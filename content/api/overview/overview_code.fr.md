@@ -1,8 +1,8 @@
 ---
-title: Aperçu
+title: Présentation
 type: apicode
 order: 1
-external_redirect: /api/#apercu
+external_redirect: /api/#presentation
 ---
 ### SIGNATURE
 De nombreuses bibliothèques client exploitent l'API Datadog. [Découvrez-les][1].

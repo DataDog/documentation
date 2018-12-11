@@ -22,6 +22,6 @@ L'endpoint des métadonnées des métriques vous permet de modifier les champs d
 * **`per_unit`** [*facultatif*, *défaut* = **None**] :
     Unité secondaire de la métrique, p. ex. **seconde** pour **octets par seconde**.
 * **`statsd_interval`** [*facultatif*, *défaut* = **None**] :
-    Le cas échéant, statds 
+    Le cas échéant, statds transmet l'intervalle en secondes pour la métrique.
 
 [1]: /developers/metrics

@@ -1,11 +1,11 @@
 ---
-title: Introduction à Datadog en 2 minutes
+title: Présentation du fonctionnement de Datadog en 2 minutes
 kind: video
 language: en
 wistiaid: ywu4jabmlf
 videos:
     - Introduction
-summary: Vous avez 5 minutes ? Que 2 ? C'est bien suffisant pour avoir un bon aperçu de ce que Datadog peut vous offrir.
+summary: Vous n'avez que 2 minutes à nous consacrer ? C'est tout ce qu'il vous faut pour comprendre le fonctionnement global de Datadog.
 private: true
 ---
 
