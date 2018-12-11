@@ -73,12 +73,12 @@ Typical integrations relying on these attributes include [Apache][7], Rails, [AW
 
 | **Fullname**       | **Type** | **Description**                                                                                          |
 | :---               | :---     | :----                                                                                                    |
-| `http.url`         | `string` | The URL of the HTTP request.                                                                             |
-| `http.status_code` | `number` | The HTTP response status code.                                                                  |
-| `http.method`      | `string` | The HTTP verb of the request.                                                                            |
-| `http.referer`     | `string` | The HTTP referer.                                                                                        |
-| `http.request_id`  | `string` | The HTTP request ID.                                                                                     |
-| `http.useragent`   | `string` | The User-Agent as it is sent (raw format). [See below for all details about it](#user-agent-attributes). |
+| `http.url`         | `string` | The URL of the HTTP request.                                                                              |
+| `http.status_code` | `number` | The HTTP response status code.                                                                            |
+| `http.method`      | `string` | Indicates the desired action to be performed for a given resource.                                          |
+| `http.referer`     | `string` | HTTP header field that identifies the address of the webpage that linked to the resource being requested.|
+| `http.request_id`  | `string` | The ID of the HTTP request.                                                                              |
+| `http.useragent`   | `string` | The User-Agent as it is sent (raw format). [See below for more details](#user-agent-attributes). |
 
 ### URL details attributes
 
