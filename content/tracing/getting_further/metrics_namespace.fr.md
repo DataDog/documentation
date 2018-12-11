@@ -1,33 +1,33 @@
 ---
-title: Nommage des métriques de Trace
+title: Nommage des métriques de traces
 kind: documentation
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
-  text: Découvrez comment configurer Tracing d'APM avec votre application
+  text: Découvrir comment configurer le tracing d'APM avec votre application
 - link: "tracing/visualization/services_list/"
   tag: "Documentation"
-  text: Découvrir la liste des services reportant à Datadog
+  text: Découvrir la liste des services transmettant des données à Datadog
 - link: "tracing/visualization/service"
   tag: "Documentation"
-  text: En savoir plus sur les Services dans Datadog
+  text: En savoir plus sur les services de Datadog
 - link: "tracing/visualization/resource"
   tag: "Documentation"
-  text: Plongez dans les performances de vos ressources et vos traces
+  text: Plonger au cœur des traces et des performances de vos ressources
 - link: "tracing/visualization/trace"
   tag: "Documentation"
   text: Comprendre comment lire une trace Datadog
 ---
 
-On nomme les métriques de Trace `trace.<name>.<metrics>{<tags>}` où:
+Les métriques de trace sont nommées de la façon suivante : `trace.<nom>.<métriques>{<tags>}`, où :
 
-* `<name>`: est le nom de l'opération i.e. le `span.name`: (*redis.command*, *pylons.request*, *rails.request*, *mysql.query*)
-* `<metrics>` est par rapport au hits, errors or latency ("request.hits", etc.)
-* `<tags>`  les métriques sont taggé par service & ressource
+* `<nom>` est le nom de l'opération, à savoir le `span.name` (*redis.command*, *pylons.request*, *rails.request*, *mysql.query*).
+* `<métriques>` indique des données sur les hits, errors ou latency (« request.hits », etc.).
+* `<tags>`  correspond aux métriques taguées par le service et la ressource.
 
-Donc pour pylons cela serait: `trace.pylons.request.hits{service:web_server}`.
+Voici un exemple pour pylons : `trace.pylons.request.hits{service:web_server}`.
 
-## En apprendre plus
+## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 

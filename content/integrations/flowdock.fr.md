@@ -19,7 +19,7 @@ version: '1.0'
 
 {{< img src="integrations/flowdock/flowdock_overview.png" alt="Flowdock overview" responsive="true" popup="true">}}
 
-## Aperçu
+## Présentation
 
 Intégrer FlowDock pour:
 
