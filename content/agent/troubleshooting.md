@@ -148,6 +148,7 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 | Windows      | Consult the dedicated [Windows documentation][10]       |
 | Heroku       | Consult the dedicated [Heroku documentation][13]        |
 
+[8]: /agent/#using-the-gui
 [10]: /agent/basic_agent_usage/windows/#agent-v6
 [13]: /agent/basic_agent_usage/heroku/#send-a-flare
 
@@ -306,7 +307,6 @@ sudo journalctl -u dd-agent.service
 [5]: /help
 [6]: /agent/faq/agent-commands/
 [7]: https://github.com/DataDog/dd-agent/blob/master/utils/flare.py
-[8]: /agent/#using-the-gui
 [9]: /agent/basic_agent_usage/windows/#agent-v5
 [10]: /agent/basic_agent_usage/windows/#agent-v6
 [11]: /agent/faq/agent-configuration-files/?tab=agentv6
