@@ -54,7 +54,7 @@ docker run -d --name datadog-agent \
            datadog/agent:latest
 ```
 
-It is recommended to pick the latest version of the Datadog Agent. Consult the full list of available [images for Agent v6][6] on Docker Hub.
+It is recommended that you pick the latest version of the Datadog Agent. Consult the full list of available [images for Agent v6][6] on Docker Hub.
 
 The commands related to log collection are:
 
