@@ -23,7 +23,7 @@ Host Maps visualize hosts together on one screen, with metrics made comprehensib
 
 `Filter by` limits the Host Map to a specific subset of an infrastructure. The filter input bar in the top left enables filtering of the Host Map by tags as well as Datadog-provided attributes.
 
-If the filter input bar is empty, the map displays all hosts that are reporting metrics to Datadog.
+If the filter input bar is empty, the map displays all hosts that are reporting the selected metric to Datadog.
 
 Example: if you tag your hosts by the environment they are in, you can filter by 'production' to remove hosts in your staging and other environments from the map. If you want to eliminate all but one host role in production, then add that role to the filter, too—the filters are `AND`ed together.
 
