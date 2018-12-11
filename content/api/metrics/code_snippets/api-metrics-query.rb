@@ -1,10 +1,10 @@
 require 'rubygems'
 require 'dogapi'
 
-api_key = "<YOUR_API_KEY>"
-application_key = "<YOUR_APP_KEY>"
+api_key = '<YOUR_API_KEY>'
+app_key = '<YOUR_APP_KEY>'
 
-dog = Dogapi::Client.new(api_key, application_key)
+dog = Dogapi::Client.new(api_key, app_key)
 
 # Get points from the last hour
 from = Time.now - 3600
