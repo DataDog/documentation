@@ -27,15 +27,6 @@ If the filter input bar is empty, the map displays all hosts that are reporting 
 
 Example: if you tag your hosts by the environment they are in, you can filter by 'production' to remove hosts in your staging and other environments from the map. If you want to eliminate all but one host role in production, then add that role to the filter, too—the filters are `AND`ed together.
 
-Filterable host attributes (automatically provided):
-
-* `up`: the host is reporting a heartbeat
-* `down`: the host is not reporting a heartbeat
-* `muted`: Datadog alerts are muted for this host
-* `agent`: the host is running the Datadog Agent
-* `agent_issue`: often indicates an integration problem, such failed access to a resource
-* `upgrade_required`: the Datadog Agent requires an upgrade
-
 **Note**: there is a distinction between filtering for `tag:value` and `"tag:value"`—filtering for `tag:value` strictly matches the tag, while filtering for `"tag:value"` performs a search on that text.
 
 ### Group hosts by tags
