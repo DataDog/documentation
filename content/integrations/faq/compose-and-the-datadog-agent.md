@@ -56,8 +56,8 @@ Finally our `redisdb.yaml` is patterned after the [redisdb.yaml.example file][4]
 
 For a more complete example, see our [Docker Compose example project on Github][5].
 
-[1]: https://docs.docker.com/compose/overview/
+[1]: https://docs.docker.com/compose/overview
 [2]: /integrations/docker_daemon
-[3]: https://hub.docker.com/r/datadog/docker-dd-agent/
+[3]: https://hub.docker.com/r/datadog/docker-dd-agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
 [5]: https://github.com/DataDog/docker-compose-example

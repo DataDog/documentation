@@ -49,5 +49,5 @@ sudo service datadog-agent start
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog
-[2]: https://yum.datadoghq.com/stable/6/x86_64/
+[2]: https://yum.datadoghq.com/stable/6/x86_64
 [3]: https://app.datadoghq.com/account/settings#api

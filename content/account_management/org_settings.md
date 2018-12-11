@@ -35,5 +35,5 @@ For more information about configuring SAML, reference the [Single sign on with 
 [1]: /account_management/team/#datadog-user-roles
 [2]: https://app.datadoghq.com/account/billing
 [3]: mailto://success@datadoghq.com
-[4]: /account_management/multi_organization/
-[5]: /account_management/saml/
+[4]: /account_management/multi_organization
+[5]: /account_management/saml

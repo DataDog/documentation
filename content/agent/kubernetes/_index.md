@@ -44,7 +44,7 @@ You can find the templates in `manifests/rbac` in the [datadog-agent GitHub repo
 
 ## Custom Integrations
 
-For details on the usage of ConfigMaps in Kubernetes, consult [Datadog's Kubernetes Custom Integrations documentation][13].
+For details on the usage of ConfigMaps in Kubernetes, consult [Datadog's Kubernetes Custom Integrations documentation][6].
 
 ## Troubleshooting
 
@@ -52,7 +52,7 @@ For details on the usage of ConfigMaps in Kubernetes, consult [Datadog's Kuberne
 * [Why is the Kubernetes check failing with a ConnectTimeout error to port 10250?][8]
 * [How to report host disk metrics when dd-agent runs in a docker container?][9]
 * [Client Authentication against the apiserver and kubelet][10]
-* [Using RBAC permission with your Kubernetes integration][12]
+* [Using RBAC permission with your Kubernetes integration][11]
 
 ## Further Reading
 
@@ -63,9 +63,9 @@ For details on the usage of ConfigMaps in Kubernetes, consult [Datadog's Kuberne
 [3]: /agent/kubernetes/host_setup
 [4]: /agent/kubernetes/event_collection#leader-election
 [5]: https://github.com/DataDog/datadog-agent/tree/0bef169d4e80e838ec6b303f5ad1da716b424b0f/Dockerfiles/manifests/rbac
+[6]: /agent/kubernetes/integrations
 [7]: /integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s
 [8]: /integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250
 [9]: /agent/faq/getting-further-with-docker
 [10]: /integrations/faq/client-authentication-against-the-apiserver-and-kubelet
-[12]: /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
-[13]: /agent/kubernetes/integrations
+[11]: /integrations/faq/using-rbac-permission-with-your-kubernetes-integration

@@ -39,6 +39,6 @@ Once done, go in your [Datadog Log section][2] to start exploring your logs!
 ## Troubleshooting
 Need help? Contact [Datadog Support][3].
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/#create-a-new-lambda-function
+[1]: /integrations/amazon_web_services/#create-a-new-lambda-function
 [2]: https://app.datadoghq.com/logs
-[3]: https://docs.datadoghq.com/help
+[3]: /help

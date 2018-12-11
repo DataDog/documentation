@@ -67,4 +67,3 @@ There are specific status formats that must be adhered to for the remapping to w
 [2]: /logs/processing/#log-status-remapper
 [3]: /logs/#reserved-attributes
 [4]: /logs/#edit-reserved-attributes
-[5]: /logs/processing

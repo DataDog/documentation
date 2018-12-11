@@ -48,13 +48,13 @@ In the Trace Search view you can:
 
 ## APM Events
 
-An APM event is generated every time a trace is generated. It corresponds to all the tags associated with the trace, plus the [top span][9] of the trace.
+An APM event is generated every time a trace is generated. It corresponds to all the tags associated with the trace, plus the [top span][1] of the trace.
 
-APM events aren't just traces: traces [get sampled][10] and APM events don't, and Datadog only keeps the top span information for the APM events, not the full trace.
+APM events aren't just traces: traces [get sampled][2] and APM events don't, and Datadog only keeps the top span information for the APM events, not the full trace.
 
-APM Events can be enriched with tags, like `customer`, `service`, `country`, `billing plan`, `request duration`, or `product` type. You can then [filter][11] and query on those tags in the Trace Search & Analytics UI.
+APM Events can be enriched with tags, like `customer`, `service`, `country`, `billing plan`, `request duration`, or `product` type. You can then [filter][3] and query on those tags in the Trace Search & Analytics UI.
 
-[Refer to the tagging section to learn how to assign tags to a trace][8].
+[Refer to the tagging section to learn how to assign tags to a trace][4].
 
 ### Complete traces
 
@@ -95,7 +95,7 @@ For instance, if your facet name is **url** and you want to filter on the **url*
 
 ### Tags search
 
-Your traces inherit tags from [hosts][4] and [integrations][5] that generate them. They can be used in the search and as facets as well:
+Your traces inherit tags from [hosts][5] and [integrations][6] that generate them. They can be used in the search and as facets as well:
 
 | Query                                                          | Match                                                                       |
 | :----                                                          | :---                                                                        |
@@ -103,7 +103,7 @@ Your traces inherit tags from [hosts][4] and [integrations][5] that generate the
 | `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` | All traces that contain tags `#service:srvA` or `#service:srvB`.            |
 | `("env:prod" AND -"version:beta")`                             | All traces that contain `#env:prod` and that do not contain `#version:beta` |
 
-If your tags don't follow [tags best practices][6] and don't use the `key:value` syntax, use this search query:
+If your tags don't follow [tags best practices][7] and don't use the `key:value` syntax, use this search query:
 
 * `tags:<MY_TAG>`
 
@@ -204,7 +204,7 @@ To start using an attribute as a Facet or in the search, click on it and add it 
 
 {{< img src="tracing/visualization/search/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:50%;">}}
 
-Once this is done, the value of this attribute is stored **for all new traces** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Trace graph query][2].
+Once this is done, the value of this attribute is stored **for all new traces** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Trace graph query][8].
 
 ### Facet Panel
 
@@ -222,7 +222,7 @@ To start using an attribute as a measure, click on a numerical attribute of your
 
 {{< img src="tracing/visualization/search/create_a_mesure.png" alt="Create a measure" responsive="true" style="width:80%;">}}
 
-Once this is done, the value of this attribute is stored **for all new traces** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Trace graph query][2].
+Once this is done, the value of this attribute is stored **for all new traces** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Trace graph query][8].
 
 ### Select the Measure Unit
 
@@ -234,12 +234,11 @@ All measure have their own unit that is then used for display in the Trace searc
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /tracing/visualization/analytics
-[4]: /graphing/infrastructure/
-[5]: /integrations/
-[6]: /tagging/#tags-best-practices
-[7]: https://app.datadoghq.com/apm/search
-[8]: /tagging/assigning_tags/#traces
-[9]: /tracing/visualization/#spans
-[10]: /tracing/getting_further/trace_sampling_and_storage
-[11]: /tracing/visualization/search/#search
+[1]: /tracing/visualization/#spans
+[2]: /tracing/getting_further/trace_sampling_and_storage
+[3]: /tracing/visualization/search/#search
+[4]: /tagging/assigning_tags/#traces
+[5]: /graphing/infrastructure
+[6]: /integrations
+[7]: /tagging/#tags-best-practices
+[8]: /tracing/visualization/analytics

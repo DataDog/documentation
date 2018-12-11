@@ -70,14 +70,14 @@ It is also possible to search for numerical attribute within a specific range. F
 
 ## Tags
 
-Your logs inherit tags from [hosts][4] and [integrations][5] that generate them. They can be used in the search and as facets as well:
+Your logs inherit tags from [hosts][1] and [integrations][2] that generate them. They can be used in the search and as facets as well:
 
 * `test` is searching for the string "test".
 * `("env:prod" OR test)` matches all logs with the tag `#env:prod` or the tag `#test`
 * `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` Matches all logs that contain tags `#service:srvA` or `#service:srvB`.
 * `("env:prod" AND -"version:beta")` matches all logs that contain `#env:prod` and that do not contain `#version:beta`
 
-If your tags don't follow [tags best practices][6] and don't use the `key:value` syntax, use this search query:
+If your tags don't follow [tags best practices][3] and don't use the `key:value` syntax, use this search query:
 
 * `tags:<MY_TAG>`
 
@@ -113,15 +113,13 @@ If an attribute was called `user.first name`, perform a search on this attribute
 
 ## Saved Searches
 
-Don't lose time building the same views everyday. [Saved Views][3] contain your search query, columns, time horizon, and facet.
+Don't lose time building the same views everyday. [Saved Views][4] contain your search query, columns, time horizon, and facet.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/processors/#attribute-remapper
-[2]: /logs/explorer/analytics
-[3]: /logs/explorer/saved_views/
-[4]: /graphing/infrastructure/
-[5]: /integrations/#cat-log-collection
-[6]: /tagging/#tags-best-practices
+[1]: /graphing/infrastructure
+[2]: /integrations/#cat-log-collection
+[3]: /tagging/#tags-best-practices
+[4]: /logs/explorer/saved_views

@@ -55,5 +55,5 @@ While the widget is in private beta, Datadog engineering teams are working throu
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/dashboards/screenboard/
+[1]: /graphing/dashboards/screenboard
 [2]: /help

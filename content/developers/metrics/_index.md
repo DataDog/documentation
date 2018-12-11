@@ -22,16 +22,16 @@ further_reading:
 
 ## Introduction
 
-This section explains what metrics are and what they do. Whether you want to send [custom metrics][4], or have a better understanding about how Datadog works, read on. If you're looking for information about the DogStatsD (which implements these metrics), see the [DogStatsD documentation][5].
+This section explains what metrics are and what they do. Whether you want to send [custom metrics][1], or have a better understanding about how Datadog works, read on. If you're looking for information about the DogStatsD (which implements these metrics), see the [DogStatsD documentation][2].
 
 ### Submitting metrics
 
 There are multiple ways to send metrics to Datadog:
 
-1. Via the Datadog Agent directly. Learn how to [write an integration][2], or examine the [Aggregator source code][9] directly.
-2. Via the DogStatsD server (bundled with the Datadog Agent) and a [client library][16].
-3. Directly via Datadog's [HTTP API][10].
-4. Via the [Dropwizard Java metrics library][11] with the [metrics-datadog][12] backend. Thanks to the people at [Vistar Media][19], [Coursera][13], and [Bazaarvoice][14] for their contributions.
+1. Via the Datadog Agent directly. Learn how to [write an integration][3], or examine the [Aggregator source code][4] directly.
+2. Via the DogStatsD server (bundled with the Datadog Agent) and a [client library][5].
+3. Directly via Datadog's [HTTP API][6].
+4. Via the [Dropwizard Java metrics library][7] with the [metrics-datadog][8] backend. Thanks to the people at [Vistar Media][9], [Coursera][10], and [Bazaarvoice][11] for their contributions.
 
 <div class="alert alert-warning">
 Metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past.
@@ -51,7 +51,7 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
 
 ## Metric Types
 
-The "Datadog in-app type" affects how a given metric is interpreted in query results and graph visualizations across the application. This type is visible and can be changed on the [metric summary page][20]. Be aware that changing the metric type may render historical data nonsensical.
+The "Datadog in-app type" affects how a given metric is interpreted in query results and graph visualizations across the application. This type is visible and can be changed on the [metric summary page][12]. Be aware that changing the metric type may render historical data nonsensical.
 
 In the Datadog web application there are four metric types (though one is deprecated):
 
@@ -68,20 +68,20 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 
 | Submission Source   | Submission Method (python)           | Submission Type   | Datadog In-App Type |
 | ------------------- | ------------------------------------ | ----------------- | ------------------- |
-| [API][3]            | `api.Metric.send(type="count", ...)` | count             | count               |
-| [API][3]            | `api.Metric.send(type="gauge", ...)` | gauge             | gauge               |
-| [API][3]            | `api.Metric.send(type="rate", ...)`  | rate              | rate                |
-| [DogStatsD][1]      | `dog.gauge(...)`                     | gauge             | gauge               |
-| [DogStatsD][1]      | `dog.histogram(...)`                 | histogram         | gauge, rate         |
-| [DogStatsD][1]      | `dog.increment(...)`                 | counter           | rate                |
-| [DogStatsD][1]      | `dog.set(...)`                       | set               | gauge               |
-| [Agent check][2]    | `self.count(...)`                    | count             | count               |
-| [Agent check][2]    | `self.gauge(...)`                    | gauge             | gauge               |
-| [Agent check][2]    | `self.histogram(...)`                | histogram         | gauge, rate         |
-| [Agent check][2]    | `self.increment(...)`                | counter <sup>deprecated</sup> | rate    |
-| [Agent check][2]    | `self.monotonic_count(...)`          | monotonic_count   | count               |
-| [Agent check][2]    | `self.rate(...)`                     | rate              | gauge               |
-| [Agent check][2]    | `self.set(...)`                      | set               | gauge               |
+| [API][13]            | `api.Metric.send(type="count", ...)` | count             | count               |
+| [API][13]            | `api.Metric.send(type="gauge", ...)` | gauge             | gauge               |
+| [API][13]            | `api.Metric.send(type="rate", ...)`  | rate              | rate                |
+| [DogStatsD][14]      | `dog.gauge(...)`                     | gauge             | gauge               |
+| [DogStatsD][14]      | `dog.histogram(...)`                 | histogram         | gauge, rate         |
+| [DogStatsD][14]      | `dog.increment(...)`                 | counter           | rate                |
+| [DogStatsD][14]      | `dog.set(...)`                       | set               | gauge               |
+| [Agent check][3]    | `self.count(...)`                    | count             | count               |
+| [Agent check][3]    | `self.gauge(...)`                    | gauge             | gauge               |
+| [Agent check][3]    | `self.histogram(...)`                | histogram         | gauge, rate         |
+| [Agent check][3]    | `self.increment(...)`                | counter <sup>deprecated</sup> | rate    |
+| [Agent check][3]    | `self.monotonic_count(...)`          | monotonic_count   | count               |
+| [Agent check][3]    | `self.rate(...)`                     | rate              | gauge               |
+| [Agent check][3]    | `self.set(...)`                      | set               | gauge               |
 
 ### Modify a metric's type
 
@@ -140,23 +140,17 @@ Units are also displayed at the bottom of timeboard graphs, and metric descripti
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd
-[2]: /developers/integrations
-[3]: /api/#metrics
-[4]: /developers/metrics/custom_metrics/
-[5]: /developers/dogstatsd/
-[6]: /developers/metrics/gauges
-[7]: /developers/metrics/rates
-[8]: /developers/metrics/count
-[9]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
-[10]: /api/
-[11]: https://github.com/dropwizard/metrics
-[12]: https://github.com/coursera/metrics-datadog
-[13]: https://www.coursera.org
-[14]: http://www.bazaarvoice.com
-[15]: https://app.datadoghq.com/account/settings#agent
-[16]: /developers/libraries
-[17]: /graphing/miscellaneous/functions
-[18]: /monitors/monitor_types/custom_check
-[19]: http://www.vistarmedia.com/
-[20]: https://app.datadoghq.com/metric/summary
+[1]: /developers/metrics/custom_metrics
+[2]: /developers/dogstatsd
+[3]: /developers/integrations
+[4]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
+[5]: /developers/libraries
+[6]: /api
+[7]: https://github.com/dropwizard/metrics
+[8]: https://github.com/coursera/metrics-datadog
+[9]: http://www.vistarmedia.com
+[10]: https://www.coursera.org
+[11]: http://www.bazaarvoice.com
+[12]: https://app.datadoghq.com/metric/summary
+[13]: /api/#metrics
+[14]: /developers/dogstatsd

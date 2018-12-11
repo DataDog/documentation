@@ -330,8 +330,8 @@ For more details on supported platforms, see the [.NET Standard documentation][5
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/tracing/setup
+[1]: /tracing/setup
 [2]: /help
-[3]: https://www.nuget.org/packages/Datadog.Trace/
+[3]: https://www.nuget.org/packages/Datadog.Trace
 [4]: /tracing/advanced_usage/?tab=net
 [5]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support

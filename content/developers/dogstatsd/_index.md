@@ -17,7 +17,7 @@ further_reading:
   text: DogStatsD source code
 ---
 
-The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][3] protocol and adds a few Datadog-specific extensions:
+The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][1] protocol and adds a few Datadog-specific extensions:
 
 * Histogram metric type
 * Service Checks and Events
@@ -27,8 +27,8 @@ Any compliant StatsD client will work, but you won't be able to use the [Datadog
 
 **Note**: DogStatsD does NOT implement the following from StatsD:
 
-* Gauge deltas (see [this issue][9])
-* Timers as a native metric type (though it [does support them via histograms][6])
+* Gauge deltas (see [this issue][2])
+* Timers as a native metric type (though it [does support them via histograms][3])
 
 ## How it works
 
@@ -63,11 +63,11 @@ dogstatsd_port: 8125
 
 Then [restart your Agent][5].
 
-By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][2], and restart the client. You can also configure DogStatsD to use a [Unix Domain Socket][10].
+By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][6], and restart the client. You can also configure DogStatsD to use a [Unix Domain Socket][7].
 
 ### Code
 
-There are [DogStatsD client libraries][1] for many languages and environments. You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
+There are [DogStatsD client libraries][8] for many languages and environments. You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
 
 For Python:
 ```shell
@@ -97,21 +97,21 @@ statsd = Datadog::Statsd.new
 
 ## Dive into DogStatsD
 
-DogStatsD and StatsD are broadly similar, however, DogStatsD implements some things differently, and contains advanced features which are specific to Datadog. See the [data types and tags][7] section to learn more about the Datadog-specific extensions to DogStatsD, including available data types, events, service Checks, and tags.
+DogStatsD and StatsD are broadly similar, however, DogStatsD implements some things differently, and contains advanced features which are specific to Datadog. See the [data types and tags][9] section to learn more about the Datadog-specific extensions to DogStatsD, including available data types, events, service Checks, and tags.
 
-If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][8] section, which also explains how to send metrics and events straight from the command line.
+If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][10] section, which also explains how to send metrics and events straight from the command line.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /libraries/
-[2]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
-[3]: https://github.com/etsy/statsd
-[4]: /developers/metrics/custom_metrics/
+[1]: https://github.com/etsy/statsd
+[2]: https://github.com/DataDog/dd-agent/pull/2104
+[3]: /developers/dogstatsd/data_types/#timers
+[4]: /developers/metrics/custom_metrics
 [5]: /agent/faq/agent-commands
-[6]: /developers/dogstatsd/data_types/#timers
-[7]: /developers/dogstatsd/data_types
-[8]: /developers/dogstatsd/datagram_shell
-[9]: https://github.com/DataDog/dd-agent/pull/2104
-[10]: /developers/dogstatsd/unix_socket
+[6]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
+[7]: /developers/dogstatsd/unix_socket
+[8]: /libraries
+[9]: /developers/dogstatsd/data_types
+[10]: /developers/dogstatsd/datagram_shell

@@ -14,7 +14,7 @@ The *[account settings][1]* page in Datadog allows you to control how you appear
 
 ## Setting your profile
 
-Your profile is how others in your organization recognize you in Datadog. Set or update your name, email address and organizational role here.  
+Your profile is how others in your organization recognize you in Datadog. Set or update your name, email address and organizational role here.
 
 To update your picture, create an account on [Gravatar][2] and associate it with your email address.
 
@@ -22,42 +22,42 @@ If you log in to Datadog using Google authentication, your email address is prov
 
 ## Managing your organizations
 
-The *account settings* page also lists all of the organizations you are associated with. Switch between these organizations from this page or by hovering over the account menu in the left-side navigation.  
+The *account settings* page also lists all of the organizations you are associated with. Switch between these organizations from this page or by hovering over the account menu in the left-side navigation.
 
 **Note**: If you leave an organization, you will not be able to rejoin unless invited by an administrator in that organization.
 
 To join an existing organization, you must be invited by an administrator. To request an invite:
 
-1. Log out of Datadog by clicking the button on the [*account settings* page][12].
-2. Visit the [*new user sign up* page][4] and click the *Join an existing team* link.
+1. Log out of Datadog by clicking the button on the [*account settings* page][4].
+2. Visit the [*new user sign up* page][5] and click the *Join an existing team* link.
 3. Enter the email address associated with your Datadog account, your name, and the email address of an administrator in the organization you wish to join.
 4. Click the "Request Invite" to submit the request. The organization administrator will receive a notification with instruction on how to add you.
 
 If you are an organization administrator, reference the additional documentation to:
 
-* [Manage team members][5]
-* [Configure single sign on with SAML][6]
-* [Rename your organization][7]
-* [Manage multi-organization accounts][8]
-* [Change your Datadog plan and view usage and billing history][9]
+* [Manage team members][6]
+* [Configure single sign on with SAML][7]
+* [Rename your organization][8]
+* [Manage multi-organization accounts][9]
+* [Change your Datadog plan and view usage and billing history][10]
 
 ## Connecting to Github
 
-If you have installed the [GitHub integration][10] to create events in Datadog, link your personal GitHub account to your Datadog user account. By linking your accounts, any comments you post to GitHub events in Datadog will be automatically posted back into the corresponding issue or pull request in GitHub.
+If you have installed the [GitHub integration][11] to create events in Datadog, link your personal GitHub account to your Datadog user account. By linking your accounts, any comments you post to GitHub events in Datadog will be automatically posted back into the corresponding issue or pull request in GitHub.
 
 ## Preferences
 
-You can set your timezone, desktop notification, and email notification preferences from the [*Preferences* tab within the *account settings* page][11].
+You can set your timezone, desktop notification, and email notification preferences from the [*Preferences* tab within the *account settings* page][12].
 
 [1]: https://app.datadoghq.com/account/profile
-[2]: https://gravatar.com/
+[2]: https://gravatar.com
 [3]: https://support.google.com/accounts/answer/19870?hl=en
-[4]: https://app.datadoghq.com/signup
-[5]: /account_management/team
-[6]: /account_management/saml
-[7]: /account_management/org_settings#change-your-organization-name
-[8]: /account_management/multi_organization
-[9]: /account_management/org_settings
-[10]: https://docs.datadoghq.com/integrations/github/
-[11]: https://app.datadoghq.com/account/preferences
-[12]: https://app.datadoghq.com/account/profile
+[4]: https://app.datadoghq.com/account/profile
+[5]: https://app.datadoghq.com/signup
+[6]: /account_management/team
+[7]: /account_management/saml
+[8]: /account_management/org_settings#change-your-organization-name
+[9]: /account_management/multi_organization
+[10]: /account_management/org_settings
+[11]: /integrations/github
+[12]: https://app.datadoghq.com/account/preferences

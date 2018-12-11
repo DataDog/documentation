@@ -13,7 +13,7 @@ categories:
 - provisioning
 - configuration & deployment
 - log collection
-doc_link: https://docs.datadoghq.com/integrations/cloud_foundry/
+doc_link: /integrations/cloud_foundry/
 ddtype: check
 ---
 
@@ -25,30 +25,30 @@ There are three main components for the Cloud Foundry integration with Datadog. 
 
 For Pivotal Cloud Foundry, you have the option to install the Datadog integration tiles with Ops Manager:
 
-* [Datadog Cluster Monitoring for PCF][23]
-* [Datadog Application Monitoring for PCF][24]
+* [Datadog Cluster Monitoring for PCF][1]
+* [Datadog Application Monitoring for PCF][2]
 
 ## Monitor Your Applications on Cloud Foundry
 
-Use the **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry application. This is a [supply buildpack][1] for Cloud Foundry that installs a [Datadog DogStatsD binary][2] and Datadog Agent in the container your app is running on.
+Use the **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry application. This is a [supply buildpack][3] for Cloud Foundry that installs a [Datadog DogStatsD binary][4] and Datadog Agent in the container your app is running on.
 
 ### Setup
 
 #### Cloud Foundry < 1.12
 
-Our buildpack uses the Cloud Foundry [multi-buildpack][4] feature that was introduced in version `1.12`.
+Our buildpack uses the Cloud Foundry [multi-buildpack][5] feature that was introduced in version `1.12`.
 
-For older versions, Cloud Foundry provides a back-port of this feature in the form of a [buildpack][25]. You must install and configure this backport in order to use Datadog's buildpack:
+For older versions, Cloud Foundry provides a back-port of this feature in the form of a [buildpack][6]. You must install and configure this backport in order to use Datadog's buildpack:
 
 1. **Upload the multi-buildpack back-port.**
-  Download the latest [multi-build pack release][25] and upload it to your Cloud Foundry environment.
+  Download the latest [multi-build pack release][6] and upload it to your Cloud Foundry environment.
 
     ```shell
     cf create-buildpack multi-buildpack ./multi-buildpack-v-x.y.z.zip 99 --enable
     ```
 
 2. **Add a multi-buildpack manifest to your application.**
-  As detailed [on the multi-buildpack back-port repo][26], create a `multi-buildpack.yml` file at the root of your application and configure it for your environment. Add a link to the Datadog Cloud Foundry Buildpack and to your regular buildpack:
+  As detailed [on the multi-buildpack back-port repo][7], create a `multi-buildpack.yml` file at the root of your application and configure it for your environment. Add a link to the Datadog Cloud Foundry Buildpack and to your regular buildpack:
 
       ```yaml
       buildpacks:
@@ -63,7 +63,7 @@ For older versions, Cloud Foundry provides a back-port of this feature in the fo
 
     Do not use the `latest` version here (replace `x.y.z` by the specific version you want to use).
 
-    **Important**: Your regular buildpack should be the last in the manifest to act as a final buildpack. To learn more refer to [cloud foundry documentation][27] about buildpacks.
+    **Important**: Your regular buildpack should be the last in the manifest to act as a final buildpack. To learn more refer to [cloud foundry documentation][8] about buildpacks.
 
 3. **Push your application with the multi-buildpack**
   Ensure that the `multi-buildpack` is the buildpack selected by Cloud Foundry for your application:
@@ -75,27 +75,27 @@ For older versions, Cloud Foundry provides a back-port of this feature in the fo
 #### Cloud Foundry >= 1.12
 
 1. **Upload the Datadog Cloud Foundry Buildpack.**
-  Download the latest Datadog [build pack release][5] and upload it to your Cloud Foundry environment.
+  Download the latest Datadog [build pack release][9] and upload it to your Cloud Foundry environment.
 
     ```shell
     cf create-buildpack datadog-cloudfoundry-buildpack ./datadog-cloudfoundry-buildpack-latest.zip
     ```
 
 2. **Push your application with the Datadog buildpack and your buildpacks.**
-  The process to push your application with multiple buildpacks is described in the [Cloud Foundry documentation][27].
+  The process to push your application with multiple buildpacks is described in the [Cloud Foundry documentation][8].
 
     ```shell
     cf push <YOUR_APP> --no-start -b binary_buildpack
     cf v3-push <YOUR_APP> -b datadog-cloudfoundry-buildpack -b <YOUR-BUILDPACK-1> -b <YOUR-FINAL-BUILDPACK>
     ```
 
-  **Important**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more refer to [Cloud Foundry documentation][27] about buildpacks.
+  **Important**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more refer to [Cloud Foundry documentation][8] about buildpacks.
 
 #### Meta-Buildpack **(deprecated)**
 
-If you are a [meta-buildpack][28] user, Datadog's buildpack can be used as a decorator out of the box.
+If you are a [meta-buildpack][10] user, Datadog's buildpack can be used as a decorator out of the box.
 
-**Note**: The [meta-buildpack][28] has been deprecated by pivotal in favor of the [multi-buildpack][25] and Datadog might drop support for it in a future release.
+**Note**: The [meta-buildpack][10] has been deprecated by pivotal in favor of the [multi-buildpack][6] and Datadog might drop support for it in a future release.
 
 ### Configuration
 
@@ -112,7 +112,7 @@ cf restage <YOUR_APP>
 
 #### Trace Collection
 
-The Datadog Trace Agent (APM) is enabled by default. Learn more about setup for your specific language in [APM Setup][3].
+The Datadog Trace Agent (APM) is enabled by default. Learn more about setup for your specific language in [APM Setup][11].
 
 #### Log Collection
 
@@ -159,7 +159,7 @@ To build this buildpack, edit the relevant files and run the `./build` script. T
 
 ### DogStatsD
 
-See [the DogStatsD documentation][6] for more information. There is [a list of DogStatsD libraries][7] compatible with a wide range of applications.
+See [the DogStatsD documentation][12] for more information. There is [a list of DogStatsD libraries][13] compatible with a wide range of applications.
 
 ## Monitor Your Cloud Foundry Cluster
 
@@ -174,11 +174,11 @@ These integrations are meant for Cloud Foundry deployment administrators, not en
 
 ### Prerequisites
 
-You must have a working Cloud Foundry deployment and access to the BOSH Director that manages it. You also need BOSH CLI to deploy each integration. You may use either major version of the CLI-[v1][8] or [v2][9].
+You must have a working Cloud Foundry deployment and access to the BOSH Director that manages it. You also need BOSH CLI to deploy each integration. You may use either major version of the CLI-[v1][14] or [v2][15].
 
 ### Install the Datadog Agent BOSH Release
 
-Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. Upload the latest release to your BOSH Director and then install it on every node in your deployment as an [addon][11] (the same way a Director deploys the BOSH Agent to all nodes).
+Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. Upload the latest release to your BOSH Director and then install it on every node in your deployment as an [addon][16] (the same way a Director deploys the BOSH Agent to all nodes).
 
 #### Upload Datadog's release to your BOSH Director
 
@@ -190,7 +190,7 @@ bosh upload release https://cloudfoundry.datadoghq.com/datadog-agent/datadog-age
 bosh upload-release -e <BOSH_ENV> https://cloudfoundry.datadoghq.com/datadog-agent/datadog-agent-boshrelease-latest.tgz
 ```
 
-If you'd like to create your own release, see the [Datadog Agent BOSH Release repository][12].
+If you'd like to create your own release, see the [Datadog Agent BOSH Release repository][17].
 
 #### Configure the Agent as an addon in your BOSH Director
 
@@ -253,7 +253,7 @@ The configuration under each check name should look the same as if you were conf
 
 Everything you configure in `runtime.yml` applies to every node. You cannot configure a check for a subset of nodes in your deployment.
 
-To customize configuration for the default checks-system, network, disk, and ntp-see the [full list of configuration options][13] for the Datadog Agent BOSH release.
+To customize configuration for the default checks-system, network, disk, and ntp-see the [full list of configuration options][18] for the Datadog Agent BOSH release.
 
 #### Sync the runtime configuration to the Director
 
@@ -280,7 +280,7 @@ Since runtime configuration applies globally, BOSH redeploys every node in your 
 
 #### Verify the Agent is installed everywhere
 
-To check if the Agent installs were successful, filter by `cloudfoundry` on the [Host map page][14] in Datadog. The Agent BOSH release tags each host with a generic `cloudfoundry` tag. Optionally group hosts by any tag, such as `bosh_job`, as in the following screenshot:
+To check if the Agent installs were successful, filter by `cloudfoundry` on the [Host map page][19] in Datadog. The Agent BOSH release tags each host with a generic `cloudfoundry` tag. Optionally group hosts by any tag, such as `bosh_job`, as in the following screenshot:
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="cloud-foundry-host-map" responsive="true" >}}
 
@@ -302,7 +302,7 @@ bosh upload release http://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/da
 bosh upload-release -e <BOSH_ENV> http://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/datadog-firehose-nozzle-release-latest.tgz
 ```
 
-If you'd like to create your own release, see the [Datadog Firehose Nozzle release repository][15].
+If you'd like to create your own release, see the [Datadog Firehose Nozzle release repository][20].
 
 #### Configure a UAA client
 
@@ -358,7 +358,7 @@ jobs:
       url: <UAA_URL> # e.g. https://uaa.your-cf-domain.com:8443
 ```
 
-To see all available configuration options, check the [Datadog Firehose Nozzle repository][16].
+To see all available configuration options, check the [Datadog Firehose Nozzle repository][21].
 
 In the same manifest, add the Datadog Nozzle release name and version:
 
@@ -386,7 +386,7 @@ bosh -n -d cf-manifest -e <BOSH_ENV> deploy --recreate cf-manifest.yml
 
 #### Verify the Nozzle is collecting
 
-On the [Metrics explorer][17] page in Datadog, search for metrics beginning `cloudfoundry.nozzle`:
+On the [Metrics explorer][22] page in Datadog, search for metrics beginning `cloudfoundry.nozzle`:
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="cloudfoundry.nozzle.metrics" responsive="true" >}}
 
@@ -394,38 +394,35 @@ On the [Metrics explorer][17] page in Datadog, search for metrics beginning `clo
 
 ### Metrics
 
-The following metrics are sent by the Datadog Firehose Nozzle (`cloudfoundry.nozzle`). The Datadog Agent release does not send any special metrics of its own, just the usual metrics from any Agent checks you configure in the Director runtime config (and, by default, [system][29], [network][20], [disk][21], and [ntp][22] metrics).
+The following metrics are sent by the Datadog Firehose Nozzle (`cloudfoundry.nozzle`). The Datadog Agent release does not send any special metrics of its own, just the usual metrics from any Agent checks you configure in the Director runtime config (and, by default, [system][23], [network][24], [disk][25], and [ntp][26] metrics).
 
 The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events) and ValueMetrics; it ignores LogMessages, Errors, and ContainerMetrics.
 
 {{< get-metrics-from-git "cloud_foundry">}}
 
-[1]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
-[2]: https://docs.datadoghq.com/developers/dogstatsd/
-[3]: https://docs.datadoghq.com//tracing/setup/
-[4]: https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html
-[5]: https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip
-[6]: /developers/dogstatsd
-[7]: https://docs.datadoghq.com/libraries/
-[8]: https://bosh.io/docs/bosh-cli.html
-[9]: https://bosh.io/docs/cli-v2.html#install
-[10]: https://bosh.io/docs/cli-envs.html#deployment-state
-[11]: https://bosh.io/docs/runtime-config.html#addons
-[12]: https://github.com/DataDog/datadog-agent-boshrelease
-[13]: https://github.com/DataDog/datadog-agent-boshrelease/blob/master/jobs/dd-agent/spec
-[14]: https://app.datadoghq.com/graphing/infrastructure/hostmap
-[15]: https://github.com/DataDog/datadog-firehose-nozzle-release
-[16]: https://github.com/DataDog/datadog-firehose-nozzle-release/blob/master/jobs/datadog-firehose-nozzle/spec
-[17]: https://app.datadoghq.com/metric/explorer
-[18]: https://bosh.io/docs/
-[19]: https://bosh.io/docs/monitoring.html
-[20]: /integrations/network/#metrics
-[21]: /integrations/disk/#metrics
-[22]: /integrations/ntp/#metrics
-[23]: https://network.pivotal.io/products/datadog/
-[24]: https://network.pivotal.io/products/datadog-application-monitoring/
-[25]: https://github.com/cloudfoundry/multi-buildpack
-[26]: https://github.com/cloudfoundry/multi-buildpack#usage
-[27]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html
-[28]: https://github.com/cf-platform-eng/meta-buildpack
-[29]: /integrations/system/#metrics
+[1]: https://network.pivotal.io/products/datadog
+[2]: https://network.pivotal.io/products/datadog-application-monitoring
+[3]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
+[4]: /developers/dogstatsd
+[5]: https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html
+[6]: https://github.com/cloudfoundry/multi-buildpack
+[7]: https://github.com/cloudfoundry/multi-buildpack#usage
+[8]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html
+[9]: https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip
+[10]: https://github.com/cf-platform-eng/meta-buildpack
+[11]: //tracing/setup
+[12]: /developers/dogstatsd
+[13]: /libraries
+[14]: https://bosh.io/docs/bosh-cli.html
+[15]: https://bosh.io/docs/cli-v2.html#install
+[16]: https://bosh.io/docs/runtime-config.html#addons
+[17]: https://github.com/DataDog/datadog-agent-boshrelease
+[18]: https://github.com/DataDog/datadog-agent-boshrelease/blob/master/jobs/dd-agent/spec
+[19]: https://app.datadoghq.com/graphing/infrastructure/hostmap
+[20]: https://github.com/DataDog/datadog-firehose-nozzle-release
+[21]: https://github.com/DataDog/datadog-firehose-nozzle-release/blob/master/jobs/datadog-firehose-nozzle/spec
+[22]: https://app.datadoghq.com/metric/explorer
+[23]: /integrations/system/#metrics
+[24]: /integrations/network/#metrics
+[25]: /integrations/disk/#metrics
+[26]: /integrations/ntp/#metrics

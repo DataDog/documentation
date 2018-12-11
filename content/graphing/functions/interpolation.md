@@ -29,7 +29,7 @@ The default function function fills empty intervals with a default or interpolat
 default(<EXPRESSION>, <DEFAULT_VALUE>)
 ```
 
-Like other functions, the default function is evaluated **after** [time and space aggregation][5]. If interpolation is enabled, the `default()` function first fills all empty values within the interpolation time limit with interpolated values. 
+Like other functions, the default function is evaluated **after** [time and space aggregation][1]. If interpolation is enabled, the `default()` function first fills all empty values within the interpolation time limit with interpolated values. 
 It then adds points with the specified default value to every interval in the query's span that doesn't already have a value.
 
 Note: Avoid using the `default()` function with the `as_count()` function.
@@ -99,5 +99,4 @@ The Agent automatically sends zeroes for five minutes after the last value was r
     {{< nextlink href="/graphing/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-[5]: /getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
-[6]: /help
+[1]: /getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation

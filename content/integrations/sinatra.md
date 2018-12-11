@@ -87,10 +87,10 @@ This logger uses the common Apache Access format and generates logs in the follo
 
 * [Restart the Agent][8]
 
-[1]: http://sinatrarb.com/
+[1]: http://sinatrarb.com
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: http://sinatrarb.com/intro.html#Logging
-[4]: http://rack.github.io/
+[4]: http://rack.github.io
 [5]: https://www.rubydoc.info/github/rack/rack/Rack/CommonLogger
 [6]: http://recipes.sinatrarb.com/p/middleware/rack_commonlogger
 [7]: /agent/faq/agent-configuration-files/?tab=agentv6#agent-configuration-directory

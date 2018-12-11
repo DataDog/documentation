@@ -1,11 +1,11 @@
-// TODO fix code block parsing (backticks, 4-space indent, etc)
+// TODO fix code block parsing (any number of backticks > 3, 4-space indent, etc)
 
-#include <iostream>
+#include <algorithm>
 #include <fstream>
+#include <iostream>
+#include <sstream>
 #include <unordered_map>
 #include <vector>
-#include <algorithm>
-#include <sstream>
 
 #define TRY_OR_ERR(cmd) do { \
     err = cmd;               \
@@ -18,8 +18,9 @@ using namespace std;
 
 enum State {
     ST_DEFAULT,
-    ST_CODEBLOCK,
-    ST_DEFLINE
+    ST_NONLINKDEF,
+    ST_LINKDEF,
+    ST_CODEBLOCK
 };
 
 struct context {
@@ -30,6 +31,14 @@ struct context {
 vector<string> shortcodes;
 vector<struct context> context_stack;
 enum State cur = ST_DEFAULT;
+
+int next(istream &in, char c);
+
+void trim_href(string &href) {
+    if ('/' == href.back()) {
+        href.pop_back();
+    }
+}
 
 void get_shortcodes(const string list) {
     shortcodes.clear();
@@ -64,10 +73,12 @@ void add_and_print_ref(string ref) {
 }
 
 int try_shortcode(istream &in) {
+    int err = 0;
     char c = in.get();
 
     if ('{' != c) {
-        cout << '{' << c;
+        cout << '{';
+        TRY_OR_ERR(next(in, c));
         return 0;
     }
 
@@ -140,7 +151,7 @@ int parse_inline(istream &in, string &href) {
     return 0;
 }
 
-int try_inline(istream &in, string ref) {
+int try_inline(istream &in) {
     int err = 0;
     char c = in.get();
     if ('#' == c || '?' == c) {
@@ -148,16 +159,15 @@ int try_inline(istream &in, string ref) {
         return 0;
     }
 
-    add_and_print_ref(ref);
-
     string href;
     href.push_back(c);
     TRY_OR_ERR(parse_inline(in, href));
-    context_stack.back().lookup[ref] = href;
+    trim_href(href);
+    add_and_print_ref(href);
+    context_stack.back().lookup[href] = href;
 
     return 0;
 }
-
 
 int try_ref(istream &in, string link_text) {
     string ref;
@@ -195,6 +205,12 @@ int try_ref_or_def(istream &in) {
     }
 
     c = in.get();
+
+    // link defs are only allowed at the beginning of the line
+    if (':' != c) {
+        cur = ST_NONLINKDEF;
+    }
+
     switch (c) {
         case '[':
             // link ref
@@ -204,24 +220,32 @@ int try_ref_or_def(istream &in) {
         case '(':
             // inline link
             cout << '[' << buf << ']';
-            TRY_OR_ERR(try_inline(in, buf));
+            TRY_OR_ERR(try_inline(in));
             break;
         case ':': {
-            // link def
+            // link definitions can only be at the start of the line
+            if (ST_NONLINKDEF == cur) {
+                cout << '[' << buf << "]:";
+                return 0;
+            }
+
             string href;
             in >> href;
-
             if (href.empty()) {
-                cerr << "Error: empty link definition" << endl;
+                cerr << "ERROR: empty link definition" << endl;
                 return 1;
             }
 
+            trim_href(href);
             context_stack.back().lookup[buf] = href;
-            cur = ST_DEFLINE;
+            cur = ST_LINKDEF;
             break;
         }
+        // didn't match any of the above, output and continue
+        case EOF:
+            cout << '[' << buf << ']';
+            break;
         default:
-            // didn't match any of the above, output and continue
             cout << '[' << buf << ']' << c;
             break;
     }
@@ -235,14 +259,21 @@ int next(istream &in, char c) {
         case ST_CODEBLOCK:
             cout.put(c);
             if ('`' == c) {
-                cur = ST_DEFAULT;
+                cur = ST_NONLINKDEF;
             }
             break;
         default:
+            if ('[' == c) {
+                return try_ref_or_def(in);
+            }
+
+            // link defs can be indented
+            if (!isspace(c)) {
+                cur = ST_NONLINKDEF;
+            }
+
             if ('{' == c) {
                 TRY_OR_ERR(try_shortcode(in));
-            } else if ('[' == c) {
-                TRY_OR_ERR(try_ref_or_def(in));
             } else if ('`' == c) {
                 cout.put(c);
                 cur = ST_CODEBLOCK;
@@ -280,10 +311,15 @@ int main(int argc, char *argv[]) {
         while (EOF != (c = iss.get())) {
             TRY_OR_ERR(next(iss, c));
         }
-        if (ST_DEFLINE == cur) {
-            cur = ST_DEFAULT;
-        } else {
+
+        // fully consume the line (including newline) if we found a link definition
+        if (ST_LINKDEF != cur) {
             cout << endl;
+        }
+
+        // don't reset state while in a codeblock
+        if (ST_CODEBLOCK != cur) {
+            cur = ST_DEFAULT;
         }
     }
 

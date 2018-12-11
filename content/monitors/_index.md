@@ -35,25 +35,25 @@ Here is a quick overview of the different terms used:
 - **Check**: Emits one or more statuses.
 - **Monitor**: Sends notifications based on a sequence of check statuses, metric
   threshold or other alerting conditions.
-- **Monitor type**: [Log][15], [Forecasts][27] [host][16], [metric][17], [integration][18], [process][19], [outlier][20], [anomaly][21], [apm][22], [composite][23], [network][24], [event][25] based, and [custom][26]. See side navigation to drill into a specific type.
-- **Tags**: Configurable labels that can be applied to each metric and host. See the [Tagging][12] page for more details.
+- **Monitor type**: [Log][11], [Forecasts][12] [host][13], [metric][14], [integration][15], [process][16], [outlier][17], [anomaly][18], [apm][19], [composite][20], [network][21], [event][22] based, and [custom][23]. See side navigation to drill into a specific type.
+- **Tags**: Configurable labels that can be applied to each metric and host. See the [Tagging][24] page for more details.
 
 ## Creating a Monitor
 
-Navigate to the [Create Monitors][13] page by hovering over **Monitors** in the main menu and clicking **New Monitor** in the sub-menu (depending on your chosen theme and screen resolution, the main menu may be at the top or on the left). You are presented with a list of monitor types on the left. See the [Monitoring Reference][6] to learn more about all monitor types.
+Navigate to the [Create Monitors][25] page by hovering over **Monitors** in the main menu and clicking **New Monitor** in the sub-menu (depending on your chosen theme and screen resolution, the main menu may be at the top or on the left). You are presented with a list of monitor types on the left. See the [Monitoring Reference][6] to learn more about all monitor types.
 
 {{< img src="monitors/index/nav.png" alt="navigation" responsive="true" >}}
 
 ## Export your monitor
 
-Export the JSON configuration for a monitor right from the create screen, or on your [monitor status page][28] in the upper right corner.
+Export the JSON configuration for a monitor right from the create screen, or on your [monitor status page][26] in the upper right corner.
 If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON right away:
 
 {{< img src="monitors/index/export_monitor_json.jpg" alt="export monitor" responsive="true" >}}
 
 ## Auditing Monitors
 
-Any changes to monitors creates an event in the [event stream][14] that explains the change and shows the user that made the actual change.
+Any changes to monitors creates an event in the [event stream][27] that explains the change and shows the user that made the actual change.
 
 Assuming you've made changes to your Monitors, you can see examples with the following event search:
 ```
@@ -86,7 +86,7 @@ There are multiple community projects for maintaining or managing Monitors along
 * https://github.com/rapid7/dogwatch
 * https://www.terraform.io/docs/providers/datadog/r/monitor.html
 
-[1]: /graphing/event_stream/
+[1]: /graphing/event_stream
 [2]: https://app.datadoghq.com/monitors/triggered
 [3]: https://app.datadoghq.com/monitors
 [4]: /api/#monitors
@@ -96,20 +96,20 @@ There are multiple community projects for maintaining or managing Monitors along
 [8]: /monitors/manage_monitor
 [9]: /monitors/downtimes
 [10]: /monitors/check_summary
-[12]: /tagging
-[13]: https://app.datadoghq.com/monitors#/create
-[14]: /graphing/event_stream
-[15]: /monitors/monitor_types/log
-[16]: /monitors/monitor_types/host
-[17]: /monitors/monitor_types/metric
-[18]: /monitors/monitor_types/integration
-[19]: /monitors/monitor_types/process
-[20]: /monitors/monitor_types/outlier
-[21]: /monitors/monitor_types/anomaly
-[22]: /monitors/monitor_types/apm
-[23]: /monitors/monitor_types/composite
-[24]: /monitors/monitor_types/network
-[25]: /monitors/monitor_types/event
-[26]: /monitors/monitor_types/custom_check
-[27]: /monitors/monitor_types/forecasts
-[28]: /monitors/monitor_status/
+[11]: /monitors/monitor_types/log
+[12]: /monitors/monitor_types/forecasts
+[13]: /monitors/monitor_types/host
+[14]: /monitors/monitor_types/metric
+[15]: /monitors/monitor_types/integration
+[16]: /monitors/monitor_types/process
+[17]: /monitors/monitor_types/outlier
+[18]: /monitors/monitor_types/anomaly
+[19]: /monitors/monitor_types/apm
+[20]: /monitors/monitor_types/composite
+[21]: /monitors/monitor_types/network
+[22]: /monitors/monitor_types/event
+[23]: /monitors/monitor_types/custom_check
+[24]: /tagging
+[25]: https://app.datadoghq.com/monitors#/create
+[26]: /monitors/monitor_status
+[27]: /graphing/event_stream

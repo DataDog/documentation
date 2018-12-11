@@ -173,7 +173,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.jmxfetch.statsd.host`          | `DD_JMXFETCH_STATSD_HOST`          | same as `agent.host` | Statsd host to send JMX metrics to.                                                                                                                                                                                     |
 | `dd.jmxfetch.statsd.port`          | `DD_JMXFETCH_STATSD_PORT`          | 8125                 | Statsd port to send JMX metrics to.                                                                                                                                                                                     |
 
-[1]: https://docs.datadoghq.com/tracing/setup/docker/
+[1]: /tracing/setup/docker
 [2]: /tracing/advanced_usage/?tab=java#distributed-tracing
 [3]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
 {{% /table %}}
@@ -237,10 +237,10 @@ Java APM has minimal impact on the overhead of an application:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/tracing/setup
-[2]: /tracing/setup/docker/
+[1]: /tracing/setup
+[2]: /tracing/setup/docker
 [3]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
-[4]: http://bytebuddy.net/
+[4]: http://bytebuddy.net
 [5]: /help
 [6]: https://github.com/DataDog/documentation#outside-contributors
-[7]: https://docs.datadoghq.com/integrations/java/#configuration
+[7]: /integrations/java/#configuration

@@ -113,7 +113,7 @@ Don't see your desired libraries? Let Datadog know more about your needs through
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup
-[2]: /tracing/setup/docker/
+[2]: /tracing/setup/docker
 [3]: https://github.com/DataDog/dd-trace-php/releases/latest
 [4]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#compiling-and-installing-the-extension-manually
 [5]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#alternative-install-datadogdd-trace-package-without-changing-minimum-stability

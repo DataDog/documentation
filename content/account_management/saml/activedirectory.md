@@ -52,7 +52,7 @@ Multi-factor Authentication is not supported at this time. Leave the selection d
 
 Permit access to all users and click Next.
 
-Note: Access can be controlled through Datadog by inviting only specific users to your Organization from [within the application Team page][4]
+Note: Access can be controlled through Datadog by inviting only specific users to your Organization from [within the application Team page][3]
 
 {{< img src="account_management/saml/Rd13Ofm.png" alt="Rd13Ofm" responsive="true" style="width:60%;">}}
 
@@ -86,7 +86,7 @@ Save the new claim rules by clicking OK.
 
 {{< img src="account_management/saml/CeCyDmc.png" alt="CeCyDmc" responsive="true" style="width:60%;">}}
 
-Finally, download and import the ADFS identity provider metadata from the ADFS server into the SAML configuration in your [Datadog Organization Saml page][5]
+Finally, download and import the ADFS identity provider metadata from the ADFS server into the SAML configuration in your [Datadog Organization Saml page][4]
 
 This file can be downloaded from the following URL (replace hostname with the public DNS hostname of your server) - `https://hostname/FederationMetadata/2007-06/FederationMetadata.xml`
 
@@ -104,12 +104,12 @@ While in most setups the user's user@domain is his  Microsoft login does not enf
 
 {{< img src="account_management/saml/0R81SaK.png" alt="0R81SaK" responsive="true" style="width:60%;">}}
 
-For any questions or help with this, reach out to [the Datadog support team][3]!
+For any questions or help with this, reach out to [the Datadog support team][5]!
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/saml
 [2]: https://app.datadoghq.com/account/saml/metadata.xml
-[3]: /help
-[4]: https://app.datadoghq.com/account/team
-[5]: https://app.datadoghq.com/saml/saml_setup
+[3]: https://app.datadoghq.com/account/team
+[4]: https://app.datadoghq.com/saml/saml_setup
+[5]: /help

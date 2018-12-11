@@ -22,7 +22,7 @@ Shared Graphs and Screenboards allow you to display metric, trace, and log visua
 
 ## Sharing a particular Graph
 
-To share a Graph from a [Timeboard][5] or a [Screenboard][6]:
+To share a Graph from a [Timeboard][1] or a [Screenboard][2]:
 
 1. Choose a graph.
 2. Click the pencil icon in the upper right corner to edit it.
@@ -42,22 +42,22 @@ Share a Screenboard entirely with the following process:
 2. Click the *Generate public URL* option.
 3. Use the created URL to have live and read-only access to just the contents of that Screenboard.
 
-**Note**: If you've enabled [Templating][13], the template variable drop down isn't present in the shared views.
+**Note**: If you've enabled [Templating][3], the template variable drop down isn't present in the shared views.
 
 ### Applying restrictions
 
-You can restrict access on a per-IP address basis to your Embed. Email [the Datadog support team][1] to enable the IP address white listing feature that allows administrators to provide a list of IP addresses that have access to shared dashboards.
+You can restrict access on a per-IP address basis to your Embed. Email [the Datadog support team][4] to enable the IP address white listing feature that allows administrators to provide a list of IP addresses that have access to shared dashboards.
 
-These shared graphs can be embedded in external-facing tools using the provided iframe as well as shared directly using the source URL provided in the text box. This can be used externally without additional authorization required for access. Once enabled, manage your restrictions on [your organisation security page][14].
+These shared graphs can be embedded in external-facing tools using the provided iframe as well as shared directly using the source URL provided in the text box. This can be used externally without additional authorization required for access. Once enabled, manage your restrictions on [your organisation security page][5].
 
-**Note**: If you have enabled [Dashboard Template Variables][13], the template variable drop-downs will not be present in the shared views. We advise to avoid using these if you intend on sharing the views outside of your organization.
+**Note**: If you have enabled [Dashboard Template Variables][3], the template variable drop-downs will not be present in the shared views. We advise to avoid using these if you intend on sharing the views outside of your organization.
 
 ## Revoking shared graphs/Screenboard
 
 ### Revoking an embedded graphs
 To revoke the keys used to share your graphs:
 
-1. [Navigate to **Integrations -> Embeds**][3] to find a list of all the graphs that are shared.
+1. [Navigate to **Integrations -> Embeds**][6] to find a list of all the graphs that are shared.
 2. Click on the **Revoke** button for the graph you want to stop sharing.
 3. The graph moves then to the **Revoked** list.
 
@@ -89,16 +89,15 @@ Datadog has a [dedicated API][7] allowing you to interact with your Embeds:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
-[3]: https://app.datadoghq.com/account/settings#embeds
-[4]: /api/#embeds
-[5]: /graphing/dashboards/timeboard
-[6]: /graphing/dashboards/screenboard
+[1]: /graphing/dashboards/timeboard
+[2]: /graphing/dashboards/screenboard
+[3]: /graphing/dashboards/template_variables
+[4]: /help
+[5]: https://app.datadoghq.com/account/org_security
+[6]: https://app.datadoghq.com/account/settings#embeds
 [7]: /api/?lang=python#embeddable-graphs
 [8]: /api/?lang=python#get-all-embeds
 [9]: /api/?lang=python#create-embed
 [10]: /api/?lang=python#get-specific-embed
 [11]: /api/?lang=python#enable-embed
 [12]: /api/?lang=python#revoke-embed
-[13]: /graphing/dashboards/template_variables
-[14]: https://app.datadoghq.com/account/org_security

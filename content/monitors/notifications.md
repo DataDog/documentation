@@ -33,7 +33,7 @@ Notifications are a key component of any [monitor][1]. You want to make sure the
   Use [conditional variables](#conditional-variables) to modulate the notification text and send them to different contacts with the [Datadog's @-notification syntax](#notification).
   A common use-case for the monitor message is to include a step-by-step way to resolve the problem.
 
-3. Optionally enable **monitor renotification**. This option is useful to remind your team that a problem is not solved until the monitor is marked as [resolved][5]. If enabled, an escalation message can be configured to send any time the monitor renotifies. The original message is included as well.
+3. Optionally enable **monitor renotification**. This option is useful to remind your team that a problem is not solved until the monitor is marked as [resolved][3]. If enabled, an escalation message can be configured to send any time the monitor renotifies. The original message is included as well.
 
 ***Note:*** *To avoid notification storms, Datadog groups notifications with the same monitor ID and alert type in 20 second buckets. The first two notifications in the group within a 20 second bucket are sent as normal. All additional notifications within that 20 second window are sent as a single message.*
 
@@ -274,7 +274,7 @@ Would produce this slack message:
 
 Mention **@here** or **@channel** by using `<!here>` or `<!channel>`, respectively.
 
-For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][10]. For example, for a user group named `testers` you would use the following syntax:
+For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][1]. For example, for a user group named `testers` you would use the following syntax:
 
 ```
 <!subteam^12345|testers>
@@ -293,8 +293,8 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 
 * `@slack-{{host.name}}` post a slack message to the #host.name channel in Slack.
 
-[10]: https://api.slack.com/methods/usergroups.list
 
+[1]: https://api.slack.com/methods/usergroups.list
 {{% /tab %}}
 {{% tab "Hipchat Integration" %}}
 
@@ -394,10 +394,4 @@ https://app.datadoghq.com/dash/integration/<integration_name>?tpl_var_scope=host
 
 [1]: /monitors
 [2]: http://daringfireball.net/projects/markdown/syntax
-[3]: /monitors/monitor_types/host
-[4]: /monitors/monitor_types/metric
-[5]: /monitors/monitor_types/integration
-[6]: /monitors/monitor_types/process
-[7]: /monitors/monitor_types/network
-[8]: /monitors/monitor_types/custom_check
-[9]: /monitors/monitor_types/event
+[3]: /monitors/monitor_types/integration

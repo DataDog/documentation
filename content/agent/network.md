@@ -58,8 +58,8 @@ The information is structured as JSON following this schema:
 
 Each section has a dedicated endpoint at `https://ip-ranges.datadoghq.com/<section>.json`, for example:
 
-* [https://ip-ranges.datadoghq.com/logs.json][10] for the IPs used to receive logs data
-* [https://ip-ranges.datadoghq.com/apm.json][11] for the IPs used to receive APM data
+* [https://ip-ranges.datadoghq.com/logs.json][5] for the IPs used to receive logs data
+* [https://ip-ranges.datadoghq.com/apm.json][6] for the IPs used to receive APM data
 
 ### Note
 
@@ -77,38 +77,38 @@ Open the following ports in order to benefit from all the Agent functionalities:
 * **Outbound**:
 
   * `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers) 
-  * `123/udp`: NTP - [More details on the importance of NTP][5].
-  * `10516/tcp`: port for the [Log collection][3]
-  * `10255/tcp`: port for the [Kubernetes http kubelet][8]
-  * `10250/tcp`: port for the [Kubernetes https kubelet][8]
+  * `123/udp`: NTP - [More details on the importance of NTP][1].
+  * `10516/tcp`: port for the [Log collection][2]
+  * `10255/tcp`: port for the [Kubernetes http kubelet][3]
+  * `10250/tcp`: port for the [Kubernetes https kubelet][3]
 
 * **Inbound (used for Agent services communicating among themselves locally within the host only)**:
 
-  * `5000/tcp`: port for the [go_expvar server][6]
+  * `5000/tcp`: port for the [go_expvar server][4]
   * `5001/tcp`: port on which the IPC api listens
-  * `5002/tcp`: port for [the Agent browser GUI to be served][7]
+  * `5002/tcp`: port for [the Agent browser GUI to be served][5]
   * `8125/udp`: dogstatsd. Unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: 
 
       * `127.0.0.1`
       * `::1` 
       * `fe80::1`
   
-  * `8126/tcp`: port for the [APM Receiver][1]
+  * `8126/tcp`: port for the [APM Receiver][6]
 
-[1]: /tracing
-[3]: /logs
-[5]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[6]: /integrations/go_expvar/
-[7]: /agent/#using-the-gui
-[8]: /agent/basic_agent_usage/kubernetes/
 
+[1]: /agent/faq/network-time-protocol-ntp-offset-issues
+[2]: /logs
+[3]: /agent/basic_agent_usage/kubernetes
+[4]: /integrations/go_expvar
+[5]: /agent/#using-the-gui
+[6]: /tracing
 {{% /tab %}}
 {{% tab "Agent v5 & v4" %}}
 
 * **Outbound**:
 
   * `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers) 
-  * `123/udp`: NTP - [More details on the importance of NTP][5].
+  * `123/udp`: NTP - [More details on the importance of NTP][1].
 
 * **Inbound**:
 
@@ -118,20 +118,20 @@ Open the following ports in order to benefit from all the Agent functionalities:
       * `::1` 
       * `fe80::1`
 
-  * `8126/tcp`: port for the [APM Receiver][1]
+  * `8126/tcp`: port for the [APM Receiver][2]
   * `17123/tcp`: Agent forwarder, used to buffer traffic in case of network splits between the Agent and Datadog
   * `17124/tcp`: optional graphite adapter
 
-[1]: /tracing
-[5]: /agent/faq/network-time-protocol-ntp-offset-issues/
 
+[1]: /agent/faq/network-time-protocol-ntp-offset-issues
+[2]: /tracing
 {{% /tab %}}
 {{< /tabs >}}
 
 
 ## Using Proxies
 
-For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][9].
+For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][7].
 
 ## Further Reading
 
@@ -141,10 +141,6 @@ For a detailed configuration guide on proxy setup, see [Agent Proxy Configuratio
 [2]: /graphing/infrastructure/livecontainers
 [3]: /logs
 [4]: https://ip-ranges.datadoghq.com
-[5]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[6]: /integrations/go_expvar/
-[7]: /agent/#using-the-gui
-[8]: /agent/basic_agent_usage/kubernetes/
-[9]: /agent/proxy
-[10]: https://ip-ranges.datadoghq.com/logs.json
-[11]: https://ip-ranges.datadoghq.com/apm.json
+[5]: https://ip-ranges.datadoghq.com/logs.json
+[6]: https://ip-ranges.datadoghq.com/apm.json
+[7]: /agent/proxy

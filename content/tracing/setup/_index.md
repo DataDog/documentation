@@ -206,12 +206,12 @@ Primary tags appear at the top of APM pages. Use these selectors to slice the da
 [9]: /agent/faq/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
 [10]: /tracing/setup/docker
 [11]: https://github.com/DataDog/datadog-trace-agent/blob/6.4.1/datadog.example.yaml
-[12]: /agent/
+[12]: /agent
 [13]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [14]: https://app.datadoghq.com/apm/services
 [15]: https://app.datadoghq.com/apm/docs/trace-search
 [16]: /tracing/visualization/search/#apm-events
-[17]: /tagging/
+[17]: /tagging
 [18]: /agent/faq/agent-configuration-files/?tab=agentv6
 [19]: /tagging/assigning_tags/#traces
 [20]: https://app.datadoghq.com/apm/settings

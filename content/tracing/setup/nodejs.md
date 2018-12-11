@@ -113,30 +113,30 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/tracing/visualization/
-[2]: https://datadog.github.io/dd-trace-js/
+[1]: /tracing/visualization
+[2]: https://datadog.github.io/dd-trace-js
 [3]: https://github.com/DataDog/dd-trace-js/blob/master/README.md#development
-[4]: /tracing/setup/
-[5]: /tracing/setup/docker/
+[4]: /tracing/setup
+[5]: /tracing/setup/docker
 [6]: https://datadog.github.io/dd-trace-js/#tracer-settings
-[7]: https://docs.datadoghq.com/help
+[7]: /help
 [8]: https://datadog.github.io/dd-trace-js/#integrations
-[9]: https://expressjs.com/
+[9]: https://expressjs.com
 [10]: https://expressjs.com/en/resources/frameworks.html
 [11]: https://github.com/graphql/graphql-js
-[12]: https://hapijs.com/
-[13]: https://koajs.com/
-[14]: http://restify.com/
+[12]: https://hapijs.com
+[13]: https://koajs.com
+[14]: http://restify.com
 [15]: https://nodejs.org/api/http.html
 [16]: https://nodejs.org/api/https.html
 [17]: https://github.com/datastax/nodejs-driver
 [18]: https://github.com/elastic/elasticsearch-js
 [19]: https://github.com/luin/ioredis
 [20]: https://github.com/3rd-Eden/memcached
-[21]: http://mongodb.github.io/node-mongodb-native/core/
+[21]: http://mongodb.github.io/node-mongodb-native/core
 [22]: https://github.com/mysqljs/mysql
 [23]: https://github.com/sidorares/node-mysql2
-[24]: https://node-postgres.com/
+[24]: https://node-postgres.com
 [25]: https://github.com/NodeRedis/node_redis
 [26]: https://github.com/noodlefrenzy/node-amqp10
 [27]: https://github.com/squaremo/amqp.node

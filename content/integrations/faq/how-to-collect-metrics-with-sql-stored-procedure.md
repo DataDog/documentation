@@ -92,5 +92,5 @@ Configure the Datadog Agent to run the stored procedure by updating the [SQL YAM
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/metrics/#metric-types
-[2]: /developers/metrics/histograms/
+[2]: /developers/metrics/histograms
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example

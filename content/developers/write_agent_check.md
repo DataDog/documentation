@@ -141,9 +141,9 @@ class LSCheck(AgentCheck):
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/integrations/new_check_howto/
+[1]: /developers/integrations/new_check_howto
 [2]: https://github.com/DataDog/integrations-extras
 [3]: http://app.datadoghq.com/account/settings#agent
-[4]: /help/
+[4]: /help
 [5]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks.checks.html#datadog_checks.base.checks.base.AgentCheck
 [6]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks.utils.html#module-datadog_checks.base.utils.subprocess_output

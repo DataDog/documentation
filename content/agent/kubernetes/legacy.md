@@ -49,9 +49,7 @@ The default configuration targets Kubernetes 1.7.6 and later, as the Agent relie
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://kubernetes.io/docs/admin/authorization/rbac/
+[1]: https://kubernetes.io/docs/admin/authorization/rbac
 [2]: https://github.com/DataDog/integrations-core/tree/73b475d0762829a32c70b63da2564eaa15b1d942/kubelet#compatibility
-[3]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/
+[3]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information
 [4]: https://kubernetes.io/docs/admin/authentication/#service-account-tokens
-
-

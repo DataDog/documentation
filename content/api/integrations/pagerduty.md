@@ -38,4 +38,4 @@ Configure your Datadog-PagerDuty integration directly through the Datadog API.
     Your PagerDuty API token.
 
 [1]: /integrations/pagerduty
-[2]: https://www.pagerduty.com/docs/guides/datadog-integration-guide/
+[2]: https://www.pagerduty.com/docs/guides/datadog-integration-guide

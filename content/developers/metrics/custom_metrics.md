@@ -122,9 +122,8 @@ The full payload is approximately \~ 100 bytes. However, with the DogStatsD API,
 
 [1]: /developers/dogstatsd
 [2]: /agent
-[3]: /integrations/
+[3]: /integrations
 [4]: /integrations/faq/what-standard-integrations-emit-custom-metrics
 [5]: /api/#rate-limiting
 [6]: https://app.datadoghq.com/account/usage/hourly
 [7]: https://app.datadoghq.com/metric/summary
-[8]: /help

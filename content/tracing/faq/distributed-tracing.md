@@ -184,7 +184,7 @@ The Datadog APM allows you to trace all interactions of a request with the diffe
 [1]: /tracing
 [2]: /tracing/setup
 [3]: https://app.datadoghq.com/apm/home
-[4]: /tracing/visualization/services_list/
+[4]: /tracing/visualization/services_list
 [5]: /tracing/visualization/service
 [6]: /tracing/visualization/service/#out-of-the-box-graphs
 [7]: /tracing/visualization/resource

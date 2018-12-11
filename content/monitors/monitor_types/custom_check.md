@@ -39,5 +39,5 @@ Refer to the [Agent checks guide][1] for detailed information on writing your ow
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/agent_checks/
+[1]: /agent/agent_checks
 [2]: /monitors/notifications

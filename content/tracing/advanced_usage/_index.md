@@ -735,7 +735,7 @@ For more advanced usage and configuration information see [Datadog Python Opentr
 Support for OpenTracing with Ruby is coming soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
 
-[1]: https://docs.datadoghq.com/help
+[1]: /help
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -801,8 +801,8 @@ The following tags are available to override Datadog specific options:
 * `resource.name`: The resource name to be used for this span. The operation name will be used if this is not provided.
 * `span.type`: The span type to be used for this span. Will fallback to `custom` if not provided.
 
-[1]: https://doc.esdoc.org/github.com/opentracing/opentracing-javascript/
-[2]: https://datadog.github.io/dd-trace-js/
+[1]: https://doc.esdoc.org/github.com/opentracing/opentracing-javascript
+[2]: https://datadog.github.io/dd-trace-js
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -824,7 +824,7 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 
-[1]: https://www.nuget.org/packages/Datadog.Trace.OpenTracing/
+[1]: https://www.nuget.org/packages/Datadog.Trace.OpenTracing
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1011,7 +1011,7 @@ Distributed tracing is enabled by default for all supported integrations (see [C
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
 
-[1]: https://docs.datadoghq.com/help
+[1]: /help
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1202,7 +1202,7 @@ Once the sampling priority has been set, it cannot be changed. This is done auto
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
 
-[1]: https://docs.datadoghq.com/help
+[1]: /help
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1279,7 +1279,7 @@ trace_id, span_id = helpers.get_correlation_ids()
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
 
-[1]: https://docs.datadoghq.com/help
+[1]: /help
 {{% /tab %}}
 {{% tab "Go" %}}
 The Go tracer exposes two API calls to allow printing trace and span identifiers along with log statements using exported methods from `SpanContext` type:
@@ -1309,14 +1309,14 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-[1]: https://docs.datadoghq.com/help
+[1]: /help
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
 
-[1]: https://docs.datadoghq.com/help
+[1]: /help
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1518,7 +1518,7 @@ apm_config:
 ```
 
 [1]: /tagging
-[2]: /tracing/visualization/services_list/
+[2]: /tracing/visualization/services_list
 [3]: http://opentracing.io
 [4]: #priority-sampling
-[5]: https://docs.datadoghq.com/tracing/getting_further/trace_sampling_and_storage/
+[5]: /tracing/getting_further/trace_sampling_and_storage

@@ -24,7 +24,7 @@ While UDP works great on `localhost`, it can be a challenge to setup in containe
 
 ## How it works
 
-Instead of using an `IP:port` pair to establish connections, Unix Domain Sockets use a placeholder socket file. Once the connection is open, data is transmitted in the same [datagram format][2] as UDP.
+Instead of using an `IP:port` pair to establish connections, Unix Domain Sockets use a placeholder socket file. Once the connection is open, data is transmitted in the same [datagram format][1] as UDP.
 
 When the Agent restarts, the existing socket is deleted and replaced by a new one. Client libraries detect this change and connect seamlessly to the new socket.
 
@@ -40,7 +40,7 @@ Edit your `datadog.yaml` file to set the `dogstatsd_socket` option to the path w
 dogstatsd_socket: /var/run/datadog/dsd.socket
 ```
 
-Then [restart your Agent][1]. You can also set the socket path via the `DD_DOGSTATSD_SOCKET` environment variable.
+Then [restart your Agent][2]. You can also set the socket path via the `DD_DOGSTATSD_SOCKET` environment variable.
 
 ### Client
 
@@ -119,7 +119,7 @@ volumes:
 
 Origin detection allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received via UDS will be tagged by the same container tags as Autodiscovery metrics. **Note:** `container_id`, `container_name` and `pod_name` tags will not be added, to avoid creating too many custom metric contexts.
 
-To use origin detection, enable the `dogstatsd_origin_detection` option in your `datadog.yaml`, or set the environment variable `DD_DOGSTATSD_ORIGIN_DETECTION=true`, and [restart your Agent][1].
+To use origin detection, enable the `dogstatsd_origin_detection` option in your `datadog.yaml`, or set the environment variable `DD_DOGSTATSD_ORIGIN_DETECTION=true`, and [restart your Agent][2].
 
 When running inside a container, DogStatsd needs to run in the host PID namespace for origin detection to work reliably. You can enable this via the docker `--pid=host` flag.
 
@@ -131,8 +131,8 @@ Adding UDS support to existing libraries can be easily achieved as the protocol 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/faq/agent-commands
-[2]: /developers/dogstatsd/data_types
+[1]: /developers/dogstatsd/data_types
+[2]: /agent/faq/agent-commands
 [3]: https://github.com/DataDog/datadog-go
 [4]: https://github.com/DataDog/java-dogstatsd-client
 [5]: https://github.com/DataDog/datadogpy

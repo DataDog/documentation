@@ -204,7 +204,7 @@ Datadog allows you to configure a timezone for each anomaly detection monitor th
 [5]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
 [6]: /api/#monitor-create
 [7]: mailto:billing@datadoghq.com
-[8]: https://www.datadoghq.com/blog/anti-patterns-metric-graphs-101/
+[8]: https://www.datadoghq.com/blog/anti-patterns-metric-graphs-101
 [9]: /monitors/monitor_types/metric
 [10]: /monitors/monitor_types/composite
 [11]: /monitors/faq/how-to-update-anomaly-monitor-timezone

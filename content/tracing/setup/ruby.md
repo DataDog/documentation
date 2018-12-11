@@ -204,18 +204,18 @@ For more details about how to activate and configure the processing pipeline, ch
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md
-[2]: http://gems.datadoghq.com/trace/docs/
-[3]: https://docs.datadoghq.com/tracing/visualization/
+[2]: http://gems.datadoghq.com/trace/docs
+[3]: /tracing/visualization
 [4]: https://github.com/DataDog/dd-trace-rb/blob/master/README.md#development
 [5]: /tracing/setup
-[6]: /tracing/setup/docker/
+[6]: /tracing/setup/docker
 [7]: https://app.datadoghq.com/apm/services
-[8]: https://docs.datadoghq.com/tracing/visualization/
-[9]: https://www.ruby-lang.org/
-[10]: http://jruby.org/
-[11]: http://puma.io/
-[12]: https://bogomips.org/unicorn/
-[13]: https://www.phusionpassenger.com/
+[8]: /tracing/visualization
+[9]: https://www.ruby-lang.org
+[10]: http://jruby.org
+[11]: http://puma.io
+[12]: https://bogomips.org/unicorn
+[13]: https://www.phusionpassenger.com
 [14]: https://github.com/rails-api/active_model_serializers
 [15]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#active-model-serializers
 [16]: https://github.com/rails/rails/tree/master/activerecord

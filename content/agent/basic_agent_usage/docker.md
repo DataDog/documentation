@@ -72,11 +72,11 @@ Send custom metrics via [the statsd protocol][5]:
 | `DD_DOGSTATSD_SOCKET`            | Path to the unix socket to listen to. Must be in a `rw` mounted volume.                           |
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Enable container detection and tagging for unix socket metrics.                                   |
 
-[Learn more about DogStatsD over Unix Domain Sockets with Docker][9].
+[Learn more about DogStatsD over Unix Domain Sockets with Docker][6].
 
 #### Tagging
 
-Datadog automatically collects common tags from [Docker][6], [Kubernetes][7], [ECS][8], [Swarm, Mesos, Nomad and Rancher][6], and allow you to extract even more tags with the following options:
+Datadog automatically collects common tags from [Docker][7], [Kubernetes][8], [ECS][9], [Swarm, Mesos, Nomad and Rancher][7], and allow you to extract even more tags with the following options:
 
 | Env Variable                            | Description                                               |
 |-----------------------------------------|-----------------------------------------------------------|
@@ -141,11 +141,11 @@ Now when the container starts, all files in `/opt/datadog-agent-conf.d` with a `
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/docker
-[2]: https://hub.docker.com/r/datadog/agent/
-[3]: /logs/
-[4]: /graphing/infrastructure/process/
-[5]: https://docs.datadoghq.com/developers/dogstatsd/
-[6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
-[7]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
-[8]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
-[9]: /developers/dogstatsd/unix_socket
+[2]: https://hub.docker.com/r/datadog/agent
+[3]: /logs
+[4]: /graphing/infrastructure/process
+[5]: /developers/dogstatsd
+[6]: /developers/dogstatsd/unix_socket
+[7]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
+[8]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
+[9]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go

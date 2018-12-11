@@ -6,11 +6,11 @@ description: "Configure Syslog-ng to gather logs from your host, containers, & s
 short_description: "Configure Syslog-ng to gather logs from your host, containers, & services."
 categories:
 - log collection
-doc_link: https://docs.datadoghq.com/integrations/syslog_ng/
+doc_link: /integrations/syslog_ng/
 aliases:
     - logs/log_collection/syslog_ng
 has_logo: true
-integration_title: syslog_ng 
+integration_title: syslog_ng
 is_public: true
 public_title: Datadog-Syslog-ng Integration
 supported_os:
@@ -70,11 +70,11 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
 
     log { source(s_src); source(s_files); destination(d_datadog); };
     ```
-    
-4. (Optional) TLS Encryption 
+
+4. (Optional) TLS Encryption
     To activate TLS encryption:
-    
-    1. Download Datadog's [certificate][1] and save it to `/etc/syslog-ng/certs.d/datadoghq.crt`. 
+
+    1. Download Datadog's [certificate][1] and save it to `/etc/syslog-ng/certs.d/datadoghq.crt`.
 
     2. Change the definition of the destination to the following:
 
@@ -84,11 +84,11 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
 
     More information about the TLS parameters and possibilities for syslog-ng available in their [official documentation][2].
 
-5. Restart syslog-ng 
+5. Restart syslog-ng
 
 ## Troubleshooting
 Need help? Contact [Datadog Support][3].
 
 [1]: /crt/intake.logs.datadoghq.com.crt
 [2]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html
-[3]: https://docs.datadoghq.com/help/
+[3]: /help

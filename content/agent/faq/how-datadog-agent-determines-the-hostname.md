@@ -9,10 +9,10 @@ comments: <!–– Original flowchart is in lucidchart. Search Trello for link o
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
-For Agent 6, some differences in hostname resolution apply. See our document on [Differences in hostname resolution between Agent v5 and Agent v6][2].
+For Agent 6, some differences in hostname resolution apply. See our document on [Differences in hostname resolution between Agent v5 and Agent v6][1].
 
-[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/hostname-resolution.md
 
+[1]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/hostname-resolution.md
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -62,4 +62,3 @@ See a list of all the hosts in your account from the Infrastructure tab in Datad
 {{< img src="agent/faq/host_aliases.png" alt="Host aliases" responsive="true" >}}
 
 [1]: /agent/faq/agent-commands/#agent-status-and-information
-[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/hostname-resolution.md

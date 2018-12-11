@@ -144,14 +144,14 @@ Once that done, edit your `logback.xml` file as described in the below `Slf4j` s
 {{% /tab %}}
 {{% tab "Log4j2" %}}
 
-There is a default log4j2 JSON Layout that can be used as shown in this [example][4].
+There is a default log4j2 JSON Layout that can be used as shown in this [example][1].
 
-[4]: https://gist.github.com/NBParis/8bda7aea745987dd3261d475c613cf66
 
+[1]: https://gist.github.com/NBParis/8bda7aea745987dd3261d475c613cf66
 {{% /tab %}}
 {{% tab "Slf4j" %}}
 
-The JSON library we recommend for Logback is [logstash-logback-encoder][5]. One advantage is: it's inside the main Maven repository.
+The JSON library we recommend for Logback is [logstash-logback-encoder][1]. One advantage is: it's inside the main Maven repository.
 
 To add it into your classpath, simply add the following dependency (version 4.5.1 on the example) in your `pom.xml` file:
 
@@ -179,8 +179,8 @@ Then edit your `logback.xml` file and update the encoder:
         </encoder>
     </appender>
 ```
-[5]: https://github.com/logstash/logstash-logback-encoder
 
+[1]: https://github.com/logstash/logstash-logback-encoder
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -223,7 +223,7 @@ There are two steps to configure the Java application to stream logs directly to
 
 ### Bridge from Java logging libraries to Logback
 
-* The recommended logging library stream logs directly is Logback [logstash-logback-encoder](https://github.com/logstash/logstash-logback-encoder).
+* The recommended logging library stream logs directly is Logback [logstash-logback-encoder][3].
 
 This logging library can be linked from the most common Java ones:
 
@@ -257,8 +257,9 @@ Then, edit the `pom.xml` file with the following content:
 </dependency>
 ```
 
-**note:** As a result of this migration, Log4j configuration files will no longer be picked up. Migrate your `log4j.properties` file to `logback.xml` with the [Log4j translator](https://logback.qos.ch/translator/).
+**note:** As a result of this migration, Log4j configuration files will no longer be picked up. Migrate your `log4j.properties` file to `logback.xml` with the [Log4j translator][1].
 
+[1]: https://logback.qos.ch/translator
 {{% /tab %}}
 
 {{% tab "Log4j2" %}}
@@ -292,13 +293,14 @@ Then, edit the `pom.xml` file with the following content:
 **notes:** 
 
 - Make sure that `log4j-slf4j-impl-2.0.jar` is **not** used as explained here: https://logging.apache.org/log4j/log4j-2.2/log4j-to-slf4j/index.html
-- As a result of this migration, Log4j configuration files will no longer be picked up. Migrate your `log4j.properties` file to `logback.xml` with the [Log4j translator](https://logback.qos.ch/translator/).
+- As a result of this migration, Log4j configuration files will no longer be picked up. Migrate your `log4j.properties` file to `logback.xml` with the [Log4j translator][1].
 
+[1]: https://logback.qos.ch/translator
 {{% /tab %}}
 
 {{% tab "Slf4j" %}}
 
-To add Logback [logstash-logback-encoder](https://github.com/logstash/logstash-logback-encoder) into your classpath, add the following dependency (version 4.5.1 on the example) in your `pom.xml` file:
+To add Logback [logstash-logback-encoder][1] into your classpath, add the following dependency (version 4.5.1 on the example) in your `pom.xml` file:
 
 ```xml
 <dependency>
@@ -314,6 +316,7 @@ To add Logback [logstash-logback-encoder](https://github.com/logstash/logstash-l
 </dependency>
 ```
 
+[1]: https://github.com/logstash/logstash-logback-encoder
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -346,8 +349,8 @@ Configure the Logback logger to stream logs directly to Datadog by adding the fo
 **Notes:**
 
 - Replace `<API_KEY>` with your Datadog API key value
-- `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace, as explained [here](https://github.com/logstash/logstash-logback-encoder#prefixsuffix)
-- See the list of [available endpoints for the EU region](https://docs.datadoghq.com/logs/?tab=euregion#datadog-logs-endpoints)
+- `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace, as explained [here][4]
+- See the list of [available endpoints for the EU region][5]
 
 ## Getting further
 
@@ -355,7 +358,7 @@ Enrich your log events with contextual attributes.
 
 ### Using the Key/Value parser
 
-The [Key/Value parser][3] extracts any `<key>=<value>` pattern recognized in any log event.
+The [Key/Value parser][6] extracts any `<key>=<value>` pattern recognized in any log event.
 
 To enrich your log events in Java, you can re-write messages in your code and introduce `<key>=<value>` sequences.
 
@@ -371,7 +374,7 @@ You can change it to:
 logger.info("Emitted quantity=1001 messages during the last durationInMs=93180 ms for customer scope=prod30");
 ```
 
-With the [Key/Value parser][3] enabled, **Datadog** automatically extracts each pair from your final JSON document:
+With the [Key/Value parser][6] enabled, **Datadog** automatically extracts each pair from your final JSON document:
 
 ```json
 {
@@ -416,4 +419,7 @@ To generate this final JSON document:
 
 [1]: http://logback.qos.ch/manual/mdc.html
 [2]: /logs/processing/parsing
-[3]: /logs/processing/parsing/#key-value
+[3]: https://github.com/logstash/logstash-logback-encoder
+[4]: https://github.com/logstash/logstash-logback-encoder#prefixsuffix
+[5]: /logs/?tab=euregion#datadog-logs-endpoints
+[6]: /logs/processing/parsing/#key-value
