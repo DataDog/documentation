@@ -56,6 +56,7 @@ Optional collection Agents are disabled by default for security or performance r
 | Env Variable               | Description                                                                                                                                        |
 |----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_APM_ENABLED`           | Run the trace-agent along with the infrastructure Agent, allowing the container to accept traces on `8126/tcp`.                                    |
+| `DD_APM_NON_LOCAL_TRAFFIC` | Required to allow the Agent container to accept traces at `8126/tcp` from other containers.                                                        |
 | `DD_LOGS_ENABLED`          | Run the [log-agent][3] along with the infrastructure Agent.                                                                                        |
 | `DD_PROCESS_AGENT_ENABLED` | Enable live process collection in the [process-agent][4]. The Live Container View is already enabled by default if the Docker socket is available. |
 
