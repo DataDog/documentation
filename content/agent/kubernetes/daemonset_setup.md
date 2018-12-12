@@ -11,6 +11,8 @@ further_reading:
 - link: "agent/kubernetes/integrations"
   tag: "documentation"
   text: "Custom Integrations"
+aliases:
+  - /agent/kubernetes/apm
 ---
 
 Take advantage of DaemonSets to deploy the Datadog Agent on all your nodes (or on specific nodes by [using nodeSelectors][22]).
@@ -258,7 +260,7 @@ Learn more about this in [the Docker log collection documentation][11].
 
 ### Trace Collection
 
-To enable [Trace collection][20] with your DaemonSet:
+To enable trace collection with your DaemonSet:
 
 1. Set the Node IP and port as environment variables for your application containers:
 
@@ -334,6 +336,5 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [17]: https://github.com/DataDog/integrations-core/tree/73b475d0762829a32c70b63da2564eaa15b1d942/kubelet#compatibility
 [18]: https://kubernetes.io/docs/admin/authentication/#service-account-tokens
 [19]: /agent/docker/#dogstatsd-custom-metrics
-[20]: /agent/kubernetes/apm
 [21]: /graphing/infrastructure/process/?tab=kubernetes#installation
 [22]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
