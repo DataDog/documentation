@@ -52,6 +52,18 @@ ac_include: ["name:frontend.*"]
 
 Containers are, by their nature, extremely high cardinality objects. Datadog's flexible string search matches substrings in the container name, ID, or image fields.
 
+To combine multiple string searches into a complex query, you can use any of the following boolean operators:
+
+|              |                                                                                                        |                              |
+| :----        | :----                                                                                                  | :----                        |
+| **Operator** | **Description**                                                                                       | **Example**                 |
+| `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | java AND elasticsearch   |
+| `OR`         | **Union**: either term is contained in the selected events                                             | java OR python   |
+| `NOT` / `!`      | **Exclusion**: the following term is NOT in the event. Note - you may use the word NOT or `!` character to perform the same operation | java NOT elasticsearch <br> **equivalent:** java !elasticsearch|
+
+You can use parentheses to group operators together. For example, `(NOT (elasticsearch OR kafka) java) OR python` .
+
+
 ### Tagging
 
 Containers are [tagged][8] with all existing host-level tags.  We also tag with metadata associated with individual containers.
@@ -103,7 +115,7 @@ To access the ScatterPlot analytic [in the Containers page][3] click on the *Sho
 
 {{< img src="graphing/infrastructure/livecontainers/scatterplot_selection.png" alt="scatterplot selection" responsive="true" style="width:60%;">}}
 
-By default, the graph groups by the `short_image` tag key. The size of each dot represents the number of containers in that group, and clicking on a dot drills in it, to display the individual containers and hosts that contribute to the group. 
+By default, the graph groups by the `short_image` tag key. The size of each dot represents the number of containers in that group, and clicking on a dot drills in it, to display the individual containers and hosts that contribute to the group.
 
 The query at the top of the ScatterPlot analytic allows you to control your ScatterPlot analytic:
 

@@ -131,12 +131,24 @@ process_config:
 
 ## Searching, Filtering, and Pivoting
 
-### String Search
+### Search Syntax
 
 Processes and containers are, by their nature, extremely high cardinality objects. The fuzzy string search gives you a view into exactly what you want. Below is Datadog's demo environment, filtered with the string `postgres /9.`.  
 **Note**: `/9.` has matched in the command path, and `postgres` matches the command itself.
 
 {{< img src="graphing/infrastructure/process/postgres.png" alt="Postgres" responsive="true" style="width:80%;">}}
+
+To combine multiple string searches into a complex query, you can use any of the following boolean operators:
+
+|              |                                                                                                        |                              |
+| :----        | :----                                                                                                  | :----                        |
+| **Operator** | **Description**                                                                                       | **Example**                 |
+| `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | java AND elasticsearch   |
+| `OR`         | **Union**: either term is contained in the selected events                                             | java OR python   |
+| `NOT` / `!`      | **Exclusion**: the following term is NOT in the event. Note - you may use the word NOT or `!` character to perform the same operation | java NOT elasticsearch <br> **equivalent:** java !elasticsearch |
+
+You can use parentheses to group operators together. For example, `(NOT (elasticsearch OR kafka) java) OR python` .
+
 
 ### Tagging
 
@@ -184,7 +196,7 @@ To access the ScatterPlot analytic [in the Processes page][16] click on the *Sho
 
 {{< img src="graphing/infrastructure/process/scatterplot_selection.png" alt="scatterplot selection" responsive="true" style="width:60%;">}}
 
-By default, the graph groups by the `command` tag key. The size of each dot represents the number of processes in that group, and clicking on a dot drills in it to display the individual pids and containers that contribute to the group. 
+By default, the graph groups by the `command` tag key. The size of each dot represents the number of processes in that group, and clicking on a dot drills in it to display the individual pids and containers that contribute to the group.
 
 The query at the top of the Scatterplot analytic allows you to control your ScatterPlot analytic:
 
