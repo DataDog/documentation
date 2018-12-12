@@ -15,20 +15,20 @@ further_reading:
 
 ## Introduction
 
-Datadog's Process Monitoring allows for real-time visibility of the most granular elements in a deployment. Taking inspiration from bedrock tools like `htop`, this centralized view, combined with existing tagging capabilities, allows you to understand what is going on at any level of your system and drill all the way down into the most fine details.
+Datadog's Process Monitoring allows for real-time visibility of the most granular elements in a deployment. 
 
 {{< img src="graphing/infrastructure/process/live_process_preview.png" alt="live process preview" responsive="true" >}}
 
 ## Installation
 
-The following installation processes are for [Agent v6 only][6]. If you are still using Agent v5, [follow this specific installation process][7]
+The following installation processes are for [Agent 6 only][6]. If you are using Agent 5, [follow this specific installation process][7].
 
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
 
-The process Agent is shipped by default with Agent 6 in Linux packages only. Refer to the instructions for standard [Agent installation][8] for platform-specific details.
+The Process Agent is shipped by default with Agent 6 in Linux packages only. Refer to the instructions for standard [Agent installation][8] for platform-specific details.
 
-Once the Datadog Agent is installed, enable Live Processes collection by editing the [Agent main configuration file][9] by setting the following parameter to true:
+Once the Datadog Agent is installed, enable Live Processes collection by editing the [Agent main configuration file][9] by setting the following parameter to `true`:
 
 ```
 process_config:
@@ -37,13 +37,13 @@ process_config:
 
 The `enabled` value is a string with the following options:
 
-* `"true"`: Enable the process-agent to collect processes and containers.
-* `"false"`: Only collect containers if available (the default).
-* `"disabled"`: Don't run the process-agent at all.
+* `"true"`: Enable the Process Agent to collect processes and containers.
+* `"false"` (default): Only collect containers if available.
+* `"disabled"`: Don't run the Process Agent at all.
 
 Additionally, some configuration options may be set as environment variables.
 
-**Note**: options set as environment variables override the settings defined in the configuration file.
+**Note**: Options set as environment variables override the settings defined in the configuration file.
 
 After configuration is complete, [restart the Agent][10].  
 
@@ -63,15 +63,15 @@ Follow the instructions for the [Docker Agent][11], passing in the following att
 
 **Note**:
 
-* To collect container information in the standard install, the `dd-agent` user needs to have permissions to access `docker.sock`.
-* Running the Agent as container still allows you to collect host processes.
+* To collect container information in the standard install, the `dd-agent` user must have permissions to access `docker.sock`.
+* Running the Agent as a container still allows you to collect host processes.
 
 [11]: /agent/basic_agent_usage/docker/#run-the-docker-agent
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-In the [dd-agent.yaml][12] manifest used to create the daemonset, add the following environmental variables, volume mount, and volume:
+In the [dd-agent.yaml][12] manifest used to create the Daemonset, add the following environmental variables, volume mount, and volume:
 
 ```
  env:
@@ -87,9 +87,9 @@ In the [dd-agent.yaml][12] manifest used to create the daemonset, add the follow
       name: passwd    
 ```
 
-Refer to the standard [DaemonSet installation][13] and the [Docker Agent][11] information pages for further documentation.
+Refer to the standard [Daemonset installation][13] and the [Docker Agent][11] information pages for further documentation.
 
-**Note**: Running the Agent as container still allows you to collect host processes.
+**Note**: Running the Agent as a container still allows you to collect host processes.
 
 [11]: /agent/basic_agent_usage/docker/#run-the-docker-agent
 [12]: https://app.datadoghq.com/account/settings#agent/kubernetes
@@ -133,12 +133,13 @@ process_config:
 
 ### Search Syntax
 
-Processes and containers are, by their nature, extremely high cardinality objects. The fuzzy string search gives you a view into exactly what you want. Below is Datadog's demo environment, filtered with the string `postgres /9.`.  
+Processes and containers are, by their nature, extremely high cardinality objects. Fuzzy string search helps you view relevant information. Below is Datadog's demo environment, filtered with the string `postgres /9.`.
+
 **Note**: `/9.` has matched in the command path, and `postgres` matches the command itself.
 
 {{< img src="graphing/infrastructure/process/postgres.png" alt="Postgres" responsive="true" style="width:80%;">}}
 
-To combine multiple string searches into a complex query, you can use any of the following boolean operators:
+To combine multiple string searches into a complex query, use any of the following Boolean operators:
 
 |              |                                                                                                        |                              |
 | :----        | :----                                                                                                  | :----                        |
@@ -147,12 +148,12 @@ To combine multiple string searches into a complex query, you can use any of the
 | `OR`         | **Union**: either term is contained in the selected events                                             | java OR python   |
 | `NOT` / `!`      | **Exclusion**: the following term is NOT in the event. You may use the word `NOT` or `!` character to perform the same operation | java NOT elasticsearch <br> **equivalent:** java !elasticsearch |
 
-You can use parentheses to group operators together. For example, `(NOT (elasticsearch OR kafka) java) OR python` .
+Use parentheses to group operators together. For example, `(NOT (elasticsearch OR kafka) java) OR python` .
 
 
 ### Tagging
 
-[Tagging][15] makes navigation easy. In addition to all existing host-level tags, processes are tagged by `user`.
+[Tagging][15] enhances navigation. In addition to all existing host-level tags, processes are tagged by `user`.
 
 Furthermore, processes in ECS containers are also tagged by:
 
@@ -174,7 +175,7 @@ Processeses in Kubernetes containers are tagged by:
 
 ### Filtering and Pivoting
 
-First, you can filter down to `role:McNulty-Query`, Datadog's front-end query service, in order to narrow the search. Then you can search for the NGINX master processes, and pivot the table by Availability-Zone, to be confident about that service staying highly available.
+First, you can filter down to `role:McNulty-Query`, Datadog's front-end query service, in order to narrow the search. Then you can search for the NGINX master processes and pivot the table by availability zone to be confident about that service staying highly available.
 
 {{< img src="graphing/infrastructure/process/mcnultynginx.png" alt="mcnulty nginx" responsive="true" style="width:80%;">}}
 
@@ -190,15 +191,15 @@ Perhaps this one is less exciting after redaction.
 
 ## ScatterPlot
 
-Use the ScatterPlot analytic to compare two metrics with one another in order to better understand the performance of your containers.
+Use the scatter plot analytic to compare two metrics with one another in order to better understand the performance of your containers.
 
-To access the ScatterPlot analytic [in the Processes page][16] click on the *Show Summary graph* button the select the ScatterPlot tab:
+To access the scatter plot analytic [in the Processes page][16] click on the *Show Summary graph* button the select the "Scatter Plot" tab:
 
 {{< img src="graphing/infrastructure/process/scatterplot_selection.png" alt="scatterplot selection" responsive="true" style="width:60%;">}}
 
-By default, the graph groups by the `command` tag key. The size of each dot represents the number of processes in that group, and clicking on a dot drills in it to display the individual pids and containers that contribute to the group.
+By default, the graph groups by the `command` tag key. The size of each dot represents the number of processes in that group, and clicking on a dot displays the individual pids and containers that contribute to the group.
 
-The query at the top of the Scatterplot analytic allows you to control your ScatterPlot analytic:
+The query at the top of the scatter plot analytic allows you to control your scatter plot analytic:
 
 * Selection of metrics to display.
 * Selection of the aggregation method for both metrics.
@@ -214,7 +215,7 @@ Live Processes adds extra visibility to your container deployments. The [Live Co
 
 ## Real-time monitoring
 
-While actively working with the Live Processes, metrics are collected at 2s resolution. This is very important for highly volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.  
+While actively working with the Live Processes, metrics are collected at 2s resolution. This is important for highly volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.  
 
 ## Notes and frequently asked questions
 
@@ -222,8 +223,8 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 
 - Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
 
-- In container deployments, the `/etc/passwd` file mounted into the docker-dd-agent is necessary to collect usernames for each process. This is a public file and the Process Agent does not use any fields except the username. All features except the `user` metadata field will function without access to this file.
-  - Note:  Live Processes only uses the host `passwd` file and will not perform username resolution for users created within containers.
+- In container deployments, the `/etc/passwd` file mounted into the `docker-dd-agent` is necessary to collect usernames for each process. This is a public file and the Process Agent does not use any fields except the username. All features except the `user` metadata field will function without access to this file.
+  - **Note**:  Live Processes only uses the host `passwd` file and will not perform username resolution for users created within containers.
 
 ## Further Reading
 
