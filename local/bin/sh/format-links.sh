@@ -11,7 +11,6 @@ do
     echo "---Link formatting $f"
     if local/bin/format-links "$f" "$shortcodes" > "$tmpfile"; then
         mv "$tmpfile" "$f"
-        git add "$f"
     else
         echo "$f: Failed to format links, check stderr." 1>&2
         rm "$tmpfile"
