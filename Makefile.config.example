@@ -12,7 +12,6 @@ RUN_GULP := true
 
 LOCALBIN := local/bin
 LOCALETC := local/etc
-LOCALGITHOOKS := local/githooks
 EXEDIR := /usr/local/bin
 EXE_LIST := `find local/bin -type f -exec sh -c "echo ${EXEDIR}/{} | sed s@${LOCALBIN}/@@" \;`
 VIRENV=hugpython

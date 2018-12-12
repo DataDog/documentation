@@ -134,7 +134,7 @@ hugpython/bin/activate: local/etc/requirements3.txt  ## start python virtual env
 source-helpers: hugpython  ## source the helper functions used in build, test, deploy.
 	@mkdir -p ${EXEDIR}
 	@find ${LOCALBIN}/*  -type f -exec cp {} ${EXEDIR} \;
-	@cp -r ${LOCALGITHOOKS}/* .git/hooks
+	@cp -r local/githooks/* .git/hooks
 	@c++ -Wall -Werror -O2 local/etc/format-links.cpp -o local/bin/format-links
 
 # ARGS=<file> will format that file
