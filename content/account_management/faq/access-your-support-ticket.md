@@ -1,6 +1,8 @@
 ---
 title: Access your support ticket
 kind: faq
+aliases:
+  - /developers/faq/access-your-support-ticket
 ---
 
 If you already have opened at least one ticket to support@datadoghq.com follow this process to access all your Datadog support tickets:
