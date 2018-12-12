@@ -104,7 +104,7 @@ my:tag                            (same)
 
 #### Groups
 
-For any given metric, data may come from a number of hosts. The data is normally aggregated from all these hosts to a single value for each time slot. If you wish to split this out, you can by any tag. To include a data point separated out by each host,  use {host} for your group.
+For any given metric, data may come from a number of hosts. The data is normally aggregated from all these hosts to a single value for each time slot. If you wish to split this out, you can by any tag. To include a data point separated out by each host, use {host} for your group.
 
 #### Arithmetic
 
@@ -234,11 +234,13 @@ applies to more than 1 host you see that ingress and egress traffic is nicely st
 
 Here's how to do it for any metric:
 
+```json
 "requests" [
-  {ÿ
+  {
     "q": "system.net.bytes_rcvd{some_tag, device:eth0} by {host}"
   }
 ]
+```
 
 Note that in this case you can only have 1 query. But you can also split by device, or a combination of both:
 
@@ -374,7 +376,7 @@ Here is a full JSON example:
 
 #### Examples
 
-Here is an example using the ```rate()``` function, which takes only a single metric as a parameter.  Other functions, with the exception of ```top()``` and ```top_offset()```, have identical syntax.
+Here is an example using the `rate()` function, which takes only a single metric as a parameter.  Other functions, with the exception of `top()` and `top_offset()`, have identical syntax.
 
 ```json
 {
@@ -388,7 +390,7 @@ Here is an example using the ```rate()``` function, which takes only a single me
 }
 ```
 
-Here is an example using the ```top()``` function:
+Here is an example using the `top()` function:
 
 ```json
 {
@@ -402,12 +404,11 @@ Here is an example using the ```top()``` function:
 }
 ```
 
-This shows the graphs for the five series with the highest peak ```system.cpu.iowait``` values in the query window.
+This shows the graphs for the five series with the highest peak `system.cpu.iowait` values in the query window.
 
-To look at the hosts with the 6th through 10th highest values (for example), use ```top_offset``` instead:
+To look at the hosts with the 6th through 10th highest values (for example), use `top_offset` instead:
 
-```python
-
+```json
 {
   "viz": "timeseries",
   "requests": [
@@ -419,10 +420,9 @@ To look at the hosts with the 6th through 10th highest values (for example), use
 }
 ```
 
-Here is an example using the ```week_before()``` function:
+Here is an example using the `week_before()` function:
 
-```python
-
+```json
 {
   "viz": "timeseries",
   "requests": [
