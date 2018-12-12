@@ -145,7 +145,7 @@ To combine multiple string searches into a complex query, you can use any of the
 | **Operator** | **Description**                                                                                       | **Example**                 |
 | `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | java AND elasticsearch   |
 | `OR`         | **Union**: either term is contained in the selected events                                             | java OR python   |
-| `NOT` / `!`      | **Exclusion**: the following term is NOT in the event. Note - you may use the word NOT or `!` character to perform the same operation | java NOT elasticsearch <br> **equivalent:** java !elasticsearch |
+| `NOT` / `!`      | **Exclusion**: the following term is NOT in the event. You may use the word `NOT` or `!` character to perform the same operation | java NOT elasticsearch <br> **equivalent:** java !elasticsearch |
 
 You can use parentheses to group operators together. For example, `(NOT (elasticsearch OR kafka) java) OR python` .
 
