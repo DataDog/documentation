@@ -10,6 +10,7 @@ private: true
 * [Help! My Password email never came through!][2]
 * [Is it possible to have my login belong to multiple Datadog organizations?][3]
 * [What are Datadog's password requirements?][4]
+* [How do I access my support ticket?][18]
 
 ## Service Providers
 
@@ -45,3 +46,4 @@ private: true
 [15]: /account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp
 [16]: /account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog
 [17]: /account_management/faq/how-is-datadog-retrieving-my-data-are-my-data-and-credentials-safe
+[18]: /account_management/faq/access-your-support-ticket
