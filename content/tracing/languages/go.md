@@ -28,7 +28,7 @@ Consult the [migration document][4] if you need to migrate from an older version
 
 ### Installation
 
-First [install and configure the Datadog Agent][5] (see additional documentation for [tracing Docker applications][6]).
+First [install and configure the Datadog Agent][5] (see additional documentation for [tracing Docker applications][6] and [Kubernetes][54]).
 
 Next, install the Go tracer from its canonical import path:
 
@@ -164,3 +164,4 @@ For more tracer settings, see available options in the [configuration documentat
 [51]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/emicklei/go-restful
 [52]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [53]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
+[54]: /agent/kubernetes/daemonset_setup/#trace-collection

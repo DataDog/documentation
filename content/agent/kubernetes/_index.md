@@ -4,6 +4,8 @@ kind: documentation
 aliases:
     - /guides/basic_agent_usage/kubernetes
     - /agent/basic_agent_usage/kubernetes
+    - /tracing/kubernetes/
+    - /tracing/setup/kubernetes
 further_reading:
 - link: "agent/kubernetes/daemonset_setup"
   tag: "documentation"

@@ -21,7 +21,7 @@ The APM tracer for PHP applications is in Open Public Beta.
 
 ## Installation and Getting Started
 
-To begin tracing applications written in PHP, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications][7]).
+To begin tracing applications written in PHP, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications][7] and [Kubernetes][9]).
 
 Next, install the Datadog PHP extension using one of the precompiled packages for supported distributions. The latest packages can be found on GitHub's [releases page][4]. If you don't find your distribution, you can install the PHP extension [from source][3]
 
@@ -117,3 +117,4 @@ Don't see your desired libraries? Let Datadog know more about your needs through
 [6]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#alternative-install-datadogdd-trace-package-without-changing-minimum-stability
 [7]: /agent/docker/apm/
 [8]: https://goo.gl/forms/rKjH2J6nJ585KXri2
+[9]: /agent/kubernetes/daemonset_setup/#trace-collection

@@ -18,7 +18,7 @@ further_reading:
 
 ## Installation and Getting Started
 
-To begin tracing applications written in any language, first [install and configure the Datadog Agent][3] (see additional documentation for [tracing Docker applications](/agent/docker/apm/)).
+To begin tracing applications written in any language, first [install and configure the Datadog Agent][3] (see additional documentation for [tracing Docker applications](/agent/docker/apm/) and [Kubernetes][10]).
 
 Next, download `dd-java-agent.jar` that contains the Agent class files:
 
@@ -244,3 +244,4 @@ Java APM has minimal impact on the overhead of an application:
 [7]: https://docs.datadoghq.com/integrations/java/#configuration
 [8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
 [9]: http://bytebuddy.net/
+[10]: /agent/kubernetes/daemonset_setup/#trace-collection

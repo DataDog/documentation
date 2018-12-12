@@ -260,18 +260,26 @@ Learn more about this in [the Docker log collection documentation][11].
 
 To enable [Trace collection][20] with your DaemonSet:
 
-1. Set the `DD_APM_ENABLED` variable to true in your *env* section:
+1. Set the Node IP and port as environment variables for your application containers:
 
-    ```
-    (...)
-      env:
-        (...)
-        - name: DD_APM_ENABLED
-            value: "true"
-    (...)
-    ```
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+...
+    spec:
+      containers:
+      - name: <CONTAINER_NAME>
+        image: <CONTAINER_IMAGE>/<TAG>
+        env:
+          - name: DD_AGENT_HOST
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
+          - name: DD_TRACE_AGENT_PORT
+            value: "8126"
+```
 
-2. Uncomment the `# hostPort: 8126` line.
+2. Uncomment the `# hostPort: 8126` line in your `datadog-agent.yaml` manifest:
   This exposes the Datadog Agent tracing port on each of your Kubernetes nodes.
 
   **Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources. 

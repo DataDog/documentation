@@ -34,7 +34,7 @@ For details about contributing, check out the [development guide][development do
 This library <strong>MUST</strong> be imported and initialized before any instrumented module. When using a transpiler, you <strong>MUST</strong> import and initialize the tracer library in an external file and then import that file as a whole when building your application. This prevents hoisting and ensures that the tracer library gets imported and initialized before importing any other instrumented module.
 </div>
 
-To begin tracing Node.js applications, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications][3]).
+To begin tracing Node.js applications, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications][3] and [Kubernetes][33]).
 
 Next, install the Datadog Tracing library using npm:
 
@@ -150,3 +150,4 @@ For details about how to how to toggle and configure plugins, check out the [API
 [4]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [6]: https://datadog.github.io/dd-trace-js/#integrations
 [7]: https://docs.datadoghq.com/help
+[33]: /agent/kubernetes/daemonset_setup/#trace-collection

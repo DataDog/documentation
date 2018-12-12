@@ -39,7 +39,7 @@ For details about contributing, check out the [development guide][development do
 
 The Ruby APM tracer sends trace data through the Datadog Agent.
 
-[Install and configure the Datadog Agent][1], see additional documentation for [tracing Docker applications][2].
+[Install and configure the Datadog Agent][1], see additional documentation for [tracing Docker applications][2] and [Kubernetes][62].
 
 ### Quickstart for Rails applications
 
@@ -268,3 +268,4 @@ For more details about how to activate and configure the processing pipeline, ch
 [6]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#tracer-settings
 [7]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#priority-sampling
 [9]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#processing-pipeline
+[62]: /agent/kubernetes/daemonset_setup/#trace-collection

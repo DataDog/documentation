@@ -25,7 +25,7 @@ For Python Django applications, note that tracing is disabled when your applicat
 
 ## Installation and Getting Started
 
-To begin tracing applications written in Python, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications](/agent/docker/apm/)).
+To begin tracing applications written in Python, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications](/agent/docker/apm/) and [Kubernetes][4]).
 
 Next, install the Datadog Tracing library, `ddtrace`, using pip:
 
@@ -104,3 +104,4 @@ The `ddtrace` library includes support for the following libraries:
 [1]: /agent/apm
 [2]: http://pypi.datadoghq.com/trace/docs/index.html#getting-started
 [3]: http://pypi.datadoghq.com/trace/docs/installation_quickstart.html#opentracing
+[4]: /agent/kubernetes/daemonset_setup/#trace-collection

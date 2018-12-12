@@ -98,7 +98,7 @@ Either update the Java Agent configuration via environment variables:
 
 ```bash
 DD_AGENT_HOST=datadog-agent \
-DD_AGENT_PORT=8126 \
+DD_TRACE_AGENT_PORT=8126 \
 java -javaagent:/path/to/the/dd-java-agent.jar -jar /your/app.jar
 ```
 

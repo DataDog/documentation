@@ -280,6 +280,88 @@ if (($span = GlobalTracer::get()->getActiveSpan()) !== null){
 {{% /tab %}}
 {{< /tabs >}}
 
+## Change Agent Hostname
+
+Configure your application level tracers to submit traces to a custom Agent hostname. See the examples below for each supported language:
+
+{{< tabs >}}
+{{% tab "Java" %}}
+
+The Java Tracing Module automatically looks for and initializes with the ENV variables DD_AGENT_HOST and DD_TRACE_AGENT_PORT:
+
+```bash
+java -javaagent:/path/to/the/dd-java-agent.jar -jar /your/app.jar
+```
+
+You can also use system properties:
+
+```bash
+java -javaagent:/path/to/the/dd-java-agent.jar \
+     -Ddd.agent.host=$DD_AGENT_HOST \
+     -Ddd.agent.port=$DD_TRACE_AGENT_PORT \
+     -jar /your/app.jar
+```
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+```python
+import os
+from ddtrace import tracer
+
+tracer.configure(
+    hostname=os.environ['DD_AGENT_HOST'],
+    port=os.environ['DD_TRACE_AGENT_PORT'],
+)
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+```ruby
+Datadog.configure do |c|
+  c.tracer hostname: ENV['DD_AGENT_HOST'],
+           port: ENV['DD_TRACE_AGENT_PORT']
+end
+```
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+```go
+package main
+
+import (
+    "net"
+    "os"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+    addr := net.JoinHostPort(
+        os.Getenv("DD_AGENT_HOST"),
+        os.Getenv("DD_TRACE_AGENT_PORT"),
+    )
+    tracer.Start(tracer.WithAgentAddr(addr))
+    defer tracer.Stop()
+}
+
+```
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+```js
+const tracer = require('dd-trace').init({
+  hostname: process.env.DD_AGENT_HOST,
+  port: process.env.DD_TRACE_AGENT_PORT
+})
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Manual Instrumentation
 
 Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][apm terminology] and familiarize yourself with the core concepts of Datadog APM. 
