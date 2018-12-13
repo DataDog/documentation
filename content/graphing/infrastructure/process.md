@@ -116,6 +116,8 @@ process_config:
   custom_sensitive_words: ['personal_key', '*token', 'sql*', *pass*d*']
 ```
 
+**Note**: Words in `custom_sensitive_words` must contain only alphanumeric characters, underscores, or wildcards (`'*'`). A wildcard-only sensitive word is not supported.
+
 The next image shows one process on the Live Processes page whose arguments have been hidden by using the configuration above.
 
 {{< img src="graphing/infrastructure/process/process_arg_scrubbing.png" alt="process arguments scrubbing" responsive="true" style="width:100%;">}}
