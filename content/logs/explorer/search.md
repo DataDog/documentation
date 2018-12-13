@@ -113,9 +113,9 @@ If an attribute was called `user.first name`, perform a search on this attribute
 
 ## Arrays
 
-It is possible to add facets on arrays of strings or numbers. All value included in the array are then listed in the facet and can be used to search the logs.
+You can add facets on arrays of strings or numbers. All values included in the array become listed in the facet and can be used to search the logs.
 
-In the below example, clicking on the `Peter` value in the facet does return all the logs that contains a `users.names` attributes which value is either `Peter` or an array that contains `Peter`:
+In the below example, clicking on the `Peter` value in the facet returns all the logs that contains a `users.names` attribute, whose value is either `Peter` or an array that contains `Peter`:
 
 {{< img src="logs/explorer/search/array_search.png" alt="Array and Facets" responsive="true" style="width:80%;">}}
 
