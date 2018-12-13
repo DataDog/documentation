@@ -91,7 +91,7 @@ Into this log:
 
 {{< img src="logs/processing/processors/attribute_post_remapping.png" alt="attribute post remapping " responsive="true" style="width:40%;">}}
 
-Constraints on the tag/attribute name are explained in the [Tag Best Practice documentation][4]. Some additional constraints are applied as `:`, `/`, or `,` are not allowed in the target tag/attribute name.
+Constraints on the tag/attribute name are explained in the [Tag Best Practice documentation][4]. Some additional constraints are applied as `:` or `,` are not allowed in the target tag/attribute name.
 
 ## URL Parser
 
