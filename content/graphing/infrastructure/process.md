@@ -116,6 +116,8 @@ process_config:
   custom_sensitive_words: ['personal_key', '*token', 'sql*', *pass*d*']
 ```
 
+**Note**: Words in `custom_sensitive_words` must contain only alphanumeric characters, underscores, or wildcards (`'*'`). A wildcard-only sensitive word is not supported.
+
 The next image shows one process on the Live Processes page whose arguments have been hidden by using the configuration above.
 
 {{< img src="graphing/infrastructure/process/process_arg_scrubbing.png" alt="process arguments scrubbing" responsive="true" style="width:100%;">}}
@@ -223,8 +225,8 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 
 - Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
 
-- In container deployments, the `/etc/passwd` file mounted into the `docker-dd-agent` is necessary to collect usernames for each process. This is a public file and the Process Agent does not use any fields except the username. All features except the `user` metadata field will function without access to this file.
-  - **Note**:  Live Processes only uses the host `passwd` file and will not perform username resolution for users created within containers.
+- In container deployments, the `/etc/passwd` file mounted into the `docker-dd-agent` is necessary to collect usernames for each process. This is a public file and the Process Agent does not use any fields except the username. All features except the `user` metadata field function without access to this file.
+  - **Note**:  Live Processes only uses the host `passwd` file and does not perform username resolution for users created within containers.
 
 ## Further Reading
 
