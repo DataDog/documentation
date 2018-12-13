@@ -20,7 +20,6 @@ content/integrations/*.md
 !content/integrations/azure_dbformysql.md
 !content/integrations/azure_dbforpostgresql.md
 !content/integrations/adobe_experience_manager.md
-!content/integrations/servicenow.md
 
 # Ignoring all automated content
 # Developers/integrations
