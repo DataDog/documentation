@@ -17,14 +17,14 @@ further_reading:
 ---
 
 Support for Datadog APM is available for NGINX using a combination of plugins and configurations.
-The instructions below use NGINX from the official [Linux repositories][nginx-repos] and pre-built binaries for the plugins.
+The instructions below use NGINX from the official [Linux repositories][1] and pre-built binaries for the plugins.
 
 ## Plugin Installation
 
 The following plugins must be installed:
 
-- NGINX plugin for OpenTracing - [v0.7.0][ot-plugin] - installed in `/usr/lib/nginx/modules`
-- Datadog OpenTracing C++ Plugin - [v0.3.5][dd-plugin] - installed in `/usr/local/lib`
+- NGINX plugin for OpenTracing - [v0.7.0][2] - installed in `/usr/lib/nginx/modules`
+- Datadog OpenTracing C++ Plugin - [v0.3.5][3] - installed in `/usr/local/lib`
 
 Commands to download and install these modules:
 
@@ -79,8 +79,8 @@ The `agent_host` value may need to be changed if NGINX is running in a container
 
 Complete examples:
 
-- [nginx.conf][example-nginx]
-- [dd-config.json][example-dd-config]
+- [nginx.conf][4]
+- [dd-config.json][5]
 
 
 After completing this configuration, HTTP requests to NGINX will initiate and propagate Datadog traces, and will appear in the APM UI.
@@ -89,9 +89,9 @@ After completing this configuration, HTTP requests to NGINX will initiate and pr
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[nginx-repos]: http://nginx.org/en/linux_packages.html#stable
-[ot-plugin]: https://github.com/opentracing-contrib/nginx-opentracing/releases/download/v0.7.0/linux-amd64-nginx-1.14.0-ngx_http_module.so.tgz
-[dd-plugin]: https://github.com/DataDog/dd-opentracing-cpp/releases/download/v0.3.5/linux-amd64-libdd_opentracing_plugin.so.gz
-[example-nginx]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/nginx.conf
-[example-dd-config]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/dd-config.json
 
+[1]: http://nginx.org/en/linux_packages.html#stable
+[2]: https://github.com/opentracing-contrib/nginx-opentracing/releases/download/v0.7.0/linux-amd64-nginx-1.14.0-ngx_http_module.so.tgz
+[3]: https://github.com/DataDog/dd-opentracing-cpp/releases/download/v0.3.5/linux-amd64-libdd_opentracing_plugin.so.gz
+[4]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/nginx.conf
+[5]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/dd-config.json

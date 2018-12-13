@@ -49,31 +49,37 @@ How these components are installed on the host depends on the runtime environmen
 
 {{% tab ".NET Framework on Windows" %}}
 
-Install the .NET Tracer on the host using the [MSI installer for Windows](https://github.com/DataDog/dd-trace-csharp/releases). Choose the platform that matches your application: x64 for 64-bits or x86 for 32-bits. You can install both side-by-side if needed.
+Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Choose the platform that matches your application: x64 for 64-bits or x86 for 32-bits. You can install both side-by-side if needed.
 
 - Native library: deployed into `Program Files` by default and registered as a COM library in the Windows Registry by the MSI installer.
 - Managed libraries: deployed into the Global Assembly Cache (GAC) by the MSI installer, where any .NET Framework application can access them.
-- Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration](?tab=netframeworkonwindows#adding-environment-variables) to set these environment variables.
+- Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration][2] to set these environment variables.
 
+[1]: https://github.com/DataDog/dd-trace-csharp/releases
+[2]: ?tab=netframeworkonwindows#adding-environment-variables
 {{% /tab %}}
 
 {{% tab ".NET Core on Windows" %}}
 
-Install the .NET Tracer on the host using the [MSI installer for Windows](https://github.com/DataDog/dd-trace-csharp/releases). Choose the platform that matches your application: x64 for 64-bits or x86 for 32-bits. You can install both side-by-side if needed.
+Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Choose the platform that matches your application: x64 for 64-bits or x86 for 32-bits. You can install both side-by-side if needed.
 
-Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package](https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed) to your application, matching the package version to the MSI installer above. Refer to the [NuGet documentation](https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package) for instructions on how to add a NuGet package to your application.
+Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][2] to your application, matching the package version to the MSI installer above. Refer to the [NuGet documentation][3] for instructions on how to add a NuGet package to your application.
 
 - Native library: deployed into `Program Files` by default and registered as a COM library in the Windows Registry by the MSI installer.
 - Managed libraries: deployed together with your application when it is published (via NuGet package).
-- Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration](?tab=netcoreonwindows#adding-environment-variables) to set these environment variables.
+- Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration][4] to set these environment variables.
 
+[1]: https://github.com/DataDog/dd-trace-csharp/releases
+[2]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
+[3]: https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package
+[4]: ?tab=netcoreonwindows#adding-environment-variables
 {{% /tab %}}
 
 {{% tab ".NET Core on Linux" %}}
 
-Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package](https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed) to your application, matching the package version to the package below. Refer to the [NuGet documentation](https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package) for instructions on how to add a NuGet package to your application.
+Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][1] to your application, matching the package version to the package below. Refer to the [NuGet documentation][2] for instructions on how to add a NuGet package to your application.
 
-Install the .NET Tracer on the host using the using one of the packages available from the `dd-trace-csharp` [releases page](https://github.com/DataDog/dd-trace-csharp/releases).
+Install the .NET Tracer on the host using the using one of the packages available from the `dd-trace-csharp` [releases page][3].
 
 For Debian or Ubuntu, download and install the Debian package:
 
@@ -105,8 +111,12 @@ apk add libc6-compat
 
 - Native library: deployed into `/opt/datadog/` by default, or manually if using the `tar` package.
 - Managed libraries: deployed together with your application when it is published (via NuGet package).
-- Environment variables: [additional configuration](?tab=netcoreonlinux#adding-environment-variables) required.
+- Environment variables: [additional configuration][4] required.
 
+[1]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
+[2]: https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package
+[3]: https://github.com/DataDog/dd-trace-csharp/releases
+[4]: ?tab=netcoreonlinux#adding-environment-variables
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -264,7 +274,7 @@ The .NET tracer supports automatic instrumentation on the following runtimes:
 
 **Note**: Libraries that target .NET Standard 2.0 are supported when running on either .NET Framework 4.6.1+ or .NET Core 2.0+.
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
 
 ### Web Framework Integrations
 
@@ -280,7 +290,7 @@ The .NET tracer can instrument the following web frameworks automatically:
 | ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Windows | Public Beta   |
 | ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Linux   | Public Beta   |
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
 
 ### Data Store Integrations
 
@@ -296,13 +306,13 @@ The .NET tracer's ability to automatically instrument data store access depends 
 | MongoDB       | `MongoDB.Driver`                         |            | _Coming soon_ |
 | PostgreSQL    | `Npgsql`                                 |            | _Coming soon_ |
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
 
 ## Manual Instrumentation
 
-To manually instrument your code, add the `Datadog.Trace` [NuGet package][4] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
+To manually instrument your code, add the `Datadog.Trace` [NuGet package][3] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For more details on manual instrumentation and custom tagging, see [Advanced Usage][2].
+For more details on manual instrumentation and custom tagging, see [Advanced Usage][4].
 
 ### Runtime Compatibility
 
@@ -314,16 +324,14 @@ Manual instrumentation is supported on .NET Framework 4.5+ on Windows and on any
 | .NET Core      | 2.0+     | Windows, Linux, macOS | Public Beta  |
 | Mono           | 5.4+     | Windows, Linux, macOS | Public Beta  |
 
-For more details on supported platforms, see the [.NET Standard documentation][6].
+For more details on supported platforms, see the [.NET Standard documentation][5].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/tracing/setup
-[2]: /tracing/advanced_usage/?tab=net
-[4]: https://www.nuget.org/packages/Datadog.Trace/
-[5]: /help
-[6]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
-[8]: #manual-instrumentation
-[9]: https://support.microsoft.com/en-us/help/969864/using-iisreset-exe-to-restart-internet-information-services-iis-result
+[1]: /tracing/setup
+[2]: /help
+[3]: https://www.nuget.org/packages/Datadog.Trace
+[4]: /tracing/advanced_usage/?tab=net
+[5]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support

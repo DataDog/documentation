@@ -43,7 +43,7 @@ If your logs put their dates in an attribute not in this list, use the log date 
 
 {{< img src="logs/processing/processors/log_date_remapper.png" alt="Log date Remapper" responsive="true" style="width:80%;" >}}
 
-If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them. 
+If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.
 
 <div class="alert alert-info">
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
@@ -147,7 +147,7 @@ The message is a key attribute in Datadog. It is displayed in the message column
 Use the Arithmetic Processor to add a new attribute (without spaces or special characters in the new attribute name) to a log with the result of the provided formula.
 This enables you to remap different time attributes with different units into a single attribute, or to compute operations on attributes within the same log.
 
-The formula can use parentheses and the basic arithmetic operators: `-`, `+`, `*`, `/`. 
+The formula can use parentheses and the basic arithmetic operators: `-`, `+`, `*`, `/`.
 
 Example:
 
@@ -156,7 +156,7 @@ Example:
 By default, the calculation is skipped if an attribute is missing. Select "Replace missing attribute by 0" to automatically populate missing attribute values with 0 to ensure that the calculation is done.
 An attribute is missing if it is not found in the log attributes, or if it cannot be converted to a number.
 
-**Notes**: 
+**Notes**:
 
 * The operator `-` needs to be space split in the formula as it can also be contained in attribute names.
 * If the target attribute already exists, it is overwritten by the result of the formula.
@@ -179,4 +179,4 @@ There are two ways to improve correlation between application traces and logs:
 [2]: /logs/processing/parsing
 [3]: https://en.wikipedia.org/wiki/Syslog#Severity_level
 [4]: /tagging/#tags-best-practices
-[5]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=java#logging
+[5]: /tracing/advanced_usage/?tab=java#logging

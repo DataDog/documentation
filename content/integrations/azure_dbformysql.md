@@ -72,6 +72,6 @@ Checks
 | **azure.dbformysql_servers.storage_percent** <br/> (gauge) | Storage percentage <br/> *shown as percent* |
 | **azure.dbformysql_servers.storage_used** <br/> (gauge) |	Storage used <br/> *shown as byte* |
 
-[1]: /integrations/azure
-[2]: https://portal.azure.com/
 
+[1]: /integrations/azure
+[2]: https://portal.azure.com

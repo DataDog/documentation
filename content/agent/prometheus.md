@@ -59,8 +59,8 @@ annotations:
     ad.datadoghq.com/l5d.instances: |
       [
         {
-          "prometheus_url": "http://%%host%%:9990/admin/metrics/prometheus", "namespace": "linkerd", 
-          "metrics": ["jvm:thread:daemon_count"], 
+          "prometheus_url": "http://%%host%%:9990/admin/metrics/prometheus", "namespace": "linkerd",
+          "metrics": ["jvm:thread:daemon_count"],
           "type_overrides": {
             "jvm:thread:daemon_count": "gauge"
           }
@@ -70,7 +70,7 @@ annotations:
 
 #### Custom join
 
-In Prometheus it's common to have some placeholder metric holding all the labels because it's possible to do some label joins in the Prometheus query language. The Datadog Agent allows you to [join some labels during processing][10], so the metric is sent with all labels/tags wanted.
+In Prometheus it's common to have some placeholder metric holding all the labels because it's possible to do some label joins in the Prometheus query language. The Datadog Agent allows you to [join some labels during processing][5], so the metric is sent with all labels/tags wanted.
 For instance, to add the `node` label on every metric with the `pod` label, use the following configuration lines:
 
 ```
@@ -85,7 +85,7 @@ For instance, to add the `node` label on every metric with the `pod` label, use 
 
 By default, all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, don't hesitate to [contribute][1]!
 
-Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For an example, reference the [kube-proxy][5] integration.
+Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For an example, reference the [kube-proxy][6] integration.
 
 ## Further Reading
 
@@ -94,10 +94,6 @@ Official integrations have their own dedicated directories. There's a default in
 [1]: /developers/prometheus
 [2]: https://github.com/DataDog/integrations-core/tree/master/prometheus
 [3]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/agent/autodiscovery/
-[5]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
-[6]: https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py
-[7]: /agent/agent_checks/#configuration
-[8]: /developers/metrics/custom_metrics
-[9]: /agent/faq/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example#L34
+[4]: /agent/autodiscovery
+[5]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example#L34
+[6]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy

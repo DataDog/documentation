@@ -31,7 +31,7 @@ Once in the edit mode click on **Add Variable +** to create your first Template 
 * A **Name** *-Mandatory-*:
     Value of your Template Variable displayed in your graphs query.
 * A **Tag Group** *-Mandatory-*:
-    If your tags follow [the tags best practice][3] with a `key:value` format, the Tag Group is the  `key` of your tags.
+    If your tags follow [the tags best practice][1] with a `key:value` format, the Tag Group is the  `key` of your tags.
 * A **Default Tag** *-Optional-*:
     Default value for your Template Variable Tag Group.
 
@@ -53,7 +53,7 @@ After the graph is saved, the value of this Template Variable will be the one se
 
 ## Template variables and events
 
-[The event overlay][1] search is helpful to correlate metrics to events and you can use Template Variables to find events that share certain tags with the metrics on your dashboard. The event overlay search is [applied through an individual graph][2].
+[The event overlay][2] search is helpful to correlate metrics to events and you can use Template Variables to find events that share certain tags with the metrics on your dashboard. The event overlay search is [applied through an individual graph][3].
 
 Values from dashboard template variables can be directly captured by using the `$variable.value` syntax in the event search field.
 
@@ -89,7 +89,7 @@ Using the `Add to all` button adds this template variable to all log widgets. Wi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/event_stream
-[2]: /graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
-[3]: /tagging/#tags-best-practices
+[1]: /tagging/#tags-best-practices
+[2]: /graphing/event_stream
+[3]: /graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
 [4]: /logs/explorer/?tab=facets#setup

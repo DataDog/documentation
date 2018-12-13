@@ -8,13 +8,13 @@ disable_toc: true
 
 The Agent is a small application that runs on hosts. It executes checks and manages the flow of information from the host to the Datadog platform. The Agent is open source and compiled binaries are made available for Windows, macOS, and many flavors of Linux.
 
-See the [Agent documentation][8] for more information.
+See the [Agent documentation][1] for more information.
 
 #### API
 
 Datadog provides an HTTP API in order to interact programmatically with the platform. Every feature, resource, and mechanism is accessible via the API. Interacting with the API manually is a great way to learn how Datadog works under the hood. In production however, you will use a purpose-built tool, library, or interface - such as the Datadog product itself - as an abstraction layer between you and the API.
 
-See the [API documentation][1] for more information.
+See the [API documentation][2] for more information.
 
 #### Check
 
@@ -28,7 +28,7 @@ There are a number of libraries in a variety of languages that help you instrume
 
 Libraries are designed to interact with either the API or DogStatsD, though a handful provide support for both.
 
-See the [Libraries documentation][2] for more information.
+See the [Libraries documentation][3] for more information.
 
 #### Dashboard
 
@@ -40,15 +40,15 @@ Time Boards have a more structured format, and represent a single point in time 
 
 #### DogStatsD
 
-DogStatsD refers to two related things: a protocol based on [StatsD][3], and an application for reporting metrics which implements that protocol. The DogStatsD protocol is an extension of the StatsD protocol, with some modifications that are specific to the Datadog platform. The DogStatsD application is a service that is bundled with the Agent, and is used as a lightweight mechanism for reporting metrics.
+DogStatsD refers to two related things: a protocol based on [StatsD][4], and an application for reporting metrics which implements that protocol. The DogStatsD protocol is an extension of the StatsD protocol, with some modifications that are specific to the Datadog platform. The DogStatsD application is a service that is bundled with the Agent, and is used as a lightweight mechanism for reporting metrics.
 
-See the [DogStatsD documentation][4] for more information.
+See the [DogStatsD documentation][5] for more information.
 
 #### Integration
 
 An Integration is a way to get data from your systems into Datadog. Integrations gather data from a given source, ensure that those data are classified correctly, and provide some other assets to assist with configuration and usage. Data sources can be anything from daemons on a server, to cloud services, to third-party APIs, and more.
 
-See the [Integrations documentation][5] for more information.
+See the [Integrations documentation][6] for more information.
 
 #### Multiple-organization ("multi-org") accounts
 
@@ -56,15 +56,15 @@ Multi-org accounts allow a parent-organization to create multiple child-organiza
 
 #### Tracer
 
-Datadog supports distributed tracing via the APM Integration. This allows you to instrument your existing code and see requests as they pass through all your systems. It works across different languages, databases, and RPC frameworks. Many languages are [supported natively][6]; however, developers can add their own language support by creating a custom shipper.
+Datadog supports distributed tracing via the APM Integration. This allows you to instrument your existing code and see requests as they pass through all your systems. It works across different languages, databases, and RPC frameworks. Many languages are [supported natively][7]; however, developers can add their own language support by creating a custom shipper.
 
-See the [Tracing documentation][7] for more information.
+See the [Tracing documentation][8] for more information.
 
-[1]: https://docs.datadoghq.com/api/
-[2]: https://docs.datadoghq.com/developers/libraries/
-[3]: https://www.datadoghq.com/blog/statsd/
-[4]: https://docs.datadoghq.com/developers/dogstatsd/
-[5]: https://docs.datadoghq.com/developers/integrations/
-[6]: https://docs.datadoghq.com/developers/libraries/#apm-tracing-client-libraries
-[7]: https://docs.datadoghq.com/tracing/
-[8]: https://docs.datadoghq.com/agent/
+[1]: /agent
+[2]: /api
+[3]: /developers/libraries
+[4]: https://www.datadoghq.com/blog/statsd
+[5]: /developers/dogstatsd
+[6]: /developers/integrations
+[7]: /developers/libraries/#apm-tracing-client-libraries
+[8]: /tracing

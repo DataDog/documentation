@@ -22,5 +22,5 @@ You should then be notified when the tag stops to be sent along with the chosen 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/
+[1]: /monitors
 [2]: /monitors/monitor_types/metric

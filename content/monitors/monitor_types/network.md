@@ -45,6 +45,6 @@ the [HTTP check documentation][1] for details on Agent configuration.
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/http_check/
+[1]: /integrations/http_check
 [2]: /monitors/monitor_types/metric
 [3]: /monitors/notifications

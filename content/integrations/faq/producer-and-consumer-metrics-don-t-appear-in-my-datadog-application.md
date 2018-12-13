@@ -24,4 +24,4 @@ If you're running Java based Producers and Consumers, uncomment this section of 
 
 If you are using custom Producer and Consumer clients that are not written in Java and/or not exposing mBeans, having this enabled would still collect zero metrics. To still submit your metrics from your code use [DogStatsD][1].
 
-[1]: /developers/dogstatsd/
+[1]: /developers/dogstatsd

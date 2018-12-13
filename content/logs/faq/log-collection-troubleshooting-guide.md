@@ -83,7 +83,7 @@ sudo cat /var/log/datadog/agent.log | grep logs
 
 ### Log collection is not enabled
 
-1. Make sure the Datadog Agent has access to the Docker socket 
+1. Make sure the Datadog Agent has access to the Docker socket
 2. Check if the Agent user is in the Docker group: `usermod -a -G docker dd-agent`
 3. Check if log collection has been enabled `DD_LOGS_ENABLED=true`
 
@@ -92,7 +92,6 @@ sudo cat /var/log/datadog/agent.log | grep logs
 At least one valid log configuration must be set to start log collection. There are several options to configure log collection; ensure that at least one of them is activated:
 
 1. `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`, which collects logs from all containers (see [here how to exclude a subset][4])
-https://docs.datadoghq.com/logs/log_collection/docker/?tab=containerinstallation
 
 2. Autodiscovery via [container labels][5]. In this case, ensure that `datadog.yaml` has Docker listener and config provider:
 
@@ -118,9 +117,9 @@ config_providers:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/
+[1]: /logs
 [2]: /help
 [3]: https://codebeautify.org/yaml-validator
-[4]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=containerinstallation#filter-containers
-[5]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=dockerfile#examples
-[6]: https://docs.datadoghq.com/agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
+[4]: /logs/log_collection/docker/?tab=containerinstallation#filter-containers
+[5]: /logs/log_collection/docker/?tab=dockerfile#examples
+[6]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates

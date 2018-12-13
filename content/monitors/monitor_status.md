@@ -65,7 +65,7 @@ Use the *cog* icon in the upper right corner of the page to [edit][1] your monit
 
 ## Status and History
 
-The *Status and History* section reflect the query and state changes over time, while the **Evaluation Graph** represents the exact query behavior within the timeframe bracket *on the history graph*. The Evaluation Graph has a fixed zoomed window that corresponds to your monitor evaluation timesteps, to ensure the displayed points are not [incorrectly aggregated][9]. Slide this bracket over the timeline in order to view previous monitor evaluation results:
+The *Status and History* section reflect the query and state changes over time, while the **Evaluation Graph** represents the exact query behavior within the timeframe bracket *on the history graph*. The Evaluation Graph has a fixed zoomed window that corresponds to your monitor evaluation timesteps, to ensure the displayed points are not [incorrectly aggregated][6]. Slide this bracket over the timeline in order to view previous monitor evaluation results:
 
 {{< img src="monitors/monitor_status/status_monitor_history.gif" alt="status monitor history" responsive="true" style="width:80%;" >}}
 
@@ -73,7 +73,7 @@ To deep dive into your metrics evolution for further investigation, we advise yo
 
 ## Events
 
-All events generated from your monitor are aggregated in this section. Those events are also displayed in your [event stream][6].
+All events generated from your monitor are aggregated in this section. Those events are also displayed in your [event stream][9].
 
 {{< img src="monitors/monitor_status/status_monitor_event.png" alt="status monitor event" responsive="true" style="width:80%;" >}}
 
@@ -81,12 +81,12 @@ All events generated from your monitor are aggregated in this section. Those eve
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/monitor_types/
-[2]: /monitors/downtimes/
+[1]: /monitors/monitor_types
+[2]: /monitors/downtimes
 [3]: /monitors/#export-your-monitor
 [4]: /api/?lang=python#monitors
-[5]: /graphing/functions/
-[6]: /graphing/event_stream/
+[5]: /graphing/functions
+[6]: /videos/datadog101-5-aggregation/?wtime=49s
 [7]: https://app.datadoghq.com/metric/explorer
-[8]: /graphing/notebooks/
-[9]: https://docs.datadoghq.com/videos/datadog101-5-aggregation/?wtime=49s
+[8]: /graphing/notebooks
+[9]: /graphing/event_stream

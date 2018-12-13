@@ -36,4 +36,4 @@ At this point, if everything went fine, you should see data in your terminal, ad
 Now, if you want to interact in different ways with your API, you only need to proceed in an analog way with the examples in [our documentation][1].
 
 [1]: /api
-[2]: http://docs.python-guide.org/en/latest/starting/install/win/
+[2]: http://docs.python-guide.org/en/latest/starting/install/win

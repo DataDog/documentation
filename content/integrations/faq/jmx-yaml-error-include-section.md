@@ -5,7 +5,7 @@ kind: faq
 
 You may encounter the following error message when configuring your `jmx.yaml` file:
 ```
-initialize check class [ERROR]: "Each configuration must have an 'include' section. See http://docs.datadoghq.com/integrations/java/ for more information"
+initialize check class [ERROR]: "Each configuration must have an 'include' section. See https://docs.datadoghq.com/integrations/java/ for more information"
 ```
 
 In this case, the error is thrown because of incorrect indentation in the yaml file. For example, in the screenshot below you can see that there is no indentation of 'domain' after the 'include'. This throws the error.
@@ -17,4 +17,4 @@ If you were to place the above code into the [Online YAML Parser][1] , you would
 In order to correct this, indent the lines below 'include' two spaces to the right as depicted below. This ensures that 'include' is not registered as null.
 {{< img src="integrations/faq/correct_jmx_include.png" alt="correct_jmx_include" responsive="true" >}}
 
-[1]: http://yaml-online-parser.appspot.com/
+[1]: http://yaml-online-parser.appspot.com

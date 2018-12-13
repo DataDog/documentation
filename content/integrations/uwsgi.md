@@ -1,8 +1,8 @@
 ---
 categories:
   - log collection
-  - web 
-doc_link: https://docs.datadoghq.com/integrations/uwsgi/
+  - web
+doc_link: /integrations/uwsgi/
 description: Collect uWSGI logs in order to track requests per second, bytes served, request status, and more.
 short_description: Collect uWSGI logs in order to track requests per second, bytes served, request status, and more.
 ddtype: check
@@ -13,7 +13,7 @@ is_public: true
 kind: integration
 name: uwsgi
 public_title: Integration Datadog-uWSGI
-short_description: 
+short_description:
 supported_os:
 - linux
 - mac_os
@@ -70,7 +70,7 @@ Need help? Contact [Datadog Support][6].
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://uwsgi-docs.readthedocs.io/en/latest/Logging.html#logging-to-files
-[3]: https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent
+[3]: /agent/faq/agent-commands/#start-stop-restart-the-agent
 [4]: https://uwsgi-docs.readthedocs.io/en/latest/LogFormat.html#uwsgi-default-logging
 [5]: https://uwsgi-docs.readthedocs.io/en/latest/LogFormat.html#apache-style-combined-request-logging
-[6]: https://docs.datadoghq.com/help/
+[6]: /help

@@ -17,4 +17,4 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://help.nopassword.com/portfolio-items/datadog/
+[1]: https://help.nopassword.com/portfolio-items/datadog

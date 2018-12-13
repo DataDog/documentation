@@ -100,10 +100,10 @@ proxy_user: my_user
 proxy_password: my_password
 ```
 
-Do not forget to [restart the Agent][2] for the new settings to take effect.
+Do not forget to [restart the Agent][1] for the new settings to take effect.
 
-[2]: /agent/faq/agent-commands
 
+[1]: /agent/faq/agent-commands
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -133,11 +133,11 @@ Those parameters can also be set with the following environment variables:
 
 * Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs to `agent-intake.logs.datadoghq.com` on port `10516` and activate SSL encryption.
 
-* Use the [public key for TLS encryption][8] for the SSL encryption. On some systems, the full certificate chain may be required. If so, use [this public key][9] instead.
+* Use the [public key for TLS encryption][1] for the SSL encryption. On some systems, the full certificate chain may be required. If so, use [this public key][2] instead.
 
-[8]: /crt/intake.logs.datadoghq.com.crt
-[9]: /crt/FULL_intake.logs.datadoghq.com.crt
 
+[1]: /crt/intake.logs.datadoghq.com.crt
+[2]: /crt/FULL_intake.logs.datadoghq.com.crt
 {{% /tab %}}
 {{% tab "SOCK5" %}}
 
@@ -157,9 +157,9 @@ This parameter can also be set with the following environment variable:
 
 ## Using HAProxy as a Proxy
 
-[HAProxy][3] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pools servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity.
+[HAProxy][1] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pools servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity.
 
-This is the best option if you do not have a web proxy readily available in your network, and you wish to proxy a large number of Agents. In some cases, a single HAProxy instance is sufficient to handle local Agent traffic in your network-each proxy can accommodate upwards of 1000 Agents. (Be aware that this figure is a conservative estimate based on the performance of m3.xl instances specifically. Numerous network-related variables can influence load on proxies. As always, deploy under a watchful eye. Visit [HAProxy documentation][6] for additional information.)
+This is the best option if you do not have a web proxy readily available in your network, and you wish to proxy a large number of Agents. In some cases, a single HAProxy instance is sufficient to handle local Agent traffic in your network-each proxy can accommodate upwards of 1000 Agents. (Be aware that this figure is a conservative estimate based on the performance of m3.xl instances specifically. Numerous network-related variables can influence load on proxies. As always, deploy under a watchful eye. Visit [HAProxy documentation][2] for additional information.)
 
 `agent ---> haproxy ---> Datadog`
 
@@ -270,13 +270,13 @@ Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validati
 skip_ssl_validation: true
 ```
 
-Finally [restart the Agent][4].
+Finally [restart the Agent][1].
 
-To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][5].
+To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][2].
 
-[4]: /agent/#start-stop-restart-the-agent/#windows
-[5]: https://app.datadoghq.com/infrastructure
 
+[1]: /agent/#start-stop-restart-the-agent/#windows
+[2]: https://app.datadoghq.com/infrastructure
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -315,13 +315,13 @@ For the Windows Agent, edit your configuration file `datadog.conf` and add this 
 skip_ssl_validation: yes
 ```
 
-Finally [restart the Agent][4].
+Finally [restart the Agent][1].
 
-To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][5].
+To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][2].
 
-[4]: /agent/#start-stop-restart-the-agent/#windows
-[5]: https://app.datadoghq.com/infrastructure
 
+[1]: /agent/#start-stop-restart-the-agent/#windows
+[2]: https://app.datadoghq.com/infrastructure
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -352,18 +352,12 @@ We recommend using an actual proxy (a web proxy or HAProxy) to forward your traf
 to
     `dd_url: http://proxy-node:17123`
 
-6. Verify on the [Infrastructure page][1] that all nodes report data to Datadog.
+6. Verify on the [Infrastructure page][3] that all nodes report data to Datadog.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/infrastructure#overview
-[2]: /agent/faq/agent-commands
-[3]: http://haproxy.1wt.eu
-[4]: /agent/#start-stop-restart-the-agent/#windows
-[5]: https://app.datadoghq.com/infrastructure
-[6]: http://www.haproxy.org/#perf
-[7]: /logs/log_collection/#using-a-proxy-for-logs
-[8]: /crt/intake.logs.datadoghq.com.crt
-[9]: /crt/FULL_intake.logs.datadoghq.com.crt
+[1]: http://haproxy.1wt.eu
+[2]: http://www.haproxy.org/#perf
+[3]: https://app.datadoghq.com/infrastructure#overview

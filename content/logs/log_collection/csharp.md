@@ -77,10 +77,10 @@ Then check the `log.json` file to see the following event:
 }
 ```
 
-[Monitor now your log file with your Agent][2] to send your logs to your Datadog application
+[Monitor now your log file with your Agent][1] to send your logs to your Datadog application
 
-[2]: /logs/#tail-existing-files
 
+[1]: /logs/#tail-existing-files
 {{% /tab %}}
 {{% tab "NLog" %}}
 
@@ -149,10 +149,10 @@ namespace Datadog
 }
 ```
 
-[Monitor now your log file with your Agent][2] to send your logs to your Datadog application.
+[Monitor now your log file with your Agent][1] to send your logs to your Datadog application.
 
-[2]: /logs/#tail-existing-files
 
+[1]: /logs/#tail-existing-files
 {{% /tab %}}
 {{% tab "Log4Net" %}}
 Log4Net is a logging platform for .NET inspired from Log4j with rich log routing and management capabilities. It can help you produce and manage high-quality logs for your application regardless of its size or complexity.
@@ -289,14 +289,14 @@ It is possible to stream logs from your application to Datadog or to the Datadog
 {{< tabs >}}
 {{% tab "SeriLog" %}}
 
-Install the Datadog [Serilog sink][4], which send events and logs to Datadog. By default the sink uses a TCP connection over SSL.
+Install the Datadog [Serilog sink][1], which send events and logs to Datadog. By default the sink uses a TCP connection over SSL.
 Run the following command in the Package Manager Console: 
 
 ```
 PM> Install-Package Serilog.Sinks.Datadog.Logs
 ```
 
-Then, initialize the logger directly in your application. Do not forget to [add your `<API_KEY>`][3].
+Then, initialize the logger directly in your application. Do not forget to [add your `<API_KEY>`][2].
 
 ```
 var log = new LoggerConfiguration()
@@ -322,9 +322,9 @@ var log = new LoggerConfiguration()
 
 New logs are now directly sent to Datadog.
 
-[3]: https://app.datadoghq.com/account/settings#api
-[4]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs/
 
+[1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
+[2]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -39,7 +39,7 @@ The first step is to install the Agent (whether the containerized version or dir
 {{< tabs >}}
 {{% tab "Container Installation" %}}
 
-To run a [Docker container][3] that embeds the Datadog Agent to monitor your host, use the following command:
+To run a [Docker container][1] that embeds the Datadog Agent to monitor your host, use the following command:
 
 ```
 docker run -d --name datadog-agent \
@@ -54,7 +54,7 @@ docker run -d --name datadog-agent \
            datadog/agent:latest
 ```
 
-It is recommended that you pick the latest version of the Datadog Agent. Consult the full list of available [images for Agent v6][6] on Docker Hub.
+It is recommended that you pick the latest version of the Datadog Agent. Consult the full list of available [images for Agent v6][2] on Docker Hub.
 
 The commands related to log collection are:
 
@@ -66,15 +66,15 @@ The commands related to log collection are:
 | `-e DD_AC_EXCLUDE="name:datadog-agent"`               | Prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs.                    |
 | `-v /var/run/docker.sock:/var/run/docker.sock:ro`     | Logs are collected from container `stdout/stderr` from the Docker socket.                                                                                    |
 
-[3]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
-[6]: https://hub.docker.com/r/datadog/agent/tags/
 
+[1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
+[2]: https://hub.docker.com/r/datadog/agent/tags
 {{% /tab %}}
 {{% tab "Host Installation" %}}
 
-Install the [latest version of Agent 6][1] on your host. The Agent can collect logs from [files on the host][14] or from container `stdout`/`stderr`.
+Install the [latest version of Agent 6][1] on your host. The Agent can collect logs from [files on the host][2] or from container `stdout`/`stderr`.
 
-Collecting logs is *disabled* by default in the Datadog Agent. To enable it, add the following lines in your `datadog.yaml` configuration file: 
+Collecting logs is *disabled* by default in the Datadog Agent. To enable it, add the following lines in your `datadog.yaml` configuration file:
 
 ```
 logs_enabled: true
@@ -94,18 +94,18 @@ logs:
       source: docker
 ```
 
-[Restart the Agent][11] to see all your container logs in Datadog.
+[Restart the Agent][3] to see all your container logs in Datadog.
 
-[1]: /agent/basic_agent_usage/
-[11]: /agent/faq/agent-commands/?tab=agentv6#restart-the-agent
-[14]: /logs/log_collection/#custom-log-collection
 
+[1]: /agent/basic_agent_usage
+[2]: /logs/log_collection/#custom-log-collection
+[3]: /agent/faq/agent-commands/?tab=agentv6#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
-**Important notes**: 
+**Important notes**:
 
-* `source` and `service` default to the `short_image` tag value in Datadog Agent 6.8+.  
+* `source` and `service` default to the `short_image` tag value in Datadog Agent 6.8+.
 The source and service values can be overridden with Autodiscovery as described below. Setting the `source` value to an integration name results in the installation of integration Pipelines that parse your logs and extract relevant information from them.
 
 * Logs coming from container `Stderr` have a default status of `Error`.
@@ -114,7 +114,7 @@ The source and service values can be overridden with Autodiscovery as described 
 
 In Datadog Agent 6.8+, `source` and `service` default to the `short_image` tag value. This allows Datadog to identify the log source for each container and automatically install the corresponding integration.
 
-The container short image name might not match the integration name for custom images, and can be overwritten to better reflect the name of your application. This can be done with [Datadog Autodiscovery][12] and [pod annotations in Kubernetes][13] or container labels.
+The container short image name might not match the integration name for custom images, and can be overwritten to better reflect the name of your application. This can be done with [Datadog Autodiscovery][1] and [pod annotations in Kubernetes][2] or container labels.
 
 Autodiscovery expects labels to follow this format, depending on the file type:
 
@@ -136,7 +136,7 @@ Add the following label in your `docker-compose.yaml` file:
 labels:
   com.datadoghq.ad.logs: '[<LOGS_CONFIG>]'
 ```
-  
+
 {{% /tab %}}
 {{% tab "Run Command" %}}
 
@@ -154,7 +154,7 @@ Add the following label as a run command:
 {{< tabs >}}
 {{% tab "NGINX Dockerfile" %}}
 
-The following Dockerfile enables the NGINX log integration on the corresponding container (`service` value can be changed): 
+The following Dockerfile enables the NGINX log integration on the corresponding container (`service` value can be changed):
 
 ```
 LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
@@ -172,7 +172,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 {{% /tab %}}
 {{% tab "Java multi-line logs" %}}
 
-For multi-line logs like stack traces, the Agent has [multi-line processing rules][13] to aggregate lines into a single log.
+For multi-line logs like stack traces, the Agent has [multi-line processing rules][1] to aggregate lines into a single log.
 
 Example log (Java stack traces):
 
@@ -189,10 +189,10 @@ Use the `com.datadoghq.ad.logs` label as below on your containers to make sure t
   labels:
     com.datadoghq.ad.logs: '[{"source": "java", "service": "myapp", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
   ```
-See the [multi-line processing rule documentation][13] to get more pattern examples.
+See the [multi-line processing rule documentation][1] to get more pattern examples.
 
-[13]: https://docs.datadoghq.com/logs/log_collection/#multi-line-aggregation
 
+[1]: /logs/log_collection/#multi-line-aggregation
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -218,11 +218,10 @@ spec:
 
 ```
 
-Refer to the [Autodiscovery guide][13] for setup, examples, and more information about Autodiscovery.
+Refer to the [Autodiscovery guide][1] for setup, examples, and more information about Autodiscovery.
 
-[12]: https://docs.datadoghq.com/agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
-[13]: https://docs.datadoghq.com/agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
 
+[1]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -298,11 +297,5 @@ ac_exclude = ["name:datadog-agent"]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /logs/#custom-log-collection
-[4]: https://github.com/DataDog/docker-dd-agent#enabling-integrations
-[5]: /agent/autodiscovery/
-[7]: /logs/#filter-logs
-[8]: https://docs.datadoghq.com/agent/autodiscovery/#template-source-docker-label-annotations
-[9]: https://docs.datadoghq.com/logs/log_collection/#multi-line-aggregation
-[12]: https://docs.datadoghq.com/agent/autodiscovery/
-[13]: https://docs.datadoghq.com/agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
+[1]: /agent/autodiscovery
+[2]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates

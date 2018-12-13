@@ -32,4 +32,4 @@ external_redirect: /api/#update-a-timeboard
     * **`default`** [*optional*, *default*=**None**]:  
     The default value for the template variable on dashboard load.
 
-[1]: /graphing/
+[1]: /graphing

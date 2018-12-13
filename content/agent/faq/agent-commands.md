@@ -29,8 +29,8 @@ List of commands to start the Datadog Agent:
 | Source   | `sudo service datadog-agent start`                             |
 | Windows  | [See the dedicated Windows documentation][1]                   |
 
-[1]: /agent/basic_agent_usage/windows
 
+[1]: /agent/basic_agent_usage/windows
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -41,8 +41,8 @@ List of commands to start the Datadog Agent:
 | Source   | `sudo ~/.datadog-agent/bin/agent start`      |
 | Windows  | [See the dedicated Windows documentation][1] |
 
-[1]: /agent/basic_agent_usage/windows
 
+[1]: /agent/basic_agent_usage/windows
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -60,8 +60,8 @@ List of commands to stop the Datadog Agent:
 | Source   | `sudo service datadog-agent stop`                             |
 | Windows  | [See the dedicated Windows documentation][1]                  |
 
-[1]: /agent/basic_agent_usage/windows
 
+[1]: /agent/basic_agent_usage/windows
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -72,8 +72,8 @@ List of commands to stop the Datadog Agent:
 | Source   | `sudo ~/.datadog-agent/bin/agent stop`       |
 | Windows  | [See the dedicated Windows documentation][1] |
 
-[1]: /agent/basic_agent_usage/windows
 
+[1]: /agent/basic_agent_usage/windows
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -91,8 +91,8 @@ List of commands to restart the Datadog Agent:
 | Source   | *unsupported Platform*                            |
 | Windows  | [See the dedicated Windows documentation][1]      |
 
-[1]: /agent/basic_agent_usage/windows
 
+[1]: /agent/basic_agent_usage/windows
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -103,8 +103,8 @@ List of commands to restart the Datadog Agent:
 | Source   | `sudo ~/.datadog-agent/bin/agent restart`    |
 | Windows  | [See the dedicated Windows documentation][1] |
 
-[1]: /agent/basic_agent_usage/windows
 
+[1]: /agent/basic_agent_usage/windows
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -125,7 +125,6 @@ List of commands to display the status of the Datadog Agent:
 | macOS           | `launchctl list com.datadoghq.agent` *or* via the systray app                 |
 | Source          | `sudo service datadog-agent status`                                           |
 
-[2]: /agent/basic_agent_usage/windows/#status-and-information
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -137,10 +136,10 @@ List of commands to display the status of the Datadog Agent:
 | Kubernetes      | `kubectl exec -it <pod-name> /etc/init.d/datadog-agent status`           |
 | macOS           | `datadog-agent status`                                                   |
 | Source          | `sudo ~/.datadog-agent/bin/agent status`                                 |
-| Windows         | [See the dedicated Windows documentation][2]                             |
+| Windows         | [See the dedicated Windows documentation][1]                             |
 
-[2]: /agent/basic_agent_usage/windows/#status-and-information
 
+[1]: /agent/basic_agent_usage/windows/#status-and-information
 {{% /tab %}}
 {{% tab "Cluster Agent" %}}
 
@@ -163,7 +162,7 @@ List of commands to display the status of your Datadog Agent and enabled integra
 | Linux      | `sudo datadog-agent status`                          |
 | Docker     | `sudo docker exec -it <container_name> agent status` |
 | Kubernetes | `kubectl exec -it <pod-name> agent status`           |
-| macOS      | `datadog-agent status` or via the [web GUI][3]       |
+| macOS      | `datadog-agent status` or via the [web GUI][1]       |
 | Source     | `sudo datadog-agent status`                          |
 | Windows    | [See the dedicated Windows documentation][2]         |
 
@@ -182,9 +181,9 @@ A properly configured integration will be displayed under **Running Checks** wit
       Average Execution Time : 0ms
 ```
 
-[2]: /agent/basic_agent_usage/windows/#status-and-information
-[3]: /agent/#using-the-gui
 
+[1]: /agent/#using-the-gui
+[2]: /agent/basic_agent_usage/windows/#status-and-information
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -195,7 +194,7 @@ A properly configured integration will be displayed under **Running Checks** wit
 | Kubernetes | `kubectl exec -it <pod-name> /etc/init.d/datadog-agent info`           |
 | macOS      | `datadog-agent info`                                                   |
 | Source     | `sudo ~/.datadog-agent/bin/info`                                       |
-| Windows    | [See the dedicated Windows documentation][2]                           |
+| Windows    | [See the dedicated Windows documentation][1]                           |
 
 A properly configured integration will be displayed under **Checks** with no warnings or errors, as seen below:
 
@@ -209,8 +208,8 @@ A properly configured integration will be displayed under **Checks** with no war
      - Collected 15 metrics, 0 events & 1 service check
 ```
 
-[2]: /agent/basic_agent_usage/windows/#status-and-information
 
+[1]: /agent/basic_agent_usage/windows/#status-and-information
 {{% /tab %}}
 {{% tab "Cluster Agent" %}}
 
@@ -225,6 +224,3 @@ A properly configured integration will be displayed under **Checks** with no war
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/basic_agent_usage/windows
-[2]: /agent/basic_agent_usage/windows/#status-and-information
-[3]: /agent/#using-the-gui

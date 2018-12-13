@@ -48,7 +48,7 @@ Create a `stunnel.d/conf.yaml` file in the `conf.d/` folder at the root of your 
            service: <MY_SERVICE>
            sourcecategory: proxy
     ```
-    
+
     Change the `path` and `service` parameter values and configure them for your environment.
 
 3. [Restart the Agent][3]
@@ -58,6 +58,6 @@ Create a `stunnel.d/conf.yaml` file in the `conf.d/` folder at the root of your 
 [Run the Agent's `status` subcommand][4] and look for `stunnel` under the Checks section.
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/agent/faq/agent-configuration-files/#agent-configuration-directory
-[3]: https://docs.datadoghq.com/agent/faq/agent-commands/?tab=agentv6#start-stop-restart-the-agent
-[4]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
+[2]: /agent/faq/agent-configuration-files/#agent-configuration-directory
+[3]: /agent/faq/agent-commands/?tab=agentv6#start-stop-restart-the-agent
+[4]: /agent/faq/agent-commands/#agent-status-and-information

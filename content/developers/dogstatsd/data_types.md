@@ -16,7 +16,7 @@ further_reading:
 
 While StatsD accepts only metrics, DogStatsD accepts all three of the major Datadog data types: metrics, events, and service checks. This section shows typical use cases for each type, and introduces tagging, which is specific to DogStatsD.
 
-Each example is in Python using the [official Datadog Python client][2], but each data type shown is supported similarly in [other DogStatsD client libraries][1].
+Each example is in Python using the [official Datadog Python client][1], but each data type shown is supported similarly in [other DogStatsD client libraries][2].
 
 ## Metrics
 
@@ -61,13 +61,13 @@ def upload_file(file):
     return 'File uploaded!'
 ```
 
-Note that for counters coming from another source that are ever-increasing and never reset (for example, the number of queries from MySQL over time), Datadog tracks the rate between flushed values. To get raw counts within Datadog, apply a function to your series such as _cumulative sum_ or _integral_. [Read more about Datadog functions][8].
+Note that for counters coming from another source that are ever-increasing and never reset (for example, the number of queries from MySQL over time), Datadog tracks the rate between flushed values. To get raw counts within Datadog, apply a function to your series such as _cumulative sum_ or _integral_. [Read more about Datadog functions][3].
 
 Learn more about the [Count type in the Metrics documentation][4].
 
 ### Distributions
 
-**This feature is in BETA. [Contact Datadog support][11] for details on how to have it enabled for your account.**
+**This feature is in BETA. [Contact Datadog support][5] for details on how to have it enabled for your account.**
 
 Distributions are like a global version of Histograms (see below). They calculate statistical distributions across multiple hosts, allowing you to compute global percentiles across your entire dataset. Global distributions are designed to instrument logical objects, such as services, independently from the underlying hosts.
 
@@ -121,7 +121,7 @@ while true do
 end
 ```
 
-Learn more about the [Gauge type in the Metrics documentation][5].
+Learn more about the [Gauge type in the Metrics documentation][6].
 
 ### Histograms
 
@@ -182,7 +182,7 @@ The above instrumentation produces the following metrics:
 
 For this toy example, say a query time of 1 second is acceptable. The median query time (graphed in purple) is usually less than 100 milliseconds, which is great. But unfortunately, the 95th percentile (graphed in blue) has large spikes sometimes nearing three seconds, which is unacceptable. This means that most of queries are running just fine, but the worst ones are very bad. If the 95th percentile was close to the median, then you would know that almost all of the queries are performing just fine.
 
-Learn more about the [Histogram type in the Metrics documentation][6].
+Learn more about the [Histogram type in the Metrics documentation][7].
 
 ### Timers
 
@@ -242,7 +242,7 @@ def login(self, user_id)
 end
 ```
 
-Learn more about the [Histogram type in the Metrics documentation][6].
+Learn more about the [Histogram type in the Metrics documentation][7].
 
 ## Metric option: sample rates
 
@@ -258,7 +258,7 @@ correct the metric value, i.e. to estimate what it would have been without sampl
 
 **Sample rates only work with counter, histogram, and timer metrics.**
 
-Learn more about the [Rates in the Metrics documentation][7].
+Learn more about the [Rates in the Metrics documentation][8].
 
 ## Events
 
@@ -305,7 +305,7 @@ opts = {
 statsd.service_check(name, status, opts)
 ```
 
-After a service check is reported, use it to trigger a [custom check monitor][3].
+After a service check is reported, use it to trigger a [custom check monitor][10].
 
 ## Tagging
 
@@ -322,29 +322,29 @@ def algorithm_two():
     # Do fancy things (maybe faster?) here ...
 ```
 
-Note that tagging is a [Datadog-specific extension][1] to StatsD.
+Note that tagging is a [Datadog-specific extension][2] to StatsD.
 
 ### Host tag key
 
-The host tag is assigned automatically by the Datadog Agent aggregating the metrics. Metrics submitted with a host tag not matching the Agent hostname lose reference to the original host. The host tag submitted overrides any hostname collected by or configured in the Agent. If you need to remove the host tag from DogStatsD metrics, reference [How to remove the host tag when submitting metrics via DogStatsD][12].
+The host tag is assigned automatically by the Datadog Agent aggregating the metrics. Metrics submitted with a host tag not matching the Agent hostname lose reference to the original host. The host tag submitted overrides any hostname collected by or configured in the Agent. If you need to remove the host tag from DogStatsD metrics, reference [How to remove the host tag when submitting metrics via DogStatsD][11].
 
 ### Distributions
 
-Because of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][10] page for more details.
+Because of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][12] page for more details.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /libraries/
-[2]: http://datadogpy.readthedocs.io/en/latest/
-[3]: /monitors/monitor_types/custom_check
+[1]: http://datadogpy.readthedocs.io/en/latest
+[2]: /libraries
+[3]: /graphing/miscellaneous/functions
 [4]: /developers/metrics/counts
-[5]: /developers/metrics/gauges
-[6]: /developers/metrics/histograms
-[7]: /developers/metrics/rates
-[8]: /graphing/miscellaneous/functions
-[9]: /graphing/event_stream/
-[10]: /graphing/metrics/distributions
-[11]: /help
-[12]: /developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd/
+[5]: /help
+[6]: /developers/metrics/gauges
+[7]: /developers/metrics/histograms
+[8]: /developers/metrics/rates
+[9]: /graphing/event_stream
+[10]: /monitors/monitor_types/custom_check
+[11]: /developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd
+[12]: /graphing/metrics/distributions

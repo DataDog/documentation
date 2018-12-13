@@ -15,5 +15,5 @@ You should set your Webhook with content-type:application/json:
 
 Once updated you should see events flowing normally in your Datadog application. If not, feel free to reach out directly to [us][2].
 
-[1]: /integrations/github/
+[1]: /integrations/github
 [2]: /help

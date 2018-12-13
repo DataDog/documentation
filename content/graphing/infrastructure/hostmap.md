@@ -123,4 +123,4 @@ Below is a screenshot from a recent issue at Datadog. Some hosts have much less 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tagging
-[2]: /integrations/
+[2]: /integrations

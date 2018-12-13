@@ -29,5 +29,5 @@ external_redirect: /api/#validate-a-monitor
 *   **`query`** [*required*]:  
     The query defines when the monitor triggers. Query syntax depends on monitor type. See [Create a monitor][2] for details.
 
-[1]: /monitors/monitor_types/
+[1]: /monitors/monitor_types
 [2]: /api/#create-a-monitor

@@ -56,5 +56,5 @@ Samples are not available for multi-alerts.
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/search/
+[1]: /logs/explorer/search
 [2]: /monitors/notifications

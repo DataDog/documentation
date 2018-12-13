@@ -17,4 +17,4 @@ external_redirect: /api/#update-organization
     * **`saml_strict_mode`** - has one property `enabled` (boolean).
     * **`saml_autocreate_users_domains`** - has two properties: `enabled` (boolean) and `domains` which is a list of domains without the @ symbol.
 
-[1]: /account_management/saml/
+[1]: /account_management/saml

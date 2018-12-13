@@ -19,9 +19,9 @@ In Agent 6, however, there are a few changes. For Docker, the configuration is f
 
 Both Agent 5 and Agent 6 have the following Python checks:
 
-- [`kubernetes_state`][6], a Python Prometheus check that reaches a `kube-state-metrics` pod
-- [`kube_dns`][7], for monitoring DNS metrics
-- [`kube_proxy`][8], for metrics from `kube_proxy` states
+- [`kubernetes_state`][3], a Python Prometheus check that reaches a `kube-state-metrics` pod
+- [`kube_dns`][4], for monitoring DNS metrics
+- [`kube_proxy`][5], for metrics from `kube_proxy` states
 
 ## Further Reading
 
@@ -29,9 +29,6 @@ Both Agent 5 and Agent 6 have the following Python checks:
 
 [1]: https://github.com/DataDog/integrations-core/tree/master/docker_daemon
 [2]: https://github.com/DataDog/integrations-core/tree/master/kubernetes
-[3]: https://github.com/DataDog/datadog-agent/tree/master/pkg/collector/corechecks/containers
-[4]: https://github.com/DataDog/datadog-agent/tree/master/pkg/collector/corechecks/cluster
-[5]: https://github.com/DataDog/integrations-core/tree/master/kubelet
-[6]: https://github.com/DataDog/integrations-core/tree/master/kubernetes_state
-[7]: https://github.com/DataDog/integrations-core/tree/master/kube_dns
-[8]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[3]: https://github.com/DataDog/integrations-core/tree/master/kubernetes_state
+[4]: https://github.com/DataDog/integrations-core/tree/master/kube_dns
+[5]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy

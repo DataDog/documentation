@@ -57,11 +57,11 @@ If you're still unsure about the issue, you may reach out to [Datadog support te
 
 To enable the full debug mode:
 
-1. Modify your local `datadog.yaml` file (see [this page][11] to locate this configuration file on your instance)
+1. Modify your local `datadog.yaml` file (see [this page][6] to locate this configuration file on your instance)
 
 2. Replace `# log_level: INFO` with `log_level: DEBUG` (remove `#` to uncomment the line).
 
-3. Restart the Datadog Agent. See the [Agent Commands][6] page for OS-specific details.
+3. Restart the Datadog Agent. See the [Agent Commands][7] page for OS-specific details.
 
 4. Wait a few minutes to generate some logs. [See the Agent][4] docuementation for the location of the logs.
 
@@ -126,7 +126,7 @@ If you are running the 5.3 version (or higher) of the Agent, you're able to send
 
 `flare` gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information including passwords, API keys, Proxy credentials, and SNMP community strings.  
 **Confirm the upload of the archive to immediately send it to Datadog support**.  
-Datadog Agent is completely open source, which allows you to [verify the code's behavior][7]. If needed, the flare can be reviewed prior to sending since the flare prompts a confirmation before uploading it.  
+Datadog Agent is completely open source, which allows you to [verify the code's behavior][8]. If needed, the flare can be reviewed prior to sending since the flare prompts a confirmation before uploading it.  
 
 In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if you don't specify a case ID, the command asks for an email address that is used to login in your organization and creates a new support case.
 
@@ -137,7 +137,7 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 | ------------ | ------------------------------------------------------- |
 | Linux        | `sudo -u dd-agent -- datadog-agent flare <CASE_ID>`     |
 | Docker       | `docker exec -it datadog-agent agent flare <CASE_ID>`   |
-| macOS        | `datadog-agent flare <CASE_ID>` or via the [web GUI][8] |
+| macOS        | `datadog-agent flare <CASE_ID>` or via the [web GUI][1] |
 | CentOS       | `sudo datadog-agent flare <CASE_ID>`                    |
 | Debian       | `sudo datadog-agent flare <CASE_ID>`                    |
 | Kubernetes   | `kubectl exec <pod-name> -it agent flare <CASE_ID>`     |
@@ -145,13 +145,13 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 | Redhat       | `sudo datadog-agent flare <CASE_ID>`                    |
 | Suse         | `sudo datadog-agent flare <CASE_ID>`                    |
 | Source       | `sudo datadog-agent flare <CASE_ID>`                    |
-| Windows      | Consult the dedicated [Windows documentation][10]       |
-| Heroku       | Consult the dedicated [Heroku documentation][13]        |
+| Windows      | Consult the dedicated [Windows documentation][2]       |
+| Heroku       | Consult the dedicated [Heroku documentation][3]        |
 
-[8]: /agent/#using-the-gui
-[10]: /agent/basic_agent_usage/windows/#agent-v6
-[13]: /agent/basic_agent_usage/heroku/#send-a-flare
 
+[1]: /agent/#using-the-gui
+[2]: /agent/basic_agent_usage/windows/#agent-v6
+[3]: /agent/basic_agent_usage/heroku/#send-a-flare
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -167,14 +167,14 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 | Redhat     | `sudo service datadog-agent flare <CASE_ID>`                            |
 | Suse       | `sudo service datadog-agent flare <CASE_ID>`                            |
 | Source     | `sudo ~/.datadog-agent/bin/agent flare <CASE_ID>`                       |
-| Windows    | Consult the dedicated [Windows documentation][9]                        |
+| Windows    | Consult the dedicated [Windows documentation][1]                        |
 
 
-**Note**: If you are using a Linux based system and the `service` wrapper command is not available, [consult the list of alternatives][12].
+**Note**: If you are using a Linux based system and the `service` wrapper command is not available, [consult the list of alternatives][2].
 
-[9]: /agent/basic_agent_usage/windows/#agent-v5
-[12]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
 
+[1]: /agent/basic_agent_usage/windows/#agent-v5
+[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
 {{% /tab %}}
 {{% tab "Cluster Agent" %}}
 
@@ -261,7 +261,7 @@ C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'File
 
 ## Systemd
 
-For [systems using systemd][12], use `journalctl` to assist with debugging.
+For [systems using systemd][9], use `journalctl` to assist with debugging.
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
@@ -305,10 +305,7 @@ sudo journalctl -u dd-agent.service
 [3]: /agent/faq/agent-commands/#agent-status-and-information
 [4]: /agent/basic_agent_usage/#log-location
 [5]: /help
-[6]: /agent/faq/agent-commands/
-[7]: https://github.com/DataDog/dd-agent/blob/master/utils/flare.py
-[9]: /agent/basic_agent_usage/windows/#agent-v5
-[10]: /agent/basic_agent_usage/windows/#agent-v6
-[11]: /agent/faq/agent-configuration-files/?tab=agentv6
-[12]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
-[13]: /agent/basic_agent_usage/heroku/#send-a-flare
+[6]: /agent/faq/agent-configuration-files/?tab=agentv6
+[7]: /agent/faq/agent-commands
+[8]: https://github.com/DataDog/dd-agent/blob/master/utils/flare.py
+[9]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands

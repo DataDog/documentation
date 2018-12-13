@@ -52,4 +52,4 @@ If Watchdog has discovered something out of the ordinary in a specific service, 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apm/watchdog
-[2]: /tracing/visualization/services_list/
+[2]: /tracing/visualization/services_list

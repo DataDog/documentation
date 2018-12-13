@@ -126,5 +126,5 @@ Note: The span value is the number of data points. So `median_9()` uses the last
     {{< nextlink href="/graphing/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: http://futuredata.stanford.edu/asap/
-[2]: https://www.datadoghq.com/blog/auto-smoother-asap/
+[1]: http://futuredata.stanford.edu/asap
+[2]: https://www.datadoghq.com/blog/auto-smoother-asap

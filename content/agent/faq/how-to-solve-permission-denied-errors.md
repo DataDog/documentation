@@ -46,6 +46,6 @@ Then [restart the Agent][1].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /agent/faq/agent-commands
 [2]: /agent/basic_agent_usage/#log-location
-
