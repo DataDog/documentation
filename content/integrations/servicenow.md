@@ -2,20 +2,20 @@
 
 ServiceNow is an IT service management platform for recording, tracking, and managing a company’s enterprise-level IT processes in a single location. This integration allows you to create tickets from triggered alarms in Datadog [with the `@notification` feature][1]. Note that _Assignment Groups_ are automatically pulled in as separate `@notification` groups when the integration is enabled.
 
-Additionally, add Datadog-generated graphs and comments to ServiceNow tickets, as well as manage the resolution workflow from within Datadog.
+Additionally, this integration enables you to add Datadog-generated graphs and comments to ServiceNow tickets, as well as manage the resolution workflow from within Datadog.
 
 ## Installation & update set
 
-It's recommended to install the Datadog update set on your servicenow instance. This will allow you to customize the
+It's recommended to install the Datadog update set on your ServiceNow instance. This will allow you to customize the
 data you receive on ServiceNow and make custom transformations to the tables you use.
 
-Our [update set][2] creates a set of interim tables that Datadog notifications will be sent to. It also adds [transform maps][3] that allow you to control how the data from those notifications is mapped to other tables.
+Datadog's [update set][2] creates a set of interim tables that Datadog notifications will be sent to. It also adds [transform maps][3] that allow you to control how the data from those notifications is mapped to other tables.
 
 Installation steps:
 
 - Install the Datadog update set in ServiceNow
 - Define additional mappings and transformations from the Datadog tables to your target table
-- Enter your Servicenow details in the integration tile in Datadog
+- Enter your ServiceNow details in the integration tile in Datadog
 - See notifications to `@servicenow` populate the Datadog interim table and your target table
 
 ### Update Set Installation
@@ -28,7 +28,7 @@ The first step is to import the XML update set provided. In ServiceNow:
 
 {{< img src="integrations/servicenow/servicenow-import-update-set.png" alt="servicenow integration" responsive="true">}}
 
-Once you uploaded the XML file, it will show a state of _Loaded_. Click on the name of the update set to preview and commit the code to the system.
+Once you upload the XML file, it shows a state of _Loaded_. Click on the name of the update set to preview and commit the code to the system.
 
 {{< img src="integrations/servicenow/servicenow-loaded-update-set.png" alt="servicenow integration" responsive="true">}}
 
@@ -36,7 +36,7 @@ Preview the update set to ensure there are no errors.
 
 {{< img src="integrations/servicenow/servicenow-preview-update-set.png" alt="servicenow integration" responsive="true">}}
 
-Selecting _Commit Update Set_ will merge the application into your system.
+Selecting _Commit Update Set_ merges the application into your system.
 
 {{< img src="integrations/servicenow/servicenow-commit-update-set.png" alt="servicenow integration" responsive="true">}}
 
@@ -60,9 +60,9 @@ At the top are two important fields on the Transform record, _Source table_ and 
 
 {{< img src="integrations/servicenow/servicenow-source-target-fields.png" alt="servicenow integration" responsive="true">}}
 
-Notice, the source is the import set table we selected, Datadog Incident Tables, and the target is your actual Incident table (or Event table) where events are stored.
+Note that the source is the import set table you selected, Datadog Incident Tables, and the target is your actual Incident table (or Event table) where events are stored.
 
-Also notice the field mappings at the bottom of the record. Some basic mappings are included. This is where you select the fields you’d like to include, define the format and select the target fields in your ServiceNow instance.
+Note also the field mappings at the bottom of the record. Some basic mappings are included. This is where you select the fields you’d like to include, define the format, and select the target fields in your ServiceNow instance.
 
 #### Add a new field mapping
 
@@ -70,28 +70,26 @@ Click _New_
 
 {{< img src="integrations/servicenow/servicenow-click-new.png" alt="servicenow integration" responsive="true">}}
 
-Select the Source and Target fields for one to one mappings
+Select the source and target fields for one to one mappings
 
 {{< img src="integrations/servicenow/servicenow-select-source-target.png" alt="servicenow integration" responsive="true">}}
 
-Or, check the _Use source script_ box and define transformations, for example:
+Or, check the _Use source script_ box and define transformations. For example:
 
 {{< img src="integrations/servicenow/servicenow-script-example.png" alt="servicenow integration" responsive="true">}}
 
 #### Define multiple mappings quickly
 
-Use _Mapping Assist_ (under Related Links) to map several Source and Target fields.
+Use _Mapping Assist_ (under Related Links) to map several source and target fields.
 
 {{< img src="integrations/servicenow/servicenow-mapping-assist.png" alt="servicenow integration" responsive="true">}}
 
 ### Installation in Datadog
 
-- In the Datadog application, go to the Integrations page and find the
-  [ServiceNow tile][4]
+- In Datadog, go to the Integrations page and find the [ServiceNow tile][4]
 - Add the instance name, which is the subdomain only. For _foo.service-now.com_ you should only enter _foo_.
-- Add the username and password for your ServiceNow instance
-  (you should create a limited user in ServiceNow just for Datadog)
-- Select the intermediary table you want to send notifications to from the dropdown
+- Add the username and password for your ServiceNow instance. (You should create a limited user in ServiceNow just for Datadog.)
+- Select the intermediary table you want to send notifications to from the dropdown.
 
 {{< img src="integrations/servicenow/servicenow-configuration.png" alt="servicenow integration" responsive="true">}}
 
@@ -101,7 +99,7 @@ The ServiceNow user needs _rest\_service_ and _x\_datad\_datadog.user_ roles so 
 
 ### Confirmation
 
-That's it! To test the integration, add `@servicenow` in a monitor or event notification. The raw data will populate rows in the interim table and will get forwarded to the ServiceNow table specified in the mappings and transformations you created.
+To test the integration, add `@servicenow` in a monitor or event notification. The raw data populates rows in the interim table and is forwarded to the ServiceNow table specified in the mappings and transformations you created.
 
 ## Troubleshooting
 
@@ -124,7 +122,7 @@ Need additional help? Contact [Datadog Support][5].
 
 #### Auto-generate support tickets from Datadog alerts
 
-Now, you can set these alerts to automatically create support tickets and send them to the ServiceNow ticketing queue. From there, your support team will be notified of issues using the communication workflows that you have already established inside ServiceNow. All you have to do is mention `@servicenow` in the alert message or add `@servicenow` to the notification list for that monitor.
+Now, you can set these alerts to automatically create support tickets and send them to the ServiceNow ticketing queue. From there, your support team will be notified of issues using the communication workflows that you have already established inside ServiceNow. Mention `@servicenow` in the alert message or add `@servicenow` to the notification list for that monitor.
 
 {{< img src="integrations/servicenow/servicenow-02-monitor-page.png" alt="ServiceNow" responsive="true">}}
 
@@ -142,7 +140,7 @@ Once the monitor state returns to normal, the associated support ticket is autom
 
 #### Send Datadog graphs to ServiceNow
 
-In addition to automating ticket creation and resolution, you can also use Datadog to create ServiceNow tickets on an ad hoc basis whenever you see something in Datadog that needs your team’s attention. Just click the camera icon to share a snapshot of any Timeboard graph, add some context in the comment box to help your colleagues interpret the graph, and @mention ServiceNow to send the graph and your comments to ServiceNow.
+In addition to automating ticket creation and resolution, you can also use Datadog to create ServiceNow tickets on an ad hoc basis whenever you see something in Datadog that needs your team’s attention. Click the camera icon to share a snapshot of any Timeboard graph, add some context in the comment box to help your colleagues interpret the graph, and @mention ServiceNow to send the graph and your comments to ServiceNow.
 
 {{< img src="integrations/servicenow/servicenow-04-mention-servicenow.png" alt="annotation" responsive="true">}}
 
