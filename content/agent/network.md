@@ -31,7 +31,8 @@ This decision was taken after the POODLE problem. Versioned endpoints start with
 
 These domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at:  
 
-* **[https://ip-ranges.datadoghq.com][4]**
+* **[https://ip-ranges.datadoghq.com][4]**, or
+* **[https://ip-ranges.datadoghq.eu][8]** for Datadog EU
 
 The information is structured as JSON following this schema:
 
@@ -56,10 +57,12 @@ The information is structured as JSON following this schema:
 }
 ```
 
-Each section has a dedicated endpoint at `https://ip-ranges.datadoghq.com/<section>.json`, for example:
+Each section has a dedicated endpoint at `https://ip-ranges.datadoghq.com/<section>.json` or `https://ip-ranges.datadoghq.eu/<section>.json`, for example:
 
 * [https://ip-ranges.datadoghq.com/logs.json][5] for the IPs used to receive logs data
+* [https://ip-ranges.datadoghq.eu/logs.json][9] for the IPs used to receive logs data for Datadog EU
 * [https://ip-ranges.datadoghq.com/apm.json][6] for the IPs used to receive APM data
+* [https://ip-ranges.datadoghq.eu/apm.json][10] for the IPs used to receive APM data for Datadog EU
 
 ### Note
 
@@ -144,3 +147,6 @@ For a detailed configuration guide on proxy setup, see [Agent Proxy Configuratio
 [5]: https://ip-ranges.datadoghq.com/logs.json
 [6]: https://ip-ranges.datadoghq.com/apm.json
 [7]: /agent/proxy
+[8]: https://ip-ranges.datadoghq.eu
+[9]: https://ip-ranges.datadoghq.eu/logs.json
+[10]: https://ip-ranges.datadoghq.eu/apm.json
