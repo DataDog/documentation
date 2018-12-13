@@ -4,13 +4,13 @@ kind: faq
 further_reading:
 - link: "monitors/monitor_types"
   tag: "Documentation"
-  text: Learn how to create a monitor
+  text: "Learn how to create a monitor"
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 - link: "monitors/downtimes"
   tag: "Documentation"
-  text: Schedule a downtime to mute a monitor
+  text: "Schedule a downtime to mute a monitor"
 ---
 
 While Datadog does fully support [composite monitors][1], there is not an official way to create alerting trees.

@@ -7,16 +7,16 @@ aliases:
 further_reading:
 - link: "logs/processing/processors"
   tag: "Documentation"
-  text: Learn how to process your logs
+  text: "Learn how to process your logs"
 - link: "logs/faq/how-to-investigate-a-log-parsing-issue"
   tag: "FAQ"
-  text: How to investigate a log parsing issue?
+  text: "How to investigate a log parsing issue?"?
 - link: "logs/faq/log-parsing-best-practice"
   tag: "FAQ"
-  text: Log Parsing - Best Practice
+  text: "Log Parsing - Best Practice"
 - link: "logs/logging_without_limits"
   tag: "Documentation"
-  text: Control the volume of logs indexed by Datadog
+  text: "Control the volume of logs indexed by Datadog"
 ---
 
 ## Overview 

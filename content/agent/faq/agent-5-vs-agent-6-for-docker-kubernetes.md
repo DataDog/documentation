@@ -4,7 +4,7 @@ kind: faq
 further_reading:
 - link: "agent/"
   tag: "Documentation"
-  text: Learn more about the Datadog Agent
+  text: "Learn more about the Datadog Agent"
 - link: "agent/basic_agent_usage/docker"
   tag: "documentation"
   text: "Docker"

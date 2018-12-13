@@ -4,10 +4,10 @@ kind: faq
 further_reading:
 - link: "https://www.datadoghq.com/blog/sql-server-metrics/#create-a-stored-procedure-to-generate-and-collect-metrics"
   tag: "Blog"
-  text: Create a stored procedure to generate and collect metrics
+  text: "Create a stored procedure to generate and collect metrics"
 - link: "integrations/mysql/"
   tag: "Documentation"
-  text: Datadog-MySQL integration
+  text: "Datadog-MySQL integration"
 ---
 
 ## Setup a Stored Procedure

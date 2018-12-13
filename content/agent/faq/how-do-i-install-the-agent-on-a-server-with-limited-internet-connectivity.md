@@ -4,10 +4,10 @@ kind: faq
 further_reading:
 - link: "agent/"
   tag: "Documentation"
-  text: Learn more about the Datadog Agent
+  text: "Learn more about the Datadog Agent"
 - link: "agent/proxy"
   tag: "Documentation"
-  text: Learn more about Proxy
+  text: "Learn more about Proxy"
 ---
 
 The setup script provided in the in application Agent install instructions requires outbound https access to a number of different endpoints in order to function properly and might not work well with servers that have limited Internet access.

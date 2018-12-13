@@ -8,16 +8,16 @@ aliases:
 further_reading:
 - link: "/videos/autodiscovery/"
   tag: "Video"
-  text: Datadog Autodiscovery on Docker with Labels using Agent v6 & v5
+  text: "Datadog Autodiscovery on Docker with Labels using Agent v6 & v5"
 - link: "logs/"
   tag: "Documentation"
-  text: Collect your logs
+  text: "Collect your logs"
 - link: "graphing/infrastructure/process"
   tag: "Documentation"
-  text: Collect your processes
+  text: "Collect your processes"
 - link: "tracing"
   tag: "Documentation"
-  text: Collect your traces
+  text: "Collect your traces"
 ---
 
 ## QuickStart

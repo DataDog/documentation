@@ -4,13 +4,13 @@ kind: faq
 further_reading:
 - link: "monitors/monitor_types"
   tag: "Documentation"
-  text: Learn how to create a monitor
+  text: "Learn how to create a monitor"
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 - link: "monitors/downtimes"
   tag: "Documentation"
-  text: Learn more about downtimes
+  text: "Learn more about downtimes"
 ---
 
 When you [schedule a downtime][1] over a specific tag scope, the downtime will apply "AND" logic to those tags. So if you wanted to set up a downtime over `host:A` and `host:B`, then the downtime will silence only those monitors that alert on evaluation groups that contain both tags **`host:A` AND `host:B`** (and such a downtime would likely not silence any alerts).  

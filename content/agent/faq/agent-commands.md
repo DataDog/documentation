@@ -7,7 +7,7 @@ aliases:
 further_reading:
 - link: "/agent/troubleshooting"
   tag: "Documentation"
-  text: Agent Troubleshooting
+  text: "Agent Troubleshooting"
 ---
 
 <div class="alert alert-info">

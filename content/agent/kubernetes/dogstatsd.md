@@ -4,10 +4,10 @@ kind: documentation
 further_reading:
 - link: "agent/kubernetes/metrics"
   tag: "documentation"
-  text: Kubernetes Metrics
+  text: "Kubernetes Metrics"
 - link: "developers/dogstatsd"
   tag: "documentation"
-  text: DogStatsD
+  text: "DogStatsD"
 ---
 
 To emit custom metrics from your Kubernetes application, use [DogStatsD][1], a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][2] protocol with some differences. See more on the [DogStatsD documentation][1].

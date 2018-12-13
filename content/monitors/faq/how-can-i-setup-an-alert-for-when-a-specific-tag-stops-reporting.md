@@ -4,10 +4,10 @@ kind: faq
 further_reading:
 - link: "monitors/monitor_types"
   tag: "Documentation"
-  text: Learn how to create a monitor
+  text: "Learn how to create a monitor"
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 ---
 
 In some cases, you would like to know when one of your tag disappears from some of your systems. It is possible to setup a [monitor][1] for such an alert scheme within Datadog:

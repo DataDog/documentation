@@ -4,10 +4,10 @@ kind: faq
 further_reading:
 - link: "monitors/monitor_types"
   tag: "Documentation"
-  text: Learn how to create a monitor
+  text: "Learn how to create a monitor"
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 ---
 
 A simple way to trigger an alert when a metric value does not change over a set period of time is to start by using the `diff()` [function][1] on your query. This will produce the delta values from consecutive data points.

@@ -5,13 +5,13 @@ disable_toc: true
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"
-  text: Learn how to process your logs
+  text: "Learn how to process your logs"
 - link: "logs/processing/parsing"
   tag: "Documentation"
-  text: Learn more about parsing
+  text: "Learn more about parsing"
 - link: "logs/faq/how-to-investigate-a-log-parsing-issue"
   tag: "FAQ"
-  text: How to investigate a log parsing issue?
+  text: "How to investigate a log parsing issue?"?
 ---
 
 Datadog lets you define parsers to extract all relevant information from your logs. More information about the parsing language and possibilities is available in [our documentation][1].

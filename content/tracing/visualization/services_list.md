@@ -4,16 +4,16 @@ kind: Documentation
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
-  text: Learn how to setup APM tracing with your application
+  text: "Learn how to setup APM tracing with your application"
 - link: "tracing/visualization/service"
   tag: "Documentation"
-  text: Learn more about services in Datadog
+  text: "Learn more about services in Datadog"
 - link: "tracing/visualization/resource"
   tag: "Documentation"
-  text: Dive into your resource performance and traces
+  text: "Dive into your resource performance and traces"
 - link: "tracing/visualization/trace"
   tag: "Documentation"
-  text: Understand how to read a Datadog Trace
+  text: "Understand how to read a Datadog Trace"
 ---
 
 {{< img src="tracing/visualization/services_page.png" alt="Services page" responsive="true" >}}

@@ -7,10 +7,10 @@ aliases:
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
   tag: "Github"
-  text: Source code
+  text: "Source code"
 - link: "https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
   tag: "GoDoc"
-  text: Package page
+  text: "Package page"
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"

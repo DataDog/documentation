@@ -4,7 +4,7 @@ kind: faq
 further_reading:
 - link: "agent/"
   tag: "Documentation"
-  text: Learn more about the Datadog Agent
+  text: "Learn more about the Datadog Agent"
 ---
 
 There are a number of issues that can cause the following error when you try starting your Datadog Agent:

@@ -4,16 +4,16 @@ kind: documentation
 further_reading:
 - link: "security/tracing"
   tag: "Documentation"
-  text: APM Security
+  text: "APM Security"
 - link: "security/logs"
   tag: "Documentation"
-  text: Logs Security
+  text: "Logs Security"
 - link: "security/agent"
   tag: "Documentation"
-  text: Agent Security
+  text: "Agent Security"
 - link: "security/other"
   tag: "Documentation"
-  text: Additional Security Considerations
+  text: "Additional Security Considerations"
 ---
 
 Datadog allows customers to submit data in multiple ways, including via the [Agent][1], the [public API][2], and [integrations][3]. This article describes the main categories of data which might be submitted by customers to Datadog as part of the intended use of its product, and highlights scenarios where submitted data may contain personal data. Consult our [security page][4] and [privacy policy][5] for more information.

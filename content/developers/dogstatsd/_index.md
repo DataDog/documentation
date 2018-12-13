@@ -8,13 +8,13 @@ aliases:
 further_reading:
 - link: "developers/metrics"
   tag: "Documentation"
-  text: Learn more about Metrics
+  text: "Learn more about Metrics"
 - link: "developers/libraries"
   tag: "Documentation"
-  text: Official and Community-contributed API and DogStatsD client libraries
+  text: "Official and Community-contributed API and DogStatsD client libraries"
 - link: "https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd"
   tag: "Github"
-  text: DogStatsD source code
+  text: "DogStatsD source code"
 ---
 
 The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][1] protocol and adds a few Datadog-specific extensions:

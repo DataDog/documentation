@@ -14,10 +14,10 @@ aliases:
 further_reading:
 - link: "developers/dogstatsd"
   tag: "Documentation"
-  text: Learn more about DogStatsD
+  text: "Learn more about DogStatsD"
 - link: "developers/libraries"
   tag: "Documentation"
-  text: Official and Community-contributed API and DogStatsD client libraries
+  text: "Official and Community-contributed API and DogStatsD client libraries"
 ---
 
 ## Introduction

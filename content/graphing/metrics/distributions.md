@@ -7,7 +7,7 @@ aliases:
 further_reading:
   - link: "developers/dogstatsd/data_types#distributions"
     tag: "Documentation"
-    text: Using Distributions in DogStatsD
+    text: "Using Distributions in DogStatsD"
 ---
 
 <div class="alert alert-warning">

@@ -12,13 +12,13 @@ further_reading:
   text: "Docker JMX"
 - link: "logs/docker"
   tag: "Documentation"
-  text: Collect your Docker logs
+  text: "Collect your Docker logs"
 - link: "graphing/infrastructure/process"
   tag: "Documentation"
-  text: Collect your Docker processes
+  text: "Collect your Docker processes"
 - link: "tracing/docker/"
   tag: "Documentation"
-  text: Collect your Docker traces
+  text: "Collect your Docker traces"
 ---
 
 To install the Datadog Container Agent, follow the [Agent Installation Instructions][1] or see the information below. The [official Docker Agent 6 image][2] can also be consulted.

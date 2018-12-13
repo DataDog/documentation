@@ -5,10 +5,10 @@ description: "Explore all of your metrics and perform analytics."
 further_reading:
   - link: "graphing/metrics/summary"
     tag: "Documentation"
-    text: Metrics Summary
+    text: "Metrics Summary"
   - link: "graphing/metrics/distributions"
     tag: "Documentation"
-    text: Metrics Distributions
+    text: "Metrics Distributions"
 ---
 
 Use the [Metrics Explorer page][1] to begin examining the [metrics][2] collected from your application by Datadog.

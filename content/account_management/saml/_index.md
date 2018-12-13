@@ -6,7 +6,7 @@ aliases:
 further_reading:
 - link: "account_management/multi_organization"
   tag: "Documentation"
-  text: Configuring Teams & Organizations with Multiple Accounts
+  text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 
 **This documentation assumes that you already have a SAML Identity Provider up and running.**

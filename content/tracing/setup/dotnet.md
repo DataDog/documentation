@@ -7,7 +7,7 @@ aliases:
 further_reading:
   - link: "https://github.com/DataDog/dd-trace-csharp"
     tag: "Github"
-    text: Source code
+    text: "Source code"
   - link: "tracing/visualization/"
     tag: "Documentation"
     text: "Explore your services, resources and traces"

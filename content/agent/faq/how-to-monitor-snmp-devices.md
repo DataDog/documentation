@@ -4,10 +4,10 @@ kind: faq
 further_reading:
 - link: "agent/"
   tag: "Documentation"
-  text: Learn more about the Datadog Agent
+  text: "Learn more about the Datadog Agent"
 - link: "integrations/snmp"
   tag: "Integration"
-  text: Learn more about the Datadog-SNMP integration
+  text: "Learn more about the Datadog-SNMP integration"
 ---
 
 Simple Network Management Protocol (SNMP) is the de facto standard for monitoring network-connected devices, such as routers, switches, servers, and firewalls.
