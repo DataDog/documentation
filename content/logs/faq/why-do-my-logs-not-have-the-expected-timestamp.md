@@ -11,7 +11,7 @@ further_reading:
   text: "Learn more about parsing"
 - link: "logs/faq/how-to-investigate-a-log-parsing-issue"
   tag: "FAQ"
-  text: "How to investigate a log parsing issue?"?
+  text: "How to investigate a log parsing issue?"
 ---
 
 By default Datadog generates a timestamp and appends it in a date attribute when logs are received on our intake API.

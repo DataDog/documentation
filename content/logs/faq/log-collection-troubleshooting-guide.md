@@ -10,7 +10,7 @@ further_reading:
   text: "Learn how to explore your logs"
 - link: "/logs/faq/why-do-my-logs-not-have-the-expected-timestamp/"
   tag: "FAQ"
-  text: "Why do my logs not have the expected timestamp?"?
+  text: "Why do my logs not have the expected timestamp?"
 - link: "/logs/faq/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors/"
   tag: "FAQ"
   text: "Why do my logs show up with an Info status even for Warnings or Errors?"

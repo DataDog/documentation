@@ -11,7 +11,7 @@ further_reading:
   text: "Learn more about parsing"
 - link: "logs/faq/how-to-investigate-a-log-parsing-issue"
   tag: "FAQ"
-  text: "How to investigate a log parsing issue?"?
+  text: "How to investigate a log parsing issue?"
 ---
 
 Datadog lets you define parsers to extract all relevant information from your logs. More information about the parsing language and possibilities is available in [our documentation][1].

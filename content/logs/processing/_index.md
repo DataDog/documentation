@@ -8,7 +8,7 @@ further_reading:
   text: "Discover Datadog Pipelines"
 - link: "logs/processing/processors"
   tag: "Documentation"
-  text: "Consult the full list of available Processors".
+  text: "Consult the full list of available Processors."
 - link: "logs/processing/attributes_naming_convention"
   tag: "Documentation"
   text: "Datadog log attributes naming convention"
