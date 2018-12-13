@@ -84,7 +84,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 |--------------------|----------|-----------------|---------------------------------------------------|
 | Apache HTTP Client | 4.3+     | Fully Supported | N/A                                               |
 | AWS Java SDK       | 1.11+    | Fully Supported | N/A                                               |
-| gRPC               | 1.5+     | Beta            | `-Ddd.integration.grpc.enabled=true`              |
+| gRPC               | 1.5+     | Fully Supported | N/A                                               |
 | HttpURLConnection  | all      | Beta            | `-Ddd.integration.httpurlconnection.enabled=true` |
 | Kafka-Clients      | 0.11+    | Fully Supported | N/A                                               |
 | Kafka-Streams      | 0.11+    | Fully Supported | N/A                                               |
@@ -159,7 +159,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.writer.type`                   | `DD_WRITER_TYPE`                   | `DDAgentWriter`      | Default value sends traces to the Agent. Configuring with `LoggingWriter` instead writes traces out to the console.                                                                                                     |
 | `dd.agent.host`                    | `DD_AGENT_HOST`                    | `localhost`          | Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP.  See [Tracing Docker Applications][1] for more details.                                                   |
 | `dd.trace.agent.port`              | `DD_TRACE_AGENT_PORT`              | `8126`               | Port number the Agent is listening on for configured host.                                                                                                                                                              |
-| `dd.priority.sampling`             | `DD_PRIORITY_SAMPLING`             | `false`              | Enable priority sampling to ensure distributed traces are complete or to require sampling of specific traces. See [Distributed Tracing][2] for more details.                                                            |
+| `dd.priority.sampling`             | `DD_PRIORITY_SAMPLING`             | `true`               | Enable priority sampling to ensure distributed traces are complete or to require sampling of specific traces. See [Distributed Tracing][2] for more details.                                                            |
 | `dd.trace.global.tags`             | `DD_TRACE_GLOBAL_TAGS`             | `null`               | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span and every JMX metric. This value is merged into `trace.span.tags` and `trace.jmx.tags` to provide single place to configure both. |
 | `dd.trace.span.tags`               | `DD_TRACE_SPAN_TAGS`               | `null`               | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span. Tags of the same name added directly to a span overwrite the defaults provided here.                                        |
 | `dd.trace.jmx.tags`                | `DD_TRACE_JMX_TAGS`                | `null`               | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every JMX metric. Tags of the same name added in JMX metrics configuration overwrite the defaults provided here.                        |
