@@ -19,7 +19,7 @@ further_reading:
   text: Automatically configure your Log Explorer
 ---
 
-All of the search parameters are contained within the URL, so you can share your view simply sharing the URL.
+All of the search parameters are contained within the URL. You can share your view by sharing the URL.
 
 {{< img src="logs/explorer/search_your_logs.gif" alt="Search your logs" responsive="true" >}}
 
@@ -29,11 +29,11 @@ A query is composed of terms and operators.
 
 There are two types of terms:
 
-* A **Single Term** is a single word such as "test" or "hello".
+* A **single term** is a single word such as `test` or `hello`.
 
-* A **Sequence** is a group of words surrounded by double quotes such as "hello dolly".
+* A **sequence** is a group of words surrounded by double quotes, such as `"hello dolly"`.
 
-To combine multiple terms into a complex query, you can use any of the following boolean operators:
+To combine multiple terms into a complex query, you can use any of the following Boolean operators:
 
 
 |              |                                                                                                        |                              |
@@ -45,9 +45,9 @@ To combine multiple terms into a complex query, you can use any of the following
 
 ## Facet search
 
-To search on a specific [facet](#facets) you need to [add it as a facet first](#create-a-facet) then add `@` to specify you are searching on a facet.
+To search on a specific [facet](#facets), first [add it as a facet](#create-a-facet) and then add `@` to specify you are searching on a facet.
 
-For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com* just enter:
+For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com*, enter:
 
 `@url:www.datadoghq.com`
 
@@ -55,16 +55,16 @@ For instance, if your facet name is **url** and you want to filter on the **url*
 
 To perform a multi-character wildcard search, use the `*` symbol as follows:
 
-* `service:web*`  matches every log message that has a service starting by "web".
-* `hello*` matches all log messages starting with hello
-* `*hello` matches all log messages that end with hello
+* `service:web*` matches every log message that has a service starting with `web`.
+* `web*` matches all log messages starting with `web`
+* `*web` matches all log messages that end with `web`
 
 ## Numerical values
 Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all logs that have a response time over 100ms with:
 
 `@http.response_time:>100`
 
-It is also possible to search for numerical attribute within a specific range. For instance, retrieve all your 4xx errors with:
+You can search for numerical attribute within a specific range. For instance, retrieve all your 4xx errors with:
 
 `@http.status_code:[400 TO 499]`
 
@@ -74,7 +74,7 @@ Your logs inherit tags from [hosts][1] and [integrations][2] that generate them.
 
 * `test` is searching for the string "test".
 * `("env:prod" OR test)` matches all logs with the tag `#env:prod` or the tag `#test`
-* `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` Matches all logs that contain tags `#service:srvA` or `#service:srvB`.
+* `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` matches all logs that contain tags `#service:srvA` or `#service:srvB`.
 * `("env:prod" AND -"version:beta")` matches all logs that contain `#env:prod` and that do not contain `#version:beta`
 
 If your tags don't follow [tags best practices][3] and don't use the `key:value` syntax, use this search query:
@@ -83,13 +83,13 @@ If your tags don't follow [tags best practices][3] and don't use the `key:value`
 
 ## Autocomplete
 
-Typing a complex query can be cumbersome. Use the search bar's autocomplete feature to complete your query using existing values:
+Use the search bar's autocomplete feature to complete your query using existing values:
 
 {{< img src="logs/explorer/search/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" style="width:80%;">}}
 
 ## Escaping of special characters
 
-The following attributes are considered as special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping.
+The following characters are considered special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping with the `\` character.
 
 ## Search in the Message attribute
 
@@ -104,10 +104,9 @@ Searching on a facet value that contains special characters also requires escapi
 Examples:
 
 * Search on `/api/v1/test`: `@http.url_details.path:"/api/v1/test"`
-* Search on all url that starts with `/api/v1/`: `@http.url:\/api\/v1\/*`
+* Search on all URLs that start with `/api/v1/`: `@http.url:\/api\/v1\/*`
 
-The same logic must be applied to spaces within log attributes. Log attributes should not contain spaces, but in such a case, spaces must be escape.
-If an attribute was called `user.first name`, perform a search on this attribute by escaping the space:
+The same logic is be applied to spaces within log attributes. Log attributes should not contain spaces, but if they do, spaces must be escaped. If an attribute is called `user.first name`, perform a search on this attribute by escaping the space:
 
 `@user.first\ name:myvalue`
 
@@ -121,7 +120,7 @@ In the below example, clicking on the `Peter` value in the facet returns all the
 
 ## Saved Searches
 
-Don't lose time building the same views everyday. [Saved Views][4] contain your search query, columns, time horizon, and facet.
+[Saved Views][4] contain your search query, columns, time horizon, and facet.
 
 ## Further Reading
 
