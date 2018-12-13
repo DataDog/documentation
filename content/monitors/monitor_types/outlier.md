@@ -7,13 +7,13 @@ description: "Alert on members of a group behaving differently than the others"
 further_reading:
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 - link: "monitors/downtimes"
   tag: "Documentation"
-  text: Schedule a dowtime to mute a monitor
+  text: "Schedule a downtime to mute a monitor"
 - link: "monitors/monitor_status"
   tag: "Documentation"
-  text: Consult your monitor status
+  text: "Consult your monitor status"
 ---
 
 Outlier Detection is an algorithmic feature that allows you to detect when some members of a group are behaving strangely compared to the others. For example, you could detect that one web server in a pool is processing an unusual number of requests, and hence should be a target for replacement. Or, you could get an early warning that significantly more 500s are happening in one AWS Availability Zone (AZ) than the others, which might indicate an issue brewing in that AZ.

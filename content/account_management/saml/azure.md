@@ -7,10 +7,10 @@ disable_toc: true
 further_reading:
 - link: "account_management/saml"
   tag: "Documentation"
-  text: Configure SAML for your Datadog account
+  text: "Configure SAML for your Datadog account"
 - link: "account_management/multi_organization"
   tag: "Documentation"
-  text: Configuring Teams & Organizations with Multiple Accounts
+  text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 
 Below is a step by step guide to configure Azure AD as a SAML IdP within Datadog:  

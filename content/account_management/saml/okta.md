@@ -7,10 +7,10 @@ disable_toc: true
 further_reading:
 - link: "account_management/saml"
   tag: "Documentation"
-  text: Configure SAML for your Datadog account
+  text: "Configure SAML for your Datadog account"
 - link: "account_management/multi_organization"
   tag: "Documentation"
-  text: Configuring Teams & Organizations with Multiple Accounts
+  text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 
 It's recommended that you set up Datadog as an Okta application manually, as opposed to using a 'pre-configured' configuration.

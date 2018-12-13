@@ -5,10 +5,10 @@ draft: true
 further_reading:
 - link: "account_management/saml"
   tag: "Documentation"
-  text: Configure SAML for your Datadog account
+  text: "Configure SAML for your Datadog account"
 - link: "account_management/multi_organization"
   tag: "Documentation"
-  text: Configuring Teams & Organizations with Multiple Accounts
+  text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 
 Datadog provides options to access system metrics, monitor alerts & multiple cloud accounts across multiple sub-organizations in the parent account as described below.

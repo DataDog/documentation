@@ -5,10 +5,10 @@ description: "Algorithmically detects application and infrastructure issues."
 further_reading:
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 - link: "watchdog"
   tag: "Documentation"
-  text: Watchdog, algorithmically detect application and infrastructure issues
+  text: "Watchdog, algorithmically detect application and infrastructure issues"
 ---
 
 ## Overview

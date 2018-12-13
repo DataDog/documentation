@@ -7,13 +7,13 @@ aliases:
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-rb"
   tag: "Github"
-  text: Source code
+  text: "Source code"
 - link: "https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md"
   tag: "Documentation"
-  text: API documentation
+  text: "API documentation"
 - link: "http://gems.datadoghq.com/trace/docs/"
   tag: "Rubydoc"
-  text: Gem documentation
+  text: "Gem documentation"
 - link: "tracing/visualization/"
   tag: "Use the APM UI"
   text: "Explore your services, resources and traces"

@@ -5,10 +5,10 @@ disable_toc: true
 further_reading:
 - link: "/logs/log_collection"
   tag: "Documentation"
-  text: Learn how to collect your logs
+  text: "Learn how to collect your logs"
 - link: "/logs/explorer"
   tag: "Documentation"
-  text: Learn how to explore your logs
+  text: "Learn how to explore your logs"
 ---
 
 **The Datadog Agent has several mechanisms to ensure that no logs are lost**.

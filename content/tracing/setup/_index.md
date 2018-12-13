@@ -10,19 +10,19 @@ aliases:
 further_reading:
 - link: "tracing/setup/docker"
   tag: "Documentation"
-  text: Docker setup
+  text: "Docker setup"
 - link: "tracing/setup/go"
   tag: "Documentation"
-  text: Go language instrumentation
+  text: "Go language instrumentation"
 - link: "tracing/setup/java"
   tag: "Documentation"
-  text: Java language instrumentation
+  text: "Java language instrumentation"
 - link: "tracing/setup/python"
   tag: "Documentation"
-  text: Python language instrumentation
+  text: "Python language instrumentation"
 - link: "tracing/setup/ruby"
   tag: "Documentation"
-  text: Ruby language instrumentation
+  text: "Ruby language instrumentation"
 ---
 
 This documentation covers Agent v6 only, to know how to set up APM tracing with Agent v5, [refer to the dedicated APM with Agent v5 doc][1].

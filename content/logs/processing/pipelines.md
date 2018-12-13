@@ -5,13 +5,13 @@ description: "Parse your logs using the Grok Processor"
 further_reading:
 - link: "logs/processing/processors"
   tag: "Documentation"
-  text: Consult the full list of available Processors
+  text: "Consult the full list of available Processors"
 - link: "logs/logging_without_limits"
   tag: "Documentation"
-  text: Logging without limit
+  text: "Logging without limit"
 - link: "logs/explorer"
   tag: "Documentation"
-  text: Learn how to explore your logs
+  text: "Learn how to explore your logs"
 ---
 
 {{< img src="logs/processing/pipelines/pipelines_overview.png" alt="original log" responsive="true">}}

@@ -10,13 +10,13 @@ further_reading:
   text: "Perform Log Analytics"
 - link: "logs/processing"
   tag: "Documentation"
-  text: Learn how to process your logs
+  text: "Learn how to process your logs"
 - link: "logs/explorer/saved_views"
   tag: Documentation
-  text: Automatically configure your Log Explorer
+  text: "Automatically configure your Log Explorer"
 - link: "logs/explorer/patterns"
   tag: Documentation
-  text: Detect patterns inside your logs
+  text: "Detect patterns inside your logs"
 ---
 
 The Logs Explorer is your home base for troubleshooting and exploration:

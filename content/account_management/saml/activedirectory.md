@@ -7,10 +7,10 @@ disable_toc: true
 further_reading:
 - link: "account_management/saml"
   tag: "Documentation"
-  text: Configure SAML for your Datadog account
+  text: "Configure SAML for your Datadog account"
 - link: "account_management/multi_organization"
   tag: "Documentation"
-  text: Configuring Teams & Organizations with Multiple Accounts
+  text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 The Datadog SAML integration for SSO provides an easy pathway for linking an organization to an external user management system so that credentials can be kept and managed in a central system.
 

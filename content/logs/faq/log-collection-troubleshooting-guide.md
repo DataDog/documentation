@@ -4,16 +4,16 @@ kind: faq
 further_reading:
 - link: "/logs/log_collection"
   tag: "Documentation"
-  text: Learn how to collect your logs
+  text: "Learn how to collect your logs"
 - link: "/logs/explorer"
   tag: "Documentation"
-  text: Learn how to explore your logs
+  text: "Learn how to explore your logs"
 - link: "/logs/faq/why-do-my-logs-not-have-the-expected-timestamp/"
   tag: "FAQ"
-  text: Why do my logs not have the expected timestamp?
+  text: "Why do my logs not have the expected timestamp?"
 - link: "/logs/faq/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors/"
   tag: "FAQ"
-  text: Why do my logs show up with an Info status even for Warnings or Errors?
+  text: "Why do my logs show up with an Info status even for Warnings or Errors?"
 ---
 
 There are a number of common issues that can get in the way when [sending new logs to Datadog][1] via the log collector in the dd-agent. If you experience issues sending new logs to Datadog, this list helps you troubleshoot. If you continue to have trouble, email [us][2] for further assistance.

@@ -5,7 +5,7 @@ disable_toc: true
 further_reading:
 - link: "/integrations/ecs_fargate/"
   tag: "Documentation"
-  text: ECS Fargate
+  text: "ECS Fargate"
 - link: "https://www.datadoghq.com/blog/monitor-aws-fargate/"
   tag: "Blog"
   text: "Monitor AWS Fargate applications with Datadog"

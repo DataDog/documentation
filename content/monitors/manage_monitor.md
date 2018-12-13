@@ -4,13 +4,13 @@ kind: documentation
 further_reading:
 - link: "monitors/monitor_types"
   tag: "Documentation"
-  text: Learn how to create a monitor
+  text: "Learn how to create a monitor"
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 - link: "monitors/downtimes"
   tag: "Documentation"
-  text: Schedule a downtime to mute a monitor
+  text: "Schedule a downtime to mute a monitor"
 ---
 
 The [Manage Monitors][1] page lets you run an advanced search of all monitors so you can delete, mute, [resolve][2], or edit service tags for selected monitors in bulk. You can also clone or fully edit any individual monitor in the search results.

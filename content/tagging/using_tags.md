@@ -6,10 +6,10 @@ aliases:
 further_reading:
 - link: "tagging"
   tag: "Documentation"
-  text: Getting started with tags
+  text: "Getting started with tags"
 - link: "tagging/assigning_tags"
   tag: "Documentation"
-  text: Learn how to assign tags
+  text: "Learn how to assign tags"
 ---
 
 After [assigning tags][1], start using them to filter and group your data in your Datadog platform. Tags can be used to include or exclude data. When including or excluding multiple tags:

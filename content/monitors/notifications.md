@@ -7,16 +7,16 @@ aliases:
 further_reading:
 - link: "monitors/monitor_types"
   tag: "Documentation"
-  text: Learn how to create a monitor
+  text: "Learn how to create a monitor"
 - link: "monitors/manage_monitor"
   tag: "Documentation"
-  text: Manage your monitors
+  text: "Manage your monitors"
 - link: "monitors/downtimes"
   tag: "Documentation"
-  text: Schedule a downtime to mute a monitor
+  text: "Schedule a downtime to mute a monitor"
 - link: "monitors/monitor_status"
   tag: "Documentation"
-  text: Consult your monitor status
+  text: "Consult your monitor status"
 ---
 
 ## Overview

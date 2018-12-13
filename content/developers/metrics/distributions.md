@@ -4,10 +4,10 @@ kind: documentation
 further_reading:
 - link: "graphing/metrics/distributions"
   tag: "Documentation"
-  text: Learn more about the dedicated UI for distribution metrics
+  text: "Learn more about the dedicated UI for distribution metrics"
 - link: "developers/libraries"
   tag: "Documentation"
-  text: Official and Community-contributed API and DogStatsD client libraries
+  text: "Official and Community-contributed API and DogStatsD client libraries"
 ---
 
 <div class="alert alert-warning">

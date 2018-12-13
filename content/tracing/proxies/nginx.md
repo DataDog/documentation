@@ -13,7 +13,7 @@ further_reading:
   text: "NGINX plugin for OpenTracing"
 - link: "https://github.com/DataDog/dd-opentracing-cpp"
   tag: "Source Code"
-  text: Datadog OpenTracing C++ Client
+  text: "Datadog OpenTracing C++ Client"
 ---
 
 Support for Datadog APM is available for NGINX using a combination of plugins and configurations.

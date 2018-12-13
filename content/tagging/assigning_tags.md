@@ -7,10 +7,10 @@ aliases:
 further_reading:
 - link: "tagging"
   tag: "Documentation"
-  text: Getting started with tags
+  text: "Getting started with tags"
 - link: "tagging/using_tags"
   tag: "Documentation"
-  text: Learn how to use tags in Datadog
+  text: "Learn how to use tags in Datadog"
 ---
 
 ## Overview 

@@ -7,10 +7,10 @@ aliases:
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-py"
   tag: "Github"
-  text: Source code
+  text: "Source code"
 - link: "http://pypi.datadoghq.com/trace/docs/"
   tag: "Pypi"
-  text: API Docs
+  text: "API Docs"
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"

@@ -5,13 +5,13 @@ disable_toc: true
 further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"
-  text: Discover Datadog Pipelines
+  text: "Discover Datadog Pipelines"
 - link: "logs/logging_without_limits"
   tag: "Documentation"
-  text: Logging without limit
+  text: "Logging without limit"
 - link: "logs/explorer"
   tag: "Documentation"
-  text: Learn how to explore your logs
+  text: "Learn how to explore your logs"
 ---
 
 Datadog’s integration processing Pipelines are available for the `source` tag value (see the table below) when an integration is setup to collect logs. For integrations with a Datadog `conf.yaml` file, the logs configuration parameter `source: <ID>` **must match** the value listed next to the integration to automatically enable the corresponding [integration Pipeline][1].

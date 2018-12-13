@@ -13,7 +13,7 @@ further_reading:
   text: "Envoy documentation"
 - link: "https://github.com/DataDog/dd-opentracing-cpp"
   tag: "Source Code"
-  text: Datadog OpenTracing C++ Client
+  text: "Datadog OpenTracing C++ Client"
 ---
 
 Support for Datadog APM has been included in Envoy.

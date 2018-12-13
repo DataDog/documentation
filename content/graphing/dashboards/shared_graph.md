@@ -7,13 +7,13 @@ aliases:
 further_reading:
 - link: "graphing/dashboards/"
   tag: "Documentation"
-  text: Learn how to create Dashboards in Datadog
+  text: "Learn how to create Dashboards in Datadog"
 - link: "graphing/dashboards/template_variables"
   tag: "Documentation"
-  text: Enhance your Dashboards with Template Variables
+  text: "Enhance your Dashboards with Template Variables"
 - link: "graphing/dashboards/widgets"
   tag: "Documentation"
-  text: Discover all available widget for your Dashboard
+  text: "Discover all available widget for your Dashboard"
 ---
 
 ## Overview

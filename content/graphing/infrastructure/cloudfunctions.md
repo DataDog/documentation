@@ -4,10 +4,10 @@ kind: documentation
 further_reading:
 - link: "integrations/amazon_xray"
   tag: "X-Ray Integration"
-  text: AWS X-Ray Integration
+  text: "AWS X-Ray Integration"
 - link: "integrations/amazon_lambda"
   tag: "AWS Lambda Integration"
-  text: AWS Lambda Integration
+  text: "AWS Lambda Integration"
 ---
 
 ## Overview

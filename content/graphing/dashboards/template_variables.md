@@ -7,13 +7,13 @@ aliases:
 further_reading:
 - link: "graphing/dashboards/"
   tag: "Documentation"
-  text: Learn how to create Dashboards in Datadog
+  text: "Learn how to create Dashboards in Datadog"
 - link: "graphing/dashboards/shared_graph"
   tag: "Documentation"
-  text: Share your Graphs outside of Datadog
+  text: "Share your Graphs outside of Datadog"
 - link: "graphing/dashboards/widgets"
   tag: "Documentation"
-  text: Discover all available widget for your Dashboard
+  text: "Discover all available widget for your Dashboard"
 ---
 
 ## Overview

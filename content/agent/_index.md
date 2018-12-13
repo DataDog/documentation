@@ -5,13 +5,13 @@ description: Install & configure the Agent to collect data
 further_reading:
 - link: "logs/"
   tag: "Documentation"
-  text: Collect your logs
+  text: "Collect your logs"
 - link: "graphing/infrastructure/process"
   tag: "Documentation"
-  text: Collect your processes
+  text: "Collect your processes"
 - link: "tracing"
   tag: "Documentation"
-  text: Collect your traces
+  text: "Collect your traces"
 aliases:
   - /agent/faq/agent-check-directory-structure
   - /agent/faq/install-core-extra/

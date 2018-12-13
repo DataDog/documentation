@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "account_management/saml"
   tag: "Documentation"
-  text: Configure SAML for your Datadog account
+  text: "Configure SAML for your Datadog account"
 ---
 
 It is possible to manage multiple child-organizations from one parent-organization account.  

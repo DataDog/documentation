@@ -4,10 +4,10 @@ kind: faq
 further_reading:
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 - link: "monitors/downtimes"
   tag: "Documentation"
-  text: Schedule a downtime to mute a monitor
+  text: "Schedule a downtime to mute a monitor"
 ---
 
 For the AWS No Data errors, the issue here has to do with how frequently we

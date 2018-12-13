@@ -4,7 +4,7 @@ kind: faq
 further_reading:
 - link: "agent/"
   tag: "Documentation"
-  text: Learn more about the Datadog Agent
+  text: "Learn more about the Datadog Agent"
 ---
 
 When running the Datadog Agent on a given host, you may encounter some permissions related issues that would prevent the Agent from running properly, such as:

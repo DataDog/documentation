@@ -5,13 +5,13 @@ description: "Schedule downtimes to ensure your Datadog monitors do not alert du
 further_reading:
 - link: "monitors/monitor_types"
   tag: "Documentation"
-  text: Learn how to create a monitor
+  text: "Learn how to create a monitor"
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 - link: "monitors/manage_monitor"
   tag: "Documentation"
-  text: Manage your monitors
+  text: "Manage your monitors"
 ---
 
 You may occasionally need to shut systems down or take them off-line to perform maintenance or upgrades. Scheduling downtime allows you to do this without triggering monitors.

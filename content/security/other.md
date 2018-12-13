@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
 - link: "/security/"
   tag: "Documentation"
-  text: Review the main categories of data submitted to Datadog
+  text: "Review the main categories of data submitted to Datadog"
 ---
 
 This article is part of a [series on data security][1].

@@ -4,10 +4,10 @@ kind: faq
 further_reading:
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 - link: "monitors/downtimes"
   tag: "Documentation"
-  text: Schedule a downtime to mute a monitor
+  text: "Schedule a downtime to mute a monitor"
 ---
 
 *No Data* Alerts are a great way to be notified when an Integration/application is no longer submitting metrics to Datadog.  

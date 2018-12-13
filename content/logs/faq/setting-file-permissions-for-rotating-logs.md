@@ -4,13 +4,13 @@ kind: faq
 further_reading:
 - link: "logs/faq/log-parsing-best-practice"
   tag: "FAQ"
-  text: Log Parsing - Best Practice
+  text: "Log Parsing - Best Practice"
 - link: "logs/processing"
   tag: "Documentation"
-  text: Learn how to process your logs
+  text: "Learn how to process your logs"
 - link: "logs/processing/parsing"
   tag: "Documentation"
-  text: Learn more about parsing
+  text: "Learn more about parsing"
 ---
 
 The Datadog Agent runs under the `dd-agent` user and `dd-agent` group. This prevents the Datadog Agent from accessing the logs in `/var/log` as they are only accessible by root (or a sudo admin).

@@ -9,10 +9,10 @@ aliases:
 further_reading:
 - link: "tagging/assigning_tags"
   tag: "Documentation"
-  text: Learn how to assign tags
+  text: "Learn how to assign tags"
 - link: "tagging/using_tags"
   tag: "Documentation"
-  text: Learn how to use tags in Datadog
+  text: "Learn how to use tags in Datadog"
 ---
 
 ## Introduction
