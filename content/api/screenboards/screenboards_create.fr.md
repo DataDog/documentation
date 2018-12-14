@@ -22,4 +22,4 @@ external_redirect: /api/#creer-un-screenboard
 * **`read_only`** [*facultatif*, *défaut* = **False**] :
     Indique si le screenboard est en lecture seule ou non.
 
-[1]: /graphing/dashboards/widgets/
+[1]: /graphing/dashboards/widgets
