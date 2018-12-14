@@ -23,13 +23,13 @@ By granting permissions to roles, any user who is associated with that role rece
 
 ## Out of the Box Roles
 
-The following roles are available out of the box. By default, users will be associated with one of these three roles:
+The following roles are available out of the box. By default, users are associated with one of these three roles:
 
-* **Datadog Admin Role**: Has read and write permissions on all data and assets in a Datadog account.
-
-* **Datadog Standard Role**: Has read permissions on all data and write permissions on most assets in a Datadog account.
-
-* **Datadog Read Only Role**: Has read permissions on all data and write permissions on no assets in a Datadog account.
+| Role                   | Description                                                                                 |
+|------------------------|---------------------------------------------------------------------------------------------|
+| Datadog Admin          | Has read and write permissions on all data and assets in a Datadog account.                 |
+| Datadog Standard Role  | Has read permissions on all data and write permissions on most assets in a Datadog account. |
+| Datadog Read Only Role | Has read permissions on all data and write permissions on no assets in a Datadog account.   |
 
 Users who are associated with any of these roles will, by default, be able to query on all log data in a Datadog account. Users who are associated with the Datadog Admin or Standard Roles will, by default, be able to create or modify all log-related account assets. But the Datadog Standard and Read Only Roles can be modified to limit their permissions.
 
@@ -79,6 +79,6 @@ In order to start limiting these permissions for existing users, you should crea
 
 * Delete the Datadog Standard or Read Only Roles via [the Role API][2].
 
+
 [1]: https://app.datadoghq.com/logs/pipelines
 [2]: /account_management/rbac/role_api
-
