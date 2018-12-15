@@ -2276,6 +2276,8 @@ params:
       key: ruby
     - display_name: Curl
       key: bash
+    - display_name: Node.js
+      key: node
   footer_scripts:
     - snowplow: false
     - marketo: false
