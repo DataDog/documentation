@@ -157,7 +157,7 @@ Note: as the mathematical log function doesn't accept negative values, the Datad
 
 ### Overlay events for additional context
 
-Add events from related systems to add even more context to your graph. For example, you can add Github commits, Jenkins deploys, or Docker creation events. Click the Overlay Events button and enter a query to find and display your events. Use the same query format as for [the event stream][16], for example:
+Add events from related systems to add even more context to your graph. For example, you can add GitHub commits, Jenkins deploys, or Docker creation events. Click the Overlay Events button and enter a query to find and display your events. Use the same query format as for [the event stream][16], for example:
 
 | Query                  | Description                                               |
 | -----                  | ----                                                      |

@@ -6,7 +6,7 @@ aliases:
 - /tracing/languages/go
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
-  tag: "Github"
+  tag: "GitHub"
   text: "Source code"
 - link: "https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
   tag: "GoDoc"

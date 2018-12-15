@@ -7,7 +7,7 @@ aliases:
 - /tracing/setup/javascript/
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-js"
-  tag: "Github"
+  tag: "GitHub"
   text: "Source code"
 - link: "https://datadog.github.io/dd-trace-js"
   tag: "Documentation"

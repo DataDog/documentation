@@ -5,7 +5,7 @@ aliases:
   - /tracing/kubernetes/
 further_reading:
 - link: "https://github.com/DataDog/datadog-trace-agent"
-  tag: "Github"
+  tag: "GitHub"
   text: "Source code"
 - link: "tracing/visualization/"
   tag: "Documentation"

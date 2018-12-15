@@ -116,7 +116,7 @@ agent -c /app/.apt/etc/datadog-agent/datadog.yaml flare
 
 ## More information
 
-Visit the [Github project page][6] for more information and to view the source code.
+Visit the [GitHub project page][6] for more information and to view the source code.
 
 [1]: /libraries
 [2]: https://app.datadoghq.com/account/settings#api

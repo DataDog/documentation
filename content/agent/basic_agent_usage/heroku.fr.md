@@ -50,7 +50,7 @@ En plus des variables d'environnement présentées ci-dessus, vous pouvez en dé
 | `DD_SERVICE_ENV` | *Optionnel* L'agent Datadog essaie automatiquement d'identifier votre environnement en recherchant un tag de la forme `env:<environment name>`. Pour plus d'informations, consultez la page [Environnements de traçage Datadog][5]. |
 
 ## Plus d'informations
-Visitez la [page du projet Github][6] pour plus d'informations et pour consultez le code source.
+Visitez la [page du projet GitHub][6] pour plus d'informations et pour consultez le code source.
 
 [1]: http://docs.datadoghq.com/libraries/
 [2]: https://app.datadoghq.com/account/settings#api

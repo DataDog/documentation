@@ -14,7 +14,7 @@ Notez cependant que les filtres effectuent une recherche de correspondance exact
 | Filter                                          | Description                                                                      |
 | --------                                        | -------------                                                                    |
 | user:pup@datadoghq.com                          | Trouver tous les évènements avec des commentaires écrits par pup@datadoghq.com.                              |
-| sources:github,chef                             | Montrer les évènements Github OU Chef.                                                 |
+| sources:github,chef                             | Montrer les évènements GitHub OU Chef.                                                 |
 | tags:env-prod OR db                             | Montre les évènements taggués #env-prod OU #db.                                        |
 | tags:security-group:sg-123 AND role:common-node | Montre les évènements taggués #security-group:sg-123 ET #role:common-node.            |
 | hosts:i-0ade23e6,db.myapp.com                   | Montre les évènements en provenance de i-0ade23e6 OU db.myapp.com.                                     |

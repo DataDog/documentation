@@ -6,7 +6,7 @@ aliases:
   - /tracing/languages/dotnet
 further_reading:
   - link: "https://github.com/DataDog/dd-trace-csharp"
-    tag: "Github"
+    tag: "GitHub"
     text: "Source code"
   - link: "tracing/visualization/"
     tag: "Documentation"

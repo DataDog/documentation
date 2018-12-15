@@ -15,7 +15,7 @@ further_reading:
   tag: "Documentation"
   text: "Custom Integrations"
 - link: "https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting"
-  tag: "Github"
+  tag: "GitHub"
   text: "Troubleshooting the Datadog Cluster Agent"
 ---
 

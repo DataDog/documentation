@@ -42,7 +42,7 @@ Every piece of metric metadata can be manually edited:
 
 * Edit the metric description to help understand what a metric does.
 
-    If a metric is coming from an integration and you notice a wrong description, [open an issue in the Datadog documentation Github repository][11] for a fix.
+    If a metric is coming from an integration and you notice a wrong description, [open an issue in the Datadog documentation GitHub repository][11] for a fix.
 
 * Edit the metric unit or add a custom unit for a custom metrics.
 

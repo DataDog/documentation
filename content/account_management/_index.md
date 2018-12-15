@@ -41,7 +41,7 @@ If you are an organization administrator, reference the additional documentation
 * [Manage multi-organization accounts][9]
 * [Change your Datadog plan and view usage and billing history][10]
 
-## Connecting to Github
+## Connecting to GitHub
 
 If you have installed the [GitHub integration][11] to create events in Datadog, link your personal GitHub account to your Datadog user account. By linking your accounts, any comments you post to GitHub events in Datadog will be automatically posted back into the corresponding issue or pull request in GitHub.
 

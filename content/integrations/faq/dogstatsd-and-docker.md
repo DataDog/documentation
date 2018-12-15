@@ -45,7 +45,7 @@ docker run -d --name my-web-app \
     my-web-app
 ```
 
-For another example using DogStatsD, see our [Docker Compose example project on Github][6].
+For another example using DogStatsD, see our [Docker Compose example project on GitHub][6].
 
 [1]: /integrations
 [2]: /developers/libraries

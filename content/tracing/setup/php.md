@@ -3,7 +3,7 @@ title: Tracing PHP Applications
 kind: Documentation
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-php"
-  tag: "Github"
+  tag: "GitHub"
   text: "Source code"
 - link: "tracing/visualization/"
   tag: "Documentation"

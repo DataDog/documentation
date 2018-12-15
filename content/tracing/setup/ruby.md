@@ -6,7 +6,7 @@ aliases:
 - /tracing/languages/ruby/
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-rb"
-  tag: "Github"
+  tag: "GitHub"
   text: "Source code"
 - link: "https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md"
   tag: "Documentation"
