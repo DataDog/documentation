@@ -591,6 +591,11 @@ languages:
           url: "tracing/setup/php/"
           weight: 195
           parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_cpp
+          name: "C++"
+          url: "tracing/setup/cpp/"
+          weight: 195
+          parent: customnav_tracingnav_setup
 
         # TRACING/APM - Setup Advanced
 
@@ -1660,6 +1665,11 @@ languages:
         - identifier: customnav_tracingnav_php
           name: "PHP"
           url: "tracing/setup/php/"
+          weight: 195
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_cpp
+          name: "C++"
+          url: "tracing/setup/cpp/"
           weight: 195
           parent: customnav_tracingnav_setup
 

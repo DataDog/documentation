@@ -278,6 +278,20 @@ if (($span = GlobalTracer::get()->getActiveSpan()) !== null){
 **Note**: `GlobalTracer::get()->getActiveSpan()` returns `null` if there is no active span.
 
 {{% /tab %}}
+{{% tab "C++" %}}
+
+Add tags directly to a Span object by calling Span.SetTag(). For example:
+
+```cpp
+auto tracer = ...
+auto span = tracer->StartSpan("operation_name");
+span->SetTag("key must be string", "Values are variable types");
+span->SetTag("key must be string", 1234);
+```
+
+Values are of [variable type](https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/value.h) and can be complex objects. Values are serialized as JSON, with the exception of a string value being serialized bare (without extra quotation marks).
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Manual Instrumentation
@@ -514,6 +528,24 @@ $span->finish();
 ```
 
 [php compatibility]: /tracing/setup/php/#compatibility
+
+{{% /tab %}}
+{{% tab "C++" %}}
+
+To manually instrument your code, install the tracer as in the Setup examples, and then use the tracer object to create Spans.
+
+```cpp
+{
+  // Create a root span.
+  auto root_span = tracer->StartSpan("operation_name");
+  // Create a child span.
+  auto child_span = tracer->StartSpan(
+      "operation_name",
+      {opentracing::ChildOf(&root_span->context())});
+  // Spans can be finished at a specific time ...
+  child_span->Finish();
+} // ... or when they are destructed (root_span finishes here).
+```
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -831,6 +863,11 @@ public void ConfigureServices(IServiceCollection services)
 [dotnet opentracing]: https://www.nuget.org/packages/Datadog.Trace.OpenTracing/
 
 {{% /tab %}}
+{{% tab "C++" %}}
+
+The Datadog C++ tracer currently can only be used through the OpenTracing API. The usage instructions in this document all describe generic OpenTracing functionality.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Distributed Tracing
@@ -1017,6 +1054,47 @@ Distributed tracing is enabled by default for all supported integrations (see [C
 Coming Soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
 
 [contact support]: https://docs.datadoghq.com/help
+
+{{% /tab %}}
+{{% tab "C++" %}}
+
+Distributed tracing can be accomplished by [using the Inject and Extract methods on the tracer](https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter), which accept [generic `Reader` and `Writer` types](https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/propagation.h). Priority sampling (enabled by default) should be on to ensure uniform delivery of spans.
+
+```cpp
+// Allows writing propagation headers to a simple map<string, string>.
+// Copied from https://github.com/opentracing/opentracing-cpp/blob/master/mocktracer/test/propagation_test.cpp
+struct HTTPHeadersCarrier : HTTPHeadersReader, HTTPHeadersWriter {
+  HTTPHeadersCarrier(std::unordered_map<std::string, std::string>& text_map_)
+      : text_map(text_map_) {}
+
+  expected<void> Set(string_view key, string_view value) const override {
+    text_map[key] = value;
+    return {};
+  }
+
+  expected<void> ForeachKey(
+      std::function<expected<void>(string_view key, string_view value)> f)
+      const override {
+    for (const auto& key_value : text_map) {
+      auto result = f(key_value.first, key_value.second);
+      if (!result) return result;
+    }
+    return {};
+  }
+
+  std::unordered_map<std::string, std::string>& text_map;
+};
+
+void example() {
+  auto tracer = ...
+  std::unordered_map<std::string, std::string> headers;
+  HTTPHeadersCarrier carrier(headers);
+
+  auto span = tracer->StartSpan("operation_name");
+  tracer->Inject(span->context(), carrier);
+  // `headers` now populated with the headers needed to propagate the span.
+}
+```
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -1211,6 +1289,19 @@ Coming Soon. Reach out to [the Datadog support team][contact support] to be part
 [contact support]: https://docs.datadoghq.com/help
 
 {{% /tab %}}
+{{% tab "C++" %}}
+
+Priority sampling is enabled by default, and can be disabled in the TracerOptions. You can mark a span to be kept or discarded by setting the tag `sampling.priority`. A value of `0` means reject/don't sample and any value greater than 0 means keep/sample.
+
+```cpp
+auto tracer = ...
+auto span = tracer->StartSpan("operation_name");
+span->SetTag("sampling.priority", 1); // Keep this span.
+auto another_span = tracer->StartSpan("operation_name");
+another_span->SetTag("sampling.priority", 0); // Discard this span.
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Logging
@@ -1321,6 +1412,13 @@ Coming Soon. Reach out to [the Datadog support team][contact support] to be part
 {{% tab ".NET" %}}
 
 Coming Soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
+
+[contact support]: https://docs.datadoghq.com/help
+
+{{% /tab %}}
+{{% tab "C++" %}}
+
+Coming Soon. Reach out to [the Datadog support team][contact support] if you're interested in this feature.
 
 [contact support]: https://docs.datadoghq.com/help
 
@@ -1445,6 +1543,18 @@ var tracer = Datadog.Trace.Tracer.Create(isDebugEnabled: true);
 
 {{% /tab %}}
 {{% tab "PHP" %}}
+
+{{% /tab %}}
+{{% tab "C++" %}}
+
+The release binary libraries are all compiled with debug symbols added to the optimized release. It is possible to use gdb or lldb to debug the library and to read core dumps. If you are building the library from source, pass the argument `-DCMAKE_BUILD_TYPE=RelWithDebInfo` to cmake to compile an optimized build with debug symbols.
+
+```bash
+cd .build
+cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+make
+make install
+```
 
 {{% /tab %}}
 {{< /tabs >}}
