@@ -159,3 +159,5 @@ g++ -o tracer_example tracer_example.cpp -lopentracing
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://docs.datadoghq.com/help
