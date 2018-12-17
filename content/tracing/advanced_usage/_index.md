@@ -1208,14 +1208,18 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
 ## Logging
 
-Datadog's logging APIs allow for accessing active tracing identifiers, which can be used to correlate APM traces with specific log events.
+For each generated trace, there are very likely log events written by the monitored functions and applications. 
+The purpose of this section is to explain how the correlation between traces and logs can be improved by automatically adding  a trace id in your logs and then use it in the Datadog platform to show you the exact logs correlated to the observed trace.
+
+{{< img src="/src/images/tracing/logs_in_trace.png" alt="Logs in Traces" responsive="true" style="width:70%;">}}
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The Java tracer exposes two API calls to allow printing trace and span identifiers along with log statements, `CorrelationIdentifier#getTraceId()`, and `CorrelationIdentifier#getSpanId()`.
+The idea is to leverage the MDC ([Map Diagnostic Context][1]) to automatically add the trace and span identifier into the logs.
+The Datadog Java tracer exposes two API calls to allow printing trace and span identifiers along with log statements, `CorrelationIdentifier#getTraceId()`, and `CorrelationIdentifier#getSpanId()`.
 
-These identifiers can be injected into application logs using MDC frameworks.
+- To inject those identifier into application logs using MDC frameworks, use the following method:
 
 **log4j2**:
 
@@ -1225,11 +1229,11 @@ import datadog.trace.api.CorrelationIdentifier;
 
 // there must be spans started and active before this block.
 try {
-    ThreadContext.put("ddTraceID", "ddTraceID:" + String.valueOf(CorrelationIdentifier.getTraceId()));
-    ThreadContext.put("ddSpanID", "ddSpanID:" + String.valueOf(CorrelationIdentifier.getSpanId()));
+    ThreadContext.put("dd.trace_id", String.valueOf(CorrelationIdentifier.getTraceId()));
+    ThreadContext.put("dd.span_id", String.valueOf(CorrelationIdentifier.getSpanId()));
 } finally {
-    ThreadContext.remove("ddTraceID");
-    ThreadContext.remove("ddSpanID");
+    ThreadContext.remove("dd.trace_id");
+    ThreadContext.remove("dd.span_id");
 }
 ```
 
@@ -1241,28 +1245,21 @@ import datadog.trace.api.CorrelationIdentifier;
 
 // there must be spans started and active before this block.
 try {
-    MDC.put("ddTraceID", "ddTraceID:" + String.valueOf(CorrelationIdentifier.getTraceId()));
-    MDC.put("ddSpanID", "ddSpanID:" + String.valueOf(CorrelationIdentifier.getSpanId()));
+    MDC.put("dd.trace_id", String.valueOf(CorrelationIdentifier.getTraceId()));
+    MDC.put("dd.span_id", String.valueOf(CorrelationIdentifier.getSpanId()));
 } finally {
-    MDC.remove("ddTraceID");
-    MDC.remove("ddSpanID");
+    MDC.remove("dd.trace_id");
+    MDC.remove("dd.span_id");
 }
 ```
 
-**log4j2 XML Pattern**:
+- Add those identifiers in the logs:
 
-```xml
-<PatternLayout pattern="%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %X{ddTraceID} %X{ddSpanID} %m%n%xwEx" />
-```
+If logs are already JSON formatted, there should be nothing left to do.
+[See our Java logging documentation][2] to add those two identifiers in raw logs or to learn how to log in JSON.
 
-**Logback XML Pattern**:
-
-```xml
-<Pattern>
-    %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} %X{ddTraceID} %X{ddSpanID} - %msg%n
-</Pattern>
-```
-
+[1]: https://logback.qos.ch/manual/mdc.html
+[2]: https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#configure-your-logger
 {{% /tab %}}
 {{% tab "Python" %}}
 Getting the required information needed for logging is easy:
