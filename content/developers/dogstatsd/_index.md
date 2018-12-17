@@ -13,7 +13,7 @@ further_reading:
   tag: "Documentation"
   text: "Official and Community-contributed API and DogStatsD client libraries"
 - link: "https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd"
-  tag: "Github"
+  tag: "GitHub"
   text: "DogStatsD source code"
 ---
 

@@ -23,7 +23,7 @@ If users see this line in the Datadog error.log: `sudo: sorry, you must have a t
 
 If you are running Agent v6 less than 6.3, try updating the Agent and using the `try_sudo` option. If you are unable to update, a workaround for this issue is running the Agent as `root`.
 
-**NOTE**: It is not recommended to run the Agent as `root`. This isn't specific to the Datadog Agent or due to any concern that something untrustworthy is happening in any way, but it isn't recommended to run the daemon as `root` as this is best practice for most processes on Linux. If you have any personal cause for concern, the Agent is open source and may be audited by you or your team via the [Github repository][1].
+**NOTE**: It is not recommended to run the Agent as `root`. This isn't specific to the Datadog Agent or due to any concern that something untrustworthy is happening in any way, but it isn't recommended to run the daemon as `root` as this is best practice for most processes on Linux. If you have any personal cause for concern, the Agent is open source and may be audited by you or your team via the [GitHub repository][1].
 
 1. [Stop the Agent][2]
 
@@ -40,7 +40,7 @@ If you are running Agent v6 less than 6.3, try updating the Agent and using the 
 
 If you are running Agent v5, try updating to the latest version of Agent 6 and using the `try_sudo` option. If you are unable to update, a workaround for this issue is running the Agent as `root`.
 
-**NOTE**: It is not recommended to run the Agent as `root`. This isn't specific to the Datadog Agent or due to any concern that something untrustworthy is happening in any way, but it isn't recommended to run the daemon as `root` as this is best practice for most processes on Linux. If you have any personal cause for concern, the Agent is open source and may be audited by you or your team via the [Github repository][1].
+**NOTE**: It is not recommended to run the Agent as `root`. This isn't specific to the Datadog Agent or due to any concern that something untrustworthy is happening in any way, but it isn't recommended to run the daemon as `root` as this is best practice for most processes on Linux. If you have any personal cause for concern, the Agent is open source and may be audited by you or your team via the [GitHub repository][1].
 
 1. [Stop the Agent][2]
 
@@ -57,7 +57,7 @@ If you are running Agent v5, try updating to the latest version of Agent 6 and u
 {{% /tab %}}
 {{< /tabs >}}
 
-See the following Github issues for more information and other potential methods of capturing this metric on Linux machines.
+See the following GitHub issues for more information and other potential methods of capturing this metric on Linux machines.
 
 * https://github.com/DataDog/dd-agent/issues/853
 * https://github.com/DataDog/dd-agent/issues/2033

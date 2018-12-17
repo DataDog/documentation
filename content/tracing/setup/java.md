@@ -6,7 +6,7 @@ aliases:
 - /tracing/languages/java
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-java"
-  tag: "Github"
+  tag: "GitHub"
   text: "Datadog Java APM source code"
 - link: "tracing/visualization/"
   tag: "Documentation"

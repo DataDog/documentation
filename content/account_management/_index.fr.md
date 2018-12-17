@@ -39,7 +39,7 @@ Si vous êtes un administrateur d'organisation, consultez les ressources suivant
 * [Gérer les comptes multi-organisations][8]
 * [Modifier votre plan Datadog et afficher l'historique d'utilisation et de facturation][9]
 
-## Connexion à Github
+## Connexion à GitHub
 
 Si vous avez installé [l'intégration GitHub][10] pour créer des événements dans Datadog, associez votre compte GitHub personnel à votre compte utilisateur Datadog. Une fois vos comptes reliés, tous les commentaires que vous publierez sur les événements GitHub dans Datadog seront automatiquement réintégrés dans l'issue correspondante ou dans la pull request dans GitHub.
 

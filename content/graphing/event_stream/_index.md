@@ -15,7 +15,7 @@ Note that filters perform an exact match search and don't work with partial stri
 | Filter                                            | Description                                                                              |
 | --------                                          | -------------                                                                            |
 | `user:pup@datadoghq.com`                          | Find all events with comments by pup@datadoghq.com.                                      |
-| `sources:github,chef`                             | Show events from Github OR Chef.                                                         |
+| `sources:github,chef`                             | Show events from GitHub OR Chef.                                                         |
 | `tags:env-prod OR db`                             | Show events tagged with #env-prod OR #db.                                                |
 | `tags:security-group:sg-123 AND role:common-node` | Show events tagged with `#security-group:sg-123` AND `#role:common-node`.                |
 | `hosts:i-0ade23e6,db.myapp.com`                   | Show events from i-0ade23e6 OR db.myapp.com.                                             |

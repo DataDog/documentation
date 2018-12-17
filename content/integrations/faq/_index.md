@@ -61,7 +61,7 @@ aliases:
 * [Why isn't Elasticsearch sending all my metrics?][35]
 * [Agent can't connect][36]
 
-## Git & Github
+## Git & GitHub
 
 * [Why events don't appear to be showing up in the event stream with my github integration ?][37]
 

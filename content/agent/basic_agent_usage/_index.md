@@ -26,7 +26,7 @@ Manage the Datadog Agent and [Integrations][1] using configuration management to
 {{< tabs >}}
 {{% tab "Chef Cookbook" %}}
 
-* [Chef Github project][1]
+* [Chef GitHub project][1]
 * [Installing Datadog Agent with Chef][2]
 
 
@@ -35,7 +35,7 @@ Manage the Datadog Agent and [Integrations][1] using configuration management to
 {{% /tab %}}
 {{% tab "Puppet" %}}
 
-* [Puppet Github project][1]
+* [Puppet GitHub project][1]
 * [Installing Datadog Agent with Puppet][2]
 
 
@@ -44,7 +44,7 @@ Manage the Datadog Agent and [Integrations][1] using configuration management to
 {{% /tab %}}
 {{% tab "Ansible" %}}
 
-* [Ansible Github project][1]
+* [Ansible GitHub project][1]
 * [Installing Datadog Agent with Ansible][2]
 
 

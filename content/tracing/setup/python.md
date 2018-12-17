@@ -6,7 +6,7 @@ aliases:
 - /tracing/languages/python/
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-py"
-  tag: "Github"
+  tag: "GitHub"
   text: "Source code"
 - link: "http://pypi.datadoghq.com/trace/docs/"
   tag: "Pypi"
