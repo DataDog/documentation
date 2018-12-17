@@ -122,7 +122,7 @@ Or the container can be restarted.
 
 ## Send a flare
 
-If you are running the 5.3 version (or higher) of the Agent, you're able to send all necessary troubleshooting information to the Datadog support Team, with one flare command!
+If you are running Agent 5.3+, you can send necessary troubleshooting information to the Datadog support team with one flare command.
 
 `flare` gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information including passwords, API keys, Proxy credentials, and SNMP community strings.  
 **Confirm the upload of the archive to immediately send it to Datadog support**.  
