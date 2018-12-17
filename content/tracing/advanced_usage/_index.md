@@ -1216,7 +1216,7 @@ The purpose of this section is to explain how the correlation between traces and
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The idea is to leverage the MDC ([Map Diagnostic Context](https://logback.qos.ch/manual/mdc.html)) to automatically add the trace and span identifier into the logs.
+The idea is to leverage the MDC ([Map Diagnostic Context][1]) to automatically add the trace and span identifier into the logs.
 The Datadog Java tracer exposes two API calls to allow printing trace and span identifiers along with log statements, `CorrelationIdentifier#getTraceId()`, and `CorrelationIdentifier#getSpanId()`.
 
 - To inject those identifier into application logs using MDC frameworks, use the following method:
@@ -1256,8 +1256,10 @@ try {
 - Add those identifiers in the logs:
 
 If logs are already JSON formatted, there should be nothing left to do.
-[See our Java logging documentation](https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#configure-your-logger) to add those two identifiers in raw logs or to learn how to log in JSON.
+[See our Java logging documentation][2] to add those two identifiers in raw logs or to learn how to log in JSON.
 
+[1]: https://logback.qos.ch/manual/mdc.html
+[2]: https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#configure-your-logger
 {{% /tab %}}
 {{% tab "Python" %}}
 Getting the required information needed for logging is easy:
