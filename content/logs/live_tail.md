@@ -8,10 +8,10 @@ further_reading:
   text: "Perform Log Analytics"
 - link: "logs/processing"
   tag: "Documentation"
-  text: Learn how to process your logs
+  text: "Learn how to process your logs"
 - link: "logs/processing/parsing"
   tag: "Documentation"
-  text: Learn more about parsing
+  text: "Learn more about parsing"
 ---
 
 {{< img src="logs/live_tail/live_tail_demo.gif" alt="Live tail" responsive="true" >}}
@@ -81,4 +81,3 @@ To filter on all logs with a line number above 150 use the following query: `@li
 
 [1]: /logs/processing/pipelines
 [2]: /logs/logging_without_limits
-[3]: /logs/explorer/search/#search-bar

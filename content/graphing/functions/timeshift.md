@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
 - link: "/graphing/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value/"
   tag: "FAQ"
-  text: Graph the percentage change between an earlier value and a current value.
+  text: "Graph the percentage change between an earlier value and a current value."
 ---
 
 Here is a set of functions of the pattern `<TIMEPERIOD>_before()`. These functions display the values from the corresponding time period on the graph. On their own, they may not be of high value, but together with the current values they may provide useful insight into the performance of your application.

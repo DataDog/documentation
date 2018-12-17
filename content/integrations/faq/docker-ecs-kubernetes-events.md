@@ -84,7 +84,7 @@ To access and use these events in Datadog, use the following three methods:
 [1]: /graphing/event_stream
 [2]: /monitors
 [3]: /help
-[4]: /integrations/docker_daemon/
-[5]: /integrations/amazon_ecs/
-[6]: /integrations/kubernetes/
+[4]: /integrations/docker_daemon
+[5]: /integrations/amazon_ecs
+[6]: /integrations/kubernetes
 [7]: /graphing/dashboards/#event-correlation-at-view-time

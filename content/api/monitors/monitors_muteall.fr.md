@@ -2,14 +2,14 @@
 title: Désactiver tous les monitors
 type: apicontent
 order: 16.07
-external_redirect: /api/#mute-all-monitors
+external_redirect: /api/#desactiver-tous-les-monitors
 ---
 
 ## Désactiver tous les monitors
-Désactiver tous les monitors les empêche de notifier par e-mail et de poster des événements dans le [flux d'événements][1]. Les changements d'état ne sont visibles que par une vérification visuelle sur la page d'alerte.
+En désactivant tous les monitors, ceux-ci n'enverront plus de notifications par e-mail et n'enverront plus d'événements dans le [flux d'événements][1]. Vous devrez consulter la page d'alertes pour vérifier les changements d'état.
 
 ##### ARGUMENTS
 
 Cet endpoint ne prend aucun argument JSON.
 
-[1]: /graphing/event_stream/
+[1]: /graphing/event_stream

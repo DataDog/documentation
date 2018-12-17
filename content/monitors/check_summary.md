@@ -5,16 +5,16 @@ description: "See the list of all your checks reporting to Datadog."
 further_reading:
 - link: "monitors/monitor_types"
   tag: "Documentation"
-  text: Learn how to create a monitor
+  text: "Learn how to create a monitor"
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 - link: "monitors/manage_monitor"
   tag: "Documentation"
-  text: Manage your monitors
+  text: "Manage your monitors"
 - link: "monitors/downtimes"
   tag: "Documentation"
-  text: Schedule a dowtime to mute a monitor
+  text: "Schedule a downtime to mute a monitor"
 ---
 
 ## Overview

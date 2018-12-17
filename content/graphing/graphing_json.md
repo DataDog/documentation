@@ -55,17 +55,21 @@ In other words at the highest level the JSON structure is a dictionary with two,
 
 The general format for a series is:
 
-    "requests": [
-        {
-          "q": "function(aggregation method:metric{scope} [by {group}])"
-        }
-    ]
+```json
+"requests": [
+  {
+    "q": "function(aggregation method:metric{scope} [by {group}])"
+  }
+]
+```
 
 The `function` and `group` are optional.
 
 A Series can be further combined together via binary operators (+, -, /, *):
 
-    metric{scope} [by {group}] operator metric{scope} [by {group}]
+```
+metric{scope} [by {group}] operator metric{scope} [by {group}]
+```
 
 #### Functions
 
@@ -89,16 +93,18 @@ characters plus colons and underscores (`[a-zA-Z0-9:_]+`).
 
 Examples of scope (meaning in parentheses):
 
-    host:my_host                      (related to a given host)
-    host:my_host, device:my_device    (related to a given device on a given host)
-    source:my_source                  (related to a given source)
-    my_tag                            (related to a tagged group of hosts)
-    my:tag                            (same)
-    *                                 (wildcard for everything)
+```
+host:my_host                      (related to a given host)
+host:my_host, device:my_device    (related to a given device on a given host)
+source:my_source                  (related to a given source)
+my_tag                            (related to a tagged group of hosts)
+my:tag                            (same)
+*                                 (wildcard for everything)
+```
 
 #### Groups
 
-For any given metric, data may come from a number of hosts. The data is normally aggregated from all these hosts to a single value for each time slot. If you wish to split this out, you can by any tag. To include a data point separated out by each host,  use {host} for your group.
+For any given metric, data may come from a number of hosts. The data is normally aggregated from all these hosts to a single value for each time slot. If you wish to split this out, you can by any tag. To include a data point separated out by each host, use {host} for your group.
 
 #### Arithmetic
 
@@ -125,12 +131,12 @@ apples by oranges.
 
 ```json
 {
-    "viz": "timeseries",
-    "requests": [
-      {
-        "q": "metric{apples} / metric{oranges}"
-      }
-    ]
+  "viz": "timeseries",
+  "requests": [
+    {
+      "q": "metric{apples} / metric{oranges}"
+    }
+  ]
 }
 ```
 
@@ -138,27 +144,33 @@ apples by oranges.
 
 You can overlay any event from Datadog. The general format is:
 
-    "events": [
-      {
-        "q": "search query"
-      }
-    ]
+```json
+"events": [
+  {
+    "q": "search query"
+  }
+]
+```
 
 For instance, to indicate that you want events for host X and tag Y:
 
-    "events": [
-      {
-        "q": "host:X tags:Y"
-      }
-    ]
+```json
+"events": [
+  {
+    "q": "host:X tags:Y"
+  }
+]
+```
 
 or if you're looking to display all errors:
 
-    "events": [
-      {
-        "q": "status:error"
-      }
-    ]
+```json
+"events": [
+  {
+    "q": "status:error"
+  }
+]
+```
 
 ### Visualization
 
@@ -184,17 +196,19 @@ The Time Series can be further broken down to:
 
 The representation is automatically derived from having multiple `requests` values.
 
-    "requests": [
-        {
-          "q": "metric1{scope}"
-        },
-        {
-          "q": "metric2{scope}"
-        },
-        {
-          "q": "metric3{scope}"
-        }
-      ]
+```json
+"requests": [
+  {
+    "q": "metric1{scope}"
+  },
+  {
+    "q": "metric2{scope}"
+  },
+  {
+    "q": "metric3{scope}"
+  }
+]
+```
 
 #### Stacked Series
 
@@ -202,11 +216,13 @@ The representation is automatically derived from having multiple `requests` valu
 
 In the case of related Time Series, you can easily draw them as stacked areas by using the following syntax:
 
-    "requests": [
-        {
-          "q": "metric1{scope}, metric2{scope}, metric3{scope}"
-        }
-    ]
+```json
+"requests": [
+  {
+    "q": "metric1{scope}, metric2{scope}, metric3{scope}"
+  }
+]
+```
 
 Instead of one query per chart you can aggregate all queries into one and concatenate the queries.
 
@@ -218,19 +234,23 @@ applies to more than 1 host you see that ingress and egress traffic is nicely st
 
 Here's how to do it for any metric:
 
-    "requests" [
-      {
-         "q": "system.net.bytes_rcvd{some_tag, device:eth0} by {host}"
-      }
-    ]
+```json
+"requests" [
+  {
+    "q": "system.net.bytes_rcvd{some_tag, device:eth0} by {host}"
+  }
+]
+```
 
 Note that in this case you can only have 1 query. But you can also split by device, or a combination of both:
 
-    "requests" [
-      {
-         "q": "system.net.bytes_rcvd{some_tag} by {host,device}"
-      }
-    ]
+```json
+"requests" [
+  {
+    "q": "system.net.bytes_rcvd{some_tag} by {host,device}"
+  }
+]
+```
 
 to get traffic for all the tagged hosts, split by host and network device.
 
@@ -251,33 +271,35 @@ There are four configuration settings:
 
 Examples:
 
-    "yaxis": {
-        "min": "auto",
-        "max": 200,
-        "scale": "log"
-    }
+```json
+"yaxis": {
+  "min": "auto",
+  "max": 200,
+  "scale": "log"
+}
 
-    "yaxis": {
-        "min": 200,
-        "scale": "sqrt"
-    }
+"yaxis": {
+  "min": 200,
+  "scale": "sqrt"
+}
 
-    "yaxis": {
-        "min": 9000,
-        "max": 10000
-    }
+"yaxis": {
+  "min": 9000,
+  "max": 10000
+}
 
-    "yaxis": {
-        "scale": "pow0.1"
-    }
+"yaxis": {
+  "scale": "pow0.1"
+}
 
-    "yaxis": {
-        "scale": "pow3"
-    }
+"yaxis": {
+  "scale": "pow3"
+}
 
-    "yaxis": {
-        "units": "true"
-    }
+"yaxis": {
+  "units": "true"
+}
+```
 
 #### Filtering
 
@@ -289,38 +311,46 @@ To begin, there is a simple configuration where you specify an absolute value or
 
 Examples:
 
-    "yaxis": {
-        "filter": 30 // all top 30 values do not appear
-    }
+```json
+"yaxis": {
+  "filter": 30 // all top 30 values do not appear
+}
 
-    "yaxis": {
-        "filter": "5%" // the top 5% of that data do not appear
-    }
+"yaxis": {
+  "filter": "5%" // the top 5% of that data do not appear
+}
+```
 
 Advanced configuration works the same way as simple configuration, with the added flexibility of configuring the lower or the upper or both parts of the graph. For example, the following configuration limits the graph to data points that are not in the bottom 10% nor in the top 30%.
 
-    "yaxis": {
-        "filter": {
-            "top": "30%",
-            "bottom": "10%"
-        }
-    }
+```json
+"yaxis": {
+  "filter": {
+    "top": "30%",
+    "bottom": "10%"
+  }
+}
+```
 
 The following shows all data except those with values higher than 15:
 
-    "yaxis": {
-        "filter": {
-            "top": 15
-        }
-    }
+```json
+"yaxis": {
+  "filter": {
+    "top": 15
+  }
+}
+```
 
 The following hides data points below 2:
 
-    "yaxis": {
-        "filter": {
-            "bottom": 2
-        }
-    }
+```json
+"yaxis": {
+  "filter": {
+    "bottom": 2
+  }
+}
+```
 
 Here is a full JSON example:
 
@@ -337,16 +367,16 @@ Here is a full JSON example:
   "yaxis": {
     "scale": "log"
     "filter": {
-         "top": "5%",
-         "bottom": 15
-     }
+      "top": "5%",
+      "bottom": 15
+    }
   },
 }
 ```
 
 #### Examples
 
-Here is an example using the ```rate()``` function, which takes only a single metric as a parameter.  Other functions, with the exception of ```top()``` and ```top_offset()```, have identical syntax.
+Here is an example using the `rate()` function, which takes only a single metric as a parameter.  Other functions, with the exception of `top()` and `top_offset()`, have identical syntax.
 
 ```json
 {
@@ -360,7 +390,7 @@ Here is an example using the ```rate()``` function, which takes only a single me
 }
 ```
 
-Here is an example using the ```top()``` function:
+Here is an example using the `top()` function:
 
 ```json
 {
@@ -374,12 +404,11 @@ Here is an example using the ```top()``` function:
 }
 ```
 
-This shows the graphs for the five series with the highest peak ```system.cpu.iowait``` values in the query window.
+This shows the graphs for the five series with the highest peak `system.cpu.iowait` values in the query window.
 
-To look at the hosts with the 6th through 10th highest values (for example), use ```top_offset``` instead:
+To look at the hosts with the 6th through 10th highest values (for example), use `top_offset` instead:
 
-```python
-
+```json
 {
   "viz": "timeseries",
   "requests": [
@@ -391,10 +420,9 @@ To look at the hosts with the 6th through 10th highest values (for example), use
 }
 ```
 
-Here is an example using the ```week_before()``` function:
+Here is an example using the `week_before()` function:
 
-```python
-
+```json
 {
   "viz": "timeseries",
   "requests": [
@@ -405,7 +433,6 @@ Here is an example using the ```week_before()``` function:
 }
 ```
 
-[1]: /graphing/
-[2]: /graphing/functions/
+[1]: /graphing
+[2]: /graphing/functions
 [3]: https://app.datadoghq.com/metric/summary
-

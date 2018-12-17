@@ -4,7 +4,7 @@ kind: faq
 further_reading:
 - link: "agent/"
   tag: "Documentation"
-  text: Learn more about the Datadog Agent
+  text: "Learn more about the Datadog Agent"
 ---
 
 One of the most common errors we see with an [Agent installation on windows][1] is a 1721 error that looks something like this:

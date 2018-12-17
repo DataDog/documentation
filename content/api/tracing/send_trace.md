@@ -28,19 +28,19 @@ and each span is a dictionary with a `trace_id`, `span_id`, `resource`..
 
 ##### Arguments
 
-*   **`trace_id`** - _Required._ The unique integer (64-bit unsigned) ID of the trace containing this span.
-*   **`span_id`** - _Required._ The span integer (64-bit unsigned) ID.
-*   **`name`** - _Required._ The span name. The span name must not be longer than 100 characters.
-*   **`resource`** - _Required._ The resource you are tracing. The resource name must not be longer than 5000 characters.
-*   **`service`** - _Required._ The service you are tracing. The service name must not be longer than 100 characters.
-*   **`type`** - _Required._ The type of request.
-*   **`start`** - _Required._ The start time of the request in nanoseconds from the unix epoch.
-*   **`duration`** - _Required._ The duration of the request in nanoseconds.
-*   **`parent_id`** - _Optional._ The span integer ID of the parent span.
-*   **`error`** - _Optional._ Set this value to 1 to indicate if an error occured. If an error occurs, you should pass additional information, such as the error message, type and stack information in the `meta` property.
-*   **`meta`** - _Optional._ A dictionary of key-value metadata. e.g. tags.
+*   **`trace_id`** - _required_ The unique integer (64-bit unsigned) ID of the trace containing this span.
+*   **`span_id`** - _required_ The span integer (64-bit unsigned) ID.
+*   **`name`** - _required_ The span name. The span name must not be longer than 100 characters.
+*   **`resource`** - _required_ The resource you are tracing. The resource name must not be longer than 5000 characters.
+*   **`service`** - _required_ The service you are tracing. The service name must not be longer than 100 characters.
+*   **`type`** - _optional, default=**custom**, case-sensitive_ The type of request. The options available are `web`, `db`, `cache`, and `custom`. 
+*   **`start`** - _required._ The start time of the request in nanoseconds from the unix epoch.
+*   **`duration`** - _required_ The duration of the request in nanoseconds.
+*   **`parent_id`** - _optional_ The span integer ID of the parent span.
+*   **`error`** - _optional_ Set this value to 1 to indicate if an error occured. If an error occurs, you should pass additional information, such as the error message, type and stack information in the `meta` property.
+*   **`meta`** - _optional_ A dictionary of key-value metadata. e.g. tags.
 
 [1]: /tracing/#instrument-your-application
 [2]: /tracing/visualization/trace
 [3]: /tracing/visualization/trace/#spans
-[4]: /tracing/visualization/services_list/
+[4]: /tracing/visualization/services_list

@@ -1,8 +1,8 @@
 ---
-title: Graphiques incorporables
+title: Graphiques intégrables
 type: apicontent
 order: 10
-external_redirect: /api/#embeddable-graphs
+external_redirect: /api/#graphiques-integrables
 ---
-## Graphiques incorporables
-Interagir avec les graphiques intégrables via l'API.
+## Graphiques intégrables
+Interagissez avec les graphiques intégrables via l'API.

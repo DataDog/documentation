@@ -15,7 +15,7 @@ further_reading:
   tag: "Documentation"
   text: "Custom Integrations"
 - link: "https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting"
-  tag: "Github"
+  tag: "GitHub"
   text: "Troubleshooting the Datadog Cluster Agent"
 ---
 
@@ -51,7 +51,7 @@ Run:
 echo -n '<ThirtyX2XcharactersXlongXtoken>' | base64
 ```
 
-Use this string in the `dca-secret.yaml` file located in the [`manifest/cluster-agent` directory][5].
+Use this string in the `dca-secret.yaml` file located in the [`manifest/cluster-agent` directory][3].
 
 Alternatively, run this one-line command:
 ```
@@ -93,7 +93,7 @@ kubectl create configmap dca-yaml --from-file datadog-cluster.yaml
 
 ### Create the Cluster Agent and its service
 
-Locate the following manifests, and replace `<DD_API_KEY>` with [your API key][3]:
+Locate the following manifests, and replace `<DD_API_KEY>` with [your API key][4]:
 
 * `Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml`
 * `Dockerfiles/manifests/cluster-agent/cluster-agent.yaml`
@@ -129,7 +129,7 @@ datadog-cluster-agent   ClusterIP      10.100.202.234   none               5005/
 
 ### Configure RBAC permissions for node-based Agents
 
-Review the manifest found at [`Dockerfiles/manifests/cluster-agent/rbac/rbac-agent.yaml`][4]. This limits an Agent's access to the kubelet API.
+Review the manifest found at [`Dockerfiles/manifests/cluster-agent/rbac/rbac-agent.yaml`][5]. This limits an Agent's access to the kubelet API.
 
 Run:
 
@@ -197,7 +197,7 @@ The following environment variables are supported:
 
 | Variable                                      | Description                                                                                                                                                                   |
 |-----------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_API_KEY`                                  | Your [Datadog API key][3].                                                                                                                                                    |
+| `DD_API_KEY`                                  | Your [Datadog API key][4].                                                                                                                                                    |
 | `DD_HOSTNAME`                                 | Hostname to use for the Datadog Cluster Agent.                                                                                                                                |
 | `DD_CLUSTER_AGENT_CMD_PORT`                   | Port for the Datadog Cluster Agent to serve, default is `5005`.                                                                                                               |
 | `DD_USE_METADATA_MAPPER`                      | Enables the cluster level metadata mapping, default is `true`.                                                                                                                |
@@ -208,7 +208,7 @@ The following environment variables are supported:
 | `DD_KUBE_RESOURCES_NAMESPACE`                 | Configures the namespace where the Cluster Agent creates the configmaps required for the Leader Election, the Event Collection (optional) and the Horizontal Pod Autoscaling. |
 | `DD_KUBERNETES_INFORMERS_RESYNC_PERIOD`       | Frequency in seconds to query the API Server to resync the local cache. The default is 5 minutes.                                                                             |
 | `DD_KUBERNETES_INFORMERS_RESTCLIENT_TIMEOUT`  | Timeout in seconds of the client communicating with the API Server. Default is 60 seconds.                                                                                    |
-| `DD_EXPVAR_PORT`                              | Change the port for fetching [expvar](https://golang.org/pkg/expvar/) public variables from the Datadog Cluster Agent. The default is port is `5000`.                         |
+| `DD_EXPVAR_PORT`                              | Change the port for fetching [expvar][6] public variables from the Datadog Cluster Agent. The default is port is `5000`.                         |
 | `DD_EXTERNAL_METRICS_BATCH_WINDOW`            | Time waited in seconds to process a batch of metrics from multiple Autoscalers. Default to 10 seconds.                                                                        |
 | `DD_EXTERNAL_METRICS_MAX_AGE`                 | Maximum age in seconds of a datapoint before considering it invalid to be served. Default to 90 seconds.                                                                      |
 | `DD_EXTERNAL_METRICS_AGGREGATOR`              | Aggregator for the Datadog metrics. Applies to all Autoscalers processed. Chose among `sum`/`avg`/`max`/`min`.                                                                |
@@ -244,7 +244,7 @@ To enable the Custom Metrics Server:
 
 1. Set `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` to `true` in the Deployment of the Datadog Cluster Agent.
 2. Configure the `<DD_APP_KEY>` as well as the `<DD_API_KEY>` in the Deployment of the Datadog Cluster Agent.
-3. Create a [service exposing the port 443][6] and [register it as an APIService for External Metrics][7].
+3. Create a [service exposing the port 443][7] and [register it as an APIService for External Metrics][8].
 
 Refer to [the dedicated Custom metrics server guide][1] to configure the Custom Metrics Server and get more details about this feature.
 
@@ -255,8 +255,9 @@ Refer to [the dedicated Custom metrics server guide][1] to configure the Custom 
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/CUSTOM_METRICS_SERVER.md
 [2]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/cluster-agent/rbac
-[3]: https://app.datadoghq.com/account/settings#api
-[4]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/rbac/rbac-agent.yaml
-[5]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/dca-secret.yaml
-[6]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/cluster-agent-hpa-svc.yaml
-[7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/rbac-hpa.yaml
+[3]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/dca-secret.yaml
+[4]: https://app.datadoghq.com/account/settings#api
+[5]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/rbac/rbac-agent.yaml
+[6]: https://golang.org/pkg/expvar
+[7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/cluster-agent-hpa-svc.yaml
+[8]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/rbac-hpa.yaml

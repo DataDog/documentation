@@ -6,6 +6,6 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "fluentd_host", "fluentd_port"],
         "name": "Etat du service",
-        "description": "Renvoie `OK` si fluentd et son agent de surveillance sont en cours d'exécution, `CRITICAL` sinon."
+        "description": "Renvoie `OK` si fluentd et son agent de surveillance sont en cours d'exécution. Si ce n'est pas le cas, renvoie `CRITICAL`."
     }
 ]

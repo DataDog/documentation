@@ -4,10 +4,10 @@ kind: faq
 further_reading:
 - link: "developers/metrics"
   tag: "Documentation"
-  text: Learn more about Datadog metrics
+  text: "Learn more about Datadog metrics"
 - link: "/tagging"
   tag: "Documentation"
-  text: Getting started with tags
+  text: "Getting started with tags"
 ---
 
 ---

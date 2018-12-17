@@ -7,13 +7,13 @@ kind: documentation
 
 Custom tagging allows adding tags in the form of key-value pairs to specific spans. These tags are used to correlate traces with other Datadog products to provide more details about specific spans.
 
-[Read more about tagging][tagging]
+[Read more about tagging][1]
 
 {{< tabs >}}
 {{% tab "Java" %}}
 Tags are key-value pairs attached to spans. All tags share a single namespace.
 
-The Datadog UI uses specific tags to set UI properties, such as an application's service name. A full list of these tags can be found in the [Datadog][java api doc] and [OpenTracing][opentracing java doc] APIs.
+The Datadog UI uses specific tags to set UI properties, such as an application's service name. A full list of these tags can be found in the [Datadog][1] and [OpenTracing][2] APIs.
 
 **Custom Tags**:
 
@@ -43,9 +43,9 @@ class ServletImpl extends AbstractHttpServlet {
 }
 ```
 
-[java api doc]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/DDTags.java
-[opentracing java doc]: https://github.com/opentracing/opentracing-java/blob/master/opentracing-api/src/main/java/io/opentracing/tag/Tags.java
 
+[1]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/DDTags.java
+[2]: https://github.com/opentracing/opentracing-java/blob/master/opentracing-api/src/main/java/io/opentracing/tag/Tags.java
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -126,10 +126,9 @@ Datadog.configure do |c|
 end
 ```
 
-See the [API documentation][ruby api doc] for more details.
+See the [API documentation][1] for more details.
 
-[ruby api doc]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#environment-and-tags
-
+[1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#environment-and-tags
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -282,18 +281,17 @@ if (($span = GlobalTracer::get()->getActiveSpan()) !== null){
 
 ## Manual Instrumentation
 
-Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][apm terminology] and familiarize yourself with the core concepts of Datadog APM. 
+Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][2] and familiarize yourself with the core concepts of Datadog APM. 
 
-[apm terminology]: /tracing/visualization/services_list/
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-If you aren't using a [supported framework instrumentation][java framework], or you would like additional depth in your application’s traces, you may want to manually instrument your code.
+If you aren't using a [supported framework instrumentation][1], or you would like additional depth in your application’s traces, you may want to manually instrument your code.
 
-Do this either using the Trace annotation for simple method call tracing, or with the [OpenTracing API][opentracing] for complex tracing.
+Do this either using the Trace annotation for simple method call tracing, or with the [OpenTracing API][2] for complex tracing.
 
-Datadog's Trace annotation is provided by the [dd-trace-api dependency][trace api maven docs].
+Datadog's Trace annotation is provided by the [dd-trace-api dependency][3].
 
 **Example Usage**
 
@@ -308,15 +306,14 @@ public class MyClass {
 }
 ```
 
-[opentracing]: #opentracing
-[java framework]: /tracing/setup/java/#compatibility
-[apm terminology]: /tracing/visualization/services_list/
-[trace api maven docs]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 
+[1]: /tracing/setup/java/#compatibility
+[2]: #opentracing
+[3]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 {{% /tab %}}
 {{% tab "Python" %}}
 
-If you aren't using supported library instrumentation (see [library compatibility][python lib compatibility]), you may want to manually instrument your code.
+If you aren't using supported library instrumentation (see [library compatibility][1]), you may want to manually instrument your code.
 
 You may also want to extend the functionality of the `ddtrace` library or gain finer control over instrumenting your application. Several techniques are provided by the library to accomplish this.
 
@@ -338,11 +335,11 @@ The following examples use the global tracer object which can be imported via:
     # ...
 ```
 
-API details for the decorator can be found at [`ddtrace.Tracer.wrap()`][py_wrap]
+API details for the decorator can be found at [`ddtrace.Tracer.wrap()`][2]
 
 **Context Manager**
 
-To trace an arbitrary block of code, you can use the [`ddtrace.Span`][py_span] context manager:
+To trace an arbitrary block of code, you can use the [`ddtrace.Span`][3] context manager:
 
 ```python
   # trace some interesting operation
@@ -352,7 +349,7 @@ To trace an arbitrary block of code, you can use the [`ddtrace.Span`][py_span] c
     # ...
 ```
 
-Further API details can be found at [`ddtrace.Tracer()`][py_tracer]
+Further API details can be found at [`ddtrace.Tracer()`][4]
 
 **Using the API**
 
@@ -370,21 +367,21 @@ If the above methods are still not enough to satisfy your tracing needs, a manua
 
 API details of the decorator can be found here:
 
-- [`ddtrace.Tracer.trace`][py_trace]
-- [`ddtrace.Span.finish`][py_span_fin]
+- [`ddtrace.Tracer.trace`][5]
+- [`ddtrace.Span.finish`][6]
 
 
-[py_wrap]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.wrap
-[py_tracer]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#tracer
-[py_trace]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.trace
-[py_span]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span
-[py_span_fin]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span.finish
-[python lib compatibility]: /tracing/setup/python/#compatibility
 
+[1]: /tracing/setup/python/#compatibility
+[2]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.wrap
+[3]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span
+[4]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#tracer
+[5]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.trace
+[6]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span.finish
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-If you aren't using supported library instrumentation (see [library compatibility][ruby lib compatibility]), you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code.
+If you aren't using supported library instrumentation (see [library compatibility][1]), you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code.
 
 **Example Usage**
 
@@ -411,17 +408,17 @@ get '/posts' do
 end
 ```
 
-For more details about manual instrumentation, check out the [API documentation][ruby api doc].
+For more details about manual instrumentation, check out the [API documentation][2].
 
-[ruby api doc]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
-[ruby lib compatibility]: /tracing/setup/ruby/#compatibility
 
+[1]: /tracing/setup/ruby/#compatibility
+[2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
 {{% /tab %}}
 {{% tab "Go" %}}
 
-If you aren't using supported library instrumentation (see [Library compatibility][go lib compatibility]), you may want to to manually instrument your code.
+If you aren't using supported library instrumentation (see [Library compatibility][1]), you may want to to manually instrument your code.
 
-To make use of manual instrumentation, use the `tracer` package which is documented on Datadog's [godoc page][tracer godoc]. 
+To make use of manual instrumentation, use the `tracer` package which is documented on Datadog's [godoc page][2]. 
 
 **Example Usage**
 
@@ -444,13 +441,13 @@ func main() {
 }
 ```
 
-[tracer godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
-[go lib compatibility]: /tracing/setup/go/#compatibility
 
+[1]: /tracing/setup/go/#compatibility
+[2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-If you aren’t using supported library instrumentation (see [Library compatibility][nodejs compatibility]), you may want to manually instrument your code.
+If you aren’t using supported library instrumentation (see [Library compatibility][1]), you may want to manually instrument your code.
 
 The following example initializes a Datadog Tracer and creates a span called `web.request`:
 
@@ -462,15 +459,15 @@ span.setTag('http.url', '/login')
 span.finish()
 ```
 
-For more information on manual instrumentation, see the [API documentation][nodejs api doc].
+For more information on manual instrumentation, see the [API documentation][2].
 
-[nodejs api doc]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
-[nodejs compatibility]: /tracing/setup/nodejs/#compatibility
 
+[1]: /tracing/setup/nodejs/#compatibility
+[2]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-If you aren’t using libraries supported by automatic instrumentation (see [Library compatibility][dotnet compatibility]), you should manually instrument your code.
+If you aren’t using libraries supported by automatic instrumentation (see [Library compatibility][1]), you should manually instrument your code.
 
 The following example uses the global Datadog Tracer and creates a span to trace a web request:
 
@@ -488,11 +485,11 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 }
 ```
 
-[dotnet compatibility]: /tracing/setup/dotnet/#compatibility
 
+[1]: /tracing/setup/dotnet/#compatibility
 {{% /tab %}}
 {{% tab "PHP" %}}
-If you aren’t using libraries supported by automatic instrumentation (see [library compatibility][php compatibility]), manually instrument your code.
+If you aren’t using libraries supported by automatic instrumentation (see [library compatibility][1]), manually instrument your code.
 
 The following example uses the global Datadog Tracer and creates a span to trace a web request:
 
@@ -513,21 +510,20 @@ $span->setTag('http.method', $request->method);
 $span->finish();
 ```
 
-[php compatibility]: /tracing/setup/php/#compatibility
 
+[1]: /tracing/setup/php/#compatibility
 {{% /tab %}}
 {{< /tabs >}}
 
 ## OpenTracing
 
-OpenTracing is a vendor-neutral, cross-language standard for tracing applications. Datadog offers OpenTracing implementations for many APM tracers. For more details see [opentracing.io][opentracing website].
+OpenTracing is a vendor-neutral, cross-language standard for tracing applications. Datadog offers OpenTracing implementations for many APM tracers. For more details see [opentracing.io][3].
 
-[opentracing website]: http://opentracing.io
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Use the [OpenTracing API][opentracing-java] and the Datadog Tracer (dd-trace-ot) library to measure execution times for specific pieces of code. This lets you trace your application more precisely than you can with the Java Agent alone.
+Use the [OpenTracing API][1] and the Datadog Tracer (dd-trace-ot) library to measure execution times for specific pieces of code. This lets you trace your application more precisely than you can with the Java Agent alone.
 
 **Setup**:
 
@@ -564,9 +560,8 @@ compile group: 'io.opentracing', name: 'opentracing-util', version: "0.31.0"
 compile group: 'com.datadoghq', name: 'dd-trace-ot', version: "${dd-trace-java.version}"
 ```
 
-Configure your application using environment variables or system properties as discussed in the [configuration][configuration] section.
+Configure your application using environment variables or system properties as discussed in the [configuration][2] section.
 
-[configuration]: /tracing/setup/java/#configuration
 
 **Manual Instrumentation with OpenTracing**:
 
@@ -683,10 +678,11 @@ try (Scope scope = tracer.buildSpan("ServiceHandlerSpan").startActive(false)) {
     // submission thread impl...
 }
 ```
-Notice the above examples only use the OpenTracing classes. Check the [OpenTracing API][opentracing-java] for more details and information.
+Notice the above examples only use the OpenTracing classes. Check the [OpenTracing API][1] for more details and information.
 
-[opentracing-java]: https://github.com/opentracing/opentracing-java
 
+[1]: https://github.com/opentracing/opentracing-java
+[2]: /tracing/setup/java/#configuration
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -728,22 +724,22 @@ init_tracer('<SERVICE_NAME>')
 my_operation()
 ```
 
-For more advanced usage and configuration information see [Datadog Python Opentracing API docs][dd-opentracing-python] and the [Python OpenTracing repo][opentracing-python].
+For more advanced usage and configuration information see [Datadog Python Opentracing API docs][1] and the [Python OpenTracing repo][2].
 
-[dd-opentracing-python]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#opentracing
-[opentracing-python]: https://github.com/opentracing/opentracing-python
 
+[1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#opentracing
+[2]: https://github.com/opentracing/opentracing-python
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Support for OpenTracing with Ruby is coming soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
+Support for OpenTracing with Ruby is coming soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-[contact support]: https://docs.datadoghq.com/help
 
+[1]: /help
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Import the [`opentracer` package][opentracing godoc] to expose the Datadog tracer as an [OpenTracing][open tracing] compatible tracer.
+Import the [`opentracer` package][1] to expose the Datadog tracer as an [OpenTracing][2] compatible tracer.
 
 **Example**:
 
@@ -774,18 +770,15 @@ func main() {
 }
 ```
 
-**Note**: Using the [OpenTracing API][opentracing go] in parallel with the regular API or Datadog integrations is fully supported. Under the hood, all of them make use of the same tracer. See the [API documentation][opentracing godoc] for more examples and details.
+**Note**: Using the [OpenTracing API][3] in parallel with the regular API or Datadog integrations is fully supported. Under the hood, all of them make use of the same tracer. See the [API documentation][1] for more examples and details.
 
-[tracer godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
-[opentracing godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
-[open tracing]: http://opentracing.io
-[opentracing go]: https://github.com/opentracing/opentracing-go
+[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
+[2]: http://opentracing.io
+[3]: https://github.com/opentracing/opentracing-go
 {{% /tab %}}
 {{% tab "Node.js" %}}
-This library is OpenTracing compliant. Use the ([OpenTracing API][opentracing api] and the Datadog Tracer ([dd-trace][nodejs api doc]) library to measure execution times for specific pieces of code. In the following example, a Datadog Tracer is initialized and used as a global tracer:
+This library is OpenTracing compliant. Use the ([OpenTracing API][1] and the Datadog Tracer ([dd-trace][2]) library to measure execution times for specific pieces of code. In the following example, a Datadog Tracer is initialized and used as a global tracer:
 
-[opentracing api]: https://doc.esdoc.org/github.com/opentracing/opentracing-javascript/
-[nodejs api doc]: https://datadog.github.io/dd-trace-js/
 
 ```javascript
 // server.js
@@ -808,10 +801,12 @@ The following tags are available to override Datadog specific options:
 * `resource.name`: The resource name to be used for this span. The operation name will be used if this is not provided.
 * `span.type`: The span type to be used for this span. Will fallback to `custom` if not provided.
 
+[1]: https://doc.esdoc.org/github.com/opentracing/opentracing-javascript
+[2]: https://datadog.github.io/dd-trace-js
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-For OpenTracing support, add the [`Datadog.Trace.OpenTracing`][dotnet opentracing] NuGet package to your application. During application start-up, initialize the OpenTracing library:
+For OpenTracing support, add the [`Datadog.Trace.OpenTracing`][1] NuGet package to your application. During application start-up, initialize the OpenTracing library:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -828,8 +823,8 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-[dotnet opentracing]: https://www.nuget.org/packages/Datadog.Trace.OpenTracing/
 
+[1]: https://www.nuget.org/packages/Datadog.Trace.OpenTracing
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -839,9 +834,8 @@ Distributed tracing allows you to propagate a single trace across multiple servi
 
 Distributed tracing headers are language agnostic. A trace started in one language may propagate to another (for example, from Python to Java).
 
-Distributed traces may sample inconsistently when the linked traces run on different hosts. To ensure that distributed traces are complete, enable [priority sampling][priority sampling].
+Distributed traces may sample inconsistently when the linked traces run on different hosts. To ensure that distributed traces are complete, enable [priority sampling][4].
 
-[priority sampling]: #priority-sampling
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -929,10 +923,10 @@ Distributed tracing is supported in the following frameworks:
 | requests          | http://pypi.datadoghq.com/trace/docs/web_integrations.html#requests |
 | tornado           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#tornado  |
 
-To add your own distributed tracing check the [Datadog API documentation][py_dist_tracing].
+To add your own distributed tracing check the [Datadog API documentation][1].
 
-[py_dist_tracing]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#http-client
 
+[1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#http-client
 {{% /tab %}}
 {{% tab "Ruby" %}} 
 
@@ -950,10 +944,10 @@ Distributed tracing is supported in the following frameworks:
 | Rest Client       | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#restclient  |
 | Sinatra           | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sinatra     |
 
-For more details about how to activate and configure distributed tracing, see the [API documentation][distributed tracing ruby].
+For more details about how to activate and configure distributed tracing, see the [API documentation][1].
 
-[distributed tracing ruby]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#distributed-tracing
 
+[1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#distributed-tracing
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -1007,17 +1001,17 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Distributed tracing is enabled by default for all supported integrations (see [Compatibility][nodejs compatibility]).
+Distributed tracing is enabled by default for all supported integrations (see [Compatibility][1]).
 
-[nodejs compatibility]: /tracing/setup/nodejs/#compatibility
 
+[1]: /tracing/setup/nodejs/#compatibility
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Coming Soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-[contact support]: https://docs.datadoghq.com/help
 
+[1]: /help
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1027,16 +1021,14 @@ Priority sampling allows traces between two Datadog endpoints to be sampled toge
 
 Priority sampling automatically assigns and propagates a priority value along all traces, depending on their service and volume. Priorities can also be set manually to drop non-interesting traces or keep important ones.
 
-For a more detailed explanations of sampling and priority sampling, check the [sampling and storage][sampling and storage] documentation. 
+For a more detailed explanations of sampling and priority sampling, check the [sampling and storage][5] documentation. 
 
-[sampling and storage]: https://docs.datadoghq.com/tracing/getting_further/trace_sampling_and_storage/
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Priority sampling is disabled by default. To enable it, configure the `priority.sampling` flag to `true` ([see how to configure the java client][javaclient].
+Priority sampling is disabled by default. To enable it, configure the `priority.sampling` flag to `true` ([see how to configure the java client][1].
 
-[javaclient]: /tracing/setup/java/#configuration
 
 Current Priority Values (more may be added in the future):
 
@@ -1067,6 +1059,7 @@ public class MyClass {
 }
 ```
 
+[1]: /tracing/setup/java/#configuration
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -1132,14 +1125,14 @@ When not using [distributed tracing](#distributed-tracing), you may change the p
 
 It is recommended that changing priority be done as soon as possible, when the root span has just been created.
 
-See the [API documentation][ruby api doc] for more details.
+See the [API documentation][1] for more details.
 
-[ruby api doc]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#priority-sampling
 
+[1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#priority-sampling
 {{% /tab %}}
 {{% tab "Go" %}}
 
-For more details about how to use and configure distributed tracing, check out the [godoc page][tracer godoc].
+For more details about how to use and configure distributed tracing, check out the [godoc page][1].
 
 Set the sampling priority of a trace by adding the `sampling.priority` tag to its root span. This is then propagated throughout the entire stack. For example:
 
@@ -1173,8 +1166,8 @@ Possible values for the sampling priority tag are:
 | ext.PriorityUserReject     | The user asked to not keep the trace. The Agent will drop it.                                               |
 | ext.PriorityUserKeep       | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                      |
 
-[tracer godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 
+[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
@@ -1206,10 +1199,10 @@ Once the sampling priority has been set, it cannot be changed. This is done auto
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Coming Soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-[contact support]: https://docs.datadoghq.com/help
 
+[1]: /help
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1278,10 +1271,10 @@ trace_id, span_id = helpers.get_correlation_ids()
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Coming Soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-[contact support]: https://docs.datadoghq.com/help
 
+[1]: /help
 {{% /tab %}}
 {{% tab "Go" %}}
 The Go tracer exposes two API calls to allow printing trace and span identifiers along with log statements using exported methods from `SpanContext` type:
@@ -1309,16 +1302,16 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Coming Soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-[contact support]: https://docs.datadoghq.com/help
+[1]: /help
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Coming Soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-[contact support]: https://docs.datadoghq.com/help
 
+[1]: /help
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1367,10 +1360,10 @@ end
 Datadog::Tracer.log.info { "this is typically called by tracing code" }
 ```
 
-See [the API documentation][ruby logging docs] for more details.
+See [the API documentation][1] for more details.
 
-[ruby logging docs]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#custom-logging
 
+[1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#custom-logging
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -1401,9 +1394,8 @@ const tracer = require('dd-trace').init({
 
 **Application Logs**:
 
-By default, logging from this library is disabled. In order to get debbuging information and errors sent to logs, the `debug` options should be set to `true` in the [init()][init method] method.
+By default, logging from this library is disabled. In order to get debbuging information and errors sent to logs, the `debug` options should be set to `true` in the [init()][1] method.
 
-[init method]: https://datadog.github.io/dd-trace-js/Tracer.html#init
 
 The tracer will then log debug information to `console.log()` and errors to `console.error()`. This behavior can be changed by passing a custom logger to the tracer. The logger should contain `debug()` and `error()` methods that can handle messages and errors, respectively.
 
@@ -1425,10 +1417,11 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-For more tracer settings, check out the [API documentation][nodejs api doc].
+For more tracer settings, check out the [API documentation][2].
 
-[nodejs api doc]: https://datadog.github.io/dd-trace-js/#tracer-settings
 
+[1]: https://datadog.github.io/dd-trace-js/Tracer.html#init
+[2]: https://datadog.github.io/dd-trace-js/#tracer-settings
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -1519,5 +1512,8 @@ apm_config:
       pattern: "(?s).*"
 ```
 
-[contact support]: https://docs.datadoghq.com/help
-[tagging]: /tagging
+[1]: /tagging
+[2]: /tracing/visualization/services_list
+[3]: http://opentracing.io
+[4]: #priority-sampling
+[5]: /tracing/getting_further/trace_sampling_and_storage

@@ -5,13 +5,13 @@ disable_toc: true
 further_reading:
 - link: "logs/log_collection"
   tag: "Documentation"
-  text: Learn how to collect your logs
+  text: "Learn how to collect your logs"
 - link: "/logs/log_collection"
   tag: "Documentation"
-  text: How to Send Logs to Datadog via External Log Shippers?
+  text: "How to Send Logs to Datadog via External Log Shippers?"
 - link: "logs/explorer"
   tag: "Documentation"
-  text: Learn how to explore your logs
+  text: "Learn how to explore your logs"
 ---
 
 Often, log files, especially system logs such as *syslog* or *journald*, have heightened read-permissions blocking Datadog Agent log collection as it does not have *sudo* or *admin* access.  

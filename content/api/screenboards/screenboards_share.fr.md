@@ -1,13 +1,13 @@
 ---
-title: Partager un Screenboard
+title: Partager un screenboard
 type: apicontent
 order: 18.6
-external_redirect: /api/#share-a-screenboard
+external_redirect: /api/#partager-un-screenboard
 ---
 
-## Partager un Screenboard
+## Partager un screenboard
 
-Partage un Screenboard existant avec un URL public.
+Partage un screenboard existant avec une URL publique.
 
 ##### ARGUMENTS
 

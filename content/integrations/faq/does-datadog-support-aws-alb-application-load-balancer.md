@@ -11,9 +11,10 @@ Classic ELBs have their metrics reported in Datadog under the namespace "aws.elb
 
 Application Load Balancers (ALBs) have their metrics reported in Datadog under the namespace "aws.applicationelb".
 
-For instance, "aws.applicationelb.active_connection_count" is the Datadog metric name corresponding to the Cloudwatch metric ([ALB only](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/elb-metricscollected.html)) named "ActiveConnectionCount".
+For instance, "aws.applicationelb.active_connection_count" is the Datadog metric name corresponding to the Cloudwatch metric ([ALB only][1]) named "ActiveConnectionCount".
 
 {{< img src="integrations/faq/alb_metrics.png" alt="alb_metrics" responsive="true" >}}
 
 Note that former ALB metrics that were reporting under the aws.elb namespace may still be present in this namespace as deprecated metrics.
 
+[1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/elb-metricscollected.html

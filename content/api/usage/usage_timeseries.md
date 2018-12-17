@@ -15,4 +15,4 @@ Get Hourly Usage For [Custom Metrics][1].
 * **`end_hr`** [*optional*, *default*=**1d+start_hr**]:  
     datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour
 
-[1]: /developers/metrics/custom_metrics/
+[1]: /developers/metrics/custom_metrics

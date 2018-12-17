@@ -4,13 +4,13 @@ kind: documentation
 further_reading:
 - link: "graphing/dashboards/template_variables"
   tag: "Documentation"
-  text: Enhance your Dashboards with Template Variables
+  text: "Enhance your Dashboards with Template Variables"
 - link: "graphing/dashboards/shared_graph"
   tag: "Documentation"
-  text: Share your Graphs outside of Datadog
+  text: "Share your Graphs outside of Datadog"
 - link: "graphing/dashboards/widgets"
   tag: "Documentation"
-  text: Discover all available widget for your Dashboard
+  text: "Discover all available widget for your Dashboard"
 ---
 
 ## Change Screenboard name 
@@ -97,8 +97,8 @@ Special thanks to [Brightcove][4], [Shopify][5], and [Zendesk][6] for sharing th
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/team/#datadog-user-roles
-[2]: /graphing/event_stream/
+[2]: /graphing/event_stream
 [3]: /api
-[4]: https://www.brightcove.com/
-[5]: https://www.shopify.com/
-[6]: https://www.zendesk.com/
+[4]: https://www.brightcove.com
+[5]: https://www.shopify.com
+[6]: https://www.zendesk.com

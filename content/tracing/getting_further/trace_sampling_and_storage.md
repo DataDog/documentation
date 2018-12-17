@@ -7,19 +7,19 @@ aliases:
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
-  text: Learn how to setup APM tracing with your application
+  text: "Learn how to setup APM tracing with your application"
 - link: "tracing/visualization/services_list/"
   tag: "Documentation"
-  text: Discover the list of services reporting to Datadog
+  text: "Discover the list of services reporting to Datadog"
 - link: "tracing/visualization/service"
   tag: "Documentation"
-  text: Learn more about services in Datadog
+  text: "Learn more about services in Datadog"
 - link: "tracing/visualization/resource"
   tag: "Documentation"
-  text: Dive into your resource performance and traces
+  text: "Dive into your resource performance and traces"
 - link: "tracing/visualization/trace"
   tag: "Documentation"
-  text: Understand how to read a Datadog Trace
+  text: "Understand how to read a Datadog Trace"
 ---
 
 ## Trace sampling
@@ -90,7 +90,7 @@ Traces are automatically assigned a priority of **0** or **1**, with a proportio
 
 #### Using Priority Sampling
 
-Priority Sampling is recommended if your traces are distributed across multiple hosts or if you need finer control over the traces sampled. To use it, enable `distributed_sampling` in your client ([Ruby][8], [Python][5], [Go][6], [Java][7]) as it is disabled by default.
+Priority Sampling is recommended if your traces are distributed across multiple hosts or if you need finer control over the traces sampled. To use it, enable `distributed_sampling` in your client ([Ruby][5], [Python][6], [Go][7], [Java][8]) as it is disabled by default.
 
 ### Client rate sampling
 
@@ -185,7 +185,7 @@ When serialized/flushed to the Agent, the `sampling.priority` is stored in the `
 [2]: /tracing/visualization/trace
 [3]: /tracing/visualization/resource
 [4]: /agent
-[5]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#priority-sampling
-[6]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer/#Span.SetSamplingPriority
-[7]: /tracing/setup/java/#sampling-distributed-tracing
-[8]: http://www.rubydoc.info/gems/ddtrace/#Priority_sampling
+[5]: http://www.rubydoc.info/gems/ddtrace/#Priority_sampling
+[6]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#priority-sampling
+[7]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer/#Span.SetSamplingPriority
+[8]: /tracing/setup/java/#sampling-distributed-tracing

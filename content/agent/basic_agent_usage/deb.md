@@ -9,13 +9,13 @@ aliases:
 further_reading:
 - link: "logs/"
   tag: "Documentation"
-  text: Collect your logs
+  text: "Collect your logs"
 - link: "graphing/infrastructure/process"
   tag: "Documentation"
-  text: Collect your processes
+  text: "Collect your processes"
 - link: "tracing"
   tag: "Documentation"
-  text: Collect your traces
+  text: "Collect your traces"
 ---
 
 ## Overview
@@ -59,12 +59,12 @@ In Agent v6, the service manager provided by the operating system is responsible
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: If `service` is not available on your system, use:
+**Note**: If the `service` wrapper is not available on your system, use:
 
-* `upstart`-based systems: `initctl`
-* `systemd`-based systems: `systemctl`
+* On `upstart`-based systems: `sudo initctl start/stop/restart/status datadog-agent`
+* On `systemd`-based systems: `sudo systemctl start/stop/restart/status datadog-agent`
 
-[Learn more about Service lifecycle commands][4]
+[Learn more about Service lifecycle commands][2]
 
 ## Configuration
 
@@ -74,12 +74,12 @@ The configuration files and folders for the Agent are located in:
 
 * `/etc/datadog-agent/datadog.yaml` 
 
-Configuration files for [Integrations][2]:
+Configuration files for [Integrations][1]:
 
 * `/etc/datadog-agent/conf.d/` 
 
-[2]: /integrations
 
+[1]: /integrations
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -87,12 +87,12 @@ The configuration files and folders for the Agent are located in:
 
 * `/etc/dd-agent/datadog.conf`  
 
-Configuration files for [Integrations][2]:
+Configuration files for [Integrations][1]:
 
 * `/etc/dd-agent/conf.d/` 
 
-[2]: /integrations
 
+[1]: /integrations
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -102,10 +102,10 @@ Configuration files for [Integrations][2]:
 
 Run the `status` command to see the state of the Agent. The Agent logs are located in the `/var/log/datadog/` directory and are consolidated in the `agent.log` file.
 
-If you're still having trouble, [our support team][3] is glad to provide further assistance.
+If you're still having trouble, [our support team][1] is glad to provide further assistance.
 
-[3]: /help
 
+[1]: /help
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -116,10 +116,10 @@ Run the `info` command to see the state of the Agent. The Agent logs are located
   * `dogstatsd.log`
   * `forwarder.log`
 
-If you're still having trouble, [our support team][3] is glad to provide further assistance.
+If you're still having trouble, [our support team][1] is glad to provide further assistance.
 
-[3]: /help
 
+[1]: /help
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -127,14 +127,12 @@ If you're still having trouble, [our support team][3] is glad to provide further
 
 The Agent contains an embedded Python environment at `/opt/datadog-agent/embedded/`. Common binaries such as `python` and `pip` are contained within `/opt/datadog-agent/embedded/bin/`.
 
-See the instructions on how to [add packages to the embedded Agent][5] for more information.
+See the instructions on how to [add packages to the embedded Agent][3] for more information.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/debian
-[2]: /integrations
-[3]: /help
-[4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
-[5]: /agent/custom_python_package
+[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
+[3]: /agent/custom_python_package

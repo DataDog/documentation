@@ -6,7 +6,7 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "url"],
         "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` s'il est impossible d'obtenir des métriques de etcd (timeout ou code d'état HTTP autre que 200)"
+        "description": "Renvoie `CRITICAL` s'il est impossible d'obtenir des métriques à partir de etcd (timeout ou code d'état HTTP autre que 200)."
     },
     {
         "agent_version": "5.21.0",
@@ -15,6 +15,6 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "url"],
         "name": "Healthy",
-        "description": "Renvoie `CRITICAL` quand un membre est malsain"
+        "description": "Renvoie `CRITICAL` lorsqu'un membre n'est pas « sain »."
     }
 ]

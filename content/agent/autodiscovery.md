@@ -8,16 +8,16 @@ aliases:
 further_reading:
 - link: "/videos/autodiscovery/"
   tag: "Video"
-  text: Datadog Autodiscovery on Docker with Labels using Agent v6 & v5
+  text: "Datadog Autodiscovery on Docker with Labels using Agent v6 & v5"
 - link: "logs/"
   tag: "Documentation"
-  text: Collect your logs
+  text: "Collect your logs"
 - link: "graphing/infrastructure/process"
   tag: "Documentation"
-  text: Collect your processes
+  text: "Collect your processes"
 - link: "tracing"
   tag: "Documentation"
-  text: Collect your traces
+  text: "Collect your traces"
 ---
 
 ## QuickStart
@@ -132,26 +132,26 @@ Storing templates as local files is easy to understand and doesn't require an ex
 
 The Agent looks for Autodiscovery templates in the `/conf.d` directory, which contains default templates for the following checks:
 
-- [Apache][3]
-- [Consul][4]
-- [CouchDB][5]
-- [Couchbase][6]
-- [Elasticsearch][7]
-- [Etcd][8]
-- [Kubernetes_state][9]
-- [Kube_dns][10]
-- [Kube_proxy][22]
-- [Kyototycoon][11]
-- [Memcached][12]
-- [Redis][13]
-- [Riak][14]
+- [Apache][1]
+- [Consul][2]
+- [CouchDB][3]
+- [Couchbase][4]
+- [Elasticsearch][5]
+- [Etcd][6]
+- [Kubernetes_state][7]
+- [Kube_dns][8]
+- [Kube_proxy][9]
+- [Kyototycoon][10]
+- [Memcached][11]
+- [Redis][12]
+- [Riak][13]
 
 Since 6.2.0 (and 5.24.0), the default templates use the default port for the monitored software, instead of auto-detecting it. If you need to use a different port, provide a custom Autodiscovery template either in [Docker container labels](#template-source-docker-label-annotations) or [Kubernetes pod annotations](#template-source-kubernetes-pod-annotations).
 
 These templates may suit you in basic cases, but if you need to use custom Agent check configurations&mdash;such as enabling extra check options, using different container identifiers, or using template variable indexing&mdash;write your own auto-conf files. These are provided in the following ways:
 
-1. Add them to each host that runs `docker-datadog-agent` and [mount the directory that contains them][15] into the datadog-agent container when starting it
-2. On Kubernetes, add them [using ConfigMaps][16]
+1. Add them to each host that runs `docker-datadog-agent` and [mount the directory that contains them][14] into the datadog-agent container when starting it
+2. On Kubernetes, add them [using ConfigMaps][15]
 
 The check name is extracted from the template file name. To run the `checkname` integration, the template file must either:
 
@@ -173,36 +173,36 @@ instances:
   - apache_status_url: http://%%host%%/server-status?auto
 ```
 
-It looks like a minimal [Apache check configuration][17], but notice the `ad_identifiers` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `httpd` image.
+It looks like a minimal [Apache check configuration][16], but notice the `ad_identifiers` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `httpd` image.
 
 _Any_ `httpd` image. Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery applies the above template to both containers. When it's loading auto-conf files, Autodiscovery cannot distinguish between identically-named images from different sources or with different tags, and **you have to provide short names for container images**, e.g. `httpd`, NOT `library/httpd:latest`.
 
-If this is too limiting&mdash;if you need to apply different check configurations to different containers running the same image&mdash;[use labels to identify the containers][18]. Label each container differently, then add each label to any template file's `ad_identifiers` list (yes, `ad_identifiers` is where to put _any_ kind of container identifier, not just images).
+If this is too limiting&mdash;if you need to apply different check configurations to different containers running the same image&mdash;[use labels to identify the containers][17]. Label each container differently, then add each label to any template file's `ad_identifiers` list (yes, `ad_identifiers` is where to put _any_ kind of container identifier, not just images).
 
-[3]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/auto_conf.yaml
-[4]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/auto_conf.yaml
-[5]: https://github.com/DataDog/integrations-core/blob/master/couch/datadog_checks/couch/data/auto_conf.yaml
-[6]: https://github.com/DataDog/integrations-core/blob/master/couchbase/datadog_checks/couchbase/data/auto_conf.yaml
-[7]: https://github.com/DataDog/integrations-core/blob/master/elastic/datadog_checks/elastic/data/auto_conf.yaml
-[8]: https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/auto_conf.yaml
-[9]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/auto_conf.yaml
-[10]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/data/auto_conf.yaml
-[11]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/datadog_checks/kyototycoon/data/auto_conf.yaml
-[12]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/auto_conf.yaml
-[13]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
-[14]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
-[15]: https://github.com/DataDog/datadog-agent
-[16]: /agent/basic_agent_usage/kubernetes/#configmap
-[17]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[18]: /agent/autodiscovery/#template-source-kubernetes-pod-annotations
-[22]: https://github.com/DataDog/integrations-core/blob/master/kube_proxy/datadog_checks/kube_proxy/data/conf.yaml.example
 
+[1]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/auto_conf.yaml
+[2]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/auto_conf.yaml
+[3]: https://github.com/DataDog/integrations-core/blob/master/couch/datadog_checks/couch/data/auto_conf.yaml
+[4]: https://github.com/DataDog/integrations-core/blob/master/couchbase/datadog_checks/couchbase/data/auto_conf.yaml
+[5]: https://github.com/DataDog/integrations-core/blob/master/elastic/datadog_checks/elastic/data/auto_conf.yaml
+[6]: https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/auto_conf.yaml
+[7]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/auto_conf.yaml
+[8]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/data/auto_conf.yaml
+[9]: https://github.com/DataDog/integrations-core/blob/master/kube_proxy/datadog_checks/kube_proxy/data/conf.yaml.example
+[10]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/datadog_checks/kyototycoon/data/auto_conf.yaml
+[11]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/auto_conf.yaml
+[12]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
+[13]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
+[14]: https://github.com/DataDog/datadog-agent
+[15]: /agent/basic_agent_usage/kubernetes/#configmap
+[16]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
+[17]: /agent/autodiscovery/#template-source-kubernetes-pod-annotations
 {{% /tab %}}
 {{% tab "Key-value Store" %}}
 
 ### Template Source: Key-value Store
 
-Autodiscovery can use [Consul][19], etcd, and Zookeeper as template sources. To use a key-value store, you must configure it in `datadog.yaml` or in environment variables passed to the datadog-agent container.
+Autodiscovery can use [Consul][1], etcd, and Zookeeper as template sources. To use a key-value store, you must configure it in `datadog.yaml` or in environment variables passed to the datadog-agent container.
 
 #### Configure in datadog.yaml
 
@@ -240,7 +240,7 @@ In the `datadog.yaml` file, set the `<KV_STORE_IP>` address and `<KV_STORE_PORT>
 #     password:
 ```
 
-[Restart the Agent][20] to apply the configuration change.
+[Restart the Agent][2] to apply the configuration change.
 
 #### Configure in environment variables
 
@@ -275,7 +275,7 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 
 #### Example: Apache check with website availability monitoring
 
-The following etcd commands create the same Apache template and add an [HTTP check][21] template to monitor whether the website created by the Apache container is available:
+The following etcd commands create the same Apache template and add an [HTTP check][3] template to monitor whether the website created by the Apache container is available:
 
 ```
 etcdctl set /datadog/check_configs/library/httpd:latest/check_names '["apache", "http_check"]'
@@ -285,10 +285,10 @@ etcdctl set /datadog/check_configs/library/httpd:latest/instances '[{"apache_sta
 
 Again, the order of each list matters. The Agent can only generate the HTTP check configuration correctly if all parts of its configuration have the same index across the three lists (they do; the index is 1).
 
-[19]: /integrations/consul
-[20]: /agent/faq/agent-commands
-[21]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
 
+[1]: /integrations/consul
+[2]: /agent/faq/agent-commands
+[3]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -423,7 +423,7 @@ spec:
 The Agent detects if it's running on Docker and automatically searches all labels for check templates.
 
 Since version 6.2 of the Datadog Agent, it is also possible to configure Docker log collection in container labels.
-Check the [Docker Log collection guide][23] for more information about the setup.
+Check the [Docker Log collection guide][1] for more information about the setup.
 
 Autodiscovery expects labels to look like these examples, depending on the file type:
 
@@ -483,8 +483,8 @@ services:
 
 ```
 
-[23]: https://docs.datadoghq.com/logs/docker/
 
+[1]: /logs/docker
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -507,7 +507,7 @@ The following template variables are handled by the Agent:
   - `%%pid%%`: retrieves the container process ID as returned by `docker inspect --format '{{.State.Pid}}' <container>`
 
 - Container hostname: `hostname` (added in Agent 6.4, Docker listener only)
-  - `%%hostname%%`: retrieves the `hostname` value from the container configuration. Only use it if the `%%host%%` variable cannot fetch a reliable IP (example: [ECS awsvpc mode][25]
+  - `%%hostname%%`: retrieves the `hostname` value from the container configuration. Only use it if the `%%host%%` variable cannot fetch a reliable IP (example: [ECS awsvpc mode][3]
 
 - Environment variable: `env` (added in Agent 6.1)
   - `%%env_MYENVVAR%%`: use the contents of the `$MYENVVAR` environment variable **as seen by the Agent process**
@@ -599,26 +599,4 @@ instances:
 
 [1]: /agent/faq/agent-5-autodiscovery
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
-[3]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/auto_conf.yaml
-[4]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/auto_conf.yaml
-[5]: https://github.com/DataDog/integrations-core/blob/master/couch/datadog_checks/couch/data/auto_conf.yaml
-[6]: https://github.com/DataDog/integrations-core/blob/master/couchbase/datadog_checks/couchbase/data/auto_conf.yaml
-[7]: https://github.com/DataDog/integrations-core/blob/master/elastic/datadog_checks/elastic/data/auto_conf.yaml
-[8]: https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/auto_conf.yaml
-[9]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/auto_conf.yaml
-[10]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/data/auto_conf.yaml
-[11]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/datadog_checks/kyototycoon/data/auto_conf.yaml
-[12]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/auto_conf.yaml
-[13]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
-[14]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
-[15]: https://github.com/DataDog/datadog-agent
-[16]: /agent/basic_agent_usage/kubernetes/#configmap
-[17]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[18]: /agent/autodiscovery/#template-source-kubernetes-pod-annotations
-[19]: /integrations/consul
-[20]: /agent/faq/agent-commands
-[21]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
-[22]: https://github.com/DataDog/integrations-core/blob/master/kube_proxy/datadog_checks/kube_proxy/data/conf.yaml.example
-[23]: https://docs.datadoghq.com/logs/docker/
-[24]: /videos/autodiscovery/
-[25]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+[3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html

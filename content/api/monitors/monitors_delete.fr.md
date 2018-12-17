@@ -2,7 +2,7 @@
 title: Supprimer un monitor
 type: apicontent
 order: 16.04
-external_redirect: /api/#delete-a-monitor
+external_redirect: /api/#supprimer-un-monitor
 ---
 
 ## Supprimer un monitor

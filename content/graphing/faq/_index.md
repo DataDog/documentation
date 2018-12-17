@@ -1,7 +1,10 @@
 ---
 title: Graphing FAQ
 kind: faq
+disable_toc: true
 private: true
+aliases:
+    - /graphing/faq/how-to-merge-screenboards/
 ---
 
 {{< whatsnext desc="List of Frequently Asked Questions:" >}}
@@ -10,7 +13,7 @@ private: true
     {{< nextlink href="graphing/faq/why-isn-t-my-aws-trusted-advisor-dashboard-showing-any-data" >}}Why isn't my AWS Trusted Advisor Dashboard showing any data?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/how-do-i-see-the-number-of-hosts-i-m-monitoring" >}}How do I see the number of hosts I'm monitoring?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/treemap-graph-visualization-can-i-use-this-elsewhere" >}}Treemap graph/visualization - can I use this elsewhere?{{< /nextlink >}}
-    {{< nextlink href="graphing/faq/how-to-merge-screenboards" >}}How to Merge Screenboards ?{{< /nextlink >}}
+    {{< nextlink href="https://github.com/DataDog/Miscellany/tree/master/merge_screenboards" >}}How to Merge Screenboards ?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/how-is-data-aggregated-in-graphs" >}}How is data aggregated in graphs?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/troubleshooting-browser-issues" >}}Troubleshooting - Browser Issues{{< /nextlink >}}
     {{< nextlink href="graphing/faq/how-do-i-do-arithmetic-with-grouped-metrics" >}}How do I do arithmetic with grouped metrics?{{< /nextlink >}}
@@ -34,4 +37,3 @@ private: true
     {{< nextlink href="graphing/faq/is-it-possible-to-query-historical-data-after-a-host-has-been-destroyed" >}}Is it possible to query historical data after a host has been destroyed?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/embeddable-graphs-with-template-variables" >}}Embeddable Graphs with Template Variables{{< /nextlink >}}
 {{< /whatsnext >}}
-

@@ -2,13 +2,13 @@
 title: Révoquer un embed
 type: apicontent
 order: 10.5
-external_redirect: /api/#revoke-embed
+external_redirect: /api/#revoquer-un-embed
 ---
 
 ## Révoquer un embed
-Révoquer un embed spécifié.
+Révoque un embed spécifié.
 
-Renvoie: Un JSON contenant le message de réussite {success: [message]}. En cas d'échec, la valeur de retour est un JSON contenant un message d'erreur {errors: [messages]}.
+Renvoie un JSON contenant le message de réussite {success: [message]}. En cas d'échec, la valeur renvoyé correspond à un JSON contenant un message d'erreur {errors: [messages]}.
 
 ##### ARGUMENTS
 

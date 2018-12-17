@@ -7,19 +7,19 @@ aliases:
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
-  text: Learn how to setup APM tracing with your application
+  text: "Learn how to setup APM tracing with your application"
 - link: "tracing/visualization/services_list/"
   tag: "Documentation"
-  text: Discover the list of services reporting to Datadog
+  text: "Discover the list of services reporting to Datadog"
 - link: "tracing/visualization/service"
   tag: "Documentation"
-  text: Learn more about services in Datadog
+  text: "Learn more about services in Datadog"
 - link: "tracing/visualization/resource"
   tag: "Documentation"
-  text: Dive into your resource performance and traces
+  text: "Dive into your resource performance and traces"
 - link: "tracing/visualization/trace"
   tag: "Documentation"
-  text: Understand how to read a Datadog Trace
+  text: "Understand how to read a Datadog Trace"
 ---
 
 APM collects metrics on your app's performance at four levels of granularity: _services_, _resources_, _traces_, and _spans_ level.
@@ -99,13 +99,13 @@ Spans are associated with a [service][8] and optionally a [resource][13]. Each s
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer/#service
 [2]: /tracing/setup/java/#configuration
 [3]: http://pypi.datadoghq.com/trace/docs/index.html#getting-started
-[4]: http://www.rubydoc.info/gems/ddtrace/
-[5]: /developers/metrics/
-[6]: /monitors/monitor_types/apm/
-[7]: /tracing/visualization/services_list/
+[4]: http://www.rubydoc.info/gems/ddtrace
+[5]: /developers/metrics
+[6]: /monitors/monitor_types/apm
+[7]: /tracing/visualization/services_list
 [8]: /tracing/visualization/service
-[9]: /tracing/setup/go/
-[10]: /tracing/setup/python/
-[11]: /tracing/setup/ruby/
+[9]: /tracing/setup/go
+[10]: /tracing/setup/python
+[11]: /tracing/setup/ruby
 [12]: /tracing/faq/how-to-create-a-monitor-over-every-resource-apm
 [13]: /tracing/visualization/resource

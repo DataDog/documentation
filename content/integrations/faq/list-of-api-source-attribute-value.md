@@ -34,6 +34,7 @@ kind: faq
 |Amazon Kinesis|KINESIS|
 |Amazon Kms|KMS|
 |Amazon Lambda|LAMBDA|
+|Amazon App Mesh|AMAZONAPPMESH|
 |Amazon Machine Learning|MACHINELEARNING|
 |Amazon Mq|MQ|
 |Amazon Ops Works|OPSWORKS|
@@ -104,7 +105,7 @@ kind: faq
 |Ganglia|GANGLIA|
 |Gearman|GEARMAN|
 |Git|GIT|
-|Github|GITHUB|
+|GitHub|GITHUB|
 |Go Expvar|GOEXPVAR|
 |Google App Engine|GAE|
 |Google Cloud Big Query|GCPBIGQUERY|

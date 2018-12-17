@@ -1,7 +1,7 @@
 title: "Docs"
 baseURL: "http://localhost:1313/"
 metadataformat: "yaml"
-
+enableGitInfo: true
 canonifyURLs: true
 pygmentsuseclasses: true
 pygmentsCodeFences: true
@@ -57,7 +57,7 @@ languages:
           url: "agent/"
           pre: "nav_agent"
           weight: 40
-        ## Basic Agent usage  
+        ## Basic Agent usage
         - identifier: customnav_agentnav_basic_usage
           name: "Basic Agent Usage"
           url: "agent/basic_agent_usage/"
@@ -750,11 +750,23 @@ languages:
         #  weight: 100
         #  parent: menu_references_tracing
 
-        - identifier: customnav_tracingnav_security
-          name: "Security"
-          url: "tracing/security"
+        # Proxy Configuration
+        - identifier: customnav_tracingnav_proxy_config
+          name: "Proxy Configuration"
+          url: "tracing/proxies/"
           weight: 70
           parent: menu_references_tracing
+        - identifier: customnav_tracingnav_proxy_config_nginx
+          name: "NGINX"
+          url: "tracing/proxies/nginx"
+          weight: 710
+          parent: customnav_tracingnav_proxy_config
+        - identifier: customnav_tracingnav_proxy_config_envoy
+          name: "Envoy"
+          url: "tracing/proxies/envoy"
+          weight: 720
+          parent: customnav_tracingnav_proxy_config
+
 
         # TRACING/APM - Subnav end
 
@@ -1798,6 +1810,23 @@ languages:
           url: "developers/libraries/#apm-tracing-client-libraries"
           weight: 60
           parent: menu_references_tracing
+
+        # Proxy Configuration
+        - identifier: customnav_tracingnav_proxy_config
+          name: "Proxy Configuration"
+          url: "tracing/proxies/"
+          weight: 70
+          parent: menu_references_tracing
+        - identifier: customnav_tracingnav_proxy_config_nginx
+          name: "NGINX"
+          url: "tracing/proxies/nginx"
+          weight: 710
+          parent: customnav_tracingnav_proxy_config
+        - identifier: customnav_tracingnav_proxy_config_envoy
+          name: "Envoy"
+          url: "tracing/proxies/envoy"
+          weight: 720
+          parent: customnav_tracingnav_proxy_config
 
         #- identifier: customnav_tracingnav_faq
         #  name: "FAQ"

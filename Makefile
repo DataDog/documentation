@@ -59,7 +59,7 @@ clean-integrations:  ## remove built integrations files.
 	    -exec rm -rf {} \; ;fi
 	@find ./content/integrations -type f -maxdepth 1 \
 	    -a -not -name '_index.md' \
-			-a -not -name 'adobe_experience_manager.md' \
+		  -a -not -name 'adobe_experience_manager.md' \
 	    -a -not -name 'amazon_guardduty.md' \
 	    -a -not -name 'amazon_vpc.md' \
 	    -a -not -name 'azure_dbformysql.md' \
@@ -71,10 +71,10 @@ clean-integrations:  ## remove built integrations files.
 	    -a -not -name 'jenkins.md' \
 	    -a -not -name 'journald.md' \
 	    -a -not -name 'kubernetes.md' \
-	    -a -not -name 'new_integration.md' \
 	    -a -not -name 'nxlog.md' \
 	    -a -not -name 'rss.md' \
 	    -a -not -name 'rsyslog.md' \
+	    -a -not -name 'sinatra.md' \
 	    -a -not -name 'stunnel.md' \
 	    -a -not -name 'syslog_ng.md' \
 	    -a -not -name 'system.md' \
@@ -134,6 +134,14 @@ hugpython/bin/activate: local/etc/requirements3.txt  ## start python virtual env
 source-helpers: hugpython  ## source the helper functions used in build, test, deploy.
 	@mkdir -p ${EXEDIR}
 	@find ${LOCALBIN}/*  -type f -exec cp {} ${EXEDIR} \;
+	@cp -r local/githooks/* .git/hooks
+	@c++ -Wall -Werror -O2 local/etc/format-links.cpp -o local/bin/format-links
+
+# ARGS=<file> will format that file
+# ARGS=<directory> will recursively format all english markdown files inside <directory>
+# empty ARGS will format all english markdown files inside content/
+link-formatting: source-helpers
+	@local/bin/sh/format-links.sh $(ARGS)
 
 start: clean source-helpers ## start the gulp/hugo server.
 	@echo "starting up..."

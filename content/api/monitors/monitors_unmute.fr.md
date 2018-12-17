@@ -1,16 +1,16 @@
 ---
-title: Activer un monitor
+title: Réactiver un monitor
 type: apicontent
 order: 16.10
-external_redirect: /api/#unmute-a-monitor
+external_redirect: /api/#reactiver-un-monitor
 ---
 
-## Activer un monitor
+## Réactiver un monitor
 
 ##### ARGUMENTS
-* **`scope`** [*optionnel*, *défaut*=**None**]:  
-    Le context auquel appliquer le silence:
-    Par exemple, si votre alerte est groupée par {host}, vous pouvez ignorer 'host:app1'
-* **`all_scopes`** [*optionnel*, *défaut* = **False**]:  
-    Suppression des silences de tous les contextes
+* **`scope`** [*facultatif*, *défaut* = **None**] :
+    Le contexte auquel appliquer la désactivation :
+    Par exemple, si votre alerte est groupée selon {host}, vous pouvez désactiver 'host:app1'.
+* **`all_scopes`** [*facultatif*, *défaut* = **False**] : 
+    Supprimer les désactivations pour tous les contextes
 

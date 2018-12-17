@@ -1,21 +1,22 @@
 ---
-title: Types de Monitors
+title: Types de monitor
 kind: documentation
 aliases:
   - /fr/monitoring
 ---
-{{< whatsnext desc="Choose your type of monitor">}}
-    {{< nextlink href="/monitors/monitor_types/anomaly" >}}Anomaly{{< /nextlink >}}
+{{< whatsnext desc="Choisissez votre type de monitor">}}
+    {{< nextlink href="/monitors/monitor_types/anomaly" >}}Anomalie{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/apm" >}}APM{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/composite" >}}Composite{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/custom_check" >}}Custom Check{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/event" >}}Event{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/host" >}}Host{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/forecasts" >}}Forecasts{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/integration" >}}Integration{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/custom_check" >}}Check custom{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/event" >}}Événement{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/host" >}}Hôte{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/forecasts" >}}Prévisions{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/integration" >}}Intégration{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/log" >}}Log{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/metric" >}}Metric{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/network" >}}Network{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/outlier" >}}Outlier{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/process" >}}Process{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/metric" >}}Métrique{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/network" >}}Réseau{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/outlier" >}}Anomalie{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/process" >}}Processus{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/watchdog" >}}Watchdog{{< /nextlink >}}
 {{< /whatsnext >}}

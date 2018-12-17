@@ -8,22 +8,22 @@ aliases:
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
-  text: Learn how to setup APM tracing with your application
+  text: "Learn how to setup APM tracing with your application"
 - link: "tracing/visualization/services_list/"
   tag: "Documentation"
-  text: Discover the list of services reporting to Datadog
+  text: "Discover the list of services reporting to Datadog"
 - link: "tracing/visualization/service"
   tag: "Documentation"
-  text: Learn more about services in Datadog
+  text: "Learn more about services in Datadog"
 - link: "tracing/visualization/resource"
   tag: "Documentation"
-  text: Dive into your resource performance and traces
+  text: "Dive into your resource performance and traces"
 - link: "tracing/visualization/trace"
   tag: "Documentation"
-  text: Understand how to read a Datadog Trace
+  text: "Understand how to read a Datadog Trace"
 - link: "tracing/visualization/search"
   tag: "Documentation"
-  text: Global search of all your traces with tags
+  text: "Global search of all your traces with tags"
 ---
 
 Switch between the Trace search and the Trace Analytics modes by clicking on the *Trace Mode* button:
@@ -96,16 +96,16 @@ Select or click on a section of the graph to either zoom in the graph or see the
 
 Export your Trace analytic: 
 
-* To create a new [APM monitor][4]:  
+* To create a new [APM monitor][3]:  
     This feature is not available yet.
-* To an existing [Timeboard][5]:  
-    This functionality is in beta, [contact the Datadog support team][6] to activate it for your organization.
+* To an existing [Timeboard][4]:  
+    This functionality is in beta, [contact the Datadog support team][5] to activate it for your organization.
 
 ## Traces in Dashboard 
 
-Export [Trace Analytics][7] from the Trace search or build them directly in your [Dashboard][8] alongside metrics and logs.
+Export [Trace Analytics][6] from the Trace search or build them directly in your [Dashboard][7] alongside metrics and logs.
 
-[Learn more about the timeseries widget][9]
+[Learn more about the timeseries widget][8]
 
 ## Further Reading
 
@@ -113,10 +113,9 @@ Export [Trace Analytics][7] from the Trace search or build them directly in your
 
 [1]: /tracing/visualization/search/#measures
 [2]: /tracing/visualization/search/#facets
-[3]: /tagging
-[4]: /monitors/monitor_types/apm
-[5]: /graphing/dashboards/timeboard
-[6]: /help
-[7]: /graphing/dashboards/widgets/#timeseries
-[8]: /graphing/dashboards
-[9]: /graphing/dashboards/widgets/#timeseries
+[3]: /monitors/monitor_types/apm
+[4]: /graphing/dashboards/timeboard
+[5]: /help
+[6]: /graphing/dashboards/widgets/#timeseries
+[7]: /graphing/dashboards
+[8]: /graphing/dashboards/widgets/#timeseries

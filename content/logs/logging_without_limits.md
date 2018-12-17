@@ -10,10 +10,10 @@ further_reading:
   text: "Perform Log Analytics"
 - link: "logs/processing"
   tag: "Documentation"
-  text: Learn how to process your logs
+  text: "Learn how to process your logs"
 - link: "logs/processing/parsing"
   tag: "Documentation"
-  text: Learn more about parsing
+  text: "Learn more about parsing"
 - link: "https://www.datadoghq.com/blog/logging-without-limits/"
   tag: "Blog"
   text: "Logging without limits blogpost"
@@ -38,11 +38,11 @@ This flexibility is critical in some exceptional situations such as outages, whe
 
 ## Index details
 
-Indexes are located at the bottom of the [pipeline page][5]. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, and the retention period for those logs:
+Indexes are located at the bottom of the [pipeline page][1]. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, and the retention period for those logs:
 
 {{< img src="logs/logging_without_limits/index_details.png" alt="" responsive="true" style="width:70%;">}}
 
-Indexed logs can be used for [faceted searching][1], [Log Analytics][2], [dashboarding][3], and [monitoring][4].
+Indexed logs can be used for [faceted searching][2], [Log Analytics][3], [dashboarding][4], and [monitoring][5].
 
 ## Setup Log Monitors on volumes
 
@@ -117,10 +117,10 @@ Enable or disable them in one click in the Pipeline page:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/?tab=facets#setup
-[2]: /logs/explorer/analytics/
-[3]: /logs/explorer/analytics/#dashboard
-[4]: /monitors/monitor_types/log/
-[5]: https://app.datadoghq.com/logs/pipelines
+[1]: https://app.datadoghq.com/logs/pipelines
+[2]: /logs/explorer/?tab=facets#setup
+[3]: /logs/explorer/analytics
+[4]: /logs/explorer/analytics/#dashboard
+[5]: /monitors/monitor_types/log
 [6]: https://app.datadoghq.com/logs
 [7]: /logs/explorer/search

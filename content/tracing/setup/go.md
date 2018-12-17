@@ -6,11 +6,11 @@ aliases:
 - /tracing/languages/go
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
-  tag: "Github"
-  text: Source code
+  tag: "GitHub"
+  text: "Source code"
 - link: "https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
   tag: "GoDoc"
-  text: Package page
+  text: "Package page"
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
@@ -111,12 +111,12 @@ For more tracer settings, see available options in the [configuration documentat
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
-[2]: /tracing/visualization/
+[2]: /tracing/visualization
 [3]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
 [4]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
 [5]: /tracing/setup
-[6]: /tracing/setup/docker/
-[7]: https://gin-gonic.github.io/gin/
+[6]: /tracing/setup/docker
+[7]: https://gin-gonic.github.io/gin
 [8]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin
 [9]: http://www.gorillatoolkit.org/pkg/mux
 [10]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux
@@ -124,7 +124,7 @@ For more tracer settings, see available options in the [configuration documentat
 [12]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc
 [13]: https://github.com/grpc/grpc-go
 [14]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12
-[15]: https://aws.amazon.com/sdk-for-go/
+[15]: https://aws.amazon.com/sdk-for-go
 [16]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go/aws
 [17]: https://github.com/olivere/elastic
 [18]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/olivere/elastic
@@ -132,7 +132,7 @@ For more tracer settings, see available options in the [configuration documentat
 [20]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/gocql/gocql
 [21]: https://github.com/graph-gophers/graphql-go
 [22]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/graph-gophers/graphql-go
-[23]: https://golang.org/pkg/net/http/
+[23]: https://golang.org/pkg/net/http
 [24]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http
 [25]: https://github.com/julienschmidt/httprouter
 [26]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter

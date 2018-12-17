@@ -25,6 +25,6 @@ And as always, feel free to reach out to [us][3] if you are looking for help wit
 
 **DISCLAIMER**: When removing the host tag you are removing a unique identifier for the submission of [custom metrics][1]. When two datapoints are submitted with the same timestamp/metric/tag combination and do not have unique identifiers the last received/processed value overwrites the value stored. To avoid this edge case, ensure that no host is submitting the same exact metric/tag combination at any given timestamp
 
-[1]: /developers/metrics/custom_metrics/
+[1]: /developers/metrics/custom_metrics
 [2]: /developers/metrics/custom_metrics
 [3]: /help

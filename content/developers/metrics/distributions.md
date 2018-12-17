@@ -4,19 +4,19 @@ kind: documentation
 further_reading:
 - link: "graphing/metrics/distributions"
   tag: "Documentation"
-  text: Learn more about the dedicated UI for distribution metrics 
+  text: "Learn more about the dedicated UI for distribution metrics"
 - link: "developers/libraries"
   tag: "Documentation"
-  text: Official and Community-contributed API and DogStatsD client libraries
+  text: "Official and Community-contributed API and DogStatsD client libraries"
 ---
 
 <div class="alert alert-warning">
-This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Datadog support</a> to enable distribution metrics for your account.
+This feature is in beta. <a href="/help">Contact Datadog support</a> to enable distribution metrics for your account.
 </div>
 
 ## Overview
 
-Distributions measure the statistical distribution of a set of values across one or more hosts. In this way, Distributions are like a "global" version of [Histograms][2].
+Distributions measure the statistical distribution of a set of values across one or more hosts. In this way, Distributions are like a "global" version of [Histograms][1].
 
 Because averages of percentile aggregations are not statistically valid, Distribution metrics work on the raw data across hosts. For each combination of tags, Datadog maintains a timeseries for `min`, `max`, `sum`, `average`, `count`, `p50`, `p75`, `p90`, `p95`, and `p99`.
 
@@ -36,11 +36,11 @@ Under this model, the total number of timeseries created is based on the set of 
 
 #### Example
 
-See the [DogStatsD-specific documentation][1] for code examples.
+See the [DogStatsD-specific documentation][2] for code examples.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd/data_types#distributions
-[2]: /developers/metrics/histograms
+[1]: /developers/metrics/histograms
+[2]: /developers/dogstatsd/data_types#distributions

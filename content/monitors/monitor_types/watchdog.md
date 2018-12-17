@@ -5,10 +5,10 @@ description: "Algorithmically detects application and infrastructure issues."
 further_reading:
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 - link: "watchdog"
   tag: "Documentation"
-  text: Watchdog, algorithmically detect application and infrastructure issues
+  text: "Watchdog, algorithmically detect application and infrastructure issues"
 ---
 
 ## Overview
@@ -20,7 +20,7 @@ Watchdog monitors allow you to set up monitors and receive alert notifications w
 ## Creating a Watchdog Monitor
 * Choose "Watchdog" on the [New Monitor][2] page.
 
-* The graph at the top of the [Create Monitor][4] page shows the number of Watchdog events over time, along with a list of events.
+* The graph at the top of the [Create Monitor][3] page shows the number of Watchdog events over time, along with a list of events.
 
 {{< img src="monitors/monitor_types/watchdog/wmonitor-create-top.png" alt="Watchdog" responsive="true" style="width:80%;">}}
 
@@ -32,7 +32,7 @@ Watchdog monitors allow you to set up monitors and receive alert notifications w
 
 {{< img src="monitors/monitor_types/watchdog/wmonitor-2.png" alt="Select sources" responsive="true" style="width:80%;">}}
 
-* Configure your notification message. You can use [template variables][3] to customize your message.
+* Configure your notification message. You can use [template variables][4] to customize your message.
 
 {{< img src="monitors/monitor_types/watchdog/wmonitor-3.png" alt="Say what's happening" responsive="true" style="width:80%;">}}
 
@@ -61,8 +61,7 @@ Once you receive an alert, you can see more information about the underlying Wat
 
 [1]: /watchdog
 [2]: https://app.datadoghq.com/monitors#/create
-[3]: /monitors/notifications/?tab=is_alertis_warning#variables
-[4]: https://app.datadoghq.com/monitors#create/watchdog
+[3]: https://app.datadoghq.com/monitors#create/watchdog
+[4]: /monitors/notifications/?tab=is_alertis_warning#variables
 [5]: https://app.datadoghq.com/monitors/manage
 [6]: https://app.datadoghq.com/monitors/triggered
-[7]: https://app.datadoghq.com/event/stream

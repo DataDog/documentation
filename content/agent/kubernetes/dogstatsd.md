@@ -4,17 +4,17 @@ kind: documentation
 further_reading:
 - link: "agent/kubernetes/metrics"
   tag: "documentation"
-  text: Kubernetes Metrics
+  text: "Kubernetes Metrics"
 - link: "developers/dogstatsd"
   tag: "documentation"
-  text: DogStatsD
+  text: "DogStatsD"
 ---
 
 To emit custom metrics from your Kubernetes application, use [DogStatsD][1], a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][2] protocol with some differences. See more on the [DogStatsD documentation][1].
 
 ## Use DogStatsD over a Unix Domain Socket
 
-You can use [DogStatsD over a Unix Domain Socket][9]. 
+You can use [DogStatsD over a Unix Domain Socket][3]. 
 
 ### Create a listening socket
 
@@ -24,7 +24,7 @@ Edit your `datadog.yaml` file to set the `dogstatsd_socket` option to the path w
 dogstatsd_socket: /var/run/datadog/dsd.socket
 ```
 
-And [restart your Agent][10]. You can also set the socket path via the `DD_DOGSTATSD_SOCKET` environment variable.
+And [restart your Agent][4]. You can also set the socket path via the `DD_DOGSTATSD_SOCKET` environment variable.
 
 ### Share the socket path with your application
 
@@ -57,7 +57,7 @@ volumes:
   name: dsdsocket
 ```
 
-For more details, see the [DogStatsD over a Unix Domain Socket documentation][9].
+For more details, see the [DogStatsD over a Unix Domain Socket documentation][3].
 
 ## Alternatively, use hostPort
 
@@ -75,7 +75,7 @@ ports:
 
 This enables your applications to send metrics via DogStatsD on port `8125` on whichever node they happen to be running.
 
-**Note**: `hostPort` functionality requires a networking provider that adheres to the [CNI specification][3], such as Calico, Canal, or Flannel. For more information, including a workaround for non-CNI network providers, consult the [Kubernetes documentation][4].
+**Note**: `hostPort` functionality requires a networking provider that adheres to the [CNI specification][5], such as Calico, Canal, or Flannel. For more information, including a workaround for non-CNI network providers, consult the [Kubernetes documentation][6].
 
 To apply the change:
 
@@ -88,7 +88,7 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 
 ### Pass the node's IP address to your application
 
-Your application needs a reliable way to determine the IP address of its host. This is made simple in Kubernetes 1.7, which expands the set of attributes you can [pass to your pods as environment variables][5]. In versions 1.7 and above, you can pass the host IP to any pod by adding an environment variable to the PodSpec. For instance, your application manifest might look like this:
+Your application needs a reliable way to determine the IP address of its host. This is made simple in Kubernetes 1.7, which expands the set of attributes you can [pass to your pods as environment variables][7]. In versions 1.7 and above, you can pass the host IP to any pod by adding an environment variable to the PodSpec. For instance, your application manifest might look like this:
 
 ```yaml
 env:
@@ -106,13 +106,13 @@ Once your application can send metrics via DogStatsD on each node, you can instr
 
 **[See the full list of Datadog DogStatsD Client Libraries][8]**
 
-For instance, if your application is written in Go, import Datadog's [Go library][6], which provides a DogStatsD client library:
+For instance, if your application is written in Go, import Datadog's [Go library][9], which provides a DogStatsD client library:
 
 ```
 import "github.com/DataDog/datadog-go/statsd"
 ```
 
-Before you can add custom counters, gauges, etc., [initialize the StatsD client][7] with the location of the DogStatsD service, depending on the method you have chosen:
+Before you can add custom counters, gauges, etc., [initialize the StatsD client][10] with the location of the DogStatsD service, depending on the method you have chosen:
 
 - Unix Domain Socket: `$DD_DOGSTATSD_SOCKET`
 - hostPort: `$DOGSTATSD_HOST_IP`
@@ -158,11 +158,11 @@ func InfoHandler(rw http.ResponseWriter, req *http.Request) {
 
 [1]: /developers/dogstatsd
 [2]: https://github.com/etsy/statsd
-[3]: https://github.com/containernetworking/cni
-[4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
-[5]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/
-[6]: https://github.com/DataDog/datadog-go
-[7]: https://gist.github.com/johnaxel/fe50c6c73442219c48bf2bebb1154f91
+[3]: /developers/dogstatsd/unix_socket
+[4]: /agent/faq/agent-commands
+[5]: https://github.com/containernetworking/cni
+[6]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
+[7]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information
 [8]: /developers/libraries/#api-and-dogstatsd-client-libraries
-[9]: /developers/dogstatsd/unix_socket/
-[10]: /agent/faq/agent-commands
+[9]: https://github.com/DataDog/datadog-go
+[10]: https://gist.github.com/johnaxel/fe50c6c73442219c48bf2bebb1154f91

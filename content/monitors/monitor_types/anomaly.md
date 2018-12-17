@@ -3,20 +3,20 @@ title: Anomaly monitor
 kind: documentation
 aliases:
     - /guides/anomalies
-description: "Detects anomalous behaviour for a metric based on historical data"
+description: "Detects anomalous behavior for a metric based on historical data"
 further_reading:
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 - link: "monitors/downtimes"
   tag: "Documentation"
-  text: Schedule a dowtime to mute a monitor
+  text: "Schedule a downtime to mute a monitor"
 - link: "monitors/monitor_status"
   tag: "Documentation"
-  text: Consult your monitor status
+  text: "Consult your monitor status"
 ---
 
-Anomaly detection is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week and time-of-day patterns. It is well-suited for metrics with strong trends and recurring patterns that are hard or impossible to monitor with threshold-based alerting.
+Anomaly detection is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week, and time-of-day patterns. It is well-suited for metrics with strong trends and recurring patterns that are hard or impossible to monitor with threshold-based alerting.
 
 For example, anomaly detection can help you discover when your web traffic is unusually low on a weekday afternoon&mdash;even though that same level of traffic would be perfectly normal later in the evening. Or consider a metric measuring the number of logins to your steadily-growing site. As the number is increasing every day, any threshold would be quickly outdated, whereas anomaly detection can quickly alert you if there is an unexpected drop&mdash;potentially indicating an issue with the login system.
 
@@ -24,7 +24,7 @@ For example, anomaly detection can help you discover when your web traffic is un
 
 There is an `anomalies` function in the Datadog query language. When you apply this function to a series, it returns the usual results along with an expected "normal" range.
 
-Anomaly detection monitors provide both "Historical Context" so that you can see how the metric behaved in the past, as well as a separate "Evaluation Window" that is longer than the alerting window to provide you some immediate context. This should provide some insight into what the anomalies algorithm takes into account when calculating the bounds.
+Anomaly detection monitors provide both "Historical Context" (see how the metric behaved in the past) and a separate "Evaluation Window" that is longer than the alerting window to provide immediate context. This provides insight into what the anomalies algorithm takes into account when calculating the bounds.
 
 {{< img src="monitors/monitor_types/anomaly/context.png" alt="historical context" responsive="true" style="width:80%;">}}
 
@@ -34,28 +34,28 @@ To create an anomaly detection monitor, navigate to the [New Monitor][1] page an
 
 {{< img src="monitors/monitor_types/anomaly/monitor_options.png" alt="monitor options" responsive="true" style="width:80%;">}}
 
-You should now see the form above, with a handful of parameters that help determine when to alert on anomalous behavior. If you only care about unusually high or unusually low values, you can choose to only alert on values above or below the bounds. The next selection determines the length of the alert window, which specifies how long a metric needs to be anomalous before an alert triggers. Beware that if the alert window is too short, you might get false alarms due to spurious noise. Finally, the recovery period specifies for how long the metric must be normal before the alert recovers.
+You should now see the form above, with a handful of parameters that help determine when to alert on anomalous behavior. If you only care about unusually high or unusually low values, choose to only alert on values above or below the bounds. The next selection determines the length of the alert window, which specifies how long a metric needs to be anomalous before an alert triggers. Beware that if the alert window is too short, you might get false alarms due to spurious noise. Finally, the recovery period specifies for how long the metric must be normal before the alert recovers.
 
 Complete the rest of the steps in the New Monitor form (**Say what's happening**, etc) and click **Save** to create the Anomaly monitor.
 
 ### Advanced Options
 
-Datadog will automatically analyze the metric you have chosen for your monitor and set several parameters for you. However, these are also available for you to edit under the advanced tab:
+Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available for you to edit under the advanced tab:
 
 {{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="advanced options" responsive="true" style="width:80%;">}}
 
-Here you can specify:
+Options:
 
 * The width of the gray band. "Deviations" is equivalent to the bounds parameter used in the anomalies function in dashboards.
-* The anomaly detection algorithm used. See the [next section below][2].
+* The [anomaly detection algorithm][2] used.
 * The [rollup][3] interval.
 * The percentage of points that need to be anomalous for alerting/warning/recovery.
-* If a seasonal algorithm is chosen, if the seasonality:
-    - is weekly, the algorithm expects that a given day of the week behaves like past same days of the week—e.g., that this Tuesday behaves like past Tuesdays. 
-    - is daily, the algorithm expects that Xpm today behaves like Xpm for past days—e.g., that 5pm today behaves like 5pm yesterday.
-    - is hourly, the algorithm expects that X minutes after the hour this hour behaves like X minutes after the hour from the past several hours—e.g., that 5:15 behaves like 4:15, 3:15, etc.
+* If the seasonality is set to:
+    - Weekly - the algorithm expects that a given day of the week behaves like past days of the week, for example this Tuesday behaves like past Tuesdays. 
+    - Daily - the algorithm expects the same time today behaves like past days, for example 5pm today behaves like 5pm yesterday.
+    - Hourly - the algorithm expects the same minute after the hour behaves like past minutes after the hour, for example 5:15 behaves like 4:15, 3:15, etc.
 
-    Note: Machine learning algorithms require at least twice as much historical data time as the chosen seasonality time to be fully efficient.
+**Note**: Machine learning algorithms require at least twice as much historical data time as the chosen seasonality time to be fully efficient.
 
 ### Anomaly Detection Algorithms
 
@@ -74,7 +74,7 @@ All of the seasonal algorithms may use up to a couple of months of historical da
 
 The figures below illustrate how and when these three algorithms behave differently from one another. In the first figure, _basic_ successfully identifies anomalies that spike out of the normal range of values, but it does not incorporate the repeating, seasonal pattern into its predicted range of values. By contrast, _robust_ and _agile_ both recognize the seasonal pattern and can detect more nuanced anomalies (e.g., if the metric was to flatline near its minimum value).
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_1.png" alt="alg comparision 1" responsive="true" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_1.png" alt="alg comparison 1" responsive="true" style="width:90%;">}}
 
 In the next figure, the metric exhibits a sudden level shift. _Agile_ adjusts more quickly to the level shift than does _robust_. Also, the width of _robust_'s bounds increases to reflect greater uncertainty after the level shift; the width of _agile_'s bounds remains unchanged. _Basic_ is clearly a poor fit for this scenario, where the metric exhibits a strong weekly seasonal pattern.
 
@@ -94,13 +94,13 @@ Finally, we see how each of the algorithms handle a new metric. _Robust_ and _ag
 
 ## Anomaly Monitors via the API
 
-If you are an enterprise-level customer, you can create an anomaly detection monitor via the API with the standard [create-monitor API endpoint][6] if you add the `anomalies` function to the monitor query. The query then follows this formula:
+Enterprise-level customers can create an anomaly detection monitor via the API with the standard [create-monitor API endpoint][6] if you add the `anomalies` function to the monitor query. The query then follows this formula:
 
 ```
 time_aggr(eval_window_length):anomalies(space_aggr:metric{tags}, 'basic/agile/robust', deviation_number, direction='both/above/below', alert_window='alert_window_length', interval=seconds, count_default_zero='true') >= threshold_value
 ```
 
-**Note**: that anomaly detection monitors may only be used by enterprise-level customer subscriptions. If you have a pro-level customer subscription and would like to use the anomaly detection monitoring feature, you can reach out to your customer success representative or [email the Datadog billing team][7] to discuss that further.
+**Note**: Anomaly detection monitors may only be used by enterprise-level customer subscriptions. If you have a pro-level customer subscription and would like to use the anomaly detection monitoring feature, reach out to your customer success representative or email the [Datadog billing team][7].
 
 ### Example
 
@@ -121,11 +121,11 @@ Also, anomaly detection requires historical data to make good predictions. If yo
 
 ### Why can't I use anomaly detection over groups in the dashboard?
 
-Looking at many separate timeseries in a single graph can lead to [spaghettification][8], and the problem gets only worse once the anomaly detection visualization is added in.
+Looking at many separate timeseries in a single graph can lead to [spaghettification][8], and the problem gets only worse once the anomaly detection visualization is added.
 
 {{< img src="monitors/monitor_types/anomaly/spaghetti.png" alt="spaghetti" responsive="true" style="width:80%;">}}
 
-You can, however, add multiple series in a single graph one at a time. The gray envelope only shows up on mouseover.
+However, it is possible to add multiple series to a single graph one at a time. The gray envelope only shows up on mouseover.
 
 {{< img src="monitors/monitor_types/anomaly/anomaly_multilines.png" alt="anomaly multi lines" responsive="true" style="width:80%;" >}}
 
@@ -166,7 +166,7 @@ Anomaly detection uses historical data to establish a baseline for normal behavi
 
 ### What happened to the `adaptive` algorithm?
 
-We used to expose an algorithm called `adaptive` which would try to figure out a metric's inherent seasonality and adjust its predictions accordingly. Now that we automatically detect the seasonality of a metric when setting up a monitor, there is less need for this particular algorithm, which was slower and required more data than the other algorithms. Existing monitors that use the `adaptive` algorithm are untouched and will work as they always have.
+We used to expose an algorithm called `adaptive` which would try to figure out a metric's inherent seasonality and adjust its predictions accordingly. Now that we automatically detect the seasonality of a metric when setting up a monitor, there is less need for this particular algorithm, which was slower and required more data than the other algorithms. Existing monitors that use the `adaptive` algorithm are untouched and continue to work.
 
 ### What is the `count_default_zero` argument?
 
@@ -178,7 +178,7 @@ Not interpolating between counts makes sense if the thing you are counting is so
 
 ### How does setting the rollup interval in "Advanced Options" differ from setting it on the query using `.rollup()`?
 
-If the rollup is set explicitly on the query, the rollup interval option for the anomaly monitor will be ignored.
+If the rollup is set explicitly on the query, the rollup interval option for the anomaly monitor is ignored.
 
 ### I don't care if my metric is anomalous if its value is less than X, can I somehow ignore those anomalies?
 
@@ -186,7 +186,13 @@ Create **A**: an anomaly monitor to alert on values above the bounds; and **B**:
 
 ### Why am I prevented from saving a monitor with a message like ''alert and alert recovery criteria are such that the monitor can be simultaneously in alert and alert recovery states?"
 
-Setting different windows for the alert and alert recovery periods might lead to an ambiguous state. The alert and alert recovery window sizes should be set such that both cannot be satisfied at the same time. For example, setting an alert threshold at 50% for a 2-hour window (i.e., 1 hour has to be anomalous to trigger the alert) and the recovery threshold at 50% for a 10-minute window (i.e., 5 minutes have to be non-anomalous to recover) might result in triggering the alert and the alert recovery states simultaneously. If the last 5 minutes are not anomalous but the 1 hour before that _was_ anomalous, both the alert and the alert recovery will be triggered.
+Setting different windows for the alert and alert recovery periods might lead to an ambiguous state. The alert and alert recovery window sizes should be set such that both cannot be satisfied at the same time. For example, setting an alert threshold at 50% for a 2-hour window (i.e., 1 hour has to be anomalous to trigger the alert) and the recovery threshold at 50% for a 10-minute window (i.e., 5 minutes have to be non-anomalous to recover) might result in triggering the alert and the alert recovery states simultaneously. If the last 5 minutes are not anomalous but the 1 hour before that _was_ anomalous, both the alert and the alert recovery are triggered.
+
+### How does daylight savings affect anomaly detection monitors?  
+
+Datadog monitors use UTC time and by default are agnostic to local time zones (e.g. EST, PST, CST). User activity is shifted relative to UTC time because activity typically remains the same for the user's local time. This could be detected as unexpected anomaly. 
+
+Datadog allows you to configure a timezone for each anomaly detection monitor that automatically corrects for the time shift. See [How to update an anomaly detection monitor to account for local timezone][11] for instructions.
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -198,6 +204,7 @@ Setting different windows for the alert and alert recovery periods might lead to
 [5]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
 [6]: /api/#monitor-create
 [7]: mailto:billing@datadoghq.com
-[8]: https://www.datadoghq.com/blog/anti-patterns-metric-graphs-101/
+[8]: https://www.datadoghq.com/blog/anti-patterns-metric-graphs-101
 [9]: /monitors/monitor_types/metric
 [10]: /monitors/monitor_types/composite
+[11]: /monitors/faq/how-to-update-anomaly-monitor-timezone

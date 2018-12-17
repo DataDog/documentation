@@ -1,6 +1,6 @@
 ---
-title: Graphiques incorporables
+title: Graphiques intégrables
 type: apicode
 order: 10
-external_redirect: /api/#embeddable-graphs
+external_redirect: /api/#graphiques-integrables
 ---

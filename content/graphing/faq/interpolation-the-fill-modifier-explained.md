@@ -46,7 +46,7 @@ Interpolation is not needed:
 
 Interpolation is not performed for multi part queries (e.g. "avg:system.cpu.user{env:prod},avg:system.cpu.user{env:dev}").
 
-The type of interpolation described in this article is also not performed for arithmetic. When evaluating queries, Datadog's backend rolls data up into intervals (one for each point in a timeseries graph, see [this article][2] for more details). If a query involves arithmetic, and one of these intervals is missing data for part of a query, the query system substitutes 0 for that interval. This behavior cannot be controlled with the fill modifier.
+The type of interpolation described in this article is also not performed for arithmetic. When evaluating queries, Datadog's backend rolls data up into intervals (one for each point in a timeseries graph, see [this article][1] for more details). If a query involves arithmetic, and one of these intervals is missing data for part of a query, the query system substitutes 0 for that interval. This behavior cannot be controlled with the fill modifier.
 
 ## How to control interpolation?
 
@@ -68,7 +68,7 @@ Rather, interpolation is about aligning series to make aggregation and multi-lin
 
 **I have disabled interpolation but I see my metrics dropping to 0 which is not expected.**
 
-These artificial dips are caused by front-end visualization enhancement. [See this article for more information][1].
+These artificial dips are caused by front-end visualization enhancement. [See this article for more information][2].
 
 **How to choose the interpolation method?**
 The default interpolation method (which is chosen based on a metric's type) is usually fine, but it is sometimes desirable to override these defaults.
@@ -78,5 +78,5 @@ Linear interpolation is a great fit for metrics reported on a steady basis from 
 Last makes sense for instance if you send datapoints only when the value of the thing you measure changes.
 Null prevents graphs from displaying interpolated values 5 min after the last real value, etc.
 
-[1]: /graphing/faq/i-see-unexpected-drops-to-zero-on-my-graph-why
-[2]: /graphing/functions/
+[1]: /graphing/functions
+[2]: /graphing/faq/i-see-unexpected-drops-to-zero-on-my-graph-why

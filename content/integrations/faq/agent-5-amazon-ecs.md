@@ -56,7 +56,7 @@ aws ecs register-task-definition --cli-input-json file://path/to/dd-agent-ecs.js
 
 #### Create or Modify your IAM Policy
 
-1. Add those permissions to your [Datadog IAM policy][6] in order to collect Amazon ECS metrics: 
+1. Add those permissions to your [Datadog IAM policy][6] in order to collect Amazon ECS metrics:
 
   * `ecs:ListClusters`: List available clusters.
   * `ecs:ListContainerInstances`: List instances of a cluster.
@@ -71,7 +71,7 @@ aws ecs register-task-definition --cli-input-json file://path/to/dd-agent-ecs.js
 6. Expand the **Inline Policies** section. Click the link to create a new inline policy.
 7. Choose **Custom Policy** and press the button.
 8. For **Policy Name** enter ```dd-agent-policy```. Copy the following text into the **Policy Document**:
-  
+
   ```json
    {
      "Version": "2012-10-17",
@@ -99,7 +99,7 @@ aws ecs register-task-definition --cli-input-json file://path/to/dd-agent-ecs.js
 
 #### Run the Agent as a Daemon Service
 
-Ideally you want the Datadog Agent to load on one container on each EC2 instance. The easiest way to achieve this is to run the Datadog Agent as a [Daemon Service][9].
+Ideally you want the Datadog Agent to load on one container on each EC2 instance. The easiest way to achieve this is to run the Datadog Agent as a [Daemon Service][8].
 
 ##### Schedule a Daemon Service in AWS using Our ECS Task
 
@@ -114,15 +114,14 @@ If you're not using APM or Logs, you are finished. Otherwise, point your applica
 
 ##### Dynamic detection and monitoring of running services
 
-Datadog's [Autodiscovery][10] can be used in conjunction with ECS and Docker to automatically discover and monitor running tasks in your environment.
+Datadog's [Autodiscovery][9] can be used in conjunction with ECS and Docker to automatically discover and monitor running tasks in your environment.
 
 [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_GetStarted.html
-[2]: https://aws.amazon.com/cli/
+[2]: https://aws.amazon.com/cli
 [3]: /json/dd-agent-ecs.json
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html#ecs-config-s3
-[6]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
+[6]: /integrations/amazon_web_services/#installation
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ecs.html
-[8]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html
-[9]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_daemon
-[10]: https://docs.datadoghq.com/agent/autodiscovery/
+[8]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_daemon
+[9]: /agent/autodiscovery

@@ -21,7 +21,7 @@ Via the "histogram_percentiles" line of the configuration file of the Agent, get
 
 * histogram_percentiles: 0.95, 0.75
 
-[More about histogram][5]
+[More about histogram][4]
 
 ## Local Aggregations
 
@@ -40,10 +40,10 @@ Histograms are computed every 10 seconds on a host per host basis by the datadog
 * Making a change to increase tag complexity (adding additional tags to be more specific) leads to changes in the behavior of a rolled up metric visualization
     * EX: Whereas before the change METRIC_NAME.avg (without any tags) would be aggregating across all raw points (statsd takes all the raw datapoints, aggregates it and then ships over a single metric stream), adding a tag like region (US, EU) tag causes statsd to bin raw datapoints into two region bins, aggregate them, and ship over two streams. This means when graphing METRIC_NAME.avg AVG by * means an aggregate across the two streams rather than a single one
 
-[Read more about the Datadog histograms characteristics][4]
+[Read more about the Datadog histograms characteristics][5]
 
 [1]: /developers/dogstatsd
 [2]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
-[3]: /developers/libraries/
-[4]: /developers/faq/characteristics-of-datadog-histograms
-[5]: /developers/metrics/#histograms
+[3]: /developers/libraries
+[4]: /developers/metrics/#histograms
+[5]: /developers/faq/characteristics-of-datadog-histograms

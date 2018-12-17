@@ -3,4 +3,6 @@ title: How can I monitor host uptime?
 kind: faq
 ---
 
-Start by creating a [host monitor](/monitors/monitor_types/host/) scoped to a set of hosts (which can range from a single host to all hosts in a Datadog account). Then use the [monitor uptime widget](/monitors/monitor_uptime_widget/) to track and visualize host level uptime.
+Start by creating a [host monitor][1] scoped to a set of hosts (which can range from a single host to all hosts in a Datadog account). Then use the [monitor uptime widget][2] to track and visualize host level uptime.
+[1]: /monitors/monitor_types/host
+[2]: /monitors/monitor_uptime_widget

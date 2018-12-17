@@ -158,8 +158,8 @@ Note: comme la fonction log logarithmique n'accepte pas les valeurs négatives, 
 
 ### Superposer des événements pour un contexte supplémentaire
 
-Ajoutez des événements du système associé pour ajouter encore plus de contexte à votre graphique. Un exemple consisterait à ajouter des validations Github, des déploiements Jenkins ou des événements de création Docker. Cliquez simplement sur le bouton Overlay Events et entrez une requête pour trouver et afficher vos événements.
-Pour montrer quelque chose d'une source telle que Github, utilisez `sources: github`. Pour tous les événements avec le tag `role:web`, utilisez `tag:role:web`.
+Ajoutez des événements du système associé pour ajouter encore plus de contexte à votre graphique. Un exemple consisterait à ajouter des validations GitHub, des déploiements Jenkins ou des événements de création Docker. Cliquez simplement sur le bouton Overlay Events et entrez une requête pour trouver et afficher vos événements.
+Pour montrer quelque chose d'une source telle que GitHub, utilisez `sources: github`. Pour tous les événements avec le tag `role:web`, utilisez `tag:role:web`.
 
 {{< img src="graphing/index/overlay_events.png" alt="Overlay Events" responsive="true" style="width:75%;" >}}
 

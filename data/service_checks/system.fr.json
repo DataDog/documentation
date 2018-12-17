@@ -4,16 +4,16 @@
         "check": "datadog.agent.up",
         "statuses": ["ok", "critical"],
         "groups": ["host"],
-        "name": "L'Agent est UP",
-        "description": "Renvoie OK si l'Agent fonctionne correctement. Des alertes sont créées si l'hôte ne répond pas."
+        "name": "Agent disponible",
+        "description": "Renvoie `OK` si l'Agent fonctionne correctement. Des alertes sont créées si l'hôte ne répond pas."
     },
     {
         "agent_version": "5.1.0",
         "check": "process.up",
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host", "process"],
-        "name": "Les processus sont UP",
-        "description": "Renvoie OK si la vérification est dans les seuils d'avertissement, CRITICAL si elle est en dehors des seuils critiques et WARNING si elle est en dehors des seuils d'avertissement."
+        "name": "Processus disponible",
+        "description": "Renvoie `OK` si le check ne dépasse pas les seuils d'avertissement, renvoie `WARNING` s'il dépasse les seuils d'avertissement et renvoie `CRITICAL` s'il dépasse les seuils critiques."
     },
     {
         "agent_version": "5.0.0",
@@ -21,7 +21,7 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "instance", "url"],
         "name": "HTTP",
-        "description": "Renvoie CRITICAL si l'Agent ne peut pas établir de connexion HTTP avec l'URL. Retourne OK si la connexion est réussie."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable d'établir de connexion HTTP avec l'URL ou renvoie `OK` si la connexion est établie."
     },
     {
         "agent_version": "5.0.0",
@@ -29,7 +29,7 @@
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host", "instance", "url"],
         "name": "HTTP - SSL",
-        "description": "Renvoie CRITICAL si le certificat SSL a expiré. Renvoie WARNING si le certificat SSL expire en deçà du seuil configuré. Retourne OK sinon."
+        "description": "Renvoie `CRITICAL` si le certificat SSL a expiré, renvoie `WARNING` si le certificat SSL expire avant le seuil configuré ou renvoie `OK` pour les autres cas."
     },
     {
         "agent_version": "5.0.0",
@@ -37,14 +37,14 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "instance", "port", "target_host"],
         "name": "TCP",
-        "description": "Renvoie CRITICAL si l'Agent ne peut pas établir de connexion TCP avec l'URL. Retourne OK si la connexion est réussie."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable d'établir de connexion TCP avec l'URL ou renvoie `OK` si la connexion est établie."
     },
     {
         "agent_version": "5.3.0",
         "check": "ntp.in_sync",
         "statuses": ["ok", "critical", "unknown"],
         "groups": ["host"],
-        "name": "Clock in Sync",
-        "description": "Renvoie CRITICAL si l'horloge de l'host est supérieure au seuil configuré à partir de l'heure NTP. Renvoie UNKNOWN si l'agent ne peut pas se connecter au serveur NTP. Retourne OK sinon."
+        "name": "Horloge synchronisée",
+        "description": "Renvoie `CRITICAL` si l'horloge de l'hôte dépasse le seuil configuré à partir de l'heure NTP, renvoie `UNKNOWN` si l'Agent n'est pas capable de se connecter au serveur NTP ou renvoie `OK` pour les autres cas."
     }
 ]

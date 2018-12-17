@@ -5,16 +5,16 @@ disable_toc: true
 further_reading:
 - link: "logs/log_collection/#custom-log-collection"
   tag: "Documentation"
-  text: Learn more about Log collection with the Agent
+  text: "Learn more about Log collection with the Agent"
 - link: "logs/processing"
   tag: "Documentation"
-  text: Learn how to process your logs
+  text: "Learn how to process your logs"
 - link: "logs/processing/parsing"
   tag: "Documentation"
-  text: Learn more about parsing
+  text: "Learn more about parsing"
 ---
 
-By default, the [Log Status Remapper][1] relies on the [Syslog severity standards][2].  
+By default, the [Log Status Remapper][1] relies on the [Syslog severity standards][2].
 However there might be other systems having different severity values that you might want to remap on the official log status.
 This is possible thanks to the [Category Processor][3] that defines a mapping between your custom values and the expected ones.
 
@@ -43,11 +43,11 @@ Then add a status remapper that uses the newly created attribute:
 
 Bunyan levels are similar to those of Syslog, but their values are multiplied by 10.
 
-* 10 = TRACE 
-* 20 = DEBUG 
-* 30 = INFO 
-* 40 = WARN 
-* 50 = ERROR 
+* 10 = TRACE
+* 20 = DEBUG
+* 30 = INFO
+* 40 = WARN
+* 50 = ERROR
 * 60 = FATAL
 
 Let's assume the bunyan level is stored in the `bunyan_level` attribute.
@@ -63,6 +63,6 @@ Then add a status remapper that uses the newly created attribute:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/logs/processing/#log-status-remapper
+[1]: /logs/processing/#log-status-remapper
 [2]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[3]: https://docs.datadoghq.com/logs/processing/#category-processor
+[3]: /logs/processing/#category-processor

@@ -6,14 +6,14 @@ aliases:
 - /tracing/languages/ruby/
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-rb"
-  tag: "Github"
-  text: Source code
+  tag: "GitHub"
+  text: "Source code"
 - link: "https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md"
   tag: "Documentation"
-  text: API documentation
+  text: "API documentation"
 - link: "http://gems.datadoghq.com/trace/docs/"
   tag: "Rubydoc"
-  text: Gem documentation
+  text: "Gem documentation"
 - link: "tracing/visualization/"
   tag: "Use the APM UI"
   text: "Explore your services, resources and traces"
@@ -24,22 +24,17 @@ further_reading:
 
 ## Installation and Getting Started
 
-For configuration instructions, and details about using the API, check out Datadog's [API documentation][api docs] and [gem documentation][gem docs].
+For configuration instructions, and details about using the API, check out Datadog's [API documentation][1] and [gem documentation][2].
 
-For descriptions of terminology used in APM, take a look at the [official documentation][visualization docs].
+For descriptions of terminology used in APM, take a look at the [official documentation][3].
 
-For details about contributing, check out the [development guide][development docs].
-
-[api docs]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md
-[gem docs]: http://gems.datadoghq.com/trace/docs/
-[visualization docs]: https://docs.datadoghq.com/tracing/visualization/
-[development docs]: https://github.com/DataDog/dd-trace-rb/blob/master/README.md#development
+For details about contributing, check out the [development guide][4].
 
 ### Setup the Datadog Agent
 
 The Ruby APM tracer sends trace data through the Datadog Agent.
 
-[Install and configure the Datadog Agent][1], see additional documentation for [tracing Docker applications][2].
+[Install and configure the Datadog Agent][5], see additional documentation for [tracing Docker applications][6].
 
 ### Quickstart for Rails applications
 
@@ -54,6 +49,7 @@ The Ruby APM tracer sends trace data through the Datadog Agent.
 3. Create a `config/initializers/datadog.rb` file containing:
 
     ```ruby
+    require 'ddtrace'
     Datadog.configure do |c|
       # This will activate auto-instrumentation for Rails
       c.use :rails
@@ -82,7 +78,7 @@ The Ruby APM tracer sends trace data through the Datadog Agent.
 
 ### Final steps for installation
 
-After setting up, your services will appear on the [APM services page][3] within a few minutes. Learn more about [using the APM UI][4].
+After setting up, your services will appear on the [APM services page][7] within a few minutes. Learn more about [using the APM UI][8].
 
 ## Compatibility
 
@@ -95,7 +91,7 @@ Ruby APM includes support for the following Ruby interpreters:
 
 | Type                               | Version | Support type    |
 | ---------------------------------- | -----   | --------------- |
-| [MRI](https://www.ruby-lang.org/)  | 1.9.1   | Experimental    |
+| [MRI][9]  | 1.9.1   | Experimental    |
 |                                    | 1.9.3   | Fully Supported |
 |                                    | 2.0     | Fully Supported |
 |                                    | 2.1     | Fully Supported |
@@ -103,7 +99,7 @@ Ruby APM includes support for the following Ruby interpreters:
 |                                    | 2.3     | Fully Supported |
 |                                    | 2.4     | Fully Supported |
 |                                    | 2.5     | Fully Supported |
-| [JRuby](http://jruby.org/)         | 9.1.5   | Experimental    |
+| [JRuby][10]         | 9.1.5   | Experimental    |
 
 #### Web Server Compatibility
 
@@ -111,9 +107,9 @@ Ruby APM includes support for the following web servers:
 
 | Type                                           | Version      | Support type    |
 | ---------------------------------------------- | ------------ | --------------- |
-| [Puma](http://puma.io/)                        | 2.16+ / 3.6+ | Fully Supported |
-| [Unicorn](https://bogomips.org/unicorn/)       | 4.8+ / 5.1+  | Fully Supported |
-| [Passenger](https://www.phusionpassenger.com/) | 5.0+         | Fully Supported |
+| [Puma][11]                        | 2.16+ / 3.6+ | Fully Supported |
+| [Unicorn][12]       | 4.8+ / 5.1+  | Fully Supported |
+| [Passenger][13] | 5.0+         | Fully Supported |
 
 #### Library Compatibility
 
@@ -121,89 +117,36 @@ Ruby APM includes support for the following libraries and frameworks:
 
 | Name                           | Versions Supported     | Support type    | How to configure |
 | ------------------------------ | ---------------------- | --------------- | ---------------- |
-| [Active Model Serializers][59] | `>= 0.9`               | Fully Supported | *[Link][58]*     |
-| [Active Record][11]            | `>= 3.2, < 6.0`        | Fully Supported | *[Link][10]*     |
-| [AWS][13]                      | `>= 2.0`               | Fully Supported | *[Link][12]*     |
-| [Concurrent Ruby][61]          | `>= 0.9`               | Fully Supported | *[Link][60]*     |
-| [Dalli][15]                    | `>= 2.7`               | Fully Supported | *[Link][14]*     |
-| [DelayedJob][53]               | `>= 4.1`               | Fully Supported | *[Link][52]*     |
-| [Elastic Search][17]           | `>= 6.0`               | Fully Supported | *[Link][16]*     |
-| [Excon][19]                    | `>= 0.62`              | Fully Supported | *[Link][18]*     |
-| [Faraday][21]                  | `>= 0.14`              | Fully Supported | *[Link][20]*     |
-| [Grape][25]                    | `>= 1.0`               | Fully Supported | *[Link][24]*     |
-| [GraphQL][27]                  | `>= 1.7.9`             | Fully Supported | *[Link][26]*     |
-| [gRPC][23]                     | `>= 1.10`              | Fully Supported | *[Link][22]*     |
-| [MongoDB][29]                  | `>= 2.0, < 2.5`        | Fully Supported | *[Link][28]*     |
-| [MySQL2][55]                   | `>= 0.3.10`            | Fully Supported | *[Link][54]*     |
-| [Net/HTTP][31]                 | *(Any Supported Ruby)* | Fully Supported | *[Link][30]*     |
-| [Racecar][33]                  | `>= 0.3.5`             | Fully Supported | *[Link][32]*     |
-| [Rack][35]                     | `>= 1.4.7`             | Fully Supported | *[Link][34]*     |
-| [Rails][37]                    | `>= 3.2, < 6.0`        | Fully Supported | *[Link][36]*     |
-| [Rake][39]                     | `>= 12.0`              | Fully Supported | *[Link][38]*     |
-| [Redis][41]                    | `>= 3.2, < 4.0`        | Fully Supported | *[Link][40]*     |
-| [Resque][43]                   | `>= 1.0, < 2.0`        | Fully Supported | *[Link][42]*     |
-| [RestClient][57]               | `>= 1.8`               | Fully Supported | *[Link][56]*     |
-| [Sequel][45]                   | `>= 3.41`              | Fully Supported | *[Link][44]*     |
-| [Sidekiq][47]                  | `>= 4.0`               | Fully Supported | *[Link][46]*     |
-| [Sinatra][49]                  | `>= 1.4.5`             | Fully Supported | *[Link][48]*     |
-| [Sucker Punch][51]             | `>= 2.0`               | Fully Supported | *[Link][50]*     |
+| [Active Model Serializers][14] | `>= 0.9`               | Fully Supported | *[Link][15]*     |
+| [Active Record][16]            | `>= 3.2, < 6.0`        | Fully Supported | *[Link][17]*     |
+| [AWS][18]                      | `>= 2.0`               | Fully Supported | *[Link][19]*     |
+| [Concurrent Ruby][20]          | `>= 0.9`               | Fully Supported | *[Link][21]*     |
+| [Dalli][22]                    | `>= 2.7`               | Fully Supported | *[Link][23]*     |
+| [DelayedJob][24]               | `>= 4.1`               | Fully Supported | *[Link][25]*     |
+| [Elastic Search][26]           | `>= 6.0`               | Fully Supported | *[Link][27]*     |
+| [Excon][28]                    | `>= 0.62`              | Fully Supported | *[Link][29]*     |
+| [Faraday][30]                  | `>= 0.14`              | Fully Supported | *[Link][31]*     |
+| [Grape][32]                    | `>= 1.0`               | Fully Supported | *[Link][33]*     |
+| [GraphQL][34]                  | `>= 1.7.9`             | Fully Supported | *[Link][35]*     |
+| [gRPC][36]                     | `>= 1.10`              | Fully Supported | *[Link][37]*     |
+| [MongoDB][38]                  | `>= 2.0, < 2.5`        | Fully Supported | *[Link][39]*     |
+| [MySQL2][40]                   | `>= 0.3.10`            | Fully Supported | *[Link][41]*     |
+| [Net/HTTP][42]                 | *(Any Supported Ruby)* | Fully Supported | *[Link][43]*     |
+| [Racecar][44]                  | `>= 0.3.5`             | Fully Supported | *[Link][45]*     |
+| [Rack][46]                     | `>= 1.4.7`             | Fully Supported | *[Link][47]*     |
+| [Rails][48]                    | `>= 3.2, < 6.0`        | Fully Supported | *[Link][49]*     |
+| [Rake][50]                     | `>= 12.0`              | Fully Supported | *[Link][51]*     |
+| [Redis][52]                    | `>= 3.2, < 4.0`        | Fully Supported | *[Link][53]*     |
+| [Resque][54]                   | `>= 1.0, < 2.0`        | Fully Supported | *[Link][55]*     |
+| [RestClient][56]               | `>= 1.8`               | Fully Supported | *[Link][57]*     |
+| [Sequel][58]                   | `>= 3.41`              | Fully Supported | *[Link][59]*     |
+| [Sidekiq][60]                  | `>= 4.0`               | Fully Supported | *[Link][61]*     |
+| [Sinatra][62]                  | `>= 1.4.5`             | Fully Supported | *[Link][63]*     |
+| [Sucker Punch][64]             | `>= 2.0`               | Fully Supported | *[Link][65]*     |
 
 *Fully Supported* support indicates all tracer features are available.
 
 *Experimental* indicates most features should be available, but unverified.
-
-[10]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#active-record
-[11]: https://github.com/rails/rails/tree/master/activerecord
-[12]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#aws
-[13]: https://github.com/aws/aws-sdk-ruby
-[14]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#dalli
-[15]: https://github.com/petergoldstein/dalli
-[16]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#elastic-search
-[17]: https://github.com/elastic/elasticsearch-ruby
-[18]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#excon
-[19]: https://github.com/excon/excon
-[20]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#faraday
-[21]: https://github.com/lostisland/faraday
-[22]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#grpc
-[23]: https://github.com/grpc/grpc/tree/master/src/ruby
-[24]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#grape
-[25]: https://github.com/ruby-grape/grape
-[26]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#graphql
-[27]: https://github.com/rmosolgo/graphql-ruby
-[28]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#mongodb
-[29]: https://github.com/mongodb/mongo-ruby-driver
-[30]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#nethttp
-[31]: https://ruby-doc.org/stdlib-2.4.0/libdoc/net/http/rdoc/Net/HTTP.html
-[32]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#racecar
-[33]: https://github.com/zendesk/racecar
-[34]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#rack
-[35]: https://github.com/rack/rack
-[36]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#rails
-[37]: https://github.com/rails/rails
-[38]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#rake
-[39]: https://github.com/ruby/rake
-[40]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#redis
-[41]: https://github.com/redis/redis-rb
-[42]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#resque
-[43]: https://github.com/resque/resque
-[44]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sequel
-[45]: https://github.com/jeremyevans/sequel
-[46]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sidekiq
-[47]: https://github.com/mperham/sidekiq
-[48]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sinatra
-[49]: https://github.com/sinatra/sinatra
-[50]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sucker-punch
-[51]: https://github.com/brandonhilkert/sucker_punch
-[52]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#delayedjob
-[53]: https://github.com/collectiveidea/delayed_job
-[54]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#mysql2
-[55]: https://github.com/brianmario/mysql2
-[56]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#rest-client
-[57]: https://github.com/rest-client/rest-client
-[58]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#active-model-serializers
-[59]: https://github.com/rails-api/active_model_serializers
-[60]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#concurrent-ruby
-[61]: https://github.com/ruby-concurrency/concurrent-ruby
 
 ## Configuration
 
@@ -246,7 +189,7 @@ Datadog.configure do |c|
 end
 ```
 
-For more tracer settings, check out the [API documentation][6].
+For more tracer settings, check out the [API documentation][66].
 
 ### Processing pipeline
 
@@ -254,16 +197,76 @@ The processing pipeline allows you to modify traces before they are sent to the 
 
 It provides **filtering** for removing spans that match certain criteria, and **processing** for modifying spans.
 
-For more details about how to activate and configure the processing pipeline, check out the [API documentation][9].
+For more details about how to activate and configure the processing pipeline, check out the [API documentation][67].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup
-[2]: /tracing/setup/docker/
-[3]: https://app.datadoghq.com/apm/services
-[4]: https://docs.datadoghq.com/tracing/visualization/
-[6]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#tracer-settings
-[7]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#priority-sampling
-[9]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#processing-pipeline
+[1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md
+[2]: http://gems.datadoghq.com/trace/docs
+[3]: /tracing/visualization
+[4]: https://github.com/DataDog/dd-trace-rb/blob/master/README.md#development
+[5]: /tracing/setup
+[6]: /tracing/setup/docker
+[7]: https://app.datadoghq.com/apm/services
+[8]: /tracing/visualization
+[9]: https://www.ruby-lang.org
+[10]: http://jruby.org
+[11]: http://puma.io
+[12]: https://bogomips.org/unicorn
+[13]: https://www.phusionpassenger.com
+[14]: https://github.com/rails-api/active_model_serializers
+[15]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#active-model-serializers
+[16]: https://github.com/rails/rails/tree/master/activerecord
+[17]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#active-record
+[18]: https://github.com/aws/aws-sdk-ruby
+[19]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#aws
+[20]: https://github.com/ruby-concurrency/concurrent-ruby
+[21]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#concurrent-ruby
+[22]: https://github.com/petergoldstein/dalli
+[23]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#dalli
+[24]: https://github.com/collectiveidea/delayed_job
+[25]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#delayedjob
+[26]: https://github.com/elastic/elasticsearch-ruby
+[27]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#elastic-search
+[28]: https://github.com/excon/excon
+[29]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#excon
+[30]: https://github.com/lostisland/faraday
+[31]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#faraday
+[32]: https://github.com/ruby-grape/grape
+[33]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#grape
+[34]: https://github.com/rmosolgo/graphql-ruby
+[35]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#graphql
+[36]: https://github.com/grpc/grpc/tree/master/src/ruby
+[37]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#grpc
+[38]: https://github.com/mongodb/mongo-ruby-driver
+[39]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#mongodb
+[40]: https://github.com/brianmario/mysql2
+[41]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#mysql2
+[42]: https://ruby-doc.org/stdlib-2.4.0/libdoc/net/http/rdoc/Net/HTTP.html
+[43]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#nethttp
+[44]: https://github.com/zendesk/racecar
+[45]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#racecar
+[46]: https://github.com/rack/rack
+[47]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#rack
+[48]: https://github.com/rails/rails
+[49]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#rails
+[50]: https://github.com/ruby/rake
+[51]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#rake
+[52]: https://github.com/redis/redis-rb
+[53]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#redis
+[54]: https://github.com/resque/resque
+[55]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#resque
+[56]: https://github.com/rest-client/rest-client
+[57]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#rest-client
+[58]: https://github.com/jeremyevans/sequel
+[59]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sequel
+[60]: https://github.com/mperham/sidekiq
+[61]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sidekiq
+[62]: https://github.com/sinatra/sinatra
+[63]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sinatra
+[64]: https://github.com/brandonhilkert/sucker_punch
+[65]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sucker-punch
+[66]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#tracer-settings
+[67]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#processing-pipeline
