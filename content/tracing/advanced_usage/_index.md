@@ -1010,6 +1010,10 @@ Distributed tracing is enabled by default for all supported integrations (see [C
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+Distributed tracing is enabled by default. 
 
 [1]: /help
 {{% /tab %}}
@@ -1201,6 +1205,10 @@ Once the sampling priority has been set, it cannot be changed. This is done auto
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+Priority sampling is enabled by default. 
 
 [1]: /help
 {{% /tab %}}
