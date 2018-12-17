@@ -9,7 +9,7 @@ Some of the API endpoints are rate limited. Once you exceed a certain number of 
 
 For rate limited API endpoints we return headers so you can know how close you are to your limit. If you exceed your limit, review these headers to determine when you are able to try again.
 
-Rate limits can be increased from defaults by [contacting the Datadog Support team][1].
+Rate limits can be increased from defaults by [contacting the Datadog support team][1].
 
 Regarding API rate limit policy:
 
