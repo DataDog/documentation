@@ -10,16 +10,16 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is currently in Private Beta. Ask your Sales representative or Customer Success Manager to have it enabled.
+This feature is in private beta. Ask your sales representative or customer success manager to have it enabled.
 </div>
 
 ## Roles
 
 Roles categorize users and define what account permissions those users have, such as what data they can read or what account assets they can modify. By default, Datadog offers three roles, and you can create custom roles so you can define a better mapping between your users and their permissions.
 
-For example, within Log Management you can specify which users can read which log data, and which users can manage log-related account assets, like pipelines, indexes, archives, etc.
+For example, within Log Management you can specify which users can read which pieces of log data, and which users can manage log-related account assets, like pipelines, indexes, archives, etc.
 
-By granting permissions to roles, any user who is associated with that role receives that permission. When users are associated with multiple roles, they receive all the permissions granted to each of their roles. The more roles a user is associated with, the more access they will have within a Datadog account.
+By granting permissions to roles, any user who is associated with that role receives that permission. When users are associated with multiple roles, they receive all the permissions granted to each of their roles. The more roles a user is associated with, the more access they have within a Datadog account.
 
 ## Out of the Box Roles
 
@@ -31,11 +31,11 @@ The following roles are available out of the box. By default, users are associat
 | Datadog Standard Role  | Has read permissions on all data and write permissions on most assets in a Datadog account. |
 | Datadog Read Only Role | Has read permissions on all data and write permissions on no assets in a Datadog account.   |
 
-Users who are associated with any of these roles will, by default, be able to query on all log data in a Datadog account. Users who are associated with the Datadog Admin or Standard Roles will, by default, be able to create or modify all log-related account assets. But the Datadog Standard and Read Only Roles can be modified to limit their permissions.
+Users who are associated with any of these roles will, by default, be able to query on all log data in a Datadog account. Users who are associated with the Datadog Admin or Standard Roles are, by default, able to create or modify all log-related account assets. But the Datadog Standard and Read-Only Roles can be modified to limit their permissions.
 
 ## Custom Roles
 
-Today, custom roles are imported via SAML integrations from Identity Providers: Datadog can receive the user groups from your IdP and automatically generate roles to match those user groups. In this case, users who sign in via the IdP will automatically be associated with those roles and will have the permissions that are granted to those roles. 
+Custom roles are imported via SAML integrations from identity providers: Datadog receives the user groups from your IdP and automatically generates roles to match those user groups. In this case, users who sign in via the IdP are automatically associated with those roles and have the permissions that are granted to those roles. 
 
 Alternatively, you can also use our "Role" API to create roles, and associate users with those roles.
 
@@ -59,7 +59,7 @@ The following permissions can be granted to manage write access on various log-r
 
 {{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="Grant write access on index exclusion filters to specific roles" responsive="true" style="width:75%;" >}}
 
-* **logs_write_pipelines**: Grants a role the ability to create and modify log processing pipelines. This includes setting matching filters for what logs should enter the processing pipeline, setting the name of the pipeline, and limiting which roles have write access on the processors within that pipeline (logs_write_processors). This permission can be granted or revoked from a role via [the Role API][2].
+* **logs_write_pipelines**: Grants a role the ability to create and modify log processing pipelines. This includes setting matching filters for what logs should enter the processing pipeline, setting the name of the pipeline, and limiting which roles have write access on the processors within that pipeline (`logs_write_processors`). This permission can be granted or revoked from a role via [the Role API][2].
 
 * **logs_write_processors**: Grants a role the ability to create or modify the processors within a processing pipeline. This permission can be granted to a role in [the Processing Pipelines page of the Datadog app][1] by editing a processing pipeline and adding a role to the "Grant editing Processors of this index to" field (screenshot below).
 
@@ -69,15 +69,15 @@ The following permissions can be granted to manage write access on various log-r
 
 ## Getting Started with RBAC
 
-By default, existing users will already be associated with one of the three out-of-the-box Datadog Admin, Standard, or Read Only Roles, so all users will already have permissions to read on all logs, and Admin or Standard users will already have write permissions on log-related account assets.
+By default, existing users are already associated with one of the three out-of-the-box Datadog Admin, Standard, or Read-Only Roles, so all users already have permissions to read all logs, and Admin or Standard users already have write permissions on log-related account assets.
 
-In order to start limiting these permissions for existing users, you should create custom roles and assign existing users to those roles. Then you can take any of the following actions to limit their permissions to those of the custom roles:
+In order to start limiting these permissions for existing users, create custom roles and assign existing users to those roles. Then you can take any of the following actions to limit their permissions to those of the custom roles:
 
-* Remove users from the Datadog Standard or Read Only Roles via [the Role API][2].
+* Remove users from the Datadog Standard or Read-Only Roles via [the Role API][2].
 
-* Remove permissions from the Datadog Standard or Read Only Roles via [the Role API][2].
+* Remove permissions from the Datadog Standard or Read-Only Roles via [the Role API][2].
 
-* Delete the Datadog Standard or Read Only Roles via [the Role API][2].
+* Delete the Datadog Standard or Read-Only Roles via [the Role API][2].
 
 
 [1]: https://app.datadoghq.com/logs/pipelines
