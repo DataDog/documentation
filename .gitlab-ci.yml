@@ -107,7 +107,7 @@ index_algolia:
   stage: post-deploy
   environment: "live"
   script:
-    - cp ./docsdatadoghq.json /etc/
+    - cp ./local/etc/docsdatadoghq.json /etc/
     - index_docsearch_algolia
   only:
     - schedules
