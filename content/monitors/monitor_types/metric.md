@@ -80,13 +80,9 @@ further_reading:
 7. Opt to **automatically resolve the monitor from a triggered state**.
     In general you'll want to leave this option off as you only want an alert to be resolved when it's fixed.
 
-    The most common use-case for this option is when you have very sparse counters, e.g. for errors. When errors stop occurring, the metric stops reporting. This prevents the monitor from resolving because there are no more values to trigger a resolution. A **Recovery threshold** can also be set. This threshold is added to your monitor to define an additional condition to a monitor's recovery from alert or warning states.
+    The most common use-case for this option is when you have very sparse counters, e.g. for errors. When errors stop occurring, the metric stops reporting. This prevents the monitor from resolving because there are no more values to trigger a resolution. A [recovery threshold][7] can also be set.
 
-    When you set up a threshold metric monitor, you get alerted when a metric passes the alert threshold. The recovery threshold adds a condition to the monitor's recovery such that it only enters recovered state once it has passed the recovery threshold.
-
-    **Note**: Your metric value needs to be strictly below/above the recovery threshold for the monitor to recover
-
-8. Configure your **notification options** Refer to the [Notifications][7] documentation page for detailed options.
+8. Configure your **notification options** Refer to the [Notifications][8] documentation page for detailed options.
 
 ## Further Reading
 
@@ -98,4 +94,5 @@ further_reading:
 [4]: /monitors/monitor_types/forecasts
 [5]: /graphing/#scope
 [6]: /graphing/miscellaneous/functions
-[7]: /monitors/notifications
+[7]: /monitors/faq/what-are-recovery-thresholds
+[8]: /monitors/notifications

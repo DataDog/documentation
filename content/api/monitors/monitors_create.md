@@ -139,7 +139,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
     _These options only apply to metric alerts._
 
     -   **`thresholds`** a dictionary of thresholds by threshold type. There are two threshold types for metric alerts: *critical* and *warning*. *Critical* is defined in the query, but can also be specified in this option. *Warning* threshold can only be specified using the thresholds option.
-    If you want to use recovery thresholds for your monitor, use the attributes `critical_recovery` and `warning_recovery`.
+    If you want to use [recovery thresholds][6] for your monitor, use the attributes `critical_recovery` and `warning_recovery`.
 
             Example: `{'critical': 90, 'warning': 80,  'critical_recovery': 70, 'warning_recovery': 50}`
 
@@ -157,3 +157,4 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 [3]: /monitors/monitor_types/#define-the-conditions
 [4]: /integrations/faq/list-of-api-source-attribute-value
 [5]: /graphing/infrastructure/process
+[6]: /monitors/faq/what-are-recovery-thresholds
