@@ -1,8 +1,8 @@
 ---
-title: Récupérer toutes les Dashboard Lists
+title: Récupérer toutes les listes de dashboards
 type: apicode
 order: 8.2
-external_redirect: /api/#get-all-dashboard-lists
+external_redirect: /api/#recuperer-toutes-les-listes-de-dashboards
 ---
 
 ##### Signature

@@ -1,27 +1,27 @@
 ---
-title: Ajouter un item à une Dashboard List
+title: Ajouter des éléments à une liste de dashboards
 type: apicontent
 order: 8.7
-external_redirect: /api/#add-items-to-a-dashboard-list
+external_redirect: /api/#ajouter-des-elements-a-une-liste-de-dashboards
 ---
 
-## Ajouter un item à une Dashboard List
+## Ajouter des éléments à une liste de dashboards
 
-Rajoute un ou plusieurs dashboards à une dashboard list.
+Ajoutez des dashboards à une liste de dashboards existante.
 
 ##### ARGUMENTS
 
-*   **`dashboards`** [*obligatoire*]:
-    Une liste de dashboards à ajouter à la dashboard list.
-    La définition du dashboard à cette forme:
-    *   **`type`** [*obligatoire*]:  
-        Le type du dashboard
-        Le type doit être:
+*   **`dashboards`** [*obligatoire*] :
+    La liste des dashboards à ajouter à la liste.
+    Les spécifications de dashboards respectent le format suivant :
+    *   **`type`** [*obligatoire*] :
+        Le type du dashboard.
+        Le type doit être correspondre à l'une des valeurs suivantes :
 
         * `"custom_timeboard"`
         * `"custom_screenboard"`
         * `"integration_screenboard"`
         * `"integration_timeboard"`
         * `"host_timeboard"`
-    *   **`id`** [*obligatoire*]:  
-        L'id du dashboard
+    *   **`id`** [*obligatoire*] :
+        L'ID du dashboard.

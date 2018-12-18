@@ -5,7 +5,7 @@
         "check": "ntp.in_sync",
         "statuses": ["ok", "critical", "unknown"],
         "groups": ["host"],
-        "name": "Clock in Sync",
-        "description": "Renvoie CRITICAL si l'horloge de l'hôte est supérieure au seuil configuré à partir de l'heure NTP. Renvoie UNKNOWN si l'agent ne peut pas se connecter au serveur NTP. Retourne OK sinon."
+        "name": "Horloge synchronisée",
+        "description": "Renvoie `CRITICAL` si l'horloge de l'hôte dépasse le seuil configuré à partir de l'heure NTP, renvoie `UNKNOWN` si l'Agent n'est pas capable de se connecter au serveur NTP ou renvoie `OK` pour les autres cas."
     }
 ]

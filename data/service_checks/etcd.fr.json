@@ -15,6 +15,6 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "url"],
         "name": "Healthy",
-        "description": "Renvoie `CRITICAL` lorsqu'un membre n'est pas « sain »."
+        "description": "Renvoie `CRITICAL` lorsqu'un membre n'est pas sain."
     }
 ]
