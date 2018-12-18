@@ -1,9 +1,9 @@
 ---
 git_integration_title: amazon_ecs
-integration_title: AWS ECS
+integration_title: Amazon Elastic Container Service
 kind: integration
 placeholder: true
-title: Datadog-AWS ECS Integration
+title: Datadog-Amazon Elastic Container Service Integration
 ---
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
@@ -33,7 +33,7 @@ You may either configure the task using the [AWS CLI tools](https://aws.amazon.c
 1. Edit dd-agent-ecs.json and update it with the [API_KEY](https://app.datadoghq.com/account/settings#api) for your account.
 1. Execute the following command:
 ```
-aws ecs register-task-definition --cli-input-json file://path/to/dd-agent-ecs.json
+Amazon Elastic Container Service register-task-definition --cli-input-json file://path/to/dd-agent-ecs.json
 ```
 
 ##### Web UI
@@ -115,7 +115,7 @@ yum install -y aws-cli jq
 instance_arn=$(curl -s http://localhost:51678/v1/metadata | jq -r '. | .ContainerInstanceArn' | awk -F/ '{print $NF}' )
 az=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
 region=${az:0:${#az} - 1}
-echo "cluster=$cluster az=$az region=$region aws ecs start-task --cluster \
+echo "cluster=$cluster az=$az region=$region Amazon Elastic Container Service start-task --cluster \
 $cluster --task-definition $task_def --container-instances $instance_arn --region $region" >> /etc/rc.local
 {{< /highlight >}}
 This user script above will:
