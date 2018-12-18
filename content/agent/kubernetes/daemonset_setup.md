@@ -4,13 +4,15 @@ kind: documentation
 further_reading:
 - link: "agent/autodiscovery"
   tag: "documentation"
-  text: "Docker Agent Autodiscovery"
+  text: Docker Agent Autodiscovery
 - link: "agent/kubernetes/host_setup"
   tag: "documentation"
   text: "Kubernetes Host Setup"
 - link: "agent/kubernetes/integrations"
   tag: "documentation"
   text: "Custom Integrations"
+aliases:
+  - /agent/kubernetes/apm
 ---
 
 Take advantage of DaemonSets to deploy the Datadog Agent on all your nodes (or on specific nodes by [using nodeSelectors][1]).
@@ -102,6 +104,18 @@ kubectl create -f datadog-serviceaccount.yaml
 Create the following `datadog-agent.yaml` manifest:
 
 ```yaml
+# datadog-agent.yaml
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: datadog-secret
+  labels:
+    app: "datadog"
+type: Opaque
+data:
+  api-key: "<YOUR_BASE64_ENCODED_DATADOG_API_KEY>"
+---
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
@@ -120,16 +134,21 @@ spec:
         name: datadog-agent
         ports:
           - containerPort: 8125
+            # Custom metrics via DogStatsD - uncomment this section to enable custom metrics collection
             # hostPort: 8125
             name: dogstatsdport
             protocol: UDP
           - containerPort: 8126
+            # Trace Collection (APM) - uncomment this section to enable APM
             # hostPort: 8126
             name: traceport
             protocol: TCP
         env:
           - name: DD_API_KEY
-            value: "<YOUR_API_KEY>"
+            valueFrom:
+              secretKeyRef:
+                name: datadog-secret
+                key: api-key
           - name: DD_COLLECT_KUBERNETES_EVENTS
             value: "true"
           - name: DD_LEADER_ELECTION
@@ -140,6 +159,9 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: status.hostIP
+          # Trace Collection (APM) - comment this section to disable APM
+          - name: DD_APM_ENABLED
+            value: "true"
         resources:
           requests:
             memory: "256Mi"
@@ -238,29 +260,37 @@ Learn more about this in [the Docker log collection documentation][9].
 
 ### Trace Collection
 
-To enable [Trace collection][10] with your DaemonSet:
+To enable trace collection with your DaemonSet:
 
-1. Set the `DD_APM_ENABLED` variable to true in your *env* section:
+1. Set the Node IP and port as environment variables for your application containers:
 
-    ```
-    (...)
-      env:
-        (...)
-        - name: DD_APM_ENABLED
-            value: "true"
-    (...)
-    ```
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+...
+    spec:
+      containers:
+      - name: <CONTAINER_NAME>
+        image: <CONTAINER_IMAGE>/<TAG>
+        env:
+          - name: DD_AGENT_HOST
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
+          - name: DD_TRACE_AGENT_PORT
+            value: "8126"
+```
 
-2. Uncomment the `# hostPort: 8126` line.
+2. Uncomment the `# hostPort: 8126` line in your `datadog-agent.yaml` manifest:
   This exposes the Datadog Agent tracing port on each of your Kubernetes nodes.
 
-  **Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources.
-  Another word of caution: some network plugins don't support `hostPorts` yet, so this won't work. If you use EKS to host your Agent and applications, the `hostPorts` parameter could not work.
+  **Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources. 
+  Another word of caution: some network plugins don't support `hostPorts` yet, so this won't work. If you use EKS to host your Agent and applications, the `hostPorts` parameter could not work. 
   The workaround in this case is to add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. It also means that all ports opened on the container are also opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod will not start. Not all Kubernetes installations allow this.
 
 ### Process Collection
 
-See [Process collection for Kubernetes][11].
+See [Process collection for Kubernetes][10].
 
 ### DogStatsD
 
@@ -275,12 +305,12 @@ To send custom metrics via DogStatsD, set the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` v
 (...)
 ```
 
-Learn more about this in the [Docker DogStatsD documentation][12]
+Learn more about this in the [Docker DogStatsD documentation][11]
 
 To send custom metrics via DogStatsD from your application pods, uncomment the `# hostPort: 8125` line in your `datadog-agent.yaml` manifest. This exposes the DogStatsD port on each of your Kubernetes nodes.
 
-**Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources.
-Another word of caution: some network plugins don't support `hostPorts` yet, so this won't work. If you use EKS to host your Agent and applications, the `hostPorts` parameter could not work.
+**Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources. 
+Another word of caution: some network plugins don't support `hostPorts` yet, so this won't work. If you use EKS to host your Agent and applications, the `hostPorts` parameter could not work. 
 The workaround in this case is to add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. It also means that all ports opened on the container are also opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod will not start. Not all Kubernetes installations allow this.
 
 ## Further Reading
@@ -292,10 +322,9 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: https://kubernetes.io/docs/concepts/configuration/secret
 [5]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information
-[6]: /agent/basic_agent_usage/docker/#environment-variables
-[7]: /agent/autodiscovery
+[6]: /agent/docker/#environment-variables
+[7]: https://docs.datadoghq.com/agent/autodiscovery
 [8]: /logs
 [9]: /logs/docker/#configuration-file-example
-[10]: /tracing/setup/kubernetes
-[11]: /graphing/infrastructure/process/?tab=kubernetes#installation
-[12]: /agent/basic_agent_usage/docker/#dogstatsd-custom-metrics
+[10]: /graphing/infrastructure/process/?tab=kubernetes#installation
+[11]: /agent/docker/#dogstatsd-custom-metrics

@@ -96,9 +96,9 @@ To mount a custom `datadog.yaml` in a container with a ConfigMap, employ the fol
               - key: datadog-yaml
                 path: datadog.yaml 
 [...]
- ```
+```
 
- And in your ConfigMap:
+And in your ConfigMap:
 
 ```yaml
 kind: ConfigMap
@@ -117,7 +117,7 @@ data:
     config_providers:
       - name: kubelet
         polling: true
- ```
+```
 
 
 ## Annotations
