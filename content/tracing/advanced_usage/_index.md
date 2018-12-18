@@ -1092,12 +1092,12 @@ Distributed tracing is enabled by default for all supported integrations (see [C
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
+[1]: 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Distributed tracing is enabled by default. 
 
-[1]: /help
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1287,12 +1287,12 @@ Once the sampling priority has been set, it cannot be changed. This is done auto
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
+[1]: 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Priority sampling is enabled by default. 
 
-[1]: /help
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1301,7 +1301,7 @@ Priority sampling is enabled by default.
 For each generated trace, there are very likely log events written by the monitored functions and applications. 
 The purpose of this section is to explain how the correlation between traces and logs can be improved by automatically adding  a trace id in your logs and then use it in the Datadog platform to show you the exact logs correlated to the observed trace.
 
-{{< img src="/src/images/tracing/logs_in_trace.png" alt="Logs in Traces" responsive="true" style="width:70%;">}}
+{{< img src="tracing/logs_in_trace.png" alt="Logs in Traces" responsive="true" style="width:70%;">}}
 
 {{< tabs >}}
 {{% tab "Java" %}}
