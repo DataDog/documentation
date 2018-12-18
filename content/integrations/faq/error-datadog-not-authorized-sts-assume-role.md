@@ -20,7 +20,8 @@ Check the following points for the AWS account mentioned in the error:
   {{< img src="integrations/faq/aws-error-sts-assume-role-02.png" alt="Datadog AWS integration tile" responsive="true">}}
 5. Add the newly generated AWS External ID to your AWS trust policy:
   {{< img src="integrations/faq/aws-error-sts-assume-role-03.png" alt="AWS Trust Policy" responsive="true">}}
-6. If the error persists, repeat steps 2 through 7 of the [AWS Installation instructions][1].
+6. Note, after the configuration update the error may persist in the UI for a few hours while the changes propagate.
+7. If the error persists, repeat steps 2 through 7 of the [AWS Installation instructions][1].
 
 Still need help? Contact [Datadog support][3].
 
