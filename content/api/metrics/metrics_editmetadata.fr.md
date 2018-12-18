@@ -12,7 +12,7 @@ L'endpoint des métadonnées des métriques vous permet de modifier les champs d
 ##### ARGUMENTS
 
 * **`type`** [*obligatoire*] :
-    [Type de la métrique][1], p. ex. **gauge** ou **rate**.
+    [Type de la métrique][1], p. ex. **jauge** ou **taux**.
 * **`description`** [*facultatif*, *défaut* = **None**] :
     Description de la chaîne de caractères de la métrique par défaut.
 * **`short_name`** [*obligatoire*] :
