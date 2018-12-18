@@ -1,5 +1,5 @@
 ---
-title: Log Patterns (Beta)
+title: Log Patterns
 kind: documentation
 description: "Spot Log Patterns"
 aliases:
