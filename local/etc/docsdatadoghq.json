@@ -73,6 +73,7 @@
         "default_value": "Documentation"
       },
       "lvl1": ".main h1",
+      "lvl2": ".main h2",
       "text": ".main p, table tbody tr td",
       "language": {
         "selector": "/html/@lang",
