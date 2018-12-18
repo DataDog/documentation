@@ -4,6 +4,7 @@ kind: Documentation
 aliases:
   - /tracing/docker/
   - /tracing/setup/docker/
+  - /agent/apm/docker
 further_reading:
 - link: "https://github.com/DataDog/datadog-trace-agent"
   tag: "Github"
@@ -14,8 +15,6 @@ further_reading:
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
-aliases:
-  - /agent/apm/docker
 ---
 
 Enable the [datadog-trace-agent][1] in the `datadog/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.

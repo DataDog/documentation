@@ -53,7 +53,7 @@ Customers with a requirement to avoid storing secrets in plaintext in the Agent'
 [1]: /security
 [2]: /agent
 [3]: /api
-[4]: /agent/network
+[4]: /agent/faq/network
 [5]: /agent/proxy
 [6]: /agent/troubleshooting
 [7]: https://coreos.com/clair

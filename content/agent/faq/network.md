@@ -4,6 +4,7 @@ kind: documentation
 aliases:
     - /account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service
     - /account_management/faq/can-i-whitelist-the-ip-addresses-for-data-coming-from-datadog-via-webhook-and-integrations
+    - /agent/network
 further_reading:
 - link: "logs/"
   tag: "Documentation"
@@ -32,7 +33,7 @@ This decision was taken after the POODLE problem. Versioned endpoints start with
 These domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at:  
 
 * **[https://ip-ranges.datadoghq.com][4]**, or
-* **[https://ip-ranges.datadoghq.eu][8]** for Datadog EU
+* **[https://ip-ranges.datadoghq.eu][5]** for Datadog EU
 
 The information is structured as JSON following this schema:
 
@@ -59,10 +60,10 @@ The information is structured as JSON following this schema:
 
 Each section has a dedicated endpoint at `https://ip-ranges.datadoghq.com/<section>.json` or `https://ip-ranges.datadoghq.eu/<section>.json`, for example:
 
-* [https://ip-ranges.datadoghq.com/logs.json][5] for the IPs used to receive logs data
-* [https://ip-ranges.datadoghq.eu/logs.json][9] for the IPs used to receive logs data for Datadog EU
-* [https://ip-ranges.datadoghq.com/apm.json][6] for the IPs used to receive APM data
-* [https://ip-ranges.datadoghq.eu/apm.json][10] for the IPs used to receive APM data for Datadog EU
+* [https://ip-ranges.datadoghq.com/logs.json][6] for the IPs used to receive logs data
+* [https://ip-ranges.datadoghq.eu/logs.json][7] for the IPs used to receive logs data for Datadog EU
+* [https://ip-ranges.datadoghq.com/apm.json][8] for the IPs used to receive APM data
+* [https://ip-ranges.datadoghq.eu/apm.json][9] for the IPs used to receive APM data for Datadog EU
 
 ### Note
 
@@ -134,7 +135,7 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
 ## Using Proxies
 
-For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][7].
+For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][10].
 
 ## Further Reading
 
@@ -144,9 +145,9 @@ For a detailed configuration guide on proxy setup, see [Agent Proxy Configuratio
 [2]: /graphing/infrastructure/livecontainers
 [3]: /logs
 [4]: https://ip-ranges.datadoghq.com
-[5]: https://ip-ranges.datadoghq.com/logs.json
-[6]: https://ip-ranges.datadoghq.com/apm.json
-[7]: /agent/proxy
-[8]: https://ip-ranges.datadoghq.eu
-[9]: https://ip-ranges.datadoghq.eu/logs.json
-[10]: https://ip-ranges.datadoghq.eu/apm.json
+[5]: https://ip-ranges.datadoghq.eu
+[6]: https://ip-ranges.datadoghq.com/logs.json
+[7]: https://ip-ranges.datadoghq.eu/logs.json
+[8]: https://ip-ranges.datadoghq.com/apm.json
+[9]: https://ip-ranges.datadoghq.eu/apm.json
+[10]: /agent/proxy
