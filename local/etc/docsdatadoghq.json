@@ -74,6 +74,7 @@
       },
       "lvl1": ".main h1",
       "lvl2": ".main h2",
+      "lvl3": ".main h3",
       "text": ".main p, table tbody tr td",
       "language": {
         "selector": "/html/@lang",
@@ -88,6 +89,7 @@
         "default_value": "FAQ"
       },
       "lvl1": ".main h1",
+      "lvl2": ".main h2",
       "text": ".main p, table tbody tr td",
       "language": {
         "selector": "/html/@lang",
@@ -102,6 +104,7 @@
         "default_value": "Integrations"
       },
       "lvl1": ".main h1",
+      "lvl2": ".main h2",
       "text": ".main p, table tbody tr td, .table-metrics tr td",
       "language": {
         "selector": "/html/@lang",
