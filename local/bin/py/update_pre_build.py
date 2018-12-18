@@ -99,11 +99,11 @@ class GitHub:
             return listing
 
     @cache_by_sha
-    def raw(self, list_item, org, repo, branch, dest_dir):
+    def raw(self, list_item, request_session, org, repo, branch, dest_dir):
         headers = self.headers()
         path_to_file = list_item.get('path', '')
         file_out = '{}{}'.format(dest_dir, path_to_file)
-        raw_response = requests.get(
+        raw_response = request_session.get(
             'https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, path_to_file),
             headers=headers
         )
@@ -138,7 +138,7 @@ class PreBuild:
         self.regex_fm = re.compile(r'(?:-{3})(.*?)(?:-{3})(.*)', re.DOTALL)
         self.regex_source = re.compile(r'(\S*FROM_DISPLAY_NAME\s*=\s*\{)(.*?)\}', re.DOTALL)
         self.datafile_json = []
-        self.pool_size = 4
+        self.pool_size = 5
         self.integration_mutations = OrderedDict({
             'hdfs': {'action': 'create', 'target': 'hdfs', 'remove_header': False, 'fm': {'is_public': True, 'kind': 'integration', 'integration_title': 'Hdfs', 'short_description': 'Track cluster disk usage, volume failures, dead DataNodes, and more.'}},
             'mesos': {'action': 'create', 'target': 'mesos', 'remove_header': False, 'fm': {'is_public': True, 'kind': 'integration', 'integration_title': 'Mesos', 'short_description': 'Track cluster resource usage, master and slave counts, tasks statuses, and more.'}},
@@ -196,8 +196,9 @@ class PreBuild:
             listing = gh.list(org, repo, branch, globs)
             dest = '{0}{1}{2}'.format(self.extract_dir, repo, sep)
             with Pool(processes=self.pool_size) as pool:
-                r = [x for x in tqdm(
-                    pool.imap_unordered(partial(gh.raw, org=org, repo=repo, branch=branch, dest_dir=dest), listing))]
+                with requests.Session() as s:
+                  r = [x for x in tqdm(
+                      pool.imap_unordered(partial(gh.raw, request_session=s, org=org, repo=repo, branch=branch, dest_dir=dest), listing))]
 
     def process(self):
         """
