@@ -1,0 +1,148 @@
+{
+  "index_name": "docsearch_docs_prod",
+  "start_urls": [
+    {
+      "url": "https://docs.datadoghq.com/api/",
+      "selectors_key": "api",
+      "tags": [
+        "api"
+      ],
+      "page_rank": 0
+    },
+    {
+      "url": "https://docs.datadoghq.com/fr/api/",
+      "selectors_key": "api",
+      "tags": [
+        "api"
+      ],
+      "page_rank": 0
+    },
+    {
+      "url": "https://docs.datadoghq.com/integrations/",
+      "selectors_key": "integrations",
+      "tags": [
+        "integrations"
+      ],
+      "page_rank": 50
+    },
+    {
+      "url": "https://docs.datadoghq.com/fr/integrations/",
+      "selectors_key": "integrations",
+      "tags": [
+        "integrations"
+      ],
+      "page_rank": 50
+    },
+    {
+      "url": "https://docs.datadoghq.com/",
+      "selectors_key": "docs",
+      "tags": [
+        "docs"
+      ],
+      "page_rank": 100
+    },
+    {
+      "url": "https://docs.datadoghq.com/(?P<section>.*?)/faq/",
+      "selectors_key": "faq",
+      "variables": {
+        "section": ["getting_started", "tagging", "agent", "watchdog", "graphing", "monitors", "tracing", "logs", "developers", "account_management", "security", "glossary"]
+      },
+      "tags": [
+        "faq"
+      ],
+      "page_rank": -100
+    }
+  ],
+  "stop_urls": [
+    "/search/",
+    "/videos/",
+    "/integrations/$",
+    "/faq/$",
+    "\\?",
+    "/api/.+",
+    "\\.json$"
+  ],
+  "sitemap_urls": [
+    "https://docs.datadoghq.com/sitemap.xml"
+  ],
+  "selectors": {
+    "docs": {
+      "lvl0": {
+        "selector": ".h-100 .sidenav-nav > ul >li.open > a",
+        "global": true,
+        "default_value": "Documentation"
+      },
+      "lvl1": ".main h1",
+      "text": ".main p, table tbody tr td",
+      "language": {
+        "selector": "/html/@lang",
+        "type": "xpath",
+        "global": true
+      }
+    },
+    "faq": {
+      "lvl0": {
+        "selector": ".h-100 .sidenav-nav > ul >li.open > a",
+        "global": true,
+        "default_value": "FAQ"
+      },
+      "lvl1": ".main h1",
+      "text": ".main p, table tbody tr td",
+      "language": {
+        "selector": "/html/@lang",
+        "type": "xpath",
+        "global": true
+      }
+    },
+    "integrations": {
+      "lvl0": {
+        "selector": ".h-100 .sidenav-nav > ul >li.open > a",
+        "global": true,
+        "default_value": "Integrations"
+      },
+      "lvl1": ".main h1",
+      "text": ".main p, table tbody tr td, .table-metrics tr td",
+      "language": {
+        "selector": "/html/@lang",
+        "type": "xpath",
+        "global": true
+      }
+    },
+    "api": {
+      "lvl0": {
+        "selector": ".h-100 .sidenav-nav > ul > li > a.toc_open",
+        "global": true,
+        "default_value": "API"
+      },
+      "lvl1": ".main-api h2",
+      "text": ".main-api p, h5[id*='rate-limit'] + ul > li",
+      "language": {
+        "selector": "/html/@lang",
+        "type": "xpath",
+        "global": true
+      }
+    }
+  },
+  "keep_tags": [
+    "code"
+  ],
+  "selectors_exclude": [
+    ".whatsnext",
+    "#en-apprendre-plus",
+    "#further-reading",
+    ".alert-info"
+  ],
+  "conversation_id": [
+    "620036890"
+  ],
+  "custom_settings": {
+    "separatorsToIndex": "_@.",
+    "attributesForFaceting": [
+      "language",
+      "tags"
+    ]
+  },
+  "only_content_level": true,
+  "user_agent": "Googlebot",
+  "nb_hits": 17537
+}
