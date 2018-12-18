@@ -277,8 +277,6 @@ To enable trace collection with your DaemonSet:
                 valueFrom:
                   fieldRef:
                     fieldPath: status.hostIP
-              - name: DD_TRACE_AGENT_PORT
-                value: "8126"
     ```
 
 2. Uncomment the `# hostPort: 8126` line in your `datadog-agent.yaml` manifest:

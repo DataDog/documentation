@@ -622,6 +622,11 @@ languages:
           url: "#custom-tagging"
           weight: 210
           parent: customnav_tracingnav_advanced_usage
+        - identifier: customnav_tracingnav_agent_hostname
+          name: "Change Agent Hostname"
+          url: "#change-agent-hostname"
+          weight: 215
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_manual_tracing
           name: "Manual Instrumentation"
           url: "#manual-instrumentation"

@@ -34,7 +34,7 @@ For details about contributing, check out the [development guide][3].
 This library <strong>MUST</strong> be imported and initialized before any instrumented module. When using a transpiler, you <strong>MUST</strong> import and initialize the tracer library in an external file and then import that file as a whole when building your application. This prevents hoisting and ensures that the tracer library gets imported and initialized before importing any other instrumented module.
 </div>
 
-To begin tracing Node.js applications, first [install and configure the Datadog Agent][4] (see additional documentation for [tracing Docker applications][5]).
+To begin tracing Node.js applications, first [install and configure the Datadog Agent][4], see the additional documentation for [tracing Docker applications][5] or [Kubernetes applications][6].
 
 Next, install the Datadog Tracing library using npm:
 
@@ -49,7 +49,7 @@ Finally, import and initialize the tracer:
 const tracer = require('dd-trace').init()
 ```
 
-See the [tracer settings][6] for the list of initialization options.
+See the [tracer settings][7] for the list of initialization options.
 
 ## Compatibility
 
@@ -57,57 +57,57 @@ Node `^4.7`, `^6.9` and `>=8` are supported by this library. However, it benefit
 
 ### Integrations
 
-APM provides out-of-the-box instrumentation for many popular frameworks and libraries by using a plugin system. If you would like support for a module that is not listed, [contact support][7] to share a request.
+APM provides out-of-the-box instrumentation for many popular frameworks and libraries by using a plugin system. If you would like support for a module that is not listed, [contact support][8] to share a request.
 
-For details about how to how to toggle and configure plugins, check out the [API documentation][8].
+For details about how to how to toggle and configure plugins, check out the [API documentation][9].
 
 #### Web Framework Compatibility
 
 | Module        | Versions    | Support Type    | Notes                        |
 | :----------   | :---------- | :-------------- | :--------------------------- |
-| [express][9]  | 4           | Fully Supported | Supports Sails, Loopback, and [more][10] |
-| [graphql][11] | 0.10 - 14   | Fully Supported | Supports Apollo Server and express-graphql |
-| [hapi][12]     | 2 - 17      | Fully Supported |                              |
-| [koa][13]     | 2           | Fully Supported |                              |
-| [restify][14] | 3 - 7       | Fully Supported |                              |
+| [express][10]  | 4           | Fully Supported | Supports Sails, Loopback, and [more][11] |
+| [graphql][12] | 0.10 - 14   | Fully Supported | Supports Apollo Server and express-graphql |
+| [hapi][13]     | 2 - 17      | Fully Supported |                              |
+| [koa][14]     | 2           | Fully Supported |                              |
+| [restify][15] | 3 - 7       | Fully Supported |                              |
 
 #### Native Module Compatibility
 
 | Module               | Support Type    |
 | :------------------- | :-------------- |
-| [http][15]           | Fully Supported |
-| [https][16]          | Fully Supported |
+| [http][16]           | Fully Supported |
+| [https][17]          | Fully Supported |
 
 #### Data Store Compatibility
 
 | Module                 | Versions    | Support Type    |  Notes              |
 | :----------            | :---------- | :-------------- | :------------------ |
-| [cassandra-driver][17] |             | Coming Soon     |                     |
-| [elasticsearch][18]    | 10 - 15     | Fully Supported |                     |
-| [ioredis][19]          | 2 - 4       | Fully Supported |                     |
-| [memcached][20]        | ^2.2        | Fully Supported |                     |
-| [mongodb-core][21]     | 2 - 3       | Fully Supported | Supports Mongoose   |
-| [mysql][22]            | 2           | Fully Supported |                     |
-| [mysql2][23]           | 1           | Fully Supported |                     |
-| [pg][24]               | 4 - 7       | Fully Supported | `pg-native` support coming soon |
-| [redis][25]            | 0.12 - 2.6  | Fully Supported |                     |
+| [cassandra-driver][18] |             | Coming Soon     |                     |
+| [elasticsearch][19]    | 10 - 15     | Fully Supported |                     |
+| [ioredis][20]          | 2 - 4       | Fully Supported |                     |
+| [memcached][21]        | ^2.2        | Fully Supported |                     |
+| [mongodb-core][22]     | 2 - 3       | Fully Supported | Supports Mongoose   |
+| [mysql][23]            | 2           | Fully Supported |                     |
+| [mysql2][24]           | 1           | Fully Supported |                     |
+| [pg][25]               | 4 - 7       | Fully Supported | `pg-native` support coming soon |
+| [redis][26]            | 0.12 - 2.6  | Fully Supported |                     |
 
 #### Worker Compatibility
 
 | Module           | Versions    | Support Type    | Notes                     |
 | :----------      | :---------- | :-------------- | :------------------------ |
-| [amqp10][26]     | 3           | Fully Supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
-| [amqplib][27]    | 0.5         | Fully Supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
-| [kafka-node][28] |             | Coming Soon     |                           |
-| [rhea][29]       |             | Coming Soon     |                           |
+| [amqp10][27]     | 3           | Fully Supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
+| [amqplib][28]    | 0.5         | Fully Supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
+| [kafka-node][29] |             | Coming Soon     |                           |
+| [rhea][30]       |             | Coming Soon     |                           |
 
 #### Promise Library Compatibility
 
 | Module           | Versions    | Support Type    |
 | :----------      | :---------- | :-------------- |
-| [bluebird][30]   | 2 - 3       | Fully Supported |
-| [q][31]          | 1           | Fully Supported |
-| [when][32]       | 3           | Fully Supported |
+| [bluebird][31]   | 2 - 3       | Fully Supported |
+| [q][32]          | 1           | Fully Supported |
+| [when][33]       | 3           | Fully Supported |
 
 ## Further Reading
 
@@ -118,30 +118,31 @@ For details about how to how to toggle and configure plugins, check out the [API
 [3]: https://github.com/DataDog/dd-trace-js/blob/master/README.md#development
 [4]: /tracing/setup
 [5]: /tracing/setup/docker
-[6]: https://datadog.github.io/dd-trace-js/#tracer-settings
-[7]: /help
-[8]: https://datadog.github.io/dd-trace-js/#integrations
-[9]: https://expressjs.com
-[10]: https://expressjs.com/en/resources/frameworks.html
-[11]: https://github.com/graphql/graphql-js
-[12]: https://hapijs.com
-[13]: https://koajs.com
-[14]: http://restify.com
-[15]: https://nodejs.org/api/http.html
-[16]: https://nodejs.org/api/https.html
-[17]: https://github.com/datastax/nodejs-driver
-[18]: https://github.com/elastic/elasticsearch-js
-[19]: https://github.com/luin/ioredis
-[20]: https://github.com/3rd-Eden/memcached
-[21]: http://mongodb.github.io/node-mongodb-native/core
-[22]: https://github.com/mysqljs/mysql
-[23]: https://github.com/sidorares/node-mysql2
-[24]: https://node-postgres.com
-[25]: https://github.com/NodeRedis/node_redis
-[26]: https://github.com/noodlefrenzy/node-amqp10
-[27]: https://github.com/squaremo/amqp.node
-[28]: https://github.com/SOHU-Co/kafka-node
-[29]: https://github.com/amqp/rhea
-[30]: https://github.com/petkaantonov/bluebird
-[31]: https://github.com/kriskowal/q
-[32]: https://github.com/cujojs/when
+[6]: /agent/kubernetes/daemonset_setup/#trace-collection
+[7]: https://datadog.github.io/dd-trace-js/#tracer-settings
+[8]: /help
+[9]: https://datadog.github.io/dd-trace-js/#integrations
+[10]: https://expressjs.com
+[11]: https://expressjs.com/en/resources/frameworks.html
+[12]: https://github.com/graphql/graphql-js
+[13]: https://hapijs.com
+[14]: https://koajs.com
+[15]: http://restify.com
+[16]: https://nodejs.org/api/http.html
+[17]: https://nodejs.org/api/https.html
+[18]: https://github.com/datastax/nodejs-driver
+[19]: https://github.com/elastic/elasticsearch-js
+[20]: https://github.com/luin/ioredis
+[21]: https://github.com/3rd-Eden/memcached
+[22]: http://mongodb.github.io/node-mongodb-native/core
+[23]: https://github.com/mysqljs/mysql
+[24]: https://github.com/sidorares/node-mysql2
+[25]: https://node-postgres.com
+[26]: https://github.com/NodeRedis/node_redis
+[27]: https://github.com/noodlefrenzy/node-amqp10
+[28]: https://github.com/squaremo/amqp.node
+[29]: https://github.com/SOHU-Co/kafka-node
+[30]: https://github.com/amqp/rhea
+[31]: https://github.com/petkaantonov/bluebird
+[32]: https://github.com/kriskowal/q
+[33]: https://github.com/cujojs/when

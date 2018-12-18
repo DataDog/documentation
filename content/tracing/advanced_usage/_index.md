@@ -286,23 +286,25 @@ Configure your application level tracers to submit traces to a custom Agent host
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The Java Tracing Module automatically looks for and initializes with the ENV variables DD_AGENT_HOST and DD_TRACE_AGENT_PORT:
+The Java Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
 ```bash
-java -javaagent:/path/to/the/dd-java-agent.jar -jar /your/app.jar
+java -javaagent:<DD-JAVA-AGENT-PATH>.jar -jar <YOUR_APPLICATION_PATH>.jar
 ```
 
 You can also use system properties:
 
 ```bash
-java -javaagent:/path/to/the/dd-java-agent.jar \
+java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
      -Ddd.agent.host=$DD_AGENT_HOST \
      -Ddd.agent.port=$DD_TRACE_AGENT_PORT \
-     -jar /your/app.jar
+     -jar <YOUR_APPLICATION_PATH>.jar
 ```
 
 {{% /tab %}}
 {{% tab "Python" %}}
+
+The Python Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
 
 ```python
 import os
@@ -317,6 +319,8 @@ tracer.configure(
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
+The Ruby Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
+
 ```ruby
 Datadog.configure do |c|
   c.tracer hostname: ENV['DD_AGENT_HOST'],
@@ -326,6 +330,8 @@ end
 
 {{% /tab %}}
 {{% tab "Go" %}}
+
+The Go Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
 
 ```go
 package main
@@ -350,6 +356,8 @@ func main() {
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
+
+The NodeJS Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
 
 ```js
 const tracer = require('dd-trace').init({
@@ -1092,7 +1100,7 @@ Distributed tracing is enabled by default for all supported integrations (see [C
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-[1]: 
+[1]: /help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -1287,7 +1295,7 @@ Once the sampling priority has been set, it cannot be changed. This is done auto
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-[1]: 
+[1]: /help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
