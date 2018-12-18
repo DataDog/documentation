@@ -80,7 +80,7 @@ languages:
           parent: customnav_agentnav_basic_usage
         - identifier: customnav_agentnav_docker
           name: "Docker"
-          url: "agent/basic_agent_usage/docker/"
+          url: "agent/docker/"
           weight: 125
           parent: customnav_agentnav_basic_usage
         - identifier: fedora
