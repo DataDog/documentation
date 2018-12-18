@@ -58,7 +58,7 @@ Note: no spaces after the colon or commas in these lists and anything not attach
 
 ## Show events unaggregated
 
-To show your events unaggregated in your event stream, un-check the **Aggregate related events** toggle in the upper right corner of your event stream:
+ To show unaggregated events in your event stream, un-check the **Aggregate related events** toggle in the upper right corner of your event stream:
 
 {{< img src="graphing/events/event_stream_aggregated.png" alt="Aggregated event stream" responsive="true" style="width:50%;" >}}
 
