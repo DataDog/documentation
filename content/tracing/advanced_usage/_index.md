@@ -280,7 +280,7 @@ if (($span = GlobalTracer::get()->getActiveSpan()) !== null){
 {{% /tab %}}
 {{% tab "C++" %}}
 
-Add tags directly to a Span object by calling Span.SetTag(). For example:
+Add tags directly to a span object by calling `Span::SetTag`. For example:
 
 ```cpp
 auto tracer = ...
@@ -954,7 +954,7 @@ Distributed tracing is disabled by default. Refer to the configuration documenta
 
 Distributed tracing is supported in the following frameworks: 
 
-| Framework/Library |                          API Documentation                          |
+| Framework/Library | API Documentation                                                   |
 | ----------------- | :------------------------------------------------------------------ |
 | aiohttp           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#aiohttp  |
 | bottle            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#bottle   |
@@ -977,15 +977,15 @@ Distributed tracing is disabled by default. Refer to the configuration documenta
 
 Distributed tracing is supported in the following frameworks:
 
-| Framework/Library |                                 API Documentation                                     |
-| ----------------- | :------------------------------------------------------------------------------------ |
-| Excon             | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#excon       |
-| Faraday           | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#faraday     |
-| Net/HTTP          | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#nethttp     |
-| Rack              | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#rack        |
-| Rails             | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#rails       |
-| Rest Client       | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#restclient  |
-| Sinatra           | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sinatra     |
+| Framework/Library | API Documentation                                                                    |
+| ----------------- | :----------------------------------------------------------------------------------- |
+| Excon             | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#excon      |
+| Faraday           | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#faraday    |
+| Net/HTTP          | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#nethttp    |
+| Rack              | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#rack       |
+| Rails             | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#rails      |
+| Rest Client       | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#restclient |
+| Sinatra           | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sinatra    |
 
 For more details about how to activate and configure distributed tracing, see the [API documentation][distributed tracing ruby].
 
@@ -1058,7 +1058,7 @@ Coming Soon. Reach out to [the Datadog support team][contact support] to be part
 {{% /tab %}}
 {{% tab "C++" %}}
 
-Distributed tracing can be accomplished by [using the Inject and Extract methods on the tracer](https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter), which accept [generic `Reader` and `Writer` types](https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/propagation.h). Priority sampling (enabled by default) should be on to ensure uniform delivery of spans.
+Distributed tracing can be accomplished by [using the `Inject` and `Extract` methods on the tracer](https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter), which accept [generic `Reader` and `Writer` types](https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/propagation.h). Priority sampling (enabled by default) should be on to ensure uniform delivery of spans.
 
 ```cpp
 // Allows writing propagation headers to a simple map<string, string>.
@@ -1119,7 +1119,7 @@ Priority sampling is disabled by default. To enable it, configure the `priority.
 Current Priority Values (more may be added in the future):
 
 | Sampling Value | Effect                                                                                                     |
-| --------       | :--------------------------------------------------                                                        |
+| -------------- | :--------------------------------------------------------------------------------------------------------- |
 | `SAMPLER_DROP` | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
 | `SAMPLER_KEEP` | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
 | `USER_DROP`    | The user asked to not keep the trace. The Agent will drop it.                                              |
@@ -1167,7 +1167,7 @@ span.context.sampling_priority = USER_REJECT
 
 The following priorities can be used.
 
-| Sampling Value |                                                   Effect                                                   |
+| Sampling Value | Effect                                                                                                     |
 | -------------- | :--------------------------------------------------------------------------------------------------------- |
 | AUTO_REJECT    | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
 | AUTO_KEEP      | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
@@ -1199,8 +1199,8 @@ span.context.sampling_priority = Datadog::Ext::Priority::USER_KEEP
 
 Possible values for the sampling priority tag are:
 
-| Sampling Value | Effect                                                                                                     |
-| --------       | :--------------------------------------------------                                                        |
+| Sampling Value                        | Effect                                                                                                     |
+| ------------------------------------- | :--------------------------------------------------------------------------------------------------------- |
 | `Datadog::Ext::Priority::AUTO_REJECT` | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
 | `Datadog::Ext::Priority::AUTO_KEEP`   | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
 | `Datadog::Ext::Priority::USER_REJECT` | The user asked to not keep the trace. The Agent will drop it.                                              |
@@ -1244,12 +1244,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 Possible values for the sampling priority tag are:
 
-| Sampling Value             | Effect                                                                                                      |
-| -------------------------- | :---------------------------------------------------------------------------------------------------------- |
-| ext.PriorityAutoReject     | The sampler automatically decided to not keep the trace. The Agent will drop it.                            |
-| ext.PriorityAutoKeep       | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side.  |
-| ext.PriorityUserReject     | The user asked to not keep the trace. The Agent will drop it.                                               |
-| ext.PriorityUserKeep       | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                      |
+| Sampling Value         | Effect                                                                                                     |
+| ---------------------- | :--------------------------------------------------------------------------------------------------------- |
+| ext.PriorityAutoReject | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
+| ext.PriorityAutoKeep   | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
+| ext.PriorityUserReject | The user asked to not keep the trace. The Agent will drop it.                                              |
+| ext.PriorityUserKeep   | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
 
 [tracer godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 
@@ -1273,7 +1273,7 @@ span.setTag('sampling.priority', priority.USER_KEEP)
 Possible values for the sampling priority tag are:
 
 | Sampling Value | Effect                                                                                                     |
-| --------       | :--------------------------------------------------                                                        |
+| -------------- | :--------------------------------------------------------------------------------------------------------- |
 | `AUTO_REJECT`  | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
 | `AUTO_KEEP`    | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
 | `USER_REJECT`  | The user asked to not keep the trace. The Agent will drop it.                                              |
@@ -1412,13 +1412,6 @@ Coming Soon. Reach out to [the Datadog support team][contact support] to be part
 {{% tab ".NET" %}}
 
 Coming Soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
-
-[contact support]: https://docs.datadoghq.com/help
-
-{{% /tab %}}
-{{% tab "C++" %}}
-
-Coming Soon. Reach out to [the Datadog support team][contact support] if you're interested in this feature.
 
 [contact support]: https://docs.datadoghq.com/help
 
