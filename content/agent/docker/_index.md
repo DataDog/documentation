@@ -20,7 +20,7 @@ further_reading:
   tag: "Documentation"
   text: Collect your Docker traces
 aliases:
-  - /agent/basic_agent_usage/docker
+  - /agent/docker
 ---
 
 To install the Datadog Container Agent, follow the [Agent Installation Instructions][1] or see the information below. The [official Docker Agent 6 image][2] can also be consulted.

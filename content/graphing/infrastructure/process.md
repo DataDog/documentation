@@ -67,7 +67,7 @@ Follow the instructions for the [Docker Agent][1], passing in the following attr
 * Running the Agent as a container still allows you to collect host processes.
 
 
-[1]: /agent/basic_agent_usage/docker/#run-the-docker-agent
+[1]: /agent/docker/#run-the-docker-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -94,7 +94,7 @@ Refer to the standard [Daemonset installation][2] and the [Docker Agent][3] info
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [2]: /integrations/kubernetes/#installation-via-daemonsets-kubernetes-110
-[3]: /agent/basic_agent_usage/docker/#run-the-docker-agent
+[3]: /agent/docker/#run-the-docker-agent
 {{% /tab %}}
 {{< /tabs >}}
 

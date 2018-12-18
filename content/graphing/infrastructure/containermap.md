@@ -32,4 +32,4 @@ After deploying the [Agent][4], no other configuration is necessary. For collect
 [2]: https://app.datadoghq.com/infrastructure/map?node_type=container
 [3]: /agent/autodiscovery
 [4]: /agent
-[5]: /agent/basic_agent_usage/docker
+[5]: /agent/docker

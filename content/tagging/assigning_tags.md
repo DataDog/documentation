@@ -316,7 +316,7 @@ The following [integration][5] sources create tags automatically in Datadog:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tagging/#defining-tags
-[2]: /agent/basic_agent_usage/docker/#environment-variables
+[2]: /agent/docker/#environment-variables
 [3]: /api
 [4]: /developers/dogstatsd
 [5]: /integrations
@@ -347,7 +347,7 @@ The following [integration][5] sources create tags automatically in Datadog:
 [30]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [31]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
 [32]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
-[33]: /agent/basic_agent_usage/docker/#tagging
+[33]: /agent/docker/#tagging
 [34]: /integrations/dyn
 [35]: /integrations/elastic
 [36]: /integrations/etcd
