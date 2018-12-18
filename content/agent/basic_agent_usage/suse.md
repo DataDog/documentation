@@ -134,4 +134,4 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 
 [1]: https://app.datadoghq.com/account/settings#agent/suse
 [2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
-[3]: /agent/custom_python_package
+[3]: /agent/faq/custom_python_package

@@ -129,4 +129,4 @@ See the instructions on how to [add packages to the embedded Agent][2] for more 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/mac
-[2]: /agent/custom_python_package
+[2]: /agent/faq/custom_python_package
