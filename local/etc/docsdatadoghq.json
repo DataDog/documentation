@@ -138,6 +138,7 @@
   ],
   "custom_settings": {
     "separatorsToIndex": "_@.",
+    "attributeForDistinct": "url_without_anchor",
     "attributesForFaceting": [
       "language",
       "tags"
