@@ -532,7 +532,7 @@ $span->finish();
 {{% /tab %}}
 {{% tab "C++" %}}
 
-To manually instrument your code, install the tracer as in the Setup examples, and then use the tracer object to create Spans.
+To manually instrument your code, install the tracer as in the setup examples, and then use the tracer object to create spans.
 
 ```cpp
 {
@@ -865,7 +865,7 @@ public void ConfigureServices(IServiceCollection services)
 {{% /tab %}}
 {{% tab "C++" %}}
 
-The Datadog C++ tracer currently can only be used through the OpenTracing API. The usage instructions in this document all describe generic OpenTracing functionality.
+The Datadog C++ tracer can only be used through the OpenTracing API. The usage instructions in this document all describe generic OpenTracing functionality.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -1291,7 +1291,7 @@ Coming Soon. Reach out to [the Datadog support team][contact support] to be part
 {{% /tab %}}
 {{% tab "C++" %}}
 
-Priority sampling is enabled by default, and can be disabled in the TracerOptions. You can mark a span to be kept or discarded by setting the tag `sampling.priority`. A value of `0` means reject/don't sample and any value greater than 0 means keep/sample.
+Priority sampling is enabled by default, and can be disabled in the TracerOptions. You can mark a span to be kept or discarded by setting the tag `sampling.priority`. A value of `0` means reject/don't sample. Any value greater than 0 means keep/sample.
 
 ```cpp
 auto tracer = ...

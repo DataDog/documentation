@@ -24,20 +24,20 @@ The APM tracer for C++ applications is in Open Public Beta.
 
 To begin tracing applications written in any language, first [install and configure the Datadog Agent](https://docs.datadoghq.com/tracing/setup).
 
-You will need to compile against [OpenTracing-cpp](https://github.com/opentracing/opentracing-cpp).
+Compile against [OpenTracing-cpp](https://github.com/opentracing/opentracing-cpp).
 
 ## Compatibility
 
-dd-opentracing-cpp needs C++14 to build, but if you use [dynamic loading](#dynamic-loading) then you are instead only limited by OpenTracing's requirement for [C++11 or later](https://github.com/opentracing/opentracing-cpp/#cc98).
+`dd-opentracing-cpp` requires C++14 to build, but if you use [dynamic loading](#dynamic-loading) then you are instead only limited by OpenTracing's requirement for [C++11 or later](https://github.com/opentracing/opentracing-cpp/#cc98).
 
-Supported platforms are: Linux & Mac. If you need Windows support, please let us know.
+Supported platforms include Linux and Mac. If you need Windows support, [contact Datadog support][1].
 
 ## Installation
 
 Datadog tracing can be enabled in one of two ways:
 
 * Compile against dd-opentracing-cpp, where the Datadog lib is compiled in and configured in code
-* Dynamic loading, where the Datadog OpenTracing library is loaded at run-time and configured via JSON
+* Dynamic loading, where the Datadog OpenTracing library is loaded at runtime and configured via JSON
 
 ### Compile against dd-opentracing-cpp
 
@@ -79,7 +79,7 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-Just link against libdd_opentracing and libopentracing (making sure that they are both in your LD_LIBRARY_PATH):
+Link against `libdd_opentracing` and `libopentracing`, making sure that they are both in your `LD_LIBRARY_PATH`:
 
 ```bash
 g++ -o tracer_example tracer_example.cpp -ldd_opentracing -lopentracing
@@ -102,7 +102,7 @@ wget https://github.com/DataDog/dd-opentracing-cpp/releases/download/v0.3.7/linu
 gunzip linux-amd64-libdd_opentracing_plugin.so.gz -c > /usr/local/lib/libdd_opentracing_plugin.so
 ```
 
-Include `<opentracing/dynamic_load.h>` and load the tracer from libdd_opentracing_plugin.so:
+Include `<opentracing/dynamic_load.h>` and load the tracer from `libdd_opentracing_plugin.so`:
 
 ```cpp
 // tracer_example.cpp
@@ -149,7 +149,7 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-Just link against libopentracing (making sure that libopentracing.so is in your LD_LIBRARY_PATH):
+Just link against `libopentracing`, making sure that `libopentracing.so` is in your `LD_LIBRARY_PATH`:
 
 ```bash
 g++ -o tracer_example tracer_example.cpp -lopentracing
