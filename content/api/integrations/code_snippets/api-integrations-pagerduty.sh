@@ -1,4 +1,5 @@
 # Create a new configuration.
+# WARNING: This will replace your current configuration.
 curl -v -X PUT -H "Content-type: application/json" \
 -d '{
       "services": [

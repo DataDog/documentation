@@ -69,13 +69,13 @@ After updating the Postgres YAML file, [restart the Datadog Agent][2].
 
 ### Validation
 
-To verify the result, search for the metrics using the [Metrics Explorer][4]:
+To verify the result, search for the metrics using the [Metrics Explorer][3]:
 
 {{< img src="integrations/faq/sql_metric_explorer.png" alt="sql_metric_explorer" responsive="true" >}}
 
 ### Debugging
 
-[Run the Agent's status subcommand][3] and look for `postgres` under the Checks section:
+[Run the Agent's status subcommand][4] and look for `postgres` under the Checks section:
 
 ```
 postgres
@@ -92,6 +92,6 @@ Additionally, the [Agent's logs][5] may provide useful information.
 
 [1]: /agent/faq/agent-configuration-files/#agent-configuration-directory
 [2]: /agent/faq/agent-commands/?tab=agentv6#restart-the-agent
-[3]: /agent/faq/agent-commands/#agent-status-and-information
-[4]: /graphing/metrics/explorer/
+[3]: /graphing/metrics/explorer
+[4]: /agent/faq/agent-commands/#agent-status-and-information
 [5]: /agent/basic_agent_usage/#log-location

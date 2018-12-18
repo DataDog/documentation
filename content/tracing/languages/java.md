@@ -74,7 +74,7 @@ Datadog officially supports the Java JRE 1.7 and higher of both Oracle JDK and O
 *Note:* Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Tomcat, Jetty, Websphere, Weblogic, etc.
 Also, frameworks like Spring Boot inherently work because it uses a Servlet compatible embedded application server.
 
-Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog Support][5] if you need help.
+Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][5] if you need help.
 
 #### Networking Framework Compatibility
 
@@ -94,7 +94,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 
 **Networking tracing provides:** timing request to response, tags for the request (e.g. response code), error and stacktrace capturing, and distributed tracing.
 
-Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog Support][5] if you need help.
+Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][5] if you need help.
 
 #### Data Store Compatibility
 
@@ -126,7 +126,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 
 **Datastore tracing provides:** timing request to response, query info (e.g. a sanitized query string), and error and stacktrace capturing.
 
-Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog Support][5] if you need help.
+Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][5] if you need help.
 
 #### Other Framework Compatibility
 
@@ -138,13 +138,13 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | JSP Rendering | 2.3+     | Fully Supported | N/A               |
 | Rabbit AMQP   | 2.7+     | Fully Supported | N/A               |
 
-Don't see your desired framework? Datadog is continually adding additional support. Contact [Datadog Support][5] if you need help.
+Don't see your desired framework? Datadog is continually adding additional support. Contact [Datadog support][5] if you need help.
 
 To improve visibility into applications using unsupported frameworks, consider:
 
 * Adding custom instrumentation (with OpenTracing or the `@Trace` annotation).
 * [Submitting a pull request][6] with instrumentation for inclusion in a future release.
-* Contacting [Datadog Support][5] and submitting a feature request.
+* Contacting [Datadog support][5] and submitting a feature request.
 
 ## Configuration
 
