@@ -1,11 +1,11 @@
 ---
-title: Dashboard Lists
+title: Listes de dashboards
 type: apicontent
 order: 8
-external_redirect: /api/#dashboard-lists
+external_redirect: /api/#listes-de-dashboards
 ---
 
-## Dashboard Lists
+## Listes de dashboards
 
-Interagissez avec vos dashboard lists via l'API pour faciliter l'organisation, la recherche et le partage de tous vos dashboards avec votre équipe et votre organisation.
+Interagissez avec vos listes de dashboards via l'API pour faciliter l'organisation, la recherche et le partage de tous vos dashboards avec votre équipe et votre organisation.
 

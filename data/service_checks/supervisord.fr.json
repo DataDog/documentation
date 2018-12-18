@@ -6,7 +6,7 @@
         "statuses": ["ok", "critical"],
         "groups": ["supervisord_server", "host"],
         "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si le check de l'agent est incapable de se connecter au daemon supervisor. Si ce n'est pas le cas, renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si le check de l'Agent n'est pas capable de se connecter au daemon supervisor. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.3.0",

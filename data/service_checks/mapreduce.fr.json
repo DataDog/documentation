@@ -5,8 +5,8 @@
         "groups": ["host"],
         "check": "mapreduce.resource_manager.can_connect",
         "statuses": ["ok", "critical"],
-        "name": "Resource Manager Can Connect",
-        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter a l'instance Resource Manager, sinon renvoie `OK`."
+        "name": "Peut se connecter à Resource Manager",
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Resource Manager. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.3.0",
@@ -14,7 +14,7 @@
         "groups": ["host"],
         "check": "mapreduce.application_master.can_connect",
         "statuses": ["ok", "critical"],
-        "name": "Application Master Can Connect",
-        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter a l'Application Master. Sinon renvoie `OK`."
+        "name": "Peut se connecter à Application Master",
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Application Master. Si ce n'est pas le cas, renvoie `OK`."
     }
 ]
