@@ -3,7 +3,7 @@ title: Tracing Java Applications
 kind: Documentation
 aliases:
 - /tracing/java
-- /tracing/languages/java
+- /tracing/setup/java
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-java"
   tag: "GitHub"

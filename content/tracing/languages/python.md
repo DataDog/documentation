@@ -3,7 +3,7 @@ title: Tracing Python Applications
 kind: Documentation
 aliases:
 - /tracing/python/
-- /tracing/languages/python/
+- /tracing/setup/python/
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-py"
   tag: "GitHub"

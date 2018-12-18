@@ -389,7 +389,7 @@ public class MyClass {
 ```
 
 
-[1]: /tracing/setup/java/#compatibility
+[1]: /tracing/languages/java/#compatibility
 [2]: #opentracing
 [3]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 {{% /tab %}}
@@ -454,7 +454,7 @@ API details of the decorator can be found here:
 
 
 
-[1]: /tracing/setup/python/#compatibility
+[1]: /tracing/languages/python/#compatibility
 [2]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.wrap
 [3]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span
 [4]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#tracer
@@ -493,7 +493,7 @@ end
 For more details about manual instrumentation, check out the [API documentation][2].
 
 
-[1]: /tracing/setup/ruby/#compatibility
+[1]: /tracing/languages/ruby/#compatibility
 [2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -524,7 +524,7 @@ func main() {
 ```
 
 
-[1]: /tracing/setup/go/#compatibility
+[1]: /tracing/languages/go/#compatibility
 [2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -544,7 +544,7 @@ span.finish()
 For more information on manual instrumentation, see the [API documentation][2].
 
 
-[1]: /tracing/setup/nodejs/#compatibility
+[1]: /tracing/languages/nodejs/#compatibility
 [2]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -568,7 +568,7 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 ```
 
 
-[1]: /tracing/setup/dotnet/#compatibility
+[1]: /tracing/languages/dotnet/#compatibility
 {{% /tab %}}
 {{% tab "PHP" %}}
 If you aren’t using libraries supported by automatic instrumentation (see [library compatibility][1]), manually instrument your code.
@@ -593,7 +593,7 @@ $span->finish();
 ```
 
 
-[1]: /tracing/setup/php/#compatibility
+[1]: /tracing/languages/php/#compatibility
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -764,7 +764,7 @@ Notice the above examples only use the OpenTracing classes. Check the [OpenTraci
 
 
 [1]: https://github.com/opentracing/opentracing-java
-[2]: /tracing/setup/java/#configuration
+[2]: /tracing/languages/java/#configuration
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -1086,7 +1086,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 Distributed tracing is enabled by default for all supported integrations (see [Compatibility][1]).
 
 
-[1]: /tracing/setup/nodejs/#compatibility
+[1]: /tracing/languages/nodejs/#compatibility
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -1141,7 +1141,7 @@ public class MyClass {
 }
 ```
 
-[1]: /tracing/setup/java/#configuration
+[1]: /tracing/languages/java/#configuration
 {{% /tab %}}
 {{% tab "Python" %}}
 

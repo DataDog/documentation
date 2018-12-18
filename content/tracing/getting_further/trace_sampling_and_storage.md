@@ -188,4 +188,4 @@ When serialized/flushed to the Agent, the `sampling.priority` is stored in the `
 [5]: http://www.rubydoc.info/gems/ddtrace/#Priority_sampling
 [6]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#priority-sampling
 [7]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer/#Span.SetSamplingPriority
-[8]: /tracing/setup/java/#sampling-distributed-tracing
+[8]: /tracing/languages/java/#sampling-distributed-tracing
