@@ -4,7 +4,7 @@ kind: documentation
 ---
 
 <div class="alert alert-warning">
-This feature is currently in Private Beta. Ask your Sales representative or Customer Success Manager to have it enabled.
+This feature is in private beta. Ask your sales representative or customer success manager to have it enabled.
 </div>
 
 The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them.
