@@ -159,7 +159,6 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: status.hostIP
-          # Trace Collection (APM) - comment this section to disable APM
           - name: DD_APM_ENABLED
             value: "true"
         resources:
