@@ -205,8 +205,8 @@ Classic:
       authors: Jacob Aronoff
 Tracing:
   - C# / .NET:
-    - name: dd-trace-csharp
-      link: https://github.com/DataDog/dd-trace-csharp
+    - name: dd-trace-dotnet
+      link: https://github.com/DataDog/dd-trace-dotnet
       official: true
       notes: NuGet package is `Datadog.Trace`.
       authors: Datadog

@@ -5,7 +5,7 @@ aliases:
   - /tracing/dotnet
   - /tracing/setup/dotnet
 further_reading:
-  - link: "https://github.com/DataDog/dd-trace-csharp"
+  - link: "https://github.com/DataDog/dd-trace-dotnet"
     tag: "GitHub"
     text: "Source code"
   - link: "tracing/visualization/"
@@ -55,7 +55,7 @@ Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Ch
 - Managed libraries: deployed into the Global Assembly Cache (GAC) by the MSI installer, where any .NET Framework application can access them.
 - Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration][2] to set these environment variables.
 
-[1]: https://github.com/DataDog/dd-trace-csharp/releases
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases
 [2]: ?tab=netframeworkonwindows#adding-environment-variables
 {{% /tab %}}
 
@@ -69,7 +69,7 @@ Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][2] to your applicati
 - Managed libraries: deployed together with your application when it is published (via NuGet package).
 - Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration][4] to set these environment variables.
 
-[1]: https://github.com/DataDog/dd-trace-csharp/releases
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases
 [2]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
 [3]: https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package
 [4]: ?tab=netcoreonwindows#adding-environment-variables
@@ -79,19 +79,19 @@ Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][2] to your applicati
 
 Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][1] to your application, matching the package version to the package below. Refer to the [NuGet documentation][2] for instructions on how to add a NuGet package to your application.
 
-Install the .NET Tracer on the host using the using one of the packages available from the `dd-trace-csharp` [releases page][3].
+Install the .NET Tracer on the host using the using one of the packages available from the `dd-trace-dotnet` [releases page][3].
 
 For Debian or Ubuntu, download and install the Debian package:
 
 ```bash
-curl -LO https://github.com/DataDog/dd-trace-csharp/releases/download/v0.5.2-beta/datadog-dotnet-apm_0.5.2_amd64.deb
+curl -LO https://github.com/DataDog/dd-trace-dotnet/releases/download/v0.5.2-beta/datadog-dotnet-apm_0.5.2_amd64.deb
 sudo dpkg -i ./datadog-dotnet-apm_0.5.2_amd64.deb
 ```
 
 For CentOS or Fedora, download and install the RPM package
 
 ```bash
-curl -LO https://github.com/DataDog/dd-trace-csharp/releases/download/v0.5.2-beta/datadog-dotnet-apm-0.5.2-1.x86_64.rpm
+curl -LO https://github.com/DataDog/dd-trace-dotnet/releases/download/v0.5.2-beta/datadog-dotnet-apm-0.5.2-1.x86_64.rpm
 sudo rpm -Uvh datadog-dotnet-apm-0.5.2-1.x86_64.rpm
 ```
 
@@ -99,7 +99,7 @@ A tar archive is available for other distributions:
 
 ```bash
 sudo mkdir -p /opt/datadog
-curl -L https://github.com/DataDog/dd-trace-csharp/releases/download/v0.5.2-beta/datadog-dotnet-apm-0.5.2.tar.gz \
+curl -L https://github.com/DataDog/dd-trace-dotnet/releases/download/v0.5.2-beta/datadog-dotnet-apm-0.5.2.tar.gz \
 | sudo tar xzf - -C /opt/datadog
 ```
 
@@ -115,7 +115,7 @@ apk add libc6-compat
 
 [1]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
 [2]: https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package
-[3]: https://github.com/DataDog/dd-trace-csharp/releases
+[3]: https://github.com/DataDog/dd-trace-dotnet/releases
 [4]: ?tab=netcoreonlinux#adding-environment-variables
 {{% /tab %}}
 
