@@ -5,7 +5,7 @@
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host", "port"],
         "name": "ruok",
-        "description": "Envoie `ruok` au node surveillé. Renvoie `OK` pour une réponse `imok`, renvoie `WARN` pour toute autre réponse et renvoie `CRITICAL` si aucune réponse n'est reçue."
+        "description": "Envoie `ruok` au nœud surveillé. Renvoie `OK` pour une réponse `imok`, renvoie `WARN` pour toute autre réponse et renvoie `CRITICAL` si aucune réponse n'est reçue."
     },
     {
         "agent_version": "5.1.0",

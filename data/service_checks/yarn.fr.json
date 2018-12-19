@@ -6,6 +6,6 @@
 		"check": "yarn.can_connect",
 		"statuses": ["ok", "critical"],
 		"name": "Peut se connecter",
-		"description": "Renvoie CRITICAL si l'agent ne peut pas se connecter à l'URI ResourceManager pour collecter des métriques, sinon OK."
+		"description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'URI ResourceManager pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`."
 	}
 ]

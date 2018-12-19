@@ -6,6 +6,6 @@
         "statuses": ["ok", "critical"],
         "name": "Peut se connecter",
         "groups": ["host", "url"],
-        "description": "Renvoie CRITICAL si l'agent ne peut pas se connecter à  Mesos slave metrics endpoint, sinon OK."
+        "description": "Renvoie CRITICAL si l'Agent n'est pas capable de se connecter au endpoint « Mesos slave metrics ». Si ce n'est pas le cas, renvoie OK."
     }
 ]

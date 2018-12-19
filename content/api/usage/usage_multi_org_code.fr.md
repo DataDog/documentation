@@ -2,7 +2,7 @@
 title: Récupérer l'utilisation de votre compte multi-org
 type: apicode
 order: 23.6
-external_redirect: /api/#get-usage-across-your-multi-org-account
+external_redirect: /api/#recuperer-l-utilisation-de-votre-compte-multi-org
 ---
 
 ##### Signature

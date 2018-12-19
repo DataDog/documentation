@@ -1,8 +1,8 @@
 ---
-title: Créer une Dashboard List
+title: Créer une liste de dashboards
 type: apicode
 order: 8.3
-external_redirect: /api/#create-a-dashboard-list
+external_redirect: /api/#creer-une-liste-de-dashboards
 ---
 
 ##### Signature
