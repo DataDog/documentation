@@ -7,4 +7,4 @@ external_redirect: /api/#graphs
 ## Graphs
 Take [graph][1] snapshots using the API.
 
-[1]: /graphing/
+[1]: /graphing

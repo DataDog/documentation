@@ -2,35 +2,22 @@
 title: Tracing Docker Applications
 kind: Documentation
 aliases:
-- /tracing/docker/
+  - /tracing/docker/
+  - /tracing/setup/docker/
+  - /agent/apm/docker
 further_reading:
 - link: "https://github.com/DataDog/datadog-trace-agent"
   tag: "Github"
   text: Source code
+- link: "agent/apm/ecs"
+  tag: "Documentation"
+  text: "Trace your ECS applications"
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
 ---
 
 Enable the [datadog-trace-agent][1] in the `datadog/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
-
-List of all environment variables available:
-
-| Environment variable       | Description                                                                                   |
-| ------                     | ------                                                                                        |
-| `DD_API_KEY`               | [Datadog API Key][3]                                                                          |
-| `DD_APM_ENABLED`           | When set to `true`, the Datadog Agent accepts trace metrics.                                  |
-| `DD_APM_DD_URL`            | Datadog API endpoint where traces are sent.                                                   |
-| `DD_PROXY_HTTPS`           | Set up the URL for the proxy to use.                                                          |
-| `DD_HOSTNAME`              | Set manually the Agent hostname.                                                              |
-| `DD_BIND_HOST`             | Set the StatsD & receiver hostname.                                                           |
-| `DD_RECEIVER_PORT`         | Port that the Datadog Agent's trace receiver listen on. Default value is `8126`.              |
-| `DD_DOGSTATSD_PORT`        | Set the DogStatsD port.                                                                       |
-| `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers](#tracing-from-other-containers). |
-| `DD_IGNORE_RESOURCE`       | A comma-separated list of resources that the Agent should ignore.                             |
-| `DD_LOG_LEVEL`             | Set the logging level. (`trace`/`debug`/`info`/`warn`/`error`/`critical`/`off`)               |
-| `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions.                                              |
-
 
 ## Tracing from the host
 
@@ -48,6 +35,24 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -e DD_APM_ENABLED=true \
               datadog/agent:latest
 ```
+## Docker APM Environment Variables
+
+List of all environment variables available for tracing with the Docker Agent:
+
+| Environment variable       | Description                                                                                                    |
+| ------                     | ------                                                                                                         |
+| `DD_API_KEY`               | [Datadog API Key][2]                                                                                           |
+| `DD_APM_ENABLED`           | When set to `true`, the Datadog Agent accepts trace metrics.                                                   |
+| `DD_APM_DD_URL`            | Datadog API endpoint where traces are sent.                                                                    |
+| `DD_PROXY_HTTPS`           | Set up the URL for the proxy to use.                                                                           |
+| `DD_HOSTNAME`              | Set manually the Agent hostname.                                                                               |
+| `DD_BIND_HOST`             | Set the StatsD & receiver hostname.                                                                            |
+| `DD_RECEIVER_PORT`         | Port that the Datadog Agent's trace receiver listen on. Default value is `8126`.                               |
+| `DD_DOGSTATSD_PORT`        | Set the DogStatsD port.                                                                                        |
+| `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers](#tracing-from-other-containers).                  |
+| `DD_IGNORE_RESOURCE`       | A comma-separated list of endpoints and resources that the Agent should ignore (i.e. health checks endpoints). |
+| `DD_LOG_LEVEL`             | Set the logging level. (`trace`/`debug`/`info`/`warn`/`error`/`critical`/`off`)                                |
+| `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions.                                                               |
 
 ## Tracing from other containers
 
@@ -92,7 +97,7 @@ Either update the Java Agent configuration via environment variables:
 
 ```bash
 DD_AGENT_HOST=datadog-agent \
-DD_AGENT_PORT=8126 \
+DD_TRACE_AGENT_PORT=8126 \
 java -javaagent:/path/to/the/dd-java-agent.jar -jar /your/app.jar
 ```
 
@@ -163,5 +168,4 @@ tracer.configure(hostname='172.17.0.1', port=8126)
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-trace-agent
-[2]: /agent/basic_agent_usage/docker
-[3]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/account/settings#api

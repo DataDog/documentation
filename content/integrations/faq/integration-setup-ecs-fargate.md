@@ -5,7 +5,7 @@ disable_toc: true
 further_reading:
 - link: "/integrations/ecs_fargate/"
   tag: "Documentation"
-  text: ECS Fargate
+  text: "ECS Fargate"
 - link: "https://www.datadoghq.com/blog/monitor-aws-fargate/"
   tag: "Blog"
   text: "Monitor AWS Fargate applications with Datadog"
@@ -23,7 +23,7 @@ If you already [set up the Container Agent][3] in ECS Fargate, follow these step
 4. Click the **Create new revision** button, then click the **Add container** button.
 5. Enter the **Container name**, **Image**, and any additional preference settings.
 6. Under **Docker labels** add the following:
-    
+
     | Key                           | Value                                           |
     |-------------------------------|-------------------------------------------------|
     | com.datadoghq.ad.instances    | `[{"host": "%%host%%", "port": <PORT_NUMBER>}]` |
@@ -47,7 +47,7 @@ When the updated **Task** displays a **RUNNING** status, use these pages to veri
 ## Examples
 {{< tabs >}}
 {{% tab "Redis - Web UI" %}}
-Use the following table to enter the Docker labels via the [AWS Web Console][4] for a Redis container:
+Use the following table to enter the Docker labels via the [AWS Web Console][1] for a Redis container:
 
 | Key                           | Value                                  |
 |-------------------------------|----------------------------------------|
@@ -55,11 +55,11 @@ Use the following table to enter the Docker labels via the [AWS Web Console][4] 
 | com.datadoghq.ad.check_names  | `["redisdb"]`                          |
 | com.datadoghq.ad.init_configs | `[{}]`                                 |
 
-[4]: https://aws.amazon.com/console/
 
+[1]: https://aws.amazon.com/console
 {{% /tab %}}
 {{% tab "Redis - AWS CLI" %}}
-Use the following JSON under `containerDefinitions` to create a Redis container via the [AWS CLI tools][7].
+Use the following JSON under `containerDefinitions` to create a Redis container via the [AWS CLI tools][1].
 
 ```json
 {
@@ -74,8 +74,8 @@ Use the following JSON under `containerDefinitions` to create a Redis container 
 }
 ```
 
-[7]: https://aws.amazon.com/cli/
 
+[1]: https://aws.amazon.com/cli
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -83,10 +83,9 @@ Use the following JSON under `containerDefinitions` to create a Redis container 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/ecs_fargate/
-[2]: https://docs.datadoghq.com/agent/autodiscovery/?tab=docker#template-source-docker-label-annotations
+[1]: /integrations/ecs_fargate
+[2]: /agent/autodiscovery/?tab=docker#template-source-docker-label-annotations
 [3]: /integrations/ecs_fargate/#container-agent-setup
-[4]: https://aws.amazon.com/console/
+[4]: https://aws.amazon.com/console
 [5]: https://app.datadoghq.com/containers
 [6]: https://app.datadoghq.com/metric/explorer
-[7]: https://aws.amazon.com/cli/

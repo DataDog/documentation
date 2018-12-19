@@ -4,16 +4,16 @@ kind: documentation
 further_reading:
 - link: "monitors/monitor_types"
   tag: "Documentation"
-  text: Learn how to create a monitor
+  text: "Learn how to create a monitor"
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 - link: "monitors/downtimes"
   tag: "Documentation"
-  text: Schedule a downtime to mute a monitor
+  text: "Schedule a downtime to mute a monitor"
 ---
 
-The [Manage Monitors][1] page lets you run an advanced search of all monitors so you can delete, mute, [resolve][5], or edit service tags for selected monitors in bulk. You can also clone or fully edit any individual monitor in the search results.
+The [Manage Monitors][1] page lets you run an advanced search of all monitors so you can delete, mute, [resolve][2], or edit service tags for selected monitors in bulk. You can also clone or fully edit any individual monitor in the search results.
 
 {{< img src="monitors/manage_monitor/manage_monitor_page.png" alt="manage monitor page" responsive="true" >}}
 
@@ -55,11 +55,11 @@ When you need to run a more complex search than the checkboxes allow, use the se
 
 The most common reason to write a query is to search for specific text across all monitor titles and message bodies. A simple search of `postgresql` returns all monitors with `postgresql` anywhere in the title or message body. To search on title or message body, but not both, qualify the search term with the field name, e.g. `title:postgresql`.
 
-Otherwise, you can use boolean operators (AND, OR, and NOT) and parentheses to write complex queries using any monitor fields. The search syntax is very similar to that of [Elasticsearch][2], so it's easiest to describe how it is *not* like Elasticsearch syntax:
+Otherwise, you can use boolean operators (AND, OR, and NOT) and parentheses to write complex queries using any monitor fields. The search syntax is very similar to that of [Elasticsearch][3], so it's easiest to describe how it is *not* like Elasticsearch syntax:
 
 * Regular expressions are not supported
 * Single-character wildcard (`?`) is not supported, but the general wildcard (`*`) is
-* Proximity searches are not supported, but the [fuzzy][3] operator is
+* Proximity searches are not supported, but the [fuzzy][4] operator is
 * Ranges are not supported
 * Boosting is not supported
 
@@ -82,10 +82,10 @@ To edit an individual monitor, hover over it and use the buttons to the far righ
 
 ## Manage Triggered Monitors with group-level granularity
 
-You can mute or [resolve][5] triggered monitors in bulk using the [Triggered Monitors page][4]. It's similar to the [Manage Monitors page](#managing-monitors)-you can find monitors by their attributes using the same easy tickboxes or query syntax-but there are a few differences. Aside from only showing monitors with a triggered status (Alert, Warn, or No Data), the main difference is that the Triggered Monitors page shows a row for _each group_ (i.e. each reporting source) of each monitor.
+You can mute or [resolve][2] triggered monitors in bulk using the [Triggered Monitors page][5]. It's similar to the [Manage Monitors page](#managing-monitors)-you can find monitors by their attributes using the same easy tickboxes or query syntax-but there are a few differences. Aside from only showing monitors with a triggered status (Alert, Warn, or No Data), the main difference is that the Triggered Monitors page shows a row for _each group_ (i.e. each reporting source) of each monitor.
 
 Say you have a monitor called "high latency" that is grouped by host. If there are 20 hosts reporting and 14 have a triggered status, the Triggered Monitor page shows 14 rows if you search for the monitor by title in the query search bar (e.g. `high latency` or `title:
-"high latency"`). This lets you easily mute or [resolve][5] a monitor for some reporting sources, but not all (though of course you can mute or resolve all, too).
+"high latency"`). This lets you easily mute or [resolve][2] a monitor for some reporting sources, but not all (though of course you can mute or resolve all, too).
 
 In writing your search queries, you can use all the same fields available on the Manage Monitors page, even though most of them aren't controllable via tickboxes on the Triggered Monitors page. A few notes on field differences on the Triggered Monitors page:
 
@@ -97,15 +97,15 @@ In writing your search queries, you can use all the same fields available on the
 
 {{< img src="monitors/manage_monitor/monitor-tags.png" alt="Monitor tags" responsive="true" style="width:30%;" >}}
 
-You can choose to add tags directly to your monitors that you can use for filtering on the [triggered][4] or [manage monitor][1] pages, or for [scheduling downtimes][6].
+You can choose to add tags directly to your monitors that you can use for filtering on the [triggered][5] or [manage monitor][1] pages, or for [scheduling downtimes][6].
 
 ## Further Reading 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors/manage
-[2]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax
-[3]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
-[4]: https://app.datadoghq.com/monitors/triggered
-[5]: /monitors/#manually-resolve-your-monitor
+[2]: /monitors/#manually-resolve-your-monitor
+[3]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax
+[4]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
+[5]: https://app.datadoghq.com/monitors/triggered
 [6]: /monitors/downtimes

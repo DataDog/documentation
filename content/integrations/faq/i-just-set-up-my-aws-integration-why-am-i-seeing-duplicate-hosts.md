@@ -13,4 +13,4 @@ Datadog creates aliases for hostnames when there are multiple uniquely identifia
 
 * **Scenario C**: In some rare cases the AWS endpoint that provides the instance-id information that Datadog uses to reconcile agent-based host records with the matching AWS-based host record. Restarting the Agent causes the Agent to attempt to re-sync with the instance-id endpoint. You can confirm the availability of this endpoint by running the following command from the host in question - `curl http://169.254.169.254/latest/meta-data/instance-id`
 
-[1]: /agent/basic_agent_usage/
+[1]: /agent/basic_agent_usage

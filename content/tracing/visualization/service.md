@@ -4,29 +4,29 @@ kind: Documentation
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
-  text: Learn how to setup APM tracing with your application
+  text: "Learn how to setup APM tracing with your application"
 - link: "tracing/visualization/services_list/"
   tag: "Documentation"
-  text: Discover the list of services reporting to Datadog
+  text: "Discover the list of services reporting to Datadog"
 - link: "tracing/visualization/resource"
   tag: "Documentation"
-  text: Dive into your resource performance and traces
+  text: "Dive into your resource performance and traces"
 - link: "tracing/visualization/trace"
   tag: "Documentation"
-  text: Understand how to read a Datadog Trace
+  text: "Understand how to read a Datadog Trace"
 ---
 
 {{< img src="tracing/visualization/service/detailed_service_page.png" alt="Detailed service page" responsive="true" style="width:90%;">}}
 
 ## Overview 
 
-Selecting a service on the services page leads you to the detailed service page. A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM][5]). 
+Selecting a service on the services page leads you to the detailed service page. A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM][1]). 
 
 Consult on this page:
 
 * [Service monitor states](#service-monitor) 
 * [Out of the box graphs](#out-of-the-box-graphs) 
-* [Resources associated to this service][1] 
+* [Resources associated to this service][2] 
 
 ## Service Monitor
 
@@ -34,7 +34,7 @@ Datadog proposes a list of monitors depending on your service type:
 
 {{< img src="tracing/visualization/service/service_monitors.png" alt="Service Monitors" responsive="true" style="width:90%;">}}
 
-Enable them directly or create your own [APM monitors][2].
+Enable them directly or create your own [APM monitors][3].
 
 **Note**: Tag any monitor with `service:<SERVICE_NAME>` to attach it to an APM service.  
 
@@ -47,7 +47,7 @@ Datadog provides out of the box graphs for any given Service:
     *  The amount of **Requests per second**
 * Latency -  Choose to display:
     *  The Avg/p75/p90/p95/p99/Max latency of your traced requests 
-    *  The **Apdex score** for web services; [learn more about Apdex][3]
+    *  The **Apdex score** for web services; [learn more about Apdex][4]
 * Error - Choose to display:
     * The **Total amount of errors** 
     * The amount of **Errors per second** 
@@ -60,7 +60,7 @@ Datadog provides out of the box graphs for any given Service:
 
 ### Export to Timeboard
 
-On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [Timeboard][4]:
+On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [Timeboard][5]:
 
 {{< img src="tracing/visualization/service/save_to_timeboard.png" alt="Save to timeboard" responsive="true" style="width:40%;">}}
 
@@ -76,11 +76,11 @@ Use the top right selector of this graph to zoom on a given percentile of latenc
 
 ## Resources
 
-See the list of resources associated with your service. Resources are particular actions for your services (typically individual endpoints or queries). Read more about resources in [Getting Started with APM][5]. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that the these metric columns are configurable (see image below).
+See the list of resources associated with your service. Resources are particular actions for your services (typically individual endpoints or queries). Read more about resources in [Getting Started with APM][1]. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that the these metric columns are configurable (see image below).
 
 {{< img src="tracing/visualization/service/resources.png" alt="Resources" responsive="true" style="width:90%;">}}
 
-[Refer to the dedicated resource documentation to learn more][1].
+[Refer to the dedicated resource documentation to learn more][2].
 
 ### Filtering the resources list
 Filter your resources list with a query for basic text filtering:
@@ -103,8 +103,8 @@ Choose what to display in your resources list:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/resource
-[2]: /monitors/monitor_types/apm
-[3]: /tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm
-[4]: /graphing/dashboards/timeboard
-[5]: /tracing/visualization
+[1]: /tracing/visualization
+[2]: /tracing/visualization/resource
+[3]: /monitors/monitor_types/apm
+[4]: /tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm
+[5]: /graphing/dashboards/timeboard

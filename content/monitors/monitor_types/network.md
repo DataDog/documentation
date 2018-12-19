@@ -5,13 +5,13 @@ description: "Check the status of TCP/HTTP endpoints"
 further_reading:
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 - link: "monitors/downtimes"
   tag: "Documentation"
-  text: Schedule a dowtime to mute a monitor
+  text: "Schedule a downtime to mute a monitor"
 - link: "monitors/monitor_status"
   tag: "Documentation"
-  text: Consult your monitor status
+  text: "Consult your monitor status"
 ---
 
 Network monitors cover the TCP and HTTP checks available in the Agent. Read
@@ -45,6 +45,6 @@ the [HTTP check documentation][1] for details on Agent configuration.
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/http_check/
+[1]: /integrations/http_check
 [2]: /monitors/monitor_types/metric
 [3]: /monitors/notifications

@@ -41,7 +41,7 @@ The Agent watches for Docker events-container creation, destruction, starts, and
 
 ### Running the Agent Container
 
-No matter what container orchestration platform you use, run a single [docker-dd-agent container][9] on every host in your cluster first. If you use Kubernetes, see the [Kubernetes integration page][3] for instructions on running docker-dd-agent. If you use Amazon ECS, see [its integration page][4].
+No matter what container orchestration platform you use, run a single [docker-dd-agent container][3] on every host in your cluster first. If you use Kubernetes, see the [Kubernetes integration page][4] for instructions on running docker-dd-agent. If you use Amazon ECS, see [its integration page][5].
 
 If you use Docker Swarm, run the following command on one of your manager nodes:
 
@@ -55,11 +55,11 @@ If you use Docker Swarm, run the following command on one of your manager nodes:
       -e SD_BACKEND=docker \
       datadog/docker-dd-agent:latest
 
-Otherwise, see the docker-dd-agent documentation for detailed instructions and a comprehensive list of supported [environment variables][5].
+Otherwise, see the docker-dd-agent documentation for detailed instructions and a comprehensive list of supported [environment variables][6].
 
 **If you want the Agent to auto-discover JMX-based checks**:
 
-1. Use the `datadog/docker-dd-agent:latest-jmx` image. This image is based on `latest`, but it includes a JVM, which the Agent needs in order to run [jmxfetch][10].
+1. Use the `datadog/docker-dd-agent:latest-jmx` image. This image is based on `latest`, but it includes a JVM, which the Agent needs in order to run [jmxfetch][7].
 2. Pass the environment variable `SD_JMX_ENABLE=yes` when starting `datadog/docker-dd-agent:latest-jmx`.
 
 ## Setting up Check Templates
@@ -72,22 +72,22 @@ Storing templates as local files is easy to understand and doesn't require an ex
 
 The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory, which contains default templates for the following checks:
 
-- [Apache][11]
-- [Consul][12]
-- [CouchDB][13]
-- [Couchbase][14]
-- [Elasticsearch][15]
-- [Etcd][16]
-- [Kubernetes_state][17]
-- [Kube_dns][18]
-- [Kyototycoon][19]
-- [Memcached][20]
-- [Redis][21]
-- [Riak][22]
+- [Apache][8]
+- [Consul][9]
+- [CouchDB][10]
+- [Couchbase][11]
+- [Elasticsearch][12]
+- [Etcd][13]
+- [Kubernetes_state][14]
+- [Kube_dns][15]
+- [Kyototycoon][16]
+- [Memcached][17]
+- [Redis][18]
+- [Riak][19]
 
 These templates may suit you in basic cases, but if you need to use custom Agent check configurations-say you want to enable extra check options, use different container identifiers, or use [template variable indexing](#supported-template-variables))- you'll have to write your own auto-conf files. You can then provide those in a few ways:
 
-1. Add them to each host that runs docker-dd-agent and [mount the directory that contains them][6] into the docker-dd-agent container when starting it
+1. Add them to each host that runs docker-dd-agent and [mount the directory that contains them][20] into the docker-dd-agent container when starting it
 2. Build your own docker image based on docker-dd-agent, adding your custom templates to `/etc/dd-agent/conf.d/auto_conf`
 3. On Kubernetes, add them using ConfigMaps
 
@@ -105,7 +105,7 @@ instances:
   - apache_status_url: http://%%host%%/server-status?auto
 ```
 
-It looks like a minimal [Apache check configuration][7], but notice the `docker_images` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `httpd` image.
+It looks like a minimal [Apache check configuration][21], but notice the `docker_images` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `httpd` image.
 
 _Any_ `httpd` image. Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery applies the above template to both containers. When it's loading auto-conf files, Autodiscovery cannot distinguish between identically-named images from different sources or with different tags, and **you have to provide short names for container images**, e.g. `httpd`, NOT `library/httpd:latest`.
 
@@ -142,7 +142,7 @@ sd_backend_port: 4001
 
 If you're using Consul and the Consul cluster requires authentication, set `consul_token`.
 
-[Restart the Agent][23] to apply the configuration change.
+[Restart the Agent][22] to apply the configuration change.
 
 #### Configure in environment variables
 
@@ -198,7 +198,7 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 
 #### Example: Apache check with website availability monitoring
 
-The following etcd commands create the same Apache template and add an [HTTP check][8] template to monitor whether the website created by the Apache container is available:
+The following etcd commands create the same Apache template and add an [HTTP check][23] template to monitor whether the website created by the Apache container is available:
 
 ```
 etcdctl set /datadog/check_configs/library/httpd:latest/check_names '["apache", "http_check"]'
@@ -381,26 +381,26 @@ checks:
     - {message: null, service_check_count: 0, status: OK, metric_count: 13, instance_name: SD-jmx_0-10.244.2.45-9010}
 ```
 
-[1]: https://www.datadoghq.com/docker-adoption/
+[1]: https://www.datadoghq.com/docker-adoption
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
-[3]: /integrations/kubernetes/
-[4]: /integrations/amazon_ecs/#installation
-[5]: https://github.com/DataDog/docker-dd-agent#environment-variables
-[6]: https://github.com/DataDog/docker-dd-agent#configuration-files
-[7]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[8]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
-[9]: https://hub.docker.com/r/datadog/docker-dd-agent/
-[10]: https://github.com/DataDog/jmxfetch
-[11]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/auto_conf.yaml
-[12]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/auto_conf.yaml
-[13]: https://github.com/DataDog/integrations-core/blob/master/couch/datadog_checks/couch/data/auto_conf.yaml
-[14]: https://github.com/DataDog/integrations-core/blob/master/couchbase/datadog_checks/couchbase/data/auto_conf.yaml
-[15]: https://github.com/DataDog/integrations-core/blob/master/elastic/datadog_checks/elastic/data/auto_conf.yaml
-[16]: https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/auto_conf.yaml
-[17]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/auto_conf.yaml
-[18]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/data/auto_conf.yaml
-[19]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/datadog_checks/kyototycoon/data/auto_conf.yaml
-[20]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/auto_conf.yaml
-[21]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
-[22]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
-[23]: /agent/faq/agent-commands/#start-stop-restart-the-agent
+[3]: https://hub.docker.com/r/datadog/docker-dd-agent
+[4]: /integrations/kubernetes
+[5]: /integrations/amazon_ecs/#installation
+[6]: https://github.com/DataDog/docker-dd-agent#environment-variables
+[7]: https://github.com/DataDog/jmxfetch
+[8]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/auto_conf.yaml
+[9]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/auto_conf.yaml
+[10]: https://github.com/DataDog/integrations-core/blob/master/couch/datadog_checks/couch/data/auto_conf.yaml
+[11]: https://github.com/DataDog/integrations-core/blob/master/couchbase/datadog_checks/couchbase/data/auto_conf.yaml
+[12]: https://github.com/DataDog/integrations-core/blob/master/elastic/datadog_checks/elastic/data/auto_conf.yaml
+[13]: https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/auto_conf.yaml
+[14]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/auto_conf.yaml
+[15]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/data/auto_conf.yaml
+[16]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/datadog_checks/kyototycoon/data/auto_conf.yaml
+[17]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/auto_conf.yaml
+[18]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
+[19]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
+[20]: https://github.com/DataDog/docker-dd-agent#configuration-files
+[21]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
+[22]: /agent/faq/agent-commands/#start-stop-restart-the-agent
+[23]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example

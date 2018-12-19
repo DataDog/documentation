@@ -43,4 +43,4 @@ and each span is a dictionary with a `trace_id`, `span_id`, `resource`..
 [1]: /tracing/#instrument-your-application
 [2]: /tracing/visualization/trace
 [3]: /tracing/visualization/trace/#spans
-[4]: /tracing/visualization/services_list/
+[4]: /tracing/visualization/services_list

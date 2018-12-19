@@ -94,7 +94,7 @@ You should see an Event appear on your [Event Stream][1] on the Datadog website.
 
 ** For convenience, reference [the YAML example][4] file to use as a template.
 
-[1]: /graphing/event_stream/
+[1]: /graphing/event_stream
 [2]: /agent/faq/agent-commands/#start-stop-restart-the-agent
 [3]: /integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class
 [4]: https://github.com/DataDog/dd-agent/tree/master/conf.d

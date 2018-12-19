@@ -4,7 +4,7 @@ kind: faq
 further_reading:
 - link: "monitors/downtimes"
   tag: "Documentation"
-  text: Schedule a downtime to mute a monitor
+  text: "Schedule a downtime to mute a monitor"
 ---
 
 We often discuss alerting with our clients and a frequent issue or pain point is alert fatigue, or when alerts 'flap' (rapidly switching from an 'ok' to an 'alert' status).  
@@ -36,5 +36,5 @@ If the issue is alert routing, template variables and the separation of **warnin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.datadoghq.com/blog/alert-rollup/
+[1]: https://www.datadoghq.com/blog/alert-rollup
 [2]: /graphing/dashboards/screenboard

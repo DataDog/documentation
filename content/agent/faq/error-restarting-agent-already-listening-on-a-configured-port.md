@@ -4,7 +4,7 @@ kind: faq
 further_reading:
 - link: "agent/"
   tag: "Documentation"
-  text: Learn more about the Datadog Agent
+  text: "Learn more about the Datadog Agent"
 ---
 
 When attempting to restart the Agent, you may encounter this error if the Agent didn't shut down correctly:

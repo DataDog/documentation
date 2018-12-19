@@ -4,7 +4,7 @@ kind: faq
 further_reading:
 - link: "developers/metrics"
   tag: "Documentation"
-  text: Learn more about Metrics
+  text: "Learn more about Metrics"
 ---
 
 The manner in which Datadog calculates the system.mem.used metric produces a value that may sometimes be different from what might be displayed by common system resource reporting tools.

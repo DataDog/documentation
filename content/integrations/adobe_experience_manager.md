@@ -6,7 +6,7 @@ description: "Collect Adobe Experience Manager logs to track errors, request res
 short_description: "Collect logs to track errors, request response time, etc."
 categories:
 - log collection
-doc_link: https://docs.datadoghq.com/integrations/adobe_experience_manager/
+doc_link: /integrations/adobe_experience_manager/
 aliases:
     - logs/log_collection/adobe_experience_manager
 has_logo: true
@@ -67,4 +67,4 @@ Need help? Contact [Datadog support][4].
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: /agent/faq/agent-configuration-files/?tab=agentv6#agent-configuration-directory
 [3]: /agent/faq/agent-commands/#restart-the-agent
-[4]: https://docs.datadoghq.com/help/
+[4]: /help

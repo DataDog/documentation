@@ -6,7 +6,7 @@ description: "Configure NXLog to gather logs from your host, containers, & servi
 short_description: "Configure NXLog to gather logs from your host, containers, & services."
 categories:
 - log collection
-doc_link: https://docs.datadoghq.com/integrations/nxlog/
+doc_link: /integrations/nxlog/
 aliases:
     - logs/log_collection/nxlog
 has_logo: true
@@ -25,7 +25,7 @@ Configure NXLog to gather logs from your host, containers, & services.
 ### Log collection
 
 1. Configure NXLog to send your logs to your Datadog platform
-    Replace the whole file in `C:\Program Files\nxlog\conf` by the following: 
+    Replace the whole file in `C:\Program Files\nxlog\conf` by the following:
 
     ```
     ## Set the ROOT to the folder your nxlog was installed into,
@@ -92,11 +92,11 @@ Configure NXLog to gather logs from your host, containers, & services.
     </Route>
     ```
 
-4. Restart NXLog.  
-    Open the service administrative tool:  
+4. Restart NXLog.
+    Open the service administrative tool:
     `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Services.lnk`.
 
-5. (Optional) Set extra parameters or tags.  
+5. (Optional) Set extra parameters or tags.
     Add any specific attribute to your logs in each input section of your NXLog configuration file. For instance, to specify the source that is used in Datadog to identify the integration the logs come from, use:
 
     ```
@@ -126,4 +126,4 @@ Configure NXLog to gather logs from your host, containers, & services.
 Need help? Contact [Datadog Support][2].
 
 [1]: /crt/intake.logs.datadoghq.com.crt
-[2]: https://docs.datadoghq.com/help/
+[2]: /help

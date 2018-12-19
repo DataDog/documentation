@@ -4,13 +4,13 @@ kind: faq
 further_reading:
 - link: "agent/"
   tag: "Documentation"
-  text: Learn more about the Datadog Agent
+  text: "Learn more about the Datadog Agent"
 - link: "integrations/docker_daemon"
   tag: "Integration"
-  text: Learn more about the Datadog-SNMP integration
+  text: "Learn more about the Datadog-SNMP integration"
 - link: "integrations/disk"
   tag: "Integration"
-  text: Learn more about the Datadog-Disk integration
+  text: "Learn more about the Datadog-Disk integration"
 ---
 
 ## How to report host disk metrics when dd-agent runs in a docker container?

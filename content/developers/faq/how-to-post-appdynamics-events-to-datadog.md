@@ -50,4 +50,4 @@ You can use also use Email Templates:
 
 {{< img src="developers/faq/email_template.png" alt="email_template" responsive="true" >}}
 
-[1]: https://www.appdynamics.com/support/
+[1]: https://www.appdynamics.com/support

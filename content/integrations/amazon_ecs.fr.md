@@ -13,12 +13,12 @@ description: >-
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_ecs/'
 git_integration_title: amazon_ecs
 has_logo: true
-integration_title: AWS ECS
+integration_title: Amazon Elastic Container Service
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_ecs
-public_title: "Intégration Datadog-AWS ECS\_"
+public_title: "Intégration Datadog-Amazon Elastic Container Service\_"
 short_description: >-
   Surveilliez les statuts des conteneurs, suiver l'utilisation des ressources,
   et plus encore…
@@ -29,7 +29,7 @@ Amazon EC2 Container Service (ECS) est un service de gestion de conteneur évolu
 
 ## Implémentation
 
-Cette page s'occupe de l'installation de AWS ECS avec [Datadog Agent v6](https://docs.datadoghq.com/agent/). Si vous souhaitez la configurer avec Datadog Agent v5, [reportez-vous à la page de documentation dédiée AWS ECS de l'Agent v5](https://docs.datadoghq.com/integrations/faq/agent-5-amazon-ecs).
+Cette page s'occupe de l'installation de Amazon Elastic Container Service avec [Datadog Agent v6](https://docs.datadoghq.com/agent/). Si vous souhaitez la configurer avec Datadog Agent v5, [reportez-vous à la page de documentation dédiée Amazon Elastic Container Service de l'Agent v5](https://docs.datadoghq.com/integrations/faq/agent-5-amazon-ecs).
 
 ### Installation
 Pour surveiller vos conteneurs et tâches ECS avec Datadog, exécutez l'agent en tant que conteneur sur chaque instance EC2 de votre cluster ECS. Comme détaillé ci-dessous, il y a quelques étapes de configuration :
@@ -52,7 +52,7 @@ Vous pouvez configurez la tâche soi en utilisant les [outils CLI d'AWS](https:/
 1. Éditez datadog-agent-ecs.json en ajoutant la bonne [DD_API_KEY](https://app.datadoghq.com/account/settings#api) pour votre compte.
 1. Exécutez la commande suivante :
 ```
-aws ecs register-task-definition --cli-input-json file://path/to/datadog-agent-ecs.json
+Amazon Elastic Container Service register-task-definition --cli-input-json file://path/to/datadog-agent-ecs.json
 ```
 
 ##### Interface Web
@@ -154,7 +154,7 @@ yum install -y aws-cli jq
 instance_arn=$( curl -f http://localhost:51678/v1/metadata | jq -re .ContainerInstanceArn | awk -F/ '{print $NF}')
 az=$(curl -f http://169.254.169.254/latest/meta-data/placement/availability-zone)
 region=${az:0:${#az} - 1}
-echo "cluster=$cluster az=$az region=$region aws ecs start-task --cluster \
+echo "cluster=$cluster az=$az region=$region Amazon Elastic Container Service start-task --cluster \
 $cluster --task-definition $task_def --container-instances $instance_arn --region $region" >> /etc/rc.local
 ```
 
@@ -180,7 +180,7 @@ Collectez les logs ECS directement à partir des conteneurs grâce à notre int�
 Chacune des métriques récupérées à partir d'AWS se verra attribuer les mêmes tags qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le nom de l'host, les groupes de sécurité et plus encore.
 
 ### Evénements
-L'intégration AWS ECS récupère les évènements suivants :
+L'intégration Amazon Elastic Container Service récupère les évènements suivants :
 
 * Drain
 * Error

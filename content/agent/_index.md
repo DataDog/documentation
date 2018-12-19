@@ -5,32 +5,32 @@ description: Install & configure the Agent to collect data
 further_reading:
 - link: "logs/"
   tag: "Documentation"
-  text: Collect your logs
+  text: "Collect your logs"
 - link: "graphing/infrastructure/process"
   tag: "Documentation"
-  text: Collect your processes
+  text: "Collect your processes"
 - link: "tracing"
   tag: "Documentation"
-  text: Collect your traces
+  text: "Collect your traces"
 aliases:
   - /agent/faq/agent-check-directory-structure
   - /agent/faq/install-core-extra/
 ---
 
 <div class="alert alert-info">
-Agent v6 is available. <a href="https://docs.datadoghq.com/agent/faq/upgrade-to-agent-v6">Upgrade to the newest version</a> to benefit from all new functionality.
+Agent v6 is available. <a href="/agent/faq/upgrade-to-agent-v6">Upgrade to the newest version</a> to benefit from all new functionality.
 </div>
 
 ## What is the Agent?
 
-The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. The Datadog Agent is open-source, and its source code is available on GitHub at [DataDog/datadog-agent][2].
+The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. The Datadog Agent is open-source, and its source code is available on GitHub at [DataDog/datadog-agent][1].
 
 {{< partial name="platforms/platforms.html" >}}
 
 The Agent has three main parts: the **collector**, **DogStatsD**, and the **forwarder**:
 
-* **Collector**: It runs checks on the current machine for configured [integrations][4], and captures system metrics, such as memory and CPU.
-* **DogStatsD**: It is a StatsD-compatible backend server that you can send [custom metrics][5] to from your applications.
+* **Collector**: It runs checks on the current machine for configured [integrations][2], and captures system metrics, such as memory and CPU.
+* **DogStatsD**: It is a StatsD-compatible backend server that you can send [custom metrics][3] to from your applications.
 * **Forwarder**: It retrieves data from both DogStatsD and the collector, queues it up, and then sends it to Datadog.
 
 ## CLI
@@ -93,59 +93,59 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 
 | OS                                 | Supported versions                                                  |
 | :----                              | :----                                                               |
-| [Debian x86_64][7]                 | Debian 7 (wheezy) and above (we support SysVinit in agent 6.6.0 and above) |
-| [Ubuntu x86_64][8]                 | Ubuntu 14.04 and above                                              |
-| [RedHat/CentOS x86_64][9]          | RedHat/CentOS 6 and above                                           |
-| [Docker][14]                       | Version 1.12 and higher                                             |
-| [Kubernetes][15]                   | Version 1.3 and higher                                              |
-| [SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 and above (we do not support SysVinit)                  |
-| [Fedora x86_64][11]                | Fedora 26 and above                                                 |
-| [macOS][12]                        | macOS 10.12 and above                                               |
-| [Windows server 64-bit][13]        | Windows server 2008r2 or above                                      |
-| [Windows 64-bit][13]               | Windows 7 or above                                                  |
+| [Debian x86_64][1]                 | Debian 7 (wheezy) and above (we support SysVinit in agent 6.6.0 and above) |
+| [Ubuntu x86_64][2]                 | Ubuntu 14.04 and above                                              |
+| [RedHat/CentOS x86_64][3]          | RedHat/CentOS 6 and above                                           |
+| [Docker][4]                       | Version 1.12 and higher                                             |
+| [Kubernetes][5]                   | Version 1.3 and higher                                              |
+| [SUSE Enterprise Linux x86_64][6] | SUSE 11 SP4 and above (we do not support SysVinit)                  |
+| [Fedora x86_64][7]                | Fedora 26 and above                                                 |
+| [macOS][8]                        | macOS 10.12 and above                                               |
+| [Windows server 64-bit][9]        | Windows server 2008r2 or above                                      |
+| [Windows 64-bit][9]               | Windows 7 or above                                                  |
 
-**Note**: [Source][16] install may work on operating systems not listed here and is supported on a best effort basis.
+**Note**: [Source][10] install may work on operating systems not listed here and is supported on a best effort basis.
 
-[7]: /agent/basic_agent_usage/deb
-[8]: /agent/basic_agent_usage/ubuntu
-[9]: /agent/basic_agent_usage/redhat
-[10]: /agent/basic_agent_usage/suse
-[11]: /agent/basic_agent_usage/fedora
-[12]: /agent/basic_agent_usage/osx
-[13]: /agent/basic_agent_usage/windows
-[14]: /agent/basic_agent_usage/docker
-[15]: /agent/basic_agent_usage/kubernetes
-[16]: /agent/basic_agent_usage/source
 
+[1]: /agent/basic_agent_usage/deb
+[2]: /agent/basic_agent_usage/ubuntu
+[3]: /agent/basic_agent_usage/redhat
+[4]: /agent/docker
+[5]: /agent/basic_agent_usage/kubernetes
+[6]: /agent/basic_agent_usage/suse
+[7]: /agent/basic_agent_usage/fedora
+[8]: /agent/basic_agent_usage/osx
+[9]: /agent/basic_agent_usage/windows
+[10]: /agent/basic_agent_usage/source
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
 | OS                                 | Supported versions             |
 | :----                              | :----                          |
-| [Debian x86_64][7]                 | Debian 7 (wheezy) and above    |
-| [Ubuntu x86_64][8]                 | Ubuntu 12.04 and above         |
-| [RedHat/CentOS x86_64][9]          | RedHat/CentOS 5 and above      |
-| [Docker][14]                       | Version 1.12 and higher        |
-| [Kubernetes][15]                   | Version 1.3 and higher         |
-| [SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 and above          |
-| [Fedora x86_64][11]                | Fedora 26 and above            |
-| [MacOS][12]                        | macOS 10.10 and above          |
-| [Windows server 64-bit][13]        | Windows server 2008r2 or above |
-| [Windows 64-bit][13]               | Windows 7 or above             |
+| [Debian x86_64][1]                 | Debian 7 (wheezy) and above    |
+| [Ubuntu x86_64][2]                 | Ubuntu 12.04 and above         |
+| [RedHat/CentOS x86_64][3]          | RedHat/CentOS 5 and above      |
+| [Docker][4]                       | Version 1.12 and higher        |
+| [Kubernetes][5]                   | Version 1.3 and higher         |
+| [SUSE Enterprise Linux x86_64][6] | SUSE 11 SP4 and above          |
+| [Fedora x86_64][7]                | Fedora 26 and above            |
+| [MacOS][8]                        | macOS 10.10 and above          |
+| [Windows server 64-bit][9]        | Windows server 2008r2 or above |
+| [Windows 64-bit][9]               | Windows 7 or above             |
 
-**Note**: [Source][16] install may work on operating systems not listed here and is supported on a best effort basis.
+**Note**: [Source][10] install may work on operating systems not listed here and is supported on a best effort basis.
 
-[7]: /agent/basic_agent_usage/deb
-[8]: /agent/basic_agent_usage/ubuntu
-[9]: /agent/basic_agent_usage/redhat
-[10]: /agent/basic_agent_usage/suse
-[11]: /agent/basic_agent_usage/fedora
-[12]: /agent/basic_agent_usage/osx
-[13]: /agent/basic_agent_usage/windows
-[14]: /agent/basic_agent_usage/docker
-[15]: /agent/basic_agent_usage/kubernetes
-[16]: /agent/basic_agent_usage/source
 
+[1]: /agent/basic_agent_usage/deb
+[2]: /agent/basic_agent_usage/ubuntu
+[3]: /agent/basic_agent_usage/redhat
+[4]: /agent/docker
+[5]: /agent/basic_agent_usage/kubernetes
+[6]: /agent/basic_agent_usage/suse
+[7]: /agent/basic_agent_usage/fedora
+[8]: /agent/basic_agent_usage/osx
+[9]: /agent/basic_agent_usage/windows
+[10]: /agent/basic_agent_usage/source
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -153,6 +153,6 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: https://github.com/DataDog/datadog-agent
-[4]: /integrations
-[5]: /developers/metrics/custom_metrics/
+[1]: https://github.com/DataDog/datadog-agent
+[2]: /integrations
+[3]: /developers/metrics/custom_metrics

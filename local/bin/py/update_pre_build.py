@@ -99,11 +99,11 @@ class GitHub:
             return listing
 
     @cache_by_sha
-    def raw(self, list_item, org, repo, branch, dest_dir):
+    def raw(self, list_item, request_session, org, repo, branch, dest_dir):
         headers = self.headers()
         path_to_file = list_item.get('path', '')
         file_out = '{}{}'.format(dest_dir, path_to_file)
-        raw_response = requests.get(
+        raw_response = request_session.get(
             'https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, path_to_file),
             headers=headers
         )
@@ -134,7 +134,7 @@ class PreBuild:
         self.regex_h1 = re.compile(r'^#{1}(?!#)(.*)', re.MULTILINE)
         self.regex_h1_replace = re.compile(r'^(#{1})(?!#)(.*)', re.MULTILINE)
         self.regex_metrics = re.compile(r'(#{3} Metrics\n)([\s\S]*this integration.|[\s\S]*this check.)([\s\S]*)(#{3} Events\n)', re.DOTALL)
-        self.regex_service_check = re.compile(r'(#{3} Service Checks\n)([\s\S]*does not include any service check at this time.)([\s\S]*)(#{2} Troubleshooting\n)', re.DOTALL)
+        self.regex_service_check = re.compile(r'(#{3} Service Checks\n)([\s\S]*does not include any service checks at this time.)([\s\S]*)(#{2} Troubleshooting\n)', re.DOTALL)
         self.regex_fm = re.compile(r'(?:-{3})(.*?)(?:-{3})(.*)', re.DOTALL)
         self.regex_source = re.compile(r'(\S*FROM_DISPLAY_NAME\s*=\s*\{)(.*?)\}', re.DOTALL)
         self.datafile_json = []
@@ -196,8 +196,9 @@ class PreBuild:
             listing = gh.list(org, repo, branch, globs)
             dest = '{0}{1}{2}'.format(self.extract_dir, repo, sep)
             with Pool(processes=self.pool_size) as pool:
-                r = [x for x in tqdm(
-                    pool.imap_unordered(partial(gh.raw, org=org, repo=repo, branch=branch, dest_dir=dest), listing))]
+                with requests.Session() as s:
+                  r = [x for x in tqdm(
+                      pool.imap_unordered(partial(gh.raw, request_session=s, org=org, repo=repo, branch=branch, dest_dir=dest), listing))]
 
     def process(self):
         """
@@ -333,15 +334,15 @@ class PreBuild:
 
     def dev_doc_integrations_core(self, file_name):
         """
-        Take the content from https://github.com/DataDog/integrations-core/tree/master/docs/dev 
+        Take the content from https://github.com/DataDog/integrations-core/tree/master/docs/dev
         and transform it to be displayed on the doc in the /developers/integrations section
         :param file_name: path to a file
         """
         relative_path_on_github = '/integrations-core/docs/dev/'
         doc_directory = '/developers/integrations/'
 
-        if (relative_path_on_github in file_name and file_name.endswith('.md')): 
-            
+        if (relative_path_on_github in file_name and file_name.endswith('.md')):
+
             with open(file_name, mode='r+') as f:
                 content = f.read()
 

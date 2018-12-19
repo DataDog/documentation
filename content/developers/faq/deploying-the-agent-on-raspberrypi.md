@@ -37,4 +37,4 @@ You should now see metrics being ingested from your RasberryPI device:
 Thank you to Karim Vaes for the [excellent blog post][2]!
 
 [1]: https://app.datadoghq.com/account/settings#agent/source
-[2]: https://kvaes.wordpress.com/2015/12/29/datadog-on-raspberry-pi/
+[2]: https://kvaes.wordpress.com/2015/12/29/datadog-on-raspberry-pi

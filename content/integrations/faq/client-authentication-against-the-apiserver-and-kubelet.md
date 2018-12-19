@@ -29,4 +29,4 @@ kubelet_tls_verify: True
 ```
 
 [1]: https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-files-from-a-pod
-[2]: https://kubernetes.io/docs/concepts/configuration/secret/
+[2]: https://kubernetes.io/docs/concepts/configuration/secret

@@ -16,4 +16,4 @@ On the Datadog side, there is the ability to prioritize certain metrics within a
 To obtain metrics with virtually zero delay, Datadog recommends installing the Datadog Agent on those hosts. Refer to the documentation on [if you should install the Datadog Agent on your AWS instances][2], especially in relation to CloudWatch.
 
 [1]: /help
-[2]: /agent/faq/why-should-i-install-the-agent-on-my-aws-instances/
+[2]: /agent/faq/why-should-i-install-the-agent-on-my-aws-instances

@@ -16,9 +16,9 @@ The metrics end-point allows you to post time-series data that can be graphed on
     * **`metric`** [*required*]:  
         The name of the timeseries
     * **`type`** [*optional*, *default*=**gauge**]:  
-        [Type](/developers/metrics/#metric-types) of your metric either: `gauge`, `rate`, or `count`
+        [Type][1] of your metric either: `gauge`, `rate`, or `count`
     * **`interval`** [*optional*, *default*=**None**]:  
-        If the [type](/developers/metrics/#metric-types) of the metric is `rate` or `count`, define the corresponding interval.
+        If the [type][1] of the metric is `rate` or `count`, define the corresponding interval.
     * **`points`** [*required*]:  
         A JSON array of points. Each point is of the form:  
         `[[POSIX_timestamp, numeric_value], ...]`  
@@ -29,3 +29,4 @@ The metrics end-point allows you to post time-series data that can be graphed on
     * **`tags`** [*optional*, *default*=**None**]:  
         A list of tags associated with the metric.
 
+[1]: /developers/metrics/#metric-types

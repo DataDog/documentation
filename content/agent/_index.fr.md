@@ -172,7 +172,7 @@ les bonne permissions: Si vous êtes capable d'ouvrir `datadog.yaml`, vous pouve
 | [RedHat/CentOS x86_64][9]          | RedHat/CentOS 6 et plus                                |
 | [SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 et plus (nous ne supportons pas SysVinit)       |
 | [Fedora x86_64][11]                | Fedora 26 et plus                                      |
-| [macOS][12]                        | macOS 10.10 et plus                                      |
+| [macOS][12]                        | macOS 10.12 et plus                                      |
 | [Windows server 64-bit][13]        | Windows server 2008r2 et plus                           |
 | [Windows 64-bit][13]               | Windows 7 et plus                                       |
 

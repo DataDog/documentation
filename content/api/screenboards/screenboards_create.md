@@ -22,4 +22,4 @@ external_redirect: /api/#create-a-screenboard
 * **`read_only`** [*optional*, *default*=**False**]:  
     The read-only status of the screenboard.
 
-[1]: /graphing/dashboards/widgets/
+[1]: /graphing/dashboards/widgets

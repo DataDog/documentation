@@ -16,4 +16,4 @@ This calls the command at the end of the script and send Datadog events if it ex
 
 (To get the python client lib install it with `pip install datadog`).
 
-[1]: https://github.com/DataDog/datadogpy/
+[1]: https://github.com/DataDog/datadogpy

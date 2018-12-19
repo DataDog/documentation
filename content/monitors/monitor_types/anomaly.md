@@ -186,13 +186,13 @@ Create **A**: an anomaly monitor to alert on values above the bounds; and **B**:
 
 ### Why am I prevented from saving a monitor with a message like ''alert and alert recovery criteria are such that the monitor can be simultaneously in alert and alert recovery states?"
 
-Setting different windows for the alert and alert recovery periods might lead to an ambiguous state. The alert and alert recovery window sizes should be set such that both cannot be satisfied at the same time. For example, setting an alert threshold at 50% for a 2-hour window (i.e., 1 hour has to be anomalous to trigger the alert) and the recovery threshold at 50% for a 10-minute window (i.e., 5 minutes have to be non-anomalous to recover) might result in triggering the alert and the alert recovery states simultaneously. If the last 5 minutes are not anomalous but the 1 hour before that _was_ anomalous, both the alert and the alert recovery are triggered.
+Setting different windows for the alert and alert recovery periods might lead to an ambiguous state. The alert and alert recovery window sizes should be set such that both cannot be satisfied at the same time. For example, setting an alert threshold at 50% for a 2-hour window (i.e., 1 hour has to be anomalous to trigger the alert) and the [recovery threshold][11] at 50% for a 10-minute window (i.e., 5 minutes have to be non-anomalous to recover) might result in triggering the alert and the alert recovery states simultaneously. If the last 5 minutes are not anomalous but the 1 hour before that _was_ anomalous, both the alert and the alert recovery are triggered.
 
 ### How does daylight savings affect anomaly detection monitors?  
 
 Datadog monitors use UTC time and by default are agnostic to local time zones (e.g. EST, PST, CST). User activity is shifted relative to UTC time because activity typically remains the same for the user's local time. This could be detected as unexpected anomaly. 
 
-Datadog allows you to configure a timezone for each anomaly detection monitor that automatically corrects for the time shift. See [How to update an anomaly detection monitor to account for local timezone][11] for instructions.
+Datadog allows you to configure a timezone for each anomaly detection monitor that automatically corrects for the time shift. See [How to update an anomaly detection monitor to account for local timezone][12] for instructions.
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -204,7 +204,8 @@ Datadog allows you to configure a timezone for each anomaly detection monitor th
 [5]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
 [6]: /api/#monitor-create
 [7]: mailto:billing@datadoghq.com
-[8]: https://www.datadoghq.com/blog/anti-patterns-metric-graphs-101/
+[8]: https://www.datadoghq.com/blog/anti-patterns-metric-graphs-101
 [9]: /monitors/monitor_types/metric
 [10]: /monitors/monitor_types/composite
-[11]: /monitors/faq/how-to-update-anomaly-monitor-timezone
+[11]: /monitors/faq/what-are-recovery-thresholds
+[12]: /monitors/faq/how-to-update-anomaly-monitor-timezone

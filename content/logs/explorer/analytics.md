@@ -8,16 +8,16 @@ aliases:
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"
-  text: Discover how to process your logs
+  text: "Discover how to process your logs"
 - link: "logs/processing/parsing"
   tag: "Documentation"
-  text: Learn more about parsing
+  text: "Learn more about parsing"
 - link: "logs/explorer"
   tag: "Documentation"
-  text: See how to explore your logs
+  text: "See how to explore your logs"
 - link: "logs/explorer/patterns"
   tag: Documentation
-  text: Detect patterns inside your logs
+  text: "Detect patterns inside your logs"
 ---
 
 ## Log Analytics query 
@@ -63,22 +63,22 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 
 {{< img src="logs/explorer/analytics/timeserie_example.png" alt="timeserie example" responsive="true" style="width:90%;">}}
 
+
 [1]: /logs/explorer/?tab=measures#setup
 [2]: /logs/explorer/?tab=facets#setup
-
 {{% /tab %}}
 {{% tab "Top List" %}}
 
-Visualize the top values from a [facet][2] according to the chosen [measure][1]:
+Visualize the top values from a [facet][1] according to the chosen [measure][2]:
 
 The following Top List Log Analytics shows:
 The evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
 
 {{< img src="logs/explorer/analytics/top_list_example.png" alt="top list example" responsive="true" style="width:90%;">}}
 
-[1]: /logs/explorer/?tab=measures#setup
-[2]: /logs/explorer/?tab=facets#setup
 
+[1]: /logs/explorer/?tab=facets#setup
+[2]: /logs/explorer/?tab=measures#setup
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -94,11 +94,3 @@ Select or click on a section of the graph to either zoom in the graph or see the
 
 [1]: /logs/explorer/?tab=measures#setup
 [2]: /logs/explorer/?tab=facets#setup
-[3]: /tagging
-[4]: /monitors/monitor_types/log
-[5]: /graphing/dashboards/timeboard
-[6]: /help
-[7]: /graphing/dashboards/widgets/#timeseries
-[8]: /graphing/dashboards
-[9]: /graphing/dashboards/#correlation-between-logs-and-metrics
-[10]: /logs/explorer/search/

@@ -7,10 +7,10 @@ disable_toc: true
 further_reading:
 - link: "account_management/saml"
   tag: "Documentation"
-  text: Configure SAML for your Datadog account
+  text: "Configure SAML for your Datadog account"
 - link: "account_management/multi_organization"
   tag: "Documentation"
-  text: Configuring Teams & Organizations with Multiple Accounts
+  text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 
 Below is a step by step guide to configure Azure AD as a SAML IdP within Datadog:  
@@ -86,8 +86,8 @@ Then paste the Single Sign-on URL that is displayed in the [Datadog SAML page][1
 
 {{< img src="account_management/saml/SAML_Configuration___Datadog13.png" alt="SAML_Configuration___Datadog13" responsive="true" style="width:60%;">}}
 
-[1]: https://app.datadoghq.com/saml/saml_setup
   
 #### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+[1]: https://app.datadoghq.com/saml/saml_setup

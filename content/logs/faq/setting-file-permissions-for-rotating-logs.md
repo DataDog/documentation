@@ -4,13 +4,13 @@ kind: faq
 further_reading:
 - link: "logs/faq/log-parsing-best-practice"
   tag: "FAQ"
-  text: Log Parsing - Best Practice
+  text: "Log Parsing - Best Practice"
 - link: "logs/processing"
   tag: "Documentation"
-  text: Learn how to process your logs
+  text: "Learn how to process your logs"
 - link: "logs/processing/parsing"
   tag: "Documentation"
-  text: Learn more about parsing
+  text: "Learn more about parsing"
 ---
 
 The Datadog Agent runs under the `dd-agent` user and `dd-agent` group. This prevents the Datadog Agent from accessing the logs in `/var/log` as they are only accessible by root (or a sudo admin).
@@ -42,11 +42,11 @@ Once you have verified ACLs are enabled, grant read and execute permissions for 
 setfacl -m u:dd-agent:rx /var/log/apache
 ```
 
-[Learn more about how to configure ACLs on linux]( http://xmodulo.com/configure-access-control-lists-acls-linux.html)
+[Learn more about how to configure ACLs on linux][3]
 
 ### Setting permissions for log file rotation
 
-[Setting the permissions][3] once will not persist for rotating logs, as logrotate does not re-apply the ACL setting. For a more permanent solution add a rule to logrotate to reset the ACL in a new file:
+[Setting the permissions][4] once will not persist for rotating logs, as logrotate does not re-apply the ACL setting. For a more permanent solution add a rule to logrotate to reset the ACL in a new file:
 
 ```
 sudo touch /etc/logrotate.d/dd-agent_ACLs
@@ -107,5 +107,6 @@ Each common off-the-shelf application will follow a similar nomenclature. The ad
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://help.ubuntu.com/community/FilePermissionsACLs
-[2]: https://www.tecmint.com/secure-files-using-acls-in-linux/
-[3]: http://bencane.com/2012/05/27/acl-using-access-control-lists-on-linux/
+[2]: https://www.tecmint.com/secure-files-using-acls-in-linux
+[3]: http://xmodulo.com/configure-access-control-lists-acls-linux.html
+[4]: http://bencane.com/2012/05/27/acl-using-access-control-lists-on-linux

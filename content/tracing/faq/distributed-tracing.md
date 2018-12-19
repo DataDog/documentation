@@ -4,19 +4,19 @@ kind: faq
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
-  text: Learn how to setup APM tracing with your application
+  text: "Learn how to setup APM tracing with your application"
 - link: "tracing/visualization/"
   tag: "Documentation"
-  text: Discover the list of services reporting to Datadog
+  text: "Discover the list of services reporting to Datadog"
 - link: "tracing/visualization/service"
   tag: "Documentation"
-  text: Learn more about services in Datadog
+  text: "Learn more about services in Datadog"
 - link: "tracing/visualization/resource"
   tag: "Documentation"
-  text: Dive into your resource performance and traces
+  text: "Dive into your resource performance and traces"
 - link: "tracing/visualization/trace"
   tag: "Documentation"
-  text: Understand how to read a Datadog Trace
+  text: "Understand how to read a Datadog Trace"
 ---
 
 If you have read the [first example of tracing][1] and want understand how tracing works further, let's take the following example which represents a simple API **thinker-api** and a micro-service behind it **thinker-microservice**. When the API receives a request with the correct *subject* parameter, it responds with a *thought*, otherwise, it responds with an error:
@@ -184,7 +184,7 @@ The Datadog APM allows you to trace all interactions of a request with the diffe
 [1]: /tracing
 [2]: /tracing/setup
 [3]: https://app.datadoghq.com/apm/home
-[4]: /tracing/visualization/services_list/
+[4]: /tracing/visualization/services_list
 [5]: /tracing/visualization/service
 [6]: /tracing/visualization/service/#out-of-the-box-graphs
 [7]: /tracing/visualization/resource

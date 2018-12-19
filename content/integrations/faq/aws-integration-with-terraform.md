@@ -10,8 +10,8 @@ further_reading:
 
 If you use [Terraform][1], the script below creates the Datadog IAM policy inside your AWS account. Update these parameters before running the script:
 
-* `YOUR_DD_EXTERNAL_ID`: A unique ID located in your [Datadog AWS Integration tile][3].
-* `AWS_PERMISSIONS_LIST`: The IAM policies needed by Datadog AWS integrations. The current list is available in the [Datadog AWS integration][4] documentation.
+* `YOUR_DD_EXTERNAL_ID`: A unique ID located in your [Datadog AWS Integration tile][2].
+* `AWS_PERMISSIONS_LIST`: The IAM policies needed by Datadog AWS integrations. The current list is available in the [Datadog AWS integration][3] documentation.
 
 ```
 variable "datadog_aws_integration_external_id" {
@@ -63,7 +63,6 @@ resource "aws_iam_role_policy_attachment" "datadog_aws_integration" {
 }
 ```
 
-[1]: https://www.terraform.io/
-[2]: integrations/amazon_web_services/
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[4]: /integrations/amazon_web_services/#datadog-aws-iam-policy
+[1]: https://www.terraform.io
+[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[3]: /integrations/amazon_web_services/#datadog-aws-iam-policy

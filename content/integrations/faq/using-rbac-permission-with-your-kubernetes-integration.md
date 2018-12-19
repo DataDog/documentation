@@ -96,4 +96,4 @@ subjects:
   kubectl replace --force -f configs/dd-agent/dd-agent.yaml
   ```
 
-[1]: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
+[1]: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account

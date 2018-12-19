@@ -10,7 +10,7 @@ To set up this "extra" integration on your Google CloudSQL instance, you can set
 With one caveat: Google CloudSQL [does not support performance_schemas][5], so you can't `GRANT SELECT ON performance_schema.*` to the Datadog Agent user. As a result, two of the MySQL check's extra/optional metrics are not available for Google CloudSQL instances. Otherwise, the integration should work just as it would with any locally hosted MySQL instance.
 
 [1]: /integrations/amazon_rds
-[2]: /integrations/google_cloudsql/
-[3]: /integrations/mysql/
+[2]: /integrations/google_cloudsql
+[3]: /integrations/mysql
 [4]: https://github.com/DataDog/integrations-core/blob/5.12.x/mysql/conf.yaml.example#L4-L7
 [5]: https://cloud.google.com/sql/docs/features#differences

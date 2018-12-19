@@ -3,7 +3,7 @@ title: Tracing C++ Applications
 kind: Documentation
 aliases:
 - /tracing/cpp/
-- /tracing/languages/cpp
+- /tracing/setup/cpp/
 further_reading:
 - link: "https://github.com/DataDog/dd-opentracing-cpp"
   tag: "Github"
@@ -22,15 +22,15 @@ The APM tracer for C++ applications is in Open Public Beta.
 
 ## Getting Started
 
-To begin tracing applications written in any language, first [install and configure the Datadog Agent](https://docs.datadoghq.com/tracing/setup).
+To begin tracing applications written in any language, first [install and configure the Datadog Agent][1].
 
-Compile against [OpenTracing-cpp](https://github.com/opentracing/opentracing-cpp).
+Compile against [OpenTracing-cpp][2].
 
 ## Compatibility
 
-`dd-opentracing-cpp` requires C++14 to build, but if you use [dynamic loading](#dynamic-loading) then you are instead only limited by OpenTracing's requirement for [C++11 or later](https://github.com/opentracing/opentracing-cpp/#cc98).
+`dd-opentracing-cpp` requires C++14 to build, but if you use [dynamic loading](#dynamic-loading) then you are instead only limited by OpenTracing's requirement for [C++11 or later][3].
 
-Supported platforms include Linux and Mac. If you need Windows support, [contact Datadog support][1].
+Supported platforms include Linux and Mac. If you need Windows support, [contact Datadog support][4].
 
 ## Installation
 
@@ -160,4 +160,7 @@ g++ -o tracer_example tracer_example.cpp -lopentracing
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/help
+[1]: https://docs.datadoghq.com/tracing/setup
+[2]: https://github.com/opentracing/opentracing-cpp
+[3]: https://github.com/opentracing/opentracing-cpp/#cc98
+[4]: https://docs.datadoghq.com/help

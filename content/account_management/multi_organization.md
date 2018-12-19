@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "account_management/saml"
   tag: "Documentation"
-  text: Configure SAML for your Datadog account
+  text: "Configure SAML for your Datadog account"
 ---
 
 It is possible to manage multiple child-organizations from one parent-organization account.  
@@ -18,7 +18,7 @@ The Multi-organization Account feature must be enabled by support. If this is a 
 
 Here's a two-minute video walkthrough:
 
-{{<wistia tg9ufqbin9>}} 
+{{< wistia tg9ufqbin9>}} 
 
 ## Create a new child-organization
 
@@ -33,7 +33,7 @@ The custom domain feature must be enabled by support. [Contact The Datadog suppo
 
 If you are a member of multiple organizations, custom sub-domains help you quickly identify the source of an alert or notification. They will also immediately switch you to the organization associated with the sub-domain.
 
-For example, The URL `https://app.datadoghq.com/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is currently viewing Datadog within the context of Organization B, then that URL will return a 404 Not Found error. The user must switch to Organization A using the [user account settings menu](/account_management/#managing-your-organizations), then revisit the URL. However, with custom sub-domains, the user could visit `https://org-a.datadoghq.com/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
+For example, The URL `https://app.datadoghq.com/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is currently viewing Datadog within the context of Organization B, then that URL will return a 404 Not Found error. The user must switch to Organization A using the [user account settings menu][6], then revisit the URL. However, with custom sub-domains, the user could visit `https://org-a.datadoghq.com/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
 
 ## Further Reading
 
@@ -44,3 +44,4 @@ For example, The URL `https://app.datadoghq.com/event/event?id=1` is associated 
 [3]: https://app.datadoghq.com/account/new_org
 [4]: https://app.datadoghq.com/account/billing
 [5]: mailto:success@datadoghq.com
+[6]: /account_management/#managing-your-organizations

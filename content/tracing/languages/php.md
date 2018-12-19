@@ -1,10 +1,12 @@
 ---
 title: Tracing PHP Applications
 kind: Documentation
+aliases:
+- /tracing/setup/php
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-php"
-  tag: "Github"
-  text: Source code
+  tag: "GitHub"
+  text: "Source code"
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
@@ -19,9 +21,9 @@ The APM tracer for PHP applications is in Open Public Beta.
 
 ## Installation and Getting Started
 
-To begin tracing applications written in PHP, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications][7]).
+To begin tracing applications written in PHP, first [install and configure the Datadog Agent][1], see additional documentation for [tracing Docker applications][2] or [Kubernetes applications][3].
 
-Next, install the Datadog PHP extension using one of the precompiled packages for supported distributions. The latest packages can be found on GitHub's [releases page][4]. If you don't find your distribution, you can install the PHP extension [from source][3]
+Next, install the Datadog PHP extension using one of the precompiled packages for supported distributions. The latest packages can be found on GitHub's [releases page][4]. If you don't find your distribution, you can install the PHP extension [from source][5]
 
 ```bash
 # using RPM package (RHEL/Centos 6+, Fedora 20+)
@@ -61,7 +63,7 @@ PHP APM includes support for the following PHP versions:
 
 ## Automatic Instrumentation
 
-Automatic instrumentation uses the `ddtrace` extension to modify PHP's runtime and inject custom PHP code around specific methods. When [tracing is enabled][5] the PHP tracer is able to automatically instrument all supported libraries out of the box.
+Automatic instrumentation uses the `ddtrace` extension to modify PHP's runtime and inject custom PHP code around specific methods. When [tracing is enabled][7] the PHP tracer is able to automatically instrument all supported libraries out of the box.
 
 Automatic instrumentation captures:
 
@@ -113,10 +115,10 @@ Don't see your desired libraries? Let Datadog know more about your needs through
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup
-[2]: https://github.com/DataDog/dd-trace-php
-[3]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#compiling-and-installing-the-extension-manually
+[2]: /tracing/setup/docker
+[3]: /agent/kubernetes/daemonset_setup/#trace-collection
 [4]: https://github.com/DataDog/dd-trace-php/releases/latest
-[5]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#enabling-tracing
+[5]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#compiling-and-installing-the-extension-manually
 [6]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#alternative-install-datadogdd-trace-package-without-changing-minimum-stability
-[7]: /tracing/setup/docker/
+[7]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#enabling-tracing
 [8]: https://goo.gl/forms/rKjH2J6nJ585KXri2

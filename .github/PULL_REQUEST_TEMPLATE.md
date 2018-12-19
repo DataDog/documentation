@@ -12,8 +12,8 @@
 <!-- This is the base preview link. Replace the branch name and add the complete path:
 https://docs-staging.datadoghq.com/<BRANCH_NAME>/<PATH>
 
-For example, for branch "lucas/update-dotnet-tracing" that updates the docs in path "https://docs.datadoghq.com/tracing/setup/dotnet/", this is the preview link:
-https://docs-staging.datadoghq.com/lucas/update-dotnet-tracing/tracing/setup/dotnet/
+For example, for branch "lucas/update-dotnet-tracing" that updates the docs in path "https://docs.datadoghq.com/tracing/languages/dotnet/", this is the preview link:
+https://docs-staging.datadoghq.com/lucas/update-dotnet-tracing/tracing/languages/dotnet/
 -->
 
 ### Additional Notes

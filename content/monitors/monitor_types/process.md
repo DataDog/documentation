@@ -5,13 +5,13 @@ description: "Check if a process is running on a host"
 further_reading:
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 - link: "monitors/downtimes"
   tag: "Documentation"
-  text: Schedule a dowtime to mute a monitor
+  text: "Schedule a downtime to mute a monitor"
 - link: "monitors/monitor_status"
   tag: "Documentation"
-  text: Consult your monitor status
+  text: "Consult your monitor status"
 ---
 
 ## Overview
@@ -22,7 +22,7 @@ Process monitors are configured to check the status of individual or groups of p
 
 {{< img src="monitors/monitor_types/process/live_process_monitor_select.png" alt="live process monitor" responsive="true" style="width:35%;">}}
 
-Live Process Monitors are based on data collected by the [Process Agent](https://docs.datadoghq.com/graphing/infrastructure/process/) which allows you to centrally create monitors that warn or alert based on the behavior of any group of processes across any hosts or tags.
+Live Process Monitors are based on data collected by the [Process Agent][1] which allows you to centrally create monitors that warn or alert based on the behavior of any group of processes across any hosts or tags.
 
 ### Configuration
 
@@ -53,7 +53,7 @@ Live Process Monitors are based on data collected by the [Process Agent](https:/
 
 A process check monitor watches the status produced by the `process.up` service check reported by the check in the Agent. At the Agent level you can configure thresholds based on the number of matching processes.
 
-Read more about configuration on the [Process Check][1] page.
+Read more about configuration on the [Process Check][3] page.
 
 For each process, a single service check status is produced. Through this creation interface, you can choose which of those checks to monitor and at what point they should notify.
 
@@ -78,5 +78,6 @@ For each process, a single service check status is produced. Through this creati
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/process/
+[1]: /graphing/infrastructure/process
 [2]: /monitors/notifications
+[3]: /integrations/process

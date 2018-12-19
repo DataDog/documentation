@@ -8,7 +8,7 @@ further_reading:
   text: "Perform Log Analytics"
 - link: "logs/processing"
   tag: "Documentation"
-  text: Learn how to process your logs
+  text: "Learn how to process your logs"
 ---
 
 ## Overview

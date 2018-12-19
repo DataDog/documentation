@@ -4,13 +4,13 @@ kind: documentation
 further_reading:
 - link: "graphing/dashboards/"
   tag: "Documentation"
-  text: Learn how to create Dashboards in Datadog
+  text: "Learn how to create Dashboards in Datadog"
 - link: "graphing/dashboards/shared_graph"
   tag: "Documentation"
-  text: Share your Graphs outside of Datadog
+  text: "Share your Graphs outside of Datadog"
 - link: "graphing/dashboards/template_variables"
   tag: "Documentation"
-  text: Enhance your Dashboards with Template Variables
+  text: "Enhance your Dashboards with Template Variables"
 ---
 
 Use widgets through the [Screenboard API][1]:
@@ -40,7 +40,7 @@ Each type of widget is described below:
 The Timeseries visualization is great for showing one or more metrics, Log events, or APM events over time. The time window depends on what is selected on the [Timeboard][5] or in the graph on a [Screenboard][6].
 Timeseries can be displayed as **lines**, **areas**, and **bars**.
 
-**Note**: Define log Analytics query (still in beta) exactly as in the [Log Explorer][11].
+**Note**: Define log Analytics query (still in beta) exactly as in the [Log Explorer][7].
 
 {{< img src="graphing/dashboards/widgets/references-graphing-timeseries-example.png" alt="Timeseries" responsive="true" style="width:80%;">}}
 
@@ -195,28 +195,28 @@ The Change graph shows you the change in a value over the time period chosen.
 ## Hostmap
 *Supported on Screenboards and Timeboards*
 
-The Hostmap graphs any metric for any subset of hosts on the same hostmap visualization available from the main [Infrastructure Hostmap][7] menu.
+The Hostmap graphs any metric for any subset of hosts on the same hostmap visualization available from the main [Infrastructure Hostmap][8] menu.
 
 {{< img src="graphing/dashboards/widgets/references-graphing-hostmap-example.png" alt="Hostmap" responsive="true" >}}
 
 ## Free Text
 *Supported on Screenboards only*
 
-Free text is a widget that allows you to add headings to your [Screenboard][8].
+Free text is a widget that allows you to add headings to your [Screenboard][9].
 
 This is commonly used to state the overall purpose of the dashboard.
 
 ## Event Timeline
 *Supported on Screenboards only*
 
-The event timeline is a widget version of the timeline that appears at the top of the [Event Stream view][9].
+The event timeline is a widget version of the timeline that appears at the top of the [Event Stream view][10].
 
 {{< img src="graphing/dashboards/widgets/references-graphing-eventtimeline-example.png" alt="Timeseries" responsive="true" style="width:80%;">}}
 
 ## Event Stream
 *Supported on Screenboards only*
 
-The event stream is a widget version of the stream of events on the [Event Stream view][10].
+The event stream is a widget version of the stream of events on the [Event Stream view][11].
 
 {{< img src="graphing/dashboards/widgets/references-graphing-eventstream-example.png" alt="Timeseries" responsive="true" style="width:70%;">}}
 
@@ -373,10 +373,10 @@ Monitor summary is a summary view of all monitors on your system, or a subset ba
 [2]: /api/#create-a-screenboard
 [3]: /api/#get-a-screenboard
 [4]: /api/#update-a-screenboard
-[5]: /graphing/dashboards/timeboard/
-[6]: /graphing/dashboards/screenboard/
-[7]: /graphing/infrastructure/hostmap
-[8]: /graphing/dashboards/screenboard
-[9]: https://app.datadoghq.com/event/stream
-[10]: /graphing/event_stream/
-[11]: /logs/explorer/analytics/#log-graph-query
+[5]: /graphing/dashboards/timeboard
+[6]: /graphing/dashboards/screenboard
+[7]: /logs/explorer/analytics/#log-graph-query
+[8]: /graphing/infrastructure/hostmap
+[9]: /graphing/dashboards/screenboard
+[10]: https://app.datadoghq.com/event/stream
+[11]: /graphing/event_stream

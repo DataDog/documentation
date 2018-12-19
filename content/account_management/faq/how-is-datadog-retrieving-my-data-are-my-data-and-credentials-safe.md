@@ -13,5 +13,5 @@ kind: faq
 See the [list of IPs and ports used by Datadog][3] for more information.
 
 [1]: https://app.datadoghq.com/policy/license
-[2]: https://github.com/DataDog/dd-agent/
-[3]: /agent/network
+[2]: https://github.com/DataDog/dd-agent
+[3]: /agent/faq/network

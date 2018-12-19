@@ -6,7 +6,7 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "instance", "url"],
         "name": "HTTP",
-        "description": "Renvoie CRITICAL si l'Agent ne peut pas établir de connexion HTTP avec l'URL. Retourne OK si la connexion est réussie."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable d'établir de connexion HTTP avec l'URL ou renvoie `OK` si la connexion est établie."
     },
     {
         "agent_version": "5.0.0",
@@ -15,6 +15,6 @@
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host", "instance", "url"],
         "name": "HTTP - SSL",
-        "description": "Renvoie CRITICAL si le certificat SSL a expiré. Renvoie WARNING si le certificat SSL expire en deçà du seuil configuré. Retourne OK sinon."
+        "description": "Renvoie `CRITICAL` si le certificat SSL a expiré, renvoie `WARNING` si le certificat SSL expire avant le seuil configuré ou renvoie `OK` pour les autres cas."
     }
 ]

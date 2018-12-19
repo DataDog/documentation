@@ -73,9 +73,9 @@ The solution here would be to only specify the specific partition for your topic
 
 5. Partition Context Limitation: the number of partition contexts collection is limited to 200. If you require more contexts, [contact the Datadog support team][8].
 
-[1]: https://kafka.apache.org/
-[2]: https://sookocheff.com/post/kafka/kafka-in-a-nutshell/
-[3]: https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics/
+[1]: https://kafka.apache.org
+[2]: https://sookocheff.com/post/kafka/kafka-in-a-nutshell
+[3]: https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics
 [4]: /integrations/kafka
 [5]: https://github.com/DataDog/jmxfetch
 [6]: /integrations/kafka/#agent-check-kafka-consumer

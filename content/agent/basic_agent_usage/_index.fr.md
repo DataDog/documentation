@@ -20,15 +20,15 @@ further_reading:
 Gérez l'Agent Datadog et ses [intégrations][1] en utilisant des outils de gestion de configurations:
 
 ### Cookbook Chef
-* [Github du projet Chef][2]
+* [GitHub du projet Chef][2]
 * [Installer l'Agent Datadog avec Chef][3]
 
 ### Puppet
-* [Github du projet Puppet][4]
+* [GitHub du projet Puppet][4]
 * [Installer l'Agent Datadog avec Puppet][5]
 
 ### Ansible
-* [Github du projet Ansible][6]
+* [GitHub du projet Ansible][6]
 * [Installer l'Agent Datadog avec Ansible][7]
 
 ### SaltStack

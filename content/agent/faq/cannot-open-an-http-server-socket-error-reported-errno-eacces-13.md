@@ -4,7 +4,7 @@ kind: faq
 further_reading:
 - link: "agent/"
   tag: "Documentation"
-  text: Learn more about the Datadog Agent
+  text: "Learn more about the Datadog Agent"
 ---
 
 There are a number of issues that can cause the following error when you try starting your Datadog Agent:
@@ -33,5 +33,5 @@ If you continue to see this issue despite having taken these steps, contact [us]
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/faq/error-restarting-agent-already-listening-on-a-configured-port
-[2]: /agent/network
+[2]: /agent/faq/network
 [3]: /help

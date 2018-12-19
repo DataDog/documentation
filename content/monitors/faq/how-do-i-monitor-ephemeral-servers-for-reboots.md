@@ -4,10 +4,10 @@ kind: faq
 further_reading:
 - link: "monitors/monitor_types"
   tag: "Documentation"
-  text: Learn how to create a monitor
+  text: "Learn how to create a monitor"
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 ---
 
 Ephemeral environments spin up and terminate hosts constantly which can make it challenging to distinguish new hosts from rebooted hosts.

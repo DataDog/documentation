@@ -133,7 +133,7 @@ from datadog_checks.utils.subprocess_output import get_subprocess_output
 class LSCheck(AgentCheck):
     def check(self, instance):
         files, err, retcode = get_subprocess_output(["ls", "."], self.log, raise_on_empty_output=True)
-        file_count = len(files) #len() returns an int by default
+        file_count = len(files.split('\n') - 1  #len() returns an int by default
         self.gauge("file.count", file_count)
 ```
 
@@ -141,9 +141,9 @@ class LSCheck(AgentCheck):
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/integrations/new_check_howto/
+[1]: /developers/integrations/new_check_howto
 [2]: https://github.com/DataDog/integrations-extras
 [3]: http://app.datadoghq.com/account/settings#agent
-[4]: /help/
+[4]: /help
 [5]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks.checks.html#datadog_checks.base.checks.base.AgentCheck
 [6]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks.utils.html#module-datadog_checks.base.utils.subprocess_output

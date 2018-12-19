@@ -10,13 +10,13 @@ further_reading:
   text: "Perform Log Analytics"
 - link: "logs/processing"
   tag: "Documentation"
-  text: Learn how to process your logs
+  text: "Learn how to process your logs"
 - link: "logs/explorer/saved_views"
   tag: Documentation
-  text: Automatically configure your Log Explorer
+  text: "Automatically configure your Log Explorer"
 - link: "logs/explorer/patterns"
   tag: Documentation
-  text: Detect patterns inside your logs
+  text: "Detect patterns inside your logs"
 ---
 
 The Logs Explorer is your home base for troubleshooting and exploration:
@@ -55,7 +55,7 @@ Follow the [guide to search your logs][1] for a detailed explanation of all the 
 
 Use Saved Views to automatically configure your Log Explorer with a preselected set of facets, measures, searches, time ranges, and visualizations.
 
-Check the dedicated [saved views documentation][4] to learn more.
+Check the dedicated [saved views documentation][2] to learn more.
 
 ## Visualization
 
@@ -95,21 +95,21 @@ Choose to display one, three, or ten lines from your logs `message` attributes i
 **Note**:  If present, the `error.stack` attribute is displayed in priority as it should be used for stack traces.
 Remap any stack trace attribute to this specific attribute with [the attribute remapper Processor][2].
 
+
 [1]: /logs/explorer/search
 [2]: /logs/processing/processors/#remapper
-
 {{% /tab %}}
 {{% tab "Log Analytics" %}}
 
-After having gone through [Datadog processing][3], log parsing, having [facets](#facets) and [measures](#measures) over the important attributes, you can graph log queries and see maximums, averages, percentiles, unique counts, and more.
+After having gone through [Datadog processing][1], log parsing, having [facets](#facets) and [measures](#measures) over the important attributes, you can graph log queries and see maximums, averages, percentiles, unique counts, and more.
 
-Follow the [log graphing guide][5] to learn more about all the graphing options.
+Follow the [log graphing guide][2] to learn more about all the graphing options.
 
 {{< img src="logs/explorer/log_analytics.png" alt="Log Analytics" responsive="true" style="width:70%;">}}
 
-[3]: /logs/processing
-[5]: /logs/explorer/analytics
 
+[1]: /logs/processing
+[2]: /logs/explorer/analytics
 {{% /tab %}}
 {{% tab "Log Patterns" %}}
 
@@ -117,20 +117,20 @@ Investigating large volumes of log data can be time consuming: you can spend hou
 
 In the Log Explorer, patterns can be surfaced automatically to bring structure to the problem and help you quickly see what matters—exclude what's irrelevant.
 
-Find out more in the [Log Patterns section][6]
+Find out more in the [Log Patterns section][1]
 
 {{< img src="logs/explorer/log_patterns.png" alt="Log Patterns" responsive="true" style="width:70%;">}}
 
-[6]: /logs/explorer/patterns
 
+[1]: /logs/explorer/patterns
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Setup
 
-After being processed with the help of pipelines and processors, your logs attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [Log Analytics][2].
+After being processed with the help of pipelines and processors, your logs attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [Log Analytics][3].
 
-Note: To leverage the most out of your Log explorer view, make sure your logs attributes follow [Datadog attribute naming convention][5].
+Note: To leverage the most out of your Log explorer view, make sure your logs attributes follow [Datadog attribute naming convention][4].
 
 {{< tabs >}}
 {{% tab "Facets" %}}
@@ -149,9 +149,9 @@ To start using an attribute as a facet or in the search, click on it and add it 
 
 Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar][1], [the Facet Panel](#facet-panel), and in the [Log Analytics query][2].
 
+
 [1]: /logs/explorer/search
 [2]: /logs/explorer/analytics
-
 {{% /tab %}}
 
 
@@ -173,9 +173,9 @@ Each measure has its own unit that is then used for display in the Log Explorer 
 
 {{< img src="logs/explorer/edit_a_measure.png" alt="Edit a measure" responsive="true" style="width:50%;">}}
 
+
 [1]: /logs/explorer/search
 [2]: /logs/explorer/analytics
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -190,12 +190,11 @@ Export your current Log Visualization with the *Export* functionality:
 
 | Button                | Description                                                                                                          |
 | ----                  | -----                                                                                                                |
-| Export to Monitor     | Export the query applied to your Logstream in order to create the log monitor query for a new [log monitor][7]       |
+| Export to Monitor     | Export the query applied to your Logstream in order to create the log monitor query for a new [log monitor][1]       |
 | Export to CSV         | Export your current Logstream view with its selected column into a CSV file. You can export up to 5000 logs at once. |
 
-[7]: /monitors/monitor_types/log
-[8]: https://app.datadoghq.com/logs
 
+[1]: /monitors/monitor_types/log
 {{% /tab %}}
 {{% tab "Log Analytics" %}}
 
@@ -203,14 +202,13 @@ Export your current Log Visualization with the *Export* functionality:
 
 | Button              | Description                                                                                                                                                                  |
 | ----                | -----                                                                                                                                                                        |
-| Export to Monitor   | Export the query applied to your Log Analytics in order to create the log monitor query for a new [log monitor][7] *This functionality is not available yet.*                |
-| Export to Timeboard | Export your Logstream as a widget to a [Timeboard][9]. **This functionality is still in beta, [contact the Datadog support team][10] to activate it for your organization.** |
+| Export to Monitor   | Export the query applied to your Log Analytics in order to create the log monitor query for a new [log monitor][1] *This functionality is not available yet.*                |
+| Export to Timeboard | Export your Logstream as a widget to a [Timeboard][2]. **This functionality is still in beta, [contact the Datadog support team][3] to activate it for your organization.** |
 
-[7]: /monitors/monitor_types/log
-[9]: /graphing/dashboards/timeboard/
-[10]: /help
-[11]: /logs/explorer/analytics
 
+[1]: /monitors/monitor_types/log
+[2]: /graphing/dashboards/timeboard
+[3]: /help
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -219,8 +217,6 @@ Export your current Log Visualization with the *Export* functionality:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/search
-[2]: /logs/explorer/analytics
-[3]: /logs/processing
-[4]: /logs/explorer/saved_views
-[5]: /logs/processing/attributes_naming_convention
-[10]: /help
+[2]: /logs/explorer/saved_views
+[3]: /logs/explorer/analytics
+[4]: /logs/processing/attributes_naming_convention

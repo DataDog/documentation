@@ -19,6 +19,6 @@ Set-AzureRmVMExtension -Publisher "Datadog.Agent" -ExtensionType "DatadogWindows
 
 More information on the syntax to set Azure instance extensions can be found [in the Microsoft documentation][3].
 
-[1]: https://www.datadoghq.com/blog/introducing-azure-monitoring-with-one-click-datadog-deployment/
-[2]: https://docs.datadoghq.com/integrations/azure/#deploy-agents
+[1]: https://www.datadoghq.com/blog/introducing-azure-monitoring-with-one-click-datadog-deployment
+[2]: /integrations/azure/#deploy-agents
 [3]: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/set-azurermvmextension?view=azurermps-6.2.0

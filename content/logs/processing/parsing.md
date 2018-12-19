@@ -7,16 +7,16 @@ aliases:
 further_reading:
 - link: "logs/processing/processors"
   tag: "Documentation"
-  text: Learn how to process your logs
+  text: "Learn how to process your logs"
 - link: "logs/faq/how-to-investigate-a-log-parsing-issue"
   tag: "FAQ"
-  text: How to investigate a log parsing issue?
+  text: "How to investigate a log parsing issue?"
 - link: "logs/faq/log-parsing-best-practice"
   tag: "FAQ"
-  text: Log Parsing - Best Practice
+  text: "Log Parsing - Best Practice"
 - link: "logs/logging_without_limits"
   tag: "Documentation"
-  text: Control the volume of logs indexed by Datadog
+  text: "Control the volume of logs indexed by Datadog"
 ---
 
 ## Overview 
@@ -99,7 +99,7 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 | `nullIf("value")`                                              | Returns null if the match is equal to the provided value.                                                                                                 |
 | `json`                                                         | Parses properly formatted JSON.                                                                                                                           |
 | `rubyhash`                                                     | Parses properly formatted Ruby hash (e.g. `{name => "John", "job" => {"company" => "Big Company", "title" => "CTO"}}`).                                    |
-| `useragent([decodeuricomponent:true/false])`                   | Parses a user-agent and returns a JSON object that contains the device, OS, and the browser represented by the Agent. [Check the User Agent processor][3]. |
+| `useragent([decodeuricomponent:true/false])`                   | Parses a user-agent and returns a JSON object that contains the device, OS, and the browser represented by the Agent. [Check the User Agent processor][1]. |
 | `querystring`                                                  | Extracts all the key-value pairs in a matching URL query string (e.g. `?productId=superproduct&promotionCode=superpromo`).                                |
 | `decodeuricomponent`                                           | This core filter decodes URI components.                                                                                                                  |
 | `lowercase`                                                    | Returns the lower-cased string.                                                                                                                           |
@@ -107,13 +107,13 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 | `keyvalue([separatorStr[, characterWhiteList [, quotingStr]])` | Extracts key value pattern and returns a JSON object. [See key-value Filter examples](#key-value).                                                        |
 | `scale(factor)`                                                | Multiplies the expected numerical value by the provided factor.                                                                                           |
 | `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | Parses a string sequence of tokens and returns it as an array.                                                                                            |
-| `url`                                                          | Parses a UFL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][1].                |
+| `url`                                                          | Parses a UFL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][2].                |
 
 
 
-[1]: /logs/processing/processors/#url-parser
-[3]: /logs/processing/processors/#user-agent-parser
 
+[1]: /logs/processing/processors/#user-agent-parser
+[2]: /logs/processing/processors/#url-parser
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -244,7 +244,7 @@ The date matcher transforms your timestamp in the EPOCH format.
 | Thu Jun 16 08:29:03 2016      | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` | {"date": 1466058543000} |
 | 2007-08-31 19:22:22.427 ADT   | `%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`               | {"date": 1188675889244} |
 
-**Note**: Parsing a date **doesn't** set its value as the log official date, for this use the Log Date Remapper [Log Date Remapper][2] in a subsequent Processor.
+**Note**: Parsing a date **doesn't** set its value as the log official date, for this use the Log Date Remapper [Log Date Remapper][1] in a subsequent Processor.
 
 ### Conditional pattern
 
@@ -310,5 +310,4 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/processors/#url-parser
-[2]: /logs/processing/processors/#log-date-remapper
+[1]: /logs/processing/processors/#log-date-remapper

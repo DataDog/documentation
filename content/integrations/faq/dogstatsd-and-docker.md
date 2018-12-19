@@ -11,7 +11,7 @@ After your code is configured, run your custom application container using [the 
 
 ##### Example: Monitoring a basic Python application
 
-To monitor your application, run the Datadog container using the [Basic Docker Agent usage][6] instructions. The `docker run` command sets the name of the container to `dd-agent`.
+To monitor your application, run the Datadog container using the [Basic Docker Agent usage][5] instructions. The `docker run` command sets the name of the container to `dd-agent`.
 
 Next, instrument your code. Here's a basic Flask-based web application:
 
@@ -45,11 +45,11 @@ docker run -d --name my-web-app \
     my-web-app
 ```
 
-For another example using DogStatsD, see our [Docker Compose example project on Github][5].
+For another example using DogStatsD, see our [Docker Compose example project on GitHub][6].
 
-[1]: /integrations/
-[2]: /developers/libraries/
-[3]: /api/
+[1]: /integrations
+[2]: /developers/libraries
+[3]: /api
 [4]: https://docs.docker.com/engine/reference/run/#expose-incoming-ports
-[5]: https://github.com/DataDog/docker-compose-example
-[6]: /agent/basic_agent_usage/docker/#how-to-run-it
+[5]: /agent/docker/#how-to-run-it
+[6]: https://github.com/DataDog/docker-compose-example

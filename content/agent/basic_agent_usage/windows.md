@@ -8,13 +8,13 @@ aliases:
 further_reading:
 - link: "logs/"
   tag: "Documentation"
-  text: Collect your logs
+  text: "Collect your logs"
 - link: "graphing/infrastructure/process"
   tag: "Documentation"
-  text: Collect your processes
+  text: "Collect your processes"
 - link: "tracing"
   tag: "Documentation"
-  text: Collect your traces
+  text: "Collect your traces"
 ---
 
 ## Overview
@@ -41,10 +41,10 @@ The following configuration command line options are available when installing t
 | `APM_ENABLED`     | String | Explicitly enables (if set to `"true"`) or disables (if set to `"false"`) the APM Agent in the configuration file.  APM is enabled by default                                                                 |
 | `PROCESS_ENABLED` | String | Enables (if set to `"true"`) or explicitly disables (if set to `"false"`) the process Agent in the configuration file.  The process Agent is disabled by default.                                             |
 | `CMD_PORT`        | Number | Number is a valid port number between 0 and 65534.  The Datadog Agent uses port 5001 by default for it's control API.  If that port is already in use by another program, the default may be overridden here. |
-| `PROXY_HOST`      | String | If using a proxy, sets your proxy host. [Learn more on using a proxy with the Datadog Agent][8].                                                                                                              |
-| `PROXY_PORT`      | Number | If using a proxy, sets your proxy port. [Learn more on using a proxy with the Datadog Agent][8].                                                                                                              |
-| `PROXY_USER`      | String | If using a proxy, sets your proxy user. [Learn more on using a proxy with the Datadog Agent][8].                                                                                                              |
-| `PROXY_PASSWORD`  | String | If using a proxy, sets your proxy password. [Learn more on using a proxy with the Datadog Agent][8].                                                                                                          |
+| `PROXY_HOST`      | String | If using a proxy, sets your proxy host. [Learn more on using a proxy with the Datadog Agent][2].                                                                                                              |
+| `PROXY_PORT`      | Number | If using a proxy, sets your proxy port. [Learn more on using a proxy with the Datadog Agent][2].                                                                                                              |
+| `PROXY_USER`      | String | If using a proxy, sets your proxy user. [Learn more on using a proxy with the Datadog Agent][2].                                                                                                              |
+| `PROXY_PASSWORD`  | String | If using a proxy, sets your proxy password. [Learn more on using a proxy with the Datadog Agent][2].                                                                                                          |
 
 Note: If a valid `datadog.yaml` is found and has an `API_KEY` configured, that file takes precedence over all specified command-line options.
 
@@ -117,8 +117,8 @@ OR
 
 * `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
 
-[1]: /integrations
 
+[1]: /integrations
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -134,8 +134,8 @@ OR
 
 * `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
 
-[1]: /integrations
 
+[1]: /integrations
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -196,10 +196,10 @@ If you're running on a version older than 5.2 visit the status page in your web 
 
 The Agent logs are located in the `C:\ProgramData\Datadog\logs` directory and all logs are in the `agent.log` file.
 
-If you're still having trouble, [our support team][3] is glad to provide further assistance.
+If you're still having trouble, [our support team][1] is glad to provide further assistance.
 
-[3]: /help
 
+[1]: /help
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -212,7 +212,7 @@ For Windows Server 2008, Vista and newer, logs are available at `C:\ProgramData\
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
-* Navigate to [http://127.0.0.1:5002][9] to [display the Agent GUI][5]
+* Navigate to [http://127.0.0.1:5002][1] to [display the Agent GUI][2]
 
 * Select flare tab
 
@@ -224,9 +224,9 @@ For Windows Server 2008, Vista and newer, logs are available at `C:\ProgramData\
 
 {{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Windows flare with Agent 6" responsive="true" style="width:75%;">}}
 
-[5]: /agent/#using-the-gui
-[9]: http://127.0.0.1:5002
 
+[1]: http://127.0.0.1:5002
+[2]: /agent/#using-the-gui
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -295,7 +295,7 @@ When adding your own services, be sure to follow the formatting exactly as shown
 
 Also, any time you modify an Integration you'll need to restart the Datadog Service. You can do this from services.msc or right from the UI via Actions.
 
-For Services, Datadog doesn't track the metrics, only their availability. (For metrics you'll want to use [Process](/#monitoring-windows-processes) or [WMI Integration][6]). To set up a Monitor, select the "Integration" then "Windows Service" monitor type. There you can "Pick Monitor Scope" and choose the service you would like to monitor.
+For Services, Datadog doesn't track the metrics, only their availability. (For metrics you'll want to use [Process][3] or [WMI Integration][4]). To set up a Monitor, select the "Integration" then "Windows Service" monitor type. There you can "Pick Monitor Scope" and choose the service you would like to monitor.
 
 ### Monitoring system load for Windows
 
@@ -318,7 +318,7 @@ While Windows does not offer this exact metric, there is an equivalent option th
 
 ### Monitoring Windows Processes
 
-You can monitor Windows processes via the [process Integration][7]. To set this up on Windows, select the "Process" Integration from the list of Integrations in the Datadog Agent Manager and edit the configuration.
+You can monitor Windows processes via the [process Integration][5]. To set this up on Windows, select the "Process" Integration from the list of Integrations in the Datadog Agent Manager and edit the configuration.
 
 For example, to monitor Notepad, your configuration file would include:
 
@@ -344,12 +344,7 @@ Again, due to the sensitivity of yaml, if you've tried the above and cannot get 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/windows
-[2]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
-[3]: /help
-[4]: /agent/faq/agent-commands
-[5]: /agent/#using-the-gui
-[6]: /integrations/wmi
-[7]: /integrations/process/
-[8]: /agent/proxy
-[9]: http://127.0.0.1:5002
-[10]: /integrations
+[2]: /agent/proxy
+[3]: /#monitoring-windows-processes
+[4]: /integrations/wmi
+[5]: /integrations/process

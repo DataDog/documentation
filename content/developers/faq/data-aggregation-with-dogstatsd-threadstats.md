@@ -6,7 +6,7 @@ kind: faq
 The statsd protocol is a great setup to fire many metrics and monitor your application code without blocking HTTP calls. Data is sampled in your application code then is transmitted via UDP to the [DogStatsD server][1] (embedded in the dd-agent) that aggregates then sends data to Datadog api endpoint. [Read more about the DogStatsD setup][1]:
 
 This article aims at describing why and how the aggregation is performed.
-([Python threadstats library](/developers/faq/is-there-an-alternative-to-dogstatsd-and-the-api-to-submit-metrics-threadstats) variations are mentioned at the end of this article.)
+([Python threadstats library][2] variations are mentioned at the end of this article.)
 
 ## Why aggregating metrics?
 
@@ -26,11 +26,11 @@ Among all values received during the same flush interval, the aggregated value i
 
 * Gauge: the most recent datapoint received
 * Count/Counter: the sum of the received values
-* Histogram: the min, max, sum, avg, 95percentiles, count, median of all value received, check [metrics documentation page][2] for more details.
+* Histogram: the min, max, sum, avg, 95percentiles, count, median of all value received, check [metrics documentation page][3] for more details.
 * Set: the number of different values seen
 * Rate: the value difference divided by the time difference of the last 2 datapoints received
 
-[Find more information about each metric type][2].
+[Find more information about each metric type][3].
 
 ## Threadstats variations
 
@@ -54,8 +54,9 @@ For instance during the flush interval of 10 seconds (between 10:00:00 and 10:00
 2. {09:30:10, 1}, {10:00:00, 2}, {10:00:00,1}, {10:00:05,1}, {10:00:05,1} # 2- every datapoint in the same roll_up_interval (5 seconds) gets the same timestamp
 3. {09:30:10, 1}, {10:00:00, 3}, {10:00:05,2} # 3- data is aggregated and only 4 values are eventually submitted to Datadog
 
-[Find more information about Threadstatsd aggregation][3].
+[Find more information about Threadstatsd aggregation][4].
 
 [1]: /developers/dogstatsd
-[2]: /developers/metrics
-[3]: https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/metrics.py
+[2]: /developers/faq/is-there-an-alternative-to-dogstatsd-and-the-api-to-submit-metrics-threadstats
+[3]: /developers/metrics
+[4]: https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/metrics.py

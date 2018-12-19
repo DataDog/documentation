@@ -14,7 +14,7 @@ further_reading:
   text: Consulter le statut de vos monitors
 ---
 
-## Aperçu
+## Présentation
 
 Les monitors d'événements vous permettent de recevoir une alerte lorsqu'un événement correspondant à votre requête se produit.
 

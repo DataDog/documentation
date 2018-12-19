@@ -53,4 +53,4 @@ In addition to the feature we may apply to your account, here are 3 workarounds 
 * **Submit the metric without the changing tags**: The obvious drawback are the disparities between the levels of detail provided by this tag, but you'll get accurate results on your graphs. Thus we would recommend continuing to send the metric as you do right now (to enjoy this level of detail) and in addition submit the same data under a slightly different name `<your.metric>.no_tag_<tag_name>` without this tag for graphing global queries without the spikes otherwise caused by `<tag_name>`.
 
 [1]: /help
-[2]: /graphing/functions/
+[2]: /graphing/functions
