@@ -6,7 +6,7 @@
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host", "port"],
         "name": "ruok",
-        "description": "Envoie `ruok` au node monitoré. Renvoie `OK` avec une réponse `imok`, `WARN` dans le cas d'une autre réponse et `CRITICAL` si aucune réponse n'est reçue."
+        "description": "Envoie `ruok` au nœud surveillé. Renvoie `OK` pour une réponse `imok`, renvoie `WARN` pour toute autre réponse ou renvoie `CRITICAL` si aucune réponse n'est reçue."
     },
     {
         "agent_version": "5.1.0",
@@ -15,6 +15,6 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "port"],
         "name": "Mode attendu",
-        "description": "Compare le mode actuel donné par la commande `stat` au mode attendu configuré dans` zk.yaml`. Retourne OK lorsque les modes correspondent et `CRITICAL` sinon. Renvoie seulement un statut quand il y a une valeur pour `expected_mode` dans` zk.yaml`."
+        "description": "Compare le mode actuel donné par la commande `stat` au mode attendu configuré dans` zk.yaml`. Renvoie `OK` lorsque les modes correspondent. Si ce n'est pas le cas, renvoie `CRITICAL`. Renvoie uniquement un statut lorsqu'une valeur pour `expected_mode` est définie dans` zk.yaml`."
     }
 ]

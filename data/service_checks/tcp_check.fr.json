@@ -6,6 +6,6 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "instance", "port", "target_host"],
         "name": "TCP",
-        "description": "Renvoie CRITICAL si l'Agent ne peut pas établir de connexion TCP avec l'URL. Retourne OK si la connexion est réussie."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable d'établir de connexion TCP avec l'URL ou renvoie `OK` si la connexion est établie."
     }
 ]

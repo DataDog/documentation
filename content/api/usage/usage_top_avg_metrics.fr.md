@@ -11,7 +11,7 @@ Obtenez les principales [métriques custom][1] selon la moyenne horaire.
 
 ##### Arguments
 * **`month`** [*obligatoire*] :
-    datetime au format ISO-8601 , UTC, au mois près : [YYYY-MM]. Pour une utilisation commençant à cette date.
+    datetime au format ISO-8601 , UTC, au mois près : [AAAA-MM]. Pour une utilisation commençant à cette date.
 * **`names`** [*facultatif*, *défaut* = **None**] :
     Liste des noms de métriques séparés par des virgules.
 
