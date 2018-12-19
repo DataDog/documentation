@@ -204,7 +204,7 @@ Classic:
       api: true
       authors: Jacob Aronoff
 Tracing:
-  - C# / .NET:
+  - .NET:
     - name: dd-trace-dotnet
       link: https://github.com/DataDog/dd-trace-dotnet
       official: true
