@@ -50,7 +50,7 @@ Navigate to the [Monitor page][1] for **Forecast Alerts**. Then fill out the **D
 
 There are three required options for setting up a forecast alert:
 
-* The threshold at which an alert is triggered. For a metric like `system.disk.in_use` this should be set to 1.0, whereas for a metric like `system.mem.pct_usable` this should be set to 0.0. A recovery threshold is also required.
+* The threshold at which an alert is triggered. For a metric like `system.disk.in_use` this should be set to 1.0, whereas for a metric like `system.mem.pct_usable` this should be set to 0.0. A [recovery threshold][2] is also required.
 * The condition on which an alert is triggered. For a metric like `system.disk.in_use` this should be set to "above or equal to", whereas for a metric like `system.mem.pct_usable` this should be set to "below or equal to".
 * Control how far in advance you would like to be alerted before your metric hits its critical threshold.
 
@@ -58,7 +58,7 @@ There are three required options for setting up a forecast alert:
 
 Datadog automatically sets the **Advanced** options for you by analyzing your metric. Note that any changes in the **Define the metric** section could change the advanced options.
 
-* You can change the forecasting algorithm to be used here. See the [next section of this page][2] for tips on how to choose the best algorithm for your use case. Each algorithm also has additional settings is described in the next section.
+* You can change the forecasting algorithm to be used here. See the [next section of this page][3] for tips on how to choose the best algorithm for your use case. Each algorithm also has additional settings is described in the next section.
 * We recommend using larger intervals between points to avoid having noise influence the forecast too much.
 * The number of deviations controls the width of the range of forecasted values. A value of 1 or 2 should be large enough to accurately forecast most "normal" points.
 
@@ -117,4 +117,5 @@ Not all functions may be nested inside of calls to the `forecast()` function. In
 {{< partial name="whats-next/whats-next.html" responsive="true" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/forecast
-[2]: /#forecast-algorithms
+[2]: /monitors/faq/what-are-recovery-thresholds
+[3]: /#forecast-algorithms
