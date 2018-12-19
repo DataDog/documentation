@@ -277,6 +277,21 @@ if (($span = GlobalTracer::get()->getActiveSpan()) !== null){
 **Note**: `GlobalTracer::get()->getActiveSpan()` returns `null` if there is no active span.
 
 {{% /tab %}}
+{{% tab "C++" %}}
+
+Add tags directly to a span object by calling `Span::SetTag`. For example:
+
+```cpp
+auto tracer = ...
+auto span = tracer->StartSpan("operation_name");
+span->SetTag("key must be string", "Values are variable types");
+span->SetTag("key must be string", 1234);
+```
+
+Values are of [variable type][1] and can be complex objects. Values are serialized as JSON, with the exception of a string value being serialized bare (without extra quotation marks).
+
+[1]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/value.h
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Change Agent Hostname
@@ -603,6 +618,24 @@ $span->finish();
 
 [1]: /tracing/languages/php/#compatibility
 {{% /tab %}}
+{{% tab "C++" %}}
+
+To manually instrument your code, install the tracer as in the setup examples, and then use the tracer object to create spans.
+
+```cpp
+{
+  // Create a root span.
+  auto root_span = tracer->StartSpan("operation_name");
+  // Create a child span.
+  auto child_span = tracer->StartSpan(
+      "operation_name",
+      {opentracing::ChildOf(&root_span->context())});
+  // Spans can be finished at a specific time ...
+  child_span->Finish();
+} // ... or when they are destructed (root_span finishes here).
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## OpenTracing
@@ -916,6 +949,11 @@ public void ConfigureServices(IServiceCollection services)
 
 [1]: https://www.nuget.org/packages/Datadog.Trace.OpenTracing
 {{% /tab %}}
+{{% tab "C++" %}}
+
+The Datadog C++ tracer can only be used through the OpenTracing API. The usage instructions in this document all describe generic OpenTracing functionality.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Distributed Tracing
@@ -1001,7 +1039,7 @@ Distributed tracing is disabled by default. Refer to the configuration documenta
 
 Distributed tracing is supported in the following frameworks: 
 
-| Framework/Library |                          API Documentation                          |
+| Framework/Library | API Documentation                                                   |
 | ----------------- | :------------------------------------------------------------------ |
 | aiohttp           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#aiohttp  |
 | bottle            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#bottle   |
@@ -1024,15 +1062,15 @@ Distributed tracing is disabled by default. Refer to the configuration documenta
 
 Distributed tracing is supported in the following frameworks:
 
-| Framework/Library |                                 API Documentation                                     |
-| ----------------- | :------------------------------------------------------------------------------------ |
-| Excon             | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#excon       |
-| Faraday           | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#faraday     |
-| Net/HTTP          | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#nethttp     |
-| Rack              | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#rack        |
-| Rails             | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#rails       |
-| Rest Client       | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#restclient  |
-| Sinatra           | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sinatra     |
+| Framework/Library | API Documentation                                                                    |
+| ----------------- | :----------------------------------------------------------------------------------- |
+| Excon             | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#excon      |
+| Faraday           | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#faraday    |
+| Net/HTTP          | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#nethttp    |
+| Rack              | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#rack       |
+| Rails             | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#rails      |
+| Rest Client       | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#restclient |
+| Sinatra           | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sinatra    |
 
 For more details about how to activate and configure distributed tracing, see the [API documentation][1].
 
@@ -1107,6 +1145,49 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 Distributed tracing is enabled by default. 
 
 {{% /tab %}}
+{{% tab "C++" %}}
+
+Distributed tracing can be accomplished by [using the `Inject` and `Extract` methods on the tracer][1], which accept [generic `Reader` and `Writer` types][2]. Priority sampling (enabled by default) should be on to ensure uniform delivery of spans.
+
+```cpp
+// Allows writing propagation headers to a simple map<string, string>.
+// Copied from https://github.com/opentracing/opentracing-cpp/blob/master/mocktracer/test/propagation_test.cpp
+struct HTTPHeadersCarrier : HTTPHeadersReader, HTTPHeadersWriter {
+  HTTPHeadersCarrier(std::unordered_map<std::string, std::string>& text_map_)
+      : text_map(text_map_) {}
+
+  expected<void> Set(string_view key, string_view value) const override {
+    text_map[key] = value;
+    return {};
+  }
+
+  expected<void> ForeachKey(
+      std::function<expected<void>(string_view key, string_view value)> f)
+      const override {
+    for (const auto& key_value : text_map) {
+      auto result = f(key_value.first, key_value.second);
+      if (!result) return result;
+    }
+    return {};
+  }
+
+  std::unordered_map<std::string, std::string>& text_map;
+};
+
+void example() {
+  auto tracer = ...
+  std::unordered_map<std::string, std::string> headers;
+  HTTPHeadersCarrier carrier(headers);
+
+  auto span = tracer->StartSpan("operation_name");
+  tracer->Inject(span->context(), carrier);
+  // `headers` now populated with the headers needed to propagate the span.
+}
+```
+
+[1]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter
+[2]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/propagation.h
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Priority Sampling
@@ -1127,7 +1208,7 @@ Priority sampling is disabled by default. To enable it, configure the `priority.
 Current Priority Values (more may be added in the future):
 
 | Sampling Value | Effect                                                                                                     |
-| --------       | :--------------------------------------------------                                                        |
+| -------------- | :--------------------------------------------------------------------------------------------------------- |
 | `SAMPLER_DROP` | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
 | `SAMPLER_KEEP` | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
 | `USER_DROP`    | The user asked to not keep the trace. The Agent will drop it.                                              |
@@ -1176,7 +1257,7 @@ span.context.sampling_priority = USER_REJECT
 
 The following priorities can be used.
 
-| Sampling Value |                                                   Effect                                                   |
+| Sampling Value | Effect                                                                                                     |
 | -------------- | :--------------------------------------------------------------------------------------------------------- |
 | AUTO_REJECT    | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
 | AUTO_KEEP      | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
@@ -1208,8 +1289,8 @@ span.context.sampling_priority = Datadog::Ext::Priority::USER_KEEP
 
 Possible values for the sampling priority tag are:
 
-| Sampling Value | Effect                                                                                                     |
-| --------       | :--------------------------------------------------                                                        |
+| Sampling Value                        | Effect                                                                                                     |
+| ------------------------------------- | :--------------------------------------------------------------------------------------------------------- |
 | `Datadog::Ext::Priority::AUTO_REJECT` | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
 | `Datadog::Ext::Priority::AUTO_KEEP`   | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
 | `Datadog::Ext::Priority::USER_REJECT` | The user asked to not keep the trace. The Agent will drop it.                                              |
@@ -1253,12 +1334,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 Possible values for the sampling priority tag are:
 
-| Sampling Value             | Effect                                                                                                      |
-| -------------------------- | :---------------------------------------------------------------------------------------------------------- |
-| ext.PriorityAutoReject     | The sampler automatically decided to not keep the trace. The Agent will drop it.                            |
-| ext.PriorityAutoKeep       | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side.  |
-| ext.PriorityUserReject     | The user asked to not keep the trace. The Agent will drop it.                                               |
-| ext.PriorityUserKeep       | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                      |
+| Sampling Value         | Effect                                                                                                     |
+| ---------------------- | :--------------------------------------------------------------------------------------------------------- |
+| ext.PriorityAutoReject | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
+| ext.PriorityAutoKeep   | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
+| ext.PriorityUserReject | The user asked to not keep the trace. The Agent will drop it.                                              |
+| ext.PriorityUserKeep   | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
 
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
@@ -1282,7 +1363,7 @@ span.setTag('sampling.priority', priority.USER_KEEP)
 Possible values for the sampling priority tag are:
 
 | Sampling Value | Effect                                                                                                     |
-| --------       | :--------------------------------------------------                                                        |
+| -------------- | :--------------------------------------------------------------------------------------------------------- |
 | `AUTO_REJECT`  | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
 | `AUTO_KEEP`    | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
 | `USER_REJECT`  | The user asked to not keep the trace. The Agent will drop it.                                              |
@@ -1300,6 +1381,19 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 {{% tab "PHP" %}}
 
 Priority sampling is enabled by default. 
+
+{{% /tab %}}
+{{% tab "C++" %}}
+
+Priority sampling is enabled by default, and can be disabled in the TracerOptions. You can mark a span to be kept or discarded by setting the tag `sampling.priority`. A value of `0` means reject/don't sample. Any value greater than 0 means keep/sample.
+
+```cpp
+auto tracer = ...
+auto span = tracer->StartSpan("operation_name");
+span->SetTag("sampling.priority", 1); // Keep this span.
+auto another_span = tracer->StartSpan("operation_name");
+another_span->SetTag("sampling.priority", 0); // Discard this span.
+```
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -1533,6 +1627,18 @@ var tracer = Datadog.Trace.Tracer.Create(isDebugEnabled: true);
 
 {{% /tab %}}
 {{% tab "PHP" %}}
+
+{{% /tab %}}
+{{% tab "C++" %}}
+
+The release binary libraries are all compiled with debug symbols added to the optimized release. It is possible to use gdb or lldb to debug the library and to read core dumps. If you are building the library from source, pass the argument `-DCMAKE_BUILD_TYPE=RelWithDebInfo` to cmake to compile an optimized build with debug symbols.
+
+```bash
+cd .build
+cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+make
+make install
+```
 
 {{% /tab %}}
 {{< /tabs >}}
