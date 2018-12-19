@@ -596,7 +596,7 @@ languages:
           name: "C++"
           url: "tracing/languages/cpp/"
           weight: 180
-          parent: customnav_tracingnav_setup
+          parent: customnav_tracingnav_languages
           
 
         # Proxy Configuration
@@ -1757,7 +1757,7 @@ languages:
           name: "C++"
           url: "tracing/languages/cpp/"
           weight: 195
-          parent: customnav_tracingnav_setup
+          parent: customnav_tracingnav_languages
 
         # TRACING/APM - Setup Advanced
 
