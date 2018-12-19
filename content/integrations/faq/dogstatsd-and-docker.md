@@ -51,5 +51,5 @@ For another example using DogStatsD, see our [Docker Compose example project on 
 [2]: /developers/libraries
 [3]: /api
 [4]: https://docs.docker.com/engine/reference/run/#expose-incoming-ports
-[5]: /agent/basic_agent_usage/docker/#how-to-run-it
+[5]: /agent/docker/#how-to-run-it
 [6]: https://github.com/DataDog/docker-compose-example

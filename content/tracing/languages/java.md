@@ -3,7 +3,7 @@ title: Tracing Java Applications
 kind: Documentation
 aliases:
 - /tracing/java
-- /tracing/languages/java
+- /tracing/setup/java
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-java"
   tag: "GitHub"
@@ -18,7 +18,7 @@ further_reading:
 
 ## Installation and Getting Started
 
-To begin tracing applications written in any language, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications][2]).
+To begin tracing applications written in any language, first [install and configure the Datadog Agent][1], see the additional documentation for [tracing Docker applications][2] or [Kubernetes applications][3].
 
 Next, download `dd-java-agent.jar` that contains the Agent class files:
 
@@ -34,8 +34,8 @@ Finally, add the following JVM argument when starting your application in your I
 
 ## Automatic Instrumentation
 
-Automatic instrumentation for Java uses the `java-agent` instrumentation capabilities [provided by the JVM][3]. When a `java-agent` is registered, it has the ability to modify class files at load time.
-The `java-agent` uses the [Byte Buddy framework][4] to find the classes defined for instrumentation and modify those class bytes accordingly.
+Automatic instrumentation for Java uses the `java-agent` instrumentation capabilities [provided by the JVM][4]. When a `java-agent` is registered, it has the ability to modify class files at load time.
+The `java-agent` uses the [Byte Buddy framework][5] to find the classes defined for instrumentation and modify those class bytes accordingly.
 
 Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mixture of both. Instrumentation generally captures the following info:
 
@@ -74,7 +74,7 @@ Datadog officially supports the Java JRE 1.7 and higher of both Oracle JDK and O
 *Note:* Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Tomcat, Jetty, Websphere, Weblogic, etc.
 Also, frameworks like Spring Boot inherently work because it uses a Servlet compatible embedded application server.
 
-Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][5] if you need help.
+Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][6] if you need help.
 
 #### Networking Framework Compatibility
 
@@ -94,7 +94,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 
 **Networking tracing provides:** timing request to response, tags for the request (e.g. response code), error and stacktrace capturing, and distributed tracing.
 
-Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][5] if you need help.
+Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][6] if you need help.
 
 #### Data Store Compatibility
 
@@ -126,7 +126,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 
 **Datastore tracing provides:** timing request to response, query info (e.g. a sanitized query string), and error and stacktrace capturing.
 
-Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][5] if you need help.
+Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][6] if you need help.
 
 #### Other Framework Compatibility
 
@@ -138,13 +138,13 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | JSP Rendering | 2.3+     | Fully Supported | N/A               |
 | Rabbit AMQP   | 2.7+     | Fully Supported | N/A               |
 
-Don't see your desired framework? Datadog is continually adding additional support. Contact [Datadog support][5] if you need help.
+Don't see your desired framework? Datadog is continually adding additional support. Contact [Datadog support][6] if you need help.
 
 To improve visibility into applications using unsupported frameworks, consider:
 
 * Adding custom instrumentation (with OpenTracing or the `@Trace` annotation).
-* [Submitting a pull request][6] with instrumentation for inclusion in a future release.
-* Contacting [Datadog support][5] and submitting a feature request.
+* [Submitting a pull request][7] with instrumentation for inclusion in a future release.
+* Contacting [Datadog support][6] and submitting a feature request.
 
 ## Configuration
 
@@ -221,7 +221,7 @@ Now add `@Trace` to methods to have them be traced when running with `dd-java-ag
 
 ## JMX Metrics
 
-Datadog's Java Tracer provides support for 'in-process' JMX metrics collection. This is enabled with `jmxfetch.enabled` configuration parameter. Additional JMX metrics are configured using configuration files that are passed to `jmxfetch.metrics-configs`. Contents of those configuration files are equivalent to contents of the `conf` section for external jmxfetch. See [JMX Integration][7] for further details on configuration.
+Datadog's Java Tracer provides support for 'in-process' JMX metrics collection. This is enabled with `jmxfetch.enabled` configuration parameter. Additional JMX metrics are configured using configuration files that are passed to `jmxfetch.metrics-configs`. Contents of those configuration files are equivalent to contents of the `conf` section for external jmxfetch. See [JMX Integration][8] for further details on configuration.
 By default, when JMX metrics collection is enabled it monitors JVM heap memory, thread count, and garbage collection. Use it in conjunction with APM for a broader view into your Java application's performance.
 
 ## Performance
@@ -239,8 +239,9 @@ Java APM has minimal impact on the overhead of an application:
 
 [1]: /tracing/setup
 [2]: /tracing/setup/docker
-[3]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
-[4]: http://bytebuddy.net
-[5]: /help
-[6]: https://github.com/DataDog/documentation#outside-contributors
-[7]: /integrations/java/#configuration
+[3]: /agent/kubernetes/daemonset_setup/#trace-collection
+[4]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
+[5]: http://bytebuddy.net
+[6]: /help
+[7]: https://github.com/DataDog/documentation#outside-contributors
+[8]: /integrations/java/#configuration

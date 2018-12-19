@@ -1,5 +1,5 @@
 ---
-title: Advanced APM Setup
+title: Advanced Languages instrumentation
 kind: documentation
 ---
 
@@ -279,6 +279,96 @@ if (($span = GlobalTracer::get()->getActiveSpan()) !== null){
 {{% /tab %}}
 {{< /tabs >}}
 
+## Change Agent Hostname
+
+Configure your application level tracers to submit traces to a custom Agent hostname. See the examples below for each supported language:
+
+{{< tabs >}}
+{{% tab "Java" %}}
+
+The Java Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+
+```bash
+java -javaagent:<DD-JAVA-AGENT-PATH>.jar -jar <YOUR_APPLICATION_PATH>.jar
+```
+
+You can also use system properties:
+
+```bash
+java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
+     -Ddd.agent.host=$DD_AGENT_HOST \
+     -Ddd.agent.port=$DD_TRACE_AGENT_PORT \
+     -jar <YOUR_APPLICATION_PATH>.jar
+```
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+The Python Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
+
+```python
+import os
+from ddtrace import tracer
+
+tracer.configure(
+    hostname=os.environ['DD_AGENT_HOST'],
+    port=os.environ['DD_TRACE_AGENT_PORT'],
+)
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+The Ruby Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
+
+```ruby
+Datadog.configure do |c|
+  c.tracer hostname: ENV['DD_AGENT_HOST'],
+           port: ENV['DD_TRACE_AGENT_PORT']
+end
+```
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+The Go Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
+
+```go
+package main
+
+import (
+    "net"
+    "os"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+    addr := net.JoinHostPort(
+        os.Getenv("DD_AGENT_HOST"),
+        os.Getenv("DD_TRACE_AGENT_PORT"),
+    )
+    tracer.Start(tracer.WithAgentAddr(addr))
+    defer tracer.Stop()
+}
+
+```
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+The NodeJS Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
+
+```js
+const tracer = require('dd-trace').init({
+  hostname: process.env.DD_AGENT_HOST,
+  port: process.env.DD_TRACE_AGENT_PORT
+})
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Manual Instrumentation
 
 Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][2] and familiarize yourself with the core concepts of Datadog APM. 
@@ -307,7 +397,7 @@ public class MyClass {
 ```
 
 
-[1]: /tracing/setup/java/#compatibility
+[1]: /tracing/languages/java/#compatibility
 [2]: #opentracing
 [3]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 {{% /tab %}}
@@ -372,7 +462,7 @@ API details of the decorator can be found here:
 
 
 
-[1]: /tracing/setup/python/#compatibility
+[1]: /tracing/languages/python/#compatibility
 [2]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.wrap
 [3]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span
 [4]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#tracer
@@ -411,7 +501,7 @@ end
 For more details about manual instrumentation, check out the [API documentation][2].
 
 
-[1]: /tracing/setup/ruby/#compatibility
+[1]: /tracing/languages/ruby/#compatibility
 [2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -442,7 +532,7 @@ func main() {
 ```
 
 
-[1]: /tracing/setup/go/#compatibility
+[1]: /tracing/languages/go/#compatibility
 [2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -462,7 +552,7 @@ span.finish()
 For more information on manual instrumentation, see the [API documentation][2].
 
 
-[1]: /tracing/setup/nodejs/#compatibility
+[1]: /tracing/languages/nodejs/#compatibility
 [2]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -486,7 +576,7 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 ```
 
 
-[1]: /tracing/setup/dotnet/#compatibility
+[1]: /tracing/languages/dotnet/#compatibility
 {{% /tab %}}
 {{% tab "PHP" %}}
 If you aren’t using libraries supported by automatic instrumentation (see [library compatibility][1]), manually instrument your code.
@@ -511,7 +601,7 @@ $span->finish();
 ```
 
 
-[1]: /tracing/setup/php/#compatibility
+[1]: /tracing/languages/php/#compatibility
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -682,7 +772,7 @@ Notice the above examples only use the OpenTracing classes. Check the [OpenTraci
 
 
 [1]: https://github.com/opentracing/opentracing-java
-[2]: /tracing/setup/java/#configuration
+[2]: /tracing/languages/java/#configuration
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -1004,18 +1094,18 @@ func handler(w http.ResponseWriter, r *http.Request) {
 Distributed tracing is enabled by default for all supported integrations (see [Compatibility][1]).
 
 
-[1]: /tracing/setup/nodejs/#compatibility
+[1]: /tracing/languages/nodejs/#compatibility
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
+[1]: /help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Distributed tracing is enabled by default. 
 
-[1]: /help
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1063,7 +1153,7 @@ public class MyClass {
 }
 ```
 
-[1]: /tracing/setup/java/#configuration
+[1]: /tracing/languages/java/#configuration
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -1205,12 +1295,12 @@ Once the sampling priority has been set, it cannot be changed. This is done auto
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
+[1]: /help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Priority sampling is enabled by default. 
 
-[1]: /help
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1219,7 +1309,7 @@ Priority sampling is enabled by default.
 For each generated trace, there are very likely log events written by the monitored functions and applications. 
 The purpose of this section is to explain how the correlation between traces and logs can be improved by automatically adding  a trace id in your logs and then use it in the Datadog platform to show you the exact logs correlated to the observed trace.
 
-{{< img src="/src/images/tracing/logs_in_trace.png" alt="Logs in Traces" responsive="true" style="width:70%;">}}
+{{< img src="tracing/logs_in_trace.png" alt="Logs in Traces" responsive="true" style="width:70%;">}}
 
 {{< tabs >}}
 {{% tab "Java" %}}

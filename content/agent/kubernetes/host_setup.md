@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
 - link: "agent/autodiscovery"
   tag: "documentation"
-  text: "Docker Agent Autodiscovery"
+  text: Docker Agent Autodiscovery
 - link: "agent/kubernetes/host_setup"
   tag: "documentation"
   text: "Kubernetes Host Setup"
@@ -29,7 +29,7 @@ To gather your kube-state metrics:
 
 Since [Agent v6][2], Kubernetes DNS integration works automatically with the [Autodiscovery][3].
 
-Note: these metrics are unavailable for Azure Kubernetes Service (AKS).
+Note: these metrics are unavailable for Azure Kubernetes Service (AKS). 
 
 ## Collect container logs
 
@@ -49,5 +49,5 @@ To get a better idea of how (or why) to integrate your Kubernetes service, see t
 [2]: /agent
 [3]: /agent/autodiscovery
 [4]: https://app.datadoghq.com/account/settings#agent/kubernetes
-[5]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
+[5]: https://docs.datadoghq.com/agent/basic_agent_usage/kubernetes/#log-collection-setup
 [6]: https://www.datadoghq.com/blog/monitoring-kubernetes-era

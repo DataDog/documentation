@@ -1,5 +1,5 @@
 ---
-title: AWS ECS with Agent v5
+title: Amazon Elastic Container Service with Agent v5
 kind: faq
 ---
 
@@ -29,7 +29,7 @@ You may either configure the task using the [AWS CLI tools][2] or using the Amaz
 1. Edit dd-agent-ecs.json and update it with the [API_KEY][4] for your account.
 1. Execute the following command:
 ```
-aws ecs register-task-definition --cli-input-json file://path/to/dd-agent-ecs.json
+Amazon Elastic Container Service register-task-definition --cli-input-json file://path/to/dd-agent-ecs.json
 ```
 
 ##### Web UI

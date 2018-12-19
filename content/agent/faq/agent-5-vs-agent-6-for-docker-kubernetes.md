@@ -5,7 +5,7 @@ further_reading:
 - link: "agent/"
   tag: "Documentation"
   text: "Learn more about the Datadog Agent"
-- link: "agent/basic_agent_usage/docker"
+- link: "agent/docker"
   tag: "documentation"
   text: "Docker"
 - link: "agent/kubernetes/"

@@ -6,7 +6,7 @@ further_reading:
 - link: "/integrations/java"
   tag: "Documentation"
   text: "Java Integration"
-- link: "/agent/basic_agent_usage/docker/"
+- link: "/agent/docker/"
   tag: "Documentation"
   text: "Basic Docker Agent usage"
 - link: "https://hub.docker.com/r/datadog/agent/"

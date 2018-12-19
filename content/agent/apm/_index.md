@@ -8,21 +8,21 @@ aliases:
   - /tracing/setup/first_class_dimensions
   - /tracing/getting_further/first_class_dimensions/
 further_reading:
-- link: "tracing/setup/docker"
+- link: "/agent/docker/apm"
   tag: "Documentation"
-  text: "Docker setup"
-- link: "tracing/setup/go"
+  text: Docker setup
+- link: "tracing/languages/go"
   tag: "Documentation"
-  text: "Go language instrumentation"
-- link: "tracing/setup/java"
+  text: Go language instrumentation
+- link: "tracing/languages/java"
   tag: "Documentation"
-  text: "Java language instrumentation"
-- link: "tracing/setup/python"
+  text: Java language instrumentation
+- link: "tracing/languages/python"
   tag: "Documentation"
-  text: "Python language instrumentation"
-- link: "tracing/setup/ruby"
+  text: Python language instrumentation
+- link: "tracing/languages/ruby"
   tag: "Documentation"
-  text: "Ruby language instrumentation"
+  text: Ruby language instrumentation
 ---
 
 This documentation covers Agent v6 only, to know how to set up APM tracing with Agent v5, [refer to the dedicated APM with Agent v5 doc][1].
@@ -44,15 +44,13 @@ To start tracing your application:
 3. **Instrument your application**:
 
   {{< whatsnext desc="Select one of the following supported languages:">}}
-      {{< nextlink href="tracing/setup/docker" tag="Docker" >}}Docker setup.{{< /nextlink >}}
-      {{< nextlink href="tracing/setup/kubernetes" tag="Kubernetes" >}}Kubernetes setup.{{< /nextlink >}}
-      {{< nextlink href="tracing/setup/java" tag="Java" >}}Java language instrumentation.{{< /nextlink >}}
-      {{< nextlink href="tracing/setup/python" tag="Python" >}}Python language instrumentation.{{< /nextlink >}}
-      {{< nextlink href="tracing/setup/ruby" tag="Ruby" >}}Ruby language instrumentation{{< /nextlink >}}
-      {{< nextlink href="tracing/setup/go" tag="Go" >}}Go language instrumentation.{{< /nextlink >}}
-      {{< nextlink href="tracing/setup/nodejs" tag="Nodejs" >}}Node.js language instrumentation.{{< /nextlink >}}
-      {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}.NET language instrumentation.{{< /nextlink >}}
-      {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
+      {{< nextlink href="tracing/languages/java" tag="Java" >}}Java language instrumentation.{{< /nextlink >}}
+      {{< nextlink href="tracing/languages/python" tag="Python" >}}Python language instrumentation.{{< /nextlink >}}
+      {{< nextlink href="tracing/languages/ruby" tag="Ruby" >}}Ruby language instrumentation{{< /nextlink >}}
+      {{< nextlink href="tracing/languages/go" tag="Go" >}}Go language instrumentation.{{< /nextlink >}}
+      {{< nextlink href="tracing/languages/nodejs" tag="Nodejs" >}}Node.js language instrumentation.{{< /nextlink >}}
+      {{< nextlink href="tracing/languages/dotnet" tag=".NET" >}}.NET language instrumentation.{{< /nextlink >}}
+      {{< nextlink href="tracing/languages/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
   {{< /whatsnext >}}
 
 
@@ -169,7 +167,7 @@ There are several ways to specify an environment when reporting data:
 
 Environments appear at the top of APM pages. Use the dropdown to scope the data displayed on the current page.
 
-{{< img src="tracing/setup/envs_tracing_screen.png" alt="Envs tracing" responsive="true" style="width:80%;">}}
+{{< img src="agent/apm/envs_tracing_screen.png" alt="Envs tracing" responsive="true" style="width:80%;">}}
 
 ### Add a second primary tag in Datadog
 
@@ -189,7 +187,7 @@ If you change a previously set primary tag, be aware of the following:
 
 Primary tags appear at the top of APM pages. Use these selectors to slice the data displayed on the current page. To view all data independent of a primary tag, choose `<TAG_NAME>:*` from the dropdown (as in the image below).
 
-{{< img src="tracing/setup/primary_tags_ui.png" alt="Primary tags UI" responsive="true" style="width:80%;">}}
+{{< img src="agent/apm/primary_tags_ui.png" alt="Primary tags UI" responsive="true" style="width:80%;">}}
 
 ## Further Reading
 
@@ -204,7 +202,7 @@ Primary tags appear at the top of APM pages. Use these selectors to slice the da
 [7]: https://app.datadoghq.com/apm/home?env=
 [8]: /tracing/visualization
 [9]: /agent/faq/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[10]: /tracing/setup/docker
+[10]: /agent/docker/apm
 [11]: https://github.com/DataDog/datadog-trace-agent/blob/6.4.1/datadog.example.yaml
 [12]: /agent
 [13]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml

@@ -1,6 +1,8 @@
 ---
 title: Tracing PHP Applications
 kind: Documentation
+aliases:
+- /tracing/setup/php
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-php"
   tag: "GitHub"
@@ -19,9 +21,9 @@ The APM tracer for PHP applications is in Open Public Beta.
 
 ## Installation and Getting Started
 
-To begin tracing applications written in PHP, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications][2]).
+To begin tracing applications written in PHP, first [install and configure the Datadog Agent][1], see additional documentation for [tracing Docker applications][2] or [Kubernetes applications][3].
 
-Next, install the Datadog PHP extension using one of the precompiled packages for supported distributions. The latest packages can be found on GitHub's [releases page][3]. If you don't find your distribution, you can install the PHP extension [from source][4]
+Next, install the Datadog PHP extension using one of the precompiled packages for supported distributions. The latest packages can be found on GitHub's [releases page][4]. If you don't find your distribution, you can install the PHP extension [from source][5]
 
 ```bash
 # using RPM package (RHEL/Centos 6+, Fedora 20+)
@@ -46,7 +48,7 @@ composer require opentracing/opentracing
 composer require datadog/dd-trace
 ```
 
-**Note:** You can [install the Datadog library without changing minimum-stability][5]
+**Note:** You can [install the Datadog library without changing minimum-stability][6]
 
 ## Compatibility
 
@@ -61,7 +63,7 @@ PHP APM includes support for the following PHP versions:
 
 ## Automatic Instrumentation
 
-Automatic instrumentation uses the `ddtrace` extension to modify PHP's runtime and inject custom PHP code around specific methods. When [tracing is enabled][6] the PHP tracer is able to automatically instrument all supported libraries out of the box.
+Automatic instrumentation uses the `ddtrace` extension to modify PHP's runtime and inject custom PHP code around specific methods. When [tracing is enabled][7] the PHP tracer is able to automatically instrument all supported libraries out of the box.
 
 Automatic instrumentation captures:
 
@@ -88,7 +90,7 @@ Automatic instrumentation captures:
 | Yii            | 2.0.x       | Coming Soon        |
 | Slim           | 3.x         | Coming Soon        |
 
-Don't see your desired web frameworks? Let Datadog know more about your needs through [this survey][7]
+Don't see your desired web frameworks? Let Datadog know more about your needs through [this survey][8]
 
 #### Library Compatibility
 
@@ -106,7 +108,7 @@ Don't see your desired web frameworks? Let Datadog know more about your needs th
 | pgsql         | *(Any Supported PHP)*      | Coming Soon  |
 | Predis        | 1.1                        | Public Beta  |
 
-Don't see your desired libraries? Let Datadog know more about your needs through [this survey][7].
+Don't see your desired libraries? Let Datadog know more about your needs through [this survey][8].
 
 ## Further Reading
 
@@ -114,8 +116,9 @@ Don't see your desired libraries? Let Datadog know more about your needs through
 
 [1]: /tracing/setup
 [2]: /tracing/setup/docker
-[3]: https://github.com/DataDog/dd-trace-php/releases/latest
-[4]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#compiling-and-installing-the-extension-manually
-[5]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#alternative-install-datadogdd-trace-package-without-changing-minimum-stability
-[6]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#enabling-tracing
-[7]: https://goo.gl/forms/rKjH2J6nJ585KXri2
+[3]: /agent/kubernetes/daemonset_setup/#trace-collection
+[4]: https://github.com/DataDog/dd-trace-php/releases/latest
+[5]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#compiling-and-installing-the-extension-manually
+[6]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#alternative-install-datadogdd-trace-package-without-changing-minimum-stability
+[7]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#enabling-tracing
+[8]: https://goo.gl/forms/rKjH2J6nJ585KXri2

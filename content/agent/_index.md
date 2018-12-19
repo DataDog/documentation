@@ -110,7 +110,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 [1]: /agent/basic_agent_usage/deb
 [2]: /agent/basic_agent_usage/ubuntu
 [3]: /agent/basic_agent_usage/redhat
-[4]: /agent/basic_agent_usage/docker
+[4]: /agent/docker
 [5]: /agent/basic_agent_usage/kubernetes
 [6]: /agent/basic_agent_usage/suse
 [7]: /agent/basic_agent_usage/fedora
@@ -139,7 +139,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 [1]: /agent/basic_agent_usage/deb
 [2]: /agent/basic_agent_usage/ubuntu
 [3]: /agent/basic_agent_usage/redhat
-[4]: /agent/basic_agent_usage/docker
+[4]: /agent/docker
 [5]: /agent/basic_agent_usage/kubernetes
 [6]: /agent/basic_agent_usage/suse
 [7]: /agent/basic_agent_usage/fedora

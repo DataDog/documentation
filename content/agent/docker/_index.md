@@ -1,8 +1,8 @@
 ---
-title: Basic Docker Agent usage
+title: Docker Agent
 kind: documentation
 aliases:
-    - /guides/basic_agent_usage/docker/
+  - /guides/basic_agent_usage/docker/
 further_reading:
 - link: "agent/faq/getting-further-with-docker"
   tag: "FAQ"
@@ -12,13 +12,15 @@ further_reading:
   text: "Docker JMX"
 - link: "logs/docker"
   tag: "Documentation"
-  text: "Collect your Docker logs"
+  text: Collect your Docker logs
 - link: "graphing/infrastructure/process"
   tag: "Documentation"
-  text: "Collect your Docker processes"
-- link: "tracing/docker/"
+  text: Collect your Docker processes
+- link: "agent/docker/apm"
   tag: "Documentation"
-  text: "Collect your Docker traces"
+  text: Collect your Docker traces
+aliases:
+  - /agent/docker
 ---
 
 To install the Datadog Container Agent, follow the [Agent Installation Instructions][1] or see the information below. The [official Docker Agent 6 image][2] can also be consulted.
@@ -56,7 +58,6 @@ Optional collection Agents are disabled by default for security or performance r
 | Env Variable               | Description                                                                                                                                        |
 |----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_APM_ENABLED`           | Run the trace-agent along with the infrastructure Agent, allowing the container to accept traces on `8126/tcp`.                                    |
-| `DD_APM_NON_LOCAL_TRAFFIC` | Required to allow the Agent container to accept traces at `8126/tcp` from other containers.                                                        |
 | `DD_LOGS_ENABLED`          | Run the [log-agent][3] along with the infrastructure Agent.                                                                                        |
 | `DD_PROCESS_AGENT_ENABLED` | Enable live process collection in the [process-agent][4]. The Live Container View is already enabled by default if the Docker socket is available. |
 
@@ -144,7 +145,7 @@ Now when the container starts, all files in `/opt/datadog-agent-conf.d` with a `
 [2]: https://hub.docker.com/r/datadog/agent
 [3]: /logs
 [4]: /graphing/infrastructure/process
-[5]: /developers/dogstatsd
+[5]: https://docs.datadoghq.com/developers/dogstatsd
 [6]: /developers/dogstatsd/unix_socket
 [7]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [8]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
