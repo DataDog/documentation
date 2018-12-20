@@ -233,6 +233,6 @@ Configure NXLog to gather logs from your host, containers, & services.
 
 ## Troubleshooting
 
-Need help? Contact [Datadog Support][1].
+Need help? Contact [Datadog support][1].
 
 [1]: /help
