@@ -129,15 +129,18 @@ Those parameters can also be set with the following environment variables:
 * `DD_LOGS_CONFIG_LOGS_DD_URL`
 * `DD_LOGS_CONFIG_LOGS_NO_SSL`
 
-**Important Note**: The parameter `logs_no_ssl` is required to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`agent-intake.logs.datadoghq.com`) and your proxy hostname. You should use a SSL encrypted connection between your proxy and Datadog intake endpoint though.
+**Important Note**: The parameter `logs_no_ssl` is required to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`agent-intake.logs.datadoghq.com` or `agent-intake.logs.datadoghq.eu`) and your proxy hostname. You should use a SSL encrypted connection between your proxy and Datadog intake endpoint though.
 
-* Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs to `agent-intake.logs.datadoghq.com` on port `10516` and activate SSL encryption.
+* Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs to:
+    * For `app.datadoghq.com`: `agent-intake.logs.datadoghq.com` on port `10516` and activate SSL encryption.
+    * For `app.datadoghq.eu`: `agent-intake.logs.datadoghq.eu` on port `443` and activate SSL encryption.
 
 * Use the public key for TLS encryption for the SSL encryption:
     * For [app.datadoghq.com][1] 
     * For [app.datadoghq.eu][2]
 
     On some systems, the full certificate chain may be required. If so, use this public key instead:
+
     * For [app.datadoghq.com][3]
     * For [app.datadoghq.eu][4]
 
