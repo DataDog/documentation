@@ -1,26 +1,27 @@
 ---
 title: When I query can I use wildcards in metric names and events?
 kind: faq
+disable_toc: true
 ---
 
-We offer a [tagging system][1] that is a great feature in Datadog and is intended for easily graphing and scaling many instances of a metric.
+Wildcards are supported in [Event monitors][1] and [Events overlay][2].
 
-For example, instead of having specific metric names you can have slightly more general ones, and have different instances of that metric reporting with specific tags. Here's a toy example, using web_page_visitors as the metric name.
+For metrics, Datadog offers a [tagging system][3] which is intended for graphing and scaling many instances of a metric. Instead of having specific metric names create more general ones to take advantage of `key:value` pairs. This creates different instances of a metric reporting with specific tags.
 
-I can then have tags associated with different instances of the metric, like:
+Here's an example using `web_page_visitors` as the metric name. Many tags can be associated with different instances of the metric, like:
 
 * `page:home`
 * `page:info`
 * `page:contact`
 * `page:signup`
 
-...and so on. Then, when I want to graph the number of web page visitors, I can do this in a variety of ways fairly easily:
+Then, to [graph][4] the number of web page visitors, there are a variety of possible queries:
 
 * `"q": "avg:web_page_visitors{*}"` -> graph the average across all instances/pages.
 * `"q": "sum:web_page_visitors{*}"` -> graph the sum across all instances.
-* `"q": "web_page_visitors{*} by {page}"` -> graph the number of visitors, with a separate line for each page
+* `"q": "web_page_visitors{*} by {page}"` -> graph the number of visitors, with a separate line for each page.
 
-**Note**: wildcards are supported in [Event Monitors][2].
-
-[1]: /tagging
-[2]: /monitors/monitor_types/event
+[1]: /monitors/monitor_types/event
+[2]: /graphing/#overlay-events-for-additional-context
+[3]: /tagging
+[4]: /graphing/#the-graphing-editor
