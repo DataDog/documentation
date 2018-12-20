@@ -190,7 +190,7 @@ Configure NXLog to gather logs from your host, containers, & services.
     </Input>
     ```
 
-3. Make sure those files are plugged in the output section
+3. Make sure those files are plugged in the output section:
     ```
     <Route file1>
         Path    FILE_WATCH_1,FILE_WATCH_2,... => out
