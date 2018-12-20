@@ -6,9 +6,9 @@ disable_toc: true
 
 Wildcards are supported in [Event monitors][1] and [Events overlay][2].
 
-For metrics, Datadog offers a [tagging system][3] which is intended for graphing and scaling many instances of a metric. Instead of having specific metric names create more general ones to take advantage of `key:value` pairs. This creates different instances of a metric reporting with specific tags.
+For metrics, Datadog offers a [tagging system][3] which is intended for graphing and scaling many instances of a metric. Instead of having specific metric names, create more general ones to take advantage of `key:value` pairs. This creates different instances of a metric reporting with specific tags.
 
-Here's an example using `web_page_visitors` as the metric name. Many tags can be associated with different instances of the metric, like:
+Here's an example using `web_page_visitors` as the metric name. Many tags can be associated with different instances of the metric:
 
 * `page:home`
 * `page:info`
