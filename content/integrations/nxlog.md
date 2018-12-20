@@ -211,7 +211,7 @@ Configure NXLog to gather logs from your host, containers, & services.
 
 ### NXLog TLS encryption
 
-1. Download the [public key for TLS encryption][1] of logs:
+1. Download the [public key for TLS encryption][1] of logs.
 
 2. Add the `om_sll` module in your NXLog configuration to enable secure transfer over port 10516:
 
