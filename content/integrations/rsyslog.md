@@ -227,7 +227,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     * Modify your `/etc/rsyslog.d/datadog.conf` to end with the following content:
 
         ```
-        $DefaultNetstreamDriverCAFile /etc/ssl/certs/intake.logs.datadoghq.com.crt
+        $DefaultNetstreamDriverCAFile /etc/ssl/certs/intake.logs.datadoghq.eu.crt
         $ActionSendStreamDriver gtls
         $ActionSendStreamDriverMode 1
         $ActionSendStreamDriverAuthMode x509/name
