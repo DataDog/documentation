@@ -18,6 +18,16 @@
           "readOnly": true
         },
         {
+          "containerPath": "/etc/passwd",
+          "sourceVolume": "passwd",
+          "readOnly": true
+        },
+        {
+          "containerPath": "/opt/datadog-agent/run",
+          "sourceVolume": "pointdir",
+          "readOnly": false
+        },
+        {
           "containerPath": "/host/proc",
           "sourceVolume": "proc",
           "readOnly": true
@@ -26,11 +36,23 @@
       "environment": [
         {
           "name": "DD_API_KEY",
-          "value": "INSERT_API_KEY"
+          "value": "<YOUR_API_KEY>"
         },
         {
-      	  "name": "SD_BACKEND",
-	  "value": "docker"
+          "name": "DD_LOGS_ENABLED",
+          "value": "true"
+        },
+        {
+          "name": "DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL",
+          "value": "true"
+        },
+        {
+          "name": "DD_PROCESS_AGENT_ENABLED",
+          "value": "true"
+        },
+        {
+          "name": "SD_BACKEND",
+          "value": "docker"
         }
       ]
     }
@@ -47,6 +69,18 @@
         "sourcePath": "/proc/"
       },
       "name": "proc"
+    },
+    {
+      "host": {
+        "sourcePath": "/opt/datadog-agent/run"
+      },
+      "name": "pointdir"
+    },
+    {
+      "host": {
+        "sourcePath": "/etc/passwd"
+      },
+      "name": "passwd"
     },
     {
       "host": {

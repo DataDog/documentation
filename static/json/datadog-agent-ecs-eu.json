@@ -39,6 +39,14 @@
           "value": "<YOUR_API_KEY>"
         },
         {
+          "name": "DD_SITE",
+          "value": "datadoghq.eu"
+        },
+        {
+          "name": "DD_LOGS_CONFIG_LOGS_DD_URL",
+          "value": "agent-intake.logs.datadoghq.eu:443"
+        },
+        {
           "name": "DD_LOGS_ENABLED",
           "value": "true"
         },
@@ -84,7 +92,7 @@
     },
     {
       "host": {
-        "sourcePath": "/cgroup/"
+        "sourcePath": "/sys/fs/cgroup/"
       },
       "name": "cgroup"
     }
