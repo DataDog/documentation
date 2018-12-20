@@ -214,7 +214,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     ```
 
 5. (Optional) TLS Encryption
-    While sending your logs directly from Rsyslog to your Datadog account, if you want to add TLS encryption, take the following steps.
+    While sending your logs directly from Rsyslog to your Datadog account, to add TLS encryption, take the following steps.
 
     * Install rsyslog-gnutls:
 
