@@ -186,7 +186,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
         input(type="imfile" ruleset="infiles" Tag="<APP_NAME_OF_FILE1>" File="<PATH_TO_FILE1>" StateFile="<UNIQUE_FILE_ID>")
         ```
 4. Send the logs to your Datadog platform.
-    To send logs directly to your Datadog account from Rsyslog over TCP, we firstly need to to define the format in `/etc/rsyslog.d/datadog.conf`:
+    To send logs directly to your Datadog account from Rsyslog over TCP, first define the format in `/etc/rsyslog.d/datadog.conf`:
 
     ```
     $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
