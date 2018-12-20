@@ -205,7 +205,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
         action(type="omfwd" target="tcp-intake.logs.datadoghq.eu" protocol="tcp" port="1883" template="DatadogFormat")
     }
     ```
-    This assumes that you have TLS enabled for your Rsyslog--if you do not, then you should use port 10514 instead of 10516.
+    This assumes that you have TLS enabled for your Rsyslog--if you do not, use port 10514 instead of 10516.
 
     Alternatively, to send logs from Rsyslog to your Datadog Logs Agent, configure your `dd-agent` to expect logs over UDP/TCP on a port of your choosing by adding the following content to the end of your `/etc/rsyslog.d/datadog.conf`:
     ```
