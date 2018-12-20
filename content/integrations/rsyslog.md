@@ -128,7 +128,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     ```
     $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\"] %msg%\n"
     ```
-    You can also add custom tags thanks to the `ddtags` attribute:
+     You can also add custom tags with the `ddtags` attribute:
 
     ```
     $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\" ddtags=\"env:test,<KEY:VALUE>\"] %msg%\n"
