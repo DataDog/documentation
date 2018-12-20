@@ -25,11 +25,11 @@
       "environment": [
         {
           "name": "API_KEY",
-          "value": "INSERT_API_KEY"
+          "value": "<DATADOG_API_KEY>"
         },
         {
       	  "name": "SD_BACKEND",
-	  "value": "docker"
+	        "value": "docker"
         }
       ]
     }

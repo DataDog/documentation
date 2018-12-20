@@ -57,10 +57,6 @@
         {
           "name": "DD_PROCESS_AGENT_ENABLED",
           "value": "true"
-        },
-        {
-          "name": "SD_BACKEND",
-          "value": "docker"
         }
       ]
     }
