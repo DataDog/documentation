@@ -133,11 +133,19 @@ Those parameters can also be set with the following environment variables:
 
 * Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs to `agent-intake.logs.datadoghq.com` on port `10516` and activate SSL encryption.
 
-* Use the [public key for TLS encryption][1] for the SSL encryption. On some systems, the full certificate chain may be required. If so, use [this public key][2] instead.
+* Use the public key for TLS encryption for the SSL encryption:
+    * For [app.datadoghq.com][1] 
+    * For [app.datadoghq.eu][2]
+
+    On some systems, the full certificate chain may be required. If so, use this public key instead:
+    * For [app.datadoghq.com][3]
+    * For [app.datadoghq.eu][4]
 
 
 [1]: /crt/intake.logs.datadoghq.com.crt
-[2]: /crt/FULL_intake.logs.datadoghq.com.crt
+[2]: /crt/intake.logs.datadoghq.eu.crt
+[3]: /crt/FULL_intake.logs.datadoghq.com.crt
+[4]: /crt/FULL_intake.logs.datadoghq.eu.crt
 {{% /tab %}}
 {{% tab "SOCK5" %}}
 
