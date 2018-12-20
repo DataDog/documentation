@@ -1,6 +1,10 @@
 ---
 title: Role API
 kind: documentation
+further_reading:
+- link: "account_management/rbac/log_management/"
+  tag: "Documentation"
+  text: "RBAC for Log Management"
 ---
 
 <div class="alert alert-warning">
@@ -174,5 +178,9 @@ The UUIDs for the permissions are as follows:
 | logs_write_pipelines         | 811ac4ca-dd12-11e8-9e57-676a7f0beef9 | Update a subset of the log pipelines         |
 | logs_write_processors        | 84aa3ae4-dd12-11e8-9e58-a373a514ccd0 | Update the log processors in an index        |
 | logs_write_archives          | 87b00304-dd12-11e8-9e59-cbeb5f71f72f | Update the external archives configuration   |
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines

@@ -1084,7 +1084,7 @@ languages:
           parent: menu_references_account_management
         - identifier: customnav_accountmanagementnav_rbac
           name: "Role Based Access Control"
-          url: "account_management/rbac/log_management"
+          url: "account_management/rbac/"
           weight: 60
           parent: menu_references_account_management
 
