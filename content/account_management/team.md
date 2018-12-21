@@ -25,7 +25,7 @@ The new user will receive an email with a link to log in.
 
 Datadog provides 3 user roles:
 
-* **Administrators** have access to billing information andthe ability to revoke API keys. They can manage users andconfigure [read-only dashboards][2]. They can also promote standard users to administrators.
+* **Administrators** have access to billing information and the ability to revoke API keys. They can manage users and configure [read-only dashboards][2]. They can also promote standard users to administrators.
 
 * **Standard users** can view and modify all monitoring features that Datadog offers, such as [dashboards][2], [monitors][3], [events][4], and [notebooks][5]. Standard users can also invite other users to organizations.
 
