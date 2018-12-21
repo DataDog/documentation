@@ -5,6 +5,7 @@ aliases:
 - /tracing/nodejs/
 - /tracing/setup/nodejs/
 - /tracing/languages/javascript/
+- /tracing/setup/javascript/
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-js"
   tag: "GitHub"
