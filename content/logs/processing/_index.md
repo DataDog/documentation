@@ -118,9 +118,7 @@ Using the Datadog Agent or the RFC5424 format automatically sets the host value 
 * `syslog.hostname`
 
 ### *source* attribute
-Using the Datadog Agent or the RFC5424 format automatically sets the source value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log's source:
-
-* `ddsource`
+If a JSON formatted log file includes the `ddsource` attribute, Datadog interprets its value as the the log's source. To use the same source names Datadog uses, see the [Integration Pipeline Reference][16].
 
 ### *service* attribute
 
@@ -158,3 +156,4 @@ To change the default values for each of the reserved attributes, go to the [Pip
 [13]: /logs/explorer/?tab=logstream#visualization
 [14]: /logs/explorer/search
 [15]: /logs/processing/processors/#log-status-remapper
+[16]: /logs/faq/integration-pipeline-reference
