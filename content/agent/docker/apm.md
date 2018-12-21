@@ -31,6 +31,7 @@ For example, the following command allows the Agent to receive traces from anywh
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+              -p 8126:8126/tcp \
               -e DD_API_KEY=<YOUR_API_KEY> \
               -e DD_APM_ENABLED=true \
               datadog/agent:latest
