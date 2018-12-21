@@ -1,7 +1,7 @@
 ---
 title: Create child-organization
 type: apicontent
-order: 17.1
+order: 18.1
 external_redirect: /api/#create-child-organization
 ---
 

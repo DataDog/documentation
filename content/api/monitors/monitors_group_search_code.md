@@ -1,7 +1,7 @@
 ---
 title: Monitors Group Search
 type: apicode
-order: 16.13
+order: 17.13
 external_redirect: /api/#monitors-group-search
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Get all monitor details
 type: apicode
-order: 16.05
+order: 17.05
 external_redirect: /api/#get-all-monitor-details
 ---
 

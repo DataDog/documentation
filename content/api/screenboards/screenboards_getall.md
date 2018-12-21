@@ -1,7 +1,7 @@
 ---
 title: Get all Screenboards
 type: apicontent
-order: 18.5
+order: 19.5
 external_redirect: /api/#get-all-screenboards
 ---
 
