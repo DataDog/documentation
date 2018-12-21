@@ -272,13 +272,13 @@ Environment Variable       | Description                                        
 `DD_AGENT_HOST`            | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. | `localhost`   |
 `DD_TRACE_AGENT_PORT`      | Sets the port where traces are sent (the port where the Agent is listening for connections).              | `8126`        |
 `DD_ENV`                   | Adds the `env` tag with the specified value to generated spans. See [Agent configuration][6] for more details about the `env` tag. | _empty_ (no `env` tag) |
-`DD_SERVICE_NAME`          | Sets the default service name. If not set, the Tracer will try to determine service name automatically from application name (e.g. IIS application name, entry assembly, or process name). | _empty_ (determine service name automatically) |
-`DD_DISABLED_INTEGRATIONS` | Sets a list of integrations to disable. All other integrations will remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semi-colons. Valid values are: `AspNetCoreMvc2`, `AspNetMvc`, `AspNetWebApi2`, `ElasticsearchNet`, `ServiceStackRedis`, `SqlServer`, `StackExchangeRedis` | _empty_ (all integrations enabled) |
+`DD_SERVICE_NAME`          | Sets the default service name. If not set, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, entry assembly, or process name). | _empty_ (determine service name automatically) |
+`DD_DISABLED_INTEGRATIONS` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are: `AspNetCoreMvc2`, `AspNetMvc`, `AspNetWebApi2`, `ElasticsearchNet`, `ServiceStackRedis`, `SqlServer`, `StackExchangeRedis` | _empty_ (all integrations enabled) |
 `DD_TRACE_LOG_PATH`        | Sets the path for the profiler's log file. | Windows: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br><br>Linux: `/var/log/datadog/dotnet-profiler.log` | |
 
 ### Runtime Compatibility
 
-The .NET tracer supports automatic instrumentation on the following runtimes:
+The .NET Tracer supports automatic instrumentation on the following runtimes:
 
 | Runtime        | Versions | OS      | Support Type |
 | -------------- | -------- | ------- | ------------ |
@@ -292,7 +292,7 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 
 ### Web Framework Integrations
 
-The .NET tracer can instrument the following web frameworks automatically:
+The .NET Tracer can instrument the following web frameworks automatically:
 
 | Web framework     | Versions  | Runtime             | OS      | Support Type  | Integration Name |
 | ----------------- | --------- | ------------------- | ------- | ------------- | ---------------- |
@@ -308,7 +308,7 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 
 ### Data Store Integrations
 
-The .NET tracer's ability to automatically instrument data store access depends on the client libraries used:
+The .NET Tracer's ability to automatically instrument data store access depends on the client libraries used:
 
 | Data store    | Library or NuGet package                 | Versions   | Support type  | Integration Name     |
 | ------------- | ---------------------------------------- | ---------- | ------------- | -------------------- |
