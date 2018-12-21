@@ -65,8 +65,6 @@ Depending on your use case, you may want to set your hostname so that hosts are 
 
 ## Heroku Log Collection
 
-** This integration is only available for the Datadog EU region**
-
 Heroku provides 3 types of logs:
 
 * `App Logs`: output from the application you pushed on the platform
@@ -82,9 +80,22 @@ To send all these logs to Datadog:
 * Connect to your Heroku project
 * Set up the HTTPS drain with the following command:
 
+{{< tabs >}}
+{{tab % US Region" %}}
+
+```
+heroku drains:add https://http-intake.logs.datadoghq.com/v1/input/<API_KEY>?ddsource=heroku&service=<SERVICE>&host=<HOST> -a <APPLICATION_NAME>
+```
+
+{{% /tab %}}
+{{% tab "EU Region" %}}
+
 ```
 heroku drains:add https://http-intake.logs.datadoghq.eu/v1/input/<API_KEY>?ddsource=heroku&service=<SERVICE>&host=<HOST> -a <APPLICATION_NAME>
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 * Replace `<API_KEY>` with your [Datadog API Key][2]
 * Replace `<APPLICATION_NAME>` and `<SERVICE>` with your application name¨
@@ -94,9 +105,22 @@ heroku drains:add https://http-intake.logs.datadoghq.eu/v1/input/<API_KEY>?ddsou
 
 To add any custom attributes on the logs from an application, replace the URL in the drain as follows:
 
+{{< tabs >}}
+{{tab % US Region" %}}
+
+```
+https://http-intake.logs.datad0g.com/v1/input/<API_KEY>?ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALUE>
+```
+
+{{% /tab %}}
+{{% tab "EU Region" %}}
+
 ```
 https://http-intake.logs.datad0g.eu/v1/input/<API_KEY>?ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALUE>
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Troubleshooting
 
