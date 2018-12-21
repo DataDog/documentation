@@ -9,11 +9,6 @@ external_redirect: /api/#send-logs-over-http
 
 Send your logs to your Datadog platform over HTTP.
 
-* http: 80
-https: 443
-
-**Note**: If you are in Datadog EU `app.datadoghq.eu`, the HTTP log endpoint is: `http-intake.logs.datadoghq.eu`
-
 | Item             | Description                                                                                                           |
 | ------           | ---------                                                                                                             |
 | Protocol         | http: 80<br>https: 443                                                                                                |
@@ -24,3 +19,4 @@ https: 443
 | Content Type     | Available content type are: `text/plain`, `application/json`, `application/logplex-1`                                 |
 
 
+**Note**: If you are in Datadog EU `app.datadoghq.eu`, the HTTP log endpoint is: `http-intake.logs.datadoghq.eu`
