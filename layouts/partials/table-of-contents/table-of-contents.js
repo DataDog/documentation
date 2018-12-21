@@ -168,7 +168,7 @@ $(document).ready(function () {
     if(window.innerWidth > 1720 && window.scrollY < 60){
         $('.toc').css('top', '189px');
         $('.mobile-toc-toggle').css('top', '189px');
-    else if(window.innerWidth > 1720 && window.scrollY > 60){
+    }else if(window.innerWidth > 1720 && window.scrollY > 60){
         $('.toc').css('top', '124.5px');
         $('.mobile-toc-toggle').css('top', '124.5px');
     }
