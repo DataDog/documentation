@@ -266,15 +266,15 @@ ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
 
 The .NET Tracer is configured using environment variables as follows:
 
-Environment Variable     | Description                                                                                           | Default Value |
------------------------- | ----------------------------------------------------------------------------------------------------- | ------------- |
-DD_TRACE_ENABLED         | Determines whether the profiler is enabled. Valid values are: `true` or `false`                       | `true`        |
-DD_AGENT_HOST            | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. | `localhost`   |
-DD_TRACE_AGENT_PORT      | Sets the port where traces are sent (the port where the Agent is listening for connections).              | `8126`        |
-DD_ENV                   | Adds the `env` tag with the specified value to generated spans. See [Agent configuration][6] for more details about the `env` tag. | _empty_ (no `env` tag) |
-DD_SERVICE_NAME          | Sets the default service name. If not set, the Tracer will try to determine service name automatically from application name (e.g. IIS application name, entry assembly, or process name). | _empty_ (determine service name automatically) |
-DD_DISABLED_INTEGRATIONS | Sets a list of integrations to disable. All other integrations will remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semi-colons. Valid values are: `AspNetCoreMvc2`, `AspNetMvc`, `AspNetWebApi2`, `ElasticsearchNet`, `ServiceStackRedis`, `SqlServer`, `StackExchangeRedis` | _empty_ (all integrations enabled) |
-DD_TRACE_LOG_PATH        | Sets the path for the profiler's log file. | Windows: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br><br>Linux: `/var/log/datadog/dotnet-profiler.log` | |
+Environment Variable       | Description                                                                                           | Default Value |
+-------------------------- | ----------------------------------------------------------------------------------------------------- | ------------- |
+`DD_TRACE_ENABLED`         | Determines whether the profiler is enabled. Valid values are: `true` or `false`                       | `true`        |
+`DD_AGENT_HOST`            | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. | `localhost`   |
+`DD_TRACE_AGENT_PORT`      | Sets the port where traces are sent (the port where the Agent is listening for connections).              | `8126`        |
+`DD_ENV`                   | Adds the `env` tag with the specified value to generated spans. See [Agent configuration][6] for more details about the `env` tag. | _empty_ (no `env` tag) |
+`DD_SERVICE_NAME`          | Sets the default service name. If not set, the Tracer will try to determine service name automatically from application name (e.g. IIS application name, entry assembly, or process name). | _empty_ (determine service name automatically) |
+`DD_DISABLED_INTEGRATIONS` | Sets a list of integrations to disable. All other integrations will remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semi-colons. Valid values are: `AspNetCoreMvc2`, `AspNetMvc`, `AspNetWebApi2`, `ElasticsearchNet`, `ServiceStackRedis`, `SqlServer`, `StackExchangeRedis` | _empty_ (all integrations enabled) |
+`DD_TRACE_LOG_PATH`        | Sets the path for the profiler's log file. | Windows: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br><br>Linux: `/var/log/datadog/dotnet-profiler.log` | |
 
 ### Runtime Compatibility
 
