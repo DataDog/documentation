@@ -121,7 +121,7 @@ apk add libc6-compat
 
 {{< /tabs >}}
 
-### Adding Environment Variables
+### Required Environment Variables
 
 **Note:** If your application runs on IIS and you used the MSI installer, you don't need to configure environment variables manually and you may skip this section.
 
@@ -262,6 +262,20 @@ ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
 
 {{< /tabs >}}
 
+### Configuration
+
+The .NET Tracer is configured using environment variables as follows:
+
+Environment variable     | Description                                                                                           | Default value |
+------------------------ | ----------------------------------------------------------------------------------------------------- | ------------- |
+DD_TRACE_ENABLED         | Determines whether the profiler is enabled. Valid values are: `true` or `false`                       | `true`        |
+DD_AGENT_HOST            | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. | `localhost`   |
+DD_TRACE_AGENT_PORT      | Sets the port where traces are sent (the port where Agent is listening for connections).              | `8126`        |
+DD_ENV                   | Adds the `env` tag with the specified value to generated spans. See [Agent configuration][6] for more details about the `env` tag. | _empty_ |
+DD_SERVICE_NAME          | Sets the default service name. If not set, the Tracer will try to determine service name automatically from application name (e.g. IIS application name, entry assembly, or process name). | |
+DD_DISABLED_INTEGRATIONS | Sets a list of integrations to disable. All other integrations will remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semi-colons. Valid values are: `AspNetCoreMvc2`, `AspNetMvc`, `AspNetWebApi2`, `ElasticsearchNet`, `ServiceStackRedis`, `SqlServer`, `StackExchangeRedis` | |
+DD_TRACE_LOG_PATH        | Sets the path for the profiler's log file. | `%ProgramData%"\Datadog .NET Tracer\logs\dotnet-profiler.log` on Windows and `/var/log/datadog/dotnet-profiler.log" on Linux`. | |
+
 ### Runtime Compatibility
 
 The .NET tracer supports automatic instrumentation on the following runtimes:
@@ -335,3 +349,4 @@ For more details on supported platforms, see the [.NET Standard documentation][5
 [3]: https://www.nuget.org/packages/Datadog.Trace
 [4]: /tracing/advanced_usage/?tab=net
 [5]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
+[6]: /agent/apm#environment
