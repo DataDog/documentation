@@ -163,7 +163,12 @@ $(document).ready(function () {
         }
     }
 
+    // when the page loads, checking the window width
     widthCheck();
+    if(window.innerWidth > 1720){
+        $('.toc').css('top', '189px');
+        $('.mobile-toc-toggle').css('top', '189px');
+    }
 
     $(window).on('resize scroll', function(e) {
         var header_h = $('body > header').height();
