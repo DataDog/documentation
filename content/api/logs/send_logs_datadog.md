@@ -5,6 +5,10 @@ order: 15.1
 external_redirect: /api/#send-logs-over-http
 ---
 
+<div class="alert alert-warning">
+This API endpoint is in beta.
+</div>
+
 ## Send Logs over HTTP
 
 Send your logs to your Datadog platform over HTTP.
