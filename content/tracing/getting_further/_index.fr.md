@@ -1,5 +1,5 @@
 ---
-title: Pour aller plus loi
+title: Concepts avancés
 kind: documentation
 ---
 
