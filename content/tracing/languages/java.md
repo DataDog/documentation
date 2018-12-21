@@ -172,6 +172,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.jmxfetch.refresh-beans-period` | `DD_JMXFETCH_REFRESH_BEANS_PERIOD` | `600`                | How often to refresh list of avalable JMX beans (in seconds).                                                                                                                                                           |
 | `dd.jmxfetch.statsd.host`          | `DD_JMXFETCH_STATSD_HOST`          | same as `agent.host` | Statsd host to send JMX metrics to.                                                                                                                                                                                     |
 | `dd.jmxfetch.statsd.port`          | `DD_JMXFETCH_STATSD_PORT`          | 8125                 | Statsd port to send JMX metrics to.                                                                                                                                                                                     |
+| `dd.logs.injection`                | `DD_LOGS_INJECTION`                | false                | Enabled automatic MDC key injection for Datadog trace and span ids to.                                                                                                                                                                                     |
 
 [1]: /tracing/setup/docker
 [2]: /tracing/advanced_usage/?tab=java#distributed-tracing
@@ -223,6 +224,33 @@ Now add `@Trace` to methods to have them be traced when running with `dd-java-ag
 
 Datadog's Java Tracer provides support for 'in-process' JMX metrics collection. This is enabled with `jmxfetch.enabled` configuration parameter. Additional JMX metrics are configured using configuration files that are passed to `jmxfetch.metrics-configs`. Contents of those configuration files are equivalent to contents of the `conf` section for external jmxfetch. See [JMX Integration][8] for further details on configuration.
 By default, when JMX metrics collection is enabled it monitors JVM heap memory, thread count, and garbage collection. Use it in conjunction with APM for a broader view into your Java application's performance.
+
+## Logs Slf4j+MDC Autoinjection
+
+The Java tracer also provides an option to enable automatic key injection for slf4j users.
+
+To enable automatic log injection:
+1. Enable injection in the tracer's configuration. [See ## Configuration](#Configuration)
+2. Configure slf4j to use the injected Keys
+  * `dd.trace_id` Active trace id during the log statement (or `0` if no trace)
+  * `dd.span_id` Active trace id during the log statement (or `0` if no trace)
+  * Log format must contain a snippet of both keys. Example: `dd.trace_id=%X{dd.trace_id} dd.span_id=%X{dd.span_id}`
+
+Example `logback.xml` configuration:
+```
+<configuration debug="true">
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] dd.trace_id=%X{dd.trace_id} dd.span_id=%X{dd.span_id} %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <root level="info">
+    <appender-ref ref="STDOUT" />
+  </root>
+</configuration>
+```
 
 ## Performance
 
