@@ -165,9 +165,12 @@ $(document).ready(function () {
 
     // when the page loads, checking the window width
     widthCheck();
-    if(window.innerWidth > 1720){
+    if(window.innerWidth > 1720 && window.scrollY < 60){
         $('.toc').css('top', '189px');
         $('.mobile-toc-toggle').css('top', '189px');
+    else if(window.innerWidth > 1720 && window.scrollY > 60){
+        $('.toc').css('top', '124.5px');
+        $('.mobile-toc-toggle').css('top', '124.5px');
     }
 
     $(window).on('resize scroll', function(e) {
