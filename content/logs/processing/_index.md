@@ -75,7 +75,7 @@ If your logs are formatted as JSON, be aware that some attributes are reserved f
 
 ### *date* attribute
 
-By default Datadog generates a timestamp and appends it in a date attribute when logs are received. However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the the log's official date:
+By default Datadog generates a timestamp and appends it in a date attribute when logs are received. However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the log's official date:
 
 * `@timestamp`
 * `timestamp`
@@ -100,7 +100,7 @@ By default, Datadog ingests the message value as the body of the log entry. That
 
 ### *status* attribute
 
-Each log entry may specify a status level which is made available for faceted search within Datadog. However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the the log's official status:
+Each log entry may specify a status level which is made available for faceted search within Datadog. However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the log's official status:
 
 * `status`
 * `severity`
@@ -111,18 +111,18 @@ If you would like to remap a status existing in the `status` attribute, you can 
 
 ### *host* attribute
 
-Using the Datadog Agent or the RFC5424 format automatically sets the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log's host:
+Using the Datadog Agent or the RFC5424 format automatically sets the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the log's host:
 
 * `host`
 * `hostname`
 * `syslog.hostname`
 
 ### *source* attribute
-If a JSON formatted log file includes the `ddsource` attribute, Datadog interprets its value as the the log's source. To use the same source names Datadog uses, see the [Integration Pipeline Reference][16].
+If a JSON formatted log file includes the `ddsource` attribute, Datadog interprets its value as the log's source. To use the same source names Datadog uses, see the [Integration Pipeline Reference][16].
 
 ### *service* attribute
 
-Using the Datadog Agent or the RFC5424 format automatically sets the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log's service:
+Using the Datadog Agent or the RFC5424 format automatically sets the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the log's service:
 
 * `service`
 * `syslog.appname`
