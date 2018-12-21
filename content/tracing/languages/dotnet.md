@@ -266,7 +266,7 @@ ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
 
 The .NET Tracer is configured using environment variables as follows:
 
-Environment variable     | Description                                                                                           | Default value |
+Environment Variable     | Description                                                                                           | Default Value |
 ------------------------ | ----------------------------------------------------------------------------------------------------- | ------------- |
 DD_TRACE_ENABLED         | Determines whether the profiler is enabled. Valid values are: `true` or `false`                       | `true`        |
 DD_AGENT_HOST            | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. | `localhost`   |
@@ -281,7 +281,7 @@ DD_TRACE_LOG_PATH        | Sets the path for the profiler's log file. | Windows:
 The .NET tracer supports automatic instrumentation on the following runtimes:
 
 | Runtime        | Versions | OS      | Support Type |
-| :------------- | :------- | :------ | :----------- |
+| -------------- | -------- | ------- | ------------ |
 | .NET Framework | 4.5+     | Windows | Public Beta  |
 | .NET Core      | 2.0+     | Windows | Public Beta  |
 | .NET Core      | 2.0+     | Linux   | Public Beta  |
@@ -294,15 +294,15 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 
 The .NET tracer can instrument the following web frameworks automatically:
 
-| Web framework     | Versions  | Runtime             | OS      | Support Type  |
-| :---------------- | :-------- | :------------------ | :------ | :------------ |
-| ASP.NET MVC 5     | 5.1.3+    | .NET Framework 4.5+ | Windows | Public Beta   |
-| ASP.NET MVC 4     | 4.0.40804 | .NET Framework 4.5+ | Windows | Public Beta   |
-| ASP.NET Web API 2 | 2.2+      | .NET Framework 4.5+ | Windows | Public Beta   |
-| ASP.NET Web Forms | 4.5+      | .NET Framework 4.5+ | Windows | _Coming soon_ |
-| ASP.NET Core MVC  | 2.0+      | .NET Framework 4.5+ | Windows | Public Beta   |
-| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Windows | Public Beta   |
-| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Linux   | Public Beta   |
+| Web framework     | Versions  | Runtime             | OS      | Support Type  | Integration Name |
+| ----------------- | --------- | ------------------- | ------- | ------------- | ---------------- |
+| ASP.NET MVC 5     | 5.1.3+    | .NET Framework 4.5+ | Windows | Public Beta   | `AspNetMvc`      |
+| ASP.NET MVC 4     | 4.0.40804 | .NET Framework 4.5+ | Windows | Public Beta   | `AspNetMvc`      |
+| ASP.NET Web API 2 | 2.2+      | .NET Framework 4.5+ | Windows | Public Beta   | `AspNetWebApi2`  |
+| ASP.NET Web Forms | 4.5+      | .NET Framework 4.5+ | Windows | _Coming soon_ |                  |
+| ASP.NET Core MVC  | 2.0+      | .NET Framework 4.5+ | Windows | Public Beta   | `AspNetCoreMvc2` |
+| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Windows | Public Beta   | `AspNetCoreMvc2` |
+| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Linux   | Public Beta   | `AspNetCoreMvc2` |
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
 
@@ -310,15 +310,15 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 
 The .NET tracer's ability to automatically instrument data store access depends on the client libraries used:
 
-| Data store    | Library or NuGet package                 | Versions   | Support type  |
-| :------------ | :--------------------------------------- | :--------- | :------------ |
-| MS SQL Server | `System.Data.SqlClient` (.NET Framework) | (built-in) | Public Beta   |
-| MS SQL Server | `System.Data.SqlClient` (NuGet)          | 4.1+       | Public Beta   |
-| Redis         | `StackExchange.Redis`                    | 1.0.187+   | Public Beta   |
-| Redis         | `ServiceStack.Redis`                     | 4.0.48+    | Public Beta   |
-| Elasticsearch | `NEST` / `Elasticsearch.Net`             | 6.0.0+     | Public Beta   |
-| MongoDB       | `MongoDB.Driver`                         |            | _Coming soon_ |
-| PostgreSQL    | `Npgsql`                                 |            | _Coming soon_ |
+| Data store    | Library or NuGet package                 | Versions   | Support type  | Integration Name     |
+| ------------- | ---------------------------------------- | ---------- | ------------- | -------------------- |
+| MS SQL Server | `System.Data.SqlClient` (.NET Framework) | (built-in) | Public Beta   | `SqlServer`          |
+| MS SQL Server | `System.Data.SqlClient` (NuGet)          | 4.1+       | Public Beta   | `SqlServer`          |
+| Redis         | `StackExchange.Redis`                    | 1.0.187+   | Public Beta   | `StackExchangeRedis` |
+| Redis         | `ServiceStack.Redis`                     | 4.0.48+    | Public Beta   | `ServiceStackRedis`  |
+| Elasticsearch | `NEST` / `Elasticsearch.Net`             | 6.0.0+     | Public Beta   | `ElasticsearchNet`   |
+| MongoDB       | `MongoDB.Driver`                         |            | _Coming soon_ |                      |
+| PostgreSQL    | `Npgsql`                                 |            | _Coming soon_ |                      |
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
 
@@ -333,7 +333,7 @@ For more details on manual instrumentation and custom tagging, see [Advanced Usa
 Manual instrumentation is supported on .NET Framework 4.5+ on Windows and on any platform that implements .NET Standard 2.0 or above:
 
 | Runtime        | Versions | OS                    | Support type |
-| :------------- | :------- | :-------------------- | :----------- |
+| -------------- | -------- | --------------------- | ------------ |
 | .NET Framework | 4.5+     | Windows               | Public Beta  |
 | .NET Core      | 2.0+     | Windows, Linux, macOS | Public Beta  |
 | Mono           | 5.4+     | Windows, Linux, macOS | Public Beta  |
