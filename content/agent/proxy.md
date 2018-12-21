@@ -177,8 +177,7 @@ This is the best option if you do not have a web proxy readily available in your
 ### Proxy metric forwarding with HAProxy
 #### HAProxy configuration
 
-We assume that HAProxy is installed on a host that has connectivity to Datadog.
-Use the following configuration file if you do not already have it configured.
+HAProxy should be installed on a host that has connectivity to Datadog. Use the following configuration file if you do not already have it configured.
 
 {{< tabs >}}
 {{% tab "Datadog US app.datadoghq.com" %}}
@@ -256,7 +255,7 @@ backend datadog-processes
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy.
 
-**We recommend having a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
+**It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
 
 {{% /tab %}}
 {{% tab "Datadog EU app.datadoghq.eu" %}}
@@ -334,7 +333,7 @@ backend datadog-processes
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy.
 
-**We recommend having a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
+**It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -423,7 +422,7 @@ To verify that everything is working properly, review the HAProxy statistics at 
 
 **This feature is only available for Agent v5**
 
-We recommend using an actual proxy (a web proxy or HAProxy) to forward your traffic to Datadog, however if those options aren't available to you, it is possible to configure an instance of Agent v5 to serve as a proxy.
+It is recommended to use an actual proxy (a web proxy or HAProxy) to forward your traffic to Datadog, however if those options aren't available to you, it is possible to configure an instance of Agent v5 to serve as a proxy.
 
 1. Designate one node **running datadog-agent** as the proxy.
     In this example assume that the proxy name is `proxy-node`. This node **must** be able to reach `https://app.datadoghq.com`.
