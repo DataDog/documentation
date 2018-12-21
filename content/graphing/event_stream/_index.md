@@ -54,7 +54,7 @@ Combine prefixes to construct more complex searches. For example, if you wanted 
 
 `sources:nagios,chef status:error cassandra`
 
-Note: no spaces after the colon or commas in these lists and anything not attached to a prefix goes to full text search.
+**Note**: no spaces after the colon or commas in these lists and anything not attached to a prefix goes to full text search.
 
 ## Show events unaggregated
 
