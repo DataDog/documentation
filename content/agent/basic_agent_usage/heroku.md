@@ -65,6 +65,8 @@ Depending on your use case, you may want to set your hostname so that hosts are 
 
 ## Heroku Log Collection
 
+**This log integration is currently in public beta**
+
 Heroku provides 3 types of logs:
 
 * `App Logs`: output from the application you pushed on the platform
