@@ -5,7 +5,7 @@ aliases:
   - /tracing/dotnet
   - /tracing/setup/dotnet
 further_reading:
-  - link: "https://github.com/DataDog/dd-trace-csharp"
+  - link: "https://github.com/DataDog/dd-trace-dotnet"
     tag: "GitHub"
     text: "Source code"
   - link: "tracing/visualization/"
@@ -55,7 +55,7 @@ Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Ch
 - Managed libraries: deployed into the Global Assembly Cache (GAC) by the MSI installer, where any .NET Framework application can access them.
 - Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration][2] to set these environment variables.
 
-[1]: https://github.com/DataDog/dd-trace-csharp/releases
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases
 [2]: ?tab=netframeworkonwindows#adding-environment-variables
 {{% /tab %}}
 
@@ -69,7 +69,7 @@ Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][2] to your applicati
 - Managed libraries: deployed together with your application when it is published (via NuGet package).
 - Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration][4] to set these environment variables.
 
-[1]: https://github.com/DataDog/dd-trace-csharp/releases
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases
 [2]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
 [3]: https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package
 [4]: ?tab=netcoreonwindows#adding-environment-variables
@@ -79,19 +79,19 @@ Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][2] to your applicati
 
 Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][1] to your application, matching the package version to the package below. Refer to the [NuGet documentation][2] for instructions on how to add a NuGet package to your application.
 
-Install the .NET Tracer on the host using the using one of the packages available from the `dd-trace-csharp` [releases page][3].
+Install the .NET Tracer on the host using the using one of the packages available from the `dd-trace-dotnet` [releases page][3].
 
 For Debian or Ubuntu, download and install the Debian package:
 
 ```bash
-curl -LO https://github.com/DataDog/dd-trace-csharp/releases/download/v0.5.2-beta/datadog-dotnet-apm_0.5.2_amd64.deb
+curl -LO https://github.com/DataDog/dd-trace-dotnet/releases/download/v0.5.2-beta/datadog-dotnet-apm_0.5.2_amd64.deb
 sudo dpkg -i ./datadog-dotnet-apm_0.5.2_amd64.deb
 ```
 
 For CentOS or Fedora, download and install the RPM package
 
 ```bash
-curl -LO https://github.com/DataDog/dd-trace-csharp/releases/download/v0.5.2-beta/datadog-dotnet-apm-0.5.2-1.x86_64.rpm
+curl -LO https://github.com/DataDog/dd-trace-dotnet/releases/download/v0.5.2-beta/datadog-dotnet-apm-0.5.2-1.x86_64.rpm
 sudo rpm -Uvh datadog-dotnet-apm-0.5.2-1.x86_64.rpm
 ```
 
@@ -99,7 +99,7 @@ A tar archive is available for other distributions:
 
 ```bash
 sudo mkdir -p /opt/datadog
-curl -L https://github.com/DataDog/dd-trace-csharp/releases/download/v0.5.2-beta/datadog-dotnet-apm-0.5.2.tar.gz \
+curl -L https://github.com/DataDog/dd-trace-dotnet/releases/download/v0.5.2-beta/datadog-dotnet-apm-0.5.2.tar.gz \
 | sudo tar xzf - -C /opt/datadog
 ```
 
@@ -115,13 +115,13 @@ apk add libc6-compat
 
 [1]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
 [2]: https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package
-[3]: https://github.com/DataDog/dd-trace-csharp/releases
+[3]: https://github.com/DataDog/dd-trace-dotnet/releases
 [4]: ?tab=netcoreonlinux#adding-environment-variables
 {{% /tab %}}
 
 {{< /tabs >}}
 
-### Adding Environment Variables
+### Required Environment Variables
 
 **Note:** If your application runs on IIS and you used the MSI installer, you don't need to configure environment variables manually and you may skip this section.
 
@@ -262,12 +262,26 @@ ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
 
 {{< /tabs >}}
 
+### Configuration
+
+The .NET Tracer is configured using environment variables as follows:
+
+Environment Variable       | Description                                                                                           | Default Value |
+-------------------------- | ----------------------------------------------------------------------------------------------------- | ------------- |
+`DD_TRACE_ENABLED`         | Determines whether the profiler is enabled. Valid values are: `true` or `false`                       | `true`        |
+`DD_AGENT_HOST`            | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. | `localhost`   |
+`DD_TRACE_AGENT_PORT`      | Sets the port where traces are sent (the port where the Agent is listening for connections).              | `8126`        |
+`DD_ENV`                   | Adds the `env` tag with the specified value to generated spans. See [Agent configuration][6] for more details about the `env` tag. | _empty_ (no `env` tag) |
+`DD_SERVICE_NAME`          | Sets the default service name. If not set, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, entry assembly, or process name). | _empty_ (determine service name automatically) |
+`DD_DISABLED_INTEGRATIONS` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are: `AspNetCoreMvc2`, `AspNetMvc`, `AspNetWebApi2`, `ElasticsearchNet`, `ServiceStackRedis`, `SqlServer`, `StackExchangeRedis` | _empty_ (all integrations enabled) |
+`DD_TRACE_LOG_PATH`        | Sets the path for the profiler's log file. | Windows: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br><br>Linux: `/var/log/datadog/dotnet-profiler.log` | |
+
 ### Runtime Compatibility
 
-The .NET tracer supports automatic instrumentation on the following runtimes:
+The .NET Tracer supports automatic instrumentation on the following runtimes:
 
 | Runtime        | Versions | OS      | Support Type |
-| :------------- | :------- | :------ | :----------- |
+| -------------- | -------- | ------- | ------------ |
 | .NET Framework | 4.5+     | Windows | Public Beta  |
 | .NET Core      | 2.0+     | Windows | Public Beta  |
 | .NET Core      | 2.0+     | Linux   | Public Beta  |
@@ -278,33 +292,33 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 
 ### Web Framework Integrations
 
-The .NET tracer can instrument the following web frameworks automatically:
+The .NET Tracer can instrument the following web frameworks automatically:
 
-| Web framework     | Versions  | Runtime             | OS      | Support Type  |
-| :---------------- | :-------- | :------------------ | :------ | :------------ |
-| ASP.NET MVC 5     | 5.1.3+    | .NET Framework 4.5+ | Windows | Public Beta   |
-| ASP.NET MVC 4     | 4.0.40804 | .NET Framework 4.5+ | Windows | Public Beta   |
-| ASP.NET Web API 2 | 2.2+      | .NET Framework 4.5+ | Windows | Public Beta   |
-| ASP.NET Web Forms | 4.5+      | .NET Framework 4.5+ | Windows | _Coming soon_ |
-| ASP.NET Core MVC  | 2.0+      | .NET Framework 4.5+ | Windows | Public Beta   |
-| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Windows | Public Beta   |
-| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Linux   | Public Beta   |
+| Web framework     | Versions  | Runtime             | OS      | Support Type  | Integration Name |
+| ----------------- | --------- | ------------------- | ------- | ------------- | ---------------- |
+| ASP.NET MVC 5     | 5.1.3+    | .NET Framework 4.5+ | Windows | Public Beta   | `AspNetMvc`      |
+| ASP.NET MVC 4     | 4.0.40804 | .NET Framework 4.5+ | Windows | Public Beta   | `AspNetMvc`      |
+| ASP.NET Web API 2 | 2.2+      | .NET Framework 4.5+ | Windows | Public Beta   | `AspNetWebApi2`  |
+| ASP.NET Web Forms | 4.5+      | .NET Framework 4.5+ | Windows | _Coming soon_ |                  |
+| ASP.NET Core MVC  | 2.0+      | .NET Framework 4.5+ | Windows | Public Beta   | `AspNetCoreMvc2` |
+| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Windows | Public Beta   | `AspNetCoreMvc2` |
+| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Linux   | Public Beta   | `AspNetCoreMvc2` |
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
 
 ### Data Store Integrations
 
-The .NET tracer's ability to automatically instrument data store access depends on the client libraries used:
+The .NET Tracer's ability to automatically instrument data store access depends on the client libraries used:
 
-| Data store    | Library or NuGet package                 | Versions   | Support type  |
-| :------------ | :--------------------------------------- | :--------- | :------------ |
-| MS SQL Server | `System.Data.SqlClient` (.NET Framework) | (built-in) | Public Beta   |
-| MS SQL Server | `System.Data.SqlClient` (NuGet)          | 4.1+       | Public Beta   |
-| Redis         | `StackExchange.Redis`                    | 1.0.187+   | Public Beta   |
-| Redis         | `ServiceStack.Redis`                     | 4.0.48+    | Public Beta   |
-| Elasticsearch | `NEST` / `Elasticsearch.Net`             | 6.0.0+     | Public Beta   |
-| MongoDB       | `MongoDB.Driver`                         |            | _Coming soon_ |
-| PostgreSQL    | `Npgsql`                                 |            | _Coming soon_ |
+| Data store    | Library or NuGet package                 | Versions   | Support type  | Integration Name     |
+| ------------- | ---------------------------------------- | ---------- | ------------- | -------------------- |
+| MS SQL Server | `System.Data.SqlClient` (.NET Framework) | (built-in) | Public Beta   | `SqlServer`          |
+| MS SQL Server | `System.Data.SqlClient` (NuGet)          | 4.1+       | Public Beta   | `SqlServer`          |
+| Redis         | `StackExchange.Redis`                    | 1.0.187+   | Public Beta   | `StackExchangeRedis` |
+| Redis         | `ServiceStack.Redis`                     | 4.0.48+    | Public Beta   | `ServiceStackRedis`  |
+| Elasticsearch | `NEST` / `Elasticsearch.Net`             | 6.0.0+     | Public Beta   | `ElasticsearchNet`   |
+| MongoDB       | `MongoDB.Driver`                         |            | _Coming soon_ |                      |
+| PostgreSQL    | `Npgsql`                                 |            | _Coming soon_ |                      |
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
 
@@ -319,7 +333,7 @@ For more details on manual instrumentation and custom tagging, see [Advanced Usa
 Manual instrumentation is supported on .NET Framework 4.5+ on Windows and on any platform that implements .NET Standard 2.0 or above:
 
 | Runtime        | Versions | OS                    | Support type |
-| :------------- | :------- | :-------------------- | :----------- |
+| -------------- | -------- | --------------------- | ------------ |
 | .NET Framework | 4.5+     | Windows               | Public Beta  |
 | .NET Core      | 2.0+     | Windows, Linux, macOS | Public Beta  |
 | Mono           | 5.4+     | Windows, Linux, macOS | Public Beta  |
@@ -330,8 +344,9 @@ For more details on supported platforms, see the [.NET Standard documentation][5
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup
+[1]: /agent/apm/
 [2]: /help
 [3]: https://www.nuget.org/packages/Datadog.Trace
 [4]: /tracing/advanced_usage/?tab=net
 [5]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
+[6]: /agent/apm#environment
