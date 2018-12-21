@@ -6,7 +6,7 @@ external_redirect: /api/#update-host-tags
 ---
 
 ## Update host tags
-This end point allows you to update all tags for a given host.
+This end point allows you to update/replace all tags in an integration source with those supplied in the request.
 
 ##### ARGUMENTS
 * **`tags`** [*required*]:  
