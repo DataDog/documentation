@@ -1,17 +1,11 @@
 ---
 title: Send Logs over HTTP
 type: apicontent
-order: 15
+order: 15.1
 external_redirect: /api/#send-logs-over-http
 ---
 
 ## Send Logs over HTTP
-
-<div class="alert alert-warning">
-This API endpoint is in beta.
-</div>
-
-Send your logs to your Datadog platform over HTTP.
 
 | Item             | Description                                                                                                           |
 | ------           | ---------                                                                                                             |
@@ -21,6 +15,3 @@ Send your logs to your Datadog platform over HTTP.
 | Query parameters | Query parameters available are the reserved log attribute. `?ddsource=<SOURCE>&service=<SERVICE>&hostname=<HOSTNAME>` |
 | Method           | `POST`                                                                                                                |
 | Content Type     | Available content type are: `text/plain`, `application/json`, `application/logplex-1`                                 |
-
-
-**Note**: If you are in Datadog EU `app.datadoghq.eu`, the HTTP log endpoint is: `http-intake.logs.datadoghq.eu`
