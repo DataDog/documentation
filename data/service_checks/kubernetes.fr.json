@@ -5,7 +5,7 @@
         "statuses": ["ok", "critical"],
         "groups": ["host"],
         "name": "Kubelet Ping",
-        "description": "Renvoie `CRITICAL` si le Kubelet ne répond pas au Ping. Si ce n'est pas le cas, renvoie`OK`."
+        "description": "Renvoie `CRITICAL` si le Kubelet ne répond pas au Ping. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.6.0",
@@ -37,8 +37,8 @@
         "check": "kubernetes_state.node.ready",
         "statuses": ["ok", "critical"],
         "groups": ["host", "node"],
-        "name": "Node Ready",
-        "description": "Renvoie `CRITICAL` si le noeud du cluster n'est pas ready. Renvoie `OK` sinon."
+        "name": "Nœud prêt",
+        "description": "Renvoie `CRITICAL` si le nœud du cluster n'est pas prêt. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.6.0",
@@ -46,8 +46,8 @@
         "check": "kubernetes_state.node.out_of_disk",
         "statuses": ["ok", "critical"],
         "groups": ["host", "node"],
-        "name": "Node Out Of Disk",
-        "description": "Renvoie `CRITICAL` si un nœud de cluster manque d'espace disque. Renvoie `OK` sinon."
+        "name": "Plus d'espace disque nœud",
+        "description": "Renvoie `CRITICAL` si un nœud de cluster manque d'espace disque. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.6.0",
@@ -55,8 +55,8 @@
         "check": "kubernetes_state.node.disk_pressure",
         "statuses": ["ok", "critical"],
         "groups": ["host", "node"],
-        "name": "Node Disk Pressure",
-        "description": "Renvoie `CRITICAL` si un nœud de cluster est dans un état disk pressure. Renvoie `OK` sinon."
+        "name": "Pression du disque du nœud",
+        "description": "Renvoie `CRITICAL` si un nœud de cluster enregistre un état de pression de disque. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.6.0",
@@ -64,8 +64,8 @@
         "check": "kubernetes_state.node.memory_pressure",
         "statuses": ["ok", "critical"],
         "groups": ["host", "node"],
-        "name": "Node Memory Pressure",
-        "description": "Renvoie `CRITICAL` si un nœud de cluster est dans un état memory pressure. Renvoie `OK` sinon."
+        "name": "Pression de la mémoire du nœud",
+        "description": "Renvoie `CRITICAL` si un nœud de cluster enregistre un état de pression de la mémoire. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.6.0",
@@ -73,8 +73,8 @@
         "check": "kubernetes_state.node.network_unavailable",
         "statuses": ["ok", "critical"],
         "groups": ["host", "node"],
-        "name": "Node Network Unavailable",
-        "description": "Renvoie `CRITICAL` si un nœud de cluster est dans un état network unavailable. Renvoie `OK` sinon."
+        "name": "Indisponibilité réseau nœud",
+        "description": "Renvoie `CRITICAL` si un nœud de cluster enregistre un état d'indisponibilité du réseau. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.6.0",
@@ -82,7 +82,7 @@
         "check": "kubernetes_state.pod.phase",
         "statuses": ["ok", "critical", "warning", "unknown"],
         "groups": ["host", "pod"],
-        "name": "Pod Phase",
-        "description": "Renvoie `CRITICAL` si le pod est en phase` Failed`, `WARNING` s'il est `Pending`, `UNKNOWN` s'il est` Unknown` ou `OK` sinon."
+        "name": "Phase Pod",
+        "description": "Renvoie `CRITICAL` si le processus n'est pas en cours d'exécution ou d'arrêt, renvoie `UNKNOWN` si l'est en cours de démarrage ou d'un autre processus inconnu ou renvoie `OK` pour les autres cas."
     }
 ]
