@@ -4,6 +4,7 @@ kind: Documentation
 aliases:
   - /tracing/dotnet
   - /tracing/setup/dotnet
+  - /agent/apm/dotnet/
 further_reading:
   - link: "https://github.com/DataDog/dd-trace-csharp"
     tag: "GitHub"

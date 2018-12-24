@@ -3,6 +3,7 @@ title: Tracing PHP Applications
 kind: Documentation
 aliases:
 - /tracing/setup/php
+- /agent/apm/php/
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-php"
   tag: "GitHub"
