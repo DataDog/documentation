@@ -66,6 +66,7 @@ clean-integrations:  ## remove built integrations files.
 	    -a -not -name 'azure_dbforpostgresql.md' \
 	    -a -not -name 'amazon_cloudhsm.md' \
 	    -a -not -name 'cloud_foundry.md' \
+			-a -not -name 'cloudability.md' \
 	    -a -not -name 'cloudcheckr.md' \
 	    -a -not -name 'integration_sdk.md' \
 	    -a -not -name 'jenkins.md' \
