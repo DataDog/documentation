@@ -12,7 +12,7 @@ further_reading:
   tag: "Documentation"
   text: "Create a new Integration"
 aliases:
-  - /developers/openmetrics/'
+  - /developers/openmetrics/
 ---
 
 ## Overview
