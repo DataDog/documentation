@@ -7,7 +7,8 @@ external_redirect: /api/#google-cloud-platform
 
 ## Google Cloud Platform
 
-Configure your Datadog-Google Cloud Platform integration directly through the Datadog API. [Read more about Datadog-Google Cloud Platform integration][1]
+Configure your Datadog-Google Cloud Platform integration directly through the Datadog API.  
+[Read more about Datadog-Google Cloud Platform integration][1].
 
 **Note**: 
 
