@@ -1,14 +1,14 @@
 ---
 title: Slack
 type: apicontent
-order: 14.5
+order: 14.4
 external_redirect: /api/#slack
 ---
 
 ## Slack
 
 Configure your Datadog-Slack integration directly through Datadog API.  
-[Read more about Datadog-Slack integration][1].
+[Read more about Datadog-Slack integration][1]
 
 **Note**: 
 
