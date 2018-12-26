@@ -1,14 +1,14 @@
 ---
 title: Webhooks
 type: apicontent
-order: 14.6
+order: 14.5
 external_redirect: /api/#webhooks
 ---
 
 ## Webhooks
 
 Configure your Datadog-Webhooks integration directly through Datadog API.  
-[Read more about Datadog-Webhooks integration][1].
+[Read more about Datadog-Webhooks integration][1]
 
 **Note**: 
 
