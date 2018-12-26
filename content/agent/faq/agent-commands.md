@@ -10,7 +10,7 @@ further_reading:
   text: "Agent Troubleshooting"
 ---
 
-<div class="alert alert-info">
+<div class="alert alert-warning">
 For Linux based systems where the `service` wrapper command is not available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands">consult the list of alternatives</a>.
 </div>
 
@@ -25,24 +25,28 @@ List of commands to start the Datadog Agent:
 | Platform | Command                                                        |
 |----------|----------------------------------------------------------------|
 | Linux    | `sudo service datadog-agent start`                             |
+| Docker   | [See the dedicated Docker documentation][1]                    |
 | macOS    | `launchctl start com.datadoghq.agent` *or* via the systray app |
 | Source   | `sudo service datadog-agent start`                             |
-| Windows  | [See the dedicated Windows documentation][1]                   |
+| Windows  | [See the dedicated Windows documentation][2]                   |
 
 
-[1]: /agent/basic_agent_usage/windows
+[1]: /agent/docker
+[2]: /agent/basic_agent_usage/windows
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
 | Platform | Command                                      |
 |----------|----------------------------------------------|
 | Linux    | `sudo service datadog-agent start`           |
+| Docker   | [See the dedicated Docker documentation][1]  |
 | macOS    | `/usr/local/bin/datadog-agent start`         |
 | Source   | `sudo ~/.datadog-agent/bin/agent start`      |
-| Windows  | [See the dedicated Windows documentation][1] |
+| Windows  | [See the dedicated Windows documentation][2] |
 
 
-[1]: /agent/basic_agent_usage/windows
+[1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
+[2]: /agent/basic_agent_usage/windows
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -56,24 +60,28 @@ List of commands to stop the Datadog Agent:
 | Platform | Command                                                       |
 |----------|---------------------------------------------------------------|
 | Linux    | `sudo service datadog-agent stop`                             |
+| Docker   | [See the dedicated Docker documentation][1]                   |
 | macOS    | `launchctl stop com.datadoghq.agent` *or* via the systray app |
 | Source   | `sudo service datadog-agent stop`                             |
-| Windows  | [See the dedicated Windows documentation][1]                  |
+| Windows  | [See the dedicated Windows documentation][2]                  |
 
 
-[1]: /agent/basic_agent_usage/windows
+[1]: /agent/docker
+[2]: /agent/basic_agent_usage/windows
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
 | Platform | Command                                      |
 |----------|----------------------------------------------|
 | Linux    | `sudo service datadog-agent stop`            |
+| Docker   | [See the dedicated Docker documentation][1]  |
 | macOS    | `/usr/local/bin/datadog-agent stop`          |
 | Source   | `sudo ~/.datadog-agent/bin/agent stop`       |
-| Windows  | [See the dedicated Windows documentation][1] |
+| Windows  | [See the dedicated Windows documentation][2] |
 
 
-[1]: /agent/basic_agent_usage/windows
+[1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
+[2]: /agent/basic_agent_usage/windows
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -87,24 +95,28 @@ List of commands to restart the Datadog Agent:
 | Platform | Command                                           |
 |----------|---------------------------------------------------|
 | Linux    | `sudo service datadog-agent restart`              |
+| Docker   | [See the dedicated Docker documentation][1]       |
 | macOS    | run `stop` then `start`, *or* via the systray app |
 | Source   | *unsupported Platform*                            |
-| Windows  | [See the dedicated Windows documentation][1]      |
+| Windows  | [See the dedicated Windows documentation][2]      |
 
 
-[1]: /agent/basic_agent_usage/windows
+[1]: /agent/docker
+[2]: /agent/basic_agent_usage/windows
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
 | Platform | Command                                      |
 |----------|----------------------------------------------|
 | Linux    | `sudo service datadog-agent restart`         |
+| Docker   | [See the dedicated Docker documentation][1]  |
 | macOS    | `/usr/local/bin/datadog-agent restart`       |
 | Source   | `sudo ~/.datadog-agent/bin/agent restart`    |
-| Windows  | [See the dedicated Windows documentation][1] |
+| Windows  | [See the dedicated Windows documentation][2] |
 
 
-[1]: /agent/basic_agent_usage/windows
+[1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
+[2]: /agent/basic_agent_usage/windows
 {{% /tab %}}
 {{< /tabs >}}
 
