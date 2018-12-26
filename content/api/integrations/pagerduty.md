@@ -7,8 +7,8 @@ external_redirect: /api/#pagerduty
 
 ## PagerDuty
 
-Configure your Datadog-PagerDuty integration directly through the Datadog API.
-[Read more about Datadog-PagerDuty integration][1]
+Configure your Datadog-PagerDuty integration directly through the Datadog API.  
+[Read more about Datadog-PagerDuty integration][1].
 
 **Note**:
 

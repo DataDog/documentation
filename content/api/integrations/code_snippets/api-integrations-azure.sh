@@ -5,10 +5,8 @@
 api_key=<DD_API_KEY>
 app_key=<DD_APP_KEY>
 
-
 # List Azure accounts in Datadog
 curl -X GET "https://app.datadoghq.com/api/v1/integration/azure?api_key=${api_key}&application_key=${app_key}"
-
 
 # Create an Azure account in Datadog
 curl -X POST -H "Content-type: application/json" \
