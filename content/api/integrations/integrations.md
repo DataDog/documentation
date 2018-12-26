@@ -10,10 +10,11 @@ external_redirect: /api/#integrations
 Configure your Datadog integrations via Datadog API, current configurable integrations are:
 
 * [AWS][1]
-* [PagerDuty][2]
-* [Slack][3]
-* [Webhooks][4]
-* [Google Cloud Platform][5]
+* [Azure][2]
+* [Google Cloud Platform][3]
+* [PagerDuty][4]
+* [Slack][5]
+* [Webhooks][6]
 
 Available endpoints are:
 
@@ -32,7 +33,8 @@ Available endpoints are:
     **`DELETE /api/v1/integration/<SOURCE_TYPE_NAME>`**
 
 [1]: /api/#aws
-[2]: /api/#pagerduty
-[3]: /api/#slack
-[4]: /api/#webhooks
-[5]: /api/#gcp
+[2]: /api/#azure
+[3]: /api/#google-cloud-platform
+[4]: /api/#pagerduty
+[5]: /api/#slack
+[6]: /api/#webhooks
