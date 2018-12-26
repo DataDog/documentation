@@ -71,7 +71,7 @@ You should whitelist all of these IPs. While only a subset are active at any giv
 
 ## Open Ports
 
-**All outbound traffic is sent over SSL via TCP.**
+**All outbound traffic is sent over SSL via TCP / UDP.**
 
 Open the following ports in order to benefit from all the Agent functionalities: 
 
