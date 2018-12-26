@@ -1,7 +1,7 @@
 ---
 title: Update a Screenboard
 type: apicontent
-order: 18.2
+order: 19.2
 external_redirect: /api/#update-a-screenboard
 ---
 

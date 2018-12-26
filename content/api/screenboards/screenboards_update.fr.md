@@ -1,7 +1,7 @@
 ---
 title: Mettre à jour un screenboard
 type: apicontent
-order: 18.2
+order: 19.2
 external_redirect: /api/#mettre-a-jour-un-screenboard
 ---
 

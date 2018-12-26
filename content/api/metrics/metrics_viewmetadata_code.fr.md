@@ -1,7 +1,7 @@
 ---
 title: Voir les metadata d'une métrique
 type: apicode
-order: 15.4
+order: 16.4
 external_redirect: /api/#view-metric-metadata
 ---
 
