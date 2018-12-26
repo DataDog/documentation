@@ -11,7 +11,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-For Linux based systems where the `service` wrapper command is not available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands">consult the list of alternatives</a>.
+For Linux based systems where the <code>service</code> wrapper command is not available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands">consult the list of alternatives</a>.
 </div>
 
 ## Start, Stop, and Restart the Agent 
