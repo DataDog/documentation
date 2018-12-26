@@ -33,13 +33,45 @@ Use the `datadog/agent:latest-jmx` image. This image is based on `datadog/agent:
 To check whether Autodiscovery is loading JMX-based checks:
 
 ```
-# docker exec -it <agent_container_name> cat /opt/datadog-agent/run/jmx_status.yaml
-timestamp: 1499296559130
-checks:
-  failed_checks: {}
-  initialized_checks:
-    SD-jmx_0:
-    - {message: null, service_check_count: 0, status: OK, metric_count: 13, instance_name: SD-jmx_0-10.244.2.45-9010}
+$ docker exec -it <agent_container_name> agent configcheck
+
+=== jmx check ===
+Source: Docker
+Instance ID: jmx:ae0a29210146d6f3
+host: 172.17.0.2
+port: "7199"
+tags:
+- image_tag:latest
+- docker_image:my-java-app:latest
+- image_name:my-java-app
+- short_image:my-java-app
+~
+Init Config:
+{}
+Auto-discovery IDs:
+* docker://f7d8dda2e6cb8847f4f172498305e532b08059bf3a700f271d65a90b0c1f0d33
+```
+
+To see JMX-based checks status from the Agent:
+
+```
+$ docker exec -it <agent_container_name> agent status
+
+========
+JMXFetch
+========
+
+  Initialized checks
+  ==================
+    jmx
+      instance_name : jmx-172.17.0.2-7199
+      message :
+      metric_count : 15
+      service_check_count : 0
+      status : OK
+  Failed checks
+  =============
+    no checks
 ```
 
 ## Further Reading
