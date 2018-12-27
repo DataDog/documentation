@@ -1,7 +1,7 @@
 ---
 title: Create a Screenboard
 type: apicontent
-order: 18.1
+order: 19.1
 external_redirect: /api/#create-a-screenboard
 ---
 
@@ -22,4 +22,4 @@ external_redirect: /api/#create-a-screenboard
 * **`read_only`** [*optional*, *default*=**False**]:  
     The read-only status of the screenboard.
 
-[1]: /graphing/dashboards/widgets/
+[1]: /graphing/dashboards/widgets

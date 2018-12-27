@@ -5,7 +5,6 @@ private: true
 ---
 
 {{< whatsnext desc="List of Frequently Asked Questions:" >}}
-    {{< nextlink href="/logs/faq/log-management-surveys" >}}Log Management - Surveys{{< /nextlink >}}
     {{< nextlink href="/logs/faq/log-collection-troubleshooting-guide" >}}Log Collection Troubleshooting Guide{{< /nextlink >}}
     {{< nextlink href="/logs/faq/i-have-a-custom-log-file-with-heightened-read-permissions" >}}I have a custom log file with heightened read-permissions; how do I send it to Datadog?{{< /nextlink >}}
     {{< nextlink href="/logs/faq/log-parsing-best-practice" >}}Log Parsing - Best Practice{{< /nextlink >}}

@@ -4,7 +4,7 @@ kind: faq
 further_reading:
 - link: "monitors/monitor_types"
   tag: "Documentation"
-  text: Learn how to create a monitor
+  text: "Learn how to create a monitor"
 ---
 
 {{< img src="monitors/faq/Require_screen.png" alt="Require_screen" responsive="true" >}}

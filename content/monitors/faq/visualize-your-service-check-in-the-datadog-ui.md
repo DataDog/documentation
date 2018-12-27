@@ -5,13 +5,13 @@ kind: faq
 
 Service checks can be visualized and used in 3 Datadog sections:
 
-* [Check Summary][2]
-* [Screenboards][3]
-* [Custom check Monitor][4]
+* [Check Summary][1]
+* [Screenboards][2]
+* [Custom check Monitor][3]
 
 ## Check Summary
 
-To reach [Check Summary][2], click on the *Monitors* tab then on *Check Summary*.
+To reach [Check Summary][1], click on the *Monitors* tab then on *Check Summary*.
 
 {{< img src="monitors/faq/check_summary.png" alt="Check summary" responsive="true" >}}
 
@@ -50,18 +50,18 @@ In this form, you can:
 * **Pick a custom check**: Select your check status name to monitor
 * **Pick monitor scope**: Select the context for your monitor (including/excluding tags)
 * **Set alert conditions**: Choose between a simple check alert or a cluster alert
-* **Say what's happening**: Edit the notification sent (find more about [Datadog notifications][5].)
+* **Say what's happening**: Edit the notification sent (find more about [Datadog notifications][4].)
 * **Notify your team**: Choose who should be notified by this monitor
 
 Service check monitors for out-of-the-box Datadog integrations can be set in *monitor tab* > *Integration* > *Integration status* tab on the left. For instance, with the HAProxy integration: 
 
 {{< img src="monitors/faq/haproxy_service_check.gif" alt="Haproxy service check" responsive="true" >}}
 
-Learn how to write an integration with the [integration developer documentation][1].
+Learn how to write an integration with the [integration developer documentation][5].
 
-[1]: /developers/integrations/
-[2]: https://app.datadoghq.com/check/summary
-[3]: https://app.datadoghq.com/dashboard
-[4]: https://app.datadoghq.com/monitors#create/custom
-[5]: /monitors/notifications/
 
+[1]: https://app.datadoghq.com/check/summary
+[2]: https://app.datadoghq.com/dashboard
+[3]: https://app.datadoghq.com/monitors#create/custom
+[4]: /monitors/notifications
+[5]: /developers/integrations

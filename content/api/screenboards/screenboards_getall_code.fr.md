@@ -1,8 +1,8 @@
 ---
-title: Récupérer tous les Screenboards
+title: Récupérer tous les screenboards
 type: apicode
-order: 18.5
-external_redirect: /api/#get-all-screenboards
+order: 19.5
+external_redirect: /api/#recuperer-tous-les-screenboards
 ---
 
 ##### Signature

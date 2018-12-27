@@ -11,7 +11,7 @@ kind: faq
 | [Span][11]    | A logical unit of work in the system                                | Spans are associated with a [service][1] and optionally a [resource][4]. Each span consists of a start time, a duration, and optional tags.      |
 
 [1]: /tracing/visualization/service
-[2]: /tracing/visualization/services_list/
+[2]: /tracing/visualization/services_list
 [3]: /tracing/visualization/service/#out-of-the-box-graphs
 [4]: /tracing/visualization/resource
 [5]: /tracing/visualization/service/#resources

@@ -4,10 +4,10 @@ kind: documentation
 further_reading:
 - link: "integrations/amazon_xray"
   tag: "X-Ray Integration"
-  text: AWS X-Ray Integration
+  text: "AWS X-Ray Integration"
 - link: "integrations/amazon_lambda"
   tag: "AWS Lambda Integration"
-  text: AWS Lambda Integration
+  text: "AWS Lambda Integration"
 ---
 
 ## Overview
@@ -26,9 +26,9 @@ The Cloud Functions dashboard requires no installation of its own, but it relies
 
 	*Note*: Metrics in the Cloud Function UI are delayed ~10 minutes, as this is the default speed at which we poll AWS APIs. Reach out to support@datadoghq.com if you would like this rate to be decreased.
 
-2. [AWS X-Ray integration][4] (optional)
+2. [AWS X-Ray integration][3] (optional)
 	This integration provides traces for Lambda functions in the function detail page.
-	
+
 	Install the X-Ray integration and add the following permissions to the policy document in your AWS/Datadog Role:
 	```
 	xray:BatchGetTraces,
@@ -40,7 +40,7 @@ The Cloud Functions dashboard requires no installation of its own, but it relies
 
 	- Navigate to the Lambda function in the AWS console you want to instrument. In the “Debugging and error handling” section, check the box to “Enable active tracing”. This turns on X-Ray for that function.
 
-	- Import the X-Ray SDK in your function, and patch all supported libraries. This automatically causes X-Ray to trace all AWS calls and other X-Ray supported integrations. See [an example of this in Python][5].
+	- Import the X-Ray SDK in your function, and patch all supported libraries. This automatically causes X-Ray to trace all AWS calls and other X-Ray supported integrations. See [an example of this in Python][4].
 
 	- Datadog's X-Ray integration supports custom subsegments and annotations as well.
 
@@ -50,7 +50,7 @@ The Cloud Functions dashboard requires no installation of its own, but it relies
 
 	Install this if you want to see logs from your Lambda functions in the function detail page. This will also populate the additional metrics such as Memory Used (avg) and Last Start in your functions table.
 
-	To enable this, refer to the [documentation for sending Lambda logs to Datadog][6].
+	To enable this, refer to the [documentation for sending Lambda logs to Datadog][5].
 
 ## Searching, Filtering, Sorting
 
@@ -122,8 +122,7 @@ All logs emitted from that function are pulled into the function detail page as 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://app.datadoghq.com/functions
-[2]: https://docs.datadoghq.com/integrations/amazon_web_services/
-[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
-[4]: https://app.datadoghq.com/account/settings#integrations/amazon_xray
-[5]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-python-patching.html
-[6]: https://docs.datadoghq.com/integrations/amazon_lambda/#log-collection 
+[2]: /integrations/amazon_web_services
+[3]: https://app.datadoghq.com/account/settings#integrations/amazon_xray
+[4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-python-patching.html
+[5]: /integrations/amazon_lambda/#log-collection

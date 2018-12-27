@@ -4,10 +4,10 @@ kind: documentation
 further_reading:
 - link: "developers/metrics"
   tag: "Documentation"
-  text: Learn more about Metrics
+  text: "Learn more about Metrics"
 - link: "developers/libraries"
   tag: "Documentation"
-  text: Official and Community-contributed API and DogStatsD client libraries
+  text: "Official and Community-contributed API and DogStatsD client libraries"
 ---
 
 ## Overview

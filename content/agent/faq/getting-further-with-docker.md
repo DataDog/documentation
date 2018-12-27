@@ -4,13 +4,13 @@ kind: faq
 further_reading:
 - link: "agent/"
   tag: "Documentation"
-  text: Learn more about the Datadog Agent
+  text: "Learn more about the Datadog Agent"
 - link: "integrations/docker_daemon"
   tag: "Integration"
-  text: Learn more about the Datadog-SNMP integration
+  text: "Learn more about the Datadog-SNMP integration"
 - link: "integrations/disk"
   tag: "Integration"
-  text: Learn more about the Datadog-Disk integration
+  text: "Learn more about the Datadog-Disk integration"
 ---
 
 ## How to report host disk metrics when dd-agent runs in a docker container?
@@ -44,7 +44,7 @@ This automount logic isn't added to the standard entrypoint, as unforeseen edge 
 
 If you customized the docker image or mount a custom directory to `/etc/dd-agent/conf.d`, make sure the `disk.yaml.default` (or a customized `disk.yaml`) file is present, or the disk check is disabled.
 
-#### Permision denied errors
+#### Permission denied errors
 
 This probably happens because the user exposed the host's whole root filesystem to the container, and the Agent stumbles upon shm or netns mount points, which one cannot get metrics from. You should get the user to only expose useful paths to the Agent's container, as the current disk check doesn't have path ignore settings.
 

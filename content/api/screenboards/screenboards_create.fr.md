@@ -1,25 +1,25 @@
 ---
-title: Créer un Screenboard
+title: Créer un screenboard
 type: apicontent
-order: 18.1
-external_redirect: /api/#create-a-screenboard
+order: 19.1
+external_redirect: /api/#creer-un-screenboard
 ---
 
-## Créer un Screenboard
+## Créer un screenboard
 ##### Arguments
-* **`board_title`** [*obligatoire*]:  
+* **`board_title`** [*obligatoire*] :
     Le nom du dashboard.
-* **`description`** [*optionnel*, *défaut*=**None**]:  
-    Une description du contenu du dashboard.
-* **`widgets`** [*obligatoire*]:  
-    [Liste des définitions de widget][1].
-* **`template_variables`** [*optionnel*, *défaut*=**None**]:  
-    Liste des template variables utilisable dans le templating Dashboard.
-* **`width`** [*optionnel*, *défaut*=**None**]:  
-    Largeur du Screenboard en pixels.
-* **`height`** [*optionnel*, *défaut*=**None**]:  
-    Hauteur du Screenboard en pixels.
-* **`read_only`** [*optionnel*, *défaut*=**False**]:  
-    Si le Screenboard est en lecture seule ou non.
+* **`description`** [*facultatif*, *défaut* = **None**] :
+    La description du contenu du dashboard.
+* **`widgets`** [*obligatoire*] :
+    [La liste des définitions de widget][1].
+* **`template_variables`** [*facultatif*, *défaut* = **None**] :
+    La liste des template variables utilisable dans le dashboard de création de modèles.
+* **`width`** [*facultatif*, *défaut* = **None**] :
+    Largeur du screenboard en pixels.
+* **`height`** [*facultatif*, *défaut* = **None**] :
+    Hauteur du screenboard en pixels.
+* **`read_only`** [*facultatif*, *défaut* = **False**] :
+    Indique si le screenboard est en lecture seule ou non.
 
-[1]: /graphing/dashboards/widgets/
+[1]: /graphing/dashboards/widgets

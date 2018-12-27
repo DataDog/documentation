@@ -4,10 +4,10 @@ kind: faq
 further_reading:
 - link: "monitors/monitor_types"
   tag: "Documentation"
-  text: Learn how to create a monitor
+  text: "Learn how to create a monitor"
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 ---
 
 In some cases, you would like to know when one of your tag disappears from some of your systems. It is possible to setup a [monitor][1] for such an alert scheme within Datadog:
@@ -22,5 +22,5 @@ You should then be notified when the tag stops to be sent along with the chosen 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/
+[1]: /monitors
 [2]: /monitors/monitor_types/metric

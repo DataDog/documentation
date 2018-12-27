@@ -4,7 +4,7 @@ kind: faq
 further_reading:
 - link: "agent/"
   tag: "Documentation"
-  text: Learn more about the Datadog Agent
+  text: "Learn more about the Datadog Agent"
 ---
 
 ## Symptoms

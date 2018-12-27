@@ -7,14 +7,14 @@ disable_toc: true
 further_reading:
 - link: "account_management/saml"
   tag: "Documentation"
-  text: Configure SAML for your Datadog account
+  text: "Configure SAML for your Datadog account"
 - link: "account_management/multi_organization"
   tag: "Documentation"
-  text: Configuring Teams & Organizations with Multiple Accounts
+  text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 
 [The NoPassword team has written up instructions for configuring this SAML IdP][1]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://help.nopassword.com/portfolio-items/datadog/
+[1]: https://help.nopassword.com/portfolio-items/datadog

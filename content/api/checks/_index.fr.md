@@ -1,5 +1,5 @@
 ---
-title: Checks de Service
+title: Checks de service
 external_redirect: /api/
 ---
 

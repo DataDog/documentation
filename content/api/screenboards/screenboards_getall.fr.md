@@ -1,13 +1,13 @@
 ---
-title: Récupérer tous les Screenboards
+title: Récupérer tous les screenboards
 type: apicontent
-order: 18.5
-external_redirect: /api/#get-all-screenboards
+order: 19.5
+external_redirect: /api/#recuperer-tous-les-screenboards
 ---
 
-## Récupérer tous les Screenboards
+## Récupérer tous les screenboards
 
-Récupère toutes les spécifications de vos Screenboards.
+Récupérez toutes les spécifications de vos screenboards.
 
 ##### ARGUMENTS
 

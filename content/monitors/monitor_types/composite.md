@@ -7,13 +7,13 @@ description: "Alert on an expression combining multiple monitors"
 further_reading:
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 - link: "monitors/downtimes"
   tag: "Documentation"
-  text: Schedule a dowtime to mute a monitor
+  text: "Schedule a downtime to mute a monitor"
 - link: "monitors/monitor_status"
   tag: "Documentation"
-  text: Consult your monitor status
+  text: "Consult your monitor status"
 ---
 
 Composite monitors combine individual monitors into one monitor to define more specific alert conditions.

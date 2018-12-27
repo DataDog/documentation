@@ -6,6 +6,6 @@
         "check": "cassandra.can_connect",
         "statuses": ["ok", "critical"],
         "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si l'agent ne peut pas se connecter et collecter les métriques de l'instance Cassandra surveillée. Renvoie `OK` sinon."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance Cassandra qu'il surveille et d'y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`."
     }
 ]

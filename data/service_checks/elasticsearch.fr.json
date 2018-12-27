@@ -5,7 +5,7 @@
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host", "port"],
         "name": "Santé du cluster",
-        "description": "Renvoie le `status` de [l'API Cluster Health d'Elasticsearch](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-health.html). Des informations supplémentaires sur l'état des shard au moment de la collecte de données sont incluses dans le message du check."
+        "description": "Renvoie le `status` de [l'API Cluster Health] d'Elasticsearch (http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-health.html). Des informations supplémentaires sur le statut des shards au moment de la collecte de données sont incluses dans le message du check."
     },
     {
         "agent_version": "5.1.0",
@@ -13,6 +13,6 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "port"],
         "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter a l'instance Elasticsearch qu'il monitor. Sinon renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance Elasticsearch qu'il surveille. Si ce n'est pas le cas, renvoie `OK`."
     }
 ]

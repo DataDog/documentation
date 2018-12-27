@@ -1,7 +1,7 @@
 ---
 title: Search metrics
 type: apicontent
-order: 15.6
+order: 16.6
 external_redirect: /api/#search-metrics
 ---
 

@@ -18,7 +18,7 @@ categories:
 - containers
 - orchestration
 - log collection
-doc_link: https://docs.datadoghq.com/integrations/kubernetes/
+doc_link: /integrations/kubernetes/
 ddtype: check
 ---
 
@@ -56,7 +56,7 @@ To gather your kube-state metrics:
 
 Since [Agent v6][4], Kubernetes DNS integration works automatically with the [Autodiscovery][5].
 
-Note: these metrics are unavailable for Azure Kubernetes Service (AKS) at this point in time.  
+Note: these metrics are unavailable for Azure Kubernetes Service (AKS) at this point in time.
 
 ## Collect container logs
 
@@ -67,7 +67,7 @@ Two installations are possible:
 - On the node where the Agent is external to the Docker environment
 - Deployed with its containerized version in the Docker environment
 
-Take advantage of DaemonSets to [automatically deploy the Datadog Agent on all your nodes][14]. Otherwise follow the [container log collection steps][15] to start collecting logs from all your containers.
+Take advantage of DaemonSets to [automatically deploy the Datadog Agent on all your nodes][6]. Otherwise follow the [container log collection steps][7] to start collecting logs from all your containers.
 
 ## Data Collected
 ### Metrics
@@ -91,7 +91,7 @@ Note that `kubernetes_state.*` metrics are gathered from the `kube-state-metrics
 
 ### Events
 
-As the 5.17.0 release, Datadog Agent now supports built in [leader election option][6] for the Kubernetes event collector. Once enabled, you no longer need to deploy an additional event collection container to your cluster. Instead, Agents will coordinate to ensure only one Agent instance is gathering events at a given time, events below will be available:
+As the 5.17.0 release, Datadog Agent now supports built in [leader election option][8] for the Kubernetes event collector. Once enabled, you no longer need to deploy an additional event collection container to your cluster. Instead, Agents will coordinate to ensure only one Agent instance is gathering events at a given time, events below will be available:
 
 * Backoff
 * Conflict
@@ -150,27 +150,27 @@ The Kubernetes check includes the following service checks:
 
 ## Troubleshooting
 
-* [Can I install the Agent on my Kubernetes master node(s)][7]
-* [Why is the Kubernetes check failing with a ConnectTimeout error to port 10250?][8]
-* [How to report host disk metrics when dd-agent runs in a docker container?][9]
-* [Client Authentication against the apiserver and kubelet][10]
-* [Using RBAC permission with your Kubernetes integration][12]
+* [Can I install the Agent on my Kubernetes master node(s)][9]
+* [Why is the Kubernetes check failing with a ConnectTimeout error to port 10250?][10]
+* [How to report host disk metrics when dd-agent runs in a docker container?][11]
+* [Client Authentication against the apiserver and kubelet][12]
+* [Using RBAC permission with your Kubernetes integration][13]
 
 ## Further Reading
 
-To get a better idea of how (or why) to integrate your Kubernetes service, check out Datadog's [series of blog posts][13] about it.
+To get a better idea of how (or why) to integrate your Kubernetes service, check out Datadog's [series of blog posts][14] about it.
 
-[1]: https://hub.docker.com/r/datadog/agent/
+[1]: https://hub.docker.com/r/datadog/agent
 [2]: /agent/basic_agent_usage/kubernetes
 [3]: https://github.com/kubernetes/kube-state-metrics/tree/master/kubernetes
-[4]: /agent/
+[4]: /agent
 [5]: /agent/autodiscovery
-[6]: /agent/basic_agent_usage/kubernetes/#event_collection
-[7]: /integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s
-[8]: /integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250
-[9]: /agent/faq/getting-further-with-docker
-[10]: /integrations/faq/client-authentication-against-the-apiserver-and-kubelet
-[12]: /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
-[13]: https://www.datadoghq.com/blog/monitoring-kubernetes-era/
-[14]: https://app.datadoghq.com/account/settings#agent/kubernetes
-[15]: https://docs.datadoghq.com/agent/basic_agent_usage/kubernetes/#log-collection-setup
+[6]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[7]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
+[8]: /agent/basic_agent_usage/kubernetes/#event_collection
+[9]: /integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s
+[10]: /integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250
+[11]: /agent/faq/getting-further-with-docker
+[12]: /integrations/faq/client-authentication-against-the-apiserver-and-kubelet
+[13]: /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
+[14]: https://www.datadoghq.com/blog/monitoring-kubernetes-era

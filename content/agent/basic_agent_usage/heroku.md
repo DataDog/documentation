@@ -126,7 +126,7 @@ https://http-intake.logs.datad0g.eu/v1/input/<API_KEY>?ddsource=heroku&service=<
 
 ## Troubleshooting
 
-You can verify that the Datadog Agent is listening by sending a custom metric: 
+You can verify that the Datadog Agent is listening by sending a custom metric:
 
 ```shell
 # From your project directory:
@@ -176,12 +176,12 @@ agent -c /app/.apt/etc/datadog-agent/datadog.yaml flare
 
 ## More information
 
-Visit the [Github project page][6] for more information and to view the source code.
+Visit the [GitHub project page][6] for more information and to view the source code.
 
-[1]: http://docs.datadoghq.com/libraries/
+[1]: /libraries
 [2]: https://app.datadoghq.com/account/settings#api
-[3]: http://docs.datadoghq.com/guides/tagging/
+[3]: /guides/tagging
 [4]: https://help.datadoghq.com/hc/en-us/articles/204588979-How-to-graph-percentiles-in-Datadog
-[5]: https://docs.datadoghq.com/tracing/environments/
+[5]: /tracing/environments
 [6]: https://github.com/DataDog/heroku-buildpack-datadog
 [7]: https://devcenter.heroku.com/articles/log-drains#https-drains

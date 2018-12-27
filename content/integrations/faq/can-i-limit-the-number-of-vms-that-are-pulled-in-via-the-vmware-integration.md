@@ -7,5 +7,5 @@ Yes you can configure this with a regex in your `vsphere.yaml` file:
 
 Refer to this example for more info:
 
-https://github.com/DataDog/integrations-core/blob/master/vsphere/datadog_checks/vsphere/data/conf.yaml.example#L31-L35
+https://github.com/DataDog/integrations-core/blob/master/vsphere/datadog_checks/vsphere/data/conf.yaml.example#L87-L91
 

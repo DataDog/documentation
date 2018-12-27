@@ -46,7 +46,7 @@ $http_request.responseText
     }"
     ```
 
-3. Execute the code presented in this [section](#the-code-that-makes-the-api call).
+3. Execute the code presented in this [section](#the-code-that-makes-the-api-call).
 
 ## Post a metric
 

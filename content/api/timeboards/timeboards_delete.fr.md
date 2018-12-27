@@ -1,11 +1,11 @@
 ---
-title: Supprimer un Timeboard
+title: Supprimer un timeboard
 type: apicontent
 order: 21.3
-external_redirect: /api/#delete-a-timeboard
+external_redirect: /api/#supprimer-un-timeboard
 ---
 
-## Supprimer un Timeboard
+## Supprimer un timeboard
 Supprime un [timeboard][1] existant.
 *Cet endpoint ne prend pas d'argument JSON*.
 

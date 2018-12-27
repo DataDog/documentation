@@ -16,8 +16,8 @@ Configure your Datadog-Google Cloud Platform integration directly through the Da
 
 ##### ARGUMENTS
 
-All of the following fields' values are provided by the JSON service account key file created in the [GCP Console for service accounts][2]; Refer to the [Datadog-Google Cloud Platform integration installation instructions][4] to see how to generate one for your organization. 
-For further references, consult the [Google Cloud service account documentation][3].
+All of the following fields' values are provided by the JSON service account key file created in the [GCP Console for service accounts][2]; Refer to the [Datadog-Google Cloud Platform integration installation instructions][3] to see how to generate one for your organization. 
+For further references, consult the [Google Cloud service account documentation][4].
 
 * **`type`** [*required*]:  
 
@@ -63,7 +63,7 @@ For further references, consult the [Google Cloud service account documentation]
 
     Limit the GCE instances that are pulled into Datadog by using tags. Only hosts that match one of the defined tags are imported into Datadog.
 
-[1]: /integrations/google_cloud_platform/
+[1]: /integrations/google_cloud_platform
 [2]: https://console.cloud.google.com/iam-admin/serviceaccounts
-[3]: https://cloud.google.com/iam/docs/creating-managing-service-account-keys
-[4]: /integrations/google_cloud_platform/#installation
+[3]: /integrations/google_cloud_platform/#installation
+[4]: https://cloud.google.com/iam/docs/creating-managing-service-account-keys

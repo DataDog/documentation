@@ -7,12 +7,12 @@ aliases:
 further_reading:
 - link: "/security/"
   tag: "Documentation"
-  text: Review the main categories of data submitted to Datadog
+  text: "Review the main categories of data submitted to Datadog"
 ---
 
-This article is part of a [series on data security][0].
+This article is part of a [series on data security][1].
 
-Customers can send data to the Datadog service by using a locally installed [Agent][1] or through our [HTTP API][2]. While use of Datadog does not strictly require use of the Datadog Agent, the vast majority of customers leverage the Agent. This article describes the main security capabilities and features available to customers to ensure their environment is secure.
+Customers can send data to the Datadog service by using a locally installed [Agent][2] or through our [HTTP API][3]. While use of Datadog does not strictly require use of the Datadog Agent, the vast majority of customers leverage the Agent. This article describes the main security capabilities and features available to customers to ensure their environment is secure.
 
 ## Information Security
 
@@ -20,11 +20,11 @@ The Datadog Agent submits data to Datadog over a TLS-encrypted TCP connection by
 
 ## Networking and Proxying
 
-Datadog is a SaaS product: customers need to establish an outbound connection from their network to the public internet in order to submit monitoring data. Traffic is always initiated by the Agent to Datadog via TLS-encrypted TCP connection by default. No sessions are ever initiated from Datadog back to the Agent. See the Agent's [Network][3] page for more information on configuring firewalls to whitelist the required Datadog domains and ports. Additionally, customers monitoring hosts with no direct connectivity to the public internet, or with restricted outbound traffic, should consider submitting monitoring data via a [Proxy][4].
+Datadog is a SaaS product: customers need to establish an outbound connection from their network to the public internet in order to submit monitoring data. Traffic is always initiated by the Agent to Datadog via TLS-encrypted TCP connection by default. No sessions are ever initiated from Datadog back to the Agent. See the Agent's [Network][4] page for more information on configuring firewalls to whitelist the required Datadog domains and ports. Additionally, customers monitoring hosts with no direct connectivity to the public internet, or with restricted outbound traffic, should consider submitting monitoring data via a [Proxy][5].
 
 ## Agent Logs Obfuscation
 
-The Datadog Agent generates local logs in order to support [Agent troubleshooting][5] as required. As a safety precaution, these local logs are filtered for some specific keywords and patterns that could indicate a potential credential (e.g. API key, password and token keywords, etc.), which are then obfuscated before being written to disk.
+The Datadog Agent generates local logs in order to support [Agent troubleshooting][6] as required. As a safety precaution, these local logs are filtered for some specific keywords and patterns that could indicate a potential credential (e.g. API key, password and token keywords, etc.), which are then obfuscated before being written to disk.
 
 ## Local HTTPS Server
 
@@ -38,28 +38,28 @@ Agent v6 comes bundled with a Graphical User Interface (GUI) by default, which l
 
 Datadog's Vulnerability Management program includes regular assessments of supporting infrastructure and application components, including active scans of core supporting services. Datadog Security teams perform monthly scans to identify configuration and software vulnerabilities, and track remediation of findings according to Datadog's Vulnerability Management policy.
 
-Regarding its Container Agent specifically, Datadog performs regular vulnerability static analysis using [clair by CoreOS][6] and [snyk.io][7]. Additionally, Datadog leverages security scanning as part of its releases of the Container Agent to the [Docker Trusted Registry][8], as well as the [Red Hat Container Catalog][9]. In addition to Datadog's internal Vulnerability Management program, Datadog also partners with container security vendors.
+Regarding its Container Agent specifically, Datadog performs regular vulnerability static analysis using [clair by CoreOS][7] and [snyk.io][8]. Additionally, Datadog leverages security scanning as part of its releases of the Container Agent to the [Docker Trusted Registry][9], as well as the [Red Hat Container Catalog][10]. In addition to Datadog's internal Vulnerability Management program, Datadog also partners with container security vendors.
 
-If you believe you've discovered a bug in Datadog's security, get in touch at [security@datadoghq.com][10] and we will get back to you within 24 hours. Datadog's [PGP key][11] is available for download in case you need to encrypt communications with us. We request that you not publicly disclose the issue until we have had a chance to address it.
+If you believe you've discovered a bug in Datadog's security, get in touch at [security@datadoghq.com][11] and we will get back to you within 24 hours. Datadog's [PGP key][12] is available for download in case you need to encrypt communications with us. We request that you not publicly disclose the issue until we have had a chance to address it.
 
 ## [BETA] Secrets Management
 
-Customers with a requirement to avoid storing secrets in plaintext in the Agent's configuration files can leverage the [secrets management][12] package. This package allows the Agent to call a user-provided executable to handle retrieval or decryption of secrets, which are then loaded in memory by the Agent. Users have the flexibility to design their executable according to their preferred key management service, authentication method, and continuous integration workflow.
+Customers with a requirement to avoid storing secrets in plaintext in the Agent's configuration files can leverage the [secrets management][13] package. This package allows the Agent to call a user-provided executable to handle retrieval or decryption of secrets, which are then loaded in memory by the Agent. Users have the flexibility to design their executable according to their preferred key management service, authentication method, and continuous integration workflow.
 
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[0]: /security/
-[1]: /agent/
-[2]: /api/
-[3]: /agent/network/
-[4]: /agent/proxy/
-[5]: /agent/troubleshooting/
-[6]: https://coreos.com/clair/
-[7]: https://snyk.io/
-[8]: https://docs.docker.com/v17.09/datacenter/dtr/2.4/guides/
-[9]: https://access.redhat.com/containers/
-[10]: mailto:security@datadoghq.com
-[11]: https://www.datadoghq.com/8869756E.asc.txt
-[12]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
+[1]: /security
+[2]: /agent
+[3]: /api
+[4]: /agent/faq/network
+[5]: /agent/proxy
+[6]: /agent/troubleshooting
+[7]: https://coreos.com/clair
+[8]: https://snyk.io
+[9]: https://docs.docker.com/v17.09/datacenter/dtr/2.4/guides
+[10]: https://access.redhat.com/containers
+[11]: mailto:security@datadoghq.com
+[12]: https://www.datadoghq.com/8869756E.asc.txt
+[13]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md

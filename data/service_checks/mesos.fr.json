@@ -5,6 +5,6 @@
         "statuses": ["ok", "critical"],
         "name": "Peut se connecter",
         "groups": ["host", "url"],
-        "description": "Renvoie l'état après avoir envoyé une requête ping à l'URL de l'instance Mesos. Des informations supplémentaires sur l'état de la réponse au moment de la collecte sont incluses dans le message du check."
+        "description": "Renvoie le statut après avoir ping l'URL de l'instance Mesos. Des informations supplémentaires sur le statut de la réponse au moment de la collecte sont incluses dans le message du check."
     }
 ]

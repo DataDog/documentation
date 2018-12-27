@@ -3,8 +3,8 @@
         "agent_version": "5.3.0",
         "groups": ["host"],
         "check": "aws.ec2.host_status",
-        "name": "Status de l'hôte",
+        "name": "Statut d'hôte",
         "statuses": ["ok", "critical", "unknown"],
-        "description": "Renvoie les statuts de l'instance EC2 tels que rapportés par la console AWS. Renvoie `CRITICAL` quand il y a un problème avec votre instance. Renvoie `UNKNOWN` lorsque AWS ne dispose pas de suffisamment de données pour exécuter un check de status. Renvoie `OK` lorsque votre instance est en cours d'exécution ou est fermée correctement."
+        "description": "Renvoie les statuts de votre EC2 tels qu'indiqués par la console AWS. Renvoie `CRITICAL` en cas de problème avec votre instance. Renvoie `UNKNOWN` lorsque AWS ne dispose pas de suffisamment de données pour exécuter un check de statut. Renvoie `OK` lorsque votre instance est en cours d'exécution ou est fermée correctement."
     }
 ]

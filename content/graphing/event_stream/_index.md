@@ -15,7 +15,7 @@ Note that filters perform an exact match search and don't work with partial stri
 | Filter                                            | Description                                                                              |
 | --------                                          | -------------                                                                            |
 | `user:pup@datadoghq.com`                          | Find all events with comments by pup@datadoghq.com.                                      |
-| `sources:github,chef`                             | Show events from Github OR Chef.                                                         |
+| `sources:github,chef`                             | Show events from GitHub OR Chef.                                                         |
 | `tags:env-prod OR db`                             | Show events tagged with #env-prod OR #db.                                                |
 | `tags:security-group:sg-123 AND role:common-node` | Show events tagged with `#security-group:sg-123` AND `#role:common-node`.                |
 | `hosts:i-0ade23e6,db.myapp.com`                   | Show events from i-0ade23e6 OR db.myapp.com.                                             |
@@ -54,17 +54,18 @@ Combine prefixes to construct more complex searches. For example, if you wanted 
 
 `sources:nagios,chef status:error cassandra`
 
-Note: no spaces after the colon or commas in these lists and anything not attached to a prefix goes to full text search.
+**Note**: no spaces after the colon or commas in these lists and anything not attached to a prefix goes to full text search.
 
 ## Show events unaggregated
 
-Change the "aggregate_up" parameter in the url to `false`.
-To remove the top level aggregate event from appearing, change `use_date_happened` to true. [Here is an example link][3]
+ To show unaggregated events in your event stream, un-check the **Aggregate related events** toggle in the upper right corner of your event stream:
+
+{{< img src="graphing/events/event_stream_aggregated.png" alt="Aggregated event stream" responsive="true" style="width:50%;" >}}
 
 ## Events Email
 
-When you need to integrate an application or system with Datadog, you have a few choices. The first is using one of the existing [Datadog integrations][integrations].
-This gets you access to a wide variety of metrics and events with minimal configuration effort on your part. If your application isn't one of the integrated applications, opt to create [a custom check using the Agent][agentcheck]. This requires  more effort and potentially more knowledge on how the application and Datadog work.
+When you need to integrate an application or system with Datadog, you have a few choices. The first is using one of the existing [Datadog integrations][1].
+This gets you access to a wide variety of metrics and events with minimal configuration effort on your part. If your application isn't one of the integrated applications, opt to create [a custom check using the Agent][2]. This requires  more effort and potentially more knowledge on how the application and Datadog work.
 
 There is another option available if you aren't using an application that has an integration, and you don't want to create an Agent check. Rely on your application or system sending an email instead. There are two different ways to use events via email, depending on whether the application offers you the ability to customize the format of the email body being sent.
 
@@ -103,21 +104,17 @@ In the source JSON-formatted email, you have 10 fields you can control: sender e
 In a JSON-formatted email, the subject of the email message is irrelevant as it is replaced by the title in the JSON in the body of the email. All data that appears in the event is defined in the JSON in the body of the email. This JSON must be well-formed or the message is ignored. This means that not only should it look correct with commas separating key value pairs, it also must be pure JSON.
 If you are testing the email with a standard email client, the body may be converted to HTML as a convenience to the user. This causes the JSON to no longer be JSON and the email is ignored by Datadog.
 
-The allowable JSON keys can be found in the [events API documentation][eventsapi].
+The allowable JSON keys can be found in the [events API documentation][3].
 
 ### Setting Up The Email Address
 
-To set up the email, first log in to your Datadog account at [https://app.datadoghq.com][dd-app]. From the *Integrations* menu, choose *APIs*, then scroll down to *Events API Emails*. This section shows you all the emails available for your applications and who created them. Choose the format for your messages from the Format: dropdown, then click *Create API Email*.
+To set up the email, first log in to your Datadog account at [https://app.datadoghq.com][4]. From the *Integrations* menu, choose *APIs*, then scroll down to *Events API Emails*. This section shows you all the emails available for your applications and who created them. Choose the format for your messages from the Format: dropdown, then click *Create API Email*.
 
 {{< img src="graphing/events/event-email-api.png" alt="JSON Event Email API" responsive="true" >}}
 
-[integrations]: /integrations
-[agentcheck]: /agent/agent_checks
-[eventsapi]: /api/#events
-[dd-app]: https://app.datadoghq.com
 
 ## Markdown events
-Datadog event text supports markdown ([Detailed markdown syntax](http://daringfireball.net/projects/markdown/syntax#lin)).
+Datadog event text supports markdown ([Detailed markdown syntax][5]).
 Note that embedding HTML in markdown is not supported with in Datadog.
 
 To use Markdown in the event text, you need to begin the text block by `%%% \n` and end the text block with `\n %%%`
@@ -147,11 +144,13 @@ Should be encoded to: `http://catchpoint.com/session_id%3A123456`
 * `@test@example.com` Sends an email to `test@example.com`.
 * If you have HipChat, Slack, Webhooks, Pagerduty, or VictorOps, use:
     * `@hipchat-[room-name]` or `@slack-[room-name]` – posts the event or graph to that chat room.
-    * `@webhook` – Alerts or triggers whatever is attached to that webhook. Check out [our blogpost on Webhooks][events-1]!
+    * `@webhook` – Alerts or triggers whatever is attached to that webhook. Check out [our blogpost on Webhooks][6]!
     * `@pagerduty` – Sends an alert to Pagerduty. You can also use `@pagerduty-acknowledge` and `@pagerduty-resolve`.
 
-[events-1]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
 
-[1]: /monitors/
-[2]: /graphing/event_stream
-[3]: https://app.datadoghq.com/event/stream?show_private=true&aggregate_up=false&use_date_happened=true&per_page=30&display_timeline=true&from_ts=1418047200000&to_ts=1418050800000&incident=true&codemirror_editor=true&live=true&bucket_size=60000
+[1]: /integrations
+[2]: /agent/agent_checks
+[3]: /api/#events
+[4]: https://app.datadoghq.com
+[5]: http://daringfireball.net/projects/markdown/syntax#lin
+[6]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio

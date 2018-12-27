@@ -4,7 +4,7 @@
         "check": "aws.ecs.agent_connected",
         "statuses": ["ok", "critical"],
         "groups": ["instance_id"],
-        "name": "ECS Agent Status",
-        "description": "Si l'agent ECS est connecté."
+        "name": "Statut de l'Agent ECS",
+        "description": "Indique si l'Agent ECS est connecté."
     }
 ]

@@ -4,15 +4,15 @@
         "check": "ssh.can_connect",
         "statuses": ["ok", "critical"],
         "groups": ["host", "instance"],
-        "name": "SSH Can Connect",
-        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter au hôte SSH. Sinon renvoie `OK`."
+        "name": "SSH peut se connecter",
+        "description": "Renvoie `CRITICAL` si le check de l'Agent n'est pas capable de se connecter au hôte SSH. Si ce n'est pas le cas, renvoie `OK`."
     },
 	{
         "agent_version": "5.1.0",
         "check": "sftp.can_connect",
         "statuses": ["ok", "critical"],
         "groups": ["host", "instance"],
-        "name": "SFTP Can Connect",
-        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'hôte SFTP. Sinon renvoie `OK`."
+        "name": "SFTP peut se connecter",
+        "description": "Renvoie `CRITICAL` si le check de l'Agent n'est pas capable de se connecter à l'hôte SFTP. Si ce n'est pas le cas, renvoie `OK`."
     }
 ]

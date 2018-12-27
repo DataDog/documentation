@@ -12,16 +12,16 @@ further_reading:
   tag: "Documentation"
   text: "Create a new Integration"
 aliases:
-  - /developers/openmetrics/'
+  - /developers/openmetrics/
 ---
 
 ## Overview
 
-This page dives into the `PrometheusCheck` interface for more advanced usage, including an example of a simple check that collects timing metrics and status events from [Kube DNS][1]. For information on configuring a basic Prometheus check, see the [Agent Documentation][6].
+This page dives into the `PrometheusCheck` interface for more advanced usage, including an example of a simple check that collects timing metrics and status events from [Kube DNS][1]. For information on configuring a basic Prometheus check, see the [Agent Documentation][2].
 
 ## Advanced usage: Prometheus check interface
 
-If you have more advanced needs than the generic check (metrics preprocessing for example) you can write a custom `PrometheusCheck`. It's [the base class][2] of the generic check and it provides a structure and some helpers to collect metrics, events, and service checks exposed via Prometheus. Minimal configuration for checks based on this class include:
+If you have more advanced needs than the generic check (metrics preprocessing for example) you can write a custom `PrometheusCheck`. It's [the base class][3] of the generic check and it provides a structure and some helpers to collect metrics, events, and service checks exposed via Prometheus. Minimal configuration for checks based on this class include:
 
 - Overriding `self.NAMESPACE`
 - Overriding `self.metrics_mapper`
@@ -51,7 +51,7 @@ instances:
 The names of the configuration and check files must match. If your check is called <code>mycheck.py</code> your configuration file <em>must</em> be named <code>mycheck.yaml</code>.
 </div>
 
-Configuration for a Prometheus check is almost the same as a regular [Agent check][3]. The main difference is to include the variable `prometheus_endpoint` in your `check.yaml` file. This goes into `conf.d/kube_dns.yaml`:
+Configuration for a Prometheus check is almost the same as a regular [Agent check][4]. The main difference is to include the variable `prometheus_endpoint` in your `check.yaml` file. This goes into `conf.d/kube_dns.yaml`:
 
 ```yaml
 init_config:
@@ -86,7 +86,7 @@ class KubeDNSCheck(PrometheusCheck):
 #### Overriding `self.metrics_mapper`
 
 `metrics_mapper` is a dictionary where the key is the metric to capture and the value is the corresponding metric name in Datadog.
-The reason for the override is so metrics reported by the Prometheus checks are not counted as [custom metric][4]:
+The reason for the override is so metrics reported by the Prometheus checks are not counted as [custom metric][5]:
 
 ```python
 from datadog_checks.checks.prometheus import PrometheusCheck
@@ -116,7 +116,7 @@ def check(self, instance):
 
 ##### Exceptions
 
-If a check cannot run because of improper configuration, programming error, or because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [info command][5] for easy debugging. For example:
+If a check cannot run because of improper configuration, programming error, or because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [info command][6] for easy debugging. For example:
 
     $ sudo /etc/init.d/datadog-agent info
 
@@ -223,8 +223,8 @@ Available types are: `counter`, `gauge`, `summary`, `untyped`, and `histogram`.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py
-[2]: https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py
-[3]: /agent/agent_checks/#configuration
-[4]: /developers/metrics/custom_metrics
-[5]: /agent/faq/agent-commands/#agent-status-and-information
-[6]: /agent/prometheus
+[2]: /agent/prometheus
+[3]: https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py
+[4]: /agent/agent_checks/#configuration
+[5]: /developers/metrics/custom_metrics
+[6]: /agent/faq/agent-commands/#agent-status-and-information

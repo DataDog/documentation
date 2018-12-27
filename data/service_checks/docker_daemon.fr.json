@@ -6,7 +6,7 @@
         "statuses": ["ok", "critical"],
         "groups": ["host"],
         "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si l'agent est incapable de collecter la liste des conteneurs du daemon Docker. Renvoie `OK` sinon."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de recueillir la liste des conteneurs du daemon Docker. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.1.0",
@@ -14,8 +14,8 @@
         "check": "docker.container_health",
         "statuses": ["ok", "critical", "unknown"],
         "groups": ["host"],
-        "name": "Container Health",
-        "description": "Renvoie `CRITICAL` si un conteneur est unhealthy. Renvoie `OK` sinon ou `UNKNOWN` si l'état de santé est inconnu."
+        "name": "Santé du conteneur",
+        "description": "Renvoie `CRITICAL` si un conteneur n'est pas sain, renvoie `OK` si ce n'est pas le cas ou renvoie `UNKNOWN` si l'état de santé est inconnu."
     },
     {
         "agent_version": "5.1.0",
@@ -23,7 +23,7 @@
         "check": "docker.exit",
         "statuses": ["ok", "critical"],
         "groups": ["host"],
-        "name": "Exit Code",
-        "description": "Renvoie `CRITICAL` si un conteneur est fermé avec un code de sortie différent de zéro. Renvoie `OK` sinon."
+        "name": "Code de sortie",
+        "description": "Renvoie `CRITICAL` si un conteneur est fermé avec un code de sortie différent de zéro. Si ce n'est pas le cas, renvoie `OK`."
     }
 ]

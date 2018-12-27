@@ -1,11 +1,11 @@
 ---
-title: Activer un hôte
+title: Réactiver un hôte
 type: apicontent
 order: 13.4
-external_redirect: /api/#unmute-a-host
+external_redirect: /api/#reactiver-un-hote
 ---
 
-## Activer un hôte
+## Réactiver un hôte
 ##### ARGUMENTS
 
 Cet endpoint ne prend aucun argument JSON.

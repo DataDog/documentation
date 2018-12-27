@@ -9,10 +9,10 @@ Similarly to Agent 5, Agent 6 can collect events from the Kubernetes API server.
 Set the `collect_kubernetes_events` variable to `true` in the datadog.yaml. This can be achieved via the environment variable `DD_COLLECT_KUBERNETES_EVENTS` that is resolved at start time.
 You will need to give the Agent some rights to activate this feature: see the [RBAC][1]section.
 
-A [ConfigMap][3] can be used to store the `event.tokenKey` and the `event.tokenTimestamp`. The ConfigMap must be deployed in the same namespace as the resources, including the Agent. The namespace for resources can be configured with `DD_KUBE_RESOURCES_NAMESPACE`.
+A [ConfigMap][2] can be used to store the `event.tokenKey` and the `event.tokenTimestamp`. The ConfigMap must be deployed in the same namespace as the resources, including the Agent. The namespace for resources can be configured with `DD_KUBE_RESOURCES_NAMESPACE`.
 You can run `kubectl create configmap datadogtoken --from-literal="event.tokenKey"="0"` . You can also use the example in `manifests/datadog_configmap.yaml`.
 
-When the ConfigMap is used, if the Agent in charge (via the [Leader election][2]) of collecting the events dies, the next leader elected will use the ConfigMap to identify the last events pulled.
+When the ConfigMap is used, if the Agent in charge (via the [Leader election][3]) of collecting the events dies, the next leader elected will use the ConfigMap to identify the last events pulled.
 This is in order to avoid duplicating the events collected, as well as to diminish stress on the API Server.
 
 ## Leader Election
@@ -29,5 +29,5 @@ The `leaderLeaseDuration` is the duration for which a leader stays elected. It i
 The `leaderLeaseDuration` can be configured with the environment variable `DD_LEADER_LEASE_DURATION`.
 
 [1]: /agent/kubernetes#rbac
-[2]: /agent/kubernetes/event_collection#leader-election
-[3]: /agent/kubernetes/integrations#configmap
+[2]: /agent/kubernetes/integrations#configmap
+[3]: /agent/kubernetes/event_collection#leader-election

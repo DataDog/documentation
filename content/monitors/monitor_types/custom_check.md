@@ -5,13 +5,13 @@ description: "Monitor status of arbitrary custom checks"
 further_reading:
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 - link: "monitors/downtimes"
   tag: "Documentation"
-  text: Schedule a dowtime to mute a monitor
+  text: "Schedule a downtime to mute a monitor"
 - link: "monitors/monitor_status"
   tag: "Documentation"
-  text: Consult your monitor status
+  text: "Consult your monitor status"
 ---
 
 ## Overview
@@ -39,5 +39,5 @@ Refer to the [Agent checks guide][1] for detailed information on writing your ow
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/agent_checks/
+[1]: /agent/agent_checks
 [2]: /monitors/notifications

@@ -5,13 +5,13 @@ disable_toc: true
 further_reading:
 - link: "logs/faq/log-parsing-best-practice"
   tag: "FAQ"
-  text: Log Parsing - Best Practice
+  text: "Log Parsing - Best Practice"
 - link: "logs/processing"
   tag: "Documentation"
-  text: Learn how to process your logs
+  text: "Learn how to process your logs"
 - link: "logs/processing/parsing"
   tag: "Documentation"
-  text: Learn more about parsing
+  text: "Learn more about parsing"
 ---
 
 Integration Pipelines support the default log format for a given technology. So if you have customized the log format or written a custom parser which is not working, your logs might not get properly parsed.
@@ -86,7 +86,7 @@ Before you go ahead and troubleshoot your parser, it might be interesting for yo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/
-[2]: /logs/processing/parsing/
+[1]: /logs/processing
+[2]: /logs/processing/parsing
 [3]: /logs/faq/log-parsing-best-practice
 [4]: /help

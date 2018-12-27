@@ -1,7 +1,7 @@
 ---
 title: Monitors group search
 type: apicontent
-order: 16.13
+order: 17.13
 external_redirect: /api/#monitors-group-search
 ---
 
@@ -13,7 +13,7 @@ Search and filter your monitor groups details.
 
 * **`query`** [*optional*]: 
     
-    After entering a search query in your [Manage Monitor page][2] use the query parameter value in the URL of the page as value for this parameter. Consult the dedicated [manage monitor documentation][1] page to learn more.
+    After entering a search query in your [Manage Monitor page][1] use the query parameter value in the URL of the page as value for this parameter. Consult the dedicated [manage monitor documentation][2] page to learn more.
 
 * **`page`** [*optional*, *default* = **0**]: 
     
@@ -31,5 +31,5 @@ Search and filter your monitor groups details.
     * `status`
     * `tags`
 
-[1]: /monitors/manage_monitor/#find-the-monitors
-[2]: https://app.datadoghq.com/monitors/manage
+[1]: https://app.datadoghq.com/monitors/manage
+[2]: /monitors/manage_monitor/#find-the-monitors

@@ -6,6 +6,6 @@
         "check": "apache.can_connect",
         "statuses": ["ok", "critical"],
         "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si l'agent ne peut pas se connecter à l'instance Apache qu'il monitor. Renvoie `OK` sinon."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance Apache qu'il surveille. Si ce n'est pas le cas, renvoie `OK`."
     }
 ]

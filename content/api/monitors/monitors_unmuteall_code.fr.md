@@ -1,8 +1,8 @@
 ---
-title: Activer tous les monitors
+title: Réactiver tous les monitors
 type: apicode
-order: 16.08
-external_redirect: /api/#unmute-all-monitors
+order: 17.08
+external_redirect: /api/#reactiver-tous-les-monitors
 ---
 
 ##### Signature

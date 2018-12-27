@@ -1,7 +1,7 @@
 ---
 title: Télécharger les métadonnées IdP
 type: apicode
-order: 17.4
+order: 18.4
 external_redirect: /api/#upload-idp-metadata
 ---
 

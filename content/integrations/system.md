@@ -50,7 +50,7 @@ The system_core check is included in the [Datadog Agent][4] package, so you don'
 
 #### Configuration
 
-1. Edit the `system_core.d/conf.yaml` file in the `conf.d/` folder at the root of your Agent's directory. See the [sample system_core.d/conf.yaml][5] for all available configuration options:  
+1. Edit the `system_core.d/conf.yaml` file in the `conf.d/` folder at the root of your Agent's directory. See the [sample system_core.d/conf.yaml][5] for all available configuration options:
 
     ```
     init_config:
@@ -61,7 +61,7 @@ The system_core check is included in the [Datadog Agent][4] package, so you don'
 
     The Agent just needs one item in `instances` in order to enable the check. The content of the item doesn't matter.
 
-2. [Restart the Agent][7] to enable the check.
+2. [Restart the Agent][6] to enable the check.
 
 ### Validation
 
@@ -84,7 +84,7 @@ The system swap check is included in the [Datadog Agent][4] package, so you don'
 
 ### Configuration
 
-1. Edit the `system_swap.d/conf.yaml` file in the `conf.d/` folder at the root of your Agent's directory. See the [sample system_swap.d/conf.yaml][6] for all available configuration options:
+1. Edit the `system_swap.d/conf.yaml` file in the `conf.d/` folder at the root of your Agent's directory. See the [sample system_swap.d/conf.yaml][7] for all available configuration options:
 
     ```
     # This check takes no initial configuration
@@ -93,7 +93,7 @@ The system swap check is included in the [Datadog Agent][4] package, so you don'
     instances: [{}]
     ```
 
-2. [Restart the Agent][7] to start collecting swap metrics.
+2. [Restart the Agent][6] to start collecting swap metrics.
 
 ### Validation
 
@@ -106,9 +106,8 @@ The system swap check is included in the [Datadog Agent][4] package, so you don'
 
 [1]: /integrations/directory
 [2]: /integrations/disk
-[3]: /integrations/process/
-[4]: https://app.datadoghq.com/account/settings#agent
-[4]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
+[3]: /integrations/process
+[4]: /agent/faq/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/system_core/datadog_checks/system_core/data/conf.yaml.example
-[6]: https://github.com/DataDog/integrations-core/blob/master/system_swap/datadog_checks/system_swap/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent
+[6]: /agent/faq/agent-commands/#start-stop-restart-the-agent
+[7]: https://github.com/DataDog/integrations-core/blob/master/system_swap/datadog_checks/system_swap/data/conf.yaml.example

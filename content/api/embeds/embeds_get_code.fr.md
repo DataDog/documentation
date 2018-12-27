@@ -2,9 +2,8 @@
 title: Récupérer un embed spécifique
 type: apicode
 order: 10.3
-external_redirect: /api/#get-specific-embed
+external_redirect: /api/#recuperer-un-embed-specifique
 ---
-
 
 ##### Signature
 `GET https://api.datadoghq.com/api/v1/graph/embed/<EMBED_ID>`

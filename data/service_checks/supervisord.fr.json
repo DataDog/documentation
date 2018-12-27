@@ -6,7 +6,7 @@
         "statuses": ["ok", "critical"],
         "groups": ["supervisord_server", "host"],
         "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si la vérification de l'agent est incapable de se connecter au daemon supervisor. Renvoie `OK` sinon."
+        "description": "Renvoie `CRITICAL` si le check de l'Agent n'est pas capable de se connecter au daemon supervisor. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.3.0",
@@ -15,7 +15,7 @@
         "check": "supervisord.process.status",
         "statuses": ["ok", "critical", "unknown"],
         "name": "Statut du processus",
-        "description": "Renvoie `CRITICAL` si le processus n'est pas en cours d'exécution ou d'arrêt,` UNKNOWN 'si démarrage ou inconnu, `OK` sinon."
+        "description": "Renvoie `CRITICAL` si le processus n'est pas en cours d'exécution ou d'arrêt, renvoie `UNKNOWN` si l'est en cours de démarrage ou d'un autre processus inconnu ou renvoie `OK` pour les autres cas."
     }
 
 ]

@@ -7,13 +7,13 @@ aliases:
 further_reading:
 - link: "graphing/infrastructure/hostmap"
   tag: "Graphing"
-  text: See all of your hosts together on one screen with the hostmap
+  text: "See all of your hosts together on one screen with the hostmap"
 - link: "graphing/infrastructure/livecontainers"
   tag: "Graphing"
-  text: Get real-time visibility of all of the containers across your environment
+  text: "Get real-time visibility of all of the containers across your environment"
 - link: "graphing/infrastructure/process"
   tag: "Graphing"
-  text: Understand what is going on at any level of your system
+  text: "Understand what is going on at any level of your system"
 ---
 
 ## Overview

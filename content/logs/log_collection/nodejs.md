@@ -6,19 +6,19 @@ aliases:
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"
-  text: Learn how to process your logs
+  text: "Learn how to process your logs"
 - link: "logs/processing/parsing"
   tag: "Documentation"
-  text: Learn more about parsing
+  text: "Learn more about parsing"
 - link: "logs/explorer"
   tag: "Documentation"
-  text: Learn how to explore your logs
+  text: "Learn how to explore your logs"
 - link: "logs/explorer/analytics"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: "logs/faq/log-collection-troubleshooting-guide"
   tag: "FAQ"
-  text: Log Collection Troubleshooting Guide
+  text: "Log Collection Troubleshooting Guide"
 ---
 
 ## Overview 

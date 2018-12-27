@@ -1,16 +1,16 @@
 ---
-title: Mettre en sourdine un serveur
+title: Désactiver un hôte
 type: apicontent
 order: 13.3
-external_redirect: /api/#mute-a-host
+external_redirect: /api/#desactiver-un-hote
 ---
 
-## Mettre en sourdine un serveur
+## Désactiver un hôte
 ##### ARGUMENTS
 
-* **`end`** [*optionnel*, *défaut*=**None**]:  
-    Timestamp POSIX lorsque l'hôte est désactivé. S'il est omis, l'hôte reste muet jusqu'à ce qu'il soit explicitement désactivé.
-* **`message`** [*optionnel*, *défaut*=**None**]:  
+* **`end`** [*facultatif*, *défaut* = **None**] :  
+    Timestamp POSIX du moment où l'hôte est réactivé. S'il est omis, l'hôte reste désactivé jusqu'à ce qu'il soit explicitement réactivité.
+* **`message`** [*facultatif*, *défaut* = **None**] :  
     Message à associer à la désactivation de cet hôte.
-* **`override`** [*optionnel*, *défaut*=**False**]:  
-    Si la valeur est true et que l'hôte est déjà désactivé, remplace les paramètres de désactivation de l'hôte existants.
+* **`override`** [*facultatif*, *défaut* = **False**] :
+    Si la valeur est true et l'hôte est déjà désactivé, remplace les paramètres de désactivation de l'hôte existants.

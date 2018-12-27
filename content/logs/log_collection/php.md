@@ -6,19 +6,19 @@ aliases:
 further_reading:
 - link: "/logs/processing"
   tag: "Documentation"
-  text: Learn how to process your logs
+  text: "Learn how to process your logs"
 - link: "/logs/processing/parsing"
   tag: "Documentation"
-  text: Learn more about parsing
+  text: "Learn more about parsing"
 - link: "/logs/explorer"
   tag: "Documentation"
-  text: Learn how to explore your logs
+  text: "Learn how to explore your logs"
 - link: "logs/explorer/analytics"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: /logs/faq/log-collection-troubleshooting-guide
   tag: "FAQ"
-  text: Log Collection Troubleshooting Guide
+  text: "Log Collection Troubleshooting Guide"
 ---
 
 ## Overview
@@ -145,19 +145,13 @@ $log->pushProcessor(function ($record) {
 
 Monolog is a part of the following frameworks:
 
-* [Symfony2, Symfony3][5]
-* [PPI][6]
-* [Laravel 4 & 5][7]
-* [Silex][8]
-* [Lumen][9]
-* [CakePHP][10]
+* [Symfony2, Symfony3][1]
+* [PPI][2]
+* [Laravel 4 & 5][3]
+* [Silex][4]
+* [Lumen][5]
+* [CakePHP][6]
 
-[5]: /logs/log_collection/php/#symfony-v2-v3
-[6]: /logs/log_collection/php/#ppi
-[7]: /logs/log_collection/php/#laravel
-[8]: /logs/log_collection/php/#silex
-[9]: /logs/log_collection/php/#lumen
-[10]: /logs/log_collection/php/#cakephp
 
 Integrate Monolog with your framework then configure your logger: 
  
@@ -313,6 +307,12 @@ CakeLog::config('debug', array(
 ));
 ```
 
+[1]: /logs/log_collection/php/#symfony-v2-v3
+[2]: /logs/log_collection/php/#ppi
+[3]: /logs/log_collection/php/#laravel
+[4]: /logs/log_collection/php/#silex
+[5]: /logs/log_collection/php/#lumen
+[6]: /logs/log_collection/php/#cakephp
 {{% /tab %}}
 {{% tab "PHP Symfony" %}}
 
@@ -455,14 +455,14 @@ logs:
               - { name: monolog.processor, method: processRecord }
   ```
 
-3. [Stream generated JSON file to Datadog][11]
+3. [Stream generated JSON file to Datadog][1]
 
-[11]: /logs/log_collection
 
+[1]: /logs/log_collection
 {{% /tab %}}
 {{% tab "PHP Zend-Log" %}}
 
-Zend-log is a part of the Zend framework. Use [Composer][12] to add Zend-Log:
+Zend-log is a part of the Zend framework. Use [Composer][1] to add Zend-Log:
 
 ```
 composer require "zendframework/zend-log"
@@ -509,7 +509,7 @@ $logger->addWriter($writer);
 Zend\Log\Logger::registerErrorHandler($logger);
 ```
 
-Then [Stream your log files to Datadog][11]
+Then [Stream your log files to Datadog][2]
 
 ## Configure your Datadog Agent
 
@@ -562,12 +562,12 @@ $logger->addProcessor(new Zend\Log\Processor\ReferenceId());
 $logger->addProcessor(new Zend\Log\Processor\RequestId());
 ```
 
-If you want to develop yours, [refer the Zend documentation][13].
+If you want to develop yours, [refer the Zend documentation][3].
 
-[11]: /logs/log_collection
-[12]: https://getcomposer.org/
-[13]: https://docs.zendframework.com/zend-log/processors/
 
+[1]: https://getcomposer.org
+[2]: /logs/log_collection
+[3]: https://docs.zendframework.com/zend-log/processors
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -575,7 +575,7 @@ If you want to develop yours, [refer the Zend documentation][13].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
+
+
 [1]: /logs
-
-
-

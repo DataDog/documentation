@@ -16,25 +16,24 @@ If you're able to connect using JConsole, run the following:
 java -jar /opt/datadog-agent/agent/checks/libs/jmxterm-1.0-DATADOG-uber.jar -l localhost:PORT -u USER -p PASSWORD
 ```
 
-If you're able to connect using the command above, run: `beans` and send to the [Datadog support team][5] a copy of the results from above along with the following information:
+If you're able to connect using the command above, run: `beans` and send to the [Datadog support team][2] a copy of the results from above along with the following information:
 
-[5]: /help
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
 * Content of `/var/log/datadog/agent.log`
-* Output of the [info command][3]
+* Output of the [info command][1]
 * Output of: `ps aux | grep jmxfetch`
 * A copy of the YAML integration (send the file)
 
-[3]: /agent/faq/agent-status-and-information
 
+[1]: /agent/faq/agent-status-and-information
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-* [Agent logs][2]
-* Output of the [info command][3]
+* [Agent logs][1]
+* Output of the [info command][2]
 * Output of: `ps aux | grep jmxfetch`
 * Content of `/var/log/datadog/jmxfetch.log`
 * Output of: `sudo /etc/init.d/datadog-agent jmx list_everything`
@@ -42,9 +41,9 @@ If you're able to connect using the command above, run: `beans` and send to the 
 
 **Note**: if you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running. If you're targeting another application and not seeing related metrics, the likely issue is a misconfiguration in your YAML.
 
-[2]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
-[3]: /agent/faq/agent-status-and-information
 
+[1]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
+[2]: /agent/faq/agent-status-and-information
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -121,3 +120,4 @@ Note: the location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.j
 {{< /tabs >}}
 
 [1]: https://docs.oracle.com/javase/8/docs/technotes/guides/management/faq.html
+[2]: /help

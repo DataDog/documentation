@@ -1,20 +1,20 @@
 ---
-title: Mise à jour d'une organisation
+title: Mettre à jour une organisation
 type: apicontent
-order: 17.3
-external_redirect: /api/#update-organization
+order: 18.3
+external_redirect: /api/#mettre-a-jour-une-organisation
 ---
 
-## Mise à jour d'une organisation
+## Mettre à jour une organisation
 
 ##### ARGUMENTS
-* **`name`** [*optionnel*]:  
-    Le nom de l'organisation
-* **`settings`** [*optionnel*]:  
-    Un tableau de paramètres JSON. Les paramètres possibles sont:
-    * **`saml`** - Définissez la propriété boolean `enabled` afin d'activer ou de désactiver l'authentification unique par SAML. Voir la [documentation SAML][1] pour plus d'informations en concernant tous les paramètres SAML.
-    * **`saml_idp_initiated_login`** - a une propriété `enabled` (boolean).
-    *  **`saml_strict_mode`** - a une propriété `enabled` (boolean).
-    * **`saml_autocreate_users_domains`** - a deux propriétés : `enabled` (boolean) et `domains` ce qui est une liste de domaines sans les symboles @.
+* **`name`** [*facultatif*] :
+    Le nom de l'organisation.
+* **`settings`** [*facultatif*] :
+    Un tableau de paramètres JSON. Les paramètres possibles sont :
+    * **`saml`** : définissez la propriété booléenne `enabled` afin d'activer ou de désactiver l'authentification unique par SAML. Consultez la [documentation SAML][1] pour en savoir plus sur l'ensemble des paramètres SAML.
+    * **`saml_idp_initiated_login`** : possède une propriété `enabled` (booléenne).
+    *  **`saml_strict_mode`** : possède une propriété `enabled` (booléenne).
+    * **`saml_autocreate_users_domains`** : possède deux propriétés, `enabled` (booléenne) et `domains`, qui correspond à la liste des domaines sans le symbole « @ .
 
-[1]: /account_management/saml/
+[1]: /account_management/saml

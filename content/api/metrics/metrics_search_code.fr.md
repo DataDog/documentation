@@ -1,8 +1,8 @@
 ---
-title: Search metrics
+title: Rechercher des métriques
 type: apicode
-order: 15.6
-external_redirect: /api/#search-metrics
+order: 16.6
+external_redirect: /api/#rechercher-des-metriques
 ---
 
 ##### Signature

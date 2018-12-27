@@ -1,17 +1,17 @@
 ---
 title: Create a monitor
 type: apicontent
-order: 16.01
+order: 17.01
 external_redirect: /api/#create-a-monitor
 ---
 
 ## Create a monitor
 
-If you manage and deploy monitors programmatically, it's easier to define the monitor in the Datadog UI and [export its valid JSON][4].
+If you manage and deploy monitors programmatically, it's easier to define the monitor in the Datadog UI and [export its valid JSON][1].
 
 ##### ARGUMENTS
 *   **`type`** [*required*]:  
-    The [type of the monitor][3], chosen from:  
+    The [type of the monitor][2], chosen from:  
 
 | Monitor Type | type attribute value |
 | :--------    | :-------             |
@@ -46,7 +46,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
     If you are using the `_change_` or `_pct_change_` time aggregator, instead use `change_aggr(time_aggr(time_window), timeshift):space_aggr:metric{tags} [by {key}] operator #` with:
 
     *   `change_aggr` change, pct_change
-    *   `time_aggr` avg, sum, max, min [Learn more][1]
+    *   `time_aggr` avg, sum, max, min [Learn more][3]
     *   `time_window` last_#m (1, 5, 10, 15, or 30), last_#h (1, 2, or 4), or last_#d (1 or 2)
     *   `timeshift` #m_ago (5, 10, 15, or 30), #h_ago (1, 2, or 4), or 1d_ago
 
@@ -65,7 +65,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     *  **`event`**, the event query string:
     *   **`string_query`** free text query to match against event title and text.
-    *   **`sources`** event sources (comma-separated). [Complete list of source attribute values][2]
+    *   **`sources`** event sources (comma-separated). [Complete list of source attribute values][4]
     *   **`status`** event statuses (comma-separated). Valid options: error, warn, and info.
     *   **`priority`** event priorities (comma-separated). Valid options: low, normal, all.
     *   **`host`** event reporting host (comma-separated).
@@ -78,7 +78,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     `processes(search).over(tags).rollup('count').last(timeframe) operator #`
 
-    *   **`search`** free text search string for querying processes. Matching processes match results on the [Live Processes](/graphing/infrastructure/process/) page
+    *   **`search`** free text search string for querying processes. Matching processes match results on the [Live Processes][5] page
     *   **`tags`** one or more tags (comma-separated)
     *   **`timeframe`** the timeframe to roll up the counts. Examples: 60s, 4h. Supported timeframes: s, m, h and d
     *   **`operator`** <, <=, >, >=, ==, or !=
@@ -139,7 +139,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
     _These options only apply to metric alerts._
 
     -   **`thresholds`** a dictionary of thresholds by threshold type. There are two threshold types for metric alerts: *critical* and *warning*. *Critical* is defined in the query, but can also be specified in this option. *Warning* threshold can only be specified using the thresholds option.
-    If you want to use recovery thresholds for your monitor, use the attributes `critical_recovery` and `warning_recovery`.
+    If you want to use [recovery thresholds][6] for your monitor, use the attributes `critical_recovery` and `warning_recovery`.
 
             Example: `{'critical': 90, 'warning': 80,  'critical_recovery': 70, 'warning_recovery': 50}`
 
@@ -152,7 +152,9 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
             Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
 
-[1]: /monitors/monitor_types/#define-the-conditions
-[2]: /integrations/faq/list-of-api-source-attribute-value
-[3]: /monitors/monitor_types/
-[4]: /monitors/#export-your-monitor
+[1]: /monitors/#export-your-monitor
+[2]: /monitors/monitor_types
+[3]: /monitors/monitor_types/#define-the-conditions
+[4]: /integrations/faq/list-of-api-source-attribute-value
+[5]: /graphing/infrastructure/process
+[6]: /monitors/faq/what-are-recovery-thresholds

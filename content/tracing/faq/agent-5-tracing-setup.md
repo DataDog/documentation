@@ -32,16 +32,17 @@ For additional information, reference [the Docker page][6].
 ### Instrument your application
 
 {{< whatsnext desc="Select one of the following supported languages:">}}
-    {{< nextlink href="tracing/setup/java" tag="Java" >}}Java language instrumentation.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/python" tag="Python" >}}Python language instrumentation.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/ruby" tag="Ruby" >}}Ruby language instrumentation{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/go" tag="Go" >}}Go language instrumentation.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/nodejs" tag="Nodejs" >}}Node.js language instrumentation.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}.NET language instrumentation.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="tracing/languages/java" tag="Java" >}}Java language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="tracing/languages/cpp" tag="C++" >}}C++ language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="tracing/languages/python" tag="Python" >}}Python language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="tracing/languages/ruby" tag="Ruby" >}}Ruby language instrumentation{{< /nextlink >}}
+    {{< nextlink href="tracing/languages/go" tag="Go" >}}Go language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="tracing/languages/nodejs" tag="Nodejs" >}}Node.js language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="tracing/languages/dotnet" tag=".NET" >}}.NET language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="tracing/languages/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-To instrument an application written in a language that does not yet have official library support, reference the [Tracing API][11].
+To instrument an application written in a language that does not yet have official library support, reference the [Tracing API][7].
 
 ## Configuration
 
@@ -64,26 +65,23 @@ Additionally, some configuration options may be set as environment variables. No
 | `resource` | `DD_IGNORE_RESOURCE` | A blacklist of regular expressions to filter out traces by their resource name. |
 {{% /table %}}
 
-For more information about the Datadog Agent, see the [dedicated doc page][12] or refer to the [`datadog.conf.example` file][13].
+For more information about the Datadog Agent, see the [dedicated doc page][8] or refer to the [`datadog.conf.example` file][9].
 
 ### Trace search
-Trace search is available for Agent 5.25.0+. For more information, see the set up instructions in the main [APM documentation][18].
+Trace search is available for Agent 5.25.0+. For more information, see the set up instructions in the main [APM documentation][10].
 
 ## Troubleshooting
-Need help? Contact [Datadog support][17].
+Need help? Contact [Datadog support][11].
 
 
 [1]: https://github.com/DataDog/datadog-trace-agent#run-on-osx
 [2]: https://github.com/DataDog/datadog-trace-agent#run-on-windows
 [3]: /agent/faq/where-is-the-configuration-file-for-the-agent
 [4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://hub.docker.com/r/datadog/docker-dd-agent/
+[5]: https://hub.docker.com/r/datadog/docker-dd-agent
 [6]: /tracing/docker
-[11]: /api/?lang=console#traces
-[12]: /agent/
-[13]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
-[14]: https://datadoghq.slack.com/messages/apm
-[15]: http://chat.datadoghq.com
-[16]: /developers/libraries/#community-tracing-apm-libraries
-[17]: https://docs.datadoghq.com/help/
-[18]: /tracing/setup/?tab=agent5250#trace-search
+[7]: /api/?lang=console#traces
+[8]: /agent
+[9]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
+[10]: /tracing/setup/?tab=agent5250#trace-search
+[11]: /help

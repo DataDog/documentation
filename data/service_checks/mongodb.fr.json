@@ -5,6 +5,6 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "port", "db"],
         "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter a l'instance MongoDB qu'il monitor. Sinon renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance MongoDB qu'il surveille. Si ce n'est pas le cas, renvoie `OK`."
     }
 ]

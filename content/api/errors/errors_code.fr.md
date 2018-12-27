@@ -1,10 +1,10 @@
 ---
-title: Succès et erreurs
+title: Réussite et erreurs
 type: apicode
 order: 3
-external_redirect: /api/#success-and-errors
+external_redirect: /api/#reussites-et-erreurs
 ---
-##### Code d'état
+##### Codes de statut
 
 * `200 200`
 * `201 Created`

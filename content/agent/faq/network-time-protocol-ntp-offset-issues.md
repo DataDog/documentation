@@ -4,10 +4,10 @@ kind: faq
 further_reading:
 - link: "agent/"
   tag: "Documentation"
-  text: Learn more about the Datadog Agent
+  text: "Learn more about the Datadog Agent"
 - link: "integrations/ntp/"
   tag: "Integration"
-  text: Learn more about the Datadog-NTP integration
+  text: "Learn more about the Datadog-NTP integration"
 ---
 
 If you have noticed any of the following issues, they may be related to the NTP offset on the hosts that are reporting metrics through the Agent:

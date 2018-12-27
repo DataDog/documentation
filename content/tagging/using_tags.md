@@ -6,13 +6,16 @@ aliases:
 further_reading:
 - link: "tagging"
   tag: "Documentation"
-  text: Getting started with tags
+  text: "Getting started with tags"
 - link: "tagging/assigning_tags"
   tag: "Documentation"
-  text: Learn how to assign tags
+  text: "Learn how to assign tags"
 ---
 
-After [assigning tags][1], start using them to filter and group your data in your Datadog platform.
+After [assigning tags][1], start using them to filter and group your data in your Datadog platform. Tags can be used to include or exclude data. When including or excluding multiple tags:
+
+* Include uses `AND` logic
+* Exclude uses `OR` logic
 
 ## Events
 
@@ -25,7 +28,7 @@ The [Events Stream][2] shows all the events that have occurred in your environme
 {{< tabs >}}
 {{% tab "Assignment" %}}
 
-Use tags to filter metrics to display in a [dashboard graph][4], or to create aggregated groups of metrics to display. To filter the metrics to display, enter the tag in the **from** textbox. You are now looking at a chosen metric over all sources that have that particular tag assigned (`service:coffee-house` in the example below).
+Use tags to filter metrics to display in a [dashboard graph][1], or to create aggregated groups of metrics to display. To filter the metrics to display, enter the tag in the **from** textbox. You are now looking at a chosen metric over all sources that have that particular tag assigned (`service:coffee-house` in the example below).
 
 {{< img src="tagging/using_tags/dashboardtags_1.png" alt="Tags in Dashboards from textbox" responsive="true" style="width:80%;">}}
 
@@ -38,14 +41,14 @@ Enter `tags:` followed by the tag. The matching events are overlaid as vertical 
 
 {{< img src="tagging/using_tags/dashboardeventtags.png" alt="Event Overlays in Dashboards" responsive="true" style="width:80%;">}}
 
-Use [template variables][5] to save time switching the **from** tag on graphs in your dashboard. In the example below, `service` is used to represent the `service` tag key. To use the template variable, add the `$service` template variable in the **from** textbox of your graph query.
+Use [template variables][3] to save time switching the **from** tag on graphs in your dashboard. In the example below, `service` is used to represent the `service` tag key. To use the template variable, add the `$service` template variable in the **from** textbox of your graph query.
 
 {{< img src="tagging/using_tags/dashboardtemplatevariables.png" alt="Dashboard Template Variables" responsive="true" style="width:80%;">}}
 
-[2]: /graphing/event_stream/
-[4]: /graphing/dashboards/
-[5]: /graphing/dashboards/template_variables/
 
+[1]: /graphing/dashboards
+[2]: /graphing/event_stream
+[3]: /graphing/dashboards/template_variables
 {{% /tab %}}
 {{% tab "Examples" %}}
 
@@ -68,7 +71,7 @@ If needed, add additional tags to narrow down the scope even further—for examp
 
 ## Infrastructure
 
-To filter the [Host Map][6], [Infrastructure List][7], [Containers][8], and [Processes][9], enter a tag in the **Filter by** textbox at the top of the page. Hosts and containers can be grouped by tag key using the **Group by** textbox. If you enter `service` in the group box, you see each service as a group heading. 
+To filter the [Host Map][4], [Infrastructure List][5], [Containers][6], and [Processes][7], enter a tag in the **Filter by** textbox at the top of the page. Hosts and containers can be grouped by tag key using the **Group by** textbox. If you enter `service` in the group box, you see each service as a group heading. 
 
 {{< tabs >}}
 {{% tab "Host Map" %}}
@@ -113,13 +116,13 @@ To filter monitors by [assigned tags][1], use the search bar or facet checkboxes
 
 {{< img src="tagging/using_tags/managemonitorstags.png" alt="Manage Monitors Tags" responsive="true" style="width:80%;">}}
 
-[1]: /tagging/assigning_tags/
 
+[1]: /tagging/assigning_tags
 {{% /tab %}}
 
 {{% tab "New Monitor" %}}
 
-When creating a [monitor][10], use metric tags in the:
+When creating a [monitor][1], use metric tags in the:
 
 * **from** textbox to limit the monitor scope to only metrics that have those tags.
 
@@ -129,29 +132,29 @@ When creating a [monitor][10], use metric tags in the:
 
 {{< img src="tagging/using_tags/newmonitortags.png" alt="New Monitor Tags" responsive="true" style="width:80%;">}}
 
-[10]: /monitors/monitor_types/
 
+[1]: /monitors/monitor_types
 {{% /tab %}}
 {{% tab "Manage Downtime" %}}
 
-To filter [downtimes][11] by monitor tag, type the tag name in the search bar, for example `service:coffee-house`.
+To filter [downtimes][1] by monitor tag, type the tag name in the search bar, for example `service:coffee-house`.
 
 {{< img src="tagging/using_tags/managedowntimetags.png" alt="Manage Monitors Tags" responsive="true" style="width:80%;">}}
 
-[11]: /monitors/downtimes/
 
+[1]: /monitors/downtimes
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Metrics
 
-Use tags in the [Metrics Explorer][12] to filter metrics over tags or display multiple graphs by tag key. The example below graphs a metric over `service:coffee-house` and displays one graph per `host`.
+Use tags in the [Metrics Explorer][8] to filter metrics over tags or display multiple graphs by tag key. The example below graphs a metric over `service:coffee-house` and displays one graph per `host`.
 
 {{< img src="tagging/using_tags/metricsexplorertags.png" alt="Manage Monitors Tags" responsive="true" style="width:80%;">}}
 
 ## Integrations
 
-Some integrations such as [AWS][13], [Google Cloud][14], and [Azure][15] allow you to optionally limit metrics using tags. In the specific integration tile, use a comma separated list of tags in the form `<KEY>:<VALUE>`.
+Some integrations such as [AWS][9], [Google Cloud][10], and [Azure][11] allow you to optionally limit metrics using tags. In the specific integration tile, use a comma separated list of tags in the form `<KEY>:<VALUE>`.
 
 {{< img src="tagging/using_tags/integrationtags.png" alt="Optionally limit metrics collection" responsive="true" style="width:80%;">}}
 
@@ -164,33 +167,33 @@ Example: `datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1`
 {{< tabs >}}
 {{% tab "Trace Search & Analytics" %}}
 
-For [Trace Search][16], filter traces with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example `service:coffee-house`. For advanced search, see the [trace search][17] page.
+For [Trace Search][1], filter traces with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example `service:coffee-house`. For advanced search, see the [trace search][2] page.
 
 {{< img src="tagging/using_tags/tracesearchtags.png" alt="Trace Search Tags" responsive="true" style="width:80%;">}}
 
-[16]: /tracing/visualization/search/
-[17]: /tracing/visualization/search/#search-bar
 
+[1]: /tracing/visualization/search
+[2]: /tracing/visualization/search/#search-bar
 {{% /tab %}}
 {{% tab "Service Map" %}}
 
-After [assigning tags][1], use the Service Map to jump to different areas of the application by clicking on a particular service. In the example below, view [Trace Search & Analytics][16], [Monitors][18], [Logs][19], and the [Host Map][20] filtered by the tag `service:coffee-house`.
+After [assigning tags][1], use the Service Map to jump to different areas of the application by clicking on a particular service. In the example below, view [Trace Search & Analytics][2], [Monitors][3], [Logs][4], and the [Host Map][5] filtered by the tag `service:coffee-house`.
 
 {{< img src="tagging/using_tags/servicemaptags.png" alt="Service Map Tags" responsive="true" style="width:80%;">}}
 
-[1]: /tagging/assigning_tags/
-[16]: /tracing/visualization/search/
-[18]: /monitors/manage_monitor/
-[19]: /logs/explorer/search/
-[20]: /graphing/infrastructure/hostmap/
 
+[1]: /tagging/assigning_tags
+[2]: /tracing/visualization/search
+[3]: /monitors/manage_monitor
+[4]: /logs/explorer/search
+[5]: /graphing/infrastructure/hostmap
 {{% /tab %}}
 
 {{< /tabs >}}
 
 ## Notebooks
 
-When creating a [Notebook][21] graph, limit metrics by using tags in the **from** textbox. Additionally, group metrics by using tags in the **avg by** textbox. In the example below, metrics are limited to `service:coffee-house` and grouped by `host`.
+When creating a [Notebook][12] graph, limit metrics by using tags in the **from** textbox. Additionally, group metrics by using tags in the **avg by** textbox. In the example below, metrics are limited to `service:coffee-house` and grouped by `host`.
 
 {{< img src="tagging/using_tags/notebooktags.png" alt="Notebook Tags" responsive="true" style="width:80%;">}}
 
@@ -200,7 +203,7 @@ To exclude tags, use `</>` to edit the text then add the tag in the form `!<KEY>
 
 ## Logs
 
-For Logs [Search][22], [Analytics][23], [Patterns][24], and [Live Tail][25] filter logs with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example `service:coffee-house`. For advanced search, see the [log search][22] page.
+For Logs [Search][13], [Analytics][14], [Patterns][15], and [Live Tail][16] filter logs with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example `service:coffee-house`. For advanced search, see the [log search][13] page.
 
 {{< tabs >}}
 {{% tab "Search" %}}
@@ -225,67 +228,58 @@ For Logs [Search][22], [Analytics][23], [Patterns][24], and [Live Tail][25] filt
 {{% /tab %}}
 {{< /tabs >}}
 
-Additionally, tags are used to filter a logs [Pipeline][26]. In the example below, the pipeline filters logs by the tag `service:coffee-house`.
+Additionally, tags are used to filter a logs [Pipeline][17]. In the example below, the pipeline filters logs by the tag `service:coffee-house`.
 
 {{< img src="tagging/using_tags/logpipelinetags.png" alt="Pipeline Tags" responsive="true" style="width:80%;">}}
 
 ## Developers
 
-Tags can be used in various ways with the [API][27]. See the list below for links to those sections:
+Tags can be used in various ways with the [API][18]. See the list below for links to those sections:
 
-- [Schedule monitor downtime][28]
-- [Query the event stream][29]
-- [Search hosts][30]
-- [Integrations][31] for [AWS][32] and [Google Cloud][33]
-- [Querying timeseries points][34]
-- [Get all monitor details][35]
-- [Mute a monitor][36]
-- [Monitors search][37]
-- [Monitors group search][38]
-- [Create a Screenboard][39]
-- [Create a Timeboard][40]
+- [Schedule monitor downtime][19]
+- [Query the event stream][20]
+- [Search hosts][21]
+- [Integrations][22] for [AWS][23] and [Google Cloud][24]
+- [Querying timeseries points][25]
+- [Get all monitor details][26]
+- [Mute a monitor][27]
+- [Monitors search][28]
+- [Monitors group search][29]
+- [Create a Screenboard][30]
+- [Create a Timeboard][31]
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tagging/assigning_tags/
-[2]: /graphing/event_stream/
+[1]: /tagging/assigning_tags
+[2]: /graphing/event_stream
 [3]: /integrations
-[4]: /graphing/dashboards/
-[5]: /graphing/dashboards/template_variables/
-[6]: /graphing/infrastructure/hostmap
-[7]: /graphing/infrastructure/
-[8]: /graphing/infrastructure/livecontainers/
-[9]: /graphing/infrastructure/process/
-[10]: /monitors/monitor_types/
-[11]: /monitors/downtimes/
-[12]: /graphing/metrics/explorer/
-[13]: /integrations/amazon_web_services/
-[14]: /integrations/google_cloud_platform/
-[15]: /integrations/azure/
-[16]: /tracing/visualization/search/
-[17]: /tracing/visualization/search/#search-bar
-[18]: /monitors/manage_monitor/
-[19]: /logs/explorer/search/
-[20]: /graphing/infrastructure/hostmap/
-[21]: /graphing/notebooks/
-[22]: /logs/explorer/search/
-[23]: /logs/explorer/analytics/
-[24]: /logs/explorer/patterns/
-[25]: /logs/live_tail/
-[26]: /logs/processing/pipelines/
-[27]: /api/
-[28]: /api/?lang=python#schedule-monitor-downtime
-[29]: /api/?lang=python#query-the-event-stream
-[30]: /api/?lang=python#search-hosts
-[31]: /api/?lang=python#integrations
-[32]: /api/?lang=python#aws
-[33]: /api/?lang=python#google-cloud-platform
-[34]: /api/?lang=python#query-timeseries-points
-[35]: /api/?lang=python#get-all-monitor-details
-[36]: /api/?lang=python#mute-a-monitor
-[37]: /api/?lang=python#monitors-search
-[38]: /api/?lang=python#monitors-group-search
-[39]: /api/?lang=python#create-a-screenboard
-[40]: /api/?lang=python#create-a-timeboard
+[4]: /graphing/infrastructure/hostmap
+[5]: /graphing/infrastructure
+[6]: /graphing/infrastructure/livecontainers
+[7]: /graphing/infrastructure/process
+[8]: /graphing/metrics/explorer
+[9]: /integrations/amazon_web_services
+[10]: /integrations/google_cloud_platform
+[11]: /integrations/azure
+[12]: /graphing/notebooks
+[13]: /logs/explorer/search
+[14]: /logs/explorer/analytics
+[15]: /logs/explorer/patterns
+[16]: /logs/live_tail
+[17]: /logs/processing/pipelines
+[18]: /api
+[19]: /api/?lang=python#schedule-monitor-downtime
+[20]: /api/?lang=python#query-the-event-stream
+[21]: /api/?lang=python#search-hosts
+[22]: /api/?lang=python#integrations
+[23]: /api/?lang=python#aws
+[24]: /api/?lang=python#google-cloud-platform
+[25]: /api/?lang=python#query-timeseries-points
+[26]: /api/?lang=python#get-all-monitor-details
+[27]: /api/?lang=python#mute-a-monitor
+[28]: /api/?lang=python#monitors-search
+[29]: /api/?lang=python#monitors-group-search
+[30]: /api/?lang=python#create-a-screenboard
+[31]: /api/?lang=python#create-a-timeboard

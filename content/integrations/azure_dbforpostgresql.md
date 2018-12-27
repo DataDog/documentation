@@ -74,4 +74,4 @@ Checks
 | **azure.dbforpostgresql_servers.storage_used** <br/> (gauge) | Storage used <br/> *shown as byte* |
 
 [1]: /integrations/azure
-[2]: https://portal.azure.com/
+[2]: https://portal.azure.com

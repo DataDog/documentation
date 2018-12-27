@@ -1,31 +1,31 @@
 ---
-title: Mettre à jour un Screenboard
+title: Mettre à jour un screenboard
 type: apicontent
-order: 18.2
-external_redirect: /api/#update-a-screenboard
+order: 19.2
+external_redirect: /api/#mettre-a-jour-un-screenboard
 ---
 
-## Mettre à jour un Screenboard
+## Mettre à jour un screenboard
 
-Remplacer une configuration de Screenboard dans Datadog.
+Remplacez une configuration de screenboard dans Datadog.
 
-**Note**: Vous devez envoyer la configuration originale de Screenboard avec vos mises à jour sinon les widgets originaux sont effacés.
+**Remarque** : vous devez envoyer toute la configuration d'origine du screenboard avec vos mises à jour, sans quoi les widgets d'origine seront effacés.
 
 ##### ARGUMENTS
 
-* **`board_title`** [*obligatoire*]:  
+* **`board_title`** [*obligatoire*] :
     Le nom du dashboard.
-* **`description`** [*optionnel*, *défaut*=**None**]:  
-    Une description du contenu du dashboard.
-* **`widgets`** [*obligatoire*]:  
-    [Liste des définitions de widget][1].
-* **`template_variables`** [*optionnel*, *défaut*=**None**]:  
-    Liste des template variables utilisable dans le templating Dashboard.
-* **`width`** [*optionnel*, *défaut*=**None**]:  
-    Largeur du Screenboard en pixels
-* **`height`** [*optionnel*, *défaut*=**None**]:  
-    Hauteur du Screenboard en pixels.
-* **`read_only`** [*optionnel*, *défaut*=**False**]:  
-    Si le Screenboard est en lecture seule ou non.
+* **`description`** [*facultatif*, *défaut* = **None**] :  
+    La description du contenu du dashboard.
+* **`widgets`** [*obligatoire*] :
+    [La liste des définitions de widget][1].
+* **`template_variables`** [*facultatif*, *défaut* = **None**] :
+    La liste des template variables utilisable dans le dashboard de création de modèles.
+* **`width`** [*facultatif*, *défaut* = **None**] :
+    Largeur du screenboard en pixels.
+* **`height`** [*facultatif*, *défaut* = **None**] :
+    Hauteur du screenboard en pixels.
+* **`read_only`** [*facultatif*, *défaut* = **False**] :
+    Indique si le screenboard est en lecture seule ou non.
 
 [1]: /graphing/dashboards/widgets

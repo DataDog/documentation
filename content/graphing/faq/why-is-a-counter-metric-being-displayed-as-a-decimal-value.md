@@ -16,4 +16,4 @@ To read more about counts and rates, check out [this blog post][1] on the topic.
 Note: these functions are only available for statsd metrics.
 Due to more complex and varying metadata information datadog-agent counters metrics cannot use the as_count/ as_rate functions at the moment.
 
-[1]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/
+[1]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing

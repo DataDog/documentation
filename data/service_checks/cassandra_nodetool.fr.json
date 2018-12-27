@@ -5,7 +5,7 @@
         "groups": ["host", "instance"],
         "check": "cassandra.nodetool.node_up",
         "statuses": ["ok", "critical"],
-        "name": "Node Up",
-        "description": "L'agent envoie ce check de service pour chaque noeud du cluster surveillé. Renvoie CRITICAL si le nœud est en panne, sinon OK."
+        "name": "Nœud disponible",
+        "description": "L'Agent envoie ce check de service pour chaque nœud surveillé du cluster. Renvoie CRITICAL si le nœud est indisponible. Si ce n'est pas le cas, renvoie OK."
     }
 ]
