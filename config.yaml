@@ -1094,6 +1094,11 @@ languages:
           url: "account_management/saml/"
           weight: 50
           parent: menu_references_account_management
+        - identifier: customnav_accountmanagementnav_rbac
+          name: "Role Based Access Control"
+          url: "account_management/rbac/"
+          weight: 60
+          parent: menu_references_account_management
 
         # SAML subnav
         - identifier: saml_activedirectory
@@ -1121,6 +1126,18 @@ languages:
           url: "account_management/saml/okta"
           weight: 550
           parent: customnav_accountmanagementnav_saml
+
+        # RBAC subnav
+        - identifier: rbac_log_management
+          name: "Log Management"
+          url: "account_management/rbac/log_management"
+          weight: 610
+          parent: customnav_accountmanagementnav_rbac
+        - identifier: role_api
+          name: "Role API"
+          url: "account_management/rbac/role_api"
+          weight: 620
+          parent: customnav_accountmanagementnav_rbac
 
         - identifier: customnav_accountmanagementnav_multi_organization
           name: "Multi-org accounts"
