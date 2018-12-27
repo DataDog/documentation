@@ -69,7 +69,7 @@ telnet intake.logs.datadoghq.com 10514
 <DATADOG_API_KEY> Log sent directly via TCP
 ```
 
-This will produce the following result in your [live tail page][27]: 
+This produces the following result in your [live tail page][27]: 
 
 {{< img src="logs/custom_log_telnet.png" alt="Custom telnet" responsive="true" style="width:70%;">}}
 
@@ -84,33 +84,33 @@ Endpoints that can be used to send logs to Datadog:
 {{% tab "US Region" %}}
 
 
-| Endpoints for SSL encrypted connections     | Port    | Description                                                                                                           |
-| :--------------------------------- | :------ | :-------                                                                                                              |
-| `agent-intake.logs.datadoghq.com`  | `10516` | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                       |
-| `intake.logs.datadoghq.com`        | `10516` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.   |
-| `lambda-intake.logs.datadoghq.com` | `10516` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. |
-| `functions-intake.logs.datadoghq.com` | `10516` | Used by any cloud provider functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. |
+| Endpoints for SSL encrypted connections | Port    | Description                                                                                                                                                                 |
+|-----------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `agent-intake.logs.datadoghq.com`       | `10516` | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                                                                                     |
+| `intake.logs.datadoghq.com`             | `10516` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                 |
+| `lambda-intake.logs.datadoghq.com`      | `10516` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
+| `functions-intake.logs.datadoghq.com`   | `10516` | Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers. |
 
 
-| Endpoint for unencrypted connections        | Port    | Description                                                                                                           |
-| :--------------------------------- | :------ | :-------   
-| `intake.logs.datadoghq.com`        | `10514` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an unecrypted TCP connection.          |
+| Endpoint for unencrypted connections | Port    | Description                                                                                              |
+|--------------------------------------|---------|----------------------------------------------------------------------------------------------------------|
+| `intake.logs.datadoghq.com`          | `10514` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an unecrypted TCP connection. |
 
 
 {{% /tab %}}
 {{% tab "EU Region" %}}
 
-| Endpoints for SSL encrypted connections                       | Port    | Description                                                                                                           |
-| :--------------------------------- | :------ | :-------                                                                                                              |
-| `agent-intake.logs.datadoghq.eu`   | `443`   | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                         |
-| `tcp-intake.logs.datadoghq.eu`     | `443`   | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.   |
-| `lambda-intake.logs.datadoghq.eu`  | `443`   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. |
-| `functions-intake.logs.datadoghq.eu` | `443` | Used by any cloud provider functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. |
+| Endpoints for SSL encrypted connections | Port  | Description                                                                                                                                                                 |
+|-----------------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `agent-intake.logs.datadoghq.eu`        | `443` | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                                                                                     |
+| `tcp-intake.logs.datadoghq.eu`          | `443` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                 |
+| `lambda-intake.logs.datadoghq.eu`       | `443` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
+| `functions-intake.logs.datadoghq.eu`    | `443` | Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers. |
 
 
-| Endpoint for unencrypted connections                           | Port    | Description                                                                                                           |
-| :--------------------------------- | :------ | :-------   
-| `tcp-intake.logs.datadoghq.eu`     | `1883`  | Used by custom forwarders to send logs in raw, Syslog, or JSON format format over an unecrypted TCP connection.          |
+| Endpoint for unencrypted connections | Port   | Description                                                                                                     |
+|--------------------------------------|--------|-----------------------------------------------------------------------------------------------------------------|
+| `tcp-intake.logs.datadoghq.eu`       | `1883` | Used by custom forwarders to send logs in raw, Syslog, or JSON format format over an unecrypted TCP connection. |
 
 
 {{% /tab %}}
@@ -121,12 +121,12 @@ Endpoints that can be used to send logs to Datadog:
 
 Here are some key attributes you should pay attention to when setting up your project:
 
-| Attribute   | Description                                                                                                                                                                                           |
-| :-------    | :------                                                                                                                                                                                               |
-| `host`    | The name of the originating host as defined in metrics. We automatically retrieve corresponding host tags from the matching host in Datadog and apply them to your logs. The Agent sets this value automatically.                          |
-| `source`  | This corresponds to the integration name: the technology from which the log originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: nginx, postgresql, etc.|
-| `service` | The name of the application or service generating the log events. It is used to switch from Logs to APM, so make sure you define the same value when you use both products.                       |
-| `message` | By default, Datadog ingests the value of the `message` attribute as the body of the log entry. That value is then highlighted and displayed in the Logstream, where it is indexed for full text search.               |
+| Attribute | Description                                                                                                                                                                                                                            |
+|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `host`    | The name of the originating host as defined in metrics. We automatically retrieve corresponding host tags from the matching host in Datadog and apply them to your logs. The Agent sets this value automatically.                      |
+| `source`  | This corresponds to the integration name: the technology from which the log originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: nginx, postgresql, etc. |
+| `service` | The name of the application or service generating the log events. It is used to switch from Logs to APM, so make sure you define the same value when you use both products.                                                            |
+| `message` | By default, Datadog ingests the value of the `message` attribute as the body of the log entry. That value is then highlighted and displayed in the Logstream, where it is indexed for full text search.                                |
 
 Your logs are collected and centralized into the [Log Explorer][3] view. You can also search, enrich, and alert on your logs.
 
