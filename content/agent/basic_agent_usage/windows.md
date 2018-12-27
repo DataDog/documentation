@@ -291,7 +291,7 @@ First, to get the name of the service, open `services.msc` and locate your targe
 
 When adding your own services, be sure to follow the formatting exactly as shown - if formatting is not correct the Integration fails.
 
-{{< img src="agent/faq/windows_DHCP_ service.png" alt="Windows DHCP Service" responsive="true" style="width:75%;">}}
+{{< img src="agent/faq/windows_DHCP_service.png" alt="Windows DHCP Service" responsive="true" style="width:75%;">}}
 
 Also, any time you modify an Integration you'll need to restart the Datadog Service. You can do this from services.msc or right from the UI via Actions.
 
