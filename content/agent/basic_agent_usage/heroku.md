@@ -73,7 +73,7 @@ Heroku provides 3 types of logs:
 * `System Logs`: messages about actions taken by the Heroku platform infrastructure on behalf of your app.
 * `API Logs`: administrative questions implemented by you and other developers working on your app.
 
-[Heroku's HTTP/S drains][7] buffer log messages and submit batches of messages to an HTTPS endpoint via a POST request.  
+[Heroku's HTTP/S drains][6] buffer log messages and submit batches of messages to an HTTPS endpoint via a POST request.  
 The POST body contains Syslog formatted messages, framed using the Syslog TCP protocol octet counting framing method.  
 The Datadog HTTP API implements and understands the Logplex standard defined by the content-header `application/logplex-1`.
 
@@ -83,7 +83,7 @@ To send all these logs to Datadog:
 * Set up the HTTPS drain with the following command:
 
 {{< tabs >}}
-{{tab % US Region" %}}
+{{% tab "US Region" %}}
 
 ```
 heroku drains:add https://http-intake.logs.datadoghq.com/v1/input/<DD_API_KEY>?ddsource=heroku&service=<SERVICE>&host=<HOST> -a <APPLICATION_NAME>
@@ -108,7 +108,7 @@ heroku drains:add https://http-intake.logs.datadoghq.eu/v1/input/<DD_API_KEY>?dd
 Add custom attributes to logs from your application by replacing the URL in the drain as follows:
 
 {{< tabs >}}
-{{tab % US Region" %}}
+{{% tab "US Region" %}}
 
 ```
 https://http-intake.logs.datad0g.com/v1/input/<DD_API_KEY>?ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALUE>
@@ -176,12 +176,12 @@ agent -c /app/.apt/etc/datadog-agent/datadog.yaml flare
 
 ## More information
 
-Visit the [Github project page][6] for more information and to view the source code.
+Visit the [Github project page][7] for more information and to view the source code.
 
-[1]: /libraries/
+[1]: /libraries
 [2]: https://app.datadoghq.com/account/settings#api
-[3]: /tagging/
-[4]: /graphing/faq/how-to-graph-percentiles-in-datadog/
-[5]: /tracing/environments/
-[6]: https://github.com/DataDog/heroku-buildpack-datadog
-[7]: https://devcenter.heroku.com/articles/log-drains#https-drains
+[3]: /tagging
+[4]: /graphing/faq/how-to-graph-percentiles-in-datadog
+[5]: /tracing/environments
+[6]: https://devcenter.heroku.com/articles/log-drains#https-drains
+[7]: https://github.com/DataDog/heroku-buildpack-datadog
