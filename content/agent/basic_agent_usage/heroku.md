@@ -101,7 +101,7 @@ heroku drains:add https://http-intake.logs.datadoghq.eu/v1/input/<API_KEY>?ddsou
 
 * Replace `<API_KEY>` with your [Datadog API Key][2]
 * Replace `<APPLICATION_NAME>` and `<SERVICE>` with your application name
-* Replace `<HOST>` by the wanted hostname. Refer to the [host section](#hostname) to see how it is set for metrics. Note that it is not yet possible to set the dyno name as the hostname for logs.
+* Replace `<HOST>` by the wanted hostname. Refer to the [host section](#hostname) to see how it is set for metrics. Note that it is not yet possible to dynamically set the dyno name as the hostname for logs.
  
 ### Custom attributes
 
