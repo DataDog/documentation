@@ -1,6 +1,7 @@
 ---
-title: RBAC for Log Management
+title: Role Based Access Control for Log Management
 kind: documentation
+beta: true
 further_reading:
 - link: "account_management/rbac/role_api"
   tag: "Documentation"
