@@ -1,7 +1,7 @@
 ---
 title: Créer un screenboard
 type: apicontent
-order: 19.1
+order: 18.1
 external_redirect: /api/#creer-un-screenboard
 ---
 
@@ -14,7 +14,7 @@ external_redirect: /api/#creer-un-screenboard
 * **`widgets`** [*obligatoire*] :
     [La liste des définitions de widget][1].
 * **`template_variables`** [*facultatif*, *défaut* = **None**] :
-    La liste des template variables utilisable dans le dashboard de création de modèles.
+    La liste des template variables utilisables dans le dashboard de création de modèles.
 * **`width`** [*facultatif*, *défaut* = **None**] :
     Largeur du screenboard en pixels.
 * **`height`** [*facultatif*, *défaut* = **None**] :

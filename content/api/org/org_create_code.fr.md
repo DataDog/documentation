@@ -1,7 +1,7 @@
 ---
 title: Créer une organisation enfant
 type: apicode
-order: 18.1
+order: 17.1
 external_redirect: /api/#creer-une-organisation-enfant
 ---
 

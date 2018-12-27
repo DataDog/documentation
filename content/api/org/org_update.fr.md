@@ -1,7 +1,7 @@
 ---
 title: Mettre à jour une organisation
 type: apicontent
-order: 18.3
+order: 17.3
 external_redirect: /api/#mettre-a-jour-une-organisation
 ---
 

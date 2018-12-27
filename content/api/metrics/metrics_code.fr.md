@@ -1,7 +1,7 @@
 ---
 title: Métriques
 type: apicode
-order: 16
+order: 15
 external_redirect: /api/#metriques
 ---
 
