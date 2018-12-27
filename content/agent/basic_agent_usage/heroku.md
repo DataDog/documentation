@@ -111,14 +111,14 @@ Add custom attributes to logs from your application by replacing the URL in the 
 {{% tab "US Region" %}}
 
 ```
-https://http-intake.logs.datad0g.com/v1/input/<DD_API_KEY>?ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALUE>
+https://http-intake.logs.datadoghq.com/v1/input/<DD_API_KEY>?ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALUE>
 ```
 
 {{% /tab %}}
 {{% tab "EU Region" %}}
 
 ```
-https://http-intake.logs.datad0g.eu/v1/input/<DD_API_KEY>?ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALUE>
+https://http-intake.logs.datadoghq.eu/v1/input/<DD_API_KEY>?ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALUE>
 ```
 
 {{% /tab %}}
