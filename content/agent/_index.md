@@ -72,7 +72,7 @@ The collector gathers all standard metrics every 15 seconds. Agent v6 embed a Py
 
 ### The Forwarder
 
-The Agent forwarder takes payloads from the collector and sends them to Datadog.
+The Agent forwarder send metrics over HTTPS to Datadog. Buffering prevents network splits from affecting metric reporting. Metrics are buffered in memory until a limit in size or number of outstanding send requests are reached. Afterwards, the oldest metrics are discarded to keep the forwarder's memory footprint manageable. Logs are sent over an SSL-encrypted TCP connection to Datadog.
 
 ### DogStatsD
 In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][2] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP or unix socket, thus allowing custom code to be instrumented without adding latency to the mix. Learn more about [DogStatsD][3].
@@ -119,7 +119,7 @@ minfds = 100  # Your hard limit
 The collector gathers all standard metrics every 15 seconds. It also supports the execution of python-based, user-provided checks, stored in `/etc/dd-agent/checks.d`. User-provided checks must inherit from the AgentCheck abstract class defined in `checks/init.py`. See [Writing a custom Agent check][5] for more details.
 
 ### The Forwarder
-The Agent forwarder listens for incoming requests over HTTP to send metrics over HTTPS to Datadog. Buffering prevents network splits from affecting metric reporting. Metrics are buffered in memory until a limit in size or number of outstanding send requests are reached. Afterwards the oldest metrics are discarded to keep the forwarder's memory footprint manageable.
+The Agent forwarder listens for incoming requests over HTTP to send metrics over HTTPS to Datadog. Buffering prevents network splits from affecting metric reporting. Metrics are buffered in memory until a limit in size or number of outstanding send requests are reached. Afterwards, the oldest metrics are discarded to keep the forwarder's memory footprint manageable.
 
 ### DogStatsD
 DogStatsD is a python implementation of [Etsy's StatsD][6] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP, thus allowing custom code to be instrumented without adding latency to the mix. Learn more about [DogStatsD][7].
