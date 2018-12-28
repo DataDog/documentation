@@ -9,7 +9,7 @@ further_reading:
 - link: "https://github.com/DataDog/datadog-trace-agent"
   tag: "Github"
   text: Source code
-- link: "agent/apm/ecs"
+- link: "https://docs.datadoghq.com/integrations/amazon_ecs/#trace-collection"
   tag: "Documentation"
   text: "Trace your ECS applications"
 - link: "tracing/visualization/"
