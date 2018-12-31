@@ -79,13 +79,13 @@ However, be aware that each incoming status value is mapped as follows:
 
 ## Service Remapper
 
-Use this Processor if you want to assign some attributes as the official service. Just enter the attribute path in the Processor tile as follows:
+Use this Processor if you want to assign one or more attributes as the official service. Define the attribute(s) in the Processor tile as follows:
 
 {{< img src="logs/processing/processors/service_remapper_processor_tile.png" alt="Service Remapper Processor tile" responsive="true" style="width:80%;" >}}
 
 ## Log Message Remapper
 
-The message is a key attribute in Datadog. It is displayed in the message column of the Log Explorer and you can do full string search on it. Use this Processor to define some attributes as the official log message. Just enter the attribute path in the Processor tile as follows:
+The message is a key attribute in Datadog. It is displayed in the message column of the Log Explorer and you can do full string search on it. Use this Processor to define one or more attributes as the official log message. Define the attribute(s) in the Processor tile as follows:
 
 {{< img src="logs/processing/processors/message_processor.png" alt="Message Processor" responsive="true" style="width:80%;">}}
 
