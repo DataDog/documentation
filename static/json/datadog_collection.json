@@ -1631,7 +1631,7 @@
 							"raw": "{  \n   \"exampleLog\":{  \n      \"title\":\"Example Log from JSON submitted via HTTP\",\n      \"msg\":\"message here\",\n      \"statusCode\": 301,\n      \"responseTime\":\"300ms\",\n      \"category\" : \"test\"\n   }\n}"
 						},
 						"url": {
-							"raw": "https://http-intake.logs.datadoghq.com/v1/input/{{dd_api_key}}?ddsource=nginx&service=exampleService&hostname=exampleHost",
+							"raw": "https://http-intake.logs.datadoghq.com/v1/input/{{dd_api_key}}?ddsource=exampleSource&service=exampleService&hostname=exampleHost",
 							"protocol": "https",
 							"host": [
 								"http-intake",
@@ -1647,7 +1647,7 @@
 							"query": [
 								{
 									"key": "ddsource",
-									"value": "nginx"
+									"value": "exampleSource"
 								},
 								{
 									"key": "service",
