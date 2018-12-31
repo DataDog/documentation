@@ -82,7 +82,7 @@ Automatic instrumentation captures:
 | Laravel        | 5.x         | Public Beta        |
 | Laravel        | 4.2         | Coming Soon        |
 | Symfony        | 4.x         | Public Beta        |
-| Symfony        | 3.x         | Coming Soon        |
+| Symfony        | 3.x         | Public Beta        |
 | Magento        | 2.x         | Coming Soon        |
 | Zend Framework | 3.x         | Coming Soon        |
 | CakePHP        | 3.x         | Coming Soon        |
