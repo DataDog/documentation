@@ -9,5 +9,5 @@ summary: Vous n'avez que 2 minutes à nous consacrer ? C'est tout ce qu'il vous
 private: true
 ---
 
-Apprenez les bases de Datadog dans environ cinq minutes. Cette vidéo introduit toutes les bases de la plateforme.
+Maîtrisez les bases de Datadog en seulement deux minutes. Cette vidéo aborde tous les éléments essentiels de la plateforme.
 
