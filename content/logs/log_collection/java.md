@@ -371,11 +371,13 @@ Configure the Logback logger to stream logs directly to Datadog by adding the fo
 <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
 	<remoteHost>intake.logs.datadoghq.com</remoteHost>
   <port>10514</port>
-  <prefix class="ch.qos.logback.classic.PatternLayout">
-      <pattern><APIKEY> %mdc{keyThatDoesNotExist}</pattern>
-  </prefix>
   <keepAliveDuration>1 minute</keepAliveDuration>
 	<encoder class="net.logstash.logback.encoder.LogstashEncoder">
+      <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+          <pattern><APIKEY> %mdc{keyThatDoesNotExist}</pattern>
+        </layout>
+      </prefix>    
 	</encoder>
 </appender>
  
@@ -390,6 +392,9 @@ Configure the Logback logger to stream logs directly to Datadog by adding the fo
 - Replace `<API_KEY>` with your Datadog API key value
 - `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace, as explained [here][4]
 - See the list of [available endpoints for the EU region][5]
+
+More information available on the prefix parameter in the [Logback documentation][4].
+
 
 ## Getting further
 
