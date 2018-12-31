@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic features of the Windows Datadog Agent. If you haven't installed the Agent yet, basic installation instructions can be found on the [Datadog Agent Integration][1] page.
+This page outlines the basic features of the Windows Datadog Agent. If you haven't installed the Agent yet, installation instructions can be found on the [Datadog Agent Integration][1] page.
 
 **Note**: Windows 7 and above are supported.
 
