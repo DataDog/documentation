@@ -9,7 +9,7 @@ external_redirect: /api/#creer-un-utilisateur
 ##### ARGUMENTS
 
 * **`handle`** [*obligatoire*] :
-    Le handle de l'utilisateur ; doit être un e-mail valide.
+    Le handle de l'utilisateur ; doit correspondre à un e-mail valide.
 * **`name`** [*facultatif*, *défaut* = **None**] :  
     Le nom de l'utilisateur.
 * **`access_role`** [*facultatif*, *défaut* = **st**] : 
@@ -17,5 +17,5 @@ external_redirect: /api/#creer-un-utilisateur
     *  **st** (utilisateur standard), 
     *  **adm** (administrateur),
     *  **ro** (utilisateur en lecture seule).
-    *Remarque : les utilisateurs ne peuvent être crées qu'avec des clés d'application disponibles pour les administrateurs.*
+    *Remarque : les utilisateurs ne peuvent être créés qu'avec des clés d'application disponibles pour les administrateurs.*
 
