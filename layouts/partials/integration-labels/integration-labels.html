@@ -17,6 +17,11 @@
             {{ partial "img.html" (dict "root" . "src" "icons/check_crawler.png" "class" "static" "alt" "Crawler" "width" "21") }}<span>{{ i18n "crawler" }}</span>
         </div>
     {{ end }}
+    {{ if eq .Params.ddtype "library" }}
+        <div class="library col-12">
+            {{ partial "img.html" (dict "root" . "src" "icons/check_library.png" "class" "static" "alt" "Library" "width" "21") }}<span>{{ i18n "library" }}</span>
+        </div>
+    {{ end }}
 </div>
 {{ end }}
 
