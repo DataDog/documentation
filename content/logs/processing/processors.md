@@ -77,6 +77,18 @@ However, be aware that each incoming status value is mapped as follows:
 * Strings matching **OK** or **Sucess** (case-insensitive) map to **OK**
 * All others map to **info (6)**
 
+## Service Remapper
+
+Use this Processor if you want to assign one or more attributes as the official service. Define the attribute(s) in the Processor tile as follows:
+
+{{< img src="logs/processing/processors/service_remapper_processor_tile.png" alt="Service Remapper Processor tile" responsive="true" style="width:80%;" >}}
+
+## Log Message Remapper
+
+The message is a key attribute in Datadog. It is displayed in the message column of the Log Explorer and you can do full string search on it. Use this Processor to define one or more attributes as the official log message. Define the attribute(s) in the Processor tile as follows:
+
+{{< img src="logs/processing/processors/message_processor.png" alt="Message Processor" responsive="true" style="width:80%;">}}
+
 ## Remapper
 
 This Processor remaps any source attribute(s) or tag to another target attribute or tag. For instance, here, it remaps `user` to `user.firstname`
@@ -135,12 +147,6 @@ It produces the following result:
 
 **Important Note**: The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
 Once the log has matched one of the Processor queries, it stops. Make sure they are properly ordered in case a log could match several queries.
-
-## Log Message Remapper
-
-The message is a key attribute in Datadog. It is displayed in the message column of the Log Explorer and you can do full string search on it. Use this Processor to define some attributes as the official log message. Just enter the attribute path in the Processor tile as follows:
-
-{{< img src="logs/processing/processors/message_processor.png" alt="Message Processor" responsive="true" style="width:80%;">}}
 
 ## Arithmetic processor
 

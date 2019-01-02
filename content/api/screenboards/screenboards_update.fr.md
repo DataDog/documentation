@@ -1,7 +1,7 @@
 ---
 title: Mettre à jour un screenboard
 type: apicontent
-order: 18.2
+order: 19.2
 external_redirect: /api/#mettre-a-jour-un-screenboard
 ---
 
@@ -20,7 +20,7 @@ Remplacez une configuration de screenboard dans Datadog.
 * **`widgets`** [*obligatoire*] :
     [La liste des définitions de widget][1].
 * **`template_variables`** [*facultatif*, *défaut* = **None**] :
-    La liste des template variables utilisable dans le dashboard de création de modèles.
+    La liste des template variables utilisables dans le dashboard de création de modèles.
 * **`width`** [*facultatif*, *défaut* = **None**] :
     Largeur du screenboard en pixels.
 * **`height`** [*facultatif*, *défaut* = **None**] :

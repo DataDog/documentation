@@ -105,7 +105,7 @@ kind: faq
 |Ganglia|GANGLIA|
 |Gearman|GEARMAN|
 |Git|GIT|
-|GitHub|GITHUB|
+|Github|GITHUB|
 |Go Expvar|GOEXPVAR|
 |Google App Engine|GAE|
 |Google Cloud Big Query|GCPBIGQUERY|

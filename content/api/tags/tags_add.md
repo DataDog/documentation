@@ -6,7 +6,7 @@ external_redirect: /api/#add-tags-to-a-host
 ---
 
 ## Add tags to a host
-This end point allows you to add tags to a host.
+This end point allows you to add new tags to a host, optionally specifying where these tags come from.
 
 ##### ARGUMENTS
 

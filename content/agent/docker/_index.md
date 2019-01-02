@@ -3,6 +3,8 @@ title: Docker Agent
 kind: documentation
 aliases:
   - /guides/basic_agent_usage/docker/
+  - /agent/docker
+  - /agent/basic_agent_usage/docker/
 further_reading:
 - link: "agent/faq/getting-further-with-docker"
   tag: "FAQ"
@@ -19,8 +21,6 @@ further_reading:
 - link: "agent/docker/apm"
   tag: "Documentation"
   text: Collect your Docker traces
-aliases:
-  - /agent/docker
 ---
 
 To install the Datadog Container Agent, follow the [Agent Installation Instructions][1] or see the information below. The [official Docker Agent 6 image][2] can also be consulted.

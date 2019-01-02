@@ -4,6 +4,7 @@ kind: Documentation
 aliases:
 - /tracing/ruby/
 - /tracing/setup/ruby/
+- /agent/apm/ruby/
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-rb"
   tag: "GitHub"

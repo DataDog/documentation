@@ -20,7 +20,7 @@ further_reading:
 Log monitors alert when a specified type of log exceeds a user-defined threshold over a given period of time. Common use cases for this monitor include:
 
 * Code exception errors monitoring 
-* Build job notifications.
+* Build job notifications
 
 ## Setup
 
@@ -36,7 +36,8 @@ Log monitors alert when a specified type of log exceeds a user-defined threshold
     {{< img src="monitors/monitor_types/log/set_alert_conditions.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
 
 4. Configure your **notification options**:  
-    Refer to the [Notifications][2] dedicated documentation page for a detailed options.
+    Refer to the [notifications][2] dedicated documentation page for detailed options.
+    
 
 ## Notifications and log samples
 
@@ -52,6 +53,22 @@ Samples are not available for multi-alerts.
 **Example for Slack notifications** 
 
  {{< img src="monitors/monitor_types/log/slack-log-sample.png" alt="Slack notification example" responsive="true" style="width:50%;" >}}
+ 
+## No Data alerts and Below Conditions
+
+To be notified if a specific set of logs are not received anymore, set the condition `below 1`. This notifies when no logs match the monitor query on the given timeframe.
+
+However, note that when splitting the monitor by any dimension (tag or facet) and using a `below` condition, the alert is triggered **if and only if** there are logs for a given group, and the count is below the threshold—or if there are no logs at all for all of the groups.
+
+Examples:
+
+1. The following monitor triggers if and only if there are no logs for all of the services:
+
+{{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Below monitor split by service" responsive="true" style="width:50%;" >}}
+
+2. The following monitor triggers if there are no logs for the service `backend`: 
+
+{{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Below monitor for backend service" responsive="true" style="width:50%;" >}}
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}

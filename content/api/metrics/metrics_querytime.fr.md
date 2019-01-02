@@ -1,7 +1,7 @@
 ---
 title: Requêter les points de séries temporelles
 type: apicontent
-order: 15.3
+order: 16.3
 external_redirect: /api/#query-time-series-points
 ---
 

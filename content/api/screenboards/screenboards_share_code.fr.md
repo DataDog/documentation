@@ -1,7 +1,7 @@
 ---
 title: Partager un Screenboard
 type: apicode
-order: 18.6
+order: 19.6
 external_redirect: /api/#share-a-screenboard
 ---
 

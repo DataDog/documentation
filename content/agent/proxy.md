@@ -129,15 +129,26 @@ Those parameters can also be set with the following environment variables:
 * `DD_LOGS_CONFIG_LOGS_DD_URL`
 * `DD_LOGS_CONFIG_LOGS_NO_SSL`
 
-**Important Note**: The parameter `logs_no_ssl` is required to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`agent-intake.logs.datadoghq.com`) and your proxy hostname. You should use a SSL encrypted connection between your proxy and Datadog intake endpoint though.
+**Important Note**: The parameter `logs_no_ssl` is required to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`agent-intake.logs.datadoghq.com` or `agent-intake.logs.datadoghq.eu`) and your proxy hostname. You should use a SSL encrypted connection between your proxy and Datadog intake endpoint though.
 
-* Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs to `agent-intake.logs.datadoghq.com` on port `10516` and activate SSL encryption.
+* Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs to:
+    * For `app.datadoghq.com`: `agent-intake.logs.datadoghq.com` on port `10516` and activate SSL encryption.
+    * For `app.datadoghq.eu`: `agent-intake.logs.datadoghq.eu` on port `443` and activate SSL encryption.
 
-* Use the [public key for TLS encryption][1] for the SSL encryption. On some systems, the full certificate chain may be required. If so, use [this public key][2] instead.
+* Use the public key for TLS encryption for the SSL encryption:
+    * For [app.datadoghq.com][1] 
+    * For [app.datadoghq.eu][2]
+
+    On some systems, the full certificate chain may be required. If so, use this public key instead:
+
+    * For [app.datadoghq.com][3]
+    * For [app.datadoghq.eu][4]
 
 
 [1]: /crt/intake.logs.datadoghq.com.crt
-[2]: /crt/FULL_intake.logs.datadoghq.com.crt
+[2]: /crt/intake.logs.datadoghq.eu.crt
+[3]: /crt/FULL_intake.logs.datadoghq.com.crt
+[4]: /crt/FULL_intake.logs.datadoghq.eu.crt
 {{% /tab %}}
 {{% tab "SOCK5" %}}
 
@@ -166,8 +177,10 @@ This is the best option if you do not have a web proxy readily available in your
 ### Proxy metric forwarding with HAProxy
 #### HAProxy configuration
 
-We assume that HAProxy is installed on a host that has connectivity to Datadog.
-Use the following configuration file if you do not already have it configured.
+HAProxy should be installed on a host that has connectivity to Datadog. Use the following configuration file if you do not already have it configured.
+
+{{< tabs >}}
+{{% tab "Datadog US app.datadoghq.com" %}}
 
 ```
 # Basic configuration
@@ -242,7 +255,88 @@ backend datadog-processes
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy.
 
-**We recommend having a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
+**It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
+
+{{% /tab %}}
+{{% tab "Datadog EU app.datadoghq.eu" %}}
+
+```
+# Basic configuration
+global
+    log 127.0.0.1 local0
+    maxconn 4096
+    stats socket /tmp/haproxy
+
+# Some sane defaults
+defaults
+    log     global
+    option  dontlognull
+    retries 3
+    option  redispatch
+    timeout client 5s
+    timeout server 5s
+    timeout connect 5s
+
+# This declares a view into HAProxy statistics, on port 3833
+# You do not need credentials to view this page and you can
+# turn it off once you are done with setup.
+listen stats
+    bind *:3833
+    mode http
+    stats enable
+    stats uri /
+
+# This declares the endpoint where your Agents connects for
+# sending metrics (e.g. the value of "dd_url").
+frontend metrics-forwarder
+    bind *:3834
+    mode tcp
+    default_backend datadog-metrics
+
+# This declares the endpoint where your Agents connects for
+# sending traces (e.g. the value of "endpoint" in the APM
+# configuration section).
+frontend traces-forwarder
+    bind *:3835
+    mode tcp
+    default_backend datadog-traces
+
+# This declares the endpoint where your agents connects for
+# sending processes (e.g. the value of "url" in the process
+# configuration section).
+frontend processes-forwarder
+    bind *:3836
+    mode tcp
+    default_backend datadog-processes
+
+# This is the Datadog server. In effect any TCP request coming
+# to the forwarder frontends defined above are proxied to
+# Datadog's public endpoints.
+backend datadog-metrics
+    balance roundrobin
+    mode tcp
+    option tcplog
+    server mothership haproxy-app.agent.datadoghq.eu:443 check port 80
+
+backend datadog-traces
+    balance roundrobin
+    mode tcp
+    option tcplog
+    server mothership trace.agent.datadoghq.eu:443 check port 80
+
+backend datadog-processes
+    balance roundrobin
+    mode tcp
+    option tcplog
+    server mothership process.datadoghq.eu:443 check port 80
+```
+
+Once the HAProxy configuration is in place, you can reload it or restart HAProxy.
+
+**It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Datadog Agent configuration
 
@@ -264,7 +358,7 @@ process_config:
     process_dd_url: https://haproxy.example.com:3836
 ```
 
-Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com`) and your HAProxy hostname:
+Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com` or `app.datadoghq.eu`) and your HAProxy hostname:
 
 ```
 skip_ssl_validation: true
@@ -273,7 +367,6 @@ skip_ssl_validation: true
 Finally [restart the Agent][1].
 
 To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][2].
-
 
 [1]: /agent/#start-stop-restart-the-agent/#windows
 [2]: https://app.datadoghq.com/infrastructure
@@ -329,7 +422,7 @@ To verify that everything is working properly, review the HAProxy statistics at 
 
 **This feature is only available for Agent v5**
 
-We recommend using an actual proxy (a web proxy or HAProxy) to forward your traffic to Datadog, however if those options aren't available to you, it is possible to configure an instance of Agent v5 to serve as a proxy.
+It is recommended to use an actual proxy (a web proxy or HAProxy) to forward your traffic to Datadog, however if those options aren't available to you, it is possible to configure an instance of Agent v5 to serve as a proxy.
 
 1. Designate one node **running datadog-agent** as the proxy.
     In this example assume that the proxy name is `proxy-node`. This node **must** be able to reach `https://app.datadoghq.com`.

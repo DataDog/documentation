@@ -23,7 +23,7 @@ La fonctionnalité Live Tail vous donne la possibilité de visualiser tous vos �
 1. Tous les logs ingérés par Datadog sont affichés. ([Il n'y a aucune limite][2].)
 2. Les logs affichés ont déjà été traités.
 3. Le flux peut être interrompu.
-4. Vous ne pouvez pas remonter dans le passé.
+4. Vous ne pouvez pas consulter les données historiques.
 
 Cette fonctionnalité vous permet par exemple de vérifier si un processus a démarré correctement, ou si un déploiement récent s'est déroulé sans erreur.
 
@@ -55,7 +55,7 @@ Cliquez sur l'engrenage en haut à droite de la page pour activer l'une des opti
 ## Filtrer le flux de logs
 
 Une requête valide dans la barre de recherche affiche les logs qui correspondent à vos critères de recherche. 
-La syntaxe de recherche en vue Live Tail est la même que celle dans les autres vues de logs. Toutefois, en vue Live Tail, la recherche se fait dans tous les logs ingérés et non pas uniquement ceux qui ont été indexés.
+La syntaxe de recherche de la vue Live Tail est la même que celle des autres vues de logs. Toutefois, avec la vue Live Tail, la recherche se fait dans tous les logs ingérés, et non pas uniquement dans ceux qui ont été indexés.
 
 ### Attributs JSON
 
@@ -81,4 +81,3 @@ Pour rechercher tous les logs dont le nombre de lignes est supérieur à 150, ut
 
 [1]: /logs/processing/pipelines
 [2]: /logs/logging_without_limits
-[3]: /logs/explorer/search/#search-bar

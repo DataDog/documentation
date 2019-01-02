@@ -22,7 +22,7 @@ external_redirect: /api/#mettre-a-jour-un-timeboard
     `{"requests": [{"q": "system.cpu.idle{*} by {host}"}`
 
 * **`template_variables`** [*facultatif*, *défaut* = **None**] : 
-    La liste des template variables utilisable dans le dashboard de création de modèles. Les spécifications de template variables respectent le format suivant :
+    La liste des template variables utilisables dans le dashboard de création de modèles. Les spécifications de template variables respectent le format suivant :
     * **`name`** [*obligatoire*] :
      Le nom de la variable.
 

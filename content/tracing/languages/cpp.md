@@ -4,6 +4,7 @@ kind: Documentation
 aliases:
 - /tracing/cpp/
 - /tracing/setup/cpp/
+- /agent/apm/cpp/
 further_reading:
 - link: "https://github.com/DataDog/dd-opentracing-cpp"
   tag: "Github"

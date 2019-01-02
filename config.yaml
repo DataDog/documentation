@@ -950,12 +950,19 @@ languages:
 
         # LOGS - Subnav end
 
+        # SYNTHETICS
+        - identifier: menu_references_synthetics
+          name: "Synthetics"
+          url: "synthetics/"
+          pre: "nav_synthetics"
+          weight: 100
+
         # DEVELOPERS
         - identifier: menu_references_developers
           name: "Developer Tools"
           url: "developers/"
           pre: "nav_developers"
-          weight: 100
+          weight: 110
         # DEVELOPERS - Subnav start
         - identifier: customnav_developersnav_dogstatsd
           name: "DogStatsD"
@@ -1070,14 +1077,14 @@ languages:
           name: "API"
           url: "api/"
           pre: "nav_api"
-          weight: 110
+          weight: 120
 
         # ACCOUNT MANAGEMENT
         - identifier: menu_references_account_management
           name: "Account management"
           url: "account_management/"
           pre: "nav_account"
-          weight: 120
+          weight: 130
         # ACCOUNT MANAGEMENT - Subnav start
         - identifier: customnav_accountmanagementnav_team
           name: "Team management"
@@ -1093,6 +1100,11 @@ languages:
           name: "SSO with SAML"
           url: "account_management/saml/"
           weight: 50
+          parent: menu_references_account_management
+        - identifier: customnav_accountmanagementnav_rbac
+          name: "Role Based Access Control"
+          url: "account_management/rbac/"
+          weight: 60
           parent: menu_references_account_management
 
         # SAML subnav
@@ -1122,6 +1134,18 @@ languages:
           weight: 550
           parent: customnav_accountmanagementnav_saml
 
+        # RBAC subnav
+        - identifier: rbac_log_management
+          name: "Log Management"
+          url: "account_management/rbac/log_management"
+          weight: 610
+          parent: customnav_accountmanagementnav_rbac
+        - identifier: role_api
+          name: "Role API"
+          url: "account_management/rbac/role_api"
+          weight: 620
+          parent: customnav_accountmanagementnav_rbac
+
         - identifier: customnav_accountmanagementnav_multi_organization
           name: "Multi-org accounts"
           url: "account_management/multi_organization/"
@@ -1139,7 +1163,7 @@ languages:
           name: "Security"
           url: "security/"
           pre: "nav_security"
-          weight: 120
+          weight: 140
         # SECURITY - Subnav start
         - identifier: customnav_security_agent
           name: "Agent"
@@ -1162,22 +1186,26 @@ languages:
           weight: 50
           parent: menu_references_security
 
-        - identifier: menu_references_videos
-          name: "Videos"
-          url: "videos/"
-          pre: "nav_videos"
-          weight: 140
+          # GLOSSARY
         - identifier: menu_references_glossary
           name: "Glossary"
           url: "glossary/"
           pre: "nav_glossary"
-          weight: 130
+          weight: 150
 
+          # VIDEOS
+        - identifier: menu_references_videos
+          name: "Videos"
+          url: "videos/"
+          pre: "nav_videos"
+          weight: 160
+
+          # HELP
         - identifier: menu_references_help
           name: "Help"
           url: "help/"
           pre: "nav_help"
-          weight: 150
+          weight: 170
   fr:
     disclaimer: "Cette page n'est pas encore disponible en Français, nous travaillons actuellement sur sa traduction.<br> Si vous avez des questions ou des retours sur ce projet de traduction, <a href=\"https://docs.datadoghq.com/fr/help/\">contactez-nous!</a>"
     weight: 0
