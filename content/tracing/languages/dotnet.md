@@ -57,7 +57,7 @@ Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Ch
 - Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration][2] to set these environment variables.
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-[2]: ?tab=netframeworkonwindows#adding-environment-variables
+[2]: ?tab=netframeworkonwindows#required-environment-variables
 {{% /tab %}}
 
 {{% tab ".NET Core on Windows" %}}
@@ -73,7 +73,7 @@ Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][2] to your applicati
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 [2]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
 [3]: https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package
-[4]: ?tab=netcoreonwindows#adding-environment-variables
+[4]: ?tab=netcoreonwindows#required-environment-variables
 {{% /tab %}}
 
 {{% tab ".NET Core on Linux" %}}
@@ -117,7 +117,7 @@ apk add libc6-compat
 [1]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
 [2]: https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package
 [3]: https://github.com/DataDog/dd-trace-dotnet/releases
-[4]: ?tab=netcoreonlinux#adding-environment-variables
+[4]: ?tab=netcoreonlinux#required-environment-variables
 {{% /tab %}}
 
 {{< /tabs >}}
