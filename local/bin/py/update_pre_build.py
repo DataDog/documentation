@@ -8,6 +8,10 @@ import platform
 import re
 import tempfile
 import shutil
+import requests
+import yaml
+import pickle
+from tqdm import *
 from collections import OrderedDict
 from functools import partial, wraps
 from itertools import chain, zip_longest
@@ -15,10 +19,6 @@ from multiprocessing.pool import ThreadPool as Pool
 from optparse import OptionParser
 from os import sep, makedirs, getenv, remove
 from os.path import exists, basename, curdir, join, abspath, normpath, dirname
-import requests
-import yaml
-from tqdm import *
-import pickle
 
 
 def cache_by_sha(func):
@@ -241,14 +241,32 @@ class PreBuild:
                 globs.append('{}{}'.format(self.options.extras, e_glob))
 
         for file_name in tqdm(chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in globs)):
-            self.process_source_attribute(file_name)
-            self.process_integration_metric(file_name)
-            self.process_integration_manifest(file_name)
-            self.process_service_checks(file_name)
-            self.process_integration_readme(file_name)
-            self.dev_doc_integrations_core(file_name)
+            self.process_filename(file_name)
 
         self.merge_integrations()
+
+    def process_filename(self, file_name):
+
+        if file_name.endswith('dd/utils/context/source.py'):
+            self.process_source_attribute(file_name)
+
+        elif file_name.endswith('.csv'):
+            self.process_integration_metric(file_name)
+
+        elif file_name.endswith('manifest.json'):
+            self.process_integration_manifest(file_name)
+
+        elif file_name.endswith('service_checks.json'):
+            self.process_service_checks(file_name)
+
+        elif ('/integrations-core/docs/dev/' in file_name and file_name.endswith('.md')):
+            self.dev_doc_integrations_core(file_name)
+
+        elif file_name.endswith('.md'):
+            self.process_integration_readme(file_name)
+        else:
+            print("Processing of {} was unsuccessful".format(file_name))
+
 
     def merge_integrations(self):
         """ Merges integrations that come under one """
@@ -298,39 +316,37 @@ class PreBuild:
         and inserts them into the file something.md
         :param file_name: path to a source.py file
         """
-        if file_name.endswith('dd/utils/context/source.py'):
-            out = '|Integration name | API source attribute|\n'
-            out += '|:---|:---|\n'
-            with open(file_name, 'r') as f:
-                result = f.read()
-                m = re.search(self.regex_source, result)
-                result = m.group(2) if m else result
-                result = re.sub(r'[^0-9A-Za-z:, ]', '', result)
-                for line in result.split(','):
-                    pair = line.split(':')
-                    if len(pair) > 1:
-                        out += '|{0}|{1}|\n'.format(pair[0].strip().title(), pair[1].strip())
-            with open('{}{}'.format(self.options.source, '/content/integrations/faq/list-of-api-source-attribute-value.md'), mode='r+', encoding='utf-8') as f:
-                boundary = re.compile(r'^-{3,}$', re.MULTILINE)
-                _, fm, content = boundary.split(f.read(), 2)
-                template = "---\n{front_matter}\n---\n\n{content}\n"
-                new_content = template.format(front_matter=fm.strip(), content=out)
-                f.truncate(0)
-                f.seek(0)
-                f.write(new_content)
+        out = '|Integration name | API source attribute|\n'
+        out += '|:---|:---|\n'
+        with open(file_name, 'r') as f:
+            result = f.read()
+            m = re.search(self.regex_source, result)
+            result = m.group(2) if m else result
+            result = re.sub(r'[^0-9A-Za-z:, ]', '', result)
+            for line in result.split(','):
+                pair = line.split(':')
+                if len(pair) > 1:
+                    out += '|{0}|{1}|\n'.format(pair[0].strip().title(), pair[1].strip())
+        with open('{}{}'.format(self.options.source, '/content/integrations/faq/list-of-api-source-attribute-value.md'), mode='r+', encoding='utf-8') as f:
+            boundary = re.compile(r'^-{3,}$', re.MULTILINE)
+            _, fm, content = boundary.split(f.read(), 2)
+            template = "---\n{front_matter}\n---\n\n{content}\n"
+            new_content = template.format(front_matter=fm.strip(), content=out)
+            f.truncate(0)
+            f.seek(0)
+            f.write(new_content)
 
     def process_integration_metric(self, file_name):
         """
         Take a single metadata csv file and convert it to yaml
         :param file_name: path to a metadata csv file
         """
-        if file_name.endswith('.csv'):
-            if file_name.endswith('/metadata.csv'):
-                key_name = basename(dirname(normpath(file_name)))
-            else:
-                key_name = basename(file_name.replace('_metadata.csv', ''))
-            new_file_name = '{}{}.yaml'.format(self.data_integrations_dir, key_name)
-            self.csv_to_yaml(key_name, file_name, new_file_name)
+        if file_name.endswith('/metadata.csv'):
+            key_name = basename(dirname(normpath(file_name)))
+        else:
+            key_name = basename(file_name.replace('_metadata.csv', ''))
+        new_file_name = '{}{}.yaml'.format(self.data_integrations_dir, key_name)
+        self.csv_to_yaml(key_name, file_name, new_file_name)
 
     def dev_doc_integrations_core(self, file_name):
         """
@@ -338,28 +354,25 @@ class PreBuild:
         and transform it to be displayed on the doc in the /developers/integrations section
         :param file_name: path to a file
         """
-        relative_path_on_github = '/integrations-core/docs/dev/'
         doc_directory = '/developers/integrations/'
 
-        if (relative_path_on_github in file_name and file_name.endswith('.md')):
+        with open(file_name, mode='r+') as f:
+            content = f.read()
 
-            with open(file_name, mode='r+') as f:
-                content = f.read()
+            # Replacing the master README.md by _index.md to follow Hugo logic
+            if file_name.endswith('README.md'):
+                file_name = '_index.md'
 
-                # Replacing the master README.md by _index.md to follow Hugo logic
-                if file_name.endswith('README.md'):
-                    file_name = '_index.md'
+            #Replacing links that point to the Github folder by link that point to the doc.
+            new_link = doc_directory +'\\2'
+            regex_github_link = re.compile(r'(https:\/\/github\.com\/DataDog\/integrations-core\/blob\/master\/docs\/dev\/)(\S+)\.md')
+            content = re.sub(regex_github_link, new_link, content, count=0)
 
-                #Replacing links that point to the Github folder by link that point to the doc.
-                new_link = doc_directory +'\\2'
-                regex_github_link = re.compile(r'(https:\/\/github\.com\/DataDog\/integrations-core\/blob\/master\/docs\/dev\/)(\S+)\.md')
-                content = re.sub(regex_github_link, new_link, content, count=0)
-
-            # Writing the new content to the documentation file
-            dirp = '{}{}'.format(self.content_dir, doc_directory[1:])
-            makedirs(dirp, exist_ok=True)
-            with open('{}{}'.format(dirp, basename(file_name)), mode='w+', encoding='utf-8') as f:
-                f.write(content)
+        # Writing the new content to the documentation file
+        dirp = '{}{}'.format(self.content_dir, doc_directory[1:])
+        makedirs(dirp, exist_ok=True)
+        with open('{}{}'.format(dirp, basename(file_name)), mode='w+', encoding='utf-8') as f:
+            f.write(content)
 
     def process_integration_manifest(self, file_name):
         """
@@ -367,19 +380,19 @@ class PreBuild:
         set is_public to false to hide integrations we merge later
         :param file_name: path to a manifest json file
         """
-        if file_name.endswith('manifest.json'):
-            names = [d.get('name', '').lower() for d in self.datafile_json if 'name' in d]
-            with open(file_name) as f:
-                data = json.load(f)
-                data_name = data.get('name', '').lower()
-                if data_name in [k for k, v in self.integration_mutations.items() if v.get('action') == 'merge']:
-                    data['is_public'] = False
-                if data_name in names:
-                    item = [d for d in self.datafile_json if d.get('name', '').lower() == data_name]
-                    if len(item) > 0:
-                        item[0].update(data)
-                else:
-                    self.datafile_json.append(data)
+        
+        names = [d.get('name', '').lower() for d in self.datafile_json if 'name' in d]
+        with open(file_name) as f:
+            data = json.load(f)
+            data_name = data.get('name', '').lower()
+            if data_name in [k for k, v in self.integration_mutations.items() if v.get('action') == 'merge']:
+                data['is_public'] = False
+            if data_name in names:
+                item = [d for d in self.datafile_json if d.get('name', '').lower() == data_name]
+                if len(item) > 0:
+                    item[0].update(data)
+            else:
+                self.datafile_json.append(data)
 
     def process_service_checks(self, file_name):
         """
@@ -387,9 +400,8 @@ class PreBuild:
         as the integration name it came from e.g /data/service_checks/docker.json
         :param file_name: path to a service_checks json file
         """
-        if file_name.endswith('service_checks.json'):
-            new_file_name = '{}.json'.format(basename(dirname(normpath(file_name))))
-            shutil.copy(file_name, self.data_service_checks_dir + new_file_name)
+        new_file_name = '{}.json'.format(basename(dirname(normpath(file_name))))
+        shutil.copy(file_name, self.data_service_checks_dir + new_file_name)
 
     def process_integration_readme(self, file_name):
         """
@@ -401,36 +413,36 @@ class PreBuild:
         5. write out file to content/integrations with filename changed to integrationname.md
         :param file_name: path to a readme md file
         """
-        if file_name.endswith('.md'):
-            dependencies = []
-            if file_name.startswith(self.options.integrations):
-                dependencies.append(file_name.replace(self.options.integrations, "https://github.com/DataDog/integrations-core/blob/master/"))
-            elif file_name.startswith(self.options.extras):
-                dependencies.append(file_name.replace(self.options.extras, "https://github.com/DataDog/integrations-extras/blob/master/"))
-            metrics = glob.glob('{path}{sep}*metadata.csv'.format(path=dirname(file_name), sep=sep))
-            metrics = metrics[0] if len(metrics) > 0 else None
-            metrics_exist = metrics and exists(metrics) and linecache.getline(metrics, 2)
-            service_check = glob.glob('{file}.json'.format(file=self.data_service_checks_dir + basename(dirname(file_name))))
-            service_check = service_check[0] if len(service_check) > 0 else None
-            service_check_exist = service_check and exists(service_check)
-            manifest = '{0}{1}{2}'.format(dirname(file_name), sep, 'manifest.json')
-            manifest_json = json.load(open(manifest)) if exists(manifest) else {}
-            new_file_name = '{}.md'.format(basename(dirname(file_name)))
-            exist_already = exists(self.content_integrations_dir + new_file_name)
-            with open(file_name, 'r') as f:
-                result = f.read()
-                title = manifest_json.get('name', '').lower()
-                if title not in [k for k, v in self.integration_mutations.items() if v.get('action') == 'merge']:
-                    result = re.sub(self.regex_h1, '', result, 1)
-                if metrics_exist:
-                    result = re.sub(self.regex_metrics, r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'%format(title), result, 0)
-                if service_check_exist:
-                    result = re.sub(self.regex_service_check, r'\1{{< get-service-checks-from-git "%s" >}}\n\3\4' % format(title), result, 0)
-                result = "{0}\n\n{1}".format(result, '{{< get-dependencies >}}')
-                result = self.add_integration_frontmatter(new_file_name, result, dependencies)
-                if not exist_already:
-                    with open(self.content_integrations_dir + new_file_name, 'w') as out:
-                        out.write(result)
+        
+        dependencies = []
+        if file_name.startswith(self.options.integrations):
+            dependencies.append(file_name.replace(self.options.integrations, "https://github.com/DataDog/integrations-core/blob/master/"))
+        elif file_name.startswith(self.options.extras):
+            dependencies.append(file_name.replace(self.options.extras, "https://github.com/DataDog/integrations-extras/blob/master/"))
+        metrics = glob.glob('{path}{sep}*metadata.csv'.format(path=dirname(file_name), sep=sep))
+        metrics = metrics[0] if len(metrics) > 0 else None
+        metrics_exist = metrics and exists(metrics) and linecache.getline(metrics, 2)
+        service_check = glob.glob('{file}.json'.format(file=self.data_service_checks_dir + basename(dirname(file_name))))
+        service_check = service_check[0] if len(service_check) > 0 else None
+        service_check_exist = service_check and exists(service_check)
+        manifest = '{0}{1}{2}'.format(dirname(file_name), sep, 'manifest.json')
+        manifest_json = json.load(open(manifest)) if exists(manifest) else {}
+        new_file_name = '{}.md'.format(basename(dirname(file_name)))
+        exist_already = exists(self.content_integrations_dir + new_file_name)
+        with open(file_name, 'r') as f:
+            result = f.read()
+            title = manifest_json.get('name', '').lower()
+            if title not in [k for k, v in self.integration_mutations.items() if v.get('action') == 'merge']:
+                result = re.sub(self.regex_h1, '', result, 1)
+            if metrics_exist:
+                result = re.sub(self.regex_metrics, r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'%format(title), result, 0)
+            if service_check_exist:
+                result = re.sub(self.regex_service_check, r'\1{{< get-service-checks-from-git "%s" >}}\n\3\4' % format(title), result, 0)
+            result = "{0}\n\n{1}".format(result, '{{< get-dependencies >}}')
+            result = self.add_integration_frontmatter(new_file_name, result, dependencies)
+            if not exist_already:
+                with open(self.content_integrations_dir + new_file_name, 'w') as out:
+                    out.write(result)
 
     def add_integration_frontmatter(self, file_name, content, dependencies=[]):
         """
