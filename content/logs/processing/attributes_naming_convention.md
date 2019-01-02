@@ -46,6 +46,7 @@ This attribute naming convention has been split into 7 functional domains:
 * [Performance](#performance)
 * [User related attributes](#user-related-attributes)
 * [Syslog and log shippers](#syslog-and-log-shippers)
+* [Security vulnerabilities](#vulnerabilities)
 
 ## Network
 
@@ -164,6 +165,19 @@ Related to the data added by a syslog or a log-shipper agent. All fields and met
 | `syslog.env`       | `string` | The environment name where the source of logs come from.                      |
 
 Some integrations that rely on these are: [Rsyslog][16], [NxLog][17], [Syslog-ng][18], [Fluentd][19], [Logstash][20], etc.
+
+## Vulnerabilities
+
+Related to security vulnerabilities, all attributes are prefixed by `vulnerability`: 
+
+| **Fullname**                    | **Type** | **Description**                                            |
+| :---                            | :---     | :----                                                      |
+| `vulnerability.cve`             | `string` | The Common Vulnerabilities and Exposures (format `CVE-AAAA-NNNN` where `AAAA` is the year and `NNNN` the id of the vulnerability)                                                       |
+| `vulnerability.cvss`            | `number` | The Common Vulnerability Scoring System (from 0 to 10).   |
+| `vulnerability.severity`        | `string` | Severity of the vulnerability (`high` or `low` for example)|
+| `vulnerability.package.name`    | `string` | The package affected by the vulnerability                  |
+| `vulnerability.package.version` | `string` | The version of the package                                 |
+| `vulnerability.status`          | `string` | The status of the vulnerability which indicates if the fix is available or in progress                                                                                                  |
 
 ## Further Reading
 
