@@ -74,7 +74,7 @@ However, be aware that each incoming status value is mapped as follows:
 * Strings beginning with **n** (case-insensitive) map to **notice (5)**
 * Strings beginning with **i** (case-insensitive) map to **info (6)**
 * Strings beginning with **d**, **trace** or **verbose** (case-insensitive) map to **debug (7)**
-* Strings matching **OK** or **Sucess** (case-insensitive) map to **OK**
+* Strings matching **OK** or **Success** (case-insensitive) map to **OK**
 * All others map to **info (6)**
 
 ## Service Remapper
