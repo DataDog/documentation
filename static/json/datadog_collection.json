@@ -1612,7 +1612,7 @@
 			]
 		},
 		{
-			"name": "Logs *BETA*",
+			"name": "Logs",
 			"item": [
 				{
 					"name": "Send Logs Over HTTP",
@@ -1628,10 +1628,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{  \n   \"exampleLog\":{  \n      \"title\":\"Example Log from JSON submitted via HTTP\",\n      \"msg\":\"message here\",\n      \"statusCode\": 301,\n      \"responseTime\":\"300ms\",\n      \"category\" : \"test\"\n   }\n}"
+							"raw": "{  \n   \"message\":\"This is an example log message over HTTP!\",\n   \"http\":{  \n      \"status_code\":301,\n      \"method\":\"POST\",\n      \"request_id\":\"{{$randomInt}}\"\n   },\n   \"network\":{  \n      \"client\":{  \n         \"ip\":\"127.0.0.1\",\n         \"port\":\"80\"\n      },\n      \"destination\":{  \n         \"ip\":\"10.0.0.1\"\n      }\n   },\n   \"duration\":2000,\n   \"category\":\"test\"\n}"
 						},
 						"url": {
-							"raw": "https://http-intake.logs.datadoghq.com/v1/input/{{dd_api_key}}?ddsource=exampleSource&service=exampleService&hostname=exampleHost",
+							"raw": "https://http-intake.logs.datadoghq.com/v1/input/{{dd_api_key}}?ddsource=nginx&service=exampleService&hostname=exampleHost",
 							"protocol": "https",
 							"host": [
 								"http-intake",
@@ -1647,7 +1647,7 @@
 							"query": [
 								{
 									"key": "ddsource",
-									"value": "exampleSource"
+									"value": "nginx"
 								},
 								{
 									"key": "service",
@@ -1664,7 +1664,29 @@
 					"response": []
 				}
 			],
-			"description": "Send your logs to your Datadog platform over HTTP."
+			"description": "Send your logs to your Datadog platform over HTTP.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f3c90f9f-2f7b-4b10-9ff0-1e95bd405883",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "53b8551e-05d1-4b29-a168-9f304aa33165",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
 		},
 		{
 			"name": "Metrics",
