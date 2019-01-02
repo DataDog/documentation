@@ -106,7 +106,7 @@ Details about the meanings of user agents attributes. Generally generated thanks
 ## Source code
 
 Related to the data used when a log or an error is generated via a logger in a custom application. All attributes are prefixed either by `logger` or `error`.
- 
+
 | **Fullname**         | **Type** | **Description**                                                  |
 | :---                 | :---     | :----                                                            |
 | `logger.name`        | `string` | The name of the logger.                                          |
@@ -140,7 +140,7 @@ Performance metrics.
 | `duration`   | `number` | A duration of any kind in **nanoseconds**: HTTP response time, database query time, latency, etc. |
 
 
-We advise you to rely or at least remap on this attribute as Datadog displays and uses it as a default [Measure][14] for [trace Search][15]. 
+We advise you to rely or at least remap on this attribute as Datadog displays and uses it as a default [Measure][14] for [trace Search][15].
 
 ## User related attributes
 
@@ -168,16 +168,17 @@ Some integrations that rely on these are: [Rsyslog][16], [NxLog][17], [Syslog-ng
 
 ## Vulnerabilities
 
-Related to security vulnerabilities, all attributes are prefixed by `vulnerability`: 
+Related to security vulnerabilities, all attributes are prefixed by `vulnerability`:
 
-| **Fullname**                    | **Type** | **Description**                                            |
-| :---                            | :---     | :----                                                      |
-| `vulnerability.cve`             | `string` | The Common Vulnerabilities and Exposures (format `CVE-AAAA-NNNN` where `AAAA` is the year and `NNNN` the id of the vulnerability)                                                       |
-| `vulnerability.cvss`            | `number` | The Common Vulnerability Scoring System (from 0 to 10).   |
-| `vulnerability.severity`        | `string` | Severity of the vulnerability (`high` or `low` for example)|
-| `vulnerability.package.name`    | `string` | The package affected by the vulnerability                  |
-| `vulnerability.package.version` | `string` | The version of the package                                 |
-| `vulnerability.status`          | `string` | The status of the vulnerability which indicates if the fix is available or in progress                                                                                                  |
+| **Fullname**                    | **Type** | **Description**                                              |
+| :---                            | :---     | :----                                                        |
+| `vulnerability.name`            | `string` | A name used to identify the vulnerability, such as its Common Vulnerabilities and Exposures (CVE) identifier |
+| `vulnerability.description`     | `string` | A description that provides more details and context about the Vulnerability |
+| `vulnerability.severity`        | `string` | The vulnerability's severity (e.g. `low` to `high`)          |
+| `vulnerability.cvss`            | `number` | The Common Vulnerability Scoring System (CVSS), ranging from from 0 to 10|
+| `vulnerability.package.name`    | `string` | The package affected by the vulnerability                    |
+| `vulnerability.package.version` | `string` | The version of the vulnerable package at the time of the scan|
+| `vulnerability.status`          | `string` | The status of the vulnerability (e.g. fix available) at the time of the scan|
 
 ## Further Reading
 
