@@ -9,5 +9,5 @@ external_redirect: /api/#importer-les-metadonnees-IdP
 
 ##### ARGUMENTS
 * **`idp_file`** [*obligatoire*] :
-     Le chemin vers le fichier de métadonnées XML que vous souhaiter importer.
+     Le chemin vers le fichier de métadonnées XML que vous souhaitez importer.
 

@@ -6,7 +6,7 @@ external_redirect: /api/#envoyer-un-evenement
 ---
 
 ## Envoyer un événement
-Cet endpoint vous permet d'envoyer des événements dans le flux. Taggez-les, définissez la priorité et regroupez-les avec d'autres événements.
+Cet endpoint vous permet d'envoyer des événements dans le flux. Taguez-les, définissez la priorité et regroupez-les avec d'autres événements.
 
 ##### ARGUMENTS
 * **`title`** [*obligatoire*] : 

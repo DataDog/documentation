@@ -8,7 +8,7 @@ external_redirect: /api/#recuperer-un-embed-specifique
 ## Récupérer un embed spécifique
 Récupérez le fragment HTML d'un embed généré précédemment avec embed_id.
 
-Renvoie un objet JSON avec 8 éléments ::
+Renvoie un objet JSON avec 8 éléments :
 
 * embed_id : jeton de l'embed.
 * graph_title : titre du graphique.
@@ -16,7 +16,7 @@ Renvoie un objet JSON avec 8 éléments ::
 * dash_url : URL du dashboard sur lequel le graphique est affiché (null si aucun).
 * shared_by : ID de l'utilisation qui a partagé l'embed.
 * html : fragment HTML pour l'embed (iframe).
-* revoked : flag booléen indiquant si l'embed est révoquée ou non.
+* revoked : flag booléen indiquant si l'embed est révoqué ou non.
 
 En cas d'échec, la valeur renvoyée est un JSON contenant un message d'erreur {errors: [messages]}.
 
