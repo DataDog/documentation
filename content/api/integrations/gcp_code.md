@@ -1,7 +1,7 @@
 ---
 title: Google Cloud Platform
 type: apicode
-order: 14.2
+order: 14.3
 external_redirect: /api/#google-cloud-platform
 ---
 
