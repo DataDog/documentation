@@ -1465,7 +1465,7 @@ trace_id, span_id = helpers.get_correlation_ids()
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-To retrieve trace and span IDs for the active trace, one can use `Datadog.tracer.active_correlation`:
+To retrieve trace and span IDs for the active trace, use `Datadog.tracer.active_correlation`:
 
 ```ruby
 # When a trace is active...
