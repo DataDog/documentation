@@ -6,6 +6,6 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "site"],
         "name": "Site disponible",
-        "description": "Renvoie `CRITICAL` si la disponibilité pour un site est 0. Si ce n'est pas le cas, renvoie `OK`. La disponibilité du site est recueillie via Windows Performance Data Helper à l'aide du compte  'Web Service(*)\\Service Uptime'."
+        "description": "Renvoie `CRITICAL` si la disponibilité pour un site est 0. Si ce n'est pas le cas, renvoie `OK`. La disponibilité du site est recueillie via Windows Performance Data Helper à l'aide du compte 'Web Service(*)\\Service Uptime'."
     }
 ]

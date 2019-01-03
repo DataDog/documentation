@@ -11,8 +11,8 @@ Récupérer l'utilisation de votre compte multi-org
 
 ##### Arguments
 * **`start_month`** [*obligatoire*] :
-    Datetime au format ISO-8601 , UTC, au mois près : [YYYY-MM]. Pour une utilisation commençant ce mois-là. Maximum de 15 mois dans le passé.
-* **`end_month`** [*facultatif*, *défaut* = **current_month-3d**] :
-    Datetime au format ISO-8601 , UTC, au mois près : [JJJJ-MM]. Pour une utilisation se terminant ce mois-là.
-* **`include_org_details`** [*facultatif*, *défaut* = **true**] :
+    Datetime au format ISO-8601, UTC, au mois près : [AAAA-MM]. Pour une utilisation commençant ce mois-là. Maximum de 15 mois dans le passé.
+* **`end_month`** [*facultatif*, *défaut*=**current_month-3d**] :
+    Datetime au format ISO-8601, UTC, au mois près : [AAAA-MM]. Pour une utilisation se terminant ce mois-là.
+* **`include_org_details`** [*facultatif*, *défaut*=**true**] :
   comprend les résumés d'utilisation pour chaque sous-organisation.

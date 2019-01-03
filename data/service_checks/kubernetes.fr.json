@@ -29,7 +29,7 @@
         "statuses": ["ok", "critical"],
         "groups": ["host"],
         "name": "Kubelet Health",
-        "description": "Renvoie `CRITICAL` si le check de santé globale de Kubelet est arrêtée. Si ce n'est pas le cas, renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si le check de santé globale de Kubelet est arrêté. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.6.0",
@@ -83,6 +83,6 @@
         "statuses": ["ok", "critical", "warning", "unknown"],
         "groups": ["host", "pod"],
         "name": "Phase Pod",
-        "description": "Renvoie `CRITICAL` si le processus n'est pas en cours d'exécution ou d'arrêt, renvoie `UNKNOWN` si l'est en cours de démarrage ou d'un autre processus inconnu ou renvoie `OK` pour les autres cas."
+        "description": "Renvoie `CRITICAL` si le pod est à la phase `Failed`, renvoie `UNKNOWN` pour la phase `Pending`, renvoie `UNKNOWN` pour la phase `Unknown` ou renvoie `OK` pour les autres cas."
     }
 ]
