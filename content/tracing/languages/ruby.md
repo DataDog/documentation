@@ -141,6 +141,7 @@ Ruby APM includes support for the following libraries and frameworks:
 | [Resque][55]                   | `>= 1.0, < 2.0`        | Fully Supported | *[Link][56]*     |
 | [RestClient][57]               | `>= 1.8`               | Fully Supported | *[Link][58]*     |
 | [Sequel][59]                   | `>= 3.41`              | Fully Supported | *[Link][60]*     |
+| [Shoryuken][67]                | `>= 4.0.2`             | Fully Supported | *[Link][68]*     |
 | [Sidekiq][61]                  | `>= 4.0`               | Fully Supported | *[Link][62]*     |
 | [Sinatra][63]                  | `>= 1.4.5`             | Fully Supported | *[Link][64]*     |
 | [Sucker Punch][65]             | `>= 2.0`               | Fully Supported | *[Link][66]*     |
