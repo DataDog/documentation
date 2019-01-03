@@ -111,10 +111,6 @@ $(document).ready(function () {
 
         $(window).on('resize scroll', function(e) {
             onScroll();
-            /*var open = $('.mobile-toc-toggle i').hasClass('icon-small-x');
-            if(open && $(window).width() > 991) {
-                $('.mobile-toc-toggle').click();
-            }*/
             if($(window).width() > 530 && $(window).width() < 1720) {
                 var bottomOfBrowser = parseInt($(document).scrollTop()) + parseInt($(window).height());
                 var footerTop = $('body > footer').offset().top;
@@ -149,6 +145,7 @@ $(document).ready(function () {
         hideToc();
     }
 
+    // hiding + displaying the ToC depending on the window width
     function widthCheck(){
         // if ToC elements exist
         if($('#TableOfContents ul').length) {
@@ -167,7 +164,6 @@ $(document).ready(function () {
     }
 
     // when the page loads, checking the window width
-    
     widthCheck();
     
     if(window.innerWidth > 1720 && window.scrollY < 60){
