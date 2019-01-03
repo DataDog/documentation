@@ -1484,7 +1484,7 @@ correlation.trace_id # => 0
 correlation.span_id # => 0
 ```
 
-To add correlation IDs to your logger, simply add a log formatter which retrieve the correlation IDs via `Datadog.tracer.active_correlation`, then add them to the message.
+To add correlation IDs to your logger, add a log formatter which retrieves the correlation IDs with `Datadog.tracer.active_correlation`, then add them to the message.
 
 To properly correlate with Datadog logging, be sure the following is present:
 
