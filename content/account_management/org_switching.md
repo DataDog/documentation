@@ -9,18 +9,18 @@ For security purposes, you must have a valid session for each org you switch to.
 
 **The following scenarios behave differently as of Jan 2, 2019**:
 
-1. **Mixed auth approaches**: In cases where you have both SAML and username/password authentication, you must login with the type required by the org (username/password or SAML) as opposed to logging into one and getting access to all.
+1. **Mixed auth approaches**: In cases where you have both SAML and username/password authentication, you must log in with the type required by the org (username/password or SAML) as opposed to logging into one and getting access to all.
 
 2. **SAML Strict**: If your org is set for [SAML Strict][1], you must authenticate via SAML. You are required to re-authenticate each time you switch orgs. Since IdPs persist sessions, this is often a redirect.
 
 ## Troubleshooting
-If you encounter a problem and cannot login, try the following:
+If you encounter a problem and cannot log in, try the following:
 
 1. Re-enter or reset your username/password, even if you haven’t needed to in the past.
 
-2. Check with another team member to see if they can login with username/password. If yes, see step 1. If not, see step 3.
+2. Check with another team member to see if they can log in with username/password. If yes, see step 1. If not, see step 3.
 
-3. Confirm with an admin member of your team if this account requires a username/password, SAML, or Google oauth to ensure you’re using the correct approach.
+3. Confirm with an admin member of your team if this account requires a username/password, SAML, or Google OAuth to ensure you’re using the correct approach.
 
 If the above troubleshooting steps fail, contact the [Datadog support team][2] and let them know the expected behavior and what you’ve tried. 
 
