@@ -9,7 +9,7 @@ external_redirect: /api/#recuperer-des-tags
 Renvoie un mappage des tags et hôtes pour l'ensemble de votre infrastructure.
 
 ##### ARGUMENTS
-* **`source`** [*facultatif*, *défaut* = **None**] :
+* **`source`** [*facultatif*, *défaut*=**None**] :
     Indique si les tags d'une source spécifique ou tous les tags doivent être affichés.
     [Liste complète de valeurs d'attribut source][1]
 

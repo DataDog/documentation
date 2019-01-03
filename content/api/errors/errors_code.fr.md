@@ -1,5 +1,5 @@
 ---
-title: Réussite et erreurs
+title: Réussites et erreurs
 type: apicode
 order: 3
 external_redirect: /api/#reussites-et-erreurs
