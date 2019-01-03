@@ -1,7 +1,7 @@
 ---
 title: Delete a Screenboard
 type: apicontent
-order: 18.3
+order: 19.3
 external_redirect: /api/#delete-a-screenboard
 ---
 

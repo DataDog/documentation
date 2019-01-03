@@ -1,8 +1,8 @@
 ---
 title: Révoquer un screenboard partagé 
 type: apicode
-order: 18.7
-external_redirect: /api/#revoquer-un-screenboard-partagé
+order: 19.7
+external_redirect: /api/#revoquer-un-screenboard-partage
 ---
 
 ##### Signature

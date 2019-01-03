@@ -4,6 +4,7 @@ kind: Documentation
 aliases:
 - /tracing/java
 - /tracing/setup/java
+- /agent/apm/java/
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-java"
   tag: "GitHub"

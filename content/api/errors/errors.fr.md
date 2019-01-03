@@ -1,10 +1,10 @@
 ---
-title: Réussite et erreurs
+title: Réussites et erreurs
 type: apicontent
 order: 3
-external_redirect: /api/#reussite-et-erreurs
+external_redirect: /api/#reussites-et-erreurs
 ---
-## Succès et erreurs
+## Réussites et erreurs
 L'API Datadog utilise des codes de statut HTTP pour indiquer la réussite ou l'échec d'une requête.
 
 Une erreur indique que le service n'a pas pu gérer votre requête. En plus du code de statut, la réponse peut contenir un objet JSON avec un tableau d'erreurs contenant des messages d'erreur plus détaillés. Remarque : lors de l'utilisation de bibliothèques, certaines erreurs peuvent générer des exceptions plutôt que de renvoyer des objets JSON.

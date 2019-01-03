@@ -1,5 +1,5 @@
 ---
-title: Conseils rapides de Matt - Rapport hebdomadaire de monitor
+title: Matt's Quick Tips - Weekly Monitor Report
 kind: video
 language: en
 wistiaid: kzcivp7n6k
@@ -8,9 +8,9 @@ videos:
     - Datadog Emails
     - Monitors
     - Matts Quick Tips
-summary: En savoir plus sur le rapport hebdomadaire du monitor qui arrive automatiquement dans votre boîte aux lettres.
+summary: En savoir plus sur le rapport hebdomadaire sur les monitors qui vous est automatiquement envoyé par e-mail.
 private: true
 ---
 
-Si vous l'avez activé dans vos paramètres de profil, nous pouvons vous envoyer un courriel contenant les alertes les plus fréquentes de la semaine dans un format interactif. C'est un moyen excellent de rattraper ce qui s'est passé dans votre organisation.
+Si vous activé cette fonction dans les paramètres de votre profil, nous pouvons vous envoyer par e-mail les principales alertes de la semaine, dans un format encourageant les interactions. Il s'agit d'un excellent moyen de faire le point sur les activités de votre organisation.
 

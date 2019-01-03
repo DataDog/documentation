@@ -4,6 +4,7 @@ kind: Documentation
 aliases:
 - /tracing/python/
 - /tracing/setup/python/
+- /agent/apm/python/
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-py"
   tag: "GitHub"

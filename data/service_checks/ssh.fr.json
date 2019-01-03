@@ -5,7 +5,7 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "instance"],
         "name": "SSH peut se connecter",
-        "description": "Renvoie `CRITICAL` si le check de l'Agent n'est pas capable de se connecter au hôte SSH. Si ce n'est pas le cas, renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si le check de l'Agent n'est pas capable de se connecter à l'hôte SSH. Si ce n'est pas le cas, renvoie `OK`."
     },
 	{
         "agent_version": "5.1.0",

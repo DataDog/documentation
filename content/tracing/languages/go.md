@@ -4,6 +4,7 @@ kind: Documentation
 aliases:
 - /tracing/go/
 - /tracing/setup/go
+- /agent/apm/go/
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
   tag: "GitHub"

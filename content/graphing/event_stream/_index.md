@@ -48,13 +48,13 @@ In the example below, a full text search is performed to find all open chef or N
 
 `sources:nagios,chef status:error redis_* AND down`
 
-Note that some of the advanced query language features (e.g. boolean logic) work only in the event stream page, and do not work in graph tiles or in screen board widgets.
+**Note**: some of the advanced query language features (e.g. boolean logic) work only in the event stream page, and do not work in graph tiles or in screen board widgets.
 
 Combine prefixes to construct more complex searches. For example, if you wanted to find all open `chef` or `nagios` errors that mention `cassandra`, you'd have a search like:
 
 `sources:nagios,chef status:error cassandra`
 
-Note: no spaces after the colon or commas in these lists and anything not attached to a prefix goes to full text search.
+**Note**: no spaces after the colon or commas in these lists and anything not attached to a prefix goes to full text search.
 
 ## Show events unaggregated
 
