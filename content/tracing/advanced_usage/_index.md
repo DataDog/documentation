@@ -1465,10 +1465,47 @@ trace_id, span_id = helpers.get_correlation_ids()
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+To retrieve trace and span IDs for the active trace, one can use `Datadog.tracer.active_correlation`:
 
+```ruby
+# When a trace is active...
+Datadog.tracer.trace('correlation.example') do
+  # Returns #<Datadog::Correlation::Identifier>
+  correlation = Datadog.tracer.active_correlation
+  correlation.trace_id # => 5963550561812073440
+  correlation.span_id # => 2232727802607726424
+end
 
-[1]: /help
+# When a trace isn't active...
+correlation = Datadog.tracer.active_correlation
+# Returns #<Datadog::Correlation::Identifier>
+correlation = Datadog.tracer.active_correlation
+correlation.trace_id # => 0
+correlation.span_id # => 0
+```
+
+To add correlation IDs to your logger, simply add a log formatter which retrieve the correlation IDs via `Datadog.tracer.active_correlation`, then add them to the message.
+
+To properly correlate with Datadog logging, be sure the following is present:
+
+ - `dd.trace_id=<trace_id>`: Where `<trace_id>` is `Datadog.tracer.active_correlation.trace_id`. `0` if no trace active.
+ - `dd.span_id=<span_id>`: Where `<span_id>` is `Datadog.tracer.active_correlation.span_id`. `0` if no trace active.
+
+An example of this in practice:
+
+```ruby
+require 'ddtrace'
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.progname = 'my_app'
+logger.formatter  = proc do |severity, datetime, progname, msg|
+  # Returns Datadog::Correlation::Identifier
+  ids = Datadog.tracer.active_correlation
+  "[#{datetime}][#{progname}][#{severity}][dd.trace_id=#{ids.trace_id} dd.span_id=#{ids.span_id}] #{msg}\n"
+end
+```
+
 {{% /tab %}}
 {{% tab "Go" %}}
 The Go tracer exposes two API calls to allow printing trace and span identifiers along with log statements using exported methods from `SpanContext` type:
