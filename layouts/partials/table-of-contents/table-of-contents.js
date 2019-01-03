@@ -150,21 +150,26 @@ $(document).ready(function () {
     }
 
     function widthCheck(){
-        if(window.innerWidth > 1720){
-            if($('.toc-container').hasClass('d-none') && $('.mobile-toc-toggle i').hasClass('icon-small-bookmark')){
-                $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
-                $('.mobile-toc-toggle i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
-            }
-        }else{
-            if($('.toc-container').hasClass('mobile-open') && $('.mobile-toc-toggle i').hasClass('icon-small-x')){
-                $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
-                $('.mobile-toc-toggle i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
+        // if ToC elements exist
+        if($('#TableOfContents ul').length) {
+            if(window.innerWidth > 1720){
+                if($('.toc-container').hasClass('d-none') && $('.mobile-toc-toggle i').hasClass('icon-small-bookmark')){
+                    $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
+                    $('.mobile-toc-toggle i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
+                }
+            }else{
+                if($('.toc-container').hasClass('mobile-open') && $('.mobile-toc-toggle i').hasClass('icon-small-x')){
+                    $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
+                    $('.mobile-toc-toggle i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
+                }
             }
         }
     }
 
     // when the page loads, checking the window width
+    
     widthCheck();
+    
     if(window.innerWidth > 1720 && window.scrollY < 60){
         $('.toc').css('top', '189px');
         $('.mobile-toc-toggle').css('top', '189px');
