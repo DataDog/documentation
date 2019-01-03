@@ -113,6 +113,10 @@ After enabling the IdP Initiated Login feature (and waiting for caches to clear)
 
 If you do not use the updated SP Metadata, Datadog will not be able to associate the assertion with your organization and will display an error page with a message that the SAML response is missing the "InResponseTo" attribute.
 
+### SAML Strict
+
+With SAML Strict mode enabled, all users must login with SAML. An existing username/password or Google OAuth login does not work. This ensures that all users with access to Datadog must have valid credentials in your company’s identity provider/directory service to access your Datadog account.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
