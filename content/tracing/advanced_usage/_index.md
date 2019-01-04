@@ -1488,7 +1488,7 @@ To add correlation IDs to your logger, add a log formatter which retrieves the c
 
 To properly correlate with Datadog logging, be sure the following is present:
 
- - `dd.trace_id=<trace_id>`: Where `<trace_id>` is `Datadog.tracer.active_correlation.trace_id`. `0` if no trace active.
+ - `dd.trace_id=<TRACE_ID>`: Where `<TRACE_ID>` is equal to `Datadog.tracer.active_correlation.trace_id` or `0` if no trace is active.
  - `dd.span_id=<SPAN_ID>`: Where `<SPAN_ID>` is equal to `Datadog.tracer.active_correlation.span_id` or `0` if no trace is active.
 
 An example of this in practice:
