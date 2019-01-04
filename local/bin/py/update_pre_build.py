@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 import csv
 import fnmatch
 import glob
@@ -20,6 +21,7 @@ from optparse import OptionParser
 from os import sep, makedirs, getenv, remove
 from os.path import exists, basename, curdir, join, abspath, normpath, dirname
 
+CONFIGURATION_FILE = './local/etc/pull_config.yaml'
 
 def cache_by_sha(func):
     """ only downloads fresh file, if we don't have one or we do and the sha has changed """
@@ -123,6 +125,12 @@ class PreBuild:
             self.options.integrations = self.options.integrations + sep
         if self.options.extras and not self.options.extras.endswith(sep):
             self.options.extras = self.options.extras + sep
+
+        self.list_of_orgs = []
+        self.list_of_repos = []
+        self.list_of_files = []
+        self.list_of_contents = []
+
         self.tempdir = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
         self.data_dir = '{0}{1}{2}'.format(abspath(normpath(options.source)), sep, 'data' + sep)
         self.content_dir = '{0}{1}{2}'.format(abspath(normpath(options.source)), sep, 'content' + sep)
@@ -183,7 +191,7 @@ class PreBuild:
             with open(file=yml_filename, mode='w', encoding='utf-8') as f:
                 f.write(yaml.dump(yaml_data, default_flow_style=False))
 
-    def download_from_repo(self, org, repo, branch, globs):
+    def download_from_repo(self, org, repo, branch, globs=None):
         """
         Takes github info and file globs and downloads files from github using multiple processes
         :param org: github organization or person
@@ -208,42 +216,84 @@ class PreBuild:
         """
         print('Processing')
 
-        dogweb_globs = ['integration/**/*_metadata.csv', 'integration/**/manifest.json',
-                        'integration/**/service_checks.json', 'integration/**/README.md',
-                        'dd/utils/context/source.py']
-        integrations_globs = ['*[!}]/metadata.csv', '*[!}]/manifest.json', '*[!}]/service_checks.json', '*[!}]/README.md', 'docs/**']
-        extras_globs = ['**/metadata.csv', '**/manifest.json', '**/service_checks.json', '**/README.md']
+        # TO DO Check first whether or not it's to do a local or a remote build
+        # then use  the config to build the doc
 
-        # sync from dogweb, download if we don't have it (token required)
-        if not self.options.dogweb:
-            if self.options.token:
-                self.download_from_repo('DataDog', 'dogweb', 'prod', dogweb_globs)
-                self.options.dogweb = '{0}{1}{2}'.format(self.extract_dir, 'dogweb', sep)
+        self.extract_config()
 
-        # sync from integrations-core, download if we don't have it (public repo so no token needed)
-        if not options.integrations:
-            self.download_from_repo('DataDog', 'integrations-core', 'master', integrations_globs)
-            self.options.integrations = '{0}{1}{2}'.format(self.extract_dir, 'integrations-core', sep)
+        self.local_or_upstream()
 
-        # sync from integrations-extras, download if we don't have it (public repo so no token needed)
-        if not options.extras:
-            self.download_from_repo('DataDog', 'integrations-extras', 'master', extras_globs)
-            self.options.extras = '{0}{1}{2}'.format(self.extract_dir, 'integrations-extras', sep)
-
-        globs = []
-
-        for d_glob, i_glob, e_glob  in zip_longest(dogweb_globs, integrations_globs, extras_globs):
-            if d_glob:
-                globs.append('{}{}'.format(self.options.dogweb, d_glob))
-            if i_glob:
-                globs.append('{}{}'.format(self.options.integrations, i_glob))
-            if e_glob:
-                globs.append('{}{}'.format(self.options.extras, e_glob))
-
-        for file_name in tqdm(chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in globs)):
+        for file_name in tqdm(chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in self.list_of_files)):
             self.process_filename(file_name)
 
         self.merge_integrations()
+
+    def extract_config(self):
+
+        print('Loading {} configuration file'.format(CONFIGURATION_FILE))
+        configuration = yaml.load(open(CONFIGURATION_FILE))
+        
+        for org in configuration:
+            self.list_of_orgs.append(org['org_name'])
+            for repo in org['repos']:
+                self.list_of_repos.append(repo['repo_name'])
+                for content in repo['contents']:
+                    content_temp = {\
+                                    "org_name":org['org_name'],\
+                                    "repo_name":repo['repo_name'],\
+                                    "branch":content['branch'],\
+                                    "globs":content['globs']}
+                    self.list_of_contents.append(content_temp)
+                    print('Adding content {} '.format(content_temp))
+
+    def local_or_upstream(self):
+
+        for content in self.list_of_contents:
+
+            if content['repo_name']=='dogweb':
+                if not self.options.dogweb:
+                    if self.options.token:
+                        print("No local version of {} found, downloading content from upstream version".format(content['repo_name']))
+                        self.download_from_repo(content['org_name'], content['repo_name'], content['branch'], content['globs'])
+                        self.options.dogweb = '{0}{1}{2}'.format(self.extract_dir, content['repo_name'], sep)
+
+                print("Updating globs for new local version or {} repo".format(content['repo_name']))
+                content['globs'] = self.update_globs(self.options.dogweb,content['globs'])
+
+            # sync from integrations-core, download if we don't have it (public repo so no token needed)
+            elif content['repo_name']== 'integrations-core':
+                if not options.integrations:
+                    print("No local version of {} found, downloading downloading content from upstream version".format(content['repo_name']))
+                    self.download_from_repo(content['org_name'], content['repo_name'], content['branch'], content['globs'])
+                    self.options.integrations = '{0}{1}{2}'.format(self.extract_dir, 'integrations-core', sep)
+
+                print("Updating globs for new local version or {} repo".format(content['repo_name']))
+                content['globs'] = self.update_globs(self.options.integrations,content['globs'])
+
+            # sync from integrations-extras, download if we don't have it (public repo so no token needed)
+            elif content['repo_name']=='integrations-extras': 
+                if not options.extras:
+                    print("No local version of {} found, downloading downloading content from upstream version".format(content['repo_name']))
+
+                    self.download_from_repo(content['org_name'], content['repo_name'], content['branch'], content['globs'])
+                    self.options.extras = '{0}{1}{2}'.format(self.extract_dir, 'integrations-extras', sep)
+
+                print("Updating globs for new local version or {} repo".format(content['repo_name']))
+                content['globs'] = self.update_globs(self.options.extras,content['globs'])
+
+            else:
+                print("No local version of {} found, downloading downloading content from upstream version".format(content['repo_name']))
+                self.download_from_repo(content['org_name'], content['repo_name'], content['branch'], content['globs'])
+
+            # Adding the final globs to a global list of globs
+            self.list_of_files += content['globs']
+
+    def update_globs(self, new_path, globs):
+        new_globs = []
+        for item in globs:
+            new_globs.append('{}{}'.format(new_path, item))
+
+        return new_globs
 
     def process_filename(self, file_name):
 
@@ -363,7 +413,7 @@ class PreBuild:
             if file_name.endswith('README.md'):
                 file_name = '_index.md'
 
-            #Replacing links that point to the Github folder by link that point to the doc.
+            # Replacing links that point to the Github folder by link that point to the doc.
             new_link = doc_directory +'\\2'
             regex_github_link = re.compile(r'(https:\/\/github\.com\/DataDog\/integrations-core\/blob\/master\/docs\/dev\/)(\S+)\.md')
             content = re.sub(regex_github_link, new_link, content, count=0)
@@ -380,7 +430,7 @@ class PreBuild:
         set is_public to false to hide integrations we merge later
         :param file_name: path to a manifest json file
         """
-        
+
         names = [d.get('name', '').lower() for d in self.datafile_json if 'name' in d]
         with open(file_name) as f:
             data = json.load(f)
@@ -413,12 +463,7 @@ class PreBuild:
         5. write out file to content/integrations with filename changed to integrationname.md
         :param file_name: path to a readme md file
         """
-        
-        dependencies = []
-        if file_name.startswith(self.options.integrations):
-            dependencies.append(file_name.replace(self.options.integrations, "https://github.com/DataDog/integrations-core/blob/master/"))
-        elif file_name.startswith(self.options.extras):
-            dependencies.append(file_name.replace(self.options.extras, "https://github.com/DataDog/integrations-extras/blob/master/"))
+
         metrics = glob.glob('{path}{sep}*metadata.csv'.format(path=dirname(file_name), sep=sep))
         metrics = metrics[0] if len(metrics) > 0 else None
         metrics_exist = metrics and exists(metrics) and linecache.getline(metrics, 2)
@@ -427,6 +472,7 @@ class PreBuild:
         service_check_exist = service_check and exists(service_check)
         manifest = '{0}{1}{2}'.format(dirname(file_name), sep, 'manifest.json')
         manifest_json = json.load(open(manifest)) if exists(manifest) else {}
+        dependencies = self.add_dependencies(file_name)
         new_file_name = '{}.md'.format(basename(dirname(file_name)))
         exist_already = exists(self.content_integrations_dir + new_file_name)
         with open(file_name, 'r') as f:
@@ -469,6 +515,15 @@ class PreBuild:
                 fm = {'kind': 'integration'}
         return template.format(front_matter=fm, content=content)
 
+    def add_dependencies(self, file_name):
+        dependencies = []
+        if file_name.startswith(self.options.integrations):
+            dependencies.append(file_name.replace(self.options.integrations, "https://github.com/DataDog/integrations-core/blob/master/"))
+
+        elif file_name.startswith(self.options.extras):
+            dependencies.append(file_name.replace(self.options.extras, "https://github.com/DataDog/integrations-extras/blob/master/"))
+
+        return dependencies
 
 if __name__ == '__main__':
     parser = OptionParser(usage="usage: %prog [options] link_type")
