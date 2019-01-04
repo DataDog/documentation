@@ -57,7 +57,7 @@ languages:
           url: "agent/"
           pre: "nav_agent"
           weight: 40
-        ## Basic Agent usage  
+        ## Basic Agent usage
         - identifier: customnav_agentnav_basic_usage
           name: "Basic Agent Usage"
           url: "agent/basic_agent_usage/"
@@ -550,7 +550,7 @@ languages:
           url: "tracing/"
           pre: "nav_tracing"
           weight: 80
-        
+
         # Languages
         - identifier: customnav_tracingnav_languages
           name: "Languages Instrumentation"
@@ -597,7 +597,7 @@ languages:
           url: "tracing/languages/cpp/"
           weight: 180
           parent: customnav_tracingnav_languages
-          
+
 
         # Proxy Configuration
         - identifier: customnav_tracingnav_proxy_config
@@ -1105,6 +1105,11 @@ languages:
           name: "Role Based Access Control"
           url: "account_management/rbac/"
           weight: 60
+          parent: menu_references_account_management
+        - identifier: customnav_accountmanagementnav_org_switching
+          name: "Switching between orgs"
+          url: "account_management/org_switching/"
+          weight: 70
           parent: menu_references_account_management
 
         # SAML subnav

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "65d3a91e-e54c-4204-ad41-4a906aed5948",
+		"_postman_id": "c71520ee-3d99-4f73-803d-d3eadef151df",
 		"name": "Datadog API Collection",
 		"description": "Top Level Folder For Datadog API calls",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -1603,6 +1603,83 @@
 					"listen": "test",
 					"script": {
 						"id": "81e73228-13c1-444f-8424-202bff06c2ec",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Logs",
+			"item": [
+				{
+					"name": "Send Logs Over HTTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n   \"message\":\"This is an example log message over HTTP!\",\n   \"http\":{  \n      \"status_code\":301,\n      \"method\":\"POST\",\n      \"request_id\":\"{{$randomInt}}\"\n   },\n   \"network\":{  \n      \"client\":{  \n         \"ip\":\"127.0.0.1\",\n         \"port\":\"80\"\n      },\n      \"destination\":{  \n         \"ip\":\"10.0.0.1\"\n      }\n   },\n   \"duration\":2000,\n   \"category\":\"test\"\n}"
+						},
+						"url": {
+							"raw": "https://http-intake.logs.datadoghq.com/v1/input/{{dd_api_key}}?ddsource=nginx&service=exampleService&hostname=exampleHost",
+							"protocol": "https",
+							"host": [
+								"http-intake",
+								"logs",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"v1",
+								"input",
+								"{{dd_api_key}}"
+							],
+							"query": [
+								{
+									"key": "ddsource",
+									"value": "nginx"
+								},
+								{
+									"key": "service",
+									"value": "exampleService"
+								},
+								{
+									"key": "hostname",
+									"value": "exampleHost"
+								}
+							]
+						},
+						"description": "Protocols\thttp: 80 or https: 443\n\nQuery parameters\t \nddsource=<SOURCE>\nservice=<SERVICE>\nhostname=<HOSTNAME>\n"
+					},
+					"response": []
+				}
+			],
+			"description": "Send your logs to your Datadog platform over HTTP.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f3c90f9f-2f7b-4b10-9ff0-1e95bd405883",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "53b8551e-05d1-4b29-a168-9f304aa33165",
 						"type": "text/javascript",
 						"exec": [
 							""

@@ -33,6 +33,6 @@
         "integration": "kubernetes",
         "groups": ["host"],
         "name": "Kubelet Health",
-        "description": "Renvoie `CRITICAL` si le check de santé globale de Kubelet est arrêtée. Si ce n'est pas le cas, renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si le check de santé globale de Kubelet est arrêté. Si ce n'est pas le cas, renvoie `OK`."
     }
 ]

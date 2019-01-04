@@ -9,10 +9,10 @@ external_redirect: /api/#recuperer-les-tags-d-un-hote
 Renvoie la liste des tags qui s'appliquent à un hôte donné.
 
 ##### ARGUMENTS
-* **`source`** [*facultatif*, *défaut* = **None**] :
-    Affiche uniquement les tags d'une source particulière. Si ce n'est pas le cas, affiche tous les tags.
-    [Liste des valeurs de l'attribut source de l'API][1].
-* **`by_source`** [*facultatif*, *défaut* = **False**] :
+* **`source`** [*facultatif*, *défaut*=**None**] :
+    Indique si les tags d'une source spécifique ou tous les tags doivent être affichés.
+    [Liste complète de valeurs d'attribut source][1]
+* **`by_source`** [*facultatif*, *défaut*=**False**] :
    Renvoie les tags regroupés par source.
 
 [1]: /integrations/faq/list-of-api-source-attribute-value

@@ -15,17 +15,17 @@ Remplacez une configuration de screenboard dans Datadog.
 
 * **`board_title`** [*obligatoire*] :
     Le nom du dashboard.
-* **`description`** [*facultatif*, *défaut* = **None**] :  
+* **`description`** [*facultatif*, *défaut*=**None**] :  
     La description du contenu du dashboard.
 * **`widgets`** [*obligatoire*] :
     [La liste des définitions de widget][1].
-* **`template_variables`** [*facultatif*, *défaut* = **None**] :
+* **`template_variables`** [*facultatif*, *défaut*=**None**] :
     La liste des template variables utilisables dans le dashboard de création de modèles.
-* **`width`** [*facultatif*, *défaut* = **None**] :
+* **`width`** [*facultatif*, *défaut*=**None**] :
     Largeur du screenboard en pixels.
-* **`height`** [*facultatif*, *défaut* = **None**] :
+* **`height`** [*facultatif*, *défaut*=**None**] :
     Hauteur du screenboard en pixels.
-* **`read_only`** [*facultatif*, *défaut* = **False**] :
+* **`read_only`** [*facultatif*, *défaut*=**False**] :
     Indique si le screenboard est en lecture seule ou non.
 
 [1]: /graphing/dashboards/widgets

@@ -1,5 +1,5 @@
 ---
-title: Conseils rapides de Matt - Partage des Screenboards
+title: Matt's Quick Tips - Sharing Screenboards
 kind: video
 language: en
 wistiaid: old1t5trj4
@@ -10,10 +10,10 @@ videos:
     - Permissions
     - Sharing
     - Matts Quick Tips
-summary: Apprenez à partager un Screenboard.
+summary: Apprenez à partager un screenboard.
 private: true
 ---
 
-Datadog est fantastique pour les groupes DevOps, mais il peut également être précieux pour l'équipe de direction et les autres membres de votre entreprise. Apprenez dans cette courte vidéo à quel point il est facile de partager votre [Screenboard][1] avec vos cadres, vos clients ou toute autre personne qui a besoin de voir l'information contenue dans votre dashboard.
+Datadog constitue non seulement la solution idéale pour les groupes DevOps, mais s'avère également très utile pour les dirigeants et les autres membres de votre entreprise. Regardez cette courte vidéo pour découvrir à quel point il est facile de partager votre [screenboard][1] avec vos cadres, vos clients ou toute autre personne qui cherche à consulter vos informations.
 
 [1]: /graphing/dashboards/screenboard

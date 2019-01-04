@@ -11,13 +11,13 @@ Ne peut être utilisé qu'avec des clés d'application disponibles pour les admi
 ##### ARGUMENTS
 * **`id`** [*obligatoire*] :
     Le handle de l'utilisateur.
-* **`name`** [*facultatif*, *défaut* = **None**] :
+* **`name`** [*facultatif*, *défaut*=**None**] :
     Le nouveau nom de l'utilisateur.
-* **`email`** [*facultatif*, *défaut* = **None**] :
+* **`email`** [*facultatif*, *défaut*=**None**] :
     Le nouvel e-mail de l'utilisateur.
-* **`disabled`** [*facultatif*, *défaut* = **None**] :
+* **`disabled`** [*facultatif*, *défaut*=**None**] :
     Le nouveau statut « disabled » de l'utilisateur.
-* **`access_role`** [*facultatif*, *défaut* = **st**] :
+* **`access_role`** [*facultatif*, *défaut*=**st**] :
     Le rôle d'accès de l'utilisateur. Valeurs autorisées :
     *  **st** (utilisateur standard), 
     *  **adm** (administrateur),

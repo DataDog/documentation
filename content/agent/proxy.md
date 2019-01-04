@@ -230,6 +230,13 @@ frontend processes-forwarder
     bind *:3836
     mode tcp
     default_backend datadog-processes
+    
+# This declares the endpoint where your Agents connects for
+# sending Logs (e.g the value of "logs.config.logs_dd_url")
+frontend logs_frontend
+    bind *:10514
+    mode tcp
+    default_backend datadog-logs
 
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
@@ -251,6 +258,12 @@ backend datadog-processes
     mode tcp
     option tcplog
     server mothership process.datadoghq.com:443 check port 80
+
+backend datadog-logs
+    balance roundrobin
+    mode tcp
+    option tcplog
+    server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt
 ```
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy.
@@ -308,6 +321,13 @@ frontend processes-forwarder
     bind *:3836
     mode tcp
     default_backend datadog-processes
+    
+# This declares the endpoint where your Agents connects for
+# sending Logs (e.g the value of "logs.config.logs_dd_url")
+frontend logs_frontend
+    bind *:10514
+    mode tcp
+    default_backend datadog-logs
 
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
@@ -329,6 +349,12 @@ backend datadog-processes
     mode tcp
     option tcplog
     server mothership process.datadoghq.eu:443 check port 80
+    
+backend datadog-logs
+    balance roundrobin
+    mode tcp
+    option tcplog
+    server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt
 ```
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy.
