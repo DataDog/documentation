@@ -65,21 +65,21 @@
     {{ else }} {{/* No param set load default integration from front matter */}}
 
       {{ if $integration }}
-
-        <table class="table table-vertical-mobile table-metrics">
-          <tbody>
-          {{ range $k, $v := (index $data $integration) }}
-            <tr>
-              <td>
-              <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
-              <td>{{$v.description}}{{if $v.unit_name}}<br><em>shown as {{$v.unit_name}}</em>{{end}}
-              </td>
-            </tr>
-          {{ end }}
-          </tbody>
-        </table>
+        {{ if $data }}
+          <table class="table table-vertical-mobile table-metrics">
+            <tbody>
+            {{ range $k, $v := (index $data $integration) }}
+              <tr>
+                <td>
+                <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
+                <td>{{$v.description}}{{if $v.unit_name}}<br><em>shown as {{$v.unit_name}}</em>{{end}}
+                </td>
+              </tr>
+            {{ end }}
+            </tbody>
+          </table>
+        {{ end }}
       {{ end }}
-
     {{ end }}
 
 
