@@ -21,19 +21,26 @@ There are several places tags can be assigned: [configuration files](#configurat
 
 ## Configuration Files
 
-The host tag is [assigned automatically][6] by the Datadog Agent. To customize the host tag, use the Agent configuration file, `datadog.yaml`.
+The hostname (tag key `host`) is [assigned automatically][6] by the Datadog Agent. To customize the hostname, use the Agent configuration file, `datadog.yaml`:
 
-**When changing the host tag**:
+```yaml
+# Force the hostname to whatever you want. (default: auto-detected)
+hostname: mymachine.mydomain
+```
+
+**When changing the hostname**:
 
 * The old hostname remains in the UI for 24 hours but does not show new metrics.
 * Any data from hosts with the old hostname can be queried with the API.
 * To graph metrics with the old and new hostname in one graph, use [Arithmetic between two metrics][7].
 
-Tags for the [integrations][5] installed with the Agent are configured via YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, refer to [the Agent configuration files FAQ][8].
+The Agent configuration file (`datadog.yaml`) is also used to set host tags which apply to all metrics, traces, and logs forwarded by the Datadog Agent (see YAML formats below).
 
-In YAML files, use a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the Agent is applied to every integration on that Agent's host, as well as to all its corresponding metrics, traces, and logs.
+Tags for the [integrations][5] installed with the Agent are configured via YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, refer to the [Agent configuration files FAQ][8].
 
-Tag dictionaries have two different yet functionally equivalent forms:
+**YAML formats**
+
+In YAML files, use a tag dictionary with a list of tags you want assigned at that level. Tag dictionaries have two different yet functionally equivalent forms:
 
 ```
 tags: <KEY_1>:<VALUE_1>, <KEY_2>:<VALUE_2>, <KEY_3>:<VALUE_3>
@@ -52,7 +59,7 @@ It is recommended you assign tags as `<KEY>:<VALUE>` pairs, but simple tags are 
 
 ## Environment Variables
 
-When installing the containerized Datadog Agent, host tags can be set using the environment variable `DD_TAGS`. We automatically collect common tags from [Docker][9], [Kubernetes][10], [ECS][11], [Swarm, Mesos, Nomad, and Rancher][9]. To extract even more tags, use the following options:
+When installing the containerized Datadog Agent, host tags set your using the environment variable `DD_TAGS`. We automatically collect common tags from [Docker][9], [Kubernetes][10], [ECS][11], [Swarm, Mesos, Nomad, and Rancher][9]. To extract even more tags, use the following options:
 
 | Environment Variable               | Description                                    |
 |------------------------------------|------------------------------------------------|
