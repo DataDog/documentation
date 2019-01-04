@@ -1454,14 +1454,21 @@ If logs are already JSON formatted, there should be nothing left to do.
 [2]: https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#configure-your-logger
 {{% /tab %}}
 {{% tab "Python" %}}
-Getting the required information needed for logging is easy:
 
-```python
-from ddtrace import helpers
+To inject trace information in Python into logs, you must:
 
-trace_id, span_id = helpers.get_correlation_ids()
-```
+1. Set the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run` or manually patch the `logging` module.
+2. Update your log formatter to include ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
 
+The integration with logs occurs as long as the log entry includes:
+
+- `dd.trace_id=%(dd.trace_id)s`
+- `dd.span_id=%(dd.span_id)s`
+
+See our [Python logging documentation][1] for usage examples.
+
+
+[1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#logs-injection
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
