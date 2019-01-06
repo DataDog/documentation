@@ -1460,7 +1460,7 @@ To inject trace information from Python into logs:
 1. Set the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run` or manually patch the `logging` module.
 2. Update your log formatter to include ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
 
-The integration with logs occurs as long as the log entry includes:
+This integration for logs works if the log entry includes:
 
 - `dd.trace_id=%(dd.trace_id)s`
 - `dd.span_id=%(dd.span_id)s`
