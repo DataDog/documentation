@@ -1455,7 +1455,7 @@ If logs are already JSON formatted, there should be nothing left to do.
 {{% /tab %}}
 {{% tab "Python" %}}
 
-To inject trace information in Python into logs, you must:
+To inject trace information from Python into logs:
 
 1. Set the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run` or manually patch the `logging` module.
 2. Update your log formatter to include ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
