@@ -3,25 +3,28 @@ title: Azure integration billing
 kind: faq
 ---
 
-As of September 1, 2018, we bill for all Azure Virtual Machines being monitored in Datadog. These machines are billable regardless of whether the Datadog Agent is installed. **Note**: You are not charged twice if you are running the Agent on an Azure Virtual machine that is also picked up by the Azure Integration.
+## Billing impact
 
-Other Azure resources (e.g. Azure SQL, Azure App Services, Azure Redis Cache) are not currently part of monthly billing but this may change in the future.
+Datadog bills for all Azure Virtual Machines being monitored in Datadog. These machines are billable regardless of whether the Datadog Agent is installed. You are not billed twice if you are running the Agent on an Azure VM picked up by the Azure integration.
 
-If you would like to control which Azure Virtual Machines are being monitored in Datadog, go the the Azure Integration tile add tag filters in the **Optionally filter to VMs with tag** section.
+Other Azure resources (Azure SQL, Azure App Services, Azure Redis Cache, etc.) are not part of monthly billing. **Note**: This could change in the future.
 
-This comma separated list of tags (in the form `<KEY>:<VALUE>`) defines a filter used for collecting metrics from Azure VMs. Wildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used. Only VMs that match one of the defined tags are imported into Datadog. The rest are ignored.
+## VM exclusion
 
-VMs matching a given tag can also be excluded by adding `!` before the tag. An example entry is below:
-
-```
-datadog:monitored,env:production,!env:staging,instance-type:c1.*
-```
+Use the [Azure integration tile][1] to filter your VMs monitored by Datadog. Go to the **Configuration** tab and edit an existing tenant or add a new one. Each tenant is controlled under **Optionally filter to VMs with tag**. Limit VMs by [host tag][2]:
 
 {{< img src="account_management/billing/azure_vm_filter.png" alt="Azure VM Filter" responsive="true">}}
 
+When adding limits to existing Azure tenants within the integration tile, the previously discovered VMs could stay in the [Infrastructure List][3] up to 24 hours. During the transition period, VMs display a status of `???`. This does not count towards your billing.
+
+VMs with a running Agent still display and are included in billing. Using the limit option is only applicable to VMs without a running Agent.
+
 ## Troubleshooting
-For technical questions, contact [Datadog support][1].
+For technical questions, contact [Datadog support][4].
 
 For billing questions, contact your Customer Success Manager.
 
-[1]: /help
+[1]: https://app.datadoghq.com/account/settings#integrations/azure
+[2]: /tagging/using_tags/#integrations
+[3]: /graphing/infrastructure
+[4]: /help
