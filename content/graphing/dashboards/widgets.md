@@ -37,7 +37,7 @@ Each type of widget is described below:
 ## Timeseries
 *Supported on Screenboards and Timeboards*
 
-The Timeseries visualization is great for showing one or more metrics, Log events, or APM events over time. The time window depends on what is selected on the [Timeboard][5] or in the graph on a [Screenboard][6].
+The Timeseries visualization allows you to show one or more metrics, Log events, or APM events evolution over time. The time window depends on what is selected on the [Timeboard][5] or in the graph on a [Screenboard][6].
 Timeseries can be displayed as **lines**, **areas**, and **bars**.
 
 **Note**: Define log Analytics query (still in beta) exactly as in the [Log Explorer][7].
@@ -163,6 +163,18 @@ Example of Query Value widget for the [API][1]
 The Query Value Widget only displays one Value, unlike a timeseries for example, that displays several points.
 
 Let's say you are on a Timeseries and you are currently displaying the past hour, this button allows you to either display the `avg` / `max` / `min` / `avg` / `sum` / `last value` of ALL points that are rendered during that 1 hour range timeframe - depending on the aggregation chosen above.
+
+## Scatterplot
+
+*Supported on Screenboards and Timeboards*
+
+The Scatterplot visualization allows you to graph a chosen scope over 2 different metrics with their respective aggregation:
+
+Select a metric and an aggregation for the X vs. the Y axis, then define the scope for each point of the Scatterplot e.g. `host`, `service`, `app`, `region`...
+
+**Note**: You can choose to enable a color-by tag, e.g. `team`.
+
+{{< img src="graphing/dashboards/widgets/scatterplot.png" alt="Heatmap" responsive="true" style="width:80%;">}}
 
 ## Heatmap
 *Supported on Screenboards and Timeboards*
