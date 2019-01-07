@@ -125,12 +125,10 @@ class PreBuild:
             self.options.integrations = self.options.integrations + sep
         if self.options.extras and not self.options.extras.endswith(sep):
             self.options.extras = self.options.extras + sep
-
         self.list_of_orgs = []
         self.list_of_repos = []
         self.list_of_files = []
         self.list_of_contents = []
-
         self.tempdir = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
         self.data_dir = '{0}{1}{2}'.format(abspath(normpath(options.source)), sep, 'data' + sep)
         self.content_dir = '{0}{1}{2}'.format(abspath(normpath(options.source)), sep, 'content' + sep)
@@ -216,16 +214,10 @@ class PreBuild:
         """
         print('Processing')
 
-        # TO DO Check first whether or not it's to do a local or a remote build
-        # then use  the config to build the doc
-
         self.extract_config()
-
         self.local_or_upstream()
-
         for file_name in tqdm(chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in self.list_of_files)):
             self.process_filename(file_name)
-
         self.merge_integrations()
 
     def extract_config(self):
