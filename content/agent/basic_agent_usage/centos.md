@@ -95,37 +95,14 @@ Configuration files for [Integrations][1]:
 {{< /tabs >}}
 
 ## Troubleshooting
-{{< tabs >}}
-{{% tab "Agent v6" %}}
 
-Run the `status` command to see the state of the Agent. The Agent logs are located in the `/var/log/datadog/` directory and are consolidated in the `agent.log` file.
-
-If you're still having trouble, [our support team][1] is glad to provide further assistance.
-
-
-[1]: /help
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-Run the `info` command to see the state of the Agent. The Agent logs are located in the `/var/log/datadog/` directory and are split into:
-
-  * `datadog-supervisord.log`
-  * `collector.log`
-  * `dogstatsd.log`
-  * `forwarder.log`
-
-If you're still having trouble, [our support team][1] is glad to provide further assistance.
-
-
-[1]: /help
-{{% /tab %}}
-{{< /tabs >}}
+[Refer to the dedicated Agent Troubleshooting documentation][3].
 
 ## Working with the embedded Agent
 
 The Agent contains an embedded Python environment at `/opt/datadog-agent/embedded/`. Common binaries such as `python` and `pip` are contained within `/opt/datadog-agent/embedded/bin/`.
 
-See the instructions on how to [add packages to the embedded Agent][3] for more information.
+See the instructions on how to [add packages to the embedded Agent][4] for more information.
 
 ## Further Reading
 
@@ -133,4 +110,5 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 
 [1]: https://app.datadoghq.com/account/settings#agent/centos
 [2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
-[3]: /agent/faq/custom_python_package
+[3]: /agent/troubleshooting
+[4]: /agent/faq/custom_python_package
