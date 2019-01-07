@@ -42,7 +42,7 @@ This table shows hourly usage for:
 | APM Hosts          | Shows the 99th percentile of all distinct APM hosts over all hours in the current month.            |
 | Infra. Hosts       | Shows the 99th percentile of all distinct infrastructure hosts over all hours in the current month. |
 | Containers         | Shows the high watermark of all distinct containers over all hours in the current month.            |
-| Custom Metrics     | Shows the average number of distinct [custom metrics][3] over all hours in the current month.       |
+| Custom Metrics     | Shows the average number of distinct [custom metrics][2] over all hours in the current month.       |
 | Ingested Logs      | Shows the sum of all log bytes ingested over all hours in the current month.                        |
 | Indexed Logs       | Shows the sum of all log events indexed over all hours in the current month.                        |
 | Indexed APM Events | Shows the sum of all APM events indexed over all hours in the current month.                        |
@@ -73,10 +73,10 @@ This table shows information on your top 500 custom metrics:
 
 
 ## Troubleshooting
-For technical questions, contact [Datadog support][2].
+For technical questions, contact [Datadog support][3].
 
 For billing questions, contact your Customer Success Manager.
 
 [1]: https://app.datadoghq.com/account/usage/hourly
-[2]: /help
-[3]: /developers/metrics/custom_metrics/
+[2]: /developers/metrics/custom_metrics
+[3]: /help
