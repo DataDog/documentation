@@ -164,38 +164,41 @@ The Query Value Widget only displays one Value, unlike a timeseries for example,
 
 Let's say you are on a Timeseries and you are currently displaying the past hour, this button allows you to either display the `avg` / `max` / `min` / `avg` / `sum` / `last value` of ALL points that are rendered during that 1 hour range timeframe - depending on the aggregation chosen above.
 
-## Scatterplot
+## Scatter Plot
 
 *Supported on Screenboards and Timeboards*
 
-The Scatterplot visualization allows you to graph a chosen scope over 2 different metrics with their respective aggregation:
+The scatter plot visualization allows you to graph a chosen scope over 2 different metrics with their respective aggregation:
 
-Select a metric and an aggregation for the X vs. the Y axis, then define the scope for each point of the Scatterplot e.g. `host`, `service`, `app`, `region`...
+* Select a metric and an aggregation for the X and Y axis.
+* Define the scope for each point of the scatter plot, such as `host`, `service`, `app`, `region`, etc.
+* Enable a color-by tag (optional).
+* Set X and Y axis controls (optional).
 
-**Note**: You can choose to enable a color-by tag, e.g. `team`.
+**Example graph**:
 
-{{< img src="graphing/dashboards/widgets/scatterplot.png" alt="Heatmap" responsive="true" style="width:80%;">}}
+{{< img src="graphing/dashboards/widgets/scatterplot.png" alt="Scatter Plot" responsive="true" style="width:80%;">}}
 
-## Heatmap
+## Heat Map
 *Supported on Screenboards and Timeboards*
 
-The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square is.
+The heat map visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square is.
 
-{{< img src="graphing/dashboards/widgets/references-graphing-heatmap-example.png" alt="Heatmap" responsive="true" style="width:80%;">}}
+{{< img src="graphing/dashboards/widgets/references-graphing-heatmap-example.png" alt="Heat Map" responsive="true" style="width:80%;">}}
 
 ## Distribution
 *Supported on Screenboards and Timeboards*
 
-The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the Heatmap, Distribution's x-axis is the quantity rather than time.
+The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the heat map, distribution's x-axis is the quantity rather than time.
 
 {{< img src="graphing/dashboards/widgets/references-graphing-distribution-example.png" alt="Distribution" responsive="true" style="width:80%;">}}
 
-## Toplist
+## Top List
 *Supported on Screenboards and Timeboards*
 
-The Toplist visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc.
+The top list visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc.
 
-{{< img src="graphing/dashboards/widgets/references-graphing-toplist-example.png" alt="TopList" responsive="true" style="width:80%;">}}
+{{< img src="graphing/dashboards/widgets/references-graphing-toplist-example.png" alt="Top List" responsive="true" style="width:80%;">}}
 
 ## Change
 *Supported on Screenboards and Timeboards*
@@ -204,12 +207,12 @@ The Change graph shows you the change in a value over the time period chosen.
 
 {{< img src="graphing/dashboards/widgets/references-graphing-change-example.png" alt="Change graph" responsive="true" style="width:80%;">}}
 
-## Hostmap
+## Host Map
 *Supported on Screenboards and Timeboards*
 
-The Hostmap graphs any metric for any subset of hosts on the same hostmap visualization available from the main [Infrastructure Hostmap][8] menu.
+The host map graphs any metric for any subset of hosts on the same host map visualization available from the main [Infrastructure Host Map][8] menu.
 
-{{< img src="graphing/dashboards/widgets/references-graphing-hostmap-example.png" alt="Hostmap" responsive="true" >}}
+{{< img src="graphing/dashboards/widgets/references-graphing-hostmap-example.png" alt="Host Map" responsive="true" >}}
 
 ## Free Text
 *Supported on Screenboards only*
