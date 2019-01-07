@@ -17,7 +17,7 @@ further_reading:
 ---
 
 Support for Datadog APM has been included in Envoy.
-It is available in the `envoyproxy/envoy:latest` docker container, and is included in the upcoming 1.9.0 release.
+It is available in the `envoyproxy/envoy:latest` docker container, and is included in the [1.9.0 release][1].
 
 ## Enabling Datadog APM
 
@@ -151,6 +151,18 @@ admin:
       port_value: 8001
 ```
 
+**Note**: If you are using Envoy's `dog_statsd` configuration to report metrics, you can _exclude_ activity from the `datadog_agent` cluster with this additional configuration.
+
+```yaml
+stats_config:
+  stats_matcher:
+    exclusion_list:
+      patterns:
+      - prefix: "cluster.datadog_agent."
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/envoyproxy/envoy/releases/tag/v1.9.0
