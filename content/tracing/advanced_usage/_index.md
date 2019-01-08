@@ -1451,7 +1451,7 @@ If logs are already JSON formatted, there should be nothing left to do.
 [See our Java logging documentation][2] to add those two identifiers in raw logs or to learn how to log in JSON.
 
 [1]: https://logback.qos.ch/manual/mdc.html
-[2]: https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#configure-your-logger
+[2]: /logs/languages/java/?tab=log4j#configure-your-logger
 {{% /tab %}}
 {{% tab "Python" %}}
 Getting the required information needed for logging is easy:

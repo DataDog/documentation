@@ -2,7 +2,7 @@
 title: PHP log collection
 kind: documentation
 aliases:
-  - /logs/languages/php
+  - /logs/log_collection/php
 further_reading:
 - link: "/logs/processing"
   tag: "Documentation"
@@ -307,12 +307,12 @@ CakeLog::config('debug', array(
 ));
 ```
 
-[1]: /logs/log_collection/php/#symfony-v2-v3
-[2]: /logs/log_collection/php/#ppi
-[3]: /logs/log_collection/php/#laravel
-[4]: /logs/log_collection/php/#silex
-[5]: /logs/log_collection/php/#lumen
-[6]: /logs/log_collection/php/#cakephp
+[1]: /logs/languages/php/#symfony-v2-v3
+[2]: /logs/languages/php/#ppi
+[3]: /logs/languages/php/#laravel
+[4]: /logs/languages/php/#silex
+[5]: /logs/languages/php/#lumen
+[6]: /logs/languages/php/#cakephp
 {{% /tab %}}
 {{% tab "PHP Symfony" %}}
 
@@ -458,7 +458,7 @@ logs:
 3. [Stream generated JSON file to Datadog][1]
 
 
-[1]: /logs/log_collection
+[1]: /agent/logs
 {{% /tab %}}
 {{% tab "PHP Zend-Log" %}}
 
@@ -566,7 +566,7 @@ If you want to develop yours, [refer the Zend documentation][3].
 
 
 [1]: https://getcomposer.org
-[2]: /logs/log_collection
+[2]: /agent/logs
 [3]: https://docs.zendframework.com/zend-log/processors
 {{% /tab %}}
 {{< /tabs >}}

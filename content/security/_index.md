@@ -59,7 +59,7 @@ Logs consist of messages collected [by the Agent or by integrations][10], and as
 [7]: /graphing
 [8]: /tracing/visualization
 [9]: /security/tracing
-[10]: /logs/log_collection
+[10]: /agent/logs
 [11]: /security/logs
 [12]: /graphing/infrastructure/process
 [13]: /security/other

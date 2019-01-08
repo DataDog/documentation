@@ -3,10 +3,10 @@ title: I have a custom log file with heightened read-permissions; how do I send 
 kind: faq
 disable_toc: true
 further_reading:
-- link: "logs/log_collection"
+- link: "agent/logs"
   tag: "Documentation"
   text: "Learn how to collect your logs"
-- link: "/logs/log_collection"
+- link: "agent/logs"
   tag: "Documentation"
   text: "How to Send Logs to Datadog via External Log Shippers?"
 - link: "logs/explorer"

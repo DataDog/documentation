@@ -57,6 +57,7 @@ languages:
           url: "agent/"
           pre: "nav_agent"
           weight: 40
+
         ## Basic Agent usage
         - identifier: customnav_agentnav_basic_usage
           name: "Basic Agent Usage"
@@ -128,6 +129,13 @@ languages:
         - identifier: customnav_tracingnav_setup
           name: "APM"
           url: "agent/apm/"
+          weight: 12
+          parent: menu_references_agent
+
+        ## Logs - Setup basic
+        - identifier: customnav_logs_setup
+          name: "Logs"
+          url: "agent/logs/"
           weight: 13
           parent: menu_references_agent
 
@@ -790,63 +798,58 @@ languages:
           weight: 90
 
         # Log collection
-        - identifier: customnav_lognav_collection
-          name: "Log Collection & Integrations"
-          url: "logs/log_collection/"
+        - identifier: customnav_lognav_languages
+          name: "Languages Log Collection"
+          url: "logs/languages/"
           weight: 20
           parent: menu_references_logs
-        - identifier: customnav_lognav_aws
-          name: "AWS"
-          url: "integrations/amazon_web_services/#log-collection"
-          weight: 210
-          parent: customnav_lognav_collection
         - identifier: docker_log_collection
           name: "Docker"
-          url: "logs/log_collection/docker"
+          url: "logs/languages/docker"
           weight: 220
-          parent: customnav_lognav_collection
+          parent: customnav_lognav_languages
         - identifier: customnav_lognav_csharp
           name: "Csharp"
-          url: "logs/log_collection/csharp/"
+          url: "logs/languages/csharp/"
           weight: 230
-          parent: customnav_lognav_collection
+          parent: customnav_lognav_languages
         - identifier: customnav_lognav_go
           name: "Go"
-          url: "logs/log_collection/go/"
+          url: "logs/languages/go/"
           weight: 240
-          parent: customnav_lognav_collection
+          parent: customnav_lognav_languages
         - identifier: customnav_lognav_java
           name: "Java"
-          url: "logs/log_collection/java/"
+          url: "logs/languages/java/"
           weight: 250
-          parent: customnav_lognav_collection
+          parent: customnav_lognav_languages
         - identifier: customnav_lognav_nodejs
           name: "Nodejs"
-          url: "logs/log_collection/nodejs/"
+          url: "logs/languages/nodejs/"
           weight: 260
-          parent: customnav_lognav_collection
+          parent: customnav_lognav_languages
         - identifier: customnav_lognav_php
           name: "PHP"
-          url: "logs/log_collection/php/"
+          url: "logs/languages/php/"
           weight: 270
-          parent: customnav_lognav_collection
+          parent: customnav_lognav_languages
         - identifier: customnav_lognav_python
           name: "Python"
-          url: "logs/log_collection/python/"
+          url: "logs/languages/python/"
           weight: 280
-          parent: customnav_lognav_collection
+          parent: customnav_lognav_languages
         - identifier: customnav_lognav_ruby
           name: "Ruby"
-          url: "logs/log_collection/ruby/"
+          url: "logs/languages/ruby/"
           weight: 290
-          parent: customnav_lognav_collection
+          parent: customnav_lognav_languages
 
 
         - identifier: customnav_lognav_other
           name: "Other Integrations"
           url: "integrations/#cat-log-collection"
           weight: 299
-          parent: customnav_lognav_collection
+          parent: customnav_lognav_languages
 
         # LOGS - Processing
         - identifier: customnav_lognav_processing
@@ -1314,44 +1317,15 @@ languages:
         - identifier: customnav_tracingnav_setup
           name: "APM"
           url: "agent/apm/"
-          weight: 13
+          weight: 12
           parent: menu_references_agent
 
-        - identifier: customnav_tracingnav_java
-          name: "Java"
-          url: "agent/apm/java/"
-          weight: 1520
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_python
-          name: "Python"
-          url: "agent/apm/python/"
-          weight: 1530
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_ruby
-          name: "Ruby"
-          url: "agent/apm/ruby/"
-          weight: 1540
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_go
-          name: "Go"
-          url: "agent/apm/go/"
-          weight: 1550
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_javascript
-          name: "Node.js"
-          url: "agent/apm/nodejs/"
-          weight: 1560
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_dotnet
-          name: ".NET"
-          url: "agent/apm/dotnet/"
-          weight: 1570
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_php
-          name: "PHP"
-          url: "agent/apm/php/"
-          weight: 1580
-          parent: customnav_tracingnav_setup
+        ## Logs - Setup basic
+        - identifier: customnav_logs_setup
+          name: "Logs"
+          url: "agent/logs/"
+          weight: 13
+          parent: menu_references_agent
 
         ## Docker
 
@@ -1968,63 +1942,58 @@ languages:
           weight: 90
 
         # Log collection
-        - identifier: customnav_lognav_collection
-          name: "Collecte de logs"
-          url: "logs/log_collection/"
+        - identifier: customnav_lognav_languages
+          name: "Languages: collecte de logs"
+          url: "logs/languages/"
           weight: 20
           parent: menu_references_logs
-        - identifier: customnav_lognav_aws
-          name: "AWS"
-          url: "integrations/amazon_web_services/#log-collection"
-          weight: 210
-          parent: customnav_lognav_collection
         - identifier: docker_log_collection
           name: "Docker"
-          url: "logs/log_collection/docker"
+          url: "logs/languages/docker"
           weight: 220
-          parent: customnav_lognav_collection
+          parent: customnav_lognav_languages
         - identifier: customnav_lognav_csharp
           name: "Csharp"
-          url: "logs/log_collection/csharp/"
+          url: "logs/languages/csharp/"
           weight: 230
-          parent: customnav_lognav_collection
+          parent: customnav_lognav_languages
         - identifier: customnav_lognav_go
           name: "Go"
-          url: "logs/log_collection/go/"
+          url: "logs/languages/go/"
           weight: 240
-          parent: customnav_lognav_collection
+          parent: customnav_lognav_languages
         - identifier: customnav_lognav_java
           name: "Java"
-          url: "logs/log_collection/java/"
+          url: "logs/languages/java/"
           weight: 250
-          parent: customnav_lognav_collection
+          parent: customnav_lognav_languages
         - identifier: customnav_lognav_nodejs
           name: "Nodejs"
-          url: "logs/log_collection/nodejs/"
+          url: "logs/languages/nodejs/"
           weight: 260
-          parent: customnav_lognav_collection
+          parent: customnav_lognav_languages
         - identifier: customnav_lognav_php
           name: "PHP"
-          url: "logs/log_collection/php/"
+          url: "logs/languages/php/"
           weight: 270
-          parent: customnav_lognav_collection
+          parent: customnav_lognav_languages
         - identifier: customnav_lognav_python
           name: "Python"
-          url: "logs/log_collection/python/"
+          url: "logs/languages/python/"
           weight: 280
-          parent: customnav_lognav_collection
+          parent: customnav_lognav_languages
         - identifier: customnav_lognav_ruby
           name: "Ruby"
-          url: "logs/log_collection/ruby/"
+          url: "logs/languages/ruby/"
           weight: 290
-          parent: customnav_lognav_collection
+          parent: customnav_lognav_languages
 
 
         - identifier: customnav_lognav_other
           name: "Autres Intégrations"
           url: "integrations/#cat-log-collection"
           weight: 299
-          parent: customnav_lognav_collection
+          parent: customnav_lognav_languages
 
         # LOGS - Subnav start
         - identifier: customnav_lognav_explore

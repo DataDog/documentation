@@ -4,9 +4,8 @@ kind: Documentation
 description: "Configure your Datadog Agent to gather logs from your host, containers & services."
 aliases:
     - /guides/logs/
-    - /agent/logs/
 further_reading:
-- link: "logs/log_collection"
+- link: "agent/logs"
   tag: "Documentation"
   text: "Configure your Datadog Agent to gather logs from your host, containers, and services."
 - link: "logs/processing"
@@ -136,14 +135,14 @@ Your logs are collected and centralized into the [Log Explorer][3] view. You can
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_collection
+[1]: /agent/logs
 [2]: /logs/processing
 [3]: /logs/explore
 [4]: /logs/explorer/analytics
 [5]: /graphing/dashboards/widgets/#timeseries
 [6]: /monitors/monitor_types/log
-[7]: /logs/log_collection/?tab=tailexistingfiles#how-to-get-the-most-of-your-application-logs
-[8]: /logs/log_collection/#getting-started-with-the-agent
+[7]: /agent/logs/?tab=tailexistingfiles#how-to-get-the-most-of-your-application-logs
+[8]: /agent/logs/#getting-started-with-the-agent
 [9]: /integrations/rsyslog
 [10]: /integrations/syslog_ng
 [11]: /integrations/nxlog
@@ -152,12 +151,12 @@ Your logs are collected and centralized into the [Log Explorer][3] view. You can
 [14]: /logs/processing/parsing
 [15]: /logs/explorer/?tab=facets#setup
 [16]: /integrations/#cat-log-collection
-[17]: /logs/log_collection/#tail-existing-files
-[18]: /logs/log_collection/#stream-logs-through-tcp-udp
-[19]: /logs/log_collection/#filter-logs
-[20]: /logs/log_collection/#scrub-sensitive-data-in-your-logs
-[21]: /logs/log_collection/#multi-line-aggregation
-[22]: /logs/log_collection/docker
+[17]: /agent/logs/#tail-existing-files
+[18]: /agent/logs/#stream-logs-through-tcp-udp
+[19]: /agent/logs/#filter-logs
+[20]: /agent/logs/#scrub-sensitive-data-in-your-logs
+[21]: /agent/logs/#multi-line-aggregation
+[22]: /logs/languages/docker
 [23]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
 [24]: /integrations/amazon_web_services/#log-collection
 [25]: /integrations/amazon_web_services/#enable-logging-for-your-aws-service

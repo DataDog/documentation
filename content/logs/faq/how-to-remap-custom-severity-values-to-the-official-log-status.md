@@ -3,7 +3,7 @@ title: How to remap custom severity values to the official log status?
 kind: faq
 disable_toc: true
 further_reading:
-- link: "logs/log_collection/#custom-log-collection"
+- link: "agent/logs/#custom-log-collection"
   tag: "Documentation"
   text: "Learn more about Log collection with the Agent"
 - link: "logs/processing"

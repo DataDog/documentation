@@ -3,7 +3,7 @@ title: Is the Datadog Agent losing logs?
 kind: faq
 disable_toc: true
 further_reading:
-- link: "/logs/log_collection"
+- link: "agent/logs"
   tag: "Documentation"
   text: "Learn how to collect your logs"
 - link: "/logs/explorer"

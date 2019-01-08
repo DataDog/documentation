@@ -3,7 +3,7 @@ title: Can the Datadog Agent be used to send logs only?
 kind: faq
 disable_toc: true
 further_reading:
-- link: "logs/log_collection/#custom-log-collection"
+- link: "agent/logs/#custom-log-collection"
   tag: "Documentation"
   text: "Learn more about Log collection with the Agent"
 - link: "logs/processing"
@@ -40,7 +40,7 @@ The Agent sends metrics and other payloads to Datadog. To make sure that the Age
 
 
 [1]: /agent/faq/agent-configuration-files/?tab=agentv6
-[2]: /logs/log_collection
+[2]: /agent/logs
 [3]: /agent/faq/agent-commands/#restart-the-agent
 {{% /tab %}}
 

@@ -1,11 +1,12 @@
 ---
-title: Log Collection & Integrations
+title: Logs Setup
 kind: Documentation
 description: "Configure your Datadog Agent to gather logs from your host, containers, and services."
 aliases:
   - /logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
   - /logs/languages
   - /integrations/windows_event_log/
+  - /logs/log_collection
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"
@@ -318,7 +319,7 @@ logs:
 
 When logging stack traces, there are specific attributes that have a dedicated UI display within your Datadog application such as the logger name, the current thread, the error type, and the stack trace itself.
 
-{{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="Stack trace" responsive="true" >}}
+{{< img src="agent/logs/stack_trace.png" style="width:80%;" alt="Stack trace" responsive="true" >}}
 
 To enable these functionalities use the following attribute names:
 

@@ -2,7 +2,7 @@
 title: Go log Collection
 kind: documentation
 aliases:
-  - /logs/languages/go
+  - /logs/log_collection/go
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"

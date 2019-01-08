@@ -2,7 +2,7 @@
 title: C# log collection
 kind: documentation
 aliases:
-  - /logs/languages/csharp
+  - /logs/log_collection/csharp
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"

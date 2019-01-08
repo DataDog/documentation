@@ -30,6 +30,6 @@ For customers using release 6, the Agent can be configured to obfuscate specific
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security
-[2]: /logs/log_collection
-[3]: /logs/log_collection/#filter-logs
-[4]: /logs/log_collection/#scrub-sensitive-data-in-your-logs
+[2]: /agent/logs
+[3]: /agent/logs/#filter-logs
+[4]: /agent/logs/#scrub-sensitive-data-in-your-logs

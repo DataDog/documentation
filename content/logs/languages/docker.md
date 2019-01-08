@@ -3,7 +3,7 @@ title: Docker Log collection
 kind: documentation
 aliases:
   - /logs/docker
-  - /logs/languages/docker/
+  - /logs/log_collection/docker/
 further_reading:
 - link: "logs/explorer"
   tag: "Documentation"

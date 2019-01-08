@@ -1,12 +1,11 @@
 ---
-title: Language instrumentation
+title: Tracing Language instrumentation
 kind: Documentation
 aliases:
     - /tracing/setup
 ---
 
 After you have [installed the Datadog Agent][1], [enabled trace collection][2], and [configured your environment][3], begin tracing by instrumenting your application.
-
 
 {{< whatsnext desc="Select one of the following supported languages to start instrumenting your application:">}}
   {{< nextlink href="tracing/languages/java" tag="Java" >}}Java language instrumentation.{{< /nextlink >}}

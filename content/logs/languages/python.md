@@ -2,7 +2,7 @@
 title: Python log collection
 kind: documentation
 aliases:
-  - /logs/languages/python
+  - /logs/log_collection/python
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"
@@ -144,7 +144,7 @@ Then [Restart the Agent][5] to apply the configuration change.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_collection/python/#configure-the-Datadog-agent
+[1]: /logs/languages/python/#configure-the-Datadog-agent
 [2]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
 [3]: https://github.com/madzak/python-json-logger
 [4]: https://github.com/madzak/python-json-logger#customizing-fields

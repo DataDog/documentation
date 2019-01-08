@@ -2,7 +2,7 @@
 title: Log Collection Troubleshooting Guide
 kind: faq
 further_reading:
-- link: "/logs/log_collection"
+- link: "agent/logs"
   tag: "Documentation"
   text: "Learn how to collect your logs"
 - link: "/logs/explorer"
@@ -120,6 +120,6 @@ config_providers:
 [1]: /logs
 [2]: /help
 [3]: https://codebeautify.org/yaml-validator
-[4]: /logs/log_collection/docker/?tab=containerinstallation#filter-containers
-[5]: /logs/log_collection/docker/?tab=dockerfile#examples
+[4]: /logs/languages/docker/?tab=containerinstallation#filter-containers
+[5]: /logs/languages/docker/?tab=dockerfile#examples
 [6]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
