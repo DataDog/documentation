@@ -727,6 +727,11 @@ languages:
           url: "tracing/getting_further/"
           weight: 40
           parent: menu_references_tracing
+        - identifier: customnav_tracingnav_top_level_span
+          name: "Top-level Span"
+          url: "tracing/getting_further/top_level_span"
+          weight: 405
+          parent: customnav_tracingnav_getting_further
         - identifier: customnav_tracingnav_apdex
           name: "Apdex"
           url: "tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm"
@@ -1907,6 +1912,11 @@ languages:
           url: "tracing/getting_further/"
           weight: 40
           parent: menu_references_tracing
+        - identifier: customnav_tracingnav_top_level_span
+          name: "Top-level Span"
+          url: "tracing/getting_further/top_level_span"
+          weight: 405
+          parent: customnav_tracingnav_getting_further  
         - identifier: customnav_tracingnav_apdex
           name: "Apdex"
           url: "tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm"

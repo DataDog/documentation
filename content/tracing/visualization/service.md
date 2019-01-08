@@ -28,15 +28,7 @@ Consult on this page:
 * [Out of the box graphs](#out-of-the-box-graphs) 
 * [Resources associated to this service][2] 
 
-## Service Monitor
-
-Datadog proposes a list of monitors depending on your service type: 
-
-{{< img src="tracing/visualization/service/service_monitors.png" alt="Service Monitors" responsive="true" style="width:90%;">}}
-
-Enable them directly or create your own [APM monitors][3].
-
-**Note**: Tag any monitor with `service:<SERVICE_NAME>` to attach it to an APM service.  
+All Services statistics for errors, throughput, and latency are calculated based on [resources][3] that match a [single top-level span name][4].
 
 ## Out of the box graphs
 
@@ -47,7 +39,7 @@ Datadog provides out of the box graphs for any given Service:
     *  The amount of **Requests per second**
 * Latency -  Choose to display:
     *  The Avg/p75/p90/p95/p99/Max latency of your traced requests 
-    *  The **Apdex score** for web services; [learn more about Apdex][4]
+    *  The **Apdex score** for web services; [learn more about Apdex][5]
 * Error - Choose to display:
     * The **Total amount of errors** 
     * The amount of **Errors per second** 
@@ -56,11 +48,14 @@ Datadog provides out of the box graphs for any given Service:
 
 {{< img src="tracing/visualization/service/out_of_the_box_service_graph.png" alt="Out of the bow service graphs" responsive="true" style="width:90%;">}}
 
-**Note**: Use the *cogs* icon to display all options available for any given graph.
+**Note**: 
+
+- Use the *cogs* icon to display all options available for any given graph.
+- Metrics from those graphs can be queried based on their respective [metric namespace][6]. 
 
 ### Export to Timeboard
 
-On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [Timeboard][5]:
+On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [Timeboard][7]:
 
 {{< img src="tracing/visualization/service/save_to_timeboard.png" alt="Save to timeboard" responsive="true" style="width:40%;">}}
 
@@ -74,6 +69,16 @@ Use the top right selector of this graph to zoom on a given percentile of latenc
 
 {{< img src="tracing/visualization/service/latency_distribution_selector.png" alt="latency distribution selector" responsive="true" style="width:20%;">}}
 
+## Service Monitor
+
+Datadog proposes a list of monitors depending on your service type: 
+
+{{< img src="tracing/visualization/service/service_monitors.png" alt="Service Monitors" responsive="true" style="width:90%;">}}
+
+Enable them directly or create your own [APM monitors][8].
+
+**Note**: Tag any monitor with `service:<SERVICE_NAME>` to attach it to an APM service.  
+
 ## Resources
 
 See the list of resources associated with your service. Resources are particular actions for your services (typically individual endpoints or queries). Read more about resources in [Getting Started with APM][1]. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that the these metric columns are configurable (see image below).
@@ -81,6 +86,12 @@ See the list of resources associated with your service. Resources are particular
 {{< img src="tracing/visualization/service/resources.png" alt="Resources" responsive="true" style="width:90%;">}}
 
 [Refer to the dedicated resource documentation to learn more][2].
+
+### Viewing Stats for Secondary Operations
+
+To ensure that all traces are being sent to Datadog correctly outside of any instrumentation, you can view your resources by additional span names that are considered a secondary operation with a drop-down menu, however these are not used to calculate service-level stats. This doesn't change the Service statistics.
+
+{{< img src="tracing/visualization/service/secondary_operations.gif" alt="Secondary operations" responsive="true" style="width:90%;">}}
 
 ### Filtering the resources list
 Filter your resources list with a query for basic text filtering:
@@ -105,6 +116,9 @@ Choose what to display in your resources list:
 
 [1]: /tracing/visualization
 [2]: /tracing/visualization/resource
-[3]: /monitors/monitor_types/apm
-[4]: /tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm
-[5]: /graphing/dashboards/timeboard
+[3]: /tracing/visualization/resource
+[4]: /tracing/getting_further/top_level_span
+[5]: /tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm
+[6]: /tracing/getting_further/metrics_namespace
+[7]: /graphing/dashboards/timeboard
+[8]: /monitors/monitor_types/apm

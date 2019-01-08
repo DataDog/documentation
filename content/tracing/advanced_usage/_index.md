@@ -283,7 +283,7 @@ Add tags directly to a span object by calling `Span::SetTag`. For example:
 
 ```cpp
 auto tracer = ...
-auto span = tracer->StartSpan("operation_name");
+auto span = tracer->StartSpan("<TOP_LEVEL_SPAN>");
 span->SetTag("key must be string", "Values are variable types");
 span->SetTag("key must be string", 1234);
 ```
@@ -625,10 +625,10 @@ To manually instrument your code, install the tracer as in the setup examples, a
 ```cpp
 {
   // Create a root span.
-  auto root_span = tracer->StartSpan("operation_name");
+  auto root_span = tracer->StartSpan("<TOP_LEVEL_SPAN>");
   // Create a child span.
   auto child_span = tracer->StartSpan(
-      "operation_name",
+      "<TOP_LEVEL_SPAN>",
       {opentracing::ChildOf(&root_span->context())});
   // Spans can be finished at a specific time ...
   child_span->Finish();
@@ -709,7 +709,7 @@ class InstrumentedClass {
          */
         Tracer tracer = GlobalTracer.get();
 
-        Scope scope = tracer.buildSpan("<OPERATION_NAME>").startActive(true);
+        Scope scope = tracer.buildSpan("<TOP_LEVEL_SPAN>").startActive(true);
         try {
             scope.span().setTag(DDTags.SERVICE_NAME, "<SERVICE_NAME>");
 
@@ -738,7 +738,7 @@ class InstrumentedClass {
     void method0() {
         Tracer tracer = GlobalTracer.get();
 
-        try (Scope scope = tracer.buildSpan("<OPERATION_NAME>").startActive(true)) {
+        try (Scope scope = tracer.buildSpan("<TOP_LEVEL_SPAN>").startActive(true)) {
             scope.span().setTag(DDTags.SERVICE_NAME, "<SERVICE_NAME>");
             Thread.sleep(1000);
         }
@@ -838,7 +838,7 @@ def init_tracer(service_name):
     return tracer
 
 def my_operation():
-  span = opentracing.tracer.start_span('<OPERATION_NAME>')
+  span = opentracing.tracer.start_span('<TOP_LEVEL_SPAN>')
   span.set_tag('<TAG_KEY>', '<TAG_VALUE>')
   time.sleep(0.05)
   span.finish()
@@ -921,11 +921,13 @@ const tracer = opentracing.globalTracer()
 The following tags are available to override Datadog specific options:
 
 * `service.name`: The service name to be used for this span. The service name from the tracer will be used if this is not provided.
-* `resource.name`: The resource name to be used for this span. The operation name will be used if this is not provided.
+* `resource.name`: The resource name to be used for this span. The [top level span][3] is used if this is not provided.
 * `span.type`: The span type to be used for this span. Will fallback to `custom` if not provided.
+
 
 [1]: https://doc.esdoc.org/github.com/opentracing/opentracing-javascript
 [2]: https://datadog.github.io/dd-trace-js
+[3]: /tracing/getting_further/top_level_span
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -1179,7 +1181,7 @@ void example() {
   std::unordered_map<std::string, std::string> headers;
   HTTPHeadersCarrier carrier(headers);
 
-  auto span = tracer->StartSpan("operation_name");
+  auto span = tracer->StartSpan("<TOP_LEVEL_SPAN>");
   tracer->Inject(span->context(), carrier);
   // `headers` now populated with the headers needed to propagate the span.
 }
@@ -1389,9 +1391,9 @@ Priority sampling is enabled by default, and can be disabled in the TracerOption
 
 ```cpp
 auto tracer = ...
-auto span = tracer->StartSpan("operation_name");
+auto span = tracer->StartSpan("<TOP_LEVEL_SPAN>");
 span->SetTag("sampling.priority", 1); // Keep this span.
-auto another_span = tracer->StartSpan("operation_name");
+auto another_span = tracer->StartSpan("<TOP_LEVEL_SPAN>");
 another_span->SetTag("sampling.priority", 0); // Discard this span.
 ```
 

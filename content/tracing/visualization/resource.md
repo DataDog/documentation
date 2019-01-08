@@ -41,11 +41,14 @@ Datadog provides out of the box graphs for any given resource:
 
 {{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Out of the bow resource graphs" responsive="true" style="width:90%;">}}
 
-**Note**: Use the *cogs* icon to display all options available for any given graph.
+**Note**: 
+
+- Use the *cogs* icon to display all options available for any given graph.
+- Metrics from those graphs can be queried based on their respective [metric namespace][2]. 
 
 ### Export to Timeboard
 
-On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [Timeboard][2]:
+On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [Timeboard][3]:
 
 {{< img src="tracing/visualization/resource/save_to_timeboard.png" alt="Save to timeboard" responsive="true" style="width:40%;">}}
 
@@ -65,7 +68,7 @@ Zoom on this graph to filter corresponding traces.
 
 Consult the list of traces associated with this resource. Filter/sort this list to see fast/slow and error/non-error traces:  
 
-[Refer to the dedicated trace documentation to learn more][3].
+[Refer to the dedicated trace documentation to learn more][4].
 
 {{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list" responsive="true" style="width:90%;">}}
 
@@ -74,5 +77,6 @@ Consult the list of traces associated with this resource. Filter/sort this list 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/visualization
-[2]: /graphing/dashboards/timeboard
-[3]: /tracing/visualization/trace
+[2]: 
+[3]: /graphing/dashboards/timeboard
+[4]: /tracing/visualization/trace

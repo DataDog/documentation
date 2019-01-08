@@ -94,15 +94,15 @@ For more information about the Datadog Agent, see the [dedicated doc page][12] o
 ### Trace search
 To enable trace search, [services][14] must be flowing into Datadog. Once services are set up, navigate to the [Trace Search & Analytics docs page][15] to find a list of each of the services running within your infrastructure.
 
-In Datadog, every automatically instrumented service has an operation name, which is used to set the type of request being traced. For example, if you're tracing a Python Flask application, you might have a `flask.request` as your operation name. In a Node application using Express, you would have `express.request` ask your operation name.
+In Datadog, every automatically instrumented service has an [top-level span][16], which is used to set the type of request being traced. For example, if you're tracing a Python Flask application, you might have a `flask.request` as your [top-level span][16]. In a Node application using Express, you would have `express.request` ask your [top-level span][16].
 
-Replace both the `<SERVICE_NAME>` and `<OPERATION_NAME>` in your configuration with the service name and operation name of the traces you want to add to Trace Search.
+Replace both the `<SERVICE_NAME>` and `<TOP_LEVEL_SPAN>` in your configuration with the service name and [top-level span][16] of the traces you want to add to Trace Search.
 
-For example, if you have a Python service named `python-api`, and it's running Flask (operation name `flask.request`), your `<SERVICE_NAME>` would be `python-api`, and your `<OPERATION_NAME>` would be `flask.request`.
+For example, if you have a Python service named `python-api`, and it's running Flask ([top-level span][16] `flask.request`), your `<SERVICE_NAME>` would be `python-api`, and your `<TOP_LEVEL_SPAN>` would be `flask.request`.
 
 The [Trace Search & Analytics docs][15] page populates with a list of your services and resource names available for usage in Trace Search:
 
-1. Select the `environment` and `services` to extract [APM events][16] from.
+1. Select the `environment` and `services` to extract [APM events][17] from.
 2. Update your Datadog Agent configuration (based on Agent version) with the information below:
 
 {{< tabs >}}
@@ -112,8 +112,8 @@ In `datadog.yaml`, add `analyzed_spans` under `apm_config`. For example:
 ```yaml
 apm_config:
   analyzed_spans:
-    <SERVICE_NAME_1>|<OPERATION_NAME_1>: 1
-    <SERVICE_NAME_2>|<OPERATION_NAME_2>: 1
+    <SERVICE_NAME_1>|<TOP_LEVEL_SPAN_1>: 1
+    <SERVICE_NAME_2>|<TOP_LEVEL_SPAN_2>: 1
 ```
 
 {{% /tab %}}
@@ -122,8 +122,8 @@ In `datadog.conf`, add `[trace.analyzed_spans]`. For example:
 
 ```
 [trace.analyzed_spans]
-<SERVICE_NAME_1>|<OPERATION_NAME_1>: 1
-<SERVICE_NAME_2>|<OPERATION_NAME_2: 1
+<SERVICE_NAME_1>|<TOP_LEVEL_SPAN_1>: 1
+<SERVICE_NAME_2>|<TOP_LEVEL_SPAN_2>: 1
 ```
 
 {{% /tab %}}
@@ -131,7 +131,7 @@ In `datadog.conf`, add `[trace.analyzed_spans]`. For example:
 Add `DD_APM_ANALYZED_SPANS` to the Agent container environment (compatible with version 12.6.5250+). For example:
 
 ```
-DD_APM_ANALYZED_SPANS="<SERVICE_NAME_1>|<OPERATION_NAME_1>=1,<SERVICE_NAME_2>|<OPERATION_NAME_2>=1"
+DD_APM_ANALYZED_SPANS="<SERVICE_NAME_1>|<TOP_LEVEL_SPAN_1>=1,<SERVICE_NAME_2>|<TOP_LEVEL_SPAN_2>=1"
 ```
 
 {{% /tab %}}
@@ -142,7 +142,7 @@ DD_APM_ANALYZED_SPANS="<SERVICE_NAME_1>|<OPERATION_NAME_1>=1,<SERVICE_NAME_2>|<O
 
 There are several dimensions available to scope an entire Datadog APM application. These include aggregate statistics (such as requests/second, latency, error rate, Apdex score) and visible traces. These dimensions are set up through primary tags that allow you to get an even finer view of your application's behavior. Use cases for primary tags include environment, availability zone, datacenter, etc.
 
-Primary tags must follow a different set of rules from those of conventional [Datadog tags][17].
+Primary tags must follow a different set of rules from those of conventional [Datadog tags][18].
 
 ### Setup
 #### Environment 
@@ -154,7 +154,7 @@ There are several ways to specify an environment when reporting data:
   Use a host tag with the format `env:<ENVIRONMENT>` to tag all traces from that Agent accordingly.
 
 2. Agent configuration:  
-  Override the default tag used by the Agent in [the Agent configuration file][18]. This tags all traces coming through the Agent, overriding the host tag value.
+  Override the default tag used by the Agent in [the Agent configuration file][19]. This tags all traces coming through the Agent, overriding the host tag value.
 
     ```
     apm_config:
@@ -162,7 +162,7 @@ There are several ways to specify an environment when reporting data:
     ```
 
 3. Per trace:  
-  When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the Agent configuration and the host tag's value (if any). Consult the [trace tagging documentation][19] to learn how to assign a tag to your traces.
+  When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the Agent configuration and the host tag's value (if any). Consult the [trace tagging documentation][20] to learn how to assign a tag to your traces.
 
 ##### Viewing Data by Environment
 
@@ -172,7 +172,7 @@ Environments appear at the top of APM pages. Use the dropdown to scope the data 
 
 ### Add a second primary tag in Datadog
 
-If you added a tag other than `env:<ENVIRONMENT>` to your traces, it can be set as a primary tag along with the environment tag. Go to the [APM Settings][20] page to define, change, or remove your primary tags. 
+If you added a tag other than `env:<ENVIRONMENT>` to your traces, it can be set as a primary tag along with the environment tag. Go to the [APM Settings][21] page to define, change, or remove your primary tags. 
 
 Note:
 
@@ -209,8 +209,9 @@ Primary tags appear at the top of APM pages. Use these selectors to slice the da
 [13]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [14]: https://app.datadoghq.com/apm/services
 [15]: https://app.datadoghq.com/apm/docs/trace-search
-[16]: /tracing/visualization/search/#apm-events
-[17]: /tagging
-[18]: /agent/faq/agent-configuration-files/?tab=agentv6
-[19]: /tagging/assigning_tags/#traces
-[20]: https://app.datadoghq.com/apm/settings
+[16]: /tracing/getting_further/top_level_span
+[17]: /tracing/visualization/search/#apm-events
+[18]: /tagging
+[19]: /agent/faq/agent-configuration-files/?tab=agentv6
+[20]: /tagging/assigning_tags/#traces
+[21]: https://app.datadoghq.com/apm/settings
