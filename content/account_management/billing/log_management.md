@@ -1,11 +1,26 @@
 ---
-title: Track your log events
+title: Log management billing
 kind: faq
 ---
 
+## Overages 
+
+With Datadog log management, you define a monthly commitment on indexed log events. However, during troubling times the number of logs can spike and you may go above your commitment. Because it's important to keep visibility on your infrastructure health, you are not limited to your monthly commitment.
+
+Since commitments are monthly, if you over-generate log events for 1 day it may not cause overages if your average daily log consumption is close to expectations for your commitment.
+
+### Pricing
+
+At the end of the month, we compute the total number of log events that have been indexed:
+
+- If you are below commitment, your bill stays the same.
+- If you over-consume, we subtract the committed amount and the **overages** are charged with a 50% premium.
+
+## Tracking log events
+
 There are several places where you can see the number of log events you have sent to Datadog.
 
-1. On the [Usage page][1], the last column reflects the hourly number of indexed log events:
+1. On the [Usage page][1], there is a column which shows the hourly number of indexed log events:
 
     {{< img src="account_management/billing/log-events01.png" alt="Log Events" responsive="true">}}
 
@@ -22,9 +37,10 @@ You can also use facets to see log count by any attribute or tag defined by your
 ## Troubleshooting
 For technical questions, contact [Datadog support][4].
 
-For billing questions, contact your Customer Success Manager.
+For billing questions, contact your [Customer Success][5] Manager.
 
 [1]: https://app.datadoghq.com/account/usage/hourly
 [2]: https://app.datadoghq.com/logs/pipelines
 [3]: https://app.datadoghq.com/logs
 [4]: /help
+[5]: mailto:success@datadoghq.com

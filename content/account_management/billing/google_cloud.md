@@ -3,13 +3,13 @@ title: Google Cloud integration billing
 kind: faq
 ---
 
-## Billing impact
+## Overview
 
 Datadog bills for hosts running the Agent and all GCE instances picked up by the Google Cloud integration. You are not billed twice if you are running the Agent on a GCE instance picked up by the Google Cloud integration.
 
 Other Google Cloud resources (CloudSQL, Google App Engine, Pub/Sub, etc.) are not part of monthly billing. **Note**: This could change in the future.
 
-## Metric exclusion
+### Metric exclusion
 
 Use the [Google Cloud integration tile][1] to control your metric collection. Go to the **Configuration** tab and select a project or add a new one. Each project is controlled under **Optionally Limit Metrics Collection to hosts with tag**. Limit metrics by [host tag][2]:
 
@@ -22,9 +22,10 @@ Hosts with a running Agent still display and are included in billing. Using the 
 ## Troubleshooting
 For technical questions, contact [Datadog support][4].
 
-For billing questions, contact your Customer Success Manager.
+For billing questions, contact your [Customer Success][5] Manager.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google_cloud_platform
 [2]: /tagging/using_tags/#integrations
 [3]: /graphing/infrastructure
 [4]: /help
+[5]: mailto:success@datadoghq.com

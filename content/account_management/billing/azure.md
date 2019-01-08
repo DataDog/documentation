@@ -3,13 +3,13 @@ title: Azure integration billing
 kind: faq
 ---
 
-## Billing impact
+## Overview
 
 Datadog bills for all Azure Virtual Machines being monitored in Datadog. These machines are billable regardless of whether the Datadog Agent is installed. You are not billed twice if you are running the Agent on an Azure VM picked up by the Azure integration.
 
 Other Azure resources (Azure SQL, Azure App Services, Azure Redis Cache, etc.) are not part of monthly billing. **Note**: This could change in the future.
 
-## VM exclusion
+### VM exclusion
 
 Use the [Azure integration tile][1] to filter your VMs monitored by Datadog. Go to the **Configuration** tab and edit an existing tenant or add a new one. Each tenant is controlled under **Optionally filter to VMs with tag**. Limit VMs by [host tag][2]:
 
@@ -22,9 +22,10 @@ VMs with a running Agent still display and are included in billing. Using the li
 ## Troubleshooting
 For technical questions, contact [Datadog support][4].
 
-For billing questions, contact your Customer Success Manager.
+For billing questions, contact your [Customer Success][5] Manager.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /tagging/using_tags/#integrations
 [3]: /graphing/infrastructure
 [4]: /help
+[5]: mailto:success@datadoghq.com

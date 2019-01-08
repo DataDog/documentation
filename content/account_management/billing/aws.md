@@ -3,13 +3,13 @@ title: AWS integration billing
 kind: faq
 ---
 
-## Billing impact
+## Overview
 
 Datadog bills for AWS hosts running the Agent and all EC2 instances picked up by the AWS integration. You are not billed twice if you are running the Agent on an EC2 instance picked up by the AWS integration.
 
 Other AWS resources (ELB, EBS, RDS, Dynamo, etc.) are not part of monthly billing and configuration exclusions do not apply. **Note**: This could change in the future.
 
-## Metric exclusion
+### Metric exclusion
 
 Use the [AWS integration tile][1] to control your metric collection. Go to the **Configuration** tab and select an account or add a new one. Each account is controlled under **Optionally limit metrics collection**. Limit metrics by [host tag][2] or per namespace:
 
@@ -22,9 +22,10 @@ Hosts with a running Agent still display and are included in billing. Using the 
 ## Troubleshooting
 For technical questions, contact [Datadog support][4].
 
-For billing questions, contact your Customer Success Manager.
+For billing questions, contact your [Customer Success][5] Manager.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [2]: /tagging/using_tags/#integrations
 [3]: /graphing/infrastructure
 [4]: /help
+[5]: mailto:success@datadoghq.com

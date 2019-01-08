@@ -7,12 +7,10 @@ kind: faq
 This feature is only available to paying customers.
 </div>
 
-## Access
+## Overview
 
-Admin users can access the [Usage][1] page by hovering over their username at the bottom left then navigate to:  
+Admin users can access the [Usage][1] page by hovering over their username at the bottom left, then navigate to:  
 `Plan & Usage`--> `Usage`.
-
-## Available data
 
 The Usage page provides the following information. Tables can be downloaded as CSV files.
 
@@ -75,8 +73,9 @@ This table shows information on your top 500 custom metrics:
 ## Troubleshooting
 For technical questions, contact [Datadog support][3].
 
-For billing questions, contact your Customer Success Manager.
+For billing questions, contact your [Customer Success][4] Manager.
 
 [1]: https://app.datadoghq.com/account/usage/hourly
 [2]: /developers/metrics/custom_metrics
 [3]: /help
+[4]: mailto:success@datadoghq.com
