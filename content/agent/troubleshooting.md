@@ -55,6 +55,7 @@ If you think you might be experiencing issues, follow this checklist first:
 * If using a proxy: Is your [Agent configured for this proxy][3]?
 * Is the Datadog API Key set up in your `datadog.yaml` configuration file [the API Key corresponding to your Datadog platform][4]?
 * Is there only one Datadog Agent running on your host?
+* Did you restart the Datadog Agent after editing a yaml configuration file?
 
 If the answer to all questions above is `yes`, then [run the status command][5] in order to have more details about your Agent and its integrations status, you can also check the [Agent logs][6] directly and enable debug mode to [get more logging from the Agent](#get-more-logging-from-the-agent).
 
