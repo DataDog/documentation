@@ -37,7 +37,7 @@ Each type of widget is described below:
 ## Timeseries
 *Supported on Screenboards and Timeboards*
 
-The Timeseries visualization allows you to show one or more metrics, Log events, or APM events evolution over time. The time window depends on what is selected on the [Timeboard][5] or in the graph on a [Screenboard][6].
+The Timeseries visualization is great for showing one or more metrics, Log events, or APM events over time. The time window depends on what is selected on the [Timeboard][5] or in the graph on a [Screenboard][6].
 Timeseries can be displayed as **lines**, **areas**, and **bars**.
 
 **Note**: Define log Analytics query (still in beta) exactly as in the [Log Explorer][7].
@@ -164,41 +164,26 @@ The Query Value Widget only displays one Value, unlike a timeseries for example,
 
 Let's say you are on a Timeseries and you are currently displaying the past hour, this button allows you to either display the `avg` / `max` / `min` / `avg` / `sum` / `last value` of ALL points that are rendered during that 1 hour range timeframe - depending on the aggregation chosen above.
 
-## Scatter Plot
-
+## Heatmap
 *Supported on Screenboards and Timeboards*
 
-The scatter plot visualization allows you to graph a chosen scope over 2 different metrics with their respective aggregation:
+The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square is.
 
-* Select a metric and an aggregation for the X and Y axis.
-* Define the scope for each point of the scatter plot, such as `host`, `service`, `app`, `region`, etc.
-* Enable a color-by tag (optional).
-* Set X and Y axis controls (optional).
-
-**Example graph**:
-
-{{< img src="graphing/dashboards/widgets/scatterplot.png" alt="Scatter Plot" responsive="true" style="width:80%;">}}
-
-## Heat Map
-*Supported on Screenboards and Timeboards*
-
-The heat map visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square is.
-
-{{< img src="graphing/dashboards/widgets/references-graphing-heatmap-example.png" alt="Heat Map" responsive="true" style="width:80%;">}}
+{{< img src="graphing/dashboards/widgets/references-graphing-heatmap-example.png" alt="Heatmap" responsive="true" style="width:80%;">}}
 
 ## Distribution
 *Supported on Screenboards and Timeboards*
 
-The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the heat map, distribution's x-axis is the quantity rather than time.
+The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the Heatmap, Distribution's x-axis is the quantity rather than time.
 
 {{< img src="graphing/dashboards/widgets/references-graphing-distribution-example.png" alt="Distribution" responsive="true" style="width:80%;">}}
 
-## Top List
+## Toplist
 *Supported on Screenboards and Timeboards*
 
-The top list visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc.
+The Toplist visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc.
 
-{{< img src="graphing/dashboards/widgets/references-graphing-toplist-example.png" alt="Top List" responsive="true" style="width:80%;">}}
+{{< img src="graphing/dashboards/widgets/references-graphing-toplist-example.png" alt="TopList" responsive="true" style="width:80%;">}}
 
 ## Change
 *Supported on Screenboards and Timeboards*
@@ -207,12 +192,12 @@ The Change graph shows you the change in a value over the time period chosen.
 
 {{< img src="graphing/dashboards/widgets/references-graphing-change-example.png" alt="Change graph" responsive="true" style="width:80%;">}}
 
-## Host Map
+## Hostmap
 *Supported on Screenboards and Timeboards*
 
-The host map graphs any metric for any subset of hosts on the same host map visualization available from the main [Infrastructure Host Map][8] menu.
+The Hostmap graphs any metric for any subset of hosts on the same hostmap visualization available from the main [Infrastructure Hostmap][8] menu.
 
-{{< img src="graphing/dashboards/widgets/references-graphing-hostmap-example.png" alt="Host Map" responsive="true" >}}
+{{< img src="graphing/dashboards/widgets/references-graphing-hostmap-example.png" alt="Hostmap" responsive="true" >}}
 
 ## Free Text
 *Supported on Screenboards only*
