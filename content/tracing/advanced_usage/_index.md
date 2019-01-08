@@ -1465,10 +1465,28 @@ This integration for logs works if the log entry includes:
 - `dd.trace_id=%(dd.trace_id)s`
 - `dd.span_id=%(dd.span_id)s`
 
-See our [Python logging documentation][1] for usage examples.
+An example of this in practice with manual instrumentation:
+
+``` python
+from ddtrace import patch_all; patch_all(logging=True)
+import logging
+from ddtrace import tracer
+
+FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
+          '[dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] '
+          '- %(message)s')
+logging.basicConfig(format=FORMAT)
+log = logging.getLogger()
+log.level = logging.INFO
 
 
-[1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#logs-injection
+@tracer.wrap()
+def hello():
+    log.info('Hello, World!')
+
+hello()
+```
+
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
