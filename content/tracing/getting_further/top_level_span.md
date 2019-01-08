@@ -12,18 +12,18 @@ further_reading:
 
 ## Definition 
 
-A top-level span is the entry point into the instrumented resources of a Service. It describes an action that links the resources together and allows you to aggregate service statistics under the same action. For this trace for the service `coffee-house`, the top-level span is `servlet.request` and the coffee-house service metrics will be calculated on resources that have `servlet.request` as the top-level span.
+A top-level span is the entry point into the instrumented resources of a Service. It describes an action that links the resources together and allows you to aggregate service statistics under the same action. 
 
 {{< img src="tracing/product_specs/top_level_span/top_level_span.png" alt="Top level span" responsive="true" style="width:90%;">}}
 
-As an example, a `webapp` service can have multiple endpoints which will be instrumented as resources. These resources will then share the same top-level span as the entry-point into these resources is consistent, i.e. the resources `/user/home` and `/user/new` should both have the same top-level span `web.request`. In different languages a top-level span for a service may look like:
+For the trace above, for the service `coffee-house`, the top-level span is `servlet.request` and the coffee-house service metrics are calculated on resources that have `servlet.request` as the top-level span.
 
+As an other example, a `webapp` service can have multiple endpoints which are instrumented as resources. These resources then share the same top-level span as the entry-point into these resources is consistent, i.e. the resources `/user/home` and `/user/new` should both have the same top-level span `web.request`. In different languages a top-level span for a service may look like:
 
 | Service Type | Top-level span example                                   |
 | --------     | ---------                                                |
 | Web          | `servlet.request`, `flask.request`, `express.request`... |
-| DB           | `mongo.query`, `postgres.query`, `redis.command`         |
-
+| DB           | `mongo.query`, `postgres.query`, `redis.command`...      |
 
 **Note**: When there are multiple top-level spans for a Service the default is determined by the highest request throughput.
 
