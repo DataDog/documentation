@@ -1,4 +1,4 @@
-f---
+---
 title: Infrastructure List
 kind: documentation
 aliases:
