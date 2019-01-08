@@ -115,7 +115,7 @@ Endpoints that can be used to send logs to Datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-To send logs over HTTPs, refer to the [Datadog Log HTTP API documentation][29]
+To send logs over HTTPs, refer to the [Datadog Log HTTP API documentation][29].
 
 ### Reserved attributes
 
