@@ -728,7 +728,7 @@ languages:
           weight: 40
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_top_level_span
-          name: "Top-level Span"
+          name: "Top-Level Span"
           url: "tracing/getting_further/top_level_span"
           weight: 405
           parent: customnav_tracingnav_getting_further
@@ -1913,7 +1913,7 @@ languages:
           weight: 40
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_top_level_span
-          name: "Top-level Span"
+          name: "Top-Level Span"
           url: "tracing/getting_further/top_level_span"
           weight: 405
           parent: customnav_tracingnav_getting_further  

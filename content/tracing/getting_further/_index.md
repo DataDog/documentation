@@ -4,6 +4,7 @@ kind: documentation
 ---
 
 {{< whatsnext desc="Enclosed in this section are other articles that may be of interest:">}}
+    {{< nextlink href="tracing/getting_further/top_level_span" >}}APM Top-Level Spans{{< /nextlink >}}
     {{< nextlink href="tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm" >}}Configure Apdex score by service{{< /nextlink >}}
     {{< nextlink href="tracing/getting_further/resource_monitor" >}}APM resource monitors{{< /nextlink >}}
     {{< nextlink href="monitors/monitor_types/apm" >}}APM service monitor{{< /nextlink >}}
