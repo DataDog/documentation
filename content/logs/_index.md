@@ -156,7 +156,7 @@ Your logs are collected and centralized into the [Log Explorer][3] view. You can
 [19]: /agent/logs/#filter-logs
 [20]: /agent/logs/#scrub-sensitive-data-in-your-logs
 [21]: /agent/logs/#multi-line-aggregation
-[22]: /logs/languages/docker
+[22]: /agent/docker/logs
 [23]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
 [24]: /integrations/amazon_web_services/#log-collection
 [25]: /integrations/amazon_web_services/#enable-logging-for-your-aws-service

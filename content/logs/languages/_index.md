@@ -7,7 +7,6 @@ After you have [installed the Datadog Agent][1], [enabled Log collection][2], be
 
 {{< whatsnext desc="Select one of the following supported languages to start collecting logs:">}}
   {{< nextlink href="logs/languages/csharp" tag="C++" >}}C# log collection.{{< /nextlink >}}
-  {{< nextlink href="logs/languages/docker" tag="Docker" >}}Docker log collection.{{< /nextlink >}}
   {{< nextlink href="logs/languages/go" tag="Go" >}}Go log collection.{{< /nextlink >}}
   {{< nextlink href="logs/languages/java" tag="Java" >}}Java log collection.{{< /nextlink >}}
   {{< nextlink href="logs/languages/nodejs" tag="NodeJS" >}}NodeJS log collection.{{< /nextlink >}}

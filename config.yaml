@@ -153,6 +153,12 @@ languages:
           weight: 140
           parent: agent_docker
 
+        - identifier: docker_logs
+          name: "Logs"
+          url: "agent/docker/logs"
+          weight: 141
+          parent: agent_docker
+
         ## Kubernetes
 
         - identifier: kubernetes
@@ -803,11 +809,6 @@ languages:
           url: "logs/languages/"
           weight: 20
           parent: menu_references_logs
-        - identifier: docker_log_collection
-          name: "Docker"
-          url: "logs/languages/docker"
-          weight: 220
-          parent: customnav_lognav_languages
         - identifier: customnav_lognav_csharp
           name: "Csharp"
           url: "logs/languages/csharp/"
@@ -1339,6 +1340,12 @@ languages:
           name: "APM"
           url: "agent/docker/apm"
           weight: 140
+          parent: agent_docker
+
+        - identifier: docker_logs
+          name: "Logs"
+          url: "agent/docker/logs"
+          weight: 141
           parent: agent_docker
 
         ## Kubernetes
@@ -1947,11 +1954,6 @@ languages:
           url: "logs/languages/"
           weight: 20
           parent: menu_references_logs
-        - identifier: docker_log_collection
-          name: "Docker"
-          url: "logs/languages/docker"
-          weight: 220
-          parent: customnav_lognav_languages
         - identifier: customnav_lognav_csharp
           name: "Csharp"
           url: "logs/languages/csharp/"
