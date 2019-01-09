@@ -28,8 +28,6 @@ Tagging binds different data types in Datadog, allowing for correlation and call
 | `source`    | Event filtering and automated pipeline creation for log management    |
 | `service`   | Correlation between metrics, traces, and logs                         |
 
-
-
 ## Why It Matters
 
 Typically, it's helpful to look at containers, VMs, and cloud infrastructure at the "service" level in aggregate. For example, it's more helpful to look at CPU usage across a collection of hosts that represents a service, rather than CPU usage for server A or server B separately.
