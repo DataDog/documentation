@@ -5,7 +5,7 @@ kind: faq
 
 ## Overview
 
-Datadog accepts payment by credit card through the [Plan][1] page. Admin users can access this page by hovering over their username at the bottom left, then navigate to: `Plan & Usage`--> `Plan`.
+Datadog accepts payment by credit card through the [Plan][1] page. Administrators users can access this page by hovering over their username at the bottom left, then navigate to: `Plan & Usage`--> `Plan`.
 
 By default, when you sign up with a credit card you are on a monthly plan. If you want to switch to an annual plan, contact your [Customer Success][2] Manager.
 
