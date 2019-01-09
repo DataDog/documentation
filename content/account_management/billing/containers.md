@@ -7,7 +7,7 @@ kind: faq
 
 Containers are supported in Pro and Enterprise plans. Pro subscriptions include 10 containers for each paid host. Enterprise subscriptions include 20 for each paid host. This container count is averaged across your entire infrastructure.
 
-Additional containers are billed at $0.002 per container per hour. In addition, customers can purchase prepaid containers at $1 per container per month. Contact [Sales][1] or your [Customer Success][2] Manager to discuss containers for your account.
+Additional containers are billed at $0.002 per container per hour. In addition, you can purchase prepaid containers at $1 per container per month. Contact [Sales][1] or your [Customer Success][2] Manager to discuss containers for your account.
 
 ### Kubernetes
 
