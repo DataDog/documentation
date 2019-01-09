@@ -125,9 +125,6 @@ class PreBuild:
             self.options.integrations = self.options.integrations + sep
         if self.options.extras and not self.options.extras.endswith(sep):
             self.options.extras = self.options.extras + sep
-        self.list_of_orgs = []
-        self.list_of_repos = []
-        self.list_of_files = []
         self.list_of_contents = []
         self.tempdir = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
         self.data_dir = '{0}{1}{2}'.format(abspath(normpath(options.source)), sep, 'data' + sep)
@@ -226,9 +223,7 @@ class PreBuild:
         print('Loading {} configuration file'.format(CONFIGURATION_FILE))
         configuration = yaml.load(open(CONFIGURATION_FILE))
         for org in configuration:
-            self.list_of_orgs.append(org['org_name'])
             for repo in org['repos']:
-                self.list_of_repos.append(repo['repo_name'])
                 for content in repo['contents']:
                     content_temp = {}
                     content_temp['org_name'] = org['org_name']
@@ -277,9 +272,6 @@ class PreBuild:
             else:
                 print("No local version of {} found, downloading downloading content from upstream version".format(content['repo_name']))
                 self.download_from_repo(content['org_name'], content['repo_name'], content['branch'], content['globs'])
-            
-            # Adding the final globs to a global list of globs
-            self.list_of_files += content['globs']
 
     def update_globs(self, new_path, globs):
         new_globs = []
