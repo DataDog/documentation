@@ -26,9 +26,7 @@ The following installation processes are for [Agent 6 only][1]. If you are using
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
 
-The Process Agent is shipped by default with Agent 6 in Linux packages only. Refer to the instructions for standard [Agent installation][1] for platform-specific details.
-
-Once the Datadog Agent is installed, enable Live Processes collection by editing the [Agent main configuration file][2] by setting the following parameter to `true`:
+Once the Datadog Agent is installed, enable Live Processes collection by editing the [Agent main configuration file][1] by setting the following parameter to `true`:
 
 ```
 process_config:
@@ -45,12 +43,11 @@ Additionally, some configuration options may be set as environment variables.
 
 **Note**: Options set as environment variables override the settings defined in the configuration file.
 
-After configuration is complete, [restart the Agent][3].
+After configuration is complete, [restart the Agent][2].
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: /agent/faq/agent-configuration-files/?tab=agentv6
-[3]: /agent/faq/agent-commands/?tab=agentv6#restart-the-agent
+[1]: /agent/faq/agent-configuration-files/?tab=agentv6
+[2]: /agent/faq/agent-commands/?tab=agentv6#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
