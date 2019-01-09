@@ -5,10 +5,10 @@ description: Visualisez tous vos logs en temps réel.
 further_reading:
 - link: logs/explorer/analytics
   tag: Documentation
-  text: Construire des analyses de log
+  text: Effectuer des analyses de logs
 - link: logs/processing
   tag: Documentation
-  text: Apprenez à traiter vos logs
+  text: Apprendre à traiter vos logs
 - link: logs/processing/parsing
   tag: Documentation
   text: En savoir plus sur le parsing
