@@ -1,7 +1,7 @@
 ---
 title: PagerDuty
 type: apicode
-order: 14.3
+order: 14.4
 external_redirect: /api/#pagerduty
 ---
 
