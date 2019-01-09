@@ -152,7 +152,6 @@ class PreBuild:
             'cassandra_nodetool': {'action': 'merge', 'target': 'cassandra', 'remove_header': False},
             'datadog_checks_base': {'action': 'discard', 'target': 'none', 'remove_header': False},
             'datadog_checks_tests_helper': {'action': 'discard', 'target': 'none', 'remove_header': False},
-            'dev': {'action': 'discard', 'target': 'none', 'remove_header': False},
             'docs': {'action': 'discard', 'target': 'none', 'remove_header': False},
             'gitlab_runner': {'action': 'merge', 'target': 'gitlab', 'remove_header': False},
             'hdfs_datanode': {'action': 'merge', 'target': 'hdfs', 'remove_header': False},
@@ -255,24 +254,21 @@ class PreBuild:
 
             # sync from integrations-core, download if we don't have it (public repo so no token needed)
             elif content['repo_name']== 'integrations-core':
-                if not options.integrations:
+                if not self.options.integrations:
                     print("No local version of {} found, downloading downloading content from upstream version".format(content['repo_name']))
                     self.download_from_repo(content['org_name'], content['repo_name'], content['branch'], content['globs'])
-                    self.options.integrations = '{0}{1}{2}'.format(self.extract_dir, 'integrations-core', sep)
 
                 print("Updating globs for new local version or {} repo".format(content['repo_name']))
-                content['globs'] = self.update_globs(self.options.integrations,content['globs'])
+                content['globs'] = self.update_globs('{0}{1}{2}'.format(self.extract_dir, 'integrations-core', sep),content['globs'])
 
             # sync from integrations-extras, download if we don't have it (public repo so no token needed)
             elif content['repo_name']=='integrations-extras': 
-                if not options.extras:
+                if not self.options.extras:
                     print("No local version of {} found, downloading downloading content from upstream version".format(content['repo_name']))
-
                     self.download_from_repo(content['org_name'], content['repo_name'], content['branch'], content['globs'])
-                    self.options.extras = '{0}{1}{2}'.format(self.extract_dir, 'integrations-extras', sep)
 
                 print("Updating globs for new local version or {} repo".format(content['repo_name']))
-                content['globs'] = self.update_globs(self.options.extras,content['globs'])
+                content['globs'] = self.update_globs('{0}{1}{2}'.format(self.extract_dir, 'integrations-extras', sep),content['globs'])
 
             else:
                 print("No local version of {} found, downloading downloading content from upstream version".format(content['repo_name']))
@@ -510,11 +506,11 @@ class PreBuild:
 
     def add_dependencies(self, file_name):
         dependencies = []
-        if file_name.startswith(self.options.integrations):
-            dependencies.append(file_name.replace(self.options.integrations, "https://github.com/DataDog/integrations-core/blob/master/"))
+        if file_name.startswith('{0}{1}{2}'.format(self.extract_dir, 'integrations-core', sep)):
+            dependencies.append(file_name.replace('{0}{1}{2}'.format(self.extract_dir, 'integrations-core', sep), "https://github.com/DataDog/integrations-core/blob/master/"))
 
-        elif file_name.startswith(self.options.extras):
-            dependencies.append(file_name.replace(self.options.extras, "https://github.com/DataDog/integrations-extras/blob/master/"))
+        elif file_name.startswith('{0}{1}{2}'.format(self.extract_dir, 'integrations-extras', sep)):
+            dependencies.append(file_name.replace('{0}{1}{2}'.format(self.extract_dir, 'integrations-extras', sep), "https://github.com/DataDog/integrations-extras/blob/master/"))
 
         return dependencies
 

@@ -39,7 +39,7 @@
     - content_name: integrations-core-doc
       branch: master
       globs:
-      - docs/**
+      - docs/dev/*.md
       dest_dir: ''
       path_to_remove: ''
 
