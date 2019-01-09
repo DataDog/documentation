@@ -33,7 +33,7 @@ You can set specific email addresses to receive invoices on the [Plan][7] page u
 
 **Note**: The email address does not need to be a team member within Datadog. For example, you could use `invoices@yourcompany.com`.
 
-## Additional topics
+## Further Reading
   
 {{< whatsnext desc="Specific billing topics:">}}
     {{< nextlink href="account_management/billing/pricing/" >}}Pricing{{< /nextlink >}}
