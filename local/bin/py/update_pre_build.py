@@ -214,10 +214,10 @@ class PreBuild:
         print('Processing')
 
         self.extract_config()
+
         self.local_or_upstream()
         
-        for file_name in tqdm(chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in self.list_of_files)):
-            self.process_filename(file_name)
+        self.process_filenames()
         
         self.merge_integrations()
 
@@ -225,17 +225,21 @@ class PreBuild:
 
         print('Loading {} configuration file'.format(CONFIGURATION_FILE))
         configuration = yaml.load(open(CONFIGURATION_FILE))
-        
         for org in configuration:
             self.list_of_orgs.append(org['org_name'])
             for repo in org['repos']:
                 self.list_of_repos.append(repo['repo_name'])
                 for content in repo['contents']:
-                    content_temp = {\
-                                    "org_name":org['org_name'],\
-                                    "repo_name":repo['repo_name'],\
-                                    "branch":content['branch'],\
-                                    "globs":content['globs']}
+                    content_temp = {}
+                    content_temp['org_name'] = org['org_name']
+                    content_temp['repo_name'] = repo['repo_name']
+                    content_temp['branch'] = content['branch']
+                    content_temp['action']= content['action']
+                    content_temp['globs'] = content['globs']
+
+                    if content['action'] == 'pull-and-push':
+                        content_temp['options'] = content['options']
+
                     self.list_of_contents.append(content_temp)
                     print('Adding content {} '.format(content_temp))
 
@@ -284,28 +288,64 @@ class PreBuild:
 
         return new_globs
 
-    def process_filename(self, file_name):
+    def process_filenames(self):
 
-        if file_name.endswith('dd/utils/context/source.py'):
-            self.process_source_attribute(file_name)
+        for content in self.list_of_contents:
+            print("Processing content: {}".format(content))
+            if content['action'] == 'integrations':
+                self.process_integrations(content['globs'])
 
-        elif file_name.endswith('.csv'):
-            self.process_integration_metric(file_name)
+            elif content['action'] == 'source':
+                
+                self.process_source_attribute(content['globs'])
+            
+            elif content['action'] == 'pull-and-push':
+                
+                self.pull_and_push(content)
+            else:
+                print("[ERROR] Unsuccessful Processing of {}".format(content))
 
-        elif file_name.endswith('manifest.json'):
-            self.process_integration_manifest(file_name)
+    def process_integrations(self,globs):
+        
+        for file_name in tqdm(chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in globs)):
+            if file_name.endswith('.csv'):
+                self.process_integration_metric(file_name)
 
-        elif file_name.endswith('service_checks.json'):
-            self.process_service_checks(file_name)
+            elif file_name.endswith('manifest.json'):
+                self.process_integration_manifest(file_name)
 
-        elif ('/integrations-core/docs/dev/' in file_name and file_name.endswith('.md')):
-            self.dev_doc_integrations_core(file_name)
+            elif file_name.endswith('service_checks.json'):
+                self.process_service_checks(file_name)
 
-        elif file_name.endswith('.md'):
-            self.process_integration_readme(file_name)
-        else:
-            print("Processing of {} was unsuccessful".format(file_name))
+            elif file_name.endswith('.md'):
+                self.process_integration_readme(file_name)
 
+    def pull_and_push(self, content):
+        """
+        Take the content from a folder following github logic
+        and transform it to be displayed in the doc in dest_dir folder
+        :param globs: folder to pull
+        :param dest_dir: folder to push the data to in the doc repo
+        """
+
+        for file_name in tqdm(chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in content['globs'])):
+            with open(file_name, mode='r+') as f:
+                file_content = f.read()
+
+                # Replacing the master README.md by _index.md to follow Hugo logic
+                if file_name.endswith('README.md'):
+                    file_name = '_index.md'
+
+                # Replacing links that point to the Github folder by link that point to the doc.
+                new_link = content['options']['dest_dir'] + '\\2'
+                regex_github_link = re.compile(r'(https:\/\/github\.com\/{}\/{}\/blob\/{}\/{})(\S+)\.md'.format(content['org_name'],content['repo_name'],content['branch'],content['options']['path_to_remove']))
+                file_content = re.sub(regex_github_link, new_link, file_content, count=0)
+
+            # Writing the new content to the documentation file
+            dirp = '{}{}'.format(self.content_dir, content['options']['dest_dir'][1:])
+            makedirs(dirp, exist_ok=True)
+            with open('{}{}'.format(dirp, basename(file_name)), mode='w+', encoding='utf-8') as f:
+                f.write(file_content)
 
     def merge_integrations(self):
         """ Merges integrations that come under one """
@@ -349,31 +389,33 @@ class PreBuild:
                         data = '---\n{0}\n---\n'.format(fm)
                         f.write(data)
 
-    def process_source_attribute(self, file_name):
+    def process_source_attribute(self, globs):
         """
         Take a single source.py file extracts the FROM_DISPLAY_NAME dict values
         and inserts them into the file something.md
         :param file_name: path to a source.py file
         """
-        out = '|Integration name | API source attribute|\n'
-        out += '|:---|:---|\n'
-        with open(file_name, 'r') as f:
-            result = f.read()
-            m = re.search(self.regex_source, result)
-            result = m.group(2) if m else result
-            result = re.sub(r'[^0-9A-Za-z:, ]', '', result)
-            for line in result.split(','):
-                pair = line.split(':')
-                if len(pair) > 1:
-                    out += '|{0}|{1}|\n'.format(pair[0].strip().title(), pair[1].strip())
-        with open('{}{}'.format(self.options.source, '/content/integrations/faq/list-of-api-source-attribute-value.md'), mode='r+', encoding='utf-8') as f:
-            boundary = re.compile(r'^-{3,}$', re.MULTILINE)
-            _, fm, content = boundary.split(f.read(), 2)
-            template = "---\n{front_matter}\n---\n\n{content}\n"
-            new_content = template.format(front_matter=fm.strip(), content=out)
-            f.truncate(0)
-            f.seek(0)
-            f.write(new_content)
+        for file_name in tqdm(chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in globs)):
+            if file_name.endswith('dd/utils/context/source.py'):
+                out = '|Integration name | API source attribute|\n'
+                out += '|:---|:---|\n'
+                with open(file_name, 'r') as f:
+                    result = f.read()
+                    m = re.search(self.regex_source, result)
+                    result = m.group(2) if m else result
+                    result = re.sub(r'[^0-9A-Za-z:, ]', '', result)
+                    for line in result.split(','):
+                        pair = line.split(':')
+                        if len(pair) > 1:
+                            out += '|{0}|{1}|\n'.format(pair[0].strip().title(), pair[1].strip())
+                with open('{}{}'.format(self.options.source, '/content/integrations/faq/list-of-api-source-attribute-value.md'), mode='r+', encoding='utf-8') as f:
+                    boundary = re.compile(r'^-{3,}$', re.MULTILINE)
+                    _, fm, content = boundary.split(f.read(), 2)
+                    template = "---\n{front_matter}\n---\n\n{content}\n"
+                    new_content = template.format(front_matter=fm.strip(), content=out)
+                    f.truncate(0)
+                    f.seek(0)
+                    f.write(new_content)
 
     def process_integration_metric(self, file_name):
         """
@@ -386,32 +428,6 @@ class PreBuild:
             key_name = basename(file_name.replace('_metadata.csv', ''))
         new_file_name = '{}{}.yaml'.format(self.data_integrations_dir, key_name)
         self.csv_to_yaml(key_name, file_name, new_file_name)
-
-    def dev_doc_integrations_core(self, file_name):
-        """
-        Take the content from https://github.com/DataDog/integrations-core/tree/master/docs/dev
-        and transform it to be displayed on the doc in the /developers/integrations section
-        :param file_name: path to a file
-        """
-        doc_directory = '/developers/integrations/'
-
-        with open(file_name, mode='r+') as f:
-            content = f.read()
-
-            # Replacing the master README.md by _index.md to follow Hugo logic
-            if file_name.endswith('README.md'):
-                file_name = '_index.md'
-
-            # Replacing links that point to the Github folder by link that point to the doc.
-            new_link = doc_directory +'\\2'
-            regex_github_link = re.compile(r'(https:\/\/github\.com\/DataDog\/integrations-core\/blob\/master\/docs\/dev\/)(\S+)\.md')
-            content = re.sub(regex_github_link, new_link, content, count=0)
-
-        # Writing the new content to the documentation file
-        dirp = '{}{}'.format(self.content_dir, doc_directory[1:])
-        makedirs(dirp, exist_ok=True)
-        with open('{}{}'.format(dirp, basename(file_name)), mode='w+', encoding='utf-8') as f:
-            f.write(content)
 
     def process_integration_manifest(self, file_name):
         """

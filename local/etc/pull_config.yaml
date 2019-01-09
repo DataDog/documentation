@@ -6,47 +6,42 @@
     
     contents:
 
-    - content_name: source
+    - action: source
       branch: prod
       globs:
       - dd/utils/context/source.py
-      path_to_remove: ''
-      dest_dir: ''
 
-    - content_name: integrations
+    - action: integrations
       branch: prod
       globs:
       - integration/**/*_metadata.csv
       - integration/**/manifest.json
       - integration/**/service_checks.json
       - integration/**/README.md
-      path_to_remove: ''
-      dest_dir: ''
 
   - repo_name: integrations-core
     contents:
 
-    - content_name: integrations
+    - action: integrations
       branch: master
       globs:
       - "*[!}]/metadata.csv"
       - "*[!}]/manifest.json"
       - "*[!}]/service_checks.json"
       - "*[!}]/README.md"
-      dest_dir: ''
-      path_to_remove: ''
 
-    - content_name: integrations-core-doc
+    - action: pull-and-push
       branch: master
       globs:
       - docs/dev/*.md
-      dest_dir: ''
-      path_to_remove: ''
+      options:
+        dest_dir: '/developers/integrations/'
+        path_to_remove: 'docs/dev/'
 
   - repo_name: integrations-extras
     contents:
 
-    - content_name: integrations
+    - action: integrations
       branch: master
       globs:
       - "**/metadata.csv"
