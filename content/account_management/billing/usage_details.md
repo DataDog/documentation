@@ -9,7 +9,7 @@ This feature is only available to paying customers.
 
 ## Overview
 
-Admin users can access the [Usage][1] page by hovering over their username at the bottom left, then navigate to:  
+Administrators can access the [Usage][1] page by hovering over their username at the bottom left, then navigate to:  
 `Plan & Usage`--> `Usage`.
 
 The Usage page provides the following information. Tables can be downloaded as CSV files.
