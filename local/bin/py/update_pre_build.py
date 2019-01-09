@@ -245,20 +245,14 @@ class PreBuild:
                 if not self.options.dogweb:
                     if self.options.token:
                         print("No local version of {} found, downloading content from upstream version".format(content['repo_name']))
-                        self.download_from_repo(content['org_name'], content['repo_name'], content['branch'], content['globs'])
-
-                print("Updating globs for new local version or {} repo".format(content['repo_name']))
-                
-                content['globs'] = self.update_globs('{0}{1}{2}'.format(self.extract_dir, content['repo_name'], sep),content['globs'])
+                        self.download_from_repo(content['org_name'], content['repo_name'], content['branch'], content['globs'])                
 
             # sync from integrations-core, download if we don't have it (public repo so no token needed)
             elif content['repo_name']== 'integrations-core':
                 if not self.options.integrations:
                     print("No local version of {} found, downloading downloading content from upstream version".format(content['repo_name']))
                     self.download_from_repo(content['org_name'], content['repo_name'], content['branch'], content['globs'])
-
-                print("Updating globs for new local version or {} repo".format(content['repo_name']))
-                content['globs'] = self.update_globs('{0}{1}{2}'.format(self.extract_dir, 'integrations-core', sep),content['globs'])
+                
 
             # sync from integrations-extras, download if we don't have it (public repo so no token needed)
             elif content['repo_name']=='integrations-extras': 
@@ -266,12 +260,12 @@ class PreBuild:
                     print("No local version of {} found, downloading downloading content from upstream version".format(content['repo_name']))
                     self.download_from_repo(content['org_name'], content['repo_name'], content['branch'], content['globs'])
 
-                print("Updating globs for new local version or {} repo".format(content['repo_name']))
-                content['globs'] = self.update_globs('{0}{1}{2}'.format(self.extract_dir, 'integrations-extras', sep),content['globs'])
-
             else:
                 print("No local version of {} found, downloading downloading content from upstream version".format(content['repo_name']))
                 self.download_from_repo(content['org_name'], content['repo_name'], content['branch'], content['globs'])
+
+            print("Updating globs for new local version of repo {}".format(content['repo_name']))
+            content['globs'] = self.update_globs('{0}{1}{2}'.format(self.extract_dir, content['repo_name'], sep),content['globs'])
 
     def update_globs(self, new_path, globs):
         new_globs = []
