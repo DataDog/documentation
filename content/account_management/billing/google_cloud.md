@@ -7,7 +7,7 @@ kind: faq
 
 Datadog bills for hosts running the Agent and all GCE instances picked up by the Google Cloud integration. You are not billed twice if you are running the Agent on a GCE instance picked up by the Google Cloud integration.
 
-Other Google Cloud resources (CloudSQL, Google App Engine, Pub/Sub, etc.) are not part of monthly billing. **Note**: This could change in the future.
+Other Google Cloud resources (CloudSQL, Google App Engine, Pub/Sub, etc.) are not part of monthly billing. 
 
 ### Metric exclusion
 
