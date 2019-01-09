@@ -189,7 +189,7 @@ class PreBuild:
             with open(file=yml_filename, mode='w', encoding='utf-8') as f:
                 f.write(yaml.dump(yaml_data, default_flow_style=False))
 
-    def download_from_repo(self, org, repo, branch, globs=None):
+    def download_from_repo(self, org, repo, branch, globs):
         """
         Takes github info and file globs and downloads files from github using multiple processes
         :param org: github organization or person
@@ -216,8 +216,10 @@ class PreBuild:
 
         self.extract_config()
         self.local_or_upstream()
+        
         for file_name in tqdm(chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in self.list_of_files)):
             self.process_filename(file_name)
+        
         self.merge_integrations()
 
     def extract_config(self):
@@ -241,16 +243,15 @@ class PreBuild:
     def local_or_upstream(self):
 
         for content in self.list_of_contents:
-
             if content['repo_name']=='dogweb':
                 if not self.options.dogweb:
                     if self.options.token:
                         print("No local version of {} found, downloading content from upstream version".format(content['repo_name']))
                         self.download_from_repo(content['org_name'], content['repo_name'], content['branch'], content['globs'])
-                        self.options.dogweb = '{0}{1}{2}'.format(self.extract_dir, content['repo_name'], sep)
 
                 print("Updating globs for new local version or {} repo".format(content['repo_name']))
-                content['globs'] = self.update_globs(self.options.dogweb,content['globs'])
+                
+                content['globs'] = self.update_globs('{0}{1}{2}'.format(self.extract_dir, content['repo_name'], sep),content['globs'])
 
             # sync from integrations-core, download if we don't have it (public repo so no token needed)
             elif content['repo_name']== 'integrations-core':
@@ -276,7 +277,7 @@ class PreBuild:
             else:
                 print("No local version of {} found, downloading downloading content from upstream version".format(content['repo_name']))
                 self.download_from_repo(content['org_name'], content['repo_name'], content['branch'], content['globs'])
-
+            
             # Adding the final globs to a global list of globs
             self.list_of_files += content['globs']
 

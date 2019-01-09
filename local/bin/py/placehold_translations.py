@@ -67,8 +67,7 @@ def create_placeholder_file(template, new_glob):
                                   content=new_content.strip())
 
     with open(new_dest, 'w') as o_file:
-        o_file.write(content)
-        print("creating placeholder for {0} at {1}".format(template, new_dest))
+            o_file.write(content)
 
     return new_dest
 
