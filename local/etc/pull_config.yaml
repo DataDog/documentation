@@ -48,5 +48,3 @@
       - "**/manifest.json"
       - "**/service_checks.json"
       - "**/README.md"
-      path_to_remove: ''
-      dest_dir: ''
