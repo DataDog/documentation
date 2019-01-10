@@ -438,7 +438,7 @@ class PreBuild:
 
     def process(self):
         """
-        This represent the overall workflow of the build of the documentation
+        This represents the overall workflow of the build of the documentation
         """
         print("Processing")
 
@@ -452,8 +452,8 @@ class PreBuild:
 
     def extract_config(self):
         """
-        This pull the content from the configuration file at CONFIGURATION_FILE location
-        then parse it to populate the list_of_content variable that contain all contents
+        This pulls the content from the configuration file at CONFIGURATION_FILE location
+        then parses it to populate the list_of_content variable that contains all contents
         that needs to be pulled and processed.
         """
         print(
@@ -614,7 +614,7 @@ class PreBuild:
 
     def process_integrations(self, content):
         """
-        Go through all files needed for integrations build
+        Goes through all files needed for integrations build
         and triggers the right function for the right type of file.
         :param content: integrations content to process
         """
