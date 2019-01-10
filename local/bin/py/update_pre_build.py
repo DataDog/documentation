@@ -596,13 +596,11 @@ class PreBuild:
         for content in self.list_of_contents:
             print("Processing content: {}".format(content))
             if content["action"] == "integrations":
-                self.process_integrations(content["globs"])
+                self.process_integrations(content)
 
             elif content["action"] == "source":
 
-                self.process_source_attribute(
-                    content["globs"]
-                )
+                self.process_source_attribute(content)
 
             elif content["action"] == "pull-and-push":
 
@@ -614,16 +612,16 @@ class PreBuild:
                     )
                 )
 
-    def process_integrations(self, globs):
+    def process_integrations(self, content):
         """
         Go through all files needed for integrations build
         and triggers the right function for the right type of file.
-        :param globs: list of globs for integrations. 
+        :param content: integrations content to process
         """
         for file_name in tqdm(
             chain.from_iterable(
                 glob.iglob(pattern, recursive=True)
-                for pattern in globs
+                for pattern in content["globs"]
             )
         ):
             if file_name.endswith(".csv"):
@@ -642,8 +640,7 @@ class PreBuild:
         """
         Take the content from a folder following github logic
         and transform it to be displayed in the doc in dest_dir folder
-        :param globs: folder to pull
-        :param dest_dir: folder to push the data to in the doc repo
+        :param content: content to process
         """
 
         for file_name in tqdm(
@@ -781,7 +778,7 @@ class PreBuild:
                         data = "---\n{0}\n---\n".format(fm)
                         f.write(data)
 
-    def process_source_attribute(self, globs):
+    def process_source_attribute(self, content):
         """
         Take a single source.py file extracts the FROM_DISPLAY_NAME dict values
         and inserts them into the file something.md
@@ -790,7 +787,7 @@ class PreBuild:
         for file_name in tqdm(
             chain.from_iterable(
                 glob.iglob(pattern, recursive=True)
-                for pattern in globs
+                for pattern in content["globs"]
             )
         ):
             if file_name.endswith(
