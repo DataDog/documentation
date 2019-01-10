@@ -654,6 +654,7 @@ class PreBuild:
         """
         Takes the content from a file from a github repo and 
         pushed it to the doc
+        :param content: object with a file name and a file path
         """
 
         with open(
