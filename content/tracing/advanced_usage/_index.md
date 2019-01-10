@@ -1465,6 +1465,23 @@ This integration for logs works if the log format includes:
 - `dd.trace_id=%(dd.trace_id)s`
 - `dd.span_id=%(dd.span_id)s`
 
+An example of this in practice when using ``ddtrace-run`` with environment variable ``DD_LOGS_INJECTION=true``:
+
+``` python
+import logging
+from ddtrace import tracer
+
+log = logging.getLogger()
+log.level = logging.INFO
+
+
+@tracer.wrap()
+def hello():
+    log.info('Hello, World!')
+
+hello()
+```
+
 An example of this in practice with manual instrumentation:
 
 ``` python
