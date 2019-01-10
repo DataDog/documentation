@@ -30,7 +30,7 @@
       - "*[!}]/service_checks.json"
       - "*[!}]/README.md"
 
-    - action: pull-and-push
+    - action: pull-and-push-folder
       branch: master
       globs:
       - docs/dev/*.md
@@ -48,5 +48,14 @@
       - "**/manifest.json"
       - "**/service_checks.json"
       - "**/README.md"
-      path_to_remove: ''
-      dest_dir: ''
+
+  - repo_name: heroku-buildpack-datadog
+    contents:
+
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - README.md
+      options:
+        dest_path: '/agent/basic_agent_usage/'
+        file_name: 'heroku.md'

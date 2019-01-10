@@ -87,6 +87,8 @@ clean-integrations:  ## remove built integrations files.
 clean-auto-doc: ##remove all doc automatically created
 	@if [ -d content/developers/integrations ]; then \
 	find ./content/developers/integrations -type f -maxdepth 1 -exec rm -rf {} \; ;fi
+	@if [ content/agent/basic_agent_usage/heroku.md ]; then \
+	rm -f content/agent/basic_agent_usage/heroku.md ;fi
 
 clean-node:  ## remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi
