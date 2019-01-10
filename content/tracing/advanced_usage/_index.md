@@ -1457,7 +1457,7 @@ If logs are already JSON formatted, there should be nothing left to do.
 
 You have two ways to inject trace informations into your logs in Python:
 
-1. Automatically: set the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
+1. Automatically: Set the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
 2. Manually: Patch your `logging` module by updating your log formatter to include the ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
 
 This integration with logs works if the log format includes:
@@ -1476,7 +1476,7 @@ FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
           '[dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] '
           '- %(message)s')
 logging.basicConfig(format=FORMAT)
-log = logging.getLogger()
+log = logging.getLogger(__name__)
 log.level = logging.INFO
 
 @tracer.wrap()
