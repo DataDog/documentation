@@ -1455,34 +1455,17 @@ If logs are already JSON formatted, there should be nothing left to do.
 {{% /tab %}}
 {{% tab "Python" %}}
 
-To inject trace information from Python into logs:
+You have two ways to inject trace informations into your logs in Python:
 
-1. Set the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run` or manually patch the `logging` module.
-2. Update your log formatter to include ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
+1. Automatically: set the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
+2. Manually: Patch your `logging` module by updating your log formatter to include the ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
 
-This integration for logs works if the log format includes:
+This integration with logs works if the log format includes:
 
 - `dd.trace_id=%(dd.trace_id)s`
 - `dd.span_id=%(dd.span_id)s`
 
-An example of this in practice when using ``ddtrace-run`` with environment variable ``DD_LOGS_INJECTION=true``:
-
-``` python
-import logging
-from ddtrace import tracer
-
-log = logging.getLogger()
-log.level = logging.INFO
-
-
-@tracer.wrap()
-def hello():
-    log.info('Hello, World!')
-
-hello()
-```
-
-An example of this in practice with manual instrumentation:
+For instance: 
 
 ``` python
 from ddtrace import patch_all; patch_all(logging=True)
@@ -1495,7 +1478,6 @@ FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
 logging.basicConfig(format=FORMAT)
 log = logging.getLogger()
 log.level = logging.INFO
-
 
 @tracer.wrap()
 def hello():
