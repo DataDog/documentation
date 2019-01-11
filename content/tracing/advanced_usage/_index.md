@@ -1456,12 +1456,36 @@ try {
 [3]: https://docs.datadoghq.com/tracing/languages/java/#configuration
 {{% /tab %}}
 {{% tab "Python" %}}
-Getting the required information needed for logging is easy:
 
-```python
-from ddtrace import helpers
+You have two ways to inject trace information into your logs in Python:
 
-trace_id, span_id = helpers.get_correlation_ids()
+1. Automatically: Set the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
+2. Manually: Patch your `logging` module by updating your log formatter to include the ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
+
+This integration with logs works if the log format includes:
+
+- `dd.trace_id=%(dd.trace_id)s`
+- `dd.span_id=%(dd.span_id)s`
+
+For instance: 
+
+``` python
+from ddtrace import patch_all; patch_all(logging=True)
+import logging
+from ddtrace import tracer
+
+FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
+          '[dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] '
+          '- %(message)s')
+logging.basicConfig(format=FORMAT)
+log = logging.getLogger(__name__)
+log.level = logging.INFO
+
+@tracer.wrap()
+def hello():
+    log.info('Hello, World!')
+
+hello()
 ```
 
 {{% /tab %}}
