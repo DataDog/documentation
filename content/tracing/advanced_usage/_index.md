@@ -1408,12 +1408,18 @@ The purpose of this section is to explain how the correlation between traces and
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The idea is to leverage the MDC ([Map Diagnostic Context][1]) to automatically add the trace and span identifier into the logs.
-The Datadog Java tracer exposes two API calls to allow printing trace and span identifiers along with log statements, `CorrelationIdentifier#getTraceId()`, and `CorrelationIdentifier#getSpanId()`.
+Leverage the MDC Frameworks ([Map Diagnostic Context][1]) to automatically add the trace and span ids into your logs. Datadog MDC keys may be injected automatically with a tracer integration, or manually injected with Datadog APIs.
 
-- To inject those identifier into application logs using MDC frameworks, use the following method:
+**How to enable Log Injection***
 
-**log4j2**:
+1. Enable injection in the [Java Tracer's configuration][3]. Note: Currently only slf4j is supported for MDC autoinjection.
+2. Alternatively, Use Datadog `CorrelationIdentifier#getTraceId()`, and `CorrelationIdentifier#getSpanId()` APIs to inject identifiers at the beginning and end of each span to log (see examples below).
+3. Configure MDC to use the injected Keys:
+  * `dd.trace_id` Active trace id during the log statement (or `0` if no trace)
+  * `dd.span_id` Active trace id during the log statement (or `0` if no trace)
+4. If logs are already JSON formatted, there should be nothing left to do. [See our Java logging documentation][2] to add those two identifiers in raw logs or to learn how to log in JSON.
+
+**Manual Injection log4j2 example**:
 
 ```java
 import org.apache.logging.log4j.ThreadContext;
@@ -1429,7 +1435,7 @@ try {
 }
 ```
 
-**slf4j/logback**:
+**Manual Injection slf4j/logback example**:
 
 ```java
 import org.slf4j.MDC;
@@ -1445,13 +1451,9 @@ try {
 }
 ```
 
-- Add those identifiers in the logs:
-
-If logs are already JSON formatted, there should be nothing left to do.
-[See our Java logging documentation][2] to add those two identifiers in raw logs or to learn how to log in JSON.
-
 [1]: https://logback.qos.ch/manual/mdc.html
 [2]: https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#configure-your-logger
+[3]: https://docs.datadoghq.com/tracing/languages/java/#configuration
 {{% /tab %}}
 {{% tab "Python" %}}
 Getting the required information needed for logging is easy:
