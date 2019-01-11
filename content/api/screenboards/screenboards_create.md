@@ -15,10 +15,6 @@ external_redirect: /api/#create-a-screenboard
     [A list of widget definitions][1].
 * **`template_variables`** [*optional*, *default*=**None**]:  
     A list of template variables for using Dashboard templating.
-* **`width`** [*optional*, *default*=**None**]:  
-    Screenboard width in pixels
-* **`height`** [*optional*, *default*=**None**]:  
-    Height in pixels.
 * **`read_only`** [*optional*, *default*=**False**]:  
     The read-only status of the screenboard.
 
