@@ -1408,7 +1408,7 @@ The purpose of this section is to explain how the correlation between traces and
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Leverage the MDC Frameworks ([Map Diagnostic Context][1]) to automatically correlate trace and span ids into your logs. Datadog MDC keys may be injected automatically with a tracer integration, or manually injected with Datadog APIs.
+Leverage the MDC Frameworks ([Map Diagnostic Context][1]) to automatically correlate trace and span IDs into your logs. Datadog MDC keys may be injected automatically with a tracer integration, or manually injected with the Datadog API.
 
 **Enable Log Injection for JSON Formatted Logs**
 
