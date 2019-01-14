@@ -44,14 +44,14 @@ Indexes are located in the [pipeline page][1] within the Indexes section. Double
 
 Indexed logs can be used for [faceted searching][2], [Log Analytics][3], [dashboarding][4], and [monitoring][5].
 
-It is also possible to have multiple indexes with different retentions (**currently in private beta**).
+It is also possible to have multiple indexes with different retentions periode (**currently in private beta**).
 Logs enter the first index whose filter they match on, so it is important to order your indexes carefully.
 
 For example, if you create a first index filtered to the `status:notice` attribute and a second index filtered to the `status:error` attribute and a final one without any filter (the equivalent of `*`), all your notice logs would go to the first index, all your error logs to the second index and the rest would go to the final one.
 
 {{< img src="logs/logging_without_limits/multi_indexes.png" alt="" responsive="true" style="width:70%;">}}
 
-Multiple indexes also provide the ability to define access rules on the data contained in each index. [More information available in the role base access control documentation][].
+Multiple indexes also provide the ability to define access rules on the data contained in each index. [More information available in the role base access control documentation][8].
 
 ## Setup Log Monitors on volumes
 
@@ -134,7 +134,7 @@ Enable or disable them in one click in the Pipeline page:
 [6]: https://app.datadoghq.com/logs
 [7]: /logs/explorer/search
 [8]: /account_management/rbac/
-[9]: https://docs.datadoghq.com/logs/processing/
-[10]: https://docs.datadoghq.com/logs/live_tail/
-[11]: https://docs.datadoghq.com/monitors/monitor_types/log/
-[12]: https://docs.datadoghq.com/logs/archives/
+[9]: /logs/processing/
+[10]: /logs/live_tail/
+[11]: /monitors/monitor_types/log/
+[12]: /logs/archives/
