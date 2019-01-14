@@ -11,4 +11,3 @@ external_redirect: /api/#desactiver-tous-les-monitors
 {{< code-snippets basename="api-monitor-mute-all" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-monitor-mute-all" >}}
-
