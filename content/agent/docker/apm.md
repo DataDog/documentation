@@ -56,7 +56,7 @@ List of all environment variables available for tracing with the Docker Agent:
 | `DD_APM_IGNORE_RESOURCE`   | A comma-separated list of endpoints and resources that the Agent should ignore (i.e. health checks endpoints).              |
 | `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions.                                                                            |
 | `DD_APM_ENV`               | Sets the default [environment][3] for your traces.                                                                          |
-| `DD_APM_MAX_EPS`           | Sets the maximum events per second.                                                                                         |
+| `DD_APM_MAX_EPS`           | Sets the maximum APM events per second.                                                                                     |
 | `DD_APM_MAX_TPS`           | Sets the maximum traces per second.                                                                                         |
 
 ## Tracing from other containers
