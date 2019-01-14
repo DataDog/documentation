@@ -1429,10 +1429,9 @@ Enable injection in the [Java Tracer's configuration][3].
 
 **Manual Injection**
 
-If you prefer to correlate manually your traces with your logs, leverage the Datadog API to retrieve correlation identifiers:
+If you prefer to manually correlate your traces with your logs, leverage the Datadog API to retrieve correlation identifiers:
 
-* Use `CorrelationIdentifier#getTraceId()`, and `CorrelationIdentifier#getSpanId()` APIs to inject identifiers
-  at the beginning and end of each span to log (see examples below).
+* Use `CorrelationIdentifier#getTraceId()` and `CorrelationIdentifier#getSpanId()` API methods to inject identifiers at the beginning and end of each span to log (see examples below).
 * Configure MDC to use the injected Keys:
   * `dd.trace_id` Active Trace ID during the log statement (or `0` if no trace)
   * `dd.span_id` Active Span ID during the log statement (or `0` if no trace)
