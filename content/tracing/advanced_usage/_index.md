@@ -1412,7 +1412,9 @@ Leverage the MDC Frameworks ([Map Diagnostic Context][1]) to automatically corre
 
 **Enable Log Injection for JSON Formatted Logs**
 
-1. Enable injection in the [Java Tracer's configuration][3]. Note: Currently only slf4j is supported for MDC autoinjection.
+Enable injection in the [Java Tracer's configuration][3]. 
+
+**Note**: Currently only slf4j is supported for MDC autoinjection.
 
 **Enable Log Injection for Raw Formatted Logs**
 
@@ -1427,7 +1429,7 @@ Leverage the MDC Frameworks ([Map Diagnostic Context][1]) to automatically corre
 
 **Manual Injection**
 
-If you prefer to correlate manually your traces with your logs, you can leverage Datadog API to retrieve correlation identifiers:
+If you prefer to correlate manually your traces with your logs, leverage the Datadog API to retrieve correlation identifiers:
 
 * Use `CorrelationIdentifier#getTraceId()`, and `CorrelationIdentifier#getSpanId()` APIs to inject identifiers
   at the beginning and end of each span to log (see examples below).
