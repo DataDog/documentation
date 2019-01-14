@@ -38,11 +38,20 @@ This flexibility is critical in some exceptional situations such as outages, whe
 
 ## Index details
 
-Indexes are located at the bottom of the [pipeline page][1]. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, and the retention period for those logs:
+Indexes are located in the [pipeline page][1] within the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, and the retention period for those logs:
 
 {{< img src="logs/logging_without_limits/index_details.png" alt="" responsive="true" style="width:70%;">}}
 
 Indexed logs can be used for [faceted searching][2], [Log Analytics][3], [dashboarding][4], and [monitoring][5].
+
+It is also possible to have multiple indexes with different retentions (**currently in private beta**).
+Logs enter the first index whose filter they match on, so it is important to order your indexes carefully.
+
+For example, if you create a first index filtered to the `status:notice` attribute and a second index filtered to the `status:error` attribute and a final one without any filter (the equivalent of `*`), all your notice logs would go to the first index, all your error logs to the second index and the rest would go to the final one.
+
+{{< img src="logs/logging_without_limits/multi_indexes.png" alt="" responsive="true" style="width:70%;">}}
+
+Multiple indexes also provide the ability to define access rules on the data contained in each index. [More information available in the role base access control documentation][].
 
 ## Setup Log Monitors on volumes
 
@@ -117,10 +126,11 @@ Enable or disable them in one click in the Pipeline page:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/logs/pipelines
+[1]: https://app.datadoghq.com/logs/pipelines/indexes
 [2]: /logs/explorer/?tab=facets#setup
 [3]: /logs/explorer/analytics
 [4]: /logs/explorer/analytics/#dashboard
 [5]: /monitors/monitor_types/log
 [6]: https://app.datadoghq.com/logs
 [7]: /logs/explorer/search
+[8]: /account_management/rbac/
