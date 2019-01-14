@@ -28,11 +28,11 @@ Datadog Index Filters avoid complex Agent level configuration and control what y
 You can now:
 
 * Ingest all your log events without server side filtering
-* Process and enrich all of them
-* Live Tail over the whole infrastructure
+* [Process and enrich all of them][9]
+* [Live Tail over the whole infrastructure][10]
 * Dynamically decide what to include or exclude from your indexes to control your costs
-* Get alerted when volumes grows unexpectedly over an index
-* Archive all enriched logs
+* [Get alerted when volumes grows unexpectedly over an index][11]
+* [Archive all enriched logs][12]
 
 This flexibility is critical in some exceptional situations such as outages, when you can disable specific filters to send more data. The inverse is true as well; if you over-consume because of a seasonal reason (Black Friday, Christmas, etc...) you can decide to selectively reduce some volume to avoid overages. 
 
@@ -134,3 +134,7 @@ Enable or disable them in one click in the Pipeline page:
 [6]: https://app.datadoghq.com/logs
 [7]: /logs/explorer/search
 [8]: /account_management/rbac/
+[9]: https://docs.datadoghq.com/logs/processing/
+[10]: https://docs.datadoghq.com/logs/live_tail/
+[11]: https://docs.datadoghq.com/monitors/monitor_types/log/
+[12]: https://docs.datadoghq.com/logs/archives/
