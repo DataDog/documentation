@@ -130,6 +130,17 @@ Tracer.Instance.ActiveScope.Span.SetTag("env", "<ENVIRONMENT>");
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note**: Span metadata must respect a typed tree structure. Each node of the tree is split by a `.` and a node can be of a single type: it can't be both an object (with sub-nodes) and a string for instance.
+
+So this example of span metadata is invalid:
+
+```json
+{
+  "key": "value",
+  "key.subkey": "value_2"
+}
+```
+
 ## UI
 
 {{< tabs >}}
