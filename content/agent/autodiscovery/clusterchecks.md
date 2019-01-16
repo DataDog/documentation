@@ -52,6 +52,13 @@ config_providers:
 
 [Restart the Agent][5] to apply the configuration change.
 
+### Custom checks
+
+Running [custom Agent Checks][6] as Cluster Checks is supported, as long as all node-based Agents are able to run it. This means your check code:
+
+- must be installed on all node-based Agents where the `clusterchecks` config provider is enabled
+- must not depend on local resources that are not accessible to all agents
+
 ## Setting up Check Configurations
 
 ### Static configurations in files
@@ -60,7 +67,7 @@ When the IP of a given resource is constant (eg. external service endpoint, publ
 
 #### Example: MySQL check on CloudSQL database
 
-After setting up your CloudSQL instance and [setting up the datadog user][6], mount a `/conf.d/mysql.yaml` file in the Cluster Agent container with the following contents:
+After setting up your CloudSQL instance and [setting up the datadog user][7], mount a `/conf.d/mysql.yaml` file in the Cluster Agent container with the following contents:
 
 ```yaml
 cluster_check: true
@@ -76,7 +83,7 @@ The `cluster_check` field will inform the Cluster Agent to delegate this check t
 
 ### Template Source: Kubernetes Service Annotations
 
-As you can [annotate Kubernetes Pods][7], you can annotate Services with the following syntax:
+As you can [annotate Kubernetes Pods][8], you can annotate Services with the following syntax:
 
 ```yaml
   ad.datadoghq.com/service.check_names: '[<CHECK_NAME>]'
@@ -84,11 +91,11 @@ As you can [annotate Kubernetes Pods][7], you can annotate Services with the fol
   ad.datadoghq.com/service.instances: '[<INSTANCE_CONFIG>]'
 ```
 
-The `%%host%%` [template variable][8] is supported and will be replaced by the service's IP. The `kube_namespace` and `kube_service` tags will be added to the instance.
+The `%%host%%` [template variable][9] is supported and will be replaced by the service's IP. The `kube_namespace` and `kube_service` tags will be added to the instance.
 
 #### Example: HTTP check on an nginx-backed service
 
-The following Service definition will expose the Pods from the `my-nginx` deployment and run an [HTTP check][9] to measure the latency of the load-balanced service:
+The following Service definition will expose the Pods from the `my-nginx` deployment and run an [HTTP check][10] to measure the latency of the load-balanced service:
 
 ```
 apiVersion: v1
@@ -116,7 +123,7 @@ spec:
     run: my-nginx
 ```
 
-In addition, each pod should be monitored with the [NGINX check][10], as it allows to observe both each worker and the aggregated service.
+In addition, each pod should be monitored with the [NGINX check][11], as it allows to observe both each worker and the aggregated service.
 
 ## Troubleshooting
 
@@ -169,7 +176,7 @@ The `clusterchecks` command allows to inspect the state of the dispatching logic
 # kubectl exec <cluster-agent_container_name> agent clusterchecks
 
 === 3 node-agents reporting ===
-Name                                                Running checks
+Name                                            Running checks
 default-pool-bce5cd34-7g24.c.sandbox.internal   0
 default-pool-bce5cd34-slx3.c.sandbox.internal   2
 default-pool-bce5cd34-ttw6.c.sandbox.internal   1
@@ -250,8 +257,9 @@ The agent `status` command should show the check instance running and reporting 
 [3]: /agent/kubernetes/cluster
 [4]: /agent/kubernetes/cluster/#cluster-checks-autodiscovery
 [5]: /agent/faq/agent-commands
-[6]: /integrations/mysql
-[7]: /agent/autodiscovery/?tab=kubernetes#template-source-kubernetes-pod-annotations
-[8]: /autodiscovery/?tab=kubernetes#supported-template-variables
-[9]: /integrations/http_check
-[10]: /integrations/nginx
+[6]: /developers/write_agent_check
+[7]: /integrations/mysql
+[8]: /agent/autodiscovery/?tab=kubernetes#template-source-kubernetes-pod-annotations
+[9]: /autodiscovery/?tab=kubernetes#supported-template-variables
+[10]: /integrations/http_check
+[11]: /integrations/nginx
