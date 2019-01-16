@@ -262,7 +262,7 @@ Refer to [the dedicated Custom metrics server guide][1] to configure the Custom 
 
 #### Cluster Checks Autodiscovery
 
-The Datadog Cluster Agent can extend the Autodiscovery mechanism for non-containerized cluster resources. To enable this, make the following changes to the Cluster Agent deployment:
+Starting with version 1.2.0, the Datadog Cluster Agent can extend the Autodiscovery mechanism for non-containerized cluster resources. To enable this, make the following changes to the Cluster Agent deployment:
 
 1. Set `DD_CLUSTER_CHECKS_ENABLED` to `true`.
 1. Pass your cluster name as `DD_CLUSTER_NAME`. It will be injected as a `cluster_name` instance tag to all configurations, to help you scope your metrics. The tag name can be customized with the `DD_CLUSTER_CHECKS_CLUSTER_TAG_NAME` option.
