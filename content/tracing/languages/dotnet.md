@@ -311,15 +311,15 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 
 The .NET Tracer's ability to automatically instrument data store access depends on the client libraries used:
 
-| Data store    | Library or NuGet package                 | Versions   | Support type  | Integration Name     |
-| ------------- | ---------------------------------------- | ---------- | ------------- | -------------------- |
-| MS SQL Server | `System.Data.SqlClient` (.NET Framework) | (built-in) | Public Beta   | `SqlServer`          |
-| MS SQL Server | `System.Data.SqlClient` (NuGet)          | 4.1+       | Public Beta   | `SqlServer`          |
-| Redis         | `StackExchange.Redis`                    | 1.0.187+   | Public Beta   | `StackExchangeRedis` |
-| Redis         | `ServiceStack.Redis`                     | 4.0.48+    | Public Beta   | `ServiceStackRedis`  |
-| Elasticsearch | `NEST` / `Elasticsearch.Net`             | 6.0.0+     | Public Beta   | `ElasticsearchNet`   |
-| MongoDB       | `MongoDB.Driver`                         |            | _Coming soon_ |                      |
-| PostgreSQL    | `Npgsql`                                 |            | _Coming soon_ |                      |
+| Data store    | Library or NuGet package                  | Versions   | Support type  |
+| ------------- | ----------------------------------------- | ---------- | ------------- |
+| MS SQL Server | `System.Data.SqlClient` (.NET Framework)  | (built-in) | Public Beta   |
+| MS SQL Server | `System.Data.SqlClient` (NuGet)           | 4.1+       | Public Beta   |
+| Redis         | `StackExchange.Redis`                     | 1.0.187+   | Public Beta   |
+| Redis         | `ServiceStack.Redis`                      | 4.0.48+    | Public Beta   |
+| Elasticsearch | `NEST` / `Elasticsearch.Net`              | 6.0.0+     | Public Beta   |
+| MongoDB       | `MongoDB.Driver` / `MongoDB.Driver.Core`  | 2.2.0+     | Public Beta   |
+| PostgreSQL    | `Npgsql`                                  |            | _Coming soon_ |
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
 
