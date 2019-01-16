@@ -57,7 +57,7 @@ Install the .NET Tracer on the host using the [MSI installer for Windows][1]. Ch
 - Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration][2] to set these environment variables.
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-[2]: ?tab=netframeworkonwindows#adding-environment-variables
+[2]: ?tab=netframeworkonwindows#required-environment-variables
 {{% /tab %}}
 
 {{% tab ".NET Core on Windows" %}}
@@ -73,7 +73,7 @@ Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][2] to your applicati
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 [2]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
 [3]: https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package
-[4]: ?tab=netcoreonwindows#adding-environment-variables
+[4]: ?tab=netcoreonwindows#required-environment-variables
 {{% /tab %}}
 
 {{% tab ".NET Core on Linux" %}}
@@ -117,7 +117,7 @@ apk add libc6-compat
 [1]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
 [2]: https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package
 [3]: https://github.com/DataDog/dd-trace-dotnet/releases
-[4]: ?tab=netcoreonlinux#adding-environment-variables
+[4]: ?tab=netcoreonlinux#required-environment-variables
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -311,15 +311,15 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 
 The .NET Tracer's ability to automatically instrument data store access depends on the client libraries used:
 
-| Data store    | Library or NuGet package                 | Versions   | Support type  | Integration Name     |
-| ------------- | ---------------------------------------- | ---------- | ------------- | -------------------- |
-| MS SQL Server | `System.Data.SqlClient` (.NET Framework) | (built-in) | Public Beta   | `SqlServer`          |
-| MS SQL Server | `System.Data.SqlClient` (NuGet)          | 4.1+       | Public Beta   | `SqlServer`          |
-| Redis         | `StackExchange.Redis`                    | 1.0.187+   | Public Beta   | `StackExchangeRedis` |
-| Redis         | `ServiceStack.Redis`                     | 4.0.48+    | Public Beta   | `ServiceStackRedis`  |
-| Elasticsearch | `NEST` / `Elasticsearch.Net`             | 6.0.0+     | Public Beta   | `ElasticsearchNet`   |
-| MongoDB       | `MongoDB.Driver`                         |            | _Coming soon_ |                      |
-| PostgreSQL    | `Npgsql`                                 |            | _Coming soon_ |                      |
+| Data store    | Library or NuGet package                  | Versions   | Support type  | Integration Name     |
+| ------------- | ----------------------------------------- | ---------- | ------------- | -------------------- |
+| ADO.NET       | `System.Data` / `System.Data.Common`      | 4.0+       | Public Beta   | `AdoNet`             |
+| Redis         | `StackExchange.Redis`                     | 1.0.187+   | Public Beta   | `StackExchangeRedis` |
+| Redis         | `ServiceStack.Redis`                      | 4.0.48+    | Public Beta   | `ServiceStackRedis`  |
+| Elasticsearch | `NEST` / `Elasticsearch.Net`              | 6.0.0+     | Public Beta   | `ElasticsearchNet`   |
+| MongoDB       | `MongoDB.Driver` / `MongoDB.Driver.Core`  | 2.2.0+     | Public Beta   | `MongoDb`            |
+
+The ADO.NET integration tries to instrument **all** ADO.NET providers. Support was tested with SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (e.g. MySQL, SQLite, Oracle) might work, but have not been tested yet.
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
 
