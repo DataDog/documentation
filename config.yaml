@@ -204,11 +204,18 @@ languages:
           weight: 180
           parent: kubernetes
 
+        ## Autodiscovery
         - identifier: autodiscovery
           name: "Autodiscovery"
           url: "agent/autodiscovery"
           weight: 20
           parent: menu_references_agent
+        - identifier: autodiscovery_clusterchecks
+          name: "Cluster Checks"
+          url: "agent/autodiscovery/clusterchecks"
+          weight: 200
+          parent: autodiscovery
+
         - identifier: proxy
           name: "Proxy"
           url: "agent/proxy"

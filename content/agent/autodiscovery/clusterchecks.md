@@ -1,0 +1,257 @@
+---
+title: Running Cluster Checks with Autodiscovery
+kind: documentation
+aliases:
+  - /agent/autodiscovery/clusterchecks
+further_reading:
+- link: "/agent/autodiscovery"
+  tag: "Documentation"
+  text: "Main Autodiscovery documentation"
+- link: "/agent/kubernetes/cluster/"
+  tag: "Documentation"
+  text: "Cluster Agent documentation"
+---
+
+## How it Works
+
+The Datadog Agent is able to auto-discover containers and create check configurations based on them via [the Autodiscovery mechanism][1]. The Cluster Checks feature extends this mechanism to monitor non-containerized workloads, including:
+
+- out-of-cluster datastores and endpoints (eg. RDS or CloudSQL)
+- load-balanced cluster services (eg. Kubernetes services)
+
+To ensure only one instance of each check runs, [the Cluster Agent][2] holds the configurations and dynamically dispatches them to node-based Agents. The Agents will connect to the Cluster Agent every 10 seconds and retrieve configurations to run. If an Agent stops reporting, the Cluster Agent will remove it from it's active pool and dispatch the configurations to other Agents. This ensures one instance always runs even as you add and remove nodes from your cluster.
+
+Metrics, events and service checks collected by Cluster Checks will be submitted without a hostname, as it is not relevant. A `cluster_name` tag is added, to allow you to scope and slice your data.
+
+This feature is currently only supported on Kubernetes, for versions 6.9.0 and up of the Agent, and versions 1.2.0 and up of the Cluster Agent.
+
+
+## How to set it up
+
+### Cluster Agent setup
+
+This feature requires a running Cluster Agent. Refer to [the Cluster Agent setup][3] documentation and it's [Cluster Checks Autodiscovery][4] section.
+
+### Agent setup
+
+On the Datadog **Host** Agent, you need to enable the `clusterchecks` configuration provider. This can be done in two ways:
+
+- By setting the `DD_EXTRA_CONFIG_PROVIDERS` environment variable:
+
+```
+DD_EXTRA_CONFIG_PROVIDERS="clusterchecks"
+```
+
+- Or adding it to your `datadog.yaml` configuration file:
+
+```
+config_providers:
+  - name: clusterchecks
+    polling: true
+```
+
+[Restart the Agent][5] to apply the configuration change.
+
+## Setting up Check Configurations
+
+### Static configurations in files
+
+When the IP of a given resource is constant (eg. external service endpoint, public URL...), you can pass a static configuration to the Cluster Agent as yaml files. The file name convention and syntax are the sames as static configurations on the node-based Agent, with the addition of the `cluster_check: true` line.
+
+#### Example: MySQL check on CloudSQL database
+
+After setting up your CloudSQL instance and [setting up the datadog user][6], mount a `/conf.d/mysql.yaml` file in the Cluster Agent container with the following contents:
+
+```yaml
+cluster_check: true
+init_config:
+instances:
+  - server: '<PRIVATE_IP_ADDRESS>'
+    port: 3306
+    user: datadog
+    pass: '<YOUR_CHOSEN_PASSWORD>'
+```
+
+The `cluster_check` field will inform the Cluster Agent to delegate this check to one node-based Agent.
+
+### Template Source: Kubernetes Service Annotations
+
+As you can [annotate Kubernetes Pods][7], you can annotate Services with the following syntax:
+
+```yaml
+  ad.datadoghq.com/service.check_names: '[<CHECK_NAME>]'
+  ad.datadoghq.com/service.init_configs: '[<INIT_CONFIG>]'
+  ad.datadoghq.com/service.instances: '[<INSTANCE_CONFIG>]'
+```
+
+The `%%host%%` [template variable][8] is supported and will be replaced by the service's IP. The `kube_namespace` and `kube_service` tags will be added to the instance.
+
+#### Example: HTTP check on an nginx-backed service
+
+The following Service definition will expose the Pods from the `my-nginx` deployment and run an [HTTP check][9] to measure the latency of the load-balanced service:
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-nginx
+  labels:
+    run: my-nginx
+  annotations:
+    ad.datadoghq.com/service.check_names: '["http_check"]'
+    ad.datadoghq.com/service.init_configs: '[{}]'
+    ad.datadoghq.com/service.instances: |
+      [
+        {
+          "name": "My Nginx",
+          "url": "http://%%host%%",
+          timeout: 1
+        }
+      ]
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    run: my-nginx
+```
+
+In addition, each pod should be monitored with the [NGINX check][10], as it allows to observe both each worker and the aggregated service.
+
+## Troubleshooting
+
+Due to their distributed nature, Cluster Checks troubleshooting is a bit more involved. The following sections explain the main steps of the dispatching process and the associated troubleshooting commands.
+
+### Kubernetes: find the leader Cluster Agent
+
+When leader-election is enabled, only the leader serves Cluster Check configurations to the node-based Agents. The name of the leader is available in the `datadog-leader-election` ConfigMap:
+
+```
+# kubectl get cm datadog-leader-election -o yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  annotations:
+    control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"cluster-agent-rhttz", ...''
+```
+
+In this case, the leader pod is `cluster-agent-rhttz`. If it is deleted or unresponsive, another pod will automatically take over.
+
+### Autodiscovery in the Cluster Agent
+
+To ensure a configuration (static or autodiscovered) is picked up by the Cluster Agent, use the `configcheck` command in the leader Cluster Agent:
+
+```
+# kubectl exec <cluster-agent_container_name> agent configcheck
+...
+=== http_check cluster check ===
+Source: kubernetes-services
+Instance ID: http_check:My service:6e5f4b16b4b433cc
+name: My service
+tags:
+- kube_namespace:default
+- kube_service:my-nginx
+timeout: 1
+url: http://10.15.246.109
+~
+Init Config:
+{}
+Auto-discovery IDs:
+* kube_service://751adfe4-1280-11e9-a26b-42010a9c00c8
+===
+```
+
+### Dispatching logic in the Cluster Agent
+
+The `clusterchecks` command allows to inspect the state of the dispatching logic, and track on what node a configuration will be running.
+
+```
+# kubectl exec <cluster-agent_container_name> agent clusterchecks
+
+=== 3 node-agents reporting ===
+Name                                                Running checks
+default-pool-bce5cd34-7g24.c.sandbox.internal   0
+default-pool-bce5cd34-slx3.c.sandbox.internal   2
+default-pool-bce5cd34-ttw6.c.sandbox.internal   1
+...
+
+===== Checks on default-pool-bce5cd34-ttw6.c.sandbox.internal =====
+
+=== http_check check ===
+Source: kubernetes-services
+Instance ID: http_check:My service:5b948dee172af830
+empty_default_hostname: true
+name: My service
+tags:
+- kube_namespace:default
+- kube_service:my-nginx
+- cluster_name:ccheck_testing
+timeout: 1
+url: http://10.15.246.109
+~
+Init Config:
+{}
+===
+```
+
+**Note:** the Instance ID will be different from the `configcheck` command, as the instance is modified to add tags and options.
+
+In this case, this configuration is dispatched to the `default-pool-bce5cd34-ttw6` node. We can continue the troubleshooting there.
+
+### Autodiscovery in the node-based Agent
+
+The agent `configcheck` command should show the instance, with the `cluster-checks` source:
+
+```
+# kubectl exec <node-agent_container_name> agent configcheck
+...
+=== http_check check ===
+Source: cluster-checks
+Instance ID: http_check:My service:5b948dee172af830
+empty_default_hostname: true
+name: My service
+tags:
+- kube_namespace:default
+- kube_service:my-nginx
+- cluster_name:ccheck_testing
+timeout: 1
+url: http://10.15.246.109
+~
+Init Config:
+{}
+===
+```
+
+The Instance ID matches the one we had earlier.
+
+### Agent status
+
+The agent `status` command should show the check instance running and reporting successfully.
+
+```
+# kubectl exec <node-agent_container_name> agent status
+...
+    http_check (3.1.1)
+    ------------------
+      Instance ID: http_check:My service:5b948dee172af830 [OK]
+      Total Runs: 234
+      Metric Samples: Last Run: 3, Total: 702
+      Events: Last Run: 0, Total: 0
+      Service Checks: Last Run: 1, Total: 234
+      Average Execution Time : 90ms
+```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/autodiscovery
+[2]: /agent/kubernetes/cluster
+[3]: /agent/kubernetes/cluster
+[4]: /agent/kubernetes/cluster/#cluster-checks-autodiscovery
+[5]: /agent/faq/agent-commands
+[6]: /integrations/mysql
+[7]: /agent/autodiscovery/?tab=kubernetes#template-source-kubernetes-pod-annotations
+[8]: /autodiscovery/?tab=kubernetes#supported-template-variables
+[9]: /integrations/http_check
+[10]: /integrations/nginx
