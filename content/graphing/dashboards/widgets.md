@@ -168,10 +168,10 @@ Let's say you are on a Timeseries and you are currently displaying the past hour
 
 *Supported on Screenboards and Timeboards*
 
-The scatter plot visualization allows you to graph a chosen scope over 2 different metrics with their respective aggregation:
+The Scatter Plot visualization allows you to graph a chosen scope over 2 different metrics with their respective aggregation:
 
 * Select a metric and an aggregation for the X and Y axis.
-* Define the scope for each point of the scatter plot, such as `host`, `service`, `app`, `region`, etc.
+* Define the scope for each point of the Scatter Plot, such as `host`, `service`, `app`, `region`, etc.
 * Enable a color-by tag (optional).
 * Set X and Y axis controls (optional).
 
