@@ -1527,12 +1527,16 @@ correlation.trace_id # => 0
 correlation.span_id # => 0
 ```
 
+**For Ruby applications**
+
 To add correlation IDs to your logger, add a log formatter which retrieves the correlation IDs with `Datadog.tracer.active_correlation`, then add them to the message.
 
 To properly correlate with Datadog logging, be sure the following is present:
 
  - `dd.trace_id=<TRACE_ID>`: Where `<TRACE_ID>` is equal to `Datadog.tracer.active_correlation.trace_id` or `0` if no trace is active.
  - `dd.span_id=<SPAN_ID>`: Where `<SPAN_ID>` is equal to `Datadog.tracer.active_correlation.span_id` or `0` if no trace is active.
+
+By default, `Datadog::Correlation::Identifier#to_s` will return `dd.trace_id=<TRACE_ID> dd.span_id=<SPAN_ID>`.
 
 An example of this in practice:
 
@@ -1543,10 +1547,34 @@ require 'logger'
 logger = Logger.new(STDOUT)
 logger.progname = 'my_app'
 logger.formatter  = proc do |severity, datetime, progname, msg|
-  # Returns Datadog::Correlation::Identifier
-  ids = Datadog.tracer.active_correlation
-  "[#{datetime}][#{progname}][#{severity}][dd.trace_id=#{ids.trace_id} dd.span_id=#{ids.span_id}] #{msg}\n"
+  "[#{datetime}][#{progname}][#{severity}][#{Datadog.tracer.active_correlation}] #{msg}\n"
 end
+
+# When no trace is active
+logger.warn('This is an untraced operation.')
+# [2019-01-16 18:38:41 +0000][my_app][WARN][dd.trace_id=0 dd.span_id=0] This is an untraced operation.
+
+# When a trace is active
+Datadog.tracer.trace('my.operation') { logger.warn('This is a traced operation.') }
+# [2019-01-16 18:38:41 +0000][my_app][WARN][dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] This is a traced operation.
+```
+
+**For Rails applications**
+
+Rails applications which are configured with a `ActiveSupport::TaggedLogging` logger can append correlation IDs as tags to log output. The default Rails logger implements this tagged logging, making it easier to add correlation tags.
+
+In your Rails environment configuration file, add the following:
+
+```ruby
+Rails.application.configure do
+  config.log_tags = [proc { Datadog.tracer.active_correlation.to_s }]
+end
+
+# Web requests will produce:
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Started GET "/articles" for 172.22.0.1 at 2019-01-16 18:50:57 +0000
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Processing by ArticlesController#index as */*
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206]   Article Load (0.5ms)  SELECT "articles".* FROM "articles"
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
 ```
 
 {{% /tab %}}
