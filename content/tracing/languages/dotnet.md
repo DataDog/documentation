@@ -319,7 +319,7 @@ The .NET Tracer's ability to automatically instrument data store access depends 
 | Elasticsearch | `NEST` / `Elasticsearch.Net`              | 6.0.0+     | Public Beta   | `ElasticsearchNet`   |
 | MongoDB       | `MongoDB.Driver` / `MongoDB.Driver.Core`  | 2.2.0+     | Public Beta   | `MongoDb`            |
 
-The ADO.NET integration will try to instrument _all_ ADO.NET providers. Support was tested with SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (e.g. MySQL, SQLite, Oracle) might work, but have not been tested yet.
+The ADO.NET integration tries to instrument **all** ADO.NET providers. Support was tested with SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (e.g. MySQL, SQLite, Oracle) might work, but have not been tested yet.
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
 
