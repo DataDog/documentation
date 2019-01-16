@@ -1202,7 +1202,7 @@ For a more detailed explanations of sampling and priority sampling, check the [s
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Priority sampling is enabled by default. To disable it, configure the `priority.sampling` flag to `false` ([see how to configure the java client][1].
+Priority sampling is enabled by default. To disable it, configure the `priority.sampling` flag to `false` ([see how to configure the java client][1]).
 
 
 Current Priority Values (more may be added in the future):
