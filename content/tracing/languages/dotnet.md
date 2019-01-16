@@ -313,13 +313,13 @@ The .NET Tracer's ability to automatically instrument data store access depends 
 
 | Data store    | Library or NuGet package                  | Versions   | Support type  |
 | ------------- | ----------------------------------------- | ---------- | ------------- |
-| MS SQL Server | `System.Data.SqlClient` (.NET Framework)  | (built-in) | Public Beta   |
-| MS SQL Server | `System.Data.SqlClient` (NuGet)           | 4.1+       | Public Beta   |
+| ADO.NET       | `System.Data` or `System.Data.Common`     | 4.0+       | Public Beta   |
 | Redis         | `StackExchange.Redis`                     | 1.0.187+   | Public Beta   |
 | Redis         | `ServiceStack.Redis`                      | 4.0.48+    | Public Beta   |
 | Elasticsearch | `NEST` / `Elasticsearch.Net`              | 6.0.0+     | Public Beta   |
 | MongoDB       | `MongoDB.Driver` / `MongoDB.Driver.Core`  | 2.2.0+     | Public Beta   |
-| PostgreSQL    | `Npgsql`                                  |            | _Coming soon_ |
+
+The ADO.NET support will try to instrument _all_ ADO.NET providers. Support was tested with SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (e.g. MySQL, SQLite, Oracle) might work, but have not been tested yet.
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
 
