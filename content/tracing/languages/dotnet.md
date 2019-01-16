@@ -313,7 +313,7 @@ The .NET Tracer's ability to automatically instrument data store access depends 
 
 | Data store    | Library or NuGet package                  | Versions   | Support type  |
 | ------------- | ----------------------------------------- | ---------- | ------------- |
-| ADO.NET       | `System.Data` / `System.Data.Common`     | 4.0+       | Public Beta   |
+| ADO.NET       | `System.Data` / `System.Data.Common`      | 4.0+       | Public Beta   |
 | Redis         | `StackExchange.Redis`                     | 1.0.187+   | Public Beta   |
 | Redis         | `ServiceStack.Redis`                      | 4.0.48+    | Public Beta   |
 | Elasticsearch | `NEST` / `Elasticsearch.Net`              | 6.0.0+     | Public Beta   |
