@@ -1,5 +1,5 @@
 ---
-title: Tracing Language instrumentation
+title: Tracing language instrumentation
 kind: Documentation
 aliases:
     - /tracing/setup
