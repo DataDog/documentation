@@ -188,7 +188,7 @@ Below, you have searched for SSH processes and pivoted by `user` to understand w
 
 Perhaps this one is less exciting after redaction.
 
-## ScatterPlot
+## Scatter Plot
 
 Use the scatter plot analytic to compare two metrics with one another in order to better understand the performance of your containers.
 
