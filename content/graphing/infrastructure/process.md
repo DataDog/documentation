@@ -190,15 +190,15 @@ Perhaps this one is less exciting after redaction.
 
 ## Scatter Plot
 
-Use the Scatter Plot analytic to compare two metrics with one another in order to better understand the performance of your containers.
+Use the scatter plot analytic to compare two metrics with one another in order to better understand the performance of your containers.
 
-To access the Scatter Plot analytic [in the Processes page][4] click on the *Show Summary graph* button the select the "Scatter Plot" tab:
+To access the scatter plot analytic [in the Processes page][4] click on the *Show Summary graph* button the select the "Scatter Plot" tab:
 
 {{< img src="graphing/infrastructure/process/scatterplot_selection.png" alt="scatterplot selection" responsive="true" style="width:60%;">}}
 
 By default, the graph groups by the `command` tag key. The size of each dot represents the number of processes in that group, and clicking on a dot displays the individual pids and containers that contribute to the group.
 
-The query at the top of the Scatter Plot analytic allows you to control your Scatter Plot analytic:
+The query at the top of the scatter plot analytic allows you to control your Scatter Plot analytic:
 
 * Selection of metrics to display.
 * Selection of the aggregation method for both metrics.
