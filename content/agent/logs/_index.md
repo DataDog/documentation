@@ -39,11 +39,11 @@ The Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This require
 
 To start collecting logs for a given integration, uncomment the logs section in that integration's yaml file and configure it for your environment.
 
-<div class="alert alert-warning">
-Not all integrations include out of the box log configurations.  <a href="/integrations/#cat-log-collection">Consult the current list of supported integrations available</a>.
+<div class="alert alert-info">
+<a href="/integrations/#cat-log-collection">Consult the list of integrations that support log collection.</a>.
 </div>
 
-If an integration does not support logs by default, use the custom file configuration below.
+If an integration does not support log collection by default, use the custom file configuration below.
 
 ## Custom log collection
 
