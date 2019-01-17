@@ -4,6 +4,8 @@ kind: Documentation
 description: "Configure your Datadog Agent to gather logs from your host, containers & services."
 aliases:
     - /guides/logs/
+    - /logs/dynamic_volume_control
+    - /logs/logging_without_limits
 further_reading:
 - link: "agent/logs"
   tag: "Documentation"
@@ -41,7 +43,7 @@ This flexibility is critical in some exceptional situations such as outages, whe
 
 Indexes are located in the [pipeline page][12] within the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, and the retention period for those logs:
 
-{{< img src="logs/logging_without_limits/index_details.png" alt="" responsive="true" style="width:70%;">}}
+{{< img src="logs/index_details.png" alt="index details" responsive="true" style="width:70%;">}}
 
 Indexed logs can be used for [faceted searching][13], [Log Analytics][14], [dashboarding][15], and [monitoring][16].
 
@@ -50,7 +52,7 @@ Logs enter the first index whose filter they match on, so it is important to ord
 
 For example, if you create a first index filtered to the `status:notice` attribute and a second index filtered to the `status:error` attribute and a final one without any filter (the equivalent of `*`), all your notice logs would go to the first index, all your error logs to the second index and the rest would go to the final one.
 
-{{< img src="logs/logging_without_limits/multi_indexes.png" alt="" responsive="true" style="width:70%;">}}
+{{< img src="logs/multi_indexes.png" alt="multi indexes" responsive="true" style="width:70%;">}}
 
 Multiple indexes also provide the ability to define access rules on the data contained in each index. [More information available in the role base access control documentation][17].
 
@@ -64,7 +66,7 @@ Get notified at any moment if the volumes in any scope (`service`, `availibility
 4. Define the rate you would like to set as *warning* or *error*.
 5. Define an explicit notification: `The volume on this service just got too high. Define an additional exclusion filter or increase the sampling rate to put it back under control.`
 
-{{< img src="logs/logging_without_limits/example_notification.png" alt="" responsive="true" style="width:70%;">}}
+{{< img src="logs/example_notification.png" alt="example notifications" responsive="true" style="width:70%;">}}
 
 ## Exclusion Filters
 
@@ -74,7 +76,7 @@ For example, if some logs were captured only for troubleshooting purposes, you m
 
 To define a new Index Filter click on the "add" button:
 
-{{< img src="logs/logging_without_limits/index_filters.png" alt="" responsive="true" style="width:70%;">}}
+{{< img src="logs/index_filters.png" alt="index filters" responsive="true" style="width:70%;">}}
 
 To configure an exclusion filter:
 
@@ -83,7 +85,7 @@ To configure an exclusion filter:
     **Note**: It is possible to use any attribute or tag in the Index filter query, even those that are not facets. If you are filtering by non-faceted attributes or tags, be sure to hit "enter/return" from the query bar
 3. Save the filter
 
-    {{< img src="logs/logging_without_limits/index_filter_details.png" alt="" responsive="true" style="width:80%;">}}
+    {{< img src="logs/index_filter_details.png" alt="index filter details" responsive="true" style="width:80%;">}}
 
 ### Example
 
@@ -121,7 +123,7 @@ Instead of changing your application logging level or using a complex internal f
 
 Enable or disable them in one click in the Pipeline page:
 
-{{< img src="logs/logging_without_limits/enable_index_filters.png" alt="" responsive="true" style="width:80%;">}}
+{{< img src="logs/enable_index_filters.png" alt="" responsive="true" style="width:80%;">}}
 
 ## Further Reading
 

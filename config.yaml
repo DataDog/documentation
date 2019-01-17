@@ -919,12 +919,6 @@ languages:
           weight: 540
           parent: customnav_lognav_explorer
 
-        - identifier: customnav_lognav_logging_without_limits
-          name: "Logging without Limits"
-          url: "logs/logging_without_limits/"
-          weight: 60
-          parent: menu_references_logs
-
         - identifier: customnav_lognav_monitor
           name: "Log monitor"
           url: "monitors/monitor_types/log"
@@ -2086,11 +2080,6 @@ languages:
           weight: 540
           parent: customnav_lognav_explorer
 
-        - identifier: customnav_lognav_logging_without_limits
-          name: "Collecter des logs sans limites"
-          url: "logs/logging_without_limits/"
-          weight: 60
-          parent: menu_references_logs
         - identifier: customnav_lognav_languages
           name: "Logs d'application"
           url: "logs/languages/"
