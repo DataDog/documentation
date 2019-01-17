@@ -61,7 +61,7 @@ This is available for Slack and email notifications.
  
 ### Multi alerts 
 
-It is possible to the top 10 of breaching values in multi alerts notifications.
+It is possible to add the top 10 of breaching values in multi alerts notifications.
 This is available for Slack and email notifications.
 
  **Enable top 10 breaching values in notification message**
