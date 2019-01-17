@@ -95,7 +95,6 @@ Endpoints that can be used to send logs to Datadog:
 |--------------------------------------|---------|----------------------------------------------------------------------------------------------------------|
 | `intake.logs.datadoghq.com`          | `10514` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an unecrypted TCP connection. |
 
-
 {{% /tab %}}
 {{% tab "EU Region" %}}
 
@@ -115,6 +114,7 @@ Endpoints that can be used to send logs to Datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
+To send logs over HTTPs, refer to the [Datadog Log HTTP API documentation][29].
 
 ### Reserved attributes
 
@@ -163,3 +163,4 @@ Your logs are collected and centralized into the [Log Explorer][3] view. You can
 [26]: https://app.datadoghq.com/account/settings#api
 [27]: https://app.datadoghq.com/logs/livetail
 [28]: /security/logs/#information-security
+[29]: /api/?lang=bash#send-logs-over-http

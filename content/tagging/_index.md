@@ -21,12 +21,12 @@ Tags are a way of adding dimensions to metrics, so they can be filtered, aggrega
 
 Tagging binds different data types in Datadog, allowing for correlation and call to action between metrics, traces, and logs. This is accomplished with **reserved** tag keys. Here are some examples:
 
-| Tag Key   | Allows for                                                          |
-|-----------|---------------------------------------------------------------------|
-| `host`    | Correlation between metrics, traces, processes, and logs            |
-| `device`  | Segregation of metrics, traces, process, and logs by device or disk |
-| `source`  | Event filtering and automated pipeline creation for log management  |
-| `service` | Correlation between traces and logs                                 |
+| Tag Key     | Allows for                                                            |
+| ----------- | --------------------------------------------------------------------- |
+| `host`      | Correlation between metrics, traces, processes, and logs              |
+| `device`    | Segregation of metrics, traces, process, and logs by device or disk   |
+| `source`    | Event filtering and automated pipeline creation for log management    |
+| `service`   | Correlation between metrics, traces, and logs                         |
 
 ## Why It Matters
 

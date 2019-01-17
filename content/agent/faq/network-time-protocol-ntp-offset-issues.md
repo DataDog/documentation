@@ -16,7 +16,7 @@ If you have noticed any of the following issues, they may be related to the NTP 
 * Metric delays
 * Gaps in graphs of metrics
 
-To check the NTP offset for a host, you can run the Agent [info command][1], using the instructions appropriate for your OS, and look for the Clocks section:
+To check the NTP offset for a host, you can run the Agent [status command][1], using the instructions appropriate for your OS, and look for the Clocks section:
 
 ```
   Clocks

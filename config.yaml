@@ -384,47 +384,52 @@ languages:
         - identifier: customnav_graphingnav_arithmetic
           name: "Arithmetic"
           url: "graphing/functions/arithmetic/"
-          weight: 620
+          weight: 615
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_count
           name: "Count"
           url: "graphing/functions/count/"
-          weight: 630
+          weight: 620
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_interpolation
           name: "Interpolation"
           url: "graphing/functions/interpolation/"
-          weight: 640
+          weight: 625
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_rank
           name: "Rank"
           url: "graphing/functions/rank/"
-          weight: 650
+          weight: 630
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_rate
           name: "Rate"
           url: "graphing/functions/rate/"
-          weight: 660
+          weight: 635
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_regression
           name: "Regression"
           url: "graphing/functions/regression/"
-          weight: 670
+          weight: 640
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_rollup
           name: "Rollup"
           url: "graphing/functions/rollup/"
-          weight: 680
+          weight: 645
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_smoothing
           name: "Smoothing"
           url: "graphing/functions/smoothing/"
-          weight: 690
+          weight: 650
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_timeshift
           name: "Timeshift"
           url: "graphing/functions/timeshift/"
-          weight: 695
+          weight: 655
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_beta
+          name: "Beta"
+          url: "graphing/functions/beta/"
+          weight: 660
           parent: customnav_graphingnav_functions
 
         - identifier: customnav_graphingnav_graphingjson
@@ -1551,47 +1556,52 @@ languages:
         - identifier: customnav_graphingnav_arithmetic
           name: "Arithmetic"
           url: "graphing/functions/arithmetic/"
-          weight: 620
+          weight: 615
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_count
           name: "Count"
           url: "graphing/functions/count/"
-          weight: 630
+          weight: 620
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_interpolation
           name: "Interpolation"
           url: "graphing/functions/interpolation/"
-          weight: 640
+          weight: 625
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_rank
           name: "Rank"
           url: "graphing/functions/rank/"
-          weight: 650
+          weight: 630
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_rate
           name: "Rate"
           url: "graphing/functions/rate/"
-          weight: 660
+          weight: 635
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_regression
           name: "Regression"
           url: "graphing/functions/regression/"
-          weight: 670
+          weight: 640
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_rollup
           name: "Rollup"
           url: "graphing/functions/rollup/"
-          weight: 680
+          weight: 645
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_smoothing
           name: "Smoothing"
           url: "graphing/functions/smoothing/"
-          weight: 690
+          weight: 650
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_timeshift
           name: "Timeshift"
           url: "graphing/functions/timeshift/"
-          weight: 695
+          weight: 655
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_beta
+          name: "Beta"
+          url: "graphing/functions/beta/"
+          weight: 660
           parent: customnav_graphingnav_functions
 
         - identifier: customnav_graphingnav_graphingjson
