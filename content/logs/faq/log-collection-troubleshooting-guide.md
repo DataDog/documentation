@@ -120,6 +120,6 @@ config_providers:
 [1]: /logs
 [2]: /help
 [3]: https://codebeautify.org/yaml-validator
-[4]: /logs/languages/docker/?tab=containerinstallation#filter-containers
-[5]: /logs/languages/docker/?tab=dockerfile#examples
+[4]: /agent/docker/logs/?tab=containerinstallation#filter-containers
+[5]: /agent/docker/logs/?tab=dockerfile#examples
 [6]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates

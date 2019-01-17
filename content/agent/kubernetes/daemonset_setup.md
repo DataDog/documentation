@@ -161,6 +161,11 @@ spec:
                 fieldPath: status.hostIP
           - name: DD_APM_ENABLED
             value: "true"
+          # Logs collection - uncomment this section to enable enable log collection
+          # - name: DD_LOGS_ENABLED
+          #  value: "true"
+          # - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
+          #  value: "true"
         resources:
           requests:
             memory: "256Mi"
@@ -177,6 +182,8 @@ spec:
           - name: cgroups
             mountPath: /host/sys/fs/cgroup
             readOnly: true
+          - name: pointerdir
+              mountPath: /opt/datadog-agent/run
         livenessProbe:
           exec:
             command:
@@ -193,6 +200,9 @@ spec:
         - hostPath:
             path: /sys/fs/cgroup
           name: cgroups
+        - hostPath:
+            path: /opt/datadog-agent/run
+            name: pointerdir
 ```
 
 Replace `<YOUR_API_KEY>` with [your Datadog API key][3] or use [Kubernetes secrets][4] to set your API key as an [environment variable][5]. Consult the [Docker integration][6] to discover all of the configuration options.
