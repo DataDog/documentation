@@ -961,6 +961,16 @@ languages:
           url: "synthetics/"
           pre: "nav_synthetics"
           weight: 100
+        - identifier: synthetics_uptime_check
+          name: "Uptime Check"
+          url: "synthetics/uptime_check"
+          weight: 110
+          parent: menu_references_synthetics
+        - identifier: synthetics_browser_check
+          name: "Browser Check"
+          url: "synthetics/browser_check"
+          weight: 120
+          parent: menu_references_synthetics
 
         # DEVELOPERS
         - identifier: menu_references_developers
@@ -1175,6 +1185,7 @@ languages:
           pre: "nav_security"
           weight: 140
         # SECURITY - Subnav start
+
         - identifier: customnav_security_agent
           name: "Agent"
           url: "security/agent"
@@ -2191,6 +2202,23 @@ languages:
           url: "logs/security"
           weight: 100
           parent: menu_references_logs
+
+          # SYNTHETICS
+        - identifier: menu_references_synthetics
+          name: "Synthetics"
+          url: "synthetics/"
+          pre: "nav_synthetics"
+          weight: 99
+        - identifier: synthetics_uptime_check
+          name: "Uptime Check"
+          url: "synthetics/uptime_check"
+          weight: 100
+          parent: menu_references_synthetics
+        - identifier: synthetics_browser_check
+          name: "Browser Check"
+          url: "synthetics/browser_check"
+          weight: 110
+          parent: menu_references_synthetics
 
         # DEVELOPERS
         - identifier: menu_references_developers
