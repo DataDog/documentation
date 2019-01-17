@@ -175,4 +175,5 @@ logs:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: 
+
+[1]: /agent/proxy/#proxy-for-logs
