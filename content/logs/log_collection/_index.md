@@ -3,22 +3,16 @@ title: Log Collection
 kind: Documentation
 ---
 
-Log collection is the beginning of your journey in the wonderful world of log management. Use the [Datadog Agent][1] to collect logs directly from your hosts or your [containerized environments][2] or from [Kubernetes][3]. You can collect AWS service logs with Datadog's [AWS Lambda function](#from-aws-services).If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][4], [Syslog-ng][5], [NXlog][6], [FluentD][7], and [Logstash][8].
+Log collection is the beginning of your journey in the wonderful world of log management. Use the [Datadog Agent][1] to collect logs directly from your hosts or your [containerized environments][2] or from [Kubernetes][3]. You can collect AWS service logs with Datadog's [AWS Lambda function](#aws-log-collection).If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][4], [Syslog-ng][5], [NXlog][6], [FluentD][7], and [Logstash][8].
+
+### Host Log collection
+
+Follow the [Datadog Agent installation instructions][1] to start forwarding logs alongside your metrics and traces.
+The Agent can [tail log files][9] or [listen for logs sent over UDP / TCP][10], and you can configure it to [filter out logs][11], [scrub sensitive data][12], or  aggregate [multi line logs][13].
 
 ## Integration Log collection 
 
-Integrations and Log Collection are intimately tied together. By collecting Logs the right way, you enable all the the subsequent components such as [processing][9], [parsing][10], and [facets][11] in the Explorer. **[Discover the log integrations supported by Datadog][12]**. You can also define custom log sources if there isn't an integration for your source yet.
-
-<div class="alert alert-info">
-<a href="/integrations/#cat-log-collection">Consult the current list of available supported integrations</a>.
-</div>
-
-The different ways and places from which to collect logs.
-
-### Host log collection
-
-Follow the [Datadog Agent installation instructions][1] to start forwarding logs alongside your metrics and traces.
-The Agent can [tail log files][13] or [listen for logs sent over UDP / TCP][14], and you can configure it to [filter out logs][15], [scrub sensitive data][16], or  aggregate [multi line logs][17].
+Integrations and Log Collection are intimately tied together. By collecting Logs the right way, you enable all the the subsequent components such as [processing][14], [parsing][15], and [facets][16] in the Explorer. **[Discover the log integrations supported by Datadog][17]**.
 
 ### Docker Log collection
 
@@ -69,7 +63,7 @@ This produces the following result in your [live tail page][26]:
 
 {{< img src="logs/custom_log_telnet.png" alt="Custom telnet" responsive="true" style="width:70%;">}}
 
-## Datadog Logs Endpoints
+### Datadog Logs Endpoints
 
 Datadog provides logging endpoints for both SSL-encrypted connections and unencrypted connections.
 You should use the encrypted endpoint when possible. The Datadog Agent uses the encrypted endpoint to send logs to Datadog (more information available in the [Datadog security documentation][27]).
@@ -112,7 +106,6 @@ Endpoints that can be used to send logs to Datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ## Reserved attributes
 
 Here are some key attributes you should pay attention to when setting up your project:
@@ -137,17 +130,17 @@ Your logs are collected and centralized into the [Log Explorer][28] view. You ca
 [6]: /integrations/nxlog
 [7]: /integrations/fluentd/#log-collection
 [8]: /integrations/logstash/#log-collection
-[9]: /logs/processing
-[10]: /logs/processing/parsing
-[11]: /logs/explorer/?tab=facets#setup
-[12]: /integrations/#cat-log-collection
-[13]: /agent/logs/#tail-existing-files
-[14]: /agent/logs/#stream-logs-through-tcp-udp
-[15]: /agent/logs/#filter-logs
-[16]: /agent/logs/#scrub-sensitive-data-in-your-logs
-[17]: /agent/logs/#multi-line-aggregation
+[9]: /agent/logs/#tail-existing-files
+[10]: /agent/logs/#stream-logs-through-tcp-udp
+[11]: /agent/logs/#filter-logs
+[12]: /agent/logs/#scrub-sensitive-data-in-your-logs
+[13]: /agent/logs/#multi-line-aggregation
+[14]: /logs/processing
+[15]: /logs/processing/parsing
+[16]: /logs/explorer/?tab=facets#setup
+[17]: /integrations/#cat-log-collection
 [18]: /agent/docker/logs
-[19]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
+[19]: /agent/kubernetes/#log-collection
 [20]: /integrations/amazon_web_services/#log-collection
 [21]: /integrations/amazon_web_services/#enable-logging-for-your-aws-service
 [22]: /agent
