@@ -7,9 +7,17 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introducing Datadog Synthetics"
+- link: "synthetics/"
+  tag: "Documentation"
+  text: "Manage your checks"
+- link: "synthetics/browser_check"
+  tag: "Documentation"
+  text: "Configure a Browser Check"
 ---
 
 ## Overview
+
+Uptime checks are HTTP requests (GET, POST, PUT, etc.) executed by Datadog to your web properties or application endpoints at periodic, configurable intervals from multiple locations around the world. These checks verify not only that your applications are up and responding to requests, but that any conditions you define are met, such as response time, HTTP response code, and header or body contents.
 
 ## Configuration
 ### Request
@@ -61,9 +69,12 @@ Click on **Add new assertion** to add up to 10 assertions for your uptime check.
 A notification is sent if at least one of the assertion defined is failing, to configure your notifications:
 
 1. Select users and/or [services][2] to send the notifications to.
-
 2. Enter a **message** for the Uptime Check. This field allows standard [Markdown formatting][3]. Notifications message include the **message** defined in this section and information about which assertion failed and why.
 3. Click **Save** to save your Uptime check.
+
+Notifications example:
+
+{{< img src="synthetics/uptime_check/uptime_check_notifications.png" alt="Assertions" responsive="true" style="width:80%;">}}
 
 ## Further Reading
 

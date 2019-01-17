@@ -7,6 +7,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introducing Datadog Synthetics"
+- link: "synthetics/"
+  tag: "Documentation"
+  text: "Manage your checks"
+- link: "synthetics/uptime_check"
+  tag: "Documentation"
+  text: "Configure an Uptime Check"
 ---
 
 ## Overview

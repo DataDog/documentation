@@ -9,13 +9,19 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introducing Datadog Synthetics"
+- link: "synthetics/browser_check"
+  tag: "Documentation"
+  text: "Configure a Browser Check"
+- link: "synthetics/uptime_check"
+  tag: "Documentation"
+  text: "Configure an Uptime Check"
 ---
 
 <div class="alert alert-warning">Synthetics is currently in beta. See the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics Request form</a>.</div>
 
 Datadog is pleased to announce the upcoming availability of Synthetics, a whole new layer of visibility on the Datadog platform. By monitoring your applications and API endpoints via simulated user requests, Synthetics helps you ensure uptime, identify regional issues, and track application performance. By unifying Synthetics with your metrics, traces, and logs, Datadog allows you to observe how all your systems are performing as experienced by your users.
 
-{{< img src="synthetics/synthetics_home_page.png" alt="Synthetics home page" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/synthetics_home_page.png" alt="Synthetics home page" responsive="true">}}
 
 ## Search 
 
@@ -55,6 +61,6 @@ Slect **Create a New Check +** in the upper right corner of the Synthetics to cr
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: 
+[1]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
 [2]: /synthetics/uptime_check
 [3]: /synthetics/browser_check
