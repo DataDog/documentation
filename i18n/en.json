@@ -87,6 +87,10 @@
     "other": "Crawler"
   },
 
+  "library_check": {
+    "other": "Library"
+  },
+
   "terms": {
     "other": "Terms"
   },
