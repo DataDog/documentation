@@ -1202,7 +1202,7 @@ For a more detailed explanations of sampling and priority sampling, check the [s
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Priority sampling is disabled by default. To enable it, configure the `priority.sampling` flag to `true` ([see how to configure the java client][1].
+Priority sampling is enabled by default. To disable it, configure the `priority.sampling` flag to `false` ([see how to configure the java client][1]).
 
 
 Current Priority Values (more may be added in the future):
@@ -1408,12 +1408,35 @@ The purpose of this section is to explain how the correlation between traces and
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The idea is to leverage the MDC ([Map Diagnostic Context][1]) to automatically add the trace and span identifier into the logs.
-The Datadog Java tracer exposes two API calls to allow printing trace and span identifiers along with log statements, `CorrelationIdentifier#getTraceId()`, and `CorrelationIdentifier#getSpanId()`.
+Leverage the MDC Frameworks ([Map Diagnostic Context][1]) to automatically correlate trace and span IDs into your logs. Datadog MDC keys may be injected automatically with a tracer integration, or manually injected with the Datadog API.
 
-- To inject those identifier into application logs using MDC frameworks, use the following method:
+**Enable Log Injection for JSON Formatted Logs**
 
-**log4j2**:
+Enable injection in the [Java Tracer's configuration][2]. 
+
+**Note**: Currently only slf4j is supported for MDC autoinjection.
+
+**Enable Log Injection for Raw Formatted Logs**
+
+1. Enable injection in the [Java Tracer's configuration][2]. Note: Currently only slf4j is supported for MDC autoinjection.
+2. Update your formatter to include `dd.trace_id` and `dd.span_id` in your logs
+
+```xml
+<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
+```
+
+[See our Java logging documentation][3] for more details.
+
+**Manual Injection**
+
+If you prefer to manually correlate your traces with your logs, leverage the Datadog API to retrieve correlation identifiers:
+
+* Use `CorrelationIdentifier#getTraceId()` and `CorrelationIdentifier#getSpanId()` API methods to inject identifiers at the beginning and end of each span to log (see examples below).
+* Configure MDC to use the injected Keys:
+  * `dd.trace_id` Active Trace ID during the log statement (or `0` if no trace)
+  * `dd.span_id` Active Span ID during the log statement (or `0` if no trace)
+
+`log4j2` example:
 
 ```java
 import org.apache.logging.log4j.ThreadContext;
@@ -1429,7 +1452,7 @@ try {
 }
 ```
 
-**slf4j/logback**:
+`slf4j/logback` example:
 
 ```java
 import org.slf4j.MDC;
@@ -1445,21 +1468,41 @@ try {
 }
 ```
 
-- Add those identifiers in the logs:
-
-If logs are already JSON formatted, there should be nothing left to do.
-[See our Java logging documentation][2] to add those two identifiers in raw logs or to learn how to log in JSON.
-
 [1]: https://logback.qos.ch/manual/mdc.html
-[2]: /logs/languages/java/?tab=log4j#configure-your-logger
+[2]: /tracing/languages/java/#configuration
+[3]: /logs/languages/java/?tab=log4j#configure-your-logger
 {{% /tab %}}
 {{% tab "Python" %}}
-Getting the required information needed for logging is easy:
 
-```python
-from ddtrace import helpers
+You have two ways to inject trace information into your logs in Python:
 
-trace_id, span_id = helpers.get_correlation_ids()
+1. Automatically: Set the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
+2. Manually: Patch your `logging` module by updating your log formatter to include the ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
+
+This integration with logs works if the log format includes:
+
+- `dd.trace_id=%(dd.trace_id)s`
+- `dd.span_id=%(dd.span_id)s`
+
+For instance: 
+
+``` python
+from ddtrace import patch_all; patch_all(logging=True)
+import logging
+from ddtrace import tracer
+
+FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
+          '[dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] '
+          '- %(message)s')
+logging.basicConfig(format=FORMAT)
+log = logging.getLogger(__name__)
+log.level = logging.INFO
+
+@tracer.wrap()
+def hello():
+    log.info('Hello, World!')
+
+hello()
 ```
 
 {{% /tab %}}

@@ -33,7 +33,7 @@ If you click on one host, You can see the tags applied to it:
 ### Agent Host Names
 
 The Datadog Agent collects potential hostnames from a number of different
-sources. To see all the names the Agent is detecting, [run the Agent info command][1]:
+sources. To see all the names the Agent is detecting, [run the Agent status command][1]:
 
     $ sudo /etc/init.d/datadog-agent info
 

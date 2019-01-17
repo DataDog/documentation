@@ -173,10 +173,12 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.jmxfetch.refresh-beans-period` | `DD_JMXFETCH_REFRESH_BEANS_PERIOD` | `600`                | How often to refresh list of avalable JMX beans (in seconds).                                                                                                                                                           |
 | `dd.jmxfetch.statsd.host`          | `DD_JMXFETCH_STATSD_HOST`          | same as `agent.host` | Statsd host to send JMX metrics to.                                                                                                                                                                                     |
 | `dd.jmxfetch.statsd.port`          | `DD_JMXFETCH_STATSD_PORT`          | 8125                 | Statsd port to send JMX metrics to.                                                                                                                                                                                     |
+| `dd.logs.injection`                | `DD_LOGS_INJECTION`                | false                | Enabled automatic MDC key injection for Datadog trace and span ids. See [Advanced Usage][4] for details                                                                                                                 |
 
 [1]: /tracing/setup/docker
 [2]: /tracing/advanced_usage/?tab=java#distributed-tracing
 [3]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
+[4]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=java#logging
 {{% /table %}}
 
 **Note**:

@@ -17,7 +17,7 @@ BODY
 
 curl -X POST https://http-intake.logs.datadoghq.com/v1/input/<API_KEY> \
      -H "Content-Type: application/json" \
-     -d '{"message":"hello wolrd"}'
+     -d '{"message":"hello world"}'
 
 ## Multi JSON Messages
 

@@ -18,6 +18,7 @@
 
   {{ $data := index $.Page.Site.Data.integrations $integration }}
 
+{{ if $data }}
 
     {{ if (index $params 1 ) }} {{/* Custom metrics set in shortcode param index 1 (second position) */}}
 
@@ -71,5 +72,6 @@
 
     {{ end }}
 
+{{ end }}
 
 {{ end }}
