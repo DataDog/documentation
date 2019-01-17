@@ -156,7 +156,7 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [7]: /integrations/fluentd/#log-collection
 [8]: /integrations/logstash/#log-collection
 [9]: /agent/logs/#tail-existing-files
-[10]: agent/logs/?tab=streamlogsfromtcpudp#custom-log-collection
+[10]: /agent/logs/?tab=streamlogsfromtcpudp#custom-log-collection
 [11]: /agent/logs/advanced_log_collection/#filter-logs
 [12]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-in-your-logs
 [13]: /agent/logs/advanced_log_collection/#multi-line-aggregation
