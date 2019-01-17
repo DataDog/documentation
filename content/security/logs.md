@@ -31,5 +31,5 @@ For customers using release 6, the Agent can be configured to obfuscate specific
 
 [1]: /security
 [2]: /agent/logs
-[3]: /agent/logs/#filter-logs
-[4]: /agent/logs/#scrub-sensitive-data-in-your-logs
+[3]: /agent/logs/advanced_log_collection/#filter-logs
+[4]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-in-your-logs

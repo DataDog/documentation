@@ -138,6 +138,11 @@ languages:
           url: "agent/logs/"
           weight: 13
           parent: menu_references_agent
+        - identifier: customnav_logs_advanced_log_collection
+          name: "Advanced log collection"
+          url: "agent/logs/advanced_log_collection"
+          weight: 131
+          parent: customnav_logs_setup
 
         ## Docker
 
@@ -1333,6 +1338,11 @@ languages:
           url: "agent/logs/"
           weight: 13
           parent: menu_references_agent
+        - identifier: customnav_logs_advanced_log_collection
+          name: "Advanced log collection"
+          url: "agent/logs/advanced_log_collection"
+          weight: 131
+          parent: customnav_logs_setup
 
         ## Docker
 

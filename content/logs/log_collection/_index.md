@@ -121,6 +121,31 @@ Your logs are collected and centralized into the [Log Explorer][28] view. You ca
 
 {{< img src="logs/log_explorer_view.png" alt="Log Explorer view" responsive="true" >}}
 
+## How to get the most of your application logs
+
+When logging stack traces, there are specific attributes that have a dedicated UI display within your Datadog application such as the logger name, the current thread, the error type, and the stack trace itself.
+
+{{< img src="agent/logs/stack_trace.png" style="width:80%;" alt="Stack trace" responsive="true" >}}
+
+To enable these functionalities use the following attribute names:
+
+| Attribute            | Description                                                      |
+|----------------------|------------------------------------------------------------------|
+| `logger.name`        | Name of the logger                                               |
+| `logger.thread_name` | Name of the current thread                                       |
+| `error.stack`        | Actual stack trace                                               |
+| `error.message`      | Error message contained in the stack trace                       |
+| `error.kind`         | The type or "kind" of an error (i.e "Exception", "OSError", ...) |
+
+**Note**: By default, integration Pipelines attempt to remap default logging library parameters to those specific attributes and parse stack traces or traceback to automatically extract the `error.message` and `error.kind`.
+
+## Send your application logs in JSON
+
+For integration frameworks, Datadog provides guidelines on how to log JSON into a file. JSON-formatted logging helps handle multi-line application logs, and is automatically parsed by Datadog.
+
+##### The Advantage of Collecting JSON-formatted logs
+
+Datadog automatically parses JSON-formatted logs. For this reason, if you have control over the log format you send to Datadog, it is recommended to format these logs as JSON to avoid the need for custom parsing rules.
 
 [1]: /agent/logs
 [2]: /agent/docker/logs
@@ -131,10 +156,10 @@ Your logs are collected and centralized into the [Log Explorer][28] view. You ca
 [7]: /integrations/fluentd/#log-collection
 [8]: /integrations/logstash/#log-collection
 [9]: /agent/logs/#tail-existing-files
-[10]: /agent/logs/#stream-logs-through-tcp-udp
-[11]: /agent/logs/#filter-logs
-[12]: /agent/logs/#scrub-sensitive-data-in-your-logs
-[13]: /agent/logs/#multi-line-aggregation
+[10]: agent/logs/?tab=streamlogsfromtcpudp#custom-log-collection
+[11]: /agent/logs/advanced_log_collection/#filter-logs
+[12]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-in-your-logs
+[13]: /agent/logs/advanced_log_collection/#multi-line-aggregation
 [14]: /logs/processing
 [15]: /logs/processing/parsing
 [16]: /logs/explorer/?tab=facets#setup
