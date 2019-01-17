@@ -1470,7 +1470,7 @@ try {
 
 [1]: https://logback.qos.ch/manual/mdc.html
 [2]: /tracing/languages/java/#configuration
-[3]: /logs/languages/java/?tab=log4j#configure-your-logger
+[3]: /logs/log_collection/java/?tab=log4j#configure-your-logger
 {{% /tab %}}
 {{% tab "Python" %}}
 

@@ -30,12 +30,12 @@ Datadog log management removes these limitations by decoupling log ingestion fro
 Datadog Index Filters avoid complex Agent level configuration and control what you want to index dynamically.
 You can now:
 
-* Ingest all your log events without server side filtering
-* [Process and enrich all of them][8]
-* [Live Tail over the whole infrastructure][9]
-* Dynamically decide what to include or exclude from your indexes to control your costs
-* [Get alerted when volumes grows unexpectedly over an index][10]
-* [Archive all enriched logs][11]
+* [Ingest all your log events without server side filtering][8]
+* [Process and enrich all of them][9]
+* [Live Tail over the whole infrastructure][10]
+* [Dynamically decide what to include or exclude from your indexes to control your costs][11]
+* [Get alerted when volumes grows unexpectedly over an index][12]
+* [Archive all enriched logs][13]
 
 This flexibility is critical in some exceptional situations such as outages, when you can disable specific filters to send more data. The inverse is true as well; if you over-consume because of a seasonal reason (Black Friday, Christmas, etc...) you can decide to selectively reduce some volume to avoid overages. 
 
@@ -51,7 +51,9 @@ This flexibility is critical in some exceptional situations such as outages, whe
 [5]: /graphing/dashboards/widgets/#timeseries
 [6]: /monitors/monitor_types/log
 [7]: /agent/logs/?tab=tailexistingfiles#how-to-get-the-most-of-your-application-logs
-[8]: /logs/processing
-[9]: /logs/live_tail
-[10]: /monitors/monitor_types/log
-[11]: /logs/archives
+[8]: /logs/log_collection
+[9]: /logs/processing
+[10]: /logs/live_tail
+[11]: /logs/indexes
+[12]: /monitors/monitor_types/log
+[13]: /logs/archives

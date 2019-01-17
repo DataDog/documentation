@@ -810,43 +810,43 @@ languages:
 
         # Log collection
         - identifier: customnav_lognav_languages
-          name: "Languages Log Collection"
-          url: "logs/languages/"
+          name: "Log Collection"
+          url: "logs/log_collection/"
           weight: 20
           parent: menu_references_logs
         - identifier: customnav_lognav_csharp
           name: "Csharp"
-          url: "logs/languages/csharp/"
+          url: "logs/log_collection/csharp/"
           weight: 230
           parent: customnav_lognav_languages
         - identifier: customnav_lognav_go
           name: "Go"
-          url: "logs/languages/go/"
+          url: "logs/log_collection/go/"
           weight: 240
           parent: customnav_lognav_languages
         - identifier: customnav_lognav_java
           name: "Java"
-          url: "logs/languages/java/"
+          url: "logs/log_collection/java/"
           weight: 250
           parent: customnav_lognav_languages
         - identifier: customnav_lognav_nodejs
           name: "Nodejs"
-          url: "logs/languages/nodejs/"
+          url: "logs/log_collection/nodejs/"
           weight: 260
           parent: customnav_lognav_languages
         - identifier: customnav_lognav_php
           name: "PHP"
-          url: "logs/languages/php/"
+          url: "logs/log_collection/php/"
           weight: 270
           parent: customnav_lognav_languages
         - identifier: customnav_lognav_python
           name: "Python"
-          url: "logs/languages/python/"
+          url: "logs/log_collection/python/"
           weight: 280
           parent: customnav_lognav_languages
         - identifier: customnav_lognav_ruby
           name: "Ruby"
-          url: "logs/languages/ruby/"
+          url: "logs/log_collection/ruby/"
           weight: 290
           parent: customnav_lognav_languages
 
@@ -1961,43 +1961,43 @@ languages:
 
         # Log collection
         - identifier: customnav_lognav_languages
-          name: "Languages Log Collection"
-          url: "logs/languages/"
+          name: "Log Collection"
+          url: "logs/log_collection/"
           weight: 20
           parent: menu_references_logs
         - identifier: customnav_lognav_csharp
           name: "Csharp"
-          url: "logs/languages/csharp/"
+          url: "logs/log_collection/csharp/"
           weight: 230
           parent: customnav_lognav_languages
         - identifier: customnav_lognav_go
           name: "Go"
-          url: "logs/languages/go/"
+          url: "logs/log_collection/go/"
           weight: 240
           parent: customnav_lognav_languages
         - identifier: customnav_lognav_java
           name: "Java"
-          url: "logs/languages/java/"
+          url: "logs/log_collection/java/"
           weight: 250
           parent: customnav_lognav_languages
         - identifier: customnav_lognav_nodejs
           name: "Nodejs"
-          url: "logs/languages/nodejs/"
+          url: "logs/log_collection/nodejs/"
           weight: 260
           parent: customnav_lognav_languages
         - identifier: customnav_lognav_php
           name: "PHP"
-          url: "logs/languages/php/"
+          url: "logs/log_collection/php/"
           weight: 270
           parent: customnav_lognav_languages
         - identifier: customnav_lognav_python
           name: "Python"
-          url: "logs/languages/python/"
+          url: "logs/log_collection/python/"
           weight: 280
           parent: customnav_lognav_languages
         - identifier: customnav_lognav_ruby
           name: "Ruby"
-          url: "logs/languages/ruby/"
+          url: "logs/log_collection/ruby/"
           weight: 290
           parent: customnav_lognav_languages
 

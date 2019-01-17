@@ -1,8 +1,6 @@
 ---
 title: PHP log collection
 kind: documentation
-aliases:
-  - /logs/log_collection/php
 further_reading:
 - link: "/logs/processing"
   tag: "Documentation"
@@ -307,12 +305,12 @@ CakeLog::config('debug', array(
 ));
 ```
 
-[1]: /logs/languages/php/#symfony-v2-v3
-[2]: /logs/languages/php/#ppi
-[3]: /logs/languages/php/#laravel
-[4]: /logs/languages/php/#silex
-[5]: /logs/languages/php/#lumen
-[6]: /logs/languages/php/#cakephp
+[1]: /logs/log_collection/php/#symfony-v2-v3
+[2]: /logs/log_collection/php/#ppi
+[3]: /logs/log_collection/php/#laravel
+[4]: /logs/log_collection/php/#silex
+[5]: /logs/log_collection/php/#lumen
+[6]: /logs/log_collection/php/#cakephp
 {{% /tab %}}
 {{% tab "PHP Symfony" %}}
 

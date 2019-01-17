@@ -37,13 +37,13 @@ However, AWS services logs are collected thanks to Datadog's [Lambda function][1
 After you have [installed the Datadog Agent][20], [enabled Log collection][21], begin sending logs to your Datadog Agent by instrumenting your application:
 
 {{< whatsnext desc="Select one of the following supported languages to start collecting logs:">}}
-  {{< nextlink href="logs/languages/csharp" tag="C++" >}}C# log collection.{{< /nextlink >}}
-  {{< nextlink href="logs/languages/go" tag="Go" >}}Go log collection.{{< /nextlink >}}
-  {{< nextlink href="logs/languages/java" tag="Java" >}}Java log collection.{{< /nextlink >}}
-  {{< nextlink href="logs/languages/nodejs" tag="NodeJS" >}}NodeJS log collection.{{< /nextlink >}}
-  {{< nextlink href="logs/languages/php" tag="PHP" >}}PHP log collection.{{< /nextlink >}}
-  {{< nextlink href="logs/languages/python" tag="NodeJS" >}}Python log collection.{{< /nextlink >}}
-  {{< nextlink href="logs/languages/ruby" tag="Ruby" >}}Ruby log collection.{{< /nextlink >}}
+  {{< nextlink href="logs/log_collection/csharp" tag="C++" >}}C# log collection.{{< /nextlink >}}
+  {{< nextlink href="logs/log_collection/go" tag="Go" >}}Go log collection.{{< /nextlink >}}
+  {{< nextlink href="logs/log_collection/java" tag="Java" >}}Java log collection.{{< /nextlink >}}
+  {{< nextlink href="logs/log_collection/nodejs" tag="NodeJS" >}}NodeJS log collection.{{< /nextlink >}}
+  {{< nextlink href="logs/log_collection/php" tag="PHP" >}}PHP log collection.{{< /nextlink >}}
+  {{< nextlink href="logs/log_collection/python" tag="NodeJS" >}}Python log collection.{{< /nextlink >}}
+  {{< nextlink href="logs/log_collection/ruby" tag="Ruby" >}}Ruby log collection.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### From a custom forwarder
