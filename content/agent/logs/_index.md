@@ -23,24 +23,26 @@ further_reading:
   text: "Logging without limit"
 ---
 
-Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface.
+Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface. If you are not using the Agent already, follow [the Agent installation instructions][1].
 
-If you are not using the Agent already, follow [the Agent installation instructions][1].
-
-Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
+Collecting logs is **disabled** by default in the Datadog Agent, you need first to enable it in [the main `datadog.yaml` configuration file][2]:
 
 ```
 logs_enabled: true
 ```
 
-The Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
+**Note**: The Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
 
-## Enabling log collection from integrations
+Once log collection, is activated for your Datadog Agent, enable log collection [for your integrations](#integration-log-collection), or create a [custom log collection configuration file](#custom-log-collection).
 
-To start collecting logs for a given integration, uncomment the logs section in that integration's yaml file and configure it for your environment.
+Refer to the dedicated documentation to collect logs from your [containerized environments][3] or from [Kubernetes][4].
+
+## Integration log collection
+
+To start collecting logs for a given integration, uncomment the logs section in that integration's yaml configuration file and set it up with your environment variables.
 
 <div class="alert alert-info">
-<a href="/integrations/#cat-log-collection">Consult the list of integrations that support log collection.</a>.
+<a href="/integrations/#cat-log-collection">Consult the list of Datadog integrations that support log collection.</a>.
 </div>
 
 If an integration does not support log collection by default, use the custom file configuration below.
@@ -49,11 +51,11 @@ If an integration does not support log collection by default, use the custom fil
 
 Datadog Agent v6 can collect logs and forward them to Datadog from files, the network (TCP or UDP), journald, and Windows channels:
 
-1. Create a new folder in the `conf.d/` directory at the root of your [Agent's configuration directory][2] named after your log source.
+1. Create a new folder in the `conf.d/` directory at the root of your [Agent's configuration directory][5] named after your log source.
 2. Create a new `conf.yaml` file in this new folder.
 3. Add a custom log collection configuration group with the parameters below.
-4. [Restart your Agent][3] to take into account this new configuration.
-5. [Run the Agent's status subcommand][4] to check if your custom configuration is correct.
+4. [Restart your Agent][6] to take into account this new configuration.
+5. [Run the Agent's status subcommand][7] to check if your custom configuration is correct.
 
 Below are examples of custom log collection setup:
 
@@ -160,12 +162,12 @@ List of all available parameters for log collection:
 | `port`           | Yes      | If `type` is **tcp** or **udp**, port to listen log from.                                                                                                                                                                                                                                                                                           |
 | `path`           | Yes      | If `type` is **file** or **journald**, path of the file to gather logs from.                                                                                                                                                                                                                                                                        |
 | `channel_path`   | Yes      | If `type` is **windows_event**, list of windows event channels to collect log from.                                                                                                                                                                                                                                                                 |
-| `service`        | Yes      | Name of the service owning the log. If you instrumented your service with [Datadog APM][5], this must be the same service name.                                                                                                                                                                                                                    |
-| `source`         | Yes      | Attribute that defines which integration is sending the logs. If the logs do not come from an existing integration, then this field may include a custom source name. However, it is recommended that you match this value to the namespace of any related [custom metrics][6] you are collecting, for example: `myapp` from `myapp.request.count`. |
+| `service`        | Yes      | Name of the service owning the log. If you instrumented your service with [Datadog APM][8], this must be the same service name.                                                                                                                                                                                                                    |
+| `source`         | Yes      | Attribute that defines which integration is sending the logs. If the logs do not come from an existing integration, then this field may include a custom source name. However, it is recommended that you match this value to the namespace of any related [custom metrics][9] you are collecting, for example: `myapp` from `myapp.request.count`. |
 | `include_units`  | No       | If `type` is **journald**, list of specific journald units to include.                                                                                                                                                                                                                                                                              |
 | `exclude_units`  | No       | If `type` is **journald**, list of specific journald units to exclude.                                                                                                                                                                                                                                                                              |
 | `sourcecategory` | No       | A multiple value attribute used to refine the source attribute, for example: `source:mongodb, sourcecategory:db_slow_logs`.                                                                                                                                                                                                                         |
-| `tags`           | No       | Add tags to each log collected ([learn more about tagging][7]).                                                                                                                                                                                                                                                                                    |
+| `tags`           | No       | Add tags to each log collected ([learn more about tagging][10]).                                                                                                                                                                                                                                                                                    |
 
 ## Further Reading
 
@@ -173,9 +175,12 @@ List of all available parameters for log collection:
 
 
 [1]: /agent
-[2]: /agent/faq/agent-configuration-files
-[3]: /agent/faq/agent-commands/#start-stop-and-restart-the-agent
-[4]: /agent/faq/agent-commands/#agent-status-and-information
-[5]: /tracing
-[6]: /developers/metrics/custom_metrics
-[7]: /tagging
+[2]: /agent/faq/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[3]: /agent/docker/logs
+[4]: /agent/kubernetes
+[5]: /agent/faq/agent-configuration-files
+[6]: /agent/faq/agent-commands/#start-stop-and-restart-the-agent
+[7]: /agent/faq/agent-commands/#agent-status-and-information
+[8]: /tracing
+[9]: /developers/metrics/custom_metrics
+[10]: /tagging

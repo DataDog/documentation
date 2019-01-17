@@ -3,7 +3,7 @@ title: Log Collection
 kind: Documentation
 ---
 
-Log collection is the beginning of your journey in the wonderful world of log management. Use the [Datadog Agent][1] to collect logs directly from your hosts or your [containerized environments][2] or from [Kubernetes][3]. You can collect AWS service logs with Datadog's [AWS Lambda function](#aws-log-collection).If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][4], [Syslog-ng][5], [NXlog][6], [FluentD][7], and [Logstash][8].
+Use the [Datadog Agent][1] to collect logs directly from your hosts or your [containerized environments][2] or from [Kubernetes][3]. You can collect AWS service logs with Datadog's [AWS Lambda function](#aws-log-collection).If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][4], [Syslog-ng][5], [NXlog][6], [FluentD][7], and [Logstash][8].
 
 ### Host Log collection
 
