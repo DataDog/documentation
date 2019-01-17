@@ -1,5 +1,5 @@
 ---
-title: Logs Setup
+title: Agent Log collection
 kind: Documentation
 description: "Configure your Datadog Agent to gather logs from your host, containers, and services."
 aliases:
@@ -22,8 +22,6 @@ further_reading:
   tag: "Documentation"
   text: "Logging without limit"
 ---
-
-## Getting started with the Agent
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface.
 

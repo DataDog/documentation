@@ -127,7 +127,7 @@ Your logs are collected and centralized into the [Log Explorer][26] view. You ca
 {{< img src="logs/log_explorer_view.png" alt="Log Explorer view" responsive="true" >}}
 
 
-[1]: /agent/logs/#getting-started-with-the-agent
+[1]: /agent/logs
 [2]: /integrations/rsyslog
 [3]: /integrations/syslog_ng
 [4]: /integrations/nxlog
