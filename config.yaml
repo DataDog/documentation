@@ -892,37 +892,11 @@ languages:
           weight: 40
           parent: menu_references_logs
 
-        # LOGS - Explorer
-        - identifier: customnav_lognav_explorer
-          name: "Explorer"
-          url: "logs/explorer/"
+        # LOGS - Indexes
+        - identifier: customnav_lognav_indexes
+          name: "Indexes"
+          url: "logs/indexes/"
           weight: 50
-          parent: menu_references_logs
-        - identifier: customnav_lognav_search
-          name: "Search"
-          url: "logs/explorer/search"
-          weight: 510
-          parent: customnav_lognav_explorer
-        - identifier: customnav_lognav_analytics
-          name: "Log Analytics"
-          url: "logs/explorer/analytics"
-          weight: 520
-          parent: customnav_lognav_explorer
-        - identifier: customnav_lognav_saved_views
-          name: "Saved Views"
-          url: "logs/explorer/saved_views"
-          weight: 530
-          parent: customnav_lognav_explorer
-        - identifier: customnav_lognav_patterns
-          name: "Log Patterns"
-          url: "logs/explorer/patterns"
-          weight: 540
-          parent: customnav_lognav_explorer
-
-        - identifier: customnav_lognav_monitor
-          name: "Log monitor"
-          url: "monitors/monitor_types/log"
-          weight: 70
           parent: menu_references_logs
 
         # LOGS - Archives
@@ -930,14 +904,47 @@ languages:
         - identifier: customnav_lognav_archives
           name: "Archives"
           url: "logs/archives/s3"
-          weight: 80
+          weight: 60
           parent: menu_references_logs
 
         - identifier: customnav_lognav_archives_s3
           name: "AWS S3"
           url: "logs/archives/s3"
-          weight: 810
+          weight: 610
           parent: customnav_lognav_archives
+
+        # LOGS - Explorer
+        - identifier: customnav_lognav_explorer
+          name: "Explorer"
+          url: "logs/explorer/"
+          weight: 70
+          parent: menu_references_logs
+        - identifier: customnav_lognav_search
+          name: "Search"
+          url: "logs/explorer/search"
+          weight: 710
+          parent: customnav_lognav_explorer
+        - identifier: customnav_lognav_analytics
+          name: "Log Analytics"
+          url: "logs/explorer/analytics"
+          weight: 720
+          parent: customnav_lognav_explorer
+        - identifier: customnav_lognav_saved_views
+          name: "Saved Views"
+          url: "logs/explorer/saved_views"
+          weight: 730
+          parent: customnav_lognav_explorer
+        - identifier: customnav_lognav_patterns
+          name: "Log Patterns"
+          url: "logs/explorer/patterns"
+          weight: 740
+          parent: customnav_lognav_explorer
+
+        - identifier: customnav_lognav_monitor
+          name: "Log monitor"
+          url: "monitors/monitor_types/log"
+          weight: 80
+          parent: menu_references_logs
 
         #- identifier: customnav_lognav_faq
         #  name: "FAQ"
@@ -1954,7 +1961,7 @@ languages:
 
         # Log collection
         - identifier: customnav_lognav_languages
-          name: "Languages: collecte de logs"
+          name: "Languages Log Collection"
           url: "logs/languages/"
           weight: 20
           parent: menu_references_logs
@@ -1996,27 +2003,10 @@ languages:
 
 
         - identifier: customnav_lognav_other
-          name: "Autres Intégrations"
+          name: "Other Integrations"
           url: "integrations/#cat-log-collection"
           weight: 299
           parent: customnav_lognav_languages
-
-        # LOGS - Subnav start
-        - identifier: customnav_lognav_explore
-          name: "Explorer"
-          url: "logs/explore/"
-          weight: 30
-          parent: menu_references_logs
-        - identifier: customnav_lognav_live_tail
-          name: "Live Tail"
-          url: "logs/live_tail/"
-          weight: 32
-          parent: menu_references_logs
-        - identifier: customnav_lognav_analytics
-          name: "Analyses de logs"
-          url: "logs/analytics/"
-          weight: 35
-          parent: menu_references_logs
 
         # LOGS - Processing
         - identifier: customnav_lognav_processing
@@ -2041,7 +2031,7 @@ languages:
           weight: 330
           parent: customnav_lognav_processing
         - identifier: customnav_lognav_attributes_naming_convention
-          name: "Convention de nommage"
+          name: "Naming Convention"
           url: "logs/processing/attributes_naming_convention/"
           weight: 340
           parent: customnav_lognav_processing
@@ -2053,77 +2043,11 @@ languages:
           weight: 40
           parent: menu_references_logs
 
-        # LOGS - Explorer
-        - identifier: customnav_lognav_explorer
-          name: "Explorer"
-          url: "logs/explorer/"
+        # LOGS - Indexes
+        - identifier: customnav_lognav_indexes
+          name: "Indexes"
+          url: "logs/indexes/"
           weight: 50
-          parent: menu_references_logs
-        - identifier: customnav_lognav_search
-          name: "Recherche"
-          url: "logs/explorer/search"
-          weight: 510
-          parent: customnav_lognav_explorer
-        - identifier: customnav_lognav_analytics
-          name: "Log Analytics"
-          url: "logs/explorer/analytics"
-          weight: 520
-          parent: customnav_lognav_explorer
-        - identifier: customnav_lognav_saved_views
-          name: "Saved Views"
-          url: "logs/explorer/saved_views"
-          weight: 530
-          parent: customnav_lognav_explorer
-        - identifier: customnav_lognav_patterns
-          name: "Log Patterns"
-          url: "logs/explorer/patterns"
-          weight: 540
-          parent: customnav_lognav_explorer
-
-        - identifier: customnav_lognav_languages
-          name: "Logs d'application"
-          url: "logs/languages/"
-          weight: 80
-          parent: menu_references_logs
-        - identifier: customnav_lognav_csharp
-          name: "Csharp"
-          url: "logs/languages/csharp/"
-          weight: 810
-          parent: customnav_lognav_languages
-        - identifier: customnav_lognav_go
-          name: "Go"
-          url: "logs/languages/go/"
-          weight: 820
-          parent: customnav_lognav_languages
-        - identifier: customnav_lognav_java
-          name: "Java"
-          url: "logs/languages/java/"
-          weight: 830
-          parent: customnav_lognav_languages
-        - identifier: customnav_lognav_nodejs
-          name: "Nodejs"
-          url: "logs/languages/nodejs/"
-          weight: 840
-          parent: customnav_lognav_languages
-        - identifier: customnav_lognav_php
-          name: "PHP"
-          url: "logs/languages/php/"
-          weight: 850
-          parent: customnav_lognav_languages
-        - identifier: customnav_lognav_python
-          name: "Python"
-          url: "logs/languages/python/"
-          weight: 850
-          parent: customnav_lognav_languages
-        - identifier: customnav_lognav_ruby
-          name: "Ruby"
-          url: "logs/languages/ruby/"
-          weight: 860
-          parent: customnav_lognav_languages
-        - identifier: customnav_lognav_monitor
-          name: "Log monitor"
-          url: "monitors/monitor_types/log"
-          weight: 70
           parent: menu_references_logs
 
         # LOGS - Archives
@@ -2131,14 +2055,47 @@ languages:
         - identifier: customnav_lognav_archives
           name: "Archives"
           url: "logs/archives/s3"
-          weight: 80
+          weight: 60
           parent: menu_references_logs
 
         - identifier: customnav_lognav_archives_s3
           name: "AWS S3"
           url: "logs/archives/s3"
-          weight: 810
+          weight: 610
           parent: customnav_lognav_archives
+
+        # LOGS - Explorer
+        - identifier: customnav_lognav_explorer
+          name: "Explorer"
+          url: "logs/explorer/"
+          weight: 70
+          parent: menu_references_logs
+        - identifier: customnav_lognav_search
+          name: "Search"
+          url: "logs/explorer/search"
+          weight: 710
+          parent: customnav_lognav_explorer
+        - identifier: customnav_lognav_analytics
+          name: "Log Analytics"
+          url: "logs/explorer/analytics"
+          weight: 720
+          parent: customnav_lognav_explorer
+        - identifier: customnav_lognav_saved_views
+          name: "Saved Views"
+          url: "logs/explorer/saved_views"
+          weight: 730
+          parent: customnav_lognav_explorer
+        - identifier: customnav_lognav_patterns
+          name: "Log Patterns"
+          url: "logs/explorer/patterns"
+          weight: 740
+          parent: customnav_lognav_explorer
+
+        - identifier: customnav_lognav_monitor
+          name: "Log monitor"
+          url: "monitors/monitor_types/log"
+          weight: 80
+          parent: menu_references_logs
 
         #- identifier: customnav_lognav_faq
         #  name: "FAQ"
@@ -2147,7 +2104,7 @@ languages:
         #  parent: menu_references_logs
 
         - identifier: customnav_loggnav_security
-          name: "Sécurité"
+          name: "Security"
           url: "logs/security"
           weight: 100
           parent: menu_references_logs
