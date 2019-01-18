@@ -26,7 +26,7 @@ kind: documentation
 
 | Function | Description                                         | Example                |
 | :----    | :-------                                            | :---------             |
-| `dt()`   | Graph the time difference between submitted points. | `dt(<METRIC_NAME>{*})` |
+| `dt()`   | Graph the time difference in seconds between submitted points. | `dt(<METRIC_NAME>{*})` |
 
 ## Delta value
 
