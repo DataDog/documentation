@@ -218,7 +218,7 @@ Configure NXLog to gather logs from your host, containers, & services.
     ```
     <Output out>
       Module  om_ssl
-      Host    tcp-intake.logs.datadoghq.com
+      Host    tcp-intake.logs.datadoghq.eu
       Port    443
       Exec    $raw_event="<DATADOG_API_KEY> " + $raw_event;
       CAFile  <CERT_DIR>/intake.logs.datadoghq.eu.crt
