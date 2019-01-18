@@ -91,7 +91,7 @@ Similar to [annotating Kubernetes Pods][7], Services can be annotated with the f
   ad.datadoghq.com/service.instances: '[<INSTANCE_CONFIG>]'
 ```
 
-The `%%host%%` [template variable][8] is supported and will be replaced by the service's IP. The `kube_namespace` and `kube_service` tags will be added to the instance.
+The `%%host%%` [template variable][8] is supported and is replaced by the service's IP. The `kube_namespace` and `kube_service` tags are automatically added to the instance.
 
 #### Example: HTTP check on an nginx-backed service
 
