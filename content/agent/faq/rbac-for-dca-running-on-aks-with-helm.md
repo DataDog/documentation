@@ -1,7 +1,7 @@
-Does your Cluster Agent restarts all the time on AKS?
+Does your Cluster Agent restart all the time on AKS?
 
 It might be because you have deployed it with our helm chart and the readiness probe is killing it.
-On AKS, the default RBAC does not allow access to /healthz for unauthenticated users.
+On AKS, the default RBAC does not allow access to `/healthz` for unauthenticated users.
 The following RBAC fixes that:
 
 ```
