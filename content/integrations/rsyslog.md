@@ -234,7 +234,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
         $ActionSendStreamDriverMode 1
         $ActionSendStreamDriverAuthMode x509/name
         $ActionSendStreamDriverPermittedPeer *.logs.datadoghq.eu
-        *.* @@intake.logs.datadoghq.eu:443;DatadogFormat
+        *.* @@tcp-intake.logs.datadoghq.eu:443;DatadogFormat
         ```
 
 6. Restart Rsyslog and your new logs get forwarded directly to your Datadog account.
