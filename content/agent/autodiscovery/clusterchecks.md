@@ -123,7 +123,7 @@ spec:
     run: my-nginx
 ```
 
-In addition, each pod should be monitored with the [NGINX check][10], as it allows to observe each worker as well as the aggregated service.
+In addition, each pod should be monitored with the [NGINX check][10], as it enables the observation of each worker as well as the aggregated service.
 
 ## Troubleshooting
 
