@@ -1422,7 +1422,7 @@ Enable injection in the [Java Tracer's configuration][3].
 2. Update your formatter to include `dd.trace_id` and `dd.span_id` in your logs
 
 ```xml
-<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
+<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
 [See our Java logging documentation][2] for more details.
