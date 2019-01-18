@@ -67,7 +67,7 @@ When the IP of a given resource is constant (eg. external service endpoint, publ
 
 #### Example: MySQL check on CloudSQL database
 
-After setting up your CloudSQL instance and [setting up the datadog user][6], mount a `/conf.d/mysql.yaml` file in the Cluster Agent container with the following contents:
+After setting up the CloudSQL instance and [datadog user][6], mount a `/conf.d/mysql.yaml` file in the Cluster Agent container with the following contents:
 
 ```yaml
 cluster_check: true
@@ -83,7 +83,7 @@ The `cluster_check` field will inform the Cluster Agent to delegate this Check t
 
 ### Template Source: Kubernetes Service Annotations
 
-As you can [annotate Kubernetes Pods][7], you can annotate Services with the following syntax:
+Similar to [annotating Kubernetes Pods][7], Services can be annotated with the following syntax:
 
 ```yaml
   ad.datadoghq.com/service.check_names: '[<CHECK_NAME>]'
@@ -95,7 +95,7 @@ The `%%host%%` [template variable][8] is supported and will be replaced by the s
 
 #### Example: HTTP check on an nginx-backed service
 
-The following Service definition will expose the Pods from the `my-nginx` deployment and run an [HTTP check][9] to measure the latency of the load-balanced service:
+The following Service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][9] to measure the latency of the load-balanced service:
 
 ```yaml
 apiVersion: v1
