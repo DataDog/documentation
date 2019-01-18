@@ -14,16 +14,16 @@ further_reading:
 
 ## How it Works
 
-The Datadog Agent is able to auto-discover containers and create check configurations based on them via [the Autodiscovery mechanism][1]. The Cluster Checks feature extends this mechanism to monitor non-containerized workloads, including:
+The Datadog Agent is able to auto-discover containers and create Check configurations via [the Autodiscovery mechanism][1]. The Cluster Checks feature extends this mechanism to monitor non-containerized workloads, including:
 
 - out-of-cluster datastores and endpoints (eg. RDS or CloudSQL)
 - load-balanced cluster services (eg. Kubernetes services)
 
-To ensure only one instance of each check runs, [the Cluster Agent][2] holds the configurations and dynamically dispatches them to node-based Agents. The Agents will connect to the Cluster Agent every 10 seconds and retrieve configurations to run. If an Agent stops reporting, the Cluster Agent will remove it from it's active pool and dispatch the configurations to other Agents. This ensures one instance always runs even as you add and remove nodes from your cluster.
+To ensure taht only one instance of each Check runs, [the Cluster Agent][2] holds the configurations and dynamically dispatches them to node-based Agents. The Agents connect to the Cluster Agent every 10 seconds and retrieve the configurations to run. If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures one (and only one) instance always even as nodes are added and removed from the cluster.
 
 Metrics, events and service checks collected by Cluster Checks will be submitted without a hostname, as it is not relevant. A `cluster_name` tag is added, to allow you to scope and slice your data.
 
-This feature is currently only supported on Kubernetes, for versions 6.9.0 and up of the Agent, and versions 1.2.0 and up of the Cluster Agent.
+This feature is currently supported on Kubernetes for versions 6.9.0+ of the Agent, and versions 1.2.0+ of the Cluster Agent.
 
 
 ## How to set it up
@@ -34,7 +34,7 @@ This feature requires a running Cluster Agent. Refer to [the Cluster Agent setup
 
 ### Agent setup
 
-On the Datadog **Host** Agent, you need to enable the `clusterchecks` configuration provider. This can be done in two ways:
+Enable the `clusterchecks` configuration provider on the Datadog **Host** Agent. This can be done in two ways:
 
 - By setting the `DD_EXTRA_CONFIG_PROVIDERS` environment variable:
 
@@ -42,7 +42,7 @@ On the Datadog **Host** Agent, you need to enable the `clusterchecks` configurat
 DD_EXTRA_CONFIG_PROVIDERS="clusterchecks"
 ```
 
-- Or adding it to your `datadog.yaml` configuration file:
+- Or adding it to the `datadog.yaml` configuration file:
 
 ```
 config_providers:
@@ -63,7 +63,7 @@ Running [custom Agent Checks][6] as Cluster Checks is supported, as long as all 
 
 ### Static configurations in files
 
-When the IP of a given resource is constant (eg. external service endpoint, public URL...), you can pass a static configuration to the Cluster Agent as yaml files. The file name convention and syntax are the sames as static configurations on the node-based Agent, with the addition of the `cluster_check: true` line.
+When the IP of a given resource is constant (eg. external service endpoint, public URL...), a static configuration can be passed to the Cluster Agent as yaml files. The file name convention and syntax are the same as the static configurations on the node-based Agent, with the addition of the `cluster_check: true` line.
 
 #### Example: MySQL check on CloudSQL database
 
@@ -79,7 +79,7 @@ instances:
     pass: '<YOUR_CHOSEN_PASSWORD>'
 ```
 
-The `cluster_check` field will inform the Cluster Agent to delegate this check to one node-based Agent.
+The `cluster_check` field will inform the Cluster Agent to delegate this Check to one node-based Agent.
 
 ### Template Source: Kubernetes Service Annotations
 
@@ -127,7 +127,7 @@ In addition, each pod should be monitored with the [NGINX check][11], as it allo
 
 ## Troubleshooting
 
-Due to their distributed nature, Cluster Checks troubleshooting is a bit more involved. The following sections explain the main steps of the dispatching process and the associated troubleshooting commands.
+Due to their distributed nature, troubleshooting Cluster Checks is a bit more involved. The following sections explain the dispatching process and the associated troubleshooting commands.
 
 ### Kubernetes: find the leader Cluster Agent
 
@@ -203,11 +203,11 @@ Init Config:
 
 **Note:** the Instance ID will be different from the `configcheck` command, as the instance is modified to add tags and options.
 
-In this case, this configuration is dispatched to the `default-pool-bce5cd34-ttw6` node. We can continue the troubleshooting there.
+In this case, this configuration is dispatched to the `default-pool-bce5cd34-ttw6` node. Troubleshooting continues from there.
 
 ### Autodiscovery in the node-based Agent
 
-The agent `configcheck` command should show the instance, with the `cluster-checks` source:
+The Agent `configcheck` command should show the instance, with the `cluster-checks` source:
 
 ```
 # kubectl exec <node-agent_container_name> agent configcheck
@@ -233,7 +233,7 @@ The Instance ID matches the one we had earlier.
 
 ### Agent status
 
-The agent `status` command should show the check instance running and reporting successfully.
+The Agent `status` command should show the check instance running and reporting successfully.
 
 ```
 # kubectl exec <node-agent_container_name> agent status
