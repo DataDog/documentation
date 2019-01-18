@@ -54,7 +54,7 @@ class HelloCheck(AgentCheck):
 
 For more details about the interface provided by the base class, browse the [API documentation][5].
 
-**Note**: When choosing a name for your custom check, you should prefix it with `custom_` in order to not conflict with the name of a preexisting Datadog Agent integrations. For instance, if you have a custom Postfix check, name your check files `custom_postfix.py` and `custom_postfix.yaml` instead of `postfix.py` and `postfix.yaml`.
+**Note**: When choosing a name for your custom check, you should prefix it with `custom_` in order to avoid conflict with the name of a preexisting Datadog Agent integrations. For instance, if you have a custom Postfix check, name your check files `custom_postfix.py` and `custom_postfix.yaml` instead of `postfix.py` and `postfix.yaml`.
 
 ### Collection interval
 To change the collection interval of your check, use `min_collection_interval` in the configuration file. The default value is `15` which means the `check` method from your class is invoked with the same interval as the rest of the integrations on the Agent.
