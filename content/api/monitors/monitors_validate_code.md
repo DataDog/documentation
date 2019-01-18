@@ -6,7 +6,7 @@ external_redirect: /api/#validate-a-monitor
 ---
 
 ##### Signature
-`POST https://api.datadoghq.com/api/v1/monitor`
+`POST https://api.datadoghq.com/api/v1/monitor/validate`
 ##### Example Request
 {{< code-snippets basename="api-monitor-validate" >}}
 ##### Example Response
