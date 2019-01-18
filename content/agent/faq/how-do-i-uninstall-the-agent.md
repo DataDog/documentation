@@ -34,6 +34,7 @@ sudo rm -rf /opt/datadog-agent
 sudo rm -rf /usr/local/bin/datadog-agent
 sudo rm -rf ~/.datadog-agent/**​ #to remove broken symlinks
 ```
+Then, reboot your machine for changes to take effect.
 
 ### Windows
 
