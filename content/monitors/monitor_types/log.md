@@ -49,15 +49,28 @@ Then configure the Alert and/or Warning threshold depending on the chosen condit
 It is possible to add up to 10 samples of logs that triggered the monitor in the notification message.
 This is available for Slack and email notifications.
 
-Samples are not available for multi-alerts.
+* Samples are not displayed for recovery notifications.
 
- **Enable log samples in notification message**
+ **Enabling log samples in notifications**:
     
 {{< img src="monitors/monitor_types/log/activate-log-monitor-sample.png" alt="Activate log samples in message" responsive="true" style="width:50%;" >}}
     
-**Example for Slack notifications** 
+**Example for a Slack notification** 
 
  {{< img src="monitors/monitor_types/log/slack-log-sample.png" alt="Slack notification example" responsive="true" style="width:50%;" >}}
+ 
+### Multi alerts 
+
+For Slack and email notifications you can enable the top 10 of breaching values in your multi alert notifications.
+
+ **Enabling top 10 breaching values in notifications**
+
+{{< img src="monitors/monitor_types/log/activate-log-multi-monitor-sample.png" alt="Activate log samples in message" responsive="true" style="width:50%;" >}}
+
+**Example for a Slack notification** 
+
+ {{< img src="monitors/monitor_types/log/slack-log-multi-sample.png" alt="Slack notification example" responsive="true" style="width:50%;" >}}
+
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
