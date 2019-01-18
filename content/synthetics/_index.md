@@ -19,7 +19,9 @@ further_reading:
 
 <div class="alert alert-warning">Synthetics is currently in beta. See the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics Request form</a>.</div>
 
-Datadog is pleased to announce the upcoming availability of Synthetics, a whole new layer of visibility on the Datadog platform. By monitoring your applications and API endpoints via simulated user requests, Synthetics helps you ensure uptime, identify regional issues, and track application performance. By unifying Synthetics with your metrics, traces, and logs, Datadog allows you to observe how all your systems are performing as experienced by your users.
+## Overview
+
+Datadog Synthetics gives you a new layer of visibility on the Datadog platform. By monitoring your applications and API endpoints via simulated user requests and browser rendering, Synthetics helps you ensure uptime, identify regional issues, and track application performance. By unifying Synthetics with your metrics, traces, and logs, Datadog allows you to observe how all your systems are performing as experienced by your users.
 
 {{< img src="synthetics/synthetics_home_page.png" alt="Synthetics home page" responsive="true">}}
 
