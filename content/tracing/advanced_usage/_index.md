@@ -1508,26 +1508,25 @@ hello()
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-To retrieve trace and span IDs for the active trace, use `Datadog.tracer.active_correlation`:
+**Enable Log Injection for Rails Applications**
+
+Rails applications which are configured with a `ActiveSupport::TaggedLogging` logger can append correlation IDs as tags to log output. The default Rails logger implements this tagged logging, making it easier to add correlation tags.
+
+In your Rails environment configuration file, add the following:
 
 ```ruby
-# When a trace is active...
-Datadog.tracer.trace('correlation.example') do
-  # Returns #<Datadog::Correlation::Identifier>
-  correlation = Datadog.tracer.active_correlation
-  correlation.trace_id # => 5963550561812073440
-  correlation.span_id # => 2232727802607726424
+Rails.application.configure do
+  config.log_tags = [proc { Datadog.tracer.active_correlation.to_s }]
 end
 
-# When a trace isn't active...
-correlation = Datadog.tracer.active_correlation
-# Returns #<Datadog::Correlation::Identifier>
-correlation = Datadog.tracer.active_correlation
-correlation.trace_id # => 0
-correlation.span_id # => 0
+# Web requests will produce:
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Started GET "/articles" for 172.22.0.1 at 2019-01-16 18:50:57 +0000
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Processing by ArticlesController#index as */*
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206]   Article Load (0.5ms)  SELECT "articles".* FROM "articles"
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
 ```
 
-**For Ruby applications**
+**Manual Injection**
 
 To add correlation IDs to your logger, add a log formatter which retrieves the correlation IDs with `Datadog.tracer.active_correlation`, then add them to the message.
 
@@ -1557,24 +1556,6 @@ logger.warn('This is an untraced operation.')
 # When a trace is active
 Datadog.tracer.trace('my.operation') { logger.warn('This is a traced operation.') }
 # [2019-01-16 18:38:41 +0000][my_app][WARN][dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] This is a traced operation.
-```
-
-**For Rails applications**
-
-Rails applications which are configured with a `ActiveSupport::TaggedLogging` logger can append correlation IDs as tags to log output. The default Rails logger implements this tagged logging, making it easier to add correlation tags.
-
-In your Rails environment configuration file, add the following:
-
-```ruby
-Rails.application.configure do
-  config.log_tags = [proc { Datadog.tracer.active_correlation.to_s }]
-end
-
-# Web requests will produce:
-# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Started GET "/articles" for 172.22.0.1 at 2019-01-16 18:50:57 +0000
-# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Processing by ArticlesController#index as */*
-# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206]   Article Load (0.5ms)  SELECT "articles".* FROM "articles"
-# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
 ```
 
 {{% /tab %}}
