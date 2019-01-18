@@ -54,7 +54,7 @@ class HelloCheck(AgentCheck):
 
 For more details about the interface provided by the base class, browse the [API documentation][5].
 
-**Note**: When choosing a name for your custom check, it's a good idea to choose a name that doesn't conflict with the name of any preexisting integrations that are already installed in the agent. The names of these integrations can be found [here][6]. For instance, if you have a custom Postfix check, it's a good idea to name the files `custom_postfix.py` and `custom_postfix.yaml` instead of `postfix.py` and `postfix.yaml`.
+**Note**: When choosing a name for your custom check, you should prefix it with `custom_` in order to not conflict with the name of a preexisting Datadog Agent integrations. For instance, if you have a custom Postfix check, name your check files `custom_postfix.py` and `custom_postfix.yaml` instead of `postfix.py` and `postfix.yaml`.
 
 ### Collection interval
 To change the collection interval of your check, use `min_collection_interval` in the configuration file. The default value is `15` which means the `check` method from your class is invoked with the same interval as the rest of the integrations on the Agent.
@@ -105,7 +105,7 @@ sudo -u dd-agent -- dd-agent check <check_name>
 
 It's possible to create a custom check that runs a command line program and captures its output as a custom metric. For example, a check can run the `vgs` command to report information about volume groups. A wrapper function is provided for convenience to avoid the boilerplate around shelling out another process and collecting its output and exit code.
 
-To run a subprocess within a check, use the [`get_subprocess_output()` function][7] from the module `datadog_checks.utils.subprocess_output`. The command and its arguments are passed to `get_subprocess_output()` in the form of a list, with the command and each of its arguments as a string within the list. For instance, a command that is entered at the command prompt like this:
+To run a subprocess within a check, use the [`get_subprocess_output()` function][6] from the module `datadog_checks.utils.subprocess_output`. The command and its arguments are passed to `get_subprocess_output()` in the form of a list, with the command and each of its arguments as a string within the list. For instance, a command that is entered at the command prompt like this:
 
 ```
 $ vgs -o vg_free
@@ -148,5 +148,4 @@ class LSCheck(AgentCheck):
 [3]: http://app.datadoghq.com/account/settings#agent
 [4]: /help
 [5]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks.checks.html#datadog_checks.base.checks.base.AgentCheck
-[6]: https://github.com/DataDog/integrations-core
-[7]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks.utils.html#module-datadog_checks.base.utils.subprocess_output
+[6]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks.utils.html#module-datadog_checks.base.utils.subprocess_output
