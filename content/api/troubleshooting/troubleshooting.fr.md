@@ -17,7 +17,7 @@ Ainsi, il est possible que vous puissiez recevoir une réponse de 202 'succès' 
 
 Pour vérifier votre timestamp, exécutez correctement:
 
-`date -u && curl -s -v https://app.datadoghq.com 2>&1 | grep Date`
+`date -u && curl -s -v https://app.datadoghq.com 2>&1 | grep -i '< date'`
 
 Cela affiche la date du système actuel, puis fait une requête à notre endpoint et récupère la data de notre coté. Si celles-ci sont espacées de plus de quelques minutes, vous devriez consulter les paramètres d'heure sur votre serveur.
 

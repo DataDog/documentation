@@ -68,7 +68,7 @@ Yes, it is!  You can change the flush interval by updating your agent's configur
 <!--#### Is the agent necessary to use Datadog? {#agent-optional}
 
 * No, it is not. You don't have to install an agent if you only want to submit
-metrics via our API. You can read more about our API [here][api].
+metrics via our API. You can read more about our API [here][1].
 * In general, most folks find a lot of value in installing an agent because
 they get system metrics for free and metrics on common software like mysql,
 postgres, etc. with just a little bit of configuration. Another advantage is
@@ -77,31 +77,31 @@ that there is a small statsd server built-in to the agent.
 
 #### Datadogを利用するのに、Datadog Agent のインストールは必要ですか。 {#agent-optional}
 
--	いいえ不要です。Datadogが提供するAPIを使ってメトリクスを送信するだけなら、どのAgentもインストールする必要は有りません。 APIの詳細については、[次のページ](/ja/api/)を参照してください。
+-	いいえ不要です。Datadogが提供するAPIを使ってメトリクスを送信するだけなら、どのAgentもインストールする必要は有りません。 APIの詳細については、[次のページ][2]を参照してください。
 -	一般的には、多くのユーザがAgentのインストールに価値を見出しています。 Agentをインストールすることでシステムのメトリクスが自動に収集できる上、mysqlやpostgresなどのよく使われるソフトウェアのメトリクスが最低限の設定で収集できるようになります。
 
 <!--#### Can I use my own StatsD client? {#statsd}
 
 Any StatsD client will work just fine, but using the Datadog DogStatsD client
 will give you a few extra features. You can read more about our clients extra
-features [here][dogstatsd].
+features [here][3].
 -->
 
 #### 独自のStatsDクライアントを使うことはできますか。 {#statsd}
 
-StatsDのクライアントならどれでも使えます。 しかし、DatadogのDogStatsDクライアントには、幾つかの追加機能があります。 DogStatsDクライアントの追加機能の詳細については、[次のページ](/ja/guides/dogstatsd/)を参照してください。
+StatsDのクライアントならどれでも使えます。 しかし、DatadogのDogStatsDクライアントには、幾つかの追加機能があります。 DogStatsDクライアントの追加機能の詳細については、[次のページ][4]を参照してください。
 
 <!--#### How can I change the hostname {#hostname-change}
 
 You can change the hostname by updating your agent's configuration file called
 datadog.conf and replacing the value for the "hostname" key.  Use the following
 link, select your OS in the left column, and go to
-the [Configuration section][basic_agent_usage] to find the location of your
+the [Configuration section][5] to find the location of your
 agent's configuration file.-->
 
 #### hostnameはどのように変更すればいいですか。 {#hostname-change}
 
-datadog.confというDatadog Agentの設定ファイル内の"hostname"の値を変更し、ファイル更新することでホスト名を変更することができます。 設定ファイルの保存先は、[次のページ](/ja/guides/basic_agent_usage/)の左メニューから、Datadog AgnetをインストールしたOSを選択し、**設定ファイルの保存されているディレクトリ**のセクションにて確認してください。
+datadog.confというDatadog Agentの設定ファイル内の"hostname"の値を変更し、ファイル更新することでホスト名を変更することができます。 設定ファイルの保存先は、[次のページ][6]の左メニューから、Datadog AgnetをインストールしたOSを選択し、**設定ファイルの保存されているディレクトリ**のセクションにて確認してください。
 
 <!--#### How do I uninstall the agent {#agent-uninstall}
 
@@ -145,11 +145,11 @@ Infrastructureのページから、ホスト名から消えるのに最長で24�
 
 <!--#### Other Agent-related questions? {#agent-other}
 
-Please refer to the [Basic Agent Usage Guide][basic_agent_usage]. -->
+Please refer to the [Basic Agent Usage Guide][5]. -->
 
 #### その他のDatadog Agent 関連の質問。 {#agent-other}
 
-[Datadog Agent 入門](/ja/guides/basic_agent_usage/)を参照してください。
+[Datadog Agent 入門][6]を参照してください。
 
 <!--
 
@@ -177,7 +177,7 @@ from AWS. -->
 
 ### メトリクスにアラートを設定したところ、なぜか非常に多くのNo Data アラートが発生します。 {#no-data}
 
-AWSのNo Dataエラーの問題は、DatadogがAWSからのメトリクスを受信する頻度に関係しています。 DatadogのクローラーはCloudwatch APIの実行制限の制約の影響を受け、メトリクスデータは、10分かそれ以上遅延します。 従って、AWSのメトリクスにアラートを設定する場合、30分から1時間の時間枠での設定を推奨しています。 (この時間枠の設定は、[アラートの設定方法](/ja/guides/monitors/)ページのアラートの新規設定の第3ステップを参照してください。) アラートの発生条件の時間枠を変更することで、この問題は解決するはずです。 より粒度の細かいデータでアラートを設定したい場合は、AWS上で起動しているホストにインストールしたDatadog Agentから送信されるメトリクスデータを基にアラートを設定することをお勧めします。
+AWSのNo Dataエラーの問題は、DatadogがAWSからのメトリクスを受信する頻度に関係しています。 DatadogのクローラーはCloudwatch APIの実行制限の制約の影響を受け、メトリクスデータは、10分かそれ以上遅延します。 従って、AWSのメトリクスにアラートを設定する場合、30分から1時間の時間枠での設定を推奨しています。 (この時間枠の設定は、[アラートの設定方法][7]ページのアラートの新規設定の第3ステップを参照してください。) アラートの発生条件の時間枠を変更することで、この問題は解決するはずです。 より粒度の細かいデータでアラートを設定したい場合は、AWS上で起動しているホストにインストールしたDatadog Agentから送信されるメトリクスデータを基にアラートを設定することをお勧めします。
 
 <!--#### Is it possible to set up alerts based on % utilisation? For example alerting when 50% of memory has been used or 80% of disk space is used? {#alert-disk-utilization}
 
@@ -188,12 +188,12 @@ alert when at 80% or above:
   3. For set alert grouping, select "simple alert".
   4. Set alert conditions: Select Above and for the value put 0.8.
   5. Add a custom message for alert if you'd like.
-* You can read more about setting up alerts [here][alerting]</a>.
+* You can read more about setting up alerts [here][8]</a>.
 
 ### リソースの利用率に基づいてアラートを発生することはできますか。例えば、メモリの利用率が50％になった時や、ディスク領域の使用率が80％になった時など。 {#alert-disk-utilization}
 
 * **はい、可能です。**
-* 詳細については、[アラートの設定方法][alerting_ja]のページを参照してください。
+* 詳細については、[アラートの設定方法][9]のページを参照してください。
 * 以下が、ディスク使用率が80％の時に発生するアラートの設定手順の概要です:
   1. `system.disk.in_use` というメトリクスを選択します。
   2. `threshold alert` タイプを選択します。
@@ -377,12 +377,12 @@ avg:foo.requests.mean_90{handler_class:ThingHandler, handler_method:list} by {ht
 <!--#### How are hostnames determined? {#arch-hostnames}
 
 The hostnames are determined by what the Datadog Agent detects; this is fully
-documented [here][hostnames]. You can see all names being detected by the Agent by running the info command:
+documented [here][10]. You can see all names being detected by the Agent by running the info command:
  ~~~/etc/init.d/datadog-agent info~~~-->
 
 #### ホスト名はどのように判定され、設定されますか。 {#arch-hostnames}
 
-ホスト名は、Datadog Agentのインストール時に、スクリプトが検出したホスト名になります。詳細に関しては、[Host Name](/ja/hostnames/)のページを参照してください。尚、Datadog Agentによって検出されたホスト名は、次のinfoコマンドを実行することで確認できます: `/etc/init.d/datadog-agent info`
+ホスト名は、Datadog Agentのインストール時に、スクリプトが検出したホスト名になります。詳細に関しては、[Host Name][11]のページを参照してください。尚、Datadog Agentによって検出されたホスト名は、次のinfoコマンドを実行することで確認できます: `/etc/init.d/datadog-agent info`
 
 <!--#### Tell me about tagging! {#tagging}
 
@@ -418,9 +418,9 @@ To get a breakdown by host, you can do:
 sum:page.views{domain:example.com} by {host}
 ~~~
 
-Further tagging info can be found [here][tags]</a>.
+Further tagging info can be found [here][12]</a>.
 
-For information on AWS tagging, please see [here][integration-aws].-->
+For information on AWS tagging, please see [here][13].-->
 
 #### Datadogを使う上での、タグの使い方について教えて下さい。 {#tagging}
 
@@ -454,7 +454,7 @@ sum:page.views{domain:example.com}
 sum:page.views{domain:example.com} by {host}
 ~~~
 
-タグ付けに関しての詳しい情報は、"DogStatsD を使った、メトリクスの送信"ページの[tag](/ja/guides/metrics/#tags)の項目を参照してください。 AWSのタグ付けに関する詳細につては、["AWS Integration"](/ja/integrations/aws/)のページを参照してください。
+タグ付けに関しての詳しい情報は、"DogStatsD を使った、メトリクスの送信"ページの[tag][14]の項目を参照してください。 AWSのタグ付けに関する詳細につては、["AWS Integration"][15]のページを参照してください。
 
 <!-- ====================================================================== -->
 
@@ -474,24 +474,24 @@ meaningful host name provided by an internal DNS server or a config-managed host
 file (myhost.mydomain). Datadog creates aliases for host names when there are multiple
 uniquely identifiable names for a single host.  It takes about 10-20 minutes for the
 single host's duplicate names to be aliased. You can read more about
-hostnames [here][hostnames].
+hostnames [here][10].
 -->
 
 ### AWSについて {#aws}
 
 #### AWS用のIntegrationを設定しました。ホスト名が重複して表示されるのはどうしてですか。 {#duplicate-hosts}
 
-EC2上で起動したインスタンス(ホスト)には、インスタンスID（I-ABCD1234）、IPアドレスに基づいて付けられた汎用的なホスト名（IP-192-0-0-1）、そして、hostsファイルやDNSによって管理されているホスト名(myhost.mydomain)があります。 Datadogでは、単一ホストに対して複数のユニークなホスト名が存在する場合、それら全てのホスト名のエリアスを作成します。 従って、実態インスタンスは1つのままです。 尚、このエリアスの作成には、通常約10〜20分かかります。 詳細に関しては、[Host Naming](/ja/hostnames/)のページを参照してください。
+EC2上で起動したインスタンス(ホスト)には、インスタンスID（I-ABCD1234）、IPアドレスに基づいて付けられた汎用的なホスト名（IP-192-0-0-1）、そして、hostsファイルやDNSによって管理されているホスト名(myhost.mydomain)があります。 Datadogでは、単一ホストに対して複数のユニークなホスト名が存在する場合、それら全てのホスト名のエリアスを作成します。 従って、実態インスタンスは1つのままです。 尚、このエリアスの作成には、通常約10〜20分かかります。 詳細に関しては、[Host Naming][11]のページを参照してください。
 
 <!--#### What metrics will I get from the AWS integration? {#aws-metrics}
 
 * Our crawlers use the Cloudwatch API, and we collect everything available from it.
-* You can read in detail about our AWS integration [here][integration-aws].-->
+* You can read in detail about our AWS integration [here][13].-->
 
 #### AWS用のIntegrationには、どのようなメトリクスが含まれていますか。 {#aws-metrics}
 
 -	CloudwatchのAPIを使用して収集できる情報は全て収集しています。
--	AWS Integrationについては、[Datadog-AWS Cloudwatch Integration](/ja/integrations/aws/)のページを参照してください。
+-	AWS Integrationについては、[Datadog-AWS Cloudwatch Integration][15]のページを参照してください。
 
 <!--#### I can't filter out my ELB instances - will I be charged for them? {#aws-elb}
 
@@ -508,7 +508,7 @@ future or the past, which can sometimes cause problems with metric submission.
 To check for this, run:
 
 ~~~
-date -u && curl -s -v https://app.datadoghq.com/intake 2>&1 | grep Date
+date -u && curl -s -v https://app.datadoghq.com 2>&1 | grep -i '< date'
 ~~~
 
 This will output the current system's date, and then make a request to our
@@ -522,7 +522,7 @@ apart, you may want to look at the time settings on your server.-->
 Datadog側の時間とインスタンスの時間の差をチェックするには、次のコマンドを実行します:
 
 ~~~
-date -u && curl -s -v https://app.datadoghq.com/intake 2>&1 | grep Date
+date -u && curl -s -v https://app.datadoghq.com 2>&1 | grep -i '< date'
 ~~~
 
 このコマンドは、現在ログインしているシステムの現在時間を表示し、その後Datadog側へリクエストを発行し、時間をgrepして表示します。もしも、これら二つの時間の差が数分以上ある場合は、インスタンスの現在時間を正しく設定し直してください。
@@ -545,7 +545,7 @@ Yes you can! Follow the steps below to set this up:
 3.	postgres.yamlに、次のタグを追加します。<code>dbinstanceidentifier:(rds-instance-id), enginename:postgres</code>
 4.	Datadog Agentを再起動します。
 
-詳しくは、[PostgreSQL Integration](https://app.datadoghq.com/account/settings#integrations/postgres)のタイルを選択し、'configuration'のタブの参照してください。
+詳しくは、[PostgreSQL Integration][16]のタイルを選択し、'configuration'のタブの参照してください。
 
 <!--
 ===============================================================================
@@ -558,11 +558,11 @@ Yes you can! Follow the steps below to set this up:
 #### How can I change the Billing contact? {#billing-contact}
 
 You can set a specific email address to receive invoices, even if that address
-is not a team member within Datadog (invoices@yourcompany.com) [here][app-billing].
+is not a team member within Datadog (invoices@yourcompany.com) [here][17].
 
 #### Where can I get a copy of the invoice? {#billing-invoice}
 
-As an admin you can check out past invoices [here][app-billing-history].-->
+As an admin you can check out past invoices [here][18].-->
 
 ### 請求について {#billing}
 
@@ -570,19 +570,19 @@ As an admin you can check out past invoices [here][app-billing-history].-->
 
 Datadogの`team`タブ以下で設定したメンバー以外の任意のメールアドレスを請求書の受信者として設定できます。(例:invoices@yourcompany.com)
 
-請求書受信者のメールアドレスは、[Billing and Plan](https://app.datadoghq.com/account/billing)のページから変更してください。
+請求書受信者のメールアドレスは、[Billing and Plan][19]のページから変更してください。
 
 <!--#### Where can I get a copy of the invoice? {#billing-invoice}
 
-As an admin you can check out past invoices [here][app-billing-history].
+As an admin you can check out past invoices [here][18].
 
-***You can read more about billing [here][billing].***-->
+***You can read more about billing [here][20].***-->
 
 #### 請求書のコピーは、どこから入手できますか。 {#billing-invoice}
 
-管理者権限のあるユーザは、[Billing History](https://app.datadoghq.com/account/billing_history)のページから過去の請求状況を確認することができます。
+管理者権限のあるユーザは、[Billing History][21]のページから過去の請求状況を確認することができます。
 
-**課金に関する詳しい情報は、[課金に関するFAQ](/ja/guides/billing/)のページを参照してください。**
+**課金に関する詳しい情報は、[課金に関するFAQ][22]のページを参照してください。**
 
 <!--
 ===============================================================================
@@ -667,7 +667,7 @@ you can apply is <a href="http://docs.datadoghq.com/graphing/#functions">here</a
 
 ewmaは、指数関数の移動平均の略語で、ewma_x(...)のxの部分には、平滑度によって5、10、20の値を設定することができます。
 
-グラフ表示時に適用可能な関数は、[Graphing Primer](/ja/graphing/#functions)を参照してください。
+グラフ表示時に適用可能な関数は、[Graphing Primer][23]を参照してください。
 
 <!--<h4>Can I stack CPU metrics on the same graph?</h4>
 <p>
@@ -678,7 +678,7 @@ on the overview page by clicking any host <a href="https://app.datadoghq.com/inf
 
 #### CPU負荷の情報を同じグラフに積み上げるのにはどうすればよいですか。
 
-各グラフの右上隅の歯車のマークをクリックし、ポップアップ表示の"Choose metrics and events"のセクションのJSONを編集します。詳細に関しては、グラフ表示の設定ページの[stacked series](/ja/graphing)を参照してください。
+各グラフの右上隅の歯車のマークをクリックし、ポップアップ表示の"Choose metrics and events"のセクションのJSONを編集します。詳細に関しては、グラフ表示の設定ページの[stacked series][24]を参照してください。
 
 <!--<h4>Is there a way to share graphs?</h4>
 <p>
@@ -758,7 +758,7 @@ There are several problems that could cause this.  Send a message to support (su
 
 #### Integrationをインストール/設定しましたが、メトリクスが表示されません。 {#ntegration-metrics}
 
-メトリクスが表示されない現象には、複数の原因が考えられます。その際は、症状の詳細と共に、Datadog Agent infoのコマンドライン出力、ログ出力、設定ファイルを添付し、サポート窓口(support@datadoghq.com)にご連絡ください。各ファイルが保存されている場所は、[Datadog Agent 入門](/ja/guides/basic_agent_usage/)のページより使用中のOSを選択し、確認してください。
+メトリクスが表示されない現象には、複数の原因が考えられます。その際は、症状の詳細と共に、Datadog Agent infoのコマンドライン出力、ログ出力、設定ファイルを添付し、サポート窓口(support@datadoghq.com)にご連絡ください。各ファイルが保存されている場所は、[Datadog Agent 入門][6]のページより使用中のOSを選択し、確認してください。
 
 <!--#### How is Datadog retrieving my data? {#ntegration-data}
 
@@ -772,7 +772,7 @@ There are several problems that could cause this.  Send a message to support (su
 -	通信セッションは、常にDatadog AgentからDatadogのサービスに向かって開始されます。Datadogのサービス側からDatadog Agentに向かっ通信セッションを開始することは一切ありません。
 -	すべてのデータ送信は、SSLを介して送信されます。
 -	Datadogのサービス側へのすべての通信は、HTTPSを介して行われます。
--	Datadogのサービス利用規約は、[SERVICE TERMS AND AGREEMENT](https://app.datadoghq.com/policy/license)ページで確認することができます。
+-	Datadogのサービス利用規約は、[SERVICE TERMS AND AGREEMENT][25]ページで確認することができます。
 
 <!-- <h4 id="integration-edit">I'd like to tweak an integration or write up a new one. Do you accept pull requests?</h4>
 <p>
@@ -781,7 +781,7 @@ Yes! The agent is entirely open source and can be found <a href="https://github.
 
 #### Integrationを、改善したり開発したりしたいと思っています。開発コードのPull requestを受け付けていますか。 {#integration-edit}
 
-はい、できます。 Datadog Agentは、オープンソースです。GithubのDatadogアカウンントの[dd-agent](https://github.com/DataDog/dd-agent/)リポジトリーで公開しています。
+はい、できます。 Datadog Agentは、オープンソースです。GithubのDatadogアカウンントの[dd-agent][26]リポジトリーで公開しています。
 
 <!--
 ===============================================================================
@@ -800,7 +800,7 @@ You can submit your custom metrics with the DogStatsD client.  You can read more
 
 #### カスタムメトリクスはどのように送信すればよいですか。 {#custom-metrics}
 
-カスタムメトリクスは、DogStatsDクライアントを使ってDatadogのサービスサイトへ送信することができます。詳細に関しては、[DogStatsD を使った、メトリクスの送信](/ja/guides/metrics/)のページを参照してください。
+カスタムメトリクスは、DogStatsDクライアントを使ってDatadogのサービスサイトへ送信することができます。詳細に関しては、[DogStatsD を使った、メトリクスの送信][27]のページを参照してください。
 
 <!--<h4 id="counter-values">Why is my counter metric showing decimal values?</h4>
 <p>
@@ -809,7 +809,7 @@ StatsD counters are normalized over the flush interval to report per-second unit
 
 #### イベントの発生回数をカウントしているメトリクスが、少数点付きの数字になるのはなぜですか。 {#ounter-values}
 
-DogStatsDのカウンタは、flush interval間の総数を1秒間の数値に換算し、情報を送信しています。詳細に関しては、[DogStatsD を使った、メトリクスの送信](/ja/guides/metrics/)のページの[カウンタ](/ja/guides/metrics/#counters)を参照してください。
+DogStatsDのカウンタは、flush interval間の総数を1秒間の数値に換算し、情報を送信しています。詳細に関しては、[DogStatsD を使った、メトリクスの送信][27]のページの[カウンタ][28]を参照してください。
 
 <!--<h4 id="log-data-metrics">Is there a way to submit metrics from my log data?</h4>
 <p>
@@ -819,7 +819,7 @@ Yes there is!  We detail log parsing <a href="http://docs.datadoghq.com/guides/l
 
 #### ログデータを基にメトリクスを送信することはできますか。 {#og-data-metrics}
 
-はい、できます。 詳細に関しては、[Datadog Agent によるログの解析方法](/ja/guides/logs/)のページを参照してください。
+はい、できます。 詳細に関しては、[Datadog Agent によるログの解析方法][29]のページを参照してください。
 
 <!--<h4 id="past-data">I'd like to add past data to my account. Is there a way to do that?</h4>
 <p>
@@ -844,9 +844,9 @@ This depends on the medium you use to send metrics.
 
 メトリクスを送信するために使う方法によって異なります。
 
--	Agent Checkを使って送信する場合は、[Agent Checkの書き方](/ja/guides/agent_checks/)のページを参照してください。
--	DogStatsDを使って送信する場合は、[DogStatsD を使った、メトリクスの送信](/ja/guides/metrics/)のページを参照してください。d
--	APIを介して送信する場合は、[API Reference](/ja/api/#metrics-post)のページを参照してください。
+-	Agent Checkを使って送信する場合は、[Agent Checkの書き方][30]のページを参照してください。
+-	DogStatsDを使って送信する場合は、[DogStatsD を使った、メトリクスの送信][27]のページを参照してください。d
+-	APIを介して送信する場合は、[API Reference][31]のページを参照してください。
 
 <!--<h4 id="metric-reports">Is there a way I can get metric reports?</h4>
 <p>
@@ -952,7 +952,7 @@ by default you'll get the average across all hosts. -->
 -	`@test@example.com` test@example.comに電子メールを送信します。
 -	HipChat, Slack, Webhooks, Pagerduty, VictorOpsの使っている場合は、次のことができます。
 	-	`@hipchat-\[ルーム名\]`または`@slack-[ルーム名]` - \[ルーム名\]で指定したチャットルームに、イベントやグラフをポストすることができます。
-	-	`@webhook-[webhook名]` - アラートなどwebhookをつなげたものなら全て。例に関しては、[Send alerts by SMS with customizable WebHooks and Twilio](https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio/)のblogポストを参照してください。この機能を使うためのIntegarationの基本は、[Datadog-Webhooks Integration](/ja/integrations/webhooks/)のページと、ダッシュボードの[Integration](https://app.datadoghq.com/account/settings)タブからwebhooksのタイルを選択し`configuration`タブを参照してください。
+	-	`@webhook-[webhook名]` - アラートなどwebhookをつなげたものなら全て。例に関しては、[Send alerts by SMS with customizable WebHooks and Twilio][32]のblogポストを参照してください。この機能を使うためのIntegarationの基本は、[Datadog-Webhooks Integration][33]のページと、ダッシュボードの[Integration][34]タブからwebhooksのタイルを選択し`configuration`タブを参照してください。
 	-	`@pagerduty`または`@oncall` - Pagerdutyにアラートを送信します。 更に、`@pagerduty-acknowledge` や `@pagerduty-resolve`を使って通知することもできます。
 
 <!--<h4>Searching Events Help</h4>
@@ -1042,7 +1042,7 @@ about on <a target="_blank" href="http://docs.datadoghq.com/api/">here</a>).
 
 <p>
 Here is an example:
-<pre><code>{
+<pre><code>{�
 "title": "Host CPU above 75% for 5 minutes",
 "text": "Host CPU has been above 75% for the last 5 minutes ...etc",
 "priority": "normal",
@@ -1053,13 +1053,13 @@ Here is an example:
 
 #### Datadogへのイベントの送信は、メールでも可能ですか。
 
-はい、できます。 まずは、ダッシュボードの`Integration`タブを選択し、次に[`API's`のタブ](https://app.datadoghq.com/account/settings#api)で、メールアドレスの追加ページに移動します。'Events API Emails'セクションでイベント情報の送信先のメールを作成します。その後、ここで作成したメールアドレスに向けイベント情報を送信するようにアプリケーションやツールを設定します。
+はい、できます。 まずは、ダッシュボードの`Integration`タブを選択し、次に[`API's`のタブ][35]で、メールアドレスの追加ページに移動します。'Events API Emails'セクションでイベント情報の送信先のメールを作成します。その後、ここで作成したメールアドレスに向けイベント情報を送信するようにアプリケーションやツールを設定します。
 
-送信するメールの本文を自由に構成できる場合は、JSONを選択するとよいでしょう。本文に記述するJSONは、Datadog APIで指定している書式に準拠している必要があります。詳しくは、[API Reference](/ja/api/#events-post)のページの"POST AN EVENT"を参照してください。
+送信するメールの本文を自由に構成できる場合は、JSONを選択するとよいでしょう。本文に記述するJSONは、Datadog APIで指定している書式に準拠している必要があります。詳しくは、[API Reference][36]のページの"POST AN EVENT"を参照してください。
 
 次に例を示します:
 
-<pre><code>{
+<pre><code>{�
 "title": "Host CPU above 75% for 5 minutes",
 "text": "Host CPU has been above 75% for the last 5 minutes ...etc",
 "priority": "normal",
@@ -1102,7 +1102,7 @@ dashboards, etc. which are not supposed to be removed.</li>
 
 #### チームの設定は、どのようにすればよいですか。 {#team}
 
-アカウント管理者が、[ダッシュボードの`team`タブ](https://app.datadoghq.com/account/team)よりチームメンバの電子メールアドレスを入力する必要があります。
+アカウント管理者が、[ダッシュボードの`team`タブ][37]よりチームメンバの電子メールアドレスを入力する必要があります。
 
 チーム管理のベストプラクティスは、次のとおりです:
 
@@ -1110,7 +1110,7 @@ dashboards, etc. which are not supposed to be removed.</li>
 -	同じ組織からの複数のユーザが個別にユーザ登録をした場合、Datadogではそれぞれ別の組織としてユーザ情報を登録します。同一チームに所属させる必要がある場合は、サポートにご連絡ください。ただし、すべてのユーザ情報が移行されるわけではないの注意してください。
 -	Datadogが提供しているアクセス制御は、管理者活動としてのユーザの追加/削除、請求書プランの変更などです。ホスト、メトリクス、ダッシュボードなどのデータという観点では、すべてのユーザがすべてのものにアクセスできます。Datadogでは、より堅牢なアクセス制御を実現するために鋭意開発を進めていますが、アクセス制御の開発が現在の最優先課題ではないことはご理解いただけると幸いです。
 
--	チームメンバを削除するには、同じ[`team`のページ](https://app.datadoghq.com/account/team)（管理者のみ使用可能）の`disable`ボタンを使用します。チームメンバに追加したユーザは、使用停止の状態にすることはできますが、チームメンバを完全に削除することはできません。使用停止状態のユーザは、管理者のチームページにのみに表示され、ログインができなくなると同時に、すでに通信中のセッションもすべて遮断されます。チームメンバを完全に削除しない理由は、削除操作しようとしているメンバが同時に削除されることを意図していないイベントやダッシュボードなどの所有者になっている可能性があるからです。
+-	チームメンバを削除するには、同じ[`team`のページ][37]（管理者のみ使用可能）の`disable`ボタンを使用します。チームメンバに追加したユーザは、使用停止の状態にすることはできますが、チームメンバを完全に削除することはできません。使用停止状態のユーザは、管理者のチームページにのみに表示され、ログインができなくなると同時に、すでに通信中のセッションもすべて遮断されます。チームメンバを完全に削除しない理由は、削除操作しようとしているメンバが同時に削除されることを意図していないイベントやダッシュボードなどの所有者になっている可能性があるからです。
 
 <!--<h4 id="security">Are my data and credentials safe?</h4>
 <p>
@@ -1129,8 +1129,8 @@ dashboards, etc. which are not supposed to be removed.</li>
 -	通信セッションは、常にDatadog AgentからDatadogのサービスに向かって開始されます。Datadogのサービス側からDatadog Agentに向かっ通信セッションを開始することは一切ありません。
 -	すべてのデータ送信は、SSLを介して送信されます。
 -	Datadogのサービス側へのすべての通信は、HTTPSを介して行われます。
--	Datadogのサービス利用規約は、[SERVICE TERMS AND AGREEMENT](https://app.datadoghq.com/policy/license)ページで確認することができます。
--	Datadog Agentのソースコードは、オープンソースとしてGithubのDatadogアカウント以下に[dd-agent](https://github.com/DataDog/dd-agent/)として公開しています。
+-	Datadogのサービス利用規約は、[SERVICE TERMS AND AGREEMENT][25]ページで確認することができます。
+-	Datadog Agentのソースコードは、オープンソースとしてGithubのDatadogアカウント以下に[dd-agent][26]として公開しています。
 -	一部のOSのインストール手順では、パスワードを求められることがあります。(例えば、CentOS5にDatadog Agentをインストールする場合)この際のパスワードの入力は、OSにパッケージ類をインストールする際に求められるものです。更に、Datadogではこれらのパスワードは一切保持していません。もしも、インストールスクリプトがどのような操作をしているのかが気になる場合は、ステップバイステップの手順に基づきDatadog Agentをインストールすることもできます。
 
 <!--<h4 id="feature-request">I have a feature request. How can I submit it?</h4>
@@ -1141,3 +1141,40 @@ You can send the request to support@datadoghq.com and we will add it to our feat
 #### サービスや機能に対する要望はどのように提出ればよいですか。 {#feature-request}
 
 要望は、support@datadoghq.comに送信してください。それらの要望は、Datadogの機能追加要求のバックログに随時追加され検討されていきます。
+[1]: 
+[2]: /ja/api
+[3]: 
+[4]: /ja/guides/dogstatsd
+[5]: 
+[6]: /ja/guides/basic_agent_usage
+[7]: /ja/guides/monitors
+[8]: 
+[9]: 
+[10]: 
+[11]: /ja/hostnames
+[12]: 
+[13]: 
+[14]: /ja/guides/metrics/#tags
+[15]: /ja/integrations/aws
+[16]: https://app.datadoghq.com/account/settings#integrations/postgres
+[17]: 
+[18]: 
+[19]: https://app.datadoghq.com/account/billing
+[20]: 
+[21]: https://app.datadoghq.com/account/billing_history
+[22]: /ja/guides/billing
+[23]: /ja/graphing/#functions
+[24]: /ja/graphing
+[25]: https://app.datadoghq.com/policy/license
+[26]: https://github.com/DataDog/dd-agent
+[27]: /ja/guides/metrics
+[28]: /ja/guides/metrics/#counters
+[29]: /ja/guides/logs
+[30]: /ja/guides/agent_checks
+[31]: /ja/api/#metrics-post
+[32]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
+[33]: /ja/integrations/webhooks
+[34]: https://app.datadoghq.com/account/settings
+[35]: https://app.datadoghq.com/account/settings#api
+[36]: /ja/api/#events-post
+[37]: https://app.datadoghq.com/account/team

@@ -35,7 +35,7 @@ for which ranges to allow, please see <a target="_blank" href="https://github.co
 
 Datadog Agent は、ターゲットホスト上で動作するソフトウェアです。その役割は、システムの監視データやパフォーマンスデータをビジネスに有効に活用していくために、ターゲットホスト上のイベントやメトリクスを取得し、Datadogに送信することです。
 
-Datadog Agent のソースコードは、[Github](https://github.com/DataDog/dd-agent)で公開しています。
+Datadog Agent のソースコードは、[Github][1]で公開しています。
 
 プロキシが設置されている環境で、Datadog Agent がデータを送信する必要がある場合は、次の<a target="_blank" href="https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration">ドキュメント"Network Traffic and Proxy Configuration"</a>を参照してください。プロキシで開放するポートの情報に関しては、<a target="_blank" href="https://github.com/DataDog/dd-agent/wiki/Network-Traffic-and-Proxy-Configuration#open-ports">"Open Ports"</a>の項目を参照してください。
 
@@ -97,7 +97,7 @@ If not, please send both the full output of the info command and the logs as att
 We have also seen a few cases where machines have their clock set further in the future or the past, which can sometimes cause problems with metric submission.
 To check for this, run:
 
-<code>date -u && curl -s -v https://app.datadoghq.com/intake 2>&1 | grep Date</code>
+<code>date -u && curl -s -v https://app.datadoghq.com 2>&1 | grep -i '< date'</code>
 <p>
 This will output the current system's date, and then make a request to our endpoint and grab the date on our end.
 If these are more than a few minutes apart, you may want to look at the time settings on your server.
@@ -152,7 +152,7 @@ Datadog Agent のインストールは完了しているがダッシュボード
 
 ホストとDatadog側の時刻の差をチェックするには、次のコマンドを実行します:
 
-<code>date -u && curl -s -v https://app.datadoghq.com/intake 2>&1 | grep Date</code>
+<code>date -u && curl -s -v https://app.datadoghq.com 2>&1 | grep -i '< date'</code>
 <p>
 このコマンドは、ホストの日付・時刻を表示し、その後Datadog側にリクエストを実行し、リクエストの結果からDatadog側の日付・時刻を取得し表示します。もし、ホストとDatadog側の時刻の差が数分以上ある場合は、ホストの時刻を正常に設定してください。
 </p>
@@ -173,3 +173,4 @@ Dataddogが提供している<a href="http://docs.datadoghq.com/ja/integrations/
     + <strong>はい、表示されています。</strong>
         * <a href="https://app.datadoghq.com/metric/explorer" target="_blank">Metrics Explorer</a> のページでそのホストの一般的なメトリクス(CPU, HDD, メモリ等)が表示されているかを確認してください。例えば、Integrationsの設定を進めているホストの`system.cpu.user`選んでみてください。
         * メトリクスが全く表示されない場合は、ログファイルでエラー情報の状況を出力している部分がないか確認してください。その上で、エラー情報を含んでいそうなログファイルとinfoコマンドの出力ファイルとを添付し、<a href="mailto:support@datadoghq.com?Subject=Agent%20issues" target="_top">support@datadoghq.com</a> までお問い合わせください。　
+[1]: https://github.com/DataDog/dd-agent
