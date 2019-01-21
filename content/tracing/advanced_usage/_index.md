@@ -1418,7 +1418,7 @@ There are three possible implementations depending on the logging configuration:
 
 **1. Automatic Trace IDs Injection for JSON Formatted Logs**
 
-Enable injection in the [Java Tracer's configuration][3] thanks to the `dd.logs.injection` parameter.
+Enable injection in the [Java Tracer's configuration][3] via the `dd.logs.injection` parameter.
 
 **Note**: Currently only **slf4j** is supported for MDC autoinjection.
 
