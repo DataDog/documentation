@@ -1536,7 +1536,7 @@ hello()
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Follow one the two following option to inject trace information into your logs in Ruby:
+Use one the two following options to inject Ruby trace information into your logs:
 
 **1. Enable Trace Ids Injection for Rails Applications**
 
