@@ -1500,7 +1500,7 @@ Then update your logger configuration to include `dd.trace_id` and `dd.span_id` 
 
 Use one the two following options to inject Python trace information into your logs:
 
-**1. Automatic Trace Ids Injection**
+**1. Automatic Trace IDs Injection**
 
 Set the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
 
