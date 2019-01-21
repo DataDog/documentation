@@ -1435,7 +1435,7 @@ If the logs are already JSON formatted, there should be nothing left to do.
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
-**3. Manual Trace Ids Injection**
+**3. Manual Trace IDs Injection**
 
 If you prefer to manually correlate your traces with your logs, leverage the Datadog API to retrieve correlation identifiers:
 
