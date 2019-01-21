@@ -1422,7 +1422,7 @@ Enable injection in the [Java Tracer's configuration][3] via the `dd.logs.inject
 
 **Note**: Currently only **slf4j** is supported for MDC autoinjection.
 
-**2. Automatic Trace Ids Injection for Raw Formatted Logs**
+**2. Automatic Trace IDs Injection for Raw Formatted Logs**
 
 Enable injection in the [Java Tracer's configuration][3]. 
 
