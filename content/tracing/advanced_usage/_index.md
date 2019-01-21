@@ -1504,7 +1504,7 @@ Use one the two following options to inject Python trace information into your l
 
 Set the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
 
-**2. Manual Trace Ids Injection**
+**2. Manual Trace IDs Injection**
 
 Patch your `logging` module by updating your log formatter to include the ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
 
