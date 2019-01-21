@@ -1538,7 +1538,7 @@ hello()
 
 Use one the two following options to inject Ruby trace information into your logs:
 
-**1. Enable Trace Ids Injection for Rails Applications**
+**1. Enable Trace IDs Injection for Rails Applications**
 
 Rails applications which are configured with a `ActiveSupport::TaggedLogging` logger can append correlation IDs as tags to log output. The default Rails logger implements this tagged logging, making it easier to add correlation tags.
 
