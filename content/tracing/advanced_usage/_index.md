@@ -1498,7 +1498,7 @@ Then update your logger configuration to include `dd.trace_id` and `dd.span_id` 
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Follow one the two following option to inject trace information into your logs in Python:
+Use one the two following options to inject Python trace information into your logs:
 
 **1. Automatic Trace Ids Injection**
 
