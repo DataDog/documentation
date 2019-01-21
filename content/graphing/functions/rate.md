@@ -39,7 +39,7 @@ kind: documentation
 
 | Function       | Description                                   | Example                        |
 | :----          | :-------                                      | :---------                     |
-| `derivative()` | Graph the derivative (dt/diff) of the metric. | `derivative(<METRIC_NAME>{*})` |
+| `derivative()` | Graph the derivative (diff/dt) of the metric. | `derivative(<METRIC_NAME>{*})` |
 
 ## Other functions
 
