@@ -1412,20 +1412,20 @@ Leverage the MDC Frameworks ([Map Diagnostic Context][1]) to automatically corre
 
 **Enable Log Injection for JSON Formatted Logs**
 
-Enable injection in the [Java Tracer's configuration][3]. 
+Enable injection in the [Java Tracer's configuration][2]. 
 
 **Note**: Currently only slf4j is supported for MDC autoinjection.
 
 **Enable Log Injection for Raw Formatted Logs**
 
-1. Enable injection in the [Java Tracer's configuration][3]. Note: Currently only slf4j is supported for MDC autoinjection.
+1. Enable injection in the [Java Tracer's configuration][2]. Note: Currently only slf4j is supported for MDC autoinjection.
 2. Update your formatter to include `dd.trace_id` and `dd.span_id` in your logs
 
 ```xml
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
-[See our Java logging documentation][2] for more details.
+[See our Java logging documentation][3] for more details.
 
 **Manual Injection**
 
@@ -1469,8 +1469,8 @@ try {
 ```
 
 [1]: https://logback.qos.ch/manual/mdc.html
-[2]: https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#configure-your-logger
-[3]: https://docs.datadoghq.com/tracing/languages/java/#configuration
+[2]: https://docs.datadoghq.com/tracing/languages/java/#configuration
+[3]: https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#configure-your-logger
 {{% /tab %}}
 {{% tab "Python" %}}
 

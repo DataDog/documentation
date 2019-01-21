@@ -208,7 +208,6 @@ Export your current Log Visualization with the *Export* functionality:
 
 [1]: /monitors/monitor_types/log
 [2]: /graphing/dashboards/timeboard
-[3]: /help
 {{% /tab %}}
 {{< /tabs >}}
 

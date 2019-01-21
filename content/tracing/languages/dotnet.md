@@ -272,7 +272,7 @@ Environment Variable       | Description                                        
 `DD_TRACE_ENABLED`         | Determines whether the profiler is enabled. Valid values are: `true` or `false`                       | `true`        |
 `DD_AGENT_HOST`            | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. | `localhost`   |
 `DD_TRACE_AGENT_PORT`      | Sets the port where traces are sent (the port where the Agent is listening for connections).              | `8126`        |
-`DD_ENV`                   | Adds the `env` tag with the specified value to generated spans. See [Agent configuration][6] for more details about the `env` tag. | _empty_ (no `env` tag) |
+`DD_ENV`                   | Adds the `env` tag with the specified value to generated spans. See [Agent configuration][2] for more details about the `env` tag. | _empty_ (no `env` tag) |
 `DD_SERVICE_NAME`          | Sets the default service name. If not set, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, entry assembly, or process name). | _empty_ (determine service name automatically) |
 `DD_DISABLED_INTEGRATIONS` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are: `AspNetCoreMvc2`, `AspNetMvc`, `AspNetWebApi2`, `ElasticsearchNet`, `ServiceStackRedis`, `SqlServer`, `StackExchangeRedis` | _empty_ (all integrations enabled) |
 `DD_TRACE_LOG_PATH`        | Sets the path for the profiler's log file. | Windows: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br><br>Linux: `/var/log/datadog/dotnet-profiler.log` | |
@@ -289,7 +289,7 @@ The .NET Tracer supports automatic instrumentation on the following runtimes:
 
 **Note**: Libraries that target .NET Standard 2.0 are supported when running on either .NET Framework 4.6.1+ or .NET Core 2.0+.
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
 
 ### Web Framework Integrations
 
@@ -305,7 +305,7 @@ The .NET Tracer can instrument the following web frameworks automatically:
 | ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Windows | Public Beta   | `AspNetCoreMvc2` |
 | ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Linux   | Public Beta   | `AspNetCoreMvc2` |
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
 
 ### Data Store Integrations
 
@@ -321,13 +321,13 @@ The .NET Tracer's ability to automatically instrument data store access depends 
 
 The ADO.NET integration tries to instrument **all** ADO.NET providers. Support was tested with SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (e.g. MySQL, SQLite, Oracle) might work, but have not been tested yet.
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
 
 ## Manual Instrumentation
 
-To manually instrument your code, add the `Datadog.Trace` [NuGet package][3] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
+To manually instrument your code, add the `Datadog.Trace` [NuGet package][4] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For more details on manual instrumentation and custom tagging, see [Advanced Usage][4].
+For more details on manual instrumentation and custom tagging, see [Advanced Usage][5].
 
 ### Runtime Compatibility
 
@@ -339,15 +339,15 @@ Manual instrumentation is supported on .NET Framework 4.5+ on Windows and on any
 | .NET Core      | 2.0+     | Windows, Linux, macOS | Public Beta  |
 | Mono           | 5.4+     | Windows, Linux, macOS | Public Beta  |
 
-For more details on supported platforms, see the [.NET Standard documentation][5].
+For more details on supported platforms, see the [.NET Standard documentation][6].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/apm/
-[2]: /help
-[3]: https://www.nuget.org/packages/Datadog.Trace
-[4]: /tracing/advanced_usage/?tab=net
-[5]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
-[6]: /agent/apm#environment
+[1]: /agent/apm
+[2]: /agent/apm#environment
+[3]: /help
+[4]: https://www.nuget.org/packages/Datadog.Trace
+[5]: /tracing/advanced_usage/?tab=net
+[6]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
