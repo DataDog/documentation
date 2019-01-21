@@ -1428,7 +1428,7 @@ Enable injection in the [Java Tracer's configuration][3].
 
 **Note**: Currently only **slf4j** is supported for MDC auto-injection.
 
-If logs are already JSON formatted, there should be nothing left to do. 
+If the logs are already JSON formatted, there should be nothing left to do. 
 2. Update your formatter to include `dd.trace_id` and `dd.span_id` in your logger configuration:
 
 ```
