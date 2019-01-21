@@ -1559,7 +1559,7 @@ The logs are generated in a format that is supported by default in the Ruby log 
 # [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
 ```
 
-**2. Manual Trace Ids Injection for Ruby Applications**
+**2. Manual Trace IDs Injection for Ruby Applications**
 
 Use `Datadog.tracer.active_correlation` method to inject trace identifiers in the log format:
 
