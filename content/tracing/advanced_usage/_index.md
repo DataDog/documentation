@@ -1416,7 +1416,7 @@ There are three possible implementations depending on the logging configuration:
 2. Automatically inject trace IDs in raw formatted logs
 3. Manually inject trace IDs
 
-**1. Automatic Trace Ids Injection for JSON Formatted Logs**
+**1. Automatic Trace IDs Injection for JSON Formatted Logs**
 
 Enable injection in the [Java Tracer's configuration][3] thanks to the `dd.logs.injection` parameter.
 
