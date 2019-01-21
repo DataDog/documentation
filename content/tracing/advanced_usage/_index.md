@@ -107,7 +107,7 @@ end
 
 **Adding tags to a current active span**
 
-Access the current active span from any method within your code. Note, however, that if the method is called and there is no span currently active, `active_span` will be nil.
+Access the current active span from any method within your code. Note, however, that if the method is called and there is no span currently active, `active_span` is nil.
 
 ```ruby
 # e.g. adding tag to active span
@@ -458,14 +458,14 @@ Further API details can be found at [`ddtrace.Tracer()`][4]
 
 **Using the API**
 
-If the above methods are still not enough to satisfy your tracing needs, a manual API is provided which will allow you to start and finish spans however you may require:
+If the above methods are still not enough to satisfy your tracing needs, a manual API is provided which allows you to start and finish spans however you may require:
 
 ```python
   span = tracer.trace('operations.of.interest')
 
   # do some operation(s) of interest in between
 
-  # NOTE: make sure to call span.finish() or the entire trace will not be sent
+  # NOTE: make sure to call span.finish() or the entire trace is not sent
   # to Datadog
   span.finish()
 ```
@@ -920,9 +920,9 @@ const tracer = opentracing.globalTracer()
 
 The following tags are available to override Datadog specific options:
 
-* `service.name`: The service name to be used for this span. The service name from the tracer will be used if this is not provided.
-* `resource.name`: The resource name to be used for this span. The operation name will be used if this is not provided.
-* `span.type`: The span type to be used for this span. Will fallback to `custom` if not provided.
+* `service.name`: The service name to be used for this span. The service name from the tracer is used if this is not provided.
+* `resource.name`: The resource name to be used for this span. The operation name is used if this is not provided.
+* `span.type`: The span type to be used for this span. The span type falls back to `custom` if not provided.
 
 [1]: https://doc.esdoc.org/github.com/opentracing/opentracing-javascript
 [2]: https://datadog.github.io/dd-trace-js
@@ -1009,7 +1009,7 @@ final SpanContext extractedContext =
                              new MyHttpRequestExtractAdapter(request));
 
 try (Scope scope = tracer.buildSpan("httpServerSpan").asChildOf(extractedContext).startActive(true)) {
-    final Span span = scope.span(); // will be a child of http client span in step 1
+    final Span span = scope.span(); // is a child of http client span in step 1
     // http server impl...
 }
 
@@ -1535,7 +1535,7 @@ To properly correlate with Datadog logging, be sure the following is present:
  - `dd.trace_id=<TRACE_ID>`: Where `<TRACE_ID>` is equal to `Datadog.tracer.active_correlation.trace_id` or `0` if no trace is active.
  - `dd.span_id=<SPAN_ID>`: Where `<SPAN_ID>` is equal to `Datadog.tracer.active_correlation.span_id` or `0` if no trace is active.
 
-By default, `Datadog::Correlation::Identifier#to_s` will return `dd.trace_id=<TRACE_ID> dd.span_id=<SPAN_ID>`.
+By default, `Datadog::Correlation::Identifier#to_s` returns `dd.trace_id=<TRACE_ID> dd.span_id=<SPAN_ID>`.
 
 An example of this in practice:
 
