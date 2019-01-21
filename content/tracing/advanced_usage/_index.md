@@ -1550,7 +1550,7 @@ Rails.application.configure do
 end
 ```
 
-The logs are generated with the following format which is supported by default by the Ruby log integration:
+The logs are generated in a format that is supported by default in the Ruby log Integration:
 
 ```
 # Web requests will produce:
