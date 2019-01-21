@@ -1412,7 +1412,7 @@ Leverage the MDC Frameworks ([Map Diagnostic Context][1]) to automatically corre
 
 There are three possible implementations depending on the logging configuration:
 
-1. Automatically inject trace ids in JSON formatted logs
+1. Automatically inject trace IDs in JSON formatted logs
 2. Automatically inject trace ids in raw formatted logs
 3. Manually inject trace ids
 
