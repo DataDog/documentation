@@ -1,5 +1,5 @@
 ---
-title: Create an Uptime check for private website
+title: Create an Uptime Check for private website
 kind: faq
 beta: true
 further_reading:
