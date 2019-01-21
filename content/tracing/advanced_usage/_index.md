@@ -1508,7 +1508,7 @@ Set the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
 
 Patch your `logging` module by updating your log formatter to include the ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
 
-The below configuration is the one used by the automatic injection method and is supported by default by the Log python integration:
+The configuration below is used by the automatic injection method and is supported by default in the Python Log Integration:
 
 ``` python
 from ddtrace import patch_all; patch_all(logging=True)
