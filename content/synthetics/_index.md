@@ -9,9 +9,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introducing Datadog Synthetics"
-- link: "synthetics/browser_check"
-  tag: "Documentation"
-  text: "Configure a Browser Check"
 - link: "synthetics/uptime_check"
   tag: "Documentation"
   text: "Configure an Uptime Check"
@@ -55,9 +52,7 @@ Finally, The following characters are reserved: `-`, `(`, `)`, `"`, `~`, `*`, `:
 
 ## Create a check
 
-Slect **Create a New check +** in the upper right corner of the Synthetics to create an [Uptime Check][2] or a [Browser Check][3]
-
-{{< img src="synthetics/create_a_check.png" alt="Create a check" responsive="true" style="width:80%;">}}
+Select **Create a New check +** in the upper right corner of the Synthetics page to create an [Uptime Check][2].
 
 ## Further Reading
 
@@ -65,4 +60,3 @@ Slect **Create a New check +** in the upper right corner of the Synthetics to cr
 
 [1]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
 [2]: /synthetics/uptime_check
-[3]: /synthetics/browser_check

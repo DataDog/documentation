@@ -10,9 +10,6 @@ further_reading:
 - link: "synthetics/"
   tag: "Documentation"
   text: "Manage your checks"
-- link: "synthetics/browser_check"
-  tag: "Documentation"
-  text: "Configure a Browser Check"
 ---
 
 ## Overview
@@ -50,11 +47,12 @@ Define the request you want to be executed by Datadog:
 
 When running an Uptime Check, you must define at least one Assertions that should be monitored by Datadog. An Assertion is defined by a parameter, a comparator, and a value.
 
-| Parameter     | Comparators                | Value type |
-| --------      | ---------                  | --------   |
-| Status Code   | `is`, `is not`             | Integer    |
-| Response time | `less than`                | Integer    |
-| Headers       | `is`, `is not`, `contains` | Strings    |
+| Parameter     | Comparators                | Value type                         |
+| --------      | ---------                  | --------                           |
+| Status Code   | `is`, `is not`             | Integer                            |
+| Response time | `less than`                | Integer                            |
+| Headers       | `is`, `is not`, `contains` | Strings                            |
+| body          | `contains`                 | Strings ([regex are supported][4]) |
 
 If you define an assertion on the content of `Headers`, you must define the headers name and the associated value.
 
@@ -63,6 +61,10 @@ Click on **Add new assertion** to add up to ten assertions for your Uptime Check
 **Note**: If you clicked on **Test URL**, then the basic Assertions are automatically filled:
 
 {{< img src="synthetics/uptime_check/assertion.png" alt="Assertions" responsive="true" style="width:80%;">}}
+
+Use the **Test URL** response to quickly add headers from the test response as one of the Uptime Check assertions:
+
+{{< img src="synthetics/uptime_check/assertion_setup.gif" alt="Assertions" responsive="true" style="width:80%;">}}
 
 ### Notifications
 
@@ -83,3 +85,4 @@ Notifications example:
 [1]: /synthetics
 [2]: /integrations/#cat-notification
 [3]: http://daringfireball.net/projects/markdown/syntax
+[4]: https://json-schema.org/understanding-json-schema/reference/regular_expressions.html
