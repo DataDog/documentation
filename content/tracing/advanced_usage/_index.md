@@ -1418,13 +1418,13 @@ There are three possible implementations depending on the logging configuration:
 
 **1. Automatic Trace IDs Injection for JSON Formatted Logs**
 
-Enable injection in the [Java Tracer's configuration][3] via the `dd.logs.injection` parameter.
+Enable injection in the [Java Tracer's configuration][2] via the `dd.logs.injection` parameter.
 
 **Note**: Currently only **slf4j** is supported for MDC autoinjection.
 
 **2. Automatic Trace IDs Injection for Raw Formatted Logs**
 
-Enable injection in the [Java Tracer's configuration][3]. 
+Enable injection in the [Java Tracer's configuration][2]. 
 
 **Note**: Currently only **slf4j** is supported for MDC auto-injection.
 
@@ -1490,11 +1490,11 @@ Then update your logger configuration to include `dd.trace_id` and `dd.span_id` 
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
-[See our Java logging documentation][2] for more details about specific logger implementation or to learn how to log in JSON.
+[See our Java logging documentation][3] for more details about specific logger implementation or to learn how to log in JSON.
 
 [1]: https://logback.qos.ch/manual/mdc.html
-[2]: https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#raw-format
-[3]: https://docs.datadoghq.com/tracing/languages/java/#configuration
+[2]: https://docs.datadoghq.com/tracing/languages/java/#configuration
+[3]: https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#raw-format
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -1531,8 +1531,8 @@ hello()
 
 [See our Python logging documentation][1] to ensure that the Python Log Integration is properly configured so that your Python logs are automatically parsed.
 
-[1]: https://docs.datadoghq.com/logs/log_collection/python/#configure-the-datadog-agent
 
+[1]: https://docs.datadoghq.com/logs/log_collection/python/#configure-the-datadog-agent
 {{% /tab %}}
 {{% tab "Ruby" %}}
 

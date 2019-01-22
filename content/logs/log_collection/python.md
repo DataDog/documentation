@@ -40,7 +40,7 @@ Here are setup examples for the two following logging libraries:
 
 ### Correlate traces and logs
 
-If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][6] to automatically add trace and span ids in your logs.
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][4] to automatically add trace and span ids in your logs.
 
 Once this is done, the log should have the following format:
 
@@ -55,7 +55,7 @@ Then [configure the Datadog Agent](#configure-the-datadog-agent) to collect pyth
 {{< tabs >}}
 {{% tab "JSON_log-formatter" %}}
 
-Usage example with [JSON-log-formatter](https://pypi.python.org/pypi/JSON-log-formatter/0.1.0):
+Usage example with [JSON-log-formatter][1]:
 
 ```python
 import logging
@@ -82,10 +82,11 @@ The log file will contain the following log record (inline).
     "referral_code": "52d6ce"
 }
 ```
+[1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
 {{% /tab %}}
 {{% tab "Python-json-logger" %}}
 
-Usage example with [Python-json-logger](https://github.com/madzak/python-json-logger):
+Usage example with [Python-json-logger][1]:
 
 ```python
     import logging
@@ -99,7 +100,7 @@ Usage example with [Python-json-logger](https://github.com/madzak/python-json-lo
     logger.addHandler(logHandler)
 ```
  
-Once the [handler is configured](https://github.com/madzak/python-json-logger#customizing-fields), the log file contains the following log record (inline):
+Once the [handler is configured][2], the log file contains the following log record (inline):
 
 ```json
 {
@@ -125,6 +126,8 @@ Once the [handler is configured](https://github.com/madzak/python-json-logger#cu
 }
 ```
 
+[1]: https://github.com/madzak/python-json-logger
+[2]: https://github.com/madzak/python-json-logger#customizing-fields
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -168,6 +171,5 @@ Then [Restart the Agent][5] to apply the configuration change.
 [1]: /logs/log_collection/python/#configure-the-Datadog-agent
 [2]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
 [3]: https://github.com/madzak/python-json-logger
-[4]: https://github.com/madzak/python-json-logger#customizing-fields
+[4]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=python#logging
 [5]: /agent/faq/agent-commands
-[6]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=python#logging

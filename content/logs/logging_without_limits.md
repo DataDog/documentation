@@ -28,21 +28,21 @@ Datadog Index Filters avoid complex Agent level configuration and control what y
 You can now:
 
 * Ingest all your log events without server side filtering
-* [Process and enrich all of them][9]
-* [Live Tail over the whole infrastructure][10]
+* [Process and enrich all of them][1]
+* [Live Tail over the whole infrastructure][2]
 * Dynamically decide what to include or exclude from your indexes to control your costs
-* [Get alerted when volumes grows unexpectedly over an index][11]
-* [Archive all enriched logs][12]
+* [Get alerted when volumes grows unexpectedly over an index][3]
+* [Archive all enriched logs][4]
 
 This flexibility is critical in some exceptional situations such as outages, when you can disable specific filters to send more data. The inverse is true as well; if you over-consume because of a seasonal reason (Black Friday, Christmas, etc...) you can decide to selectively reduce some volume to avoid overages. 
 
 ## Index details
 
-Indexes are located in the [pipeline page][1] within the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, and the retention period for those logs:
+Indexes are located in the [pipeline page][5] within the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, and the retention period for those logs:
 
 {{< img src="logs/logging_without_limits/index_details.png" alt="" responsive="true" style="width:70%;">}}
 
-Indexed logs can be used for [faceted searching][2], [Log Analytics][3], [dashboarding][4], and [monitoring][5].
+Indexed logs can be used for [faceted searching][6], [Log Analytics][7], [dashboarding][8], and [monitoring][9].
 
 It is also possible to have multiple indexes with different retentions periode (**currently in private beta**).
 Logs enter the first index whose filter they match on, so it is important to order your indexes carefully.
@@ -51,14 +51,14 @@ For example, if you create a first index filtered to the `status:notice` attribu
 
 {{< img src="logs/logging_without_limits/multi_indexes.png" alt="" responsive="true" style="width:70%;">}}
 
-Multiple indexes also provide the ability to define access rules on the data contained in each index. [More information available in the role base access control documentation][8].
+Multiple indexes also provide the ability to define access rules on the data contained in each index. [More information available in the role base access control documentation][10].
 
 ## Setup Log Monitors on volumes
 
 Get notified at any moment if the volumes in any scope (`service`, `availibility-zone`, etc...) of your infrastructure is growing unexpectedly:
 
-1. Go in the [Datadog Log Explorer][6] view 
-2. Build a [search query][7] that represents the volume to monitor. 
+1. Go in the [Datadog Log Explorer][11] view 
+2. Build a [search query][12] that represents the volume to monitor. 
 3. Click on **Export to monitor**.
 4. Define the rate you would like to set as *warning* or *error*.
 5. Define an explicit notification: `The volume on this service just got too high. Define an additional exclusion filter or increase the sampling rate to put it back under control.`
@@ -126,15 +126,15 @@ Enable or disable them in one click in the Pipeline page:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/logs/pipelines/indexes
-[2]: /logs/explorer/?tab=facets#setup
-[3]: /logs/explorer/analytics
-[4]: /logs/explorer/analytics/#dashboard
-[5]: /monitors/monitor_types/log
-[6]: https://app.datadoghq.com/logs
-[7]: /logs/explorer/search
-[8]: /account_management/rbac/
-[9]: /logs/processing/
-[10]: /logs/live_tail/
-[11]: /monitors/monitor_types/log/
-[12]: /logs/archives/
+[1]: /logs/processing
+[2]: /logs/live_tail
+[3]: /monitors/monitor_types/log
+[4]: /logs/archives
+[5]: https://app.datadoghq.com/logs/pipelines/indexes
+[6]: /logs/explorer/?tab=facets#setup
+[7]: /logs/explorer/analytics
+[8]: /logs/explorer/analytics/#dashboard
+[9]: /monitors/monitor_types/log
+[10]: /account_management/rbac
+[11]: https://app.datadoghq.com/logs
+[12]: /logs/explorer/search
