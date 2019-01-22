@@ -26,6 +26,7 @@ further_reading:
 Use your favorite python logger to log into a file on your host. Then [monitor this file with your Datadog Agent][1] to send your logs to Datadog.
 
 ## Setup
+
 Python logs are quite complex to handle, mainly because of tracebacks. They are split into multiple lines which make them difficult to associate with the original log event.  
 To address this use case we strongly recommend you use a JSON formatter when logging in order to:
 
@@ -37,9 +38,24 @@ Here are setup examples for the two following logging libraries:
 - [JSON-log-formatter][2]
 - [Python-json-logger][3]
 
+### Correlate traces and logs
+
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][6] to automatically add trace and span ids in your logs.
+
+Once this is done, the log should have the following format:
+
+```xml
+2019-01-07 15:20:15,972 DEBUG [flask.app] [app.py:100] [dd.trace_id=5688176451479556031 dd.span_id=4663104081780224235] - this is an example
+```
+
+Then [configure the Datadog Agent](#configure-the-datadog-agent) to collect python logs from the file.
+
 ### Log into a file
 
-Usage example with [JSON-log-formatter][2]:
+{{< tabs >}}
+{{% tab "JSON_log-formatter" %}}
+
+Usage example with [JSON-log-formatter](https://pypi.python.org/pypi/JSON-log-formatter/0.1.0):
 
 ```python
 import logging
@@ -66,8 +82,10 @@ The log file will contain the following log record (inline).
     "referral_code": "52d6ce"
 }
 ```
+{{% /tab %}}
+{{% tab "Python-json-logger" %}}
 
-Usage example with [Python-json-logger][3]:
+Usage example with [Python-json-logger](https://github.com/madzak/python-json-logger):
 
 ```python
     import logging
@@ -81,7 +99,7 @@ Usage example with [Python-json-logger][3]:
     logger.addHandler(logHandler)
 ```
  
-Once the [handler is configured][4], the log file contains the following log record (inline):
+Once the [handler is configured](https://github.com/madzak/python-json-logger#customizing-fields), the log file contains the following log record (inline):
 
 ```json
 {
@@ -106,6 +124,9 @@ Once the [handler is configured][4], the log file contains the following log rec
     "run": 12
 }
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Configure the Datadog Agent
 
@@ -149,3 +170,4 @@ Then [Restart the Agent][5] to apply the configuration change.
 [3]: https://github.com/madzak/python-json-logger
 [4]: https://github.com/madzak/python-json-logger#customizing-fields
 [5]: /agent/faq/agent-commands
+[6]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=python#logging

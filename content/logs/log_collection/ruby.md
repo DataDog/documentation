@@ -162,6 +162,20 @@ logs:
 That's it! Now, all the rails calls are going to be in proper JSON automatically understood by your Datadog application.
 
 ## Further Reading
+
+### Correlate traces and logs
+
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][3] to automatically add trace and span ids in your logs.
+
+Once this is done, the log should have the following format:
+
+```xml
+[2019-01-16 18:38:41 +0000][my_app][WARN][dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] This is a traced operation.
+[dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
+```
+
+Then [configure the Datadog Agent](#configure-the-datadog-agent) to collect ruby logs from the file.
+
 ### Good logging practices in your application
 
 Now that your logging configuration is sending proper JSON, you should exploit it as much as you can.
@@ -243,3 +257,4 @@ end
 
 [1]: https://github.com/roidrage/lograge#installation
 [2]: https://github.com/TwP/logging/blob/master/lib/logging/layouts/parseable.rb#L100
+[3]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=ruby#logging

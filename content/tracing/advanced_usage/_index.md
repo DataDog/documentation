@@ -1410,24 +1410,32 @@ The purpose of this section is to explain how the correlation between traces and
 
 Leverage the MDC Frameworks ([Map Diagnostic Context][1]) to automatically correlate trace and span IDs into your logs. Datadog MDC keys may be injected automatically with a tracer integration, or manually injected with the Datadog API.
 
-**Enable Log Injection for JSON Formatted Logs**
+There are three possible implementations depending on the logging configuration:
+
+1. Automatically inject trace IDs in JSON formatted logs
+2. Automatically inject trace IDs in raw formatted logs
+3. Manually inject trace IDs
+
+**1. Automatic Trace IDs Injection for JSON Formatted Logs**
+
+Enable injection in the [Java Tracer's configuration][3] via the `dd.logs.injection` parameter.
+
+**Note**: Currently only **slf4j** is supported for MDC autoinjection.
+
+**2. Automatic Trace IDs Injection for Raw Formatted Logs**
 
 Enable injection in the [Java Tracer's configuration][3]. 
 
-**Note**: Currently only slf4j is supported for MDC autoinjection.
+**Note**: Currently only **slf4j** is supported for MDC auto-injection.
 
-**Enable Log Injection for Raw Formatted Logs**
+If the logs are already JSON formatted, there should be nothing left to do. 
+2. Update your formatter to include `dd.trace_id` and `dd.span_id` in your logger configuration:
 
-1. Enable injection in the [Java Tracer's configuration][3]. Note: Currently only slf4j is supported for MDC autoinjection.
-2. Update your formatter to include `dd.trace_id` and `dd.span_id` in your logs
-
-```xml
+```
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
-[See our Java logging documentation][2] for more details.
-
-**Manual Injection**
+**3. Manual Trace IDs Injection**
 
 If you prefer to manually correlate your traces with your logs, leverage the Datadog API to retrieve correlation identifiers:
 
@@ -1436,7 +1444,7 @@ If you prefer to manually correlate your traces with your logs, leverage the Dat
   * `dd.trace_id` Active Trace ID during the log statement (or `0` if no trace)
   * `dd.span_id` Active Span ID during the log statement (or `0` if no trace)
 
-`log4j2` example:
+* `log4j2` example:
 
 ```java
 import org.apache.logging.log4j.ThreadContext;
@@ -1446,13 +1454,17 @@ import datadog.trace.api.CorrelationIdentifier;
 try {
     ThreadContext.put("dd.trace_id", String.valueOf(CorrelationIdentifier.getTraceId()));
     ThreadContext.put("dd.span_id", String.valueOf(CorrelationIdentifier.getSpanId()));
-} finally {
+} 
+
+// Log something
+
+finally {
     ThreadContext.remove("dd.trace_id");
     ThreadContext.remove("dd.span_id");
 }
 ```
 
-`slf4j/logback` example:
+* `slf4j/logback` example:
 
 ```java
 import org.slf4j.MDC;
@@ -1462,29 +1474,41 @@ import datadog.trace.api.CorrelationIdentifier;
 try {
     MDC.put("dd.trace_id", String.valueOf(CorrelationIdentifier.getTraceId()));
     MDC.put("dd.span_id", String.valueOf(CorrelationIdentifier.getSpanId()));
-} finally {
+} 
+
+// Log something
+
+finally {
     MDC.remove("dd.trace_id");
     MDC.remove("dd.span_id");
 }
 ```
 
+Then update your logger configuration to include `dd.trace_id` and `dd.span_id` in your log pattern:
+
+```
+<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
+```
+
+[See our Java logging documentation][2] for more details about specific logger implementation or to learn how to log in JSON.
+
 [1]: https://logback.qos.ch/manual/mdc.html
-[2]: https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#configure-your-logger
+[2]: https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#raw-format
 [3]: https://docs.datadoghq.com/tracing/languages/java/#configuration
 {{% /tab %}}
 {{% tab "Python" %}}
 
-You have two ways to inject trace information into your logs in Python:
+Use one the two following options to inject Python trace information into your logs:
 
-1. Automatically: Set the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
-2. Manually: Patch your `logging` module by updating your log formatter to include the ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
+**1. Automatic Trace IDs Injection**
 
-This integration with logs works if the log format includes:
+Set the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
 
-- `dd.trace_id=%(dd.trace_id)s`
-- `dd.span_id=%(dd.span_id)s`
+**2. Manual Trace IDs Injection**
 
-For instance: 
+Patch your `logging` module by updating your log formatter to include the ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
+
+The configuration below is used by the automatic injection method and is supported by default in the Python Log Integration:
 
 ``` python
 from ddtrace import patch_all; patch_all(logging=True)
@@ -1505,10 +1529,16 @@ def hello():
 hello()
 ```
 
+[See our Python logging documentation][1] to ensure that the Python Log Integration is properly configured so that your Python logs are automatically parsed.
+
+[1]: https://docs.datadoghq.com/logs/log_collection/python/#configure-the-datadog-agent
+
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-**Enable Log Injection for Rails Applications**
+Use one the two following options to inject Ruby trace information into your logs:
+
+**1. Enable Trace IDs Injection for Rails Applications**
 
 Rails applications which are configured with a `ActiveSupport::TaggedLogging` logger can append correlation IDs as tags to log output. The default Rails logger implements this tagged logging, making it easier to add correlation tags.
 
@@ -1518,25 +1548,25 @@ In your Rails environment configuration file, add the following:
 Rails.application.configure do
   config.log_tags = [proc { Datadog.tracer.active_correlation.to_s }]
 end
+```
 
+The logs are generated in a format that is supported by default in the Ruby log Integration:
+
+```
 # Web requests will produce:
 # [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Started GET "/articles" for 172.22.0.1 at 2019-01-16 18:50:57 +0000
 # [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Processing by ArticlesController#index as */*
-# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206]   Article Load (0.5ms)  SELECT "articles".* FROM "articles"
 # [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
 ```
 
-**Manual Injection**
+**2. Manual Trace IDs Injection for Ruby Applications**
 
-To add correlation IDs to your logger, add a log formatter which retrieves the correlation IDs with `Datadog.tracer.active_correlation`, then add them to the message.
+Use `Datadog.tracer.active_correlation` method to inject trace identifiers in the log format:
 
-To properly correlate with Datadog logging, be sure the following is present:
-
- - `dd.trace_id=<TRACE_ID>`: Where `<TRACE_ID>` is equal to `Datadog.tracer.active_correlation.trace_id` or `0` if no trace is active.
- - `dd.span_id=<SPAN_ID>`: Where `<SPAN_ID>` is equal to `Datadog.tracer.active_correlation.span_id` or `0` if no trace is active.
-
-By default, `Datadog::Correlation::Identifier#to_s` returns `dd.trace_id=<TRACE_ID> dd.span_id=<SPAN_ID>`.
-
+- `dd.trace_id`:  Active Trace ID during the log statement (or 0 if no trace)
+- `dd.span_id`: Active Span ID during the log statement (or 0 if no trace)
+ 
+By default, `Datadog.tracer.active_correlation` returns `dd.trace_id=<TRACE_ID> dd.span_id=<SPAN_ID>`.
 An example of this in practice:
 
 ```ruby
@@ -1558,6 +1588,9 @@ Datadog.tracer.trace('my.operation') { logger.warn('This is a traced operation.'
 # [2019-01-16 18:38:41 +0000][my_app][WARN][dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] This is a traced operation.
 ```
 
+[See our Ruby logging documentation][1] to ensure that the Ruby log integration is properly configured and your ruby logs automatically parsed.
+
+[1]: https://docs.datadoghq.com/logs/log_collection/ruby/#configure-the-datadog-agent
 {{% /tab %}}
 {{% tab "Go" %}}
 The Go tracer exposes two API calls to allow printing trace and span identifiers along with log statements using exported methods from `SpanContext` type:
