@@ -1529,7 +1529,7 @@ def hello():
 hello()
 ```
 
-[See our Python logging documentation][1] to ensure that the python log integration is properly configured and your python logs automatically parsed.
+[See our Python logging documentation][1] to ensure that the Python Log Integration is properly configured so that your Python logs are automatically parsed.
 
 [1]: https://docs.datadoghq.com/logs/log_collection/python/#configure-the-datadog-agent
 
