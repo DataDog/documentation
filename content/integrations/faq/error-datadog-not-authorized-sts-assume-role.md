@@ -12,10 +12,10 @@ This error usually indicates an issue with the trust policy associated with the 
 
 Check the following points for the AWS account mentioned in the error:
 
-1. Ensure that you are using the correct IAM role name in the [Datadog AWS integration tile][2]. Extra spaces or characters in AWS or Datadog causes the role delegation to fail:
+1. When creating an IAM role, ensure that you are using the correct IAM role name in the [Datadog AWS integration tile][2]. Extra spaces or characters in AWS or Datadog causes the role delegation to fail:
     {{< img src="integrations/faq/aws-error-sts-assume-role-04.png" alt="AWS Create IAM Role - Review" responsive="true">}}
 
-2. When creating an IAM role, ensure Datadog's account ID `464622532012` is entered under `Another AWS account`. Entering any other account ID causes the integration to fail. Also ensure `Required MFA` is **unchecked**:
+2. Ensure Datadog's account ID `464622532012` is entered under `Another AWS account`. Entering any other account ID causes the integration to fail. Also ensure `Required MFA` is **unchecked**:
     {{< img src="integrations/faq/aws-error-sts-assume-role-01.png" alt="AWS Create IAM Role" responsive="true">}}
 
 3. Generate a new AWS External ID in the [Datadog AWS integration tile][2] and click the **Update Configuration** button:
