@@ -14,7 +14,7 @@ further_reading:
   text: "Configure an Uptime Check"
 ---
 
-<div class="alert alert-warning">Synthetics is currently in beta for the Datadog US Region. See the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics Request form</a>.</div>
+<div class="alert alert-warning">Synthetics is currently in beta for the Datadog US Region. To request access complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics Request form</a>.</div>
 
 ## Overview
 

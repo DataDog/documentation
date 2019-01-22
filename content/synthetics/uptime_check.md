@@ -12,11 +12,11 @@ further_reading:
   text: "Manage your checks"
 ---
 
-<div class="alert alert-warning">Synthetics is currently in beta for the Datadog US Region. See the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics Request form</a>.</div>
+<div class="alert alert-warning">Synthetics is currently in beta for the Datadog US Region. To request access complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics Request form</a>.</div>
 
 ## Overview
 
-Uptime Checks are HTTP requests (GET, POST, PUT, etc.) executed by Datadog to your web properties or application endpoints at configurable periodic intervals from multiple locations around the world. These Checks verify not only that your applications are up and responding to requests, but that any conditions you define are met, such as response time, HTTP response code, and header or body contents.
+Uptime Checks are HTTP requests (GET, POST, PUT, etc.) executed by Datadog to your web properties or application endpoints at configurable periodic intervals from multiple locations around the world. These checks verify that your applications are responding to requests and verify that they meet any conditions you define, such as response time, HTTP response code, and header or body contents.
 
 ## Configuration
 ### Request
@@ -47,7 +47,7 @@ Define the request you want to be executed by Datadog:
 
 ### Validation
 
-When running an Uptime Check, you must define at least one Assertions that should be monitored by Datadog. An Assertion is defined by a parameter, a comparator, and a value.
+When running an Uptime Check, you must define at least one Assertion that should be monitored by Datadog. An Assertion is defined by a parameter, a comparator, and a value.
 
 | Parameter     | Comparators                | Value type                                                       |
 | --------      | ---------                  | --------                                                         |
@@ -59,13 +59,13 @@ When running an Uptime Check, you must define at least one Assertions that shoul
 
 If you define an assertion on the content of `Headers`, you must define the headers name and the associated value.
 
-Click on **Add new assertion** to add up to 100 assertions for your Uptime Check. 
+Click on **Add new assertion** to add up to 10 assertions for your Uptime Check. 
 
 **Note**: If you clicked on **Test URL**, then the basic Assertions are automatically filled:
 
 {{< img src="synthetics/uptime_check/assertion.png" alt="Assertions" responsive="true" style="width:80%;">}}
 
-Use the **Test URL** response to quickly add headers from the test response as one of the Uptime Check assertions:
+Use the **Test URL** response to quickly add Status Code, Response Time or Headers from the test response as one of the Uptime Check assertions:
 
 {{< img src="synthetics/uptime_check/assertion_setup.gif" alt="Assertions" responsive="true" style="width:80%;">}}
 
