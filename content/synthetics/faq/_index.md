@@ -5,9 +5,5 @@ private: true
 ---
 
 {{< whatsnext desc="List of Frequently Asked Questions:">}}
-    {{< nextlink href="" >}}{{< /nextlink >}}
-    {{< nextlink href="" >}}{{< /nextlink >}}
-    {{< nextlink href="" >}}{{< /nextlink >}}
-    {{< nextlink href="" >}}{{< /nextlink >}}
-    {{< nextlink href="" >}}{{< /nextlink >}}
+    {{< nextlink href="/synthetics/faq/uptime-check-internal-website" >}}Create an Uptime Check for private website{{< /nextlink >}}
 {{< /whatsnext >}}
