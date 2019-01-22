@@ -1,7 +1,9 @@
 ---
-title: Log FAQ
+title: Logs FAQ
 kind: faq
 private: true
+aliases:
+    - /logs/faq/instance-initialization-error-while-sending-logs-from-datadog-agent/
 ---
 
 {{< whatsnext desc="List of Frequently Asked Questions:" >}}
