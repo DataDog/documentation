@@ -40,7 +40,7 @@ Each type of widget is described below:
 The Timeseries visualization allows you to show one or more metrics, Log events, or APM events evolution over time. The time window depends on what is selected on the [Timeboard][5] or in the graph on a [Screenboard][6].
 Timeseries can be displayed as **lines**, **areas**, and **bars**.
 
-**Note**: Define log Analytics query (still in beta) exactly as in the [Log Explorer][7].
+**Note**: Define log Analytics query exactly as in the [Log Explorer][7].
 
 {{< img src="graphing/dashboards/widgets/references-graphing-timeseries-example.png" alt="Timeseries" responsive="true" style="width:80%;">}}
 
@@ -198,7 +198,18 @@ The Distribution visualization is another way of showing metrics aggregated acro
 
 The top list visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc.
 
+**Note**: Define log Analytics query exactly as in the [Log Explorer][7].
+
 {{< img src="graphing/dashboards/widgets/references-graphing-toplist-example.png" alt="Top List" responsive="true" style="width:80%;">}}
+
+## Log Stream
+*Supported on Screenboards*
+
+The Log Stream displays a log flow matching the defined query:
+
+{{< img src="graphing/dashboards/widgets/log_stream.png" alt="Log stream" responsive="true" style="width:80%;">}}
+
+**Note**: You can choose which columns to display in the Log Stream widget.
 
 ## Change
 *Supported on Screenboards and Timeboards*
