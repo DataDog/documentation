@@ -1,6 +1,7 @@
-Does your Cluster Agent restart all the time on AKS?
+Does your Cluster Agent or Agent restart when using Azure Kubernetes Service (AKS)?
 
-It might be because you have deployed it with our helm chart and the readiness probe is killing it.
+Depending on how you deployed the manifest, you might be using readiness probes. Azure AKS requires extra permissions in the Cluster Role in order for the health endpoint to be reachable.
+
 On AKS, the default RBAC does not allow access to `/healthz` for unauthenticated users.
 The following RBAC fixes that:
 
