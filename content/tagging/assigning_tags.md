@@ -276,7 +276,7 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 
 ## Integration Inheritance
 
-The most efficient method for assigning tags is to rely on your integrations. Tags assigned to your Amazon Web Services instances, Chef recipes, and more are all automatically assigned to the hosts and metrics when they are brought into Datadog.
+The most efficient method for assigning tags is to rely on your integrations. Tags assigned to your Amazon Web Services instances, Chef recipes, and more are all automatically assigned to the hosts and metrics when they are brought into Datadog. **Note**: `CamelCase` tags are converted to underscores by Datadog, for example `TestTag` --> `test_tag`.
 
 The following [integration][5] sources create tags automatically in Datadog:
 
