@@ -272,4 +272,4 @@ Don't see your desired libraries? Let Datadog know more about your needs through
 [11]: #enable-the-extension
 [12]: #library-compatibility
 [13]: https://app.datadoghq.com/apm/services
-[14]: https://goo.gl/forms/rKjH2J6nJ585KXri2
+[14]: https://docs.google.com/forms/d/e/1FAIpQLSemTVTCdqzXkfzemJSr8wuEllxfqbGVj00flmRvKA17f0lyFg/viewform
