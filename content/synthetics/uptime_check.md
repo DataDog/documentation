@@ -33,7 +33,7 @@ Define the request you want to be executed by Datadog:
     * DELETE
     * OPTIONS
 
-2. Optionally, click on **Advanced options** to enrich your request with custom Request Headers, Authentication credentials, Body content, or Cookies.
+2. Optionally, click on **Advanced options** to enrich your request with custom request headers, authentication credentials, body content, or cookies.
 
 3. Name your Uptime Check.
 4. Optionally, add tags to filter your Uptime Check in the [Synthetics page][1].
