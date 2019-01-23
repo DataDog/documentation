@@ -40,7 +40,7 @@ To run a search, construct your query using the checkboxes on the left and/or th
 
 To search for specific text across all checks, titles, and notification messages, enter your text in the search bar.
 
-Otherwise, use boolean operators (`AND`, `OR`, and `NOT`) and parentheses to write complex queries using any check field:
+Otherwise, use Boolean operators (`AND`, `OR`, and `NOT`) and parentheses to write complex queries using any check field:
 
 * Regular expressions are not supported
 * Single-character wildcard (`?`) is not supported, but the general wildcard (`*`) is
