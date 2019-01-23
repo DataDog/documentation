@@ -14,16 +14,16 @@ If you're seeing unexpected results in the Datadog app such as missing data or b
 * Are you experiencing this from multiple locations? Can you send the output of:
     * traceroute app.datadoghq.com
     * tracepath app.datadoghq.com
-* Is this dashboard specific? Using Chrome browser, do the following:
+* Is this dashboard specific? Using the Chrome browser, do the following:
     * Select View->Developer->Developer Tools
     * Click on the Network tab of the new window that opens
     * Load the dashboard experiencing issues
     * After the page has loaded, right click on the results that show up and * select "Save as HAR with content"
     * Save the file as an attachment and send to us
 
-In most of the scenarios above, the root cause of the issue is very likely related to a browser extension, outdated browser, or something similar.
+In most of the scenarios above, the root cause of the issue is related to a browser extension, outdated browser, or something similar.
 
-If you continue to have issues,contact [us][2] for assistance, to help expedite your issue include:
+For further assistance, contact [Datadog support][2]. To expedite your request include:
 
 * Results of the above tests
 * A screenshot of your issue
@@ -31,6 +31,11 @@ If you continue to have issues,contact [us][2] for assistance, to help expedite 
 * Extensions you're running
 * Browser version
 * OS versions
+
+## Mobile browsing
+
+The Datadog application is supported on all mobile browsers and is presented in mobile friendly format. If you are having issues or would like to provide feedback on the mobile browsing experience, contact [Datadog support][2].
+
 
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues
 [2]: /help
