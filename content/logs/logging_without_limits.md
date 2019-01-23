@@ -44,7 +44,7 @@ Indexes are located in the [pipeline page][5] within the Indexes section. Double
 
 Indexed logs can be used for [faceted searching][6], [Log Analytics][7], [dashboarding][8], and [monitoring][9].
 
-It is also possible to have multiple indexes with different retentions periode (**currently in private beta**).
+It is also possible to have multiple indexes with different retention periods (**currently in private beta**).
 Logs enter the first index whose filter they match on, so it is important to order your indexes carefully.
 
 For example, if you create a first index filtered to the `status:notice` attribute and a second index filtered to the `status:error` attribute and a final one without any filter (the equivalent of `*`), all your notice logs would go to the first index, all your error logs to the second index and the rest would go to the final one.
