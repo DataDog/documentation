@@ -6,7 +6,7 @@ aliases:
   - /tracing/setup/docker/
   - /agent/apm/docker
 further_reading:
-- link: "https://github.com/DataDog/datadog-trace-agent"
+- link: "https://github.com/DataDog/datadog-agent/tree/master/pkg/trace"
   tag: "Github"
   text: Source code
 - link: "https://docs.datadoghq.com/integrations/amazon_ecs/#trace-collection"
@@ -17,7 +17,7 @@ further_reading:
   text: "Explore your services, resources and traces"
 ---
 
-Enable the [datadog-trace-agent][1] in the `datadog/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
+Enable the Trace Agent in the `datadog/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
 
 ## Tracing from the host
 
@@ -172,6 +172,5 @@ tracer.configure(hostname='172.17.0.1', port=8126)
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-trace-agent
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: /agent/apm/#environment
