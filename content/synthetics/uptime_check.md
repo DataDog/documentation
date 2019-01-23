@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Uptime Checks are HTTP requests (GET, POST, PUT, etc.) executed by Datadog to your web properties or application endpoints at configurable periodic intervals from multiple locations around the world. These checks verify that your applications are responding to requests and verify that they meet any conditions you define, such as response time, HTTP response code, and header or body contents.
+Uptime Checks are HTTP requests (GET, POST, PUT, etc.) executed by Datadog to your web properties or application endpoints at configurable periodic intervals from multiple locations around the world. These checks verify that your applications are both responding to requests and meeting any conditions you define—such as response time, HTTP response code, and header or body contents.
 
 ## Configuration
 ### Request
