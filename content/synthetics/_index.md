@@ -48,7 +48,7 @@ Otherwise, use Boolean operators (`AND`, `OR`, and `NOT`) and parentheses to wri
 * Ranges are not supported
 * Boosting is not supported
 
-Finally, The following characters are reserved: `-`, `(`, `)`, `"`, `~`, `*`, `:`, `.`, and whitespace. To search check fields that include any of them, wrap the field string in quotes: `status:("OK") AND "doc-check"` is a valid query string; `status:("OK") AND doc check` is not.
+Finally, the following characters are reserved: `-`, `(`, `)`, `"`, `~`, `*`, `:`, `.`, and whitespace. To search check fields that include any of them, wrap the field string in quotes: `status:("OK") AND "doc-check"` is a valid query string; `status:("OK") AND doc check` is not.
 
 ## Create a check
 
