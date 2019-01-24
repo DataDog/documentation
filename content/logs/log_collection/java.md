@@ -62,7 +62,7 @@ Add a new file appender to `log4j.xml`:
 </appender>
 ```
 
-**Correlate traces and logs**
+**Inject trace id in your logs**
 
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][1] to set the [MDC (Mapped Diagnostic Contexts)][2] to then automatically add trace and span id in your logs.
 
@@ -90,7 +90,7 @@ Edit your `log4j2.xml` file:
 </Loggers>
 ```
 
-**Correlate traces and logs**
+**Inject trace id in your logs**
 
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][1] to set the [MDC (Mapped Diagnostic Contexts)][2] to then automatically add trace and span id in your logs.
 
@@ -126,7 +126,7 @@ Edit your `logback.xml` file:
 </configuration>
 ```
 
-**Correlate traces and logs**
+**Inject trace id in your logs**
 
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][1] to set the [MDC (Mapped Diagnostic Contexts)][2] to then automatically add trace and span id in your logs.
 
@@ -187,7 +187,7 @@ If APM is enabled for this application and you wish to improve the correlation b
 
 There is a default log4j2 JSON Layout that can be used as shown in this [example][1].
 
-**Correlate traces and logs**
+**Inject trace id in your logs**
 
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)][2] that are then automatically added in the JSON logs.
 
@@ -225,7 +225,7 @@ Then edit your `logback.xml` file and update the encoder:
     </appender>
 ```
 
-**Correlate traces and logs**
+**Inject trace id in your logs**
 
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][2] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)][3] that are then automatically added in the JSON logs.
 
