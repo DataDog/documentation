@@ -43,30 +43,38 @@ To combine multiple terms into a complex query, you can use any of the following
 | `OR`         | **Union**: either term is contained in the selected events                                             | authentication OR password   |
 | `-`          | **Exclusion**: the following term is NOT in the event                                                  | authentication AND -password |
 
+### Autocomplete
+
+Use the search bar's autocomplete feature to complete your query using existing values:
+
+{{< img src="logs/explorer/search/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" style="width:80%;">}}
+
 ### Escaping of special characters
 
 The following characters are considered special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping with the `\` character.
 
-## Facets
+### Facets and Message attribute search
+### Message attribute search
+To search logs that contain `user=12345` in their message attribute the following search must be entered:
 
+`user\=JaneDoe`
+#### Facets search
 To search on a specific facet, first [add it as a facet][1] and then add `@` to specify you are searching on a facet.
 
 For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com*, enter:
 
 `@url:www.datadoghq.com`
 
-Searching on a facet value that contains special characters requires escaping or double quotes.
+**Note**: Searching on a facet value that contains special characters requires escaping or double quotes. The same logic is be applied to spaces within log attributes. Log attributes should not contain spaces, but if they do, spaces must be escaped. If an attribute is called `user.first name`, perform a search on this attribute by escaping the space: `@user.first\ name:myvalue`
 
 Examples:
 
-* Search on `/api/v1/test`: `@http.url_details.path:"/api/v1/test"`
-* Search on all URLs that start with `/api/v1/`: `@http.url:\/api\/v1\/*`
+| Search query                                                         | Description                                                                                                                                                         |
+| `@http.url_details.path:"/api/v1/test"`                              | Searches all logs containing `/api/v1/test` in the attribute `http.url_details.path`.                                                                               |
+| `@http.url:\/api\/v1\/*`                                             | Searches all logs containing a value in `http.url` attribute that start with `/api/v1/`                                                                             |
+| `@http.status_code:[200 TO 299] @http.url_details.path:\/api\/v1\/*` | Searches all logs containing a `http.status_code` value between 200 and 299, and containing a value in `http.url_details.path` attribute that start with `/api/v1/` |
 
-The same logic is be applied to spaces within log attributes. Log attributes should not contain spaces, but if they do, spaces must be escaped. If an attribute is called `user.first name`, perform a search on this attribute by escaping the space:
-
-`@user.first\ name:myvalue`
-
-## Wildcards
+### Wildcards
 
 To perform a multi-character wildcard search, use the `*` symbol as follows:
 
@@ -74,7 +82,7 @@ To perform a multi-character wildcard search, use the `*` symbol as follows:
 * `web*` matches all log messages starting with `web`
 * `*web` matches all log messages that end with `web`
 
-## Numerical values
+### Numerical values
 Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all logs that have a response time over 100ms with:
 
 `@http.response_time:>100`
@@ -83,7 +91,7 @@ You can search for numerical attribute within a specific range. For instance, re
 
 `@http.status_code:[400 TO 499]`
 
-## Tags
+### Tags
 
 Your logs inherit tags from [hosts][2] and [integrations][3] that generate them. They can be used in the search and as facets as well:
 
@@ -96,19 +104,7 @@ If your tags don't follow [tags best practices][4] and don't use the `key:value`
 
 * `tags:<MY_TAG>`
 
-## Autocomplete
-
-Use the search bar's autocomplete feature to complete your query using existing values:
-
-{{< img src="logs/explorer/search/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" style="width:80%;">}}
-
-## Search in the Message attribute
-
-For instance, to search logs that contain `user=12345` the following search must be entered:
-
-`user\=JaneDoe`
-
-## Arrays
+### Arrays
 
 You can add facets on arrays of strings or numbers. All values included in the array become listed in the facet and can be used to search the logs.
 
