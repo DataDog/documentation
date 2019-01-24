@@ -9,4 +9,4 @@ external_redirect: /api/#supprimer-un-timeboard
 Supprime un [timeboard][1] existant.
 *Cet endpoint ne prend pas d'argument JSON*.
 
-[1]: /graphing/dashboards/timeboard
+[1]: /fr/graphing/dashboards/timeboard
