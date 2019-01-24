@@ -38,7 +38,7 @@ Here are setup examples for the two following logging libraries:
 - [JSON-log-formatter][2]
 - [Python-json-logger][3]
 
-### Inject trace id in your logs
+### Inject trace IDs in your logs
 
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][4] to automatically add trace and span ids in your logs.
 
