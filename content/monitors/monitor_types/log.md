@@ -36,6 +36,8 @@ Log monitors alert when a specified type of log exceeds a user-defined threshold
 
 * Above
 * Above or equal
+* Below 
+* Below or equal
 
 Then configure the Alert and/or Warning threshold depending on the chosen condition:
     {{< img src="monitors/monitor_types/log/set_alert_conditions.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
@@ -71,6 +73,18 @@ For Slack and email notifications you can enable the top 10 of breaching values 
 
  {{< img src="monitors/monitor_types/log/slack-log-multi-sample.png" alt="Slack notification example" responsive="true" style="width:50%;" >}}
 
+## No Data alerts and Below Conditions  
+
+To be notified if a specific set of logs are not received anymore, set the condition `below 1`. This notifies when no logs match the monitor query on the given timeframe. 
+
+However, note that when splitting the monitor by any dimension (tag or facet) and using a `below` condition, the alert is triggered **if and only if** there are logs for a given group, and the count is below the threshold—or if there are no logs at all for all of the groups.  
+
+Examples:  
+
+1. The following monitor triggers if and only if there are no logs for all of the services:  
+  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Below monitor split by service" responsive="true" style="width:50%;" >}}
+2. The following monitor triggers if there are no logs for the service `backend`:  
+  {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Below monitor for backend service" responsive="true" style="width:50%;" >}}
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
