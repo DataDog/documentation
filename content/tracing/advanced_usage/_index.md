@@ -1046,6 +1046,7 @@ Distributed tracing is supported in the following frameworks:
 | django            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#django   |
 | falcon            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#falcon   |
 | flask             | http://pypi.datadoghq.com/trace/docs/web_integrations.html#flask    |
+| molten            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#molten   |
 | pylons            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pylons   |
 | pyramid           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pyramid  |
 | requests          | http://pypi.datadoghq.com/trace/docs/other_integrations.html#requests |
