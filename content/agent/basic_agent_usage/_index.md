@@ -60,10 +60,15 @@ Manage the Datadog Agent and [Integrations][1] using configuration management to
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ## Configuration files
 
 [Refer to the dedicated page for Agent configuration files][2].
+
+## Datadog Region
+
+To send your Agent data to [Datadog EU region][3], edit your [Agent main configuration file][4] `datadog.yaml` and set the `dd_site` parameter to:
+
+`dd_site:datadoghq.eu`
 
 ## Log location
 
@@ -93,3 +98,5 @@ The Datadog logs do a rollover every 10MB. When a rollover occurs, **one** backu
 
 [1]: /integrations
 [2]: /agent/faq/agent-configuration-files
+[3]: https://app.datadoghq.eu
+[4]: /agent/faq/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
