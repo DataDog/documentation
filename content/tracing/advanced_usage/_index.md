@@ -261,20 +261,52 @@ span?.SetTag("<TAG_KEY>", "<TAG_VALUE>");
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Add tags directly to a `OpenTracing\Span` object by calling `Span.setTag()`. For example:
+**Adding tags to a span**
+
+Add tags directly to a `DDTrace\Span` object by calling `Span::setTag()`.
 
 ```php
-use OpenTracing\GlobalTracer;
+dd_trace('my_function', function () {
+    $scope = \DDTrace\GlobalTracer::get()
+      ->startActiveSpan('my_function');
+    $span = $scope->getSpan();
+    $span->setTag('<TAG_KEY>', '<TAG_VALUE>');
 
-// get the currently active span (can be null)
-if (($span = GlobalTracer::get()->getActiveSpan()) !== null){
+    $result = my_function();
 
-  // add a tag to the span
-  $span->setTag("<TAG_KEY>", "<TAG_VALUE>");
+    $scope->close();
+    return $result;
+});
+```
+
+**Adding tags to a current active span**
+
+```php
+// Get the currently active span (can be null)
+$span = \DDTrace\GlobalTracer::get()->getActiveSpan();
+if (null !== $span) {
+  // Add a tag to the span
+  $span->setTag('<TAG_KEY>', '<TAG_VALUE>');
 }
 ```
 
-**Note**: `GlobalTracer::get()->getActiveSpan()` returns `null` if there is no active span.
+**Note**: `Tracer::getActiveSpan()` returns `null` if there is no active span.
+
+**Adding tags globally to all spans**
+
+Not supported with automatic instrumentation.
+
+Manual instrumentations of the tracer can set an associative array of global tags via the `global_tags` configuration key.
+
+```php
+$config = [
+    'global_tags' => [
+        '<TAG_KEY>' => '<TAG_VALUE>',
+    ]
+];
+$tracer = new \DDTrace\Tracer(null, null, $config);
+\DDTrace\GlobalTracer::set($tracer);
+```
 
 {{% /tab %}}
 {{% tab "C++" %}}
@@ -379,6 +411,16 @@ const tracer = require('dd-trace').init({
   hostname: process.env.DD_AGENT_HOST,
   port: process.env.DD_TRACE_AGENT_PORT
 })
+```
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+The PHP tracer automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
+
+```php
+putenv('DD_AGENT_HOST=localhost');
+putenv('DD_TRACE_AGENT_PORT=8126');
 ```
 
 {{% /tab %}}
@@ -594,29 +636,45 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 [1]: /tracing/languages/dotnet/#compatibility
 {{% /tab %}}
 {{% tab "PHP" %}}
-If you aren’t using libraries supported by automatic instrumentation (see [library compatibility][1]), manually instrument your code.
 
-The following example uses the global Datadog Tracer and creates a span to trace a web request:
+If you aren’t using a [framework supported by automatic instrumentation][1], manually instrument your code.
+
+First install the PHP tracer dependency with Composer:
+
+```bash
+$ composer require datadog/dd-trace
+```
+
+Then use the PHP tracer bootstrap to initialize the global tracer and create a root span to start the trace:
 
 ```php
-use OpenTracing\GlobalTracer;
-use DDTrace\Tags;
-use DDTrace\Types;
+// The existing Composer autoloader
+require __DIR__ . '/../vendor/autoload.php';
 
-$scope = GlobalTracer::get()->startActiveSpan("web.request");
-$span = $scope->getSpan();
+// Add the PHP tracer bootstrap
+require __DIR__ . '/../vendor/datadog/dd-trace/bridge/dd_init.php';
 
-$span->setResource($request->url);
-$span->setTag(Tags\SPAN_TYPE, Types\WEB_SERVLET);
-$span->setTag('http.method', $request->method);
+$span = \DDTrace\GlobalTracer::get()
+    ->startRootSpan('web.request')
+    ->getSpan();
+$span->setResource($_SERVER['REQUEST_URI']);
+$span->setTag(\DDTrace\Tag::SPAN_TYPE, \DDTrace\Type::WEB_SERVLET);
+$span->setTag(\DDTrace\Tag::HTTP_METHOD, $_SERVER['REQUEST_METHOD']);
 
-// do some work...
+// Run the app here...
+```
 
-$span->finish();
+The root span an be accessed later on directly from the global tracer via `Tracer::getRootScope()`. This is useful in contexts where the metadata to be added to the root span does not exist in early script execution.
+
+```php
+$rootSpan = \DDTrace\GlobalTracer::get()
+    ->getRootScope()
+    ->getSpan();
+$rootSpan->setTag(\DDTrace\Tag::HTTP_STATUS_CODE, 200);
 ```
 
 
-[1]: /tracing/languages/php/#compatibility
+[1]: /tracing/languages/php/#framework-compatibility
 {{% /tab %}}
 {{% tab "C++" %}}
 
@@ -948,6 +1006,28 @@ public void ConfigureServices(IServiceCollection services)
 
 
 [1]: https://www.nuget.org/packages/Datadog.Trace.OpenTracing
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+The PHP tracer supports OpenTracing via the [**opentracing/opentracing** library][1] which is installed with Composer:
+
+```bash
+$ composer require opentracing/opentracing:1.0.0-beta5
+```
+
+When [automatic instrumentation][2] is enabled, an OpenTracing-compatible tracer is made available as the global tracer:
+
+```php
+$otTracer = \OpenTracing\GlobalTracer::get();
+$span = $otTracer->startActiveSpan('web.request')->getSpan();
+$span->setTag('span.type', 'web');
+$span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
+// ...Use OpenTracing as expected
+```
+
+
+[1]: https://github.com/opentracing/opentracing-php
+[2]: /tracing/languages/php/#automatic-instrumentation
 {{% /tab %}}
 {{% tab "C++" %}}
 
@@ -1629,6 +1709,40 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
 [1]: /help
 {{% /tab %}}
+{{% tab "PHP" %}}
+
+The following example injects the required `dd.trace_id` and `dd.span_id` identifiers into the log message to associate the log entry with the current trace.
+
+```php
+$span = \DDTrace\GlobalTracer::get()->getActiveSpan();
+$append = sprintf(
+    ' [dd.trace_id=%d dd.span_id=%d]',
+    $span->getTraceId(),
+    $span->getSpanId()
+);
+my_error_logger('Error message.' . $append);
+```
+
+If the logger implements the [**monolog/monolog** library][1], use `Logger::pushProcessor()` to automatically append the identifiers to all the log messages:
+
+```php
+$logger->pushProcessor(function ($record) {
+    $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
+    if (null === $span) {
+        return $record;
+    }
+    $record['message'] .= sprintf(
+        ' [dd.trace_id=%d dd.span_id=%d]',
+        $span->getTraceId(),
+        $span->getSpanId()
+    );
+    return $record;
+});
+```
+
+
+[1]: https://github.com/Seldaek/monolog
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Debugging
@@ -1750,6 +1864,24 @@ var tracer = Datadog.Trace.Tracer.Create(isDebugEnabled: true);
 {{% /tab %}}
 {{% tab "PHP" %}}
 
+Debug mode is disabled by default. To enable it, set the environment variable `DD_TRACE_DEBUG=true`.
+
+```php
+putenv('DD_TRACE_DEBUG=true');
+```
+
+**Application Logs**:
+
+By default, logging from the PHP tracer is disabled. In order to get debugging information and errors sent to logs, set a [PSR-3 logger][1] singleton.
+
+```php
+\DDTrace\Log\Logger::set(
+    new \DDTrace\Log\PsrLogger($logger)
+);
+```
+
+
+[1]: https://www.php-fig.org/psr/psr-3
 {{% /tab %}}
 {{% tab "C++" %}}
 
