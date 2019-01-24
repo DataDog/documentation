@@ -29,8 +29,8 @@
           "value": "INSERT_API_KEY"
         },
         {
-      	  "name": "SD_BACKEND",
-	  "value": "docker"
+          "name": "DD_SITE",
+          "value": "datadoghq.com"
         }
       ]
     }
