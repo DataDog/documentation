@@ -61,6 +61,7 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | [Django][6] | Fully Supported | http://pypi.datadoghq.com/trace/docs/web_integrations.html#django  |
 | [Falcon][7]   | Fully Supported | http://pypi.datadoghq.com/trace/docs/web_integrations.html#falcon  |
 | [Flask][8]         | Fully Supported | http://pypi.datadoghq.com/trace/docs/web_integrations.html#flask   |
+| [Molten][29]         | Fully Supported | http://pypi.datadoghq.com/trace/docs/web_integrations.html#molten   |
 | [Pylons][9]      | Fully Supported | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pylons  |
 | [Pyramid][10]       | Fully Supported | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pyramid |
 | [Tornado][28]       | Fully Supported | http://pypi.datadoghq.com/trace/docs/web_integrations.html#tornado |
@@ -131,3 +132,4 @@ The `ddtrace` library includes support for the following libraries:
 [26]: https://kombu.readthedocs.io/en/latest
 [27]: http://docs.python-requests.org/en/master
 [28]: http://www.tornadoweb.org/
+[29]: https://moltenframework.com/
