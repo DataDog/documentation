@@ -17,4 +17,6 @@ Monitor your internal staging/intranet environment by appending Authentication c
 
 {{< img src="synthetics/faq/advanced_options.png" alt="Advanced options" responsive="true" style="width:80%;">}}
 
+**Note**: Secrets are fully encrypted all along to the request.
+
 

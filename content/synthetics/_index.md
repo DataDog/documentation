@@ -52,7 +52,7 @@ Finally, The following characters are reserved: `-`, `(`, `)`, `"`, `~`, `*`, `:
 
 ## Create a check
 
-Select **Create a New check +** in the upper right corner of the Synthetics page to create an [Uptime Check][2].
+Select **Create a New check +** > **New Uptime Check** in the upper right corner of the Synthetics page to create an [Uptime Check][2].
 
 ## Further Reading
 

@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Uptime Checks are HTTP requests (GET, POST, PUT, etc.) executed by Datadog to your web properties or application endpoints at configurable periodic intervals from multiple locations around the world. These checks verify that your applications are responding to requests and verify that they meet any conditions you define, such as response time, HTTP response code, and header or body contents.
+Uptime Checks are HTTP requests (GET, POST, PUT, etc.) executed by Datadog to your web properties or application endpoints at configurable periodic intervals from multiple locations around the world. These checks verify that your applications are responding to requests and verify that they meet any conditions you define, such as response time, HTTP status code, and header or body contents.
 
 ## Configuration
 ### Request
@@ -38,16 +38,16 @@ Define the request you want to be executed by Datadog:
 3. Name your Uptime Check.
 4. Optionally, add tags to filter your Uptime Check in the [Synthetics page][1].
 
-5. Pick-up locations to run the test from, available locations are:
+5. Pick-up locations to run the test from. Available locations are:
     * Frankfurt (Request made from an AWS Datacenter)
     * Tokyo (Request made from an AWS Datacenter)
 
-6. Choose a Check frequency between "1 run per minute" to "1 run per week".
+6. Choose a Check frequency between "1 run per minute" and "1 run per week".
 7. Finish by clicking on **Test URL** to try out the request configuration. You should see a response preview show up in the right side of your screen.
 
 ### Validation
 
-When running an Uptime Check, you must define at least one Assertion that should be monitored by Datadog. An Assertion is defined by a parameter, a comparator, and a value.
+When running an Uptime Check, you must define at least one assertion that should be monitored by Datadog. An assertion is defined by a parameter, a comparator, and a value.
 
 | Parameter     | Comparators                | Value type                                                       |
 | --------      | ---------                  | --------                                                         |
@@ -61,17 +61,17 @@ If you define an assertion on the content of `Headers`, you must define the head
 
 Click on **Add new assertion** to add up to 10 assertions for your Uptime Check. 
 
-**Note**: If you clicked on **Test URL**, then the basic Assertions are automatically filled:
+**Note**: If you clicked on **Test URL**, then the basic assertions are automatically filled:
 
 {{< img src="synthetics/uptime_check/assertion.png" alt="Assertions" responsive="true" style="width:80%;">}}
 
-Use the **Test URL** response to quickly add Status Code, Response Time or Headers from the test response as one of the Uptime Check assertions:
+Use the **Test URL** response to quickly add status code, tesponse time or headers from the test response as one of the Uptime Check assertions:
 
 {{< img src="synthetics/uptime_check/assertion_setup.gif" alt="Assertions" responsive="true" style="width:80%;">}}
 
 ### Notifications
 
-A notification is sent if at least one of the Assertion fails. To configure notifications:
+A notification is sent if at least one of the assertion fails. To configure notifications:
 
 1. Select users and/or [services][3] to send the notifications to. Note that you can use the [`@-notification` feature][4] in the **message** field.
 2. Enter a **message** for the Uptime Check. This field allows standard [Markdown formatting][5]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
