@@ -1048,7 +1048,7 @@ Distributed tracing is supported in the following frameworks:
 | flask             | http://pypi.datadoghq.com/trace/docs/web_integrations.html#flask    |
 | pylons            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pylons   |
 | pyramid           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pyramid  |
-| requests          | http://pypi.datadoghq.com/trace/docs/web_integrations.html#requests |
+| requests          | http://pypi.datadoghq.com/trace/docs/other_integrations.html#requests |
 | tornado           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#tornado  |
 
 To add your own distributed tracing check the [Datadog API documentation][1].
