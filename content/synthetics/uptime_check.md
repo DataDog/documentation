@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Uptime Checks are HTTP requests (GET, POST, PUT, etc.) executed by Datadog to your web properties or application endpoints at configurable periodic intervals from multiple locations around the world. These checks verify that your applications are responding to requests and verify that they meet any conditions you define, such as response time, HTTP status code, and header or body contents.
+Uptime Checks are HTTP requests (GET, POST, PUT, etc.) executed by Datadog to your web properties or application endpoints at configurable periodic intervals from multiple locations around the world. These checks verify that your applications are responding to requests, as well as that they meet any conditions you define—such as response time, HTTP status code, and header or body contents.
 
 ## Configuration
 ### Request
@@ -25,7 +25,7 @@ Define the request you want to be executed by Datadog:
 
 {{< img src="synthetics/uptime_check/uptime_check_make_request.png" alt="Uptime Check make request" responsive="true" style="width:80%;">}}
 
-1. Choose the `Method` and `URL` to query. Available `Method` are:
+1. Choose the `Method` and `URL` to query. Available `Method`s are:
     * GET
     * POST
     * PATCH
@@ -38,7 +38,7 @@ Define the request you want to be executed by Datadog:
 3. Name your Uptime Check.
 4. Optionally, add tags to filter your Uptime Check in the [Synthetics page][1].
 
-5. Pick-up locations to run the test from. Available locations are:
+5. Pick locations to run the test from. Available locations are:
     * Frankfurt (Request made from an AWS Datacenter)
     * Tokyo (Request made from an AWS Datacenter)
 
