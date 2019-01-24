@@ -163,7 +163,7 @@ That's it! Now, all the rails calls are going to be in proper JSON automatically
 
 ## Further Reading
 
-### Correlate traces and logs
+### Inject trace IDs in your logs
 
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][3] to automatically add trace and span ids in your logs.
 
