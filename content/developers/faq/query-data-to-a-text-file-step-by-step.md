@@ -35,6 +35,7 @@ If successful, you should see data in the terminal and a file created in your fo
 
 To see additional examples, see our [API documentation][1].
 
+
 [1]: /api
 [2]: http://docs.python-guide.org/en/latest/starting/install/win
 [3]: /python/api_query_data.py
@@ -44,4 +45,3 @@ To see additional examples, see our [API documentation][1].
 [7]: https://docs.datadoghq.com/api/?lang=python#rate-limiting
 [8]: https://virtualenv.pypa.io/en/stable
 [9]: https://pypi.org/project/datadog
-

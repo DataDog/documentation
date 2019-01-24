@@ -108,13 +108,11 @@ data:
 ## Annotations
 
 It is also possible to enable integrations via the annotations in the manifest of your application.
-This can be done with Autodiscovery. For more details, see the [Autodiscovery][4] section.
+This can be done with Autodiscovery. For more details, see the [Autodiscovery][2] section.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/http_check
-[2]: /logs
-[3]: /logs/docker/#configuration-file-example
-[4]: /agent/autodiscovery
+[2]: /agent/autodiscovery
