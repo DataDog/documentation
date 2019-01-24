@@ -45,11 +45,13 @@ The Agent is highly customizable. Here are the most used environment variables:
 
 #### Global options
 
-| Env Variable  | Description                                                                      |
-|---------------|----------------------------------------------------------------------------------|
-| `DD_API_KEY`  | Your Datadog API key (**required**)                                              |
-| `DD_HOSTNAME` | Hostname to use for metrics (if autodetection fails)                             |
-| `DD_TAGS`     | Host tags separated by spaces. For example: `simple-tag-0 tag-key-1:tag-value-1` |
+| Env Variable    | Description                                                                                                                                        |
+| --------------- | ----------------------------------------------------------------------------------                                                                 |
+| `DD_API_KEY`    | Your Datadog API key (**required**)                                                                                                                |
+| `DD_HOSTNAME`   | Hostname to use for metrics (if autodetection fails)                                                                                               |
+| `DD_TAGS`       | Host tags separated by spaces. For example: `simple-tag-0 tag-key-1:tag-value-1`                                                                   |
+| `DD_SITE`       | Destination region for your metrics, traces, and logs. Valid options are `datadoghq.com` for the Datadog US region, and `datadoghq.eu` for the Datadog EU region |
+
 
 #### Optional collection Agents
 
