@@ -24,19 +24,19 @@ The APM tracer for PHP applications is in Open Public Beta.
 
 For descriptions of terminology used in APM, take a look at the [official documentation][1].
 
-For details about contributing the PHP tracer, check out the [contributing guide][2].
+For details about open-source contributions to the PHP tracer, refer to the [contributing guide][2].
 
 ### Setup the Datadog Agent
 
 The PHP APM tracer sends trace data through the Datadog Agent.
 
-[Install and configure the Datadog Agent][3], see the additional documentation for [tracing Docker applications][4] or [Kubernetes applications][5].
+[Install and configure the Datadog Agent][3]. See the additional documentation for [tracing Docker applications][4] or [Kubernetes applications][5].
 
 Make sure the Agent has **[APM enabled][6]**.
 
 ### Install the extension
 
-Install the PHP extension using one of the [precompiled packages for supported distributions][7]. If you don't find your distribution, you can install the PHP extension [from PECL][8] or [from source][9].
+Install the PHP extension using one of the [precompiled packages for supported distributions][7]. If you can't find your distribution, you can install the PHP extension [from PECL][8] or [from source][9].
 
 Once downloaded, install the package with one of the commands below.
 
@@ -99,7 +99,7 @@ Add the following line to the **php.ini** file.
 extension=ddtrace.so
 ```
 
-After restarting the web server/PHP SAPI (e.g., `$ sudo apachectl restart`, `$ sudo service php-fpm restart`, etc) the extension is enabled. To confirm that the extension is loaded, run:
+After restarting the web server/PHP SAPI (e.g., `$ sudo apachectl restart`, `$ sudo service php-fpm restart`, etc.) the extension is enabled. To confirm that the extension is loaded, run:
 
 ```bash
 $ php --ri=ddtrace
@@ -125,7 +125,7 @@ PHP APM supports the following PHP versions:
 
 ## Automatic Instrumentation
 
-Tracing is automatically instrumented by default so once the extension is installed, **ddtrace** will trace your application and send traces to the Agent.
+Tracing is automatically instrumented by default. Once the extension is installed, **ddtrace** traces your application and sends traces to the Agent.
 
 Automatic instrumentation works by modifying PHP's runtime to wrap certain functions and methods in order to trace them. The PHP tracer supports automatic instrumentation for [several libraries][12].
 
@@ -138,15 +138,15 @@ Automatic instrumentation captures:
 
 ## Manual instrumentation
 
-Although automatic instrumentation will work in most cases, there are some special bootstrapping contextes where automatic instrumentation will not work as expected. In these cases, disable automatic instrumentation and manually enable it.
+Although automatic instrumentation works in most cases, there are some special bootstrapping contexts where automatic instrumentation will not work as expected. In these cases, disable automatic instrumentation and manually enable it.
 
-First install the PHP tracer dependency with Composer:
+First, install the PHP tracer dependency with Composer:
 
 ```bash
 $ composer require datadog/dd-trace
 ```
 
-Then include the PHP tracer boostrap file right after the composer autoloader.
+Then, include the PHP tracer boostrap file right after the Composer autoloader.
 
 ```php
 // The existing Composer autoloader
@@ -158,9 +158,9 @@ require '<APP_ROOT>/vendor/datadog/dd-trace/bridge/dd_init.php';
 
 ### Zend Framework 1 integration
 
-Zend Framework 1 is automatically instrumented by default so you are not required to modify your ZF1 project. However, if automatic instrumentation is disabled, enable the tracer manually.
+Zend Framework 1 is automatically instrumented by default, so you are not required to modify your ZF1 project. However, if automatic instrumentation is disabled, enable the tracer manually.
 
-First, [download the latest source code from the releases page][7]. Extract the zip file and copy the **src/DDTrace** folder to your application's **library** folder. Then add the following to your **application/configs/application.ini** file.
+First, [download the latest source code from the releases page][7]. Extract the zip file and copy the **src/DDTrace** folder to your application's **library** folder. Then add the following to your **application/configs/application.ini** file:
 
 ```ini
 autoloaderNamespaces[] = "DDTrace_"
@@ -170,7 +170,7 @@ resources.ddtrace = true
 
 ## View the trace
 
-Assuming the Agent is running with APM enabled and it is configured with your API key, and assuming the **ddtrace** extension is installed and instrumented properly into your app, visit a tracing-enabled enpoint of your app and check out the [APM UI][13] to see the traces.
+Assuming the Agent is running with APM enabled and it is configured with your API key, and assuming the **ddtrace** extension is installed and instrumented properly into your app, visit a tracing-enabled enpoint of your app and view the [APM UI][13] to see the traces.
 
 **It might take a few minutes before traces appear in the UI.** Just refresh the page a few times until you see the screen change.
 
@@ -183,7 +183,7 @@ The `dd_trace()` function hooks into existing functions and methods to:
 * Close the span when it is done
 * Modify the arguments or the return value
 
-For example, trace the `CustomDriver::doWork()` method, add custom tags, report any exceptions as errors on the span and then re-throw the exeptions.
+For example, the following snippet traces the `CustomDriver::doWork()` method, adds custom tags, reports any exceptions as errors on the span, and then re-throws the exceptions.
 
 ```php
 dd_trace("CustomDriver", "doWork", function (...$args) {
@@ -214,7 +214,7 @@ dd_trace("CustomDriver", "doWork", function (...$args) {
 
 ## Configuration
 
-Configure the agent connection parameters via environment variables.
+Configure the Agent connection parameters via environment variables.
 
 | Env variable               | Default     | Note                                                                       |
 | :------------------------- | :---------- | :------------------------------------------------------------------------- |
@@ -222,7 +222,7 @@ Configure the agent connection parameters via environment variables.
 | `DD_INTEGRATIONS_DISABLED` | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                       |
 | `DD_AGENT_HOST`            | `localhost` | The Agent host name                                                        |
 | `DD_TRACE_AGENT_PORT`      | `8126`      | The Agent port number                                                      |
-| `DD_AUTOFINISH_SPANS`      | `false`     | Whether or not spans are automatically finished when the tracer is flushed |
+| `DD_AUTOFINISH_SPANS`      | `false`     | Whether spans are automatically finished when the tracer is flushed        |
 
 ### Integrations
 
