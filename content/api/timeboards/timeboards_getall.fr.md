@@ -11,4 +11,4 @@ Récupérez toutes les spécifications de votre [timeboard][1].
 ##### Arguments
 *Cet endpoint ne prend aucun argument JSON.*
 
-[1]: /graphing/dashboards/timeboard
+[1]: /fr/graphing/dashboards/timeboard

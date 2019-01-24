@@ -15,4 +15,4 @@ Obtenez les principales [métriques custom][1] selon la moyenne horaire.
 * **`names`** [*facultatif*, *défaut*=**None**] :
     Liste des noms de métriques séparés par des virgules.
 
-[1]: /developers/metrics/custom_metrics
+[1]: /fr/developers/metrics/custom_metrics
