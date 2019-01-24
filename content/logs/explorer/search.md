@@ -54,8 +54,8 @@ Use the search bar's autocomplete feature to complete your query using existing 
 The following characters are considered special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping with the `\` character.
 
 ### Attributes search
-### Message attribute search
-To search logs that contain `user=12345` in their message attribute the following search must be entered:
+#### Message attribute search
+To search for logs that contain `user=12345` in the message attribute use the following search:
 
 `user\=JaneDoe`
 
