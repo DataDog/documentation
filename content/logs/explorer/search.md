@@ -53,11 +53,12 @@ Use the search bar's autocomplete feature to complete your query using existing 
 
 The following characters are considered special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping with the `\` character.
 
-### Facets and Message attribute search
+### Attributes search
 ### Message attribute search
 To search logs that contain `user=12345` in their message attribute the following search must be entered:
 
 `user\=JaneDoe`
+
 #### Facets search
 To search on a specific facet, first [add it as a facet][1] and then add `@` to specify you are searching on a facet.
 
