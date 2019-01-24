@@ -67,7 +67,7 @@ Alternatively install the extension from the [PECL package **datadog_trace**][10
 $ sudo pecl install datadog_trace-beta
 ```
 
-Next, [enable the extension][11].
+Next, [modify the **php.ini** file][11] to add the extension to the PHP runtime.
 
 ### Install from source
 
@@ -81,9 +81,9 @@ $ make
 $ sudo make install
 ```
 
-#### Enable the extension
+#### Modify the INI file
 
-Modify the **php.ini** to enable the **ddtrace** extension. To find out where the INI file is, run the following command:
+Modify the **php.ini** configuration file to make the **ddtrace** extension available in the PHP runtime. To find out where the INI file is, run the following command:
 
 ```bash
 $ php --ini
@@ -121,7 +121,7 @@ PHP APM supports the following PHP versions:
 | 7.1.x   | Beta         |
 | 7.0.x   | Beta         |
 | 5.6.x   | Beta         |
-| 5.4.x   | Experimental |
+| 5.4.x   | Beta         |
 
 ## Automatic Instrumentation
 
@@ -146,7 +146,7 @@ First, install the PHP tracer dependency with Composer:
 $ composer require datadog/dd-trace
 ```
 
-Then, include the PHP tracer boostrap file right after the Composer autoloader.
+Then, include the PHP tracer boostrap file right after the Composer autoloader and start the first span in the trace.
 
 ```php
 // The existing Composer autoloader
@@ -154,6 +154,9 @@ require '<APP_ROOT>/vendor/autoload.php';
 
 // Add the PHP tracer bootstrap
 require '<APP_ROOT>/vendor/datadog/dd-trace/bridge/dd_init.php';
+
+// Create the first span in the trace
+\DDTrace\GlobalTracer::get()->startRootSpan('web.request');
 ```
 
 ### Zend Framework 1 integration
@@ -216,13 +219,15 @@ dd_trace("CustomDriver", "doWork", function (...$args) {
 
 Configure the Agent connection parameters via environment variables.
 
-| Env variable               | Default     | Note                                                                       |
-| :------------------------- | :---------- | :------------------------------------------------------------------------- |
-| `DD_TRACE_ENABLED`         | `true`      | Enable the tracer globally                                                 |
-| `DD_INTEGRATIONS_DISABLED` | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                       |
-| `DD_AGENT_HOST`            | `localhost` | The Agent host name                                                        |
-| `DD_TRACE_AGENT_PORT`      | `8126`      | The Agent port number                                                      |
-| `DD_AUTOFINISH_SPANS`      | `false`     | Whether spans are automatically finished when the tracer is flushed        |
+| Env variable               | Default     | Note                                                                |
+| :------------------------- | :---------- | :------------------------------------------------------------------ |
+| `DD_TRACE_ENABLED`         | `true`      | Enable the tracer globally                                          |
+| `DD_INTEGRATIONS_DISABLED` | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                |
+| `DD_AGENT_HOST`            | `localhost` | The Agent host name                                                 |
+| `DD_TRACE_AGENT_PORT`      | `8126`      | The Agent port number                                               |
+| `DD_AUTOFINISH_SPANS`      | `false`     | Whether spans are automatically finished when the tracer is flushed |
+| `DD_DISTRIBUTED_TRACING`   | `true`      | Whether to enable [distributed tracing][14]                         |
+| `DD_PRIORITY_SAMPLING`     | `true`      | Whether to enable [priority sampling][15]                           |
 
 ### Integrations
 
@@ -233,10 +238,10 @@ Configure the Agent connection parameters via environment variables.
 | Laravel        | 5.x      | Beta         |
 | Laravel        | 4.2      | Beta         |
 | Symfony        | 4.x      | Beta         |
-| Symfony        | >= 3.3   | Beta         |
+| Symfony        | >= 3.4   | Beta         |
 | Zend Framework | 1.12     | Beta         |
 
-Don't see your desired web frameworks? Let Datadog know more about your needs through [this survey][14].
+Don't see your desired web frameworks? Let Datadog know more about your needs through [this survey][16].
 
 #### Library Compatibility
 
@@ -253,7 +258,7 @@ Don't see your desired web frameworks? Let Datadog know more about your needs th
 | PDO           | *(Any Supported PHP)*      | Beta         |
 | Predis        | 1.1                        | Beta         |
 
-Don't see your desired libraries? Let Datadog know more about your needs through [this survey][14].
+Don't see your desired libraries? Let Datadog know more about your needs through [this survey][16].
 
 ## Further Reading
 
@@ -269,7 +274,9 @@ Don't see your desired libraries? Let Datadog know more about your needs through
 [8]: #install-from-pecl
 [9]: #install-from-source
 [10]: https://pecl.php.net/package/datadog_trace
-[11]: #enable-the-extension
+[11]: #modify-the-ini-file
 [12]: #library-compatibility
 [13]: https://app.datadoghq.com/apm/services
-[14]: https://docs.google.com/forms/d/e/1FAIpQLSemTVTCdqzXkfzemJSr8wuEllxfqbGVj00flmRvKA17f0lyFg/viewform
+[14]: /tracing/advanced_usage/?tab=php#distributed-tracing
+[15]: /tracing/advanced_usage/?tab=php#priority-sampling
+[16]: https://docs.google.com/forms/d/e/1FAIpQLSemTVTCdqzXkfzemJSr8wuEllxfqbGVj00flmRvKA17f0lyFg/viewform
