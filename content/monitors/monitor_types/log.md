@@ -77,7 +77,7 @@ For Slack and email notifications you can enable the top 10 of breaching values 
 
 To be notified if a specific set of logs are not received anymore, set the condition `below 1`. This notifies when no logs match the monitor query on the given timeframe. 
 
-However, note that when splitting the monitor by any dimension (tag or facet) and using a `below` condition, the alert is triggered **if and only if** there are logs for a given group, and the count is below the threshold—or if there are no logs at all for all of the groups.  
+However, note that when splitting the monitor by any dimension (tag or facet) and using a `below` condition, the alert is triggered **if and only if** there are logs for a given group, and the count is below the threshold—or if there are no logs for **all** of the groups.  
 
 Examples:  
 
