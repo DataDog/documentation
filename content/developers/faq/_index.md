@@ -47,9 +47,8 @@ private: true
 * [Is it possible to integrate with ThousandEyes?][24]
 * [Deploying the Agent on RaspberryPI][25]
 * [How to Monitor Logs with Loggly Live Tail and Datadog][26]
-* [Monitoring Akka][27]
-* [Hubot Script - Request snapshots in chat using the Datadog API][28]
-* [How do I collect metrics from Heroku with Datadog?][29]
+* [Hubot Script - Request snapshots in chat using the Datadog API][27]
+* [How do I collect metrics from Heroku with Datadog?][28]
 
 [1]: /developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd
 [2]: /developers/faq/what-do-notifications-do-in-datadog
@@ -77,6 +76,5 @@ private: true
 [24]: /developers/faq/is-it-possible-to-integrate-with-thousandeyes
 [25]: /developers/faq/deploying-the-agent-on-raspberrypi
 [26]: /developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog
-[27]: /developers/faq/monitoring-akka
-[28]: /developers/faq/hubot-script-request-snapshots-in-chat-using-the-datadog-api
-[29]: /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
+[27]: /developers/faq/hubot-script-request-snapshots-in-chat-using-the-datadog-api
+[28]: /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
