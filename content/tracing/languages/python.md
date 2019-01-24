@@ -63,6 +63,7 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | [Flask][8]         | Fully Supported | http://pypi.datadoghq.com/trace/docs/web_integrations.html#flask   |
 | [Pylons][9]      | Fully Supported | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pylons  |
 | [Pyramid][10]       | Fully Supported | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pyramid |
+| [Tornado][28]       | Fully Supported | http://pypi.datadoghq.com/trace/docs/web_integrations.html#tornado |
 
 #### Datastore Compatibility
 
@@ -129,3 +130,4 @@ The `ddtrace` library includes support for the following libraries:
 [25]: http://jinja.pocoo.org
 [26]: https://kombu.readthedocs.io/en/latest
 [27]: http://docs.python-requests.org/en/master
+[28]: http://www.tornadoweb.org/
