@@ -2,9 +2,8 @@
 title: Créer un commentaire
 type: apicontent
 order: 7.1
-external_redirect: /api/#creer-un-commentaire
+external_redirect: '/api/#creer-un-commentaire'
 ---
-
 ## Créer un commentaire
 Les commentaires sont fondamentalement des événements spéciaux qui apparaissent dans le [flux d'événements][1]. Ils peuvent débuter un nouveau fil de discussion ou encore fournir une réponse dans un autre fil.
 

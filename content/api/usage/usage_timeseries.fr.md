@@ -15,4 +15,4 @@ Obtenez l'utilisation horaire pour [des métriques custom][1].
 * **`end_hr`** [*facultatif*, *défaut*=**1d+start_hr**] :
     datetime au format ISO-8601, UTC, à l'heure près : [AAAA-MM-JJThh]. Pour une utilisation se terminant AVANT cette heure.
 
-[1]: /fr/developers/metrics/custom_metrics
+[1]: /developers/metrics/custom_metrics

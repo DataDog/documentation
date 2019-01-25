@@ -2,9 +2,8 @@
 title: Récupérer les tags d'un hôte
 type: apicontent
 order: 20.2
-external_redirect: /api/#recuperer-les-tags-d-un-hote
+external_redirect: '/api/#recuperer-les-tags-d-un-hote'
 ---
-
 ## Récupérer les tags d'un hôte
 Renvoie la liste des tags qui s'appliquent à un hôte donné.
 

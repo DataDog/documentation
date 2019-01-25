@@ -2,9 +2,8 @@
 title: Récupérer des tags
 type: apicontent
 order: 20.1
-external_redirect: /api/#recuperer-des-tags
+external_redirect: '/api/#recuperer-des-tags'
 ---
-
 ## Récupérer des tags
 Renvoie un mappage des tags et hôtes pour l'ensemble de votre infrastructure.
 

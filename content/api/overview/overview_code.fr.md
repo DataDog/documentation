@@ -10,4 +10,4 @@ De nombreuses bibliothèques client exploitent l'API Datadog. [Découvrez-les][1
 ### SIGNATURE
 https://api.datadoghq.com/api/
 
-[1]: /fr/developers/libraries
+[1]: /developers/libraries

@@ -2,9 +2,8 @@
 title: Snapshot de graphique
 type: apicontent
 order: 12.1
-external_redirect: /api/#snapshot-de-graphique
+external_redirect: '/api/#snapshot-de-graphique'
 ---
-
 ## Snapshot de graphique
 
 **Remarque** : lorsqu'un snapshot est créé, [vous devez attendre un certain temps][1] avant de pouvoir y accéder.

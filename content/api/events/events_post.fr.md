@@ -2,9 +2,8 @@
 title: Envoyer un événement
 type: apicontent
 order: 11.1
-external_redirect: /api/#envoyer-un-evenement
+external_redirect: '/api/#envoyer-un-evenement'
 ---
-
 ## Envoyer un événement
 Cet endpoint vous permet d'envoyer des événements dans le flux. Taguez-les, définissez la priorité et regroupez-les avec d'autres événements.
 

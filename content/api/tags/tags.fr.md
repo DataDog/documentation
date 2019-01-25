@@ -2,9 +2,8 @@
 title: Tags
 type: apicontent
 order: 20
-external_redirect: /api/#tags
+external_redirect: '/api/#tags'
 ---
-
 ## Tags
 L'endpoint tag vous permet de taguer les hôtes avec des mots-clés qui vous sont utiles, comme `role:database`.
 Toutes les métriques envoyées par un hôte se voient appliquer ses tags. Pour la récupération et l'application de tags à un host spécifique, utilisez le nom des hôtes (yourhost.example.com) pour vous y référer.
