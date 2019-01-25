@@ -15,4 +15,4 @@ Renvoie la liste des tags qui s'appliquent à un hôte donné.
 * **`by_source`** [*facultatif*, *défaut*=**False**] :
    Renvoie les tags regroupés par source.
 
-[1]: /fr/integrations/faq/list-of-api-source-attribute-value
+[1]: /integrations/faq/list-of-api-source-attribute-value

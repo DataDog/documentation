@@ -18,4 +18,4 @@ Les commentaires sont fondamentalement des événements spéciaux qui apparaisse
 * **`related_event_id`** [*facultatif*, *défaut*=**None**] :
     L'ID d'un autre commentaire ou événement auquel répondre.
 
-[1]: /fr/graphing/event_stream
+[1]: /graphing/event_stream
