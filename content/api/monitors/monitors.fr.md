@@ -9,5 +9,5 @@ external_redirect: /api/#monitors
 Les [monitors][1] vous permettent de surveiller une métrique ou un check, en envoyant une notification à votre équipe lorsque certains seuils définis sont dépassés.
 Reportez-vous à la [page de création de monitors][2] pour en savoir plus sur la création de monitors.
 
-[1]: /fr/monitors
-[2]: /fr/monitors/monitor_types
+[1]: /monitors
+[2]: /monitors/monitor_types

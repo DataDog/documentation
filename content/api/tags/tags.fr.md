@@ -13,5 +13,5 @@ Le composant de votre infrastructure responsable d'un tag est identifié par une
 
 [En savoir plus sur les tags sur la page de la documentation dédiée][2].
 
-[1]: /fr/integrations/faq/list-of-api-source-attribute-value
-[2]: /fr/tagging
+[1]: /integrations/faq/list-of-api-source-attribute-value
+[2]: /tagging

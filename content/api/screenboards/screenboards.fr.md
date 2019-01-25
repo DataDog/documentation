@@ -8,4 +8,4 @@ external_redirect: /api/#screenboards
 
 Cet endpoint vous permet de programmer la création, la mise à jour, la suppression et la récupération de screenboards. [En apprendre plus sur les screenboards][1].
 
-[1]: /fr/graphing/dashboards/screenboard
+[1]: /graphing/dashboards/screenboard
