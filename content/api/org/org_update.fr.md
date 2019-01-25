@@ -2,9 +2,8 @@
 title: Mettre à jour une organisation
 type: apicontent
 order: 18.3
-external_redirect: /api/#mettre-a-jour-une-organisation
+external_redirect: '/api/#mettre-a-jour-une-organisation'
 ---
-
 ## Mettre à jour une organisation
 
 ##### ARGUMENTS

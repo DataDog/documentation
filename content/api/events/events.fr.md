@@ -2,9 +2,8 @@
 title: Événements
 type: apicontent
 order: 11
-external_redirect: /api/#evenements
+external_redirect: '/api/#evenements'
 ---
-
 ## Événements
 Le service d'événements vous permet de programmer l'envoi d'événements dans le [flux d'événements][1] et d'extraire des événements du [flux d'événements][1].
 

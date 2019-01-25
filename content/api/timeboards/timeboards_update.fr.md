@@ -2,9 +2,8 @@
 title: Mettre à jour un timeboard
 type: apicontent
 order: 21.2
-external_redirect: /api/#mettre-a-jour-un-timeboard
+external_redirect: '/api/#mettre-a-jour-un-timeboard'
 ---
-
 ## Mettre à jour un timeboard
 
 ##### Arguments
