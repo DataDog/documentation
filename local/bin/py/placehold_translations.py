@@ -4,6 +4,7 @@ import ntpath
 from optparse import OptionParser
 import os
 import re
+import logging
 
 import yaml
 
@@ -15,6 +16,8 @@ TEMPLATE = """\
 
 {content}
 """
+
+logger = logging.getLogger(__name__)
 
 
 def get_languages(config_location):
@@ -40,6 +43,22 @@ def diff_globs(base, compare):
     return [f for f in base['glob'] if f.replace('.md', '.%s.md' % compare['name']) not in compare['glob']]
 
 
+def md_update_links(this_lang_code, content):
+    """ Update footer links in markdown to be language relative """
+    result = content
+    try:
+        common_lang_codes = ["en/", "es/", "de/", "fr/", "es/", "ja/"]
+        exclude_common_langs = "|".join(list(map(lambda code: f"{code}",common_lang_codes)))
+        relative_regex = re.compile("^(\\[[0-9]+]\:\\s*)(\/(?!" + exclude_common_langs + ").*)$", re.MULTILINE | re.IGNORECASE)
+        substitute = "\g<1>/" + this_lang_code.lower() + "\g<2>"
+        result = relative_regex.sub(substitute, content)
+    except Exception as e:
+        result = content
+        logger.exception("fail to update md links")
+    finally:
+        return result
+
+
 def create_placeholder_file(template, new_glob):
     new_dest = os.path.dirname(template) + '/' + ntpath.basename(template).replace('.md', '.%s.md' % new_glob['name'])
     
@@ -63,6 +82,9 @@ def create_placeholder_file(template, new_glob):
             disclaimer = "<div class='alert alert-info'><strong>NOTICE:</strong>%s</div>\n\n" % new_glob["disclaimer"]
             new_content = disclaimer + content
             new_yml['placeholder'] = True
+
+        new_content = md_update_links(new_glob['name'], new_content.strip())
+
         content = TEMPLATE.format(front_matter=yaml.dump(new_yml, default_flow_style=False).strip(),
                                   content=new_content.strip())
 
