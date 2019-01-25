@@ -2,9 +2,8 @@
 title: Tracing
 type: apicontent
 order: 22
-external_redirect: /api/#tracing
+external_redirect: '/api/#tracing'
 ---
-
 ## Tracing
 En savoir plus sur le [tracing avec Datadog][1] et [la terminologie APM][2].
 
