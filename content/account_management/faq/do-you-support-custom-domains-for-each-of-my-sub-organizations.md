@@ -3,7 +3,7 @@ title: Do you support custom domains for each of my sub-organizations?
 kind: faq
 ---
 
-Yes, [email the Datadog support team][1] to enable custom sub-domains.
+Yes, [email the Datadog support team][1] to enable custom subdomains.
 
 [Learn more about multi-organization][2]
 

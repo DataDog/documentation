@@ -8,7 +8,7 @@ kind: faq
 * All communication to Datadog is via HTTPS.
 * [The full license agreement][1].
 * [The Agent is entirely open source][2].
-* Some installations (for example, installing the Agent on CentOS 5), requests your password. The password is needed because it's installing packages - Datadog does not retain it in any way. You can also use the step-by-step directions if you prefer to see exactly what the script is doing.
+* Some installations (for example, installing the Agent on CentOS 5), request your password. The password is needed because it's installing packages—Datadog does not retain it in any way. You can also use the step-by-step directions if you prefer to see exactly what the script is doing.
 
 See the [list of IPs and ports used by Datadog][3] for more information.
 
