@@ -5,7 +5,7 @@ order: 20.1
 external_redirect: '/api/#recuperer-des-tags'
 ---
 ## Récupérer des tags
-Renvoie un mappage des tags et hôtes pour l'ensemble de votre infrastructure.
+Renvoie un mappage des tags et hosts pour l'ensemble de votre infrastructure.
 
 ##### ARGUMENTS
 * **`source`** [*facultatif*, *défaut*=**None**] :

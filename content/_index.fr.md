@@ -23,15 +23,15 @@ Datadog recueille l'ensemble de ces métriques, événements et états de servic
 
 Recueillez une multitude de données déjà disponibles sans écrire de code. [Installez l'Agent Datadog][1] où bon vous semble : sur vos serveurs, instances, machines virtuelles, nœuds et [hosts exécutant des conteneurs][2]. Activez ensuite l'Agent et configurez l'une de nos 200 [intégrations][3] prêtes à l'emploi pour commencer à envoyer vos métriques au backend de Datadog.
 
-Envoyez des métriques d'application custom en rédigeant quelques lignes de code. Utilisez vos propres jauges, compteurs, minuteurs et histogrammes avec [DogStatsD][4] ou consultez [l'APM][5] pour tracer le temps d'exécution de n'importe quel chemin de code et découvrir l'impact sur les délais de réponse. Les [bibliothèques client][6] envoient vos [métriques custom][7] et données de trace à l'Agent Datadog, qui les transmet ensuite à Datadog.
+Envoyez des métriques d'application custom en rédigeant quelques lignes de code. Utilisez vos propres gauges, counters, timers et histograms avec [DogStatsD][4] ou consultez [l'APM][5] pour tracer le temps d'exécution de n'importe quel chemin de code et découvrir l'impact sur les délais de réponse. Les [bibliothèques client][6] envoient vos [métriques custom][7] et données de trace à l'Agent Datadog, qui les transmet ensuite à Datadog.
 
 Certaines parties de votre pile peuvent correspondre à des outils SaaS, et non à des serveurs. Datadog peut [interroger plusieurs de ces services][8]. Les intégrations associées à ces services sont extrêmement simples à installer, et ne nécessitent pas d'Agent.
 
 ## Visualisation
 
-Dès que les données sont enregistrées, vous pouvez y accéder directement dans l'application Web Datadog. Utilisez l'explorateur de métriques pour trouver une métrique spécifique et l'observer en temps réel. Visualisez et commentez des événements (par exemple, le déploiement d'une application) au fil de leur arrivée dans votre [flux d'événements][9]. Filtrez les données selon un groupe d'hosts dans la [carte d'infrastructure][10]. Bénéficiez d'une vue d'ensemble du fonctionnement d'un service donné (par exemple, MySQL) sur son tableau de bord par défaut.
+Dès que les données sont enregistrées, vous pouvez y accéder directement dans l'application Web Datadog. Utilisez Metrics Explorer pour trouver une métrique spécifique et l'observer en temps réel. Visualisez et commentez des événements (par exemple, le déploiement d'une application) au fil de leur arrivée dans votre [flux d'événements][9]. Filtrez les données selon un groupe d'hosts dans la [carte d'infrastructure][10]. Bénéficiez d'une vue d'ensemble du fonctionnement d'un service donné (par exemple, MySQL) sur son tableau de bord par défaut.
 
-Vous pourrez rapidement créer des [screenboards][11] personnalisés qui combineront l'ensemble des graphiques, données chiffrées, événements et états de services qui vous intéressent le plus. Adaptez les graphiques à vos besoins pour mieux mettre en évidence les problèmes : modifiez les valeurs de leurs métriques à l'aide d'autres métriques, appliquez une détection des [anomalies][12], des [outliers][13] ou des [prévisions][13], superposez des événements, et plus encore.
+Vous pourrez rapidement créer des [screenboards][11] personnalisés qui combineront l'ensemble des graphiques, données chiffrées, événements et états de services qui vous intéressent le plus. Adaptez les graphiques à vos besoins pour mieux mettre en évidence les problèmes : modifiez les valeurs de leurs métriques à l'aide d'autres métriques, appliquez une détection des [anomalies][12], des [singularités][13] ou des [prévisions][13], superposez des événements, et plus encore.
 
 ## Surveillance
 

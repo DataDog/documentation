@@ -1,4 +1,4 @@
 ---
-title: Hôtes
+title: Hosts
 external_redirect: /api/
 ---
