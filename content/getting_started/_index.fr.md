@@ -37,8 +37,8 @@ en fonction de ce qui a précédemment été configuré pour ce tag. [En savoir 
 
 [La hostmap](/graphing/infrastructure/hostmap) se trouve dans le menu Infrastructure. Grâce à cette carte, vous pouvez :
 
-* Visualiser rapidement l'intégralité de votre environnement, qu'il soit composé de 5, 500 ou 50 000 hôtes
-* Identifier les outliers
+* Visualiser rapidement l'intégralité de votre environnement, qu'il soit composé de 5, 500 ou 50 000 hosts
+* Identifier les singularités
 * Détecter les modèles d'utilisation
 * Optimiser les ressources
 
@@ -92,7 +92,7 @@ spécifique dépassent un certain seuil :
 * Sur l'ensemble de votre infrastructure
 * Par machine (moyenne, max, min ou somme)
 * Vous pouvez appliquer des monitors à toutes les métriques de votre choix : chiffre d'affaires, température du centre de données, etc.
-* Alertes multiples (par device, hôte, etc.)
+* Alertes multiples (par device, host, etc.)
 * Possibilité de définir un message de notification d'alerte, avec les fonctionnalités @
 
 {{< img src="getting_started/alert_setup.png" alt="configuration d'alerte" responsive="true" >}}

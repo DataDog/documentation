@@ -20,7 +20,7 @@ Cet endpoint vous permet d'envoyer des événements dans le flux. Taguez-les, d�
 * **`priority`** [*facultatif*, *défaut*=**normal**] :
     La priorité de l'événement : **normal** ou **low**.
 * **`host`** [*facultatif*, *défaut*=**None**] :
-    Hostname à associer à l'événement. Tous les tags associés à l'hôte sont également appliqués à cet événement.
+    Hostname à associer à l'événement. Tous les tags associés au host sont également appliqués à cet événement.
 * **`tags`** [*facultatif*, *défaut*=**None**] :
     La liste de tags à appliquer à l'événement.
 * **`alert_type`** [*facultatif*, *défaut*=**info**] :
