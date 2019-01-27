@@ -2,7 +2,8 @@
 aliases:
   - /fr/integrations/aws/
   - /fr/logs/aws
-  - /fr/integrations/faq/revoking-aws-keys-and-enabling-role-delegation-for-the-datadog-aws-integration/
+  - >-
+    /fr/integrations/faq/revoking-aws-keys-and-enabling-role-delegation-for-the-datadog-aws-integration/
 categories:
   - cloud
   - aws
