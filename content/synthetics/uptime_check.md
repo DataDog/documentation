@@ -58,13 +58,13 @@ When running an Uptime Check, you must define at least one assertion that should
 
 If you define an assertion on the content of `Headers`, you must define the headers name and the associated value.
 
-Click on **Add new assertion** to add up to 10 assertions for your Uptime Check. 
+Click on **Add new assertion** to add up to 10 assertions for your Uptime Check.
 
 **Note**: If you clicked on **Test URL**, then the basic assertions are automatically filled:
 
 {{< img src="synthetics/uptime_check/assertion.png" alt="Assertions" responsive="true" style="width:80%;">}}
 
-Use the **Test URL** response to quickly add status code, tesponse time or headers from the test response as one of the Uptime Check assertions:
+Use the **Test URL** response to quickly add status code, response time or headers from the test response as one of the Uptime Check assertions:
 
 {{< img src="synthetics/uptime_check/assertion_setup.gif" alt="Assertions" responsive="true" style="width:80%;">}}
 
