@@ -150,7 +150,7 @@ spec:
                 name: datadog-secret
                 key: api-key
           - name: DD_SITE
-            # Set DD_SITE to datadoghq.eu to send your Agent data to the Datadog EU region 
+            # Set DD_SITE to datadoghq.eu to send your Agent data to the Datadog EU site 
             value: "datadoghq.com"
           - name: DD_COLLECT_KUBERNETES_EVENTS
             value: "true"

@@ -12,7 +12,7 @@ further_reading:
   text: "Manage your checks"
 ---
 
-<div class="alert alert-warning">Synthetics is in beta for the Datadog US Region. To request access, complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics request form</a>.</div>
+<div class="alert alert-warning">Synthetics is in beta for the Datadog US Site. To request access, complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics request form</a>.</div>
 
 ## Overview
 
