@@ -24,7 +24,9 @@ There are several places tags can be assigned: [configuration files](#configurat
 The hostname (tag key `host`) is [assigned automatically][6] by the Datadog Agent. To customize the hostname, use the Agent configuration file, `datadog.yaml`:
 
 ```yaml
-# Force the hostname to whatever you want. (default: auto-detected)
+# Set the hostname (default: auto-detected)
+# Must comply with RFC-1123, which permits only:
+# "A" to "Z", "a" to "z", "0" to "9", and the hyphen (-)
 hostname: mymachine.mydomain
 ```
 
