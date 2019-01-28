@@ -49,13 +49,12 @@ Define the request you want to be executed by Datadog:
 
 When running an Uptime Check, you must define at least one assertion that should be monitored by Datadog. An assertion is defined by a parameter, a comparator, and a value.
 
-| Parameter     | Comparators                | Value type                                                       |
-| --------      | ---------                  | --------                                                         |
-| Status Code   | `is`, `is not`             | Integer                                                          |
-| Response time | `less than`                | Integer                                                          |
-| Headers       | `is`, `is not`, `contains` | for `is`/`is not`: String <br>for `contains`: [RegexStrings][2]  |
-| Body          | `is`, `is not`, `contains` | for `is`/`is not`: String <br> for `contains`: [RegexStrings][2] |
-
+| Parameter     | Comparators                           | Value type                                                                    |
+| ------------- | ------------------------------------- | ----------------------------------------------------------------------------- |
+| Status Code   | `is`, `is not`                        | Integer                                                                       |
+| Response time | `less than`                           | Integer                                                                       |
+| Headers       | `contains`, `is`, `is not`, `matches` | for `contains`/`is`/`is not`: String <br> for `matches`: [RegexStrings][2]    |
+| Body          | `contains`, `is`, `is not`, `matches` | for `contains`/`is`/`is not`: String <br> for `matches`: [RegexStrings][2]    |
 
 If you define an assertion on the content of `Headers`, you must define the headers name and the associated value.
 
