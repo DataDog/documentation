@@ -86,7 +86,7 @@ Notifications example:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics
-[2]: https://json-schema.org/understanding-json-schema/reference/regular_expressions.html
+[2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [3]: /integrations/#cat-notification
 [4]: /developers/faq/what-do-notifications-do-in-datadog
 [5]: http://daringfireball.net/projects/markdown/syntax
