@@ -266,13 +266,13 @@ span?.SetTag("<TAG_KEY>", "<TAG_VALUE>");
 Add tags directly to a `DDTrace\Span` object by calling `Span::setTag()`.
 
 ```php
-dd_trace('my_function', function () {
+dd_trace('<FUNCTION_NAME>', function () {
     $scope = \DDTrace\GlobalTracer::get()
-      ->startActiveSpan('my_function');
+      ->startActiveSpan('<FUNCTION_NAME>');
     $span = $scope->getSpan();
     $span->setTag('<TAG_KEY>', '<TAG_VALUE>');
 
-    $result = my_function();
+    $result = <FUNCTION_NAME>();
 
     $scope->close();
     return $result;
