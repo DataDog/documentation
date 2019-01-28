@@ -602,7 +602,7 @@ instances:
 [1]: /agent/faq/agent-5-autodiscovery
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
 [3]: /integrations/ceph
-[4]: /integrations/varnish
+[4]: /integrations/varnish/#autodiscovery
 [5]: /integrations/postfix
 [6]: /integrations/cassandra/#agent-check-cassandra-nodetool
 [7]: /integrations/gunicorn
