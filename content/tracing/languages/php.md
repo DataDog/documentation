@@ -173,7 +173,7 @@ resources.ddtrace = true
 
 ## View the trace
 
-Assuming the Agent is running with APM enabled and it is configured with your API key, and assuming the **ddtrace** extension is installed and instrumented properly into your application, visit a tracing-enabled enpoint of your application and view the [APM UI][13] to see the traces.
+Assuming the Agent is running with APM enabled and it is configured with your API key, and assuming the **ddtrace** extension is installed and instrumented properly into your application, visit a tracing-enabled endpoint of your application and view the [APM UI][13] to see the traces.
 
 **Note**: It might take a few minutes before traces appear in the UI.
 
