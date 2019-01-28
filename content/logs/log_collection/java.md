@@ -403,7 +403,7 @@ Configure the Logback logger to stream logs directly to Datadog by adding the fo
 
 - Replace `<API_KEY>` with your Datadog API key value
 - `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace, as explained [here][4]
-- See the list of [available endpoints for the EU region][5]
+- See the list of [available endpoints for the EU site][5]
 
 More information available on the prefix parameter in the [Logback documentation][4].
 
