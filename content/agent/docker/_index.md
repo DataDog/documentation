@@ -104,7 +104,7 @@ Exclude containers from metrics collection and Autodiscovery. Datadog excludes K
 | Env Variable    | Description                                                                                                             |
 |-----------------|-------------------------------------------------------------------------------------------------------------------------|
 | `DD_AC_INCLUDE` | Whitelist of containers to include (separated by spaces). For example: `"image:image_name_1 image:image_name_2"` |
-| `DD_AC_EXCLUDE` | Blacklist of containers to exclude (separated by spaces). For example: `"image:image_name_3 image:image_name_4"`        |
+| `DD_AC_EXCLUDE` | Blacklist of containers to exclude (separated by spaces). For example: `"image:image_name_3 image:image_name_4"` (**Note**: this variable is not honored in Fargate.)       |
 
 **Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings and always count all containers. This does not affect your per-container billing.
 
