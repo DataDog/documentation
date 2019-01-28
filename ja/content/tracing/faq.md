@@ -23,18 +23,18 @@ Tracing data is stored for about 36 hours.
 
 ### How often does the trace agent send stats?
 
-The application code instrumentation flushes to the Agent every 1 s ([see here for the Python client](https://github.com/DataDog/dd-trace-py/blob/69693dc7cdaed3a2b6a855325109fa100e42e254/ddtrace/writer.py#L159) for instance) and the Agent flushes to the [Datadog API every 10s](https://github.com/DataDog/datadog-trace-agent/blob/master/config/agent.go#L95).
+The application code instrumentation flushes to the Agent every second ([see here for the Python client](https://github.com/DataDog/dd-trace-py/blob/69693dc7cdaed3a2b6a855325109fa100e42e254/ddtrace/writer.py#L159) for instance) and the Agent flushes traces every 5 seconds and stats every 10 seconds to the Datadog API.
 
 ### Is the Trace Agent open source?
 
-Yes, [check it out on GitHub](https://github.com/DataDog/datadog-trace-agent).
+Yes, [check it out on GitHub](https://github.com/DataDog/datadog-agent). The code for the trace agent is contained in the `cmd/trace-agent` and `pkg/trace` subdirectories.
 
 ### On what platforms can I run the Trace Agent?
 
 Trace Agent packages are available for:
 
 * Linux - packaged with the Datadog Agent since v5.11.0
-* Mac OS - packaged separately, see the [Trace Agent releases](https://github.com/DataDog/datadog-trace-agent/releases/)
+* Mac OS - packaged separately, see the [Trace Agent releases (pre-6.9.0)](https://github.com/DataDog/datadog-trace-agent/releases/). As of 6.9.0, the Trace Agent must be compiled from source from within the [Datadog Agent repository](https://github.com/DataDog/datadog-agent/tree/master/cmd/trace-agent).
 * Docker - included in the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) container
 
 For other platforms, you must install from source.
