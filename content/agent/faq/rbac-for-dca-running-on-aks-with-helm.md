@@ -1,4 +1,7 @@
-Does your Cluster Agent or Agent restart when using Azure Kubernetes Service (AKS)?
+---
+title: Cluster Agent or Agent restart when using Azure Kubernetes Service (AKS).
+kind: faq
+---
 
 Depending on how you deployed the manifest, you might be using readiness probes. Azure AKS requires extra permissions in the Cluster Role in order for the health endpoint to be reachable.
 
