@@ -13,4 +13,4 @@ Send your logs to your Datadog platform over HTTP, limits per http request are:
 * Maximum size for a single log: 256kB
 * Maximum array size if sending multiple logs in a array: 50 entries
 
-**Note**: If you are in Datadog EU `app.datadoghq.eu`, the HTTP log endpoint is: `http-intake.logs.datadoghq.eu`
+**Note**: If you are in Datadog EU region (`app.datadoghq.eu`), the HTTP log endpoint is: `http-intake.logs.datadoghq.eu`
