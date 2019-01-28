@@ -9,10 +9,10 @@ further_reading:
   tag: "GitHub"
   text: "Source code"
 - link: "tracing/visualization/"
-  tag: "Use the APM UI"
+  tag: "Documentation"
   text: "Explore your services, resources and traces"
 - link: "tracing/advanced_usage/?tab=php"
-  tag: "Advanced Usage"
+  tag: "Documentation"
   text: "Advanced Usage"
 ---
 
