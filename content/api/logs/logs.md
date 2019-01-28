@@ -7,10 +7,10 @@ external_redirect: /api/#logs
 
 ## Logs
 
-<div class="alert alert-warning">
-This API endpoint is in beta.
-</div>
+Send your logs to your Datadog platform over HTTP, limits per http request are:
 
-Send your logs to your Datadog platform over HTTP.
+* Maximum content size per payload: 2MB
+* Maximum size for a single log: 256kB
+* Maximum array size if sending multiple logs in a array: 50 entries
 
 **Note**: If you are in Datadog EU `app.datadoghq.eu`, the HTTP log endpoint is: `http-intake.logs.datadoghq.eu`
