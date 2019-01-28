@@ -180,7 +180,7 @@ This is the best option if you do not have a web proxy readily available in your
 HAProxy should be installed on a host that has connectivity to Datadog. Use the following configuration file if you do not already have it configured.
 
 {{< tabs >}}
-{{% tab "Datadog US app.datadoghq.com" %}}
+{{% tab "Datadog US site" %}}
 
 ```
 # Basic configuration
@@ -271,7 +271,7 @@ Once the HAProxy configuration is in place, you can reload it or restart HAProxy
 **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
 
 {{% /tab %}}
-{{% tab "Datadog EU app.datadoghq.eu" %}}
+{{% tab "Datadog EU site" %}}
 
 ```
 # Basic configuration

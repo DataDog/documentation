@@ -26,7 +26,7 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
 ### Log collection
 
 {{< tabs >}}
-{{% tab "Datadog US app.datadoghq.com" %}}
+{{% tab "Datadog US site" %}}
 
 1. Collect system logs and log files in `/etc/syslog-ng/syslog-ng.conf` make sure the source is correctly defined:
     ```
@@ -94,7 +94,7 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
 [1]: /crt/intake.logs.datadoghq.com.crt
 [2]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html
 {{% /tab %}}
-{{% tab "Datadog EU app.datadoghq.eu" %}}
+{{% tab "Datadog EU site" %}}
 
 1. Collect system logs and log files in `/etc/syslog-ng/syslog-ng.conf` make sure the source is correctly defined:
     ```

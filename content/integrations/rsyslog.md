@@ -25,7 +25,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 ### Log collection
 
 {{< tabs >}}
-{{% tab "Datadog US app.datadoghq.com" %}}
+{{% tab "Datadog US site" %}}
 
 1. (Optional) Activate Rsyslog file monitoring module.  
     If you want to watch/monitor specific log files, then you have to activate the imfile module by adding this to  your `rsyslog.conf`:
@@ -150,7 +150,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 [1]: /crt/intake.logs.datadoghq.com.crt
 [2]: /crt/FULL_intake.logs.datadoghq.com.crt
 {{% /tab %}}
-{{% tab "Datadog EU app.datadoghq.eu" %}}
+{{% tab "Datadog EU site" %}}
 
 1. (Optional) Activate Rsyslog file monitoring module.  
     If you want to watch/monitor specific log files, then you have to activate the imfile module by adding this to  your `rsyslog.conf`:
