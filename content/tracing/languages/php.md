@@ -67,11 +67,11 @@ Alternatively install the extension from the [PECL package **datadog_trace**][10
 $ sudo pecl install datadog_trace-beta
 ```
 
-Next, [modify the **php.ini** file][11] to add the extension to the PHP runtime.
+Next, [modify the `php.ini` file][11] to add the extension to the PHP runtime.
 
 ### Install from source
 
-[Download the source code **tar.gz** or **zip** file][7] from the releases page and unzip the file. Then compile and install the extension with the commands below.
+[Download the source code `tar.gz` or `.zip` file][7] from the releases page and unzip the file. Then compile and install the extension with the commands below.
 
 ```bash
 $ cd /path/to/dd-trace-php
@@ -83,7 +83,7 @@ $ sudo make install
 
 #### Modify the INI file
 
-Modify the **php.ini** configuration file to make the **ddtrace** extension available in the PHP runtime. To find out where the INI file is, run the following command:
+Modify the `php.ini` configuration file to make the **ddtrace** extension available in the PHP runtime. To find out where the INI file is, run the following command:
 
 ```bash
 $ php --ini
@@ -93,7 +93,7 @@ Loaded Configuration File:         /usr/local/etc/php/7.2/php.ini
 ...
 ```
 
-Add the following line to the **php.ini** file.
+Add the following line to the `php.ini` file.
 
 ```ini
 extension=ddtrace.so
@@ -138,7 +138,7 @@ Automatic instrumentation captures:
 
 ## Manual instrumentation
 
-Although automatic instrumentation works in most cases, there are some special bootstrapping contexts where automatic instrumentation will not work as expected. In these cases, disable automatic instrumentation and manually enable it.
+Although automatic instrumentation works in most cases, there are some special bootstrapping contexts where automatic instrumentation does not work as expected. In these cases, disable automatic instrumentation and manually enable it.
 
 First, install the PHP tracer dependency with Composer:
 
@@ -163,7 +163,7 @@ require '<APP_ROOT>/vendor/datadog/dd-trace/bridge/dd_init.php';
 
 Zend Framework 1 is automatically instrumented by default, so you are not required to modify your ZF1 project. However, if automatic instrumentation is disabled, enable the tracer manually.
 
-First, [download the latest source code from the releases page][7]. Extract the zip file and copy the **src/DDTrace** folder to your application's **library** folder. Then add the following to your **application/configs/application.ini** file:
+First, [download the latest source code from the releases page][7]. Extract the zip file and copy the `src/DDTrace` folder to your application's `/library` folder. Then add the following to your `application/configs/application.ini` file:
 
 ```ini
 autoloaderNamespaces[] = "DDTrace_"
@@ -173,9 +173,9 @@ resources.ddtrace = true
 
 ## View the trace
 
-Assuming the Agent is running with APM enabled and it is configured with your API key, and assuming the **ddtrace** extension is installed and instrumented properly into your app, visit a tracing-enabled enpoint of your app and view the [APM UI][13] to see the traces.
+Assuming the Agent is running with APM enabled and it is configured with your API key, and assuming the **ddtrace** extension is installed and instrumented properly into your application, visit a tracing-enabled enpoint of your application and view the [APM UI][13] to see the traces.
 
-**It might take a few minutes before traces appear in the UI.** Just refresh the page a few times until you see the screen change.
+**Note**: It might take a few minutes before traces appear in the UI.
 
 ## Trace a custom function or method
 
