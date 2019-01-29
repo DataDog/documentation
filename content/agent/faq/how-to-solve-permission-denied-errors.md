@@ -48,4 +48,4 @@ Then [restart the Agent][1].
 
 
 [1]: /agent/faq/agent-commands
-[2]: /agent/basic_agent_usage/#log-location
+[2]: /agent/faq/agent-log-files

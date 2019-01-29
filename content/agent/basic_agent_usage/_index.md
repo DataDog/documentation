@@ -60,37 +60,21 @@ Manage the Datadog Agent and [Integrations][1] using configuration management to
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configuration files
+## Agent extra info
 
-[Refer to the dedicated page for Agent configuration files][2].
+### Configuration files
 
-## Datadog Region
+[See the dedicated documentation for Agent configuration files][2].
+
+### Datadog site
 
 To send your Agent data to the [Datadog EU site][3], edit your [Agent main configuration file][4] `datadog.yaml` and set the `dd_site` parameter to:
 
 `dd_site:datadoghq.eu`
 
-## Log location
+### Log location
 
-{{< tabs >}}
-{{% tab "Linux" %}}
-
-Datadog Agent logs are located in the `/var/log/datadog/` directory
-
-{{% /tab %}}
-{{% tab "macOS" %}}
-
-Datadog Agent logs are located in the `/var/log/datadog/` directory
-
-{{% /tab %}}
-{{% tab "Windows" %}}
-
-Datadog Agent logs are located in the `C:\ProgramData\Datadog\logs` directory
-
-{{% /tab %}}
-{{< /tabs >}} 
-
-The Datadog logs do a rollover every 10MB. When a rollover occurs, **one** backup is kept (e.g. `agent.log.1`). If a previous backup exists, it is overwritten during the rollover.
+[See the dedicated documentation for Agent log files][5]
 
 ## Further Reading
 
@@ -100,3 +84,4 @@ The Datadog logs do a rollover every 10MB. When a rollover occurs, **one** backu
 [2]: /agent/faq/agent-configuration-files
 [3]: https://app.datadoghq.eu
 [4]: /agent/faq/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[5]: /agent/faq/agent-log-files
