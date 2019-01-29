@@ -79,7 +79,7 @@ Here is an example that uses the tags field together with the hosts: field in th
 ## Template variables and Logs
 
 Template variables work by default on Log widgets, as Metrics and Logs share the same tags.
-Additionally, it is possible to define specific Log Template variables based on your [Log Facets][3]. Those template variables starts with `@`.
+Additionally, it is possible to define specific Log Template variables based on your [Log Facets][3]. Those template variables start with `@`.
 
 {{< img src="graphing/dashboards/template_variables/log_template_variables.png" alt="log template variables" responsive="true" style="width:85%;">}}
 
