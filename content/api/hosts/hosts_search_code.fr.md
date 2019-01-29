@@ -1,8 +1,8 @@
 ---
-title: Rechercher des hôtes
+title: Rechercher des hosts
 type: apicode
 order: 13.1
-external_redirect: /api/#rechercher-des-hotes
+external_redirect: /api/#rechercher-des-hosts
 ---
 
 ##### Signature

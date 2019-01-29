@@ -57,13 +57,19 @@ kind: faq
 |Api|API|
 |Azure App Services|AZUREAPPSERVICES|
 |Azure Batch|AZUREBATCH|
+|Azure Blob Storage|AZUREBLOBSTORAGE|
+|Azure Db For Mysql|AZUREDBFORMYSQL|
+|Azure Db For Postgresql|AZUREDBFORPOSTGRESQL|
 |Azure Event Hub|AZUREEVENTHUB|
 |Azure Iot Hub|AZUREIOTHUB|
 |Azure Logic App|AZURELOGICAPP|
+|Azure Queue Storage|AZUREQUEUESTORAGE|
 |Azure Redis Cache|AZUREREDISCACHE|
+|Azure Service Bus|AZURESERVICEBUS|
 |Azure Sql Database|AZURESQLDATABASE|
 |Azure Sql Elastic Pool|AZURESQLELASTICPOOL|
 |Azure Storage|AZURESTORAGE|
+|Azure Table Storage|AZURETABLESTORAGE|
 |Azure Vm|AZUREVM|
 |Azure Vm Scale Set|AZUREVMSCALESET|
 |Azure|AZURE|

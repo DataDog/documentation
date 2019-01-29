@@ -2,9 +2,8 @@
 title: Mettre à jour un timeboard
 type: apicontent
 order: 21.2
-external_redirect: /api/#mettre-a-jour-un-timeboard
+external_redirect: '/api/#mettre-a-jour-un-timeboard'
 ---
-
 ## Mettre à jour un timeboard
 
 ##### Arguments
@@ -32,4 +31,4 @@ external_redirect: /api/#mettre-a-jour-un-timeboard
     * **`default`** [*facultatif*, *défaut*=**None**] :
     La valeur par défaut de la template variable lors du chargement du dashboard.
 
-[1]: /graphing
+[1]: /fr/graphing

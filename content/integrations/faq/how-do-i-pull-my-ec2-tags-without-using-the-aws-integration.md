@@ -48,4 +48,4 @@ This option only pulls in custom tags set on the EC2 host under the **Tags** tab
 
 Tags like `availability_zone`, `region`, or `instance_type` are only available by pulling in the EC2 host through the [AWS integration][1].
 
-[1]: /agent/faq/agent-commands/?tab=agentv5#restart-the-agent
+[1]: /integrations/amazon_web_services/?tab=allpermissions

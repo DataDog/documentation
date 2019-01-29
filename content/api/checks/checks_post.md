@@ -18,7 +18,7 @@ external_redirect: /api/#post-a-check-run
 * **`status`** *[optional]*:   
     An integer for the status of the check:
     * 0 : OK
-    * 1 : Warning
+    * 1 : WARNING
     * 2 : CRITICAL
     * 3 : UNKNOWN
   

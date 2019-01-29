@@ -203,12 +203,11 @@ Export your current Log Visualization with the *Export* functionality:
 | Button              | Description                                                                                                                                                                  |
 | ----                | -----                                                                                                                                                                        |
 | Export to Monitor   | Export the query applied to your Log Analytics in order to create the log monitor query for a new [log monitor][1] *This functionality is not available yet.*                |
-| Export to Timeboard | Export your Logstream as a widget to a [Timeboard][2]. **This functionality is still in beta, [contact the Datadog support team][3] to activate it for your organization.** |
+| Export to Timeboard | Export your Log Analytics as a widget to a [Timeboard][2]. |
 
 
 [1]: /monitors/monitor_types/log
 [2]: /graphing/dashboards/timeboard
-[3]: /help
 {{% /tab %}}
 {{< /tabs >}}
 

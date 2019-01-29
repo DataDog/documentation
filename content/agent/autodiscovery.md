@@ -161,7 +161,7 @@ The check name is extracted from the template file name. To run the `checkname` 
 
 ### Example: Apache check
 
-Here's the `apache.yaml` template packaged with datadog-agent:
+Here's the `apache.yaml` template packaged with `datadog-agent`:
 
 ```yaml
 ad_identifiers:
@@ -202,7 +202,7 @@ If this is too limiting&mdash;if you need to apply different check configuration
 
 ### Template Source: Key-value Store
 
-Autodiscovery can use [Consul][1], etcd, and Zookeeper as template sources. To use a key-value store, you must configure it in `datadog.yaml` or in environment variables passed to the datadog-agent container.
+Autodiscovery can use [Consul][1], etcd, and Zookeeper as template sources. To use a key-value store, you must configure it in `datadog.yaml` or in environment variables passed to the `datadog-agent` container.
 
 #### Configure in datadog.yaml
 
@@ -488,6 +488,8 @@ services:
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note**: Some supported integrations require additional steps for Autodiscovery to work: [Ceph][3], [Varnish][4], [Postfix][5], [Cassandra Nodetools][6], and [Gunicorn][7]. Contact [Datadog support][8] for assistance.
+
 ## Reference
 
 ### Supported Template Variables
@@ -507,7 +509,7 @@ The following template variables are handled by the Agent:
   - `%%pid%%`: retrieves the container process ID as returned by `docker inspect --format '{{.State.Pid}}' <container>`
 
 - Container hostname: `hostname` (added in Agent 6.4, Docker listener only)
-  - `%%hostname%%`: retrieves the `hostname` value from the container configuration. Only use it if the `%%host%%` variable cannot fetch a reliable IP (example: [ECS awsvpc mode][3]
+  - `%%hostname%%`: retrieves the `hostname` value from the container configuration. Only use it if the `%%host%%` variable cannot fetch a reliable IP (example: [ECS awsvpc mode][9]
 
 - Environment variable: `env` (added in Agent 6.1)
   - `%%env_MYENVVAR%%`: use the contents of the `$MYENVVAR` environment variable **as seen by the Agent process**
@@ -599,4 +601,10 @@ instances:
 
 [1]: /agent/faq/agent-5-autodiscovery
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
-[3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+[3]: /integrations/ceph
+[4]: /integrations/varnish/#autodiscovery
+[5]: /integrations/postfix
+[6]: /integrations/cassandra/#agent-check-cassandra-nodetool
+[7]: /integrations/gunicorn
+[8]: /help
+[9]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html

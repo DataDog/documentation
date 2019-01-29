@@ -1,8 +1,8 @@
 ---
-title: Nombre d'hôtes
+title: Nombre de hosts
 type: apicode
 order: 13.2
-external_redirect: /api/#nombre-d-hotes
+external_redirect: /api/#nombre-de-hosts
 ---
 
 ##### Signature

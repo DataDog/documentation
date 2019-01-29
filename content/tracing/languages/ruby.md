@@ -141,9 +141,10 @@ Ruby APM includes support for the following libraries and frameworks:
 | [Resque][55]                   | `>= 1.0, < 2.0`        | Fully Supported | *[Link][56]*     |
 | [RestClient][57]               | `>= 1.8`               | Fully Supported | *[Link][58]*     |
 | [Sequel][59]                   | `>= 3.41`              | Fully Supported | *[Link][60]*     |
-| [Sidekiq][61]                  | `>= 4.0`               | Fully Supported | *[Link][62]*     |
-| [Sinatra][63]                  | `>= 1.4.5`             | Fully Supported | *[Link][64]*     |
-| [Sucker Punch][65]             | `>= 2.0`               | Fully Supported | *[Link][66]*     |
+| [Shoryuken][61]                | `>= 4.0.2`             | Fully Supported | *[Link][62]*     |
+| [Sidekiq][63]                  | `>= 4.0`               | Fully Supported | *[Link][64]*     |
+| [Sinatra][65]                  | `>= 1.4.5`             | Fully Supported | *[Link][66]*     |
+| [Sucker Punch][67]             | `>= 2.0`               | Fully Supported | *[Link][68]*     |
 
 *Fully Supported* support indicates all tracer features are available.
 
@@ -190,7 +191,7 @@ Datadog.configure do |c|
 end
 ```
 
-For more tracer settings, check out the [API documentation][67].
+For more tracer settings, check out the [API documentation][61].
 
 ### Processing pipeline
 
@@ -198,7 +199,7 @@ The processing pipeline allows you to modify traces before they are sent to the 
 
 It provides **filtering** for removing spans that match certain criteria, and **processing** for modifying spans.
 
-For more details about how to activate and configure the processing pipeline, check out the [API documentation][68].
+For more details about how to activate and configure the processing pipeline, check out the [API documentation][62].
 
 ## Further reading
 
@@ -264,11 +265,11 @@ For more details about how to activate and configure the processing pipeline, ch
 [58]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#rest-client
 [59]: https://github.com/jeremyevans/sequel
 [60]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sequel
-[61]: https://github.com/mperham/sidekiq
-[62]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sidekiq
-[63]: https://github.com/sinatra/sinatra
-[64]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sinatra
-[65]: https://github.com/brandonhilkert/sucker_punch
-[66]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sucker-punch
-[67]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#tracer-settings
-[68]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#processing-pipeline
+[61]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#tracer-settings
+[62]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#processing-pipeline
+[63]: https://github.com/mperham/sidekiq
+[64]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sidekiq
+[65]: https://github.com/sinatra/sinatra
+[66]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sinatra
+[67]: https://github.com/brandonhilkert/sucker_punch
+[68]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sucker-punch

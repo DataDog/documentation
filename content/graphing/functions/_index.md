@@ -110,11 +110,11 @@ Note that the Datadog backend tries to keep the number of intervals to a number 
 Now you can mix data from different source into a single line.
 
 You have ~300 points for each source. Each of them represents a minute.
-In this example, for each minute, Datadog computes the sum across all sources, resulting in the following graph:
+In this example, for each minute, Datadog computes the average across all sources, resulting in the following graph:
 
 {{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_4.png" alt="metrics_graph_4" responsive="true" style="width:75%;">}}
 
-The value obtained (25.74GB) is the sum of the values reported by all sources (see previous image).
+The value obtained (25.74GB) is the average of the values reported by all sources (see previous image).
 
 Note: Of course, if there is only one source (for instance, if we had chosen the scope `{host:moby, device:/dev/disk}` for the query), using `sum`/`avg`/`max`/`min` has no effect as no space aggregation needs to be performed. [See here for more information][10].
 

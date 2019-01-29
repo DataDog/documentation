@@ -9,7 +9,7 @@ title: Tracing Docker Applications
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-Enable the [datadog-trace-agent](https://github.com/DataDog/datadog-trace-agent) in the `docker-dd-agent` container by passing `DD_APM_ENABLED=true` as an environment variable
+Enable the trace-agent in the `docker-dd-agent` container by passing `DD_APM_ENABLED=true` as an environment variable
 
 **Note: APM is NOT available on Alpine Images**
 

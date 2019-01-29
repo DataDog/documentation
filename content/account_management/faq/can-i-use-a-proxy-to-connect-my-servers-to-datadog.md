@@ -14,10 +14,10 @@ You have a few options to send traffic to Datadog over SSL/TLS for hosts that ar
 Here is a common scenario with an Amazon VPC:
 {{< img src="account_management/faq/Datadog_Amazon_VPC.jpg" alt="Datadog Amazon VPC" responsive="true" >}}
 
-In the above, the six EC2 instances in the VPC aren't Internet facing, however, they have communication to a single instance that is and are using it to route local traffic to Datadog via 443 TCP.
+In the above diagram, the six EC2 instances in the VPC aren't internet facing; however, they communicate with a single instance that is. The six instances are using it to route local traffic to Datadog via 443 TCP.
 {{< img src="account_management/faq/Datadog_Physical.jpg" alt="Datadog Physical" responsive="true" >}}
 
-In the above, the six physical servers in the data center aren't Internet facing, however, they have communication to a single instance acting as a proxy that is open and may be used to route local traffic (one way) from the hosts out to Datadog via 443 TCP/HTTPS for external communication.
+In the above diagram, the six physical servers in the data center aren't internet facing; however, they communicate to a single instance acting as a proxy that is open and may be used to route local traffic (one way) from the hosts out to Datadog via 443 TCP/HTTPS for external communication.
 
 [1]: /agent/proxy
 [2]: /agent/proxy/#using-the-agent-as-a-proxy

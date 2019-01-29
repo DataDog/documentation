@@ -1,0 +1,50 @@
+---
+- org_name: DataDog
+  
+  repos:
+  - repo_name: dogweb
+    
+    contents:
+
+    - action: source
+      branch: prod
+      globs:
+      - dd/utils/context/source.py
+
+    - action: integrations
+      branch: prod
+      globs:
+      - integration/**/*_metadata.csv
+      - integration/**/manifest.json
+      - integration/**/service_checks.json
+      - integration/**/README.md
+
+  - repo_name: integrations-core
+    contents:
+
+    - action: integrations
+      branch: master
+      globs:
+      - "*[!}]/metadata.csv"
+      - "*[!}]/manifest.json"
+      - "*[!}]/service_checks.json"
+      - "*[!}]/README.md"
+
+    - action: pull-and-push
+      branch: master
+      globs:
+      - docs/dev/*.md
+      options:
+        dest_dir: '/developers/integrations/'
+        path_to_remove: 'docs/dev/'
+
+  - repo_name: integrations-extras
+    contents:
+
+    - action: integrations
+      branch: master
+      globs:
+      - "**/metadata.csv"
+      - "**/manifest.json"
+      - "**/service_checks.json"
+      - "**/README.md"
