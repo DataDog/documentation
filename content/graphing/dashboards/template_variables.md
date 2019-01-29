@@ -47,7 +47,7 @@ Once you have defined a template variable, it appears in the options displayed i
 
 {{< img src="graphing/dashboards/template_variables/tv_in_graph.png" alt="Template variable in graphs" responsive="true" style="width:50%;">}}
 
-After the graph is saved, the value of this Template Variable are the one selected on top of your Dashboard:
+After the graph is saved, the value of this template variable is the one selected on top of your dashboard:
 
 {{< img src="graphing/dashboards/template_variables/selecting_template_variables.png" alt="Selecting template variables" responsive="true" style="width:75%;">}}
 
