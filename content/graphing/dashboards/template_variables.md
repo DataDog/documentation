@@ -53,7 +53,7 @@ After the graph is saved, the value of this template variable is the one selecte
 
 ## Template variables and events
 
-[The event overlay][2] search is helpful to correlate metrics to events and you can use template variables to find events that share certain tags with the metrics on your dashboard. The event overlay search is applied through an individual graph.
+[The event overlay][2] search is helpful to correlate metrics to events, and you can use template variables to find events that share certain tags with the metrics on your dashboard. The event overlay search is applied through an individual graph.
 
 Values from dashboard template variables can be directly captured by using the `$variable.value` syntax in the event search field.
 
