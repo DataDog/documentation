@@ -1536,7 +1536,7 @@ hello()
 
 **3. Manual Trace IDs Injection with Third-Party Logging**
 
-If you are not using the standard library `logging` module, you can use the `ddtrace.helpers.get_correlation_ids()` to inject tracer information into your logs. As an illustration of this approach, we can define a function as a *processor* in `structlog` to add `dd.trace_id` and `dd.span_id` to the log output:
+If you are not using the standard library `logging` module, you can use the `ddtrace.helpers.get_correlation_ids()` to inject tracer information into your logs. As an illustration of this approach, the following example defines a function as a *processor* in `structlog` to add `dd.trace_id` and `dd.span_id` to the log output:
 
 ``` python
 from ddtrace.helpers import get_correlation_ids
@@ -1565,7 +1565,7 @@ structlog.configure(
 log = structlog.get_logger()
 ```
 
-Once the logger is configured, executing a traced function that logs an event will yield the injected tracer information:
+Once the logger is configured, executing a traced function that logs an event yields the injected tracer information:
 
 ``` 
 >>> traced_func()
