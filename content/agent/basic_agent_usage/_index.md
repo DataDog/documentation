@@ -60,7 +60,7 @@ Manage the Datadog Agent and [Integrations][1] using configuration management to
 {{% /tab %}}
 {{< /tabs >}}
 
-## Agent extra info
+## Getting further with the Datadog Agent
 
 ### Configuration files
 
