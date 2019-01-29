@@ -4,6 +4,7 @@ $(document).ready(function () {
     {
         // hide toc
         $('.toc-container > div').hide();
+
         // hide mobile toc button
         $('.mobile-toc-toggle').removeClass('d-block').addClass('d-none');
     }
@@ -33,8 +34,6 @@ $(document).ready(function () {
                             'isH3': header.is('h3')
                         });
                     }
-                } else {
-                    //console.log('could not find h2[id="'+id+'"]');
                 }
                 link = $(this);
             });
@@ -138,17 +137,14 @@ $(document).ready(function () {
             $('.toc').css('top', height + offset + 'px');
         });
 
-
         buildMap();
         onScroll();
     } else {
         hideToc();
     }
 
-
     // Setup for large screen ToC
     var largeScreenThreshold = 1720;
-
 
     // hiding + displaying the ToC depending on the window width
     function widthCheck(){
@@ -170,9 +166,7 @@ $(document).ready(function () {
 
     // updating ToC width on large screens
     function tocWidthUpdate(){
-        console.log(innerWidth > largeScreenThreshold)
         if(innerWidth > largeScreenThreshold){
-            console.log("changing width")
             $('.toc-container.mobile-open').css("width", (innerWidth/2)-620 + "px");
         }
     }
