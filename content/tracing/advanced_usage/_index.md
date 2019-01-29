@@ -1579,15 +1579,19 @@ Then update your logger configuration to include `dd.trace_id` and `dd.span_id` 
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Use one the two following options to inject Python trace information into your logs:
+Use one the following options to inject Python trace information into your logs, depending on whether you are using `ddtrace-run` or the standard library **logging** module:
 
-**1. Automatic Trace IDs Injection**
+**1. Automatic Trace IDs Injection With Standard Library Logging**
 
-Set the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
+Enable injection with the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
 
-**2. Manual Trace IDs Injection**
+**Note**: The standard library `logging` is supported for auto-injection. Any libraries, such as `json_log_formatter`, that extend the standard library module are also supported for auto-injection.
 
-Patch your `logging` module by updating your log formatter to include the ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
+**Note**: `ddtrace-run` calls `logging.basicConfig` before executing your application. Since that function does nothing if the root logger has a handler configured, your applicaiton will have to modify the root logger and handler directly.
+
+**2. Manual Trace IDs Injection with Standard Library Logging**
+
+If you prefer to manually correlate your traces with your logs, patch your `logging` module by updating your log formatter to include the ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
 
 The configuration below is used by the automatic injection method and is supported by default in the Python Log Integration:
 
@@ -1610,8 +1614,46 @@ def hello():
 hello()
 ```
 
-[See our Python logging documentation][1] to ensure that the Python Log Integration is properly configured so that your Python logs are automatically parsed.
 
+**3. Manual Trace IDs Injection with Third-Party Logging**
+
+If you are not using the standard library `logging` module, you can use the `ddtrace.helpers.get_correlation_ids()` to inject tracer information into your logs. As an illustration of this approach, the following example defines a function as a *processor* in `structlog` to add `dd.trace_id` and `dd.span_id` to the log output:
+
+``` python
+from ddtrace.helpers import get_correlation_ids
+
+import structlog
+
+
+def tracer_injection(logger, log_method, event_dict):
+    # get correlation ids from current tracer context
+    trace_id, span_id = get_correlation_ids()
+
+    # add ids to structlog event dictionary
+    # if no trace present, set ids to 0
+    event_dict['dd.trace_id'] = trace_id or 0
+    event_dict['dd.span_id'] = span_id or 0
+
+    return event_dict
+
+
+structlog.configure(
+    processors=[
+        tracer_injection,
+        structlog.processors.JSONRenderer()
+    ]
+)
+log = structlog.get_logger()
+```
+
+Once the logger is configured, executing a traced function that logs an event yields the injected tracer information:
+
+``` 
+>>> traced_func()
+{"event": "In tracer context", "trace_id": 9982398928418628468, "span_id": 10130028953923355146}
+```
+
+[See our Python logging documentation][1] to ensure that the Python Log Integration is properly configured so that your Python logs are automatically parsed.
 
 [1]: https://docs.datadoghq.com/logs/log_collection/python/#configure-the-datadog-agent
 {{% /tab %}}
