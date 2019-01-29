@@ -172,7 +172,7 @@ Environments appear at the top of APM pages. Use the dropdown to scope the data 
 
 ### Add a second primary tag in Datadog
 
-If you added a tag other than `env:<ENVIRONMENT>` to your traces, it can be set as a primary tag along with the environment tag. Go to the [APM Settings][20] page to define, change, or remove your primary tags. 
+If you added a host tag other than `env:<ENVIRONMENT>` to your traces, it can be set as a primary tag along with the environment tag. Go to the [APM Settings][20] page to define, change, or remove your primary tags. 
 
 Note:
 
@@ -196,6 +196,7 @@ Primary tags appear at the top of APM pages. Use these selectors to slice the da
 
 [1]: /tracing/faq/agent-5-tracing-setup
 [2]: https://github.com/DataDog/dd-trace-py/blob/69693dc7cdaed3a2b6a855325109fa100e42e254/ddtrace/writer.py#L159
+[3]: 
 [4]: https://app.datadoghq.com/account/settings#agent
 [5]: https://github.com/DataDog/datadog-agent/tree/master/docs/trace-agent#run-on-macos
 [6]: /developers/libraries/#community-tracing-apm-libraries
