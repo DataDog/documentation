@@ -1,6 +1,8 @@
 ---
 title: Autodiscovery with Agent 5
-kind: faq
+kind: guide
+aliases:
+  - /agent/faq/agent-5-autodiscovery
 ---
 
 <div class="alert alert-info">

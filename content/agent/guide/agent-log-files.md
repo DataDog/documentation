@@ -2,6 +2,8 @@
 title: Agent log files
 kind: faq
 disable_toc: true
+aliases:
+  - /agent/faq/agent-log-files
 further_reading:
 - link: "agent/troubleshooting/"
   tag: "Documentation"

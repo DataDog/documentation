@@ -1,6 +1,8 @@
 ---
 title: Dogstream
-kind: documentation
+kind: guide
+aliases:
+  - /agent/faq/dogstream
 ---
 
 <div class="alert alert-danger">

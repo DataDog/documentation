@@ -1,6 +1,8 @@
 ---
 title: Upgrade to Datadog Agent v6
-kind: faq
+kind: guide
+aliases:
+  - /agent/faq/upgrade-to-agent-v6
 ---
 
 <div class="alert alert-info">
