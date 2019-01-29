@@ -17,9 +17,9 @@ The Agent enables, disables, and regenerates static check configurations from th
 
 ## How it Works
 
-In a traditional non-container environment, Datadog Agent configuration is-like the environment in which it runs-static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously runs every configured check.
-The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service (e.g. a Redis instance at 10.0.0.61:6379).
-When an Agent check cannot connect to such a service, metrics will be missing until you troubleshoot the issue. The Agent check retries its failed connection attempts until an administrator revives the monitored service or fixes the check's configuration.
+In a traditional non-container environment, Datadog Agent configuration is—like the environment in which it runs—static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously runs every configured check.
+
+The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service (e.g. a Redis instance at 10.0.0.61:6379). When an Agent check cannot connect to such a service, metrics are missing until you troubleshoot the issue. The Agent check retries its failed connection attempts until an administrator revives the monitored service or fixes the check's configuration.
 
 With Autodiscovery enabled, the Agent runs checks differently.
 
@@ -27,17 +27,17 @@ With Autodiscovery enabled, the Agent runs checks differently.
 
 Static configuration files aren't suitable for checks that collect data from ever-changing network endpoints, so Autodiscovery uses **templates** for check configuration. In each template, the Agent looks for two template variables—`%%host%%` and `%%port%%`—to appear in place of any normally-hardcoded network options. For example: a template for the Agent's [Go Expvar check][2] contains the option `expvar_url: http://%%host%%:%%port%%`. For containers that have more than one IP address or exposed port, you can direct Autodiscovery to pick the right ones by using [template variable indexes](#supported-template-variables).
 
-Because templates don't identify specific instances of a monitored service-which `%%host%%`? which `%%port%%`?-Autodiscovery needs one or more **container identifiers** for each template so it can determine which IP(s) and Port(s) to substitute into the templates. For Docker, container identifiers are image names or container labels.
+Because templates don't identify specific instances of a monitored service—which `%%host%%`? which `%%port%%`?—Autodiscovery needs one or more **container identifiers** for each template so it can determine which IP(s) and port(s) to substitute into the templates. For Docker, container identifiers are image names or container labels.
 
 Finally, Autodiscovery can load check templates from places other than disk. Other possible **template sources** include key-value stores like Consul, and, when running on Kubernetes, Pod annotations.
 
 ### Different Execution
 
-When the Agent starts with Autodiscovery enabled, it loads check templates from all available template sources-[not just one or another](#template-source-precedence)-along with the templates' container identifiers. Unlike in a traditional Agent setup, the Agent doesn't run all checks all the time; it decides which checks to enable by inspecting all containers currently running on the same host as the Agent.
+When the Agent starts with Autodiscovery enabled, it loads check templates from all available template sources—[not just one or another](#template-source-precedence)—along with the templates' container identifiers. Unlike in a traditional Agent setup, the Agent doesn't run all checks all the time; it decides which checks to enable by inspecting all containers currently running on the same host as the Agent.
 
 As the Agent inspects each running container, it checks if the container matches any of the container identifiers from any loaded templates. For each match, the Agent generates a static check configuration by substituting the matching container's IP address and port. Then it enables the check using the static configuration.
 
-The Agent watches for Docker events-container creation, destruction, starts, and stops-and enables, disables, and regenerates static check configurations on such events.
+The Agent watches for Docker events-container creation, destruction, starts, and stops—and enables, disables, and regenerates static check configurations on such events.
 
 ## How to set it up
 
@@ -87,7 +87,7 @@ The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory,
 - [Redis][18]
 - [Riak][19]
 
-These templates may suit you in basic cases, but if you need to use custom Agent check configurations-say you want to enable extra check options, use different container identifiers, or use [template variable indexing](#supported-template-variables))- you'll have to write your own auto-conf files. You can then provide those in a few ways:
+These templates may suit you in basic cases, but if you need to use custom Agent check configurations—say you want to enable extra check options, use different container identifiers, or use [template variable indexing](#supported-template-variables))—you'll have to write your own auto-conf files. You can then provide those in a few ways:
 
 1. Add them to each host that runs docker-dd-agent and [mount the directory that contains them][20] into the docker-dd-agent container when starting it
 2. Build your own docker image based on docker-dd-agent, adding your custom templates to `/etc/dd-agent/conf.d/auto_conf`
@@ -111,7 +111,7 @@ It looks like a minimal [Apache check configuration][21], but notice the `docker
 
 _Any_ `httpd` image. Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery applies the above template to both containers. When it's loading auto-conf files, Autodiscovery cannot distinguish between identically-named images from different sources or with different tags, and **you have to provide short names for container images**, e.g. `httpd`, NOT `library/httpd:latest`.
 
-If this is too limiting-if you need to apply different check configurations to different containers running the same image-use labels to identify the containers. Label each container differently, then add each label to any template file's `docker_images` list (yes, `docker_images` is where to put _any_ kind of container identifier, not just images).
+If this is too limiting—if you need to apply different check configurations to different containers running the same image—use labels to identify the containers. Label each container differently, then add each label to any template file's `docker_images` list (yes, `docker_images` is where to put _any_ kind of container identifier, not just images).
 
 ### Template Source: Key-value Store
 
@@ -359,7 +359,7 @@ So if you configure a `redisdb` template both in Consul and as a file (`conf.d/a
 
 ## Troubleshooting
 
-When you're not sure if Autodiscovery is loading certain checks you've configured, use the Agent's `configcheck` init script command. For example, to confirm that your Redis template is being loaded from a Kubernetes annotation-not the default `auto_conf/redisdb.yaml` file:
+When you're not sure if Autodiscovery is loading certain checks you've configured, use the Agent's `configcheck` init script command. For example, to confirm that your Redis template is being loaded from a Kubernetes annotation—not the default `auto_conf/redisdb.yaml` file:
 
 ```
 # docker exec -it <agent_container_name> /etc/init.d/datadog-agent configcheck
