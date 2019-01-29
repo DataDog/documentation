@@ -119,10 +119,10 @@ datadog-cluster-agent   1         1         1            1           1d
 NAME                   TYPE                                  DATA      AGE
 datadog-auth-token     Opaque                                1         1d
 
--> kubectl get pods -l app:datadog-cluster-agent
+-> kubectl get pods -l app=datadog-cluster-agent
 datadog-cluster-agent-8568545574-x9tc9   1/1       Running   0          2h
 
--> kubectl get service -l app:datadog-cluster-agent
+-> kubectl get service -l app=datadog-cluster-agent
 NAME                    TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(S)          AGE
 datadog-cluster-agent   ClusterIP      10.100.202.234   none               5005/TCP         1d
 ```

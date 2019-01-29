@@ -150,7 +150,7 @@ The response of the Agent to any flush is a JSON containing a `rate_by_service` 
 With that example, if you create a new trace with a root span of service **webapp**, the Agent will pick between a `sampling.priority` of 1 (with a 94% chance) or a priority of 0 (with a 6% chance).
 This mechanism is meant to ensure that good proportion of low QPS services are sampled(high QPS services have a lower rate) and that the total resulting volume sampled aligns with the `max_traces_per_second` parameter configured in the Agent.
 
-The client allows a sampling priority of **-1** (drop the trace fully) or **2** (force its sampling). This should be done only after any context propagation. If this happens after the propagation of a context, the system can't ensure that the entire trace is sampled properly.
+The client allows a sampling priority of **-1** (drop the trace fully) or **2** (force its sampling). This should be done only before any context propagation. If this happens after the propagation of a context, the system can't ensure that the entire trace is sampled properly.
 
 When serialized/flushed to the Agent, the `sampling.priority` is stored in the `_sampling_priority_v1` key of the `metrics` attribute. Example with JSON (similar with msgpack).
 

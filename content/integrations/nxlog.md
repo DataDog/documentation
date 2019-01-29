@@ -25,7 +25,7 @@ Configure NXLog to gather logs from your host, containers, & services.
 ### Log collection
 
 {{< tabs >}}
-{{% tab "Datadog US app.datadoghq.com" %}}
+{{% tab "Datadog US site" %}}
 
 1. Configure NXLog to send your logs to your Datadog platform
     Replace the whole file in `C:\Program Files\nxlog\conf` by the following:
@@ -127,7 +127,7 @@ Configure NXLog to gather logs from your host, containers, & services.
 
 [1]: /crt/intake.logs.datadoghq.com.crt
 {{% /tab %}}
-{{% tab "Datadog EU app.datadoghq.eu" %}}
+{{% tab "Datadog EU site" %}}
 
 1. Configure NXLog to send your logs to your Datadog platform
     Replace the whole file in `C:\Program Files\nxlog\conf` by the following:
@@ -218,7 +218,7 @@ Configure NXLog to gather logs from your host, containers, & services.
     ```
     <Output out>
       Module  om_ssl
-      Host    tcp-intake.logs.datadoghq.com
+      Host    tcp-intake.logs.datadoghq.eu
       Port    443
       Exec    $raw_event="<DATADOG_API_KEY> " + $raw_event;
       CAFile  <CERT_DIR>/intake.logs.datadoghq.eu.crt

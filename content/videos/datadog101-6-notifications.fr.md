@@ -16,7 +16,7 @@ Les vidéos Datadog 101 vous permettent d'apprendre tout ce dont vous avez besoi
 * [Ajout d'un commentaire dans le flux d'événements](?wtime=85)
 * [Annotations](?wtime=107)
 * [Monitors](?wtime=127)
-* [Monitor d'hôte](?wtime=146)
+* [Monitor de host](?wtime=146)
 * [Corps de message](?wtime=204)
 * [Template variables](?wtime=226)
 * [Monitor de métrique](?wtime=290)
@@ -27,6 +27,6 @@ Les vidéos Datadog 101 vous permettent d'apprendre tout ce dont vous avez besoi
 * [Monitor réseau](?wtime=509)
 * [Check custom](?wtime=535)
 * [Monitor d'événement](?wtime=548)
-* [Monitor de singularité](?wtime=562)
+* [Monitor outlier](?wtime=562)
 * [Managing your monitors](?wtime=574)
 

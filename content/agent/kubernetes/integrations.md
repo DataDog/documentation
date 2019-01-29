@@ -53,21 +53,6 @@ And in the manifest of your Agent (DaemonSet/deployment) add the following:
 [...]
 ```
 
-To enable [Log collection][2] add the following lines in your `http-config`:
-
-```yaml
-[...]
-data:
-  http-config: |-
-  [...]
-    logs:
-      - type: docker
-        service: docker
-        source: kubernetes
-```
-
-Learn more about this in [the Docker log collection documentation][3].
-
 ### Mounting a custom configuration file in a container with a ConfigMap
 
 To mount a custom `datadog.yaml` in a container with a ConfigMap, employ the following in your DaemonSet manifest:
@@ -123,13 +108,11 @@ data:
 ## Annotations
 
 It is also possible to enable integrations via the annotations in the manifest of your application.
-This can be done with Autodiscovery. For more details, see the [Autodiscovery][4] section.
+This can be done with Autodiscovery. For more details, see the [Autodiscovery][2] section.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/http_check
-[2]: /logs
-[3]: /logs/docker/#configuration-file-example
-[4]: /agent/autodiscovery
+[2]: /agent/autodiscovery

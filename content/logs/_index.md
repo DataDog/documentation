@@ -81,7 +81,7 @@ You should use the encrypted endpoint when possible. The Datadog Agent uses the 
 Endpoints that can be used to send logs to Datadog:
 
 {{< tabs >}}
-{{% tab "US Region" %}}
+{{% tab "US Site" %}}
 
 
 | Endpoints for SSL encrypted connections | Port    | Description                                                                                                                                                                 |
@@ -97,7 +97,7 @@ Endpoints that can be used to send logs to Datadog:
 | `intake.logs.datadoghq.com`          | `10514` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an unecrypted TCP connection. |
 
 {{% /tab %}}
-{{% tab "EU Region" %}}
+{{% tab "EU Site" %}}
 
 | Endpoints for SSL encrypted connections | Port  | Description                                                                                                                                                                 |
 |-----------------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

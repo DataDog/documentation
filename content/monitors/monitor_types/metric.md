@@ -34,7 +34,7 @@ further_reading:
 
 2. Select the metric and scope you want to monitor.
   {{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope" responsive="true" >}}
-  Monitors can be created on any metrics that you are currently sending to Datadog. The standard [scoping rules][5] apply here.
+  Monitors can be created on any metrics that you are currently sending to Datadog.
 
 3. Select the alert grouping.
     {{< img src="monitors/monitor_types/metric/alert_grouping.png" alt="alert grouping" responsive="true" >}}
@@ -55,13 +55,13 @@ further_reading:
   For a **threshold alert** you are able to chose a *time aggregation* of the data. The alerting engine generates a single series and performs selected aggregation.
   The details of each option:
 
-    * **on average**: The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` [functions][6] at the beginning of your monitor query.
+    * **on average**: The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` [functions][5] at the beginning of your monitor query.
 
-    * **at least once**: If any single value in the generated series crosses the threshold then an alert is triggered. This option adds a [function][6] to the beginning of your monitor query based on your selection: `min()` for below or `max()` for above.
+    * **at least once**: If any single value in the generated series crosses the threshold then an alert is triggered. This option adds a [function][5] to the beginning of your monitor query based on your selection: `min()` for below or `max()` for above.
 
-    * **at all times**: If every point in the generated series is outside the threshold then an alert is triggered. This option adds a [function][6] to the beginning of your monitor query based on your selection: `min()` for above or `max()` for below.
+    * **at all times**: If every point in the generated series is outside the threshold then an alert is triggered. This option adds a [function][5] to the beginning of your monitor query based on your selection: `min()` for above or `max()` for below.
 
-    * **in total**: If the summation of every point in the series is outside the threshold then an alert is triggered. It adds the `sum()` [functions][6] at the beginning of your monitor query.
+    * **in total**: If the summation of every point in the series is outside the threshold then an alert is triggered. It adds the `sum()` [functions][5] at the beginning of your monitor query.
 
   - When you select the **change alert** option, these additional parameters are available:
 
@@ -80,9 +80,9 @@ further_reading:
 7. Opt to **automatically resolve the monitor from a triggered state**.
     In general you'll want to leave this option off as you only want an alert to be resolved when it's fixed.
 
-    The most common use-case for this option is when you have very sparse counters, e.g. for errors. When errors stop occurring, the metric stops reporting. This prevents the monitor from resolving because there are no more values to trigger a resolution. A [recovery threshold][7] can also be set.
+    The most common use-case for this option is when you have very sparse counters, e.g. for errors. When errors stop occurring, the metric stops reporting. This prevents the monitor from resolving because there are no more values to trigger a resolution. A [recovery threshold][6] can also be set.
 
-8. Configure your **notification options** Refer to the [Notifications][8] documentation page for detailed options.
+8. Configure your **notification options** Refer to the [Notifications][7] documentation page for detailed options.
 
 ## Further Reading
 
@@ -92,7 +92,6 @@ further_reading:
 [2]: /monitors/monitor_types/anomaly
 [3]: /monitors/monitor_types/outlier
 [4]: /monitors/monitor_types/forecasts
-[5]: /graphing/#scope
-[6]: /graphing/miscellaneous/functions
-[7]: /monitors/faq/what-are-recovery-thresholds
-[8]: /monitors/notifications
+[5]: /graphing/miscellaneous/functions
+[6]: /monitors/faq/what-are-recovery-thresholds
+[7]: /monitors/notifications

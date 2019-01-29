@@ -45,7 +45,7 @@
       "url": "https://docs.datadoghq.com/(?P<section>.*?)/faq/",
       "selectors_key": "faq",
       "variables": {
-        "section": ["getting_started", "tagging", "agent", "watchdog", "graphing", "monitors", "tracing", "logs", "developers", "account_management", "security", "glossary"]
+        "section": ["getting_started", "tagging", "agent", "graphing", "monitors", "tracing", "logs", "developers", "account_management", "synthetics"]
       },
       "tags": [
         "faq"

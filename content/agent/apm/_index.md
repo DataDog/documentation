@@ -196,9 +196,9 @@ Primary tags appear at the top of APM pages. Use these selectors to slice the da
 
 [1]: /tracing/faq/agent-5-tracing-setup
 [2]: https://github.com/DataDog/dd-trace-py/blob/69693dc7cdaed3a2b6a855325109fa100e42e254/ddtrace/writer.py#L159
-[3]: https://github.com/DataDog/datadog-trace-agent/blob/master/config/agent.go#L95
+[3]: 
 [4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://github.com/DataDog/datadog-trace-agent#run-on-osx
+[5]: https://github.com/DataDog/datadog-agent/tree/master/docs/trace-agent#run-on-macos
 [6]: /developers/libraries/#community-tracing-apm-libraries
 [7]: https://app.datadoghq.com/apm/home?env=
 [8]: /tracing/visualization

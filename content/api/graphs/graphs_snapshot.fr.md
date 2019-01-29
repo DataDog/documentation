@@ -2,9 +2,8 @@
 title: Snapshot de graphique
 type: apicontent
 order: 12.1
-external_redirect: /api/#snapshot-de-graphique
+external_redirect: '/api/#snapshot-de-graphique'
 ---
-
 ## Snapshot de graphique
 
 **Remarque** : lorsqu'un snapshot est créé, [vous devez attendre un certain temps][1] avant de pouvoir y accéder.
@@ -25,4 +24,4 @@ external_redirect: /api/#snapshot-de-graphique
     Le titre du graphique. Si aucun titre n'est spécifié, le graphique n'a pas de titre.
 
 [1]: http://andreafalzetti.github.io/blog/2017/04/17/datadog-png-snapshot-not-showing.html
-[2]: /graphing/graphing_json/#grammar
+[2]: /fr/graphing/graphing_json/#grammar

@@ -2293,7 +2293,7 @@
 							"raw": "{\n    \"type\": \"query alert\",\n    \"query\": \"min(last_5m):avg:fse_auto_process.request.duration{build:prod} + avg:cassandra.db.recent_read_latency_micros{host:fse-ldmx-f7-18} + avg:cassandra.db.recent_write_latency_micros{host:fse-ldmx-f7-18} + avg:redis.info.latency_ms{*} + avg:gunicorn.request.duration.avg{*} >= 550\"\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/monitor?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://api.datadoghq.com/api/v1/monitor/validate?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",

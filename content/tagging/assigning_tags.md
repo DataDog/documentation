@@ -24,7 +24,9 @@ There are several places tags can be assigned: [configuration files](#configurat
 The hostname (tag key `host`) is [assigned automatically][6] by the Datadog Agent. To customize the hostname, use the Agent configuration file, `datadog.yaml`:
 
 ```yaml
-# Force the hostname to whatever you want. (default: auto-detected)
+# Set the hostname (default: auto-detected)
+# Must comply with RFC-1123, which permits only:
+# "A" to "Z", "a" to "z", "0" to "9", and the hyphen (-)
 hostname: mymachine.mydomain
 ```
 
@@ -129,6 +131,17 @@ Tracer.Instance.ActiveScope.Span.SetTag("env", "<ENVIRONMENT>");
 
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: Span metadata must respect a typed tree structure. Each node of the tree is split by a `.` and a node can be of a single type: it can't be both an object (with sub-nodes) and a string for instance.
+
+So this example of span metadata is invalid:
+
+```json
+{
+  "key": "value",
+  "key.subkey": "value_2"
+}
+```
 
 ## UI
 
@@ -265,7 +278,7 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 
 ## Integration Inheritance
 
-The most efficient method for assigning tags is to rely on your integrations. Tags assigned to your Amazon Web Services instances, Chef recipes, and more are all automatically assigned to the hosts and metrics when they are brought into Datadog.
+The most efficient method for assigning tags is to rely on your integrations. Tags assigned to your Amazon Web Services instances, Chef recipes, and more are all automatically assigned to the hosts and metrics when they are brought into Datadog. **Note**: `CamelCase` tags are converted to underscores by Datadog, for example `TestTag` --> `test_tag`.
 
 The following [integration][5] sources create tags automatically in Datadog:
 
