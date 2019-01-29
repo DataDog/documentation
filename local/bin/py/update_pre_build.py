@@ -619,6 +619,14 @@ class PreBuild:
                     content["branch"],
                     content["globs"],
                 )
+                content["globs"] = self.update_globs(   
+                    "{0}{1}{2}".format( 
+                    self.extract_dir,   
+                    content["repo_name"],   
+                    sep,    
+                    ),  
+                    content["globs"],   
+                )
 
     def update_globs(self, new_path, globs):
         """
