@@ -7,9 +7,18 @@
                 {{ $.Scratch.Set "link" .link}}
             {{ else }}
                 {{ if eq (substr .link 0 1) "/"}}
-                    {{ $.Scratch.Set "link" ((substr .link 1) | absLangURL) }}
+                    {{ if in .link "#" }}
+                        {{ $.Scratch.Set "link" ((substr .link 1) | relLangURL) }}
+                    {{ else }}
+                        {{ $.Scratch.Set "link" ((substr .link 1) | absLangURL) }}
+                    {{ end }}
                 {{ else }}
                     {{ $.Scratch.Set "link" (.link | absLangURL) }}
+                    {{ if in .link "#" }}
+                        {{ $.Scratch.Set "link" (.link | relLangURL) }}
+                    {{ else }}
+                        {{ $.Scratch.Set "link" (.link | absLangURL) }}
+                    {{ end }}
                 {{ end }}
             {{ end }}
             {{ $link := $.Scratch.Get "link" }}
