@@ -1504,7 +1504,7 @@ Use one the following options to inject Python trace information into your logs,
 
 Enable injection with the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
 
-**Note**: Currently the standard library `logging` is supported for auto-injection. Any libraries, such as `json_log_formatter`, that extend the standard library module are also supported for auto-injection.
+**Note**: The standard library `logging` is supported for auto-injection. Any libraries, such as `json_log_formatter`, that extend the standard library module are also supported for auto-injection.
 
 **Note**: `ddtrace-run` calls `logging.basicConfig` before executing your application. Since that function does nothing if the root logger has a handler configured, your applicaiton will have to modify the root logger and handler directly.
 
