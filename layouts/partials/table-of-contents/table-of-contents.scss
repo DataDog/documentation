@@ -30,10 +30,10 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
   padding-top:80px;
   &.mobile-open {
     top:60px;
-    position:fixed;
+    position:absolute;
     max-width: 266px;
     background: rgba(248, 248, 248, 0.8);
-    height: 100vh;
+    height: 94%;
     right: 0px;
     z-index: 3;
     

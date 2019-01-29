@@ -144,7 +144,7 @@ $(document).ready(function () {
     }
 
     // Setup for large screen ToC
-    var largeScreenThreshold = 1720;
+    var largeScreenThreshold = 1710;
 
     // hiding + displaying the ToC depending on the window width
     function widthCheck(){
