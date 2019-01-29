@@ -145,11 +145,16 @@ $(document).ready(function () {
         hideToc();
     }
 
+
+    // Setup for large screen ToC
+    var largeScreenThreshold = 1720;
+
+
     // hiding + displaying the ToC depending on the window width
     function widthCheck(){
         // if ToC elements exist
         if($('#TableOfContents ul').length) {
-            if(window.innerWidth > 1720){
+            if(innerWidth > largeScreenThreshold){
                 if($('.toc-container').hasClass('d-none') && $('.mobile-toc-toggle i').hasClass('icon-small-bookmark')){
                     $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
                     $('.mobile-toc-toggle i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
@@ -163,13 +168,23 @@ $(document).ready(function () {
         }
     }
 
+    // updating ToC width on large screens
+    function tocWidthUpdate(){
+        console.log(innerWidth > largeScreenThreshold)
+        if(innerWidth > largeScreenThreshold){
+            console.log("changing width")
+            $('.toc-container.mobile-open').css("width", (innerWidth/2)-620 + "px");
+        }
+    }
+
     // when the page loads, checking the window width
     widthCheck();
+    tocWidthUpdate();
     
-    if(window.innerWidth > 1720 && window.scrollY < 60){
+    if(innerWidth > largeScreenThreshold && window.scrollY < 60){
         $('.toc').css('top', '189px');
         $('.mobile-toc-toggle').css('top', '189px');
-    }else if(window.innerWidth > 1720 && window.scrollY > 60){
+    }else if(innerWidth > largeScreenThreshold && window.scrollY > 60){
         $('.toc').css('top', '124.5px');
         $('.mobile-toc-toggle').css('top', '124.5px');
     }
@@ -183,5 +198,6 @@ $(document).ready(function () {
 
     $(window).on('resize', function() {
         widthCheck();
+        tocWidthUpdate();
     });
 });
