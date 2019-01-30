@@ -125,16 +125,16 @@ Event parsing is done via the same custom parsing functions as described above, 
 
 Here are the event fields (bold means the field is required):
 
-| Field | Type | Value |
-| --- | --- | --- |
-| **msg_title** | string | Title of the event, gets indexed by our full-text search. |
-| **timestamp** | integer | Unix epoch timestamp. If omitted, it defaults to the time that the Agent parsed the event. |
-| **msg_text** | string | Body of the event, get indexed by our full-text search. |
-| alert_type | string enum | Indicates the severity of the event. Must be one of `error`, `warning`, `success` or `info`. If omitted, it defaults to `info`. Searchable by `alert_type:value` |
-| event_type | string | Describes what kind of event this is. Used as part of the aggregation key |
-| aggregation_key | string | Describes what this event affected, if anything. Used as part of the aggregation key |
-| host | string | Name of the host this event originated from. The event automatically gets tagged with any tags you've given this host using the [tagging page][1] or the [tagging api][2]. The host value is used as part of the aggregation key. |
-| **priority** | string | Determines whether the event is visible or hidden by default in the stream; Must be one of `low` or `normal` |
+| Field           | Type        | Value                                                                                                                                                                                                                             |
+|-----------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **msg_title**   | string      | Title of the event, gets indexed by our full-text search.                                                                                                                                                                         |
+| **timestamp**   | integer     | Unix epoch timestamp. If omitted, it defaults to the time that the Agent parsed the event.                                                                                                                                        |
+| **msg_text**    | string      | Body of the event, get indexed by our full-text search.                                                                                                                                                                           |
+| alert_type      | string enum | Indicates the severity of the event. Must be one of `error`, `warning`, `success` or `info`. If omitted, it defaults to `info`. Searchable by `alert_type:value`                                                                  |
+| event_type      | string      | Describes what kind of event this is. Used as part of the aggregation key                                                                                                                                                         |
+| aggregation_key | string      | Describes what this event affected, if anything. Used as part of the aggregation key                                                                                                                                              |
+| host            | string      | Name of the host this event originated from. The event automatically gets tagged with any tags you've given this host using the [tagging page][1] or the [tagging api][2]. The host value is used as part of the aggregation key. |
+| **priority**    | string      | Determines whether the event is visible or hidden by default in the stream; Must be one of `low` or `normal`                                                                                                                      |
 
 The events with the same aggregation key within a 24 hour time window gets aggregated together on the stream.
 The aggregation key is a combination of the following fields:

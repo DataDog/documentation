@@ -83,7 +83,7 @@ This way, complex configurations can be broken down into multiple files. For exa
 └── frontend.yaml
 ```
 
-Autodiscovery template files will be stored in the configuration folder as well. For example, consider `redisdb`:
+Autodiscovery template files are stored in the configuration folder as well. For example, consider `redisdb`:
 
 ```
 /datadog-agent/conf.d/redisdb.d/
