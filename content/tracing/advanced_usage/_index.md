@@ -1735,8 +1735,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
     // Retrieve Trace ID and Span ID
     traceID := span.Context().TraceID()
     spanID := span.Context().SpanID()
+
+    // Append them to log messages as fields:
+    log.Printf("my log message dd.trace_id=%d dd.span_id=%d", traceID, spanID)
 }
 ```
+
+The above example illustrates how to use the span's context in the standard library's `log` package. Similar logic may be applied to 3rd party packages too.
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
