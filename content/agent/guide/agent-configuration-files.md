@@ -1,5 +1,5 @@
 ---
-title: Agent configuration files
+title: Agent Configuration Files
 kind: faq
 aliases:
   - /agent/faq/agent-configuration-files

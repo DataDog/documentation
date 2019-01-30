@@ -1,5 +1,5 @@
 ---
-title: Autodiscovery with Agent 5
+title: Autodiscovery with Agent v5
 kind: guide
 aliases:
   - /agent/faq/agent-5-autodiscovery

@@ -1,5 +1,5 @@
 ---
-title: Agent commands
+title: Agent Commands
 kind: faq
 aliases:
     - /agent/faq/agent-status-and-information

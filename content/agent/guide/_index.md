@@ -4,10 +4,10 @@ kind: guide
 ---
 
 {{< whatsnext desc="Agent 5 Guides:" >}}
-    {{< nextlink href="agent/guide/agent-5-autodiscovery" >}}Autodiscovery in Agent 5{{< /nextlink >}}
-    {{< nextlink href="agent/guide/agent-5-kubernetes-basic-agent-usage" >}}Kubernetes Basic Agent Usage in Agent 5{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-5-autodiscovery" >}}Autodiscovery in Agent v5{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-5-kubernetes-basic-agent-usage" >}}Kubernetes Basic Agent Usage in Agent v5{{< /nextlink >}}
     {{< nextlink href="agent/guide/dogstream" >}}Dogstream{{< /nextlink >}}
-    {{< nextlink href="agent/guide/upgrade-to-agent-v6" >}}Upgrading to Agent 6{{< /nextlink >}}
+    {{< nextlink href="agent/guide/upgrade-to-agent-v6" >}}Upgrade to Datadog Agent v6{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 {{< whatsnext desc="General Guides:" >}}

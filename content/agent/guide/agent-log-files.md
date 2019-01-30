@@ -1,5 +1,5 @@
 ---
-title: Agent log files
+title: Agent Log Files
 kind: faq
 disable_toc: true
 aliases:
