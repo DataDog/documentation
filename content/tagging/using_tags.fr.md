@@ -93,16 +93,16 @@ Voici les zones de texte de filtrage et de regroupement de la page de la liste d
 
 {{% tab "Conteneurs" %}}
 
-Voici les zones de texte de filtrage et de regroupement de la page des Live Containers :
+Voici les zones de texte de filtrage et de regroupement de la page des live containers :
 
-{{< img src="tagging/using_tags/livecontainertags.png" alt="Tags Live Containers" responsive="true" style="width:80%;">}}
+{{< img src="tagging/using_tags/livecontainertags.png" alt="Tags live containers" responsive="true" style="width:80%;">}}
 {{% /tab %}}
 
 {{% tab "Processus" %}}
 
-Voici les zones de texte de filtrage et de regroupement de la page des Live Processes :
+Voici les zones de texte de filtrage et de regroupement de la page des live processes :
 
-{{< img src="tagging/using_tags/liveprocessestags.png" alt="Tags Live Processes" responsive="true" style="width:80%;">}}
+{{< img src="tagging/using_tags/liveprocessestags.png" alt="Tags live processes" responsive="true" style="width:80%;">}}
 {{% /tab %}}
 {{< /tabs >}}
 
