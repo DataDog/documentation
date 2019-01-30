@@ -4,6 +4,7 @@ kind: faq
 aliases:
     - /agent/faq/agent-status-and-information
     - /agent/faq/start-stop-restart-the-datadog-agent
+    - /agent/faq/agent-commands
 further_reading:
 - link: "/agent/troubleshooting"
   tag: "Documentation"

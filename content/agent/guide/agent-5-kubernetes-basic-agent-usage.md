@@ -1,16 +1,18 @@
 ---
 title: Agent v5 Kubernetes basic Agent usage
-kind: faq
+kind: guide
+aliases:
+  - /agent/faq/agent-5-kubernetes-basic-agent-usage
 ---
 
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" >}}
 
 ## Overview
 
-Get metrics from kubernetes service in real time to:
+Get metrics from Kubernetes in real time to:
 
-* Visualize and monitor kubernetes states
-* Be notified about kubernetes failovers and events.
+* Visualize and monitor Kubernetes states
+* Be notified about Kubernetes failovers and events.
 
 For Kubernetes, it's recommended to run the [Agent in a DaemonSet][1]. We have created a [Docker image][2] with both the Docker and the Kubernetes integrations enabled.
 
@@ -105,7 +107,7 @@ See the [example kubernetes.yaml][10] for all available configuration options.
 ### Validation
 #### Container Running
 
-To verify the Datadog Agent is running in your environment as a daemonset, execute:
+To verify the Datadog Agent is running in your environment as a DaemonSet, execute:
 
     kubectl get daemonset
 
@@ -195,7 +197,7 @@ Then edit the `kubernetes_state.yaml` file to point to your server and port and 
 
 ### Validation
 #### Container validation
-To verify the Datadog Agent is running in your environment as a daemonset, execute:
+To verify the Datadog Agent is running in your environment as a DaemonSet, execute:
 
     kubectl get daemonset
 
@@ -227,7 +229,7 @@ Edit the `kube_dns.yaml` file to point to your server and port, set the masters 
 
 #### Using with service discovery
 
-If you are using one `dd-agent` pod per kubernetes worker node, you could use the following annotations on your kube-dns pod to retrieve the data automatically.
+If you are using one `dd-agent` pod per Kubernetes worker node, you could use the following annotations on your kube-dns pod to retrieve the data automatically.
 
 ```yaml
 
