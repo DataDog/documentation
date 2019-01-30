@@ -9,7 +9,7 @@ comments: <!–– Original flowchart is in lucidchart. Search Trello for link o
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
-For Agent 6, some differences in hostname resolution apply. See our document on [Differences in hostname resolution between Agent v5 and Agent v6][1].
+For Agent 6, some differences in hostname resolution apply. See the documentation on [differences in hostname resolution between Agent v5 and Agent v6][1].
 
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/hostname-resolution.md
@@ -21,7 +21,7 @@ For Agent 6, some differences in hostname resolution apply. See our document on 
 {{% /tab %}}
 {{< /tabs >}}
 
-The Datadog Agent collects potential hostnames from a number of different sources. To see all the names the Agent is detecting, [run the Agent status command][1], for example:
+The Datadog Agent collects potential hostnames from a number of different sources. To see all the names the Agent is detecting, [run the Agent status command][1]. For example:
 ```
 $ sudo /etc/init.d/datadog-agent status
 
@@ -42,10 +42,10 @@ Hostnames
 
 From these names, a canonical name is picked for the host. This is the name the Agent primarily uses to identify itself to Datadog. The other names are submitted as well, but only as candidates for aliasing.
 
-The canonical host name is picked according to the following rules. The first match is selected.
+The canonical hostname is picked according to the following rules. The first match is selected.
 
-* **agent-hostname**: If a host name is explicitly set in the Agent configuration file.
-* **hostname**: If the DNS host name is not an EC2 default (e.g. ip-192-0-0-1).
+* **agent-hostname**: If a hostname is explicitly set in the Agent configuration file.
+* **hostname**: If the DNS hostname is not an EC2 default (e.g. ip-192-0-0-1).
 * **instance-id**: If the Agent can reach the EC2 metadata endpoint from the host.
 * **hostname**: Fall back on the DNS host name even if it is an EC2 default.
 
@@ -53,7 +53,7 @@ If name is recognized as obviously non-unique (e.g. localhost.localdomain), the 
 
 ### Host Aliases
 
-A single host running in EC2 might have an instance ID (i-abcd1234), a generic hostname provided by EC2 based on the host's IP address (ip-192-0-0-1), and a meaningful host name provided by an internal DNS server or a config-managed hosts file (myhost.mydomain). Datadog creates aliases for host names when there are multiple uniquely identifiable names for a single host.
+A single host running in EC2 might have an instance ID (i-abcd1234), a generic hostname provided by EC2 based on the host's IP address (ip-192-0-0-1), and a meaningful hostname provided by an internal DNS server or a config-managed hosts file (myhost.mydomain). Datadog creates aliases for hostnames when there are multiple uniquely identifiable names for a single host.
 
 The names collected by the Agent (detailed above) are added as aliases for the chosen canonical name.
 

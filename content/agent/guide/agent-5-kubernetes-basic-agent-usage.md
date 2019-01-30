@@ -1,16 +1,18 @@
 ---
-title: Agent v5 Kubernetes basic Agent usage
-kind: faq
+title: Kubernetes Basic Agent Usage in Agent v5
+kind: guide
+aliases:
+  - /agent/faq/agent-5-kubernetes-basic-agent-usage
 ---
 
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" >}}
 
 ## Overview
 
-Get metrics from kubernetes service in real time to:
+Get metrics from Kubernetes in real time to:
 
-* Visualize and monitor kubernetes states
-* Be notified about kubernetes failovers and events.
+* Visualize and monitor Kubernetes states
+* Be notified about Kubernetes failovers and events.
 
 For Kubernetes, it's recommended to run the [Agent in a DaemonSet][1]. We have created a [Docker image][2] with both the Docker and the Kubernetes integrations enabled.
 
@@ -105,11 +107,11 @@ See the [example kubernetes.yaml][10] for all available configuration options.
 ### Validation
 #### Container Running
 
-To verify the Datadog Agent is running in your environment as a daemonset, execute:
+To verify the Datadog Agent is running in your environment as a DaemonSet, execute:
 
     kubectl get daemonset
 
-If the Agent is deployed you will see output similar to the text below, where desired and current are equal to the number of nodes running in your cluster.
+If the Agent is deployed, a similar output to the text below is displayed, where **desired** and **current** are equal to the number of nodes running in your cluster.
 
     NAME       DESIRED   CURRENT   NODE-SELECTOR   AGE
     dd-agent   3         3         <none>          11h
@@ -186,7 +188,7 @@ kubectl create -f kube-state-metrics.yaml
 The manifest above uses Google's publicly available `kube-state-metrics` container, which is also available on [Quay][13]. If you want to build it manually, refer [to the official project documentation][12].
 
 If you configure your Kubernetes State Metrics service to run on a different URL or port, you can configure the Datadog Agent by setting the `kube_state_url` parameter in `conf.d/kubernetes_state.yaml`, then restarting the Agent.
-For more information, see the [kubernetes_state.yaml.example file][14]. If you have enabled [Autodiscovery][9], the kube state URL will be configured and managed automatically.
+For more information, see the [kubernetes_state.yaml.example file][14]. If you have enabled [Autodiscovery][9], the kube state URL is configured and managed automatically.
 
 #### Host Installation
 
@@ -195,18 +197,18 @@ Then edit the `kubernetes_state.yaml` file to point to your server and port and 
 
 ### Validation
 #### Container validation
-To verify the Datadog Agent is running in your environment as a daemonset, execute:
+To verify the Datadog Agent is running in your environment as a DaemonSet, execute:
 
     kubectl get daemonset
 
-If the Agent is deployed you will see similar output to the text below, where desired and current are equal to the number of running nodes in your cluster.
+If the Agent is deployed you a similar output to the text below, where **desired** and **current** are equal to the number of running nodes in your cluster.
 
     NAME       DESIRED   CURRENT   NODE-SELECTOR   AGE
     dd-agent   3         3         <none>          11h
 
 #### Agent check validation
 
-[Run the Agent's `info` subcommand][17] and look for `kubernetes_state` under the Checks section:
+[Run the Agent's info subcommand][17] and look for `kubernetes_state` under the Checks section:
 
     Checks
     ======
@@ -227,7 +229,7 @@ Edit the `kube_dns.yaml` file to point to your server and port, set the masters 
 
 #### Using with service discovery
 
-If you are using one `dd-agent` pod per kubernetes worker node, you could use the following annotations on your kube-dns pod to retrieve the data automatically.
+If you are using one `dd-agent` pod per Kubernetes worker node, you could use the following annotations on your kube-dns pod to retrieve the data automatically.
 
 ```yaml
 
@@ -242,12 +244,12 @@ metadata:
 
 **Remarks:**
 
- - Notice the "dns-pod" tag will keep track of the target DNS pod IP. The other tags will be related to the dd-agent that is polling the informations using the service discovery.
+ - Notice the "dns-pod" tag keeps track of the target DNS pod IP. The other tags are related to the `dd-agent` that is polling the information using service discovery.
  - The service discovery annotations need to be applied to the pod. In case of a deployment, add the annotations to the metadata of the template's spec.
 
 ### Validation
 
-[Run the Agent's `info` subcommand][17] and look for `kube_dns` under the Checks section:
+[Run the Agent's info subcommand][17] and look for `kube_dns` under the Checks section:
 
     Checks
     ======

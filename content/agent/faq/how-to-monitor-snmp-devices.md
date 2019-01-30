@@ -12,25 +12,25 @@ further_reading:
 
 Simple Network Management Protocol (SNMP) is the de facto standard for monitoring network-connected devices, such as routers, switches, servers, and firewalls.
 
-In this article, we go through monitoring a Juniper SRX firewall, using the Datadog Agent installed on an Ubuntu 14-04 workstation.
+This article goes through monitoring a Juniper SRX firewall, using the Datadog Agent installed on an Ubuntu 14-04 workstation.
 
 SNMP uses OIDs, or Object Identifiers, to uniquely identify managed objects. OIDs follow a hierarchical tree pattern: under the root is ISO which is numbered 1, then next level is ORG and numbered 3 and so on, with each level being separated by a ..
 
-A MIB, or Management Information Base acts as a translator between OIDs and human readable names, and organizes a subset of the hierarchy. Because of the way the tree is structured, most SNMP values we're interested in always start with the same set of objects: 1.3.6.1.1 for MIB-2 which is a standard that holds system information like uptime, interfaces, network stack, and 1.3.6.1.4.1 which holds vendor specific information.
+A MIB, or Management Information Base, acts as a translator between OIDs and human readable names, and organizes a subset of the hierarchy. Because of the way the tree is structured, most SNMP values you're interested in always start with the same set of objects: 1.3.6.1.1 for MIB-2 which is a standard that holds system information like uptime, interfaces, network stack, and 1.3.6.1.4.1 which holds vendor specific information.
 
-Let's start by installing some useful snmp tools on our ubuntu machine:
+Begin by installing some useful SNMP tools on your Ubuntu machine:
 
-First let's enable the multiverse repo.
+First, enable the multiverse repo.
 
-Then we install 2 packages:
+Then install 2 packages:
 
 ```
 sudo apt-get install snmp snmp-mibs-downloader
 ```
 
-This installs the snmp tool suite and download MIBs.
+This installs the SNMP tool suite and download MIBs.
 
-Now use the snmpwalk utility to make sure we can communicate over SNMP with the device. We have to supply the version of the SNMP protocol supported by our device, the community string (which acts as a passphrase), the IP address of the device and ask to use all MIB files available:
+Now use the snmpwalk utility to make sure you can communicate over SNMP with the device. Supply the version of the SNMP protocol supported by your device, the community string (which acts as a passphrase), the IP address of the device, and ask to use all MIB files available:
 
 ```
 $ snmpwalk -v 2c -c public -mALL 192.168.33.10 1.3
@@ -50,7 +50,7 @@ IF-MIB::ifIndex.5 = INTEGER: 5
 
 There are two types of MIBs: scalar and tabular. Scalar objects define a single object instance whereas tabular objects define multiple related object instances grouped in MIB tables.
 
-First we want to monitor sysServices, which is a scalar, so we can specify its OID directly in our YAML file:
+First, monitor sysServices, which is a scalar, so taht you can specify its OID directly in your YAML file:
 
 ```yaml
 init_config:
@@ -69,9 +69,9 @@ instances:
          name: sysServices
 ```
 
-Now we want to poll metrics coming from a table, the ifTable. It comes from the IF-MIB MIB and gives network interface information: http://www.oidview.com/mibs/0/IF-MIB.html.
+Now you want to poll metrics coming from a table, the ifTable. It comes from the IF-MIB MIB and gives network interface information: http://www.oidview.com/mibs/0/IF-MIB.html.
 
-First we check we can find this table:
+First check you can find this table:
 
 ```
 $ snmptable -v 2c -c public -Cw 70 -Ci -mALL 192.168.33.10 ifTable
@@ -113,7 +113,7 @@ SNMP table: IF-MIB::ifTable
 [...]
 ```
 
-Now we tell the Agent to poll it and to use the value of the ifDescr column as tag, so we can differentiate the ports:
+Now, tell the Agent to poll it and to use the value of the ifDescr column as tag, so you can differentiate the ports:
 
 ```yaml
 init_config:
@@ -148,7 +148,7 @@ instances:
 
 Note that the column name must be present in the output of snmptable.
 
-Now we [restart the Agent][1] and we make sure that the check is collecting metrics, it can take up to 1 minute to update:
+Now [restart the Agent][1] and make sure that the check is collecting metrics. It can take up to 1 minute to update.
 
 ```
 $ sudo service datadog-agent info
@@ -166,7 +166,7 @@ Collector (v 5.4.2)
 [...]
 ```
 
-In the Metrics Explorer or a dashboard, we can plot snmp.ifInOctets, filter by device and break it down by port, cf screenshot.
+In the Metrics Explorer or a dashboard, you can plot `snmp.ifInOctets`, filter by device, and break it down by port and cf screenshot.
 
 {{< img src="agent/faq/metric_explorer_plot.png" alt="Metric Explorer Plot" responsive="true" >}}
 

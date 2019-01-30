@@ -1,9 +1,10 @@
 ---
-title: Agent commands
+title: Agent Commands
 kind: faq
 aliases:
     - /agent/faq/agent-status-and-information
     - /agent/faq/start-stop-restart-the-datadog-agent
+    - /agent/faq/agent-commands
 further_reading:
 - link: "/agent/troubleshooting"
   tag: "Documentation"
@@ -178,7 +179,7 @@ List of commands to display the status of your Datadog Agent and enabled integra
 | Source     | `sudo datadog-agent status`                          |
 | Windows    | [See the dedicated Windows documentation][2]         |
 
-A properly configured integration will be displayed under **Running Checks** with no warnings or errors, as seen below:
+A properly configured integration is displayed under **Running Checks** with no warnings or errors, as seen below:
 
 ```
   Running Checks
@@ -208,7 +209,7 @@ A properly configured integration will be displayed under **Running Checks** wit
 | Source     | `sudo ~/.datadog-agent/bin/info`                                       |
 | Windows    | [See the dedicated Windows documentation][1]                           |
 
-A properly configured integration will be displayed under **Checks** with no warnings or errors, as seen below:
+A properly configured integration is displayed under **Checks** with no warnings or errors, as seen below:
 
 ```
   Checks
@@ -235,4 +236,3 @@ A properly configured integration will be displayed under **Checks** with no war
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
