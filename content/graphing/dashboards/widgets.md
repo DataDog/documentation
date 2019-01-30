@@ -162,7 +162,7 @@ Example of Query Value widget for the [API][1]
 
 The Query Value Widget only displays one Value, unlike a timeseries for example, that displays several points.
 
-Let's say you are on a Timeseries and you are currently displaying the past hour, this button allows you to either display the `avg` / `max` / `min` / `avg` / `sum` / `last value` of ALL points that are rendered during that 1 hour range timeframe - depending on the aggregation chosen above.
+Let's say you are on a Timeseries and you are currently displaying the past hour, this button allows you to either display the `avg` / `max` / `min` / `sum` / `last value` of ALL points that are rendered during that 1 hour range timeframe - depending on the aggregation chosen above.
 
 ## Scatter Plot
 
