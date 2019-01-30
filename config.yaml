@@ -230,6 +230,13 @@ languages:
           weight: 80
           parent: menu_references_agent
 
+        # Guides
+        - identifier: customnav_agentnav_guides
+          name: "Guides"
+          url: "agent/guide/"
+          weight: 90
+          parent: menu_references_agent
+
         #- identifier: customnav_agentnav_faq
         #  name: "FAQ"
         #  url: "agent/faq/"
