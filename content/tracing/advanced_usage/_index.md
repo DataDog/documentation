@@ -1618,8 +1618,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-The above example illustrates how to use the span's context in the standard library's `log` package. Similar logic
-may be applied to 3rd party packages too.
+The above example illustrates how to use the span's context in the standard library's `log` package. Similar logic may be applied to 3rd party packages too.
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
