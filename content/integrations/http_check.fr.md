@@ -53,7 +53,7 @@ instances:
     # days_warning: 28                   # valeur par défaut : 14
     # days_critical: 14                  # valeur par défaut : 7
     # timeout: 3                         # en secondes. Valeur par défaut : 10.
-  - name: Exemple de site Web (préparation)
+  - name: Exemple de site Web (staging)
     url: http://staging.example.com/
 ```
 
