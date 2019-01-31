@@ -4,6 +4,10 @@ kind: documentation
 aliases:
   - /overview
   - /guides/overview/
+further_reading:
+- link: "https://learn.datadoghq.com/course/view.php?id=2"
+  tag: "Learning Center"
+  text: "Introduction to Datadog"
 ---
 
 So, you've just finished [installing][1] the Datadog Agent, or maybe you're just curious about [what Datadog can do for you][2]. This page gives a high level overview of Datadog's capabilities and how it can help you bring your infrastructure to heel.
@@ -97,6 +101,10 @@ metric is above or below a certain threshold:
 * Set alert notification message, including @ capabilities
 
 {{< img src="getting_started/alert_setup.png" alt="alert setup" responsive="true" >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent
 [2]: http://www.datadoghq.com/product

@@ -7,6 +7,10 @@ aliases:
     - /graphing/faq/is-there-a-way-for-me-to-set-the-maximum-and-minimum-values-on-the-y-axis-of-a-graph
     - /graphing/faq/is-it-possible-to-adjust-the-y-axis-for-my-graphs
 description: Visualize your data to gain insight
+further_reading:
+- link: "https://learn.datadoghq.com/course/view.php?id=8"
+  tag: "Learning Center"
+  text: "Building Better Dashboards"
 ---
 
 Graphs are the window onto your monitored systems. Most of the times that you visit Datadog, you look at [dashboards][1] made up of graphs. Other times you see email notifications that include a graph of some fluctuation in the system. And yet other times you see graphs in your Slack, HipChat, and other chat clients documenting the changes in metrics over the course of time. Graphs are at the heart of monitoring and observability, so it is essential to understand how to define great graphs.
@@ -176,6 +180,10 @@ If you don't enter a title, we automatically generate a title based on the selec
 ## Save
 
 The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing/dashboards
 [2]: /graphing/graphing_json

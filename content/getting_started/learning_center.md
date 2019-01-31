@@ -12,7 +12,6 @@ Datadog is an extensive, easy-to-use platform for understanding your infrastruct
     {{< nextlink href="https://learn.datadoghq.com/course/view.php?id=10" tag="Learning Center" >}}Going Deeper with Logs: Parsing{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/course/view.php?id=5" tag="Learning Center" >}}Introduction to Logs in Datadog{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/course/view.php?id=4" tag="Learning Center" >}}Introduction to Application Performance Monitoring{{< /nextlink >}}
-    {{< nextlink href="https://learn.datadoghq.com/course/view.php?id=2" tag="Learning Center" >}}Introduction to Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://learn.datadoghq.com
