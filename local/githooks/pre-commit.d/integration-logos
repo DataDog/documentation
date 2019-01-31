@@ -4,7 +4,7 @@ import os
 
 int_md = filter(lambda x: x.endswith('.md'), os.listdir('content/integrations'))
 int_png = filter(lambda x: x.endswith('.png'), os.listdir('src/images/integrations_logos'))
-int_ignore = ['_index.png', 'datadog_checks_dev.png','integration.png', 'integrations-extras.png']
+int_ignore = ['_index.png', 'agent_metrics.png', 'datadog_checks_dev.png','integration.png', 'integrations-extras.png']
 
 for md in int_md:
   png = md.split('.')[0] + '.png'
