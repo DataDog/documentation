@@ -224,16 +224,16 @@ languages:
           weight: 60
           parent: menu_references_agent
 
-        - identifier: customnav_agentnav_security
-          name: "Security"
-          url: "agent/security"
-          weight: 80
-          parent: menu_references_agent
-
         # Guides
         - identifier: customnav_agentnav_guides
           name: "Guides"
           url: "agent/guide/"
+          weight: 80
+          parent: menu_references_agent
+
+        - identifier: customnav_agentnav_security
+          name: "Security"
+          url: "agent/security"
           weight: 90
           parent: menu_references_agent
 
@@ -954,6 +954,13 @@ languages:
         #  weight: 90
         #  parent: menu_references_logs
 
+        # Guides
+        - identifier: customnav_logsnav_guides
+          name: "Guides"
+          url: "logs/guide/"
+          weight: 80
+          parent: menu_references_logs
+
         - identifier: customnav_loggnav_security
           name: "Security"
           url: "logs/security"
@@ -1462,6 +1469,13 @@ languages:
           name: "Troubleshooting"
           url: "agent/troubleshooting/"
           weight: 60
+          parent: menu_references_agent
+
+        # Guides
+        - identifier: customnav_agentnav_guides
+          name: "Guides"
+          url: "agent/guide/"
+          weight: 80
           parent: menu_references_agent
 
         #- identifier: customnav_agentnav_faq
@@ -2198,6 +2212,13 @@ languages:
         #  url: "logs/faq/"
         #  weight: 90
         #  parent: menu_references_logs
+
+        # Guides
+        - identifier: customnav_logsnav_guides
+          name: "Guides"
+          url: "logs/guide/"
+          weight: 90
+          parent: menu_references_agent
 
         - identifier: customnav_loggnav_security
           name: "Sécurité"
