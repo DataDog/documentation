@@ -32,6 +32,11 @@ languages:
           url: "getting_started/"
           pre: "nav_start"
           weight: 30
+        - identifier: menu_gettingstartednav_learning_center
+          name: "Learning Center"
+          url: "getting_started/learning_center"
+          weight: 310
+          parent: menu_references_getting_started
 
         # TAGGING
         - identifier: menu_references_tagging
@@ -1241,6 +1246,11 @@ languages:
           url: "getting_started/"
           pre: "nav_start"
           weight: 30
+        - identifier: menu_gettingstartednav_learning_center
+          name: "Learning Center"
+          url: "getting_started/learning_center"
+          weight: 310
+          parent: menu_references_getting_started
 
         # TAGGING
         - identifier: menu_references_tagging
