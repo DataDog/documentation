@@ -86,7 +86,7 @@ class { 'datadog_agent':
 {{% /tab %}}
 {{% tab "Ansible" %}}
 
-Add the following attributes in your playbook (on CentOS, this will only work with Ansible 2.4+):
+Add the following attributes in your playbook (on CentOS, this only works with Ansible 2.4+):
 
 ```yaml
 datadog_agent_version: "6.X.Y-1"

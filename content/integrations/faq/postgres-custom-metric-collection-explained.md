@@ -94,4 +94,4 @@ Additionally, the [Agent's logs][5] may provide useful information.
 [2]: /agent/faq/agent-commands/?tab=agentv6#restart-the-agent
 [3]: /graphing/metrics/explorer
 [4]: /agent/faq/agent-commands/#agent-status-and-information
-[5]: /agent/basic_agent_usage/#log-location
+[5]: /agent/faq/agent-log-files

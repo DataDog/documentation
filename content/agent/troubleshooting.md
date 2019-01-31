@@ -313,7 +313,7 @@ sudo journalctl -u dd-agent.service
 [3]: /agent/proxy
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: /agent/faq/agent-commands/#agent-status-and-information
-[6]: /agent/basic_agent_usage/#log-location
+[6]: /agent/faq/agent-log-files
 [7]: /help
 [8]: /agent/faq/agent-configuration-files/?tab=agentv6
 [9]: /agent/faq/agent-commands

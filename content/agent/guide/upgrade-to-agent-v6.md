@@ -1,6 +1,8 @@
 ---
 title: Upgrade to Datadog Agent v6
-kind: faq
+kind: guide
+aliases:
+  - /agent/faq/upgrade-to-agent-v6
 ---
 
 <div class="alert alert-info">
@@ -368,7 +370,7 @@ The Agent v6 installer can automatically convert v5 configurations during the up
 DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
 
-**Note:** The import process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
+**Note:** The import process won't automatically move **custom** Agent checks. This is by design as full backwards compatibility out of the box is not guaranteed.
 
 ### Manual Upgrade
 

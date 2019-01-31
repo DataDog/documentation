@@ -51,6 +51,39 @@
         "faq"
       ],
       "page_rank": -100
+    },
+    {
+      "url": "https://docs.datadoghq.com/fr/(?P<section>.*?)/faq/",
+      "selectors_key": "faq",
+      "variables": {
+        "section": ["getting_started", "tagging", "agent", "graphing", "monitors", "tracing", "logs", "developers", "account_management", "synthetics"]
+      },
+      "tags": [
+        "faq"
+      ],
+      "page_rank": -100
+    },
+    {
+      "url": "https://docs.datadoghq.com/(?P<section>.*?)/guide/",
+      "selectors_key": "guide",
+      "variables": {
+        "section": ["agent"]
+      },
+      "tags": [
+        "guide"
+      ],
+      "page_rank": 10
+    },
+    {
+      "url": "https://docs.datadoghq.com/fr/(?P<section>.*?)/guide/",
+      "selectors_key": "guide",
+      "variables": {
+        "section": ["agent"]
+      },
+      "tags": [
+        "guide"
+      ],
+      "page_rank": 10
     }
   ],
   "stop_urls": [
@@ -58,6 +91,7 @@
     "/videos/",
     "/integrations/$",
     "/faq/$",
+    "/guide/$",
     "\\?",
     "/api/.+",
     "\\.json$"
@@ -83,6 +117,21 @@
       }
     },
     "faq": {
+      "lvl0": {
+        "selector": ".h-100 .sidenav-nav > ul >li.open > a",
+        "global": true,
+        "default_value": "FAQ"
+      },
+      "lvl1": ".main h1",
+      "lvl2": ".main h2",
+      "text": ".main p, table tbody tr td",
+      "language": {
+        "selector": "/html/@lang",
+        "type": "xpath",
+        "global": true
+      }
+    },
+    "guide": {
       "lvl0": {
         "selector": ".h-100 .sidenav-nav > ul >li.open > a",
         "global": true,

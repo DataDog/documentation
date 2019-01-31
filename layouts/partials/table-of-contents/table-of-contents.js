@@ -4,6 +4,7 @@ $(document).ready(function () {
     {
         // hide toc
         $('.toc-container > div').hide();
+
         // hide mobile toc button
         $('.mobile-toc-toggle').removeClass('d-block').addClass('d-none');
     }
@@ -33,8 +34,6 @@ $(document).ready(function () {
                             'isH3': header.is('h3')
                         });
                     }
-                } else {
-                    //console.log('could not find h2[id="'+id+'"]');
                 }
                 link = $(this);
             });
@@ -111,11 +110,7 @@ $(document).ready(function () {
 
         $(window).on('resize scroll', function(e) {
             onScroll();
-            /*var open = $('.mobile-toc-toggle i').hasClass('icon-small-x');
-            if(open && $(window).width() > 991) {
-                $('.mobile-toc-toggle').click();
-            }*/
-            if($(window).width() > 530) {
+            if($(window).width() > 530 && $(window).width() < 1720) {
                 var bottomOfBrowser = parseInt($(document).scrollTop()) + parseInt($(window).height());
                 var footerTop = $('body > footer').offset().top;
                 if(bottomOfBrowser >= footerTop) {
@@ -142,18 +137,61 @@ $(document).ready(function () {
             $('.toc').css('top', height + offset + 'px');
         });
 
-
         buildMap();
         onScroll();
     } else {
         hideToc();
     }
 
+    // Setup for large screen ToC
+    var largeScreenThreshold = 1710;
+
+    // hiding + displaying the ToC depending on the window width
+    function widthCheck(){
+        // if ToC elements exist
+        if($('#TableOfContents ul').length) {
+            if(innerWidth > largeScreenThreshold){
+                if($('.toc-container').hasClass('d-none') && $('.mobile-toc-toggle i').hasClass('icon-small-bookmark')){
+                    $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
+                    $('.mobile-toc-toggle i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
+                }
+            }else{
+                if($('.toc-container').hasClass('mobile-open') && $('.mobile-toc-toggle i').hasClass('icon-small-x')){
+                    $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
+                    $('.mobile-toc-toggle i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
+                }
+            }
+        }
+    }
+
+    // updating ToC width on large screens
+    function tocWidthUpdate(){
+        if(innerWidth > largeScreenThreshold){
+            $('.toc-container.mobile-open').css("width", (innerWidth/2)-620 + "px");
+        }
+    }
+
+    // when the page loads, checking the window width
+    widthCheck();
+    tocWidthUpdate();
+    
+    if(innerWidth > largeScreenThreshold && window.scrollY < 60){
+        $('.toc').css('top', '189px');
+        $('.mobile-toc-toggle').css('top', '189px');
+    }else if(innerWidth > largeScreenThreshold && window.scrollY > 60){
+        $('.toc').css('top', '124.5px');
+        $('.mobile-toc-toggle').css('top', '124.5px');
+    }
 
     $(window).on('resize scroll', function(e) {
         var header_h = $('body > header').height();
         var top = $('#TableOfContents').position() ? $('#TableOfContents').position().top : 0;
         var offset = header_h + top;
         $('.toc').css('maxHeight', document.documentElement.clientHeight - offset);
+    });
+
+    $(window).on('resize', function() {
+        widthCheck();
+        tocWidthUpdate();
     });
 });
