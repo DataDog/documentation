@@ -61,7 +61,7 @@ It is recommended you assign tags as `<KEY>:<VALUE>` pairs, but simple tags are 
 
 ## Environment Variables
 
-When installing the containerized Datadog Agent, host tags set your using the environment variable `DD_TAGS`. We automatically collect common tags from [Docker][9], [Kubernetes][10], [ECS][11], [Swarm, Mesos, Nomad, and Rancher][9]. To extract even more tags, use the following options:
+When installing the containerized Datadog Agent, set your host tags using the environment variable `DD_TAGS`. We automatically collect common tags from [Docker][9], [Kubernetes][10], [ECS][11], [Swarm, Mesos, Nomad, and Rancher][9]. To extract even more tags, use the following options:
 
 | Environment Variable               | Description                                    |
 |------------------------------------|------------------------------------------------|
