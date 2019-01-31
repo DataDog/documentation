@@ -12,7 +12,7 @@ further_reading:
   text: "Share your Graphs outside of Datadog"
 - link: "graphing/dashboards/widgets"
   tag: "Documentation"
-  text: "Discover all available widget for your Dashboard"
+  text: "Discover all available Widgets for your Dashboard"
 ---
 
 ## Dashboard List
