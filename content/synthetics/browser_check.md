@@ -15,6 +15,8 @@ further_reading:
   text: "Configure an Uptime Check"
 ---
 
+<div class="alert alert-warning">Synthetics is in beta for the Datadog US Site. To request access, complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics request form</a>.</div>
+
 ## Overview
 
 Browser Checks are scenarios executed by Datadog on your web application at configurable periodic intervals, from multiple locations around the world, on multiple devices. These checks verify not only that your applications are up and responding to requests, but that any conditions defined in your scenarios are met.
