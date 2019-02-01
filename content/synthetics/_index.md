@@ -2,7 +2,7 @@
 title: Synthetics
 kind: documentation
 beta: true
-description: documentation
+description: "Make sure the most critical parts of your product are up and running from various locations around the world."
 aliases:
   - /integrations/synthetics/
 further_reading:
