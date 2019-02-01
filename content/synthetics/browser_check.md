@@ -15,11 +15,11 @@ further_reading:
   text: "Configure an Uptime Check"
 ---
 
-<div class="alert alert-warning">Synthetics is in beta for the Datadog US Site. To request access, complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics request form</a>.</div>
+<div class="alert alert-warning">Synthetics is in beta for the Datadog US Site. Request access via the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics request form</a>.</div>
 
 ## Overview
 
-Browser Checks are scenarios executed by Datadog on your web application at configurable periodic intervals, from multiple locations around the world, on multiple devices. These checks verify not only that your applications are up and responding to requests, but that any conditions defined in your scenarios are met.
+Browser Checks are scenarios executed by Datadog on your web applications. They run at configurable periodic intervals from multiple locations around the world, and from multiple devices. These checks verify both that your applications are up and responding to requests, and that any conditions defined in your scenarios are met.
 
 ## Configuration
 
@@ -30,7 +30,7 @@ Define the configuration of our Browser Check.
 {{< img src="synthetics/browser_check/browser_check_configuration.png" alt="Browser Check make request" responsive="true" style="width:80%;">}}
 
 1. Give your Browser Check a name. 
-2. Enter the Start URL. This is URL on which your Browser Check starts its scenario.
+2. Enter the Start URL. This is URL from which your Browser Check starts the scenario.
 3. Define on which device to run your check. Available devices are: `Laptop Large`, `Tablet`, and `Mobile Small`.
 4. Pick-up locations to run the test from. Available locations are:
     * Frankfurt (Request made from an AWS Datacenter)

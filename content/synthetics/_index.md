@@ -55,7 +55,7 @@ Finally, the following characters are reserved: `-`, `(`, `)`, `"`, `~`, `*`, `:
 
 ## Create a check
 
-Slect **Create a New check +** in the upper right corner of the Synthetics page to create an [Uptime Check][2] or a [Browser Check][3]
+Select **Create a New check +** in the upper right corner of the Synthetics page to create an [Uptime Check][2] or a [Browser Check][3].
 
 {{< img src="synthetics/create_a_check.png" alt="Create a check" responsive="true" style="width:80%;">}}
 
