@@ -140,7 +140,7 @@ config_providers:
 
 ### Journald
 
-When using Journald in a containerised environment, make sure to follow the instruction of the [journald integration][8] as there is a specific file to mount to the agent.
+When using Journald in a containerized environment, make sure to follow the instructions in the [journald integration][8] as there is a specific file used to mount to the Agent.
 
 ## Further Reading
 
