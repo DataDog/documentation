@@ -56,7 +56,7 @@ Otherwise there should be a similar message in the Agent `status`:
 
 {{< img src="logs/agent-log-executable-permission-issue.png" alt="Permission issue" responsive="true" style="width:70%;">}}
 
-In those cases it is possible to run the `namei` command to have more information about the file permission:
+Run the `namei` command to obtain more information about the file permissions:
 
 ```
 > namei -m /var/log/application/error.log
