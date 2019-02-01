@@ -37,6 +37,7 @@ github:
   pr_body: 'This is an automated PR created by the scheduled translation task pulling the latest translated files'
   pr_labels:
     - "Translation"
+  pr_preview_base_url: "https://docs-staging.datadoghq.com"
 reviewers:
   - name: 'David Jones'
     github_user: 'davidejones'
