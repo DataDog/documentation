@@ -448,13 +448,15 @@ To verify that everything is working properly, review the HAProxy statistics at 
 
 [NGINX][3] is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. You can use NGINX as a proxy to send logs to Datadog:
 
-`agent ---> nginx ---> Datadog` or  
-`external log shipper ---> nginx ---> Datadog`
+`agent ---> nginx ---> Datadog`
 
 ### Proxy forwarding with NGINX
 #### NGINX configuration
 
 This example `nginx.conf` can be used to proxy logs to the Datadog intake. It does TLS wrapping to ensure internal plaintext logs are encrypted between your proxy and Datadog's log intake API endpoint:
+
+{{< tabs >}}
+{{% tab "Datadog US site" %}}
 
 ```
 user nginx;
@@ -476,64 +478,43 @@ stream {
 }
 ```
 
-#### Shipper configuration
-
-{{< tabs >}}
-{{% tab "Agent v6" %}}
-
-To use the Datadog Agent as the logs collector, instruct the Agent to use the newly created proxy instead of establishing a connection directly with the logs intake by updating `datadog.yaml`:
-
-```yaml
-logs_config:
-  dd_url: myProxyServer.myDomain
-  dd_port: 10514
-  dev_mode_use_proto: false
-  dev_mode_no_ssl: true
-```
-
-The `dev_mode_no_ssl` parameter is set to `true` because establishing the SSL/TLS connection is handled by NGINX's `proxy_ssl on` option. **Note**: Set this option to `false` if you don't intend to use a proxy which can encrypt the connection to the logs intake.
-
 {{% /tab %}}
-{{% tab "NXLogs" %}}
-
-In Windows, NXLogs is frequently used as a logs collector. In the configuration, change the host and port in the `<Output>` block to those of your proxy instead of the Datadog intake.
-
-**Example**:
+{{% tab "Datadog EU site" %}}
 
 ```
-<Output out>
-  Module om_tcp
-  Host myProxyServer.myDomain
-  Port 10514
-  Exec to_syslog_ietf();
-  Exec $raw_event="<YOUR_DATADOG_API_KEY> "+$raw_event;
-</Output>
+user nginx;
+worker_processes auto;
+error_log /var/log/nginx/error.log;
+pid /run/nginx.pid; 
+
+include /usr/share/nginx/modules/*.conf;
+events {
+    worker_connections 1024;
+}
+# TCP Proxy for Datadog logs
+stream {
+    server {
+        listen 10514; #proxy listen port
+        proxy_ssl on;
+        proxy_pass agent-intake.logs.datadoghq.eu:443;
+    }
+}
 ```
-
-{{% /tab %}}
-{{% tab "Fluentd" %}}
-
-In container environments, Fluentd is frequently used as a logs collector. Add the following to your configuration file:
-
-```
-<match datadog.**>
-  @type datadog
-  @id awesome_agent
-  api_key <YOUR_DATADOG_API_KEY>
-  host myProxyServer.myDomain
-  use_ssl false
-  #port 10514
-</match>
-```
-
-The option `port 10514` shown above is unnecessary because Fluentd defaults to port 10514 if `use_ssl false` is used.
 
 {{% /tab %}}
 {{< /tabs >}}
 
--------------------
+#### Datadog Agent configuration
 
-Datadog has successfully tested the shipper configurations on Windows Server 2012 R2, CentOS 7, and Ubuntu 16 with NXLog, Datadog Agent v6, and Fluentd.
+To use the Datadog Agent v6 as the logs collector, instruct the Agent to use the newly created proxy instead of establishing a connection directly with the logs intake by updating `datadog.yaml`:
+
+```yaml
+logs_config:
+  logs_dd_url: myProxyServer.myDomain:10514
+  dev_mode_no_ssl: true
+```
+
+The `dev_mode_no_ssl` parameter is set to `true` because establishing the SSL/TLS connection is handled by NGINX's `proxy_ssl on` option. **Note**: Set this option to `false` if you don't intend to use a proxy which can encrypt the connection to the logs intake.
 
 ## Using the Agent as a Proxy
 
