@@ -20,4 +20,4 @@ for md in int_md:
   png = md.split('.')[0] + '.png'
   if png not in int_ignore:
     if png not in int_png:
-      print png
+      print(png)
