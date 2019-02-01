@@ -99,7 +99,7 @@ DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 
 #### Ignore containers
 
-Exclude containers from logs collection, metrics collection and Autodiscovery. Datadog excludes Kubernetes and OpenShift `pause` containers by default. See the `datadog.yaml.example` file for more documentation, and examples:
+Exclude containers from logs collection, metrics collection, and Autodiscovery. Datadog excludes Kubernetes and OpenShift `pause` containers by default. See the `datadog.yaml.example` file for more documentation, and examples:
 
 | Env Variable    | Description                                                                                                             |
 |-----------------|-------------------------------------------------------------------------------------------------------------------------|
