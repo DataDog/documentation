@@ -69,7 +69,7 @@ If APM is enabled for this application and you wish to improve the correlation b
 Once this is done, the `ConversionPattern` to use becomes:
 
 ```xml
-<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
+<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - dd.trace_id=%X{dd.trace_id} dd.span_id=%X{dd.span_id} - %m%n" />
 ```
 
 [1]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=java#logging
