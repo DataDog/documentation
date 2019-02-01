@@ -26,7 +26,7 @@ JMXFetch envoie également des checks de service qui signalent le statut de vos 
 
 Les checks JMX possèdent une limite de 350 métriques par instance. Celle-ci ne devrait pas vous empêcher de satisfaire à vos besoins, car vous pouvez facilement personnaliser les métriques que vous recueillez.
 
-Si vous exécutez JMX au sein de Docker, consultez la [documentation Docker JMX][12] dédiée.
+Si vous exécutez JMX au sein de Docker, consultez la [documentation relative à Docker JMX][12].
 
 ## Implémentation
 ### Installation
