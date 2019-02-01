@@ -80,7 +80,7 @@ Set permissions as `644` in the log rotation configuration to make sure the Agen
 
 When collecting logs from journald, make sure that the Datadog Agent user is added in the systemd group as shown in the [journald integration][8].
 
-The journald API does not return a permission denied error but an empty payload so no explicit message can be raised in the Agent status or logs if the permission is not set.
+Note that journald sends an empty payload if the file permissions are incorrect. Accordingly, it is not possible to raise or send an explicit error message in this case.
 
 ## Configuration issues
 
