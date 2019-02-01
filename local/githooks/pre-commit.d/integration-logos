@@ -7,13 +7,13 @@ int_png = filter(lambda x: x.endswith('.png'), os.listdir('src/images/integratio
 int_ignore = ['_index.png',
               'agent_metrics.png',
               'datadog_checks_dev.png',
-              'dotnetclr',
+              'dotnetclr.png',
               'integration.png',
               'integrations-extras.png',
-              'sortdb',
-              'snmpwalk',
-              'stunnel',
-              'upsc'
+              'sortdb.png',
+              'snmpwalk.png',
+              'stunnel.png',
+              'upsc.png'
               ]
 
 for md in int_md:
