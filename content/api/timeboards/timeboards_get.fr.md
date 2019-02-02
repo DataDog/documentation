@@ -6,7 +6,7 @@ external_redirect: /api/#recuperer-un-timeboard
 ---
 
 ## Récupérer un Timeboard
-Récupérez toutes les spécifications d'un dashboard.
+Récupérez la définition d'un dashboard existant.
 
 ##### Arguments
 *Cet endpoint ne prend aucun argument JSON.*
