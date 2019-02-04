@@ -1659,13 +1659,34 @@ Once the logger is configured, executing a traced function that logs an event yi
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Use one the two following options to inject Ruby trace information into your logs:
+Use one of the following options to inject Ruby trace information into your logs:
 
-**1. Enable Trace IDs Injection for Rails Applications**
+**1. Enable Trace ID Injection for Rails Applications using Lograge (recommended)**
 
-Rails applications which are configured with a `ActiveSupport::TaggedLogging` logger can append correlation IDs as tags to log output. The default Rails logger implements this tagged logging, making it easier to add correlation tags.
+After [setting up Lograge in a Rails application][1], modify the `custom_options` block in your environment configuration file (e.g. `config/environments/production.rb`) to add the trace IDs:
 
-In your Rails environment configuration file, add the following:
+```ruby
+config.lograge.custom_options = lambda do |event|
+  # Retrieves trace information for current thread
+  correlation = Datadog.tracer.active_correlation
+
+  {
+    # Adds IDs as tags to log output
+    :dd => {
+      :trace_id => correlation.trace_id,
+      :span_id => correlation.span_id
+    },
+    :ddsource => ["ruby"],
+    :params => event.payload[:params].reject { |k| %w(controller action).include? k }
+  }
+end
+```
+
+**2. Enable Trace ID Injection for default Rails Applications**
+
+Rails applications which are configured with a `ActiveSupport::TaggedLogging` logger can append trace IDs as tags to log output. The default Rails logger implements this tagged logging, making it easier to add trace tags.
+
+In your Rails environment configuration file (e.g. `config/environments/production.rb`), add the following:
 
 ```ruby
 Rails.application.configure do
@@ -1673,23 +1694,26 @@ Rails.application.configure do
 end
 ```
 
-The logs are generated in a format that is supported by default in the Ruby log Integration:
+This appends trace tags to web requests:
 
 ```
-# Web requests will produce:
 # [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Started GET "/articles" for 172.22.0.1 at 2019-01-16 18:50:57 +0000
 # [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Processing by ArticlesController#index as */*
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206]   Article Load (0.5ms)  SELECT "articles".* FROM "articles"
 # [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
 ```
 
-**2. Manual Trace IDs Injection for Ruby Applications**
+**3. Manual Trace ID Injection for Ruby Applications**
 
-Use `Datadog.tracer.active_correlation` method to inject trace identifiers in the log format:
+To add trace IDs to your own logger, add a log formatter which retrieves the trace IDs with `Datadog.tracer.active_correlation`, then add the trace IDs to the message.
 
-- `dd.trace_id`:  Active Trace ID during the log statement (or 0 if no trace)
-- `dd.span_id`: Active Span ID during the log statement (or 0 if no trace)
- 
-By default, `Datadog.tracer.active_correlation` returns `dd.trace_id=<TRACE_ID> dd.span_id=<SPAN_ID>`.
+To ensure proper log correlation, verify the following is present in each message:
+
+ - `dd.trace_id=<TRACE_ID>`: Where `<TRACE_ID>` is equal to `Datadog.tracer.active_correlation.trace_id` or `0` if no trace is active during logging.
+ - `dd.span_id=<SPAN_ID>`: Where `<SPAN_ID>` is equal to `Datadog.tracer.active_correlation.span_id` or `0` if no trace is active during logging.
+
+By default, `Datadog::Correlation::Identifier#to_s` returns `dd.trace_id=<TRACE_ID> dd.span_id=<SPAN_ID>`.
+
 An example of this in practice:
 
 ```ruby
@@ -1711,9 +1735,10 @@ Datadog.tracer.trace('my.operation') { logger.warn('This is a traced operation.'
 # [2019-01-16 18:38:41 +0000][my_app][WARN][dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] This is a traced operation.
 ```
 
-[See our Ruby logging documentation][1] to ensure that the Ruby log integration is properly configured and your ruby logs automatically parsed.
+See our [Ruby logging documentation][2] to verify the Ruby log integration is properly configured and your ruby logs are automatically parsed.
 
-[1]: https://docs.datadoghq.com/logs/log_collection/ruby/#configure-the-datadog-agent
+[1]: https://docs.datadoghq.com/logs/log_collection/ruby/
+[2]: https://docs.datadoghq.com/logs/log_collection/ruby/#configure-the-datadog-agent
 {{% /tab %}}
 {{% tab "Go" %}}
 The Go tracer exposes two API calls to allow printing trace and span identifiers along with log statements using exported methods from `SpanContext` type:
