@@ -77,7 +77,7 @@ This produces the following result in your [live tail page][27]:
 
 {{< img src="logs/custom_log_telnet.png" alt="Custom telnet" responsive="true" style="width:70%;">}}
 
-The log parser will automatically decode JSON formatted messages. You can pass log attributes as key:value pairs.
+Datadog can automatically parse JSON formatted messages. You can pass log attributes as key:value pairs.
 
 ```
 telnet intake.logs.datadoghq.com 10514 
