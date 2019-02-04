@@ -77,6 +77,15 @@ This produces the following result in your [live tail page][27]:
 
 {{< img src="logs/custom_log_telnet.png" alt="Custom telnet" responsive="true" style="width:70%;">}}
 
+The Log parser will automatically decode JSON formatted messages. You can pass log attributes as key:value pairs.
+
+```
+telnet intake.logs.datadoghq.com 10514 
+<DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
+```
+
+
+
 ### Datadog Logs Endpoints
 
 Datadog provides logging endpoints for both SSL-encrypted connections and unencrypted connections.
