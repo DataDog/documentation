@@ -6,7 +6,7 @@ external_redirect: /api/#recuperer-un-screenboard
 ---
 
 ## Récupérer un screenboard
-Récupérez toutes les spécifications d'un screenboard.
+Récupérez la définition d'un screenboard existant.
 
 ##### ARGUMENTS
 

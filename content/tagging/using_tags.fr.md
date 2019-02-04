@@ -174,11 +174,11 @@ Pour [les recherches de traces][1], filtrez les traces avec des tags à l'aide d
 [1]: /fr/tracing/visualization/search
 [2]: /fr/tracing/visualization/search/#search-bar
 {{% /tab %}}
-{{% tab "Carte des services" %}}
+{{% tab "Service map" %}}
 
-Après avoir [attribué des tags][1], utilisez la carte des services pour accéder facilement à différentes sections de l'application en cliquant sur un service spécifique. L'exemple ci-dessous affiche les données des [analyses et recherches de traces][2], des [monitors][3], des [logs][4] et de la [hostmap][5] filtrées par le tag `service:coffee-house`.
+Après avoir [attribué des tags][1], utilisez la Service map pour accéder facilement à différentes sections de l'application en cliquant sur un service spécifique. L'exemple ci-dessous affiche les données des [analyses et recherches de traces][2], des [monitors][3], des [logs][4] et de la [hostmap][5] filtrées par le tag `service:coffee-house`.
 
-{{< img src="tagging/using_tags/servicemaptags.png" alt="Tags carte de service" responsive="true" style="width:80%;">}}
+{{< img src="tagging/using_tags/servicemaptags.png" alt="Tags Service map" responsive="true" style="width:80%;">}}
 
 
 [1]: /fr/tagging/assigning_tags
