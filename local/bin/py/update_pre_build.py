@@ -480,7 +480,12 @@ class PreBuild:
                     ]
                     content_temp["globs"] = content["globs"]
 
-                    if content["action"] == "pull-and-push":
+                    if (
+                        content["action"]
+                        == "pull-and-push-folder"
+                        or content["action"]
+                        == "pull-and-push-file"
+                    ):
                         content_temp["options"] = content[
                             "options"
                         ]
@@ -614,6 +619,14 @@ class PreBuild:
                     content["branch"],
                     content["globs"],
                 )
+                content["globs"] = self.update_globs(   
+                    "{0}{1}{2}".format( 
+                    self.extract_dir,   
+                    content["repo_name"],   
+                    sep,    
+                    ),  
+                    content["globs"],   
+                )
 
     def update_globs(self, new_path, globs):
         """
@@ -642,9 +655,16 @@ class PreBuild:
 
                 self.process_source_attribute(content)
 
-            elif content["action"] == "pull-and-push":
+            elif (
+                content["action"] == "pull-and-push-folder"
+            ):
 
-                self.pull_and_push(content)
+                self.pull_and_push_folder(content)
+
+            elif content["action"] == "pull-and-push-file":
+
+                self.pull_and_push_file(content)
+
             else:
                 print(
                     "[ERROR] Unsuccessful Processing of {}".format(
@@ -676,7 +696,30 @@ class PreBuild:
             elif file_name.endswith(".md"):
                 self.process_integration_readme(file_name)
 
-    def pull_and_push(self, content):
+    def pull_and_push_file(self, content):
+        """
+        Takes the content from a file from a github repo and 
+        pushed it to the doc
+        :param content: object with a file name and a file path
+        """
+
+        with open(
+            "".join(content["globs"]), mode="r+"
+        ) as f:
+            file_content = f.read()
+
+        with open(
+            "{}{}{}".format(
+                self.content_dir,
+                content["options"]["dest_path"][1:],
+                basename(content["options"]["file_name"]),
+            ),
+            mode="w+",
+            encoding="utf-8",
+        ) as f:
+            f.write(file_content)
+
+    def pull_and_push_folder(self, content):
         """
         Take the content from a folder following github logic
         and transform it to be displayed in the doc in dest_dir folder
