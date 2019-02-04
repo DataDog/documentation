@@ -108,7 +108,7 @@ logs:
     path: /var/log/journal/
 ```
 
-Refer to the [journald integration][2] documentation for more details regarding the setup for containerised environment and units filtering.
+Refer to the [journald integration][2] documentation for more details regarding the setup for containerized environments and units filtering.
  
 
 [1]: /agent/faq/agent-configuration-files
