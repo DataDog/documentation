@@ -221,13 +221,17 @@ Configure the Agent connection parameters via environment variables.
 
 | Env variable               | Default     | Note                                                                |
 | :------------------------- | :---------- | :------------------------------------------------------------------ |
-| `DD_TRACE_ENABLED`         | `true`      | Enable the tracer globally                                          |
-| `DD_INTEGRATIONS_DISABLED` | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                |
 | `DD_AGENT_HOST`            | `localhost` | The Agent host name                                                 |
-| `DD_TRACE_AGENT_PORT`      | `8126`      | The Agent port number                                               |
 | `DD_AUTOFINISH_SPANS`      | `false`     | Whether spans are automatically finished when the tracer is flushed |
 | `DD_DISTRIBUTED_TRACING`   | `true`      | Whether to enable [distributed tracing][14]                         |
+| `DD_INTEGRATIONS_DISABLED` | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                |
 | `DD_PRIORITY_SAMPLING`     | `true`      | Whether to enable [priority sampling][15]                           |
+| `DD_SAMPLING_RATE`         | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default) |
+| `DD_TRACE_AGENT_PORT`      | `8126`      | The Agent port number                                               |
+| `DD_TRACE_APP_NAME`        | ``          | The default app name                                                |
+| `DD_TRACE_DEBUG`           | `false`     | Enable debug mode for the tracer                                    |
+| `DD_TRACE_ENABLED`         | `true`      | Enable the tracer globally                                          |
+| `DD_TRACE_GLOBAL_TAGS`     | ``          | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`        |
 
 ### Integrations
 
