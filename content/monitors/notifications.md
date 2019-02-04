@@ -263,6 +263,8 @@ After having installed the Slack integration, type `@slack` in your notification
 
 **@-mentions in Slack from monitor alert**:
 
+*Please note that there must be a space between a closing curly brace `}` and `@`.  As `}` is a legal email character, we do not handle @-mentions immediately following them.
+
 Wrap the `@username` in `< >` as seen below in your monitors message template to **@ notify** the defined user within slack notifications.
 For example this configuration:
 
