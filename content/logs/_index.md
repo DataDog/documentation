@@ -128,8 +128,8 @@ Here are some key attributes you should pay attention to when setting up your pr
 | Attribute | Description                                                                                                                                                                                                                            |
 |-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `host`    | The name of the originating host as defined in metrics. We automatically retrieve corresponding host tags from the matching host in Datadog and apply them to your logs. The Agent sets this value automatically.                      |
-| `source`  | This corresponds to the integration name: the technology from which the log originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, etc. |
-| `status` | This correspond to the level/severity of a log. It's used to define [patterns][30], and has a dedicated layout in the Datadog Log UI.|
+| `source`  | This corresponds to the Integration name: the technology from which the log originated. When it matches an Integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, etc. |
+| `status` | This corresponds to the level/severity of a log. It's used to define [patterns][30] and has a dedicated layout in the Datadog Log UI.|
 | `service` | The name of the application or service generating the log events. It is used to switch from Logs to APM, so make sure you define the same value when you use both products.                                                            |
 | `message` | By default, Datadog ingests the value of the `message` attribute as the body of the log entry. That value is then highlighted and displayed in the Logstream, where it is indexed for full text search.                                |
 
