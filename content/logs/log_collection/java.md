@@ -189,7 +189,7 @@ There is a default log4j2 JSON Layout that can be used as shown in this [example
 
 **Inject trace IDs in your logs**
 
-If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)][2] that are then automatically added in the JSON logs.
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][1] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)][2] that are then automatically added in the JSON logs.
 
 [1]: https://gist.github.com/NBParis/8bda7aea745987dd3261d475c613cf66
 [2]: http://logback.qos.ch/manual/mdc.html
