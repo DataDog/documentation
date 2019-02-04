@@ -2,6 +2,10 @@
 title: Troubleshooting JMX Integrations
 kind: faq
 disable_toc: true
+further_reading:
+- link: "https://docs.datadoghq.com/integrations/java/"
+  tag: "Documentation"
+  text: "Java integration"
 ---
 
 To verify you have access to JMX, test using JConsole or equivalent if possible. If you're unable to connect using JConsole [this article][1] may help to get you sorted. Also, if the metrics listed in your YAML aren't 1:1 with those listed in JConsole you'll need to correct this.
@@ -119,5 +123,38 @@ Note: the location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.j
 {{% /tab %}}
 {{< /tabs >}}
 
+## SSL troubleshooting
+
+### JMX & SSL=true
+
+Once JMX is enabled and your Agent check is successfully sending metrics to Datadog, you can secure the remote connection over an SSL Socket.
+
+**Note**: You cannot secure JMX over SSL without using the JMX remote user/password authentication files. If you are using system level permissions to run your application, add these files and run them at startup.
+
+This example shows the Datadog configuration for the Tomcat integration.
+
+* Establish a certificate and key to apply to your [Java app keystore][3].
+* Update your Datadog Tomcat `conf.yaml` file located in `conf.d/tomcat.d`:
+
+```yaml
+instances:
+  - host: localhost
+    port: 9000
+    user: tomcat
+    password: tomcat
+    name: tomcat_webapp
+    trust_store_path: /path/to/keystore
+    trust_store_password: mykey_Password
+```
+
+* [Restart the Agent][4].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+
 [1]: https://docs.oracle.com/javase/8/docs/technotes/guides/management/faq.html
 [2]: /help
+[3]: https://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#SSL_and_Tomcat
+[4]: /agent/guide/agent-commands/#restart-the-agent
