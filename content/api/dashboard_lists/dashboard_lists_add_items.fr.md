@@ -13,7 +13,7 @@ Ajoutez des dashboards à une liste de dashboards existante.
 
 *   **`dashboards`** [*obligatoire*] :
     La liste des dashboards à ajouter à la liste.
-    Les spécifications de dashboards respectent le format suivant :
+    Les définitions de dashboard respectent le format suivant :
     *   **`type`** [*obligatoire*] :
         Le type du dashboard.
         Le type doit être correspondre à l'une des valeurs suivantes :
