@@ -26,7 +26,7 @@ Event monitors allows you to alert when an event matching your query occurs.
 3. Select the **alerting conditions**. The **threshold value** and **timeframe** options allows you to set the number of occurrence of an event required during a timeframe before triggering the monitor.  
     {{< img src="monitors/monitor_types/event/event_monitor_alert_conditions.png" alt="event monitor alert conditions" responsive="true" style="width:80%;">}}
 
-    **Note**: Event monitors for crawler-based integrations may see events that are posted by a provider not at the same time they are timestamped. This can false an event monitor evaluation, if you observe such behavior, [reach out to us][1].
+    **Note**: Some providers introduce a significant delay between when an event is **posted**, and when the event actually happened. In this case, Datadog back-dates the event to the time of occurrence, which can lead to odd monitor evaluation behavior. If you observe such behavior, reach out to [Datadog Support][1].
 4. Configure your **notification options**:  
     Refer to the [Notifications](#monitor-notifications) dedicated documentation page for informations.
 
