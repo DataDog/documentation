@@ -91,7 +91,7 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
 5. Restart syslog-ng.
 
 
-[1]: /crt/intake.logs.datadoghq.com.crt
+[1]: /crt/FULL_intake.logs.datadoghq.com.crt
 [2]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html
 {{% /tab %}}
 {{% tab "Datadog EU site" %}}
@@ -159,7 +159,7 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
 5. Restart syslog-ng.
 
 
-[1]: /crt/intake.logs.datadoghq.eu.crt
+[1]: /crt/FULL_intake.logs.datadoghq.eu.crt
 [2]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html
 {{% /tab %}}
 {{< /tabs >}}
