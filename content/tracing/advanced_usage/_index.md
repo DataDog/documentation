@@ -1694,7 +1694,7 @@ Rails.application.configure do
 end
 ```
 
-This will append trace tags to web requests:
+This appends trace tags to web requests:
 
 ```
 # [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Started GET "/articles" for 172.22.0.1 at 2019-01-16 18:50:57 +0000
