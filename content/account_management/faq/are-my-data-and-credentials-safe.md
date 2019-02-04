@@ -8,7 +8,7 @@ kind: faq
 * All communication to Datadog is via HTTPS.
 * [The full license agreement][1].
 * [The Datadog Agent source code][2] under an open source software license.
-* The installation process for the Datadog Agent and other components may prompt you for your administrative or root credentials. The password is only used to complete the installation process, Datadog does not retain these credentials. If you prefer to see the installation process step-by-step instructions can be found on the [Agent installation page][3].
+* The installation process for the Datadog Agent and other components may prompt you for your administrative or root credentials. The password is only used to complete the installation process; Datadog does not retain these credentials. If you prefer to see the installation process, step-by-step instructions can be found on the [Agent installation page][3].
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/LICENSE
 [2]: https://github.com/DataDog/datadog-agent

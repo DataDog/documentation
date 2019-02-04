@@ -2,7 +2,7 @@
 title: Modifier les métadonnées d'une métrique
 type: apicontent
 order: 16.5
-external_redirect: /api/#modifier-les-metadonnes-d-une-metrique
+external_redirect: '/api/#modifier-les-metadonnes-d-une-metrique'
 ---
 ## Modifier les métadonnées d'une métrique
 
@@ -24,4 +24,4 @@ L'endpoint des métadonnées des métriques vous permet de modifier les champs d
 * **`statsd_interval`** [*facultatif*, *défaut*=**None**] :
     Le cas échéant, statds transmet l'intervalle en secondes pour la métrique.
 
-[1]: /developers/metrics
+[1]: /fr/developers/metrics

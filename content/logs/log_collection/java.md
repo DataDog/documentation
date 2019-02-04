@@ -60,7 +60,7 @@ Add a new file appender to `log4j.xml`:
 </appender>
 ```
 
-**Correlate traces and logs**
+**Inject trace IDs in your logs**
 
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][1] to set the [MDC (Mapped Diagnostic Contexts)][2] to then automatically add trace and span id in your logs.
 
@@ -88,7 +88,7 @@ Edit your `log4j2.xml` file:
 </Loggers>
 ```
 
-**Correlate traces and logs**
+**Inject trace IDs in your logs**
 
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][1] to set the [MDC (Mapped Diagnostic Contexts)][2] to then automatically add trace and span id in your logs.
 
@@ -124,7 +124,7 @@ Edit your `logback.xml` file:
 </configuration>
 ```
 
-**Correlate traces and logs**
+**Inject trace IDs in your logs**
 
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][1] to set the [MDC (Mapped Diagnostic Contexts)][2] to then automatically add trace and span id in your logs.
 
@@ -174,7 +174,7 @@ Edit your `pom.xml` file:
 
 Once that done, edit your `logback.xml` file as described in the below `Slf4j` section.
 
-**Correlate traces and logs**
+**Inject trace IDs in your logs**
 
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][1] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)][2] that are then automatically added in the JSON logs.
 
@@ -185,7 +185,7 @@ If APM is enabled for this application and you wish to improve the correlation b
 
 There is a default log4j2 JSON Layout that can be used as shown in this [example][1].
 
-**Correlate traces and logs**
+**Inject trace IDs in your logs**
 
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)][2] that are then automatically added in the JSON logs.
 
@@ -223,7 +223,7 @@ Then edit your `logback.xml` file and update the encoder:
     </appender>
 ```
 
-**Correlate traces and logs**
+**Inject trace IDs in your logs**
 
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][2] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)][3] that are then automatically added in the JSON logs.
 
@@ -401,7 +401,7 @@ Configure the Logback logger to stream logs directly to Datadog by adding the fo
 
 - Replace `<API_KEY>` with your Datadog API key value
 - `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace, as explained [here][4]
-- See the list of [available endpoints for the EU region][5]
+- See the list of [available endpoints for the EU site][5]
 
 More information available on the prefix parameter in the [Logback documentation][4].
 

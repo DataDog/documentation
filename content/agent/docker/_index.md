@@ -51,11 +51,14 @@ The Agent is highly customizable. Here are the most used environment variables:
 
 #### Global options
 
-| Env Variable  | Description                                                                      |
-|---------------|----------------------------------------------------------------------------------|
-| `DD_API_KEY`  | Your Datadog API key (**required**)                                              |
-| `DD_HOSTNAME` | Hostname to use for metrics (if autodetection fails)                             |
-| `DD_TAGS`     | Host tags separated by spaces. For example: `simple-tag-0 tag-key-1:tag-value-1` |
+| Env Variable    | Description                                                                                                                                                 |
+| --------------- | ----------------------------------------------------------------------------------                                                                          |
+| `DD_API_KEY`    | Your Datadog API key (**required**)                                                                                                                         |
+| `DD_HOSTNAME`   | Hostname to use for metrics (if autodetection fails)                                                                                                        |
+| `DD_TAGS`       | Host tags separated by spaces. For example: `simple-tag-0 tag-key-1:tag-value-1`                                                                            |
+| `DD_SITE`       | Destination site for your metrics, traces, and logs. Valid options are `datadoghq.com` for the Datadog US site, and `datadoghq.eu` for the Datadog EU site. |
+
+
 
 #### Optional collection Agents
 
@@ -102,12 +105,12 @@ DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 
 #### Ignore containers
 
-Exclude containers from metrics collection and Autodiscovery. Datadog excludes Kubernetes and OpenShift `pause` containers by default. See the `datadog.yaml.example` file for more documentation, and examples:
+Exclude containers from logs collection, metrics collection, and Autodiscovery. Datadog excludes Kubernetes and OpenShift `pause` containers by default. See the `datadog.yaml.example` file for more documentation, and examples:
 
 | Env Variable    | Description                                                                                                             |
 |-----------------|-------------------------------------------------------------------------------------------------------------------------|
 | `DD_AC_INCLUDE` | Whitelist of containers to include (separated by spaces). For example: `"image:image_name_1 image:image_name_2"` |
-| `DD_AC_EXCLUDE` | Blacklist of containers to exclude (separated by spaces). For example: `"image:image_name_3 image:image_name_4"`        |
+| `DD_AC_EXCLUDE` | Blacklist of containers to exclude (separated by spaces). For example: `"image:image_name_3 image:image_name_4"` (**Note**: this variable is not honored in Fargate.)       |
 
 **Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings and always count all containers. This does not affect your per-container billing.
 

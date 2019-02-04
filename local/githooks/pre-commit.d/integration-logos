@@ -1,0 +1,23 @@
+#!/usr/bin/env python
+
+import os
+
+int_md = filter(lambda x: x.endswith('.md'), os.listdir('content/integrations'))
+int_png = filter(lambda x: x.endswith('.png'), os.listdir('src/images/integrations_logos'))
+int_ignore = ['_index.png',
+              'agent_metrics.png',
+              'datadog_checks_dev.png',
+              'dotnetclr.png',
+              'integration.png',
+              'integrations-extras.png',
+              'sortdb.png',
+              'snmpwalk.png',
+              'stunnel.png',
+              'upsc.png'
+              ]
+
+for md in int_md:
+  png = md.split('.')[0] + '.png'
+  if png not in int_ignore:
+    if png not in int_png:
+      print(png)

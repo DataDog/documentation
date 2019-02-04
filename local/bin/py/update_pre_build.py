@@ -514,6 +514,26 @@ class PreBuild:
                             content["branch"],
                             content["globs"],
                         )
+                        content[
+                            "globs"
+                        ] = self.update_globs(
+                            "{0}{1}{2}".format(
+                                self.extract_dir,
+                                content["repo_name"],
+                                sep,
+                            ),
+                            content["globs"],
+                        )
+                else:
+                    print(
+                        "local version of {} found".format(
+                            content["repo_name"]
+                        )
+                    )
+                    content["globs"] = self.update_globs(
+                        self.options.dogweb,
+                        content["globs"],
+                    )
 
             elif (
                 content["repo_name"] == "integrations-core"
@@ -530,7 +550,24 @@ class PreBuild:
                         content["branch"],
                         content["globs"],
                     )
-
+                    content["globs"] = self.update_globs(
+                        "{0}{1}{2}".format(
+                            self.extract_dir,
+                            content["repo_name"],
+                            sep,
+                        ),
+                        content["globs"],
+                    )
+                else:
+                    print(
+                        "local version of {} found".format(
+                            content["repo_name"]
+                        )
+                    )
+                    content["globs"] = self.update_globs(
+                        self.options.integrations,
+                        content["globs"],
+                    )
             elif (
                 content["repo_name"]
                 == "integrations-extras"
@@ -547,7 +584,24 @@ class PreBuild:
                         content["branch"],
                         content["globs"],
                     )
-
+                    content["globs"] = self.update_globs(
+                        "{0}{1}{2}".format(
+                            self.extract_dir,
+                            content["repo_name"],
+                            sep,
+                        ),
+                        content["globs"],
+                    )
+                else:
+                    print(
+                        "local version of {} found".format(
+                            content["repo_name"]
+                        )
+                    )
+                    content["globs"] = self.update_globs(
+                        self.options.extras,
+                        content["globs"],
+                    )
             else:
                 print(
                     "No local version of {} found, downloading downloading content from upstream version".format(
@@ -560,20 +614,6 @@ class PreBuild:
                     content["branch"],
                     content["globs"],
                 )
-
-            print(
-                "Updating globs for new local version of repo {}".format(
-                    content["repo_name"]
-                )
-            )
-            content["globs"] = self.update_globs(
-                "{0}{1}{2}".format(
-                    self.extract_dir,
-                    content["repo_name"],
-                    sep,
-                ),
-                content["globs"],
-            )
 
     def update_globs(self, new_path, globs):
         """

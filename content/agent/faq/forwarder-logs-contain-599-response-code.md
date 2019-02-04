@@ -13,15 +13,15 @@ further_reading:
 * The app is otherwise reachable from the browser.
 * The MTU on the main interface of the server is > 1500 (e.g. jumbo frames)
 
-If you're only seeing this failure intermittently - every couple of weeks and not continues - it's likely fine, the Agent is designed to store and forward metrics and events in the case of transient issues so all of your data is still being routed to us.
+If you're only seeing this failure intermittently—every couple of weeks and not continually—it's likely fine; the Agent is designed to store and forward metrics and events in the case of transient issues, so all of your data is still being routed to Datadog.
 
 ## Cause
 
-The first and easiest thing to check is your hosts time - verify it's in sync with a valid NTP server. If NTP is not related, move onto below.
+The first and easiest thing to check is your host's time—verify it's in sync with a valid NTP server. If NTP is not related, move onto the below.
 
 Between the server and ELB, there is a link with a smaller MTU and an ICMP blackhole. The hypothesis is that the server uses an MTU > 1500.
 
-Our ELB supports jumbo frames as shown by the response MSS.
+Datadog's ELB supports jumbo frames as shown by the response MSS.
 
 ```
 17:26:24.040194 IP (tos 0x0, ttl 64, id 30550, offset 0, flags [DF], proto TCP (6), length 60)
@@ -33,7 +33,7 @@ Our ELB supports jumbo frames as shown by the response MSS.
 ```
 
 ## Diagnosis
-On linux, get the servers MTU using one of the following:
+On Linux, get the server's MTU using one of the following:
 
 * ip addr
 * ifconfig
@@ -46,16 +46,17 @@ Then find the lowest MTU on the way:
 
 ## Workarounds
 
-1. (Easy) reduce the MTU of the whole interface (sudo ip link set dev ... mtu 1500)
-2. (Easy) enable TCP MTU probing on linux (sudo sysctl net.ipv4.tcp_mtu_probing=1)
+1. (Easy) reduce the MTU of the whole interface (`sudo ip link set dev ... mtu 1500`)
+2. (Easy) enable TCP MTU probing on Linux (`sudo sysctl net.ipv4.tcp_mtu_probing=1`)
 3. (Medium) Use a working Agent as a proxy: https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration#using-the-agent-as-a-proxy
-4. (Medium) reduce the MTU of all routes to EC2 as a whole (sudo ip route add ... via ... mtu 1500); first argument is ip range, second argument is gateway
-5. (Hard) find the MTU black hole on the path to our servers
-Note, we've also had some customers report that this was resolved by correcting DNS or ipv6 issues on their side. For example:
+4. (Medium) reduce the MTU of all routes to EC2 as a whole (`sudo ip route add ... via ... mtu 1500`); first argument is IP range, second argument is gateway
+5. (Hard) find the MTU black hole on the path to Datadog's servers
+
+Note, some customers report that this was resolved by correcting DNS or IPv6 issues on their side. For example:
 
 ### DNS
 
-When DNS responses are more than 512 bytes, DNS is sent on TCP. If any TCP ports have been blocked this results in an issue for the Agent. Checking for similar communication restrictions assists in troubleshooting Agent communication issues. If DNS is the culprit you'll see the following error in your forwarder.log:
+When DNS responses are more than 512 bytes, DNS is sent on TCP. If any TCP ports have been blocked, this results in an issue for the Agent. Checking for similar communication restrictions assists in troubleshooting Agent communication issues. If DNS is the culprit, you'll see the following error in your `forwarder.log`:
 ```
 gaierror: (-2, ' Name of service not known ')
 ```
@@ -69,7 +70,7 @@ http://linoxide.com/linux-how-to/disable-ipv6-centos-fedora-rhel/
 
 ## Changing the Agent's Tornado Client
 
-Some customers experience these 599 tornado errors only when their Datadog Agent uses the default "Simple HTTP" tornado client. It can sometimes help to switch this to the curl client instead. This can be done from the `datadog.yaml` on [this line][1].
+Some customers experience these 599 tornado errors only when their Datadog Agent uses the default "Simple HTTP" tornado client. It can sometimes help to switch this to the cURL client instead. This can be done from the `datadog.yaml` on [this line][1].
 
 ## Windows
 
@@ -83,7 +84,7 @@ If you've done everything above and continue to have issues, send support@datado
 
 1. [Send a flare][2]
 2. Let the [Datadog support team][3] know if you're seeing this across all instances or only a subset—if only one instance is impacted, help the support team understand what's different with this one.
-3. Where is this instances hosted physically? We've seen network issues with service providers upstream from our customers that have resulted in 599's
+3. Where is this instances hosted physically? Datadog has seen network issues with service providers upstream from our customers that have resulted in 599's
 4. Include the information listed in the "Diagnosis" section above.
 
 ## Further Reading

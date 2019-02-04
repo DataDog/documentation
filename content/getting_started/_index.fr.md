@@ -5,107 +5,113 @@ aliases:
   - /fr/overview
   - /fr/guides/overview/
 ---
-Donc, vous venez de terminer [l'installation][1] de l'Agent Datadog, ou peut-être êtes vous simplement curieux de savoir [ce que Datadog peut faire pour vous][2]. Cette page donne un aperçu général des capacités de Datadog et de la façon dont il peut vous aider à mettre votre infrastructure au pas.
+Vous venez de terminer [l'installation][1] de l'Agent Datadog, ou aimeriez tout simplement savoir [ce que Datadog peut faire pour vous][2]. Cette page propose un aperçu des fonctionnalités de Datadog et vous permet de comprendre à quel point Datadog vous aide à maîtriser votre infrastructure.
 
 ## Intégrations
 
-{{< img src="getting_started/integrations.png" alt="integrations" responsive="true" >}}
+{{< img src="getting_started/integrations.png" alt="intégrations" responsive="true" >}}
 
-* Plus de 200 intégrations [officiellement listées][3], et nous en ajoutons toujours plus.
-* Des intégrations personnalisées sont disponibles [via notre API][4], dont beaucoup sont documentées par notre communauté d'utilisateurs actifs.
+* Plus de 200 intégrations officielles sont [répertoriées][3], et nous en ajoutons régulièrement.
+* Des intégrations personnalisées sont disponibles [via l'API Datadog][4], et nombreuses d'entre elles sont documentées par notre communauté active d'utilisateurs.
 * L'Agent est [open source][5] et vous pouvez l'instrumenter directement si vous le souhaitez.
-* Une fois les intégrations configurées, les données résidant dans un centre de données ou
+* Une fois les intégrations configurées, les données stockées dans un centre de données ou
 dans un service en ligne sont traitées de la même façon sur Datadog.
 
 ## Infrastructure
 
 {{< img src="getting_started/infrastructure.png" alt="infrastructure" responsive="true" >}}
 
-* Toutes les machines apparaissent dans la [liste d'infrastructures](/graphing/infrastructure).
-* Ici vous pouvez voir les tags appliqués à chaque machine; comme elles sont assignées à
-effectuer certains rôles, le tagging vous permet d'indiquer les machines qui ont
+* Toutes les machines apparaissent dans la [liste d'infrastructures][6].
+* La liste d'infrastructures vous permet de consulter les tags appliqués à toutes les machines qui sont allouées à
+une tâche précise. L'ajout de tags vous permet d'identifier les machines qui possèdent
 un but précis.
 * Nous faisons tout notre possible pour catégoriser automatiquement vos serveurs
-pour vous, ce qui contribue à créer une structure dans votre infrastructure avec le minimum
+pour vous, ce qui contribue à créer une structure au sein de votre infrastructure nécessitant le moins
 de travail possible (contrairement à la création explicite de tous vos clusters).
-Ainsi, si une nouvelle machine est taggée, vous pouvez voir immédiatement les statistiques
-pour cette machine en fonction de ce qui a été précédemment configuré pour ce tag. [En savoir plus sur le tagging][15].
+Ainsi, si une nouvelle machine est taguée, vous pouvez immédiatement consulter ses statistiques
+en fonction de ce qui a précédemment été configuré pour ce tag. [En savoir plus sur l'ajout de tags][7].
 
-## Map des hosts
+## Hostmap
 
-{{< img src="getting_started/hostmap-overview.png" alt="hostmap overview" responsive="true" >}}
+{{< img src="getting_started/hostmap-overview.png" alt="aperçu hostmap" responsive="true" >}}
 
-[La Host Map](/graphing/infrastructure/hostmap) se trouve dans le menu Infrastructure et offre la possibilité de:
+[La hostmap](/graphing/infrastructure/hostmap) se trouve dans le menu Infrastructure. Grâce à cette carte, vous pouvez :
 
-* Visualiser rapidement l'intégralité de votre environnement, qu'il s'agisse de 5, 500 ou 50 000 hôtes.
+* Visualiser rapidement l'intégralité de votre environnement, qu'il soit composé de 5, 500 ou 50 000 hosts
 * Identifier les singularités
-* Détecter les habitudes d'utilisation
+* Détecter les modèles d'utilisation
 * Optimiser les ressources
 
-Pour en apprendre plus sur la Host Map, consultez la [page de documentation dédiée à la Host Map][10].
+Pour en savoir plus sur la hostmap, consultez la [page de la documentation dédiée][10].
 
-## Evénements
+## Événements
 
-{{< img src="getting_started/event_stream.png" alt="Event stream" responsive="true" >}}
+{{< img src="getting_started/event_stream.png" alt="Flux d'événements" responsive="true" >}}
 
-[Le flux d'événements](/graphing/event_stream) est basé sur les mêmes conventions qu'un blog:
+[Le flux d'événements][9] fonctionne comme un blog :
 
 * Chaque événement du flux peut être commenté.
-* Idéal pour les [équipes réparties aux quatre coins du monde](/account_management/team) cherchant à mener l'enquête.
-* Vous pouvez [filter][8] par: `user`, `source`, `tag`, `host`, `status`, `priority`, `incident`
+* Il est particulièrement utile pour les [équipes][10] réparties aux quatre coins du monde cherchant à mener des enquêtes.
+* Vous pouvez [filtrer][11] par : `user`, `source`, `tag`, `host`, `status`, `priority` ou `incident`
 
-Pour chaque incident, les utilisateurs peuvent:
+Pour chaque incident, les utilisateurs peuvent :
 
-* Le réclamer
-* Augmenter/diminuer sa priorité
-* Le commenter
-* Voir des incidents similaires
-* [@ notifier les membres de l'équipe](/graphing/event_stream/#@-notifications), qui reçoivent alors un courriel
-* `@support-datadog` pour demander [l'assistance](/help) d'un ingénieur Datadog
+* Augmenter/diminuer la priorité
+* Publier des commentaires
+* Consulter des incidents similaires
+* [Informer des membres de l'équipe avec la fonctionnalité « @ »][12], afin qu'ils reçoivent un e-mail
+* Ajouter `@support-datadog` pour demander de [l'aide][13]
 
-{{< img src="getting_started/event_stream_event.png" alt="event stream event" responsive="true" style="width:70%;">}}
+{{< img src="getting_started/event_stream_event.png" alt="événement flux d'événements" responsive="true" style="width:70%;">}}
 
 ## Dashboards
 
 {{< img src="getting_started/dashboard.png" alt="dashboard" responsive="true" >}}
 
-Les Dashboards contiennent [des graphiques][11] avec des métriques de performance en temps réel
+Les dashboards contiennent [des graphiques][14] avec des métriques enregistrant des performances en temps réel :
 
-* Mousing synchrone sur tous les graphiques d'un [screenboard](/graphing/dashboards/screenboard).
-* Les barres verticales rouge sont des événements dans le contexte de la métrique.
-* Cliquez et glissez sur un graphique pour zoomer sur un intervalle de temps particulier.
-* Lorsque vous passez la souris sur le graphique, le flux d'événements se déplace avec vous.
-* Afficher par zone, hôte ou utilisation totale
-* Nous exposons l'éditeur JSON du graphique permettant [une arithmétique][12] de métrique et
-l'utilisation de [fonctions][13].
-* Partagez un snapshot de graphique qui apparaît dans le flux d'événements; en cliquer sur
-ce snapshot vous dirige au dashboard d'origine (via l'icône de caméra en haut à droite d'un graphique).
-* Les graphes peuvent être incorporés dans un iframe, donnant à un tiers un accès au graphique en direct
-sans qu'il puisse accéder à vos données ou toute autre information (via le crayon dans le coin supérieur droit d'un graphique).
+* Déplacez simultanément votre curseur sur l'ensemble des graphiques d'un [screenboard][15].
+* Les barres verticales correspondent à des événements dans le contexte de la métrique.
+* Cliquez sur un graphique et faites-le glisser pour étudier une intervalle spécifique.
+* Lorsque vous passez le curseur sur le graphique, le flux d'événements se déplace avec vous.
+* Affichez l'utilisation par zone, par host ou globale.
+* Vous pouvez utiliser l'éditeur JSON du graphique afin d'appliquer [des opérations arithmétiques][16] et
+des [fonctions][17] aux métriques.
+* Partagez un snapshot de graphique qui apparaît dans le flux d'événements. Si vous cliquez sur
+ce snapshot, vous revenez au dashboard d'origine (via l'icône en forme d'appareil photo en haut à droite d'un graphique).
+* Les graphiques peuvent être intégrés à un iframe, ce qui permet à un tiers d'accéder au graphique en direct
+sans qu'il ne puisse accéder à vos données ou à toute autre information (via le crayon dans le coin supérieur droit d'un graphique).
 
-## Monitoring
+## Surveillance
 
 {{< img src="getting_started/monitor.png" alt="monitor" responsive="true" >}}
 
-Le [Monitoring][14] vous donne la possibilité d'être informé si un agrégat ou si une métrique spécifique est supérieure ou inférieure à un certain seuil:
+Les fonctions de [surveillance][14] vous permettent de recevoir une notification lorsque les valeurs agrégées d'une métrique
+spécifique dépassent un certain seuil :
 
 * Sur l'ensemble de votre infrastructure
 * Par machine (moyenne, max, min ou somme)
-* S'applique à toutes les métriques que vous voulez: chiffre d'affaires: température du centre de données, etc.
+* Vous pouvez appliquer des monitors à toutes les métriques de votre choix : chiffre d'affaires, température du centre de données, etc.
 * Alertes multiples (par device, host, etc.)
-* Définir un message de notification d'alerte, avec les capacités @
+* Possibilité de définir un message de notification d'alerte, avec les fonctionnalités @
 
-{{< img src="getting_started/alert_setup.png" alt="alert setup" responsive="true" >}}
+{{< img src="getting_started/alert_setup.png" alt="configuration d'alerte" responsive="true" >}}
 
-[1]: /agent/
-[2]: http://www.datadoghq.com/product/
-[3]: http://www.datadoghq.com/integrations/
-[4]: /api/
-[5]: https://github.com/DataDog/dd-agent/
-[8]: https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure/
-[10]: /graphing/infrastructure/hostmap/
-[11]: /graphing/
-[12]: /graphing/miscellaneous/functions/
-[13]: https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function/
-[14]: /monitors/
-[15]: /tagging
+[1]: /fr/agent
+[2]: http://www.datadoghq.com/product
+[3]: http://www.datadoghq.com/integrations
+[4]: /fr/api
+[5]: https://github.com/DataDog/dd-agent
+[6]: /fr/graphing/infrastructure
+[7]: /fr/tagging
+[8]: /fr/graphing/infrastructure/hostmap
+[9]: /fr/graphing/event_stream
+[10]: /fr/account_management/team
+[11]: https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure
+[12]: /fr/graphing/event_stream/#@-notifications
+[13]: /fr/help
+[14]: /fr/graphing
+[15]: /fr/graphing/dashboards/screenboard
+[16]: /fr/graphing/functions
+[17]: https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function
+[18]: /fr/monitors

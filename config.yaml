@@ -32,6 +32,11 @@ languages:
           url: "getting_started/"
           pre: "nav_start"
           weight: 30
+        - identifier: menu_gettingstartednav_learning_center
+          name: "Learning Center"
+          url: "getting_started/learning_center"
+          weight: 310
+          parent: menu_references_getting_started
 
         # TAGGING
         - identifier: menu_references_tagging
@@ -247,6 +252,13 @@ languages:
           name: "Security"
           url: "agent/security"
           weight: 80
+          parent: menu_references_agent
+
+        # Guides
+        - identifier: customnav_agentnav_guides
+          name: "Guides"
+          url: "agent/guide/"
+          weight: 90
           parent: menu_references_agent
 
         #- identifier: customnav_agentnav_faq
@@ -971,6 +983,11 @@ languages:
           url: "synthetics/"
           pre: "nav_synthetics"
           weight: 100
+        - identifier: synthetics_uptime_check
+          name: "Uptime Check"
+          url: "synthetics/uptime_check"
+          weight: 110
+          parent: menu_references_synthetics
 
         # DEVELOPERS
         - identifier: menu_references_developers
@@ -1185,6 +1202,7 @@ languages:
           pre: "nav_security"
           weight: 140
         # SECURITY - Subnav start
+
         - identifier: customnav_security_agent
           name: "Agent"
           url: "security/agent"
@@ -1238,6 +1256,11 @@ languages:
           url: "getting_started/"
           pre: "nav_start"
           weight: 30
+        - identifier: menu_gettingstartednav_learning_center
+          name: "Learning Center"
+          url: "getting_started/learning_center"
+          weight: 310
+          parent: menu_references_getting_started
 
         # TAGGING
         - identifier: menu_references_tagging
@@ -2118,6 +2141,18 @@ languages:
           url: "logs/security"
           weight: 100
           parent: menu_references_logs
+
+          # SYNTHETICS
+        - identifier: menu_references_synthetics
+          name: "Synthetics"
+          url: "synthetics/"
+          pre: "nav_synthetics"
+          weight: 99
+        - identifier: synthetics_uptime_check
+          name: "Uptime Check"
+          url: "synthetics/uptime_check"
+          weight: 100
+          parent: menu_references_synthetics
 
         # DEVELOPERS
         - identifier: menu_references_developers

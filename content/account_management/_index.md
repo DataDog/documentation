@@ -5,7 +5,6 @@ description: "Manage your Datadog account and organization"
 aliases:
     - /guides/billing
     - /account_management/settings
-
 ---
 
 ## Account settings
@@ -24,14 +23,14 @@ If you log in to Datadog using Google authentication, your email address is prov
 
 The *account settings* page also lists all of the organizations you are associated with. Switch between these organizations from this page or by hovering over the account menu in the left-side navigation.
 
-**Note**: If you leave an organization, you will not be able to rejoin unless invited by an administrator in that organization.
+**Note**: If you leave an organization, you cannot rejoin unless invited by an administrator in that organization.
 
 To join an existing organization, you must be invited by an administrator. To request an invite:
 
 1. Log out of Datadog by clicking the button on the [*account settings* page][4].
 2. Visit the [*new user sign up* page][5] and click the *Join an existing team* link.
 3. Enter the email address associated with your Datadog account, your name, and the email address of an administrator in the organization you wish to join.
-4. Click the "Request Invite" to submit the request. The organization administrator will receive a notification with instruction on how to add you.
+4. Click the "Request Invite" to submit the request. The organization administrator receives a notification with instruction on how to add you.
 
 If you are an organization administrator, reference the additional documentation to:
 
@@ -43,11 +42,17 @@ If you are an organization administrator, reference the additional documentation
 
 ## Connecting to GitHub
 
-If you have installed the [GitHub integration][11] to create events in Datadog, link your personal GitHub account to your Datadog user account. By linking your accounts, any comments you post to GitHub events in Datadog will be automatically posted back into the corresponding issue or pull request in GitHub.
+If you have installed the [GitHub integration][11] to create events in Datadog, link your personal GitHub account to your Datadog user account. By linking your accounts, any comments you post to GitHub events in Datadog are automatically posted back into the corresponding issue or pull request in GitHub.
 
 ## Preferences
 
-You can set your timezone, desktop notification, and email notification preferences from the [*Preferences* tab within the *account settings* page][12].
+You can set your timezone, desktop notifications, and email subscriptions from the [*Preferences* tab][12] within the *account settings* page. Under email subscriptions, you have access to the following reports:
+
+* Daily Digest
+* Weekly Digest
+* Weekly Monitor Report
+* Weekly Pagerduty Report
+* Weekly Nagios Report
 
 [1]: https://app.datadoghq.com/account/profile
 [2]: https://gravatar.com

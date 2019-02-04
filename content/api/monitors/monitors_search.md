@@ -15,6 +15,8 @@ Search and filter your monitors details.
     
     After entering a search query in your [Manage Monitor page][1] use the query parameter value in the URL of the page as value for this parameter. Consult the dedicated [manage monitor documentation][2] page to learn more.
 
+    The query can contain any number of space-separated monitor attributes, for instance `query="type:metric status:alert"`.
+
 * **`page`** [*optional*, *default* = **0**]: 
     
     Page to start paginating from.

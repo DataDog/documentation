@@ -52,10 +52,35 @@ The Datadog Agent only collects logs that have been written after it has started
 
 The `datadog-agent` does not run as root (and we do not recommend that you make it run as root, as a general best-practice). For this reason, when you configure your `datadog-agent` to tail log files (for custom logs or for integrations) you need to take special care to ensure the `datadog-agent` user has read access to tail the log files you want to collect from.
 
-If the `datadog-agent` user does not have read access to the files you configure it to tail, then a permissions error is captured in the `/var/log/datadog/agent.log`. The Agent requires to have an execute permission on the directory containing the files (this is the default permission required to be able to list the file contained in a directory).
+Otherwise there should be a similar message in the Agent `status`:
+
+{{< img src="logs/agent-log-executable-permission-issue.png" alt="Permission issue" responsive="true" style="width:70%;">}}
+
+Run the `namei` command to obtain more information about the file permissions:
+
+```
+> namei -m /var/log/application/error.log
+> f: /var/log/application/error.log
+ drwxr-xr-x /
+ drwxr-xr-x var
+ drwxrwxr-x log
+ drw-r--r-- application
+ -rw-r----- error.log
+```
+
+In this example, the `application` directory is not executable, therefore the Agent cannot list its files. Furthermore, the Agent does not have read permissions on the `error.log` file.
+Add the missing permissions via the [chmod command][7].
+
+{{< img src="logs/agent-log-permission-ok.png" alt="Permission OK" responsive="true" style="width:70%;">}}
 
 **Note**: When adding the appropriate read permissions, make sure that these permissions are correctly set in your log rotation configuration. Otherwise, on the next log rotate, the Datadog Agent may lose its read permissions.
 Set permissions as `644` in the log rotation configuration to make sure the Agent has read access to the files.
+
+## Permission issue and Journald
+
+When collecting logs from journald, make sure that the Datadog Agent user is added in the systemd group as shown in the [journald integration][8].
+
+Note that journald sends an empty payload if the file permissions are incorrect. Accordingly, it is not possible to raise or send an explicit error message in this case.
 
 ## Configuration issues
 
@@ -71,12 +96,12 @@ These are a few of the common configuration issues that are worth triple-checkin
 
 5. Check if you have `logs_enabled: true` in your `datadog.yaml`
 
-### Check for errors in the logs
+### Check for errors in the Agent logs
 
 There might be an error in the logs that would explain the issue. So just run the following command and check for errors:
 
 ```
-sudo cat /var/log/datadog/agent.log | grep logs
+sudo cat /var/log/datadog/agent.log | grep ERROR
 ```
 
 ## Docker environment
@@ -113,6 +138,10 @@ config_providers:
     polling: true
 ```
 
+### Journald
+
+When using Journald in a containerized environment, make sure to follow the instructions in the [journald integration][8] as there is a specific file used to mount to the Agent.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -123,3 +152,5 @@ config_providers:
 [4]: /agent/docker/logs/?tab=containerinstallation#filter-containers
 [5]: /agent/docker/logs/?tab=dockerfile#examples
 [6]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
+[7]: https://en.wikipedia.org/wiki/Chmod
+[8]: https://docs.datadoghq.com/integrations/journald/#pagetitle

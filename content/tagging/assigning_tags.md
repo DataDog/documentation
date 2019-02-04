@@ -24,7 +24,9 @@ There are several places tags can be assigned: [configuration files](#configurat
 The hostname (tag key `host`) is [assigned automatically][6] by the Datadog Agent. To customize the hostname, use the Agent configuration file, `datadog.yaml`:
 
 ```yaml
-# Force the hostname to whatever you want. (default: auto-detected)
+# Set the hostname (default: auto-detected)
+# Must comply with RFC-1123, which permits only:
+# "A" to "Z", "a" to "z", "0" to "9", and the hyphen (-)
 hostname: mymachine.mydomain
 ```
 
@@ -59,7 +61,7 @@ It is recommended you assign tags as `<KEY>:<VALUE>` pairs, but simple tags are 
 
 ## Environment Variables
 
-When installing the containerized Datadog Agent, host tags set your using the environment variable `DD_TAGS`. We automatically collect common tags from [Docker][9], [Kubernetes][10], [ECS][11], [Swarm, Mesos, Nomad, and Rancher][9]. To extract even more tags, use the following options:
+When installing the containerized Datadog Agent, set your host tags using the environment variable `DD_TAGS`. We automatically collect common tags from [Docker][9], [Kubernetes][10], [ECS][11], [Swarm, Mesos, Nomad, and Rancher][9]. To extract even more tags, use the following options:
 
 | Environment Variable               | Description                                    |
 |------------------------------------|------------------------------------------------|
@@ -276,7 +278,7 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 
 ## Integration Inheritance
 
-The most efficient method for assigning tags is to rely on your integrations. Tags assigned to your Amazon Web Services instances, Chef recipes, and more are all automatically assigned to the hosts and metrics when they are brought into Datadog.
+The most efficient method for assigning tags is to rely on your integrations. Tags assigned to your Amazon Web Services instances, Chef recipes, and more are all automatically assigned to the hosts and metrics when they are brought into Datadog. **Note**: `CamelCase` tags are converted to underscores by Datadog, for example `TestTag` --> `test_tag`.
 
 The following [integration][5] sources create tags automatically in Datadog:
 

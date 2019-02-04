@@ -7,58 +7,57 @@ aliases:
   - /fr/faq/
 disable_toc: true
 ---
-# Bienvenue sur la Documentation de Datadog!
+# Bienvenue dans la documentation de Datadog !
 
-Si vous êtes nouveau ici, lisez ce rapide tour d'horizon de Datadog.
+*Si vous accédez à cette documentation pour la première fois, consultez ci-dessous une vue d'ensemble de Datadog.*
 
 {{< partial name="tile-nav/tile-nav.html" >}}
 
-Votre stack d'applications regorge de métadonnées inutilisées qui tentent de raconter une histoire: les choses ne tournent pas aussi bien qu'elles devraient.
+Votre suite d'applications regorge de métadonnées inexploitées qui tentent de raconter une histoire : les choses ne fonctionnent pas aussi bien qu'elles le devraient.
 
-Des exceptions qui apparaissent,  les requêtes de base de données qui ralentissent; les cache miss sont en augmentation; les logs d'erreurs commencent à remplir vos fichiers. Chacun de ces bavardages fait partie de l'histoire, mais ils sont difficiles à comprendre lorsqu'ils sont pris séparément des autres.
+Exceptions levées, ralentissement des requêtes de base de données, hausse du miss du cache, oscillations de services en amont, logs d'erreurs de plus en plus conséquents… Toutes ces données constituent des indicateurs. Il est cependant difficile d'en comprendre le sens ou de prendre des mesures utiles en les étudiant séparément.
 
-Datadog collecte toutes ces métriques, événements et check de services en un seul endroit sans que vous ayez à gérer vous-même l'infrastructure de stockage ou de surveillance. Vous pouvez alors vous concentrer pleinement sur la visualisation et la corrélation des données collectées via des graphiques, tout en  définissant vos conditions de monitoring.
+Datadog recueille l'ensemble de ces métriques, événements et états de services en un seul endroit. Vous pouvez alors visualiser et corréler les données grâce à de superbes graphiques et définir des conditions d'alerte flexibles sur l'ensemble des données sans avoir à gérer vous-même l'infrastructure de stockage ou de surveillance.
 
-## Collecter tout
+## Collecte exhaustive
 
-Collectez une multitude de données déjà disponibles sans écrire de code. [Installez l'agent Datadog][1] partout: sur vos serveurs,  vos instances, machines virtuelles,  nœuds, [hôtes conteneurisés][2] puis activez et configurez l'une de nos 200 [intégrations][3] prêtes à l'emploi pour commencer à envoyer vos métriques vers Datadog.
+Recueillez une multitude de données déjà disponibles sans écrire de code. [Installez l'Agent Datadog][1] où bon vous semble : sur vos serveurs, instances, machines virtuelles, nœuds et [hosts exécutant des conteneurs][2]. Activez ensuite l'Agent et configurez l'une de nos 200 [intégrations][3] prêtes à l'emploi pour commencer à envoyer vos métriques au backend de Datadog.
 
-Envoyez des métriques d'application custom en écrivant un petit code. Mesurez vos propres gauges, counters, timers et histogrammes avec [DogStatsD][4] ou utilisez [l'APM][5] pour suivre le temps d'exécution de tout chemin de code afin de voir comment cela affecte les temps de réponse .
-Les [bibliothèques client][6] envoient vos [mesures personnalisées][7] et données de trace à l'agent Datadog, qui les expédie alors vers Datadog.
+Envoyez des métriques d'application custom en rédigeant quelques lignes de code. Utilisez vos propres gauges, counters, timers et histograms avec [DogStatsD][4] ou consultez [l'APM][5] pour tracer le temps d'exécution de n'importe quel chemin de code et découvrir l'impact sur les délais de réponse. Les [bibliothèques client][6] envoient vos [métriques custom][7] et données de trace à l'Agent Datadog, qui les transmet ensuite à Datadog.
 
-Certaines parties de votre stack peuvent être des outils SaaS et non des serveurs. Datadog peut [interroger plusieurs de ces services](/integrations) afin de récupérer automatiquement des métriques ou événements.
+Certaines parties de votre pile peuvent correspondre à des outils SaaS, et non à des serveurs. Datadog peut [interroger plusieurs de ces services][8]. Les intégrations associées à ces services sont extrêmement simples à installer, et ne nécessitent pas d'Agent.
 
-## Visualiser le
+## Visualisation
 
-Dès que vous capturez toutes ces données, consultez-les immédiatement dans l'application Web Datadog. Utilisez le Metrics Explorer pour trouver une métrique donnée et l'observer en temps réel. Visualisez et commentez des événements (par exemple, le déploiement d'une application) lorsqu'ils se déversent dans votre [flux d'événements][8]. Filtrez pour un groupe d'hôtes dans [l'Infrastructure Map][9]. Obtenez une image globale de la façon dont certains services (par exemple, MySQL) fonctionnent via son dashboard par défaut.
+Dès que les données sont enregistrées, vous pouvez y accéder directement dans l'application Web Datadog. Utilisez Metrics Explorer pour trouver une métrique spécifique et l'observer en temps réel. Visualisez et commentez des événements (par exemple, le déploiement d'une application) au fil de leur arrivée dans votre [flux d'événements][9]. Filtrez les données selon un groupe d'hosts dans la [carte d'infrastructure][10]. Bénéficiez d'une vue d'ensemble du fonctionnement d'un service donné (par exemple, MySQL) sur son tableau de bord par défaut.
 
-Créez des [Screenboards][10] personnalisés, où vous combinerez tous les graphiques, nombres, événements et états de services qui vous intéressent le plus. Personnalisez les graphiques selon vos besoins afin de résoudre au mieux vos problèmes: en modifiant leurs valeurs de mesure à l'aide d'autres métriques, en appliquant une détection [d'anomalie][11], [de singularité][12] ou de [prévisions][13], superposant de des événements sur eux, et plus encore.
+Vous pourrez rapidement créer des [screenboards][11] personnalisés qui combineront l'ensemble des graphiques, données chiffrées, événements et états de services qui vous intéressent le plus. Adaptez les graphiques à vos besoins pour mieux mettre en évidence les problèmes : modifiez les valeurs de leurs métriques à l'aide d'autres métriques, appliquez une détection des [anomalies][12], des [singularités][13] ou des [prévisions][13], superposez des événements, et plus encore.
 
-## Monitorer le
+## Surveillance
 
-Une fois que vos graphiques ont mis l'accent sur des points de tensions potentiels, définissez des conditions d'alerte sur vos métriques à l'aide de [Monitors][14].  Par défaut vous [recevrez des courriels][15] lorsque les alertes se déclenchent, mais configurez l'intégration[Slack][16] ou [HipChat][17] afin d'obtenir des notifications dédiées.
+Une fois que vos graphiques ont mis en évidence des problèmes potentiels, définissez des conditions d'alerte sur vos métriques à l'aide des [monitors][15]. Par défaut, vous [recevrez des e-mails][16] lorsque les alertes se déclenchent, mais vous pouvez également configurer l'intégration [Slack][17] ou [HipChat][18] pour recevoir des notifications spéciales dans l'application.
 
-Lorsque vous êtes au courant d'un problème en cours [mettez en sourdine vos alertes grâce aux downtimes][18], et lorsque vous êtes sur le point d'arrêter un service pour maintenance, [planifier un temps d'arrêt][19] afin de ne pas être spammé avec des notifications. Lorsque vous ne pouvez pas définir une condition unique d'alerte en matière d'hosts, d'événements, de métriques ou de services, créez un [monitor composite][20].
+Lorsque vous êtes conscient d'un problème récurrent, [désactivez les alertes associées][19]. Avant d'arrêter un service afin d'effectuer une maintenance, [planifiez un downtime][19] afin de ne pas recevoir d'alertes inutiles. Lorsque vous ne pouvez pas définir une condition d'alerte intéressante pour un host, un événement, une métrique ou un service, créez un [monitor composite][20].
 
 {{< partial name="support/support.html" >}}
 
-[1]: /agent
+[1]: /fr/agent
 [2]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
-[3]: /integrations
-[4]: /developers/dogstatsd
-[5]: /tracing
-[6]: /developers/libraries
-[7]: /developers/metrics/custom_metrics/
-[8]: /graphing/event_stream/
-[9]: /graphing/infrastructure
-[10]: /graphing/dashboards/screenboard
-[11]: /monitors/monitor_types/anomaly
-[12]: /monitors/monitor_types/outlier
-[13]: /monitors/monitor_types/forecasts
-[14]: /monitors
-[15]: /monitors/notifications
-[16]: /integrations/slack
-[17]: /integrations/hipchat
-[18]: /monitors/downtimes
-[19]: /monitors/downtimes/
-[20]: /monitors/monitor_types/composite/
+[3]: /fr/integrations
+[4]: /fr/developers/dogstatsd
+[5]: /fr/tracing
+[6]: /fr/developers/libraries
+[7]: /fr/developers/metrics/custom_metrics
+[8]: /fr/integrations
+[9]: /fr/graphing/event_stream
+[10]: /fr/graphing/infrastructure
+[11]: /fr/graphing/dashboards/screenboard
+[12]: /fr/monitors/monitor_types/anomaly
+[13]: /fr/monitors/monitor_types/outlier
+[14]: /fr/monitors/monitor_types/forecasts
+[15]: /fr/monitors
+[16]: /fr/monitors/notifications
+[17]: /fr/integrations/slack
+[18]: /fr/integrations/hipchat
+[19]: /fr/monitors/downtimes
+[20]: /fr/monitors/monitor_types/composite

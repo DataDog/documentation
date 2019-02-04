@@ -2,9 +2,8 @@
 title: Mettre à jour un screenboard
 type: apicontent
 order: 19.2
-external_redirect: /api/#mettre-a-jour-un-screenboard
+external_redirect: '/api/#mettre-a-jour-un-screenboard'
 ---
-
 ## Mettre à jour un screenboard
 
 Remplacez une configuration de screenboard dans Datadog.
@@ -28,4 +27,4 @@ Remplacez une configuration de screenboard dans Datadog.
 * **`read_only`** [*facultatif*, *défaut*=**False**] :
     Indique si le screenboard est en lecture seule ou non.
 
-[1]: /graphing/dashboards/widgets
+[1]: /fr/graphing/dashboards/widgets

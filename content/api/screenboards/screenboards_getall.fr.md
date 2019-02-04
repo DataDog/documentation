@@ -7,7 +7,7 @@ external_redirect: /api/#recuperer-tous-les-screenboards
 
 ## Récupérer tous les screenboards
 
-Récupérez toutes les spécifications de vos screenboards.
+Récupérez toutes les définitions de vos screenboards.
 
 ##### ARGUMENTS
 
