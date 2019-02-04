@@ -53,6 +53,30 @@ The Metrics Explorer allows you to play around with different graph settings in 
 
 Once you have a metric in mind to display in your graph, select your visualization. Check the [list of all visualizations (widgets)][5].
 
+### Appearance
+
+Graphs can be displayed as Areas, Bars, or Lines. For all graph types, Datadog offers various color options to differentiate multiple metrics displayed on the same graph:
+
+| Palette | Description                                                                                              |
+|---------|----------------------------------------------------------------------------------------------------------|
+| Classic | The simple colors light blue, dark blue, light purple, purple, light yellow, and yellow (colors repeat). |
+| Cool    | A gradient color scheme made from green and blue.                                                        |
+| Warm    | A gradient color scheme made from yellow and orange.                                                     |
+| Purple  | A gradient color scheme made from purple.                                                                |
+| Orange  | A gradient color scheme made from orange.                                                                |
+| Gray    | A gradient color scheme made from gray.                                                                  |
+
+For line graphs, different metrics can be assigned specific palettes by separating the queries in JSON.
+
+#### Line graphs
+
+Line graphs include two additional parameters:
+
+| Parameter | Options               |
+|-----------|-----------------------|
+| Style     | Solid, Dashed, Dotted |
+| Stroke    | Normal, Thin, Thick   |
+
 ## Filter
 
 Once the metric and a visualization are in place, you can filter the hosts to be graphed. To the right of the metric is the **from** dropdown which defaults to *(everywhere)*. Click this and choose the tag(s) you want to filter by. To learn more about tags, refer to the [Tagging documentation][6].
@@ -150,10 +174,10 @@ The following configuration options are available:
 
 Add events from related systems to add more context to your graph. For example, you can add GitHub commits, Jenkins deploys, or Docker creation events. Expand the **Event Overlays** section and enter a query to display those events. Use the same query format as for the [Event Stream][8], for example:
 
-| Query                       | Description                                                 |
-|-----------------------------|-------------------------------------------------------------|
-| `sources:jenkins`           | Shows all events from the Jenkins source.                   |
-| `tag:role:web`              | Shows all events with the tag `role:web`.                   |
+| Query                       | Description                                                |
+|-----------------------------|------------------------------------------------------------|
+| `sources:jenkins`           | Shows all events from the Jenkins source.                  |
+| `tag:role:web`              | Shows all events with the tag `role:web`.                  |
 | `tags:$<TEMPLATE_VARIABLE>` | Shows all events from the selected [Template Variable][9]. |
 
 {{< img src="graphing/index/overlay_events.png" alt="Overlay Events" responsive="true" style="width:75%;" >}}
