@@ -15,25 +15,25 @@ further_reading:
   text: "Configure an Uptime Check"
 ---
 
-<div class="alert alert-warning">Synthetics is in beta for the Datadog US Site. To request access, complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics request form</a>.</div>
+<div class="alert alert-warning">Synthetics is in beta for the Datadog US Site. Request access via the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics request form</a>.</div>
 
 ## Overview
 
-Browser Checks are scenarios executed by Datadog on your web application at configurable periodic intervals, from multiple locations around the world, on multiple devices. These checks verify not only that your applications are up and responding to requests, but that any conditions defined in your scenarios are met.
+Browser Checks are scenarios executed by Datadog on your web applications. They run at configurable periodic intervals from multiple locations around the world, and from multiple devices. These checks verify both that your applications are up and responding to requests, and that any conditions defined in your scenarios are met.
 
 ## Configuration
 
 ### Test details
 
-Define the configuration of our Browser Check.
+Define the configuration of your Browser Check.
 
 {{< img src="synthetics/browser_check/browser_check_configuration.png" alt="Browser Check make request" responsive="true" style="width:80%;">}}
 
 1. Give your Browser Check a name. 
-2. Enter the Start URL. This is URL on which your Browser Check starts its scenario.
+2. Enter the Start URL. This is the URL from which your Browser Check starts the scenario.
 3. Define Tags with the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` in the Synthetics page.
 4. Define on which device to run your check. Available devices are: `Laptop Large`, `Tablet`, and `Mobile Small`.
-5. Select locations to run the test from. Available locations are:
+5. Pick-up locations to run the test from. Available locations are:
     * Frankfurt (Request made from an AWS Datacenter)
     * Tokyo (Request made from an AWS Datacenter)
 6. Choose a Check frequency between "1 run per 5 minute interval" to "1 run per week":
@@ -57,10 +57,10 @@ A notification is sent if at least one step of the Browser Check scenario fails.
 
 {{< img src="synthetics/browser_check/browser_check_record_test.png" alt="Browser check record test" responsive="true" >}}
 
-1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window in order to avoid sizing issues in the displayed window within Datadog interface.
+1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window in order to avoid sizing issues in the displayed window within Datadog's interface.
 2. Click on **Start recording** to begin recording your Browser Check.
 3. Your actions are recorded and used to create steps within your Browser Check Scenario.
-4. Optionally, use the Actions available in the upper left corner to enrich your scenario:
+4. Optionally, use the actions available in the upper left corner to enrich your scenario:
     {{< img src="synthetics/browser_check/browser_check_assertions.png" alt="Browser Check assertions" responsive="true" style="width:80%;">}}
 
 5. Once you have finished your Scenario, click on **Save and Launch Test**.
