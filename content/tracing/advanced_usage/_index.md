@@ -428,7 +428,7 @@ putenv('DD_TRACE_AGENT_PORT=8126');
 
 ## Manual Instrumentation
 
-Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][2] and familiarize yourself with the core concepts of Datadog APM. 
+Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][2] and familiarize yourself with the core concepts of Datadog APM.
 
 
 {{< tabs >}}
@@ -565,7 +565,7 @@ For more details about manual instrumentation, check out the [API documentation]
 
 If you aren't using supported library instrumentation (see [Library compatibility][1]), you may want to to manually instrument your code.
 
-To make use of manual instrumentation, use the `tracer` package which is documented on Datadog's [godoc page][2]. 
+To make use of manual instrumentation, use the `tracer` package which is documented on Datadog's [godoc page][2].
 
 **Example Usage**
 
@@ -995,7 +995,7 @@ public void ConfigureServices(IServiceCollection services)
     // create an OpenTracing ITracer with default setting
     OpenTracing.ITracer tracer =
         Datadog.Trace.OpenTracing.OpenTracingTracerFactory.CreateTracer();
-    
+
     // to use tracer with ASP.NET Core dependency injection
     services.AddSingleton<ITracer>(tracer);
 
@@ -1117,7 +1117,7 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 
 Distributed tracing is disabled by default. Refer to the configuration documentation for each framework to enable it.
 
-Distributed tracing is supported in the following frameworks: 
+Distributed tracing is supported in the following frameworks:
 
 | Framework/Library | API Documentation                                                   |
 | ----------------- | :------------------------------------------------------------------ |
@@ -1137,7 +1137,7 @@ To add your own distributed tracing check the [Datadog API documentation][1].
 
 [1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#http-client
 {{% /tab %}}
-{{% tab "Ruby" %}} 
+{{% tab "Ruby" %}}
 
 Distributed tracing is disabled by default. Refer to the configuration documentation for each framework to enable it.
 
@@ -1223,7 +1223,7 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Distributed tracing is enabled by default. 
+Distributed tracing is enabled by default.
 
 {{% /tab %}}
 {{% tab "C++" %}}
@@ -1277,7 +1277,7 @@ Priority sampling allows traces between two Datadog endpoints to be sampled toge
 
 Priority sampling automatically assigns and propagates a priority value along all traces, depending on their service and volume. Priorities can also be set manually to drop non-interesting traces or keep important ones.
 
-For a more detailed explanations of sampling and priority sampling, check the [sampling and storage][5] documentation. 
+For a more detailed explanations of sampling and priority sampling, check the [sampling and storage][5] documentation.
 
 
 {{< tabs >}}
@@ -1461,7 +1461,7 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Priority sampling is enabled by default. 
+Priority sampling is enabled by default.
 
 {{% /tab %}}
 {{% tab "C++" %}}
@@ -1481,7 +1481,7 @@ another_span->SetTag("sampling.priority", 0); // Discard this span.
 
 ## Logging
 
-For each generated trace, there are very likely log events written by the monitored functions and applications. 
+For each generated trace, there are very likely log events written by the monitored functions and applications.
 The purpose of this section is to explain how the correlation between traces and logs can be improved by automatically adding  a trace id in your logs and then use it in the Datadog platform to show you the exact logs correlated to the observed trace.
 
 {{< img src="tracing/logs_in_trace.png" alt="Logs in Traces" responsive="true" style="width:70%;">}}
@@ -1505,11 +1505,11 @@ Enable injection in the [Java Tracer's configuration][2] via the `dd.logs.inject
 
 **2. Automatic Trace IDs Injection for Raw Formatted Logs**
 
-Enable injection in the [Java Tracer's configuration][2]. 
+Enable injection in the [Java Tracer's configuration][2].
 
 **Note**: Currently only **slf4j** is supported for MDC auto-injection.
 
-If the logs are already JSON formatted, there should be nothing left to do. 
+If the logs are already JSON formatted, there should be nothing left to do.
 2. Update your formatter to include `dd.trace_id` and `dd.span_id` in your logger configuration:
 
 ```
@@ -1535,7 +1535,7 @@ import datadog.trace.api.CorrelationIdentifier;
 try {
     ThreadContext.put("dd.trace_id", String.valueOf(CorrelationIdentifier.getTraceId()));
     ThreadContext.put("dd.span_id", String.valueOf(CorrelationIdentifier.getSpanId()));
-} 
+}
 
 // Log something
 
@@ -1555,7 +1555,7 @@ import datadog.trace.api.CorrelationIdentifier;
 try {
     MDC.put("dd.trace_id", String.valueOf(CorrelationIdentifier.getTraceId()));
     MDC.put("dd.span_id", String.valueOf(CorrelationIdentifier.getSpanId()));
-} 
+}
 
 // Log something
 
@@ -1648,7 +1648,7 @@ log = structlog.get_logger()
 
 Once the logger is configured, executing a traced function that logs an event yields the injected tracer information:
 
-``` 
+```
 >>> traced_func()
 {"event": "In tracer context", "trace_id": 9982398928418628468, "span_id": 10130028953923355146}
 ```
@@ -1771,16 +1771,90 @@ The above example illustrates how to use the span's context in the standard libr
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+Use one the following options to inject Node trace information into your logs.
 
-[1]: /help
+**1. Automatic Trace IDs Injection With Supported Logging Libraries (recommended)**
+
+Enable injection with the environment variable `DD_LOGS_INJECTION=true` or by configuring the tracer directly:
+
+```javascript
+const tracer = require('dd-trace').init({
+  logInjection: true
+})
+```
+
+This will enable automatic trace IDs injection for `winston`, `bunyan` and `pino`.
+
+**Note**: Automatic injection only works for logs formatted as JSON.
+
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
+**2. Manual Trace IDs Injection for JSON Formatted Logs**
 
-[1]: /help
+If you are using a logging library not supported for automatic injection but using JSON format, it's possible to do manual injection directly in code.
+
+Example using `console` as the underlying logger:
+
+```javascript
+const tracer = require('dd-trace')
+
+class Logger {
+  log (level, message) {
+    const scope = tracer.scopeManager().active()
+    const time = (new Date()).toISOString()
+    const record = { time, level, message }
+
+    if (scope && scope.span()) {
+      tracer.inject(scope.span().context(), record)
+    }
+
+    console.log(record)
+  }
+}
+
+module.exports = Logger
+```
+
+**3. Manual Trace IDs Injection for Raw Formatted Logs**
+
+To ensure proper log correlation, verify the following is present in each log entry:
+
+- `dd.trace_id=<TRACE_ID>`: Where `<TRACE_ID>` is equal to `tracer.scopeManager().active().span().context().toTraceId()` or `0` if no trace is active during logging.
+- `dd.span_id=<SPAN_ID>`: Where `<SPAN_ID>` is equal to `tracer.scopeManager().active().span().context().toSpanId()` or `0` if no trace is active during logging.
+
+We appending or prepending these 2 strings directly to the message part of the log entry. This will allow you to correlate trace and logs without having to alter your parsing rules.
+
+Example using `console` as the underlying logger:
+
+```javascript
+const tracer = require('dd-trace').init()
+
+class Logger {
+  log (level, message) {
+    const scope = tracer.scopeManager().active()
+    const time = (new Date()).toISOString()
+    const format = '[%s] [%s] - dd.trace_id=%s dd.span_id=%s %s'
+
+    let traceId = 0
+    let spanId = 0
+
+    if (scope && scope.span()) {
+      const context = scope.span().context()
+
+      traceId = context.toTraceId()
+      spanId = context.toSpanId()
+    }
+
+    console.log(format, time, level.toUpperCase(), traceId, spanId, message)
+  }
+}
+
+module.exports = Logger
+```
+
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -1832,7 +1906,7 @@ To return debug level application logs, enable debug mode with the flag `-Ddatad
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Debugging is disabled by default. 
+Debugging is disabled by default.
 
 To enable it set the environment variable `DATADOG_TRACE_DEBUG=true` when using `ddtrace-run`.
 {{% /tab %}}
@@ -1970,7 +2044,7 @@ make install
 {{% /tab %}}
 {{< /tabs >}}
 
-## Security 
+## Security
 
 Sensitive information within your traces can be scrubbed [automatically](#automatic-scrubbing) or [manually](#replace-rules).
 

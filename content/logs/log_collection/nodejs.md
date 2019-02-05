@@ -21,9 +21,9 @@ further_reading:
   text: "Log Collection Troubleshooting Guide"
 ---
 
-## Overview 
+## Overview
 
-To log from your NodeJS application, we recommend using [Winston][1] - as you'll get all the features you need to build up your logging strategy. 
+To log from your NodeJS application, we recommend using [Winston][1] - as you'll get all the features you need to build up your logging strategy.
 
 We also strongly encourage you to setup your logging libraries to produce your logs in JSON format to avoid sustaning [custom parsing rules][2].
 
@@ -48,7 +48,13 @@ npm install --save winston
 }
 ```
 
-## Setup - Log to file
+## Setup
+
+### Inject trace IDs in your logs
+
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions](https://docs.datadoghq.com/tracing/advanced_usage/?tab=nodejs#logging) to automatically add trace and span IDs in your logs.
+
+### Log to file
 
 In your bootstrap file or somewhere in your code, declare the logger as follow:
 
@@ -85,7 +91,7 @@ Create a `nodejs.d/conf.yaml` file in your `conf.d/` folder with the following c
 init_config:
 
 instances:
-    
+
 ##Log section
 logs:
 
