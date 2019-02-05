@@ -17,7 +17,7 @@ For all versions of <strong>Agent v6</strong>, the <code>jmxterm</code> JAR is n
 If you're able to connect using JConsole, run the following:
 
 ```
-java -jar /opt/datadog-agent/agent/checks/libs/jmxterm-1.0-DATADOG-uber.jar -l localhost:PORT -u USER -p PASSWORD
+java -jar /opt/datadog-agent/agent/checks/libs/jmxterm-1.0-DATADOG-uber.jar -l localhost:<PORT> -u <USER> -p <PASSWORD>
 ```
 
 If you're able to connect using the command above, run: `beans` and send to the [Datadog support team][2] a copy of the results from above along with the following information:
@@ -143,8 +143,8 @@ instances:
     user: tomcat
     password: tomcat
     name: tomcat_webapp
-    trust_store_path: /path/to/keystore
-    trust_store_password: mykey_Password
+    trust_store_path: <KEYSTORE_PATH>
+    trust_store_password: <KEY_PASSWORD>
 ```
 
 * [Restart the Agent][4].
