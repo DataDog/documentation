@@ -18,7 +18,7 @@ BODY
 ## Log attributes can also be passed as key:value pairs in valid JSON messages
 curl -X POST https://http-intake.logs.datadoghq.com/v1/input/<API_KEY> \
      -H "Content-Type: application/json" \
-     -d '{"message":"hello world", "ddsource":"my-source", "ddtags":"env:my-env,user:my-user", "hostname":"my-hostname"}'
+     -d '{"message":"hello world", "ddsource":"<SOURCE>", "ddtags":"env:<ENV>,user:<USER_NAME>", "hostname":"<HOSTNAME>"}'
 
 ## Multi JSON Messages
 
