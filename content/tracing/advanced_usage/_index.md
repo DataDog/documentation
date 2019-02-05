@@ -1787,11 +1787,6 @@ This will enable automatic trace IDs injection for `winston`, `bunyan` and `pino
 
 **Note**: Automatic injection only works for logs formatted as JSON.
 
-{{% /tab %}}
-{{% tab ".NET" %}}
-
-Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
-
 **2. Manual Trace IDs Injection for JSON Formatted Logs**
 
 If you are using a logging library not supported for automatic injection but using JSON format, it's possible to do manual injection directly in code.
@@ -1855,6 +1850,13 @@ class Logger {
 module.exports = Logger
 ```
 
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+
+[1]: /help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
