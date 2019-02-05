@@ -256,6 +256,8 @@ Send the monitor notification to the appropriate endpoint:
 * Notify any non-Datadog users via email by adding `@<EMAIL>` to the notification message.
 * Install Slack or Hipchat integration to send your notifications directly in the appropriate channel.
 
+**Note**: A @-mention must have a space between it and the last line character: `{{value}}@slack-channel` is invalid `{{value}} @slack-channel` is valid.
+
 {{< tabs >}}
 {{% tab "Slack Integration" %}}
 

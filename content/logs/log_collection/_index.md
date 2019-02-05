@@ -63,6 +63,15 @@ This produces the following result in your [live tail page][26]:
 
 {{< img src="logs/custom_log_telnet.png" alt="Custom telnet" responsive="true" style="width:70%;">}}
 
+Datadog can automatically parse attributes out of JSON formatted messages.
+
+```
+telnet intake.logs.datadoghq.com 10514 
+<DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
+```
+
+{{< img src="logs/custom_log_telnet_json_.png" alt="Custom telnet" responsive="true" style="width:100%;">}}
+
 ### Datadog Logs Endpoints
 
 Datadog provides logging endpoints for both SSL-encrypted connections and unencrypted connections.
@@ -106,18 +115,19 @@ Endpoints that can be used to send logs to Datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Reserved attributes
+### Reserved attributes
 
 Here are some key attributes you should pay attention to when setting up your project:
 
 | Attribute | Description                                                                                                                                                                                                                            |
 |-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `host`    | The name of the originating host as defined in metrics. We automatically retrieve corresponding host tags from the matching host in Datadog and apply them to your logs. The Agent sets this value automatically.                      |
-| `source`  | This corresponds to the integration name: the technology from which the log originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: nginx, postgresql, etc. |
+| `source`  | This corresponds to the integration name: the technology from which the log originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, etc. |
+| `status` | This corresponds to the level/severity of a log. It is used to define [patterns][28] and has a dedicated layout in the Datadog Log UI.|
 | `service` | The name of the application or service generating the log events. It is used to switch from Logs to APM, so make sure you define the same value when you use both products.                                                            |
 | `message` | By default, Datadog ingests the value of the `message` attribute as the body of the log entry. That value is then highlighted and displayed in the Logstream, where it is indexed for full text search.                                |
 
-Your logs are collected and centralized into the [Log Explorer][28] view. You can also search, enrich, and alert on your logs.
+Your logs are collected and centralized into the [Log Explorer][29] view. You can also search, enrich, and alert on your logs.
 
 {{< img src="logs/log_explorer_view.png" alt="Log Explorer view" responsive="true" >}}
 
@@ -174,4 +184,5 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [25]: https://app.datadoghq.com/account/settings#api
 [26]: https://app.datadoghq.com/logs/livetail
 [27]: /security/logs/#information-security
-[28]: /logs/explore
+[28]: /logs/explorer/patterns
+[29]: /logs/explorer
