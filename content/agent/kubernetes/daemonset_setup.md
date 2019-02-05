@@ -285,7 +285,7 @@ To enable trace collection with your DaemonSet:
   This exposes the Datadog Agent tracing port on each of your Kubernetes nodes.
 
     **Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources. 
-    Another word of caution: some network plugins don't support `hostPorts` yet, so this won't work. If you use EKS to host your Agent and applications, the `hostPorts` parameter could not work. 
+    Another word of caution: some network plugins don't support `hostPorts` yet, so this won't work. 
     The workaround in this case is to add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. It also means that all ports opened on the container are also opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod will not start. Not all Kubernetes installations allow this.
 
 ### Process Collection
@@ -310,7 +310,7 @@ Learn more about this in the [Docker DogStatsD documentation][11]
 To send custom metrics via DogStatsD from your application pods, uncomment the `# hostPort: 8125` line in your `datadog-agent.yaml` manifest. This exposes the DogStatsD port on each of your Kubernetes nodes.
 
 **Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources. 
-Another word of caution: some network plugins don't support `hostPorts` yet, so this won't work. If you use EKS to host your Agent and applications, the `hostPorts` parameter could not work. 
+Another word of caution: some network plugins don't support `hostPorts` yet, so this won't work.
 The workaround in this case is to add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. It also means that all ports opened on the container are also opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod will not start. Not all Kubernetes installations allow this.
 
 ## Further Reading
