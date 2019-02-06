@@ -60,9 +60,10 @@ A notification is sent if at least one step of the Browser Check scenario fails.
 1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window in order to avoid sizing issues in the displayed window within Datadog's interface.
 2. Click on **Start recording** to begin recording your Browser Check.
 3. Your actions are recorded and used to create steps within your Browser Check Scenario.
-4. Optionally, use the actions available in the upper left corner to enrich your scenario:
+4. Use the actions available in the upper left corner to enrich your scenario:
     {{< img src="synthetics/browser_check/browser_check_assertions.png" alt="Browser Check assertions" responsive="true" style="width:80%;">}}
 
+    **You must setup at least one action** in order for your browser check to be valid. Otherwise there is nothing to check. 
 5. Once you have finished your Scenario, click on **Save and Launch Test**.
 
 ### Actions
@@ -101,7 +102,7 @@ After selecting the Hover action, the hovering is blocked, and the step can be a
 
 To define a variable, enter a capitalized name then choose its type between 
 
-* `Select an element content` : this type allows you to create a variable out of a span, div, h, a, etc. content by extracting the text of this element.
+* `Select an element content` : this type allows you to create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
 * `From pattern`:
 
 | Pattern                 | Description                                         |
@@ -112,8 +113,8 @@ To define a variable, enter a capitalized name then choose its type between
 
 ##### Use the variable
 
-Once created, use your variable to set an input text on a form, search
-bar, etc. Use the little hand on your variable box to create an input step: 
+Once created, use your variable to set an input text on a form or search
+bar. Use the little hand on your variable box to create an input step: 
 
 {{< img src="synthetics/browser_check/variable_input.gif" alt="Variable Input" responsive="true" style="width:80%;">}}
 
