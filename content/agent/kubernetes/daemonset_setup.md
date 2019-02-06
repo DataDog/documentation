@@ -305,7 +305,7 @@ To send custom metrics via DogStatsD, set the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` v
 (...)
 ```
 
-Learn more about this in the [Docker DogStatsD documentation][11]
+Learn more about this in the [Kubernetes DogStatsD documentation][11]
 
 To send custom metrics via DogStatsD from your application pods, uncomment the `# hostPort: 8125` line in your `datadog-agent.yaml` manifest. This exposes the DogStatsD port on each of your Kubernetes nodes.
 
@@ -327,4 +327,4 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [8]: /logs
 [9]: /logs/docker/#configuration-file-example
 [10]: /graphing/infrastructure/process/?tab=kubernetes#installation
-[11]: /agent/docker/#dogstatsd-custom-metrics
+[11]: /agent/kubernetes/dogstatsd
