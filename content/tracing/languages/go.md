@@ -92,7 +92,7 @@ The Go tracer includes support for the following data stores and libraries.
 Packages must be imported, i.e.:
 
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<package_dir>/<package_name>
+import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<package_dir>/<package_name>"
 ```
 
 ## Configuration
