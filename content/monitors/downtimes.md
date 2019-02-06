@@ -65,7 +65,7 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 Recurring downtimes allow you to create a downtime that is started and stopped at a recurring interval or pattern. 
 
-These are useful if you have for example a regularly scheduled maintenance window, non-peak or peak hours for which you have configured a different monitor to account for this change in behavior and want to suppress an otherwise noisy monitor.
+One use case for this would be if you have regularly scheduled maintenance windows and want to suppress what might become a noisy monitor due to your changes.
 
 The downtimes will be scheduled and cancelled at the specified constraints, by cancelling the existing downtime and creating a new downtime with the same constraints associated to the user which configured this downtime.
 
