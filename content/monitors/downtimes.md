@@ -22,7 +22,7 @@ You can schedule downtimes and/or mute your Datadog monitors so that they do not
 
 Monitors trigger events when they change state between `ALERT`, `WARNING` (if enabled), `RESOLVED`, and `NO DATA` (if enabled). If a monitor has been silenced either by a downtime or muting, then any transition from `RESOLVED` to another state will **neither trigger an event**, nor activate any associated notification channels. 
 
-**Note**: Muting or un-muting a monitor via the UI deletes all scheduled downtimes associated with that monitor.
+**Note**: Muting or un-muting a monitor via the UI does not delete scheduled downtimes associated with that monitor. For that you should use the Manage Downtimes feature or directly use the API.
 
 {{< img src="monitors/downtimes/downtime_on_alert.png" alt="downtime on alert" responsive="true" style="width:80%;">}}
 
@@ -55,11 +55,23 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 2. Set a schedule.
   {{< img src="monitors/downtimes/downtime-schedule.png" alt="downtime-schedule" responsive="true" style="width:80%;">}}
-  You can set a start date and time or leave the field empty to immediately start the downtime. You may also set a repeating schedule to accommodate regularly scheduled downtimes.
+  You can set a start date and time or leave the field empty to immediately start the downtime. You may also set a [repeating schedule to accommodate regularly scheduled downtimes](#recurring-downtimes).
 
 3. Add an optional message to notify your team
   {{< img src="monitors/downtimes/downtime-notify.png" alt="downtime-notify" responsive="true" style="width:80%;">}}
   Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting][5] as well as Datadog's @-notification syntax. The *Notify your team* field allows you to specify team members or send the message to a service [integration][6].
+
+## Recurring Downtimes
+
+Recurring downtimes allow you to create a downtime that is started and stopped and a recurring interval or pattern. 
+
+These are useful if you have for example a regularly scheduled maintenance window, non-peak or peak hours for which you have configured a different monitor to account for this change in behavior and want to suppress an otherwise noisy monitor.
+
+The downtimes will be scheduled and cancelled at the specified constraints, by cancelling the existing downtime and creating a new downtime with the same constraints associated to the user which configured this downtime.
+
+## Searching Downtimes
+
+Downtime history can be seen both on the Monitor Status Page as overlayed on the group transition history, as well as in the Event Stream by searching for: `tags:audit,downtime` or a specific downtime by id with `tags:audit,downtime_id:<downtime_id>`
 
 ## Further Reading
 
