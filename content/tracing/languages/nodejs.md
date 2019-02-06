@@ -57,15 +57,11 @@ const tracer = require('dd-trace').init()
 
 ```js
 // server.js
-
 import "./tracer"; // must come before importing any instrumented module.
 
 // tracer.js
-
 import * as tracer from "dd-trace";
-
 tracer.init(); // initialized in a different file to avoid hoisting.
-
 export default tracer;
 ```
 
