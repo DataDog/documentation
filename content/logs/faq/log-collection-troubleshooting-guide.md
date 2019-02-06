@@ -142,6 +142,36 @@ config_providers:
 
 When using Journald in a containerized environment, make sure to follow the instructions in the [journald integration][8] as there is a specific file used to mount to the Agent.
 
+## Serverless environment
+
+### Logs from lambda functions are not visible in log explorer
+
+Refer to https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function to configure your environment.
+
+If you still do not see your logs, double-check the following points.
+
+#### are logs expectedly dropped? 
+
+Check if logs appear in the livetail. Source is likely to be aws or cloudwatch (see parse_event_source() function in Python lambda functions for details).
+
+If they appear in livetail, you probably explicitely excluded those logs from indexes. 
+
+If they do not appear in live-tail, remind that we drop logs older than 6 hours.
+
+#### configuration of datadog lambda function
+
+Check datalog lambda configuration :
+- API KEY : may be set directly in the Python code, or alternatively as a variable environment.
+- DD_HOST / DD_SOURCE : default values are ok, unless a proxy is set.
+
+#### execution of datadog lambda function
+
+
+Check that datadog lambda fucntion is actually triggered. You can leverage `aws.lambda.invocations` and `aws.lambda.errors` metrics with the tag functionname of your datadog lambda function. 
+
+Check that datadog lambda fuction runs properly, checking for errors in datadog lambda logs in cloudwatch.
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
