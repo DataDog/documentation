@@ -173,6 +173,11 @@ languages:
           url: "agent/kubernetes/cluster"
           weight: 157
           parent: kubernetes
+        - identifier: kubernetes_helm
+          name: "Using Helm"
+          url: "agent/kubernetes/helm"
+          weight: 158
+          parent: kubernetes
         - identifier: kubernetes_event
           name: "Event Collection"
           url: "agent/kubernetes/event_collection"
