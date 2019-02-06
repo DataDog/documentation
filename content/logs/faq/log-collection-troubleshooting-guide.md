@@ -92,7 +92,7 @@ These are a few of the common configuration issues that are worth triple-checkin
 
 3. By default the Agent does not collect any logs, make sure there is at least one .yaml file in the Agent's `conf.d/` directory that includes a logs section and the appropriate values.
 
-4. You may have some .yaml parsing errors in your configuration files. Yaml is notoriously finicky, so when in doubt, a good [yaml validator][5] is worth referencing.
+4. You may have some .yaml parsing errors in your configuration files. YAML can be finicky, so when in doubt, a good [YAML validator][5] is worth referencing.
 
 5. Check if you have `logs_enabled: true` in your `datadog.yaml`
 
