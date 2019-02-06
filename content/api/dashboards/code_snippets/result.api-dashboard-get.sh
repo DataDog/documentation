@@ -1,26 +1,35 @@
 {
-  "dash": {
-    "description": "An informative dashboard.",
-    "graphs": [
-      {
-        "definition": {
-          "events": [],
-          "requests": [
-            {
-              "q": "avg:system.mem.free{*}"
-            }
-          ],
-          "viz": "timeseries"
-        },
-        "title": "Average Memory Free"
-      }
+    "notify_list": [
+        "user@domain.com"
     ],
-    "id": 2473,
-    "title": "My Dashboard",
-  },
-  "resource": "/api/v1/dashboard/2473",
-  "url": "/dashboard/dashboard/2473",
-  "created": "2015-12-17T23:06:06.703087+00:00",
-  "modified": "2015-12-17T23:12:26.726234+00:00",
-  "read_only": "true"
+    "description": "A dashboard with memory info.",
+    "template_variables": [
+        {
+            "default": "my-host",
+            "prefix": "host",
+            "name": "host1"
+        }
+    ],
+    "is_read_only": true,
+    "id": "qc9-tuk-9kv",
+    "title": "Average Memory Free Shell",
+    "url": "/dashboard/qc9-tuk-9kv/average-memory-free-shell",
+    "created_at": "2019-02-05T01:06:36.636295+00:00",
+    "modified_at": "2019-02-05T01:06:36.636295+00:00",
+    "author_handle": "user@domain.com",
+    "widgets": [
+        {
+            "definition": {
+                "requests": [
+                    {
+                        "q": "avg:system.mem.free{*}"
+                    }
+                ],
+                "type": "timeseries",
+                "title": "Average Memory Free"
+            },
+            "id": 2252428653625902
+        }
+    ],
+    "layout_type": "ordered"
 }
