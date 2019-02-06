@@ -1820,7 +1820,7 @@ To ensure proper log correlation, verify the following is present in each log en
 - `dd.trace_id=<TRACE_ID>`: Where `<TRACE_ID>` is equal to `tracer.scopeManager().active().span().context().toTraceId()` or `0` if no trace is active during logging.
 - `dd.span_id=<SPAN_ID>`: Where `<SPAN_ID>` is equal to `tracer.scopeManager().active().span().context().toSpanId()` or `0` if no trace is active during logging.
 
-We appending or prepending these 2 strings directly to the message part of the log entry. This will allow you to correlate trace and logs without having to alter your parsing rules.
+We recommend appending or prepending these 2 strings directly to the message part of the log entry. This will allow you to correlate trace and logs without having to alter your parsing rules.
 
 Example using `console` as the underlying logger:
 
