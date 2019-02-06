@@ -63,7 +63,7 @@ A notification is sent if at least one step of the Browser Check scenario fails.
 4. Use the actions available in the upper left corner to enrich your scenario:
     {{< img src="synthetics/browser_check/browser_check_assertions.png" alt="Browser Check assertions" responsive="true" style="width:80%;">}}
 
-    **You must setup at least one action** in order for your browser check to be valid. Otherwise there is nothing to check. 
+    **Note**: **Your last browser check step must be an Assertion**, otherwise there is nothing to check.
 5. Once you have finished your Scenario, click on **Save and Launch Test**.
 
 ### Actions
