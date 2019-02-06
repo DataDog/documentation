@@ -67,7 +67,7 @@ Recurring downtimes allow you to create a downtime that is started and stopped a
 
 One use case for this would be if you have regularly scheduled maintenance windows and want to suppress what might become a noisy monitor due to your changes.
 
-The downtimes are scheduled and cancelled at the specified constraints—by cancelling the existing downtime, and creating a new downtime with the same constraints associated to the user who configured this downtime.
+This works by cancelling the existing downtime, and creating a new downtime with the same constraints associated to the user who configured this downtime.
 
 ## Searching Downtimes
 
