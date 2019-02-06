@@ -113,8 +113,7 @@ To define a variable, enter a capitalized name then choose its type between
 
 ##### Use the variable
 
-Once created, use your variable to set an input text on a form or search
-bar. Use the little hand on your variable box to create an input step: 
+Once created, use your variable to set an input text on a form or search bar. Use the little hand on your variable box to create an input step: 
 
 {{< img src="synthetics/browser_check/variable_input.gif" alt="Variable Input" responsive="true" style="width:80%;">}}
 
@@ -125,7 +124,7 @@ You can also use your variables in some assertions, including:
 * Assert the page does not contain text
 * Check main page URL's content
 
-To use your variables in one of your assertions, hit *Use Variable* and select the variable you’re willing to use:
+To use your variables in one of your assertions, hit *Use Variable* and select the variable you want to use:
 
 {{< img src="synthetics/browser_check/use_variable_in_assertion.png" alt="Use variable in assertion" responsive="true" style="width:40%;">}}
 
