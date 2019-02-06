@@ -111,10 +111,10 @@ logs:
 Refer to the [journald integration][2] documentation for more details regarding the setup for containerized environments and units filtering.
  
 
+
+
 [1]: /agent/faq/agent-configuration-files
 [2]: /integrations/journald
-
-
 {{% /tab %}}
 {{% tab "Windows Events" %}}
 

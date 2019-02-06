@@ -46,7 +46,7 @@ Additionally, this metric has been tagged with `Status`, which has 2 values: `St
 
 ##### Scenario 1
 
-By default, Datadog creates aggregations for `my.service.latency` for [each combination of custom metric][5] tags `Status` and `Result`.
+By default, Datadog creates aggregations for `my.service.latency` for each combination of custom metric tags `Status` and `Result`.
 
 You could then query, for example `{my.service.latency for Status:success, Result:closed}`, but not `{my.service.latency for Availability-Zone: US-East-1a}`
 
@@ -94,4 +94,3 @@ The following gif demonstrates inspecting the aggregations created for a metric,
 [2]: /developers/metrics/histograms
 [3]: /developers/metrics/distributions
 [4]: https://app.datadoghq.com/metric/distribution_metrics
-[5]: /developers/metrics/custom_metrics

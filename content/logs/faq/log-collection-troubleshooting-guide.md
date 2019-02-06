@@ -69,7 +69,7 @@ Run the `namei` command to obtain more information about the file permissions:
 ```
 
 In this example, the `application` directory is not executable, therefore the Agent cannot list its files. Furthermore, the Agent does not have read permissions on the `error.log` file.
-Add the missing permissions via the [chmod command][7].
+Add the missing permissions via the [chmod command][3].
 
 {{< img src="logs/agent-log-permission-ok.png" alt="Permission OK" responsive="true" style="width:70%;">}}
 
@@ -78,7 +78,7 @@ Set permissions as `644` in the log rotation configuration to make sure the Agen
 
 ## Permission issue and Journald
 
-When collecting logs from journald, make sure that the Datadog Agent user is added in the systemd group as shown in the [journald integration][8].
+When collecting logs from journald, make sure that the Datadog Agent user is added in the systemd group as shown in the [journald integration][4].
 
 Note that journald sends an empty payload if the file permissions are incorrect. Accordingly, it is not possible to raise or send an explicit error message in this case.
 
@@ -92,7 +92,7 @@ These are a few of the common configuration issues that are worth triple-checkin
 
 3. By default the Agent does not collect any logs, make sure there is at least one .yaml file in the Agent's `conf.d/` directory that includes a logs section and the appropriate values.
 
-4. You may have some .yaml parsing errors in your configuration files. Yaml is notoriously finicky, so when in doubt, a good [yaml validator][3] is worth referencing.
+4. You may have some .yaml parsing errors in your configuration files. Yaml is notoriously finicky, so when in doubt, a good [yaml validator][5] is worth referencing.
 
 5. Check if you have `logs_enabled: true` in your `datadog.yaml`
 
@@ -116,9 +116,9 @@ sudo cat /var/log/datadog/agent.log | grep ERROR
 
 At least one valid log configuration must be set to start log collection. There are several options to configure log collection; ensure that at least one of them is activated:
 
-1. `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`, which collects logs from all containers (see [here how to exclude a subset][4])
+1. `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`, which collects logs from all containers (see [here how to exclude a subset][6])
 
-2. Autodiscovery via [container labels][5]. In this case, ensure that `datadog.yaml` has Docker listener and config provider:
+2. Autodiscovery via [container labels][7]. In this case, ensure that `datadog.yaml` has Docker listener and config provider:
 
 ```
 listeners:
@@ -128,7 +128,7 @@ config_providers:
     polling: true
 ```
 
-3. Autodiscovery in Kubernetes via [pod annotations][6]. In this case, ensure that `datadog.yaml` has the kubelet listener and config provider:
+3. Autodiscovery in Kubernetes via [pod annotations][8]. In this case, ensure that `datadog.yaml` has the kubelet listener and config provider:
 
 ```
 listeners:
@@ -140,7 +140,7 @@ config_providers:
 
 ### Journald
 
-When using Journald in a containerized environment, make sure to follow the instructions in the [journald integration][8] as there is a specific file used to mount to the Agent.
+When using Journald in a containerized environment, make sure to follow the instructions in the [journald integration][4] as there is a specific file used to mount to the Agent.
 
 ## Further Reading
 
@@ -148,9 +148,9 @@ When using Journald in a containerized environment, make sure to follow the inst
 
 [1]: /logs
 [2]: /help
-[3]: https://codebeautify.org/yaml-validator
-[4]: /logs/log_collection/docker/?tab=containerinstallation#filter-containers
-[5]: /logs/log_collection/docker/?tab=dockerfile#examples
-[6]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
-[7]: https://en.wikipedia.org/wiki/Chmod
-[8]: https://docs.datadoghq.com/integrations/journald/#pagetitle
+[3]: https://en.wikipedia.org/wiki/Chmod
+[4]: https://docs.datadoghq.com/integrations/journald/#pagetitle
+[5]: https://codebeautify.org/yaml-validator
+[6]: /logs/log_collection/docker/?tab=containerinstallation#filter-containers
+[7]: /logs/log_collection/docker/?tab=dockerfile#examples
+[8]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates

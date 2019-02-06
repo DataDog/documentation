@@ -1737,7 +1737,7 @@ Datadog.tracer.trace('my.operation') { logger.warn('This is a traced operation.'
 
 See our [Ruby logging documentation][2] to verify the Ruby log integration is properly configured and your ruby logs are automatically parsed.
 
-[1]: https://docs.datadoghq.com/logs/log_collection/ruby/
+[1]: https://docs.datadoghq.com/logs/log_collection/ruby
 [2]: https://docs.datadoghq.com/logs/log_collection/ruby/#configure-the-datadog-agent
 {{% /tab %}}
 {{% tab "Go" %}}
