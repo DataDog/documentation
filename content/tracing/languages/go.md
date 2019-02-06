@@ -21,14 +21,14 @@ further_reading:
 ---
 ## Installation and Getting Started
 
-For configuration instructions and details about using the API, check out the Datadog [API documentation][1]. For manual instrumentation, use the [integrations section](#integrations) below for Go libraries and frameworks supporting automatic instrumentation.
+For configuration instructions and details about using the API, see the Datadog [API documentation][1]. For manual instrumentation, use the [integrations section](#integrations) below for Go libraries and frameworks supporting automatic instrumentation.
 
 For a description of the terminology used in APM, see the [Getting started with APM section][2]. For details about contributing, check the official repository [README.md][3].
 
-Consult the [migration document][4] if you need to migrate from an older version of the tracer (e.g. v<0.6.x) to newest version.
+Consult the [migration document][4] if you need to migrate from an older version of the tracer (e.g. v<0.6.x) to the newest version.
 
 ### Installation
-First [install and configure the Datadog Agent][5], see the additional documentation for [tracing Docker applications][6] or [Kubernetes applications][7].
+First [install and configure the Datadog Agent][5]. See the additional documentation for [tracing Docker applications][6] or [Kubernetes applications][7].
 
 Next, install the Go tracer from its canonical import path:
 
@@ -40,7 +40,7 @@ You are now ready to import the tracer and start instrumenting your code.
 
 ## Automatic Instrumentation
 
-Datadog built a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. Find the list of supported [integrations](#integrations) below.
+Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. Find the list of supported [integrations](#integrations) below.
 
 ## Compatibility
 To begin tracing your Go applications, your environment must first meet the following requirements:
@@ -89,19 +89,46 @@ The Go tracer includes support for the following data stores and libraries.
 
 **Note**: The [integrations documentation][53] provides a detailed overview of the supported packages and their APIs, along with usage examples.
 
+Packages must be imported, i.e.:
+
+```go
+import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<package_dir>/<package_name>
+```
+
 ## Configuration
 
-The tracer is configured with options parameters when the `Start` function is called. A list of available options are:
+The tracer is configured with options parameters when the `Start` function is called. An example for generating a trace:
 
 ```go
 package main
 
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+import (
+    "net/http"
+    "strings"
+    "log"
+    httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func sayHello(w http.ResponseWriter, r *http.Request) {
+  message := r.URL.Path
+  message = strings.TrimPrefix(message, "/")
+  message = "Hello " + message
+  w.Write([]byte(message))
+}
 
 func main() {
-    // Start the tracer with zero or more options.
-    tracer.Start(tracer.WithServiceName("my-service"))
+    // start the tracer with zero or more options
+    tracer.Start(tracer.WithServiceName("test-go"))
     defer tracer.Stop()
+
+    mux := httptrace.NewServeMux() // init the http tracer
+    mux.HandleFunc("/", sayHello) // use the tracer to handle the urls
+
+    err := http.ListenAndServe(":9090", mux) // set listen port
+    if err != nil {
+        log.Fatal("ListenAndServe: ", err)
+    }
 }
 ```
 
