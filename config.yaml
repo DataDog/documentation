@@ -543,7 +543,7 @@ languages:
           weight: 135
           parent: menu_references_monitoring
 
-        # Check summary 
+        # Check summary
         - identifier: customnav_monitornav_check_summary
           name: "Check Summary"
           url: "monitors/check_summary/"
@@ -1157,6 +1157,11 @@ languages:
           name: "Active Directory"
           url: "account_management/saml/activedirectory"
           weight: 510
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_auth0
+          name: "Auth0"
+          url: "account_management/saml/auth0"
+          weight: 515
           parent: customnav_accountmanagementnav_saml
         - identifier: saml_azure
           name: "Azure"
@@ -2415,6 +2420,11 @@ languages:
           name: "Active Directory"
           url: "account_management/saml/activedirectory"
           weight: 510
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_auth0
+          name: "Auth0"
+          url: "account_management/saml/auth0"
+          weight: 515
           parent: customnav_accountmanagementnav_saml
         - identifier: saml_azure
           name: "Azure"
