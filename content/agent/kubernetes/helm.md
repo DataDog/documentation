@@ -135,6 +135,14 @@ helm install --name <RELEASE_NAME> -f my-values.yaml stable/datadog
 
 You can copy and customize the default [values.yaml][7].
 
+## Upgrading the chart
+
+Use the `helm upgrade` command to upgrade to a new version of the chart, or to change the configuration of your release. 
+
+```bash
+helm upgrade -f my-values.yaml <RELEASE_NAME> stable/datadog --recreate-pods
+```
+
 ## Enabling integrations with Helm
 
 The Datadog [entrypoint][8] copies files with a `.yaml` extension found in `/conf.d` and files with `.py` extension in `/check.d` to `/etc/datadog-agent/conf.d` and `/etc/datadog-agent/checks.d` respectively. The keys for `datadog.confd` and `datadog.checksd` should mirror the content found in their respective ConfigMaps, i.e.:
