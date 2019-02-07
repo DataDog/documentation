@@ -1,5 +1,5 @@
 ---
-title: Integration Guides
+title: Graphing Guides
 kind: guide
 ---
 
