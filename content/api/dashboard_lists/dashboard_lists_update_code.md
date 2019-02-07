@@ -1,7 +1,7 @@
 ---
 title: Update a Dashboard List
 type: apicode
-order: 8.4
+order: 9.4
 external_redirect: /api/#update-a-dashboard-list
 ---
 

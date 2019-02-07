@@ -1,6 +1,6 @@
 ---
 title: Dashboards
 type: apicode
-order: 25
+order: 8
 external_redirect: /api/#dashboards
 ---

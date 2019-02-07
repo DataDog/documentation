@@ -1,7 +1,7 @@
 ---
 title: Upload IdP metadata
 type: apicode
-order: 18.4
+order: 19.4
 external_redirect: /api/#upload-idp-metadata
 ---
 

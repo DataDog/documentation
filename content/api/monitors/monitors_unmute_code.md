@@ -1,7 +1,7 @@
 ---
 title: Unmute a monitor
 type: apicode
-order: 17.10
+order: 18.10
 external_redirect: /api/#unmute-a-monitor
 ---
 

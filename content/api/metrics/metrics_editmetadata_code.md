@@ -1,7 +1,7 @@
 ---
 title: Edit metric metadata
 type: apicode
-order: 16.5
+order: 17.5
 external_redirect: /api/#edit-metric-metadata
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Nombre de hosts
 type: apicode
-order: 13.2
+order: 14.2
 external_redirect: /api/#nombre-de-hosts
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Create embed
 type: apicontent
-order: 10.2
+order: 11.2
 external_redirect: /api/#create-embed
 ---
 

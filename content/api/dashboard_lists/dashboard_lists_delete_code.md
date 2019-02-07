@@ -1,7 +1,7 @@
 ---
 title: Delete a Dashboard List
 type: apicode
-order: 8.5
+order: 9.5
 external_redirect: /api/#delete-a-dashboard-list
 ---
 

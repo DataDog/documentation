@@ -1,7 +1,7 @@
 ---
 title: Search hosts
 type: apicontent
-order: 13.1
+order: 14.1
 external_redirect: /api/#search-hosts
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Create a Dashboard
 type: apicode
-order: 25.1
+order: 8.1
 external_redirect: /api/#create-a-dashboard
 ---
 

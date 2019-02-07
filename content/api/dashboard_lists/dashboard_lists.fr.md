@@ -1,7 +1,7 @@
 ---
 title: Listes de dashboards
 type: apicontent
-order: 8
+order: 9
 external_redirect: /api/#listes-de-dashboards
 ---
 

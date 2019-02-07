@@ -1,6 +1,6 @@
 ---
 title: Hosts
 type: apicode
-order: 13
+order: 14
 external_redirect: /api/#hosts
 ---

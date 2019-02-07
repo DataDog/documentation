@@ -1,7 +1,7 @@
 ---
 title: Delete a Dashboard
 type: apicode
-order: 25.3
+order: 8.3
 external_redirect: /api/#delete-a-dashboard
 ---
 
