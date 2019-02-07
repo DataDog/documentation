@@ -60,7 +60,6 @@ The Synthetics details page displays the following network timings:
 
 | Timing | Description |
 | ------ | ----------- |
-| Redirect | Sum of the time spent in redirects. The next 5 timings in this table are for the last request executed; all the time spent before the last request is aggregated here. When there is no redirect or `followRedirect` is explicitly set to false, this metric does not appear. |
 | DNS | Time spent resolving the DNS name of the last request. |
 | Connect | Time spent establishing a connection to the server. |
 | SSL | Time spent for the TLS handshake. If the last request is not over HTTPS, this metric does not appear. |
