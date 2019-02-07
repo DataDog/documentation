@@ -51,11 +51,11 @@ Les intégrations connexes comprennent :
 | [Elastic Cloud Compute (EC2)][20]       | capacité de calcul redimensionnable dans le cloud                                       |
 | [Elastic File System (EFS)][21]         | stockage de fichiers partagé                                                           |
 | [Elastic Load Balancing (ELB)][22]      | distribution du trafic entrant d'applications sur plusieurs instances Amazon EC2 |
-| [Elastic Map Reduce (EMR)][23]          | traitement de données avec Hadoop                                                  |
+| [Elastic Map Reduce (EMR)][23]          | processing de données avec Hadoop                                                  |
 | [Elasticsearch Service (ES)][24]        | déploie, exploite et met à l'échelle des clusters Elasticsearch                             |
 | [Firehose][25]                          | enregistrement et chargement de données de diffusion                                               |
 | [IoT][26]                               | connecte des appareils IoT à des services cloud                                       |
-| [Kinesis][27]                           | service de traitement en temps réel de grands flux de données distribués           |
+| [Kinesis][27]                           | service de processing en temps réel de grands flux de données distribués           |
 | [Key Management Service (KMS)][28]      | crée et contrôle des clés de chiffrement                                            |
 | [Lambda][29]                            | calcul sans serveur                                                          |
 | [Machine Learning (ML)][30]             | crée des modèles d'apprentissage automatique                                                |
