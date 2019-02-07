@@ -14,11 +14,11 @@ Maintaining service level agreements with external or internal customers often r
 
 First, make sure the [Datadog Agent][3] is installed. The [HTTP check][1] is included with the Agent install.
 
-Datadog's HTTP check connects to internal or external web pages / endpoints. The HTTP check is among the list of Agent side integrations, meaning the checks are conducted by an Agent installed on a host inside your environment. This gives it the ability probe endpoints, which you may not be exposing publicly (similar to a layer 7 load balancer).
+Datadog's HTTP check connects to internal or external web pages or endpoints. The HTTP check is among the list of Agent side integrations, meaning the checks are conducted by an Agent installed on a host inside your environment. This gives it the ability to probe endpoints, which you may not be exposing publicly (similar to a layer 7 load balancer).
 
 ### Configuration
 
-The HTTP check is configured with a YAML file. Update the `http_check.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent’s configuration directory][4]. Then [restart the Agent][5]. See the [sample http_check.d/conf.yaml][6] for all available configuration options.
+The HTTP check is configured with a YAML file. Update the `http_check.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent’s configuration directory][4]. Then [restart the Agent][5]. See the [sample http_check.d/conf.yaml][6] for all available configuration options.
 
 **Example**:
 
@@ -37,7 +37,7 @@ instances:
 
 Adding the config above instructs the Agent to collect metrics on Amazon's public webpage. One of the metrics collected is `network.http.can_connect`, which returns either 1 (valid response) or 0 (non-valid response).
 
-The example uses optional parameters, timeout of 3 seconds (returns 0 if it takes longer than 3 seconds for a response to arrive) and tags for customer name and category.
+The example uses optional parameters: timeout of 3 seconds (returns 0 if it takes longer than 3 seconds for a response to arrive) and tags for customer name and category.
 
 ### Validation
 
