@@ -98,10 +98,10 @@ kubectl get pods -n kube-system
 
 ## Installing the Datadog Helm chart
 
-To install the chart with the release name `my-release`, retrieve your Datadog API key from your [Agent installation instructions][4] and run:
+To install the chart with the release name `<RELEASE_NAME>`, retrieve your Datadog API key from your [Agent installation instructions][4] and run:
 
 ```bash
-helm install --name my-release --set datadog.apiKey=<API_KEY> stable/datadog
+helm install --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
 ```
 
 Refer to the section below for a list of configurable parameters.
@@ -110,22 +110,20 @@ This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. 
 
 ### Configuration
 
-The following table lists the configurable parameters of the Datadog chart and their default values.
-
 For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository readme][6].
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
 
 ```bash
-helm install --name my-release \
-  --set datadog.apiKey=YOUR-KEY-HERE,datadog.logLevel=DEBUG \
+helm install --name <RELEASE_NAME> \
+  --set datadog.apiKey=<DATADOG_API_KEY>,datadog.logLevel=DEBUG \
   stable/datadog
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example:
 
 ```bash
-helm install --name my-release -f my-values.yaml stable/datadog
+helm install --name <RELEASE_NAME> -f my-values.yaml stable/datadog
 ```
 
 You can copy and customize the default [values.yaml][7].
@@ -161,10 +159,10 @@ datadog:
 
 ## Uninstalling the Datadog Helm Chart
 
-To uninstall or delete a deployment called `my-release`:
+To uninstall or delete a deployment called `<RELEASE_NAME>`:
 
 ```bash
-helm delete my-release
+helm delete <RELEASE_NAME>
 ```
 
 This command removes all Kubernetes components associated with the chart and deletes the release.
