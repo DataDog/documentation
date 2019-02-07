@@ -157,11 +157,6 @@ datadog:
       instances:
         - host: "%%host%%"
           port: "%%port_0%%"
-    redisdb.yaml: |-
-      init_config:
-      instances:
-        - host: "outside-k8s.example.com"
-          port: 6379
 ```
 
 ## Uninstalling the Datadog Helm Chart
