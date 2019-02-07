@@ -73,13 +73,13 @@ A notification is sent if at least one step of the Browser Check scenario fails.
 
 Assertions allow you to check if an element, a content, or some text is available in the current page:
 
-| Assertion | Description |
-| ----      | ----        |
-| `Assert that an element is present on the page` | Asserts that an element (such as a specific `span`, `div`, `h`, `a`, etc.) is present on the current page. |
-| `Check an element's content` |  Makes sure that a specific element is located or not on the current page. |
-| `Assert that some text is present anywhere on the page` | Asserts that some specific text is present on the current page. |
-| `Assert that some text is nowhere on the page` | Asserts that some specific text is **NOT** present on the current page. |
-| `Check main page URL's content` | This takes the URL of the current page, and asserts whether a specific value (`string`, `number`, `regex`) is present within it. |
+| Assertion                                               | Description                                                                                                                      |
+| ----                                                    | ----                                                                                                                             |
+| `Assert that an element is present on the page`         | Asserts that an element (such as a specific `span`, `div`, `h`, `a`, etc.) is present on the current page.                       |
+| `Check an element's content`                            | Makes sure that a specific element is located or not on the current page.                                                        |
+| `Assert that some text is present anywhere on the page` | Asserts that some specific text is present on the current page.                                                                  |
+| `Assert that some text is nowhere on the page`          | Asserts that some specific text is **NOT** present on the current page.                                                          |
+| `Check main page URL's content`                         | This takes the URL of the current page, and asserts whether a specific value (`string`, `number`, `regex`) is present within it. |
 
 #### Navigation
 
