@@ -170,7 +170,7 @@ This command removes all Kubernetes components associated with the chart and del
 [1]: https://docs.helm.sh/using_helm/#installing-the-helm-client
 [2]: https://docs.helm.sh/using_helm/#installing-tiller
 [3]: https://docs.helm.sh/using_helm/#role-based-access-control
-[4]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[4]: https://app.datadoghq.com/account/settings#api
 [5]: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
 [6]: https://github.com/helm/charts/tree/master/stable/datadog#configuration
 [7]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
