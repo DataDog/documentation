@@ -93,7 +93,14 @@ Refer to [Helm's Tiller/RBAC documentation][3] for further details.
 To verify your installation, run:
 
 ```bash
-kubectl get pods -n kube-system
+kubectl get pods -n kube-system -l app=helm
+```
+
+This returns something resembling:
+
+```bash
+NAME READY STATUS RESTARTS AGE
+tiller-deploy-f54b67464-jl5gm 1/1 Running 0 3h16m
 ```
 
 ## Installing the Datadog Helm chart
