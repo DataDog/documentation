@@ -97,7 +97,7 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<package_dir>/<package_name>"
 
 ## Configuration
 
-The tracer is configured with options parameters when the `Start` function is called. An example for generating a trace:
+The tracer is configured with options parameters when the `Start` function is called. An example for generating a trace using the HTTP library:
 
 ```go
 package main
