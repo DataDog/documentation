@@ -996,6 +996,11 @@ languages:
           url: "synthetics/uptime_check"
           weight: 110
           parent: menu_references_synthetics
+        - identifier: synthetics_browser_check
+          name: "Browser Check"
+          url: "synthetics/browser_check"
+          weight: 120
+          parent: menu_references_synthetics
 
         # DEVELOPERS
         - identifier: menu_references_developers
@@ -2273,6 +2278,11 @@ languages:
           name: "Uptime Check"
           url: "synthetics/uptime_check"
           weight: 100
+          parent: menu_references_synthetics
+        - identifier: synthetics_browser_check
+          name: "Browser Check"
+          url: "synthetics/browser_check"
+          weight: 120
           parent: menu_references_synthetics
 
         # DEVELOPERS
