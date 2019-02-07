@@ -91,8 +91,10 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 | Module               | Support Type    |
 | :------------------- | :-------------- |
+| [dns][37]            | Fully Supported |
 | [http][16]           | Fully Supported |
 | [https][17]          | Fully Supported |
+| [net][38]            | Fully Supported |
 
 #### Data Store Compatibility
 
@@ -173,3 +175,5 @@ For details about how to how to toggle and configure plugins, check out the [API
 [34]: https://github.com/trentm/node-bunyan
 [35]: http://getpino.io
 [36]: https://github.com/winstonjs/winston
+[37]: https://nodejs.org/api/dns.html
+[38]: https://nodejs.org/api/net.html
