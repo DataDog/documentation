@@ -58,13 +58,13 @@ Select **Create a New check +** > **New Uptime Check** in the upper right corner
 
 The Synthetics details page displays the following network timings:
 
-| Timing | Description |
-| ------ | ----------- |
-| DNS | Time spent resolving the DNS name of the last request. |
-| Connect | Time spent establishing a connection to the server. |
-| SSL | Time spent for the TLS handshake. If the last request is not over HTTPS, this metric does not appear. |
-| TTFB (time to first byte) | Time spent waiting for the first byte of response to be received. |
-| Download | Time spent downloading the response. |
+| Timing                    | Description                                                                                           |
+|---------------------------|-------------------------------------------------------------------------------------------------------|
+| DNS                       | Time spent resolving the DNS name of the last request.                                                |
+| Connect                   | Time spent establishing a connection to the server.                                                   |
+| SSL                       | Time spent for the TLS handshake. If the last request is not over HTTPS, this metric does not appear. |
+| TTFB (time to first byte) | Time spent waiting for the first byte of response to be received.                                     |
+| Download                  | Time spent downloading the response.                                                                  |
 
 Response time is the sum of these network timings.
 
