@@ -101,7 +101,7 @@ kubectl get pods -n kube-system
 To install the chart with the release name `<RELEASE_NAME>`, retrieve your Datadog API key from your [Agent installation instructions][4] and run:
 
 ```bash
-helm install --name <RELEASE_NAME> --set datadog.apiKey=<API_KEY> stable/datadog
+helm install --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
 ```
 
 Refer to the section below for a list of configurable parameters.
