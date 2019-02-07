@@ -71,7 +71,7 @@ This works by cancelling the existing downtime, and creating a new downtime with
 
 ## Searching Downtimes
 
-Downtime history can be seen both on the Monitor Status Page as overlaid on the group transition history, as well as in the Event Stream by searching for `tags:audit,downtime`, or a specific downtime by ID with `tags:audit,downtime_id:<downtime_id>`
+Downtime history can be seen both on the Monitor Status Page as overlaid on the group transition history, as well as in the Event Stream by searching for `tags:audit,downtime`, or a specific downtime by ID with `tags:audit,downtime_id:<DOWNTIME_ID>`
 
 ## Further Reading
 
