@@ -98,10 +98,10 @@ kubectl get pods -n kube-system
 
 ## Installing the Datadog Helm chart
 
-To install the chart with the release name `my-release`, retrieve your Datadog API key from your [Agent installation instructions][4] and run:
+To install the chart with the release name `<RELEASE_NAME>`, retrieve your Datadog API key from your [Agent installation instructions][4] and run:
 
 ```bash
-helm install --name my-release --set datadog.apiKey=<API_KEY> stable/datadog
+helm install --name <RELEASE_NAME> --set datadog.apiKey=<API_KEY> stable/datadog
 ```
 
 Refer to the section below for a list of configurable parameters.
@@ -112,91 +112,91 @@ This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. 
 
 The following table lists the configurable parameters of the Datadog chart and their default values.
 
-|             Parameter       |            Description             |                    Default                |
-|-----------------------------|------------------------------------|-------------------------------------------|
-| `datadog.apiKey`            | Your Datadog API key               |  `Nil` You must provide your own key      |
-| `datadog.apiKeyExistingSecret` | If set, use the secret with a provided name instead of creating a new one |`nil` |
-| `datadog.appKey`            | Datadog APP key required to use metricsProvider |  `Nil` You must provide your own key      |
-| `datadog.appKeyExistingSecret` | If set, use the secret with a provided name instead of creating a new one |`nil` |
-| `image.repository`          | The image repository to pull from  | `datadog/agent`                           |
-| `image.tag`                 | The image tag to pull              | `6.9.0`                                   |
-| `image.pullPolicy`          | Image pull policy                  | `IfNotPresent`                            |
-| `image.pullSecrets`         | Image pull secrets                 |  `nil`                                    |
-| `rbac.create`               | If true, create & use RBAC resources | `true`                                  |
-| `rbac.serviceAccount`       | existing ServiceAccount to use (ignored if rbac.create=true) | `default`       |
-| `datadog.name`              | Container name if Daemonset or Deployment | `datadog`                          |
-| `datadog.site`              | Site ('datadoghq.com' or 'datadoghq.eu') | `nil`                                |
-| `datadog.dd_url`            | Datadog intake server              | `nil`                                     |
-| `datadog.env`               | Additional Datadog environment variables | `nil`                               |
-| `datadog.logsEnabled`       | Enable log collection              | `nil`                                     |
-| `datadog.logsConfigContainerCollectAll` | Collect logs from all containers | `nil`                           |
-| `datadog.logsPointerHostPath` | Host path to store the log tailing state in | `/var/lib/datadog-agent/logs`   |
-| `datadog.apmEnabled`        | Enable tracing from the host       | `nil`                                     |
-| `datadog.processAgentEnabled` | Enable live process monitoring   | `nil`                                     |
-| `datadog.checksd`           | Additional custom checks as python code  | `nil`                               |
-| `datadog.confd`             | Additional check configurations (static and Autodiscovery) | `nil`             |
-| `datadog.criSocketPath`     | Path to the container runtime socket (if different from Docker) | `nil`        |
-| `datadog.tags`              | Set host tags                      | `nil`                                     |
-| `datadog.nonLocalTraffic` | Enable statsd reporting from any external ip | `False`                           |
-| `datadog.useCriSocketVolume` | Enable mounting the container runtime socket in Agent containers | `True` |
-| `datadog.volumes`           | Additional volumes for the daemonset or deployment | `nil`                     |
-| `datadog.volumeMounts`      | Additional volumeMounts for the daemonset or deployment | `nil`                |
-| `datadog.podAnnotationsAsTags` | Kubernetes Annotations to Datadog Tags mapping | `nil`                      |
-| `datadog.podLabelsAsTags`   | Kubernetes Labels to Datadog Tags mapping      | `nil`                         |
-| `datadog.resources.requests.cpu` | CPU resource requests         | `200m`                                    |
-| `datadog.resources.limits.cpu` | CPU resource limits             | `200m`                                    |
-| `datadog.resources.requests.memory` | Memory resource requests   | `256Mi`                                   |
-| `datadog.resources.limits.memory` | Memory resource limits       | `256Mi`                                   |
-| `datadog.securityContext`   | Allows you to overwrite the default securityContext applied to the container  | `nil`  |
-| `datadog.livenessProbe`     | Overrides the default liveness probe | http port 5555                          |
-| `datadog.hostname`          | Set the hostname (write it in datadog.conf) | `nil`                            |
-| `datadog.acInclude`         | Include containers based on image name | `nil`                                 |
-| `datadog.acExclude`         | Exclude containers based on image name | `nil`                                 |
-| `daemonset.podAnnotations`  | Annotations to add to the DaemonSet's Pods | `nil`                             |
-| `daemonset.tolerations`     | List of node taints to tolerate (requires Kubernetes >= 1.6) | `nil`           |
-| `daemonset.nodeSelector`    | Node selectors                     | `nil`                                     |
-| `daemonset.affinity`        | Node affinities                    | `nil`                                     |
-| `daemonset.useHostNetwork`  | If true, use the host's network    | `nil`                                     |
-| `daemonset.useHostPID`.     | If true, use the host's PID namespace    | `nil`                               |
-| `daemonset.useHostPort`     | If true, use the same ports for both host and container  | `nil`               |
-| `daemonset.priorityClassName` | Which Priority Class to associate with the daemonset| `nil`                  |
-| `datadog.leaderElection`    | Enable the leader Election feature | `false`                                   |
-| `datadog.leaderLeaseDuration`| The duration for which a leader stays elected.| `nil`                         |
-| `datadog.collectEvents`     | Enable Kubernetes event collection. Requires leader election. | `false`        |
-| `deployment.affinity`       | Node / Pod affinities              | `{}`                                      |
-| `deployment.tolerations`    | List of node taints to tolerate    | `[]`                                      |
-| `deployment.priorityClassName` | Which Priority Class to associate with the deployment | `nil`               |
-| `kubeStateMetrics.enabled`  | If true, create kube-state-metrics | `true`                                    |
-| `kube-state-metrics.rbac.create`| If true, create & use RBAC resources for kube-state-metrics | `true`       |
-| `kube-state-metrics.rbac.serviceAccount` | existing ServiceAccount to use (ignored if rbac.create=true) for kube-state-metrics | `default` |
-| `clusterAgent.enabled`                   | Use the cluster-agent for cluster metrics (Kubernetes 1.10+ only) | `false`                           |
-| `clusterAgent.token`                     | A cluster-internal secret for agent-to-agent communication. Must be 32+ characters a-zA-Z | Generates a random value |
-| `clusterAgent.containerName`             | The container name for the Cluster Agent  | `cluster-agent`                           |
-| `clusterAgent.image.repository`          | The image repository for the cluster-agent | `datadog/cluster-agent`                           |
-| `clusterAgent.image.tag`                 | The image tag to pull              | `1.0.0`                                   |
-| `clusterAgent.image.pullPolicy`          | Image pull policy                  | `IfNotPresent`                            |
-| `clusterAgent.image.pullSecrets`         | Image pull secrets                 |  `nil`                                    |
-| `clusterAgent.metricsProvider.enabled`   | Enable Datadog metrics as a source for HPA scaling |  `false`                  |
-| `clusterAgent.resources.requests.cpu`    | CPU resource requests              | `200m`                                    |
-| `clusterAgent.resources.limits.cpu`      | CPU resource limits                | `200m`                                    |
-| `clusterAgent.resources.requests.memory` | Memory resource requests           | `256Mi`                                   |
-| `clusterAgent.resources.limits.memory`   | Memory resource limits             | `256Mi`                                   |
-| `clusterAgent.tolerations`               | List of node taints to tolerate    | `[]`                                      |
-| `clusterAgent.livenessProbe`             | Overrides the default liveness probe | http port 443 if external metrics enabled       |
-| `clusterAgent.readinessProbe`            | Overrides the default readiness probe | http port 443 if external metrics enabled      |
+| Parameter                                | Description                                                                               | Default                                     |
+| -----------------------------            | ------------------------------------                                                      | ------------------------------------------- |
+| `datadog.apiKey`                         | Your Datadog API key                                                                      | `Nil` You must provide your own key         |
+| `datadog.apiKeyExistingSecret`           | If set, use the secret with a provided name instead of creating a new one                 | `nil`                                       |
+| `datadog.appKey`                         | Datadog APP key required to use metricsProvider                                           | `Nil` You must provide your own key         |
+| `datadog.appKeyExistingSecret`           | If set, use the secret with a provided name instead of creating a new one                 | `nil`                                       |
+| `image.repository`                       | The image repository to pull from                                                         | `datadog/agent`                             |
+| `image.tag`                              | The image tag to pull                                                                     | `6.9.0`                                     |
+| `image.pullPolicy`                       | Image pull policy                                                                         | `IfNotPresent`                              |
+| `image.pullSecrets`                      | Image pull secrets                                                                        | `nil`                                       |
+| `rbac.create`                            | If true, create & use RBAC resources                                                      | `true`                                      |
+| `rbac.serviceAccount`                    | existing ServiceAccount to use (ignored if rbac.create=true)                              | `default`                                   |
+| `datadog.name`                           | Container name if Daemonset or Deployment                                                 | `datadog`                                   |
+| `datadog.site`                           | Site (`datadoghq.com` or `datadoghq.eu`)                                                  | `nil`                                       |
+| `datadog.dd_url`                         | Datadog intake server                                                                     | `nil`                                       |
+| `datadog.env`                            | Additional Datadog environment variables                                                  | `nil`                                       |
+| `datadog.logsEnabled`                    | Enable log collection                                                                     | `nil`                                       |
+| `datadog.logsConfigContainerCollectAll`  | Collect logs from all containers                                                          | `nil`                                       |
+| `datadog.logsPointerHostPath`            | Host path to store the log tailing state in                                               | `/var/lib/datadog-agent/logs`               |
+| `datadog.apmEnabled`                     | Enable tracing from the host                                                              | `nil`                                       |
+| `datadog.processAgentEnabled`            | Enable live process monitoring                                                            | `nil`                                       |
+| `datadog.checksd`                        | Additional custom checks as python code                                                   | `nil`                                       |
+| `datadog.confd`                          | Additional check configurations (static and Autodiscovery)                                | `nil`                                       |
+| `datadog.criSocketPath`                  | Path to the container runtime socket (if different from Docker)                           | `nil`                                       |
+| `datadog.tags`                           | Set host tags                                                                             | `nil`                                       |
+| `datadog.nonLocalTraffic`                | Enable statsd reporting from any external ip                                              | `False`                                     |
+| `datadog.useCriSocketVolume`             | Enable mounting the container runtime socket in Agent containers                          | `True`                                      |
+| `datadog.volumes`                        | Additional volumes for the daemonset or deployment                                        | `nil`                                       |
+| `datadog.volumeMounts`                   | Additional volumeMounts for the daemonset or deployment                                   | `nil`                                       |
+| `datadog.podAnnotationsAsTags`           | Kubernetes Annotations to Datadog Tags mapping                                            | `nil`                                       |
+| `datadog.podLabelsAsTags`                | Kubernetes Labels to Datadog Tags mapping                                                 | `nil`                                       |
+| `datadog.resources.requests.cpu`         | CPU resource requests                                                                     | `200m`                                      |
+| `datadog.resources.limits.cpu`           | CPU resource limits                                                                       | `200m`                                      |
+| `datadog.resources.requests.memory`      | Memory resource requests                                                                  | `256Mi`                                     |
+| `datadog.resources.limits.memory`        | Memory resource limits                                                                    | `256Mi`                                     |
+| `datadog.securityContext`                | Allows you to overwrite the default securityContext applied to the container              | `nil`                                       |
+| `datadog.livenessProbe`                  | Overrides the default liveness probe                                                      | http port 5555                              |
+| `datadog.hostname`                       | Set the hostname (write it in datadog.conf)                                               | `nil`                                       |
+| `datadog.acInclude`                      | Include containers based on image name                                                    | `nil`                                       |
+| `datadog.acExclude`                      | Exclude containers based on image name                                                    | `nil`                                       |
+| `daemonset.podAnnotations`               | Annotations to add to the DaemonSet's Pods                                                | `nil`                                       |
+| `daemonset.tolerations`                  | List of node taints to tolerate (requires Kubernetes >= 1.6)                              | `nil`                                       |
+| `daemonset.nodeSelector`                 | Node selectors                                                                            | `nil`                                       |
+| `daemonset.affinity`                     | Node affinities                                                                           | `nil`                                       |
+| `daemonset.useHostNetwork`               | If true, use the host's network                                                           | `nil`                                       |
+| `daemonset.useHostPID`.                  | If true, use the host's PID namespace                                                     | `nil`                                       |
+| `daemonset.useHostPort`                  | If true, use the same ports for both host and container                                   | `nil`                                       |
+| `daemonset.priorityClassName`            | Which Priority Class to associate with the daemonset                                      | `nil`                                       |
+| `datadog.leaderElection`                 | Enable the leader Election feature                                                        | `false`                                     |
+| `datadog.leaderLeaseDuration`            | The duration for which a leader stays elected.                                            | `nil`                                       |
+| `datadog.collectEvents`                  | Enable Kubernetes event collection. Requires leader election.                             | `false`                                     |
+| `deployment.affinity`                    | Node / Pod affinities                                                                     | `{}`                                        |
+| `deployment.tolerations`                 | List of node taints to tolerate                                                           | `[]`                                        |
+| `deployment.priorityClassName`           | Which Priority Class to associate with the deployment                                     | `nil`                                       |
+| `kubeStateMetrics.enabled`               | If true, create kube-state-metrics                                                        | `true`                                      |
+| `kube-state-metrics.rbac.create`         | If true, create & use RBAC resources for kube-state-metrics                               | `true`                                      |
+| `kube-state-metrics.rbac.serviceAccount` | existing ServiceAccount to use (ignored if rbac.create=true) for kube-state-metrics       | `default`                                   |
+| `clusterAgent.enabled`                   | Use the cluster-agent for cluster metrics (Kubernetes 1.10+ only)                         | `false`                                     |
+| `clusterAgent.token`                     | A cluster-internal secret for agent-to-agent communication. Must be 32+ characters a-zA-Z | Generates a random value                    |
+| `clusterAgent.containerName`             | The container name for the Cluster Agent                                                  | `cluster-agent`                             |
+| `clusterAgent.image.repository`          | The image repository for the cluster-agent                                                | `datadog/cluster-agent`                     |
+| `clusterAgent.image.tag`                 | The image tag to pull                                                                     | `1.0.0`                                     |
+| `clusterAgent.image.pullPolicy`          | Image pull policy                                                                         | `IfNotPresent`                              |
+| `clusterAgent.image.pullSecrets`         | Image pull secrets                                                                        | `nil`                                       |
+| `clusterAgent.metricsProvider.enabled`   | Enable Datadog metrics as a source for HPA scaling                                        | `false`                                     |
+| `clusterAgent.resources.requests.cpu`    | CPU resource requests                                                                     | `200m`                                      |
+| `clusterAgent.resources.limits.cpu`      | CPU resource limits                                                                       | `200m`                                      |
+| `clusterAgent.resources.requests.memory` | Memory resource requests                                                                  | `256Mi`                                     |
+| `clusterAgent.resources.limits.memory`   | Memory resource limits                                                                    | `256Mi`                                     |
+| `clusterAgent.tolerations`               | List of node taints to tolerate                                                           | `[]`                                        |
+| `clusterAgent.livenessProbe`             | Overrides the default liveness probe                                                      | http port 443 if external metrics enabled   |
+| `clusterAgent.readinessProbe`            | Overrides the default readiness probe                                                     | http port 443 if external metrics enabled   |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
 
 ```bash
-helm install --name my-release \
-  --set datadog.apiKey=YOUR-KEY-HERE,datadog.logLevel=DEBUG \
+helm install --name <RELEASE_NAME> \
+  --set datadog.apiKey=<DATADOG_API_KEY>,datadog.logLevel=DEBUG \
   stable/datadog
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example:
 
 ```bash
-helm install --name my-release -f my-values.yaml stable/datadog
+helm install --name <RELEASE_NAME> -f my-values.yaml stable/datadog
 ```
 
 You can copy and customize the default [values.yaml][6].
@@ -232,10 +232,10 @@ datadog:
 
 ## Uninstalling the Datadog Helm Chart
 
-To uninstall or delete a deployment called `my-release`:
+To uninstall or delete a deployment called `<RELEASE_NAME>`:
 
 ```bash
-helm delete my-release
+helm delete <RELEASE_NAME>
 ```
 
 This command removes all Kubernetes components associated with the chart and deletes the release.
