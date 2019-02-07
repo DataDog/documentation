@@ -92,7 +92,7 @@ The navigation action allow you to:
 
 This browser check step isn’t added through an actual hovering mechanism (otherwise each element you are hovering would be added as a step) but using a dedicated action with a click.
 
-After selecting the Hover action, the hovering is blocked, and the step can be added by clicking on the element that you want to choose. 
+After selecting the Hover action, click on the element you want to choose to create a new step.
 
 #### Variable
 
