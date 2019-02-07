@@ -29,6 +29,7 @@ kind: faq
 |Amazon Emr|EMR|
 |Amazon Es|ES|
 |Amazon Firehose|FIREHOSE|
+|Amazon Gamelift|GAMELIFT|
 |Amazon Health|HEALTH|
 |Amazon Iot|IOT|
 |Amazon Kinesis|KINESIS|

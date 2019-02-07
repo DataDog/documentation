@@ -10,6 +10,9 @@ further_reading:
 - link: "synthetics/"
   tag: "Documentation"
   text: "Manage your checks"
+- link: "synthetics/browser_check"
+  tag: "Documentation"
+  text: "Configure a Browser Check"
 ---
 
 <div class="alert alert-warning">Synthetics is in beta for the Datadog US Site. To request access, complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics request form</a>.</div>

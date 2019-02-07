@@ -1,6 +1,7 @@
 ## Simple Raw Message
+## Log attributes can be passed as query parameters
 
-curl -X POST https://http-intake.logs.datadoghq.com/v1/input/<API_KEY> \
+curl -X POST https://http-intake.logs.datadoghq.com/v1/input/<API_KEY>?ddtags=env:prod,user:my-user \
      -H "Content-Type: text/plain" \
      -d 'hello world'
 
@@ -14,10 +15,10 @@ world
 BODY
 
 ## Simple JSON Message
-
+## Log attributes can also be passed as key:value pairs in valid JSON messages
 curl -X POST https://http-intake.logs.datadoghq.com/v1/input/<API_KEY> \
      -H "Content-Type: application/json" \
-     -d '{"message":"hello world"}'
+     -d '{"message":"hello world", "ddsource":"<SOURCE>", "ddtags":"env:<ENV>,user:<USER_NAME>", "hostname":"<HOSTNAME>"}'
 
 ## Multi JSON Messages
 

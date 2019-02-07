@@ -11,29 +11,34 @@ further_reading:
   text: "Configure SAML for your Datadog account"
 ---
 
-It is possible to manage multiple child-organizations from one parent-organization account.  
-This is typically used by Managed Service Providers that have customers which should not have access to each others' data. Users can be added to the parent-organization and/or multiple child-organizations and easily switch between them from the [user account settings menu][1].
+It is possible to manage multiple child-organizations from one parent-organization account. This is typically used by Managed Service Providers that have customers which should not have access to each others' data. Users can be added to the parent-organization and/or multiple child-organizations and switch between them from the [user account settings menu][1].
 
-The Multi-organization Account feature must be enabled by support. If this is a feature you need, [contact us][2]!
+The Multi-organization Account feature is not enabled by default. Contact [Datadog support][2] to have it enabled.
 
 Here's a two-minute video walkthrough:
 
-{{< wistia tg9ufqbin9>}} 
+{{< wistia tg9ufqbin9>}}
+<br>
+## Child organizations
 
-## Create a new child-organization
+### Create
 
-1. After the feature has been enabled, visit the [New Account Page][3].
+1. After the feature is enabled, visit the [New Account Page][3].
 2. Enter the name of the child-organization you wish to create and click the **Create** button. **The child-organization name cannot exceed 32 characters.**
 
-The new child-organization will be created as a 14-day free trial account. You can change the billing plan on the [Organization account settings page][4]. If you wish to add the child-organization's billing to your parent-organization's billing account, [contact your sales representative][5].
+The new child-organization is created as a 14-day free trial account. You can change the billing plan in the [Organization account settings][4]. If you want to add the child-organization's billing to your parent-organization's billing account, [contact your sales representative][5].
 
-## Custom domains for each child-organization
+### Content
 
-The custom domain feature must be enabled by support. [Contact The Datadog support team to enable it][2].
+Onboarding a new sub-organization with a set of baseline dashboards and monitors can be done programmatically with the [Datadog API][6] and tools such as Terraform, see [Managing Datadog with Terraform][7]. Additionally, scripts can be used to backup existing [dashboards][8] and [monitors][9] as code.
 
-If you are a member of multiple organizations, custom sub-domains help you quickly identify the source of an alert or notification. They will also immediately switch you to the organization associated with the sub-domain.
+### Custom sub-domains
 
-For example, The URL `https://app.datadoghq.com/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is currently viewing Datadog within the context of Organization B, then that URL will return a 404 Not Found error. The user must switch to Organization A using the [user account settings menu][6], then revisit the URL. However, with custom sub-domains, the user could visit `https://org-a.datadoghq.com/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
+The custom sub-domain feature is not enabled by default. Contact [Datadog support][2] to have it enabled.
+
+If you are a member of multiple organizations, custom sub-domains help you identify the source of an alert or notification. Also, they can immediately switch you to the organization associated with the sub-domain.
+
+For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is currently viewing Datadog within the context of Organization B, then that URL returns a `404 Not Found error`. The user must switch to Organization A using the [user account settings menu][10], then revisit the URL. However, with custom sub-domains, the user could visit `https://org-a.datadoghq.com/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
 
 ## Further Reading
 
@@ -44,4 +49,8 @@ For example, The URL `https://app.datadoghq.com/event/event?id=1` is associated 
 [3]: https://app.datadoghq.com/account/new_org
 [4]: https://app.datadoghq.com/account/billing
 [5]: mailto:success@datadoghq.com
-[6]: /account_management/#managing-your-organizations
+[6]: /api
+[7]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
+[8]: /graphing/dashboards/screenboard/#backup-my-screenboard
+[9]: /monitors/#managing-monitors
+[10]: /account_management/#managing-your-organizations

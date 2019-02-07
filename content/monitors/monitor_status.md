@@ -69,7 +69,12 @@ The *Status and History* section reflect the query and state changes over time, 
 
 {{< img src="monitors/monitor_status/status_monitor_history.gif" alt="status monitor history" responsive="true" style="width:80%;" >}}
 
-To deep dive into your metrics evolution for further investigation, we advise you to use the [Metric Explorer page][7] or a dedicated [Notebook][8]
+For further investigation into your metrics evolution, use the [Metric Explorer][7] or a dedicated [Notebook][8].
+
+**Note**: For the *Status* graph, if you see `None` or `no groups found` as group names, this is usually because:  
+- The monitor is newly created and has not evaluated yet.  
+- The monitor's query was recently changed.  
+- A host's name previously included in query has changed. Host name changes age out of the UI within 24 hours.
 
 ## Events
 

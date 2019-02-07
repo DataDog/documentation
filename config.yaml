@@ -528,11 +528,22 @@ languages:
           url: "monitors/monitor_types/watchdog/"
           weight: 430
           parent: customnav_monitornav_monitor_types
+
+        # Manage monitor
         - identifier: customnav_monitornav_manage_monitor
           name: "Manage Monitor"
           url: "monitors/manage_monitor/"
           weight: 130
           parent: menu_references_monitoring
+
+        # Monitor status
+        - identifier: customnav_monitornav_monitor_status
+          name: "Monitor Status"
+          url: "monitors/monitor_status/"
+          weight: 135
+          parent: menu_references_monitoring
+
+        # Check summary
         - identifier: customnav_monitornav_check_summary
           name: "Check Summary"
           url: "monitors/check_summary/"
@@ -985,6 +996,11 @@ languages:
           url: "synthetics/uptime_check"
           weight: 110
           parent: menu_references_synthetics
+        - identifier: synthetics_browser_check
+          name: "Browser Check"
+          url: "synthetics/browser_check"
+          weight: 120
+          parent: menu_references_synthetics
 
         # DEVELOPERS
         - identifier: menu_references_developers
@@ -1146,6 +1162,11 @@ languages:
           name: "Active Directory"
           url: "account_management/saml/activedirectory"
           weight: 510
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_auth0
+          name: "Auth0"
+          url: "account_management/saml/auth0"
+          weight: 515
           parent: customnav_accountmanagementnav_saml
         - identifier: saml_azure
           name: "Azure"
@@ -1752,11 +1773,22 @@ languages:
           url: "monitors/monitor_types/process/"
           weight: 420
           parent: customnav_monitornav_monitor_types
+
+        # Manage monitor
         - identifier: customnav_monitornav_manage_monitor
           name: "Gérer les monitors"
           url: "monitors/manage_monitor/"
           weight: 130
           parent: menu_references_monitoring
+
+        # Monitor status
+        - identifier: customnav_monitornav_monitor_status
+          name: "Status de Monitor"
+          url: "monitors/monitor_status/"
+          weight: 135
+          parent: menu_references_monitoring
+
+        # Check summary
         - identifier: customnav_monitornav_check_summary
           name: "Sommaire des Checks"
           url: "monitors/check_summary/"
@@ -2247,6 +2279,11 @@ languages:
           url: "synthetics/uptime_check"
           weight: 100
           parent: menu_references_synthetics
+        - identifier: synthetics_browser_check
+          name: "Browser Check"
+          url: "synthetics/browser_check"
+          weight: 120
+          parent: menu_references_synthetics
 
         # DEVELOPERS
         - identifier: menu_references_developers
@@ -2393,6 +2430,11 @@ languages:
           name: "Active Directory"
           url: "account_management/saml/activedirectory"
           weight: 510
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_auth0
+          name: "Auth0"
+          url: "account_management/saml/auth0"
+          weight: 515
           parent: customnav_accountmanagementnav_saml
         - identifier: saml_azure
           name: "Azure"

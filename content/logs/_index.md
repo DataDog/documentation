@@ -77,6 +77,16 @@ This produces the following result in your [live tail page][27]:
 
 {{< img src="logs/custom_log_telnet.png" alt="Custom telnet" responsive="true" style="width:70%;">}}
 
+Datadog can automatically parse attributes out of JSON formatted messages.
+
+```
+telnet intake.logs.datadoghq.com 10514 
+<DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
+```
+
+{{< img src="logs/custom_log_telnet_json_.png" alt="Custom telnet" responsive="true" style="width:100%;">}}
+
+
 ### Datadog Logs Endpoints
 
 Datadog provides logging endpoints for both SSL-encrypted connections and unencrypted connections.
