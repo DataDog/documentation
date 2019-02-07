@@ -150,21 +150,22 @@ See the [Datadog-AWS Log integration][9] to configure your environment.
 
 If you still do not see your logs, double-check the following points:
 
-#### are logs expectedly dropped? 
+#### Are logs expectedly dropped? 
 
-Check if logs appear in the [Datadog Live Tail][10]. Source is should to be `aws` or `cloudwatch` (see the `parse_event_source()` function in the [Datadog Python lambda function][11] for details).
+Check if logs appear in the [Datadog Live Tail][10].
 
-If they appear in the Live Tail page, you probably explicitly excluded those logs from indexes. 
+If they appear in the Live Tail page, check that you don't have a mathching index exclusion filter on these logs. 
 
-If they do not appear in the Live Tail page, remind that we drop logs older than 6 hours.
+If they do not appear in the Live Tail page, check that the logs you send are not older than 6 hours (Datadog rejects logs older than 6 hours).
 
-#### configuration of datadog lambda function
+#### Make sure the lambda function is properly configured
 
 Check Datadog lambda configuration parameter:
 
-* `<API_KEY>` : Should be set with your [Datadog API key][12] either directly in the Python code, or alternatively as a environment variable.
+* `<API_KEY>` : Should be set with your [Datadog API key][12] either directly in the Python code, or alternatively as a environment variable. In case you manage several platforms, we encourage you to double-check that you are actually using the right `<API_KEY>` for the right platform.
 
-#### execution of datadog lambda function
+
+#### Make sure the lambda function is properly triggered
 
 Check that Datadog lambda function is actually triggered. You can leverage `aws.lambda.invocations` and `aws.lambda.errors` metrics with the `functionname` tag of your Datadog lambda function within Datadog, or check for errors in Datadog lambda logs in Cloudwatch.
 
