@@ -106,7 +106,7 @@ helm install --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable
 
 Refer to the section below for a list of configurable parameters.
 
-This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. It also optionally depends on the [kube-state-metrics chart][5]. A few minutes after installation, Datadog begins to report hosts and metrics.
+This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. It also optionally deploys the [kube-state-metrics chart][5] and uses it as an additional source of metrics about the cluster. A few minutes after installation, Datadog begins to report hosts and metrics.
 
 ### Configuration
 
