@@ -1,6 +1,8 @@
 ---
 title: Widgets
 kind: documentation
+aliases:
+  - graphing/dashboards/widgets
 further_reading:
 - link: "graphing/dashboards/"
   tag: "Documentation"
