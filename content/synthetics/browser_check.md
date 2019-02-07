@@ -75,11 +75,11 @@ Assertions allow you to check if an element, a content, or some text is availabl
 
 | Assertion | Description |
 | ----      | ----        |
-| `Assert that an element is present on the page` | Asserts that an element is present on the page. This checks if a specific `span`, `div`, `h`, `a`, etc. is somewhere on the current page. |
+| `Assert that an element is present on the page` | Asserts that an element (such as a specific `span`, `div`, `h`, `a`, etc.) is present on the current page. |
 | `Check an element's content` |  Makes sure that a specific element is located or not on the current page. |
-| `Assert that some text is present anywhere on the page` | Makes sure that a specific text is located on the current page. |
-| `Assert that some text is nowhere on the page` | Makes sure that a specific text is **NOT** located on the current page. |
-| `Check main page URL's content` | This takes the URL or the current page, and check whether or not a specific value (`string`, `number`, `regex`) is located within it. |
+| `Assert that some text is present anywhere on the page` | Asserts that some specific text is present on the current page. |
+| `Assert that some text is nowhere on the page` | Asserts that some specific text is **NOT** present on the current page. |
+| `Check main page URL's content` | This takes the URL of the current page, and asserts whether a specific value (`string`, `number`, `regex`) is present within it. |
 
 #### Navigation
 
@@ -100,9 +100,9 @@ After selecting the Hover action, the hovering is blocked, and the step can be a
 
 {{< img src="synthetics/browser_check/setup_variable.png" alt="Setup Variable" responsive="true" style="width:40%;">}}
 
-To define a variable, enter a capitalized name then choose its type between 
+To define a variable, enter a capitalized name then choose its type between:
 
-* `Select an element content` : this type allows you to create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
+* `Select an element content`: this type allows you to create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
 * `From pattern`:
 
 | Pattern                 | Description                                         |
