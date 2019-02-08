@@ -1481,7 +1481,7 @@ another_span->SetTag("sampling.priority", 0); // Discard this span.
 
 ## Correlate Traces and Logs
 
-The correlation between Datadog APM and Datadog Log Management is improved by automatically adding a `trace_id` and `span_id` in your logs with the Tracing Libraries. This can then be used in platform to show you the exact logs correlated to the observed trace.
+The correlation between Datadog APM and Datadog Log Management is improved by automatically adding a `trace_id` and `span_id` in your logs with the Tracing Libraries. This can then be used in the platform to show you the exact logs correlated to the observed trace.
 
 {{< img src="tracing/trace_id_injection.png" alt="Logs in Traces" responsive="true" style="width:100%;">}}
 
@@ -1496,7 +1496,7 @@ Enable injection in the Java Tracer's [configuration][2] by setting `Ddd.logs.in
 
 **Note**: Currently only **slf4j** is supported for MDC autoinjection.
 
-If the logs are already JSON formatted, there should be nothing left to do. If the logs are raw formatted, update your formatter to include `dd.trace_id` and `dd.span_id` in your logger configuration:
+If the logs are already JSON formatted, there is nothing left to do. If the logs are raw formatted, update your formatter to include `dd.trace_id` and `dd.span_id` in your logger configuration:
 
 ```
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
@@ -1571,7 +1571,7 @@ Use one of the following options to inject Python trace information into your lo
 
 Enable injection with the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
 
-**Note**: The standard library `logging` is supported for auto-injection. Any libraries, such as `json_log_formatter`, that extend the standard library module are also supported for auto-injection. `ddtrace-run` calls `logging.basicConfig` before executing your application. If the root logger has a handler configured, your application will have to modify the root logger and handler directly.
+**Note**: The standard library `logging` is supported for auto-injection. Any libraries, such as `json_log_formatter`, that extend the standard library module are also supported for auto-injection. `ddtrace-run` calls `logging.basicConfig` before executing your application. If the root logger has a handler configured, your application must modify the root logger and handler directly.
 
 **Manual Trace ID Injection with Standard Library Logging**
 
@@ -1772,7 +1772,7 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-This enables automatic trace ID injection for `winston`, `bunyan` and `pino`.
+This enables automatic trace ID injection for `winston`, `bunyan`, and `pino`.
 
 **Note**: Automatic injection only works for logs formatted as JSON.
 
