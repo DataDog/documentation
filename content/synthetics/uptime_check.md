@@ -103,10 +103,10 @@ A check is considered `FAILED` if it doesn't satisfy the assertions configured f
 
 | Error           | Description                                                                                                                                                                                  |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CONNRESET       | The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, loss of connectivity of the webserver... |
-| DNS             | DNS entry not found for %example.com%. Possible causes include misconfigured check URL, wrong configuration of your DNS entries...                                                          |
-| INVALID_REQUEST | The configuration of the check is invalid (eg. typo in the URL).                                                                                                                             |
-| SSL             | The SSL connection couldn't be performed, see below for more detailed explanations.                                                                                                          |
+| CONNRESET       | The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, loss of connectivity of the webserver, etc. |
+| DNS             | DNS entry not found for the check URL. Possible causes include misconfigured check URL, wrong configuration of your DNS entries, etc.                                                        |
+| INVALID_REQUEST | The configuration of the check is invalid (e.g., typo in the URL).                                                                                                                             |
+| SSL             | The SSL connection couldn't be performed; see below for more detailed explanations.                                                                                                          |
 | TIMEOUT         | The request couldn't be completed in a reasonable time.                                                                                                                                      |
 
 ### SSL errors
@@ -114,7 +114,7 @@ A check is considered `FAILED` if it doesn't satisfy the assertions configured f
 | Error                              | Description                                                                                                                                                            |
 | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | CERT_CHAIN_TOO_LONG                | The certificate chain length is greater than the supplied maximum depth.                                                                                               |
-| CERT_HAS_EXPIRED                   | The certificate has expired.                                                                                                                                           |
+| CERT_HAS_EXPIRED                   | The certificate is expired.                                                                                                                                           |
 | CERT_NOT_YET_VALID                 | The certificate is not valid until a future date.                                                                                                                      |
 | CERT_REJECTED                      | The root CA is marked to reject the purpose specified.                                                                                                                 |
 | CERT_REVOKED                       | The certificate was revoked by the issuer.                                                                                                                             |
@@ -132,14 +132,14 @@ A check is considered `FAILED` if it doesn't satisfy the assertions configured f
 | INVALID_PURPOSE                    | The certificate that was provided cannot be used for its intended purpose.                                                                                             |
 | OUT_OF_MEM                         | An error occurred while allocating memory.                                                                                                                             |
 | PATH_LENGTH_EXCEEDED               | The basicConstraints pathlength parameter was exceeded.                                                                                                                |
-| SELF_SIGNED_CERT_IN_CHAIN          | A self-signed certificate exists in the certificate chain. The certificate chain can be built using the untrusted certificates, but the root CA was not found locally. |
-| UNABLE_TO_DECODE_ISSUER_PUBLIC_KEY | The public key in the certificate could not be read.                                                                                                                   |
+| SELF_SIGNED_CERT_IN_CHAIN          | A self-signed certificate exists in the certificate chain. The certificate chain can be built using the untrusted certificates, but the root CA cannot be found locally. |
+| UNABLE_TO_DECODE_ISSUER_PUBLIC_KEY | The public key in the certificate cannot be read.                                                                                                                   |
 | UNABLE_TO_DECRYPT_CERT_SIGNATURE   | Unable to decrypt the signature of the certificate.                                                                                                                    |
-| UNABLE_TO_DECRYPT_CRL_SIGNATURE    | The CRL signature could not be decrypted. (The actual signature value could not be determined.)                                                                        |
-| UNABLE_TO_GET_CRL                  | The certificate revocation list (CRL) was not found.                                                                                                                   |
+| UNABLE_TO_DECRYPT_CRL_SIGNATURE    | The CRL signature cannot be decrypted. (The actual signature value cannot be determined.)                                                                        |
+| UNABLE_TO_GET_CRL                  | The certificate revocation list (CRL) is not found.                                                                                                                   |
 | UNABLE_TO_GET_ISSUER_CERT          | Unable to find the certificate for one of the certificate authorities (CAs) in the signing hierarchy, and that CA is not trusted by the local application.             |
-| UNABLE_TO_GET_ISSUER_CERT_LOCALLY  | The issuer certificate of a locally found certificate was not found. This usually means that the list of trusted certificates is not complete.                         |
-| UNABLE_TO_VERIFY_LEAF_SIGNATURE    | No signatures were verified because the certificate chain contains only one certificate, which is not self-signed, and the issuer is not trusted.                      |
+| UNABLE_TO_GET_ISSUER_CERT_LOCALLY  | The issuer certificate of a locally found certificate is not found. This usually means that the list of trusted certificates is not complete.                         |
+| UNABLE_TO_VERIFY_LEAF_SIGNATURE    | No signatures are verified because the certificate chain contains only one certificate, which is not self-signed, and the issuer is not trusted.                      |
 
 ## Further Reading
 
