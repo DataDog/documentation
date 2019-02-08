@@ -4,5 +4,5 @@ kind: guide
 ---
 
 {{< whatsnext desc="General Guides:" >}}
-    {{< nextlink href="graphing/guide/uptime-percentage-widget" >}}Uptime percentage widget for SLO & SLA use{{< /nextlink >}}
+    {{< nextlink href="graphing/guide/uptime-percentage-widget" >}}Custom Uptime Percentage Widget{{< /nextlink >}}
 {{< /whatsnext >}}
