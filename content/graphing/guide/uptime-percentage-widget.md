@@ -1,11 +1,14 @@
 ---
-title: Uptime percentage widget for SLO & SLA use
+title: Custom Uptime Percentage Widget
 kind: guide
 author: "Boyan Syarov"
 further_reading:
-- link: "integrations/http_check/"
+- link: "/monitors/monitor_uptime_widget/"
   tag: "Documentation"
-  text: "HTTP Check integration"
+  text: "Monitor Uptime Widget"
+- link: "/synthetics/"
+  tag: "Documentation"
+  text: "Synthetics"
 ---
 
 Maintaining service level agreements with external or internal customers often requires measuring uptime percentage. This guide shows you how to achieve this using Datadog's [HTTP check][1] and the [Query Value widget][2].
