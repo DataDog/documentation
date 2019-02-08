@@ -265,14 +265,16 @@ Refer to [the dedicated Custom metrics server guide][1] to configure the Custom 
 Starting with version 1.2.0, the Datadog Cluster Agent can extend the Autodiscovery mechanism for non-containerized cluster resources. To enable this, make the following changes to the Cluster Agent deployment:
 
 1. Set `DD_CLUSTER_CHECKS_ENABLED` to `true`.
-1. Pass your cluster name as `DD_CLUSTER_NAME`. It will be injected as a `cluster_name` instance tag to all configurations, to help you scope your metrics. The tag name can be customized with the `DD_CLUSTER_CHECKS_CLUSTER_TAG_NAME` option.
+1. Pass your cluster name as `DD_CLUSTER_NAME`. It will be injected as a `cluster_name` instance tag to all configurations, to help you scope your metrics.
 1. The recommended leader election lease duration is 15 seconds. Set it with the `DD_LEADER_LEASE_DURATION` envvar.
-1. If you want to autodetect Kubernetes services, set both `DD_EXTRA_CONFIG_PROVIDERS` and `DD_EXTRA_LISTENERS` to `kube_services`.
 1. If the service name is different from the default `datadog-cluster-agent`, ensure the `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME` environment variable reflects that.
 
-If you want to add Autodiscovery templates as yaml files, you can mount them as a ConfigMap in the `/conf.d` folder, they will be automatically imported by the image's entrypoint.
+Two configuration sources are currently supported, [described in the Autodiscovery documentation][9]:
 
-Refer to [the dedicated Cluster Checks Autodiscovery guide][9] for more configuration and troubleshooting details on this feature.
+- yaml files can be mounted from a ConfigMap in the `/conf.d` folder, they will be automatically imported by the image's entrypoint.
+- Kubernetes Services annotations requires setting both the `DD_EXTRA_CONFIG_PROVIDERS` and `DD_EXTRA_LISTENERS` environment variables to `kube_services`.
+
+Refer to [the dedicated Cluster Checks Autodiscovery guide][10] for more configuration and troubleshooting details on this feature.
 
 ## Further Reading
 
@@ -287,4 +289,5 @@ Refer to [the dedicated Cluster Checks Autodiscovery guide][9] for more configur
 [6]: https://golang.org/pkg/expvar
 [7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/cluster-agent-hpa-svc.yaml
 [8]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/rbac-hpa.yaml
-[9]: /agent/autodiscovery/clusterchecks
+[9]: /agent/autodiscovery/clusterchecks/#setting-up-check-configurations
+[10]: /agent/autodiscovery/clusterchecks

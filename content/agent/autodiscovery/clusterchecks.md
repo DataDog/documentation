@@ -30,7 +30,7 @@ This feature is currently supported on Kubernetes for versions 6.9.0+ of the Age
 
 ### Cluster Agent setup
 
-This feature requires a running Cluster Agent. Refer to [the Cluster Agent documentation][3].
+This feature requires a running [Cluster Agent with the Cluster Checks feature enabled][3].
 
 ### Agent setup
 
@@ -54,7 +54,7 @@ config_providers:
 
 ### Custom checks
 
-Running [custom Agent Checks][5] as Cluster Checks is supported, as long as all node-based Agents are able to run it. This means your check code:
+Running [custom Agent Checks][5] as Cluster Checks is supported, as long as all node-based Agents are able to run it. This means your Checks' code:
 
 - must be installed on all node-based Agents where the `clusterchecks` config provider is enabled
 - must not depend on local resources that are not accessible to all agents
@@ -112,7 +112,7 @@ metadata:
         {
           "name": "My Nginx",
           "url": "http://%%host%%",
-          timeout: 1
+          "timeout": 1
         }
       ]
 spec:
@@ -123,7 +123,7 @@ spec:
     run: my-nginx
 ```
 
-In addition, each pod should be monitored with the [NGINX check][10], as it enables the observation of each worker as well as the aggregated service.
+In addition, each pod should be monitored with the [NGINX check][10], as it enables the monitoring of each worker as well as the aggregated service.
 
 ## Troubleshooting
 
