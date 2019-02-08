@@ -2,9 +2,7 @@
 title: Get a Dashboard
 type: apicontent
 order: 8.4
-external_redirect: 
-    - /api/#get-a-dashboard
-    - /api/#get-a-timeboard
+external_redirect: /api/#get-a-dashboard
 ---
 
 ## Get a Dashboard
