@@ -84,8 +84,8 @@ The following configuration options are available:
 ## API
 
 
-[1]: 
-[2]: 
-[3]: 
+[1]: /graphing/dashboards/timeboard
+[2]: /graphing/dashboards/screenboard
+[3]: /logs/explorer/search
 [4]: /graphing/event_stream
 [5]: /graphing/dashboards/template_variables
