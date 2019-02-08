@@ -7,11 +7,16 @@ further_reading:
   text: "Timeboards"
 ---
 
-*Supported on [Timeboards][1]*
+{{< img src="graphing/widgets/group01.gif" alt="Group Widget" responsive="true">}}
+
+## Overview
 
 The groups widget allows you to keep similar graphs together on your timeboard. Each group has a custom header, can hold one to many graphs, and is collapsible.
 
-{{< img src="graphing/widgets/group01.gif" alt="Group Widget" responsive="true">}}
+
+## Options
+
+## API
 
 **Group widget API example**:
 
@@ -22,5 +27,3 @@ The groups widget allows you to keep similar graphs together on your timeboard. 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /graphing/dashboards/timeboard

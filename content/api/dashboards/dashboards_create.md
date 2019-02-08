@@ -2,9 +2,7 @@
 title: Create a Dashboard
 type: apicontent
 order: 8.1
-external_redirect: 
-  - /api/#create-a-dashboard
-  - /api/#create-a-timeboard
+external_redirect: /api/#create-a-dashboard
 ---
 
 ## Create a Dashboard

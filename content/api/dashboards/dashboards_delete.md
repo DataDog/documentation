@@ -2,9 +2,7 @@
 title: Delete a Dashboard
 type: apicontent
 order: 8.3
-external_redirect: 
-    - /api/#delete-a-dashboard
-    - /api/#delete-a-timeboard
+external_redirect: /api/#delete-a-dashboard
 ---
 
 ## Delete a Dashboard
