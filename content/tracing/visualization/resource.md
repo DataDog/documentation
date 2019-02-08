@@ -72,7 +72,7 @@ The displayed metrics represent, per span:
 | Metric            | Description                                                                                             |
 | ------            | --------                                                                                                |
 | `Avg Span/trace`  | Average number of occurrences of the span, for traces including the current resource, where the span is present at least once. |
-| `% of traces`     | Percentage of traces of the current resource where the span is present at least once. |
+| `% of traces`     | Percentage of traces including the current resource where the span is present at least once. |
 | `Avg duration`    | Average duration for which the span was active, for traces including the current resource, where the span is present at least once.                |
 | `Avg % Exec Time` | Average ratio of execution time for which the span was active, for traces including the current resource, where the span is present at least once. |
 
