@@ -1479,44 +1479,30 @@ another_span->SetTag("sampling.priority", 0); // Discard this span.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Logging
+## Correlate Traces and Logs
 
-For each generated trace, there are very likely log events written by the monitored functions and applications.
-The purpose of this section is to explain how the correlation between traces and logs can be improved by automatically adding  a trace id in your logs and then use it in the Datadog platform to show you the exact logs correlated to the observed trace.
+The correlation between Datadog APM and Datadog Log Management is improved by automatically adding a `trace_id` and `span_id` in your logs with the Tracing Libraries. This can then be used in the platform to show you the exact logs correlated to the observed trace.
 
-{{< img src="tracing/logs_in_trace.png" alt="Logs in Traces" responsive="true" style="width:70%;">}}
+{{< img src="tracing/trace_id_injection.png" alt="Logs in Traces" responsive="true" style="width:100%;">}}
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Leverage the MDC Frameworks ([Map Diagnostic Context][1]) to automatically correlate trace and span IDs into your logs. Datadog MDC keys may be injected automatically with a tracer integration, or manually injected with the Datadog API.
+Use one of the following options to inject Java trace information into your logs:
 
-There are three possible implementations depending on the logging configuration:
+**Automatic Trace ID Injection**
 
-1. Automatically inject trace IDs in JSON formatted logs
-2. Automatically inject trace IDs in raw formatted logs
-3. Manually inject trace IDs
-
-**1. Automatic Trace IDs Injection for JSON Formatted Logs**
-
-Enable injection in the [Java Tracer's configuration][2] via the `dd.logs.injection` parameter.
+Enable injection in the Java Tracer's [configuration][2] by setting `Ddd.logs.injection=true` or through environment variable `DD_LOGS_INJECTION=true`.
 
 **Note**: Currently only **slf4j** is supported for MDC autoinjection.
 
-**2. Automatic Trace IDs Injection for Raw Formatted Logs**
-
-Enable injection in the [Java Tracer's configuration][2].
-
-**Note**: Currently only **slf4j** is supported for MDC auto-injection.
-
-If the logs are already JSON formatted, there should be nothing left to do.
-2. Update your formatter to include `dd.trace_id` and `dd.span_id` in your logger configuration:
+If the logs are already JSON formatted, there is nothing left to do. If the logs are raw formatted, update your formatter to include `dd.trace_id` and `dd.span_id` in your logger configuration:
 
 ```
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
-**3. Manual Trace IDs Injection**
+**Manual Trace ID Injection**
 
 If you prefer to manually correlate your traces with your logs, leverage the Datadog API to retrieve correlation identifiers:
 
@@ -1579,17 +1565,15 @@ Then update your logger configuration to include `dd.trace_id` and `dd.span_id` 
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Use one the following options to inject Python trace information into your logs, depending on whether you are using `ddtrace-run` or the standard library **logging** module:
+Use one of the following options to inject Python trace information into your logs:
 
-**1. Automatic Trace IDs Injection With Standard Library Logging**
+**Automatic Trace ID Injection With Standard Library Logging**
 
 Enable injection with the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
 
-**Note**: The standard library `logging` is supported for auto-injection. Any libraries, such as `json_log_formatter`, that extend the standard library module are also supported for auto-injection.
+**Note**: The standard library `logging` is supported for auto-injection. Any libraries, such as `json_log_formatter`, that extend the standard library module are also supported for auto-injection. `ddtrace-run` calls `logging.basicConfig` before executing your application. If the root logger has a handler configured, your application must modify the root logger and handler directly.
 
-**Note**: `ddtrace-run` calls `logging.basicConfig` before executing your application. Since that function does nothing if the root logger has a handler configured, your applicaiton will have to modify the root logger and handler directly.
-
-**2. Manual Trace IDs Injection with Standard Library Logging**
+**Manual Trace ID Injection with Standard Library Logging**
 
 If you prefer to manually correlate your traces with your logs, patch your `logging` module by updating your log formatter to include the ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
 
@@ -1615,7 +1599,7 @@ hello()
 ```
 
 
-**3. Manual Trace IDs Injection with Third-Party Logging**
+**Manual Trace ID Injection without Standard Library Logging**
 
 If you are not using the standard library `logging` module, you can use the `ddtrace.helpers.get_correlation_ids()` to inject tracer information into your logs. As an illustration of this approach, the following example defines a function as a *processor* in `structlog` to add `dd.trace_id` and `dd.span_id` to the log output:
 
@@ -1661,7 +1645,7 @@ Once the logger is configured, executing a traced function that logs an event yi
 
 Use one of the following options to inject Ruby trace information into your logs:
 
-**1. Enable Trace ID Injection for Rails Applications using Lograge (recommended)**
+**Automatic Trace ID Injection for Rails Applications using Lograge (recommended)**
 
 After [setting up Lograge in a Rails application][1], modify the `custom_options` block in your environment configuration file (e.g. `config/environments/production.rb`) to add the trace IDs:
 
@@ -1682,7 +1666,7 @@ config.lograge.custom_options = lambda do |event|
 end
 ```
 
-**2. Enable Trace ID Injection for default Rails Applications**
+**Automatic Trace ID Injection for default Rails Applications**
 
 Rails applications which are configured with a `ActiveSupport::TaggedLogging` logger can append trace IDs as tags to log output. The default Rails logger implements this tagged logging, making it easier to add trace tags.
 
@@ -1703,7 +1687,7 @@ This appends trace tags to web requests:
 # [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
 ```
 
-**3. Manual Trace ID Injection for Ruby Applications**
+**Manual Trace ID Injection for Ruby Applications**
 
 To add trace IDs to your own logger, add a log formatter which retrieves the trace IDs with `Datadog.tracer.active_correlation`, then add the trace IDs to the message.
 
@@ -1741,6 +1725,11 @@ See our [Ruby logging documentation][2] to verify the Ruby log integration is pr
 [2]: https://docs.datadoghq.com/logs/log_collection/ruby/#configure-the-datadog-agent
 {{% /tab %}}
 {{% tab "Go" %}}
+
+Use the following example to inject Go trace information into your logs.
+
+**Manual Trace ID Injection for Go**
+
 The Go tracer exposes two API calls to allow printing trace and span identifiers along with log statements using exported methods from `SpanContext` type:
 
 ```go
@@ -1773,7 +1762,7 @@ The above example illustrates how to use the span's context in the standard libr
 
 Use one the following options to inject Node trace information into your logs.
 
-**1. Automatic Trace IDs Injection With Supported Logging Libraries (recommended)**
+**Automatic Trace ID Injection With Supported Logging Libraries (recommended)**
 
 Enable injection with the environment variable `DD_LOGS_INJECTION=true` or by configuring the tracer directly:
 
@@ -1783,13 +1772,13 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-This enables automatic trace IDs injection for `winston`, `bunyan` and `pino`.
+This enables automatic trace ID injection for `winston`, `bunyan`, and `pino`.
 
 **Note**: Automatic injection only works for logs formatted as JSON.
 
-**2. Manual Trace IDs Injection for JSON Formatted Logs**
+**Manual Trace ID Injection for JSON Formatted Logs**
 
-If you are using a logging library not supported for automatic injection but using JSON format, it's possible to do manual injection directly in your code.
+If you are using a logging library not supported for automatic injection but are using JSON format, it's possible to do manual injection directly in your code.
 
 Example using `console` as the underlying logger:
 
@@ -1813,7 +1802,7 @@ class Logger {
 module.exports = Logger
 ```
 
-**3. Manual Trace IDs Injection for Raw Formatted Logs**
+**Manual Trace ID Injection for Raw Formatted Logs**
 
 To ensure proper log correlation, verify the following is present in each log entry:
 
@@ -1860,7 +1849,9 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-The following example injects the required `dd.trace_id` and `dd.span_id` identifiers into the log message to associate the log entry with the current trace.
+Use the following example to inject PHP trace information into your logs.
+
+**Manual Trace ID Injection**
 
 ```php
 $span = \DDTrace\GlobalTracer::get()->getActiveSpan();

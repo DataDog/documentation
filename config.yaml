@@ -687,8 +687,8 @@ languages:
           weight: 250
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_logging
-          name: "Logging"
-          url: "#logging"
+          name: "Correlate Traces and Logs"
+          url: "#correlate-traces-and-logs"
           weight: 260
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_debugging
