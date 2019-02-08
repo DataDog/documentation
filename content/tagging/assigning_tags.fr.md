@@ -1,5 +1,5 @@
 ---
-title: Attribuer des tags
+title: Assigner des tags
 kind: documentation
 aliases:
   - /fr/agent/tagging
@@ -14,13 +14,13 @@ further_reading:
 ---
 ## Présentation
 
-Les tags vous permettent d'interroger les machines et métriques que vous surveillez avec Datadog. Pour identifier les problèmes au sein de votre environnement et affiner suffisamment les données afin d'en découvrir les causes profondes, vous devez être en mesure d'attribuer des tags et d'appliquer des filtres à partir de ces derniers. Découvrez comment [définir des tags][1] dans Datadog avant de poursuivre la lecture de cette rubrique.
+Les tags vous permettent d'interroger les machines et métriques que vous surveillez avec Datadog. Pour identifier les problèmes au sein de votre environnement et affiner suffisamment les données afin d'en découvrir les causes profondes, vous devez être en mesure d'assigner des tags et d'appliquer des filtres à partir de ces derniers. Découvrez comment [définir des tags][1] dans Datadog avant de poursuivre la lecture de cette rubrique.
 
-Vous pouvez attribuer des tags au sein de plusieurs éléments de Datadog : les [fichiers de configuration](#fichiers-de-configuration), les [variables d'environnement][2], vos [traces](#traces), l'[IU](#iu) de Datadog, l'[API][3], [DogStatsD][4] et les [intégrations][5] (grâce à leur fonction d'héritage). Nous vous recommandons d'utiliser les fichiers de configuration et l'héritage des intégrations pour l'attribution de la majorité de vos tags.
+Vous pouvez assigner des tags au sein de plusieurs éléments de Datadog : les [fichiers de configuration](#fichiers-de-configuration), les [variables d'environnement][2], vos [traces](#traces), l'[IU](#iu) de Datadog, l'[API][3], [DogStatsD][4] et les [intégrations][5] (grâce à leur fonction d'héritage). Nous vous recommandons d'utiliser les fichiers de configuration et l'héritage des intégrations pour l'attribution de la majorité de vos tags.
 
 ## Fichiers de configuration
 
-Le hostname (clé de tag `host`) est [attribué automatiquement][6] par l'Agent Datadog. Pour personnaliser le hostname, utilisez le fichier de configuration de l'Agent, `datadog.yaml` :
+Le hostname (clé de tag `host`) est [assigné automatiquement][6] par l'Agent Datadog. Pour personnaliser le hostname, utilisez le fichier de configuration de l'Agent, `datadog.yaml` :
 
 ```yaml
 # Définissez le hostname (par défaut : détection automatique)
@@ -41,31 +41,31 @@ Les tags pour les [intégrations][5] installées avec l'Agent sont configurés �
 
 **Formats YAML**
 
-Utilisez dans les fichiers YAML un dictionnaire de tags comportant la liste des tags à attribuer à ce niveau. Les dictionnaires de tags peuvent respecter deux formats différents, aux caractéristiques similaires :
+Utilisez dans les fichiers YAML un dictionnaire de tags comportant la liste des tags à assigner à ce niveau. Les dictionnaires de tags peuvent respecter deux formats différents, aux caractéristiques similaires :
 
 ```
-tags: <CLÉ_1>:<VALEUR_1>, <CLÉ_2>:<VALEUR_2>, <CLÉ_3>:<VALEUR_3>
+tags: <KEY_1>:<VALUE_1>, <KEY_2>:<VALUE_2>, <KEY_3>:<VALUE_3>
 ```
 
 ou
 
 ```
 tags:
-    - <CLÉ_1>:<VALEUR_1>
-    - <CLÉ_2>:<VALEUR_2>
-    - <CLÉ_3>:<VALEUR_3>
+    - <KEY_1>:<VALUE_1>
+    - <KEY_2>:<VALUE_2>
+    - <KEY_3>:<VALUE_3>
 ```
 
-Nous vous recommandons d'attribuer des tags sous la forme de paires `<CLÉ>:<VALEUR>`. L'autre format de tags plus simple est également accepté. Consultez la rubrique sur la [définition des tags][1] pour en savoir plus. 
+Nous vous recommandons d'attribuer des tags sous la forme de paires `<KEY>:<VALUE>`. L'autre format de tags plus simple est également accepté. Consultez la rubrique sur la [définition des tags][1] pour en savoir plus. 
 
 ## Variables d'environnement
 
-Lors de l'installation de l'Agent Datadog conteneurisé, définissez vos tags de host à l'aide de la variable d'environnement `DD_TAGS`. Nous recueillons automatiquement les tags courants de [Docker][9], [Kubernetes][10], [ECS][11], [Swarm, Mesos, Nomad, et Rancher][9]. Pour extraire encore plus de tags, utilisez les paramètres suivants :
+Lors de l'installation de l'Agent Datadog conteneurisé, définissez vos tags de host à l'aide de la variable d'environnement `DD_TAGS`. Nous recueillons automatiquement les tags courants de [Docker][9], [Kubernetes][10], [ECS][11], [Swarm, Mesos, Nomad et Rancher][9]. Pour extraire encore plus de tags, utilisez les paramètres suivants :
 
 | Variable d'environnement               | Description                                    |
 |------------------------------------|------------------------------------------------|
-| `DD_DOCKER_LABELS_AS_TAGS`         | Extraire les étiquettes de conteneur docker                |
-| `DD_DOCKER_ENV_AS_TAGS`            | Extraire les variables d'environnement de conteneur docker |
+| `DD_DOCKER_LABELS_AS_TAGS`         | Extraire les étiquettes de conteneur Docker                |
+| `DD_DOCKER_ENV_AS_TAGS`            | Extraire les variables d'environnement de conteneur Docker |
 | `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Extraire les étiquettes de pod                             |
 
 **Exemples :**
@@ -81,13 +81,13 @@ Définissez les variables dans votre fichier `datadog.yaml` personnalisé ou con
 
 Si vous envoyez une seule trace, taguez ses spans afin d'ignorer les tags de configuration de l'Agent et/ou la valeur des tags du host (le cas échéant) pour ces traces :
 
-Les exemples suivants utilisent le tag primaire par défaut `env:<ENVIRONNEMENT>`. Cependant, vous pouvez également le remplacer par un tag `<CLÉ>:<VALEUR>`.
+Les exemples suivants utilisent le tag primaire par défaut `env:<ENVIRONMENT>`. Cependant, vous pouvez également le remplacer par un tag `<KEY>:<VALUE>`.
 
 {{< tabs >}}
 {{% tab "Go" %}}
 
 ```go
-tracer.SetTag("env", "<ENVIRONNEMENT>")
+tracer.SetTag("env", "<ENVIRONMENT>")
 ```
 
 Pour OpenTracing, utilisez l'option de démarrage `tracer.WithGlobalTag` pour définir de façon globale l'environnement.
