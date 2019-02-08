@@ -198,7 +198,7 @@ Click **Done** to save your work and exit the editor. You can always come back t
 [2]: https://app.datadoghq.com/metric/explorer
 [3]: https://app.datadoghq.com/notebook/list
 [4]: https://app.datadoghq.com/metric/summary
-[5]: /graphing/dashboards/widgets
+[5]: /graphing/widgets
 [6]: /tagging
 [7]: /graphing/functions/#apply-functions-optional
 [8]: /graphing/event_stream
