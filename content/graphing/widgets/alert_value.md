@@ -8,6 +8,7 @@ further_reading:
 ---
 
 *Supported on Screenboards only*
+
 ## Overview
 
 Alert values are query values showing the current value of the metric in any monitor defined on your system.
