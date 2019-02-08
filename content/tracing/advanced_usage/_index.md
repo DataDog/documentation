@@ -1772,7 +1772,7 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-This enables automatic trace ID injection for `winston`, `bunyan` and `pino`.
+This enables automatic trace ID injection for `winston`, `bunyan`, and `pino`.
 
 **Note**: Automatic injection only works for logs formatted as JSON.
 
