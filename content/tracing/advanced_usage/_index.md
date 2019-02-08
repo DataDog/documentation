@@ -1481,7 +1481,7 @@ another_span->SetTag("sampling.priority", 0); // Discard this span.
 
 ## Correlate Traces and Logs
 
-The correlation between Datadog APM and Datadog Log Management is improved by automatically adding a `trace_id` and `span_id` in your logs with the Tracing Libraries. This can then be used in platform to show you the exact logs correlated to the observed trace.
+The correlation between Datadog APM and Datadog Log Management is improved by automatically adding a `trace_id` and `span_id` in your logs with the Tracing Libraries. This can then be used in the platform to show you the exact logs correlated to the observed trace.
 
 {{< img src="tracing/trace_id_injection.png" alt="Logs in Traces" responsive="true" style="width:100%;">}}
 
