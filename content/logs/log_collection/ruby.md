@@ -71,7 +71,7 @@ gem 'logging-rails', :require => 'logging/rails'
 gem 'lograge'
 ```
 
-##Configure Lograge
+## Configure Lograge
 In your configuration file, set the following:
 
 ```ruby
