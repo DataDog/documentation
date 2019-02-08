@@ -2,7 +2,9 @@
 title: Dashboards
 type: apicontent
 order: 8
-external_redirect: /api/#dashboards
+external_redirect: 
+    - /api/#dashboards
+    - /api/#timeboard
 ---
 
 ## Dashboards

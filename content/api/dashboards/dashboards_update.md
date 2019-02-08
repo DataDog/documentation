@@ -2,7 +2,9 @@
 title: Update a Dashboard
 type: apicontent
 order: 8.2
-external_redirect: /api/#update-a-dashboard
+external_redirect: 
+  - /api/#update-a-dashboard
+  - /api/#update-a-timeboard
 ---
 
 ## Update a Dashboard
