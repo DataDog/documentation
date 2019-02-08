@@ -217,7 +217,12 @@ dd_trace("CustomDriver", "doWork", function (...$args) {
 
 ## Configuration
 
-Configure the Agent connection parameters via environment variables.
+The PHP tracer can be configured using environment variables.
+
+*An important note*: If you use code auto-instrumentation (the recommended approach) please be aware that the
+instrumenting code is executed before any user code. So the environment variables below must be set at the server
+level and be available to the PHP runtime before any user code is executed. So, for example, `putenv()` and `.env`
+files would not work.
 
 | Env variable               | Default     | Note                                                                |
 | :------------------------- | :---------- | :------------------------------------------------------------------ |

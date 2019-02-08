@@ -2015,13 +2015,19 @@ var tracer = Datadog.Trace.Tracer.Create(isDebugEnabled: true);
 
 Debug mode is disabled by default. To enable it, set the environment variable `DD_TRACE_DEBUG=true`.
 
+*An important note*: If you use code auto-instrumentation (the recommended approach) please be aware that the
+instrumenting code is executed before any user code. So the environment variables below must be set at the server
+level and be available to the PHP runtime before any user code is executed. So, for example, `putenv()` and `.env`
+files would not work.
+
 ```php
-putenv('DD_TRACE_DEBUG=true');
+DD_TRACE_DEBUG=true
 ```
 
 **Application Logs**:
 
-By default, logging from the PHP tracer is disabled. In order to get debugging information and errors sent to logs, set a [PSR-3 logger][1] singleton.
+By default, logging from the PHP tracer is disabled. In order to get debugging information and errors sent to logs,
+set a [PSR-3 logger][1] singleton.
 
 ```php
 \DDTrace\Log\Logger::set(
