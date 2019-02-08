@@ -4,8 +4,6 @@ kind: documentation
 aliases:
   - /guides/servicediscovery/
   - /guides/autodiscovery/
-  - /agent/autodiscovery
-  - /agent/autodiscovery/
 further_reading:
 - link: "/videos/autodiscovery/"
   tag: "Video"
