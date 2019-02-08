@@ -1,7 +1,7 @@
 ---
 title: Interroger le flux d'événements
 type: apicode
-order: 11.4
+order: 12.4
 external_redirect: /api/#interroger-le-flux-d-evenements
 ---
 

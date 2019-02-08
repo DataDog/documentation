@@ -1,7 +1,7 @@
 ---
 title: Edit a monitor
 type: apicontent
-order: 17.03
+order: 18.03
 external_redirect: /api/#edit-a-monitor
 ---
 

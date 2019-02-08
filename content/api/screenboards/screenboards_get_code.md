@@ -1,7 +1,7 @@
 ---
 title: Get a Screenboard
 type: apicode
-order: 19.4
+order: 20.4
 external_redirect: /api/#get-a-screenboard
 ---
 

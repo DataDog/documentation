@@ -1,7 +1,7 @@
 ---
 title: Create a Screenboard
 type: apicontent
-order: 19.1
+order: 20.1
 external_redirect: /api/#create-a-screenboard
 ---
 

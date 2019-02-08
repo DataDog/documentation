@@ -1,7 +1,7 @@
 ---
 title: Monitors Search
 type: apicode
-order: 17.12
+order: 18.12
 external_redirect: /api/#monitors-search
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Get all monitor downtimes
 type: apicontent
-order: 9.6
+order: 10.6
 external_redirect: /api/#get-all-monitor-downtimes
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Annuler les downtimes d'un monitor selon le contexte
 type: apicode
-order: 9.4
+order: 10.4
 external_redirect: /api/#annuler-les-downtimes-d-un-monitor-selon-le-contexte
 ---
 

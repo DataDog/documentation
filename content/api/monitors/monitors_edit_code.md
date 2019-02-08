@@ -1,7 +1,7 @@
 ---
 title: Edit a monitor
 type: apicode
-order: 17.03
+order: 18.03
 external_redirect: /api/#edit-a-monitor
 ---
 
