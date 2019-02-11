@@ -55,15 +55,18 @@ const tracer = require('dd-trace').init()
 
 ##### TypeScript
 
-```js
-// server.js
+```ts
+// tracer.ts - initialized in separate file to avoid hoisting by the TypeScript compiler
+import tracer from "dd-trace";
+tracer.init();
+export default tracer;
+
+// server.ts
 import "./tracer"; // must come before importing any instrumented module.
 
-// tracer.js
-import tracer from "dd-trace";
-tracer.init(); // initialized in a different file to avoid hoisting.
-export default tracer;
 ```
+
+Depending on the TypeScript compiler configuration, `npm install --save-dev @types/dd-trace` may be required before compilation works.
 
 See the [tracer settings][7] for the list of initialization options.
 
