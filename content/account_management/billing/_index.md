@@ -21,7 +21,7 @@ It is recommended that containers are monitored with a single containerized Agen
 
 ## Invoicing
 
-If you pay by credit card, invoices are available to [Administrators][4] for previous months under [Billing History][5].
+If you pay by credit card, receipts are available to [Administrators][4] for previous months under [Billing History][5].
 
 If you pay by check or wire, invoices are emailed to the billing email addresses when due. If you need an additional copy, email [Datadog billing][6].
 
