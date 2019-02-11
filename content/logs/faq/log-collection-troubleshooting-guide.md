@@ -144,30 +144,24 @@ When using Journald in a containerized environment, make sure to follow the inst
 
 ## Serverless environment
 
-### Logs from lambda functions are not visible in log explorer
+### Logs from lambda functions are not visible in Log Explorer page
 
-See the [Datadog-AWS Log integration][9] to configure your environment.
+See the [Datadog-AWS Log integration][9] to configure your environment. If you still do not see your logs, double-check the following points:
 
-If you still do not see your logs, double-check the following points:
-
-#### Are logs expectedly dropped? 
-
-Check if logs appear in the [Datadog Live Tail][10].
-
-If they appear in the Live Tail page, check that you don't have a mathching index exclusion filter on these logs. 
-
-If they do not appear in the Live Tail page, check that the logs you send are not older than 6 hours (Datadog rejects logs older than 6 hours).
-
-#### Make sure the lambda function is properly configured
+#### Lambda function configuration
 
 Check Datadog lambda configuration parameter:
 
-* `<API_KEY>` : Should be set with your [Datadog API key][12] either directly in the Python code, or alternatively as a environment variable. In case you manage several platforms, we encourage you to double-check that you are actually using the right `<API_KEY>` for the right platform.
+* `<API_KEY>` : Should be set with your [Datadog API key][12] either directly in the Python code, or alternatively as a environment variable. In case you manage several platforms, double-check that you are actually using the right `<API_KEY>` for the right platform.
 
 
-#### Make sure the lambda function is properly triggered
+#### The lambda function is triggered
 
-Check that Datadog lambda function is actually triggered. You can leverage `aws.lambda.invocations` and `aws.lambda.errors` metrics with the `functionname` tag of your Datadog lambda function within Datadog, or check for errors in Datadog lambda logs in Cloudwatch.
+Check that Datadog lambda function is actually triggered by leveraging `aws.lambda.invocations` and `aws.lambda.errors` metrics with the `functionname` tag of your Datadog lambda function within Datadog, or check for errors in Datadog lambda logs in Cloudwatch.
+
+#### Expectedly droping logs
+
+Check if logs appear in the [Datadog Live Tail][10]. If they appear in the Live Tail, check the Indexes configuration page for any exclusion filters that could match your logs.
 
 ## Further Reading
 
