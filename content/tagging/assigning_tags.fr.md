@@ -16,7 +16,7 @@ further_reading:
 
 Les tags vous permettent d'interroger les machines et métriques que vous surveillez avec Datadog. Pour identifier les problèmes au sein de votre environnement et affiner suffisamment les données afin d'en découvrir les causes profondes, vous devez être en mesure d'assigner des tags et d'appliquer des filtres à partir de ces derniers. Découvrez comment [définir des tags][1] dans Datadog avant de poursuivre la lecture de cette rubrique.
 
-Vous pouvez assigner des tags au sein de plusieurs éléments de Datadog : les [fichiers de configuration](#fichiers-de-configuration), les [variables d'environnement][2], vos [traces](#traces), l'[IU](#iu) de Datadog, l'[API][3], [DogStatsD][4] et les [intégrations][5] (grâce à leur fonction d'héritage). Nous vous recommandons d'utiliser les fichiers de configuration et l'héritage des intégrations pour l'attribution de la majorité de vos tags.
+Vous pouvez assigner des tags au sein de plusieurs éléments de Datadog : les [fichiers de configuration](#fichiers-de-configuration), les [variables d'environnement][2], vos [traces](#traces), l'[IU](#iu) de Datadog, l'[API][3], [DogStatsD][4] et les [intégrations][5] (grâce à leur fonction d'héritage). Nous vous recommandons d'utiliser les fichiers de configuration et l'héritage des intégrations pour l'assignation de la majorité de vos tags.
 
 ## Fichiers de configuration
 
@@ -56,7 +56,7 @@ tags:
     - <KEY_3>:<VALUE_3>
 ```
 
-Nous vous recommandons d'attribuer des tags sous la forme de paires `<KEY>:<VALUE>`. L'autre format de tags plus simple est également accepté. Consultez la rubrique sur la [définition des tags][1] pour en savoir plus. 
+Nous vous recommandons d'assigner des tags sous la forme de paires `<KEY>:<VALUE>`. L'autre format de tags plus simple est également accepté. Consultez la rubrique sur la [définition des tags][1] pour en savoir plus. 
 
 ## Variables d'environnement
 
@@ -147,7 +147,7 @@ Cet exemple de métadonnées span n'est donc pas valide :
 {{< tabs >}}
 {{% tab "Hostmap" %}}
 
-Vous pouvez attribuer des tags de host dans l'IU depuis la page relative à la [Hostmap][1]. Cliquez sur l'hexagone (host) de votre choix pour superposer le host en bas de la page. Depuis la section *User*, cliquez ensuite sur le bouton **Edit Tags**. Saisissez les tags sous la forme d'une liste de valeurs séparées par des virgules, puis cliquez sur **Save Tags**. Remarque : l'application des modifications de tags de métrique effectuées via l'IU peut prendre jusqu'à 30 minutes.
+Vous pouvez assigner des tags de host dans l'IU depuis la page relative à la [Hostmap][1]. Cliquez sur l'hexagone (host) de votre choix pour superposer le host en bas de la page. Depuis la section *User*, cliquez ensuite sur le bouton **Edit Tags**. Saisissez les tags sous la forme d'une liste de valeurs séparées par des virgules, puis cliquez sur **Save Tags**. Remarque : l'application des modifications de tags de métrique effectuées via l'IU peut prendre jusqu'à 30 minutes.
 
 {{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Tags hostmap" responsive="true" style="width:80%;">}}
 
@@ -156,7 +156,7 @@ Vous pouvez attribuer des tags de host dans l'IU depuis la page relative à la [
 {{% /tab %}}
 {{% tab "Liste d'infrastructures" %}}
 
-Vous pouvez attribuer des tags de host dans l'IU depuis la page relative à la [liste d'infrastructures][1]. Cliquez sur un host pour le superposer sur la droite de la page. Depuis la section *User*, cliquez ensuite sur le bouton **Edit Tags**. Saisissez les tags sous la forme d'une liste de valeurs séparées par des virgules, puis cliquez sur **Save Tags**. Remarque : l'application des modifications de tags de métrique effectuées via l'IU peut prendre jusqu'à 30 minutes.
+Vous pouvez assigner des tags de host dans l'IU depuis la page relative à la [liste d'infrastructures][1]. Cliquez sur un host pour le superposer sur la droite de la page. Depuis la section *User*, cliquez ensuite sur le bouton **Edit Tags**. Saisissez les tags sous la forme d'une liste de valeurs séparées par des virgules, puis cliquez sur **Save Tags**. Remarque : l'application des modifications de tags de métrique effectuées via l'IU peut prendre jusqu'à 30 minutes.
 
 {{< img src="tagging/assigning_tags/hostuitags.png" alt="Tags liste d'infrastructures" responsive="true" style="width:80%;">}}
 
@@ -165,11 +165,11 @@ Vous pouvez attribuer des tags de host dans l'IU depuis la page relative à la [
 {{% /tab %}}
 {{% tab "Monitors" %}}
 
-Depuis la page de [gestion des monitors][1], cochez la case en regard de chaque monitor pour ajouter des tags (sélectionnez un ou plusieurs monitors). Cliquez sur le bouton **Edit Tags**. Saisissez un tag ou sélectionnez un tag précédemment utilisé. Cliquez ensuite sur **Add Tag `nom:tag`** ou **Apply Changes**. Si vous aviez déjà ajouté des tags, vous pouvez attribuer plusieurs tags à la fois en cochant leurs cases.
+Depuis la page de [gestion des monitors][1], cochez la case en regard de chaque monitor pour ajouter des tags (sélectionnez un ou plusieurs monitors). Cliquez sur le bouton **Edit Tags**. Saisissez un tag ou sélectionnez un tag précédemment utilisé. Cliquez ensuite sur **Add Tag `nom:tag`** ou **Apply Changes**. Si vous aviez déjà ajouté des tags, vous pouvez assigner plusieurs tags à la fois en cochant leurs cases.
 
 {{< img src="tagging/assigning_tags/monitortags.png" alt="Tags gestion de monitors" responsive="true" style="width:80%;">}}
 
-Lorsque vous créez un monitor, attribuez des tags de monitor durant l'étape 4 *Say what's happening* :
+Lorsque vous créez un monitor, assignez des tags de monitor durant l'étape 4 *Say what's happening* :
 
 {{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Tags création de monitor" responsive="true" style="width:80%;">}}
 
@@ -178,7 +178,7 @@ Lorsque vous créez un monitor, attribuez des tags de monitor durant l'étape 4
 {{% /tab %}}
 {{% tab "Métriques de distribution" %}}
 
-Vous pouvez attribuer des clés de tag au sein des [métriques de distribution][1] (version bêta) pour créer des séries temporelles agrégées. Pour ce faire, appliquez un ensemble de tags à une métrique afin de créer une série temporelle pour chaque combinaison de valeurs de tag de l'ensemble.
+Vous pouvez assigner des clés de tag au sein des [métriques de distribution][1] (version bêta) pour créer des séries temporelles agrégées. Pour ce faire, appliquez un ensemble de tags à une métrique afin de créer une série temporelle pour chaque combinaison de valeurs de tag de l'ensemble.
 
 **Les ensembles ne peuvent pas comprendre plus de quatre tags** :
 
@@ -189,7 +189,7 @@ Vous pouvez attribuer des clés de tag au sein des [métriques de distribution][
 {{% /tab %}}
 {{% tab "Intégrations" %}}
 
-Le carré d'intégration [AWS][1] vous permet d'attribuer des tags supplémentaires à l'ensemble des métriques au niveau des comptes. Utilisez une liste de tags au format `<CLÉ>:<VALEUR>` séparés par des virgules.
+Le carré d'intégration [AWS][1] vous permet d'assigner des tags supplémentaires à l'ensemble des métriques au niveau des comptes. Utilisez une liste de tags au format `<CLÉ>:<VALEUR>` séparés par des virgules.
 
 {{< img src="tagging/assigning_tags/integrationtags.png" alt="Tags AWS" responsive="true" style="width:80%;">}}
 
@@ -203,7 +203,7 @@ Le carré d'intégration [AWS][1] vous permet d'attribuer des tags supplémentai
 {{< tabs >}}
 {{% tab "Attribution" %}}
 
-Les tags peuvent être attribués de diverses façons avec l'[API Datadog][1]. Cliquez sur les liens ci-dessous pour accéder aux rubriques indiquées :
+Les tags peuvent être assignés de diverses façons avec l'[API Datadog][1]. Cliquez sur les liens ci-dessous pour accéder aux rubriques indiquées :
 
 - [Envoyer le résultat d'un check][2]
 - [Envoyer un événement][3]
@@ -273,11 +273,11 @@ def algorithm_two():
 
 Veuillez noter que l'ajout de tags dans StatsD requiert une [extension Datadog][12].
 
-Des précautions particulières doivent être prises pour l'attribution du tag `host` aux métriques DogStatsD. Pour en savoir plus sur la clé de tag host, consultez la [rubrique DogStatsD][13].
+Des précautions particulières doivent être prises pour l'assignation du tag `host` aux métriques DogStatsD. Pour en savoir plus sur la clé de tag host, consultez la [rubrique DogStatsD][13].
 
 ## Héritage des intégrations
 
-Pour attribuer facilement des tags, il est conseillé d'utiliser les intégrations. Les tags attribués à vos instances Amazon Web Services, recipes Chef et autres éléments sont automatiquement attribués aux hosts et métriques transmis à Datadog. **Remarque** : les tags `CamelCase` sont convertis par Datadog en ajoutant des underscores. Par exemple, `TestTag` --> `test_tag`.
+Pour assigner facilement des tags, il est conseillé d'utiliser les intégrations. Les tags assignés à vos instances Amazon Web Services, recipes Chef et autres éléments sont automatiquement assignés aux hosts et métriques transmis à Datadog. **Remarque** : les tags `CamelCase` sont convertis par Datadog en ajoutant des underscores. Par exemple, `TestTag` --> `test_tag`.
 
 Les sources d'[intégration][5] suivantes créent automatiquement des tags dans Datadog :
 
