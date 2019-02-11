@@ -10,5 +10,6 @@ private: true
     {{< nextlink href="tracing/faq/if-i-instrument-a-database-with-datadog-apm-will-there-be-sensitive-database-data-sent-to-datadog" >}}If I instrument a database with Datadog APM, will there be sensitive database data sent to Datadog?{{< /nextlink >}}
     {{< nextlink href="tracing/faq/distributed-tracing" >}} Example of distributed tracing{{< /nextlink >}}
     {{< nextlink href="tracing/faq/terminology" >}}Terminology{{< /nextlink >}}
+    {{< nextlink href="tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel" >}}Why can't I see my correlated logs in the Trace ID panel?{{< /nextlink >}}    
 {{< /whatsnext >}}
 
