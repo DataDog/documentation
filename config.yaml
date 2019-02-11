@@ -1161,6 +1161,11 @@ languages:
           url: "account_management/org_switching/"
           weight: 70
           parent: menu_references_account_management
+        - identifier: customnav_accountmanagementnav_billing
+          name: "Billing"
+          url: "account_management/billing/"
+          weight: 80
+          parent: menu_references_account_management
 
         # SAML subnav
         - identifier: saml_activedirectory
