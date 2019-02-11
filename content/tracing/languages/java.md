@@ -226,8 +226,25 @@ Now add `@Trace` to methods to have them be traced when running with `dd-java-ag
 
 ## JMX Metrics
 
-Datadog's Java Tracer provides support for 'in-process' JMX metrics collection. This is enabled with `jmxfetch.enabled` configuration parameter. Additional JMX metrics are configured using configuration files that are passed to `jmxfetch.metrics-configs`. Contents of those configuration files are equivalent to contents of the `conf` section for external jmxfetch. See [JMX Integration][9] for further details on configuration.
-By default, when JMX metrics collection is enabled it monitors JVM heap memory, thread count, and garbage collection. Use it in conjunction with APM for a broader view into your Java application's performance.
+Datadog's Java Tracer can collect JMX Metrics that can be viewed in your APM Service Dashboard and used for a broader view into your Java application's performance. This is enabled by setting `-Ddd.jmxfetch.enabled=true` or through environment variable `DD_JMXFETCH_ENABLED=true`. Once enabled, JVM Runtime Metrics such as Garbage Collection and Heap Usage will then be correlated directly to the `service` you are monitoring with APM.
+
+{{< img src="tracing/jvm-runtime.png" alt="JVM Runtime" responsive="true" style="width:100%;">}}
+
+JVM Runtime metrics can be correlated in the Trace View, directly viewing any output of performance with the time of a specific request.
+
+{{< img src="tracing/jvm_runtime_trace.png" alt="JVM Runtime Trace" responsive="true" style="width:100%;">}}
+
+By enabling JMXFetch in the Java Tracer the following metrics will be collected by default.
+
+Please insert table of jmx metrics from here https://docs.datadoghq.com/integrations/java/#metrics
+
+Along with viewing these metrics in your APM Service Page, Datadog provides a JVM Runtime Dashboard that is pre-built with the `service` and `runtime-id` tags that will be applied to these metrics. 
+
+Additional JMX metrics can be added using configuration files that are passed to `jmxfetch.metrics-configs`. You can also enable existing Datadog JMX Integrations individually with the `dd.integration.<name>` parameter. This will auto-embed configuration from our [existing JMX configuration files][10]. See [JMX Integration][9] for further details on configuration. 
+
+**Note**: To ensure JMX metrics are not captured prematurely, JMXFetch does not initialize until Java's LogManager class is loaded. In the case that a custom log manager is on the classpath and not being used, you can override this setting with `-Ddd.app.customlogmanager=false`.
+
+Don’t see your desired JMX Integration? Datadog is continually adding additional support. Contact [Datadog support][7] if you need help.
 
 ## Performance
 
@@ -251,3 +268,5 @@ Java APM has minimal impact on the overhead of an application:
 [7]: /help
 [8]: https://github.com/DataDog/documentation#outside-contributors
 [9]: /integrations/java/#configuration
+[10]: https://github.com/DataDog/integrations-core/search?q=jmx_metrics&unscoped_q=jmx_metrics
+[11]: /integrations/java/#data-collected
