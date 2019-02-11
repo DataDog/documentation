@@ -147,7 +147,7 @@ In this case, the leader pod is `cluster-agent-rhttz`. If it is deleted or unres
 To ensure a configuration (static or autodiscovered) is picked up by the Cluster Agent, use the `configcheck` command in the leader Cluster Agent:
 
 ```
-# kubectl exec <cluster-agent_pod_name> agent configcheck
+# kubectl exec <CLUSTER_AGENT_POD_NAME> agent configcheck
 ...
 === http_check cluster check ===
 Source: kubernetes-services
@@ -174,7 +174,7 @@ The `clusterchecks` command allows to inspect the state of the dispatching logic
 - which Checks are dispatched on each node
 
 ```
-# kubectl exec <cluster-agent_pod_name> agent clusterchecks
+# kubectl exec <CLUSTER_AGENT_POD_NAME> agent clusterchecks
 
 === 3 node-agents reporting ===
 Name                                            Running checks
@@ -211,7 +211,7 @@ In this case, this configuration is dispatched to the `default-pool-bce5cd34-ttw
 The Agent `configcheck` command should show the instance, with the `cluster-checks` source:
 
 ```
-# kubectl exec <node-agent_pod_name> agent configcheck
+# kubectl exec <NODE_AGENT_POD_NAME> agent configcheck
 ...
 === http_check check ===
 Source: cluster-checks
@@ -237,7 +237,7 @@ The Instance ID matches the one we had earlier.
 The Agent `status` command should show the check instance running and reporting successfully.
 
 ```
-# kubectl exec <node-agent_pod_name> agent status
+# kubectl exec <NODE_AGENT_POD_NAME> agent status
 ...
     http_check (3.1.1)
     ------------------
