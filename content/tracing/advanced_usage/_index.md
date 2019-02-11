@@ -2013,8 +2013,7 @@ var tracer = Datadog.Trace.Tracer.Create(isDebugEnabled: true);
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Debug mode is disabled by default. To enable it, set the environment variable `DD_TRACE_DEBUG=true`. Please see at
-the PHP [configuration docs][6] for details about how and when this environment variable value should be set in order
+Debug mode is disabled by default. To enable it, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][6] for details about how and when this environment variable value should be set in order
 to be properly handled by the tracer.
 
 **Application Logs**:
@@ -2028,8 +2027,8 @@ set a [PSR-3 logger][1] singleton.
 );
 ```
 
-
 [1]: https://www.php-fig.org/psr/psr-3
+
 {{% /tab %}}
 {{% tab "C++" %}}
 
