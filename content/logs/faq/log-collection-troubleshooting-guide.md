@@ -161,7 +161,7 @@ Check that Datadog lambda function is actually triggered by leveraging `aws.lamb
 
 #### Expectedly droping logs
 
-Check if logs appear in the [Datadog Live Tail][10]. If they appear in the Live Tail, check the Indexes configuration page for any exclusion filters that could match your logs.
+Check if logs appear in the [Datadog Live Tail][10]. If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][13] that could match your logs.
 
 ## Further Reading
 
@@ -179,3 +179,5 @@ Check if logs appear in the [Datadog Live Tail][10]. If they appear in the Live 
 [10]: https://app.datadoghq.com/logs/livetail
 [11]: https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/lambda_function.py#L386
 [12]: https://app.datadoghq.com/account/settings#api
+[13]: /logs/logging_without_limits/#exclusion-filters
+
