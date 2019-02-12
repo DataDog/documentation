@@ -3,18 +3,22 @@ title: Log Collection
 kind: Documentation
 ---
 
-Use the [Datadog Agent][1] to collect logs directly from your hosts or your [containerized environments][2] or from [Kubernetes][3]. You can collect AWS service logs with Datadog's [AWS Lambda function](#aws-log-collection).If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][4], [Syslog-ng][5], [NXlog][6], [FluentD][7], and [Logstash][8].
+Use the [Datadog Agent][1] to collect logs directly from your hosts or your [containerized environments][2] or from [Kubernetes][3]. 
 
-### Host Log collection
+You can collect Logs from your Cloud providers with Datadog's [AWS Lambda function](#aws-log-collection), 
+
+If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][4], [Syslog-ng][5], [NXlog][6], [FluentD][7], and [Logstash][8].
+
+## Host Log collection
 
 Follow the [Datadog Agent installation instructions][1] to start forwarding logs alongside your metrics and traces.
 The Agent can [tail log files][9] or [listen for logs sent over UDP / TCP][10], and you can configure it to [filter out logs][11], [scrub sensitive data][12], or  aggregate [multi line logs][13].
 
-## Integration Log collection 
+Integrations and Log Collection are intimately tied together. By collecting Logs the right way, you enable all the the subsequent components such as [processing][14], [parsing][15], and [facets][16] in the Explorer. 
 
-Integrations and Log Collection are intimately tied together. By collecting Logs the right way, you enable all the the subsequent components such as [processing][14], [parsing][15], and [facets][16] in the Explorer. **[Discover the log integrations supported by Datadog][17]**.
+**[Discover the log integrations supported by Datadog][17]**.
 
-### Docker Log collection
+## Docker Log collection
 
 The Datadog Agent can [collect logs directly from container stdout/stderr][18] without using a logging driver. When the Agent's Docker check is enabled, container and orchestrator metadata are automatically added as tags to your logs.
 
@@ -22,15 +26,23 @@ It is possible to collect logs from all your containers or only a subset filtere
 
 In Kubernetes environments you can also leverage [the daemonset installation][19].
 
-## AWS Log collection
+## Cloud provider Log collection
+
+### AWS
 
 The Datadog Agent can be used to collect logs directly from ECS or EC2 instances and applications running on them.
 
 However, AWS services logs are collected thanks to Datadog's [Lambda function][20]. Triggers are then defined ([manually or automatically][21]) to forward logs from any S3 bucket, Cloudwatch Log group, or Cloudwatch events.
 
+### Azure
+
+The Datadog Agent can be used to collect logs directly from your Azure VM instances and applications running on them. 
+
+However, Azure service logs are collected thanks to Datadog's [Azure function][22]. 
+
 ## Application log collection
 
-After you have [installed the Datadog Agent][22], [enabled Log collection][23], begin sending logs to your Datadog Agent by instrumenting your application:
+After you have [installed the Datadog Agent][23], [enabled Log collection][24], begin sending logs to your Datadog Agent by instrumenting your application:
 
 {{< whatsnext desc="Select one of the following supported languages to start collecting logs:">}}
   {{< nextlink href="logs/log_collection/csharp" tag="C++" >}}C# log collection.{{< /nextlink >}}
@@ -44,9 +56,9 @@ After you have [installed the Datadog Agent][22], [enabled Log collection][23], 
 
 ## Custom forwarder Log collection
 
-Any custom process or [logging library][24] able to forward logs through **TCP** can be used in conjuntion with Datadog Logs. The secure TCP endpoint is `intake.logs.datadoghq.com:10516` (or port `10514` for insecure connections). 
+Any custom process or [logging library][25] able to forward logs through **TCP** can be used in conjuntion with Datadog Logs. The secure TCP endpoint is `intake.logs.datadoghq.com:10516` (or port `10514` for insecure connections). 
 
-You must prefix the log entry with your [Datadog API Key][25], e.g.:
+You must prefix the log entry with your [Datadog API Key][26], e.g.:
 
 ```
 <DATADOG_API_KEY> this is my log
@@ -59,7 +71,7 @@ telnet intake.logs.datadoghq.com 10514
 <DATADOG_API_KEY> Log sent directly via TCP
 ```
 
-This produces the following result in your [live tail page][26]: 
+This produces the following result in your [live tail page][27]: 
 
 {{< img src="logs/custom_log_telnet.png" alt="Custom telnet" responsive="true" style="width:70%;">}}
 
@@ -75,7 +87,7 @@ telnet intake.logs.datadoghq.com 10514
 ### Datadog Logs Endpoints
 
 Datadog provides logging endpoints for both SSL-encrypted connections and unencrypted connections.
-You should use the encrypted endpoint when possible. The Datadog Agent uses the encrypted endpoint to send logs to Datadog (more information available in the [Datadog security documentation][27]).
+You should use the encrypted endpoint when possible. The Datadog Agent uses the encrypted endpoint to send logs to Datadog (more information available in the [Datadog security documentation][28]).
 
 Endpoints that can be used to send logs to Datadog:
 
@@ -94,7 +106,6 @@ Endpoints that can be used to send logs to Datadog:
 | Endpoint for unencrypted connections | Port    | Description                                                                                              |
 |--------------------------------------|---------|----------------------------------------------------------------------------------------------------------|
 | `intake.logs.datadoghq.com`          | `10514` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an unecrypted TCP connection. |
-
 
 {{% /tab %}}
 {{% tab "EU Region" %}}
@@ -115,7 +126,7 @@ Endpoints that can be used to send logs to Datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Reserved attributes
+## Reserved attributes
 
 Here are some key attributes you should pay attention to when setting up your project:
 
@@ -123,11 +134,11 @@ Here are some key attributes you should pay attention to when setting up your pr
 |-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `host`    | The name of the originating host as defined in metrics. We automatically retrieve corresponding host tags from the matching host in Datadog and apply them to your logs. The Agent sets this value automatically.                      |
 | `source`  | This corresponds to the integration name: the technology from which the log originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, etc. |
-| `status` | This corresponds to the level/severity of a log. It is used to define [patterns][28] and has a dedicated layout in the Datadog Log UI.|
+| `status` | This corresponds to the level/severity of a log. It is used to define [patterns][29] and has a dedicated layout in the Datadog Log UI.|
 | `service` | The name of the application or service generating the log events. It is used to switch from Logs to APM, so make sure you define the same value when you use both products.                                                            |
 | `message` | By default, Datadog ingests the value of the `message` attribute as the body of the log entry. That value is then highlighted and displayed in the Logstream, where it is indexed for full text search.                                |
 
-Your logs are collected and centralized into the [Log Explorer][29] view. You can also search, enrich, and alert on your logs.
+Your logs are collected and centralized into the [Log Explorer][30] view. You can also search, enrich, and alert on your logs.
 
 {{< img src="logs/log_explorer_view.png" alt="Log Explorer view" responsive="true" >}}
 
@@ -149,11 +160,9 @@ To enable these functionalities use the following attribute names:
 
 **Note**: By default, integration Pipelines attempt to remap default logging library parameters to those specific attributes and parse stack traces or traceback to automatically extract the `error.message` and `error.kind`.
 
-## Send your application logs in JSON
+### Send your application logs in JSON
 
 For integration frameworks, Datadog provides guidelines on how to log JSON into a file. JSON-formatted logging helps handle multi-line application logs, and is automatically parsed by Datadog.
-
-##### The Advantage of Collecting JSON-formatted logs
 
 Datadog automatically parses JSON-formatted logs. For this reason, if you have control over the log format you send to Datadog, it is recommended to format these logs as JSON to avoid the need for custom parsing rules.
 
@@ -178,11 +187,12 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [19]: /agent/kubernetes/#log-collection
 [20]: /integrations/amazon_web_services/#log-collection
 [21]: /integrations/amazon_web_services/#enable-logging-for-your-aws-service
-[22]: /agent
-[23]: /agent/logs
-[24]: /agent/logs/?tab=tailexistingfiles#how-to-get-the-most-of-your-application-logs
-[25]: https://app.datadoghq.com/account/settings#api
-[26]: https://app.datadoghq.com/logs/livetail
-[27]: /security/logs/#information-security
-[28]: /logs/explorer/patterns
-[29]: /logs/explorer
+[22]: /integrations/azure/?tab=azurecliv20#log-collection
+[23]: /agent
+[24]: /agent/logs
+[25]: /agent/logs/?tab=tailexistingfiles#how-to-get-the-most-of-your-application-logs
+[26]: https://app.datadoghq.com/account/settings#api
+[27]: https://app.datadoghq.com/logs/livetail
+[28]: /security/logs/#information-security
+[29]: /logs/explorer/patterns
+[30]: /logs/explorer
