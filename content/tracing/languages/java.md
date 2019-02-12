@@ -236,11 +236,11 @@ JVM Runtime metrics can be correlated in the Trace View, directly viewing any ou
 
 By enabling JMXFetch in the Java Tracer the following metrics will be collected by default.
 
-Please insert table of jmx metrics from here https://docs.datadoghq.com/integrations/java/#metrics
+{{< get-metrics-from-git "java" >}}
 
 Along with viewing these metrics in your APM Service Page, Datadog provides a JVM Runtime Dashboard that is pre-built with the `service` and `runtime-id` tags that will be applied to these metrics. 
 
-Additional JMX metrics can be added using configuration files that are passed to `jmxfetch.metrics-configs`. You can also enable existing Datadog JMX Integrations individually with the `dd.integration.<name>` parameter. This will auto-embed configuration from our [existing JMX configuration files][10]. See [JMX Integration][9] for further details on configuration. 
+Additional JMX metrics can be added using configuration files that are passed to `jmxfetch.metrics-configs`. You can also enable existing Datadog JMX Integrations individually with the `dd.integration.<name>` parameter. This will auto-embed configuration from our [existing JMX configuration files][9]. See [JMX Integration][10] for further details on configuration. 
 
 **Note**: To ensure JMX metrics are not captured prematurely, JMXFetch does not initialize until Java's LogManager class is loaded. In the case that a custom log manager is on the classpath and not being used, you can override this setting with `-Ddd.app.customlogmanager=false`.
 
@@ -267,6 +267,5 @@ Java APM has minimal impact on the overhead of an application:
 [6]: http://bytebuddy.net
 [7]: /help
 [8]: https://github.com/DataDog/documentation#outside-contributors
-[9]: /integrations/java/#configuration
-[10]: https://github.com/DataDog/integrations-core/search?q=jmx_metrics&unscoped_q=jmx_metrics
-[11]: /integrations/java/#data-collected
+[9]: https://github.com/DataDog/integrations-core/search?q=jmx_metrics&unscoped_q=jmx_metrics
+[10]: /integrations/java/#configuration
