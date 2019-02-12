@@ -339,7 +339,7 @@ Your test notifications are sent to any notification handle available in the mes
 
 You do not need to save the monitor to run the notification test. By clicking Run Test, the notification is sent, and you can continue to edit the monitor and notification box if you wish before saving. 
 
-Testing notifications are currently supported for the following monitor types: Host, Metric, Anomaly, Outlier, Forecast, Integration (check only), Process (check only), Network (check only), Custom check, and Event
+Testing notifications are currently supported for the following monitor types: Host, Metric, Anomaly, Outlier, Forecast, Integration (check only), Process (check only), Network (check only), Custom check, and Event.
 
 ## Advanced notification configuration
 ### Include links to appropriate dashboards
