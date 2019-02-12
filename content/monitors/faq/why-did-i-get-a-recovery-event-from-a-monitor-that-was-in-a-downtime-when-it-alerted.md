@@ -13,10 +13,10 @@ further_reading:
   text: "Learn more about downtimes"
 ---
 
-When a group is [downtimed][1] and transitions from **`OK`** to one of **`ALERT`**, **`WARNING`**, or **`NO DATA`** state, this event is suppressed from notifying you. 
+When a group is [downtimed][1] and transitions from **`OK`** to one of a **`ALERT`**, **`WARNING`**, or **`NO DATA`** state, this event is suppressed from notifying you. 
 When this downtime ends or is cancelled, this allows both re-notify events (if configured) and recovery events to then be sent. 
 
-An option is to resolve the monitor prior to cancelling the downtime to suppress recovery notifications. Though any groups that were in a non-**`OK`** state could switch back to their previous state resulting in another notification.
+An option is to resolve the monitor prior to cancelling the downtime to suppress recovery notifications. However, any groups that were in a non-**`OK`** state could switch back to their previous state, resulting in another notification.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
