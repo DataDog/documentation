@@ -1,5 +1,5 @@
 ---
-title: API and APP Key Management
+title: API and Application Key Management
 kind: faq
 aliases:
     - /account_management/faq/how-do-i-reset-my-application-keys/
@@ -10,13 +10,13 @@ aliases:
 
 API keys are unique to your organization. An API key is required by the Datadog Agent to submit metrics and events to Datadog.
 
-## APP keys
+## Application keys
 
 Application keys, in conjunction with your org's API key, give you full access to Datadog's programmatic API. Application keys are associated with the user account that created them and must be named. The application key is used to log all requests made to the API.
 
 ## Add
 
-To add a Datadog API or APP key, navigate to [Integration -> APIs][1], enter a name for your key, and click **Create API key** or **Create Application Key**.
+To add a Datadog API or application key, navigate to [Integration -> APIs][1], enter a name for your key, and click **Create API key** or **Create Application Key**.
 
 **Note**:
 
@@ -26,7 +26,7 @@ To add a Datadog API or APP key, navigate to [Integration -> APIs][1], enter a n
 
 ## Remove
 
-To remove a Datadog API or APP key, navigate to [Integration -> APIs][1] and select the **Revoke** button next to the key you want to remove:
+To remove a Datadog API or application key, navigate to [Integration -> APIs][1] and select the **Revoke** button next to the key you want to remove:
 
 {{< img src="account_management/faq/Application_Keys.jpg" alt="Application Keys" responsive="true" >}}
 

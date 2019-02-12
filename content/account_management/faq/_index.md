@@ -21,7 +21,7 @@ private: true
 ## Communication and Security
 
 * [How do I configure Azure AD as a SAML IdP?][9]
-* [API and APP Key Management][10]
+* [API and Application Key Management][10]
 * [Why are users being added as "none none"?][11]
 * [How do I configure NoPassword as a SAML IdP?][12]
 * [How do I configure Okta as a SAML IdP?][13]
