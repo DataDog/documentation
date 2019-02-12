@@ -315,7 +315,7 @@ After you define your monitor, you can test what your monitor's notification wou
 
 {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" responsive="true" style="width:50%;" >}}
 
-You can only test states that are available in the monitor’s configuration and test for thresholds specified in the alerting conditions. Recovery thresholds are an exception, as Datadog sends a recovery notification once the monitor is no longer in alert or has no warn conditions.
+You can only test states that are available in the monitor’s configuration and test for thresholds specified in the alerting conditions. [Recovery thresholds][4] are an exception, as Datadog sends a recovery notification once the monitor is no longer in alert or has no warn conditions.
 
 In the following, you are only able to test for ALERT because only an alert threshold has been specified:
 
@@ -429,3 +429,4 @@ https://app.datadoghq.com/dash/integration/<integration_name>?tpl_var_scope=host
 [1]: /monitors
 [2]: http://daringfireball.net/projects/markdown/syntax
 [3]: /monitors/monitor_types/integration
+[4]: /monitors/faq/what-are-recovery-thresholds
