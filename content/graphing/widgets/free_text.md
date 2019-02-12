@@ -26,4 +26,5 @@ This is commonly used to state the overall purpose of the dashboard.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /graphing/dashboards/screenboard

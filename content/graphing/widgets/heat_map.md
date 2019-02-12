@@ -63,5 +63,6 @@ The following configuration options are available:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /graphing/event_stream
 [2]: /graphing/dashboards/template_variables

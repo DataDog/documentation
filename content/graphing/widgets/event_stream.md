@@ -27,7 +27,7 @@ Note: **This widgets displays only the 100 most recent events**.
 ### Options
 #### Title
 
-Display a custom title for you widget by activating the `Show a Title` check box:
+Display a custom title for your widget by activating the `Show a Title` check box:
 
 {{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
 
@@ -36,4 +36,5 @@ Optionally define its size and alignment.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /graphing/event_stream

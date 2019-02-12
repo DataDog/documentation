@@ -16,9 +16,8 @@ The groups widget allows you to keep similar graphs together on your [Timeboard]
 
 Choose a name for your Group by using the cog icon in the upper right corner of your group.
 
-## API
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /graphing/dashboards/timeboard

@@ -32,5 +32,6 @@ The service summary displays the graphs of a chosen [service][1] in your Screenb
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /tracing/visualization/service
 [2]: /agent/apm/#environment

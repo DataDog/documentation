@@ -34,7 +34,7 @@ On Screenboard only, choose whether your widget has a custom timeframe or the gl
 
 #### Title
 
-Display a custom title for you widget by activating the `Show a Title` check box:
+Display a custom title for your widget by activating the `Show a Title` check box:
 
 {{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
 
@@ -52,6 +52,7 @@ If you are on a Timeseries and you are currently displaying the past hour, this 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /graphing
 [2]: /tracing/visualization/search/#search-bar
 [3]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
