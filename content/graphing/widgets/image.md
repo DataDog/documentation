@@ -1,18 +1,27 @@
 ---
 title: Image Widget
 kind: documentation
+description: Inlude an image or a gif in your Datadog dashboards.
 further_reading:
-- link: "graphing/dashboards/timeboard/"
+- link: "graphing/dashboards/screenboard/"
   tag: "Documentation"
-  text: "Timeboards"
+  text: "Screenboard"
 ---
 
-*Supported on Screenboards only*
+Image allows you to embed an image on your dashboard. Images can be PNG, JPG, or even **animated GIF files**:
 
-## Overview
+{{< img src="graphing/widgets/image/image.gif" alt="Image" responsive="true" style="width:80%;">}}
 
-Image allows you to embed an image on your dashboard. Images can be PNG, JPG, or even animated GIF files.
+## Setup
 
-## Options
+{{< img src="graphing/widgets/image/image_setup.png" alt="Image setup" responsive="true" style="width:80%;">}}
 
-## API
+1. Enter your image URL
+2. Choose an appearance:
+    * Zoom image to cover whole title
+    * Fit image on tile
+    * Center image on tile
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

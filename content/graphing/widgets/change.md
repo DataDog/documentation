@@ -1,20 +1,64 @@
 ---
 title: Change Widget
 kind: documentation
+description: Graph the change in a value over a chosen time period .
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"
   text: "Timeboards"
+- link: "graphing/dashboards/screenboard/"
+  tag: "Documentation"
+  text: "Screenboard"
 ---
+The Change graph shows you the change in a value over the time period chosen:
 
-*Supported on Screenboards and Timeboards*
+{{< img src="graphing/widgets/change/change.png" alt="Change graph" responsive="true">}}
 
-{{< img src="graphing/widgets/references-graphing-change-example.png" alt="Change graph" responsive="true" style="width:80%;">}}
+## Setup
 
-## Overview 
+{{< img src="graphing/widgets/change/change_setup.png" alt="Change graph Setup" responsive="true" style="width:80%;">}}
 
-The Change graph shows you the change in a value over the time period chosen.
+### Configuration
 
-## Options
+1. Choose a metric to graph. 
+2. Choose an aggregation function.
+3. Optional - choose a specific context for your widget.
+4. Break down your aggregation on a Tag Key i.e `host`, `service`..
+5. Choose the Compared period between:
+    * an hour before
+    * a day before
+    * a week before
+    * a month before
+6. Select to show the `relative` or `absolute` change between the two periods.
+7. Select your ranking by sorting your result by:
+    * `change`
+    * `name`
+    * `present value`
+    * `past value`
+8. Indicate if `increases` or `decreases` changes are better. The better one are highlighted in green, the other one in red.
+9. Optional - Display current value.
 
-## API
+### Options
+#### Display preference 
+
+{{< img src="graphing/widgets/options/display_preferences.png" alt="Display preferences" responsive="true" style="width:80%;">}}
+
+##### Global time
+
+On Screenboard only, choose whether your widget has a custom timeframe or the global timeframe of the Screenboard.
+
+###### Legend
+
+Enable legend display on your widget by selecting the *Show legend on graph* toggle. Optionally, select the amount of entries to display.
+
+#### Title
+
+Display a custom title for you widget by activating the `Show a Title` check box:
+
+{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+
+Optionally define its size and alignment.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -1,23 +1,39 @@
 ---
 title: Event Stream Widget
 kind: documentation
+description: "Display filtered events from the Even Stream."
 further_reading:
-- link: "graphing/dashboards/timeboard/"
+- link: "graphing/dashboards/Screenboard/"
   tag: "Documentation"
-  text: "Timeboards"
+  text: "Screenboard"
 ---
 
-*Supported on Screenboards only*
+The event stream is a widget version of the stream of events on the [Event Stream view][1]. 
 
-{{< img src="graphing/widgets/references-graphing-eventstream-example.png" alt="event stream" responsive="true" style="width:70%;">}}
+Note: **This widgets displays only the 100 most recent events**.
 
-## Overview 
+{{< img src="graphing/widgets/event_stream/event_stream.png" alt="event stream" responsive="true">}}
 
-The event stream is a widget version of the stream of events on the [Event Stream view][11].
+## Setup
 
+{{< img src="graphing/widgets/event_stream/event_stream_setup.png" alt="event stream setup" responsive="true" style="width:80%;">}}
 
-**This widgets displays only the 100 most recent events**
+### Configuration
 
-## Options
+1. Enter a [search query][1] to filter the event stream. 
+2. On Screenboard only, choose whether your widget has a custom timeframe or the global timeframe of the Screenboard.
+3. Use the size parameter to choose to display either only the events title or the full event body.
 
-## API
+### Options
+#### Title
+
+Display a custom title for you widget by activating the `Show a Title` check box:
+
+{{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
+
+Optionally define its size and alignment.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+[1]: /graphing/event_stream

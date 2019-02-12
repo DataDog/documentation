@@ -5,19 +5,30 @@ further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"
   text: "Timeboards"
+- link: "graphing/dashboards/screenboard/"
+  tag: "Documentation"
+  text: "Screenboard"
 ---
 
-{{< img src="graphing/widgets/references-graphing-timeseries-example.png" alt="Timeseries" responsive="true" style="width:80%;">}}
+The Timeseries visualization allows you to show one or more metrics, Log events, or APM events evolution over time. The time window depends on what is selected on the [Timeboard][1] or in the graph on a [Screenboard][2]:
 
-## Overview
+{{< img src="graphing/widgets/timeseries/timeseries.png" alt="Timeseries" responsive="true">}}
 
-The Timeseries visualization allows you to show one or more metrics, Log events, or APM events evolution over time. The time window depends on what is selected on the [Timeboard][1] or in the graph on a [Screenboard][2].
+## Setup
 
-**Note**: Define the Log Analytics query exactly as in the [Log Explorer][3].
+{{< img src="graphing/widgets/timeseries/timeseries_setup.png" alt="Timeseries setup" responsive="true" style="width:80%;" >}}
 
-## Options
+### Configuration
 
-### Line graphs
+1. Choose the data to graph:
+    * Metric: See [the main graphing documentation][3] to configure a metric query.
+    * APM Events: See [the trace search documentation][4] to configure an APM event query.
+    * Log Events: See [the log search documentation][5] to configure an APM event query.
+
+2. Customize your Graph with the available [options](#options).
+
+### Options
+#### Line graphs
 
 Line graphs include two additional parameters:
 
@@ -26,7 +37,7 @@ Line graphs include two additional parameters:
 | Style     | Solid, Dashed, Dotted |
 | Stroke    | Normal, Thin, Thick   |
 
-### Appearance
+#### Appearance
 
 Graphs can be displayed as Areas, Bars, or Lines. For all graph types, Datadog offers various color options to differentiate multiple metrics displayed on the same graph:
 
@@ -41,35 +52,31 @@ Graphs can be displayed as Areas, Bars, or Lines. For all graph types, Datadog o
 
 For line graphs, different metrics can be assigned specific palettes by separating the queries in JSON.
 
-### Metric aliasing
+#### Metric aliasing
 
 Each query or formula can be aliased. The alias overrides the display on the graph and legend, which is useful for long metric names. At the end of the query/formula click on **as...**, then enter your metric alias:
 
 {{< img src="graphing/index/metric_alias.png" alt="metric alias" responsive="true" style="width:75%;" >}}
 
-### Overlay events
+##### Event Overlay
 
-Add events from related systems to add more context to your graph. For example, you can add GitHub commits, Jenkins deploys, or Docker creation events. Expand the **Event Overlays** section and enter a query to display those events. Use the same query format as for the [Event Stream][4], for example:
+Add events from related systems to add more context to your graph. For example, you can add GitHub commits, Jenkins deploys, or Docker creation events. Expand the **Event Overlays** section and enter a query to display those events. Use the same query format as for the [Event Stream][6], for example:
 
 | Query                       | Description                                                |
 |-----------------------------|------------------------------------------------------------|
 | `sources:jenkins`           | Shows all events from the Jenkins source.                  |
 | `tag:role:web`              | Shows all events with the tag `role:web`.                  |
-| `tags:$<TEMPLATE_VARIABLE>` | Shows all events from the selected [Template Variable][5]. |
+| `tags:$<TEMPLATE_VARIABLE>` | Shows all events from the selected [Template Variable][7]. |
 
-{{< img src="graphing/index/overlay_events.png" alt="Overlay Events" responsive="true" style="width:75%;" >}}
+##### Y-axis controls
 
-### Set Y-axis scale
-
-The Datadog y-axis controls are available via the UI and the JSON editor. They allow you to:
+Y-axis controls are available via the UI and the JSON editor. They allow you to:
 
 * Clip the y-axis to specific ranges.
 * Remove outliers either by specifying a percentage or an absolute value to remove outliers.
 * Change the y-axis scale from linear to log, pow, or sqrt.
 
-Change the Y-axis scale by expanding the **Y-Axis Controls**:
-
-{{< img src="graphing/index/y_axis_control.png" alt="y axis control" responsive="true" style="width:75%;" >}}
+Change the Y-axis scale by expanding the *Y-Axis Controls* button.
 
 The following configuration options are available:
 
@@ -81,11 +88,15 @@ The following configuration options are available:
 
 **Note**: Because the mathematical log function doesn't accept negative values, the Datadog log scale only works if values are of the same sign (everything > 0 or everything < 0). Otherwise an empty graph is returned.
 
-## API
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /graphing/dashboards/timeboard
 [2]: /graphing/dashboards/screenboard
-[3]: /logs/explorer/search
-[4]: /graphing/event_stream
-[5]: /graphing/dashboards/template_variables
+[3]: /graphing
+[4]: /tracing/visualization/search/#search-bar
+[5]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
+[6]: /graphing/event_stream
+[7]: /graphing/dashboards/template_variables

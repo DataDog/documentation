@@ -1,29 +1,24 @@
 ---
 title: Group Widget
 kind: documentation
+description: Group your widgets together in a Timeboard.
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"
   text: "Timeboards"
 ---
 
-{{< img src="graphing/widgets/group01.gif" alt="Group Widget" responsive="true">}}
+The groups widget allows you to keep similar graphs together on your [Timeboard][1]. Each group has a custom header, can hold one to many graphs, and is collapsible:
 
-## Overview
+{{< img src="graphing/widgets/group/group.gif" alt="Group Widget" responsive="true">}}
 
-The groups widget allows you to keep similar graphs together on your timeboard. Each group has a custom header, can hold one to many graphs, and is collapsible.
+## Setup
 
-
-## Options
+Choose a name for your Group by using the cog icon in the upper right corner of your group.
 
 ## API
-
-**Group widget API example**:
-
-```json
-{}
-```
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+[1]: /graphing/dashboards/timeboard

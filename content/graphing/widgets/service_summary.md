@@ -2,19 +2,35 @@
 title: Service Summary Widget
 kind: documentation
 further_reading:
-- link: "graphing/dashboards/timeboard/"
+- link: "graphing/dashboards/screenboard/"
   tag: "Documentation"
-  text: "Timeboards"
+  text: "Screenboard"
 ---
 
-*Supported on Screenboards only*
+The service summary displays the graphs of a chosen [service][1] in your Screenboard.
 
-{{< img src="graphing/widgets/references-graphing-servicesummary-example.png" alt="Timeseries" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/service_summary/service_summary.png" alt="service summary" responsive="true">}}
 
-## Overview
+## Setup
 
-The service summary displays the top portion of any APM trace in your Screenboard.
+{{< img src="graphing/widgets/service_summary/service_summary_setup.png" alt="service summary setup" responsive="true" style="width:80%;">}}
 
-## Options
+### Configuration
 
-## API
+1. Select an [environment][2] and a [service][1].
+2. Select a widget size.
+3. Select the information to display:
+    * Hits
+    * Errors
+    * Latency
+    * Breakdown
+    * Distribution
+    * Resource
+4. Choose your display preference, by selecting a timeframe and the amount of column to display your graphs.
+5. Enter a title for your graph.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+[1]: /tracing/visualization/service
+[2]: /agent/apm/#environment

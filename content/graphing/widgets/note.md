@@ -2,22 +2,25 @@
 title: Note Widget
 kind: documentation
 further_reading:
-- link: "graphing/dashboards/timeboard/"
+- link: "graphing/dashboards/screenboard/"
   tag: "Documentation"
-  text: "Timeboards"
+  text: "Screenboard"
 ---
 
-*Supported on Screenboards only*
 
-## Overview
+Note widget is similar to [Free Text widget][1], but allows for more formatting options:
 
-Note widget is similar to Free Text widget, but allows for more formatting options:
+{{< img src="graphing/widgets/note/note.png" alt="note widget" responsive="true" >}}
 
-* An arrow can be added to the text box that appears on the dashboard. This is commonly used to document the structure of the dashboard.
+## Setup
 
-* Use `href` to create internal links in Datadog.
-    {{< img src="graphing/widgets/using_link_note_widget.gif" alt="Using links in note widget" responsive="true" >}}
+{{< img src="graphing/widgets/note/note_setup.png" alt="Note widget setup" responsive="true"  style="width:80%;">}}
 
-## Options
+1. Enter the text you want to display. Note that markdown is supported.
+2. Choose the text size and the note background color.
+3. Select the pointer position.
 
-## API
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+[1]: /graphing/widget/free_text
