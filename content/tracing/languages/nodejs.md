@@ -46,9 +46,23 @@ npm install --save dd-trace
 
 Finally, import and initialize the tracer:
 
+##### JavaScript
+
 ```js
 // This line must come before importing any instrumented module.
 const tracer = require('dd-trace').init()
+```
+
+##### TypeScript
+
+```js
+// server.js
+import "./tracer"; // must come before importing any instrumented module.
+
+// tracer.js
+import * as tracer from "dd-trace";
+tracer.init(); // initialized in a different file to avoid hoisting.
+export default tracer;
 ```
 
 See the [tracer settings][7] for the list of initialization options.
@@ -67,11 +81,11 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 | Module        | Versions    | Support Type    | Notes                        |
 | :----------   | :---------- | :-------------- | :--------------------------- |
-| [express][10]  | 4           | Fully Supported | Supports Sails, Loopback, and [more][11] |
-| [graphql][12] | 0.10 - 14   | Fully Supported | Supports Apollo Server and express-graphql |
-| [hapi][13]     | 2 - 17      | Fully Supported |                              |
-| [koa][14]     | 2           | Fully Supported |                              |
-| [restify][15] | 3 - 7       | Fully Supported |                              |
+| [express][10] | `>=4`       | Fully Supported | Supports Sails, Loopback, and [more][11] |
+| [graphql][12] | `>=0.10`    | Fully Supported | Supports Apollo Server and express-graphql |
+| [hapi][13]    | `>=2`       | Fully Supported |                              |
+| [koa][14]     | `>=2`       | Fully Supported |                              |
+| [restify][15] | `>=3`       | Fully Supported |                              |
 
 #### Native Module Compatibility
 
@@ -85,21 +99,21 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module                 | Versions    | Support Type    |  Notes              |
 | :----------            | :---------- | :-------------- | :------------------ |
 | [cassandra-driver][18] |             | Coming Soon     |                     |
-| [elasticsearch][19]    | 10 - 15     | Fully Supported |                     |
-| [ioredis][20]          | 2 - 4       | Fully Supported |                     |
-| [memcached][21]        | ^2.2        | Fully Supported |                     |
-| [mongodb-core][22]     | 2 - 3       | Fully Supported | Supports Mongoose   |
-| [mysql][23]            | 2           | Fully Supported |                     |
-| [mysql2][24]           | 1           | Fully Supported |                     |
-| [pg][25]               | 4 - 7       | Fully Supported | `pg-native` support coming soon |
-| [redis][26]            | 0.12 - 2.6  | Fully Supported |                     |
+| [elasticsearch][19]    | `>=10`      | Fully Supported |                     |
+| [ioredis][20]          | `>=2`       | Fully Supported |                     |
+| [memcached][21]        | `>=2.2`     | Fully Supported |                     |
+| [mongodb-core][22]     | `>=2`       | Fully Supported | Supports Mongoose   |
+| [mysql][23]            | `>=2`       | Fully Supported |                     |
+| [mysql2][24]           | `>=1`       | Fully Supported |                     |
+| [pg][25]               | `>=4`       | Fully Supported | `pg-native` support coming soon |
+| [redis][26]            | `>=0.12`    | Fully Supported |                     |
 
 #### Worker Compatibility
 
 | Module           | Versions    | Support Type    | Notes                     |
 | :----------      | :---------- | :-------------- | :------------------------ |
-| [amqp10][27]     | 3           | Fully Supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
-| [amqplib][28]    | 0.5         | Fully Supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
+| [amqp10][27]     | `>=3`       | Fully Supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
+| [amqplib][28]    | `>=0.5`     | Fully Supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
 | [kafka-node][29] |             | Coming Soon     |                           |
 | [rhea][30]       |             | Coming Soon     |                           |
 
@@ -107,9 +121,17 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 | Module           | Versions    | Support Type    |
 | :----------      | :---------- | :-------------- |
-| [bluebird][31]   | 2 - 3       | Fully Supported |
-| [q][32]          | 1           | Fully Supported |
-| [when][33]       | 3           | Fully Supported |
+| [bluebird][31]   | `>=2`       | Fully Supported |
+| [q][32]          | `>=1`       | Fully Supported |
+| [when][33]       | `>=3`       | Fully Supported |
+
+#### Logger Compatibility
+
+| Module                 | Versions    | Support Type    |
+| :----------            | :---------- | :-------------- |
+| [bunyan][34]           | `>=1`       | Fully Supported |
+| [pino][35]             | `>=2`       | Fully Supported |
+| [winston][36]          | `>=1`       | Fully Supported |
 
 ## Further Reading
 
@@ -148,3 +170,6 @@ For details about how to how to toggle and configure plugins, check out the [API
 [31]: https://github.com/petkaantonov/bluebird
 [32]: https://github.com/kriskowal/q
 [33]: https://github.com/cujojs/when
+[34]: https://github.com/trentm/node-bunyan
+[35]: http://getpino.io
+[36]: https://github.com/winstonjs/winston

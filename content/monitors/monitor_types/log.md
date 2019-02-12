@@ -47,7 +47,7 @@ Then configure the Alert and/or Warning threshold depending on the chosen condit
 ## Notifications and log samples
 
 It is possible to add up to 10 samples of logs that triggered the monitor in the notification message.
-This is available for Slack and email notifications.
+This is available for Slack, Jira, and email notifications.
 
 * Samples are not displayed for recovery notifications.
 

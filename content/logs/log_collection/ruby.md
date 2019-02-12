@@ -69,7 +69,7 @@ gem 'logging-rails', :require => 'logging/rails'
 gem 'lograge'
 ```
 
-##Configure Lograge
+## Configure Lograge
 In your configuration file, set the following:
 
 ```ruby
@@ -275,4 +275,4 @@ end
 
 [1]: https://github.com/roidrage/lograge#installation
 [2]: https://github.com/TwP/logging/blob/master/lib/logging/layouts/parseable.rb#L100
-[3]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=ruby#logging
+[3]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=ruby#correlate-traces-and-logs

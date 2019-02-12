@@ -19,13 +19,11 @@ further_reading:
   text: "Log Collection Troubleshooting Guide"
 ---
 
-## Overview 
+## Overview
 
-To log from your NodeJS application, we recommend using [Winston][1] - as you'll get all the features you need to build up your logging strategy. 
+Using [Winston][1] to log from your NodeJS application gets you all the features you need to build up your logging strategy. 
 
-We also strongly encourage you to setup your logging libraries to produce your logs in JSON format to avoid sustaning [custom parsing rules][2].
-
-Winston is available through [NPM][3]. So, in order to get started, you want to add the dependency to your code.
+Winston is available through [NPM][2], to get started, you want to add the dependency to your code:
 
 ```
 npm install --save winston
@@ -46,7 +44,13 @@ npm install --save winston
 }
 ```
 
-## Setup - Log to file
+## Setup
+
+**Inject trace IDs in your logs**
+
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow APM NodeJS logging instructions][3] to automatically add trace and span IDs in your logs.
+
+### Log to file
 
 In your bootstrap file or somewhere in your code, declare the logger as follow:
 
@@ -56,8 +60,8 @@ var winston = require('winston');
 var logger = new (winston.Logger)({
     transports: [
         new (winston.transports.File)({
-            name: 'your_logger_name',
-            filename: 'your-appname-info.log',
+            name: '<LOGGER_NAME>',
+            filename: '<FILE_NAME>.log',
       json: true,
             level: 'info'
         })
@@ -68,7 +72,7 @@ logger.log('info', 'Hello simple log!');
 logger.info('Hello log with metas',{color: 'blue' });
 ```
 
-Check the content of the `your-appname-info.log` file to see that Winston already took care of logging everything in JSON:
+Check the content of the `<FILE_NAME>.log` file to see that Winston already took care of logging everything in JSON:
 
 ```json
 {"level":"info","message":"Hello simple log!","timestamp":"2015-04-23T16:52:05.337Z"}
@@ -83,7 +87,7 @@ Create a `nodejs.d/conf.yaml` file in your `conf.d/` folder with the following c
 init_config:
 
 instances:
-    
+
 ##Log section
 logs:
 
@@ -95,7 +99,7 @@ logs:
     ##   tags: (optional) add tags to each logs collected
 
   - type: file
-    path: /path/to/your/go/nodejs.log
+    path: <FILE_NAME_PATH>.log
     service: nodejs
     source: nodejs
     sourcecategory: sourcecode
@@ -113,20 +117,12 @@ logstash.on('error', function(err) {
 });
 ```
 
-Make sure that the parameter `max_connect_retries` is not set to 1 (the default is 4).
-
-## Getting Further
-Here are some little advices:
-
-- Always give a name to the logger corresponding to the functionality or service you try to deliver.
-- Log a lot in the DEBUG level and log accurately in the INFO, WARNING and FATAL levels; since these are the log levels you'll get in your production environments.
-- Start small and try to log the important stuff first, instead of being comprehensive. Then add what is missing after having a discussion with your team.
-- Use metas! Add context to any log so you can quickly filter over users, customers or any business centric attribute.
+Make sure that the parameter `max_connect_retries` is not set to `1` (the default is `4`).
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/winstonjs/winston
-[2]: /logs/processing/parsing
-[3]: https://www.npmjs.com
+[2]: https://www.npmjs.com
+[3]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=nodejs#correlate-traces-and-logs

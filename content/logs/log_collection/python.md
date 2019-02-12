@@ -169,5 +169,5 @@ Then [Restart the Agent][5] to apply the configuration change.
 [1]: /logs/log_collection/python/#configure-the-Datadog-agent
 [2]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
 [3]: https://github.com/madzak/python-json-logger
-[4]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=python#logging
+[4]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=python#correlate-traces-and-logs
 [5]: /agent/faq/agent-commands
