@@ -331,7 +331,7 @@ Message variables auto-populate with an available randomly selected group based 
 
 ### Managing test notifications
 
-Test notifications produce events that can be searched for within the event stream. These notification walso indicate who initiated the test in the message body, and [TEST] is added into the test notification title. 
+Test notifications produce events that can be searched for within the event stream. These notifications also indicate who initiated the test in the message body, and [TEST] is added into the test notification title. 
 
 Your test notifications are sent to any notification handle available in the message box. You can also test webhooks.  
 
