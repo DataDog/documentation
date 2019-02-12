@@ -129,7 +129,7 @@ Using the Datadog Agent or the RFC5424 format automatically sets the service val
 
 ### *trace_id* attribute
 
-By default, [Datadog tracers can automatically inject trace and span IDs in the logs][17]. However, if a JSON formatted log  includes the following attributes, Datadog interprets its value as the log's `trace_id`:
+By default, [Datadog tracers can automatically inject trace and span IDs in the logs][17]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `trace_id`:
 
 * `dd.trace_id`
 * `contextMap.dd.trace_id`
