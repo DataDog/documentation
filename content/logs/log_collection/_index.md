@@ -3,28 +3,29 @@ title: Log Collection
 kind: Documentation
 ---
 
+## Overview
+
 Use the [Datadog Agent][1] to collect logs directly from your hosts or your [containerized environments][2] or from [Kubernetes][3]. 
 
-You can collect Logs from your Cloud providers with Datadog's [AWS Lambda function](#aws-log-collection), 
+You can collect Logs from your Cloud providers with Datadog's [AWS Lambda function][4] or [Azure Function][5], 
 
-If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][4], [Syslog-ng][5], [NXlog][6], [FluentD][7], and [Logstash][8].
+If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][6], [Syslog-ng][7], [NXlog][8], [FluentD][9], and [Logstash][10].
 
 ## Host Log collection
 
-Follow the [Datadog Agent installation instructions][1] to start forwarding logs alongside your metrics and traces.
-The Agent can [tail log files][9] or [listen for logs sent over UDP / TCP][10], and you can configure it to [filter out logs][11], [scrub sensitive data][12], or  aggregate [multi line logs][13].
+Follow the [Datadog Agent installation instructions][1] to start forwarding logs alongside your metrics and traces. The Agent can [tail log files][11] or [listen for logs sent over UDP / TCP][12], and you can configure it to [filter out logs][13], [scrub sensitive data][14], or  aggregate [multi line logs][15].
 
-Integrations and Log Collection are intimately tied together. By collecting Logs the right way, you enable all the the subsequent components such as [processing][14], [parsing][15], and [facets][16] in the Explorer. 
+Integrations and Log Collection are intimately tied together. By collecting Logs the right way, you enable all the the subsequent components such as [processing][16], [parsing][17], and [facets][18] in the Explorer. 
 
-**[Discover the log integrations supported by Datadog][17]**.
+**[Discover the log integrations supported by Datadog][19]**.
 
 ## Docker Log collection
 
-The Datadog Agent can [collect logs directly from container stdout/stderr][18] without using a logging driver. When the Agent's Docker check is enabled, container and orchestrator metadata are automatically added as tags to your logs.
+The Datadog Agent can [collect logs directly from container stdout/stderr][20] without using a logging driver. When the Agent's Docker check is enabled, container and orchestrator metadata are automatically added as tags to your logs.
 
 It is possible to collect logs from all your containers or only a subset filtered by container image, label, or name. Autodiscovery can also be used to configure log collection directly in the container labels.
 
-In Kubernetes environments you can also leverage [the daemonset installation][19].
+In Kubernetes environments you can also leverage [the daemonset installation][21].
 
 ## Cloud provider Log collection
 
@@ -32,17 +33,17 @@ In Kubernetes environments you can also leverage [the daemonset installation][19
 
 The Datadog Agent can be used to collect logs directly from ECS or EC2 instances and applications running on them.
 
-However, AWS services logs are collected thanks to Datadog's [Lambda function][20]. Triggers are then defined ([manually or automatically][21]) to forward logs from any S3 bucket, Cloudwatch Log group, or Cloudwatch events.
+However, AWS services logs are collected thanks to Datadog's [Lambda function][4]. Triggers are then defined ([manually or automatically][22]) to forward logs from any S3 bucket, Cloudwatch Log group, or Cloudwatch events.
 
 ### Azure
 
 The Datadog Agent can be used to collect logs directly from your Azure VM instances and applications running on them. 
 
-However, Azure service logs are collected thanks to Datadog's [Azure function][22]. 
+However, Azure service logs are collected thanks to Datadog's [Azure function][23]. 
 
 ## Application log collection
 
-After you have [installed the Datadog Agent][23], [enabled Log collection][24], begin sending logs to your Datadog Agent by instrumenting your application:
+After you have [installed the Datadog Agent][5], [enabled Log collection][24], begin sending logs to your Datadog Agent by instrumenting your application:
 
 {{< whatsnext desc="Select one of the following supported languages to start collecting logs:">}}
   {{< nextlink href="logs/log_collection/csharp" tag="C++" >}}C# log collection.{{< /nextlink >}}
@@ -169,26 +170,26 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [1]: /agent/logs
 [2]: /agent/docker/logs
 [3]: /agent/kubernetes
-[4]: /integrations/rsyslog
-[5]: /integrations/syslog_ng
-[6]: /integrations/nxlog
-[7]: /integrations/fluentd/#log-collection
-[8]: /integrations/logstash/#log-collection
-[9]: /agent/logs/#tail-existing-files
-[10]: /agent/logs/?tab=streamlogsfromtcpudp#custom-log-collection
-[11]: /agent/logs/advanced_log_collection/#filter-logs
-[12]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-in-your-logs
-[13]: /agent/logs/advanced_log_collection/#multi-line-aggregation
-[14]: /logs/processing
-[15]: /logs/processing/parsing
-[16]: /logs/explorer/?tab=facets#setup
-[17]: /integrations/#cat-log-collection
-[18]: /agent/docker/logs
-[19]: /agent/kubernetes/#log-collection
-[20]: /integrations/amazon_web_services/#log-collection
-[21]: /integrations/amazon_web_services/#enable-logging-for-your-aws-service
-[22]: /integrations/azure/?tab=azurecliv20#log-collection
-[23]: /agent
+[4]: /integrations/amazon_web_services/#log-collection
+[5]: /agent
+[6]: /integrations/rsyslog
+[7]: /integrations/syslog_ng
+[8]: /integrations/nxlog
+[9]: /integrations/fluentd/#log-collection
+[10]: /integrations/logstash/#log-collection
+[11]: /agent/logs/#tail-existing-files
+[12]: /agent/logs/?tab=streamlogsfromtcpudp#custom-log-collection
+[13]: /agent/logs/advanced_log_collection/#filter-logs
+[14]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-in-your-logs
+[15]: /agent/logs/advanced_log_collection/#multi-line-aggregation
+[16]: /logs/processing
+[17]: /logs/processing/parsing
+[18]: /logs/explorer/?tab=facets#setup
+[19]: /integrations/#cat-log-collection
+[20]: /agent/docker/logs
+[21]: /agent/kubernetes/#log-collection
+[22]: /integrations/amazon_web_services/#enable-logging-for-your-aws-service
+[23]: /integrations/azure/?tab=azurecliv20#log-collection
 [24]: /agent/logs
 [25]: /agent/logs/?tab=tailexistingfiles#how-to-get-the-most-of-your-application-logs
 [26]: https://app.datadoghq.com/account/settings#api
