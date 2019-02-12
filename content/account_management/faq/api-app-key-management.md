@@ -20,7 +20,7 @@ To add a Datadog API or APP key, navigate to [Integration -> APIs][1], enter a n
 
 **Note**:
 
-* Your org must have at least one API key and at most API five keys.
+* Your org must have at least one API key and at most five API keys.
 * Key names must be unique across your org.
 * Application key names cannot be blank.
 
