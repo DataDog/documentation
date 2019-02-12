@@ -319,11 +319,11 @@ You can only test states that are available in the monitor’s configuration and
 
 In the following, you are only able to test for ALERT because only an alert threshold has been specified:
 
-{{< img src="monitors/notifications/test-notif-alert.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
+{{< img src="monitors/notifications/test-notif-alert.png" alt="Set alert conditions" responsive="true" >}}
 
 In this next example, you can test for both ALERT and NO DATA:
 
-{{< img src="monitors/notifications/test-notif-alert-nodata.png" alt="Test the notifications for this monitor" responsive="true" style="width:50%;" >}}
+{{< img src="monitors/notifications/test-notif-alert-nodata.png" alt="Test the notifications for this monitor" responsive="true"  >}}
 
 Message variables auto-populate with an available randomly selected group based on the scope of your monitor's definition.
 
