@@ -337,7 +337,7 @@ Your test notifications are sent to any notification handle available in the mes
 
 **TIP**: Datadog recommends that you test using a test notification channel if you do not want to add these notifications to your on-call channels. 
 
-You do not need to save the monitor to run the notification test. By clicking Run Test, the notification is sent, and you can continue to edit the monitor and notification box if you wish before saving. 
+You do not need to save the monitor to run the notification test. Clicking **Run test** sends the notification, and you can continue to edit the monitor and notification box before saving. 
 
 Testing notifications are currently supported for the following monitor types: Host, Metric, Anomaly, Outlier, Forecast, Integration (check only), Process (check only), Network (check only), Custom check, and Event.
 
