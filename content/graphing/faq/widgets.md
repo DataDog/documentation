@@ -1,5 +1,5 @@
 ---
-title: Widgets
+title: Screenboard Widgets
 kind: documentation
 aliases:
   - graphing/dashboards/widgets
