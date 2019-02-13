@@ -51,7 +51,7 @@ List of all environment variables available for tracing with the Docker Agent:
 | `DD_APM_ENABLED`           | When set to `true`, the Datadog Agent accepts trace metrics.                                                              |
 | `DD_APM_CONNECTION_LIMIT`  | Sets the maximum connection limit for a 30 second time window.                                                            |
 | `DD_APM_DD_URL`            | Datadog API endpoint where traces are sent. For Datadog EU site set `DD_APM_DD_URL` to `https://trace.agent.datadoghq.eu` |
-| `DD_APM_RECEIVER_PORT`     | Port that the Datadog Agent's trace receiver listen on. Default value is `8126`.                                          |
+| `DD_APM_RECEIVER_PORT`     | Port that the Datadog Agent's trace receiver listens on. Default value is `8126`.                                          |
 | `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers](#tracing-from-other-containers).                             |
 | `DD_APM_IGNORE_RESOURCES`   | A comma-separated list of endpoints and resources that the Agent should ignore (i.e. health checks endpoints).            |
 | `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions.                                                                          |
