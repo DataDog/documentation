@@ -29,17 +29,18 @@ Log monitors alert when a specified type of log crosses a user-defined threshold
     The search query has the same behavior as [the log explorer search][1]
 
 2. (Optional) Define the alert grouping:
-  {{< img src="monitors/monitor_types/log/log_monitor_group_by.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
+    {{< img src="monitors/monitor_types/log/log_monitor_group_by.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
     With or without alert grouping defined, you get one alert when the aggregated value meets the conditions set below. Even if you split the query by host, a single notification is sent if several hosts meet the conditions set below. This is done to reduce notification noise.
 
 3. Set alert conditions. The following options can be used:
 
-* Above
-* Above or equal
-* Below
-* Below or equal
+    * Above
+    * Above or equal
+    * Below
+    * Below or equal
+    <p>&nbsp;</p>
 
-Then configure the Alert and/or Warning threshold depending on the chosen condition:
+    Then configure the Alert and/or Warning threshold depending on the chosen condition:
     {{< img src="monitors/monitor_types/log/set_alert_conditions.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
 
 4. Configure your **notification options**:  
