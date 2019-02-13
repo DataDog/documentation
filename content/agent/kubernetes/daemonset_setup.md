@@ -101,6 +101,8 @@ spec:
           #  value: "true"
           # - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
           #  value: "true"
+          # - name: DD_AC_EXCLUDE=
+          #  value: "name:datadog-agent"
         resources:
           requests:
             memory: "256Mi"
@@ -180,6 +182,8 @@ To enable [Log collection][8] with your DaemonSet:
             value: "true"
         - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
             value: "true"
+        - name: DD_AC_EXCLUDE=
+            value: "name:datadog-agent"
     (...)
     ```
 
