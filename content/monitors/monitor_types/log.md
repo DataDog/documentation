@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-Log monitors alert when a specified type of log (result of a search query) cross a user-defined threshold over a given period of time. Common use cases for this monitor include:
+Log monitors alert when a specified type of log crosses a user-defined threshold over a given period of time. Common use cases for this monitor include:
 
 * Code exception errors monitoring 
 * Build job notifications
