@@ -13,9 +13,9 @@ short_description: Gather your logs from Sidekiq and send them to Datadog.
 
 ## Overview
 
-Connect Sidekiq logs to Datadog in order to track requests per second, bytes served, troubleshoot errors and monitor document updates.
+Connect Sidekiq logs to Datadog in order to track requests per second and bytes served, troubleshoot errors, and monitor document updates.
 
-This integration supports the access log as well as the error ones.
+This integration supports access logs as well as error logs.
 
 ## Setup
 ### Installation
@@ -28,7 +28,7 @@ The Sidekiq integration is included in the [Datadog Agent][1] package, so you do
 
 **Available for Agent >6.0**
 
-1. Collecting logs is disabled by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
+1. Collecting logs is disabled by default in the Datadog Agent. Enable it in `datadog.yaml`:
 
     ```yaml
     logs_enabled: true
