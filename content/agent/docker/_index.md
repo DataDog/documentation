@@ -3,7 +3,6 @@ title: Docker Agent
 kind: documentation
 aliases:
   - /guides/basic_agent_usage/docker/
-  - /agent/docker
   - /agent/basic_agent_usage/docker/
 further_reading:
 - link: "agent/faq/getting-further-with-docker"

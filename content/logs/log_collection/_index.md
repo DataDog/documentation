@@ -1,6 +1,19 @@
 ---
 title: Log Collection
 kind: Documentation
+further_reading:
+- link: "logs/processing"
+  tag: "Documentation"
+  text: "Learn how to process your logs"
+- link: "logs/processing/parsing"
+  tag: "Documentation"
+  text: "Learn more about parsing"
+- link: "logs/explorer"
+  tag: "Documentation"
+  text: "Learn how to explore your logs"
+- link: "logs/explorer/analytics"
+  tag: "Documentation"
+  text: "Perform Log Analytics"
 ---
 
 Use the [Datadog Agent][1] to collect logs directly from:
@@ -101,9 +114,12 @@ Endpoints that can be used to send logs to Datadog:
 |--------------------------------------|--------|-----------------------------------------------------------------------------------------------------------------|
 | `tcp-intake.logs.datadoghq.eu`       | `1883` | Used by custom forwarders to send logs in raw, Syslog, or JSON format format over an unecrypted TCP connection. |
 
-
 {{% /tab %}}
 {{< /tabs >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/logs
 [2]: /agent/logs
