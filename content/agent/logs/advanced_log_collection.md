@@ -15,9 +15,6 @@ further_reading:
 - link: "logs/explorer"
   tag: "Documentation"
   text: "See how to explore your logs"
-- link: "logs/logging_without_limits"
-  tag: "Documentation"
-  text: "Logging without limit"
 ---
 
 This document contains a set of advanced log collection configuration functions for your Datadog Agent, learn how to: 
