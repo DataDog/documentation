@@ -3,6 +3,7 @@ title: Monitor Uptime Widget
 kind: documentation
 description: "Track your monitor’s uptime via a widget in your Screenboard"
 disable_toc: true
+beta: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/slo-monitoring-widget/"
   tag: "Blog"
@@ -25,9 +26,9 @@ To configure the widget from a [screenboard][1]:
 
 1. Select the monitor to display uptime for.
     
-    *Optionally* - Select the monitor group ordering between the worst performing 5 groups, best performing 5 groups, or custom (select up to 5 custom groups).
+    *Optionally* - Select the monitor group ordering between the worst performing 5 groups, best performing 5 groups, or custom (select up to 5 custom groups). The total percentage is based on the worst state of any group, which when selected by group can be calculated based on the entire monitor or scoped by the selected groups.
 
-    The total percentage is based on the worst state of any group, which when selected by group can be calculated based on the entire monitor or scoped by the selected groups.
+    You can also select, *Query multiple monitors* and use the monitor search query to select up to 5 monitors.
 
 2. If the widget is configured to report by groups, only one duration can be selected; otherwise, select up to 3 uptime durations for your widget from:
     * 7 days 
