@@ -7,6 +7,6 @@ options = {
 
 initialize(**options)
 
-dashboard_id = 'qc9-tuk-9kv'
+dashboard_id = '<DASHBOARD_ID>'
 
 api.Dashboard.delete(dashboard_id)
