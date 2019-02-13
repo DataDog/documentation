@@ -27,7 +27,7 @@ Le [flux d'événements][2] affiche tous les événements qui se sont produits d
 {{< tabs >}}
 {{% tab "Assignation" %}}
 
-Utilisez des tags pour filtrer les métriques à afficher dans un [graphique de dashboard] ou pour créer des groupes agrégés de métriques à afficher. Pour filtrer les métriques, saisissez le tag dans la zone de texte **from**. Cela affiche les données de la métrique choisie fournies par toutes les sources qui possèdent ce tag (à savoir, `service:coffee-house` dans l'exemple ci-dessous).
+Utilisez des tags pour filtrer les métriques à afficher dans un [graphique de dashboard][1] ou pour créer des groupes agrégés de métriques à afficher. Pour filtrer les métriques, saisissez le tag dans la zone de texte **from**. Cela affiche les données de la métrique choisie fournies par toutes les sources qui possèdent ce tag (à savoir, `service:coffee-house` dans l'exemple ci-dessous).
 
 {{< img src="tagging/using_tags/dashboardtags_1.png" alt="Tags dans des dashboards avec la zone de texte from" responsive="true" style="width:80%;">}}
 
@@ -111,7 +111,7 @@ Voici les zones de texte de filtrage et de regroupement de la page des live proc
 {{< tabs >}}
 {{% tab "Gérer les monitors" %}}
 
-Pour filtrer des moniteurs en leur [assignant des tags][1], utilisez la barre de recherche ou les cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `tag:<CLÉ>:<VALEUR>`. Indiquez par exemple `tag:service:coffee-house`. **Remarque** : les tags de monitor ne fonctionnent pas de la même façon que les tags de métrique.
+Pour filtrer des moniteurs en leur [assignant des tags][1], utilisez la barre de recherche ou les cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `tag:<KEY>:<VALUE>`. Indiquez par exemple `tag:service:coffee-house`. **Remarque** : les tags de monitor ne fonctionnent pas de la même façon que les tags de métrique.
 
 {{< img src="tagging/using_tags/managemonitorstags.png" alt="Gérer les tags de monitor" responsive="true" style="width:80%;">}}
 
@@ -153,7 +153,7 @@ Utilisez les tags dans [Metrics Explorer][8] pour filtrer les métriques en fonc
 
 ## Intégrations
 
-Certaines intégrations, comme celles pour [AWS][9], [Google Cloud][10] et [Azure][11], vous permettent de fixer des limites facultatives pour vos métriques à l'aide de tags. Dans le carré d'intégration pertinent, utilisez une liste de tags au format `<CLÉ>:<VALEUR>` séparés par des virgules.
+Certaines intégrations, comme celles pour [AWS][9], [Google Cloud][10] et [Azure][11], vous permettent de fixer des limites facultatives pour vos métriques à l'aide de tags. Dans le carré d'intégration pertinent, utilisez une liste de tags au format `<KEY>:<VALUE>` séparés par des virgules.
 
 {{< img src="tagging/using_tags/integrationtags.png" alt="Collecte de métriques limite facultative" responsive="true" style="width:80%;">}}
 
@@ -166,7 +166,7 @@ Exemple : `datadog:monitored,env:production,instance-type:c1.*,!region:us-east-
 {{< tabs >}}
 {{% tab "Analyse et recherche de traces" %}}
 
-Pour [les recherches de traces][1], filtrez les traces avec des tags à l'aide de la barre de recherche ou des cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<CLÉ>:<VALEUR>`. Indiquez par exemple `service:coffee-house`. Pour effectuer une recherche avancée, consultez la page [sur les recherches de traces][2].
+Pour [les recherches de traces][1], filtrez les traces avec des tags à l'aide de la barre de recherche ou des cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>`. Indiquez par exemple `service:coffee-house`. Pour effectuer une recherche avancée, consultez la page [sur les recherches de traces][2].
 
 {{< img src="tagging/using_tags/tracesearchtags.png" alt="Tags recherche de traces" responsive="true" style="width:80%;">}}
 
@@ -196,13 +196,13 @@ Lors de la création d'un graphique de [notebook][12], limitez des métriques en
 
 {{< img src="tagging/using_tags/notebooktags.png" alt="Tags notebook" responsive="true" style="width:80%;">}}
 
-Pour exclure des tags, utilisez `</>` afin de modifier le texte, puis ajoutez le tag en respectant le format `!<CLÉ>:<VALEUR>`. Dans l'exemple ci-dessous, `service:coffeehouse` est exclu par l'expression `!service:coffeehouse`.
+Pour exclure des tags, utilisez `</>` afin de modifier le texte, puis ajoutez le tag en respectant le format `!<KEY>:<VALUE>`. Dans l'exemple ci-dessous, `service:coffeehouse` est exclu par l'expression `!service:coffeehouse`.
 
 {{< img src="tagging/using_tags/notebooktagsexclude.gif" alt="Tags exclusion notebook" responsive="true" style="width:80%;">}}
 
 ## Logs
 
-Pour [les recherches][13], [les analyses][14], [les modèles][15] et le [Live Tailing][16] de logs, filtrez les logs avec des tags à l'aide de la barre de recherche ou des cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<CLÉ>:<VALEUR>`. Indiquez par exemple `service:coffee-house`. Pour effectuer une recherche avancée, consultez la page [sur les recherches de logs][13]. 
+Pour [les recherches][13], [les analyses][14], [les modèles][15] et le [Live Tailing][16] de logs, filtrez les logs avec des tags à l'aide de la barre de recherche ou des cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>`. Indiquez par exemple `service:coffee-house`. Pour effectuer une recherche avancée, consultez la page [sur les recherches de logs][13]. 
 
 {{< tabs >}}
 {{% tab "Recherche" %}}
