@@ -24,7 +24,7 @@ There are several places where you can see the number of log events you have sen
 
     {{< img src="account_management/billing/log-events01.png" alt="Log Events" responsive="true">}}
 
-2. On the [Pipeline page][2], double-click on an index to see the number of log events that were indexed in the past couple days.
+2. On the [Configuration page][2], double-click on an index to see the number of log events that were indexed in the past couple days.
 
     {{< img src="account_management/billing/log-events02.png" alt="Log Events" responsive="true">}}
 
