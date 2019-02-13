@@ -27,8 +27,8 @@ When looking at a trace, there are two types of logs that can be seen:
 
 If the log section is empty when the `host` option is set, go into the log explorer and check if:
 
-- Logs are being sent for the host of the trace
-- There are logs for that host on the trace timeframe
+- Logs are being sent from the host that emitted trace.
+- There are logs for that host within the trace timeframe.
 - The timestamp of the logs is properly set. Checkout [this specific guide][3] for more explanation about the log timestamp.
 
 ### Trace_id option
@@ -49,13 +49,13 @@ In case of issue, double check in your logs the name of the attribute that conta
 {{% /tab %}}
 {{% tab "With Log integration" %}}
 
-For raw logs, using a log integration (setting the source to the framework, `java`, `python`, `ruby`, ....) should do all the work automatically as well.
+For raw logs, using a log integration (setting the `source` attribute to: `java`, `python`, `ruby`, ...) should do all the work automatically as well.
 
 Here is an example with the Java integration pipeline:
 
 {{< img src="tracing/tracing_java_traceid_remapping.png" alt="Java log pipeline" responsive="true" style="width:90%;">}}
 
-Now it is possible that the log format is not covered by the integration pipeline. In this case, clone the pipeline and [follow our parsing troubleshooting guide](https://docs.datadoghq.com/logs/faq/how-to-investigate-a-log-parsing-issue/#pagetitle) to make sure it fits with your format.
+Now it is possible that the log format is not covered by the integration pipeline. In this case, clone the pipeline and [follow our parsing troubleshooting guide](https://docs.datadoghq.com/logs/faq/how-to-investigate-a-log-parsing-issue/#pagetitle) to make sure it fits your format.
 
 {{% /tab %}}
 {{% tab "Custom" %}}
@@ -69,7 +69,7 @@ Then define a [Trace remapper](https://docs.datadoghq.com/logs/processing/proces
 {{% /tab %}}
 {{< /tabs >}}
 
-Once the IDs are properly injected and remapped in the logs, you can make a direct trace to log correlation:
+Once the IDs are properly injected and remapped into your logs, you can make a direct trace to log correlation:
 
 {{< img src="tracing/trace_id_injection.png" alt="Tracing id injection" responsive="true" style="width:90%;">}}
 
