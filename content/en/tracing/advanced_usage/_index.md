@@ -3,6 +3,83 @@ title: Advanced Languages instrumentation
 kind: documentation
 ---
 
+## Trace Analytics Configuration
+
+Trace clients can send unsampled trace data to Trace Analytics for querying. Apply the following config to your application to enable this feature.
+
+{{< tabs >}}
+{{% tab "Java" %}}
+
+### Enable Trace Analytics
+
+The following setting will enable trace analytics for all web integrations. (Other types of integrations to be enabled in the future.)
+* System Property: `-Ddd.trace.analytics.enabled=true`
+* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
+
+### Configure Additional Integrations
+
+To enable or disable Trace Analytics for individual integrations, use the following setting:
+* System Property: `-Ddd.integration.<integration>.analytics.enabled=true`
+* Environment Variable: `DD_INTEGRATION_<INTEGRATION>_ANALYTICS_ENABLED=true`
+
+Integration names can be found on the [integrations table](/tracing/languages/java/#integrations).
+Note: This setting takes priority over the non-integration specific setting.
+
+### Configure Sample Rate
+
+When enabled, the default sample rate is to collect everything (`1.0`). Sampling can be applied with the following config.
+* System Property: `-Ddd.integration.<integration>.analytics.sample_rate=0.5`
+* Environment Variable: `DD_INTEGRATION_<INTEGRATION>_ANALYTICS_SAMPLE_RATE=0.5`
+
+Integration names can be found on the [integrations table](/tracing/languages/java/#integrations).
+
+### Configuring on Custom Instrumentation
+
+Applications with custom instrumentation can enable and set sample rate by setting a tag on the service root span:
+
+```java
+import datadog.trace.api.DDTags;
+import datadog.trace.api.Trace;
+import io.opentracing.Tracer;
+import io.opentracing.util.GlobalTracer;
+
+class SomeClass {
+  @Trace
+  void someMethod() {
+    final Span span = GlobalTracer.get().activeSpan();
+    // Span provided by @Trace annotation.
+    if (span != null) {
+      span.setTag(DDTags.SERVICE_NAME, "my-custom-service");
+      span.setTag(DDTags.EVENT_SAMPLE_RATE, 1.0);
+    }
+  }
+}
+```
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+{{% /tab %}}
+{{% tab "C++" %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Custom Tagging
 
 Custom tagging allows adding tags in the form of key-value pairs to specific spans. These tags are used to correlate traces with other Datadog products to provide more details about specific spans.
@@ -33,10 +110,10 @@ import javax.servlet.http.HttpServletResponse;
 class ServletImpl extends AbstractHttpServlet {
   @Override
   void doGet(HttpServletRequest req, HttpServletResponse resp) {
-    final Tracer tracer = GlobalTracer.get();
-    if (tracer != null && tracer.activeSpan() != null) {
-      tracer.activeSpan().setTag("customer.id", 12345);
-      tracer.activeSpan().setTag("http.url", "/login");
+    final Span span = GlobalTracer.get().activeSpan();
+    if (span != null) {
+      span.setTag("customer.id", 12345);
+      span.setTag("http.url", "/login");
     }
     // servlet impl
   }
