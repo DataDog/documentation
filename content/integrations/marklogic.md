@@ -34,7 +34,7 @@ The Marklogic integration is included in the [Datadog Agent][1] package, so you 
 
 2. Add this configuration block to your `marklogic.d/conf.yaml` file to start collecting your MarkLogic Logs:
 
-    ```yaml
+    ```
       logs:
           - type: file
             path: <MARKLOGIC_LOG_FILE_PATH>

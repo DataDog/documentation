@@ -36,7 +36,7 @@ The Sidekiq integration is included in the [Datadog Agent][1] package, so you do
 
 2. Add this configuration block to your `sidekiq.d/conf.yaml` file to start collecting your Sidekiq Logs:
 
-    ```yaml
+    ```
       logs:
           - type: file
             path: <SIDEKIQ_LOG_FILE_PATH>
