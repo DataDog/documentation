@@ -27,7 +27,7 @@
         {{ end }}
         {{ $el_url := ($ctx.Scratch.Get "el_url") }}
         {{ $hash_list := split $element.URL "#" }}
-        {{ $hash_check := in $element.URL "#" }}
+        {{ $hash_check := slicestr $element.URL 0 1 }}
         {{ if gt (len $hash_list) 1 }}
             {{ $ctx.Scratch.Set "url_hash" (print "#" (index $hash_list 1)) }}
         {{ else }}
@@ -40,7 +40,7 @@
         {{ $active_page := (or (eq $ctx.RelPermalink $el_url) (and (eq $url_first_second $el_url) (not $element.Children)) (and (eq $url_first "/integrations/") (eq $el_url "/integrations/") ) ) }}
         {{ $open_parent := (or (and (eq $url_first $el_url) (ne $el_url "/")) (eq $url_first_second $el_url) (eq $url_first_second_third $el_url) $active_page) }}
         <li class="{{if $open_parent }}open{{ end }}">
-            <a href={{ if $hash_check }}{{$element.URL | relLangURL}}{{ else }}{{ $element.URL | absLangURL}}{{ end }} {{if $active_page }}class="active"{{ end }}>
+            <a href="{{ if eq $hash_check "#" }}{{$element.URL}}{{ else }}{{ $element.URL | absLangURL}}{{ end }}" {{if $active_page }}class="active"{{ end }}>
                 {{ if $element.Pre }}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" ($element.Pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" ($element.Pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21" "disable_lazy" "true") -}}{{ end }} <span>{{ $element.Name }}</span>
             </a>
             {{ if eq $element.Name "Integrations" }}
