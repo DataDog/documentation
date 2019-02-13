@@ -46,15 +46,15 @@ However, Azure service logs are collected thanks to Datadog's [Azure function][2
 After you have [installed the Datadog Agent][5], [enabled Log collection][24], begin sending logs to your Datadog Agent by instrumenting your application:
 
 {{< whatsnext desc="Select one of the following supported languages to start collecting logs:">}}
-  {{< nextlink href="logs/log_collection/csharp" tag="C++" >}}C# log collection.{{< /nextlink >}}
-  {{< nextlink href="logs/log_collection/go" tag="Go" >}}Go log collection.{{< /nextlink >}}
-  {{< nextlink href="logs/log_collection/java" tag="Java" >}}Java log collection.{{< /nextlink >}}
-  {{< nextlink href="logs/log_collection/nodejs" tag="NodeJS" >}}NodeJS log collection.{{< /nextlink >}}
-  {{< nextlink href="logs/log_collection/php" tag="PHP" >}}PHP log collection.{{< /nextlink >}}
-  {{< nextlink href="logs/log_collection/python" tag="NodeJS" >}}Python log collection.{{< /nextlink >}}
-  {{< nextlink href="logs/log_collection/ruby" tag="Ruby" >}}Ruby log collection.{{< /nextlink >}}
+  {{< nextlink href="logs/log_collection/csharp" tag="C++" >}}C# log collection{{< /nextlink >}}
+  {{< nextlink href="logs/log_collection/go" tag="Go" >}}Go log collection{{< /nextlink >}}
+  {{< nextlink href="logs/log_collection/java" tag="Java" >}}Java log collection{{< /nextlink >}}
+  {{< nextlink href="logs/log_collection/nodejs" tag="NodeJS" >}}NodeJS log collection{{< /nextlink >}}
+  {{< nextlink href="logs/log_collection/php" tag="PHP" >}}PHP log collection{{< /nextlink >}}
+  {{< nextlink href="logs/log_collection/python" tag="NodeJS" >}}Python log collection{{< /nextlink >}}
+  {{< nextlink href="logs/log_collection/ruby" tag="Ruby" >}}Ruby log collection{{< /nextlink >}}
 {{< /whatsnext >}}
-
+<p></p>
 ## Custom forwarder Log collection
 
 Any custom process or [logging library][25] able to forward logs through **TCP** can be used in conjuntion with Datadog Logs. The secure TCP endpoint is `intake.logs.datadoghq.com:10516` (or port `10514` for insecure connections). 
