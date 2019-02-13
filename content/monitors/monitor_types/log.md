@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-Log monitors alert when a specified type of log exceeds a user-defined threshold over a given period of time. Common use cases for this monitor include:
+Log monitors alert when a specified type of log (result of a search query) cross a user-defined threshold over a given period of time. Common use cases for this monitor include:
 
 * Code exception errors monitoring 
 * Build job notifications
@@ -25,24 +25,25 @@ Log monitors alert when a specified type of log exceeds a user-defined threshold
 ## Setup
 
 1. Define the search query:
-    {{< img src="monitors/monitor_types/log/define_the_search_query.png" alt="Define the search query" responsive="true" style="width:50%;" >}}
-    The search query has the same behavior as [the log explorer search][1]
+  {{< img src="monitors/monitor_types/log/define_the_search_query.png" alt="Define the search query" responsive="true" style="width:50%;" >}}
+  The search query has the same behavior as [the log explorer search][1]
 
 2. (Optional) Define the alert grouping:
   {{< img src="monitors/monitor_types/log/log_monitor_group_by.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
-    With or without alert grouping defined, you get one alert when the aggregated value meets the conditions set below. Even if you split the query by host, a single notification is sent if several hosts meet the conditions set below. This is done to reduce notification noise.
+  With or without alert grouping defined, you get one alert when the aggregated value meets the conditions set below. Even if you split the query by host, a single notification is sent if several hosts meet the conditions set below. This is done to reduce notification noise.
 
 3. Set alert conditions. The following options can be used:
 
 * Above
 * Above or equal
+* Below
+* Below or equal
 
 Then configure the Alert and/or Warning threshold depending on the chosen condition:
-    {{< img src="monitors/monitor_types/log/set_alert_conditions.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
+  {{< img src="monitors/monitor_types/log/set_alert_conditions.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
 
-4. Configure your **notification options**:  
-    Refer to the [notifications][2] dedicated documentation page for detailed options.
-    
+4. Configure your **notification options**:
+  Refer to the [notifications][2] dedicated documentation page for detailed options.
 
 ## Notifications and log samples
 
@@ -51,26 +52,23 @@ This is available for Slack and email notifications.
 
 * Samples are not displayed for recovery notifications.
 
- **Enabling log samples in notifications**:
-    
+**Enabling log samples in notifications**:
+
 {{< img src="monitors/monitor_types/log/activate-log-monitor-sample.png" alt="Activate log samples in message" responsive="true" style="width:50%;" >}}
-    
+
 **Example for a Slack notification** 
 
- {{< img src="monitors/monitor_types/log/slack-log-sample.png" alt="Slack notification example" responsive="true" style="width:50%;" >}}
+{{< img src="monitors/monitor_types/log/slack-log-sample.png" alt="Slack notification example" responsive="true" style="width:50%;" >}}
  
-### Multi alerts 
+For Slack and email notifications you can enable the top 10 breaching values in your segmented alert notifications.
 
-For Slack and email notifications you can enable the top 10 of breaching values in your multi alert notifications.
-
- **Enabling top 10 breaching values in notifications**
+**Enabling top 10 breaching values in notifications**
 
 {{< img src="monitors/monitor_types/log/activate-log-multi-monitor-sample.png" alt="Activate log samples in message" responsive="true" style="width:50%;" >}}
 
 **Example for a Slack notification** 
 
- {{< img src="monitors/monitor_types/log/slack-log-multi-sample.png" alt="Slack notification example" responsive="true" style="width:50%;" >}}
-
+{{< img src="monitors/monitor_types/log/slack-log-multi-sample.png" alt="Slack notification example" responsive="true" style="width:50%;" >}}
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
