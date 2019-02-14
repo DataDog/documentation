@@ -19,7 +19,7 @@ When looking at a trace, there are two types of logs that can be seen:
 * - `host`: Display logs from the trace's host within the trace timeframe
 * - `trace_id`: Display logs that have the corresponding trace id
 
-{{< img src="tracing/tracing_logs_display_option.png" alt="Tracing log display option" responsive="true" style="width:90%;">}}
+{{< img src="tracing/tracing_logs_display_option.png" alt="Tracing log display option" responsive="true" style="width:50%;">}}
 
 ## Troubleshooting steps
 
