@@ -195,7 +195,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 
 | OS                                | Supported versions                                                         |
 |-----------------------------------|----------------------------------------------------------------------------|
-| [Amazon][1]                      | Amazon Linux 2 or better                                                   |
+| [Amazon][1]                       | Amazon Linux 2                                                   |
 | [Debian x86_64][2]                | Debian 7 (wheezy) and above (we support SysVinit in agent 6.6.0 and above) |
 | [Ubuntu x86_64][3]                | Ubuntu 14.04 and above                                                     |
 | [RedHat/CentOS x86_64][4]         | RedHat/CentOS 6 and above                                                  |
