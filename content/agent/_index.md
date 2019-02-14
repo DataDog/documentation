@@ -195,7 +195,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 
 | OS                                | Supported versions                                                         |
 |-----------------------------------|----------------------------------------------------------------------------|
-| [Amazon][1]                       | Amazon Linux 2                                                   |
+| [Amazon][1]                       | Amazon Linux 2                                                             |
 | [Debian x86_64][2]                | Debian 7 (wheezy) and above (we support SysVinit in agent 6.6.0 and above) |
 | [Ubuntu x86_64][3]                | Ubuntu 14.04 and above                                                     |
 | [RedHat/CentOS x86_64][4]         | RedHat/CentOS 6 and above                                                  |
@@ -204,8 +204,8 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [SUSE Enterprise Linux x86_64][7] | SUSE 11 SP4 and above (we do not support SysVinit)                         |
 | [Fedora x86_64][8]                | Fedora 26 and above                                                        |
 | [macOS][9]                        | macOS 10.12 and above                                                      |
-| [Windows server 64-bit][10]        | Windows server 2008r2 or above                                             |
-| [Windows 64-bit][10]               | Windows 7 or above                                                         |
+| [Windows server 64-bit][10]       | Windows server 2008r2 or above                                             |
+| [Windows 64-bit][10]              | Windows 7 or above                                                         |
 
 **Note**: [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
 
@@ -225,7 +225,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 
 | OS                                | Supported versions             |
 |-----------------------------------|--------------------------------|
-| [Amazon][1]                      | Amazon Linux 2 or better       |
+| [Amazon][1]                       | Amazon Linux 2                 |
 | [Debian x86_64][2]                | Debian 7 (wheezy) and above    |
 | [Ubuntu x86_64][3]                | Ubuntu 12.04 and above         |
 | [RedHat/CentOS x86_64][4]         | RedHat/CentOS 5 and above      |
@@ -234,8 +234,8 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [SUSE Enterprise Linux x86_64][7] | SUSE 11 SP4 and above          |
 | [Fedora x86_64][8]                | Fedora 26 and above            |
 | [MacOS][9]                        | macOS 10.10 and above          |
-| [Windows server 64-bit][10]        | Windows server 2008r2 or above |
-| [Windows 64-bit][10]               | Windows 7 or above             |
+| [Windows server 64-bit][10]       | Windows server 2008r2 or above |
+| [Windows 64-bit][10]              | Windows 7 or above             |
 
 **Note**: [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
 
