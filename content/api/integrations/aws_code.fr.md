@@ -1,7 +1,7 @@
 ---
 title: AWS
 type: apicode
-order: 15.1
+order: 14.1
 external_redirect: /api/#aws
 ---
 

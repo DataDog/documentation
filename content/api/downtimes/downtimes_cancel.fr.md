@@ -1,7 +1,7 @@
 ---
 title: Annuler le downtime d'un monitor
 type: apicontent
-order: 10.3
+order: 9.3
 external_redirect: /api/#annuler-le-downtime-d-un-monitor
 ---
 

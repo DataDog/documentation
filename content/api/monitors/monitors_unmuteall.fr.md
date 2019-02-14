@@ -1,7 +1,7 @@
 ---
 title: Réactiver tous les monitors
 type: apicontent
-order: 18.08
+order: 17.08
 external_redirect: /api/#reactiver-tous-les-monitors
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Réactiver un host
 type: apicontent
-order: 14.4
+order: 13.4
 external_redirect: /api/#reactiver-un-host
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Supprimer un événement
 type: apicontent
-order: 12.3
+order: 11.3
 external_redirect: /api/#supprimer-un-evenement
 ---
 ## Supprimer un événement

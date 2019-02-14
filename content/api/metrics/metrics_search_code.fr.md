@@ -1,7 +1,7 @@
 ---
 title: Rechercher des métriques
 type: apicode
-order: 17.6
+order: 16.6
 external_redirect: /api/#rechercher-des-metriques
 ---
 

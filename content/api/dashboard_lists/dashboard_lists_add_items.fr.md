@@ -1,7 +1,7 @@
 ---
 title: Ajouter des éléments à une liste de dashboards
 type: apicontent
-order: 9.7
+order: 8.7
 external_redirect: /api/#ajouter-des-elements-a-une-liste-de-dashboards
 ---
 

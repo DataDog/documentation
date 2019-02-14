@@ -1,7 +1,7 @@
 ---
 title: Créer un embed
 type: apicode
-order: 11.2
+order: 10.2
 external_redirect: /api/#creer-un-embed
 ---
 

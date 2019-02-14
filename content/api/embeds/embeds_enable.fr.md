@@ -1,7 +1,7 @@
 ---
 title: Activer un embed
 type: apicontent
-order: 11.4
+order: 10.4
 external_redirect: /api/#activer-un-embed
 ---
 

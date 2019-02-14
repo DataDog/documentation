@@ -1,7 +1,7 @@
 ---
 title: Envoyer un événement
 type: apicode
-order: 12.1
+order: 11.1
 external_redirect: /api/#envoyer-un-evenement
 ---
 

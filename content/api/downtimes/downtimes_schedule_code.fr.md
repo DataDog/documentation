@@ -1,7 +1,7 @@
 ---
 title: Planifier le downtime d'un monitor
 type: apicode
-order: 10.1
+order: 9.1
 external_redirect: /api/#planifier-le-downtime-d-un-monitor
 ---
 

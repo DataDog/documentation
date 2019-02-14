@@ -1,7 +1,7 @@
 ---
 title: Récupérer la liste des métriques actives
 type: apicode
-order: 17.1
+order: 16.1
 external_redirect: /api/#recuperer-la-liste-des-metriques-actives
 ---
 

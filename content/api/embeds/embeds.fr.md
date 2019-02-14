@@ -1,7 +1,7 @@
 ---
 title: Graphiques intégrables
 type: apicontent
-order: 11
+order: 10
 external_redirect: /api/#graphiques-integrables
 ---
 ## Graphiques intégrables

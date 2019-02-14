@@ -1,7 +1,7 @@
 ---
 title: Rechercher des hosts
 type: apicontent
-order: 14.1
+order: 13.1
 external_redirect: /api/#rechercher-des-hosts
 ---
 

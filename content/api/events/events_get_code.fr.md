@@ -1,7 +1,7 @@
 ---
 title: Récupérer un événement
 type: apicode
-order: 12.2
+order: 11.2
 external_redirect: /api/#recuperer-un-evenement
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Partager un screenboard
 type: apicontent
-order: 20.6
+order: 19.6
 external_redirect: /api/#partager-un-screenboard
 ---
 
