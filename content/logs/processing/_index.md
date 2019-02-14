@@ -21,11 +21,9 @@ further_reading:
 
 ## Overview
 
-To access the processing panel use the left `Logs` menu:
+To access the configuration panel use the left `Logs` menu then the configuration sub menu.
 
-{{< img src="logs/processing/processing_panel.png" alt="Pipelines panel" responsive="true" style="width:40%;" >}}
-
-Log processing allows full control over how your logs are processed with Datadog [Pipelines][1] and [Processors][2].
+Log configuration page allows full control over how your logs are processed with Datadog [Pipelines][1] and [Processors][2].
 
 * A [Pipeline][1] takes a filtered subset of incoming logs and applies a list of sequential processors.
 * A [Processor][2] executes within a [Pipeline][1] a data-structuring action ([Remapping an attribute][3], [Grok parsing][4], etc.) on a log.
@@ -140,7 +138,7 @@ You can now control the global hostname, service, timestamp, and status main map
 
 {{< img src="logs/processing/reserved_attribute.png" alt="Reserved Attribute" responsive="true" style="width:80%;">}}
 
-To change the default values for each of the reserved attributes, go to the [Pipeline page][5] and edit the `Reserved Attribute mapping`:
+To change the default values for each of the reserved attributes, go to the [Configuration page][5] and edit the `Reserved Attribute mapping`:
 
 {{< img src="logs/processing/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" style="width:80%;">}}
 

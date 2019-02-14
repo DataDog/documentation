@@ -59,9 +59,7 @@ Check the dedicated [saved views documentation][2] to learn more.
 
 ## Visualization
 
-Switch between the Logstream and the Log Analytics modes by clicking on the *Log Mode* button:
-
-{{< img src="logs/explorer/log_graph_switch.png" alt="Log Analytics switch" responsive="true" style="width:40%;">}}
+Switch between the Logstream and the Log Analytics modes by clicking on the *Log Mode* button in the upper left corner of the page:
 
 {{< tabs >}}
 {{% tab "Logstream" %}}
