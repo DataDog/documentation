@@ -635,4 +635,10 @@ $(document).ready(function () {
         }
     }
 
+    // For the Advanced Instrumentation sidenav section
+    $(".sidenav-nav span:contains('Advanced Instrumentation')").parent('a').next('ul').find('a').click(function(){
+        moveToAnchor($(this).attr('href').substr(1), true);
+    });
+
+
 });
