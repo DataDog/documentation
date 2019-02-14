@@ -1,1 +1,7 @@
-* @DataDog/baklava @DataDog/corpweb
+*       @DataDog/baklava
+
+# Websites
+*.js    @DataDog/corpweb
+*.html  @DataDog/corpweb
+*.scss  @DataDog/corpweb
+*.css   @DataDog/corpweb
