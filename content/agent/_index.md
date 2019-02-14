@@ -195,58 +195,62 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 
 | OS                                | Supported versions                                                         |
 |-----------------------------------|----------------------------------------------------------------------------|
-| [Debian x86_64][1]                | Debian 7 (wheezy) and above (we support SysVinit in agent 6.6.0 and above) |
-| [Ubuntu x86_64][2]                | Ubuntu 14.04 and above                                                     |
-| [RedHat/CentOS x86_64][3]         | RedHat/CentOS 6 and above                                                  |
-| [Docker][4]                       | Version 1.12 and higher                                                    |
-| [Kubernetes][5]                   | Version 1.3 and higher                                                     |
-| [SUSE Enterprise Linux x86_64][6] | SUSE 11 SP4 and above (we do not support SysVinit)                         |
-| [Fedora x86_64][7]                | Fedora 26 and above                                                        |
-| [macOS][8]                        | macOS 10.12 and above                                                      |
-| [Windows server 64-bit][9]        | Windows server 2008r2 or above                                             |
-| [Windows 64-bit][9]               | Windows 7 or above                                                         |
+| [Amazon][1]                       | Amazon Linux 2                                                   |
+| [Debian x86_64][2]                | Debian 7 (wheezy) and above (we support SysVinit in agent 6.6.0 and above) |
+| [Ubuntu x86_64][3]                | Ubuntu 14.04 and above                                                     |
+| [RedHat/CentOS x86_64][4]         | RedHat/CentOS 6 and above                                                  |
+| [Docker][5]                       | Version 1.12 and higher                                                    |
+| [Kubernetes][6]                   | Version 1.3 and higher                                                     |
+| [SUSE Enterprise Linux x86_64][7] | SUSE 11 SP4 and above (we do not support SysVinit)                         |
+| [Fedora x86_64][8]                | Fedora 26 and above                                                        |
+| [macOS][9]                        | macOS 10.12 and above                                                      |
+| [Windows server 64-bit][10]        | Windows server 2008r2 or above                                             |
+| [Windows 64-bit][10]               | Windows 7 or above                                                         |
 
-**Note**: [Source][10] install may work on operating systems not listed here and is supported on a best effort basis.
+**Note**: [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
 
-[1]: /agent/basic_agent_usage/deb
-[2]: /agent/basic_agent_usage/ubuntu
-[3]: /agent/basic_agent_usage/redhat
-[4]: /agent/docker
-[5]: /agent/basic_agent_usage/kubernetes
-[6]: /agent/basic_agent_usage/suse
-[7]: /agent/basic_agent_usage/fedora
-[8]: /agent/basic_agent_usage/osx
-[9]: /agent/basic_agent_usage/windows
-[10]: /agent/basic_agent_usage/source
+[1]: /agent/basic_agent_usage/amazonlinux/?tab=agentv6
+[2]: /agent/basic_agent_usage/deb
+[3]: /agent/basic_agent_usage/ubuntu
+[4]: /agent/basic_agent_usage/redhat
+[5]: /agent/docker
+[6]: /agent/basic_agent_usage/kubernetes
+[7]: /agent/basic_agent_usage/suse
+[8]: /agent/basic_agent_usage/fedora
+[9]: /agent/basic_agent_usage/osx
+[10]: /agent/basic_agent_usage/windows
+[11]: /agent/basic_agent_usage/source
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
 | OS                                | Supported versions             |
 |-----------------------------------|--------------------------------|
-| [Debian x86_64][1]                | Debian 7 (wheezy) and above    |
-| [Ubuntu x86_64][2]                | Ubuntu 12.04 and above         |
-| [RedHat/CentOS x86_64][3]         | RedHat/CentOS 5 and above      |
-| [Docker][4]                       | Version 1.12 and higher        |
-| [Kubernetes][5]                   | Version 1.3 and higher         |
-| [SUSE Enterprise Linux x86_64][6] | SUSE 11 SP4 and above          |
-| [Fedora x86_64][7]                | Fedora 26 and above            |
-| [MacOS][8]                        | macOS 10.10 and above          |
-| [Windows server 64-bit][9]        | Windows server 2008r2 or above |
-| [Windows 64-bit][9]               | Windows 7 or above             |
+| [Amazon][1]                      | Amazon Linux 2 or better       |
+| [Debian x86_64][2]                | Debian 7 (wheezy) and above    |
+| [Ubuntu x86_64][3]                | Ubuntu 12.04 and above         |
+| [RedHat/CentOS x86_64][4]         | RedHat/CentOS 5 and above      |
+| [Docker][5]                       | Version 1.12 and higher        |
+| [Kubernetes][6]                   | Version 1.3 and higher         |
+| [SUSE Enterprise Linux x86_64][7] | SUSE 11 SP4 and above          |
+| [Fedora x86_64][8]                | Fedora 26 and above            |
+| [MacOS][9]                        | macOS 10.10 and above          |
+| [Windows server 64-bit][10]        | Windows server 2008r2 or above |
+| [Windows 64-bit][10]               | Windows 7 or above             |
 
-**Note**: [Source][10] install may work on operating systems not listed here and is supported on a best effort basis.
+**Note**: [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
 
 
-[1]: /agent/basic_agent_usage/deb
-[2]: /agent/basic_agent_usage/ubuntu
-[3]: /agent/basic_agent_usage/redhat
-[4]: /agent/docker
-[5]: /agent/basic_agent_usage/kubernetes
-[6]: /agent/basic_agent_usage/suse
-[7]: /agent/basic_agent_usage/fedora
-[8]: /agent/basic_agent_usage/osx
-[9]: /agent/basic_agent_usage/windows
-[10]: /agent/basic_agent_usage/source
+[1]: /agent/basic_agent_usage/amazonlinux/?tab=agentv5
+[2]: /agent/basic_agent_usage/deb
+[3]: /agent/basic_agent_usage/ubuntu
+[4]: /agent/basic_agent_usage/redhat
+[5]: /agent/docker
+[6]: /agent/basic_agent_usage/kubernetes
+[7]: /agent/basic_agent_usage/suse
+[8]: /agent/basic_agent_usage/fedora
+[9]: /agent/basic_agent_usage/osx
+[10]: /agent/basic_agent_usage/windows
+[11]: /agent/basic_agent_usage/source
 {{% /tab %}}
 {{< /tabs >}}
 
