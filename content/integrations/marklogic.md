@@ -7,13 +7,14 @@ integration_title: Marklogic
 is_public: true
 kind: integration
 name: marklogic
-public_title: Datadog-Stunnel Integration
+public_title: Datadog-Marklogic Integration
 short_description: Gather your logs from Marklogic and send them to Datadog.
 ---
 
 
 ## Overview
 
+Gather your logs from Marklogic and send them to Datadog.
 
 ## Setup
 ### Installation
