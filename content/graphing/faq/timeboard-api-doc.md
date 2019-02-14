@@ -4,7 +4,7 @@ kind: faq
 ---
 
 <div class="alert alert-danger">
-This endpoint is outdated. Use the <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md"> new Dashboard endpoint</a> instead. 
+This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api/?lang=python#dashboards"> new Dashboard endpoint</a> instead. 
 </div>
 
 The Timeboard endpoint allows you to programmatically create, update delete and query Timeboards. [Find more about Timeboard][1].
