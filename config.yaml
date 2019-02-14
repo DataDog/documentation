@@ -651,49 +651,54 @@ languages:
           url: "tracing/advanced_usage/"
           weight: 20
           parent: menu_references_tracing
+        - identifier: customnav_tracingnav_trace_analytics
+          name: "Trace Analytics"
+          url: "tracing/advanced_usage/trace_analytics"
+          weight: 205
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_custom_tagging
           name: "Custom Tagging"
-          url: "#custom-tagging"
+          url: "tracing/advanced_usage/custom_tagging"
           weight: 210
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_agent_hostname
           name: "Change Agent Hostname"
-          url: "#change-agent-hostname"
+          url: "tracing/advanced_usage/change_agent_hostname"
           weight: 215
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_manual_tracing
           name: "Manual Instrumentation"
-          url: "#manual-instrumentation"
+          url: "tracing/advanced_usage/manual_instrumentation"
           weight: 220
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_open_tracing
           name: "OpenTracing"
-          url: "#opentracing"
+          url: "tracing/advanced_usage/opentracing"
           weight: 230
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_distributed_tracing
           name: "Distributed Tracing"
-          url: "#distributed-tracing"
+          url: "tracing/advanced_usage/distributed_tracing"
           weight: 240
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_sampling
           name: "Priority Sampling"
-          url: "#priority-sampling"
+          url: "tracing/advanced_usage/priority-sampling"
           weight: 250
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_logging
           name: "Correlate Traces and Logs"
-          url: "#correlate-traces-and-logs"
+          url: "tracing/advanced_usage/correlate_traces_and_logs"
           weight: 260
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_debugging
           name: "Debugging"
-          url: "#debugging"
+          url: "tracing/advanced_usage/debugging"
           weight: 270
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_security
           name: "Security"
-          url: "#security"
+          url: "tracing/advanced_usage/security"
           weight: 280
           parent: customnav_tracingnav_advanced_usage
 
@@ -1893,48 +1898,58 @@ languages:
         # TRACING/APM - Setup Advanced
 
         - identifier: customnav_tracingnav_advanced_usage
-          name: "Instrumentation avancée"
+          name: "Advanced Instrumentation"
           url: "tracing/advanced_usage/"
           weight: 20
           parent: menu_references_tracing
+        - identifier: customnav_tracingnav_trace_analytics
+          name: "Trace Analytics"
+          url: "tracing/advanced_usage/trace_analytics"
+          weight: 205
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_custom_tagging
           name: "Custom Tagging"
-          url: "#custom-tagging"
+          url: "tracing/advanced_usage/custom_tagging"
           weight: 210
+          parent: customnav_tracingnav_advanced_usage
+        - identifier: customnav_tracingnav_agent_hostname
+          name: "Change Agent Hostname"
+          url: "tracing/advanced_usage/change_agent_hostname"
+          weight: 215
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_manual_tracing
           name: "Manual Instrumentation"
-          url: "#manual-instrumentation"
+          url: "tracing/advanced_usage/manual_instrumentation"
           weight: 220
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_open_tracing
           name: "OpenTracing"
-          url: "#opentracing"
+          url: "tracing/advanced_usage/opentracing"
           weight: 230
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_distributed_tracing
           name: "Distributed Tracing"
-          url: "#distributed-tracing"
+          url: "tracing/advanced_usage/distributed_tracing"
           weight: 240
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_sampling
           name: "Priority Sampling"
-          url: "#priority-sampling"
+          url: "tracing/advanced_usage/priority-sampling"
           weight: 250
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_logging
-          name: "Logging"
-          url: "#logging"
+          name: "Correlate Traces and Logs"
+          url: "tracing/advanced_usage/correlate_traces_and_logs"
           weight: 260
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_debugging
           name: "Debugging"
-          url: "#debugging"
+          url: "tracing/advanced_usage/debugging"
           weight: 270
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_security
           name: "Security"
-          url: "#security"
+          url: "tracing/advanced_usage/security"
           weight: 280
           parent: customnav_tracingnav_advanced_usage
 
