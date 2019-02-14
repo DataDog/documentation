@@ -651,11 +651,6 @@ languages:
           url: "tracing/advanced_usage/"
           weight: 20
           parent: menu_references_tracing
-        - identifier: customnav_tracingnav_trace_analytics
-          name: "Trace Analytics"
-          url: "tracing/advanced_usage/trace_analytics"
-          weight: 205
-          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_custom_tagging
           name: "Custom Tagging"
           url: "tracing/advanced_usage/custom_tagging"
@@ -1902,11 +1897,6 @@ languages:
           url: "tracing/advanced_usage/"
           weight: 20
           parent: menu_references_tracing
-        - identifier: customnav_tracingnav_trace_analytics
-          name: "Trace Analytics"
-          url: "tracing/advanced_usage/trace_analytics"
-          weight: 205
-          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_custom_tagging
           name: "Custom Tagging"
           url: "tracing/advanced_usage/custom_tagging"
