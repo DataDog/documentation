@@ -1,7 +1,7 @@
 ---
 title: Get a monitor downtime
 type: apicontent
-order: 9.5
+order: 10.5
 external_redirect: /api/#get-a-monitor-downtime
 ---
 

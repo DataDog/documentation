@@ -281,4 +281,4 @@ Les tags peuvent être utilisés de diverses façons avec l'[API][18]. Cliquez s
 [28]: /fr/api/?lang=python#monitors-search
 [29]: /fr/api/?lang=python#monitors-group-search
 [30]: /fr/api/?lang=python#create-a-screenboard
-[31]: /fr/api/?lang=python#create-a-timeboard
+[31]: /fr/api/?lang=python#create-a-dashboard

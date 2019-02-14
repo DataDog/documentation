@@ -1,7 +1,7 @@
 ---
 title: Get all embeds
 type: apicontent
-order: 10.1
+order: 11.1
 external_redirect: /api/#get-all-embeds
 ---
 

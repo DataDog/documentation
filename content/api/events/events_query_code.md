@@ -1,7 +1,7 @@
 ---
 title: Query the event stream
 type: apicode
-order: 11.4
+order: 12.4
 external_redirect: /api/#query-the-event-stream
 ---
 
