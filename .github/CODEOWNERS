@@ -5,3 +5,4 @@
 *.html  @DataDog/corpweb
 *.scss  @DataDog/corpweb
 *.css   @DataDog/corpweb
+*.py    @DataDog/corpweb
