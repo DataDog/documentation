@@ -1,7 +1,7 @@
 ---
 title: Delete Items from a Dashboard List
 type: apicontent
-order: 8.9
+order: 9.9
 external_redirect: /api/#delete-items-from-a-dashboard-list
 ---
 

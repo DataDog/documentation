@@ -1,7 +1,7 @@
 ---
 title: Post timeseries points
 type: apicode
-order: 16.2
+order: 17.2
 external_redirect: /api/#post-time-series-points
 ---
 

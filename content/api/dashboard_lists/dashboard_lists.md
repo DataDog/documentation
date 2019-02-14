@@ -1,7 +1,7 @@
 ---
 title: Dashboard Lists
 type: apicontent
-order: 8
+order: 9
 external_redirect: /api/#dashboard-lists
 ---
 

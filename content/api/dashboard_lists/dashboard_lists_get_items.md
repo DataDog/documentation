@@ -1,7 +1,7 @@
 ---
 title: Get Items of a Dashboard List
 type: apicontent
-order: 8.6
+order: 9.6
 external_redirect: /api/#get-items-of-a-dashboard-list
 ---
 
