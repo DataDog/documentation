@@ -7,7 +7,7 @@ integration_title: Sidekiq
 is_public: true
 kind: integration
 name: sidekiq
-public_title: Datadog-Stunnel Integration
+public_title: Datadog-Sidekiq Integration
 short_description: Gather your logs from Sidekiq and send them to Datadog.
 ---
 
