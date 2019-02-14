@@ -7,12 +7,11 @@ The correlation between Datadog APM and Datadog Log Management is improved by au
 
 {{< img src="tracing/trace_id_injection.png" alt="Logs in Traces" responsive="true" style="width:100%;">}}
 
+
+## Automatic Trace ID Injection
+
 {{< tabs >}}
 {{% tab "Java" %}}
-
-Use one of the following options to inject Java trace information into your logs:
-
-**Automatic Trace ID Injection**
 
 Enable injection in the Java Tracer's [configuration][1] by setting `Ddd.logs.injection=true` or through environment variable `DD_LOGS_INJECTION=true`.
 
@@ -24,7 +23,108 @@ If the logs are already JSON formatted, there is nothing left to do. If the logs
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
-**Manual Trace ID Injection**
+[1]: https://docs.datadoghq.com/tracing/languages/java/#configuration
+{{% /tab %}}
+{{% tab "Python" %}}
+
+Use one of the following options to inject Python trace information into your logs:
+
+**Automatic Trace ID Injection With Standard Library Logging**
+
+Enable injection with the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
+
+**Note**: The standard library `logging` is supported for auto-injection. Any libraries, such as `json_log_formatter`, that extend the standard library module are also supported for auto-injection. `ddtrace-run` calls `logging.basicConfig` before executing your application. If the root logger has a handler configured, your application must modify the root logger and handler directly.
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+Use one of the following options to inject Ruby trace information into your logs:
+
+**Automatic Trace ID Injection for Rails Applications using Lograge (recommended)**
+
+After [setting up Lograge in a Rails application][1], modify the `custom_options` block in your environment configuration file (e.g. `config/environments/production.rb`) to add the trace IDs:
+
+```ruby
+config.lograge.custom_options = lambda do |event|
+  # Retrieves trace information for current thread
+  correlation = Datadog.tracer.active_correlation
+
+  {
+    # Adds IDs as tags to log output
+    :dd => {
+      :trace_id => correlation.trace_id,
+      :span_id => correlation.span_id
+    },
+    :ddsource => ["ruby"],
+    :params => event.payload[:params].reject { |k| %w(controller action).include? k }
+  }
+end
+```
+
+**Automatic Trace ID Injection for default Rails Applications**
+
+Rails applications which are configured with a `ActiveSupport::TaggedLogging` logger can append trace IDs as tags to log output. The default Rails logger implements this tagged logging, making it easier to add trace tags.
+
+In your Rails environment configuration file (e.g. `config/environments/production.rb`), add the following:
+
+```ruby
+Rails.application.configure do
+  config.log_tags = [proc { Datadog.tracer.active_correlation.to_s }]
+end
+```
+
+This appends trace tags to web requests:
+
+```
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Started GET "/articles" for 172.22.0.1 at 2019-01-16 18:50:57 +0000
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Processing by ArticlesController#index as */*
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206]   Article Load (0.5ms)  SELECT "articles".* FROM "articles"
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
+```
+
+[1]: https://docs.datadoghq.com/logs/log_collection/ruby
+{{% /tab %}}
+{{% tab "Go" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+Enable injection with the environment variable `DD_LOGS_INJECTION=true` or by configuring the tracer directly:
+
+```javascript
+const tracer = require('dd-trace').init({
+  logInjection: true
+})
+```
+
+This enables automatic trace ID injection for `winston`, `bunyan`, and `pino`.
+
+**Note**: Automatic injection only works for logs formatted as JSON.
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+
+[1]: /help
+{{% /tab %}}
+{{< /tabs >}}
+
+
+## Manual Trace ID injection
+
+{{< tabs >}}
+{{% tab "Java" %}}
 
 If you prefer to manually correlate your traces with your logs, leverage the Datadog API to retrieve correlation identifiers:
 
@@ -79,23 +179,14 @@ Then update your logger configuration to include `dd.trace_id` and `dd.span_id` 
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
-**Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][3].
+**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][2].
 
-[See our Java logging documentation][2] for more details about specific logger implementation or to learn how to log in JSON.
+[See our Java logging documentation][1] for more details about specific logger implementation or to learn how to log in JSON.
 
-[1]: https://docs.datadoghq.com/tracing/languages/java/#configuration
-[2]: https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#raw-format
-[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
+[1]: https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#raw-format
+[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Python" %}}
-
-Use one of the following options to inject Python trace information into your logs:
-
-**Automatic Trace ID Injection With Standard Library Logging**
-
-Enable injection with the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
-
-**Note**: The standard library `logging` is supported for auto-injection. Any libraries, such as `json_log_formatter`, that extend the standard library module are also supported for auto-injection. `ddtrace-run` calls `logging.basicConfig` before executing your application. If the root logger has a handler configured, your application must modify the root logger and handler directly.
 
 **Manual Trace ID Injection with Standard Library Logging**
 
@@ -170,50 +261,6 @@ Once the logger is configured, executing a traced function that logs an event yi
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Use one of the following options to inject Ruby trace information into your logs:
-
-**Automatic Trace ID Injection for Rails Applications using Lograge (recommended)**
-
-After [setting up Lograge in a Rails application][1], modify the `custom_options` block in your environment configuration file (e.g. `config/environments/production.rb`) to add the trace IDs:
-
-```ruby
-config.lograge.custom_options = lambda do |event|
-  # Retrieves trace information for current thread
-  correlation = Datadog.tracer.active_correlation
-
-  {
-    # Adds IDs as tags to log output
-    :dd => {
-      :trace_id => correlation.trace_id,
-      :span_id => correlation.span_id
-    },
-    :ddsource => ["ruby"],
-    :params => event.payload[:params].reject { |k| %w(controller action).include? k }
-  }
-end
-```
-
-**Automatic Trace ID Injection for default Rails Applications**
-
-Rails applications which are configured with a `ActiveSupport::TaggedLogging` logger can append trace IDs as tags to log output. The default Rails logger implements this tagged logging, making it easier to add trace tags.
-
-In your Rails environment configuration file (e.g. `config/environments/production.rb`), add the following:
-
-```ruby
-Rails.application.configure do
-  config.log_tags = [proc { Datadog.tracer.active_correlation.to_s }]
-end
-```
-
-This appends trace tags to web requests:
-
-```
-# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Started GET "/articles" for 172.22.0.1 at 2019-01-16 18:50:57 +0000
-# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Processing by ArticlesController#index as */*
-# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206]   Article Load (0.5ms)  SELECT "articles".* FROM "articles"
-# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
-```
-
 **Manual Trace ID Injection for Ruby Applications**
 
 To add trace IDs to your own logger, add a log formatter which retrieves the trace IDs with `Datadog.tracer.active_correlation`, then add the trace IDs to the message.
@@ -246,19 +293,14 @@ Datadog.tracer.trace('my.operation') { logger.warn('This is a traced operation.'
 # [2019-01-16 18:38:41 +0000][my_app][WARN][dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] This is a traced operation.
 ```
 
-**Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][3].
+**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][2].
 
-See our [Ruby logging documentation][2] to verify the Ruby log integration is properly configured and your ruby logs are automatically parsed.
+See our [Ruby logging documentation][1] to verify the Ruby log integration is properly configured and your ruby logs are automatically parsed.
 
-[1]: https://docs.datadoghq.com/logs/log_collection/ruby
-[2]: https://docs.datadoghq.com/logs/log_collection/ruby/#configure-the-datadog-agent
-[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
+[1]: https://docs.datadoghq.com/logs/log_collection/ruby/#configure-the-datadog-agent
+[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Go" %}}
-
-Use the following example to inject Go trace information into your logs.
-
-**Manual Trace ID Injection for Go**
 
 The Go tracer exposes two API calls to allow printing trace and span identifiers along with log statements using exported methods from `SpanContext` type:
 
@@ -295,21 +337,7 @@ The above example illustrates how to use the span's context in the standard libr
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Use one the following options to inject Node trace information into your logs.
-
-**Automatic Trace ID Injection With Supported Logging Libraries (recommended)**
-
-Enable injection with the environment variable `DD_LOGS_INJECTION=true` or by configuring the tracer directly:
-
-```javascript
-const tracer = require('dd-trace').init({
-  logInjection: true
-})
-```
-
-This enables automatic trace ID injection for `winston`, `bunyan`, and `pino`.
-
-**Note**: Automatic injection only works for logs formatted as JSON.
+Use the following example to inject NodeJS trace information into your logs.
 
 **Manual Trace ID Injection for JSON Formatted Logs**
 
@@ -390,7 +418,6 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
 Use the following example to inject PHP trace information into your logs.
 
-**Manual Trace ID Injection**
 
 ```php
 $span = \DDTrace\GlobalTracer::get()->getActiveSpan();

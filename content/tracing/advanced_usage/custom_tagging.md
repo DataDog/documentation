@@ -3,9 +3,85 @@ title: Custom Tagging
 kind: documentation
 ---
 
-Custom tagging allows adding tags in the form of key-value pairs to specific spans. These tags are used to correlate traces with other Datadog products to provide more details about specific spans.
+Custom tagging allows adding tags in the form of key-value pairs to [a specific spans](#adding-tags-to-a-span) or [globally to all spans](#adding-tags-globally-to-all-spans) produced by your application. [Read more about tagging][1].
 
-[Read more about tagging][1]
+## Adding tags globally to all spans
+
+{{< tabs >}}
+{{% tab "Java" %}}
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+Add tags to all spans by configuring the tracer with the `tracer.set_tags` method:
+
+```python
+from ddtrace import tracer
+
+tracer.set_tags({ 'env': 'prod' })
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+Add tags to all spans by configuring the tracer with the `tags` option:
+
+```ruby
+Datadog.configure do |c|
+  c.tracer tags: { 'env' => 'prod' }
+end
+```
+
+See the [API documentation][1] for more details.
+
+[1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#environment-and-tags
+{{% /tab %}}
+{{% tab "Go" %}}
+
+Add tags to all spans by configuring the tracer with the `tags` option:
+
+```go
+package main
+
+import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+
+func main() {
+    tracer.Start(
+        tracer.WithGlobalTag("datacenter", "us-1"),
+        tracer.WithGlobalTag("env", "prod"),
+    )
+    defer tracer.Stop()
+}
+```
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+**Note**: This feature is not supported with automatic instrumentation.
+
+Manual instrumentations of the tracer can set an associative array of global tags via the `global_tags` configuration key.
+
+```php
+$config = [
+    'global_tags' => [
+        '<TAG_KEY>' => '<TAG_VALUE>',
+    ]
+];
+$tracer = new \DDTrace\Tracer(null, null, $config);
+\DDTrace\GlobalTracer::set($tracer);
+```
+
+{{% /tab %}}
+{{% tab "C++" %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+##  Adding tags to a span
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -47,8 +123,6 @@ class ServletImpl extends AbstractHttpServlet {
 {{% /tab %}}
 {{% tab "Python" %}}
 
-**Adding tags to a span**
-
 Add tags directly to a span by calling `set_tag`. For example, with the following route handler:
 
 ```python
@@ -76,20 +150,8 @@ def handle_customer(customer_id):
     current_span.set_tag('customer.id', customer_id)
 ```
 
-**Adding tags globally to all spans**
-
-Add tags to all spans by configuring the tracer with the `tracer.set_tags` method:
-
-```python
-from ddtrace import tracer
-
-tracer.set_tags({ 'env': 'prod' })
-```
-
 {{% /tab %}}
 {{% tab "Ruby" %}}
-
-**Adding tags to a span**
 
 Add tags directly to `Datadog::Span` objects by calling `#set_tag`:
 
@@ -114,23 +176,8 @@ current_span = Datadog.tracer.active_span
 current_span.set_tag('<TAG_KEY>', '<TAG_VALUE>') unless current_span.nil?
 ```
 
-**Adding tags globally to all spans**
-
-Add tags to all spans by configuring the tracer with the `tags` option:
-
-```ruby
-Datadog.configure do |c|
-  c.tracer tags: { 'env' => 'prod' }
-end
-```
-
-See the [API documentation][1] for more details.
-
-[1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#environment-and-tags
 {{% /tab %}}
 {{% tab "Go" %}}
-
-**Adding tags to a span**
 
 Add tags directly to a `Span` interface by calling `SetTag`:
 
@@ -183,28 +230,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-**Adding tags globally to all spans**
-
-Add tags to all spans by configuring the tracer with the `tags` option:
-
-```go
-package main
-
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-
-func main() {
-    tracer.Start(
-        tracer.WithGlobalTag("datacenter", "us-1"),
-        tracer.WithGlobalTag("env", "prod"),
-    )
-    defer tracer.Stop()
-}
-```
-
 {{% /tab %}}
 {{% tab "Node.js" %}}
-
-**Adding tags to a span**
 
 Add tags directly to span objects by calling `setTag` or `addTags`:
 
@@ -237,8 +264,6 @@ span.setTag('<TAG_KEY>', '<TAG_VALUE>')
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-**Adding tags to a span**
-
 Add tags directly to a `Datadog.Trace.Span` object by calling `Span.SetTag()`. For example:
 
 ```csharp
@@ -258,8 +283,6 @@ span?.SetTag("<TAG_KEY>", "<TAG_VALUE>");
 
 {{% /tab %}}
 {{% tab "PHP" %}}
-
-**Adding tags to a span**
 
 Add tags directly to a `DDTrace\Span` object by calling `Span::setTag()`.
 
@@ -290,39 +313,7 @@ if (null !== $span) {
 
 **Note**: `Tracer::getActiveSpan()` returns `null` if there is no active span.
 
-**Adding tags globally to all spans**
-
-Not supported with automatic instrumentation.
-
-Manual instrumentations of the tracer can set an associative array of global tags via the `global_tags` configuration key.
-
-```php
-$config = [
-    'global_tags' => [
-        '<TAG_KEY>' => '<TAG_VALUE>',
-    ]
-];
-$tracer = new \DDTrace\Tracer(null, null, $config);
-\DDTrace\GlobalTracer::set($tracer);
-```
-
-{{% /tab %}}
-{{% tab "C++" %}}
-
-Add tags directly to a span object by calling `Span::SetTag`. For example:
-
-```cpp
-auto tracer = ...
-auto span = tracer->StartSpan("operation_name");
-span->SetTag("key must be string", "Values are variable types");
-span->SetTag("key must be string", 1234);
-```
-
-Values are of [variable type][1] and can be complex objects. Values are serialized as JSON, with the exception of a string value being serialized bare (without extra quotation marks).
-
-[1]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/value.h
 {{% /tab %}}
 {{< /tabs >}}
-
 
 [1]: /tagging
