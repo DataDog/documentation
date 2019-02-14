@@ -5,7 +5,7 @@ kind: documentation
 
 ## Trace Analytics Configuration
 
-Trace clients can send unsampled trace data to Trace Analytics for querying. Apply the following config to your application to enable this feature.
+[Trace Analytics](/tracing/visualization/search/) is used to filter APM Data by [user-defined tags](#custom-tagging) such as `customer_id`, `error_type` or `app_name` to help troubleshoot and filter your requests. Apply the following config to your application to enable this feature.
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -50,7 +50,7 @@ class SomeClass {
     // Span provided by @Trace annotation.
     if (span != null) {
       span.setTag(DDTags.SERVICE_NAME, "my-custom-service");
-      span.setTag(DDTags.EVENT_SAMPLE_RATE, 1.0);
+      span.setTag(DDTags.ANALYTICS_SAMPLE_RATE, 1.0);
     }
   }
 }
