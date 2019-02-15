@@ -18,9 +18,9 @@ custom_metrics:
 
 Parameter can be read as follow:
 
-| Parameter      | Description                                                                                                                                                   |
-| ------         | ------                                                                                                                                                        |
-| `name`         | Name of your metric inside Datadog.                                                                                                                           |
+| Parameter      | Description                                           |
+| ------         | ------                                                |
+| `name`         | Name of your metric inside Datadog.                   |
 | `counter_name` | The counter name of [SQL server database objects][2]. |
 
 If a counter has multiple instances associated with it. You can choose to only fetch one instance with the `instance_name` parameter name: 
@@ -80,5 +80,6 @@ custom_metrics:
 ```
 
 The above example reports two metrics, `sqlserver.io_file_stats.num_of_reads` and `sqlserver.io_file_stats.num_of_writes` each  tagged with the database id and file id.
+
 [1]: /integrations/sqlserver
 [2]: https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-databases-object
