@@ -109,11 +109,12 @@ Note: SET NOCOUNT to ON inside proc to avoid extra resultsets that prevent valid
 
 You can also specify:
 
-| Parameter                 | Description                                                                                  | Default            |
-| ---------                 | -------                                                                                      | --------           |
-| `ignore_missing_database` | If the DB specified doesn't exist on the server then don't do the check                      | `False`            |
-| `proc_only_if`            | Run this SQL before each call to `stored_procedure`. Only if it returns 1 then call the proc |                    |
-| `proc_only_if_database`   | The database to run the `proc_only_if` SQL in.                                               | database attribute |
+| Parameter                 | Description                                                                                   | Default            |
+| ---------                 | -------                                                                                       | --------           |
+| `ignore_missing_database` | If the DB specified doesn't exist on the server then don't do the check.                      | `False`            |
+| `proc_only_if`            | Run this SQL before each call to `stored_procedure`. Only if it returns 1 then call the proc. |                    |
+| `proc_only_if_database`   | The database to run the `proc_only_if` SQL in.                                                | database attribute |
+
 
 **Note**: The `proc_only_if` guard condition is useful for HA scenarios where a database can move between servers.
 
