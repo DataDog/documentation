@@ -5,6 +5,7 @@ kind: faq
 
 By default the [Datadog-SQL server Check][1] only captures *some* of the metrics available in the `sys.dm_os_performance_counters` table. Add additional metrics by following the `custom_metrics` structure.
 
+## Collecting metrics from DMV
 
 Find below an example for a basic custom metric collection. There is no instance associated with this counter. Note that you can specify optional `tags` to be sent with your metrics:
 
@@ -80,6 +81,41 @@ custom_metrics:
 ```
 
 The above example reports two metrics, `sqlserver.io_file_stats.num_of_reads` and `sqlserver.io_file_stats.num_of_writes` each  tagged with the database id and file id.
+
+## Collecting metrics from a custom proc
+
+As well as capturing from the DMV you can also capture from a custom proc
+Please note this feature produces a number of custom metrics that might affect your billing. This feature is also only available when using the adodbapi driver (set by default)
+
+To use this feature, specify in your instance definition inside the `sqlserver.d/conf.yaml` file the the procedure to execute:
+
+```
+stored_procedure: <PROCEDURE_NAME>
+```
+
+The proc should return this table:
+
+```
+CREATE TABLE #Datadog
+(
+  [metric] varchar(255) not null,
+  [type] varchar(50) not null,
+  [value] float not null,
+  [tags] varchar(255)
+)
+```
+
+Note: SET NOCOUNT to ON inside proc to avoid extra resultsets that prevent valid query results
+
+You can also specify:
+
+| Parameter                 | Description                                                                                  | Default            |
+| ---------                 | -------                                                                                      | --------           |
+| `ignore_missing_database` | If the DB specified doesn't exist on the server then don't do the check                      | `False`            |
+| `proc_only_if`            | Run this SQL before each call to `stored_procedure`. Only if it returns 1 then call the proc |                    |
+| `proc_only_if_database`   | The database to run the `proc_only_if` SQL in.                                               | database attribute |
+
+**Note**: The `proc_only_if` guard condition is useful for HA scenarios where a database can move between servers.
 
 [1]: /integrations/sqlserver
 [2]: https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-databases-object
