@@ -1115,6 +1115,11 @@ languages:
           url: "developers/integrations/legacy"
           weight: 903
           parent: customnav_integrationsnav_new_integration
+        - identifier: customnav_integrationsnav_new_guides
+          name: "Guides"
+          url: "developers/guide/"
+          weight: 95
+          parent: menu_references_developers
         #- identifier: customnav_developersnav_faq
         #  name: "FAQ"
         #  url: "developers/faq/"
