@@ -4,4 +4,11 @@
     <a href="{{.Site.Params.corp_url}}{{$announce.link}}">{{$announce.text | safeHTML }}</a>
     <i class="icon icon-small-x pull-right"></i>
 </div>
+<script>
+    var announcement_banner;
+    announcement_banner = sessionStorage.getItem('announcement_banner');
+    if (announcement_banner !== 'closed') {
+        document.getElementsByClassName('announcement_banner')[0].classList.add('open');
+    }
+</script>
 {{ end }}
