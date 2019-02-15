@@ -1115,9 +1115,7 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Distributed tracing is disabled by default. Refer to the configuration documentation for each framework to enable it.
-
-Distributed tracing is supported in the following frameworks:
+Distributed tracing is enabled by default and supported in the following frameworks:
 
 | Framework/Library | API Documentation                                                   |
 | ----------------- | :------------------------------------------------------------------ |
