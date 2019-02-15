@@ -61,8 +61,7 @@ test_preview_link_checks:
     URL: ${PREVIEW_DOMAIN}
     DISALLOW_BOTS: "1"
   script:
-    - npm install https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/link-checker-v1.0.50.tgz
-    - node ./node_modules/link-checker/dd-link-checker.js -e preview -c ${CI_PROJECT_DIR}/link-check-config.js
+    - node /etc/node_modules/link-checker/dd-link-checker.js -e preview -c ${CI_PROJECT_DIR}/link-check-config.js
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
