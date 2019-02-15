@@ -4,5 +4,6 @@ kind: guide
 ---
 
 {{< whatsnext desc="General Guides:" >}}
-    {{< nextlink href="integrations/guide/freshservice-tickets-using-webhooks" >}}Freshservice Tickets using Webhooks{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/freshservice-tickets-using-webhooks" tag="Webhooks" >}}Freshservice Tickets using Webhooks{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/collect-sql-server-custom-metrics" tag="SQL server" >}}Collect SQL server custom metrics{{< /nextlink >}}
 {{< /whatsnext >}}
