@@ -1,22 +1,21 @@
 ---
-title: I want my application deployed in a container through ElasticBeanstalk to talk to DogStatsD
+title: I want my application deployed in a container through Elastic Beanstalk to talk to DogStatsD
 kind: faq
 ---
 
-Beanstalk allows to deploy only a single container per instance and doesn't support docker links as well.
+Beanstalk allows you to deploy only a single container per instance, and it also doesn't support Docker links.
 
-Thus it is not obvious how to have your application talk to [DogStatsD server][1] when deploying it on AWS via Elastic Beanstalk.
+Thus, it is not obvious how to have your application talk to the [DogStatsD server][1] when deploying it on AWS via Elastic Beanstalk.
 
-We suggest you the following workaround:
+Datadog suggests the following workaround:
 
-1. expose the [DogStatsD server][1] port when you run the `dd-agent` container.
-2. use the docker bridge ip address to send data from within a container to this port.
+1. Expose the [DogStatsD server][1] port when you run the `dd-agent` container.
+2. Use the Docker bridge IP address to send data from within a container to this port.
 
-More details on achieving that kind of network traffic can be found here :
+[See this external blog post][2] for more details on achieving this type of network traffic.
 
-http://blog.michaelhamrah.com/2014/06/accessing-the-docker-host-server-within-a-container/
-This is not an optimal solution but this should work just fine.
-
-Also if you are going with this solution, putting `dd-agent` inside a container is not really necessary, put it on the docker host by following the regular instructions https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk/
+If you choose to follow this workaround, putting `dd-agent` inside a container is not necessary. Put it on the Docker host by following the [instructions in this Datadog blog post][3].
 
 [1]: /developers/dogstatsd
+[2]: http://blog.michaelhamrah.com/2014/06/accessing-the-docker-host-server-within-a-container/
+[3]: https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk/
