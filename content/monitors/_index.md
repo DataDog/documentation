@@ -13,7 +13,7 @@ description: Create & manage your notifications
 
 Monitoring all of your infrastructure in one place wouldn't be complete without the ability to know when critical changes are occurring. Datadog gives you the ability to create monitors that actively check metrics, integration availability, network endpoints, and more.
 
-Once a monitor is created, you are notified when its conditions are met. You can also notify team members via email, 3rd party services (e.g. Pagerduty or Stride), or other custom endpoints via Webhooks.
+Once a monitor is created, you are notified when its conditions are met. You can also notify team members via email, 3rd party services (e.g. Pagerduty), or other custom endpoints via Webhooks.
 
 Triggered monitors appear in the [event stream][1], allowing collaboration around active issues in your applications or infrastructure. Datadog provides a high-level view of open issues on the [Triggered Monitors][2] page as well as general monitor management on the [Manage Monitors][3] page.
 

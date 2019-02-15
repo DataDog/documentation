@@ -13,7 +13,7 @@ further_reading:
   text: "Building Better Dashboards"
 ---
 
-Graphs are the window to your monitored systems. You see graphs throughout Datadog, in email notifications, Slack, HipChat, and other chat clients. Graphs are at the center of monitoring and observability, so it is essential to understand how to define graphs.
+Graphs are the window to your monitored systems. You see graphs throughout Datadog, in email notifications, Slack, and other chat clients. Graphs are at the center of monitoring and observability, so it is essential to understand how to define graphs.
 
 ## The graphing editor
 
