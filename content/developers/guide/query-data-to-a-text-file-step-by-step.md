@@ -1,6 +1,8 @@
 ---
 title: Query data to a text file, step by step
-kind: faq
+kind: guide
+aliases:
+  - /developers/faq/query-data-to-a-text-file-step-by-step
 ---
 
 This article explains how to set up an environment to make the most of the Datadog API. At the end, you will be able to pull or push events, metrics, and monitors from [Datadog's public API][1] to a local file.

@@ -1,6 +1,8 @@
 ---
 title: Dogshell, Quickly Use Datadog's API from Terminal/Shell
-kind: faq
+kind: guide
+aliases:
+  - /developers/faq/dogshell-quickly-use-datadog-s-api-from-terminal-shell
 ---
 
 You can use the Datadog API straight from terminal/shell by using a wrapper called `dogshell`.

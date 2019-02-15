@@ -1,53 +1,21 @@
 ---
-title: Developers FAQ
-kind: faq
-private: true
+title: Developer Guides
+kind: guide
 ---
 
 ## General
 
-* [How to remove the `host` tag when submitting metrics via dogstatsD][1]
-* [What do @ notifications do in Datadog?][2]
 * [What best practices are recommended for naming metrics and tags?][3]
 
-## Metrics
-
-* [Why is my counter metric showing decimal values?][4]
-* [Characteristics of Datadog histograms.][5]
-* [Submitting Metrics via PowerShell][6]
-
-## DogStatsD
-
-* [How Can I Submit A Custom Status Check?][8]
-* [(dog)statsd sample_rate parameter explained][9]
-
-* [Reduce submission rate][10]
-
-## APIs, Libraries and Community Contributions
-
-### API
+## API
 
 * [Query the Infrastructure List via the API][11]
-* [Use our Webhook Integration to create a trello card][12]
 * [Using Postman With Datadog APIs][13]
 * [Calling on Datadog's API with the Webhooks Integration][14]
 * [Dogshell, Quickly Use Datadog's API from Terminal/Shell][15]
 * [Query data to a text file, step by step][16]
-* [How to post AppDynamics events to Datadog][17]
-* [I'm receiving a 202 but not seeing data][18]
-* [Data aggregation with DogStatsD/Threadstats][19]
-* [Is there an alternative to DogStatsD and the api to submit metrics? Threadstats][20]
-* [I want my application deployed in a container through ElasticBeanstalk to talk to DogStatsD][21]
-* [Can I call scripts and generate events from their results?][22]
 
-### Libraries and Community Contributions
 
-* [OmniOS (and possibly OpenIndiana/Nexenta): install from source by tweaking the Agent install script ][23]
-* [Is it possible to integrate with ThousandEyes?][24]
-* [Deploying the Agent on RaspberryPI][25]
-* [How to Monitor Logs with Loggly Live Tail and Datadog][26]
-* [Hubot Script - Request snapshots in chat using the Datadog API][27]
-* [How do I collect metrics from Heroku with Datadog?][28]
 
 [1]: /developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd
 [2]: /developers/faq/what-do-notifications-do-in-datadog
