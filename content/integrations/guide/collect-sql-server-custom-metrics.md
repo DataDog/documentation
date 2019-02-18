@@ -93,9 +93,7 @@ The above example reports two metrics, `sqlserver.io_file_stats.num_of_reads` an
 
 ## Collecting metrics from a custom procedure
 
-As well as capturing from the DMV you can also capture from a custom procedure
-
-**Note**: Collecting metrics from a custom procedure produces a large amount of custom metrics that may affect your billing. Also, this feature is only available when using the `adodbapi` driver (set by default).
+Collecting metrics from a custom procedure produces a large amount of custom metrics that may affect your billing. Also, this feature is only available when using the `adodbapi` driver (set by default).
 
 ### Setup a Stored Procedure
 
