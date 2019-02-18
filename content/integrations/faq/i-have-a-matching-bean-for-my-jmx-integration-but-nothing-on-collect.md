@@ -11,7 +11,7 @@ Trouble setting up your JMX integration ? Here are a few great articles to get y
 * [Collecting Composite type JMX attributes][4]
 * [How to run JMX commands in Windows?][5]
 
-Now, if everything is set up properly as described in the above articles, and your metric appears in [Agent log file][6] but not in the [status command][1], there is probably an issue with the `metric_type` your using.
+If everything is set up properly as described in the above articles, *and* your metric appears in the [Agent log file][6] (but *not* in the [status command][1]), then there is probably an issue with the `metric_type` that you're using.
 
 Here is the output of the  `list_matching_attributes.log` file :
 ```
@@ -20,7 +20,7 @@ Matching: 0/350. Bean name: Hadoop:service=HBase,name=Master,sub=Server - Attrib
 
 ## How can I solve this?
 
-Go to you [Agent Log file][6] and search for errors similar to these ones :
+Go to your [Agent Log file][6] and search for errors similar to the following:
 
 ```
 2016-12-05 03:08:33,261 | WARN | JMXAttribute | Unable to get metrics from Hadoop:service=HBase,name=Master,sub=Server - tag.isActiveMaster
@@ -36,7 +36,7 @@ Check your `jmx.yaml` file, the following excerpt should show something similar:
 
 The `java.lang.String` metric_type confirms the issue you were seeing in the logs.
 
-To resolve this issue, change the associated metric_type, and have your `jmx.yaml` look like this :
+To resolve this issue, change the associated metric_type, and ensure that your `jmx.yaml` file has the following configuration:
 
 {{< img src="integrations/faq/jmx_metric_type.png" alt="jmx_metric_type" responsive="true" >}}
 
