@@ -69,7 +69,7 @@ curl -X POST -H "Content-type: application/json" -d "{\"name\":\"${ROLENAME}\"}"
 ### Update Role
 
 Description: Updates an existing role's name. Returns role name and uuid.  
-Method: POST  
+Method: PUT  
 Endpoint: `api/v1/role/$ROLE_UUID`  
 Required Payload: "name"  
 Example:

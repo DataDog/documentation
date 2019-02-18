@@ -27,6 +27,8 @@ Using the Datadog Cluster Agent helps you to:
 * isolate node-based Agents to their respective nodes, reducing RBAC rules to solely read metrics and metadata from the kubelet.
 * leverage horizontal pod autoscaling with custom Kubernetes metrics. Refer to [the dedicated guide][1] for more details about this feature.
 
+**Note**: To leverage all features from the Datadog Cluster Agent, you must run Kubernetes v1.10+.
+
 ## Setup
 
 ### Configure RBAC permissions for the Cluster Agent
