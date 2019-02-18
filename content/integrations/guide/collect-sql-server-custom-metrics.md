@@ -1,6 +1,15 @@
 ---
 title: Collect SQL Server Custom Metrics
 kind: faq
+aliases:
+  - /integrations/faq/how-to-collect-metrics-with-sql-stored-procedure/
+further_reading:
+- link: "https://www.datadoghq.com/blog/sql-server-metrics/#create-a-stored-procedure-to-generate-and-collect-metrics"
+  tag: "Blog"
+  text: "Create a stored procedure to generate and collect metrics"
+- link: "integrations/mysql/"
+  tag: "Documentation"
+  text: "Datadog-MySQL integration"
 ---
 
 By default the [Datadog-SQL server Check][1] only captures *some* of the metrics available in the `sys.dm_os_performance_counters` table. Add additional metrics by following the `custom_metrics` structure.
@@ -82,30 +91,84 @@ custom_metrics:
 
 The above example reports two metrics, `sqlserver.io_file_stats.num_of_reads` and `sqlserver.io_file_stats.num_of_writes` each tagged with the database ID and file ID.
 
-## Collecting metrics from a custom proc
+## Collecting metrics from a custom procedure
 
-As well as capturing from the DMV you can also capture from a custom proc
-Please note this feature produces a number of custom metrics that might affect your billing. This feature is also only available when using the adodbapi driver (set by default)
+As well as capturing from the DMV you can also capture from a custom procedure
+
+**Note**: Collecting metrics from a custom procedure produces a large amount of custom metrics that may affect your billing. Also, this feature is only available when using the `adodbapi` driver (set by default).
+
+### Setup a Stored Procedure
+
+A temporary table must be setup to collect the custom metrics for reporting to Datadog. The table needs the following columns:
+
+| Column   | Description                                               |
+| -----    | ----                                                      |
+| `metric` | The name of the metric as it appears in Datadog.          |
+| `type`   | The [metric type][3] (gauge, rate, or [histogram][4]).    |
+| `value`  | The value of the metric (must be convertible to a float). |
+| `tags`   | The tags that appear in Datadog separated by a comma.     |
+
+The following stored procedure is created within the master database:
+
+```
+-- Create a stored procedure with the name <PROCEDURE_NAME>
+CREATE PROCEDURE [dbo].[<PROCEDURE_NAME>]
+AS
+BEGIN
+
+  -- Create a temporary table per integration instructions
+  CREATE TABLE #DataDog
+  (
+    [metric] varchar(255) not null,
+    [type] varchar(50) not null,
+    [value] float not null,
+    [tags] varchar(255)
+  )
+
+  -- Remove row counts from result sets
+  SET NOCOUNT ON;
+
+  -- Create variable count and set it equal to the number of User Connections
+  DECLARE @count float;
+  SET @count = (select cntr_value from sys.dm_os_performance_counters where counter_name = 'User Connections');
+
+  -- Insert custom metrics into the table #Datadog
+  INSERT INTO #Datadog (metric, type, value, tags)
+  VALUES ('sql.test.test', 'gauge', @count, 'db:master,env:staging')
+        ,('sql.test.gauge', 'gauge', FLOOR(RAND()*20), 'tag:test')
+        ,('sql.test.rate', 'rate', FLOOR(RAND()*20), 'metric:gauge')
+        ,('sql.test.histogram', 'histogram', FLOOR(RAND()*20), 'metric:histogram')
+  SELECT * from #DataDog
+END
+GO
+
+-- Grant permission to run the stored procedure
+GRANT EXECUTE ON [dbo].[<PROCEDURE_NAME>] To Public
+GO
+```
+
+The stored procedure outputs the following custom metrics:
+
+- `sql.test.test`
+- `sql.test.gauge`
+- `sql.test.rate`
+- `sql.test.histogram.95percentile`
+- `sql.test.histogram.avg`
+- `sql.test.histogram.count`
+- `sql.test.histogram.max`
+- `sql.test.histogram.median`
+
+### Update the SQL Server integration configuration
 
 To collect metrics from a custom procedure, update the instance definition inside your `sqlserver.d/conf.yaml` file with the procedure to execute:
 
 ```
-stored_procedure: <PROCEDURE_NAME>
+  - host: 127.0.0.1,1433
+    username: datadog
+    password: <PASSWORD>
+    stored_procedure: <PROCEDURE_NAME>
+    database: master
 ```
-
-The procedure should return this table:
-
-```
-CREATE TABLE #Datadog
-(
-  [metric] varchar(255) not null,
-  [type] varchar(50) not null,
-  [value] float not null,
-  [tags] varchar(255)
-)
-```
-
-**Note**: SET NOCOUNT to ON inside the procedure to avoid extra result sets that prevent valid query results.
 
 You can also specify:
 
@@ -118,5 +181,11 @@ You can also specify:
 
 **Note**: The `proc_only_if` guard condition is useful for HA scenarios where a database can move between servers.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /integrations/sqlserver
 [2]: https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-databases-object
+[3]: /developers/metrics/#metric-types
+[4]: /developers/metrics/histograms/
