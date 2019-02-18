@@ -110,42 +110,41 @@ aliases:
 * [Can I collect SQL Server performance metrics beyond what is available in the sys.dm_os_performance_counters table? Try WMI][61]
 * [How can I collect more metrics from my SQL Server integration?][62]
 * [Database user lacks privileges][63]
-* [How to collect metrics with a SQL Stored Procedure?][64]
 
 ## Network
-* [How to send TCP/UDP host metrics via the Datadog API ?][65]
+* [How to send TCP/UDP host metrics via the Datadog API ?][64]
 
 ## Postgres
-* [Postgres custom metric collection explained][66]
+* [Postgres custom metric collection explained][65]
 
 ## RabbitMQ
 
-* [Tagging RabbitMQ queues by tag family][67]
+* [Tagging RabbitMQ queues by tag family][66]
 
 ## Redis
 
-* [Redis Integration Error: "unknown command 'CONFIG'"][68]
+* [Redis Integration Error: "unknown command 'CONFIG'"][67]
 
 ## SNMP
 
-* [For SNMP, does Datadog have a list of commonly used/compatible OIDs?  ][69]
+* [For SNMP, does Datadog have a list of commonly used/compatible OIDs?  ][68]
 
 ## Unix
-* [How can I gather metrics from the UNIX shell?][70]
+* [How can I gather metrics from the UNIX shell?][69]
 
 ## VMWare
-* [Can I limit the number of VMs that are pulled in via the VMWare integration?][71]
+* [Can I limit the number of VMs that are pulled in via the VMWare integration?][70]
 
 ## Webhooks
-* [How to make a Trello Card using Webhooks][72]
+* [How to make a Trello Card using Webhooks][71]
 
 ## Windows
 
-* [How to add event log files to the `Win32_NTLogEvent` WMI class][73]
-* [Collect Custom Windows Performance Counters over WMI][74]
-* [Windows Status Based Check][75]
-* [How to monitor events from the Windows Event Logs][76]
-* [How to retrieve WMI metrics][77]
+* [How to add event log files to the `Win32_NTLogEvent` WMI class][72]
+* [Collect Custom Windows Performance Counters over WMI][73]
+* [Windows Status Based Check][74]
+* [How to monitor events from the Windows Event Logs][75]
+* [How to retrieve WMI metrics][76]
 
 [1]: /integrations/faq/what-standard-integrations-emit-custom-metrics
 [2]: /integrations/faq/using-events-for-service-checks-is-deprecated-in-favor-of-monitors
@@ -210,17 +209,16 @@ aliases:
 [61]: /integrations/faq/can-i-collect-sql-server-performance-metrics-beyond-what-is-available-in-the-sys-dm-os-performance-counters-table-try-wmi
 [62]: /integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration
 [63]: /integrations/faq/database-user-lacks-privileges
-[64]: /integrations/faq/how-to-collect-metrics-with-sql-stored-procedure
-[65]: /integrations/faq/how-to-send-tcp-udp-host-metrics-via-the-datadog-api
-[66]: /integrations/faq/postgres-custom-metric-collection-explained
-[67]: /integrations/faq/tagging-rabbitmq-queues-by-tag-family
-[68]: /integrations/faq/redis-integration-error-unknown-command-config
-[69]: /integrations/faq/for-snmp-does-datadog-have-a-list-of-commonly-used-compatible-oids
-[70]: https://github.com/DataDog/Miscellany/tree/master/custom_check_shell
-[71]: /integrations/faq/can-i-limit-the-number-of-vms-that-are-pulled-in-via-the-vmware-integration
-[72]: /integrations/faq/how-to-make-trello-card-using-webhooks
-[73]: /integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class
-[74]: /integrations/faq/collect-custom-windows-performance-counters-over-wmi
-[75]: /integrations/faq/windows-status-based-check
-[76]: /integrations/faq/how-to-monitor-events-from-the-windows-event-logs
-[77]: /integrations/faq/how-to-retrieve-wmi-metrics
+[64]: /integrations/faq/how-to-send-tcp-udp-host-metrics-via-the-datadog-api
+[65]: /integrations/faq/postgres-custom-metric-collection-explained
+[66]: /integrations/faq/tagging-rabbitmq-queues-by-tag-family
+[67]: /integrations/faq/redis-integration-error-unknown-command-config
+[68]: /integrations/faq/for-snmp-does-datadog-have-a-list-of-commonly-used-compatible-oids
+[69]: https://github.com/DataDog/Miscellany/tree/master/custom_check_shell
+[70]: /integrations/faq/can-i-limit-the-number-of-vms-that-are-pulled-in-via-the-vmware-integration
+[71]: /integrations/faq/how-to-make-trello-card-using-webhooks
+[72]: /integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class
+[73]: /integrations/faq/collect-custom-windows-performance-counters-over-wmi
+[74]: /integrations/faq/windows-status-based-check
+[75]: /integrations/faq/how-to-monitor-events-from-the-windows-event-logs
+[76]: /integrations/faq/how-to-retrieve-wmi-metrics
