@@ -111,39 +111,52 @@ To install the chart with the release name `<RELEASE_NAME>`, retrieve your Datad
 helm install --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
 ```
 
-Refer to the section below for a list of configurable parameters.
-
 This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. It also optionally deploys the [kube-state-metrics chart][5] and uses it as an additional source of metrics about the cluster. A few minutes after installation, Datadog begins to report hosts and metrics.
 
-### Configuration
+**Note**: For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository README][6]. 
 
-For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository readme][6].
+## Configuring the Datadog Helm chart
 
-Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
+As a best practice, a YAML file that specifies the values for the chart parameters should be provided to configure the chart: 
 
-```bash
-helm install --name <RELEASE_NAME> \
-  --set datadog.apiKey=<DATADOG_API_KEY>,datadog.logLevel=DEBUG \
-  stable/datadog
-```
-
-Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example:
+1.  **Copy the default [`datadog-values.yaml`][7] value file.**
+2.  Set the `apiKey` parameter with your [Datadog API key][4].
+3. Upgrade the Datadog Helm chart with the new `datadog-values.yaml` file:
 
 ```bash
-helm install --name <RELEASE_NAME> -f my-values.yaml stable/datadog
+helm upgrade -f datadog-values.yaml <RELEASE_NAME> stable/datadog --recreate-pods
 ```
 
-You can copy and customize the default [values.yaml][7].
+### Enable Log Collection
 
-## Upgrading the chart
+Update your [datadog-values.yaml][7] file with the following log collection configuration, then upgrade your Datadog Helm chart:
 
-Use the `helm upgrade` command to upgrade to a new version of the chart, or to change the configuration of your release. 
-
-```bash
-helm upgrade -f my-values.yaml <RELEASE_NAME> stable/datadog --recreate-pods
+```
+datadog:
+  (...)
+ logsEnabled: true
+ logsConfigContainerCollectAll: true
 ```
 
-## Enabling integrations with Helm
+### Enabling Process Collection
+
+Update your [datadog-values.yaml][7] file with the process collection configuration, then upgrade your Datadog Helm chart:
+
+```
+datadog:
+  (...)
+  processAgentEnabled: true
+  volumes:
+    - hostPath:
+      path: /etc/passwd
+      name: passwd
+  volumeMounts:
+    - name: passwd
+      mountPath: /etc/passwd
+      readOnly: true
+```
+
+### Enabling integrations with Helm
 
 The Datadog [entrypoint][8] copies files with a `.yaml` extension found in `/conf.d` and files with `.py` extension in `/check.d` to `/etc/datadog-agent/conf.d` and `/etc/datadog-agent/checks.d` respectively. The keys for `datadog.confd` and `datadog.checksd` should mirror the content found in their respective ConfigMaps, i.e.:
 
