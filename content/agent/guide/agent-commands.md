@@ -18,6 +18,7 @@ For Linux based systems where the <code>service</code> wrapper command is not av
 ## Start, Stop, and Restart the Agent 
 
 ### Start the Agent
+
 List of commands to start the Datadog Agent:
 
 {{< tabs >}}
