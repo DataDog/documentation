@@ -44,9 +44,9 @@ Datadog tracing can be enabled in one of two ways:
 ```bash
 # Gets the latest release version number from Github.
 get_latest_release() {
-  curl --silent "https://api.github.com/repos/$1/releases/latest" |
+  wget -qO- "https://api.github.com/repos/$1/releases/latest" |
     grep '"tag_name":' |
-    sed -E 's/.*"([^"]+)".*/\1/'
+    sed -E 's/.*"([^"]+)".*/\1/';
 }
 DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
 # Download and install dd-opentracing-cpp library.
@@ -97,9 +97,9 @@ g++ -std=c++14 -o tracer_example tracer_example.cpp -ldd_opentracing -lopentraci
 
 ```bash
 get_latest_release() {
-  curl --silent "https://api.github.com/repos/$1/releases/latest" |
+  wget -qO- "https://api.github.com/repos/$1/releases/latest" |
     grep '"tag_name":' |
-    sed -E 's/.*"([^"]+)".*/\1/'
+    sed -E 's/.*"([^"]+)".*/\1/';
 }
 DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
 OPENTRACING_VERSION="$(get_latest_release opentracing/opentracing-cpp)"
@@ -131,7 +131,7 @@ int main(int argc, char* argv[]) {
       "/usr/local/lib/libdd_opentracing_plugin.so", error_message);
   if (!handle_maybe) {
     std::cerr << "Failed to load tracer library " << error_message << "\n";
-    return 0;
+    return 1;
   }
 
   // Read in the tracer's configuration.
@@ -146,7 +146,7 @@ int main(int argc, char* argv[]) {
   auto tracer_maybe = tracer_factory.MakeTracer(tracer_config.c_str(), error_message);
   if (!tracer_maybe) {
     std::cerr << "Failed to create tracer " << error_message << "\n";
-    return 0;
+    return 1;
   }
   auto& tracer = *tracer_maybe;
 
