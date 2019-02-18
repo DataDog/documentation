@@ -405,7 +405,7 @@ Si vous stockez des logs dans de nombreux compartiments S3 ou groupes de logs Cl
 
 Si vous stockez des logs dans un groupe de logs CloudWatch, suivez les étapes ci-dessous pour les transmettre à Datadog :
 
-1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][85].
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][85].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur dans la console AWS sur le groupe de logs CloudWatch qui contient vos logs :
 
 {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="groupes de logs cloudwatch" responsive="true" popup="true" style="width:70%;">}}
@@ -419,7 +419,7 @@ Accédez ensuite à votre [section Log de Datadog][86] pour commencer à explore
 
 Si vous stockez des logs dans un compartiment S3, suivez les étapes ci-dessous pour les transmettre à Datadog :
 
-1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][85].
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][85].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur dans la console AWS sur le compartiment S3 qui contient vos logs :
     {{< img src="logs/aws/adding_trigger.png" alt="Ajout d'un déclencheur" responsive="true" popup="true"style="width:80%;">}}
 
@@ -429,7 +429,7 @@ Si vous stockez des logs dans un compartiment S3, suivez les étapes ci-dessous 
 4. Définissez le bon type d'événement sur les compartiments S3 :
     {{< img src="logs/aws/object_created.png" alt="Objet créé" responsive="true" popup="true" style="width:80%;">}}
 
-Accédez ensuite à votre [section Log sur Datadog][86] pour commencer à explorer vos logs !
+Accédez ensuite à votre [section Log de Datadog][86] pour commencer à explorer vos logs !
 
 ## Données collectées
 

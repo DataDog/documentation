@@ -4,6 +4,10 @@ kind: documentation
 aliases:
   - /fr/overview
   - /fr/guides/overview/
+further_reading:
+  - link: 'https://learn.datadoghq.com/course/view.php?id=2'
+    tag: Centre d'apprentissage
+    text: Présentation de Datadog
 ---
 Vous venez de terminer [l'installation][1] de l'Agent Datadog, ou aimeriez tout simplement savoir [ce que Datadog peut faire pour vous][2]. Cette page propose un aperçu des fonctionnalités de Datadog et vous permet de comprendre à quel point Datadog vous aide à maîtriser votre infrastructure.
 
@@ -35,14 +39,14 @@ en fonction de ce qui a précédemment été configuré pour ce tag. [En savoir 
 
 {{< img src="getting_started/hostmap-overview.png" alt="aperçu hostmap" responsive="true" >}}
 
-[La hostmap](/graphing/infrastructure/hostmap) se trouve dans le menu Infrastructure. Grâce à cette carte, vous pouvez :
+[La hostmap][8] se trouve dans le menu Infrastructure. Grâce à cette carte, vous pouvez :
 
 * Visualiser rapidement l'intégralité de votre environnement, qu'il soit composé de 5, 500 ou 50 000 hosts
 * Identifier les singularités
 * Détecter les modèles d'utilisation
 * Optimiser les ressources
 
-Pour en savoir plus sur la hostmap, consultez la [page de la documentation dédiée][10].
+Pour en savoir plus sur la hostmap, consultez la [page de la documentation dédiée][8].
 
 ## Événements
 
@@ -86,16 +90,20 @@ sans qu'il ne puisse accéder à vos données ou à toute autre information (via
 
 {{< img src="getting_started/monitor.png" alt="monitor" responsive="true" >}}
 
-Les fonctions de [surveillance][14] vous permettent de recevoir une notification lorsque les valeurs agrégées d'une métrique
+Les fonctions de [surveillance][18] vous permettent de recevoir une notification lorsque les valeurs agrégées d'une métrique
 spécifique dépassent un certain seuil :
 
 * Sur l'ensemble de votre infrastructure
 * Par machine (moyenne, max, min ou somme)
 * Vous pouvez appliquer des monitors à toutes les métriques de votre choix : chiffre d'affaires, température du centre de données, etc.
-* Alertes multiples (par device, host, etc.)
+* Alertes multiples (par appareil, host, etc.)
 * Possibilité de définir un message de notification d'alerte, avec les fonctionnalités @
 
 {{< img src="getting_started/alert_setup.png" alt="configuration d'alerte" responsive="true" >}}
+
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/agent
 [2]: http://www.datadoghq.com/product

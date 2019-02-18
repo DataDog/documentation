@@ -31,7 +31,7 @@ Certaines parties de votre pile peuvent correspondre à des outils SaaS, et non 
 
 Dès que les données sont enregistrées, vous pouvez y accéder directement dans l'application Web Datadog. Utilisez Metrics Explorer pour trouver une métrique spécifique et l'observer en temps réel. Visualisez et commentez des événements (par exemple, le déploiement d'une application) au fil de leur arrivée dans votre [flux d'événements][9]. Filtrez les données selon un groupe d'hosts dans la [carte d'infrastructure][10]. Bénéficiez d'une vue d'ensemble du fonctionnement d'un service donné (par exemple, MySQL) sur son tableau de bord par défaut.
 
-Vous pourrez rapidement créer des [screenboards][11] personnalisés qui combineront l'ensemble des graphiques, données chiffrées, événements et états de services qui vous intéressent le plus. Adaptez les graphiques à vos besoins pour mieux mettre en évidence les problèmes : modifiez les valeurs de leurs métriques à l'aide d'autres métriques, appliquez une détection des [anomalies][12], des [singularités][13] ou des [prévisions][13], superposez des événements, et plus encore.
+Vous pourrez rapidement créer des [screenboards][11] personnalisés qui combineront l'ensemble des graphiques, données chiffrées, événements et états de services qui vous intéressent le plus. Adaptez les graphiques à vos besoins pour mieux mettre en évidence les problèmes : modifiez les valeurs de leurs métriques à l'aide d'autres métriques, appliquez une détection des [anomalies][12], des [singularités][13] ou des [prévisions][14], superposez des événements, et plus encore.
 
 ## Surveillance
 
