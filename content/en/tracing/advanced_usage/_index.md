@@ -1115,9 +1115,7 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Distributed tracing is disabled by default. Refer to the configuration documentation for each framework to enable it.
-
-Distributed tracing is supported in the following frameworks:
+Distributed tracing is enabled by default and supported in the following frameworks:
 
 | Framework/Library | API Documentation                                                   |
 | ----------------- | :------------------------------------------------------------------ |
@@ -1492,7 +1490,7 @@ Use one of the following options to inject Java trace information into your logs
 
 **Automatic Trace ID Injection**
 
-Enable injection in the Java Tracer's [configuration][2] by setting `Ddd.logs.injection=true` or through environment variable `DD_LOGS_INJECTION=true`.
+Enable injection in the Java Tracer's [configuration][1] by setting `Ddd.logs.injection=true` or through environment variable `DD_LOGS_INJECTION=true`.
 
 **Note**: Currently only **slf4j** is supported for MDC autoinjection.
 
@@ -1557,14 +1555,13 @@ Then update your logger configuration to include `dd.trace_id` and `dd.span_id` 
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
-**Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][4].
+**Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][3].
 
-[See our Java logging documentation][3] for more details about specific logger implementation or to learn how to log in JSON.
+[See our Java logging documentation][2] for more details about specific logger implementation or to learn how to log in JSON.
 
-[1]: https://logback.qos.ch/manual/mdc.html
-[2]: https://docs.datadoghq.com/tracing/languages/java/#configuration
-[3]: https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#raw-format
-[4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/
+[1]: https://docs.datadoghq.com/tracing/languages/java/#configuration
+[2]: https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#raw-format
+[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -1645,7 +1642,7 @@ Once the logger is configured, executing a traced function that logs an event yi
 [See our Python logging documentation][1] to ensure that the Python Log Integration is properly configured so that your Python logs are automatically parsed.
 
 [1]: https://docs.datadoghq.com/logs/log_collection/python/#configure-the-datadog-agent
-[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/
+[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
@@ -1731,7 +1728,7 @@ See our [Ruby logging documentation][2] to verify the Ruby log integration is pr
 
 [1]: https://docs.datadoghq.com/logs/log_collection/ruby
 [2]: https://docs.datadoghq.com/logs/log_collection/ruby/#configure-the-datadog-agent
-[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/
+[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -1766,8 +1763,10 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 The above example illustrates how to use the span's context in the standard library's `log` package. Similar logic may be applied to 3rd party packages too.
 
-**Note**: If you are not using a [Datadog Log Integration][7] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][8].
+**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][2].
 
+[1]: 
+[2]: 
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
@@ -1852,9 +1851,9 @@ module.exports = Logger
 
 **Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][2].
 
-[1]: https://docs.datadoghq.com/logs/log_collection/nodejs/
-[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/
 
+[1]: https://docs.datadoghq.com/logs/log_collection/nodejs
+[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -1898,8 +1897,8 @@ $logger->pushProcessor(function ($record) {
 **Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][3].
 
 [1]: https://github.com/Seldaek/monolog
-[2]: https://docs.datadoghq.com/logs/log_collection/php/
-[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/
+[2]: https://docs.datadoghq.com/logs/log_collection/php
+[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -2022,13 +2021,13 @@ var tracer = Datadog.Trace.Tracer.Create(isDebugEnabled: true);
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Debug mode is disabled by default. To enable it, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][6] for details about how and when this environment variable value should be set in order
+Debug mode is disabled by default. To enable it, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][1] for details about how and when this environment variable value should be set in order
 to be properly handled by the tracer.
 
 **Application Logs**:
 
 By default, logging from the PHP tracer is disabled. In order to get debugging information and errors sent to logs,
-set a [PSR-3 logger][1] singleton.
+set a [PSR-3 logger][2] singleton.
 
 ```php
 \DDTrace\Log\Logger::set(
@@ -2036,8 +2035,9 @@ set a [PSR-3 logger][1] singleton.
 );
 ```
 
-[1]: https://www.php-fig.org/psr/psr-3
 
+[1]: 
+[2]: https://www.php-fig.org/psr/psr-3
 {{% /tab %}}
 {{% tab "C++" %}}
 
@@ -2133,4 +2133,3 @@ apm_config:
 [3]: http://opentracing.io
 [4]: #priority-sampling
 [5]: /tracing/getting_further/trace_sampling_and_storage
-[6]: /tracing/languages/php/#configuration
