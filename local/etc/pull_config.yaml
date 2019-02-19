@@ -1,9 +1,9 @@
 ---
 - org_name: DataDog
-  
+
   repos:
   - repo_name: dogweb
-    
+
     contents:
 
     - action: source
