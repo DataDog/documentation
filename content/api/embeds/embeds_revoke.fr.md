@@ -1,7 +1,7 @@
 ---
 title: Révoquer un embed
 type: apicontent
-order: 10.5
+order: 11.5
 external_redirect: /api/#revoquer-un-embed
 ---
 

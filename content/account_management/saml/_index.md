@@ -80,13 +80,15 @@ If **sn** and **givenName** are provided, they are used to update the user's nam
 
 ## Specific SAML IdP
 
-For more information about configuring specific IdP's, refer to the following Knowledge Base articles:
+For more information about configuring specific IdP's, refer to the following documentation:
 
-* [Google][6]
-* [Azure][7]
-* [Microsoft Active Directory Federation Services][8]
-* [NoPassword][9]
-* [Okta][10]
+* [Active Directory][6]
+* [Auth0][7]
+* [Azure][8]
+* [Google][9]
+* [NoPassword][10]
+* [Okta][11]
+* [SafeNet][12]
 
 ## Additional Features
 
@@ -96,7 +98,7 @@ The following features can be enabled through the [SAML Configuration dialog][3]
 
 With Just-in-Time provisioning, a user is created within Datadog the first time they try to log in. This eliminates the need for administrators to manually create user accounts one at a time.
 
-Some organizations might not want to invite all of their users to Datadog. If you would like to make changes to how SAML works for your account, contact [Datadog support][11]. It is up to the organization to configure their IdP to not send assertions to Datadog if they don't want a particular user to access Datadog.
+Some organizations might not want to invite all of their users to Datadog. If you would like to make changes to how SAML works for your account, contact [Datadog support][13]. It is up to the organization to configure their IdP to not send assertions to Datadog if they don't want a particular user to access Datadog.
 
 Administrators can set the default role for new Just-in-Time users. The default role is **Standard**, but you can choose to add new JIT users as **Read-Only** or even **Administrators**.
 
@@ -123,9 +125,11 @@ With SAML Strict mode enabled, all users must log in with SAML. An existing user
 [3]: https://app.datadoghq.com/saml/saml_setup
 [4]: https://app.datadoghq.com/account/saml/metadata.xml
 [5]: https://app.datadoghq.com/account/team
-[6]: /account_management/faq/how-do-i-configure-google-as-a-saml-idp
-[7]: /account_management/faq/how-do-i-configure-azure-ad-as-a-saml-idp
-[8]: /account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp
-[9]: /account_management/faq/how-do-i-configure-nopassword-as-a-saml-idp
-[10]: /account_management/faq/how-do-i-configure-okta-as-a-saml-idp
-[11]: /help
+[6]: /account_management/saml/activedirectory
+[7]: /account_management/saml/auth0
+[8]: /account_management/saml/azure
+[9]: /account_management/saml/google
+[10]: /account_management/saml/nopassword
+[11]: /account_management/saml/okta
+[12]: /account_management/saml/safenet
+[13]: /help

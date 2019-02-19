@@ -9,9 +9,9 @@ further_reading:
     text: Débuter avec les tags
   - link: tagging/assigning_tags
     tag: Documentation
-    text: Apprendre à attribuer des tags
+    text: Apprendre à assigner des tags
 ---
-Après avoir [attribué des tags][1], utilisez-les pour filtrer et regrouper vos données au sein de la plateforme Datadog. Les tags vous permettent d'inclure et d'exclure des données. Lorsque vous choisissez d'inclure ou d'exclure plusieurs tags :
+Après avoir [assigné des tags][1], utilisez-les pour filtrer et regrouper vos données au sein de la plateforme Datadog. Les tags vous permettent d'inclure et d'exclure des données. Lorsque vous choisissez d'inclure ou d'exclure plusieurs tags :
 
 * la fonction Include utilise la logique `AND` ;
 * la fonction Exclude utilise la logique `OR`.
@@ -25,7 +25,7 @@ Le [flux d'événements][2] affiche tous les événements qui se sont produits d
 ## Dashboards
 
 {{< tabs >}}
-{{% tab "Attribution" %}}
+{{% tab "Assignation" %}}
 
 Utilisez des tags pour filtrer les métriques à afficher dans un [graphique de dashboard] ou pour créer des groupes agrégés de métriques à afficher. Pour filtrer les métriques, saisissez le tag dans la zone de texte **from**. Cela affiche les données de la métrique choisie fournies par toutes les sources qui possèdent ce tag (à savoir, `service:coffee-house` dans l'exemple ci-dessous).
 
@@ -111,7 +111,7 @@ Voici les zones de texte de filtrage et de regroupement de la page des live proc
 {{< tabs >}}
 {{% tab "Gérer les monitors" %}}
 
-Pour filtrer des moniteurs en leur [attribuant des tags][1], utilisez la barre de recherche ou les cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `tag:<CLÉ>:<VALEUR>`. Indiquez par exemple `tag:service:coffee-house`. **Remarque** : les tags de monitor ne fonctionnent pas de la même façon que les tags de métrique.
+Pour filtrer des moniteurs en leur [assignant des tags][1], utilisez la barre de recherche ou les cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `tag:<CLÉ>:<VALEUR>`. Indiquez par exemple `tag:service:coffee-house`. **Remarque** : les tags de monitor ne fonctionnent pas de la même façon que les tags de métrique.
 
 {{< img src="tagging/using_tags/managemonitorstags.png" alt="Gérer les tags de monitor" responsive="true" style="width:80%;">}}
 
@@ -176,7 +176,7 @@ Pour [les recherches de traces][1], filtrez les traces avec des tags à l'aide d
 {{% /tab %}}
 {{% tab "Service map" %}}
 
-Après avoir [attribué des tags][1], utilisez la Service map pour accéder facilement à différentes sections de l'application en cliquant sur un service spécifique. L'exemple ci-dessous affiche les données des [analyses et recherches de traces][2], des [monitors][3], des [logs][4] et de la [hostmap][5] filtrées par le tag `service:coffee-house`.
+Après avoir [assigné des tags][1], utilisez la Service map pour accéder facilement à différentes sections de l'application en cliquant sur un service spécifique. L'exemple ci-dessous affiche les données des [analyses et recherches de traces][2], des [monitors][3], des [logs][4] et de la [hostmap][5] filtrées par le tag `service:coffee-house`.
 
 {{< img src="tagging/using_tags/servicemaptags.png" alt="Tags Service map" responsive="true" style="width:80%;">}}
 
@@ -281,4 +281,4 @@ Les tags peuvent être utilisés de diverses façons avec l'[API][18]. Cliquez s
 [28]: /fr/api/?lang=python#monitors-search
 [29]: /fr/api/?lang=python#monitors-group-search
 [30]: /fr/api/?lang=python#create-a-screenboard
-[31]: /fr/api/?lang=python#create-a-timeboard
+[31]: /fr/api/?lang=python#create-a-dashboard

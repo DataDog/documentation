@@ -108,9 +108,12 @@ $(document).ready(function () {
             }
         });
 
+        // Setup for large screen ToC
+        var largeScreenThreshold = 1710;
+
         $(window).on('resize scroll', function(e) {
             onScroll();
-            if($(window).width() > 530 && $(window).width() < 1720) {
+            if($(window).width() > 530 && $(window).width() < largeScreenThreshold) {
                 var bottomOfBrowser = parseInt($(document).scrollTop()) + parseInt($(window).height());
                 var footerTop = $('body > footer').offset().top;
                 if(bottomOfBrowser >= footerTop) {
@@ -143,9 +146,6 @@ $(document).ready(function () {
         hideToc();
     }
 
-    // Setup for large screen ToC
-    var largeScreenThreshold = 1710;
-
     // hiding + displaying the ToC depending on the window width
     function widthCheck(){
         // if ToC elements exist
@@ -167,7 +167,7 @@ $(document).ready(function () {
     // updating ToC width on large screens
     function tocWidthUpdate(){
         if(innerWidth > largeScreenThreshold){
-            $('.toc-container.mobile-open').css("width", (innerWidth/2)-620 + "px");
+            $('.toc-container.mobile-open').css("width", (innerWidth/2)-600 + "px");
         }
     }
 

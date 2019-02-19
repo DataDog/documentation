@@ -73,7 +73,7 @@ logs:
     source: custom
 ```
 
-**Note**: If you are using Windows with Agent v6 and trailing files for logs, make sure that those files have UTF8 encoding.
+**Note**: If you are using Windows with Agent v6 and tailing files for logs, make sure that those files have UTF8 encoding.
 
 
 [1]: /agent/faq/agent-configuration-files

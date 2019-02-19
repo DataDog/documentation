@@ -268,7 +268,7 @@ $(document).ready(function () {
                         if (event.state.page) {
                             current_page = event.state.page;
                             changePage(current_page);
-                        } 
+                        }
                     };
 
                     function addHistory(page) {
@@ -419,6 +419,23 @@ $(document).ready(function () {
     // sticky polyfill trigger
     var elements = document.querySelectorAll('.sticky');
     Stickyfill.add(elements);
+
+    // Polyfill `includes` for Internet Explorer
+    if (!String.prototype.includes) {
+        Object.defineProperty(String.prototype, 'includes', {
+          value: function(search, start) {
+            if (typeof start !== 'number') {
+              start = 0
+            }
+
+            if (start + search.length > this.length) {
+              return false
+            } else {
+              return this.indexOf(search, start) !== -1
+            }
+          }
+        })
+      }
 
     // add targer-blank to external links
     var newLinks = document.getElementsByTagName("a");

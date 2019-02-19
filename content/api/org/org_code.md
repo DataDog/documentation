@@ -1,7 +1,7 @@
 ---
 title: Organizations
 type: apicode
-order: 18
+order: 19
 external_redirect: /api/#organizations
 ---
 

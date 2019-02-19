@@ -311,11 +311,6 @@ languages:
           url: "graphing/dashboards/shared_graph/"
           weight: 130
           parent: customnav_graphingnav_dashboards
-        - identifier: customnav_graphingnav_widgets
-          name: "Widgets"
-          url: "graphing/dashboards/widgets/"
-          weight: 140
-          parent: customnav_graphingnav_dashboards
 
         # Metrics
         - identifier: customnav_graphingnav_metrics
@@ -694,8 +689,8 @@ languages:
           weight: 250
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_logging
-          name: "Logging"
-          url: "#logging"
+          name: "Correlate Traces and Logs"
+          url: "#correlate-traces-and-logs"
           weight: 260
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_debugging
@@ -1168,6 +1163,11 @@ languages:
           url: "account_management/org_switching/"
           weight: 70
           parent: menu_references_account_management
+        - identifier: customnav_accountmanagementnav_billing
+          name: "Billing"
+          url: "account_management/billing/"
+          weight: 80
+          parent: menu_references_account_management
 
         # SAML subnav
         - identifier: saml_activedirectory
@@ -1199,6 +1199,11 @@ languages:
           name: "Okta"
           url: "account_management/saml/okta"
           weight: 550
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_safenet
+          name: "SafeNet"
+          url: "account_management/saml/safenet"
+          weight: 560
           parent: customnav_accountmanagementnav_saml
 
         # RBAC subnav
@@ -1570,11 +1575,6 @@ languages:
           name: "Graphiques partagés"
           url: "graphing/dashboards/shared_graph/"
           weight: 130
-          parent: customnav_graphingnav_dashboards
-        - identifier: customnav_graphingnav_widgets
-          name: "Widgets"
-          url: "graphing/dashboards/widgets/"
-          weight: 140
           parent: customnav_graphingnav_dashboards
 
         # Metrics
@@ -2467,6 +2467,11 @@ languages:
           name: "Okta"
           url: "account_management/saml/okta"
           weight: 550
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_safenet
+          name: "SafeNet"
+          url: "account_management/saml/safenet"
+          weight: 560
           parent: customnav_accountmanagementnav_saml
 
         - identifier: customnav_accountmanagementnav_multi_organization

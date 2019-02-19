@@ -1,7 +1,7 @@
 ---
 title: Send Logs over HTTP
 type: apicontent
-order: 15.1
+order: 16.1
 external_redirect: /api/#send-logs-over-http
 ---
 

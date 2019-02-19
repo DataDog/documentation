@@ -123,7 +123,7 @@ In `datadog.conf`, add `[trace.analyzed_spans]`. For example:
 ```
 [trace.analyzed_spans]
 <SERVICE_NAME_1>|<OPERATION_NAME_1>: 1
-<SERVICE_NAME_2>|<OPERATION_NAME_2: 1
+<SERVICE_NAME_2>|<OPERATION_NAME_2>: 1
 ```
 
 {{% /tab %}}

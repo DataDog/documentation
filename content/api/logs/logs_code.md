@@ -1,7 +1,7 @@
 ---
 title: Logs
 type: apicode
-order: 15
+order: 16
 external_redirect: /api/#logs
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Update host tags
 type: apicontent
-order: 20.4
+order: 21.4
 external_redirect: /api/#update-host-tags
 ---
 
