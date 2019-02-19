@@ -3,7 +3,7 @@ title: Hubot Script - Request snapshots in chat using the Datadog API
 kind: faq
 ---
 
-Here is a Hubot script that may be used to request Datadog metric snapshots from a chat client:
+To request Datadog metric snapshots in chat with Hubot, use the [Hubot Datadog][1] package.
 
-https://www.npmjs.com/package/hubot-datadog
+[1]: https://www.npmjs.com/package/hubot-datadog
 
