@@ -12,7 +12,7 @@
 {{ $static := $.Scratch.Get "static" }}
 
 <!-- we load all snippets from code_snippets of the file this is called from -->
-{{ $snipdir := (print "content/" $dot.Page.File.Dir "code_snippets/") }}
+{{ $snipdir := (print "content/en/" $dot.Page.File.Dir "code_snippets/") }}
 {{- $files := readDir $snipdir -}}
 {{- range $files }}
     {{ $file := (print $snipdir (.Name))}}
