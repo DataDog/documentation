@@ -30,17 +30,23 @@ def get_languages(config_location):
         return d
 
 
-def create_glob(files_location, lang, disclaimer=""):
+def create_glob(files_location, lang, disclaimer="", lang_as_dir=False):
     all_files = [f for f in glob(files_location + '**/*.md', recursive=True)]
     if lang == 'en':
         g = [f for f in all_files if len(f.split('.')) == 2]
     else:
-        g = [f for f in all_files if '.{0}.md'.format(lang) in f]
+        if lang_as_dir:
+            g = [f for f in all_files if '.md'.format(lang) in f]
+        else:
+            g = [f for f in all_files if '.{0}.md'.format(lang) in f]
     return {"name": lang, "glob": g, "disclaimer": disclaimer}
 
 
-def diff_globs(base, compare):
-    return [f for f in base['glob'] if f.replace('.md', '.%s.md' % compare['name']) not in compare['glob']]
+def diff_globs(base, compare, lang_as_dir=False):
+    if lang_as_dir:
+        return [f for f in base['glob'] if f.replace('/en/', '/%s/' % compare['name']) not in compare['glob']]
+    else:
+        return [f for f in base['glob'] if f.replace('.md', '.%s.md' % compare['name']) not in compare['glob']]
 
 
 def md_update_links(this_lang_code, content):
@@ -114,7 +120,7 @@ def main():
     options = vars(options)
 
     lang = get_languages(options["config_location"])
-    default_glob = create_glob(options["files_location"] or "content/en/", DEFAULT_LANGUAGE)
+    default_glob = create_glob(options["files_location"] or "content/en/", DEFAULT_LANGUAGE, lang_as_dir=options["lang_as_dir"])
     del lang[DEFAULT_LANGUAGE]
     for l in lang:
         info = lang[l]
@@ -123,8 +129,8 @@ def main():
         else:
             files_location = info.get('contentDir', 'content/')
             files_location = files_location if files_location.endswith('/') else files_location + '/'
-        lang_glob = create_glob(files_location=files_location, lang=l, disclaimer=info["disclaimer"])
-        diff = diff_globs(base=default_glob, compare=lang_glob)
+        lang_glob = create_glob(files_location=files_location, lang=l, disclaimer=info["disclaimer"], lang_as_dir=options["lang_as_dir"])
+        diff = diff_globs(base=default_glob, compare=lang_glob, lang_as_dir=options["lang_as_dir"])
         print("building {0} placeholder pages for {1} ".format(len(diff), l))
         for f in diff:
             create_placeholder_file(template=f, new_glob=lang_glob, lang_as_dir=options["lang_as_dir"], files_location=files_location)
