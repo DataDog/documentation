@@ -59,8 +59,17 @@ def md_update_links(this_lang_code, content):
         return result
 
 
-def create_placeholder_file(template, new_glob):
-    new_dest = os.path.dirname(template) + '/' + ntpath.basename(template).replace('.md', '.%s.md' % new_glob['name'])
+def create_placeholder_file(template, new_glob, lang_as_dir, files_location):
+    if lang_as_dir:
+        content_path = files_location
+        sub_path = os.path.dirname(template).replace('content/en', '')
+        # add trailing slash if we don't have one and its not an empty string
+        sub_path = sub_path if not sub_path or sub_path.endswith('/') else sub_path + '/'
+        # remove leading slash if we have one
+        sub_path = sub_path[1:] if sub_path.startswith('/') else sub_path
+        new_dest = "{content_path}{sub_path}{template}".format(content_path=content_path, sub_path=sub_path, template=ntpath.basename(template))
+    else:
+        new_dest = os.path.dirname(template) + '/' + ntpath.basename(template).replace('.md', '.%s.md' % new_glob['name'])
     
     with open(template) as o_file:
         content = o_file.read()
@@ -98,6 +107,7 @@ def main():
     parser = OptionParser(usage="usage: %prog [options] create placeholder pages for multi-language")
     parser.add_option("-c", "--config_location", help="location of site config")
     parser.add_option("-f", "--files_location", help="location of site content files", default="")
+    parser.add_option("-d", "--lang_as_dir", help="use dir lang instead of suffix", default=True)
 
     (options, args) = parser.parse_args()
     options = vars(options)
@@ -111,11 +121,12 @@ def main():
             files_location = options["files_location"]
         else:
             files_location = info.get('contentDir', 'content/')
+            files_location = files_location if files_location.endswith('/') else files_location + '/'
         lang_glob = create_glob(files_location=files_location, lang=l, disclaimer=info["disclaimer"])
         diff = diff_globs(base=default_glob, compare=lang_glob)
         print("building {0} placeholder pages for {1} ".format(len(diff), l))
         for f in diff:
-            create_placeholder_file(template=f, new_glob=lang_glob)
+            create_placeholder_file(template=f, new_glob=lang_glob, lang_as_dir=options["lang_as_dir"], files_location=files_location)
 
 
 if __name__ == "__main__":
