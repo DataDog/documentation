@@ -44,7 +44,7 @@ def create_glob(files_location, lang, disclaimer="", lang_as_dir=False):
 
 def diff_globs(base, compare, lang_as_dir=False):
     if lang_as_dir:
-        return [f for f in base['glob'] if f.replace('/en/', '/%s/' % compare['name']) not in compare['glob']]
+        return [f for f in base['glob'] if f.replace('/%s/' % base['name'], '/%s/' % compare['name']) not in compare['glob']]
     else:
         return [f for f in base['glob'] if f.replace('.md', '.%s.md' % compare['name']) not in compare['glob']]
 
