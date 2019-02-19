@@ -113,7 +113,7 @@ def main():
     options = vars(options)
 
     lang = get_languages(options["config_location"])
-    default_glob = create_glob(options["files_location"], DEFAULT_LANGUAGE)
+    default_glob = create_glob(options["files_location"] or "content/en/", DEFAULT_LANGUAGE)
     del lang[DEFAULT_LANGUAGE]
     for l in lang:
         info = lang[l]
