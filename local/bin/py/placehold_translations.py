@@ -5,6 +5,7 @@ from optparse import OptionParser
 import os
 import re
 import logging
+import sys
 
 import yaml
 
@@ -18,6 +19,7 @@ TEMPLATE = """\
 """
 
 logger = logging.getLogger(__name__)
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 
 def get_languages(config_location):
@@ -104,6 +106,8 @@ def create_placeholder_file(template, new_glob, lang_as_dir, files_location):
                                   content=new_content.strip())
 
     os.makedirs(os.path.dirname(new_dest), exist_ok=True)
+    if os.path.exists(new_dest):
+        logger.info("overwriting {}".format(new_dest))
     with open(new_dest, 'w') as o_file:
             o_file.write(content)
 
