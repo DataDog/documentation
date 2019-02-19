@@ -9,7 +9,7 @@ further_reading:
     tag: documentation
     text: DogStatsD
 ---
-Pour générer des métriques custom à partir de votre application Kubernetes, utilisez [DogStatsD][1], un service d'agrégation de métriques fourni avec l'Agent Datadog. DogStatsD ajoute de nouvelles fonctionnalités au protocole [StatsD]. Consultez la [documentation sur DogStatsD][1] pour en savoir plus.
+Pour générer des métriques custom à partir de votre application Kubernetes, utilisez [DogStatsD][1], un service d'agrégation de métriques fourni avec l'Agent Datadog. DogStatsD ajoute de nouvelles fonctionnalités au protocole [StatsD][2]. Consultez la [documentation sur DogStatsD][1] pour en savoir plus.
 
 ## Utiliser DogStatsD sur un socket de domaine Unix
 
@@ -82,7 +82,7 @@ Pour appliquer ce changement :
 kubectl apply -f datadog-agent.yaml
 ```
 
-**Attention** : le paramètre `hostPort` ouvre un port sur votre host. Assurez-vous que votre pare-feu autorise uniquement un accès pour vos applications et autres sources de confiance. En outre, certains plug-ins réseau ne prennent pas encore en charge `hostPorts`, ce qui rend cette configuration inutile. SI vous utilisez EKS pour héberger votre Agent et vos applications, il est possible que le paramètre `hostPorts` ne fonctionne pas.
+**Attention** : le paramètre `hostPort` ouvre un port sur votre host. Assurez-vous que votre pare-feu autorise uniquement un accès pour vos applications et autres sources de confiance. En outre, certains plug-ins réseau ne prennent pas encore en charge `hostPorts`, ce qui rend cette configuration inutile.
 Pour y remédier, ajoutez `hostNetwork: true` aux spécifications de pod de votre Agent, afin de partager l'espace de nommage réseau de votre host avec l'Agent Datadog. Cela signifie également que tous les ports ouverts sur le conteneur sont également ouverts sur le host. Si un port est utilisé sur un host et dans votre conteneur, ces derniers peuvent entrer en conflit (puisqu'ils partagent le même espace de nommage réseau) et le pod ne démarre pas. Cela n'est pas systématiquement possible avec toutes les installations Kubernetes.
 
 ### Transmettre l'adresse IP du nœud à votre application

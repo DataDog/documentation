@@ -52,7 +52,7 @@ Voici quelques restrictions, exigences et suggestions en ce qui concerne l'utili
 
 2. Les noms de tags peuvent comporter **jusqu'à 200 caractères** et prennent en charge la norme Unicode.
 3. Les tags sont convertis en minuscules. Ainsi, les tags `CamelCase` ne sont pas recommandés. Les intégrations reposant sur une authentification (crawler) convertissent les tags au format camel case en ajoutant des underscores. Par exemple, `TestTag` --> `test_tag`.
-4. Un tag peut être au format `valeur` ou `<CLÉ>:<VALEUR>`. Pour un fonctionnement optimal, **nous recommandons de créer des tags au format `<KEY>:<VALUE>`.** `env`, `instance`, et `name` sont des clés de tag couramment utilisées. La clé précède toujours le caractère « : » de la définition globale du tag. Par exemple :
+4. Un tag peut être au format `valeur` ou `<KEY>:<VALUE>`. Pour un fonctionnement optimal, **nous recommandons de créer des tags au format `<KEY>:<VALUE>`.** `env`, `instance`, et `name` sont des clés de tag couramment utilisées. La clé précède toujours le caractère « : » de la définition globale du tag. Par exemple :
 
     | Tag                | Clé           | Valeur          |
     |--------------------|---------------|----------------|
@@ -64,7 +64,7 @@ Voici quelques restrictions, exigences et suggestions en ce qui concerne l'utili
 6. Les tags ne doivent pas provenir de sources illimitées, telles que des horodatages EPOCH, des ID d'utilisateur ou des ID de demande. Cela pourrait [accroître de façon significative le nombre de métriques][2] de votre organisation et augmenter vos frais.
 
 ## Assignation de tags
-Vous pouvez utiliser l'une (ou l'ensemble) des méthodes suivantes pour assigner des tags. Consultez la [documentation relative à l'assignation des tags] pour en savoir plus :
+Vous pouvez utiliser l'une (ou l'ensemble) des méthodes suivantes pour assigner des tags. Consultez la [documentation relative à l'assignation des tags][3] pour en savoir plus :
 
 | Méthode                        | Assignation de tags                                                                                  |
 |-------------------------------|----------------------------------------------------------------------------------------------|
