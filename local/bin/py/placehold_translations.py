@@ -97,7 +97,7 @@ def create_placeholder_file(template, new_glob, lang_as_dir, files_location):
         content = TEMPLATE.format(front_matter=yaml.dump(new_yml, default_flow_style=False).strip(),
                                   content=new_content.strip())
 
-    os.path.makedirs(os.path.dirname(new_dest), exist_ok=True)
+    os.makedirs(os.path.dirname(new_dest), exist_ok=True)
     with open(new_dest, 'w') as o_file:
             o_file.write(content)
 
