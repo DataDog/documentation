@@ -142,8 +142,8 @@ Should be encoded to: `http://catchpoint.com/session_id%3A123456`
 * `@all` – Sends a notification to all members of your organization.
 * `@yourname` – Notifies the specific user named 'yourname'.
 * `@test@example.com` Sends an email to `test@example.com`.
-* If you have HipChat, Slack, Webhooks, Pagerduty, or VictorOps, use:
-    * `@hipchat-[room-name]` or `@slack-[room-name]` – posts the event or graph to that chat room.
+* If you have Slack, Webhooks, Pagerduty, or VictorOps, use:
+    * `@slack-[room-name]` – posts the event or graph to that chat room.
     * `@webhook` – Alerts or triggers whatever is attached to that webhook. Check out [our blogpost on Webhooks][6]!
     * `@pagerduty` – Sends an alert to Pagerduty. You can also use `@pagerduty-acknowledge` and `@pagerduty-resolve`.
 
