@@ -24,7 +24,7 @@ The instructions below use NGINX from the official [Linux repositories][1] and p
 The following plugins must be installed:
 
 - NGINX plugin for OpenTracing - [linux-amd64-nginx-${NGINX_VERSION}-ngx_http_module.so.tgz][2] - installed in `/usr/lib/nginx/modules`
-- Datadog OpenTracing C++ Plugin - [linux-amd64-libdd_opentracing_plugin.so.gz][3] - installed in `/usr/local/lib`
+- Datadog OpenTracing C++ Plugin - [linux-amd64-libdd_opentracing_plugin.so.gz][3] - installed somewhere accessible to NGINX, eg `/usr/local/lib`
 
 Commands to download and install these modules:
 
@@ -35,7 +35,7 @@ get_latest_release() {
     grep '"tag_name":' |
     sed -E 's/.*"([^"]+)".*/\1/';
 }
-NGINX_VERSION=1.14.2
+NGINX_VERSION=1.14.0
 OPENTRACING_NGINX_VERSION="$(get_latest_release opentracing-contrib/nginx-opentracing)"
 DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
 # Install NGINX plugin for OpenTracing
