@@ -121,7 +121,7 @@ As a best practice, a YAML file that specifies the values for the chart paramete
 
 1.  **Copy the default [`datadog-values.yaml`][7] value file.**
 2.  Set the `apiKey` parameter with your [Datadog API key][4].
-3. Upgrade the Datadog Helm chart with the new `datadog-values.yaml` file:
+3.  Upgrade the Datadog Helm chart with the new `datadog-values.yaml` file:
 
 ```bash
 helm upgrade -f datadog-values.yaml <RELEASE_NAME> stable/datadog --recreate-pods
