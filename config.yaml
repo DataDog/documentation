@@ -32,6 +32,11 @@ languages:
           url: "getting_started/"
           pre: "nav_start"
           weight: 30
+        - identifier: menu_gettingstartednav_learning_center
+          name: "Learning Center"
+          url: "getting_started/learning_center"
+          weight: 310
+          parent: menu_references_getting_started
 
         # TAGGING
         - identifier: menu_references_tagging
@@ -168,6 +173,11 @@ languages:
           url: "agent/kubernetes/cluster"
           weight: 157
           parent: kubernetes
+        - identifier: kubernetes_helm
+          name: "Using Helm"
+          url: "agent/kubernetes/helm"
+          weight: 158
+          parent: kubernetes
         - identifier: kubernetes_event
           name: "Event Collection"
           url: "agent/kubernetes/event_collection"
@@ -224,10 +234,17 @@ languages:
           weight: 60
           parent: menu_references_agent
 
+        # Guides
+        - identifier: customnav_agentnav_guides
+          name: "Guides"
+          url: "agent/guide/"
+          weight: 80
+          parent: menu_references_agent
+
         - identifier: customnav_agentnav_security
           name: "Security"
           url: "agent/security"
-          weight: 80
+          weight: 90
           parent: menu_references_agent
 
         #- identifier: customnav_agentnav_faq
@@ -286,11 +303,6 @@ languages:
           name: "Shared Graphs"
           url: "graphing/dashboards/shared_graph/"
           weight: 130
-          parent: customnav_graphingnav_dashboards
-        - identifier: customnav_graphingnav_widgets
-          name: "Widgets"
-          url: "graphing/dashboards/widgets/"
-          weight: 140
           parent: customnav_graphingnav_dashboards
 
         # Metrics
@@ -370,47 +382,52 @@ languages:
         - identifier: customnav_graphingnav_arithmetic
           name: "Arithmetic"
           url: "graphing/functions/arithmetic/"
-          weight: 620
+          weight: 615
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_count
           name: "Count"
           url: "graphing/functions/count/"
-          weight: 630
+          weight: 620
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_interpolation
           name: "Interpolation"
           url: "graphing/functions/interpolation/"
-          weight: 640
+          weight: 625
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_rank
           name: "Rank"
           url: "graphing/functions/rank/"
-          weight: 650
+          weight: 630
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_rate
           name: "Rate"
           url: "graphing/functions/rate/"
-          weight: 660
+          weight: 635
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_regression
           name: "Regression"
           url: "graphing/functions/regression/"
-          weight: 670
+          weight: 640
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_rollup
           name: "Rollup"
           url: "graphing/functions/rollup/"
-          weight: 680
+          weight: 645
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_smoothing
           name: "Smoothing"
           url: "graphing/functions/smoothing/"
-          weight: 690
+          weight: 650
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_timeshift
           name: "Timeshift"
           url: "graphing/functions/timeshift/"
-          weight: 695
+          weight: 655
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_beta
+          name: "Beta"
+          url: "graphing/functions/beta/"
+          weight: 660
           parent: customnav_graphingnav_functions
 
         - identifier: customnav_graphingnav_graphingjson
@@ -511,11 +528,22 @@ languages:
           url: "monitors/monitor_types/watchdog/"
           weight: 430
           parent: customnav_monitornav_monitor_types
+
+        # Manage monitor
         - identifier: customnav_monitornav_manage_monitor
           name: "Manage Monitor"
           url: "monitors/manage_monitor/"
           weight: 130
           parent: menu_references_monitoring
+
+        # Monitor status
+        - identifier: customnav_monitornav_monitor_status
+          name: "Monitor Status"
+          url: "monitors/monitor_status/"
+          weight: 135
+          parent: menu_references_monitoring
+
+        # Check summary
         - identifier: customnav_monitornav_check_summary
           name: "Check Summary"
           url: "monitors/check_summary/"
@@ -654,8 +682,8 @@ languages:
           weight: 250
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_logging
-          name: "Logging"
-          url: "#logging"
+          name: "Correlate Traces and Logs"
+          url: "#correlate-traces-and-logs"
           weight: 260
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_debugging
@@ -947,6 +975,13 @@ languages:
         #  weight: 90
         #  parent: menu_references_logs
 
+        # Guides
+        - identifier: customnav_logsnav_guides
+          name: "Guides"
+          url: "logs/guide/"
+          weight: 80
+          parent: menu_references_logs
+
         - identifier: customnav_loggnav_security
           name: "Security"
           url: "logs/security"
@@ -961,6 +996,16 @@ languages:
           url: "synthetics/"
           pre: "nav_synthetics"
           weight: 100
+        - identifier: synthetics_uptime_check
+          name: "Uptime Check"
+          url: "synthetics/uptime_check"
+          weight: 110
+          parent: menu_references_synthetics
+        - identifier: synthetics_browser_check
+          name: "Browser Check"
+          url: "synthetics/browser_check"
+          weight: 120
+          parent: menu_references_synthetics
 
         # DEVELOPERS
         - identifier: menu_references_developers
@@ -1116,12 +1161,22 @@ languages:
           url: "account_management/org_switching/"
           weight: 70
           parent: menu_references_account_management
+        - identifier: customnav_accountmanagementnav_billing
+          name: "Billing"
+          url: "account_management/billing/"
+          weight: 80
+          parent: menu_references_account_management
 
         # SAML subnav
         - identifier: saml_activedirectory
           name: "Active Directory"
           url: "account_management/saml/activedirectory"
           weight: 510
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_auth0
+          name: "Auth0"
+          url: "account_management/saml/auth0"
+          weight: 515
           parent: customnav_accountmanagementnav_saml
         - identifier: saml_azure
           name: "Azure"
@@ -1142,6 +1197,11 @@ languages:
           name: "Okta"
           url: "account_management/saml/okta"
           weight: 550
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_safenet
+          name: "SafeNet"
+          url: "account_management/saml/safenet"
+          weight: 560
           parent: customnav_accountmanagementnav_saml
 
         # RBAC subnav
@@ -1175,6 +1235,7 @@ languages:
           pre: "nav_security"
           weight: 140
         # SECURITY - Subnav start
+
         - identifier: customnav_security_agent
           name: "Agent"
           url: "security/agent"
@@ -1228,6 +1289,11 @@ languages:
           url: "getting_started/"
           pre: "nav_start"
           weight: 30
+        - identifier: menu_gettingstartednav_learning_center
+          name: "Learning Center"
+          url: "getting_started/learning_center"
+          weight: 310
+          parent: menu_references_getting_started
 
         # TAGGING
         - identifier: menu_references_tagging
@@ -1451,6 +1517,13 @@ languages:
           weight: 60
           parent: menu_references_agent
 
+        # Guides
+        - identifier: customnav_agentnav_guides
+          name: "Guides"
+          url: "agent/guide/"
+          weight: 80
+          parent: menu_references_agent
+
         #- identifier: customnav_agentnav_faq
         #  name: "FAQ"
         #  url: "agent/faq/"
@@ -1500,11 +1573,6 @@ languages:
           name: "Graphiques partagés"
           url: "graphing/dashboards/shared_graph/"
           weight: 130
-          parent: customnav_graphingnav_dashboards
-        - identifier: customnav_graphingnav_widgets
-          name: "Widgets"
-          url: "graphing/dashboards/widgets/"
-          weight: 140
           parent: customnav_graphingnav_dashboards
 
         # Metrics
@@ -1575,47 +1643,52 @@ languages:
         - identifier: customnav_graphingnav_arithmetic
           name: "Arithmetic"
           url: "graphing/functions/arithmetic/"
-          weight: 620
+          weight: 615
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_count
           name: "Count"
           url: "graphing/functions/count/"
-          weight: 630
+          weight: 620
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_interpolation
           name: "Interpolation"
           url: "graphing/functions/interpolation/"
-          weight: 640
+          weight: 625
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_rank
           name: "Rank"
           url: "graphing/functions/rank/"
-          weight: 650
+          weight: 630
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_rate
           name: "Rate"
           url: "graphing/functions/rate/"
-          weight: 660
+          weight: 635
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_regression
           name: "Regression"
           url: "graphing/functions/regression/"
-          weight: 670
+          weight: 640
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_rollup
           name: "Rollup"
           url: "graphing/functions/rollup/"
-          weight: 680
+          weight: 645
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_smoothing
           name: "Smoothing"
           url: "graphing/functions/smoothing/"
-          weight: 690
+          weight: 650
           parent: customnav_graphingnav_functions
         - identifier: customnav_graphingnav_timeshift
           name: "Timeshift"
           url: "graphing/functions/timeshift/"
-          weight: 695
+          weight: 655
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_beta
+          name: "Beta"
+          url: "graphing/functions/beta/"
+          weight: 660
           parent: customnav_graphingnav_functions
 
         - identifier: customnav_graphingnav_graphingjson
@@ -1710,11 +1783,22 @@ languages:
           url: "monitors/monitor_types/process/"
           weight: 420
           parent: customnav_monitornav_monitor_types
+
+        # Manage monitor
         - identifier: customnav_monitornav_manage_monitor
           name: "Gérer les monitors"
           url: "monitors/manage_monitor/"
           weight: 130
           parent: menu_references_monitoring
+
+        # Monitor status
+        - identifier: customnav_monitornav_monitor_status
+          name: "Status de Monitor"
+          url: "monitors/monitor_status/"
+          weight: 135
+          parent: menu_references_monitoring
+
+        # Check summary
         - identifier: customnav_monitornav_check_summary
           name: "Sommaire des Checks"
           url: "monitors/check_summary/"
@@ -2186,11 +2270,35 @@ languages:
         #  weight: 90
         #  parent: menu_references_logs
 
+        # Guides
+        - identifier: customnav_logsnav_guides
+          name: "Guides"
+          url: "logs/guide/"
+          weight: 90
+          parent: menu_references_agent
+
         - identifier: customnav_loggnav_security
           name: "Sécurité"
           url: "logs/security"
           weight: 100
           parent: menu_references_logs
+
+          # SYNTHETICS
+        - identifier: menu_references_synthetics
+          name: "Synthetics"
+          url: "synthetics/"
+          pre: "nav_synthetics"
+          weight: 99
+        - identifier: synthetics_uptime_check
+          name: "Uptime Check"
+          url: "synthetics/uptime_check"
+          weight: 100
+          parent: menu_references_synthetics
+        - identifier: synthetics_browser_check
+          name: "Browser Check"
+          url: "synthetics/browser_check"
+          weight: 120
+          parent: menu_references_synthetics
 
         # DEVELOPERS
         - identifier: menu_references_developers
@@ -2338,6 +2446,11 @@ languages:
           url: "account_management/saml/activedirectory"
           weight: 510
           parent: customnav_accountmanagementnav_saml
+        - identifier: saml_auth0
+          name: "Auth0"
+          url: "account_management/saml/auth0"
+          weight: 515
+          parent: customnav_accountmanagementnav_saml
         - identifier: saml_azure
           name: "Azure"
           url: "account_management/saml/azure"
@@ -2357,6 +2470,11 @@ languages:
           name: "Okta"
           url: "account_management/saml/okta"
           weight: 550
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_safenet
+          name: "SafeNet"
+          url: "account_management/saml/safenet"
+          weight: 560
           parent: customnav_accountmanagementnav_saml
 
         - identifier: customnav_accountmanagementnav_multi_organization

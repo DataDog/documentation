@@ -1,0 +1,52 @@
+Setup OpenCSW repos:
+
+* pkgadd -d http://get.opencsw.org/now
+
+Add the OpenCSW bin dir to the path to save some typing:
+
+* export PATH=/opt/csw/bin:$PATH
+
+and install updated versions of sysstat and python2.7, plus some other prerequisites:
+
+* pkgutil -U
+* pkgutil -y -i sysstat
+* pkgutil -y -i python27
+* pkgutil -y -i python27_dev <----missed this at first and installing it fixed a bunch of fatal errors.
+* pkgutil -y -i gcc5core <----missed this at first too
+* pkgutil -y -i php5_gmp <---not 100% sure this is needed, the gmp.h file that was missing is in ibgmp_dev
+* pkgutil -y -i libgmp_dev <---needed for gmp.h
+* pkgutil -y -i postgresql_dev
+This fixes most of the errors, but it bails on the install script because pkgin is missing.
+
+Install pkgsrc from Joyent repos:
+
+* # # Copy and paste the lines below to install the 64-bit set. #
+* BOOTSTRAP_TAR="bootstrap-2016Q3-x86_64.tar.gz"
+* BOOTSTRAP_SHA="e2abe46ed8e5f26896f0bef43ed61fbc9308046f"
+* # Download the bootstrap kit to the current directory.
+* curl -O https://pkgsrc.joyent.com/packages/SmartOS/bootstrap/${BOOTSTRAP_TAR} (https://pkgsrc.joyent.com/packages/SmartOS/bootstrap/$%7BBOOTSTRAP_TAR%7D)
+* # Verify the SHA1 checksum.
+* [ "${BOOTSTRAP_SHA}" = "$(/bin/digest -a sha1 ${BOOTSTRAP_TAR})" ] || echo "ERROR: checksum failure"
+* # Verify PGP signature. This step is optional, and requires gpg.
+* curl -O https://pkgsrc.joyent.com/packages/SmartOS/bootstrap/${BOOTSTRAP_TAR}.asc (https://pkgsrc.joyent.com/packages/SmartOS/bootstrap/$%7BBOOTSTRAP_TAR%7D.asc)
+* gpg --recv-keys 0xDE817B8E
+* gpg --verify ${BOOTSTRAP_TAR}{.asc,}
+* # Install bootstrap kit to /opt/local
+* sudo tar -zxpf ${BOOTSTRAP_TAR} -C /
+* # Add to PATH/MANPATH.
+* export PATH=/opt/local/sbin:/opt/local/bin:$PATH
+* export MANPATH=/opt/local/man:$MANPATH
+
+Then it gets interesting. All the Fatal errors are gone from the log and the only error lines relate to trying to build pycurl and winrandom-ctypes, but it doesn't seem to be the issue, as it skips them. The log file is confusing as it interlaces some results from different processes at the end so it's hard to tell what's blowing up. But the install process was saying "Starting agent" when it blew up so I thought I'd try it manually, and that's when I discovered the last issue:
+
+Somehow the DD_HOME variable wasn't getting set, which meant that the line to import the service config and the line to start the agent were failing because the paths start with "DD_HOME". So set that stuff manually:
+
+* DD_HOME="/opt/local/datadog"
+
+Then import the service config and start the agent:
+
+* svccfg import "$DD_HOME/agent/packaging/datadog-agent/smartos/dd-agent.xml"
+* svcadm enable site/datadog
+* svcs datadog
+
+It's running! Check the hosts list and sure enough there it is... And the only blank chart on the default dashboard for it is the process memory usage chart.

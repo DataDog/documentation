@@ -1,8 +1,8 @@
 ---
-title: Ajouter des tags à un hôte
+title: Ajouter des tags à un host
 type: apicode
-order: 20.3
-external_redirect: /api/#ajouter-des-tags-a-un-hote
+order: 21.3
+external_redirect: /api/#ajouter-des-tags-a-un-host
 ---
 
 ##### Signature

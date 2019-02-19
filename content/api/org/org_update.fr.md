@@ -1,10 +1,9 @@
 ---
 title: Mettre à jour une organisation
 type: apicontent
-order: 18.3
-external_redirect: /api/#mettre-a-jour-une-organisation
+order: 19.3
+external_redirect: '/api/#mettre-a-jour-une-organisation'
 ---
-
 ## Mettre à jour une organisation
 
 ##### ARGUMENTS
@@ -17,4 +16,4 @@ external_redirect: /api/#mettre-a-jour-une-organisation
     *  **`saml_strict_mode`** : possède une propriété `enabled` (booléenne).
     * **`saml_autocreate_users_domains`** : possède deux propriétés, `enabled` (booléenne) et `domains`, qui correspond à la liste des domaines sans le symbole « @ ».
 
-[1]: /account_management/saml
+[1]: /fr/account_management/saml

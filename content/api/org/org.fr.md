@@ -1,10 +1,10 @@
 ---
 title: Organisations
 type: apicontent
-order: 18
-external_redirect: /api/#organisations
+order: 19
+external_redirect: '/api/#organisations'
 ---
 ## Organisations
 Créez, modifiez et gérez vos organisations. En savoir plus sur les [comptes multi-org][1].
 
-[1]: /account_management/multi_organization
+[1]: /fr/account_management/multi_organization

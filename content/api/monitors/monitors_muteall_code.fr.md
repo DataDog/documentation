@@ -1,7 +1,7 @@
 ---
 title: Désactiver tous les monitors
 type: apicode
-order: 17.07
+order: 18.07
 external_redirect: /api/#desactiver-tous-les-monitors
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#desactiver-tous-les-monitors
 {{< code-snippets basename="api-monitor-mute-all" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-monitor-mute-all" >}}
-

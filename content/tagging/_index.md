@@ -21,12 +21,12 @@ Tags are a way of adding dimensions to metrics, so they can be filtered, aggrega
 
 Tagging binds different data types in Datadog, allowing for correlation and call to action between metrics, traces, and logs. This is accomplished with **reserved** tag keys. Here are some examples:
 
-| Tag Key   | Allows for                                                          |
-|-----------|---------------------------------------------------------------------|
-| `host`    | Correlation between metrics, traces, processes, and logs            |
-| `device`  | Segregation of metrics, traces, process, and logs by device or disk |
-| `source`  | Event filtering and automated pipeline creation for log management  |
-| `service` | Correlation between traces and logs                                 |
+| Tag Key     | Allows for                                                            |
+| ----------- | --------------------------------------------------------------------- |
+| `host`      | Correlation between metrics, traces, processes, and logs              |
+| `device`    | Segregation of metrics, traces, process, and logs by device or disk   |
+| `source`    | Event filtering and automated pipeline creation for log management    |
+| `service`   | Correlation between metrics, traces, and logs                         |
 
 ## Why It Matters
 
@@ -52,7 +52,7 @@ Below are Datadog's tagging restrictions, requirements, and suggestions:
     **Note**: A tag cannot end with a colon, for example `tag:`
 
 2. Tags can be **up to 200 characters** long and support Unicode.
-3. Tags are converted to lowercase.
+3. Tags are converted to lowercase. Therefore, `CamelCase` tags are not recommended. Authentication (crawler) based integrations convert camel case tags to underscores, for example `TestTag` --> `test_tag`.
 4. A tag can be in the format `value` or `<KEY>:<VALUE>`. For optimal functionality, **we recommend constructing tags in the `<KEY>:<VALUE>` format.** Commonly used tag keys are `env`, `instance`, and `name`. The key always precedes the first colon of the global tag definition, for example:
     
     | Tag                | Key           | Value          |

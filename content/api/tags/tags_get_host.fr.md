@@ -1,12 +1,11 @@
 ---
-title: Récupérer les tags d'un hôte
+title: Récupérer les tags d'un host
 type: apicontent
-order: 20.2
-external_redirect: /api/#recuperer-les-tags-d-un-hote
+order: 21.2
+external_redirect: '/api/#recuperer-les-tags-d-un-host'
 ---
-
-## Récupérer les tags d'un hôte
-Renvoie la liste des tags qui s'appliquent à un hôte donné.
+## Récupérer les tags d'un host
+Renvoie la liste des tags qui s'appliquent à un host donné.
 
 ##### ARGUMENTS
 * **`source`** [*facultatif*, *défaut*=**None**] :
@@ -15,4 +14,4 @@ Renvoie la liste des tags qui s'appliquent à un hôte donné.
 * **`by_source`** [*facultatif*, *défaut*=**False**] :
    Renvoie les tags regroupés par source.
 
-[1]: /integrations/faq/list-of-api-source-attribute-value
+[1]: /fr/integrations/faq/list-of-api-source-attribute-value

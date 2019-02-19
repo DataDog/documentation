@@ -33,9 +33,15 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     position:absolute;
     max-width: 266px;
     background: rgba(248, 248, 248, 0.8);
-    height: 100%;
+    height: 94%;
     right: 0px;
-    z-index: 9;
+    z-index: 3;
+    
+    // for left aligned ToC layout for large screens
+    @media (min-width: 1720px){
+      max-width: none !important;
+      min-width: 240px !important;
+    }
   }
 }
 

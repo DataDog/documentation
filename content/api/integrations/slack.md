@@ -1,7 +1,7 @@
 ---
 title: Slack
 type: apicontent
-order: 14.5
+order: 15.5
 external_redirect: /api/#slack
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Graphs
 type: apicode
-order: 12
+order: 13
 external_redirect: /api/#graphs
 ---
 

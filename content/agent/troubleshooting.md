@@ -49,21 +49,29 @@ further_reading:
 
 If you have not yet installed the Datadog Agent, go [to the dedicated Agent integration page][1] for installation instructions. If you just installed the Agent, it may take a few moments before you start seeing metrics appear. The first place you should check for metrics is the [Metrics Explorer][2].
 
-If you think you might be experiencing issues, the first thing to do is [run the info command][3] and check the [Agent logs][4].
+If you think you might be experiencing issues, follow this checklist first:
 
-If you're still unsure about the issue, you may reach out to [Datadog support team][5] along with [a flare](#send-a-flare) of your Agent.
+* Is your host connected to the internet or able to access it through a proxy?
+* If using a proxy: is your [Agent configured for this proxy][3]?
+* Is the Datadog API key set up in your `datadog.yaml` configuration file [the API key corresponding to your Datadog platform][4]?
+* Is there only one Datadog Agent running on your host?
+* Did you restart the Datadog Agent after editing a yaml configuration file?
+
+If the answer to all questions above is `yes`, then [run the status command][5] for more details about your Agent and its integrations status. You can also check the [Agent logs][6] directly and enable debug mode to [get more logging from the Agent](#get-more-logging-from-the-agent).
+
+If you're still unsure about the issue, you may reach out to the [Datadog support team][7] with [a flare](#send-a-flare) from your Agent.
 
 ## Get more logging from the Agent
 
 To enable the full debug mode:
 
-1. Modify your local `datadog.yaml` file (see [this page][6] to locate this configuration file on your instance)
+1. Modify your local `datadog.yaml` file (see [this page][8] to locate this configuration file on your instance)
 
 2. Replace `# log_level: INFO` with `log_level: DEBUG` (remove `#` to uncomment the line).
 
-3. Restart the Datadog Agent. See the [Agent Commands][7] page for OS-specific details.
+3. Restart the Datadog Agent. See the [Agent Commands][9] page for OS-specific details.
 
-4. Wait a few minutes to generate some logs. [See the Agent][4] docuementation for the location of the logs.
+4. Wait a few minutes to generate some logs. [See the Agent][6] docuementation for the location of the logs.
 
 ### Obtaining debug logs from the container Agent
 
@@ -126,7 +134,7 @@ If you are running Agent 5.3+, you can send necessary troubleshooting informatio
 
 `flare` gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information including passwords, API keys, Proxy credentials, and SNMP community strings.  
 **Confirm the upload of the archive to immediately send it to Datadog support**.  
-Datadog Agent is completely open source, which allows you to [verify the code's behavior][8]. If needed, the flare can be reviewed prior to sending since the flare prompts a confirmation before uploading it.  
+Datadog Agent is completely open source, which allows you to [verify the code's behavior][10]. If needed, the flare can be reviewed prior to sending since the flare prompts a confirmation before uploading it.  
 
 In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if you don't specify a case ID, the command asks for an email address that is used to login in your organization and creates a new support case.
 
@@ -218,7 +226,7 @@ sudo -u dd-agent dd-agent check <CHECK_NAME> --check-rate
 {{% /tab %}}
 {{< /tabs >}}
 
-If your issue continues, [reach out to the Datadog support team][5] with a [flare](#flare).
+If your issue continues, [reach out to the Datadog support team][7] with a [flare](#flare).
 
 ### Windows
 
@@ -261,7 +269,7 @@ C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'File
 
 ## Systemd
 
-For [systems using systemd][9], use `journalctl` to assist with debugging.
+For [systems using systemd][11], use `journalctl` to assist with debugging.
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
@@ -302,10 +310,12 @@ sudo journalctl -u dd-agent.service
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://app.datadoghq.com/metric/explorer
-[3]: /agent/faq/agent-commands/#agent-status-and-information
-[4]: /agent/basic_agent_usage/#log-location
-[5]: /help
-[6]: /agent/faq/agent-configuration-files/?tab=agentv6
-[7]: /agent/faq/agent-commands
-[8]: https://github.com/DataDog/dd-agent/blob/master/utils/flare.py
-[9]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
+[3]: /agent/proxy
+[4]: https://app.datadoghq.com/account/settings#api
+[5]: /agent/faq/agent-commands/#agent-status-and-information
+[6]: /agent/faq/agent-log-files
+[7]: /help
+[8]: /agent/faq/agent-configuration-files/?tab=agentv6
+[9]: /agent/faq/agent-commands
+[10]: https://github.com/DataDog/dd-agent/blob/master/utils/flare.py
+[11]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands

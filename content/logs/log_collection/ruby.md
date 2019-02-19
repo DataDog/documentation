@@ -71,7 +71,7 @@ gem 'logging-rails', :require => 'logging/rails'
 gem 'lograge'
 ```
 
-##Configure Lograge
+## Configure Lograge
 In your configuration file, set the following:
 
 ```ruby
@@ -162,6 +162,40 @@ logs:
 That's it! Now, all the rails calls are going to be in proper JSON automatically understood by your Datadog application.
 
 ## Further Reading
+
+### Inject trace IDs in your logs
+
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][3] to automatically add trace and span ids in your logs.
+
+Once this is done, the log should have the following (for JSON format):
+
+```json
+{
+  "timestamp":"2016-01-12T19:15:19.118829+01:00",
+  "level":"INFO",
+  "logger":"Rails",
+  "message": {
+    "method":"GET",
+    "path":"/jobs/833552.json",
+    "format":"json",
+    "controller":"jobs",
+    "action":"show",
+    "status":200,
+    "duration":58.33,
+    "view":40.43,
+    "db":15.26,
+    "dd":{
+      "trace_id":7290723543738956761,
+      "span_id":8140992452225855633
+    },
+    "ddsource": ["ruby"],
+    "params":{}
+  }
+}
+```
+
+Then [configure the Datadog Agent](#configure-the-datadog-agent) to collect ruby logs from the file.
+
 ### Good logging practices in your application
 
 Now that your logging configuration is sending proper JSON, you should exploit it as much as you can.
@@ -243,3 +277,4 @@ end
 
 [1]: https://github.com/roidrage/lograge#installation
 [2]: https://github.com/TwP/logging/blob/master/lib/logging/layouts/parseable.rb#L100
+[3]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=ruby#correlate-traces-and-logs

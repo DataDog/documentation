@@ -2,12 +2,14 @@
 aliases:
   - /fr/integrations/aws/
   - /fr/logs/aws
+  - /fr/integrations/faq/revoking-aws-keys-and-enabling-role-delegation-for-the-datadog-aws-integration/
 categories:
   - cloud
   - aws
   - log collection
 ddtype: crawler
-description: Intégrez vos services AWS avec Datadog.
+dependencies: []
+description: Intégrez vos services AWS à Datadog.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_web_services/'
 git_integration_title: amazon_web_services
 has_logo: true
@@ -16,85 +18,94 @@ is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_web_services
-public_title: Intégration Datadog-AWS
-short_description: Intégrez vos services AWS avec Datadog.
+public_title: Intégration Datadog/AWS
+short_description: Intégrez vos services AWS à Datadog.
 version: '1.0'
 ---
-## Aperçu
+## Présentation
 
-Connectez-vous à Amazon Web Services (AWS) pour:
+Connectez-vous à Amazon Web Services (AWS) pour :
 
-* Voir les mises à jour de statut AWS dans votre flux d'événements
-* Obtenir des métriques CloudWatch pour les hôtes EC2 sans installer l'agent
-* Tagger vos hôtes EC2 avec des informations spécifiques à EC2 (par exemple la zone de disponibilité)
-* Voir les périodes maintenances de EC2 planifiées dans votre flux
-* Collecte des métriques et les événements CloudWatch des nombreux autres produits AWS
+* Consulter des mises à jour automatiques de statut AWS dans votre flux
+* Obtenir des métriques CloudWatch pour les hosts EC2 sans installer l'Agent
+* Appliquer un tag à vos hosts EC2 comportant des informations spécifiques à EC2 (p. ex., leur zone de disponibilité)
+* Consulter les événements de maintenance EC2 planifiés dans votre flux
+* Recueillir des métriques et des événements CloudWatch depuis de nombreux autres produits AWS
 
+Les intégrations connexes comprennent :
 
-Les intégrations connexes incluent:
-
-|                                                           |                                                                               |
-| :---------------------------------------------------------|:------------------------------------------------------------------------------|
-| [API Gateway][8]                | créer, publier, maintenir et sécuriser les API                                    |
-| [Autoscaling][9]               | scale EC2 capacity                                                            |
-| [Billing][10]                       | billing and budgets                                                           |
-| [CloudFront][11]                 | glocal content delivery network                                               |
-| [CloudTrail][12]                 | accès aux fichiers de log et aux appels d'API AWS                                         |
-| [CloudSearch][13]               | accès aux fichiers de log et aux appels d'API AWS                                         |
-| [Direct Connect][14]          | connexion réseau dédiée à AWS                                           |
-| [Dynamo DB][15]                      | NoSQL Database                                                                |
-| [EC2 Container Service (ECS)][16]          | service de gestion de conteneur prenant en charge les conteneurs Docker                  |
-| [Elastic Beanstalk][17]           | service facile à utiliser pour le déploiement et le scaling d'applications et de services Web   |
-| [Elastic Block Store (EBS)][18]         | volumes de stockage au niveau du bloc persistant                                        |
-| [ElastiCache][19]               | cache in-memory dans le cloud                                                  |
+|                                         |                                                                               |
+| --------------------------------------- | ----------------------------------------------------------------------------- |
+| [API Gateway][8]                        | crée, publie, maintient et sécurise des API                                    |
+| [Autoscaling][9]                        | met à l'échelle la capacité d'EC2                                                            |
+| [Billing][10]                           | facturation et budgets                                                           |
+| [CloudFront][11]                        | réseau de diffusion de contenu local                                                |
+| [CloudTrail][12]                        | accède aux fichiers logs et aux appels d'API AWS                                         |
+| [CloudSearch][13]                       | accède aux fichiers logs et aux appels d'API AWS                                         |
+| [Direct Connect][14]                    | connexion réseau dédiée à AWS                                           |
+| [Dynamo DB][15]                         | Base de données NoSQL                                                                |
+| [EC2 Container Service (ECS)][16]       | service de gestion de conteneurs prenant en charge les conteneurs Docker                  |
+| [Elastic Beanstalk][17]                 | service convivial pour le déploiement et la mise à l'échelle d'applications et de services Web   |
+| [Elastic Block Store (EBS)][18]         | volumes de stockage permanent en mode bloc                                        |
+| [ElastiCache][19]                       | cache en mémoire dans le cloud                                                  |
 | [Elastic Cloud Compute (EC2)][20]       | capacité de calcul redimensionnable dans le cloud                                       |
 | [Elastic File System (EFS)][21]         | stockage de fichiers partagé                                                           |
-| [Elastic Load Balancing (ELB)][22]      | distribue le trafic d'applications entrantes sur plusieurs instances Amazon EC2 |
-| [Elastic Map Reduce (EMR)][23]          | data processing using Hadoop                                                  |
-| [Elasticsearch Service (ES)][24]         |  déployer, exploiter et mettre à l'échelle les clusters Elasticsearch                            |
-| [Firehose][25]                     | capture and load streaming data                                               |
-| [IOT][26]                               | connecter des périphériques IOT avec des services cloud                                       |
-| [Kinesis][27]                       | service pour le traitement en temps réel de grands flux de données distribués           |
-| [Key Management Service (KMS)][28]      | créer et contrôler les clés de chiffrement                                            |
-| [Lambda][29]                         | serverless computing                                                          |
-| [Machine Learning (ML)][30]              | créer des modèles de machine learning                                                |
-| [OpsWorks][31]                     | gestion de la configuration                                                      |
-| [Polly][32]                           | service de texte-discours                                                           |
-| [Redshift][33]                     | solution de data warehouse                                                       |
+| [Elastic Load Balancing (ELB)][22]      | distribution du trafic entrant d'applications sur plusieurs instances Amazon EC2 |
+| [Elastic Map Reduce (EMR)][23]          | processing de données avec Hadoop                                                  |
+| [Elasticsearch Service (ES)][24]        | déploie, exploite et met à l'échelle des clusters Elasticsearch                             |
+| [Firehose][25]                          | enregistrement et chargement de données de diffusion                                               |
+| [IoT][26]                               | connecte des appareils IoT à des services cloud                                       |
+| [Kinesis][27]                           | service de processing en temps réel de grands flux de données distribués           |
+| [Key Management Service (KMS)][28]      | crée et contrôle des clés de chiffrement                                            |
+| [Lambda][29]                            | calcul sans serveur                                                          |
+| [Machine Learning (ML)][30]             | crée des modèles d'apprentissage automatique                                                |
+| [OpsWorks][31]                          | gestion de configuration                                                      |
+| [Polly][32]                             | service de synthèse vocale                                                           |
+| [Redshift][33]                          | solution d'entrepôt de données                                                       |
 | [Relational Database Service (RDS)][34] | base de données relationnelle dans le cloud                                              |
-| [Route 53][35]                      | Gestion du DNS et du trafic avec monitoring de la disponibilité                       |
-| [Simple Email Service (SES)][36]        | service d'envoi de courrier électronique sortant uniquement                           |
-| [Simple Notification System (SNS)][37]  | alerte et notifications                                                       |
+| [Route 53][35]                          | gestion de DNS et de trafic avec surveillance de la disponibilité                       |
+| [Simple Email Service (SES)][36]        | service économique d'envoi d'e-mails                           |
+| [Simple Notification System (SNS)][37]  | alertes et notifications                                                       |
 | [Simple Queue Service (SQS)][38]        | service de file d'attente de messagerie                                                       |
-| [Simple Storage Service (S3)][39]        | service de stockage cloud hautement disponible et évolutif                           |
-| [Simple Workflow Service (SWF)][40]     | gestion du workflow cloud                                                     |
-| [Storage Gateway][41]        | stockage cloud hybride                                                          |
-| [Web Application Firewall (WAF)][42]    | protéger les applications Web contre les intrusions Web courantes                             |
-| [Workspaces][43]                 | service informatique de bureau sécurisé                                              |
+| [Simple Storage Service (S3)][39]       | service de stockage dans le cloud hautement disponible et évolutif                           |
+| [Simple Workflow Service (SWF)][40]     | gestion de workflow dans le cloud                                                     |
+| [Storage Gateway][41]                   | stockage cloud hybride                                                          |
+| [Web Application Firewall (WAF)][42]    | protège des applications Web contre les failles Web les plus courantes                             |
+| [Workspaces][43]                        | service de bureau sécurisé                                              |
+| [X-Ray][97]                             | création de traces pour des applications distribuées                                          |
 
 ## Implémentation
 ### Installation
 
-La configuration de l'intégration de Datadog avec Amazon Web Services nécessite la configuration de la délégation de rôles à l'aide d'AWS IAM. 
-Pour mieux comprendre la délégation des rôles, reportez-vous au [AWS IAM Best Practices guide][44].
+La configuration de l'intégration de Datadog à Amazon Web Services nécessite la configuration de la délégation de rôles à l'aide d'AWS IAM. 
+Pour mieux comprendre le principe de délégation des rôles, reportez-vous au [guide des meilleures pratiques d'AWS IAM][44].
 
 <div class="alert alert-warning">
-Les régions GovCloud et China ne prennent pas actuellement en charge la délégation de rôle IAM. 
-Si vous déployez dans ces régions, veuillez passer la séction  <a href="#configuration-for-china-and-govcloud">configuration </a> ci dessous.
+Les régions GovCloud et Chine ne prennent actuellement pas en charge la délégation de rôle IAM. Si vous effectuez un déploiement dans ces régions, passez directement à la <a href="#configuration">section Configuration</a> ci-dessous.
 </div>
 
-1.  Créez un nouveau rôle dans la [console IAM d'AWS][45].
-2.  Sélectionnez `Un autre compte AWS` pour le Role Type.
-3.  Pour Account ID, entrez `464622532012` (identifiant de compte Datadog). Cela signifie que vous accordez à Datadog un accès en lecture seule à vos données AWS.
-4.  Cochez la case `Require external ID` et entrez celle générée [dans l'application Datadog][46]. Assurez-vous de laisser **Require MFA** désactivé. *Pour plus d'informations sur External ID, reportez-vous à [ce document dans le Guide de l'utilisateur IAM][47]*.
-5.  Cliquez sur `Next: Permissions`.
-6.  Cliquez sur `Create Policy`. Notez que si vous avez déjà créé la politique, recherchez-la sur cette page et utilisez-la avec "select it". Sinon, complétez ce qui suit pour en créer une nouvelle.
-7.  Choisissez `Create Your Own Policy`.
-8.  Nommez la politique `DatadogAWSIntegrationPolicy`, ou un autre nom de votre choix et fournissez une description adéquate. Pour tirer parti de toutes les intégrations AWS offertes par Datadog, utilisez ce qui suit dans la zone de texte **Policy Document**. Lorsque nous ajoutons d'autres composants à l'intégration, ces autorisations peuvent changer.
+1. Créez un nouveau rôle dans la [console IAM d'AWS][45].
+2. Sélectionnez le type de rôle `Another AWS account`.
+3. Pour Account ID, saisissez `464622532012` (identifiant de compte Datadog). Cela signifie que vous accordez à Datadog un accès en lecture seule à vos données AWS.
+4. Cochez la case `Require external ID` et saisissez l'ID généré [dans l'application Datadog][46]. Assurez-vous de ne pas cocher **Require MFA**. *Pour en savoir plus sur l'External ID, consultez [ce document du Guide de l'utilisateur d'IAM][47]*.
+5. Cliquez sur `Next: Permissions`.
+6. Si vous avez déjà créé la stratégie, sélectionnez-la sur cette page, puis passez à l'étape 12. Si ce n'est pas le cas, cliquez sur `Create Policy` afin d'ouvrir une nouvelle fenêtre.
+7. Sélectionnez l'onglet `JSON`. Afin de profiter de toutes les intégrations AWS proposées par Datadog, utilisez l'[extrait de stratégie](#strategie-iam-aws-datadog) sous la zone de texte. Étant donné que d'autres composants sont ajoutés à une intégration, ces autorisations peuvent évoluer.
+8. Cliquez sur `Review policy`.
+9. Nommez la stratégie `DatadogAWSIntegrationPolicy` ou utilisez le nom de votre choix, et saisissez une description pertinente.
+10. Cliquez sur `Create policy`. Vous pouvez ensuite fermer cette fenêtre.
+11. Depuis la fenêtre « Create role », actualisez la liste des stratégies et sélectionnez celle que vous venez de créer.
+12. Cliquez sur `Next: Review`.
+13. Saisissez le nom `DatadogAWSIntegrationRole` ou un nom similaire pour le rôle, ainsi qu'une description pertinente. Cliquez sur `Create role`.
 
-<div class="alert alert-info">
-Ces actions et celles listées ci-dessous sont incluses dans le document de stratégie en utilisant des caractères génériques tels que <code>List*</code> and <code>Get*</code>. Si vous avez besoin de règles strictes, veuillez utiliser les noms d'action complets indiqués et vous reporter à la documentation de l'API Amazon pour les services dont vous avez besoin.
-</div>
+**Étape facultative** : si vous utilisez Terraform, configurez votre stratégie IAM Datadog à l'aide de [l'intégration AWS avec Terraform][3].
+
+#### Stratégie IAM AWS Datadog
+Les autorisations énumérées ci-dessous sont incluses dans le document de stratégie à l'aide de wildcards comme `List*` et `Get*`. Si vous avez besoin de stratégies strictes, utilisez les noms d'action complets indiqués et consultez la documentation sur l'API Amazon pour les services requis.
+
+{{< tabs >}}
+{{% tab "Toutes les autorisations" %}}
+Si vous ne souhaitez pas accorder toutes les autorisations, nous vous recommandons d'utiliser au strict minimum les stratégies **AmazonEC2ReadOnlyAccess** et **CloudWatchReadOnlyAccess**. Pour en savoir plus sur les autorisations, consultez l'onglet **Autorisations de base**.
 
 ```json
 {
@@ -102,6 +113,7 @@ Ces actions et celles listées ci-dessous sont incluses dans le document de stra
   "Statement": [
     {
       "Action": [
+        "apigateway:GET",
         "autoscaling:Describe*",
         "budgets:ViewBudget",
         "cloudfront:GetDistributionConfig",
@@ -142,6 +154,9 @@ Ces actions et celles listées ci-dessous sont incluses dans le document de stra
         "logs:Describe*",
         "logs:FilterLogEvents",
         "logs:TestMetricFilter",
+        "logs:PutSubscriptionFilter",
+        "logs:DeleteSubscriptionFilter",
+        "logs:DescribeSubscriptionFilters",
         "rds:Describe*",
         "rds:List*",
         "redshift:DescribeClusters",
@@ -158,9 +173,11 @@ Ces actions et celles listées ci-dessous sont incluses dans le document de stra
         "sns:Publish",
         "sqs:ListQueues",
         "support:*",
-        "tag:getResources",
-        "tag:getTagKeys",
-        "tag:getTagValues"
+        "tag:GetResources",
+        "tag:GetTagKeys",
+        "tag:GetTagValues",
+        "xray:BatchGetTraces",
+        "xray:GetTraceSummaries"
       ],
       "Effect": "Allow",
       "Resource": "*"
@@ -168,14 +185,9 @@ Ces actions et celles listées ci-dessous sont incluses dans le document de stra
   ]
 }
 ```
-
-Si vous n'êtes pas à l'aise avec l'octroi de toutes ces autorisations, utilisez au moins les actions suivantes: **AmazonEC2ReadOnlyAccess** et **CloudWatchReadOnlyAccess**, pour plus d'informations sur les permissions, consultez la section [Permissions](#permissions) ci-dessous.
-9.  Cliquez sur `Next: Review`.
-10.  Attribuez un nom au rôle, par exemple `DatadogAWSIntegrationRole` et une description appropriée, puis cliquez sur `Create Role`.
-
-### Permissions
-
-L'intégration de base Datadog-AWS extrait des données d'AWS CloudWatch. Au minimum, votre Policy Document doit autoriser les actions suivantes:
+{{% /tab %}}
+{{% tab "Autorisations de base" %}}
+L'intégration AWS/Datadog de base récupère des données à partir d'AWS CloudWatch. Votre document de stratégie doit au minimum autoriser les actions suivantes :
 
 ```json
 {
@@ -187,9 +199,9 @@ L'intégration de base Datadog-AWS extrait des données d'AWS CloudWatch. Au min
         "cloudwatch:List*",
         "ec2:Describe*",
         "support:*",
-        "tag:getResources",
-        "tag:getTagKeys",
-        "tag:getTagValues"
+        "tag:GetResources",
+        "tag:GetTagKeys",
+        "tag:GetTagValues"
       ],
       "Effect": "Allow",
       "Resource": "*"
@@ -198,116 +210,144 @@ L'intégration de base Datadog-AWS extrait des données d'AWS CloudWatch. Au min
 }
 ```
 
-* **Cloudwatch**:
+| Autorisation AWS             | Description                                                                                   |
+| -------------------------- | --------------------------------------------------------------------------------------------- |
+| `cloudwatch:ListMetrics`   | Énumère les métriques CloudWatch disponibles.                                                        |
+| `cloudwatch:GetMetricData` | Récupère des points de données pour une métrique donnée.                                                         |
+| `support:*`               | Ajoute des métriques à propos des limites de service.<br>Nécessite un accès complet, en raison des [limites AWS][48]. |
+| `tag:getResources`         | Récupère des tags personnalisés en fonction du type de ressource.                                                             |
+| `tag:getTagKeys`           | Récupère des clés de tag selon les régions d'un compte AWS.                                                 |
+| `tag:getTagValues`         | Récupère les valeurs de tag selon les régions d'un compte AWS.                                               |
 
-    * `cloudwatch:ListMetrics` pour lister les métriques CloudWatch disponibles.
-    * `cloudwatch:GetMetricStatistics` pour extraire des points de données pour une métrique donnée.
+L'API Resource Group Tagging vise notamment à réduire le nombre d'appels API requis pour recueillir des tags personnalisés. Pour en savoir plus, consultez la documentation relative aux [stratégies sur les tags][49] sur le site Web d'AWS.
 
-* **Support**:
+[48]: http://docs.aws.amazon.com/IAM/latest/UserGuide/list_trustedadvisor.html
+[49]: http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html
 
-    * `support:*`: Utilisé pour ajouter des statistiques sur les limites de service.<br>Il nécessite un accès complet en raison des [limitations AWS][48]
-
-* **Tag**:
-
-    * `tag:getResources`: Utilisé pour obtenir des tags personnalisées par type de ressource.
-    * `tag:getTagKeys`: Permet d'obtenir des clés de tag par région dans un compte AWS.
-    * `tag:getTagValues`: Permet d'obtenir des valeurs de tag par région dans un compte AWS.
-
-    L'utilisation principale de l'API Resource Group Tagging consiste à réduire le nombre d'appels d'API dont nous avons besoin pour collecter les tags custom.  Pour plus d'informations sur [les règles de tag][49], consultez la documentation sur le site Web AWS.
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Délégation de rôles" %}}
+
 {{< img src="integrations/aws/integrations-aws-secretentry.png" alt="logo" responsive="true">}}
 
-1.  Ouvrez la [l'intégration AWS](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
-2.  Sélectionnez l'onglet **Role Delegation**.
-3.  Inscrivez votre identifient de compte AWS **sans tirets**, e.g. 123456789012, et non 1234-5678-9012. Votre identifiant de compte peut être trouvé dans l'ARN du rôle nouvellement créé. Ensuite, inscrivez le nom du rôle que vous venez de créer.
-4.  Choisissez les services pour lesquels vous désirez récupérer les métriques sur le côté gauche de la fenêtre de dialogue. Facultativement, vous pouvez ajouter des tags à tous les hôtes et métriques. De même, si vous souhaitez uniquement surveiller un sous-ensemble d'instances EC2 sur AWS, marquez-les et spécifiez le tag dans la zone de texte « limite » ici.
-5.  Cliquez **Install Integration**.
+1. Ouvrez le [carré d'intégration AWS][2].
+2. Sélectionnez l'onglet **Role Delegation**.
+3. Saisissez votre ID de compte AWS **sans tiret**, p. ex. `123456789012` et **non** `1234-5678-9012`. Votre ID de compte est indiqué dans l'ARN du rôle créé durant l'[installation de l'intégration AWS](#installation). Saisissez ensuite le nom du rôle créé. **Remarque** : le nom du rôle saisi dans le carré d'intégration est sensible à la casse et doit correspondre parfaitement au nom de rôle créé sur AWS.
+4. Choisissez les services pour lesquels vous souhaitez récupérer des métriques sur le côté gauche de la fenêtre de dialogue. Vous pouvez également ajouter des tags à l'ensemble des hosts et métriques. De même, si vous souhaitez uniquement surveiller un sous-ensemble d'instances EC2 sur AWS, appliquez-leur un tag et indiquez ce tag dans la zone de texte « limite » de cette page.
+5. Cliquez sur **Install Integration**.
 
-#### Configuration pour la Chine et GovCloud
+[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 
-1.  Ouvrez la [l'intégration AWS](https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
-2.  Sélectionnez l'onglet **Access Keys (GovCloud or China Only)**.
-3.  Inscrivez vos clés AWS d’accès et secrète respectivement. **Uniquement les clés d'accès et secrète pour la Chine et GovCloud sont permis.**
-4.  Choisissez les services pour lesquels vous désirez récupérer les métriques sur le côté gauche de la fenêtre de dialogue. Facultativement, vous pouvez ajouter des tags à tous les hôtes et métriques. De même, si vous souhaitez uniquement surveiller un sous-ensemble d'instances EC2 sur AWS, marquez-les et spécifiez le tag dans la zone de texte « limite » ici.
-5.  Cliquez **Install Integration**.
+{{% /tab %}}
+{{% tab "GovCloud et Chine" %}}
 
-## Collecte de log
+1. Ouvrez le [carré d'intégration AWS][2].
+2. Sélectionnez l'onglet **Access Keys (GovCloud or China Only)**.
+3. Saisissez votre clé d'accès et votre clé de secret AWS. **Seules les clés d'accès et de secret pour GovCloud et la Chine sont acceptées.**
+4. Choisissez les services pour lesquels vous souhaitez récupérer des métriques sur le côté gauche de la fenêtre de dialogue. Vous pouvez également ajouter des tags à l'ensemble des hosts et métriques. De même, si vous souhaitez uniquement surveiller un sous-ensemble d'instances EC2 sur AWS, appliquez-leur un tag et indiquez ce tag dans la zone de texte « limite » de cette page.
+5. Cliquez sur **Install Integration**.
 
-Pour commencer à récupérer des journaux d'évènements à partir d'un de vos services AWS, voici le processus général:
+[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 
-1. Configurer la fonction lambda Datadog
-2. Activer la journalisation pour votre service AWS
-2. Configurez les déclencheurs qui provoquent l'exécution de Lambda et envoyez les journaux d'évènements vers Datadog. Il existe deux façons de configurer les déclencheurs :
+{{% /tab %}}
+{{< /tabs >}}
 
-  * [automatiquement](#automatic-log-collection) : Avec les [permissions](#permissions) appropriées, Datadog les gère pour vous.
-  * [manuellement](#manually-set-up-triggers) : configurez vous-même chaque déclencheur dans la console AWS.
+## Collecte de logs
 
+Les logs de service AWS sont recueillis via la fonction Lambda de Datadog. Ce Lambda, qui se déclenche sur les compartiments S3, les groupes de logs CloudWatch et les événements CloudWatch, transmet des logs à Datadog.
 
-### Créez une nouvelle fonction Lambda
+Pour commencer à recueillir des logs à partir de vos services AWS :
 
-1. Naviguez vers le [Console Lambda][50] et créez une nouvelle fonction :
-    {{< img src="logs/aws/create_lambda_function.png" alt="Create Lambda function" responsive="true" style="width:80%;" >}}
+1. Configurez la [fonction Lambda de Datadog](#configurer-la-fonction-lambda-de-datadog).
+2. [Activez la création de logs](#activer-la-creation-de-logs-pour-votre-service-AWS) pour votre service AWS (la plupart des services AWS peuvent se connecter à un compartiment S3 ou à un groupe de logs CloudWatch).
+3. Configurez les déclencheurs entraînant l'exécution du lambda. Il existe deux façons de les configurer :
 
-2. Sélectionnez **Author from scratch** et inscrivez un nom unique pour la fonction.
-3. Modifiez le Runtime en tant que **Python 2.7**
-4. Pour `Role`, sélectionnez **Create new role from template(s)** et inscrivez un nom unique pour le rôle.
-5. Parmi les modèles de stratégie, recherchez pour et sélectionnez **s3 object read-only permissions**.
+  * [automatiquement](#configurer-automatiquement-des-declencheurs) : Datadog récupère les logs pour les services AWS sélectionnés et les ajoute en tant que déclencheurs pour la fonction Lambda de Datadog. Datadog met également la liste à jour.
+  * [manuellement](#configurer-manuellement-des-declencheurs) : configurez vous-même chaque déclencheur via la console AWS.
+
+### Configurer la fonction Lambda de Datadog
+
+Pour ajouter le Lambda de transmission de logs à Datadog sur votre compte AWS, vous pouvez **utiliser le référentiel sans serveur AWS *ou* créer manuellement un nouveau Lambda.**
+
+#### Référentiel sans serveur AWS
+
+Utilisez le [référentiel sans serveur AWS][96] pour déployer la fonction Lambda sur votre compte AWS.
+
+#### Créer manuellement un nouveau Lambda
+
+##### Créer une fonction Lambda
+
+1. Accédez à la [console Lambda][50] et créez une nouvelle fonction :
+    {{< img src="logs/aws/create_lambda_function.png" alt="Créer une fonction Lambda" responsive="true" popup="true" style="width:80%;" >}}
+
+2. Sélectionnez **Author from scratch** et saisissez un nom unique pour la fonction.
+3. Définissez Runtime sur **Python 2.7**.
+4. Pour `Role`, sélectionnez **Create new role from template(s)** et saisissez un nom unique pour le rôle.
+5. Si vous récupérez des logs à partir d'un compartiment S3, sous « Policy templates », sélectionnez **s3 object read-only permissions**.
 6. Sélectionnez **Create Function**.
-    {{< img src="logs/aws/author_from_scratch.png" alt="Author from Scratch" responsive="true" style="width:80%;" >}}
+    {{< img src="logs/aws/author_from_scratch.png" alt="Création de A à Z" responsive="true" style="width:80%;" >}}
 
-#### Fournissez le code et configurez le Lambda
+##### Fournir le code et configurer le Lambda
 
-1. Copiez et collez le code depuis [ce répo][51] dans le champ de code de la fonction.
-2. Assurez-vous que le Handler indique **lambda_function.lambda_handler**
-    {{< img src="logs/aws/select_python.png" alt="Select Python" responsive="true" style="width:80%;" >}}
-3. En haut du script vous trouverez une section intitulée `#Parameters`. Vous disposez de deux options pour fournir la clé API requise par la fonction Lambda :
+1. Copiez le code depuis [ce référentiel][51] et collez-le dans le champ de code de la fonction.
+2. Assurez-vous que le gestionnaire indique **lambda_function.lambda_handler**.
+    {{< img src="logs/aws/select_python.png" alt="Sélectionner Python" responsive="true" style="width:80%;" >}}
+3. En haut du script se trouve une section intitulée `#Parameters`. Vous pouvez fournir la clé d'API requise par la fonction Lambda de deux façons différentes :
 
-    * Configurez une variable d'environnement (préféré)
-    * Éditez le code directement avec votre clé d'API de Datadog
-    {{< img src="logs/aws/dd_api_key_setup.png" alt="DD API key setup" responsive="true" style="width:80%;" >}}
-4. Faites défiler en dépassant la champ de code en ligne pour retrouvez **Basic Settings**.
-5. Réglez la mémoire à **environ 1Go**.
-6. Réglez la limite de délai d'expiration. Nous recommandons **120 secondes**.
-    {{< img src="logs/aws/basic_settings.png" alt="Basic Settings" responsive="true" style="width:80%;" >}}
-7. Refaites défiler vers le haut de la page et cliquez **Save**.
+    * En configurant une variable d'environnement (recommandé)
+    * En ajoutant directement votre clé API Datadog dans le code
+    {{< img src="logs/aws/dd_api_key_setup.png" alt="Configuration clé API DD" responsive="true" popup="true" style="width:80%;" >}}
+4. Faites défiler jusqu'à atteindre **Basic Settings** sous la zone de code en ligne.
+5. Définissez la mémoire sur une valeur **proche de 1 Go**.
+6. Définissez le délai d'expiration (nous recommandons d'indiquer **120 secondes**).
+    {{< img src="logs/aws/basic_settings.png" alt="Réglages de base" responsive="true" style="width:80%;" >}}
+7. Faites défiler vers le haut de la page et cliquez sur **Save**.
 
-#### Testez votre Lambda
+#### Tester votre Lambda
 
-1. Appuyez **Test**.
-2. Recherchez pour et sélectionnez **Cloudwatch Logs** comme échantillon d'évènement.
-    {{< img src="logs/aws/test_event.png" alt="Test Event" responsive="true" style="width:80%;" >}}
-2. Fournissez un nom unique pour l'évènement et appuyez **Create**.
-3. Appuyez Test et assurez-vous que le test réussisse sans aucune erreur.
+1. Cliquez sur **Test**.
+2. Sélectionnez **CloudWatch Logs** comme événement de test.
+    {{< img src="logs/aws/test_event.png" alt="Événement test" responsive="true" style="width:80%;" >}}
+2. Saisissez un nom unique pour l'événement, puis cliquez sur **Create**.
+3. Cliquez sur Test et vérifiez qu'aucune erreur ne survient (les logs de test n'apparaîtront pas dans votre plateforme Datadog).
 
+### Activer la création de logs pour votre service AWS
 
-### Activez le journal d'évènements pour votre service AWS.
+Tous les services AWS qui génèrent des logs dans un compartiment S3 ou un groupe de logs CloudWatch sont pris en charge. Consultez les instructions de configuration spécifiques des services les plus utilisés dans le tableau ci-dessous :
 
-N'importe quel service AWS qui génère des journaux d'évènements et leur place dans un compartiment S3 ou un groupe de journaux Cloudwatch est compatible. Veuillez trouver des instructions spécifiques pour les services le plus fréquemment utilisés dans le tableau ci-dessous :
+| Service AWS                        | Activer la création de logs de service AWS                                                                    | Envoyer des logs AWS à Datadog                                                   |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| [API Gateway][52]                  | [Activer les logs AWS API Gateway][53]                                                               | Collecte de logs [manuelle][54]                                                |
+| [Cloudfront][55]                   | [Activer les logs AWS Cloudfront][56]                                                                | Collecte de logs [manuelle][57] et [automatique](#configurer-automatiquement-des-declencheurs) |
+| [Cloudtrail][58]                   | [Activer les logs AWS Cloudtrail][59]                                                                | Collecte de logs [manuelle][60]                                                |
+| [DynamoDB][61]                     | [Activer les logs AWS DynamoDB][62]                                                                  | Collecte de logs [manuelle][63]                                                |
+| [EC2][64]                          | `-`                                                                                             | Utiliser l'[Agent Datadog][65] pour envoyer vos logs à Datadog                   |
+| [ECS][67]                          | `-`                                                                                             | [Utiliser l'Agent Docker pour rassembler vos logs][68]                             |
+| [Elastic Load Balancing (ELB)][69] | [Activer les logs AWS ELB][70]                                                                       | Collecte de logs [manuelle][71] et [automatique](#configurer-automatiquement-des-declencheurs) |
+| [Lambda][72]                       | `-`                                                                                             | Collecte de logs [manuelle][73] et [automatique](#configurer-automatiquement-des-declencheurs) |
+| [RDS][74]                          | [Activer les logs AWS RDS][75]                                                                       | Collecte de logs [manuelle][76]                                                |
+| [Route 53][77]                     | [Activer les logs AWS Route 53][78]                                                                  | Collecte de logs [manuelle][79]                                                |
+| [S3][80]                           | [Activer les logs AWS S3][81]                                                                        | Collecte de logs [manuelle][82] et [automatique](#configurer-automatiquement-des-declencheurs) |
+| [SNS][83]                          | Il n'y a pas de « logs SNS ». Traitez les logs et les événements transmis via le service SNS. | Collecte de logs [manuelle][84]                                                |
+| [RedShift][90]                     | [Activer les logs AWS Redshift][92]                                                                  | Collecte de logs [manuelle][91] et [automatique](#configurer-automatiquement-des-declencheurs) |
+| [VPC][93]                          | [Activer les logs AWS VPC][95]                                                                       | Collecte de logs [manuelle][94]                                                |
 
-|AWS service | Activez le journal d'évènements du service AWS | Envoyer des logs AWS à Datadog|
-|:------|:-----|:------|
-|[API Gateway][52]| [Activer les logs AWS API Gateway][53]|Collecte de log [manuelle][54] |
-|[Cloudfront][55]| [Activer les logs AWS Cloudfront][56]|Collecte de log [manuelle][57] |
-|[Cloudtrail][58]| [Activer les logs AWS Cloudtrail][59]|Collecte de log [manuelle][60] |
-|[DynamoDB][61]| [Activer les logs AWS DynamoDB][62]|Collecte de log [manuelle][63] |
-|[EC2][64]|`-`| Utilisez l'[Agent de Datadog][65] ou un autre [outil d'envoi de logs][66] pour transmettre vos logs à Datadog.|
-|[ECS][67]|`-`|[Utilisez l'agent Docker afin de récupérer vos journaux d'évènements][68]|
-| [Elastic Load Balancing (ELB)][69] | [Activer les logs AWS ELB][70] |Collecte de log [manuelle][71] et [automatique](#automatic-log-collection) |
-|[Lambda][72]| `-` |Collecte de log [manuelle][73] |
-|[RDS][74]| [Activer les logs AWS RDS][75]|Collecte de log [manuelle][76] |
-|[Route 53][77]| [Activer les logs AWS Route 53][78]|Collecte de log [manuelle][79] |
-| [S3][80] | [Activer les logs AWS S3][81] |Collecte de log [manuelle][82] et [automatique](#automatic-log-collection)|
-|[SNS][83]| Il n'y a pas de « SNS Logs ». Traitez les journaux et le évènements qui transitent vers les le service SNS. |Collecte de log [manuelle][84] |
+### Envoyer des logs de service AWS à Datadog
 
-### Envoyer des journaux d'évènements AWS vers Datadog
-#### Collecte de log automatique
+Vous pouvez choisir entre deux options pour la configuration des déclencheurs de la fonction Lambda de Datadog :
+* Configurer manuellement des déclencheurs sur des compartiments S3, des groupes de logs CloudWatch ou des événements CloudWatch.
+* Laisser Datadog définir et gérer automatiquement la liste des déclencheurs.
 
-Si vous stockez des journaux d'évènements dans plusieurs compartiments S3, Datadog peut gérer les déclencheurs de votre part.
+#### Configurer automatiquement des déclencheurs
 
-1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda pour collecte de log AWS][85].
-2. Ajoutez les autorisations nécessaires dans votre rôle Datadog dans le [console IAM](https://console.aws.amazon.com/iam/home#/roles). Vous avez potentiellement certaines de ces autorisations déjà présentes grâce à nos autres intégrations AWS. Plus d'information concernant la façon dont ces autorisations sont exploitées peut être retrouvée dans la section [permissions](#permissions) ci-dessous.
+Si vous stockez des logs dans de nombreux compartiments S3 ou groupes de logs CloudWatch, Datadog peut gérer automatiquement les déclencheurs à votre place.
+
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][85].
+2. Ajoutez les autorisations requises pour votre rôle Datadog dans la [console IAM][1]. Il est possible que vous ayez déjà accordé certaines de ces autorisations pour d'autres intégrations Datadog/AWS. Consultez les informations ci-dessous pour en savoir plus sur l'utilisation de ces autorisations :
 
     ```
     "cloudfront:GetDistributionConfig",
@@ -323,142 +363,158 @@ Si vous stockez des journaux d'évènements dans plusieurs compartiments S3, Dat
     "s3:GetBucketLocation",
     "s3:GetBucketNotification",
     "s3:ListAllMyBuckets",
-    "s3:PutBucketNotification"
+    "s3:PutBucketNotification",
+    "logs:PutSubscriptionFilter",
+    "logs:DeleteSubscriptionFilter",
+    "logs:DescribeSubscriptionFilters"
     ```
 
-    * `cloudfront:GetDistributionConfig` : Obtenez le nom du compartiment S3 qui contient le journal d'évènements d'accès CloudFront.
-    * `cloudfront:ListDistributions` : Listez toutes les distributions CloudFront.
-    * `elasticloadbalancing:DescribeLoadBalancers` : Listez toutes les répartiteurs de charge.
-    * `elasticloadbalancing:DescribeLoadBalancerAttributes` : Obtenez le nom du compartiment S3 qui contient le journal d'évènements d'accès ELB.
-    * `lambda:AddPermission` : Ajouter une autorisation permettant à un compartiment S3 donné de déclencher une fonction Lambda.
-    * `lambda:GetPolicy` : Obtient la règle Lambda lorsque les déclencheurs doivent être supprimés.
-    * `lambda:RemovePermission` : Supprimer les autorisations d'une stratégie Lambda.
-    * `redshift:DescribeClusters` : Listez toutes les grappes Redshift.
-    * `redshift:DescribeLoggingStatus` : Obtenez le nom du compartiment S3 qui contient le journal d'évènements Redshift.
-    * `s3:GetBucketLogging` : Obtenez le nom du compartiment S3 qui contient le journal d'évènements d'accès S3.
-    * `s3:GetBucketLocation` : Obtenez la region du compartiment S3 qui contient le journal d'évènements d'accès S3.
-    * `s3:GetBucketNotification` : Obtenez les configurations existantes du déclencheur Lambda.
-    * `s3:ListAllMyBuckets` : Listez toutes les compartiments S3.
-    * `s3:PutBucketNotification` : Ajoutez ou supprimez un déclencheur Lambda selon des événements de compartiment S3.
+| Autorisation AWS                                        | Description                                                                  |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `cloudfront:GetDistributionConfig`                    | Récupère le nom du compartiment S3 contenant les logs d'accès CloudFront.             |
+| `cloudfront:ListDistributions`                        | Énumère toutes les distributions CloudFront.                                           |
+| `elasticloadbalancing:DescribeLoadBalancers`          | Énumère tous les répartiteurs de charge.                                                     |
+| `elasticloadbalancing:DescribeLoadBalancerAttributes` | Récupère le nom du compartiment S3 contenant les logs d'accès ELB.                    |
+| `lambda:AddPermission`                                | Ajoute une autorisation permettant à un compartiment S3 spécifique de déclencher une fonction Lambda. |
+| `lambda:GetPolicy`                                    | Récupère la stratégie Lambda lorsque des déclencheurs doivent être supprimés.                      |
+| `lambda:RemovePermission`                             | Supprime des autorisations d'une stratégie Lambda.                                     |
+| `redshift:DescribeClusters`                           | Énumère tous les clusters Redshift.                                                  |
+| `redshift:DescribeLoggingStatus`                      | Récupère le nom du compartiment S3 contenant les logs Redshift.                      |
+| `s3:GetBucketLogging`                                 | Récupère le nom du compartiment S3 contenant les logs d'accès S3.                     |
+| `s3:GetBucketLocation`                                | Récupère la région du compartiment S3 contenant les logs d'accès S3.                   |
+| `s3:GetBucketNotification`                            | Récupère les configurations existantes de déclenchement de Lambda.                                  |
+| `s3:ListAllMyBuckets`                                 | Énumère tous les compartiments S3.                                                         |
+| `s3:PutBucketNotification`                            | Ajoute ou supprime un déclencheur Lambda basé sur des événements de compartiment S3.                    |
+| `logs:PutSubscriptionFilter`                          | Ajoute un déclencheur Lambda basé sur des événements de log CloudWatch.                          |
+| `logs:DeleteSubscriptionFilter`                       | Supprime un déclencheur Lambda basé sur des événements de log CloudWatch.                       |
+| `logs:DescribeSubscriptionFilters`                    | Énumère les filtres d'abonnement pour le groupe de logs spécifié.                  |
 
-3. Naviguez vers l'onglet *Collect Logs* dans le [carreau AWS Integration](https://app.datadoghq.com/account/settings#integrations/amazon_web_services)
-4. Sélectionnez le compte AWS depuis lequel vous désirez récupérer des journaux d'évènements et inscrivez l'ARN du Lambda créée dans la section précédente.
-{{< img src="logs/aws/AWSLogStep1.png" alt="Enter Lambda" responsive="true" style="width:80%;" >}}
-5. Cochez les services à partir desquels vous souhaitez récupérer les journaux d'évènements et cliquez sur enregistrer. Pour arrêter la collecte des journaux d'un service spécifique, décochez-le.
-{{< img src="logs/aws/AWSLogStep2.png" alt="Select services" responsive="true" style="width:80%;" >}}
-6. Si vous avez des journaux dans plusieurs régions, vous devez créer des fonctions Lambda supplémentaires dans ces régions et leur inscrivez dans ce carreau.
-7. Pour arrêter la collecte de tous les journaux AWS, appuyez sur le *x* à côté de chaque ARN Lambda. Tous les déclencheurs de cette fonction seront supprimés.
-8. Dans un délai de quelques minutes après cette configuration initiale, vous verrez vos journaux AWS apparaître dans notre [plate-forme de log][86] en temps quasi réel.
 
-**Note** Stockez les journaux d'évènements pour des distributions différentes dans le même compartiment. Lors de l'activation de la journalisation, spécifiez un préfixe facultatif pour les noms de fichiers, afin de [conserver la relation entre les journaux d'évènements et les distributions respectives][87].
+3. Accédez à l'onglet *Collect logs* dans le [carré d'intégration AWS][2].
+4. Sélectionnez le compte AWS à partir duquel vous souhaitez recueillir des logs, puis saisissez l'ARN du Lambda créé dans la section précédente.
+{{< img src="logs/aws/AWSLogStep1.png" alt="Saisie de Lambda" responsive="true" popup="true" style="width:80%;" >}}
+5. Cochez les services à partir desquels vous souhaitez recueillir des logs et cliquez sur « Save ». Pour arrêter la collecte de logs d'un service spécifique, décochez la case associée.
+{{< img src="logs/aws/AWSLogStep2.png" alt="Sélection de services" responsive="true" popup="true" style="width:80%;" >}}
+6. Si vous possédez des logs dans plusieurs régions, vous devez créer des fonctions Lambda supplémentaires dans ces régions et les indiquer dans ce carré.
+7. Pour arrêter la collecte de l'ensemble des logs AWS, appuyez sur la *croix* en regard de chaque ARN de Lambda. Tous les déclencheurs de cette fonction seront supprimés.
+8. Quelques minutes après cette première configuration, vos logs AWS apparaîtront dans votre [page Log Explorer][86] Datadog, quasiment en temps réel.
 
-**Pour que Datadog puisse étiqueter les journaux d'évènements CloudFront comme `source:cloudfront` il est nécessaire d'inclure `cloudfront` quelque part dans le préfixe.**
+#### Configurer manuellement des déclencheurs
 
-#### Configurez les déclencheurs manuellement
-Dans votre Lambda, naviguez vers l'onglet des déclencheurs et sélectionnez `Add Trigger` :
+##### Collecte de logs depuis un groupe de logs CloudWatch
 
-{{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" responsive="true" style="width:80%;">}}
+Si vous stockez des logs dans un groupe de logs CloudWatch, suivez les étapes ci-dessous pour les transmettre à Datadog :
 
-Sélectionnez la source de journal d'évènements et ensuite suivez les instructions AWS :
+1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][85].
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur dans la console AWS sur le groupe de logs CloudWatch qui contient vos logs :
 
-{{< img src="logs/aws/integration_lambda.png" alt="Integration Lambda" responsive="true" style="width:80%;">}}
+{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="groupes de logs cloudwatch" responsive="true" popup="true" style="width:70%;">}}
 
-Par exemple, n'oubliez pas de définir le type d'évènement correct pour les compartiments S3 :
+   Sélectionnez le groupe de logs CloudWatch correspondant, ajoutez un nom de filtre (vous pouvez toutefois laisser le filtre vide) et ajoutez le déclencheur :
+{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="déclencheur cloudwatch" responsive="true" popup="true" style="width:70%;">}}
 
-{{< img src="logs/aws/object_created.png" alt="Object Created" responsive="true" style="width:80%;">}}
+Accédez ensuite à votre [section Log de Datadog][86] pour commencer à explorer vos logs !
+
+##### Collecte de logs depuis des compartiments S3
+
+Si vous stockez des logs dans un compartiment S3, suivez les étapes ci-dessous pour les transmettre à Datadog :
+
+1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][85].
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur dans la console AWS sur le compartiment S3 qui contient vos logs :
+    {{< img src="logs/aws/adding_trigger.png" alt="Ajout d'un déclencheur" responsive="true" popup="true"style="width:80%;">}}
+
+3. Sélectionnez le compartiment, puis suivez les instructions d'AWS :
+    {{< img src="logs/aws/integration_lambda.png" alt="Intégration Lambda" responsive="true" popup="true" style="width:80%;">}}
+
+4. Définissez le bon type d'événement sur les compartiments S3 :
+    {{< img src="logs/aws/object_created.png" alt="Objet créé" responsive="true" popup="true" style="width:80%;">}}
+
+Accédez ensuite à votre [section Log sur Datadog][86] pour commencer à explorer vos logs !
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "amazon_web_services" >}}
 
 
-### Évènements
+### Événements
 
-Les intégrations Datadog-AWS enverrez tous vos évènements CloudWatch dans votre [Event stream][89]
+Vous pouvez configurer la collecte d'événements AWS pour chaque service AWS. Consultez la documentation des différents services AWS pour en savoir plus sur la collecte d'événements.
 
-## Troubleshooting
+## Dépannage
 
-### Vous constatez un écart entre vos données dans CloudWatch et Datadog ?
+### Vous constatez un écart entre vos données dans CloudWatch et Datadog ?
 
-Il y a deux distinctions importantes à connaître:
+Il est important de tenir compte des deux distinctions suivantes :
 
-  1. Dans AWS pour les compteurs, un graphique défini sur 'sum' '1minute' indique le nombre total d'occurrences dans une minute jusqu'à ce point, c'est-à-dire le taux par minute. Datadog affiche les données brutes à partir des valeurs AWS normalisées par seconde, quelle que soit la période sélectionnée dans AWS, ce qui explique pourquoi notre valeur sera probablement inférieure.
-  2. Globalement, min / max / avg ont une signification différente entre AWS et Datadog. Dans AWS, la latence moyenne, la latence minimale, et la latence maximale sont trois mesures distinctes récupérés par AWS. Lorsque Datadog extrait des métriques d'AWS CloudWatch, nous obtenons uniquement la latence moyenne sous la forme d'une série chronologique unique par ELB. Dans Datadog, lorsque vous sélectionnez 'min', 'max', ou 'avg', vous contrôlez la façon dont plusieurs séries chronologique seront combinées. Par exemple, demander `system.cpu.idle` sans aucun filtre retournerait une série pour chaque hôte qui signale cette métrique et ces séries doivent être combinées pour être représentées graphiquement. D'un autre côté, si vous avez demandé `system.cpu.idle` à partir d'un seul hôte, aucune agrégation ne serait nécessaire et la basculement entre moyenne et maximum donnerait le même résultat.
+1. Pour les compteurs AWS, un graphique défini sur « sum » « 1minute » affiche le nombre total d’occurrences en l'espace d'une minute, soit le taux par minute. Datadog affiche les données brutes à partir des valeurs AWS normalisées par seconde, peu importe l'intervalle sélectionné dans AWS. Cela explique pourquoi la valeur affichée dans Datadog peut être plus faible.
+2. Les valeurs minimales, maximales et moyennes ont globalement la même signification dans AWS et dans Datadog. Dans AWS, les latences moyenne, minimale et maximale correspondent à trois métriques distinctes recueillies. Lorsque Datadog récupère des métriques à partir d'AWS CloudWatch, la latence moyenne est transmise sous la forme de séries temporelles distinctes par ELB. Dans Datadog, lorsque vous sélectionnez les valeurs « min », « max » ou « avg », vous définissez les critères de rassemblement de séries temporelles. Par exemple, si vous cherchez à obtenir `system.cpu.idle` sans appliquer de filtre, une série est envoyée pour chaque host qui renvoie cette métrique. Ces séries doivent être combinées pour être représentées graphiquement. À l'inverse, si vous cherchez à obtenir `system.cpu.idle` pour un seul host, aucune agrégation n'est nécessaire. Les valeurs maximale et moyenne sont identiques.
 
-### Métriques retardées?
+### Retard des métriques ?
 
-Lorsque vous utilisez l'intégration AWS, nous récupérons des métriques via l'API CloudWatch. Vous pouvez constater un léger retard dans les métriques d'AWS en raison de certaines contraintes qui existent pour leur API.
+Lorsque vous utilisez l'intégration AWS, Datadog récupère vos métriques via l'API CloudWatch. Il est possible que les données des métriques AWS accusent un léger retard, en raison des contraintes liées à l'API.
 
-Pour commencer, l'API CloudWatch propose uniquement une analyse métrique-par-métrique afin d'extraire des données. Les API CloudWatch ont une limite de débit qui varie en fonction de la combinaison des informations d'authentification, de la région et du service. Les métriques sont mises à disposition par AWS en fonction du niveau du compte. Par exemple, si vous payez pour des « statistiques détaillées » dans AWS, elles sont disponibles plus rapidement. Ce niveau de service pour les métriques détaillées s'applique également à la granularité, certaines métriques étant disponibles par minute et d'autres par cinq minutes.
+Pour commencer, l'API CloudWatch propose uniquement une analyse métrique par métrique afin d'extraire des données. Les API CloudWatch prévoient une limite de débit qui varie en fonction des informations d'authentification, de la région et du service. Les métriques sont transmises par AWS en fonction du niveau du compte. Par exemple, si vous payez pour des « métriques détaillées » dans AWS, vous y avez accès plus rapidement. Ce niveau de service pour les métriques détaillées s'applique également à la granularité. Ainsi, certaines métriques sont transmises toutes les minutes, tandis que d'autres sont envoyées toutes les cinq minutes.
 
-Du côté de Datadog, nous avons la possibilité de classer par ordre de priorité certaines métriques dans un compte pour les récupérer plus rapidement, selon les circonstances. Veuillez contacter [support@datadoghq.com][6] pour plus d'informations.
+Datadog vous permet de hiérarchiser certaines métriques d'un compte afin de les récupérer en priorité, en fonction de certaines circonstances. Contactez [l'assistance Datadog][6] pour en savoir plus.
 
-Afin d'obtenir des métriques avec un délai quasiment nul, nous vous recommandons d'installer l'Agent Datadog sur ces hôtes. Nous avons écrit un peu à ce sujet [ici][7], particulièrement en ce qui concerne CloudWatch.
+Pour obtenir des métriques quasiment en temps réel, installez l'Agent Datadog sur le host. Pour en savoir plus, consultez l'article de blog de Datadog intitulé [Don't fear the Agent: Agent-based monitoring][7] (en anglais).
 
+### Métriques manquantes ?
 
+L'API CloudWatch renvoie uniquement les métriques avec des points de données. Ainsi, si un ELB ne possède aucune instance liée, aucune métrique associée à cet ELB n'apparaît dans Datadog.
 
-### Métriques manquantes?
+### Nombre aws.elb.healthy_host_count incorrect ?
 
-L'API de CloudWatch ne renvoie que des métriques avec des points de données, donc si une instance ELB n'a aucune instances attachés (par exemple), il ne devrait pas voir les métriques associées à cet ELB dans Datadog.
+Lorsque l'option d'équilibrage des charges entre zones est activée sur un ELB, toutes les instances liées à cet ELB font partie de toutes les zones de disponibilité (pour CloudWatch). Ainsi, si vous possédez deux instances dans 1a et trois dans ab, la métrique affiche cinq instances par zone de disponibilité.
+Puisque cela peut s'avérer contre-intuitif, nous avons ajouté de nouvelles métriques, **aws.elb.healthy_host_count_deduped** et **aws.elb.un_healthy_host_count_deduped**, qui affichent le nombre d'instances saines et non saines par zone de disponibilité, que vous ayez activé ou non l'option d'équilibrage des charges entre zones.
 
+### Certains hosts sont dupliqués durant l'installation de l'Agent ?
 
-
-### Mauvais compte de aws.elb.healthy_host_count?
-
-
-Lorsque l'option d'équilibrage de charge entre zones est activée dans un ELB, toutes les instances attachées à cet ELB seront considérées comme faisant partie de toutes les zones de disponibilité (côté CloudWatch), donc si vous avez 2 instances dans 1a et 3 dans ab, la métrique affichera 5 instances par zone de disponibilité.
-Comme cela peut être contre-intuitif, nous avons ajouté de nouvelles métriques, **aws.elb.healthy_host_count_deduped** et **aws.elb.un_healthy_host_count_deduped**, qui affichent le nombre d'instances disponibles par zone de disponibilité, peu importe si cette option d'équilibrage de charge entre zones est activée ou non.
-
-### Hôtes dupliqués lors de l'installation de l'agent?
+Lors de l'installation de l'Agent sur un host AWS, il est possible que des hosts soient dupliqués pendant quelques heures sur la page d'infrastructure si vous avez défini manuellement le hostname dans la configuration de l'Agent. Ces doublons disparaîtront après quelques heures et ne seront pas pris en compte durant la facturation.
 
 
-Lors de l'installation de l'agent sur un hôte aws, vous pouvez voir des hôtes dupliqués sur la page infra pendant quelques heures si vous définissez manuellement le nom d'hôte dans la configuration de l'agent. Ce second hôte disparaîtra quelques heures plus tard et n'affectera pas votre facturation.
-
-
-
-   [1]: https://console.aws.amazon.com/iam/home#s=Home
-   [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-
-   [6]: mailto:support@datadoghq.com
-   [7]: http://www.datadoghq.com/blog/dont-fear-the-agent
-
-
-[8]: https://docs.datadoghq.com/integrations/awsapigateway
-[9]: https://docs.datadoghq.com/integrations/awsautoscaling
-[10]: https://docs.datadoghq.com/integrations/awsbilling
-[11]: https://docs.datadoghq.com/integrations/awscloudfront
-[12]: https://docs.datadoghq.com/integrations/awscloudtrail
-[13]: https://docs.datadoghq.com/integrations/awscloudsearch
-[14]: https://docs.datadoghq.com/integrations/awsdirectconnect
-[15]: https://docs.datadoghq.com/integrations/awsdynamo
-[16]: https://docs.datadoghq.com/integrations/ecs
-[17]: https://docs.datadoghq.com/integrations/awsbeanstalk
-[18]: https://docs.datadoghq.com/integrations/awsebs
-[19]: https://docs.datadoghq.com/integrations/awselasticache
-[20]: https://docs.datadoghq.com/integrations/awsec2
-[21]: https://docs.datadoghq.com/integrations/awsefs
-[22]: https://docs.datadoghq.com/integrations/awselb
-[23]: https://docs.datadoghq.com/integrations/awsemr
-[24]: https://docs.datadoghq.com/integrations/awses
-[25]: https://docs.datadoghq.com/integrations/awsfirehose
-[26]: https://docs.datadoghq.com/integrations/awsiot
-[27]: https://docs.datadoghq.com/integrations/awskinesis
-[28]: https://docs.datadoghq.com/integrations/awskms
-[29]: https://docs.datadoghq.com/integrations/awslambda
-[30]: https://docs.datadoghq.com/integrations/awsml
-[31]: https://docs.datadoghq.com/integrations/awsopsworks
-[32]: https://docs.datadoghq.com/integrations/awspolly
-[33]: https://docs.datadoghq.com/integrations/awsredshift
-[34]: https://docs.datadoghq.com/integrations/awsrds
-[35]: https://docs.datadoghq.com/integrations/awsroute53
-[36]: https://docs.datadoghq.com/integrations/awsses
-[37]: https://docs.datadoghq.com/integrations/awssns
-[38]: https://docs.datadoghq.com/integrations/awssqs
-[39]: https://docs.datadoghq.com/integrations/amazon_s3
-[40]: https://docs.datadoghq.com/integrations/awsswf
-[41]: https://docs.datadoghq.com/integrations/awsstoragegateway
-[42]: https://docs.datadoghq.com/integrations/awswaf
-[43]: https://docs.datadoghq.com/integrations/awsworkspaces
+[1]: https://console.aws.amazon.com/iam/home#s=Home
+[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[3]: https://docs.datadoghq.com/fr/integrations/faq/aws-integration-with-terraform/
+[6]: https://docs.datadoghq.com/fr/help/
+[7]: http://www.datadoghq.com/blog/dont-fear-the-agent
+[8]: https://docs.datadoghq.com/fr/integrations/awsapigateway
+[9]: https://docs.datadoghq.com/fr/integrations/awsautoscaling
+[10]: https://docs.datadoghq.com/fr/integrations/awsbilling
+[11]: https://docs.datadoghq.com/fr/integrations/awscloudfront
+[12]: https://docs.datadoghq.com/fr/integrations/awscloudtrail
+[13]: https://docs.datadoghq.com/fr/integrations/awscloudsearch
+[14]: https://docs.datadoghq.com/fr/integrations/awsdirectconnect
+[15]: https://docs.datadoghq.com/fr/integrations/awsdynamo
+[16]: https://docs.datadoghq.com/fr/integrations/ecs
+[17]: https://docs.datadoghq.com/fr/integrations/awsbeanstalk
+[18]: https://docs.datadoghq.com/fr/integrations/awsebs
+[19]: https://docs.datadoghq.com/fr/integrations/awselasticache
+[20]: https://docs.datadoghq.com/fr/integrations/awsec2
+[21]: https://docs.datadoghq.com/fr/integrations/awsefs
+[22]: https://docs.datadoghq.com/fr/integrations/awselb
+[23]: https://docs.datadoghq.com/fr/integrations/awsemr
+[24]: https://docs.datadoghq.com/fr/integrations/awses
+[25]: https://docs.datadoghq.com/fr/integrations/awsfirehose
+[26]: https://docs.datadoghq.com/fr/integrations/awsiot
+[27]: https://docs.datadoghq.com/fr/integrations/awskinesis
+[28]: https://docs.datadoghq.com/fr/integrations/awskms
+[29]: https://docs.datadoghq.com/fr/integrations/awslambda
+[30]: https://docs.datadoghq.com/fr/integrations/awsml
+[31]: https://docs.datadoghq.com/fr/integrations/awsopsworks
+[32]: https://docs.datadoghq.com/fr/integrations/awspolly
+[33]: https://docs.datadoghq.com/fr/integrations/awsredshift
+[34]: https://docs.datadoghq.com/fr/integrations/awsrds
+[35]: https://docs.datadoghq.com/fr/integrations/awsroute53
+[36]: https://docs.datadoghq.com/fr/integrations/awsses
+[37]: https://docs.datadoghq.com/fr/integrations/awssns
+[38]: https://docs.datadoghq.com/fr/integrations/awssqs
+[39]: https://docs.datadoghq.com/fr/integrations/amazon_s3
+[40]: https://docs.datadoghq.com/fr/integrations/awsswf
+[41]: https://docs.datadoghq.com/fr/integrations/awsstoragegateway
+[42]: https://docs.datadoghq.com/fr/integrations/awswaf
+[43]: https://docs.datadoghq.com/fr/integrations/awsworkspaces
 [44]: http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles
 [45]: https://console.aws.amazon.com/iam/home#/roles
 [46]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
@@ -466,42 +522,52 @@ Lors de l'installation de l'agent sur un hôte aws, vous pouvez voir des hôtes 
 [48]: http://docs.aws.amazon.com/IAM/latest/UserGuide/list_trustedadvisor.html
 [49]: http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html
 [50]: https://console.aws.amazon.com/lambda/home?region=us-east-1
-[51]: https://github.com/DataDog/dd-aws-lambda-functions/blob/master/Log/lambda_function.py
-[52]: https://docs.datadoghq.com/integrations/amazon_api_gateway
-[53]: https://docs.datadoghq.com/integrations/amazon_api_gateway/#log-collection
-[54]: https://docs.datadoghq.com/integrations/amazon_api_gateway/#send-logs-to-datadog
-[55]: https://docs.datadoghq.com/integrations/amazon_cloudfront
-[56]: https://docs.datadoghq.com/integrations/amazon_cloudfront/#enable-cloudfront-logging
-[57]: https://docs.datadoghq.com/integrations/amazon_cloudfront/#send-logs-to-datadog
-[58]: https://docs.datadoghq.com/integrations/amazon_cloudtrail
-[59]: https://docs.datadoghq.com/integrations/amazon_cloudtrail/#enable-cloudtrail-logging
-[60]: https://docs.datadoghq.com/integrations/amazon_cloudtrail/#send-logs-to-datadog
-[61]: https://docs.datadoghq.com/integrations/amazon_dynamodb
-[62]: https://docs.datadoghq.com/integrations/amazon_dynamodb/#enable-dynamodb-logging
-[63]: https://docs.datadoghq.com/integrations/amazon_dynamodb/#send-logs-to-datadog
-[64]: https://docs.datadoghq.com/integrations/amazon_ec2
-[65]: https://docs.datadoghq.com/logs
-[66]: https://docs.datadoghq.com/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
-[67]: https://docs.datadoghq.com/integrations/amazon_ecs
-[68]: https://docs.datadoghq.com/integrations/amazon_ecs/#log-collection
-[69]: https://docs.datadoghq.com/integrations/amazon_elb
-[70]: https://docs.datadoghq.com/integrations/amazon_elb/#enable-aws-elb-logging
-[71]: https://docs.datadoghq.com/integrations/amazon_elb/#manual-installation-steps
-[72]: https://docs.datadoghq.com/integrations/amazon_lambda
-[73]: https://docs.datadoghq.com/integrations/amazon_lambda/#log-collection
-[74]: https://docs.datadoghq.com/integrations/amazon_rds
-[75]: https://docs.datadoghq.com/integrations/amazon_rds/#enable-rds-logging
-[76]: https://docs.datadoghq.com/integrations/amazon_rds/#send-logs-to-datadog
-[77]: https://docs.datadoghq.com/integrations/amazon_route53
-[78]: https://docs.datadoghq.com/integrations/amazon_route53/#enable-route53-logging
-[79]: https://docs.datadoghq.com/integrations/amazon_route53/#send-logs-to-datadog
-[80]: https://docs.datadoghq.com/integrations/amazon_s3
-[81]: https://docs.datadoghq.com/integrations/amazon_s3/#enable-s3-access-logs
-[82]: https://docs.datadoghq.com/integrations/amazon_s3/#manual-installation-steps
-[83]: https://docs.datadoghq.com/integrations/amazon_sns
-[84]: https://docs.datadoghq.com/integrations/amazon_sns/#send-logs-to-datadog
-[85]: https://docs.datadoghq.com/integrations/amazon_web_services/#create-a-new-lambda-function
+[51]: https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/lambda_function.py
+[52]: https://docs.datadoghq.com/fr/integrations/amazon_api_gateway
+[53]: https://docs.datadoghq.com/fr/integrations/amazon_api_gateway/#log-collection
+[54]: https://docs.datadoghq.com/fr/integrations/amazon_api_gateway/#send-logs-to-datadog
+[55]: https://docs.datadoghq.com/fr/integrations/amazon_cloudfront
+[56]: https://docs.datadoghq.com/fr/integrations/amazon_cloudfront/#enable-cloudfront-logging
+[57]: https://docs.datadoghq.com/fr/integrations/amazon_cloudfront/#send-logs-to-datadog
+[58]: https://docs.datadoghq.com/fr/integrations/amazon_cloudtrail
+[59]: https://docs.datadoghq.com/fr/integrations/amazon_cloudtrail/#enable-cloudtrail-logging
+[60]: https://docs.datadoghq.com/fr/integrations/amazon_cloudtrail/#send-logs-to-datadog
+[61]: https://docs.datadoghq.com/fr/integrations/amazon_dynamodb
+[62]: https://docs.datadoghq.com/fr/integrations/amazon_dynamodb/#enable-dynamodb-logging
+[63]: https://docs.datadoghq.com/fr/integrations/amazon_dynamodb/#send-logs-to-datadog
+[64]: https://docs.datadoghq.com/fr/integrations/amazon_ec2
+[65]: https://docs.datadoghq.com/fr/logs
+[67]: https://docs.datadoghq.com/fr/integrations/amazon_ecs
+[68]: https://docs.datadoghq.com/fr/integrations/amazon_ecs/#log-collection
+[69]: https://docs.datadoghq.com/fr/integrations/amazon_elb
+[70]: https://docs.datadoghq.com/fr/integrations/amazon_elb/#enable-aws-elb-logging
+[71]: https://docs.datadoghq.com/fr/integrations/amazon_elb/#manual-installation-steps
+[72]: https://docs.datadoghq.com/fr/integrations/amazon_lambda
+[73]: https://docs.datadoghq.com/fr/integrations/amazon_lambda/#log-collection
+[74]: https://docs.datadoghq.com/fr/integrations/amazon_rds
+[75]: https://docs.datadoghq.com/fr/integrations/amazon_rds/#enable-rds-logging
+[76]: https://docs.datadoghq.com/fr/integrations/amazon_rds/#send-logs-to-datadog
+[77]: https://docs.datadoghq.com/fr/integrations/amazon_route53
+[78]: https://docs.datadoghq.com/fr/integrations/amazon_route53/#enable-route53-logging
+[79]: https://docs.datadoghq.com/fr/integrations/amazon_route53/#send-logs-to-datadog
+[80]: https://docs.datadoghq.com/fr/integrations/amazon_s3
+[81]: https://docs.datadoghq.com/fr/integrations/amazon_s3/#enable-s3-access-logs
+[82]: https://docs.datadoghq.com/fr/integrations/amazon_s3/#manual-installation-steps
+[83]: https://docs.datadoghq.com/fr/integrations/amazon_sns
+[84]: https://docs.datadoghq.com/fr/integrations/amazon_sns/#send-logs-to-datadog
+[85]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#set-up-the-datadog-lambda-function
 [86]: https://app.datadoghq.com/logs
 [87]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket
 [88]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_web_services/amazon_web_services_metadata.csv
-[89]: https://docs.datadoghq.com/graphing/event_stream/
+[89]: https://docs.datadoghq.com/fr/graphing/event_stream/
+[90]: https://docs.datadoghq.com/fr/integrations/amazon_redshift/
+[91]: https://docs.datadoghq.com/fr/integrations/amazon_redshift/#log-collection
+[92]: https://docs.datadoghq.com/fr/integrations/amazon_redshift/#enable-aws-redshift-logging
+[93]: https://docs.datadoghq.com/fr/integrations/amazon_vpc/
+[94]: https://docs.datadoghq.com/fr/integrations/amazon_vpc/#log-collection
+[95]: https://docs.datadoghq.com/fr/integrations/amazon_vpc/#enable-vpc-flow-log-logging
+[96]: https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:464622532012:applications~Datadog-Log-Forwarder
+[97]: https://docs.datadoghq.com/fr/integrations/amazon_xray
+
+
+{{< get-dependencies >}}

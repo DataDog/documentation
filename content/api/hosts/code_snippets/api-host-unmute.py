@@ -8,7 +8,7 @@ options = {
 initialize(**options)
 
 # Find a host to unmute
-hosts = api.Infrastructure.search(q='hosts:')
+hosts = api.Hosts.search(q='hosts:')
 
 # Unmute host
 api.Host.unmute(hosts['results']['hosts'][0])

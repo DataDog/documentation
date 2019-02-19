@@ -40,9 +40,9 @@ To combine multiple terms into a complex query, use any of the following Boolean
 
 | Operator | Description                                                                                                                      | Example                             |
 | ----     | ----                                                                                                                             | -----                               |
-| `AND`    | **Intersection**: both terms are in the selected events (if nothing is added, `AND` is taken by default).                        | `redis_* AND down`                  |
-| `OR`     | **Union**: either term is contained in the selected events.                                                                      | `sources:nagios OR sources:chef`    |
-| `NOT`    | **Exclusion**: the following term is NOT in the event. This operator works for strings only—this does not work for tag searches. | `tags:<KEY>:<VALUE> NOT "<STRING>"` |
+| `AND`    | **Intersection**: both terms are in the selected events (for tags, if nothing is added, `AND` is taken by default).                        | `redis_* AND down`                  |
+| `OR`     | **Union**: either term is contained in the selected events. Use a comma (`,`) for tags.                                                    | `sources:nagios,chef directory OR Mixlib`    |
+| `NOT`    | **Exclusion**: the following term is NOT in the event. This operator works for strings only—use `-` in front of tags. | `-tags:<KEY>:<VALUE> NOT "<STRING>"` |
 
 In the example below, a full text search is performed to find all open chef or Nagios errors that mention one or more Redis instances that are currently down.
 

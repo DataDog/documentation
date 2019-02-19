@@ -1,7 +1,7 @@
 ---
 title: Ajouter des éléments à une liste de dashboards
 type: apicontent
-order: 8.7
+order: 9.7
 external_redirect: /api/#ajouter-des-elements-a-une-liste-de-dashboards
 ---
 
@@ -13,7 +13,7 @@ Ajoutez des dashboards à une liste de dashboards existante.
 
 *   **`dashboards`** [*obligatoire*] :
     La liste des dashboards à ajouter à la liste.
-    Les spécifications de dashboards respectent le format suivant :
+    Les définitions de dashboard respectent le format suivant :
     *   **`type`** [*obligatoire*] :
         Le type du dashboard.
         Le type doit être correspondre à l'une des valeurs suivantes :

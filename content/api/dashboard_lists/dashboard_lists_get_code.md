@@ -1,7 +1,7 @@
 ---
 title: Get a Dashboard List
 type: apicode
-order: 8.1
+order: 9.1
 external_redirect: /api/#get-a-dashboard-list
 ---
 

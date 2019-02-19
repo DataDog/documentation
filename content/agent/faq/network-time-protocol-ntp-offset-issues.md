@@ -16,7 +16,7 @@ If you have noticed any of the following issues, they may be related to the NTP 
 * Metric delays
 * Gaps in graphs of metrics
 
-To check the NTP offset for a host, you can run the Agent [info command][1], using the instructions appropriate for your OS, and look for the Clocks section:
+To check the NTP offset for a host, you can run the Agent [status command][1], using the instructions appropriate for your OS, and look for the Clocks section:
 
 ```
   Clocks
@@ -25,7 +25,7 @@ To check the NTP offset for a host, you can run the Agent [info command][1], usi
     System UTC time: 2015-02-12 22:10:49.524660
 ```
 
-Any significant offset can have undesired effects, and we recommend keeping hosts in sync with NTP to ensure this does not cause issues, to help we also offer an [NTP Integration][2].
+Any significant offset can have undesired effects, and it is recommended to keep hosts in sync with NTP to ensure this does not cause issues. To help with this, there's an [NTP Integration][2].
 
 ## Syncing a System Clock with NTP
 
@@ -37,13 +37,11 @@ Instructions for syncing the system clock with NTP vary based on the operating s
 
 ## Prevent and check NTP issues
 
-To prevent NTP issues, you can leverage our monitor for NTP offset to alert you when there is drift on a host.
+To prevent NTP issues, you can leverage Datadog's monitor for NTP offset to alert you when there is drift on a host.
 
-Also, you can check over all the reporting hosts, the one that have offset issues.
+Also, you can check over all the reporting hosts for one that has offset issues: use Datadog's [Check Summary page][6]. Inspect the check `ntp.in_sync` and see the list of the hosts that have NTP issues.
 
-To do so, use our [Check Summary page][6]. Inspect the check `ntp.in_sync` and see the list of the hosts that have NTP issues.
-
-Also note that outgoing UDP traffic over the port 123 should be allowed so the Agent can confirm that the local server time is reasonably accurate according the Datadog NTP servers.
+Also note that outgoing UDP traffic over the port 123 should be allowed so the Agent can confirm that the local server time is reasonably accurate according to the Datadog NTP servers.
 
 ## Further Reading
 

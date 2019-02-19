@@ -1,6 +1,6 @@
 ---
-title: Hôtes
+title: Hosts
 type: apicode
-order: 13
-external_redirect: /api/#hotes
+order: 14
+external_redirect: /api/#hosts
 ---

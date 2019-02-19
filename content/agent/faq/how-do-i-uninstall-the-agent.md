@@ -7,7 +7,7 @@ further_reading:
   text: "Learn more about the Datadog Agent"
 ---
 
-To uninstall the Datadog Agent run:
+To uninstall the Datadog Agent, run:
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
@@ -25,8 +25,8 @@ sudo yum remove datadog-agent
 
 ### Mac OS
 
-1. Stop and close the Datadog Agent: via the bone icon in the Tray.
-2. Drag the Datadog Application from the application folder to the Trash Bin.
+1. Stop and close the Datadog Agent via the bone icon in the tray.
+2. Drag the Datadog application from the application folder to the trash bin.
 3. Run:
 
 ```
@@ -34,12 +34,13 @@ sudo rm -rf /opt/datadog-agent
 sudo rm -rf /usr/local/bin/datadog-agent
 sudo rm -rf ~/.datadog-agent/**​ #to remove broken symlinks
 ```
+Then, reboot your machine for changes to take effect.
 
 ### Windows
 
 **It's important that the original account used to install the Agent is also used to remove it, otherwise it's possible remnants are left behind and it won't be cleanly removed.**
 
-Uninstall the Agent using Add/Remove Programs, alternatively, it's possible to to use Powershell as well. Here is a one liner:
+Uninstall the Agent using Add/Remove Programs; alternatively, it's possible to to use Powershell as well. Here is a one-liner:
 
 ```
 (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName . ).Uninstall()
@@ -62,8 +63,8 @@ sudo yum remove datadog-agent
 
 ### Mac OS
 
-1. Stop and Close the Datadog Agent: via the bone icon in the Tray.
-2. Drag the Datadog Application from the application folder to the Trash Bin.
+1. Stop and close the Datadog Agent: via the bone icon in the tray.
+2. Drag the Datadog application from the application folder to the trash bin.
 3. Run:
 
 ```
@@ -83,7 +84,7 @@ sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
 
 **It's important that the original account used to install the Agent is also used to remove it, otherwise it's possible remnants are left behind and it won't be cleanly removed.**
 
-Uninstall the Agent using Add/Remove Programs, alternatively, it's possible to to use Powershell as well. Here is a one liner:
+Uninstall the Agent using Add/Remove Programs, alternatively, it's possible to to use Powershell as well. Here is a one-liner:
 
 ```
 (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName . ).Uninstall()

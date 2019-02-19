@@ -14,7 +14,6 @@ further_reading:
   text: "DogStatsD source code"
 ---
 
-
 This section specifies the raw datagram format for each data type that DogStatsD accepts. This isn't required reading if you're using any of the DogStatsD client libraries; however, if you want to write your own library, or use the shell to send metrics or events, then read on.
 
 ## Datagram Format
@@ -23,11 +22,13 @@ This section specifies the raw datagram format for each data type that DogStatsD
 
 `metric.name:value|type|@sample_rate|#tag1:value,tag2`
 
-- `metric.name` - a string with no colons, bars, or @ characters. See the [metric naming policy][1].
-- `value` - an integer or float.
-- `type` - `c` for counter, `g` for gauge, `ms` for timer, `h` for histogram, `s` for set.
-- `sample rate` (optional) - a float between 0 and 1, inclusive. Only works with counter, histogram, and timer metrics. Default is 1 (i.e. sample 100% of the time).
-- `tags` (optional) - a comma separated list of tags. Use colons for key/value tags, i.e. `env:prod`. The key `device` is reserved; Datadog drops a user-added tag like `device:foobar`.
+| Parameter     | Required | Description                                                                                                                                                        |
+|---------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `metric.name` | Yes      | a string with no colons, bars, or @ characters. See the [metric naming policy][1].                                                                                 |
+| `value`       | Yes      | an integer or float.                                                                                                                                               |
+| `type`        | Yes      | `c` for counter, `g` for gauge, `ms` for timer, `h` for histogram, `s` for set.                                                                                    |
+| `sample rate` | No       | a float between 0 and 1, inclusive. Only works with counter, histogram, and timer metrics. Default is 1 (i.e. sample 100% of the time).                            |
+| `tags`        | No       | a comma separated list of tags. Use colons for key/value tags, i.e. `env:prod`. The key `device` is reserved; Datadog drops a user-added tag like `device:foobar`. |
 
 Here are some example datagrams:
 
@@ -53,16 +54,18 @@ Here are some example datagrams:
 
 `_e{title.length,text.length}:title|text|d:timestamp|h:hostname|p:priority|t:alert_type|#tag1,tag2`
 
-- `_e` - The datagram must begin with `_e`
-- `title` - Event title.
-- `text` - Event text. Insert line breaks with an escaped slash (`\\n`)
-- `|d:timestamp` (optional) - Add a timestamp to the event. Default is the current Unix epoch timestamp.
-- `|h:hostname` (optional) - Add a hostname to the event. No default.
-- `|k:aggregation_key` (optional) - Add an aggregation key to group the event with others that have the same key. No default.
-- `|p:priority` (optional) - Set to 'normal' or 'low'. Default 'normal'.
-- `|s:source_type_name` (optional) - Add a source type to the event. No default.
-- `|t:alert_type` (optional) - Set to 'error', 'warning', 'info' or 'success'. Default 'info'.
-- `|#tag1:value1,tag2,tag3:value3...` (optional) - The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default.
+| Parameter                          | Required | Description                                                                                                            |
+|------------------------------------|----------|------------------------------------------------------------------------------------------------------------------------|
+| `_e`                               | Yes      | The datagram must begin with `_e`                                                                                      |
+| `title`                            | Yes      | Event title.                                                                                                           |
+| `text`                             | Yes      | Event text. Insert line breaks with an escaped slash (`\\n`)                                                           |
+| `d:timestamp`                      | No       | Add a timestamp to the event. Default is the current Unix epoch timestamp.                                             |
+| `h:hostname`                       | No       | Add a hostname to the event. No default.                                                                               |
+| `k:aggregation_key`                | No       | Add an aggregation key to group the event with others that have the same key. No default.                              |
+| `p:priority`                       | No       | Set to 'normal' or 'low'. Default 'normal'.                                                                            |
+| `s:source_type_name`               | No       | Add a source type to the event. No default.                                                                            |
+| `t:alert_type`                     | No       | Set to 'error', 'warning', 'info' or 'success'. Default 'info'.                                                        |
+| `#tag1:value1,tag2,tag3:value3...` | No       | The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default. |
 
 Here are some example datagrams:
 
@@ -76,13 +79,15 @@ Here are some example datagrams:
 
 `_sc|name|status|d:timestamp|h:hostname|#tag1:value1,tag2,tag3:value3,...|m:service_check_message`
 
-- `_sc` - the datagram must begin with `_sc`
-- `name` - Service check name.
-- `status` - Integer corresponding to the check status (OK = 0, WARNING = 1, CRITICAL = 2, UNKNOWN = 3).
-- `d:timestamp` (optional) - Add a timestamp to the check. Default is the current Unix epoch timestamp.
-- `h:hostname` (optional) - Add a hostname to the event. No default.
-- `#tag1:value1,tag2,tag3:value3,...` (optional) - The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default.
-- `m:service_check_message` (optional) - Add a message describing the current state of the service check. *This field MUST be positioned last among the metadata fields.* No default.
+| Parameter                           | Required | Description                                                                                                                                  |
+|-------------------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| `_sc`                               | Yes      | the datagram must begin with `_sc`                                                                                                           |
+| `name`                              | Yes      | Service check name.                                                                                                                          |
+| `status`                            | Yes      | Integer corresponding to the check status (OK = 0, WARNING = 1, CRITICAL = 2, UNKNOWN = 3).                                                  |
+| `d:timestamp`                       | No       | Add a timestamp to the check. Default is the current Unix epoch timestamp.                                                                   |
+| `h:hostname`                        | No       | Add a hostname to the event. No default.                                                                                                     |
+| `#tag1:value1,tag2,tag3:value3,...` | No       | The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default.                       |
+| `m:service_check_message`           | No       | Add a message describing the current state of the service check. *This field MUST be positioned last among the metadata fields.* No default. |
 
 Here's an example datagram:
 
@@ -91,28 +96,30 @@ Here's an example datagram:
 
 ## Send metrics and events using DogStatsD and the shell
 
-For Linux and other Unix-like OS, we use Bash.
-For Windows we need Powershell and [powershell-statsd][2], a simple Powershell function that takes care of the network bits for us.
+For Linux and other Unix-like OS, use Bash.
+For Windows, you need Powershell and [powershell-statsd][2] (a simple Powershell function that takes care of the network bits).
 
 The idea behind DogStatsD is simple: create a message that contains information about your metric/event, and send it to a collector over UDP on port 8125. [Read more about the message format](#datagram-format).
 
 ### Sending metrics
 
-The format for sending metrics is `metric.name:value|type|@sample_rate|#tag1:value,tag2,` so let's go ahead and send datapoints for a gauge metric called custom_metric with the shell tag. We use a locally installed Agent as a collector, so the destination IP address is 127.0.0.1.
+The format for sending metrics is `metric.name:value|type|@sample_rate|#tag1:value,tag2,` so let's go ahead and send datapoints for a gauge metric called custom_metric with the shell tag. Using a locally installed Agent as a collector, the destination IP address is 127.0.0.1.
 
-On Linux:
+Linux options:
 
 ```
 vagrant@vagrant-ubuntu-14-04:~$ echo -n "custom_metric:60|g|#shell" >/dev/udp/localhost/8125
 ```
 
-or
-
 ```
 vagrant@vagrant-ubuntu-14-04:~$ echo -n "custom_metric:60|g|#shell" | nc -4u -w0 127.0.0.1 8125
 ```
 
-On Windows:
+```
+vagrant@vagrant-ubuntu-14-04:~$ echo -n "custom.metric.name:1|c"|nc -4u -w1 localhost 8125
+```
+
+Windows options:
 
 ```
 PS C:\vagrant> .\send-statsd.ps1 "custom_metric:123|g|#shell"
@@ -135,7 +142,7 @@ The format for sending events is:
 _e{title.length,text.length}:title|text|d:date_happened|h:hostname|p:priority|t:alert_type|#tag1,tag2.
 ```
 
-Here we need to calculate the size of the event's title and body.
+Here, calculate the size of the event's title and body:
 
 On Linux:
 

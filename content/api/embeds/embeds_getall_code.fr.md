@@ -1,7 +1,7 @@
 ---
 title: Récupérer tous les embeds
 type: apicode
-order: 10.1
+order: 11.1
 external_redirect: /api/#recuperer-tous-les-embeds
 ---
 

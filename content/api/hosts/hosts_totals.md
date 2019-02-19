@@ -1,7 +1,7 @@
 ---
 title: Host totals
 type: apicontent
-order: 13.2
+order: 14.2
 external_redirect: /api/#host-totals
 ---
 

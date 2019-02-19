@@ -1,7 +1,7 @@
 ---
 title: Google Cloud Platform
 type: apicontent
-order: 14.3
+order: 15.3
 external_redirect: /api/#google-cloud-platform
 ---
 
@@ -13,7 +13,6 @@ Configure your Datadog-Google Cloud Platform integration directly through the Da
 **Note**: 
 
 * Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization. 
-* Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.
 
 ##### ARGUMENTS
 

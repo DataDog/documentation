@@ -180,7 +180,7 @@ This is the best option if you do not have a web proxy readily available in your
 HAProxy should be installed on a host that has connectivity to Datadog. Use the following configuration file if you do not already have it configured.
 
 {{< tabs >}}
-{{% tab "Datadog US app.datadoghq.com" %}}
+{{% tab "Datadog US site" %}}
 
 ```
 # Basic configuration
@@ -271,7 +271,7 @@ Once the HAProxy configuration is in place, you can reload it or restart HAProxy
 **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
 
 {{% /tab %}}
-{{% tab "Datadog EU app.datadoghq.eu" %}}
+{{% tab "Datadog EU site" %}}
 
 ```
 # Basic configuration
@@ -444,6 +444,78 @@ To verify that everything is working properly, review the HAProxy statistics at 
 {{% /tab %}}
 {{< /tabs >}}
 
+## Using NGINX as a Proxy
+
+[NGINX][3] is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. You can use NGINX as a proxy to send logs to Datadog:
+
+`agent ---> nginx ---> Datadog`
+
+### Proxy forwarding with NGINX
+#### NGINX configuration
+
+This example `nginx.conf` can be used to proxy logs to the Datadog intake. It does TLS wrapping to ensure internal plaintext logs are encrypted between your proxy and Datadog's log intake API endpoint:
+
+{{< tabs >}}
+{{% tab "Datadog US site" %}}
+
+```
+user nginx;
+worker_processes auto;
+error_log /var/log/nginx/error.log;
+pid /run/nginx.pid; 
+
+include /usr/share/nginx/modules/*.conf;
+events {
+    worker_connections 1024;
+}
+# TCP Proxy for Datadog logs
+stream {
+    server {
+        listen 10514; #proxy listen port
+        proxy_ssl on;
+        proxy_pass agent-intake.logs.datadoghq.com:10516;
+    }
+}
+```
+
+{{% /tab %}}
+{{% tab "Datadog EU site" %}}
+
+```
+user nginx;
+worker_processes auto;
+error_log /var/log/nginx/error.log;
+pid /run/nginx.pid; 
+
+include /usr/share/nginx/modules/*.conf;
+events {
+    worker_connections 1024;
+}
+# TCP Proxy for Datadog logs
+stream {
+    server {
+        listen 10514; #proxy listen port
+        proxy_ssl on;
+        proxy_pass agent-intake.logs.datadoghq.eu:443;
+    }
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Datadog Agent configuration
+
+To use the Datadog Agent v6 as the logs collector, instruct the Agent to use the newly created proxy instead of establishing a connection directly with the logs intake by updating `datadog.yaml`:
+
+```yaml
+logs_config:
+  logs_dd_url: myProxyServer.myDomain:10514
+  dev_mode_no_ssl: true
+```
+
+The `dev_mode_no_ssl` parameter is set to `true` because establishing the SSL/TLS connection is handled by NGINX's `proxy_ssl on` option. **Note**: Set this option to `false` if you don't intend to use a proxy which can encrypt the connection to the logs intake.
+
 ## Using the Agent as a Proxy
 
 **This feature is only available for Agent v5**
@@ -471,7 +543,7 @@ It is recommended to use an actual proxy (a web proxy or HAProxy) to forward you
 to
     `dd_url: http://proxy-node:17123`
 
-6. Verify on the [Infrastructure page][3] that all nodes report data to Datadog.
+6. Verify on the [Infrastructure page][4] that all nodes report data to Datadog.
 
 ## Further Reading
 
@@ -479,4 +551,5 @@ to
 
 [1]: http://haproxy.1wt.eu
 [2]: http://www.haproxy.org/#perf
-[3]: https://app.datadoghq.com/infrastructure#overview
+[3]: https://www.nginx.com
+[4]: https://app.datadoghq.com/infrastructure#overview

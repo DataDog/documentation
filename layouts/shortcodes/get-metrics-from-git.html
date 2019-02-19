@@ -29,6 +29,7 @@
   {{ end }}
   {{ $data := ($.Scratch.Get "data") }}
 
+  {{ if $data }}
 
     {{ if (index $params 1 ) }} {{/* Custom metrics set in shortcode param index 1 (second position) */}}
 
@@ -82,5 +83,6 @@
 
     {{ end }}
 
+  {{ end }}
 
 {{ end }}

@@ -10,13 +10,13 @@ aliases:
     {{< nextlink href="/monitors/monitor_types/composite" >}}Composite{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/custom_check" >}}Check custom{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/event" >}}Événement{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/host" >}}Hôte{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/host" >}}Host{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/forecasts" >}}Prévisions{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/integration" >}}Intégration{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/log" >}}Log{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/metric" >}}Métrique{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/network" >}}Réseau{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/outlier" >}}Anomalie{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/outlier" >}}Singularité{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/process" >}}Processus{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/watchdog" >}}Watchdog{{< /nextlink >}}
 {{< /whatsnext >}}

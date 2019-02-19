@@ -21,7 +21,7 @@ private: true
 ## Communication and Security
 
 * [How do I configure Azure AD as a SAML IdP?][9]
-* [How do I reset my Application Keys?][10]
+* [API and Application Key Management][10]
 * [Why are users being added as "none none"?][11]
 * [How do I configure NoPassword as a SAML IdP?][12]
 * [How do I configure Okta as a SAML IdP?][13]
@@ -39,7 +39,7 @@ private: true
 [7]: /account_management/faq/as-a-parent-account-admin-how-do-i-create-new-sub-organizations
 [8]: /account_management/faq/do-you-support-custom-domains-for-each-of-my-sub-organizations
 [9]: /account_management/faq/how-do-i-configure-azure-ad-as-a-saml-idp
-[10]: /account_management/faq/how-do-i-reset-my-application-keys
+[10]: /account_management/faq/api-app-key-management
 [11]: /account_management/faq/why-are-users-being-added-as-none-none
 [12]: /account_management/faq/how-do-i-configure-nopassword-as-a-saml-idp
 [13]: /account_management/faq/how-do-i-configure-okta-as-a-saml-idp

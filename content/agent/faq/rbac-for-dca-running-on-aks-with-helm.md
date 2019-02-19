@@ -1,0 +1,37 @@
+---
+title: Cluster Agent or Agent restart when using Azure Kubernetes Service (AKS).
+kind: faq
+---
+
+Depending on how you deployed the manifest, you might be using readiness probes. Azure AKS requires extra permissions in the Cluster Role in order for the health endpoint to be reachable.
+
+On AKS, the default RBAC does not allow access to `/healthz` for unauthenticated users.
+The following RBAC fixes that:
+
+```
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: system:healthz
+rules:
+- nonResourceURLs:
+  - /healthz
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: system:healthz
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:healthz
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: system:authenticated
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: system:unauthenticated
+```

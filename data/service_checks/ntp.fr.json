@@ -6,6 +6,6 @@
         "statuses": ["ok", "critical", "unknown"],
         "groups": ["host"],
         "name": "Horloge synchronisée",
-        "description": "Renvoie `CRITICAL` si l'horloge de l'hôte dépasse le seuil configuré à partir de l'heure NTP, renvoie `UNKNOWN` si l'Agent n'est pas capable de se connecter au serveur NTP ou renvoie `OK` pour les autres cas."
+        "description": "Renvoie `CRITICAL` si l'horloge du host dépasse le seuil configuré à partir de l'heure NTP, renvoie `UNKNOWN` si l'Agent n'est pas capable de se connecter au serveur NTP ou renvoie `OK` pour les autres cas."
     }
 ]

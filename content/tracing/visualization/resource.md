@@ -64,6 +64,24 @@ Use the top right selector of this graph to zoom on a given percentile of latenc
 
 Zoom on this graph to filter corresponding traces.
 
+## Span Statistics
+
+For a given resource, Datadog provides you a span analysis breakdown of all matching traces:
+
+{{< img src="tracing/visualization/resource/span_stats.png" alt="Span statistics" responsive="true" style="width:80%;">}}
+
+The displayed metrics represent, per span:
+
+| Metric            | Description                                                                                             |
+| ------            | --------                                                                                                |
+| `Avg Span/trace`  | Average number of occurrences of the span, for traces including the current resource, where the span is present at least once. |
+| `% of traces`     | Percentage of traces including the current resource where the span is present at least once. |
+| `Avg duration`    | Average duration for which the span was active, for traces including the current resource, where the span is present at least once.                |
+| `Avg % Exec Time` | Average ratio of execution time for which the span was active, for traces including the current resource, where the span is present at least once. |
+
+**Note**: A span is considered active when it's not waiting for a child span to complete. The active spans at a given time, for a given trace, are all the leaf spans (i.e.: spans without children).
+
+
 ## Traces
 
 Consult the list of traces associated with this resource. Filter/sort this list to see fast/slow and error/non-error traces:  

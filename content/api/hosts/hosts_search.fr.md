@@ -1,24 +1,24 @@
 ---
-title: Rechercher des hôtes
+title: Rechercher des hosts
 type: apicontent
-order: 13.1
-external_redirect: /api/#rechercher-des-hotes
+order: 14.1
+external_redirect: /api/#rechercher-des-hosts
 ---
 
-## Rechercher des hôtes
-Cet endpoint permet de rechercher les hôtes selon leur nom, alias ou tag. Les hôtes actifs au cours des trois dernières heures sont inclus. Les résultats sont paginés avec un maximum de 100 résultats par recherche.
+## Rechercher des hosts
+Cet endpoint permet de rechercher les hosts selon leur nom, alias ou tag. Les hosts actifs au cours des trois dernières heures sont inclus. Les résultats sont paginés avec un maximum de 100 résultats par recherche.
 
 ##### ARGUMENTS
 
 * **`filter`** [*facultatif*, *défaut*=**None**] :
     chaîne de requête pour filtrer les résultats de la recherche.
 * **`sort_field`** [*facultatif*, *défaut*=**cpu**] :
-    triez les hôtes selon un champ donné.
+    triez les hosts selon un champ donné.
     Options : **status**, **apps**, **cpu**, **iowait** ou **load**
 * **`sort_dir`** [*facultatif*, *défaut*=**desc**] :
     le sens du tri.
     Options : **asc** ou **desc**
 * **`start`** [*facultatif*, *défaut*=**0**] :
-    résultat des hôtes à partir desquels commencer la recherche.
+    résultat des hosts à partir desquels commencer la recherche.
 * **`count`** [*facultatif*, *défaut*=**100**] :
-     nombre d'hôtes à renvoyer, max. 100.
+     nombre de hosts à renvoyer, max. 100.

@@ -65,22 +65,23 @@ The Agent has a new set of command-line options:
 
 | Command         | Description                                                                 |
 |-----------------|-----------------------------------------------------------------------------|
-| check           | Run the specified check.                                                    |
-| diagnose        | Execute some connectivity diagnosis on your system.                         |
-| flare           | Collect a flare and send it to Datadog.                                     |
-| help            | Get help about any command.                                                 |
-| hostname        | Print the hostname used by the Agent.                                       |
-| import          | Import and convert configuration files from previous versions of the Agent. |
+| check           | Runs the specified check.                                                    |
+| diagnose        | Executes some connectivity diagnosis on your system.                         |
+| flare           | Collects a flare and send it to Datadog.                                     |
+| help            | Gets help about any command.                                                 |
+| hostname        | Prints the hostname used by the Agent.                                       |
+| import          | Imports and converts configuration files from previous versions of the Agent. |
 | installservice  | Installs the Agent within the service control manager.                      |
 | launch-gui      | Starts the Datadog Agent Manager.                                           |
 | regimport       | Import the registry settings into `datadog.yaml`.                           |
 | remove-service  | Removes the Agent from the service control manager.                         |
 | restart-service | Restarts the Agent within the service control manager.                      |
-| start           | Start the Agent.                                                            |
+| run             | Starts the Agent.                                                           |
+| start           | Starts the Agent. (Being deprecated, but accepted. Use `run` as an alternative.)        |
 | start-service   | Starts the Agent within the service control manager.                        |
 | status          | Print the current status.                                                   |
 | stopservice     | Stops the Agent within the service control manager.                         |
-| version         | Print the version info.                                                     |
+| version         | Prints the version info.                                                     |
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}

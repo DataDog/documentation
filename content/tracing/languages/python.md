@@ -61,8 +61,10 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | [Django][6] | Fully Supported | http://pypi.datadoghq.com/trace/docs/web_integrations.html#django  |
 | [Falcon][7]   | Fully Supported | http://pypi.datadoghq.com/trace/docs/web_integrations.html#falcon  |
 | [Flask][8]         | Fully Supported | http://pypi.datadoghq.com/trace/docs/web_integrations.html#flask   |
-| [Pylons][9]      | Fully Supported | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pylons  |
-| [Pyramid][10]       | Fully Supported | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pyramid |
+| [Molten][9]         | Fully Supported | http://pypi.datadoghq.com/trace/docs/web_integrations.html#molten   |
+| [Pylons][10]      | Fully Supported | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pylons  |
+| [Pyramid][11]       | Fully Supported | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pyramid |
+| [Tornado][12]       | Fully Supported | http://pypi.datadoghq.com/trace/docs/web_integrations.html#tornado |
 
 #### Datastore Compatibility
 
@@ -70,16 +72,16 @@ The `ddtrace` library includes support for the following data stores:
 
 |                           Datastore                            |  Support Type   |                       PyPi Datadog Documentation                        |
 | -------------------------------------------------------------- | --------------- | ----------------------------------------------------------------------- |
-| [Cassandra][11]                     | Fully Supported | http://pypi.datadoghq.com/trace/docs/db_integrations.html#cassandra     |
-| [Elasticsearch][12] | Fully Supported | http://pypi.datadoghq.com/trace/docs/db_integrations.html#elasticsearch |
-| [Flask Cache][13]           | Fully Supported | http://pypi.datadoghq.com/trace/docs/db_integrations.html#flask-cache   |
-| [MongoDB][14]             | Fully Supported | http://pypi.datadoghq.com/trace/docs/db_integrations.html#mongodb       |
-| [Memcached][15]                            | Fully Supported | http://pypi.datadoghq.com/trace/docs/db_integrations.html#memcached     |
-| [MySQL][16]                                | Fully Supported | http://pypi.datadoghq.com/trace/docs/db_integrations.html#mysql         |
-| [Postgres][17]                        | Fully Supported | http://pypi.datadoghq.com/trace/docs/db_integrations.html#postgres      |
-| [Redis][18]                                     | Fully Supported | http://pypi.datadoghq.com/trace/docs/db_integrations.html#redis         |
-| [SQLAlchemy][19]                      | Fully Supported | http://pypi.datadoghq.com/trace/docs/db_integrations.html#sqlalchemy    |
-| [SQLite][20]                              | Fully Supported | http://pypi.datadoghq.com/trace/docs/db_integrations.html#sqlite        |
+| [Cassandra][13]                     | Fully Supported | http://pypi.datadoghq.com/trace/docs/db_integrations.html#cassandra     |
+| [Elasticsearch][14] | Fully Supported | http://pypi.datadoghq.com/trace/docs/db_integrations.html#elasticsearch |
+| [Flask Cache][15]           | Fully Supported | http://pypi.datadoghq.com/trace/docs/db_integrations.html#flask-cache   |
+| [MongoDB][16]             | Fully Supported | http://pypi.datadoghq.com/trace/docs/db_integrations.html#mongodb       |
+| [Memcached][17]                            | Fully Supported | http://pypi.datadoghq.com/trace/docs/db_integrations.html#memcached     |
+| [MySQL][18]                                | Fully Supported | http://pypi.datadoghq.com/trace/docs/db_integrations.html#mysql         |
+| [Postgres][19]                        | Fully Supported | http://pypi.datadoghq.com/trace/docs/db_integrations.html#postgres      |
+| [Redis][20]                                     | Fully Supported | http://pypi.datadoghq.com/trace/docs/db_integrations.html#redis         |
+| [SQLAlchemy][21]                      | Fully Supported | http://pypi.datadoghq.com/trace/docs/db_integrations.html#sqlalchemy    |
+| [SQLite][22]                              | Fully Supported | http://pypi.datadoghq.com/trace/docs/db_integrations.html#sqlite        |
 
 
 #### Library Compatibility
@@ -89,13 +91,13 @@ The `ddtrace` library includes support for the following libraries:
 |                               Library                                |  Support Type   |                      PyPi Datadog Documentation                       |
 | -------------------------------------------------------------------- | --------------- | --------------------------------------------------------------------- |
 | Async Libraries                                                      | Fully Supported | http://pypi.datadoghq.com/trace/docs/async_integrations.html          |
-| [Boto][21]                        | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#boto     |
-| [Futures][22] | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#futures  |
-| [Celery][23]                              | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#celery   |
-| [httplib][24]            | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#httplib  |
-| [Jinja2][25]                                    | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#jinja2   |
-| [Kombu][26]                     | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#kombu    |
-| [Requests][27]               | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#requests |
+| [Boto][23]                        | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#boto     |
+| [Futures][24] | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#futures  |
+| [Celery][25]                              | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#celery   |
+| [httplib][26]            | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#httplib  |
+| [Jinja2][27]                                    | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#jinja2   |
+| [Kombu][28]                     | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#kombu    |
+| [Requests][29]               | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#requests |
 
 
 ## Further Reading
@@ -110,22 +112,24 @@ The `ddtrace` library includes support for the following libraries:
 [6]: https://www.djangoproject.com
 [7]: https://falconframework.org
 [8]: http://flask.pocoo.org
-[9]: http://pylonsproject.org
-[10]: https://trypyramid.com
-[11]: https://cassandra.apache.org
-[12]: https://www.elastic.co/products/elasticsearch
-[13]: https://pythonhosted.org/Flask-Cache
-[14]: https://www.mongodb.com/what-is-mongodb
-[15]: https://memcached.org
-[16]: https://www.mysql.com
-[17]: https://www.postgresql.org
-[18]: https://redis.io
-[19]: https://www.sqlalchemy.org
-[20]: https://www.sqlite.org
-[21]: http://docs.pythonboto.org/en/latest
-[22]: https://docs.python.org/3/library/concurrent.futures.html
-[23]: http://www.celeryproject.org
-[24]: https://docs.python.org/2/library/httplib.html
-[25]: http://jinja.pocoo.org
-[26]: https://kombu.readthedocs.io/en/latest
-[27]: http://docs.python-requests.org/en/master
+[9]: https://moltenframework.com
+[10]: http://pylonsproject.org
+[11]: https://trypyramid.com
+[12]: http://www.tornadoweb.org
+[13]: https://cassandra.apache.org
+[14]: https://www.elastic.co/products/elasticsearch
+[15]: https://pythonhosted.org/Flask-Cache
+[16]: https://www.mongodb.com/what-is-mongodb
+[17]: https://memcached.org
+[18]: https://www.mysql.com
+[19]: https://www.postgresql.org
+[20]: https://redis.io
+[21]: https://www.sqlalchemy.org
+[22]: https://www.sqlite.org
+[23]: http://docs.pythonboto.org/en/latest
+[24]: https://docs.python.org/3/library/concurrent.futures.html
+[25]: http://www.celeryproject.org
+[26]: https://docs.python.org/2/library/httplib.html
+[27]: http://jinja.pocoo.org
+[28]: https://kombu.readthedocs.io/en/latest
+[29]: http://docs.python-requests.org/en/master

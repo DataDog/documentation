@@ -6,6 +6,6 @@
         "statuses": ["ok", "critical"],
         "groups": ["host"],
         "name": "Agent disponible",
-        "description": "Renvoie `OK` si l'Agent fonctionne correctement. Des alertes sont créées si l'hôte ne répond pas."
+        "description": "Renvoie `OK` si l'Agent fonctionne correctement. Des alertes sont créées si le host ne répond pas."
     }
 ]

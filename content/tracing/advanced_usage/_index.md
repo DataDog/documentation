@@ -107,7 +107,7 @@ end
 
 **Adding tags to a current active span**
 
-Access the current active span from any method within your code. Note, however, that if the method is called and there is no span currently active, `active_span` will be nil.
+Access the current active span from any method within your code. Note, however, that if the method is called and there is no span currently active, `active_span` is nil.
 
 ```ruby
 # e.g. adding tag to active span
@@ -261,20 +261,52 @@ span?.SetTag("<TAG_KEY>", "<TAG_VALUE>");
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Add tags directly to a `OpenTracing\Span` object by calling `Span.setTag()`. For example:
+**Adding tags to a span**
+
+Add tags directly to a `DDTrace\Span` object by calling `Span::setTag()`.
 
 ```php
-use OpenTracing\GlobalTracer;
+dd_trace('<FUNCTION_NAME>', function () {
+    $scope = \DDTrace\GlobalTracer::get()
+      ->startActiveSpan('<FUNCTION_NAME>');
+    $span = $scope->getSpan();
+    $span->setTag('<TAG_KEY>', '<TAG_VALUE>');
 
-// get the currently active span (can be null)
-if (($span = GlobalTracer::get()->getActiveSpan()) !== null){
+    $result = <FUNCTION_NAME>();
 
-  // add a tag to the span
-  $span->setTag("<TAG_KEY>", "<TAG_VALUE>");
+    $scope->close();
+    return $result;
+});
+```
+
+**Adding tags to a current active span**
+
+```php
+// Get the currently active span (can be null)
+$span = \DDTrace\GlobalTracer::get()->getActiveSpan();
+if (null !== $span) {
+  // Add a tag to the span
+  $span->setTag('<TAG_KEY>', '<TAG_VALUE>');
 }
 ```
 
-**Note**: `GlobalTracer::get()->getActiveSpan()` returns `null` if there is no active span.
+**Note**: `Tracer::getActiveSpan()` returns `null` if there is no active span.
+
+**Adding tags globally to all spans**
+
+Not supported with automatic instrumentation.
+
+Manual instrumentations of the tracer can set an associative array of global tags via the `global_tags` configuration key.
+
+```php
+$config = [
+    'global_tags' => [
+        '<TAG_KEY>' => '<TAG_VALUE>',
+    ]
+];
+$tracer = new \DDTrace\Tracer(null, null, $config);
+\DDTrace\GlobalTracer::set($tracer);
+```
 
 {{% /tab %}}
 {{% tab "C++" %}}
@@ -382,11 +414,21 @@ const tracer = require('dd-trace').init({
 ```
 
 {{% /tab %}}
+{{% tab "PHP" %}}
+
+The PHP tracer automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
+
+```php
+putenv('DD_AGENT_HOST=localhost');
+putenv('DD_TRACE_AGENT_PORT=8126');
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Manual Instrumentation
 
-Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][2] and familiarize yourself with the core concepts of Datadog APM. 
+Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][2] and familiarize yourself with the core concepts of Datadog APM.
 
 
 {{< tabs >}}
@@ -458,14 +500,14 @@ Further API details can be found at [`ddtrace.Tracer()`][4]
 
 **Using the API**
 
-If the above methods are still not enough to satisfy your tracing needs, a manual API is provided which will allow you to start and finish spans however you may require:
+If the above methods are still not enough to satisfy your tracing needs, a manual API is provided which allows you to start and finish spans however you may require:
 
 ```python
   span = tracer.trace('operations.of.interest')
 
   # do some operation(s) of interest in between
 
-  # NOTE: make sure to call span.finish() or the entire trace will not be sent
+  # NOTE: make sure to call span.finish() or the entire trace is not sent
   # to Datadog
   span.finish()
 ```
@@ -523,7 +565,7 @@ For more details about manual instrumentation, check out the [API documentation]
 
 If you aren't using supported library instrumentation (see [Library compatibility][1]), you may want to to manually instrument your code.
 
-To make use of manual instrumentation, use the `tracer` package which is documented on Datadog's [godoc page][2]. 
+To make use of manual instrumentation, use the `tracer` package which is documented on Datadog's [godoc page][2].
 
 **Example Usage**
 
@@ -594,29 +636,45 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 [1]: /tracing/languages/dotnet/#compatibility
 {{% /tab %}}
 {{% tab "PHP" %}}
-If you aren’t using libraries supported by automatic instrumentation (see [library compatibility][1]), manually instrument your code.
 
-The following example uses the global Datadog Tracer and creates a span to trace a web request:
+If you aren’t using a [framework supported by automatic instrumentation][1], manually instrument your code.
+
+First install the PHP tracer dependency with Composer:
+
+```bash
+$ composer require datadog/dd-trace
+```
+
+Then use the PHP tracer bootstrap to initialize the global tracer and create a root span to start the trace:
 
 ```php
-use OpenTracing\GlobalTracer;
-use DDTrace\Tags;
-use DDTrace\Types;
+// The existing Composer autoloader
+require __DIR__ . '/../vendor/autoload.php';
 
-$scope = GlobalTracer::get()->startActiveSpan("web.request");
-$span = $scope->getSpan();
+// Add the PHP tracer bootstrap
+require __DIR__ . '/../vendor/datadog/dd-trace/bridge/dd_init.php';
 
-$span->setResource($request->url);
-$span->setTag(Tags\SPAN_TYPE, Types\WEB_SERVLET);
-$span->setTag('http.method', $request->method);
+$span = \DDTrace\GlobalTracer::get()
+    ->startRootSpan('web.request')
+    ->getSpan();
+$span->setResource($_SERVER['REQUEST_URI']);
+$span->setTag(\DDTrace\Tag::SPAN_TYPE, \DDTrace\Type::WEB_SERVLET);
+$span->setTag(\DDTrace\Tag::HTTP_METHOD, $_SERVER['REQUEST_METHOD']);
 
-// do some work...
+// Run the app here...
+```
 
-$span->finish();
+The root span an be accessed later on directly from the global tracer via `Tracer::getRootScope()`. This is useful in contexts where the metadata to be added to the root span does not exist in early script execution.
+
+```php
+$rootSpan = \DDTrace\GlobalTracer::get()
+    ->getRootScope()
+    ->getSpan();
+$rootSpan->setTag(\DDTrace\Tag::HTTP_STATUS_CODE, 200);
 ```
 
 
-[1]: /tracing/languages/php/#compatibility
+[1]: /tracing/languages/php/#framework-compatibility
 {{% /tab %}}
 {{% tab "C++" %}}
 
@@ -939,7 +997,7 @@ public void ConfigureServices(IServiceCollection services)
     // create an OpenTracing ITracer with default setting
     OpenTracing.ITracer tracer =
         Datadog.Trace.OpenTracing.OpenTracingTracerFactory.CreateTracer();
-    
+
     // to use tracer with ASP.NET Core dependency injection
     services.AddSingleton<ITracer>(tracer);
 
@@ -950,6 +1008,28 @@ public void ConfigureServices(IServiceCollection services)
 
 
 [1]: https://www.nuget.org/packages/Datadog.Trace.OpenTracing
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+The PHP tracer supports OpenTracing via the [**opentracing/opentracing** library][1] which is installed with Composer:
+
+```bash
+$ composer require opentracing/opentracing:1.0.0-beta5
+```
+
+When [automatic instrumentation][2] is enabled, an OpenTracing-compatible tracer is made available as the global tracer:
+
+```php
+$otTracer = \OpenTracing\GlobalTracer::get();
+$span = $otTracer->startActiveSpan('web.request')->getSpan();
+$span->setTag('span.type', 'web');
+$span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
+// ...Use OpenTracing as expected
+```
+
+
+[1]: https://github.com/opentracing/opentracing-php
+[2]: /tracing/languages/php/#automatic-instrumentation
 {{% /tab %}}
 {{% tab "C++" %}}
 
@@ -1011,7 +1091,7 @@ final SpanContext extractedContext =
                              new MyHttpRequestExtractAdapter(request));
 
 try (Scope scope = tracer.buildSpan("httpServerSpan").asChildOf(extractedContext).startActive(true)) {
-    final Span span = scope.span(); // will be a child of http client span in step 1
+    final Span span = scope.span(); // is a child of http client span in step 1
     // http server impl...
 }
 
@@ -1039,7 +1119,7 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 
 Distributed tracing is disabled by default. Refer to the configuration documentation for each framework to enable it.
 
-Distributed tracing is supported in the following frameworks: 
+Distributed tracing is supported in the following frameworks:
 
 | Framework/Library | API Documentation                                                   |
 | ----------------- | :------------------------------------------------------------------ |
@@ -1048,9 +1128,10 @@ Distributed tracing is supported in the following frameworks:
 | django            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#django   |
 | falcon            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#falcon   |
 | flask             | http://pypi.datadoghq.com/trace/docs/web_integrations.html#flask    |
+| molten            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#molten   |
 | pylons            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pylons   |
 | pyramid           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pyramid  |
-| requests          | http://pypi.datadoghq.com/trace/docs/web_integrations.html#requests |
+| requests          | http://pypi.datadoghq.com/trace/docs/other_integrations.html#requests |
 | tornado           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#tornado  |
 
 To add your own distributed tracing check the [Datadog API documentation][1].
@@ -1058,7 +1139,7 @@ To add your own distributed tracing check the [Datadog API documentation][1].
 
 [1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#http-client
 {{% /tab %}}
-{{% tab "Ruby" %}} 
+{{% tab "Ruby" %}}
 
 Distributed tracing is disabled by default. Refer to the configuration documentation for each framework to enable it.
 
@@ -1144,7 +1225,7 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Distributed tracing is enabled by default. 
+Distributed tracing is enabled by default.
 
 {{% /tab %}}
 {{% tab "C++" %}}
@@ -1198,13 +1279,13 @@ Priority sampling allows traces between two Datadog endpoints to be sampled toge
 
 Priority sampling automatically assigns and propagates a priority value along all traces, depending on their service and volume. Priorities can also be set manually to drop non-interesting traces or keep important ones.
 
-For a more detailed explanations of sampling and priority sampling, check the [sampling and storage][5] documentation. 
+For a more detailed explanations of sampling and priority sampling, check the [sampling and storage][5] documentation.
 
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Priority sampling is disabled by default. To enable it, configure the `priority.sampling` flag to `true` ([see how to configure the java client][1].
+Priority sampling is enabled by default. To disable it, configure the `priority.sampling` flag to `false` ([see how to configure the java client][1]).
 
 
 Current Priority Values (more may be added in the future):
@@ -1382,7 +1463,7 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Priority sampling is enabled by default. 
+Priority sampling is enabled by default.
 
 {{% /tab %}}
 {{% tab "C++" %}}
@@ -1400,22 +1481,39 @@ another_span->SetTag("sampling.priority", 0); // Discard this span.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Logging
+## Correlate Traces and Logs
 
-For each generated trace, there are very likely log events written by the monitored functions and applications. 
-The purpose of this section is to explain how the correlation between traces and logs can be improved by automatically adding  a trace id in your logs and then use it in the Datadog platform to show you the exact logs correlated to the observed trace.
+The correlation between Datadog APM and Datadog Log Management is improved by automatically adding a `trace_id` and `span_id` in your logs with the Tracing Libraries. This can then be used in the platform to show you the exact logs correlated to the observed trace.
 
-{{< img src="tracing/logs_in_trace.png" alt="Logs in Traces" responsive="true" style="width:70%;">}}
+{{< img src="tracing/trace_id_injection.png" alt="Logs in Traces" responsive="true" style="width:100%;">}}
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The idea is to leverage the MDC ([Map Diagnostic Context][1]) to automatically add the trace and span identifier into the logs.
-The Datadog Java tracer exposes two API calls to allow printing trace and span identifiers along with log statements, `CorrelationIdentifier#getTraceId()`, and `CorrelationIdentifier#getSpanId()`.
+Use one of the following options to inject Java trace information into your logs:
 
-- To inject those identifier into application logs using MDC frameworks, use the following method:
+**Automatic Trace ID Injection**
 
-**log4j2**:
+Enable injection in the Java Tracer's [configuration][2] by setting `Ddd.logs.injection=true` or through environment variable `DD_LOGS_INJECTION=true`.
+
+**Note**: Currently only **slf4j** is supported for MDC autoinjection.
+
+If the logs are already JSON formatted, there is nothing left to do. If the logs are raw formatted, update your formatter to include `dd.trace_id` and `dd.span_id` in your logger configuration:
+
+```
+<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
+```
+
+**Manual Trace ID Injection**
+
+If you prefer to manually correlate your traces with your logs, leverage the Datadog API to retrieve correlation identifiers:
+
+* Use `CorrelationIdentifier#getTraceId()` and `CorrelationIdentifier#getSpanId()` API methods to inject identifiers at the beginning and end of each span to log (see examples below).
+* Configure MDC to use the injected Keys:
+  * `dd.trace_id` Active Trace ID during the log statement (or `0` if no trace)
+  * `dd.span_id` Active Span ID during the log statement (or `0` if no trace)
+
+* `log4j2` example:
 
 ```java
 import org.apache.logging.log4j.ThreadContext;
@@ -1425,13 +1523,17 @@ import datadog.trace.api.CorrelationIdentifier;
 try {
     ThreadContext.put("dd.trace_id", String.valueOf(CorrelationIdentifier.getTraceId()));
     ThreadContext.put("dd.span_id", String.valueOf(CorrelationIdentifier.getSpanId()));
-} finally {
+}
+
+// Log something
+
+finally {
     ThreadContext.remove("dd.trace_id");
     ThreadContext.remove("dd.span_id");
 }
 ```
 
-**slf4j/logback**:
+* `slf4j/logback` example:
 
 ```java
 import org.slf4j.MDC;
@@ -1441,57 +1543,168 @@ import datadog.trace.api.CorrelationIdentifier;
 try {
     MDC.put("dd.trace_id", String.valueOf(CorrelationIdentifier.getTraceId()));
     MDC.put("dd.span_id", String.valueOf(CorrelationIdentifier.getSpanId()));
-} finally {
+}
+
+// Log something
+
+finally {
     MDC.remove("dd.trace_id");
     MDC.remove("dd.span_id");
 }
 ```
 
-- Add those identifiers in the logs:
+Then update your logger configuration to include `dd.trace_id` and `dd.span_id` in your log pattern:
 
-If logs are already JSON formatted, there should be nothing left to do.
-[See our Java logging documentation][2] to add those two identifiers in raw logs or to learn how to log in JSON.
-
-[1]: https://logback.qos.ch/manual/mdc.html
-[2]: https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#configure-your-logger
-{{% /tab %}}
-{{% tab "Python" %}}
-Getting the required information needed for logging is easy:
-
-```python
-from ddtrace import helpers
-
-trace_id, span_id = helpers.get_correlation_ids()
+```
+<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
+**Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][4].
+
+[See our Java logging documentation][3] for more details about specific logger implementation or to learn how to log in JSON.
+
+[1]: https://logback.qos.ch/manual/mdc.html
+[2]: https://docs.datadoghq.com/tracing/languages/java/#configuration
+[3]: https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#raw-format
+[4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/
+{{% /tab %}}
+{{% tab "Python" %}}
+
+Use one of the following options to inject Python trace information into your logs:
+
+**Automatic Trace ID Injection With Standard Library Logging**
+
+Enable injection with the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
+
+**Note**: The standard library `logging` is supported for auto-injection. Any libraries, such as `json_log_formatter`, that extend the standard library module are also supported for auto-injection. `ddtrace-run` calls `logging.basicConfig` before executing your application. If the root logger has a handler configured, your application must modify the root logger and handler directly.
+
+**Manual Trace ID Injection with Standard Library Logging**
+
+If you prefer to manually correlate your traces with your logs, patch your `logging` module by updating your log formatter to include the ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
+
+The configuration below is used by the automatic injection method and is supported by default in the Python Log Integration:
+
+``` python
+from ddtrace import patch_all; patch_all(logging=True)
+import logging
+from ddtrace import tracer
+
+FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
+          '[dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] '
+          '- %(message)s')
+logging.basicConfig(format=FORMAT)
+log = logging.getLogger(__name__)
+log.level = logging.INFO
+
+@tracer.wrap()
+def hello():
+    log.info('Hello, World!')
+
+hello()
+```
+
+
+**Manual Trace ID Injection without Standard Library Logging**
+
+If you are not using the standard library `logging` module, you can use the `ddtrace.helpers.get_correlation_ids()` to inject tracer information into your logs. As an illustration of this approach, the following example defines a function as a *processor* in `structlog` to add `dd.trace_id` and `dd.span_id` to the log output:
+
+``` python
+from ddtrace.helpers import get_correlation_ids
+
+import structlog
+
+
+def tracer_injection(logger, log_method, event_dict):
+    # get correlation ids from current tracer context
+    trace_id, span_id = get_correlation_ids()
+
+    # add ids to structlog event dictionary
+    # if no trace present, set ids to 0
+    event_dict['dd.trace_id'] = trace_id or 0
+    event_dict['dd.span_id'] = span_id or 0
+
+    return event_dict
+
+
+structlog.configure(
+    processors=[
+        tracer_injection,
+        structlog.processors.JSONRenderer()
+    ]
+)
+log = structlog.get_logger()
+```
+
+Once the logger is configured, executing a traced function that logs an event yields the injected tracer information:
+
+```
+>>> traced_func()
+{"event": "In tracer context", "trace_id": 9982398928418628468, "span_id": 10130028953923355146}
+```
+
+**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][2].
+
+[See our Python logging documentation][1] to ensure that the Python Log Integration is properly configured so that your Python logs are automatically parsed.
+
+[1]: https://docs.datadoghq.com/logs/log_collection/python/#configure-the-datadog-agent
+[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-To retrieve trace and span IDs for the active trace, use `Datadog.tracer.active_correlation`:
+Use one of the following options to inject Ruby trace information into your logs:
+
+**Automatic Trace ID Injection for Rails Applications using Lograge (recommended)**
+
+After [setting up Lograge in a Rails application][1], modify the `custom_options` block in your environment configuration file (e.g. `config/environments/production.rb`) to add the trace IDs:
 
 ```ruby
-# When a trace is active...
-Datadog.tracer.trace('correlation.example') do
-  # Returns #<Datadog::Correlation::Identifier>
+config.lograge.custom_options = lambda do |event|
+  # Retrieves trace information for current thread
   correlation = Datadog.tracer.active_correlation
-  correlation.trace_id # => 5963550561812073440
-  correlation.span_id # => 2232727802607726424
-end
 
-# When a trace isn't active...
-correlation = Datadog.tracer.active_correlation
-# Returns #<Datadog::Correlation::Identifier>
-correlation = Datadog.tracer.active_correlation
-correlation.trace_id # => 0
-correlation.span_id # => 0
+  {
+    # Adds IDs as tags to log output
+    :dd => {
+      :trace_id => correlation.trace_id,
+      :span_id => correlation.span_id
+    },
+    :ddsource => ["ruby"],
+    :params => event.payload[:params].reject { |k| %w(controller action).include? k }
+  }
+end
 ```
 
-To add correlation IDs to your logger, add a log formatter which retrieves the correlation IDs with `Datadog.tracer.active_correlation`, then add them to the message.
+**Automatic Trace ID Injection for default Rails Applications**
 
-To properly correlate with Datadog logging, be sure the following is present:
+Rails applications which are configured with a `ActiveSupport::TaggedLogging` logger can append trace IDs as tags to log output. The default Rails logger implements this tagged logging, making it easier to add trace tags.
 
- - `dd.trace_id=<TRACE_ID>`: Where `<TRACE_ID>` is equal to `Datadog.tracer.active_correlation.trace_id` or `0` if no trace is active.
- - `dd.span_id=<SPAN_ID>`: Where `<SPAN_ID>` is equal to `Datadog.tracer.active_correlation.span_id` or `0` if no trace is active.
+In your Rails environment configuration file (e.g. `config/environments/production.rb`), add the following:
+
+```ruby
+Rails.application.configure do
+  config.log_tags = [proc { Datadog.tracer.active_correlation.to_s }]
+end
+```
+
+This appends trace tags to web requests:
+
+```
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Started GET "/articles" for 172.22.0.1 at 2019-01-16 18:50:57 +0000
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Processing by ArticlesController#index as */*
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206]   Article Load (0.5ms)  SELECT "articles".* FROM "articles"
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
+```
+
+**Manual Trace ID Injection for Ruby Applications**
+
+To add trace IDs to your own logger, add a log formatter which retrieves the trace IDs with `Datadog.tracer.active_correlation`, then add the trace IDs to the message.
+
+To ensure proper log correlation, verify the following is present in each message:
+
+ - `dd.trace_id=<TRACE_ID>`: Where `<TRACE_ID>` is equal to `Datadog.tracer.active_correlation.trace_id` or `0` if no trace is active during logging.
+ - `dd.span_id=<SPAN_ID>`: Where `<SPAN_ID>` is equal to `Datadog.tracer.active_correlation.span_id` or `0` if no trace is active during logging.
+
+By default, `Datadog::Correlation::Identifier#to_s` returns `dd.trace_id=<TRACE_ID> dd.span_id=<SPAN_ID>`.
 
 An example of this in practice:
 
@@ -1502,14 +1715,32 @@ require 'logger'
 logger = Logger.new(STDOUT)
 logger.progname = 'my_app'
 logger.formatter  = proc do |severity, datetime, progname, msg|
-  # Returns Datadog::Correlation::Identifier
-  ids = Datadog.tracer.active_correlation
-  "[#{datetime}][#{progname}][#{severity}][dd.trace_id=#{ids.trace_id} dd.span_id=#{ids.span_id}] #{msg}\n"
+  "[#{datetime}][#{progname}][#{severity}][#{Datadog.tracer.active_correlation}] #{msg}\n"
 end
+
+# When no trace is active
+logger.warn('This is an untraced operation.')
+# [2019-01-16 18:38:41 +0000][my_app][WARN][dd.trace_id=0 dd.span_id=0] This is an untraced operation.
+
+# When a trace is active
+Datadog.tracer.trace('my.operation') { logger.warn('This is a traced operation.') }
+# [2019-01-16 18:38:41 +0000][my_app][WARN][dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] This is a traced operation.
 ```
 
+**Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][3].
+
+See our [Ruby logging documentation][2] to verify the Ruby log integration is properly configured and your ruby logs are automatically parsed.
+
+[1]: https://docs.datadoghq.com/logs/log_collection/ruby
+[2]: https://docs.datadoghq.com/logs/log_collection/ruby/#configure-the-datadog-agent
+[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/
 {{% /tab %}}
 {{% tab "Go" %}}
+
+Use the following example to inject Go trace information into your logs.
+
+**Manual Trace ID Injection for Go**
+
 The Go tracer exposes two API calls to allow printing trace and span identifiers along with log statements using exported methods from `SpanContext` type:
 
 ```go
@@ -1529,22 +1760,148 @@ func handler(w http.ResponseWriter, r *http.Request) {
     // Retrieve Trace ID and Span ID
     traceID := span.Context().TraceID()
     spanID := span.Context().SpanID()
+
+    // Append them to log messages as fields:
+    log.Printf("my log message dd.trace_id=%d dd.span_id=%d", traceID, spanID)
 }
 ```
+
+The above example illustrates how to use the span's context in the standard library's `log` package. Similar logic may be applied to 3rd party packages too.
+
+**Note**: If you are not using a [Datadog Log Integration][7] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][8].
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+Use one the following options to inject Node trace information into your logs.
 
-[1]: /help
+**Automatic Trace ID Injection With Supported Logging Libraries (recommended)**
+
+Enable injection with the environment variable `DD_LOGS_INJECTION=true` or by configuring the tracer directly:
+
+```javascript
+const tracer = require('dd-trace').init({
+  logInjection: true
+})
+```
+
+This enables automatic trace ID injection for `winston`, `bunyan`, and `pino`.
+
+**Note**: Automatic injection only works for logs formatted as JSON.
+
+**Manual Trace ID Injection for JSON Formatted Logs**
+
+If you are using a logging library not supported for automatic injection but are using JSON format, it's possible to do manual injection directly in your code.
+
+Example using `console` as the underlying logger:
+
+```javascript
+const tracer = require('dd-trace')
+
+class Logger {
+  log (level, message) {
+    const scope = tracer.scopeManager().active()
+    const time = (new Date()).toISOString()
+    const record = { time, level, message }
+
+    if (scope && scope.span()) {
+      tracer.inject(scope.span().context(), record)
+    }
+
+    console.log(record)
+  }
+}
+
+module.exports = Logger
+```
+
+**Manual Trace ID Injection for Raw Formatted Logs**
+
+To ensure proper log correlation, verify the following is present in each log entry:
+
+- `dd.trace_id=<TRACE_ID>`: Where `<TRACE_ID>` is equal to `tracer.scopeManager().active().span().context().toTraceId()` or `0` if no trace is active during logging.
+- `dd.span_id=<SPAN_ID>`: Where `<SPAN_ID>` is equal to `tracer.scopeManager().active().span().context().toSpanId()` or `0` if no trace is active during logging.
+
+You should append or prepend these 2 strings directly to the message part of the log entry. This allows you to correlate trace and logs without having to alter your parsing rules.
+
+Example using `console` as the underlying logger:
+
+```javascript
+const tracer = require('dd-trace').init()
+
+class Logger {
+  log (level, message) {
+    const scope = tracer.scopeManager().active()
+    const time = (new Date()).toISOString()
+    const format = '[%s] [%s] - dd.trace_id=%s dd.span_id=%s %s'
+
+    let traceId = 0
+    let spanId = 0
+
+    if (scope && scope.span()) {
+      const context = scope.span().context()
+
+      traceId = context.toTraceId()
+      spanId = context.toSpanId()
+    }
+
+    console.log(format, time, level.toUpperCase(), traceId, spanId, message)
+  }
+}
+
+module.exports = Logger
+```
+
+**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][2].
+
+[1]: https://docs.datadoghq.com/logs/log_collection/nodejs/
+[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/
+
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-
 [1]: /help
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+Use the following example to inject PHP trace information into your logs.
+
+**Manual Trace ID Injection**
+
+```php
+$span = \DDTrace\GlobalTracer::get()->getActiveSpan();
+$append = sprintf(
+    ' [dd.trace_id=%d dd.span_id=%d]',
+    $span->getTraceId(),
+    $span->getSpanId()
+);
+my_error_logger('Error message.' . $append);
+```
+
+If the logger implements the [**monolog/monolog** library][1], use `Logger::pushProcessor()` to automatically append the identifiers to all the log messages:
+
+```php
+$logger->pushProcessor(function ($record) {
+    $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
+    if (null === $span) {
+        return $record;
+    }
+    $record['message'] .= sprintf(
+        ' [dd.trace_id=%d dd.span_id=%d]',
+        $span->getTraceId(),
+        $span->getSpanId()
+    );
+    return $record;
+});
+```
+
+**Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][3].
+
+[1]: https://github.com/Seldaek/monolog
+[2]: https://docs.datadoghq.com/logs/log_collection/php/
+[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1562,7 +1919,7 @@ To return debug level application logs, enable debug mode with the flag `-Ddatad
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Debugging is disabled by default. 
+Debugging is disabled by default.
 
 To enable it set the environment variable `DATADOG_TRACE_DEBUG=true` when using `ddtrace-run`.
 {{% /tab %}}
@@ -1667,6 +2024,22 @@ var tracer = Datadog.Trace.Tracer.Create(isDebugEnabled: true);
 {{% /tab %}}
 {{% tab "PHP" %}}
 
+Debug mode is disabled by default. To enable it, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][6] for details about how and when this environment variable value should be set in order
+to be properly handled by the tracer.
+
+**Application Logs**:
+
+By default, logging from the PHP tracer is disabled. In order to get debugging information and errors sent to logs,
+set a [PSR-3 logger][1] singleton.
+
+```php
+\DDTrace\Log\Logger::set(
+    new \DDTrace\Log\PsrLogger($logger)
+);
+```
+
+[1]: https://www.php-fig.org/psr/psr-3
+
 {{% /tab %}}
 {{% tab "C++" %}}
 
@@ -1682,7 +2055,7 @@ make install
 {{% /tab %}}
 {{< /tabs >}}
 
-## Security 
+## Security
 
 Sensitive information within your traces can be scrubbed [automatically](#automatic-scrubbing) or [manually](#replace-rules).
 
@@ -1762,3 +2135,4 @@ apm_config:
 [3]: http://opentracing.io
 [4]: #priority-sampling
 [5]: /tracing/getting_further/trace_sampling_and_storage
+[6]: /tracing/languages/php/#configuration

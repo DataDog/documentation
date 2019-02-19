@@ -1,7 +1,7 @@
 ---
 title: AWS
 type: apicontent
-order: 14.1
+order: 15.1
 external_redirect: /api/#aws
 ---
 

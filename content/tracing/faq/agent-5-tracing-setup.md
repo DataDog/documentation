@@ -74,8 +74,8 @@ Trace search is available for Agent 5.25.0+. For more information, see the set u
 Need help? Contact [Datadog support][11].
 
 
-[1]: https://github.com/DataDog/datadog-trace-agent#run-on-osx
-[2]: https://github.com/DataDog/datadog-trace-agent#run-on-windows
+[1]: https://github.com/DataDog/datadog-agent/tree/master/docs/trace-agent#run-on-macos
+[2]: https://github.com/DataDog/datadog-agent/tree/master/docs/trace-agent#run-on-windows
 [3]: /agent/faq/where-is-the-configuration-file-for-the-agent
 [4]: https://app.datadoghq.com/account/settings#agent
 [5]: https://hub.docker.com/r/datadog/docker-dd-agent

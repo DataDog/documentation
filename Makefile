@@ -62,19 +62,19 @@ clean-integrations:  ## remove built integrations files.
 		  -a -not -name 'adobe_experience_manager.md' \
 	    -a -not -name 'amazon_guardduty.md' \
 	    -a -not -name 'amazon_vpc.md' \
-	    -a -not -name 'azure_dbformysql.md' \
-	    -a -not -name 'azure_dbforpostgresql.md' \
 	    -a -not -name 'amazon_cloudhsm.md' \
 	    -a -not -name 'cloud_foundry.md' \
-			-a -not -name 'cloudability.md' \
+		-a -not -name 'cloudability.md' \
 	    -a -not -name 'cloudcheckr.md' \
 	    -a -not -name 'integration_sdk.md' \
 	    -a -not -name 'jenkins.md' \
 	    -a -not -name 'journald.md' \
 	    -a -not -name 'kubernetes.md' \
+	    -a -not -name 'marklogic.md' \
 	    -a -not -name 'nxlog.md' \
 	    -a -not -name 'rss.md' \
 	    -a -not -name 'rsyslog.md' \
+	    -a -not -name 'sidekiq.md' \
 	    -a -not -name 'sinatra.md' \
 	    -a -not -name 'stunnel.md' \
 	    -a -not -name 'syslog_ng.md' \
@@ -87,6 +87,8 @@ clean-integrations:  ## remove built integrations files.
 clean-auto-doc: ##remove all doc automatically created
 	@if [ -d content/developers/integrations ]; then \
 	find ./content/developers/integrations -type f -maxdepth 1 -exec rm -rf {} \; ;fi
+	@if [ content/agent/basic_agent_usage/heroku.md ]; then \
+	rm -f content/agent/basic_agent_usage/heroku.md ;fi
 
 clean-node:  ## remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi

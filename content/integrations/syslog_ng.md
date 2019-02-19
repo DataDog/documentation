@@ -26,7 +26,7 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
 ### Log collection
 
 {{< tabs >}}
-{{% tab "Datadog US app.datadoghq.com" %}}
+{{% tab "Datadog US site" %}}
 
 1. Collect system logs and log files in `/etc/syslog-ng/syslog-ng.conf` make sure the source is correctly defined:
     ```
@@ -91,10 +91,10 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
 5. Restart syslog-ng.
 
 
-[1]: /crt/intake.logs.datadoghq.com.crt
+[1]: /crt/FULL_intake.logs.datadoghq.com.crt
 [2]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html
 {{% /tab %}}
-{{% tab "Datadog EU app.datadoghq.eu" %}}
+{{% tab "Datadog EU site" %}}
 
 1. Collect system logs and log files in `/etc/syslog-ng/syslog-ng.conf` make sure the source is correctly defined:
     ```
@@ -151,7 +151,7 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
     2. Change the definition of the destination to the following:
 
         ```
-        destination d_datadog { tcp("intake.logs.datadoghq.eu" port(443)     tls(peer-verify(required-untrusted) ca_dir('/opt/syslog-ng/certs.d/')) template(DatadogFormat)); };
+        destination d_datadog { tcp("tcp-intake.logs.datadoghq.eu" port(443)     tls(peer-verify(required-untrusted) ca_dir('/opt/syslog-ng/certs.d/')) template(DatadogFormat)); };
         ```
 
     More information about the TLS parameters and possibilities for syslog-ng available in their [official documentation][2].
@@ -159,7 +159,7 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
 5. Restart syslog-ng.
 
 
-[1]: /crt/intake.logs.datadoghq.eu.crt
+[1]: /crt/FULL_intake.logs.datadoghq.eu.crt
 [2]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html
 {{% /tab %}}
 {{< /tabs >}}
