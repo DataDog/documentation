@@ -50,8 +50,8 @@ Alternatively, if you want to query the same data for only hosts with hostnames 
 import requests
 s = requests.session()
 s.params = {
-    'api_key': 'YOUR_API_KEY',
-    'application_key': 'YOUR_APPLICATION_KEY',
+    'api_key': '<YOUR_API_KEY>',
+    'application_key': '<YOUR_APPLICATION_KEY>',
     'hostnames[]': ['A', 'B', 'C']
 }
 infra_link = 'https://app.datadoghq.com/reports/v2/overview'

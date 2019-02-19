@@ -27,10 +27,10 @@ Imagine that you have a series of monitors that someone on your team would like 
 In that case, you need two separate webhooks, one for "mymonitorgroup-alert-check" and the other for "mymonitorgroup-ok-check". Both use the same API endpoint, so their respective name and URL values are be as follows:
 
 * Name: mymonitorgroup-alert-check
-    URL: `https://api.datadoghq.com/api/v1/check_run?api_key=<MY_API_KEY>`
+    URL: `https://api.datadoghq.com/api/v1/check_run?api_key=<DATADOG_API_KEY>`
 
 * Name: mymonitorgroup-ok-check
-    URL: `https://api.datadoghq.com/api/v1/check_run?api_key=<MY_API_KEY>`
+    URL: `https://api.datadoghq.com/api/v1/check_run?api_key=<DATADOG_API_KEY>`
 
 The custom payload is where the name and tags of the check_run are applied. For the "alert" webhook, consider the following:
 

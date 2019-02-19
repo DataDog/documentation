@@ -46,8 +46,8 @@ In the event that you would rather just write the `.dogrc` file yourself (perhap
 
 ```
 [Connection]
-apikey = YOUR_API_KEY
-appkey = YOUR_APPLICATION_KEY
+apikey = <YOUR_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
 ```
 
 ## The Dogshell Commands:
@@ -70,7 +70,7 @@ For reference, [find the code for Dogshell][4]. But once you have Dogshell insta
 
 You can post metrics to your Datadog account by using:
 ```
-dog metric post <metric_name> <metric_value> --tags "tag:one,tag:two"
+dog metric post <metric_name> <metric_value> --tags "<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_KEY_2>:<TAG_VALUE_2>"
 ```
 
 For example, the following command sends a metric named `test_dogshell_metric` to your account with a value of 1.0 and the tags `test:one` and `another_test`:
