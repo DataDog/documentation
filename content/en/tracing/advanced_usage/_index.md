@@ -3,39 +3,50 @@ title: Advanced Languages instrumentation
 kind: documentation
 ---
 
-## Trace Analytics Configuration
+## Enable Trace Search & Analytics
 
-[Trace Analytics](/tracing/visualization/search/) is used to filter APM Data by [user-defined tags](#custom-tagging) such as `customer_id`, `error_type` or `app_name` to help troubleshoot and filter your requests. Apply the following config to your application to enable this feature.
+[Trace Search & Analytics](/tracing/visualization/search/) is used to filter APM Data by [user-defined tags](#custom-tagging) such as `customer_id`, `error_type` or `app_name` to help troubleshoot and filter your requests. Apply the following configuration to your application to enable this feature.
+
+{{< img src="tracing/enable_trace_search.png" alt="Trace Sampling UI" responsive="true" style="width:100%;">}}
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-### Enable Trace Analytics
+### Automatic Configuration
 
-The following setting will enable trace analytics for all web integrations. (Other types of integrations to be enabled in the future.)
+Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the Tracing Client:
+
 * System Property: `-Ddd.trace.analytics.enabled=true`
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
-### Configure Additional Integrations
+After enabling, the Trace Search & Analytics UI will now populate, you can get started [here][1]. 
 
-To enable or disable Trace Analytics for individual integrations, use the following setting:
+### Configure Additional Services (optional)
+
+**Configure By Integration**
+
+In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
+
 * System Property: `-Ddd.integration.<integration>.analytics.enabled=true`
 * Environment Variable: `DD_INTEGRATION_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-Integration names can be found on the [integrations table](/tracing/languages/java/#integrations).
-Note: This setting takes priority over the non-integration specific setting.
+This can be used in addition to the global configuration for any Integrations that submit Custom Services. For example, for JMS spans which comes in as a Custom Service, you can set the following to enable all JMS Tracing in Trace Search & Analytics:
 
-### Configure Sample Rate
-
-When enabled, the default sample rate is to collect everything (`1.0`). Sampling can be applied with the following config.
-* System Property: `-Ddd.integration.<integration>.analytics.sample_rate=0.5`
-* Environment Variable: `DD_INTEGRATION_<INTEGRATION>_ANALYTICS_SAMPLE_RATE=0.5`
+* System Property: `-Ddd.integration.jms.analytics.enabled=true`
+* Environment Variable: `DD_INTEGRATION_JMS_ANALYTICS_ENABLED=true`
 
 Integration names can be found on the [integrations table](/tracing/languages/java/#integrations).
 
-### Configuring on Custom Instrumentation
+**Database Services**
 
-Applications with custom instrumentation can enable and set sample rate by setting a tag on the service root span:
+Database tracing is not captured by Trace Search & Analytics by default, in order to enable these spans to be collected these can be configured per integration. For example:
+
+* System Property: `-Ddd.integration.jdbc.analytics.enabled=true`
+* Environment Variable: `DD_INTEGRATION_JDBC_ANALYTICS_ENABLED=true`
+
+**Custom Instrumentation**
+
+Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS_KEY` tag on the service root span:
 
 ```java
 import datadog.trace.api.DDTags;
@@ -43,39 +54,76 @@ import datadog.trace.api.Trace;
 import io.opentracing.Tracer;
 import io.opentracing.util.GlobalTracer;
 
-class SomeClass {
+class MyClass {
   @Trace
-  void someMethod() {
+  void myMethod() {
     final Span span = GlobalTracer.get().activeSpan();
     // Span provided by @Trace annotation.
     if (span != null) {
       span.setTag(DDTags.SERVICE_NAME, "my-custom-service");
-      span.setTag(DDTags.ANALYTICS_SAMPLE_RATE, 1.0);
+      span.setTag(DDTags.ANALYTICS_KEY, True);
     }
   }
 }
 ```
 
+**Configure Sample Rate of APM Events**
+
+When enabling Trace Search & Analytics, the default sample rate is to collect 100% of APM Events. For any services that have been enabled for Trace Search & Analytics in the Tracing Client, you can adjusted the sampling rate for APM Events in your [APM settings][2].
+
+{{< img src="tracing/trace_sampling_ui.png" alt="Trace Sampling UI" responsive="true" style="width:100%;">}}
+
+[1]: https://app.datadoghq.com/apm/search
+[2]: https://app.datadoghq.com/apm/settings
+
 {{% /tab %}}
 {{% tab "Python" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
+
 {{% /tab %}}
 {{% tab "Go" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
+
 {{% /tab %}}
 {{% tab ".NET" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
+
 {{% /tab %}}
 {{% tab "C++" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
 
 {{% /tab %}}
 {{< /tabs >}}
