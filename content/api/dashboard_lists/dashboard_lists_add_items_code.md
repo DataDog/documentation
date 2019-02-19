@@ -1,7 +1,7 @@
 ---
 title: Add Items to a Dashboard List
 type: apicode
-order: 8.7
+order: 9.7
 external_redirect: /api/#add-items-to-a-dashboard-list
 ---
 

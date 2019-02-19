@@ -1,7 +1,7 @@
 ---
 title: Récupérer le downtime d'un monitor
 type: apicontent
-order: 9.5
+order: 10.5
 external_redirect: /api/#recuperer-le-downtime-d-un-monitor
 ---
 

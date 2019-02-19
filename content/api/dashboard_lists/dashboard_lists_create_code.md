@@ -1,7 +1,7 @@
 ---
 title: Create a Dashboard List
 type: apicode
-order: 8.3
+order: 9.3
 external_redirect: /api/#create-a-dashboard-list
 ---
 

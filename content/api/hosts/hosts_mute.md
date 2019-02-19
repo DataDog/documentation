@@ -1,7 +1,7 @@
 ---
 title: Mute a host
 type: apicontent
-order: 13.3
+order: 14.3
 external_redirect: /api/#mute-a-host
 ---
 

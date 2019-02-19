@@ -272,7 +272,7 @@ There are two steps to configure the Java application to stream logs directly to
 
 ### Bridge from Java logging libraries to Logback
 
-* The recommended logging library stream logs directly is Logback [logstash-logback-encoder][3].
+* The recommended logging library to stream logs directly is Logback [logstash-logback-encoder][3].
 
 This logging library can be linked from the most common Java ones:
 

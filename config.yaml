@@ -323,11 +323,6 @@ languages:
           url: "graphing/dashboards/shared_graph/"
           weight: 130
           parent: customnav_graphingnav_dashboards
-        - identifier: customnav_graphingnav_widgets
-          name: "Widgets"
-          url: "graphing/dashboards/widgets/"
-          weight: 140
-          parent: customnav_graphingnav_dashboards
 
         # Metrics
         - identifier: customnav_graphingnav_metrics
@@ -1208,6 +1203,11 @@ languages:
           url: "account_management/saml/okta"
           weight: 550
           parent: customnav_accountmanagementnav_saml
+        - identifier: saml_safenet
+          name: "SafeNet"
+          url: "account_management/saml/safenet"
+          weight: 560
+          parent: customnav_accountmanagementnav_saml
 
         # RBAC subnav
         - identifier: rbac_log_management
@@ -1560,11 +1560,6 @@ languages:
           name: "Graphiques partagés"
           url: "graphing/dashboards/shared_graph/"
           weight: 130
-          parent: customnav_graphingnav_dashboards
-        - identifier: customnav_graphingnav_widgets
-          name: "Widgets"
-          url: "graphing/dashboards/widgets/"
-          weight: 140
           parent: customnav_graphingnav_dashboards
 
         # Metrics
@@ -2392,6 +2387,11 @@ languages:
           name: "Okta"
           url: "account_management/saml/okta"
           weight: 550
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_safenet
+          name: "SafeNet"
+          url: "account_management/saml/safenet"
+          weight: 560
           parent: customnav_accountmanagementnav_saml
 
         - identifier: customnav_accountmanagementnav_multi_organization

@@ -1,7 +1,7 @@
 ---
 title: Azure
 type: apicontent
-order: 14.2
+order: 15.2
 external_redirect: /api/#azure
 ---
 

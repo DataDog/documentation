@@ -282,4 +282,4 @@ Tags can be used in various ways with the [API][18]. See the list below for link
 [28]: /api/?lang=python#monitors-search
 [29]: /api/?lang=python#monitors-group-search
 [30]: /api/?lang=python#create-a-screenboard
-[31]: /api/?lang=python#create-a-timeboard
+[31]: /api/?lang=python#create-a-dashboard

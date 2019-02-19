@@ -2,7 +2,7 @@
 categories:
     - log collection
 description: Gather your logs from your Stunnel proxy and send them to Datadog.
-has_logo: false
+has_logo: true
 integration_title: Stunnel
 is_public: true
 kind: integration

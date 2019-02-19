@@ -1,7 +1,7 @@
 ---
 title: Snapshot de graphique
 type: apicontent
-order: 12.1
+order: 13.1
 external_redirect: '/api/#snapshot-de-graphique'
 ---
 ## Snapshot de graphique

@@ -1,7 +1,7 @@
 ---
 title: Update Items of a Dashboard List
 type: apicontent
-order: 8.8
+order: 9.8
 external_redirect: /api/#update-items-of-a-dashboard-list
 ---
 
