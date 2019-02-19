@@ -9,7 +9,7 @@ aliases:
 further_reading:
   - link: tagging/assigning_tags
     tag: Documentation
-    text: Apprendre à attribuer des tags
+    text: Apprendre à assigner des tags
   - link: tagging/using_tags
     tag: Documentation
     text: Apprendre à utiliser des tags dans Datadog
@@ -63,21 +63,21 @@ Voici quelques restrictions, exigences et suggestions en ce qui concerne l'utili
 
 6. Les tags ne doivent pas provenir de sources illimitées, telles que des horodatages EPOCH, des ID d'utilisateur ou des ID de demande. Cela pourrait [accroître de façon significative le nombre de métriques][2] de votre organisation et augmenter vos frais.
 
-## Attribution de tags
-Vous pouvez utiliser l'une (ou l'ensemble) des méthodes suivantes pour attribuer des tags. Consultez la [documentation relative à l'attribution des tags] pour en savoir plus :
+## Assignation de tags
+Vous pouvez utiliser l'une (ou l'ensemble) des méthodes suivantes pour assigner des tags. Consultez la [documentation relative à l'assignation des tags] pour en savoir plus :
 
-| Méthode                        | Attribution de tags                                                                                  |
+| Méthode                        | Assignation de tags                                                                                  |
 |-------------------------------|----------------------------------------------------------------------------------------------|
-| [Fichiers de configuration][4]     | Attribution manuelle dans les principaux fichiers de configuration de votre Agent, ou dans les fichiers de configuration de vos intégrations |
+| [Fichiers de configuration][4]     | Assignation manuelle dans les principaux fichiers de configuration de votre Agent, ou dans les fichiers de configuration de vos intégrations |
 | [Variables d'environnement][5]   | Utilisation de variables d'environnement pour l'Agent conteneurisé                                      |
 | [IU][6]                      | Dans votre plateforme Datadog                                                                     |
 | [API][7]                     | À l'aide de l'API de Datadog                                                                          |
 | [DogStatsD][8]               | Lors de l'envoi de métriques via DogStatsD                                                        |
-| [Héritage des déclarations][9] | Attribution automatique après la configuration des intégrations prises en charge                                        |
+| [Héritage des déclarations][9] | Assignation automatique après la configuration des intégrations prises en charge                                        |
 
 ## Utiliser les tags
 
-[Attribuez des tags][3] au niveau des hosts et des [intégrations][10] pour pouvoir filtrer et regrouper vos métriques, traces et logs. Les tags peuvent être utilisés dans les sections suivantes de votre plateforme Datadog. Consultez la [documentation relative à l'utilisation des tags][1] pour en savoir plus :
+[Assignez des tags][3] au niveau des hosts et des [intégrations][10] pour pouvoir filtrer et regrouper vos métriques, traces et logs. Les tags peuvent être utilisés dans les sections suivantes de votre plateforme Datadog. Consultez la [documentation relative à l'utilisation des tags][1] pour en savoir plus :
 
 | Section                 | Utilisation des tags                                                                                      |
 |----------------------|--------------------------------------------------------------------------------------------------|

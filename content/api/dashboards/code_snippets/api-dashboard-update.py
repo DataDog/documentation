@@ -5,7 +5,8 @@ options = {'api_key': '<YOUR_API_KEY>',
 
 initialize(**options)
 
-dashboard_id = 'qc9-tuk-9kv'
+dashboard_id = '<DASHBOARD_ID>'
+
 title = 'Sum of Memory Free'
 widgets = [{
     'definition': {

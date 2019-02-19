@@ -63,7 +63,7 @@ Saved Views can be removed directly from the Saved View list in the Logs Explore
 
 To update an existing Saved View, proceed exactly as if you were creating a new one but instead of saving it, select an existing Saved View from the drop down, click on *replace*, and confirm.
 
-{{< img src="logs/explorer/saved_views/update_saved_views.gif" alt="Saved Views selection" responsive="true" style="width:50%;">}}
+{{< img src="logs/explorer/saved_views/update_saved_views.png" alt="Saved Views selection" responsive="true" style="width:50%;">}}
 
 ## Revert a modification to a Saved View
 

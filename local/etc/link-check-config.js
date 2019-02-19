@@ -2,9 +2,11 @@ module.exports = {
     "production": {
         serverUrl: "https://docs.datadoghq.com/",
         branches: ["master"],
+        slackChannel: "#guac-ops",
     },
     "preview": {
         serverUrl: "https://docs-staging.datadoghq.com/",
+        slackChannel: "#guac-ops",
     },
     "linkCheckOptions": {
         filterLevel: 3,

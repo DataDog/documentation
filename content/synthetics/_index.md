@@ -59,20 +59,6 @@ Select **Create a New check +** in the upper right corner of the Synthetics page
 
 {{< img src="synthetics/create_a_check.png" alt="Create a check" responsive="true" style="width:80%;">}}
 
-## Network timings
-
-The Synthetics details page displays the following network timings:
-
-| Timing                    | Description                                                                                           |
-|---------------------------|-------------------------------------------------------------------------------------------------------|
-| DNS                       | Time spent resolving the DNS name of the last request.                                                |
-| Connect                   | Time spent establishing a connection to the server.                                                   |
-| SSL                       | Time spent for the TLS handshake. If the last request is not over HTTPS, this metric does not appear. |
-| TTFB (time to first byte) | Time spent waiting for the first byte of response to be received.                                     |
-| Download                  | Time spent downloading the response.                                                                  |
-
-Response time is the sum of these network timings.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

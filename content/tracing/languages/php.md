@@ -36,7 +36,7 @@ Make sure the Agent has **[APM enabled][6]**.
 
 ### Install the extension
 
-Install the PHP extension using one of the [precompiled packages for supported distributions][7]. If you can't find your distribution, you can install the PHP extension [from PECL][8] or [from source][9].
+Install the PHP extension using one of the [precompiled packages for supported distributions][7]. If you can't find your distribution, install the PHP extension [from PECL][8] or [from source][9].
 
 Once downloaded, install the package with one of the commands below.
 
@@ -217,7 +217,35 @@ dd_trace("CustomDriver", "doWork", function (...$args) {
 
 ## Configuration
 
-Configure the Agent connection parameters via environment variables.
+The PHP tracer can be configured using environment variables.
+
+**Note**: If you use code auto-instrumentation (the recommended approach) be aware that the instrumenting code is executed before any user code. As a result, the environment variables below must be set at the server level and be available to the PHP runtime before any user code is executed. For example, `putenv()` and `.env` files would not work.
+
+### Apache
+
+Set using [`SetEnv`](https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv) from the server config, virtual host,
+directory, or **.htaccess** file.
+
+```
+SetEnv DD_TRACE_DEBUG true
+```
+
+### nginx
+
+Set using [`fastcgi_param`](http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param) from the `http`,
+`server`, or `location` contexts.
+
+```
+fastcgi_param DD_TRACE_DEBUG true;
+```
+
+### PHP CLI server
+
+Set in the command line to start the server.
+
+```
+DD_TRACE_DEBUG=true php -S localhost:8888
+```
 
 | Env variable               | Default     | Note                                                                |
 | :------------------------- | :---------- | :------------------------------------------------------------------ |
@@ -229,7 +257,7 @@ Configure the Agent connection parameters via environment variables.
 | `DD_SAMPLING_RATE`         | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default) |
 | `DD_TRACE_AGENT_PORT`      | `8126`      | The Agent port number                                               |
 | `DD_TRACE_APP_NAME`        | ``          | The default app name                                                |
-| `DD_TRACE_DEBUG`           | `false`     | Enable debug mode for the tracer                                    |
+| `DD_TRACE_DEBUG`           | `false`     | Enable [debug mode][17] for the tracer                              |
 | `DD_TRACE_ENABLED`         | `true`      | Enable the tracer globally                                          |
 | `DD_TRACE_GLOBAL_TAGS`     | ``          | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`        |
 
@@ -284,3 +312,4 @@ Don't see your desired libraries? Let Datadog know more about your needs through
 [14]: /tracing/advanced_usage/?tab=php#distributed-tracing
 [15]: /tracing/advanced_usage/?tab=php#priority-sampling
 [16]: https://docs.google.com/forms/d/e/1FAIpQLSemTVTCdqzXkfzemJSr8wuEllxfqbGVj00flmRvKA17f0lyFg/viewform
+[17]: /tracing/advanced_usage/?tab=php#debugging

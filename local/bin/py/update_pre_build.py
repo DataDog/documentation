@@ -293,6 +293,11 @@ class PreBuild:
                     "target": "none",
                     "remove_header": False,
                 },
+                "datadog_checks_downloader": {
+                    "action": "discard",
+                    "target": "none",
+                    "remove_header": False,
+                },
                 "datadog_checks_tests_helper": {
                     "action": "discard",
                     "target": "none",
@@ -344,6 +349,11 @@ class PreBuild:
                     "remove_header": False,
                 },
                 "kubernetes_state": {
+                    "action": "discard",
+                    "target": "none",
+                    "remove_header": False,
+                },
+                "logo": {
                     "action": "discard",
                     "target": "none",
                     "remove_header": False,

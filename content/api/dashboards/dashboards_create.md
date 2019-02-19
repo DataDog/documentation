@@ -12,13 +12,13 @@ external_redirect: /api/#create-a-dashboard
     Title of the dashboard.
 * **`widgets`** [*required*]:  
     List of widgets to display on the dashboard. Widget definitions follow this form:
-    * **`id`** [*optional*, *default*=**auto-generated integer**]:  
-        ID of the widget.
     * **`definition`** [*required*]:  
         Definition of the widget.
-* **`layout_type`** [*required*]:
-  Layout type of the dashboard (for now, only `ordered` layout - current timeboard layout - is supported).
-  * **`description`** [*optional*, *default*=**None**]:  
+    * **`id`** [*optional*, *default*=**auto-generated integer**]:  
+        ID of the widget.
+* **`layout_type`** [*required*]:  
+  Layout type of the dashboard (for now, only `ordered` layout - previous timeboard layout - is supported).
+* **`description`** [*optional*, *default*=**None**]:  
   Description of the dashboard.
 * **`is_read_only`** [*optional*, *default*=**False**]:  
   Whether this dashboard is read-only. If `True`, only the author and admins can make changes to it.

@@ -6,5 +6,5 @@ app_key = '<YOUR_APP_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
-dashboard_id = 'qc9-tuk-9kv'
+dashboard_id = '<DASHBOARD_ID>'
 dog.delete_board(dashboard_id)

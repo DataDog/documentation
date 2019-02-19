@@ -27,6 +27,8 @@ Using the Datadog Cluster Agent helps you to:
 * isolate node-based Agents to their respective nodes, reducing RBAC rules to solely read metrics and metadata from the kubelet.
 * leverage horizontal pod autoscaling with custom Kubernetes metrics. Refer to [the dedicated guide][1] for more details about this feature.
 
+**Note**: To leverage all features from the Datadog Cluster Agent, you must run Kubernetes v1.10+.
+
 ## Setup
 
 ### Configure RBAC permissions for the Cluster Agent
@@ -36,7 +38,9 @@ Using the Datadog Cluster Agent helps you to:
 2. Enter the `datadog-agent` directory, and run:
 
   ```
-  kubectl apply -f Dockerfiles/manifests/cluster-agent/rbac/rbac-cluster-agent.yaml
+  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrole.yaml"
+  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/serviceaccount.yaml"
+  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrolebinding.yaml"
   ```
 
   This creates the appropriate ServiceAccount, ClusterRole, and ClusterRoleBinding.
@@ -246,7 +250,9 @@ To enable the Custom Metrics Server:
 2. Configure the `<DD_APP_KEY>` as well as the `<DD_API_KEY>` in the Deployment of the Datadog Cluster Agent.
 3. Create a [service exposing the port 443][7] and [register it as an APIService for External Metrics][8].
 
-Refer to [the dedicated Custom metrics server guide][1] to configure the Custom Metrics Server and get more details about this feature.
+Refer to [the dedicated Custom metrics server guide][1] to configure the Custom Metrics Server and get more details about this feature. 
+
+**Note**: An [HPA][9] is required for values to be served on the external metrics route.
 
 ## Further Reading
 
@@ -261,3 +267,4 @@ Refer to [the dedicated Custom metrics server guide][1] to configure the Custom 
 [6]: https://golang.org/pkg/expvar
 [7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/cluster-agent-hpa-svc.yaml
 [8]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/rbac-hpa.yaml
+[9]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale
