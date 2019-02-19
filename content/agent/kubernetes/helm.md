@@ -146,14 +146,6 @@ Update your [datadog-values.yaml][7] file with the process collection configurat
 datadog:
   (...)
   processAgentEnabled: true
-  volumes:
-    - hostPath:
-      path: /etc/passwd
-      name: passwd
-  volumeMounts:
-    - name: passwd
-      mountPath: /etc/passwd
-      readOnly: true
 ```
 
 ### Enabling integrations with Helm
