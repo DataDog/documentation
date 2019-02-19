@@ -115,6 +115,7 @@ def main():
         diff = diff_globs(base=default_glob, compare=lang_glob)
         print("building {0} placeholder pages for {1} ".format(len(diff), l))
         for f in diff:
+            print(f)
             create_placeholder_file(template=f, new_glob=lang_glob)
 
 
