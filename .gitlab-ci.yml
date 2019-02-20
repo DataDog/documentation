@@ -53,6 +53,18 @@ build_preview:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
+manage_translations:on-schedule:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  variables:
+    URL: ${PREVIEW_DOMAIN}
+    CONFIG: ${PREVIEW_CONFIG}
+  script:
+    - manage_translations "${APIKEY}"
+  only:
+    - schedules
+
 test_preview_link_checks:
   <<: *base_template
   stage: post-deploy
