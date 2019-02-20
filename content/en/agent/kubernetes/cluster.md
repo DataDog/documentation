@@ -198,7 +198,7 @@ The available commands for the Datadog Cluster Agents are:
 | `datadog-cluster-agent metamap <NODE_NAME>` | Queries the local cache of the mapping between the pods living on `NODE_NAME`  and the cluster level metadata it's associated with (endpoints ...). Not specifying the `NODE_NAME` runs the mapper on all the nodes of the cluster.           |
 | `datadog-cluster-agent flare <CASE_ID>`     | Similarly to the node agent, the cluster agent can aggregate the logs and the configurations used and forward an archive to the support team or be deflated and used locally. **Note** this command is run from within the Cluster Agent pod. |
 
-## Custer Agent Options
+## Cluster Agent Options
 
 The following environment variables are supported:
 
