@@ -56,15 +56,15 @@ The dedicated [widget JSON schema definition][4] for the change widget is:
   }
 ```
 
-| Parameter  | Type             | Description                                                                                                                                                                         |
-| ------     | -----            | --------                                                                                                                                                                            |
-| `type`     | string           | Type of the widget, for the group widget use `query_value`                                                                                                                          |
-| `requests` | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `<REQUEST_SCHEMA>`. |
-| `autoscale`   | boolean | Whether to use autoscaling or not.                                                     |
-| `custom_unit` | string  | Display a unit of your choice on the widget.                                           |
-| `precision`   | integer | Number of decimal to show. If not defined, the widget uses the raw value.              |
-| `text_align`  | enum    | How to align the value in the widget, value available are `center`, `left`, or `right` |
-| `title`       | string  | Title of your widget.                                                                  |
+| Parameter     | Type             | Description                                                                                                                                      |
+| ------        | -----            | --------                                                                                                                                         |
+| `type`        | string           | Type of the widget, for the group widget use `query_value`                                                                                       |
+| `requests`    | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `<REQUEST_SCHEMA>`. |
+| `autoscale`   | boolean          | Whether to use autoscaling or not.                                                                                                               |
+| `custom_unit` | string           | Display a unit of your choice on the widget.                                                                                                     |
+| `precision`   | integer          | Number of decimal to show. If not defined, the widget uses the raw value.                                                                        |
+| `text_align`  | enum             | How to align the value in the widget, value available are `center`, `left`, or `right`                                                           |
+| `title`       | string           | Title of your widget.                                                                                                                            |
 
 Additional properties allowed in a request:
 
@@ -75,10 +75,10 @@ Additional properties allowed in a request:
 }
 ```
 
-| Parameter             | Type   | Description                                                                                                                                                                                                                    |
-| ------                | -----  | --------                                                                                                                                                                                                                       |
+| Parameter             | Type   | Description                                                                                                                                                       |
+| ------                | -----  | --------                                                                                                                                                          |
 | `conditional_formats` | object | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][6] to learn how to build the `<CONDITIONAL_FORMATS_SCHEMA>`. |
-| `aggregator`          | enum   | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum`                                                                                                                                   |
+| `aggregator`          | enum   | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum`                                                                      |
 
 ## Further Reading
 

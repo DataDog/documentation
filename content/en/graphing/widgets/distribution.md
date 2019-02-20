@@ -58,11 +58,11 @@ The dedicated [widget JSON schema definition][2] for the change widget is:
   }
 ```
 
-| Parameter  | Type             | Description                                                                                                                                                                  |
-| ------     | -----            | --------                                                                                                                                                                     |
-| `type`     | string           | Type of the widget, for the group widget use `distribution`                                                                                                                  |
+| Parameter  | Type             | Description                                                                                                                                      |
+| ------     | -----            | --------                                                                                                                                         |
+| `type`     | string           | Type of the widget, for the group widget use `distribution`                                                                                      |
 | `requests` | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation][3] to learn how to build the `<REQUEST_SCHEMA>`. |
-| `title`       | string           | Title of your widget.                                                                                                                                                            |
+| `title`    | string           | Title of your widget.                                                                                                                            |
 
 Additional properties allowed in a request:
 

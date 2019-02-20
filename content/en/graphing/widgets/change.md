@@ -71,11 +71,11 @@ The dedicated [widget JSON schema definition][1] for the change widget is:
   }
 ```
 
-| Parameter  | Type             | Description                                                                                                                                                                         |
-| ------     | -----            | --------                                                                                                                                                                            |
-| `type`     | string           | Type of the widget, for the group widget use `change`                                                                                                                               |
+| Parameter  | Type             | Description                                                                                                                                      |
+| ------     | -----            | --------                                                                                                                                         |
+| `type`     | string           | Type of the widget, for the group widget use `change`                                                                                            |
 | `requests` | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation][2] to learn how to build the `<REQUEST_SCHEMA>`. |
-| `title`    | string           | Title of your widget.                                                                                                                                                               |
+| `title`    | string           | Title of your widget.                                                                                                                            |
 
 Additional properties allowed in a request:
 
@@ -101,5 +101,6 @@ Additional properties allowed in a request:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /graphing/graphing_json/widgets_json
 [2]: /graphing/graphing_json/request_json

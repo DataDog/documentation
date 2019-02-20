@@ -54,14 +54,14 @@ The dedicated [widget JSON schema definition][1] for the change widget is:
   }
 ```
 
-| Parameter         | Type             | Description                                                                                                                                                                         |
-| ------            | -----            | --------                                                                                                                                                                            |
-| `type`            | string           | Type of the widget, for the group widget use `scatterplot`                                                                                                                          |
+| Parameter         | Type             | Description                                                                                                                                      |
+| ------            | -----            | --------                                                                                                                                         |
+| `type`            | string           | Type of the widget, for the group widget use `scatterplot`                                                                                       |
 | `requests`        | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation][2] to learn how to build the `<REQUEST_SCHEMA>`. |
-| `yaxis`           | object           | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][3] to learn how to build the `<AXIS_SCHEMA>`.         |
-| `xaxis`           | object           | Y-axis control options. See the dedicated [X-axis JSON schema documentation][3] to learn how to build the `<AXIS_SCHEMA>`.         |
-| `color_by_groups` | array of string  | List of groups used for colors.                                                                                                                                                     |
-| `title`           | string           | Title of your widget.                                                                                                                                                               |
+| `yaxis`           | object           | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][3] to learn how to build the `<AXIS_SCHEMA>`.                       |
+| `xaxis`           | object           | Y-axis control options. See the dedicated [X-axis JSON schema documentation][3] to learn how to build the `<AXIS_SCHEMA>`.                       |
+| `color_by_groups` | array of string  | List of groups used for colors.                                                                                                                  |
+| `title`           | string           | Title of your widget.                                                                                                                            |
 Additional properties allowed in a request:
 
 ```
@@ -77,6 +77,7 @@ Additional properties allowed in a request:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /graphing/graphing_json/widgets_json
 [2]: /graphing/graphing_json/request_json
 [3]: /graphing/graphing_json/widget_json/#y-axis-schema

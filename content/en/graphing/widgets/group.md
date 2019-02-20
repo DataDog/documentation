@@ -28,12 +28,12 @@ The dedicated [widget JSON schema definition][2] for the change widget is:
   }
 ```
 
-| Parameter     | Type             | Description                                                                                                                                                                      |
-| ------        | -----            | --------                                                                                                                                                                         |
-| `type`        | string           | Type of the widget, for the group widget use `group`                                                                                                                             |
+| Parameter     | Type             | Description                                                                                                                                           |
+| ------        | -----            | --------                                                                                                                                              |
+| `type`        | string           | Type of the widget, for the group widget use `group`                                                                                                  |
 | `widgets`     | array of objects | List of widgets that belong to the group widget. See the dedicated [Widget JSON schema documentation][3] to learn how to build the `<WIDGET_SCHEMA>`. |
-| `layout_type` | string           | Layout type of the group, value available is `ordered`                                                                                                                           |
-| `title`       | string           | Title of your widget.                                                                                                                                                            |
+| `layout_type` | string           | Layout type of the group, value available is `ordered`                                                                                                |
+| `title`       | string           | Title of your widget.                                                                                                                                 |
 
 ## Further Reading
 

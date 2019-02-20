@@ -29,11 +29,11 @@ A widget definition follow the following object structure:
 }
 ```
 
-| Parameter | Type            | Description                             |
-| ------    | -----           | --------                                |
-| `type`    | enum            | Type of the widget.                     |
-| `requests` | array of object | [Request(s) associated with your widget](/graphing/graphing_json/request_json). |
-| `title`   | string          | Title of your widget.                   |
+| Parameter  | Type            | Description                                                                     |
+| ------     | -----           | --------                                                                        |
+| `type`     | enum            | Type of the widget.                                                             |
+| `requests` | array of object | [Request(s) associated with your widget][1]. |
+| `title`    | string          | Title of your widget.                                                           |
 
 
 ### Line Charts
@@ -98,7 +98,7 @@ You can overlay any event from Datadog. The general format is:
 }
 ```
 
-See the [Event stream documentation](/graphing/event_stream) to learn more about the `<EVENT_QUERY>` syntax.
+See the [Event stream documentation][2] to learn more about the `<EVENT_QUERY>` syntax.
 
 #### Examples
 
@@ -253,3 +253,6 @@ Here is a full JSON example:
   },
 }
 ```
+
+[1]: /graphing/graphing_json/request_json
+[2]: /graphing/event_stream

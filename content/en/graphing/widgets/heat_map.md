@@ -74,13 +74,13 @@ The dedicated [widget JSON schema definition][3] for the change widget is:
   }
 ```
 
-| Parameter  | Type             | Description                                                                                                                                                                         |
-| ------     | -----            | --------                                                                                                                                                                            |
-| `type`     | string           | Type of the widget, for the group widget use `heatmap`                                                                                                                              |
+| Parameter  | Type             | Description                                                                                                                                      |
+| ------     | -----            | --------                                                                                                                                         |
+| `type`     | string           | Type of the widget, for the group widget use `heatmap`                                                                                           |
 | `requests` | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation][4] to learn how to build the `<REQUEST_SCHEMA>`. |
-| `yaxis`    | object           | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][5] to learn how to build the `<AXIS_SCHEMA>`.       |
-| `events`   | object           | Event overlay control options. See the dedicated [Events JSON schema documentation][6] to learn how to build the `<EVENTS_SCHEMA>` |
-| `title`    | string           | Title of your widget.                                                                                                                                                               |
+| `yaxis`    | object           | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][5] to learn how to build the `<AXIS_SCHEMA>`.                       |
+| `events`   | object           | Event overlay control options. See the dedicated [Events JSON schema documentation][6] to learn how to build the `<EVENTS_SCHEMA>`               |
+| `title`    | string           | Title of your widget.                                                                                                                            |
 
 Additional properties allowed in a request:
 
