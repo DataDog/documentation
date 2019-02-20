@@ -153,7 +153,8 @@ Then, include the PHP tracer boostrap file right after the Composer autoloader a
 require '<APP_ROOT>/vendor/autoload.php';
 
 // Add the PHP tracer bootstrap
-// Don't add this line if you have also installed the dd tracer in another way than with Composer 
+// Don't add this line if you have also installed the dd tracer 
+// in another way than with Composer 
 require '<APP_ROOT>/vendor/datadog/dd-trace/bridge/dd_init.php';
 
 // Create the first span in the trace
