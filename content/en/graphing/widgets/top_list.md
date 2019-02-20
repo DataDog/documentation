@@ -10,7 +10,7 @@ further_reading:
   text: "Screenboard"
 ---
 
-The top list visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc: 
+The top list visualization enables you to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc: 
 
 {{< img src="graphing/widgets/toplist/toplist.png" alt="Top List" responsive="true">}}
 
@@ -25,12 +25,12 @@ The top list visualization is perfect when you want to see the list of hosts wit
     * APM Events: See [the trace search documentation][2] to configure an APM event query.
     * Log Events: See [the log search documentation][3] to configure an APM event query.
 
-2. Optional - Configure a conditional formating depending of your entries values.
+2. Optional: configure conditional formatting depending of your entries' values.
 
 ### Options
 #### Global time
 
-On Screenboard only, choose whether or not your widget has a custom timeframe or the global timeframe of the Screenboard.
+On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
 
 #### Title
 

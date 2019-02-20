@@ -10,7 +10,7 @@ further_reading:
   text: "Screenboard"
 ---
 
-The Timeseries visualization allows you to show one or more metrics, Log events, or APM events evolution over time. The time window depends on what is selected on the [Timeboard][1] or in the graph on a [Screenboard][2]:
+The timeseries visualization allows you to show the evolution of one or more metrics, log events, or APM events over time. The time window depends on what is selected on the [timeboard][1] or [screenboard][2]:
 
 {{< img src="graphing/widgets/timeseries/timeseries.png" alt="Timeseries" responsive="true">}}
 
@@ -25,7 +25,7 @@ The Timeseries visualization allows you to show one or more metrics, Log events,
     * APM Events: See [the trace search documentation][4] to configure an APM event query.
     * Log Events: See [the log search documentation][5] to configure an APM event query.
 
-2. Customize your Graph with the available [options](#options).
+2. Customize your graph with the available [options](#options).
 
 ### Options
 #### Line graphs
@@ -39,7 +39,7 @@ Line graphs include two additional parameters:
 
 #### Appearance
 
-Graphs can be displayed as Areas, Bars, or Lines. For all graph types, Datadog offers various color options to differentiate multiple metrics displayed on the same graph:
+Graphs can be displayed as areas, bars, or lines. For all graph types, Datadog offers various color options to differentiate multiple metrics displayed on the same graph:
 
 | Palette | Description                                                                                              |
 |---------|----------------------------------------------------------------------------------------------------------|
@@ -82,7 +82,7 @@ The following configuration options are available:
 
 | Option                | Required | Description                                                                                                                                                                                                       |
 |-----------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Min`/`Max`           | No       | Specify the minimum and / or maximum value to show on y-axis. It takes a number or `Auto` as the default value.                                                                                                   |
+| `Min`/`Max`           | No       | Specify the minimum and/or maximum value to show on y-axis. It takes a number or `Auto` as the default value.                                                                                                   |
 | `Scale`               | No       | Specifies the scale type. Possible values:<br>- *linear*: A linear scale (default)<br>- *log*: A logarithmic scale<br>- *pow*: A Power of 2 scale (2 is default, modify in JSON)<br>- *sqrt*: A square root scale |
 | `Always include zero` | No       | Always include zero or fit the axis to the data range. The default is to always include zero.                                                                                                                     |
 

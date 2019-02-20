@@ -8,13 +8,13 @@ further_reading:
   text: "Timeboards"
 ---
 
-The groups widget allows you to keep similar graphs together on your [Timeboard][1]. Each group has a custom header, can hold one to many graphs, and is collapsible:
+The groups widget allows you to keep similar graphs together on your [timeboard][1]. Each group has a custom header, can hold one to many graphs, and is collapsible:
 
 {{< img src="graphing/widgets/group/group.gif" alt="Group Widget" responsive="true">}}
 
 ## Setup
 
-Choose a name for your Group by using the cog icon in the upper right corner of your group.
+Choose a name for your group by using the cog icon in the upper right corner of your group.
 
 ## Further Reading
 

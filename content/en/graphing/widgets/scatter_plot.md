@@ -19,14 +19,14 @@ The scatter plot visualization allows you to graph a chosen scope over 2 differe
 
 1. Select a metric and an aggregation for the X and Y axis.
 2. Define the scope for each point of the scatter plot, such as `host`, `service`, `app`, `region`, etc.
-3. Optional - Enable a color-by tag.
-4. Optional - Set X and Y axis controls.
+3. Optional: enable a color-by tag.
+4. Optional: set X and Y axis controls.
 
 ## Options
 
 #### Global time
 
-On Screenboard only, choose whether your widget has a custom timeframe or the global timeframe of the Screenboard.
+On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
 
 #### Title
 

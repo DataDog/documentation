@@ -10,7 +10,7 @@ further_reading:
 Query values display the current value of a given metric query, with conditional formatting (such as a green/yellow/red background) to convey whether or not the value is in the expected range.
 The value displayed by a query value need not represent an instantaneous measurement.
 
-The widget can display the latest value reported, or an aggregate computed from all query values across the time window. These visualizations provide a narrow but unambiguous window into your infrastructure.query
+The widget can display the latest value reported, or an aggregate computed from all query values across the time window. These visualizations provide a narrow but unambiguous window into your infrastructure query.
 
 {{< img src="graphing/widgets/query_value/query_value.png" alt="Query value widget" responsive="true" >}}
 
@@ -24,13 +24,13 @@ The widget can display the latest value reported, or an aggregate computed from 
     * Metric: See [the main graphing documentation][1] to configure a metric query.
     * APM Events: See [the trace search documentation][2] to configure an APM event query.
     * Log Events: See [the log search documentation][3] to configure an APM event query.
-2. Chose the units and the formating. 
-3. Optional - Configure a conditional format depending of the value displayed.
+2. Choose the units and the formatting. 
+3. Optional: configure a conditional format depending on the value displayed.
 
 ### Options
 #### Global time
 
-On Screenboard only, choose whether your widget has a custom timeframe or the global timeframe of the Screenboard.
+On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
 
 #### Title
 
@@ -45,9 +45,9 @@ Optionally define its size and alignment.
 
 {{< img src="graphing/widgets/query_value_widget.png" alt="query_value_widget" responsive="true" style="width:50%;">}}
 
-The Query Value Widget only displays one value, unlike a timeseries for example, that displays several points.
+The query value widget only displays one value—unlike, for example, a timeseries, which displays several points.
 
-If you are on a Timeseries and you are currently displaying the past hour, this button allows you to either display the `avg` / `max` / `min` / `sum` / `last value` of ALL points that are rendered during that 1 hour range timeframe—depending on the aggregation chosen above.
+If you are viewing a timeseries and you are currently displaying the past hour, this button allows you to display the `avg` / `max` / `min` / `sum` / `last value` of ALL points that are rendered during that 1 hour range timeframe—depending on the aggregation chosen above.
 
 ## Further Reading
 

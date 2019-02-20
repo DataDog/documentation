@@ -117,7 +117,7 @@ To display only your formula, un-check your metrics **a** and **b**:
 
 ## Create a title
 
-If you don't enter a title, one is automatically generated based on your selections. But it may be more useful to the users of the [dashboard][8] to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value.
+If you don't enter a title, one is automatically generated based on your selections. However, it is recommended that you create a title that aptly describes the purpose of the graph. 
 
 ## Save
 

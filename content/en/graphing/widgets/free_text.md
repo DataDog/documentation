@@ -8,7 +8,7 @@ further_reading:
   text: "Screenboard"
 ---
 
-Free text is a widget that allows you to add headings to your [Screenboard][1].
+Free text is a widget that allows you to add headings to your [screenboard][1].
 
 This is commonly used to state the overall purpose of the dashboard.
 

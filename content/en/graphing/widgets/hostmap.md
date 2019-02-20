@@ -1,5 +1,5 @@
 ---
-title: Hostmap Widget
+title: Host map Widget
 kind: documentation
 description: Display the Datadog hostmap in your dashboards.
 further_reading:
@@ -21,14 +21,14 @@ The host map graphs any metric for any subset of hosts on the same host map visu
 
 ### Configuration
 
-Configuration of the Hostmap widget works as the main [Hostmap page][1]:
+Configuration of the host map widget works as the main [host map page][1]:
 
-1. Choose to display `host` or `containers`
+1. Choose to display `hosts` or `containers`
 2. `Filter by` : Choose which hosts/containers to display
-3. `Group by`: Aggregate your hosts/containers depending of one or several Tag.
-4. Choose a metric to fill your hostmap elements.
-5. Optional - Choose a metric to size your hostmap elements.
-6. Optional - Define a color palette with a `min` and `max` color palette value.
+3. `Group by`: Aggregate your hosts/containers by one or several tags.
+4. Choose a metric by which to fill your host map elements.
+5. Optional: choose a metric by which to size your host map elements.
+6. Optional: define a color palette with a `min` and `max` color palette value.
 
 ### Options
 #### Title

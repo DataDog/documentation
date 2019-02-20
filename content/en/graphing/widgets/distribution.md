@@ -8,7 +8,7 @@ further_reading:
   text: "Timeboards"
 ---
 
-The Distribution visualization is another way of showing metrics aggregated across one or several tags, such as *hosts*. Unlike the [heat map][1], distribution's x-axis is the quantity rather than time.
+The Distribution visualization is another way of showing metrics aggregated across one or several tags, such as *hosts*. Unlike the [heat map][1], a distribution graph's x-axis is quantity rather than time.
 
 This visualization displays only a single metric query; additional queries are disregarded.
 
@@ -22,8 +22,8 @@ This visualization displays only a single metric query; additional queries are d
 
 ### Configuration
 
-Configure your metric query as usual. Note that this visualization type is useful only when metrics are aggregated across Tag Keys , e.g. for each `host`. 
-Make a selection in the "`avg`/`max`/`min`/`sum by`…" control to see your data across the associated tags.
+Configure your metric query as usual. Note that this visualization type is useful only when metrics are aggregated across tag keys, e.g. for each `host`. 
+Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your data across the associated tags.
 
 ### Options
 #### Display preference 
@@ -32,11 +32,11 @@ Make a selection in the "`avg`/`max`/`min`/`sum by`…" control to see your data
 
 ##### Global time
 
-On Screenboard only, choose whether your widget has a custom timeframe or the global timeframe of the Screenboard.
+On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
 
 ##### Legend
 
-Enable legend display on your widget by selecting the *Show legend on graph* toggle. Optionally, select the amount of entries to display.
+Use *Show legend on graph* to toggle the legend display on your widget. Optionally, select the number of entries to display.
 
 #### Title
 

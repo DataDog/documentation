@@ -11,7 +11,7 @@ further_reading:
   text: "Screenboard"
 ---
 
-The heat map visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square is.
+The heat map visualization shows metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square is.
 
 This visualization displays only a single metric query; additional queries are disregarded.
 
@@ -25,9 +25,9 @@ This visualization displays only a single metric query; additional queries are d
 
 ### Configuration
 
-Configure your metric query as usual. Note that this visualization type is useful only when metrics are aggregated across Tag Keys , e.g. for each `host`.
+Configure your metric query as usual. Note that this visualization type is useful only when metrics are aggregated across tag keys , e.g. for each `host`.
 
-Make a selection in the "`avg`/`max`/`min`/`sum by`…" control to see your data across the associated tags.
+Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your data across the associated tags.
 
 ### Options
 #### Event Overlay

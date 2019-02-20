@@ -18,20 +18,20 @@ Check status shows the current status or number of results for any check perform
 
 ### Configuration
 
-1. Select a previously created Service check.
-2. Choose the reporting timeframe:
+1. Select a previously created service check.
+2. Choose a reporting timeframe:
   * Global Time
-  * The past 10 Minutes
-  * The past 30 Minutes
+  * The past 10 minutes
+  * The past 30 minutes
   * The past hour
   * The past 4 hours
   * The past day
 3. Choose your scope:
-    * **A single Check**: Select this option if your Check Status widget is for a specific element only i.e. one `host:<HOSTNAME>`, one `service:<SERVICE_NAME>`...
-    * **A Cluster of Checks**: Select this option if your Check Status widget is for a scope of elements i.e all `host`, all `service`..
+    * **A single check**: Select this option if your Check Status widget is for a specific element only i.e. one `host:<HOSTNAME>`, one `service:<SERVICE_NAME>`, etc.
+    * **A cluster of checks**: Select this option if your Check Status widget is for a scope of elements i.e all `host`s, all `service`s, etc.
     
 4. After selecting your scope, define your Check Status widget context with the **Reported by** field.
-5. Optional - Group your checks result according to a custom Tag Key.
+5. Optional: group your checks result according to a custom tag key.
 
 ### Options
 #### Title

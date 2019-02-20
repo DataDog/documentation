@@ -17,16 +17,16 @@ The Log Stream displays a log flow matching the defined query:
 
 {{< img src="graphing/widgets/log_stream/log_stream_setup.png" alt="Log stream setup" responsive="true" style="width:80%;">}}
 
-Enter a [Log query][1] to filter the log stream. 
+Enter a [log query][1] to filter the log stream. 
 
 ### Options
 #### Columns
 
-Display value of your [facets][2] and [measures][3] with columns.
+Display values of your [facets][2] and [measures][3] with columns.
 
 #### Global time
 
-On Screenboard only, choose whether or not your widget has a custom timeframe or the global timeframe of the Screenboard.
+On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
 
 #### Title
 

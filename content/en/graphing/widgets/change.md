@@ -22,9 +22,9 @@ The Change graph shows you the change in a value over the time period chosen:
 
 1. Choose a metric to graph. 
 2. Choose an aggregation function.
-3. Optional - choose a specific context for your widget.
-4. Break down your aggregation on a Tag Key i.e `host`, `service`..
-5. Choose the Compared period between:
+3. Optional: choose a specific context for your widget.
+4. Break down your aggregation on a tag key i.e `host`, `service`..
+5. Choose the "Compared" period from:
     * an hour before
     * a day before
     * a week before
@@ -35,8 +35,8 @@ The Change graph shows you the change in a value over the time period chosen:
     * `name`
     * `present value`
     * `past value`
-8. Indicate if `increases` or `decreases` changes are better. The better one are highlighted in green, the other one in red.
-9. Optional - Display current value.
+8. Indicate whether `increases` or `decreases` changes are better. The better one is highlighted in green; the other one in red.
+9. Optional: display current value.
 
 ### Options
 #### Display preference 
@@ -45,11 +45,11 @@ The Change graph shows you the change in a value over the time period chosen:
 
 ##### Global time
 
-On Screenboard only, choose whether your widget has a custom timeframe or the global timeframe of the Screenboard.
+On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
 
 ###### Legend
 
-Enable legend display on your widget by selecting the *Show legend on graph* toggle. Optionally, select the amount of entries to display.
+Use *Show legend on graph* to toggle the legend display on your widget. Optionally, select the number of entries to display.
 
 #### Title
 

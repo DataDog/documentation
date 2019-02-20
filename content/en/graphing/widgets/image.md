@@ -8,7 +8,7 @@ further_reading:
   text: "Screenboard"
 ---
 
-Image allows you to embed an image on your dashboard. Images can be PNG, JPG, or even **animated GIF files**:
+The image widget allows you to embed an image on your dashboard. Images can be PNG, JPG, or animated GIFs:
 
 {{< img src="graphing/widgets/image/image.gif" alt="Image" responsive="true" style="width:80%;">}}
 

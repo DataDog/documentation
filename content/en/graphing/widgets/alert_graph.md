@@ -31,11 +31,11 @@ Alert graphs are timeseries graphs showing the current status of any monitor def
 
 ##### Global time
 
-On Screenboard only, choose whether your widget has a custom timeframe or the global timeframe of the Screenboard.
+On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
 
 ##### Legend
 
-Enable legend display on your widget by selecting the *Show legend on graph* toggle. Optionally, select the amount of entries to display.
+Use *Show legend on graph* to toggle the legend display on your widget. Optionally, select the number of entries to display.
 
 #### Title
 

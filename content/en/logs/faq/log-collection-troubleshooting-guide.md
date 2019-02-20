@@ -152,7 +152,7 @@ See the [Datadog-AWS Log integration][9] to configure your environment. If you s
 
 Check Datadog lambda configuration parameter:
 
-* `<API_KEY>` : Should be set with your [Datadog API key][10] either directly in the Python code, or alternatively as a environment variable. In case you manage several platforms, double-check that you are actually using the right `<API_KEY>` for the right platform.
+* `<API_KEY>`: Should be set with your [Datadog API key][10] either directly in the Python code, or alternatively as a environment variable. In case you manage several platforms, double-check that you are actually using the right `<API_KEY>` for the right platform.
 
 
 #### The lambda function is triggered

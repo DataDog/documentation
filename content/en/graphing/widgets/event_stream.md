@@ -10,7 +10,7 @@ further_reading:
 
 The event stream is a widget version of the stream of events on the [Event Stream view][1]. 
 
-Note: **This widgets displays only the 100 most recent events**.
+Note: **this widget displays only the 100 most recent events**.
 
 {{< img src="graphing/widgets/event_stream/event_stream.png" alt="event stream" responsive="true">}}
 
@@ -21,7 +21,7 @@ Note: **This widgets displays only the 100 most recent events**.
 ### Configuration
 
 1. Enter a [search query][1] to filter the event stream. 
-2. On Screenboard only, choose whether your widget has a custom timeframe or the global timeframe of the Screenboard.
+2. On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
 3. Use the size parameter to choose to display either only the events title or the full event body.
 
 ### Options
