@@ -93,50 +93,71 @@ The following configuration options are available:
 The dedicated [widget JSON schema definition][8] for the change widget is: 
 
 ```
-  "definition": {
-    "type": "timeseries",
-    "requests": ["<REQUEST_SCHEMA>"],
-    "yaxis":  <AXIS_SCHEMA>,
-    "markers": <MARKERS_SCHEMA>,
-    "events": <EVENTS_SCHEMA>,
-    "title": "<WIDGET_TITLE>"
-  }
-```
-
-| Parameter  | Type             | Description                                                                                                                                      |
-| ------     | -----            | --------                                                                                                                                         |
-| `type`     | string           | Type of the widget, for the group widget use `timeseries`                                                                                        |
-| `requests` | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation][9] to learn how to build the `<REQUEST_SCHEMA>`. |
-| `yaxis`    | object           | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][10] to learn how to build the `<AXIS_SCHEMA>`.                      |
-| `events`   | object           | Event overlay control options. See the dedicated [Events JSON schema documentation][11] to learn how to build the `<EVENTS_SCHEMA>`              |
-| `title`    | string           | Title of your widget.                                                                                                                            |
-
-Additional properties allowed in a request:
-
-```
-{
-    "style": {
-        "palette": "<PALETTE_STYLE>"
-        "line_type":  "<LINE_TYPE>"
-        "line_width": "<LINE_WIDTH>"
+TIMESERIES_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "type": {"enum": ["timeseries"]},
+        "requests": {
+            "type":    "array",
+            "items":   REQUEST_SCHEMA,
+            "minItems": 1
+        },
+        "yaxis":   AXIS_SCHEMA,
+        "events":  EVENTS_SCHEMA,
+        "markers": MARKERS_SCHEMA,
+        "title":   {"type": "string"},
     },
-    "metadata": [
-        {
-            "expression": "<EXPRESSION>",
-            "alias_name": "<ALIAS_NAME>"
-        }
-    ],
-    "display_type": "<DISPLAY_TYPE>"
+    "required": ["type", "requests"],
+    "additionalProperties": False
 }
 ```
 
-| Parameter          | Type   | Description                                                                             |
-| ------             | -----  | --------                                                                                |
-| `style.palette`    | string | Color palette to apply to the widget.                                                   |
-| `style.line_type`  | string | Type of lines displayed. Available values are: `dashed`, `dotted`, or `solid`.          |
-| `style.line_width` | string | Width of line displayed. Available values are: `normal`, `thick`, or `thin`.            |
-| `metadata`         | object | Used to define expression aliases.                                                      |
-| `display_type`     | enum   | Type of display to use for the request, available value are: `area`, `bars`, or `line`. |
+| Parameter  | Type             | Required | Description                                                                                                                                              |
+| ------     | -----            | -------- | ----                                                                                                                                                     |
+| `type`     | string           | yes      | Type of the widget, for the group widget use `timeseries`.                                                                                               |
+| `requests` | array of objects | yes      | Array of `request` object to display in the widget. See the dedicated [Request JSON schema documentation][9] to learn how to build the `REQUEST_SCHEMA`. |
+| `yaxis`    | object           | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][10] to learn how to build the `AXIS_SCHEMA`.                                |
+| `events`   | object           | no       | Event overlay control options. See the dedicated [Events JSON schema documentation][11] to learn how to build the `EVENTS_SCHEMA`                        |
+| `title`    | string           | no       | Title of your widget.                                                                                                                                    |
+
+
+Additional properties allowed in each `request` object:
+
+```json
+{
+    "style": {
+        "type": "object",
+        "properties": {
+            "palette":    {"type": "string"},
+            "line_type":  {"enum": ["dashed", "dotted", "solid"]},
+            "line_width": {"enum": ["normal", "thick", "thin"]}
+        },
+        "additionalProperties": False
+    },
+    "metadata": {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "expression": {"type": "string"},
+                "alias_name": {"type": "string"}
+            },
+            "required": ["expression"],
+            "additionalProperties": False
+        }
+    },
+    "display_type": {"enum": ["area", "bars", "line"]}
+}
+```
+
+| Parameter          | Type   | Required | Description                                                                             |
+| ------             | -----  | -----    | --------                                                                                |
+| `style.palette`    | string | no       | Color palette to apply to the widget.                                                   |
+| `style.line_type`  | string | no       | Type of lines displayed. Available values are: `dashed`, `dotted`, or `solid`.          |
+| `style.line_width` | string | no       | Width of line displayed. Available values are: `normal`, `thick`, or `thin`.            |
+| `metadata`         | object | no       | Used to define expression aliases.                                                      |
+| `display_type`     | enum   | no       | Type of display to use for the request, available value are: `area`, `bars`, or `line`. |
+
 
 
 ## Further Reading

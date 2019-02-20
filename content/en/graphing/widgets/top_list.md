@@ -45,31 +45,41 @@ Optionally define its size and alignment.
 The dedicated [widget JSON schema definition][4] for the change widget is: 
 
 ```
-  "definition": {
-    "type": "toplist",
-    "requests": ["<REQUEST_SCHEMA>"],
-    "title": "<WIDGET_TITLE>"
-  }
-```
-
-| Parameter  | Type             | Description                                                                                                                                      |
-| ------     | -----            | --------                                                                                                                                         |
-| `type`     | string           | Type of the widget, for the group widget use `toplist`                                                                                           |
-| `requests` | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `<REQUEST_SCHEMA>`. |
-| `title`    | string           | Title of your widget.                                                                                                                            |
-
-
-Additional properties allowed in a request:
-
-```
-{
-   "conditional_formats": <CONDITIONAL_FORMATS_SCHEMA>
+TOP_LIST_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "type": {"enum": ["toplist"]},
+        "requests": {
+            "type":     "array",
+            "items":    REQUEST_SCHEMA,
+            "minItems": 1,
+            "maxItems": 1
+        },
+        "title": {"type": "string"},
+    },
+    "required": ["type", "requests"],
+    "additionalProperties": False
 }
 ```
 
-| Parameter             | Type   | Description                                                                                                                                                       |
-| ------                | -----  | --------                                                                                                                                                          |
-| `conditional_formats` | object | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][6] to learn how to build the `<CONDITIONAL_FORMATS_SCHEMA>`. |
+| Parameter  | Type            | Required | Description                                                                                                                                                  |
+| ------     | -----           | -------- | -----                                                                                                                                                        |
+| `type`     | string          | yes      | Type of the widget, for the group widget use `toplist`.                                                                                                      |
+| `requests` | array of object | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `REQUEST_SCHEMA`. |
+| `title`    | string          | no       | Title of your widget.                                                                                                                                        |
+
+
+Additional properties allowed in the `request` object:
+
+```
+{
+   "conditional_formats": CONDITIONAL_FORMATS_SCHEMA
+}
+```
+
+| Parameter             | Type   | Required | Description                                                                                                                                                     |
+| ------                | -----  | ----     | -------                                                                                                                                                         |
+| `conditional_formats` | object | no       | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][6] to learn how to build the `CONDITIONAL_FORMATS_SCHEMA`. |
 
 
 ## Further Reading

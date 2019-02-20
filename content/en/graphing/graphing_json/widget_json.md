@@ -10,9 +10,14 @@ This page covers how to use JSON to build a widget in a Datadog dashboard as you
 All widgets follow the same object structure `WIDGET_SCHEMA`:
 
 ```
-"widgets": {
-  "definition": <WIDGET_DEFINITION>,
-  "id": 123456
+WIDGET_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "definition": {"type": "object"},
+        "id": {"type": "integer"}
+    },
+    "required": ["definition"],
+    "additionalProperties": False
 }
 ```
 
@@ -33,11 +38,11 @@ A widget definition follow the following object structure:
 }
 ```
 
-| Parameter  | Type            | Description                                                                     |
-| ------     | -----           | --------                                                                        |
-| `type`     | enum            | Type of the widget.                                                             |
+| Parameter  | Type            | Description                                  |
+| ------     | -----           | --------                                     |
+| `type`     | enum            | Type of the widget.                          |
 | `requests` | array of object | [Request(s) associated with your widget][1]. |
-| `title`    | string          | Title of your widget.                                                           |
+| `title`    | string          | Title of your widget.                        |
 
 
 ### Line Charts
@@ -96,10 +101,16 @@ yaxis {
 You can overlay any event from Datadog. The general format is:
 
 ```
-"events": {
-  [
-    "q": "<EVENT_QUERY>""
-  ]
+EVENTS_SCHEMA = {
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "q": {"type": "string"},
+        },
+        "required": ["q"],
+        "additionalProperties": False
+    }
 }
 ```
 
@@ -132,10 +143,18 @@ or if you're looking to display all errors:
 Markers allow you to 
 
 ```
-"markers": {
-  "value": "<VALUE>",
-  "display_type": "<DISPLAY_TYPE>",
-  "label": "<LABEL>"
+MARKERS_SCHEMA = {
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "value":        {"type": "string"},
+            "display_type": {"type": "string"},
+            "label":        {"type": "string"}
+        },
+        "required": ["value"],
+        "additionalProperties": False
+    }
 }
 ```
 
@@ -148,17 +167,24 @@ Markers allow you to
 
 ## Conditional format schema
 
-```
-"conditional_formats": [
-  {
-    "comparator": <COMPARATOR>,
-    "value": <VALUE>,
-    "palette": "<PALETTE>",
-    "custom_bg_color": "<CUSTOM_BG_COLOR>",
-    "custom_fg_color": "<CUSTOM_FG_COLOR>",
-    "image_url": "<IMAGE_URL>"
-  }
-]
+```json
+CONDITIONAL_FORMATS_SCHEMA = {
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "comparator":      {"enum": [">", ">=", "<", "<="]},
+            "value":           {"type": "number"},
+            "palette":         {"enum": ["blue","custom_bg","custom_image","custom_text","gray_on_white","green","green_on_white","grey","orange","red","red_on_white","white_on_gray","white_on_green","white_on_red","white_on_yellow","yellow_on_white",
+            ]},
+            "custom_bg_color": {"type": "string"},
+            "custom_fg_color": {"type": "string"},
+            "image_url":       {"type": "string", "format": "uri"},
+        },
+        "required": ["comparator", "value", "palette"],
+        "additionalProperties": False
+    }
+}
 ```
 
 | Parameter    | Type   | Description                                          | Default |

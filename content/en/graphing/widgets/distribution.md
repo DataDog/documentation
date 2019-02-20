@@ -51,32 +51,50 @@ Optionally define its size and alignment.
 The dedicated [widget JSON schema definition][2] for the change widget is: 
 
 ```
-  "definition": {
-    "type": "distribution",
-    "requests": ["<REQUEST_SCHEMA>"],
-    "title": "<WIDGET_TITLE>"
-  }
+DISTIBUTION_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "type": {"enum": ["distribution"]},
+        # Requests displayed by the widget
+        "requests": {
+            "type":     "array",
+            "items":    REQUEST_SCHEMA,
+            "minItems": 1,
+            "maxItems": 1
+        },
+        # Title of the widget
+        "title": {"type": "string"},
+    },
+    "required": ["type", "requests"],
+    "additionalProperties": False
+}
 ```
 
-| Parameter  | Type             | Description                                                                                                                                      |
-| ------     | -----            | --------                                                                                                                                         |
-| `type`     | string           | Type of the widget, for the group widget use `distribution`                                                                                      |
-| `requests` | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation][3] to learn how to build the `<REQUEST_SCHEMA>`. |
-| `title`    | string           | Title of your widget.                                                                                                                            |
+| Parameter  | Type            | Required | Description                                                                                                                                                  |
+| ------     | -----           | -----    | -----                                                                                                                                                        |
+| `type`     | string          | yes      | Type of the widget, for the group widget use `distribution`.                                                                                                 |
+| `requests` | array of object | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
+| `title`    | string          | no       | Title of your widget.                                                                                                                                        |
 
-Additional properties allowed in a request:
 
-```
+Additional properties allowed the `request` object:
+
+```json
 {
     "style": {
-        "palette": "<PALETTE_STYLE>"
+        "type": "object",
+        "properties": {
+            "palette": {"type": "string"},
+        },
+        "additionalProperties": False
     }
 }
 ```
 
-| Parameter       | Type   | Description                           |
-| ------          | -----  | --------                              |
-| `style.palette` | string | Color palette to apply to the widget. |
+| Parameter       | Type   | Required | Description                           |
+| ------          | -----  | -------- | ----                                  |
+| `style.palette` | string | no       | Color palette to apply to the widget. |
+
 
 
 ## Further Reading

@@ -64,40 +64,53 @@ Optionally define its size and alignment.
 The dedicated [widget JSON schema definition][1] for the change widget is: 
 
 ```
-  "definition": {
-    "type": "change",
-    "requests": ["<REQUEST_SCHEMA>"],
-    "title": "<WIDGET_TITLE>"
-  }
-```
-
-| Parameter  | Type             | Description                                                                                                                                      |
-| ------     | -----            | --------                                                                                                                                         |
-| `type`     | string           | Type of the widget, for the group widget use `change`                                                                                            |
-| `requests` | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation][2] to learn how to build the `<REQUEST_SCHEMA>`. |
-| `title`    | string           | Title of your widget.                                                                                                                            |
-
-Additional properties allowed in a request:
-
-```
-{
-    "change_type": "<CHANGE_TYPE>",
-    "compare_to": "<COMPARE_TO>",
-    "increase_good": <INCREASE_GOOD>,
-    "order_by": "<ORDER_BY>"
-    "order_dir": "<ORDER_DIR>",
-    "show_present": <SHOW_PRESENT>
+CHANGE_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "type": {"enum": ["change"]},
+        # Requests displayed by the widget
+        "requests": {
+            "type":     "array",
+            "items":    REQUEST_SCHEMA,
+            "minItems": 1,
+            "maxItems": 1
+        },
+        # Title of the widget
+        "title": {"type": "string"},
+    },
+    "required": ["type", "requests"],
+    "additionalProperties": False
 }
 ```
 
-| Parameter       | Type    | Description                                                                                                                    |
-| ------          | -----   | --------                                                                                                                       |
-| `change_type`   | enum    | Show the absolute or the relative change, values available are: `absolute` or `relative`                                       |
-| `compare_to`    | enum    | Timeframe used for the change comparison, values available are: `hour_before`, `day_before`, `week_before`, or `month_before`. |
-| `increase_good` | boolean | Whether to show increase as good.                                                                                              |
-| `order_by`      | enum    | What to order by, values available are: `change`, `name`, `present`, or `past`.                                                |
-| `order_dir`     | enum    | Order direction, values available are: `asc` or `desc`.                                                                        |
-| `show_present`  | boolean | Whether to show the present value.                                                                                             |
+| Parameter  | Type            | Required | Description                                                                                                                                                  |
+| ------     | -----           | -------- | -----                                                                                                                                                        |
+| `type`     | string          | yes      | Type of the widget, for the group widget use `change`.                                                                                                       |
+| `requests` | array of object | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][2] to learn how to build the `REQUEST_SCHEMA`. |
+| `title`    | string          | no       | Title of your widget.                                                                                                                                        |
+
+
+Additional properties allowed in the `request` object:
+
+```json
+{
+    "change_type":   {"enum": ["absolute", "relative"]},
+    "compare_to":    {"enum": ["hour_before", "day_before", "week_before", "month_before"]},
+    "increase_good": {"type": "boolean"},
+    "order_by":      {"enum": ["change", "name", "present", "past"]},
+    "order_dir":     {"enum": ["asc", "desc"]},
+    "show_present":  {"type": "boolean"}
+}
+```
+
+| Parameter       | Type    | Required | Description                                                                                                                    |
+| ------          | -----   | -----    | --------                                                                                                                       |
+| `change_type`   | enum    | no       | Show the absolute or the relative change, values available are: `absolute` or `relative`                                       |
+| `compare_to`    | enum    | no       | Timeframe used for the change comparison, values available are: `hour_before`, `day_before`, `week_before`, or `month_before`. |
+| `increase_good` | boolean | no       | Whether to show increase as good.                                                                                              |
+| `order_by`      | enum    | no       | What to order by, values available are: `change`, `name`, `present`, or `past`.                                                |
+| `order_dir`     | enum    | no       | Order direction, values available are: `asc` or `desc`.                                                                        |
+| `show_present`  | boolean | no       | Whether to show the present value.                                                                                             |
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -45,40 +45,53 @@ Optionally define its size and alignment.
 The dedicated [widget JSON schema definition][4] for the change widget is: 
 
 ```
-  "definition": {
-    "type": "query_value",
-    "requests": ["<REQUEST_SCHEMA>"],
-    "autoscale":   <AUTOSCALE>,
-    "custom_unit": "<CUSTOM_UNIT>",
-    "precision":   <PRECISION>,
-    "text_align":  "<TEXT_ALIGN>"
-    "title": "<WIDGET_TITLE>"
-  }
-```
-
-| Parameter     | Type             | Description                                                                                                                                      |
-| ------        | -----            | --------                                                                                                                                         |
-| `type`        | string           | Type of the widget, for the group widget use `query_value`                                                                                       |
-| `requests`    | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `<REQUEST_SCHEMA>`. |
-| `autoscale`   | boolean          | Whether to use autoscaling or not.                                                                                                               |
-| `custom_unit` | string           | Display a unit of your choice on the widget.                                                                                                     |
-| `precision`   | integer          | Number of decimal to show. If not defined, the widget uses the raw value.                                                                        |
-| `text_align`  | enum             | How to align the value in the widget, value available are `center`, `left`, or `right`                                                           |
-| `title`       | string           | Title of your widget.                                                                                                                            |
-
-Additional properties allowed in a request:
-
-```
-{
-   "conditional_formats": <CONDITIONAL_FORMATS_SCHEMA>,
-   "aggregator": "<AGGREGATOR>"
+QUERY_VALUE_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "type": {"enum": ["query_value"]},
+        "requests": {
+            "type":     "array",
+            "items":    REQUEST_SCHEMA,
+            "minItems": 1,
+            "maxItems": 1
+        },
+        "autoscale":   {"type": "boolean"},
+        "custom_unit": {"type": "string"},
+        "precision":   {"type": "integer"},
+        "text_align":  {"enum": ["center", "left", "right"]},
+        "title":       {"type": "string"},
+    },
+    "required": ["type", "requests"],
+    "additionalProperties": False
 }
 ```
 
-| Parameter             | Type   | Description                                                                                                                                                       |
-| ------                | -----  | --------                                                                                                                                                          |
-| `conditional_formats` | object | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][6] to learn how to build the `<CONDITIONAL_FORMATS_SCHEMA>`. |
-| `aggregator`          | enum   | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum`                                                                      |
+| Parameter     | Type            | Required | Description                                                                                                                                                  |
+| ------        | -----           | -----    | --------                                                                                                                                                     |
+| `type`        | string          | yes      | Type of the widget, for the group widget use `query_value`                                                                                                   |
+| `requests`    | array of object | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `REQUEST_SCHEMA`. |
+| `autoscale`   | boolean         | no       | Whether to use autoscaling or not.                                                                                                                           |
+| `custom_unit` | string          | no       | Display a unit of your choice on the widget.                                                                                                                 |
+| `precision`   | integer         | no       | Number of decimal to show. If not defined, the widget uses the raw value.                                                                                    |
+| `text_align`  | enum            | no       | How to align the value in the widget, value available are `center`, `left`, or `right`.                                                                      |
+| `title`       | string          | no       | Title of your widget.                                                                                                                                        |
+
+
+Additional properties allowed in the `request` object:
+
+```
+{
+    "conditional_formats": CONDITIONAL_FORMATS_SCHEMA,
+    "aggregator": {"enum": ["avg", "last", "max", "min", "sum"]}
+}
+```
+
+| Parameter             | Type   | Required | Description                                                                                                                                                     |
+| ------                | -----  | -------- | ----                                                                                                                                                            |
+| `conditional_formats` | object | no       | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][6] to learn how to build the `CONDITIONAL_FORMATS_SCHEMA`. |
+| `aggregator`          | enum   | no       | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum`.                                                                   |
+
+
 
 ## Further Reading
 

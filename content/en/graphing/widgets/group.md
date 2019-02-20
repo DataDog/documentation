@@ -20,20 +20,40 @@ Choose a name for your group by using the cog icon in the upper right corner of 
 The dedicated [widget JSON schema definition][2] for the change widget is: 
 
 ```
-  "definition": {
-    "type": "group",
-    "layout_type": "<LAYOUT_TYPE>"
-    "widgets": ["<WIDGET_SCHEMA>"]
-    "title": "<WIDGET_TITLE>"
-  }
+GROUP_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "type": {"enum": ["group"]},
+        "layout_type": {"enum": ["ordered"]},
+        "widgets": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "definition": {
+                        "oneOf": [WIDGET_DEFINITION]
+                    },
+                    "id": {"type": "integer"}
+                },
+                "required": ["definition"],
+                "additionalProperties": False
+            }
+        },
+        # Title of the group
+        "title": {"type": "string"},
+    },
+    "required": ["type", "layout_type", "widgets"],
+    "additionalProperties": False
+}
 ```
 
-| Parameter     | Type             | Description                                                                                                                                           |
-| ------        | -----            | --------                                                                                                                                              |
-| `type`        | string           | Type of the widget, for the group widget use `group`                                                                                                  |
-| `widgets`     | array of objects | List of widgets that belong to the group widget. See the dedicated [Widget JSON schema documentation][3] to learn how to build the `<WIDGET_SCHEMA>`. |
-| `layout_type` | string           | Layout type of the group, value available is `ordered`                                                                                                |
-| `title`       | string           | Title of your widget.                                                                                                                                 |
+| Parameter     | Type             | Required | Description                                                                                                                                             |
+| ------        | -----            | -------- | -----                                                                                                                                                   |
+| `type`        | string           | yes      | Type of the widget, for the group widget use `group`.                                                                                                   |
+| `widgets`     | array of objects | yes      | List of widgets that belong to the group widget. See the dedicated [Widget JSON schema documentation][3] to learn how to build the `WIDGET_DEFINITION`. |
+| `layout_type` | string           | yes      | Layout type of the group, value available is `ordered`                                                                                                  |
+| `title`       | string           | no       | Title of your widget.                                                                                                                                   |
+
 
 ## Further Reading
 

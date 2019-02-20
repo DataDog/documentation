@@ -41,38 +41,50 @@ Optionally define its size and alignment.
 The dedicated [widget JSON schema definition][1] for the change widget is: 
 
 ```
-  "definition": {
-    "type": "scatterplot",
-    "requests": {
-        "x": "<REQUEST_SCHEMA>",
-        "y": "<REQUEST_SCHEMA>"
+SCATTER_PLOT_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "type": {"enum": ["scatterplot"]},
+        "requests": {
+            "type": "object",
+            "properties": {
+                "x": REQUEST_SCHEMA,
+                "y": REQUEST_SCHEMA
+            },
+            "required": ["x", "y"],
+            "additionalProperties": False
+        },
+        "xaxis": AXIS_SCHEMA,
+        "yaxis": AXIS_SCHEMA,
+        "color_by_groups": {"type": "array", "items": {"type": "string"}},
+        "title": {"type": "string"},
     },
-    "yaxis":  <AXIS_SCHEMA>,
-    "xaxis": <AXIS_SCHEMA>,
-    "color_by_groups": ["<GROUP_COLOR>"]
-    "title": "<WIDGET_TITLE>"
-  }
-```
-
-| Parameter         | Type             | Description                                                                                                                                      |
-| ------            | -----            | --------                                                                                                                                         |
-| `type`            | string           | Type of the widget, for the group widget use `scatterplot`                                                                                       |
-| `requests`        | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation][2] to learn how to build the `<REQUEST_SCHEMA>`. |
-| `yaxis`           | object           | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][3] to learn how to build the `<AXIS_SCHEMA>`.                       |
-| `xaxis`           | object           | Y-axis control options. See the dedicated [X-axis JSON schema documentation][3] to learn how to build the `<AXIS_SCHEMA>`.                       |
-| `color_by_groups` | array of string  | List of groups used for colors.                                                                                                                  |
-| `title`           | string           | Title of your widget.                                                                                                                            |
-Additional properties allowed in a request:
-
-```
-{
-   "aggregator": "<AGGREGATOR>"
+    "required": ["type", "requests"],
+    "additionalProperties": False
 }
 ```
 
-| Parameter    | Type  | Description                                                                                  |
-| ------       | ----- | --------                                                                                     |
-| `aggregator` | enum  | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum` |
+| Parameter         | Type            | Required | Description                                                                                                                                        |
+| ------            | -----           | -----    | --------                                                                                                                                           |
+| `type`            | string          | yes      | Type of the widget, for the group widget use `scatterplot`.                                                                                        |
+| `requests`        | object          | yes      | A `requests` object to display in the widget. See the dedicated [Request JSON schema documentation][2] to learn how to build the `REQUEST_SCHEMA`. |
+| `yaxis`           | object          | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][3] to learn how to build the `AXIS_SCHEMA`.                           |
+| `xaxis`           | object          | no       | Y-axis control options. See the dedicated [X-axis JSON schema documentation][3] to learn how to build the `AXIS_SCHEMA`.                           |
+| `color_by_groups` | array of string | no       | List of groups used for colors.                                                                                                                    |
+| `title`           | string          | no       | Title of your widget.                                                                                                                              |
+
+Additional properties allowed in the `request` object:
+
+```json
+{
+  "aggregator": {"enum": ["avg", "last", "max", "min", "sum"]}
+}
+```
+
+| Parameter    | Type  | Required | Description                                                                                  |
+| ------       | ----- | -------- | ----                                                                                         |
+| `aggregator` | enum  | no       | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum`. |
+
 
 ## Further Reading
 

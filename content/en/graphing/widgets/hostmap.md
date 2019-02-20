@@ -45,41 +45,63 @@ Optionally define its size and alignment.
 The dedicated [widget JSON schema definition][2] for the change widget is: 
 
 ```
-  "definition": {
-    "type": "hostmap",
-    "requests": {
-        "fill": <REQUEST_SCHEMA>,
-        "size": <REQUEST_SCHEMA>
+HOST_MAP_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "type": {"enum": ["hostmap"]},
+        "requests":       {
+            "type": "object",
+            "properties": {
+                'fill': REQUEST_SCHEMA,
+                'size': REQUEST_SCHEMA
+            },
+            "anyOf": [
+                {"required": ["fill"]},
+                {"required": ["size"]}
+            ],
+            "additionalProperties": False
+        },
+        "node_type":       {"enum": ["host", "container"]},
+        "no_metric_hosts": {"type": "boolean"},
+        "no_group_hosts":  {"type": "boolean"},
+        "group":           {"type": "array", "items": {"type": "string"}},
+        "scope":           {"type": "array", "items": {"type": "string"}},
+        "style":           {
+            "type": "object",
+            "properties": {
+                # Palette to use on the map
+                "palette":      {"type": "string"},
+                # Whether to flip the palette tones
+                "palette_flip": {"type": "boolean"},
+                # Min value to use to color the map
+                "fill_min":     {"type": "string"},
+                # Max value to use to color the map
+                "fill_max":     {"type": "string"}
+            },
+            "additionalProperties": False
+        },
+        "title": {"type": "string"},
     },
-    "node_type": "<NODE_TYPE>",
-    "no_metric_hosts": <NO_METRIC_HOSTS>,
-    "no_group_hosts": <NO_GROUP_HOSTS>,
-    "group": ["<GROUP>"],
-    "scope": ["<SCOPE>"],
-    "style": {
-        "palette": "<PALETTE>",
-        "palette_flip": <PALETTE_FILP>,
-        "fill_min": "<FILL_MIN>",
-        "fill_max": "<FILL_MAX>"
-    },
-    "title": "<WIDGET_TITLE>"
-  }
+    "required": ["type", "requests"],
+    "additionalProperties": False
+}
 ```
 
-| Parameter            | Type             | Description                                                                                                                        |
-| ------               | -----            | --------                                                                                                                           |
-| `type`               | string           | Type of the widget, for the host map widget use `hostmap`                                                                          |
-| `requests.fill`      | string           | Query used to fill the map. See the dedicated [Request JSON schema documentation][3] to learn how to build the `<REQUEST_SCHEMA>`. |
-| `requests.size`      | string           | Query used to size the map. See the dedicated [Request JSON schema documentation][3] to learn how to build the `<REQUEST_SCHEMA>`. |
-| `node_type`          | enum             | Which type of node to use in the map, available value are: `host` or `container`                                                   |
-| `no_metric_hosts`    | boolean          | Whether to show the hosts with no metrics.                                                                                         |
-| `no_group_hosts`     | boolean          | Whether to show the hosts that don't fit in a group.                                                                               |
-| `group`              | array of strings | List of tag prefixes to group by.                                                                                                  |
-| `scope`              | array of strings | List of tags used to filter the map.                                                                                               |
-| `style.palette`      | string           | Color palette to apply to the widget.                                                                                              |
-| `style.palette_flip` | boolean          | Whether to flip the palette tones.                                                                                                 |
-| `style.fill_min`     | string           | Min value to use to color the map.                                                                                                 |
-| `style.fill_max`     | string           | Max value to use to color the map.                                                                                                 |
+| Parameter            | Type             | Required | Description                                                                                                                      |
+| ------               | -----            | -----    | --------                                                                                                                         |
+| `type`               | string           | yes      | Type of the widget, for the host map widget use `hostmap`.                                                                       |
+| `requests.fill`      | string           | yes/no   | Query used to fill the map. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
+| `requests.size`      | string           | yes/no   | Query used to size the map. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
+| `node_type`          | enum             | no       | Which type of node to use in the map, available value are: `host` or `container`                                                 |
+| `no_metric_hosts`    | boolean          | no       | Whether to show the hosts with no metrics.                                                                                       |
+| `no_group_hosts`     | boolean          | no       | Whether to show the hosts that don't fit in a group.                                                                             |
+| `group`              | array of strings | no       | List of tag prefixes to group by.                                                                                                |
+| `scope`              | array of strings | no       | List of tags used to filter the map.                                                                                             |
+| `style.palette`      | string           | no       | Color palette to apply to the widget.                                                                                            |
+| `style.palette_flip` | boolean          | no       | Whether to flip the palette tones.                                                                                               |
+| `style.fill_min`     | string           | no       | Min value to use to color the map.                                                                                               |
+| `style.fill_max`     | string           | no       | Max value to use to color the map.                                                                                               |
+
 
 
 ## Further Reading
