@@ -56,7 +56,7 @@ Use `event.tags` and `event.tags.tagname` to retrieve the values of your tags in
 
 {{< img src="monitors/monitor_types/event/whats_happening.png" alt="whats_happening" responsive="true" style="width:60%;">}}
 
-When your alert triggers any matching events that are found in Datadog with the tags appear in the message:
+When your alert triggers, any matching events that are found in Datadog with the tags appear in the message:
 
 {{< img src="monitors/monitor_types/event/triggered_event.png" alt="triggered_event" responsive="true" style="width:60%;">}}
 
