@@ -117,7 +117,7 @@ To display only your formula, un-check your metrics **a** and **b**:
 
 ## Create a title
 
-If you don't enter a title, one is automatically generated based on your selections. But it may be more useful to the users of the [dashboard][8] to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value.
+If you don't enter a title, one is automatically generated based on your selections. However, it is recommended that you create a title that aptly describes the purpose of the graph. 
 
 ## Save
 
@@ -134,4 +134,3 @@ Click **Done** to save your work and exit the editor. You can always come back t
 [5]: /graphing/widgets
 [6]: /tagging
 [7]: /graphing/functions/#apply-functions-optional
-[8]: /graphing/dashboards

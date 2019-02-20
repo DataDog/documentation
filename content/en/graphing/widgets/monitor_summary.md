@@ -7,7 +7,7 @@ further_reading:
   text: "Screenboard"
 ---
 
-Monitor summary is a summary view of all monitors on your system, or a subset based on a query.
+The monitor summary widget provides a summary view of all monitors on your system, or a subset based on a query.
 
 {{< img src="graphing/widgets/monitor_summary/monitor_summary.png" alt="monitor summary " responsive="true">}}
 
@@ -18,7 +18,7 @@ Monitor summary is a summary view of all monitors on your system, or a subset ba
 ### Configuration
 
 1. Enter a [monitor query][1] to display the monitor summary widget over a subset of your monitors.
-2. Chose to display only the `count` of monitor per monitor status type, or the full `list` of monitors, or `both`.
+2. Choose to display only the `count` of monitors per monitor status type, the full `list` of monitors, or `both`.
  
 ## Options
 #### Title

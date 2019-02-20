@@ -8,7 +8,7 @@ further_reading:
   text: "Timeboards"
 ---
 
-The Distribution visualization is another way of showing metrics aggregated across one or several tags, such as *hosts*. Unlike the [heat map][1], distribution's x-axis is the quantity rather than time.
+The Distribution visualization is another way of showing metrics aggregated across one or several tags, such as *hosts*. Unlike the [heat map][1], a distribution graph's x-axis is quantity rather than time.
 
 This visualization displays only a single metric query; additional queries are disregarded.
 
@@ -22,8 +22,8 @@ This visualization displays only a single metric query; additional queries are d
 
 ### Configuration
 
-Configure your metric query as usual. Note that this visualization type is useful only when metrics are aggregated across Tag Keys , e.g. for each `host`. 
-Make a selection in the "`avg`/`max`/`min`/`sum by`…" control to see your data across the associated tags.
+Configure your metric query as usual. Note that this visualization type is useful only when metrics are aggregated across tag keys, e.g. for each `host`. 
+Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your data across the associated tags.
 
 ### Options
 #### Display preference 
@@ -32,11 +32,11 @@ Make a selection in the "`avg`/`max`/`min`/`sum by`…" control to see your data
 
 ##### Global time
 
-On Screenboard only, choose whether your widget has a custom timeframe or the global timeframe of the Screenboard.
+On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
 
 ##### Legend
 
-Enable legend display on your widget by selecting the *Show legend on graph* toggle. Optionally, select the amount of entries to display.
+Use *Show legend on graph* to toggle the legend display on your widget. Optionally, select the number of entries to display.
 
 #### Title
 
@@ -48,7 +48,7 @@ Optionally define its size and alignment.
 
 ## API
 
-The dedicated [widget JSON schema definition](/graphing/graphing_json/widgets_json) for the change widget is: 
+The dedicated [widget JSON schema definition][2] for the change widget is: 
 
 ```
   "definition": {
@@ -61,7 +61,7 @@ The dedicated [widget JSON schema definition](/graphing/graphing_json/widgets_js
 | Parameter  | Type             | Description                                                                                                                                                                  |
 | ------     | -----            | --------                                                                                                                                                                     |
 | `type`     | string           | Type of the widget, for the group widget use `distribution`                                                                                                                  |
-| `requests` | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation](/graphing/graphing_json/request_json) to learn how to build the `<REQUEST_SCHEMA>`. |
+| `requests` | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation][3] to learn how to build the `<REQUEST_SCHEMA>`. |
 | `title`       | string           | Title of your widget.                                                                                                                                                            |
 
 Additional properties allowed in a request:
@@ -84,3 +84,5 @@ Additional properties allowed in a request:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing/widgets/heat_map
+[2]: /graphing/graphing_json/widgets_json
+[3]: /graphing/graphing_json/request_json

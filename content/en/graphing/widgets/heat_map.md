@@ -11,7 +11,7 @@ further_reading:
   text: "Screenboard"
 ---
 
-The heat map visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square is.
+The heat map visualization shows metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square is.
 
 This visualization displays only a single metric query; additional queries are disregarded.
 
@@ -25,9 +25,9 @@ This visualization displays only a single metric query; additional queries are d
 
 ### Configuration
 
-Configure your metric query as usual. Note that this visualization type is useful only when metrics are aggregated across Tag Keys , e.g. for each `host`.
+Configure your metric query as usual. Note that this visualization type is useful only when metrics are aggregated across tag keys , e.g. for each `host`.
 
-Make a selection in the "`avg`/`max`/`min`/`sum by`…" control to see your data across the associated tags.
+Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your data across the associated tags.
 
 ### Options
 #### Event Overlay
@@ -62,7 +62,7 @@ The following configuration options are available:
 
 ## API
 
-The dedicated [widget JSON schema definition](/graphing/graphing_json/widgets_json) for the change widget is: 
+The dedicated [widget JSON schema definition][3] for the change widget is: 
 
 ```
   "definition": {
@@ -77,9 +77,9 @@ The dedicated [widget JSON schema definition](/graphing/graphing_json/widgets_js
 | Parameter  | Type             | Description                                                                                                                                                                         |
 | ------     | -----            | --------                                                                                                                                                                            |
 | `type`     | string           | Type of the widget, for the group widget use `heatmap`                                                                                                                              |
-| `requests` | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation](/graphing/graphing_json/request_json) to learn how to build the `<REQUEST_SCHEMA>`. |
-| `yaxis`    | object           | Y-axis control options. See the dedicated [Y-axis JSON schema documentation](/graphing/graphing_json/widget_json/#y-axis-schema) to learn how to build the `<AXIS_SCHEMA>`.       |
-| `events`   | object           | Event overlay control options. See the dedicated [Events JSON schema documentation](/grpahing/graphing_json/widget_json/#events-schema) to learn how to build the `<EVENTS_SCHEMA>` |
+| `requests` | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation][4] to learn how to build the `<REQUEST_SCHEMA>`. |
+| `yaxis`    | object           | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][5] to learn how to build the `<AXIS_SCHEMA>`.       |
+| `events`   | object           | Event overlay control options. See the dedicated [Events JSON schema documentation][6] to learn how to build the `<EVENTS_SCHEMA>` |
 | `title`    | string           | Title of your widget.                                                                                                                                                               |
 
 Additional properties allowed in a request:
@@ -102,3 +102,7 @@ Additional properties allowed in a request:
 
 [1]: /graphing/event_stream
 [2]: /graphing/dashboards/template_variables
+[3]: /graphing/graphing_json/widgets_json
+[4]: /graphing/graphing_json/request_json
+[5]: /graphing/graphing_json/widget_json/#y-axis-schema
+[6]: /grpahing/graphing_json/widget_json/#events-schema

@@ -7,7 +7,7 @@ further_reading:
   text: "Screenboard"
 ---
 
-The service summary displays the graphs of a chosen [service][1] in your Screenboard.
+The service summary displays the graphs of a chosen [service][1] in your screenboard.
 
 {{< img src="graphing/widgets/service_summary/service_summary.png" alt="service summary" responsive="true">}}
 
@@ -26,7 +26,7 @@ The service summary displays the graphs of a chosen [service][1] in your Screenb
     * Breakdown
     * Distribution
     * Resource
-4. Choose your display preference, by selecting a timeframe and the amount of column to display your graphs.
+4. Choose your display preference by selecting a timeframe and the number of column to display your graphs across.
 5. Enter a title for your graph.
 
 ## Further Reading

@@ -8,7 +8,7 @@ further_reading:
 ---
 
 
-Note widget is similar to [Free Text widget][1], but allows for more formatting options:
+The note widget is similar to [free text widget][1], but allows for more formatting options:
 
 {{< img src="graphing/widgets/note/note.png" alt="note widget" responsive="true" >}}
 
@@ -16,7 +16,7 @@ Note widget is similar to [Free Text widget][1], but allows for more formatting 
 
 {{< img src="graphing/widgets/note/note_setup.png" alt="Note widget setup" responsive="true"  style="width:80%;">}}
 
-1. Enter the text you want to display. Note that markdown is supported.
+1. Enter the text you want to display. Note that Markdown is supported.
 2. Choose the text size and the note background color.
 3. Select the pointer position.
 

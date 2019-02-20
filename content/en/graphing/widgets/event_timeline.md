@@ -19,7 +19,7 @@ The event timeline is a widget version of the timeline that appears at the top o
 ### Configuration
 
 1. Enter a [search query][1] to filter the event stream. 
-2. On Screenboard only, choose whether your widget has a custom timeframe or the global timeframe of the Screenboard.
+2. On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
 
 ### Options
 #### Title

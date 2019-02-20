@@ -10,7 +10,7 @@ further_reading:
   text: "Screenboard"
 ---
 
-The top list visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc: 
+The top list visualization enables you to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc: 
 
 {{< img src="graphing/widgets/toplist/toplist.png" alt="Top List" responsive="true">}}
 
@@ -25,12 +25,12 @@ The top list visualization is perfect when you want to see the list of hosts wit
     * APM Events: See [the trace search documentation][2] to configure an APM event query.
     * Log Events: See [the log search documentation][3] to configure an APM event query.
 
-2. Optional - Configure a conditional formating depending of your entries values.
+2. Optional: configure conditional formatting depending of your entries' values.
 
 ### Options
 #### Global time
 
-On Screenboard only, choose whether or not your widget has a custom timeframe or the global timeframe of the Screenboard.
+On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
 
 #### Title
 
@@ -42,7 +42,7 @@ Optionally define its size and alignment.
 
 ## API
 
-The dedicated [widget JSON schema definition](/graphing/graphing_json/widgets_json) for the change widget is: 
+The dedicated [widget JSON schema definition][4] for the change widget is: 
 
 ```
   "definition": {
@@ -55,7 +55,7 @@ The dedicated [widget JSON schema definition](/graphing/graphing_json/widgets_js
 | Parameter  | Type             | Description                                                                                                                                                                         |
 | ------     | -----            | --------                                                                                                                                                                            |
 | `type`     | string           | Type of the widget, for the group widget use `toplist`                                                                                                                              |
-| `requests` | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation](/graphing/graphing_json/request_json) to learn how to build the `<REQUEST_SCHEMA>`. |
+| `requests` | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `<REQUEST_SCHEMA>`. |
 | `title`    | string           | Title of your widget.                                                                                                                                                               |
 
 Additional properties allowed in a request:
@@ -68,7 +68,7 @@ Additional properties allowed in a request:
 
 | Parameter       | Type   | Description                           |
 | ------          | -----  | --------                              |
-| `conditional_formats` | object | Conditional format control options. See the dedicated [Conditional format JSON schema documentation](/graphing/graphing_json/widget_json/#conditional-format-schema) to learn how to build the `<CONDITIONAL_FORMATS_SCHEMA>`. |
+| `conditional_formats` | object | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][6] to learn how to build the `<CONDITIONAL_FORMATS_SCHEMA>`. |
 
 ## Further Reading
 
@@ -77,3 +77,6 @@ Additional properties allowed in a request:
 [1]: /graphing
 [2]: /tracing/visualization/search/#search-bar
 [3]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
+[4]: /graphing/graphing_json/widgets_json
+[5]: /graphing/graphing_json/request_json
+[6]: /graphing/graphing_json/widget_json/#conditional-format-schema

@@ -19,14 +19,14 @@ The scatter plot visualization allows you to graph a chosen scope over 2 differe
 
 1. Select a metric and an aggregation for the X and Y axis.
 2. Define the scope for each point of the scatter plot, such as `host`, `service`, `app`, `region`, etc.
-3. Optional - Enable a color-by tag.
-4. Optional - Set X and Y axis controls.
+3. Optional: enable a color-by tag.
+4. Optional: set X and Y axis controls.
 
 ## Options
 
 #### Global time
 
-On Screenboard only, choose whether your widget has a custom timeframe or the global timeframe of the Screenboard.
+On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
 
 #### Title
 
@@ -38,7 +38,7 @@ Optionally define its size and alignment.
 
 ## API
 
-The dedicated [widget JSON schema definition](/graphing/graphing_json/widgets_json) for the change widget is: 
+The dedicated [widget JSON schema definition][1] for the change widget is: 
 
 ```
   "definition": {
@@ -57,9 +57,9 @@ The dedicated [widget JSON schema definition](/graphing/graphing_json/widgets_js
 | Parameter         | Type             | Description                                                                                                                                                                         |
 | ------            | -----            | --------                                                                                                                                                                            |
 | `type`            | string           | Type of the widget, for the group widget use `scatterplot`                                                                                                                          |
-| `requests`        | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation](/graphing/graphing_json/request_json) to learn how to build the `<REQUEST_SCHEMA>`. |
-| `yaxis`           | object           | Y-axis control options. See the dedicated [Y-axis JSON schema documentation](/graphing/graphing_json/widget_json/#y-axis-schema) to learn how to build the `<AXIS_SCHEMA>`.         |
-| `xaxis`           | object           | Y-axis control options. See the dedicated [X-axis JSON schema documentation](/graphing/graphing_json/widget_json/#y-axis-schema) to learn how to build the `<AXIS_SCHEMA>`.         |
+| `requests`        | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation][2] to learn how to build the `<REQUEST_SCHEMA>`. |
+| `yaxis`           | object           | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][3] to learn how to build the `<AXIS_SCHEMA>`.         |
+| `xaxis`           | object           | Y-axis control options. See the dedicated [X-axis JSON schema documentation][3] to learn how to build the `<AXIS_SCHEMA>`.         |
 | `color_by_groups` | array of string  | List of groups used for colors.                                                                                                                                                     |
 | `title`           | string           | Title of your widget.                                                                                                                                                               |
 Additional properties allowed in a request:
@@ -77,3 +77,6 @@ Additional properties allowed in a request:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+[1]: /graphing/graphing_json/widgets_json
+[2]: /graphing/graphing_json/request_json
+[3]: /graphing/graphing_json/widget_json/#y-axis-schema

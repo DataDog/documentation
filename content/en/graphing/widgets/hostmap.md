@@ -1,5 +1,5 @@
 ---
-title: Hostmap Widget
+title: Host map Widget
 kind: documentation
 description: Display the Datadog hostmap in your dashboards.
 further_reading:
@@ -21,14 +21,14 @@ The host map graphs any metric for any subset of hosts on the same host map visu
 
 ### Configuration
 
-Configuration of the Hostmap widget works as the main [Hostmap page][1]:
+Configuration of the host map widget works as the main [host map page][1]:
 
-1. Choose to display `host` or `containers`
+1. Choose to display `hosts` or `containers`
 2. `Filter by` : Choose which hosts/containers to display
-3. `Group by`: Aggregate your hosts/containers depending of one or several Tag.
-4. Choose a metric to fill your hostmap elements.
-5. Optional - Choose a metric to size your hostmap elements.
-6. Optional - Define a color palette with a `min` and `max` color palette value.
+3. `Group by`: Aggregate your hosts/containers by one or several tags.
+4. Choose a metric by which to fill your host map elements.
+5. Optional: choose a metric by which to size your host map elements.
+6. Optional: define a color palette with a `min` and `max` color palette value.
 
 ### Options
 #### Title
@@ -42,7 +42,7 @@ Optionally define its size and alignment.
 ## API
 
 
-The dedicated [widget JSON schema definition](/graphing/graphing_json/widgets_json) for the change widget is: 
+The dedicated [widget JSON schema definition][2] for the change widget is: 
 
 ```
   "definition": {
@@ -69,8 +69,8 @@ The dedicated [widget JSON schema definition](/graphing/graphing_json/widgets_js
 | Parameter            | Type             | Description                                                                                                                                                           |
 | ------               | -----            | --------                                                                                                                                                              |
 | `type`               | string           | Type of the widget, for the host map widget use `hostmap`                                                                                                             |
-| `requests.fill`      | string           | Query used to fill the map. See the dedicated [Request JSON schema documentation](/graphing/graphing_json/request_json) to learn how to build the `<REQUEST_SCHEMA>`. |
-| `requests.size`      | string           | Query used to size the map. See the dedicated [Request JSON schema documentation](/graphing/graphing_json/request_json) to learn how to build the `<REQUEST_SCHEMA>`. |
+| `requests.fill`      | string           | Query used to fill the map. See the dedicated [Request JSON schema documentation][3] to learn how to build the `<REQUEST_SCHEMA>`. |
+| `requests.size`      | string           | Query used to size the map. See the dedicated [Request JSON schema documentation][3] to learn how to build the `<REQUEST_SCHEMA>`. |
 | `node_type`          | enum             | Which type of node to use in the map, available value are: `host` or `container`|
 | `no_metric_hosts`    | boolean          | Whether to show the hosts with no metrics.                                                                                                                            |
 | `no_group_hosts`     | boolean          | Whether to show the hosts that don't fit in a group.                                                                                                                  |
@@ -87,3 +87,5 @@ The dedicated [widget JSON schema definition](/graphing/graphing_json/widgets_js
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing/infrastructure/hostmap
+[2]: /graphing/graphing_json/widgets_json
+[3]: /graphing/graphing_json/request_json
