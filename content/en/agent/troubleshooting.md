@@ -171,7 +171,7 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 | Kubernetes   | `kubectl exec <pod-name> -it /etc/init.d/datadog-agent flare <CASE_ID>`   |
 | Fedora       | `sudo service datadog-agent flare <CASE_ID>`                              |
 | Redhat       | `sudo service datadog-agent flare <CASE_ID>`                              |
-| Suse         | `sudo service datadog-agent flare <CASE_ID>`                              |
+| SUSE         | `sudo service datadog-agent flare <CASE_ID>`                              |
 | Source       | `sudo ~/.datadog-agent/bin/agent flare <CASE_ID>`                         |
 | Windows      | Consult the dedicated [Windows documentation][1]                          |
 
