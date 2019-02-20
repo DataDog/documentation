@@ -40,11 +40,11 @@ In Event Monitors, you can use the tags sent with events to identify events and 
 
 ## Using event template variables in notifications
 
-Include Event specific information in your event monitor notifications, template variables available are: 
+Include event-specific information in your event monitor notifications. Available template variables: 
 
 | Template variable        | Definition                                                               |
 | ------                   | ------                                                                   |
-| `{{event.id}}`           | Id of your event                                                         |
+| `{{event.id}}`           | ID of the event                                                         |
 | `{{event.title}}`        | Title of the event                                                       |
 | `{{event.text}}`         | Text of the event                                                        |
 | `{{event.host.name}}`    | Hostname that generated the event                                        |
@@ -52,7 +52,7 @@ Include Event specific information in your event monitor notifications, template
 
 {{< img src="monitors/monitor_types/event/event_notification_template.png" alt="event_notification_template" responsive="true" style="width:60%;">}}
 
-Use `event.tags` and `event.tags.tagname` to retrieve the values of your tags in markdown. For example:
+Use `event.tags` and `event.tags.tagname` to retrieve the values of your tags in Markdown. For example:
 
 {{< img src="monitors/monitor_types/event/whats_happening.png" alt="whats_happening" responsive="true" style="width:60%;">}}
 
