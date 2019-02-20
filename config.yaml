@@ -436,6 +436,16 @@ languages:
           url: "graphing/graphing_json/"
           weight: 70
           parent: menu_references_graphing
+        - identifier: customnav_graphingnav_widgetjson
+          name: "Widget JSON"
+          url: "graphing/graphing_json/widget_json"
+          weight: 705
+          parent: customnav_graphingnav_graphingjson
+        - identifier: customnav_graphingnav_requestjson
+          name: "Request JSON"
+          url: "graphing/graphing_json/request_json"
+          weight: 710
+          parent: customnav_graphingnav_graphingjson
 
         - identifier: customnav_graphingnav_widget
           name: "Widgets"

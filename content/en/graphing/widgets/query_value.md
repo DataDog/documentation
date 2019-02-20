@@ -40,14 +40,45 @@ Display a custom title for your widget by activating the `Show a Title` check bo
 
 Optionally define its size and alignment.
 
-## FAQ
-### What does "Take the X value from the displayed timeframe" mean?
+## API
 
-{{< img src="graphing/widgets/query_value_widget.png" alt="query_value_widget" responsive="true" style="width:50%;">}}
+The dedicated [widget JSON schema definition](/graphing/graphing_json/widgets_json) for the change widget is: 
 
-The Query Value Widget only displays one value, unlike a timeseries for example, that displays several points.
+```
+  "definition": {
+    "type": "query_value",
+    "requests": ["<REQUEST_SCHEMA>"],
+    "autoscale":   <AUTOSCALE>,
+    "custom_unit": "<CUSTOM_UNIT>",
+    "precision":   <PRECISION>,
+    "text_align":  "<TEXT_ALIGN>"
+    "title": "<WIDGET_TITLE>"
+  }
+```
 
-If you are on a Timeseries and you are currently displaying the past hour, this button allows you to either display the `avg` / `max` / `min` / `sum` / `last value` of ALL points that are rendered during that 1 hour range timeframe—depending on the aggregation chosen above.
+| Parameter  | Type             | Description                                                                                                                                                                         |
+| ------     | -----            | --------                                                                                                                                                                            |
+| `type`     | string           | Type of the widget, for the group widget use `query_value`                                                                                                                          |
+| `requests` | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation](/graphing/graphing_json/request_json) to learn how to build the `<REQUEST_SCHEMA>`. |
+| `autoscale`   | boolean | Whether to use autoscaling or not.                                                     |
+| `custom_unit` | string  | Display a unit of your choice on the widget.                                           |
+| `precision`   | integer | Number of decimal to show. If not defined, the widget uses the raw value.              |
+| `text_align`  | enum    | How to align the value in the widget, value available are `center`, `left`, or `right` |
+| `title`       | string  | Title of your widget.                                                                  |
+
+Additional properties allowed in a request:
+
+```
+{
+   "conditional_formats": <CONDITIONAL_FORMATS_SCHEMA>,
+   "aggregator": "<AGGREGATOR>"
+}
+```
+
+| Parameter             | Type   | Description                                                                                                                                                                                                                    |
+| ------                | -----  | --------                                                                                                                                                                                                                       |
+| `conditional_formats` | object | Conditional format control options. See the dedicated [Conditional format JSON schema documentation](/graphing/graphing_json/widget_json/#conditional-format-schema) to learn how to build the `<CONDITIONAL_FORMATS_SCHEMA>`. |
+| `aggregator`          | enum   | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum`                                                                                                                                   |
 
 ## Further Reading
 

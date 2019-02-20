@@ -42,6 +42,34 @@ Optionally define its size and alignment.
 
 ## API
 
+The dedicated [widget JSON schema definition](/graphing/graphing_json/widgets_json) for the change widget is: 
+
+```
+  "definition": {
+    "type": "toplist",
+    "requests": ["<REQUEST_SCHEMA>"],
+    "title": "<WIDGET_TITLE>"
+  }
+```
+
+| Parameter  | Type             | Description                                                                                                                                                                         |
+| ------     | -----            | --------                                                                                                                                                                            |
+| `type`     | string           | Type of the widget, for the group widget use `toplist`                                                                                                                              |
+| `requests` | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation](/graphing/graphing_json/request_json) to learn how to build the `<REQUEST_SCHEMA>`. |
+| `title`    | string           | Title of your widget.                                                                                                                                                               |
+
+Additional properties allowed in a request:
+
+```
+{
+   "conditional_formats": <CONDITIONAL_FORMATS_SCHEMA>
+}
+```
+
+| Parameter       | Type   | Description                           |
+| ------          | -----  | --------                              |
+| `conditional_formats` | object | Conditional format control options. See the dedicated [Conditional format JSON schema documentation](/graphing/graphing_json/widget_json/#conditional-format-schema) to learn how to build the `<CONDITIONAL_FORMATS_SCHEMA>`. |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

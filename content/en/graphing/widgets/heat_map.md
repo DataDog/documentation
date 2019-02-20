@@ -60,6 +60,42 @@ The following configuration options are available:
 
 **Note**: Because the mathematical log function doesn't accept negative values, the Datadog log scale only works if values are of the same sign (everything > 0 or everything < 0). Otherwise an empty graph is returned.
 
+## API
+
+The dedicated [widget JSON schema definition](/graphing/graphing_json/widgets_json) for the change widget is: 
+
+```
+  "definition": {
+    "type": "heatmap",
+    "requests": ["<REQUEST_SCHEMA>"],
+    "yaxis":  <AXIS_SCHEMA>,
+    "events": <EVENTS_SCHEMA>,
+    "title": "<WIDGET_TITLE>"
+  }
+```
+
+| Parameter  | Type             | Description                                                                                                                                                                         |
+| ------     | -----            | --------                                                                                                                                                                            |
+| `type`     | string           | Type of the widget, for the group widget use `heatmap`                                                                                                                              |
+| `requests` | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation](/graphing/graphing_json/request_json) to learn how to build the `<REQUEST_SCHEMA>`. |
+| `yaxis`    | object           | Y-axis control options. See the dedicated [Y-axis JSON schema documentation](/graphing/graphing_json/widget_json/#y-axis-schema) to learn how to build the `<AXIS_SCHEMA>`.       |
+| `events`   | object           | Event overlay control options. See the dedicated [Events JSON schema documentation](/grpahing/graphing_json/widget_json/#events-schema) to learn how to build the `<EVENTS_SCHEMA>` |
+| `title`    | string           | Title of your widget.                                                                                                                                                               |
+
+Additional properties allowed in a request:
+
+```
+{
+    "style": {
+        "palette": "<PALETTE_STYLE>"
+    }
+}
+```
+
+| Parameter       | Type   | Description                           |
+| ------          | -----  | --------                              |
+| `style.palette` | string | Color palette to apply to the widget. |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

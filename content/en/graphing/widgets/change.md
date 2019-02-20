@@ -59,6 +59,45 @@ Display a custom title for your widget by activating the `Show a Title` check bo
 
 Optionally define its size and alignment.
 
+## API
+
+The dedicated [widget JSON schema definition](/graphing/graphing_json/widgets_json) for the change widget is: 
+
+```
+  "definition": {
+    "type": "change",
+    "requests": ["<REQUEST_SCHEMA>"],
+    "title": "<WIDGET_TITLE>"
+  }
+```
+
+| Parameter  | Type             | Description                                                                                                                                                                         |
+| ------     | -----            | --------                                                                                                                                                                            |
+| `type`     | string           | Type of the widget, for the group widget use `change`                                                                                                                               |
+| `requests` | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation](/graphing/graphing_json/request_json) to learn how to build the `<REQUEST_SCHEMA>`. |
+| `title`    | string           | Title of your widget.                                                                                                                                                               |
+
+Additional properties allowed in a request:
+
+```
+{
+    "change_type": "<CHANGE_TYPE>",
+    "compare_to": "<COMPARE_TO>",
+    "increase_good": <INCREASE_GOOD>,
+    "order_by": "<ORDER_BY>"
+    "order_dir": "<ORDER_DIR>",
+    "show_present": <SHOW_PRESENT>
+}
+```
+
+| Parameter       | Type    | Description                                                                                                                    |
+| ------          | -----   | --------                                                                                                                       |
+| `change_type`   | enum    | Show the absolute or the relative change, values available are: `absolute` or `relative`                                       |
+| `compare_to`    | enum    | Timeframe used for the change comparison, values available are: `hour_before`, `day_before`, `week_before`, or `month_before`. |
+| `increase_good` | boolean | Whether to show increase as good.                                                                                              |
+| `order_by`      | enum    | What to order by, values available are: `change`, `name`, `present`, or `past`.                                                |
+| `order_dir`     | enum    | Order direction, values available are: `asc` or `desc`.                                                                        |
+| `show_present`  | boolean | Whether to show the present value.                                                                                             |
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

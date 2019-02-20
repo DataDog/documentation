@@ -88,6 +88,57 @@ The following configuration options are available:
 
 **Note**: Because the mathematical log function doesn't accept negative values, the Datadog log scale only works if values are of the same sign (everything > 0 or everything < 0). Otherwise an empty graph is returned.
 
+## API
+
+The dedicated [widget JSON schema definition](/graphing/graphing_json/widgets_json) for the change widget is: 
+
+```
+  "definition": {
+    "type": "timeseries",
+    "requests": ["<REQUEST_SCHEMA>"],
+    "yaxis":  <AXIS_SCHEMA>,
+    "markers": <MARKERS_SCHEMA>,
+    "events": <EVENTS_SCHEMA>,
+    "title": "<WIDGET_TITLE>"
+  }
+```
+
+| Parameter  | Type             | Description                                                                                                                                                                         |
+| ------     | -----            | --------                                                                                                                                                                            |
+| `type`     | string           | Type of the widget, for the group widget use `timeseries`                                                                                                                           |
+| `requests` | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation](/graphing/graphing_json/request_json) to learn how to build the `<REQUEST_SCHEMA>`. |
+| `yaxis`    | object           | Y-axis control options. See the dedicated [Y-axis JSON schema documentation](/graphing/graphing_json/widget_json/#y-axis-schema) to learn how to build the `<AXIS_SCHEMA>`.         |
+| `events`   | object           | Event overlay control options. See the dedicated [Events JSON schema documentation](/grpahing/graphing_json/widget_json/#events-schema) to learn how to build the `<EVENTS_SCHEMA>` |
+| `title`    | string           | Title of your widget.                                                                                                                                                               |
+
+Additional properties allowed in a request:
+
+```
+{
+    "style": {
+        "palette": "<PALETTE_STYLE>"
+        "line_type":  "<LINE_TYPE>"
+        "line_width": "<LINE_WIDTH>"
+    },
+    "metadata": [
+        {
+            "expression": "<EXPRESSION>",
+            "alias_name": "<ALIAS_NAME>"
+        }
+    ],
+    "display_type": "<DISPLAY_TYPE>"
+}
+```
+
+| Parameter          | Type   | Description                                                                             |
+| ------             | -----  | --------                                                                                |
+| `style.palette`    | string | Color palette to apply to the widget.                                                   |
+| `style.line_type`  | string | Type of lines displayed. Available values are: `dashed`, `dotted`, or `solid`.          |
+| `style.line_width` | string | Width of line displayed. Available values are: `normal`, `thick`, or `thin`.            |
+| `metadata`         | object | Used to define expression aliases.                                                      |
+| `display_type`     | enum   | Type of display to use for the request, available value are: `area`, `bars`, or `line`. |
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -46,6 +46,39 @@ Display a custom title for your widget by activating the `Show a Title` check bo
 
 Optionally define its size and alignment.
 
+## API
+
+The dedicated [widget JSON schema definition](/graphing/graphing_json/widgets_json) for the change widget is: 
+
+```
+  "definition": {
+    "type": "distribution",
+    "requests": ["<REQUEST_SCHEMA>"],
+    "title": "<WIDGET_TITLE>"
+  }
+```
+
+| Parameter  | Type             | Description                                                                                                                                                                  |
+| ------     | -----            | --------                                                                                                                                                                     |
+| `type`     | string           | Type of the widget, for the group widget use `distribution`                                                                                                                  |
+| `requests` | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation](/graphing/graphing_json/request_json) to learn how to build the `<REQUEST_SCHEMA>`. |
+| `title`       | string           | Title of your widget.                                                                                                                                                            |
+
+Additional properties allowed in a request:
+
+```
+{
+    "style": {
+        "palette": "<PALETTE_STYLE>"
+    }
+}
+```
+
+| Parameter       | Type   | Description                           |
+| ------          | -----  | --------                              |
+| `style.palette` | string | Color palette to apply to the widget. |
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -36,6 +36,44 @@ Display a custom title for your widget by activating the `Show a Title` check bo
 
 Optionally define its size and alignment.
 
+## API
+
+The dedicated [widget JSON schema definition](/graphing/graphing_json/widgets_json) for the change widget is: 
+
+```
+  "definition": {
+    "type": "scatterplot",
+    "requests": {
+        "x": "<REQUEST_SCHEMA>",
+        "y": "<REQUEST_SCHEMA>"
+    },
+    "yaxis":  <AXIS_SCHEMA>,
+    "xaxis": <AXIS_SCHEMA>,
+    "color_by_groups": ["<GROUP_COLOR>"]
+    "title": "<WIDGET_TITLE>"
+  }
+```
+
+| Parameter         | Type             | Description                                                                                                                                                                         |
+| ------            | -----            | --------                                                                                                                                                                            |
+| `type`            | string           | Type of the widget, for the group widget use `scatterplot`                                                                                                                          |
+| `requests`        | array of strings | List of request to display in the widget. See the dedicated [Request JSON schema documentation](/graphing/graphing_json/request_json) to learn how to build the `<REQUEST_SCHEMA>`. |
+| `yaxis`           | object           | Y-axis control options. See the dedicated [Y-axis JSON schema documentation](/graphing/graphing_json/widget_json/#y-axis-schema) to learn how to build the `<AXIS_SCHEMA>`.         |
+| `xaxis`           | object           | Y-axis control options. See the dedicated [X-axis JSON schema documentation](/graphing/graphing_json/widget_json/#y-axis-schema) to learn how to build the `<AXIS_SCHEMA>`.         |
+| `color_by_groups` | array of string  | List of groups used for colors.                                                                                                                                                     |
+| `title`           | string           | Title of your widget.                                                                                                                                                               |
+Additional properties allowed in a request:
+
+```
+{
+   "aggregator": "<AGGREGATOR>"
+}
+```
+
+| Parameter    | Type  | Description                                                                                  |
+| ------       | ----- | --------                                                                                     |
+| `aggregator` | enum  | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum` |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
