@@ -8,6 +8,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
   tag: "Blog"
   text: "Autoscale your Kubernetes workloads with any Datadog metric"
+- link: "/agent/autodiscovery/clusterchecks"
+  tag: "Documentation"
+  text: "Running Cluster Checks with Autodiscovery"
 - link: "agent/kubernetes/daemonset_setup"
   tag: "Documentation"
   text: "Kubernetes DaemonSet Setup"
@@ -19,7 +22,7 @@ further_reading:
   text: "Troubleshooting the Datadog Cluster Agent"
 ---
 
-The Datadog Cluster Agent provides a streamlined, centralized approach to collecting cluster-level monitoring data. By acting as a proxy between the API server and node-based Agents, the Cluster Agent helps to alleviate server load. It also relays cluster-level metadata to node-based Agents, allowing them to enrich the metadata of locally collected metrics. 
+The Datadog Cluster Agent provides a streamlined, centralized approach to collecting cluster-level monitoring data. By acting as a proxy between the API server and node-based Agents, the Cluster Agent helps to alleviate server load. It also relays cluster-level metadata to node-based Agents, allowing them to enrich the metadata of locally collected metrics.
 
 Using the Datadog Cluster Agent helps you to:
 
@@ -47,7 +50,7 @@ Using the Datadog Cluster Agent helps you to:
 
 ### Secure Cluster-Agent-to-Agent Communication
 
-Secure communication between the Agent and the Cluster Agent by creating a secret. 
+Secure communication between the Agent and the Cluster Agent by creating a secret.
 
 Run:
 
@@ -210,6 +213,7 @@ The following environment variables are supported:
 | `DD_LEADER_LEASE_DURATION`                    | Used only if the leader election is activated. See the details [in the leader election section](#leader-election-lease). Value in seconds, 60 by default.                     |
 | `DD_CLUSTER_AGENT_AUTH_TOKEN`                 | 32 characters long token that needs to be shared between the node agent and the Datadog Cluster Agent.                                                                        |
 | `DD_KUBE_RESOURCES_NAMESPACE`                 | Configures the namespace where the Cluster Agent creates the configmaps required for the Leader Election, the Event Collection (optional) and the Horizontal Pod Autoscaling. |
+| `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME`    | Name of the Kubernetes service Cluster Agents are exposed through. Default is `datadog-cluster-agent`. |
 | `DD_KUBERNETES_INFORMERS_RESYNC_PERIOD`       | Frequency in seconds to query the API Server to resync the local cache. The default is 5 minutes.                                                                             |
 | `DD_KUBERNETES_INFORMERS_RESTCLIENT_TIMEOUT`  | Timeout in seconds of the client communicating with the API Server. Default is 60 seconds.                                                                                    |
 | `DD_EXPVAR_PORT`                              | Change the port for fetching [expvar][6] public variables from the Datadog Cluster Agent. The default is port is `5000`.                         |
@@ -218,6 +222,14 @@ The following environment variables are supported:
 | `DD_EXTERNAL_METRICS_AGGREGATOR`              | Aggregator for the Datadog metrics. Applies to all Autoscalers processed. Chose among `sum`/`avg`/`max`/`min`.                                                                |
 | `DD_EXTERNAL_METRICS_BUCKET_SIZE`             | Size of the window in seconds used to query metric from Datadog. Default to 300 seconds.                                                                                      |
 | `DD_EXTERNAL_METRICS_LOCAL_COPY_REFRESH_RATE` | Rate to resync local cache of processed metrics with the global store. Useful when there are several replicas of the Cluster Agent.                                           |
+| `DD_CLUSTER_CHECKS_ENABLED`                   | Enable Cluster Check Autodiscovery. Default is `false`. |
+| `DD_EXTRA_CONFIG_PROVIDERS`                   | Additionnal Autodiscovery configuration providers to use. |
+| `DD_EXTRA_LISTENERS`                          | Additionnal Autodiscovery listeners to run. |
+| `DD_CLUSTER_NAME`                             | Cluster name, will be added as instance tag to all cluster check configurations. |
+| `DD_CLUSTER_CHECKS_CLUSTER_TAG_NAME`          | Name of the instance tag set with the `DD_CLUSTER_NAME` option. Default is `cluster_name`. |
+| `DD_CLUSTER_CHECKS_NODE_EXPIRATION_TIMEOUT`   | Time after which node-based Agents are considered down and removed from the pool. Default is 30 seconds. |
+| `DD_CLUSTER_CHECKS_WARMUP_DURATION`           | Delay between acquiring leadership and starting the Cluster Checks logic, allows for all node-based Agents to register first. Default is 30 seconds. |
+
 
 ## Feature Activation
 ### Event collection
@@ -254,6 +266,22 @@ Refer to [the dedicated Custom metrics server guide][1] to configure the Custom 
 
 **Note**: An [HPA][9] is required for values to be served on the external metrics route.
 
+#### Cluster Checks Autodiscovery
+
+Starting with version 1.2.0, the Datadog Cluster Agent can extend the Autodiscovery mechanism for non-containerized cluster resources. To enable this, make the following changes to the Cluster Agent deployment:
+
+1. Set `DD_CLUSTER_CHECKS_ENABLED` to `true`.
+1. Pass your cluster name as `DD_CLUSTER_NAME`. It will be injected as a `cluster_name` instance tag to all configurations, to help you scope your metrics.
+1. The recommended leader election lease duration is 15 seconds. Set it with the `DD_LEADER_LEASE_DURATION` envvar.
+1. If the service name is different from the default `datadog-cluster-agent`, ensure the `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME` environment variable reflects that.
+
+Two configuration sources are currently supported, [described in the Autodiscovery documentation][10]:
+
+- yaml files can be mounted from a ConfigMap in the `/conf.d` folder, they will be automatically imported by the image's entrypoint.
+- Kubernetes Services annotations requires setting both the `DD_EXTRA_CONFIG_PROVIDERS` and `DD_EXTRA_LISTENERS` environment variables to `kube_services`.
+
+Refer to [the dedicated Cluster Checks Autodiscovery guide][11] for more configuration and troubleshooting details on this feature.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -268,3 +296,5 @@ Refer to [the dedicated Custom metrics server guide][1] to configure the Custom 
 [7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/cluster-agent-hpa-svc.yaml
 [8]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/rbac-hpa.yaml
 [9]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale
+[10]: /agent/autodiscovery/clusterchecks/#setting-up-check-configurations
+[11]: /agent/autodiscovery/clusterchecks
