@@ -15,7 +15,7 @@ Custom status checks can be submitted either through the Datadog API, DogStatsD,
 
 ## Submitting a check with the API
 
-When submitting a status check through the Datadog API, specify a check name, the host submitting the check, and the status; with optional parameters including a timestamp, a message describing the status, and any tags you wish to associate with the check. An example call with all of these options through the shell API would look like:
+When submitting a status check through the Datadog API, specify a check name, the host submitting the check, and the status. Optional parameters include a timestamp, a message describing the status, and any tags you wish to associate with the check. The following is an example call with all of these options through the shell API:
 
 ```
 currenttime=$(date +%s)
@@ -33,7 +33,7 @@ curl  -X POST -H "Content-type: application/json" \
 
 ## Submitting a check with DogStatsD
 
-When submitting a status check through DogStatsD, specify a check name and a check status with optional parameters including tags you wish to associate with the check, a timestamp for the check status, the host submitting the check, and a message describing the status. An example call using the datadogpy library would look like:
+When submitting a status check through DogStatsD, specify a check name and a check status with optional parameters including tags you wish to associate with the check, a timestamp for the check status, the host submitting the check, and a message describing the status. An example call using the datadogpy library looks like:
 
 ```
 statsd.service_check('app.is_ok', 0, tags=['environment:production','role:webserver'], hostname='app1', message='App1 is up and running')

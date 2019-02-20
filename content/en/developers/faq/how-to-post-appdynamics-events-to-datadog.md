@@ -8,7 +8,7 @@ This article allows you to submit events from your AppDynamics Application into 
 
 Prerequisites: Running AppDynamics 4.1 or later
 
-First, create Datadog Policy Single Violation Only HTTP Template:
+First, create a Datadog Policy Single Violation Only HTTP Template:
 
 ```json
 {
