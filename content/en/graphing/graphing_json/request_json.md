@@ -1,5 +1,5 @@
 ---
-title: Datadog Requests schemas
+title: Request JSON schema
 kind: documentation
 ---
 

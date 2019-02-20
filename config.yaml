@@ -432,17 +432,17 @@ languages:
           parent: customnav_graphingnav_functions
 
         - identifier: customnav_graphingnav_graphingjson
-          name: "Graphing JSON"
+          name: "Graphing Dashboard in JSON"
           url: "graphing/graphing_json/"
           weight: 70
           parent: menu_references_graphing
         - identifier: customnav_graphingnav_widgetjson
-          name: "Widget JSON"
+          name: "Widget JSON schema"
           url: "graphing/graphing_json/widget_json"
           weight: 705
           parent: customnav_graphingnav_graphingjson
         - identifier: customnav_graphingnav_requestjson
-          name: "Request JSON"
+          name: "Request JSON schema"
           url: "graphing/graphing_json/request_json"
           weight: 710
           parent: customnav_graphingnav_graphingjson

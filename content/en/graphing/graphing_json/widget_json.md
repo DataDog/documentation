@@ -1,7 +1,11 @@
 ---
-title: Datadog Widgets schemas
+title: Widget JSON schema
 kind: documentation
 ---
+
+This page covers how to use JSON to build a widget in a Datadog dashboard as you would see in the *JSON* tab of a widget. To learn more about the GUI editor, visit the main [Graphing Primer Page][1]
+
+{{< img src="graphing/graphing_json/references-graphing-jsoneditor.png" alt="references graphing jsoneditor" responsive="true" style="width:80%;">}}
 
 All widgets follow the same object structure `WIDGET_SCHEMA`:
 
@@ -78,13 +82,14 @@ yaxis {
 }
 ```
 
-| Parameter      | Type    | Description                                                                                          | Default  |  |
-| ------         | -----   | --------                                                                                             | ----     |  |
-| `label`        | string  |                                                                                                      |          |  |
-| `scale`        | string  | Specifies the scale type. Possible values: `linear`, `log`, `sqrt`, `pow##` (eg. `pow2`, `pow0.5`..) | `linear` |  |
-| `min`          | string  | Specifies minimum value to show on y-axis. It takes a number, or `auto` for default behavior.        | `auto`   |  |
-| `max`          | string  | Specifies the maximum value to show on y-axis. It takes a number, or `auto` for default behavior.    | `auto`   |  |
-| `include_zero` | boolean |                                                                                                      |          |  |
+| Parameter      | Type    | Description                                                                                          | Default  |
+| ------         | -----   | --------                                                                                             | ----     |
+| `label`        | string  |                                                                                                      |          |
+| `scale`        | string  | Specifies the scale type. Possible values: `linear`, `log`, `sqrt`, `pow##` (eg. `pow2`, `pow0.5`..) | `linear` |
+| `min`          | string  | Specifies minimum value to show on y-axis. It takes a number, or `auto` for default behavior.        | `auto`   |
+| `max`          | string  | Specifies the maximum value to show on y-axis. It takes a number, or `auto` for default behavior.    | `auto`   |
+| `include_zero` | boolean |                                                                                                      |          |
+
 
 ### Events schema
 
@@ -124,62 +129,46 @@ or if you're looking to display all errors:
 
 ## Markers schema
 
+Markers allow you to 
+
 ```
-MARKERS_SCHEMA = {
-    "type": "array",
-    "items": {
-        "type": "object",
-        "properties": {
-            "value":        {"type": "string"},
-            "display_type": {"type": "string"},
-            "label":        {"type": "string"}
-        },
-        "required": ["value"],
-        "additionalProperties": False
-    }
+"markers": {
+  "value": "<VALUE>",
+  "display_type": "<DISPLAY_TYPE>",
+  "label": "<LABEL>"
 }
 ```
+
+| Parameter      | Type   | Description | Default |
+| ------         | -----  | --------    | ----    |
+| `value`        | string |             |         |
+| `display_type` | string |             |         |
+| `label`        | string |             |         |
 
 
 ## Conditional format schema
 
-
 ```
-CONDITIONAL_FORMATS_SCHEMA = {
-    "type": "array",
-    "items": {
-        "type": "object",
-        "properties": {
-            "comparator":      {"enum": [">", ">=", "<", "<="]},
-            "value":           {"type": "number"},
-            "palette":         {"enum": [
-                "blue",
-                "custom_bg",
-                "custom_image",
-                "custom_text",
-                "gray_on_white",
-                "green",
-                "green_on_white",
-                "grey",
-                "orange",
-                "red",
-                "red_on_white",
-                "white_on_gray",
-                "white_on_green",
-                "white_on_red",
-                "white_on_yellow",
-                "yellow_on_white",
-            ]},
-            "custom_bg_color": {"type": "string"},
-            "custom_fg_color": {"type": "string"},
-            "image_url":       {"type": "string", "format": "uri"},
-        },
-        "required": ["comparator", "value", "palette"],
-        "additionalProperties": False
-    }
-}
+"conditional_formats": [
+  {
+    "comparator": <COMPARATOR>,
+    "value": <VALUE>,
+    "palette": "<PALETTE>",
+    "custom_bg_color": "<CUSTOM_BG_COLOR>",
+    "custom_fg_color": "<CUSTOM_FG_COLOR>",
+    "image_url": "<IMAGE_URL>"
+  }
+]
 ```
 
+| Parameter    | Type   | Description                                          | Default |
+| ------       | -----  | --------                                             | ----    |
+| `comparator` | enum   | Comparator to apply between: `>`, `>=`, `<`, or `<=` |         |
+| `value`      | double | Value for the comparator.                            |         |
+| `palette` | string | Palette of color to apply, to choose between `blue`, `custom_bg`, `custom_image`, `custom_text`, `gray_on_white`, `green`, `green_on_white`, `grey`, `orange`, `red`, `red_on_white`, `white_on_gray`, `white_on_green`, `white_on_red`, `white_on_yellow`, or `yellow_on_white` |
+| `custom_bg_color`| string | ||
+| `custom_fg_color`| string | ||
+| `image_url` | string | Displays an image as the background | | 
 
 #### Filtering
 

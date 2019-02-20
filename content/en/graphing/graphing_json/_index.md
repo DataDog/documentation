@@ -1,5 +1,5 @@
 ---
-title: Graphing Primer using JSON
+title: Graphing Dashboard using JSON
 kind: documentation
 aliases:
   - /graphingjson/
@@ -7,54 +7,65 @@ aliases:
   - /graphing/graphing_json
 ---
 
-There are two ways to interact with the Graphing Editor: using the GUI or  writing JSON directly with the *JSON* tab. This page covers using JSON. To learn more about the GUI editor, visit the main [Graphing Primer Page][1]
-
-{{< img src="graphing/graphing_json/references-graphing-jsoneditor.png" alt="references graphing jsoneditor" responsive="true" style="width:80%;">}}
-
-
-## Dashboard schema
+If you query a [Datadog timeboard][1] though the [Dashboard API][2] the result should be a JSON object with the following layout:
 
 ```
-DASHBOARD_SCHEMA = {
-    "type": "object",
-    "properties": {
-        # Title of the dashboard
-        "title": {"type": "string"},
-        # Description of the dashboard
-        "description": {"type": "string"},
-        # Layout type of the dashboard (for now, only "ordered" layout - current timeboard layout - is supported)
-        "layout_type": {"enum": ["ordered"]},
-        # Whether this dashboard is read-only. If True, only the author and admins can make changes to it.
-        "is_read_only": {"type": "boolean"},
-        # List of template variables for this dashboard
-        "template_variables": {"type": "array", "items": TEMPLATE_VARIABLE_SCHEMA},
-        # List of handles of users to notify when changes are made to this dashboard
-        "notify_list": {"type": "array", "items": {"type": "string"}},
-        # List of widgets to display on the dashboard
-        "widgets": {
-            "type": "array",
-            "items": WIDGET_SCHEMA
+{
+    "title": "<DASHBOARD_TITLE>",
+    "description": "<DASHBOARD_DESCRIPTION>",
+    "layout_type": "ordered",
+    "is_read_only": <READ_ONLY>,
+    "template_variables": [
+        {
+            <TEMPLATE_VARIABLE_SCHEMA>
         }
-    },
-    "required": ["title", "layout_type", "widgets"],
-    "additionalProperties": False
+    ],
+    "notify_list": ["<DATADOG_HANDLE>"]
+    "widgets": [
+        {
+            <WIDGET_SCHEMA>
+        }
+    ]
 }
 ```
+
+| Parameter            | Type             | Description                                                                                                                                                                         |
+| ------               | -----            | --------                                                                                                                                                                            |
+| `title`              | string           | Title of your Dashboard.                                                                                                                                                            |
+| `description`        | string           | Description of the dashboard.                                                                                                                                                       |
+| `layout_type`        | enum             | Layout type of the dashboard only `ordered` layout is supported                                                                                                                     |
+| `is_read_only`       | boolean          | Whether this dashboard is read-only. If `true`, only the dashboard author and administrators can apply changes to it.                                                               |
+| `template_variables` | array of object  | List of template variables for this dashboard. See [the template variable schema documentation](#template-variable-schema) to learn more                                            |
+| `notify_list`        | array of strings | List of handles of users to notify when changes are made to this dashboard.                                                                                                         |
+| `widgets`            | array of object  | List of widgets to display on the dashboard. See the dedicated [Widget JSON schema documentation][3] to learn how to build the `<WIDGET_SCHEMA>`. |
+
 
 
 ## Template variable schema
 
+Dashboard template variables apply a new scope to one or more graphs on your dashboard, allowing you to dynamically explore metrics across different sets of tags by using variables instead of specific tags, to configure them through the Dashboard API use the following layout:
+
 ```
-TEMPLATE_VARIABLE_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "name": {"type": "string"},
-        "default": {"type": "string"},
-        "prefix": {"type": "string"},
-    },
-    "additionalProperties": False,
-    "required": ["name"]
+{
+    "template_variables": [
+        {
+            "name": "<TV_NAME>",
+            "default": "<TV_DEFAULT_VALUE>",
+            "prefix": "<TV_PREFIX>",
+        }
+    ]
 }
 ```
 
-[1]: /graphing/
+| Parameter | Type   | Description                               |
+| ------    | -----  | --------                                  |
+| `name`    | string | Name of your template variable.           |
+| `default` | string | Default value for your template variable. |
+| `prefix`  | string |                                           |
+
+[Learn more about template variable in the Datadog UI][4].
+
+[1]: /graphing/dashboards/timboard
+[2]: /api/#dashboards
+[3]: /graphing/graphing_json/widget_json
+[4]: /graphing/dashboards/template_variables
