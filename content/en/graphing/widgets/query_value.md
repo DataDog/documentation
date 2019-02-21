@@ -1,10 +1,14 @@
 ---
 title: Query Value Widget
 kind: documentation
+description: "Display an aggregated value for a given metric query"
 further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"
   text: "Screenboard"
+- link: "graphing/dashboards/graphing_json/"
+  tag: "Documentation"
+  text: "Building Dashboard using JSON"
 ---
 
 Query values display the current value of a given metric query, with conditional formatting (such as a green/yellow/red background) to convey whether or not the value is in the expected range.

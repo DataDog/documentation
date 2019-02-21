@@ -432,7 +432,7 @@ languages:
           parent: customnav_graphingnav_functions
 
         - identifier: customnav_graphingnav_graphingjson
-          name: "Graphing Dashboard in JSON"
+          name: "Graphing with JSON"
           url: "graphing/graphing_json/"
           weight: 70
           parent: menu_references_graphing

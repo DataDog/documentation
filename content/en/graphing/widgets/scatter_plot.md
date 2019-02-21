@@ -1,13 +1,17 @@
 ---
 title: Scatter Plot Widget
 kind: documentation
+description: "Graph a chosen scope over two different metrics with their respective aggregation"
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"
   text: "Timeboards"
+- link: "graphing/dashboards/graphing_json/"
+  tag: "Documentation"
+  text: "Building Dashboard using JSON"
 ---
 
-The scatter plot visualization allows you to graph a chosen scope over 2 different metrics with their respective aggregation:
+The scatter plot visualization allows you to graph a chosen scope over two different metrics with their respective aggregation:
 
 {{< img src="graphing/widgets/scatterplot/scatterplot.png" alt="Scatter Plot" responsive="true">}}
 

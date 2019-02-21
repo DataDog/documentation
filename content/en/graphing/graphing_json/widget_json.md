@@ -1,6 +1,13 @@
 ---
 title: Widget JSON schema
 kind: documentation
+further_reading:
+- link: "graphing/dashboards/graphing_json/"
+  tag: "Documentation"
+  text: "Building Dashboard using JSON"
+- link: "graphing/dashboards/graphing_json/request_json"
+  tag: "Documentation"
+  text: "Request JSON schema"
 ---
 
 This page covers how to use JSON to build a widget in a Datadog dashboard as you would see in the *JSON* tab of a widget. To learn more about the GUI editor, visit the main [Graphing Primer Page][1]
@@ -51,7 +58,7 @@ A widget definition follow the following object structure:
 
 If your `requests` parameter has multiple requests, the widget displays all of them.
 
-```json
+```
 "requests": [
   {
     "q": "<METRIC_1>{<SCOPE_1>}"
@@ -124,7 +131,7 @@ See the [Event stream documentation][2] to learn more about the `<EVENT_QUERY>` 
 
 For instance, to indicate that you want events for host X and tag Y:
 
-```json
+```
 "events": [
   {
     "q": "host:X tags:Y"
@@ -134,7 +141,7 @@ For instance, to indicate that you want events for host X and tag Y:
 
 or if you're looking to display all errors:
 
-```json
+```
 "events": [
   {
     "q": "status:error"
@@ -171,7 +178,7 @@ MARKERS_SCHEMA = {
 
 ## Conditional format schema
 
-```json
+```
 CONDITIONAL_FORMATS_SCHEMA = {
     "type": "array",
     "items": {
@@ -210,7 +217,7 @@ To begin, there is a simple configuration where you specify an absolute value or
 
 Examples:
 
-```json
+```
 "yaxis": {
   "filter": 30 // all top 30 values do not appear
 }
@@ -222,7 +229,7 @@ Examples:
 
 Advanced configuration works the same way as simple configuration, with the added flexibility of configuring the lower or the upper or both parts of the graph. For example, the following configuration limits the graph to data points that are not in the bottom 10% nor in the top 30%.
 
-```json
+```
 "yaxis": {
   "filter": {
     "top": "30%",
@@ -233,7 +240,7 @@ Advanced configuration works the same way as simple configuration, with the adde
 
 The following shows all data except those with values higher than 15:
 
-```json
+```
 "yaxis": {
   "filter": {
     "top": 15
@@ -243,7 +250,7 @@ The following shows all data except those with values higher than 15:
 
 The following hides data points below 2:
 
-```json
+```
 "yaxis": {
   "filter": {
     "bottom": 2
@@ -272,6 +279,10 @@ Here is a full JSON example:
   },
 }
 ```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing/graphing_json/request_json
 [2]: /graphing/event_stream

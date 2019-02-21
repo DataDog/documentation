@@ -1,11 +1,18 @@
 ---
 title: Request JSON schema
 kind: documentation
+further_reading:
+- link: "graphing/dashboards/graphing_json/"
+  tag: "Documentation"
+  text: "Building Dashboard using JSON"
+- link: "graphing/dashboards/graphing_json/widget_json"
+  tag: "Documentation"
+  text: "Widget JSON schema"
 ---
 
 The general format for the `REQUEST_SCHEMA` is an array of one or more series:
 
-```json
+```
 "requests": [
   {
     "q": "function(aggregation method:metric{scope} [by {group}])"
@@ -90,7 +97,7 @@ apples by oranges.
 
 In the case of related Time Series, you can easily draw them as stacked areas by using the following syntax:
 
-```json
+```
 "requests": [
   {
     "q": "metric1{scope}, metric2{scope}, metric3{scope}"
@@ -108,7 +115,7 @@ applies to more than 1 host you see that ingress and egress traffic is nicely st
 
 Here's how to do it for any metric:
 
-```json
+```
 "requests" [
   {
     "q": "system.net.bytes_rcvd{some_tag, device:eth0} by {host}"
@@ -118,7 +125,7 @@ Here's how to do it for any metric:
 
 Note that in this case you can only have 1 query. But you can also split by device, or a combination of both:
 
-```json
+```
 "requests" [
   {
     "q": "system.net.bytes_rcvd{some_tag} by {host,device}"
@@ -186,6 +193,10 @@ Here is an example using the `week_before()` function:
   ]
 }
 ```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing/functions
 [2]: https://app.datadoghq.com/metric/summary

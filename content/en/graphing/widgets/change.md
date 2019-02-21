@@ -1,7 +1,7 @@
 ---
 title: Change Widget
 kind: documentation
-description: Graph the change in a value over a chosen time period .
+description: "Graph the change in a value over a chosen time period."
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"
@@ -9,6 +9,15 @@ further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"
   text: "Screenboard"
+- link: "graphing/dashboards/graphing_json/"
+  tag: "Documentation"
+  text: "Building Dashboard using JSON"
+- link: "graphing/dashboards/graphing_json/widget_json"
+  tag: "Documentation"
+  text: "Widget JSON schema"
+- link: "graphing/dashboards/graphing_json/request_json"
+  tag: "Documentation"
+  text: "Request JSON schema"
 ---
 The Change graph shows you the change in a value over the time period chosen:
 

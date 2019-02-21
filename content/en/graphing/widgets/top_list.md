@@ -8,9 +8,12 @@ further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"
   text: "Screenboard"
+- link: "graphing/dashboards/graphing_json/"
+  tag: "Documentation"
+  text: "Building Dashboard using JSON"
 ---
 
-The top list visualization enables you to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc: 
+The top list visualization enables you to display a list of Tag value like `hostname` or `service` with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc: 
 
 {{< img src="graphing/widgets/toplist/toplist.png" alt="Top List" responsive="true">}}
 

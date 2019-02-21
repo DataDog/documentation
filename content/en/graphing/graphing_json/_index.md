@@ -1,10 +1,18 @@
 ---
-title: Graphing Dashboard using JSON
+title: Graphing with JSON
 kind: documentation
+disable_toc: true
 aliases:
   - /graphingjson/
   - /graphing/miscellaneous/graphingjson
   - /graphing/graphing_json
+further_reading:
+- link: "graphing/dashboards/graphing_json/widget_json"
+  tag: "Documentation"
+  text: "Widget JSON schema"
+- link: "graphing/dashboards/graphing_json/request_json"
+  tag: "Documentation"
+  text: "Request JSON schema"
 ---
 
 If you query a [Datadog timeboard][1] though the [Dashboard API][2] the result should be a JSON object with the following layout:
@@ -62,6 +70,10 @@ TEMPLATE_VARIABLE_SCHEMA = {
 | `prefix`  | string | Tag group for your template variable.     |
 
 [Learn more about template variable in the Datadog UI][4].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing/dashboards/timboard
 [2]: /api/#dashboards

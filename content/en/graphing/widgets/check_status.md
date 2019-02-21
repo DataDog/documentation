@@ -1,7 +1,7 @@
 ---
 title: Check Status Widget
 kind: documentation
-description: Graph the current status or number of results for any check performed.
+description: "Graph the current status or number of results for any check performed."
 further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"

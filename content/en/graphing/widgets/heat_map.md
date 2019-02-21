@@ -1,7 +1,7 @@
 ---
 title: Heat Map Widget
 kind: documentation
-description: Build temporal heat map over a given metric.
+description: "Build temporal heat map over a given metric."
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"
@@ -9,6 +9,9 @@ further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"
   text: "Screenboard"
+- link: "graphing/dashboards/graphing_json/"
+  tag: "Documentation"
+  text: "Building Dashboard using JSON"
 ---
 
 The heat map visualization shows metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square is.

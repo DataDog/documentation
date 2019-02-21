@@ -1,6 +1,7 @@
 ---
 title: Timeseries Widget
 kind: documentation
+description: "Display the evolution of one or more metrics, log events, APM events, or process metrics over time."
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"
@@ -8,9 +9,12 @@ further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"
   text: "Screenboard"
+- link: "graphing/dashboards/graphing_json/"
+  tag: "Documentation"
+  text: "Building Dashboard using JSON"
 ---
 
-The timeseries visualization allows you to show the evolution of one or more metrics, log events, or APM events over time. The time window depends on what is selected on the [timeboard][1] or [screenboard][2]:
+The timeseries visualization allows you to display the evolution of one or more metrics, log events, or APM events over time. The time window depends on what is selected on the [timeboard][1] or [screenboard][2]:
 
 {{< img src="graphing/widgets/timeseries/timeseries.png" alt="Timeseries" responsive="true">}}
 

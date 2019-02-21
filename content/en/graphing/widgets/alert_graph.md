@@ -1,7 +1,7 @@
 ---
 title: Alert Graph Widget
 kind: documentation
-description: Graph the current status of any monitor defined on your system.
+description: "Graph the current status of any monitor defined on your system."
 further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"
