@@ -37,9 +37,9 @@ This is why Datadog decided while implementing log integrations to rely on a sub
 
 But as Datadog integrations are not covering your custom formats and sources, we decided to make this collection of Standard Attribute (or [Taxonomy][1]) public to help you decide how to name your attributes in your own parsers.
 
-The standard attribute table is available in Log Configuration pages, along with pipelines, indexes and archives.
-https://cl.ly/b6f2e441356e
+The standard attribute table is available in Log Configuration pages, along with pipelines, indexes, and archives.
 
+{{< img src="logs/processing/attribute_naming_convention/standard_attributes.png" alt="Standard Attributes" responsive="true" style="width:80%;">}}
 
 ## The role of standard attributes
 
@@ -54,20 +54,21 @@ Standard attribute processors work according to the following rules:
 * The original attribute is kept in the log, along with the remapped standard attribute.
 * Standard attributes cannot be set as a source for a standard attribute processor.
 
+You don't actually need to explicitly remap one "custom attribute" into a "standard attribute" if they share the same name. But defining a standard attribute out of a custom attribute allows you to:
 
-Note that you don't actually need to explicitely remap one "custom attribute" into a "standard attribute" if they have they share the same name. But defining a standard attribute out of a custom attribute is still useful both to enforce type casting, and for internal communication purpose in your organisation, to assert your own taxonomy.
-
+* Enforce type casting for this attribute.
+* Assert your own taxonomy across your organization.
 
 ## Update standard attribute list
 
 
-The standard attribute table comes with a set of [predefined standard attributes][22] . You can append that list with your own attributes, and edit or delete existing standard attributes.
-https://cl.ly/e3f0e3df576a
+The standard attribute table comes with a set of [predefined standard attributes](#default-standard-attribute-list) . You can append that list with your own attributes, and edit or delete existing standard attributes:
 
+{{< img src="logs/processing/attribute_naming_convention/edit_standard_attributes.png" alt="Edit standard attributes" responsive="true" style="width:80%;">}}
 
-The standard attribute panel pops when you add a new standard attribute or edit an existing one.
-https://cl.ly/5a2bd4687c58
+The standard attribute panel pops when you add a new standard attribute or edit an existing one:
 
+{{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Define Standard attribute" responsive="true" style="width:80%;">}}
 
 ## Default standard attribute list
 
@@ -223,5 +224,3 @@ Some integrations that rely on these are: [Rsyslog][16], [NxLog][17], [Syslog-ng
 [18]: /integrations/syslog_ng
 [19]: /integrations/fluentd
 [20]: /integrations/logstash
-
-[22]: Link to "## Default standard attribute list" section 
