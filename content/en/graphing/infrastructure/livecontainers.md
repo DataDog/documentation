@@ -17,34 +17,17 @@ further_reading:
 
 [Datadog Live Containers][1] enable real-time visibility into all containers across your environment.
 
-Taking inspiration from bedrock tools like *htop* and *ctop*, live containers give you complete coverage of your container infrastructure in a continuously updated table with resource metrics at two-second resolution and faceted search.
+Taking inspiration from bedrock tools like *htop*, *ctop*, and *kubectl*, live containers give you complete coverage of your container infrastructure in a continuously updated table with resource metrics at two-second resolution, faceted search, and streaming container logs.
+
 Coupled with integrations for [Docker][2], [Kubernetes][3], [ECS][4], and other container technologies, plus built-in tagging of dynamic components, the live container view provides a detailed overview of your containers' health, resource consumption, and deployment in real time:
 
-{{< img src="graphing/infrastructure/livecontainers/LiveContainersWithSummaries.png" alt="Live containers with summaries" responsive="true" >}}
+{{< img src="graphing/infrastructure/livecontainers/livecontainerssummaries.png" alt="Live containers with summaries" responsive="true" >}}
 
 ## Installation
 
 After deploying the [Docker Agent][5], no other configuration is necessary.
 
 **Note**: To collect container information in the standard install rather than with the [Docker Agent][5], the `dd-agent` user must have permissions to access **docker.sock**.
-
-### Include/Exclude containers
-
-It is possible to include and/or exclude containers from real-time collection:
-
-- Exclude containers either via passing the environment variable `DD_AC_EXCLUDE` or adding `ac_exclude:` in your `datadog.yaml` main configuration file.
-- Include containers either via passing the environment variable `DD_AC_INCLUDE` or adding `ac_include:` in your `datadog.yaml` main configuration file.
-
-Both arguments take an **image name** as value; regular expressions are also supported.
-
-For example, to exclude all Debian images except containers with a name starting with *frontend*, add these two configuration lines in your `datadog.yaml`file:
-
-```
-ac_exclude: ["image:debian"]
-ac_include: ["name:frontend.*"]
-```
-
-**Note**: For Agent 5, instead of including the above in the `datadog.conf` main configuration file, explicitly add a `datadog.yaml` file to `/etc/datadog-agent/`, as the Process Agent requires all configuration options here. This configuration only excludes containers from real-time collection, **not** from Autodiscovery.
 
 ## Searching, Filtering, and Pivoting
 
@@ -120,10 +103,90 @@ The query at the top of the scatter plot analytic allows you to control your sca
 
 {{< img src="graphing/infrastructure/livecontainers/scatterplot.png" alt="scatterplot" responsive="true" style="width:80%;">}}
 
+## Container Logs
 
+View streaming logs for any container reporting logs -- like `docker logs -f` or `kubectl logs -f` in the app! 
+
+Click any container in the table to inspect it.  Click the “logs” tab in this panel to see real-time log data from [Live Tail][7] or indexed logs for any time in the past.
+
+{{< img src="graphing/infrastructure/livecontainers/accessingsidepanel.png" alt="Logs Sidepanel" responsive="true" style="width:100%;">}}
+
+### Installation
+{{< tabs >}}
+{{% tab "Container Installation" %}}
+
+Follow these [Instructions][1] for running a Docker container that embeds the Datadog Agent, ensuring the following environment variables are set to true.
+
+```
+-e DD_LOGS_ENABLED=true 
+-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true 
+```
+[1]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=containerinstallation
+{{% /tab %}}
+{{% tab "Host Installation" %}}
+Follow these [Instructions][1] for installing the Datadog Agent on your host, ensuring you make the following changes in your datadog.yaml file to begin log collection.
+
+```
+logs_enabled: true
+listeners:
+  - name: docker
+config_providers:
+  - name: docker
+    polling: true
+```
+[1]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=hostinstallation
+{{% /tab %}}
+{{< /tabs >}}
+
+For more information about activating Log integrations view the [Documentation][8] here.
+
+Once the Datadog Agent is up and running, we will begin collecting the data exposed in container logs across your entire environment. This will be accessible to you from the Live Containers side panel view immediately. 
+
+
+### Live Tail
+With Live Tail, all container logs will be streamed.  “Live” corresponds to a trailing 15-minute period for metrics, and pausing the stream will show the time selector switch to `Past 15 minutes`.  
+
+Pausing the stream is an important feature that allows you to easily read logs that are quickly being written -- unpause to continue streaming.  Streaming logs are not persisted, and entering a new search or refreshing the page will clear the stream.
+
+Streaming logs can be searched with simple string matching, and for those lines that you are indexing, they can be searched by tag.  For more details about Live Tail, see the [Live Tail documentation][7].
+{{< img src="graphing/infrastructure/livecontainers/livecontainerlogssidepanel.gif" alt="Preview Logs Sidepanel" responsive="true" style="width:100%;">}}
+
+### Indexed Logs
+By selecting a period of 1-hour or longer, you can see logs that you have chosen to index and persist.  Indexing is a powerful feature that allows you to filter your logs using tags and facets. 
+
+For example, to search for logs with an `Error` status, type `status:error` into the search box. 
+
+Autocompletion can help you locate the particular tag that you want. Key attributes about your logs are already stored in tags, which enables you to search, filter, and aggregate as needed.
+
+{{< img src="graphing/infrastructure/livecontainers/errorlogs.gif" alt="Preview Logs Sidepanel" responsive="true" style="width:100%;">}}
+
+### Exclusion Filters
+[Exclusion Filters][9] can be configured for fine-grained controls over what goes into your indexes. 
+
+Logs are indexed by default, but it is possible to use any attribute or tag to index only logs with errors & warnings. This can be extended to exclude logs coming from specific container images, or to collect logs only during production deployments.
 ## Real-time monitoring
 
 While actively working with the containers page, metrics are collected at a 2-second resolution. This is important for highly volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.
+
+## Include/Exclude containers
+
+*Please note that Live Containers is not metered.  There is no reason to exclude containers for billing purposes.*
+
+It is possible to include and/or exclude containers from real-time collection:
+
+- Exclude containers either via passing the environment variable `DD_AC_EXCLUDE` or adding `ac_exclude:` in your `datadog.yaml` main configuration file.
+- Include containers either via passing the environment variable `DD_AC_INCLUDE` or adding `ac_include:` in your `datadog.yaml` main configuration file.
+
+Both arguments take an **image name** as value; regular expressions are also supported.
+
+For example, to exclude all Debian images except containers with a name starting with *frontend*, add these two configuration lines in your `datadog.yaml` file:
+
+```
+ac_exclude: ["image:debian"]
+ac_include: ["name:frontend.*"]
+```
+
+**Note**: For Agent 5, instead of including the above in the `datadog.conf` main configuration file, explicitly add a `datadog.yaml` file to `/etc/datadog-agent/`, as the Process Agent requires all configuration options here. This configuration only excludes containers from real-time collection, **not** from Autodiscovery.
 
 ## Notes/known issues
 
@@ -131,7 +194,7 @@ While actively working with the containers page, metrics are collected at a 2-se
 
 - Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
 
-- RBAC settings can restrict Kubernetes metadata collection. Refer to the [RBAC entites for the Datadog Agent][7].
+- RBAC settings can restrict Kubernetes metadata collection. Refer to the [RBAC entites for the Datadog Agent][10].
 
 - In Kubernetes the `health` value is the containers' readiness probe, not its liveness probe.
 
@@ -140,10 +203,14 @@ While actively working with the containers page, metrics are collected at a 2-se
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: https://app.datadoghq.com/containers
 [2]: /integrations/docker_daemon
 [3]: /integrations/kubernetes
 [4]: /integrations/amazon_ecs
 [5]: /agent/docker/#run-the-docker-agent
 [6]: /tagging
-[7]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237
+[7]: https://docs.datadoghq.com/logs/live_tail
+[8]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=hostinstallation#activate-log-integrations
+[9]: https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters
+[10]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237
