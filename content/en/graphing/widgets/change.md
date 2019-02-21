@@ -68,14 +68,12 @@ CHANGE_SCHEMA = {
     "type": "object",
     "properties": {
         "type": {"enum": ["change"]},
-        # Requests displayed by the widget
         "requests": {
             "type":     "array",
             "items":    REQUEST_SCHEMA,
             "minItems": 1,
             "maxItems": 1
         },
-        # Title of the widget
         "title": {"type": "string"},
     },
     "required": ["type", "requests"],
