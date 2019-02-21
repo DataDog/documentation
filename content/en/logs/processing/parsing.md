@@ -72,7 +72,7 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 | `integer`                                       | Matches a decimal integer number and parses it as an integer number.                                                               |
 | `integerExtStr`                                 | Matches an integer number (with scientific notation support).                                                                      |
 | `integerExt`                                    | Matches an integer number (with scientific notation support) and parses it as an integer number.                                   |
-| `word`                                          | Matches alphanumeric words.                                                                                                      |
+| `word`                                          | Matches characters from a-z, A-Z, 0-9, including the _ (underscore) character.                                                                                                      |
 | `doubleQuotedString`                            | Matches a double-quoted string.                                                                                                    |
 | `singleQuotedString`                            | Matches a single-quoted string.                                                                                                    |
 | `quotedString`                                  | Matches a double-quoted or single-quoted string.                                                                                   |
