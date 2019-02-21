@@ -112,17 +112,17 @@ index_algolia:
   only:
     - schedules
 
-#manage_translations:on-schedule:
-#  <<: *base_template
-#  stage: post-deploy
-#  environment: "live"
-#  variables:
-#    URL: ${PREVIEW_DOMAIN}
-#    CONFIG: ${PREVIEW_CONFIG}
-#  script:
-#    - manage_translations "${APIKEY}"
-#  only:
-#    - schedules
+manage_translations:on-schedule:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  variables:
+    URL: ${PREVIEW_DOMAIN}
+    CONFIG: ${PREVIEW_CONFIG}
+  script:
+    - manage_translations "${APIKEY}"
+  only:
+    - schedules
 
 #rollback_live:
 #  <<: *base_template
