@@ -31,13 +31,13 @@ Certaines parties de votre pile peuvent correspondre à des outils SaaS, et non 
 
 Dès que les données sont enregistrées, vous pouvez y accéder directement dans l'application Web Datadog. Utilisez Metrics Explorer pour trouver une métrique spécifique et l'observer en temps réel. Visualisez et commentez des événements (par exemple, le déploiement d'une application) au fil de leur arrivée dans votre [flux d'événements][9]. Filtrez les données selon un groupe d'hosts dans la [carte d'infrastructure][10]. Bénéficiez d'une vue d'ensemble du fonctionnement d'un service donné (par exemple, MySQL) sur son tableau de bord par défaut.
 
-Vous pourrez rapidement créer des [screenboards][11] personnalisés qui combineront l'ensemble des graphiques, données chiffrées, événements et états de services qui vous intéressent le plus. Adaptez les graphiques à vos besoins pour mieux mettre en évidence les problèmes : modifiez les valeurs de leurs métriques à l'aide d'autres métriques, appliquez une détection des [anomalies][12], des [singularités][13] ou des [prévisions][13], superposez des événements, et plus encore.
+Vous pourrez rapidement créer des [screenboards][11] personnalisés qui combineront l'ensemble des graphiques, données chiffrées, événements et états de services qui vous intéressent le plus. Adaptez les graphiques à vos besoins pour mieux mettre en évidence les problèmes : modifiez les valeurs de leurs métriques à l'aide d'autres métriques, appliquez une détection des [anomalies][12], des [singularités][13] ou des [prévisions][14], superposez des événements, et plus encore.
 
 ## Surveillance
 
-Une fois que vos graphiques ont mis en évidence des problèmes potentiels, définissez des conditions d'alerte sur vos métriques à l'aide des [monitors][14]. Par défaut, vous [recevrez des e-mails][15] lorsque les alertes se déclenchent, mais vous pouvez également configurer l'intégration [Slack][16] ou [HipChat][17] pour recevoir des notifications spéciales dans l'application.
+Une fois que vos graphiques ont mis en évidence des problèmes potentiels, définissez des conditions d'alerte sur vos métriques à l'aide des [monitors][15]. Par défaut, vous [recevrez des e-mails][16] lorsque les alertes se déclenchent, mais vous pouvez également configurer l'intégration [Slack][17] ou [HipChat][18] pour recevoir des notifications spéciales dans l'application.
 
-Lorsque vous êtes conscient d'un problème récurrent, [désactivez les alertes associées][18]. Avant d'arrêter un service afin d'effectuer une maintenance, [planifiez un downtime][18] afin de ne pas recevoir d'alertes inutiles. Lorsque vous ne pouvez pas définir une condition d'alerte intéressante pour un host, un événement, une métrique ou un service, créez un [monitor composite][19].
+Lorsque vous êtes conscient d'un problème récurrent, [désactivez les alertes associées][19]. Avant d'arrêter un service afin d'effectuer une maintenance, [planifiez un downtime][19] afin de ne pas recevoir d'alertes inutiles. Lorsque vous ne pouvez pas définir une condition d'alerte intéressante pour un host, un événement, une métrique ou un service, créez un [monitor composite][20].
 
 {{< partial name="support/support.html" >}}
 
@@ -54,9 +54,10 @@ Lorsque vous êtes conscient d'un problème récurrent, [désactivez les alertes
 [11]: /fr/graphing/dashboards/screenboard
 [12]: /fr/monitors/monitor_types/anomaly
 [13]: /fr/monitors/monitor_types/outlier
-[14]: /fr/monitors
-[15]: /fr/monitors/notifications
-[16]: /fr/integrations/slack
-[17]: /fr/integrations/hipchat
-[18]: /fr/monitors/downtimes
-[19]: /fr/monitors/monitor_types/composite
+[14]: /fr/monitors/monitor_types/forecasts
+[15]: /fr/monitors
+[16]: /fr/monitors/notifications
+[17]: /fr/integrations/slack
+[18]: /fr/integrations/hipchat
+[19]: /fr/monitors/downtimes
+[20]: /fr/monitors/monitor_types/composite

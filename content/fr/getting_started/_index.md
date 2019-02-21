@@ -4,6 +4,10 @@ kind: documentation
 aliases:
   - /fr/overview
   - /fr/guides/overview/
+further_reading:
+  - link: 'https://learn.datadoghq.com/course/view.php?id=2'
+    tag: Centre d'apprentissage
+    text: Présentation de Datadog
 ---
 Vous venez de terminer [l'installation][1] de l'Agent Datadog, ou aimeriez tout simplement savoir [ce que Datadog peut faire pour vous][2]. Cette page propose un aperçu des fonctionnalités de Datadog et vous permet de comprendre à quel point Datadog vous aide à maîtriser votre infrastructure.
 
@@ -42,16 +46,16 @@ en fonction de ce qui a précédemment été configuré pour ce tag. [En savoir 
 * Détecter les modèles d'utilisation
 * Optimiser les ressources
 
-Pour en savoir plus sur la hostmap, consultez la [page de la documentation dédiée][9].
+Pour en savoir plus sur la hostmap, consultez la [page de la documentation dédiée][8].
 
 ## Événements
 
 {{< img src="getting_started/event_stream.png" alt="Flux d'événements" responsive="true" >}}
 
-[Le flux d'événements][10] fonctionne comme un blog :
+[Le flux d'événements][9] fonctionne comme un blog :
 
 * Chaque événement du flux peut être commenté.
-* Il est particulièrement utile pour les [équipes][9] réparties aux quatre coins du monde cherchant à mener des enquêtes.
+* Il est particulièrement utile pour les [équipes][10] réparties aux quatre coins du monde cherchant à mener des enquêtes.
 * Vous pouvez [filtrer][11] par : `user`, `source`, `tag`, `host`, `status`, `priority` ou `incident`
 
 Pour chaque incident, les utilisateurs peuvent :
@@ -86,16 +90,20 @@ sans qu'il ne puisse accéder à vos données ou à toute autre information (via
 
 {{< img src="getting_started/monitor.png" alt="monitor" responsive="true" >}}
 
-Les fonctions de [surveillance][14] vous permettent de recevoir une notification lorsque les valeurs agrégées d'une métrique
+Les fonctions de [surveillance][18] vous permettent de recevoir une notification lorsque les valeurs agrégées d'une métrique
 spécifique dépassent un certain seuil :
 
 * Sur l'ensemble de votre infrastructure
 * Par machine (moyenne, max, min ou somme)
 * Vous pouvez appliquer des monitors à toutes les métriques de votre choix : chiffre d'affaires, température du centre de données, etc.
-* Alertes multiples (par device, host, etc.)
+* Alertes multiples (par appareil, host, etc.)
 * Possibilité de définir un message de notification d'alerte, avec les fonctionnalités @
 
 {{< img src="getting_started/alert_setup.png" alt="configuration d'alerte" responsive="true" >}}
+
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/agent
 [2]: http://www.datadoghq.com/product
@@ -104,9 +112,9 @@ spécifique dépassent un certain seuil :
 [5]: https://github.com/DataDog/dd-agent
 [6]: /fr/graphing/infrastructure
 [7]: /fr/tagging
-[8]: /graphing/infrastructure/hostmap
-[9]: /fr/account_management/team
-[10]: /fr/graphing/event_stream
+[8]: /fr/graphing/infrastructure/hostmap
+[9]: /fr/graphing/event_stream
+[10]: /fr/account_management/team
 [11]: https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure
 [12]: /fr/graphing/event_stream/#@-notifications
 [13]: /fr/help
@@ -114,3 +122,4 @@ spécifique dépassent un certain seuil :
 [15]: /fr/graphing/dashboards/screenboard
 [16]: /fr/graphing/functions
 [17]: https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function
+[18]: /fr/monitors
