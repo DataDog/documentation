@@ -40,8 +40,7 @@ Configuring a graph is a multi-step process:
 3. [Filter](#filter)
 4. [Aggregate and Rollup](#aggregate-and-rollup)
 5. [Apply additional functions](#advanced-graphing)
-6. [Enhance the graph](#graphs-enhancement)
-7. [Title the graph](#create-a-title)
+6. [Title the graph](#create-a-title)
 
 ## Choose the metric to graph
 
@@ -52,30 +51,6 @@ The Metrics Explorer allows you to play around with different graph settings in 
 ## Select your visualization
 
 Once you have a metric in mind to display in your graph, select your visualization. Check the [list of all visualizations (widgets)][5].
-
-### Appearance
-
-Graphs can be displayed as Areas, Bars, or Lines. For all graph types, Datadog offers various color options to differentiate multiple metrics displayed on the same graph:
-
-| Palette | Description                                                                                              |
-|---------|----------------------------------------------------------------------------------------------------------|
-| Classic | The simple colors light blue, dark blue, light purple, purple, light yellow, and yellow (colors repeat). |
-| Cool    | A gradient color scheme made from green and blue.                                                        |
-| Warm    | A gradient color scheme made from yellow and orange.                                                     |
-| Purple  | A gradient color scheme made from purple.                                                                |
-| Orange  | A gradient color scheme made from orange.                                                                |
-| Gray    | A gradient color scheme made from gray.                                                                  |
-
-For line graphs, different metrics can be assigned specific palettes by separating the queries in JSON.
-
-#### Line graphs
-
-Line graphs include two additional parameters:
-
-| Parameter | Options               |
-|-----------|-----------------------|
-| Style     | Solid, Dashed, Dotted |
-| Stroke    | Normal, Thin, Thick   |
 
 ## Filter
 
@@ -140,51 +115,9 @@ To display only your formula, un-check your metrics **a** and **b**:
 
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
 
-## Graphs enhancement
-
-### Metric aliasing
-
-Each query or formula can be aliased. The alias overrides the display on the graph and legend, which is useful for long metric names. At the end of the query/formula click on **as...**, then enter your metric alias:
-
-{{< img src="graphing/index/metric_alias.png" alt="metric alias" responsive="true" style="width:75%;" >}}
-
-### Set Y-axis scale
-
-The Datadog y-axis controls are available via the UI and the JSON editor. They allow you to:
-
-* Clip the y-axis to specific ranges.
-* Remove outliers either by specifying a percentage or an absolute value to remove outliers.
-* Change the y-axis scale from linear to log, pow, or sqrt.
-
-Change the Y-axis scale by expanding the **Y-Axis Controls**:
-
-{{< img src="graphing/index/y_axis_control.png" alt="y axis control" responsive="true" style="width:75%;" >}}
-
-The following configuration options are available:
-
-| Option                | Required | Description                                                                                                                                                                                                       |
-|-----------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Min`/`Max`           | No       | Specify the minimum and / or maximum value to show on y-axis. It takes a number or `Auto` as the default value.                                                                                                   |
-| `Scale`               | No       | Specifies the scale type. Possible values:<br>- *linear*: A linear scale (default)<br>- *log*: A logarithmic scale<br>- *pow*: A Power of 2 scale (2 is default, modify in JSON)<br>- *sqrt*: A square root scale |
-| `Always include zero` | No       | Always include zero or fit the axis to the data range. The default is to always include zero.                                                                                                                     |
-
-**Note**: Because the mathematical log function doesn't accept negative values, the Datadog log scale only works if values are of the same sign (everything > 0 or everything < 0). Otherwise an empty graph is returned.
-
-### Overlay events for additional context
-
-Add events from related systems to add more context to your graph. For example, you can add GitHub commits, Jenkins deploys, or Docker creation events. Expand the **Event Overlays** section and enter a query to display those events. Use the same query format as for the [Event Stream][8], for example:
-
-| Query                       | Description                                                |
-|-----------------------------|------------------------------------------------------------|
-| `sources:jenkins`           | Shows all events from the Jenkins source.                  |
-| `tag:role:web`              | Shows all events with the tag `role:web`.                  |
-| `tags:$<TEMPLATE_VARIABLE>` | Shows all events from the selected [Template Variable][9]. |
-
-{{< img src="graphing/index/overlay_events.png" alt="Overlay Events" responsive="true" style="width:75%;" >}}
-
 ## Create a title
 
-If you don't enter a title, one is automatically generated based on your selections. But it may be more useful to the users of the [dashboard][10] to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value.
+If you don't enter a title, one is automatically generated based on your selections. However, it is recommended that you create a title that aptly describes the purpose of the graph. 
 
 ## Save
 
@@ -198,9 +131,7 @@ Click **Done** to save your work and exit the editor. You can always come back t
 [2]: https://app.datadoghq.com/metric/explorer
 [3]: https://app.datadoghq.com/notebook/list
 [4]: https://app.datadoghq.com/metric/summary
-[5]: /graphing/dashboards/widgets
+[5]: /graphing/widgets
 [6]: /tagging
 [7]: /graphing/functions/#apply-functions-optional
-[8]: /graphing/event_stream
-[9]: /graphing/dashboards/template_variables
-[10]: /graphing/dashboards
+[8]: /graphing/dashboards

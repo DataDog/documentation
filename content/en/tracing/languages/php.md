@@ -225,7 +225,7 @@ The PHP tracer can be configured using environment variables.
 
 ### Apache
 
-Set using [`SetEnv`](https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv) from the server config, virtual host,
+Set using [`SetEnv`][14] from the server config, virtual host,
 directory, or **.htaccess** file.
 
 ```
@@ -234,7 +234,7 @@ SetEnv DD_TRACE_DEBUG true
 
 ### nginx
 
-Set using [`fastcgi_param`](http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param) from the `http`,
+Set using [`fastcgi_param`][15] from the `http`,
 `server`, or `location` contexts.
 
 ```
@@ -253,13 +253,13 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | :------------------------- | :---------- | :------------------------------------------------------------------ |
 | `DD_AGENT_HOST`            | `localhost` | The Agent host name                                                 |
 | `DD_AUTOFINISH_SPANS`      | `false`     | Whether spans are automatically finished when the tracer is flushed |
-| `DD_DISTRIBUTED_TRACING`   | `true`      | Whether to enable [distributed tracing][14]                         |
+| `DD_DISTRIBUTED_TRACING`   | `true`      | Whether to enable [distributed tracing][16]                         |
 | `DD_INTEGRATIONS_DISABLED` | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                |
-| `DD_PRIORITY_SAMPLING`     | `true`      | Whether to enable [priority sampling][15]                           |
+| `DD_PRIORITY_SAMPLING`     | `true`      | Whether to enable [priority sampling][17]                           |
 | `DD_SAMPLING_RATE`         | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default) |
 | `DD_TRACE_AGENT_PORT`      | `8126`      | The Agent port number                                               |
 | `DD_TRACE_APP_NAME`        | ``          | The default app name                                                |
-| `DD_TRACE_DEBUG`           | `false`     | Enable [debug mode][17] for the tracer                              |
+| `DD_TRACE_DEBUG`           | `false`     | Enable [debug mode][18] for the tracer                              |
 | `DD_TRACE_ENABLED`         | `true`      | Enable the tracer globally                                          |
 | `DD_TRACE_GLOBAL_TAGS`     | ``          | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`        |
 
@@ -275,7 +275,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | Symfony        | >= 3.4   | Beta         |
 | Zend Framework | 1.12     | Beta         |
 
-Don't see your desired web frameworks? Let Datadog know more about your needs through [this survey][16].
+Don't see your desired web frameworks? Let Datadog know more about your needs through [this survey][19].
 
 #### Library Compatibility
 
@@ -292,7 +292,7 @@ Don't see your desired web frameworks? Let Datadog know more about your needs th
 | PDO           | *(Any Supported PHP)*      | Beta         |
 | Predis        | 1.1                        | Beta         |
 
-Don't see your desired libraries? Let Datadog know more about your needs through [this survey][16].
+Don't see your desired libraries? Let Datadog know more about your needs through [this survey][19].
 
 ## Further Reading
 
@@ -311,7 +311,9 @@ Don't see your desired libraries? Let Datadog know more about your needs through
 [11]: #modify-the-ini-file
 [12]: #library-compatibility
 [13]: https://app.datadoghq.com/apm/services
-[14]: /tracing/advanced_usage/?tab=php#distributed-tracing
-[15]: /tracing/advanced_usage/?tab=php#priority-sampling
-[16]: https://docs.google.com/forms/d/e/1FAIpQLSemTVTCdqzXkfzemJSr8wuEllxfqbGVj00flmRvKA17f0lyFg/viewform
-[17]: /tracing/advanced_usage/?tab=php#debugging
+[14]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
+[15]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
+[16]: /tracing/advanced_usage/?tab=php#distributed-tracing
+[17]: /tracing/advanced_usage/?tab=php#priority-sampling
+[18]: /tracing/advanced_usage/?tab=php#debugging
+[19]: https://docs.google.com/forms/d/e/1FAIpQLSemTVTCdqzXkfzemJSr8wuEllxfqbGVj00flmRvKA17f0lyFg/viewform
