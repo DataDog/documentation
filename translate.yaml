@@ -30,9 +30,9 @@ langs:
 github:
   org: 'DataDog'
   repo: 'documentation'
-  branch_from: 'david.jones/fixing-trans'
+  branch_from: 'master'
   commit_message: 'Adding translations'
-  pr_to: 'david.jones/fixing-trans'
+  pr_to: 'master'
   pr_title: 'Translation PR'
   pr_body: 'This is an automated PR created by the scheduled translation task pulling the latest translated files'
   pr_labels:
@@ -42,4 +42,4 @@ reviewers:
   - name: 'David Jones'
     github_user: 'davidejones'
     slack_user: 'david.jones'
-#  - github_user: 'l0k0ms'
+  - github_user: 'l0k0ms'
