@@ -224,28 +224,6 @@ compile group: 'com.datadoghq', name: 'dd-trace-api', version: {version}
 
 Now add `@Trace` to methods to have them be traced when running with `dd-java-agent.jar`.  If the Agent is not attached, this annotation has no effect on your application.
 
-## JMX Metrics
-
-Datadog's Java Tracer can collect JMX Metrics that can be viewed in your APM Service Dashboard and used for a broader view into your Java application's performance. This is enabled by setting `-Ddd.jmxfetch.enabled=true` or through environment variable `DD_JMXFETCH_ENABLED=true`. Once enabled, JVM Runtime Metrics such as Garbage Collection and Heap Usage will then be correlated directly to the `service` you are monitoring with APM.
-
-{{< img src="tracing/jvm-runtime.png" alt="JVM Runtime" responsive="true" style="width:100%;">}}
-
-JVM Runtime metrics can be correlated in the Trace View, directly viewing any output of performance with the time of a specific request.
-
-{{< img src="tracing/jvm_runtime_trace.png" alt="JVM Runtime Trace" responsive="true" style="width:100%;">}}
-
-By enabling JMXFetch in the Java Tracer the following metrics will be collected by default.
-
-{{< get-metrics-from-git "java" >}}
-
-Along with viewing these metrics in your APM Service Page, Datadog provides a JVM Runtime Dashboard that is pre-built with the `service` and `runtime-id` tags that will be applied to these metrics. 
-
-Additional JMX metrics can be added using configuration files that are passed to `jmxfetch.metrics-configs`. You can also enable existing Datadog JMX Integrations individually with the `dd.integration.<name>` parameter. This will auto-embed configuration from our [existing JMX configuration files][9]. See [JMX Integration][10] for further details on configuration. 
-
-**Note**: To ensure JMX metrics are not captured prematurely, JMXFetch does not initialize until Java's LogManager class is loaded. In the case that a custom log manager is on the classpath and not being used, you can override this setting with `-Ddd.app.customlogmanager=false`.
-
-Don’t see your desired JMX Integration? Datadog is continually adding additional support. Contact [Datadog support][7] if you need help.
-
 ## Performance
 
 Java APM has minimal impact on the overhead of an application:
@@ -267,5 +245,3 @@ Java APM has minimal impact on the overhead of an application:
 [6]: http://bytebuddy.net
 [7]: /help
 [8]: https://github.com/DataDog/documentation#outside-contributors
-[9]: https://github.com/DataDog/integrations-core/search?q=jmx_metrics&unscoped_q=jmx_metrics
-[10]: /integrations/java/#configuration

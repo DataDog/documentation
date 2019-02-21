@@ -426,6 +426,84 @@ putenv('DD_TRACE_AGENT_PORT=8126');
 {{% /tab %}}
 {{< /tabs >}}
 
+## Runtime Metrics
+
+Enable runtime metric collection in the Tracing Client to gain additional insight into an application's performance. Runtime metrics can be viewed in context of a service, correlated in the Trace View at the time of a given request, and utilized anywhere in the platform.
+
+{{< img src="tracing/jvm_runtime_trace.png" alt="JVM Runtime Trace" responsive="true" style="width:100%;">}}
+
+{{< tabs >}}
+{{% tab "Java" %}}
+
+### Automatic Configuration
+
+JVM runtime metric collection can be enabled with one configuration parameter in the Tracing Client:
+
+* System Property: `-Ddd.jmxfetch.enabled=true`
+* Environment Variable: `DD_JMXFETCH_ENABLED=true`
+
+JVM Metrics can now be viewed in correlation with your Java Services, you can get started [here][1]. 
+
+{{< img src="tracing/jvm-runtime.png" alt="JVM Runtime" responsive="true" style="width:100%;">}}
+
+### Data Collected
+
+The following metrics will be collected by default after enabling JMXFetch.
+
+{{< get-metrics-from-git "java" >}}
+
+Along with viewing these metrics in your APM Service Page, Datadog provides a [default JVM Runtime Dashboard][4] with the `service` and `runtime-id` tags that will be applied to these metrics. 
+
+Additional JMX metrics can be added using configuration files that are passed to `jmxfetch.metrics-configs`. You can also enable existing Datadog JMX Integrations individually with the `dd.integration.<name>` parameter. This will auto-embed configuration from our [existing JMX configuration files][2]. See [JMX Integration][3] for further details on configuration. 
+
+[1]: https://app.datadoghq.com/apm/services
+[2]: https://github.com/DataDog/integrations-core/search?q=jmx_metrics&unscoped_q=jmx_metrics
+[3]: /integrations/java/#configuration
+[4]: https://app.datadoghq.com/dash/integration/256/jvm-runtime-metrics
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
+{{% /tab %}}
+{{% tab "Go" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Manual Instrumentation
 
 Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][2] and familiarize yourself with the core concepts of Datadog APM.
