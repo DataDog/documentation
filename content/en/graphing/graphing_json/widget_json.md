@@ -17,7 +17,7 @@ WIDGET_SCHEMA = {
         "id": {"type": "integer"}
     },
     "required": ["definition"],
-    "additionalProperties": False
+    "additionalProperties": false
 }
 ```
 
@@ -78,12 +78,16 @@ The Datadog y-axis controls allow you to:
 The schema is:
 
 ```
-yaxis {
-  "label": "<LABEL_NAME>",
-  "scale": "linear",
-  "min": "auto",         
-  "max": "auto",
-  "include_zero": "false"
+AXIS_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "label":        {"type": "string"},
+        "scale":        {"type": "string"},
+        "min":          {"type": "string"},
+        "max":          {"type": "string"},
+        "include_zero": {"type": "boolean"}
+    },
+    "additionalProperties": false
 }
 ```
 
@@ -109,7 +113,7 @@ EVENTS_SCHEMA = {
             "q": {"type": "string"},
         },
         "required": ["q"],
-        "additionalProperties": False
+        "additionalProperties": false
     }
 }
 ```
@@ -153,7 +157,7 @@ MARKERS_SCHEMA = {
             "label":        {"type": "string"}
         },
         "required": ["value"],
-        "additionalProperties": False
+        "additionalProperties": false
     }
 }
 ```
@@ -182,7 +186,7 @@ CONDITIONAL_FORMATS_SCHEMA = {
             "image_url":       {"type": "string", "format": "uri"},
         },
         "required": ["comparator", "value", "palette"],
-        "additionalProperties": False
+        "additionalProperties": false
     }
 }
 ```

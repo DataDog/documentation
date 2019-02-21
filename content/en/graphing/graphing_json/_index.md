@@ -50,7 +50,7 @@ TEMPLATE_VARIABLE_SCHEMA = {
         "default": {"type": "string"},
         "prefix": {"type": "string"},
     },
-    "additionalProperties": False,
+    "additionalProperties": false,
     "required": ["name"]
 }
 ```

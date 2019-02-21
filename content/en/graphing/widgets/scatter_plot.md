@@ -52,7 +52,7 @@ SCATTER_PLOT_SCHEMA = {
                 "y": REQUEST_SCHEMA
             },
             "required": ["x", "y"],
-            "additionalProperties": False
+            "additionalProperties": false
         },
         "xaxis": AXIS_SCHEMA,
         "yaxis": AXIS_SCHEMA,
@@ -60,7 +60,7 @@ SCATTER_PLOT_SCHEMA = {
         "title": {"type": "string"},
     },
     "required": ["type", "requests"],
-    "additionalProperties": False
+    "additionalProperties": false
 }
 ```
 

@@ -3,46 +3,7 @@ title: Request JSON schema
 kind: documentation
 ---
 
-
-Depending of what you want to graph the `requests` parameter takes different values: 
-
-{{< tabs >}}
-{{% tab "Metric Query" %}}
-
-```
-{
-  "requests" : [
-    "q": "<METRIC_QUERY>"
-  ]
-}
-```
-
-{{% /tab %}}
-{{% tab "APM Query" %}}
-
-```
-{
-  "requests" : [
-    "apm_query": "<APM_QUERY>"
-  ]
-}
-```
-
-{{% /tab %}}
-{{% tab "Log Query" %}}
-
-```
-{
-  "requests" : [
-    "log_query": "<APM_QUERY>"
-  ]
-}
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-The general format for a series is:
+The general format for the `REQUEST_SCHEMA` is an array of one or more series:
 
 ```json
 "requests": [
@@ -52,15 +13,9 @@ The general format for a series is:
 ]
 ```
 
-The `function` and `group` are optional.
+Where the `function` and `group` are optional.
 
-A Series can be further combined together via binary operators (+, -, /, *):
-
-```
-metric{scope} [by {group}] operator metric{scope} [by {group}]
-```
-
-#### Functions
+## Functions
 
 You can apply functions to the result of each query.
 
@@ -128,7 +83,6 @@ apples by oranges.
   ]
 }
 ```
-
 
 ## Stacked Series
 
@@ -233,57 +187,5 @@ Here is an example using the `week_before()` function:
 }
 ```
 
-## APM / Log query
-
-```
-_APM_OR_LOG_QUERY = {
-    "type": "object",
-    "properties": {
-        "index":    {"type": "string"},
-        "compute":  {
-            "type": "object",
-            "properties": {
-                "aggregation": {"type": "string"},
-                "facet":       {"type": "string"},
-                "interval":    {"type": "integer"}
-            },
-            "required": ["aggregation"],
-            "additionalProperties": False
-        },
-        "search":   {
-            "type": "object",
-            "properties": {
-                "query": {"type": "string"}
-            },
-            "required": ["query"],
-            "additionalProperties": False
-        },
-        "group_by": {
-            "type":  "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "facet": {"type": "string"},
-                    "limit": {"type": "integer"},
-                    "sort":  {
-                        "type": "object",
-                        "properties": {
-                            "aggregation": {"type": "string"},
-                            "order":       {"enum": ["asc", "desc"]},
-                            "facet":       {"type": "string"}
-                        },
-                        "required": ["aggregation", "order"],
-                        "additionalProperties": False
-                    }
-                },
-                "required": ["facet"],
-                "additionalProperties": False
-            }
-        }
-    },
-    "required": ["index", "compute"],
-    "additionalProperties": False
-}
-```
 [1]: /graphing/functions
 [2]: https://app.datadoghq.com/metric/summary

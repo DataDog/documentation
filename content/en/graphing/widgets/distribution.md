@@ -66,7 +66,7 @@ DISTIBUTION_SCHEMA = {
         "title": {"type": "string"},
     },
     "required": ["type", "requests"],
-    "additionalProperties": False
+    "additionalProperties": false
 }
 ```
 
@@ -86,7 +86,7 @@ Additional properties allowed the `request` object:
         "properties": {
             "palette": {"type": "string"},
         },
-        "additionalProperties": False
+        "additionalProperties": false
     }
 }
 ```

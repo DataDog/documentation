@@ -108,7 +108,7 @@ TIMESERIES_SCHEMA = {
         "title":   {"type": "string"},
     },
     "required": ["type", "requests"],
-    "additionalProperties": False
+    "additionalProperties": false
 }
 ```
 
@@ -132,7 +132,7 @@ Additional properties allowed in each `request` object:
             "line_type":  {"enum": ["dashed", "dotted", "solid"]},
             "line_width": {"enum": ["normal", "thick", "thin"]}
         },
-        "additionalProperties": False
+        "additionalProperties": false
     },
     "metadata": {
         "type": "array",
@@ -143,7 +143,7 @@ Additional properties allowed in each `request` object:
                 "alias_name": {"type": "string"}
             },
             "required": ["expression"],
-            "additionalProperties": False
+            "additionalProperties": false
         }
     },
     "display_type": {"enum": ["area", "bars", "line"]}

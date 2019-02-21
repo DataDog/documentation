@@ -36,14 +36,14 @@ GROUP_SCHEMA = {
                     "id": {"type": "integer"}
                 },
                 "required": ["definition"],
-                "additionalProperties": False
+                "additionalProperties": false
             }
         },
         # Title of the group
         "title": {"type": "string"},
     },
     "required": ["type", "layout_type", "widgets"],
-    "additionalProperties": False
+    "additionalProperties": false
 }
 ```
 

@@ -80,7 +80,7 @@ HEAT_MAP_SCHEMA = {
         "title": {"type": "string"},
     },
     "required": ["type", "requests"],
-    "additionalProperties": False
+    "additionalProperties": false
 }
 ```
 
@@ -102,7 +102,7 @@ Additional properties allowed in the `requests` object:
     "properties": {
       "palette": {"type": "string"},
     },
-    "additionalProperties": False
+    "additionalProperties": false
   }
 }
 ```

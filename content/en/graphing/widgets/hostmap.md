@@ -59,7 +59,7 @@ HOST_MAP_SCHEMA = {
                 {"required": ["fill"]},
                 {"required": ["size"]}
             ],
-            "additionalProperties": False
+            "additionalProperties": false
         },
         "node_type":       {"enum": ["host", "container"]},
         "no_metric_hosts": {"type": "boolean"},
@@ -78,12 +78,12 @@ HOST_MAP_SCHEMA = {
                 # Max value to use to color the map
                 "fill_max":     {"type": "string"}
             },
-            "additionalProperties": False
+            "additionalProperties": false
         },
         "title": {"type": "string"},
     },
     "required": ["type", "requests"],
-    "additionalProperties": False
+    "additionalProperties": false
 }
 ```
 

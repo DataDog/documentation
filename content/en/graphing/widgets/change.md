@@ -77,7 +77,7 @@ CHANGE_SCHEMA = {
         "title": {"type": "string"},
     },
     "required": ["type", "requests"],
-    "additionalProperties": False
+    "additionalProperties": false
 }
 ```
 
