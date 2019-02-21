@@ -28,8 +28,8 @@ List endpoint returns logs that match a log search query. Results are paginated.
    Equivalent to time.timezone. But value in seconds.
    If both timezone and offset are specified, timezon is ignored.
 * **`startAt`** [*optional*, *default*=**None**]:  
-   For pagination purpose. Hash of the first log returned. 
-   Response includes hash of the first non-returned log.
+   Hash identifier of the first log to return in the list. 
+   When pagination is at stake, you get that hash from the `nextLogID`parameter from previous request result.
 * **`sort`** [*optional*, *default*=**desc**]:  
     Time-ascending or time-descending results.
 * **`limit`** [*optional*, *default*=**10**]:  
