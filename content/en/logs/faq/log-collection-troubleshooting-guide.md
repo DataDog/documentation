@@ -159,7 +159,7 @@ Check Datadog lambda configuration parameter:
 
 Check that Datadog lambda function is actually triggered by leveraging `aws.lambda.invocations` and `aws.lambda.errors` metrics with the `functionname` tag of your Datadog lambda function within Datadog, or check for errors in Datadog lambda logs in Cloudwatch.
 
-#### Expectedly droping logs
+#### Expectedly dropping logs
 
 Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][12] that could match your logs.
 
