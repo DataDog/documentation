@@ -6,7 +6,7 @@ $ddpurple:    #774DA2;
 }
 
 .api {
-  .announcement_banner.text-center.open ~ .container-fluid {
+  .announcement_banner.open ~ .container-fluid {
     padding-top: 30px;
   }
   .api-content {
