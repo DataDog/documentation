@@ -23,7 +23,7 @@ The widget can display the latest value reported, or an aggregate computed from 
 1. Choose the data to graph:
     * Metric: See [the main graphing documentation][1] to configure a metric query.
     * APM Events: See [the trace search documentation][2] to configure an APM event query.
-    * Log Events: See [the log search documentation][3] to configure an APM event query.
+    * Log Events: See [the log search documentation][3] to configure a log event query.
 2. Choose the units and the formatting. 
 3. Optional: configure a conditional format depending on the value displayed.
 
@@ -39,15 +39,6 @@ Display a custom title for your widget by activating the `Show a Title` check bo
 {{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
 
 Optionally define its size and alignment.
-
-## FAQ
-### What does "Take the X value from the displayed timeframe" mean?
-
-{{< img src="graphing/widgets/query_value_widget.png" alt="query_value_widget" responsive="true" style="width:50%;">}}
-
-The query value widget only displays one value—unlike, for example, a timeseries, which displays several points.
-
-If you are viewing a timeseries and you are currently displaying the past hour, this button allows you to display the `avg` / `max` / `min` / `sum` / `last value` of ALL points that are rendered during that 1 hour range timeframe—depending on the aggregation chosen above.
 
 ## Further Reading
 

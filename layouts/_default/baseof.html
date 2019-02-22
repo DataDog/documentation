@@ -38,7 +38,8 @@
     </script>
 </head>
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
-<body class="{{ .Site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }}">
+{{- $customClass := $.Params.customclass -}}
+<body class="{{ .Site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ $customClass }}">
 
     <div class="greyside">
         <div class="container h-100">
