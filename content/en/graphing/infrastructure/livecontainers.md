@@ -19,15 +19,96 @@ further_reading:
 
 Taking inspiration from bedrock tools like *htop*, *ctop*, and *kubectl*, live containers give you complete coverage of your container infrastructure in a continuously updated table with resource metrics at two-second resolution, faceted search, and streaming container logs.
 
-Coupled with integrations for [Docker][2], [Kubernetes][3], [ECS][4], and other container technologies, plus built-in tagging of dynamic components, the live container view provides a detailed overview of your containers' health, resource consumption, and deployment in real time:
+Coupled with integrations for [Docker][2], [Kubernetes][3], [ECS][4], and other container technologies, plus built-in tagging of dynamic components, the live container view provides a detailed overview of your containers' health, resource consumption, logs, and deployment in real time:
 
 {{< img src="graphing/infrastructure/livecontainers/livecontainerssummaries.png" alt="Live containers with summaries" responsive="true" >}}
 
 ## Installation
+{{< tabs >}}
+{{% tab "Container Installation" %}}
 
-After deploying the [Docker Agent][5], no other configuration is necessary.
+Follow these [Instructions][1] for running a Docker container that embeds the Datadog Agent, ensuring the following environment variables are set to true.
 
-**Note**: To collect container information in the standard install rather than with the [Docker Agent][5], the `dd-agent` user must have permissions to access **docker.sock**.
+```
+-e DD_LOGS_ENABLED=true 
+-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true 
+```
+**Notes**: 
+
+* To collect container information in the standard install rather than with the [Docker Agent][2], the `dd-agent` user must have permissions to access **docker.sock**.
+* Logs are indexed by default, but for customers interested only in Live Tail or desiring fine-grained controls over index [Exclusion Filters][3] can be configured for this purpose.
+
+[1]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=containerinstallation
+[2]: 
+[3]: https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters
+{{% /tab %}}
+
+
+{{% tab "Host Installation" %}}
+Follow these [Instructions][1] for installing the Datadog Agent on your host, ensuring you make the following changes in your datadog.yaml file to begin log collection.
+
+```
+logs_enabled: true
+listeners:
+  - name: docker
+config_providers:
+  - name: docker
+    polling: true
+```
+**Note**: 
+
+* Logs are indexed by default, but for customers interested only in Live Tail or desiring fine-grained controls over index [Exclusion Filters][2] can be configured for this purpose.
+
+[1]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=hostinstallation
+[2]: https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters
+{{% /tab %}}
+
+{{% tab "Kubernetes Installation" %}}
+Follow these [Instructions][1] for installing the Datadog Agent that runs inside of a pod, making the following configuration changes to begin log collection.
+
+```
+# Set DD_LOGS_ENABLED and DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL variable to true
+
+(...)
+  env:
+    (...)
+    - name: DD_LOGS_ENABLED
+        value: "true"
+    - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
+        value: "true"
+(...)
+
+# Mount the pointdir volume in volumeMounts:
+
+(...)
+  volumeMounts:
+    (...)
+    - name: pointerdir
+        mountPath: /opt/datadog-agent/run
+(...)
+volumes:
+  (...)
+  - hostPath:
+      path: /opt/datadog-agent/run
+      name: pointerdir
+(...)
+```
+**Notes**: 
+
+* To collect container information in the standard install rather than with the [Docker Agent][2], the `dd-agent` user must have permissions to access **docker.sock**.
+* Logs are indexed by default, but for customers interested only in Live Tail or desiring fine-grained controls over index [Exclusion Filters][3] can be configured for this purpose.
+
+[1]: https://docs.datadoghq.com/agent/kubernetes/daemonset_setup
+[2]: 
+[3]: https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters
+{{% /tab %}}
+{{< /tabs >}}
+
+For more information about activating Log integrations view the [Documentation][5] here.
+
+Once the Datadog Agent is up and running, we will begin collecting the data exposed in container logs across your entire environment. This will be accessible to you from the Live Containers side panel view immediately. 
+
+
 
 ## Searching, Filtering, and Pivoting
 
@@ -111,37 +192,6 @@ Click any container in the table to inspect it.  Click the “logs” tab in thi
 
 {{< img src="graphing/infrastructure/livecontainers/accessingsidepanel.png" alt="Logs Sidepanel" responsive="true" style="width:100%;">}}
 
-### Installation
-{{< tabs >}}
-{{% tab "Container Installation" %}}
-
-Follow these [Instructions][1] for running a Docker container that embeds the Datadog Agent, ensuring the following environment variables are set to true.
-
-```
--e DD_LOGS_ENABLED=true 
--e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true 
-```
-[1]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=containerinstallation
-{{% /tab %}}
-{{% tab "Host Installation" %}}
-Follow these [Instructions][1] for installing the Datadog Agent on your host, ensuring you make the following changes in your datadog.yaml file to begin log collection.
-
-```
-logs_enabled: true
-listeners:
-  - name: docker
-config_providers:
-  - name: docker
-    polling: true
-```
-[1]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=hostinstallation
-{{% /tab %}}
-{{< /tabs >}}
-
-For more information about activating Log integrations view the [Documentation][8] here.
-
-Once the Datadog Agent is up and running, we will begin collecting the data exposed in container logs across your entire environment. This will be accessible to you from the Live Containers side panel view immediately. 
-
 
 ### Live Tail
 With Live Tail, all container logs will be streamed.  “Live” corresponds to a trailing 15-minute period for metrics, and pausing the stream will show the time selector switch to `Past 15 minutes`.  
@@ -160,10 +210,6 @@ Autocompletion can help you locate the particular tag that you want. Key attribu
 
 {{< img src="graphing/infrastructure/livecontainers/errorlogs.gif" alt="Preview Logs Sidepanel" responsive="true" style="width:100%;">}}
 
-### Exclusion Filters
-[Exclusion Filters][9] can be configured for fine-grained controls over what goes into your indexes. 
-
-Logs are indexed by default, but it is possible to use any attribute or tag to index only logs with errors & warnings. This can be extended to exclude logs coming from specific container images, or to collect logs only during production deployments.
 ## Real-time monitoring
 
 While actively working with the containers page, metrics are collected at a 2-second resolution. This is important for highly volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.
@@ -194,7 +240,7 @@ ac_include: ["name:frontend.*"]
 
 - Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
 
-- RBAC settings can restrict Kubernetes metadata collection. Refer to the [RBAC entites for the Datadog Agent][10].
+- RBAC settings can restrict Kubernetes metadata collection. Refer to the [RBAC entites for the Datadog Agent][8].
 
 - In Kubernetes the `health` value is the containers' readiness probe, not its liveness probe.
 
@@ -208,9 +254,7 @@ ac_include: ["name:frontend.*"]
 [2]: /integrations/docker_daemon
 [3]: /integrations/kubernetes
 [4]: /integrations/amazon_ecs
-[5]: /agent/docker/#run-the-docker-agent
+[5]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=hostinstallation#activate-log-integrations
 [6]: /tagging
 [7]: https://docs.datadoghq.com/logs/live_tail
-[8]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=hostinstallation#activate-log-integrations
-[9]: https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters
-[10]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237
+[8]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237
