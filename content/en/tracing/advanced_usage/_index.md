@@ -446,6 +446,8 @@ JVM Metrics can now be viewed in correlation with your Java Services, you can ge
 
 {{< img src="tracing/jvm-runtime.png" alt="JVM Runtime" responsive="true" style="width:100%;">}}
 
+**Note**: For the runtime UI, `dd-trace-java` >= [`0.24.0`][5] is supported.   
+
 ### Data Collected
 
 The following metrics will be collected by default after enabling JMXFetch.
@@ -460,6 +462,7 @@ Additional JMX metrics can be added using configuration files that are passed to
 [2]: https://github.com/DataDog/integrations-core/search?q=jmx_metrics&unscoped_q=jmx_metrics
 [3]: /integrations/java/#configuration
 [4]: https://app.datadoghq.com/dash/integration/256/jvm-runtime-metrics
+[5]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.0
 
 {{% /tab %}}
 {{% tab "Python" %}}

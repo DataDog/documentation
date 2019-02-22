@@ -674,6 +674,11 @@ languages:
           url: "#change-agent-hostname"
           weight: 215
           parent: customnav_tracingnav_advanced_usage
+        - identifier: customnav_tracingnav_runtime_metrics
+          name: "Runtime Metrics"
+          url: "#runtime-metrics"
+          weight: 215
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_manual_tracing
           name: "Manual Instrumentation"
           url: "#manual-instrumentation"
