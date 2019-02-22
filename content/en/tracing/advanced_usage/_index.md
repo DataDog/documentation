@@ -1481,6 +1481,10 @@ another_span->SetTag("sampling.priority", 0); // Discard this span.
 
 The correlation between Datadog APM and Datadog Log Management is improved by automatically adding a `trace_id` and `span_id` in your logs with the Tracing Libraries. This can then be used in the platform to show you the exact logs correlated to the observed trace.
 
+Before correlating traces with logs, ensure your logs are either [sent as JSON][6], or [parsed by the proper language level log processor][7]. 
+
+Your language level logs *must* be turned into Datadog attributes in order for traces and logs correlation to work.
+
 {{< img src="tracing/trace_id_injection.png" alt="Logs in Traces" responsive="true" style="width:100%;">}}
 
 {{< tabs >}}
@@ -2134,3 +2138,5 @@ apm_config:
 [3]: http://opentracing.io
 [4]: #priority-sampling
 [5]: /tracing/getting_further/trace_sampling_and_storage
+[6]: /logs/log_collection/?tab=tailexistingfiles#send-your-application-logs-in-json
+[7]: /logs/log_collection/?tab=tailexistingfiles#enabling-log-collection-from-integrations
