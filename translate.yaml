@@ -7,8 +7,8 @@ transifex:
   project_slug: 'documentation_loc'
   user: 'api'
 sources:
-- src: "content/**/*.md"
-  dst: "*.{lang}.md"
+- src: "content/en/**/*.md"
+  dst: "content/{lang}/**/*.md"
 - src: "data/partials/*.yaml"
   dst: "*.{lang}.yaml"
 - src: "data/service_checks/*.json"
@@ -16,7 +16,7 @@ sources:
 - src: "i18n/en.json"
   dst: "{lang}.json"
 ignores:
-  - "content/**/faq/*.md"
+  - "content/en/**/faq/*.md"
   - "**/*.fr.md"
   - "**/*.fr.yaml"
   - "**/*.fr.json"
