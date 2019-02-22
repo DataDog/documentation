@@ -3,7 +3,7 @@ title: Widgets
 kind: documentation
 aliases:
     - graphing/dashboards/widgets
-    - graphing/faq/widgets/
+    - graphing/faq/widgets
 ---
 
 {{< whatsnext desc="Choose a widget:">}}
