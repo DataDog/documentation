@@ -48,6 +48,9 @@ This is for a [FreeSwitch ESL][11] application to export statistics to Datadog u
 ### Google Analytics
 You can get data into Datadog from Google Analytics via the Datadog API with [this library][13] from [Bithaus][14].
 
+### Jira
+A [tool][37] to poll data from Jira and upload as a metric to Datadog.
+
 ### Logstash Output
   * [Logstash Output for Datadog][15]
   * [Logstash Output for DogStatsD][16]
@@ -129,3 +132,4 @@ If you've written a Datadog library and would like to add it to this page, send 
 [34]: https://github.com/urosgruber/dd-agent-FreeBSD
 [35]: https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/networking/dd-agent
 [36]: mailto:code@datadoghq.com
+[37]: https://github.com/evernote/jiradog
