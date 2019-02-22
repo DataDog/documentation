@@ -52,7 +52,7 @@ Voici quelques restrictions, exigences et suggestions en ce qui concerne l'utili
 
 2. Les noms de tags peuvent comporter **jusqu'à 200 caractères** et prennent en charge la norme Unicode.
 3. Les tags sont convertis en minuscules. Ainsi, les tags `CamelCase` ne sont pas recommandés. Les intégrations reposant sur une authentification (crawler) convertissent les tags au format camel case en ajoutant des underscores. Par exemple, `TestTag` --> `test_tag`.
-4. Un tag peut être au format `valeur` ou `<CLÉ>:<VALEUR>`. Pour un fonctionnement optimal, **nous recommandons de créer des tags au format `<KEY>:<VALUE>`.** `env`, `instance`, et `name` sont des clés de tag couramment utilisées. La clé précède toujours le caractère « : » de la définition globale du tag. Par exemple :
+4. Un tag peut être au format `valeur` ou `<KEY>:<VALUE>`. Pour un fonctionnement optimal, **nous recommandons de créer des tags au format `<KEY>:<VALUE>`.** `env`, `instance`, et `name` sont des clés de tag couramment utilisées. La clé précède toujours le caractère « : » de la définition globale du tag. Par exemple :
 
     | Tag                | Clé           | Valeur          |
     |--------------------|---------------|----------------|
@@ -64,20 +64,20 @@ Voici quelques restrictions, exigences et suggestions en ce qui concerne l'utili
 6. Les tags ne doivent pas provenir de sources illimitées, telles que des horodatages EPOCH, des ID d'utilisateur ou des ID de demande. Cela pourrait [accroître de façon significative le nombre de métriques][2] de votre organisation et augmenter vos frais.
 
 ## Assignation de tags
-Vous pouvez utiliser l'une (ou l'ensemble) des méthodes suivantes pour assigner des tags. Consultez la [documentation relative à l'assignation des tags] pour en savoir plus :
+Vous pouvez utiliser l'une (ou l'ensemble) des méthodes suivantes pour assigner des tags. Consultez la [documentation relative à l'assignation des tags][3] pour en savoir plus :
 
 | Méthode                        | Assignation de tags                                                                                  |
 |-------------------------------|----------------------------------------------------------------------------------------------|
-| [Fichiers de configuration][3]     | Assignation manuelle dans les principaux fichiers de configuration de votre Agent, ou dans les fichiers de configuration de vos intégrations |
-| [Variables d'environnement][4]   | Utilisation de variables d'environnement pour l'Agent conteneurisé                                      |
-| [IU][5]                      | Dans votre plateforme Datadog                                                                     |
-| [API][6]                     | À l'aide de l'API de Datadog                                                                          |
-| [DogStatsD][7]               | Lors de l'envoi de métriques via DogStatsD                                                        |
-| [Héritage des déclarations][8] | Assignation automatique après la configuration des intégrations prises en charge                                        |
+| [Fichiers de configuration][4]     | Assignation manuelle dans les principaux fichiers de configuration de votre Agent, ou dans les fichiers de configuration de vos intégrations |
+| [Variables d'environnement][5]   | Utilisation de variables d'environnement pour l'Agent conteneurisé                                      |
+| [IU][6]                      | Dans votre plateforme Datadog                                                                     |
+| [API][7]                     | À l'aide de l'API de Datadog                                                                          |
+| [DogStatsD][8]               | Lors de l'envoi de métriques via DogStatsD                                                        |
+| [Héritage des déclarations][9] | Assignation automatique après la configuration des intégrations prises en charge                                        |
 
 ## Utiliser les tags
 
-[Assignez des tags][9] au niveau des hosts et des [intégrations][10] pour pouvoir filtrer et regrouper vos métriques, traces et logs. Les tags peuvent être utilisés dans les sections suivantes de votre plateforme Datadog. Consultez la [documentation relative à l'utilisation des tags][1] pour en savoir plus :
+[Assignez des tags][3] au niveau des hosts et des [intégrations][10] pour pouvoir filtrer et regrouper vos métriques, traces et logs. Les tags peuvent être utilisés dans les sections suivantes de votre plateforme Datadog. Consultez la [documentation relative à l'utilisation des tags][1] pour en savoir plus :
 
 | Section                 | Utilisation des tags                                                                                      |
 |----------------------|--------------------------------------------------------------------------------------------------|
@@ -98,13 +98,13 @@ Vous pouvez utiliser l'une (ou l'ensemble) des méthodes suivantes pour assigner
 
 [1]: /fr/tagging/using_tags
 [2]: /fr/developers/metrics/custom_metrics/#how-is-a-custom-metric-defined
-[3]: /fr/tagging/assigning_tags/#configuration-files
-[4]: /fr/tagging/assigning_tags/#environment-variables
-[5]: /fr/tagging/assigning_tags/#ui
-[6]: /fr/tagging/assigning_tags/#api
-[7]: /fr/tagging/assigning_tags/#dogstatsd
-[8]: /fr/tagging/assigning_tags/#integration-inheritance
-[9]: /fr/tagging/assigning_tags
+[3]: /fr/tagging/assigning_tags
+[4]: /fr/tagging/assigning_tags/#configuration-files
+[5]: /fr/tagging/assigning_tags/#environment-variables
+[6]: /fr/tagging/assigning_tags/#ui
+[7]: /fr/tagging/assigning_tags/#api
+[8]: /fr/tagging/assigning_tags/#dogstatsd
+[9]: /fr/tagging/assigning_tags/#integration-inheritance
 [10]: /fr/integrations
 [11]: /fr/tagging/using_tags/#events
 [12]: /fr/tagging/using_tags/#dashboards

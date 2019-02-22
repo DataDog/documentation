@@ -56,7 +56,7 @@ Pour commencer à tracer votre application :
 
 Pour instrumenter une application rédigée dans un langage qui ne prend pas encore en charge une bibliothèque officielle, consultez la liste des [bibliothèques de tracing de notre communauté][5].
 
-Enfin, commencez à surveiller les performances de votre app. Après quelques minutes d'exécution de l'APM, vos services apparaissent sur [la page d'accueil de l'APM][6]. Consultez la section [Utiliser l'IU de l'APM][7] pour en savoir plus.
+Enfin, commencez à surveiller les performances de votre application. Après quelques minutes d'exécution de l'APM, vos services apparaissent sur [la page d'accueil de l'APM][6]. Consultez la section [Utiliser l'IU de l'APM][7] pour en savoir plus.
 
 ## Configuration de l'Agent
 
@@ -77,7 +77,7 @@ Vous trouverez ci-dessous la liste complète des paramètres disponibles pour vo
 | `enabled`                 | boolean     | Lorsque ce paramètre est défini sur `true`, l'Agent Datadog accepte les métriques de trace. Valeur par défaut : `true`.                                                                              |
 | `apm_dd_url`              | string      | Endpoint de l'API Datadog vers lequel les traces sont envoyées.                                                                                                                        |
 | `env`                     | string      | Environnement par défaut auquel les traces appartiennent (p. ex., *staging*, *production*, etc.).                                                              |
-| `extra_sample_rate`       | float       | Utilisez ce paramètre pour ajuster le taux d’échantillonnage des traces. La valeur doit être de type float et varier entre `0` (pas d'échantillonnage) ou `1` (échantillonnage normale). Valeur par défaut : `1`.           |
+| `extra_sample_rate`       | float       | Utilisez ce paramètre pour ajuster le taux d'échantillonnage des traces. La valeur doit être de type float et varier entre `0` (pas d'échantillonnage) et `1` (échantillonnage normal). Valeur par défaut : `1`.           |
 | `max_traces_per_second`   | float       | Nombre maximum de traces à échantillonner par seconde. Définissez ce paramètre sur `0` pour désactiver la limite (*non recommandé*). Valeur par défaut : `10`.                                     |
 | `ignore_resources`        | list        | La liste des ressources ignorées par l'Agent.                                                                                                                  |
 | `log_file`                | string      | Emplacement du fichier de log.                                                                                                                                          |
@@ -101,7 +101,7 @@ Par exemple, pour un service Python intitulé `python-api` qui exécute Flask (n
 
 La [page de la documentation relative à l'analyse et à la recherche de traces][14] indique la liste des services et des noms de ressources au sein desquels vous pouvez rechercher des traces :
 
-1. Sélectionnez les paramètres `environment` et `services` à partir desquels vous souhaitez extraire des [événements APM][15].
+1. Sélectionnez les paramètres `environment` et `services` à partir desquels vous souhaitez extraire des [événements APM][15].
 2. Modifiez la configuration de votre Agent Datadog (en fonction de la version de votre Agent) en suivant les instructions ci-dessous :
 
 {{< tabs >}}
@@ -122,7 +122,7 @@ Dans `datadog.conf`, ajoutez `[trace.analyzed_spans]`. Par exemple :
 ```
 [trace.analyzed_spans]
 <NOM_SERVICE_1>|<NOM_OPÉRATION_1>: 1
-<NOM_SERVICE_2>|<NOM_OPÉRATION_2: 1
+<NOM_SERVICE_2>|<NOM_OPÉRATION_2>: 1
 ```
 
 {{% /tab %}}
@@ -150,10 +150,10 @@ L'environnement à partir duquel vous recueillez vos traces constitue le tag pri
 Il existe différentes façons de spécifier un environnement lors de l'envoi de données :
 
 1. Tag de host :
-  Utilisez un tag de host au format `env:<ENVIRONNEMENT>` pour taguer l'ensemble des traces de l'Agent correspondant.
+  Utilisez un tag de host au format `env:<ENVIRONNEMENT>` pour tagger l'ensemble des traces de l'Agent correspondant.
 
 2. Configuration de l'Agent :
-  Remplacez le tag par défaut utilisé par l'Agent dans [le fichier de configuration de l'Agent][17]. Cela tague toutes les traces transmises à l'Agent, ce qui ignore la valeur du tag du host.
+  Remplacez le tag par défaut utilisé par l'Agent dans [le fichier de configuration de l'Agent][17]. Cela permet de tagger toutes les traces transmises à l'Agent, ce qui ignore la valeur du tag du host.
 
     ```
     apm_config:
@@ -161,7 +161,7 @@ Il existe différentes façons de spécifier un environnement lors de l'envoi de
     ```
 
 3. Par trace :
-  Lorsque vous envoyez une seule trace, spécifiez un environnement en taguant l'une de ses spans avec la clé de métadonnées `env`. Cela ignore la configuration de l'Agent et la valeur du tag du host (le cas échéant). Consultez la [documentation relative aux tags des traces][18] pour découvrir comment assigner un tag à vos traces.
+  Lorsque vous envoyez une seule trace, spécifiez un environnement en taggant l'une de ses spans avec la clé de métadonnées `env`. Cela ignore la configuration de l'Agent et la valeur du tag du host (le cas échéant). Consultez la [documentation relative aux tags des traces][18] pour découvrir comment assigner un tag à vos traces.
 
 ##### Afficher les données selon un environnement
 
@@ -173,7 +173,7 @@ L'environnement apparaît en haut des pages APM. Utilisez la liste déroulante p
 
 Si vous ajoutez un tag de host autre que `env:<ENVIRONNEMENT>` à vos traces, celui-ci peut être défini comme tag primaire en plus du tag d'environnement. Accédez à la page [APM Settings][19] pour définir, modifier ou supprimer vos tags primaires.
 
-Remarque :
+Remarques :
 
 * Seuls les administrateurs d'organisation peuvent accéder à cette page.
 * Les modifications peuvent prendre jusqu'à deux heures avant d'être appliquées dans l'IU.

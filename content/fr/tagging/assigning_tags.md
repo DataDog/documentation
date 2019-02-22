@@ -81,13 +81,13 @@ Définissez les variables dans votre fichier `datadog.yaml` personnalisé ou con
 
 Si vous envoyez une seule trace, taguez ses spans afin d'ignorer les tags de configuration de l'Agent et/ou la valeur des tags du host (le cas échéant) pour ces traces :
 
-Les exemples suivants utilisent le tag primaire par défaut `env:<ENVIRONMENT>`. Cependant, vous pouvez également le remplacer par un tag `<KEY>:<VALUE>`.
+Les exemples suivants utilisent le tag primaire par défaut `env:<ENVIRONNEMENT>`. Cependant, vous pouvez également le remplacer par un tag `<KEY>:<VALUE>`.
 
 {{< tabs >}}
 {{% tab "Go" %}}
 
 ```go
-tracer.SetTag("env", "<ENVIRONMENT>")
+tracer.SetTag("env", "<ENVIRONNEMENT>")
 ```
 
 Pour OpenTracing, utilisez l'option de démarrage `tracer.WithGlobalTag` pour définir de façon globale l'environnement.
@@ -147,7 +147,7 @@ Cet exemple de métadonnées span n'est donc pas valide :
 {{< tabs >}}
 {{% tab "Hostmap" %}}
 
-Vous pouvez assigner des tags de host dans l'IU depuis la page relative à la [Hostmap][1]. Cliquez sur l'hexagone (host) de votre choix pour superposer le host en bas de la page. Depuis la section *User*, cliquez ensuite sur le bouton **Edit Tags**. Saisissez les tags sous la forme d'une liste de valeurs séparées par des virgules, puis cliquez sur **Save Tags**. Remarque : l'application des modifications de tags de métrique effectuées via l'IU peut prendre jusqu'à 30 minutes.
+Vous pouvez assigner des tags de host dans l'IU depuis la page relative à la [Hostmap][1]. Cliquez sur l'hexagone (host) de votre choix pour superposer le host en bas de la page. Depuis la section *User*, cliquez ensuite sur le bouton **Edit Tags**. Saisissez les tags sous forme de liste de valeurs séparées par des virgules, puis cliquez sur **Save Tags**. Remarque : l'application des modifications de tags de métrique effectuées via l'IU peut prendre jusqu'à 30 minutes.
 
 {{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Tags hostmap" responsive="true" style="width:80%;">}}
 
@@ -156,7 +156,7 @@ Vous pouvez assigner des tags de host dans l'IU depuis la page relative à la [H
 {{% /tab %}}
 {{% tab "Liste d'infrastructures" %}}
 
-Vous pouvez assigner des tags de host dans l'IU depuis la page relative à la [liste d'infrastructures][1]. Cliquez sur un host pour le superposer sur la droite de la page. Depuis la section *User*, cliquez ensuite sur le bouton **Edit Tags**. Saisissez les tags sous la forme d'une liste de valeurs séparées par des virgules, puis cliquez sur **Save Tags**. Remarque : l'application des modifications de tags de métrique effectuées via l'IU peut prendre jusqu'à 30 minutes.
+Vous pouvez assigner des tags de host dans l'IU depuis la page relative à la [liste d'infrastructures][1]. Cliquez sur un host pour le superposer sur la droite de la page. Depuis la section *User*, cliquez ensuite sur le bouton **Edit Tags**. Saisissez les tags sous forme de liste de valeurs séparées par des virgules, puis cliquez sur **Save Tags**. Remarque : l'application des modifications de tags de métrique effectuées via l'IU peut prendre jusqu'à 30 minutes.
 
 {{< img src="tagging/assigning_tags/hostuitags.png" alt="Tags liste d'infrastructures" responsive="true" style="width:80%;">}}
 
@@ -189,7 +189,7 @@ Vous pouvez assigner des clés de tag au sein des [métriques de distribution][1
 {{% /tab %}}
 {{% tab "Intégrations" %}}
 
-Le carré d'intégration [AWS][1] vous permet d'assigner des tags supplémentaires à l'ensemble des métriques au niveau des comptes. Utilisez une liste de tags au format `<CLÉ>:<VALEUR>` séparés par des virgules.
+Le carré d'intégration [AWS][1] vous permet d'assigner des tags supplémentaires à l'ensemble des métriques au niveau des comptes. Utilisez une liste de tags au format `<KEY>:<VALUE>` séparés par des virgules.
 
 {{< img src="tagging/assigning_tags/integrationtags.png" alt="Tags AWS" responsive="true" style="width:80%;">}}
 
@@ -201,7 +201,7 @@ Le carré d'intégration [AWS][1] vous permet d'assigner des tags supplémentair
 ## API
 
 {{< tabs >}}
-{{% tab "Attribution" %}}
+{{% tab "Assignation" %}}
 
 Les tags peuvent être assignés de diverses façons avec l'[API Datadog][1]. Cliquez sur les liens ci-dessous pour accéder aux rubriques indiquées :
 
