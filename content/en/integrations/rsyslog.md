@@ -263,7 +263,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     Some Rsyslog versions are not able to reconnect properly when necessary. To mitigate this issue, use time markers so the connection never stops. To achieve this, add the following 2 lines in your Rsyslog configuration:  
     ```
     $ModLoad immark
-    $MarkMessagePeriod 45
+    $MarkMessagePeriod 20
     ```
     And don't forget to restart:
     ```
