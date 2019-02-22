@@ -208,7 +208,7 @@ class PreBuild:
         self.content_dir = "{0}{1}{2}".format(
             abspath(normpath(options.source)),
             sep,
-            "content" + sep,
+            "content" + sep + "en" + sep,
         )
         self.data_integrations_dir = (
             join(self.data_dir, "integrations") + sep
@@ -905,7 +905,7 @@ class PreBuild:
                 with open(
                     "{}{}".format(
                         self.options.source,
-                        "/content/integrations/faq/list-of-api-source-attribute-value.md",
+                        "/content/en/integrations/faq/list-of-api-source-attribute-value.md",
                     ),
                     mode="r+",
                     encoding="utf-8",
