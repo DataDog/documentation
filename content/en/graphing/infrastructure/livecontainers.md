@@ -39,7 +39,7 @@ Follow these [Instructions][1] for running a Docker container that embeds the Da
 * Logs are indexed by default, but for customers interested only in Live Tail or desiring fine-grained controls over index [Exclusion Filters][3] can be configured for this purpose.
 
 [1]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=containerinstallation
-[2]: 
+[2]: https://docs.datadoghq.com/integrations/docker_daemon
 [3]: https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters
 {{% /tab %}}
 
@@ -99,7 +99,7 @@ volumes:
 * Logs are indexed by default, but for customers interested only in Live Tail or desiring fine-grained controls over index [Exclusion Filters][3] can be configured for this purpose.
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/daemonset_setup
-[2]: 
+[2]: https://docs.datadoghq.com/integrations/docker_daemon
 [3]: https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters
 {{% /tab %}}
 {{< /tabs >}}
@@ -108,6 +108,31 @@ For more information about activating Log integrations view the [Documentation][
 
 Once the Datadog Agent is up and running, we will begin collecting the data exposed in container logs across your entire environment. This will be accessible to you from the Live Containers side panel view immediately. 
 
+## Container Logs
+
+View streaming logs for any container reporting logs -- like `docker logs -f` or `kubectl logs -f` in the app! 
+
+Click any container in the table to inspect it.  Click the “logs” tab in this panel to see real-time log data from [Live Tail][6] or indexed logs for any time in the past.
+
+{{< img src="graphing/infrastructure/livecontainers/accessingsidepanel.png" alt="Logs Sidepanel" responsive="true" style="width:100%;">}}
+
+
+### Live Tail
+With Live Tail, all container logs will be streamed.  “Live” corresponds to a trailing 15-minute period for metrics, and pausing the stream will show the time selector switch to `Past 15 minutes`.  
+
+Pausing the stream is an important feature that allows you to easily read logs that are quickly being written -- unpause to continue streaming.  Streaming logs are not persisted, and entering a new search or refreshing the page will clear the stream.
+
+Streaming logs can be searched with simple string matching, and for those lines that you are indexing, they can be searched by tag.  For more details about Live Tail, see the [Live Tail documentation][6].
+{{< img src="graphing/infrastructure/livecontainers/livecontainerlogssidepanel.gif" alt="Preview Logs Sidepanel" responsive="true" style="width:100%;">}}
+
+### Indexed Logs
+By selecting a period of 1-hour or longer, you can see logs that you have chosen to index and persist.  Indexing is a powerful feature that allows you to filter your logs using tags and facets. 
+
+For example, to search for logs with an `Error` status, type `status:error` into the search box. 
+
+Autocompletion can help you locate the particular tag that you want. Key attributes about your logs are already stored in tags, which enables you to search, filter, and aggregate as needed.
+
+{{< img src="graphing/infrastructure/livecontainers/errorlogs.gif" alt="Preview Logs Sidepanel" responsive="true" style="width:100%;">}}
 
 
 ## Searching, Filtering, and Pivoting
@@ -130,7 +155,7 @@ Use parentheses to group operators together. For example, `(NOT (elasticsearch O
 
 ### Tagging
 
-Containers are [tagged][6] with all existing host-level tags, as well as with metadata associated with individual containers.
+Containers are [tagged][7] with all existing host-level tags, as well as with metadata associated with individual containers.
 
 All containers are tagged by `image_name`, including integrations with popular orchestrators, such as [ECS][4] and [Kubernetes][3], which provide further container-level tags. Additionally, each container is decorated with Docker, ECS, or Kubernetes icons so you can tell which are being orchestrated at a glance.
 
@@ -184,31 +209,6 @@ The query at the top of the scatter plot analytic allows you to control your sca
 
 {{< img src="graphing/infrastructure/livecontainers/scatterplot.png" alt="scatterplot" responsive="true" style="width:80%;">}}
 
-## Container Logs
-
-View streaming logs for any container reporting logs -- like `docker logs -f` or `kubectl logs -f` in the app! 
-
-Click any container in the table to inspect it.  Click the “logs” tab in this panel to see real-time log data from [Live Tail][7] or indexed logs for any time in the past.
-
-{{< img src="graphing/infrastructure/livecontainers/accessingsidepanel.png" alt="Logs Sidepanel" responsive="true" style="width:100%;">}}
-
-
-### Live Tail
-With Live Tail, all container logs will be streamed.  “Live” corresponds to a trailing 15-minute period for metrics, and pausing the stream will show the time selector switch to `Past 15 minutes`.  
-
-Pausing the stream is an important feature that allows you to easily read logs that are quickly being written -- unpause to continue streaming.  Streaming logs are not persisted, and entering a new search or refreshing the page will clear the stream.
-
-Streaming logs can be searched with simple string matching, and for those lines that you are indexing, they can be searched by tag.  For more details about Live Tail, see the [Live Tail documentation][7].
-{{< img src="graphing/infrastructure/livecontainers/livecontainerlogssidepanel.gif" alt="Preview Logs Sidepanel" responsive="true" style="width:100%;">}}
-
-### Indexed Logs
-By selecting a period of 1-hour or longer, you can see logs that you have chosen to index and persist.  Indexing is a powerful feature that allows you to filter your logs using tags and facets. 
-
-For example, to search for logs with an `Error` status, type `status:error` into the search box. 
-
-Autocompletion can help you locate the particular tag that you want. Key attributes about your logs are already stored in tags, which enables you to search, filter, and aggregate as needed.
-
-{{< img src="graphing/infrastructure/livecontainers/errorlogs.gif" alt="Preview Logs Sidepanel" responsive="true" style="width:100%;">}}
 
 ## Real-time monitoring
 
@@ -255,6 +255,6 @@ ac_include: ["name:frontend.*"]
 [3]: /integrations/kubernetes
 [4]: /integrations/amazon_ecs
 [5]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=hostinstallation#activate-log-integrations
-[6]: /tagging
-[7]: https://docs.datadoghq.com/logs/live_tail
+[6]: https://docs.datadoghq.com/logs/live_tail
+[7]: /tagging
 [8]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237
