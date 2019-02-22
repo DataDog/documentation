@@ -40,15 +40,6 @@ Display a custom title for your widget by activating the `Show a Title` check bo
 
 Optionally define its size and alignment.
 
-## FAQ
-### What does "Take the X value from the displayed timeframe" mean?
-
-{{< img src="graphing/widgets/query_value_widget.png" alt="query_value_widget" responsive="true" style="width:50%;">}}
-
-The query value widget only displays one value—unlike, for example, a timeseries, which displays several points.
-
-If you are viewing a timeseries and you are currently displaying the past hour, this button allows you to display the `avg` / `max` / `min` / `sum` / `last value` of ALL points that are rendered during that 1 hour range timeframe—depending on the aggregation chosen above.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
