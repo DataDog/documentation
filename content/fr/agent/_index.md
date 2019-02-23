@@ -81,7 +81,7 @@ Dans la version 6, DogStatsD est une implémentation Golang du daemon d'agréga
 [2]: https://github.com/etsy/statsd
 [3]: /fr/developers/dogstatsd
 {{% /tab %}}
-{{% tab "Agent v5" %}}
+{{% tab "Agent v5" %}}
 
 {{< img src="agent/agent5architecture.jpg" alt="Architecture de l'Agent v5" responsive="true">}}
 
@@ -167,7 +167,7 @@ Pour exécuter une sous-commande, commencez par invoquer le binaire de l'Agent 
 
 Certaines options disposent de leur propre ensemble de flags et d'options détaillés dans un message d'aide. Par exemple, pour découvrir comment utiliser la sous-commande `check`, exécutez :
 ```
-<agent_binary> check --help
+<agent_binaire> check --help
 ```
 
 ## L'interface graphique
