@@ -35,9 +35,9 @@ Vous pourrez rapidement créer des [screenboards][11] personnalisés qui combine
 
 ## Surveillance
 
-Une fois que vos graphiques ont mis en évidence des problèmes potentiels, définissez des conditions d'alerte sur vos métriques à l'aide des [monitors][15]. Par défaut, vous [recevrez des e-mails][16] lorsque les alertes se déclenchent, mais vous pouvez également configurer l'intégration [Slack][17] ou [HipChat][18] pour recevoir des notifications spéciales dans l'application.
+Une fois que vos graphiques ont mis en évidence des problèmes potentiels, définissez des conditions d'alerte sur vos métriques à l'aide des [monitors][15]. Par défaut, vous [recevrez des e-mails][16] lorsque les alertes se déclenchent, mais vous pouvez également configurer l'intégration [Slack][17] pour recevoir des notifications spéciales dans l'application.
 
-Lorsque vous êtes conscient d'un problème récurrent, [désactivez les alertes associées][19]. Avant d'arrêter un service afin d'effectuer une maintenance, [planifiez un downtime][19] afin de ne pas recevoir d'alertes inutiles. Lorsque vous ne pouvez pas définir une condition d'alerte intéressante pour un host, un événement, une métrique ou un service, créez un [monitor composite][20].
+Lorsque vous êtes conscient d'un problème récurrent, [désactivez les alertes associées][18]. Avant d'arrêter un service afin d'effectuer une maintenance, [planifiez un downtime][18] afin de ne pas recevoir d'alertes inutiles. Lorsque vous ne pouvez pas définir une condition d'alerte intéressante pour un host, un événement, une métrique ou un service, créez un [monitor composite][19].
 
 {{< partial name="support/support.html" >}}
 
@@ -58,6 +58,5 @@ Lorsque vous êtes conscient d'un problème récurrent, [désactivez les alertes
 [15]: /fr/monitors
 [16]: /fr/monitors/notifications
 [17]: /fr/integrations/slack
-[18]: /fr/integrations/hipchat
-[19]: /fr/monitors/downtimes
-[20]: /fr/monitors/monitor_types/composite
+[18]: /fr/monitors/downtimes
+[19]: /fr/monitors/monitor_types/composite

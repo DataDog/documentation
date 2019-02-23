@@ -54,7 +54,7 @@ Lorsque vous ouvrez un notebook existant, ses cellules sont « fermées ». Po
 Pour insérer, dupliquer ou supprimer des cellules, cliquez sur l'icône en forme d'engrenage qui apparaît à gauche du numéro de cellule, ou utilisez un raccourci clavier. Accédez à liste de tous les raccourcis clavier en cliquant sur le bouton du clavier dans l'en-tête du notebook.
 Les cellules peuvent également être réorganisées en utilisant des raccourcis clavier.
 
-### Modification des intervalles de temps 
+### Modification des intervalles de temps
 
 Un indicateur de durée apparaît dans le coin supérieur droit de chaque cellule de graphique. Si la cellule est associée à l'intervalle de temps global, elle indique « Global Time ». Dans le cas contraire, elle précise l'intervalle de temps indépendant de la cellule.
 

@@ -154,7 +154,7 @@ Vous pouvez assigner des tags de host dans l'IU depuis la page relative à la [H
 
 [1]: /fr/graphing/infrastructure/hostmap
 {{% /tab %}}
-{{% tab "Liste d'infrastructures" %}}
+{{% tab "Liste des infrastructures" %}}
 
 Vous pouvez assigner des tags de host dans l'IU depuis la page relative à la [liste d'infrastructures][1]. Cliquez sur un host pour le superposer sur la droite de la page. Depuis la section *User*, cliquez ensuite sur le bouton **Edit Tags**. Saisissez les tags sous forme de liste de valeurs séparées par des virgules, puis cliquez sur **Save Tags**. Remarque : l'application des modifications de tags de métrique effectuées via l'IU peut prendre jusqu'à 30 minutes.
 

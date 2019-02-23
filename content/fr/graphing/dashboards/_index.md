@@ -10,7 +10,7 @@ further_reading:
   - link: graphing/dashboards/shared_graph
     tag: Documentation
     text: Partager vos graphiques en dehors de Datadog
-  - link: graphing/dashboards/widgets
+  - link: graphing/widgets
     tag: Documentation
     text: Découvrir tous les widgets disponibles pour votre dashboard
 ---
