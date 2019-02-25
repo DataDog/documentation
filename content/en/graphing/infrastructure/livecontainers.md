@@ -64,7 +64,7 @@ config_providers:
 {{% /tab %}}
 
 {{% tab "Kubernetes Installation" %}}
-In the dd-agent.yaml manifest used to create the Daemonset, add the following environmental variables, volume mount, and volume:
+In the `dd-agent.yaml` manifest used to create the DaemonSet, add the following environment variables, volume mount, and volume:
 
 ```
 # Set DD_LOGS_ENABLED and DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL variable to true
