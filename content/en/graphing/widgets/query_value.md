@@ -6,7 +6,7 @@ further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"
   text: "Screenboard"
-- link: "graphing/dashboards/graphing_json/"
+- link: "graphing/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---

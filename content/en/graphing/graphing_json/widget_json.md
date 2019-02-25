@@ -2,10 +2,10 @@
 title: Widget JSON schema
 kind: documentation
 further_reading:
-- link: "graphing/dashboards/graphing_json/"
+- link: "graphing/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
-- link: "graphing/dashboards/graphing_json/request_json"
+- link: "graphing/graphing_json/request_json"
   tag: "Documentation"
   text: "Request JSON schema"
 ---

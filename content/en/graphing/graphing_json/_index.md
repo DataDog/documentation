@@ -5,12 +5,11 @@ disable_toc: true
 aliases:
   - /graphingjson/
   - /graphing/miscellaneous/graphingjson
-  - /graphing/graphing_json
 further_reading:
-- link: "graphing/dashboards/graphing_json/widget_json"
+- link: "graphing/graphing_json/widget_json"
   tag: "Documentation"
   text: "Widget JSON schema"
-- link: "graphing/dashboards/graphing_json/request_json"
+- link: "graphing/graphing_json/request_json"
   tag: "Documentation"
   text: "Request JSON schema"
 ---
@@ -75,7 +74,7 @@ TEMPLATE_VARIABLE_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/dashboards/timboard
+[1]: /graphing/dashboards/timeboard
 [2]: /api/#dashboards
 [3]: /graphing/graphing_json/widget_json
 [4]: /graphing/dashboards/template_variables

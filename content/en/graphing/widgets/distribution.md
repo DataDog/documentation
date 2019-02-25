@@ -6,7 +6,7 @@ further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"
   text: "Timeboards"
-- link: "graphing/dashboards/graphing_json/"
+- link: "graphing/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
 ---
