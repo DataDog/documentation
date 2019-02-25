@@ -1,30 +1,22 @@
 ---
-title: as_count() monitor evaluation changes
+title: as_count() monitor evaluation with division
 kind: faq
 ---
 
 ## Overview
 
-Monitors that have the `as_count` modifier use a separate evaluation path than other monitors. In certain use cases this can result in unexpected behavior. We intend to migrate all monitors with `as_count` to the same evaluation path as other monitors, but this doc explains the underlying issue and will guide you through the migration process.
+Monitors involving arithmetic division and at least 1 `as_count` modifier use a separate evaluation path than other monitors. This impacts queries of the format `A.as_count() OP B.as_count()`, where `OP` is division (`/`). Queries where OP is `+`, `-` or `*` are not impacted. 
 
-Let's call the current evaluation path for `as_count` monitors `current_eval_path` and the new one `new_eval_path`.
+## Example
 
-The difference between those two evaluation paths is that complex monitor queries, especially those that have division, may produce **unintended results** depending on the time aggregation function. Let's say that you have 2 metrics, *A* and *B*:
+Let's say that you have 2 metrics, *A* and *B*:
 
 * *A* has datapoints (a0, a1, ..., ax)
 * *B* has datapoints (b0, b1, ..., bx)
 
-#### Why ?
+Let's call now the current evaluation path for `as_count` monitors with division queries `as_count_eval_path` and all other monitors evaluation path `classic_eval_path`.
 
-Many of our customers need to be alerted when the total global error rate over a certain time-period is too high.
-
-Normal timeseries graphs compute the point by point ratio so it wasn't possible to accommodate such an important use case as what's my ratio of request error. Thus an exception has been made for monitors involving arithmetic and at least 1 `as_count` modifier.
-
-This impacts queries of the format `A.as_count() OP B.as_count()`, where OP is division (`/`). Queries where OP is `+`, `-` or `*` are not impacted.
-
-## Example
-
-Suppose we wish to monitor an error rate, which we calculate as:
+Suppose Datadog monitors an error rate, which is calculated as:
 
 `sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count()`
 
@@ -60,22 +52,22 @@ For the 5 min timeframe there are 5 timeseries points (zeros excluded):
 
 Here is the result of the evaluation depending of the path:
 
-| Path | Behavior | Expanded expression | Result|
-|:--------|:--------|:-----|:-----|
-|**`current_eval_path`** | Aggregation function applied *before* evaluation | **(1+2+...+5)/(5+5+...+5)** | **0.6**|
-|**`new_eval_path`** | Aggregation function applied *after* evaluation|**(1/5 + 2/5 + ... + 5/5)**|**3**|
+| Path                    | Behavior                                         | Expanded expression         | Result  |
+| :--------               | :--------                                        | :-----                      | :-----  |
+| **`as_count_eval_path`** | Aggregation function applied *before* evaluation | **(1+2+...+5)/(5+5+...+5)** | **0.6** |
+| **`classic_eval_path`**     | Aggregation function applied *after* evaluation  | **(1/5 + 2/5 + ... + 5/5)** | **3**   |
 
 Notice that the results are completely different. Remember that each query consists of an underlying time-series, which we refer to as (a0, a1, ..., ).:
 
 | Path | Behavior | Expanded expression |
 |:--------|:--------|:--------|
-|**`current_eval_path`** | Aggregation function applied *before* evaluation | **(a0 + a1 + ... + a4)/(b0 + b1 + ... + b4)** |
-|**`new_eval_path`** | Aggregation function applied *after* evaluation |**(a0/b0 + a1/b2 + ... + a4/b4)**|
+|**`as_count_eval_path`** | Aggregation function applied *before* evaluation | **(a0 + a1 + ... + a4)/(b0 + b1 + ... + b4)** |
+|**`classic_eval_path`** | Aggregation function applied *after* evaluation |**(a0/b0 + a1/b2 + ... + a4/b4)**|
 
 
-### Sparse metric problem
+### Sparse metric
 
-In case of sparse or *0* metrics in the denominator some results are rejected in case of `new_eval_path`.
+In case of sparse or *0* metrics in the denominator some results are rejected in case of `classic_eval_path`.
 
 Let's have following metrics:
 
@@ -84,26 +76,26 @@ Let's have following metrics:
 
 Here is the behavior difference:
 
-| Path | Evaluation of `A/B` | Result |
-|:------|:------|:-------|
-| `current_eval_path` | (10 + 10 + 10) / (0 + 1 + NaN) | 30 |
-| `new_eval_path` | 10/0 + 10/1 + 10/NaN | 10 |
+| Path                 | Evaluation of `A/B`            | Result   |
+| :------              | :------                        | :------- |
+| `as_count_eval_path` | (10 + 10 + 10) / (0 + 1 + NaN) | 30       |
+| `classic_eval_path`  | 10/0 + 10/1 + 10/NaN           | 10       |
 
 Note that both evaluations are correct -- it depends on your intention.
 
 ## Workaround
 
-Since this special behavior is tied to the `as_count` modifier, we encourage replacing `as_count()` with the `as_rate()` operator to make your intended query explicit. **Reminder: this replacement should only be done for queries with division.**
+Since this special behavior is tied to the `as_count` modifier, replace `as_count()` with the `as_rate()` operator to make your intended query explicit. **Reminder: this replacement should only be done for queries with division.**
 
 *Example:* Suppose you wish to monitor the error rate of a service:
 
-Suppose you want to be alerted when the error rate is above 50% in total during the past 5 min. You might have a query like:
+If you want to be alerted when the error rate is above 50% in total during the past 5 min. You might have this query like:
 `sum(last_5m):sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count() > 0.5 `
 
 To correctly rewrite it in the explicit format, the query can be rewritten like:
 
 `sum(last_5m): ( default(sum:requests.error{*}.as_rate(),0) / sum:requests.total{*}.as_rate() )`
 
-[Reach out to the Datadog support team][1] if you have any questions regarding these changes.
+[Reach out to the Datadog support team][1] if you have any questions regarding these logic.
 
 [1]: /help
