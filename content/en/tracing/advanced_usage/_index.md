@@ -437,7 +437,7 @@ Enable runtime metric collection in the Tracing Client to gain additional insigh
 
 ### Automatic Configuration
 
-JVM runtime metric collection can be enabled with one configuration parameter in the Tracing Client:
+JVM Metric collection can be enabled with one configuration parameter in the Tracing Client:
 
 * System Property: `-Ddd.jmxfetch.enabled=true`
 * Environment Variable: `DD_JMXFETCH_ENABLED=true`
@@ -450,7 +450,7 @@ JVM Metrics can now be viewed in correlation with your Java Services, you can ge
 
 ### Data Collected
 
-The following metrics will be collected by default after enabling JMXFetch.
+The following metrics will be collected by default after enabling JVM Metrics.
 
 {{< get-metrics-from-git "java" >}}
 
