@@ -72,7 +72,7 @@ If your `requests` parameter has multiple requests, the widget displays all of t
 ]
 ```
 
-## Widget Options 
+## Widget definition options 
 
 ### Y-Axis schema
 
@@ -100,16 +100,15 @@ AXIS_SCHEMA = {
 
 | Parameter      | Type    | Description                                                                                          | Default  |
 | ------         | -----   | --------                                                                                             | ----     |
-| `label`        | string  |                                                                                                      |          |
+| `label`        | string  | Label to display on the Y-scale.                                                                     |          |
 | `scale`        | string  | Specifies the scale type. Possible values: `linear`, `log`, `sqrt`, `pow##` (eg. `pow2`, `pow0.5`..) | `linear` |
 | `min`          | string  | Specifies minimum value to show on y-axis. It takes a number, or `auto` for default behavior.        | `auto`   |
 | `max`          | string  | Specifies the maximum value to show on y-axis. It takes a number, or `auto` for default behavior.    | `auto`   |
 | `include_zero` | boolean |                                                                                                      |          |
 
-
 ### Events schema
 
-You can overlay any event from Datadog. The general format is:
+You can overlay any event from Datadog. The general `events` format is:
 
 ```
 EVENTS_SCHEMA = {
@@ -149,9 +148,9 @@ or if you're looking to display all errors:
 ]
 ```
 
-## Markers schema
+### Markers schema
 
-Markers allow you to 
+Markers allow you to add a visual conditional formating for your graphs, the `markers` format is:
 
 ```
 MARKERS_SCHEMA = {
@@ -169,14 +168,50 @@ MARKERS_SCHEMA = {
 }
 ```
 
-| Parameter      | Type   | Description | Default |
-| ------         | -----  | --------    | ----    |
-| `value`        | string |             |         |
-| `display_type` | string |             |         |
-| `label`        | string |             |         |
+| Parameter      | Type   | Description                                                                                                                | Default |
+| ------         | -----  | --------                                                                                                                   | ----    |
+| `value`        | string | Value to apply. Can be a single value `y = 15` or a range of value `0 < y < 10`                                                                                                              |         |
+| `display_type` | string | Combination between: <br>- A severity `error`, `warning`, `ok`, or `info` <br> - A line type: `dashed`, `solid`, or `bold` |         |
+| `label`        | string | Label to display over the marker.                                                                                          |         |
 
+#### Example:
 
-## Conditional format schema
+The following markers:
+
+{{< img src="graphing/graphing_json/markers.png" alt="Markers" responsive="true" style="width:80%;">}}
+
+Are applied with the following configuration:
+```
+{ (...)
+  "widgets": [
+    {
+      "definition": {
+        "markers": [
+          {
+            "display_type": "ok dashed",
+            "label": "OK",
+            "value": "0 < y < 50"
+          },
+          {
+            "display_type": "error dashed",
+            "label": "ALERT",
+            "value": "y > 80"
+          },
+          {
+            "display_type": "warning dashed",
+            "label": "WARNING",
+            "value": "50 < y < 80"
+          }
+        ],
+        "requests": [(...)],
+        "title": "CPU with markers",
+        "type": "timeseries"
+      },
+(...)
+},
+```
+
+### Conditional format schema
 
 ```
 CONDITIONAL_FORMATS_SCHEMA = {
@@ -198,14 +233,14 @@ CONDITIONAL_FORMATS_SCHEMA = {
 }
 ```
 
-| Parameter    | Type   | Description                                          | Default |
-| ------       | -----  | --------                                             | ----    |
-| `comparator` | enum   | Comparator to apply between: `>`, `>=`, `<`, or `<=` |         |
-| `value`      | double | Value for the comparator.                            |         |
-| `palette` | string | Palette of color to apply, to choose between `blue`, `custom_bg`, `custom_image`, `custom_text`, `gray_on_white`, `green`, `green_on_white`, `grey`, `orange`, `red`, `red_on_white`, `white_on_gray`, `white_on_green`, `white_on_red`, `white_on_yellow`, or `yellow_on_white` |
-| `custom_bg_color`| string | ||
-| `custom_fg_color`| string | ||
-| `image_url` | string | Displays an image as the background | | 
+| Parameter         | Type   | Description                                                                                                                                                                                                                                                                      | Default |
+| ------            | -----  | --------                                                                                                                                                                                                                                                                         | ----    |
+| `comparator`      | enum   | Comparator to apply between: `>`, `>=`, `<`, or `<=`                                                                                                                                                                                                                             |         |
+| `value`           | double | Value for the comparator.                                                                                                                                                                                                                                                        |         |
+| `palette`         | string | Palette of color to apply, to choose between `blue`, `custom_bg`, `custom_image`, `custom_text`, `gray_on_white`, `green`, `green_on_white`, `grey`, `orange`, `red`, `red_on_white`, `white_on_gray`, `white_on_green`, `white_on_red`, `white_on_yellow`, or `yellow_on_white` |         |
+| `custom_bg_color` | string | Palette of colors to apply to the background, same values available as palette.                                                                                                                                                                                                  |         |
+| `custom_fg_color` | string | Palette of colors to apply to the background, same values available as palette.                                                                                                                                                                                                  |         |
+| `image_url`       | string | Displays an image as the background.                                                                                                                                                                                                                                             |         |
 
 #### Filtering
 
