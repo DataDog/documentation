@@ -22,6 +22,7 @@ languages:
     #languageCode: "en-US"
     disclaimer: ""
     weight: 0
+    contentDir: content/en
     menu:
 
 # Home Page
@@ -204,11 +205,18 @@ languages:
           weight: 180
           parent: kubernetes
 
+        ## Autodiscovery
         - identifier: autodiscovery
           name: "Autodiscovery"
           url: "agent/autodiscovery"
           weight: 20
           parent: menu_references_agent
+        - identifier: autodiscovery_clusterchecks
+          name: "Cluster Checks"
+          url: "agent/autodiscovery/clusterchecks"
+          weight: 200
+          parent: autodiscovery
+
         - identifier: proxy
           name: "Proxy"
           url: "agent/proxy"
@@ -303,11 +311,6 @@ languages:
           name: "Shared Graphs"
           url: "graphing/dashboards/shared_graph/"
           weight: 130
-          parent: customnav_graphingnav_dashboards
-        - identifier: customnav_graphingnav_widgets
-          name: "Widgets"
-          url: "graphing/dashboards/widgets/"
-          weight: 140
           parent: customnav_graphingnav_dashboards
 
         # Metrics
@@ -441,6 +444,11 @@ languages:
           weight: 70
           parent: menu_references_graphing
 
+        - identifier: customnav_graphingnav_widget
+          name: "Widgets"
+          url: "graphing/widgets/"
+          weight: 80
+          parent: menu_references_graphing
        # - identifier: customnav_graphingnav_faq
        #   name: "FAQ"
        #   url: "graphing/faq/"
@@ -1115,6 +1123,11 @@ languages:
           url: "developers/integrations/legacy"
           weight: 903
           parent: customnav_integrationsnav_new_integration
+        - identifier: customnav_integrationsnav_new_guides
+          name: "Guides"
+          url: "developers/guide/"
+          weight: 95
+          parent: menu_references_developers
         #- identifier: customnav_developersnav_faq
         #  name: "FAQ"
         #  url: "developers/faq/"
@@ -1198,6 +1211,11 @@ languages:
           url: "account_management/saml/okta"
           weight: 550
           parent: customnav_accountmanagementnav_saml
+        - identifier: saml_safenet
+          name: "SafeNet"
+          url: "account_management/saml/safenet"
+          weight: 560
+          parent: customnav_accountmanagementnav_saml
 
         # RBAC subnav
         - identifier: rbac_log_management
@@ -1275,6 +1293,7 @@ languages:
   fr:
     disclaimer: "Cette page n'est pas encore disponible en Français, nous travaillons actuellement sur sa traduction.<br> Si vous avez des questions ou des retours sur ce projet de traduction, <a href=\"https://docs.datadoghq.com/fr/help/\">contactez-nous!</a>"
     weight: 0
+    contentDir: content/fr
     menu:
       # Home Page
       main:
@@ -1569,11 +1588,6 @@ languages:
           url: "graphing/dashboards/shared_graph/"
           weight: 130
           parent: customnav_graphingnav_dashboards
-        - identifier: customnav_graphingnav_widgets
-          name: "Widgets"
-          url: "graphing/dashboards/widgets/"
-          weight: 140
-          parent: customnav_graphingnav_dashboards
 
         # Metrics
         - identifier: customnav_graphingnav_metrics
@@ -1695,6 +1709,12 @@ languages:
           name: "Graphing JSON"
           url: "graphing/graphing_json/"
           weight: 70
+          parent: menu_references_graphing
+
+        - identifier: customnav_graphingnav_widget
+          name: "Widgets"
+          url: "graphing/widgets/"
+          weight: 80
           parent: menu_references_graphing
        # - identifier: customnav_graphingnav_faq
        #   name: "FAQ"
@@ -2465,6 +2485,11 @@ languages:
           name: "Okta"
           url: "account_management/saml/okta"
           weight: 550
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_safenet
+          name: "SafeNet"
+          url: "account_management/saml/safenet"
+          weight: 560
           parent: customnav_accountmanagementnav_saml
 
         - identifier: customnav_accountmanagementnav_multi_organization
