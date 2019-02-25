@@ -213,7 +213,7 @@ While actively working with the containers page, metrics are collected at a 2-se
 
 ## Include/Exclude containers
 
-*Please note that Live Containers is not metered.  There is no reason to exclude containers for billing purposes.*
+*Note that Live Containers is not metered. Including or excluding containers does not affect billing.*
 
 It is possible to include and/or exclude containers from real-time collection:
 
