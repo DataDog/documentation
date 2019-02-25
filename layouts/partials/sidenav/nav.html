@@ -1,0 +1,204 @@
+{{ $dot := . }}
+{{ $ctx := . }}
+
+<!-- get lang specific data file -->
+{{ $.Scratch.Set "data" "" }}
+{{ if ne $dot.Page.Lang "en"}}
+    {{ if (fileExists (print "data/partials/mainnav." $dot.Page.Lang ".yaml")) }}
+      {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "mainnav." $dot.Page.Lang)) }}
+    {{ else }}
+      {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.mainnav }}
+    {{ end }}
+{{ else }}
+    {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.mainnav }}
+{{ end }}
+{{ $datafile := ($.Scratch.Get "data") }}
+
+<ul class="list-unstyled">
+    <!--
+      Recursive version was slow in hugo, that's why you may see repetition below
+
+      We need to pre check whats .active and .open before the real loop occurs
+      because parents change based on children
+
+      Rules:
+        A:
+          if 2 links point to the same place we should favor the one that url subsections matches depth
+            e.g if current url is /agent/docker/
+          - should highlight "Agent -> Docker"
+          - not highlight "Agent -> Basic Agent Usage -> Docker"
+
+        B:
+          if link exists but is deeper than nav shows e.g on a faq page
+          We need to highlight the path to that page.
+
+        C:
+          if links begin with # we should handle them
+    -->
+
+    <!-- For Rule (A) -->
+    {{ $plink := replace $dot.Page.RelPermalink (print "/" $ctx.Site.Language.Lang) "" }}
+    {{ $spacedWords := (replace $plink "/" " ") }}
+    {{ $currentUrlPartsLength := countwords $spacedWords }}
+    {{ $url_part1 := index (split $plink "/") 1 }}
+    {{ $url_part2 := index (split $plink "/") 2 }}
+    {{ $url_part3 := index (split $plink "/") 3 }}
+
+    <!-- Loop over main nav top level items -->
+    {{ range $i1, $nav := $datafile.main }}
+
+      <!-- set defaults -->
+      {{ $.Scratch.Set (print "mainnav_active_" $i1) false }}
+      {{ $.Scratch.Set (print "mainnav_open_" $i1) false }}
+
+      <!-- set parts of url for comparison -->
+      {{ $mainnav_part1 := index (split ($nav.url | relLangURL) "/") 1 }}
+
+      <!-- normalize url for comparison -->
+      {{ if in $nav.url "#" }}
+          {{ if eq (slicestr $nav.url 0 1) "#" }}
+              {{ $ctx.Scratch.Set "nav_url" (print $nav.url) }}
+          {{ else }}
+              {{ $ctx.Scratch.Set "nav_url" (print ($nav.url | absLangURL) "#" (index (split $nav.url "#") 1)) }}
+          {{ end }}
+      {{ else }}
+          {{ if eq (substr $nav.url -1 1) "/" }}
+              {{ $.Scratch.Set "nav_url" (print ($nav.url | absLangURL)) }}
+          {{ else }}
+              {{ $.Scratch.Set "nav_url" (print ($nav.url | absLangURL) "/" ) }}
+          {{ end }}
+      {{ end }}
+
+      <!-- lets store a nav_url too incase we want to output it specifically -->
+      {{ $.Scratch.Set (print "mainnav_url_" $i1) ($.Scratch.Get "nav_url") }}
+
+      <!-- do the comparison, set open and active accordingly -->
+      {{ if or (eq (print $dot.Page.Permalink) (print (($.Scratch.Get "nav_url") | absLangURL))) (eq $mainnav_part1 $url_part1) }}
+        {{ $.Scratch.Set (print "mainnav_open_" $i1) true }}
+        {{ $.Scratch.Set (print "mainnav_active_" $i1) true }}
+      {{ end }}
+
+      <!-- loop over children -->
+      {{ range $i2, $subnav := $nav.children }}
+
+        <!-- set defaults -->
+        {{ $.Scratch.Set (print "subnav_active_" $i1 "_" $i2) false }}
+        {{ $.Scratch.Set (print "subnav_open_" $i1 "_" $i2) false }}
+
+        <!-- set parts of url for comparison -->
+        {{ $subnav_part1 := index (split ($subnav.url | relLangURL) "/") 1 }}
+        {{ $subnav_part2 := index (split ($subnav.url | relLangURL) "/") 2 }}
+
+        <!-- normalize url for comparison -->
+        {{ if in $subnav.url "#" }}
+            {{ if eq (slicestr $subnav.url 0 1) "#" }}
+                {{ $ctx.Scratch.Set "subnav_url" (print $subnav.url) }}
+            {{ else }}
+                {{ $ctx.Scratch.Set "subnav_url" (print ($subnav.url | absLangURL) "#" (index (split $subnav.url "#") 1)) }}
+            {{ end }}
+        {{ else }}
+            {{ if eq (substr $subnav.url -1 1) "/" }}
+                {{ $.Scratch.Set "subnav_url" (print ($subnav.url | absLangURL)) }}
+            {{ else }}
+                {{ $.Scratch.Set "subnav_url" (print ($subnav.url | absLangURL) "/" ) }}
+            {{ end }}
+        {{ end }}
+
+        <!-- lets store a nav_url too incase we want to output it specifically -->
+        {{ $.Scratch.Set (print "subnav_url_" $i1 "_" $i2) ($.Scratch.Get "subnav_url") }}
+
+        <!-- do the comparison, set open and active accordingly -->
+        {{ if or (and (eq (print $dot.Page.Permalink) (print (($.Scratch.Get "subnav_url") | absLangURL))) (eq $currentUrlPartsLength 2))  (and (eq $subnav_part1 $url_part1) (eq $subnav_part2 $url_part2)) }}
+          {{ $.Scratch.Set (print "subnav_open_" $i1 "_" $i2) true }}
+          {{ $.Scratch.Set (print "subnav_active_" $i1 "_" $i2) true }}
+          <!-- set parent open too -->
+          {{ $.Scratch.Set (print "mainnav_open_" $i1) true }}
+        {{ end }}
+
+        <!-- loop over children -->
+        {{ range $i3, $subnav2 := $subnav.children }}
+
+          <!-- set defaults -->
+          {{ $.Scratch.Set (print "subnav2_active_" $i1 "_" $i2 "_" $i3) false }}
+          {{ $.Scratch.Set (print "subnav2_open_" $i1 "_" $i2 "_" $i3) false }}
+
+          <!-- normalize url for comparison -->
+          {{ if in $subnav2.url "#" }}
+              {{ if eq (slicestr $subnav2.url 0 1) "#" }}
+                  {{ $ctx.Scratch.Set "subnav2_url" (print $subnav2.url) }}
+              {{ else }}
+                  {{ $ctx.Scratch.Set "subnav2_url" (print ($subnav2.url | absLangURL) "#" (index (split $subnav2.url "#") 1)) }}
+              {{ end }}
+          {{ else }}
+              {{ if eq (substr $subnav2.url -1 1) "/" }}
+                  {{ $.Scratch.Set "subnav2_url" (print ($subnav2.url | absLangURL)) }}
+              {{ else }}
+                  {{ $.Scratch.Set "subnav2_url" (print ($subnav2.url | absLangURL) "/" ) }}
+              {{ end }}
+          {{ end }}
+
+          <!-- lets store a nav_url too incase we want to output it specifically -->
+          {{ $.Scratch.Set (print "subnav2_url_" $i1 "_" $i2 "_" $i3) ($.Scratch.Get "subnav2_url") }}
+
+          <!-- do the comparison, set open and active accordingly -->
+          {{ if (and (eq (print $dot.Page.Permalink) (print (($.Scratch.Get "subnav2_url") | absLangURL))) (eq $currentUrlPartsLength 3) ) }}
+            {{ $.Scratch.Set (print "subnav2_open_" $i1 "_" $i2 "_" $i3) true }}
+            {{ $.Scratch.Set (print "subnav2_active_" $i1 "_" $i2 "_" $i3) true }}
+            <!-- set parents open too -->
+            {{ $.Scratch.Set (print "subnav_open_" $i1 "_" $i2) true }}
+            {{ $.Scratch.Set (print "mainnav_open_" $i1) true }}
+          {{ end }}
+
+        {{ end }}
+      {{ end }}
+    {{ end }}
+
+
+    <!-- With this data built up lets do the real loop and output nav -->
+    {{ range $i1, $nav := $datafile.main }}
+      <li {{ if $.Scratch.Get (print "mainnav_open_" $i1) }}class="open"{{end}}>
+
+        <a href="{{ $.Scratch.Get (print "mainnav_url_" $i1) }}" {{ if $.Scratch.Get (print "mainnav_active_" $i1) }}class="active"{{ end }}>
+          {{ if $nav.pre }}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" ($nav.pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" ($nav.pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21" "disable_lazy" "true") -}}{{ end }} <span>{{ $nav.name }}</span>
+        </a>
+
+        <!-- Level 1 subnav -->
+        {{ if $nav.children }}
+          <ul class="list-unstyled">
+            {{ range $i2, $subnav := $nav.children }}
+
+              <li {{ if $.Scratch.Get (print "subnav_open_" $i1 "_" $i2) }}class="open"{{ end }}>
+                <a href="{{ $.Scratch.Get (print "subnav_url_" $i1 "_" $i2) }}" {{ if $.Scratch.Get (print "subnav_active_" $i1 "_" $i2) }}class="active"{{ end }}>{{ $subnav.name }}</a>
+
+                <!-- Level 2 subnav -->
+                {{ if $subnav.children }}
+                <ul class="list-unstyled">
+                  {{ range $i3, $subnav2 := $subnav.children }}
+
+                    <li {{ if $.Scratch.Get (print "subnav2_open_" $i1 "_" $i2 "_" $i3)  }}class="open"{{end}}>
+                      <a href="{{ $.Scratch.Get (print "subnav2_url_" $i1 "_" $i2 "_" $i3) }}" {{ if $.Scratch.Get (print "subnav2_active_" $i1 "_" $i2 "_" $i3) }}class="active"{{ end }}>{{ $subnav2.name }}</a>
+
+                      <!-- Level 3 subnav -->
+                      {{ if $subnav2.children }}
+                      <ul class="list-unstyled">
+                        {{ range $i4, $subnav3 := $subnav2.children }}
+                          {{ $subnav3_active := (eq (print $dot.Page.Permalink) (print ($subnav3.url | absLangURL))) }}
+                          <li {{ if $.Scratch.Get (print "subnav3_open_" $i4) }}class="open"{{ end }}>
+                            <a href="{{ $subnav3.url | absLangURL }}" {{ if $.Scratch.Get (print "subnav3_active_" $i4) }}class="active"{{ end }}>{{ $subnav3.name }}</a>
+                          </li>
+                          {{ end }}
+                      </ul>
+                      {{ end }}
+
+                    </li>
+                    {{ end }}
+                </ul>
+                {{ end }}
+
+              </li>
+            {{ end }}
+          </ul>
+        {{ end }}
+      </li>
+    {{ end }}
+  </ul>

@@ -178,12 +178,14 @@ aside.sidenav {
         // 2nd level
         ul li {
           a {
+            margin-left:5px;
             font-weight:200;
             line-height:24px;
           }
 
           // 3rd level
           ul li a {
+            margin-left:5px;
             font-size:15px;
             line-height:22px;
           }

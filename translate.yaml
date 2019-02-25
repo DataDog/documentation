@@ -21,6 +21,8 @@ ignores:
   - "**/*.fr.yaml"
   - "**/*.fr.json"
   - "**/fr.json"
+  - "data/partials/mainnav.yaml"
+  - "data/partials/mainnav.fr.yaml"
 filters:
 - src: "data/integrations/*.yaml"
   template: ".translate/templates/integrations.yaml"
