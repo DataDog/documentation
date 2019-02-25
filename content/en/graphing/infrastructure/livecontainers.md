@@ -27,25 +27,24 @@ Coupled with integrations for [Docker][2], [Kubernetes][3], [ECS][4], and other 
 {{< tabs >}}
 {{% tab "Container Installation" %}}
 
-Follow these [Instructions][1] for running a Docker container that embeds the Datadog Agent, ensuring the following environment variables are set to true.
+Follow the instructions for the [Docker Agent][1], passing in the following attributes, in addition to any other custom settings as appropriate:
 
 ```
 -e DD_LOGS_ENABLED=true 
 -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true 
 ```
-**Notes**: 
 
-* To collect container information in the standard install rather than with the [Docker Agent][2], the `dd-agent` user must have permissions to access **docker.sock**.
-* Logs are indexed by default, but for customers interested only in Live Tail or desiring fine-grained controls over index [Exclusion Filters][3] can be configured for this purpose.
+**Note**: 
+
+* Logs are indexed by default, but for those interested only in Live Tail or fine-grained controls over indexes [Exclusion Filters][2] can be configured.
 
 [1]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=containerinstallation
-[2]: https://docs.datadoghq.com/integrations/docker_daemon
-[3]: https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters
+[2]: https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters
 {{% /tab %}}
 
 
 {{% tab "Host Installation" %}}
-Follow these [Instructions][1] for installing the Datadog Agent on your host, ensuring you make the following changes in your datadog.yaml file to begin log collection.
+Once the Datadog Agent is installed, enable log collection by editing the Agent main configuration file and updating the following parameters:
 
 ```
 logs_enabled: true
@@ -55,16 +54,17 @@ config_providers:
   - name: docker
     polling: true
 ```
-**Note**: 
+**Notes**: 
 
-* Logs are indexed by default, but for customers interested only in Live Tail or desiring fine-grained controls over index [Exclusion Filters][2] can be configured for this purpose.
+* To collect container information in the standard install rather than with the [Docker Agent][1], the `dd-agent` user must have permissions to access **docker.sock**.
+* Logs are indexed by default, but for those interested only in Live Tail or desiring fine-grained controls over indexes [Exclusion Filters][2] can be configured.
 
 [1]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=hostinstallation
 [2]: https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters
 {{% /tab %}}
 
 {{% tab "Kubernetes Installation" %}}
-Follow these [Instructions][1] for installing the Datadog Agent that runs inside of a pod, making the following configuration changes to begin log collection.
+In the dd-agent.yaml manifest used to create the Daemonset, add the following environmental variables, volume mount, and volume:
 
 ```
 # Set DD_LOGS_ENABLED and DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL variable to true
@@ -93,14 +93,11 @@ volumes:
       name: pointerdir
 (...)
 ```
-**Notes**: 
+**Note**: 
 
-* To collect container information in the standard install rather than with the [Docker Agent][2], the `dd-agent` user must have permissions to access **docker.sock**.
-* Logs are indexed by default, but for customers interested only in Live Tail or desiring fine-grained controls over index [Exclusion Filters][3] can be configured for this purpose.
+* Logs are indexed by default, but for those interested only in Live Tail or desiring fine-grained controls over indexes [Exclusion Filters][1] can be configured.
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/daemonset_setup
-[2]: https://docs.datadoghq.com/integrations/docker_daemon
-[3]: https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters
+[1]: https//docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters
 {{% /tab %}}
 {{< /tabs >}}
 
