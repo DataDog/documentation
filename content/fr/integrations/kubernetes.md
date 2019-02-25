@@ -100,7 +100,7 @@ Depuis la version 5.17.0, l'Agent Datadog prend en charge [l'option d'élection
 * Delete
 * DeletingAllPods
 * Didn't have enough resource
-* Error
+* 
 * Failed
 * FailedCreate
 * FailedDelete

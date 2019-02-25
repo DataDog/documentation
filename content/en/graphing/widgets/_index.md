@@ -4,7 +4,7 @@ kind: documentation
 disable_toc: true
 aliases:
     - graphing/dashboards/widgets
-    - graphing/dashboards/faq/widgets
+    - graphing/faq/widgets
 ---
 
 {{< whatsnext desc="Choose a widget:">}}

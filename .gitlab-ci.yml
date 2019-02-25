@@ -18,7 +18,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:david.jones_latest-hugo
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
   tags:
     - "runner:main"
     - "size:large"
@@ -112,17 +112,17 @@ index_algolia:
   only:
     - schedules
 
-#manage_translations:on-schedule:
-#  <<: *base_template
-#  stage: post-deploy
-#  environment: "live"
-#  variables:
-#    URL: ${PREVIEW_DOMAIN}
-#    CONFIG: ${PREVIEW_CONFIG}
-#  script:
-#    - manage_translations "${APIKEY}"
-#  only:
-#    - schedules
+manage_translations:on-schedule:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  variables:
+    URL: ${PREVIEW_DOMAIN}
+    CONFIG: ${PREVIEW_CONFIG}
+  script:
+    - manage_translations "${APIKEY}"
+  only:
+    - schedules
 
 #rollback_live:
 #  <<: *base_template

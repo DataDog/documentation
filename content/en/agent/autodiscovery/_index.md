@@ -4,7 +4,6 @@ kind: documentation
 aliases:
   - /guides/servicediscovery/
   - /guides/autodiscovery/
-  - /agent/autodiscovery
 further_reading:
 - link: "/videos/autodiscovery/"
   tag: "Video"
@@ -485,6 +484,14 @@ services:
 
 
 [1]: /logs/docker
+{{% /tab %}}
+{{% tab "Cluster Checks" %}}
+
+### Template Source: Cluster Checks with the Cluster Agent
+
+The [Cluster Checks feature][1] monitors non-containerized and out-of-cluster resources.
+
+[1]: /agent/autodiscovery/clusterchecks
 {{% /tab %}}
 {{< /tabs >}}
 

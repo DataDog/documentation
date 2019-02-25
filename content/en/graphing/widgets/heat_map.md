@@ -48,7 +48,7 @@ Add events from related systems to add more context to your graph. For example, 
 Y-axis controls are available via the UI and the JSON editor. They allow you to:
 
 * Clip the y-axis to specific ranges.
-* Remove outliers either by specifying a percentage or an absolute value to remove outliers.
+* Automatically change y-axis bounds based on a percentage or an absolute value threshold. This threshold can be applied to one of both ends of the graph (lower and upper) in order to remove "outliers" series.
 * Change the y-axis scale from linear to log, pow, or sqrt.
 
 Change the Y-axis scale by expanding the *Y-Axis Controls* button.

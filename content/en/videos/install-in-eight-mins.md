@@ -3,11 +3,10 @@ title: Install Five Integrations in Eight Minutes
 kind: video
 wistiaid: ira7wzi1d4
 language: en
-summary: In about 8 minutes get Datadog setup and install integrations with PagerDuty HipChat AWS RDS and Elasticsearch
+summary: In about 8 minutes get Datadog setup and install integrations with PagerDuty, AWS, RDS, and Elasticsearch
 videos:
     - Installation
     - PagerDuty
-    - HipChat
     - AWS
     - RDS
     - Elasticsearch

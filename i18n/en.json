@@ -40,7 +40,7 @@
   },
 
   "help_sentence": {
-    "other": "Our friendly, knowledgeable solution engineers are here to help"
+    "other": "Our friendly, knowledgeable solutions engineers are here to help"
   },
 
   "email_support_sentence": {
@@ -48,7 +48,7 @@
   },
 
   "live_chat_support_sentence": {
-    "other": "Chat with our support team any business day between the hours of 10:00 and 19:00 ET. You can reach us through in-app chat, or on Slack,  <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Datadog Slack</a>"
+    "other": "Chat with our support team any business day between the hours of 10:00 and 19:00 ET. You can reach us through in-app chat, or on <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Datadog Slack</a>"
   },
 
   "event_stream_support_sentence": {

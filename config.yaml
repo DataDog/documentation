@@ -205,11 +205,18 @@ languages:
           weight: 180
           parent: kubernetes
 
+        ## Autodiscovery
         - identifier: autodiscovery
           name: "Autodiscovery"
           url: "agent/autodiscovery"
           weight: 20
           parent: menu_references_agent
+        - identifier: autodiscovery_clusterchecks
+          name: "Cluster Checks"
+          url: "agent/autodiscovery/clusterchecks"
+          weight: 200
+          parent: autodiscovery
+
         - identifier: proxy
           name: "Proxy"
           url: "agent/proxy"
@@ -1126,6 +1133,11 @@ languages:
           url: "developers/integrations/legacy"
           weight: 903
           parent: customnav_integrationsnav_new_integration
+        - identifier: customnav_integrationsnav_new_guides
+          name: "Guides"
+          url: "developers/guide/"
+          weight: 95
+          parent: menu_references_developers
         #- identifier: customnav_developersnav_faq
         #  name: "FAQ"
         #  url: "developers/faq/"

@@ -27,7 +27,7 @@ The widget can display the latest value reported, or an aggregate computed from 
 1. Choose the data to graph:
     * Metric: See [the main graphing documentation][1] to configure a metric query.
     * APM Events: See [the trace search documentation][2] to configure an APM event query.
-    * Log Events: See [the log search documentation][3] to configure an APM event query.
+    * Log Events: See [the log search documentation][3] to configure a log event query.
 2. Choose the units and the formatting. 
 3. Optional: configure a conditional format depending on the value displayed.
 
@@ -94,8 +94,6 @@ Additional properties allowed in the `request` object:
 | ------                | -----  | -------- | ----                                                                                                                                                            |
 | `conditional_formats` | object | no       | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][6] to learn how to build the `CONDITIONAL_FORMATS_SCHEMA`. |
 | `aggregator`          | enum   | no       | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum`.                                                                   |
-
-
 
 ## Further Reading
 

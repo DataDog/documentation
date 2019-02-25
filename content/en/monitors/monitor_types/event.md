@@ -33,31 +33,32 @@ Event monitors allows you to alert when an event matching your query occurs.
 ## Using event tags in Event Monitors
 
 In Event Monitors, you can use the tags sent with events to identify events and customize the actions and messages of the Monitor. First, define the search parameters for the full text event search. If you are looking for a specific tag, you can include this in the search as well. For example:
-My Example Event #example-tag
 
-Note: You may have to escape special characters using a forward slash when searching. For example, if you wanted to search for the string "my_tag_name", you would need to use "my/_tag/_name"
+`My Example Event #example-tag`
 
 {{< img src="monitors/monitor_types/event/define_event.png" alt="define_event" responsive="true" style="width:80%;">}}
 
-You can then use event.tags and event.tags.tagname to retrieve the values of your tags in markdown. For example:
-
-{{< img src="monitors/monitor_types/event/whats_happening.png" alt="whats_happening" responsive="true" style="width:80%;">}}
-
-You should then see that your alert triggers when any matching events are found in Datadog and the tags appear in the message.
-
-{{< img src="monitors/monitor_types/event/triggered_event.png" alt="triggered_event" responsive="true" style="width:80%;">}}
-
 ## Using event template variables in notifications
 
-Include Event specific information in your event monitor notifications, template variables available are: 
+Include event-specific information in your event monitor notifications. Available template variables: 
 
-* `{{event.id}}` : Id of your event
-* `{{event.title}}`: Title of the event
-* `{{event.text}}`: Text of the event
-* `{{event.host.name}}`: Hostname that generated the event
-* `{{event.tags.tagname}}`: Tags attached to the event, replace `tagname` with the name of your tag. 
+| Template variable        | Definition                                                               |
+| ------                   | ------                                                                   |
+| `{{event.id}}`           | ID of the event                                                         |
+| `{{event.title}}`        | Title of the event                                                       |
+| `{{event.text}}`         | Text of the event                                                        |
+| `{{event.host.name}}`    | Hostname that generated the event                                        |
+| `{{event.tags.tagname}}` | Tags attached to the event, replace `tagname` with the name of your tag. |
 
-{{< img src="monitors/monitor_types/event/event_notification_template.png" alt="event_notification_template" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/event/event_notification_template.png" alt="event_notification_template" responsive="true" style="width:60%;">}}
+
+Use `event.tags` and `event.tags.tagname` to retrieve the values of your tags in Markdown. For example:
+
+{{< img src="monitors/monitor_types/event/whats_happening.png" alt="whats_happening" responsive="true" style="width:60%;">}}
+
+When your alert triggers, any matching events that are found in Datadog with the tags appear in the message:
+
+{{< img src="monitors/monitor_types/event/triggered_event.png" alt="triggered_event" responsive="true" style="width:60%;">}}
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}

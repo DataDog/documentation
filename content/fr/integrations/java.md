@@ -44,12 +44,12 @@ L'Agent Datadog appelle un petit plug-in Java, JMXFetch, afin de se connecter à
 
 Les checks JMX sont limités à 350 métriques par instance.
 
-Si vous exécutez JMX au sein de Docker, consultez la [documentation relative à Docker JMX][2].
+Si vous exécutez JMX au sein de Docker, consultez la [documentation relative à Docker JMX][12].
 
 ## Implémentation
 ### Installation
 
-Assurez-vous que vous pouvez ouvrir une [connexion JMX à distance][3].
+Assurez-vous que vous pouvez ouvrir une [connexion JMX à distance][2].
 
 L'Agent Datadog nécessite une connexion à distance pour se connecter à JVM, même s'ils sont tous les deux sur le même host.
 
@@ -168,7 +168,7 @@ Chaque dictionnaire `include` ou `exclude` prend en charge les clés suivantes 
 | `bean_regex`          | Liste des expressions régulières pour les noms de bean complets (p. ex., `java\.lang.*[,:]type=Compilation.*`). Vous pouvez utiliser des groupes d'enregistrement dans votre expression régulière afin de fournir des valeurs de tag. Voir l'exemple de configuration ci-dessus. |
 | `attribute`           | Liste ou dictionnaire de noms d'attributs (voir ci-dessous pour plus de détails).                                                                                                                  |
 
-Les expressions régulières définies dans `domain_regex` et `bean_regex` doivent respecter le [format des expressions régulières de Java][4].
+Les expressions régulières définies dans `domain_regex` et `bean_regex` doivent respecter le [format des expressions régulières de Java][3].
 
 Les filtres `domain_regex` et `bean_regex` ont été ajoutés dans la version 5.5.0.
 
@@ -275,9 +275,9 @@ La liste de filtres est uniquement prise en charge pour les versions > 5.3.0 de
 
 ### Validation
 
-[Lancez la sous-commande « status » de l'Agent][5] et cherchez votre check JMX dans la section JMXFetch.
+[Lancez la sous-commande « status » de l'Agent][7] et cherchez votre check JMX dans la section JMXFetch.
 
-Les checks JMX possèdent également une configuration par défaut qui recueille 11 métriques depuis votre application. Reportez-vous au [Metrics Explorer][6] pour : `jvm.heap_memory`, `jvm.non_heap_memory` ou `jvm.gc.cms.count`.
+Les checks JMX possèdent également une configuration par défaut qui recueille 11 métriques depuis votre application. Reportez-vous au [Metrics Explorer][8] pour : `jvm.heap_memory`, `jvm.non_heap_memory` ou `jvm.gc.cms.count`.
 
 ## Données collectées
 ### Métriques
@@ -286,13 +286,13 @@ Les checks JMX possèdent également une configuration par défaut qui recueille
 
 ## Dépannage
 
-Consultez la liste des [commandes de dépannage JMX][7].
+Consultez la liste des [commandes de dépannage JMX][11].
 
 ### Limite de 350 métriques
 
 En raison de la nature de ces intégrations, il est possible d'envoyer directement à Datadog un nombre très important de métriques. De nombreux clients s'accordent à dire que certaines de ces métriques ne sont pas requises. Ainsi, Datadog a défini une limite de 350 métriques.
 
-Pour consulter les métriques que vous recueillez et respecter la limite, commencez par utiliser les commandes ci-dessus afin d'identifier les métriques disponibles. Nous vous recommandons de créer des filtres pour réduire le nombre de métriques recueillies. Si vous estimez que vous avez besoin de plus de 350 métriques, contactez [l'assistance Datadog][8].
+Pour consulter les métriques que vous recueillez et respecter la limite, commencez par utiliser les commandes ci-dessus afin d'identifier les métriques disponibles. Nous vous recommandons de créer des filtres pour réduire le nombre de métriques recueillies. Si vous estimez que vous avez besoin de plus de 350 métriques, contactez [l'assistance Datadog][5].
 
 ### Chemin Java
 
@@ -335,13 +335,13 @@ Les applications JBoss/WildFly exposent JMX avec un protocole spécifique (JMX �
                                # is used to tag the metrics pulled from that instance
   ```
 
-* [Redémarrez l'Agent][9].
+* [Redémarrez l'Agent][6].
 
 ### Surveillance de Tomcat avec l'option d'écoute de cycle de vie à distance de JMX
 
 Les instructions suivantes fonctionnent sur la version 5.6.0+ de l'Agent.
 
-Si vous utilisez Tomcat avec l'option d'écoute de cycle de vie à distance de JMX activée (consultez la [documentation Tomcat][10] pour en savoir plus), vous devez suivre quelques étapes de configuration supplémentaires pour que JMXFetch se connecte à votre application Tomcat.
+Si vous utilisez Tomcat avec l'option d'écoute de cycle de vie à distance de JMX activée (consultez la [documentation Tomcat](https://tomcat.apache.org/tomcat-7.0-doc/config/listeners.html#JMX_Remote_Lifecycle_Listener_-_org.apache.catalina.mbeans.JmxRemoteLifecycleListener) pour en savoir plus), vous devez suivre quelques étapes de configuration supplémentaires pour que JMXFetch se connecte à votre application Tomcat.
 
 * Naviguez jusqu'au fichier `catalina-jmx-remote.jar` sur votre serveur Tomcat (par défaut, son chemin est `$CATALINA_HOME/lib`).
 * Si JMXFetch s'exécute sur un host autre que l'application Tomcat, copiez `catalina-jmx-remote.jar` à un emplacement du host sur lequel JMXFetch s'exécute.
@@ -367,22 +367,22 @@ instances:
                               # est utilisé pour taguer les métriques récupérées à partir de cette instance
 ```
 
-* [Redémarrez l'Agent][9].
+* [Redémarrez l'Agent][6].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html
+[2]: http://docs.oracle.com/javase/1.5.0/docs/guide/management/agent.html
+[3]: http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
+[4]: https://github.com/DataDog/dd-agent/blob/master/conf.d/jmx.yaml.example
+[5]: https://docs.datadoghq.com/fr/help/
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/fr/graphing/metrics/explorer/
+[11]: https://docs.datadoghq.com/fr/integrations/faq/troubleshooting-jmx-integrations/
+[12]: https://docs.datadoghq.com/fr/agent/faq/docker-jmx/
 
 
 {{< get-dependencies >}}
-[1]: http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html
-[2]: https://docs.datadoghq.com/fr/agent/faq/docker-jmx
-[3]: http://docs.oracle.com/javase/1.5.0/docs/guide/management/agent.html
-[4]: http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/fr/graphing/metrics/explorer
-[7]: https://docs.datadoghq.com/fr/integrations/faq/troubleshooting-jmx-integrations
-[8]: https://docs.datadoghq.com/fr/help
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
-[10]: https://tomcat.apache.org/tomcat-7.0-doc/config/listeners.html#JMX_Remote_Lifecycle_Listener_-_org.apache.catalina.mbeans.JmxRemoteLifecycleListener

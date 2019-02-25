@@ -23,17 +23,26 @@ The instructions below use NGINX from the official [Linux repositories][1] and p
 
 The following plugins must be installed:
 
-- NGINX plugin for OpenTracing - [v0.7.0][2] - installed in `/usr/lib/nginx/modules`
-- Datadog OpenTracing C++ Plugin - [v0.3.5][3] - installed in `/usr/local/lib`
+- NGINX plugin for OpenTracing - [linux-amd64-nginx-${NGINX_VERSION}-ngx_http_module.so.tgz][2] - installed in `/usr/lib/nginx/modules`
+- Datadog OpenTracing C++ Plugin - [linux-amd64-libdd_opentracing_plugin.so.gz][3] - installed somewhere accessible to NGINX, eg `/usr/local/lib`
 
 Commands to download and install these modules:
 
 ```bash
+# Gets the latest release version number from Github.
+get_latest_release() {
+  wget -qO- "https://api.github.com/repos/$1/releases/latest" |
+    grep '"tag_name":' |
+    sed -E 's/.*"([^"]+)".*/\1/';
+}
+NGINX_VERSION=1.14.0
+OPENTRACING_NGINX_VERSION="$(get_latest_release opentracing-contrib/nginx-opentracing)"
+DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
 # Install NGINX plugin for OpenTracing
-wget https://github.com/opentracing-contrib/nginx-opentracing/releases/download/v0.7.0/linux-amd64-nginx-1.14.0-ngx_http_module.so.tgz
-tar zxf linux-amd64-nginx-1.14.0-ngx_http_module.so.tgz -C /usr/lib/nginx/modules
+wget https://github.com/opentracing-contrib/nginx-opentracing/releases/download/${OPENTRACING_NGINX_VERSION}/linux-amd64-nginx-${NGINX_VERSION}-ngx_http_module.so.tgz
+tar zxf linux-amd64-nginx-${NGINX_VERSION}-ngx_http_module.so.tgz -C /usr/lib/nginx/modules
 # Install Datadog Opentracing C++ Plugin
-wget https://github.com/DataDog/dd-opentracing-cpp/releases/download/v0.3.5/linux-amd64-libdd_opentracing_plugin.so.gz
+wget https://github.com/DataDog/dd-opentracing-cpp/releases/download/${DD_OPENTRACING_CPP_VERSION}/linux-amd64-libdd_opentracing_plugin.so.gz
 gunzip linux-amd64-libdd_opentracing_plugin.so.gz -c > /usr/local/lib/libdd_opentracing_plugin.so
 ```
 
@@ -91,7 +100,7 @@ After completing this configuration, HTTP requests to NGINX will initiate and pr
 
 
 [1]: http://nginx.org/en/linux_packages.html#stable
-[2]: https://github.com/opentracing-contrib/nginx-opentracing/releases/download/v0.7.0/linux-amd64-nginx-1.14.0-ngx_http_module.so.tgz
-[3]: https://github.com/DataDog/dd-opentracing-cpp/releases/download/v0.3.5/linux-amd64-libdd_opentracing_plugin.so.gz
+[2]: https://github.com/opentracing-contrib/nginx-opentracing/releases/latest/
+[3]: https://github.com/DataDog/dd-opentracing-cpp/releases/latest/
 [4]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/nginx.conf
 [5]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/dd-config.json

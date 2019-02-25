@@ -8,7 +8,7 @@ aliases:
 further_reading:
   - link: agent/faq/getting-further-with-docker
     tag: FAQ
-    text: Concepts avancés de Docker
+    text: En apprendre plus sur Docker
   - link: agent/faq/docker-jmx
     tag: FAQ
     text: JMX Docker
@@ -22,7 +22,7 @@ further_reading:
     tag: Documentation
     text: Recueillir vos traces Docker
 ---
-Pour installer l'Agent de conteneur Datadog, suivez les [instructions d'installation de l'Agent][1] ou passer en revue les informations ci-dessous. Vous pouvez également consulter [l'image officielle de la version 6 de l'Agent Docker].
+Pour installer l'Agent de conteneur Datadog, suivez les [instructions d'installation de l'Agent][1] ou passez en revue les informations ci-dessous. Vous pouvez également consulter [l'image officielle de la version 6 de l'Agent Docker].
 
 **Remarque** : les versions 1.12 et supérieures de Docker sont prises en charge.
 
@@ -46,26 +46,26 @@ De nombreux paramètres de l'Agent peuvent être personnalisés. Vous trouverez 
 
 | Variable d'environnement    | Description                                                                                                                                                 |
 | --------------- | ----------------------------------------------------------------------------------                                                                          |
-| `DD_API_KEY`    | Votre clé d'API Datadog (**requis**).                                                                                                                         |
+| `DD_API_KEY`    | Votre clé d'API Datadog (**obligatoire**).                                                                                                                         |
 | `DD_HOSTNAME`   | Le hostname à utiliser pour les métriques (si la détection automatique échoue).                                                                                                        |
 | `DD_TAGS`       | Tags de host séparés par des espaces. Exemple : `tag-simple-0 clé-tag-1:valeur-tag-1`.                                                                            |
-| `DD_SITE`       | Le site auquel vous transmettez vos métriques, traces et logs. Vous pouvez choisir entre `datadoghq.com` pour le site américain de Datadog, ou `datadoghq.eu` pour le site européen. |
+| `DD_SITE`       | Le site auquel vous transmettez vos métriques, traces et logs. Vous pouvez choisir entre `datadoghq.com` pour le site américain de Datadog et `datadoghq.eu` pour le site européen. |
 
 
 
-#### Agents de collecte facultatifs
+#### Agents de collecte optionnels
 
-Par défaut, les Agents de collecte facultatifs sont désactivés pour des raisons de sécurité et de performances. Utilisez les variables d'environnement suivantes pour les activer :
+Par défaut, les Agents de collecte optionnels sont désactivés pour des raisons de sécurité et de performances. Utilisez les variables d'environnement suivantes pour les activer :
 
 | Variable d'environnement               | Description                                                                                                                                        |
 |----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_APM_ENABLED`           | Exécute trace-agent avec l'Agent d'infrastructure, afin que le conteneur accepte les traces sur `8126/tcp`.                                    |
-| `DD_LOGS_ENABLED`          | Exécute [log-agent][2] avec l'Agent d'infrastructure.                                                                                        |
-| `DD_PROCESS_AGENT_ENABLED` | Active la collecte de live processes dans [process-agent][3]. Par défaut, la vue Live Container est déjà activée si le socket Docker est activé. |
+| `DD_LOGS_ENABLED`          | Exécute [log-agent][3] avec l'Agent d'infrastructure.                                                                                        |
+| `DD_PROCESS_AGENT_ENABLED` | Active la collecte de live processes dans [process-agent][4]. Par défaut, la vue Live Container est déjà activée si le socket Docker est disponible. |
 
 #### DogStatsD (métriques custom)
 
-Envoyez des métriques custom par l'intermédiaire [du protocole statsd][4] :
+Envoyez des métriques custom par l'intermédiaire du [protocole statsd][5] :
 
 | Variable d'environnement                     | Description                                                                                       |
 |----------------------------------|---------------------------------------------------------------------------------------------------|
@@ -75,16 +75,16 @@ Envoyez des métriques custom par l'intermédiaire [du protocole statsd][4] :
 | `DD_DOGSTATSD_SOCKET`            | Chemin vers le socket Unix à écouter. Doit être dans le volume `rw` monté.                           |
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Active la détection de conteneurs et l'ajout de tags pour les métriques de socket Unix.                                   |
 
-[En savoir plus sur DogStatsD sur un socket de domaine Unix avec Docker][5].
+[En savoir plus sur DogStatsD sur un socket de domaine Unix avec Docker][6].
 
 #### Tagging
 
-Datadog recueille automatiquement les tags courants de [Docker][6], [Kubernetes][7], [ECS][8], [Swarm, Mesos, Nomad et Rancher][6], et vous permet d'extraire des tags supplémentaires à l'aide des paramètres suivants :
+Datadog recueille automatiquement les tags courants de [Docker][7], [Kubernetes][8], [ECS][9], [Swarm, Mesos, Nomad et Rancher][7], et vous permet d'extraire des tags supplémentaires à l'aide des paramètres suivants :
 
 | Variable d'environnement                            | Description                                               |
 |-----------------------------------------|-----------------------------------------------------------|
-| `DD_DOCKER_LABELS_AS_TAGS`              | Extraire les étiquettes de conteneur docker                           |
-| `DD_DOCKER_ENV_AS_TAGS`                 | Extraire les variables d'environnement de conteneur docker            |
+| `DD_DOCKER_LABELS_AS_TAGS`              | Extraire les étiquettes de conteneur Docker                           |
+| `DD_DOCKER_ENV_AS_TAGS`                 | Extraire les variables d'environnement de conteneur Docker            |
 | `DD_KUBERNETES_POD_LABELS_AS_TAGS`      | Extraire les étiquettes de pod                                        |
 | `DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS` | Extraire les annotations de pod                                   |
 | `DD_COLLECT_EC2_TAGS`                   | Extraire les tags EC2 personnalisés sans utiliser l'intégration AWS |
@@ -103,7 +103,7 @@ Excluez les conteneurs de la collecte de logs, de la collecte de métriques et d
 | Variable d'environnement    | Description                                                                                                             |
 |-----------------|-------------------------------------------------------------------------------------------------------------------------|
 | `DD_AC_INCLUDE` | Liste des conteneurs à inclure (séparés par des espaces). Exemple : `"image:nom_image_1 image:nom_image_2"`. |
-| `DD_AC_EXCLUDE` | Liste des conteneurs à exclure (séparés par des espaces). Exemple : `"image:nom_image_3 image:nom_image_4"`. **Remarque** : cette variable n'est pas traitée dans Fargate.       |
+| `DD_AC_EXCLUDE` | Liste des conteneurs à exclure (séparés par des espaces). Exemple : `"image:nom_image_3 image:nom_image_4"`. (**Remarque** : cette variable n'est pas traitée dans Fargate.)       |
 
 **Remarque** : ces paramètres n'ont aucun effet sur les métriques `docker.containers.running`, `.stopped`, `.running.total` et `.stopped.total`, qui prennent toujours en compte l'ensemble des conteneurs. Cela n'a aucune incidence sur le nombre de conteneurs facturés.
 
@@ -144,10 +144,11 @@ Désormais, lorsque le conteneur démarre, tous les fichiers dans `/opt/datadog-
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/docker
-[2]: /fr/logs
-[3]: /fr/graphing/infrastructure/process
-[4]: https://docs.datadoghq.com/fr/developers/dogstatsd
-[5]: /fr/developers/dogstatsd/unix_socket
-[6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
-[7]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
-[8]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
+[2]: https://hub.docker.com/r/datadog/agent
+[3]: /fr/logs
+[4]: /fr/graphing/infrastructure/process
+[5]: https://docs.datadoghq.com/fr/developers/dogstatsd
+[6]: /fr/developers/dogstatsd/unix_socket
+[7]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
+[8]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
+[9]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
