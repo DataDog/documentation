@@ -9,18 +9,18 @@ Monitors involving arithmetic division and at least 1 `as_count` modifier use a 
 
 ## Example
 
-Let's say that you have 2 metrics, *A* and *B*:
+You have 2 metrics, *A* and *B*:
 
 * *A* has datapoints (a0, a1, ..., ax)
 * *B* has datapoints (b0, b1, ..., bx)
 
-Let's call now the current evaluation path for `as_count` monitors with division queries `as_count_eval_path` and all other monitors evaluation path `classic_eval_path`.
+Call the current evaluation path for `as_count` monitors with division query `as_count_eval_path` and all other monitors evaluation path `classic_eval_path`.
 
 Suppose Datadog monitors an error rate, which is calculated as:
 
 `sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count()`
 
-Let's take this query for the time frame between *11:00:00* and *11:05:00*:
+Take this query for the time frame between *11:00:00* and *11:05:00*:
 
 `sum(last_5m): sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count()`
 
