@@ -10,7 +10,7 @@ further_reading:
   text: "Widget JSON schema"
 ---
 
-The general format for the `REQUEST_SCHEMA` is an array of one or more series:
+The general format for the `REQUEST_SCHEMA` is an array of one or more `request`:
 
 ```
 "requests": [
@@ -20,7 +20,23 @@ The general format for the `REQUEST_SCHEMA` is an array of one or more series:
 ]
 ```
 
-Where the `function` and `group` are optional.
+If your `requests` parameter has multiple `request`, the widget displays all of them:
+
+```
+"requests": [
+  {
+    "q": "<METRIC_1>{<SCOPE_1>}"
+  },
+  {
+    "apm_query": "<METRIC_2>{<SCOPE_2>}"
+  },
+  {
+    "log_query": "<METRIC_3>{<SCOPE_3>}"
+  }
+]
+```
+
+{{< img src="graphing/graphing_json/multi-lines.png" alt="multi lines" responsive="true" >}}
 
 ## Functions
 

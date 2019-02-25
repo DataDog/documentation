@@ -10,11 +10,11 @@ further_reading:
   text: "Request JSON schema"
 ---
 
-This page covers how to use JSON to build a widget in a Datadog dashboard as you would see in the *JSON* tab of a widget. To learn more about the GUI editor, visit the main [Graphing Primer Page][1]
+This page covers how to use JSON to build a widget in a Datadog dashboard as you would see in the *JSON* tab of a widget. To learn more about the GUI editor, visit the main [Graphing documentation Page][1]
 
 {{< img src="graphing/graphing_json/references-graphing-jsoneditor.png" alt="references graphing jsoneditor" responsive="true" style="width:80%;">}}
 
-All widgets follow the same object structure `WIDGET_SCHEMA`:
+All widgets follow the same object `WIDGET_SCHEMA` structure:
 
 ```
 WIDGET_SCHEMA = {
@@ -35,46 +35,50 @@ WIDGET_SCHEMA = {
 
 ## Widget Definition 
 
-A widget definition follow the following object structure:
+A widget definition follows the following object structure:
 
 ```
 "definition": {
   "type": "<WIDGET_TYPE>",
   "requests": <REQUEST_SCHEMA>,
-  "title": "<WIDGET_TITLE>"
+  "title": "<WIDGET_TITLE>",
+  "yaxis": "<AXIS_SCHEMA>",
+  "events": "<EVENTS_SCHEMA>",
+  "markers": "<MARKERS_SCHEMA>",
+  "conditional_formats": "<CONDITIONAL_FORMATS_SCHEMA>"
 }
 ```
 
-| Parameter  | Type            | Description                                  |
-| ------     | -----           | --------                                     |
-| `type`     | enum            | Type of the widget.                          |
-| `requests` | array of object | [Request(s) associated with your widget][1]. |
-| `title`    | string          | Title of your widget.                        |
+The three first parameters are mandatory and present on all widgets:
 
+| Parameter  | Type            | Required | Description                                  |
+| ------     | -----           | -----    | --------                                     |
+| `type`     | enum            | yes      | Type of the widget.                          |
+| `requests` | array of object | yes      | [Request(s) associated with your widget][1]. |
+| `title`    | string          | yes      | Title of your widget.                        |
 
-### Line Charts
+The other are extra and optional parameters that enhance your widgets, but are only available depending of the `type` of widget.
 
-{{< img src="graphing/graphing_json/multi-lines.png" alt="multi lines" responsive="true" >}}
+| Parameter             | Type   | Required | Description                                                                                                                                                                              |
+| ------                | -----  | -------- | ----                                                                                                                                                                                     |
+| `yaxis`               | object | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation](#y-axis-schema) to learn how to build the `AXIS_SCHEMA`.                                                    |
+| `events`              | object | no       | Event overlay control options. See the dedicated [Events JSON schema documentation](#events-schema) to learn how to build the `EVENTS_SCHEMA`                                            |
+| `markers`             | object | no       | Markers overlay control options. See the dedicated [Markers JSON schema documentation](#markers-schema) to learn how to build the `MARKERS_SCHEMA`                                       |
+| `conditional_formats` | object | no       | Conditional format control options. See the dedicated [Conditional format JSON schema documentation](#conditional-format-schema) to learn how to build the `CONDITIONAL_FORMATS_SCHEMA`. |
 
-If your `requests` parameter has multiple requests, the widget displays all of them.
+{{< whatsnext desc="Refer to each widget dedicated documentation to learn how to build a specific widget:">}}
+    {{< nextlink href="/graphing/widgets/change/#api" >}}Change{{< /nextlink >}}
+    {{< nextlink href="/graphing/widgets/distribution/#api" >}}Distribution{{< /nextlink >}}
+    {{< nextlink href="/graphing/widgets/group/#api" >}}Group{{< /nextlink >}}
+    {{< nextlink href="/graphing/widgets/heat_map/#api" >}}Heat Map{{< /nextlink >}}
+    {{< nextlink href="/graphing/widgets/hostmap/#api" >}}Hostmap{{< /nextlink >}}
+    {{< nextlink href="/graphing/widgets/query_value/#api" >}}Query Value{{< /nextlink >}}
+    {{< nextlink href="/graphing/widgets/scatter_plot/#api" >}}Scatter Plot{{< /nextlink >}}
+    {{< nextlink href="/graphing/widgets/timeseries/#api" >}}Timeseries{{< /nextlink >}}
+    {{< nextlink href="/graphing/widgets/top_list/#api" >}}Top List{{< /nextlink >}}
+{{< /whatsnext >}}
 
-```
-"requests": [
-  {
-    "q": "<METRIC_1>{<SCOPE_1>}"
-  },
-  {
-    "apm_query": "<METRIC_2>{<SCOPE_2>}"
-  },
-  {
-    "log_query": "<METRIC_3>{<SCOPE_3>}"
-  }
-]
-```
-
-## Widget definition options 
-
-### Y-Axis schema
+## Y-Axis schema
 
 The Datadog y-axis controls allow you to:
 
@@ -106,7 +110,7 @@ AXIS_SCHEMA = {
 | `max`          | string  | Specifies the maximum value to show on y-axis. It takes a number, or `auto` for default behavior.    | `auto`   |
 | `include_zero` | boolean |                                                                                                      |          |
 
-### Events schema
+## Events schema
 
 You can overlay any event from Datadog. The general `events` format is:
 
@@ -126,7 +130,7 @@ EVENTS_SCHEMA = {
 
 See the [Event stream documentation][2] to learn more about the `<EVENT_QUERY>` syntax.
 
-#### Examples
+### Examples
 
 For instance, to indicate that you want events for host X and tag Y:
 
@@ -148,7 +152,7 @@ or if you're looking to display all errors:
 ]
 ```
 
-### Markers schema
+## Markers schema
 
 Markers allow you to add a visual conditional formating for your graphs, the `markers` format is:
 
@@ -168,13 +172,14 @@ MARKERS_SCHEMA = {
 }
 ```
 
-| Parameter      | Type   | Description                                                                                                                | Default |
-| ------         | -----  | --------                                                                                                                   | ----    |
-| `value`        | string | Value to apply. Can be a single value `y = 15` or a range of value `0 < y < 10`                                                                                                              |         |
-| `display_type` | string | Combination between: <br>- A severity `error`, `warning`, `ok`, or `info` <br> - A line type: `dashed`, `solid`, or `bold` |         |
-| `label`        | string | Label to display over the marker.                                                                                          |         |
+| Parameter      | Type   | Description                                                                                                                |
+| ------         | -----  | --------                                                                                                                   |
+| `value`        | string | Value to apply. Can be a single value `y = 15` or a range of value `0 < y < 10`                                            |
+| `display_type` | string | Combination between: <br>- A severity `error`, `warning`, `ok`, or `info` <br> - A line type: `dashed`, `solid`, or `bold` |
+| `label`        | string | Label to display over the marker.                                                                                          |
 
-#### Example:
+
+### Example:
 
 The following markers:
 
@@ -211,7 +216,9 @@ Are applied with the following configuration:
 },
 ```
 
-### Conditional format schema
+## Conditional format schema
+
+Conditional format allows you to set the color of your widget content or background depending of a rule applied to your data.
 
 ```
 CONDITIONAL_FORMATS_SCHEMA = {
@@ -233,91 +240,19 @@ CONDITIONAL_FORMATS_SCHEMA = {
 }
 ```
 
-| Parameter         | Type   | Description                                                                                                                                                                                                                                                                      | Default |
-| ------            | -----  | --------                                                                                                                                                                                                                                                                         | ----    |
-| `comparator`      | enum   | Comparator to apply between: `>`, `>=`, `<`, or `<=`                                                                                                                                                                                                                             |         |
-| `value`           | double | Value for the comparator.                                                                                                                                                                                                                                                        |         |
-| `palette`         | string | Palette of color to apply, to choose between `blue`, `custom_bg`, `custom_image`, `custom_text`, `gray_on_white`, `green`, `green_on_white`, `grey`, `orange`, `red`, `red_on_white`, `white_on_gray`, `white_on_green`, `white_on_red`, `white_on_yellow`, or `yellow_on_white` |         |
-| `custom_bg_color` | string | Palette of colors to apply to the background, same values available as palette.                                                                                                                                                                                                  |         |
-| `custom_fg_color` | string | Palette of colors to apply to the background, same values available as palette.                                                                                                                                                                                                  |         |
-| `image_url`       | string | Displays an image as the background.                                                                                                                                                                                                                                             |         |
+| Parameter         | Type   | Description                                                                                                                                                                                                                                                                      |
+| ------            | -----  | --------                                                                                                                                                                                                                                                                         |
+| `comparator`      | enum   | Comparator to apply between: `>`, `>=`, `<`, or `<=`                                                                                                                                                                                                                             |
+| `value`           | double | Value for the comparator.                                                                                                                                                                                                                                                        |
+| `palette`         | string | Palette of color to apply, to choose between `blue`, `custom_bg`, `custom_image`, `custom_text`, `gray_on_white`, `green`, `green_on_white`, `grey`, `orange`, `red`, `red_on_white`, `white_on_gray`, `white_on_green`, `white_on_red`, `white_on_yellow`, or `yellow_on_white` |
+| `custom_bg_color` | string | Palette of colors to apply to the background, same values available as palette.                                                                                                                                                                                                  |
+| `custom_fg_color` | string | Palette of colors to apply to the background, same values available as palette.                                                                                                                                                                                                  |
+| `image_url`       | string | Displays an image as the background.                                                                                                                                                                                                                                             |
 
-#### Filtering
-
-Filter configuration allows you to automatically change y-axis bounds based on a threshold. Thresholds can be a percentage or an absolute value, and it can apply to both both ends of the graph (lower and upper).
-
-For y-axis filtering, there are two ways to set up the configuration.
-
-To begin, there is a simple configuration where you specify an absolute value or a percentage. All top values or all values that sit within the top `X%` are cut off.
-
-Examples:
-
-```
-"yaxis": {
-  "filter": 30 // all top 30 values do not appear
-}
-
-"yaxis": {
-  "filter": "5%" // the top 5% of that data do not appear
-}
-```
-
-Advanced configuration works the same way as simple configuration, with the added flexibility of configuring the lower or the upper or both parts of the graph. For example, the following configuration limits the graph to data points that are not in the bottom 10% nor in the top 30%.
-
-```
-"yaxis": {
-  "filter": {
-    "top": "30%",
-    "bottom": "10%"
-  }
-}
-```
-
-The following shows all data except those with values higher than 15:
-
-```
-"yaxis": {
-  "filter": {
-    "top": 15
-  }
-}
-```
-
-The following hides data points below 2:
-
-```
-"yaxis": {
-  "filter": {
-    "bottom": 2
-  }
-}
-```
-
-Here is a full JSON example:
-
-```json
-{
-  "viz": "timeseries",
-  "requests": [
-    {
-      "q": "system.cpu.idle{host:hostname}",
-      "stacked": false
-    }
-  ],
-  "events": [],
-  "yaxis": {
-    "scale": "log"
-    "filter": {
-      "top": "5%",
-      "bottom": 15
-    }
-  },
-}
-```
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/graphing_json/request_json
+[1]: /graphing
 [2]: /graphing/event_stream
