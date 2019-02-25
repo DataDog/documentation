@@ -14,7 +14,7 @@ further_reading:
 
 Histograms measure the statistical distribution of a set of values.
 
-Datadog histogram and timing metrics are essentially the same thing and are extensions on the [StatsD timing metric][1]: It aggregates the values that are sent during the flush interval (usually defaults to 10 seconds). 
+Datadog histogram and timing metrics are essentially the same thing and are extensions on the [StatsD timing metric][1]: they aggregate the values that are sent during the flush interval (usually defaults to 10 seconds). 
 
 If you send 20 values for a metric `<METRIC_NAME>` during the flush interval, A Datadog Histogram gives you the aggregation of those values for the flush interval, i.e.:
 
