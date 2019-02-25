@@ -101,33 +101,25 @@ volumes:
 {{% /tab %}}
 {{< /tabs >}}
 
-For more information about activating Log integrations view the [Documentation][5] here.
+For more information about activating log integrations, see the [documentation][5].
 
-Once the Datadog Agent is up and running, we will begin collecting the data exposed in container logs across your entire environment. This will be accessible to you from the Live Containers side panel view immediately. 
+Once the Agent is up and running, Datadog begins collecting the data exposed in container logs across your entire environment. This is immediately accessible to you from the Live Containers side panel view. 
 
 ## Container Logs
 
-View streaming logs for any container reporting logs -- like `docker logs -f` or `kubectl logs -f` in the app! 
-
-Click any container in the table to inspect it.  Click the “logs” tab in this panel to see real-time log data from [Live Tail][6] or indexed logs for any time in the past.
+View streaming logs for any container reporting logs—like `docker logs -f` or `kubectl logs -f`—in the app. Click any container in the table to inspect it. Click the “logs” tab in this panel to see real-time log data from [Live Tail][6] or indexed logs for any time in the past.
 
 {{< img src="graphing/infrastructure/livecontainers/accessingsidepanel.png" alt="Logs Sidepanel" responsive="true" style="width:100%;">}}
 
 
 ### Live Tail
-With Live Tail, all container logs will be streamed.  “Live” corresponds to a trailing 15-minute period for metrics, and pausing the stream will show the time selector switch to `Past 15 minutes`.  
+With Live Tail, all container logs are streamed. “Live” corresponds to a trailing 15-minute period for metrics, and pausing the stream will show the time selector switch to `Past 15 minutes`. Pausing the stream allows you to easily read logs that are quickly being written; unpause to continue streaming. Streaming logs are not persisted, and entering a new search or refreshing the page clears the stream.
 
-Pausing the stream is an important feature that allows you to easily read logs that are quickly being written -- unpause to continue streaming.  Streaming logs are not persisted, and entering a new search or refreshing the page will clear the stream.
-
-Streaming logs can be searched with simple string matching, and for those lines that you are indexing, they can be searched by tag.  For more details about Live Tail, see the [Live Tail documentation][6].
+Streaming logs can be searched with simple string matching. For lines that you are indexing, search by tag. For more details about Live Tail, see the [Live Tail documentation][6].
 {{< img src="graphing/infrastructure/livecontainers/livecontainerlogssidepanel.gif" alt="Preview Logs Sidepanel" responsive="true" style="width:100%;">}}
 
 ### Indexed Logs
-By selecting a period of 1-hour or longer, you can see logs that you have chosen to index and persist.  Indexing is a powerful feature that allows you to filter your logs using tags and facets. 
-
-For example, to search for logs with an `Error` status, type `status:error` into the search box. 
-
-Autocompletion can help you locate the particular tag that you want. Key attributes about your logs are already stored in tags, which enables you to search, filter, and aggregate as needed.
+By selecting a period of 1-hour or longer, you can see logs that you have chosen to index and persist. Indexing allows you to filter your logs using tags and facets. For example, to search for logs with an `Error` status, type `status:error` into the search box. Autocompletion can help you locate the particular tag that you want. Key attributes about your logs are already stored in tags, which enables you to search, filter, and aggregate as needed.
 
 {{< img src="graphing/infrastructure/livecontainers/errorlogs.gif" alt="Preview Logs Sidepanel" responsive="true" style="width:100%;">}}
 
