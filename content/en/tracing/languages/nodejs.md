@@ -60,7 +60,7 @@ const tracer = require('dd-trace').init()
 import "./tracer"; // must come before importing any instrumented module.
 
 // tracer.js
-import * as tracer from "dd-trace";
+import tracer from "dd-trace";
 tracer.init(); // initialized in a different file to avoid hoisting.
 export default tracer;
 ```
@@ -112,12 +112,13 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 #### Worker Compatibility
 
-| Module           | Versions    | Support Type    | Notes                     |
-| :----------      | :---------- | :-------------- | :------------------------ |
-| [amqp10][27]     | `>=3`       | Fully Supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
-| [amqplib][28]    | `>=0.5`     | Fully Supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
-| [kafka-node][29] |             | Coming Soon     |                           |
-| [rhea][30]       |             | Coming Soon     |                           |
+| Module             | Versions    | Support Type    | Notes                   |
+| :----------        | :---------- | :-------------- | :---------------------- |
+| [amqp10][27]       | `>=3`       | Fully Supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
+| [amqplib][28]      | `>=0.5`     | Fully Supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
+| [generic-pool][39] | `>=2`       | Fully Supported |                         |
+| [kafka-node][29]   |             | Coming Soon     |                         |
+| [rhea][30]         |             | Coming Soon     |                         |
 
 #### Promise Library Compatibility
 
@@ -177,3 +178,4 @@ For details about how to how to toggle and configure plugins, check out the [API
 [36]: https://github.com/winstonjs/winston
 [37]: https://nodejs.org/api/dns.html
 [38]: https://nodejs.org/api/net.html
+[39]: https://github.com/coopernurse/node-pool
