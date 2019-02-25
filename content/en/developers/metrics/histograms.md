@@ -27,7 +27,7 @@ If you send 20 values for a metric `<METRIC_NAME>` during the flush interval, a 
 * `<METRIC_NAME>.sum`: gives you the sum of values sent during the flush interval.
 
 Configure which aggregation you want to send to Datadog with the `histogram_aggregates` parameter in your [datadog.yaml configuration file][2]. 
-By default only `max`, `median`, `avg` and `count` aggregations are sent out to Datadog.
+By default only `max`, `median`, `avg`, and `count` aggregations are sent out to Datadog.
 
 ## Submission
 
