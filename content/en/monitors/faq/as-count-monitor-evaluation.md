@@ -89,13 +89,13 @@ Since this special behavior is tied to the `as_count` modifier, replace `as_coun
 
 *Example:* Suppose you wish to monitor the error rate of a service:
 
-If you want to be alerted when the error rate is above 50% in total during the past 5 min. You might have this query like:
+If you want to be alerted when the error rate is above 50% in total during the past 5 min. You might have a query like:
 `sum(last_5m):sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count() > 0.5 `
 
 To correctly rewrite it in the explicit format, the query can be rewritten like:
 
 `sum(last_5m): ( default(sum:requests.error{*}.as_rate(),0) / sum:requests.total{*}.as_rate() )`
 
-[Reach out to the Datadog support team][1] if you have any questions regarding these logic.
+[Reach out to the Datadog support team][1] if you have any questions regarding this logic.
 
 [1]: /help
