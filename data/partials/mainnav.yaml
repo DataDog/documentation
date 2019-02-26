@@ -465,10 +465,10 @@ main:
     url: "synthetics/"
     pre: "nav_synthetics"
     children:
-      - name: "Uptime Check"
-        url: "synthetics/uptime_check"
-      - name: "Browser Check"
-        url: "synthetics/browser_check"
+      - name: "API Tests"
+        url: "synthetics/api_test"
+      - name: "Browser Tests"
+        url: "synthetics/browser_test"
 
   # DEVELOPERS
   - name: "Developer Tools"
