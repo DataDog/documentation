@@ -45,8 +45,8 @@ config_providers:
 * Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexing and uniquely receiving Live Tail data.
 
 
-[1]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=hostinstallation
-[2]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6
+[1]: /logs/log_collection/docker/?tab=hostinstallation
+[2]: /agent/guide/agent-configuration-files/?tab=agentv6
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -60,8 +60,8 @@ Follow the instructions for the [Docker Agent][1], passing in the following attr
 
 **Note**: Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexing and uniquely receiving Live Tail data.
 
-[1]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=containerinstallation
-[2]: https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters
+[1]: /logs/log_collection/docker/?tab=containerinstallation
+[2]: /logs/logging_without_limits/#exclusion-filters
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
@@ -87,8 +87,8 @@ volumes:
 **Note**: 
 * Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexes and Live Tail data uniquely.
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/daemonset_setup
-[2]: https//docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters
+[1]: /agent/kubernetes/daemonset_setup
+[2]: /logs/logging_without_limits/#exclusion-filters
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -234,8 +234,8 @@ ac_include: ["name:frontend.*"]
 [2]: /integrations/docker_daemon
 [3]: /integrations/kubernetes
 [4]: /integrations/amazon_ecs
-[5]: https://docs.datadoghq.com/agent/docker/#run-the-docker-agent
-[6]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=hostinstallation#activate-log-integrations
-[7]: https://docs.datadoghq.com/logs/live_tail
+[5]: /agent/docker/#run-the-docker-agent
+[6]: /logs/log_collection/docker/?tab=hostinstallation#activate-log-integrations
+[7]: /logs/live_tail
 [8]: /tagging
 [9]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237
