@@ -66,36 +66,45 @@ Switch between the Logstream and the Log Analytics modes by clicking on the *Log
 
 The Logstream is the list of logs that match the selected context. A context is defined by a [search bar][1] filter and a [time range](#time-range).
 
-{{< img src="logs/explorer/logstream.png" alt="Logstream" responsive="true" style="width:80%;">}}
 
-If you enter a valid query into the [search bar](#search-bar), words that match your query are highlighted, and the logs displayed match your facet criteria.
+### Logs Table
 
-Sort the list by clicking the **date** column header.
+The logstream is displayed in the log table. 
 
-Click on any log line to see more details about it:
+Configure the logtable content according to your needs and preferences with the Options button. Among your custom attributes, only faceted or measures attributes are available for columns.
 
-{{< img src="logs/explorer/log_in_log_list.png" alt="Log in Logstream" responsive="true" style="width:80%;">}}
+Log results are sorted by date - the most recent on top by default. You can make it the least recent on top (within the limits of the time range though).
 
-Click on `View in context` to see log lines dated just before and after a selected log—even if they don't match your filter.
+https://cl.ly/d8fde2657fa3
 
-{{< img src="logs/explorer/view-in-context.gif" alt="View in context" responsive="true" >}}
 
-The context is different according to the situation as we use the `Hostname`, `Service`, `filename`, or `container_id` attributes, along with tags, to make sure we find the perfect context for your logs.
+### Log Panel
 
-Click the **Columns** button and select any facets you want to see to add more log details to your Logstream:
+Click on any log line to open the log panel and see more details about it: raw message, extracted attributes, tags (with host, service and source tags on top).
 
-{{< img src="logs/explorer/log_list_with_columns.png" alt="Logstream with columns" responsive="true" style="width:80%;">}}
+Some standard attributes, such as `error.stack`, `http.method` or `duration` for instance, have specific highlighted displays in the Log Panel for better readability. Make sure you extract corresponding information from your logs and eventually remap your attributes with [standard attribute remappers][2].
 
-Choose to display one, three, or ten lines from your logs `message` attributes in your Logstream:
 
-{{< img src="logs/explorer/multi_line_display.png" alt="Multi-line display" responsive="true" style="width:30%;">}}
+Interact with the attributes names and values in the lower JSON section to:
 
-**Note**:  If present, the `error.stack` attribute is displayed in priority as it should be used for stack traces.
-Remap any stack trace attribute to this specific attribute with [the attribute remapper Processor][2].
+* Build a facet or a measure out of an attribute. Note that this action does not apply to anterior logs.
+* Add or remove a column from the log table.
+* Append the search request with specific values (include or exclude)
+
+Interact with upper reserved attributes section:
+
+* with **Host**, to access Host Dashboard or append search request with `host` of log. 
+* with **Service**, to see Trace in APM, append search request with Trace ID (both requires a `trace_id` attribute in log, refer to [trace injection in logs][3]) or append search request with `service` of log.
+* with **Source**, to append search request with `source` of log.
+
+
+The **View in context** button update search request to see log lines dated just before and after a selected log—even if they don't match your filter. The context is different according to the situation as we use the `Hostname`, `Service`, `filename`, or `container_id` attributes, along with tags, to make sure we find the perfect context for your logs.
 
 
 [1]: /logs/explorer/search
-[2]: /logs/processing/processors/#remapper
+[2]: /logs/processing/attributes_naming_convention/
+[3]: /tracing/advanced_usage/?tab=java#correlate-traces-and-logs
+
 {{% /tab %}}
 {{% tab "Log Analytics" %}}
 
