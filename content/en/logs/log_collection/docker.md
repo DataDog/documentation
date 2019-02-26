@@ -90,8 +90,6 @@ To collect logs from all your containers without any filtering, add the followin
 ```
 logs:
     - type: docker
-      service: docker
-      source: docker
 ```
 
 [Restart the Agent][3] to see all your container logs in Datadog.
