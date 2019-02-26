@@ -3,6 +3,8 @@ title: Browser Test
 kind: documentation
 beta: true
 description: Simulate and monitor user journeys from specific locations.
+aliases:
+  - synthetics/browser_check
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
