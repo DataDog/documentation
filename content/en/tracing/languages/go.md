@@ -78,7 +78,7 @@ The Go tracer includes support for the following data stores and libraries.
 | [Redis (redigo)][30]    | Fully Supported     | [gopkg.in/DataDog/dd-trace-go.v1/contrib/garyburd/redigo][31]                 |
 | [SQL][32]               | Fully Supported     | [gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql][33]                    |
 | [SQLx][34]              | Fully Supported     | [gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx][35]                    |
-| [MongoDB][36]           | [Alpha 17][37] only | [gopkg.in/DataDog/dd-trace-go.v1/contrib/mongodb/mongo-go-driver/mongo][38]   |
+| [MongoDB][36]           | [v0.2.0][37] only   | [gopkg.in/DataDog/dd-trace-go.v1/contrib/mongodb/mongo-go-driver/mongo][38]   |
 | [BuntDB][39]            | Fully Supported     | [gopkg.in/DataDog/dd-trace-go.v1/contrib/tidwall/buntdb][40]                  |
 | [LevelDB][41]           | Fully Supported     | [gopkg.in/DataDog/dd-trace-go.v1/contrib/syndtr/goleveldb/leveldb][42]        |
 | [miekg/dns][43]         | Fully Supported     | [gopkg.in/DataDog/dd-trace-go.v1/contrib/miekg/dns][44]                       |
@@ -174,7 +174,7 @@ For more tracer settings, see available options in the [configuration documentat
 [34]: https://github.com/jmoiron/sqlx
 [35]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx
 [36]: https://github.com/mongodb/mongo-go-driver
-[37]: https://github.com/mongodb/mongo-go-driver/releases/tag/v0.0.17
+[37]: https://github.com/mongodb/mongo-go-driver/releases/tag/v0.2.0
 [38]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/mongodb/mongo-go-driver/mongo
 [39]: https://github.com/tidwall/buntdb
 [40]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/tidwall/buntdb

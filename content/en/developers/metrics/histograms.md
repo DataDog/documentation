@@ -14,20 +14,20 @@ further_reading:
 
 Histograms measure the statistical distribution of a set of values.
 
-Our histogram and timing metrics are essentially the same thing and are extensions on the StatsD timing metric:
+Datadog histogram and timing metrics are essentially the same thing and are extensions on the [StatsD timing metric][1]: they aggregate the values that are sent during the flush interval (usually defaults to 10 seconds). 
 
-https://github.com/etsy/statsd/blob/master/docs/metric_types.md#timing
+If you send 20 values for a metric `<METRIC_NAME>` during the flush interval, a Datadog histogram gives you the aggregation of those values for the flush interval, i.e.:
 
-It aggregates the values that are sent during the flush interval (usually defaults to 10 seconds). So if you send 20 values for a metric during the flush interval, it'll give you the aggregation of those values for the flush interval, i.e.:
+* `<METRIC_NAME>.avg`: gives you the avg of those 20 values during the flush interval
+* `<METRIC_NAME>.count`: gives you the count of the values (20 in this case) sent during the flush interval.
+* `<METRIC_NAME>.median`: gives you the median of those values in the flush interval.
+* `<METRIC_NAME>.95percentile`: gives you the 95th percentile value in the flush interval.
+* `<METRIC_NAME>.max`: gives you the max value sent during the flush interval.
+* `<METRIC_NAME>.min`: gives you the min value sent during the flush interval.
+* `<METRIC_NAME>.sum`: gives you the sum of values sent during the flush interval.
 
-* `my_metric.avg`: gives you the avg of those 20 values during the flush interval
-* `my_metric.count`: gives you the count of the values (20 in this case) sent during the flush interval
-* `my_metric.median`: gives you the median of those values in the flush interval
-* `my_metric.95percentile`: gives you the 95th percentile value in the flush interval
-* `my_metric.max`: gives you the max value sent during the flush interval
-* `my_metric.min`: gives you the min value sent during the flush interval
-
-Each one of these becomes a value in their respective metric timeseries that are sent to Datadog. Then you can aggregate these timeseries the same way you aggregate any other metric timeseries.
+Configure which aggregation you want to send to Datadog with the `histogram_aggregates` parameter in your [datadog.yaml configuration file][2]. 
+By default only `max`, `median`, `avg`, and `count` aggregations are sent out to Datadog.
 
 ## Submission
 
@@ -47,10 +47,12 @@ Each one of these becomes a value in their respective metric timeseries that are
 
 #### Example
 
-See the [DogStatsD-specific documentation][1] for code examples.
+See the [DogStatsD-specific documentation][3] for code examples.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd/data_types#histograms
+[1]: https://github.com/etsy/statsd/blob/master/docs/metric_types.md#timing
+[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[3]: /developers/dogstatsd/data_types#histograms

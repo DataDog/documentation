@@ -2029,17 +2029,11 @@ var tracer = Datadog.Trace.Tracer.Create(isDebugEnabled: true);
 Debug mode is disabled by default. To enable it, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][1] for details about how and when this environment variable value should be set in order
 to be properly handled by the tracer.
 
-**Application Logs**:
+In order to tell PHP where it should put `error_log` messages, you can either set it at the server level, or as a PHP `ini` parameter, which is the standard way to configure PHP behavior.
 
-By default, logging from the PHP tracer is disabled. In order to get debugging information and errors sent to logs,
-set a [PSR-3 logger][2] singleton.
-
-```php
-\DDTrace\Log\Logger::set(
-    new \DDTrace\Log\PsrLogger($logger)
-);
-```
-
+If you are using an Apache server, use the `ErrorLog` directive.
+If you are using an NGINX server, use the `error_log` directive.
+If you are configuring instead at the PHP level, use PHP's `error_log` ini parameter.
 
 [1]: 
 [2]: https://www.php-fig.org/psr/psr-3
