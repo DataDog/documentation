@@ -1,638 +1,370 @@
 main:
   # GETTING STARTED
-  - identifier: menu_references_getting_started
-    name: "Getting Started"
+  - name: "Getting Started"
     url: "getting_started/"
     pre: "nav_start"
     children:
-      - identifier: menu_gettingstartednav_learning_center
-        name: "Learning Center"
+      - name: "Learning Center"
         url: "getting_started/learning_center"
-        parent: menu_references_getting_started
   # TAGGING
-  - identifier: menu_references_tagging
-    name: "Tagging"
+  - name: "Tagging"
     url: "tagging/"
     pre: "nav_tagging"
     children:
-      - identifier: customnav_getting_started_assigning_tags
-        name: "Assigning tags"
+      - name: "Assigning tags"
         url: "tagging/assigning_tags"
-        parent: menu_references_tagging
-      - identifier: customnav_getting_started_using_tags
-        name: "Using tags"
+      - name: "Using tags"
         url: "tagging/using_tags"
-        parent: menu_references_tagging
   # AGENT
-  - identifier: menu_references_agent
-    name: "Agent"
+  - name: "Agent"
     url: "agent/"
     pre: "nav_agent"
     children:
       ## Basic Agent usage
-      - identifier: customnav_agentnav_basic_usage
-        name: "Basic Agent Usage"
+      - name: "Basic Agent Usage"
         url: "agent/basic_agent_usage/"
-        parent: menu_references_agent
         children:
-          - identifier: amazonlinux
-            name: "Amazon Linux"
+          - name: "Amazon Linux"
             url: "agent/basic_agent_usage/amazonlinux/"
-            parent: customnav_agentnav_basic_usage
-          - identifier: centos
-            name: "CentOS"
+          - name: "CentOS"
             url: "agent/basic_agent_usage/centos/"
-            parent: customnav_agentnav_basic_usage
-          - identifier: deb
-            name: "Debian"
+          - name: "Debian"
             url: "agent/basic_agent_usage/deb/"
-            parent: customnav_agentnav_basic_usage
-          - identifier: customnav_agentnav_docker
-            name: "Docker"
+          - name: "Docker"
             url: "agent/docker/"
-            parent: customnav_agentnav_basic_usage
-          - identifier: fedora
-            name: "Fedora"
+          - name: "Fedora"
             url: "agent/basic_agent_usage/fedora/"
-            parent: customnav_agentnav_basic_usage
-          - identifier: heroku
-            name: "Heroku"
+          - name: "Heroku"
             url: "agent/basic_agent_usage/heroku/"
-            parent: customnav_agentnav_basic_usage
-          - identifier: osx
-            name: "Mac OS X"
+          - name: "Mac OS X"
             url: "agent/basic_agent_usage/osx/"
-            parent: customnav_agentnav_basic_usage
-          - identifier: redhat
-            name: "Red Hat"
+          - name: "Red Hat"
             url: "agent/basic_agent_usage/redhat/"
-            parent: customnav_agentnav_basic_usage
-          - identifier: suse
-            name: "SUSE"
+          - name: "SUSE"
             url: "agent/basic_agent_usage/suse/"
-            parent: customnav_agentnav_basic_usage
-          - identifier: ubuntu
-            name: "Ubuntu"
+          - name: "Ubuntu"
             url: "agent/basic_agent_usage/ubuntu/"
-            parent: customnav_agentnav_basic_usage
-          - identifier: windows
-            name: "Windows"
+          - name: "Windows"
             url: "agent/basic_agent_usage/windows/"
-            parent: customnav_agentnav_basic_usage
-          - identifier: source
-            name: "From Source"
+          - name: "From Source"
             url: "agent/basic_agent_usage/source/"
-            parent: customnav_agentnav_basic_usage
       ## TRACING/APM - Setup basic
-      - identifier: customnav_tracingnav_setup
-        name: "APM"
+      - name: "APM"
         url: "agent/apm/"
-        parent: menu_references_agent
       ## Docker
-      - identifier: agent_docker
-        name: "Docker"
+      - name: "Docker"
         url: "agent/docker/"
-        parent: menu_references_agent
         children:
-          - identifier: docker_apm
-            name: "APM"
+          - name: "APM"
             url: "agent/docker/apm"
-            parent: agent_docker
       ## Kubernetes
-      - identifier: kubernetes
-        name: "Kubernetes"
+      - name: "Kubernetes"
         url: "agent/kubernetes/"
-        parent: menu_references_agent
         children:
-          - identifier: kubernetes_daemonset
-            name: "DaemonSet Setup"
+          - name: "DaemonSet Setup"
             url: "agent/kubernetes/daemonset_setup"
-            parent: kubernetes
-          - identifier: kubernetes_host
-            name: "Host Setup"
+          - name: "Host Setup"
             url: "agent/kubernetes/host_setup"
-            parent: kubernetes
-          - identifier: kubernetes_dca
-            name: "Cluster Agent"
+          - name: "Cluster Agent"
             url: "agent/kubernetes/cluster"
-            parent: kubernetes
-          - identifier: kubernetes_helm
-            name: "Using Helm"
+          - name: "Using Helm"
             url: "agent/kubernetes/helm"
-            parent: kubernetes
-          - identifier: kubernetes_event
-            name: "Event Collection"
+          - name: "Event Collection"
             url: "agent/kubernetes/event_collection"
-            parent: kubernetes
-          - identifier: kubernetes_integrations
-            name: "Custom Integrations"
+          - name: "Custom Integrations"
             url: "agent/kubernetes/integrations"
-            parent: kubernetes
-          - identifier: kubernetes_metrics
-            name: "Metrics"
+          - name: "Metrics"
             url: "agent/kubernetes/metrics"
-            parent: kubernetes
-          - identifier: kubernetes_dogstatsd
-            name: "Custom Metrics & DogStatsD"
+          - name: "Custom Metrics & DogStatsD"
             url: "agent/kubernetes/dogstatsd"
-            parent: kubernetes
-          - identifier: kubernetes_legacy
-            name: "Legacy Versions"
+          - name: "Legacy Versions"
             url: "agent/kubernetes/legacy"
-            parent: kubernetes
       ## Autodiscovery
-      - identifier: autodiscovery
-        name: "Autodiscovery"
+      - name: "Autodiscovery"
         url: "agent/autodiscovery"
-        parent: menu_references_agent
         children:
-          - identifier: autodiscovery_clusterchecks
-            name: "Cluster Checks"
+          - name: "Cluster Checks"
             url: "agent/autodiscovery/clusterchecks"
-            parent: autodiscovery
-      - identifier: proxy
-        name: "Proxy"
+      - name: "Proxy"
         url: "agent/proxy"
-        parent: menu_references_agent
       ## Upgrade to Agent v6
-      - identifier: customnav_agentnav_upgrade_agent_6
-        name: "Upgrade to Agent v6"
+      - name: "Upgrade to Agent v6"
         url: "agent/faq/upgrade-to-agent-v6"
-        parent: menu_references_agent
-      - identifier: prometheus
-        name: "Prometheus Checks"
+      - name: "Prometheus Checks"
         url: "agent/prometheus"
-        parent: menu_references_agent
       # Troubleshooting
-      - identifier: troubleshooting
-        name: "Troubleshooting"
+      - name: "Troubleshooting"
         url: "agent/troubleshooting/"
-        parent: menu_references_agent
       # Guides
-      - identifier: customnav_agentnav_guides
-        name: "Guides"
+      - name: "Guides"
         url: "agent/guide/"
-        parent: menu_references_agent
-      - identifier: customnav_agentnav_security
-        name: "Security"
+      - name: "Security"
         url: "agent/security"
-        parent: menu_references_agent
-      #- identifier: customnav_agentnav_faq
-      #  name: "FAQ"
+      #- #  name: "FAQ"
       #  url: "agent/faq/"
       #  #  parent: menu_references_agent
       # AGENT - Subnav end
 
   # INTEGRATIONS
-  - identifier: menu_references_integrations
-    name: "Integrations"
+  - name: "Integrations"
     url: "integrations/"
     pre: "nav_integrations"
     # INTEGRATIONS - Subnav start
   # INTEGRATIONS - Subnav end
 
   # Watchdog
-  - identifier: customnav_watchdog
-    name: "Watchdog"
+  - name: "Watchdog"
     url: "watchdog/"
     pre: "nav_watchdog"
     # GRAPHING
-  - identifier: menu_references_graphing
-    name: "Graphing"
+  - name: "Graphing"
     url: "graphing/"
     pre: "nav_graphing"
     children:
       # GRAPHING - Subnav start
-      - identifier: customnav_graphingnav_dashboards
-        name: "Dashboards"
+      - name: "Dashboards"
         url: "graphing/dashboards/"
-        parent: menu_references_graphing
         children:
           # Graphing dashboard subnav
-          - identifier: customnav_graphingnav_screenboard
-            name: "Screenboard"
+          - name: "Screenboard"
             url: "graphing/dashboards/screenboard/"
-            parent: customnav_graphingnav_dashboards
-          - identifier: customnav_graphingnav_timeboard
-            name: "Timeboard"
+          - name: "Timeboard"
             url: "graphing/dashboards/timeboard/"
-            parent: customnav_graphingnav_dashboards
-          - identifier: customnav_graphingnav_template_variables
-            name: "Template Variables"
+          - name: "Template Variables"
             url: "graphing/dashboards/template_variables/"
-            parent: customnav_graphingnav_dashboards
-          - identifier: customnav_graphingnav_shared_graph
-            name: "Shared Graphs"
+          - name: "Shared Graphs"
             url: "graphing/dashboards/shared_graph/"
-            parent: customnav_graphingnav_dashboards
       # Metrics
-      - identifier: customnav_graphingnav_metrics
-        name: "Metrics"
+      - name: "Metrics"
         url: "graphing/metrics/"
-        parent: menu_references_graphing
         children:
-          - identifier: customnav_graphingnav_explorer
-            name: "Explorer"
+          - name: "Explorer"
             url: "graphing/metrics/explorer"
-            parent: customnav_graphingnav_metrics
-          - identifier: customnav_graphingnav_summary
-            name: "Summary"
+          - name: "Summary"
             url: "graphing/metrics/summary"
-            parent: customnav_graphingnav_metrics
-          - identifier: customnav_graphingnav_distribution
-            name: "Distributions"
+          - name: "Distributions"
             url: "graphing/metrics/distributions"
-            parent: customnav_graphingnav_metrics
-      - identifier: customnav_graphingnav_notebooks
-        name: "Notebooks"
+      - name: "Notebooks"
         url: "graphing/notebooks/"
-        parent: menu_references_graphing
-      - identifier: customnav_graphingnav_events
-        name: "Event Stream"
+      - name: "Event Stream"
         url: "graphing/event_stream/"
-        parent: menu_references_graphing
-      - identifier: customnav_graphingnav_infrastructure
-        name: "Infrastructure"
+      - name: "Infrastructure"
         url: "graphing/infrastructure/"
-        parent: menu_references_graphing
         children:
-          - identifier: customnav_infrastructurenav_containermap
-            name: "Container Map"
+          - name: "Container Map"
             url: "graphing/infrastructure/containermap/"
-            parent: customnav_graphingnav_infrastructure
-          - identifier: customnav_infrastructurenav_hostmap
-            name: "Host Map"
+          - name: "Host Map"
             url: "graphing/infrastructure/hostmap/"
-            parent: customnav_graphingnav_infrastructure
-          - identifier: customnav_infrastructurenav_livecontainers
-            name: "Live Containers"
+          - name: "Live Containers"
             url: "graphing/infrastructure/livecontainers/"
-            parent: customnav_graphingnav_infrastructure
-          - identifier: customnav_infrastructurenav_process
-            name: "Live Processes"
+          - name: "Live Processes"
             url: "graphing/infrastructure/process/"
-            parent: customnav_graphingnav_infrastructure
-          - identifier: customnav_infrastructurenav_cloudfunctions
-            name: "Cloud Functions"
+          - name: "Cloud Functions"
             url: "graphing/infrastructure/cloudfunctions/"
-            parent: customnav_graphingnav_infrastructure
       # GRAPHING - Functions
-      - identifier: customnav_graphingnav_functions
-        name: "From the query to the graph "
+      - name: "From the query to the graph "
         url: "graphing/functions/"
-        parent: menu_references_graphing
         children:
-          - identifier: customnav_graphingnav_algorithms
-            name: "Algorithms"
+          - name: "Algorithms"
             url: "graphing/functions/algorithms/"
-            parent: customnav_graphingnav_functions
-          - identifier: customnav_graphingnav_arithmetic
-            name: "Arithmetic"
+          - name: "Arithmetic"
             url: "graphing/functions/arithmetic/"
-            parent: customnav_graphingnav_functions
-          - identifier: customnav_graphingnav_count
-            name: "Count"
+          - name: "Count"
             url: "graphing/functions/count/"
-            parent: customnav_graphingnav_functions
-          - identifier: customnav_graphingnav_interpolation
-            name: "Interpolation"
+          - name: "Interpolation"
             url: "graphing/functions/interpolation/"
-            parent: customnav_graphingnav_functions
-          - identifier: customnav_graphingnav_rank
-            name: "Rank"
+          - name: "Rank"
             url: "graphing/functions/rank/"
-            parent: customnav_graphingnav_functions
-          - identifier: customnav_graphingnav_rate
-            name: "Rate"
+          - name: "Rate"
             url: "graphing/functions/rate/"
-            parent: customnav_graphingnav_functions
-          - identifier: customnav_graphingnav_regression
-            name: "Regression"
+          - name: "Regression"
             url: "graphing/functions/regression/"
-            parent: customnav_graphingnav_functions
-          - identifier: customnav_graphingnav_rollup
-            name: "Rollup"
+          - name: "Rollup"
             url: "graphing/functions/rollup/"
-            parent: customnav_graphingnav_functions
-          - identifier: customnav_graphingnav_smoothing
-            name: "Smoothing"
+          - name: "Smoothing"
             url: "graphing/functions/smoothing/"
-            parent: customnav_graphingnav_functions
-          - identifier: customnav_graphingnav_timeshift
-            name: "Timeshift"
+          - name: "Timeshift"
             url: "graphing/functions/timeshift/"
-            parent: customnav_graphingnav_functions
-          - identifier: customnav_graphingnav_beta
-            name: "Beta"
+          - name: "Beta"
             url: "graphing/functions/beta/"
-            parent: customnav_graphingnav_functions
-      - identifier: customnav_graphingnav_graphingjson
-        name: "Graphing JSON"
+      - name: "Graphing JSON"
         url: "graphing/graphing_json/"
-        parent: menu_references_graphing
-      - identifier: customnav_graphingnav_widget
-        name: "Widgets"
+      - name: "Widgets"
         url: "graphing/widgets/"
-        parent: menu_references_graphing
-     # - identifier: customnav_graphingnav_faq
-     #   name: "FAQ"
+     # - #   name: "FAQ"
      #   url: "graphing/faq/"
      #   #   parent: menu_references_graphing
       # GRAPHING - Subnav end
 
   # ALERTING
-  - identifier: menu_references_monitoring
-    name: "Alerting"
+  - name: "Alerting"
     url: "monitors/"
     pre: "nav_alerting"
     children:
       # ALERTING - Subnav start
-      - identifier: customnav_monitornav_monitor_types
-        name: "Monitor Types"
+      - name: "Monitor Types"
         url: "monitors/monitor_types/"
-        parent: menu_references_monitoring
         children:
-          - identifier: customnav_monitortypenav_anomaly
-            name: "Anomaly"
+          - name: "Anomaly"
             url: "monitors/monitor_types/anomaly/"
-            parent: customnav_monitornav_monitor_types
-          - identifier: customnav_monitortypenav_apm
-            name: "APM"
+          - name: "APM"
             url: "monitors/monitor_types/apm/"
-            parent: customnav_monitornav_monitor_types
-          - identifier: customnav_monitortypenav_composite
-            name: "Composite"
+          - name: "Composite"
             url: "monitors/monitor_types/composite/"
-            parent: customnav_monitornav_monitor_types
-          - identifier: customnav_monitortypenav_custom_check
-            name: "Custom Check"
+          - name: "Custom Check"
             url: "monitors/monitor_types/custom_check/"
-            parent: customnav_monitornav_monitor_types
-          - identifier: customnav_monitortypenav_event
-            name: "Event"
+          - name: "Event"
             url: "monitors/monitor_types/event/"
-            parent: customnav_monitornav_monitor_types
-          - identifier: customnav_monitortypenav_forecasts
-            name: "Forecasts"
+          - name: "Forecasts"
             url: "monitors/monitor_types/forecasts/"
-            parent: customnav_monitornav_monitor_types
-          - identifier: customnav_monitortypenav_host
-            name: "Host"
+          - name: "Host"
             url: "monitors/monitor_types/host/"
-            parent: customnav_monitornav_monitor_types
-          - identifier: customnav_monitortypenav_integration
-            name: "Integration"
+          - name: "Integration"
             url: "monitors/monitor_types/integration/"
-            parent: customnav_monitornav_monitor_types
-          - identifier: customnav_monitortypenav_monitor
-            name: "Log"
+          - name: "Log"
             url: "monitors/monitor_types/log"
-            parent: customnav_monitornav_monitor_types
-          - identifier: customnav_monitortypenav_metric
-            name: "Metric"
+          - name: "Metric"
             url: "monitors/monitor_types/metric/"
-            parent: customnav_monitornav_monitor_types
-          - identifier: customnav_monitortypenav_network
-            name: "Network"
+          - name: "Network"
             url: "monitors/monitor_types/network/"
-            parent: customnav_monitornav_monitor_types
-          - identifier: customnav_monitortypenav_outlier
-            name: "Outlier"
+          - name: "Outlier"
             url: "monitors/monitor_types/outlier/"
-            parent: customnav_monitornav_monitor_types
-          - identifier: customnav_monitortypenav_process
-            name: "Process"
+          - name: "Process"
             url: "monitors/monitor_types/process/"
-            parent: customnav_monitornav_monitor_types
-          - identifier: customnav_monitortypenav_watchdog
-            name: "Watchdog"
+          - name: "Watchdog"
             url: "monitors/monitor_types/watchdog/"
-            parent: customnav_monitornav_monitor_types
 
       # Manage monitor
-      - identifier: customnav_monitornav_manage_monitor
-        name: "Manage Monitor"
+      - name: "Manage Monitor"
         url: "monitors/manage_monitor/"
-        parent: menu_references_monitoring
 
       # Monitor status
-      - identifier: customnav_monitornav_monitor_status
-        name: "Monitor Status"
+      - name: "Monitor Status"
         url: "monitors/monitor_status/"
-        parent: menu_references_monitoring
 
       # Check summary
-      - identifier: customnav_monitornav_check_summary
-        name: "Check Summary"
+      - name: "Check Summary"
         url: "monitors/check_summary/"
-        parent: menu_references_monitoring
-      - identifier: customnav_monitornav_notifications
-        name: "Notifications"
+      - name: "Notifications"
         url: "monitors/notifications/"
-        parent: menu_references_monitoring
-      - identifier: customnav_monitornav_downtimes
-        name: "Downtimes"
+      - name: "Downtimes"
         url: "monitors/downtimes/"
-        parent: menu_references_monitoring
-      - identifiet: customnav_monitornav_uptime_widget
-        name: "Uptime Widget"
+      - name: "Uptime Widget"
         url: "monitors/monitor_uptime_widget/"
-        parent: menu_references_monitoring
-      #- identifier: customnav_monitornav_faq
-      #  name: "FAQ"
+      #- #  name: "FAQ"
       #  url: "monitors/faq/"
       #  #  parent: menu_references_monitoring
       # ALERTING - Subnav end
 
 
   # TRACING/APM
-  - identifier: menu_references_tracing
-    name: "APM (Tracing)"
+  - name: "APM (Tracing)"
     url: "tracing/"
     pre: "nav_tracing"
     children:
       # Languages
-      - identifier: customnav_tracingnav_languages
-        name: "Languages Instrumentation"
+      - name: "Languages Instrumentation"
         url: "tracing/languages/"
-        parent: menu_references_tracing
         children:
-          - identifier: customnav_tracingnav_java
-            name: "Java"
+          - name: "Java"
             url: "tracing/languages/java/"
-            parent: customnav_tracingnav_languages
-          - identifier: customnav_tracingnav_python
-            name: "Python"
+          - name: "Python"
             url: "tracing/languages/python/"
-            parent: customnav_tracingnav_languages
-          - identifier: customnav_tracingnav_ruby
-            name: "Ruby"
+          - name: "Ruby"
             url: "tracing/languages/ruby/"
-            parent: customnav_tracingnav_languages
-          - identifier: customnav_tracingnav_go
-            name: "Go"
+          - name: "Go"
             url: "tracing/languages/go/"
-            parent: customnav_tracingnav_languages
-          - identifier: customnav_tracingnav_javascript
-            name: "Node.js"
+          - name: "Node.js"
             url: "tracing/languages/nodejs/"
-            parent: customnav_tracingnav_languages
-          - identifier: customnav_tracingnav_dotnet
-            name: ".NET"
+          - name: ".NET"
             url: "tracing/languages/dotnet/"
-            parent: customnav_tracingnav_languages
-          - identifier: customnav_tracingnav_php
-            name: "PHP"
+          - name: "PHP"
             url: "tracing/languages/php/"
-            parent: customnav_tracingnav_languages
-          - identifier: customnav_tracingnav_cpp
-            name: "C++"
+          - name: "C++"
             url: "tracing/languages/cpp/"
-            parent: customnav_tracingnav_languages
 
       # Proxy Configuration
-      - identifier: customnav_tracingnav_proxy_config
-        name: "Proxy Configuration"
+      - name: "Proxy Configuration"
         url: "tracing/proxies/"
-        parent: menu_references_tracing
         children:
-          - identifier: customnav_tracingnav_proxy_config_nginx
-            name: "NGINX"
+          - name: "NGINX"
             url: "tracing/proxies/nginx"
-            parent: customnav_tracingnav_proxy_config
-          - identifier: customnav_tracingnav_proxy_config_envoy
-            name: "Envoy"
+          - name: "Envoy"
             url: "tracing/proxies/envoy"
-            parent: customnav_tracingnav_proxy_config
 
       # TRACING/APM - Setup Advanced
 
-      - identifier: customnav_tracingnav_advanced_usage
-        name: "Advanced Instrumentation"
+      - name: "Advanced Instrumentation"
         url: "tracing/advanced_usage/"
-        parent: menu_references_tracing
         children:
-          - identifier: customnav_tracingnav_custom_tagging
-            name: "Custom Tagging"
+          - name: "Custom Tagging"
             url: "#custom-tagging"
-            parent: customnav_tracingnav_advanced_usage
-          - identifier: customnav_tracingnav_agent_hostname
-            name: "Change Agent Hostname"
+          - name: "Change Agent Hostname"
             url: "#change-agent-hostname"
-            parent: customnav_tracingnav_advanced_usage
-          - identifier: customnav_tracingnav_manual_tracing
-            name: "Manual Instrumentation"
+          - name: "Manual Instrumentation"
             url: "#manual-instrumentation"
-            parent: customnav_tracingnav_advanced_usage
-          - identifier: customnav_tracingnav_open_tracing
-            name: "OpenTracing"
+          - name: "OpenTracing"
             url: "#opentracing"
-            parent: customnav_tracingnav_advanced_usage
-          - identifier: customnav_tracingnav_distributed_tracing
-            name: "Distributed Tracing"
+          - name: "Distributed Tracing"
             url: "#distributed-tracing"
-            parent: customnav_tracingnav_advanced_usage
-          - identifier: customnav_tracingnav_sampling
-            name: "Priority Sampling"
+          - name: "Priority Sampling"
             url: "#priority-sampling"
-            parent: customnav_tracingnav_advanced_usage
-          - identifier: customnav_tracingnav_logging
-            name: "Correlate Traces and Logs"
+          - name: "Correlate Traces and Logs"
             url: "#correlate-traces-and-logs"
-            parent: customnav_tracingnav_advanced_usage
-          - identifier: customnav_tracingnav_debugging
-            name: "Debugging"
+          - name: "Debugging"
             url: "#debugging"
-            parent: customnav_tracingnav_advanced_usage
-          - identifier: customnav_tracingnav_security
-            name: "Security"
+          - name: "Security"
             url: "#security"
-            parent: customnav_tracingnav_advanced_usage
 
       # Using the APM UI
-      - identifier: customnav_tracingnav_visualization
-        name: "Use the APM UI"
+      - name: "Use the APM UI"
         url: "tracing/visualization/"
-        parent: menu_references_tracing
         children:
-          - identifier: customnav_tracingnav_services_list
-            name: "Services List"
+          - name: "Services List"
             url: "tracing/visualization/services_list"
-            parent: customnav_tracingnav_visualization
-          - identifier: customnav_tracingnav_service
-            name: "Service page"
+          - name: "Service page"
             url: "tracing/visualization/service"
-            parent: customnav_tracingnav_visualization
-          - identifier: customnav_tracingnav_resource
-            name: "Resource page"
+          - name: "Resource page"
             url: "tracing/visualization/resource"
-            parent: customnav_tracingnav_visualization
-          - identifier: customnav_tracingnav_trace
-            name: "Trace page"
+          - name: "Trace page"
             url: "tracing/visualization/trace"
-            parent: customnav_tracingnav_visualization
 
           # Trace Search
-          - identifier: customnav_tracingnav_trace_search
-            name: "Trace Search"
+          - name: "Trace Search"
             url: "tracing/visualization/search"
-            parent: customnav_tracingnav_visualization
-          - identifier: customnav_tracingnav_graph
-            name: "Trace Analytics"
+          - name: "Trace Analytics"
             url: "tracing/visualization/analytics"
-            parent: customnav_tracingnav_visualization
 
-          - identifier: customnav_tracingnav_servicemap
-            name: "Service Map"
+          - name: "Service Map"
             url: "tracing/visualization/services_map"
-            parent: customnav_tracingnav_visualization
 
       # Getting further
-      - identifier: customnav_tracingnav_getting_further
-        name: "Getting Further"
+      - name: "Getting Further"
         url: "tracing/getting_further/"
-        parent: menu_references_tracing
         children:
-          - identifier: customnav_tracingnav_apdex
-            name: "Apdex"
+          - name: "Apdex"
             url: "tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm"
-            parent: customnav_tracingnav_getting_further
-          - identifier: customnav_tracingnav_resource_monitor
-            name: "Resource Monitor"
+          - name: "Resource Monitor"
             url: "tracing/getting_further/resource_monitor"
-            parent: customnav_tracingnav_getting_further
-          - identifier: customnav_tracingnav_apm_monitor
-            name: "Service Monitor"
+          - name: "Service Monitor"
             url: "monitors/monitor_types/apm"
-            parent: customnav_tracingnav_getting_further
-          - identifier: customnav_tracingnav_apm_widget
-            name: "APM in Dashboard"
+          - name: "APM in Dashboard"
             url: "graphing/dashboards/widgets/#service-summary"
-            parent: customnav_tracingnav_getting_further
-          - identifier: customnav_tracingnav_metrics_namespace
-            name: "Trace metrics namespace"
+          - name: "Trace metrics namespace"
             url: "tracing/getting_further/metrics_namespace"
-            parent: customnav_tracingnav_getting_further
-          - identifier: customnav_tracingnav_apm_sampling_storage
-            name: "Storage & Sampling"
+          - name: "Storage & Sampling"
             url: "tracing/getting_further/trace_sampling_and_storage"
-            parent: customnav_tracingnav_getting_further
 
       # Trace API
-      - identifier: customnav_tracingnav_api
-        name: "Trace API"
+      - name: "Trace API"
         url: "api/#tracing"
-        parent: menu_references_tracing
 
       # Libraries
 
-      - identifier: customnav_tracingnav_libraries
-        name: "Community Libraries"
+      - name: "Community Libraries"
         url: "developers/libraries/#apm-tracing-client-libraries"
-        parent: menu_references_tracing
 
-      #- identifier: customnav_tracingnav_faq
-      #  name: "FAQ"
+      #- #  name: "FAQ"
       #  url: "tracing/faq/"
       #  #  parent: menu_references_tracing
 
@@ -640,393 +372,239 @@ main:
       # TRACING/APM - Subnav end
 
   # LOGS
-  - identifier: menu_references_logs
-    name: "Log Management"
+  - name: "Log Management"
     url: "logs/"
     pre: "nav_logs"
     children:
       # Log collection
-      - identifier: customnav_lognav_collection
-        name: "Log Collection & Integrations"
+      - name: "Log Collection & Integrations"
         url: "logs/log_collection/"
-        parent: menu_references_logs
         children:
-          - identifier: customnav_lognav_aws
-            name: "AWS"
+          - name: "AWS"
             url: "integrations/amazon_web_services/#log-collection"
-            parent: customnav_lognav_collection
-          - identifier: docker_log_collection
-            name: "Docker"
+          - name: "Docker"
             url: "logs/log_collection/docker"
-            parent: customnav_lognav_collection
-          - identifier: customnav_lognav_csharp
-            name: "Csharp"
+          - name: "Csharp"
             url: "logs/log_collection/csharp/"
-            parent: customnav_lognav_collection
-          - identifier: customnav_lognav_go
-            name: "Go"
+          - name: "Go"
             url: "logs/log_collection/go/"
-            parent: customnav_lognav_collection
-          - identifier: customnav_lognav_java
-            name: "Java"
+          - name: "Java"
             url: "logs/log_collection/java/"
-            parent: customnav_lognav_collection
-          - identifier: customnav_lognav_nodejs
-            name: "Nodejs"
+          - name: "Nodejs"
             url: "logs/log_collection/nodejs/"
-            parent: customnav_lognav_collection
-          - identifier: customnav_lognav_php
-            name: "PHP"
+          - name: "PHP"
             url: "logs/log_collection/php/"
-            parent: customnav_lognav_collection
-          - identifier: customnav_lognav_python
-            name: "Python"
+          - name: "Python"
             url: "logs/log_collection/python/"
-            parent: customnav_lognav_collection
-          - identifier: customnav_lognav_ruby
-            name: "Ruby"
+          - name: "Ruby"
             url: "logs/log_collection/ruby/"
-            parent: customnav_lognav_collection
 
 
-          - identifier: customnav_lognav_other
-            name: "Other Integrations"
+          - name: "Other Integrations"
             url: "integrations/#cat-log-collection"
-            parent: customnav_lognav_collection
 
       # LOGS - Processing
-      - identifier: customnav_lognav_processing
-        name: "Processing"
+      - name: "Processing"
         url: "logs/processing/"
-        parent: menu_references_logs
         children:
-          - identifier: customnav_lognav_pipelines
-            name: "Pipelines"
+          - name: "Pipelines"
             url: "logs/processing/pipelines/"
-            parent: customnav_lognav_processing
-          - identifier: customnav_lognav_processors
-            name: "Processors"
+          - name: "Processors"
             url: "logs/processing/processors/"
-            parent: customnav_lognav_processing
-          - identifier: customnav_lognav_parsing
-            name: "Parsing"
+          - name: "Parsing"
             url: "logs/processing/parsing/"
-            parent: customnav_lognav_processing
-          - identifier: customnav_lognav_attributes_naming_convention
-            name: "Naming Convention"
+          - name: "Naming Convention"
             url: "logs/processing/attributes_naming_convention/"
-            parent: customnav_lognav_processing
 
       # LOGS - Live tail
-      - identifier: customnav_lognav_live_tail
-        name: "Live Tail"
+      - name: "Live Tail"
         url: "logs/live_tail/"
-        parent: menu_references_logs
 
       # LOGS - Explorer
-      - identifier: customnav_lognav_explorer
-        name: "Explorer"
+      - name: "Explorer"
         url: "logs/explorer/"
-        parent: menu_references_logs
         children:
-          - identifier: customnav_lognav_search
-            name: "Search"
+          - name: "Search"
             url: "logs/explorer/search"
-            parent: customnav_lognav_explorer
-          - identifier: customnav_lognav_analytics
-            name: "Log Analytics"
+          - name: "Log Analytics"
             url: "logs/explorer/analytics"
-            parent: customnav_lognav_explorer
-          - identifier: customnav_lognav_saved_views
-            name: "Saved Views"
+          - name: "Saved Views"
             url: "logs/explorer/saved_views"
-            parent: customnav_lognav_explorer
-          - identifier: customnav_lognav_patterns
-            name: "Log Patterns"
+          - name: "Log Patterns"
             url: "logs/explorer/patterns"
-            parent: customnav_lognav_explorer
 
-      - identifier: customnav_lognav_logging_without_limits
-        name: "Logging without Limits"
+      - name: "Logging without Limits"
         url: "logs/logging_without_limits/"
-        parent: menu_references_logs
 
-      - identifier: customnav_lognav_monitor
-        name: "Log monitor"
+      - name: "Log monitor"
         url: "monitors/monitor_types/log"
-        parent: menu_references_logs
 
       # LOGS - Archives
 
-      - identifier: customnav_lognav_archives
-        name: "Archives"
+      - name: "Archives"
         url: "logs/archives/s3"
-        parent: menu_references_logs
         children:
-          - identifier: customnav_lognav_archives_s3
-            name: "AWS S3"
+          - name: "AWS S3"
             url: "logs/archives/s3"
-            parent: customnav_lognav_archives
 
-      #- identifier: customnav_lognav_faq
-      #  name: "FAQ"
+      #- #  name: "FAQ"
       #  url: "logs/faq/"
       #  #  parent: menu_references_logs
 
       # Guides
-      - identifier: customnav_logsnav_guides
-        name: "Guides"
+      - name: "Guides"
         url: "logs/guide/"
-        parent: menu_references_logs
 
-      - identifier: customnav_loggnav_security
-        name: "Security"
+      - name: "Security"
         url: "logs/security"
-        parent: menu_references_logs
 
       # LOGS - Subnav end
 
   # SYNTHETICS
-  - identifier: menu_references_synthetics
-    name: "Synthetics"
+  - name: "Synthetics"
     url: "synthetics/"
     pre: "nav_synthetics"
     children:
-      - identifier: synthetics_uptime_check
-        name: "Uptime Check"
+      - name: "Uptime Check"
         url: "synthetics/uptime_check"
-        parent: menu_references_synthetics
-      - identifier: synthetics_browser_check
-        name: "Browser Check"
+      - name: "Browser Check"
         url: "synthetics/browser_check"
-        parent: menu_references_synthetics
 
   # DEVELOPERS
-  - identifier: menu_references_developers
-    name: "Developer Tools"
+  - name: "Developer Tools"
     url: "developers/"
     pre: "nav_developers"
     children:
       # DEVELOPERS - Subnav start
-      - identifier: customnav_developersnav_dogstatsd
-        name: "DogStatsD"
+      - name: "DogStatsD"
         url: "developers/dogstatsd/"
-        parent: menu_references_developers
         children:
-          - identifier: customnav_developersnav_dogstatsd_data_types
-            name: "Data Types and Tags"
+          - name: "Data Types and Tags"
             url: "developers/dogstatsd/data_types"
-            parent: customnav_developersnav_dogstatsd
-          - identifier: customnav_developersnav_dogstatsd_datagram_shell
-            name: "Datagram and Shell Usage"
+          - name: "Datagram and Shell Usage"
             url: "developers/dogstatsd/datagram_shell"
-            parent: customnav_developersnav_dogstatsd
-          - identifier: customnav_developersnav_dogstatsd_unix_socket
-            name: "Unix Domain Socket usage"
+          - name: "Unix Domain Socket usage"
             url: "developers/dogstatsd/unix_socket"
-            parent: customnav_developersnav_dogstatsd
-      - identifier: customnav_developersnav_metrics
-        name: "Metrics"
+      - name: "Metrics"
         url: "developers/metrics/"
-        parent: menu_references_developers
         children:
-          - identifier: customnav_developersnav_metrics_custom
-            name: "Custom Metrics"
+          - name: "Custom Metrics"
             url: "developers/metrics/custom_metrics/"
-            parent: customnav_developersnav_metrics
-          - identifier: customnav_developersnav_metrics_counts
-            name: "Counts"
+          - name: "Counts"
             url: "developers/metrics/counts"
-            parent: customnav_developersnav_metrics
-          - identifier: customnav_developersnav_metrics_distributions
-            name: "Distributions"
+          - name: "Distributions"
             url: "developers/metrics/distributions"
-            parent: customnav_developersnav_metrics
-          - identifier: customnav_developersnav_metrics_gauges
-            name: "Gauges"
+          - name: "Gauges"
             url: "developers/metrics/gauges"
-            parent: customnav_developersnav_metrics
-          - identifier: customnav_developersnav_metrics_histograms
-            name: "Histograms"
+          - name: "Histograms"
             url: "developers/metrics/histograms"
-            parent: customnav_developersnav_metrics
-          - identifier: customnav_developersnav_metrics_rates
-            name: "Rates"
+          - name: "Rates"
             url: "developers/metrics/rates"
-            parent: customnav_developersnav_metrics
-          - identifier: customnav_developersnav_metrics_sets
-            name: "Sets"
+          - name: "Sets"
             url: "developers/metrics/sets"
-            parent: customnav_developersnav_metrics
-      - identifier: customnav_developersnav_libraries
-        name: "Libraries"
+      - name: "Libraries"
         url: "developers/libraries/"
-        parent: menu_references_developers
-      - identifier: customnav_developersnav_office_hours
-        name: "Community Office Hours"
+      - name: "Community Office Hours"
         url: "developers/office_hours/"
-        parent: menu_references_developers
-      - identifier: customnav_developersnav_agent_checks
-        name: "Write a Custom Check"
+      - name: "Write a Custom Check"
         url: "developers/write_agent_check"
-        parent: menu_references_developers
-      - identifier: customnav_developersnav_prometheus
-        name: "Write a Prometheus Check"
+      - name: "Write a Prometheus Check"
         url: "developers/prometheus"
-        parent: menu_references_developers
       # Integrations core doc
-      - identifier: customnav_integrationsnav_new_integration
-        name: "Integrations"
+      - name: "Integrations"
         url: "developers/integrations/"
-        parent: menu_references_developers
         children:
-          - identifier: customnav_integrationsnav_new_check_howto
-            name: "Create a new Integration"
+          - name: "Create a new Integration"
             url: "developers/integrations/new_check_howto"
-            parent: customnav_integrationsnav_new_integration
-          - identifier: customnav_integrationsnav_python
-            name: "Python"
+          - name: "Python"
             url: "developers/integrations/python"
-            parent: customnav_integrationsnav_new_integration
-          - identifier: customnav_integrationsnav_legacy
-            name: "Legacy"
+          - name: "Legacy"
             url: "developers/integrations/legacy"
-            parent: customnav_integrationsnav_new_integration
-      - identifier: customnav_integrationsnav_new_guides
-        name: "Guides"
+      - name: "Guides"
         url: "developers/guide/"
-        parent: menu_references_developers
-      #- identifier: customnav_developersnav_faq
-      #  name: "FAQ"
+      #- #  name: "FAQ"
       #  url: "developers/faq/"
       #  #  parent: menu_references_developers
       # DEVELOPERS - Subnav end
 
   # API
-  - identifier: menu_references_api
-    name: "API"
+  - name: "API"
     url: "api/"
     pre: "nav_api"
     # ACCOUNT MANAGEMENT
-  - identifier: menu_references_account_management
-    name: "Account management"
+  - name: "Account management"
     url: "account_management/"
     pre: "nav_account"
     children:
       # ACCOUNT MANAGEMENT - Subnav start
-      - identifier: customnav_accountmanagementnav_team
-        name: "Team management"
+      - name: "Team management"
         url: "account_management/team/"
-        parent: menu_references_account_management
-      - identifier: customnav_accountmanagementnav_org
-        name: "Organization settings"
+      - name: "Organization settings"
         url: "account_management/org_settings/"
-        parent: menu_references_account_management
-      - identifier: customnav_accountmanagementnav_saml
-        name: "SSO with SAML"
+      - name: "SSO with SAML"
         url: "account_management/saml/"
-        parent: menu_references_account_management
         children:
           # SAML subnav
-          - identifier: saml_activedirectory
-            name: "Active Directory"
+          - name: "Active Directory"
             url: "account_management/saml/activedirectory"
-            parent: customnav_accountmanagementnav_saml
-          - identifier: saml_auth0
-            name: "Auth0"
+          - name: "Auth0"
             url: "account_management/saml/auth0"
-            parent: customnav_accountmanagementnav_saml
-          - identifier: saml_azure
-            name: "Azure"
+          - name: "Azure"
             url: "account_management/saml/azure"
-            parent: customnav_accountmanagementnav_saml
-          - identifier: saml_google
-            name: "Google"
+          - name: "Google"
             url: "account_management/saml/google"
-            parent: customnav_accountmanagementnav_saml
-          - identifier: saml_nopassword
-            name: "NoPassword"
+          - name: "NoPassword"
             url: "account_management/saml/nopassword"
-            parent: customnav_accountmanagementnav_saml
-          - identifier: saml_okta
-            name: "Okta"
+          - name: "Okta"
             url: "account_management/saml/okta"
-            parent: customnav_accountmanagementnav_saml
-          - identifier: saml_safenet
-            name: "SafeNet"
+          - name: "SafeNet"
             url: "account_management/saml/safenet"
-            parent: customnav_accountmanagementnav_saml
-      - identifier: customnav_accountmanagementnav_multi_organization
-        name: "Multi-org accounts"
+      - name: "Multi-org accounts"
         url: "account_management/multi_organization/"
-        parent: menu_references_account_management
-      - identifier: customnav_accountmanagementnav_rbac
-        name: "Role Based Access Control"
+      - name: "Role Based Access Control"
         url: "account_management/rbac/"
-        parent: menu_references_account_management
         children:
           # RBAC subnav
-          - identifier: rbac_log_management
-            name: "Log Management"
+          - name: "Log Management"
             url: "account_management/rbac/log_management"
-            parent: customnav_accountmanagementnav_rbac
-          - identifier: role_api
-            name: "Role API"
+          - name: "Role API"
             url: "account_management/rbac/role_api"
-            parent: customnav_accountmanagementnav_rbac
-      - identifier: customnav_accountmanagementnav_org_switching
-        name: "Switching between orgs"
+      - name: "Switching between orgs"
         url: "account_management/org_switching/"
-        parent: menu_references_account_management
-      - identifier: customnav_accountmanagementnav_billing
-        name: "Billing"
+      - name: "Billing"
         url: "account_management/billing/"
-        parent: menu_references_account_management
 
 
-      #- identifier: customnav_accountmanagementnav_faq
-      #  name: "FAQ"
+      #- #  name: "FAQ"
       #  url: "account_management/faq/"
       #  #  parent: menu_references_account_management
       # ACCOUNT MANAGEMENT - Subnav end
 
     # SECURITY
-  - identifier: menu_references_security
-    name: "Security"
+  - name: "Security"
     url: "security/"
     pre: "nav_security"
     children:
       # SECURITY - Subnav start
 
-      - identifier: customnav_security_agent
-        name: "Agent"
+      - name: "Agent"
         url: "security/agent"
-        parent: menu_references_security
-      - identifier: customnav_security_tracing
-        name: "APM (Tracing)"
+      - name: "APM (Tracing)"
         url: "security/tracing"
-        parent: menu_references_security
-      - identifier: customnav_security_logs
-        name: "Log Management"
+      - name: "Log Management"
         url: "security/logs"
-        parent: menu_references_security
-      - identifier: customnav_security_other
-        name: "Other considerations"
+      - name: "Other considerations"
         url: "security/other"
-        parent: menu_references_security
 
     # GLOSSARY
-  - identifier: menu_references_glossary
-    name: "Glossary"
+  - name: "Glossary"
     url: "glossary/"
     pre: "nav_glossary"
     # VIDEOS
-  - identifier: menu_references_videos
-    name: "Videos"
+  - name: "Videos"
     url: "videos/"
     pre: "nav_videos"
     # HELP
-  - identifier: menu_references_help
-    name: "Help"
+  - name: "Help"
     url: "help/"
     pre: "nav_help"
