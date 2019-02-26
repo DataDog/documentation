@@ -88,7 +88,7 @@ Some standard attributes, such as `error.stack`, `http.method` or `duration` for
 
 Interact with the attributes names and values in the lower JSON section to:
 
-* Build a facet or a measure out of an attribute. Note that this action does not apply to anterior logs.
+* Build or Edit a facet or a measure out of an attribute. Note that this action does not apply to anterior logs.
 * Add or remove a column from the log table.
 * Append the search request with specific values (include or exclude)
 
@@ -98,7 +98,7 @@ Interact with the attributes names and values in the lower JSON section to:
 Interact with upper reserved attributes section:
 
 * with **Host**, to access Host Dashboard or append search request with `host` of log. 
-* with **Service**, to see Trace in APM, append search request with Trace ID (both requires a `trace_id` attribute in log, refer to [trace injection in logs][3]) or append search request with `service` of log.
+* with **Service**, to see Trace in APM, append search request with Trace ID (both require a `trace_id` attribute in log, refer to [trace injection in logs][3]) or append search request with `service` of log.
 * with **Source**, to append search request with `source` of log.
 
 
