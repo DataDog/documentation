@@ -15,7 +15,7 @@ further_reading:
 
 ## Introduction
 
-[Datadog Live Containers][1] enable real-time visibility into all containers across your environment.
+[Datadog Live Containers][1] enables real-time visibility into all containers across your environment.
 
 Taking inspiration from bedrock tools like *htop*, *ctop*, and *kubectl*, live containers give you complete coverage of your container infrastructure in a continuously updated table with resource metrics at two-second resolution, faceted search, and streaming container logs.
 
@@ -24,12 +24,12 @@ Coupled with integrations for [Docker][2], [Kubernetes][3], [ECS][4], and other 
 {{< img src="graphing/infrastructure/livecontainers/livecontainerssummaries.png" alt="Live containers with summaries" responsive="true" >}}
 
 ## Installation
-After deploying the [Docker Agent][5], monitoring Live Containers is available without additional configuration. To enable logging follow these steps:
+After deploying the [Docker Agent][5], container metrics are available without additional configuration. To enable log collection follow these steps:
 
 {{< tabs >}}
 
 {{% tab "Linux/Windows" %}}
-Once the [Datadog Agent][1] is installed, enable log collection by editing the Agent main configuration file and updating the following parameters:
+Once the [Datadog Agent][1] is installed, enable log collection by editing the [Agent main configuration file][2] and updating the following parameters:
 
 ```
 logs_enabled: true
@@ -42,10 +42,11 @@ config_providers:
 **Notes**: 
 
 * To collect container information in the standard install rather than with the [Docker Agent][1], the `dd-agent` user must have permissions to access **docker.sock**.
-* Logs are indexed by default, however [Exclusion Filters][1] are configurable for fine-grained controls over indexes.
+* Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexing and uniquely receiving Live Tail data.
 
 
 [1]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=hostinstallation
+[2]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -57,9 +58,7 @@ Follow the instructions for the [Docker Agent][1], passing in the following attr
 -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true 
 ```
 
-**Note**: 
-
-* Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexes.
+**Note**: Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexing and uniquely receiving Live Tail data.
 
 [1]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=containerinstallation
 [2]: https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters
@@ -86,8 +85,7 @@ volumes:
 
 ```
 **Note**: 
-
-* Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexes.
+* Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexes and Live Tail data uniquely.
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/daemonset_setup
 [2]: https//docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters
@@ -99,11 +97,13 @@ For more information about activating log integrations, see the [documentation][
 
 ## Container Logs
 
-View streaming logs for any container reporting logs—like `docker logs -f` or `kubectl logs -f`—in the app. Click any container in the table to inspect it. Click the “logs” tab to see real-time log data from [Live Tail][7] or indexed logs for any time in the past.
+View streaming logs for any container like `docker logs -f` or `kubectl logs -f`—in the app. Click any container in the table to inspect it. Click the “logs” tab to see real-time data from [Live Tail][7] or indexed logs for any time in the past.
 
 
 ### Live Tail
-With Live Tail, all container logs are streamed, and pausing the stream will show the time selector switch to select a timeframe. Pausing the stream allows you to easily read logs that are quickly being written; unpause to continue streaming. Streaming logs can be searched with simple string matching. For lines that you are indexing, search by tag. For more details about Live Tail, see the [Live Tail documentation][7].
+With Live Tail, all container logs are streamed -- pausing the stream allows you to easily read logs that are quickly being written; unpause to continue streaming. 
+
+Streaming logs can be searched with simple string matching. For more details about Live Tail, see the [Live Tail documentation][7].
 
 **Note**: Streaming logs are not persisted, and entering a new search or refreshing the page clears the stream.
 
