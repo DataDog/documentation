@@ -35,7 +35,7 @@ build_preview:
     URL: ${PREVIEW_DOMAIN}
     CONFIG: ${PREVIEW_CONFIG}
     MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
-    UNTRACKED_EXTRAS: "data,content/integrations"
+    UNTRACKED_EXTRAS: "data,content/en/integrations"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - version_static_assets
@@ -61,7 +61,7 @@ test_preview_link_checks:
     URL: ${PREVIEW_DOMAIN}
     DISALLOW_BOTS: "1"
   script:
-    - node /etc/node_modules/link-checker/dd-link-checker.js -e preview -c ${CI_PROJECT_DIR}/link-check-config.js
+    - node /etc/node_modules/link-checker/dd-link-checker.js -e preview -c ${CI_PROJECT_DIR}/local/etc/link-check-config.js
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
@@ -73,7 +73,7 @@ build_live:
   variables:
     CONFIG: ${LIVE_CONFIG}
     URL: ${LIVE_DOMAIN}
-    UNTRACKED_EXTRAS: "data,content/integrations"
+    UNTRACKED_EXTRAS: "data,content/en/integrations"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
@@ -98,7 +98,7 @@ test_live_link_checks:
   variables:
     URL: ${LIVE_DOMAIN}
   script:
-    - node /etc/node_modules/link-checker/dd-link-checker.js -e live -c ${CI_PROJECT_DIR}/link-check-config.js
+    - node /etc/node_modules/link-checker/dd-link-checker.js -e live -c ${CI_PROJECT_DIR}/local/etc/link-check-config.js
   only:
     - master
 
