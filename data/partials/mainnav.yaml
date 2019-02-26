@@ -187,8 +187,14 @@ main:
             url: "graphing/functions/timeshift/"
           - name: "Beta"
             url: "graphing/functions/beta/"
-      - name: "Graphing JSON"
+      - name: "Graphing with JSON"
         url: "graphing/graphing_json/"
+        children:
+          - name: "Widget JSON schema"
+            url: "graphing/graphing_json/widget_json/"
+          - name: "Request JSON schema"
+            url: "graphing/graphing_json/request_json/"
+
       - name: "Widgets"
         url: "graphing/widgets/"
      # - #   name: "FAQ"
