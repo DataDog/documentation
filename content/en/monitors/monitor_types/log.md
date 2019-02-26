@@ -49,7 +49,7 @@ Then configure the Alert and/or Warning threshold depending on the chosen condit
 ## Notifications and log samples
 
 It is possible to add up to 10 samples of logs that triggered the monitor in the notification message.
-This is available for Slack, Jira, and email notifications.
+This is available for Slack, Jira, Webhook, Microsoft Teams, and email notifications.
 
 * Samples are not displayed for recovery notifications.
 
@@ -63,7 +63,7 @@ This is available for Slack, Jira, and email notifications.
  
 ### Multi alerts 
 
-For Slack and email notifications you can enable the top 10 of breaching values in your multi alert notifications.
+Multi alert notification may include the list of the top 10 of breaching values instead of 10 log samples.
 
  **Enabling top 10 breaching values in notifications**
 
