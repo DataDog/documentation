@@ -39,7 +39,7 @@ config_providers:
   - name: docker
     polling: true
 ```
-**Notes**: 
+**Notes**:
 
 * To collect container information in the standard install rather than with the [Docker Agent][1], the `dd-agent` user must have permissions to access **docker.sock**.
 * Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexing and uniquely receiving Live Tail data.
@@ -54,8 +54,8 @@ config_providers:
 Follow the instructions for the [Docker Agent][1], passing in the following attributes, in addition to any other custom settings as appropriate:
 
 ```
--e DD_LOGS_ENABLED=true 
--e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true 
+-e DD_LOGS_ENABLED=true
+-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
 ```
 
 **Note**: Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexing and uniquely receiving Live Tail data.
@@ -71,7 +71,7 @@ In the `dd-agent.yaml` manifest used to create the [DaemonSet][1], add the follo
   env:
     - name: DD_LOGS_ENABLED
         value: "true"
-    - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALLs
+    - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
         value: "true"
 
   volumeMounts:
@@ -84,7 +84,9 @@ volumes:
       name: pointerdir
 
 ```
-**Note**: 
+
+**Note**:
+
 * Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexes and Live Tail data uniquely.
 
 [1]: /agent/kubernetes/daemonset_setup
@@ -92,25 +94,23 @@ volumes:
 {{% /tab %}}
 {{< /tabs >}}
 
-For more information about activating log integrations, see the [documentation][6].
-
+For more information about activating log integrations, see the [ Log collection documentation][6].
 
 ## Container Logs
 
-View streaming logs for any container like `docker logs -f` or `kubectl logs -f`—in the app. Click any container in the table to inspect it. Click the “logs” tab to see real-time data from [Live Tail][7] or indexed logs for any time in the past.
-
+View streaming logs for any container like `docker logs -f` or `kubectl logs -f`—in Datadog. Click any container in the table to inspect it. Click the *Logs* tab to see real-time data from [Live Tail][7] or indexed logs for any time in the past.
 
 ### Live Tail
-With Live Tail, all container logs are streamed -- pausing the stream allows you to easily read logs that are quickly being written; unpause to continue streaming. 
+With Live Tail, all container logs are streamed -- pausing the stream allows you to easily read logs that are quickly being written; un-pause to continue streaming.
 
 Streaming logs can be searched with simple string matching. For more details about Live Tail, see the [Live Tail documentation][7].
 
 **Note**: Streaming logs are not persisted, and entering a new search or refreshing the page clears the stream.
 
-
 {{< img src="graphing/infrastructure/livecontainers/livecontainerlogssidepanel.gif" alt="Preview Logs Sidepanel" responsive="true" style="width:100%;">}}
 
 ### Indexed Logs
+
 You can see logs that you have chosen to index and persist by selecting a corresponding timeframe. Indexing allows you to filter your logs using tags and facets. For example, to search for logs with an `Error` status, type `status:error` into the search box. Autocompletion can help you locate the particular tag that you want. Key attributes about your logs are already stored in tags, which enables you to search, filter, and aggregate as needed.
 
 {{< img src="graphing/infrastructure/livecontainers/errorlogs.png" alt="Preview Logs Sidepanel" responsive="true" style="width:100%;">}}
@@ -123,12 +123,12 @@ Containers are, by their nature, extremely high cardinality objects. Datadog's f
 
 To combine multiple string searches into a complex query, you can use any of the following Boolean operators:
 
-|              |                                                                                                        |                              |
-| :----        | :----                                                                                                  | :----                        |
-| **Operator** | **Description**                                                                                       | **Example**                 |
-| `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | java AND elasticsearch   |
-| `OR`         | **Union**: either term is contained in the selected events                                             | java OR python   |
-| `NOT` / `!`      | **Exclusion**: the following term is NOT in the event. You may use the word `NOT` or `!` character to perform the same operation | java NOT elasticsearch <br> **equivalent:** java !elasticsearch|
+|              |                                                                                                                                  |                                                                 |
+| :----        | :----                                                                                                                            | :----                                                           |
+| **Operator** | **Description**                                                                                                                  | **Example**                                                     |
+| `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default)                           | java AND elasticsearch                                          |
+| `OR`         | **Union**: either term is contained in the selected events                                                                       | java OR python                                                  |
+| `NOT` / `!`  | **Exclusion**: the following term is NOT in the event. You may use the word `NOT` or `!` character to perform the same operation | java NOT elasticsearch <br> **equivalent:** java !elasticsearch |
 
 Use parentheses to group operators together. For example, `(NOT (elasticsearch OR kafka) java) OR python`.
 
