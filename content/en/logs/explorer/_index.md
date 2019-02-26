@@ -75,7 +75,8 @@ Configure the logtable content according to your needs and preferences with the 
 
 Log results are sorted by date - the most recent on top by default. You can make it the least recent on top (within the limits of the time range though).
 
-https://cl.ly/d8fde2657fa3
+{{< img src="logs/explorer/logtable_confg.png" alt="configure display table" responsive="true" style="width:50%;">}}
+
 
 
 ### Log Panel
@@ -91,6 +92,9 @@ Interact with the attributes names and values in the lower JSON section to:
 * Add or remove a column from the log table.
 * Append the search request with specific values (include or exclude)
 
+{{< img src="logs/explorer/attribute_actions.png" alt="configure display table" responsive="true" style="width:50%;">}}
+
+
 Interact with upper reserved attributes section:
 
 * with **Host**, to access Host Dashboard or append search request with `host` of log. 
@@ -99,6 +103,8 @@ Interact with upper reserved attributes section:
 
 
 The **View in context** button update search request to see log lines dated just before and after a selected log—even if they don't match your filter. The context is different according to the situation as we use the `Hostname`, `Service`, `filename`, or `container_id` attributes, along with tags, to make sure we find the perfect context for your logs.
+
+{{< img src="logs/explorer/upper_log_panel.png" alt="configure display table" responsive="true" style="width:50%;">}}
 
 
 [1]: /logs/explorer/search
