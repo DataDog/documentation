@@ -260,6 +260,6 @@ The Agent `status` command should show the check instance running and reporting 
 [5]: /developers/write_agent_check
 [6]: /integrations/mysql
 [7]: /agent/autodiscovery/?tab=kubernetes#template-source-kubernetes-pod-annotations
-[8]: /autodiscovery/?tab=kubernetes#supported-template-variables
+[8]: /agent/autodiscovery/?tab=kubernetes#supported-template-variables
 [9]: /integrations/http_check
 [10]: /integrations/nginx

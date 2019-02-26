@@ -19,18 +19,18 @@ further_reading:
 
 ## Overview
 
-Browser Checks are scenarios executed by Datadog on your web applications. They run at configurable periodic intervals from multiple locations around the world, and from multiple devices. These checks verify both that your applications are up and responding to requests, and that any conditions defined in your scenarios are met.
+Browser checks are scenarios executed by Datadog on your web applications. They run at configurable periodic intervals from multiple locations around the world, and from multiple devices. These checks verify both that your applications are up and responding to requests, and that any conditions defined in your scenarios are met.
 
 ## Configuration
 
 ### Test details
 
-Define the configuration of your Browser Check.
+Define the configuration of your browser check.
 
 {{< img src="synthetics/browser_check/browser_check_configuration.png" alt="Browser Check make request" responsive="true" style="width:80%;">}}
 
-1. Give your Browser Check a name. 
-2. Enter the Start URL. This is the URL from which your Browser Check starts the scenario.
+1. Give your browser check a name. 
+2. Enter the Start URL. This is the URL from which your browser check starts the scenario.
 3. Define Tags with the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` in the Synthetics page.
 4. Define on which device to run your check. Available devices are: `Laptop Large`, `Tablet`, and `Mobile Small`.
 5. Pick-up locations to run the test from. Available locations are:
@@ -42,7 +42,7 @@ Define the configuration of your Browser Check.
 
 ### Notifications
 
-A notification is sent if at least one step of the Browser Check scenario fails. To configure your notifications:
+A notification is sent if at least one step of the browser check scenario fails. To configure your notifications:
 
 {{< img src="synthetics/browser_check/browser_check_notification.png" alt="Browser check notification" responsive="true" style="width:80%;">}}
 
@@ -58,8 +58,8 @@ A notification is sent if at least one step of the Browser Check scenario fails.
 {{< img src="synthetics/browser_check/browser_check_record_test.png" alt="Browser check record test" responsive="true" >}}
 
 1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window in order to avoid sizing issues in the displayed window within Datadog's interface.
-2. Click on **Start recording** to begin recording your Browser Check.
-3. Your actions are recorded and used to create steps within your Browser Check Scenario.
+2. Click on **Start recording** to begin recording your browser check.
+3. Your actions are recorded and used to create steps within your browser check scenario.
 4. Use the actions available in the upper left corner to enrich your scenario:
     {{< img src="synthetics/browser_check/browser_check_assertions.png" alt="Browser Check assertions" responsive="true" style="width:80%;">}}
 
@@ -127,6 +127,7 @@ You can also use your variables in some assertions, including:
 To use your variables in one of your assertions, hit *Use Variable* and select the variable you want to use:
 
 {{< img src="synthetics/browser_check/use_variable_in_assertion.png" alt="Use variable in assertion" responsive="true" style="width:40%;">}}
+
 
 ## Further Reading
 

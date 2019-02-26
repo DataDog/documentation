@@ -26,7 +26,7 @@
             </form>
 
             <div class="sidenav-nav">
-                {{ partial "sidenav/recursive-nav.html" (dict "context" $dot "data" .Site.Menus.main) }}
+                {{ partial "sidenav/nav.html" . }}
             </div>
         </div>
     </div>
