@@ -102,6 +102,6 @@ Additional properties allowed in the `request` object:
 [1]: /graphing
 [2]: /tracing/visualization/search/#search-bar
 [3]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
-[4]: /graphing/graphing_json/widgets_json
+[4]: /graphing/graphing_json/widget_json
 [5]: /graphing/graphing_json/request_json
 [6]: /graphing/graphing_json/widget_json/#conditional-format-schema

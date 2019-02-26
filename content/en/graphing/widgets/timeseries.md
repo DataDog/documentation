@@ -176,7 +176,7 @@ Additional properties allowed in each `request` object:
 [5]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
 [6]: /graphing/event_stream
 [7]: /graphing/dashboards/template_variables
-[8]: /graphing/graphing_json/widgets_json
+[8]: /graphing/graphing_json/widget_json
 [9]: /graphing/graphing_json/request_json
 [10]: /graphing/graphing_json/widget_json/#y-axis-schema
 [11]: /grpahing/graphing_json/widget_json/#events-schema

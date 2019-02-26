@@ -63,5 +63,5 @@ GROUP_SCHEMA = {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing/dashboards/timeboard
-[2]: /graphing/graphing_json/widgets_json
+[2]: /graphing/graphing_json/widget_json
 [3]: /graphing/graphing_json/widget_json

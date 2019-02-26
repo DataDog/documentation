@@ -105,5 +105,5 @@ Additional properties allowed the `request` object:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing/widgets/heat_map
-[2]: /graphing/graphing_json/widgets_json
+[2]: /graphing/graphing_json/widget_json
 [3]: /graphing/graphing_json/request_json
