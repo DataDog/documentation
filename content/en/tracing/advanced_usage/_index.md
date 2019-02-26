@@ -2031,8 +2031,8 @@ to be properly handled by the tracer.
 
 In order to tell PHP where it should put `error_log` messages, you can either set it at the server level, or as a PHP `ini` parameter, which is the standard way to configure PHP behavior.
 
-If you are using Apache as a server, use the `ErrorLog` directive.
-If you are using NGINX as a server, use the `error_log` directive.
+If you are using an Apache server, use the `ErrorLog` directive.
+If you are using an NGINX server, use the `error_log` directive.
 If you are configuring instead at the PHP level, use PHP's `error_log` ini parameter.
 
 [1]: 
