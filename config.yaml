@@ -1005,13 +1005,13 @@ languages:
           pre: "nav_synthetics"
           weight: 100
         - identifier: synthetics_uptime_check
-          name: "Uptime Check"
-          url: "synthetics/uptime_check"
+          name: "API Tests"
+          url: "synthetics/api_test"
           weight: 110
           parent: menu_references_synthetics
         - identifier: synthetics_browser_check
-          name: "Browser Check"
-          url: "synthetics/browser_check"
+          name: "Browser Tests"
+          url: "synthetics/browser_test"
           weight: 120
           parent: menu_references_synthetics
 
@@ -2305,13 +2305,13 @@ languages:
           pre: "nav_synthetics"
           weight: 99
         - identifier: synthetics_uptime_check
-          name: "Uptime Check"
-          url: "synthetics/uptime_check"
+          name: "API Tests"
+          url: "synthetics/api_test"
           weight: 100
           parent: menu_references_synthetics
         - identifier: synthetics_browser_check
-          name: "Browser Check"
-          url: "synthetics/browser_check"
+          name: "Browser Tests"
+          url: "synthetics/browser_test"
           weight: 120
           parent: menu_references_synthetics
 
