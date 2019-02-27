@@ -28,11 +28,13 @@ You can access the analytics page from any log explorer view by clicking on the 
 {{< img src="logs/explorer/analytics/explorer-button.png" alt="Logs Explorer" style="width:50%;" responsive="true">}}
 
 You can control:
-* the query that filters the set of logs to analyse,
+
+* the query that filters the set of logs to analyze
 * the dimensions over which to split data
 * the visualization method for aggregates and splits 
 
 From an analytics visualization, you can, additionally:
+
 * create a widget in a dashboard out of that visualization
 * create a monitor out of that query 
 * deep dive sinto ubsets of the log list, depending on the interactions that the visualization enables  
@@ -79,11 +81,13 @@ Available visualizations:
 Visualize the evolution of a single [measure][1] (or a [facet][2] unique count of values) over a selected time frame, and (optionally) split by an available [facet][2].
 
 You have additional display options for timeseries:
+
 * whether you display lines, bars, or areas
 * data stacking option, by value, or by percentage
 * color set
 
 Noteworthy facts about stacking:
+
 * Stacking is available only for query requests with a split.
 * Stacking options are for bar and area displays only. Line displays are always overlapping.
 * When you use a toplist option that hides part of your data, stacking does not show the total overall; rather, it shows only the subtotal for the top/bottom series.
