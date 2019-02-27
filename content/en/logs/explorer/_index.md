@@ -75,7 +75,7 @@ Configure the logtable content according to your needs and preferences with the 
 
 Log results are sorted by date - the most recent on top by default. You can make it the least recent on top (within the limits of the time range though).
 
-{{< img src="logs/explorer/logtable_confg.png" alt="configure display table" responsive="true" style="width:50%;">}}
+{{< img src="logs/explorer/logtable_config.png" alt="configure display table" responsive="true" style="width:50%;">}}
 
 
 
@@ -92,7 +92,7 @@ Interact with the attributes names and values in the lower JSON section to:
 * Add or remove a column from the log table.
 * Append the search request with specific values (include or exclude)
 
-{{< img src="logs/explorer/attribute_actions.png" alt="configure display table" responsive="true" style="width:50%;">}}
+{{< img src="logs/explorer/attribute_actions.png" alt="configure display table" responsive="true" style="width:20%;">}}
 
 
 Interact with upper reserved attributes section:
