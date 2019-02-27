@@ -12,7 +12,7 @@ further_reading:
 - link: "tracing/"
   tag: "Documentation"
   text: "Collect your traces"
-- link: "agent/faq/why-should-i-install-the-agent-on-my-aws-instances/"
+- link: "agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"
   tag: "Documentation"
   text: "Why Install the Agent on AWS Instances?"
 - link: "https://www.datadoghq.com/blog/dont-fear-the-agent/"
