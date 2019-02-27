@@ -7,7 +7,7 @@ further_reading:
   text: "Screenboard"
 ---
 
-Query values display the current value of a given metric query, with conditional formatting (such as a green/yellow/red background) to convey whether or not the value is in the expected range.
+Query values display the current value of a given metric, APM or Log query. It comes with conditional formatting (such as a green/yellow/red background) to convey whether or not the value is in the expected range.
 The value displayed by a query value need not represent an instantaneous measurement.
 
 The widget can display the latest value reported, or an aggregate computed from all query values across the time window. These visualizations provide a narrow but unambiguous window into your infrastructure query.
