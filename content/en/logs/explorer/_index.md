@@ -97,12 +97,12 @@ Interact with the attributes names and values in the lower JSON section to:
 
 Interact with the upper reserved attributes section:
 
-* with **Host**, to access the host dashboard or append search request with `host` of log. 
-* with **Service**, to see Trace in APM, append search request with Trace ID (both require a `trace_id` attribute in log, refer to [trace injection in logs][3]) or append search request with `service` of log.
-* with **Source**, to append search request with `source` of log.
+* with **Host**, to access the host dashboard or append the search request with the `host` of the log. 
+* with **Service**, to see the trace in APM, append the search request with the trace ID (both require a `trace_id` attribute in the log: refer to [trace injection in logs][3]) or append search request with the `service` of the log.
+* with **Source**, to append the search request with the `source` of the log.
 
 
-The **View in context** button update search request to see log lines dated just before and after a selected log—even if they don't match your filter. The context is different according to the situation as we use the `Hostname`, `Service`, `filename`, or `container_id` attributes, along with tags, to make sure we find the perfect context for your logs.
+The **View in context** button updates the search request in order to show you the log lines dated just before and after a selected log—even if they don't match your filter. This context is different according to the situation, as Datadog uses the `Hostname`, `Service`, `filename`, and `container_id` attributes, along with tags, in order find the appropriate context for your logs.
 
 {{< img src="logs/explorer/upper_log_panel.png" alt="configure display table" responsive="true" style="width:50%;">}}
 
