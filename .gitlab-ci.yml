@@ -73,7 +73,7 @@ build_live:
   variables:
     CONFIG: ${LIVE_CONFIG}
     URL: ${LIVE_DOMAIN}
-    UNTRACKED_EXTRAS: "data,content/integrations"
+    UNTRACKED_EXTRAS: "data,content/en/integrations"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"

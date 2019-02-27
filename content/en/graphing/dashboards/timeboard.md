@@ -8,7 +8,7 @@ further_reading:
 - link: "graphing/dashboards/shared_graph"
   tag: "Documentation"
   text: "Share your Graphs outside of Datadog"
-- link: "graphing/dashboards/widgets"
+- link: "graphing/widgets"
   tag: "Documentation"
   text: "Discover all available Widgets for your Dashboard"
 ---

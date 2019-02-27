@@ -11,7 +11,7 @@ further_reading:
 - link: "graphing/dashboards/template_variables"
   tag: "Documentation"
   text: "Enhance your Dashboards with Template Variables"
-- link: "graphing/dashboards/widgets"
+- link: "graphing/widgets"
   tag: "Documentation"
   text: "Discover all available Widgets for your Dashboard"
 ---

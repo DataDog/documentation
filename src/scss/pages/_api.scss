@@ -6,7 +6,9 @@ $ddpurple:    #774DA2;
 }
 
 .api {
-
+  .announcement_banner.open ~ .container-fluid {
+    padding-top: 30px;
+  }
   .api-content {
     ul{
       list-style-type: none;

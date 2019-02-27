@@ -25,7 +25,7 @@ further_reading:
 
 Using [Winston][1] to log from your NodeJS application gets you all the features you need to build up your logging strategy. 
 
-Winston is available through [NPM][3], to get started, you want to add the dependency to your code:
+Winston is available through [NPM][2], to get started, you want to add the dependency to your code:
 
 ```
 npm install --save winston
@@ -50,7 +50,7 @@ npm install --save winston
 
 **Inject trace IDs in your logs**
 
-If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow APM NodeJS logging instructions](https://docs.datadoghq.com/tracing/advanced_usage/?tab=nodejs#correlate-traces-and-logs) to automatically add trace and span IDs in your logs.
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow APM NodeJS logging instructions][3] to automatically add trace and span IDs in your logs.
 
 ### Log to file
 
@@ -126,5 +126,5 @@ Make sure that the parameter `max_connect_retries` is not set to `1` (the defaul
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/winstonjs/winston
-[2]: /logs/processing/parsing
-[3]: https://www.npmjs.com
+[2]: https://www.npmjs.com
+[3]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=nodejs#correlate-traces-and-logs

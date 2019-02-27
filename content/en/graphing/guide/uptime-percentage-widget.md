@@ -116,7 +116,7 @@ This example can be extended to additional use cases:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/http_check
-[2]: /graphing/dashboards/widgets/#query-value
+[2]: /graphing/widgets/query_value
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: /agent/guide/agent-configuration-files
 [5]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent

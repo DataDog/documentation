@@ -116,6 +116,6 @@ Export [Trace Analytics][6] from the Trace search or build them directly in your
 [3]: /monitors/monitor_types/apm
 [4]: /graphing/dashboards/timeboard
 [5]: /help
-[6]: /graphing/dashboards/widgets/#timeseries
+[6]: /graphing/widgets/timeseries
 [7]: /graphing/dashboards
-[8]: /graphing/dashboards/widgets/#timeseries
+[8]: /graphing/widgets/timeseries

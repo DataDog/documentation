@@ -152,20 +152,21 @@ See the [Datadog-AWS Log integration][9] to configure your environment. If you s
 
 Check Datadog lambda configuration parameter:
 
-* `<API_KEY>` : Should be set with your [Datadog API key][12] either directly in the Python code, or alternatively as a environment variable. In case you manage several platforms, double-check that you are actually using the right `<API_KEY>` for the right platform.
+* `<API_KEY>` : Should be set with your [Datadog API key][10] either directly in the Python code, or alternatively as an environment variable. In case you manage several platforms, double-check that you are actually using the right `<API_KEY>` for the right platform.
 
 
 #### The lambda function is triggered
 
 Check that Datadog lambda function is actually triggered by leveraging `aws.lambda.invocations` and `aws.lambda.errors` metrics with the `functionname` tag of your Datadog lambda function within Datadog, or check for errors in Datadog lambda logs in Cloudwatch.
 
-#### Expectedly droping logs
+#### Expectedly dropping logs
 
-Check if logs appear in the [Datadog Live Tail][10]. If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][13] that could match your logs.
+Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][12] that could match your logs.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /logs
 [2]: /help
@@ -176,8 +177,6 @@ Check if logs appear in the [Datadog Live Tail][10]. If they appear in the Live 
 [7]: /logs/log_collection/docker/?tab=dockerfile#examples
 [8]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
 [9]: /integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[10]: https://app.datadoghq.com/logs/livetail
-[11]: https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/lambda_function.py#L386
-[12]: https://app.datadoghq.com/account/settings#api
-[13]: /logs/logging_without_limits/#exclusion-filters
-
+[10]: https://app.datadoghq.com/account/settings#api
+[11]: https://app.datadoghq.com/logs/livetail
+[12]: /logs/logging_without_limits/#exclusion-filters

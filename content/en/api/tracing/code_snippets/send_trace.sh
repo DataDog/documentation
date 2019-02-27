@@ -5,6 +5,8 @@ TRACE_ID=($RANDOM % 1000000)
 SPAN_ID=($RANDOM % 1000000)
 
 # Start a timer.
+# For the Alpine image, in order to get the time in nanoseconds,
+# you may need to install coreutils ("apk add coreutils").
 START=$(date +%s%N)
 
 # Do things...
