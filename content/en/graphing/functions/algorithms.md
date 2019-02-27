@@ -15,6 +15,8 @@ The `anomalies()` function has two parameters:
 * `ALGORITHM`:  Methodology used to detect anomalies.
 * `BOUNDS`:  Width of the gray band. `bounds` can be interpreted as the standard deviations for your algorithm; a value of 2 or 3 should be large enough to include most "normal" points.
 
+**Note**: If you are using the agile or robust anomaly detection algorithms with weekly or daily seasonality, you can update your anomaly detection monitor to account for a local timezone using both the API and the UI.
+
 Here's a two-minute video walkthrough:
 
 {{< vimeo 188833506 >}}

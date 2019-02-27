@@ -13,8 +13,6 @@ further_reading:
 
 If you are using the agile or robust anomaly detection algorithms with weekly or daily seasonality, you can update your anomaly detection monitor to account for a local timezone using both the API and the UI.
 
-**Note**: If the traffic you are monitoring is a mix from a lot of different locals, it’s possible that your monitor doesn't need any DST adjustment. However, if you do want to monitor DST in multiple locales, use tags to differentiate the regions and create a separate monitor for each tag. 
-
 ## UI
 
 To update an anomaly detection monitor to account for a local timezone in the UI, navigate to the [Create a new monitor][1] > [Anomoly monitor][2] section in the UI. In section 3, Set Alert Conditions, open the Advanced panel and toggle on the switch on to take daylight savings into account while evaluating the monitor. Then, set the timezone to match the local to track.
@@ -38,8 +36,6 @@ To update an anomaly detection monitor to account for a local timezone in the UI
 3. Use the [Edit a Monitor][5] API to update the monitor's definition.
   - Examples are available in Python, Ruby, and cURL.
   - Only include the ID and query in the request to avoid overriding existing settings. The name, message, options, and tags are not required.
-
-**Note**: A monitor with the time zone parameter evaluates using the specified time zone. The graphs shown on the monitor status page and in snapshots will correctly show the bounds used for those evaluations. However, the evaluation graph on the edit page does not respect the time zone. **Saving the monitor using the UI removes the time zone from the monitor definition.**
 
 ## Further Reading
 
