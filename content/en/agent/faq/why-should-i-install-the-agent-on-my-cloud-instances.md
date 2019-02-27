@@ -14,7 +14,7 @@ If you use AWS, Azure, GCP, or another cloud-based metrics provider, installing 
 
 * **Better resolution** - Cloud providers observe what's happening from the outside by sampling hosts every ~ 5-25 minutes, whereas the Datadog Agent captures performance statistics every 15 seconds to provide a more accurate understanding of what's happening from the hosts' perspective.
 
-* **Exposed metrics** - Datadog has over 50 metrics enabled by default. More metrics may be added with Datadog's application-specific integrations.
+* **Exposed metrics** - Datadog has over 50 metrics enabled by default. More metrics can be added with Datadog's application-specific integrations.
 
 * **Integrations** - These make it simple to extend our Agent beyond the native metrics so you can monitor application health, process utilization, and more.
 
