@@ -114,7 +114,7 @@ The **View in context** button updates the search request in order to show you t
 {{% /tab %}}
 {{% tab "Log Analytics" %}}
 
-After having gone through [Datadog processing][1], log parsing, having [facets](#facets) and [measures](#measures) over the important attributes, you can graph log queries and see maximums, averages, percentiles, unique counts, and more.
+After having gone through [Datadog processing][1], log parsing, and having [facets](#facets) and [measures](#measures) over the important attributes, you can graph log queries and see maximums, averages, percentiles, unique counts, and more.
 
 Follow the [log graphing guide][2] to learn more about all the graphing options.
 
