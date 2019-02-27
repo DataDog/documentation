@@ -81,23 +81,23 @@ Log results are sorted by date—the most recent on top by default. You can also
 
 ### Log Panel
 
-Click on any log line to open the log panel and see more details about it: raw message, extracted attributes, tags (with host, service and source tags on top).
+Click on any log line to open the log panel and see more details about it: raw message, extracted attributes, and tags (with host, service, and source tags on top).
 
-Some standard attributes, such as `error.stack`, `http.method` or `duration` for instance, have specific highlighted displays in the Log Panel for better readability. Make sure you extract corresponding information from your logs and eventually remap your attributes with [standard attribute remappers][2].
+Some standard attributes—for instance, `error.stack`, `http.method`, or `duration`—have specific highlighted displays in the Log Panel for better readability. Make sure you extract corresponding information from your logs and remap your attributes with [standard attribute remappers][2].
 
 
 Interact with the attributes names and values in the lower JSON section to:
 
-* Build or Edit a facet or a measure out of an attribute. Note that this action does not apply to anterior logs.
-* Add or remove a column from the log table.
+* Build or edit a facet or measure from an attribute. Tthis action does not apply to anterior logs.
+* Add or remove a column from the logs table.
 * Append the search request with specific values (include or exclude)
 
 {{< img src="logs/explorer/attribute_actions.png" alt="configure display table" responsive="true" style="width:20%;">}}
 
 
-Interact with upper reserved attributes section:
+Interact with the upper reserved attributes section:
 
-* with **Host**, to access Host Dashboard or append search request with `host` of log. 
+* with **Host**, to access the host dashboard or append search request with `host` of log. 
 * with **Service**, to see Trace in APM, append search request with Trace ID (both require a `trace_id` attribute in log, refer to [trace injection in logs][3]) or append search request with `service` of log.
 * with **Source**, to append search request with `source` of log.
 
