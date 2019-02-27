@@ -69,11 +69,11 @@ The Logstream is the list of logs that match the selected context. A context is 
 
 ### Logs Table
 
-The logstream is displayed in the log table. 
+The logstream is displayed in the logs table. 
 
-Configure the logtable content according to your needs and preferences with the Options button. Among your custom attributes, only faceted or measures attributes are available for columns.
+Configure the logs table content according to your needs and preferences with the "Options" button. Among your custom attributes, only faceted or measures attributes are available for columns.
 
-Log results are sorted by date - the most recent on top by default. You can make it the least recent on top (within the limits of the time range though).
+Log results are sorted by date—the most recent on top by default. You can also inverse-sort by date, with the least recent (within the limits of the time range) on top.
 
 {{< img src="logs/explorer/logtable_config.png" alt="configure display table" responsive="true" style="width:50%;">}}
 
