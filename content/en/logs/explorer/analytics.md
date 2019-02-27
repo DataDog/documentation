@@ -23,7 +23,9 @@ further_reading:
 ## Overview
 
 Log analytics extend the log search page with log aggregation and split capabilities for troubleshooting and monitoring. 
-You can access that analytics page from either log explorer view, clicking on the Analytics icon next to the search query bar https://cl.ly/2dba52206723.
+You can access that analytics page from either log explorer view, clicking on the Analytics icon next to the search query bar.
+
+{{< img src="logs/explorer/analytics/explorer-button.png" alt="Logs Explorer" style="width:50%;" responsive="true">}}
 
 You can control:
 - the query that filters the set of logs to analyse,
