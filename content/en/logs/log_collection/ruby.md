@@ -250,16 +250,15 @@ end
 Add the grape_logging gem:
 
 ```ruby
-gem 'grape_logging', git: "git://github.com/guizmaii/grape_logging.git", branch: "master"
+gem 'grape_logging'
 ```
 
 Pass additional configuration to Grape:
 
 ```ruby
 use GrapeLogging::Middleware::RequestLogger,
-      instrumentation_key: 'grape', # (cette clé devra matcher avec la config du point 2.3)
+      instrumentation_key: 'grape', 
       include: [ GrapeLogging::Loggers::Response.new,
-                 GrapeLogging::Loggers::DatabaseTime.new,
                  GrapeLogging::Loggers::FilterParameters.new ]
 ```
 
