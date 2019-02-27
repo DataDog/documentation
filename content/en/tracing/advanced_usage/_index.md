@@ -261,6 +261,44 @@ span?.SetTag("<TAG_KEY>", "<TAG_VALUE>");
 {{% /tab %}}
 {{% tab "PHP" %}}
 
+**Tracing a custom function or method**
+
+The `dd_trace()` function hooks into existing functions and methods to:
+
+* Open a span before the code executes
+* Set additional tags or errors on the span
+* Close the span when it is done
+* Modify the arguments or the return value
+
+For example, the following snippet traces the `CustomDriver::doWork()` method, adds custom tags, reports any exceptions as errors on the span, and then re-throws the exceptions.
+
+```php
+dd_trace("CustomDriver", "doWork", function (...$args) {
+    // Start a new span
+    $scope = GlobalTracer::get()->startActiveSpan('CustomDriver.doWork');
+    $span = $scope->getSpan();
+
+    // Access object members via $this
+    $span->setTag(Tags\RESOURCE_NAME, $this->workToDo);
+
+    try {
+        // Execute the original method
+        $result = $this->doWork(...$args);
+        // Set a tag based on the return value
+        $span->setTag('doWork.size', count($result));
+        return $result;
+    } catch (Exception $e) {
+        // Inform the tracer that there was an exception thrown
+        $span->setError($e);
+        // Bubble up the exception
+        throw $e
+    } finally {
+        // Close the span
+        $span->finish();
+    }
+});
+```
+
 **Adding tags to a span**
 
 Add tags directly to a `DDTrace\Span` object by calling `Span::setTag()`.

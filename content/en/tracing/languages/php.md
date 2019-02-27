@@ -161,25 +161,7 @@ require '<APP_ROOT>/vendor/datadog/dd-trace/bridge/dd_init.php';
 \DDTrace\GlobalTracer::get()->startRootSpan('web.request');
 ```
 
-### Zend Framework 1 integration
-
-Zend Framework 1 is automatically instrumented by default, so you are not required to modify your ZF1 project. However, if automatic instrumentation is disabled, enable the tracer manually.
-
-First, [download the latest source code from the releases page][7]. Extract the zip file and copy the `src/DDTrace` folder to your application's `/library` folder. Then add the following to your `application/configs/application.ini` file:
-
-```ini
-autoloaderNamespaces[] = "DDTrace_"
-pluginPaths.DDTrace = APPLICATION_PATH "/../library/DDTrace/Integrations/ZendFramework/V1"
-resources.ddtrace = true
-```
-
-## View the trace
-
-Assuming the Agent is running with APM enabled and it is configured with your API key, and assuming the **ddtrace** extension is installed and instrumented properly into your application, visit a tracing-enabled endpoint of your application and view the [APM UI][13] to see the traces.
-
-**Note**: It might take a few minutes before traces appear in the UI.
-
-## Trace a custom function or method
+### Trace a custom function or method
 
 The `dd_trace()` function hooks into existing functions and methods to:
 
@@ -216,6 +198,24 @@ dd_trace("CustomDriver", "doWork", function (...$args) {
     }
 });
 ```
+
+### Zend Framework 1 integration
+
+Zend Framework 1 is automatically instrumented by default, so you are not required to modify your ZF1 project. However, if automatic instrumentation is disabled, enable the tracer manually.
+
+First, [download the latest source code from the releases page][7]. Extract the zip file and copy the `src/DDTrace` folder to your application's `/library` folder. Then add the following to your `application/configs/application.ini` file:
+
+```ini
+autoloaderNamespaces[] = "DDTrace_"
+pluginPaths.DDTrace = APPLICATION_PATH "/../library/DDTrace/Integrations/ZendFramework/V1"
+resources.ddtrace = true
+```
+
+## View the trace
+
+Assuming the Agent is running with APM enabled and it is configured with your API key, and assuming the **ddtrace** extension is installed and instrumented properly into your application, visit a tracing-enabled endpoint of your application and view the [APM UI][13] to see the traces.
+
+**Note**: It might take a few minutes before traces appear in the UI.
 
 ## Configuration
 
