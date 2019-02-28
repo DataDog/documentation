@@ -15,12 +15,11 @@ further_reading:
 
 ## Before you start
 
-We strongly encourage you to install the PHP extension through our [pre-built packages][1].
-If you still prefer to manually install the PHP tracer please follow the steps below.
+Datadog strongly encourages you to install the PHP extension through the [pre-built packages][1]. If you still prefer to manually install the PHP tracer, follow the steps below.
 
 ### Install from the .tar.gz archive
 
-You can download the latest `.tar.gz` from our [release page][2].
+Download the latest `.tar.gz` from the [release page][2].
 
 From the location you downloaded the package:
 
@@ -61,7 +60,7 @@ Add the following line to the `php.ini` file.
 extension=ddtrace.so
 ```
 
-Depending on how you manually installed the PHP tracer, you also need to add this line to the php.ini file.
+Depending on how you manually installed the PHP tracer, you also need to add this line to the `php.ini` file.
 
 ```ini
 # If you installed from .tar.gz
@@ -82,7 +81,7 @@ Datadog PHP tracer extension
 ...
 ```
 
-You are now all set, now visit a tracing-enabled endpoint of your application and view the [APM UI][5] to see the traces.
+Visit a tracing-enabled endpoint of your application and view the [APM UI][5] to see the traces.
 
 **Note**: It might take a few minutes before traces appear in the UI.
 
