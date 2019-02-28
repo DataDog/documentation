@@ -15,7 +15,7 @@ If you are using the agile or robust anomaly detection algorithms with weekly or
 
 ## UI
 
-To update an anomaly detection monitor to account for a local timezone in the UI, navigate to the [Create a new monitor][1] > [Anomoly monitor][2] section in the UI. In section 3, Set Alert Conditions, open the Advanced panel and toggle on the switch to take daylight savings into account while evaluating the monitor. Then, set the timezone dropdown to match the timezone you want tracked.
+To update an anomaly detection monitor to account for a local timezone in the UI, navigate to the [Create a new monitor][1] > [Anomaly monitor][2] section in the UI. In section 3, Set Alert Conditions, open the Advanced panel and toggle on the switch to take daylight savings into account while evaluating the monitor. Then, set the timezone dropdown to match the timezone you want tracked.
 
 {{< img src="monitors/faq/anomaly_monitor_timezone_ui.png" alt="DST tracking in the UI" responsive="true">}}
 
