@@ -11,6 +11,8 @@ further_reading:
   text: "Configure monitor notifications"
 ---
 
+Datadog monitors use UTC time, which by default does not track local time zones. Depending on the type of system you have, your data could be impacted by local activity happening in your time zone. For example, a lunch surge could cause a spike in the middle of the day, and this surge could be detected as an unexpected anomaly. If you are getting unexpected anomalies caused by local activity, update your anomaly detection monitor to account for your local timezone.
+
 If you are using the agile or robust anomaly detection algorithms with weekly or daily seasonality, you can update your anomaly detection monitor to account for a local timezone using both the API and the UI.
 
 ## UI
