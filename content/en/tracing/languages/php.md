@@ -126,17 +126,15 @@ The PHP tracer can be configured using environment variables.
 
 ### Apache
 
-Set using [`SetEnv`][12] from the server config, virtual host,
-directory, or **.htaccess** file.
+Set using [`SetEnv`][12] from the server config, virtual host, directory, or **.htaccess** file.
 
 ```
 SetEnv DD_TRACE_DEBUG true
 ```
 
-### nginx
+### NGINX
 
-Set using [`fastcgi_param`][13] from the `http`,
-`server`, or `location` contexts.
+Set using [`fastcgi_param`][13] from the `http`, `server`, or `location` contexts.
 
 ```
 fastcgi_param DD_TRACE_DEBUG true;
