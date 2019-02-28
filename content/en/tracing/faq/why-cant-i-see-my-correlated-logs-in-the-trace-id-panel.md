@@ -33,7 +33,11 @@ If the log section is empty when the `host` option is set, go into the log explo
 
 ### Trace_id option
 
-If your logs do not contain the trace id, follow the guide on [correlating traces and logs][2] to do it.
+Make sure you actually have a `trace_id` standard attribute in your logs. If so, you should see a trace Icon next to the SERVICE (black if Trace is not sampled, grey if Trace is sampled).
+
+{{< img src="tracing/trace_in_log_panel.png" alt="Trace icon in log panel" responsive="true" style="width:50%;">}}
+
+If your logs do not contain the `trace_id`, follow the guide on [correlating traces and logs][2] to do it.
 The idea is then on the log side to:
 
 1. Extract the trace id in a log attribute
