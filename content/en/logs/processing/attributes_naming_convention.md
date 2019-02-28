@@ -17,16 +17,6 @@ further_reading:
   text: "Learn how to explore your logs"
 ---
 
-## Getting Started
-
-One may ask, why do we need to define a naming concention for log attributes?
-
-* Various technologies tend to use different attribute names for the same underlying meaning.
-* This usually generates too many attributes, which can lead to user confusion and the inability to correlate logs across sources.
-* Datadog Integrations rely on the following naming convention.
-* Use the following reference when parsing custom formats and sources in order to fully leverage all of Datadog's functionalities
-* Update the default list of standard attributes to enforce your own naming convention 
-
 ## Overview
 
 Centralizing logs from various technologies and applications tends to generate tens or hundreds of different attributes in a Log Management environment- especially when many teams users, each one with their own personal usage patterns, are working within the same environment.
@@ -42,7 +32,7 @@ The standard attribute table is available in Log Configuration pages, along with
 
 ## Standard Attribute list
 
-The standard attribute table comes with a set of [predefined standard attributes](#default-standard-attribute-list) . You can append that list with your own attributes, and edit or delete existing standard attributes:
+The standard attribute table comes with a set of [predefined standard attributes](#default-standard-attribute-list). You can append that list with your own attributes, and edit or delete existing standard attributes:
 
 {{< img src="logs/processing/attribute_naming_convention/edit_standard_attributes.png" alt="Edit standard attributes" responsive="true" style="width:80%;">}}
 
@@ -58,8 +48,8 @@ A standard Attribute is defined by its:
 After being processed in the pipelines, each log goes through the full list of Standard Attributes.
 For each entry of the Standard Attribute table, if the current log has an attribute matching the remapping list the following is done:
 
-* The first attribute that matches the provided list is remapped and the value is overriden by the new one if already existing
-* Enforce the type of the remapped attribute
+* The first attribute that matches the provided list is remapped and the value is overridden by the new one if already existing
+* Enforce the type of the remapped attribute (if not possible, the attribute is skipped and the next matching one of the list is used)
 * The original attribute is kept in the log
 
 **Important Note**: By default, the type of an existing Standard Attribute is unchanged if the remapping list is empty. Add the Standard Attribute to its own remapping list to enforce its type.
@@ -70,7 +60,7 @@ The standard attribute panel pops when you add a new standard attribute or edit 
 
 {{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Define Standard attribute" responsive="true" style="width:80%;">}}
 
-Any element of the Standard Attribute can then be filled or udpated. **Note** that any updates or addition to Standard Attributes only applies to newly ingested logs.
+Any element of the Standard Attribute can then be filled or updated. **Note** that any updates or addition to Standard Attributes only applies to newly ingested logs.
 
 #### Validation
 
