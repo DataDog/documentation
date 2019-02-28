@@ -704,9 +704,7 @@ resources.ddtrace = true
 
 Prior to PHP 7, some frameworks provided ways to compile PHP classes—e.g., through the Laravel's `php artisan optimize` command.
 
-While this [has been deprecated][3] if you are using PHP 7.x, you still may use this caching mechanism in your app prior
-to version 7.x. In this case, Datadog suggests you use the [OpenTracing][4] API instead of adding `datadog/dd-trace` to your
-Composer file.
+While this [has been deprecated][3] if you are using PHP 7.x, you still may use this caching mechanism in your app prior to version 7.x. In this case, Datadog suggests you use the [OpenTracing][4] API instead of adding `datadog/dd-trace` to your Composer file.
 
 
 [1]: /tracing/languages/php/#automatic-instrumentation
