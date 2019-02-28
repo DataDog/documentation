@@ -54,7 +54,7 @@ Options:
     - Weekly - the algorithm expects that a given day of the week behaves like past days of the week, for example this Tuesday behaves like past Tuesdays. 
     - Daily - the algorithm expects the same time today behaves like past days, for example 5pm today behaves like 5pm yesterday.
     - Hourly - the algorithm expects the same minute after the hour behaves like past minutes after the hour, for example 5:15 behaves like 4:15, 3:15, etc.
-* Daylight savings time - If you are using the agile or robust anomaly detection algorithms with weekly or daily seasonality, you can update your anomaly detection monitor to account for a local timezone.
+* Daylight savings time - if you are using the agile or robust anomaly detection algorithms with weekly or daily seasonality, you can update your anomaly detection monitor to account for a local timezone.
 
 **Note**: Machine learning algorithms require at least twice as much historical data time as the chosen seasonality time to be fully efficient.
 
