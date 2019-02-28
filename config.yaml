@@ -1,7 +1,8 @@
 title: "Docs"
 baseURL: "http://localhost:1313/"
 metadataformat: "yaml"
-
+# enableGitInfo so lastmod in sitemap.xml is based off git
+enableGitInfo: true
 canonifyURLs: true
 pygmentsuseclasses: true
 pygmentsCodeFences: true
