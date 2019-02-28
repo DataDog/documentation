@@ -46,7 +46,8 @@ For JSON logs, step 1 and 2 are done automatically. The tracer inject the trace 
 
 In case of issue, double check in your logs the name of the attribute that contains the trace id (should be `dd.trace_id`) and double check in your [reserved attributes][2] that it is properly set.
 
-[1]: 
+
+[1]: /logs/processing/#edit-reserved-attributes
 [2]: https://app.datadoghq.com/logs/pipelines/remapping
 {{% /tab %}}
 {{% tab "With Log integration" %}}
@@ -67,7 +68,7 @@ For raw logs without any integration, make sure that the custom parsing rule is 
 
 {{< img src="tracing/tracing_custom_parsing.png" alt="Custom parser" responsive="true" style="width:90%;">}}
 
-Then define a [Trace remapper][1] on the extracted attribute to remap them to the official trace id of the logs.
+* Then define a [Trace remapper][1] on the extracted attribute to remap them to the official trace id of the logs.
 
 [1]: https://docs.datadoghq.com/logs/processing/processors/#trace-remapper
 {{% /tab %}}
