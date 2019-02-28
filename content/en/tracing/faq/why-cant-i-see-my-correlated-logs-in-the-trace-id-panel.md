@@ -42,10 +42,13 @@ The idea is then on the log side to:
 {{< tabs >}}
 {{% tab "JSON logs" %}}
 
-For JSON logs, step 1 and 2 are done automatically. The tracer inject the trace and span id automatically in the logs and it is remapped automatically thanks to the [reserved attribute remappers](https://docs.datadoghq.com/logs/processing/#edit-reserved-attributes).
+For JSON logs, step 1 and 2 are done automatically. The tracer inject the trace and span id automatically in the logs and it is remapped automatically thanks to the [reserved attribute remappers][1].
 
-In case of issue, double check in your logs the name of the attribute that contains the trace id (should be `dd.trace_id`) and double check in your [reserved attributes](https://app.datadoghq.com/logs/pipelines/remapping) that it is properly set.
+In case of issue, double check in your logs the name of the attribute that contains the trace id (should be `dd.trace_id`) and double check in your [reserved attributes][2] that it is properly set.
 
+
+[1]: /logs/processing/#edit-reserved-attributes
+[2]: https://app.datadoghq.com/logs/pipelines/remapping
 {{% /tab %}}
 {{% tab "With Log integration" %}}
 
