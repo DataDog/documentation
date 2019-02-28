@@ -261,44 +261,6 @@ span?.SetTag("<TAG_KEY>", "<TAG_VALUE>");
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-**Tracing a custom function or method**
-
-The `dd_trace()` function hooks into existing functions and methods to:
-
-* Open a span before the code executes
-* Set additional tags or errors on the span
-* Close the span when it is done
-* Modify the arguments or the return value
-
-For example, the following snippet traces the `CustomDriver::doWork()` method, adds custom tags, reports any exceptions as errors on the span, and then re-throws the exceptions.
-
-```php
-dd_trace("CustomDriver", "doWork", function (...$args) {
-    // Start a new span
-    $scope = GlobalTracer::get()->startActiveSpan('CustomDriver.doWork');
-    $span = $scope->getSpan();
-
-    // Access object members via $this
-    $span->setTag(Tags\RESOURCE_NAME, $this->workToDo);
-
-    try {
-        // Execute the original method
-        $result = $this->doWork(...$args);
-        // Set a tag based on the return value
-        $span->setTag('doWork.size', count($result));
-        return $result;
-    } catch (Exception $e) {
-        // Inform the tracer that there was an exception thrown
-        $span->setError($e);
-        // Bubble up the exception
-        throw $e
-    } finally {
-        // Close the span
-        $span->finish();
-    }
-});
-```
-
 **Adding tags to a span**
 
 Add tags directly to a `DDTrace\Span` object by calling `Span::setTag()`.
@@ -332,19 +294,14 @@ if (null !== $span) {
 
 **Adding tags globally to all spans**
 
-Not supported with automatic instrumentation.
+Use the environment variable `DD_TRACE_GLOBAL_TAGS` to add tags to all the generated spans. Please see at the [PHP configuration][1]
+section for details on how environment variables should be set.
 
-Manual instrumentations of the tracer can set an associative array of global tags via the `global_tags` configuration key.
-
-```php
-$config = [
-    'global_tags' => [
-        '<TAG_KEY>' => '<TAG_VALUE>',
-    ]
-];
-$tracer = new \DDTrace\Tracer(null, null, $config);
-\DDTrace\GlobalTracer::set($tracer);
+```ini
+DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
 ```
+
+[1]: /tracing/languages/php/#configuration
 
 {{% /tab %}}
 {{% tab "C++" %}}
@@ -673,33 +630,55 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 
 [1]: /tracing/languages/dotnet/#compatibility
 {{% /tab %}}
+
 {{% tab "PHP" %}}
 
-If you aren’t using a [framework supported by automatic instrumentation][1], manually instrument your code.
+Even if we do not officially support your web framework, most probably you won't need to perform any manual instrumentation.
+See [automatic instrumentation][1] for more details.
 
-First install the PHP tracer dependency with Composer:
+If you really need manual instrumentation, e.g because you want to trace specific custom methods in your application,
+first install the PHP tracer dependency with Composer:
 
 ```bash
 $ composer require datadog/dd-trace
 ```
 
-Then use the PHP tracer bootstrap to initialize the global tracer and create a root span to start the trace:
+#### Trace a custom function or method
+
+The `dd_trace()` function hooks into existing functions and methods to:
+
+* Open a span before the code executes
+* Set additional tags or errors on the span
+* Close the span when it is done
+* Modify the arguments or the return value
+
+For example, the following snippet traces the `CustomDriver::doWork()` method, adds custom tags, reports any exceptions as errors on the span, and then re-throws the exceptions.
 
 ```php
-// The existing Composer autoloader
-require __DIR__ . '/../vendor/autoload.php';
+dd_trace("CustomDriver", "doWork", function (...$args) {
+    // Start a new span
+    $scope = GlobalTracer::get()->startActiveSpan('CustomDriver.doWork');
+    $span = $scope->getSpan();
 
-// Add the PHP tracer bootstrap
-require __DIR__ . '/../vendor/datadog/dd-trace/bridge/dd_init.php';
+    // Access object members via $this
+    $span->setTag(Tags\RESOURCE_NAME, $this->workToDo);
 
-$span = \DDTrace\GlobalTracer::get()
-    ->startRootSpan('web.request')
-    ->getSpan();
-$span->setResource($_SERVER['REQUEST_URI']);
-$span->setTag(\DDTrace\Tag::SPAN_TYPE, \DDTrace\Type::WEB_SERVLET);
-$span->setTag(\DDTrace\Tag::HTTP_METHOD, $_SERVER['REQUEST_METHOD']);
-
-// Run the app here...
+    try {
+        // Execute the original method
+        $result = $this->doWork(...$args);
+        // Set a tag based on the return value
+        $span->setTag('doWork.size', count($result));
+        return $result;
+    } catch (Exception $e) {
+        // Inform the tracer that there was an exception thrown
+        $span->setError($e);
+        // Bubble up the exception
+        throw $e
+    } finally {
+        // Close the span
+        $span->finish();
+    }
+});
 ```
 
 The root span an be accessed later on directly from the global tracer via `Tracer::getRootScope()`. This is useful in contexts where the metadata to be added to the root span does not exist in early script execution.
@@ -711,8 +690,33 @@ $rootSpan = \DDTrace\GlobalTracer::get()
 $rootSpan->setTag(\DDTrace\Tag::HTTP_STATUS_CODE, 200);
 ```
 
+#### Zend Framework 1 manual instrumentation
 
-[1]: /tracing/languages/php/#framework-compatibility
+Zend Framework 1 is automatically instrumented by default, so you are not required to modify your ZF1 project. However, if automatic instrumentation is disabled, enable the tracer manually.
+
+First, [download the latest source code from the releases page][2]. Extract the zip file and copy the `src/DDTrace` folder to your application's `/library` folder. Then add the following to your `application/configs/application.ini` file:
+
+```ini
+autoloaderNamespaces[] = "DDTrace_"
+pluginPaths.DDTrace = APPLICATION_PATH "/../library/DDTrace/Integrations/ZendFramework/V1"
+resources.ddtrace = true
+```
+
+#### Manual instrumentation and php code optimization
+
+Prior to PHP 7 some frameworks provided ways to compile php classes, e.g. through the Laravel's `php artisan optimize`
+command.
+
+While this [has been deprecated][3] if you are using php 7.x, you still may use this caching mechanism in your app prior
+to version 7.x. In this case we suggest to use [OpenTracing][4] api instead of adding `datadog/dd-trace` to your
+composer file.
+
+
+[1]: /tracing/languages/php/#automatic-instrumentation
+[2]: https://github.com/DataDog/dd-trace-php/releases/latest
+[3]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
+[4]: #opentracing
+
 {{% /tab %}}
 {{% tab "C++" %}}
 
