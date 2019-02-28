@@ -321,7 +321,12 @@ logs:
 
 ### Global processing rules
 
-Since Datadog Agent v6.10, the `exclude_at_match`, `include_at_match`, and `mask_sequences` rules can be defined globally in the `datadog.yaml`:
+Since Datadog Agent v6.10, the `exclude_at_match`, `include_at_match`, and `mask_sequences` rules can be defined globally.
+
+{{< tabs >}}
+{{% tab "Configuration files" %}}
+
+In the `datadog.yaml` file:
 
 ```
 logs_config:
@@ -334,7 +339,17 @@ logs_config:
        pattern: \w+@datadoghq.com
        replace_placeholder: "MASKED_EMAIL"
 ```
+{{% /tab %}}
+{{% tab "Environment Variable" %}}
 
+The `DD_LOGS_CONFIG_PROCESSING_RULES` can be used to configure global processing rules:
+
+```
+DD_LOGS_CONFIG_PROCESSING_RULES="[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\w+@datadoghq.com"}]
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 All the logs collected by the Datadog Agent are impacted by those processing rules.
 
 **Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the [Status Command][9] to troubleshoot any issues.
