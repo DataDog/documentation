@@ -19,12 +19,13 @@ further_reading:
 
 ## Getting Started
 
-One may ask, why do we need to define standard attributes for log pipelines?
+One may ask, why do we need to define a naming concention for log attributes?
 
 * Various technologies tend to use different attribute names for the same underlying meaning.
 * This usually generates too many attributes, which can lead to user confusion and the inability to correlate logs across sources.
-* Datadog Integrations rely on the following standard attributes.
-* Use the following reference when parsing custom formats and sources in order to fully leverage all of Datadog's functionalities.
+* Datadog Integrations rely on the following naming convention.
+* Use the following reference when parsing custom formats and sources in order to fully leverage all of Datadog's functionalities
+* Update the default list of standard attributes to enforce your own naming convention 
 
 ## Overview
 
@@ -35,42 +36,51 @@ In this context, it can be cumbersome to know which attributes correspond to the
 Even if technologies define their respective logs attributes differently, a URL, client IP, or duration have universally consistent meanings.
 This is why Datadog decided while implementing log integrations to rely on a subset of names for attributes that are commonly observed over log sources.
 
-But as Datadog integrations are not covering your custom formats and sources, we decided to make this collection of Standard Attribute (or [Taxonomy][1]) public to help you decide how to name your attributes in your own parsers.
-
 The standard attribute table is available in Log Configuration pages, along with pipelines, indexes, and archives.
 
 {{< img src="logs/processing/attribute_naming_convention/standard_attributes.png" alt="Standard Attributes" responsive="true" style="width:80%;">}}
 
-## The role of standard attributes
-
-Standard attributes preprocessing happen after pipelines and before indexing and archiving.
-
-Each standard attributes entry in the table stands for a single processing that remaps attributes coming from pipelines.
-
-Standard attribute processors work according to the following rules:
-
-* One single source attribute can be remapped only once.
-* The processor enforces type casting of the source attribute.
-* The original attribute is kept in the log, along with the remapped standard attribute.
-* Standard attributes cannot be set as a source for a standard attribute processor.
-
-You don't actually need to explicitly remap one "custom attribute" into a "standard attribute" if they share the same name. But defining a standard attribute out of a custom attribute allows you to:
-
-* Enforce type casting for this attribute.
-* Assert your own taxonomy across your organization.
-
-## Update standard attribute list
-
+## Standard Attribute list
 
 The standard attribute table comes with a set of [predefined standard attributes](#default-standard-attribute-list) . You can append that list with your own attributes, and edit or delete existing standard attributes:
 
 {{< img src="logs/processing/attribute_naming_convention/edit_standard_attributes.png" alt="Edit standard attributes" responsive="true" style="width:80%;">}}
 
+### Standard Attribute Definition
+
+A standard Attribute is defined by its:
+
+* Name
+* Type (`string`, `integer`, `double`, `boolean`)
+* Description
+* Remapping list
+
+After being processed in the pipelines, each log goes through the full list of Standard Attributes.
+For each entry of the Standard Attribute table, if the current log has an attribute matching the remapping list the following is done:
+
+* The first attribute that matches the provided list is remapped and the value is overriden by the new one if already existing
+* Enforce the type of the remapped attribute
+* The original attribute is kept in the log
+
+**Important Note**: By default, the type of an existing Standard Attribute is unchanged if the remapping list is empty. Add the Standard Attribute to its own remapping list to enforce its type.
+
+### Add or Update a Standard Attribute
+
 The standard attribute panel pops when you add a new standard attribute or edit an existing one:
 
 {{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Define Standard attribute" responsive="true" style="width:80%;">}}
 
-## Default standard attribute list
+Any element of the Standard Attribute can then be filled or udpated. **Note** that any updates or addition to Standard Attributes only applies to newly ingested logs.
+
+#### Validation
+
+To add or update an Standard Attribute, the following rules must be followed:
+
+* A Standard Attribute cannot be added in the remapping list of another Standard Attribute.
+* A custom attribute can be remapped to only one Standard Attribute.
+* To respect the JSON structure of the logs, it is not possible to have one Standard Attribute as the child of another (for example `user` and `user.name` cannot be both Standard Attributes).
+
+## Default Standard Attribute List
 
 The default standard attribute list has been split into 7 functional domains:
 
