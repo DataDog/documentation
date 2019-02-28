@@ -294,7 +294,7 @@ if (null !== $span) {
 
 **Adding tags globally to all spans**
 
-Use the environment variable `DD_TRACE_GLOBAL_TAGS` to add tags to all the generated spans. Please see at the [PHP configuration][1]
+Use the environment variable `DD_TRACE_GLOBAL_TAGS` to add tags to all the generated spans. See the [PHP configuration][1]
 section for details on how environment variables should be set.
 
 ```ini
