@@ -36,7 +36,7 @@ Make sure the Agent has **[APM enabled][6]**.
 
 ### Install the extension
 
-Install the PHP extension using one of the [precompiled packages for supported distributions][7]. If you can't find your distribution, install the PHP extension [from source][9].
+Install the PHP extension using one of the [precompiled packages for supported distributions][7].
 
 Once downloaded, install the package with one of the commands below.
 
@@ -49,53 +49,13 @@ $ dpkg -i datadog-php-tracer.deb
 
 # using APK package (Alpine)
 $ apk add datadog-php-tracer.apk --allow-untrusted
-
-# using tar.gz archive (Other distributions using libc6)
-$ tar -xf datadog-php-tracer.tar.gz -C /
-  /opt/datadog-php/bin/post-install.sh
 ```
 
-### Install from source
+You are all set, now visit a tracing-enabled endpoint of your application and view the [APM UI][8] to see the traces.
 
-[Download the source code `tar.gz` or `.zip` file][7] from the releases page and unzip the file. Then compile and install the extension with the commands below.
+**Note**: It might take a few minutes before traces appear in the UI.
 
-```bash
-$ cd /path/to/dd-trace-php
-$ phpize
-$ ./configure --enable-ddtrace
-$ make
-$ sudo make install
-```
-
-#### Modify the INI file
-
-Modify the `php.ini` configuration file to make the **ddtrace** extension available in the PHP runtime. To find out where the INI file is, run the following command:
-
-```bash
-$ php --ini
-
-Configuration File (php.ini) Path: /usr/local/etc/php/7.2
-Loaded Configuration File:         /usr/local/etc/php/7.2/php.ini
-...
-```
-
-Add the following line to the `php.ini` file.
-
-```ini
-extension=ddtrace.so
-```
-
-After restarting the web server/PHP SAPI (e.g., `$ sudo apachectl restart`, `$ sudo service php-fpm restart`, etc.) the extension is enabled. To confirm that the extension is loaded, run:
-
-```bash
-$ php --ri=ddtrace
-
-ddtrace
-
-
-Datadog PHP tracer extension
-...
-```
+If you can't find your distribution, you can [manually install][9] the PHP extension.
 
 ## Compatibility
 
@@ -113,7 +73,7 @@ PHP APM supports the following PHP versions:
 
 Tracing is automatically instrumented by default. Once the extension is installed, **ddtrace** traces your application and sends traces to the Agent.
 
-Automatic instrumentation works by modifying PHP's runtime to wrap certain functions and methods in order to trace them. The PHP tracer supports automatic instrumentation for [several libraries][12].
+Automatic instrumentation works by modifying PHP's runtime to wrap certain functions and methods in order to trace them. The PHP tracer supports automatic instrumentation for [several libraries][10].
 
 Automatic instrumentation captures:
 
@@ -197,12 +157,6 @@ pluginPaths.DDTrace = APPLICATION_PATH "/../library/DDTrace/Integrations/ZendFra
 resources.ddtrace = true
 ```
 
-## View the trace
-
-Assuming the Agent is running with APM enabled and it is configured with your API key, and assuming the **ddtrace** extension is installed and instrumented properly into your application, visit a tracing-enabled endpoint of your application and view the [APM UI][13] to see the traces.
-
-**Note**: It might take a few minutes before traces appear in the UI.
-
 ## Configuration
 
 The PHP tracer can be configured using environment variables.
@@ -211,7 +165,7 @@ The PHP tracer can be configured using environment variables.
 
 ### Apache
 
-Set using [`SetEnv`][14] from the server config, virtual host,
+Set using [`SetEnv`][11] from the server config, virtual host,
 directory, or **.htaccess** file.
 
 ```
@@ -220,7 +174,7 @@ SetEnv DD_TRACE_DEBUG true
 
 ### nginx
 
-Set using [`fastcgi_param`][15] from the `http`,
+Set using [`fastcgi_param`][12] from the `http`,
 `server`, or `location` contexts.
 
 ```
@@ -239,13 +193,13 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | :------------------------- | :---------- | :------------------------------------------------------------------ |
 | `DD_AGENT_HOST`            | `localhost` | The Agent host name                                                 |
 | `DD_AUTOFINISH_SPANS`      | `false`     | Whether spans are automatically finished when the tracer is flushed |
-| `DD_DISTRIBUTED_TRACING`   | `true`      | Whether to enable [distributed tracing][16]                         |
+| `DD_DISTRIBUTED_TRACING`   | `true`      | Whether to enable [distributed tracing][13]                         |
 | `DD_INTEGRATIONS_DISABLED` | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                |
-| `DD_PRIORITY_SAMPLING`     | `true`      | Whether to enable [priority sampling][17]                           |
+| `DD_PRIORITY_SAMPLING`     | `true`      | Whether to enable [priority sampling][14]                           |
 | `DD_SAMPLING_RATE`         | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default) |
 | `DD_TRACE_AGENT_PORT`      | `8126`      | The Agent port number                                               |
 | `DD_TRACE_APP_NAME`        | ``          | The default app name                                                |
-| `DD_TRACE_DEBUG`           | `false`     | Enable [debug mode][18] for the tracer                              |
+| `DD_TRACE_DEBUG`           | `false`     | Enable [debug mode][15] for the tracer                              |
 | `DD_TRACE_ENABLED`         | `true`      | Enable the tracer globally                                          |
 | `DD_TRACE_GLOBAL_TAGS`     | ``          | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`        |
 
@@ -261,7 +215,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | Symfony        | >= 3.4   | Beta         |
 | Zend Framework | 1.12     | Beta         |
 
-Don't see your desired web frameworks? Let Datadog know more about your needs through [this survey][19].
+Don't see your desired web frameworks? Let Datadog know more about your needs through [this survey][16].
 
 #### Library Compatibility
 
@@ -278,7 +232,7 @@ Don't see your desired web frameworks? Let Datadog know more about your needs th
 | PDO           | *(Any Supported PHP)*      | Beta         |
 | Predis        | 1.1                        | Beta         |
 
-Don't see your desired libraries? Let Datadog know more about your needs through [this survey][19].
+Don't see your desired libraries? Let Datadog know more about your needs through [this survey][16].
 
 ## Further Reading
 
@@ -291,14 +245,12 @@ Don't see your desired libraries? Let Datadog know more about your needs through
 [5]: /agent/kubernetes/daemonset_setup/#trace-collection
 [6]: /agent/apm/?tab=agent630#agent-configuration
 [7]: https://github.com/DataDog/dd-trace-php/releases/latest
-[9]: #install-from-source
-[10]: https://pecl.php.net/package/datadog_trace
-[11]: #modify-the-ini-file
-[12]: #library-compatibility
-[13]: https://app.datadoghq.com/apm/services
-[14]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[15]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
-[16]: /tracing/advanced_usage/?tab=php#distributed-tracing
-[17]: /tracing/advanced_usage/?tab=php#priority-sampling
-[18]: /tracing/advanced_usage/?tab=php#debugging
-[19]: https://docs.google.com/forms/d/e/1FAIpQLSemTVTCdqzXkfzemJSr8wuEllxfqbGVj00flmRvKA17f0lyFg/viewform
+[8]: https://app.datadoghq.com/apm/services
+[9]: /tracing/languages/php/manual-installation
+[10]: #library-compatibility
+[11]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
+[12]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
+[13]: /tracing/advanced_usage/?tab=php#distributed-tracing
+[14]: /tracing/advanced_usage/?tab=php#priority-sampling
+[15]: /tracing/advanced_usage/?tab=php#debugging
+[16]: https://docs.google.com/forms/d/e/1FAIpQLSemTVTCdqzXkfzemJSr8wuEllxfqbGVj00flmRvKA17f0lyFg/viewform
