@@ -1,5 +1,5 @@
 ---
-title: How to update an anomaly detection monitor to account for local time zone?
+title: How to update an anomaly detection monitor to account for local time zone
 kind: faq
 disable_toc: true
 further_reading:
@@ -10,6 +10,16 @@ further_reading:
   tag: "Documentation"
   text: "Configure monitor notifications"
 ---
+
+If you are using the agile or robust anomaly detection algorithms with weekly or daily seasonality, you can update your anomaly detection monitor to account for a local timezone using both the API and the UI.
+
+## UI
+
+To update an anomaly detection monitor to account for a local timezone in the UI, navigate to the [Create a new monitor][1] > [Anomoly monitor][2] section in the UI. In section 3, Set Alert Conditions, open the Advanced panel and toggle on the switch to take daylight savings into account while evaluating the monitor. Then, set the timezone dropdown to match the timezone you want tracked.
+
+{{< img src="monitors/faq/anomaly_monitor_timezone_ui.png" alt="DST tracking in the UI" responsive="true">}}
+
+## API
 
 1.  You need the following information to make the update request through the monitor API:
   - Your [Datadog API key and APP key][1] for authentication
