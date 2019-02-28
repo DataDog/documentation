@@ -37,7 +37,7 @@ Make sure you have a `trace_id` standard attribute in your logs. You should see 
 
 {{< img src="tracing/trace_in_log_panel.png" alt="Trace icon in log panel" responsive="true" style="width:50%;">}}
 
-If your logs do not contain the `trace_id`, follow the guide on [correlating traces and logs][2] to do it.
+If your logs do not contain the `trace_id`, follow the guide on [correlating traces and logs][2].
 The idea is then on the log side to:
 
 1. Extract the trace id in a log attribute
@@ -48,7 +48,7 @@ The idea is then on the log side to:
 
 For JSON logs, step 1 and 2 are done automatically. The tracer inject the trace and span id automatically in the logs and it is remapped automatically thanks to the [reserved attribute remappers][1].
 
-If this isn't working as expected, ensure the name of the Logs attribute that contains the trace id is `dd.trace_id` and verify it is properly set in [reserved attributes][2].
+If this isn't working as expected, ensure the name of the logs attribute that contains the trace id is `dd.trace_id` and verify it is properly set in [reserved attributes][2].
 
 [1]: 
 [2]: https://app.datadoghq.com/logs/pipelines/remapping
