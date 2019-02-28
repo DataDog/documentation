@@ -36,7 +36,7 @@ Make sure the Agent has **[APM enabled][6]**.
 
 ### Install the extension
 
-Install the PHP extension using one of the [precompiled packages for supported distributions][7]. If you can't find your distribution, install the PHP extension [from PECL][8] or [from source][9].
+Install the PHP extension using one of the [precompiled packages for supported distributions][7]. If you can't find your distribution, install the PHP extension [from source][9].
 
 Once downloaded, install the package with one of the commands below.
 
@@ -54,20 +54,6 @@ $ apk add datadog-php-tracer.apk --allow-untrusted
 $ tar -xf datadog-php-tracer.tar.gz -C /
   /opt/datadog-php/bin/post-install.sh
 ```
-
-### Install from PECL
-
-<div class="alert alert-warning">
-Installing the PHP tracer via PECL is an experimental feature.
-</div>
-
-Alternatively install the extension from the [PECL package **datadog_trace**][10].
-
-```bash
-$ sudo pecl install datadog_trace-beta
-```
-
-Next, [modify the `php.ini` file][11] to add the extension to the PHP runtime.
 
 ### Install from source
 
@@ -305,7 +291,6 @@ Don't see your desired libraries? Let Datadog know more about your needs through
 [5]: /agent/kubernetes/daemonset_setup/#trace-collection
 [6]: /agent/apm/?tab=agent630#agent-configuration
 [7]: https://github.com/DataDog/dd-trace-php/releases/latest
-[8]: #install-from-pecl
 [9]: #install-from-source
 [10]: https://pecl.php.net/package/datadog_trace
 [11]: #modify-the-ini-file
