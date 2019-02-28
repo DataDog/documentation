@@ -33,7 +33,7 @@ If the log section is empty when the `host` option is set, go into the log explo
 
 ### Trace_id option
 
-Make sure you actually have a `trace_id` standard attribute in your logs. If so, you should see a trace Icon next to the SERVICE (black if Trace is not sampled, grey if Trace is sampled).
+Make sure you have a `trace_id` standard attribute in your logs. You should see a trace icon next to the SERVICE name (black if trace is not sampled, grey if trace is sampled).
 
 {{< img src="tracing/trace_in_log_panel.png" alt="Trace icon in log panel" responsive="true" style="width:50%;">}}
 
@@ -48,7 +48,7 @@ The idea is then on the log side to:
 
 For JSON logs, step 1 and 2 are done automatically. The tracer inject the trace and span id automatically in the logs and it is remapped automatically thanks to the [reserved attribute remappers][1].
 
-In case of issue, double check in your logs the name of the attribute that contains the trace id (should be `dd.trace_id`) and double check in your [reserved attributes][2] that it is properly set.
+If this isn't working as expected, ensure the name of the Logs attribute that contains the trace id is `dd.trace_id` and verify it is properly set in [reserved attributes][2].
 
 [1]: 
 [2]: https://app.datadoghq.com/logs/pipelines/remapping
