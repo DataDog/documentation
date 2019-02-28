@@ -22,7 +22,7 @@ To update an anomaly detection monitor to account for a local timezone in the UI
 ## API
 
 1.  You need the following information to make the update request through the monitor API:
-  - Your [Datadog API key and APP key][3] for authentication
+  - Your [Datadog API key and application key][3] for authentication
   - The monitor ID and query from your anomaly detection monitor:
     {{< img src="monitors/faq/anomaly_monitor_timezone.png" alt="Monitor ID and Query" responsive="true">}}
   - The TZ identification string for the time zone related to your metric, for example `America/New_York` or `Europe/Paris`. Locate your preferred time zone in the TZ column on the [List of tz database time zones][4] (canonical format recommended).<br><br>
