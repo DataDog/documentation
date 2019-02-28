@@ -37,8 +37,6 @@ To update an anomaly detection monitor to account for a local timezone in the UI
   - Examples are available in Python, Ruby, and cURL.
   - Only include the ID and query in the request to avoid overriding existing settings. The name, message, options, and tags are not required.
 
-**Note**: A monitor with the time zone parameter evaluates using the specified time zone. The graphs shown on the monitor status page and in snapshots will correctly show the bounds used for those evaluations. However, the evaluation graph on the edit page does not respect the time zone. **Saving the monitor using the UI removes the time zone from the monitor definition.**
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
