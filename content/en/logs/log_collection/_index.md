@@ -345,7 +345,7 @@ logs_config:
 The `DD_LOGS_CONFIG_PROCESSING_RULES` can be used to configure global processing rules:
 
 ```
-DD_LOGS_CONFIG_PROCESSING_RULES="[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\w+@datadoghq.com"}]
+DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
 ```
 
 {{% /tab %}}
