@@ -23,24 +23,24 @@ further_reading:
 
 ## Overview
 
-Use your favorite python logger to log into a file on your host. Then [monitor this file with your Datadog Agent][1] to send your logs to Datadog.
+Use your favorite python logger to log into a file on your host. Then monitor the file with the Datadog Agent to send your logs to Datadog.
 
 ## Setup
 
 Python logs are quite complex to handle, mainly because of tracebacks. They are split into multiple lines which make them difficult to associate with the original log event.  
-To address this use case we strongly recommend you use a JSON formatter when logging in order to:
+To address this use case it is strongly recommended to use a JSON formatter when logging in order to:
 
 * Ensure each stack_trace is properly wrapped into the correct log
-* Ensure that all the attributes of a log event are properly extracted (severity, logger name, thread name, etc...)
+* Ensure all the attributes of a log event are properly extracted (severity, logger name, thread name, etc.)
  
-Here are setup examples for the two following logging libraries:
+Here are setup examples for the following logging libraries:
 
-- [JSON-log-formatter][2]
-- [Python-json-logger][3]
+- [JSON-log-formatter][1]
+- [Python-json-logger][2]
 
 ### Inject trace IDs in your logs
 
-If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][4] to automatically add trace and span ids in your logs.
+If APM is enabled for this application, improve the [correlation between application logs and traces][3] to automatically add trace and span ids to your logs.
 
 Once this is done, the log should have the following format:
 
@@ -74,7 +74,7 @@ logger.setLevel(logging.INFO)
 logger.info('Sign up', extra={'referral_code': '52d6ce'})
 ```
 
-The log file will contain the following log record (inline).
+The log file contains the following log record (inline):
 ```json
 {
     "message": "Sign up",
@@ -133,9 +133,9 @@ Once the [handler is configured][2], the log file contains the following log rec
 
 ### Configure the Datadog Agent
 
-Create a file `conf.yaml` in the Agent's `python.d/` directory with the following content:
+Create a file `conf.yaml` in the Agent's `conf.d/python.d/` directory with the following content:
 
-```yaml
+```
 init_config:
 
 instances:
@@ -151,8 +151,8 @@ logs:
     ##   tags: (optional) add tags to each logs collected
 
   - type: file
-    path: /path/to/your/python/log.log
-    service: myapplication
+    path: <PATH_TO_PYTHON_LOG>.log
+    service: <YOUR_APPLICATION>
     source: python
     sourcecategory: sourcecode
     # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
@@ -162,14 +162,13 @@ logs:
     #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
-Then [Restart the Agent][5] to apply the configuration change.
+[Restart the Agent][4] to apply the configuration changes.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_collection/python/#configure-the-Datadog-agent
-[2]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
-[3]: https://github.com/madzak/python-json-logger
-[4]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=python#correlate-traces-and-logs
-[5]: /agent/faq/agent-commands
+[1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
+[2]: https://github.com/madzak/python-json-logger
+[3]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=python#correlate-traces-and-logs
+[4]: /agent/guide/agent-commands
