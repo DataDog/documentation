@@ -40,7 +40,7 @@ Here are setup examples for the following logging libraries:
 
 ### Inject trace IDs in your logs
 
-If APM is enabled for this application, improve the [correlation between application logs and traces][3] to automatically add trace and span ids to your logs.
+If APM is enabled for this application, improve the [correlation between application logs and traces][3] to automatically add trace and span IDs to your logs.
 
 Once this is done, the log should have the following format:
 
