@@ -88,8 +88,9 @@ PHP APM supports the following PHP versions:
 
 #### Web Framework Compatibility
 
-Please not that if the web framework that you use is not listed below you will still see traces for your web requests
-in the UI. The only caveat is that some metadata and spans which are very specific to a particular web fr
+Please note that if the web framework that you use is not listed below you will still see traces for your web requests
+in the UI. The only caveat is that some metadata and spans which are very specific to a particular web framework will
+not show up.
 
 | Module         | Versions | Support Type |
 | :------------- | :------- | :----------- |
