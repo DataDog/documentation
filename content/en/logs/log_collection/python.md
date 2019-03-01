@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-Use your favorite python logger to log into a file on your host. Then monitor the file with the Datadog Agent to send your logs to Datadog.
+Use your favorite Python logger to log into a file on your host. Then monitor the file with the Datadog Agent to send your logs to Datadog.
 
 ## Setup
 
