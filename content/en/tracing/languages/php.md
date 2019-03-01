@@ -16,10 +16,6 @@ further_reading:
   text: "Advanced Usage"
 ---
 
-<div class="alert alert-warning">
-The APM tracer for PHP applications is in Open Public Beta.
-</div>
-
 ## Installation and Getting Started
 
 For descriptions of terminology used in APM, take a look at the [official documentation][1].
@@ -76,13 +72,13 @@ Automatic instrumentation captures:
 
 PHP APM supports the following PHP versions:
 
-| Version | Support type |
-| :------ | :----------- |
-| 7.2.x   | Beta         |
-| 7.1.x   | Beta         |
-| 7.0.x   | Beta         |
-| 5.6.x   | Beta         |
-| 5.4.x   | Beta         |
+| Version | Support type    |
+| :------ | :-------------  |
+| 7.2.x   | Fully Supported |
+| 7.1.x   | Fully Supported |
+| 7.0.x   | Fully Supported |
+| 5.6.x   | Fully Supported |
+| 5.4.x   | Fully Supported |
 
 ### Integrations
 
@@ -92,30 +88,29 @@ Please note that if the web framework that you use is not listed below you will 
 in the UI. The only caveat is that some metadata and spans which are very specific to a particular web framework will
 not show up.
 
-| Module         | Versions | Support Type |
-| :------------- | :------- | :----------- |
-| Laravel        | 5.x      | Beta         |
-| Laravel        | 4.2      | Beta         |
-| Symfony        | 4.x      | Beta         |
-| Symfony        | >= 3.3   | Beta         |
-| Zend Framework | 1.12     | Beta         |
+| Module         | Versions      | Support Type    |
+|:---------------|:--------------|:----------------|
+| Laravel        | 4.2, 5.x      | Fully Supported |
+| Symfony        | 3.3, 3.4, 4.x | Fully Supported |
+| Wordpress      | 5.x           | _Coming soon_   |
+| Zend Framework | 1.12          | Fully Supported |
 
 Don't see your desired web frameworks? Let Datadog know more about your needs through [this survey][11].
 
 #### Library Compatibility
 
-| Module        | Versions                   | Support Type |
-| :------------ | :------------------------- | :----------- |
-| Curl          | *(Any Supported PHP)*      | Beta         |
-| Elasticsearch | 1.x                        | Beta         |
-| Eloquent      | Laravel supported versions | Beta         |
-| Guzzle        | 6.x                        | Beta         |
-| Guzzle        | 5.x                        | Beta         |
-| Memcached     | *(Any Supported PHP)*      | Beta         |
-| MongoDB       | 1.4.x                      | Beta         |
-| Mysqli        | *(Any Supported PHP)*      | Beta         |
-| PDO           | *(Any Supported PHP)*      | Beta         |
-| Predis        | 1.1                        | Beta         |
+| Module        | Versions                   | Support Type    |
+| :------------ | :------------------------- | :-------------- |
+| Curl          | *(Any Supported PHP)*      | Fully Supported |
+| Elasticsearch | 1.x                        | Fully Supported |
+| Eloquent      | Laravel supported versions | Fully Supported |
+| Guzzle        | 6.x                        | Fully Supported |
+| Guzzle        | 5.x                        | Fully Supported |
+| Memcached     | *(Any Supported PHP)*      | Fully Supported |
+| MongoDB       | 1.4.x                      | Fully Supported |
+| Mysqli        | *(Any Supported PHP)*      | Fully Supported |
+| PDO           | *(Any Supported PHP)*      | Fully Supported |
+| Predis        | 1.1                        | Fully Supported |
 
 Don't see your desired libraries? Let Datadog know more about your needs through [this survey][11].
 
