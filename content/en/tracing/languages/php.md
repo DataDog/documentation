@@ -16,10 +16,6 @@ further_reading:
   text: "Advanced Usage"
 ---
 
-<div class="alert alert-warning">
-The APM tracer for PHP applications is in Open Public Beta.
-</div>
-
 ## Installation and Getting Started
 
 For descriptions of terminology used in APM, take a look at the [official documentation][1].
@@ -76,13 +72,13 @@ Automatic instrumentation captures:
 
 PHP APM supports the following PHP versions:
 
-| Version | Support type |
-| :------ | :----------- |
-| 7.2.x   | Beta         |
-| 7.1.x   | Beta         |
-| 7.0.x   | Beta         |
-| 5.6.x   | Beta         |
-| 5.4.x   | Beta         |
+| Version | Support type    |
+| :------ | :-------------  |
+| 7.2.x   | Fully Supported |
+| 7.1.x   | Fully Supported |
+| 7.0.x   | Fully Supported |
+| 5.6.x   | Fully Supported |
+| 5.4.x   | Fully Supported |
 
 ### Integrations
 
@@ -90,32 +86,55 @@ PHP APM supports the following PHP versions:
 
 If the web framework that you use is not listed below, you can still see traces for your web requests in the UI. However, some metadata and spans that are very specific to that particular web framework may not display.
 
-| Module         | Versions | Support Type |
-| :------------- | :------- | :----------- |
-| Laravel        | 5.x      | Beta         |
-| Laravel        | 4.2      | Beta         |
-| Symfony        | 4.x      | Beta         |
-| Symfony        | >= 3.3   | Beta         |
-| Zend Framework | 1.12     | Beta         |
+| Module         | Versions      | Support Type    |
+|:---------------|:--------------|:----------------|
+| Laravel        | 4.2, 5.x      | Fully Supported |
+| Symfony        | 3.3, 3.4, 4.x | Fully Supported |
+| Zend Framework | 1.12          | Fully Supported |
+| CakePHP        | 1.3, 2.8, 3.x | _Coming Soon_   |
+| CodeIgniter    | 2, 3          | _Coming Soon_   |
+| Drupal         |               | _Coming Soon_   |
+| Magento        | 2             | _Coming Soon_   |
+| Phalcon        | 1.3, 3.4      | _Coming Soon_   |
+| Slim           | 2, 3          | _Coming Soon_   |
+| Wordpress      |               | _Coming Soon_   |
+| Yii            | 1.1           | _Coming Soon_   |
 
-Don't see your desired web frameworks? Let Datadog know more about your needs through [this survey][11].
+Don’t see your desired frameworks? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
+
+#### Datastore Compatibility
+
+| Module                           | Versions                   | Support Type    |
+|:---------------------------------|:---------------------------|:----------------|
+| Amazon RDS (using PDO or MySQLi) | *(Any Supported PHP)*      | Fully Supported |
+| Elasticsearch                    | 1.x                        | Fully Supported |
+| Eloquent                         | Laravel supported versions | Fully Supported |
+| Memcached                        | *(Any Supported PHP)*      | Fully Supported |
+| MongoDB                          | 1.4.x                      | Fully Supported |
+| MySQLi                           | *(Any Supported PHP)*      | Fully Supported |
+| PDO (MySQL, PostgreSQL, MariaDB) | *(Any Supported PHP)*      | Fully Supported |
+| Predis                           | 1.1                        | Fully Supported |
+| AWS Couchbase                    | AWS PHP SDK 3              | _Coming Soon_   |
+| AWS DynamoDB                     | AWS PHP SDK 3              | _Coming Soon_   |
+| AWS ElastiCache                  | AWS PHP SDK 3              | _Coming Soon_   |
+| Doctrine ORM                     | 2                          | _Coming Soon_   |
+| ODBC                             | *(Any Supported PHP)*      | _Coming Soon_   |
+| PHPredis                         | 4                          | _Coming Soon_   |
+| Solarium                         | 4.2                        | _Coming Soon_   |
+
+Don’t see your desired datastores? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
 
 #### Library Compatibility
 
-| Module        | Versions                   | Support Type |
-| :------------ | :------------------------- | :----------- |
-| Curl          | *(Any Supported PHP)*      | Beta         |
-| Elasticsearch | 1.x                        | Beta         |
-| Eloquent      | Laravel supported versions | Beta         |
-| Guzzle        | 6.x                        | Beta         |
-| Guzzle        | 5.x                        | Beta         |
-| Memcached     | *(Any Supported PHP)*      | Beta         |
-| MongoDB       | 1.4.x                      | Beta         |
-| Mysqli        | *(Any Supported PHP)*      | Beta         |
-| PDO           | *(Any Supported PHP)*      | Beta         |
-| Predis        | 1.1                        | Beta         |
+| Module     | Versions              | Support Type    |
+|:-----------|:----------------------|:----------------|
+| Curl       | *(Any Supported PHP)* | Fully Supported |
+| Guzzle     | 5.x                   | Fully Supported |
+| Guzzle     | 6.x                   | Fully Supported |
+| Beanstalkd |                       | _Coming Soon_   |
+| ReactPHP   |                       | _Coming Soon_   |
 
-Don't see your desired libraries? Let Datadog know more about your needs through [this survey][11].
+Don’t see your desired libraries? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
 
 ## Configuration
 
@@ -175,7 +194,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 [8]: https://app.datadoghq.com/apm/services
 [9]: /tracing/languages/php/manual-installation
 [10]: #library-compatibility
-[11]: https://docs.google.com/forms/d/e/1FAIpQLSemTVTCdqzXkfzemJSr8wuEllxfqbGVj00flmRvKA17f0lyFg/viewform
+[11]: https://docs.datadoghq.com/help
 [12]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [13]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
 [14]: /tracing/advanced_usage/?tab=php#distributed-tracing
