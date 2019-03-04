@@ -128,12 +128,13 @@ Don’t see your desired datastores? Datadog is continually adding additional su
 
 #### Library Compatibility
 
-| Module   | Versions              | Support Type    |
-|:---------|:----------------------|:----------------|
-| Curl     | *(Any Supported PHP)* | Fully Supported |
-| Guzzle   | 5.x                   | Fully Supported |
-| Guzzle   | 6.x                   | Fully Supported |
-| ReactPHP |                       | _Coming Soon_   |
+| Module     | Versions              | Support Type    |
+|:-----------|:----------------------|:----------------|
+| Curl       | *(Any Supported PHP)* | Fully Supported |
+| Guzzle     | 5.x                   | Fully Supported |
+| Guzzle     | 6.x                   | Fully Supported |
+| Beanstalkd |                       | _Coming Soon_   |
+| ReactPHP   |                       | _Coming Soon_   |
 
 Don’t see your desired libraries? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
 
