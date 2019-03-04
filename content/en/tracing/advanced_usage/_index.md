@@ -423,7 +423,7 @@ putenv('DD_TRACE_AGENT_PORT=8126');
 
 ## Runtime Metrics
 
-Enable runtime metric collection in the Tracing Client to gain additional insight into an application's performance. Runtime metrics can be viewed in context of a service, correlated in the Trace View at the time of a given request, and utilized anywhere in the platform.
+Enable runtime metrics collection in the tracing client to gain additional insight into an application's performance. Runtime metrics can be viewed in the context of a service, correlated in the Trace View at the time of a given request, and utilized anywhere in the platform.
 
 {{< img src="tracing/jvm_runtime_trace.png" alt="JVM Runtime Trace" responsive="true" style="width:100%;">}}
 
@@ -432,12 +432,12 @@ Enable runtime metric collection in the Tracing Client to gain additional insigh
 
 ### Automatic Configuration
 
-JVM Metric collection can be enabled with one configuration parameter in the Tracing Client:
+JVM metrics collection can be enabled with one configuration parameter in the tracing client:
 
 * System Property: `-Ddd.jmxfetch.enabled=true`
 * Environment Variable: `DD_JMXFETCH_ENABLED=true`
 
-JVM Metrics can now be viewed in correlation with your Java Services, you can get started [here][1]. 
+JVM metrics can be viewed in correlation with your Java services. You can get started [here][1]. 
 
 {{< img src="tracing/jvm-runtime.png" alt="JVM Runtime" responsive="true" style="width:100%;">}}
 
@@ -445,13 +445,13 @@ JVM Metrics can now be viewed in correlation with your Java Services, you can ge
 
 ### Data Collected
 
-The following metrics will be collected by default after enabling JVM Metrics.
+The following metrics are collected by default after enabling JVM metrics.
 
 {{< get-metrics-from-git "java" >}}
 
-Along with viewing these metrics in your APM Service Page, Datadog provides a [default JVM Runtime Dashboard][4] with the `service` and `runtime-id` tags that will be applied to these metrics. 
+Along with displaying these metrics in your APM Service Page, Datadog provides a [default JVM Runtime Dashboard][4] with the `service` and `runtime-id` tags that are applied to these metrics. 
 
-Additional JMX metrics can be added using configuration files that are passed to `jmxfetch.metrics-configs`. You can also enable existing Datadog JMX Integrations individually with the `dd.integration.<name>` parameter. This will auto-embed configuration from our [existing JMX configuration files][2]. See [JMX Integration][3] for further details on configuration. 
+Additional JMX metrics can be added using configuration files that are passed to `jmxfetch.metrics-configs`. You can also enable existing Datadog JMX integrations individually with the `dd.integration.<name>` parameter. This auto-embeds configuration from Datadog's [existing JMX configuration files][2]. See the [JMX Integration][3] for further details on configuration. 
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: https://github.com/DataDog/integrations-core/search?q=jmx_metrics&unscoped_q=jmx_metrics
