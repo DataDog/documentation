@@ -21,10 +21,11 @@ further_reading:
 
 Centralizing logs from various technologies and applications tends to generate tens or hundreds of different attributes in a Log Management environment- especially when many teams users, each one with their own personal usage patterns, are working within the same environment.
 This generates confusion. For instance, a client IP might have the following attributes within your logs: `clientIP`, `client_ip_address`, `remote_address`, `client.ip`, etc.
+
 In this context, it can be cumbersome to know which attributes correspond to the logs you are trying to filter on, or correlate proxy logs to web application logs.
 
 Even if technologies define their respective logs attributes differently, a URL, client IP, or duration have universally consistent meanings.
-This is why Datadog decided while implementing log integrations to rely on a subset of names for attributes that are commonly observed over log sources.
+This is why Datadog decided while implementing log integrations to rely on a subset of names for attributes that are commonly observed over log sources. For custom sources, a Standard Attribute page was added to let you benefit from the existing naming convention or to build your own.
 
 The standard attribute table is available in Log Configuration pages, along with pipelines, indexes, and archives.
 
