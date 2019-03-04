@@ -103,7 +103,7 @@ not show up.
 | Yii            | 1.1           | _Coming Soon_   |
 | Zend Framework | 1.12          | Fully Supported |
 
-Datadog is continually adding additional support. Contact [Datadog support][11] support if you need help.
+Datadog is continually adding additional support. Contact [Datadog support][11] if you need help.
 
 #### Datastore Compatibility
 
@@ -123,7 +123,7 @@ Datadog is continually adding additional support. Contact [Datadog support][11] 
 | phpredis        | 4                          | _Coming Soon_   |
 | Predis          | 1.1                        | Beta            |
 
-Datadog is continually adding additional support. Contact [Datadog support][11] support if you need help.
+Datadog is continually adding additional support. Contact [Datadog support][11] if you need help.
 
 #### Library Compatibility
 
@@ -134,7 +134,7 @@ Datadog is continually adding additional support. Contact [Datadog support][11] 
 | Guzzle   | 6.x                   | Fully Supported |
 | ReactPHP |                       | _Coming Soon_   |
 
-Datadog is continually adding additional support. Contact [Datadog support][11] support if you need help.
+Datadog is continually adding additional support. Contact [Datadog support][11] if you need help.
 
 ## Configuration
 
