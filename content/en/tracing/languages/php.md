@@ -113,7 +113,7 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 | Eloquent                         | Laravel supported versions | Fully Supported |
 | Memcached                        | *(Any Supported PHP)*      | Fully Supported |
 | MongoDB                          | 1.4.x                      | Fully Supported |
-| Mysqli                           | *(Any Supported PHP)*      | Fully Supported |
+| MySQLi                           | *(Any Supported PHP)*      | Fully Supported |
 | PDO (MySQL, PostgreSQL, MariaDB) | *(Any Supported PHP)*      | Fully Supported |
 | Predis                           | 1.1                        | Fully Supported |
 | AWS Couchbase                    | AWS PHP SDK 3              | _Coming Soon_   |
