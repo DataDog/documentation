@@ -90,17 +90,17 @@ not show up.
 
 | Module         | Versions      | Support Type    |
 |:---------------|:--------------|:----------------|
+| Laravel        | 4.2, 5.x      | Fully Supported |
+| Symfony        | 3.3, 3.4, 4.x | Fully Supported |
+| Zend Framework | 1.12          | Fully Supported |
 | CakePHP        | 1.3, 2.8, 3.x | _Coming Soon_   |
 | CodeIgniter    | 2, 3          | _Coming Soon_   |
 | Drupal         |               | _Coming Soon_   |
-| Laravel        | 4.2, 5.x      | Fully Supported |
 | Magento        | 2             | _Coming Soon_   |
 | Phalcon        | 1.3, 3.4      | _Coming Soon_   |
 | slim           | 2, 3          | _Coming Soon_   |
-| Symfony        | 3.3, 3.4, 4.x | Fully Supported |
 | Wordpress      |               | _Coming Soon_   |
 | Yii            | 1.1           | _Coming Soon_   |
-| Zend Framework | 1.12          | Fully Supported |
 
 Datadog is continually adding additional support. Contact [Datadog support][11] if you need help.
 
@@ -108,19 +108,19 @@ Datadog is continually adding additional support. Contact [Datadog support][11] 
 
 | Module          | Versions                   | Support Type    |
 |:----------------|:---------------------------|:----------------|
-| AWS Couchbase   | AWS PHP SDK 3              | _Coming Soon_   |
-| AWS DynamoDB    | AWS PHP SDK 3              | _Coming Soon_   |
-| AWS Elasticache | AWS PHP SDK 3              | _Coming Soon_   |
-| Doctrin ORM     | 2                          | _Coming Soon_   |
 | Elasticsearch   | 1.x                        | Fully Supported |
 | Eloquent        | Laravel supported versions | Fully Supported |
 | Memcached       | *(Any Supported PHP)*      | Fully Supported |
 | MongoDB         | 1.4.x                      | Fully Supported |
 | Mysqli          | *(Any Supported PHP)*      | Fully Supported |
+| PDO             | *(Any Supported PHP)*      | Fully Supported |
+| Predis          | 1.1                        | Fully Supported |
+| AWS Couchbase   | AWS PHP SDK 3              | _Coming Soon_   |
+| AWS DynamoDB    | AWS PHP SDK 3              | _Coming Soon_   |
+| AWS Elasticache | AWS PHP SDK 3              | _Coming Soon_   |
+| Doctrin ORM     | 2                          | _Coming Soon_   |
 | ODBC            | *(Any Supported PHP)*      | _Coming Soon_   |
-| PDO             | *(Any Supported PHP)*      | Beta            |
 | phpredis        | 4                          | _Coming Soon_   |
-| Predis          | 1.1                        | Beta            |
 
 Datadog is continually adding additional support. Contact [Datadog support][11] if you need help.
 
