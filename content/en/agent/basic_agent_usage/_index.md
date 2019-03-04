@@ -68,9 +68,9 @@ Manage the Datadog Agent and [Integrations][1] using configuration management to
 
 ### Datadog site
 
-To send your Agent data to the [Datadog EU site][3], edit your [Agent main configuration file][4] `datadog.yaml` and set the `dd_site` parameter to:
+To send your Agent data to the [Datadog EU site][3], edit your [Agent main configuration file][4] `datadog.yaml` and set the `site` parameter to:
 
-`dd_site:datadoghq.eu`
+`site:datadoghq.eu`
 
 ### Log location
 

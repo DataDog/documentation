@@ -67,9 +67,9 @@ Gérez l'Agent Datadog et les [intégrations][1] grâce aux outils de gestion de
 
 ### Site de Datadog
 
-Pour envoyer vos données de l'Agent au [site Datadog Europe][3], modifiez le [principal fichier de configuration de l'Agent][4] `datadog.yaml` et définissez le paramètre `dd_site` sur :
+Pour envoyer vos données de l'Agent au [site Datadog Europe][3], modifiez le [principal fichier de configuration de l'Agent][4] `datadog.yaml` et définissez le paramètre `site` sur :
 
-`dd_site:datadoghq.eu`
+`site:datadoghq.eu`
 
 ### Emplacement des logs
 
