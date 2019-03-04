@@ -90,29 +90,51 @@ not show up.
 
 | Module         | Versions      | Support Type    |
 |:---------------|:--------------|:----------------|
+| CakePHP        | 1.3, 2.8, 3.x | _Coming Soon_   |
+| CodeIgniter    | 2, 3          | _Coming Soon_   |
+| Drupal         |               | _Coming Soon_   |
 | Laravel        | 4.2, 5.x      | Fully Supported |
+| Magento        | 2             | _Coming Soon_   |
+| Phalcon        | 1.3, 3.4      | _Coming Soon_   |
+| slim           | 2, 3          | _Coming Soon_   |
 | Symfony        | 3.3, 3.4, 4.x | Fully Supported |
+| Wordpress      |               | _Coming Soon_   |
 | Wordpress      | 5.x           | _Coming soon_   |
+| Yii            | 1.1           | _Coming Soon_   |
 | Zend Framework | 1.12          | Fully Supported |
 
-Don't see your desired web frameworks? Let Datadog know more about your needs through [this survey][11].
+Datadog is continually adding additional support. Contact [Datadog support][11] support if you need help.
+
+#### Datastore Compatibility
+
+| Module          | Versions                   | Support Type    |
+|:----------------|:---------------------------|:----------------|
+| AWS Couchbase   | AWS PHP SDK 3              | _Coming Soon_   |
+| AWS DynamoDB    | AWS PHP SDK 3              | _Coming Soon_   |
+| AWS Elasticache | AWS PHP SDK 3              | _Coming Soon_   |
+| Doctrin ORM     | 2                          | _Coming Soon_   |
+| Elasticsearch   | 1.x                        | Fully Supported |
+| Eloquent        | Laravel supported versions | Fully Supported |
+| Memcached       | *(Any Supported PHP)*      | Fully Supported |
+| MongoDB         | 1.4.x                      | Fully Supported |
+| Mysqli          | *(Any Supported PHP)*      | Fully Supported |
+| ODBC            | *(Any Supported PHP)*      | _Coming Soon_   |
+| PDO             | *(Any Supported PHP)*      | Beta            |
+| phpredis        | 4                          | _Coming Soon_   |
+| Predis          | 1.1                        | Beta            |
+
+Datadog is continually adding additional support. Contact [Datadog support][11] support if you need help.
 
 #### Library Compatibility
 
-| Module        | Versions                   | Support Type    |
-| :------------ | :------------------------- | :-------------- |
-| Curl          | *(Any Supported PHP)*      | Fully Supported |
-| Elasticsearch | 1.x                        | Fully Supported |
-| Eloquent      | Laravel supported versions | Fully Supported |
-| Guzzle        | 6.x                        | Fully Supported |
-| Guzzle        | 5.x                        | Fully Supported |
-| Memcached     | *(Any Supported PHP)*      | Fully Supported |
-| MongoDB       | 1.4.x                      | Fully Supported |
-| Mysqli        | *(Any Supported PHP)*      | Fully Supported |
-| PDO           | *(Any Supported PHP)*      | Fully Supported |
-| Predis        | 1.1                        | Fully Supported |
+| Module   | Versions              | Support Type    |
+|:---------|:----------------------|:----------------|
+| Curl     | *(Any Supported PHP)* | Fully Supported |
+| Guzzle   | 5.x                   | Fully Supported |
+| Guzzle   | 6.x                   | Fully Supported |
+| ReactPHP |                       | _Coming Soon_   |
 
-Don't see your desired libraries? Let Datadog know more about your needs through [this survey][11].
+Datadog is continually adding additional support. Contact [Datadog support][11] support if you need help.
 
 ## Configuration
 
@@ -172,7 +194,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 [8]: https://app.datadoghq.com/apm/services
 [9]: /tracing/languages/php/manual-installation
 [10]: #library-compatibility
-[11]: https://docs.google.com/forms/d/e/1FAIpQLSemTVTCdqzXkfzemJSr8wuEllxfqbGVj00flmRvKA17f0lyFg/viewform
+[11]: https://docs.datadoghq.com/help
 [12]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [13]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
 [14]: /tracing/advanced_usage/?tab=php#distributed-tracing
