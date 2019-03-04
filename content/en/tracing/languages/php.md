@@ -98,7 +98,7 @@ not show up.
 | Drupal         |               | _Coming Soon_   |
 | Magento        | 2             | _Coming Soon_   |
 | Phalcon        | 1.3, 3.4      | _Coming Soon_   |
-| slim           | 2, 3          | _Coming Soon_   |
+| Slim           | 2, 3          | _Coming Soon_   |
 | Wordpress      |               | _Coming Soon_   |
 | Yii            | 1.1           | _Coming Soon_   |
 
@@ -121,7 +121,7 @@ Datadog is continually adding additional support. Contact [Datadog support][11] 
 | AWS Elasticache                  | AWS PHP SDK 3              | _Coming Soon_   |
 | Doctrine ORM                     | 2                          | _Coming Soon_   |
 | ODBC                             | *(Any Supported PHP)*      | _Coming Soon_   |
-| phpredis                         | 4                          | _Coming Soon_   |
+| PHPredis                         | 4                          | _Coming Soon_   |
 | Solarium                         | 4.2                        | _Coming Soon_   |
 
 Datadog is continually adding additional support. Contact [Datadog support][11] if you need help.
