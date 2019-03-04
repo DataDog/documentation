@@ -108,17 +108,17 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 
 | Module                           | Versions                   | Support Type    |
 |:---------------------------------|:---------------------------|:----------------|
-| Amazon RDS (using PDO or mysqli) | *(Any Supported PHP)*      | Fully Supported |
+| Amazon RDS (using PDO or MySQLi) | *(Any Supported PHP)*      | Fully Supported |
 | Elasticsearch                    | 1.x                        | Fully Supported |
 | Eloquent                         | Laravel supported versions | Fully Supported |
 | Memcached                        | *(Any Supported PHP)*      | Fully Supported |
 | MongoDB                          | 1.4.x                      | Fully Supported |
 | Mysqli                           | *(Any Supported PHP)*      | Fully Supported |
-| PDO (mysql, postgresql, mariadb) | *(Any Supported PHP)*      | Fully Supported |
+| PDO (MySQL, PostgreSQL, MariaDB) | *(Any Supported PHP)*      | Fully Supported |
 | Predis                           | 1.1                        | Fully Supported |
 | AWS Couchbase                    | AWS PHP SDK 3              | _Coming Soon_   |
 | AWS DynamoDB                     | AWS PHP SDK 3              | _Coming Soon_   |
-| AWS Elasticache                  | AWS PHP SDK 3              | _Coming Soon_   |
+| AWS ElastiCache                  | AWS PHP SDK 3              | _Coming Soon_   |
 | Doctrine ORM                     | 2                          | _Coming Soon_   |
 | ODBC                             | *(Any Supported PHP)*      | _Coming Soon_   |
 | PHPredis                         | 4                          | _Coming Soon_   |
