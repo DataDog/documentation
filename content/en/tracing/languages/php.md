@@ -102,7 +102,7 @@ not show up.
 | Wordpress      |               | _Coming Soon_   |
 | Yii            | 1.1           | _Coming Soon_   |
 
-Datadog is continually adding additional support. Contact [Datadog support][11] if you need help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
 
 #### Datastore Compatibility
 
@@ -124,7 +124,7 @@ Datadog is continually adding additional support. Contact [Datadog support][11] 
 | PHPredis                         | 4                          | _Coming Soon_   |
 | Solarium                         | 4.2                        | _Coming Soon_   |
 
-Datadog is continually adding additional support. Contact [Datadog support][11] if you need help.
+Don’t see your desired datastores? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
 
 #### Library Compatibility
 
@@ -135,7 +135,7 @@ Datadog is continually adding additional support. Contact [Datadog support][11] 
 | Guzzle   | 6.x                   | Fully Supported |
 | ReactPHP |                       | _Coming Soon_   |
 
-Datadog is continually adding additional support. Contact [Datadog support][11] if you need help.
+Don’t see your desired libraries? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
 
 ## Configuration
 
