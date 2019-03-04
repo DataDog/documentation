@@ -99,7 +99,6 @@ not show up.
 | slim           | 2, 3          | _Coming Soon_   |
 | Symfony        | 3.3, 3.4, 4.x | Fully Supported |
 | Wordpress      |               | _Coming Soon_   |
-| Wordpress      | 5.x           | _Coming soon_   |
 | Yii            | 1.1           | _Coming Soon_   |
 | Zend Framework | 1.12          | Fully Supported |
 
