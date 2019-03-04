@@ -301,6 +301,8 @@ main:
             url: "#custom-tagging"
           - name: "Change Agent Hostname"
             url: "#change-agent-hostname"
+          - name: "Runtime Metrics"
+            url: "#runtime-metrics"
           - name: "Manual Instrumentation"
             url: "#manual-instrumentation"
           - name: "OpenTracing"
@@ -608,3 +610,4 @@ main:
   - name: "Help"
     url: "help/"
     pre: "nav_help"
+
