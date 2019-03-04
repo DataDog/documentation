@@ -42,6 +42,8 @@ Une fois SAML configuré dans Datadog et votre fournisseur d'identité prêt à 
 
 Cette URL est également fournie sur la [page Team][5]. Cliquez dessus pour initier l'authentification SAML avec votre fournisseur d'identité. **Remarque** : cette URL ne s'affiche pas tant que SAML n'est pas activé pour votre compte.
 
+**Remarque** : si vous souhaitez configurer SAML pour un compte multi-org, consultez la [documentation dédiée][6].
+
 ## Détails du prestataire de services de Datadog
 
 * Datadog prend en charge la liaison **HTTP-POST** pour **SAML2** :
@@ -51,7 +53,7 @@ Cette URL est également fournie sur la [page Team][5]. Cliquez dessus pour init
 * Les assertions peuvent être chiffrées. Les assertions non chiffrées sont néanmoins acceptées.
 * Consultez [les métadonnées du prestataire de services de Datadog][4].
 
-##  Définition des attributs
+## Définir des attributs
 
 Des attributs peuvent être inclus dans l'assertion. Datadog analyse trois attributs dans AttributeStatement :
 
@@ -81,13 +83,13 @@ Si **sn** et **givenName** sont fournis, ils servent à mettre à jour le nom de
 
 Pour en savoir plus sur la configuration d'un fournisseur d'identité spécifique, consultez la documentation suivante :
 
-* [Active Directory][6]
-* [Auth0][7]
-* [Azure][8]
-* [Google][9]
-* [NoPassword][10]
-* [Okta][11]
-* [SafeNet][12]
+* [Active Directory][7]
+* [Auth0][8]
+* [Azure][9]
+* [Google][10]
+* [NoPassword][11]
+* [Okta][12]
+* [SafeNet][13]
 
 ## Fonctionnalités supplémentaires
 
@@ -97,7 +99,7 @@ Les fonctionnalités suivantes peuvent être activées via la [fenêtre de dialo
 
 Grâce à l'approvisionnement juste à temps, chaque première connexion d'un nouvel utilisateur entraîne la création d'un compte Datadog. Ainsi, les administrateurs n'ont plus à créer manuellement de comptes individuels.
 
-Certaines organisations ne souhaitent pas inviter l'ensemble de leurs utilisateurs à rejoindre Datadog. Si vous souhaitez modifier le fonctionnement de SAML pour votre compte, contactez l'[assistance Datadog][13]. Si vous souhaitez refuser l'accès d'un utilisateur spécifique à Datadog, votre organisation doit configurer son fournisseur d'identité de façon à ce qu'il n'envoie pas d'assertions à Datadog.
+Certaines organisations ne souhaitent pas inviter l'ensemble de leurs utilisateurs à rejoindre Datadog. Si vous souhaitez modifier le fonctionnement de SAML pour votre compte, contactez l'[assistance Datadog][14]. Si vous souhaitez refuser l'accès d'un utilisateur spécifique à Datadog, votre organisation doit configurer son fournisseur d'identité de façon à ce qu'il n'envoie pas d'assertions à Datadog.
 
 Les administrateurs peuvent définir le rôle par défaut des nouveaux utilisateurs « juste à temps ». Le rôle par défaut attribué est **Standard**, mais vous pouvez choisir d'ajouter de nouveaux utilisateurs « juste à temps » avec le rôle **Read-Only** ou même **Administrator**.
 
@@ -124,11 +126,12 @@ Lorsque le mode SAML Strict est activé, tous les utilisateurs doivent se connec
 [3]: https://app.datadoghq.com/saml/saml_setup
 [4]: https://app.datadoghq.com/account/saml/metadata.xml
 [5]: https://app.datadoghq.com/account/team
-[6]: /fr/account_management/saml/activedirectory
-[7]: /fr/account_management/saml/auth0
-[8]: /fr/account_management/saml/azure
-[9]: /fr/account_management/saml/google
-[10]: /fr/account_management/saml/nopassword
-[11]: /fr/account_management/saml/okta
-[12]: /fr/account_management/saml/safenet
-[13]: /fr/help
+[6]: /fr/account_management/multi_organization#setting-up-saml
+[7]: /fr/account_management/saml/activedirectory
+[8]: /fr/account_management/saml/auth0
+[9]: /fr/account_management/saml/azure
+[10]: /fr/account_management/saml/google
+[11]: /fr/account_management/saml/nopassword
+[12]: /fr/account_management/saml/okta
+[13]: /fr/account_management/saml/safenet
+[14]: /fr/help

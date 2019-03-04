@@ -24,4 +24,4 @@ The note widget is similar to [free text widget][1], but allows for more formatt
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/widget/free_text
+[1]: /graphing/widgets/free_text

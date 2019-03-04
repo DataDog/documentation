@@ -50,6 +50,8 @@ Use variables to customize your monitor notifications, the available variables a
 | `{{comparator}}`     | Display the relational value selected in the monitor's *Set alert conditions* section.         |
 | `{{last_triggered_at}}`     | Display the UTC date/time when the monitor last triggered.         |
 
+**Note**: When entering decimal values for thresholds, if your value is `<1`, add a leading `0` to the number. For example, use `0.5`, not `.5`.
+
 ### Tag variables
 
 For multi-alert monitors, add tag variables to include information in your alert message that's specific to the tag scope that triggered the alert. This is dependent on the tags you used in the *trigger a separate alert for each* field in Section 1 of your monitor.

@@ -158,7 +158,7 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 
 [1]: /agent/#using-the-gui
 [2]: /agent/basic_agent_usage/windows/#agent-v6
-[3]: /agent/basic_agent_usage/heroku/#send-a-flare
+[3]: https://docs.datadoghq.com/agent/faq/heroku-troubleshooting/#send-a-flare
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 

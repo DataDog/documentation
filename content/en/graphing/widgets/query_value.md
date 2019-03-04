@@ -7,8 +7,8 @@ further_reading:
   text: "Screenboard"
 ---
 
-Query values display the current value of a given metric query, with conditional formatting (such as a green/yellow/red background) to convey whether or not the value is in the expected range.
-The value displayed by a query value need not represent an instantaneous measurement.
+Query values display the current value of a given metric, APM, or log query. They come with conditional formatting (such as a green/yellow/red background) to convey whether the value is in the expected range.
+The values displayed by a query value need not represent an instantaneous measurement.
 
 The widget can display the latest value reported, or an aggregate computed from all query values across the time window. These visualizations provide a narrow but unambiguous window into your infrastructure query.
 
@@ -39,15 +39,6 @@ Display a custom title for your widget by activating the `Show a Title` check bo
 {{< img src="graphing/widgets/options/title.png" alt="Widget title" responsive="true" style="width:80%;">}}
 
 Optionally define its size and alignment.
-
-## FAQ
-### What does "Take the X value from the displayed timeframe" mean?
-
-{{< img src="graphing/widgets/query_value_widget.png" alt="query_value_widget" responsive="true" style="width:50%;">}}
-
-The query value widget only displays one value—unlike, for example, a timeseries, which displays several points.
-
-If you are viewing a timeseries and you are currently displaying the past hour, this button allows you to display the `avg` / `max` / `min` / `sum` / `last value` of ALL points that are rendered during that 1 hour range timeframe—depending on the aggregation chosen above.
 
 ## Further Reading
 
