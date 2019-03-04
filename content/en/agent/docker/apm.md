@@ -53,13 +53,13 @@ List of all environment variables available for tracing with the Docker Agent:
 | `DD_APM_DD_URL`            | Datadog API endpoint where traces are sent. For Datadog EU site set `DD_APM_DD_URL` to `https://trace.agent.datadoghq.eu` |
 | `DD_APM_RECEIVER_PORT`     | Port that the Datadog Agent's trace receiver listens on. Default value is `8126`.                                          |
 | `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers](#tracing-from-other-containers).                             |
-| `DD_APM_IGNORE_RESOURCES`  | Configure resources for the agent to ignore. Format should comma seperated\* regular expressions. Example: `"GET /ignore-me,(GET|POST) /and-also-me"` |
-| `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions. Format should look like `<service-name>|<span-name>=1` with comma separated values\* i.e. `"your-express-serivce|express.request=1,your-dotnet-service|aspnet_core_mvc.request=1"`|
+| `DD_APM_IGNORE_RESOURCES`  | Configure resources for the agent to ignore. Format should be comma seperated\* regular expressions. Example: `"GET /ignore-me,(GET|POST) /and-also-me"` |
+| `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions. Format should be comma seperated\* instances of `<service-name>|<span-name>=1` |
 | `DD_APM_ENV`               | Sets the default [environment][2] for your traces.                                                                        |
 | `DD_APM_MAX_EPS`           | Sets the maximum APM events per second.                                                                                   |
 | `DD_APM_MAX_TPS`           | Sets the maximum traces per second.                                                                                       |
 
-\**No additional characters such as spaces or newlines are allowed between commas*
+**\****No additional characters such as spaces or newlines are allowed between commas*
 
 ## Tracing from other containers
 
