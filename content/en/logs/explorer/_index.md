@@ -88,7 +88,7 @@ Some standard attributes—for instance, `error.stack`, `http.method`, or `durat
 
 Interact with the attributes names and values in the lower JSON section to:
 
-* Build or edit a facet or measure from an attribute. Tthis action does not apply to anterior logs.
+* Build or edit a facet or measure from an attribute. This action does not apply to anterior logs.
 * Add or remove a column from the logs table.
 * Append the search request with specific values (include or exclude)
 
