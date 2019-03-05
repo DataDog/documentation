@@ -1,7 +1,7 @@
 ---
 title: Iframe Widget
 kind: documentation
-description: Inlude an Iframe in your Datadog dashboards.
+description: "Inlude an Iframe in your Datadog dashboards."
 further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"

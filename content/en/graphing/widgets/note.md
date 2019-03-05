@@ -1,6 +1,7 @@
 ---
 title: Note Widget
 kind: documentation
+description: "Display text in your Screenboards."
 further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"

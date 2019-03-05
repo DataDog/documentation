@@ -8,9 +8,12 @@ further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"
   text: "Screenboard"
+- link: "graphing/graphing_json/"
+  tag: "Documentation"
+  text: "Building Dashboard using JSON"
 ---
 
-The top list visualization enables you to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc: 
+The top list visualization enables you to display a list of Tag value like `hostname` or `service` with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc: 
 
 {{< img src="graphing/widgets/toplist/toplist.png" alt="Top List" responsive="true">}}
 
@@ -42,6 +45,46 @@ Optionally define its size and alignment.
 
 ## API
 
+The dedicated [widget JSON schema definition][4] for the change widget is: 
+
+```
+TOP_LIST_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "type": {"enum": ["toplist"]},
+        "requests": {
+            "type":     "array",
+            "items":    REQUEST_SCHEMA,
+            "minItems": 1,
+            "maxItems": 1
+        },
+        "title": {"type": "string"},
+    },
+    "required": ["type", "requests"],
+    "additionalProperties": false
+}
+```
+
+| Parameter  | Type            | Required | Description                                                                                                                                                  |
+| ------     | -----           | -------- | -----                                                                                                                                                        |
+| `type`     | string          | yes      | Type of widget, for the group widget use `toplist`.                                                                                                      |
+| `requests` | array of object | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `REQUEST_SCHEMA`. |
+| `title`    | string          | no       | Title of your widget.                                                                                                                                        |
+
+
+Additional properties allowed in the `request` object:
+
+```
+{
+   "conditional_formats": CONDITIONAL_FORMATS_SCHEMA
+}
+```
+
+| Parameter             | Type   | Required | Description                                                                                                                                                     |
+| ------                | -----  | ----     | -------                                                                                                                                                         |
+| `conditional_formats` | object | no       | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][6] to learn how to build the `CONDITIONAL_FORMATS_SCHEMA`. |
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -49,3 +92,6 @@ Optionally define its size and alignment.
 [1]: /graphing
 [2]: /tracing/visualization/search/#search-bar
 [3]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
+[4]: /graphing/graphing_json/widget_json
+[5]: /graphing/graphing_json/request_json
+[6]: /graphing/graphing_json/widget_json/#conditional-format-schema

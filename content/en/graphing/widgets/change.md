@@ -1,7 +1,7 @@
 ---
 title: Change Widget
 kind: documentation
-description: Graph the change in a value over a chosen time period .
+description: "Graph the change in a value over a chosen time period."
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"
@@ -9,6 +9,15 @@ further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"
   text: "Screenboard"
+- link: "graphing/graphing_json/"
+  tag: "Documentation"
+  text: "Building Dashboard using JSON"
+- link: "graphing/graphing_json/widget_json"
+  tag: "Documentation"
+  text: "Widget JSON schema"
+- link: "graphing/graphing_json/request_json"
+  tag: "Documentation"
+  text: "Request JSON schema"
 ---
 The Change graph shows you the change in a value over the time period chosen:
 
@@ -59,6 +68,59 @@ Display a custom title for your widget by activating the `Show a Title` check bo
 
 Optionally define its size and alignment.
 
+## API
+
+The dedicated [widget JSON schema definition][1] for the change widget is: 
+
+```
+CHANGE_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "type": {"enum": ["change"]},
+        "requests": {
+            "type":     "array",
+            "items":    REQUEST_SCHEMA,
+            "minItems": 1,
+            "maxItems": 1
+        },
+        "title": {"type": "string"},
+    },
+    "required": ["type", "requests"],
+    "additionalProperties": false
+}
+```
+
+| Parameter  | Type            | Required | Description                                                                                                                                                  |
+| ------     | -----           | -------- | -----                                                                                                                                                        |
+| `type`     | string          | yes      | Type of widget. For the group widget, use `change`.                                                                                                       |
+| `requests` | array of object | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][2] to learn how to build the `REQUEST_SCHEMA`. |
+| `title`    | string          | no       | Title of your widget.                                                                                                                                        |
+
+
+Additional properties allowed in the `request` object:
+
+```json
+{
+    "change_type":   {"enum": ["absolute", "relative"]},
+    "compare_to":    {"enum": ["hour_before", "day_before", "week_before", "month_before"]},
+    "increase_good": {"type": "boolean"},
+    "order_by":      {"enum": ["change", "name", "present", "past"]},
+    "order_dir":     {"enum": ["asc", "desc"]},
+    "show_present":  {"type": "boolean"}
+}
+```
+
+| Parameter       | Type    | Required | Description                                                                                                                    |
+| ------          | -----   | -----    | --------                                                                                                                       |
+| `change_type`   | enum    | no       | Show the absolute or the relative change; values available are: `absolute` or `relative`                                       |
+| `compare_to`    | enum    | no       | Timeframe used for the change comparison; values available are: `hour_before`, `day_before`, `week_before`, or `month_before`. |
+| `increase_good` | Boolean | no       | Whether to show increase as good.                                                                                              |
+| `order_by`      | enum    | no       | What to order by; values available are: `change`, `name`, `present`, or `past`.                                                |
+| `order_dir`     | enum    | no       | Order direction; values available are: `asc` or `desc`.                                                                        |
+| `show_present`  | Boolean | no       | Whether to show the present value.                                                                                             |
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /graphing/graphing_json/widget_json
+[2]: /graphing/graphing_json/request_json

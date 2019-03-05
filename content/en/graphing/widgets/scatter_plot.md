@@ -1,13 +1,17 @@
 ---
 title: Scatter Plot Widget
 kind: documentation
+description: "Graph a chosen scope over two different metrics with their respective aggregation"
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"
   text: "Timeboards"
+- link: "graphing/graphing_json/"
+  tag: "Documentation"
+  text: "Building Dashboard using JSON"
 ---
 
-The scatter plot visualization allows you to graph a chosen scope over 2 different metrics with their respective aggregation:
+The scatter plot visualization allows you to graph a chosen scope over two different metrics with their respective aggregation:
 
 {{< img src="graphing/widgets/scatterplot/scatterplot.png" alt="Scatter Plot" responsive="true">}}
 
@@ -36,6 +40,60 @@ Display a custom title for your widget by activating the `Show a Title` check bo
 
 Optionally define its size and alignment.
 
+## API
+
+The dedicated [widget JSON schema definition][1] for the change widget is: 
+
+```
+SCATTER_PLOT_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "type": {"enum": ["scatterplot"]},
+        "requests": {
+            "type": "object",
+            "properties": {
+                "x": REQUEST_SCHEMA,
+                "y": REQUEST_SCHEMA
+            },
+            "required": ["x", "y"],
+            "additionalProperties": false
+        },
+        "xaxis": AXIS_SCHEMA,
+        "yaxis": AXIS_SCHEMA,
+        "color_by_groups": {"type": "array", "items": {"type": "string"}},
+        "title": {"type": "string"},
+    },
+    "required": ["type", "requests"],
+    "additionalProperties": false
+}
+```
+
+| Parameter         | Type            | Required | Description                                                                                                                                        |
+| ------            | -----           | -----    | --------                                                                                                                                           |
+| `type`            | string          | yes      | Type of widget, for the group widget use `scatterplot`.                                                                                        |
+| `requests`        | object          | yes      | A `requests` object to display in the widget. See the dedicated [Request JSON schema documentation][2] to learn how to build the `REQUEST_SCHEMA`. |
+| `yaxis`           | object          | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][3] to learn how to build the `AXIS_SCHEMA`.                           |
+| `xaxis`           | object          | no       | Y-axis control options. See the dedicated [X-axis JSON schema documentation][3] to learn how to build the `AXIS_SCHEMA`.                           |
+| `color_by_groups` | array of string | no       | List of groups used for colors.                                                                                                                    |
+| `title`           | string          | no       | Title of your widget.                                                                                                                              |
+
+Additional properties allowed in the `request` object:
+
+```json
+{
+  "aggregator": {"enum": ["avg", "last", "max", "min", "sum"]}
+}
+```
+
+| Parameter    | Type  | Required | Description                                                                                  |
+| ------       | ----- | -------- | ----                                                                                         |
+| `aggregator` | enum  | no       | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum`. |
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /graphing/graphing_json/widget_json
+[2]: /graphing/graphing_json/request_json
+[3]: /graphing/graphing_json/widget_json/#y-axis-schema

@@ -1,6 +1,7 @@
 ---
 title: Widgets
 kind: documentation
+disable_toc: true
 aliases:
     - graphing/dashboards/widgets
     - graphing/faq/widgets
