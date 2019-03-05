@@ -160,7 +160,7 @@ Additional properties allowed in each `request` object:
 | `style.line_type`  | string | no       | Type of lines displayed. Available values are: `dashed`, `dotted`, or `solid`.          |
 | `style.line_width` | string | no       | Width of line displayed. Available values are: `normal`, `thick`, or `thin`.            |
 | `metadata`         | object | no       | Used to define expression aliases.                                                      |
-| `display_type`     | enum   | no       | Type of display to use for the request, available value are: `area`, `bars`, or `line`. |
+| `display_type`     | enum   | no       | Type of display to use for the request. Available values are: `area`, `bars`, or `line`. |
 
 
 
