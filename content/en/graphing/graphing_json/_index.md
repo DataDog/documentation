@@ -6,9 +6,9 @@ aliases:
   - /graphingjson/
   - /graphing/miscellaneous/graphingjson
 further_reading:
-- link: "graphing/graphing_json/widget_json"
+- link: "graphing/widgets"
   tag: "Documentation"
-  text: "Widget JSON schema"
+  text: "Widgets"
 - link: "graphing/graphing_json/request_json"
   tag: "Documentation"
   text: "Request JSON schema"
