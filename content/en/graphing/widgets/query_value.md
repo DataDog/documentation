@@ -72,12 +72,12 @@ QUERY_VALUE_SCHEMA = {
 
 | Parameter     | Type            | Required | Description                                                                                                                                                  |
 | ------        | -----           | -----    | --------                                                                                                                                                     |
-| `type`        | string          | yes      | Type of the widget, for the group widget use `query_value`                                                                                                   |
+| `type`        | string          | yes      | Type of the widget; for the group widget use `query_value`                                                                                                   |
 | `requests`    | array of object | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `REQUEST_SCHEMA`. |
-| `autoscale`   | boolean         | no       | Whether to use autoscaling or not.                                                                                                                           |
+| `autoscale`   | Boolean         | no       | Whether to use autoscaling or not.                                                                                                                           |
 | `custom_unit` | string          | no       | Display a unit of your choice on the widget.                                                                                                                 |
-| `precision`   | integer         | no       | Number of decimal to show. If not defined, the widget uses the raw value.                                                                                    |
-| `text_align`  | enum            | no       | How to align the value in the widget, value available are `center`, `left`, or `right`.                                                                      |
+| `precision`   | integer         | no       | Number of decimals to show. If not defined, the widget uses the raw value.                                                                                    |
+| `text_align`  | enum            | no       | How to align the value in the widget; values available are `center`, `left`, or `right`.                                                                      |
 | `title`       | string          | no       | Title of your widget.                                                                                                                                        |
 
 
@@ -93,7 +93,7 @@ Additional properties allowed in the `request` object:
 | Parameter             | Type   | Required | Description                                                                                                                                                     |
 | ------                | -----  | -------- | ----                                                                                                                                                            |
 | `conditional_formats` | object | no       | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][6] to learn how to build the `CONDITIONAL_FORMATS_SCHEMA`. |
-| `aggregator`          | enum   | no       | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum`.                                                                   |
+| `aggregator`          | enum   | no       | Aggregator used for the request; available values are: `avg`, `last`, `max`, `min`, or `sum`.                                                                   |
 
 ## Further Reading
 
