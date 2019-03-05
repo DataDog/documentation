@@ -118,7 +118,7 @@ TIMESERIES_SCHEMA = {
 
 | Parameter  | Type             | Required | Description                                                                                                                                              |
 | ------     | -----            | -------- | ----                                                                                                                                                     |
-| `type`     | string           | yes      | Type of the widget, for the group widget use `timeseries`.                                                                                               |
+| `type`     | string           | yes      | Type of widget, for the group widget use `timeseries`.                                                                                               |
 | `requests` | array of objects | yes      | Array of `request` object to display in the widget. See the dedicated [Request JSON schema documentation][9] to learn how to build the `REQUEST_SCHEMA`. |
 | `yaxis`    | object           | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][10] to learn how to build the `AXIS_SCHEMA`.                                |
 | `events`   | object           | no       | Event overlay control options. See the dedicated [Events JSON schema documentation][11] to learn how to build the `EVENTS_SCHEMA`                        |
