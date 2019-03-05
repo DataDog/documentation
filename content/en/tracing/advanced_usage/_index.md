@@ -301,8 +301,8 @@ section for details on how environment variables should be set.
 DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
 ```
 
-[1]: /tracing/languages/php/#configuration
 
+[1]: /tracing/languages/php/#configuration
 {{% /tab %}}
 {{% tab "C++" %}}
 
@@ -441,7 +441,7 @@ JVM metrics can be viewed in correlation with your Java services. You can get st
 
 {{< img src="tracing/jvm-runtime.png" alt="JVM Runtime" responsive="true" style="width:100%;">}}
 
-**Note**: For the runtime UI, `dd-trace-java` >= [`0.24.0`][5] is supported.   
+**Note**: For the runtime UI, `dd-trace-java` >= [`0.24.0`][2] is supported.   
 
 ### Data Collected
 
@@ -449,16 +449,16 @@ The following metrics are collected by default after enabling JVM metrics.
 
 {{< get-metrics-from-git "java" >}}
 
-Along with displaying these metrics in your APM Service Page, Datadog provides a [default JVM Runtime Dashboard][4] with the `service` and `runtime-id` tags that are applied to these metrics. 
+Along with displaying these metrics in your APM Service Page, Datadog provides a [default JVM Runtime Dashboard][3] with the `service` and `runtime-id` tags that are applied to these metrics. 
 
-Additional JMX metrics can be added using configuration files that are passed to `jmxfetch.metrics-configs`. You can also enable existing Datadog JMX integrations individually with the `dd.integration.<name>` parameter. This auto-embeds configuration from Datadog's [existing JMX configuration files][2]. See the [JMX Integration][3] for further details on configuration. 
+Additional JMX metrics can be added using configuration files that are passed to `jmxfetch.metrics-configs`. You can also enable existing Datadog JMX integrations individually with the `dd.integration.<name>` parameter. This auto-embeds configuration from Datadog's [existing JMX configuration files][4]. See the [JMX Integration][5] for further details on configuration. 
+
 
 [1]: https://app.datadoghq.com/apm/services
-[2]: https://github.com/DataDog/integrations-core/search?q=jmx_metrics&unscoped_q=jmx_metrics
-[3]: /integrations/java/#configuration
-[4]: https://app.datadoghq.com/dash/integration/256/jvm-runtime-metrics
-[5]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.0
-
+[2]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.0
+[3]: https://app.datadoghq.com/dash/integration/256/jvm-runtime-metrics
+[4]: https://github.com/DataDog/integrations-core/search?q=jmx_metrics&unscoped_q=jmx_metrics
+[5]: /integrations/java/#configuration
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -476,29 +476,29 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-[1]: /help
 
+[1]: /help
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-[1]: /help
 
+[1]: /help
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-[1]: /help
 
+[1]: /help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-[1]: /help
 
+[1]: /help
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -788,11 +788,11 @@ Prior to PHP 7, some frameworks provided ways to compile PHP classes—e.g., thr
 While this [has been deprecated][3] if you are using PHP 7.x, you still may use this caching mechanism in your app prior to version 7.x. In this case, Datadog suggests you use the [OpenTracing][4] API instead of adding `datadog/dd-trace` to your Composer file.
 
 
+
 [1]: /tracing/languages/php/#automatic-instrumentation
 [2]: https://github.com/DataDog/dd-trace-php/releases/latest
 [3]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
 [4]: #opentracing
-
 {{% /tab %}}
 {{% tab "C++" %}}
 
@@ -2153,8 +2153,7 @@ If you are using an Apache server, use the `ErrorLog` directive.
 If you are using an NGINX server, use the `error_log` directive.
 If you are configuring instead at the PHP level, use PHP's `error_log` ini parameter.
 
-[1]: 
-[2]: https://www.php-fig.org/psr/psr-3
+[1]: http://php.net/manual/en/install.php
 {{% /tab %}}
 {{% tab "C++" %}}
 
