@@ -80,7 +80,7 @@ HEATMAP_SCHEMA = {
         },
         "yaxis":  AXIS_SCHEMA,
         "events": EVENTS_SCHEMA,
-        "title": {"type": "string"},
+        "title": {"type": "string"}
     },
     "required": ["type", "requests"],
     "additionalProperties": false

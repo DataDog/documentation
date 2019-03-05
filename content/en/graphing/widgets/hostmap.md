@@ -79,7 +79,7 @@ HOSTMAP_SCHEMA = {
             },
             "additionalProperties": false
         },
-        "title": {"type": "string"},
+        "title": {"type": "string"}
     },
     "required": ["type", "requests"],
     "additionalProperties": false

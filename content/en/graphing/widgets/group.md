@@ -42,7 +42,7 @@ GROUP_SCHEMA = {
                 "additionalProperties": false
             }
         },
-        "title": {"type": "string"},
+        "title": {"type": "string"}
     },
     "required": ["type", "layout_type", "widgets"],
     "additionalProperties": false

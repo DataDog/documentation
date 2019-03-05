@@ -64,7 +64,7 @@ DISTIBUTION_SCHEMA = {
             "minItems": 1,
             "maxItems": 1
         },
-        "title": {"type": "string"},
+        "title": {"type": "string"}
     },
     "required": ["type", "requests"],
     "additionalProperties": false

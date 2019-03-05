@@ -63,7 +63,7 @@ CHECK_STATUS_SCHEMA = {
         "group": {"type": "string"},
         "tags":  {"type": "array", "items": {"type": "string"}},
         "group_by":  {"type": "array", "items": {"type": "string"}},
-        "title": {"type": "string"},
+        "title": {"type": "string"}
     },
     "required": ["type", "check", "grouping"],
     "additionalProperties": false

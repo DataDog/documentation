@@ -61,7 +61,7 @@ SCATTERPLOT_SCHEMA = {
         "xaxis": AXIS_SCHEMA,
         "yaxis": AXIS_SCHEMA,
         "color_by_groups": {"type": "array", "items": {"type": "string"}},
-        "title": {"type": "string"},
+        "title": {"type": "string"}
     },
     "required": ["type", "requests"],
     "additionalProperties": false

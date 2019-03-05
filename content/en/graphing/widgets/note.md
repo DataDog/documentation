@@ -42,7 +42,7 @@ NOTE_SCHEMA = {
         "text_align": {"enum": ["center", "left", "right"]}
         "show_tick": {"type": "boolean"},
         "tick_pos": {"type": "string"},
-        "tick_edge": {"enum": ["bottom", "left", "right", "top"]},
+        "tick_edge": {"enum": ["bottom", "left", "right", "top"]}
     },
     "required": ["type", "content"],
     "additionalProperties": false

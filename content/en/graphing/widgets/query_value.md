@@ -63,7 +63,7 @@ QUERY_VALUE_SCHEMA = {
         "custom_unit": {"type": "string"},
         "precision":   {"type": "integer"},
         "text_align":  {"enum": ["center", "left", "right"]},
-        "title":       {"type": "string"},
+        "title":       {"type": "string"}
     },
     "required": ["type", "requests"],
     "additionalProperties": false

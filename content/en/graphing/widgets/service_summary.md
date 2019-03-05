@@ -56,7 +56,7 @@ TRACE_SERVICE_SCHEMA = {
         "display_format": {"enum": ["one_column", "two_column", "three_column"]},
         "title": {"type": "string"},
         "title_size": {"type": "string"},
-        "title_align": {"enum": ["center", "left", "right"]}
+        "title_align": {"enum": ["center", "left", "right"]},
         "time": TIME_SCHEMA
     },
     "required": ["type", "env", "service", "span_name"],

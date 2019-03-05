@@ -47,7 +47,7 @@ EVENT_TIMELINE_SCHEMA = {
         "title": {"type": "string"},
         "title_size": {"type": "string"},
         "title_align": {"enum": ["center", "left", "right"]}
-        "time": TIME_SCHEMA,
+        "time": TIME_SCHEMA
     },
     "required": ["type", "query"],
     "additionalProperties": false

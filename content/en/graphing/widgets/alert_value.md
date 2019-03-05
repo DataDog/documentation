@@ -57,7 +57,7 @@ ALERT_VALUE_SCHEMA = {
         "unit": {"type": "string"},
         "text_size": {"type": "string"},
         "text_align": {"enum": ["left", "center", "right"]},
-        "title": {"type": "string"},
+        "title": {"type": "string"}
     },
     "required": ["type", "alert_id"],
     "additionalProperties": false
