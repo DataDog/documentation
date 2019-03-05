@@ -42,7 +42,7 @@ If your `requests` parameter has multiple `requests`, the widget displays all of
 
 You can apply functions to the result of each query.
 
-A few of these functions are further explained in a series of examples. See the [examples page][1] for more details.
+For more information about functions explained through a series of examples, see the [examples page][1].
 
 #### Aggregation Method
 
