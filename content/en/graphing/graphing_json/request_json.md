@@ -69,7 +69,7 @@ Examples of scopes and their meanings:
 
 #### Groups
 
-For any given metric, data may come from a number of hosts. The data is normally aggregated from all these hosts to a single value for each time slot. You can split these out by any tag. To include a data point separated out by each host, use {host} for your group.
+For any given metric, data may come from several hosts. The data is normally aggregated from all these hosts to a single value for each time slot. You can split these out by any tag. To include a data point separated by each host, use {host} for your group.
 
 #### Arithmetic
 
