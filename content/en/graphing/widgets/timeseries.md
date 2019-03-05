@@ -179,5 +179,5 @@ Additional properties allowed in each `request` object:
 [8]: /graphing/graphing_json/widget_json
 [9]: /graphing/graphing_json/request_json
 [10]: /graphing/graphing_json/widget_json/#y-axis-schema
-[11]: /grpahing/graphing_json/widget_json/#events-schema
-[12]: /grpahing/graphing_json/widget_json/#markers-schema
+[11]: /graphing/graphing_json/widget_json/#events-schema
+[12]: /graphing/graphing_json/widget_json/#markers-schema

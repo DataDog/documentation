@@ -124,4 +124,4 @@ Additional properties allowed in the `requests` object:
 [3]: /graphing/graphing_json/widget_json
 [4]: /graphing/graphing_json/request_json
 [5]: /graphing/graphing_json/widget_json/#y-axis-schema
-[6]: /grpahing/graphing_json/widget_json/#events-schema
+[6]: /graphing/graphing_json/widget_json/#events-schema
