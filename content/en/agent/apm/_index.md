@@ -133,6 +133,9 @@ Add `DD_APM_ANALYZED_SPANS` to the Agent container environment (compatible with 
 ```
 DD_APM_ANALYZED_SPANS="<SERVICE_NAME_1>|<OPERATION_NAME_1>=1,<SERVICE_NAME_2>|<OPERATION_NAME_2>=1"
 ```
+<div class="alert alert-info">
+Make sure there are no spaces between your services. If you have spaces, not all of your services will report correctly.
+</div>
 
 {{% /tab %}}
 {{< /tabs >}}
