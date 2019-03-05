@@ -35,7 +35,7 @@ Surveillez le statut de disponibilité d'endpoints HTTP locaux ou à distance. L
 
 ### Installation
 
-Le check HTTP est fourni dans le paquet de [l'Agent Datadog][1]. Ainsi, vous n'avez pas besoin d'installer quoi que ce soit sur les serveurs à partir desquels vous sondez vos sites HTTP. Bien qu'il soit recommandé d'exécuter bon nombre des checks axés sur des métriques sur le(s) mêmes hôte(s) que le service surveillé, ce check axé sur des statuts peut être lancé sur des hôtes qui n'exécutent pas les sites surveillés.
+Le check HTTP est fourni dans le paquet de [l'Agent Datadog][1]. Ainsi, vous n'avez pas besoin d'installer quoi que ce soit sur les serveurs à partir desquels vous sondez vos sites HTTP. Bien qu'il soit recommandé d'exécuter bon nombre des checks axés sur des métriques sur le(s) mêmes host(s) que le service surveillé, ce check axé sur des statuts peut être lancé sur des hosts qui n'exécutent pas les sites surveillés.
 
 ### Configuration
 
