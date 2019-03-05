@@ -134,7 +134,7 @@ Here's how to do it for any metric:
 ]
 ```
 
-Note that in this case you can only have 1 query. But you can also split by device, or a combination of both:
+Note that in this case, you can only have 1 query. But you can also split by device or a combination of both:
 
 ```
 "requests" [
