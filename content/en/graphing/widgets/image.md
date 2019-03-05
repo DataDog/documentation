@@ -6,6 +6,9 @@ further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"
   text: "Screenboard"
+- link: "graphing/graphing_json/"
+  tag: "Documentation"
+  text: "Building Dashboard using JSON"
 ---
 
 The image widget allows you to embed an image on your dashboard. Images can be PNG, JPG, or animated GIFs:
@@ -22,6 +25,34 @@ The image widget allows you to embed an image on your dashboard. Images can be P
     * Fit image on tile
     * Center image on tile
 
+## API
+
+The dedicated [widget JSON schema definition][1] for the image widget is:
+
+```
+IMAGE_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "type": {"enum": ["image"]},
+        "url": {"type": "string"},
+        "sizing": {"enum": ["zoom", "fit", "center"]},
+        "margin": {"enum": ["small", "large"]}
+    },
+    "required": ["type", "url"],
+    "additionalProperties": false
+}
+```
+
+| Parameter  | Type            | Required | Description                                                                                                                                                  |
+| ------     | -----           | -----    | -----                                                                                                                                                        |
+| `type`| string|yes|Type of the widget, for the image widget use `image`|
+|`url`|string|yes|URL of the image|
+|`sizing`|string|no|How to size the image on the widget. Available values are: `zoom`, `fit` or `center`
+|`margin`|string|no|Size of the margins around the image. Available values are: `small` or `large`
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /graphing/graphing_json/widget_json
