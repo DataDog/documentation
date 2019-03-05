@@ -20,7 +20,7 @@ The groups widget allows you to keep similar graphs together on your [timeboard]
 Choose a name for your group by using the cog icon in the upper right corner of your group.
 
 ## API
-The dedicated [widget JSON schema definition][2] for the change widget is: 
+The dedicated [widget JSON schema definition][2] for the change widget is:
 
 ```
 GROUP_SCHEMA = {
@@ -42,7 +42,6 @@ GROUP_SCHEMA = {
                 "additionalProperties": false
             }
         },
-        # Title of the group
         "title": {"type": "string"},
     },
     "required": ["type", "layout_type", "widgets"],

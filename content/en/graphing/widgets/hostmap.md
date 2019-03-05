@@ -72,13 +72,9 @@ HOSTMAP_SCHEMA = {
         "style":           {
             "type": "object",
             "properties": {
-                # Palette to use on the map
                 "palette":      {"type": "string"},
-                # Whether to flip the palette tones
                 "palette_flip": {"type": "boolean"},
-                # Min value to use to color the map
                 "fill_min":     {"type": "string"},
-                # Max value to use to color the map
                 "fill_max":     {"type": "string"}
             },
             "additionalProperties": false
