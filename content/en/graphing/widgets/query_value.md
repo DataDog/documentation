@@ -77,7 +77,7 @@ QUERY_VALUE_SCHEMA = {
 | `autoscale`   | boolean         | no       | Whether to use autoscaling or not.                                                                                                                           |
 | `custom_unit` | string          | no       | Display a unit of your choice on the widget.                                                                                                                 |
 | `precision`   | integer         | no       | Number of decimal to show. If not defined, the widget uses the raw value.                                                                                    |
-| `text_align`  | string            | no       | How to align the value in the widget, value available are `center`, `left`, or `right`.                                                                      |
+| `text_align`  | string            | no       | How to align the value in the widget, values available are `center`, `left`, or `right`.                                                                      |
 | `title`       | string          | no       | Title of your widget.                                                                                                                                        |
 
 
