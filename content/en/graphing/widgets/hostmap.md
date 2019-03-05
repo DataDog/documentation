@@ -88,16 +88,16 @@ HOSTMAP_SCHEMA = {
 
 | Parameter            | Type             | Required | Description                                                                                                                      |
 | ------               | -----            | -----    | --------                                                                                                                         |
-| `type`               | string           | yes      | Type of the widget, for the host map widget use `hostmap`.                                                                       |
+| `type`               | string           | yes      | Type of widget; for the host map widget use `hostmap`.                                                                       |
 | `requests.fill`      | string           | yes/no   | Query used to fill the map. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
 | `requests.size`      | string           | yes/no   | Query used to size the map. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
-| `node_type`          | string             | no       | Which type of node to use in the map, available value are: `host` or `container`                                                 |
-| `no_metric_hosts`    | boolean          | no       | Whether to show the hosts with no metrics.                                                                                       |
-| `no_group_hosts`     | boolean          | no       | Whether to show the hosts that don't fit in a group.                                                                             |
+| `node_type`          | string             | no       | Which type of node to use in the map; available values are: `host` or `container`                                                 |
+| `no_metric_hosts`    | Boolean          | no       | Whether to show the hosts with no metrics.                                                                                       |
+| `no_group_hosts`     | Boolean          | no       | Whether to show the hosts that don't fit in a group.                                                                             |
 | `group`              | array of strings | no       | List of tag prefixes to group by.                                                                                                |
 | `scope`              | array of strings | no       | List of tags used to filter the map.                                                                                             |
 | `style.palette`      | string           | no       | Color palette to apply to the widget.                                                                                            |
-| `style.palette_flip` | boolean          | no       | Whether to flip the palette tones.                                                                                               |
+| `style.palette_flip` | Boolean          | no       | Whether to flip the palette tones.                                                                                               |
 | `style.fill_min`     | string           | no       | Min value to use to color the map.                                                                                               |
 | `style.fill_max`     | string           | no       | Max value to use to color the map.                                                                                               |
 

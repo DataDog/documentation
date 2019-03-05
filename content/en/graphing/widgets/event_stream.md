@@ -3,7 +3,7 @@ title: Event Stream Widget
 kind: documentation
 description: "Display filtered events from the Even Stream."
 further_reading:
-- link: "graphing/dashboards/Screenboard/"
+- link: "graphing/dashboards/screenboard/"
   tag: "Documentation"
   text: "Screenboard"
 - link: "graphing/graphing_json/"

@@ -12,28 +12,28 @@ description: Créer et gérer vos notifications
 
 Pour surveiller l'ensemble de votre infrastructure depuis un seul endroit, vous devez recevoir des notifications lorsque des modifications critiques se produisent. Datadog vous permet de créer des monitors qui vérifient activement vos métriques, les disponibilités de vos intégrations, les endpoints réseau, et plus encore.
 
-Une fois un monitor créé, vous recevez des alertes sous certaines conditions. Vous pouvez également informer les membres de l'équipe par e-mail, grâce à des services tiers (tels que Pagerduty ou Stride) ou d'autres endpoints personnalisés, via Webhooks.
+Une fois un monitor créé, vous recevez des alertes sous certaines conditions. Vous pouvez également informer les membres de l'équipe par e-mail, grâce à des services tiers (tels que Pagerduty) ou d'autres endpoints personnalisés, via Webhooks.
 
-Les monitors déclenchés apparaissent dans le [flux d'événements][1], ce qui vous permet de collaborer en vue de corriger des problèmes actifs concernant vos applications ou votre infrastructure. Datadog fournit une vue d'ensemble des problèmes en cours sur la page [Triggered Monitors][2] ainsi que des fonctions de gestion globale de vos monitors sur la page [Manage Monitors][3].
+Les monitors déclenchés apparaissent dans le [flux d'événements][1]. Vous pouvez ainsi résoudre avec vos collègues les problèmes concernant vos applications et votre infrastructure. La page [Triggered Monitors][2] de Datadog propose une vue d'ensemble de vos problèmes en suspens, tandis que la page [Manager Monitors][3] contient des options de gestion globale des monitors.
 
 La gestion des monitors peut être programmée. Consultez la [documentation relative à l'API Datadog][4] pour obtenir des informations détaillées sur la gestion des monitors via l'API à l'aide des [bibliothèques][5] disponibles ou de cURL.
 
-Grâce à cette section, vous pouvez :
+Cette section vous explique comment :
 
-* [Apprendre à créer un monitor][6]
+* [Créer un monitor][6]
 * [Configurer les notifications de vos monitors][7]
 * [Gérer vos monitors][8]
 * [Planifier un downtime pour désactiver un monitor][9]
-* [Consulter tous vos checks en un seul endroit][10]
+* [Consulter tous vos checks depuis une seule vue][10]
 
 ### Glossaire
 
-Voici un aperçu des différents termes utilisés :
+Voici les principaux termes utilisés dans cette section :
 
 - **Statut** : chaque exécution de check renvoie un statut, à savoir OK, WARNING ou CRITICAL.
-- **Check** : renvoie un ou plusieurs statut.
-- **Monitor** : envoie des notifications basées sur une séquence de statuts de check, un seuil
-  de métrique ou d'autres conditions d'alertes.
+- **Check** : émet un ou plusieurs statuts.
+- **Monitor** : envoie des notifications en fonction d'une série de statuts de check, de
+  seuil de métrique ou d'autres conditions d'alertes.
 - **Type de monitor** : les monitors se basent sur des [logs][11], des [prévisions][12], des [hosts][13], des [métriques][14], des [intégrations][15], des [processus][16], des [singularités][17], des [anomalies][18], l'[APM][19], des [composites][20], des [réseaux][21] ou des [événements][22], et peuvent être [personnalisés][23]. Consultez la barre de navigation pour en savoir plus sur un type spécifique de monitor.
 - **Tags** : des étiquettes configurables qui peuvent être appliquées à chaque métrique et à chaque host. Consultez la page relative au [tagging][24] pour en savoir plus.
 
@@ -48,9 +48,9 @@ Accédez à la page [Create Monitors][25] en passant le curseur sur **Monitors**
 Exportez la configuration JSON d'un monitor directement à partir de l'écran de création ou sur votre [page de statut du monitor][26] dans le coin supérieur droit.
 Si vous gérez et déployez des monitors à l'aide de programmes, il est plus simple de définir le monitor dans l'interface utilisateur et d'exporter immédiatement le JSON :
 
-{{< img src="monitors/index/export_monitor_json.jpg" alt="exportation monitor" responsive="true" >}}
+{{< img src="monitors/index/export_monitor_json.jpg" alt="exporter monitor" responsive="true" >}}
 
-## Audit de monitors
+## Contrôler des monitors
 
 Toute modification apportée aux monitors crée dans le [flux d'événements][27] un événement qui explique la modification et affiche l'utilisateur à son origine.
 
@@ -59,9 +59,9 @@ Si vous avez apporté des modifications à vos monitors, vous pouvez consulter d
 https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
 ```
 
-Nous vous offrons également la possibilité d'être informé des modifications apportées à un monitor que vous avez créé. En bas de l'éditeur de monitors se trouve une option vous permettant d'envoyer des notifications à certaines personnes en cas de modification du monitor :
+Vous pouvez également recevoir une notification en cas de changement apporté un monitor que vous avez créé. En bas de l'éditeur de moniteurs, vous disposez d'une option pour prévenir certains destinataires et leur envoyer une alerte pour chacun des changements concernant le monitor :
 
-{{< img src="monitors/index/Monitor_Change_notifications.png" alt="Monitor_changement_notifications" responsive="true" >}}
+{{< img src="monitors/index/Monitor_Change_notifications.png" alt="Notifications_changement_monitor" responsive="true" >}}
 
 Si vous choisissez l'option **Notify**, un e-mail est envoyé pour les événements d'audit du monitor à toutes les personnes qui reçoivent des alertes pour ce monitor.
 
@@ -75,9 +75,9 @@ Lorsque les données sont transmises ponctuellement, il convient de *résoudre* 
 
 Cette fonction vous permet par exemple de gérer un monitor reposant sur des métriques d'erreur qui ne sont pas générées en l'absence d'erreur (par ex. : `aws.elb.httpcode_elb_5xx` ou des counters DogStatsD dans votre code qui renvoient des informations _uniquement en cas d'erreur_).
 
-## Gestion des monitors
+## Gérer des monitors
 
-Notre communauté travaille sur plusieurs projets en vue de conserver ou de gérer les monitors pour une utilisation conjointe avec d'autres composants Datadog via les API :
+Plusieurs projets de notre communauté sont consacrés à la maintenance et à la gestion des monitors. Certains composants Datadog sont également disponibles à ces fins, via les API :
 
 * https://github.com/trueaccord/DogPush
 * https://github.com/winebarrel/barkdog

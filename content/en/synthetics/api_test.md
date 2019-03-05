@@ -1,8 +1,10 @@
 ---
-title: Uptime Check
+title: API Tests
 kind: documentation
 beta: true
 description: Simulate and monitor HTTP requests from specific locations
+aliases:
+  - synthetics/uptime_check
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
@@ -10,23 +12,23 @@ further_reading:
 - link: "synthetics/"
   tag: "Documentation"
   text: "Manage your checks"
-- link: "synthetics/browser_check"
+- link: "synthetics/browser_test"
   tag: "Documentation"
-  text: "Configure a Browser Check"
+  text: "Configure a Browser Test"
 ---
 
 <div class="alert alert-warning">Synthetics is in beta for the Datadog US Site. To request access, complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics request form</a>.</div>
 
 ## Overview
 
-Uptime checks are HTTP requests (GET, POST, PUT, etc.) executed by Datadog to your web properties or application endpoints at configurable periodic intervals from multiple locations around the world. These checks verify that your applications are responding to requests, as well as that they meet any conditions you define—such as response time, HTTP status code, and header or body contents.
+API tests are HTTP requests (GET, POST, PUT, etc.) executed by Datadog to your web properties or application endpoints at configurable periodic intervals from multiple locations around the world. These checks verify that your applications are responding to requests, as well as that they meet any conditions you define—such as response time, HTTP status code, and header or body contents.
 
 ## Configuration
 ### Request
 
 Define the request you want to be executed by Datadog:
 
-{{< img src="synthetics/uptime_check/uptime_check_make_request.png" alt="Uptime Check make request" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/api_test/uptime_check_make_request.png" alt="API Tests make request" responsive="true" style="width:80%;">}}
 
 1. Choose the `Method` and `URL` to query. Available `Method`s are:
     * GET
@@ -38,8 +40,8 @@ Define the request you want to be executed by Datadog:
 
 2. Optionally, click on **Advanced options** to enrich your request with custom request headers, authentication credentials, body content, or cookies.
 
-3. Name your uptime check.
-4. Optionally, add tags to filter your uptime check in the [Synthetics page][1].
+3. Name your API test.
+4. Optionally, add tags to filter your API test in the [Synthetics page][1].
 
 5. Pick locations to run the test from. Available locations are:
     * Frankfurt (Request made from an AWS Datacenter)
@@ -50,7 +52,7 @@ Define the request you want to be executed by Datadog:
 
 ### Validation
 
-When running an uptime check, you must define at least one assertion that should be monitored by Datadog. An assertion is defined by a parameter, a comparator, and a value.
+When running an API test, you must define at least one assertion that should be monitored by Datadog. An assertion is defined by a parameter, a comparator, and a value.
 
 | Parameter     | Comparators                           | Value type                                                                    |
 | ------------- | ------------------------------------- | ----------------------------------------------------------------------------- |
@@ -61,27 +63,27 @@ When running an uptime check, you must define at least one assertion that should
 
 If you define an assertion on the content of `Headers`, you must define the headers name and the associated value.
 
-Click on **Add new assertion** to add up to 10 assertions for your uptime check.
+Click on **Add new assertion** to add up to 10 assertions for your API test.
 
 **Note**: If you clicked on **Test URL**, then the basic assertions are automatically filled:
 
-{{< img src="synthetics/uptime_check/assertion.png" alt="Assertions" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/api_test/assertion.png" alt="Assertions" responsive="true" style="width:80%;">}}
 
-Use the **Test URL** response to quickly add status code, response time or headers from the test response as one of the uptime check assertions:
+Use the **Test URL** response to quickly add status code, response time or headers from the test response as one of the API test assertions:
 
-{{< img src="synthetics/uptime_check/assertion_setup.gif" alt="Assertions" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/api_test/assertion_setup.gif" alt="Assertions" responsive="true" style="width:80%;">}}
 
 ### Notifications
 
 A notification is sent if at least one of the assertion fails. To configure notifications:
 
 1. Select users and/or [services][3] to send the notifications to. Note that you can use the [`@-notification` feature][4] in the **message** field.
-2. Enter a **message** for the uptime check. This field allows standard [Markdown formatting][5]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
-3. Click **Save** to save your uptime check.
+2. Enter a **message** for the API test. This field allows standard [Markdown formatting][5]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
+3. Click **Save** to save your API test.
 
 Notifications example:
 
-{{< img src="synthetics/uptime_check/uptime_check_notifications.png" alt="Assertions" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/api_test/uptime_check_notifications.png" alt="Assertions" responsive="true" style="width:80%;">}}
 
 ## Network timings
 

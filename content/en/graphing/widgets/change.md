@@ -92,7 +92,7 @@ CHANGE_SCHEMA = {
 
 | Parameter  | Type            | Required | Description                                                                                                                                                  |
 | ------     | -----           | -------- | -----                                                                                                                                                        |
-| `type`     | string          | yes      | Type of the widget, for the change widget use `change`.                                                                                                       |
+| `type`     | string          | yes      | Type of widget. For the change widget, use `change`.                                                                                                       |
 | `requests` | array of object | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][2] to learn how to build the `REQUEST_SCHEMA`. |
 | `title`    | string          | no       | Title of your widget.                                                                                                                                        |
 
@@ -112,12 +112,12 @@ Additional properties allowed in the `request` object:
 
 | Parameter       | Type    | Required | Description                                                                                                                    |
 | ------          | -----   | -----    | --------                                                                                                                       |
-| `change_type`   | string    | no       | Show the absolute or the relative change, values available are: `absolute` or `relative`                                       |
-| `compare_to`    | string    | no       | Timeframe used for the change comparison, values available are: `hour_before`, `day_before`, `week_before`, or `month_before`. |
-| `increase_good` | boolean | no       | Whether to show increase as good.                                                                                              |
-| `order_by`      | string    | no       | What to order by, values available are: `change`, `name`, `present`, or `past`.                                                |
-| `order_dir`     | string    | no       | Order direction, values available are: `asc` or `desc`.                                                                        |
-| `show_present`  | boolean | no       | Whether to show the present value.                                                                                             |
+| `change_type`   | string    | no       | Show the absolute or the relative change; values available are: `absolute` or `relative`                                       |
+| `compare_to`    | string    | no       | Timeframe used for the change comparison; values available are: `hour_before`, `day_before`, `week_before`, or `month_before`. |
+| `increase_good` | Boolean | no       | Whether to show increase as good.                                                                                              |
+| `order_by`      | string    | no       | What to order by; values available are: `change`, `name`, `present`, or `past`.                                                |
+| `order_dir`     | string    | no       | Order direction; values available are: `asc` or `desc`.                                                                        |
+| `show_present`  | Boolean | no       | Whether to show the present value.                                                                                             |
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

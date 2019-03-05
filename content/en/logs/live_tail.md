@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The Live Tail feature gives you the ability to see all your log events in near real time from anywhere in your infrastructure. It displays logs as soon as they get out of the [Pipeline section][1] and before [their indexation][2] by Datadog, hence: 
+The Live Tail feature gives you the ability to see all your log events in near real time from anywhere in your infrastructure. It displays logs as soon as they get out of the [Pipeline section][1] and before they are [indexed][2] by Datadog, hence: 
 
 1. All logs ingested by Datadog are displayed. ([It's logging without limits][2].)
 2. Displayed logs have been processed.

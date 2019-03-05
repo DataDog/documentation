@@ -307,6 +307,8 @@ main:
             url: "#custom-tagging"
           - name: "Change Agent Hostname"
             url: "#change-agent-hostname"
+          - name: "Runtime Metrics"
+            url: "#runtime-metrics"
           - name: "Manual Instrumentation"
             url: "#manual-instrumentation"
           - name: "OpenTracing"
@@ -471,10 +473,10 @@ main:
     url: "synthetics/"
     pre: "nav_synthetics"
     children:
-      - name: "Uptime Check"
-        url: "synthetics/uptime_check"
-      - name: "Browser Check"
-        url: "synthetics/browser_check"
+      - name: "API Tests"
+        url: "synthetics/api_test"
+      - name: "Browser Tests"
+        url: "synthetics/browser_test"
 
   # DEVELOPERS
   - name: "Developer Tools"
@@ -614,3 +616,4 @@ main:
   - name: "Help"
     url: "help/"
     pre: "nav_help"
+

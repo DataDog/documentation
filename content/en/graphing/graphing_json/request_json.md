@@ -10,7 +10,7 @@ further_reading:
   text: "Widget JSON schema"
 ---
 
-The general format for the `REQUEST_SCHEMA` is an array of one or more `request`:
+The general format for the `REQUEST_SCHEMA` is an array of one or more `requests`:
 
 ```
 "requests": [
@@ -20,7 +20,7 @@ The general format for the `REQUEST_SCHEMA` is an array of one or more `request`
 ]
 ```
 
-If your `requests` parameter has multiple `request`, the widget displays all of them:
+If your `requests` parameter has multiple `requests`, the widget displays all of them:
 
 ```
 "requests": [
@@ -42,41 +42,40 @@ If your `requests` parameter has multiple `request`, the widget displays all of 
 
 You can apply functions to the result of each query.
 
-A few of these functions have been further explained in a series of examples. Visit this page for more detail: [Examples][1]
+For more information about functions explained through a series of examples, see the [examples page][1].
 
 #### Aggregation Method
 
-In most cases, the number of data points available outnumbers the maximum number that can be shown on screen. To overcome this, the data is aggregated using one of 4 available methods: average,  max, min, and sum.
+In most cases, the number of data points available outnumbers the maximum number that can be shown on screen. To overcome this, the data is aggregated using one of 4 available methods: average, max, min, and sum.
 
 #### Metrics
 
-The metric is the main focus of the graph. You can find the list of metrics available to you in the [Metrics Summary][2]. Click on any metric to see more detail about that metric, including the type of data collected, units, tags, hosts, and more.
+Metrics are the main focus of the graph. You can find the list of metrics available to you in the [Metrics Summary][2]. Click on any metric to see more detail about that metric, including the type of data collected, units, tags, hosts, and more.
 
 ## Scope
 
-A scope lets you filter a Series. It can be a host, a device on a host
-or any arbitrary tag you can think of that contains only alphanumeric
-characters plus colons and underscores (`[a-zA-Z0-9:_]+`).
+A scope lets you filter a series. It can be a host, a device on a host, or any arbitrary tag you can think of that contains only alphanumeric characters, plus colons and underscores (`[a-zA-Z0-9:_]+`).
 
-Examples of scope (meaning in parentheses):
+Examples of scopes and their meanings:
 
-```
-host:my_host                      (related to a given host)
-host:my_host, device:my_device    (related to a given device on a given host)
-source:my_source                  (related to a given source)
-my_tag                            (related to a tagged group of hosts)
-my:tag                            (same)
-*                                 (wildcard for everything)
-```
+| Scope | Meaning |
+| --- | --- |
+| `host:my_host` | Related to a given host. |
+| `host:my_host, device:my_device` | Related to a given device on a given host. |
+| `source:my_source` | Related to a given source. |
+| `my_tag` | Related to a tagged group of hosts. |
+| `my:tag` | Same as above. |
+| `*` | Wildcard for everything. |
 
 #### Groups
 
-For any given metric, data may come from a number of hosts. The data is normally aggregated from all these hosts to a single value for each time slot. If you wish to split this out, you can by any tag. To include a data point separated out by each host, use {host} for your group.
+For any given metric, data may come from several hosts. The data is normally aggregated from all these hosts to a single value for each time slot. You can split these out by any tag. To include a data point separated by each host, use {host} for your group.
 
 #### Arithmetic
 
-You can apply simple arithmetic to a Series (+, -, * and /). In this
-example we graph 5-minute load and its double:
+You can apply simple arithmetic to a series (+, -, * and /). 
+
+The following example graphs 5-minute load and its double:
 
 ```json
 {
@@ -92,9 +91,7 @@ example we graph 5-minute load and its double:
 }
 ```
 
-You can also add, substract, multiply and divide a Series. Beware that
-Datadog does not enforce consistency at this point so you *can* divide
-apples by oranges.
+You can also add, subtract, multiply, and divide a series. Note that Datadog does not enforce consistency at this point, so you *can* divide apples by oranges.
 
 ```json
 {
@@ -111,7 +108,7 @@ apples by oranges.
 
 {{< img src="graphing/graphing_json/slice-n-stack.png" alt="slice and stack" responsive="true" >}}
 
-In the case of related Time Series, you can easily draw them as stacked areas by using the following syntax:
+In the case of related timeseries, you can draw them as stacked areas by using the following syntax:
 
 ```
 "requests": [
@@ -121,13 +118,11 @@ In the case of related Time Series, you can easily draw them as stacked areas by
 ]
 ```
 
-Instead of one query per chart you can aggregate all queries into one and concatenate the queries.
+Instead of one query per chart, you can aggregate all queries into one and concatenate the queries.
 
 ## Slice-n-Stack
 
-A useful visualization is to represent a metric shared across
-hosts and stack the results. For instance, when selecting a tag that
-applies to more than 1 host you see that ingress and egress traffic is nicely stacked to give you the sum as well as the split per host. This is useful to spot wild swings in the distribution of network traffic.
+You can represent a metric shared across hosts and stack the results. For instance, when selecting a tag that applies to more than 1 host, you see that ingress and egress traffic is nicely stacked to give you the sum as well as the split per host. This is useful to spot wild swings in the distribution of network traffic.
 
 Here's how to do it for any metric:
 
@@ -139,7 +134,7 @@ Here's how to do it for any metric:
 ]
 ```
 
-Note that in this case you can only have 1 query. But you can also split by device, or a combination of both:
+Note that in this case, you can only have 1 query. But you can also split by device or a combination of both:
 
 ```
 "requests" [
@@ -149,11 +144,11 @@ Note that in this case you can only have 1 query. But you can also split by devi
 ]
 ```
 
-to get traffic for all the tagged hosts, split by host and network device.
+To get traffic for all the tagged hosts, split by host and network device.
 
 #### Examples
 
-Here is an example using the `rate()` function, which takes only a single metric as a parameter.  Other functions, with the exception of `top()` and `top_offset()`, have identical syntax.
+Here is an example using the `rate()` function, which takes only a single metric as a parameter. Other functions, with the exception of `top()` and `top_offset()`, have identical syntax.
 
 ```json
 {

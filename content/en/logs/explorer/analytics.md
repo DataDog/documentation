@@ -20,7 +20,29 @@ further_reading:
   text: "Detect patterns inside your logs"
 ---
 
-## Log Analytics query 
+## Overview
+
+Log analytics extend the log search page with log aggregation and split capabilities for troubleshooting and monitoring. 
+You can access the analytics page from any log explorer view by clicking on the "Analytics" icon next to the search query bar.
+
+{{< img src="logs/explorer/analytics/explorer-button.png" alt="Logs Explorer" style="width:50%;" responsive="true">}}
+
+You can control:
+
+* the query that filters the set of logs to analyze
+* the dimensions over which to split data
+* the visualization method for aggregates and splits 
+
+From an analytics visualization, you can, additionally:
+
+* create a widget in a dashboard out of that visualization
+* create a monitor out of that query 
+* deep dive sinto ubsets of the log list, depending on the interactions that the visualization enables  
+
+Save a log analytics view with the "Save As" button. You can load your teammates' saved views from the "Saved Views" tab.
+
+
+## Build an analytics query
 
 Use the query to control what's displayed in your Log Analytics:
 
@@ -58,6 +80,20 @@ Available visualizations:
 
 Visualize the evolution of a single [measure][1] (or a [facet][2] unique count of values) over a selected time frame, and (optionally) split by an available [facet][2].
 
+You have additional display options for timeseries:
+
+* whether you display lines, bars, or areas
+* data stacking option, by value, or by percentage
+* color set
+
+Noteworthy facts about stacking:
+
+* Stacking is available only for query requests with a split.
+* Stacking options are for bar and area displays only. Line displays are always overlapping.
+* When you use a toplist option that hides part of your data, stacking does not show the total overall; rather, it shows only the subtotal for the top/bottom series.
+* Stacking may not make sense when you have non-unique values in the split facet.
+* Stacking may not make sense for some aggregration methods for measures.
+
 The following timeseries Log Analytics shows:
 The evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
 
@@ -67,6 +103,7 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 [1]: /logs/explorer/?tab=measures#setup
 [2]: /logs/explorer/?tab=facets#setup
 {{% /tab %}}
+
 {{% tab "Top List" %}}
 
 Visualize the top values from a [facet][1] according to the chosen [measure][2]:

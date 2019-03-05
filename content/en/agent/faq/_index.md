@@ -22,6 +22,7 @@ private: true
 * [Why don't I see the 'system.processes.open_file_descriptors' metric?][16]
 * [How is the 'system.mem.used' metric calculated?][17]
 * [Adding a custom Python package to the Agent][18]
+* [Why should I install the Datadog Agent on my cloud instances?][19]
 
 
 [1]: /agent/faq/getting-further-with-docker
@@ -42,3 +43,4 @@ private: true
 [16]: /agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric
 [17]: /agent/faq/how-is-the-system-mem-used-metric-calculated
 [18]: /agent/faq/custom_python_package
+[19]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances

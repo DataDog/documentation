@@ -33,7 +33,11 @@ If the log section is empty when the `host` option is set, go into the log explo
 
 ### Trace_id option
 
-If your logs do not contain the trace id, follow the guide on [correlating traces and logs][2] to do it.
+Make sure you have a `trace_id` standard attribute in your logs. You should see a trace icon next to the SERVICE name (black if trace is not sampled, grey if trace is sampled).
+
+{{< img src="tracing/trace_in_log_panel.png" alt="Trace icon in log panel" responsive="true" style="width:50%;">}}
+
+If your logs do not contain the `trace_id`, follow the guide on [correlating traces and logs][2].
 The idea is then on the log side to:
 
 1. Extract the trace id in a log attribute
@@ -44,9 +48,10 @@ The idea is then on the log side to:
 
 For JSON logs, step 1 and 2 are done automatically. The tracer inject the trace and span id automatically in the logs and it is remapped automatically thanks to the [reserved attribute remappers][1].
 
-In case of issue, double check in your logs the name of the attribute that contains the trace id (should be `dd.trace_id`) and double check in your [reserved attributes][2] that it is properly set.
+If this isn't working as expected, ensure the name of the logs attribute that contains the trace id is `dd.trace_id` and verify it is properly set in [reserved attributes][2].
 
-[1]: 
+
+[1]: /logs/processing/#edit-reserved-attributes
 [2]: https://app.datadoghq.com/logs/pipelines/remapping
 {{% /tab %}}
 {{% tab "With Log integration" %}}
@@ -67,7 +72,7 @@ For raw logs without any integration, make sure that the custom parsing rule is 
 
 {{< img src="tracing/tracing_custom_parsing.png" alt="Custom parser" responsive="true" style="width:90%;">}}
 
-Then define a [Trace remapper][1] on the extracted attribute to remap them to the official trace id of the logs.
+* Then define a [Trace remapper][1] on the extracted attribute to remap them to the official trace id of the logs.
 
 [1]: https://docs.datadoghq.com/logs/processing/processors/#trace-remapper
 {{% /tab %}}

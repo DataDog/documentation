@@ -11,8 +11,8 @@ further_reading:
   text: "Building Dashboard using JSON"
 ---
 
-Query values display the current value of a given metric query, with conditional formatting (such as a green/yellow/red background) to convey whether or not the value is in the expected range.
-The value displayed by a query value need not represent an instantaneous measurement.
+Query values display the current value of a given metric, APM, or log query. They come with conditional formatting (such as a green/yellow/red background) to convey whether the value is in the expected range.
+The values displayed by a query value need not represent an instantaneous measurement.
 
 The widget can display the latest value reported, or an aggregate computed from all query values across the time window. These visualizations provide a narrow but unambiguous window into your infrastructure query.
 
@@ -72,12 +72,12 @@ QUERY_VALUE_SCHEMA = {
 
 | Parameter     | Type            | Required | Description                                                                                                                                                  |
 | ------        | -----           | -----    | --------                                                                                                                                                     |
-| `type`        | string          | yes      | Type of the widget, for the query value widget use `query_value`                                                                                                   |
+| `type`        | string          | yes      | Type of widget; for the query value widget use `query_value`                                                                                                   |
 | `requests`    | array of object | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `REQUEST_SCHEMA`. |
-| `autoscale`   | boolean         | no       | Whether to use autoscaling or not.                                                                                                                           |
+| `autoscale`   | Boolean         | no       | Whether to use autoscaling or not.                                                                                                                           |
 | `custom_unit` | string          | no       | Display a unit of your choice on the widget.                                                                                                                 |
-| `precision`   | integer         | no       | Number of decimal to show. If not defined, the widget uses the raw value.                                                                                    |
-| `text_align`  | string            | no       | How to align the value in the widget, values available are `center`, `left`, or `right`.                                                                      |
+| `precision`   | integer         | no       | Number of decimals to show. If not defined, the widget uses the raw value.                                                                                    |
+| `text_align`  | string            | no       | How to align the value in the widget; values available are `center`, `left`, or `right`.                                                                      |
 | `title`       | string          | no       | Title of your widget.                                                                                                                                        |
 
 
@@ -93,7 +93,11 @@ Additional properties allowed in the `request` object:
 | Parameter             | Type   | Required | Description                                                                                                                                                     |
 | ------                | -----  | -------- | ----                                                                                                                                                            |
 | `conditional_formats` | object | no       | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][6] to learn how to build the `CONDITIONAL_FORMATS_SCHEMA`. |
+<<<<<<< HEAD
 | `aggregator`          | string   | no       | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum`.                                                                   |
+=======
+| `aggregator`          | enum   | no       | Aggregator used for the request; available values are: `avg`, `last`, `max`, `min`, or `sum`.                                                                   |
+>>>>>>> master
 
 ## Further Reading
 

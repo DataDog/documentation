@@ -70,7 +70,7 @@ SCATTERPLOT_SCHEMA = {
 
 | Parameter         | Type            | Required | Description                                                                                                                                        |
 | ------            | -----           | -----    | --------                                                                                                                                           |
-| `type`            | string          | yes      | Type of the widget, for the scatterplot widget use `scatterplot`.                                                                                        |
+| `type`            | string          | yes      | Type of widget, for the scatterplot widget use `scatterplot`.                                                                                        |
 | `requests`        | object          | yes      | A `requests` object to display in the widget. See the dedicated [Request JSON schema documentation][2] to learn how to build the `REQUEST_SCHEMA`. |
 | `yaxis`           | object          | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][3] to learn how to build the `AXIS_SCHEMA`.                           |
 | `xaxis`           | object          | no       | Y-axis control options. See the dedicated [X-axis JSON schema documentation][3] to learn how to build the `AXIS_SCHEMA`.                           |

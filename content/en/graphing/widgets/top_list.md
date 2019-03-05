@@ -67,7 +67,7 @@ TOPLIST_SCHEMA = {
 
 | Parameter  | Type            | Required | Description                                                                                                                                                  |
 | ------     | -----           | -------- | -----                                                                                                                                                        |
-| `type`     | string          | yes      | Type of the widget, for the toplist widget use `toplist`.                                                                                                      |
+| `type`     | string          | yes      | Type of widget, for the toplist widget use `toplist`.                                                                                                      |
 | `requests` | array of object | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `REQUEST_SCHEMA`. |
 | `title`    | string          | no       | Title of your widget.                                                                                                                                        |
 

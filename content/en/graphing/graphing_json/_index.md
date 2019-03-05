@@ -6,15 +6,15 @@ aliases:
   - /graphingjson/
   - /graphing/miscellaneous/graphingjson
 further_reading:
-- link: "graphing/graphing_json/widget_json"
+- link: "graphing/widgets"
   tag: "Documentation"
-  text: "Widget JSON schema"
+  text: "Widgets"
 - link: "graphing/graphing_json/request_json"
   tag: "Documentation"
   text: "Request JSON schema"
 ---
 
-If you query a [Datadog timeboard][1] though the [Dashboard API][2] the result should be a JSON object with the following layout:
+If you query a [Datadog timeboard][1] though the [dashboard API][2], the result is a JSON object with the following layout:
 
 ```
 DASHBOARD_SCHEMA = {
@@ -37,17 +37,17 @@ DASHBOARD_SCHEMA = {
 
 | Parameter            | Type             | Description                                                                                                                                                                         |
 | ------               | -----            | --------                                                                                                                                                                            |
-| `title`              | string           | Title of your Dashboard.                                                                                                                                                            |
+| `title`              | string           | Title of your dashboard.                                                                                                                                                            |
 | `description`        | string           | Description of the dashboard.                                                                                                                                                       |
-| `layout_type`        | enum             | Layout type of the dashboard only `ordered` layout is supported                                                                                                                     |
-| `is_read_only`       | boolean          | Whether this dashboard is read-only. If `true`, only the dashboard author and administrators can apply changes to it.                                                               |
-| `template_variables` | array of object  | List of template variables for this dashboard. See [the template variable schema documentation](#template-variable-schema) to learn more                                            |
+| `layout_type`        | enum             | Layout type of the dashboard. Only `ordered` layouts are supported.                                                                                                                     |
+| `is_read_only`       | Boolean          | Whether this dashboard is read-only. If `true`, only the dashboard author and administrators can apply changes to it.                                                               |
+| `template_variables` | array of object  | List of template variables for this dashboard. See [the template variable schema documentation](#template-variable-schema) to learn more.                                            |
 | `notify_list`        | array of strings | List of handles of users to notify when changes are made to this dashboard.                                                                                                         |
-| `widgets`            | array of object  | List of widgets to display on the dashboard. See the dedicated [Widget JSON schema documentation][3] to learn how to build the `WIDGET_SCHEMA`. |
+| `widgets`            | array of object  | List of widgets to display on the dashboard. See the dedicated [Widget JSON schema documentation][3] to build the `WIDGET_SCHEMA`. |
 
 ## Template variable schema
 
-Dashboard template variables apply a new scope to one or more graphs on your dashboard, allowing you to dynamically explore metrics across different sets of tags by using variables instead of specific tags, to configure them through the Dashboard API use the following layout:
+Dashboard template variables apply a new scope to one or more graphs on your dashboard. This allows you to dynamically explore metrics across different sets of tags by using variables instead of specific tags. To configure them through the Dashboard API, use the following layout:
 
 ```
 TEMPLATE_VARIABLE_SCHEMA = {

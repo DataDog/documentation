@@ -93,7 +93,20 @@ Note: Tags are only set when a container starts.
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-The Datadog Agent can extract pod labels and annotations as metric tags with the following configuration in your `datadog.yaml` file:
+The Datadog Agent can autodiscover tags from Pod annotations, which allows it to
+associate tags to entire pods or individual containers. Use this format
+for annotation autodiscovery:
+
+```
+annotations:
+  ad.datadoghq.com/tags: '{"<TAG_NAME>": "<TAG_VALUE>", ...}'
+  ad.datadoghq.com/<container identifier>.tags: '{"<TAG_NAME>": "<TAG_VALUE>", ...}'
+```
+
+Note that autodiscovery identifies containers by _name_.
+
+The Datadog Agent can also extract pod labels and annotations as metric tags
+with the following configuration in your `datadog.yaml` file:
 
 ```
 kubernetes_pod_labels_as_tags:

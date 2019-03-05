@@ -10,81 +10,15 @@ further_reading:
   text: "Request JSON schema"
 ---
 
-This page covers how to use JSON to build a widget in a Datadog dashboard as you would see in the *JSON* tab of a widget. To learn more about the GUI editor, visit the main [Graphing documentation Page][1]
-
-{{< img src="graphing/graphing_json/references-graphing-jsoneditor.png" alt="references graphing jsoneditor" responsive="true" style="width:80%;">}}
-
-All widgets follow the same object `WIDGET_SCHEMA` structure:
-
-```
-WIDGET_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "definition": {"type": "object"},
-        "id": {"type": "integer"}
-    },
-    "required": ["definition"],
-    "additionalProperties": false
-}
-```
-
-| Parameter    | Type    | Description                                     |
-| ------       | -----   | --------                                        |
-| `definition` | Object  | [Definition of the widget](#widget-definition). |
-| `id`         | integer | Unique ID for your widget.                      |
-
-## Widget Definition
-
-A widget definition follows the following object structure:
-
-```
-"definition": {
-  "type": "<WIDGET_TYPE>",
-  "requests": <REQUEST_SCHEMA>,
-  "title": "<WIDGET_TITLE>",
-  "yaxis": "<AXIS_SCHEMA>",
-  "events": "<EVENTS_SCHEMA>",
-  "markers": "<MARKERS_SCHEMA>",
-  "conditional_formats": "<CONDITIONAL_FORMATS_SCHEMA>"
-}
-```
-
-The three first parameters are mandatory and present on all widgets:
-
-| Parameter  | Type            | Required | Description                                  |
-| ------     | -----           | -----    | --------                                     |
-| `type`     | enum            | yes      | Type of the widget.                          |
-| `requests` | array of object | yes      | [Request(s) associated with your widget][1]. |
-| `title`    | string          | yes      | Title of your widget.                        |
-
-The other are extra and optional parameters that enhance your widgets, but are only available depending of the `type` of widget.
-
-| Parameter             | Type   | Required | Description                                                                                                                                                                              |
-| ------                | -----  | -------- | ----                                                                                                                                                                                     |
-| `yaxis`               | object | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation](#y-axis-schema) to learn how to build the `AXIS_SCHEMA`.                                                    |
-| `events`              | object | no       | Event overlay control options. See the dedicated [Events JSON schema documentation](#events-schema) to learn how to build the `EVENTS_SCHEMA`                                            |
-| `markers`             | object | no       | Markers overlay control options. See the dedicated [Markers JSON schema documentation](#markers-schema) to learn how to build the `MARKERS_SCHEMA`                                       |
-| `conditional_formats` | object | no       | Conditional format control options. See the dedicated [Conditional format JSON schema documentation](#conditional-format-schema) to learn how to build the `CONDITIONAL_FORMATS_SCHEMA`. |
-
-{{< whatsnext desc="Refer to each widget dedicated documentation to learn how to build a specific widget:">}}
-    {{< nextlink href="/graphing/widgets/change/#api" >}}Change{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/distribution/#api" >}}Distribution{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/group/#api" >}}Group{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/heat_map/#api" >}}Heat Map{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/hostmap/#api" >}}Hostmap{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/query_value/#api" >}}Query Value{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/scatter_plot/#api" >}}Scatter Plot{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/timeseries/#api" >}}Timeseries{{< /nextlink >}}
-    {{< nextlink href="/graphing/widgets/top_list/#api" >}}Top List{{< /nextlink >}}
-{{< /whatsnext >}}
+To learn more about the GUI editor, visit the main [Graphing documentation Page][1].
 
 ## Y-Axis schema
 
 The Datadog y-axis controls allow you to:
 
-*   Clip y-axis to specific ranges
+*   Clip the y-axis to specific ranges
 *   Filter series either by specifying a percentage or an absolute value
-*   Change y-axis scale from linear to log, sqrt or power scale
+*   Change the y-axis scale from linear to log, sqrt, or power scale
 
 The schema is:
 
@@ -106,9 +40,9 @@ AXIS_SCHEMA = {
 | ------         | -----   | --------                                                                                             | ----     |
 | `label`        | string  | Label to display on the Y-scale.                                                                     |          |
 | `scale`        | string  | Specifies the scale type. Possible values: `linear`, `log`, `sqrt`, `pow##` (eg. `pow2`, `pow0.5`..) | `linear` |
-| `min`          | string  | Specifies minimum value to show on y-axis. It takes a number, or `auto` for default behavior.        | `auto`   |
-| `max`          | string  | Specifies the maximum value to show on y-axis. It takes a number, or `auto` for default behavior.    | `auto`   |
-| `include_zero` | boolean |                                                                                                      |          |
+| `min`          | string  | Specifies minimum value to show on the y-axis. It takes a number, or `auto` for default behavior.        | `auto`   |
+| `max`          | string  | Specifies the maximum value to show on the y-axis. It takes a number, or `auto` for default behavior.    | `auto`   |
+| `include_zero` | Boolean |                                                                                                      |          |
 
 ## Events schema
 
@@ -142,7 +76,7 @@ For instance, to indicate that you want events for host X and tag Y:
 ]
 ```
 
-or if you're looking to display all errors:
+or, if you're looking to display all errors:
 
 ```
 "events": [
@@ -154,7 +88,7 @@ or if you're looking to display all errors:
 
 ## Markers schema
 
-Markers allow you to add a visual conditional formating for your graphs, the `markers` format is:
+Markers allow you to add visual conditional formatting for your graphs. The `markers` format is:
 
 ```
 MARKERS_SCHEMA = {
@@ -174,8 +108,8 @@ MARKERS_SCHEMA = {
 
 | Parameter      | Type   | Description                                                                                                                |
 | ------         | -----  | --------                                                                                                                   |
-| `value`        | string | Value to apply. Can be a single value `y = 15` or a range of value `0 < y < 10`                                            |
-| `display_type` | string | Combination between: <br>- A severity `error`, `warning`, `ok`, or `info` <br> - A line type: `dashed`, `solid`, or `bold` |
+| `value`        | string | Value to apply. Can be a single value `y = 15` or a range of values `0 < y < 10`                                            |
+| `display_type` | string | Combination of: <br>- A severity `error`, `warning`, `ok`, or `info` <br> - A line type: `dashed`, `solid`, or `bold` |
 | `label`        | string | Label to display over the marker.                                                                                          |
 
 
@@ -186,6 +120,7 @@ The following markers:
 {{< img src="graphing/graphing_json/markers.png" alt="Markers" responsive="true" style="width:80%;">}}
 
 Are applied with the following configuration:
+
 ```
 { (...)
   "widgets": [
@@ -218,7 +153,7 @@ Are applied with the following configuration:
 
 ## Conditional format schema
 
-Conditional format allows you to set the color of your widget content or background depending of a rule applied to your data.
+Conditional formats allow you to set the color of your widget content or background, depending on a rule applied to your data.
 
 ```
 CONDITIONAL_FORMATS_SCHEMA = {
@@ -242,11 +177,11 @@ CONDITIONAL_FORMATS_SCHEMA = {
 
 | Parameter         | Type   | Description                                                                                                                                                                                                                                                                      |
 | ------            | -----  | --------                                                                                                                                                                                                                                                                         |
-| `comparator`      | enum   | Comparator to apply between: `>`, `>=`, `<`, or `<=`                                                                                                                                                                                                                             |
+| `comparator`      | enum   | Comparator to apply from: `>`, `>=`, `<`, or `<=`                                                                                                                                                                                                                             |
 | `value`           | double | Value for the comparator.                                                                                                                                                                                                                                                        |
-| `palette`         | string | Palette of color to apply, to choose between `blue`, `custom_bg`, `custom_image`, `custom_text`, `gray_on_white`, `green`, `green_on_white`, `grey`, `orange`, `red`, `red_on_white`, `white_on_gray`, `white_on_green`, `white_on_red`, `white_on_yellow`, or `yellow_on_white` |
-| `custom_bg_color` | string | Palette of colors to apply to the background, same values available as palette.                                                                                                                                                                                                  |
-| `custom_fg_color` | string | Palette of colors to apply to the background, same values available as palette.                                                                                                                                                                                                  |
+| `palette`         | string | Color palette to apply; choose from `blue`, `custom_bg`, `custom_image`, `custom_text`, `gray_on_white`, `green`, `green_on_white`, `grey`, `orange`, `red`, `red_on_white`, `white_on_gray`, `white_on_green`, `white_on_red`, `white_on_yellow`, or `yellow_on_white` |
+| `custom_bg_color` | string | Color palette to apply to the background, same values available as palette.                                                                                                                                                                                                  |
+| `custom_fg_color` | string | Color palette to apply to the foreground, same values available as palette.                                                                                                                                                                                                  |
 | `image_url`       | string | Displays an image as the background.                                                                                                                                                                                                                                             |
 ## Time schema
 
