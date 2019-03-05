@@ -5,6 +5,9 @@ aliases:
 - /tracing/setup/php
 - /agent/apm/php/
 further_reading:
+- link: "https://www.datadoghq.com/blog/monitor-php-performance/"
+  tag: "Blog"
+  text: "PHP monitoring with Datadog APM and distributed tracing"
 - link: "https://github.com/DataDog/dd-trace-php"
   tag: "GitHub"
   text: "Source code"
