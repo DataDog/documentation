@@ -154,7 +154,7 @@ or, if you're looking to display all errors:
 
 ## Markers schema
 
-Markers allow you to add a visual conditional formatting for your graphs. The `markers` format is:
+Markers allow you to add visual conditional formatting for your graphs. The `markers` format is:
 
 ```
 MARKERS_SCHEMA = {
