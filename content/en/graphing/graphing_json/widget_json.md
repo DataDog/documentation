@@ -10,9 +10,7 @@ further_reading:
   text: "Request JSON schema"
 ---
 
-This page covers how to use JSON to build a widget in a Datadog dashboard, as you would see in the *JSON* tab of a widget. To learn more about the GUI editor, visit the main [Graphing documentation Page][1]
-
-{{< img src="graphing/graphing_json/references-graphing-jsoneditor.png" alt="references graphing jsoneditor" responsive="true" style="width:80%;">}}
+To learn more about the GUI editor, visit the main [Graphing documentation Page][1].
 
 ## Y-Axis schema
 
