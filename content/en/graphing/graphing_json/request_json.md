@@ -91,7 +91,7 @@ The following example graphs 5-minute load and its double:
 }
 ```
 
-You can also add, substract, multiply, and divide a series. Note that Datadog does not enforce consistency at this point, so you *can* divide apples by oranges.
+You can also add, subtract, multiply, and divide a series. Note that Datadog does not enforce consistency at this point, so you *can* divide apples by oranges.
 
 ```json
 {
