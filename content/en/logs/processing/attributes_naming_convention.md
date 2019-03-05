@@ -21,15 +21,17 @@ further_reading:
 
 Centralizing logs from various technologies and applications tends to generate tens or hundreds of different attributes in a Log Management environment—especially when many teams' users, each one with their own personal usage patterns, are working within the same environment.
 
-This can generate confusion. For instance, a client IP might have the following attributes within your logs: `clientIP`, `client_ip_address`, `remote_address`, `client.ip`, etc.
+This can generate confusion. For instance, a client IP might have the following attributes within your logs: `clientIP`, `client_ip_address`, `remote_address`, `client.ip`, etc. 
 
-In this context, it can be cumbersome to know which attributes correspond to the logs you are trying to filter on, or correlate proxy logs to web application logs.
+In this context, the number of created or provided attributes can lead to confusion and difficulty to configure or understand the environment. It is also cumbersome to know which attributes correspond to the the logs of interest and - for instance - correlating web proxy with web application logs would be difficult. Even if technologies define their respective logs attributes differently, a URL, client IP, or duration have universally consistent meanings.
 
-Even if technologies define their respective logs attributes differently, a URL, client IP, or duration have universally consistent meanings.
+Standard Attributes have been designed to help your organization to define its own Naming Convention and to enforce it as much as possible across users and functional teams. The goal is to define a subset of attributes that would be the recipient of shared semantics that everyone agrees to use by convention.
 
-Datadog decided, while implementing log integrations, to rely on a subset of names for attributes that are commonly observed over log sources. For custom sources, a _standard attribute_ page was added to let you benefit from the existing naming convention or to build your own.
-
+Log Integrations are natively relying on the [default provided set](#default-standard-attribute-list) but your organization can decide to extend or modify this list.
 The standard attribute table is available in Log Configuration pages, along with pipelines, indexes, and archives.
+
+How these Standard Attributes will be suggested or enforced?
+Administrators have the right to re-copy an existing set of (non-standard) attributes into a standard one so to enforce non compliant logs sources to become compliant without loosing any previous information. 
 
 {{< img src="logs/processing/attribute_naming_convention/standard_attributes.png" alt="Standard Attributes" responsive="true" style="width:80%;">}}
 
@@ -39,14 +41,22 @@ The standard attribute table comes with a set of [predefined standard attributes
 
 {{< img src="logs/processing/attribute_naming_convention/edit_standard_attributes.png" alt="Edit standard attributes" responsive="true" style="width:80%;">}}
 
-### Standard Attribute Definition
+### Add Or Update Standard Attributes
 
 A standard attribute is defined by its:
 
-* Name
-* Type (`string`, `integer`, `double`, `boolean`)
-* Description
-* Remapping list
+* `Path`: The path of the Standard attributes as you would find it in your JSON (e.g `network.client.ip`)
+* `Type` (`string`, `integer`, `double`, `boolean`): The type of the attribute which is used to cast element of the remapping list
+* `Description`: Human readable description of the attribute
+* `Remapping list`: Comma separated list of non-compliant attribute that should be remapped to the Standard one
+
+The standard attribute panel pops when you add a new standard attribute or edit an existing one:
+
+{{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Define Standard attribute" responsive="true" style="width:80%;">}}
+
+Any element of the standard attribute can then be filled or updated. **Note**: Any updates or additions to standard attributes are only applied to newly ingested logs.
+
+### Standard Attribute Remapping Behaviour
 
 After being processed in the pipelines, each log goes through the full list of Standard Attributes.
 For each entry of the standard attribute table, if the current log has an attribute matching the remapping list, the following is done:
@@ -56,14 +66,6 @@ For each entry of the standard attribute table, if the current log has an attrib
 * The original attribute is kept in the log
 
 **Important Note**: By default, the type of an existing standard attribute is unchanged if the remapping list is empty. Add the standard attribute to its own remapping list to enforce its type.
-
-### Add or Update a Standard Attribute
-
-The standard attribute panel pops when you add a new standard attribute or edit an existing one:
-
-{{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Define Standard attribute" responsive="true" style="width:80%;">}}
-
-Any element of the standard attribute can then be filled or updated. **Note**: Any updates or additions to standard attributes are only applied to newly ingested logs.
 
 #### Validation
 
