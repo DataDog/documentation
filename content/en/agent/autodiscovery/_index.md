@@ -93,9 +93,9 @@ Note: Tags are only set when a container starts.
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-The Datadog Agent can autodiscover tags from Pod annotations, allowing to
-associate tags to entire pods or individual containers. The expected format
-for annotation autodiscovery is the following one:
+The Datadog Agent can autodiscover tags from Pod annotations, which allows it to
+associate tags to entire pods or individual containers. Use this format
+for annotation autodiscovery:
 
 ```
 annotations:
