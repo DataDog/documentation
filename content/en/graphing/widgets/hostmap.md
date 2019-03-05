@@ -92,7 +92,7 @@ HOST_MAP_SCHEMA = {
 
 | Parameter            | Type             | Required | Description                                                                                                                      |
 | ------               | -----            | -----    | --------                                                                                                                         |
-| `type`               | string           | yes      | Type of the widget; for the host map widget use `hostmap`.                                                                       |
+| `type`               | string           | yes      | Type of widget; for the host map widget use `hostmap`.                                                                       |
 | `requests.fill`      | string           | yes/no   | Query used to fill the map. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
 | `requests.size`      | string           | yes/no   | Query used to size the map. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
 | `node_type`          | enum             | no       | Which type of node to use in the map; available values are: `host` or `container`                                                 |
