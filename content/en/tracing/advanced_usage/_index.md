@@ -2153,7 +2153,7 @@ If you are using an Apache server, use the `ErrorLog` directive.
 If you are using an NGINX server, use the `error_log` directive.
 If you are configuring instead at the PHP level, use PHP's `error_log` ini parameter.
 
-[1]: 
+[1]: http://php.net/manual/en/install.php
 [2]: https://www.php-fig.org/psr/psr-3
 {{% /tab %}}
 {{% tab "C++" %}}
