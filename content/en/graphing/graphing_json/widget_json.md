@@ -53,7 +53,7 @@ The 3 first parameters are mandatory and present on all widgets:
 
 | Parameter  | Type            | Required | Description                                  |
 | ------     | -----           | -----    | --------                                     |
-| `type`     | enum            | yes      | Type of the widget.                          |
+| `type`     | enum            | yes      | Type of widget.                          |
 | `requests` | array of object | yes      | [Request(s) associated with the widget][1]. |
 | `title`    | string          | yes      | Title of the widget.                        |
 
