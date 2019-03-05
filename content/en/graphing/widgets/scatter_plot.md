@@ -42,10 +42,10 @@ Optionally define its size and alignment.
 
 ## API
 
-The dedicated [widget JSON schema definition][1] for the change widget is: 
+The dedicated [widget JSON schema definition][1] for the scatterplot widget is:
 
 ```
-SCATTER_PLOT_SCHEMA = {
+SCATTERPLOT_SCHEMA = {
     "type": "object",
     "properties": {
         "type": {"enum": ["scatterplot"]},
@@ -70,7 +70,7 @@ SCATTER_PLOT_SCHEMA = {
 
 | Parameter         | Type            | Required | Description                                                                                                                                        |
 | ------            | -----           | -----    | --------                                                                                                                                           |
-| `type`            | string          | yes      | Type of the widget, for the group widget use `scatterplot`.                                                                                        |
+| `type`            | string          | yes      | Type of the widget, for the scatterplot widget use `scatterplot`.                                                                                        |
 | `requests`        | object          | yes      | A `requests` object to display in the widget. See the dedicated [Request JSON schema documentation][2] to learn how to build the `REQUEST_SCHEMA`. |
 | `yaxis`           | object          | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][3] to learn how to build the `AXIS_SCHEMA`.                           |
 | `xaxis`           | object          | no       | Y-axis control options. See the dedicated [X-axis JSON schema documentation][3] to learn how to build the `AXIS_SCHEMA`.                           |
@@ -87,7 +87,7 @@ Additional properties allowed in the `request` object:
 
 | Parameter    | Type  | Required | Description                                                                                  |
 | ------       | ----- | -------- | ----                                                                                         |
-| `aggregator` | enum  | no       | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum`. |
+| `aggregator` | string  | no       | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum`. |
 
 
 ## Further Reading

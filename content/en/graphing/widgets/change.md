@@ -29,7 +29,7 @@ The Change graph shows you the change in a value over the time period chosen:
 
 ### Configuration
 
-1. Choose a metric to graph. 
+1. Choose a metric to graph.
 2. Choose an aggregation function.
 3. Optional: choose a specific context for your widget.
 4. Break down your aggregation on a tag key i.e `host`, `service`..
@@ -48,7 +48,7 @@ The Change graph shows you the change in a value over the time period chosen:
 9. Optional: display current value.
 
 ### Options
-#### Display preference 
+#### Display preference
 
 {{< img src="graphing/widgets/options/display_preferences.png" alt="Display preferences" responsive="true" style="width:80%;">}}
 
@@ -70,7 +70,7 @@ Optionally define its size and alignment.
 
 ## API
 
-The dedicated [widget JSON schema definition][1] for the change widget is: 
+The dedicated [widget JSON schema definition][1] for the change widget is:
 
 ```
 CHANGE_SCHEMA = {
@@ -92,7 +92,7 @@ CHANGE_SCHEMA = {
 
 | Parameter  | Type            | Required | Description                                                                                                                                                  |
 | ------     | -----           | -------- | -----                                                                                                                                                        |
-| `type`     | string          | yes      | Type of the widget, for the group widget use `change`.                                                                                                       |
+| `type`     | string          | yes      | Type of the widget, for the change widget use `change`.                                                                                                       |
 | `requests` | array of object | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][2] to learn how to build the `REQUEST_SCHEMA`. |
 | `title`    | string          | no       | Title of your widget.                                                                                                                                        |
 
@@ -112,11 +112,11 @@ Additional properties allowed in the `request` object:
 
 | Parameter       | Type    | Required | Description                                                                                                                    |
 | ------          | -----   | -----    | --------                                                                                                                       |
-| `change_type`   | enum    | no       | Show the absolute or the relative change, values available are: `absolute` or `relative`                                       |
-| `compare_to`    | enum    | no       | Timeframe used for the change comparison, values available are: `hour_before`, `day_before`, `week_before`, or `month_before`. |
+| `change_type`   | string    | no       | Show the absolute or the relative change, values available are: `absolute` or `relative`                                       |
+| `compare_to`    | string    | no       | Timeframe used for the change comparison, values available are: `hour_before`, `day_before`, `week_before`, or `month_before`. |
 | `increase_good` | boolean | no       | Whether to show increase as good.                                                                                              |
-| `order_by`      | enum    | no       | What to order by, values available are: `change`, `name`, `present`, or `past`.                                                |
-| `order_dir`     | enum    | no       | Order direction, values available are: `asc` or `desc`.                                                                        |
+| `order_by`      | string    | no       | What to order by, values available are: `change`, `name`, `present`, or `past`.                                                |
+| `order_dir`     | string    | no       | Order direction, values available are: `asc` or `desc`.                                                                        |
 | `show_present`  | boolean | no       | Whether to show the present value.                                                                                             |
 ## Further Reading
 

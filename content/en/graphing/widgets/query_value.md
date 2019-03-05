@@ -28,7 +28,7 @@ The widget can display the latest value reported, or an aggregate computed from 
     * Metric: See [the main graphing documentation][1] to configure a metric query.
     * APM Events: See [the trace search documentation][2] to configure an APM event query.
     * Log Events: See [the log search documentation][3] to configure a log event query.
-2. Choose the units and the formatting. 
+2. Choose the units and the formatting.
 3. Optional: configure a conditional format depending on the value displayed.
 
 ### Options
@@ -46,7 +46,7 @@ Optionally define its size and alignment.
 
 ## API
 
-The dedicated [widget JSON schema definition][4] for the change widget is: 
+The dedicated [widget JSON schema definition][4] for the query value widget is:
 
 ```
 QUERY_VALUE_SCHEMA = {
@@ -72,12 +72,12 @@ QUERY_VALUE_SCHEMA = {
 
 | Parameter     | Type            | Required | Description                                                                                                                                                  |
 | ------        | -----           | -----    | --------                                                                                                                                                     |
-| `type`        | string          | yes      | Type of the widget, for the group widget use `query_value`                                                                                                   |
+| `type`        | string          | yes      | Type of the widget, for the query value widget use `query_value`                                                                                                   |
 | `requests`    | array of object | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `REQUEST_SCHEMA`. |
 | `autoscale`   | boolean         | no       | Whether to use autoscaling or not.                                                                                                                           |
 | `custom_unit` | string          | no       | Display a unit of your choice on the widget.                                                                                                                 |
 | `precision`   | integer         | no       | Number of decimal to show. If not defined, the widget uses the raw value.                                                                                    |
-| `text_align`  | enum            | no       | How to align the value in the widget, value available are `center`, `left`, or `right`.                                                                      |
+| `text_align`  | string            | no       | How to align the value in the widget, value available are `center`, `left`, or `right`.                                                                      |
 | `title`       | string          | no       | Title of your widget.                                                                                                                                        |
 
 
@@ -93,7 +93,7 @@ Additional properties allowed in the `request` object:
 | Parameter             | Type   | Required | Description                                                                                                                                                     |
 | ------                | -----  | -------- | ----                                                                                                                                                            |
 | `conditional_formats` | object | no       | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][6] to learn how to build the `CONDITIONAL_FORMATS_SCHEMA`. |
-| `aggregator`          | enum   | no       | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum`.                                                                   |
+| `aggregator`          | string   | no       | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum`.                                                                   |
 
 ## Further Reading
 

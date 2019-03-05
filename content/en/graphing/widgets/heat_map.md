@@ -65,10 +65,10 @@ The following configuration options are available:
 
 ## API
 
-The dedicated [widget JSON schema definition][3] for the change widget is: 
+The dedicated [widget JSON schema definition][3] for the heatmap widget is:
 
 ```
-HEAT_MAP_SCHEMA = {
+HEATMAP_SCHEMA = {
     "type": "object",
     "properties": {
         "type": {"enum": ["heatmap"]},
@@ -89,7 +89,7 @@ HEAT_MAP_SCHEMA = {
 
 | Parameter  | Type            | Required | Description                                                                                                                                                  |
 | ------     | -----           | -------- | -----                                                                                                                                                        |
-| `type`     | string          | yes      | Type of the widget, for the group widget use `heatmap`                                                                                                       |
+| `type`     | string          | yes      | Type of the widget, for the heatmap widget use `heatmap`                                                                                                       |
 | `requests` | array of object | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][4] to learn how to build the `REQUEST_SCHEMA`. |
 | `yaxis`    | object          | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][5] to learn how to build the `<AXIS_SCHEMA>`.                                   |
 | `events`   | object          | no       | Event overlay control options. See the dedicated [Events JSON schema documentation][6] to learn how to build the `<EVENTS_SCHEMA>`                           |
@@ -124,4 +124,4 @@ Additional properties allowed in the `requests` object:
 [3]: /graphing/graphing_json/widget_json
 [4]: /graphing/graphing_json/request_json
 [5]: /graphing/graphing_json/widget_json/#y-axis-schema
-[6]: /grpahing/graphing_json/widget_json/#events-schema
+[6]: /graphing/graphing_json/widget_json/#events-schema

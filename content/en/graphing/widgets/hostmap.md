@@ -45,10 +45,10 @@ Optionally define its size and alignment.
 ## API
 
 
-The dedicated [widget JSON schema definition][2] for the change widget is: 
+The dedicated [widget JSON schema definition][2] for the host map widget is:
 
 ```
-HOST_MAP_SCHEMA = {
+HOSTMAP_SCHEMA = {
     "type": "object",
     "properties": {
         "type": {"enum": ["hostmap"]},
@@ -95,7 +95,7 @@ HOST_MAP_SCHEMA = {
 | `type`               | string           | yes      | Type of the widget, for the host map widget use `hostmap`.                                                                       |
 | `requests.fill`      | string           | yes/no   | Query used to fill the map. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
 | `requests.size`      | string           | yes/no   | Query used to size the map. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
-| `node_type`          | enum             | no       | Which type of node to use in the map, available value are: `host` or `container`                                                 |
+| `node_type`          | string             | no       | Which type of node to use in the map, available value are: `host` or `container`                                                 |
 | `no_metric_hosts`    | boolean          | no       | Whether to show the hosts with no metrics.                                                                                       |
 | `no_group_hosts`     | boolean          | no       | Whether to show the hosts that don't fit in a group.                                                                             |
 | `group`              | array of strings | no       | List of tag prefixes to group by.                                                                                                |

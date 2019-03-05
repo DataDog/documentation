@@ -25,11 +25,11 @@ This visualization displays only a single metric query; additional queries are d
 
 ### Configuration
 
-Configure your metric query as usual. Note that this visualization type is useful only when metrics are aggregated across tag keys, e.g. for each `host`. 
+Configure your metric query as usual. Note that this visualization type is useful only when metrics are aggregated across tag keys, e.g. for each `host`.
 Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your data across the associated tags.
 
 ### Options
-#### Display preference 
+#### Display preference
 
 {{< img src="graphing/widgets/options/display_preferences.png" alt="Display preferences" responsive="true" style="width:80%;">}}
 
@@ -51,7 +51,7 @@ Optionally define its size and alignment.
 
 ## API
 
-The dedicated [widget JSON schema definition][2] for the change widget is: 
+The dedicated [widget JSON schema definition][2] for the distribution widget is:
 
 ```
 DISTIBUTION_SCHEMA = {
@@ -75,7 +75,7 @@ DISTIBUTION_SCHEMA = {
 
 | Parameter  | Type            | Required | Description                                                                                                                                                  |
 | ------     | -----           | -----    | -----                                                                                                                                                        |
-| `type`     | string          | yes      | Type of the widget, for the group widget use `distribution`.                                                                                                 |
+| `type`     | string          | yes      | Type of the widget, for the distribution widget use `distribution`.                                                                                                 |
 | `requests` | array of object | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
 | `title`    | string          | no       | Title of your widget.                                                                                                                                        |
 
