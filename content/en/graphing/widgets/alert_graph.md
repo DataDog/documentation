@@ -73,7 +73,7 @@ ALERT_GRAPH_SCHEMA = {
 | ------     | -----           | -----    | -----                                                                                                                                                        |
 | `type`     | string          | yes      | Type of the widget, for the alert graph widget use `alert_graph`|
 | `alert_id`     | string          | yes      | ID of the alert to use in the widget|
-|`viz_type`|string|yes|Whether to display the Alert Graph as a timeseries or a toplist. Available values are: `timeseries` or `toplist`
+|`viz_type`|string|yes|Whether to display the Alert Graph as a timeseries or a top list. Available values are: `timeseries` or `toplist`
 |`title`|string|no|Title of the widget|
 
 ## Further Reading
