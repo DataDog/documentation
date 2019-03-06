@@ -11,7 +11,7 @@ further_reading:
   text: "Building Dashboard using JSON"
 ---
 
-The image widget allows you to embed an image on your dashboard. Images can be PNG, JPG, or animated GIFs:
+The image widget allows you to embed an image on your dashboard. An image can be a PNG, JPG, or animated GIF:
 
 {{< img src="graphing/widgets/image/image.gif" alt="Image" responsive="true" style="width:80%;">}}
 
