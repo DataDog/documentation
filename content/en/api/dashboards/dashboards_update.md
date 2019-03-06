@@ -18,7 +18,7 @@ external_redirect: /api/#update-a-dashboard
     * **`id`** [*optional*, *default*=**auto-generated integer**]:  
         ID of the widget.
 * **`layout_type`** [*required*]:  
-  Layout type of the dashboard (for now, only `ordered` layout - previous timeboard layout - is supported).
+  Layout type of the dashboard. Available values are: `ordered` (previous timeboard) or `free` (previous screenboard layout)
 * **`description`** [*optional*, *default*=**None**]:  
   Description of the dashboard.
 * **`is_read_only`** [*optional*, *default*=**False**]:  
