@@ -1,5 +1,5 @@
 ---
-title: Host map Widget
+title: Host map widget
 kind: documentation
 description: "Display the Datadog hostmap in your dashboards."
 further_reading:
