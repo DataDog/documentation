@@ -51,7 +51,7 @@ FREE_TEXT_SCHEMA = {
 |`text`|string|yes|Text to display|
 |`color`|string|no|Color of the text|
 |`font_size`|string|no|Size of the text|
-|`text_align`|string|no|How to align the text on the widget. Available values are: `center`, `left` or `right`
+|`text_align`|string|no|How to align the text on the widget. Available values are: `center`, `left`, or `right`
 
 ## Further Reading
 
