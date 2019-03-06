@@ -1,5 +1,4 @@
 ---
-title: Screenboards
+title: Timeboards
 external_redirect: /api/
 ---
-
