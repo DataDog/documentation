@@ -20,7 +20,7 @@ List endpoint returns logs that match a log search query. Results are paginated.
     - a unix timestamp (number representing the elapsed millisec since epoch)
 * **`time.to`** [*required*]:  
     maximum timestamp for requested logs. Format can be either
-    - an ISO-8601 string
+    - an ISO-8601 string with minute, second or millisecond precision 
     - a unix timestamp (number representing the elapsed millisec since epoch)
 * **`time.timezone`** [*optional*, *default*=**None**]:
    Can be specified both as an offset (eg "UTC+03:00") or a regional zone (eg "Europe/Paris")
