@@ -455,7 +455,7 @@ Additional JMX metrics can be added using configuration files that are passed to
 
 ### Collecting JVM Metrics in Containerized Environments
 
-By default, JVM metrics from your Application are sent to the Datadog Agent over port 8125. If you are running the Agent as a container, ensure that DD_DOGSTATSD_NON_LOCAL_TRAFFIC [is set to true][6], and that port 8125 is open on the Agent. For example, in Kubernetes [bind the DogstatsD port to a host port][7], and in ECS you would have to [set the approriate flags in your task definition][8].
+By default, JVM metrics from your application are sent to the Datadog Agent over port 8125. If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][6], and that port 8125 is open on the Agent. For example: in Kubernetes, [bind the DogstatsD port to a host port][7]; in ECS, [set the approriate flags in your task definition][8].
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: https://github.com/DataDog/integrations-core/search?q=jmx_metrics&unscoped_q=jmx_metrics
