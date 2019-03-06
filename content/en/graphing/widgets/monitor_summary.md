@@ -64,7 +64,7 @@ MANAGE_STATUS_SCHEMA = {
 |`hide_zero_counts`|Boolean|no|Whether to show counts of 0 or not|
 |`title`|string|no|Title of the widget|
 |`title_size`|string|no|Size of the title|
-|`title_align`|string|no|How to align the title. Available values are: `center`, `left` or `right`
+|`title_align`|string|no|How to align the title. Available values are: `center`, `left`, or `right`
 
 
 ## Further Reading
