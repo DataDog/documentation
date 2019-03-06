@@ -4,10 +4,10 @@ kind: faq
 ---
 
 <div class="alert alert-danger">
-This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api/?lang=python#dashboards"> new Dashboard endpoint</a> instead.
+This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api/?lang=python#dashboards">new Dashboard endpoint</a> instead.
 </div>
 
-The Screenboard endpoint allows you to programmatically create, update delete and query Screenboards. [Find more about Screenboard][1].
+The Screenboard endpoint allows you to programmatically create, update, delete, and query Screenboards. [Read more about Screenboards][1].
 
 
 ## Create a Screenboard
@@ -253,14 +253,14 @@ curl -X PUT -H "Content-type: application/json" \
 
 ## Delete a Screenboard
 Delete an existing [Screenboard][1].
-*This end point takes no JSON arguments.*
+*This endpoint takes no JSON arguments.*
 
 
 ### Signature
 `DELETE https://api.datadoghq.com/api/v1/screen/<SCREEENBOARD_ID>`
 
 ### Arguments
-*This end point takes no JSON arguments.*
+*This endpoint takes no JSON arguments.*
 
 ### Examples
 
@@ -338,7 +338,7 @@ Fetch an existing Screenboard's definition.
 `GET https://api.datadoghq.com/api/v1/screen/<SCREEENBOARD_ID>`
 
 ### Arguments
-*This end point takes no JSON arguments.*
+*This endpoint takes no JSON arguments.*
 
 ### Examples
 
@@ -415,7 +415,7 @@ Fetch all of your [Screenboards][1]' definitions.
 `GET https://api.datadoghq.com/api/v1/screen`
 
 ### Arguments
-*This end point takes no JSON arguments.*
+*This endpoint takes no JSON arguments.*
 
 ### Examples
 
