@@ -68,7 +68,7 @@ ALERT_VALUE_SCHEMA = {
 | ------     | -----           | -----    | -----                                                                                                                                                        |
 | `type`     | string          | yes      | Type of the widget, for the alert value widget use `alert_value`|
 | `alert_id`     | string          | yes      | ID of the alert to use in the widget|
-| `precision`| integer| no| Number of decimal places to show. If not defined, will use the raw value|
+| `precision`| integer| no| Number of decimal places to show. If not defined, uses the raw value|
 | `unit`| string| no| Unit to display with the value|
 | `text_size`| string| no| Size of value in the widget|
 | `text_align`| string| no| How to align the value in the widget. Available values are: `left`, `center` or `right`|
