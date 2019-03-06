@@ -69,7 +69,7 @@ LOG_STREAM_SCHEMA = {
 |`columns`|array|no|Which columns to display on the widget|
 |`title`|string|no|Title of the widget|
 |`title_size`|string|no|Size of the title|
-|`title_align`|string|no|How to align the title. Available values are: `center`, `left` or `right`
+|`title_align`|string|no|How to align the title. Available values are: `center`, `left`, or `right`
 |`time`|object|no|Time setting for the widget. See the dedicated [Time JSON schema documentation][5] to learn how to build the `TIME_SCHEMA`
 
 
