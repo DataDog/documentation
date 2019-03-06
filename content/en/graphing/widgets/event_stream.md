@@ -62,10 +62,10 @@ EVENT_STREAM_SCHEMA = {
 | ------     | -----           | -----    | -----                                                                                                                                                        |
 | `type`| string|yes|Type of the widget, for the event stream widget use `event_stream`|
 |`query`|string|yes|Query to filter the event stream with|
-|`event_size`|string|no|Size to use to display an event (Small or Large). Available values are: `s` or `l`
+|`event_size`|string|no|Size to use to display an event (small or large). Available values are: `s` or `l`
 |`title`|string|no|Title of the widget|
 |`title_size`|string|no|Size of the title|
-|`title_align`|string|no|How to align the title. Available values are: `center`, `left` or `right`
+|`title_align`|string|no|How to align the title. Available values are: `center`, `left`, or `right`
 |`time`|object|no|Time setting for the widget. See the dedicated [Time JSON schema documentation][3] to learn how to build the `TIME_SCHEMA`
 
 
