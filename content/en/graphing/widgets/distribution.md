@@ -74,7 +74,7 @@ DISTIBUTION_SCHEMA = {
 | Parameter  | Type            | Required | Description                                                                                                                                                  |
 | ------     | -----           | -----    | -----                                                                                                                                                        |
 | `type`     | string          | yes      | Type of widget, for the distribution widget use `distribution`.                                                                                                 |
-| `requests` | array of object | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
+| `requests` | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
 | `title`    | string          | no       | Title of your widget.                                                                                                                                        |
 
 
