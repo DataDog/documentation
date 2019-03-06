@@ -70,12 +70,12 @@ TRACE_SERVICE_SCHEMA = {
 |`env`|string|yes|APM environment|
 |`service`|string|yes|APM service|
 |`span_name`|string|yes|APM span name|
-|`show_hits`|boolean|no|Whether to show the hits metrics or not|
-|`show_errors`|boolean|no|Whether to show the error metrics or not|
-|`show_latency`|boolean|no|Whether to show the latency metrics or not|
-|`show_breakdown`|boolean|no|Whether to show the latency breakdown or not|
-|`show_distribution`|boolean|no|Whether to show the latency distribution or not|
-|`show_resource_list`|boolean|no|Whether to show the resource list or not|
+|`show_hits`|Boolean|no|Whether to show the hits metrics or not|
+|`show_errors`|Boolean|no|Whether to show the error metrics or not|
+|`show_latency`|Boolean|no|Whether to show the latency metrics or not|
+|`show_breakdown`|Boolean|no|Whether to show the latency breakdown or not|
+|`show_distribution`|Boolean|no|Whether to show the latency distribution or not|
+|`show_resource_list`|Boolean|no|Whether to show the resource list or not|
 |`size_format`|string|no|Size of the widget. Available values are: `small`, `medium` or `large`
 |`display_format`|string|no|Number of columns to display. Available values are: `one_column`, `two_column` or `three_column`
 |`title`|string|no|Title of the widget|
