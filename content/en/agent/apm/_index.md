@@ -128,10 +128,14 @@ In `datadog.conf`, add `[trace.analyzed_spans]`. For example:
 
 {{% /tab %}}
 {{% tab "Docker" %}}
-Add `DD_APM_ANALYZED_SPANS` to the Agent container environment (compatible with version 12.6.5250+). For example:
+Add `DD_APM_ANALYZED_SPANS` to the Agent container environment (compatible with version 12.6.5250+). Format should be a comma-separated regular expressions without spaces. For example:
 
 ```
 DD_APM_ANALYZED_SPANS="<SERVICE_NAME_1>|<OPERATION_NAME_1>=1,<SERVICE_NAME_2>|<OPERATION_NAME_2>=1"
+```
+
+```
+`my-express-app|express.request=1,my-dotnet-app|aspnet_core_mvc.request=1`
 ```
 
 {{% /tab %}}
