@@ -39,7 +39,7 @@ En ce sens, les notebooks rassemblent les caractéristiques de deux types de das
 
 Les métriques d'un notebook sont représentées graphiquement à l'aide de l'éditeur de requête standard qui s'affiche dans Datadog. Les notebooks prennent en charge trois types de visualisations : les séries temporelles, les cartes thermiques et les distributions.
 
-Comme dans le Metrics Explorer, vous pouvez comparer une métrique entre différents groupes de votre infrastructure. Par exemple, si les données d'une métrique sont transmises pour plusieurs hôtes, un notebook vous permet de générer des graphiques séparés qui affichent le comportement de la métrique sur chaque hôte.
+Comme dans le Metrics Explorer, vous pouvez comparer une métrique entre différents groupes de votre infrastructure. Par exemple, si les données d'une métrique sont transmises pour plusieurs hosts, un notebook vous permet de générer des graphiques séparés qui affichent le comportement de la métrique sur chaque host.
 
 Le texte d'un notebook bénéficie du format Markdown. Cela signifie que les notebooks peuvent inclure des titres, des sous-titres, des liens, des images, des listes à puces et numérotées et des blocs de code.
 
@@ -54,7 +54,7 @@ Lorsque vous ouvrez un notebook existant, ses cellules sont « fermées ». Po
 Pour insérer, dupliquer ou supprimer des cellules, cliquez sur l'icône en forme d'engrenage qui apparaît à gauche du numéro de cellule, ou utilisez un raccourci clavier. Accédez à liste de tous les raccourcis clavier en cliquant sur le bouton du clavier dans l'en-tête du notebook.
 Les cellules peuvent également être réorganisées en utilisant des raccourcis clavier.
 
-### Modification des intervalles de temps 
+### Modification des intervalles de temps
 
 Un indicateur de durée apparaît dans le coin supérieur droit de chaque cellule de graphique. Si la cellule est associée à l'intervalle de temps global, elle indique « Global Time ». Dans le cas contraire, elle précise l'intervalle de temps indépendant de la cellule.
 

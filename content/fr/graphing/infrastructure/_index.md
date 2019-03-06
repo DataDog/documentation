@@ -62,7 +62,8 @@ résultat correspondant est sélectionné.
  3. `instance-id` : si l'Agent peut atteindre l'endpoint de métadonnées EC2 à partir du host.
  4. `hostname` : revient au hostname du DNS, même s'il n'est pas défini sur EC2 par défaut.
 
-Si le nom n'est manifestement pas unique (p. ex. `localhost.localdomain`), la règle actuelle échoue et la règle suivante est appliquée.
+Si le nom n'est manifestement pas unique (p. ex. `localhost.localdomain`),
+la règle actuelle échoue et la règle suivante est appliquée.
 
 **Remarque** : si une instance EC2 est un host ECS, Datadog utilise `instance-id` comme hostname, [même si le hostname du DNS n'est pas défini sur EC2 par défaut][2]. Si vous ne souhaitez pas utiliser l'`instance-id`, définissez le hostname dans le fichier de configuration de l'Agent.
 

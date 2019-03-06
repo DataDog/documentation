@@ -294,19 +294,14 @@ if (null !== $span) {
 
 **Adding tags globally to all spans**
 
-Not supported with automatic instrumentation.
+Use the environment variable `DD_TRACE_GLOBAL_TAGS` to add tags to all the generated spans. See the [PHP configuration][1]
+section for details on how environment variables should be set.
 
-Manual instrumentations of the tracer can set an associative array of global tags via the `global_tags` configuration key.
-
-```php
-$config = [
-    'global_tags' => [
-        '<TAG_KEY>' => '<TAG_VALUE>',
-    ]
-];
-$tracer = new \DDTrace\Tracer(null, null, $config);
-\DDTrace\GlobalTracer::set($tracer);
+```ini
+DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
 ```
+
+[1]: /tracing/languages/php/#configuration
 
 {{% /tab %}}
 {{% tab "C++" %}}
@@ -422,6 +417,94 @@ The PHP tracer automatically looks for and initializes with the ENV variables `D
 putenv('DD_AGENT_HOST=localhost');
 putenv('DD_TRACE_AGENT_PORT=8126');
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Runtime Metrics
+
+Enable runtime metrics collection in the tracing client to gain additional insight into an application's performance. Runtime metrics can be viewed in the context of a service, correlated in the Trace View at the time of a given request, and utilized anywhere in the platform.
+
+{{< img src="tracing/jvm_runtime_trace.png" alt="JVM Runtime Trace" responsive="true" style="width:100%;">}}
+
+{{< tabs >}}
+{{% tab "Java" %}}
+
+### Automatic Configuration
+
+JVM metrics collection can be enabled with one configuration parameter in the tracing client:
+
+* System Property: `-Ddd.jmxfetch.enabled=true`
+* Environment Variable: `DD_JMXFETCH_ENABLED=true`
+
+JVM metrics can be viewed in correlation with your Java services. You can get started [here][1]. 
+
+{{< img src="tracing/jvm-runtime.png" alt="JVM Runtime" responsive="true" style="width:100%;">}}
+
+**Note**: For the runtime UI, `dd-trace-java` >= [`0.24.0`][5] is supported.   
+
+### Data Collected
+
+The following metrics are collected by default after enabling JVM metrics.
+
+{{< get-metrics-from-git "java" >}}
+
+Along with displaying these metrics in your APM Service Page, Datadog provides a [default JVM Runtime Dashboard][4] with the `service` and `runtime-id` tags that are applied to these metrics. 
+
+Additional JMX metrics can be added using configuration files that are passed to `jmxfetch.metrics-configs`. You can also enable existing Datadog JMX integrations individually with the `dd.integration.<name>` parameter. This auto-embeds configuration from Datadog's [existing JMX configuration files][2]. See the [JMX Integration][3] for further details on configuration. 
+
+### Collecting JVM Metrics in Containerized Environments
+
+By default, JVM metrics from your application are sent to the Datadog Agent over port 8125. If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][6], and that port 8125 is open on the Agent. For example: in Kubernetes, [bind the DogstatsD port to a host port][7]; in ECS, [set the approriate flags in your task definition][8].
+
+[1]: https://app.datadoghq.com/apm/services
+[2]: https://github.com/DataDog/integrations-core/search?q=jmx_metrics&unscoped_q=jmx_metrics
+[3]: /integrations/java/#configuration
+[4]: https://app.datadoghq.com/dash/integration/256/jvm-runtime-metrics
+[5]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.0
+[6]: https://docs.datadoghq.com/agent/docker/#dogstatsd-custom-metrics
+[7]: https://docs.datadoghq.com/agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[8]: https://docs.datadoghq.com/integrations/amazon_ecs/?tab=python#create-an-ecs-task
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
+{{% /tab %}}
+{{% tab "Go" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -635,33 +718,53 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 
 [1]: /tracing/languages/dotnet/#compatibility
 {{% /tab %}}
+
 {{% tab "PHP" %}}
 
-If you aren’t using a [framework supported by automatic instrumentation][1], manually instrument your code.
+Even if Datdog does not officially support your web framework, you may not need to perform any manual instrumentation. See [automatic instrumentation][1] for more details.
 
-First install the PHP tracer dependency with Composer:
+If you really need manual instrumentation, e.g., because you want to trace specific custom methods in your application, first install the PHP tracer dependency with Composer:
 
 ```bash
 $ composer require datadog/dd-trace
 ```
 
-Then use the PHP tracer bootstrap to initialize the global tracer and create a root span to start the trace:
+#### Trace a custom function or method
+
+The `dd_trace()` function hooks into existing functions and methods to:
+
+* Open a span before the code executes
+* Set additional tags or errors on the span
+* Close the span when it is done
+* Modify the arguments or the return value
+
+For example, the following snippet traces the `CustomDriver::doWork()` method, adds custom tags, reports any exceptions as errors on the span, and then re-throws the exceptions.
 
 ```php
-// The existing Composer autoloader
-require __DIR__ . '/../vendor/autoload.php';
+dd_trace("CustomDriver", "doWork", function (...$args) {
+    // Start a new span
+    $scope = GlobalTracer::get()->startActiveSpan('CustomDriver.doWork');
+    $span = $scope->getSpan();
 
-// Add the PHP tracer bootstrap
-require __DIR__ . '/../vendor/datadog/dd-trace/bridge/dd_init.php';
+    // Access object members via $this
+    $span->setTag(Tags\RESOURCE_NAME, $this->workToDo);
 
-$span = \DDTrace\GlobalTracer::get()
-    ->startRootSpan('web.request')
-    ->getSpan();
-$span->setResource($_SERVER['REQUEST_URI']);
-$span->setTag(\DDTrace\Tag::SPAN_TYPE, \DDTrace\Type::WEB_SERVLET);
-$span->setTag(\DDTrace\Tag::HTTP_METHOD, $_SERVER['REQUEST_METHOD']);
-
-// Run the app here...
+    try {
+        // Execute the original method
+        $result = $this->doWork(...$args);
+        // Set a tag based on the return value
+        $span->setTag('doWork.size', count($result));
+        return $result;
+    } catch (Exception $e) {
+        // Inform the tracer that there was an exception thrown
+        $span->setError($e);
+        // Bubble up the exception
+        throw $e
+    } finally {
+        // Close the span
+        $span->finish();
+    }
+});
 ```
 
 The root span an be accessed later on directly from the global tracer via `Tracer::getRootScope()`. This is useful in contexts where the metadata to be added to the root span does not exist in early script execution.
@@ -673,8 +776,30 @@ $rootSpan = \DDTrace\GlobalTracer::get()
 $rootSpan->setTag(\DDTrace\Tag::HTTP_STATUS_CODE, 200);
 ```
 
+#### Zend Framework 1 manual instrumentation
 
-[1]: /tracing/languages/php/#framework-compatibility
+Zend Framework 1 is automatically instrumented by default, so you are not required to modify your ZF1 project. However, if automatic instrumentation is disabled, enable the tracer manually.
+
+First, [download the latest source code from the releases page][2]. Extract the zip file and copy the `src/DDTrace` folder to your application's `/library` folder. Then add the following to your `application/configs/application.ini` file:
+
+```ini
+autoloaderNamespaces[] = "DDTrace_"
+pluginPaths.DDTrace = APPLICATION_PATH "/../library/DDTrace/Integrations/ZendFramework/V1"
+resources.ddtrace = true
+```
+
+#### Manual instrumentation and php code optimization
+
+Prior to PHP 7, some frameworks provided ways to compile PHP classes—e.g., through the Laravel's `php artisan optimize` command.
+
+While this [has been deprecated][3] if you are using PHP 7.x, you still may use this caching mechanism in your app prior to version 7.x. In this case, Datadog suggests you use the [OpenTracing][4] API instead of adding `datadog/dd-trace` to your Composer file.
+
+
+[1]: /tracing/languages/php/#automatic-instrumentation
+[2]: https://github.com/DataDog/dd-trace-php/releases/latest
+[3]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
+[4]: #opentracing
+
 {{% /tab %}}
 {{% tab "C++" %}}
 
@@ -1481,6 +1606,10 @@ another_span->SetTag("sampling.priority", 0); // Discard this span.
 
 The correlation between Datadog APM and Datadog Log Management is improved by automatically adding a `trace_id` and `span_id` in your logs with the Tracing Libraries. This can then be used in the platform to show you the exact logs correlated to the observed trace.
 
+Before correlating traces with logs, ensure your logs are either [sent as JSON][6], or [parsed by the proper language level log processor][7]. 
+
+Your language level logs *must* be turned into Datadog attributes in order for traces and logs correlation to work.
+
 {{< img src="tracing/trace_id_injection.png" alt="Logs in Traces" responsive="true" style="width:100%;">}}
 
 {{< tabs >}}
@@ -2025,19 +2154,13 @@ var tracer = Datadog.Trace.Tracer.Create(isDebugEnabled: true);
 Debug mode is disabled by default. To enable it, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][1] for details about how and when this environment variable value should be set in order
 to be properly handled by the tracer.
 
-**Application Logs**:
+In order to tell PHP where it should put `error_log` messages, you can either set it at the server level, or as a PHP `ini` parameter, which is the standard way to configure PHP behavior.
 
-By default, logging from the PHP tracer is disabled. In order to get debugging information and errors sent to logs,
-set a [PSR-3 logger][2] singleton.
+If you are using an Apache server, use the `ErrorLog` directive.
+If you are using an NGINX server, use the `error_log` directive.
+If you are configuring instead at the PHP level, use PHP's `error_log` ini parameter.
 
-```php
-\DDTrace\Log\Logger::set(
-    new \DDTrace\Log\PsrLogger($logger)
-);
-```
-
-
-[1]: 
+[1]: http://php.net/manual/en/install.php
 [2]: https://www.php-fig.org/psr/psr-3
 {{% /tab %}}
 {{% tab "C++" %}}
@@ -2134,3 +2257,5 @@ apm_config:
 [3]: http://opentracing.io
 [4]: #priority-sampling
 [5]: /tracing/getting_further/trace_sampling_and_storage
+[6]: /logs/log_collection/?tab=tailexistingfiles#send-your-application-logs-in-json
+[7]: /logs/log_collection/?tab=tailexistingfiles#enabling-log-collection-from-integrations

@@ -1,7 +1,7 @@
 ---
 title: Heat Map Widget
 kind: documentation
-description: Build temporal heat map over a given metric.
+description: "Build temporal heat map over a given metric."
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"
@@ -9,6 +9,9 @@ further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"
   text: "Screenboard"
+- link: "graphing/graphing_json/"
+  tag: "Documentation"
+  text: "Building Dashboard using JSON"
 ---
 
 The heat map visualization shows metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square is.
@@ -60,9 +63,65 @@ The following configuration options are available:
 
 **Note**: Because the mathematical log function doesn't accept negative values, the Datadog log scale only works if values are of the same sign (everything > 0 or everything < 0). Otherwise an empty graph is returned.
 
+## API
+
+The dedicated [widget JSON schema definition][3] for the heat map widget is:
+
+```
+HEATMAP_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "type": {"enum": ["heatmap"]},
+        "requests": {
+            "type":     "array",
+            "items":    REQUEST_SCHEMA,
+            "minItems": 1,
+            "maxItems": 1
+        },
+        "yaxis":  AXIS_SCHEMA,
+        "events": EVENTS_SCHEMA,
+        "title": {"type": "string"}
+    },
+    "required": ["type", "requests"],
+    "additionalProperties": false
+}
+```
+
+| Parameter  | Type            | Required | Description                                                                                                                                                  |
+| ------     | -----           | -------- | -----                                                                                                                                                        |
+| `type`     | string          | yes      | Type of widget, for the heat map widget use `heatmap`                                                                                                       |
+| `requests` | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][4] to learn how to build the `REQUEST_SCHEMA`. |
+| `yaxis`    | object          | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][5] to learn how to build the `<AXIS_SCHEMA>`.                                   |
+| `events`   | object          | no       | Event overlay control options. See the dedicated [Events JSON schema documentation][6] to learn how to build the `<EVENTS_SCHEMA>`                           |
+| `title`    | string          | no       | Title of your widget.                                                                                                                                        |
+
+
+Additional properties allowed in the `requests` object:
+
+```json
+{
+  "style": {
+    "type": "object",
+    "properties": {
+      "palette": {"type": "string"},
+    },
+    "additionalProperties": false
+  }
+}
+```
+
+| Parameter       | Type   | Required | Description                           |
+| ------          | -----  | -------- | ----                                  |
+| `style.palette` | string | no       | Color palette to apply to the widget. |
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing/event_stream
 [2]: /graphing/dashboards/template_variables
+[3]: /graphing/graphing_json/widget_json
+[4]: /graphing/graphing_json/request_json
+[5]: /graphing/graphing_json/widget_json/#y-axis-schema
+[6]: /graphing/graphing_json/widget_json/#events-schema

@@ -11,7 +11,7 @@ aliases:
 Vous pouvez affiner votre recherche en filtrant certaines propriétés d'événement. Consultez la liste des filtres ci-dessous pour obtenir plus de détails.
 Attention : les filtres effectuent une recherche de correspondance exacte et ne fonctionnent pas avec des chaînes de caractères partielles.
 
-| Filtres                                            | Description                                                                              |
+| Filtre                                            | Description                                                                              |
 | --------                                          | -------------                                                                            |
 | `user:pup@datadoghq.com`                          | Trouve tous les événements avec des commentaires publiés par pup@datadoghq.com.                                      |
 | `sources:github,chef`                             | Affiche les événements provenant de GitHub OU Chef.                                                         |
@@ -91,7 +91,7 @@ Notez que le titre de l'événement correspond à l'objet de l'e-mail et que le 
 #### E-mail source
 
 Vous disposez dans l'e-mail au format JSON de 10 champs contrôlables : « sender email address » et jusqu'à 9 clés JSON : title, text, priority, tags, alert type, data happened, host, aggregation key et source type name.
-**Remarque : si votre fichier JSON n'est pas correctement formaté, ou si votre e-mail est envoyé avec un objet, l'événement n'apparaîtra pas dans votre flux d'événements.**
+**Remarque : si votre fichier JSON n'est pas correctement mis en forme, ou si votre e-mail est envoyé avec un objet, l'événement n'apparaîtra pas dans votre flux d'événements.**
 
 {{< img src="graphing/events/json-email.png" alt="e-mail json" responsive="true" >}}
 
@@ -99,7 +99,7 @@ Vous disposez dans l'e-mail au format JSON de 10 champs contrôlables : « se
 
 {{< img src="graphing/events/json-event.png" alt="événement json" responsive="true" >}}
 
-Dans un e-mail au format JSON, l'objet de l'e-mail n'est pas pertinent, car il est remplacé par le titre du JSON dans le corps de l'e-mail. Toutes les données qui apparaissent dans l'événement sont définies dans le JSON du corps de l'e-mail. Ce JSON doit être bien formaté, sans quoi le message est ignoré. Cela signifie qu'il doit non seulement inclure des paires clé/valeur séparées par des virgules, mais également être uniquement composé de JSON.
+Dans un e-mail au format JSON, l'objet de l'e-mail n'est pas pertinent, car il est remplacé par le titre du JSON dans le corps de l'e-mail. Toutes les données qui apparaissent dans l'événement sont définies dans le JSON du corps de l'e-mail. Ce JSON doit être bien mis en forme, sans quoi le message est ignoré. Cela signifie qu'il doit non seulement inclure des paires key/value séparées par des virgules, mais également être uniquement composé de JSON.
 Si vous testez un e-mail avec un client de messagerie standard, le corps peut être converti en HTML pour améliorer la lecture du destinataire. Cela engendre une altération du format JSON. L'e-mail est donc ignoré par Datadog.
 
 Les clés JSON admissibles se trouvent dans la [documentation relative à l'API des événements][3].
@@ -121,7 +121,7 @@ Voici un exemple :
 ```json
 {
       "title": "Vous avez entendu la nouvelle ?",
-      "text": "%%% \n [an example link](http://catchpoint.com/session_id \"Title\") \n %%%",
+      "text": "%%% \n [un exemple de lien](http://catchpoint.com/session_id \"Title\") \n %%%",
       "priority": "normal",
       "tags": ["environment:test"],
       "alert_type": "info"
@@ -140,8 +140,8 @@ Doit être encodée afin d'obtenir l'URL : `http://catchpoint.com/session_id%3
 * `@all` : envoie une notification à tous les membres de votre organisation.
 * `@nomdonné` : envoie une notification à l'utilisateur 'nomdonné'.
 * `@test@exemple.com` envoie un e-mail à `test@exemple.com`.
-* Si vous échangez sur HipChat, Slack, Webhooks, Pagerduty ou VictorOps, utilisez :
-    * `@hipchat-[nom-room]` ou `@slack-[nom-room]` : affiche l'événement ou le graphique dans cette room de conversation.
+* Si vous échangez sur Slack, Webhooks, Pagerduty ou VictorOps, utilisez :
+    * `@slack-[nom-room]` : affiche l'événement ou le graphique dans cette room de conversation.
     * `@webhook` : déclenche une alerte ou prévient l'élément associé à ce webhook. Consultez [notre article de blog sur les webhooks][6].
     * `@pagerduty` : envoie une alerte à Pagerduty. Vous pouvez également utiliser `@pagerduty-acknowledge` et `@pagerduty-resolve`.
 

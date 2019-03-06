@@ -6,6 +6,6 @@ external_redirect: /api/#screenboards
 ---
 ## Screenboards
 
-This endpoint allows you to programmatically create, update delete and query Screenboards. [Find more about Screenboard][1].
-
-[1]: /graphing/dashboards/screenboard
+<div class="alert alert-danger">
+    This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api/#dashboards">new Dashboard endpoint</a> instead.
+</div>

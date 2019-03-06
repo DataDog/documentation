@@ -49,8 +49,14 @@ This is for a [FreeSwitch ESL][11] application to export statistics to Datadog u
 You can get data into Datadog from Google Analytics via the Datadog API with [this library][13] from [Bithaus][14].
 
 ### Heroku
+Heroku emits dyno metrics via logs. To convert these logs into metrics and send them to Datadog, use one of the following log drains. To send your Heroku logs to Datadog, see [the documentation][41].
+
   * [Heroku Datadog Log Drain][37] written in Nodejs by [Oz][38].
   * [Heroku Datadog Log Drain][39] written in Go by [Apiary][40].
+
+
+### Jira
+A [tool][42] to poll data from Jira and upload it as metrics to Datadog.
 
 ### Logstash Output
   * [Logstash Output for Datadog][15]
@@ -137,3 +143,5 @@ If you've written a Datadog library and would like to add it to this page, send 
 [38]: https://corp.oz.com/
 [39]: https://github.com/apiaryio/heroku-datadog-drain-golang
 [40]: https://apiary.io/
+[41]: /logs/guide/collect-heroku-logs
+[42]: https://github.com/evernote/jiradog

@@ -1,7 +1,7 @@
 ---
 title: Send traces
 type: apicode
-order: 22.1
+order: 23.1
 external_redirect: /api/#send-traces
 ---
 
@@ -15,4 +15,3 @@ external_redirect: /api/#send-traces
 ##### Example Response
 
 {{< code-snippets basename="result.send_trace" >}}
-

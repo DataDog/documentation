@@ -635,8 +635,8 @@ $(document).ready(function () {
         }
     }
 
-    // Hash menu item
-    $(".sidenav-nav a").click(function(){
+    // For sidenav links with anchor tag refs
+    $(".sidenav-nav a[href^='#']").click(function(){
         moveToAnchor($(this).attr('href').substr(1), true);
     });
 

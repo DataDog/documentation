@@ -12,7 +12,7 @@ further_reading:
     tag: Centre d'apprentissage
     text: Améliorer vos dashboards
 ---
-Les graphiques vous permettent de visualiser vos systèmes surveillés. Vous pouvez les consulter sur Datadog, dans des e-mails de notification, sur Slack, sur HipChat ou dans tout autre client de messagerie. Les graphiques font partie intégrante de la surveillance et de l'observabilité. Il est donc essentiel de bien comprendre comment créer des graphiques.
+Les graphiques vous permettent de visualiser vos systèmes surveillés. Vous pouvez les consulter sur Datadog, dans des e-mails de notification, sur Slack ou dans tout autre client de messagerie. Les graphiques font partie intégrante de la surveillance et de l'observabilité. Il est donc essentiel de bien comprendre comment créer des graphiques.
 
 ## L'éditeur de graphiques
 
@@ -36,11 +36,10 @@ Pour configurer un graphique, vous devez suivre plusieurs étapes :
 
 1. [Choisir la métrique à représenter](#choose-the-metric-to-graph)
 2. [Sélectionner la visualisation](#select-your-visualization)
-3. [Filtrer](#filter)
+3. [Filtre](#filter)
 4. [Agréger et cumuler des données](#aggregate-and-rollup)
 5. [Appliquer des fonctions supplémentaires](#advanced-graphing)
-6. [Améliorer le graphique](#graphs-enhancement)
-7. [Donner un titre au graphique](#create-a-title)
+6. [Donner un titre au graphique](#create-a-title)
 
 ## Choisir la métrique à représenter
 
@@ -52,31 +51,7 @@ La page Metrics Explorer vous permet de jouer avec différents paramètres graph
 
 Une fois que vous avez choisi une métrique à représenter dans votre graphique, sélectionnez votre visualisation. Consultez la [liste de toutes les visualisations (widgets)][5].
 
-### Apparence
-
-Vous pouvez créer des graphiques en aires, à barres ou linéaires. Pour tous les types de graphiques, Datadog propose de nombreuses options en matière de couleurs pour différentier les diverses métriques affichées sur un même graphique :
-
-| Palette | Description                                                                                              |
-|---------|----------------------------------------------------------------------------------------------------------|
-| Classic | Les couleurs simples : bleu clair, bleu foncé, violet clair, violet, jaune clair et jaune (les couleurs se répètent). |
-| Cool    | Un dégradé de couleurs composé de tons bleus et verts.                                                        |
-| Warm    | Un dégradé de couleurs composé des tons jaunes et orange.                                                     |
-| Purple  | Un dégradé de couleurs composé de tons violets.                                                                |
-| Orange  | Un dégradé de couleurs composé de tons orange.                                                                |
-| Gray    | Un dégradé de couleurs composé de tons gris.                                                                  |
-
-Pour les graphiques linéaires, vous pouvez attribuer des palettes à différentes métriques en séparant les requêtes avec le format JSON.
-
-#### Graphiques linéaires
-
-Les graphiques linéaires comprennent deux paramètres supplémentaires :
-
-| Paramètre | Options               |
-|-----------|-----------------------|
-| Style     | Uni, tirets ou pointillé |
-| Stroke    | Normal, fin, épais   |
-
-## Filtrer
+## Filtre
 
 Maintenant que votre métrique et votre visualisation sont prêtes, vous pouvez filtrer les hosts à représenter graphiquement. À droite de la métrique se trouve la liste déroulante **from**. Sa valeur par défaut est *(everywhere)*. Cliquez dessus et choisissez le ou les tags que vous souhaitez utiliser pour filtrer les données. Pour en savoir plus sur les tags, consultez la [documentation relative au tagging][6].
 
@@ -139,51 +114,9 @@ Pour afficher uniquement votre formule, désélectionnez vos métriques **a** et
 
 **Remarque** : les formules ne sont pas représentées par des lettres. Vous ne pouvez donc pas effectuer d'opérations arithmétiques entre plusieurs formules.
 
-## Amélioration des graphiques
-
-### Alias de métrique
-
-Chaque requête ou formule peut avoir un alias. L'alias remplace le nom sur le graphique et la légende, ce qui est utile pour les longs noms de métrique. À la fin de la requête/formule, cliquez sur **as...**, puis saisissez votre alias de métrique :
-
-{{< img src="graphing/index/metric_alias.png" alt="Alias de métrique" responsive="true" style="width:75%;" >}}
-
-### Définir l'échelle de l'axe des ordonnées
-
-Les commandes de l'axe des ordonnées de Datadog sont disponibles via l'interface utilisateur et l'éditeur JSON. Grâce à ces commandes, vous pouvez :
-
-* Régler l'axe des ordonnées sur un intervalle donné
-* Supprimer les singularités en spécifiant un pourcentage ou une valeur absolue
-* Changer l'échelle de l'axe des coordonnées afin de passer d'une échelle linéaire à une échelle logarithmique, racine carrée ou puissance.
-
-Modifiez l'échelle de l'axe des ordonnées en développant **Y-Axis Controls** :
-
-{{< img src="graphing/index/y_axis_control.png" alt="commande axe des ordonnées" responsive="true" style="width:75%;" >}}
-
-Les options de configuration suivantes sont disponibles :
-
-| Option                | Obligatoire | Description                                                                                                                                                                                                       |
-|-----------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Min`/`Max`           | Non       | Spécifiez la valeur minimale (et/ou maximale) à afficher sur l'axe des ordonnées. Indiquez un nombre ou `Auto` en tant que valeur par défaut.                                                                                                   |
-| `Scale`               | Non       | Spécifie le type d'échelle. Valeurs autorisées :<br>- *linear* : une échelle linéaire (échelle par défaut).<br>- *log* : une échelle logarithmique<br>- *pow* : une échelle exprimée en puissance de 2. La valeur par défaut est 2, mais celle-ci peut être modifiée dans l'éditeur JSON.<br>- *sqrt* : une échelle exprimée sous la forme d'une racine carrée. |
-| `Always include zero` | Non       | Inclut toujours le zéro ou ajuste l'axe à la plage de données. Par défaut, le zéro est toujours inclus.                                                                                                                     |
-
-**Remarque** : comme la fonction log mathématique n'accepte pas les valeurs négatives, notre échelle log ne fonctionne que si les valeurs ont le même signe (tout > 0 ou tout < 0). Si ce n'est pas le cas, un graphique vide s'affiche.
-
-### Superposer des événements pour gagner en contexte
-
-Ajoutez des événements de systèmes associés pour ajouter plus de contexte à votre graphique. Par exemple, vous pouvez ajouter des commits Github, des déploiements Jenkins ou des événements de création Docker. Développez la section **Event Overlays** et saisissez une requête pour afficher ces événements. Utilisez le même format de requête que pour [le flux d'événements][8], par exemple :
-
-| Requête                       | Description                                                |
-|-----------------------------|------------------------------------------------------------|
-| `sources:jenkins`           | Affiche tous les événements provenant de la source Jenkins.                  |
-| `tag:role:web`              | Affiche tous les événements dotés du tag `role:web`.                  |
-| `tags:$<VARIABLE_MODÈLE>` | Affiche tous les événements provenant du [template variable][9] sélectionné. |
-
-{{< img src="graphing/index/overlay_events.png" alt="Superposer des événements" responsive="true" style="width:75%;" >}}
-
 ## Créer un titre
 
-Si vous ne saisissez pas de titre, nous générons automatiquement un titre en fonction de vos sélections. Cependant, il peut être plus utile pour les utilisateurs du [dashboard][10] de créer un titre qui décrit plus précisément le but du graphique. Associez l'objectif technique aux avantages opérationnels pour optimiser davantage votre graphique.
+Si vous ne saisissez pas de titre, nous en générons un automatiquement en fonction de vos sélections. Nous vous recommandons toutefois de créer un titre qui décrit précisément l'objectif du graphique.
 
 ## Enregistrer
 
@@ -197,9 +130,7 @@ Cliquez sur **Done** pour enregistrer votre travail et quitter l'éditeur. Vous 
 [2]: https://app.datadoghq.com/metric/explorer
 [3]: https://app.datadoghq.com/notebook/list
 [4]: https://app.datadoghq.com/metric/summary
-[5]: /fr/graphing/dashboards/widgets
+[5]: /fr/graphing/widgets
 [6]: /fr/tagging
 [7]: /fr/graphing/functions/#apply-functions-optional
-[8]: /fr/graphing/event_stream
-[9]: /fr/graphing/dashboards/template_variables
-[10]: /fr/graphing/dashboards
+[8]: /fr/graphing/dashboards

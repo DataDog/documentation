@@ -1,7 +1,7 @@
 ---
 title: Get hourly usage for custom metrics
 type: apicode
-order: 23.3
+order: 24.3
 external_redirect: /api/#get-hourly-usage-for-custom-metrics
 ---
 

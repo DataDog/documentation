@@ -1,7 +1,7 @@
 ---
 title: Get top 500 custom metrics by hourly average
 type: apicontent
-order: 23.4
+order: 24.4
 external_redirect: /api/#get-top-500-custom-metrics-by-hourly-average
 ---
 

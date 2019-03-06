@@ -77,8 +77,8 @@ Les intégrations connexes comprennent :
 ## Implémentation
 ### Installation
 
-La configuration de l'intégration de Datadog à Amazon Web Services nécessite la configuration de la délégation de rôles à l'aide d'AWS IAM. 
-Pour mieux comprendre le principe de délégation des rôles, reportez-vous au [guide des meilleures pratiques d'AWS IAM][44].
+La configuration de l'intégration de Datadog à Amazon Web Services nécessite la configuration de la délégation de rôles à l'aide d'AWS IAM. Pour mieux comprendre
+le principe de délégation des rôles, reportez-vous au [guide des meilleures pratiques d'AWS IAM][44].
 
 <div class="alert alert-warning">
 Les régions GovCloud et Chine ne prennent actuellement pas en charge la délégation de rôle IAM. Si vous effectuez un déploiement dans ces régions, passez directement à la <a href="#configuration">section Configuration</a> ci-dessous.

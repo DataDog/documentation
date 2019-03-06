@@ -1,7 +1,7 @@
 ---
 title: Get hourly usage for logs
 type: apicode
-order: 23.2
+order: 24.2
 external_redirect: /api/#get-hourly-usage-for-logs
 ---
 
