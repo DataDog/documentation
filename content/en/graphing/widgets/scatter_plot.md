@@ -74,7 +74,7 @@ SCATTERPLOT_SCHEMA = {
 | `requests`        | object          | yes      | A `requests` object to display in the widget. See the dedicated [Request JSON schema documentation][2] to learn how to build the `REQUEST_SCHEMA`. |
 | `yaxis`           | object          | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][3] to learn how to build the `AXIS_SCHEMA`.                           |
 | `xaxis`           | object          | no       | Y-axis control options. See the dedicated [X-axis JSON schema documentation][3] to learn how to build the `AXIS_SCHEMA`.                           |
-| `color_by_groups` | array of string | no       | List of groups used for colors.                                                                                                                    |
+| `color_by_groups` | array of strings | no       | List of groups used for colors.                                                                                                                    |
 | `title`           | string          | no       | Title of your widget.                                                                                                                              |
 
 Additional properties allowed in the `request` object:
