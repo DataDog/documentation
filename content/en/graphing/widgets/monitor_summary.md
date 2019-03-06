@@ -61,7 +61,7 @@ MANAGE_STATUS_SCHEMA = {
 |`query`|string|yes|Query to filter the monitors with|
 |`display_format`|string|no|What to display on the widget. Available values are: `counts`, `countsAndList` or `list`
 |`color_preference`|string|no|Which color to use on the widget. Available values are:`background` or `text`
-|`hide_zero_counts`|boolean|no|Whether to show counts of 0 or not|
+|`hide_zero_counts`|Boolean|no|Whether to show counts of 0 or not|
 |`title`|string|no|Title of the widget|
 |`title_size`|string|no|Size of the title|
 |`title_align`|string|no|How to align the title. Available values are: `center`, `left` or `right`
