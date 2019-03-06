@@ -55,10 +55,10 @@ NOTE_SCHEMA = {
 |`content`|string|yes|Content of the note|
 |`background_color`|string|no|Background color of the note|
 |`font_size`|string|no|Size of the text|
-|`text_align`|string|no|How to align the text on the widget. Available values are: `center`, `left` or `right`
+|`text_align`|string|no|How to align the text on the widget. Available values are: `center`, `left`, or `right`
 |`show_tick`|Boolean|no|Whether to show a tick or not
 |`tick_pos`|string|no|Where to position the tick on an edge
-|`tick_edge`|string|no|Edge on which the tick will be displayed. Available values are: `bottom`, `left`, `right` or `top`
+|`tick_edge`|string|no|Edge on which the tick will be displayed. Available values are: `bottom`, `left`, `right`, or `top`
 
 
 ## Further Reading
