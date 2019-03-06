@@ -185,7 +185,7 @@ CONDITIONAL_FORMATS_SCHEMA = {
 | `image_url`       | string | Displays an image as the background.                                                                                                                                                                                                                                             |
 ## Time schema
 
-The available timeframes depend on the widget you’re using, but the general format for `time` is:
+The available timeframes depend on the widget you are using, but the general format for `time` is:
 
 ```
 TIME_SCHEMA = {
@@ -219,7 +219,7 @@ TIME_SCHEMA = {
 
 ### Example
 
-For instance, to indicate that you want a 10-minute timeframe:
+For instance, to indicate that you want a 10-minute timeframe, use the following:
 
 ```
 "time": {
