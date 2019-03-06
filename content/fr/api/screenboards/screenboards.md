@@ -2,10 +2,10 @@
 title: Screenboards
 type: apicontent
 order: 20
-external_redirect: '/api/#screenboards'
+external_redirect: /api/#screenboards
 ---
 ## Screenboards
 
-Cet endpoint vous permet de programmer la création, la mise à jour, la suppression et la récupération de screenboards. [En apprendre plus sur les screenboards][1].
-
-[1]: /fr/graphing/dashboards/screenboard
+<div class="alert alert-danger">
+    This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api/#dashboards">new Dashboard endpoint</a> instead.
+</div>

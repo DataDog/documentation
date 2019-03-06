@@ -1,7 +1,7 @@
 ---
 title: Mettre à jour un utilisateur
 type: apicontent
-order: 24.4
+order: 25.4
 external_redirect: /api/#mettre-a-jour-un-utilisateur
 ---
 
