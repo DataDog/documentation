@@ -76,11 +76,11 @@ TRACE_SERVICE_SCHEMA = {
 |`show_breakdown`|Boolean|no|Whether to show the latency breakdown or not|
 |`show_distribution`|Boolean|no|Whether to show the latency distribution or not|
 |`show_resource_list`|Boolean|no|Whether to show the resource list or not|
-|`size_format`|string|no|Size of the widget. Available values are: `small`, `medium` or `large`
-|`display_format`|string|no|Number of columns to display. Available values are: `one_column`, `two_column` or `three_column`
+|`size_format`|string|no|Size of the widget. Available values are: `small`, `medium`, or `large`
+|`display_format`|string|no|Number of columns to display. Available values are: `one_column`, `two_column`, or `three_column`
 |`title`|string|no|Title of the widget|
 |`title_size`|string|no|Size of the title|
-|`title_align`|string|no|How to align the title. Available values are: `center`, `left` or `right`
+|`title_align`|string|no|How to align the title. Available values are: `center`, `left`, or `right`
 |`time`|object|no|Time setting for the widget. See the dedicated [Time JSON schema documentation][3] to learn how to build the `TIME_SCHEMA`
 ## Further Reading
 
