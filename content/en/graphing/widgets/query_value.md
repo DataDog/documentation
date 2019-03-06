@@ -93,11 +93,7 @@ Additional properties allowed in the `request` object:
 | Parameter             | Type   | Required | Description                                                                                                                                                     |
 | ------                | -----  | -------- | ----                                                                                                                                                            |
 | `conditional_formats` | object | no       | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][6] to learn how to build the `CONDITIONAL_FORMATS_SCHEMA`. |
-<<<<<<< HEAD
-| `aggregator`          | string   | no       | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum`.                                                                   |
-=======
 | `aggregator`          | enum   | no       | Aggregator used for the request; available values are: `avg`, `last`, `max`, `min`, or `sum`.                                                                   |
->>>>>>> master
 
 ## Further Reading
 
