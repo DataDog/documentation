@@ -215,7 +215,7 @@ TIME_SCHEMA = {
 
 | Parameter         | Type   | Description                                                                                                                                                                                                                                                                      |
 | ------            | -----  | --------                                                                                                                                                                                                                                                                         |
-| `live_span`      | string   | A short name to represent a timeframe value. Available values are:<br> -`1m`: 1 minute<br> -`5m`: 5 minutes<br> -`10m`: 10 minutes<br> -`15m`: 15 minutes<br> -`30m`: 30 minutes<br> -`1h`: 1 hour<br> -`4h`: 4 hours<br> -`1d`: 1 day<br> -`2d`: 2 days<br> -`1w`: 1 week<br> -`1mo`: 1 month<br> -`3mo`: 3 months<br> -`6mo`: 6 months<br> -`1y`: 1 year<br> -`alert`: used in `alert_graph` widget only|
+| `live_span`      | string   | A short name to represent a timeframe value. Available values are:<br> -`1m`: 1 minute<br> -`5m`: 5 minutes<br> -`10m`: 10 minutes<br> -`15m`: 15 minutes<br> -`30m`: 30 minutes<br> -`1h`: 1 hour<br> -`4h`: 4 hours<br> -`1d`: 1 day<br> -`2d`: 2 days<br> -`1w`: 1 week<br> -`1mo`: 1 month<br> -`3mo`: 3 months<br> -`6mo`: 6 months<br> -`1y`: 1 year<br> -`alert`: used in the `alert_graph` widget only|
 
 ### Example
 
