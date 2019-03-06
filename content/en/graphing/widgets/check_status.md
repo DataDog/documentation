@@ -6,6 +6,12 @@ further_reading:
 - link: "graphing/dashboards/screenboard/"
   tag: "Documentation"
   text: "Screenboard"
+- link: "graphing/dashboards/timeboard/"
+  tag: "Documentation"
+  text: "Timeboards"
+- link: "graphing/graphing_json/"
+  tag: "Documentation"
+  text: "Building Dashboard using JSON"
 ---
 
 Check status shows the current status or number of results for any check performed:
@@ -29,7 +35,7 @@ Check status shows the current status or number of results for any check perform
 3. Choose your scope:
     * **A single check**: Select this option if your Check Status widget is for a specific element only i.e. one `host:<HOSTNAME>`, one `service:<SERVICE_NAME>`, etc.
     * **A cluster of checks**: Select this option if your Check Status widget is for a scope of elements i.e all `host`s, all `service`s, etc.
-    
+
 4. After selecting your scope, define your Check Status widget context with the **Reported by** field.
 5. Optional: group your checks result according to a custom tag key.
 
@@ -42,6 +48,40 @@ Display a custom title for your widget by activating the `Show a Title` check bo
 
 Optionally define its size and alignment.
 
+
+## API
+
+The dedicated [widget JSON schema definition][1] for the check status widget is:
+
+```
+CHECK_STATUS_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "type": {"enum": ["check_status"]},
+        "check": {"type": "string"},
+        "grouping": {"enum": ["check", "cluster"]},
+        "group": {"type": "string"},
+        "tags":  {"type": "array", "items": {"type": "string"}},
+        "group_by":  {"type": "array", "items": {"type": "string"}},
+        "title": {"type": "string"}
+    },
+    "required": ["type", "check", "grouping"],
+    "additionalProperties": false
+}
+```
+
+| Parameter  | Type            | Required | Description                                                                                                                                                  |
+| ------     | -----           | -----    | -----                                                                                                                                                        |
+| `type`     | string          | yes      | Type of the widget, for the check status widget use `check_status`|
+| `check`     | string          | yes      | Name of the check to use in the widget|
+| `grouping`| string| yes| The kind of grouping to use (single check vs. cluster of checks). Available values are: `check` or `cluster`|
+| `group`| string| no| Group reporting a single check|
+| `tags`| Array of strings| no| List of tags used to filter the groups reporting a cluster check|
+| `group_by`| Array of strings| no| List of tag prefixes to group by in the case of a cluster check|
+|`title`|string|no|Title of the widget|
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /graphing/graphing_json/widget_json

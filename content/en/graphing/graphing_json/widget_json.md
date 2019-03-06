@@ -183,6 +183,49 @@ CONDITIONAL_FORMATS_SCHEMA = {
 | `custom_bg_color` | string | Color palette to apply to the background, same values available as palette.                                                                                                                                                                                                  |
 | `custom_fg_color` | string | Color palette to apply to the foreground, same values available as palette.                                                                                                                                                                                                  |
 | `image_url`       | string | Displays an image as the background.                                                                                                                                                                                                                                             |
+## Time schema
+
+The available timeframes depend on the widget you are using, but the general format for `time` is:
+
+```
+TIME_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "live_span": {"enum": [
+            '1m',
+            '5m',
+            '10m',
+            '15m',
+            '30m',
+            '1h',
+            '4h',
+            '1d',
+            '2d',
+            '1w',
+            '1mo',
+            '3mo',
+            '6mo',
+            '1y',
+            'alert'
+        ]}
+    },
+    "additionalProperties": false
+}
+```
+
+| Parameter         | Type   | Description                                                                                                                                                                                                                                                                      |
+| ------            | -----  | --------                                                                                                                                                                                                                                                                         |
+| `live_span`      | string   | A short name to represent a timeframe value. Available values are:<br> -`1m`: 1 minute<br> -`5m`: 5 minutes<br> -`10m`: 10 minutes<br> -`15m`: 15 minutes<br> -`30m`: 30 minutes<br> -`1h`: 1 hour<br> -`4h`: 4 hours<br> -`1d`: 1 day<br> -`2d`: 2 days<br> -`1w`: 1 week<br> -`1mo`: 1 month<br> -`3mo`: 3 months<br> -`6mo`: 6 months<br> -`1y`: 1 year<br> -`alert`: used in the `alert_graph` widget only|
+
+### Example
+
+For instance, to indicate that you want a 10-minute timeframe, use the following:
+
+```
+"time": {
+  "live_span": "10m"
+}
+```
 
 
 ## Further Reading

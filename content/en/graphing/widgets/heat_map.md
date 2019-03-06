@@ -65,10 +65,10 @@ The following configuration options are available:
 
 ## API
 
-The dedicated [widget JSON schema definition][3] for the change widget is: 
+The dedicated [widget JSON schema definition][3] for the heat map widget is:
 
 ```
-HEAT_MAP_SCHEMA = {
+HEATMAP_SCHEMA = {
     "type": "object",
     "properties": {
         "type": {"enum": ["heatmap"]},
@@ -80,7 +80,7 @@ HEAT_MAP_SCHEMA = {
         },
         "yaxis":  AXIS_SCHEMA,
         "events": EVENTS_SCHEMA,
-        "title": {"type": "string"},
+        "title": {"type": "string"}
     },
     "required": ["type", "requests"],
     "additionalProperties": false
@@ -89,8 +89,8 @@ HEAT_MAP_SCHEMA = {
 
 | Parameter  | Type            | Required | Description                                                                                                                                                  |
 | ------     | -----           | -------- | -----                                                                                                                                                        |
-| `type`     | string          | yes      | Type of widget, for the group widget use `heatmap`                                                                                                       |
-| `requests` | array of object | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][4] to learn how to build the `REQUEST_SCHEMA`. |
+| `type`     | string          | yes      | Type of widget, for the heat map widget use `heatmap`                                                                                                       |
+| `requests` | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][4] to learn how to build the `REQUEST_SCHEMA`. |
 | `yaxis`    | object          | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][5] to learn how to build the `<AXIS_SCHEMA>`.                                   |
 | `events`   | object          | no       | Event overlay control options. See the dedicated [Events JSON schema documentation][6] to learn how to build the `<EVENTS_SCHEMA>`                           |
 | `title`    | string          | no       | Title of your widget.                                                                                                                                        |
