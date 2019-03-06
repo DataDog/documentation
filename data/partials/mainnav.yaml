@@ -477,6 +477,8 @@ main:
         url: "synthetics/api_test"
       - name: "Browser Tests"
         url: "synthetics/browser_test"
+      - name: "APM Integration"
+        url: "synthetics/apm"
 
   # DEVELOPERS
   - name: "Developer Tools"
