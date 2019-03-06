@@ -1,7 +1,7 @@
 ---
-title: Host map widget
+title: Host Map Widget
 kind: documentation
-description: "Display the Datadog hostmap in your dashboards."
+description: "Display the Datadog host map in your dashboards."
 further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"
