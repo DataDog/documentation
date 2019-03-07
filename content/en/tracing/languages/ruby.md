@@ -146,9 +146,7 @@ Ruby APM includes support for the following libraries and frameworks:
 | [Sinatra][65]                  | `>= 1.4.5`             | Fully Supported | *[Link][66]*     |
 | [Sucker Punch][67]             | `>= 2.0`               | Fully Supported | *[Link][68]*     |
 
-*Fully Supported* support indicates all tracer features are available.
-
-*Experimental* indicates most features should be available, but unverified.
+For more details about how to activate and configure distributed tracing, see the [API documentation][69].
 
 ## Configuration
 
@@ -273,3 +271,4 @@ For more details about how to activate and configure the processing pipeline, ch
 [66]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sinatra
 [67]: https://github.com/brandonhilkert/sucker_punch
 [68]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sucker-punch
+[69]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#distributed-tracing
