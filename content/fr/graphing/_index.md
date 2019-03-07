@@ -133,4 +133,3 @@ Cliquez sur **Done** pour enregistrer votre travail et quitter l'éditeur. Vous 
 [5]: /fr/graphing/widgets
 [6]: /fr/tagging
 [7]: /fr/graphing/functions/#apply-functions-optional
-[8]: /fr/graphing/dashboards
