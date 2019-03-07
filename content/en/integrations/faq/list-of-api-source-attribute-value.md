@@ -156,6 +156,7 @@ kind: faq
 |Metric Alert|ALERT|
 |Microsoft Teams|MICROSOFTTEAMS|
 |Mongodb|MONGODB|
+|Mongodb Atlas|MONGODBATLAS|
 |Monitor Alert|ALERT|
 |Moxtra|MOXTRA|
 |Mparticle|MPARTICLE|
