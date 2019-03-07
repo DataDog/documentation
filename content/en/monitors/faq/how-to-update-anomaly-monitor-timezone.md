@@ -15,7 +15,7 @@ Datadog monitors use UTC time, which by default does not track local time zones.
 
 If you are using the agile or robust anomaly detection algorithms with weekly or daily seasonality, you can update your anomaly detection monitor to account for a local timezone using both the API and the UI.
 
-Here is an example of of a monitor before it is set to account for a local timezone:
+Here is an example of a monitor before it is set to account for a local timezone:
 
 {{< img src="monitors/faq/dst-off.png" alt="DST tracking turned off" responsive="true">}}
 
