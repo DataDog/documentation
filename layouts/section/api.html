@@ -46,8 +46,9 @@
             <div class="col-12 col-lg-6 api-content">
                 {{ $element.Content }}
             </div>
-            {{ $item := (index $codeList $index) | default ""}}
-            {{ $codelen := (len (index $codeList $index).Content) | default 0 }}
+            {{ $item := (index $codeList $index) | default (dict "Content" "")}}
+            {{ $content := $item.Content | default "" }}
+            {{ $codelen := (len $content | default 0 }}
             <div class="col-12 col-lg-6 api-code {{ if eq $codelen 0 }}empty{{ end }}">
                 {{ if gt $codelen 0 }}
                     <div class="code-container">
