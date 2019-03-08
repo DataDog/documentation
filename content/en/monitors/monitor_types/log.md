@@ -21,6 +21,8 @@ Log monitors alert when a specified type of log exceeds a user-defined threshold
 
 ## Setup
 
+Construct a query to control what will be monitored:
+
 1. Define the search query:
     {{< img src="monitors/monitor_types/log/define_the_search_query.png" alt="Define the search query" responsive="true" style="width:50%;" >}}
     The search query has the same behavior as [the log explorer search][1]
