@@ -100,14 +100,14 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 | Module                 | Versions    | Support Type    |  Notes              |
 | :----------            | :---------- | :-------------- | :------------------ |
-| [cassandra-driver][18] |             | Coming Soon     |                     |
+| [cassandra-driver][18] | `>=3`       | Fully Supported |                     |
 | [elasticsearch][19]    | `>=10`      | Fully Supported |                     |
 | [ioredis][20]          | `>=2`       | Fully Supported |                     |
 | [memcached][21]        | `>=2.2`     | Fully Supported |                     |
 | [mongodb-core][22]     | `>=2`       | Fully Supported | Supports Mongoose   |
 | [mysql][23]            | `>=2`       | Fully Supported |                     |
 | [mysql2][24]           | `>=1`       | Fully Supported |                     |
-| [pg][25]               | `>=4`       | Fully Supported | `pg-native` support coming soon |
+| [pg][25]               | `>=4`       | Fully Supported | Supports `pg-native` when used with `pg` |
 | [redis][26]            | `>=0.12`    | Fully Supported |                     |
 
 #### Worker Compatibility
