@@ -99,9 +99,15 @@ Use the summary graphs across the top of screen and the time selector to focus i
 
 ### Traces
 
-Via the AWS X-Ray integration, traces from the function currently being viewed are shown in the `Traces` tab. You can sort these traces by attributes such as date, duration, and status.
+Via the AWS X-Ray integration, traces from the function currently being viewed are shown in the `Traces` section. You can sort these traces by attributes such as date, duration, and status.
 
 {{< img src="graphing/infrastructure/cloudfunctions/cf-traces.png" alt="Traces" responsive="true">}}
+
+### Logs
+
+The `Logs` section aggregates logs from all recent invocations of the current function. It updates live as your functions send new logs to Datadog.
+
+{{< img src="graphing/infrastructure/cloudfunctions/cf-logs2.png" alt="Traces" responsive="true">}}
 
 #### Trace detail view
 
