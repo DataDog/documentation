@@ -41,10 +41,6 @@ Construct a query to control what will be monitored:
 
 5. Set alert conditions. The following options can be used:
 
-  * Above
-  * Above or equal
-  * Below 
-  * Below or equal
   {{< img src="monitors/monitor_types/log/above_below.png" alt="aggregation function for Log Analytics" responsive="true" style="width:50%;">}}
 
 Then configure the Alert and/or Warning threshold depending on the chosen condition:
