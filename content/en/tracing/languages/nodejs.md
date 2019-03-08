@@ -79,62 +79,62 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 #### Web Framework Compatibility
 
-| Module        | Versions    | Support Type    | Notes                        |
-| :----------   | :---------- | :-------------- | :--------------------------- |
-| [express][10] | `>=4`       | Fully Supported | Supports Sails, Loopback, and [more][11] |
-| [graphql][12] | `>=0.10`    | Fully Supported | Supports Apollo Server and express-graphql |
-| [hapi][13]    | `>=2`       | Fully Supported |                              |
-| [koa][14]     | `>=2`       | Fully Supported |                              |
-| [restify][15] | `>=3`       | Fully Supported |                              |
+| Module        | Versions | Support Type    | Notes                                      |
+|---------------|----------|-----------------|--------------------------------------------|
+| [express][10] | `>=4`    | Fully Supported | Supports Sails, Loopback, and [more][11]   |
+| [graphql][12] | `>=0.10` | Fully Supported | Supports Apollo Server and express-graphql |
+| [hapi][13]    | `>=2`    | Fully Supported |                                            |
+| [koa][14]     | `>=2`    | Fully Supported |                                            |
+| [restify][15] | `>=3`    | Fully Supported |                                            |
 
 #### Native Module Compatibility
 
-| Module               | Support Type    |
-| :------------------- | :-------------- |
-| [dns][37]            | Fully Supported |
-| [http][16]           | Fully Supported |
-| [https][17]          | Fully Supported |
-| [net][38]            | Fully Supported |
+| Module      | Support Type    |
+|-------------|-----------------|
+| [dns][16]   | Fully Supported |
+| [http][17]  | Fully Supported |
+| [https][18] | Fully Supported |
+| [net][19]   | Fully Supported |
 
 #### Data Store Compatibility
 
-| Module                 | Versions    | Support Type    |  Notes              |
-| :----------            | :---------- | :-------------- | :------------------ |
-| [cassandra-driver][18] | `>=3`       | Fully Supported |                     |
-| [elasticsearch][19]    | `>=10`      | Fully Supported |                     |
-| [ioredis][20]          | `>=2`       | Fully Supported |                     |
-| [memcached][21]        | `>=2.2`     | Fully Supported |                     |
-| [mongodb-core][22]     | `>=2`       | Fully Supported | Supports Mongoose   |
-| [mysql][23]            | `>=2`       | Fully Supported |                     |
-| [mysql2][24]           | `>=1`       | Fully Supported |                     |
-| [pg][25]               | `>=4`       | Fully Supported | Supports `pg-native` when used with `pg` |
-| [redis][26]            | `>=0.12`    | Fully Supported |                     |
+| Module                 | Versions | Support Type    | Notes                                    |
+|------------------------|----------|-----------------|------------------------------------------|
+| [cassandra-driver][20] | `>=3`    | Fully Supported |                                          |
+| [elasticsearch][21]    | `>=10`   | Fully Supported |                                          |
+| [ioredis][22]          | `>=2`    | Fully Supported |                                          |
+| [memcached][23]        | `>=2.2`  | Fully Supported |                                          |
+| [mongodb-core][24]     | `>=2`    | Fully Supported | Supports Mongoose                        |
+| [mysql][25]            | `>=2`    | Fully Supported |                                          |
+| [mysql2][26]           | `>=1`    | Fully Supported |                                          |
+| [pg][27]               | `>=4`    | Fully Supported | Supports `pg-native` when used with `pg` |
+| [redis][28]            | `>=0.12` | Fully Supported |                                          |
 
 #### Worker Compatibility
 
-| Module             | Versions    | Support Type    | Notes                   |
-| :----------        | :---------- | :-------------- | :---------------------- |
-| [amqp10][27]       | `>=3`       | Fully Supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
-| [amqplib][28]      | `>=0.5`     | Fully Supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
-| [generic-pool][39] | `>=2`       | Fully Supported |                         |
-| [kafka-node][29]   |             | Coming Soon     |                         |
-| [rhea][30]         |             | Coming Soon     |                         |
+| Module             | Versions | Support Type    | Notes                                                  |
+|--------------------|----------|-----------------|--------------------------------------------------------|
+| [amqp10][29]       | `>=3`    | Fully Supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
+| [amqplib][30]      | `>=0.5`  | Fully Supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
+| [generic-pool][31] | `>=2`    | Fully Supported |                                                        |
+| [kafka-node][32]   |          | Coming Soon     |                                                        |
+| [rhea][33]         |          | Coming Soon     |                                                        |
 
 #### Promise Library Compatibility
 
-| Module           | Versions    | Support Type    |
-| :----------      | :---------- | :-------------- |
-| [bluebird][31]   | `>=2`       | Fully Supported |
-| [q][32]          | `>=1`       | Fully Supported |
-| [when][33]       | `>=3`       | Fully Supported |
+| Module         | Versions | Support Type    |
+|----------------|----------|-----------------|
+| [bluebird][34] | `>=2`    | Fully Supported |
+| [q][35]        | `>=1`    | Fully Supported |
+| [when][36]     | `>=3`    | Fully Supported |
 
 #### Logger Compatibility
 
-| Module                 | Versions    | Support Type    |
-| :----------            | :---------- | :-------------- |
-| [bunyan][34]           | `>=1`       | Fully Supported |
-| [pino][35]             | `>=2`       | Fully Supported |
-| [winston][36]          | `>=1`       | Fully Supported |
+| Module        | Versions | Support Type    |
+|---------------|----------|-----------------|
+| [bunyan][37]  | `>=1`    | Fully Supported |
+| [pino][38]    | `>=2`    | Fully Supported |
+| [winston][39] | `>=1`    | Fully Supported |
 
 ## Further Reading
 
@@ -155,27 +155,27 @@ For details about how to how to toggle and configure plugins, check out the [API
 [13]: https://hapijs.com
 [14]: https://koajs.com
 [15]: http://restify.com
-[16]: https://nodejs.org/api/http.html
-[17]: https://nodejs.org/api/https.html
-[18]: https://github.com/datastax/nodejs-driver
-[19]: https://github.com/elastic/elasticsearch-js
-[20]: https://github.com/luin/ioredis
-[21]: https://github.com/3rd-Eden/memcached
-[22]: http://mongodb.github.io/node-mongodb-native/core
-[23]: https://github.com/mysqljs/mysql
-[24]: https://github.com/sidorares/node-mysql2
-[25]: https://node-postgres.com
-[26]: https://github.com/NodeRedis/node_redis
-[27]: https://github.com/noodlefrenzy/node-amqp10
-[28]: https://github.com/squaremo/amqp.node
-[29]: https://github.com/SOHU-Co/kafka-node
-[30]: https://github.com/amqp/rhea
-[31]: https://github.com/petkaantonov/bluebird
-[32]: https://github.com/kriskowal/q
-[33]: https://github.com/cujojs/when
-[34]: https://github.com/trentm/node-bunyan
-[35]: http://getpino.io
-[36]: https://github.com/winstonjs/winston
-[37]: https://nodejs.org/api/dns.html
-[38]: https://nodejs.org/api/net.html
-[39]: https://github.com/coopernurse/node-pool
+[16]: https://nodejs.org/api/dns.html
+[17]: https://nodejs.org/api/http.html
+[18]: https://nodejs.org/api/https.html
+[19]: https://nodejs.org/api/net.html
+[20]: https://github.com/datastax/nodejs-driver
+[21]: https://github.com/elastic/elasticsearch-js
+[22]: https://github.com/luin/ioredis
+[23]: https://github.com/3rd-Eden/memcached
+[24]: http://mongodb.github.io/node-mongodb-native/core
+[25]: https://github.com/mysqljs/mysql
+[26]: https://github.com/sidorares/node-mysql2
+[27]: https://node-postgres.com
+[28]: https://github.com/NodeRedis/node_redis
+[29]: https://github.com/noodlefrenzy/node-amqp10
+[30]: https://github.com/squaremo/amqp.node
+[31]: https://github.com/coopernurse/node-pool
+[32]: https://github.com/SOHU-Co/kafka-node
+[33]: https://github.com/amqp/rhea
+[34]: https://github.com/petkaantonov/bluebird
+[35]: https://github.com/kriskowal/q
+[36]: https://github.com/cujojs/when
+[37]: https://github.com/trentm/node-bunyan
+[38]: http://getpino.io
+[39]: https://github.com/winstonjs/winston
