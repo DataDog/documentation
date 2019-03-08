@@ -43,11 +43,11 @@ Construct a query to control what will be monitored:
 
   {{< img src="monitors/monitor_types/log/above_below.png" alt="aggregation function for Log Analytics" responsive="true" style="width:50%;">}}
 
-Then configure the Alert and/or Warning threshold depending on the chosen condition:
-    {{< img src="monitors/monitor_types/log/set_alert_conditions.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
-
 6. Configure your **notification options**:  
-    Refer to the [notifications][2] dedicated documentation page for detailed options.
+
+  {{< img src="monitors/monitor_types/log/set_alert_conditions.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
+
+  Refer to the [notifications][2] dedicated documentation page for detailed options.
     
 
 ## Notifications and log samples
