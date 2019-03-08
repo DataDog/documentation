@@ -37,14 +37,14 @@ Create a check that hits your traced HTTP server, and Datadog automatically link
 
 Datadog uses the distributed tracing protocol and sets up the following HTTP headers:
 
-* `x-datadog-trace-id`: Generated from the Synthetics backend. Allows Datadog to link the trace with the test result.
-* `x-datadog-parent-id`: 0
-* `x-datadog-origin`: Synthetics to make sure the generated traces don't affect your APM quotas. See below.
-* `x-datadog-sampling-priority`: 1, [to make sure that the Agent keeps the trace][2].
+* `x-datadog-trace-id`, generated from the Synthetics backend. Allows Datadog to link the trace with the test result.
+* `x-datadog-parent-id: 0`
+* `x-datadog-origin: synthetics`, to make sure the generated traces don't affect your APM quotas. See below.
+* `x-datadog-sampling-priority: 1`, [to make sure that the Agent keeps the trace][2].
 
 ### How are APM quotas affected?
 
-The `x-datadog-origin` header specifies to the APM backend that the traces are Synthetics generated. The generated traces consequently do not impact your classical APM quotas.
+The `x-datadog-origin: synthetics` header specifies to the APM backend that the traces are Synthetics generated. The generated traces consequently do not impact your classical APM quotas.
 
 ### How long are traces retained?
 
