@@ -14,6 +14,8 @@ Configure your Datadog-Google Cloud Platform integration directly through the Da
 
 * Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization. 
 
+* Using the `PUT` method updates the existing integration configuration in your Datadog organization.
+
 ##### ARGUMENTS
 
 All of the following fields' values are provided by the JSON service account key file created in the [GCP Console for service accounts][2]; Refer to the [Datadog-Google Cloud Platform integration installation instructions][3] to see how to generate one for your organization. 
@@ -62,6 +64,10 @@ For further references, consult the [Google Cloud service account documentation]
 * **`host_filters`** [*optional*]:
 
     Limit the GCE instances that are pulled into Datadog by using tags. Only hosts that match one of the defined tags are imported into Datadog.
+
+* **`automute`** [*optional*, *default*=**false**]:
+
+    Silence monitors for expected GCE instance shutdowns.
 
 [1]: /integrations/google_cloud_platform
 [2]: https://console.cloud.google.com/iam-admin/serviceaccounts
