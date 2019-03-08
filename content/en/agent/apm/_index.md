@@ -185,7 +185,7 @@ Note:
 
 If you change a previously set primary tag, be aware of the following:
 
-* Historical APM data aggregated by the previously set tag is no longer be accessible.
+* Historical APM data aggregated by the previously set tag is no longer accessible.
 * Any APM monitors scoped to the previous tag display a status of _No Data_.
 
 #### Viewing Data by Primary Tag
