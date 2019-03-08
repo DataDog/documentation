@@ -242,7 +242,7 @@ def login(self, user_id)
 end
 ```
 
-Learn more about the [Histogram type in the Metrics documentation][7].
+Learn more about the [Sets type in the Metrics documentation][8].
 
 ## Metric option: sample rates
 
