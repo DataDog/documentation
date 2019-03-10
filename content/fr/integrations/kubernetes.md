@@ -152,7 +152,7 @@ Le check Kubernetes contient les checks de service suivants :
 
 ## Dépannage
 
-* [Puis-je installer l'Agent sur mon ou mes nœuds principaux sur mon Kybernetes ?][9]
+* [Puis-je installer l'Agent sur mon ou mes nœuds principaux sur mon Kubernetes ?][9]
 * [Pourquoi mon check Kubernetes échoue-t-il et affiche-t-il une erreur ConnectTimeout sur le port 10250 ?][10]
 * [Comment transmettre les métriques sur le disque host lorsque dd-agent s'exécute sur un conteneur docker ?][11]
 * [Authentification client auprès de l'apiserver et de kubelet][12]
