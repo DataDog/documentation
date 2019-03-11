@@ -34,7 +34,7 @@ Set different proxy servers for `https` and `http` requests in your Agent `datad
 The Agent uses `https` to send data to Datadog, but integrations might use `http` to gather metrics. No matter the proxied requests, you can activate SSL on your proxy server. Below are some configuration examples for your `datadog.yaml` file.
 
 <div class="alert alert-warning">
-The <code>&ltHOST&gt;:&ltPORT&gt;</code> used to proxy metrics can NOT be used to proxy logs.
+The <code>&ltHOST&gt;:&ltPORT&gt;</code> used to proxy metrics can NOT be used to proxy logs. See the <a href="#proxy-for-logs">Proxy for Logs</a> section.
 </div>
 
 Setting an HTTP proxy for all `https` requests:
@@ -95,7 +95,7 @@ The Agent uses the following values in order of precedence:
 {{% tab "Agent v5" %}}
 
 <div class="alert alert-warning">
-The <code>&ltHOST&gt;:&ltPORT&gt;</code> used to proxy metrics can NOT be used to proxy logs.
+The <code>&ltHOST&gt;:&ltPORT&gt;</code> used to proxy metrics can NOT be used to proxy logs. See the <a href="#proxy-for-logs">Proxy for Logs</a> section.
 </div>
 
 Edit the `datadog.conf` file with your proxy information:
