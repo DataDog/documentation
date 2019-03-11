@@ -89,7 +89,7 @@ config.lograge.custom_options = lambda do |event|
 end
 ```
 
-**Note**:You can also ask Lograge to add contextual information to your logs. Refer to the official doc if you are interested: [Lograge documentation][1]
+**Note**:You can also ask Lograge to add contextual information to your logs. Refer to the official doc if you are interested: [Lograge documentation][2]
 
 ## Disable log coloration
 As it would be weirdly displayed in your Datadog application, disable your log coloration:
@@ -130,7 +130,7 @@ Logging.appenders.file(
 )
 ```
 
-If you want to tweak the log layout, all items available can be found directly from the [source repository][2]
+If you want to tweak the log layout, all items available can be found directly from the [source repository][3]
 
 ## Configure your Datadog Agent.
 
@@ -165,7 +165,7 @@ That's it! Now, all the rails calls are going to be in proper JSON automatically
 
 ### Inject trace IDs in your logs
 
-If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][3] to automatically add trace and span ids in your logs.
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][4] to automatically add trace and span ids in your logs.
 
 Once this is done, the log should have the following (for JSON format):
 
@@ -277,3 +277,4 @@ end
 [1]: https://docs.datadoghq.com/logs/?tab=ussite#reserved-attributes)
 [2]: https://github.com/roidrage/lograge#installation
 [3]: https://github.com/TwP/logging/blob/master/lib/logging/layouts/parseable.rb#L100
+[4]: 
