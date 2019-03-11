@@ -212,7 +212,7 @@ main:
         url: monitors/downtimes/
       - name: Widget d'uptime
         url: monitors/monitor_uptime_widget/
-  - name: APM (tracing)
+  - name: APM & Distributed Tracing
     url: tracing/
     pre: nav_tracing
     children:
@@ -468,7 +468,7 @@ main:
     children:
       - name: Agent
         url: security/agent
-      - name: APM (tracing)
+      - name: APM & Distributed Tracing
         url: security/tracing
       - name: Log Management
         url: security/logs
