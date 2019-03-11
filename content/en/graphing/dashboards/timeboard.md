@@ -107,7 +107,7 @@ Special thanks to [Brightcove][4], [Shopify][5], and [Zendesk][6] for sharing th
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing/event_stream
-[2]: 
+[2]: /account_management/team/#datadog-user-roles
 [3]: /api
 [4]: https://www.brightcove.com
 [5]: https://www.shopify.com
