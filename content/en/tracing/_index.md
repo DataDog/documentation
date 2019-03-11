@@ -1,5 +1,5 @@
 ---
-title: APM and Distributed Tracing
+title: APM & Distributed Tracing
 kind: Documentation
 description: Instrument your code to improve performance
 further_reading:
@@ -20,7 +20,7 @@ Distributed tracing allows you to propagate a single trace across multiple servi
 
 Distributed tracing headers are language agnostic. A trace started in one language may propagate to another (for example, from Python to Java).
 
-Datadog APM and Distributed Tracing is offered as an upgrade to the Pro and Enterprise plans. A free 14-day trial is available. Registered users can visit the [APM page of the Datadog application][1] to get started.
+Datadog APM & Distributed Tracing is offered as an upgrade to the Pro and Enterprise plans. A free 14-day trial is available. Registered users can visit the [APM page of the Datadog application][1] to get started.
 
 {{< whatsnext desc="Get started with Datadog APM">}}
     {{< nextlink href="/agent/apm" >}}Configure your Agent to collect your Application Traces{{< /nextlink >}}
