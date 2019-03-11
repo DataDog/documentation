@@ -189,7 +189,7 @@
   },
 
   "apm_tracing": {
-    "other": "APM (Tracing)"
+    "other": "APM & Distributed Tracing"
   },
 
   "developer_tools": {
