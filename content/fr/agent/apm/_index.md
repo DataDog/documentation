@@ -78,7 +78,7 @@ Vous trouverez ci-dessous la liste complète des paramètres disponibles pour vo
 | `apm_dd_url`              | string      | Endpoint de l'API Datadog vers lequel les traces sont envoyées.                                                                                                                        |
 | `env`                     | string      | Environnement par défaut auquel les traces appartiennent (p. ex., *staging*, *production*, etc.).                                                              |
 | `extra_sample_rate`       | float       | Utilisez ce paramètre pour ajuster le taux d'échantillonnage des traces. La valeur doit être de type float et varier entre `0` (pas d'échantillonnage) et `1` (échantillonnage normal). Valeur par défaut : `1`.           |
-| `max_traces_per_second`   | float       | Nombre maximum de traces à échantillonner par seconde. Définissez ce paramètre sur `0` pour désactiver la limite (*non recommandé*). Valeur par défaut : `10`.                                     |
+| `max_traces_per_second`   | float       | Nombre maximum de traces à échantillonner par seconde. Définissez ce paramètre sur `0` pour désactiver la limite (*non conseillé*). Valeur par défaut : `10`.                                     |
 | `ignore_resources`        | list        | La liste des ressources ignorées par l'Agent.                                                                                                                  |
 | `log_file`                | string      | Emplacement du fichier de log.                                                                                                                                          |
 | `replace_tags`            | list        | La liste des règles de remplacement des tags. Consultez la section [Nettoyer les informations sensibles](#nettoyer-les-informations-sensibles) pour en savoir plus.                                              |
@@ -127,10 +127,14 @@ Dans `datadog.conf`, ajoutez `[trace.analyzed_spans]`. Par exemple :
 
 {{% /tab %}}
 {{% tab "Docker" %}}
-Ajoutez `DD_APM_ANALYZED_SPANS` à l'environnement de conteneur de l'Agent (compatible avec les versions 12.6.5250+). Par exemple :
+Ajoutez `DD_APM_ANALYZED_SPANS` à l'environnement de conteneur de l'Agent (compatible avec les versions 12.6.5250+). Utilisez des expressions régulières séparées par des virgules sans espace. Par exemple :
 
 ```
 DD_APM_ANALYZED_SPANS="<NOM_SERVICE_1>|<NOM_OPÉRATION_1>=1,<NOM_SERVICE_2>|<NOM_OPÉRATION_2>=1"
+```
+
+```
+`my-express-app|express.request=1,my-dotnet-app|aspnet_core_mvc.request=1`
 ```
 
 {{% /tab %}}
@@ -150,10 +154,10 @@ L'environnement à partir duquel vous recueillez vos traces constitue le tag pri
 Il existe différentes façons de spécifier un environnement lors de l'envoi de données :
 
 1. Tag de host :
-  Utilisez un tag de host au format `env:<ENVIRONNEMENT>` pour tagger l'ensemble des traces de l'Agent correspondant.
+  Utilisez un tag de host au format `env:<ENVIRONNEMENT>` pour taguer l'ensemble des traces de l'Agent correspondant.
 
 2. Configuration de l'Agent :
-  Remplacez le tag par défaut utilisé par l'Agent dans [le fichier de configuration de l'Agent][17]. Cela permet de tagger toutes les traces transmises à l'Agent, ce qui ignore la valeur du tag du host.
+  Remplacez le tag par défaut utilisé par l'Agent dans [le fichier de configuration de l'Agent][17]. Cela permet de taguer toutes les traces transmises à l'Agent, ce qui ignore la valeur du tag du host.
 
     ```
     apm_config:
@@ -161,7 +165,7 @@ Il existe différentes façons de spécifier un environnement lors de l'envoi de
     ```
 
 3. Par trace :
-  Lorsque vous envoyez une seule trace, spécifiez un environnement en taggant l'une de ses spans avec la clé de métadonnées `env`. Cela ignore la configuration de l'Agent et la valeur du tag du host (le cas échéant). Consultez la [documentation relative aux tags des traces][18] pour découvrir comment assigner un tag à vos traces.
+  Lorsque vous envoyez une seule trace, spécifiez un environnement en taguant l'une de ses spans avec la clé de métadonnées `env`. Cela ignore la configuration de l'Agent et la valeur du tag du host (le cas échéant). Consultez la [documentation relative aux tags des traces][18] pour découvrir comment assigner un tag à vos traces.
 
 ##### Afficher les données selon un environnement
 
