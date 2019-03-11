@@ -264,7 +264,7 @@ main:
 
 
   # TRACING/APM
-  - name: "APM (Tracing)"
+  - name: "APM & Distributed Tracing"
     url: "tracing/"
     pre: "nav_tracing"
     children:
@@ -597,7 +597,7 @@ main:
 
       - name: "Agent"
         url: "security/agent"
-      - name: "APM (Tracing)"
+      - name: "APM & Distributed Tracing"
         url: "security/tracing"
       - name: "Log Management"
         url: "security/logs"

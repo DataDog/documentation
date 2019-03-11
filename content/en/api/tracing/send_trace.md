@@ -22,7 +22,7 @@ trace1 = [ span, span2, span3 ]
 
 and each span is a dictionary with a `trace_id`, `span_id`, `resource`..
 
-[Learn more about the APM (tracing) terminology][4]
+[Learn more about the APM & Distributed Tracing terminology][4]
 
 **Note**: Each span within a trace should use the same trace_id.
 
