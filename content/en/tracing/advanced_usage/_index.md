@@ -1310,7 +1310,8 @@ $span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
 
 The Datadog C++ tracer can only be used through the OpenTracing API. The usage instructions in this document all describe generic OpenTracing functionality.
 
-
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Priority Sampling
 
