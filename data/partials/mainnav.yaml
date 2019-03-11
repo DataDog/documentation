@@ -313,8 +313,6 @@ main:
             url: "#manual-instrumentation"
           - name: "OpenTracing"
             url: "#opentracing"
-          - name: "Distributed Tracing"
-            url: "#distributed-tracing"
           - name: "Priority Sampling"
             url: "#priority-sampling"
           - name: "Correlate Traces and Logs"
