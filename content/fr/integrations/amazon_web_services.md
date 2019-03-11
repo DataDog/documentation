@@ -298,7 +298,7 @@ Utilisez le [référentiel sans serveur AWS][96] pour déployer la fonction Lamb
     {{< img src="logs/aws/select_python.png" alt="Sélectionner Python" responsive="true" style="width:80%;" >}}
 3. En haut du script se trouve une section intitulée `#Parameters`. Vous pouvez fournir la clé d'API requise par la fonction Lambda de deux façons différentes :
 
-    * En configurant une variable d'environnement (recommandé)
+    * En configurant une variable d'environnement (conseillé)
     * En ajoutant directement votre clé API Datadog dans le code
     {{< img src="logs/aws/dd_api_key_setup.png" alt="Configuration clé API DD" responsive="true" popup="true" style="width:80%;" >}}
 4. Faites défiler jusqu'à atteindre **Basic Settings** sous la zone de code en ligne.
