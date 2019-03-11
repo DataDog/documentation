@@ -32,8 +32,6 @@ Search across your Dashboard with the search bar at the top of the page. Dashboa
 
 A Dashboard's popularity is relative. An organization's most popular Dashboard appears as 5 bars; all other Dashboards are relative to that. Popularity is based upon the amount of traffic a Dashboard is getting and is updated daily, so new Dashboards have 0 popularity bars for up to the first 24 hours.
 
-If you are using uBlock or a similar browser plugin to block web beacons, your traffic won't impact a Dashboard's popularity.
-
 **Note**: Traffic to the public URLs of public Dashboards is ignored.
 
 ## Create a Dashboard list
