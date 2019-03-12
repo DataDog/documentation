@@ -90,7 +90,7 @@ Pour Ruby :
 # Importer la bibliothèque
 require 'datadog/statsd'
 
-# Créez une instance client statsd.
+# Créer une instance client statsd.
 statsd = Datadog::Statsd.new
 ```
 

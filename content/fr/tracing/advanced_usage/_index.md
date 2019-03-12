@@ -224,13 +224,12 @@ app.get('/posts', (req, res) => {
 
 **Ajouter des tags à une span actuellement active**
 
-Accédez à la span actuellement active au sein de votre code à l'aide de la méthode de votre choix. Attention : si la méthode est appelée et qu'aucune span n'est actuellement active, `tracer.scopeManager().active()` renvoie `null`.
+Accédez à la span actuellement active au sein de votre code à l'aide de la méthode de votre choix. **Attention** : si la méthode est appelée et qu'aucune span n'est actuellement active, `tracer.scope().active()` renvoie `null`.
 
 ```javascript
-// exemple d'ajout de tag à une span actve
+// exemple d'ajout de tag à une span active
 
-const scope = tracer.scopeManager().active()
-const span = scope.span()
+const span = tracer.scope().active()
 
 span.setTag('<TAG_KEY>', '<TAG_VALUE>')
 ```
@@ -300,8 +299,8 @@ pour découvrir comment définir des variables d'environnements.
 DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
 ```
 
-[1]: /fr/tracing/languages/php/#configuration
 
+[1]: /fr/tracing/languages/php/#configuration
 {{% /tab %}}
 {{% tab "C++" %}}
 
@@ -436,11 +435,11 @@ La collecte de métriques JVM peut être activée à l'aide d'un paramètre de c
 * Propriété système : `-Ddd.jmxfetch.enabled=true`
 * Variable d'environnement : `DD_JMXFETCH_ENABLED=true`
 
-Les métriques JVM peuvent être visualisées conjointement à vos services Java. Pour commencer, cliquez [ici][1].
+Les métriques JVM peuvent être visualisées conjointement à vos services Java. Consultez la [page Service][1] dans Datadog.
 
 {{< img src="tracing/jvm-runtime.png" alt="Exécution JVM" responsive="true" style="width:100%;">}}
 
-**Remarque** : Pour l'IU d'exécution, `dd-trace-java` >= [`0.24.0`][5] est pris en charge.
+**Remarque** : pour l'IU d'exécution, `dd-trace-java` >= [`0.24.0`][2] est pris en charge.
 
 ### Données collectées
 
@@ -448,23 +447,23 @@ Les métriques suivantes sont par défaut recueillies après l'activation des m�
 
 {{< get-metrics-from-git "java" >}}
 
-Datadog fournit non seulement ces métriques sur votre page Service de l'APM, mais également un [dashboard d'exécution JVM par défaut][4] comportant les tags `service` et `runtime-id` appliqués à ces métriques.
+Datadog fournit non seulement ces métriques sur votre page Service de l'APM, mais également un [dashboard d'exécution JVM par défaut][3] comportant les tags `service` et `runtime-id` appliqués à ces métriques.
 
-En outre, vous pouvez ajouter des métriques JMX, à l'aide de fichiers de configuration, qui sont transmises à `jmxfetch.metrics-configs`. Il est également possible d'activer chaque intégration JMX de Datadog à l'aide du paramètre `dd.integration.<nom>`. Cela intègre automatiquement la configuration des [fichiers de configuration JMX existants][2]. Consultez l'[intégration JMX][3] pour en savoir plus sur la configuration.
+En outre, vous pouvez ajouter des métriques JMX, à l'aide de fichiers de configuration, qui sont transmises à `jmxfetch.metrics-configs`. Il est également possible d'activer chaque intégration JMX de Datadog à l'aide du paramètre `dd.integration.<nom>`. Cela intègre automatiquement la configuration des [fichiers de configuration JMX existants][4]. Consultez l'[intégration JMX][5] pour en savoir plus sur la configuration.
 
 ### Collecte de métriques JVM dans des environnements conteneurisés
 
 Par défaut, les métriques JVM de votre application sont envoyées à l'Agent Datadog sur le port 8125. Si vous exécutez l'Agent en tant que conteneur, assurez-vous que `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [est défini sur true][6] et que le port 8125 est ouvert sur l'Agent. Par exemple : dans Kubernetes, [associez le port DogstatsD à un port de host][7] ; dans ECS, [indiquez les flags pertinents dans la définition de votre tâche][8].
 
+
 [1]: https://app.datadoghq.com/apm/services
-[2]: https://github.com/DataDog/integrations-core/search?q=jmx_metrics&unscoped_q=jmx_metrics
-[3]: /fr/integrations/java/#configuration
-[4]: https://app.datadoghq.com/dash/integration/256/jvm-runtime-metrics
-[5]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.0
+[2]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.0
+[3]: https://app.datadoghq.com/dash/integration/256/jvm-runtime-metrics
+[4]: https://github.com/DataDog/integrations-core/search?q=jmx_metrics&unscoped_q=jmx_metrics
+[5]: /fr/integrations/java/#configuration
 [6]: https://docs.datadoghq.com/fr/agent/docker/#dogstatsd-custom-metrics
 [7]: https://docs.datadoghq.com/fr/agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
 [8]: https://docs.datadoghq.com/fr/integrations/amazon_ecs/?tab=python#create-an-ecs-task
-
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -482,29 +481,29 @@ Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour par
 
 Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour participer à la bêta.
 
-[1]: /fr/help
 
+[1]: /fr/help
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
 Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour participer à la bêta.
 
-[1]: /fr/help
 
+[1]: /fr/help
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour participer à la bêta.
 
-[1]: /fr/help
 
+[1]: /fr/help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour participer à la bêta.
 
-[1]: /fr/help
 
+[1]: /fr/help
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -794,11 +793,11 @@ Avant PHP 7, certains frameworks fournissaient des solutions pour compiler les 
 Bien que cette version [soit désormais obsolète][3], si vous utilisez PHP 7.x, vous pouvez utiliser ce mécanisme de mise en cache au sein de votre app avant la version 7.x. Pour ce cas précis, nous vous recommandons d'utiliser l'API [OpenTracing][4] au lieu d'ajouter `datadog/dd-trace` à votre fichier Composer.
 
 
+
 [1]: /fr/tracing/languages/php/#automatic-instrumentation
 [2]: https://github.com/DataDog/dd-trace-php/releases/latest
 [3]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
 [4]: #opentracing
-
 {{% /tab %}}
 {{% tab "C++" %}}
 
@@ -1926,12 +1925,12 @@ const tracer = require('dd-trace')
 
 class Logger {
   log (level, message) {
-    const scope = tracer.scopeManager().active()
+    const span = tracer.scope().active()
     const time = (new Date()).toISOString()
     const record = { time, level, message }
 
-    if (scope && scope.span()) {
-      tracer.inject(scope.span().context(), record)
+    if (span) {
+      tracer.inject(span.context(), record)
     }
 
     console.log(record)
@@ -1945,8 +1944,8 @@ module.exports = Logger
 
 Pour s'assurer du bon fonctionnement de la corrélation des logs, vérifiez que les éléments suivants sont inclus dans chaque entrée de log :
 
-- `dd.trace_id=<ID_TRACE>` : `<ID_TRACE>` a pour valeur `tracer.scopeManager().active().span().context().toTraceId()` ou `0` en l'absence de trace active lors de la journalisation.
-- `dd.span_id=<ID_SPAN>` : `<ID_SPAN>` a pour valeur `tracer.scopeManager().active().span().context().toSpanId()` ou `0` en l'absence de trace active lors de la journalisation.
+- `dd.trace_id=<ID_TRACE>` : `<ID_TRACE>` a pour valeur `tracer.scope().active().context().toTraceId()`.
+- `dd.span_id=<ID_SPAN>` : `<ID_SPAN>` a pour valeur `tracer.scope().active().context().toSpanId()`.
 
 Vous devez inclure ces deux chaînes de caractères, ou les ajouter en préfixe, directement dans le message de l'entrée du log. Cela vous permet de corréler la trace et les logs sans avoir à modifier vos règles de parsing.
 
@@ -1957,18 +1956,16 @@ const tracer = require('dd-trace').init()
 
 class Logger {
   log (level, message) {
-    const scope = tracer.scopeManager().active()
+    const span = tracer.scope().active()
     const time = (new Date()).toISOString()
     const format = '[%s] [%s] - dd.trace_id=%s dd.span_id=%s %s'
 
-    let traceId = 0
-    let spanId = 0
+    let traceId = ''
+    let spanId = ''
 
-    if (scope && scope.span()) {
-      const context = scope.span().context()
-
-      traceId = context.toTraceId()
-      spanId = context.toSpanId()
+    if (span) {
+      traceId = span.context().toTraceId()
+      spanId = span.context().toSpanId()
     }
 
     console.log(format, time, level.toUpperCase(), traceId, spanId, message)
@@ -2160,7 +2157,6 @@ Si vous exploitez un serveur NGINX, utilisez la directive `error_log`.
 Si vous effectuez une configuration au niveau de PHP, utilisez le paramètre ini `error_log` de PHP.
 
 [1]: http://php.net/manual/en/install.php
-[2]: https://www.php-fig.org/psr/psr-3
 {{% /tab %}}
 {{% tab "C++" %}}
 
