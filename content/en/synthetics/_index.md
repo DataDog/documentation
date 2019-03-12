@@ -17,7 +17,7 @@ further_reading:
   text: "Configure a Browser Test"
 ---
 
-<div class="alert alert-warning">Synthetics is currently in beta for the Datadog US Site. To request access complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics Request form</a>.</div>
+<div class="alert alert-warning">Synthetics is only available in the US. Browser tests are available in beta: to request access complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics Request form</a>.</div>
 
 ## Overview
 
