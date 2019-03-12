@@ -125,6 +125,17 @@ Select or click on a section of the graph to either zoom in the graph or see the
 
 {{< img src="logs/explorer/analytics/view_logs.gif" alt="view logs" responsive="true" style="width:80%;">}}
 
+## How aggregations work behind the scene
+
+An aggregation (whether it is a mean, a sum, a percentile, etc.) is computed on the set of logs included in the considered time frame.
+
+Let's illustrate this on a fictive bar timeline. In such timeline, each single bar represents a time interval. And one single aggregation is performed for each of these time intervals, for the whole set of logs it includes. Note that log events are not necessarily uniformly time-distribuetd, so aggregations may not be performed on the same amount of logs.
+
+In the following example, each dot represent one log event. The timestamp of the log is represented on the X-axis, and the value of a duration attribute borne by logs on the Y-axis. The timeseries displays a maximum-aggregation. We display a timeline with a rollout parameter such as there are 4 bars for the whole time frame.
+
+{{< img src="logs/explorer/analytics/aggregation_howto.gif" alt="top list example" responsive="true" style="width:90%;">}}
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
