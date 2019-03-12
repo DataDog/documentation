@@ -125,6 +125,17 @@ Select or click on a section of the graph to either zoom in the graph or see the
 
 {{< img src="logs/explorer/analytics/view_logs.gif" alt="view logs" responsive="true" style="width:80%;">}}
 
+## How aggregations work behind the scenes
+
+Datadog computes an aggregation (whether it is a mean, a sum, a percentile, etc.) by using the set of logs included in the targeted time frame.
+
+Let's illustrate this on a fictive bar timeline where each bar represents a time interval. In this example, Datadog creates one aggregation for each of the time intervals for the entire set of logs. Note that log events are not necessarily uniformly time-distributed, so you can not necessarily create aggregations for the same amount of logs.
+
+In the following example, each dot represents one log event. The X-axis is the timestamp of the log, and the Y-axis is the value of a duration attribute borne by logs. The timeseries displays a maximum-aggregation. Datadog displays a timeline with a rollout parameter; for example, there are 4 bars for the whole time frame.
+
+{{< img src="logs/explorer/analytics/aggregation_howto.gif" alt="top list example" responsive="true" style="width:90%;">}}
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
