@@ -191,6 +191,7 @@ kind: faq
 |Riakcs|RIAKCS|
 |Rollbar|ROLLBAR|
 |Ruby|RUBY|
+|Segment|SEGMENT|
 |Sentry|SENTRY|
 |Servicenow|SERVICENOW|
 |Sketch|SKETCH|
