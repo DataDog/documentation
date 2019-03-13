@@ -31,8 +31,6 @@ Effectuez des recherches dans votre dashboard grâce à la barre de recherche en
 
 La popularité d'un dashboard est relative. Le dashboard le plus populaire d'une entreprise est représenté par cinq barres, et la popularité de tous les autres dashboards dépend de ce dernier. La popularité est basée sur le trafic d'un dashboard et est mise à jour quotidiennement. Par conséquent, les nouveaux dashboards n'ont aucune barre de popularité pendant les 24 premières heures.
 
-Si vous utilisez uBlock ou un plug-in de navigateur similaire pour bloquer les balises Web, votre trafic n'aura aucune incidence sur la popularité d'un dashboard.
-
 **Remarque** : le trafic vers des URL publiques de dashboards publics n'est pas pris en compte.
 
 ## Créer une liste de dashboards
@@ -55,7 +53,7 @@ Pour créer un dashboard, cliquez sur le bouton *New Dashboard* dans le coin sup
 
 ### Quelle est la différence entre un screenboard et un timeboard ?
 
-Vous pouvez créer et personnaliser deux types de dashboards : les [screenboards][3] et les [timeboards][4]. Consultez le tableau ci-dessous pour mieux ce qui les différencie :
+Vous pouvez créer et personnaliser deux types de dashboards : les [screenboards][3] et les [timeboards][4]. Consultez le tableau ci-dessous pour mieux comprendre ce qui les différencie :
 
 |                                | Timeboards                       | Screenboards                                      |
 | ---                            | ------------                     | -------------                                     |
