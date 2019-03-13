@@ -1317,7 +1317,9 @@ The Datadog C++ tracer can only be used through the OpenTracing API. The usage i
 
 APM enables priority sampling by default to allows traces between two Datadog endpoints to be sampled together. This prevents trace sampling from removing segments of a distributed trace (i.e. ensures completeness) and helps removing unimportant ones. You can override this functionality to force keep a trace (critical transaction, debug mode, etc.) by the agent and the server using forced tracing.
 
-Note: <TODO (Optional): Include link from API documentation for cases where it doesn't work>
+Forced tracing should be done only before any context propagation. If this happens after the propagation of a context, the system can’t ensure that the entire trace is sampled properly.
+
+Note: TODO (Optional): Include link from API documentation for cases where it doesn't work
 
 For a more detailed explanations of sampling, check the [sampling and storage][5] documentation.
 
@@ -1357,7 +1359,6 @@ To set a custom priority to a trace:
 from ddtrace.ext.priority import FORCE_TRACE
 
 span = tracer.current_span()
-
 # indicate to force a trace
 #TODO: Tentative
 span.context.setTag(FORCE_TRACE)
@@ -1387,7 +1388,6 @@ package main
 import (
     "log"
     "net/http"
-
     "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
     "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
@@ -1396,7 +1396,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
     // Create a span for a web request at the /posts URL.
     span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
     defer span.Finish()
-
     // Indicate to force a trace
     //Tentative
     span.SetTag(ext.ForceTrace)
@@ -1422,13 +1421,13 @@ span.setTag('force.trace')
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+Forced Tracing is currently not supported. 
 
 [1]: /help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Priority sampling is enabled by default.
+Forced Tracing is currently not supported.
 
 {{% /tab %}}
 {{% tab "C++" %}}
