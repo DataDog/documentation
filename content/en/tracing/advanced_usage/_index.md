@@ -249,7 +249,7 @@ using Datadog.Trace;
 var scope = Tracer.Instance.ActiveScope;
 
 // add a tag to the span
-span?.SetTag("<TAG_KEY>", "<TAG_VALUE>");
+scope.Span.SetTag("<TAG_KEY>", "<TAG_VALUE>");
 ```
 
 **Note**: `Datadog.Trace.Tracer.Instance.ActiveScope` returns `null` if there is no active span.
