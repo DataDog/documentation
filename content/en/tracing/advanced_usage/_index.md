@@ -1592,8 +1592,6 @@ Once the sampling priority has been set, it cannot be changed. This is done auto
 
 Priority sampling is enabled by default. The default sampler automatically assigns a value of `AutoReject` or `AutoKeep` to traces, depending on their service and volume.
 
-The ability to set a trace's sampling priority manually is coming soon.
-
 {{% /tab %}}
 {{% tab "PHP" %}}
 
