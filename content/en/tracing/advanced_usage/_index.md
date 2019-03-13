@@ -715,7 +715,7 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 ```
 
 
-[1]: /tracing/languages/dotnet/#compatibility
+[1]: /tracing/languages/dotnet/#runtime-compatibility
 {{% /tab %}}
 
 {{% tab "PHP" %}}
