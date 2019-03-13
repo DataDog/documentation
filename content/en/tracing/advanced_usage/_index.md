@@ -407,7 +407,7 @@ const tracer = require('dd-trace').init({
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-The .NET Tracer automatically reads the environment variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. The Agent endpoint can also be set when creating a new `Tracer` instance:
+The .NET Tracer automatically reads the environment variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` to set the Agent endpoint. The Agent endpoint can also be set when creating a new `Tracer` instance:
 
 ```csharp
 using Datadog.Trace;
