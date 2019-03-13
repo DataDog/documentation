@@ -286,7 +286,7 @@ The .NET Tracer supports automatic instrumentation on the following runtimes:
 | .NET Framework         | 4.5+     | Windows        | Public Beta  |
 | .NET Core <sup>1</sup> | 2.0+     | Windows, Linux | Public Beta  |
 
-<sup>1</sup> There was an issue in .NET Core versions 2.1.0, 2.1.1, and 2.1.2 that could prevent profilers from working correctly. This issue was fixed in .NET Core 2.1.3. See [this GitHub issue][9] for more details.
+<sup>1</sup> There is an issue in .NET Core versions 2.1.0, 2.1.1, and 2.1.2 that can prevent profilers from working correctly. This issue is fixed in .NET Core 2.1.3. See [this GitHub issue][9] for more details.
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
 
