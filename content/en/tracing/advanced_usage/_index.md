@@ -708,9 +708,9 @@ For more information on manual instrumentation, see the [API documentation][2].
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-If you aren’t using libraries supported by automatic instrumentation (see [Library compatibility][1]), you should manually instrument your code.
+If you are not using libraries supported by automatic instrumentation (see [Integrations][1]), you can instrument your code manually.
 
-The following example uses the global Datadog Tracer and creates a span to trace a web request:
+The following example uses the global `Tracer` and creates a custom span to trace a web request:
 
 ```csharp
 using Datadog.Trace;
@@ -727,7 +727,7 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 ```
 
 
-[1]: /tracing/languages/dotnet/#runtime-compatibility
+[1]: /tracing/languages/dotnet/#integrations
 {{% /tab %}}
 
 {{% tab "PHP" %}}
