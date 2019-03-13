@@ -36,7 +36,7 @@ Automatic instrumentation captures:
 - Unhandled exceptions, including stacktraces if available
 - A total count of traces (e.g. web requests) flowing through the system
 
-### Installing libraries
+### Installation
 
 There are three components needed to enable automatic instrumentation.
 
@@ -126,7 +126,7 @@ apk add libc6-compat
 
 **Note:** If your application runs on IIS and you used the MSI installer, you don't need to configure environment variables manually and you may skip this section.
 
-**Note:** The profiler tries to attach to _any_ .NET process that is started while these environment variables are set. You should limit profiling only to the applications that need to be traced. **Do not set these environment variables globally as this causes _all_ .NET processes on the host to be profiled.**
+**Note:** The .NET runtime tries to load a profiler into _any_ .NET process that is started while these environment variables are set. You should limit profiling only to the applications that need to be traced. **Do not set these environment variables globally as this causes _all_ .NET processes on the host to be profiled.**
 
 {{< tabs >}}
 
@@ -273,53 +273,50 @@ Environment Variable       | Description                                        
 `DD_AGENT_HOST`            | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. | `localhost`   |
 `DD_TRACE_AGENT_PORT`      | Sets the port where traces are sent (the port where the Agent is listening for connections).              | `8126`        |
 `DD_ENV`                   | Adds the `env` tag with the specified value to generated spans. See [Agent configuration][2] for more details about the `env` tag. | _empty_ (no `env` tag) |
-`DD_SERVICE_NAME`          | Sets the default service name. If not set, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, entry assembly, or process name). | _empty_ (determine service name automatically) |
-`DD_DISABLED_INTEGRATIONS` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are: `AspNetCoreMvc2`, `AspNetMvc`, `AspNetWebApi2`, `ElasticsearchNet`, `ServiceStackRedis`, `SqlServer`, `StackExchangeRedis` | _empty_ (all integrations enabled) |
+`DD_SERVICE_NAME`          | Sets the default service name. If not set, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). | _empty_ (determine service name automatically) |
+`DD_DISABLED_INTEGRATIONS` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][8] section below | _empty_ (all integrations enabled) |
 `DD_TRACE_LOG_PATH`        | Sets the path for the profiler's log file. | Windows: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br><br>Linux: `/var/log/datadog/dotnet-profiler.log` | |
 
 ### Runtime Compatibility
 
 The .NET Tracer supports automatic instrumentation on the following runtimes:
 
-| Runtime        | Versions | OS      | Support Type |
-| -------------- | -------- | ------- | ------------ |
-| .NET Framework | 4.5+     | Windows | Public Beta  |
-| .NET Core      | 2.0+     | Windows | Public Beta  |
-| .NET Core      | 2.0+     | Linux   | Public Beta  |
+| Runtime                | Versions | OS             | Support type |
+| ---------------------- | -------- | ---------------| ------------ |
+| .NET Framework         | 4.5+     | Windows        | Public Beta  |
+| .NET Core <sup>1</sup> | 2.0+     | Windows, Linux | Public Beta  |
 
-**Note**: Libraries that target .NET Standard 2.0 are supported when running on either .NET Framework 4.6.1+ or .NET Core 2.0+.
-
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
-
-### Web Framework Integrations
-
-The .NET Tracer can instrument the following web frameworks automatically:
-
-| Web framework     | Versions  | Runtime             | OS      | Support Type  | Integration Name |
-| ----------------- | --------- | ------------------- | ------- | ------------- | ---------------- |
-| ASP.NET MVC 5     | 5.1.3+    | .NET Framework 4.5+ | Windows | Public Beta   | `AspNetMvc`      |
-| ASP.NET MVC 4     | 4.0.40804 | .NET Framework 4.5+ | Windows | Public Beta   | `AspNetMvc`      |
-| ASP.NET Web API 2 | 2.2+      | .NET Framework 4.5+ | Windows | Public Beta   | `AspNetWebApi2`  |
-| ASP.NET Web Forms | 4.5+      | .NET Framework 4.5+ | Windows | _Coming soon_ |                  |
-| ASP.NET Core MVC  | 2.0+      | .NET Framework 4.5+ | Windows | Public Beta   | `AspNetCoreMvc2` |
-| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Windows | Public Beta   | `AspNetCoreMvc2` |
-| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Linux   | Public Beta   | `AspNetCoreMvc2` |
+<sup>1</sup> There is an issue in .NET Core versions 2.1.0, 2.1.1, and 2.1.2 that can prevent profilers from working correctly. This issue is fixed in .NET Core 2.1.3. See [this GitHub issue][9] for more details.
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
 
-### Data Store Integrations
+### Integrations
 
-The .NET Tracer's ability to automatically instrument data store access depends on the client libraries used:
+The .NET Tracer can instrument the following libraries automatically:
 
-| Data store    | Library or NuGet package                  | Versions   | Support type  | Integration Name     |
-| ------------- | ----------------------------------------- | ---------- | ------------- | -------------------- |
-| ADO.NET       | `System.Data` / `System.Data.Common`      | 4.0+       | Public Beta   | `AdoNet`             |
-| Redis         | `StackExchange.Redis`                     | 1.0.187+   | Public Beta   | `StackExchangeRedis` |
-| Redis         | `ServiceStack.Redis`                      | 4.0.48+    | Public Beta   | `ServiceStackRedis`  |
-| Elasticsearch | `NEST` / `Elasticsearch.Net`              | 6.0.0+     | Public Beta   | `ElasticsearchNet`   |
-| MongoDB       | `MongoDB.Driver` / `MongoDB.Driver.Core`  | 2.2.0+     | Public Beta   | `MongoDb`            |
+| Framework or library            | NuGet package name                       | Package versions | Support Type              | Integration Name     |
+| ------------------------------- | ---------------------------------------- | ---------------- | ------------------------- | -------------------- |
+| ASP.NET MVC 5                   | `Microsoft.AspNet.Mvc`                   | 5.1.3+           | Public Beta               | `AspNetMvc`          |
+| ASP.NET MVC 4                   | `Microsoft.AspNet.Mvc`                   | 4.0.40804        | Public Beta               | `AspNetMvc`          |
+| ASP.NET Web API 2               | `Microsoft.AspNet.WebApi.Core`           | 5.2+             | Public Beta               | `AspNetWebApi2`      |
+| ASP.NET Core MVC                | `Microsoft.AspNetCore.Mvc.Core`          | 2.0+             | Public Beta               | `AspNetCoreMvc2`     |
+| ASP.NET Web Forms <sup>1</sup>  | built-in                                 |                  | Experimental<sup>2</sup>  | `AspNet`             |
+| WCF                             | built-in                                 |                  | _Coming soon_             |                      |
+| ADO.NET <sup>3</sup>            | built-in                                 |                  | Public Beta               | `AdoNet`             |
+| WebClient / WebRequest          | built-in                                 |                  | Public Beta               | `WebRequest`         |
+| HttpClient / HttpClientHandler  | built-in or `System.Net.Http`            | 4.0+             | Public Beta               | `HttpMessageHandler` |
+| Redis (StackExchange client)    | `StackExchange.Redis`                    | 1.0.187+         | Public Beta               | `StackExchangeRedis` |
+| Redis (ServiceStack client)     | `ServiceStack.Redis`                     | 4.0.48+          | Public Beta               | `ServiceStackRedis`  |
+| Elasticsearch                   | `NEST` / `Elasticsearch.Net`             | 6.0.0+           | Public Beta               | `ElasticsearchNet`   |
+| MongoDB                         | `MongoDB.Driver` / `MongoDB.Driver.Core` | 2.2.0+           | Public Beta               | `MongoDb`            |
 
-The ADO.NET integration tries to instrument **all** ADO.NET providers. Support was tested with SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (e.g. MySQL, SQLite, Oracle) might work, but have not been tested yet.
+Notes:
+
+<sup>1</sup> The `AspNet` integration adds instrumentation to any application based on `Systme.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks.
+
+<sup>2</sup> The `AspNet` integration is not enabled by default in .NET Tracer 0.8. To enable it manually for testing purposes, see the [release notes for .NET Tracer 0.8][7].
+
+<sup>3</sup> The ADO.NET integration tries to instrument **all** ADO.NET providers. Support was tested with SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (e.g. MySQL, SQLite, Oracle) might work, but have not been tested.
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
 
@@ -351,3 +348,6 @@ For more details on supported platforms, see the [.NET Standard documentation][6
 [4]: https://www.nuget.org/packages/Datadog.Trace
 [5]: /tracing/advanced_usage/?tab=net
 [6]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
+[7]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v0.8.0-beta
+[8]: #integrations
+[9]: https://github.com/dotnet/coreclr/issues/18448
