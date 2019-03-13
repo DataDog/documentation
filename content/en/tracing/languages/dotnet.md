@@ -299,12 +299,12 @@ The .NET Tracer can instrument the following libraries automatically:
 | ASP.NET MVC 5                   | `Microsoft.AspNet.Mvc`                   | 5.1.3+           | Public Beta               | `AspNetMvc`          |
 | ASP.NET MVC 4                   | `Microsoft.AspNet.Mvc`                   | 4.0.40804        | Public Beta               | `AspNetMvc`          |
 | ASP.NET Web API 2               | `Microsoft.AspNet.WebApi.Core`           | 5.2+             | Public Beta               | `AspNetWebApi2`      |
-| ASP.NET Web Forms<sup>1</sup>   | included with .NET Framework             |                  | Experimental <sup>2</sup> | `AspNet`             |
 | ASP.NET Core MVC                | `Microsoft.AspNetCore.Mvc.Core`          | 2.0+             | Public Beta               | `AspNetCoreMvc2`     |
-| WCF                             | included with .NET Framework             |                  | _Coming soon_             |                      |
-| ADO.NET <sup>3</sup>            | included / `System.Data.Common`          | 4.0+             | Public Beta               | `AdoNet`             |
-| HttpClient / HttpClientHandler  | included / `System.Net.Http`             | 4.0+             | Public Beta               | `HttpMessageHandler` |
-| WebClient / WebRequest          | included / `System.Net.Requests`         | 4.0+             | Public Beta               | `WebRequest`         |
+| ASP.NET Web Forms<sup>1</sup>   | built-in                                 |                  | Experimental <sup>2</sup> | `AspNet`             |
+| WCF                             | built-in                                 |                  | _Coming soon_             |                      |
+| ADO.NET <sup>3</sup>            | built-in                                 | 4.0+             | Public Beta               | `AdoNet`             |
+| HttpClient / HttpClientHandler  | built-in                                 | 4.0+             | Public Beta               | `HttpMessageHandler` |
+| WebClient / WebRequest          | built-in                                 | 4.0+             | Public Beta               | `WebRequest`         |
 | Redis (StackExchange client)    | `StackExchange.Redis`                    | 1.0.187+         | Public Beta               | `StackExchangeRedis` |
 | Redis (ServiceStack client)     | `ServiceStack.Redis`                     | 4.0.48+          | Public Beta               | `ServiceStackRedis`  |
 | Elasticsearch                   | `NEST` / `Elasticsearch.Net`             | 6.0.0+           | Public Beta               | `ElasticsearchNet`   |
