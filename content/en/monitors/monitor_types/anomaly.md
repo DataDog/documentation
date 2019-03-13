@@ -54,7 +54,7 @@ Options:
     - Weekly - the algorithm expects that a given day of the week behaves like past days of the week, for example this Tuesday behaves like past Tuesdays. 
     - Daily - the algorithm expects the same time today behaves like past days, for example 5pm today behaves like 5pm yesterday.
     - Hourly - the algorithm expects the same minute after the hour behaves like past minutes after the hour, for example 5:15 behaves like 4:15, 3:15, etc.
-* Daylight savings time - if you are using the agile or robust anomaly detection algorithms with weekly or daily seasonality, you can update your anomaly detection monitor to account for a local timezone. For more information, see [How to update an anomaly detection monitor to account for local time zone](4).
+* Daylight savings time - if you are using the agile or robust anomaly detection algorithms with weekly or daily seasonality, you can update your anomaly detection monitor to account for a local timezone. For more information, see [How to update an anomaly detection monitor to account for local time zone][4].
 
 **Note**: Machine learning algorithms require at least twice as much historical data time as the chosen seasonality time to be fully efficient.
 
@@ -201,7 +201,7 @@ Datadog allows you to configure a timezone for each anomaly detection monitor th
 [1]: https://app.datadoghq.com/monitors#/create
 [2]: #anomaly-detection-algorithms
 [3]: /graphing/#aggregate-and-rollup
-[4]: /monitors/faq/how-to-update-anomaly-monitor-timezone/
+[4]: /monitors/faq/how-to-update-anomaly-monitor-timezone
 [5]: https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average
 [6]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
 [7]: /api/#monitor-create
@@ -210,4 +210,4 @@ Datadog allows you to configure a timezone for each anomaly detection monitor th
 [10]: /monitors/monitor_types/metric
 [11]: /monitors/monitor_types/composite
 [12]: /monitors/faq/what-are-recovery-thresholds
-[13]: /monitors/faq/how-to-update-anomaly-monitor-timezone
+[13]: 
