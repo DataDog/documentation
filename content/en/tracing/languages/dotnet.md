@@ -312,7 +312,7 @@ The .NET Tracer can instrument the following libraries automatically:
 
 Notes:
 
-<sup>1</sup> The `AspNet` integration adds instrumentation to any application based on `Systme.Web.HttpApplication`, which can include application developed with Web Forms, MVC, Web API, and other web frameworks.
+<sup>1</sup> The `AspNet` integration adds instrumentation to any application based on `Systme.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks.
 
 <sup>2</sup> The `AspNet` integration is experimental and not enabled by default as of v0.8. To enable it manually for testing purposes, see the [release notes for .NET Tracer v0.8][7].
 
