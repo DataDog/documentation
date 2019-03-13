@@ -193,7 +193,7 @@ Setting different windows for the alert and alert recovery periods might lead to
 
 Datadog monitors use UTC time and by default are agnostic to local time zones (e.g. EST, PST, CST). User activity is shifted relative to UTC time because activity typically remains the same for the user's local time. This could be detected as unexpected anomaly. 
 
-Datadog allows you to configure a timezone for each anomaly detection monitor that automatically corrects for the time shift. See [How to update an anomaly detection monitor to account for local timezone][13] for instructions.
+Datadog allows you to configure a timezone for each anomaly detection monitor that automatically corrects for the time shift. See [How to update an anomaly detection monitor to account for local timezone][4] for instructions.
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -210,4 +210,3 @@ Datadog allows you to configure a timezone for each anomaly detection monitor th
 [10]: /monitors/monitor_types/metric
 [11]: /monitors/monitor_types/composite
 [12]: /monitors/faq/what-are-recovery-thresholds
-[13]: 
