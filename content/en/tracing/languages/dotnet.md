@@ -316,7 +316,7 @@ Notes:
 
 <sup>2</sup> The `AspNet` integration is not enabled by default in .NET Tracer 0.8. To enable it manually for testing purposes, see the [release notes for .NET Tracer 0.8][7].
 
-<sup>3</sup> The ADO.NET integration tries to instrument **all** ADO.NET providers. Support was tested with SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (e.g. MySQL, SQLite, Oracle) might work, but have not been tested yet.
+<sup>3</sup> The ADO.NET integration tries to instrument **all** ADO.NET providers. Support was tested with SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (e.g. MySQL, SQLite, Oracle) might work, but have not been tested.
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
 
