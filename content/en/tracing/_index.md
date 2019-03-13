@@ -18,7 +18,7 @@ Datadog APM provides you with deep insight into your application's performance-f
 
 Distributed tracing allows you to propagate a single trace across multiple services and hosts, so you can see performance end-to-end. Linking is implemented by injecting Datadog Metadata into the request headers.
 
-Distributed tracing headers are language agnostic. A trace started in one language may propagate to another (for example, from Python to Java).
+Distributed tracing headers are language agnostic. A trace started in one language may propagate to another (for example, from Python to Java). Datadog sampling ensures completeness of traces distributed across hosts and services.
 
 Datadog APM & Distributed Tracing is offered as an upgrade to the Pro and Enterprise plans. A free 14-day trial is available. Registered users can visit the [APM page of the Datadog application][1] to get started.
 
