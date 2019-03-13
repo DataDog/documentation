@@ -83,7 +83,7 @@ Vous trouverez ci-dessous la liste complète des paramètres disponibles pour vo
 | `log_file`                | string      | Emplacement du fichier de log.                                                                                                                                          |
 | `replace_tags`            | list        | La liste des règles de remplacement des tags. Consultez la section [Nettoyer les informations sensibles](#nettoyer-les-informations-sensibles) pour en savoir plus.                                              |
 | `receiver_port`           | number      | Port sur lequel le récepteur de traces de l'Agent Datadog effectue son écoute. Valeur par défaut : `8126`.                                                                                   |
-| `apm_non_local_traffic`   | boolean     | Autorise l'Agent à recevoir des connexions extérieures, afin d'effectuer une écoute sur l'ensemble des interfaces.                                                                                 |
+| `apm_non_local_traffic`   | boolean     | Définir sur `true` pour autoriser l'Agent à recevoir des connexions extérieures et effectuer une écoute sur l'ensemble des interfaces.                                                                                 |
 | `max_memory`              | float       | Mémoire maximale que l'Agent peut occuper. Si l'Agent dépasse cette valeur, le processus est arrêté.                                                                   |
 | `max_cpu_percent`         | float       | Pourcentage maximum du processeur que l'Agent doit utiliser. L'Agent ajuste automatiquement son taux de pré-échantillonnage pour ne pas dépasser cette valeur.                                 |
 
