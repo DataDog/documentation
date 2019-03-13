@@ -106,7 +106,7 @@ The following ports are open for operations:
 | tcp/17124 | The forwarder for graphite support  |
 | udp/8125  | DogStatsD                           |
 
-All listening processes are bound by default to `127.0.0.1` and/or `::1` on v3.4.1+ of the Agent. In earlier versions, they were bound to `0.0.0.0` (all interfaces). For information on running the Agent through a proxy see [Agent proxy configuration][3]. For information on IP ranges to allow, see [Network Traffic][4]. 
+All listening processes are bound by default to `127.0.0.1` and/or `::1` on v3.4.1+ of the Agent. In earlier versions, they were bound to `0.0.0.0` (all interfaces). For information on running the Agent through a proxy see [Agent proxy configuration][3]. For information on IP ranges to allow, see [Network Traffic][4].
 
 The recommended number of open file descriptors is 1024. You can see this value with the command `ulimit -a`. If you have a hard limitation below the recommended value, for example Shell Fork Bomb Protection, one solution is to add the following in `superisord.conf`:
 
@@ -251,6 +251,16 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 [9]: /agent/basic_agent_usage/osx
 [10]: /agent/basic_agent_usage/windows
 [11]: /agent/basic_agent_usage/source
+{{% /tab %}}
+{{% tab "UNIX Agent" %}}
+
+| OS                                | Supported versions             |
+|-----------------------------------|--------------------------------|
+| [AIX][1]                          | AIX 6.1, 7.1, 7.2              |
+
+
+[1]: /agent/aix
+
 {{% /tab %}}
 {{< /tabs >}}
 
