@@ -1313,7 +1313,7 @@ The Datadog C++ tracer can only be used through the OpenTracing API. The usage i
 {{% /tab %}}
 {{< /tabs >}}
 
-## Forced Tracing - priyanshi
+## Forced Tracing
 
 APM enables priority sampling by default to allows traces between two Datadog endpoints to be sampled together. This prevents trace sampling from removing segments of a distributed trace (i.e. ensures completeness) and helps removing unimportant ones. You can override this functionality to force keep a trace (critical transaction, debug mode, etc.) by the agent and the server using forced tracing.
 

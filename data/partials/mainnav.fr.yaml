@@ -255,7 +255,7 @@ main:
             url: '#opentracing'
           - name: Tracing distribué
             url: '#tracing-distribue'
-          - name: Priority Sampling
+          - name: Forced Tracing
             url: '#priority-sampling'
           - name: Correlate Traces and Logs
             url: '#correlate-traces-and-logs'
