@@ -302,9 +302,9 @@ The .NET Tracer can instrument the following libraries automatically:
 | ASP.NET Core MVC                | `Microsoft.AspNetCore.Mvc.Core`          | 2.0+             | Public Beta               | `AspNetCoreMvc2`     |
 | ASP.NET Web Forms<sup>1</sup>   | built-in                                 |                  | Experimental <sup>2</sup> | `AspNet`             |
 | WCF                             | built-in                                 |                  | _Coming soon_             |                      |
-| ADO.NET <sup>3</sup>            | built-in                                 | 4.0+             | Public Beta               | `AdoNet`             |
-| HttpClient / HttpClientHandler  | built-in                                 | 4.0+             | Public Beta               | `HttpMessageHandler` |
-| WebClient / WebRequest          | built-in                                 | 4.0+             | Public Beta               | `WebRequest`         |
+| ADO.NET <sup>3</sup>            | built-in                                 |                  | Public Beta               | `AdoNet`             |
+| WebClient / WebRequest          | built-in                                 |                  | Public Beta               | `WebRequest`         |
+| HttpClient / HttpClientHandler  | built-in or `System.Net.Http`            |                  | Public Beta               | `HttpMessageHandler` |
 | Redis (StackExchange client)    | `StackExchange.Redis`                    | 1.0.187+         | Public Beta               | `StackExchangeRedis` |
 | Redis (ServiceStack client)     | `ServiceStack.Redis`                     | 4.0.48+          | Public Beta               | `ServiceStackRedis`  |
 | Elasticsearch                   | `NEST` / `Elasticsearch.Net`             | 6.0.0+           | Public Beta               | `ElasticsearchNet`   |
