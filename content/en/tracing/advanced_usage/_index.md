@@ -2275,4 +2275,3 @@ apm_config:
 [5]: /tracing/getting_further/trace_sampling_and_storage
 [6]: /logs/log_collection/?tab=tailexistingfiles#send-your-application-logs-in-json
 [7]: /logs/log_collection/?tab=tailexistingfiles#enabling-log-collection-from-integrations
-[8]:
