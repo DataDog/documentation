@@ -126,7 +126,7 @@ apk add libc6-compat
 
 **Note:** If your application runs on IIS and you used the MSI installer, you don't need to configure environment variables manually and you may skip this section.
 
-**Note:** The .NET runtime will try to load a profiler into _any_ .NET process that is started while these environment variables are set. You should limit profiling only to the applications that need to be traced. **Do not set these environment variables globally as this causes _all_ .NET processes on the host to be profiled.**
+**Note:** The .NET runtime tries to load a profiler into _any_ .NET process that is started while these environment variables are set. You should limit profiling only to the applications that need to be traced. **Do not set these environment variables globally as this causes _all_ .NET processes on the host to be profiled.**
 
 {{< tabs >}}
 
