@@ -314,7 +314,7 @@ Notes:
 
 <sup>1</sup> The `AspNet` integration adds instrumentation to any application based on `Systme.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks.
 
-<sup>2</sup> The `AspNet` integration not enabled by default as in .NET Tracer 0.8. To enable it manually for testing purposes, see the [release notes for .NET Tracer 0.8][7].
+<sup>2</sup> The `AspNet` integration is not enabled by default in .NET Tracer 0.8. To enable it manually for testing purposes, see the [release notes for .NET Tracer 0.8][7].
 
 <sup>3</sup> The ADO.NET integration tries to instrument **all** ADO.NET providers. Support was tested with SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (e.g. MySQL, SQLite, Oracle) might work, but have not been tested yet.
 
