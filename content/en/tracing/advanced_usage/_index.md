@@ -1313,36 +1313,23 @@ The Datadog C++ tracer can only be used through the OpenTracing API. The usage i
 {{% /tab %}}
 {{< /tabs >}}
 
-## Priority Sampling
+## Forced Tracing - priyanshi
 
-Priority sampling allows traces between two Datadog endpoints to be sampled together. This prevents trace sampling from removing segments of a distributed trace (i.e. ensures completeness). Additionally, APM traces expose sampling flags to configure how specific traces are sampled.
+APM enables priority sampling by default to allows traces between two Datadog endpoints to be sampled together. This prevents trace sampling from removing segments of a distributed trace (i.e. ensures completeness) and helps removing unimportant ones. You can override this functionality to force keep a trace (critical transaction, debug mode, etc.) by the agent and the server using forced tracing.
 
-Priority sampling automatically assigns and propagates a priority value along all traces, depending on their service and volume. Priorities can also be set manually to drop non-interesting traces or keep important ones.
+Note: <TODO (Optional): Include link from API documentation for cases where it doesn't work>
 
-For a more detailed explanations of sampling and priority sampling, check the [sampling and storage][5] documentation.
-
+For a more detailed explanations of sampling, check the [sampling and storage][5] documentation.
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Priority sampling is enabled by default. To disable it, configure the `priority.sampling` flag to `false` ([see how to configure the java client][1]).
-
-
-Current Priority Values (more may be added in the future):
-
-| Sampling Value | Effect                                                                                                     |
-| -------------- | :--------------------------------------------------------------------------------------------------------- |
-| `SAMPLER_DROP` | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
-| `SAMPLER_KEEP` | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
-| `USER_DROP`    | The user asked to not keep the trace. The Agent will drop it.                                              |
-| `USER_KEEP`    | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
-
-Manually set trace priority:
+Set tag to manually force trace:
 
 ```java
 import datadog.trace.api.Trace;
 import datadog.trace.api.interceptor.MutableSpan;
-import datadog.trace.common.sampling.PrioritySampling;
+import datadog.trace.common.sampling.ForcedTracing;
 import io.opentracing.util.GlobalTracer;
 
 public class MyClass {
@@ -1350,87 +1337,49 @@ public class MyClass {
     public static void myMethod() {
         // grab the active span out of the traced method
         MutableSpan ddspan = (MutableSpan) GlobalTracer.get().activeSpan();
-        // ask the sampler to keep the current trace
-        ddspan.setSamplingPriority(PrioritySampling.USER_KEEP);
+        // ask the sampler to force the current trace
+        //TODO: Tentative
+        ddspan.setTag(ForcedTracing.keep);
         // method impl follows
     }
 }
 ```
 
-[1]: /tracing/languages/java/#configuration
+
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Priority sampling is disabled by default. To enable it, configure the `priority_sampling` flag using the `tracer.configure` method:
-
-```python
-tracer.configure(priority_sampling=True)
-```
+Set tag to manually force trace:
 
 To set a custom priority to a trace:
 
 ```python
-from ddtrace.ext.priority import USER_REJECT, USER_KEEP
+from ddtrace.ext.priority import FORCE_TRACE
 
 span = tracer.current_span()
 
-# indicate to not keep the trace
-span.context.sampling_priority = USER_REJECT
+# indicate to force a trace
+#TODO: Tentative
+span.context.setTag(FORCE_TRACE)
 ```
-
-The following priorities can be used.
-
-| Sampling Value | Effect                                                                                                     |
-| -------------- | :--------------------------------------------------------------------------------------------------------- |
-| AUTO_REJECT    | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
-| AUTO_KEEP      | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
-| USER_REJECT    | The user asked to not keep the trace. The Agent will drop it.                                              |
-| USER_KEEP      | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Priority sampling is disabled by default. Enabling it ensures that your sampled distributed traces will be complete. To enable the priority sampling:
+Set tag to manually force trace:
+
 
 ```ruby
-Datadog.configure do |c|
-  c.tracer priority_sampling: true
-end
+# Indicate to force a trace
+#TODO: Tentative
+span.context.set_tag(Datadog::Ext::FORCE_TRACE)
+
 ```
 
-Once enabled, the sampler automatically assigns a value of `AUTO_REJECT` or `AUTO_KEEP` to traces, depending on their service and volume.
-
-You can also set this priority manually to either drop a non-interesting trace or to keep an important one. For that, set the `Context#sampling_priority` to:
-
-```ruby
-# To reject the trace
-span.context.sampling_priority = Datadog::Ext::Priority::USER_REJECT
-
-# To keep the trace
-span.context.sampling_priority = Datadog::Ext::Priority::USER_KEEP
-```
-
-Possible values for the sampling priority tag are:
-
-| Sampling Value                        | Effect                                                                                                     |
-| ------------------------------------- | :--------------------------------------------------------------------------------------------------------- |
-| `Datadog::Ext::Priority::AUTO_REJECT` | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
-| `Datadog::Ext::Priority::AUTO_KEEP`   | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
-| `Datadog::Ext::Priority::USER_REJECT` | The user asked to not keep the trace. The Agent will drop it.                                              |
-| `Datadog::Ext::Priority::USER_KEEP`   | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
-
-Once the sampling priority has been set, it cannot be changed. This is done automatically whenever a span is finished or the trace is propagated. Setting it manually should thus be done before either occur.
-
-See the [API documentation][1] for more details.
-
-
-[1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#priority-sampling
 {{% /tab %}}
 {{% tab "Go" %}}
 
-For more details about how to use and configure distributed tracing, check out the [godoc page][1].
-
-Set the sampling priority of a trace by adding the `sampling.priority` tag to its root span. This is then propagated throughout the entire stack. For example:
+Set tag to manually force trace:
 
 ```go
 package main
@@ -1448,49 +1397,27 @@ func handler(w http.ResponseWriter, r *http.Request) {
     span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
     defer span.Finish()
 
-    // Set priority sampling as a regular tag
-    span.SetTag(ext.SamplingPriority, ext.PriorityUserKeep)
+    // Indicate to force a trace
+    //Tentative
+    span.SetTag(ext.ForceTrace)
 }
 ```
 
-Possible values for the sampling priority tag are:
 
-| Sampling Value         | Effect                                                                                                     |
-| ---------------------- | :--------------------------------------------------------------------------------------------------------- |
-| ext.PriorityAutoReject | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
-| ext.PriorityAutoKeep   | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
-| ext.PriorityUserReject | The user asked to not keep the trace. The Agent will drop it.                                              |
-| ext.PriorityUserKeep   | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
-
-
-[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Priority sampling is enabled by default. The sampler automatically assigns a value of `AUTO_REJECT` or `AUTO_KEEP` to traces, depending on their service and volume.
-
-Set this priority manually to either drop a non-interesting trace or to keep an important one with the `sampling.priority` tag:
+Set tag to manually force trace:
 
 ```javascript
-const priority = require('dd-trace/ext/priority')
 
-// To reject the trace
-span.setTag('sampling.priority', priority.USER_REJECT)
 
-// To keep the trace
-span.setTag('sampling.priority', priority.USER_KEEP)
+
+// Indicate to force a trace
+//TODO: Tentative
+span.setTag('force.trace')
 ```
 
-Possible values for the sampling priority tag are:
-
-| Sampling Value | Effect                                                                                                     |
-| -------------- | :--------------------------------------------------------------------------------------------------------- |
-| `AUTO_REJECT`  | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
-| `AUTO_KEEP`    | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
-| `USER_REJECT`  | The user asked to not keep the trace. The Agent will drop it.                                              |
-| `USER_KEEP`    | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
-
-Once the sampling priority has been set, it cannot be changed. This is done automatically whenever a span is finished or the trace is propagated. Setting it manually should thus be done before either occur.
 
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -1506,14 +1433,15 @@ Priority sampling is enabled by default.
 {{% /tab %}}
 {{% tab "C++" %}}
 
-Priority sampling is enabled by default, and can be disabled in the TracerOptions. You can mark a span to be kept or discarded by setting the tag `sampling.priority`. A value of `0` means reject/don't sample. Any value greater than 0 means keep/sample.
+Set tag to manually force trace:
 
 ```cpp
 auto tracer = ...
 auto span = tracer->StartSpan("operation_name");
-span->SetTag("sampling.priority", 1); // Keep this span.
-auto another_span = tracer->StartSpan("operation_name");
-another_span->SetTag("sampling.priority", 0); // Discard this span.
+// Force this trace
+//TODO: Tentative
+span->SetTag("force.trace"); 
+
 ```
 
 {{% /tab %}}
