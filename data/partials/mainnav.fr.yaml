@@ -256,7 +256,7 @@ main:
           - name: Tracing distribué
             url: '#tracing-distribue'
           - name: Forced Tracing
-            url: '#priority-sampling'
+            url: '#forced-tracing'
           - name: Correlate Traces and Logs
             url: '#correlate-traces-and-logs'
           - name: Debugging
