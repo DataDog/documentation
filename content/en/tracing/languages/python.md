@@ -101,7 +101,6 @@ The `ddtrace` library includes support for the following libraries:
 | [httplib][29]            | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#httplib  |
 | [Jinja2][30]                                    | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#jinja2   |
 | [Kombu][31]                     | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#kombu    |
-| [Requests][32]               | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#requests |
 
 
 ## Further Reading
@@ -139,4 +138,3 @@ The `ddtrace` library includes support for the following libraries:
 [29]: https://docs.python.org/2/library/httplib.html
 [30]: http://jinja.pocoo.org
 [31]: https://kombu.readthedocs.io/en/latest
-[32]: http://docs.python-requests.org/en/master
