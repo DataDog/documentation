@@ -245,11 +245,8 @@ Add tags directly to a `Datadog.Trace.Span` object by calling `Span.SetTag()`. F
 ```csharp
 using Datadog.Trace;
 
-// get the global tracer
-var tracer = Tracer.Instance;
-
-// get the currently active span (can be null)
-var span = tracer.ActiveScope?.Span;
+// access the active scope through the global tracer (can return null)
+var scope = Tracer.Instance.ActiveScope;
 
 // add a tag to the span
 span?.SetTag("<TAG_KEY>", "<TAG_VALUE>");
@@ -405,6 +402,21 @@ const tracer = require('dd-trace').init({
   hostname: process.env.DD_AGENT_HOST,
   port: process.env.DD_TRACE_AGENT_PORT
 })
+```
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+The .NET Tracer automatically reads the environment variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. The Agent endpoint can also be set when creating a new `Tracer` instance:
+
+```csharp
+using Datadog.Trace;
+
+var uri = new Uri("htt://localhost:8126/");
+var tracer = Tracer.Create(agentEndpoint: uri);
+
+// optional: set the new tracer as the new default/global tracer
+Tracer.Instance = tracer;
 ```
 
 {{% /tab %}}
@@ -1114,11 +1126,12 @@ The following tags are available to override Datadog specific options:
 For OpenTracing support, add the [`Datadog.Trace.OpenTracing`][1] NuGet package to your application. During application start-up, initialize the OpenTracing library:
 
 ```csharp
+using Datadog.Trace.OpenTracing;
+
 public void ConfigureServices(IServiceCollection services)
 {
     // create an OpenTracing ITracer with default setting
-    OpenTracing.ITracer tracer =
-        Datadog.Trace.OpenTracing.OpenTracingTracerFactory.CreateTracer();
+    OpenTracing.ITracer tracer = OpenTracingTracerFactory.CreateTracer();
 
     // to use tracer with ASP.NET Core dependency injection
     services.AddSingleton<ITracer>(tracer);
@@ -1339,9 +1352,9 @@ Distributed tracing is enabled by default for all supported integrations (see [C
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+Distributed tracing is enabled by default for all supported integrations (see [Integrations][1]).
 
-[1]: /help
+[1]: /tracing/languages/dotnet/#integrations
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -1577,7 +1590,9 @@ Once the sampling priority has been set, it cannot be changed. This is done auto
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+Priority sampling is enabled by default. The default sampler automatically assigns a value of `AutoReject` or `AutoKeep` to traces, depending on their service and volume.
+
+The ability to set a trace's sampling priority manually is coming soon.
 
 [1]: /help
 {{% /tab %}}
@@ -2142,7 +2157,12 @@ For more tracer settings, check out the [API documentation][2].
 Debug mode is disabled by default. To enable it, set the `isDebugEnabled` argument to `true` when creating a new tracer instance:
 
 ```csharp
-var tracer = Datadog.Trace.Tracer.Create(isDebugEnabled: true);
+using Datadog.Trace;
+
+var tracer = Tracer.Create(isDebugEnabled: true);
+
+// optional: set the new tracer as the new default/global tracer
+Tracer.Instance = tracer;
 ```
 
 {{% /tab %}}
@@ -2255,3 +2275,4 @@ apm_config:
 [5]: /tracing/getting_further/trace_sampling_and_storage
 [6]: /logs/log_collection/?tab=tailexistingfiles#send-your-application-logs-in-json
 [7]: /logs/log_collection/?tab=tailexistingfiles#enabling-log-collection-from-integrations
+[8]:
