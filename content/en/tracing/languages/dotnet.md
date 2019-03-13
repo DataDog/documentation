@@ -300,7 +300,7 @@ The .NET Tracer can instrument the following libraries automatically:
 | ASP.NET MVC 4                   | `Microsoft.AspNet.Mvc`                   | 4.0.40804        | Public Beta               | `AspNetMvc`          |
 | ASP.NET Web API 2               | `Microsoft.AspNet.WebApi.Core`           | 5.2+             | Public Beta               | `AspNetWebApi2`      |
 | ASP.NET Core MVC                | `Microsoft.AspNetCore.Mvc.Core`          | 2.0+             | Public Beta               | `AspNetCoreMvc2`     |
-| ASP.NET Web Forms<sup>1</sup>   | built-in                                 |                  | Experimental <sup>2</sup> | `AspNet`             |
+| ASP.NET Web Forms <sup>1</sup>  | built-in                                 |                  | Experimental<sup>2</sup>  | `AspNet`             |
 | WCF                             | built-in                                 |                  | _Coming soon_             |                      |
 | ADO.NET <sup>3</sup>            | built-in                                 |                  | Public Beta               | `AdoNet`             |
 | WebClient / WebRequest          | built-in                                 |                  | Public Beta               | `WebRequest`         |
