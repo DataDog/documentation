@@ -1594,7 +1594,6 @@ Priority sampling is enabled by default. The default sampler automatically assig
 
 The ability to set a trace's sampling priority manually is coming soon.
 
-[1]: /help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
