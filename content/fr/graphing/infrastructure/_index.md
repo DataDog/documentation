@@ -83,7 +83,7 @@ de Datadog. Le volet Inspect contient notamment la liste des alias associés à 
 
 {{< img src="graphing/infrastructure/index/host_aliases.png" alt="alias hosts" responsive="true" style="width:80%;">}}
 
-### Exporter votre liste d'infrastructure et les versions de l'Agent
+### Exporter votre liste d'infrastructures et les versions de l'Agent
 
 Si vous avez besoin d'afficher ou d'exporter la liste des hosts transmis à Datadog, utilisez le permalien « API JSON » en bas de la page Infrastructure List.
 
