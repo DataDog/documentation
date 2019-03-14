@@ -107,13 +107,15 @@ Expose the same folder in your client containers:
 volumeMounts:
   - name: dsdsocket
     mountPath: /var/run/datadog
-    readOnly: true
+    readOnly: true                  # see note below
 ...
 volumes:
 - hostPath:
     path: /var/run/datadog/
   name: dsdsocket
 ```
+
+**Note**: Remove `readOnly: true` if your client containers need to write access to the socket.
 
 ## Using origin detection for container tagging
 
