@@ -50,7 +50,7 @@ $ dpkg -i datadog-php-tracer.deb
 $ apk add datadog-php-tracer.apk --allow-untrusted
 ```
 
-Visit a tracing-enabled endpoint of your application and view the [APM UI][8] to see the traces.
+Restart PHP (PHP-FPM or the Apache SAPI) and visit a tracing-enabled endpoint of your application and view the [APM UI][8] to see the traces.
 
 **Note**: It might take a few minutes before traces appear in the UI.
 
