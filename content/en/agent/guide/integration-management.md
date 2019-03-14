@@ -5,7 +5,7 @@ kind: guide
 
 ## Overview
 
-The Agent comes with a set of bundled official Datadog integrations to allow users to quickly start monitoring their applications. These integrations are also available as single Python packages that can be individually upgraded.
+The Agent comes with a set of bundled official Datadog integrations to allow users to start monitoring their applications quickly. These integrations are available as single Python packages, and you can upgrade them separately.
 
 For Agent v6.8+, the `datadog-agent integration` command allows users to manage the official Datadog integrations that are available for the Agent. It has the following subcommands:
 
@@ -14,7 +14,7 @@ For Agent v6.8+, the `datadog-agent integration` command allows users to manage 
  * [show](#show)
  * [freeze](#freeze)
 
-The usage and documentation of these commands can be printed with `datadog-agent integration --help`.  
+Print the usage and documentation of these commands with `datadog-agent integration --help`.  
 For Linux, execute the command as the `dd-agent` user. For Windows, execute the command as an `administrator`.
 
 ## Integration commands
@@ -26,7 +26,7 @@ For Linux, execute the command as the `dd-agent` user. For Windows, execute the 
 3. Install the integration with the `install` command.
 4. Restart your Agent.
 
-**Note**: When using a configuration management tool, it is recommended to pin the integration to the desired version. When the Agent is upgraded, remove the integration pin. Upgrading the Agent without removing the integration pin can cause the configuration management tool to fail if the version of the integration is not compatible with the new version of the Agent.
+**Note**: When using a configuration management tool, it is recommended to pin the integration to the desired version. When you're ready to upgrade the Agent, remove the pin. Upgrading the Agent without removing the integration pin can cause the configuration management tool to fail if the version of the integration is not compatible with the new version of the Agent.
 
 ### Install
 
