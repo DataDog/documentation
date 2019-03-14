@@ -396,7 +396,7 @@ On the [Metrics explorer][22] page in Datadog, search for metrics beginning `clo
 
 The following metrics are sent by the Datadog Firehose Nozzle (`cloudfoundry.nozzle`). The Datadog Agent release does not send any special metrics of its own, just the usual metrics from any Agent checks you configure in the Director runtime config (and, by default, [system][23], [network][24], [disk][25], and [ntp][26] metrics).
 
-The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events) and ValueMetrics; it ignores LogMessages, Errors, and ContainerMetrics.
+The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events), ValueMetrics, and ContainerMetrics; it ignores LogMessages and Errors.
 
 {{< get-metrics-from-git "cloud_foundry">}}
 
