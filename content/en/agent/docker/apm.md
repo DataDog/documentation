@@ -36,9 +36,9 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -e DD_APM_ENABLED=true \
               datadog/agent:latest
 ```
-## Docker APM Environment Variables
+## Docker APM Agent Environment Variables
 
-List of all environment variables available for tracing with the Docker Agent:
+List of all environment variables available for tracing within the Docker Agent:
 
 | Environment variable       | Description                                                                                                               |
 | ------                     | ------                                                                                                                    |
@@ -94,7 +94,9 @@ docker run -d --name app \
 This exposes the hostname `datadog-agent` in your `app` container.
 If you're using `docker-compose`, `<NETWORK_NAME>` parameters are the ones defined under the `networks` section of your `docker-compose.yml`.
 
-Your application tracers must be configured to submit traces to this address. See the examples below for each supported language:
+Your application tracers must be configured to submit traces to this address. Set environment variables with the `DD_AGENT_HOST` as the Agent container name, and `DD_TRACE_AGENT_PORT` as the Agent Trace port. (In this example case, `datadog-agent` and `8126`, respectively.)
+
+Alternately, see the examples below to set the Agent host manually in each supported language:
 
 {{< tabs >}}
 {{% tab "Java" %}}
