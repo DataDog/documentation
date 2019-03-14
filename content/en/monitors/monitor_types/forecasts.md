@@ -62,6 +62,8 @@ Datadog automatically sets the **Advanced** options for you by analyzing your me
 * We recommend using larger intervals between points to avoid having noise influence the forecast too much.
 * The number of deviations controls the width of the range of forecasted values. A value of 1 or 2 should be large enough to accurately forecast most "normal" points.
 
+Then, you can choose if the monitor requires a full window of data for evaluation. Setting it to "Requires" might result in evaluations getting skipped. Indeed, evaluations will get skipped if the data is sparse or if the past data in the evaluation window has some missing values. 
+
 Complete all steps in the New Monitor form (**Say what's happening**, etc.) and click **Save** to create the Forecast monitor.
 
 Both the Monitor Edit page and the Monitor Status pages provide "Historical Context" so that you can see how the metric behaved in the past. This should provide some insight into what the forecast algorithm takes into account when predicting future values.
