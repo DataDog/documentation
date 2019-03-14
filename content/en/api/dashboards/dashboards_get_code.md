@@ -1,5 +1,5 @@
 ---
-title: Dashboards
+title: Get a Dashboard
 type: apicode
 order: 8.4
 external_redirect: /api/#get-a-dashboard

@@ -1,0 +1,12 @@
+---
+title: Get all Dashboards
+type: apicontent
+order: 8.5
+external_redirect: /api/#get-all-dashboards
+---
+
+## Get a Dashboard
+Fetch all dashboards.
+
+##### Arguments
+*This end point takes no JSON arguments.*
