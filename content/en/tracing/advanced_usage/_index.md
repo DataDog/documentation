@@ -1935,6 +1935,7 @@ Example using `console` as the underlying logger:
 
 ```javascript
 const tracer = require('dd-trace')
+const formats = require('dd-trace/ext/formats')
 
 class Logger {
   log (level, message) {
@@ -1943,7 +1944,7 @@ class Logger {
     const record = { time, level, message }
 
     if (span) {
-      tracer.inject(span.context(), record)
+      tracer.inject(span.context(), formats.LOG, record)
     }
 
     console.log(record)
