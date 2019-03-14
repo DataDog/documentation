@@ -5,7 +5,7 @@ order: 8.5
 external_redirect: /api/#get-all-dashboards
 ---
 
-## Get a Dashboard
+## Get all Dashboards
 Fetch all dashboards.
 
 ##### Arguments
