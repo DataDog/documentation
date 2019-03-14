@@ -1676,7 +1676,7 @@ finally {
 }
 ```
 
-Modifiez ensuite la configuration de votre enregistreur en ajoutant `dd.trace_id` et `dd.span_id` à votre expression de log :
+Modifiez ensuite la configuration de votre enregistreur en ajoutant `dd.trace_id` et `dd.span_id` à votre modèle de log :
 
 ```
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
@@ -2156,7 +2156,7 @@ Si vous exploitez un serveur Apache, utilisez la directive `ErrorLog`.
 Si vous exploitez un serveur NGINX, utilisez la directive `error_log`.
 Si vous effectuez une configuration au niveau de PHP, utilisez le paramètre ini `error_log` de PHP.
 
-[1]: http://php.net/manual/en/install.php
+[1]: https://www.php-fig.org/psr/psr-3
 {{% /tab %}}
 {{% tab "C++" %}}
 

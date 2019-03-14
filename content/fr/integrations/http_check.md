@@ -11,6 +11,7 @@ dependencies:
 display_name: HTTP
 git_integration_title: http_check
 guid: eb133a1f-697c-4143-bad3-10e72541fa9c
+integration_id: network
 integration_title: Check HTTP
 is_public: true
 kind: integration
@@ -35,7 +36,7 @@ Surveillez le statut de disponibilité d'endpoints HTTP locaux ou à distance. L
 
 ### Installation
 
-Le check HTTP est fourni dans le paquet de [l'Agent Datadog][1]. Ainsi, vous n'avez pas besoin d'installer quoi que ce soit sur les serveurs à partir desquels vous sondez vos sites HTTP. Bien qu'il soit recommandé d'exécuter bon nombre des checks axés sur des métriques sur le(s) mêmes host(s) que le service surveillé, ce check axé sur des statuts peut être lancé sur des hosts qui n'exécutent pas les sites surveillés.
+Le check HTTP est inclus avec le paquet de [l'Agent Datadog][1]. Ainsi, vous n'avez pas besoin d'installer quoi que ce soit sur les serveurs à partir desquels vous sondez vos sites HTTP. Bien qu'il soit recommandé d'exécuter bon nombre des checks axés sur des métriques sur le(s) même(s) host(s) que le service surveillé, ce check axé sur des statuts peut être lancé sur des hosts qui n'exécutent pas les sites surveillés.
 
 ### Configuration
 
@@ -47,8 +48,8 @@ init_config:
 instances:
   - name: Exemple de site Web
     url: https://example.com/
-    # disable_ssl_validation: false      # valeur par défaut : true. Remplacez la valeur par false pour vérifier la validation SSL
-    # ca_certs: /path/to/ca/file         # p.ex., /etc/ssl/certs/ca-certificates.crt
+    # disable_ssl_validation: false      # valeur par défaut : true. Remplacez la valeur par false pour vérifier la validation SSL.
+    # ca_certs: /chemin/vers/fichier/ca         # p.ex., /etc/ssl/certs/ca-certificates.crt
     # check_certificate_expiration: true # valeur par défaut : true
     # days_warning: 28                   # valeur par défaut : 14
     # days_critical: 14                  # valeur par défaut : 7
@@ -59,7 +60,7 @@ instances:
 
 Le check HTTP dispose de davantage d'options de configuration que bon nombre de checks. Seules quelques-unes d'entre elles sont indiquées ci-dessus. La plupart des options fonctionnent selon un système d'activation : par exemple, l'Agent n'exécutera pas la validation SSL sauf si vous configurez les options requises. L'Agent _vérifiera_ notamment les certificats SSL sur le point d'expirer par défaut.
 
-Ce check se lance à chaque exécution du collecteur de l'Agent, soit par défaut toutes les 15 secondes. Pour définir une fréquence d'exécution personnalisée pour ce check, consultez la section [Intervalle de collecte][4] de la documentation portant sur les checks custom.
+Ce check se lance à chaque exécution du collecteur de l'Agent, soit par défaut toutes les 15 secondes. Pour définir une fréquence d'exécution personnalisée pour ce check, consultez la section [Intervalle de collecte][4] de la documentation relative aux checks custom.
 
 Consultez le [fichier d'exemple http_check.d/conf.yaml][3] pour obtenir la liste complète des options disponibles ainsi que leur description. Voici la liste des différentes options :
 
@@ -73,7 +74,7 @@ Consultez le [fichier d'exemple http_check.d/conf.yaml][3] pour obtenir la liste
 | `content_match`                  | Une chaîne de caractères ou une expression régulière Python. Le check HTTP recherche cette valeur dans la réponse et renvoie DOWN si la chaîne de caractères ou l'expression est introuvable.                                                                                                                                                          |
 | `reverse_content_match`          | Si ce paramètre a pour valeur true, inverse le comportement de l'option `content_match`. Ainsi, le check HTTP renverra DOWN si la chaîne ou l'expression dans `content_match` a été trouvée. Valeur par défaut : false.                                                                                                                                         |
 | `username` et `password`          | Si votre service utilise un système d'authentification de base, vous pouvez fournir avec ces paramètres le nom d'utilisateur et le mot de passe.                                                                                                                                                                                                                                  |
-| `http_response_status_code`      | Une chaîne de caractères ou une expression régulière Python d'un code de statut HTTP. Ce check renvoie DOWN pour tout code de statut ne correspondant pas. Par défaut, ce check couvre les codes de statut HTTP 1xx, 2xx et 3xx. Par exemple, `401` ou `4\d\d`.                                                                                                     |
+| `http_response_status_code`      | Une chaîne de caractères ou une expression régulière Python pour un code de statut HTTP. Ce check renvoie DOWN pour tout code de statut ne correspondant pas. Par défaut, ce check couvre les codes de statut HTTP 1xx, 2xx et 3xx. Par exemple, `401` ou `4\d\d`.                                                                                                     |
 | `include_content`                | Lorsque ce paramètre est défini sur `true`, le check inclut les 200 premiers caractères du corps de la réponse HTTP dans les notifications. Valeur par défaut : `false`.                                                                                                                                                                               |
 | `collect_response_time`          | Par défaut, le check recueille le délai de réponse (en secondes) par l'intermédiaire de la métrique `network.http.response_time`. Pour désactiver cette option, définissez cette valeur sur `false`.                                                                                                                                                                        |
 | `disable_ssl_validation`         | Ce paramètre, activé par défaut, ignore la validation du certificat SSL. Si vous avez besoin de valider les certificats SSL, définissez-le sur `false`. Cette option est uniquement utilisée lors de la collecte du délai de réponse et de la disponibilité à partir du endpoint spécifié. Remarque : ce paramètre ne s'applique pas à l'option `check_certificate_expiration`. |
@@ -103,7 +104,7 @@ Une fois la configuration de `http_check.d/conf.yaml` terminée, [redémarrez l'
 
 ### Événements
 
-Le check HTTP ne comprend aucun événement.
+Le check HTTP n'inclut aucun événement.
 
 ### Checks de service
 
@@ -114,9 +115,9 @@ Pour créer des conditions d'alerte sur ces checks de service dans Datadog, sél
 Renvoie `DOWN` lorsqu'une des affirmations suivantes se vérifie :
 
 * La requête vers `uri` expire.
-* Le code de réponse correspond à 4xx/5xx, ou ne correspond pas au modèle fourni pour le paramètre `http_response_status_code`.
-* Le corps de la réponse ne contient *pas* le modèle de `content_match`.
-* `reverse_content_match` est défini sur « true » et le corps de la réponse *contient* le modèle de `content_match`.
+* Le code de réponse correspond à 4xx/5xx, ou ne correspond pas à l'expression fournie pour le paramètre `http_response_status_code`.
+* Le corps de la réponse ne contient *pas* l'expression de `content_match`.
+* `reverse_content_match` est défini sur « true » et le corps de la réponse *contient* l'expression de `content_match`.
 * `uri` contient `https` et `disable_ssl_validation` est défini sur « false », et la connexion SSL ne peut pas être validée.
 
 Si ce n'est pas le cas, renvoie `UP`.
