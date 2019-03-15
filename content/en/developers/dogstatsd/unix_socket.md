@@ -28,7 +28,7 @@ Instead of using an `IP:port` pair to establish connections, Unix Domain Sockets
 
 When the Agent restarts, the existing socket is deleted and replaced by a new one. Client libraries detect this change and connect seamlessly to the new socket.
 
-**Note:** By design, UDS traffic is local to the host, which means the Datadog Agent must run on every host you will be sending metrics from.
+**Note:** By design, UDS traffic is local to the host, which means the Datadog Agent must run on every host you send metrics from.
 
 ## Setup
 
@@ -49,7 +49,7 @@ Then [restart your Agent][2]. You can also set the socket path via the `DD_DOGST
 The following DogStatsD client libraries natively support UDS traffic:
 
 | Language | Library                            |
-| :----    | :----                              |
+|----------|------------------------------------|
 | Golang   | [DataDog/datadog-go][3]            |
 | Java     | [DataDog/java-dogstatsd-client][4] |
 | Python   | [DataDog/datadogpy][5]             |
@@ -77,7 +77,7 @@ socat -s -u UDP-RECV:8125 UNIX-SENDTO:/var/run/datadog/dsd.socket
 
 ### Accessing the socket across containers
 
-When running in a containerized environment, the socket file needs to be accessible to the client containers. To achieve this, we recommend mounting a host directory on both sides (read-only in your client containers, read-write in the Agent container).
+When running in a containerized environment, the socket file needs to be accessible to the client containers. To achieve this, Datadog recommends mounting a host directory on both sides (read-only in your client containers, read-write in the Agent container).
 
 Mounting the parent folder instead of the individual socket enables socket communication to persist across DogStatsD restarts.
 
@@ -107,7 +107,7 @@ Expose the same folder in your client containers:
 volumeMounts:
   - name: dsdsocket
     mountPath: /var/run/datadog
-    readOnly: true
+    readOnly: true                  # see note below
 ...
 volumes:
 - hostPath:
@@ -115,9 +115,11 @@ volumes:
   name: dsdsocket
 ```
 
+**Note**: Remove `readOnly: true` if your client containers need write access to the socket.
+
 ## Using origin detection for container tagging
 
-Origin detection allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received via UDS will be tagged by the same container tags as Autodiscovery metrics. **Note:** `container_id`, `container_name` and `pod_name` tags will not be added, to avoid creating too many custom metric contexts.
+Origin detection allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received via UDS is tagged by the same container tags as Autodiscovery metrics. **Note:** `container_id`, `container_name` and `pod_name` tags are not added to avoid creating too many custom metric contexts.
 
 To use origin detection, enable the `dogstatsd_origin_detection` option in your `datadog.yaml`, or set the environment variable `DD_DOGSTATSD_ORIGIN_DETECTION=true`, and [restart your Agent][2].
 
