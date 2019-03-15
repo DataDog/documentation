@@ -47,7 +47,7 @@ Lorsque vous créez un graphique, vous cherchez probablement à représenter une
 
 La page Metrics Explorer vous permet de jouer avec différents paramètres graphiques de façon plus ponctuelle. La page Metrics Summary indique le type d'une métrique et son unité par défaut.
 
-## Sélectionner la visualisation
+## Sélectionner votre visualisation
 
 Une fois que vous avez choisi une métrique à représenter dans votre graphique, sélectionnez votre visualisation. Consultez la [liste de toutes les visualisations (widgets)][5].
 
@@ -82,7 +82,7 @@ Lorsque vous passez à la vue JSON, voici à quoi ressemble la requête :
 "q": "avg:system.disk.free{*}.rollup(avg, 60)"
 ```
 
-Pour obtenir davantage d'informations sur l'utilisation de la vue JSON, consultez la section [Présentation des graphiques JSON][2].
+Pour obtenir davantage d'informations sur l'utilisation de la vue JSON, consultez la section [Présentation des graphiques JSON][1].
 
 ## Créer des graphiques avancés
 

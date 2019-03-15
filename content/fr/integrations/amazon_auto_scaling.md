@@ -31,7 +31,7 @@ Activez cette intégration pour visualiser dans Datadog toutes vos métriques d'
 ## Implémentation
 ### Installation
 
-Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration d'Amazon Web Services][1].
+Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon Web Services][1].
 
 ### Configuration
 
@@ -58,7 +58,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration d'Amazon 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
 
 ### Événements
-L'intégration AWS Auto-Scaling comprend des événements pour lancer et fermer des instances EC2. Vous trouverez ci-dessous des exemples d'événement :
+L'intégration AWS Auto-Scaling comprend des événements pour lancer et fermer des instances EC2. Vous trouverez ci-dessous des exemples d'événements :
 
 {{< img src="integrations/amazon_auto_scaling/aws_auto_scaling_events.png" alt="Événements AWS Auto Scaling" responsive="true">}}
 
