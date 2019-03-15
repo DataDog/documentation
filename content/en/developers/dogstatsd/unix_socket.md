@@ -115,7 +115,7 @@ volumes:
   name: dsdsocket
 ```
 
-**Note**: Remove `readOnly: true` if your client containers need to write access to the socket.
+**Note**: Remove `readOnly: true` if your client containers need write access to the socket.
 
 ## Using origin detection for container tagging
 
