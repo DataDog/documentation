@@ -78,14 +78,21 @@ Use the faceted search functionality along the left-hand side of the page to nar
 
 ### Selecting metrics on table
 
-You can check and uncheck metrics you would like to view on the functions table. By default, invocations, duration (avg), errors, estimated cost, memory used (avg), and last start are on by default.
+You can check and uncheck metric columns on the functions table. Below is a list of metrics, the associated integration type, and if the column is displayed by default:
 
-Non-default metrics you can check are
-
-- DeadLetterError
-- Iterator Age
-- Concurrent Executions
-- Throttles
+| Metric                | Type   | Default |
+|-----------------------|--------|---------|
+| Invocations           | Metric | Yes     |
+| Duration (Avg)        | Metric | Yes     |
+| Errors                | Metric | Yes     |
+| Throttles             | Metric | No      |
+| Dead Letter Errors    | Metric | No      |
+| Concurrent Executions | Metric | No      |
+| Iterator Age          | Metric | No      |
+| Est Cost              | Logs   | Yes     |
+| Memory Used           | Logs   | Yes     |
+| Last Start            | Logs   | Yes     |
+| % Memory Used         | Logs   | No      |
 
 ## Function Detail view
 
