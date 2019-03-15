@@ -93,12 +93,12 @@ After enabling, the Trace Search & Analytics UI will now populate, you can get s
 
 In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
 
-* Tracer Configuration: `ddtrace.config.<INTEGRATION>.analytics_enabled=true`
+* Tracer Configuration: `ddtrace.config.<INTEGRATION>.analytics_enabled = True`
 * Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-This can be used in addition to the global configuration for any Integrations that submit Custom Services. For example, for Cassandra spans which comes in as a Custom Service, you can set the following to enable all Boto Tracing in Trace Search & Analytics:
+This can be used in addition to the global configuration for any Integrations that submit Custom Services. For example, for Boto spans which comes in as a Custom Service, you can set the following to enable all Boto Tracing in Trace Search & Analytics:
 
-* System Property: `ddtrace.config.boto.analytics_enabled=true`
+* Tracer Configuration: `ddtrace.config.boto.analytics_enabled = True`
 * Environment Variable: `DD_BOTO_ANALYTICS_ENABLED=true`
 
 Integration names can be found on the [integrations table][2].
