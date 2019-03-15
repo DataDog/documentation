@@ -19,7 +19,7 @@ Trace Search & Analytics can be enabled globally for all web integrations with o
 * System Property: `-Ddd.trace.analytics.enabled=true`
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
-After enabling, the Trace Search & Analytics UI will now populate, you can get started [here][1]. 
+After enabling, the Trace Search & Analytics UI will now populate, you can get started [here][1].
 
 ### Configure Additional Services (optional)
 
@@ -27,13 +27,13 @@ After enabling, the Trace Search & Analytics UI will now populate, you can get s
 
 In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
 
-* System Property: `-Ddd.integration.<integration>.analytics.enabled=true`
-* Environment Variable: `DD_INTEGRATION_<INTEGRATION>_ANALYTICS_ENABLED=true`
+* System Property: `-Ddd.<integration>.analytics.enabled=true`
+* Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
 This can be used in addition to the global configuration for any Integrations that submit Custom Services. For example, for JMS spans which comes in as a Custom Service, you can set the following to enable all JMS Tracing in Trace Search & Analytics:
 
-* System Property: `-Ddd.integration.jms.analytics.enabled=true`
-* Environment Variable: `DD_INTEGRATION_JMS_ANALYTICS_ENABLED=true`
+* System Property: `-Ddd.jms.analytics.enabled=true`
+* Environment Variable: `DD_JMS_ANALYTICS_ENABLED=true`
 
 Integration names can be found on the [integrations table](/tracing/languages/java/#integrations).
 
@@ -41,8 +41,8 @@ Integration names can be found on the [integrations table](/tracing/languages/ja
 
 Database tracing is not captured by Trace Search & Analytics by default, in order to enable these spans to be collected these can be configured per integration. For example:
 
-* System Property: `-Ddd.integration.jdbc.analytics.enabled=true`
-* Environment Variable: `DD_INTEGRATION_JDBC_ANALYTICS_ENABLED=true`
+* System Property: `-Ddd.jdbc.analytics.enabled=true`
+* Environment Variable: `DD_JDBC_ANALYTICS_ENABLED=true`
 
 **Custom Instrumentation**
 
