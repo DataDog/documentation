@@ -33,7 +33,7 @@ Construct a query to control what will be monitored:
     
 3. Select the aggregation function for the [Measure][1] you want to graph:
     
-    {{< img src="monitors/monitor_types/log/agg_function_log_graph.png" alt="aggregation function for Log Analytics" responsive="true" style="width:50%;">}}
+    {{< img src="monitors/monitor_types/log/agg_function_log_graph_2.png" alt="aggregation function for Log Analytics" responsive="true" style="width:50%;">}}
 
 4. (Optional) Define the alert grouping:
   {{< img src="monitors/monitor_types/log/log_monitor_group_by.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
