@@ -22,35 +22,35 @@ The Cloud Functions dashboard requires no installation of its own, but it relies
 
 1. [Amazon Web Services integration][2] (required)
 
-	This integration is used to populate summary graphs and the main functions table. Install this integration and ensure that Lambda metrics are reporting in your account.
+    This integration populates the summary graphs and the main functions table. Install this integration and ensure that Lambda metrics are reporting in your account.
 
-	*Note*: Metrics in the Cloud Function UI are delayed ~10 minutes, as this is the default speed at which we poll AWS APIs. Reach out to support@datadoghq.com if you would like this rate to be decreased.
+    **Note**: Metrics in the Cloud Function UI are delayed ~10 minutes, as this is the default speed at which Datadog polls AWS APIs. To find out if your delay can be decreased, contact [Datadog support][3].
 
-2. [AWS X-Ray integration][3] (optional)
-	This integration provides traces for Lambda functions in the function detail page.
+2. [AWS X-Ray integration][4] (optional)
+    This integration provides traces for Lambda functions in the function detail page.
 
-	Install the X-Ray integration and add the following permissions to the policy document in your AWS/Datadog Role:
-	```
-	xray:BatchGetTraces,
-	xray:GetTraceSummaries
-	```
-	If using a Customer Master Key to encrypt traces, add the `kms:Decrypt` method to your policy where the Resource is the Customer Master Key used for X-Ray.
+    Install the X-Ray integration and add the following permissions to the policy document in your AWS/Datadog Role:
+    ```
+    xray:BatchGetTraces,
+    xray:GetTraceSummaries
+    ```
+    If using a Customer Master Key to encrypt traces, add the `kms:Decrypt` method to your policy where the Resource is the Customer Master Key used for X-Ray.
 
-	Recommended X-Ray setup:
+    Recommended X-Ray setup:
 
-	- Navigate to the Lambda function in the AWS console you want to instrument. In the “Debugging and error handling” section, check the box to “Enable active tracing”. This turns on X-Ray for that function.
+    - Navigate to the Lambda function in the AWS console you want to instrument. In the “Debugging and error handling” section, check the box to “Enable active tracing”. This turns on X-Ray for that function.
 
-	- Import the X-Ray SDK in your function, and patch all supported libraries. This automatically causes X-Ray to trace all AWS calls and other X-Ray supported integrations. See [an example of this in Python][4].
+    - Import the X-Ray SDK in your function, and patch all supported libraries. This automatically causes X-Ray to trace all AWS calls and other X-Ray supported integrations. See an [example of this in Python][5].
 
-	- Datadog's X-Ray integration supports custom subsegments and annotations as well.
+    - Datadog's X-Ray integration supports custom subsegments and annotations as well.
 
-	*Note*: Traces are delayed ~5 minutes, as this is the speed at which Datadog polls AWS X-Ray APIs.
+    **Note**: Traces are delayed ~5 minutes, as this is the speed at which Datadog polls AWS X-Ray APIs.
 
 3. AWS CloudWatch Logs (optional)
 
-	Install this if you want to see logs from your Lambda functions in the function detail page. This will also populate the additional metrics such as Memory Used (avg) and Last Start in your functions table.
+    Install this if you want to see logs from your Lambda functions in the function detail page. This also populates the additional metrics such as Memory Used (avg) and Last Start in your functions table.
 
-	To enable this, refer to the [documentation for sending Lambda logs to Datadog][5].
+    To enable this, refer to the [documentation for sending Lambda logs to Datadog][6].
 
 ## Searching, Filtering, Sorting
 
@@ -68,24 +68,32 @@ AWS Metadata:
 - resource
 - runtime
 
-Ensure you have the `lambda:List*` permission in your Datadog IAM policy in order to have these tags collected.
+In your Datadog IAM policy, add the permissions:
 
-Ensure you have the `tag:GetResources` permission in your Datadog IAM policy in order to have custom tags collected.
+* `lambda:List*` to have the tags above collected.
+* `tag:GetResources` to have custom tags collected.
 
 ### Filtering
 
-Use the faceted search functionality along the left-hand side of the page to narrow down the functions that are in view. All AWS and custom tags are available to use as filters.
+Use the faceted search functionality along the left side of the page to narrow down the functions that are in view. All AWS and custom tags are available to use as filters.
 
 ### Selecting metrics on table
 
-You can check and uncheck metrics you would like to view on the functions table. By default, invocations, duration (avg), errors, estimated cost, memory used (avg), and last start are on by default.
+Using the settings gear, you can check and uncheck metric columns on the functions table. Below is a list of metrics, the associated integration type, and if the column is displayed by default:
 
-Non-default metrics you can check are
-
-- DeadLetterError
-- Iterator Age
-- Concurrent Executions
-- Throttles
+| Metric                | Type   | Default |
+|-----------------------|--------|---------|
+| Invocations           | Metric | Yes     |
+| Duration (Avg)        | Metric | Yes     |
+| Errors                | Metric | Yes     |
+| Throttles             | Metric | No      |
+| Dead Letter Errors    | Metric | No      |
+| Concurrent Executions | Metric | No      |
+| Iterator Age          | Metric | No      |
+| Est Cost              | Logs   | Yes     |
+| Memory Used           | Logs   | Yes     |
+| Last Start            | Logs   | Yes     |
+| % Memory Used         | Logs   | No      |
 
 ## Function Detail view
 
@@ -135,6 +143,7 @@ The errors tab bubbles up exceptions that occured during the duration of the tra
 
 [1]: http://app.datadoghq.com/functions
 [2]: /integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon_xray
-[4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-python-patching.html
-[5]: /integrations/amazon_lambda/#log-collection
+[3]: /help
+[4]: https://app.datadoghq.com/account/settings#integrations/amazon_xray
+[5]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-python-patching.html
+[6]: /integrations/amazon_lambda/#log-collection
