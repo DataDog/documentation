@@ -22,7 +22,7 @@ further_reading:
     tag: Documentation
     text: Recueillir vos traces Docker
 ---
-Pour installer l'Agent de conteneur Datadog, suivez les [instructions d'installation de l'Agent][1] ou passez en revue les informations ci-dessous. Vous pouvez également consulter [l'image officielle de la version 6 de l'Agent Docker].
+Pour installer l'Agent de conteneur Datadog, suivez les [instructions d'installation de l'Agent][1] ou passez en revue les informations ci-dessous. Vous pouvez également consulter [l'image officielle de la version 6 de l'Agent Docker][2].
 
 **Remarque** : les versions 1.12 et supérieures de Docker sont prises en charge.
 

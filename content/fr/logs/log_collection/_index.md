@@ -57,7 +57,7 @@ L'Agent Datadog v6 peut recueillir des logs et les transférer à Datadog à par
 4. [Redémarrez votre Agent][3] pour prendre en compte cette nouvelle configuration.
 5. [Lancez la sous-commande status de l'Agent][4] pour vérifier si votre configuration personnalisée est correcte.
 
-Voici des exemples de configuration de collecte de logs personnalisée ci-dessous :
+Voici des exemples de configurations de collecte de logs personnalisée ci-dessous :
 
 {{< tabs >}}
 {{% tab "Suivre des fichiers existants" %}}

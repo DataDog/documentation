@@ -44,7 +44,7 @@ Consultez la page [Monitor outlier][2] pour en savoir plus.
     {{< nextlink href="/graphing/functions/arithmetic" >}}Opérations arithmétiques : effectuez des opérations arithmétiques sur votre métrique.  {{< /nextlink >}}
     {{< nextlink href="/graphing/functions/count" >}}Total : comptez les valeurs différentes de zéro ou de null de votre métrique. {{< /nextlink >}}
     {{< nextlink href="/graphing/functions/interpolation" >}}Interpolation : saisissez ou définissez des valeurs par défaut pour votre métrique.{{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/rank/" >}}Rang : sélectionnez seulement un sous-ensemble de métriques.{{< /nextlink >}}
+    {{< nextlink href="/graphing/functions/rank" >}}Rang : sélectionnez seulement un sous-ensemble de métriques. {{< /nextlink >}}
     {{< nextlink href="/graphing/functions/rate" >}}Taux : calculez une dérivée personnalisée sur votre métrique.{{< /nextlink >}}
     {{< nextlink href="/graphing/functions/regression" >}}Régression : appliquez une fonction d'apprentissage automatique sur votre métrique.{{< /nextlink >}}
     {{< nextlink href="/graphing/functions/rollup" >}}Cumul : contrôlez le nombre de points bruts utilisés dans votre métrique. {{< /nextlink >}}
