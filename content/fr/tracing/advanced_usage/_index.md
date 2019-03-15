@@ -244,14 +244,11 @@ Ajoutez directement des tags à un objet `Datadog.Trace.Span` en appelant `Span.
 ```csharp
 using Datadog.Trace;
 
-// récupérer le traceur global
-var tracer = Tracer.Instance;
-
-// récupérer la span actuellement active (peut être null)
-var span = tracer.ActiveScope?.Span;
+// accéder au contexte actif par l'intermédiaire du traceur global (peut renvoyer null)
+var scope = Tracer.Instance.ActiveScope;
 
 // ajouter un tag à la span
-span?.SetTag("<TAG_KEY>", "<TAG_VALUE>");
+scope.Span.SetTag("<TAG_KEY>", "<TAG_VALUE>");
 ```
 
 **Remarque** : `Datadog.Trace.Tracer.Instance.ActiveScope` renvoie`null` si aucune span n'est active.
@@ -404,6 +401,21 @@ const tracer = require('dd-trace').init({
   hostname: process.env.DD_AGENT_HOST,
   port: process.env.DD_TRACE_AGENT_PORT
 })
+```
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Le traceur .NET lit automatiquement les variables d'environnement `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT` afin de définir l'endpoint de l'Agent. L'endpoint de l'Agent peut également être défini lors de la création d'une nouvelle instance `Tracer` :
+
+```csharp
+using Datadog.Trace;
+
+var uri = new Uri("htt://localhost:8126/");
+var tracer = Tracer.Create(agentEndpoint: uri);
+
+// facultatif : définir le nouveau traceur en tant que nouveau traceur global/par défaut
+Tracer.Instance = tracer;
 ```
 
 {{% /tab %}}
@@ -695,9 +707,9 @@ Pour en savoir plus sur l'instrumentation manuelle, consultez la [documentation 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Si vous n'utilisez pas de bibliothèques compatibles avec l’instrumentation automatique (voir la [compatibilité des bibliothèques][1]), vous devez instrumenter manuellement votre code.
+Si vous n'utilisez pas de bibliothèques compatibles avec l’instrumentation automatique (voir les [intégrations][1]), vous pouvez instrumenter manuellement votre code.
 
-L'exemple suivant utilise le traceur Datadog global et crée une span pour tracer une requête Web :
+L'exemple suivant utilise le `Tracer` global et crée une span personnalisée pour tracer une requête Web :
 
 ```csharp
 using Datadog.Trace;
@@ -714,7 +726,7 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 ```
 
 
-[1]: /fr/tracing/languages/dotnet/#compatibility
+[1]: /fr/tracing/languages/dotnet/#integrations
 {{% /tab %}}
 
 {{% tab "PHP" %}}
@@ -801,7 +813,7 @@ Bien que cette version [soit désormais obsolète][3], si vous utilisez PHP 7.x
 {{% /tab %}}
 {{% tab "C++" %}}
 
-Pour instrumenter manuellement votre code, installez le traceur tel qu'indiqué dans les exemples de configuration, puis utilisez l'objet tracer pour créer des spans.
+Pour instrumenter manuellement votre code, installez le traceur tel qu'indiqué dans les exemples de configurations, puis utilisez l'objet tracer pour créer des spans.
 
 ```cpp
 {
@@ -1113,16 +1125,17 @@ Vous pouvez utiliser les tags suivants pour remplacer certaines options de Datad
 Pour prendre en charge OpenTracing, ajoutez le paquet NuGet [`Datadog.Trace.OpenTracing`][1] à votre application. Lors du démarrage de l'application, initialisez la bibliothèque OpenTracing :
 
 ```csharp
+using Datadog.Trace.OpenTracing;
+
 public void ConfigureServices(IServiceCollection services)
 {
-    // créer un ITracer OpenTracing avec les réglages par défaut
-    OpenTracing.ITracer tracer =
-        Datadog.Trace.OpenTracing.OpenTracingTracerFactory.CreateTracer();
+    // créer un iTracer OpenTracing avec les réglages par défaut
+    OpenTracing.ITracer tracer = OpenTracingTracerFactory.CreateTracer();
 
-    // pour utiliser le traceur avec l'injection de dépendance ASP.NET Core
+    // pour utiliser le traceur avec l'injection de dépendance ASP.NET Core 
     services.AddSingleton<ITracer>(tracer);
 
-    // pour utiliser le traceur avec OpenTracing.GlobalTracer.Instance
+    // pour utiliser le traceur avec OpenTracing.GlobalTracer.Instance Core
     GlobalTracer.Register(tracer);
 }
 ```
@@ -1338,9 +1351,9 @@ Le tracing distribué est activé par défaut pour toutes les intégrations pris
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour participer à la bêta.
+Le tracing distribué est activé par défaut pour toutes les intégrations prises en charge (voir les [intégrations][1]).
 
-[1]: /fr/help
+[1]: /fr/tracing/languages/dotnet/#integrations
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -1576,9 +1589,8 @@ Une fois la priorité d'échantillonnage définie, vous ne pouvez pas la modifie
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour participer à la bêta.
+L'échantillonnage prioritaire est activé par défaut. L'échantillonneur par défaut attribue automatiquement une valeur `AutoReject` ou `AutoKeep` aux traces, en fonction de leur service et volume.
 
-[1]: /fr/help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -1764,7 +1776,7 @@ Une fois l'enregistreur configuré, si vous exécutez une fonction tracée qui l
 {"event": "Contexte du traceur", "trace_id": 9982398928418628468, "span_id": 10130028953923355146}
 ```
 
-**Remarque** : si vous n'utilisez pas une [intégration de log de Datadog][1] pour analyser vos logs, des règles de parsing de log personnalisées doivent s'assurer que `trace_id` and `span_id` sont analysés en tant que chaînes de caractères. Pour en savoir plus, consultez la [FAQ à ce sujet][2].
+**Remarque** : si vous n'utilisez pas une [intégration de log de Datadog][1] pour analyser vos logs, des règles de parsing de log personnalisées doivent s'assurer que `trace_id` et `span_id` sont analysés en tant que chaînes de caractères. Pour en savoir plus, consultez la [FAQ à ce sujet][2].
 
 [Consultez la documentation relative à la journalisation Python][1] pour vous assurer que l'intégration de log Python est bien configurée de façon à ce que vos logs Python soient automatiquement analysés.
 
@@ -2141,7 +2153,12 @@ Pour obtenir davantage de réglages pour le traceur, consultez la [documentation
 Le mode debugging est désactivé par défaut. Pour l'activer, définissez l'argument `isDebugEnabled` sur `true` lors de la création d'une nouvelle instance de traceur :
 
 ```csharp
-var tracer = Datadog.Trace.Tracer.Create(isDebugEnabled: true);
+using Datadog.Trace;
+
+var tracer = Tracer.Create(isDebugEnabled: true);
+
+// facultatif : définir le nouveau traceur en tant que nouveau traceur global/par défaut
+Tracer.Instance = tracer;
 ```
 
 {{% /tab %}}

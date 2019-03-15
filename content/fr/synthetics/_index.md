@@ -16,7 +16,7 @@ further_reading:
     tag: Documentation
     text: Configurer un test Browser
 ---
-<div class="alert alert-warning">Synthetics est actuellement en version bêta pour la version américaine du site de Datadog. Pour demander à y accéder, veuillez remplir le <a href="https://app.datadoghq.com/synthetics/beta">formulaire de demande d'accès à Datadog Synthetics</a>.</div>
+<div class="alert alert-warning">Synthetics est actuellement uniquement disponible aux États-Unis. Des tests Browser sont disponibles en version bêta : pour demander à y accéder, veuillez remplir le <a href="https://app.datadoghq.com/synthetics/beta">formulaire de demande d'accès à Datadog Synthetics</a>.</div>
 
 ## Présentation
 

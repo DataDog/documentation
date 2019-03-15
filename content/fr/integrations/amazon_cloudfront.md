@@ -31,7 +31,7 @@ Activez cette intégration pour visualiser dans Datadog toutes vos métriques de
 ## Implémentation
 ### Installation
 
-Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration d'Amazon Web Services][1].
+Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon Web Services][1].
 
 ### Collecte de métriques
 1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `CloudFront` est cochée dans la section concernant la collecte des métriques.
