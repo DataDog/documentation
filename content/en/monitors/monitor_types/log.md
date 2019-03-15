@@ -65,6 +65,18 @@ This is available for Slack, Jira, Webhook, Microsoft Teams, and email notificat
 
   {{< img src="monitors/monitor_types/log/slack-log-sample.png" alt="Slack notification example" responsive="true" style="width:50%;" >}}
  
+### Notifications for groups
+
+Notifications from monitors split by group may include the list of the top 10 of breaching values instead of 10 log samples.
+
+ **Enabling top 10 breaching values in notifications**
+
+{{< img src="monitors/monitor_types/log/activate-log-multi-monitor-sample.png" alt="Activate log samples in message" responsive="true" style="width:50%;" >}}
+
+**Example for a Slack notification** 
+
+ {{< img src="monitors/monitor_types/log/slack-log-multi-sample.png" alt="Slack notification example" responsive="true" style="width:50%;" >}}
+
 ## No Data alerts and Below Conditions  
 
 To be notified if a specific set of logs are not received anymore, set the condition `below 1`. This notifies when no logs match the monitor query on the given timeframe. 
