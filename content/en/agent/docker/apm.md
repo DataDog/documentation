@@ -44,7 +44,7 @@ List of all environment variables available for tracing within the Docker Agent:
 | ------                     | ------                                                                                                                    |
 | `DD_API_KEY`               | [Datadog API Key][1]                                                                                                      |
 | `DD_PROXY_HTTPS`           | Set up the URL for the proxy to use.                                                                                      |
-| `DD_HOSTNAME`              | Set the Agent hostname manually.                                                                                          |
+| `DD_HOSTNAME`              | Manually set the hostname to use for metrics if autodection fails, or running the DCA.                                    |
 | `DD_DOGSTATSD_PORT`        | Set the DogStatsD port.                                                                                                   |
 | `DD_BIND_HOST`             | Set the StatsD & receiver hostname.                                                                                       |
 | `DD_LOG_LEVEL`             | Set the logging level. (`trace`/`debug`/`info`/`warn`/`error`/`critical`/`off`)                                           |
