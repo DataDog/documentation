@@ -303,6 +303,8 @@ main:
       - name: "Advanced Instrumentation"
         url: "tracing/advanced_usage/"
         children:
+          - name: "Trace Search & Analytics"
+            url: "#trace-search-analytics"
           - name: "Custom Tagging"
             url: "#custom-tagging"
           - name: "Change Agent Hostname"

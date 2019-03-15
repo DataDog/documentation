@@ -3,9 +3,9 @@ title: Advanced Languages instrumentation
 kind: documentation
 ---
 
-## Enable Trace Search & Analytics
+## Trace Search & Analytics
 
-[Trace Search & Analytics](/tracing/visualization/search/) is used to filter APM Data by [user-defined tags](#custom-tagging) such as `customer_id`, `error_type` or `app_name` to help troubleshoot and filter your requests. Apply the following configuration to your application to enable this feature.
+[Trace Search & Analytics][1] is used to filter APM Data by [user-defined tags](#custom-tagging) such as `customer_id`, `error_type` or `app_name` to help troubleshoot and filter your requests. Apply the following configuration to your application to enable this feature.
 
 {{< img src="tracing/enable_trace_search.png" alt="Trace Sampling UI" responsive="true" style="width:100%;">}}
 
@@ -35,7 +35,7 @@ This can be used in addition to the global configuration for any Integrations th
 * System Property: `-Ddd.jms.analytics.enabled=true`
 * Environment Variable: `DD_JMS_ANALYTICS_ENABLED=true`
 
-Integration names can be found on the [integrations table](/tracing/languages/java/#integrations).
+Integration names can be found on the [integrations table][2].
 
 **Database Services**
 
@@ -69,62 +69,95 @@ class MyClass {
 
 **Configure Sample Rate of APM Events**
 
-When enabling Trace Search & Analytics, the default sample rate is to collect 100% of APM Events. For any services that have been enabled for Trace Search & Analytics in the Tracing Client, you can adjusted the sampling rate for APM Events in your [APM settings][2].
+When enabling Trace Search & Analytics, the default sample rate is to collect 100% of APM Events. For any services that have been enabled for Trace Search & Analytics in the Tracing Client, you can adjusted the sampling rate for APM Events in your [APM settings][3].
 
 {{< img src="tracing/trace_sampling_ui.png" alt="Trace Sampling UI" responsive="true" style="width:100%;">}}
 
-[1]: https://app.datadoghq.com/apm/search
-[2]: https://app.datadoghq.com/apm/settings
 
+[1]: https://app.datadoghq.com/apm/search
+[2]: /tracing/languages/java/#integrations
+[3]: https://app.datadoghq.com/apm/settings
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+### Automatic Configuration
 
-[1]: /help
+Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the Tracing Client:
 
+* Tracer Configuration: `ddtrace.config.analytics_enabled = True`
+* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
+
+After enabling, the Trace Search & Analytics UI will now populate, you can get started [here][1].
+
+### Configure By Integration
+
+In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
+
+* Tracer Configuration: `ddtrace.config.<INTEGRATION>.analytics_enabled=true`
+* Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
+
+This can be used in addition to the global configuration for any Integrations that submit Custom Services. For example, for Cassandra spans which comes in as a Custom Service, you can set the following to enable all Boto Tracing in Trace Search & Analytics:
+
+* System Property: `ddtrace.config.boto.analytics_enabled=true`
+* Environment Variable: `DD_BOTO_ANALYTICS_ENABLED=true`
+
+Integration names can be found on the [integrations table][2].
+
+Note several integrations require non-standard configuration due to the integration-specific implementation of the tracer. Consult the library documentation on [Trace Search & Analytics][3] for details.
+
+### Configure Sample Rate of APM Events
+
+When enabling Trace Search & Analytics, the default sample rate is to collect 100% of APM Events. For any services that have been enabled for Trace Search & Analytics in the Tracing Client, you can adjusted the sampling rate for APM Events in your [APM settings][4].
+
+{{< img src="tracing/trace_sampling_ui.png" alt="Trace Sampling UI" responsive="true" style="width:100%;">}}
+
+
+[1]: https://app.datadoghq.com/apm/search
+[2]: /tracing/languages/python/#integrations
+[3]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace_search_analytics
+[4]: https://app.datadoghq.com/apm/settings
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-[1]: /help
 
+[1]: /help
 {{% /tab %}}
 {{% tab "Go" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-[1]: /help
 
+[1]: /help
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-[1]: /help
 
+[1]: /help
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-[1]: /help
 
+[1]: /help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-[1]: /help
 
+[1]: /help
 {{% /tab %}}
 {{% tab "C++" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
-[1]: /help
 
+[1]: /help
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -132,7 +165,7 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
 Custom tagging allows adding tags in the form of key-value pairs to specific spans. These tags are used to correlate traces with other Datadog products to provide more details about specific spans.
 
-[Read more about tagging][1]
+[Read more about tagging][2]
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -647,7 +680,7 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
 ## Manual Instrumentation
 
-Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][2] and familiarize yourself with the core concepts of Datadog APM.
+Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][3] and familiarize yourself with the core concepts of Datadog APM.
 
 
 {{< tabs >}}
@@ -959,7 +992,7 @@ To manually instrument your code, install the tracer as in the setup examples, a
 
 ## OpenTracing
 
-OpenTracing is a vendor-neutral, cross-language standard for tracing applications. Datadog offers OpenTracing implementations for many APM tracers. For more details see [opentracing.io][3].
+OpenTracing is a vendor-neutral, cross-language standard for tracing applications. Datadog offers OpenTracing implementations for many APM tracers. For more details see [opentracing.io][4].
 
 
 {{< tabs >}}
@@ -1304,7 +1337,7 @@ Distributed tracing allows you to propagate a single trace across multiple servi
 
 Distributed tracing headers are language agnostic. A trace started in one language may propagate to another (for example, from Python to Java).
 
-Distributed traces may sample inconsistently when the linked traces run on different hosts. To ensure that distributed traces are complete, enable [priority sampling][4].
+Distributed traces may sample inconsistently when the linked traces run on different hosts. To ensure that distributed traces are complete, enable [priority sampling][5].
 
 
 {{< tabs >}}
@@ -1537,7 +1570,7 @@ Priority sampling allows traces between two Datadog endpoints to be sampled toge
 
 Priority sampling automatically assigns and propagates a priority value along all traces, depending on their service and volume. Priorities can also be set manually to drop non-interesting traces or keep important ones.
 
-For a more detailed explanations of sampling and priority sampling, check the [sampling and storage][5] documentation.
+For a more detailed explanations of sampling and priority sampling, check the [sampling and storage][6] documentation.
 
 
 {{< tabs >}}
@@ -1742,7 +1775,7 @@ another_span->SetTag("sampling.priority", 0); // Discard this span.
 
 The correlation between Datadog APM and Datadog Log Management is improved by automatically adding a `trace_id` and `span_id` in your logs with the Tracing Libraries. This can then be used in the platform to show you the exact logs correlated to the observed trace.
 
-Before correlating traces with logs, ensure your logs are either [sent as JSON][6], or [parsed by the proper language level log processor][7].
+Before correlating traces with logs, ensure your logs are either [sent as JSON][7], or [parsed by the proper language level log processor][8].
 
 Your language level logs *must* be turned into Datadog attributes in order for traces and logs correlation to work.
 
@@ -2391,10 +2424,11 @@ apm_config:
       pattern: "(?s).*"
 ```
 
-[1]: /tagging
-[2]: /tracing/visualization/services_list
-[3]: http://opentracing.io
-[4]: #priority-sampling
-[5]: /tracing/getting_further/trace_sampling_and_storage
-[6]: /logs/log_collection/?tab=tailexistingfiles#send-your-application-logs-in-json
-[7]: /logs/log_collection/?tab=tailexistingfiles#enabling-log-collection-from-integrations
+[1]: /tracing/visualization/search
+[2]: /tagging
+[3]: /tracing/visualization/services_list
+[4]: http://opentracing.io
+[5]: #priority-sampling
+[6]: /tracing/getting_further/trace_sampling_and_storage
+[7]: /logs/log_collection/?tab=tailexistingfiles#send-your-application-logs-in-json
+[8]: /logs/log_collection/?tab=tailexistingfiles#enabling-log-collection-from-integrations
