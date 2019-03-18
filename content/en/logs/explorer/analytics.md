@@ -37,7 +37,7 @@ From an analytics visualization, you can, additionally:
 
 * create a widget in a dashboard out of that visualization
 * create a monitor out of that query 
-* deep dive sinto ubsets of the log list, depending on the interactions that the visualization enables  
+* deep dive into subsets of the log list, depending on the interactions that the visualization enables  
 
 Save a log analytics view with the "Save As" button. You can load your teammates' saved views from the "Saved Views" tab.
 
