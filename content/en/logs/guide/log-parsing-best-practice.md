@@ -1,6 +1,8 @@
 ---
-title: Log Parsing - Best Practice
-kind: faq
+title: Log Parsing - Best Practices
+kind: guide
+aliases:
+  - /logs/guide/log-parsing-best-practice
 disable_toc: true
 further_reading:
 - link: "logs/processing"

@@ -1,6 +1,8 @@
 ---
 title: Log Collection Troubleshooting Guide
-kind: faq
+kind: guide
+aliases:
+  - /logs/guide/log-collection-troubleshooting-guide
 further_reading:
 - link: "/logs/log_collection"
   tag: "Documentation"
