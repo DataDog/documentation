@@ -61,8 +61,8 @@ Une fois l'installation terminée, vous pouvez consulter toutes vos fonctions La
 1. Configurez [la fonction Lambda de collecte de logs AWS avec Datadog][6] si vous ne l'avez pas déjà fait.
 2. Une fois la fonction Lambda installée, vous pouvez transmettre vos logs Lambda à Datadog de deux façons différentes :
 
-    * Automatique : nous gérons des déclencheurs Lambda pour la collecte de logs si vous nous accordez les autorisations nécessaires. [Consultez le principal service Web d'Amazon pour configurer la collecte automatique de logs ][20].
-    * Manuelle : ajoutez manuellement un déclencheur sur le groupe de logs Cloudwatch qui contient vos logs Lambda dans la console AWS. Pour ce faire, suivez [ces étapes][21].
+    * Solution automatique : nous gérons des déclencheurs Lambda pour la collecte de logs si vous nous accordez les autorisations nécessaires. [Consultez le principal service Web d'Amazon pour configurer la collecte automatique de logs ][20].
+    * Solution manuelle : ajoutez manuellement un déclencheur sur le groupe de logs Cloudwatch qui contient vos logs Lambda dans la console AWS. Pour ce faire, suivez [ces étapes][21].
 
 Accédez ensuite à votre [section Log de Datadog][7] pour commencer à explorer vos logs.
 
