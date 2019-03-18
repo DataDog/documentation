@@ -16,6 +16,7 @@
     "url" => "/dashboard/4qf-77b-uhc/my-timeboard",
     "layout_type" => "ordered",
     "modified_at" => "2019-03-11T14:22:03.131495+00:00",
+    "author_handle": "user@domain.com",
     "id" => "4qf-77b-uhc"
   }]
 }
