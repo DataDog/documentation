@@ -7,6 +7,7 @@
     "url" => "/dashboard/grh-zkj-h2c/my-screenboard",
     "layout_type" => "free",
     "modified_at" => "2019-03-13T19:09:40.930616+00:00",
+    "author_handle": "user@domain.com",
     "id" => "grh-zkj-h2c"
   }, {
     "created_at" => "2019-02-28T17:45:11.535045+00:00",
