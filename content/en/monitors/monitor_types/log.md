@@ -31,9 +31,9 @@ Construct a query to control what is monitored:
     
     {{< img src="monitors/monitor_types/log/choose_measure_facet.png" alt="choose measure facet" responsive="true" style="width:50%;">}}
     
-3. Select the aggregation function for the [Measure][1] you want to graph:
+3. Select the aggregation function for the [Measure][1] you want to monitor:
     
-    {{< img src="monitors/monitor_types/log/agg_function_log_graph_2.png" alt="aggregation function for Log Analytics" responsive="true" style="width:50%;">}}
+    {{< img src="monitors/monitor_types/log/agg_function.png" alt="aggregation function for Log Analytics" responsive="true" style="width:50%;">}}
 
 4. (Optional) Define the alert grouping:
   {{< img src="monitors/monitor_types/log/log_monitor_group_by.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
