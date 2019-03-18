@@ -1,6 +1,8 @@
 ---
 title: Screenboard API doc
-kind: faq
+kind: guide
+aliases:
+  - /graphing/faq/screenboard-api-doc
 ---
 
 <div class="alert alert-danger">

@@ -1,6 +1,8 @@
 ---
 title: Timeboard API doc
-kind: faq
+kind: guide
+aliases:
+  - /graphing/faq/timeboard-api-doc
 ---
 
 <div class="alert alert-danger">

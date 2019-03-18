@@ -31,7 +31,6 @@ aliases:
     {{< nextlink href="graphing/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs" >}}Why does zooming out a timeframe also smooth out my graphs?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/why-is-a-counter-metric-being-displayed-as-a-decimal-value" >}}Why is a counter metric being displayed as a decimal value?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/the-same-color-is-used-twice-in-my-graph" >}}The same color is used twice in my graph!{{< /nextlink >}}
-    {{< nextlink href="graphing/faq/how-to-graph-percentiles-in-datadog" >}}How to graph percentiles in Datadog ?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same" >}}I'm switching between the sum/min/max/avg aggregators but the values look the same?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/when-i-query-can-i-use-wildcards-in-metric-names-and-events" >}}When I query can I use wildcards in metric names and events?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/is-it-possible-to-query-historical-data-after-a-host-has-been-destroyed" >}}Is it possible to query historical data after a host has been destroyed?{{< /nextlink >}}
