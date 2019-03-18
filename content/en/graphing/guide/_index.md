@@ -5,7 +5,7 @@ kind: guide
 
 {{< whatsnext desc="General Guides:" >}}
     {{< nextlink href="graphing/guide/uptime-percentage-widget" >}}Custom Uptime Percentage Widget{{< /nextlink >}}
-    {{< nextlink href="graphing/guide/how-to-graph-percenties-in-datadog" >}}Graphing percentiles in Datadog{{< /nextlink >}}
+    {{< nextlink href="graphing/guide/how-to-graph-percentiles-in-datadog" >}}Graphing percentiles in Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Deprecated APIs:" >}}
