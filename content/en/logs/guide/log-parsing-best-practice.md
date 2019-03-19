@@ -2,7 +2,7 @@
 title: Log Parsing - Best Practices
 kind: guide
 aliases:
-  - /logs/guide/log-parsing-best-practice
+  - /logs/faq/log-parsing-best-practice
 disable_toc: true
 further_reading:
 - link: "logs/processing"

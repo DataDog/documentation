@@ -2,9 +2,9 @@
 title: Setting file permissions for rotating logs (Linux)
 kind: guide
 aliases:
-  - /logs/guide/setting-file-permissions-for-rotating-logs
+  - /logs/faq/setting-file-permissions-for-rotating-logs
 further_reading:
-- link: "logs/faq/log-parsing-best-practice"
+- link: "logs/guide/log-parsing-best-practice"
   tag: "FAQ"
   text: "Log Parsing - Best Practice"
 - link: "logs/processing"
