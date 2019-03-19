@@ -1315,11 +1315,9 @@ The Datadog C++ tracer can only be used through the OpenTracing API. The usage i
 
 ## Forced Tracing
 
-APM enables priority sampling by default to allows traces between two Datadog endpoints to be sampled together. This prevents trace sampling from removing segments of a distributed trace (i.e. ensures completeness) and helps removing unimportant ones. You can override this functionality to force keep a trace (critical transaction, debug mode, etc.) by the agent and the server using forced tracing.
+APM enables priority sampling by default to allows traces between two Datadog endpoints to be sampled together. This prevents trace sampling from removing segments of a distributed trace (i.e. ensures completeness) and helps removing unimportant ones. You can override this functionality to force keep a trace (critical transaction, debug mode, etc.) or force drop a trace (health checks, static assets, etc) by the agent and the server using forced tracing.
 
 Forced tracing should be done only before any context propagation. If this happens after the propagation of a context, the system can’t ensure that the entire trace is sampled properly.
-
-Note: TODO (Optional): Include link from API documentation for cases where it doesn't work
 
 For a more detailed explanations of sampling, check the [sampling and storage][5] documentation.
 
@@ -1339,9 +1337,10 @@ public class MyClass {
     public static void myMethod() {
         // grab the active span out of the traced method
         MutableSpan ddspan = (MutableSpan) GlobalTracer.get().activeSpan();
-        // ask the sampler to force the current trace
-        //TODO: Tentative
-        ddspan.setTag(ForcedTracing.keep);
+        // To KEEP the current trace
+        ddspan.setTag(force.keep, true);
+        //To DROP the current trace
+        ddspan.setTag(force.drop, true);
         // method impl follows
     }
 }
@@ -1359,9 +1358,10 @@ To set a custom priority to a trace:
 from ddtrace.ext.priority import FORCE_TRACE
 
 span = tracer.current_span()
-# indicate to force a trace
-#TODO: Tentative
-span.context.setTag(FORCE_TRACE)
+# To KEEP the current trace
+span.context.setTag(FORCE_KEEP)
+# To DROP the current trace
+span.context.setTag(FORCE_DROP)
 ```
 
 {{% /tab %}}
@@ -1371,10 +1371,10 @@ Set tag to manually force trace:
 
 
 ```ruby
-# Indicate to force a trace
-#TODO: Tentative
-span.context.set_tag(Datadog::Ext::FORCE_TRACE)
-
+# To KEEP the current trace
+span.context.set_tag(Datadog::Ext::FORCE_KEEP)
+# To DROP the current trace
+span.context.set_tag(Datadog::Ext::FORCE_DROP)
 ```
 
 {{% /tab %}}
@@ -1396,9 +1396,10 @@ func handler(w http.ResponseWriter, r *http.Request) {
     // Create a span for a web request at the /posts URL.
     span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
     defer span.Finish()
-    // Indicate to force a trace
-    //Tentative
-    span.SetTag(ext.ForceTrace)
+    // To KEEP the current trace
+    span.SetTag(ext.ForceKeep)
+    // To DROP the current trace
+    span.SetTag(ext.ForceDrop)
 }
 ```
 
@@ -1410,37 +1411,46 @@ Set tag to manually force trace:
 
 ```javascript
 
-
-
-// Indicate to force a trace
-//TODO: Tentative
-span.setTag('force.trace')
+// To KEEP the current trace
+span.setTag('force.keep')
+// To DROP the current trace
+span.setTag('force.drop')
 ```
 
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Forced Tracing is currently not supported. 
+```csharp
+// To KEEP the current trace
+span.SetTag(force.keep);
+// To DROP the current trace
+span.SetTag(force.drop);
+```
+
 
 [1]: /help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Forced Tracing is currently not supported.
+```php
+// To KEEP the current trace
+$span->setTag(force.keep)
+// To DROP the current trace
+$span->setTag(force.drop)
+```
 
 {{% /tab %}}
 {{% tab "C++" %}}
 
-Set tag to manually force trace:
 
 ```cpp
 auto tracer = ...
 auto span = tracer->StartSpan("operation_name");
-// Force this trace
-//TODO: Tentative
-span->SetTag("force.trace"); 
-
+// To KEEP the current trace
+span->SetTag("force.keep"); 
+// To DROP the current trace
+span->SetTag("force.drop"); 
 ```
 
 {{% /tab %}}
