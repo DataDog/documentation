@@ -29,9 +29,10 @@ List endpoint returns logs that match a log search query. Results are paginated.
    If both timezone and offset are specified, timezon is ignored.
 * **`startAt`** [*optional*, *default*=**None**]:  
    Hash identifier of the first log to return in the list. 
-   When pagination is at stake, you get that hash from the `nextLogID`parameter from previous request result.
+   When pagination is at stake, you get that hash from the `nextLogID` parameter from previous request result. 
+   Note that this parameter is ignored if the corresponding log is out of the scope of the specified time window. 
 * **`sort`** [*optional*, *default*=**desc**]:  
-    Time-ascending or time-descending results.
+    Time-ascending `asc` or time-descending `desc`results.
 * **`limit`** [*optional*, *default*=**10**]:  
     Number of logs return in the response (maximum is 1000)
 [1]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
