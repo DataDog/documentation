@@ -409,8 +409,8 @@ $(document).ready(function () {
     });
 
     $("a[href^='#']").click(function(e) {
-        e.preventDefault();
         if(!e.target.parentElement.id) {
+            e.preventDefault();
             var id = e.target.hash.split('#').join('');
             moveToAnchor(id);
         }
