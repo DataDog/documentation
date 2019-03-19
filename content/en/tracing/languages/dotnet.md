@@ -85,22 +85,22 @@ Install the .NET Tracer on the host using the using one of the packages availabl
 For Debian or Ubuntu, download and install the Debian package:
 
 ```bash
-curl -LO https://github.com/DataDog/dd-trace-dotnet/releases/download/v0.5.2-beta/datadog-dotnet-apm_0.5.2_amd64.deb
-sudo dpkg -i ./datadog-dotnet-apm_0.5.2_amd64.deb
+curl -LO https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>-beta/datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb
+sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb
 ```
 
 For CentOS or Fedora, download and install the RPM package
 
 ```bash
-curl -LO https://github.com/DataDog/dd-trace-dotnet/releases/download/v0.5.2-beta/datadog-dotnet-apm-0.5.2-1.x86_64.rpm
-sudo rpm -Uvh datadog-dotnet-apm-0.5.2-1.x86_64.rpm
+curl -LO https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>-beta/datadog-dotnet-apm-<TRACER_VERSION>-1.x86_64.rpm
+sudo rpm -Uvh datadog-dotnet-apm-<TRACER_VERSION>-1.x86_64.rpm
 ```
 
 A tar archive is available for other distributions:
 
 ```bash
 sudo mkdir -p /opt/datadog
-curl -L https://github.com/DataDog/dd-trace-dotnet/releases/download/v0.5.2-beta/datadog-dotnet-apm-0.5.2.tar.gz \
+curl -L https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>-beta/datadog-dotnet-apm-<TRACER_VERSION>.tar.gz \
 | sudo tar xzf - -C /opt/datadog
 ```
 
