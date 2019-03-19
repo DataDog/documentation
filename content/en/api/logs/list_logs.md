@@ -35,4 +35,5 @@ List endpoint returns logs that match a log search query. Results are paginated.
     Time-ascending `asc` or time-descending `desc`results.
 * **`limit`** [*optional*, *default*=**10**]:  
     Number of logs return in the response (maximum is 1000)
+    
 [1]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
