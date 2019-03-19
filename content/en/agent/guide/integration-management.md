@@ -19,7 +19,7 @@ For Linux, execute the command as the `dd-agent` user. For Windows, execute the 
 
 ## Integration commands
 
-### Summary workflow
+### Workflow
 
 1. Check the version of the integration installed in your Agent with the `show` command.
 2. Review the changelog of the specific integration on the [integrations-core][1] repository to identify the version you want.
