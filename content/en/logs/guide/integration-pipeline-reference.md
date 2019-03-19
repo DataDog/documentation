@@ -2,7 +2,7 @@
 title: Integration Pipeline Reference
 kind: guide
 aliases:
-  - /logs/guide/integration-pipeline-reference
+  - /logs/faq/integration-pipeline-reference
 disable_toc: true
 further_reading:
 - link: "logs/processing/pipelines"
