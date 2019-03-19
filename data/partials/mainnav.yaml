@@ -259,6 +259,8 @@ main:
         url: "monitors/downtimes/"
       - name: "Uptime Widget"
         url: "monitors/monitor_uptime_widget/"
+      - name: "Guides"
+        url: "monitors/guide"
       #- #  name: "FAQ"
       #  url: "monitors/faq/"
       #  #  parent: menu_references_monitoring
