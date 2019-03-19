@@ -1,6 +1,6 @@
 api_key=<YOUR_API_KEY>
 app_key=<YOUR_APP_KEY>
-public_id=axd2s
+public_id=<DD_APP_PUBLIC_ID>
 
 # Upload IdP file using multipart/form-data
 curl -X POST -H "Content-Type: multipart/form-data" \
