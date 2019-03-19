@@ -125,6 +125,9 @@ To use origin detection, enable the `dogstatsd_origin_detection` option in your 
 
 When running inside a container, DogStatsd needs to run in the host PID namespace for origin detection to work reliably. You can enable this via the docker `--pid=host` flag.
 
+**Note**: This is supported by ECS with the parameter `"pidMode": "host"` in the task definition of the container.
+This option is not supported in Fargate. For more information, see the [AWS documentation][8].
+
 ## Client library implementation guidelines
 
 Adding UDS support to existing libraries can be easily achieved as the protocol is very close to UDP. Implementation guidelines and a testing checklist are available in the [datadog-agent wiki][7].
@@ -140,3 +143,4 @@ Adding UDS support to existing libraries can be easily achieved as the protocol 
 [5]: https://github.com/DataDog/datadogpy
 [6]: https://github.com/DataDog/dogstatsd-ruby
 [7]: https://github.com/DataDog/datadog-agent/wiki/Unix-Domain-Sockets-support
+[8]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
