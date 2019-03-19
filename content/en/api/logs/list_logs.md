@@ -30,7 +30,7 @@ List endpoint returns logs that match a log search query. Results are paginated.
 * **`startAt`** [*optional*, *default*=**None**]:  
    Hash identifier of the first log to return in the list. 
    When pagination is at stake, you get that hash from the `nextLogID` parameter from previous request result. 
-   Note that this parameter is ignored if the corresponding log is out of the scope of the specified time window. 
+   **Note** that this parameter is ignored if the corresponding log is out of the scope of the specified time window. 
 * **`sort`** [*optional*, *default*=**desc**]:  
     Time-ascending `asc` or time-descending `desc`results.
 * **`limit`** [*optional*, *default*=**10**]:  
