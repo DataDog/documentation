@@ -434,4 +434,4 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [6]: /developers/metrics/custom_metrics
 [7]: /tagging
 [8]: /agent/proxy/#proxy-for-logs
-[9]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/?tab=agentv6#agent-commands
+[9]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information 
