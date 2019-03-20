@@ -21,7 +21,7 @@ further_reading:
 
 This page outlines the basic features of the Datadog Agent for macOS. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
 
-Unlike other agents, the agent tracing functionality is not included with the macOS Datadog agent out of the box and must be installed separately by downloading the darwin trace agent from our [Github trace agent repository](https://github.com/DataDog/datadog-trace-agent/releases).
+Unlike other agents, the agent tracing functionality is not included with the macOS Datadog agent out of the box and must be installed separately by downloading the darwin trace agent from our [Github trace agent repository][4].
 
 By default, the Agent is installed in a sandbox located at `/opt/datadog-agent`. You're free to move this folder wherever you like; however, his documentation assumes a default installation location.
 
@@ -110,3 +110,4 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 [1]: https://app.datadoghq.com/account/settings#agent/mac
 [2]: /agent/troubleshooting
 [3]: /agent/faq/custom_python_package
+[4]: https://github.com/DataDog/datadog-trace-agent/releases
