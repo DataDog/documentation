@@ -89,7 +89,7 @@ The "reactive" model more easily extrapolates recent behavior, at the risk of ov
 
 {{< img src="monitors/monitor_types/forecasts/linear_reactive.png" alt="linear reactive" responsive="true" style="width:80%;" >}}
 
-The "default" model is what Goldilocks would choose, and adjusts to the most recent trend and extrapolate that line while being robust to recent noise.
+The "default" model is the optimized choice which adjusts to the most recent trend. It extrapolates a line while being robust to recent noise.
 
 {{< img src="monitors/monitor_types/forecasts/linear_default.png" alt="linear default" responsive="true" style="width:80%;">}}
 
