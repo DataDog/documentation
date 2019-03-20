@@ -265,6 +265,10 @@ For example, every Java log line starts with a timestamp in `yyyy-dd-mm` format.
 2018-01-03T09:26:24.365Z UTC starting upload of /my/file.gz
 ```
 
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
 To achieve this, you need to use the following `log_processing_rules`:
 
 ```yaml
@@ -278,6 +282,43 @@ logs:
         name: new_log_start_with_date
         pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
+
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+In a docker environment use the `com.datadoghq.ad.logs` labels on your container to make sure that the log is properly collected, for example:
+
+```
+ labels:
+    com.datadoghq.ad.logs: '[{"source": "postgresql", "service": "database", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
+```
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+In a Kubernetes environment use the `ad.datadoghq.com` pod annotations on your pods to make sure that the log is properly collected, for example:
+
+```
+apiVersion: extensions/v1beta1
+kind: ReplicaSet
+metadata:
+  name: postgres
+spec:
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/nginx.logs: '[{"source": "postgresql", "service": "database", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
+      labels:
+        app: database
+      name: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:latest
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 More examples:
 
