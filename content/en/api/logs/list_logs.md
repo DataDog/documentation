@@ -35,7 +35,7 @@ List endpoint returns logs that match a log search query. Results are paginated.
 * **`limit`** [*optional*, *default*=**10**]:  
     Number of logs return in the response (maximum is 1000)
 * **`index`** [*optional*, *default*=**main**]:  
-    For multi-index organisations, the log index in which the request is performed.
+    For multi-index organizations, the log index in which the request is performed.
 
 ##### PAGINATION
 
