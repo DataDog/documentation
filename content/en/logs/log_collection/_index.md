@@ -286,7 +286,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-In docker environment use the `com.datadoghq.ad.logs` labels as below on your container to make sure that the above log is properly collected:
+In a docker environment use the `com.datadoghq.ad.logs` labels on your container to make sure that the log is properly collected, for example:
 
 ```
  labels:
@@ -296,7 +296,7 @@ In docker environment use the `com.datadoghq.ad.logs` labels as below on your co
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-In Kubernetes environment use the `ad.datadoghq.com` pod annotations as below on your pods to make sure that the above log is properly collected:
+In a Kubernetes environment use the `ad.datadoghq.com` pod annotations on your pods to make sure that the log is properly collected, for example:
 
 ```
 apiVersion: extensions/v1beta1
