@@ -97,7 +97,7 @@ The "default" model is the optimized choice which adjusts to the most recent tre
 
 Examples of seasonality options:
 
-* **weekly**: the algorithm expects that this Monday will behave like past Mondays.
+* **weekly**: the algorithm expects this Monday behaves like past Mondays.
 * **daily**: the algorithm assumes that 7 pm today is like 7 pm from previous days.
 * **hourly**: the algorithm expects that 7:15 will behave like 6:15, 5:15, 4:15, etc.
 
