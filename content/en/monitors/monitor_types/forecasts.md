@@ -93,7 +93,7 @@ The "default" model is the optimized choice which adjusts to the most recent tre
 
 {{< img src="monitors/monitor_types/forecasts/linear_default.png" alt="linear default" responsive="true" style="width:80%;">}}
 
-**Seasonal:** Use this algorithm for seasonal metrics. In monitors, Datadog auto-detects the seasonality of the metric and choose between weekly, daily, and hourly seasonality. This algorithm requires at least two seasons of history for it to start forecasting, and potentially uses up to six.
+**Seasonal:** Use this algorithm for seasonal metrics. In monitors, Datadog auto-detects the seasonality of the metric and chooses between weekly, daily, and hourly seasonality. This algorithm requires at least two seasons of history for it to start forecasting, and potentially uses up to six.
 
 Examples of seasonality options:
 
