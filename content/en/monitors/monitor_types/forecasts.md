@@ -39,7 +39,7 @@ The chart below shows a dashboard tile of a forecast in "live" mode. The dashed 
 
 {{< img src="monitors/monitor_types/forecasts/dashboard_live.png" alt="dashboard live" responsive="true" style="width:80%;">}}
 
-When the dashboard is no longer in "live" mode, the vertical pink line and the gray line indicating "Now" starts to diverge. In the chart below, the dashed pink line is still splitting the history from the forecast, but we can see actual data (solid green) to the right of the pink line. The lighter green is still showing the range of predicted values, and the dotted green line is still showing the predicted future values. The forecast is based only on the actual data observed before the dashed pink line. This view is useful for checking how accurate the forecast is against known data.
+When the dashboard is no longer in "live" mode, the vertical pink line and the gray line indicating "Now" start to diverge. In the chart below, the dashed pink line is still splitting the history from the forecast, but the actual data (solid green) is to the right of the pink line. The lighter green is still showing the range of predicted values, and the dotted green line is still showing the predicted future values. The forecast is based only on the actual data observed before the dashed pink line. This view is useful for checking how accurate the forecast is against known data.
 
 {{< img src="monitors/monitor_types/forecasts/dashboard_past.png" alt="dashboard past" responsive="true" style="width:80%;">}}
 
