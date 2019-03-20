@@ -99,7 +99,7 @@ Examples of seasonality options:
 
 * **weekly**: the algorithm expects this Monday behaves like past Mondays.
 * **daily**: the algorithm assumes that 7 pm today is like 7 pm from previous days.
-* **hourly**: the algorithm expects that 7:15 will behave like 6:15, 5:15, 4:15, etc.
+* **hourly**: the algorithm expects that 7:15 behaves like 6:15, 5:15, 4:15, etc.
 
 {{< img src="monitors/monitor_types/forecasts/seasonal.png" alt="seasonal" responsive="true" style="width:80%;">}}
 
