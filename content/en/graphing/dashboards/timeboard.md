@@ -8,7 +8,7 @@ further_reading:
 - link: "graphing/dashboards/shared_graph"
   tag: "Documentation"
   text: "Share your Graphs outside of Datadog"
-- link: "graphing/dashboards/widgets"
+- link: "graphing/widgets"
   tag: "Documentation"
   text: "Discover all available Widgets for your Dashboard"
 ---
@@ -25,7 +25,7 @@ Event Correlation refers to overlaying events on top of a dashboard graph. You c
 
 {{< img src="graphing/dashboards/guides-eventcorrelation-screenboard.png" alt="guides-eventcorrelation-screenboard" responsive="true" style="width:90%;">}}
 
-Set up event correlation at design time by editing any graph on both Timeboards and Screenboards and adding events to the graph. To learn more about this, visit the [Graphing Primer][1]. You can find details about adding events [using the UI][2] or via the JSON interface further down the page.
+Set up event correlation at design time by editing any graph on both Timeboards and Screenboards and adding events to the graph. You can find details about adding events [using the UI][1] or via the JSON interface further down the page.
 
 ## Event Correlation at View Time
 
@@ -53,15 +53,15 @@ To define the most related logs, the following parameters are used:
 
 ## Read Only
 
-[An Administrator][1] or Timeboard creator can make a Timeboard read-only by clicking the gear icon (upper right corner of a Timeboard) and clicking the **Permissions** link:
+[An Administrator][2] or Timeboard creator can make a Timeboard read-only by clicking the gear icon (upper right corner of a Timeboard) and clicking the **Permissions** link:
 
 {{< img src="graphing/dashboards/timeboard/read_only.png" alt="Read Only" responsive="true" style="width:30%;">}}
 
 **Click "Yes" on the confirmation window to make the Timeboard read-only**
 
-Only account [administrators][1] and the Timeboard creator can activate read-only mode for a Timeboard. Any user in the organization, regardless of administrator privileges, can sign up to receive change notifications for a particular Timeboard.
+Only account [administrators][2] and the Timeboard creator can activate read-only mode for a Timeboard. Any user in the organization, regardless of administrator privileges, can sign up to receive change notifications for a particular Timeboard.
 
-If a user decides to track changes for a Timeboard, the following Timeboard changes are reported to the user through an event in the [event stream][2]:
+If a user decides to track changes for a Timeboard, the following Timeboard changes are reported to the user through an event in the [event stream][1]:
 
 1. Text changes (title, description)
 2. Tile changes
@@ -106,8 +106,8 @@ Special thanks to [Brightcove][4], [Shopify][5], and [Zendesk][6] for sharing th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/team/#datadog-user-roles
-[2]: /graphing/event_stream
+[1]: /graphing/event_stream
+[2]: /account_management/team/#datadog-user-roles
 [3]: /api
 [4]: https://www.brightcove.com
 [5]: https://www.shopify.com

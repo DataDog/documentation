@@ -54,6 +54,7 @@ Options:
     - Weekly - the algorithm expects that a given day of the week behaves like past days of the week, for example this Tuesday behaves like past Tuesdays. 
     - Daily - the algorithm expects the same time today behaves like past days, for example 5pm today behaves like 5pm yesterday.
     - Hourly - the algorithm expects the same minute after the hour behaves like past minutes after the hour, for example 5:15 behaves like 4:15, 3:15, etc.
+* Daylight savings time - if you are using the agile or robust anomaly detection algorithms with weekly or daily seasonality, you can update your anomaly detection monitor to account for a local timezone. For more information, see [How to update an anomaly detection monitor to account for local time zone][4].
 
 **Note**: Machine learning algorithms require at least twice as much historical data time as the chosen seasonality time to be fully efficient.
 
@@ -65,10 +66,10 @@ There are three different anomaly detection algorithms:
 *Basic* uses a simple lagging rolling quantile computation to determine the range of expected values, but it uses very little data and adjusts quickly to changing conditions but has no knowledge of seasonal behavior or longer trends.
 
 * **Agile**: Use this algorithm for seasonal metrics when you want the algorithm to quickly adjust to level shifts in the metric.
-*Agile* is a robust version of the [SARIMA][4] algorithm. It incorporates the immediate past into its predictions, allowing it to update quickly to level shifts at the expense of being less robust to recent, long-lasting anomalies.
+*Agile* is a robust version of the [SARIMA][5] algorithm. It incorporates the immediate past into its predictions, allowing it to update quickly to level shifts at the expense of being less robust to recent, long-lasting anomalies.
 
 * **Robust**: Use this algorithm for seasonal metrics where you expect the metric to be stable and want to consider slow level shifts as anomalies.
-*Robust* is a [seasonal-trend decomposition][5] algorithm. It is very stable and its predictions remain constant even through long-lasting anomalies at the expense of taking longer to respond to intended level shifts (e.g., if the level of a metric shifts due to a code change.)
+*Robust* is a [seasonal-trend decomposition][6] algorithm. It is very stable and its predictions remain constant even through long-lasting anomalies at the expense of taking longer to respond to intended level shifts (e.g., if the level of a metric shifts due to a code change.)
 
 All of the seasonal algorithms may use up to a couple of months of historical data when calculating a metric's expected normal range of behavior. By using a significant amount of past data, the algorithms are able to avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
 
@@ -94,13 +95,13 @@ Finally, we see how each of the algorithms handle a new metric. _Robust_ and _ag
 
 ## Anomaly Monitors via the API
 
-Enterprise-level customers can create an anomaly detection monitor via the API with the standard [create-monitor API endpoint][6] if you add the `anomalies` function to the monitor query. The query then follows this formula:
+Enterprise-level customers can create an anomaly detection monitor via the API with the standard [create-monitor API endpoint][7] if you add the `anomalies` function to the monitor query. The query then follows this formula:
 
 ```
 time_aggr(eval_window_length):anomalies(space_aggr:metric{tags}, 'basic/agile/robust', deviation_number, direction='both/above/below', alert_window='alert_window_length', interval=seconds, count_default_zero='true') >= threshold_value
 ```
 
-**Note**: Anomaly detection monitors may only be used by enterprise-level customer subscriptions. If you have a pro-level customer subscription and would like to use the anomaly detection monitoring feature, reach out to your customer success representative or email the [Datadog billing team][7].
+**Note**: Anomaly detection monitors may only be used by enterprise-level customer subscriptions. If you have a pro-level customer subscription and would like to use the anomaly detection monitoring feature, reach out to your customer success representative or email the [Datadog billing team][8].
 
 ### Example
 
@@ -121,7 +122,7 @@ Also, anomaly detection requires historical data to make good predictions. If yo
 
 ### Why can't I use anomaly detection over groups in the dashboard?
 
-Looking at many separate timeseries in a single graph can lead to [spaghettification][8], and the problem gets only worse once the anomaly detection visualization is added.
+Looking at many separate timeseries in a single graph can lead to [spaghettification][9], and the problem gets only worse once the anomaly detection visualization is added.
 
 {{< img src="monitors/monitor_types/anomaly/spaghetti.png" alt="spaghetti" responsive="true" style="width:80%;">}}
 
@@ -182,17 +183,17 @@ If the rollup is set explicitly on the query, the rollup interval option for the
 
 ### I don't care if my metric is anomalous if its value is less than X, can I somehow ignore those anomalies?
 
-Create **A**: an anomaly monitor to alert on values above the bounds; and **B**: a separate [metric monitor][9] with a threshold alert to alert on values greater than X; and then finally a [composite monitor][10] on **A && B**.
+Create **A**: an anomaly monitor to alert on values above the bounds; and **B**: a separate [metric monitor][10] with a threshold alert to alert on values greater than X; and then finally a [composite monitor][11] on **A && B**.
 
 ### Why am I prevented from saving a monitor with a message like ''alert and alert recovery criteria are such that the monitor can be simultaneously in alert and alert recovery states?"
 
-Setting different windows for the alert and alert recovery periods might lead to an ambiguous state. The alert and alert recovery window sizes should be set such that both cannot be satisfied at the same time. For example, setting an alert threshold at 50% for a 2-hour window (i.e., 1 hour has to be anomalous to trigger the alert) and the [recovery threshold][11] at 50% for a 10-minute window (i.e., 5 minutes have to be non-anomalous to recover) might result in triggering the alert and the alert recovery states simultaneously. If the last 5 minutes are not anomalous but the 1 hour before that _was_ anomalous, both the alert and the alert recovery are triggered.
+Setting different windows for the alert and alert recovery periods might lead to an ambiguous state. The alert and alert recovery window sizes should be set such that both cannot be satisfied at the same time. For example, setting an alert threshold at 50% for a 2-hour window (i.e., 1 hour has to be anomalous to trigger the alert) and the [recovery threshold][12] at 50% for a 10-minute window (i.e., 5 minutes have to be non-anomalous to recover) might result in triggering the alert and the alert recovery states simultaneously. If the last 5 minutes are not anomalous but the 1 hour before that _was_ anomalous, both the alert and the alert recovery are triggered.
 
 ### How does daylight savings affect anomaly detection monitors?  
 
 Datadog monitors use UTC time and by default are agnostic to local time zones (e.g. EST, PST, CST). User activity is shifted relative to UTC time because activity typically remains the same for the user's local time. This could be detected as unexpected anomaly. 
 
-Datadog allows you to configure a timezone for each anomaly detection monitor that automatically corrects for the time shift. See [How to update an anomaly detection monitor to account for local timezone][12] for instructions.
+Datadog allows you to configure a timezone for each anomaly detection monitor that automatically corrects for the time shift. See [How to update an anomaly detection monitor to account for local timezone][4] for instructions.
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -200,12 +201,12 @@ Datadog allows you to configure a timezone for each anomaly detection monitor th
 [1]: https://app.datadoghq.com/monitors#/create
 [2]: #anomaly-detection-algorithms
 [3]: /graphing/#aggregate-and-rollup
-[4]: https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average
-[5]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
-[6]: /api/#monitor-create
-[7]: mailto:billing@datadoghq.com
-[8]: https://www.datadoghq.com/blog/anti-patterns-metric-graphs-101
-[9]: /monitors/monitor_types/metric
-[10]: /monitors/monitor_types/composite
-[11]: /monitors/faq/what-are-recovery-thresholds
-[12]: /monitors/faq/how-to-update-anomaly-monitor-timezone
+[4]: /monitors/faq/how-to-update-anomaly-monitor-timezone
+[5]: https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average
+[6]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
+[7]: /api/#monitor-create
+[8]: mailto:billing@datadoghq.com
+[9]: https://www.datadoghq.com/blog/anti-patterns-metric-graphs-101
+[10]: /monitors/monitor_types/metric
+[11]: /monitors/monitor_types/composite
+[12]: /monitors/faq/what-are-recovery-thresholds

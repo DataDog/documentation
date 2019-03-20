@@ -42,11 +42,18 @@ Datadog tracing can be enabled in one of two ways:
 ### Compile against dd-opentracing-cpp
 
 ```bash
+# Gets the latest release version number from Github.
+get_latest_release() {
+  wget -qO- "https://api.github.com/repos/$1/releases/latest" |
+    grep '"tag_name":' |
+    sed -E 's/.*"([^"]+)".*/\1/';
+}
+DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
 # Download and install dd-opentracing-cpp library.
-wget https://github.com/DataDog/dd-opentracing-cpp/archive/v0.3.7.tar.gz -O dd-opentracing-cpp.tar.gz
-tar zxvf dd-opentracing-cpp.tar.gz
-mkdir dd-opentracing-cpp-0.3.7/.build
-cd dd-opentracing-cpp-0.3.7/.build
+wget https://github.com/DataDog/dd-opentracing-cpp/archive/${DD_OPENTRACING_CPP_VERSION}.tar.gz -O dd-opentracing-cpp.tar.gz
+mkdir -p dd-opentracing-cpp/.build
+tar zxvf dd-opentracing-cpp.tar.gz -C ./dd-opentracing-cpp/ --strip-components=1
+cd dd-opentracing-cpp/.build
 # Download and install the correct version of opentracing-cpp, & other deps.
 ../scripts/install_dependencies.sh
 cmake ..
@@ -82,23 +89,30 @@ int main(int argc, char* argv[]) {
 Link against `libdd_opentracing` and `libopentracing`, making sure that they are both in your `LD_LIBRARY_PATH`:
 
 ```bash
-g++ -o tracer_example tracer_example.cpp -ldd_opentracing -lopentracing
+g++ -std=c++14 -o tracer_example tracer_example.cpp -ldd_opentracing -lopentracing
 ./tracer_example
 ```
 
 ### Dynamic Loading
 
 ```bash
+get_latest_release() {
+  wget -qO- "https://api.github.com/repos/$1/releases/latest" |
+    grep '"tag_name":' |
+    sed -E 's/.*"([^"]+)".*/\1/';
+}
+DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
+OPENTRACING_VERSION="$(get_latest_release opentracing/opentracing-cpp)"
 # Download and install OpenTracing-cpp
-wget https://github.com/opentracing/opentracing-cpp/archive/v1.5.0.tar.gz -O opentracing-cpp.tar.gz
-tar zxvf opentracing-cpp.tar.gz
-mkdir opentracing-cpp-1.5.0/.build
-cd opentracing-cpp-1.5.0/.build
+wget https://github.com/opentracing/opentracing-cpp/archive/${OPENTRACING_VERSION}.tar.gz -O opentracing-cpp.tar.gz
+mkdir -p opentracing-cpp/.build
+tar zxvf opentracing-cpp.tar.gz -C ./opentracing-cpp/ --strip-components=1
+cd opentracing-cpp/.build
 cmake ..
 make
 make install
 # Install dd-opentracing-cpp shared plugin.
-wget https://github.com/DataDog/dd-opentracing-cpp/releases/download/v0.3.7/linux-amd64-libdd_opentracing_plugin.so.gz
+wget https://github.com/DataDog/dd-opentracing-cpp/releases/download/${DD_OPENTRACING_CPP_VERSION}/linux-amd64-libdd_opentracing_plugin.so.gz
 gunzip linux-amd64-libdd_opentracing_plugin.so.gz -c > /usr/local/lib/libdd_opentracing_plugin.so
 ```
 
@@ -117,7 +131,7 @@ int main(int argc, char* argv[]) {
       "/usr/local/lib/libdd_opentracing_plugin.so", error_message);
   if (!handle_maybe) {
     std::cerr << "Failed to load tracer library " << error_message << "\n";
-    return false;
+    return 1;
   }
 
   // Read in the tracer's configuration.
@@ -132,7 +146,7 @@ int main(int argc, char* argv[]) {
   auto tracer_maybe = tracer_factory.MakeTracer(tracer_config.c_str(), error_message);
   if (!tracer_maybe) {
     std::cerr << "Failed to create tracer " << error_message << "\n";
-    return false;
+    return 1;
   }
   auto& tracer = *tracer_maybe;
 

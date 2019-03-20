@@ -50,6 +50,8 @@ Use variables to customize your monitor notifications, the available variables a
 | `{{comparator}}`     | Display the relational value selected in the monitor's *Set alert conditions* section.         |
 | `{{last_triggered_at}}`     | Display the UTC date/time when the monitor last triggered.         |
 
+**Note**: When entering decimal values for thresholds, if your value is `<1`, add a leading `0` to the number. For example, use `0.5`, not `.5`.
+
 ### Tag variables
 
 For multi-alert monitors, add tag variables to include information in your alert message that's specific to the tag scope that triggered the alert. This is dependent on the tags you used in the *trigger a separate alert for each* field in Section 1 of your monitor.
@@ -254,7 +256,7 @@ Send the monitor notification to the appropriate endpoint:
 
 * Notify a Datadog user via email by adding `@<DD_USER_EMAIL>` in your notification message.
 * Notify any non-Datadog users via email by adding `@<EMAIL>` to the notification message.
-* Install Slack or Hipchat integration to send your notifications directly in the appropriate channel.
+* Install the Slack integration to send your notifications directly in the appropriate channel.
 
 **Note**: A @-mention must have a space between it and the last line character: `{{value}}@slack-channel` is invalid `{{value}} @slack-channel` is valid.
 
@@ -297,15 +299,6 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 
 
 [1]: https://api.slack.com/methods/usergroups.list
-{{% /tab %}}
-{{% tab "Hipchat Integration" %}}
-
-After having installed the Hipchat integration, type `@hipchat` in your notification message to see the available list of channels to send your notification to.
-
-Use `@here` in the monitor message to notify everybody in a given Hipchat channel. Do not use `@all` as it notifies all members of your Datadog organization.
-
-**Note**: Hipchat users must have room notifications set to *at least* `Normal` to receive notifications this way.
-
 {{% /tab %}}
 {{< /tabs >}}
 

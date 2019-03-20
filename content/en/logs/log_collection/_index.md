@@ -319,6 +319,41 @@ logs:
 
 [Refer to the Agent proxy documentation][8] to learn how to forward your Logs with a proxy.
 
+### Global processing rules
+
+Since Datadog Agent v6.10, the `exclude_at_match`, `include_at_match`, and `mask_sequences` rules can be defined globally.
+
+{{< tabs >}}
+{{% tab "Configuration files" %}}
+
+In the `datadog.yaml` file:
+
+```
+logs_config:
+  processing_rules:
+     - type: exclude_at_match
+       name: exclude_healthcheck
+       pattern: healtcheck
+     - type: mask_sequences
+       name: mask_user_email
+       pattern: \w+@datadoghq.com
+       replace_placeholder: "MASKED_EMAIL"
+```
+{{% /tab %}}
+{{% tab "Environment Variable" %}}
+
+The `DD_LOGS_CONFIG_PROCESSING_RULES` can be used to configure global processing rules:
+
+```
+DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+All the logs collected by the Datadog Agent are impacted by those processing rules.
+
+**Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the [Status Command][9] to troubleshoot any issues.
+
 ## How to get the most of your application logs
 
 When logging stack traces, there are specific attributes that have a dedicated UI display within your Datadog application such as the logger name, the current thread, the error type, and the stack trace itself.
@@ -358,3 +393,4 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [6]: /developers/metrics/custom_metrics
 [7]: /tagging
 [8]: /agent/proxy/#proxy-for-logs
+[9]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/?tab=agentv6#agent-commands

@@ -40,6 +40,14 @@ If you are a member of multiple organizations, custom sub-domains help you ident
 
 For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is currently viewing Datadog within the context of Organization B, then that URL returns a `404 Not Found error`. The user must switch to Organization A using the [user account settings menu][10], then revisit the URL. However, with custom sub-domains, the user could visit `https://org-a.datadoghq.com/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
 
+## Setting up SAML
+
+To configure SAML for multi-organizations, use the following procedure:
+
+1. Create a new organization as a different user, with a different username/password.
+2. Invite SAML users.
+3. Login as a SAML user and set SAML.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

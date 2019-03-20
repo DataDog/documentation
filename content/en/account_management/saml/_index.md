@@ -43,6 +43,8 @@ Once SAML is configured in Datadog and your IdP is set up to accept requests fro
 
 The Single Sign-on URL is also displayed on the [Team page][5]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed until SAML is enabled for your account.
 
+**Note**: If you want to configure SAML for a multi-org, see the [multi-org documentation][6].
+
 ## Datadog Service Provider Details
 
 * Datadog supports the **HTTP-POST** binding for **SAML2**:
@@ -82,13 +84,13 @@ If **sn** and **givenName** are provided, they are used to update the user's nam
 
 For more information about configuring specific IdP's, refer to the following documentation:
 
-* [Active Directory][6]
-* [Auth0][7]
-* [Azure][8]
-* [Google][9]
-* [NoPassword][10]
-* [Okta][11]
-* [SafeNet][12]
+* [Active Directory][7]
+* [Auth0][8]
+* [Azure][9]
+* [Google][10]
+* [NoPassword][11]
+* [Okta][12]
+* [SafeNet][13]
 
 ## Additional Features
 
@@ -98,7 +100,7 @@ The following features can be enabled through the [SAML Configuration dialog][3]
 
 With Just-in-Time provisioning, a user is created within Datadog the first time they try to log in. This eliminates the need for administrators to manually create user accounts one at a time.
 
-Some organizations might not want to invite all of their users to Datadog. If you would like to make changes to how SAML works for your account, contact [Datadog support][13]. It is up to the organization to configure their IdP to not send assertions to Datadog if they don't want a particular user to access Datadog.
+Some organizations might not want to invite all of their users to Datadog. If you would like to make changes to how SAML works for your account, contact [Datadog support][14]. It is up to the organization to configure their IdP to not send assertions to Datadog if they don't want a particular user to access Datadog.
 
 Administrators can set the default role for new Just-in-Time users. The default role is **Standard**, but you can choose to add new JIT users as **Read-Only** or even **Administrators**.
 
@@ -125,11 +127,12 @@ With SAML Strict mode enabled, all users must log in with SAML. An existing user
 [3]: https://app.datadoghq.com/saml/saml_setup
 [4]: https://app.datadoghq.com/account/saml/metadata.xml
 [5]: https://app.datadoghq.com/account/team
-[6]: /account_management/saml/activedirectory
-[7]: /account_management/saml/auth0
-[8]: /account_management/saml/azure
-[9]: /account_management/saml/google
-[10]: /account_management/saml/nopassword
-[11]: /account_management/saml/okta
-[12]: /account_management/saml/safenet
-[13]: /help
+[6]: /account_management/multi_organization#setting-up-saml
+[7]: /account_management/saml/activedirectory
+[8]: /account_management/saml/auth0
+[9]: /account_management/saml/azure
+[10]: /account_management/saml/google
+[11]: /account_management/saml/nopassword
+[12]: /account_management/saml/okta
+[13]: /account_management/saml/safenet
+[14]: /help

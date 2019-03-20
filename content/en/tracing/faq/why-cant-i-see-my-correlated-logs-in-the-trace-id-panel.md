@@ -29,11 +29,15 @@ If the log section is empty when the `host` option is set, go into the log explo
 
 - Logs are being sent from the host that emitted trace.
 - There are logs for that host within the trace timeframe.
-- The timestamp of the logs is properly set. Checkout [this specific guide][3] for more explanation about the log timestamp.
+- The timestamp of the logs is properly set. Checkout [this specific guide][1] for more explanation about the log timestamp.
 
 ### Trace_id option
 
-If your logs do not contain the trace id, follow the guide on [correlating traces and logs][2] to do it.
+Make sure you have a `trace_id` standard attribute in your logs. You should see a trace icon next to the SERVICE name (black if trace is not sampled, grey if trace is sampled).
+
+{{< img src="tracing/trace_in_log_panel.png" alt="Trace icon in log panel" responsive="true" style="width:50%;">}}
+
+If your logs do not contain the `trace_id`, follow the guide on [correlating traces and logs][2].
 The idea is then on the log side to:
 
 1. Extract the trace id in a log attribute
@@ -42,10 +46,13 @@ The idea is then on the log side to:
 {{< tabs >}}
 {{% tab "JSON logs" %}}
 
-For JSON logs, step 1 and 2 are done automatically. The tracer inject the trace and span id automatically in the logs and it is remapped automatically thanks to the [reserved attribute remappers][4].
+For JSON logs, step 1 and 2 are done automatically. The tracer inject the trace and span id automatically in the logs and it is remapped automatically thanks to the [reserved attribute remappers][1].
 
-In case of issue, double check in your logs the name of the attribute that contains the trace id (should be `dd.trace_id`) and double check in your [reserved attributes](https://app.datadoghq.com/logs/pipelines/remapping) that it is properly set.
+If this isn't working as expected, ensure the name of the logs attribute that contains the trace id is `dd.trace_id` and verify it is properly set in [reserved attributes][2].
 
+
+[1]: /logs/processing/#edit-reserved-attributes
+[2]: https://app.datadoghq.com/logs/pipelines/remapping
 {{% /tab %}}
 {{% tab "With Log integration" %}}
 
@@ -55,8 +62,9 @@ Here is an example with the Java integration pipeline:
 
 {{< img src="tracing/tracing_java_traceid_remapping.png" alt="Java log pipeline" responsive="true" style="width:90%;">}}
 
-Now it is possible that the log format is not covered by the integration pipeline. In this case, clone the pipeline and [follow our parsing troubleshooting guide](https://docs.datadoghq.com/logs/faq/how-to-investigate-a-log-parsing-issue/#pagetitle) to make sure it fits your format.
+Now it is possible that the log format is not covered by the integration pipeline. In this case, clone the pipeline and [follow our parsing troubleshooting guide][1] to make sure it fits your format.
 
+[1]: https://docs.datadoghq.com/logs/faq/how-to-investigate-a-log-parsing-issue/#pagetitle
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -64,8 +72,9 @@ For raw logs without any integration, make sure that the custom parsing rule is 
 
 {{< img src="tracing/tracing_custom_parsing.png" alt="Custom parser" responsive="true" style="width:90%;">}}
 
-Then define a [Trace remapper](https://docs.datadoghq.com/logs/processing/processors/#trace-remapper) on the extracted attribute to remap them to the official trace id of the logs.
+* Then define a [Trace remapper][1] on the extracted attribute to remap them to the official trace id of the logs.
 
+[1]: https://docs.datadoghq.com/logs/processing/processors/#trace-remapper
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -77,7 +86,5 @@ Once the IDs are properly injected and remapped into your logs, you can make a d
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_collection
+[1]: https://docs.datadoghq.com/logs/faq/why-do-my-logs-not-have-the-expected-timestamp/#pagetitle
 [2]: /tracing/advanced_usage/#correlate-traces-and-logs
-[3]: https://docs.datadoghq.com/logs/faq/why-do-my-logs-not-have-the-expected-timestamp/#pagetitle
-[4]: https://docs.datadoghq.com/logs/processing/#edit-reserved-attributes

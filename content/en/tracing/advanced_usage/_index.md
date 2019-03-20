@@ -165,7 +165,7 @@ func main() {
 
 **Adding tags to a Span attached to a Context**
 
-Our integrations make use of the `Context` type to propagate the current active span. If you want to add a tag to a span attached to a `Context` via automatic instrumentation, call the `SpanFromContext` function:
+Datadog's integrations make use of the `Context` type to propagate the current active span. If you want to add a tag to a span attached to a `Context` via automatic instrumentation, call the `SpanFromContext` function:
 
 ```go
 package main
@@ -225,13 +225,12 @@ app.get('/posts', (req, res) => {
 
 **Adding tags to a current active span**
 
-Access the current active span from any method within your code. Note, however, that if the method is called and there is no span currently active, `tracer.scopeManager().active()` returns `null`.
+Access the current active span from any method within your code. **Note**: If the method is called and there is no span currently active, `tracer.scope().active()` returns `null`.
 
 ```javascript
 // e.g. adding tag to active span
 
-const scope = tracer.scopeManager().active()
-const span = scope.span()
+const span = tracer.scope().active()
 
 span.setTag('<TAG_KEY>', '<TAG_VALUE>')
 ```
@@ -246,14 +245,11 @@ Add tags directly to a `Datadog.Trace.Span` object by calling `Span.SetTag()`. F
 ```csharp
 using Datadog.Trace;
 
-// get the global tracer
-var tracer = Tracer.Instance;
-
-// get the currently active span (can be null)
-var span = tracer.ActiveScope?.Span;
+// access the active scope through the global tracer (can return null)
+var scope = Tracer.Instance.ActiveScope;
 
 // add a tag to the span
-span?.SetTag("<TAG_KEY>", "<TAG_VALUE>");
+scope.Span.SetTag("<TAG_KEY>", "<TAG_VALUE>");
 ```
 
 **Note**: `Datadog.Trace.Tracer.Instance.ActiveScope` returns `null` if there is no active span.
@@ -294,20 +290,15 @@ if (null !== $span) {
 
 **Adding tags globally to all spans**
 
-Not supported with automatic instrumentation.
+Use the environment variable `DD_TRACE_GLOBAL_TAGS` to add tags to all the generated spans. See the [PHP configuration][1]
+section for details on how environment variables should be set.
 
-Manual instrumentations of the tracer can set an associative array of global tags via the `global_tags` configuration key.
-
-```php
-$config = [
-    'global_tags' => [
-        '<TAG_KEY>' => '<TAG_VALUE>',
-    ]
-];
-$tracer = new \DDTrace\Tracer(null, null, $config);
-\DDTrace\GlobalTracer::set($tracer);
+```ini
+DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
 ```
 
+
+[1]: /tracing/languages/php/#configuration
 {{% /tab %}}
 {{% tab "C++" %}}
 
@@ -414,6 +405,21 @@ const tracer = require('dd-trace').init({
 ```
 
 {{% /tab %}}
+{{% tab ".NET" %}}
+
+The .NET Tracer automatically reads the environment variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` to set the Agent endpoint. The Agent endpoint can also be set when creating a new `Tracer` instance:
+
+```csharp
+using Datadog.Trace;
+
+var uri = new Uri("htt://localhost:8126/");
+var tracer = Tracer.Create(agentEndpoint: uri);
+
+// optional: set the new tracer as the new default/global tracer
+Tracer.Instance = tracer;
+```
+
+{{% /tab %}}
 {{% tab "PHP" %}}
 
 The PHP tracer automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
@@ -423,6 +429,94 @@ putenv('DD_AGENT_HOST=localhost');
 putenv('DD_TRACE_AGENT_PORT=8126');
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
+## Runtime Metrics
+
+Enable runtime metrics collection in the tracing client to gain additional insight into an application's performance. Runtime metrics can be viewed in the context of a service, correlated in the Trace View at the time of a given request, and utilized anywhere in the platform.
+
+{{< img src="tracing/jvm_runtime_trace.png" alt="JVM Runtime Trace" responsive="true" style="width:100%;">}}
+
+{{< tabs >}}
+{{% tab "Java" %}}
+
+### Automatic Configuration
+
+JVM metrics collection can be enabled with one configuration parameter in the tracing client:
+
+* System Property: `-Ddd.jmxfetch.enabled=true`
+* Environment Variable: `DD_JMXFETCH_ENABLED=true`
+
+JVM metrics can be viewed in correlation with your Java services. See the [Service page][1] in Datadog.
+
+{{< img src="tracing/jvm-runtime.png" alt="JVM Runtime" responsive="true" style="width:100%;">}}
+
+**Note**: For the runtime UI, `dd-trace-java` >= [`0.24.0`][2] is supported.
+
+### Data Collected
+
+The following metrics are collected by default after enabling JVM metrics.
+
+{{< get-metrics-from-git "java" >}}
+
+Along with displaying these metrics in your APM Service Page, Datadog provides a [default JVM Runtime Dashboard][3] with the `service` and `runtime-id` tags that are applied to these metrics.
+
+Additional JMX metrics can be added using configuration files that are passed to `jmxfetch.metrics-configs`. You can also enable existing Datadog JMX integrations individually with the `dd.integration.<name>` parameter. This auto-embeds configuration from Datadog's [existing JMX configuration files][4]. See the [JMX Integration][5] for further details on configuration.
+
+### Collecting JVM Metrics in Containerized Environments
+
+By default, JVM metrics from your application are sent to the Datadog Agent over port 8125. If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][6], and that port 8125 is open on the Agent. For example: in Kubernetes, [bind the DogstatsD port to a host port][7]; in ECS, [set the approriate flags in your task definition][8].
+
+
+[1]: https://app.datadoghq.com/apm/services
+[2]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.0
+[3]: https://app.datadoghq.com/dash/integration/256/jvm-runtime-metrics
+[4]: https://github.com/DataDog/integrations-core/search?q=jmx_metrics&unscoped_q=jmx_metrics
+[5]: /integrations/java/#configuration
+[6]: https://docs.datadoghq.com/agent/docker/#dogstatsd-custom-metrics
+[7]: https://docs.datadoghq.com/agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[8]: https://docs.datadoghq.com/integrations/amazon_ecs/?tab=python#create-an-ecs-task
+{{% /tab %}}
+{{% tab "Python" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+[1]: /help
+{{% /tab %}}
+{{% tab "Go" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+
+[1]: /help
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+
+[1]: /help
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+
+[1]: /help
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+
+[1]: /help
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -614,9 +708,9 @@ For more information on manual instrumentation, see the [API documentation][2].
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-If you aren’t using libraries supported by automatic instrumentation (see [Library compatibility][1]), you should manually instrument your code.
+If you are not using libraries supported by automatic instrumentation (see [Integrations][1]), you can instrument your code manually.
 
-The following example uses the global Datadog Tracer and creates a span to trace a web request:
+The following example uses the global `Tracer` and creates a custom span to trace a web request:
 
 ```csharp
 using Datadog.Trace;
@@ -633,35 +727,55 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 ```
 
 
-[1]: /tracing/languages/dotnet/#compatibility
+[1]: /tracing/languages/dotnet/#integrations
 {{% /tab %}}
+
 {{% tab "PHP" %}}
 
-If you aren’t using a [framework supported by automatic instrumentation][1], manually instrument your code.
+Even if Datdog does not officially support your web framework, you may not need to perform any manual instrumentation. See [automatic instrumentation][1] for more details.
 
-First install the PHP tracer dependency with Composer:
+If you really need manual instrumentation, e.g., because you want to trace specific custom methods in your application, first install the PHP tracer dependency with Composer:
 
 ```bash
 $ composer require datadog/dd-trace
 ```
 
-Then use the PHP tracer bootstrap to initialize the global tracer and create a root span to start the trace:
+#### Trace a custom function or method
+
+The `dd_trace()` function hooks into existing functions and methods to:
+
+* Open a span before the code executes
+* Set additional tags or errors on the span
+* Close the span when it is done
+* Modify the arguments or the return value
+
+For example, the following snippet traces the `CustomDriver::doWork()` method, adds custom tags, reports any exceptions as errors on the span, and then re-throws the exceptions.
 
 ```php
-// The existing Composer autoloader
-require __DIR__ . '/../vendor/autoload.php';
+dd_trace("CustomDriver", "doWork", function (...$args) {
+    // Start a new span
+    $scope = GlobalTracer::get()->startActiveSpan('CustomDriver.doWork');
+    $span = $scope->getSpan();
 
-// Add the PHP tracer bootstrap
-require __DIR__ . '/../vendor/datadog/dd-trace/bridge/dd_init.php';
+    // Access object members via $this
+    $span->setTag(Tags\RESOURCE_NAME, $this->workToDo);
 
-$span = \DDTrace\GlobalTracer::get()
-    ->startRootSpan('web.request')
-    ->getSpan();
-$span->setResource($_SERVER['REQUEST_URI']);
-$span->setTag(\DDTrace\Tag::SPAN_TYPE, \DDTrace\Type::WEB_SERVLET);
-$span->setTag(\DDTrace\Tag::HTTP_METHOD, $_SERVER['REQUEST_METHOD']);
-
-// Run the app here...
+    try {
+        // Execute the original method
+        $result = $this->doWork(...$args);
+        // Set a tag based on the return value
+        $span->setTag('doWork.size', count($result));
+        return $result;
+    } catch (Exception $e) {
+        // Inform the tracer that there was an exception thrown
+        $span->setError($e);
+        // Bubble up the exception
+        throw $e
+    } finally {
+        // Close the span
+        $span->finish();
+    }
+});
 ```
 
 The root span an be accessed later on directly from the global tracer via `Tracer::getRootScope()`. This is useful in contexts where the metadata to be added to the root span does not exist in early script execution.
@@ -673,8 +787,30 @@ $rootSpan = \DDTrace\GlobalTracer::get()
 $rootSpan->setTag(\DDTrace\Tag::HTTP_STATUS_CODE, 200);
 ```
 
+#### Zend Framework 1 manual instrumentation
 
-[1]: /tracing/languages/php/#framework-compatibility
+Zend Framework 1 is automatically instrumented by default, so you are not required to modify your ZF1 project. However, if automatic instrumentation is disabled, enable the tracer manually.
+
+First, [download the latest source code from the releases page][2]. Extract the zip file and copy the `src/DDTrace` folder to your application's `/library` folder. Then add the following to your `application/configs/application.ini` file:
+
+```ini
+autoloaderNamespaces[] = "DDTrace_"
+pluginPaths.DDTrace = APPLICATION_PATH "/../library/DDTrace/Integrations/ZendFramework/V1"
+resources.ddtrace = true
+```
+
+#### Manual instrumentation and php code optimization
+
+Prior to PHP 7, some frameworks provided ways to compile PHP classes—e.g., through the Laravel's `php artisan optimize` command.
+
+While this [has been deprecated][3] if you are using PHP 7.x, you still may use this caching mechanism in your app prior to version 7.x. In this case, Datadog suggests you use the [OpenTracing][4] API instead of adding `datadog/dd-trace` to your Composer file.
+
+
+
+[1]: /tracing/languages/php/#automatic-instrumentation
+[2]: https://github.com/DataDog/dd-trace-php/releases/latest
+[3]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
+[4]: #opentracing
 {{% /tab %}}
 {{% tab "C++" %}}
 
@@ -990,11 +1126,12 @@ The following tags are available to override Datadog specific options:
 For OpenTracing support, add the [`Datadog.Trace.OpenTracing`][1] NuGet package to your application. During application start-up, initialize the OpenTracing library:
 
 ```csharp
+using Datadog.Trace.OpenTracing;
+
 public void ConfigureServices(IServiceCollection services)
 {
     // create an OpenTracing ITracer with default setting
-    OpenTracing.ITracer tracer =
-        Datadog.Trace.OpenTracing.OpenTracingTracerFactory.CreateTracer();
+    OpenTracing.ITracer tracer = OpenTracingTracerFactory.CreateTracer();
 
     // to use tracer with ASP.NET Core dependency injection
     services.AddSingleton<ITracer>(tracer);
@@ -1115,9 +1252,7 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Distributed tracing is disabled by default. Refer to the configuration documentation for each framework to enable it.
-
-Distributed tracing is supported in the following frameworks:
+Distributed tracing is enabled by default and supported in the following frameworks:
 
 | Framework/Library | API Documentation                                                   |
 | ----------------- | :------------------------------------------------------------------ |
@@ -1217,9 +1352,9 @@ Distributed tracing is enabled by default for all supported integrations (see [C
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+Distributed tracing is enabled by default for all supported integrations (see [Integrations][1]).
 
-[1]: /help
+[1]: /tracing/languages/dotnet/#integrations
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -1455,9 +1590,8 @@ Once the sampling priority has been set, it cannot be changed. This is done auto
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+Priority sampling is enabled by default. The default sampler automatically assigns a value of `AutoReject` or `AutoKeep` to traces, depending on their service and volume.
 
-[1]: /help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -1483,6 +1617,10 @@ another_span->SetTag("sampling.priority", 0); // Discard this span.
 
 The correlation between Datadog APM and Datadog Log Management is improved by automatically adding a `trace_id` and `span_id` in your logs with the Tracing Libraries. This can then be used in the platform to show you the exact logs correlated to the observed trace.
 
+Before correlating traces with logs, ensure your logs are either [sent as JSON][6], or [parsed by the proper language level log processor][7].
+
+Your language level logs *must* be turned into Datadog attributes in order for traces and logs correlation to work.
+
 {{< img src="tracing/trace_id_injection.png" alt="Logs in Traces" responsive="true" style="width:100%;">}}
 
 {{< tabs >}}
@@ -1492,7 +1630,7 @@ Use one of the following options to inject Java trace information into your logs
 
 **Automatic Trace ID Injection**
 
-Enable injection in the Java Tracer's [configuration][2] by setting `Ddd.logs.injection=true` or through environment variable `DD_LOGS_INJECTION=true`.
+Enable injection in the Java Tracer's [configuration][1] by setting `Ddd.logs.injection=true` or through environment variable `DD_LOGS_INJECTION=true`.
 
 **Note**: Currently only **slf4j** is supported for MDC autoinjection.
 
@@ -1557,14 +1695,13 @@ Then update your logger configuration to include `dd.trace_id` and `dd.span_id` 
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
-**Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][4].
+**Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][3].
 
-[See our Java logging documentation][3] for more details about specific logger implementation or to learn how to log in JSON.
+[See the Java logging documentation][2] for more details about specific logger implementation or to learn how to log in JSON.
 
-[1]: https://logback.qos.ch/manual/mdc.html
-[2]: https://docs.datadoghq.com/tracing/languages/java/#configuration
-[3]: https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#raw-format
-[4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/
+[1]: https://docs.datadoghq.com/tracing/languages/java/#configuration
+[2]: https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#raw-format
+[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -1640,12 +1777,12 @@ Once the logger is configured, executing a traced function that logs an event yi
 {"event": "In tracer context", "trace_id": 9982398928418628468, "span_id": 10130028953923355146}
 ```
 
-**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][2].
+**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][2].
 
-[See our Python logging documentation][1] to ensure that the Python Log Integration is properly configured so that your Python logs are automatically parsed.
+[See the Python logging documentation][1] to ensure that the Python Log Integration is properly configured so that your Python logs are automatically parsed.
 
 [1]: https://docs.datadoghq.com/logs/log_collection/python/#configure-the-datadog-agent
-[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/
+[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
@@ -1725,13 +1862,13 @@ Datadog.tracer.trace('my.operation') { logger.warn('This is a traced operation.'
 # [2019-01-16 18:38:41 +0000][my_app][WARN][dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] This is a traced operation.
 ```
 
-**Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][3].
+**Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][3].
 
-See our [Ruby logging documentation][2] to verify the Ruby log integration is properly configured and your ruby logs are automatically parsed.
+See the [Ruby logging documentation][2] to verify the Ruby log integration is properly configured and your ruby logs are automatically parsed.
 
 [1]: https://docs.datadoghq.com/logs/log_collection/ruby
 [2]: https://docs.datadoghq.com/logs/log_collection/ruby/#configure-the-datadog-agent
-[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/
+[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -1766,8 +1903,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 The above example illustrates how to use the span's context in the standard library's `log` package. Similar logic may be applied to 3rd party packages too.
 
-**Note**: If you are not using a [Datadog Log Integration][7] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][8].
 
+**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][2].
+
+[1]: https://docs.datadoghq.com/tracing/languages/go/#configuration
+[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
@@ -1795,15 +1935,16 @@ Example using `console` as the underlying logger:
 
 ```javascript
 const tracer = require('dd-trace')
+const formats = require('dd-trace/ext/formats')
 
 class Logger {
   log (level, message) {
-    const scope = tracer.scopeManager().active()
+    const span = tracer.scope().active()
     const time = (new Date()).toISOString()
     const record = { time, level, message }
 
-    if (scope && scope.span()) {
-      tracer.inject(scope.span().context(), record)
+    if (span) {
+      tracer.inject(span.context(), formats.LOG, record)
     }
 
     console.log(record)
@@ -1817,8 +1958,8 @@ module.exports = Logger
 
 To ensure proper log correlation, verify the following is present in each log entry:
 
-- `dd.trace_id=<TRACE_ID>`: Where `<TRACE_ID>` is equal to `tracer.scopeManager().active().span().context().toTraceId()` or `0` if no trace is active during logging.
-- `dd.span_id=<SPAN_ID>`: Where `<SPAN_ID>` is equal to `tracer.scopeManager().active().span().context().toSpanId()` or `0` if no trace is active during logging.
+- `dd.trace_id=<TRACE_ID>`: Where `<TRACE_ID>` is equal to `tracer.scope().active().context().toTraceId()`.
+- `dd.span_id=<SPAN_ID>`: Where `<SPAN_ID>` is equal to `tracer.scope().active().context().toSpanId()`.
 
 You should append or prepend these 2 strings directly to the message part of the log entry. This allows you to correlate trace and logs without having to alter your parsing rules.
 
@@ -1829,18 +1970,16 @@ const tracer = require('dd-trace').init()
 
 class Logger {
   log (level, message) {
-    const scope = tracer.scopeManager().active()
+    const span = tracer.scope().active()
     const time = (new Date()).toISOString()
     const format = '[%s] [%s] - dd.trace_id=%s dd.span_id=%s %s'
 
-    let traceId = 0
-    let spanId = 0
+    let traceId = ''
+    let spanId = ''
 
-    if (scope && scope.span()) {
-      const context = scope.span().context()
-
-      traceId = context.toTraceId()
-      spanId = context.toSpanId()
+    if (span) {
+      traceId = span.context().toTraceId()
+      spanId = span.context().toSpanId()
     }
 
     console.log(format, time, level.toUpperCase(), traceId, spanId, message)
@@ -1850,11 +1989,11 @@ class Logger {
 module.exports = Logger
 ```
 
-**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][2].
+**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][2].
 
-[1]: https://docs.datadoghq.com/logs/log_collection/nodejs/
-[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/
 
+[1]: https://docs.datadoghq.com/logs/log_collection/nodejs
+[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -1895,11 +2034,11 @@ $logger->pushProcessor(function ($record) {
 });
 ```
 
-**Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in our [FAQ on this topic][3].
+**Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][3].
 
 [1]: https://github.com/Seldaek/monolog
-[2]: https://docs.datadoghq.com/logs/log_collection/php/
-[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/
+[2]: https://docs.datadoghq.com/logs/log_collection/php
+[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -2016,28 +2155,27 @@ For more tracer settings, check out the [API documentation][2].
 Debug mode is disabled by default. To enable it, set the `isDebugEnabled` argument to `true` when creating a new tracer instance:
 
 ```csharp
-var tracer = Datadog.Trace.Tracer.Create(isDebugEnabled: true);
+using Datadog.Trace;
+
+var tracer = Tracer.Create(isDebugEnabled: true);
+
+// optional: set the new tracer as the new default/global tracer
+Tracer.Instance = tracer;
 ```
 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Debug mode is disabled by default. To enable it, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][6] for details about how and when this environment variable value should be set in order
+Debug mode is disabled by default. To enable it, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][1] for details about how and when this environment variable value should be set in order
 to be properly handled by the tracer.
 
-**Application Logs**:
+In order to tell PHP where it should put `error_log` messages, you can either set it at the server level, or as a PHP `ini` parameter, which is the standard way to configure PHP behavior.
 
-By default, logging from the PHP tracer is disabled. In order to get debugging information and errors sent to logs,
-set a [PSR-3 logger][1] singleton.
-
-```php
-\DDTrace\Log\Logger::set(
-    new \DDTrace\Log\PsrLogger($logger)
-);
-```
+If you are using an Apache server, use the `ErrorLog` directive.
+If you are using an NGINX server, use the `error_log` directive.
+If you are configuring instead at the PHP level, use PHP's `error_log` ini parameter.
 
 [1]: https://www.php-fig.org/psr/psr-3
-
 {{% /tab %}}
 {{% tab "C++" %}}
 
@@ -2133,4 +2271,5 @@ apm_config:
 [3]: http://opentracing.io
 [4]: #priority-sampling
 [5]: /tracing/getting_further/trace_sampling_and_storage
-[6]: /tracing/languages/php/#configuration
+[6]: /logs/log_collection/?tab=tailexistingfiles#send-your-application-logs-in-json
+[7]: /logs/log_collection/?tab=tailexistingfiles#enabling-log-collection-from-integrations

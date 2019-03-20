@@ -155,7 +155,7 @@ Your logs are collected and centralized into the [Log Explorer][3] view. You can
 [2]: /logs/processing
 [3]: /logs/explore
 [4]: /logs/explorer/analytics
-[5]: /graphing/dashboards/widgets/#timeseries
+[5]: /graphing/widgets/timeseries
 [6]: /monitors/monitor_types/log
 [7]: /logs/log_collection/?tab=tailexistingfiles#how-to-get-the-most-of-your-application-logs
 [8]: /logs/log_collection/#getting-started-with-the-agent

@@ -1,7 +1,7 @@
 ---
-title: Attributes Naming Convention
+title: Standard Attributes
 kind: documentation
-description: "Datadog log attributes naming convention."
+description: "Datadog standard attributes for pipelines."
 further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"
@@ -17,27 +17,68 @@ further_reading:
   text: "Learn how to explore your logs"
 ---
 
-## Getting Started
-
-One may ask, Why do we need a naming convention for log attributes?
-
-* Various technologies tend to use different attribute names for the same meaning.
-* This usually generates too many attributes, which can lead to user confusion and the inability to correlate logs across sources.
-* Datadog Integrations rely on the following attribute naming convention.
-* Use the following reference when parsing custom formats and sources in order to fully leverage all of Datadog's functionalities.
-
 ## Overview
 
-Centralizing logs from various technologies and applications tends to generate tens or hundreds of different attributes in a Log Management environment- especially when many users, each one with their own personal usage patterns, are working within the same environment.
-This generates confusion. For instance, a client IP might have the following attributes within your logs: `clientIP`, `client_ip_address`, `remote_address`, `client.ip`, etc.
-In this context, it can be cumbersome to know which attributes correspond to the logs you are trying to filter on, or correlate proxy logs to web application logs.
+Centralizing logs from various technologies and applications tends to generate tens or hundreds of different attributes in a Log Management environment—especially when many teams' users, each one with their own personal usage patterns, are working within the same environment.
 
-Even if technologies define their respective logs attributes differently, a URL, client IP, or duration have universally consistent meanings.
-This is why Datadog decided while implementing log integrations to rely on a subset of names for attributes that are commonly observed over log sources.
+This can generate confusion. For instance, a client IP might have the following attributes within your logs: `clientIP`, `client_ip_address`, `remote_address`, `client.ip`, etc. 
 
-But as Datadog integrations are not covering your custom formats and sources, we decided to make this Attribute Naming Convention (or [Taxonomy][1]) public to help you decide how to name your attributes in your own parsers.
+In this context, the number of created or provided attributes can lead to confusion and difficulty to configure or understand the environment. It is also cumbersome to know which attributes correspond to the the logs of interest and - for instance - correlating web proxy with web application logs would be difficult. Even if technologies define their respective logs attributes differently, a URL, client IP, or duration have universally consistent meanings.
 
-This attribute naming convention has been split into 7 functional domains:
+Standard Attributes have been designed to help your organization to define its own Naming Convention and to enforce it as much as possible across users and functional teams. The goal is to define a subset of attributes that would be the recipient of shared semantics that everyone agrees to use by convention.
+
+Log Integrations are natively relying on the [default provided set](#default-standard-attribute-list) but your organization can decide to extend or modify this list.
+The standard attribute table is available in Log Configuration pages, along with pipelines, indexes, and archives.
+
+
+{{< img src="logs/processing/attribute_naming_convention/standard_attributes.png" alt="Standard Attributes" responsive="true" style="width:80%;">}}
+
+How these Standard Attributes will be suggested or enforced?
+Administrators have the right to re-copy an existing set of (non-standard) attributes into a standard one so to enforce non compliant logs sources to become compliant without loosing any previous information. 
+
+## Standard Attribute list
+
+The standard attribute table comes with a set of [predefined standard attributes](#default-standard-attribute-list). You can append that list with your own attributes, and edit or delete existing standard attributes:
+
+{{< img src="logs/processing/attribute_naming_convention/edit_standard_attributes.png" alt="Edit standard attributes" responsive="true" style="width:80%;">}}
+
+### Add Or Update Standard Attributes
+
+A standard attribute is defined by its:
+
+* `Path`: The path of the Standard attributes as you would find it in your JSON (e.g `network.client.ip`)
+* `Type` (`string`, `integer`, `double`, `boolean`): The type of the attribute which is used to cast element of the remapping list
+* `Description`: Human readable description of the attribute
+* `Remapping list`: Comma separated list of non-compliant attribute that should be remapped to the Standard one
+
+The standard attribute panel pops when you add a new standard attribute or edit an existing one:
+
+{{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Define Standard attribute" responsive="true" style="width:80%;">}}
+
+Any element of the standard attribute can then be filled or updated. **Note**: Any updates or additions to standard attributes are only applied to newly ingested logs.
+
+### Standard Attribute Remapping Behaviour
+
+After being processed in the pipelines, each log goes through the full list of Standard Attributes.
+For each entry of the standard attribute table, if the current log has an attribute matching the remapping list, the following is done:
+
+* The first attribute that matches the provided list is remapped, and the value is overridden by the new one if already existing
+* Datadog enforces the type of the remapped attribute (if this is not possible, the attribute is skipped and the next matching one of the list is used)
+* The original attribute is kept in the log
+
+**Important Note**: By default, the type of an existing standard attribute is unchanged if the remapping list is empty. Add the standard attribute to its own remapping list to enforce its type.
+
+#### Validation
+
+To add or update a standard attribute, follow these rules:
+
+* A standard attribute cannot be added in the remapping list of another standard attribute.
+* A custom attribute can be remapped to only one standard attribute.
+* To respect the JSON structure of the logs, it is not possible to have one standard attribute as the child of another (for example `user` and `user.name` cannot be both standard attributes).
+
+## Default Standard Attribute List
+
+The default standard attribute list is split into 7 functional domains:
 
 * [Network/communications](#network)
 * [HTTP Requests](#http-requests)
@@ -47,9 +88,9 @@ This attribute naming convention has been split into 7 functional domains:
 * [User related attributes](#user-related-attributes)
 * [Syslog and log shippers](#syslog-and-log-shippers)
 
-## Network
+### Network
 
-Related to the data used in network communication. All fields and metrics are prefixed by `network`.
+The following attributes are related to the data used in network communication. All fields and metrics are prefixed by `network`.
 
 | **Fullname**               | **Type** | **Description**                                                                          |
 | :---                       | :---     | :----                                                                                    |
@@ -62,13 +103,13 @@ Related to the data used in network communication. All fields and metrics are pr
 
 Typical integrations relying on these attributes include [Apache][2], [Varnish][3], [AWS ELB][4], [Nginx][5], [HAProxy][6], etc.
 
-## HTTP Requests
+### HTTP Requests
 
-Related to the data commonly used in HTTP requests and accesses. All attributes are prefixed by `http`.
+These attributes are related to the data commonly used in HTTP requests and accesses. All attributes are prefixed by `http`.
 
 Typical integrations relying on these attributes include [Apache][2], Rails, [AWS CloudFront][7], web applications servers, etc.
 
-### Common attributes
+#### Common attributes
 
 
 | **Fullname**       | **Type** | **Description**                                                                                          |
@@ -80,9 +121,9 @@ Typical integrations relying on these attributes include [Apache][2], Rails, [AW
 | `http.request_id`  | `string` | The ID of the HTTP request.                                                                              |
 | `http.useragent`   | `string` | The User-Agent as it is sent (raw format). [See below for more details](#user-agent-attributes). |
 
-### URL details attributes
+#### URL details attributes
 
-Details about the parsed parts of the HTTP URL. Generally generated thanks to the [URL parser][8]. All attributes are prefixed by `http.url_details`.
+These attributes provide details about the parsed parts of the HTTP URL. They are generally generated thanks to the [URL parser][8]. All attributes are prefixed by `http.url_details`.
 
 | **Fullname**                   | **Type** | **Description**                                                                         |
 | :---                           | :---     | :----                                                                                   |
@@ -92,9 +133,9 @@ Details about the parsed parts of the HTTP URL. Generally generated thanks to th
 | `http.url_details.queryString` | `object` | The HTTP query string parts of the URL decomposed as query params key/value attributes. |
 | `http.url_details.scheme`      | `string` | The protocol name of the URL (HTTP or HTTPS)                                            |
 
-### User-Agent attributes
+#### User-Agent attributes
 
-Details about the meanings of user agents attributes. Generally generated thanks to the [User-Agent parser][9]. All attributes are prefixed by `http.useragent_details`.
+These attributes provide details about the meanings of user-agents' attributes. They are generally generated thanks to the [User-Agent parser][9]. All attributes are prefixed by `http.useragent_details`.
 
 | **Fullname**                            | **Type** | **Description**                                |
 | :---                                    | :---     | :----                                          |
@@ -102,9 +143,9 @@ Details about the meanings of user agents attributes. Generally generated thanks
 | `http.useragent_details.browser.family` | `string` | The Browser Family reported by the User-Agent. |
 | `http.useragent_details.device.family`  | `string` | The Device family reported by the User-Agent.  |
 
-## Source code
+### Source code
 
-Related to the data used when a log or an error is generated via a logger in a custom application. All attributes are prefixed either by `logger` or `error`.
+These attributes are related to the data used when a log or an error is generated via a logger in a custom application. All attributes are prefixed either by `logger` or `error`.
  
 | **Fullname**         | **Type** | **Description**                                                  |
 | :---                 | :---     | :----                                                            |
@@ -117,7 +158,7 @@ Related to the data used when a log or an error is generated via a logger in a c
 
 Typical integrations relying on these attributes are: *Java*, *NodeJs*, *.NET*, *Golang*, *Python*, etc.
 
-## Database
+### Database
 
 Database related attributes are prefixed by `db`.
 
@@ -130,9 +171,9 @@ Database related attributes are prefixed by `db`.
 
 Typical integrations relying on these attributes are: [Cassandra][10], [MySQL][11], [RDS][12], [Elasticsearch][13], etc.
 
-## Performance
+### Performance
 
-Performance metrics.
+Performance metrics attributes.
 
 | **Fullname** | **Type** | **Description**                                                                                   |
 | :---         | :---     | :----                                                                                             |
@@ -141,7 +182,7 @@ Performance metrics.
 
 We advise you to rely or at least remap on this attribute as Datadog displays and uses it as a default [Measure][14] for [trace Search][15]. 
 
-## User related attributes
+### User related attributes
 
 All attributes and measures are prefixed by `usr`.
 
@@ -151,9 +192,9 @@ All attributes and measures are prefixed by `usr`.
 | `usr.name`   | `string` | The user friendly name. |
 | `usr.email`  | `string` | The user email.         |
 
-## Syslog and log shippers
+### Syslog and log shippers
 
-Related to the data added by a syslog or a log-shipper agent. All fields and metrics are prefixed by `syslog`.
+These attributes are related to the data added by a syslog or a log-shipper agent. All fields and metrics are prefixed by `syslog`.
 
 | **Fullname**       | **Type** | **Description**                                                               |
 | :---               | :---     | :----                                                                         |

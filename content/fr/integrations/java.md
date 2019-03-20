@@ -44,12 +44,12 @@ L'Agent Datadog appelle un petit plug-in Java, JMXFetch, afin de se connecter à
 
 Les checks JMX sont limités à 350 métriques par instance.
 
-Si vous exécutez JMX au sein de Docker, consultez la [documentation relative à Docker JMX][2].
+Si vous exécutez JMX au sein de Docker, consultez la [documentation relative à Docker JMX][12].
 
 ## Implémentation
 ### Installation
 
-Assurez-vous que vous pouvez ouvrir une [connexion JMX à distance][3].
+Assurez-vous que vous pouvez ouvrir une [connexion JMX à distance][2].
 
 L'Agent Datadog nécessite une connexion à distance pour se connecter à JVM, même s'ils sont tous les deux sur le même host.
 
@@ -57,68 +57,78 @@ L'Agent Datadog nécessite une connexion à distance pour se connecter à JVM, m
 
 1.  Configurez l'Agent afin qu'il se connecte à l'aide de JMX, et modifiez-le selon vos besoins. Voici un exemple de fichier `jmx.d/conf.yaml` :
 
-```yaml
+```
 init_config:
   custom_jar_paths: # facultatif
-    - /chemin/vers/jar/personnalise.jar
+    - <CHEMIN_FICHIER_JAR_PERSONNALISÉ>.jar
   #is_jmx: true
 
 instances:
   - host: localhost
     port: 7199
-    user: nomutilisateur
-    password: motdepasse
+    user: <NOM_UTILISATEUR>
+    password: <MOTDEPASSE>
 
-    jmx_url: "service:jmx:rmi:///jndi/rmi://myhost.host:9999/custompath" # facultatif
+    jmx_url: "service:jmx:rmi:///jndi/rmi://myhost.host:9999/<CHEMIN_PERSONNALISÉ>" # facultatif
 
     name: jmx_instance  # facultatif
-    java_bin_path: /chemin/vers/java
+    java_bin_path: <CHEMIN_JAVA>
     java_options: "-Xmx200m -Xms50m"
-    trust_store_path: /chemin/vers/trustStore.jks
-    trust_store_password: motdepasse
+    trust_store_path: <CHEMIN_STOCKAGE_CONFIANCE>.jks
+    trust_store_password: <MOTDEPASSE>
 
-    process_name_regex: .*nom_processus.*
+    process_name_regex: .*<NOM_PROCESSUS>.*
     tools_jar_path: /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
     refresh_beans: 600 # facultatif (en secondes)
     tags:
       env: stage
-      newTag: test
+      <TAG_KEY>:<TAG_VALUE>
 
     conf:
       - include:
-          domain: mon_domaine
+          domain: <NOM_DOMAINE_1>
           tags:
               simple: $attr0
-              raw_value: ma_valeur_choisie
+              raw_value: <VALEUR_CHOISIE>
               multiple: $attr0-$attr1
           bean:
-            - my_bean
-            - my_second_bean
+            - <NOM_BEAN_1>
+            - <NOM_BEAN_2>
           attribute:
             attribute1:
               metric_type: counter
-              alias: jmx.mon_nom_metrique
+              alias: jmx.<NOM_ATTRIBUT_MÉTRIQUE_1>
             attribute2:
               metric_type: gauge
-              alias: jmx.mondeuxiemeattribut
+              alias: jmx.<NOM_ATTRIBUT_MÉTRIQUE_2>
+
       - include:
-          domain: deuxieme_domaine
+          domain: <NOM_DOMAINE_2>
         exclude:
           bean:
-            - excluded_bean
+            - <NOM_BEAN_EXCLU>
       - include:
-          domain_regex: regex_sur_domaine
+          domain_regex: <REGEX_DOMAINE>
         exclude:
           bean_regex:
-            - regex_on_excluded_bean
+            - <NOM_REGEX_BEAN_EXCLU>
       - include:
           bean_regex: regex_topic=(.*?)
           attribute: 
-            attribute1:
+            atteibute1:
               metric_type: gauge
-              alias: jmx.attribut_avec_tag_regex
+              alias: jmx.<NOM_ATTRIBUT_AVEC_TAG_REGEX>
+
+          ## Les lignes suivantes envoient le jmx.<NOM_ATTRIBUT_AVEC_TAG_REGEX> bean with tags:
+          ## `hostregex:<paramètreBean>`
+          ## `typeregex:<paramètreBean>`
+          ## `contextregex<paramètreBean>`
+          ## `optional:tag`
           tags:
-            - topic: $1 # Tague toutes les métriques sous ce bean avec le topic du bean correspondant
+              TypeRegex: $1
+              HostRegex: $2
+              contextRegex: $3
+              optional: tag
 ```
 
 **Remarque** : pour exécuter plusieurs checks JMX, créez des fichiers de configuration avec le format `jmx_<INDEX>.yaml` (p. ex., `jmx_1.d/conf.yaml`, `jmx_2.d/conf.yaml`, etc.). Chaque fichier doit être stocké dans le répertoire `conf.d`. Définissez l'option `is_jmx` sur `true` dans ces fichiers de configuration.
@@ -168,7 +178,7 @@ Chaque dictionnaire `include` ou `exclude` prend en charge les clés suivantes 
 | `bean_regex`          | Liste des expressions régulières pour les noms de bean complets (p. ex., `java\.lang.*[,:]type=Compilation.*`). Vous pouvez utiliser des groupes d'enregistrement dans votre expression régulière afin de fournir des valeurs de tag. Voir l'exemple de configuration ci-dessus. |
 | `attribute`           | Liste ou dictionnaire de noms d'attributs (voir ci-dessous pour plus de détails).                                                                                                                  |
 
-Les expressions régulières définies dans `domain_regex` et `bean_regex` doivent respecter le [format des expressions régulières de Java][4].
+Les expressions régulières définies dans `domain_regex` et `bean_regex` doivent respecter le [format des expressions régulières de Java][3].
 
 Les filtres `domain_regex` et `bean_regex` ont été ajoutés dans la version 5.5.0.
 
@@ -275,9 +285,9 @@ La liste de filtres est uniquement prise en charge pour les versions > 5.3.0 de
 
 ### Validation
 
-[Lancez la sous-commande « status » de l'Agent][5] et cherchez votre check JMX dans la section JMXFetch.
+[Lancez la sous-commande « status » de l'Agent][7] et cherchez votre check JMX dans la section JMXFetch.
 
-Les checks JMX possèdent également une configuration par défaut qui recueille 11 métriques depuis votre application. Reportez-vous au [Metrics Explorer][6] pour : `jvm.heap_memory`, `jvm.non_heap_memory` ou `jvm.gc.cms.count`.
+Les checks JMX possèdent également une configuration par défaut qui recueille 11 métriques depuis votre application. Reportez-vous au [Metrics Explorer][8] pour : `jvm.heap_memory`, `jvm.non_heap_memory` ou `jvm.gc.cms.count`.
 
 ## Données collectées
 ### Métriques
@@ -286,13 +296,13 @@ Les checks JMX possèdent également une configuration par défaut qui recueille
 
 ## Dépannage
 
-Consultez la liste des [commandes de dépannage JMX][7].
+Consultez la liste des [commandes de dépannage JMX][11].
 
 ### Limite de 350 métriques
 
 En raison de la nature de ces intégrations, il est possible d'envoyer directement à Datadog un nombre très important de métriques. De nombreux clients s'accordent à dire que certaines de ces métriques ne sont pas requises. Ainsi, Datadog a défini une limite de 350 métriques.
 
-Pour consulter les métriques que vous recueillez et respecter la limite, commencez par utiliser les commandes ci-dessus afin d'identifier les métriques disponibles. Nous vous recommandons de créer des filtres pour réduire le nombre de métriques recueillies. Si vous estimez que vous avez besoin de plus de 350 métriques, contactez [l'assistance Datadog][8].
+Pour consulter les métriques que vous recueillez et respecter la limite, commencez par utiliser les commandes ci-dessus afin d'identifier les métriques disponibles. Nous vous recommandons de créer des filtres pour réduire le nombre de métriques recueillies. Si vous estimez que vous avez besoin de plus de 350 métriques, contactez [l'assistance Datadog][5].
 
 ### Chemin Java
 
@@ -335,13 +345,13 @@ Les applications JBoss/WildFly exposent JMX avec un protocole spécifique (JMX �
                                # is used to tag the metrics pulled from that instance
   ```
 
-* [Redémarrez l'Agent][9].
+* [Redémarrez l'Agent][6].
 
 ### Surveillance de Tomcat avec l'option d'écoute de cycle de vie à distance de JMX
 
 Les instructions suivantes fonctionnent sur la version 5.6.0+ de l'Agent.
 
-Si vous utilisez Tomcat avec l'option d'écoute de cycle de vie à distance de JMX activée (consultez la [documentation Tomcat][10] pour en savoir plus), vous devez suivre quelques étapes de configuration supplémentaires pour que JMXFetch se connecte à votre application Tomcat.
+Si vous utilisez Tomcat avec l'option d'écoute de cycle de vie à distance de JMX activée (consultez la [documentation Tomcat](https://tomcat.apache.org/tomcat-7.0-doc/config/listeners.html#JMX_Remote_Lifecycle_Listener_-_org.apache.catalina.mbeans.JmxRemoteLifecycleListener) pour en savoir plus), vous devez suivre quelques étapes de configuration supplémentaires pour que JMXFetch se connecte à votre application Tomcat.
 
 * Naviguez jusqu'au fichier `catalina-jmx-remote.jar` sur votre serveur Tomcat (par défaut, son chemin est `$CATALINA_HOME/lib`).
 * Si JMXFetch s'exécute sur un host autre que l'application Tomcat, copiez `catalina-jmx-remote.jar` à un emplacement du host sur lequel JMXFetch s'exécute.
@@ -367,22 +377,22 @@ instances:
                               # est utilisé pour taguer les métriques récupérées à partir de cette instance
 ```
 
-* [Redémarrez l'Agent][9].
+* [Redémarrez l'Agent][6].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html
+[2]: http://docs.oracle.com/javase/1.5.0/docs/guide/management/agent.html
+[3]: http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
+[4]: https://github.com/DataDog/dd-agent/blob/master/conf.d/jmx.yaml.example
+[5]: https://docs.datadoghq.com/fr/help/
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/fr/graphing/metrics/explorer/
+[11]: https://docs.datadoghq.com/fr/integrations/faq/troubleshooting-jmx-integrations/
+[12]: https://docs.datadoghq.com/fr/agent/faq/docker-jmx/
 
 
 {{< get-dependencies >}}
-[1]: http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html
-[2]: https://docs.datadoghq.com/fr/agent/faq/docker-jmx
-[3]: http://docs.oracle.com/javase/1.5.0/docs/guide/management/agent.html
-[4]: http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/fr/graphing/metrics/explorer
-[7]: https://docs.datadoghq.com/fr/integrations/faq/troubleshooting-jmx-integrations
-[8]: https://docs.datadoghq.com/fr/help
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
-[10]: https://tomcat.apache.org/tomcat-7.0-doc/config/listeners.html#JMX_Remote_Lifecycle_Listener_-_org.apache.catalina.mbeans.JmxRemoteLifecycleListener

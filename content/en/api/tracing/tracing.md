@@ -1,7 +1,7 @@
 ---
 title: Tracing
 type: apicontent
-order: 22
+order: 23
 external_redirect: /api/#tracing
 ---
 

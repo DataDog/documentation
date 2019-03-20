@@ -5,6 +5,9 @@ aliases:
 - /tracing/setup/php
 - /agent/apm/php/
 further_reading:
+- link: "https://www.datadoghq.com/blog/monitor-php-performance/"
+  tag: "Blog"
+  text: "PHP monitoring with Datadog APM and distributed tracing"
 - link: "https://github.com/DataDog/dd-trace-php"
   tag: "GitHub"
   text: "Source code"
@@ -15,10 +18,6 @@ further_reading:
   tag: "Documentation"
   text: "Advanced Usage"
 ---
-
-<div class="alert alert-warning">
-The APM tracer for PHP applications is in Open Public Beta.
-</div>
 
 ## Installation and Getting Started
 
@@ -36,7 +35,7 @@ Make sure the Agent has **[APM enabled][6]**.
 
 ### Install the extension
 
-Install the PHP extension using one of the [precompiled packages for supported distributions][7]. If you can't find your distribution, install the PHP extension [from PECL][8] or [from source][9].
+Install the PHP extension using one of the [precompiled packages for supported distributions][7].
 
 Once downloaded, install the package with one of the commands below.
 
@@ -49,85 +48,21 @@ $ dpkg -i datadog-php-tracer.deb
 
 # using APK package (Alpine)
 $ apk add datadog-php-tracer.apk --allow-untrusted
-
-# using tar.gz archive (Other distributions using libc6)
-$ tar -xf datadog-php-tracer.tar.gz -C /
-  /opt/datadog-php/bin/post-install.sh
 ```
 
-### Install from PECL
+Restart PHP (PHP-FPM or the Apache SAPI) and then visit a tracing-enabled endpoint of your application. View the [APM UI][8] to see the traces.
 
-<div class="alert alert-warning">
-Installing the PHP tracer via PECL is an experimental feature.
-</div>
+**Note**: It might take a few minutes before traces appear in the UI.
 
-Alternatively install the extension from the [PECL package **datadog_trace**][10].
-
-```bash
-$ sudo pecl install datadog_trace-beta
-```
-
-Next, [modify the `php.ini` file][11] to add the extension to the PHP runtime.
-
-### Install from source
-
-[Download the source code `tar.gz` or `.zip` file][7] from the releases page and unzip the file. Then compile and install the extension with the commands below.
-
-```bash
-$ cd /path/to/dd-trace-php
-$ phpize
-$ ./configure --enable-ddtrace
-$ make
-$ sudo make install
-```
-
-#### Modify the INI file
-
-Modify the `php.ini` configuration file to make the **ddtrace** extension available in the PHP runtime. To find out where the INI file is, run the following command:
-
-```bash
-$ php --ini
-
-Configuration File (php.ini) Path: /usr/local/etc/php/7.2
-Loaded Configuration File:         /usr/local/etc/php/7.2/php.ini
-...
-```
-
-Add the following line to the `php.ini` file.
-
-```ini
-extension=ddtrace.so
-```
-
-After restarting the web server/PHP SAPI (e.g., `$ sudo apachectl restart`, `$ sudo service php-fpm restart`, etc.) the extension is enabled. To confirm that the extension is loaded, run:
-
-```bash
-$ php --ri=ddtrace
-
-ddtrace
-
-
-Datadog PHP tracer extension
-...
-```
-
-## Compatibility
-
-PHP APM supports the following PHP versions:
-
-| Version | Support type |
-| :------ | :----------- |
-| 7.2.x   | Beta         |
-| 7.1.x   | Beta         |
-| 7.0.x   | Beta         |
-| 5.6.x   | Beta         |
-| 5.4.x   | Beta         |
+If you can't find your distribution, you can [manually install][9] the PHP extension.
 
 ## Automatic Instrumentation
 
 Tracing is automatically instrumented by default. Once the extension is installed, **ddtrace** traces your application and sends traces to the Agent.
 
-Automatic instrumentation works by modifying PHP's runtime to wrap certain functions and methods in order to trace them. The PHP tracer supports automatic instrumentation for [several libraries][12].
+Even if Datadog does not officially support your web framework, you may not need any manual instrumentation. Datadog records generic web requests and creates generic traces for them. If you use one of the supported frameworks, however, Datadog sets more relevant metadata, which makes it easier to navigate through your services.
+
+Automatic instrumentation works by modifying PHP's runtime to wrap certain functions and methods in order to trace them. The PHP tracer supports automatic instrumentation for [several libraries][10].
 
 Automatic instrumentation captures:
 
@@ -136,84 +71,73 @@ Automatic instrumentation captures:
 * Unhandled exceptions, including stacktraces if available
 * A total count of traces (e.g., web requests) flowing through the system
 
-## Manual instrumentation
+## Compatibility
 
-Although automatic instrumentation works in most cases, there are some special bootstrapping contexts where automatic instrumentation does not work as expected. In these cases, disable automatic instrumentation and manually enable it.
+PHP APM supports the following PHP versions:
 
-First, install the PHP tracer dependency with Composer:
+| Version | Support type    |
+| :------ | :-------------  |
+| 7.2.x   | Fully Supported |
+| 7.1.x   | Fully Supported |
+| 7.0.x   | Fully Supported |
+| 5.6.x   | Fully Supported |
+| 5.4.x   | Fully Supported |
 
-```bash
-$ composer require datadog/dd-trace
-```
+### Integrations
 
-Then, include the PHP tracer boostrap file right after the Composer autoloader and start the first span in the trace.
+#### Web Framework Compatibility
 
-```php
-// The existing Composer autoloader
-require '<APP_ROOT>/vendor/autoload.php';
+If the web framework that you use is not listed below, you can still see traces for your web requests in the UI. However, some metadata and spans that are very specific to that particular web framework may not display.
 
-// Add the PHP tracer bootstrap
-require '<APP_ROOT>/vendor/datadog/dd-trace/bridge/dd_init.php';
+| Module         | Versions      | Support Type    |
+|:---------------|:--------------|:----------------|
+| Laravel        | 4.2, 5.x      | Fully Supported |
+| Symfony        | 3.3, 3.4, 4.x | Fully Supported |
+| Zend Framework | 1.12          | Fully Supported |
+| CakePHP        | 1.3, 2.8, 3.x | _Coming Soon_   |
+| CodeIgniter    | 2, 3          | _Coming Soon_   |
+| Drupal         |               | _Coming Soon_   |
+| Magento        | 2             | _Coming Soon_   |
+| Phalcon        | 1.3, 3.4      | _Coming Soon_   |
+| Slim           | 2, 3          | _Coming Soon_   |
+| Wordpress      |               | _Coming Soon_   |
+| Yii            | 1.1           | _Coming Soon_   |
 
-// Create the first span in the trace
-\DDTrace\GlobalTracer::get()->startRootSpan('web.request');
-```
+Don’t see your desired frameworks? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
 
-### Zend Framework 1 integration
+#### Datastore Compatibility
 
-Zend Framework 1 is automatically instrumented by default, so you are not required to modify your ZF1 project. However, if automatic instrumentation is disabled, enable the tracer manually.
+| Module                           | Versions                   | Support Type    |
+|:---------------------------------|:---------------------------|:----------------|
+| Amazon RDS (using PDO or MySQLi) | *(Any Supported PHP)*      | Fully Supported |
+| Elasticsearch                    | 1.x                        | Fully Supported |
+| Eloquent                         | Laravel supported versions | Fully Supported |
+| Memcached                        | *(Any Supported PHP)*      | Fully Supported |
+| MongoDB                          | 1.4.x                      | Fully Supported |
+| MySQLi                           | *(Any Supported PHP)*      | Fully Supported |
+| PDO (MySQL, PostgreSQL, MariaDB) | *(Any Supported PHP)*      | Fully Supported |
+| Predis                           | 1.1                        | Fully Supported |
+| AWS Couchbase                    | AWS PHP SDK 3              | _Coming Soon_   |
+| AWS DynamoDB                     | AWS PHP SDK 3              | _Coming Soon_   |
+| AWS ElastiCache                  | AWS PHP SDK 3              | _Coming Soon_   |
+| Doctrine ORM                     | 2                          | _Coming Soon_   |
+| ODBC                             | *(Any Supported PHP)*      | _Coming Soon_   |
+| PHPredis                         | 4                          | _Coming Soon_   |
+| Solarium                         | 4.2                        | _Coming Soon_   |
 
-First, [download the latest source code from the releases page][7]. Extract the zip file and copy the `src/DDTrace` folder to your application's `/library` folder. Then add the following to your `application/configs/application.ini` file:
+Don’t see your desired datastores? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
 
-```ini
-autoloaderNamespaces[] = "DDTrace_"
-pluginPaths.DDTrace = APPLICATION_PATH "/../library/DDTrace/Integrations/ZendFramework/V1"
-resources.ddtrace = true
-```
+#### Library Compatibility
 
-## View the trace
+| Module     | Versions              | Support Type    |
+|:-----------|:----------------------|:----------------|
+| Curl       | *(Any Supported PHP)* | Fully Supported |
+| Guzzle     | 5.x                   | Fully Supported |
+| Guzzle     | 6.x                   | Fully Supported |
+| Beanstalkd |                       | _Coming Soon_   |
+| ReactPHP   |                       | _Coming Soon_   |
 
-Assuming the Agent is running with APM enabled and it is configured with your API key, and assuming the **ddtrace** extension is installed and instrumented properly into your application, visit a tracing-enabled endpoint of your application and view the [APM UI][13] to see the traces.
-
-**Note**: It might take a few minutes before traces appear in the UI.
-
-## Trace a custom function or method
-
-The `dd_trace()` function hooks into existing functions and methods to:
-
-* Open a span before the code executes
-* Set additional tags or errors on the span
-* Close the span when it is done
-* Modify the arguments or the return value
-
-For example, the following snippet traces the `CustomDriver::doWork()` method, adds custom tags, reports any exceptions as errors on the span, and then re-throws the exceptions.
-
-```php
-dd_trace("CustomDriver", "doWork", function (...$args) {
-    // Start a new span
-    $scope = GlobalTracer::get()->startActiveSpan('CustomDriver.doWork');
-    $span = $scope->getSpan();
-
-    // Access object members via $this
-    $span->setTag(Tags\RESOURCE_NAME, $this->workToDo);
-    
-    try {
-        // Execute the original method
-        $result = $this->doWork(...$args);
-        // Set a tag based on the return value
-        $span->setTag('doWork.size', count($result));
-        return $result;
-    } catch (Exception $e) {
-        // Inform the tracer that there was an exception thrown
-        $span->setError($e);
-        // Bubble up the exception
-        throw $e
-    } finally {
-        // Close the span
-        $span->finish();
-    }
-});
-```
+Don’t see your desired libraries? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
 
 ## Configuration
 
@@ -223,17 +147,15 @@ The PHP tracer can be configured using environment variables.
 
 ### Apache
 
-Set using [`SetEnv`](https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv) from the server config, virtual host,
-directory, or **.htaccess** file.
+Set using [`SetEnv`][12] from the server config, virtual host, directory, or **.htaccess** file.
 
 ```
 SetEnv DD_TRACE_DEBUG true
 ```
 
-### nginx
+### NGINX
 
-Set using [`fastcgi_param`](http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param) from the `http`,
-`server`, or `location` contexts.
+Set using [`fastcgi_param`][13] from the `http`, `server`, or `location` contexts.
 
 ```
 fastcgi_param DD_TRACE_DEBUG true;
@@ -257,40 +179,9 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_SAMPLING_RATE`         | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default) |
 | `DD_TRACE_AGENT_PORT`      | `8126`      | The Agent port number                                               |
 | `DD_TRACE_APP_NAME`        | ``          | The default app name                                                |
-| `DD_TRACE_DEBUG`           | `false`     | Enable [debug mode][17] for the tracer                              |
+| `DD_TRACE_DEBUG`           | `false`     | Enable [debug mode][16] for the tracer                              |
 | `DD_TRACE_ENABLED`         | `true`      | Enable the tracer globally                                          |
 | `DD_TRACE_GLOBAL_TAGS`     | ``          | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`        |
-
-### Integrations
-
-#### Framework Compatibility
-
-| Module         | Versions | Support Type |
-| :------------- | :------- | :----------- |
-| Laravel        | 5.x      | Beta         |
-| Laravel        | 4.2      | Beta         |
-| Symfony        | 4.x      | Beta         |
-| Symfony        | >= 3.4   | Beta         |
-| Zend Framework | 1.12     | Beta         |
-
-Don't see your desired web frameworks? Let Datadog know more about your needs through [this survey][16].
-
-#### Library Compatibility
-
-| Module        | Versions                   | Support Type |
-| :------------ | :------------------------- | :----------- |
-| Curl          | *(Any Supported PHP)*      | Beta         |
-| Elasticsearch | 1.x                        | Beta         |
-| Eloquent      | Laravel supported versions | Beta         |
-| Guzzle        | 6.x                        | Beta         |
-| Guzzle        | 5.x                        | Beta         |
-| Memcached     | *(Any Supported PHP)*      | Beta         |
-| MongoDB       | 1.4.x                      | Beta         |
-| Mysqli        | *(Any Supported PHP)*      | Beta         |
-| PDO           | *(Any Supported PHP)*      | Beta         |
-| Predis        | 1.1                        | Beta         |
-
-Don't see your desired libraries? Let Datadog know more about your needs through [this survey][16].
 
 ## Further Reading
 
@@ -303,13 +194,12 @@ Don't see your desired libraries? Let Datadog know more about your needs through
 [5]: /agent/kubernetes/daemonset_setup/#trace-collection
 [6]: /agent/apm/?tab=agent630#agent-configuration
 [7]: https://github.com/DataDog/dd-trace-php/releases/latest
-[8]: #install-from-pecl
-[9]: #install-from-source
-[10]: https://pecl.php.net/package/datadog_trace
-[11]: #modify-the-ini-file
-[12]: #library-compatibility
-[13]: https://app.datadoghq.com/apm/services
+[8]: https://app.datadoghq.com/apm/services
+[9]: /tracing/languages/php/manual-installation
+[10]: #library-compatibility
+[11]: https://docs.datadoghq.com/help
+[12]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
+[13]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
 [14]: /tracing/advanced_usage/?tab=php#distributed-tracing
 [15]: /tracing/advanced_usage/?tab=php#priority-sampling
-[16]: https://docs.google.com/forms/d/e/1FAIpQLSemTVTCdqzXkfzemJSr8wuEllxfqbGVj00flmRvKA17f0lyFg/viewform
-[17]: /tracing/advanced_usage/?tab=php#debugging
+[16]: /tracing/advanced_usage/?tab=php#debugging

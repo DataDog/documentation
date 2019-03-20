@@ -13,11 +13,11 @@ external_redirect: /api/#create-a-dashboard
 * **`widgets`** [*required*]:  
     List of widgets to display on the dashboard. Widget definitions follow this form:
     * **`definition`** [*required*]:  
-        Definition of the widget.
+        [Definition of the widget.][1]
     * **`id`** [*optional*, *default*=**auto-generated integer**]:  
         ID of the widget.
 * **`layout_type`** [*required*]:  
-  Layout type of the dashboard (for now, only `ordered` layout - previous timeboard layout - is supported).
+  Layout type of the dashboard. Available values are: `ordered` (previous timeboard) or `free` (previous screenboard layout)
 * **`description`** [*optional*, *default*=**None**]:  
   Description of the dashboard.
 * **`is_read_only`** [*optional*, *default*=**False**]:  
@@ -32,3 +32,5 @@ external_redirect: /api/#create-a-dashboard
         The default value for the template variable on dashboard load.
     * **`prefix`** [*optional*, *default*=**None**]:  
         The tag prefix associated with the variable. Only tags with this prefix appear in the variable dropdown.
+
+[1]: /graphing/widgets

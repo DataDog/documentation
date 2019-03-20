@@ -17,7 +17,7 @@ For added convenience, one of our engineers has made available a python script t
 
 [1]: /integrations/amazon_web_services
 [2]: /agent
-[3]: /agent/#why-should-i-install-the-agent-on-my-aws-instances
+[3]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
 [4]: /integrations/faq/i-just-set-up-my-aws-integration-why-am-i-seeing-duplicate-hosts
 [5]: /integrations/faq/how-do-i-pull-my-ec2-tags-without-using-the-aws-integration
 [6]: /api/#tags-remove

@@ -66,40 +66,55 @@ Switch between the Logstream and the Log Analytics modes by clicking on the *Log
 
 The Logstream is the list of logs that match the selected context. A context is defined by a [search bar][1] filter and a [time range](#time-range).
 
-{{< img src="logs/explorer/logstream.png" alt="Logstream" responsive="true" style="width:80%;">}}
 
-If you enter a valid query into the [search bar](#search-bar), words that match your query are highlighted, and the logs displayed match your facet criteria.
+### Logs Table
 
-Sort the list by clicking the **date** column header.
+The logstream is displayed in the logs table. 
 
-Click on any log line to see more details about it:
+Configure the logs table content according to your needs and preferences with the "Options" button. Among your custom attributes, only faceted or measures attributes are available for columns.
 
-{{< img src="logs/explorer/log_in_log_list.png" alt="Log in Logstream" responsive="true" style="width:80%;">}}
+Log results are sorted by date—the most recent on top by default. You can also inverse-sort by date, with the least recent (within the limits of the time range) on top.
 
-Click on `View in context` to see log lines dated just before and after a selected log—even if they don't match your filter.
+{{< img src="logs/explorer/logtable_config.png" alt="configure display table" responsive="true" style="width:50%;">}}
 
-{{< img src="logs/explorer/view-in-context.gif" alt="View in context" responsive="true" >}}
 
-The context is different according to the situation as we use the `Hostname`, `Service`, `filename`, or `container_id` attributes, along with tags, to make sure we find the perfect context for your logs.
 
-Click the **Columns** button and select any facets you want to see to add more log details to your Logstream:
+### Log Panel
 
-{{< img src="logs/explorer/log_list_with_columns.png" alt="Logstream with columns" responsive="true" style="width:80%;">}}
+Click on any log line to open the log panel and see more details about it: raw message, extracted attributes, and tags (with host, service, and source tags on top).
 
-Choose to display one, three, or ten lines from your logs `message` attributes in your Logstream:
+Some standard attributes—for instance, `error.stack`, `http.method`, or `duration`—have specific highlighted displays in the Log Panel for better readability. Make sure you extract corresponding information from your logs and remap your attributes with [standard attribute remappers][2].
 
-{{< img src="logs/explorer/multi_line_display.png" alt="Multi-line display" responsive="true" style="width:30%;">}}
 
-**Note**:  If present, the `error.stack` attribute is displayed in priority as it should be used for stack traces.
-Remap any stack trace attribute to this specific attribute with [the attribute remapper Processor][2].
+Interact with the attributes names and values in the lower JSON section to:
+
+* Build or edit a facet or measure from an attribute. This action does not apply to anterior logs.
+* Add or remove a column from the logs table.
+* Append the search request with specific values (include or exclude)
+
+{{< img src="logs/explorer/attribute_actions.png" alt="configure display table" responsive="true" style="width:20%;">}}
+
+
+Interact with the upper reserved attributes section:
+
+* with **Host**, to access the host dashboard or append the search request with the `host` of the log. 
+* with **Service**, to see the trace in APM, append the search request with the trace ID (both require a `trace_id` attribute in the log: refer to [trace injection in logs][3]) or append search request with the `service` of the log.
+* with **Source**, to append the search request with the `source` of the log.
+
+
+The **View in context** button updates the search request in order to show you the log lines dated just before and after a selected log—even if they don't match your filter. This context is different according to the situation, as Datadog uses the `Hostname`, `Service`, `filename`, and `container_id` attributes, along with tags, in order find the appropriate context for your logs.
+
+{{< img src="logs/explorer/upper_log_panel.png" alt="configure display table" responsive="true" style="width:50%;">}}
 
 
 [1]: /logs/explorer/search
-[2]: /logs/processing/processors/#remapper
+[2]: /logs/processing/attributes_naming_convention/
+[3]: /tracing/advanced_usage/?tab=java#correlate-traces-and-logs
+
 {{% /tab %}}
 {{% tab "Log Analytics" %}}
 
-After having gone through [Datadog processing][1], log parsing, having [facets](#facets) and [measures](#measures) over the important attributes, you can graph log queries and see maximums, averages, percentiles, unique counts, and more.
+After having gone through [Datadog processing][1], log parsing, and having [facets](#facets) and [measures](#measures) over the important attributes, you can graph log queries and see maximums, averages, percentiles, unique counts, and more.
 
 Follow the [log graphing guide][2] to learn more about all the graphing options.
 

@@ -36,15 +36,15 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -e DD_APM_ENABLED=true \
               datadog/agent:latest
 ```
-## Docker APM Environment Variables
+## Docker APM Agent Environment Variables
 
-List of all environment variables available for tracing with the Docker Agent:
+List of all environment variables available for tracing within the Docker Agent:
 
 | Environment variable       | Description                                                                                                               |
 | ------                     | ------                                                                                                                    |
 | `DD_API_KEY`               | [Datadog API Key][1]                                                                                                      |
 | `DD_PROXY_HTTPS`           | Set up the URL for the proxy to use.                                                                                      |
-| `DD_HOSTNAME`              | Set the Agent hostname manually.                                                                                          |
+| `DD_HOSTNAME`              | Manually set the hostname to use for metrics if autodection fails, or when running the Datadog Cluster Agent.                                    |
 | `DD_DOGSTATSD_PORT`        | Set the DogStatsD port.                                                                                                   |
 | `DD_BIND_HOST`             | Set the StatsD & receiver hostname.                                                                                       |
 | `DD_LOG_LEVEL`             | Set the logging level. (`trace`/`debug`/`info`/`warn`/`error`/`critical`/`off`)                                           |
@@ -53,8 +53,8 @@ List of all environment variables available for tracing with the Docker Agent:
 | `DD_APM_DD_URL`            | Datadog API endpoint where traces are sent. For Datadog EU site set `DD_APM_DD_URL` to `https://trace.agent.datadoghq.eu` |
 | `DD_APM_RECEIVER_PORT`     | Port that the Datadog Agent's trace receiver listens on. Default value is `8126`.                                          |
 | `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers](#tracing-from-other-containers).                             |
-| `DD_APM_IGNORE_RESOURCES`   | A comma-separated list of endpoints and resources that the Agent should ignore (i.e. health checks endpoints).            |
-| `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions.                                                                          |
+| `DD_APM_IGNORE_RESOURCES`  | Configure resources for the agent to ignore. Format should be comma seperated, regular expressions. i.e. <code>"GET /ignore-me,(GET&#124;POST) /and-also-me"</code>. |
+| `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions. Format should be comma seperated instances of <code>\<SERVICE_NAME>&#124;\<OPERATION_NAME>=1</code>. i.e. <code>my-express-app&#124;express.request=1,my-dotnet-app&#124;aspnet_core_mvc.request=1</code>. |
 | `DD_APM_ENV`               | Sets the default [environment][2] for your traces.                                                                        |
 | `DD_APM_MAX_EPS`           | Sets the maximum APM events per second.                                                                                   |
 | `DD_APM_MAX_TPS`           | Sets the maximum traces per second.                                                                                       |
@@ -94,7 +94,9 @@ docker run -d --name app \
 This exposes the hostname `datadog-agent` in your `app` container.
 If you're using `docker-compose`, `<NETWORK_NAME>` parameters are the ones defined under the `networks` section of your `docker-compose.yml`.
 
-Your application tracers must be configured to submit traces to this address. See the examples below for each supported language:
+Your application tracers must be configured to submit traces to this address. Set environment variables with the `DD_AGENT_HOST` as the Agent container name, and `DD_TRACE_AGENT_PORT` as the Agent Trace port in your application containers. (In this example case, `datadog-agent` and `8126`, respectively.)
+
+Alternately, see the examples below to set the Agent host manually in each supported language:
 
 {{< tabs >}}
 {{% tab "Java" %}}
