@@ -65,7 +65,7 @@ Datadog automatically sets the **Advanced** options for you by analyzing your me
 * Datadog recommends using larger intervals between points to avoid having noise influence the forecast too much.
 * The number of deviations controls the width of the range of forecasted values. A value of 1 or 2 should be large enough to forecast most "normal" points accurately.
 
-Then, you can choose if the monitor requires a full window of data for evaluation. Setting it to "Requires" will force the monitor to ignore (i.e., show "No Data" as the monitor state) any series that doesn't have data going back to the start of the time range shown in the Evaluation Window graph.
+Then, you can choose if the monitor requires a full window of data for evaluation. Setting it to "Requires" forces the monitor to ignore (show "No Data" as the monitor state) any series that doesn't have data going back to the start of the time range shown in the Evaluation Window graph.
 
 Complete all steps in the New Monitor form (**Say what's happening**, etc.) and click **Save** to create the Forecast monitor.
 
