@@ -75,7 +75,7 @@ Both the Monitor Edit page and the Monitor Status pages provide "Historical Cont
 
 There are two different forecast algorithms:
 
-**Linear**: Use this algorithm for metrics that have no repeating seasonal pattern, and tend to have steady trends. On dashboards, linear uses the data within view to create a forecast of the same length. E.g., if you set the time selector to "The Past Week", the forecast uses the past week of data to forecast the next week. For monitors, you can explicitly set the amount of history to use, and it is set to one week by default.
+**Linear**: Use this algorithm for metrics that have no repeating seasonal pattern, and tend to have steady trends. On dashboards, linear uses the data within view to create a forecast of the same length. For example, if you set the time selector to "The Past Week", the forecast uses the past week of data to forecast the next week. For monitors, you can explicitly set the amount of history to use, and it is set to one week by default.
 
 {{< img src="monitors/monitor_types/forecasts/linear.png" alt="linear" responsive="true" style="width:80%;" >}}
 
