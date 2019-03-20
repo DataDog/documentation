@@ -408,6 +408,14 @@ $(document).ready(function () {
         });
     });
 
+    $("a[href^='#']").click(function(e) {
+        if(!e.target.parentElement.id) {
+            e.preventDefault();
+            var id = e.target.hash.split('#').join('');
+            moveToAnchor(id);
+        }
+    });
+
     $('.api-content h2[id]').each(function() {
         var id = $(this).attr('id');
         $(this).wrapInner('<a href="#'+id+'"></a>').on('click', function(e) {
