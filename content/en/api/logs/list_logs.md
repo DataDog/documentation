@@ -34,6 +34,8 @@ List endpoint returns logs that match a log search query. Results are paginated.
     Time-ascending `asc` or time-descending `desc`results.
 * **`limit`** [*optional*, *default*=**10**]:  
     Number of logs return in the response (maximum is 1000)
+* **`index`** [*optional*, *default*=**main**]:  
+    For multi-index organisations, the log index in which the request is performed.
 
 ##### PAGINATION
 
