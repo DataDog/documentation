@@ -23,7 +23,7 @@ This page outlines the basic features of the Datadog Agent for macOS. If you hav
 
 Unlike other Agents, the macOS Datadog Agent does not include Agent tracing functionality out of the box. This functionality can be installed separately by downloading the Darwin Trace Agent from the [Github trace agent repository][4].
 
-By default, the Agent is installed in a sandbox located at `/opt/datadog-agent`. You're free to move this folder wherever you like; however, this documentation assumes a default installation location.
+By default, the Agent is installed in a sandbox located at `/opt/datadog-agent`. You can move this folder wherever you like; however, this documentation assumes a default installation location.
 
 **Note**: macOS 10.12 and above are supported by the Agent v6, macOS 10.10 and above by the Agent v5.
 
