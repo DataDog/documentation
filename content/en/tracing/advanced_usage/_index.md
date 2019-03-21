@@ -147,10 +147,55 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+### Automatic Configuration
+
+Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the Tracing Client:
+
+* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
+
+After enabling, the Trace Search & Analytics UI will now populate, you can get started [here][1].
+
+### Configure Additional Services (optional)
+
+**Configure By Integration**
+
+In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
+
+* Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
+
+At the same time, we can also configure Trace Search & Analytics for any Datastore or Library Integration. For example, for `curl` spans you can set the following to enable http calls in Trace Search & Analytics:
+
+* Environment Variable: `DD_CURL_ANALYTICS_ENABLED=true`
+
+Integration names can be found on the [integrations table][2].
+
+**Custom Instrumentation**
+
+Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS_KEY` tag on the service root span:
+
+```php
+
+// ... your existing span that want to enable for Trace Search & Analytics
+
+// Enable on 100% of spans of that type
+$span->setTag(Tag::ANALYTICS_KEY, true);
+
+// Enable on 30% of spans of that type
+$span->setTag(Tag::ANALYTICS_KEY, 0.3);
+
+```
+
+**Configure Sample Rate of APM Events**
+
+When enabling Trace Search & Analytics, the default sample rate is to collect 100% of APM Events. For any services that have been enabled for Trace Search & Analytics in the Tracing Client, you can adjusted the sampling rate for APM Events in your [APM settings][3].
+
+{{< img src="tracing/trace_sampling_ui.png" alt="Trace Sampling UI" responsive="true" style="width:100%;">}}
 
 
-[1]: /help
+
+[1]: https://app.datadoghq.com/apm/search
+[2]: /tracing/languages/java/#integrations
+[3]: https://app.datadoghq.com/apm/settings
 {{% /tab %}}
 {{% tab "C++" %}}
 

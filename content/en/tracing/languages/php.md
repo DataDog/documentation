@@ -183,8 +183,8 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_ENABLED`                            | `true`      | Enable the tracer globally                                                                                 |
 | `DD_TRACE_GLOBAL_TAGS`                        | ``          | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`                                               |
 | `DD_TRACE_ANALYTICS_ENABLED`                  | `false`     | Flag to enable trace analytics for relevant spans in web integrations                                      |
-| `DD_<INTEGRATION_NAME>_ANALYTICS_ENABLED`     | `false`     | Flag to enable trace analytics for relevant spans in a specific integration                                |
-| `DD_<INTEGRATION_NAME>_ANALYTICS_SAMPLE_RATE` | `1.0`       | Sample rate for trace analytics of a specific integration. Accepted values between 0.0 (0%) and 1.0 (100%) |
+| `DD_<INTEGRATION>_ANALYTICS_ENABLED`          | `false`     | Flag to enable trace analytics for relevant spans in a specific integration                                |
+| `DD_<INTEGRATION>_ANALYTICS_SAMPLE_RATE`      | `1.0`       | Sample rate for trace analytics of a specific integration. Accepted values between 0.0 (0%) and 1.0 (100%) |
 
 ## Further Reading
 
