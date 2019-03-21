@@ -105,6 +105,20 @@ Integration names can be found on the [integrations table][2].
 
 Note several integrations require non-standard configuration due to the integration-specific implementation of the tracer. Consult the library documentation on [Trace Search & Analytics][3] for details.
 
+### Custom Instrumentation
+
+Applications with custom instrumentation can enable trace analytics by setting the `ddtrace.constants.ANALYTICS_SAMPLE_RATE_KEY` tag on the service root span:
+
+```python
+from ddtrace import tracer
+from ddtrace.constants import ANALYTICS_SAMPLE_RATE_KEY
+
+@tracer.wrap()
+def my_method():
+    current_span = tracer.current_span()
+    span.set_tag(ANALYTICS_SAMPLE_RATE_KEY, True)
+```
+
 ### Configure Sample Rate of APM Events
 
 When enabling Trace Search & Analytics, the default sample rate is to collect 100% of APM Events. For any services that have been enabled for Trace Search & Analytics in the Tracing Client, you can adjusted the sampling rate for APM Events in your [APM settings][4].
