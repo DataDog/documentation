@@ -307,7 +307,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/nginx.logs: '[{"source": "postgresql", "service": "database", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
+        ad.datadoghq.com/postgres.logs: '[{"source": "postgresql", "service": "database", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
       labels:
         app: database
       name: postgres
