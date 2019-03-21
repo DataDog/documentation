@@ -133,10 +133,40 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+### Automatic Configuration
 
+Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the tracing client:
 
-[1]: /help
+```javascript
+tracer.init({
+  analytics: true
+})
+```
+
+After enabling, the Trace Search & Analytics UI will now populate, you can get started [here][1].
+
+### Configure Additional Services (optional)
+
+**Configure By Integration**
+
+In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations.
+
+For example, to enable Trace Search & Analytics for Express:
+
+```javascript
+tracer.use('express', {
+  analytics: true
+})
+```
+
+**Configure Sample Rate of APM Events**
+
+When enabling Trace Search & Analytics, the default sample rate is to collect analytics for 100% of APM events. For any services that have been enabled for Trace Search & Analytics in the Tracing Client, you can adjusted the sampling rate for APM Events in your [APM settings][2].
+
+{{< img src="tracing/trace_sampling_ui.png" alt="Trace Sampling UI" responsive="true" style="width:100%;">}}
+
+[1]: https://app.datadoghq.com/apm/search
+[2]: https://app.datadoghq.com/apm/settings
 {{% /tab %}}
 {{% tab ".NET" %}}
 
