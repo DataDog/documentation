@@ -29,7 +29,7 @@ The Log Management solution is an all-in-one comprehensive solution that compris
 
 Use the [Datadog Agent][8] to collect logs directly from your hosts or your containerized environments. You can collect AWS service logs with Datadog's [AWS Lambda function](#from-aws-services).If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][9], [Syslog-ng][10], [NXlog][11], [FluentD][12], and [Logstash][13].
 
-Integrations and Log Collection are tied together. Use default integration configuration file to enable dedicated[processing][2], [parsing][14], and [facets][15] in Datadog. You can also define custom log sources if there isn't an integration for your source yet.
+Integrations and Log Collection are tied together. Use an integration default configuration file to enable its dedicated [processing][2], [parsing][14], and [facets][15] in Datadog.
 
 <div class="alert alert-warning">
 <a href="/integrations/#cat-log-collection">Consult the current list of available supported integrations</a>.
