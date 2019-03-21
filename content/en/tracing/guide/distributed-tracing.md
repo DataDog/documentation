@@ -1,6 +1,5 @@
 ---
 title: Distributed Tracing
-kind: faq
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
@@ -17,6 +16,9 @@ further_reading:
 - link: "tracing/visualization/trace"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
+kind: guide
+aliases:
+  - /tracing/faq/distributed-tracing
 ---
 
 If you have read the [first example of tracing][1] and want understand how tracing works further, let's take the following example which represents a simple API **thinker-api** and a micro-service behind it **thinker-microservice**. When the API receives a request with the correct *subject* parameter, it responds with a *thought*, otherwise, it responds with an error:

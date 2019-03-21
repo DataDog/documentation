@@ -1,6 +1,8 @@
 ---
 title: Terminology
-kind: faq
+kind: guide
+aliases:
+  - /tracing/faq/terminology
 ---
 
 | Term          | Definition                                                          | Note                                                                                                                                             |
