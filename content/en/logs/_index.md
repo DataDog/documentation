@@ -35,7 +35,7 @@ Integrations and Log Collection are tied together. Use an integration default co
 <a href="/integrations/#cat-log-collection">Consult the current list of available supported integrations</a>.
 </div>
 
-The different ways and places from which to collect logs:
+Collect logs from these places:
 
 ### From your hosts
 
