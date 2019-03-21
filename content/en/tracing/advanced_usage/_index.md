@@ -115,7 +115,7 @@ from ddtrace.constants import ANALYTICS_SAMPLE_RATE_KEY
 
 @tracer.wrap()
 def my_method():
-    current_span = tracer.current_span()
+    span = tracer.current_span()
     span.set_tag(ANALYTICS_SAMPLE_RATE_KEY, True)
 ```
 
