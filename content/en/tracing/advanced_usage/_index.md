@@ -167,35 +167,27 @@ At the same time, we can also configure Trace Search & Analytics for any Datasto
 
 * Environment Variable: `DD_CURL_ANALYTICS_ENABLED=true`
 
-Integration names can be found on the [integrations table][2].
-
 **Custom Instrumentation**
 
 Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS_KEY` tag on the service root span:
 
 ```php
 
-// ... your existing span that want to enable for Trace Search & Analytics
-
-// Enable on 100% of spans of that type
+// ... your existing span that you want to enable for Trace Search & Analytics
 $span->setTag(Tag::ANALYTICS_KEY, true);
-
-// Enable on 30% of spans of that type
-$span->setTag(Tag::ANALYTICS_KEY, 0.3);
 
 ```
 
 **Configure Sample Rate of APM Events**
 
-When enabling Trace Search & Analytics, the default sample rate is to collect 100% of APM Events. For any services that have been enabled for Trace Search & Analytics in the Tracing Client, you can adjusted the sampling rate for APM Events in your [APM settings][3].
+When enabling Trace Search & Analytics, the default sample rate is to collect 100% of APM Events. For any services that have been enabled for Trace Search & Analytics in the Tracing Client, you can adjusted the sampling rate for APM Events in your [APM settings][2].
 
 {{< img src="tracing/trace_sampling_ui.png" alt="Trace Sampling UI" responsive="true" style="width:100%;">}}
 
 
 
 [1]: https://app.datadoghq.com/apm/search
-[2]: /tracing/languages/java/#integrations
-[3]: https://app.datadoghq.com/apm/settings
+[2]: https://app.datadoghq.com/apm/settings
 {{% /tab %}}
 {{% tab "C++" %}}
 
