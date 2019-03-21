@@ -46,7 +46,7 @@ Retrieve a log list longer than the 1000 logs limit with the Log List API Pagina
 
 For better control over pagination results, you should use an absolute `time` parameter - don't use the`now` keyword.
 
-**If you are thinking about archiving logs for your organisation, consider using Datadog archive capabilities instead of the log list API. See [Datadog Logs Archive documentation][2].**
+**If you are thinking about archiving logs for your organization, consider using Datadog archive capabilities instead of the log list API. See [Datadog Logs Archive documentation][2].**
 
 [1]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
 [2]: https://docs.datadoghq.com/logs/archives/
