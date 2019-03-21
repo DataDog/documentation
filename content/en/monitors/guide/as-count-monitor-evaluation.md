@@ -1,6 +1,8 @@
 ---
 title: as_count() monitor evaluation with division
-kind: faq
+kind: guide
+aliases:
+    - /monitor/faq/as-count-monitor-evaluation
 ---
 
 ## Overview
