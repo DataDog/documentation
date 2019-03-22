@@ -29,7 +29,7 @@ La collecte de logs nécessite la version >= 6.0. Les anciennes versions de l'Ag
 
 Si vous n'utilisez pas encore l'Agent, suivez les [instructions d'installation de l'Agent][1].
 
-La collecte des logs est **désactivée** par défaut dans l'agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+La collecte des logs est **désactivée** par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
 ```
 logs_enabled: true

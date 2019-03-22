@@ -18,8 +18,6 @@ private: true
     {{< nextlink href="monitors/faq/sending-datadog-events-to-your-moogsoft-aiops-instance" >}}Sending Datadog Events to your Moogsoft AIOps instance.{{< /nextlink >}}
     {{< nextlink href="monitors/faq/how-can-i-setup-an-alert-for-when-a-specific-tag-stops-reporting" >}}How can I setup an alert for when a specific tag stops reporting?{{< /nextlink >}}
     {{< nextlink href="monitors/faq/can-i-create-monitor-dependencies" >}}Can I create monitor dependencies?{{< /nextlink >}}
-    {{< nextlink href="monitors/faq/as-count-monitor-evaluation" >}}as_count() monitor evaluation{{< /nextlink >}}
-    {{< nextlink href="monitors/faq/visualize-your-service-check-in-the-datadog-ui" >}}Visualize your service check in the Datadog UI.{{< /nextlink >}}
     {{< nextlink href="monitors/faq/how-to-update-anomaly-monitor-timezone" >}}How to update an anomaly detection monitor to account for local timezone?{{< /nextlink >}}
     {{< nextlink href="monitors/faq/what-are-recovery-thresholds" >}}What are recovery thresholds?{{< /nextlink >}}
 {{< /whatsnext >}}

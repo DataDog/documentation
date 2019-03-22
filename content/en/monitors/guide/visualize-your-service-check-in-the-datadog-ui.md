@@ -1,6 +1,8 @@
 ---
 title: Visualize your service check in the Datadog UI.
-kind: faq
+kind: guide
+aliases:
+    - /monitor/faq/visualize-your-service-check-in-the-datadog-ui
 ---
 
 Service checks can be visualized and used in 3 Datadog sections:

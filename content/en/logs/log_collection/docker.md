@@ -229,18 +229,6 @@ Refer to the [Autodiscovery guide][1] for setup, examples, and more information 
 * Use the environment variable to collect logs from all containers and then override the default `source` and `service` values.
 * Add processing rules for the wanted subset of containers.
 
-#### Short lived containers
-
-To ensure their logs are properly collected, Autodiscovery detects short lived containers as soon as they are started. If you are using the host installation of the Agent, add this in your `datadog.yaml` file (it is automatically added for the containerized version):
-
-```
-listeners:
-  - name: docker
-config_providers:
-  - name: docker
-    polling: true
-```
-
 ### Filter containers
 
 It is possible to filter logs, metrics, and Autodiscovery using the following methods. This can be useful to prevent the collection of the Datadog Agent logs.
