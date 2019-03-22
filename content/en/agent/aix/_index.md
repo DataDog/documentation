@@ -23,9 +23,9 @@ The installer may be executed as follows (as root):
 installp -aXYgd ./datadog-unix-agent-<version>.powerpc.bff -e dd-aix-install.log datadog-unix-agent
 ```
 
-This will install the agent in `/opt/datadog-agent`.
+This installs the agent in `/opt/datadog-agent`.
 
-Note how we're logging to dd-aix-install.log, you may skip that by removing the `-e` switch.
+Note: Agent installation logs can be found in the `dd-aix-install.log` file. To disable this logging, remove the `-e` parameter in the installation command.
 
 
 ## Commands
@@ -50,7 +50,7 @@ That said, config file will be searched in this order (with the first match bein
 
 A sample configuration file may be found in `/opt/datadog-agent/etc/datadog-agent`.
 
-A basic configuration will typically require a destination `dd_url` and your datadog API key. Occasionally, a proxy configuration must be specified depending on your network setup.
+A basic configuration typically requires a destination `dd_url` and your Datadog API key. Occasionally, a proxy configuration must be specified depending on your network setup.
 
 
 **Configuration files for Integrations:**
@@ -63,29 +63,29 @@ Additional integrations currently available or in development:
 * lparstats
 * hmc
 
-For non-core integrations, a configuration file should be put in place to enable the integration. These are expected to be found in `./etc/datadog-agent/conf.d`. The name of the YAML configuration file should match that of the integration: `./etc/datadog-agent/conf.d/foo.yaml` will enable integration `foo`, and set its configuration.
+For non-core integrations, a configuration file should be put in place to enable the integration. These are expected to be found in `./etc/datadog-agent/conf.d`. The name of the YAML configuration file should match that of the integration: `./etc/datadog-agent/conf.d/<INTEGRATION_NAME>.yaml` enables the integration `<INTEGRATION_NAME>`, and set its configuration.
 
-## Running dogstatsd
-Dogstatsd allows collecting and submitting custom metrics to datadog. It listens on a UDP port and statsd metrics may be submitted to it. These will then be relayed to Datadog.
+## Running DogStatsD
+DogStatsD allows collecting and submitting custom metrics to Datadog. It listens on a UDP port and StatsD metrics may be submitted to it. These are then relayed to Datadog.
 
-Dogstatsd relies on the same configuration file defined for the agent and runs in a separate process. To run dogstatsd you may do the following:
+DogStatsD relies on the same configuration file defined for the agent and runs in a separate process. To enable DogStatsD do:
 
 ```
 cd /opt/datadog-agent/agent
 ./dogstatsd.py
 ```
-**Note:** Dogstatsd does not currently daemonize and will run in the foreground.
+**Note:** DogStatsD does not daemonize and runs in the foreground.
 
-There are also facilities to run the agent via the known python supervisor, this might be your preferred way to manage the agent daemon if you are familiar with the tool. There are currently entries for both the agent and dogstatsd.
+There are also facilities to run the Agent via the known python supervisor, this might be your preferred way to manage the Agent daemon if you are familiar with the tool. There are entries for both the Agent and DogStatsD.
 
 ## Uninstall
-To remove an installed agent you will run a similar `installp` command:
+To remove an installed Agent run the following `installp` command:
 
 ```
 installp -e dd-aix-uninstall.log -uv datadog-unix-agent
 ```
 
-Note how we're again logging to dd-aix-install.log, you may skip that by removing the -e switch.
+Note: Agent un-installation logs can be found in the `dd-aix-install.log` file. To disable this logging, remove the `-e` parameter in the un-installation command.
 
 ## Further Reading
 
