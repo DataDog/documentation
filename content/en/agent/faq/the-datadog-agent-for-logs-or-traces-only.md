@@ -1,5 +1,5 @@
 ---
-title: Use the Datadog Agent for Logs or Traces Only
+title: The Datadog Agent for Logs or Traces Only
 kind: faq
 disable_toc: true
 aliases:
