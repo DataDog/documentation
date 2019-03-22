@@ -93,17 +93,6 @@ For Seasonal: `forecast(metric_name, 'seasonal', 1, interval='60m', seasonality=
 
 When using the API, specify the start and end times of the forecast itself. If you want the forecast for the next day, specify the start to be `now` and the end to be `1 day ahead`.
 
-<<<<<<< HEAD
-=======
-## Forecast dashboards and notebooks
-
-To create a forecast graph, start by adding a timeseries graph to a dashboard or a timeseries cell to a notebook. Now, click on the **+** icon on the right side of your expression. Choose the **Forecast** function in the **Algorithms** submenu. You should immediately see the preview update to include the forecast visualization. A number of the graphing options disappear, as forecasts have a unique visualization.
-
-The function has two parameters. The first parameter is for selecting which algorithm is used (see [Forecast Algorithms](#forecast-algorithms)). The second parameter is deviations, and you can tune this to change the width of the range of forecasted values. A value of 1 or 2 should be large enough to forecast most "normal" points accurately. After successfully adding **Forecast**, your editor should show something like this:
-
-{{< img src="monitors/monitor_types/forecasts/query_editor.png" alt="query editor" responsive="true" style="width:80%;">}}
-
->>>>>>> origin/kaylyn/forecast-monitor
 ### Things to Note
 
 Not all functions may be nested inside of calls to the `forecast()` function. In particular, you may not include any of the following functions in a forecast monitor or dashboard query: `anomalies()`, `cumsum()`, `integral()`, `outliers()`, `piecewise_constant()`, `robust_trend()`, or `trend_line()`
