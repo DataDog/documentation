@@ -24,6 +24,8 @@ main:
       - name: "Basic Agent Usage"
         url: "agent/basic_agent_usage/"
         children:
+          - name: "AIX"
+            url: "agent/basic_agent_usage/aix/"
           - name: "Amazon Linux"
             url: "agent/basic_agent_usage/amazonlinux/"
           - name: "CentOS"

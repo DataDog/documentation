@@ -1,8 +1,6 @@
 ---
-title: UNIX Agent for AIX
+title: Basic Agent Usage for AIX
 kind: documentation
-aliases:
-  - /agent/aix
 further_reading:
 - link: "agent/faq/getting-further-with-docker"
   tag: "FAQ"
@@ -40,9 +38,10 @@ Note: Agent installation logs can be found in the `dd-aix-install.log` file. To 
 | Display command usage              | `datadog-agent --help`              |
 
 ## Configuration
+
 The configuration files and folders for the Agent are located in:
 `/etc/datadog-agent/datadog.yaml`
-That said, config file will be searched in this order (with the first match being taken):
+That said, configuration file is searched in this order (with the first match being taken):
 
 * `/etc/datadog-agent/datadog.yaml`
 * `./etc/datadog-agent/datadog.yaml`
@@ -57,7 +56,8 @@ A basic configuration typically requires a destination `dd_url` and your Datadog
 `/etc/datadog-agent/conf.d/`
 
 ## Integrations
-Additional integrations currently available or in development:
+
+Additional integrations available:
 
 * process
 * lparstats
@@ -66,6 +66,7 @@ Additional integrations currently available or in development:
 For non-core integrations, a configuration file should be put in place to enable the integration. These are expected to be found in `./etc/datadog-agent/conf.d`. The name of the YAML configuration file should match that of the integration: `./etc/datadog-agent/conf.d/<INTEGRATION_NAME>.yaml` enables the integration `<INTEGRATION_NAME>`, and set its configuration.
 
 ## Running DogStatsD
+
 DogStatsD allows collecting and submitting custom metrics to Datadog. It listens on a UDP port and StatsD metrics may be submitted to it. These are then relayed to Datadog.
 
 DogStatsD relies on the same configuration file defined for the agent and runs in a separate process. To enable DogStatsD do:
@@ -79,6 +80,7 @@ cd /opt/datadog-agent/agent
 There are also facilities to run the Agent via the known python supervisor, this might be your preferred way to manage the Agent daemon if you are familiar with the tool. There are entries for both the Agent and DogStatsD.
 
 ## Uninstall
+
 To remove an installed Agent run the following `installp` command:
 
 ```

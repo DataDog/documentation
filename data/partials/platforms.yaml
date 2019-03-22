@@ -36,7 +36,7 @@ platforms:
     link: "agent/basic_agent_usage/windows/"
     image: "platform_windows.png"
   - name: aix
-    link: "agent/aix/"
+    link: "agent/basic_agent_usage/aix/"
     image: "platform_aix.png"
   - name: source
     link: "agent/basic_agent_usage/source/"
