@@ -15,6 +15,9 @@ further_reading:
 - link: "synthetics/browser_test"
   tag: "Documentation"
   text: "Configure a Browser Test"
+- link: "synthetics/identify_our_bots"
+  tag: "Documentation"
+  text: "Identify Our Bots"
 ---
 
 <div class="alert alert-warning">Synthetics is only available in the US. Browser tests are available in beta: to request access complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics Request form</a>.</div>
