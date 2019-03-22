@@ -8,21 +8,35 @@ further_reading:
   text: "Introduction to Application Performance Monitoring"
 ---
 
-{{< vimeo 203196972 >}}
+## Setup
+    {{< nextlink href="/agent/apm/" >}}Enable APM in the Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="/tracing/languages" >}}Instrument Your Application{{< /nextlink >}}
+    {{< nextlink href="/agent/apm#enable-trace-search-analytics" >}}Enable Trace Search & Analytics{{< /nextlink >}}
 
-## What is APM?
+## Enrich Tracing
+    {{< nextlink href="/agent/apm" >}}Connect Logs & Traces{{< /nextlink >}}
+    {{< nextlink href="/tracing/languages" >}}Adding Unique Metadata to Spans{{< /nextlink >}}
+    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Runtime Metrics{{< /nextlink >}}
+    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Opentracing{{< /nextlink >}}
+    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Manual Instrumentation{{< /nextlink >}}
 
-Datadog APM provides you with deep insight into your application's performance-from automatically generated dashboards monitoring key metrics, such as request volume and latency, to detailed traces of individual requests-side by side with your logs and infrastructure monitoring.
+## Use the APM UI
+    {{< nextlink href="/agent/apm" >}}Service List{{< /nextlink >}}
+    {{< nextlink href="/tracing/languages" >}}Serice Page{{< /nextlink >}}
+    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Resource Page{{< /nextlink >}}
+    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Trace View{{< /nextlink >}}
+    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Trace Search{{< /nextlink >}}
+    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Trace Analytics{{< /nextlink >}}
+    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Service Map{{< /nextlink >}}
 
-Datadog APM is offered as an upgrade to the Pro and Enterprise plans. A free 14-day trial is available. Registered users can visit the [APM page of the Datadog application][1] to get started.
+## Proxy Instrumentation
+    {{< nextlink href="/agent/apm" >}}Envoy{{< /nextlink >}}
+    {{< nextlink href="/tracing/languages" >}}Nginx{{< /nextlink >}}
 
-{{< whatsnext desc="Get started with Datadog APM">}}
-    {{< nextlink href="/agent/apm" >}}Configure your Agent to collect your Application Traces{{< /nextlink >}}
-    {{< nextlink href="/tracing/languages" >}}Set up your Application to send traces to your Datadog Agent{{< /nextlink >}}
-    {{< nextlink href="/tracing/visualization" >}}Visualize services, resources, and traces in Datadog {{< /nextlink >}}
-    {{< nextlink href="/tracing/getting_further" >}}Learn more about Datadog APM product specificities{{< /nextlink >}}
-    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Join the APM channel in the Public Datadog Slack for additional help from Datadog staff{{< /nextlink >}}
-{{< /whatsnext >}}
+## Guides
+    {{< nextlink href="/agent/apm" >}}How Distributed Tracing Works{{< /nextlink >}}
+    {{< nextlink href="/tracing/languages" >}}Monitoring APM{< /nextlink >}}
+    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Trace Metrics{{< /nextlink >}}
 
 ## Further Reading
 
