@@ -27,7 +27,15 @@ Some parts of your system might not be available to robots without the right ide
 
 ## Solutions
 
-1. You can use the [**headers we set for APM integration**][1]. It will work for all the tests (both browser and API).
+1. You can use the [**headers we set for APM integration**][1]. The `x-datadog-origin: synthetics` header for instance is being added to all the requests launched for both API & Browser tests. Using one of these headers will allow you to filter these bot requests once in your analytics tool.
+
+If you want these requests to be completely removed, and not sent at all to your analytics tool, you can use the below JavaScript variable on your website, wrapped around your analytics tool code snippet:
+
+```
+if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
+  initializeAnalytics()
+}
+```
 
 2. You can use the **shared headers** to set any header to any value for all your API tests at once.
 
