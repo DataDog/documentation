@@ -41,9 +41,7 @@ Once your graphs have exposed the problem areas, set up alerting conditions on y
 When you're well aware of an ongoing problem, [silence its alerts][18]. When you're about to bring a service down for maintenance, [schedule a downtime][18] so you won't get spammed with alerts. When you can't define some alert-worthy condition in terms of a single host, event, metric, or service, then create a [composite monitor][19] instead.
 
 <div class="col text-center">
-<a href="https://docs.datadoghq.com/fr/" rel="noindex">
-{{< img src="icons/fr-flag-round-50.png" alt="French Docs"  responsive="true" >}}
-</a>
+{{< img src="icons/fr-flag-round-50.png" alt="French Docs" responsive="true" popup="false" href="https://docs.datadoghq.com/fr/" >}}
 </div>
 
 {{< partial name="support/support.html" >}}
