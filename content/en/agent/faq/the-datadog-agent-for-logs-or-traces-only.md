@@ -14,9 +14,11 @@ further_reading:
 ---
 
 
-It is not recommended to use the Agent for log or trace collection only. Using metric collection ensures that your logs, metrics, and traces from the same host share the same hostname and therefore the same tags. However, it is still possible to configure this change for the Agent.
+<div class="alert alert-danger">
+Datadog does not recommend using the Agent for only log or trace collection. Using metric collection ensures that your logs, metrics, and traces from the same host share the same hostname and therefore the same tags.
+</div>
 
-The Agent sends metrics and other payloads to Datadog. To disable these payloads, you must be running Agent v6.4+. Then follow the steps below:
+Even though not recommended, it is still possible to configure the Agent for only log and trace collection. To disable the unwanted payloads, you must be running Agent v6.4+, and then follow these steps:
 
 ### Configuration file
 
