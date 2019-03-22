@@ -30,7 +30,7 @@ Many items can be configured on the command line when installing the Datadog Win
 * cmd: `msiexec /qn /i datadog-agent-6-latest.amd64.msi APIKEY="<DATADOG_API_KEY>" HOSTNAME="<HOSTNAME>" TAGS="key_1:val_1,key_2:val_2"`
 * Powershell: `Start-Process msiexec -ArgumentList '/qn /i datadog-agent-6-latest.amd64.msi APIKEY="<DATADOG_API_KEY>" HOSTNAME="<HOSTNAME>" TAGS="key_1:val_1,key_2:val_2"'`
 
-The following configuration command line options are available when installing the Agent: 
+The following configuration command line options are available when installing the Agent:
 
 | Variable          | Type   | Description                                                                                                                                                                                       |
 |-------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -94,7 +94,7 @@ Use the `start`, `stop`, and `restart` commands in the Datadog Agent Manager:
 
 {{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Manager snapshot" responsive="true" style="width:75%;">}}
 
-You can also use Windows Powershell if you are running a modern version of Windows:  
+You can also use Windows Powershell if you are running a modern version of Windows:
 `[start|stop|restart]-service datadogagent`
 
 {{% /tab %}}
@@ -106,11 +106,11 @@ Use the Datadog Agent Manager (available in the start menu) to enable, disable, 
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
-The main Agent configuration file is located at:  
+The main Agent configuration file is located at:
 `C:\ProgramData\Datadog\datadog.yaml`
 
-Configuration files for [integrations][1] are in:  
-`C:\ProgramData\Datadog\conf.d\`  
+Configuration files for [integrations][1] are in:
+`C:\ProgramData\Datadog\conf.d\`
 OR `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
 
 **Note**: `ProgramData` is a hidden folder.
@@ -119,11 +119,11 @@ OR `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-The main Agent configuration file is located at:  
+The main Agent configuration file is located at:
 `C:\ProgramData\Datadog\datadog.conf`
 
-Configuration files for [integrations][1] are in:  
-`C:\ProgramData\Datadog\conf.d\`  
+Configuration files for [integrations][1] are in:
+`C:\ProgramData\Datadog\conf.d\`
 OR `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
 
 **Note**: `ProgramData` is a hidden folder.
@@ -145,7 +145,7 @@ To receive more information about the Agent's state, start the Datadog Agent Man
 - Right click on the Datadog Agent system tray icon -> Configure, or
 - Run `& "C:\program files\datadog\datadog agent\embedded\agent.exe" launch-gui` from an admin Powershell prompt
 
-Then, open the status page by going to *Status* -> *General*.  
+Then, open the status page by going to *Status* -> *General*.
 Get more information on running checks in *Status* -> *Collector* and *Checks* -> *Summary*.
 
 The status command is available for Powershell:
@@ -165,7 +165,7 @@ or cmd.exe:
 
 To verify the Agent is running, check if the service status in the Services panel is listed as "Started". A process called `ddagent.exe` should also exist in the Task Manager.
 
-Information about the Agent's state for Agent v5.2+ is available in the  
+Information about the Agent's state for Agent v5.2+ is available in the
 *Datadog Agent Manager -> Settings -> Agent Status*:
 
 {{< img src="agent/faq/windows_status.png" alt="Windows Status" responsive="true" style="width:50%;" >}}
@@ -192,7 +192,7 @@ or cmd.exe:
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
-The Agent logs are located in `C:\ProgramData\Datadog\logs\agent.log`.  
+The Agent logs are located in `C:\ProgramData\Datadog\logs\agent.log`.
 **Note**: `ProgramData` is a hidden folder.
 
 Need help? Contact [Datadog support][1].
@@ -201,7 +201,7 @@ Need help? Contact [Datadog support][1].
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-For Windows Server 2008, Vista, and newer, the Agent logs are located in `C:\ProgramData\Datadog\logs`.  
+For Windows Server 2008, Vista, and newer, the Agent logs are located in `C:\ProgramData\Datadog\logs`.
 **Note**: `ProgramData` is a hidden folder.
 
 Need help? Contact [Datadog support][1].

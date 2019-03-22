@@ -80,7 +80,7 @@ Configuration files for [Integrations][1]:
 
 The configuration files and folders for the Agent are located in:
 
-* `~/.datadog-agent/datadog.conf`  
+* `~/.datadog-agent/datadog.conf`
 
 Configuration files for [Integrations][1]:
 

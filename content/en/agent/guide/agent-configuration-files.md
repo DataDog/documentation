@@ -15,6 +15,7 @@ Therefore, `datadog.conf` (v5) is now retired in favor of `datadog.yaml` (v6).
 
 | Platform                             | Command                              |
 | :--------                            | :--------                            |
+| AIX                                  | `/etc/datadog-agent/datadog.yaml`    |
 | Linux                                | `/etc/datadog-agent/datadog.yaml`    |
 | CentOS                               | `/etc/datadog-agent/datadog.yaml`    |
 | Debian                               | `/etc/datadog-agent/datadog.yaml`    |
@@ -25,7 +26,7 @@ Therefore, `datadog.conf` (v5) is now retired in favor of `datadog.yaml` (v6).
 | Suse                                 | `/etc/datadog-agent/datadog.yaml`    |
 | Ubuntu                               | `/etc/datadog-agent/datadog.yaml`    |
 | Windows Server 2008, Vista and newer | `\\ProgramData\Datadog\datadog.yaml` |
-| Windows Server 2003, XP or older     | *unsupported Platform*             |
+| Windows Server 2003, XP or older     | *unsupported Platform*               |
 
 
 {{% /tab %}}
@@ -57,6 +58,7 @@ Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/
 
 | Platform                             | Command                        |
 | :--------                            | :--------                      |
+| AIX                                  | `/etc/datadog-agent/conf.d/`   |
 | Linux                                | `/etc/datadog-agent/conf.d/`   |
 | CentOS                               | `/etc/datadog-agent/conf.d/`   |
 | Debian                               | `/etc/datadog-agent/conf.d/`   |
@@ -67,7 +69,7 @@ Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/
 | Suse                                 | `/etc/datadog-agent/conf.d/`   |
 | Ubuntu                               | `/etc/datadog-agent/conf.d/`   |
 | Windows Server 2008, Vista and newer | `\\ProgramData\Datadog\conf.d` |
-| Windows Server 2003, XP or older     | *unsupported Platform*       |
+| Windows Server 2003, XP or older     | *unsupported Platform*         |
 
 ### Checks configuration files for Agent 6
 

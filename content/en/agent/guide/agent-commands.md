@@ -24,13 +24,14 @@ List of commands to start the Datadog Agent:
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
-| Platform | Command                                                        |
-|----------|----------------------------------------------------------------|
-| Linux    | `sudo service datadog-agent start`                             |
-| Docker   | [See the dedicated Docker documentation][1]                    |
-| macOS    | `launchctl start com.datadoghq.agent` *or* via the systray app |
-| Source   | `sudo service datadog-agent start`                             |
-| Windows  | [See the dedicated Windows documentation][2]                   |
+| Platform   | Command                                                        |
+| ---------- | --------------------------                                     |
+| AIX        | `startsrc -s datadog-agent`                                    |
+| Linux      | `sudo service datadog-agent start`                             |
+| Docker     | [See the dedicated Docker documentation][1]                    |
+| macOS      | `launchctl start com.datadoghq.agent` *or* via the systray app |
+| Source     | `sudo service datadog-agent start`                             |
+| Windows    | [See the dedicated Windows documentation][2]                   |
 
 
 [1]: /agent/docker
@@ -59,13 +60,14 @@ List of commands to stop the Datadog Agent:
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
-| Platform | Command                                                       |
-|----------|---------------------------------------------------------------|
-| Linux    | `sudo service datadog-agent stop`                             |
-| Docker   | [See the dedicated Docker documentation][1]                   |
-| macOS    | `launchctl stop com.datadoghq.agent` *or* via the systray app |
-| Source   | `sudo service datadog-agent stop`                             |
-| Windows  | [See the dedicated Windows documentation][2]                  |
+| Platform   | Command                                                       |
+| ---------- | ---------------------------------------------                 |
+| AIX        | `stopsrc -s datadog-agent`                                    |
+| Linux      | `sudo service datadog-agent stop`                             |
+| Docker     | [See the dedicated Docker documentation][1]                   |
+| macOS      | `launchctl stop com.datadoghq.agent` *or* via the systray app |
+| Source     | `sudo service datadog-agent stop`                             |
+| Windows    | [See the dedicated Windows documentation][2]                  |
 
 
 [1]: /agent/docker
@@ -131,13 +133,14 @@ List of commands to display the status of the Datadog Agent:
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
-| Platform        | Command                                                                       |
-|-----------------|-------------------------------------------------------------------------------|
-| Linux           | `sudo service datadog-agent status`                                           |
-| Docker (Debian) | `sudo docker exec -it <container_name> s6-svstat /var/run/s6/services/agent/` |
-| Kubernetes      | `kubectl exec -it <pod-name> s6-svstat /var/run/s6/services/agent/`           |
-| macOS           | `launchctl list com.datadoghq.agent` *or* via the systray app                 |
-| Source          | `sudo service datadog-agent status`                                           |
+| Platform          | Command                                                                       |
+| ----------------- | ---------------------------------------------------------                     |
+| AIX               | `lssrc -s datadog-agent`                                                      |
+| Linux             | `sudo service datadog-agent status`                                           |
+| Docker (Debian)   | `sudo docker exec -it <container_name> s6-svstat /var/run/s6/services/agent/` |
+| Kubernetes        | `kubectl exec -it <pod-name> s6-svstat /var/run/s6/services/agent/`           |
+| macOS             | `launchctl list com.datadoghq.agent` *or* via the systray app                 |
+| Source            | `sudo service datadog-agent status`                                           |
 
 
 {{% /tab %}}
@@ -171,14 +174,15 @@ List of commands to display the status of your Datadog Agent and enabled integra
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
-| Platform   | Command                                              |
-|------------|------------------------------------------------------|
-| Linux      | `sudo datadog-agent status`                          |
-| Docker     | `sudo docker exec -it <container_name> agent status` |
-| Kubernetes | `kubectl exec -it <pod-name> agent status`           |
-| macOS      | `datadog-agent status` or via the [web GUI][1]       |
-| Source     | `sudo datadog-agent status`                          |
-| Windows    | [See the dedicated Windows documentation][2]         |
+| Platform     | Command                                                |
+| ------------ | ------------------------------------------------------ |
+| AIX          | `datadog-agent status`                                 |
+| Linux        | `sudo datadog-agent status`                            |
+| Docker       | `sudo docker exec -it <container_name> agent status`   |
+| Kubernetes   | `kubectl exec -it <pod-name> agent status`             |
+| macOS        | `datadog-agent status` or via the [web GUI][1]         |
+| Source       | `sudo datadog-agent status`                            |
+| Windows      | [See the dedicated Windows documentation][2]           |
 
 A properly configured integration is displayed under **Running Checks** with no warnings or errors, as seen below:
 

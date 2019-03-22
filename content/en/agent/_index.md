@@ -259,8 +259,8 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [AIX][1]                          | AIX 6.1, 7.1, 7.2              |
 
 
-[1]: /agent/aix
 
+[1]: /agent/basic_agent_usage/aix
 {{% /tab %}}
 {{< /tabs >}}
 
