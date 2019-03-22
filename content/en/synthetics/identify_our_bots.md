@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-Some parts of your system might not be available to robots without the right identification. Datadog provides you with a variety of ways to identify the robots and make sure they can perform the actions you expect them to do.
+Some parts of your system might not be available to robots without the right identification or you might want to avoid collecting analytics from our robots. Datadog provides you with a variety of ways to identify the robots and make sure they can perform the actions you expect them to do.
 
 ## Solutions
 
