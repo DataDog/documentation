@@ -2,7 +2,7 @@
 title: as_count() monitor evaluation with division
 kind: guide
 aliases:
-    - /monitor/faq/as-count-monitor-evaluation
+    - /monitors/faq/as-count-monitor-evaluation
 ---
 
 ## Overview
