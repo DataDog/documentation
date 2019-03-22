@@ -38,6 +38,8 @@ Define the configuration of your browser test.
 5. Pick-up locations to run the test from. Available locations are:
     * Frankfurt (Request made from an AWS Datacenter)
     * Tokyo (Request made from an AWS Datacenter)
+    * Oregon (Request made from an AWS Datacenter)
+    * London (Request made from an AWS Datacenter)
 6. Choose a Check frequency between "1 run per 5 minute interval" to "1 run per week":
 
     {{< img src="synthetics/browser_test/check_frequency.png" alt="Check frequency" responsive="true" style="width:80%;">}}

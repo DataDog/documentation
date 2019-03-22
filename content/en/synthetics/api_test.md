@@ -46,6 +46,8 @@ Define the request you want to be executed by Datadog:
 5. Pick locations to run the test from. Available locations are:
     * Frankfurt (Request made from an AWS Datacenter)
     * Tokyo (Request made from an AWS Datacenter)
+    * Oregon (Request made from an AWS Datacenter)
+    * London (Request made from an AWS Datacenter)
 
 6. Choose a check frequency between "1 run per minute" and "1 run per week".
 7. Finish by clicking on **Test URL** to try out the request configuration. You should see a response preview show up in the right side of your screen.
