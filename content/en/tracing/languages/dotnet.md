@@ -25,6 +25,8 @@ further_reading:
 
 To begin tracing applications written in any language, first [install and configure the Datadog Agent][1]. The .NET Tracer runs in-process to instrument your applications and sends traces to the Agent.
 
+Note that the .NET Tracer supports all .NET-based languages, i.e. C#, VB.Net, etc. If you need support for a particular framework, consider making an open-source contribution.
+
 ## Automatic Instrumentation
 
 Automatic instrumentation uses the Profiling API provided by .NET Framework and .NET Core to modify IL instructions at runtime and inject instrumentation code into your application. With zero code changes and minimal configuration, the .NET Tracer automatically instruments all supported libraries out of the box.
