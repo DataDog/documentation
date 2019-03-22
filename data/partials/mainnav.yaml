@@ -376,6 +376,9 @@ main:
       - name: "Community Libraries"
         url: "developers/libraries/#apm-tracing-client-libraries"
 
+      - name: "Guides"
+        url: "tracing/guide"
+
       #- #  name: "FAQ"
       #  url: "tracing/faq/"
       #  #  parent: menu_references_tracing
