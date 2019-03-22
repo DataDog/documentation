@@ -23,11 +23,13 @@ further_reading:
 
 ## Overview
 
-Some parts of your system might not be available to robots without the right identification or you might want to avoid collecting analytics from our robots. Datadog provides you with a variety of ways to identify the robots and make sure they can perform the actions you expect them to do.
+Some parts of your system might not be available to robots without the right identification, or you might want to avoid collecting analytics from Datadog robots.
 
 ## Solutions
 
-1. You can use the [**headers we set for APM integration**][1]. The `x-datadog-origin: synthetics` header for instance is being added to all the requests launched for both API & Browser tests. Using one of these headers will allow you to filter these bot requests once in your analytics tool.
+Choose any or a variety of the following methods to identify the robots to make sure they are performing the actions you expect.
+
+1. You can use the [**headers set for APM integration**][1]. The `x-datadog-origin: synthetics` header, for instance, is added to all the requests launched for both API and browser tests. Using one of these headers allows you to filter these bot requests once in your analytics tool.
 
 If you want these requests to be completely removed, and not sent at all to your analytics tool, you can use the below JavaScript variable on your website, wrapped around your analytics tool code snippet:
 
@@ -41,5 +43,7 @@ if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
 
 3. You can locally add **cookies, headers or basic auth** to your API tests.
 
-4. You can use our **IP ranges** provided by this URL https://ip-ranges.datadoghq.com/, in the section "synthetics".
-[1]: ../apm/#how-are-traces-linked-to-checks
+4. You can use Datadog's [**IP ranges**][2], provided in the section "synthetics".
+
+[1]: /synthetics/apm/#how-are-traces-linked-to-checks
+[2]: https://ip-ranges.datadoghq.com/
