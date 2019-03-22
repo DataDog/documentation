@@ -118,7 +118,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | Database                | Versions | Support Type    | Instrumentation Names (used for configuration)                                           |
 |---------------          |----------|-----------------|------------------------------------------------------------------------------------------|
 | Couchbase               | 2.0+     | Fully Supported | `couchbase`                                                                              |
-| Cassandra               | 2.3+     | Fully Supported | `cassandra`                                                                              |
+| Cassandra               | 3.X      | Fully Supported | `cassandra`                                                                              |
 | Elasticsearch Transport | 2.0+     | Fully Supported | `elasticsearch`, `elasticsearch-transport`, `elasticsearch-transport-{2,5,6}` (pick one) |
 | Elasticsearch Rest      | 5.0+     | Fully Supported | `elasticsearch`, `elasticsearch-rest`, `elasticsearch-rest-5`, `elasticsearch-rest-6`    |
 | Hibernate               | 3.5+     | Fully Supported | `hibernate`                                                                              |
