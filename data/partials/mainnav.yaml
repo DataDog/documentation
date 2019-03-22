@@ -486,8 +486,8 @@ main:
         url: "synthetics/browser_test"
       - name: "APM Integration"
         url: "synthetics/apm"
-      - name: "Identify our bots"
-        url: "synthetics/identify_our_bots"
+      - name: "Identify Synthetics Bots"
+        url: "synthetics/identify_synthetics_bots"
 
   # DEVELOPERS
   - name: "Developer Tools"
