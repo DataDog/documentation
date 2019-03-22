@@ -140,10 +140,60 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+### Automatic Configuration
 
+Trace Search & Analytics can be enabled globally for all web integrations using the [`WithAnalytics`](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics) tracer start option. For example:
 
-[1]: /help
+```go
+tracer.Start(tracer.WithAnalytics(true))
+```
+
+After enabling, the Trace Search & Analytics UI should start showing results. Visit [this page][1] to get started.
+
+### Configure by Integration
+
+In addition to the global setting, you can enable or disable Trace Search & Analytics individually for each integration. All of them should have the option to. As an example, for configuring the standard library's `net/http` package you could do:
+
+```go
+package main
+
+import (
+	httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+	tracer.Start()
+	defer tracer.Stop()
+    
+	mux := httptrace.NewServeMux(httptrace.WithAnalytics(true))
+	// ...
+}
+```
+
+### Custom instrumentation
+
+For custom instrumentation, a special tag has been added to enable Trace Search & Analytics on a span, as can be seen below:
+
+```go
+span.SetTag(ext.AnalyticsEvent, true)
+```
+
+This will mark the span as a Trace Search & Analytics event.
+
+### Configuring the sample rate
+
+If you wish to downsample the rate of APM events that are being collected globally or scoped to a specific integration, this can be achieved by using the [`WithAnalyticsRate`](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalyticsRate) tracer start option. For integrations, it's the option with [the same name](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#WithAnalyticsRate).
+
+If you are doing custom instrumentation, there is a special tag which can specify the sampling rate for Analytics events on a span:
+
+```go
+span.SetTag(ext.EventSampleRate, 0.5) // capture 50% of these events
+```
+
+The rate parameter is a floating point number in the range N=[0,1] and it determines the percentage of traces that will be sampled. The actual percentage is N*100.
+
+[1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
