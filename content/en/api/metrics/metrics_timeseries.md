@@ -6,7 +6,7 @@ external_redirect: /api/#post-time-series-points
 ---
 
 ## Post timeseries points
-The metrics end-point allows you to post time-series data that can be graphed on Datadog's dashboards.
+The metrics end-point allows you to post time-series data that can be graphed on Datadog's dashboards. As of this writing, the limit is 3.2 megabytes (3200000) for compressed payloads, and 62 megabytes (62914560) for the decompressed payloads.
 
 #### ARGUMENTS
 
