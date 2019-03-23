@@ -12,7 +12,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure/'
 further_reading:
   - link: 'https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms/'
     tag: Blog
-    text: Comment surveiller des machines virtuelles Azure de Microsoft
+    text: Comment surveiller des machines virtuelles Azure Microsoft
   - link: 'https://docs.datadoghq.com/integrations/faq/azure-troubleshooting/'
     tag: FAQ
     text: Dépannage Azure
