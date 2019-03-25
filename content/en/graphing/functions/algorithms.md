@@ -8,7 +8,7 @@ disable_toc: true
 
 | Function      | Description                                                                                | Example                                                    |
 | :----         | :-------                                                                                   | :---------                                                 |
-| `anomalies()` | Overlay a gray band on the metric showing the expected behavior of a series based on past. | `anomalies(avg:<METRIC_NAME>{*}, '<ALGORITHM>', <BOUNDS>)` |
+| `anomalies()` | Overlay a gray band on the metric showing the expected behavior of a series based on past. | `anomalies(METRIC_NAME>{*}, '<ALGORITHM>', <BOUNDS>)` |
 
 The `anomalies()` function has two parameters:
 
@@ -27,7 +27,7 @@ See the [Anomaly Monitor][1] page for more info.
 
 | Function     | Description                | Example                                                                    |
 | :----        | :-------                   | :---------                                                                 |
-| `outliers()` | Highlight outliers series. | `outliers(avg:<METRIC_NAME>{*}, '<ALGORITHM>', <TOLERANCE>, <PERCENTAGE>)` |
+| `outliers()` | Highlight outliers series. | `outliers(<METRIC_NAME>{*}, '<ALGORITHM>', <TOLERANCE>, <PERCENTAGE>)` |
 
 The `outliers()` function has three parameters:
 
@@ -39,15 +39,15 @@ The `outliers()` function has three parameters:
 
 See the [Outlier Monitor][2] page for more info.
 
-## Forcast
+## Forecast
 
 | Function     | Description                | Example                                                                    |
 | :----        | :-------                   | :---------                                                                 |
-| `forcast()`  | Predicts where a metric is heading in the future. | `forcast(avg:<METRIC_NAME>{*}, '<FORECAST>', <DEVIATIONS>` |
+| `forecast()`  | Predicts where a metric is heading in the future. | `forecast(<METRIC_NAME>{*}, '<ALGORITHM>', <DEVIATIONS>)` |
 
-The `forcasts()` function has two parameters:
+The `forecast()` function has two parameters:
 
-* `FORECAST`: The outliers algorithm to use - select `linear` or `seasonal`. For more information about these algorithms, see the [Forcast Algorithms][3] section.
+* `ALGORITHM`: The forecasting algorithm to use - select `linear` or `seasonal`. For more information about these algorithms, see the [Forecast Algorithms][3] section.
 * `DEVIATIONS`: The width of the range of forecasted values. A value of 1 or 2 should be large enough to forecast most "normal" points accurately.
 
 A number of the graphing options disappear, as forecasts have a unique visualization. After successfully adding **Forecast**, your editor should show something like this:

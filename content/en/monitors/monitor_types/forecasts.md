@@ -2,7 +2,7 @@
 title: Forecasts monitor
 kind: documentation
 aliases:
-- /guides/forecasts/ 
+- /guides/forecasts/
 further_reading:
 - link: "monitors/notifications"
   tag: "Documentation"
@@ -41,7 +41,7 @@ There are three required options for setting up a forecast alert:
 
 Datadog automatically sets the **Advanced** options for you by analyzing your metric. Note that any changes in the **Define the metric** section could change the advanced options.
 
-* You can change the forecasting algorithm to be used here. See the [Forcast algorithms](#forecast-algorithms) section for tips on how to choose the best algorithm for your use case. Each algorithm also has additional settings is described in the next section.
+* You can change the forecasting algorithm to be used here. See the [Forecast algorithms](#forecast-algorithms) section for tips on how to choose the best algorithm for your use case. Each algorithm also has additional settings is described in the next section.
 * Datadog recommends using larger intervals between points to avoid having noise influence the forecast too much.
 * The number of deviations controls the width of the range of forecasted values. A value of 1 or 2 should be large enough to forecast most "normal" points accurately.
 
