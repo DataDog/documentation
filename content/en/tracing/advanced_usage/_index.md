@@ -105,6 +105,16 @@ Integration names can be found on the [integrations table][2].
 
 Note several integrations require non-standard configuration due to the integration-specific implementation of the tracer. Consult the library documentation on [Trace Search & Analytics][3] for details.
 
+### Custom Instrumentation
+
+Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS` tag on the span:
+
+```javascript
+const { ANALYTICS } = require('dd-trace/ext/tags')
+
+span.setTag(ANALYTICS, true)
+```
+
 ### Configure Sample Rate of APM Events
 
 When enabling Trace Search & Analytics, the default sample rate is to collect 100% of APM Events. For any services that have been enabled for Trace Search & Analytics in the Tracing Client, you can adjusted the sampling rate for APM Events in your [APM settings][4].
