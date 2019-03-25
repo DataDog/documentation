@@ -1,11 +1,12 @@
 ---
-title: Basic Agent Usage for AIX
+title:UNIX Agent for AIX
 kind: documentation
 further_reading:
-- link: "agent/faq/getting-further-with-docker"
-  tag: "FAQ"
-  text: "Getting further with Docker"
 ---
+
+<div class="alert alert-info">
+The Datadog UNIX agent is separate from Agents 5 and 6 that only support Linux and Windows  
+</div>
 
 This page outlines the installation and configuration of the Datadog UNIX Agent for AIX.
 
@@ -61,9 +62,10 @@ Additional integrations available:
 
 * process
 * lparstats
-* hmc
+* disk
+* network
 
-For non-core integrations, a configuration file should be put in place to enable the integration. These are expected to be found in `./etc/datadog-agent/conf.d`. The name of the YAML configuration file should match that of the integration: `./etc/datadog-agent/conf.d/<INTEGRATION_NAME>.yaml` enables the integration `<INTEGRATION_NAME>`, and set its configuration.
+To enable the above integrations, copy and edit the sample configuration files provided. These are expected to be found in `/etc/datadog-agent/conf.d`. The name of the YAML configuration file should match that of the integration: `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.yaml` enables the integration `<INTEGRATION_NAME>`, and set its configuration.
 
 ## Running DogStatsD
 
