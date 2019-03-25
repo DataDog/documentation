@@ -101,13 +101,13 @@ The following attributes are related to the data used in network communication. 
 | `network.bytes_read`       | `number` | Total number of bytes transmitted from the client to the server when the log is emitted. |
 | `network.bytes_written`    | `number` | Total number of bytes transmitted from the server to the client when the log is emitted. |
 
-Typical integrations relying on these attributes include [Apache][2], [Varnish][3], [AWS ELB][4], [Nginx][5], [HAProxy][6], etc.
+Typical integrations relying on these attributes include [Apache][1], [Varnish][2], [AWS ELB][3], [Nginx][4], [HAProxy][5], etc.
 
 ### HTTP Requests
 
 These attributes are related to the data commonly used in HTTP requests and accesses. All attributes are prefixed by `http`.
 
-Typical integrations relying on these attributes include [Apache][2], Rails, [AWS CloudFront][7], web applications servers, etc.
+Typical integrations relying on these attributes include [Apache][1], Rails, [AWS CloudFront][6], web applications servers, etc.
 
 #### Common attributes
 
@@ -123,7 +123,7 @@ Typical integrations relying on these attributes include [Apache][2], Rails, [AW
 
 #### URL details attributes
 
-These attributes provide details about the parsed parts of the HTTP URL. They are generally generated thanks to the [URL parser][8]. All attributes are prefixed by `http.url_details`.
+These attributes provide details about the parsed parts of the HTTP URL. They are generally generated thanks to the [URL parser][7]. All attributes are prefixed by `http.url_details`.
 
 | **Fullname**                   | **Type** | **Description**                                                                         |
 | :---                           | :---     | :----                                                                                   |
@@ -135,7 +135,7 @@ These attributes provide details about the parsed parts of the HTTP URL. They ar
 
 #### User-Agent attributes
 
-These attributes provide details about the meanings of user-agents' attributes. They are generally generated thanks to the [User-Agent parser][9]. All attributes are prefixed by `http.useragent_details`.
+These attributes provide details about the meanings of user-agents' attributes. They are generally generated thanks to the [User-Agent parser][8]. All attributes are prefixed by `http.useragent_details`.
 
 | **Fullname**                            | **Type** | **Description**                                |
 | :---                                    | :---     | :----                                          |
@@ -169,7 +169,7 @@ Database related attributes are prefixed by `db`.
 | `db.operation` | `string` | The operation that was performed ("query", "update", "delete",...).                                                                   |
 | `db.user`      | `string` | User that performs the operation.                                                                                                     |
 
-Typical integrations relying on these attributes are: [Cassandra][10], [MySQL][11], [RDS][12], [Elasticsearch][13], etc.
+Typical integrations relying on these attributes are: [Cassandra][9], [MySQL][10], [RDS][11], [Elasticsearch][12], etc.
 
 ### Performance
 
@@ -180,7 +180,7 @@ Performance metrics attributes.
 | `duration`   | `number` | A duration of any kind in **nanoseconds**: HTTP response time, database query time, latency, etc. |
 
 
-We advise you to rely or at least remap on this attribute as Datadog displays and uses it as a default [Measure][14] for [trace Search][15]. 
+We advise you to rely or at least remap on this attribute as Datadog displays and uses it as a default [Measure][13] for [trace Search][14]. 
 
 ### User related attributes
 
@@ -204,29 +204,28 @@ These attributes are related to the data added by a syslog or a log-shipper agen
 | `syslog.timestamp` | `string` | The log timestamp. Generally remapped to the `date` reserved attribute.       |
 | `syslog.env`       | `string` | The environment name where the source of logs come from.                      |
 
-Some integrations that rely on these are: [Rsyslog][16], [NxLog][17], [Syslog-ng][18], [Fluentd][19], [Logstash][20], etc.
+Some integrations that rely on these are: [Rsyslog][15], [NxLog][16], [Syslog-ng][17], [Fluentd][18], [Logstash][19], etc.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://en.wikipedia.org/wiki/Taxonomy
-[2]: /integrations/apache
-[3]: /integrations/varnish
-[4]: /integrations/amazon_elb
-[5]: /integrations/nginx
-[6]: /integrations/haproxy
-[7]: /integrations/amazon_elb
-[8]: /logs/processing/#url-parser
-[9]: /logs/processing/#useragent-parser
-[10]: /integrations/cassandra
-[11]: /integrations/mysql
-[12]: /integrations/amazon_rds
-[13]: /integrations/elastic
-[14]: /logs/explorer/?tab=measures#setup
-[15]: /tracing/visualization/search
-[16]: /integrations/rsyslog
-[17]: /integrations/nxlog
-[18]: /integrations/syslog_ng
-[19]: /integrations/fluentd
-[20]: /integrations/logstash
+[1]: /integrations/apache
+[2]: /integrations/varnish
+[3]: /integrations/amazon_elb
+[4]: /integrations/nginx
+[5]: /integrations/haproxy
+[6]: /integrations/amazon_elb
+[7]: /logs/processing/processors/#url-parser
+[8]: /logs/processing/processors/#user-agent-parser
+[9]: /integrations/cassandra
+[10]: /integrations/mysql
+[11]: /integrations/amazon_rds
+[12]: /integrations/elastic
+[13]: /logs/explorer/?tab=measures#setup
+[14]: /tracing/visualization/search
+[15]: /integrations/rsyslog
+[16]: /integrations/nxlog
+[17]: /integrations/syslog_ng
+[18]: /integrations/fluentd
+[19]: /integrations/logstash
