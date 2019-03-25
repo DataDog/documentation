@@ -48,7 +48,7 @@ Le check Apache est fourni avec l'Agent. Pour commencer à recueillir vos logs e
 
 ### Configuration
 
-1. Modifiez le fichier `apache.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](collecte-de-logs) Apache.
+1. Modifiez le fichier `apache.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) Apache.
   Consultez le [fichier d'exemple apache.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
 2. [Redémarrez l'Agent][5].
