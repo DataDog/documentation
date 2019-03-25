@@ -29,19 +29,17 @@ A resource is a particular action for a given service (typically an individual e
 Datadog provides out of the box graphs for any given resource:
 
 * Requests - Choose to display:
-    *  The **Total amount of requests** 
+    *  The **Total amount of requests**
     *  The amount of **Requests per second**
 * Latency -  Choose to display:
-    *  The Avg/p75/p90/p95/p99/Max latency of your traced requests 
+    *  The Avg/p75/p90/p95/p99/Max latency of your traced requests
 * Error - Choose to display:
-    * The **Total amount of errors** 
-    * The amount of **Errors per second** 
-    * The **% Error Rate** 
+    * The **Total amount of errors**
+    * The amount of **Errors per second**
+    * The **% Error Rate**
 * Sub-Services: When there are multiple services involved, a fourth graph is available that breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*. For services like *Postgres* or *Redis*, which are "final" operations not calling other service underneath, there will be no Sub-services graph.
 
 {{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Out of the bow resource graphs" responsive="true" style="width:90%;">}}
-
-**Note**: Use the *cogs* icon to display all options available for any given graph.
 
 ### Export to Timeboard
 
@@ -81,7 +79,7 @@ The displayed metrics represent, per span:
 
 ## Traces
 
-Consult the list of traces associated with this resource. Filter/sort this list to see fast/slow and error/non-error traces:  
+Consult the list of traces associated with this resource. Filter/sort this list to see fast/slow and error/non-error traces:
 
 [Refer to the dedicated trace documentation to learn more][3].
 
