@@ -13,11 +13,24 @@ Additional containers are billed at $0.002 per container per hour. In addition, 
 
 Kubernetes creates pause containers to acquire the respective pod’s IP address and set up the network namespace for all other containers that join that pod. Datadog excludes all pause containers from your quota and does not charge for them (requires Agent 5.8+).
 
+### Fargate
+
+Fargate is charged based on the concurrent number of tasks.
+
+- Infrastructure Monitoring 
+  - Pro: $1 / task / month  
+  - Enterprise: $1.50 / task / month 
+- APM
+  - Additional $2 / task / month
+- Log Management: charged with [standard pricing][3]
+
+
 ## Troubleshooting
-For technical questions, contact [Datadog support][3].
+For technical questions, contact [Datadog support][4].
 
 For billing questions, contact your [Customer Success][2] Manager.
 
 [1]: mailto:sales@datadoghq.com
 [2]: mailto:success@datadoghq.com
-[3]: /help
+[3]: https://www.datadoghq.com/pricing
+[4]: /help
