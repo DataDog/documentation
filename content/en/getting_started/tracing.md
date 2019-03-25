@@ -64,7 +64,7 @@ And in `trace-agent.log`:
 ```
 
 ### Environment name
-Name your environment by updating the `datadog.yaml` by setting `env` under `apm_config`, for example:
+Name your environment by updating `datadog.yaml` to set `env` under `apm_config`, for example:
 
 ```
 apm_config:
@@ -75,7 +75,7 @@ apm_config:
 Then, [restart][10] the Datadog Agent:
 
 ```
-sudo service datadog-agent status
+sudo service datadog-agent restart
 ```
 
 
