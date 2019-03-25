@@ -8,7 +8,7 @@ disable_toc: true
 
 | Function      | Description                                                                                | Example                                                    |
 | :----         | :-------                                                                                   | :---------                                                 |
-| `anomalies()` | Overlay a gray band on the metric showing the expected behavior of a series based on past. | `anomalies(avg:<METRIC_NAME>{*}, '<ALGORITHM>', <BOUNDS>)` |
+| `anomalies()` | Overlay a gray band on the metric showing the expected behavior of a series based on past. | `anomalies(METRIC_NAME>{*}, '<ALGORITHM>', <BOUNDS>)` |
 
 The `anomalies()` function has two parameters:
 
@@ -27,7 +27,7 @@ See the [Anomaly Monitor][1] page for more info.
 
 | Function     | Description                | Example                                                                    |
 | :----        | :-------                   | :---------                                                                 |
-| `outliers()` | Highlight outliers series. | `outliers(avg:<METRIC_NAME>{*}, '<ALGORITHM>', <TOLERANCE>, <PERCENTAGE>)` |
+| `outliers()` | Highlight outliers series. | `outliers(<METRIC_NAME>{*}, '<ALGORITHM>', <TOLERANCE>, <PERCENTAGE>)` |
 
 The `outliers()` function has three parameters:
 
@@ -43,7 +43,7 @@ See the [Outlier Monitor][2] page for more info.
 
 | Function     | Description                | Example                                                                    |
 | :----        | :-------                   | :---------                                                                 |
-| `forecast()`  | Predicts where a metric is heading in the future. | `forecast(avg:<METRIC_NAME>{*}, '<ALGORITHM>', <DEVIATIONS>)` |
+| `forecast()`  | Predicts where a metric is heading in the future. | `forecast(<METRIC_NAME>{*}, '<ALGORITHM>', <DEVIATIONS>)` |
 
 The `forecast()` function has two parameters:
 
