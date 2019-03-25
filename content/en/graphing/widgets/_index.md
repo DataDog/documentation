@@ -3,8 +3,8 @@ title: Widgets
 kind: documentation
 disable_toc: true
 aliases:
-    - graphing/dashboards/widgets
-    - graphing/faq/widgets
+    - /graphing/dashboards/widgets
+    - /graphing/faq/widgets
 ---
 
 {{< whatsnext desc="Choose a widget:">}}
