@@ -70,4 +70,4 @@ To delete your Datadog account completely, [contact our support team][13].
 [10]: /account_management/org_settings
 [11]: /integrations/github
 [12]: https://app.datadoghq.com/account/preferences
-[13]: https://docs.datadoghq.com/help
+[13]: /help
