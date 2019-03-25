@@ -1,5 +1,5 @@
 ---
-title:UNIX Agent for AIX
+title: Basic Agent Usage for AIX
 kind: documentation
 further_reading:
 ---
