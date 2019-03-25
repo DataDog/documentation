@@ -54,6 +54,10 @@ You can set your timezone, desktop notifications, and email subscriptions from t
 * Weekly Pagerduty Report
 * Weekly Nagios Report
 
+## Deleting your account
+
+To delete your Datadog account completely, [contact our support team][13].
+
 [1]: https://app.datadoghq.com/account/profile
 [2]: https://gravatar.com
 [3]: https://support.google.com/accounts/answer/19870?hl=en
@@ -66,3 +70,4 @@ You can set your timezone, desktop notifications, and email subscriptions from t
 [10]: /account_management/org_settings
 [11]: /integrations/github
 [12]: https://app.datadoghq.com/account/preferences
+[13]: https://docs.datadoghq.com/help
