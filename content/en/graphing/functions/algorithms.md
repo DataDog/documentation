@@ -45,7 +45,7 @@ See the [Outlier Monitor][2] page for more info.
 | :----        | :-------                   | :---------                                                                 |
 | `forecast()`  | Predicts where a metric is heading in the future. | `forecast(avg:<METRIC_NAME>{*}, '<ALGORITHM>', <DEVIATIONS>)` |
 
-The `forecasts()` function has two parameters:
+The `forecast()` function has two parameters:
 
 * `ALGORITHM`: The forecasting algorithm to use - select `linear` or `seasonal`. For more information about these algorithms, see the [Forecast Algorithms][3] section.
 * `DEVIATIONS`: The width of the range of forecasted values. A value of 1 or 2 should be large enough to forecast most "normal" points accurately.
