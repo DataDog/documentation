@@ -264,11 +264,11 @@ h5{
   & > p > a,
   & > ol li a,
   & > ul li a {
-    //text-decoration:underline;
-    border-bottom: 1px solid $gray-300;
+    text-decoration:none;
+    color: $ddpurple;
     &:hover {
-      color: $ddpurple;
-      border-color: $ddpurple;
+      color: $gray-600;
+      border-bottom: 1px solid $gray-600;
     }
   }
 
@@ -447,7 +447,7 @@ table, .table {
   border: 1px solid $ddgray;
   font-size: 16px;
   a {
-    border-bottom: 1px solid $gray-300;
+    border-bottom: 1px solid $gray-600;
     &:hover {
       border-bottom: 1px solid $ddpurple;
     }

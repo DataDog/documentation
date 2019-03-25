@@ -22,10 +22,11 @@ $ddpurple:    #774DA2;
     margin-bottom:15px
   }
   a {
-    border-bottom: 1px solid #dee2e6;
+    text-decoration:none;
+    color: $ddpurple;
     &:hover {
-      color: $ddpurple;
-      border-color: $ddpurple;
+      color: #6c757d;
+      border-bottom: 1px solid #6c757d;
     }
   }
   .foot {
