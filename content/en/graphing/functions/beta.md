@@ -19,18 +19,6 @@ Beta functions are available by editing the query JSON directly.
 |------------------|------------------------------------------------|------------------------------------------------|
 | `exclude_null()` | Remove N/A groups from your graph or top list. | `exclude_null(avg:system.load.1{*} by {host})` |
 
-## Lowess
-
-| Function   | Description                                                           | Example                        |
-|------------|-----------------------------------------------------------------------|--------------------------------|
-| `lowess()` | Smooth the metric by applying locally-weighted polynomial regression. | `lowess(avg:system.load.1{*})` |
-
-## Piecewise Linear
-
-| Function             | Description                                                          | Example                                  |
-|----------------------|----------------------------------------------------------------------|------------------------------------------|
-| `piecewise_linear()` | Approximate the metric with a piecewise function of linear segments. | `piecewise_linear(avg:system.load.1{*})` |
-
 ## Rolling Average
 
 | Function          | Description                                    | Example                           |
@@ -54,4 +42,3 @@ Beta functions are available by editing the query JSON directly.
     {{< nextlink href="/graphing/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
     {{< nextlink href="/graphing/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
-
