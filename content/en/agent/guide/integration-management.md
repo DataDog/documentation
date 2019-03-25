@@ -33,9 +33,10 @@ For Linux, execute the command as the `dd-agent` user. For Windows, execute the 
 Use the `datadog-agent integration install` command to install a specific version of an official Datadog integration (available on the [integrations-core repository][1]), provided that it is compatible with the version of the Agent. The command does this verification and exits with a failure in case of incompatibilities.
 
 An integration is compatible and installable if:
- 1. The version is newer than the one [shipped with the Agent][2].
- 1. It is compatible with the version of the [datadog_checks_base][3].
- 1. It is not the `datadog_checks_base`. The base check can only be upgraded by upgrading the Agent.
+
+1. The version is newer than the one [shipped with the Agent][2].
+2. It is compatible with the version of the [datadog_checks_base][3] in the installed Agent.
+3. It is not the `datadog_checks_base`. The base check can only be upgraded by upgrading the Agent.
 
 The syntax for this command is `datadog-agent integration install <integration_package_name>==<version>` where `<integration_package_name>` is the name of the integration prefixed with `datadog-`.
 
