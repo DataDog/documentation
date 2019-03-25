@@ -35,6 +35,25 @@ Finally, add the following JVM argument when starting your application in your I
 
 Note that `dd-trace-java`'s artifacts (`dd-java-agent.jar`, `dd-trace-api.jar`, `dd-trace-ot.jar`) support all JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc. If you need support for a particular framework, consider making an [open-source contribution][4].
 
+### Containerized Setup
+
+Once your application is instrumented with the tracing client, by default traces will be sent to `localhost:8126`. Please see the [Agent Setup instructions][] to enable trace collection, below is an example on how to adjust the Agent hostname in your application:
+
+The Java Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+
+```bash
+java -javaagent:<DD-JAVA-AGENT-PATH>.jar -jar <YOUR_APPLICATION_PATH>.jar
+```
+
+You can also use system properties:
+
+```bash
+java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
+     -Ddd.agent.host=$DD_AGENT_HOST \
+     -Ddd.agent.port=$DD_TRACE_AGENT_PORT \
+     -jar <YOUR_APPLICATION_PATH>.jar
+```
+
 ## Automatic Instrumentation
 
 Automatic instrumentation for Java uses the `java-agent` instrumentation capabilities [provided by the JVM][5]. When a `java-agent` is registered, it has the ability to modify class files at load time.
@@ -245,3 +264,4 @@ Java APM has minimal impact on the overhead of an application:
 [6]: http://bytebuddy.net
 [7]: /help
 [8]: https://github.com/DataDog/documentation#outside-contributors
+[9]: agent/apm/#containerized-setup

@@ -1,0 +1,14 @@
+platforms_apm_containers:
+  - name: docker
+    link: "agent/docker/"
+    image: "platform_docker.png"
+  - name: kubernetes
+    link: "agent/kubernetes/"
+    image: "platform_kubernetes.png"
+  - name: ecs
+    link: "integrations/amazon_ecs/#metric-collection"
+    image: "platform_macosx.png"
+  - name: fargate
+    link: "integrations/ecs_fargate/#agent-setup"
+    image: "platform_redhat.png"
+  

@@ -8,38 +8,37 @@ further_reading:
   text: "Introduction to Application Performance Monitoring"
 ---
 
-## Setup
+Datadog APM provides you with deep insight into your application's performance-from automatically generated dashboards monitoring key metrics, such as request volume and latency, to detailed traces of individual requests-side by side with your logs and infrastructure monitoring.
+
+{{< whatsnext desc="Setup">}}
     {{< nextlink href="/agent/apm/" >}}Enable APM in the Datadog Agent{{< /nextlink >}}
     {{< nextlink href="/tracing/languages" >}}Instrument Your Application{{< /nextlink >}}
     {{< nextlink href="/agent/apm#enable-trace-search-analytics" >}}Enable Trace Search & Analytics{{< /nextlink >}}
+{{< /whatsnext >}}
 
-## Enrich Tracing
-    {{< nextlink href="/agent/apm" >}}Connect Logs & Traces{{< /nextlink >}}
-    {{< nextlink href="/tracing/languages" >}}Adding Unique Metadata to Spans{{< /nextlink >}}
-    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Runtime Metrics{{< /nextlink >}}
-    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Opentracing{{< /nextlink >}}
-    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Manual Instrumentation{{< /nextlink >}}
+{{< whatsnext desc="Enrich Tracing">}}
+    {{< nextlink href="/tracing/advanced_usage/correlate-traces-and-logs" >}}Connect Logs & Traces{{< /nextlink >}}
+    {{< nextlink href="/tracing/advanced_usage/#custom-tagging" >}}Adding Unique Metadata to Spans{{< /nextlink >}}
+    {{< nextlink href="/tracing/advanced_usage#runtime-metrics" >}}Runtime Metrics{{< /nextlink >}}
+    {{< nextlink href="/tracing/advanced_usage/#opentracing" >}}Opentracing{{< /nextlink >}}
+    {{< nextlink href="/tracing" >}}Manual Instrumentation{{< /nextlink >}}
+    {{< nextlink href="/tracing" >}}Setting Primary Tags to Group Services{{< /nextlink >}}
+{{< /whatsnext >}}
 
-## Use the APM UI
+{{< whatsnext desc="Use the APM UI">}}
     {{< nextlink href="/agent/apm" >}}Service List{{< /nextlink >}}
     {{< nextlink href="/tracing/languages" >}}Serice Page{{< /nextlink >}}
-    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Resource Page{{< /nextlink >}}
-    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Trace View{{< /nextlink >}}
-    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Trace Search{{< /nextlink >}}
-    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Trace Analytics{{< /nextlink >}}
-    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Service Map{{< /nextlink >}}
+    {{< nextlink href="/tracing" >}}Resource Page{{< /nextlink >}}
+    {{< nextlink href="/tracing" >}}Trace View{{< /nextlink >}}
+    {{< nextlink href="/tracing" >}}Trace Search{{< /nextlink >}}
+    {{< nextlink href="/tracing" >}}Trace Analytics{{< /nextlink >}}
+    {{< nextlink href="/tracing" >}}Service Map{{< /nextlink >}}
+{{< /whatsnext >}}
 
-## Proxy Instrumentation
-    {{< nextlink href="/agent/apm" >}}Envoy{{< /nextlink >}}
-    {{< nextlink href="/tracing/languages" >}}Nginx{{< /nextlink >}}
-
-## Guides
+{{< whatsnext desc="Guides">}}
     {{< nextlink href="/agent/apm" >}}How Distributed Tracing Works{{< /nextlink >}}
     {{< nextlink href="/tracing/languages" >}}Monitoring APM{< /nextlink >}}
-    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Trace Metrics{{< /nextlink >}}
+    {{< nextlink href="/tracing" >}}Trace Metrics{{< /nextlink >}}
+{{< /whatsnext >}}
 
-## Further Reading
 
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/apm/home
