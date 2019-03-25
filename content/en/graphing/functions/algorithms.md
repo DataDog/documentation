@@ -39,15 +39,15 @@ The `outliers()` function has three parameters:
 
 See the [Outlier Monitor][2] page for more info.
 
-## Forcast
+## Forecast
 
 | Function     | Description                | Example                                                                    |
 | :----        | :-------                   | :---------                                                                 |
-| `forcast()`  | Predicts where a metric is heading in the future. | `forcast(avg:<METRIC_NAME>{*}, '<FORECAST>', <DEVIATIONS>` |
+| `forecast()`  | Predicts where a metric is heading in the future. | `forecast(avg:<METRIC_NAME>{*}, '<ALGORITHM>', <DEVIATIONS>)` |
 
-The `forcasts()` function has two parameters:
+The `forecasts()` function has two parameters:
 
-* `FORECAST`: The outliers algorithm to use - select `linear` or `seasonal`. For more information about these algorithms, see the [Forcast Algorithms][3] section.
+* `ALGORITHM`: The forecasting algorithm to use - select `linear` or `seasonal`. For more information about these algorithms, see the [Forecast Algorithms][3] section.
 * `DEVIATIONS`: The width of the range of forecasted values. A value of 1 or 2 should be large enough to forecast most "normal" points accurately.
 
 A number of the graphing options disappear, as forecasts have a unique visualization. After successfully adding **Forecast**, your editor should show something like this:
