@@ -7,7 +7,7 @@ further_reading:
   text: "Learn more about the Datadog Agent"
 ---
 
-Follow the steps below to install the Datadog Agent on an EC2 instance with AWS Systems Manager.
+Follow the steps below to install the Datadog Agent on an EC2 instance with AWS Systems Manager. **Note**: The EC2 step is for a single manual instance. The other steps can be used for multiple instances.
 
 ### EC2 instance
 * Create an [EC2 IAM Role][1] with the `AmazonEC2RoleforSSM` prebuilt policy or update your current [AWS Datadog policy][2].
