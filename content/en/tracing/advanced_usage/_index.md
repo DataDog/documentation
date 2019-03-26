@@ -146,7 +146,7 @@ Datadog.configure { |c| c.analytics_enabled = true }
 - `true` enables analytics for all web frameworks.
 - `false` or `nil` disables analytics, except for integrations that explicitly enable it. (Default)
 
-After enabling, the trace search & analytics UI will now populate; you can get started [here][1].
+After enabling, the [Trace Search & Analytics][1] page populates.
 
 ### Configure By Integration
 
