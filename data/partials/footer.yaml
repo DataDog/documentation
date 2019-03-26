@@ -2,25 +2,28 @@ col1:
   - name: product
     link: "https://www.datadoghq.com/product/"
     title: "Features"
+  - name: integrations
+    link: "https://www.datadoghq.com/product/integrations/"
+    title: "Integrations"
   - name: apm
     link: "https://www.datadoghq.com/apm/"
     title: "APM"
   - name: logs
     link: "https://www.datadoghq.com/log-management/"
     title: "Log Management"
-  - name: integrations
-    link: "https://www.datadoghq.com/product/integrations/"
-    title: "Integrations"
+  - name: dashboards
+    link: "https://www.datadoghq.com/dashboarding/"
+    title: "Dashboards"
+  - name: synthetics
+    link: "https://www.datadoghq.com/synthetics/"
+    title: "Synthetics"
   - name: alerts
     link: "https://www.datadoghq.com/alerts/"
     title: "Alerts"
-  - name: api
-    link: "api/"
-    title: "API"
+col2:
   - name: pricing
     link: "https://www.datadoghq.com/pricing/"
     title: "Pricing"
-col2:
   - name: documentation
     link: "https://docs.datadoghq.com/"
     title: "Documentation"
@@ -33,6 +36,9 @@ col2:
   - name: security
     link: "https://www.datadoghq.com/security/"
     title: "Security"
+  - name: api
+    link: "api/"
+    title: "API"
 col3:
   - name: contact
     link: "https://www.datadoghq.com/about/contact/"
@@ -52,6 +58,9 @@ col3:
   - name: legal
     link: "https://www.datadoghq.com/legal/"
     title: "Legal"
+  - name: analyst
+    link: "https://www.datadoghq.com/about/analyst/"
+    title: "Analyst Reports"
 col4:
   - name: blog
     link: "https://www.datadoghq.com/blog/"

@@ -50,7 +50,7 @@ $ dpkg -i datadog-php-tracer.deb
 $ apk add datadog-php-tracer.apk --allow-untrusted
 ```
 
-Visit a tracing-enabled endpoint of your application and view the [APM UI][8] to see the traces.
+Restart PHP (PHP-FPM or the Apache SAPI) and then visit a tracing-enabled endpoint of your application. View the [APM UI][8] to see the traces.
 
 **Note**: It might take a few minutes before traces appear in the UI.
 
@@ -92,7 +92,7 @@ If the web framework that you use is not listed below, you can still see traces 
 | Module         | Versions      | Support Type    |
 |:---------------|:--------------|:----------------|
 | Laravel        | 4.2, 5.x      | Fully Supported |
-| Symfony        | 3.3, 3.4, 4.x | Fully Supported |
+| Symfony        | 2.x, 3.3, 3.4, 4.x | Fully Supported |
 | Zend Framework | 1.12          | Fully Supported |
 | CakePHP        | 1.3, 2.8, 3.x | _Coming Soon_   |
 | CodeIgniter    | 2, 3          | _Coming Soon_   |

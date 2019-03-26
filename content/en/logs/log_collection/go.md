@@ -4,6 +4,9 @@ kind: documentation
 aliases:
   - /logs/languages/go
 further_reading:
+- link: "https://www.datadoghq.com/blog/go-logging/"
+  tag: "Blog"
+  text: "How to collect, standardize, and centralize Golang logs"
 - link: "logs/processing"
   tag: "Documentation"
   text: "Learn how to process your logs"

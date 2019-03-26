@@ -199,6 +199,8 @@ main:
 
       - name: "Widgets"
         url: "graphing/widgets/"
+      - name: "Guides"
+        url: "graphing/guide"
      # - #   name: "FAQ"
      #   url: "graphing/faq/"
      #   #   parent: menu_references_graphing
@@ -259,6 +261,8 @@ main:
         url: "monitors/downtimes/"
       - name: "Uptime Widget"
         url: "monitors/monitor_uptime_widget/"
+      - name: "Guides"
+        url: "monitors/guide"
       #- #  name: "FAQ"
       #  url: "monitors/faq/"
       #  #  parent: menu_references_monitoring
@@ -374,6 +378,9 @@ main:
       - name: "Community Libraries"
         url: "developers/libraries/#apm-tracing-client-libraries"
 
+      - name: "Guides"
+        url: "tracing/guide"
+
       #- #  name: "FAQ"
       #  url: "tracing/faq/"
       #  #  parent: menu_references_tracing
@@ -479,6 +486,10 @@ main:
         url: "synthetics/api_test"
       - name: "Browser Tests"
         url: "synthetics/browser_test"
+      - name: "APM Integration"
+        url: "synthetics/apm"
+      - name: "Identify Synthetics Bots"
+        url: "synthetics/identify_synthetics_bots"
 
   # DEVELOPERS
   - name: "Developer Tools"

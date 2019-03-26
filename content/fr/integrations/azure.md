@@ -12,10 +12,13 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure/'
 further_reading:
   - link: 'https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms/'
     tag: Blog
-    text: Comment surveiller des machines virtuelles Azure de Microsoft
+    text: Comment surveiller des machines virtuelles Azure Microsoft
   - link: 'https://docs.datadoghq.com/integrations/faq/azure-troubleshooting/'
     tag: FAQ
     text: Dépannage Azure
+  - link: 'https://docs.datadoghq.com/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/'
+    tag: FAQ
+    text: "Pourquoi installer l'Agent Datadog sur mes instances dans le cloud\_?"
 git_integration_title: azure
 has_logo: true
 integration_title: Microsoft Azure
@@ -31,9 +34,9 @@ version: '1.0'
 
 Connectez-vous à Microsoft Azure pour :
 
-* Obtenez des métriques sur des machines virtuelles Azure sans avoir nécessairement à installer l'Agent.
-* Appliquez un tag à vos machines virtuelles Azure comportant des informations spécifiques à Azure (p. ex, la localisation).
-* Recueillez les métriques d'autres services : Application Gateway, App Service (Web et mobile), Batch Service, Event Hubs, IoT Hub, Logic App, Redis Cache, Server Farm (plan App Service), SQL Database, SQL Elastic Pool, Virtual Machine Scale Set, et bien d'autres encore.
+* Obtenir des métriques sur des machines virtuelles Azure sans avoir nécessairement à installer l'Agent
+* Appliquer un tag à vos machines virtuelles Azure comportant des informations spécifiques à Azure (p. ex, la localisation)
+* Recueillir des métriques d'autres services : Application Gateway, App Service (Web et mobile), Batch Service, Event Hubs, IoT Hub, Logic App, Redis Cache, Server Farm (plan App Service), SQL Database, SQL Elastic Pool, Virtual Machine Scale Set, et bien d'autres encore.
 
 Les intégrations connexes comprennent :
 
@@ -51,7 +54,7 @@ Les intégrations connexes comprennent :
 | [Machine virtuelle][16]           | Service de gestion de machines virtuelles                                                   |
 | [Virtual Machine Scale Set][17] | Déploiement, gestion et mise à l'échelle automatique d'un ensemble de machines virtuelles identiques                                 |
 
-## Collecte de métriques
+## Implémentation
 ### Installation
 
 Intégrez votre compte Microsoft Azure à Datadog à l'aide de l'outil d'interface de ligne de commande Azure ou du portail Azure. Cette méthode d'intégration fonctionne automatiquement sur tous les clouds Azure : Public, Chine, Germany et Government. Suivez les instructions ci-dessous afin que Datadog détecte automatiquement le type de cloud que vous utilisez pour terminer l'intégration.
@@ -185,55 +188,55 @@ azure role assignment create --objectId <ID_OBJET> --roleName Reader --subscript
 
 1. Accédez au site [portal.azure.com][2].
 2. Dans la barre latérale de gauche, sélectionnez **Azure Active Directory**.
-3. Sous **Properties**, collez la valeur de **Directory ID** :
+3. Sous **Propriétés**, collez la valeur de **ID de répertoire** :
 
     {{< img src="integrations/azure/Azure_tenant_name.png" alt="Nom de locataire Azure" responsive="true" popup="true" style="width:70%;" >}}
 
-4. Collez la valeur `Directory ID` dans le [carré d'intégration Azure de Datadog][1], sous **Tenant name/ID**.
+4. Collez la valeur `ID de répertoire` dans le [carré d'intégration Azure de Datadog][1], sous **Tenant name/ID**.
 
     {{< img src="integrations/azure/tenant_name_form.png" alt="formulaire du nom de locataire" responsive="true" popup="true" style="width:70%;" >}}
 
 ##### Créer l'application Web
 
-1. Sous **Azure Active Directory**, accédez à **App Registrations** et cliquez sur **New application registration** :
+1. Sous **Azure Active Directory**, accédez à **Inscriptions d'applications** et cliquez sur **Nouvelle inscription d'application** :
 
     {{< img src="integrations/azure/Azure_create_ad.png" alt="Création d'app Azure" responsive="true" popup="true" style="width:70%;" >}}
 
-2. Saisissez les informations suivantes et cliquez sur le bouton **Create**. **Remarque** : le nom et l'URL de connexion ne sont pas utilisés et sont seulement requis dans le cadre du processus de configuration. 
-  * Name : `Datadog Auth`
-  * Application Type : `Web app / API`
-  * Sign-on URL : `https://app.datadoghq.com`
+2. Saisissez les informations suivantes et cliquez sur le bouton **Créer**. **Remarque** : le nom et l'URL de connexion ne sont pas utilisés et sont seulement requis dans le cadre du processus de configuration. 
+  * Nom : `Datadog Auth`
+  * Type d'application : `Web app / API`
+  * URL de connexion : `https://app.datadoghq.com`
 
 ##### Donner des autorisations de lecture à l'application
 
-1. Accédez à la section **Subscriptions** en utilisant la barre de recherche ou depuis la barre latérale de gauche :
+1. Accédez à la section **Abonnements** en utilisant la barre de recherche ou depuis la barre latérale de gauche :
 
     {{< img src="integrations/azure/subscriptions_icon.png" alt="icône abonnements" responsive="true" popup="true" style="width:25%">}}
 
 2. Cliquez sur l'abonnement que vous souhaitez surveiller.
-3. Sélectionnez **Access control (IAM)** dans le menu d'abonnement, puis **Add** -> **Add role assignment** :
+3. Sélectionnez **Contrôle d'accès (IAM)** dans le menu d'abonnement, puis **Ajouter** -> **Ajouter une attribution de rôle** :
 
-    {{< img src="integrations/azure/azure-add-role.png" alt="Add Role Assignment" responsive="true" popup="true" style="width:80%">}}
+    {{< img src="integrations/azure/azure-add-role.png" alt="Ajouter une attribution de rôle" responsive="true" popup="true" style="width:80%">}}
 
-4. Pour **Role**, sélectionnez *Reader*. Sous **Select**, choisissez le nom de l'application que vous avez créée :
+4. Pour **Rôle**, sélectionnez *Lecteur*. Sous **Sélectionner**, choisissez le nom de l'application que vous avez créée :
 
     {{< img src="integrations/azure/azure-select-role-app.png" alt="Sélection du rôle et de l'app" responsive="true" popup="true" style="width:80%">}}
 
-5. Cliquez sur **Save**.
+5. Cliquez sur **Enregistreer**.
 
 **Remarque** : les diagnostics doivent être activés pour que les machines virtuelles déployées avec ARM puissent recueillir des métriques. Consultez la section [Activer les diagnostics][3].
 
 ##### Terminer l'intégration
 
-1. Sous **App Registrations**, sélectionnez l'app que vous avez créée, copiez la valeur **Application ID**, puis collez-la dans le [carré d'intégration Azure de Datadog][1], sous **Client ID**.
+1. Sous **Inscriptions d'applications**, sélectionnez l'app que vous avez créée, copiez la valeur **ID d'application**, puis collez-la dans le [carré d'intégration Azure de Datadog][1], sous **ID client**.
 
-    {{< img src="integrations/azure/Azure_client_id.png" alt="id du client azure" responsive="true" popup="true" style="width:70%;" >}}
+    {{< img src="integrations/azure/Azure_client_id.png" alt="id client azure" responsive="true" popup="true" style="width:70%;" >}}
 
-    {{< img src="integrations/azure/client_id_form.png" alt="formulaire id du client" responsive="true" popup="true" style="width:70%;" >}}
+    {{< img src="integrations/azure/client_id_form.png" alt="formulaire id client" responsive="true" popup="true" style="width:70%;" >}}
 
-2. Pour cette même app, accédez à **Settings** -> **Keys**, ajoutez une clé portant le nom *Client Secret* et cliquez sur **Save** :
+2. Pour cette même app, accédez à **Paramètres** -> **Clés**, ajoutez une clé portant le nom *Secret client* et cliquez sur **Enregistrer** :
 
-    {{< img src="integrations/azure/Azure_client_secret.png" alt="client secret azure" responsive="true" popup="true" style="width:70%">}}
+    {{< img src="integrations/azure/Azure_client_secret.png" alt="secret client azure" responsive="true" popup="true" style="width:70%">}}
 
 3. Une fois la valeur de la clé indiquée, collez-la dans le [carré d'intégration Azure de Datadog][1], sous **Client Secret**, puis cliquez sur **Install Integration** ou **Update Configuration**.
 
@@ -241,20 +244,24 @@ azure role assignment create --objectId <ID_OBJET> --roleName Reader --subscript
 
 ### Configuration
 
-Vous pouvez choisir de limiter le nombre de machines virtuelles qui sont transmises à Datadog en ajoutant des tags sous **Optionally filter to VMs with tag** :
+Vous pouvez choisir de limiter le nombre de machines virtuelles Azure qui sont transmises à Datadog en ajoutant des tags sous **Optionally filter to VMs with tag** :
 
 {{< img src="integrations/azure/filter_form.png" alt="formulaire_filtre" responsive="true" popup="true" style="width:70%">}}
 
-Cette liste de tags séparés par des virgules au format `<KEY>:<VALUE>` définit un filtre utilisé lors de la collecte de métriques. Les wildcards, tels que `?` (pour un seul caractère) et `*` (pour plusieurs caractères), peuvent également être utilisés. Seuils les machines virtuelles qui correspondent à l'un des tags définis sont importées dans Datadog. Les autres machines virtuelles sont ignorées. Ajoutez `!` devant un tag pour exclure les machines virtuelles correspond à ce tag. Par exemple : 
+Cette liste de tags séparés par des virgules au format `<KEY>:<VALUE>` définit un filtre utilisé lors de la collecte de métriques. Les wildcards, tels que `?` (pour un seul caractère) et `*` (pour plusieurs caractères), peuvent également être utilisés. Seules les machines virtuelles qui correspondent à l'un des tags définis sont importées dans Datadog. Les autres machines virtuelles sont ignorées. Ajoutez `!` devant un tag pour exclure les machines virtuelles correspond à ce tag. Par exemple : 
 
 ```
 datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ```
 
-### Déployer les Agents
+### Collecte de métriques
+
+Une fois le carré d'intégration configuré, les métriques sont recueillies par un crawler. Pour recueillir des métriques supplémentaires, déployez l'Agent Datadog sur vos machines virtuelles :
+
+#### Installation de l'Agent
 
 1. Dans le [portail Azure][2], accédez à *Machine virtuelle -> Paramètres -> Extensions -> Ajouter* et sélectionnez l'Agent Datadog.
-2. Cliquez sur **Create**, saisissez votre [clé d'API Datadog][37] et cliquez sur **OK**.
+2. Cliquez sur **Créer**, saisissez votre [clé d'API Datadog][37] et cliquez sur **OK**.
 
 Pour effectuer l'installation de l'Agent en fonction du système d'exploitation ou de l'outil CICD, consultez les [instructions d'installation de l'Agent Datadog][18] au sein de l'application.
 
@@ -266,7 +273,7 @@ Accédez au [dashboard par défaut des machines virtuelles Azure][5] pour visual
 
 {{< img src="integrations/azure/azure_vm_screenboard.png" alt="Screenboard machines virtuelles azure" responsive="true" popup="true" style="width:70%">}}
 
-## Collecte de logs
+### Collecte de logs
 
 Pour recueillir des logs à partir de l'un de vos services Azure, suivez cette méthode globale :
 
@@ -274,7 +281,7 @@ Pour recueillir des logs à partir de l'un de vos services Azure, suivez cette m
 2. [Configurez la fonction Datadog/Azure](#creer-une-fonction-azure) qui transmet les logs depuis votre Event Hub vers Datadog.
 3. [Configurez vos services Azure pour transférer leurs logs au Event Hub][34].
 
-### Créer une fonction Azure
+#### Créer une fonction Azure
 
 Si vous n'avez jamais utilisé de fonction Azure, consultez la section [Créer votre première fonction à l'aide du portail Azure][35].
 
@@ -286,18 +293,18 @@ Si vous n'avez jamais utilisé de fonction Azure, consultez la section [Créer v
 
     {{< img src="integrations/azure/event_hub_selector.png" alt="Sélecteur Event hub" responsive="true" style="width:70%">}}
 
-3. Nommez votre fonction sous le champ **Name**.
-4. Sélectionnez ou ajoutez votre **Event Hub connection**.
-5. Sélectionnez le **Event Hub consumer group** et le **Event Hub Name** à partir desquels vous souhaitez récupérer des logs.
-6. Cliquez sur **Create** :
+3. Nommez votre fonction sous le champ **Nom**.
+4. Sélectionnez ou ajoutez votre **Connexion de l'Event Hub**.
+5. Sélectionnez le **Groupe de consommateurs Event Hub** et le **Nom de l'Event Hub** à partir desquels vous souhaitez récupérer des logs.
+6. Cliquez sur **Créer** :
 
     {{< img src="integrations/azure/azure-new-function.png" alt="Nouvelle fonction" responsive="true" style="width:35%">}}
 
-7. Créez un fichier `index.js` et ajoutez le [code Datadog/Fonction Azure][36] (remplacez `<DATADOG_API_KEY>` par votre [clé d'API Datadog][37]).
+7. Créez un fichier `index.js` et ajoutez le [code de la fonction Datadog/Azure][36] (remplacez `<DATADOG_API_KEY>` par votre [clé d'API Datadog][37]).
 8. Enregistrez la fonction.
-9. Pour **Integrate**, définissez **Event Parameter Name** sur `eventHubMessages`, et cliquez sur **Save**.
+9. Pour **Intégrer**, définissez **Nom du paramètre d'événement** sur `eventHubMessages`, et cliquez sur **Save**.
 
-    {{< img src="integrations/azure/azure-trigger-integrate.png" alt="Déclencheur Integrate" responsive="true" style="width:70%">}}
+    {{< img src="integrations/azure/azure-trigger-integrate.png" alt="Déclencheur Intégrer" responsive="true" style="width:70%">}}
 
 10. Vérifiez que vos logs sont présents dans le [Log Explorer de Datadog][38] pour confirmer que la fonction est bien configurée.
 

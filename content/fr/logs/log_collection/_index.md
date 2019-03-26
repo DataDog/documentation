@@ -29,7 +29,7 @@ La collecte de logs nécessite la version >= 6.0. Les anciennes versions de l'Ag
 
 Si vous n'utilisez pas encore l'Agent, suivez les [instructions d'installation de l'Agent][1].
 
-La collecte des logs est **désactivée** par défaut dans l'agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+La collecte des logs est **désactivée** par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
 ```
 logs_enabled: true
@@ -57,7 +57,7 @@ L'Agent Datadog v6 peut recueillir des logs et les transférer à Datadog à par
 4. [Redémarrez votre Agent][3] pour prendre en compte cette nouvelle configuration.
 5. [Lancez la sous-commande status de l'Agent][4] pour vérifier si votre configuration personnalisée est correcte.
 
-Voici des exemples de configuration de collecte de logs personnalisée ci-dessous :
+Voici des exemples de configurations de collecte de logs personnalisée ci-dessous :
 
 {{< tabs >}}
 {{% tab "Suivre des fichiers existants" %}}
@@ -318,6 +318,41 @@ logs:
 
 [Consultez la documentation relative au proxy de l'Agent][8] pour apprendre à transférer vos logs avec un proxy.
 
+### Règles globales de traitement
+
+Depuis la version 6.10 de l'Agent Datadog, les règles `exclude_at_match`, `include_at_match` et `mask_sequences` peuvent être définies de façon globale.
+
+{{< tabs >}}
+{{% tab "Fichiers de configuration" %}}
+
+Dans le fichier `datadog.yaml` : 
+
+```
+logs_config:
+  processing_rules:
+     - type: exclude_at_match
+       name: exclude_healthcheck
+       pattern: healtcheck
+     - type: mask_sequences
+       name: mask_user_email
+       pattern: \w+@datadoghq.com
+       replace_placeholder: "EMAIL_MASQUÉ"
+```
+{{% /tab %}}
+{{% tab "Variable d'environnement" %}}
+
+Le paramètre `DD_LOGS_CONFIG_PROCESSING_RULES` peut être utilisé pour configurer des règles globales de traitement :
+
+```
+DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "EMAIL_MASQUÉ", "pattern" : "\\w+@datadoghq.com"}]'
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+Ces règles de traitement s'appliquent à tous les logs recueillis par l'Agent Datadog.
+
+**Remarque** : l'Agent Datadog n'initie pas le processus de collecte de logs en cas de problème de format dans les règles globales de traitement. Exécutez la [commande status][9] pour diagnostiquer un problème.
+
 ## Comment tirer le meilleur parti de vos logs d'application
 
 Lorsque vous enregistrez des traces de pile, des attributs spécifiques disposent d'un affichage de l'interface utilisateur dédié au sein de votre application Datadog, comme le nom de l'enregistreur, le thread actuel, le type d'erreur et la trace de pile.
@@ -334,7 +369,7 @@ Pour activer ces fonctionnalités, utilisez les noms d'attribut suivants :
 | `error.message`      | Le message d'erreur contenu dans la trace de pile                       |
 | `error.kind`         | Le type d'erreur (comme « Exception », « OSError », etc.) |
 
-**Remarque** : par défaut, les pipelines des intégrations tentent de remapper les paramètres par défaut de la bibliothèque de création de logs sur ces attributs spécifiques et analysent les traces ou tracebacks de pile afin d'extraire automatiquement `error.message` et `error.kind`.
+**Remarque** : par défaut, les pipelines des intégrations tentent de remapper les paramètres par défaut de la bibliothèque de journalisation sur ces attributs spécifiques et analysent les traces ou tracebacks de pile afin d'extraire automatiquement `error.message` et `error.kind`.
 
 ## Envoyer vos logs d'application au format JSON
 
@@ -357,3 +392,4 @@ Datadog analyse automatiquement les logs au format JSON. C'est pour cela que si 
 [6]: /fr/developers/metrics/custom_metrics
 [7]: /fr/tagging
 [8]: /fr/agent/proxy/#proxy-for-logs
+[9]: https://docs.datadoghq.com/fr/agent/basic_agent_usage/windows/?tab=agentv6#agent-commands

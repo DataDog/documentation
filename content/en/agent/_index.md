@@ -40,14 +40,14 @@ The Datadog Agent is software that runs on your hosts. It collects events and me
 
 Agent v6 is a complete rewrite in Go of the Agent v5. V6 offers better performances, smaller footprint, and more features. It is the default Datadog Agent (v5 is no longer in active development).
 
-Agent v6 is a composed of a main process responsible for collecting infrastructure metrics, logs, and receiving DogStatsD metrics. The main components to this process are:
+Agent v6 is a composed of a main process responsible for collecting infrastructure metrics, logs, and receiving [DogStatsD metrics][1]. The main components to this process are:
 
 * The Collector is in charge of running checks and collecting metrics.
 * The Forwarder sends payloads to Datadog.
 
 Two optional processes are spawned by the Agent if enabled in the `datadog.yaml` configuration file:
 
-* The APM Agent is a process to collect traces (enabled by default).
+* The APM Agent is a process to collect [traces][2] (enabled by default).
 * The Process Agent is a process to collect live process information. By default, it only collects available containers, otherwise it is disabled.
 
 On Windows the services are listed as:
@@ -58,7 +58,7 @@ On Windows the services are listed as:
 | datadog-trace-agent   | “Datadog Trace Agent”   |
 | datadog-process-agent | "Datadog Process Agent” |
 
-By default the Agent binds 3 ports on Linux and 4 on Windows and OSX:
+By default the Agent binds 3 [ports][3] on Linux and 4 on Windows and OSX:
 
 | Port | Description                                                                                 |
 |------|---------------------------------------------------------------------------------------------|
@@ -68,19 +68,22 @@ By default the Agent binds 3 ports on Linux and 4 on Windows and OSX:
 | 8125 | Used for the DogStatsD server to receive external metrics.                                  |
 
 ### The Collector
-The collector gathers all standard metrics every 15 seconds. Agent v6 embed a Python2.7 interpreter to run integrations and [custom checks][1].
+The collector gathers all standard metrics every 15 seconds. Agent v6 embed a Python2.7 interpreter to run integrations and [custom checks][4].
 
 ### The Forwarder
 
 The Agent forwarder send metrics over HTTPS to Datadog. Buffering prevents network splits from affecting metric reporting. Metrics are buffered in memory until a limit in size or number of outstanding send requests are reached. Afterwards, the oldest metrics are discarded to keep the forwarder's memory footprint manageable. Logs are sent over an SSL-encrypted TCP connection to Datadog.
 
 ### DogStatsD
-In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][2] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP or unix socket, thus allowing custom code to be instrumented without adding latency to the mix. Learn more about [DogStatsD][3].
+In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][5] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP or unix socket, thus allowing custom code to be instrumented without adding latency to the mix. Learn more about [DogStatsD][6].
 
 
-[1]: /developers/write_agent_check/?tab=agentv6
-[2]: https://github.com/etsy/statsd
-[3]: /developers/dogstatsd
+[1]: /developers/dogstatsd/data_types/#metrics
+[2]: /tracing/guide/terminology
+[3]: /agent/guide/network/?tab=agentv6#open-ports
+[4]: /developers/write_agent_check/?tab=agentv6
+[5]: https://github.com/etsy/statsd
+[6]: /developers/dogstatsd
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -98,7 +101,7 @@ Agent v5 is composed of four major components, each written in Python running as
 ### Supervision, Privileges, and Network Ports
 A SupervisorD master process runs as the `dd-agent` user, and all forked subprocesses run as the same user. This also applies to any system call (`iostat`/`netstat`) initiated by the Datadog Agent. The Agent configuration resides at `/etc/dd-agent/datadog.conf` and `/etc/dd-agent/conf.d`. All configuration must be readable by `dd-agent`. The recommended permissions are 0600 since configuration files contain your API key and other credentials needed to access metrics.
 
-The following ports are open for operations:
+The following [ports][3] are open for operations:
 
 | Port      | Description                         |
 |-----------|-------------------------------------|
@@ -106,7 +109,8 @@ The following ports are open for operations:
 | tcp/17124 | The forwarder for graphite support  |
 | udp/8125  | DogStatsD                           |
 
-All listening processes are bound by default to `127.0.0.1` and/or `::1` on v3.4.1+ of the Agent. In earlier versions, they were bound to `0.0.0.0` (all interfaces). For information on running the Agent through a proxy see [Agent proxy configuration][3]. For information on IP ranges to allow, see [Network Traffic][4].
+
+All listening processes are bound by default to `127.0.0.1` and/or `::1` on v3.4.1+ of the Agent. In earlier versions, they were bound to `0.0.0.0` (all interfaces). For information on running the Agent through a proxy see [Agent proxy configuration][4]. For information on IP ranges to allow, see [Network Traffic][5]. 
 
 The recommended number of open file descriptors is 1024. You can see this value with the command `ulimit -a`. If you have a hard limitation below the recommended value, for example Shell Fork Bomb Protection, one solution is to add the following in `superisord.conf`:
 
@@ -116,22 +120,23 @@ minfds = 100  # Your hard limit
 ```
 
 ### The Collector
-The collector gathers all standard metrics every 15 seconds. It also supports the execution of python-based, user-provided checks, stored in `/etc/dd-agent/checks.d`. User-provided checks must inherit from the AgentCheck abstract class defined in `checks/init.py`. See [Writing a custom Agent check][5] for more details.
+The collector gathers all standard metrics every 15 seconds. It also supports the execution of python-based, user-provided checks, stored in `/etc/dd-agent/checks.d`. User-provided checks must inherit from the AgentCheck abstract class defined in `checks/init.py`. See [Writing a custom Agent check][6] for more details.
 
 ### The Forwarder
 The Agent forwarder listens for incoming requests over HTTP to send metrics over HTTPS to Datadog. Buffering prevents network splits from affecting metric reporting. Metrics are buffered in memory until a limit in size or number of outstanding send requests are reached. Afterwards, the oldest metrics are discarded to keep the forwarder's memory footprint manageable.
 
 ### DogStatsD
-DogStatsD is a python implementation of [Etsy's StatsD][6] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP, thus allowing custom code to be instrumented without adding latency to the mix. Learn more about [DogStatsD][7].
+DogStatsD is a python implementation of [Etsy's StatsD][7] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP, thus allowing custom code to be instrumented without adding latency to the mix. Learn more about [DogStatsD][8].
 
 
 [1]: /integrations
 [2]: /developers/metrics/custom_metrics
-[3]: /agent/proxy/?tab=agentv5
-[4]: /agent/faq/network
-[5]: /developers/write_agent_check/?tab=agentv5
-[6]: https://github.com/etsy/statsd
-[7]: /developers/dogstatsd
+[3]: /agent/guide/network/?tab=agentv5v4#open-ports
+[4]: /agent/proxy/?tab=agentv5
+[5]: /agent/faq/network
+[6]: /developers/write_agent_check/?tab=agentv5
+[7]: https://github.com/etsy/statsd
+[8]: /developers/dogstatsd
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -193,19 +198,19 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
-| OS                                | Supported versions                                                         |
-|-----------------------------------|----------------------------------------------------------------------------|
-| [Amazon][1]                       | Amazon Linux 2                                                             |
-| [Debian x86_64][2]                | Debian 7 (wheezy) and above (we support SysVinit in agent 6.6.0 and above) |
-| [Ubuntu x86_64][3]                | Ubuntu 14.04 and above                                                     |
-| [RedHat/CentOS x86_64][4]         | RedHat/CentOS 6 and above                                                  |
-| [Docker][5]                       | Version 1.12 and higher                                                    |
-| [Kubernetes][6]                   | Version 1.3 and higher                                                     |
-| [SUSE Enterprise Linux x86_64][7] | SUSE 11 SP4 and above (we do not support SysVinit)                         |
-| [Fedora x86_64][8]                | Fedora 26 and above                                                        |
-| [macOS][9]                        | macOS 10.12 and above                                                      |
-| [Windows server 64-bit][10]       | Windows server 2008r2 or above                                             |
-| [Windows 64-bit][10]              | Windows 7 or above                                                         |
+| OS                                | Supported versions                                |
+|-----------------------------------|---------------------------------------------------|
+| [Amazon][1]                       | Amazon Linux 2                                    |
+| [Debian x86_64][2]                | Debian 7 (wheezy)+ and SysVinit in Agent 6.6.0+)  |
+| [Ubuntu x86_64][3]                | Ubuntu 14.04+                                     |
+| [RedHat/CentOS x86_64][4]         | RedHat/CentOS 6+                                  |
+| [Docker][5]                       | Version 1.12+                                     |
+| [Kubernetes][6]                   | Version 1.3+                                      |
+| [SUSE Enterprise Linux x86_64][7] | SUSE 11 SP4+ (not SysVinit)                       |
+| [Fedora x86_64][8]                | Fedora 26+                                        |
+| [macOS][9]                        | macOS 10.12+                                      |
+| [Windows server 64-bit][10]       | Windows Server 2008r2+ and Server Core (not Nano) |
+| [Windows 64-bit][10]              | Windows 7+                                        |
 
 **Note**: [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
 
@@ -223,19 +228,19 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-| OS                                | Supported versions             |
-|-----------------------------------|--------------------------------|
-| [Amazon][1]                       | Amazon Linux 2                 |
-| [Debian x86_64][2]                | Debian 7 (wheezy) and above    |
-| [Ubuntu x86_64][3]                | Ubuntu 12.04 and above         |
-| [RedHat/CentOS x86_64][4]         | RedHat/CentOS 5 and above      |
-| [Docker][5]                       | Version 1.12 and higher        |
-| [Kubernetes][6]                   | Version 1.3 and higher         |
-| [SUSE Enterprise Linux x86_64][7] | SUSE 11 SP4 and above          |
-| [Fedora x86_64][8]                | Fedora 26 and above            |
-| [MacOS][9]                        | macOS 10.10 and above          |
-| [Windows server 64-bit][10]       | Windows server 2008r2 or above |
-| [Windows 64-bit][10]              | Windows 7 or above             |
+| OS                                | Supported versions     |
+|-----------------------------------|------------------------|
+| [Amazon][1]                       | Amazon Linux 2         |
+| [Debian x86_64][2]                | Debian 7 (wheezy)+     |
+| [Ubuntu x86_64][3]                | Ubuntu 12.04+          |
+| [RedHat/CentOS x86_64][4]         | RedHat/CentOS 5+       |
+| [Docker][5]                       | Version 1.12+          |
+| [Kubernetes][6]                   | Version 1.3+           |
+| [SUSE Enterprise Linux x86_64][7] | SUSE 11 SP4+           |
+| [Fedora x86_64][8]                | Fedora 26+             |
+| [MacOS][9]                        | macOS 10.10+           |
+| [Windows server 64-bit][10]       | Windows server 2008r2+ |
+| [Windows 64-bit][10]              | Windows 7+             |
 
 **Note**: [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
 

@@ -16,5 +16,5 @@ api.Event.query(
     end=end_time,
     priority="normal",
     tags=["application:web"],
-    unaggregated=true
+    unaggregated=True
 )

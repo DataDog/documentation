@@ -263,7 +263,7 @@ Les logs de service AWS sont recueillis via la fonction Lambda de Datadog. Ce La
 Pour commencer à recueillir des logs à partir de vos services AWS :
 
 1. Configurez la [fonction Lambda de Datadog](#configurer-la-fonction-lambda-de-datadog).
-2. [Activez la création de logs](#activer-la-creation-de-logs-pour-votre-service-AWS) pour votre service AWS (la plupart des services AWS peuvent se connecter à un compartiment S3 ou à un groupe de logs CloudWatch).
+2. [Activez la journalisation](#activer-la-journalisation-pour-votre-service-AWS) pour votre service AWS (la plupart des services AWS peuvent se connecter à un compartiment S3 ou à un groupe de logs CloudWatch).
 3. Configurez les déclencheurs entraînant l'exécution du lambda. Il existe deux façons de les configurer :
 
   * [automatiquement](#configurer-automatiquement-des-declencheurs) : Datadog récupère les logs pour les services AWS sélectionnés et les ajoute en tant que déclencheurs pour la fonction Lambda de Datadog. Datadog met également la liste à jour.
@@ -298,7 +298,7 @@ Utilisez le [référentiel sans serveur AWS][96] pour déployer la fonction Lamb
     {{< img src="logs/aws/select_python.png" alt="Sélectionner Python" responsive="true" style="width:80%;" >}}
 3. En haut du script se trouve une section intitulée `#Parameters`. Vous pouvez fournir la clé d'API requise par la fonction Lambda de deux façons différentes :
 
-    * En configurant une variable d'environnement (recommandé)
+    * En configurant une variable d'environnement (conseillé)
     * En ajoutant directement votre clé API Datadog dans le code
     {{< img src="logs/aws/dd_api_key_setup.png" alt="Configuration clé API DD" responsive="true" popup="true" style="width:80%;" >}}
 4. Faites défiler jusqu'à atteindre **Basic Settings** sous la zone de code en ligne.
@@ -315,11 +315,11 @@ Utilisez le [référentiel sans serveur AWS][96] pour déployer la fonction Lamb
 2. Saisissez un nom unique pour l'événement, puis cliquez sur **Create**.
 3. Cliquez sur Test et vérifiez qu'aucune erreur ne survient (les logs de test n'apparaîtront pas dans votre plateforme Datadog).
 
-### Activer la création de logs pour votre service AWS
+### Activer la journalisation pour votre service AWS
 
 Tous les services AWS qui génèrent des logs dans un compartiment S3 ou un groupe de logs CloudWatch sont pris en charge. Consultez les instructions de configuration spécifiques des services les plus utilisés dans le tableau ci-dessous :
 
-| Service AWS                        | Activer la création de logs de service AWS                                                                    | Envoyer des logs AWS à Datadog                                                   |
+| Service AWS                        | Activer la journalisation de service AWS                                                                    | Envoyer des logs AWS à Datadog                                                   |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | [API Gateway][52]                  | [Activer les logs AWS API Gateway][53]                                                               | Collecte de logs [manuelle][54]                                                |
 | [Cloudfront][55]                   | [Activer les logs AWS Cloudfront][56]                                                                | Collecte de logs [manuelle][57] et [automatique](#configurer-automatiquement-des-declencheurs) |

@@ -18,6 +18,9 @@ left:
           - name: product_dashboards
             link: "https://www.datadoghq.com/dashboarding/"
             title: "Dashboards"
+          - name: product_synthetics
+            link: "https://www.datadoghq.com/synthetics/"
+            title: "Synthetics"
           - name: product_alerts
             link: "https://www.datadoghq.com/alerts/"
             title: "Alerts"
@@ -66,6 +69,9 @@ right:
           - name: blog_engineering
             link: "https://www.datadoghq.com/blog/engineering/"
             title: "Engineering"
+          - name: blog_community
+            link: "https://www.datadoghq.com/blog/community/"
+            title: "Community"
           - name: blog_pupculture
             link: "https://www.datadoghq.com/blog/pup-culture/"
             title: "Pup Culture"

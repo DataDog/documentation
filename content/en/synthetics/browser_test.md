@@ -4,7 +4,7 @@ kind: documentation
 beta: true
 description: Simulate and monitor user journeys from specific locations.
 aliases:
-  - synthetics/browser_check
+  - /synthetics/browser_check
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
@@ -17,7 +17,7 @@ further_reading:
   text: "Configure an API Tests"
 ---
 
-<div class="alert alert-warning">Synthetics is in beta for the Datadog US Site. Request access via the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics request form</a>.</div>
+<div class="alert alert-warning">Synthetics is only available in the US. Browser tests are available in beta: to request access complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics Request form</a>.</div>
 
 ## Overview
 
@@ -38,6 +38,8 @@ Define the configuration of your browser test.
 5. Pick-up locations to run the test from. Available locations are:
     * Frankfurt (Request made from an AWS Datacenter)
     * Tokyo (Request made from an AWS Datacenter)
+    * Oregon (Request made from an AWS Datacenter)
+    * London (Request made from an AWS Datacenter)
 6. Choose a Check frequency between "1 run per 5 minute interval" to "1 run per week":
 
     {{< img src="synthetics/browser_test/check_frequency.png" alt="Check frequency" responsive="true" style="width:80%;">}}

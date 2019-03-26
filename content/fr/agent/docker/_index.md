@@ -22,7 +22,7 @@ further_reading:
     tag: Documentation
     text: Recueillir vos traces Docker
 ---
-Pour installer l'Agent de conteneur Datadog, suivez les [instructions d'installation de l'Agent][1] ou passez en revue les informations ci-dessous. Vous pouvez également consulter [l'image officielle de la version 6 de l'Agent Docker].
+Pour installer l'Agent de conteneur Datadog, suivez les [instructions d'installation de l'Agent][1] ou passez en revue les informations ci-dessous. Vous pouvez également consulter [l'image officielle de la version 6 de l'Agent Docker][2].
 
 **Remarque** : les versions 1.12 et supérieures de Docker sont prises en charge.
 
@@ -44,12 +44,12 @@ De nombreux paramètres de l'Agent peuvent être personnalisés. Vous trouverez 
 
 #### Options globales
 
-| Variable d'environnement    | Description                                                                                                                                                 |
-| --------------- | ----------------------------------------------------------------------------------                                                                          |
-| `DD_API_KEY`    | Votre clé d'API Datadog (**obligatoire**).                                                                                                                         |
-| `DD_HOSTNAME`   | Le hostname à utiliser pour les métriques (si la détection automatique échoue).                                                                                                        |
-| `DD_TAGS`       | Tags de host séparés par des espaces. Exemple : `tag-simple-0 clé-tag-1:valeur-tag-1`.                                                                            |
-| `DD_SITE`       | Le site auquel vous transmettez vos métriques, traces et logs. Vous pouvez choisir entre `datadoghq.com` pour le site américain de Datadog et `datadoghq.eu` pour le site européen. |
+| Variable d'environnement  | Description                                                                                                                                                 |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_API_KEY`  | Votre clé d'API Datadog (**obligatoire**).                                                                                                                         |
+| `DD_HOSTNAME` | Le hostname à utiliser pour les métriques (si la détection automatique échoue).                                                                                                        |
+| `DD_TAGS`     | Tags de host séparés par des espaces. Exemple : `tag-simple-0 clé-tag-1:valeur-tag-1`.                                                                            |
+| `DD_SITE`     | Le site auquel vous transmettez vos métriques, traces et logs. Vous pouvez choisir entre `datadoghq.com` pour le site américain de Datadog et `datadoghq.eu` pour le site européen. |
 
 
 
@@ -100,10 +100,10 @@ DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 
 Excluez les conteneurs de la collecte de logs, de la collecte de métriques et d'Autodiscovery. Par défaut, Datadog exclut les conteneurs `pause` de Kubernetes et d'OpenShift. Consultez le fichier `datadog.yaml.example` pour en savoir plus et découvrir des exemples :
 
-| Variable d'environnement    | Description                                                                                                             |
-|-----------------|-------------------------------------------------------------------------------------------------------------------------|
-| `DD_AC_INCLUDE` | Liste des conteneurs à inclure (séparés par des espaces). Exemple : `"image:nom_image_1 image:nom_image_2"`. |
-| `DD_AC_EXCLUDE` | Liste des conteneurs à exclure (séparés par des espaces). Exemple : `"image:nom_image_3 image:nom_image_4"`. (**Remarque** : cette variable n'est pas traitée dans Fargate.)       |
+| Variable d'environnement    | Description                                                                                                                                                                   |
+|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_AC_INCLUDE` | Liste des conteneurs à inclure (séparés par des espaces). Exemple : `"image:nom_image_1 image:nom_image_2"`.                                                              |
+| `DD_AC_EXCLUDE` | Liste des conteneurs à exclure (séparés par des espaces). Exemple : `"image:nom_image_3 image:nom_image_4"`. (**Remarque** : cette variable est seulement traitée pour Autodiscovery.) |
 
 **Remarque** : ces paramètres n'ont aucun effet sur les métriques `docker.containers.running`, `.stopped`, `.running.total` et `.stopped.total`, qui prennent toujours en compte l'ensemble des conteneurs. Cela n'a aucune incidence sur le nombre de conteneurs facturés.
 
