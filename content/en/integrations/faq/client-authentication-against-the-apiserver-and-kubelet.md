@@ -30,7 +30,7 @@ kubelet_tls_verify: True
 
 ## Alternate Option: kubeconfig
 
-Alternately, you can also use [kubeconfig][3] for API server authentication. Use the `DD_KUBERNETES_KUBECONFIG_PATH` environment variable to specify the path, or the equivalent option in [datadog.yaml][4]
+Alternately, you can use [kubeconfig][3] for API server authentication. Use the `DD_KUBERNETES_KUBECONFIG_PATH` environment variable to specify the path, or the equivalent option in [datadog.yaml][4].
 
 ```
 kubernetes_kubeconfig_path: /path/to/file
