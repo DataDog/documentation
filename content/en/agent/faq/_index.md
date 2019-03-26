@@ -24,6 +24,7 @@ private: true
 * [Adding a custom Python package to the Agent][18]
 * [Why should I install the Datadog Agent on my cloud instances?][19]
 * [The Datadog Agent for Logs or Traces Only][20]
+* [Install the Agent with AWS SSM][21]
 
 
 [1]: /agent/faq/getting-further-with-docker
@@ -46,3 +47,4 @@ private: true
 [18]: /agent/faq/custom_python_package
 [19]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances
 [20]: /agent/faq/the-datadog-agent-for-logs-or-traces-only
+[21]: /agent/faq/install-the-agent-with-aws-ssm
