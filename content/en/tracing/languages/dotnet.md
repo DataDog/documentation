@@ -283,10 +283,10 @@ Environment Variable       | Description                                        
 
 The .NET Tracer supports automatic instrumentation on the following runtimes:
 
-| Runtime                | Versions | OS             | Support type |
-| ---------------------- | -------- | ---------------| ------------ |
-| .NET Framework         | 4.5+     | Windows        | Public Beta  |
-| .NET Core <sup>1</sup> | 2.0+     | Windows, Linux | Public Beta  |
+| Runtime                | Versions | OS              |
+| ---------------------- | -------- | --------------- |
+| .NET Framework         | 4.5+     | Windows         |
+| .NET Core <sup>1</sup> | 2.0+     | Windows, Linux  |
 
 <sup>1</sup> There is an issue in .NET Core versions 2.1.0, 2.1.1, and 2.1.2 that can prevent profilers from working correctly. This issue is fixed in .NET Core 2.1.3. See [this GitHub issue][9] for more details.
 
