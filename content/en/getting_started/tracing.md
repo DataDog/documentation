@@ -1,5 +1,5 @@
 ---
-title: Application Performance Monitoring (APM)
+title: Quickstart Guide - APM
 kind: documentation
 further_reading:
 - link: "https://learn.datadoghq.com/enrol/index.php?id=4"
@@ -8,7 +8,7 @@ further_reading:
 ---
 
 ## Overview
-Datadog APM is used to collect [traces][1] from your back-end application code. This is a quickstart guide to show you how APM works. Get started by following the sections below:
+Datadog Application Performance Monitoring (APM) is used to collect [traces][1] from your back-end application code. This quickstart guide shows you how get your first trace into Datadog. Follow the sections below:
 
 * [Create a Datadog account](#create-a-datadog-account)
 * [Install the Agent](#install-the-agent)
