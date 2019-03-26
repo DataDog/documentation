@@ -166,19 +166,14 @@ Where `integration` is the name of the integration. See the [list of available i
 
 ### Custom Instrumentation
 
-Applications with custom instrumentation can enable trace analytics by setting the `Datadog::Ext::Analytics::TAG_ENABLED` or `Datadog::Ext::Analytics::TAG_SAMPLE_RATE` tag on the span:
+Applications with custom instrumentation can enable trace analytics by setting the `Datadog::Ext::Analytics::TAG_ENABLED` tag on the span:
 
 ```ruby
 Datadog.tracer.trace('my.task') do |span|
   # Set the analytics sample rate to 1.0
   span.set_tag(Datadog::Ext::Analytics::TAG_ENABLED, true)
-
-  # Sets the analytics sample rate to specified rate
-  span.set_tag(Datadog::Ext::Analytics::TAG_SAMPLE_RATE, sample_rate)
 end
 ```
-
-Where `sample_rate` is a `Float` within `0.0...1.0`.
 
 ### Configure Sample Rate of APM Events
 
