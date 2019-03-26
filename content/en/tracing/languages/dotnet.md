@@ -296,21 +296,20 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 
 The .NET Tracer can instrument the following libraries automatically:
 
-| Framework or library            | NuGet package name                       | Package versions | Integration Name     |
-| ------------------------------- | ---------------------------------------- | ---------------- | -------------------- |
-| ASP.NET MVC 5                   | `Microsoft.AspNet.Mvc`                   | 5.1.3+           | `AspNetMvc`          |
-| ASP.NET MVC 4                   | `Microsoft.AspNet.Mvc`                   | 4.0.40804        | `AspNetMvc`          |
-| ASP.NET Web API 2               | `Microsoft.AspNet.WebApi.Core`           | 5.2+             | `AspNetWebApi2`      |
-| ASP.NET Core MVC                | `Microsoft.AspNetCore.Mvc.Core`          | 2.0+             | `AspNetCoreMvc2`     |
-| ASP.NET Web Forms <sup>1</sup>  | built-in                                 |                  | `AspNet`             |
-| WCF (_Coming soon_)             | built-in                                 |                  |                      |
-| ADO.NET <sup>2</sup>            | built-in                                 |                  | `AdoNet`             |
-| WebClient / WebRequest          | built-in                                 |                  | `WebRequest`         |
-| HttpClient / HttpClientHandler  | built-in or `System.Net.Http`            | 4.0+             | `HttpMessageHandler` |
-| Redis (StackExchange client)    | `StackExchange.Redis`                    | 1.0.187+         | `StackExchangeRedis` |
-| Redis (ServiceStack client)     | `ServiceStack.Redis`                     | 4.0.48+          | `ServiceStackRedis`  |
-| Elasticsearch                   | `NEST` / `Elasticsearch.Net`             | 6.0.0+           | `ElasticsearchNet`   |
-| MongoDB                         | `MongoDB.Driver` / `MongoDB.Driver.Core` | 2.2.0+           | `MongoDb`            |
+| Framework or library            | NuGet package name                       | Package versions     | Integration Name     |
+| ------------------------------- | ---------------------------------------- | -------------------- | -------------------- |
+| ASP.NET MVC                     | `Microsoft.AspNet.Mvc`                   | 5.1.3+ and 4.0.40804 | `AspNetMvc`          |
+| ASP.NET Web API                 | `Microsoft.AspNet.WebApi.Core`           | 5.2+                 | `AspNetWebApi2`      |
+| ASP.NET Core MVC                | `Microsoft.AspNetCore.Mvc.Core`          | 2.0+                 | `AspNetCoreMvc2`     |
+| ASP.NET Web Forms <sup>1</sup>  | built-in                                 |                      | `AspNet`             |
+| WCF (_Coming soon_)             | built-in                                 |                      |                      |
+| ADO.NET <sup>2</sup>            | built-in                                 |                      | `AdoNet`             |
+| WebClient / WebRequest          | built-in                                 |                      | `WebRequest`         |
+| HttpClient / HttpClientHandler  | built-in or `System.Net.Http`            | 4.0+                 | `HttpMessageHandler` |
+| Redis (StackExchange client)    | `StackExchange.Redis`                    | 1.0.187+             | `StackExchangeRedis` |
+| Redis (ServiceStack client)     | `ServiceStack.Redis`                     | 4.0.48+              | `ServiceStackRedis`  |
+| Elasticsearch                   | `NEST` / `Elasticsearch.Net`             | 6.0.0+               | `ElasticsearchNet`   |
+| MongoDB                         | `MongoDB.Driver` / `MongoDB.Driver.Core` | 2.2.0+               | `MongoDb`            |
 
 Notes:
 
