@@ -302,7 +302,7 @@ The .NET Tracer can instrument the following libraries automatically:
 | ASP.NET MVC 4                   | `Microsoft.AspNet.Mvc`                   | 4.0.40804        | Public Beta               | `AspNetMvc`          |
 | ASP.NET Web API 2               | `Microsoft.AspNet.WebApi.Core`           | 5.2+             | Public Beta               | `AspNetWebApi2`      |
 | ASP.NET Core MVC                | `Microsoft.AspNetCore.Mvc.Core`          | 2.0+             | Public Beta               | `AspNetCoreMvc2`     |
-| ASP.NET Web Forms <sup>1</sup>  | built-in                                 |                  | Experimental<sup>2</sup>  | `AspNet`             |
+| ASP.NET Web Forms <sup>1</sup>  | built-in                                 |                  | Public Beta<sup>2</sup>   | `AspNet`             |
 | WCF                             | built-in                                 |                  | _Coming soon_             |                      |
 | ADO.NET <sup>3</sup>            | built-in                                 |                  | Public Beta               | `AdoNet`             |
 | WebClient / WebRequest          | built-in                                 |                  | Public Beta               | `WebRequest`         |
@@ -314,9 +314,9 @@ The .NET Tracer can instrument the following libraries automatically:
 
 Notes:
 
-<sup>1</sup> The `AspNet` integration adds instrumentation to any application based on `Systme.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks.
+<sup>1</sup> The `AspNet` integration adds instrumentation to any ASP.NET application based on `Systme.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks.
 
-<sup>2</sup> The `AspNet` integration is not enabled by default in .NET Tracer 0.8. To enable it manually for testing purposes, see the [release notes for .NET Tracer 0.8][7].
+<sup>2</sup> To enable the `AspNet` integration, you must add the [`Datadog.Trace.ClrProfiler.Managed`][7] NuGet package to your application.
 
 <sup>3</sup> The ADO.NET integration tries to instrument **all** ADO.NET providers. Support was tested with SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (e.g. MySQL, SQLite, Oracle) might work, but have not been tested.
 
@@ -350,6 +350,6 @@ For more details on supported platforms, see the [.NET Standard documentation][6
 [4]: https://www.nuget.org/packages/Datadog.Trace
 [5]: /tracing/advanced_usage/?tab=net
 [6]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
-[7]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v0.8.0-beta
+[7]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
 [8]: #integrations
 [9]: https://github.com/dotnet/coreclr/issues/18448
