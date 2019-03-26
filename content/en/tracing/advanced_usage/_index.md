@@ -133,10 +133,58 @@ When enabling Trace Search & Analytics, the default sample rate is to collect 10
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+### Automatic Configuration
+
+Trace search & analytics can be enabled for all web integrations with a global flag.
+
+To do so, set either `DD_TRACE_ANALYTICS_ENABLED=true` in your environment, or configure with:
+
+```ruby
+Datadog.configure { |c| c.analytics_enabled = true }
+```
+
+- `true` enables analytics for all web frameworks.
+- `false` or `nil` disables analytics, except for integrations that explicitly enable it. (Default)
+
+After enabling, the [Trace Search & Analytics][1] page populates.
+
+### Configure By Integration
+
+Trace search & analytics can be enabled for specific integrations.
+
+To do so, set either `DD_<INTEGRATION>_ANALYTICS_ENABLED=true` in your environment, or configure with:
+
+```ruby
+Datadog.configure { |c| c.use :integration, analytics_enabled: true }
+```
+
+Where `integration` is the name of the integration. See the [list of available integrations][2] for options.
+
+- `true` enables analytics for this integration, regardless of global setting.
+- `false` disables analytics for this integration, regardless of global setting.
+- `nil` defers to global setting for analytics.
+
+### Custom Instrumentation
+
+Applications with custom instrumentation can enable trace analytics by setting the `Datadog::Ext::Analytics::TAG_ENABLED` tag on the span:
+
+```ruby
+Datadog.tracer.trace('my.task') do |span|
+  # Set the analytics sample rate to 1.0
+  span.set_tag(Datadog::Ext::Analytics::TAG_ENABLED, true)
+end
+```
+
+### Configure Sample Rate of APM Events
+
+When enabling trace search & analytics, the default sample rate is to collect 100% of APM Events. For any service that has enabled trace search & analytics, you can adjust its sampling rate for APM Events in your [APM settings][3].
+
+{{< img src="tracing/trace_sampling_ui.png" alt="Trace Sampling UI" responsive="true" style="width:100%;">}}
 
 
-[1]: /help
+[1]: https://app.datadoghq.com/apm/search
+[2]: /tracing/languages/ruby/#library-compatibility
+[3]: https://app.datadoghq.com/apm/settings
 {{% /tab %}}
 {{% tab "Go" %}}
 
