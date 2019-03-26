@@ -13,7 +13,7 @@ kubelet_client_crt: /path/to/client.crt
 kubelet_client_key: /path/to/client.key
 ```
 
-## Server Authentication for API server and kubelet
+## Server authentication for API server and kubelet
 
 Datadog uses the default CA certificate of the Agent's service account to verify the API server's identity. To use custom certificates, specify the path in your configuration file.
 
