@@ -283,10 +283,10 @@ Environment Variable       | Description                                        
 
 The .NET Tracer supports automatic instrumentation on the following runtimes:
 
-| Runtime                | Versions | OS             | Support type |
-| ---------------------- | -------- | ---------------| ------------ |
-| .NET Framework         | 4.5+     | Windows        | Public Beta  |
-| .NET Core <sup>1</sup> | 2.0+     | Windows, Linux | Public Beta  |
+| Runtime                | Versions | OS              |
+| ---------------------- | -------- | --------------- |
+| .NET Framework         | 4.5+     | Windows         |
+| .NET Core <sup>1</sup> | 2.0+     | Windows, Linux  |
 
 <sup>1</sup> There is an issue in .NET Core versions 2.1.0, 2.1.1, and 2.1.2 that can prevent profilers from working correctly. This issue is fixed in .NET Core 2.1.3. See [this GitHub issue][9] for more details.
 
@@ -296,29 +296,28 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 
 The .NET Tracer can instrument the following libraries automatically:
 
-| Framework or library            | NuGet package name                       | Package versions | Support Type              | Integration Name     |
-| ------------------------------- | ---------------------------------------- | ---------------- | ------------------------- | -------------------- |
-| ASP.NET MVC 5                   | `Microsoft.AspNet.Mvc`                   | 5.1.3+           | Public Beta               | `AspNetMvc`          |
-| ASP.NET MVC 4                   | `Microsoft.AspNet.Mvc`                   | 4.0.40804        | Public Beta               | `AspNetMvc`          |
-| ASP.NET Web API 2               | `Microsoft.AspNet.WebApi.Core`           | 5.2+             | Public Beta               | `AspNetWebApi2`      |
-| ASP.NET Core MVC                | `Microsoft.AspNetCore.Mvc.Core`          | 2.0+             | Public Beta               | `AspNetCoreMvc2`     |
-| ASP.NET Web Forms <sup>1</sup>  | built-in                                 |                  | Experimental<sup>2</sup>  | `AspNet`             |
-| WCF                             | built-in                                 |                  | _Coming soon_             |                      |
-| ADO.NET <sup>3</sup>            | built-in                                 |                  | Public Beta               | `AdoNet`             |
-| WebClient / WebRequest          | built-in                                 |                  | Public Beta               | `WebRequest`         |
-| HttpClient / HttpClientHandler  | built-in or `System.Net.Http`            | 4.0+             | Public Beta               | `HttpMessageHandler` |
-| Redis (StackExchange client)    | `StackExchange.Redis`                    | 1.0.187+         | Public Beta               | `StackExchangeRedis` |
-| Redis (ServiceStack client)     | `ServiceStack.Redis`                     | 4.0.48+          | Public Beta               | `ServiceStackRedis`  |
-| Elasticsearch                   | `NEST` / `Elasticsearch.Net`             | 6.0.0+           | Public Beta               | `ElasticsearchNet`   |
-| MongoDB                         | `MongoDB.Driver` / `MongoDB.Driver.Core` | 2.2.0+           | Public Beta               | `MongoDb`            |
+| Framework or library            | NuGet package name                       | Package versions     | Integration Name     |
+| ------------------------------- | ---------------------------------------- | -------------------- | -------------------- |
+| ASP.NET MVC                     | `Microsoft.AspNet.Mvc`                   | 5.1.3+ and 4.0.40804 | `AspNetMvc`          |
+| ASP.NET Web API                 | `Microsoft.AspNet.WebApi.Core`           | 5.2+                 | `AspNetWebApi2`      |
+| ASP.NET Core MVC                | `Microsoft.AspNetCore.Mvc.Core`          | 2.0+                 | `AspNetCoreMvc2`     |
+| ASP.NET Web Forms <sup>1</sup>  | built-in                                 |                      | `AspNet`             |
+| WCF (_Coming soon_)             | built-in                                 |                      |                      |
+| ADO.NET <sup>2</sup>            | built-in                                 |                      | `AdoNet`             |
+| WebClient / WebRequest          | built-in                                 |                      | `WebRequest`         |
+| HttpClient / HttpClientHandler  | built-in or `System.Net.Http`            | 4.0+                 | `HttpMessageHandler` |
+| Redis (StackExchange client)    | `StackExchange.Redis`                    | 1.0.187+             | `StackExchangeRedis` |
+| Redis (ServiceStack client)     | `ServiceStack.Redis`                     | 4.0.48+              | `ServiceStackRedis`  |
+| Elasticsearch                   | `NEST` / `Elasticsearch.Net`             | 6.0.0+               | `ElasticsearchNet`   |
+| MongoDB                         | `MongoDB.Driver` / `MongoDB.Driver.Core` | 2.2.0+               | `MongoDb`            |
 
 Notes:
 
-<sup>1</sup> The `AspNet` integration adds instrumentation to any application based on `Systme.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks.
+All integrations are in Public Beta.
 
-<sup>2</sup> The `AspNet` integration is not enabled by default in .NET Tracer 0.8. To enable it manually for testing purposes, see the [release notes for .NET Tracer 0.8][7].
+<sup>1</sup> The `AspNet` integration adds instrumentation to any ASP.NET application based on `Systme.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. To enable the `AspNet` integration, you must add the [`Datadog.Trace.ClrProfiler.Managed`][7] NuGet package to your application.
 
-<sup>3</sup> The ADO.NET integration tries to instrument **all** ADO.NET providers. Support was tested with SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (e.g. MySQL, SQLite, Oracle) might work, but have not been tested.
+<sup>2</sup> The ADO.NET integration tries to instrument **all** ADO.NET providers. Datadog tested SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (MySQL, SQLite, Oracle) are untested but should work.
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
 
@@ -350,6 +349,6 @@ For more details on supported platforms, see the [.NET Standard documentation][6
 [4]: https://www.nuget.org/packages/Datadog.Trace
 [5]: /tracing/advanced_usage/?tab=net
 [6]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
-[7]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v0.8.0-beta
+[7]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
 [8]: #integrations
 [9]: https://github.com/dotnet/coreclr/issues/18448
