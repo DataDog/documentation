@@ -819,6 +819,47 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 {{% /tab %}}
 {{< /tabs >}}
 
+## B3 Headers Extraction and Injection
+
+Datadog APM tracer supports [B3 headers extraction][1] and injection for
+distributed tracing.
+
+[1]: https://github.com/openzipkin/b3-propagation
+
+{{< tabs >}}
+{{% tab "Java" %}}
+
+### Configuration
+
+Distributed headers injection and extraction is controlled by
+configuring injection/extraction styles. Currently two styles are
+supported:
+
+* Datadog: `Datadog`
+* B3: `B3`
+
+Injection styles can be configured using:
+
+* System Property: `-Ddd.propagation.style.inject=Datadog,B3`
+* Environment Variable: `DD_PROPAGATION_STYLE_INJECTION=Datadog,B3`
+
+The value of the property or environment variable is a comma (or
+space) separated list of header styles that are enabled for
+injection. By default only Datadog injection style is enabled.
+
+Extraction styles can be configured using:
+
+* System Property: `-Ddd.propagation.style.extraction=Datadog,B3`
+* Environment Variable: `DD_PROPAGATION_STYLE_EXTRACTION=Datadog,B3`
+
+The value of the property or environment variable is a comma (or
+space) separated list of header styles that are enabled for
+extraction. By default only Datadog extraction style is enabled.
+
+If multiple extraction styles are enabled extraction attempt is done
+on the order those styles are configured and first successful
+extracted value is used.
+
 ## Manual Instrumentation
 
 Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][3] and familiarize yourself with the core concepts of Datadog APM.
