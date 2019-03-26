@@ -5,7 +5,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-The Datadog UNIX agent is separate from Agents 5 and 6 that only support Linux and Windows  
+The Datadog UNIX agent is being developed for specific system architectures, and is not the same as Agents 5 and 6.
 </div>
 
 This page outlines the installation and configuration of the Datadog UNIX Agent for AIX.
