@@ -4,22 +4,22 @@ kind: documentation
 further_reading:
 - link: "https://learn.datadoghq.com/enrol/index.php?id=4"
   tag: "Learning Center"
-  text: "Introduction to Application Performance Monitoring"
+  text: "Learn Application Performance Monitoring with Docker"
 ---
 
 ## Overview
 Datadog APM is used to collect [traces][1] from your back-end application code. This is a quickstart guide to show you how APM works. Get started by following the sections below:
 
-- Create a Datadog account
-- Install the Agent
-- APM Agent setup
-- APM application setup
+* [Create a Datadog account](#create-a-datadog-account)
+* [Install the Agent](#install-the-agent)
+* [APM Agent setup](#apm-agent-setup)
+* [APM application setup](#apm-application-setup)
 
 ## Create a Datadog account
 If you haven't already, create a [Datadog account][2].
 
 ## Install the Agent
-This tutorial uses a [Vagrant Ubuntu 16.04 VM][3]. If have questions on setting up a VM, see [Vagrant's getting started][4].
+Before installing the Agent, set up a [Vagrant Ubuntu 16.04 virtual machine][3] using the following commands. If have questions about Vagrant, see their [Getting Started][4] page.
 
 ```
 vagrant init ubuntu/xenial64
@@ -40,7 +40,7 @@ Verify the Agent is running with the [status command][7]:
 sudo datadog-agent status
 ```
 
-Verify the Agent is connected to your account by checking the [Infrastructure List][8] in Datadog.
+After a few minutes, verify the Agent is connected to your account by checking the [Infrastructure List][8] in Datadog.
 
 ## APM Agent setup
 ### Enable APM
@@ -64,7 +64,7 @@ And in `trace-agent.log`:
 ```
 
 ### Environment name
-Name your environment by updating `datadog.yaml` to set `env` under `apm_config`, for example:
+(Optional) - Name your environment by updating `datadog.yaml` to set `env` under `apm_config`, for example:
 
 ```
 apm_config:
@@ -78,6 +78,61 @@ Then, [restart][10] the Datadog Agent:
 sudo service datadog-agent restart
 ```
 
+## APM application setup
+### Installation
+Before setting up the application, install `pip` then `flask` and `ddtrace` on your Ubuntu VM:
+
+```
+sudo apt-get install python-pip
+pip install flask
+pip install ddtrace
+```
+
+### Create
+On the Ubuntu VM, create the application `hello.py` with the following content:
+
+```python
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return 'hello world'
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5050)
+```
+
+### Run
+Run `hello.py` with `ddtrace` which automatically instruments your application in Datadog:
+
+```
+ddtrace-run python hello.py
+```
+
+You should see a similar output to:
+
+```
+* Serving Flask app "hello" (lazy loading)
+  ...
+* Running on http://0.0.0.0:5050/ (Press CTRL+C to quit)
+```
+
+### Test
+Test your application and send your traces to Datadog using `curl`. Your application should be running (as shown above). In a separate command prompt run:
+
+```
+vagrant ssh
+curl http://0.0.0.0:5050/
+```
+
+This outputs:
+
+```
+hello world
+```
+
+After a few minutes, your trace displays in Datadog under the `flask` service. Check the [services page][11] or [trace list][12].
 
 ## Further Reading
 
@@ -93,3 +148,5 @@ sudo service datadog-agent restart
 [8]: https://app.datadoghq.com/infrastructure
 [9]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
 [10]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[11]: https://app.datadoghq.com/apm/services
+[12]: https://app.datadoghq.com/apm/traces
