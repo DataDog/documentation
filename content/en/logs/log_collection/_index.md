@@ -176,6 +176,9 @@ List of all available parameters for log collection:
 | `tags`           | No       | Add tags to each log collected ([learn more about tagging][7]).                                                                                                                                                                                                                                                                                    |
 
 ## Advanced log collection functions
+
+If you set up multiple processing rules, they are applied sequentially. Each rule is applied on the result of the previous one.
+
 ### Filter logs
 
 To send only a specific subset of logs to Datadog use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** or **include_at_match** `type`.
@@ -226,8 +229,6 @@ logs:
 
 {{% /tab %}}
 {{< /tabs >}}
-
-**Note**: If you set up multiple processing rules, they are applied sequentially. Each rule is applied on the result of the previous one.
 
 ### Scrub sensitive data in your logs
 
