@@ -69,10 +69,10 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
  [1]: https://docs.datadoghq.com/integrations/go_expvar
 [2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/go_expvar.d/agent_stats.yaml.example
 [3]: https://app.datadoghq.com/account/settings#agent
-[4]: https://docs.datadoghq.com/fr/agent/faq/agent-configuration-files/#agent-configuration-directory
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
 [5]: https://github.com/DataDog/integrations-core/blob/master/agent_metrics/datadog_checks/agent_metrics/data/conf.yaml.default
-[6]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
-[7]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/agent_metrics/metadata.csv
 [9]: https://docs.datadoghq.com/fr/help
 
