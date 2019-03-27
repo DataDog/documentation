@@ -69,8 +69,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 [1]: https://www.aerospike.com/products/aerospike-database-platform
 [2]: https://github.com/DataDog/integrations-core/blob/master/aerospike/datadog_checks/aerospike/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
-[4]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/aerospike/metadata.csv
 [6]: https://docs.datadoghq.com/fr/help
 

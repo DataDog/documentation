@@ -16,7 +16,7 @@ maintainer: support@buddy.works
 manifest_version: 1.0.2
 name: buddy
 public_title: Intégration Datadog/Buddy
-short_description: Automatisation de la livraison en un seul clic grâce à des aperçus de sites Web actifs pour web developers.
+short_description: Automatisation de la livraison en un seul clic grâce à des aperçus de sites Web actifs pour les développeurs web web developers.
 support: contrib
 supported_os:
   - linux
