@@ -82,7 +82,9 @@ Trace Search & Analytics can be enabled globally for all web integrations with o
 
 After enabling, the Trace Search & Analytics UI will now populate, you can get started [here][1].
 
-### Configure By Integration
+### Configure Additional Services (optional)
+
+**Configure By Integration**
 
 In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
 
@@ -98,9 +100,16 @@ Integration names can be found on the [integrations table][2].
 
 Note several integrations require non-standard configuration due to the integration-specific implementation of the tracer. Consult the library documentation on [Trace Search & Analytics][3] for details.
 
-### Custom Instrumentation
+**Database Services**
 
-Applications with custom instrumentation can enable trace analytics by setting the `ddtrace.constants.ANALYTICS_SAMPLE_RATE_KEY` tag on the service root span:
+Database tracing is not captured by Trace Search & Analytics by default, in order to enable these spans to be collected these can be configured per integration. For example:
+
+* System Property: `-Ddd.jdbc.analytics.enabled=true`
+* Environment Variable: `DD_JDBC_ANALYTICS_ENABLED=true`
+
+**Custom Instrumentation**
+
+Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS_KEY` tag on the service root span:
 
 ```python
 from ddtrace import tracer
@@ -134,7 +143,9 @@ Datadog.configure { |c| c.analytics_enabled = true }
 
 After enabling, the [Trace Search & Analytics][1] page populates.
 
-### Configure By Integration
+### Configure Additional Services (Optional)
+
+**Configure By Integration**
 
 Trace search & analytics can be enabled for specific integrations.
 
@@ -150,9 +161,16 @@ Where `integration` is the name of the integration. See the [list of available i
 - `false` disables analytics for this integration, regardless of global setting.
 - `nil` defers to global setting for analytics.
 
-### Custom Instrumentation
+**Database Services**
 
-Applications with custom instrumentation can enable trace analytics by setting the `Datadog::Ext::Analytics::TAG_ENABLED` tag on the span:
+Database tracing is not captured by Trace Search & Analytics by default, in order to enable these spans to be collected these can be configured per integration. For example:
+
+* System Property: `-Ddd.jdbc.analytics.enabled=true`
+* Environment Variable: `DD_JDBC_ANALYTICS_ENABLED=true`
+
+**Custom Instrumentation**
+
+Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS_KEY` tag on the service root span:
 
 ```ruby
 Datadog.tracer.trace('my.task') do |span|
@@ -177,7 +195,9 @@ tracer.Start(tracer.WithAnalytics(true))
 
 After enabling, the Trace Search & Analytics UI should start showing results. Visit [this page][2] to get started.
 
-### Configure by Integration
+### Configure Additional Services (Optional)
+
+**Configure by Integration**
 
 In addition to the global setting, you can enable or disable Trace Search & Analytics individually for each integration. All of them should have the option to. As an example, for configuring the standard library's `net/http` package you could do:
 
@@ -197,8 +217,14 @@ func main() {
 	// ...
 }
 ```
+**Database Services**
 
-### Custom instrumentation
+Database tracing is not captured by Trace Search & Analytics by default, in order to enable these spans to be collected these can be configured per integration. For example:
+
+* System Property: `-Ddd.jdbc.analytics.enabled=true`
+* Environment Variable: `DD_JDBC_ANALYTICS_ENABLED=true`
+
+**Custom instrumentation**
 
 For custom instrumentation, a special tag has been added to enable Trace Search & Analytics on a span, as can be seen below:
 
@@ -257,7 +283,6 @@ const { ANALYTICS } = require('dd-trace/ext/tags')
 
 span.setTag(ANALYTICS, true)
 ```
-
 
 [1]: https://app.datadoghq.com/apm/search
 [2]: /tracing/languages/nodejs/#integrations
