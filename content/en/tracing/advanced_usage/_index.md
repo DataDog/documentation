@@ -67,16 +67,9 @@ class MyClass {
 }
 ```
 
-**Configure Sample Rate of APM Events**
-
-When enabling Trace Search & Analytics, the default sample rate is to collect 100% of APM Events. For any services that have been enabled for Trace Search & Analytics in the Tracing Client, you can adjusted the sampling rate for APM Events in your [APM settings][3].
-
-{{< img src="tracing/trace_sampling_ui.png" alt="Trace Sampling UI" responsive="true" style="width:100%;">}}
-
 
 [1]: https://app.datadoghq.com/apm/search
 [2]: /tracing/languages/java/#integrations
-[3]: https://app.datadoghq.com/apm/settings
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -119,17 +112,10 @@ def my_method():
     span.set_tag(ANALYTICS_SAMPLE_RATE_KEY, True)
 ```
 
-### Configure Sample Rate of APM Events
-
-When enabling Trace Search & Analytics, the default sample rate is to collect 100% of APM Events. For any services that have been enabled for Trace Search & Analytics in the Tracing Client, you can adjusted the sampling rate for APM Events in your [APM settings][4].
-
-{{< img src="tracing/trace_sampling_ui.png" alt="Trace Sampling UI" responsive="true" style="width:100%;">}}
-
 
 [1]: https://app.datadoghq.com/apm/search
 [2]: /tracing/languages/python/#integrations
 [3]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace_search_analytics
-[4]: https://app.datadoghq.com/apm/settings
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
@@ -175,28 +161,21 @@ Datadog.tracer.trace('my.task') do |span|
 end
 ```
 
-### Configure Sample Rate of APM Events
-
-When enabling trace search & analytics, the default sample rate is to collect 100% of APM Events. For any service that has enabled trace search & analytics, you can adjust its sampling rate for APM Events in your [APM settings][3].
-
-{{< img src="tracing/trace_sampling_ui.png" alt="Trace Sampling UI" responsive="true" style="width:100%;">}}
-
 
 [1]: https://app.datadoghq.com/apm/search
 [2]: /tracing/languages/ruby/#library-compatibility
-[3]: https://app.datadoghq.com/apm/settings
 {{% /tab %}}
 {{% tab "Go" %}}
 
 ### Automatic Configuration
 
-Trace Search & Analytics can be enabled globally for all web integrations using the [`WithAnalytics`](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics) tracer start option. For example:
+Trace Search & Analytics can be enabled globally for all web integrations using the [`WithAnalytics`][1] tracer start option. For example:
 
 ```go
 tracer.Start(tracer.WithAnalytics(true))
 ```
 
-After enabling, the Trace Search & Analytics UI should start showing results. Visit [this page][1] to get started.
+After enabling, the Trace Search & Analytics UI should start showing results. Visit [this page][2] to get started.
 
 ### Configure by Integration
 
@@ -229,19 +208,8 @@ span.SetTag(ext.AnalyticsEvent, true)
 
 This will mark the span as a Trace Search & Analytics event.
 
-### Configuring the sample rate
-
-If you wish to downsample the rate of APM events that are being collected globally or scoped to a specific integration, this can be achieved by using the [`WithAnalyticsRate`](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalyticsRate) tracer start option. For integrations, it's the option with [the same name](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#WithAnalyticsRate).
-
-If you are doing custom instrumentation, there is a special tag which can specify the sampling rate for Analytics events on a span:
-
-```go
-span.SetTag(ext.EventSampleRate, 0.5) // capture 50% of these events
-```
-
-The rate parameter is a floating point number in the range N=[0,1] and it determines the percentage of traces that will be sampled. The actual percentage is N*100.
-
-[1]: https://app.datadoghq.com/apm/search
+[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
+[2]: https://app.datadoghq.com/apm/search
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
@@ -261,19 +229,28 @@ After enabling, the Trace Search & Analytics UI will now populate, you can get s
 
 **Configure By Integration**
 
-In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations.
+In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
 
-For example, to enable Trace Search & Analytics for Express:
+* System Property: `-Ddd.<integration>.analytics.enabled=true`
+* Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-```javascript
-tracer.use('express', {
-  analytics: true
-})
-```
+This can be used in addition to the global configuration for any Integrations that submit Custom Services. For example, for JMS spans which comes in as a Custom Service, you can set the following to enable all JMS Tracing in Trace Search & Analytics:
+
+* System Property: `-Ddd.jms.analytics.enabled=true`
+* Environment Variable: `DD_JMS_ANALYTICS_ENABLED=true`
+
+Integration names can be found on the [integrations table][2].
+
+**Database Services**
+
+Database tracing is not captured by Trace Search & Analytics by default, in order to enable these spans to be collected these can be configured per integration. For example:
+
+* System Property: `-Ddd.jdbc.analytics.enabled=true`
+* Environment Variable: `DD_JDBC_ANALYTICS_ENABLED=true`
 
 **Custom Instrumentation**
 
-Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS` tag on the span:
+Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS_KEY` tag on the service root span:
 
 ```javascript
 const { ANALYTICS } = require('dd-trace/ext/tags')
@@ -281,14 +258,9 @@ const { ANALYTICS } = require('dd-trace/ext/tags')
 span.setTag(ANALYTICS, true)
 ```
 
-**Configure Sample Rate of APM Events**
-
-When enabling Trace Search & Analytics, the default sample rate is to collect analytics for 100% of APM events. For any services that have been enabled for Trace Search & Analytics in the Tracing Client, you can adjusted the sampling rate for APM Events in your [APM settings][2].
-
-{{< img src="tracing/trace_sampling_ui.png" alt="Trace Sampling UI" responsive="true" style="width:100%;">}}
 
 [1]: https://app.datadoghq.com/apm/search
-[2]: https://app.datadoghq.com/apm/settings
+[2]: /tracing/languages/nodejs/#integrations
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -313,11 +285,22 @@ After enabling, the Trace Search & Analytics UI will now populate, you can get s
 
 In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
 
+* System Property: `-Ddd.<integration>.analytics.enabled=true`
 * Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-At the same time, we can also configure Trace Search & Analytics for any Datastore or Library Integration. For example, for `curl` spans you can set the following to enable http calls in Trace Search & Analytics:
+This can be used in addition to the global configuration for any Integrations that submit Custom Services. For example, for JMS spans which comes in as a Custom Service, you can set the following to enable all JMS Tracing in Trace Search & Analytics:
 
-* Environment Variable: `DD_CURL_ANALYTICS_ENABLED=true`
+* System Property: `-Ddd.jms.analytics.enabled=true`
+* Environment Variable: `DD_JMS_ANALYTICS_ENABLED=true`
+
+Integration names can be found on the [integrations table][2].
+
+**Database Services**
+
+Database tracing is not captured by Trace Search & Analytics by default, in order to enable these spans to be collected these can be configured per integration. For example:
+
+* System Property: `-Ddd.jdbc.analytics.enabled=true`
+* Environment Variable: `DD_JDBC_ANALYTICS_ENABLED=true`
 
 **Custom Instrumentation**
 
@@ -330,16 +313,9 @@ $span->setTag(Tag::ANALYTICS_KEY, true);
 
 ```
 
-**Configure Sample Rate of APM Events**
-
-When enabling Trace Search & Analytics, the default sample rate is to collect 100% of APM Events. For any services that have been enabled for Trace Search & Analytics in the Tracing Client, you can adjusted the sampling rate for APM Events in your [APM settings][2].
-
-{{< img src="tracing/trace_sampling_ui.png" alt="Trace Sampling UI" responsive="true" style="width:100%;">}}
-
-
 
 [1]: https://app.datadoghq.com/apm/search
-[2]: https://app.datadoghq.com/apm/settings
+[2]: /tracing/languages/php/#integrations
 {{% /tab %}}
 {{% tab "C++" %}}
 
