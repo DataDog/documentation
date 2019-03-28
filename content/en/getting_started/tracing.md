@@ -2,6 +2,9 @@
 title: Quickstart Guide - APM
 kind: documentation
 further_reading:
+- link: "/tracing/visualization/"
+  tag: "Documentation"
+  text: "Use the APM UI"
 - link: "https://learn.datadoghq.com/enrol/index.php?id=4"
   tag: "Learning Center"
   text: "Learn Application Performance Monitoring with Docker"
@@ -133,6 +136,8 @@ hello world
 ```
 
 After a few minutes, your trace displays in Datadog under the `flask` service. Check the [services page][11] or [trace list][12].
+
+{{< img src="getting_started/tracing-services-list.png" alt="Tracing Services List" responsive="true">}}
 
 ## Further Reading
 
