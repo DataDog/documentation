@@ -138,14 +138,14 @@ Pour désactiver ce check, définissez `check_certificate_expiration` sur false.
 Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/faq/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/fr/developers/write_agent_check/?tab=agentv6#collection-interval
 [5]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/fr/getting_started/tagging
 [7]: https://www.datadoghq.com/blog/the-power-of-tagged-metrics
-[8]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
-[9]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [10]: https://github.com/DataDog/integrations-core/blob/master/http_check/metadata.csv
 [11]: https://app.datadoghq.com/monitors#/create
 [12]: https://docs.datadoghq.com/fr/help
