@@ -22,7 +22,7 @@ Datadog Application Performance Monitoring (APM) is used to collect [traces][1] 
 If you haven't already, create a [Datadog account][2].
 
 ## Install the Agent
-Before installing the Agent, set up a [Vagrant Ubuntu 16.04 virtual machine][3] using the following commands. If have questions about Vagrant, see their [Getting Started][4] page.
+Before installing the Agent, set up a [Vagrant Ubuntu 16.04 virtual machine][3] using the following commands. For more information about Vagrant, see their [Getting Started][4] page.
 
 ```
 vagrant init ubuntu/xenial64
