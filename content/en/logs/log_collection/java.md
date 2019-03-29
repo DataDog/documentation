@@ -19,6 +19,9 @@ further_reading:
 - link: "logs/faq/log-collection-troubleshooting-guide"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
+- link: "https://www.datadoghq.com/blog/java-logging-guide/"
+  tag: "Blog"
+  text: "How to collect, customize, and standardize Java logs"
 ---
 
 Java logs are quite complex to handle, mainly because of stack traces. These stack traces are split into multiple lines which makes them difficult to associate to the original log event:
@@ -479,4 +482,3 @@ To generate this final JSON document:
 [4]: https://github.com/logstash/logstash-logback-encoder#prefixsuffix
 [5]: /logs/?tab=euregion#datadog-logs-endpoints
 [6]: /logs/processing/parsing/#key-value
-[7]: https://www.datadoghq.com/blog/java-logging-guide/
