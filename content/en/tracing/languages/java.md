@@ -207,10 +207,8 @@ The tracer is configured using System Properties and Environment Variables as fo
 
 ### B3 Headers Extraction and Injection
 
-Datadog APM tracer supports [B3 headers extraction][1] and injection for
+Datadog APM tracer supports [B3 headers extraction][9] and injection for
 distributed tracing.
-
-[1]: https://github.com/openzipkin/b3-propagation
 
 Distributed headers injection and extraction is controlled by
 configuring injection/extraction styles. Currently two styles are
@@ -299,3 +297,4 @@ Java APM has minimal impact on the overhead of an application:
 [6]: http://bytebuddy.net
 [7]: /help
 [8]: https://github.com/DataDog/documentation#outside-contributors
+[9]: https://github.com/openzipkin/b3-propagation
