@@ -53,24 +53,35 @@ Datadog officially supports the Java JRE 1.7 and higher of both Oracle JDK and O
 
 ### Integrations
 
+Most integrations are enabled by default. The following setting can change the default to disabled.
+* System Property: `-Ddd.integrations.enabled=false`
+* Environment Variable: `DD_INTEGRATIONS_ENABLED=false`
+
+Integrations can be enabled or disabled individually (overriding the default above).
+* System Property: `-Ddd.integration.<integration-name>.enabled=true`
+* Environment Variable: `DD_INTEGRATION_<INTEGRATION_NAME>_ENABLED=true`
+
+(See below for each integration's name.)
+
+Beta integrations are disabled by default but can be enabled individually.
+
 #### Web Framework Compatibility
 
 `dd-java-agent` includes support for automatically tracing the following web frameworks.
 
-| Server                       | Versions   | Support Type    | JVM Arg to enable                                                             |
-|------------------------------|------------|-----------------|-------------------------------------------------------------------------------|
-| Akka-Http Server             | 10.0+      | Fully Supported | `-Ddd.integration.akka-http.enabled=true`<br>(0.17.0+ enabled by default)     |
-| Dropwizard Views             | 0.7+       | Fully Supported | N/A                                                                           |
-| Java Servlet Compatible      | 2.3+, 3.0+ | Fully Supported | N/A                                                                           |
-| Jax-RS Annotations           | JSR311-API | Fully Supported | N/A                                                                           |
-| Jetty (non-Servlet)          | 8+         | Beta            | `-Ddd.integration.jetty.enabled=true`                                         |
-| Netty Http Server and Client | 4.0+       | Fully Supported | N/A                                                                           |
-| Play                         | 2.4-2.6    | Fully Supported | N/A                                                                           |
-| Ratpack                      | 1.4+       | Beta            | `-Ddd.integration.ratpack.enabled=true`                                       |
-| Spark Java                   | 2.3+       | Beta            | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true` |
-| Spring Web (MVC)             | 4.0+       | Fully Supported | N/A                                                                           |
-| Spring WebFlux               | 5.0+       | Fully Supported | N/A                                                                           |
-| Vert.x-Web                   | 4.1.0      | Fully Supported | N/A                                                                           |
+| Server                       | Versions   | Support Type    | Instrumentation Names (used for configuration)   |
+|------------------------------|------------|-----------------|--------------------------------------------------|
+| Akka-Http Server             | 10.0+      | Fully Supported | `akka-http`, `akka-http-server`                  |
+| Java Servlet Compatible      | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`              |
+| Jax-RS Annotations           | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`          |
+| Jetty (non-Servlet)          | 8+         | [Beta][^integ]  | `jetty`, `jetty-8`                               |
+| Netty Http Server and Client | 4.0+       | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`                |
+| Play                         | 2.4-2.6    | Fully Supported | `play`                                           |
+| Ratpack                      | 1.4+       | [Beta][^integ]  | `ratpack`                                        |
+| Spark Java                   | 2.3+       | [Beta][^integ]  | `sparkjava` (requires `jetty`)                   |
+| Spring Web (MVC)             | 4.0+       | Fully Supported | `spring-web`                                     |
+| Spring WebFlux               | 5.0+       | Fully Supported | `spring-webflux`                                 |
+| Vert.x-Web                   | 4.1.0+     | Fully Supported | (requires `netty`)                               |
 
 **Web Framework tracing provides:** timing HTTP request to response, tags for the HTTP request (status code, method, etc), error and stacktrace capturing, linking work created within a web request and Distributed Tracing.
 
@@ -83,17 +94,18 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 
 `dd-java-agent` includes support for automatically tracing the following networking frameworks.
 
-| Framework          | Versions | Support Type    | JVM Arg to enable                                 |
-|--------------------|----------|-----------------|---------------------------------------------------|
-| Apache HTTP Client | 4.3+     | Fully Supported | N/A                                               |
-| AWS Java SDK       | 1.11+    | Fully Supported | N/A                                               |
-| gRPC               | 1.5+     | Fully Supported | N/A                                               |
-| HttpURLConnection  | all      | Beta            | `-Ddd.integration.httpurlconnection.enabled=true` |
-| Kafka-Clients      | 0.11+    | Fully Supported | N/A                                               |
-| Kafka-Streams      | 0.11+    | Fully Supported | N/A                                               |
-| Jax RS Clients     | 1.11+    | Fully Supported | N/A                                               |
-| JMS                | 1 and 2  | Fully Supported | N/A                                               |
-| OkHTTP             | 3.0+     | Fully Supported | N/A                                               |
+| Framework          | Versions    | Support Type    | Instrumentation Names (used for configuration) |
+|--------------------|-------------|-----------------|------------------------------------------------|
+| Apache HTTP Client | 4.3+        | Fully Supported | `httpclient`                                   |
+| AWS Java SDK       | 1.11+, 2.2+ | Fully Supported | `aws-sdk`                                      |
+| gRPC               | 1.5+        | Fully Supported | `grpc`, `grpc-client`, `grpc-server`           |
+| HttpURLConnection  | all         | Fully Supported | `httpurlconnection`, `urlconnection`           |
+| Kafka-Clients      | 0.11+       | Fully Supported | `kafka`                                        |
+| Kafka-Streams      | 0.11+       | Fully Supported | `kafka`, `kafka-streams`                       |
+| Jax RS Clients     | 1.11+       | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
+| JMS                | 1 and 2     | Fully Supported | `jms`                                          |
+| Rabbit AMQP        | 2.7+        | Fully Supported | `amqp`, `rabbitmq`                             |
+| OkHTTP             | 3.0+        | Fully Supported | `okhttp`, `okhttp-3`                           |
 
 **Networking tracing provides:** timing request to response, tags for the request (e.g. response code), error and stacktrace capturing, and distributed tracing.
 
@@ -103,16 +115,18 @@ Don't see your desired networking framework? Datadog is continually adding addit
 
 `dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
 
-| Database      | Versions | Support Type    | JVM Arg to enable                                                            |
-|---------------|----------|-----------------|------------------------------------------------------------------------------|
-| Couchbase     | 2.0+     | Fully Supported | N/A                                                                          |
-| Cassandra     | 2.3+     | Fully Supported | N/A                                                                          |
-| Elasticsearch | 2.0+     | Fully Supported | N/A                                                                          |
-| JDBC          | N/A      | Fully Supported | N/A                                                                          |
-| Jedis         | 1.4+     | Fully Supported | N/A                                                                          |
-| Lettuce       | 5.0+     | Fully Supported | N/A                                                                          |
-| MongoDB       | 3.0+     | Fully Supported | N/A                                                                          |
-| SpyMemcached  | 2.12+    | Beta            | `-Ddd.integration.spymemcached.enabled=true`<br>(0.17.0+ enabled by default) |
+| Database                | Versions | Support Type    | Instrumentation Names (used for configuration)                                           |
+|---------------          |----------|-----------------|------------------------------------------------------------------------------------------|
+| Couchbase               | 2.0+     | Fully Supported | `couchbase`                                                                              |
+| Cassandra               | 3.X      | Fully Supported | `cassandra`                                                                              |
+| Elasticsearch Transport | 2.0+     | Fully Supported | `elasticsearch`, `elasticsearch-transport`, `elasticsearch-transport-{2,5,6}` (pick one) |
+| Elasticsearch Rest      | 5.0+     | Fully Supported | `elasticsearch`, `elasticsearch-rest`, `elasticsearch-rest-5`, `elasticsearch-rest-6`    |
+| Hibernate               | 3.5+     | Fully Supported | `hibernate`                                                                              |
+| JDBC                    | N/A      | Fully Supported | `jdbc`                                                                                   |
+| Jedis                   | 1.4+     | Fully Supported | `redis`                                                                                  |
+| Lettuce                 | 5.0+     | Fully Supported | `lettuce`                                                                                |
+| MongoDB                 | 3.0+     | Fully Supported | `mongo`                                                                                  |
+| SpyMemcached            | 2.12+    | Fully Supported | `spymemcached`                                                                           |
 
 `dd-java-agent` is also compatible with common JDBC drivers including:
 
@@ -135,11 +149,12 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 
 `dd-java-agent` includes support for automatically tracing the following other frameworks.
 
-| Framework     | Versions | Support Type    | JVM Arg to enable |
-|---------------|----------|-----------------|-------------------|
-| Hystrix       | 1.4+     | Fully Supported | N/A               |
-| JSP Rendering | 2.3+     | Fully Supported | N/A               |
-| Rabbit AMQP   | 2.7+     | Fully Supported | N/A               |
+| Framework        | Versions | Support Type    | Instrumentation Names (used for configuration) |
+|------------------|----------|-----------------|------------------------------------------------|
+| Slf4J MDC        | 1+       | Fully Supported | `mdc` (See also `dd.logs.injection` config)    |
+| JSP Rendering    | 2.3+     | Fully Supported | `jsp`, `jsp-render`                            |
+| Dropwizard Views | 0.7+     | Fully Supported | `dropwizard`, `dropwizard-view`                |
+| Hystrix          | 1.4+     | Fully Supported | `hystrix`                                      |
 
 Don't see your desired framework? Datadog is continually adding additional support. Contact [Datadog support][7] if you need help.
 
@@ -152,6 +167,7 @@ To improve visibility into applications using unsupported frameworks, consider:
 ## Configuration
 
 The tracer is configured using System Properties and Environment Variables as follows:
+(See integration specific config in the [integrations][^integ] section above.)
 
 {{% table responsive="true" %}}
 
@@ -181,12 +197,48 @@ The tracer is configured using System Properties and Environment Variables as fo
 [2]: /tracing/advanced_usage/?tab=java#distributed-tracing
 [3]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
 [4]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=java#logging
+[^integ]: #integrations
 {{% /table %}}
 
 **Note**:
 
 * If the same key type is set for both, the system property configuration takes priority.
 * System properties can be used as JVM parameters.
+
+### B3 Headers Extraction and Injection
+
+Datadog APM tracer supports [B3 headers extraction][9] and injection for
+distributed tracing.
+
+Distributed headers injection and extraction is controlled by
+configuring injection/extraction styles. Currently two styles are
+supported:
+
+* Datadog: `Datadog`
+* B3: `B3`
+
+Injection styles can be configured using:
+
+* System Property: `-Ddd.propagation.style.inject=Datadog,B3`
+* Environment Variable: `DD_PROPAGATION_STYLE_INJECTION=Datadog,B3`
+
+The value of the property or environment variable is a comma (or
+space) separated list of header styles that are enabled for
+injection. By default only Datadog injection style is enabled.
+
+Extraction styles can be configured using:
+
+* System Property: `-Ddd.propagation.style.extraction=Datadog,B3`
+* Environment Variable: `DD_PROPAGATION_STYLE_EXTRACTION=Datadog,B3`
+
+The value of the property or environment variable is a comma (or
+space) separated list of header styles that are enabled for
+extraction. By default only Datadog extraction style is enabled.
+
+If multiple extraction styles are enabled extraction attempt is done
+on the order those styles are configured and first successful
+extracted value is used.
+
 
 ## Trace Reporting
 
@@ -245,3 +297,4 @@ Java APM has minimal impact on the overhead of an application:
 [6]: http://bytebuddy.net
 [7]: /help
 [8]: https://github.com/DataDog/documentation#outside-contributors
+[9]: https://github.com/openzipkin/b3-propagation

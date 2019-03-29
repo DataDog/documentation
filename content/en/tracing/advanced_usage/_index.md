@@ -3,11 +3,364 @@ title: Advanced Languages instrumentation
 kind: documentation
 ---
 
+## Trace Search & Analytics
+
+[Trace Search & Analytics][1] is used to filter APM Data by [user-defined tags](#custom-tagging) such as `customer_id`, `error_type` or `app_name` to help troubleshoot and filter your requests. Apply the following configuration to your application to enable this feature.
+
+{{< img src="tracing/enable_trace_search.png" alt="Trace Sampling UI" responsive="true" style="width:100%;">}}
+
+{{< tabs >}}
+{{% tab "Java" %}}
+
+### Automatic Configuration
+
+Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the Tracing Client:
+
+* System Property: `-Ddd.trace.analytics.enabled=true`
+* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
+
+After enabling, the Trace Search & Analytics UI will now populate, you can get started [here][1].
+
+### Configure Additional Services (optional)
+
+**Configure By Integration**
+
+In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
+
+* System Property: `-Ddd.<integration>.analytics.enabled=true`
+* Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
+
+Use this in addition to the global configuration for any integrations that submit custom services. For example, for JMS spans which comes in as a custom service, you can set the following to enable all JMS Tracing in Trace Search & Analytics:
+
+* System Property: `-Ddd.jms.analytics.enabled=true`
+* Environment Variable: `DD_JMS_ANALYTICS_ENABLED=true`
+
+Integration names can be found on the [integrations table][2].
+
+**Database Services**
+
+Database tracing is not captured by Trace Search & Analytics by default and you must enable collection manually for each integration. For example:
+
+* System Property: `-Ddd.jdbc.analytics.enabled=true`
+* Environment Variable: `DD_JDBC_ANALYTICS_ENABLED=true`
+
+**Custom Instrumentation**
+
+Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS_KEY` tag on the service root span:
+
+```java
+import datadog.trace.api.DDTags;
+import datadog.trace.api.Trace;
+import io.opentracing.Tracer;
+import io.opentracing.util.GlobalTracer;
+
+class MyClass {
+  @Trace
+  void myMethod() {
+    final Span span = GlobalTracer.get().activeSpan();
+    // Span provided by @Trace annotation.
+    if (span != null) {
+      span.setTag(DDTags.SERVICE_NAME, "my-custom-service");
+      span.setTag(DDTags.ANALYTICS_KEY, true);
+    }
+  }
+}
+```
+
+
+[1]: https://app.datadoghq.com/apm/search
+[2]: /tracing/languages/java/#integrations
+{{% /tab %}}
+{{% tab "Python" %}}
+
+### Automatic Configuration
+
+Enable Trace Search & Analytics globally for all web integrations with one configuration parameter in the Tracing Client:
+
+* Tracer Configuration: `ddtrace.config.analytics_enabled = True`
+* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
+
+After enabling, the Trace Search & Analytics UI will now populate, you can get started [here][1].
+
+### Configure Additional Services (optional)
+
+**Configure By Integration**
+
+In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
+
+* Tracer Configuration: `ddtrace.config.<INTEGRATION>.analytics_enabled = True`
+* Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
+
+Use this in addition to the global configuration for any integrations that submit custom services. For example, for Boto spans which comes in as a custom service, you can set the following to enable all Boto Tracing in Trace Search & Analytics:
+
+* Tracer Configuration: `ddtrace.config.boto.analytics_enabled = True`
+* Environment Variable: `DD_BOTO_ANALYTICS_ENABLED=true`
+
+Integration names can be found on the [integrations table][2].
+
+Note several integrations require non-standard configuration due to the integration-specific implementation of the tracer. Consult the library documentation on [Trace Search & Analytics][3] for details.
+
+**Database Services**
+
+Database tracing is not captured by Trace Search & Analytics by default and you must enable collection manually for each integration. For example:
+
+* Tracer Configuration: `ddtrace.config.postgres.analytics_enabled = True`
+* Environment Variable: `DD_POSTGRES_ANALYTICS_ENABLED=true`
+
+**Custom Instrumentation**
+
+Applications with custom instrumentation can enable trace analytics by setting the `ddtrace.constants.ANALYTICS_SAMPLE_RATE_KEY` tag on the service root span:
+
+```python
+from ddtrace import tracer
+from ddtrace.constants import ANALYTICS_SAMPLE_RATE_KEY
+
+@tracer.wrap()
+def my_method():
+    span = tracer.current_span()
+    span.set_tag(ANALYTICS_SAMPLE_RATE_KEY, True)
+```
+
+
+[1]: https://app.datadoghq.com/apm/search
+[2]: /tracing/languages/python/#integrations
+[3]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace_search_analytics
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+### Automatic Configuration
+
+Trace search & analytics can be enabled for all web integrations with a global flag.
+
+To do so, set either `DD_TRACE_ANALYTICS_ENABLED=true` in your environment, or configure with:
+
+```ruby
+Datadog.configure { |c| c.analytics_enabled = true }
+```
+
+- `true` enables analytics for all web frameworks.
+- `false` or `nil` disables analytics, except for integrations that explicitly enable it. (Default)
+
+After enabling, the [Trace Search & Analytics][1] page populates.
+
+### Configure Additional Services (Optional)
+
+**Configure By Integration**
+
+Trace search & analytics can be enabled for specific integrations.
+
+To do so, set either `DD_<INTEGRATION>_ANALYTICS_ENABLED=true` in your environment, or configure with:
+
+```ruby
+Datadog.configure { |c| c.use :integration, analytics_enabled: true }
+```
+
+Where `integration` is the name of the integration. See the [list of available integrations][2] for options.
+
+- `true` enables analytics for this integration, regardless of the global setting.
+- `false` disables analytics for this integration, regardless of the global setting.
+- `nil` defers to global setting for analytics.
+
+**Database Services**
+
+Database tracing is not captured by Trace Search & Analytics by default and you must enable collection manually for each integration. For example:
+
+```ruby
+Datadog.configure { |c| c.use :mongo, analytics_enabled: true }
+```
+
+**Custom Instrumentation**
+
+Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS_KEY` tag on the service root span:
+
+```ruby
+Datadog.tracer.trace('my.task') do |span|
+  # Set the analytics sample rate to 1.0
+  span.set_tag(Datadog::Ext::Analytics::TAG_ENABLED, true)
+end
+```
+
+
+[1]: https://app.datadoghq.com/apm/search
+[2]: /tracing/languages/ruby/#library-compatibility
+{{% /tab %}}
+{{% tab "Go" %}}
+
+### Automatic Configuration
+
+Trace Search & Analytics can be enabled globally for all web integrations using the [`WithAnalytics`][1] tracer start option. For example:
+
+```go
+tracer.Start(tracer.WithAnalytics(true))
+```
+
+After enabling, the Trace Search & Analytics UI should start showing results. Visit [this page][2] to get started.
+
+### Configure Additional Services (Optional)
+
+**Configure by Integration**
+
+In addition to the global setting, you can enable or disable Trace Search & Analytics individually for each integration. As an example, for configuring the standard library's `net/http` package, you could do:
+
+```go
+package main
+
+import (
+	httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+	tracer.Start()
+	defer tracer.Stop()
+
+	mux := httptrace.NewServeMux(httptrace.WithAnalytics(true))
+	// ...
+}
+```
+**Database Services**
+
+Database tracing is not captured by Trace Search & Analytics by default and you must enable collection manually for each integration.
+
+**Custom instrumentation**
+
+For custom instrumentation, a special tag has been added to enable Trace Search & Analytics on a span, as can be seen below:
+
+```go
+span.SetTag(ext.AnalyticsEvent, true)
+```
+
+This will mark the span as a Trace Search & Analytics event.
+
+
+[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
+[2]: https://app.datadoghq.com/apm/search
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+### Automatic Configuration
+
+Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the tracing client:
+
+```javascript
+tracer.init({
+  analytics: true
+})
+```
+
+After enabling, the Trace Search & Analytics UI will now populate, you can get started [here][1].
+
+### Configure Additional Services (optional)
+
+**Configure By Integration**
+
+In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
+
+* System Property: `-Ddd.<integration>.analytics.enabled=true`
+* Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
+
+Use this in addition to the global configuration for any integrations that submit custom services. For example, for JMS spans which comes in as a custom service, you can set the following to enable all JMS Tracing in Trace Search & Analytics:
+
+* System Property: `-Ddd.jms.analytics.enabled=true`
+* Environment Variable: `DD_JMS_ANALYTICS_ENABLED=true`
+
+Integration names can be found on the [integrations table][2].
+
+**Database Services**
+
+Database tracing is not captured by Trace Search & Analytics by default and you must enable collection manually for each integration. For example:
+
+```javascript
+tracer.use('mysql', {
+  analytics: true
+})
+```
+
+**Custom Instrumentation**
+
+Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS` tag on the service root span:
+
+```javascript
+const { ANALYTICS } = require('dd-trace/ext/tags')
+
+span.setTag(ANALYTICS, true)
+```
+
+[1]: https://app.datadoghq.com/apm/search
+[2]: /tracing/languages/nodejs/#integrations
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+
+[1]: /help
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+### Automatic Configuration
+
+Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the Tracing Client:
+
+* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
+
+After enabling, the Trace Search & Analytics UI will now populate, you can get started [here][1].
+
+### Configure Additional Services (optional)
+
+**Configure By Integration**
+
+In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
+
+* System Property: `-Ddd.<integration>.analytics.enabled=true`
+* Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
+
+Use this in addition to the global configuration for any integrations that submit custom services. For example, for JMS spans which comes in as a custom service, you can set the following to enable all JMS Tracing in Trace Search & Analytics:
+
+* System Property: `-Ddd.jms.analytics.enabled=true`
+* Environment Variable: `DD_JMS_ANALYTICS_ENABLED=true`
+
+Integration names can be found on the [integrations table][2].
+
+**Database Services**
+
+Database tracing is not captured by Trace Search & Analytics by default and you must enable collection manually for each integration. For example:
+
+```javascript
+tracer.use('mysqli', {
+  analytics: true
+})
+```
+
+**Custom Instrumentation**
+
+Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS_KEY` tag on the service root span:
+
+```php
+
+// ... your existing span that you want to enable for Trace Search & Analytics
+$span->setTag(Tag::ANALYTICS_KEY, true);
+
+```
+
+
+[1]: https://app.datadoghq.com/apm/search
+[2]: /tracing/languages/php/#integrations
+{{% /tab %}}
+{{% tab "C++" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+
+
+[1]: /help
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Custom Tagging
 
 Custom tagging allows adding tags in the form of key-value pairs to specific spans. These tags are used to correlate traces with other Datadog products to provide more details about specific spans.
 
-[Read more about tagging][1]
+[Read more about tagging][2]
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -33,10 +386,10 @@ import javax.servlet.http.HttpServletResponse;
 class ServletImpl extends AbstractHttpServlet {
   @Override
   void doGet(HttpServletRequest req, HttpServletResponse resp) {
-    final Tracer tracer = GlobalTracer.get();
-    if (tracer != null && tracer.activeSpan() != null) {
-      tracer.activeSpan().setTag("customer.id", 12345);
-      tracer.activeSpan().setTag("http.url", "/login");
+    final Span span = GlobalTracer.get().activeSpan();
+    if (span != null) {
+      span.setTag("customer.id", 12345);
+      span.setTag("http.url", "/login");
     }
     // servlet impl
   }
@@ -522,7 +875,7 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 
 ## Manual Instrumentation
 
-Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][2] and familiarize yourself with the core concepts of Datadog APM.
+Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][3] and familiarize yourself with the core concepts of Datadog APM.
 
 
 {{< tabs >}}
@@ -834,7 +1187,7 @@ To manually instrument your code, install the tracer as in the setup examples, a
 
 ## OpenTracing
 
-OpenTracing is a vendor-neutral, cross-language standard for tracing applications. Datadog offers OpenTracing implementations for many APM tracers. For more details see [opentracing.io][3].
+OpenTracing is a vendor-neutral, cross-language standard for tracing applications. Datadog offers OpenTracing implementations for many APM tracers. For more details see [opentracing.io][4].
 
 
 {{< tabs >}}
@@ -1179,7 +1532,7 @@ Distributed tracing allows you to propagate a single trace across multiple servi
 
 Distributed tracing headers are language agnostic. A trace started in one language may propagate to another (for example, from Python to Java).
 
-Distributed traces may sample inconsistently when the linked traces run on different hosts. To ensure that distributed traces are complete, enable [priority sampling][4].
+Distributed traces may sample inconsistently when the linked traces run on different hosts. To ensure that distributed traces are complete, enable [priority sampling][5].
 
 
 {{< tabs >}}
@@ -1412,7 +1765,7 @@ Priority sampling allows traces between two Datadog endpoints to be sampled toge
 
 Priority sampling automatically assigns and propagates a priority value along all traces, depending on their service and volume. Priorities can also be set manually to drop non-interesting traces or keep important ones.
 
-For a more detailed explanations of sampling and priority sampling, check the [sampling and storage][5] documentation.
+For a more detailed explanations of sampling and priority sampling, check the [sampling and storage][6] documentation.
 
 
 {{< tabs >}}
@@ -1617,7 +1970,7 @@ another_span->SetTag("sampling.priority", 0); // Discard this span.
 
 The correlation between Datadog APM and Datadog Log Management is improved by automatically adding a `trace_id` and `span_id` in your logs with the Tracing Libraries. This can then be used in the platform to show you the exact logs correlated to the observed trace.
 
-Before correlating traces with logs, ensure your logs are either [sent as JSON][6], or [parsed by the proper language level log processor][7].
+Before correlating traces with logs, ensure your logs are either [sent as JSON][7], or [parsed by the proper language level log processor][8].
 
 Your language level logs *must* be turned into Datadog attributes in order for traces and logs correlation to work.
 
@@ -2266,10 +2619,11 @@ apm_config:
       pattern: "(?s).*"
 ```
 
-[1]: /tagging
-[2]: /tracing/visualization/services_list
-[3]: http://opentracing.io
-[4]: #priority-sampling
-[5]: /tracing/getting_further/trace_sampling_and_storage
-[6]: /logs/log_collection/?tab=tailexistingfiles#send-your-application-logs-in-json
-[7]: /logs/log_collection/?tab=tailexistingfiles#enabling-log-collection-from-integrations
+[1]: /tracing/visualization/search
+[2]: /tagging
+[3]: /tracing/visualization/services_list
+[4]: http://opentracing.io
+[5]: #priority-sampling
+[6]: /tracing/getting_further/trace_sampling_and_storage
+[7]: /logs/log_collection/?tab=tailexistingfiles#send-your-application-logs-in-json
+[8]: /logs/log_collection/?tab=tailexistingfiles#enabling-log-collection-from-integrations
