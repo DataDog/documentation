@@ -256,6 +256,16 @@ To send custom metrics via DogStatsD from your application pods, uncomment the `
 Another word of caution: some network plugins don't support `hostPorts` yet, so this won't work.
 The workaround in this case is to add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. It also means that all ports opened on the container are also opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod will not start. Not all Kubernetes installations allow this.
 
+### Short Lived containers
+
+By default, the agent looks for new containers every 5 seconds. Therefore any container that has a shorter duration life might not be picked up by the agent autodiscovery.
+
+One option to solve that situation is to override this value thanks to the `ad_config_poll_interval` parameter which correspond to the `DD_AD_CONFIG_POLL_INTERVAL` environment variable.
+The expected value is a integer in seconds.
+
+A workaround could also be to configure the container to wait for at least the poll interval before starting.
+This can be achieved by adding a sleep period that is as long as the poll interval:`sh -c 'sleep 5; exec yourcommand --etc`
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
