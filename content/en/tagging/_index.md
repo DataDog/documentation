@@ -3,10 +3,10 @@ title: Getting started with tags
 kind: documentation
 aliases:
     - /getting_started/getting_started_with_tags
-    - /guides/tagging/
-    - /developers/tagging/
+    - /guides/tagging
+    - /developers/tagging
     - /getting_started/tagging
-    - /tags/
+    - /tags
 further_reading:
 - link: "tagging/assigning_tags"
   tag: "Documentation"
