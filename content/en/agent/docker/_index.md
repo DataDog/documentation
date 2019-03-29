@@ -108,6 +108,17 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 
 **Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings and always count all containers. This does not affect your per-container billing.
 
+
+#### Short Lived containers
+
+By default, the agent looks for new containers every 5 seconds. Therefore any container that has a shorter duration life might not be picked up by the agent autodiscovery.
+
+One option to solve that situation is to override this value thanks to the `ad_config_poll_interval` parameter which correspond to the `DD_AD_CONFIG_POLL_INTERVAL` environment variable.
+The expected value is a integer in seconds.
+
+A workaround could also be to configure the container to wait for at least the poll interval before starting.
+This can be achieved by adding a sleep period that is as long as the poll interval:`sh -c 'sleep 5; exec yourcommand --etc`
+
 #### Misc
 
 | Env Variable                        | Description                                                                                                      |
