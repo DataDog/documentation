@@ -83,13 +83,8 @@ listeners:
 config_providers:
   - name: docker
     polling: true
-```
-
-To collect logs from all your containers without any filtering, add the following at the end of `docker.d/conf.yaml` in your Agent's `conf.d` directory:
-
-```
-logs:
-    - type: docker
+logs_config:
+  container_collect_all: true
 ```
 
 [Restart the Agent][3] to see all your container logs in Datadog.
