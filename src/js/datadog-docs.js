@@ -648,4 +648,22 @@ $(document).ready(function () {
         moveToAnchor($(this).attr('href').substr(1), true);
     });
 
+    // 404 Page
+    if ($('.kind-404').length){
+        var fourOFourSearchBtn = document.querySelector('.search-input-container-js .icon-thin-mag');
+        var fourOFourSearchInput = document.querySelector('.search-input-container-js .search-404');
+
+        fourOFourSearchBtn.addEventListener('click', searchHandler);
+        fourOFourSearchInput.addEventListener('keypress', searchHandler);
+
+        function searchHandler(e) {
+          if (e.keyCode === 13 || e.target.classList.contains('icon-thin-mag')) {
+
+            if (fourOFourSearchInput.value !== '') {
+              window.location.href = 'https://docs.datadoghq.com/search/?ref=404&s=' + fourOFourSearchInput.value;
+            }
+          }
+        }
+    }
+
 });
