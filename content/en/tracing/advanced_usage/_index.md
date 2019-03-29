@@ -104,12 +104,12 @@ Note several integrations require non-standard configuration due to the integrat
 
 Database tracing is not captured by Trace Search & Analytics by default, in order to enable these spans to be collected these can be configured per integration. For example:
 
-* System Property: `-Ddd.jdbc.analytics.enabled=true`
-* Environment Variable: `DD_JDBC_ANALYTICS_ENABLED=true`
+* Tracer Configuration: `ddtrace.config.postgres.analytics_enabled = True`
+* Environment Variable: `DD_POSTGRES_ANALYTICS_ENABLED=true`
 
 **Custom Instrumentation**
 
-Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS_KEY` tag on the service root span:
+Applications with custom instrumentation can enable trace analytics by setting the `ddtrace.constants.ANALYTICS_SAMPLE_RATE_KEY` tag on the service root span:
 
 ```python
 from ddtrace import tracer
@@ -165,8 +165,9 @@ Where `integration` is the name of the integration. See the [list of available i
 
 Database tracing is not captured by Trace Search & Analytics by default, in order to enable these spans to be collected these can be configured per integration. For example:
 
-* System Property: `-Ddd.jdbc.analytics.enabled=true`
-* Environment Variable: `DD_JDBC_ANALYTICS_ENABLED=true`
+```ruby
+Datadog.configure { |c| c.use :mongo, analytics_enabled: true }
+```
 
 **Custom Instrumentation**
 
@@ -219,10 +220,7 @@ func main() {
 ```
 **Database Services**
 
-Database tracing is not captured by Trace Search & Analytics by default, in order to enable these spans to be collected these can be configured per integration. For example:
-
-* System Property: `-Ddd.jdbc.analytics.enabled=true`
-* Environment Variable: `DD_JDBC_ANALYTICS_ENABLED=true`
+Database tracing is not captured by Trace Search & Analytics by default, in order to enable these spans to be collected these can be configured per integration.
 
 **Custom instrumentation**
 
@@ -233,6 +231,7 @@ span.SetTag(ext.AnalyticsEvent, true)
 ```
 
 This will mark the span as a Trace Search & Analytics event.
+
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
 [2]: https://app.datadoghq.com/apm/search
@@ -271,12 +270,15 @@ Integration names can be found on the [integrations table][2].
 
 Database tracing is not captured by Trace Search & Analytics by default, in order to enable these spans to be collected these can be configured per integration. For example:
 
-* System Property: `-Ddd.jdbc.analytics.enabled=true`
-* Environment Variable: `DD_JDBC_ANALYTICS_ENABLED=true`
+```javascript
+tracer.use('mysql', {
+  analytics: true
+})
+```
 
 **Custom Instrumentation**
 
-Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS_KEY` tag on the service root span:
+Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS` tag on the service root span:
 
 ```javascript
 const { ANALYTICS } = require('dd-trace/ext/tags')
@@ -324,8 +326,11 @@ Integration names can be found on the [integrations table][2].
 
 Database tracing is not captured by Trace Search & Analytics by default, in order to enable these spans to be collected these can be configured per integration. For example:
 
-* System Property: `-Ddd.jdbc.analytics.enabled=true`
-* Environment Variable: `DD_JDBC_ANALYTICS_ENABLED=true`
+```javascript
+tracer.use('mysqli', {
+  analytics: true
+})
+```
 
 **Custom Instrumentation**
 
