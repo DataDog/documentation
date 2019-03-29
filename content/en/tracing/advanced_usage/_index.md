@@ -30,7 +30,7 @@ In addition to setting globally, you can enable or disable Trace Search & Analyt
 * System Property: `-Ddd.<integration>.analytics.enabled=true`
 * Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-This can be used in addition to the global configuration for any Integrations that submit Custom Services. For example, for JMS spans which comes in as a Custom Service, you can set the following to enable all JMS Tracing in Trace Search & Analytics:
+Use this in addition to the global configuration for any integrations that submit custom services. For example, for JMS spans which comes in as a custom service, you can set the following to enable all JMS Tracing in Trace Search & Analytics:
 
 * System Property: `-Ddd.jms.analytics.enabled=true`
 * Environment Variable: `DD_JMS_ANALYTICS_ENABLED=true`
@@ -39,7 +39,7 @@ Integration names can be found on the [integrations table][2].
 
 **Database Services**
 
-Database tracing is not captured by Trace Search & Analytics by default, in order to enable these spans to be collected these can be configured per integration. For example:
+Database tracing is not captured by Trace Search & Analytics by default and you must enable collection manually for each integration. For example:
 
 * System Property: `-Ddd.jdbc.analytics.enabled=true`
 * Environment Variable: `DD_JDBC_ANALYTICS_ENABLED=true`
@@ -75,7 +75,7 @@ class MyClass {
 
 ### Automatic Configuration
 
-Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the Tracing Client:
+Enable Trace Search & Analytics globally for all web integrations with one configuration parameter in the Tracing Client:
 
 * Tracer Configuration: `ddtrace.config.analytics_enabled = True`
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
@@ -91,7 +91,7 @@ In addition to setting globally, you can enable or disable Trace Search & Analyt
 * Tracer Configuration: `ddtrace.config.<INTEGRATION>.analytics_enabled = True`
 * Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-This can be used in addition to the global configuration for any Integrations that submit Custom Services. For example, for Boto spans which comes in as a Custom Service, you can set the following to enable all Boto Tracing in Trace Search & Analytics:
+Use this in addition to the global configuration for any integrations that submit custom services. For example, for Boto spans which comes in as a custom service, you can set the following to enable all Boto Tracing in Trace Search & Analytics:
 
 * Tracer Configuration: `ddtrace.config.boto.analytics_enabled = True`
 * Environment Variable: `DD_BOTO_ANALYTICS_ENABLED=true`
@@ -102,7 +102,7 @@ Note several integrations require non-standard configuration due to the integrat
 
 **Database Services**
 
-Database tracing is not captured by Trace Search & Analytics by default, in order to enable these spans to be collected these can be configured per integration. For example:
+Database tracing is not captured by Trace Search & Analytics by default and you must enable collection manually for each integration. For example:
 
 * Tracer Configuration: `ddtrace.config.postgres.analytics_enabled = True`
 * Environment Variable: `DD_POSTGRES_ANALYTICS_ENABLED=true`
@@ -157,13 +157,13 @@ Datadog.configure { |c| c.use :integration, analytics_enabled: true }
 
 Where `integration` is the name of the integration. See the [list of available integrations][2] for options.
 
-- `true` enables analytics for this integration, regardless of global setting.
-- `false` disables analytics for this integration, regardless of global setting.
+- `true` enables analytics for this integration, regardless of the global setting.
+- `false` disables analytics for this integration, regardless of the global setting.
 - `nil` defers to global setting for analytics.
 
 **Database Services**
 
-Database tracing is not captured by Trace Search & Analytics by default, in order to enable these spans to be collected these can be configured per integration. For example:
+Database tracing is not captured by Trace Search & Analytics by default and you must enable collection manually for each integration. For example:
 
 ```ruby
 Datadog.configure { |c| c.use :mongo, analytics_enabled: true }
@@ -200,7 +200,7 @@ After enabling, the Trace Search & Analytics UI should start showing results. Vi
 
 **Configure by Integration**
 
-In addition to the global setting, you can enable or disable Trace Search & Analytics individually for each integration. All of them should have the option to. As an example, for configuring the standard library's `net/http` package you could do:
+In addition to the global setting, you can enable or disable Trace Search & Analytics individually for each integration. As an example, for configuring the standard library's `net/http` package, you could do:
 
 ```go
 package main
@@ -220,7 +220,7 @@ func main() {
 ```
 **Database Services**
 
-Database tracing is not captured by Trace Search & Analytics by default, in order to enable these spans to be collected these can be configured per integration.
+Database tracing is not captured by Trace Search & Analytics by default and you must enable collection manually for each integration.
 
 **Custom instrumentation**
 
@@ -259,7 +259,7 @@ In addition to setting globally, you can enable or disable Trace Search & Analyt
 * System Property: `-Ddd.<integration>.analytics.enabled=true`
 * Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-This can be used in addition to the global configuration for any Integrations that submit Custom Services. For example, for JMS spans which comes in as a Custom Service, you can set the following to enable all JMS Tracing in Trace Search & Analytics:
+Use this in addition to the global configuration for any integrations that submit custom services. For example, for JMS spans which comes in as a custom service, you can set the following to enable all JMS Tracing in Trace Search & Analytics:
 
 * System Property: `-Ddd.jms.analytics.enabled=true`
 * Environment Variable: `DD_JMS_ANALYTICS_ENABLED=true`
@@ -268,7 +268,7 @@ Integration names can be found on the [integrations table][2].
 
 **Database Services**
 
-Database tracing is not captured by Trace Search & Analytics by default, in order to enable these spans to be collected these can be configured per integration. For example:
+Database tracing is not captured by Trace Search & Analytics by default and you must enable collection manually for each integration. For example:
 
 ```javascript
 tracer.use('mysql', {
@@ -315,7 +315,7 @@ In addition to setting globally, you can enable or disable Trace Search & Analyt
 * System Property: `-Ddd.<integration>.analytics.enabled=true`
 * Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-This can be used in addition to the global configuration for any Integrations that submit Custom Services. For example, for JMS spans which comes in as a Custom Service, you can set the following to enable all JMS Tracing in Trace Search & Analytics:
+Use this in addition to the global configuration for any integrations that submit custom services. For example, for JMS spans which comes in as a custom service, you can set the following to enable all JMS Tracing in Trace Search & Analytics:
 
 * System Property: `-Ddd.jms.analytics.enabled=true`
 * Environment Variable: `DD_JMS_ANALYTICS_ENABLED=true`
@@ -324,7 +324,7 @@ Integration names can be found on the [integrations table][2].
 
 **Database Services**
 
-Database tracing is not captured by Trace Search & Analytics by default, in order to enable these spans to be collected these can be configured per integration. For example:
+Database tracing is not captured by Trace Search & Analytics by default and you must enable collection manually for each integration. For example:
 
 ```javascript
 tracer.use('mysqli', {
