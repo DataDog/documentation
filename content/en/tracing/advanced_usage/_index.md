@@ -61,7 +61,7 @@ class MyClass {
     // Span provided by @Trace annotation.
     if (span != null) {
       span.setTag(DDTags.SERVICE_NAME, "my-custom-service");
-      span.setTag(DDTags.ANALYTICS_KEY, True);
+      span.setTag(DDTags.ANALYTICS_KEY, true);
     }
   }
 }
@@ -213,7 +213,7 @@ import (
 func main() {
 	tracer.Start()
 	defer tracer.Stop()
-    
+
 	mux := httptrace.NewServeMux(httptrace.WithAnalytics(true))
 	// ...
 }
