@@ -109,7 +109,7 @@ logs:
 ```
 
 Refer to the [journald integration][2] documentation for more details regarding the setup for containerized environments and units filtering.
- 
+
 
 
 
@@ -372,7 +372,7 @@ In the `datadog.yaml` file:
 
 ```
 logs_config:
-  processing_rules:
+  log_processing_rules:
      - type: exclude_at_match
        name: exclude_healthcheck
        pattern: healtcheck
@@ -435,4 +435,4 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [6]: /developers/metrics/custom_metrics
 [7]: /tagging
 [8]: /agent/proxy/#proxy-for-logs
-[9]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information 
+[9]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information

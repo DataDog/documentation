@@ -329,7 +329,7 @@ Dans le fichier `datadog.yaml` : 
 
 ```
 logs_config:
-  processing_rules:
+  log_processing_rules:
      - type: exclude_at_match
        name: exclude_healthcheck
        pattern: healtcheck
