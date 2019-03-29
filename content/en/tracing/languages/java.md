@@ -44,7 +44,7 @@ Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mi
 
 * Timing duration is captured using the JVM's nanotime clock unless a timestamp is provided from the OpenTracing api
 * Key/value tag pairs
-* Errors and stacktraces which are unhanded by the application
+* Errors and stacktraces which are unhandled by the application
 * A total count of traces (requests) flowing through the system
 
 ## Compatibility
