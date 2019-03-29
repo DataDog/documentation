@@ -479,3 +479,4 @@ To generate this final JSON document:
 [4]: https://github.com/logstash/logstash-logback-encoder#prefixsuffix
 [5]: /logs/?tab=euregion#datadog-logs-endpoints
 [6]: /logs/processing/parsing/#key-value
+[7]: https://www.datadoghq.com/blog/java-logging-guide/
