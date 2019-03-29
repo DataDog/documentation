@@ -1,9 +1,9 @@
 ---
-title: "Utilisation de base de l'Agent pour Amazon\_Linux"
+title: Utilisation de base de l'Agent pour CentOS
 kind: documentation
-platform: "Amazon\_Linux"
+platform: CentOS
 aliases:
-  - /fr/guides/basic_agent_usage/amazonlinux/
+  - /fr/guides/basic_agent_usage/centos/
 further_reading:
   - link: logs/
     tag: Documentation
@@ -17,7 +17,9 @@ further_reading:
 ---
 ## Présentation
 
-Cette page présente les fonctionnalités de base de l'Agent Datadog pour Amazon Linux. Si vous n'avez pas encore installé l'Agent, vous trouverez des instructions dans la documentation relative à l'[intégration de l'Agent Datadog][1].
+Cette page présente les fonctionnalités de base de l'Agent Datadog pour CentOS. Pour installer l'Agent Datadog, suivez les [instructions d'installation de l'Agent][1] pour CentOs.
+
+**Remarque** : les versions 6 et supérieures de CentOS sont prises en charge.
 
 ## Commandes
 
@@ -105,7 +107,7 @@ Pour en savoir plus, consultez les instructions pour découvrir comment [ajouter
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/aws
+[1]: https://app.datadoghq.com/account/settings#agent/centos
 [2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
 [3]: /fr/agent/troubleshooting
 [4]: /fr/agent/faq/custom_python_package
