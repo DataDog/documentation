@@ -264,11 +264,11 @@ h5{
   & > p > a,
   & > ol li a,
   & > ul li a {
-    text-decoration:none;
-    color: $ddpurple;
+    color: #4a4a4a;
+    border-bottom: 1px solid $gray-600;
     &:hover {
-      color: $gray-600;
-      border-bottom: 1px solid $gray-600;
+      color: $ddpurple;
+      border-bottom: 1px solid $ddpurple;
     }
   }
 
