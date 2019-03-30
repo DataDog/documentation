@@ -1,13 +1,13 @@
 ---
-title: Arithmetic in Monitor Evaluations
+title: Division in Monitor Evaluations
 kind: guide
 aliases:
-  - /monitors/faq/arithmetic-in-Monitor-Evaluations
+  - /monitors/faq/Division-in-Monitor-Evaluations
 ---
 
 ## Overview
 
-You may want to create an alert based on a formula involving multiple metric queries. There are some tools and behaviors that you should consider to ensure your monitor settings are appropriate for evaluating queries as you intend. The scenarios discussed below will mostly pertain to division, but many of these principles can generally be applied to any combination of operations, except where explicitly stated.
+Creating an alert based on a query with division is a common practice. There are some tools and behaviors that should be considered to ensure monitor settings are appropriate for evaluating these queries as intended.
 
 ## Error Rate Example
 
@@ -62,7 +62,7 @@ Compare the result of the evaluation depending of the path:
 | **`as_count_eval_path`** | Aggregation function applied _before_ division | **(1+2+...+5)/(5+5+...+5)** | **0.6** |
 | **`classic_eval_path`**  | Aggregation function applied _after_ division  | **(1/5 + 2/5 + ... + 5/5)** | **3**   |
 
-You could also use `avg` and `as_rate()` to get the same result as `sum` and `as_count()`:
+You could also use `avg` and `as_rate()` to get the same result as `sum` and `as_count()` :
 
 ```
 avg(last_5m): sum:requests.error{*}.as_rate() / sum:requests.total{*}.as_rate()
@@ -74,13 +74,13 @@ avg(last_5m): sum:requests.error{*}.as_rate() / sum:requests.total{*}.as_rate()
 
 _Note that all evaluations above are mathematically correct. Choose a method to suit your intention._
 
-\*If the metric is a rate, you can omit `.as_rate()`. Include this modifier to be explicit.
+\*If the metric is a rate, you can optionally omit `.as_rate()`. Include this modifier to be explicit.
 
 ## Sparse Metrics
 
 In case of sparse or _0_ metrics in the denominator some results are rejected in case of the `classic_eval_path`.
 
-Let's have following metrics:
+Let's consider the following metric values:
 
 - `A = (10, 10, 10)`
 - `B = (0, 1, -)`
@@ -100,7 +100,7 @@ If the evaluation window includes many "null" buckets (**10/NaN + 10/Nan + ... +
 
 ## `.rollup()`
 
-You can apply a `.rollup()` function to ensure all time buckets being evaluated have valid values.
+You can apply a `.rollup()` function to ensure all time buckets being evaluated have valid values. This function can be similarly useful for any metric with gaps, regardless of whether the query involves artithmetic.
 
 **Original**: `sum:my_metric.is.sparse{*}`
 
