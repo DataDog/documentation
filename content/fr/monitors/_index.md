@@ -73,7 +73,7 @@ Si un monitor émet une alerte car ses données actuelles déclenchent l'état `
 
 Lorsque les données sont transmises ponctuellement, il convient de *résoudre* manuellement un monitor. Après avoir déclenché une alerte, le monitor ne reçoit plus de données et ne peut donc plus évaluer les conditions d'alerte et revenir à l'état `OK`. Dans ce cas, la fonction *Resolve* ou *Automatically resolve monitor after X hours* rétablit l'état `OK` de l'alerte.
 
-Cette fonction vous permet par exemple de gérer un monitor reposant sur des métriques d'erreur qui ne sont pas générées en l'absence d'erreur (par ex. : `aws.elb.httpcode_elb_5xx` ou des counters DogStatsD dans votre code qui renvoient des informations _uniquement en cas d'erreur_).
+Cette fonction vous permet par exemple de gérer un monitor reposant sur des métriques d'erreur qui ne sont pas générées en l'absence d'erreur (par ex. : `aws.elb.httpcode_elb_5xx` ou des counters DogStatsD dans votre code qui renvoient des informations _uniquement en cas d'erreur_).
 
 ## Gérer des monitors
 
