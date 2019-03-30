@@ -199,7 +199,7 @@ If your monitor query requires division over an evaluation window of 1 minute, t
 | 2019-03-29 13:30:50   | 900                 | 1000                |
 | 2019-03-29 13:30:52   | 900                 | 1000                |
 | 2019-03-29 13:30:54   | 900                 | 1000                |
-| 2019-03-29 13:30:56   | 120 (inc)           | 850                 |
+| 2019-03-29 13:30:56   | 120 (inc)           | 850 (inc)           |
 ```
 
 In the case of a query like `avg(last_1m):sum:my_num{*}/sum:my_denom{*}`, the average value could be skewed quite a bit and could trigger your monitor unintentionally.
