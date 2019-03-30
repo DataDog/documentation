@@ -184,13 +184,13 @@ With `.fill(last)` the new result would be:
 
 ## Short Evaluation Windows
 
-Monitors can have timing issues with division queries over short evaluation windows. Considering that the transmission of a metric commonly happens through this standard path below, it is not reasonable to expect this to happen instantaneously:
+Monitors can have timing issues with division queries over short evaluation windows. While Datadog's pipeline is quite efficient, considering that the transmission of a metric commonly happens through this standard path outlined below, it is certainly not reasonable to expect this to happen instantaneously:
 
 ```
 Datadog Agent (15-20s) -> The Web -> Datadog Intake and Processing -> Monitor Query
 ```
 
-If your monitor query requires division over an evaluation window of 1 minute, the numerator and denominator represent time buckets on the order of a few seconds. Whether through a delay in any part of the pipeline, or a query that is slowed due to a large number of contexts, querying the available values for the most recent time buckets could produce incomplete results for one of the operands, despite the metric being available soon after evaluation time.
+If your monitor query requires division over an evaluation window of 1 minute, the numerator and denominator represent time buckets on the order of a few seconds. Whether through a small delay in any part of the pipeline, or a query that is slowed due to a large number of contexts, querying the available values for the most recent time buckets could produce incomplete results for one of the operands, despite the metric being available soon after evaluation time.
 
 ```
 | Timestamp             | sum:my_num{*}       | sum:my_denom{*}     |
@@ -199,7 +199,7 @@ If your monitor query requires division over an evaluation window of 1 minute, t
 | 2019-03-29 13:30:50   | 900                 | 1000                |
 | 2019-03-29 13:30:52   | 900                 | 1000                |
 | 2019-03-29 13:30:54   | 900                 | 1000                |
-| 2019-03-29 13:30:56   | 12 (inc)            | 850                 |
+| 2019-03-29 13:30:56   | 120 (inc)           | 850                 |
 ```
 
 In the case of a query like `avg(last_1m):sum:my_num{*}/sum:my_denom{*}`, the average value could be skewed quite a bit and could trigger your monitor unintentionally.
