@@ -177,6 +177,19 @@ There are two ways to improve correlation between application traces and logs:
 
 {{< img src="logs/processing/processors/trace_processor.png" alt="Trace Id Processor" responsive="true" style="width:80%;">}}
 
+## Nested Pipelines
+
+Nested Pipelines are pipelines within a pipeline. Use Nested Pipelines to split the processing in two  steps. First a high level filtering, for example by team, and then a second level of filtering thanks to Nested Pipeline based on the integration or service.
+
+A pipeline can contain Nested Pipelines and Processors whereas a Nested Pipeline can only contain Processors.
+
+{{< img src="logs/processing/processors/nested_pipeline.png" alt="Nested Pipelines" responsive="true" style="width:80%;">}}
+
+It is possible to drag and drop a Pipeline into another Pipeline to transform it into a Nested Pipeline:
+
+{{< img src="logs/processing/processors/nested_pipeline_drag_drop.gif" alt="Drag and Drop Nested Pipelines" responsive="true" style="width:80%;">}}
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
