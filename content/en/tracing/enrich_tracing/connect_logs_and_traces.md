@@ -1,5 +1,5 @@
 ---
-title: Connect Log and Traces
+title: Connect Logs and Traces
 kind: documentation
 ---
 

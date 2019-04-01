@@ -196,7 +196,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 [1]: /tracing/setup/docker
 [2]: /tracing/guide/distributed_tracing
 [3]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[4]: /tracing/enrich_tracing/connect_log_and_traces/?tab=java
+[4]: /tracing/enrich_tracing/connect_logs_and_traces/?tab=java
 {{% /table %}}
 
 **Note**:

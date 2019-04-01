@@ -298,13 +298,13 @@ main:
           - name: "C++"
             url: "tracing/setup/cpp/"
 
-      # TRACING/APM - Setup Advanced
+      # Enrich Tracing
 
       - name: "Enrich Tracing"
         url: "tracing/enrich_tracing/"
         children:
           - name: "Correlate Traces and Logs"
-            url: "tracing/enrich_tracing/connect_log_and_traces"
+            url: "tracing/enrich_tracing/connect_logs_and_traces"
           - name: "Adding Metadata to Spans"
             url: "tracing/enrich_tracing/adding_metadata_to_spans"
           - name: "Runtime Metrics"

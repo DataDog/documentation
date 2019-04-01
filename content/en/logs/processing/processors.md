@@ -185,4 +185,4 @@ There are two ways to improve correlation between application traces and logs:
 [2]: /logs/processing/parsing
 [3]: https://en.wikipedia.org/wiki/Syslog#Severity_level
 [4]: /tagging/#tags-best-practices
-[5]: /tracing/enrich_tracing/connect_log_and_traces/?tab=java
+[5]: /tracing/enrich_tracing/connect_logs_and_traces/?tab=java

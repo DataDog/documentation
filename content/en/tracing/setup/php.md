@@ -208,7 +208,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 [6]: /agent/apm/?tab=agent630#agent-configuration
 [7]: https://github.com/DataDog/dd-trace-php/releases/latest
 [8]: https://app.datadoghq.com/apm/services
-[9]: /tracing/languages/php/manual-installation
+[9]: /tracing/faq/php-tracer-manual-installation
 [10]: #library-compatibility
 [11]: /help
 [12]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
