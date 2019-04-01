@@ -32,7 +32,7 @@ version: '1.0'
 ---
 ## Présentation
 
-Connectez-vous à Microsoft Azure pour :
+Associez Microsoft Azure pour :
 
 * Obtenir des métriques sur des machines virtuelles Azure sans avoir nécessairement à installer l'Agent
 * Appliquer un tag à vos machines virtuelles Azure comportant des informations spécifiques à Azure (p. ex, la localisation)
