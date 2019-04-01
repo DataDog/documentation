@@ -298,21 +298,6 @@ main:
           - name: "C++"
             url: "tracing/setup/cpp/"
 
-      # Using the APM UI
-      - name: "Use the APM UI"
-        url: "tracing/visualization/"
-        children:
-          - name: "Services List"
-            url: "tracing/visualization/services_list"
-          - name: "Service page"
-            url: "tracing/visualization/service"
-          - name: "Resource page"
-            url: "tracing/visualization/resource"
-          - name: "Trace page"
-            url: "tracing/visualization/trace"
-          - name: "Service Map"
-            url: "tracing/visualization/services_map"
-
       # Enrich Tracing
 
       - name: "Enrich Tracing"
@@ -330,6 +315,21 @@ main:
             url: "tracing/advanced/manual_instrumentation"
           - name: "Setting Primary Tags to scope "
             url: "tracing/advanced/setting_primary_tags_to_scope"
+
+      # Using the APM UI
+      - name: "Use the APM UI"
+        url: "tracing/visualization/"
+        children:
+          - name: "Services List"
+            url: "tracing/visualization/services_list"
+          - name: "Service page"
+            url: "tracing/visualization/service"
+          - name: "Resource page"
+            url: "tracing/visualization/resource"
+          - name: "Trace page"
+            url: "tracing/visualization/trace"
+          - name: "Service Map"
+            url: "tracing/visualization/services_map"
 
       # Trace Search
       - name: "Trace Search & Analytics"
