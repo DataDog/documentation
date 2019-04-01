@@ -260,7 +260,7 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 
 By default, the agent looks for new containers every 5 seconds. Therefore any container that has a shorter duration life might not be picked up by the agent autodiscovery.
 
-One option to solve that situation is to override this value thanks to the `ad_config_poll_interval` parameter which correspond to the `DD_AD_CONFIG_POLL_INTERVAL` environment variable.
+You can override this autodiscovery interval with a shorter one by setting `ad_config_poll_interval` parameter which correspond to the `DD_AD_CONFIG_POLL_INTERVAL` environment variable.
 The expected value is a integer in seconds.
 
 A workaround could also be to configure the container to wait for at least the poll interval before starting.
