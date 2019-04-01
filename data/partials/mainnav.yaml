@@ -305,7 +305,7 @@ main:
         children:
           - name: "Correlate Traces and Logs"
             url: "tracing/enrich_tracing/connect_log_and_traces"
-          - name: "Custom Tagging"
+          - name: "Adding Metadata to Spans"
             url: "tracing/enrich_tracing/adding_metadata_to_spans"
           - name: "Runtime Metrics"
             url: "tracing/enrich_tracing/runtime_metrics"
@@ -353,7 +353,8 @@ main:
         url: "tracing/guide"
 
       - name: Troubleshooting
-        url: "tracing/troubleshooting"
+        url: "tracing/troubleshooting/"
+
       #- #  name: "FAQ"
       #  url: "tracing/faq/"
       #  #  parent: menu_references_tracing
