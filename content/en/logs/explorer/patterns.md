@@ -33,17 +33,16 @@ The patterns view is helpful for detecting and filtering noisy error patterns th
 
 Switch to the patterns view to automatically see your log patterns for the selected context. A [context][1] is composed of a time range and a search query.
 
+Each pattern comes with highlights, to get you straight to its characteristic features:
+
+* Sections of the logs that vary within the pattern are highlighted, to help you quickly identify differences across log lines. 
+* A minigraph displays a rough timeline for the volume of its logs, to help you identify how that pattern differs from other patterns. 
+
+Click on a pattern to see a sample of underlying logs, and eventually display one single log.
+
+{{< img src="logs/explorer/patterns/patterns_overview.gif" alt="Log Patterns" responsive="true" style="width:90%;">}}
+
 **Note**: The pattern detection is based on 10,000 log samples. Refine the search to see patterns limited to a specific subset of logs:
-
-{{< img src="logs/explorer/log_patterns.png" alt="Log Patterns" responsive="true" style="width:90%;">}}
-
-Sections of the logs that vary within the pattern are highlighted to help you quickly identify differences across log lines.
-
-## Sample logs related to a pattern
-
-Click on a pattern to see underlying log samples:
-
-{{< img src="logs/explorer/patterns/sample_logs_related_to_pattern.gif" alt="Log Patterns" responsive="true" style="width:90%;">}}
 
 ## Further Reading
 
