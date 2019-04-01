@@ -315,7 +315,7 @@ Notes:
 
 All integrations are in Public Beta.
 
-<sup>1</sup> The `AspNet` integration adds instrumentation to any ASP.NET application based on `Systme.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. To enable the `AspNet` integration, you must add the [`Datadog.Trace.ClrProfiler.Managed`][6] NuGet package to your application.
+<sup>1</sup> The `AspNet` integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. To enable the `AspNet` integration, you must add the [`Datadog.Trace.ClrProfiler.Managed`][6] NuGet package to your application.
 
 <sup>2</sup> The ADO.NET integration tries to instrument **all** ADO.NET providers. Datadog tested SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (MySQL, SQLite, Oracle) are untested but should work.
 
@@ -323,9 +323,9 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 
 ## Manual Instrumentation
 
-To manually instrument your code, add the `Datadog.Trace` [NuGet package][7] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
+To manually instrument your code, add the `Datadog.Trace` [NuGet package][6] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][8].
+For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][7].
 
 ### Runtime Compatibility
 
@@ -337,7 +337,7 @@ Manual instrumentation is supported on .NET Framework 4.5+ on Windows and on any
 | .NET Core      | 2.0+     | Windows, Linux, macOS | Public Beta  |
 | Mono           | 5.4+     | Windows, Linux, macOS | Public Beta  |
 
-For more details on supported platforms, see the [.NET Standard documentation][9].
+For more details on supported platforms, see the [.NET Standard documentation][8].
 
 ## Change Agent Hostname
 
@@ -365,7 +365,6 @@ Tracer.Instance = tracer;
 [3]: #integrations
 [4]: https://github.com/dotnet/coreclr/issues/18448
 [5]: /help
-[6]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
-[7]: https://www.nuget.org/packages/Datadog.Trace
-[8]: /tracing/enrich_tracing/manual_instrumentation/?tab=net
-[9]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
+[6]: https://www.nuget.org/packages/Datadog.Trace
+[7]: /tracing/enrich_tracing/manual_instrumentation/?tab=net
+[8]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
