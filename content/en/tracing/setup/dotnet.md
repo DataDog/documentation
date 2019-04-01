@@ -1,6 +1,6 @@
 ---
 title: Tracing .NET Applications
-kind: Documentation
+kind: documentation
 aliases:
   - /tracing/dotnet
   - /tracing/languages/dotnet

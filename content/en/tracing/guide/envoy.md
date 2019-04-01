@@ -1,6 +1,6 @@
 ---
 title: Envoy
-kind: Documentation
+kind: documentation
 further_reading:
 - link: "tracing/visualization/"
   tag: "Use the APM UI"

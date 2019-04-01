@@ -1,6 +1,6 @@
 ---
 title: Tracing PHP Applications
-kind: Documentation
+kind: documentation
 aliases:
 - /tracing/languages/php
 - /agent/apm/php/

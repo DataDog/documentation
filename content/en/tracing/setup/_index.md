@@ -1,6 +1,6 @@
 ---
 title: Language instrumentation
-kind: Documentation
+kind: documentation
 aliases:
     - /tracing/languages
 ---

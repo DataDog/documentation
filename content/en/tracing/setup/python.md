@@ -1,6 +1,6 @@
 ---
 title: Tracing Python Applications
-kind: Documentation
+kind: documentation
 aliases:
 - /tracing/python/
 - /tracing/languages/python/

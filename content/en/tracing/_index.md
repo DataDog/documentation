@@ -1,6 +1,6 @@
 ---
 title: APM and Distributed Tracing
-kind: Documentation
+kind: documentation
 description: Instrument your code to improve performance
 further_reading:
 - link: "https://learn.datadoghq.com/course/view.php?id=4"

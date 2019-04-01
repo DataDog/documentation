@@ -1,6 +1,6 @@
 ---
 title: Trace Analytics
-kind: Documentation
+kind: documentation
 description: "Analytics on your APM data at infinite cardinality"
 aliases:
   - tracing/trace_search_analytics/analytics

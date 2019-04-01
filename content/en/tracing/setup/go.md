@@ -1,6 +1,6 @@
 ---
 title: Tracing Go Applications
-kind: Documentation
+kind: documentation
 aliases:
 - /tracing/go/
 - /tracing/languages/go

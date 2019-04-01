@@ -1,6 +1,6 @@
 ---
 title: Tracing Ruby Applications
-kind: Documentation
+kind: documentation
 aliases:
 - /tracing/ruby/
 - /tracing/languages/ruby/

@@ -1,6 +1,6 @@
 ---
 title: Trace Search
-kind: Documentation
+kind: documentation
 description: "Global search of all your traces with tags"
 aliases:
   - tracing/trace_search_analytics/analytics

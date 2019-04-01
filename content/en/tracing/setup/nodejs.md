@@ -1,6 +1,6 @@
 ---
 title: Tracing Node.js Applications
-kind: Documentation
+kind: documentation
 aliases:
 - /tracing/nodejs/
 - /tracing/languages/nodejs/

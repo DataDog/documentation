@@ -1,6 +1,6 @@
 ---
 title: Manual Installation
-kind: Documentation
+kind: documentation
 aliases:
   - /tracing/setup/php/manual-installation
   - /agent/apm/php/manual-installation
