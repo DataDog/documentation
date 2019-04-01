@@ -12,7 +12,7 @@ kind: guide
 {{< /whatsnext >}}
 
 
-### Proxy Configuration
+## Proxy Configuration
 
 {{< whatsnext desc="Guides for proxy configuration with Datadog Tracing:" >}}
     {{< nextlink href="tracing/guide/nginx" >}}Nginx Proxy Configuration{{< /nextlink >}}

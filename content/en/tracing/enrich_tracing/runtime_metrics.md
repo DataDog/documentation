@@ -7,7 +7,7 @@ Enable runtime metrics collection in the tracing client to gain additional insig
 
 {{< img src="tracing/jvm_runtime_trace.png" alt="JVM Runtime Trace" responsive="true" style="width:100%;">}}
 
-### Automatic Configuration
+## Automatic Configuration
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -30,9 +30,9 @@ By default, JVM metrics from your application are sent to the Datadog Agent over
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.0
-[3]: https://docs.datadoghq.com/agent/docker/#dogstatsd-custom-metrics
-[4]: https://docs.datadoghq.com/agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
-[5]: https://docs.datadoghq.com/integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[3]: /agent/docker/#dogstatsd-custom-metrics
+[4]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[5]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -76,7 +76,7 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 {{% /tab %}}
 {{< /tabs >}}
 
-### Data Collected
+## Data Collected
 
 {{< tabs >}}
 {{% tab "Java" %}}

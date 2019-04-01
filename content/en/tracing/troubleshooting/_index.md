@@ -3,7 +3,7 @@ title: Troubleshooting
 kind: documentation
 ---
 
-### Tracer debugging
+## Tracer debugging
 
 Datadog debug settings are used to diagnose issues or audit trace data.
 

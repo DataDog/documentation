@@ -3,11 +3,9 @@ title: Security
 kind: documentation
 ---
 
-## Security
-
 Sensitive information within your traces can be scrubbed [automatically](#automatic-scrubbing) or [manually](#replace-rules).
 
-#### Automatic scrubbing
+## Automatic scrubbing
 
 Automatic scrubbing is available for some services, such as ElasticSearch, MongoDB, Redis, Memcached, and HTTP server and client request URLs. Below is an example configuration snippet documenting all the available options.
 
@@ -52,7 +50,7 @@ apm_config:
       enabled: true
 ```
 
-#### Replace rules
+## Replace rules
 
 To scrub sensitive data from your span's tags, use the `replace_tags` setting. It is a list containing one or more groups of parameters that describe how to perform replacements of sensitive data within your tags. These parameters are:
 

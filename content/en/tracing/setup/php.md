@@ -210,7 +210,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 [8]: https://app.datadoghq.com/apm/services
 [9]: /tracing/languages/php/manual-installation
 [10]: #library-compatibility
-[11]: https://docs.datadoghq.com/help
+[11]: /help
 [12]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [13]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
 [14]: /tracing/advanced_usage/?tab=php#distributed-tracing

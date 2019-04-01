@@ -5,14 +5,14 @@ kind: documentation
 
 The correlation between Datadog APM and Datadog Log Management is improved by automatically adding a `trace_id` and `span_id` in your logs with the Tracing Libraries. This can then be used in the platform to show you the exact logs correlated to the observed trace.
 
-Before correlating traces with logs, ensure your logs are either [sent as JSON][1], or [parsed by the proper language level log processor][2].
+Before correlating traces with logs, ensure your logs are either sent as JSON, or [parsed by the proper language level log processor][1].
 
 Your language level logs *must* be turned into Datadog attributes in order for traces and logs correlation to work.
 
 {{< img src="tracing/trace_id_injection.png" alt="Logs in Traces" responsive="true" style="width:100%;">}}
 
 
-### Automatic Trace ID injection
+## Automatic Trace ID injection
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -27,7 +27,7 @@ If the logs are already JSON formatted, there is nothing left to do. If the logs
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
-[1]: 
+[1]: /tracing/languages/java/#configuration
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -82,7 +82,8 @@ This appends trace tags to web requests:
 # [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
 ```
 
-[1]: 
+
+[1]: /logs/log_collection/python/#configure-the-datadog-agent
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -138,7 +139,7 @@ $logger->pushProcessor(function ($record) {
 
 
 [1]: https://github.com/Seldaek/monolog
-[2]: https://docs.datadoghq.com/logs/log_collection/php
+[2]: /logs/log_collection/php
 [3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "C++" %}}
@@ -148,7 +149,7 @@ XXX_Coming_Soon_XXX
 {{% /tab %}}
 {{< /tabs >}}
 
-### Manual Trace ID injection
+## Manual Trace ID injection
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -211,7 +212,7 @@ Then update your logger configuration to include `dd.trace_id` and `dd.span_id` 
 [See the Java logging documentation][1] for more details about specific logger implementation or to learn how to log in JSON.
 
 
-[1]: https://docs.datadoghq.com/logs/log_collection/java/?tab=log4j#raw-format
+[1]: /logs/log_collection/java/?tab=log4j#raw-format
 [2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -285,7 +286,7 @@ Once the logger is configured, executing a traced function that logs an event yi
 [See the Python logging documentation][1] to ensure that the Python Log Integration is properly configured so that your Python logs are automatically parsed.
 
 
-[1]: https://docs.datadoghq.com/logs/log_collection/python/#configure-the-datadog-agent
+[1]: /logs/log_collection/python/#configure-the-datadog-agent
 [2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Ruby" %}}
@@ -324,7 +325,7 @@ Datadog.tracer.trace('my.operation') { logger.warn('This is a traced operation.'
 See the [Ruby logging documentation][1] to verify the Ruby log integration is properly configured and your ruby logs are automatically parsed.
 
 
-[1]: https://docs.datadoghq.com/logs/log_collection/ruby/#configure-the-datadog-agent
+[1]: /logs/log_collection/ruby/#configure-the-datadog-agent
 [2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -360,7 +361,7 @@ The above example illustrates how to use the span's context in the standard libr
 **Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][2].
 
 
-[1]: https://docs.datadoghq.com/tracing/languages/go/#configuration
+[1]: /tracing/languages/go/#configuration
 [2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -429,9 +430,7 @@ module.exports = Logger
 
 **Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][2].
 
-
-
-[1]: https://docs.datadoghq.com/logs/log_collection/nodejs
+[1]: /logs/log_collection/nodejs
 [2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "PHP" %}}
@@ -444,6 +443,6 @@ XXX_Coming_Soon_XXX
 {{% /tab %}}
 {{< /tabs >}}
 
-### Further Reading
-[1]: 
-[2]: /logs/log_collection/?tab=tailexistingfiles#enabling-log-collection-from-integrations
+## Further Reading
+
+[1]: /logs/log_collection/?tab=tailexistingfiles#enabling-log-collection-from-integrations

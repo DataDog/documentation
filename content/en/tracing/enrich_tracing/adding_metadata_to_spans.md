@@ -12,7 +12,7 @@ Metadata can be:
 * [Added globally to all spans](#adding-tags-globally-to-all-spans)
 
 
-### Adding tags to a span
+## Adding tags to a span
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -236,7 +236,7 @@ if (null !== $span) {
 {{% /tab %}}
 {{< /tabs >}}
 
-### Adding tags globally to all spans
+## Adding tags globally to all spans
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -332,6 +332,6 @@ Values are of [variable type][1] and can be complex objects. Values are serializ
 {{< /tabs >}}
 
 
-### Further Reading
+## Further Reading
 
 [1]: /tagging

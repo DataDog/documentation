@@ -9,9 +9,7 @@ kind: documentation
 
 {{< img src="tracing/enable_trace_search.png" alt="Trace Sampling UI" responsive="true" style="width:100%;">}}
 
-### 
-
-### Automatic Configuration
+## Automatic Configuration
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -105,9 +103,9 @@ XXX_Coming_Soon_XXX
 {{< /tabs >}}
 
 
-### Configure Additional Services (optional)
+## Configure Additional Services (optional)
 
-#### Configure by integration
+### Configure by integration
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -232,7 +230,7 @@ XXX_Coming_Soon_XXX
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Database Services
+### Database Services
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -294,7 +292,7 @@ XXX_Coming_Soon_XXX
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Custom instrumentation
+### Custom instrumentation
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -393,4 +391,5 @@ XXX_Coming_Soon_XXX
 {{< /tabs >}}
 
 ## Further Reading
-[1]: 
+
+[1]: https://app.datadoghq.com/apm/search

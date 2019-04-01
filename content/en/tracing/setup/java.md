@@ -196,7 +196,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 [1]: /tracing/setup/docker
 [2]: /tracing/advanced_usage/?tab=java#distributed-tracing
 [3]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[4]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=java#logging
+[4]: /tracing/advanced_usage/?tab=java#logging
 {{% /table %}}
 
 **Note**:
@@ -313,7 +313,7 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 [4]: https://github.com/DataDog/dd-trace-java/blob/master/CONTRIBUTING.md
 [5]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
 [6]: http://bytebuddy.net
-[7]: 
+[7]: /help
 [8]: /help
 [9]: https://github.com/DataDog/documentation#outside-contributors
 [10]: https://github.com/openzipkin/b3-propagation
