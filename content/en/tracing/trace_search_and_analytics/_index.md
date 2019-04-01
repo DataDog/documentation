@@ -7,7 +7,7 @@ kind: documentation
 
 [Trace Search & Analytics][1] is used to filter APM Data by [user-defined tags](#custom-tagging) such as `customer_id`, `error_type` or `app_name` to help troubleshoot and filter your requests. Apply the following configuration to your application to enable this feature.
 
-{{< img src="tracing/enable_trace_search.png" alt="Trace Sampling UI" responsive="true" style="width:100%;">}}
+{{< img src="tracing/trace_search_and_analytics/enable_trace_search.png" alt="Trace Sampling UI" responsive="true" style="width:100%;">}}
 
 ## Automatic Configuration
 

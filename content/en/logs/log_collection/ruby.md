@@ -277,4 +277,4 @@ end
 [1]: https://docs.datadoghq.com/logs/?tab=ussite#reserved-attributes)
 [2]: https://github.com/roidrage/lograge#installation
 [3]: https://github.com/TwP/logging/blob/master/lib/logging/layouts/parseable.rb#L100
-[4]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=ruby#correlate-traces-and-logs
+[4]: /tracing/enrich_tracing/connect_log_and_traces/?tab=ruby

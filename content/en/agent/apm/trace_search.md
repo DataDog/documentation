@@ -51,6 +51,7 @@ DD_APM_ANALYZED_SPANS="<SERVICE_NAME_1>|<OPERATION_NAME_1>=1,<SERVICE_NAME_2>|<O
 
 {{% /tab %}}
 {{< /tabs >}}
-[1]: 
-[2]: 
-[3]: 
+
+[1]: https://app.datadoghq.com/apm/services
+[2]: https://app.datadoghq.com/apm/docs/trace-search
+[3]: /tracing/trace_search_and_analytics/search/#apm-events

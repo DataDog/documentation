@@ -104,7 +104,7 @@ For more information about the Datadog Agent, see the [dedicated doc page][12] o
 [7]: /tracing/visualization
 [8]: /agent/faq/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
 [9]: /agent/docker/apm
-[10]: /tracing/advanced_usage/#replace-rules
+[10]: /tracing/guide/security
 [11]: https://github.com/DataDog/datadog-trace-agent/blob/6.4.1/datadog.example.yaml
 [12]: /agent
 [13]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml

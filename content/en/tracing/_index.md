@@ -20,11 +20,11 @@ Datadog APM provides you with deep insight into your application's performance-f
 Datadog APM is offered as an upgrade to the Pro and Enterprise plans. A free 14-day trial is available. Registered users can visit the [APM page of the Datadog application][1] to get started.
 
 {{< whatsnext desc="Get started with Datadog APM">}}
-    {{< nextlink href="/agent/apm" >}}Configure your Agent to collect your Application Traces{{< /nextlink >}}
-    {{< nextlink href="/tracing/languages" >}}Set up your Application to send traces to your Datadog Agent{{< /nextlink >}}
-    {{< nextlink href="/tracing/visualization" >}}Visualize services, resources, and traces in Datadog {{< /nextlink >}}
-    {{< nextlink href="/tracing/getting_further" >}}Learn more about Datadog APM product specificities{{< /nextlink >}}
-    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Join the APM channel in the Public Datadog Slack for additional help from Datadog staff{{< /nextlink >}}
+    {{< nextlink href="/agent/apm" >}} 1 - Configure your Agent to collect your Application Traces{{< /nextlink >}}
+    {{< nextlink href="/tracing/languages" >}}2 - Set up your Application to send traces to your Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="/tracing/visualization" >}} 3 - Visualize services, resources, and traces in Datadog {{< /nextlink >}}
+    {{< nextlink href="/tracing/getting_further" >}}4 - Learn more about Datadog APM product specificities{{< /nextlink >}}
+    {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}5 - Join the APM channel in the Public Datadog Slack for additional help from Datadog staff{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Terminology
@@ -51,5 +51,5 @@ Datadog APM is offered as an upgrade to the Pro and Enterprise plans. A free 14-
 [7]: /tracing/visualization/trace
 [8]: /tracing/setup
 [9]: /tracing/visualization/resource/#traces
-[10]: /tracing/visualization/search
+[10]: /tracing/trace_search_and_analytics/search
 [11]: /tracing/visualization/trace/#spans

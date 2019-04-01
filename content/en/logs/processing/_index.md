@@ -162,4 +162,4 @@ To change the default values for each of the reserved attributes, go to the [Con
 [14]: /logs/explorer/search
 [15]: /logs/processing/processors/#log-status-remapper
 [16]: /logs/faq/integration-pipeline-reference
-[17]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=java#correlate-traces-and-logs
+[17]: /tracing/enrich_tracing/connect_log_and_traces/?tab=java

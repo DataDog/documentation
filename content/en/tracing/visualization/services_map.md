@@ -86,6 +86,6 @@ Monitors are not constrained to APM monitors. The service tag, described above, 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/advanced_usage/#distributed-tracing
+[1]: /tracing/guide/distributed_tracing
 [2]: /tracing/setup/first_class_dimensions
 [3]: https://app.datadoghq.com/apm/services

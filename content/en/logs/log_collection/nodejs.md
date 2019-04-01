@@ -127,4 +127,4 @@ Make sure that the parameter `max_connect_retries` is not set to `1` (the defaul
 
 [1]: https://github.com/winstonjs/winston
 [2]: https://www.npmjs.com
-[3]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=nodejs#correlate-traces-and-logs
+[3]: /tracing/enrich_tracing/connect_log_and_traces/?tab=nodejs

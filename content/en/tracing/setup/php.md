@@ -186,11 +186,11 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_AUTOFINISH_SPANS`                | `false`     | Whether spans are automatically finished when the tracer is flushed         |
 | `DD_DISTRIBUTED_TRACING`             | `true`      | Whether to enable [distributed tracing][14]                                 |
 | `DD_INTEGRATIONS_DISABLED`           | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                        |
-| `DD_PRIORITY_SAMPLING`               | `true`      | Whether to enable [priority sampling][15]                                   |
+| `DD_PRIORITY_SAMPLING`               | `true`      | Whether to enable priority sampling.                                   |
 | `DD_SAMPLING_RATE`                   | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default)         |
 | `DD_TRACE_AGENT_PORT`                | `8126`      | The Agent port number                                                       |
 | `DD_TRACE_APP_NAME`                  | ``          | The default app name                                                        |
-| `DD_TRACE_DEBUG`                     | `false`     | Enable [debug mode][16] for the tracer                                      |
+| `DD_TRACE_DEBUG`                     | `false`     | Enable [debug mode][15] for the tracer                                      |
 | `DD_TRACE_ENABLED`                   | `true`      | Enable the tracer globally                                                  |
 | `DD_TRACE_GLOBAL_TAGS`               | ``          | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`                |
 | `DD_TRACE_ANALYTICS_ENABLED`         | `false`     | Flag to enable trace analytics for relevant spans in web integrations       |
@@ -213,6 +213,5 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 [11]: /help
 [12]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [13]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
-[14]: /tracing/advanced_usage/?tab=php#distributed-tracing
-[15]: /tracing/advanced_usage/?tab=php#priority-sampling
-[16]: /tracing/advanced_usage/?tab=php#debugging
+[14]: /tracing/guide/distributed_tracing/?tab=php
+[15]: /tracing/troubleshooting

@@ -325,7 +325,7 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 
 To manually instrument your code, add the `Datadog.Trace` [NuGet package][7] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For more details on manual instrumentation and custom tagging, see [Advanced Usage][8].
+For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][8].
 
 ### Runtime Compatibility
 
@@ -367,5 +367,5 @@ Tracer.Instance = tracer;
 [5]: /help
 [6]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
 [7]: https://www.nuget.org/packages/Datadog.Trace
-[8]: /tracing/advanced_usage/?tab=net
+[8]: /tracing/enrich_tracing/manual_instrumentation/?tab=net
 [9]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support

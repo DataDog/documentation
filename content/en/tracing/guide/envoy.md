@@ -15,7 +15,7 @@ further_reading:
   tag: "Source Code"
   text: "Datadog OpenTracing C++ Client"
 aliases:
-  - tracing/proxies/envoy
+  - /tracing/proxies/envoy
 ---
 
 Support for Datadog APM has been included in Envoy.

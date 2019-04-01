@@ -107,10 +107,10 @@ The **View in context** button updates the search request in order to show you t
 {{< img src="logs/explorer/upper_log_panel.png" alt="configure display table" responsive="true" style="width:50%;">}}
 
 
-[1]: /logs/explorer/search
-[2]: /logs/processing/attributes_naming_convention/
-[3]: /tracing/advanced_usage/?tab=java#correlate-traces-and-logs
 
+[1]: /logs/explorer/search
+[2]: /logs/processing/attributes_naming_convention
+[3]: /tracing/enrich_tracing/connect_log_and_traces
 {{% /tab %}}
 {{% tab "Log Analytics" %}}
 

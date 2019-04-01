@@ -194,9 +194,9 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.logs.injection`                | `DD_LOGS_INJECTION`                | false                | Enabled automatic MDC key injection for Datadog trace and span ids. See [Advanced Usage][4] for details                                                                                                                 |
 
 [1]: /tracing/setup/docker
-[2]: /tracing/advanced_usage/?tab=java#distributed-tracing
+[2]: /tracing/guide/distributed_tracing
 [3]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[4]: /tracing/advanced_usage/?tab=java#logging
+[4]: /tracing/enrich_tracing/connect_log_and_traces/?tab=java
 {{% /table %}}
 
 **Note**:

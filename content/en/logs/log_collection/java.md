@@ -75,7 +75,7 @@ Once this is done, the `ConversionPattern` to use becomes:
 <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
 ```
 
-[1]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=java#correlate-traces-and-logs
+[1]: /tracing/enrich_tracing/connect_log_and_traces/?tab=java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Log4j2" %}}
@@ -103,7 +103,7 @@ Once this is done, the `PatternLayout` to use becomes:
 <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
 ```
 
-[1]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=java#correlate-traces-and-logs
+[1]: /tracing/enrich_tracing/connect_log_and_traces/?tab=java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Slf4j" %}}
@@ -139,7 +139,7 @@ Once this is done, the `Pattern` to use becomes:
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
 ```
 
-[1]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=java#correlate-traces-and-logs
+[1]: /tracing/enrich_tracing/connect_log_and_traces/?tab=java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{< /tabs >}}
@@ -183,7 +183,7 @@ Once that done, edit your `logback.xml` file as described in the below `Slf4j` s
 
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][1] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)][2] that are then automatically added in the JSON logs.
 
-[1]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=java#correlate-traces-and-logs
+[1]: /tracing/enrich_tracing/connect_log_and_traces/?tab=java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Log4j2" %}}
@@ -233,7 +233,7 @@ Then edit your `logback.xml` file and update the encoder:
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][2] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)][3] that are then automatically added in the JSON logs.
 
 [1]: https://github.com/logstash/logstash-logback-encoder
-[2]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=java#correlate-traces-and-logs
+[2]: /tracing/enrich_tracing/connect_log_and_traces/?tab=java
 [3]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{< /tabs >}}
