@@ -53,6 +53,9 @@ main:
       ## TRACING/APM - Setup basic
       - name: "APM"
         url: "agent/apm/"
+        children:
+          - name: "Agent Trace Search setup"
+            url: "agent/apm/trace_search"
       ## Docker
       - name: "Docker"
         url: "agent/docker/"
@@ -275,62 +278,43 @@ main:
     pre: "nav_tracing"
     children:
       # Languages
-      - name: "Languages Instrumentation"
-        url: "tracing/languages/"
+      - name: "Setup"
+        url: "tracing/setup/"
         children:
           - name: "Java"
-            url: "tracing/languages/java/"
+            url: "tracing/setup/java/"
           - name: "Python"
-            url: "tracing/languages/python/"
+            url: "tracing/setup/python/"
           - name: "Ruby"
-            url: "tracing/languages/ruby/"
+            url: "tracing/setup/ruby/"
           - name: "Go"
-            url: "tracing/languages/go/"
+            url: "tracing/setup/go/"
           - name: "Node.js"
-            url: "tracing/languages/nodejs/"
+            url: "tracing/setup/nodejs/"
           - name: ".NET"
-            url: "tracing/languages/dotnet/"
+            url: "tracing/setup/dotnet/"
           - name: "PHP"
-            url: "tracing/languages/php/"
+            url: "tracing/setup/php/"
           - name: "C++"
-            url: "tracing/languages/cpp/"
-
-      # Proxy Configuration
-      - name: "Proxy Configuration"
-        url: "tracing/proxies/"
-        children:
-          - name: "NGINX"
-            url: "tracing/proxies/nginx"
-          - name: "Envoy"
-            url: "tracing/proxies/envoy"
+            url: "tracing/setup/cpp/"
 
       # TRACING/APM - Setup Advanced
 
-      - name: "Advanced Instrumentation"
-        url: "tracing/advanced_usage/"
+      - name: "Enrich Tracing"
+        url: "tracing/enrich_tracing/"
         children:
-          - name: "Trace Search & Analytics"
-            url: "#trace-search-analytics"
-          - name: "Custom Tagging"
-            url: "#custom-tagging"
-          - name: "Change Agent Hostname"
-            url: "#change-agent-hostname"
-          - name: "Runtime Metrics"
-            url: "#runtime-metrics"
-          - name: "Manual Instrumentation"
-            url: "#manual-instrumentation"
-          - name: "OpenTracing"
-            url: "#opentracing"
-          - name: "Distributed Tracing"
-            url: "#distributed-tracing"
-          - name: "Priority Sampling"
-            url: "#priority-sampling"
           - name: "Correlate Traces and Logs"
-            url: "#correlate-traces-and-logs"
-          - name: "Debugging"
-            url: "#debugging"
-          - name: "Security"
-            url: "#security"
+            url: "tracing/enrich_tracing/connect_log_and_traces"
+          - name: "Custom Tagging"
+            url: "tracing/enrich_tracing/adding_metadata_to_spans"
+          - name: "Runtime Metrics"
+            url: "tracing/enrich_tracing/runtime_metrics"
+          - name: "OpenTracing"
+            url: "tracing/enrich_tracing/opentracing"
+          - name: "Manual Instrumentation"
+            url: "tracing/enrich_tracing/manual_instrumentation"
+          - name: "Setting Primary Tags to scope "
+            url: "tracing/enrich_tracing/setting_primary_tags_to_scope"
 
       # Using the APM UI
       - name: "Use the APM UI"
@@ -344,32 +328,17 @@ main:
             url: "tracing/visualization/resource"
           - name: "Trace page"
             url: "tracing/visualization/trace"
-
-          # Trace Search
-          - name: "Trace Search"
-            url: "tracing/visualization/search"
-          - name: "Trace Analytics"
-            url: "tracing/visualization/analytics"
-
           - name: "Service Map"
             url: "tracing/visualization/services_map"
 
-      # Getting further
-      - name: "Getting Further"
-        url: "tracing/getting_further/"
+      # Trace Search
+      - name: "Trace Search & Analytics"
+        url: "tracing/trace_search_and_analytics/"
         children:
-          - name: "Apdex"
-            url: "tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm"
-          - name: "Resource Monitor"
-            url: "tracing/getting_further/resource_monitor"
-          - name: "Service Monitor"
-            url: "monitors/monitor_types/apm"
-          - name: "APM in Dashboard"
-            url: "graphing/dashboards/widgets/#service-summary"
-          - name: "Trace metrics namespace"
-            url: "tracing/getting_further/metrics_namespace"
-          - name: "Storage & Sampling"
-            url: "tracing/getting_further/trace_sampling_and_storage"
+          - name: "Trace Search"
+            url: "tracing/trace_search_and_analytics/search"
+          - name: "Trace Analytics"
+            url: "tracing/trace_search_and_analytics/analytics"
 
       # Trace API
       - name: "Trace API"
@@ -383,6 +352,8 @@ main:
       - name: "Guides"
         url: "tracing/guide"
 
+      - name: Troubleshooting
+        url: "tracing/troubleshooting"
       #- #  name: "FAQ"
       #  url: "tracing/faq/"
       #  #  parent: menu_references_tracing
@@ -402,7 +373,7 @@ main:
           - name: "AWS"
             url: "integrations/amazon_web_services/#log-collection"
           - name: "Docker"
-            url: "logs/log_collection/docker"
+            url: "logs/log_collection/docker/"
           - name: "Csharp"
             url: "logs/log_collection/csharp/"
           - name: "Go"
