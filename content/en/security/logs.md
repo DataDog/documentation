@@ -25,6 +25,25 @@ For customers using release 6, the Agent can be configured to filter Logs sent b
 
 For customers using release 6, the Agent can be configured to obfuscate specific patterns within Logs sent by the Agent to the Datadog application. To mask sensitive sequences within your Logs, use the `log_processing_rules` [setting][4], with the  **mask_sequences** `type`. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to redact sensitive data within your Logs.
 
+## Configuration Requirements for HIPAA-enabled Customers
+
+Datadog will sign a Business Associate Agreement (BAA) with customers that transmit protected health information via Datadog’s Log Management Service.
+
+For customers that have a BAA in place with Datadog, the following security configurations for the Datadog Log Management Service must be put in place:
+
+* The Datadog agent must be configured to submit logs to `encrypted-intake.logs.datadoghq.com`
+* Other log sources besides the Datadog agent must be configured to submit logs to `http-encrypted-intake.logs.datadoghq.com`
+* The default Datadog AWS lambda must not be used. Only a HIPAA-ready lambda function provided by Datadog can be used.
+
+Additionally, certain features are not available at the moment to customers who have signed Datadog's BAA, notably:
+
+* Users cannot request support via chat
+* The Logs Live Tail is disabled
+* Notifications from Log Monitors cannot include log samples
+* Log Monitors cannot be configured with a `group-by` clause
+
+If you have any questions about how the Log Management Service satisfies the applicable requirements under HIPAA, please contact your account manager.
+
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
