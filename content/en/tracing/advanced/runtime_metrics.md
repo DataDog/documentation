@@ -5,7 +5,7 @@ kind: documentation
 
 Enable runtime metrics collection in the tracing client to gain additional insight into an application's performance. Runtime metrics can be viewed in the context of a service, correlated in the Trace View at the time of a given request, and utilized anywhere in the platform.
 
-{{< img src="tracing/enrich_tracing/runtime_metrics/jvm_runtime_trace.png" alt="JVM Runtime Trace" responsive="true">}}
+{{< img src="tracing/advanced/runtime_metrics/jvm_runtime_trace.png" alt="JVM Runtime Trace" responsive="true">}}
 
 ## Automatic Configuration
 
@@ -19,7 +19,7 @@ JVM metrics collection can be enabled with one configuration parameter in the tr
 
 JVM metrics can be viewed in correlation with your Java services. See the [Service page][1] in Datadog.
 
-{{< img src="tracing/enrich_tracing/runtime_metrics/jvm-runtime.png" alt="JVM Runtime" responsive="true" >}}
+{{< img src="tracing/advanced/runtime_metrics/jvm-runtime.png" alt="JVM Runtime" responsive="true" >}}
 
 **Note**: For the runtime UI, `dd-trace-java` >= [`0.24.0`][2] is supported.
 

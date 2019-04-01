@@ -110,7 +110,7 @@ The **View in context** button updates the search request in order to show you t
 
 [1]: /logs/explorer/search
 [2]: /logs/processing/attributes_naming_convention
-[3]: /tracing/enrich_tracing/connect_logs_and_traces
+[3]: /tracing/advanced/connect_logs_and_traces
 {{% /tab %}}
 {{% tab "Log Analytics" %}}
 

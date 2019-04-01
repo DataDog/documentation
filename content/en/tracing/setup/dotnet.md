@@ -366,5 +366,5 @@ Tracer.Instance = tracer;
 [4]: https://github.com/dotnet/coreclr/issues/18448
 [5]: /help
 [6]: https://www.nuget.org/packages/Datadog.Trace
-[7]: /tracing/enrich_tracing/manual_instrumentation/?tab=net
+[7]: /tracing/advanced/manual_instrumentation/?tab=net
 [8]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support

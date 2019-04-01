@@ -298,24 +298,6 @@ main:
           - name: "C++"
             url: "tracing/setup/cpp/"
 
-      # Enrich Tracing
-
-      - name: "Enrich Tracing"
-        url: "tracing/enrich_tracing/"
-        children:
-          - name: "Correlate Traces and Logs"
-            url: "tracing/enrich_tracing/connect_logs_and_traces"
-          - name: "Adding Metadata to Spans"
-            url: "tracing/enrich_tracing/adding_metadata_to_spans"
-          - name: "Runtime Metrics"
-            url: "tracing/enrich_tracing/runtime_metrics"
-          - name: "OpenTracing"
-            url: "tracing/enrich_tracing/opentracing"
-          - name: "Manual Instrumentation"
-            url: "tracing/enrich_tracing/manual_instrumentation"
-          - name: "Setting Primary Tags to scope "
-            url: "tracing/enrich_tracing/setting_primary_tags_to_scope"
-
       # Using the APM UI
       - name: "Use the APM UI"
         url: "tracing/visualization/"
@@ -330,6 +312,24 @@ main:
             url: "tracing/visualization/trace"
           - name: "Service Map"
             url: "tracing/visualization/services_map"
+
+      # Enrich Tracing
+
+      - name: "Enrich Tracing"
+        url: "tracing/advanced/"
+        children:
+          - name: "Correlate Traces and Logs"
+            url: "tracing/advanced/connect_logs_and_traces"
+          - name: "Adding Metadata to Spans"
+            url: "tracing/advanced/adding_metadata_to_spans"
+          - name: "Runtime Metrics"
+            url: "tracing/advanced/runtime_metrics"
+          - name: "OpenTracing"
+            url: "tracing/advanced/opentracing"
+          - name: "Manual Instrumentation"
+            url: "tracing/advanced/manual_instrumentation"
+          - name: "Setting Primary Tags to scope "
+            url: "tracing/advanced/setting_primary_tags_to_scope"
 
       # Trace Search
       - name: "Trace Search & Analytics"
