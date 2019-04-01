@@ -63,6 +63,18 @@ By default, all users can edit pipelines. Administrators can activate read-only 
 
 {{< img src="logs/processing/pipelines/pipeline_lock.png" alt="Pipeline Lock" responsive="true" style="width:70%;">}}
 
+## Nested Pipelines
+
+Nested Pipelines are pipelines within a pipeline. Use Nested Pipelines to split the processing in two steps. First a high level filtering, for example by team, and then a second level of filtering thanks to Nested Pipeline based on the integration or service or any other tag or attribute.
+
+ A pipeline can contain Nested Pipelines and Processors whereas a Nested Pipeline can only contain Processors.
+
+ {{< img src="logs/processing/pipelines/nested_pipeline.png" alt="Nested Pipelines" responsive="true" style="width:80%;">}}
+
+ It is possible to drag and drop a Pipeline into another Pipeline to transform it into a Nested Pipeline:
+
+ {{< img src="logs/processing/pipelines/nested_pipeline_drag_drop.gif" alt="Drag and Drop Nested Pipelines" responsive="true" style="width:80%;">}}
+
 ## Special Pipelines
 
 ### Reserved attribute Pipeline
