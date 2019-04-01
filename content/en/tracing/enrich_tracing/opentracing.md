@@ -341,4 +341,5 @@ The Datadog C++ tracer can only be used through the OpenTracing API. The usage i
 
 {{% /tab %}}
 {{< /tabs >}}
-[1]: 
+
+[1]: https://opentracing.io

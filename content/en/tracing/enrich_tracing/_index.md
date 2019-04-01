@@ -5,8 +5,6 @@ aliases:
     - /tracing/advanced_instrumentation
 ---
 
-toto
-
 {{< whatsnext desc="Enrich your Tracing by:">}}
     {{< nextlink href="tracing/enrich_tracing/adding_metadata_to_spans" >}}Adding Metadata to your spans.{{< /nextlink >}}
     {{< nextlink href="tracing/enrich_tracing/connect_logs_and_traces" >}}Connecting your logs and traces.{{< /nextlink >}}

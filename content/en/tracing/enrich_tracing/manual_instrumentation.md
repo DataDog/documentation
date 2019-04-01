@@ -6,7 +6,7 @@ aliases:
   - /agent/apm/php/manual-installation
 ---
 
-Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][1] and familiarize yourself with the core concepts of Datadog APM.
+Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s APM Terminology and familiarize yourself with the core concepts of Datadog APM.
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -315,4 +315,3 @@ To manually instrument your code, install the tracer as in the setup examples, a
 
 {{% /tab %}}
 {{< /tabs >}}
-[1]: 
