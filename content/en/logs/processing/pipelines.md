@@ -65,7 +65,7 @@ By default, all users can edit pipelines. Administrators can activate read-only 
 
 ## Nested Pipelines
 
-Nested Pipelines are pipelines within a pipeline. Use Nested Pipelines to split the processing in two steps. First a high level filtering, for example by team, and then a second level of filtering thanks to Nested Pipeline based on the integration or service or any other tag or attribute.
+Nested Pipelines are pipelines within a pipeline. Use Nested Pipelines to split the processing into two steps. First a high-level filtering, for example by team, and then a second level of filtering thanks to Nested Pipeline based on the integration or service or any other tag or attribute.
 
  A pipeline can contain Nested Pipelines and Processors whereas a Nested Pipeline can only contain Processors.
 
