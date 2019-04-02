@@ -5,9 +5,7 @@ kind: faq
 
 In Kubernetes, a `secret` object enables you to store sensitive information, such as an API key. 
 
-To use Kubernetes `secret`s to set your API key, first create the secret:
-
-1. Encode your plaintext API key using `base_64`.
+To use Kubernetes `secret`s to set your API key, first encode your plaintext API key using `base_64`:
 
 ```
 echo -n <DD_API_KEY> | base64
@@ -15,7 +13,7 @@ echo -n <DD_API_KEY> | base64
 
 This command generates the value for `<YOUR_BASE64_ENCODED_DATADOG_API_KEY>`
 
-2. Uncomment the "Secret" manifest section and the `valueFrom` section of the `DD_API_KEY` environment variable of the DaemonSet.
+Then, uncomment the "Secret" manifest section and the `valueFrom` section of the `DD_API_KEY` environment variable of the DaemonSet.
 
 Secret manifest section:
 
@@ -40,4 +38,4 @@ valueFrom:
     key: api-key
 ```
 
-3. Replace `<YOUR_BASE64_ENCODED_DATADOG_API_KEY>` with the value you generated in step 1.
+Finally, replace `<YOUR_BASE64_ENCODED_DATADOG_API_KEY>` with the value you generated with `base_64`.
