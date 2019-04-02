@@ -31,12 +31,13 @@ In this section you can:
 
 Here is a quick overview of the different terms used:
 
-- **Status**: Each check run submits a status of OK, WARNING or CRITICAL.
-- **Check**: Emits one or more statuses.
-- **Monitor**: Sends notifications based on a sequence of check statuses, metric
-  threshold or other alerting conditions.
-- **Monitor type**: [Log][11], [Forecasts][12] [host][13], [metric][14], [integration][15], [process][16], [outlier][17], [anomaly][18], [apm][19], [composite][20], [network][21], [event][22] based, and [custom][23]. See side navigation to drill into a specific type.
-- **Tags**: Configurable labels that can be applied to each metric and host. See the [Tagging][24] page for more details.
+| Term             | Description                                                                                                                                                                                                                          |
+|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Status**       | Each check run submits a status of OK, WARNING or CRITICAL.                                                                                                                                                                          |
+| **Check**        | Emits one or more statuses.                                                                                                                                                                                                          |
+| **Monitor**      | Sends notifications based on a sequence of check statuses, metric threshold or other alerting conditions.                                                                                                                            |
+| **Monitor type** | The different monitor types available: [log][11], [forecast][12] [host][13], [metric][14], [integration][15], [process][16], [outlier][17], [anomaly][18], [apm][19], [composite][20], [network][21], [event][22], and [custom][23]. |
+| **Tags**         | Configurable labels that can be applied to each metric and host. See the [Tagging][24] page for more details.                                                                                                                        |
 
 ## Creating a Monitor
 
@@ -55,22 +56,22 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
 Any changes to monitors creates an event in the [event stream][27] that explains the change and shows the user that made the actual change.
 
-Assuming you've made changes to your Monitors, you can see examples with the following event search:
+Assuming you've made changes to your monitors, you can see examples with the following event search:
 ```
 https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
 ```
 
-We also provide you with the ability to be notified on changes to a monitor you create. At the bottom of the Monitor Editor there's an option to notify alert recipients for all changes to the monitor:
+Datadog also provides the ability to be notified on changes to a monitor you create. At the bottom of the monitor editor, there's an option to notify alert recipients for all changes to the monitor:
 
-{{< img src="monitors/index/Monitor_Change_notifications.png" alt="Monitor_Change_notifications" responsive="true" >}}
+{{< img src="monitors/index/Monitor_Change_notifications.png" alt="Monitor Change Notifications" responsive="true" >}}
 
-Setting the above to **Notify** send an email for the monitor audit events to all people who are alerted in a specific monitor.
+Setting the above to **Notify** sends an email for the monitor audit events to all people who are alerted in a specific monitor.
 
 ## Manually resolve your monitor
 
-The monitor *Resolve* function is artificially switching the monitor status to `OK` for its next evaluation. The following monitor evaluation will be performed normally on the data the monitor is based on.
+The monitor *Resolve* function is artificially switching the monitor status to `OK` for its next evaluation. The following monitor evaluation is performed normally on the data the monitor is based on.
 
-If a monitor is alerting because its current data corresponds to its `ALERT` state, *Resolve* will have the monitor follow the state switch `ALERT -> OK -> ALERT`. Thus, it's not appropriate for acknowledging that you have seen the alert or telling Datadog to ignore the alert.
+If a monitor is alerting because its current data corresponds to its `ALERT` state, *Resolve* has the monitor follow the state switch `ALERT -> OK -> ALERT`. Thus, it's not appropriate for acknowledging that you have seen the alert or telling Datadog to ignore the alert.
 
 Manually *Resolve*-ing a monitor is appropriate for cases where data is reported intermittently: after triggering an alert, the monitor doesn't receive further data so it can no longer evaluate alerting conditions and recover to the `OK` state. In that case the *Resolve* function or the *Automatically resolve monitor after X hours* switches the monitor back to `OK` state.
 
@@ -78,7 +79,7 @@ Typical use case: monitor based on error metrics that are not generated when the
 
 ## Managing Monitors
 
-There are multiple community projects for maintaining or managing Monitors along with some other Datadog components via the API's:
+There are multiple community projects available to maintain, manage, or backup monitors by using the Datadog API:
 
 * https://github.com/trueaccord/DogPush
 * https://github.com/winebarrel/barkdog
