@@ -47,7 +47,7 @@ aliases:
 * [Apache SSL certificate issues][28]
 
 ## Azure
-* [My Azure VM is powered down... why is it still listed in my infrastructure list?][29]
+* [My Azure VM is powered down. Why is it still listed in my infrastructure list?][29]
 * [Azure VMs are showing up in the App but not reporting metrics][30]
 * [Azure VM status is not reporting][31]
 * [Azure Troubleshooting][32]
