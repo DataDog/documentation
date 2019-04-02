@@ -294,6 +294,10 @@ main:
             url: "tracing/setup/php/"
           - name: "C++"
             url: "tracing/setup/cpp/"
+          - name: "Envoy"
+            url: "tracing/setup/envoy/"
+          - name: "NGINX"
+            url: "tracing/setup/nginx/"
 
       # Enrich Tracing
 
