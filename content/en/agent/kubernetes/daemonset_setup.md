@@ -263,7 +263,7 @@ By default the Agent looks every 5 seconds for new containers, any container wit
 You can override this autodiscovery interval with a shorter one by setting `ad_config_poll_interval` parameter which correspond to the `DD_AD_CONFIG_POLL_INTERVAL` environment variable.
 The expected value is a integer in seconds.
 
-A workaround could also be to configure the container to wait for at least the poll interval before starting.
+A better workaround would be to configure your containers to wait for at least the poll interval before starting.
 This can be achieved by adding a sleep period that is as long as the poll interval:`sh -c 'sleep 5; exec yourcommand --etc`
 
 ## Further Reading
