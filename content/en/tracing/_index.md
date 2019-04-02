@@ -11,8 +11,6 @@ aliases:
   - /tracing/guide/terminology
 ---
 
-{{< vimeo 203196972 >}}
-
 ## What is APM?
 
 Datadog APM provides you with deep insight into your application's performance-from automatically generated dashboards monitoring key metrics, such as request volume and latency, to detailed traces of individual requests-side by side with your logs and infrastructure monitoring.
