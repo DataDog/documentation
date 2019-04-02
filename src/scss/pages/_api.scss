@@ -40,8 +40,10 @@ $ddpurple:    #774DA2;
       }
     }
     a {
-      border-bottom: 1px solid #dee2e6;
+      color: #4a4a4a;
+      border-bottom: 1px solid #6c757d;
       &:hover {
+        color: $ddpurple;
         border-bottom: 1px solid $ddpurple;
       }
     }
