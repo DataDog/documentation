@@ -79,7 +79,7 @@ spec:
             protocol: TCP
         env:
           - name: DD_API_KEY
-            # Kubernetes Secrets - uncomment this section to use Kubernetes Secrets to supply the API key
+            # Kubernetes Secrets - uncomment this section to supply API Key with secrets
 #            valueFrom:
 #              secretKeyRef:
 #                name: datadog-secret
