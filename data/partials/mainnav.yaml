@@ -53,9 +53,6 @@ main:
       ## TRACING/APM - Setup basic
       - name: "APM"
         url: "agent/apm/"
-        children:
-          - name: "Agent Trace Search setup"
-            url: "agent/apm/trace_search"
       ## Docker
       - name: "Docker"
         url: "agent/docker/"
