@@ -1,5 +1,5 @@
 ---
-title: Trace page
+title: Trace View
 kind: documentation
 further_reading:
 - link: "tracing/setup/"

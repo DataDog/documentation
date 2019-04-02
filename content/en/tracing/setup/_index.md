@@ -10,13 +10,13 @@ After you have [installed the Datadog Agent][1], [enabled trace collection][2], 
 
 {{< whatsnext desc="Select one of the following supported languages or proxy configurations to start instrumenting your application:">}}
   {{< nextlink href="tracing/languages/java" tag="Java" >}}Java language instrumentation.{{< /nextlink >}}
-  {{< nextlink href="tracing/languages/cpp" tag="C++" >}}C++ language instrumentation.{{< /nextlink >}}
   {{< nextlink href="tracing/languages/python" tag="Python" >}}Python language instrumentation.{{< /nextlink >}}
   {{< nextlink href="tracing/languages/ruby" tag="Ruby" >}}Ruby language instrumentation{{< /nextlink >}}
   {{< nextlink href="tracing/languages/go" tag="Go" >}}Go language instrumentation.{{< /nextlink >}}
   {{< nextlink href="tracing/languages/nodejs" tag="Nodejs" >}}Node.js language instrumentation.{{< /nextlink >}}
   {{< nextlink href="tracing/languages/dotnet" tag=".NET" >}}.NET language instrumentation.{{< /nextlink >}}
   {{< nextlink href="tracing/languages/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
+  {{< nextlink href="tracing/languages/cpp" tag="C++" >}}C++ language instrumentation.{{< /nextlink >}}
   {{< nextlink href="/tracing/setup/envoy/" tag="envoy" >}}Envoy proxy configuration.{{< /nextlink >}}
   {{< nextlink href="/tracing/setup/nginx/" tag="nginix" >}}NGINX proxy configuration.{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -1,5 +1,5 @@
 ---
-title: Services list
+title: Services List
 kind: documentation
 further_reading:
 - link: "tracing/setup/"

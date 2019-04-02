@@ -57,7 +57,7 @@ APM Events can be enriched with tags, like `customer`, `service`, `country`, `bi
 
 ### Complete traces
 
-{{< img src="tracing/trace_search_and_analytics/search/complete_trace.png" alt="Trace list" responsive="true" style="width:40%;">}}
+{{< img src="tracing/trace_search_and_analytics/search/complete_trace.png" alt="Trace list" responsive="true">}}
 
 If checked, APM Events listed in the trace stream have a trace associated with them, so you can display the full trace with all its associated spans.
 

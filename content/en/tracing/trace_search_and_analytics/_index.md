@@ -28,7 +28,7 @@ After enabling, the Trace Search & Analytics UI starts showing results. Visit [T
 Enable Trace Search & Analytics globally for all web integrations with one configuration parameter in the Tracing Client:
 
 * Tracer Configuration: `ddtrace.config.analytics_enabled = True`
-* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
+* Environment Variable: `DD_ANALYTICS_ENABLED=true`
 
 After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
 
@@ -387,7 +387,5 @@ XXX_Coming_Soon_XXX
 
 {{% /tab %}}
 {{< /tabs >}}
-
-## Further Reading
 
 [1]: https://app.datadoghq.com/apm/search

@@ -1,5 +1,5 @@
 ---
-title: Service page
+title: Service Page
 kind: documentation
 further_reading:
 - link: "tracing/setup/"
