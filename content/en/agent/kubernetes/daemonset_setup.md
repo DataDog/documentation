@@ -264,7 +264,7 @@ You can override this autodiscovery interval with a shorter one by setting `ad_c
 The expected value is a integer in seconds.
 
 A better workaround would be to configure your containers to wait for at least the poll interval before starting.
-This can be achieved by adding a sleep period that is as long as the poll interval:`sh -c 'sleep 5; exec yourcommand --etc`
+This can be achieved by adding a sleep period that is as long as the poll interval:`sh -c 'sleep 5; exec <COMMAND> --etc`
 
 ## Further Reading
 
