@@ -27,13 +27,13 @@ For customers using release 6, the Agent can be configured to obfuscate specific
 
 ## Configuration Requirements for HIPAA-enabled Customers
 
-Datadog will sign a Business Associate Agreement (BAA) with customers that transmit protected health information via Datadog’s Log Management Service.
+Datadog will sign a Business Associate Agreement (BAA) with customers that transmit protected health information (ePHI) via Datadog’s Log Management Service.
 
-For customers that have a BAA in place with Datadog, the following security configurations for the Datadog Log Management Service must be put in place:
+Prior to executing a BAA, customers transmitting ePHI to the Datadog Log Management Service must implement the following configurations:
 
 * The Datadog agent must be configured to submit logs to `encrypted-intake.logs.datadoghq.com`
 * Other log sources besides the Datadog agent must be configured to submit logs to `http-encrypted-intake.logs.datadoghq.com`
-* The default Datadog AWS lambda must not be used. Only a HIPAA-ready lambda function provided by Datadog can be used.
+* A HIPAA-ready lambda function, provided by Datadog, must be used to submit logs. The default Datadog AWS lambda must not be used.
 
 Additionally, certain features are not available at the moment to customers who have signed Datadog's BAA, notably:
 
