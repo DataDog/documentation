@@ -42,7 +42,7 @@ By asking your logging library to log into JSON, you will:
 
 **To send your logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog Agent.**
 
-We also strongly encourage you to setup your logging libraries to produce your logs in JSON format to avoid sustaning [custom parsing rules][2].
+We also strongly encourage you to setup your logging libraries to produce your logs in JSON format to avoid the need for [custom parsing rules][2].
 
 Here are setup examples for the `log4j`, `slf4j` and `log4j2` logging libraries:
 
