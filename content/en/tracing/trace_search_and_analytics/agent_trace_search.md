@@ -1,5 +1,5 @@
 ---
-title: Agent trace Search setup
+title: Agent trace Search Configuration
 kind: Documentation
 ---
 

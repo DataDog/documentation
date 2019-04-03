@@ -336,6 +336,8 @@ main:
       - name: "Trace Search & Analytics"
         url: "tracing/trace_search_and_analytics/"
         children:
+          - name: "Agent Trace Search Configuration"
+            url: "tracing/trace_search_and_analytics/agent_trace_search"
           - name: "Trace Search"
             url: "tracing/trace_search_and_analytics/search"
           - name: "Trace Analytics"

@@ -7,11 +7,12 @@ kind: documentation
 
 [Trace Search & Analytics][1] is used to filter APM Data by [user-defined tags](#custom-tagging) such as `customer_id`, `error_type` or `app_name` to help troubleshoot and filter your requests. Apply the following configuration to your application to enable this feature.
 
+To enable it, first configure your services to emit the relevant analytics either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Then [setup your Datadog Agent in order to forward those analytics to Datadog][2].
+
 ## Automatic Configuration
 
 {{< tabs >}}
 {{% tab "Java" %}}
-
 
 Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the Tracing Client:
 
@@ -369,3 +370,4 @@ $span->setTag(Tag::ANALYTICS_KEY, true);
 {{< /tabs >}}
 
 [1]: https://app.datadoghq.com/apm/search
+[2]: /tracing/trace_search_and_analytics/agent_trace_search
