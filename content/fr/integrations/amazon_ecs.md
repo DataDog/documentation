@@ -315,7 +315,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][19].
 [6]: /json/datadog-agent-ecs.json
 [7]: /json/datadog-agent-ecs1.json
 [8]: https://app.datadoghq.com/account/settings#api
-[9]: 
+[9]: #collecte-de-processus
 [10]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html#ecs-config-s3
 [11]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [12]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ecs.html
