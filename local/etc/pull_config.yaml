@@ -25,10 +25,10 @@
     - action: integrations
       branch: master
       globs:
-      - "*[!}]/metadata.csv"
-      - "*[!}]/manifest.json"
-      - "*[!}]/service_checks.json"
-      - "*[!}]/README.md"
+      - "*/metadata.csv"
+      - "*/manifest.json"
+      - "*/service_checks.json"
+      - "*/README.md"
 
     - action: pull-and-push-folder
       branch: master
@@ -44,10 +44,10 @@
     - action: integrations
       branch: master
       globs:
-      - "*[!}]/metadata.csv"
-      - "*[!}]/manifest.json"
-      - "*[!}]/service_checks.json"
-      - "*[!}]/README.md"
+      - "*/metadata.csv"
+      - "*/manifest.json"
+      - "*/service_checks.json"
+      - "*/README.md"
 
   - repo_name: heroku-buildpack-datadog
     contents:
