@@ -180,7 +180,7 @@ Configure your application level tracers to submit traces to a custom Agent host
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/guide/envoy
+[1]: /tracing/setup/envoy
 [2]: /tracing/guide/nginx
 [3]: /tracing/setup
 [4]: https://github.com/opentracing/opentracing-cpp
