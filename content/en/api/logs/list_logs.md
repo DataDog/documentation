@@ -18,12 +18,12 @@ List endpoint returns logs that match a log search query. Results are paginated.
     Minimum timestamp for requested logs. Format can be either
     - an ISO-8601 string
     - a unix timestamp (number representing the elapsed millisec since epoch)
-    - a relative time (`now - 1h`, `now - 1d` )
+    - a relative time (`now -10m`, `now - 1h`, `now - 1d`)
 * **`time.to`** [*required*]:
     Maximum timestamp for requested logs. Format can be either
     - an ISO-8601 string with minute, second or millisecond precision
     - a unix timestamp (number representing the elapsed millisec since epoch)
-    - a relative time (`now`, `now - 1h`, `now - 1d` )
+    - a relative time (`now`, `now -10m`, `now - 1h`, `now - 1d`)
 * **`time.timezone`** [*optional*, *default*=**None**]:
    Can be specified both as an offset (e.g. "UTC+03:00") or a regional zone (e.g. "Europe/Paris")
 * **`time.offset`** [*optional*, *default*=**None**]:
