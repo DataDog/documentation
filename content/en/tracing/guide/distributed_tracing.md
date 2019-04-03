@@ -240,7 +240,7 @@ Priority sampling allows traces between two Datadog endpoints to be sampled toge
 
 Priority sampling automatically assigns and propagates a priority value along all traces, depending on their service and volume. Priorities can also be set manually to drop non-interesting traces or keep important ones.
 
-For a more detailed explanations of sampling and priority sampling, check the [sampling and storage][2] documentation.
+For a more detailed explanations of sampling and priority sampling, check the [sampling and storage][1] documentation.
 
 
 {{< tabs >}}
@@ -440,5 +440,5 @@ another_span->SetTag("sampling.priority", 0); // Discard this span.
 
 {{% /tab %}}
 {{< /tabs >}}
-[1]: 
-[2]: 
+
+[1]: /tracing/guide/trace_sampling_and_storage
