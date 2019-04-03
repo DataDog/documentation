@@ -87,8 +87,10 @@ This appends trace tags to web requests:
 {{% /tab %}}
 {{% tab "Go" %}}
 
-XXX_Coming_Soon_XXX
+Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
+
+[1]: /help
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
@@ -144,8 +146,10 @@ $logger->pushProcessor(function ($record) {
 {{% /tab %}}
 {{% tab "C++" %}}
 
-XXX_Coming_Soon_XXX
+Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
+
+[1]: /help
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -435,11 +439,16 @@ module.exports = Logger
 {{% /tab %}}
 {{% tab "PHP" %}}
 
+Coming Soon. Reach out to [the Datadog support team][1] to learn more.
+
+[1]: /help
 {{% /tab %}}
 {{% tab "C++" %}}
 
-XXX_Coming_Soon_XXX
+Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
+
+[1]: /help
 {{% /tab %}}
 {{< /tabs >}}
 

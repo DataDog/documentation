@@ -93,11 +93,6 @@ After enabling, the Trace Search & Analytics UI starts showing results. Visit [T
 
 [1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}
-{{% tab "C++" %}}
-
-XXX_Coming_Soon_XXX
-
-{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -221,11 +216,6 @@ Integration names can be found on the [integrations table][1].
 
 [1]: /tracing/languages/php/#integrations
 {{% /tab %}}
-{{% tab "C++" %}}
-
-XXX_Coming_Soon_XXX
-
-{{% /tab %}}
 {{< /tabs >}}
 
 ### Database Services
@@ -281,11 +271,6 @@ tracer.use('mysqli', {
   analytics: true
 })
 ```
-
-{{% /tab %}}
-{{% tab "C++" %}}
-
-XXX_Coming_Soon_XXX
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -379,11 +364,6 @@ $span->setTag(Tag::ANALYTICS_KEY, true);
 
 ```
 
-
-{{% /tab %}}
-{{% tab "C++" %}}
-
-XXX_Coming_Soon_XXX
 
 {{% /tab %}}
 {{< /tabs >}}

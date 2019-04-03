@@ -241,8 +241,10 @@ if (null !== $span) {
 {{< tabs >}}
 {{% tab "Java" %}}
 
-XXX_Coming_Soon_XXX
+Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
+
+[1]: /help
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -292,13 +294,17 @@ func main() {
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-XXX_Coming_Soon_XXX
+Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
+
+[1]: /help
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-XXX_Coming_Soon_XXX
+Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
+
+[1]: /help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
