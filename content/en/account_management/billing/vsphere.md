@@ -5,7 +5,7 @@ kind: faq
 
 ## Overview
 
-Datadog bills for each Agent installed on a vCenter server.
+Datadog bills for each Agent installed on a vCenter server and each VM monitored.
 
 ### VM exclusion
 
