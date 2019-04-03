@@ -80,7 +80,7 @@ DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 
 Either define the variables in your custom `datadog.yaml`, or set them as JSON maps in these environment variables. The map key is the source (`label/envvar`) name, and the map value is the Datadog tag name.
 
-The environment variables that set tag cardinality (`DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`) can have values `low`, `orchestrator`, or `high`. `DD_CHECKS_TAG_CARDINALITY` defaults to `orchestrator`, and `DD_DOGSTATSD_TAG_CARDINALITY` defaults to `low`.
+The environment variables that set tag cardinality (`DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`) can have values `low`, `orchestrator`, or `high`. They both default to `low`.
 
 Setting the variable to `orchestrator` adds the following tags: `pod_name` (Kubernetes), `oshift_deployment` (OpenShift), `task_arn` (ECS and Fargate), `mesos_task` (Mesos).
 
