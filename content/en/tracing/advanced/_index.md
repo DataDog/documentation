@@ -2,7 +2,7 @@
 title: Enrich Tracing
 kind: documentation
 aliases:
-    - /tracing/advanced_instrumentation
+    - /tracing/advanced_usage/
 ---
 
 {{< whatsnext desc="Enrich your Tracing by:">}}

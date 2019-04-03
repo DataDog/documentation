@@ -12,7 +12,7 @@ further_reading:
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
-- link: "tracing/advanced_usage/?tab=c"
+- link: "tracing/advanced/"
   tag: "Advanced Usage"
   text: "Advanced Usage"
 ---
