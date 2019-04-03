@@ -48,7 +48,6 @@ kind: faq
 |Amazon Ses|SES|
 |Amazon Sns|SNS|
 |Amazon Sqs|SQS|
-|Amazon States|STATEMACHINE|
 |Amazon Storage Gateway|STORAGEGATEWAY|
 |Amazon Swf|SWF|
 |Amazon Waf|WAF|
