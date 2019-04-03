@@ -57,7 +57,7 @@ def md_update_links(this_lang_code, content):
     try:
         common_lang_codes = ["en/", "es/", "de/", "fr/", "es/", "ja/"]
         exclude_common_langs = "|".join(list(map(lambda code: f"{code}",common_lang_codes)))
-        relative_regex = re.compile("^(\\[[0-9]+]\:\\s*)(\/(?!" + exclude_common_langs + ").*)$", re.MULTILINE | re.IGNORECASE)
+        relative_regex = re.compile("^(\\[[0-9]+]\:\\s*)(\/(?!" + exclude_common_langs + ")(?!.*[.][A-Za-z]{3}$).*)$", re.MULTILINE | re.IGNORECASE)
         substitute = "\g<1>/" + this_lang_code.lower() + "\g<2>"
         result = relative_regex.sub(substitute, content)
     except Exception as e:
