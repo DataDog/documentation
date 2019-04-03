@@ -63,7 +63,7 @@ There are specific status formats that must be adhered to for the remapping to w
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/parsing/#matcher
-[2]: /logs/processing/#log-status-remapper
+[1]: /logs/processing/parsing/?tab=matcher
+[2]: /logs/processing/processors/#log-status-remapper
 [3]: /logs/#reserved-attributes
 [4]: /logs/#edit-reserved-attributes

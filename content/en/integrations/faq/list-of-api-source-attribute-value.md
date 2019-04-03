@@ -18,6 +18,7 @@ kind: faq
 |Amazon Codebuild|CODEBUILD|
 |Amazon Codedeploy|CODEDEPLOY|
 |Amazon Directconnect|DIRECTCONNECT|
+|Amazon Documentdb|DOCUMENTDB|
 |Amazon Dynamodb|DYNAMODB|
 |Amazon Ebs|EBS|
 |Amazon Ec2|EC2|
@@ -47,6 +48,7 @@ kind: faq
 |Amazon Ses|SES|
 |Amazon Sns|SNS|
 |Amazon Sqs|SQS|
+|Amazon States|STATEMACHINE|
 |Amazon Storage Gateway|STORAGEGATEWAY|
 |Amazon Swf|SWF|
 |Amazon Waf|WAF|
@@ -156,6 +158,7 @@ kind: faq
 |Metric Alert|ALERT|
 |Microsoft Teams|MICROSOFTTEAMS|
 |Mongodb|MONGODB|
+|Mongodb Atlas|MONGODBATLAS|
 |Monitor Alert|ALERT|
 |Moxtra|MOXTRA|
 |Mparticle|MPARTICLE|
@@ -190,6 +193,7 @@ kind: faq
 |Riakcs|RIAKCS|
 |Rollbar|ROLLBAR|
 |Ruby|RUBY|
+|Segment|SEGMENT|
 |Sentry|SENTRY|
 |Servicenow|SERVICENOW|
 |Sketch|SKETCH|

@@ -89,9 +89,9 @@ While it is not normally required, it is possible to change a metric's _type_. F
 
 1. You have a metric `app.requests.served` that counts requests served, but accidentally submitted it via StatsD as a `gauge`. The metric's Datadog type is therefore `gauge`.
 
-2. You wanted to submit `app.requests.served` as a StatsD `counter` metric for time aggregation. This would help answer questions like _"How many total requests were served in the past day?"_ by querying `sum:app.requests.served{*}` (this would not make sense for a `gauge`-type  metric.)
+2. You wanted to submit `app.requests.served` as a StatsD `count` metric for time aggregation. This would help answer questions like _"How many total requests were served in the past day?"_ by querying `sum:app.requests.served{*}` (this would not make sense for a `gauge`-type  metric.)
 
-3. You like the name `app.requests.served` so rather than submitting a new metric name with the more appropriate `counter` type, you could change the type of `app.requests.served` by updating:
+3. You like the name `app.requests.served` so rather than submitting a new metric name with the more appropriate `count` type, you could change the type of `app.requests.served` by updating:
   * Your submission code, calling `dogstatsd.increment('app.requests.served', N)` after N requests are served.
   * The Datadog in-app type via the metric summary page to `rate`.
 

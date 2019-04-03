@@ -1,0 +1,11 @@
+[
+    {
+        "agent_version": "5.0.0",
+        "integration":"cisco aci",
+        "check": "cisco_aci.can_connect",
+        "statuses": ["ok", "critical"],
+        "groups": ["url"],
+        "name": "Peut se connecter",
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance cisco_aci qu'il surveille. Si ce n'est pas le cas, renvoie `OK`."
+    }
+]

@@ -6,6 +6,6 @@
         "check": "cassandra.nodetool.node_up",
         "statuses": ["ok", "critical"],
         "name": "Nœud disponible",
-        "description": "L'Agent envoie ce check de service pour chaque nœud surveillé du cluster. Renvoie CRITICAL si le nœud est indisponible. Si ce n'est pas le cas, renvoie OK."
+        "description": "L'Agent envoie ce check de service pour chaque nœud du cluster surveillé. Renvoie CRITICAL si le nœud est indisponible. Si ce n'est pas le cas, renvoie OK."
     }
 ]

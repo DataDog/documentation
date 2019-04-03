@@ -4,6 +4,8 @@ main:
     url: "getting_started/"
     pre: "nav_start"
     children:
+      - name: "Collect traces"
+        url: "getting_started/tracing"
       - name: "Learning Center"
         url: "getting_started/learning_center"
   # TAGGING
@@ -187,10 +189,18 @@ main:
             url: "graphing/functions/timeshift/"
           - name: "Beta"
             url: "graphing/functions/beta/"
-      - name: "Graphing JSON"
+      - name: "Graphing with JSON"
         url: "graphing/graphing_json/"
+        children:
+          - name: "Widget JSON schema"
+            url: "graphing/graphing_json/widget_json/"
+          - name: "Request JSON schema"
+            url: "graphing/graphing_json/request_json/"
+
       - name: "Widgets"
         url: "graphing/widgets/"
+      - name: "Guides"
+        url: "graphing/guide"
      # - #   name: "FAQ"
      #   url: "graphing/faq/"
      #   #   parent: menu_references_graphing
@@ -251,6 +261,8 @@ main:
         url: "monitors/downtimes/"
       - name: "Uptime Widget"
         url: "monitors/monitor_uptime_widget/"
+      - name: "Guides"
+        url: "monitors/guide"
       #- #  name: "FAQ"
       #  url: "monitors/faq/"
       #  #  parent: menu_references_monitoring
@@ -297,6 +309,8 @@ main:
       - name: "Advanced Instrumentation"
         url: "tracing/advanced_usage/"
         children:
+          - name: "Trace Search & Analytics"
+            url: "#trace-search-analytics"
           - name: "Custom Tagging"
             url: "#custom-tagging"
           - name: "Change Agent Hostname"
@@ -365,6 +379,9 @@ main:
 
       - name: "Community Libraries"
         url: "developers/libraries/#apm-tracing-client-libraries"
+
+      - name: "Guides"
+        url: "tracing/guide"
 
       #- #  name: "FAQ"
       #  url: "tracing/faq/"
@@ -471,6 +488,10 @@ main:
         url: "synthetics/api_test"
       - name: "Browser Tests"
         url: "synthetics/browser_test"
+      - name: "APM Integration"
+        url: "synthetics/apm"
+      - name: "Identify Synthetics Bots"
+        url: "synthetics/identify_synthetics_bots"
 
   # DEVELOPERS
   - name: "Developer Tools"

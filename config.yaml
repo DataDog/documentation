@@ -42,8 +42,8 @@ params:
     gif: ""
   static_url: "http://localhost:1313/"
   announcement_banner:
-    text: "The <strong>Service Map</strong> for APM is here!"
-    link: "blog/service-map/"
+    text: "<strong>Datadog Synthetics</strong> is now available!"
+    link: "blog/introducing-synthetic-monitoring/"
     exclude: []
   code_languages:
     - display_name: Python

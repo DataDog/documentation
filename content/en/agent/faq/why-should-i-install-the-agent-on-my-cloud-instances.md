@@ -5,9 +5,9 @@ disable_toc: true
 aliases:
     - /agent/faq/why-should-i-install-the-agent-on-my-aws-instances/
 further_reading:
-- link: "integrations/faq/are-my-aws-cloudwatch-metrics-delayed"
+- link: "integrations/faq/cloud-metric-delay"
   tag: "FAQ"
-  text: "Are my AWS CloudWatch metrics delayed?"
+  text: "Cloud Metric Delay"
 ---
 
 If you use AWS, Azure, GCP, or another cloud-based metrics provider, installing the Datadog Agent on your instances gives you a number of benefits, for example:

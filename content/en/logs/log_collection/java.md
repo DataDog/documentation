@@ -19,6 +19,9 @@ further_reading:
 - link: "logs/faq/log-collection-troubleshooting-guide"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
+- link: "https://www.datadoghq.com/blog/java-logging-guide/"
+  tag: "Blog"
+  text: "How to collect, customize, and standardize Java logs"
 ---
 
 Java logs are quite complex to handle, mainly because of stack traces. These stack traces are split into multiple lines which makes them difficult to associate to the original log event:
@@ -39,7 +42,7 @@ By asking your logging library to log into JSON, you will:
 
 **To send your logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog Agent.**
 
-We also strongly encourage you to setup your logging libraries to produce your logs in JSON format to avoid sustaning [custom parsing rules][2].
+Datadog strongly recommends setting up your logging libraries to produce your logs in JSON format to avoid the need for [custom parsing rules][2].
 
 Here are setup examples for the `log4j`, `slf4j` and `log4j2` logging libraries:
 

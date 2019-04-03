@@ -5,6 +5,9 @@ aliases:
 - /tracing/setup/php
 - /agent/apm/php/
 further_reading:
+- link: "https://www.datadoghq.com/blog/monitor-php-performance/"
+  tag: "Blog"
+  text: "PHP monitoring with Datadog APM and distributed tracing"
 - link: "https://github.com/DataDog/dd-trace-php"
   tag: "GitHub"
   text: "Source code"
@@ -15,10 +18,6 @@ further_reading:
   tag: "Documentation"
   text: "Advanced Usage"
 ---
-
-<div class="alert alert-warning">
-The APM tracer for PHP applications is in Open Public Beta.
-</div>
 
 ## Installation and Getting Started
 
@@ -51,7 +50,7 @@ $ dpkg -i datadog-php-tracer.deb
 $ apk add datadog-php-tracer.apk --allow-untrusted
 ```
 
-Visit a tracing-enabled endpoint of your application and view the [APM UI][8] to see the traces.
+Restart PHP (PHP-FPM or the Apache SAPI) and then visit a tracing-enabled endpoint of your application. View the [APM UI][8] to see the traces.
 
 **Note**: It might take a few minutes before traces appear in the UI.
 
@@ -76,13 +75,13 @@ Automatic instrumentation captures:
 
 PHP APM supports the following PHP versions:
 
-| Version | Support type |
-| :------ | :----------- |
-| 7.2.x   | Beta         |
-| 7.1.x   | Beta         |
-| 7.0.x   | Beta         |
-| 5.6.x   | Beta         |
-| 5.4.x   | Beta         |
+| Version | Support type    |
+| :------ | :-------------  |
+| 7.2.x   | Fully Supported |
+| 7.1.x   | Fully Supported |
+| 7.0.x   | Fully Supported |
+| 5.6.x   | Fully Supported |
+| 5.4.x   | Fully Supported |
 
 ### Integrations
 
@@ -90,32 +89,55 @@ PHP APM supports the following PHP versions:
 
 If the web framework that you use is not listed below, you can still see traces for your web requests in the UI. However, some metadata and spans that are very specific to that particular web framework may not display.
 
-| Module         | Versions | Support Type |
-| :------------- | :------- | :----------- |
-| Laravel        | 5.x      | Beta         |
-| Laravel        | 4.2      | Beta         |
-| Symfony        | 4.x      | Beta         |
-| Symfony        | >= 3.3   | Beta         |
-| Zend Framework | 1.12     | Beta         |
+| Module         | Versions      | Support Type    |
+|:---------------|:--------------|:----------------|
+| Laravel        | 4.2, 5.x      | Fully Supported |
+| Symfony        | 2.x, 3.3, 3.4, 4.x | Fully Supported |
+| Zend Framework | 1.12          | Fully Supported |
+| CakePHP        | 1.3, 2.8, 3.x | _Coming Soon_   |
+| CodeIgniter    | 2, 3          | _Coming Soon_   |
+| Drupal         |               | _Coming Soon_   |
+| Magento        | 2             | _Coming Soon_   |
+| Phalcon        | 1.3, 3.4      | _Coming Soon_   |
+| Slim           | 2, 3          | _Coming Soon_   |
+| Wordpress      |               | _Coming Soon_   |
+| Yii            | 1.1           | _Coming Soon_   |
 
-Don't see your desired web frameworks? Let Datadog know more about your needs through [this survey][11].
+Don’t see your desired frameworks? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
+
+#### Datastore Compatibility
+
+| Module                           | Versions                   | Support Type    |
+|:---------------------------------|:---------------------------|:----------------|
+| Amazon RDS (using PDO or MySQLi) | *(Any Supported PHP)*      | Fully Supported |
+| Elasticsearch                    | 1.x                        | Fully Supported |
+| Eloquent                         | Laravel supported versions | Fully Supported |
+| Memcached                        | *(Any Supported PHP)*      | Fully Supported |
+| MongoDB                          | 1.4.x                      | Fully Supported |
+| MySQLi                           | *(Any Supported PHP)*      | Fully Supported |
+| PDO (MySQL, PostgreSQL, MariaDB) | *(Any Supported PHP)*      | Fully Supported |
+| Predis                           | 1.1                        | Fully Supported |
+| AWS Couchbase                    | AWS PHP SDK 3              | _Coming Soon_   |
+| AWS DynamoDB                     | AWS PHP SDK 3              | _Coming Soon_   |
+| AWS ElastiCache                  | AWS PHP SDK 3              | _Coming Soon_   |
+| Doctrine ORM                     | 2                          | _Coming Soon_   |
+| ODBC                             | *(Any Supported PHP)*      | _Coming Soon_   |
+| PHPredis                         | 4                          | _Coming Soon_   |
+| Solarium                         | 4.2                        | _Coming Soon_   |
+
+Don’t see your desired datastores? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
 
 #### Library Compatibility
 
-| Module        | Versions                   | Support Type |
-| :------------ | :------------------------- | :----------- |
-| Curl          | *(Any Supported PHP)*      | Beta         |
-| Elasticsearch | 1.x                        | Beta         |
-| Eloquent      | Laravel supported versions | Beta         |
-| Guzzle        | 6.x                        | Beta         |
-| Guzzle        | 5.x                        | Beta         |
-| Memcached     | *(Any Supported PHP)*      | Beta         |
-| MongoDB       | 1.4.x                      | Beta         |
-| Mysqli        | *(Any Supported PHP)*      | Beta         |
-| PDO           | *(Any Supported PHP)*      | Beta         |
-| Predis        | 1.1                        | Beta         |
+| Module     | Versions              | Support Type    |
+|:-----------|:----------------------|:----------------|
+| Curl       | *(Any Supported PHP)* | Fully Supported |
+| Guzzle     | 5.x                   | Fully Supported |
+| Guzzle     | 6.x                   | Fully Supported |
+| Beanstalkd |                       | _Coming Soon_   |
+| ReactPHP   |                       | _Coming Soon_   |
 
-Don't see your desired libraries? Let Datadog know more about your needs through [this survey][11].
+Don’t see your desired libraries? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
 
 ## Configuration
 
@@ -147,19 +169,21 @@ Set in the command line to start the server.
 DD_TRACE_DEBUG=true php -S localhost:8888
 ```
 
-| Env variable               | Default     | Note                                                                |
-| :------------------------- | :---------- | :------------------------------------------------------------------ |
-| `DD_AGENT_HOST`            | `localhost` | The Agent host name                                                 |
-| `DD_AUTOFINISH_SPANS`      | `false`     | Whether spans are automatically finished when the tracer is flushed |
-| `DD_DISTRIBUTED_TRACING`   | `true`      | Whether to enable [distributed tracing][14]                         |
-| `DD_INTEGRATIONS_DISABLED` | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                |
-| `DD_PRIORITY_SAMPLING`     | `true`      | Whether to enable [priority sampling][15]                           |
-| `DD_SAMPLING_RATE`         | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default) |
-| `DD_TRACE_AGENT_PORT`      | `8126`      | The Agent port number                                               |
-| `DD_TRACE_APP_NAME`        | ``          | The default app name                                                |
-| `DD_TRACE_DEBUG`           | `false`     | Enable [debug mode][16] for the tracer                              |
-| `DD_TRACE_ENABLED`         | `true`      | Enable the tracer globally                                          |
-| `DD_TRACE_GLOBAL_TAGS`     | ``          | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`        |
+| Env variable                         | Default     | Note                                                                        |
+|:-------------------------------------|:------------|:----------------------------------------------------------------------------|
+| `DD_AGENT_HOST`                      | `localhost` | The Agent host name                                                         |
+| `DD_AUTOFINISH_SPANS`                | `false`     | Whether spans are automatically finished when the tracer is flushed         |
+| `DD_DISTRIBUTED_TRACING`             | `true`      | Whether to enable [distributed tracing][14]                                 |
+| `DD_INTEGRATIONS_DISABLED`           | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                        |
+| `DD_PRIORITY_SAMPLING`               | `true`      | Whether to enable [priority sampling][15]                                   |
+| `DD_SAMPLING_RATE`                   | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default)         |
+| `DD_TRACE_AGENT_PORT`                | `8126`      | The Agent port number                                                       |
+| `DD_TRACE_APP_NAME`                  | ``          | The default app name                                                        |
+| `DD_TRACE_DEBUG`                     | `false`     | Enable [debug mode][16] for the tracer                                      |
+| `DD_TRACE_ENABLED`                   | `true`      | Enable the tracer globally                                                  |
+| `DD_TRACE_GLOBAL_TAGS`               | ``          | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`                |
+| `DD_TRACE_ANALYTICS_ENABLED`         | `false`     | Flag to enable trace analytics for relevant spans in web integrations       |
+| `DD_<INTEGRATION>_ANALYTICS_ENABLED` | `false`     | Flag to enable trace analytics for relevant spans in a specific integration |
 
 ## Further Reading
 
@@ -175,7 +199,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 [8]: https://app.datadoghq.com/apm/services
 [9]: /tracing/languages/php/manual-installation
 [10]: #library-compatibility
-[11]: https://docs.google.com/forms/d/e/1FAIpQLSemTVTCdqzXkfzemJSr8wuEllxfqbGVj00flmRvKA17f0lyFg/viewform
+[11]: https://docs.datadoghq.com/help
 [12]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [13]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
 [14]: /tracing/advanced_usage/?tab=php#distributed-tracing

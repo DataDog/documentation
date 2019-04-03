@@ -31,7 +31,7 @@ aliases:
 * [Extra hosts with name "N/A" reporting data][15]
 * [Wrong count of aws.elb.healthy_host_count?][16]
 * [Why is my AWS error count metric orders of magnitude lower in Datadog than Cloudwatch?][17]
-* [Are my AWS CloudWatch metrics delayed?][18]
+* [Cloud Metric Delay][18]
 * [Do you believe you're seeing a discrepancy between your data in CloudWatch and Datadog?][19]
 * [I think I'm missing some of my CloudTrail events?][20]
 * [Why is there a delay in receiving my data?][21]
@@ -47,7 +47,7 @@ aliases:
 * [Apache SSL certificate issues][28]
 
 ## Azure
-* [My Azure VM is powered down... why is it still listed in my infrastructure list?][29]
+* [My Azure VM is powered down. Why is it still listed in my infrastructure list?][29]
 * [Azure VMs are showing up in the App but not reporting metrics][30]
 * [Azure VM status is not reporting][31]
 * [Azure Troubleshooting][32]
@@ -165,7 +165,7 @@ aliases:
 [15]: /integrations/faq/extra-hosts-with-name-n-a-reporting-data
 [16]: /integrations/faq/wrong-count-of-aws-elb-healthy-host-count
 [17]: /integrations/faq/why-is-my-aws-error-count-metric-orders-of-magnitude-lower-in-datadog-than-cloudwatch
-[18]: /integrations/faq/are-my-aws-cloudwatch-metrics-delayed
+[18]: /integrations/faq/cloud-metric-delay
 [19]: /integrations/faq/do-you-believe-you-re-seeing-a-discrepancy-between-your-data-in-cloudwatch-and-datadog
 [20]: /integrations/faq/i-think-i-m-missing-some-of-my-cloudtrail-events
 [21]: /integrations/faq/why-is-there-a-delay-in-receiving-my-data

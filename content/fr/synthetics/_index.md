@@ -9,14 +9,14 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
     tag: Blog
     text: "Présentation de Datadog\_Synthetics"
-  - link: synthetics/uptime_check
+  - link: synthetics/api_test
     tag: Documentation
-    text: Configurer un check Uptime
-  - link: synthetics/browser_check
+    text: Configurer un test API
+  - link: synthetics/browser_test
     tag: Documentation
-    text: Configurer un check Browser
+    text: Configurer un test Browser
 ---
-<div class="alert alert-warning">Synthetics est actuellement en version bêta pour la version américaine du site de Datadog. Pour demander à y accéder, veuillez remplir le <a href="https://app.datadoghq.com/synthetics/beta">formulaire de demande d'accès à Datadog Synthetics</a>.</div>
+<div class="alert alert-warning">Synthetics est actuellement uniquement disponible aux États-Unis. Des tests Browser sont disponibles en version bêta : pour demander à y accéder, veuillez remplir le <a href="https://app.datadoghq.com/synthetics/beta">formulaire de demande d'accès à Datadog Synthetics</a>.</div>
 
 ## Présentation
 
@@ -54,14 +54,20 @@ Enfin, les caractères suivants sont réservés : `-`, `(`, `)`, `"`, `~`, `*`,
 
 ## Créer un check
 
-Sélectionnez **Create a New check +** dans le coin supérieur droit de la page Synthetics pour créer un [check Uptime][2] ou un [check Browser][3].
+Sélectionnez **Create a New check +** dans le coin supérieur droit de la page Synthetics pour créer un [test API][2] ou un [test Browser][3].
 
 {{< img src="synthetics/create_a_check.png" alt="Créer un check" responsive="true" style="width:80%;">}}
+
+## Métriques
+
+Les métriques suivantes sont générées par des checks.
+
+{{< get-metrics-from-git "synthetics" >}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
-[2]: /fr/synthetics/uptime_check
-[3]: /fr/synthetics/browser_check
+[2]: /fr/synthetics/api_test
+[3]: /fr/synthetics/browser_test

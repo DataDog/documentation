@@ -1,7 +1,7 @@
 ---
 title: Récupérer tous les utilisateurs
 type: apicode
-order: 24.3
+order: 25.3
 external_redirect: /api/#recuperer-tous-les-utilisateurs
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Create user
 type: apicode
-order: 24.1
+order: 25.1
 external_redirect: /api/#create-user
 ---
 

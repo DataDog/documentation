@@ -4,6 +4,9 @@ kind: documentation
 aliases:
   - /logs/languages/csharp
 further_reading:
+- link: "https://www.datadoghq.com/blog/c-logging-guide/"
+  tag: "Blog"
+  text: "How to collect, customize, and analyze C# logs"
 - link: "logs/processing"
   tag: "Documentation"
   text: "Learn how to process your logs"

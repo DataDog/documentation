@@ -1,7 +1,7 @@
 ---
 title: Récupérer un utilisateur
 type: apicontent
-order: 24.2
+order: 25.2
 external_redirect: /api/#recuperer-un-utilisateur
 ---
 

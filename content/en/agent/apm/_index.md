@@ -82,17 +82,17 @@ Find below the list of all available parameters for your `datadog.yaml` configur
 | `max_traces_per_second`   | float       | Maximum number of traces to sample per second. Set to `0` to disable the limit (*not recommended*). The default value is `10`.                                     |
 | `ignore_resources`        | list        | A list of resources that the Agent should ignore.                                                                                                                  |
 | `log_file`                | string      | Location of the log file.                                                                                                                                          |
-| `replace_tags`            | list        | A list of tag replacement rules. See the [Scrubbing sensitive information](#scrubbing-sensitive-information) section.                                              |
+| `replace_tags`            | list        | A list of tag replacement rules. Read more about scrubbing sensitive data with [replace rules][10].                                              |
 | `receiver_port`           | number      | Port that the Datadog Agent's trace receiver listen on. Default value is `8126`.                                                                                   |
-| `apm_non_local_traffic`   | boolean     | Allows the Agent to receive outside connections. It then listen on all interfaces.                                                                                 |
+| `apm_non_local_traffic`   | boolean     | Set to `true` to allow the Agent to receive outside connections, and then listen on all interfaces.                                                                                 |
 | `max_memory`              | float       | Maximum memory that the Agent is allowed to occupy. When this is exceeded the process is killed.                                                                   |
 | `max_cpu_percent`         | float       | Maximum CPU percentage that the Agent should use. The Agent automatically adjusts its pre-sampling rate to stay below this number.                                 |
   
-To get a an overview of all the possible settings for APM, take a look at the Agent's [`datadog.example.yaml`][10] configuration file.
-For more information about the Datadog Agent, see the [dedicated doc page][11] or refer to the [`datadog.yaml` templates][12].
+To get a an overview of all the possible settings for APM, take a look at the Agent's [`datadog.example.yaml`][11] configuration file.
+For more information about the Datadog Agent, see the [dedicated doc page][12] or refer to the [`datadog.yaml` templates][13].
 
 ### Trace search
-To enable trace search, [services][13] must be flowing into Datadog. Once services are set up, navigate to the [Trace Search & Analytics docs page][14] to find a list of each of the services running within your infrastructure.
+To enable trace search, [services][14] must be flowing into Datadog. Once services are set up, navigate to the [Trace Search & Analytics docs page][15] to find a list of each of the services running within your infrastructure.
 
 In Datadog, every automatically instrumented service has an operation name, which is used to set the type of request being traced. For example, if you're tracing a Python Flask application, you might have a `flask.request` as your operation name. In a Node application using Express, you would have `express.request` ask your operation name.
 
@@ -100,9 +100,9 @@ Replace both the `<SERVICE_NAME>` and `<OPERATION_NAME>` in your configuration w
 
 For example, if you have a Python service named `python-api`, and it's running Flask (operation name `flask.request`), your `<SERVICE_NAME>` would be `python-api`, and your `<OPERATION_NAME>` would be `flask.request`.
 
-The [Trace Search & Analytics docs][14] page populates with a list of your services and resource names available for usage in Trace Search:
+The [Trace Search & Analytics docs][15] page populates with a list of your services and resource names available for usage in Trace Search:
 
-1. Select the `environment` and `services` to extract [APM events][15] from.
+1. Select the `environment` and `services` to extract [APM events][16] from.
 2. Update your Datadog Agent configuration (based on Agent version) with the information below:
 
 {{< tabs >}}
@@ -128,10 +128,14 @@ In `datadog.conf`, add `[trace.analyzed_spans]`. For example:
 
 {{% /tab %}}
 {{% tab "Docker" %}}
-Add `DD_APM_ANALYZED_SPANS` to the Agent container environment (compatible with version 12.6.5250+). For example:
+Add `DD_APM_ANALYZED_SPANS` to the Agent container environment (compatible with version 12.6.5250+). Format should be a comma-separated regular expressions without spaces. For example:
 
 ```
 DD_APM_ANALYZED_SPANS="<SERVICE_NAME_1>|<OPERATION_NAME_1>=1,<SERVICE_NAME_2>|<OPERATION_NAME_2>=1"
+```
+
+```
+`my-express-app|express.request=1,my-dotnet-app|aspnet_core_mvc.request=1`
 ```
 
 {{% /tab %}}
@@ -142,7 +146,7 @@ DD_APM_ANALYZED_SPANS="<SERVICE_NAME_1>|<OPERATION_NAME_1>=1,<SERVICE_NAME_2>|<O
 
 There are several dimensions available to scope an entire Datadog APM application. These include aggregate statistics (such as requests/second, latency, error rate, Apdex score) and visible traces. These dimensions are set up through primary tags that allow you to get an even finer view of your application's behavior. Use cases for primary tags include environment, availability zone, datacenter, etc.
 
-Primary tags must follow a different set of rules from those of conventional [Datadog tags][16].
+Primary tags must follow a different set of rules from those of conventional [Datadog tags][17].
 
 ### Setup
 #### Environment 
@@ -154,7 +158,7 @@ There are several ways to specify an environment when reporting data:
   Use a host tag with the format `env:<ENVIRONMENT>` to tag all traces from that Agent accordingly.
 
 2. Agent configuration:  
-  Override the default tag used by the Agent in [the Agent configuration file][17]. This tags all traces coming through the Agent, overriding the host tag value.
+  Override the default tag used by the Agent in [the Agent configuration file][18]. This tags all traces coming through the Agent, overriding the host tag value.
 
     ```
     apm_config:
@@ -162,7 +166,7 @@ There are several ways to specify an environment when reporting data:
     ```
 
 3. Per trace:  
-  When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the Agent configuration and the host tag's value (if any). Consult the [trace tagging documentation][18] to learn how to assign a tag to your traces.
+  When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the Agent configuration and the host tag's value (if any). Consult the [trace tagging documentation][19] to learn how to assign a tag to your traces.
 
 ##### Viewing Data by Environment
 
@@ -172,7 +176,7 @@ Environments appear at the top of APM pages. Use the dropdown to scope the data 
 
 ### Add a second primary tag in Datadog
 
-If you added a host tag other than `env:<ENVIRONMENT>` to your traces, it can be set as a primary tag along with the environment tag. Go to the [APM Settings][19] page to define, change, or remove your primary tags. 
+If you added a host tag other than `env:<ENVIRONMENT>` to your traces, it can be set as a primary tag along with the environment tag. Go to the [APM Settings][20] page to define, change, or remove your primary tags. 
 
 Note:
 
@@ -181,7 +185,7 @@ Note:
 
 If you change a previously set primary tag, be aware of the following:
 
-* Historical APM data aggregated by the previously set tag is no longer be accessible.
+* Historical APM data aggregated by the previously set tag is no longer accessible.
 * Any APM monitors scoped to the previous tag display a status of _No Data_.
 
 #### Viewing Data by Primary Tag
@@ -203,13 +207,14 @@ Primary tags appear at the top of APM pages. Use these selectors to slice the da
 [7]: /tracing/visualization
 [8]: /agent/faq/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
 [9]: /agent/docker/apm
-[10]: https://github.com/DataDog/datadog-trace-agent/blob/6.4.1/datadog.example.yaml
-[11]: /agent
-[12]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[13]: https://app.datadoghq.com/apm/services
-[14]: https://app.datadoghq.com/apm/docs/trace-search
-[15]: /tracing/visualization/search/#apm-events
-[16]: /tagging
-[17]: /agent/faq/agent-configuration-files/?tab=agentv6
-[18]: /tagging/assigning_tags/#traces
-[19]: https://app.datadoghq.com/apm/settings
+[10]: /tracing/advanced_usage/#replace-rules
+[11]: https://github.com/DataDog/datadog-trace-agent/blob/6.4.1/datadog.example.yaml
+[12]: /agent
+[13]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[14]: https://app.datadoghq.com/apm/services
+[15]: https://app.datadoghq.com/apm/docs/trace-search
+[16]: /tracing/visualization/search/#apm-events
+[17]: /tagging
+[18]: /agent/faq/agent-configuration-files/?tab=agentv6
+[19]: /tagging/assigning_tags/#traces
+[20]: https://app.datadoghq.com/apm/settings

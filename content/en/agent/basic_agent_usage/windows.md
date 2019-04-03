@@ -19,9 +19,7 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic features of the Windows Datadog Agent. If you haven't installed the Agent yet, installation instructions can be found on the [Datadog Agent Integration][1] page.
-
-**Note**: Windows 7 and above are supported.
+This page outlines the basic features of the Windows Datadog Agent. If you haven't installed the Agent yet, see the [Datadog Agent installation instructions][1] and the [Supported OS versions][2].
 
 ## Agent installation
 
@@ -41,10 +39,10 @@ The following configuration command line options are available when installing t
 | `APM_ENABLED`     | String | Enable (`"true"`) or disable (`"false"`) the APM Agent in the configuration file. APM is enabled by default.                                                                                      |
 | `PROCESS_ENABLED` | String | Enable (`"true"`) or disable (`"false"`) the Process Agent in the configuration file. The Process Agent is disabled by default.                                                                   |
 | `CMD_PORT`        | Number | A valid port number between 0 and 65534. The Datadog Agent uses port 5001 by default for it's control API. If that port is already in use by another program, the default may be overridden here. |
-| `PROXY_HOST`      | String | If using a proxy, sets your proxy host. [Learn more about using a proxy with the Datadog Agent][2].                                                                                               |
-| `PROXY_PORT`      | Number | If using a proxy, sets your proxy port. [Learn more about using a proxy with the Datadog Agent][2].                                                                                               |
-| `PROXY_USER`      | String | If using a proxy, sets your proxy user. [Learn more about using a proxy with the Datadog Agent][2].                                                                                               |
-| `PROXY_PASSWORD`  | String | If using a proxy, sets your proxy password. [Learn more about using a proxy with the Datadog Agent][2].                                                                                           |
+| `PROXY_HOST`      | String | If using a proxy, sets your proxy host. [Learn more about using a proxy with the Datadog Agent][3].                                                                                               |
+| `PROXY_PORT`      | Number | If using a proxy, sets your proxy port. [Learn more about using a proxy with the Datadog Agent][3].                                                                                               |
+| `PROXY_USER`      | String | If using a proxy, sets your proxy user. [Learn more about using a proxy with the Datadog Agent][3].                                                                                               |
+| `PROXY_PASSWORD`  | String | If using a proxy, sets your proxy password. [Learn more about using a proxy with the Datadog Agent][3].                                                                                           |
 
 **Note**: If a valid `datadog.yaml` is found and has an `API_KEY` configured, that file takes precedence over all specified command-line options.
 
@@ -298,7 +296,7 @@ When adding your own services, be sure to follow the formatting exactly as shown
 
 Also, any time you modify an integration the Datadog service needs to be restarted. You can do this from services.msc or from the UI sidebar.
 
-For Services, Datadog doesn't track the metrics, only their availability. (For metrics, use the [Process][3] or [WMI][4] integration). To set up a Monitor, select the [Integration monitor type][5] then search for **Windows Service**. From *Integration Status -> Pick Monitor Scope*, choose the service you would like to monitor.
+For Services, Datadog doesn't track the metrics, only their availability. (For metrics, use the [Process][4] or [WMI][5] integration). To set up a Monitor, select the [Integration monitor type][6] then search for **Windows Service**. From *Integration Status -> Pick Monitor Scope*, choose the service you would like to monitor.
 
 ### Monitoring system load for Windows
 
@@ -321,7 +319,7 @@ While Windows does not offer this exact metric, there is an equivalent option th
 
 ### Monitoring Windows Processes
 
-You can monitor Windows processes via the [Process integration][6]. To set this up on Windows, select the **Process** integration from the list of integrations in the Datadog Agent Manager and edit the configuration.
+You can monitor Windows processes via the [Process integration][7]. To set this up on Windows, select the **Process** integration from the list of integrations in the Datadog Agent Manager and edit the configuration.
 
 For example, to monitor Notepad, your configuration file would include:
 
@@ -347,8 +345,9 @@ Due to the sensitivity of YAML, if you tried the above and cannot get it to work
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/windows
-[2]: /agent/proxy
-[3]: /#monitoring-windows-processes
-[4]: /integrations/wmi
-[5]: https://app.datadoghq.com/monitors#create/integration
-[6]: /integrations/process
+[2]: /agent/#supported-os-versions
+[3]: /agent/proxy
+[4]: /#monitoring-windows-processes
+[5]: /integrations/wmi
+[6]: https://app.datadoghq.com/monitors#create/integration
+[7]: /integrations/process

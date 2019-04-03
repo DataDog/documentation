@@ -134,4 +134,3 @@ Click **Done** to save your work and exit the editor. You can always come back t
 [5]: /graphing/widgets
 [6]: /tagging
 [7]: /graphing/functions/#apply-functions-optional
-[8]: /graphing/dashboards

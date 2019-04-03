@@ -154,11 +154,22 @@ NAME            DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELE
 datadog-agent   2         2         2         2            2           <none>          16h
 ```
 
+### Kubernetes cluster name auto detection
+
+Since version 6.5.0 of the Datadog Agent, the Agent configuration contains a cluster name attribute to be used in Kubernetes clusters, so that host aliases are unique. This attribute can be set using the `DD_CLUSTER_NAME` environment variable.
+
+Starting with version 6.11.0, the Datadog Agent can auto-detect the Kubernetes cluster name on Google GKE, Azure AKS, and AWS EKS. This feature facilitates the identification of nodes across Kubernetes clusters by adding an alias which contains the cluster name as a suffix on the node name.
+
+On Google GKE and Azure AKS, the cluster name is retrieved from the cloud provider API. For AWS EKS, the cluster name is retrieved from EC2 instance tags.
+
+**Note**: On AWS, it is required to add the `ec2:DescribeInstances` [permission][8] to your Datadog IAM policy so that the Agent can query the EC2 instance tags.
+
+
 ## Enable capabilities
 
 ### Log Collection
 
-To enable [Log collection][8] with your DaemonSet:
+To enable [Log collection][9] with your DaemonSet:
 
 1. Set the `DD_LOGS_ENABLED` and `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` variable to true in your *env* section:
 
@@ -190,7 +201,7 @@ To enable [Log collection][8] with your DaemonSet:
       (...)
     ```
 
-Learn more about this in [the Docker log collection documentation][9].
+Learn more about this in [the Docker log collection documentation][10].
 
 ### Trace Collection
 
@@ -222,7 +233,7 @@ To enable trace collection with your DaemonSet:
 
 ### Process Collection
 
-See [Process collection for Kubernetes][10].
+See [Process collection for Kubernetes][11].
 
 ### DogStatsD
 
@@ -237,7 +248,7 @@ To send custom metrics via DogStatsD, set the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` v
 (...)
 ```
 
-Learn more about this in the [Kubernetes DogStatsD documentation][11]
+Learn more about this in the [Kubernetes DogStatsD documentation][12]
 
 To send custom metrics via DogStatsD from your application pods, uncomment the `# hostPort: 8125` line in your `datadog-agent.yaml` manifest. This exposes the DogStatsD port on each of your Kubernetes nodes.
 
@@ -256,7 +267,8 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [5]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information
 [6]: /agent/docker/#environment-variables
 [7]: https://docs.datadoghq.com/agent/autodiscovery
-[8]: /logs
-[9]: /logs/docker/#configuration-file-example
-[10]: /graphing/infrastructure/process/?tab=kubernetes#installation
-[11]: /agent/kubernetes/dogstatsd
+[8]: https://docs.datadoghq.com/integrations/amazon_ec2/#configuration
+[9]: /logs
+[10]: /logs/docker/#configuration-file-example
+[11]: /graphing/infrastructure/process/?tab=kubernetes#installation
+[12]: /agent/kubernetes/dogstatsd

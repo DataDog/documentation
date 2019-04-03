@@ -67,6 +67,8 @@ Lors de l'installation de l'Agent Datadog conteneurisé, définissez vos tags de
 | `DD_DOCKER_LABELS_AS_TAGS`         | Extraire les étiquettes de conteneur Docker                |
 | `DD_DOCKER_ENV_AS_TAGS`            | Extraire les variables d'environnement de conteneur Docker |
 | `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Extraire les étiquettes de pod                             |
+| `DD_CHECKS_TAG_CARDINALITY`        | Ajouter des tags aux métriques de check                      |
+| `DD_DOGSTATSD_TAG_CARDINALITY`     | Ajouter des tags aux métriques custom                     |
 
 **Exemples :**
 
@@ -76,6 +78,12 @@ DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
 
 Définissez les variables dans votre fichier `datadog.yaml` personnalisé ou configurez-les en tant que cartes JSON dans ces variables d'environnement. La clé de carte correspond au nom de la source (`label/envvar`), tandis que sa valeur correspond au nom du tag Datadog.
+
+Les variables d'environnement qui définissent la cardinalité des tags (`DD_CHECKS_TAG_CARDINALITY` et `DD_DOGSTATSD_TAG_CARDINALITY`) peuvent prendre pour valeur `low`, `orchestrator` ou `high`. Par défaut, `DD_CHECKS_TAG_CARDINALITY` a pour valeur `orchestrator` `DD_DOGSTATSD_TAG_CARDINALITY` a pour valeur `low`.
+
+Si vous définissez la variable sur `orchestrator`, cela ajoute les tags suivants : `pod_name` (Kubernetes), `oshift_deployment` (OpenShift), `task_arn` (ECS et Fargate) et `mesos_task` (Mesos).
+
+Si vous définissez la variable sur `high`, cela ajoute également les tags suivants : `container_name` (Docker), `container_id` (Docker) et `display_container_name` (Kubelet).
 
 ## Traces
 
@@ -154,7 +162,7 @@ Vous pouvez assigner des tags de host dans l'IU depuis la page relative à la [H
 
 [1]: /fr/graphing/infrastructure/hostmap
 {{% /tab %}}
-{{% tab "Liste des infrastructures" %}}
+{{% tab "Liste d'infrastructures" %}}
 
 Vous pouvez assigner des tags de host dans l'IU depuis la page relative à la [liste d'infrastructures][1]. Cliquez sur un host pour le superposer sur la droite de la page. Depuis la section *User*, cliquez ensuite sur le bouton **Edit Tags**. Saisissez les tags sous forme de liste de valeurs séparées par des virgules, puis cliquez sur **Save Tags**. Remarque : l'application des modifications de tags de métrique effectuées via l'IU peut prendre jusqu'à 30 minutes.
 
@@ -296,7 +304,7 @@ Les sources d'[intégration][5] suivantes créent automatiquement des tags dans 
 | [AWS SQS][23]                           | Queue Name                                                                                                                                                                                                                                                                                                                                    |
 | [Apache][24]                            | Apache Host, Apache Port                                                                                                                                                                                                                                                                                                                          |
 | [Azure][25]                             | Tenant Name, Status, Tags, Subscription ID, Subscription Name, Availability Zone en commun avec un tag AWS sur demande auprès de l'assistance Datadog                                                                                                                                                                                                                |
-| [BTRFS][26]                             | Usage and Replication Type                                                                                                                                                                                                                                                                                                                    |
+| [BTRFS][26]                             | Usage et Replication Type                                                                                                                                                                                                                                                                                                                    |
 | [Chef][27]                              | Chef Roles                                                                                                                                                                                                                                                                                                                                    |
 | [Consul][28]                            | Previous Consul Leaders, Previous Consul Followers, Current Consul Leaders, Current Consul Followers, Consul Datacenter, Service  Name, Service ID                                                                                                                                                                                                                                               |
 | [CouchDB][29]                           | Database Name, Instance Name                                                                                                                                                                                                                                                                                                                 |
@@ -325,7 +333,7 @@ Les sources d'[intégration][5] suivantes créent automatiquement des tags dans 
 | [PHP FPM][56]                           | Pool Name                                                                                                                                                                                                                                                                                                                                     |
 | [Pivotal][57]                           | Current State, Owner, Labels, Requester, Story Type                                                                                                                                                                                                                                                                                           |
 | [Postfix][58]                          | Queue, Instance                                                                                                                                                                                                                                                                                                                               |
-| [Puppet][59]                            | Puppet Tags                                                                                                                                                                                                                                                                                                                                   |
+| [Puppet][59]                            | Tags Puppet                                                                                                                                                                                                                                                                                                                                   |
 | [RabbitMQ][60]                          | Node, Queue Name, Vhost, Policy, Host                                                                                                                                                                                                                                                                                                         |
 | [Redis][61]                             | Host, Port, Slave, Master                                                                                                                                                                                                                                                                                                                   |
 | [RiakCS][62]                            | Aggregation Key                                                                                                                                                                                                                                                                                                                               |

@@ -124,7 +124,7 @@ func main(){
 
   var err error
   // use host IP and port to define endpoint
-  dogstatsd, err = statsd.New(os.Getenv("DOGSGTATSD_HOST_IP") + ":8125")
+  dogstatsd, err = statsd.New(os.Getenv("DOGSTATSD_HOST_IP") + ":8125")
   // alternatively, use the unix socket path
   // dogstatsd, err = statsd.New(os.Getenv("DD_DOGSTATSD_SOCKET"))
   if err != nil{

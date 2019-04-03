@@ -83,13 +83,8 @@ listeners:
 config_providers:
   - name: docker
     polling: true
-```
-
-To collect logs from all your containers without any filtering, add the following at the end of `docker.d/conf.yaml` in your Agent's `conf.d` directory:
-
-```
-logs:
-    - type: docker
+logs_config:
+  container_collect_all: true
 ```
 
 [Restart the Agent][3] to see all your container logs in Datadog.
@@ -228,18 +223,6 @@ Refer to the [Autodiscovery guide][1] for setup, examples, and more information 
 * Use container labels or pod annotations to choose the containers to collect logs from.
 * Use the environment variable to collect logs from all containers and then override the default `source` and `service` values.
 * Add processing rules for the wanted subset of containers.
-
-#### Short lived containers
-
-To ensure their logs are properly collected, Autodiscovery detects short lived containers as soon as they are started. If you are using the host installation of the Agent, add this in your `datadog.yaml` file (it is automatically added for the containerized version):
-
-```
-listeners:
-  - name: docker
-config_providers:
-  - name: docker
-    polling: true
-```
 
 ### Filter containers
 

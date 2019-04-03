@@ -6,6 +6,9 @@ further_reading:
 - link: "graphing/dashboards/timeboard/"
   tag: "Documentation"
   text: "Timeboards"
+- link: "graphing/graphing_json/"
+  tag: "Documentation"
+  text: "Building Dashboard using JSON"
 ---
 
 The Distribution visualization is another way of showing metrics aggregated across one or several tags, such as *hosts*. Unlike the [heat map][1], a distribution graph's x-axis is quantity rather than time.
@@ -22,11 +25,11 @@ This visualization displays only a single metric query; additional queries are d
 
 ### Configuration
 
-Configure your metric query as usual. Note that this visualization type is useful only when metrics are aggregated across tag keys, e.g. for each `host`. 
+Configure your metric query as usual. Note that this visualization type is useful only when metrics are aggregated across tag keys, e.g. for each `host`.
 Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your data across the associated tags.
 
 ### Options
-#### Display preference 
+#### Display preference
 
 {{< img src="graphing/widgets/options/display_preferences.png" alt="Display preferences" responsive="true" style="width:80%;">}}
 
@@ -46,8 +49,59 @@ Display a custom title for your widget by activating the `Show a Title` check bo
 
 Optionally define its size and alignment.
 
+## API
+
+The dedicated [widget JSON schema definition][2] for the distribution widget is:
+
+```
+DISTIBUTION_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "type": {"enum": ["distribution"]},
+        "requests": {
+            "type":     "array",
+            "items":    REQUEST_SCHEMA,
+            "minItems": 1,
+            "maxItems": 1
+        },
+        "title": {"type": "string"}
+    },
+    "required": ["type", "requests"],
+    "additionalProperties": false
+}
+```
+
+| Parameter  | Type            | Required | Description                                                                                                                                                  |
+| ------     | -----           | -----    | -----                                                                                                                                                        |
+| `type`     | string          | yes      | Type of widget, for the distribution widget use `distribution`.                                                                                                 |
+| `requests` | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
+| `title`    | string          | no       | Title of your widget.                                                                                                                                        |
+
+
+Additional properties allowed the `request` object:
+
+```json
+{
+    "style": {
+        "type": "object",
+        "properties": {
+            "palette": {"type": "string"},
+        },
+        "additionalProperties": false
+    }
+}
+```
+
+| Parameter       | Type   | Required | Description                           |
+| ------          | -----  | -------- | ----                                  |
+| `style.palette` | string | no       | Color palette to apply to the widget. |
+
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing/widgets/heat_map
+[2]: /graphing/graphing_json/widget_json
+[3]: /graphing/graphing_json/request_json

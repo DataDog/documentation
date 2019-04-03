@@ -18,7 +18,7 @@ Après avoir [assigné des tags][1], utilisez-les pour filtrer et regrouper vos 
 
 ## Événements
 
-Le [flux d'événements][2] affiche tous les événements qui se sont produits dans votre environnement au cours de l'intervalle spécifié. Utiliser des tags pour affiner la liste d'événements et étudier un sous-ensemble d'événements. Saisissez `tags:` suivi du nom d'un tag pour afficher tous les événements générés par un host ou une [intégration][3] qui possèdent ce tag. L'exemple ci-dessous permet de recherche le tag `service:coffee-house` à l'aide de l'expression `tags:service:coffee-house`. Pour rechercher plusieurs tags, séparez chaque tag par une virgule : `tags:service:coffee-house,host:coffeehouseprod`.
+Le [flux d'événements][2] affiche tous les événements qui se sont produits dans votre environnement au cours de l'intervalle spécifié. Utilisez des tags pour affiner la liste d'événements et étudier un sous-ensemble d'événements. Saisissez `tags:` suivi du nom d'un tag pour afficher tous les événements générés par un host ou une [intégration][3] qui possèdent ce tag. L'exemple ci-dessous permet de rechercher le tag `service:coffee-house` à l'aide de l'expression `tags:service:coffee-house`. Pour rechercher plusieurs tags, séparez chaque tag par une virgule : `tags:service:coffee-house,host:coffeehouseprod`.
 
 {{< img src="tagging/using_tags/eventtags.png" alt="Liste d'événements et tags" responsive="true" style="width:80%;">}}
 
@@ -70,7 +70,7 @@ Vous pouvez ajouter d'autres tags pour réduire davantage la portée, afin d'ét
 
 ## Infrastructure
 
-Pour filtrer la [hostmap][4], [la liste des infrastructures][5], les [conteneurs][6] et les [processus][7], saisissez un tag dans la zone de texte **Filter by** en haut de la page. Les hosts et conteneurs peuvent être regroupés par clé de tag à l'aide de la zone de texte **Group by**. Si vous saisissez `service` dans cette zone de texte, chaque service s'affiche sous la forme d'un en-tête de groupe.
+Pour filtrer la [hostmap][4], [la liste d'infrastructures][5], les [conteneurs][6] et les [processus][7], saisissez un tag dans la zone de texte **Filter by** en haut de la page. Les hosts et conteneurs peuvent être regroupés par clé de tag à l'aide de la zone de texte **Group by**. Si vous saisissez `service` dans cette zone de texte, chaque service s'affiche sous la forme d'un en-tête de groupe.
 
 {{< tabs >}}
 {{% tab "Hostmap" %}}
@@ -84,7 +84,7 @@ Ou des conteneurs :
 {{< img src="tagging/using_tags/containermaptags.png" alt="Tags hostmap conteneurs" responsive="true" style="width:80%;">}}
 {{% /tab %}}
 
-{{% tab "Liste d'infrastructures" %}} 
+{{% tab "Liste des infrastructures" %}}
 
 Voici les zones de texte de filtrage et de regroupement de la page de la liste d'infrastructures :
 
@@ -121,7 +121,7 @@ Pour filtrer des monitors en leur [assignant des tags][1], utilisez la barre de 
 
 {{% tab "Nouveau monitor" %}}
 
-Lorsque vous créez un [monitor][1], utilisez les tags de métrique dans :
+Lorsque vous créez un [monitor][1], utilisez les tags de métrique dans :
 
 * la zone de texte **from**, afin de limiter la portée du monitor et d'inclure uniquement les métriques possédant les tags indiqués ;
 
@@ -192,7 +192,7 @@ Après avoir [assigné des tags][1], utilisez la Service map pour accéder facil
 
 ## Notebooks
 
-Lors de la création d'un graphique de [notebook][12], limitez des métriques en utilisant des tags dans la zone de texte **from**. Vous pouvez également regrouper des métriques en ajoutant des tags dans la zone de texte **avg by**. Dans l'exemple ci-dessous, les métriques sont limitées par `service:coffee-house` et regroupées par `host`.
+Lors de la création d'un graphique de [notebook][12], limitez des métriques en utilisant des tags dans la zone de texte **from**. Vous pouvez également regrouper des métriques en ajoutant des tags dans la zone de texte **avg by**. Dans l'exemple ci-dessous, les métriques sont limitées par `service:coffee-house` et regroupées par `host`.
 
 {{< img src="tagging/using_tags/notebooktags.png" alt="Tags notebook" responsive="true" style="width:80%;">}}
 
@@ -202,7 +202,7 @@ Pour exclure des tags, utilisez `</>` afin de modifier le texte, puis ajoutez le
 
 ## Logs
 
-Pour [les recherches][13], [les analyses][14], [les modèles][15] et le [Live Tailing][16] de logs, filtrez les logs avec des tags à l'aide de la barre de recherche ou des cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>`. Indiquez par exemple `service:coffee-house`. Pour effectuer une recherche avancée, consultez la page [sur les recherches de logs][13]. 
+Pour [les recherches][13], [les analyses][14], [les modèles][15] et le [Live Tailing][16] de logs, filtrez les logs avec des tags à l'aide de la barre de recherche ou des cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>`. Indiquez par exemple `service:coffee-house`. Pour effectuer une recherche avancée, consultez la page [sur les recherches de logs][13].
 
 {{< tabs >}}
 {{% tab "Recherche" %}}

@@ -408,6 +408,14 @@ $(document).ready(function () {
         });
     });
 
+    $(".main a[href^='#']").click(function(e) {
+        if(!e.target.parentElement.id) {
+            e.preventDefault();
+            var id = e.target.hash.split('#').join('');
+            moveToAnchor(id);
+        }
+    });
+
     $('.api-content h2[id]').each(function() {
         var id = $(this).attr('id');
         $(this).wrapInner('<a href="#'+id+'"></a>').on('click', function(e) {
@@ -635,8 +643,8 @@ $(document).ready(function () {
         }
     }
 
-    // Hash menu item
-    $(".sidenav-nav a").click(function(){
+    // For sidenav links with anchor tag refs
+    $(".sidenav-nav a[href^='#']").click(function(){
         moveToAnchor($(this).attr('href').substr(1), true);
     });
 
