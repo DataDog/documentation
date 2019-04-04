@@ -22,7 +22,7 @@ further_reading:
 
 An integration, at the highest level, is when you assemble a unified system from units that are usually considered separately. At Datadog, you can use integrations to bring together all of the units of your infrastructure and gain insight into the unified system as a whole—you can see pieces individually and also how individual pieces are impacting the whole. Datadog's integrations use a Python class called `check` to define the typical metrics most people would want to monitor for that system.
 
-* Over 250 integrations are [officially listed][1], and supported in our [integrations core][2] (and we're always adding more).
+* Over 250 integrations are [officially listed][1], and supported in the [integrations core][2] (and more are always being added).
 * Even more integrations have been built by our open source community, in [integrations extras][3].
 * You can build your own integration using [Datadog API][4].
 * The Agent is [open source][5] and you can instrument your own if you'd like.
