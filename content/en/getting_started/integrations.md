@@ -14,7 +14,7 @@ further_reading:
   text: "Our full list of integrations"
 - link: "/graphing/"
   tag: "Graphing"
-  text: "Now that you have your integrations set up, build graphs to visulize your data"
+  text: "Now that you have your integrations set up, build graphs to visualize your data"
 - link: "/monitors/"
   tag: "Alerts"
   text: "Set up alerts on your data"
