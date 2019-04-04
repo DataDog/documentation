@@ -5,7 +5,7 @@ aliases:
   - /tracing/setup/php/manual-installation
   - /agent/apm/php/manual-installation
 further_reading:
-- link: "tracing/advanced/adding_metadata_to_spans"
+- link: "tracing/advanced/connect_logs_and_traces"
   tags: "Enrich Tracing"
   text: "Connect your Logs and Traces together"
 - link: "tracing/advanced/opentracing"
