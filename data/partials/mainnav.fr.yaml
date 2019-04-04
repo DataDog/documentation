@@ -257,7 +257,7 @@ main:
             url: '#tracing-distribue'
           - name: Priority Sampling
             url: '#priority-sampling'
-          - name: Correlate Traces and Logs
+          - name: Connect Logs and Traces
             url: '#correlate-traces-and-logs'
           - name: Debugging
             url: '#debugging'

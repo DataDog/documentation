@@ -1,9 +1,19 @@
 ---
-title: Manual Installation
+title: Manual Instrumentation
 kind: documentation
 aliases:
   - /tracing/setup/php/manual-installation
   - /agent/apm/php/manual-installation
+further_reading:
+- link: "tracing/advanced/adding_metadata_to_spans"
+  tags: "Enrich Tracing"
+  text: "Connect your Logs and Traces together"
+- link: "tracing/advanced/opentracing"
+  tags: "Enrich Tracing"
+  text: "Implement Opentracing across your applications."
+- link: "tracing/visualization/"
+  tag: "Use the APM UI"
+  text: "Explore your services, resources and traces"
 ---
 
 Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s APM Terminology and familiarize yourself with the core concepts of Datadog APM.
@@ -315,3 +325,7 @@ To manually instrument your code, install the tracer as in the setup examples, a
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

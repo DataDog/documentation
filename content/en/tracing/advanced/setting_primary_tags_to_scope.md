@@ -1,6 +1,19 @@
 ---
 title: Set primary tags to scope
 kind: documentation
+further_reading:
+- link: "tracing/advanced/adding_metadata_to_spans"
+  tags: "Enrich Tracing"
+  text: "Connect your Logs and Traces together"
+- link: "tracing/advanced/manual_instrumentation"
+  tags: "Enrich Tracing"
+  text: "Instrument manually your application to create traces."
+- link: "tracing/advanced/opentracing"
+  tags: "Enrich Tracing"
+  text: "Implement Opentracing across your applications."
+- link: "tracing/visualization/"
+  tag: "Use the APM UI"
+  text: "Explore your services, resources and traces"
 ---
 
 ## Definition
@@ -55,6 +68,10 @@ Primary tags appear at the top of APM pages. Use these selectors to slice the da
 
 {{< img src="agent/apm/primary_tags_ui.png" alt="Primary tags UI" responsive="true" style="width:80%;">}}
 
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 [1]: /tagging
 [2]: /agent/faq/agent-configuration-files/?tab=agentv6
 [3]: /tagging/assigning_tags/#traces
