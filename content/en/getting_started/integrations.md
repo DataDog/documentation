@@ -6,43 +6,45 @@ aliases:
   - /guides/getting-started-integrations/
   - /guides/integrations/
 further_reading:
-- link: "https://learn.datadoghq.com/course/view.php?id=2"
+- link: "https://learn.datadoghq.com/"
   tag: "Learning Center"
   text: "Introduction to Datadog"
 - link: "/integrations/"
   tag: "Integrations"
-  text: "Our full list of integrations"
+  text: "Datadog's full list of integrations"
 - link: "/graphing/"
   tag: "Graphing"
-  text: "Now that you have your integrations set up, build graphs to visulize your data"
+  text: "Now that you have your integrations set up, build graphs to visualize your data"
 - link: "/monitors/"
   tag: "Alerts"
   text: "Set up alerts on your data"
 ---
 
-An integration at the highest level is when you assemble a unified system from units that are usually considered separately. At Datadog, you can use integrations to bring together all of the units of your infrastructure and gain insight into the unified system as a whole - you can see pieces individually and also how individual pieces are impacting the whole. Datadogs integrations use a Python class called a check to define the typical metrics most people would want to monitor for that system.
+This is a guide for using integrations, for information about building a new integration, see the [Create a new integration][1] page.
 
-* Over 250 integrations are [officially listed][1], and supported in our [integrations core][2] (and we're always adding more).
-* Even more integrations have been built by our open source community, in [integrations extras][3].
-* You can build your own integration using [Datadog API][4].
-* The Agent is [open source][5] and you can instrument your own if you'd like.
+An integration, at the highest level, is when you assemble a unified system from units that are usually considered separately. At Datadog, you can use integrations to bring together all of the units of your infrastructure and gain insight into the unified system as a whole—you can see pieces individually and also how individual pieces are impacting the whole. Datadog's integrations use a Python class called `check` to define the typical metrics most people would want to monitor for that system.
+
+* Over 250 integrations are [officially listed][2], and supported in the [integrations core][3] (and more are always being added).
+* Even more integrations have been built by our open source community, in [integrations extras][4].
+* You can build your own integration using [Datadog API][5].
+* The Agent is [open source][6] and you can instrument your own if you'd like.
 * All incoming data is treated the same throughout Datadog.
 
-Whether you're beginning developing a new product today or you've been developing for decades, it's never too early or too late to start monitoring with Datadog.
+It's best to start monitoring your projects as early in the development process as possible, but you can start at any stage.
 
 ### Key terms
 
 **parameters** - Use the parameters in the `conf.yaml` file to control accesses between your integration data source and the Agent. The individual integrations `conf.yaml.example` file has all of the required and not required parameters listed. Define all of the needed parameters for all of your integrations in a single `conf.yaml` file - if you have more than one file, the Agent only uses the alphabetically first file.
 
-**conf.yaml** - You can find the `conf.yaml` in the `conf.d/` folder at the root of your [Agent's configuration directory][6]. Use this file to connect and configure any integrations to your system. Non required parameters are usually commented out.
+**conf.yaml** - You can find the `conf.yaml` in the `conf.d/` folder at the root of your [Agent's configuration directory][7]. Use this file to connect integrations to your system, as well as configure their settings. Nonrequired parameters are usually commented out.
 
-**instance** - You define and map the instance of whatever you are monitoring in the `conf.yaml` file. For example, in the [`http_check` integration][7], you're defining the name associated with the instance of the HTTP endpoint you are monitoring up and downtime. You can monitor multiple instances in the same integration, and you do that by defining all of the instances in the `conf.yaml` file.
+**instance** - You define and map the instance of whatever you are monitoring in the `conf.yaml` file. For example, in the [`http_check` integration][8], you're defining the name associated with the instance of the HTTP endpoint you are monitoring up and downtime. You can monitor multiple instances in the same integration, and you do that by defining all of the instances in the `conf.yaml` file.
 
-**metrics** - The list of what is collected from your system by each integration. You can find the metrics for each integration in that integrations `metadata.csv` file. For more information about metrics, see the [Metrics][8] developer page. You can also set up [custom metrics][9], so if the integration doesn't offer a metric out of the box, you can usually add it.
+**metrics** - The list of what is collected from your system by each integration. You can find the metrics for each integration in that integrations `metadata.csv` file. For more information about metrics, see the [Metrics][9] developer page. You can also set up [custom metrics][10], so if the integration doesn't offer a metric out of the box, you can usually add it.
 
 **metadata.csv** - The file that lists and stores the metrics collected by each integration.
 
-**custom check** - If you have a unique system that you want to monitor, or if you're going to expand the metrics already sent by an integration, you can build a [custom check][10] to define and send metrics to Datadog. However, if you want to monitor a generally available application, public service, or an open source project, and we don't have an integration that already exists for it, you should consider [building a new integration][11] instead of a custom check.
+**custom check** - If you have a unique system that you want to monitor, or if you're going to expand the metrics already sent by an integration, you can build a [custom check][11] to define and send metrics to Datadog. However, if you want to monitor a generally available application, public service, or an open source project, and we don't have an integration that already exists for it, you should consider [building a new integration][1] instead of a custom check.
 
 **tagging** - [Tags][12] are a way to add customization to metrics so that you can filter and visualize them in the most useful way to you.
 
@@ -58,7 +60,7 @@ In order to download the the Datadog Agent package, you need an [API and Applica
 
 ### Installation
 
-If you want to connect with a cloud service provider, navigate to that provider on the [Integrations page][16] for specific instructions on how to connect. For most other integrations, start by installing the [Datadog Agent][17]. We also have containerized agents: [docker][18], and [kuberneties][19]. After you've downloaded the Agent, go to the [Integrations page][16] section to find specific configuration instructions for individual integrations.
+If you want to connect with a cloud service provider, navigate to that provider on the [Integrations page][16] for specific instructions on how to connect. For most other integrations, start by installing the [Datadog Agent][17]. Most integrations are supported on our containerized agents: [Docker][18], and [Kubernetes][19]. After you've downloaded the Agent, go to the [Integrations page][16] section to find specific configuration instructions for individual integrations.
 
 ### Configuration
 
@@ -110,17 +112,17 @@ Also check out our [Logs management][13], [APM][25], and [Synthetics][26] soluti
 
 {{< partial name="whats-next/whats-next.html" >}}
  
-[1]: http://www.datadoghq.com/integrations
-[2]: https://github.com/DataDog/integrations-core
-[3]: https://github.com/DataDog/integrations-extras
-[4]: /api
-[5]: https://github.com/DataDog/dd-agent
-[6]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[7]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example#L13
-[8]: /developers/metrics
-[9]: /developers/metrics/custom_metrics
-[10]: /developers/write_agent_check/?tab=agentv6
-[11]: /developers/integrations/new_check_howto
+[1]: /developers/integrations/new_check_howto
+[2]: http://www.datadoghq.com/integrations
+[3]: https://github.com/DataDog/integrations-core
+[4]: https://github.com/DataDog/integrations-extras
+[5]: /api
+[6]: https://github.com/DataDog/dd-agent
+[7]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[8]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example#L13
+[9]: /developers/metrics
+[10]: /developers/metrics/custom_metrics
+[11]: /developers/write_agent_check/?tab=agentv6
 [12]: /tagging
 [13]: /logs
 [14]: /account_management/faq/api-app-key-management
