@@ -57,13 +57,20 @@ If APM is enabled for this application and you wish to improve the correlation b
 {{< tabs >}}
 {{% tab "Winston 3.0" %}}
 
+Install the dependencies:
+
+```
+// ~/.../<APPLICATION_NAME>
+npm install morgan winston app-root-path --save
+```
+
 Create a configuration file for Winston as follow:
 
 ```js
 // ~/.../<APPLICATION_NAME>/winston-config.js
 
 const { createLogger, format, transports } = require('winston');
-const appRoot = require('<APP_ROOT_PATH>');
+const appRoot = require('app-root-path');
 
 const logger = createLogger({
   level: 'info',
@@ -83,10 +90,20 @@ Then in the file where the middleware is set up:
 // ~/.../<APPLICATION_NAME>/index.js
 
 //...
+const morgan = require('morgan'); // or other HTTP logger
 const logger = require('/winston-config.js');
 
-logger.log('info', 'Hello simple log!');
-logger.info('Hello log with metas',{color: 'blue' });
+// Logging middleware
+app.use(morgan('common', { stream: logger.stream }));
+
+// Error handling endware - example
+app.use((err, req, res, next) => {
+  winston.error(
+    `${err.status || 500}
+    - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`
+  );
+  res.status(err.status || 500).send(err.message || 'Internal server error.');
+});
 
 // ...
 ```
@@ -94,8 +111,10 @@ logger.info('Hello log with metas',{color: 'blue' });
 In `<FILE_NAME>.log` the following JSON can be seen:
 
 ```js
-{"level":"info","message":"Hello simple log!","timestamp":"2015-04-23T16:52:05.337Z"}
-{"color":"blue","level":"info","message":"Hello log with metas","timestamp":"2015-04-23T16:52:05.339Z"}
+{"message":"::ffff:10.0.2.2 - - [20/Feb/2019:00:40:37 +0000] \"GET / HTTP/1.1\" 304 -\n","level":"info"}
+{"message":"404 - Not found! - /foo - GET - ::ffff:10.0.2.2","level":"error"}
+{"message":"::ffff:10.0.2.2 - - [20/Feb/2019:00:41:11 +0000] \"GET /foo HTTP/1.1\" 404 10\n","level":"info"}
+{"message":"::ffff:10.0.2.2 - - [20/Feb/2019:00:58:49 +0000] \"GET / HTTP/1.1\" 304 -\n","level":"info"}
 ```
 
 {{% /tab %}}
