@@ -172,7 +172,7 @@ Additional properties allowed in each `request` object:
 [1]: /graphing/dashboards/timeboard
 [2]: /graphing/dashboards/screenboard
 [3]: /graphing
-[4]: /tracing/visualization/search/#search-bar
+[4]: /tracing/trace_search_and_analytics/search/#search-bar
 [5]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
 [6]: /graphing/event_stream
 [7]: /graphing/dashboards/template_variables

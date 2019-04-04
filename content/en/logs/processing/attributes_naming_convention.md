@@ -223,7 +223,7 @@ Some integrations that rely on these are: [Rsyslog][15], [NxLog][16], [Syslog-ng
 [11]: /integrations/amazon_rds
 [12]: /integrations/elastic
 [13]: /logs/explorer/?tab=measures#setup
-[14]: /tracing/visualization/search
+[14]: /tracing/trace_search_and_analytics/search
 [15]: /integrations/rsyslog
 [16]: /integrations/nxlog
 [17]: /integrations/syslog_ng

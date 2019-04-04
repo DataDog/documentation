@@ -1,6 +1,6 @@
 ---
-title: Services list
-kind: Documentation
+title: Services List
+kind: documentation
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
