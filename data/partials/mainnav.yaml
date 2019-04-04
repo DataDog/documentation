@@ -304,7 +304,7 @@ main:
       - name: "Enrich Tracing"
         url: "tracing/advanced/"
         children:
-          - name: "Correlate Traces and Logs"
+          - name: "Connect Logs and Traces"
             url: "tracing/advanced/connect_logs_and_traces"
           - name: "Adding Metadata to Spans"
             url: "tracing/advanced/adding_metadata_to_spans"
