@@ -13,7 +13,7 @@ further_reading:
   text: "Implement Opentracing across your applications."
 - link: "tracing/visualization/"
   tag: "Use the APM UI"
-  text: "Explore your services, resources and traces"
+  text: "Explore your services, resources, and traces"
 ---
 
 Enable runtime metrics collection in the tracing client to gain additional insight into an application's performance. Runtime metrics can be viewed in the context of a service, correlated in the Trace View at the time of a given request, and utilized anywhere in the platform.

@@ -13,7 +13,7 @@ further_reading:
   text: "Implement Opentracing across your applications."
 - link: "tracing/visualization/"
   tag: "Use the APM UI"
-  text: "Explore your services, resources and traces"
+  text: "Explore your services, resources, and traces"
 ---
 
 Adding metadata in the form of key-value pairs to a span allows to correlate traces with other Datadog products to provide more details about specific spans. [Read more about tagging][1]

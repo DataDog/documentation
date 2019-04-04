@@ -13,7 +13,7 @@ further_reading:
   text: "Implement Opentracing across your applications."
 - link: "tracing/visualization/"
   tag: "Use the APM UI"
-  text: "Explore your services, resources and traces"
+  text: "Explore your services, resources, and traces"
 ---
 
 ## Definition

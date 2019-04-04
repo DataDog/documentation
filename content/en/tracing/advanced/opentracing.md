@@ -10,7 +10,7 @@ further_reading:
   text: "Instrument manually your application to create traces."
 - link: "tracing/visualization/"
   tag: "Use the APM UI"
-  text: "Explore your services, resources and traces"
+  text: "Explore your services, resources, and traces"
 ---
 
 OpenTracing is a vendor-neutral, cross-language standard for tracing applications. Datadog offers OpenTracing implementations for many APM tracers. For more details see [opentracing.io][1].

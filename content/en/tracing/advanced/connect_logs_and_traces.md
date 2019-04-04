@@ -10,7 +10,7 @@ further_reading:
   text: "Implement Opentracing across your applications."
 - link: "tracing/visualization/"
   tag: "Use the APM UI"
-  text: "Explore your services, resources and traces"
+  text: "Explore your services, resources, and traces"
 ---
 
 The correlation between Datadog APM and Datadog Log Management is improved by automatically adding a `trace_id` and `span_id` in your logs with the Tracing Libraries. This can then be used in the platform to show you the exact logs correlated to the observed trace.

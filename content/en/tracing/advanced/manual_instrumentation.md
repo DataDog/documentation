@@ -13,7 +13,7 @@ further_reading:
   text: "Implement Opentracing across your applications."
 - link: "tracing/visualization/"
   tag: "Use the APM UI"
-  text: "Explore your services, resources and traces"
+  text: "Explore your services, resources, and traces"
 ---
 
 Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s APM Terminology and familiarize yourself with the core concepts of Datadog APM.
