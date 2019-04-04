@@ -28,7 +28,7 @@ An integration, at the highest level, is when you assemble a unified system from
 * The Agent is [open source][5] and you can instrument your own if you'd like.
 * All incoming data is treated the same throughout Datadog.
 
-Whether you're beginning developing a new product today or you've been developing for decades, it's never too early or too late to start monitoring with Datadog.
+Whether you're beginning development on a new project today, or you've been developing for decades, it's never too early or too late to start monitoring.
 
 ### Key terms
 
