@@ -54,6 +54,53 @@ If APM is enabled for this application and you wish to improve the correlation b
 
 ### Log to file
 
+{{< tabs >}}
+{{% tab "Winston 3.0" %}}
+
+Create a configuration file for Winston as follow:
+
+```js
+// ~/.../<APPLICATION_NAME>/winston-config.js
+
+const { createLogger, format, transports } = require('winston');
+const appRoot = require('<APP_ROOT_PATH>');
+
+const logger = createLogger({
+  level: 'info',
+  exitOnError: false,
+  format: format.json(),
+  transports: [
+    new transports.File({ filename: `${appRoot}/logs/<FILE_NAME>.log` }),
+  ],
+});
+
+module.exports = logger;
+```
+
+Then in the file where the middleware is set up:
+
+```js
+// ~/.../<APPLICATION_NAME>/index.js
+
+//...
+const logger = require('/winston-config.js');
+
+logger.log('info', 'Hello simple log!');
+logger.info('Hello log with metas',{color: 'blue' });
+
+// ...
+```
+
+In `<FILE_NAME>.log` the following JSON can be seen:
+
+```js
+{"level":"info","message":"Hello simple log!","timestamp":"2015-04-23T16:52:05.337Z"}
+{"color":"blue","level":"info","message":"Hello log with metas","timestamp":"2015-04-23T16:52:05.339Z"}
+```
+
+{{% /tab %}}
+{{% tab "Winston 2.0" %}}
+
 In your bootstrap file or somewhere in your code, declare the logger as follow:
 
 ```js
@@ -80,6 +127,9 @@ Check the content of the `<FILE_NAME>.log` file to see that Winston already took
 {"level":"info","message":"Hello simple log!","timestamp":"2015-04-23T16:52:05.337Z"}
 {"color":"blue","level":"info","message":"Hello log with metas","timestamp":"2015-04-23T16:52:05.339Z"}
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Configure your Datadog Agent
 
