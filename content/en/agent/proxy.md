@@ -153,10 +153,10 @@ Those parameters can also be set with the following environment variables:
     * For [app.datadoghq.eu][4]
 
 
-[1]: /crt/intake.logs.datadoghq.com.crt
-[2]: /crt/intake.logs.datadoghq.eu.crt
-[3]: /crt/FULL_intake.logs.datadoghq.com.crt
-[4]: /crt/FULL_intake.logs.datadoghq.eu.crt
+[1]: /resources/crt/intake.logs.datadoghq.com.crt
+[2]: /resources/crt/intake.logs.datadoghq.eu.crt
+[3]: /resources/crt/FULL_intake.logs.datadoghq.com.crt
+[4]: /resources/crt/FULL_intake.logs.datadoghq.eu.crt
 {{% /tab %}}
 {{% tab "SOCKS5" %}}
 

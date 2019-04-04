@@ -13,4 +13,4 @@ A Datadog user managed to tweak the install from source script to have the Agent
 **Note**: This is not supported or tested by Datadog. OmnisOS remains an OS not supported by Datadog.
 
 [1]: https://app.datadoghq.com/account/settings#agent/source
-[2]: /txt/omnis_os_instructions.txt
+[2]: /resources/txt/omnis_os_instructions.txt
