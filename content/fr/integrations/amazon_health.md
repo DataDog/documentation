@@ -1,7 +1,6 @@
 ---
 categories:
   - cloud
-  - health
   - aws
   - log collection
 ddtype: crawler
