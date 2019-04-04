@@ -3,6 +3,7 @@ title: Enrich Tracing
 kind: documentation
 aliases:
     - /tracing/advanced_usage/
+disable_toc: true
 ---
 
 {{< whatsnext desc="Enrich your Tracing by:">}}

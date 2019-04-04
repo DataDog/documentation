@@ -72,6 +72,7 @@ Primary tags appear at the top of APM pages. Use these selectors to slice the da
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /tagging
 [2]: /agent/faq/agent-configuration-files/?tab=agentv6
 [3]: /tagging/assigning_tags/#traces
