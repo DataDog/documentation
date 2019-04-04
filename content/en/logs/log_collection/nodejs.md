@@ -79,17 +79,8 @@ logger.log('info', 'Hello simple log!');
 logger.info('Hello log with metas',{color: 'blue' });
 ```
 
-Check the content of the `<FILE_NAME>.log` file to see that Winston already took care of logging everything in JSON:
-
-```json
-{"level":"info","message":"Hello simple log!","timestamp":"2015-04-23T16:52:05.337Z"}
-{"color":"blue","level":"info","message":"Hello log with metas","timestamp":"2015-04-23T16:52:05.339Z"}
-```
-
 {{% /tab %}}
 {{% tab "Winston 2.0" %}}
-
-In your bootstrap file or somewhere in your code, declare the logger as follow:
 
 ```js
 var winston = require('winston');
@@ -110,15 +101,15 @@ logger.log('info', 'Hello simple log!');
 logger.info('Hello log with metas',{color: 'blue' });
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
 Check the content of the `<FILE_NAME>.log` file to see that Winston already took care of logging everything in JSON:
 
 ```json
 {"level":"info","message":"Hello simple log!","timestamp":"2015-04-23T16:52:05.337Z"}
 {"color":"blue","level":"info","message":"Hello log with metas","timestamp":"2015-04-23T16:52:05.339Z"}
 ```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Configure your Datadog Agent
 
