@@ -11,7 +11,7 @@ further_reading:
   text: "Introduction to Datadog"
 - link: "/integrations/"
   tag: "Integrations"
-  text: "Our full list of integrations"
+  text: "Datadog's full list of integrations"
 - link: "/graphing/"
   tag: "Graphing"
   text: "Now that you have your integrations set up, build graphs to visualize your data"
