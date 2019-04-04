@@ -104,7 +104,7 @@ This section uses examples to show how trigger conditions are computed, and how 
 
 Datadog doesn't compute `A && B && C` any differently than you would expect, but which monitor statuses are considered true and which false?
 
-Recall the seven statuses a monitor may have (in order of increasing severity):
+Recall the six statuses a monitor may have (in order of increasing severity):
 
 * `Ok`,
 * `Warn`,
