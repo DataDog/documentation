@@ -55,7 +55,7 @@ def md_update_links(this_lang_code, content):
     """ Update footer links in markdown to be language relative """
     result = content
     try:
-        common_lang_codes = ["en/", "es/", "de/", "fr/", "es/", "ja/"]
+        common_lang_codes = ["en/", "es/", "de/", "fr/", "es/", "ja/", "resources/"]
         exclude_common_langs = "|".join(list(map(lambda code: f"{code}",common_lang_codes)))
         relative_regex = re.compile("^(\\[[0-9]+]\:\\s*)(\/(?!" + exclude_common_langs + ").*)$", re.MULTILINE | re.IGNORECASE)
         substitute = "\g<1>/" + this_lang_code.lower() + "\g<2>"
