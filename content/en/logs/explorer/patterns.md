@@ -36,7 +36,7 @@ Switch to the patterns view to automatically see your log patterns for the selec
 Each pattern comes with highlights, to get you straight to its characteristic features:
 
 * Sections of the logs that vary within the pattern are highlighted, to help you quickly identify differences across log lines. 
-* A minigraph displays a rough timeline for the volume of its logs, to help you identify how that pattern differs from other patterns. 
+* A mini graph displays a rough timeline for the volume of its logs, to help you identify how that pattern differs from other patterns. 
 
 Click on a pattern to see a sample of underlying logs, and eventually display one single log.
 
