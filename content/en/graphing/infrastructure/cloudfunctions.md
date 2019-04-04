@@ -27,7 +27,7 @@ The Cloud Functions dashboard requires no installation of its own, but it relies
     **Note**: Metrics in the Cloud Function UI are delayed ~10 minutes, as this is the default speed at which Datadog polls AWS APIs. To find out if your delay can be decreased, contact [Datadog support][3].
 
 2. [AWS X-Ray integration][4] (optional)
-    This integration provides traces for Lambda functions in the function detail page and allows to detect Lambda function cold start.
+    This integration provides traces for Lambda functions in the function detail page and allows the detection of Lambda function cold start.
 
     Install the X-Ray integration and add the following permissions to the policy document in your AWS/Datadog Role:
     ```
