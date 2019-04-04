@@ -45,7 +45,7 @@ Un [pipeline d'intégration][7] est automatiquement installé pour les logs d'in
 {{< img src="logs/processing/elb_log_post_processing.png" alt="Post traitement de logs ELB" responsive="true" style="width:70%;">}}
 
 <div class="alert alert-info">
-Consultez la liste <a href="/integrations/#cat-log-collection">actuelle des intégrations prises en charge disponibles</a>.
+Consultez la liste <a href="/integrations/#collecte-de-logs-cat">actuelle des intégrations prises en charge disponibles</a>.
 </div>
 
 ### Logs personnalisés
