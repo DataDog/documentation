@@ -1,6 +1,16 @@
 ---
 title: Connect Logs and Traces
 kind: documentation
+further_reading:
+- link: "tracing/advanced/manual_instrumentation"
+  tags: "Enrich Tracing"
+  text: "Instrument manually your application to create traces."
+- link: "tracing/advanced/opentracing"
+  tags: "Enrich Tracing"
+  text: "Implement Opentracing across your applications."
+- link: "tracing/visualization/"
+  tag: "Use the APM UI"
+  text: "Explore your services, resources, and traces"
 ---
 
 The correlation between Datadog APM and Datadog Log Management is improved by automatically adding a `trace_id` and `span_id` in your logs with the Tracing Libraries. This can then be used in the platform to show you the exact logs correlated to the observed trace.
@@ -139,7 +149,6 @@ $logger->pushProcessor(function ($record) {
 
 **Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][3].
 
-
 [1]: https://github.com/Seldaek/monolog
 [2]: /logs/log_collection/php
 [3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
@@ -147,7 +156,6 @@ $logger->pushProcessor(function ($record) {
 {{% tab "C++" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to learn more.
-
 
 [1]: /help
 {{% /tab %}}
@@ -245,7 +253,6 @@ def hello():
 
 hello()
 ```
-
 
 **Manual Trace ID Injection without Standard Library Logging**
 
@@ -361,7 +368,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 The above example illustrates how to use the span's context in the standard library's `log` package. Similar logic may be applied to 3rd party packages too.
 
-
 **Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][2].
 
 
@@ -447,11 +453,12 @@ Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
 Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
-
 [1]: /help
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/log_collection/?tab=tailexistingfiles#enabling-log-collection-from-integrations

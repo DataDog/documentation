@@ -3,6 +3,7 @@ title: Application Tracing Setup
 kind: documentation
 aliases:
     - /tracing/languages
+disable_toc: true
 ---
 
 After you have [installed the Datadog Agent][1], [enabled trace collection][2], and [configured your environment][3], begin tracing by instrumenting your application.

@@ -1,16 +1,28 @@
 ---
 title: Adding Metadata to Spans
 kind: documentation
+further_reading:
+- link: "tracing/advanced/adding_metadata_to_spans"
+  tags: "Enrich Tracing"
+  text: "Connect your Logs and Traces together"
+- link: "tracing/advanced/manual_instrumentation"
+  tags: "Enrich Tracing"
+  text: "Instrument manually your application to create traces."
+- link: "tracing/advanced/opentracing"
+  tags: "Enrich Tracing"
+  text: "Implement Opentracing across your applications."
+- link: "tracing/visualization/"
+  tag: "Use the APM UI"
+  text: "Explore your services, resources, and traces"
 ---
-
 
 Adding metadata in the form of key-value pairs to a span allows to correlate traces with other Datadog products to provide more details about specific spans. [Read more about tagging][1]
 
 Metadata can be:
 
-* [Added to specific span](#adding-tags-to-a-span).
-* [Added globally to all spans](#adding-tags-globally-to-all-spans)
-
+- [Adding tags to a span](#adding-tags-to-a-span)
+- [Adding tags globally to all spans](#adding-tags-globally-to-all-spans)
+- [Further Reading](#further-reading)
 
 ## Adding tags to a span
 
@@ -46,7 +58,6 @@ class ServletImpl extends AbstractHttpServlet {
   }
 }
 ```
-
 
 [1]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/DDTags.java
 [2]: https://github.com/opentracing/opentracing-java/blob/master/opentracing-api/src/main/java/io/opentracing/tag/Tags.java
@@ -269,11 +280,9 @@ end
 
 See the [API documentation][1] for more details.
 
-
 [1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#environment-and-tags
 {{% /tab %}}
 {{% tab "Go" %}}
-
 
 Add tags to all spans by configuring the tracer with the `tags` option:
 
@@ -296,18 +305,15 @@ func main() {
 
 Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
-
 [1]: /help
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
-
 [1]: /help
 {{% /tab %}}
 {{% tab "PHP" %}}
-
 
 Use the environment variable `DD_TRACE_GLOBAL_TAGS` to add tags to all the generated spans. See the [PHP configuration][1]
 section for details on how environment variables should be set.
@@ -315,7 +321,6 @@ section for details on how environment variables should be set.
 ```ini
 DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
 ```
-
 
 [1]: /tracing/languages/php/#configuration
 {{% /tab %}}
@@ -332,12 +337,12 @@ span->SetTag("key must be string", 1234);
 
 Values are of [variable type][1] and can be complex objects. Values are serialized as JSON, with the exception of a string value being serialized bare (without extra quotation marks).
 
-
 [1]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/value.h
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tagging

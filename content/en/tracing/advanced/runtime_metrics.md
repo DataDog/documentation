@@ -1,6 +1,19 @@
 ---
 title: Runtime Metrics
 kind: documentation
+further_reading:
+- link: "tracing/advanced/adding_metadata_to_spans"
+  tags: "Enrich Tracing"
+  text: "Connect your Logs and Traces together"
+- link: "tracing/advanced/manual_instrumentation"
+  tags: "Enrich Tracing"
+  text: "Instrument manually your application to create traces."
+- link: "tracing/advanced/opentracing"
+  tags: "Enrich Tracing"
+  text: "Implement Opentracing across your applications."
+- link: "tracing/visualization/"
+  tag: "Use the APM UI"
+  text: "Explore your services, resources, and traces"
 ---
 
 Enable runtime metrics collection in the tracing client to gain additional insight into an application's performance. Runtime metrics can be viewed in the context of a service, correlated in the Trace View at the time of a given request, and utilized anywhere in the platform.
@@ -25,7 +38,7 @@ JVM metrics can be viewed in correlation with your Java services. See the [Servi
 
 **Collecting JVM Metrics in Containerized Environments**
 
-By default, JVM metrics from your application are sent to the Datadog Agent over port 8125. If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][3], and that port 8125 is open on the Agent. For example: in Kubernetes, [bind the DogstatsD port to a host port][4]; in ECS, [set the approriate flags in your task definition][5].
+By default, JVM metrics from your application are sent to the Datadog Agent over port 8125. If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][3], and that port 8125 is open on the Agent. For example: in Kubernetes, [bind the DogstatsD port to a host port][4]; in ECS, [set the appropriate flags in your task definition][5].
 
 
 [1]: https://app.datadoghq.com/apm/services
@@ -134,3 +147,7 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 [1]: /help
 {{% /tab %}}
 {{< /tabs >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -1,6 +1,16 @@
 ---
 title: OpenTracing
 kind: documentation
+further_reading:
+- link: "tracing/advanced/adding_metadata_to_spans"
+  tags: "Enrich Tracing"
+  text: "Connect your Logs and Traces together"
+- link: "tracing/advanced/manual_instrumentation"
+  tags: "Enrich Tracing"
+  text: "Instrument manually your application to create traces."
+- link: "tracing/visualization/"
+  tag: "Use the APM UI"
+  text: "Explore your services, resources, and traces"
 ---
 
 OpenTracing is a vendor-neutral, cross-language standard for tracing applications. Datadog offers OpenTracing implementations for many APM tracers. For more details see [opentracing.io][1].
@@ -341,5 +351,9 @@ The Datadog C++ tracer can only be used through the OpenTracing API. The usage i
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentracing.io
