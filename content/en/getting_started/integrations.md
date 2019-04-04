@@ -34,7 +34,7 @@ Whether you're beginning developing a new product today or you've been developin
 
 **parameters** - Use the parameters in the `conf.yaml` file to control accesses between your integration data source and the Agent. The individual integrations `conf.yaml.example` file has all of the required and not required parameters listed. Define all of the needed parameters for all of your integrations in a single `conf.yaml` file - if you have more than one file, the Agent only uses the alphabetically first file.
 
-**conf.yaml** - You can find the `conf.yaml` in the `conf.d/` folder at the root of your [Agent's configuration directory][6]. Use this file to connect and configure any integrations to your system. Non required parameters are usually commented out.
+**conf.yaml** - You can find the `conf.yaml` in the `conf.d/` folder at the root of your [Agent's configuration directory][6]. Use this file to connect integrations to your system, as well as configure their settings. Nonrequired parameters are usually commented out.
 
 **instance** - You define and map the instance of whatever you are monitoring in the `conf.yaml` file. For example, in the [`http_check` integration][7], you're defining the name associated with the instance of the HTTP endpoint you are monitoring up and downtime. You can monitor multiple instances in the same integration, and you do that by defining all of the instances in the `conf.yaml` file.
 
