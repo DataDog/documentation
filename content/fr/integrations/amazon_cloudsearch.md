@@ -4,7 +4,6 @@ aliases:
 categories:
   - cloud
   - processing
-  - search
   - aws
   - log collection
 ddtype: crawler
