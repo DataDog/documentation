@@ -1,27 +1,27 @@
 ---
-title: APP Keys
+title: Application keys
 type: apicontent
 order: 16.2
 external_redirect: /api/#app-keys
 ---
 
-## APP Keys
+## Application keys
 
-Manage all your APP Key with the following endpoints:
+Manage all your application key with the following endpoints:
 
-* To **get** all APP keys available for your account:
+* To **get** all application keys available for your account:
 
     **`GET /api/v1/application_key`**
 
-* To **get** a given APP key:
+* To **get** a given application key:
 
     **`GET /api/v1/application_key/<APP_KEY>`**
 
-* To **edit** an APP Key name:
+* To **edit** an application key name:
 
     **`POST /api/v1/application_key/<APP_KEY>`**
 
-* To **delete** an APP Key from Datadog:
+* To **delete** an application key from Datadog:
 
     **`DELETE /api/v1/application_key/<APP_KEY>`**
 
@@ -29,4 +29,4 @@ Manage all your APP Key with the following endpoints:
 
 * **`name`** [*required*]:
 
-    Name of your APP key.
+    Name of your application key.

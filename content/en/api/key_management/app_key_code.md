@@ -1,5 +1,5 @@
 ---
-title: APP Keys
+title: Application key
 type: apicode
 order: 16.2
 external_redirect: /api/#app-keys

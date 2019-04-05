@@ -1,4 +1,4 @@
-## Get all your APP keys
+## Get all your application keys
 
 {
     "application_keys": [
@@ -15,7 +15,7 @@
     ]
 }
 
-## Create a new APP KEY
+## Create a new application key
 
 {
     "application_key": {
@@ -45,7 +45,7 @@
     }
 }
 
-## Delete an API Key
+## Delete an API key
 
 {
     "application_key": {

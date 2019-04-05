@@ -1,5 +1,5 @@
 ---
-title: API Keys
+title: API keys
 type: apicode
 order: 16.1
 external_redirect: /api/#api-keys

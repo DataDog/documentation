@@ -7,5 +7,5 @@ external_redirect: /api/#key-management
 
 ## Key Management
 
-Manage your Datadog API Key and Application Key. Full list of keys can be seen in the [Datadog API page][1].
+Manage your Datadog API and application keys. The full list of keys can be seen on your [Datadog API page][1].
 [1]: https://app.datadoghq.com/account/settings#api

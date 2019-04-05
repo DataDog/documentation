@@ -10,7 +10,7 @@ curl -X GET \
   "https://app.datadoghq.com/api/v1/api_key?api_key=${api_key}}&application_key=${app_key}" \
   -H 'Content-Type: application/json'
 
-# Create a new API Key
+# Create a new API key
 
 curl -X POST \
   "https://app.datadoghq.com/api/v1/api_key?api_key=${api_key}&application_key=${app_key}" \

@@ -50,7 +50,7 @@
     }
 }
 
-## Delete an API Key
+## Delete an API key
 
 {
     "api_key": {

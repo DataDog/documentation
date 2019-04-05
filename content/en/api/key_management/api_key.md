@@ -1,13 +1,13 @@
 ---
-title: API Keys
+title: API keys
 type: apicontent
 order: 16.1
 external_redirect: /api/#api-keys
 ---
 
-## API Keys
+## API keys
 
-Manage all your API Key with the following endpoints:
+Manage all your API keys with the following endpoints:
 
 * To **get** all API keys available for your account:
 
@@ -17,11 +17,11 @@ Manage all your API Key with the following endpoints:
 
     **`GET /api/v1/api_key/<API_KEY>`**
 
-* To **edit** an API Key name:
+* To **edit** an API key name:
 
     **`POST /api/v1/api_key/<API_KEY>`**
 
-* To **delete** an API Key from Datadog:
+* To **delete** an API key from Datadog:
 
     **`DELETE /api/v1/api_key/<API_KEY>`**
 
