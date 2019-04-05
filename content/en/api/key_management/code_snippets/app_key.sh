@@ -34,7 +34,7 @@ curl -X PUT \
     "name":"<NEW_APP_KEY_NAME>"
 }'
 
-## Delete a given APP key
+## Delete a given application key
 
 curl -X DELETE \
   "https://app.datadoghq.com/api/v1/application_key/<APP_KEY_TO_DELETE>?api_key=${api_key}&application_key=${app_key}" \
