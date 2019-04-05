@@ -5,7 +5,7 @@ order: 16.2
 external_redirect: /api/#app-keys
 ---
 
-## API Keys
+## APP Keys
 
 Manage all your APP Key with the following endpoints:
 
