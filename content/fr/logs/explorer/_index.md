@@ -106,10 +106,10 @@ Le bouton **View in context** met à jour la requête de recherche afin d'affich
 {{< img src="logs/explorer/upper_log_panel.png" alt="configurer le tableau d'affichage" responsive="true" style="width:50%;">}}
 
 
-[1]: /fr/logs/explorer/search
-[2]: /fr/logs/processing/attributes_naming_convention/
-[3]: /fr/tracing/advanced_usage/?tab=java#correlate-traces-and-logs
 
+[1]: /fr/logs/explorer/search
+[2]: /fr/logs/processing/attributes_naming_convention
+[3]: /fr/tracing/advanced/connect_logs_and_traces
 {{% /tab %}}
 {{% tab "Analyses de logs" %}}
 
