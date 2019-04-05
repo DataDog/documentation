@@ -1,10 +1,6 @@
 ---
-title: Getting started with Integrations
+title: Introduction to Integrations
 kind: documentation
-aliases:
-  - /getting-started-integrations/
-  - /guides/getting-started-integrations/
-  - /guides/integrations/
 further_reading:
 - link: "https://learn.datadoghq.com/"
   tag: "Learning Center"
@@ -12,12 +8,6 @@ further_reading:
 - link: "/integrations/"
   tag: "Integrations"
   text: "Datadog's full list of integrations"
-- link: "/graphing/"
-  tag: "Graphing"
-  text: "Now that you have your integrations set up, build graphs to visualize your data"
-- link: "/monitors/"
-  tag: "Alerts"
-  text: "Set up alerts on your data"
 ---
 
 This is a guide for using integrations, for information about building a new integration, see the [Create a new integration][1] page.
@@ -107,6 +97,8 @@ Now that you have your first integrations set up, you can start [exploring all o
 Also check out our [Logs management][13], [APM][25], and [Synthetics][26] solutions.
 
 ## Troubleshooting
+
+The first step to troubleshooting an integration is to use a plugin in your code editor or use one of the many online tools to verify that the YAML is valid. The next step is to run through all of the Agent troubleshooting steps.
 
 ## Further Reading
 
