@@ -48,7 +48,6 @@ kind: faq
 |Amazon Ses|SES|
 |Amazon Sns|SNS|
 |Amazon Sqs|SQS|
-|Amazon States|STATEMACHINE|
 |Amazon Storage Gateway|STORAGEGATEWAY|
 |Amazon Swf|SWF|
 |Amazon Waf|WAF|
@@ -125,7 +124,6 @@ kind: faq
 |Google Cloud Ml|GCPML|
 |Google Cloud Platform|GCP|
 |Google Cloud Pubsub|GCPPUBSUB|
-|Google Cloud Run|GCPCLOUDRUN|
 |Google Cloud Spanner|GCPSPANNER|
 |Google Cloud Storage|GCPSTORAGE|
 |Google Cloud Vpn|GCPVPN|
