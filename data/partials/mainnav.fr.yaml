@@ -3,6 +3,8 @@ main:
     url: getting_started/
     pre: nav_start
     children:
+      - name: Recueillir vos traces
+        url: getting_started/tracing
       - name: Centre d'apprentissage
         url: getting_started/learning_center
   - name: Tagging
@@ -163,8 +165,15 @@ main:
             url: graphing/functions/beta/
       - name: Graphiques JSON
         url: graphing/graphing_json/
+        children:
+          - name: Schéma JSON des Widgets
+            url: graphing/graphing_json/widget_json/
+          - name: Schema JSON des requètes
+            url: graphing/graphing_json/request_json/
       - name: Widgets
         url: graphing/widgets/
+      - name: Guides
+        url: graphing/guide
   - name: Alertes
     url: monitors/
     pre: nav_alerting
@@ -212,57 +221,50 @@ main:
         url: monitors/downtimes/
       - name: Widget d'uptime
         url: monitors/monitor_uptime_widget/
+      - name: Guides
+        url: monitors/guide
   - name: APM (tracing)
     url: tracing/
     pre: nav_tracing
     children:
-      - name: Langage d'instrumentation
-        url: tracing/languages/
+      - name: Implémentation
+        url: tracing/setup/
         children:
           - name: Java
-            url: tracing/languages/java/
+            url: tracing/setup/java/
           - name: Python
-            url: tracing/languages/python/
+            url: tracing/setup/python/
           - name: Ruby
-            url: tracing/languages/ruby/
+            url: tracing/setup/ruby/
           - name: Go
-            url: tracing/languages/go/
+            url: tracing/setup/go/
           - name: Node.js
-            url: tracing/languages/nodejs/
+            url: tracing/setup/nodejs/
           - name: .NET
-            url: tracing/languages/dotnet/
+            url: tracing/setup/dotnet/
           - name: PHP
-            url: tracing/languages/php/
+            url: tracing/setup/php/
           - name: C++
-            url: tracing/languages/cpp/
-      - name: Configuration du proxy
-        url: tracing/proxies/
-        children:
-          - name: NGINX
-            url: tracing/proxies/nginx
+            url: tracing/setup/cpp/
           - name: Envoy
-            url: tracing/proxies/envoy
-      - name: Instrumentation avancée
-        url: tracing/advanced_usage/
+            url: tracing/setup/envoy/
+          - name: NGINX
+            url: tracing/setup/nginx/
+      - name: Enrichir vos Traces
+        url: tracing/advanced/
         children:
-          - name: Tagging personnalisé
-            url: '#tagging-personnalise'
-          - name: Modifier le hostname de l'Agent
-            url: '#modifier-le-hostname-de-l-agent'
-          - name: Instrumentation manuelle
-            url: '#instrumentation-manuelle'
+          - name: Corréler des traces et des logs
+            url: tracing/advanced/connect_logs_and_traces
+          - name: Ajouter des Metadata aux Spans
+            url: tracing/advanced/adding_metadata_to_spans
+          - name: Métriques d'exécution
+            url: tracing/advanced/runtime_metrics
           - name: OpenTracing
-            url: '#opentracing'
-          - name: Tracing distribué
-            url: '#tracing-distribue'
-          - name: Priority Sampling
-            url: '#priority-sampling'
-          - name: Connect Logs and Traces
-            url: '#correlate-traces-and-logs'
-          - name: Debugging
-            url: '#debugging'
-          - name: Sécurité
-            url: '#securite'
+            url: tracing/advanced/opentracing
+          - name: Instrumentation manuelle
+            url: tracing/advanced/manual_instrumentation
+          - name: Configurer les Primary Tags
+            url: tracing/advanced/setting_primary_tags_to_scope
       - name: Interface de l'APM
         url: tracing/visualization/
         children:
@@ -272,34 +274,27 @@ main:
             url: tracing/visualization/service
           - name: Page Resource
             url: tracing/visualization/resource
-          - name: Page Trace
+          - name: Vue Trace
             url: tracing/visualization/trace
-          - name: Recherche de traces
-            url: tracing/visualization/search
-          - name: Analyses de traces
-            url: tracing/visualization/analytics
           - name: Service Map
             url: tracing/visualization/services_map
-      - name: Concepts avancés
-        url: tracing/getting_further/
+      - name: Analyse et recherche de traces
+        url: tracing/trace_search_and_analytics/
         children:
-          - name: Apdex
-            url: >-
-              tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm
-          - name: Resource Monitors
-            url: tracing/getting_further/resource_monitor
-          - name: Service Monitor
-            url: monitors/monitor_types/apm
-          - name: APM dans les Dashboards
-            url: 'graphing/dashboards/widgets/#service-summary'
-          - name: Espace de nommage des métriques des traces
-            url: tracing/getting_further/metrics_namespace
-          - name: Stockage et échantillonnage
-            url: tracing/getting_further/trace_sampling_and_storage
+          - name: Configuration de l'Agent
+            url: tracing/trace_search_and_analytics/agent_trace_search
+          - name: Recherche de traces
+            url: tracing/trace_search_and_analytics/search
+          - name: Analyse de traces
+            url: tracing/trace_search_and_analytics/analytics
       - name: API des traces
         url: 'api/#tracing'
       - name: Bibliothèques
-        url: 'developers/libraries/#apm-tracing-client-libraries'
+        url: 'developers/libraries/#bibliotheques-client-pour-l-apm-tracing'
+      - name: Guides
+        url: tracing/guide
+      - name: Dépannage
+        url: tracing/troubleshooting/
   - name: Log Management
     url: logs/
     pre: nav_logs
@@ -308,9 +303,9 @@ main:
         url: logs/log_collection/
         children:
           - name: AWS
-            url: 'integrations/amazon_web_services/#collecte-de-log'
+            url: 'integrations/amazon_web_services/#collecte-de-logs'
           - name: Docker
-            url: logs/log_collection/docker
+            url: logs/log_collection/docker/
           - name: Csharp
             url: logs/log_collection/csharp/
           - name: Go
@@ -326,7 +321,7 @@ main:
           - name: Ruby
             url: logs/log_collection/ruby/
           - name: Autres Intégrations
-            url: 'integrations/#cat-log-collection'
+            url: 'integrations/#collecte-de-logs-cat'
       - name: Processing
         url: logs/processing/
         children:
@@ -349,7 +344,7 @@ main:
             url: logs/explorer/analytics
           - name: Vues enregistrées
             url: logs/explorer/saved_views
-          - name: Pattern de Logs
+          - name: Modèle de Logs
             url: logs/explorer/patterns
       - name: Collecte illimitée de logs
         url: logs/logging_without_limits/
@@ -368,10 +363,14 @@ main:
     url: synthetics/
     pre: nav_synthetics
     children:
-      - name: Check Uptime
-        url: synthetics/uptime_check
-      - name: Check Browser
-        url: synthetics/browser_check
+      - name: API Tests
+        url: synthetics/api_test
+      - name: Browser Tests
+        url: synthetics/browser_test
+      - name: Intégration APM
+        url: synthetics/apm
+      - name: Identifier les Bots Synthetics
+        url: synthetics/identify_synthetics_bots
   - name: Outils de développement
     url: developers/
     pre: nav_developers

@@ -161,4 +161,4 @@ Pour modifier les valeurs par défaut de chaque attribut réservé, accédez à 
 [14]: /fr/logs/explorer/search
 [15]: /fr/logs/processing/processors/#log-status-remapper
 [16]: /fr/logs/faq/integration-pipeline-reference
-[17]: https://docs.datadoghq.com/fr/tracing/advanced_usage/?tab=java#correlate-traces-and-logs
+[17]: /fr/tracing/advanced/connect_logs_and_traces/?tab=java
