@@ -9,6 +9,7 @@ further_reading:
 aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology
+  - /tracing/guide/distributed-tracing
 disable_toc: true
 ---
 
