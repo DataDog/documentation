@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c71520ee-3d99-4f73-803d-d3eadef151df",
+		"_postman_id": "9d1fce9f-edf4-40b0-828f-230cceff7143",
 		"name": "Datadog API Collection",
 		"description": "Top Level Folder For Datadog API calls",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -1612,6 +1612,520 @@
 			]
 		},
 		{
+			"name": "Key Management",
+			"item": [
+				{
+					"name": "API Key",
+					"item": [
+						{
+							"name": "Get all API Key",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://app.datadoghq.com/api/v1/api_key?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"protocol": "https",
+									"host": [
+										"app",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"api_key"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{dd_api_key}}"
+										},
+										{
+											"key": "application_key",
+											"value": "{{dd_app_key}}"
+										}
+									]
+								},
+								"description": "Get all API key from a given Datadog Organization"
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new API Key",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"<API_KEY_NAME>\"\n}"
+								},
+								"url": {
+									"raw": "https://app.datadoghq.com/api/v1/api_key?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"protocol": "https",
+									"host": [
+										"app",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"api_key"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{dd_api_key}}"
+										},
+										{
+											"key": "application_key",
+											"value": "{{dd_app_key}}"
+										}
+									]
+								},
+								"description": "Create a new API key for your Datadog Account by providing its name."
+							},
+							"response": []
+						},
+						{
+							"name": "Get a given API Key",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://app.datadoghq.com/api/v1/api_key/:api_key_to_get?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"protocol": "https",
+									"host": [
+										"app",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"api_key",
+										":api_key_to_get"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{dd_api_key}}"
+										},
+										{
+											"key": "application_key",
+											"value": "{{dd_app_key}}"
+										},
+										{
+											"key": "API_KEY_TO_GET",
+											"value": null,
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "api_key_to_get",
+											"value": "<API_KEY_TO_GET>"
+										}
+									]
+								},
+								"description": "Get a given API Key description from Datadog"
+							},
+							"response": []
+						},
+						{
+							"name": "Edit a given API key",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"<API_KEY_NAME>\"\n}"
+								},
+								"url": {
+									"raw": "https://app.datadoghq.com/api/v1/api_key/:api_key_to_edit?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"protocol": "https",
+									"host": [
+										"app",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"api_key",
+										":api_key_to_edit"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{dd_api_key}}"
+										},
+										{
+											"key": "application_key",
+											"value": "{{dd_app_key}}"
+										}
+									],
+									"variable": [
+										{
+											"key": "api_key_to_edit",
+											"value": "<API_KEY_TO_EDIT>"
+										}
+									]
+								},
+								"description": "Edit the name of a given API key."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete an API key",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://app.datadoghq.com/api/v1/api_key/:api_key_to_delete?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"protocol": "https",
+									"host": [
+										"app",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"api_key",
+										":api_key_to_delete"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{dd_api_key}}"
+										},
+										{
+											"key": "application_key",
+											"value": "{{dd_app_key}}"
+										},
+										{
+											"key": "API_KEY_TO_GET",
+											"value": null,
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "api_key_to_delete",
+											"value": "<API_KEY_TO_DELETE>"
+										}
+									]
+								},
+								"description": "Delete a given API key"
+							},
+							"response": []
+						}
+					],
+					"description": "Manage your Datadog API keys",
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "APP Key",
+					"item": [
+						{
+							"name": "Get all APP Key",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://app.datadoghq.com/api/v1/application_key?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"protocol": "https",
+									"host": [
+										"app",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"application_key"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{dd_api_key}}"
+										},
+										{
+											"key": "application_key",
+											"value": "{{dd_app_key}}"
+										}
+									]
+								},
+								"description": "Get all API key from a given Datadog Organization"
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new APP Key",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"<APP_KEY_NAME>\"\n}"
+								},
+								"url": {
+									"raw": "https://app.datadoghq.com/api/v1/application_key?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"protocol": "https",
+									"host": [
+										"app",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"application_key"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{dd_api_key}}"
+										},
+										{
+											"key": "application_key",
+											"value": "{{dd_app_key}}"
+										}
+									]
+								},
+								"description": "Create a new API key for your Datadog Account by providing its name."
+							},
+							"response": []
+						},
+						{
+							"name": "Get a given APP Key",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://app.datadoghq.com/api/v1/application_key/:app_key_to_get?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"protocol": "https",
+									"host": [
+										"app",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"application_key",
+										":app_key_to_get"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{dd_api_key}}"
+										},
+										{
+											"key": "application_key",
+											"value": "{{dd_app_key}}"
+										},
+										{
+											"key": "API_KEY_TO_GET",
+											"value": null,
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "app_key_to_get",
+											"value": "<APP_KEY_TO_GET>"
+										}
+									]
+								},
+								"description": "Get a given API Key description from Datadog"
+							},
+							"response": []
+						},
+						{
+							"name": "Edit a given APP key",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"<APP_KEY_NAME>\"\n}"
+								},
+								"url": {
+									"raw": "https://app.datadoghq.com/api/v1/application_key/:app_key_to_edit?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"protocol": "https",
+									"host": [
+										"app",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"application_key",
+										":app_key_to_edit"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{dd_api_key}}"
+										},
+										{
+											"key": "application_key",
+											"value": "{{dd_app_key}}"
+										}
+									],
+									"variable": [
+										{
+											"key": "app_key_to_edit",
+											"value": "<APP_KEY_TO_EDIT>"
+										}
+									]
+								},
+								"description": "Edit the name of a given API key."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete an APP key",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://app.datadoghq.com/api/v1/application_key/:app_key_to_delete?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"protocol": "https",
+									"host": [
+										"app",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"application_key",
+										":app_key_to_delete"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{dd_api_key}}"
+										},
+										{
+											"key": "application_key",
+											"value": "{{dd_app_key}}"
+										},
+										{
+											"key": "API_KEY_TO_GET",
+											"value": null,
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "app_key_to_delete",
+											"value": "<APP_KEY_TO_DELETE>"
+										}
+									]
+								},
+								"description": "Delete a given API key"
+							},
+							"response": []
+						}
+					],
+					"description": "Manage your Datadog API keys",
+					"_postman_isSubFolder": true
+				}
+			],
+			"description": "Manage your Datdog API keys"
+		},
+		{
 			"name": "Logs",
 			"item": [
 				{
@@ -1928,9 +2442,12 @@
 			"name": "Monitors",
 			"item": [
 				{
-					"name": "Create a Monitor ",
+					"name": "Get all API Key",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -1939,10 +2456,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n      \"type\": \"metric alert\",\n      \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100\",\n      \"name\": \"Bytes received on host0\",\n      \"message\": \"We may need to add web hosts if this is consistently high.\",\n      \"tags\": [\"app:webserver\", \"frontend\"],\n      \"options\": {\n      \t\"notify_no_data\": true,\n      \t\"no_data_timeframe\": 20\n      }\n    }"
+							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/monitor?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/api_key?api_key=6f3fb9b7c63fb5185fbca639bf5cf57d&application_key=ef71925bbf818759130928f718825ce0354bdd68",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1952,16 +2469,16 @@
 							"path": [
 								"api",
 								"v1",
-								"monitor"
+								"api_key"
 							],
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "6f3fb9b7c63fb5185fbca639bf5cf57d"
 								},
 								{
 									"key": "application_key",
-									"value": "{{dd_app_key}}"
+									"value": "ef71925bbf818759130928f718825ce0354bdd68"
 								}
 							]
 						},
@@ -2370,7 +2887,7 @@
 							"raw": "{\n    \"type\": \"query alert\",\n    \"query\": \"min(last_5m):avg:fse_auto_process.request.duration{build:prod} + avg:cassandra.db.recent_read_latency_micros{host:fse-ldmx-f7-18} + avg:cassandra.db.recent_write_latency_micros{host:fse-ldmx-f7-18} + avg:redis.info.latency_ms{*} + avg:gunicorn.request.duration.avg{*} >= 550\"\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/monitor/validate?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://api.datadoghq.com/api/v1/monitor?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
