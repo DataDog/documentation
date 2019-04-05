@@ -1,6 +1,8 @@
 ---
 title: Trace Search and Analytics
 kind: documentation
+aliases:
+  - tracing/visualization/search/
 ---
 
 {{< vimeo 278748711 >}}

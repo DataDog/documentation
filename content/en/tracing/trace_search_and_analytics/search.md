@@ -8,7 +8,6 @@ aliases:
   - tracing/trace_search/
   - tracing/search
   - /tracing/getting_further/apm_events/
-  - tracing/visualization/search
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
