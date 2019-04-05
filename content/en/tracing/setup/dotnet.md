@@ -17,10 +17,6 @@ further_reading:
     text: "Advanced Usage"
 ---
 
-<div class="alert alert-warning">
-.NET Tracing is in an open Public Beta.
-</div>
-
 ## Getting Started
 
 To begin tracing applications written in any language, first [install and configure the Datadog Agent][1]. The .NET Tracer runs in-process to instrument your applications and sends traces to the Agent.
@@ -87,14 +83,14 @@ Install the .NET Tracer on the host using the using one of the packages availabl
 For Debian or Ubuntu, download and install the Debian package:
 
 ```bash
-curl -LO https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>-beta/datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb
+curl -LO https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>/datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb
 sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb
 ```
 
 For CentOS or Fedora, download and install the RPM package
 
 ```bash
-curl -LO https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>-beta/datadog-dotnet-apm-<TRACER_VERSION>-1.x86_64.rpm
+curl -LO https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>/datadog-dotnet-apm-<TRACER_VERSION>-1.x86_64.rpm
 sudo rpm -Uvh datadog-dotnet-apm-<TRACER_VERSION>-1.x86_64.rpm
 ```
 
@@ -102,7 +98,7 @@ A tar archive is available for other distributions:
 
 ```bash
 sudo mkdir -p /opt/datadog
-curl -L https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>-beta/datadog-dotnet-apm-<TRACER_VERSION>.tar.gz \
+curl -L https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>/datadog-dotnet-apm-<TRACER_VERSION>.tar.gz \
 | sudo tar xzf - -C /opt/datadog
 ```
 
@@ -313,8 +309,6 @@ The .NET Tracer can instrument the following libraries automatically:
 
 Notes:
 
-All integrations are in Public Beta.
-
 <sup>1</sup> The `AspNet` integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. To enable the `AspNet` integration, you must add the [`Datadog.Trace.ClrProfiler.Managed`][6] NuGet package to your application.
 
 <sup>2</sup> The ADO.NET integration tries to instrument **all** ADO.NET providers. Datadog tested SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (MySQL, SQLite, Oracle) are untested but should work.
@@ -331,11 +325,11 @@ For more details on manual instrumentation and custom tagging, see [Manual instr
 
 Manual instrumentation is supported on .NET Framework 4.5+ on Windows and on any platform that implements .NET Standard 2.0 or above:
 
-| Runtime        | Versions | OS                    | Support type |
-| -------------- | -------- | --------------------- | ------------ |
-| .NET Framework | 4.5+     | Windows               | Public Beta  |
-| .NET Core      | 2.0+     | Windows, Linux, macOS | Public Beta  |
-| Mono           | 5.4+     | Windows, Linux, macOS | Public Beta  |
+| Runtime        | Versions | OS                    |
+| -------------- | -------- | --------------------- |
+| .NET Framework | 4.5+     | Windows               |
+| .NET Core      | 2.0+     | Windows, Linux, macOS |
+| Mono           | 5.4+     | Windows, Linux, macOS |
 
 For more details on supported platforms, see the [.NET Standard documentation][8].
 
