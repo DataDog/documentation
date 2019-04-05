@@ -1,7 +1,7 @@
 ---
 title: View metric metadata
 type: apicontent
-order: 17.4
+order: 18.4
 external_redirect: /api/#view-metric-metadata
 ---
 ## View metric metadata

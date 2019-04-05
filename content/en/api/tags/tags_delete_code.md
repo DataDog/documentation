@@ -1,7 +1,7 @@
 ---
 title: Remove host tags
 type: apicode
-order: 21.5
+order: 22.5
 external_redirect: /api/#remove-host-tags
 ---
 
