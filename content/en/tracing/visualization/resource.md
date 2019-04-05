@@ -1,6 +1,6 @@
 ---
-title: Resource page
-kind: Documentation
+title: Resource Page
+kind: documentation
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"

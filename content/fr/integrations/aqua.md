@@ -49,7 +49,7 @@ Pour installer le check Aqua sur votre host :
 
 ### Configuration
 
-1. Modifiez le fichier `aqua.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent] (https://docs.datadoghq.com/agent/faq/agent-configuration-files/#agent-configuration-directory) pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) Aqua.
+1. Modifiez le fichier `aqua.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent] (https://docs.datadoghq.com/agent/faq/agent-configuration-files/#repertoire-de-configuration-de-l-agent) pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) Aqua.
   Consultez le [fichier d'exemple conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
 
 #### Collecte de métriques
@@ -86,7 +86,7 @@ Pour recueillir des logs d'audit Aqua :
 
 Pour les logs d'exécution Aqua (**Disponible à partir des versions > 6.0 de l'Agent**) :
 
-* La collecte des logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans votre [configuration DaemonSet](https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/#log-collection) :
+* La collecte des logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans votre [configuration DaemonSet](https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/#collecte-de-logs) :
 
 ```
 (...)
@@ -99,7 +99,7 @@ Pour les logs d'exécution Aqua (**Disponible à partir des versions > 6.0 de l
 (...)
 ```
 
-* Assurez-vous que le socket Docker est monté sur l'Agent Datadog comme dans [ce manifeste](https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/#create-manifest).
+* Assurez-vous que le socket Docker est monté sur l'Agent Datadog comme dans [ce manifeste](https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/#creer-un-manifeste).
 
 * [Redémarrez l'Agent][4].
 

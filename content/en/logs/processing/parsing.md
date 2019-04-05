@@ -244,9 +244,9 @@ The date matcher transforms your timestamp in the EPOCH format.
 | Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` | {"date": 1466058543000} |
 | 2007-08-31 19:22:22.427 ADT              | `%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`               | {"date": 1188675889244} |
 
-<sup>1</sup> Use this format if you perform your own localizations and your timestamps are _not_ in UTC. Timezone IDs are pulled from the TZ Database. For more information, see the [TZ database names][2].
+<sup>1</sup> Use this format if you perform your own localizations and your timestamps are _not_ in UTC. Timezone IDs are pulled from the TZ Database. For more information, see the [TZ database names][1].
 
-**Note**: Parsing a date **doesn't** set its value as the log official date, for this use the Log Date Remapper [Log Date Remapper][1] in a subsequent Processor.
+**Note**: Parsing a date **doesn't** set its value as the log official date, for this use the Log Date Remapper [Log Date Remapper][2] in a subsequent Processor.
 
 ### Conditional pattern
 
@@ -312,5 +312,5 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/processors/#log-date-remapper
-[2]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+[1]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+[2]: /logs/processing/processors/#log-date-remapper

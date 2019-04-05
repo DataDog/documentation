@@ -3,7 +3,6 @@ aliases:
   - /fr/integrations/awsapigateway/
 categories:
   - cloud
-  - api
   - aws
   - log collection
 ddtype: crawler

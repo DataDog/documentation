@@ -45,7 +45,7 @@ Un [pipeline d'intégration][7] est automatiquement installé pour les logs d'in
 {{< img src="logs/processing/elb_log_post_processing.png" alt="Post traitement de logs ELB" responsive="true" style="width:70%;">}}
 
 <div class="alert alert-info">
-Consultez la liste <a href="/integrations/#cat-log-collection">actuelle des intégrations prises en charge disponibles</a>.
+Consultez la liste <a href="/integrations/#collecte-de-logs-cat">actuelle des intégrations prises en charge disponibles</a>.
 </div>
 
 ### Logs personnalisés
@@ -161,4 +161,4 @@ Pour modifier les valeurs par défaut de chaque attribut réservé, accédez à 
 [14]: /fr/logs/explorer/search
 [15]: /fr/logs/processing/processors/#log-status-remapper
 [16]: /fr/logs/faq/integration-pipeline-reference
-[17]: https://docs.datadoghq.com/fr/tracing/advanced_usage/?tab=java#correlate-traces-and-logs
+[17]: /fr/tracing/advanced/connect_logs_and_traces/?tab=java

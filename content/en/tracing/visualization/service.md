@@ -1,6 +1,6 @@
 ---
-title: Service page
-kind: Documentation
+title: Service Page
+kind: documentation
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
