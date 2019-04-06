@@ -20,4 +20,5 @@ private: true
     {{< nextlink href="monitors/faq/can-i-create-monitor-dependencies" >}}Can I create monitor dependencies?{{< /nextlink >}}
     {{< nextlink href="monitors/faq/how-to-update-anomaly-monitor-timezone" >}}How to update an anomaly detection monitor to account for local timezone?{{< /nextlink >}}
     {{< nextlink href="monitors/faq/what-are-recovery-thresholds" >}}What are recovery thresholds?{{< /nextlink >}}
+    {{< nextlink href="monitors/faq/why-did-my-monitor-settings-change-not-take-effect" >}}Why did my monitor settings change not take effect?{{< /nextlink >}}
 {{< /whatsnext >}}
