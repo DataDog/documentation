@@ -81,7 +81,7 @@ Depuis cette section, utilisez des tags pour filtrer ou regrouper des hosts :
 
 Ou des conteneurs :
 
-{{< img src="tagging/using_tags/containermaptags.png" alt="Tags hostmap conteneurs" responsive="true" style="width:80%;">}}
+{{< img src="tagging/using_tags/containermaptags.png" alt="Tags Map des conteneurs" responsive="true" style="width:80%;">}}
 {{% /tab %}}
 
 {{% tab "Liste des infrastructures" %}}
