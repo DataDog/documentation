@@ -23,12 +23,16 @@ This page outlines the basic features of the Windows Datadog Agent. If you haven
 
 ## Agent installation
 
+**Starting with release `6.11`, the Windows Agent main components (i.e. Core, APM/Trace, and Process) run under the `ddagentuser` account, created at install time, instead of running on prior version under the `LOCAL_SYSTEM` account.**
+
+[Refer to the dedicated ddagentuser FAQ to learn more.][3]
+
 Many items can be configured on the command line when installing the Datadog Windows Agent. Each configuration item is added as an install property to the command line. For instance, the following commands install the Agent, configure the Agent configuration file with the `<DATADOG_API_KEY>`, and set the `<HOSTNAME>` and tags.
 
 * cmd: `msiexec /qn /i datadog-agent-6-latest.amd64.msi APIKEY="<DATADOG_API_KEY>" HOSTNAME="<HOSTNAME>" TAGS="key_1:val_1,key_2:val_2"`
 * Powershell: `Start-Process msiexec -ArgumentList '/qn /i datadog-agent-6-latest.amd64.msi APIKEY="<DATADOG_API_KEY>" HOSTNAME="<HOSTNAME>" TAGS="key_1:val_1,key_2:val_2"'`
 
-The following configuration command line options are available when installing the Agent: 
+The following configuration command line options are available when installing the Agent:
 
 | Variable          | Type   | Description                                                                                                                                                                                       |
 |-------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -39,10 +43,12 @@ The following configuration command line options are available when installing t
 | `APM_ENABLED`     | String | Enable (`"true"`) or disable (`"false"`) the APM Agent in the configuration file. APM is enabled by default.                                                                                      |
 | `PROCESS_ENABLED` | String | Enable (`"true"`) or disable (`"false"`) the Process Agent in the configuration file. The Process Agent is disabled by default.                                                                   |
 | `CMD_PORT`        | Number | A valid port number between 0 and 65534. The Datadog Agent uses port 5001 by default for it's control API. If that port is already in use by another program, the default may be overridden here. |
-| `PROXY_HOST`      | String | If using a proxy, sets your proxy host. [Learn more about using a proxy with the Datadog Agent][3].                                                                                               |
-| `PROXY_PORT`      | Number | If using a proxy, sets your proxy port. [Learn more about using a proxy with the Datadog Agent][3].                                                                                               |
-| `PROXY_USER`      | String | If using a proxy, sets your proxy user. [Learn more about using a proxy with the Datadog Agent][3].                                                                                               |
-| `PROXY_PASSWORD`  | String | If using a proxy, sets your proxy password. [Learn more about using a proxy with the Datadog Agent][3].                                                                                           |
+| `PROXY_HOST`      | String | If using a proxy, sets your proxy host. [Learn more about using a proxy with the Datadog Agent][4].                                                                                               |
+| `PROXY_PORT`      | Number | If using a proxy, sets your proxy port. [Learn more about using a proxy with the Datadog Agent][4].                                                                                               |
+| `PROXY_USER`      | String | If using a proxy, sets your proxy user. [Learn more about using a proxy with the Datadog Agent][4].                                                                                               |
+| `PROXY_PASSWORD`  | String | If using a proxy, sets your proxy password. [Learn more about using a proxy with the Datadog Agent][4].                                                                                           |
+| `DDAGENTUSER_NAME` | String | Override the default `ddagentuser` username used during Agent installation. [Learn more about the Datadog Windows Agent User][3]|
+|`DDAGENTUSER_PASSWORD` | String | Override the randomly generated password for the `ddagentuser` user during Agent installation. [Learn more about the Datadog Windows Agent User][3] |
 
 **Note**: If a valid `datadog.yaml` is found and has an `API_KEY` configured, that file takes precedence over all specified command-line options.
 
@@ -92,7 +98,7 @@ Use the `start`, `stop`, and `restart` commands in the Datadog Agent Manager:
 
 {{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Manager snapshot" responsive="true" style="width:75%;">}}
 
-You can also use Windows Powershell if you are running a modern version of Windows:  
+You can also use Windows Powershell if you are running a modern version of Windows:
 `[start|stop|restart]-service datadogagent`
 
 {{% /tab %}}
@@ -104,11 +110,11 @@ Use the Datadog Agent Manager (available in the start menu) to enable, disable, 
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
-The main Agent configuration file is located at:  
+The main Agent configuration file is located at:
 `C:\ProgramData\Datadog\datadog.yaml`
 
-Configuration files for [integrations][1] are in:  
-`C:\ProgramData\Datadog\conf.d\`  
+Configuration files for [integrations][1] are in:
+`C:\ProgramData\Datadog\conf.d\`
 OR `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
 
 **Note**: `ProgramData` is a hidden folder.
@@ -117,11 +123,11 @@ OR `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-The main Agent configuration file is located at:  
+The main Agent configuration file is located at:
 `C:\ProgramData\Datadog\datadog.conf`
 
-Configuration files for [integrations][1] are in:  
-`C:\ProgramData\Datadog\conf.d\`  
+Configuration files for [integrations][1] are in:
+`C:\ProgramData\Datadog\conf.d\`
 OR `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
 
 **Note**: `ProgramData` is a hidden folder.
@@ -143,7 +149,7 @@ To receive more information about the Agent's state, start the Datadog Agent Man
 - Right click on the Datadog Agent system tray icon -> Configure, or
 - Run `& "C:\program files\datadog\datadog agent\embedded\agent.exe" launch-gui` from an admin Powershell prompt
 
-Then, open the status page by going to *Status* -> *General*.  
+Then, open the status page by going to *Status* -> *General*.
 Get more information on running checks in *Status* -> *Collector* and *Checks* -> *Summary*.
 
 The status command is available for Powershell:
@@ -163,7 +169,7 @@ or cmd.exe:
 
 To verify the Agent is running, check if the service status in the Services panel is listed as "Started". A process called `ddagent.exe` should also exist in the Task Manager.
 
-Information about the Agent's state for Agent v5.2+ is available in the  
+Information about the Agent's state for Agent v5.2+ is available in the
 *Datadog Agent Manager -> Settings -> Agent Status*:
 
 {{< img src="agent/faq/windows_status.png" alt="Windows Status" responsive="true" style="width:50%;" >}}
@@ -190,7 +196,7 @@ or cmd.exe:
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
-The Agent logs are located in `C:\ProgramData\Datadog\logs\agent.log`.  
+The Agent logs are located in `C:\ProgramData\Datadog\logs\agent.log`.
 **Note**: `ProgramData` is a hidden folder.
 
 Need help? Contact [Datadog support][1].
@@ -199,7 +205,7 @@ Need help? Contact [Datadog support][1].
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-For Windows Server 2008, Vista, and newer, the Agent logs are located in `C:\ProgramData\Datadog\logs`.  
+For Windows Server 2008, Vista, and newer, the Agent logs are located in `C:\ProgramData\Datadog\logs`.
 **Note**: `ProgramData` is a hidden folder.
 
 Need help? Contact [Datadog support][1].
@@ -296,7 +302,7 @@ When adding your own services, be sure to follow the formatting exactly as shown
 
 Also, any time you modify an integration the Datadog service needs to be restarted. You can do this from services.msc or from the UI sidebar.
 
-For Services, Datadog doesn't track the metrics, only their availability. (For metrics, use the [Process][4] or [WMI][5] integration). To set up a Monitor, select the [Integration monitor type][6] then search for **Windows Service**. From *Integration Status -> Pick Monitor Scope*, choose the service you would like to monitor.
+For Services, Datadog doesn't track the metrics, only their availability. (For metrics, use the [Process][5] or [WMI][6] integration). To set up a Monitor, select the [Integration monitor type][7] then search for **Windows Service**. From *Integration Status -> Pick Monitor Scope*, choose the service you would like to monitor.
 
 ### Monitoring system load for Windows
 
@@ -319,7 +325,7 @@ While Windows does not offer this exact metric, there is an equivalent option th
 
 ### Monitoring Windows Processes
 
-You can monitor Windows processes via the [Process integration][7]. To set this up on Windows, select the **Process** integration from the list of integrations in the Datadog Agent Manager and edit the configuration.
+You can monitor Windows processes via the [Process integration][8]. To set this up on Windows, select the **Process** integration from the list of integrations in the Datadog Agent Manager and edit the configuration.
 
 For example, to monitor Notepad, your configuration file would include:
 
@@ -346,8 +352,9 @@ Due to the sensitivity of YAML, if you tried the above and cannot get it to work
 
 [1]: https://app.datadoghq.com/account/settings#agent/windows
 [2]: /agent/#supported-os-versions
-[3]: /agent/proxy
-[4]: /#monitoring-windows-processes
-[5]: /integrations/wmi
-[6]: https://app.datadoghq.com/monitors#create/integration
-[7]: /integrations/process
+[3]: /agent/faq/windows-agent-ddagent-user
+[4]: /agent/proxy
+[5]: /#monitoring-windows-processes
+[6]: /integrations/wmi
+[7]: https://app.datadoghq.com/monitors#create/integration
+[8]: /integrations/process
