@@ -1,0 +1,11 @@
+[
+    {
+        "agent_version": "6.9.0",
+        "integration":"containerd",
+        "check": "containerd.health",
+        "statuses": ["ok", "critical"],
+        "groups": ["host"],
+        "name": "Santé",
+        "description": "Renvoie `CRITICAL` si le check de l'Agent n'est pas capable de se connecter au socket containerd qu'il surveille. Si ce n'est pas le cas, renvoie `OK`."
+    }
+]

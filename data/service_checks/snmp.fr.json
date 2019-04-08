@@ -6,6 +6,6 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "snmp_device"],
         "name": "Peut vérifier",
-        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de récupérer des métriques à partir de SNMP. Si ce n'est pas le cas, renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si le check de l'Agent n'est pas capable de récupérer des métriques à partir de SNMP. Si ce n'est pas le cas, renvoie `OK`."
     }
 ]

@@ -6,7 +6,7 @@ categories:
   - azure
 ddtype: crawler
 dependencies: []
-description: 'Surveillez les hits, misses, expulsions, clients connectés, et plus encore.'
+description: 'Surveillez les hits, miss, expulsions, clients connectés, et plus encore.'
 doc_link: 'https://docs.datadoghq.com/integrations/azure_redis_cache/'
 git_integration_title: azure_redis_cache
 has_logo: true
@@ -16,7 +16,7 @@ kind: integration
 manifest_version: '1.0'
 name: azure_redis_cache
 public_title: Intégration Datadog/Microsoft Azure Redis Cache
-short_description: 'Surveillez les hits, misses, expulsions, clients connectés, et plus encore.'
+short_description: 'Surveillez les hits, miss, expulsions, clients connectés, et plus encore.'
 version: '1.0'
 ---
 ## Présentation
