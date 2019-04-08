@@ -71,7 +71,7 @@ config_providers:
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-**Note**: this feature is available for Agent v6.5+. See [Upgrading the Datadog Agent][1].
+**Note**: this feature is available for Agent v6.5+.
 
 The Datadog Agent can extract container labels and environment variables as metric tags with the following configuration in your `datadog.yaml` file:
 
@@ -92,11 +92,10 @@ docker_labels_as_tags:
 
 Note: Tags are only set when a container starts.
 
-[1]: 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-**Note**: this feature is available for Agent v6.10+. See [Upgrading the Datadog Agent][1].
+**Note**: this feature is available for Agent v6.10+.
 
 The Datadog Agent can autodiscover tags from Pod annotations, which allows it to
 associate tags to entire pods or individual containers. Use this format
@@ -133,7 +132,6 @@ kubernetes_pod_annotations_as_tags:
 
 Note: Tags are only set when a pod starts.
 
-[1]: 
 {{% /tab %}}
 {{< /tabs >}}
 
