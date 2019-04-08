@@ -172,8 +172,8 @@ For [Trace Search][1], filter traces with tags using the search bar or facet che
 {{< img src="tagging/using_tags/tracesearchtags.png" alt="Trace Search Tags" responsive="true" style="width:80%;">}}
 
 
-[1]: /tracing/visualization/search
-[2]: /tracing/visualization/search/#search-bar
+[1]: /tracing/trace_search_and_analytics/search
+[2]: /tracing/trace_search_and_analytics/search/#search-bar
 {{% /tab %}}
 {{% tab "Service Map" %}}
 
@@ -183,7 +183,7 @@ After [assigning tags][1], use the Service Map to jump to different areas of the
 
 
 [1]: /tagging/assigning_tags
-[2]: /tracing/visualization/search
+[2]: /tracing/trace_search_and_analytics/search
 [3]: /monitors/manage_monitor
 [4]: /logs/explorer/search
 [5]: /graphing/infrastructure/hostmap

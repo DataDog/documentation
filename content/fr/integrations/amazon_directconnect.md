@@ -3,7 +3,6 @@ aliases:
   - /fr/integrations/awsdirectconnect/
 categories:
   - cloud
-  - direct connect
   - aws
   - log collection
 ddtype: crawler

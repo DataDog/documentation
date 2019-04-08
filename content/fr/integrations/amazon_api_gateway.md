@@ -3,12 +3,11 @@ aliases:
   - /fr/integrations/awsapigateway/
 categories:
   - cloud
-  - api
   - aws
   - log collection
 ddtype: crawler
 dependencies: []
-description: 'Mesurez les erreurs d''AWS Gateway, les hits et misses de cache et la latence de requêtes.'
+description: 'Mesurez les erreurs d''AWS Gateway, les hits et miss de cache et la latence de requêtes.'
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_api_gateway/'
 git_integration_title: amazon_api_gateway
 has_logo: true
