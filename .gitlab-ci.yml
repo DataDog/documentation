@@ -120,7 +120,7 @@ manage_translations:on-schedule:
     URL: ${PREVIEW_DOMAIN}
     CONFIG: ${PREVIEW_CONFIG}
   script:
-    - manage_translations "${APIKEY}"
+    - if [[ $(date +%u) -lt 6 ]]; then manage_translations "${APIKEY}"; fi
   only:
     - schedules
 
