@@ -1,6 +1,8 @@
 ---
 title: Distributed Tracing
 kind: documentation
+aliases:
+  - /tracing/guide/distributed-tracing
 ---
 
 Distributed tracing allows you to propagate a single trace across multiple services and hosts, so you can see performance end-to-end. Linking is implemented by injecting Datadog Metadata into the request headers.
