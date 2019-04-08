@@ -62,26 +62,34 @@ Manage the Datadog Agent and [Integrations][1] using configuration management to
 
 ## Getting further with the Datadog Agent
 
+### Update the Agent
+
+To manually update the Datadog Agent core between to minor versions on a given host, run the [corresponding install command for your platform][2].
+
+Note: If you want to manually update one specific Agent integration refer to the [Integration Management guide][3].
+
 ### Configuration files
 
-[See the dedicated documentation for Agent configuration files][2].
+[See the dedicated documentation for Agent configuration files][4].
 
 ### Datadog site
 
-To send your Agent data to the [Datadog EU site][3], edit your [Agent main configuration file][4] `datadog.yaml` and set the `site` parameter to:
+To send your Agent data to the [Datadog EU site][5], edit your [Agent main configuration file][6] `datadog.yaml` and set the `site` parameter to:
 
 `site: datadoghq.eu`
 
 ### Log location
 
-[See the dedicated documentation for Agent log files][5]
+[See the dedicated documentation for Agent log files][7]
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations
-[2]: /agent/faq/agent-configuration-files
-[3]: https://app.datadoghq.eu
-[4]: /agent/faq/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[5]: /agent/faq/agent-log-files
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: /agent/guide/integration-management
+[4]: /agent/faq/agent-configuration-files
+[5]: https://app.datadoghq.eu
+[6]: /agent/faq/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[7]: /agent/faq/agent-log-files
