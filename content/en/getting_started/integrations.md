@@ -49,11 +49,11 @@ instances:
 
 **metadata.csv** - The file that lists and stores the metrics collected by each integration.
 
-**custom check** - If you have a unique system that you want to monitor, or if you're going to expand the metrics already sent by an integration, you can build a [custom check][13] to define and send metrics to Datadog. However, if you want to monitor a generally available application, public service, or an open source project, and we don't have an integration that already exists for it, you should consider [building a new integration][1] instead of a custom check.
+**custom check** - If you have a unique system that you want to monitor, or if you're going to expand the metrics already sent by an integration, you can build a [custom check][7] to define and send metrics to Datadog. However, if you want to monitor a generally available application, public service, or an open source project, and we don't have an integration that already exists for it, you should consider [building a new integration][1] instead of a custom check.
 
-**tagging** - [Tags][14] are a way to add customization to metrics so that you can filter and visualize them in the most useful way to you.
+**tagging** - [Tags][13] are a way to add customization to metrics so that you can filter and visualize them in the most useful way to you.
 
-**logging** - If the system you are monitoring has logs, you can customize the logs you are sending to Datadog and use our [Logging Management solution][15] to manage and analyze them.
+**logging** - If the system you are monitoring has logs, you can customize the logs you are sending to Datadog and use our [Logging Management solution][14] to manage and analyze them.
 
 **events** - 
 
@@ -61,21 +61,21 @@ instances:
 
 ## Setting up an integration
 
-The Datadog Agent package includes integrations officially supported by Datadog, in [integrations core][2]. To use the integrations in integrations core, download the Datadog agent. Community based integrations are in [integrations extras][3], and to use those, you need to download them individually. For more information on installing or managing these integrations, see the [integrations management guide][16].
+The Datadog Agent package includes integrations officially supported by Datadog, in [integrations core][2]. To use the integrations in integrations core, download the Datadog agent. Community based integrations are in [integrations extras][3], and to use those, you need to download them individually. For more information on installing or managing these integrations, see the [integrations management guide][15].
 
 ### API and Application keys
 
-In order to [install the the Datadog Agent package][17], you need an [API and Application key][18]. You can manage your accounts API and Application keys in the [API Settings page][19] of the UI.
+In order to [install the the Datadog Agent][6], you need an [API and Application key][16]. You can manage your accounts API and Application keys in the [API Settings page][17] of the UI.
 
 ### Installation
 
-If you want to connect with a cloud service provider, navigate to that provider on the [Integrations page][20] for specific instructions on how to connect. For other supported integrations, install the [Datadog Agent][21]. Most integrations are supported on our containerized agents: [Docker][22], and [Kubernetes][23]. After you've downloaded the Agent, go to the [Integrations page][20] section to find specific configuration instructions for individual integrations.
+If you want to connect with a cloud service provider, navigate to that provider on the [Integrations page][18] for specific instructions on how to connect. For other supported integrations, install the [Datadog Agent][19]. Most integrations are supported on our containerized agents: [Docker][20], and [Kubernetes][21]. After you've downloaded the Agent, go to the [Integrations page][18] section to find specific configuration instructions for individual integrations.
 
 ### Configuration
 
-Configurations are specific to [individual integrations][20]. In the `conf.d` folder at the root of your Agent's configuration directory, there is a file named `<INTEGRATIONS>.d` in each integration folder, and a sample `conf.yaml` that lists all available configuration options. 
+Configurations are specific to [individual integrations][18]. In the `conf.d` folder at the root of your Agent's configuration directory, there is a file named `<INTEGRATIONS>.d` in each integration folder, and a sample `conf.yaml` that lists all available configuration options. 
 
-To begin configuring, rename `<INTEGRATIONS>.d`to `conf.yaml`to activate the integration. Then update the parameters inside the configuration file. Non-required parameters are commented out. All configuration files follow the format documented in the [parameters documentation][24].
+To begin configuring, rename `<INTEGRATIONS>.d`to `conf.yaml`to activate the integration. Then update the parameters inside the configuration file. Non-required parameters are commented out. All configuration files follow the format documented in the [parameters documentation][22].
 
 For example, this is a sample `conf.yaml` for the `http_check` integration:
 
@@ -97,11 +97,11 @@ instances:
 
 ### Tagging
 
-Tagging is a key part of filtering and aggregating the data coming into Datadog across many sources. You can assign tags in configuration files, in environment variables, in the UI, or the API, in DogStatsD, and new integrations automatically inherited existing tags. For more information about tagging, see [Getting started with tags][14].
+Tagging is a key part of filtering and aggregating the data coming into Datadog across many sources. You can assign tags in configuration files, in environment variables, in the UI, or the API, in DogStatsD, and new integrations automatically inherited existing tags. For more information about tagging, see [Getting started with tags][13].
 
 ### Validation
 
-To validate your configuration, [run the Agent's `status` subcommand][25], and look for new configuration under the Checks section.
+To validate your configuration, [run the Agent's `status` subcommand][23], and look for new configuration under the Checks section.
 
 ## Installing multiple integrations
 
@@ -109,19 +109,19 @@ Installing more than one integration is a matter of adding the configuration inf
 
 ## Security practices
 
-For information on how Datadog handles your data, and other security considerations, see our [Security documentation][26].
+For information on how Datadog handles your data, and other security considerations, see our [Security documentation][24].
 
 ## What's next?
 
-Now that you have your first integrations set up, you can start [exploring all of the metrics][27] being sent by Datadog to your application, and use these metrics to begin setting up [graphs][28] and [alerts][29] to monitor your data.
+Now that you have your first integrations set up, you can start [exploring all of the metrics][25] being sent by Datadog to your application, and use these metrics to begin setting up [graphs][26] and [alerts][27] to monitor your data.
 
-Also check out our [Logs management][15], [APM][30], and [Synthetics][31] solutions.
+Also check out our [Logs management][14], [APM][28], and [Synthetics][29] solutions.
 
 ## Troubleshooting
 
-The first step to troubleshooting an integration is to use a plugin in your code editor or use one of the many online tools to verify that the YAML is valid. The next step is to run through all of the [Agent troubleshooting][32] steps.
+The first step to troubleshooting an integration is to use a plugin in your code editor or use one of the many online tools to verify that the YAML is valid. The next step is to run through all of the [Agent troubleshooting][30] steps.
 
-If you continue to have problems, reach out to [our awesome Support team][33].
+If you continue to have problems, reach out to [our awesome Support team][31].
 
 ## Further Reading
 
@@ -133,30 +133,28 @@ If you continue to have problems, reach out to [our awesome Support team][33].
 [4]: https://app.datadoghq.com/account/settings
 [5]: /api
 [6]: https://github.com/DataDog/dd-agent
-[7]: 
+[7]: /developers/write_agent_check/?tab=agentv6
 [8]: https://app.datadoghq.com/account/settings
 [9]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
 [10]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example#L13
 [11]: /developers/metrics
 [12]: /developers/metrics/custom_metrics
-[13]: /developers/write_agent_check/?tab=agentv6
-[14]: /tagging
-[15]: /logs
-[16]: agent/guide/integration-management
-[17]: 
-[18]: /account_management/faq/api-app-key-management
-[19]: https://app.datadoghq.com/account/settings#api
-[20]: /integrations
-[21]: https://app.datadoghq.com/account/settings#agent
-[22]: https://app.datadoghq.com/account/settings#agent/docker
-[23]: https://app.datadoghq.com/account/settings#agent/kubernetes
-[24]: /integrations/new_check_howto/#parameters-documentation
-[25]: /agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[26]: /security
-[27]: /graphing/metrics/explorer
-[28]: /graphing
-[29]: /monitors
-[30]: /tracing
-[31]: /synthetics
-[32]: /agent/troubleshooting/?tab=agentv6
-[33]: /help
+[13]: /tagging
+[14]: /logs
+[15]: agent/guide/integration-management
+[16]: /account_management/faq/api-app-key-management
+[17]: https://app.datadoghq.com/account/settings#api
+[18]: /integrations
+[19]: https://app.datadoghq.com/account/settings#agent
+[20]: https://app.datadoghq.com/account/settings#agent/docker
+[21]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[22]: /integrations/new_check_howto/#parameters-documentation
+[23]: /agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[24]: /security
+[25]: /graphing/metrics/explorer
+[26]: /graphing
+[27]: /monitors
+[28]: /tracing
+[29]: /synthetics
+[30]: /agent/troubleshooting/?tab=agentv6
+[31]: /help
