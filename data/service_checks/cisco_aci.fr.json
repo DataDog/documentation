@@ -6,6 +6,6 @@
         "statuses": ["ok", "critical"],
         "groups": ["url"],
         "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance cisco_aci qu'il surveille. Si ce n'est pas le cas, renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si le check de l'Agent n'est pas capable de se connecter à l'instance cisco_aci qu'il surveille. Si ce n'est pas le cas, renvoie `OK`."
     }
 ]
