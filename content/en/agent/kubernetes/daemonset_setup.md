@@ -229,7 +229,7 @@ Then, forward the port of the Agent to the host.
 (...)
 ```
 
-Use the downward API to pull the host IP; the application container needs an environment variable that points to `status.hostIP`. You can name it `DD_AGENT_HOST`:
+Use the downward API to pull the host IP; the application container needs an environment variable that points to `status.hostIP`. The Datadog container Agent expects this to be named `DD_AGENT_HOST`:
 
 ```
 apiVersion: apps/v1
