@@ -42,7 +42,7 @@ try:
     # Premier essai d'importation de la classe de base à partir des anciennes versions de l'Agent...
     from checks import AgentCheck
 except ImportError:
-    # ... si la commande ci-dessus a échoué, le check s'exécute dans la version 6 de l'Agent ou dans une version ultérieure
+    # ... si la commande ci-dessus a échoué, le check s'exécute dans la version6 de l'Agent ou dans une version ultérieure
     from datadog_checks.checks import AgentCheck
 
 # Le contenu de la variable spéciale __version__ sera indiqué dans la page de statut de l'Agent
@@ -51,7 +51,7 @@ __version__ = "1.0.0"
 
 class HelloCheck(AgentCheck):
     def check(self, instance):
-        self.gauge('hello.world', 1)
+        self.gauge('hello.world', 1, tags=['TAG_KEY:TAG_VALUE'])
 ```
 
 Pour en savoir plus sur l'interface fournie par la classe de base, consultez la [documentation relative à l'API][5].
@@ -138,7 +138,7 @@ class LSCheck(AgentCheck):
     def check(self, instance):
         files, err, retcode = get_subprocess_output(["ls", "."], self.log, raise_on_empty_output=True)
         file_count = len(files.split('\n') - 1  #len() renvoie par défaut un nombre entier
-        self.gauge("file.count", file_count)
+        self.gauge("file.count", file_count,tags=['TAG_KEY:TAG_VALUE'])
 ```
 
 
