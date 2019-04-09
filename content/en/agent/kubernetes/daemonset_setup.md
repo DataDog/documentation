@@ -205,7 +205,7 @@ Learn more about this in [the Docker log collection documentation][10].
 
 ### APM and Distributed Tracing
 
-To enable APM, set the `DD_APM_NON_LOCAL_TRAFFIC` variable to true in your *env* section:
+To enable APM by allowing incoming data from port 8126, set the `DD_APM_NON_LOCAL_TRAFFIC` variable to true in your *env* section:
 
 ```
 (...)
@@ -215,8 +215,6 @@ To enable APM, set the `DD_APM_NON_LOCAL_TRAFFIC` variable to true in your *env*
           value: "true"
 (...)
 ```
-
-This is needed for the container to allow incoming data from port 8126.
 
 Then, forward the port of the Agent to the host. 
 
