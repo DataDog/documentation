@@ -22,7 +22,7 @@ An integration, at the highest level, is when you assemble a unified system from
 
 Datadog provides two main types of integrations:
 
-* Agent based integrations are installed with the Datadog Agent and use a Python class called `check` to define the metrics to collect.
+* Agent-based integrations are installed with the Datadog Agent and use a Python class called `check` to define the metrics to collect.
 * Authentication (crawler) based integrations are set up in the [Datadog App][8] where you provide credentials for obtaining metrics with the API.
 
 It's best to start collecting metrics on your projects as early in the development process as possible, but you can start at any stage.
@@ -61,11 +61,11 @@ instances:
 
 ## Setting up an integration
 
-The Datadog Agent package includes integrations officially supported by Datadog, in [integrations core][2]. To use the integrations in integrations core, download the Datadog agent. Community based integrations are in [integrations extras][3], and to use those, you need to download them individually. For more information on installing or managing these integrations, see the [integrations management guide][15].
+The Datadog Agent package includes integrations officially supported by Datadog, in [integrations core][2]. To use the integrations in integrations core, download the Datadog agent. Community-based integrations are in [integrations extras][3], and to use those, you need to download them individually. For more information on installing or managing these integrations, see the [integrations management guide][15].
 
 ### API and Application keys
 
-In order to [install the the Datadog Agent][6], you need an [API and Application key][16]. You can manage your accounts API and Application keys in the [API Settings page][17] of the UI.
+In order to [install the Datadog Agent][6], you need an [API and Application key][16]. You can manage your accounts API and Application keys in the [API Settings page][17] of the UI.
 
 ### Installation
 
@@ -75,12 +75,12 @@ If you want to connect with a cloud service provider, navigate to that provider 
 
 Configurations are specific to [individual integrations][18]. In the `conf.d` folder at the root of your Agent's configuration directory, there is a file named `<INTEGRATIONS>.d` in each integration folder, and a sample `conf.yaml.example` that lists all available configuration options. 
 
-To begin configuring, rename `conf.yaml.example` (in `<INTEGRATIONS>.d`) to `conf.yaml`to activate the integration. Then update the parameters inside the configuration file. Non-required parameters are commented out. All configuration files follow the format documented in the [parameters documentation][22].
+To begin configuring, rename `conf.yaml.example` (in `<INTEGRATIONS>.d`) to `conf.yaml` to activate the integration. Then update the parameters inside the configuration file. Non-required parameters are commented out. All configuration files follow the format documented in the [parameters documentation][22].
 
 All configuration files have things in common:
 * Not required parameters are commented out of the example files.
 * If the integration supports our Logging solution, you configure it here too.
-* You can set up multiple instances in the same file in order to monitor local host and remote endpoints.
+* You can set up multiple instances in the same file to monitor local host and remote endpoints.
 
 For example, this is a sample `conf.yaml` for the `apache` integration:
 
@@ -157,7 +157,7 @@ instances:
 
 ### Tagging
 
-Tagging is a key part of filtering and aggregating the data coming into Datadog across many sources. You can assign tags in configuration files, in environment variables, in the UI, or the API, and in DogStatsD. If you define tags in the `datadog.yaml` file, the tags are applied to all of your integrations. Once you've defined the tag in `datadog.yaml`, it is inherited by all new integrations. If you use a tag environment variable, it applies to all integrations. If you define tags in the corresponding integrations configuration file, it only applies to that specific integration. If you use tags in containers, it applies only to that tag. For more information about tagging, see [Getting started with tags][13].
+Tagging is a key part of filtering and aggregating the data coming into Datadog across many sources. You can assign tags in configuration files, in environment variables, in the UI, or the API, and in DogStatsD. If you define tags in the `datadog.yaml` file, the tags are applied to all of your integrations. Once you've defined the tag in `datadog.yaml`, all new integrations inherit it. If you use a tag environment variable, it applies to all integrations. If you define tags in the corresponding integrations configuration file, it only applies to that specific integration. If you use tags in containers, it applies only to that tag. For more information about tagging, see [Getting started with tags][13].
 
 ### Validation
 
