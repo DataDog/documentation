@@ -187,15 +187,15 @@ func main() {
 {{% tab "Node.js" %}}
 
 
-In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
+In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations.
 
-* System Property: `-Ddd.<integration>.analytics.enabled=true`
-* Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
+For example, to enable Trace Search & Analytics for `express`:
 
-Use this in addition to the global configuration for any integrations that submit custom services. For example, for JMS spans which comes in as a custom service, you can set the following to enable all JMS Tracing in Trace Search & Analytics:
-
-* System Property: `-Ddd.jms.analytics.enabled=true`
-* Environment Variable: `DD_JMS_ANALYTICS_ENABLED=true`
+```js
+tracer.use('express', {
+  analytics: true
+})
+```
 
 Integration names can be found on the [integrations table][1].
 
