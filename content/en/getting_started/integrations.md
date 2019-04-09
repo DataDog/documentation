@@ -55,7 +55,7 @@ instances:
 
 **logging** - If the system you are monitoring has logs, you can customize the logs you are sending to Datadog and use our [Logging Management solution][14] to manage and analyze them.
 
-**events** - 
+**event** - 
 
 **service check** - 
 
@@ -71,33 +71,93 @@ In order to [install the the Datadog Agent][6], you need an [API and Application
 
 If you want to connect with a cloud service provider, navigate to that provider on the [Integrations page][18] for specific instructions on how to connect. For other supported integrations, install the [Datadog Agent][19]. Most integrations are supported on our containerized agents: [Docker][20], and [Kubernetes][21]. After you've downloaded the Agent, go to the [Integrations page][18] section to find specific configuration instructions for individual integrations.
 
-### Configuration
+### Configuring Agent integrations
 
-Configurations are specific to [individual integrations][18]. In the `conf.d` folder at the root of your Agent's configuration directory, there is a file named `<INTEGRATIONS>.d` in each integration folder, and a sample `conf.yaml` that lists all available configuration options. 
+Configurations are specific to [individual integrations][18]. In the `conf.d` folder at the root of your Agent's configuration directory, there is a file named `<INTEGRATIONS>.d` in each integration folder, and a sample `conf.yaml.example` that lists all available configuration options. 
 
-To begin configuring, rename `<INTEGRATIONS>.d`to `conf.yaml`to activate the integration. Then update the parameters inside the configuration file. Non-required parameters are commented out. All configuration files follow the format documented in the [parameters documentation][22].
+To begin configuring, rename `conf.yaml.example` (in `<INTEGRATIONS>.d`) to `conf.yaml`to activate the integration. Then update the parameters inside the configuration file. Non-required parameters are commented out. All configuration files follow the format documented in the [parameters documentation][22].
 
-For example, this is a sample `conf.yaml` for the `http_check` integration:
+All configuration files have things in common:
+* Not required parameters are commented out of the example files.
+* If the integration supports our Logging solution, you configure it here too.
+* You can set up multiple instances in the same file in order to monitor local host and remote endpoints.
+
+For example, this is a sample `conf.yaml` for the `apache` integration:
 
 ```
 init_config:
 
 instances:
-  - name: Example website
-    url: https://example.com/
-    # disable_ssl_validation: false      # default is true, so set false to check SSL validation
-    # ca_certs: /path/to/ca/file         # e.g. /etc/ssl/certs/ca-certificates.crt
-    # check_certificate_expiration: true # default is true
-    # days_warning: 28                   # default 14
-    # days_critical: 14                  # default 7
-    # timeout: 3                         # in seconds. Default is 10.
-  - name: Example website (staging)
-    url: http://staging.example.com/
+
+  ## @param apache_status_url - string - required
+  ## Status url of your Apache server.
+  #
+  - apache_status_url: http://localhost/server-status?auto
+
+  ## @param apache_user - string - optional
+  ## Username for the Apache status endpoint authentication.
+  #
+  #  apache_user: <USERNAME>
+
+  ## @param apache_password - string - optional
+  ## Password for the Apache status endpoint authentication.
+  #
+  #  apache_password: <PASSWORD>
+
+  ## @param tags  - list of key:value elements - optional
+  ## List of tags to attach to every metric, event and service check emitted by this integration.
+  ##
+  ## Learn more about tagging: https://docs.datadoghq.com/tagging/
+  #
+  #  tags:
+  #    - <KEY_1>:<VALUE_1>
+  #    - <KEY_2>:<VALUE_2>
+
+  ## @param disable_ssl_validation - boolean - optional - default: false
+  ## Instructs the check to skip the validation of the SSL certificate of the URL being tested.
+  ## Defaults to false, set to true if you want to disable SSL certificate validation.
+  #
+  #  disable_ssl_validation: false
+
+  ## @param connect_timeout - integer - optional
+  ## Overrides the default connection timeout value,
+  ## and fails the check if the time to establish the (TCP) connection
+  ## exceeds the connect_timeout value (in seconds)
+  #
+  #  connect_timeout: <VALUE_IN_SECOND>
+
+  ## @param receive_timeout - integer - optional
+  ## Overrides the default received timeout value, and fails the check if the time to receive
+  ## the server status from the Apache server exceeds the receive_timeout value (in seconds)
+  #
+  #  receive_timeout: <VALUE_IN_SECOND>
+
+## Log Section (Available for Agent >=6.0)
+##
+## type - mandatory - Type of log input source (tcp / udp / file / windows_event)
+## port / path / channel - mandatory - Set port if type is tcp or udp. Set path if type is file. Set channel if type is windows_event
+## service - mandatory - Name of the service that generated the log
+## source  - mandatory - Attribute that defines which Integration sent the logs
+## sourcecategory - optional - Multiple value attribute. Used to refine the source attribute
+## tags: - optional - Add tags to the collected logs
+##
+## Discover Datadog log collection: https://docs.datadoghq.com/logs/log_collection/
+#
+#logs:
+#  - type: file
+#    path: /var/log/apache2/access.log
+#    source: apache
+#    sourcecategory: http_web_access
+#    service: apache
+#  - type: file
+#    path: /var/log/apache2/error.log
+#    source: apache
+#    sourcecategory: http_web_access
 ```
 
 ### Tagging
 
-Tagging is a key part of filtering and aggregating the data coming into Datadog across many sources. You can assign tags in configuration files, in environment variables, in the UI, or the API, in DogStatsD, and new integrations automatically inherited existing tags. For more information about tagging, see [Getting started with tags][13].
+Tagging is a key part of filtering and aggregating the data coming into Datadog across many sources. You can assign tags in configuration files, in environment variables, in the UI, or the API, and in DogStatsD. If you define tags in the `datadog.yaml` file, the tags are applied to all of your integrations. Once you've defined the tag in `datadog.yaml`, it is inherited by all new integrations. If you use a tag environment variable, it applies to all integrations. If you define tags in the corresponding integrations configuration file, it only applies to that specific integration. If you use tags in containers, it applies only to that tag. For more information about tagging, see [Getting started with tags][13].
 
 ### Validation
 
