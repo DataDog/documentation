@@ -154,7 +154,7 @@ daemonset:
   useHostPort: true
 ```
 
-Update the `env` section of your `datadog-values.yaml` file (or your application's manifest) with the following:
+Update the `env` section of your application's manifest with the following:
 
 ```
 env:
