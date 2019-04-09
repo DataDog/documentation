@@ -138,6 +138,16 @@ datadog:
  logsConfigContainerCollectAll: true
 ```
 
+### Enable APM and Distributed Tracing
+
+Update your [datadog-values.yaml][7] file with the process collection configuration, then upgrade your Datadog Helm chart:
+
+```
+datadog:
+  (...)
+  apmEnabled: true
+```
+
 ### Enabling Process Collection
 
 Update your [datadog-values.yaml][7] file with the process collection configuration, then upgrade your Datadog Helm chart:
