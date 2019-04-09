@@ -231,7 +231,7 @@ Then, forward the port of the Agent to the host.
 (...)
 ```
 
-The application container needs an environment variable that points to `status.hostIP`. You can name it `DD_AGENT_HOST`:
+Use the downward API to pull the host IP; the application container needs an environment variable that points to `status.hostIP`. You can name it `DD_AGENT_HOST`:
 
 ```
     apiVersion: apps/v1
@@ -248,7 +248,7 @@ The application container needs an environment variable that points to `status.h
                     fieldPath: status.hostIP
     ```
 
-Finally, application-level tracers must point to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. For example, in Python:
+Finally, point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. For example, in Python:
 
 ```
 import os

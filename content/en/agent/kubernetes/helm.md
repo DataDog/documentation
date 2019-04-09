@@ -140,17 +140,49 @@ datadog:
 
 ### Enable APM and Distributed Tracing
 
-Update your [datadog-values.yaml][7] file with the process collection configuration, then upgrade your Datadog Helm chart:
+Update your [datadog-values.yaml][7] file with the following APM configuration:
 
 ```
 datadog:
   (...)
   apmEnabled: true
+
+(...)
+
+daemonset:
+  (...)
+  useHostPort: true
 ```
+
+Use the downward API to pull the host IP; the application container needs an environment variable that points to `status.hostIP`. You can name it `DD_AGENT_HOST`. Update the `env` section of your `datadog-values.yaml` file with the following:
+
+```
+env:
+  - name: DD_AGENT_HOST
+    valueFrom:
+      fieldRef:
+        fieldPath: status.hostIP
+```
+
+Then upgrade your Datadog Helm chart.
+
+Finally, point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. For example, in Python:
+
+```
+import os
+from ddtrace import tracer
+
+tracer.configure(
+    hostname=os.environ['DD_AGENT_HOST'],
+    port=os.environ['DD_TRACE_AGENT_PORT'],
+)
+```
+
+Refer to the [language-specific APM instrumentation docs][8] for more examples.
 
 ### Enabling Process Collection
 
-Update your [datadog-values.yaml][7] file with the process collection configuration, then upgrade your Datadog Helm chart:
+Update your [datadog-values.yaml][7] file with the following process collection configuration, then upgrade your Datadog Helm chart:
 
 ```
 datadog:
@@ -160,7 +192,7 @@ datadog:
 
 ### Enabling integrations with Helm
 
-The Datadog [entrypoint][8] copies files with a `.yaml` extension found in `/conf.d` and files with `.py` extension in `/check.d` to `/etc/datadog-agent/conf.d` and `/etc/datadog-agent/checks.d` respectively. The keys for `datadog.confd` and `datadog.checksd` should mirror the content found in their respective ConfigMaps, i.e.:
+The Datadog [entrypoint][9] copies files with a `.yaml` extension found in `/conf.d` and files with `.py` extension in `/check.d` to `/etc/datadog-agent/conf.d` and `/etc/datadog-agent/checks.d` respectively. The keys for `datadog.confd` and `datadog.checksd` should mirror the content found in their respective ConfigMaps, i.e.:
 
 ```yaml
 datadog:
@@ -199,4 +231,5 @@ This command removes all Kubernetes components associated with the chart and del
 [5]: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
 [6]: https://github.com/helm/charts/tree/master/stable/datadog#configuration
 [7]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
-[8]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/entrypoint/89-copy-customfiles.sh
+[8]: /tracing/setup
+[9]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/entrypoint/89-copy-customfiles.sh
