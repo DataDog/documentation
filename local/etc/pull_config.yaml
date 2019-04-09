@@ -12,7 +12,7 @@
       - dd/utils/context/source.py
 
     - action: integrations
-      branch: nils/gcp-logs-doc
+      branch: prod
       globs:
       - integration/**/*_metadata.csv
       - integration/**/manifest.json
