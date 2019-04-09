@@ -19,7 +19,7 @@ further_reading:
 
 ---
 
-<div class="alert alert-warning">Synthetics is only available in the US. Browser tests are available in beta: to request access complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics Request form</a>.</div>
+<div class="alert alert-warning">Synthetics is only available on our US hosted instances. Browser tests are available in beta: to request access complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics Request form</a>.</div>
 
 ## Overview
 
@@ -46,4 +46,4 @@ if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
 4. You can use Datadog's [**IP ranges**][2], provided in the section "synthetics".
 
 [1]: /synthetics/apm/#how-are-traces-linked-to-checks
-[2]: https://ip-ranges.datadoghq.com/
+[2]: https://ip-ranges.datadoghq.com
