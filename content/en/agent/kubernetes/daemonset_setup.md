@@ -226,33 +226,45 @@ Then, forward the port of the Agent to the host.
         (...)
         - containerPort: 8126
           hostPort: 8126
-          name: dogstatsdport
+          name: traceport
           protocol: TCP
 (...)
 ```
 
-Finally, the application should send its TDP packets directly to the IP of the host. Add the following to the `env` section:
+The application container needs an environment variable that points to `status.hostIP`. You can name it `DD_AGENT_HOST`:
 
 ```
-(...)
-      env:
-        (...)
-        - name: DD_KUBERNETES_KUBELET_HOST
-          valueFrom:
-            fieldRef:
-              fieldPath: status.hostIP
-(...)
+    apiVersion: apps/v1
+    kind: Deployment
+    ...
+        spec:
+          containers:
+          - name: <CONTAINER_NAME>
+            image: <CONTAINER_IMAGE>/<TAG>
+            env:
+              - name: DD_AGENT_HOST
+                valueFrom:
+                  fieldRef:
+                    fieldPath: status.hostIP
+    ```
+
+Finally, application-level tracers must point to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. For example, in Python:
+
+```
+import os
+from ddtrace import tracer
+
+tracer.configure(
+    hostname=os.environ['DD_AGENT_HOST'],
+    port=os.environ['DD_TRACE_AGENT_PORT'],
+)
 ```
 
-You can test this manually by running:
-
-```
-kubectl get no NODE_NAME -o json | grep InternalIP -B1
-```
+Refer to the [language-specific APM instrumentation docs][11] for more examples.
 
 ### Process Collection
 
-See [Process collection for Kubernetes][11].
+See [Process collection for Kubernetes][12].
 
 ### DogStatsD
 
@@ -267,7 +279,7 @@ To send custom metrics via DogStatsD, set the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` v
 (...)
 ```
 
-Learn more about this in the [Kubernetes DogStatsD documentation][12]
+Learn more about this in the [Kubernetes DogStatsD documentation][13]
 
 To send custom metrics via DogStatsD from your application pods, uncomment the `# hostPort: 8125` line in your `datadog-agent.yaml` manifest. This exposes the DogStatsD port on each of your Kubernetes nodes.
 
@@ -289,5 +301,6 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [8]: https://docs.datadoghq.com/integrations/amazon_ec2/#configuration
 [9]: /logs
 [10]: /logs/docker/#configuration-file-example
-[11]: /graphing/infrastructure/process/?tab=kubernetes#installation
-[12]: /agent/kubernetes/dogstatsd
+[11]: /tracing/setup
+[12]: /graphing/infrastructure/process/?tab=kubernetes#installation
+[13]: /agent/kubernetes/dogstatsd
