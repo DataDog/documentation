@@ -234,19 +234,19 @@ Then, forward the port of the Agent to the host.
 Use the downward API to pull the host IP; the application container needs an environment variable that points to `status.hostIP`. You can name it `DD_AGENT_HOST`:
 
 ```
-    apiVersion: apps/v1
-    kind: Deployment
-    ...
-        spec:
-          containers:
-          - name: <CONTAINER_NAME>
-            image: <CONTAINER_IMAGE>/<TAG>
-            env:
-              - name: DD_AGENT_HOST
-                valueFrom:
-                  fieldRef:
-                    fieldPath: status.hostIP
-    ```
+apiVersion: apps/v1
+kind: Deployment
+...
+    spec:
+      containers:
+      - name: <CONTAINER_NAME>
+        image: <CONTAINER_IMAGE>/<TAG>
+        env:
+          - name: DD_AGENT_HOST
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
+```
 
 Finally, point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. For example, in Python:
 
