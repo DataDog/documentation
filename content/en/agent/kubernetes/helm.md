@@ -154,7 +154,7 @@ daemonset:
   useHostPort: true
 ```
 
-Use the downward API to pull the host IP; the application container needs an environment variable that points to `status.hostIP`. You can name it `DD_AGENT_HOST`. Update the `env` section of your `datadog-values.yaml` file with the following:
+Update the `env` section of your `datadog-values.yaml` file (or your application's manifest) with the following:
 
 ```
 env:
@@ -166,7 +166,7 @@ env:
 
 Then upgrade your Datadog Helm chart.
 
-Finally, point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. For example, in Python:
+Finally, point your application-level tracers to the host IP using the environment variable `DD_AGENT_HOST`. For example, in Python:
 
 ```
 import os
