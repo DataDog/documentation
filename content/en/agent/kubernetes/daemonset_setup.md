@@ -162,14 +162,14 @@ Starting with version 6.11.0, the Datadog Agent can auto-detect the Kubernetes c
 
 On Google GKE and Azure AKS, the cluster name is retrieved from the cloud provider API. For AWS EKS, the cluster name is retrieved from EC2 instance tags.
 
-**Note**: On AWS, it is required to add the `ec2:DescribeInstances` [permission][12] to your Datadog IAM policy so that the Agent can query the EC2 instance tags.
+**Note**: On AWS, it is required to add the `ec2:DescribeInstances` [permission][8] to your Datadog IAM policy so that the Agent can query the EC2 instance tags.
 
 
 ## Enable capabilities
 
 ### Log Collection
 
-To enable [Log collection][8] with your DaemonSet:
+To enable [Log collection][9] with your DaemonSet:
 
 1. Set the `DD_LOGS_ENABLED` and `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` variable to true in your *env* section:
 
@@ -201,39 +201,58 @@ To enable [Log collection][8] with your DaemonSet:
       (...)
     ```
 
-Learn more about this in [the Docker log collection documentation][9].
+Learn more about this in [the Docker log collection documentation][10].
 
-### Trace Collection
+### APM and Distributed Tracing
 
-To enable trace collection with your DaemonSet:
+To enable APM, set the `DD_APM_NON_LOCAL_TRAFFIC` variable to true in your *env* section:
 
-1. Set the Node IP and port as environment variables for your application containers:
+```
+(...)
+      env:
+        (...)
+        - name: DD_APM_NON_LOCAL_TRAFFIC
+          value: "true"
+(...)
+```
 
-    ```
-    apiVersion: apps/v1
-    kind: Deployment
-    ...
-        spec:
-          containers:
-          - name: <CONTAINER_NAME>
-            image: <CONTAINER_IMAGE>/<TAG>
-            env:
-              - name: DD_AGENT_HOST
-                valueFrom:
-                  fieldRef:
-                    fieldPath: status.hostIP
-    ```
+This is needed for the container to allow incoming data from port 8126.
 
-2. Uncomment the `# hostPort: 8126` line in your `datadog-agent.yaml` manifest:
-  This exposes the Datadog Agent tracing port on each of your Kubernetes nodes.
+Then, forward the port of the Agent to the host. 
 
-    **Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources. 
-    Another word of caution: some network plugins don't support `hostPorts` yet, so this won't work. 
-    The workaround in this case is to add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. It also means that all ports opened on the container are also opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod will not start. Not all Kubernetes installations allow this.
+```
+(...)
+      ports:
+        (...)
+        - containerPort: 8126
+          hostPort: 8126
+          name: dogstatsdport
+          protocol: TCP
+(...)
+```
+
+Finally, the application should send its TDP packets directly to the IP of the host. Add the following to the `env` section:
+
+```
+(...)
+      env:
+        (...)
+        - name: DD_KUBERNETES_KUBELET_HOST
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+(...)
+```
+
+You can test this manually by running:
+
+```
+kubectl get no NODE_NAME -o json | grep InternalIP -B1
+```
 
 ### Process Collection
 
-See [Process collection for Kubernetes][10].
+See [Process collection for Kubernetes][11].
 
 ### DogStatsD
 
@@ -248,7 +267,7 @@ To send custom metrics via DogStatsD, set the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` v
 (...)
 ```
 
-Learn more about this in the [Kubernetes DogStatsD documentation][11]
+Learn more about this in the [Kubernetes DogStatsD documentation][12]
 
 To send custom metrics via DogStatsD from your application pods, uncomment the `# hostPort: 8125` line in your `datadog-agent.yaml` manifest. This exposes the DogStatsD port on each of your Kubernetes nodes.
 
@@ -267,8 +286,8 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [5]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information
 [6]: /agent/docker/#environment-variables
 [7]: https://docs.datadoghq.com/agent/autodiscovery
-[8]: /logs
-[9]: /logs/docker/#configuration-file-example
-[10]: /graphing/infrastructure/process/?tab=kubernetes#installation
-[11]: /agent/kubernetes/dogstatsd
-[12]: https://docs.datadoghq.com/integrations/amazon_ec2/#configuration
+[8]: https://docs.datadoghq.com/integrations/amazon_ec2/#configuration
+[9]: /logs
+[10]: /logs/docker/#configuration-file-example
+[11]: /graphing/infrastructure/process/?tab=kubernetes#installation
+[12]: /agent/kubernetes/dogstatsd
