@@ -55,9 +55,9 @@ instances:
 
 **logging** - If the system you are monitoring has logs, you can customize the logs you are sending to Datadog and use our [Logging Management solution][14] to manage and analyze them.
 
-**event** - 
+**event** - Events are informational messages about your system that are consumed by the events stream.
 
-**service check** - 
+**service check** - Service checks are a type of monitor used to track the status of the service.
 
 ## Setting up an integration
 
