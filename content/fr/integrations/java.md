@@ -34,15 +34,23 @@ version: '1.0'
 ---
 ## Présentation
 
-L'intégration JMX recueille des métriques à partir des applications exposant des métriques [JMX][1].
-
-L'Agent Datadog appelle un petit plug-in Java, JMXFetch, afin de se connecter à MBean Server et de recueillir des métriques. Ce plug-in envoie des métriques à l'Agent Datadog à l'aide du serveur DogStatsD, qui s'exécute au sein de l'Agent. Cette fonctionnalité est aussi utilisée dans les intégrations d'ActiveMQ, de Cassandra, de Solr et de Tomcat. JMXFetch envoie également des checks de service concernant le statut de vos instances surveillées.
-
 <div class="alert alert-warning">
   JMXFetch est uniquement compatible avec Java >= 1.7.
 </div>
 
-Les checks JMX sont limités à 350 métriques par instance.
+L'intégration JMX recueille des métriques à partir des applications exposant des métriques [JMX][1].
+
+L'Agent Datadog appelle un petit plug-in Java, JMXFetch, afin de se connecter à MBean Server et de recueillir des métriques. Il envoie également des checks de service qui signale le statut des instances que vous surveillez.
+
+Ce plug-in envoie des métriques à l'Agent Datadog à l'aide du serveur DogStatsD, qui s'exécute au sein de l'Agent. Les intégrations suivantes utilisent également les métriques JMX :
+
+* ActiveMQ
+* Cassandra
+* Solr
+* Tomcat
+* Kafka
+
+**Remarque** : les checks JMX sont limités à 350 métriques par instance.
 
 Si vous exécutez JMX au sein de Docker, consultez la [documentation relative à Docker JMX][12].
 
@@ -55,7 +63,7 @@ L'Agent Datadog nécessite une connexion à distance pour se connecter à JVM, m
 
 ### Configuration
 
-1.  Configurez l'Agent afin qu'il se connecte à l'aide de JMX, et modifiez-le selon vos besoins. Voici un exemple de fichier `jmx.d/conf.yaml` :
+Configurez l'Agent afin qu'il se connecte à l'aide de JMX, et modifiez-le selon vos besoins. Voici un exemple de fichier `jmx.d/conf.yaml` :
 
 ```
 init_config:

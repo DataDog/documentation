@@ -24,7 +24,7 @@ version: '1.0'
 ---
 ## Présentation
 
-Connectez-vous à Amazon Web Services (AWS) pour :
+Associez Amazon Web Services (AWS) pour :
 
 * Consulter des mises à jour automatiques de statut AWS dans votre flux
 * Obtenir des métriques CloudWatch pour les hosts EC2 sans installer l'Agent
@@ -296,7 +296,7 @@ Utilisez le [référentiel sans serveur AWS][96] pour déployer la fonction Lamb
 1. Copiez le code depuis [ce référentiel][51] et collez-le dans le champ de code de la fonction.
 2. Assurez-vous que le gestionnaire indique **lambda_function.lambda_handler**.
     {{< img src="logs/aws/select_python.png" alt="Sélectionner Python" responsive="true" style="width:80%;" >}}
-3. En haut du script se trouve une section intitulée `#Parameters`. Vous pouvez fournir la clé d'API requise par la fonction Lambda de deux façons différentes :
+3. En haut du script se trouve une section intitulée `#DD_API_KEY: Datadog API Key`. Vous pouvez fournir la clé d'API requise par la fonction Lambda de deux façons différentes :
 
     * En configurant une variable d'environnement (conseillé)
     * En ajoutant directement votre clé API Datadog dans le code
@@ -305,6 +305,8 @@ Utilisez le [référentiel sans serveur AWS][96] pour déployer la fonction Lamb
 5. Définissez la mémoire sur une valeur **proche de 1 Go**.
 6. Définissez le délai d'expiration (nous recommandons d'indiquer **120 secondes**).
     {{< img src="logs/aws/basic_settings.png" alt="Réglages de base" responsive="true" style="width:80%;" >}}
+7. Définissez Execution Role sur le [rôle créé précédemment][98].
+    {{< img src="logs/aws/execution_role.png" alt="Réglages de base" responsive="true" style="width:80%;" >}}
 7. Faites défiler vers le haut de la page et cliquez sur **Save**.
 
 #### Tester votre Lambda
@@ -568,6 +570,7 @@ Lors de l'installation de l'Agent sur un host AWS, il est possible que des hosts
 [95]: https://docs.datadoghq.com/fr/integrations/amazon_vpc/#enable-vpc-flow-log-logging
 [96]: https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:464622532012:applications~Datadog-Log-Forwarder
 [97]: https://docs.datadoghq.com/fr/integrations/amazon_xray
+[98]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#create-a-new-lambda-function
 
 
 {{< get-dependencies >}}
