@@ -143,7 +143,7 @@ Ruby APM includes support for the following libraries and frameworks:
 | [Grape][33]                    | `>= 1.0`               | Fully Supported | *[Link][34]*     |
 | [GraphQL][35]                  | `>= 1.7.9`             | Fully Supported | *[Link][36]*     |
 | [gRPC][37]                     | `>= 1.10`              | Fully Supported | *[Link][38]*     |
-| [MongoDB][39]                  | `>= 2.0, < 2.5`        | Fully Supported | *[Link][40]*     |
+| [MongoDB][39]                  | `>= 2.0`               | Fully Supported | *[Link][40]*     |
 | [MySQL2][41]                   | `>= 0.3.10`            | Fully Supported | *[Link][42]*     |
 | [Net/HTTP][43]                 | *(Any Supported Ruby)* | Fully Supported | *[Link][44]*     |
 | [Racecar][45]                  | `>= 0.3.5`             | Fully Supported | *[Link][46]*     |
