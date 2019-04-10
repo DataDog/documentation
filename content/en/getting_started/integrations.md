@@ -77,7 +77,7 @@ Configurations are specific to [individual integrations][18]. In the `conf.d` fo
 
 To begin configuring, rename `conf.yaml.example` (in `<INTEGRATIONS>.d`) to `conf.yaml` to activate the integration. Then update the parameters inside the configuration file. Non-required parameters are commented out. All configuration files follow the format documented in the [parameters documentation][22].
 
-All configuration files have things in common:
+**Note**: All configuration files follow the format documented in the [parameters documentation][22]:
 * Not required parameters are commented out of the example files.
 * If the integration supports our Logging solution, you configure it here too.
 * You can set up multiple instances in the same file to monitor local host and remote endpoints.
