@@ -73,7 +73,7 @@ If you want to connect with a cloud service provider, navigate to that provider 
 
 ### Configuring Agent integrations
 
-Configurations are specific to [individual integrations][18]. In the `conf.d` folder at the root of your Agent's configuration directory, there is a file named `<INTEGRATIONS>.d` in each integration folder, and a sample `conf.yaml.example` that lists all available configuration options. 
+Configurations are specific to [individual integrations][18]. In the `conf.d` folder at the root of your Agent's configuration directory, there is a folder named `<INTEGRATIONS>.d` for each officially supported Agent integration which contains a sample `conf.yaml.example` that lists all available configuration options for this particular integration.
 
 To begin configuring, rename `conf.yaml.example` (in `<INTEGRATIONS>.d`) to `conf.yaml` to activate the integration. Then update the parameters inside the configuration file. Non-required parameters are commented out. All configuration files follow the format documented in the [parameters documentation][22].
 
