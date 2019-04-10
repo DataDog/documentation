@@ -7,7 +7,7 @@ app_key=<DD_APP_KEY>
 
 
 # List GCP Accounts (service accounts only) in Datadog
-curl -X GET "https://app.datadoghq.com/api/v1/integration/gcp?api_key=${api_key}&application_key=${app_key}"
+curl -X GET "https://api.datadoghq.com/api/v1/integration/gcp?api_key=${api_key}&application_key=${app_key}"
 
 
 # Create a GCP Service Account in Datadog
@@ -25,7 +25,7 @@ curl -X POST -H "Content-type: application/json" \
         "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>",
         "host_filters": "<KEY_1>:<VALUE_1>,<KEY_2>:<VALUE_2>"
     }' \
-"https://app.datadoghq.com/api/v1/integration/gcp?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/integration/gcp?api_key=${api_key}&application_key=${app_key}"
 
 # Update a GCP Service Account's automute option in Datadog
 # project_id and client_email are required
@@ -35,7 +35,7 @@ curl -X PUT -H "Content-type: application/json" \
         "client_email": "<CLIENT_EMAIL>",
         "automute": <AUTOMUTE> # true or false
     }' \
-"https://app.datadoghq.com/api/v1/integration/gcp?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/integration/gcp?api_key=${api_key}&application_key=${app_key}"
 
 # Update a GCP Service Account's host filters in Datadog
 # project_id and client_email are required
@@ -45,7 +45,7 @@ curl -X PUT -H "Content-type: application/json" \
         "client_email": "<CLIENT_EMAIL>",
         "host_filters": "<KEY_1>:<VALUE_1>,<KEY_2>:<VALUE_2>"
     }' \
-"https://app.datadoghq.com/api/v1/integration/gcp?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/integration/gcp?api_key=${api_key}&application_key=${app_key}"
 
 # Delete a GCP Service Account in Datadog
 # project_id and client_email are required
@@ -54,4 +54,4 @@ curl -X DELETE -H "Content-type: application/json" \
         "project_id": "<GCP_PROJECT_ID>",
         "client_email": "<CLIENT_EMAIL>"
     }' \
-"https://app.datadoghq.com/api/v1/integration/gcp?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/integration/gcp?api_key=${api_key}&application_key=${app_key}"
