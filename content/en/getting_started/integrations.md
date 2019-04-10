@@ -75,7 +75,11 @@ If you want to connect with a cloud service provider, navigate to that provider 
 
 Configurations are specific to [individual integrations][18]. In the `conf.d` folder at the root of your Agent's configuration directory, there is a folder named `<INTEGRATIONS>.d` for each officially supported Agent integration which contains a sample `conf.yaml.example` that lists all available configuration options for this particular integration.
 
-To begin configuring, rename `conf.yaml.example` (in `<INTEGRATIONS>.d`) to `conf.yaml` to activate the integration. Then update the parameters inside the configuration file. Non-required parameters are commented out. All configuration files follow the format documented in the [parameters documentation][22].
+To activate a given integration:
+
+1. Rename the `conf.yaml.example` file (in the corresponding `<INTEGRATIONS>.d` folder) to `conf.yaml`. 
+2. Update the required parameters inside the newly created configuration file with the values corresponding to your environment.
+3. [Restart the Datadog Agent](/agent/guide/agent-commands/?tab=agentv6#restart-the-agent)
 
 **Note**: All configuration files follow the format documented in the [parameters documentation][22]:
 * Not required parameters are commented out of the example files.
