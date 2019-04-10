@@ -1,7 +1,4 @@
 ---
-{}
----
----
 integration_title: Cloud Foundry
 name: cloudfoundry
 kind: integration
