@@ -77,7 +77,7 @@ When installing the containerized Datadog Agent, set your host tags using the en
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
 DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
-For the above DD_DOCKER_LABELS_AS_TAGS variable, if using within Docker Swarm in a docker-compose.yaml file DO NOT wrap the {} block in apostrophes instead leave without as below:
+When using the `DD_DOCKER_LABELS_AS_TAGS` variable within a Docker Swarm `docker-compose.yaml file`, remove the apostrophes, for example:
 
 ```shell
 DD_DOCKER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
