@@ -82,7 +82,7 @@ All configuration files have things in common:
 * If the integration supports our Logging solution, you configure it here too.
 * You can set up multiple instances in the same file to monitor local host and remote endpoints.
 
-For example, this is a sample `conf.yaml` for the `apache` integration:
+For example, this is the minimum `conf.yaml` configuration file needed to collect metrics and logs from the `apache` integration:
 
 ```
 init_config:
