@@ -33,17 +33,7 @@ It's best to start collecting metrics on your projects as early in the developme
 
 **conf.yaml** - You create the `conf.yaml` in the `conf.d/` folder at the root of your [Agent's configuration directory][9]. Use this file to connect integrations to your system, as well as configure their settings. Nonrequired parameters are usually commented out.
 
-**instance** - You define and map the instance of whatever you are monitoring in the `conf.yaml` file. For example, in the [`http_check` integration][10], you're defining the name associated with the instance of the HTTP endpoint you are monitoring up and downtime. You can monitor multiple instances in the same integration, and you do that by defining all of the instances in the `conf.yaml` file. For example:
-
-```
-instances:
-
-  # this is my first instance
-  - url: example.com
-
-  # this is my second instance
-  - url: example_2.com
-```
+**instance** - You define and map the instance of whatever you are monitoring in the `conf.yaml` file. For example, in the [`http_check` integration][10], you're defining the name associated with the instance of the HTTP endpoint you are monitoring up and downtime. You can monitor multiple instances in the same integration, and you do that by defining all of the instances in the `conf.yaml` file.
 
 **metrics** - The list of what is collected from your system by each integration. You can find the metrics for each integration in that integrations `metadata.csv` file. For more information about metrics, see the [Metrics][11] developer page. You can also set up [custom metrics][12], so if the integration doesn't offer a metric out of the box, you can usually add it.
 
@@ -55,97 +45,48 @@ instances:
 
 **logging** - If the system you are monitoring has logs, you can customize the logs you are sending to Datadog and use our [Logging Management solution][14] to manage and analyze them.
 
-**event** - Events are informational messages about your system that are consumed by the events stream.
+**event** - Events are informational messages about your system that are consumed by [the events stream][15] so that you can build monitors on them.
 
-**service check** - Service checks are a type of monitor used to track the status of the service.
+**service check** - Service checks are a type of monitor used to track the uptime status of the service. For more information, see the [Service checks guide][16].
 
 ## Setting up an integration
 
-The Datadog Agent package includes integrations officially supported by Datadog, in [integrations core][2]. To use the integrations in integrations core, download the Datadog agent. Community-based integrations are in [integrations extras][3], and to use those, you need to download them individually. For more information on installing or managing these integrations, see the [integrations management guide][15].
+The Datadog Agent package includes integrations officially supported by Datadog, in [integrations core][2]. To use the integrations in integrations core, download the Datadog agent. Community-based integrations are in [integrations extras][3], and to use those, you need to download them individually. For more information on installing or managing these integrations, see the [integrations management guide][17].
 
 ### API and Application keys
 
-In order to [install the Datadog Agent][6], you need an [API and Application key][16]. You can manage your accounts API and Application keys in the [API Settings page][17] of the UI.
+In order to [install the Datadog Agent][6], you need an [API and Application key][18]. You can manage your accounts API and Application keys in the [API Settings page][19] of the UI.
 
 ### Installation
 
-If you want to connect with a cloud service provider, navigate to that provider on the [Integrations page][18] for specific instructions on how to connect. For other supported integrations, install the [Datadog Agent][19]. Most integrations are supported on our containerized agents: [Docker][20], and [Kubernetes][21]. After you've downloaded the Agent, go to the [Integrations page][18] section to find specific configuration instructions for individual integrations.
+If you want to connect with a cloud service provider, navigate to that provider on the [Integrations page][20] for specific instructions on how to connect. For other supported integrations, install the [Datadog Agent][21]. Most integrations are supported on our containerized agents: [Docker][22], and [Kubernetes][23]. After you've downloaded the Agent, go to the [Integrations page][20] section to find specific configuration instructions for individual integrations.
 
 ### Configuring Agent integrations
 
-Configurations are specific to [individual integrations][18]. In the `conf.d` folder at the root of your Agent's configuration directory, there is a folder named `<INTEGRATIONS>.d` for each officially supported Agent integration which contains a sample `conf.yaml.example` that lists all available configuration options for this particular integration.
+Configurations are specific to [individual integrations][20]. In the `conf.d` folder at the root of your Agent's configuration directory, there is a folder named `<INTEGRATIONS>.d` for each officially supported Agent integration which contains a sample `conf.yaml.example` that lists all available configuration options for this particular integration.
 
 To activate a given integration:
 
 1. Rename the `conf.yaml.example` file (in the corresponding `<INTEGRATIONS>.d` folder) to `conf.yaml`. 
 2. Update the required parameters inside the newly created configuration file with the values corresponding to your environment.
-3. [Restart the Datadog Agent](/agent/guide/agent-commands/?tab=agentv6#restart-the-agent)
+3. [Restart the Datadog Agent][24]
 
-**Note**: All configuration files follow the format documented in the [parameters documentation][22]:
-* Not required parameters are commented out of the example files.
-* If the integration supports our Logging solution, you configure it here too.
-* You can set up multiple instances in the same file to monitor local host and remote endpoints.
+**Note**: All configuration files follow the format documented in the [parameters documentation][25].
 
-For example, this is the minimum `conf.yaml` configuration file needed to collect metrics and logs from the `apache` integration:
+For example, this is the minimum `conf.yaml` configuration file needed to collect metrics and logs from the [apache integration][26]:
 
 ```
 init_config:
 
 instances:
 
-  ## @param apache_status_url - string - required
-  ## Status url of your Apache server.
-  #
-  - apache_status_url: http://localhost/server-status?auto
+## @param apache_status_url - string - required
+## Status url of your Apache server.
+#
+- apache_status_url: http://localhost/server-status?auto
 
-  ## @param apache_user - string - optional
-  ## Username for the Apache status endpoint authentication.
-  #
-  #  apache_user: <USERNAME>
-
-  ## @param apache_password - string - optional
-  ## Password for the Apache status endpoint authentication.
-  #
-  #  apache_password: <PASSWORD>
-
-  ## @param tags  - list of key:value elements - optional
-  ## List of tags to attach to every metric, event and service check emitted by this integration.
-  ##
-  ## Learn more about tagging: https://docs.datadoghq.com/tagging/
-  #
-  #  tags:
-  #    - <KEY_1>:<VALUE_1>
-  #    - <KEY_2>:<VALUE_2>
-
-  ## @param disable_ssl_validation - boolean - optional - default: false
-  ## Instructs the check to skip the validation of the SSL certificate of the URL being tested.
-  ## Defaults to false, set to true if you want to disable SSL certificate validation.
-  #
-  #  disable_ssl_validation: false
-
-  ## @param connect_timeout - integer - optional
-  ## Overrides the default connection timeout value,
-  ## and fails the check if the time to establish the (TCP) connection
-  ## exceeds the connect_timeout value (in seconds)
-  #
-  #  connect_timeout: <VALUE_IN_SECOND>
-
-  ## @param receive_timeout - integer - optional
-  ## Overrides the default received timeout value, and fails the check if the time to receive
-  ## the server status from the Apache server exceeds the receive_timeout value (in seconds)
-  #
-  #  receive_timeout: <VALUE_IN_SECOND>
-
-## Log Section (Available for Agent >=6.0)
-##
-## type - mandatory - Type of log input source (tcp / udp / file / windows_event)
-## port / path / channel - mandatory - Set port if type is tcp or udp. Set path if type is file. Set channel if type is windows_event
-## service - mandatory - Name of the service that generated the log
-## source  - mandatory - Attribute that defines which Integration sent the logs
-## sourcecategory - optional - Multiple value attribute. Used to refine the source attribute
-## tags: - optional - Add tags to the collected logs
-##
-## Discover Datadog log collection: https://docs.datadoghq.com/logs/log_collection/
+# you can also add an optional second instance
+## - url: url.com
 #
 #logs:
 #  - type: file
@@ -165,7 +106,7 @@ Tagging is a key part of filtering and aggregating the data coming into Datadog 
 
 ### Validation
 
-To validate your configuration, [run the Agent's `status` subcommand][23], and look for new configuration under the Checks section.
+To validate your configuration, [run the Agent's `status` subcommand][27], and look for new configuration under the Checks section.
 
 ## Installing multiple integrations
 
@@ -173,19 +114,19 @@ Installing more than one integration is a matter of adding the configuration inf
 
 ## Security practices
 
-For information on how Datadog handles your data, and other security considerations, see our [Security documentation][24].
+For information on how Datadog handles your data, and other security considerations, see our [Security documentation][28].
 
 ## What's next?
 
-Now that you have your first integrations set up, you can start [exploring all of the metrics][25] being sent by Datadog to your application, and use these metrics to begin setting up [graphs][26] and [alerts][27] to monitor your data.
+Now that you have your first integrations set up, you can start [exploring all of the metrics][29] being sent by Datadog to your application, and use these metrics to begin setting up [graphs][30] and [alerts][31] to monitor your data.
 
-Also check out our [Logs management][14], [APM][28], and [Synthetics][29] solutions.
+Also check out our [Logs management][14], [APM][32], and [Synthetics][33] solutions.
 
 ## Troubleshooting
 
-The first step to troubleshooting an integration is to use a plugin in your code editor or use one of the many online tools to verify that the YAML is valid. The next step is to run through all of the [Agent troubleshooting][30] steps.
+The first step to troubleshooting an integration is to use a plugin in your code editor or use one of the many online tools to verify that the YAML is valid. The next step is to run through all of the [Agent troubleshooting][34] steps.
 
-If you continue to have problems, reach out to [our awesome Support team][31].
+If you continue to have problems, reach out to [our awesome Support team][35].
 
 ## Further Reading
 
@@ -205,20 +146,24 @@ If you continue to have problems, reach out to [our awesome Support team][31].
 [12]: /developers/metrics/custom_metrics
 [13]: /tagging
 [14]: /logs
-[15]: agent/guide/integration-management
-[16]: /account_management/faq/api-app-key-management
-[17]: https://app.datadoghq.com/account/settings#api
-[18]: /integrations
-[19]: https://app.datadoghq.com/account/settings#agent
-[20]: https://app.datadoghq.com/account/settings#agent/docker
-[21]: https://app.datadoghq.com/account/settings#agent/kubernetes
-[22]: /integrations/new_check_howto/#parameters-documentation
-[23]: /agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[24]: /security
-[25]: /graphing/metrics/explorer
-[26]: /graphing
-[27]: /monitors
-[28]: /tracing
-[29]: /synthetics
-[30]: /agent/troubleshooting/?tab=agentv6
-[31]: /help
+[15]: https://app.datadoghq.com/event/stream
+[16]: /monitors/guide/visualize-your-service-check-in-the-datadog-ui
+[17]: agent/guide/integration-management
+[18]: /account_management/faq/api-app-key-management
+[19]: https://app.datadoghq.com/account/settings#api
+[20]: /integrations
+[21]: https://app.datadoghq.com/account/settings#agent
+[22]: https://app.datadoghq.com/account/settings#agent/docker
+[23]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[24]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[25]: /developers/integrations/new_check_howto/#param-specification
+[26]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
+[27]: /agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[28]: /security
+[29]: /graphing/metrics/explorer
+[30]: /graphing
+[31]: /monitors
+[32]: /tracing
+[33]: /synthetics
+[34]: /agent/troubleshooting/?tab=agentv6
+[35]: /help
