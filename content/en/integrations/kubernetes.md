@@ -52,6 +52,8 @@ To gather your kube-state metrics:
   kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
   ```
 
+Once done, the Kubernetes State integration automatically collects kube-state metrics.
+
 ## Setup Kubernetes DNS
 ### Configuration
 
