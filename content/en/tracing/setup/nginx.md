@@ -8,6 +8,9 @@ further_reading:
 - link: "https://www.nginx.com/"
   tag: "Documentation"
   text: "NGINX website"
+- link: "https://kubernetes.github.io/ingress-nginx/user-guide/third-party-addons/opentracing/"
+  tag: "Documentation"
+  text: "NGINX Ingress Controller OpenTracing"
 - link: "https://github.com/opentracing-contrib/nginx-opentracing"
   tag: "Source Code"
   text: "NGINX plugin for OpenTracing"
@@ -56,7 +59,7 @@ The NGINX configuration must load the OpenTracing module.
 load_module modules/ngx_http_opentracing_module.so; # Load OpenTracing module
 ```
 
-The `http` section enables the OpenTracing module and loads the Datadog tracer:
+The `http` directive's block enables the OpenTracing module and loads the Datadog tracer:
 
 ```nginx
     opentracing on; # Enable OpenTracing
@@ -67,7 +70,7 @@ The `http` section enables the OpenTracing module and loads the Datadog tracer:
     opentracing_load_tracer /usr/local/lib/libdd_opentracing_plugin.so /etc/dd-config.json;
 ```
 
-Locations within the server where tracing is desired should add the following:
+The `location` block within the server where tracing is desired should add the following:
 
 ```nginx
             opentracing_operation_name "$request_method $uri";
@@ -95,6 +98,34 @@ Complete examples:
 
 
 After completing this configuration, HTTP requests to NGINX will initiate and propagate Datadog traces, and will appear in the APM UI.
+
+## NGINX Ingress Controller for Kubernetes
+
+The [Kubernetes ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller versions 0.23.0+ include the NGINX plugin for OpenTracing.
+
+To enable this plugin, create or edit a ConfigMap to set `enable-opentracing: "true"` and the `datadog-collector-host` to which traces should be sent.
+The name of the ConfigMap will be cited explicitly by the nginx-ingress controller container's command line argument, defaulting to `--configmap=$(POD_NAMESPACE)/nginx-configuration`.
+If ingress-nginx was installed via helm chart, this ConfigMap will be named like `Release-Name-nginx-ingress-controller`.
+
+The ingress controller manages both the `nginx.conf` and `/etc/nginx/opentracing.json` files. Tracing is enabled for all `location` blocks.
+
+```yaml
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: nginx-configuration
+  namespace: ingress-nginx
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+data:
+  enable-opentracing: "true"
+  datadog-collector-host: datadogd.monitoring.svc.cluster.local
+  # Defaults
+  # datadog-service-name: "nginx"
+  # datadog-collector-port: "8126"
+  # datadog-operation-name-override: "nginx.handle"
+```
 
 ## Further Reading
 
