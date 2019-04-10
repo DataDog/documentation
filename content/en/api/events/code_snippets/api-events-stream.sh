@@ -1,4 +1,4 @@
-# Note: this end point only accepts form-encoded requests.
+# Note: this endpoint only accepts form-encoded requests.
 currenttime=$(date +%s)
 currenttime2=$(date --date='1 day ago' +%s)
 

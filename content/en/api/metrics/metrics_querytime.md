@@ -6,7 +6,7 @@ external_redirect: /api/#query-time-series-points
 ---
 
 ## Query timeseries points
-This end point allows you to query for metrics from any time period.
+This endpoint allows you to query for metrics from any time period.
 
 *Note:* In Python, `from` is a reserved word. So instead, the Python API uses the `start` and `end` parameters in the function call.
 

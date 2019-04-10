@@ -11,4 +11,4 @@ Get all application keys available for your account.
 
 ##### ARGUMENTS
 
-This end point takes no JSON arguments.
+This endpoint takes no JSON arguments.

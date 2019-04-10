@@ -7,4 +7,4 @@ external_redirect: /api/#delete-a-dashboard
 
 ## Delete a Dashboard
 Delete an existing dashboard.
-*This end point takes no JSON arguments.*
+*This endpoint takes no JSON arguments.*

@@ -11,4 +11,4 @@ Delete a given API key.
 
 ##### ARGUMENTS
 
-This end point takes no JSON arguments.
+This endpoint takes no JSON arguments.

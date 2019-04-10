@@ -6,5 +6,5 @@ external_redirect: /api/#delete-a-comment
 ---
 
 ## Delete A Comment
-This end point takes no JSON arguments.
+This endpoint takes no JSON arguments.
 

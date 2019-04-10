@@ -10,5 +10,5 @@ Disables muting all monitors. Throws an error if mute all was not enabled previo
 
 ##### ARGUMENTS
 
-This end point takes no JSON arguments.
+This endpoint takes no JSON arguments.
 

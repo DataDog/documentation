@@ -11,4 +11,4 @@ Get a given application key.
 
 ##### ARGUMENTS
 
-This end point takes no JSON arguments.
+This endpoint takes no JSON arguments.
