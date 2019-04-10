@@ -1,7 +1,7 @@
 ---
 title: Update organization
 type: apicontent
-order: 19.3
+order: 20.3
 external_redirect: /api/#update-organization
 ---
 

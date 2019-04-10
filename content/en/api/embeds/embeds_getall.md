@@ -12,4 +12,4 @@ Returns: A JSON list containing information on previously created embeds from bo
 
 ##### ARGUMENTS
 
-This end point takes no JSON arguments.
+This endpoint takes no JSON arguments.
