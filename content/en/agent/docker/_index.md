@@ -103,8 +103,8 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 
 | Env Variable    | Description                                                                                                                                                                   |
 |-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_AC_INCLUDE` | Whitelist of containers to include (separated by spaces). For example: `"image:image_name_1 image:image_name_2"`                                                              |
-| `DD_AC_EXCLUDE` | Blacklist of containers to exclude (separated by spaces). For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.) |
+| `DD_AC_INCLUDE` | Whitelist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`                                                              |
+| `DD_AC_EXCLUDE` | Blacklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*`  |
 
 **Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings and always count all containers. This does not affect your per-container billing.
 
