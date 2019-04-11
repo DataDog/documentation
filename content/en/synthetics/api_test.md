@@ -60,8 +60,8 @@ When running an API test, you must define at least one assertion that should be 
 | ------------- | ------------------------------------- | ----------------------------------------------------------------------------- |
 | Status Code   | `is`, `is not`                        | Integer                                                                       |
 | Response time | `less than`                           | Integer                                                                       |
-| Headers       | `contains`, `is`, `is not`, `matches` | for `contains`/`is`/`is not`: String <br> for `matches`: [RegexStrings][2]    |
-| Body          | `contains`, `is`, `is not`, `matches` | for `contains`/`is`/`is not`: String <br> for `matches`: [RegexStrings][2]    |
+| Headers       | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | for `contains`/`does not contain`/`is`/`is not`: String <br> for `matches`/`does not match`: [RegexStrings][2]    |
+| Body          | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | for `contains`/`does not contain`/`is`/`is not`: String <br> for `matches`/`does not match`: [RegexStrings][2]    |
 
 If you define an assertion on the content of `Headers`, you must define the headers name and the associated value.
 
