@@ -18,13 +18,16 @@ Configure your Datadog integrations via Datadog API, current configurable integr
 
 Available endpoints are:
 
-* To **create** an integration or **append** its configuration in Datadog:  
+* To **create** an integration or **append** its configuration in Datadog:
+
     **`POST /api/v1/integration/<SOURCE_TYPE_NAME>`**
 
-* To read an integration configuration:  
+* To **read** an integration configuration:
+
     **`GET /api/v1/integration/<SOURCE_TYPE_NAME>`**
 
-* To delete an integration from Datadog:  
+* To **delete** an integration from Datadog:
+
     **`DELETE /api/v1/integration/<SOURCE_TYPE_NAME>`**
 
 [1]: /api/#aws

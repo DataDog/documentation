@@ -11,4 +11,4 @@ Fetch the dashboard list's dashboard definitions.
 
 ##### ARGUMENTS
 
-This end point takes no JSON arguments.
+This endpoint takes no JSON arguments.

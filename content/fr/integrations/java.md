@@ -34,15 +34,23 @@ version: '1.0'
 ---
 ## Présentation
 
-L'intégration JMX recueille des métriques à partir des applications exposant des métriques [JMX][1].
-
-L'Agent Datadog appelle un petit plug-in Java, JMXFetch, afin de se connecter à MBean Server et de recueillir des métriques. Ce plug-in envoie des métriques à l'Agent Datadog à l'aide du serveur DogStatsD, qui s'exécute au sein de l'Agent. Cette fonctionnalité est aussi utilisée dans les intégrations d'ActiveMQ, de Cassandra, de Solr et de Tomcat. JMXFetch envoie également des checks de service concernant le statut de vos instances surveillées.
-
 <div class="alert alert-warning">
   JMXFetch est uniquement compatible avec Java >= 1.7.
 </div>
 
-Les checks JMX sont limités à 350 métriques par instance.
+L'intégration JMX recueille des métriques à partir des applications exposant des métriques [JMX][1].
+
+L'Agent Datadog appelle un petit plug-in Java, JMXFetch, afin de se connecter à MBean Server et de recueillir des métriques. Il envoie également des checks de service qui signale le statut des instances que vous surveillez.
+
+Ce plug-in envoie des métriques à l'Agent Datadog à l'aide du serveur DogStatsD, qui s'exécute au sein de l'Agent. Les intégrations suivantes utilisent également les métriques JMX :
+
+* ActiveMQ
+* Cassandra
+* Solr
+* Tomcat
+* Kafka
+
+**Remarque** : les checks JMX sont limités à 350 métriques par instance.
 
 Si vous exécutez JMX au sein de Docker, consultez la [documentation relative à Docker JMX][12].
 
@@ -55,70 +63,80 @@ L'Agent Datadog nécessite une connexion à distance pour se connecter à JVM, m
 
 ### Configuration
 
-1.  Configurez l'Agent afin qu'il se connecte à l'aide de JMX, et modifiez-le selon vos besoins. Voici un exemple de fichier `jmx.d/conf.yaml` :
+Configurez l'Agent afin qu'il se connecte à l'aide de JMX, et modifiez-le selon vos besoins. Voici un exemple de fichier `jmx.d/conf.yaml` :
 
-```yaml
+```
 init_config:
   custom_jar_paths: # facultatif
-    - /chemin/vers/jar/personnalise.jar
+    - <CHEMIN_FICHIER_JAR_PERSONNALISÉ>.jar
   #is_jmx: true
 
 instances:
   - host: localhost
     port: 7199
-    user: nomutilisateur
-    password: motdepasse
+    user: <NOM_UTILISATEUR>
+    password: <MOTDEPASSE>
 
-    jmx_url: "service:jmx:rmi:///jndi/rmi://myhost.host:9999/custompath" # facultatif
+    jmx_url: "service:jmx:rmi:///jndi/rmi://myhost.host:9999/<CHEMIN_PERSONNALISÉ>" # facultatif
 
     name: jmx_instance  # facultatif
-    java_bin_path: /chemin/vers/java
+    java_bin_path: <CHEMIN_JAVA>
     java_options: "-Xmx200m -Xms50m"
-    trust_store_path: /chemin/vers/trustStore.jks
-    trust_store_password: motdepasse
+    trust_store_path: <CHEMIN_STOCKAGE_CONFIANCE>.jks
+    trust_store_password: <MOTDEPASSE>
 
-    process_name_regex: .*nom_processus.*
+    process_name_regex: .*<NOM_PROCESSUS>.*
     tools_jar_path: /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
     refresh_beans: 600 # facultatif (en secondes)
     tags:
       env: stage
-      newTag: test
+      <TAG_KEY>:<TAG_VALUE>
 
     conf:
       - include:
-          domain: mon_domaine
+          domain: <NOM_DOMAINE_1>
           tags:
               simple: $attr0
-              raw_value: ma_valeur_choisie
+              raw_value: <VALEUR_CHOISIE>
               multiple: $attr0-$attr1
           bean:
-            - my_bean
-            - my_second_bean
+            - <NOM_BEAN_1>
+            - <NOM_BEAN_2>
           attribute:
             attribute1:
               metric_type: counter
-              alias: jmx.mon_nom_metrique
+              alias: jmx.<NOM_ATTRIBUT_MÉTRIQUE_1>
             attribute2:
               metric_type: gauge
-              alias: jmx.mondeuxiemeattribut
+              alias: jmx.<NOM_ATTRIBUT_MÉTRIQUE_2>
+
       - include:
-          domain: deuxieme_domaine
+          domain: <NOM_DOMAINE_2>
         exclude:
           bean:
-            - excluded_bean
+            - <NOM_BEAN_EXCLU>
       - include:
-          domain_regex: regex_sur_domaine
+          domain_regex: <REGEX_DOMAINE>
         exclude:
           bean_regex:
-            - regex_on_excluded_bean
+            - <NOM_REGEX_BEAN_EXCLU>
       - include:
           bean_regex: regex_topic=(.*?)
           attribute: 
-            attribute1:
+            atteibute1:
               metric_type: gauge
-              alias: jmx.attribut_avec_tag_regex
+              alias: jmx.<NOM_ATTRIBUT_AVEC_TAG_REGEX>
+
+          ## Les lignes suivantes envoient le jmx.<NOM_ATTRIBUT_AVEC_TAG_REGEX> bean with tags:
+          ## `hostregex:<paramètreBean>`
+          ## `typeregex:<paramètreBean>`
+          ## `contextregex<paramètreBean>`
+          ## `optional:tag`
           tags:
-            - topic: $1 # Tague toutes les métriques sous ce bean avec le topic du bean correspondant
+              TypeRegex: $1
+              HostRegex: $2
+              contextRegex: $3
+              optional: tag
 ```
 
 **Remarque** : pour exécuter plusieurs checks JMX, créez des fichiers de configuration avec le format `jmx_<INDEX>.yaml` (p. ex., `jmx_1.d/conf.yaml`, `jmx_2.d/conf.yaml`, etc.). Chaque fichier doit être stocké dans le répertoire `conf.d`. Définissez l'option `is_jmx` sur `true` dans ces fichiers de configuration.

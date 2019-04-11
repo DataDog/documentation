@@ -59,7 +59,7 @@ If we have a metric `const_1{*}` that is a constant with the value of `1`, then 
 
 | Function     | Description                       | Example                             |
 | :----        | :-------                          | :---------                          |
-| `integral()` | Graph the integral of the metric. | `Graph the integral of the metric.` |
+| `integral()` | Graph the integral of the metric. | `integral(<METRIC_NAME>{*})` |
 
 **Note**: Datadog's `integral()` is the cumulative sum of `[time delta] x [value delta]` over all consecutive pairs of points in the visible time window for a given metric.
 

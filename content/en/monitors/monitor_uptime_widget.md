@@ -46,8 +46,6 @@ To configure the widget from a [screenboard][1]:
 
 If the chosen monitor for the widget is configured to alert on *WARN* or *NO DATA*, those states are rendered as down (red) inside the uptime widget.
 
-Downtimes and muted periods are disregarded: if your monitor triggers during a scheduled downtime, that period is removed from the calculated uptime.  
-
 To ensure accurate calculations, new monitors aren't calculated until the end of the first UTC day. Until the first UTC day is over, a warning message is displayed instead: `Calculating Uptime`.
 
 While the widget is in private beta, Datadog engineering teams are working through the final implementation. **Thus, until the end of the beta phase, do not rely on the uptime percentage**. Should you see any discrepancies or unexpected behaviors, reach out to [the Datadog support team][2].

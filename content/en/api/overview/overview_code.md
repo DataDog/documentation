@@ -5,9 +5,9 @@ order: 1
 external_redirect: /api/#overview
 ---
 ### SIGNATURE
-There are many client libraries that wrap the Datadog API. [Check them out][1].
+There are many [client libraries][1] that wrap the Datadog API.
 
 ### SIGNATURE
-https://api.datadoghq.com/api/
+`https://api.datadoghq.com/api/`
 
 [1]: /developers/libraries

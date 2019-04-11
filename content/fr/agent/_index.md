@@ -12,7 +12,7 @@ further_reading:
   - link: tracing/
     tag: Documentation
     text: Recueillir vos traces
-  - link: agent/faq/why-should-i-install-the-agent-on-my-aws-instances/
+  - link: agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
     tag: Documentation
     text: "Pourquoi installer l'Agent sur des instances AWS\_?"
   - link: 'https://www.datadoghq.com/blog/dont-fear-the-agent/'
@@ -90,7 +90,7 @@ L'Agent v5 est composé de quatre éléments majeurs, chacun rédigé en Python 
 * **Collecteur** (`agent.py`) : le collecteur exécute des checks sur la machine actuelle pour les [intégrations][1] configurées, et enregistre les métriques du système, portant par exemple sur la mémoire et le processeur.
 * **DogStatsD** (`dogstatsd.py`) : il s'agit d'un serveur backend compatible avec StatsD auquel vous pouvez envoyer des [métriques custom][2] à partir de vos applications.
 * **Redirecteur** (`ddagent.py`) : le redirecteur récupère les données de DogStatsD et du collecteur, les met en attente et les envoie à Datadog.
-* **SupervisorD** : toute la solution est contrôlée par un unique processus de supervision. Celui-ci est séparé afin de limiter le traitement de chaque application si vous n'exécutez pas tous les éléments (peu recommandé).
+* **SupervisorD** : toute la solution est contrôlée par un unique processus de supervision. Celui-ci est séparé afin de limiter le traitement de chaque application si vous n'exécutez pas tous les éléments (peu conseillé).
 
 **Remarque** : pour les utilisateurs de Windows, les quatre processus de l'Agent apparaissent sous forme d'instances de `ddagent.exe`, avec la description `DevOps’ best friend`.
 

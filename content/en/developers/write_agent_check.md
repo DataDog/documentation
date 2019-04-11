@@ -52,7 +52,7 @@ __version__ = "1.0.0"
 
 class HelloCheck(AgentCheck):
     def check(self, instance):
-        self.gauge('hello.world', 1)
+        self.gauge('hello.world', 1, tags=['TAG_KEY:TAG_VALUE'])
 ```
 
 For more details about the interface provided by the base class, browse the [API documentation][5].
@@ -139,7 +139,7 @@ class LSCheck(AgentCheck):
     def check(self, instance):
         files, err, retcode = get_subprocess_output(["ls", "."], self.log, raise_on_empty_output=True)
         file_count = len(files.split('\n') - 1  #len() returns an int by default
-        self.gauge("file.count", file_count)
+        self.gauge("file.count", file_count,tags=['TAG_KEY:TAG_VALUE'])
 ```
 
 

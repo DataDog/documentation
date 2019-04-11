@@ -19,6 +19,9 @@ further_reading:
 - link: "logs/faq/log-collection-troubleshooting-guide"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
+- link: "https://www.datadoghq.com/blog/java-logging-guide/"
+  tag: "Blog"
+  text: "How to collect, customize, and standardize Java logs"
 ---
 
 Java logs are quite complex to handle, mainly because of stack traces. These stack traces are split into multiple lines which makes them difficult to associate to the original log event:
@@ -39,7 +42,7 @@ By asking your logging library to log into JSON, you will:
 
 **To send your logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog Agent.**
 
-We also strongly encourage you to setup your logging libraries to produce your logs in JSON format to avoid sustaning [custom parsing rules][2].
+Datadog strongly recommends setting up your logging libraries to produce your logs in JSON format to avoid the need for [custom parsing rules][2].
 
 Here are setup examples for the `log4j`, `slf4j` and `log4j2` logging libraries:
 
@@ -72,7 +75,7 @@ Once this is done, the `ConversionPattern` to use becomes:
 <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
 ```
 
-[1]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=java#correlate-traces-and-logs
+[1]: /tracing/advanced/connect_logs_and_traces/?tab=java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Log4j2" %}}
@@ -100,7 +103,7 @@ Once this is done, the `PatternLayout` to use becomes:
 <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
 ```
 
-[1]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=java#correlate-traces-and-logs
+[1]: /tracing/advanced/connect_logs_and_traces/?tab=java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Slf4j" %}}
@@ -136,7 +139,7 @@ Once this is done, the `Pattern` to use becomes:
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
 ```
 
-[1]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=java#correlate-traces-and-logs
+[1]: /tracing/advanced/connect_logs_and_traces/?tab=java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{< /tabs >}}
@@ -180,7 +183,7 @@ Once that done, edit your `logback.xml` file as described in the below `Slf4j` s
 
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][1] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)][2] that are then automatically added in the JSON logs.
 
-[1]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=java#correlate-traces-and-logs
+[1]: /tracing/advanced/connect_logs_and_traces/?tab=java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Log4j2" %}}
@@ -230,7 +233,7 @@ Then edit your `logback.xml` file and update the encoder:
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][2] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)][3] that are then automatically added in the JSON logs.
 
 [1]: https://github.com/logstash/logstash-logback-encoder
-[2]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=java#correlate-traces-and-logs
+[2]: /tracing/advanced/connect_logs_and_traces/?tab=java
 [3]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{< /tabs >}}

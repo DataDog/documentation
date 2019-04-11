@@ -123,7 +123,7 @@ Pour éliminer toute ambiguïté et vous aider à mieux comprendre vos systèmes
 | TEMPERATURE  | degree celsius / degree fahrenheit                                                                                                                                                                                                                 |
 | CPU          | nanocore / microcore / millicore / core / kilocore / megacore / gigacore / teracore / petacore / exacore                                                                                                                                           |
 
-Les unités sont affichées automatiquement sur des graphiques de série temporelle, des widgets de valeur de requête et des top lists, comme indiqué sur la capture d'écran du dashboard Redis ci-dessous :
+Les unités sont affichées automatiquement sur des graphiques de série temporelle, des widgets de valeur de requête et des Top Lists, comme indiqué sur la capture d'écran du dashboard Redis ci-dessous :
 
 {{< img src="developers/metrics/redis_dash_metrics_units.png" alt="unités de métriques dash. Redis" responsive="true" style="width:70%;">}}
 

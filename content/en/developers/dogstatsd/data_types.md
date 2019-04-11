@@ -242,7 +242,7 @@ def login(self, user_id)
 end
 ```
 
-Learn more about the [Histogram type in the Metrics documentation][7].
+Learn more about the [Sets type in the Metrics documentation][8].
 
 ## Metric option: sample rates
 
@@ -343,7 +343,7 @@ Because of the global nature of Distributions, extra tools for tagging are provi
 [5]: /help
 [6]: /developers/metrics/gauges
 [7]: /developers/metrics/histograms
-[8]: /developers/metrics/rates
+[8]: /developers/metrics/sets
 [9]: /graphing/event_stream
 [10]: /monitors/monitor_types/custom_check
 [11]: /developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd

@@ -7,6 +7,7 @@ kind: guide
     {{< nextlink href="agent/guide/agent-commands" >}}Agent Commands{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-configuration-files" >}}Agent Configuration Files{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-log-files" >}}Agent Log Files{{< /nextlink >}}
+    {{< nextlink href="agent/guide/integration-management" >}}Integration Management{{< /nextlink >}}
     {{< nextlink href="agent/guide/network" >}}Network Traffic{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>

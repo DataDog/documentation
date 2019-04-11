@@ -12,7 +12,6 @@ import shutil
 import requests
 import yaml
 import pickle
-from tqdm import *
 from collections import OrderedDict
 from functools import partial, wraps
 from itertools import chain, zip_longest
@@ -288,26 +287,6 @@ class PreBuild:
                     "target": "cassandra",
                     "remove_header": False,
                 },
-                "datadog_checks_base": {
-                    "action": "discard",
-                    "target": "none",
-                    "remove_header": False,
-                },
-                "datadog_checks_downloader": {
-                    "action": "discard",
-                    "target": "none",
-                    "remove_header": False,
-                },
-                "datadog_checks_tests_helper": {
-                    "action": "discard",
-                    "target": "none",
-                    "remove_header": False,
-                },
-                "docs": {
-                    "action": "discard",
-                    "target": "none",
-                    "remove_header": False,
-                },
                 "gitlab_runner": {
                     "action": "merge",
                     "target": "gitlab",
@@ -349,11 +328,6 @@ class PreBuild:
                     "remove_header": False,
                 },
                 "kubernetes_state": {
-                    "action": "discard",
-                    "target": "none",
-                    "remove_header": False,
-                },
-                "logo": {
                     "action": "discard",
                     "target": "none",
                     "remove_header": False,
@@ -431,18 +405,16 @@ class PreBuild:
                 with requests.Session() as s:
                     r = [
                         x
-                        for x in tqdm(
-                            pool.imap_unordered(
-                                partial(
-                                    gh.raw,
-                                    request_session=s,
-                                    org=org,
-                                    repo=repo,
-                                    branch=branch,
-                                    dest_dir=dest,
-                                ),
-                                listing,
-                            )
+                        for x in pool.imap_unordered(
+                            partial(
+                                gh.raw,
+                                request_session=s,
+                                org=org,
+                                repo=repo,
+                                branch=branch,
+                                dest_dir=dest,
+                            ),
+                            listing,
                         )
                     ]
 
@@ -503,11 +475,11 @@ class PreBuild:
                     self.list_of_contents.append(
                         content_temp
                     )
-                    print(
-                        "Adding content {} ".format(
-                            content_temp
-                        )
-                    )
+                    # print(
+                    #    "Adding content {} ".format(
+                    #        content_temp
+                    #    )
+                    # )
 
     def local_or_upstream(self):
         """
@@ -629,13 +601,13 @@ class PreBuild:
                     content["branch"],
                     content["globs"],
                 )
-                content["globs"] = self.update_globs(   
-                    "{0}{1}{2}".format( 
-                    self.extract_dir,   
-                    content["repo_name"],   
-                    sep,    
-                    ),  
-                    content["globs"],   
+                content["globs"] = self.update_globs(
+                    "{0}{1}{2}".format(
+                        self.extract_dir,
+                        content["repo_name"],
+                        sep,
+                    ),
+                    content["globs"],
                 )
 
     def update_globs(self, new_path, globs):
@@ -657,7 +629,7 @@ class PreBuild:
         triggers the right action to apply.
         """
         for content in self.list_of_contents:
-            print("Processing content: {}".format(content))
+            # print("Processing content: {}".format(content))
             if content["action"] == "integrations":
                 self.process_integrations(content)
 
@@ -688,11 +660,9 @@ class PreBuild:
         and triggers the right function for the right type of file.
         :param content: integrations content to process
         """
-        for file_name in tqdm(
-            chain.from_iterable(
-                glob.iglob(pattern, recursive=True)
-                for pattern in content["globs"]
-            )
+        for file_name in chain.from_iterable(
+            glob.iglob(pattern, recursive=True)
+            for pattern in content["globs"]
         ):
             if file_name.endswith(".csv"):
                 self.process_integration_metric(file_name)
@@ -736,11 +706,9 @@ class PreBuild:
         :param content: content to process
         """
 
-        for file_name in tqdm(
-            chain.from_iterable(
-                glob.iglob(pattern, recursive=True)
-                for pattern in content["globs"]
-            )
+        for file_name in chain.from_iterable(
+            glob.iglob(pattern, recursive=True)
+            for pattern in content["globs"]
         ):
             with open(file_name, mode="r+") as f:
                 file_content = f.read()
@@ -877,11 +845,9 @@ class PreBuild:
         and inserts them into the file something.md
         :param file_name: path to a source.py file
         """
-        for file_name in tqdm(
-            chain.from_iterable(
-                glob.iglob(pattern, recursive=True)
-                for pattern in content["globs"]
-            )
+        for file_name in chain.from_iterable(
+            glob.iglob(pattern, recursive=True)
+            for pattern in content["globs"]
         ):
             if file_name.endswith(
                 "dd/utils/context/source.py"
@@ -999,6 +965,7 @@ class PreBuild:
         5. write out file to content/integrations with filename changed to integrationname.md
         :param file_name: path to a readme md file
         """
+        no_integration_issue = True
 
         metrics = glob.glob(
             "{path}{sep}*metadata.csv".format(
@@ -1028,11 +995,17 @@ class PreBuild:
         manifest = "{0}{1}{2}".format(
             dirname(file_name), sep, "manifest.json"
         )
-        manifest_json = (
-            json.load(open(manifest))
-            if exists(manifest)
-            else {}
-        )
+
+        if exists(manifest):
+            manifest_json = json.load(open(manifest))
+        else:
+            no_integration_issue = False
+            manifest_json = {}
+            print(
+                "WARNING: No manifest found for {}".format(
+                    file_name
+                )
+            )
         dependencies = self.add_dependencies(file_name)
         new_file_name = "{}.md".format(
             basename(dirname(file_name))
@@ -1073,7 +1046,7 @@ class PreBuild:
             result = self.add_integration_frontmatter(
                 new_file_name, result, dependencies
             )
-            if not exist_already:
+            if not exist_already and no_integration_issue:
                 with open(
                     self.content_integrations_dir
                     + new_file_name,

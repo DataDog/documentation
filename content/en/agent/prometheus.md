@@ -28,7 +28,9 @@ Starting with version 6.1.0, the Agent includes a new [Prometheus][2] check capa
 
 ### Configuration
 
-Edit the `prometheus.yaml` file to add the different instances you want to retrieve custom metrics from.
+If running the Agent as a DaemonSet in Kubernetes, configure the Prometheus check using [auto-discovery][7].
+
+If running the Agent as a binary on a host, edit the `prometheus.yaml` file to add the different instances you want to retrieve custom metrics from.
 
 The minimal configuration of an instance includes:
 
@@ -97,3 +99,4 @@ Official integrations have their own dedicated directories. There's a default in
 [4]: /agent/autodiscovery
 [5]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example#L34
 [6]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[7]: /agent/prometheus/#auto-discovery

@@ -119,7 +119,7 @@ When sending this API call, an HTTP status of 200 means the call was successful.
 
 [1]: https://www.getpostman.com
 [2]: https://app.datadoghq.com/account/settings#api
-[3]: /json/datadog_collection.json
+[3]: /resources/json/datadog_collection.json
 [4]: https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments
 [5]: /api/#organizations
 [6]: /api

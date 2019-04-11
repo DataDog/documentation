@@ -1,7 +1,7 @@
 ---
 title: Unmute all monitors
 type: apicontent
-order: 18.08
+order: 19.08
 external_redirect: /api/#unmute-all-monitors
 ---
 
@@ -10,5 +10,5 @@ Disables muting all monitors. Throws an error if mute all was not enabled previo
 
 ##### ARGUMENTS
 
-This end point takes no JSON arguments.
+This endpoint takes no JSON arguments.
 

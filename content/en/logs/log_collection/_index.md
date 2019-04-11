@@ -176,6 +176,9 @@ List of all available parameters for log collection:
 | `tags`           | No       | Add tags to each log collected ([learn more about tagging][7]).                                                                                                                                                                                                                                                                                    |
 
 ## Advanced log collection functions
+
+If you set up multiple processing rules, they are applied sequentially. Each rule is applied on the result of the previous one.
+
 ### Filter logs
 
 To send only a specific subset of logs to Datadog use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** or **include_at_match** `type`.
@@ -227,8 +230,6 @@ logs:
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: If you set up multiple processing rules, they are applied sequentially. Each rule is applied on the result of the previous one.
-
 ### Scrub sensitive data in your logs
 
 If your logs contain sensitive information that you want to redact, configure the Datadog Agent to scrub sensitive sequences by using the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`.
@@ -265,6 +266,10 @@ For example, every Java log line starts with a timestamp in `yyyy-dd-mm` format.
 2018-01-03T09:26:24.365Z UTC starting upload of /my/file.gz
 ```
 
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
 To achieve this, you need to use the following `log_processing_rules`:
 
 ```yaml
@@ -278,6 +283,43 @@ logs:
         name: new_log_start_with_date
         pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
+
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+In a docker environment use the `com.datadoghq.ad.logs` labels on your container to make sure that the log is properly collected, for example:
+
+```
+ labels:
+    com.datadoghq.ad.logs: '[{"source": "postgresql", "service": "database", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
+```
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+In a Kubernetes environment use the `ad.datadoghq.com` pod annotations on your pods to make sure that the log is properly collected, for example:
+
+```
+apiVersion: extensions/v1beta1
+kind: ReplicaSet
+metadata:
+  name: postgres
+spec:
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/postgres.logs: '[{"source": "postgresql", "service": "database", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
+      labels:
+        app: database
+      name: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:latest
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 More examples:
 
@@ -393,4 +435,4 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [6]: /developers/metrics/custom_metrics
 [7]: /tagging
 [8]: /agent/proxy/#proxy-for-logs
-[9]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/?tab=agentv6#agent-commands
+[9]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information 

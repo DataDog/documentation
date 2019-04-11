@@ -27,6 +27,7 @@ sidebar:
       href: "guides/billing/"
 aliases:
     - /ja/guides/
+    - /videos/tipsandtricks-k8s-autodiscovery/
 
 ---
 <!--
@@ -79,19 +80,4 @@ and we'll take care of it.</p>
 でお知らせ下さい。メッセージ欄の内容を基にドキュメントを修正し、改善に努めます。</p>
 
 <!--
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: /guides/metrics/
-[3]: /graphing/
-[4]: /overview/
-[5]: https://app.datadoghq.com/event/stream
-[6]: /help/#email
-[7]: /help/#irc
-[8]: https://help.datadoghq.com/hc/en-us/requests/new
-[9]: https://github.com/DataDog/documentation/issues
-[102]: /ja/guides/metrics/
-[103]: /ja/graphing/
-[104]: /ja/guides/overview/
-[106]: /ja/help/#email
-[107]: /ja/help/#irc
-[111]: /ja/guides/monitoring/
 -->

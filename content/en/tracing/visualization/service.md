@@ -1,6 +1,6 @@
 ---
-title: Service page
-kind: Documentation
+title: Service Page
+kind: documentation
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
@@ -18,45 +18,43 @@ further_reading:
 
 {{< img src="tracing/visualization/service/detailed_service_page.png" alt="Detailed service page" responsive="true" style="width:90%;">}}
 
-## Overview 
+## Overview
 
-Selecting a service on the services page leads you to the detailed service page. A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM][1]). 
+Selecting a service on the services page leads you to the detailed service page. A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM][1]).
 
 Consult on this page:
 
-* [Service monitor states](#service-monitor) 
-* [Out of the box graphs](#out-of-the-box-graphs) 
-* [Resources associated to this service][2] 
+* [Service monitor states](#service-monitor)
+* [Out of the box graphs](#out-of-the-box-graphs)
+* [Resources associated to this service][2]
 
 ## Service Monitor
 
-Datadog proposes a list of monitors depending on your service type: 
+Datadog proposes a list of monitors depending on your service type:
 
 {{< img src="tracing/visualization/service/service_monitors.png" alt="Service Monitors" responsive="true" style="width:90%;">}}
 
 Enable them directly or create your own [APM monitors][3].
 
-**Note**: Tag any monitor with `service:<SERVICE_NAME>` to attach it to an APM service.  
+**Note**: Tag any monitor with `service:<SERVICE_NAME>` to attach it to an APM service.
 
 ## Out of the box graphs
 
 Datadog provides out of the box graphs for any given Service:
 
 * Requests - Choose to display:
-    *  The **Total amount of requests** 
+    *  The **Total amount of requests**
     *  The amount of **Requests per second**
 * Latency -  Choose to display:
-    *  The Avg/p75/p90/p95/p99/Max latency of your traced requests 
+    *  The Avg/p75/p90/p95/p99/Max latency of your traced requests
     *  The **Apdex score** for web services; [learn more about Apdex][4]
 * Error - Choose to display:
-    * The **Total amount of errors** 
-    * The amount of **Errors per second** 
-    * The **% Error Rate** 
+    * The **Total amount of errors**
+    * The amount of **Errors per second**
+    * The **% Error Rate**
 * Sub-Services: When there are multiple services involved, a fourth graph is available that breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*. For services like *Postgres* or *Redis*, which are "final" operations not calling other service underneath, there will be no Sub-services graph.
 
 {{< img src="tracing/visualization/service/out_of_the_box_service_graph.png" alt="Out of the bow service graphs" responsive="true" style="width:90%;">}}
-
-**Note**: Use the *cogs* icon to display all options available for any given graph.
 
 ### Export to Timeboard
 
@@ -87,13 +85,13 @@ Filter your resources list with a query for basic text filtering:
 
 {{< img src="tracing/visualization/service/resources_filtering.gif" alt="Resource filtering" responsive="true" style="width:90%;">}}
 
-### Columns 
+### Columns
 
 Choose what to display in your resources list:
 
 * **Requests**: Absolute amount of requests traced (per seconds)
 * **Avg/p75/p90/p95/p99/Max Latency**: The Avg/p75/p90/p95/p99/Max latency of your traced requests
-* **Total time**: Sum of all time spend in this resource 
+* **Total time**: Sum of all time spend in this resource
 * **Error**: Absolute amount of error for a given resource
 * **Error Rate**: Percent of error for a given resource
 
@@ -106,5 +104,5 @@ Choose what to display in your resources list:
 [1]: /tracing/visualization
 [2]: /tracing/visualization/resource
 [3]: /monitors/monitor_types/apm
-[4]: /tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm
+[4]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm
 [5]: /graphing/dashboards/timeboard

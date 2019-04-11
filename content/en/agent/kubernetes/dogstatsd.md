@@ -122,9 +122,8 @@ func main(){
 
   // other main() code omitted for brevity
 
-  var err error
   // use host IP and port to define endpoint
-  dogstatsd, err = statsd.New(os.Getenv("DOGSGTATSD_HOST_IP") + ":8125")
+  dogstatsd, err := statsd.New(os.Getenv("DOGSTATSD_HOST_IP") + ":8125")
   // alternatively, use the unix socket path
   // dogstatsd, err = statsd.New(os.Getenv("DD_DOGSTATSD_SOCKET"))
   if err != nil{
@@ -134,7 +133,7 @@ func main(){
     dogstatsd.Namespace = "My Application"
 
     // post an event to Datadog at app startup
-    dogstatsd.Event(*statsd.Event{
+    dogstatsd.Event(&statsd.Event{
       Title: "My application started.",
       Text: "My application started.",
       })

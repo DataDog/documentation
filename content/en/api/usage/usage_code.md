@@ -1,6 +1,6 @@
 ---
 title: Usage metering
 type: apicode
-order: 24
+order: 25
 external_redirect: /api/#usage-metering
 ---

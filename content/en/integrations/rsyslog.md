@@ -147,8 +147,8 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     ```
 
 
-[1]: /crt/intake.logs.datadoghq.com.crt
-[2]: /crt/FULL_intake.logs.datadoghq.com.crt
+[1]: /resources/crt/intake.logs.datadoghq.com.crt
+[2]: /resources/crt/FULL_intake.logs.datadoghq.com.crt
 {{% /tab %}}
 {{% tab "Datadog EU site" %}}
 
@@ -271,8 +271,8 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     ```
 
 
-[1]: /crt/intake.logs.datadoghq.eu.crt
-[2]: /crt/FULL_intake.logs.datadoghq.eu.crt
+[1]: /resources/crt/intake.logs.datadoghq.eu.crt
+[2]: /resources/crt/FULL_intake.logs.datadoghq.eu.crt
 {{% /tab %}}
 {{< /tabs >}}
 

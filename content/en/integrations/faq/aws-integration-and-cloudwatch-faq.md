@@ -27,10 +27,10 @@ You can monitor your CloudWatch API usage using the [AWS Billing integration][2]
 
 ## How can I reduce the lag on my CloudWatch metrics to appear in Datadog/Why are my CloudWatch metrics delayed?
 
-By default, Datadog collects AWS metrics every 10 minutes. See [Are my AWS CloudWatch metrics delayed?][4] for more information. If you need to reduce the latency, contact [Datadog support][5] for assistance.
+By default, Datadog collects AWS metrics every 10 minutes. See [Cloud Metric Delay][4] for more information. If you need to reduce the latency, contact [Datadog support][5] for assistance.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [2]: /integrations/amazon_billing
 [3]: /integrations/faq/using-datadog-s-aws-billing-integration-to-monitor-your-cloudwatch-usage
-[4]: /integrations/faq/are-my-aws-cloudwatch-metrics-delayed
+[4]: /integrations/faq/cloud-metric-delay
 [5]: /help

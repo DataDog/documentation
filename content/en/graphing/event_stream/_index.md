@@ -44,9 +44,6 @@ To combine multiple terms into a complex query, use any of the following Boolean
 | `OR`     | **Union**: either term is contained in the selected events. Use a comma (`,`) for tags.                                                    | `sources:nagios,chef directory OR Mixlib`    |
 | `NOT`    | **Exclusion**: the following term is NOT in the event. This operator works for strings only—use `-` in front of tags. | `-tags:<KEY>:<VALUE> NOT "<STRING>"` |
 
-In the example below, a full text search is performed to find all open chef or Nagios errors that mention one or more Redis instances that are currently down.
-
-`sources:nagios,chef status:error redis_* AND down`
 
 **Note**: some of the advanced query language features (e.g. boolean logic) work only in the event stream page, and do not work in graph tiles or in screen board widgets.
 

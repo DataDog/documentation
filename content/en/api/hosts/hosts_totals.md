@@ -10,4 +10,4 @@ This endpoint returns the total number of active and up hosts in your Datadog ac
 
 ##### ARGUMENTS
 
-This end point takes no JSON arguments.
+This endpoint takes no JSON arguments.

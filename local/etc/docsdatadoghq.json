@@ -67,7 +67,7 @@
       "url": "https://docs.datadoghq.com/(?P<section>.*?)/guide/",
       "selectors_key": "guide",
       "variables": {
-        "section": ["agent"]
+        "section": ["agent","graphing","monitors","tracing","logs","developers"]
       },
       "tags": [
         "guide"
@@ -78,7 +78,7 @@
       "url": "https://docs.datadoghq.com/fr/(?P<section>.*?)/guide/",
       "selectors_key": "guide",
       "variables": {
-        "section": ["agent"]
+        "section": ["agent","graphing","monitors","tracing","logs","developers"]
       },
       "tags": [
         "guide"

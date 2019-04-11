@@ -12,4 +12,4 @@ Returns: A JSON containing the success message {success: [message]}. On failure,
 
 ##### ARGUMENTS
 
-This end point takes no JSON arguments.
+This endpoint takes no JSON arguments.

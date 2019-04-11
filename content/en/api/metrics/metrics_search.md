@@ -1,12 +1,12 @@
 ---
 title: Search metrics
 type: apicontent
-order: 17.6
+order: 18.6
 external_redirect: /api/#search-metrics
 ---
 
 ## Search metrics
-This end point allows you to search for metrics from the last 24 hours in Datadog.
+This endpoint allows you to search for metrics from the last 24 hours in Datadog.
 
 
 ##### ARGUMENTS

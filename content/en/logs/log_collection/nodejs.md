@@ -33,7 +33,7 @@ npm install --save winston
 
 `package.js` is updated with the corresponding dependencies:
 
-```
+```js
 {
   "name": "...",
 
@@ -56,6 +56,32 @@ If APM is enabled for this application and you wish to improve the correlation b
 
 In your bootstrap file or somewhere in your code, declare the logger as follow:
 
+{{< tabs >}}
+{{% tab "Winston 3.0" %}}
+
+```js
+
+const { createLogger, format, transports } = require('winston');
+
+const logger = createLogger({
+  level: 'info',
+  exitOnError: false,
+  format: format.json(),
+  transports: [
+    new transports.File({ filename: `${appRoot}/logs/<FILE_NAME>.log` }),
+  ],
+});
+
+module.exports = logger;
+
+// Example logs
+logger.log('info', 'Hello simple log!');
+logger.info('Hello log with metas',{color: 'blue' });
+```
+
+{{% /tab %}}
+{{% tab "Winston 2.0" %}}
+
 ```js
 var winston = require('winston');
 
@@ -70,9 +96,13 @@ var logger = new (winston.Logger)({
     ]
 });
 
+// Example logs
 logger.log('info', 'Hello simple log!');
 logger.info('Hello log with metas',{color: 'blue' });
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Check the content of the `<FILE_NAME>.log` file to see that Winston already took care of logging everything in JSON:
 
@@ -127,4 +157,4 @@ Make sure that the parameter `max_connect_retries` is not set to `1` (the defaul
 
 [1]: https://github.com/winstonjs/winston
 [2]: https://www.npmjs.com
-[3]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=nodejs#correlate-traces-and-logs
+[3]: /tracing/advanced/connect_logs_and_traces/?tab=nodejs

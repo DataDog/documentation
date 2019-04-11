@@ -65,5 +65,5 @@ NOTE_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/widget/free_text
+[1]: /graphing/widgets/free_text
 [2]: /graphing/graphing_json/widget_json

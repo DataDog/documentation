@@ -24,7 +24,7 @@ version: '1.0'
 ---
 ## Présentation
 
-Connectez-vous à Amazon Web Services (AWS) pour :
+Associez Amazon Web Services (AWS) pour :
 
 * Consulter des mises à jour automatiques de statut AWS dans votre flux
 * Obtenir des métriques CloudWatch pour les hosts EC2 sans installer l'Agent
@@ -263,7 +263,7 @@ Les logs de service AWS sont recueillis via la fonction Lambda de Datadog. Ce La
 Pour commencer à recueillir des logs à partir de vos services AWS :
 
 1. Configurez la [fonction Lambda de Datadog](#configurer-la-fonction-lambda-de-datadog).
-2. [Activez la création de logs](#activer-la-creation-de-logs-pour-votre-service-AWS) pour votre service AWS (la plupart des services AWS peuvent se connecter à un compartiment S3 ou à un groupe de logs CloudWatch).
+2. [Activez la journalisation](#activer-la-journalisation-pour-votre-service-AWS) pour votre service AWS (la plupart des services AWS peuvent se connecter à un compartiment S3 ou à un groupe de logs CloudWatch).
 3. Configurez les déclencheurs entraînant l'exécution du lambda. Il existe deux façons de les configurer :
 
   * [automatiquement](#configurer-automatiquement-des-declencheurs) : Datadog récupère les logs pour les services AWS sélectionnés et les ajoute en tant que déclencheurs pour la fonction Lambda de Datadog. Datadog met également la liste à jour.
@@ -296,15 +296,17 @@ Utilisez le [référentiel sans serveur AWS][96] pour déployer la fonction Lamb
 1. Copiez le code depuis [ce référentiel][51] et collez-le dans le champ de code de la fonction.
 2. Assurez-vous que le gestionnaire indique **lambda_function.lambda_handler**.
     {{< img src="logs/aws/select_python.png" alt="Sélectionner Python" responsive="true" style="width:80%;" >}}
-3. En haut du script se trouve une section intitulée `#Parameters`. Vous pouvez fournir la clé d'API requise par la fonction Lambda de deux façons différentes :
+3. En haut du script se trouve une section intitulée `#DD_API_KEY: Datadog API Key`. Vous pouvez fournir la clé d'API requise par la fonction Lambda de deux façons différentes :
 
-    * En configurant une variable d'environnement (recommandé)
+    * En configurant une variable d'environnement (conseillé)
     * En ajoutant directement votre clé API Datadog dans le code
     {{< img src="logs/aws/dd_api_key_setup.png" alt="Configuration clé API DD" responsive="true" popup="true" style="width:80%;" >}}
 4. Faites défiler jusqu'à atteindre **Basic Settings** sous la zone de code en ligne.
 5. Définissez la mémoire sur une valeur **proche de 1 Go**.
 6. Définissez le délai d'expiration (nous recommandons d'indiquer **120 secondes**).
     {{< img src="logs/aws/basic_settings.png" alt="Réglages de base" responsive="true" style="width:80%;" >}}
+7. Définissez Execution Role sur le [rôle créé précédemment][98].
+    {{< img src="logs/aws/execution_role.png" alt="Réglages de base" responsive="true" style="width:80%;" >}}
 7. Faites défiler vers le haut de la page et cliquez sur **Save**.
 
 #### Tester votre Lambda
@@ -315,11 +317,11 @@ Utilisez le [référentiel sans serveur AWS][96] pour déployer la fonction Lamb
 2. Saisissez un nom unique pour l'événement, puis cliquez sur **Create**.
 3. Cliquez sur Test et vérifiez qu'aucune erreur ne survient (les logs de test n'apparaîtront pas dans votre plateforme Datadog).
 
-### Activer la création de logs pour votre service AWS
+### Activer la journalisation pour votre service AWS
 
 Tous les services AWS qui génèrent des logs dans un compartiment S3 ou un groupe de logs CloudWatch sont pris en charge. Consultez les instructions de configuration spécifiques des services les plus utilisés dans le tableau ci-dessous :
 
-| Service AWS                        | Activer la création de logs de service AWS                                                                    | Envoyer des logs AWS à Datadog                                                   |
+| Service AWS                        | Activer la journalisation de service AWS                                                                    | Envoyer des logs AWS à Datadog                                                   |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | [API Gateway][52]                  | [Activer les logs AWS API Gateway][53]                                                               | Collecte de logs [manuelle][54]                                                |
 | [Cloudfront][55]                   | [Activer les logs AWS Cloudfront][56]                                                                | Collecte de logs [manuelle][57] et [automatique](#configurer-automatiquement-des-declencheurs) |
@@ -568,6 +570,7 @@ Lors de l'installation de l'Agent sur un host AWS, il est possible que des hosts
 [95]: https://docs.datadoghq.com/fr/integrations/amazon_vpc/#enable-vpc-flow-log-logging
 [96]: https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:464622532012:applications~Datadog-Log-Forwarder
 [97]: https://docs.datadoghq.com/fr/integrations/amazon_xray
+[98]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#create-a-new-lambda-function
 
 
 {{< get-dependencies >}}

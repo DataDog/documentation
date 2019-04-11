@@ -46,7 +46,18 @@ If you customized the Docker image or mount a custom directory to `/etc/dd-agent
 
 #### Permission denied errors
 
-This probably happens because the user exposed the host's whole root filesystem to the container, and the Agent stumbles upon shm or netns mount points, which one cannot get metrics from. You should get the user to only expose useful paths to the Agent's container, as the current disk check doesn't have path ignore settings.
+You may see permission denied errors with the containerized Agent when collecting disk metrics from certain virtual mount points. This usually occurs when the host's entire root filesystem is exposed to the container. The Agent finds `shm` or `netns` mount points, which cannot generate metrics.
+
+Here is an example of a related log reported by the Agent:
+
+```
+10:12:52 PST | WARN | (datadog_agent.go:149 in LogMessage) | (disk.py:114) | Unable to get disk metrics for /run/docker/netns/9ec58235910c: [Errno 13] Permission denied: '/run/docker/netns/9ec58235910c'
+```
+
+Ideally, you should only expose useful paths to the Agent's container. If needed, prevent these logs from being reported by the Agent by updating the Disk integration `conf.yaml` to exclude the relevant file systems. Use one of the following parameters:
+
+* `file_system_blacklist` for Agent v6.8.0+
+* `excluded_filesystems` for older Agent versions
 
 ### Docker_daemon check
 
