@@ -3,6 +3,7 @@ title: Enrich Tracing
 kind: documentation
 aliases:
     - /tracing/advanced_usage/
+    - /tracing/getting_further/
 disable_toc: true
 ---
 
