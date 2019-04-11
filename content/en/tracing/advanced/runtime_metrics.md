@@ -69,7 +69,8 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 {{% tab "Node.js" %}}
 
 <div class="alert alert-info">
-This feature is currently in <strong>BETA</strong>. Reach out to [the Datadog support team][5] to be part of the beta.
+This feature is currently in <strong>BETA</strong>.
+Reach out to <a href="/help">the Datadog support team</a> to be part of the beta.
 </div>
 
 Node metrics collection can be enabled with one configuration parameter in the tracing client:
@@ -87,7 +88,6 @@ By default, Node metrics from your application are sent to the Datadog Agent ove
 [2]: /agent/docker/#dogstatsd-custom-metrics
 [3]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
 [4]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
-[5]: /help
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -149,7 +149,7 @@ The following metrics are collected by default after enabling Node metrics.
 
 Along with displaying these metrics in your APM Service Page, Datadog provides a [default Node Runtime Dashboard][1] with the `service` and `runtime-id` tags that are applied to these metrics.
 
-[1]: https://app.datadoghq.com/dash/integration/256/jvm-runtime-metrics
+[1]: https://app.datadoghq.com/dash/integration/30191/node-runtime-metrics
 {{% /tab %}}
 {{% tab ".NET" %}}
 
