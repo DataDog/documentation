@@ -68,10 +68,26 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+<div class="alert alert-info">
+This feature is currently in <strong>BETA</strong>. Reach out to [the Datadog support team][5] to be part of the beta.
+</div>
 
+Node metrics collection can be enabled with one configuration parameter in the tracing client:
 
-[1]: /help
+* Tracer Option: `tracer.init({ runtimeMetrics: true })`
+* Environment Variable: `DD_RUNTIME_METRICS_ENABLED=true`
+
+Node metrics can be viewed in correlation with your Node services. See the [Service page][1] in Datadog.
+
+**Collecting Node Metrics in Containerized Environments**
+
+By default, Node metrics from your application are sent to the Datadog Agent over port 8125. If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][2], and that port 8125 is open on the Agent. For example: in Kubernetes, [bind the DogstatsD port to a host port][3]; in ECS, [set the appropriate flags in your task definition][4].
+
+[1]: https://app.datadoghq.com/apm/services
+[2]: /agent/docker/#dogstatsd-custom-metrics
+[3]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[4]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[5]: /help
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -127,10 +143,13 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+The following metrics are collected by default after enabling Node metrics.
 
+{{< get-metrics-from-git "node" >}}
 
-[1]: /help
+Along with displaying these metrics in your APM Service Page, Datadog provides a [default Node Runtime Dashboard][1] with the `service` and `runtime-id` tags that are applied to these metrics.
+
+[1]: https://app.datadoghq.com/dash/integration/256/jvm-runtime-metrics
 {{% /tab %}}
 {{% tab ".NET" %}}
 
