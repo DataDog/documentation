@@ -84,10 +84,11 @@ DD_DOCKER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
 ```
 When adding labels to Docker containers, the placement of the `labels:` keyword inside the `docker-compose.yaml` file is very important. If the container needs to be labeled then place the `labels:` keyword **inside** the `services:` section **not** inside the `deploy:` section. Place the `labels:` keyword inside the `deploy:` section only when the service needs to be labeled. If this placement is not followed then the Datadog agent will not have any labels to extract from the containers. Below is a sample, working `docker-compose.yaml` file that shows this. In the example below, the labels in the `myapplication:` section, `my.custom.label.project` and `my.custom.label.version` each have unique values. Using the `DD_DOCKER_LABELS_AS_TAGS` environment variable in the `datadog:` section will extract the labels and produce these two tags for the `myapplication` container:
 
-*Labels inside the `myapplication` container are: `my.custom.label.project` and `my.custom.label.version`
-*After extracting them from the container the Datadog agent will have these tags:
--`projecttag:projectA`
--`versiontag:1`
+Inside the `myapplication` container the labels are: `my.custom.label.project` and `my.custom.label.version`
+
+After the agent extracts the labels from the container the tags will be:
+`projecttag:projectA`
+`versiontag:1`
 
 **Sample docker-compose.yaml:**
 ```shell
