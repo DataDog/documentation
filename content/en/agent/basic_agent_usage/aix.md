@@ -17,7 +17,7 @@ This page outlines the installation and configuration of the Datadog UNIX Agent 
 
 ## Installation
 
-A convenient one-line installation script has been provided for convenience on the [Agent download page](https://app.datadoghq.com/account/settings#agent/aix) within Datadog. Alternatively, download links for the latest releases can be found on [this page][1].
+An easy, one-step ksh install script has been provided on the [Agent download page](https://app.datadoghq.com/account/settings#agent/aix) within Datadog. Alternatively, download links for the latest releases can be found on [this page][1].
 
 The installer may be executed as follows (as root):
 
