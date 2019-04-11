@@ -307,7 +307,8 @@ var log = new LoggerConfiguration()
     .CreateLogger();
 ```
 
-Logs can be sent to the EU site by setting the `url` property to `https://http-intake.logs.datadoghq.eu`
+**Note**: To send logs to Datadog EU site, set the `url` property to `https://http-intake.logs.datadoghq.eu`
+
 You can also override the default behavior and forward logs in TCP by manually specifying the following properties in the parameters: `url`, `port`, `useSSL` and `useTCP`. You can also specify the `source`, `service`, `host`, and custom tags:
 
 ```
