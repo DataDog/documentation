@@ -309,7 +309,7 @@ var log = new LoggerConfiguration()
 
 **Note**: To send logs to Datadog EU site, set the `url` property to `https://http-intake.logs.datadoghq.eu`
 
-You can also override the default behaviour and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL` and `useTCP`. Optionally, specify the `source`, `service`, `host`, and custom tags.
+You can also override the default behaviour and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, specify the `source`, `service`, `host`, and custom tags.
 For instance to forward logs to the Datadog US site in TCP you would use the following sink configuration:
 
 ```
