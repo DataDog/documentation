@@ -81,24 +81,30 @@ init_config:
 
 instances:
 
-## @param apache_status_url - string - required
-## Status url of your Apache server.
-#
-- apache_status_url: http://localhost/server-status?auto
+  - apache_status_url: http://localhost/server-status?auto
 
-# you can also add an optional second instance
-## - url: url.com
-#
-#logs:
-#  - type: file
-#    path: /var/log/apache2/access.log
-#    source: apache
-#    sourcecategory: http_web_access
-#    service: apache
-#  - type: file
-#    path: /var/log/apache2/error.log
-#    source: apache
-#    sourcecategory: http_web_access
+logs:
+  - type: file
+    path: /var/log/apache2/access.log
+    source: apache
+    sourcecategory: http_web_access
+    service: apache
+  - type: file
+    path: /var/log/apache2/error.log
+    source: apache
+    sourcecategory: http_web_access
+```
+
+To create multiple instances in the same Agent check to monitor two Apache services, create a new instance with a `-` in the `instances:` section:
+
+```
+init_config:
+
+instances:
+
+  - apache_status_url: http://localhost/server-status?auto
+
+  - apache_status_url: http://<REMOTE_APACHE_ENDPOINT>/server-status?auto
 ```
 
 ### Tagging
