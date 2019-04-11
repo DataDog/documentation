@@ -256,11 +256,11 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 [10]: /agent/basic_agent_usage/windows
 [11]: /agent/basic_agent_usage/source
 {{% /tab %}}
-{{% tab "UNIX Agent" %}}
+{{% tab "Unix Agent" %}}
 
-| OS                                | Supported versions             |
-|-----------------------------------|--------------------------------|
-| [AIX][1]                          | AIX 6.1, 7.1, 7.2              |
+| OS                                | Supported versions                        |
+|-----------------------------------|-------------------------------------------|
+| [AIX][1]                          | AIX 6.1 TL9 SP6, 7.1 TL5 SP3, 7.2 TL3 SP0 |
 
 
 

@@ -5,12 +5,15 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-The Datadog UNIX agent is separate from Agents 5 and 6 that only support Linux and Windows  
+The Datadog Unix agent is separate from Agents 5 and 6, which will not run on AIX
 </div>
 
 This page outlines the installation and configuration of the Datadog UNIX Agent for AIX.
 
-**Note:** The Datadog UNIX Agent supports AIX 6.1, 7.1 and 7.2.
+**Note:** The Datadog Unix Agent currently supports the following versions of AIX:
+* AIX 6.1 TL9 SP6+
+* AIX 7.1 TL5 SP3+
+* AIX 7.2 TL3 SP0+
 
 ## Installation
 
