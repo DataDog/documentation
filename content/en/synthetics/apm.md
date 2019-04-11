@@ -55,5 +55,5 @@ These traces are retained [just like your classical APM traces][3].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing
-[2]: https://docs.datadoghq.com/tracing/getting_further/trace_sampling_and_storage/#how-it-works
-[3]: https://docs.datadoghq.com/tracing/getting_further/trace_sampling_and_storage/#trace-storage
+[2]: https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage/#how-it-works
+[3]: https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage/#trace-storage
