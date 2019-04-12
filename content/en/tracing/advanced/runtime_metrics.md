@@ -60,7 +60,7 @@ This feature is currently in <strong>BETA</strong>.
 Reach out to <a href="/help">the Datadog support team</a> to be part of the beta.
 </div>
 
-Ruby runtime metrics collection uses the [`dogstatsd-ruby`][1] gem to send metrics to the Statsd agent. To collect runtime metrics, you must add this gem to your Ruby application.
+Runtime runtime metrics collection uses the [`dogstatsd-ruby`][1] gem to send metrics to the Statsd agent. To collect runtime metrics, you must add this gem to your Ruby application.
 
 Metrics collection is disabled by default. You can enable it by setting the `DD_RUNTIME_METRICS_ENABLED` environment variable to `true`, or by setting the following configuration in your Ruby application:
 
@@ -81,11 +81,11 @@ Datadog.configure do |c|
 end
 ```
 
-Ruby metrics can be viewed in correlation with your Ruby services. See the [Service page][1] in Datadog.
+Runtime metrics can be viewed in correlation with your Ruby services. See the [Service page][1] in Datadog.
 
-**Collecting Ruby Metrics in Containerized Environments**
+**Collecting Runtime Metrics in Containerized Environments**
 
- By default, Ruby metrics from your application are sent to the Datadog Agent over port 8125. If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][2], and that port 8125 is open on the Agent. For example: in Kubernetes, [bind the DogstatsD port to a host port][3]; in ECS, [set the appropriate flags in your task definition][4].
+ By default, Runtime metrics from your application are sent to the Datadog Agent over port 8125. If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][2], and that port 8125 is open on the Agent. For example: in Kubernetes, [bind the DogstatsD port to a host port][3]; in ECS, [set the appropriate flags in your task definition][4].
 
 [1]: https://rubygems.org/gems/dogstatsd-ruby
 [2]: https://app.datadoghq.com/apm/services
