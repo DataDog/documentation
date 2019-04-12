@@ -24,7 +24,7 @@ further_reading:
 
 This is a guide for using integrations, if you are looking for information about building a new integration, see the [Create a new integration][1] page.
 
-An integration, at the highest level, is when you assemble a unified system from units that are usually considered separately. At Datadog, you can use integrations to bring together all of the metrics and logs from your infrastructure and gain insight into the unified system as a whole — you can see pieces individually and also how individual pieces are impacting the whole. 
+An integration, at the highest level, is when you assemble a unified system from units that are usually considered separately. At Datadog, you can use integrations to bring together all of the metrics and logs from your infrastructure and gain insight into the unified system as a whole — you can see pieces individually and also how individual pieces are impacting the whole.
 
 **Note**: It's best to start collecting metrics on your projects as early in the development process as possible, but you can start at any stage.
 
@@ -54,7 +54,7 @@ Configurations are specific to [individual integrations][18]. In the `conf.d/<IN
 
 To activate a given integration:
 
-1. Rename the `conf.yaml.example` file (in the corresponding `<INTEGRATION_NAME>.d` folder) to `conf.yaml`. 
+1. Rename the `conf.yaml.example` file (in the corresponding `<INTEGRATION_NAME>.d` folder) to `conf.yaml`.
 2. Update the required parameters inside the newly created configuration file with the values corresponding to your environment.
 3. [Restart the Datadog Agent][22].
 
