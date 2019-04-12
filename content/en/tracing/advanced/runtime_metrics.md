@@ -73,16 +73,16 @@ This feature is currently in <strong>BETA</strong>.
 Reach out to <a href="/help">the Datadog support team</a> to be part of the beta.
 </div>
 
-Node metrics collection can be enabled with one configuration parameter in the tracing client:
+Runtime metrics collection can be enabled with one configuration parameter in the tracing client:
 
 * Tracer Option: `tracer.init({ runtimeMetrics: true })`
 * Environment Variable: `DD_RUNTIME_METRICS_ENABLED=true`
 
-Node metrics can be viewed in correlation with your Node services. See the [Service page][1] in Datadog.
+Runtime metrics can be viewed in correlation with your Node services. See the [Service page][1] in Datadog.
 
-**Collecting Node Metrics in Containerized Environments**
+**Collecting Runtime Metrics in Containerized Environments**
 
-By default, Node metrics from your application are sent to the Datadog Agent over port 8125. If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][2], and that port 8125 is open on the Agent. For example: in Kubernetes, [bind the DogstatsD port to a host port][3]; in ECS, [set the appropriate flags in your task definition][4].
+By default, Runtime metrics from your application are sent to the Datadog Agent over port 8125. If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][2], and that port 8125 is open on the Agent. For example: in Kubernetes, [bind the DogstatsD port to a host port][3]; in ECS, [set the appropriate flags in your task definition][4].
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: /agent/docker/#dogstatsd-custom-metrics
@@ -143,7 +143,7 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-The following metrics are collected by default after enabling Node metrics.
+The following metrics are collected by default after enabling Runtime metrics.
 
 {{< get-metrics-from-git "node" >}}
 
