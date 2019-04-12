@@ -60,7 +60,7 @@ This feature is currently in <strong>BETA</strong>.
 Reach out to <a href="/help">the Datadog support team</a> to be part of the beta.
 </div>
 
-Runtime runtime metrics collection uses the [`dogstatsd-ruby`][1] gem to send metrics to the Statsd agent. To collect runtime metrics, you must add this gem to your Ruby application.
+Runtime metrics collection uses the [`dogstatsd-ruby`][1] gem to send metrics to the Statsd agent. To collect runtime metrics, you must add this gem to your Ruby application.
 
 Metrics collection is disabled by default. You can enable it by setting the `DD_RUNTIME_METRICS_ENABLED` environment variable to `true`, or by setting the following configuration in your Ruby application:
 
