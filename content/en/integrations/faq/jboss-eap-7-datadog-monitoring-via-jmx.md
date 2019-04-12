@@ -117,5 +117,5 @@ JMXFetch
 ```
 
 [1]: https://app.datadoghq.com/account/settings#agent/centos
-[2]: /agent/faq/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[3]: /agent/faq/agent-commands/?tab=agentv6#agent-status-and-information
+[2]: /agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[3]: /agent/guide/agent-commands/?tab=agentv6#agent-status-and-information

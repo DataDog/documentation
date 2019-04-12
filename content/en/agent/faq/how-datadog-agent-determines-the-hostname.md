@@ -61,4 +61,4 @@ See a list of all the hosts in your account from the Infrastructure tab in Datad
 
 {{< img src="agent/faq/host_aliases.png" alt="Host aliases" responsive="true" >}}
 
-[1]: /agent/faq/agent-commands/#agent-status-and-information
+[1]: /agent/guide/agent-commands/#agent-status-and-information

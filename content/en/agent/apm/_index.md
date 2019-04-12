@@ -39,7 +39,7 @@ To start tracing your application:
 2. **Enable trace collection for the Datadog Agent**. [See below dedicated instructions](#agent-configuration).
 
 2. **Configure your environment**:
-  An environment is a mandatory [primary tag](#primary-tags) used to scope a whole Datadog APM application. A common use case is to disaggregate metrics from stage environments such as production, staging, and pre-production. [Learn how to configure primary tags](#primary-tags).
+  An environment is a mandatory [primary tag][5] used to scope a whole Datadog APM application. A common use case is to disaggregate metrics from stage environments such as production, staging, and pre-production. [Learn how to configure primary tags][5].
 
 3. **Instrument your application**:
 
@@ -55,21 +55,21 @@ To start tracing your application:
   {{< /whatsnext >}}
 
 
-To instrument an application written in a language that does not yet have official library support, visit the list of [community tracing libraries][5].
+To instrument an application written in a language that does not yet have official library support, visit the list of [community tracing libraries][6].
 
-Finally, start monitoring your app's performance: within a few minutes of running APM, your services will appear in [the APM home page][6]. See [Using the APM UI][7] to learn more.
+Finally, start monitoring your app's performance: within a few minutes of running APM, your services will appear in [the APM home page][7]. See [Using the APM UI][8] to learn more.
 
 ## Agent configuration
 
 ### Trace collection
-To enable trace collection for your Agent, update the `apm_config` key in your [Agent `datadog.yaml` main configuration file][8]:
+To enable trace collection for your Agent, update the `apm_config` key in your [Agent `datadog.yaml` main configuration file][9]:
 
 ```
 apm_config:
   enabled: true
 ```
 
-[Reference the dedicated documentation to setup tracing with Docker][9].
+[Reference the dedicated documentation to setup tracing with Docker][10].
 
 Find below the list of all available parameters for your `datadog.yaml` configuration file:
 
@@ -82,29 +82,30 @@ Find below the list of all available parameters for your `datadog.yaml` configur
 | `max_traces_per_second`   | float       | Maximum number of traces to sample per second. Set to `0` to disable the limit (*not recommended*). The default value is `10`.                                     |
 | `ignore_resources`        | list        | A list of resources that the Agent should ignore.                                                                                                                  |
 | `log_file`                | string      | Location of the log file.                                                                                                                                          |
-| `replace_tags`            | list        | A list of tag replacement rules. Read more about scrubbing sensitive data with [replace rules][10].                                              |
+| `replace_tags`            | list        | A list of tag replacement rules. Read more about scrubbing sensitive data with [replace rules][11].                                              |
 | `receiver_port`           | number      | Port that the Datadog Agent's trace receiver listen on. Default value is `8126`.                                                                                   |
 | `apm_non_local_traffic`   | boolean     | Set to `true` to allow the Agent to receive outside connections, and then listen on all interfaces.                                                                                 |
 | `max_memory`              | float       | Maximum memory that the Agent is allowed to occupy. When this is exceeded the process is killed.                                                                   |
 | `max_cpu_percent`         | float       | Maximum CPU percentage that the Agent should use. The Agent automatically adjusts its pre-sampling rate to stay below this number.                                 |
 
-To get a an overview of all the possible settings for APM, take a look at the Agent's [`datadog.example.yaml`][11] configuration file.
-For more information about the Datadog Agent, see the [dedicated doc page][12] or refer to the [`datadog.yaml` templates][13].
+To get a an overview of all the possible settings for APM, take a look at the Agent's [`datadog.example.yaml`][12] configuration file.
+For more information about the Datadog Agent, see the [dedicated doc page][13] or refer to the [`datadog.yaml` templates][14].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/faq/agent-5-tracing-setup
+ [1]: /tracing/faq/agent-5-tracing-setup
 [2]: https://github.com/DataDog/dd-trace-py
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://github.com/DataDog/datadog-agent/tree/master/docs/trace-agent#run-on-macos
-[5]: /developers/libraries/#community-tracing-apm-libraries
-[6]: https://app.datadoghq.com/apm/home?env=
-[7]: /tracing/visualization
-[8]: /agent/faq/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[9]: /agent/docker/apm
-[10]: /tracing/guide/security
-[11]: https://github.com/DataDog/datadog-trace-agent/blob/6.4.1/datadog.example.yaml
-[12]: /agent
-[13]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[5]: /tracing/advanced/setting_primary_tags_to_scope
+[6]: /developers/libraries/#community-tracing-apm-libraries
+[7]: https://app.datadoghq.com/apm/home
+[8]: /tracing/visualization
+[9]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[10]: /agent/docker/apm
+[11]: /tracing/guide/security
+[12]: https://github.com/DataDog/datadog-trace-agent/blob/6.4.1/datadog.example.yaml
+[13]: /agent
+[14]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml

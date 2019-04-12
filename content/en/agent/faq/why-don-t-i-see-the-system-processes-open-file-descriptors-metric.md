@@ -33,8 +33,8 @@ If you are running Agent v6 less than 6.3, try updating the Agent and using the 
 
 
 [1]: https://github.com/DataDog/datadog-agent
-[2]: /agent/faq/agent-commands/?tab=agentv6#stop-the-agent
-[3]: /agent/faq/agent-commands/?tab=agentv6#start-the-agent
+[2]: /agent/guide/agent-commands/?tab=agentv6#stop-the-agent
+[3]: /agent/guide/agent-commands/?tab=agentv6#start-the-agent
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -50,10 +50,10 @@ If you are running Agent v5, try updating to the latest version of Agent 6 and u
 
 
 [1]: https://github.com/DataDog/dd-agent
-[2]: /agent/faq/agent-commands/?tab=agentv5#stop-the-agent
+[2]: /agent/guide/agent-commands/?tab=agentv5#stop-the-agent
 [3]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L20
 [4]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L30
-[5]: /agent/faq/agent-commands/?tab=agentv5#start-the-agent
+[5]: /agent/guide/agent-commands/?tab=agentv5#start-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 

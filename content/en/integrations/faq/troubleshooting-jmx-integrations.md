@@ -32,7 +32,7 @@ If you're able to connect using the command above, run: `beans` and send to the 
 * A copy of the YAML integration (send the file)
 
 
-[1]: /agent/faq/agent-status-and-information
+[1]: /agent/guide/agent-commands/#agent-status-and-information
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -47,7 +47,7 @@ If you're able to connect using the command above, run: `beans` and send to the 
 
 
 [1]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
-[2]: /agent/faq/agent-status-and-information
+[2]: /agent/guide/agent-commands/#agent-status-and-information
 {{% /tab %}}
 {{< /tabs >}}
 

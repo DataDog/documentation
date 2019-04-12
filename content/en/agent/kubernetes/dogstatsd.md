@@ -158,7 +158,7 @@ func InfoHandler(rw http.ResponseWriter, req *http.Request) {
 [1]: /developers/dogstatsd
 [2]: https://github.com/etsy/statsd
 [3]: /developers/dogstatsd/unix_socket
-[4]: /agent/faq/agent-commands
+[4]: /agent/guide/agent-commands
 [5]: https://github.com/containernetworking/cni
 [6]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [7]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information

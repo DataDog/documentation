@@ -11,5 +11,5 @@ If you are getting an error when integrating with HDFS first try upgrading pip a
 
 If these steps do not resolve your error, contact [us][2]!
 
-[1]: /agent/faq/agent-commands/#start-stop-restart-the-agent
+[1]: /agent/guide/agent-commands/#start-stop-restart-the-agent
 [2]: /help
