@@ -124,7 +124,7 @@ Additional JMX metrics can be added using configuration files that are passed to
 
 Along with displaying these metrics in your APM Service Page, Datadog provides a [default Python Runtime Metrics Dashboard][1] with the `service` and `runtime-id` tags that are applied to these metrics.
 
-[1]: https://app.datadoghq.com/dash/integration/xyz/python-runtime-metrics
+[1]: https://app.datadoghq.com/dash/integration/30267/python-runtime-metrics
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
