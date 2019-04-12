@@ -36,6 +36,14 @@ Add `context` and extra attributes
 
 ## Get the Public API Key
 
+**Public API Keys are in Private Beta** 
+
+For security reasons, [API keys][2] cannot be used as they would be exposed in the Javascript code. To collect Logs from web browsers, a [Public API keys][3] must be used.
+To manage your Public API keys, go to your [Datadog API configuration page][4] in the `Public API Key` section as shown here:
+
+{{< img src="logs/log_collection/public_key.png" style="width:80%;" alt="Public API Keys" responsive="true" >}}
+
+Read our [Public API keys documentation][3] to learn more about the restrictions that applies.
 
 ## Configure the Javascript logger
 
@@ -145,3 +153,6 @@ This gives the following result:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/processing/parsing
+[2]: https://docs.datadoghq.com/account_management/faq/api-app-key-management/#api-keys
+[3]: https://docs.datadoghq.com/account_management/faq/api-app-key-management/#public-api-keys
+[4]: https://app.datadoghq.com/account/settings#api
