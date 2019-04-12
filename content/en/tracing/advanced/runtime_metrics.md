@@ -49,7 +49,10 @@ By default, JVM metrics from your application are sent to the Datadog Agent over
 {{% /tab %}}
 {{% tab "Python" %}}
 
-This feature is currently in **BETA**. Reach out to the [the Datadog support team][1] to be part of the beta.
+<div class="alert alert-info">
+This feature is currently in <strong>BETA</strong>.
+Reach out to <a href="/help">the Datadog support team</a> to be part of the beta.
+</div>
 
 Runtime metrics collection can be enabled with one environment parameter when running with `ddtrace-run`:
 
