@@ -9,16 +9,18 @@ further_reading:
   tag: "Integrations"
   text: "Datadog's full list of integrations"
 ---
-* [Setting up an integration](#setting-up-an-integration)
-    * [API and application keys](#api-and-application-keys)
-    * [Installation](#installation)
-    * [Configuring Agent integrations](#configuring-agent-integrations)
-    * [Tagging](#tagging)
-    * [Validation](#validation)
-* [Installing multiple integrations](#installing-multiple-integrations)
-* [Security practices](#security-practices)
-* [Troubleshooting](#troubleshooting)
-* [Key Terms](#key-terms)
+- [Setting up an integration](#setting-up-an-integration)
+  - [API and Application keys](#api-and-application-keys)
+  - [Installation](#installation)
+  - [Configuring Agent integrations](#configuring-agent-integrations)
+  - [Tagging](#tagging)
+  - [Validation](#validation)
+- [Installing multiple integrations](#installing-multiple-integrations)
+- [Security practices](#security-practices)
+- [What's next?](#whats-next)
+- [Troubleshooting](#troubleshooting)
+- [Key terms](#key-terms)
+- [Further Reading](#further-reading)
 
 This is a guide for using integrations, if you are looking for information about building a new integration, see the [Create a new integration][1] page.
 
@@ -139,7 +141,7 @@ If you continue to have problems, reach out to [our awesome Support team][35].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
- 
+
 [1]: /developers/integrations/new_check_howto
 [2]: https://app.datadoghq.com/account/settings
 [3]: /integrations/slack
@@ -153,7 +155,7 @@ If you continue to have problems, reach out to [our awesome Support team][35].
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
 [13]: /developers/integrations/new_check_howto/#developer-toolkit
-[14]: agent/guide/integration-management
+[14]: /agent/guide/integration-management
 [15]: https://github.com/DataDog/dd-agent
 [16]: /account_management/faq/api-app-key-management
 [17]: https://app.datadoghq.com/account/settings#api
