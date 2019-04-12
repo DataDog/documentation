@@ -74,6 +74,6 @@ Primary tags appear at the top of APM pages. Use these selectors to slice the da
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tagging
-[2]: /agent/faq/agent-configuration-files/?tab=agentv6
+[2]: /agent/guide/agent-configuration-files/?tab=agentv6
 [3]: /tagging/assigning_tags/#traces
 [4]: https://app.datadoghq.com/apm/settings

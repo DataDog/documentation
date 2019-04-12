@@ -47,7 +47,7 @@ Also note that outgoing UDP traffic over the port 123 should be allowed so the A
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/faq/agent-commands/#agent-status-and-information
+[1]: /agent/guide/agent-commands/#agent-status-and-information
 [2]: /integrations/ntp
 [3]: https://support.microsoft.com/en-us/help/816042/how-to-configure-an-authoritative-time-server-in-windows-server
 [4]: http://askubuntu.com/questions/254826/how-to-force-a-clock-update-using-ntp

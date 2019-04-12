@@ -18,5 +18,5 @@ Here is a quick guide for troubleshooting getting integrations installed:
         2. If there are still no metrics, check the logs for errors and send them along, with the info command output, to support@datadoghq.com.
 
 [1]: /integrations
-[2]: /agent/faq/agent-status-and-information
-[3]: /agent/faq/agent-commands/#start-stop-restart-the-agent
+[2]: /agent/guide/agent-commands/#agent-status-and-information
+[3]: /agent/guide/agent-commands/#start-stop-restart-the-agent

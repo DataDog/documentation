@@ -6,10 +6,10 @@ aliases:
     - /agent/faq/how-to-get-more-logging-from-the-agent
     - /agent/faq/agent-5-container-more-log
 further_reading:
-- link: "/agent/faq/agent-commands/?tab=agentv6"
+- link: "/agent/guide/agent-commands/?tab=agentv6"
   tag: "FAQ"
   text: "List of all Agent commands"
-- link: "/agent/faq/agent-configuration-files/?tab=agentv6"
+- link: "/agent/guide/agent-configuration-files/?tab=agentv6"
   tag: "FAQ"
   text: "Agent configuration files"
 - link: "/agent/faq/common-windows-agent-installation-error-1721"
@@ -310,10 +310,10 @@ sudo journalctl -u dd-agent.service
 [2]: https://app.datadoghq.com/metric/explorer
 [3]: /agent/proxy
 [4]: https://app.datadoghq.com/account/settings#api
-[5]: /agent/faq/agent-commands/#agent-status-and-information
-[6]: /agent/faq/agent-log-files
+[5]: /agent/guide/agent-commands/#agent-status-and-information
+[6]: /agent/guide/agent-log-files
 [7]: /help
-[8]: /agent/faq/agent-configuration-files/?tab=agentv6
-[9]: /agent/faq/agent-commands
+[8]: /agent/guide/agent-configuration-files/?tab=agentv6
+[9]: /agent/guide/agent-commands
 [10]: https://github.com/DataDog/dd-agent/blob/master/utils/flare.py
 [11]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands

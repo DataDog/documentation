@@ -70,7 +70,7 @@ Need help? Contact [Datadog Support][6].
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://uwsgi-docs.readthedocs.io/en/latest/Logging.html#logging-to-files
-[3]: /agent/faq/agent-commands/#start-stop-restart-the-agent
+[3]: /agent/guide/agent-commands/#start-stop-restart-the-agent
 [4]: https://uwsgi-docs.readthedocs.io/en/latest/LogFormat.html#uwsgi-default-logging
 [5]: https://uwsgi-docs.readthedocs.io/en/latest/LogFormat.html#apache-style-combined-request-logging
 [6]: /help

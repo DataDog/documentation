@@ -111,7 +111,7 @@ proxy_password: my_password
 Do not forget to [restart the Agent][1] for the new settings to take effect.
 
 
-[1]: /agent/faq/agent-commands
+[1]: /agent/guide/agent-commands
 {{% /tab %}}
 {{< /tabs >}}
 

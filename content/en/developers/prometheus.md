@@ -227,4 +227,4 @@ Available types are: `counter`, `gauge`, `summary`, `untyped`, and `histogram`.
 [3]: https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py
 [4]: /agent/agent_checks/#configuration
 [5]: /developers/metrics/custom_metrics
-[6]: /agent/faq/agent-commands/#agent-status-and-information
+[6]: /agent/guide/agent-commands/#agent-status-and-information
