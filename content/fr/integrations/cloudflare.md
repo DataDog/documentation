@@ -3,7 +3,7 @@ categories:
   - web
 ddtype: crawler
 dependencies: []
-description: Suivez vos métriques DNS et le trafic de votre site Web Cloudflare.
+description: Surveillez vos métriques Cloudfare relatives au DNS et au trafic Web.
 doc_link: 'https://docs.datadoghq.com/integrations/cloudflare/'
 git_integration_title: cloudflare
 has_logo: true

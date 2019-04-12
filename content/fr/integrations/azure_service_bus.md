@@ -20,7 +20,7 @@ version: 1
 ## Présentation
 Microsoft Azure Service Bus est un courtier de messages d'intégration d'entreprise entièrement géré.
 
-Recueillez des métriques d'Azure App Service pour :
+Recueillez des métriques d'Azure Service Bus pour :
 
 * Visualiser les performances de votre Service Bus
 * Corréler les performances de vos Service Bus avec vos applications

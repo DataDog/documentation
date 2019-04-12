@@ -63,7 +63,7 @@ Voici quelques restrictions, exigences et suggestions en ce qui concerne l'utili
 
 6. Les tags ne doivent pas provenir de sources illimitées, telles que des horodatages EPOCH, des ID d'utilisateur ou des ID de demande. Cela pourrait [accroître de façon significative le nombre de métriques][2] de votre organisation et augmenter vos frais.
 
-## Assignation de tags
+## Assigner des tags
 Vous pouvez utiliser l'une (ou l'ensemble) des méthodes suivantes pour assigner des tags. Consultez la [documentation relative à l'assignation des tags][3] pour en savoir plus :
 
 | Méthode                        | Assignation de tags                                                                                  |
