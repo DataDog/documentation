@@ -49,9 +49,21 @@ By default, JVM metrics from your application are sent to the Datadog Agent over
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+<div class="alert alert-info">
+This feature is currently in <strong>BETA</strong>.
+Reach out to <a href="/help">the Datadog support team</a> to be part of the beta.
+</div>
 
-[1]: /help
+Runtime metrics collection can be enabled with one environment parameter when running with `ddtrace-run`:
+
+* Environment Variable: `DD_RUNTIME_METRICS_ENABLED=true`
+
+Runtime metrics can be viewed in correlation with your Python services. See the [Service page][1] in Datadog.
+
+**Note**: For the runtime UI, `ddtrace` >= [`0.24.0`][2] is supported.
+
+[1]: https://app.datadoghq.com/apm/services
+[2]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.24.0
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
@@ -143,9 +155,11 @@ Additional JMX metrics can be added using configuration files that are passed to
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+{{< get-metrics-from-git "python" >}}
 
-[1]: /help
+Along with displaying these metrics in your APM Service Page, Datadog provides a [default Python Runtime Metrics Dashboard][1] with the `service` and `runtime-id` tags that are applied to these metrics.
+
+[1]: https://app.datadoghq.com/dash/integration/30267/python-runtime-metrics
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
