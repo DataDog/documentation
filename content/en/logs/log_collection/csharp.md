@@ -292,7 +292,7 @@ It is possible to stream logs from your application to Datadog or to the Datadog
 {{< tabs >}}
 {{% tab "SeriLog" %}}
 
-Install the Datadog [Serilog sink][1], which send events and logs to Datadog. By default the sink uses a TCP connection over SSL.
+Install the Datadog [Serilog sink][1], which send events and logs to Datadog. By default the sink forwards logs through HTTPS on port 443.
 Run the following command in the Package Manager Console: 
 
 ```
@@ -307,10 +307,13 @@ var log = new LoggerConfiguration()
     .CreateLogger();
 ```
 
-You can override the default behavior by manually specifying the following properties in the parameters: `endpoint`, `port`, `useSSL`. You can also specify the `source`, `service`, `host`, and custom tags:
+**Note**: To send logs to Datadog EU site, set the `url` property to `https://http-intake.logs.datadoghq.eu`
+
+You can also override the default behaviour and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, specify the `source`, `service`, `host`, and custom tags.
+For instance to forward logs to the Datadog US site in TCP you would use the following sink configuration:
 
 ```
-var config = new DatadogConfiguration("intake.logs.datadoghq.com", 10516, true);
+var config = new DatadogConfiguration(url: "intake.logs.datadoghq.com", port: 10516, useSSL: true, useTCP: true);
 var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs(
         "<API_KEY>",

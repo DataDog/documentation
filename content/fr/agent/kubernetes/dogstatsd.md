@@ -123,13 +123,13 @@ func main(){
 
   var err error
   // utiliser le port et l'IP du host pour définir l'endpoint
-  dogstatsd, err = statsd.New(os.Getenv("DOGSGTATSD_HOST_IP") + ":8125")
+  dogstatsd, err = statsd.New(os.Getenv("DOGSTATSD_HOST_IP") + ":8125")
   // ou utiliser le chemin du socket Unix
   // dogstatsd, err = statsd.New(os.Getenv("DD_DOGSTATSD_SOCKET"))
   if err != nil{
     log.Printf("Impossible d'obtenir un client DogStatsD.")
   } else {
-    // ajouter le nom de l'app devant chaque métrique et événement
+    // // ajouter le nom de l'app devant chaque métrique et événement
     dogstatsd.Namespace = "Mon application"
 
     // publier un événement sur Datadog au lancement de l'app

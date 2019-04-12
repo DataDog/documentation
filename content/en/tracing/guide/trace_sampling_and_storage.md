@@ -21,8 +21,6 @@ further_reading:
 - link: "tracing/visualization/trace"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
-aliases:
-  - /tracing/getting_further/trace_sampling_and_storage
 ---
 
 ## Trace sampling

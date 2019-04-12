@@ -6,7 +6,7 @@ external_redirect: /api/#post-an-event
 ---
 
 ## Post an event
-This end point allows you to post events to the stream. Tag them, set priority and event aggregate them with other events.
+This endpoint allows you to post events to the stream. Tag them, set priority and event aggregate them with other events.
 
 ##### ARGUMENTS
 * **`title`** [*required*]:  

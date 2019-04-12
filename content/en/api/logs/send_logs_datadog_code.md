@@ -1,10 +1,9 @@
 ---
 title: Send Logs over HTTP
 type: apicode
-order: 16.1
+order: 17.1
 external_redirect: /api/#send-logs-over-http
 ---
-
 
 ##### Signature
 `https://http-intake.logs.datadoghq.com/v1/input/<DATADOG_API_KEY>`

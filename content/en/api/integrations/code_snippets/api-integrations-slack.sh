@@ -75,7 +75,7 @@ curl -X POST -H "Content-type: application/json" \
       }
     ]
   }' \
-"https://app.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}"
 
 curl -v "https://api.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}"
 

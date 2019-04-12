@@ -1,7 +1,7 @@
 ---
 title: Get organization
 type: apicontent
-order: 19.2
+order: 20.2
 external_redirect: /api/#get-organization
 ---
 

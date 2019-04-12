@@ -7,7 +7,7 @@ description: >-
   performances sont faibles.
 short_description: 'Recueillez des logs pour suivre les erreurs, obtenir des délais de réponse, etc.'
 categories:
-  - collecte de logs
+  - log collection
 doc_link: /integrations/adobe_experience_manager/
 aliases:
   - /fr/logs/log_collection/adobe_experience_manager

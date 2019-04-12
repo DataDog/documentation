@@ -23,32 +23,38 @@ This page outlines the basic features of the Windows Datadog Agent. If you haven
 
 ## Agent installation
 
-**Starting with release `6.11`, the Windows Agent main components (i.e. Core, APM/Trace, and Process) run under the `ddagentuser` account, created at install time, instead of running on prior version under the `LOCAL_SYSTEM` account.**
+**Starting with release `6.11.0`, the Windows Agent main components (i.e. Core, APM/Trace, and Process) run under the `ddagentuser` account, created at install time, instead of running on prior version under the `LOCAL_SYSTEM` account.**
 
 [Refer to the dedicated ddagentuser FAQ to learn more.][3]
 
-Many items can be configured on the command line when installing the Datadog Windows Agent. Each configuration item is added as an install property to the command line. For instance, the following commands install the Agent, configure the Agent configuration file with the `<DATADOG_API_KEY>`, and set the `<HOSTNAME>` and tags.
+To install the Agent, you may simply download and run the Datadog Agent MSI as Administrator.
 
-* cmd: `msiexec /qn /i datadog-agent-6-latest.amd64.msi APIKEY="<DATADOG_API_KEY>" HOSTNAME="<HOSTNAME>" TAGS="key_1:val_1,key_2:val_2"`
-* Powershell: `Start-Process msiexec -ArgumentList '/qn /i datadog-agent-6-latest.amd64.msi APIKEY="<DATADOG_API_KEY>" HOSTNAME="<HOSTNAME>" TAGS="key_1:val_1,key_2:val_2"'`
+Optionally, install the Agent with the command line to customize the install settings and/or run an unattended install. Each configuration item is added as an install property to the command line. For instance, the following command installs the Agent and configures the Agent configuration file with the `<DATADOG_API_KEY>`.
+
+* cmd: `msiexec /i datadog-agent-6-latest.amd64.msi APIKEY="<DATADOG_API_KEY>"`
+* Powershell: `Start-Process msiexec -ArgumentList '/i datadog-agent-6-latest.amd64.msi APIKEY="<DATADOG_API_KEY>"'`
+
+**Note**: Use the `/qn /i` options instead of `/i` to run an unattended install. The unattended install may take up to a few minutes to complete.
 
 The following configuration command line options are available when installing the Agent:
 
-| Variable          | Type   | Description                                                                                                                                                                                       |
-|-------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `APIKEY`          | String | Adds the Datadog API KEY to the configuration file.                                                                                                                                               |
-| `TAGS`            | String | Comma separated list of tags to assign in the configuration file.                                                                                                                                 |
-| `HOSTNAME`        | String | Configures the hostname reported by the Agent to Datadog (overrides any hostname calculated at runtime).                                                                                          |
-| `LOGS_ENABLED`    | String | Enable (`"true"`) or disable (`"false"`) the log collection feature in the configuration file. Logs are disabled by default.                                                                      |
-| `APM_ENABLED`     | String | Enable (`"true"`) or disable (`"false"`) the APM Agent in the configuration file. APM is enabled by default.                                                                                      |
-| `PROCESS_ENABLED` | String | Enable (`"true"`) or disable (`"false"`) the Process Agent in the configuration file. The Process Agent is disabled by default.                                                                   |
-| `CMD_PORT`        | Number | A valid port number between 0 and 65534. The Datadog Agent uses port 5001 by default for it's control API. If that port is already in use by another program, the default may be overridden here. |
-| `PROXY_HOST`      | String | If using a proxy, sets your proxy host. [Learn more about using a proxy with the Datadog Agent][4].                                                                                               |
-| `PROXY_PORT`      | Number | If using a proxy, sets your proxy port. [Learn more about using a proxy with the Datadog Agent][4].                                                                                               |
-| `PROXY_USER`      | String | If using a proxy, sets your proxy user. [Learn more about using a proxy with the Datadog Agent][4].                                                                                               |
-| `PROXY_PASSWORD`  | String | If using a proxy, sets your proxy password. [Learn more about using a proxy with the Datadog Agent][4].                                                                                           |
-| `DDAGENTUSER_NAME` | String | Override the default `ddagentuser` username used during Agent installation. [Learn more about the Datadog Windows Agent User][3]|
-|`DDAGENTUSER_PASSWORD` | String | Override the randomly generated password for the `ddagentuser` user during Agent installation. [Learn more about the Datadog Windows Agent User][3] |
+| Variable                   | Type   | Description                                                                                                                                                                                                                            |
+|----------------------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `APIKEY`                   | String | Adds the Datadog API KEY to the configuration file.                                                                                                                                                                                    |
+| `TAGS`                     | String | Comma separated list of tags to assign in the configuration file. Example: `TAGS="key_1:val_1,key_2:val_2"`                                                                                                                            |
+| `HOSTNAME`                 | String | Configures the hostname reported by the Agent to Datadog (overrides any hostname calculated at runtime).                                                                                                                               |
+| `LOGS_ENABLED`             | String | Enable (`"true"`) or disable (`"false"`) the log collection feature in the configuration file. Logs are disabled by default.                                                                                                           |
+| `APM_ENABLED`              | String | Enable (`"true"`) or disable (`"false"`) the APM Agent in the configuration file. APM is enabled by default.                                                                                                                           |
+| `PROCESS_ENABLED`          | String | Enable (`"true"`) or disable (`"false"`) the Process Agent in the configuration file. The Process Agent is disabled by default.                                                                                                        |
+| `CMD_PORT`                 | Number | A valid port number between 0 and 65534. The Datadog Agent uses port 5001 by default for it's control API. If that port is already in use by another program, the default may be overridden here.                                      |
+| `PROXY_HOST`               | String | If using a proxy, sets your proxy host. [Learn more about using a proxy with the Datadog Agent][4].                                                                                                                                    |
+| `PROXY_PORT`               | Number | If using a proxy, sets your proxy port. [Learn more about using a proxy with the Datadog Agent][4].                                                                                                                                    |
+| `PROXY_USER`               | String | If using a proxy, sets your proxy user. [Learn more about using a proxy with the Datadog Agent][4].                                                                                                                                    |
+| `PROXY_PASSWORD`           | String | If using a proxy, sets your proxy password. [Learn more about using a proxy with the Datadog Agent][4].                                                                                                                                |
+| `DDAGENTUSER_NAME`         | String | Override the default `ddagentuser` username used during Agent installation _(since v6.11.0)_. [Learn more about the Datadog Windows Agent User][3]                                                                                     |
+| `DDAGENTUSER_PASSWORD`     | String | Override the cryptographically secure password generated for the `ddagentuser` user during Agent installation _(since v6.11.0)_. Must be provided for installs on Domain Servers. [Learn more about the Datadog Windows Agent User][3] |
+| `APPLICATIONDATADIRECTORY` | Path   | Override the directory to use for the configuration file directory tree. May only be provided on initial install; not valid for upgrades. Default: `c:\programdata\datadog`. _(since v6.11.0)_                                         |
+| `PROJECTLOCATION`          | Path   | Override the directory to use for the binary file directory tree. May only be provided on initial install; not valid for upgrades. Default: `c:\Program Files\Datadog\Datadog Agent`. _(since v6.11.0)_                                |
 
 **Note**: If a valid `datadog.yaml` is found and has an `API_KEY` configured, that file takes precedence over all specified command-line options.
 

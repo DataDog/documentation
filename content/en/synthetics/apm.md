@@ -13,7 +13,7 @@ further_reading:
 
 ---
 
-<div class="alert alert-warning">Synthetics is only available in the US. Browser tests are available in beta: to request access complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics Request form</a>.</div>
+<div class="alert alert-warning">Synthetics is only available for the Datadog US site. Browser tests are available in beta: to request access complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics Request form</a>.</div>
 
 {{< img src="synthetics/apm/synthetics-apm.gif" alt="APM and Synthetics" responsive="true" style="width:80%;">}}
 
@@ -55,5 +55,5 @@ These traces are retained [just like your classical APM traces][3].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing
-[2]: https://docs.datadoghq.com/tracing/getting_further/trace_sampling_and_storage/#how-it-works
-[3]: https://docs.datadoghq.com/tracing/getting_further/trace_sampling_and_storage/#trace-storage
+[2]: https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage/#how-it-works
+[3]: https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage/#trace-storage

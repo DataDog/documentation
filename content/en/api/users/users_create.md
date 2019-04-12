@@ -1,7 +1,7 @@
 ---
 title: Create user
 type: apicontent
-order: 25.1
+order: 26.1
 external_redirect: /api/#create-user
 ---
 

@@ -11,6 +11,6 @@ external_redirect: /api/#modifier-un-commentaire
 * **`message`** [*facultatif*, *défaut*=**original message**] :
   Le texte du commentaire.
 
-* **`handle`** [*facultatif*, *défaut* = **Application key owner**] :
+* **`handle`** [*facultatif*, *défaut*=**Application key owner**] :
   Le handle de l'utilisateur qui publie le commentaire.
 
