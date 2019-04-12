@@ -50,7 +50,7 @@ L'Agent _Consul_ peut fournir davantage de métriques via DogStatsD. Ces métriq
 * Le protocole Raft
 * Les performances DNS
 
-Et bien plus encore.
+Et bien plus encore
 
 Enfin, en plus des métriques, l'Agent Datadog envoie également un check de service pour chaque check de santé de Consul, ainsi qu'un événement après chaque nouvelle élection de leader.
 
