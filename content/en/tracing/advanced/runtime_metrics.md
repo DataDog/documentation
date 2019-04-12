@@ -55,8 +55,6 @@ Python metrics collection can be enabled with one environment parameter when run
 
 Python metrics can be viewed in correlation with your Python services. See the [Service page][1] in Datadog.
 
-{{< img src="tracing/advanced/runtime_metrics/python-runtime.png" alt="Python Runtime" responsive="true" >}}
-
 **Note**: For the runtime UI, `ddtrace` >= [`0.24.0`][2] is supported.
 
 [1]: https://app.datadoghq.com/apm/services
