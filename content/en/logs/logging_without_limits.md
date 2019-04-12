@@ -83,6 +83,8 @@ To configure an exclusion filter:
 3. Save the filter
 
     {{< img src="logs/logging_without_limits/index_filter_details.png" alt="" responsive="true" style="width:80%;">}}
+    
+**Note**: If a log matches several exclusion filters, only the first exclusion filter rule is applied. A log is not sampled or excluded multiple times by different exclusion filters. 
 
 ### Example
 
