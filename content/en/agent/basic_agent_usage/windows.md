@@ -23,14 +23,14 @@ This page outlines the basic features of the Windows Datadog Agent. If you haven
 
 ## Agent installation
 
-To install the Agent, you may simply download and run the Datadog Agent MSI as Administrator.
+To install the Agent, download and run the Datadog Agent MSI **as Administrator**.
 
-Optionally, install the Agent with the command line to customize the install settings and/or run an unattended install. Each configuration item is added as an install property to the command line. For instance, the following command installs the Agent and configures the Agent configuration file with the `<DATADOG_API_KEY>`.
+Optionally, install the Agent with the command line to customize the settings and/or run an unattended installation. Each configuration item is added as an property to the command line. For instance, the following command installs and pre-configures the Agent with the `<DATADOG_API_KEY>`.
 
 * cmd: `msiexec /i datadog-agent-6-latest.amd64.msi APIKEY="<DATADOG_API_KEY>"`
 * Powershell: `Start-Process msiexec -ArgumentList '/i datadog-agent-6-latest.amd64.msi APIKEY="<DATADOG_API_KEY>"'`
 
-**Note**: Use the `/qn /i` options instead of `/i` to run an unattended install. The unattended install may take up to a few minutes to complete.
+**Note**: Use the `/qn /i` options instead of `/i` to run an unattended install. The unattended install may take a few minutes to complete.
 
 The following configuration command line options are available when installing the Agent:
 
@@ -42,15 +42,15 @@ The following configuration command line options are available when installing t
 | `LOGS_ENABLED`             | String | Enable (`"true"`) or disable (`"false"`) the log collection feature in the configuration file. Logs are disabled by default.                                                                             |
 | `APM_ENABLED`              | String | Enable (`"true"`) or disable (`"false"`) the APM Agent in the configuration file. APM is enabled by default.                                                                                             |
 | `PROCESS_ENABLED`          | String | Enable (`"true"`) or disable (`"false"`) the Process Agent in the configuration file. The Process Agent is disabled by default.                                                                          |
-| `CMD_PORT`                 | Number | A valid port number between 0 and 65534. The Datadog Agent uses port 5001 by default for it's control API. If that port is already in use by another program, the default may be overridden here.        |
+| `CMD_PORT`                 | Number | A valid port number between 0 and 65534. The Datadog Agent exposes a command API on port 5001. If that port is already in use by another program, the default may be overridden here.                  |
 | `PROXY_HOST`               | String | If using a proxy, sets your proxy host. [Learn more about using a proxy with the Datadog Agent][3].                                                                                                      |
 | `PROXY_PORT`               | Number | If using a proxy, sets your proxy port. [Learn more about using a proxy with the Datadog Agent][3].                                                                                                      |
 | `PROXY_USER`               | String | If using a proxy, sets your proxy user. [Learn more about using a proxy with the Datadog Agent][3].                                                                                                      |
 | `PROXY_PASSWORD`           | String | If using a proxy, sets your proxy password. [Learn more about using a proxy with the Datadog Agent][3].                                                                                                  |
-| `DDAGENTUSER_NAME`         | String | Creates/uses this `username` as user context for running the Datadog Agent. Default: `ddagentuser`. _(since v6.11.0)_                                                                                    |
-| `DDAGENTUSER_PASSWORD`     | String | Specifies password to assign to the Datadog Agent user. Must be provided for installs on Domain Servers. Default: cryptographically secure password generated during the install. _(since v6.11.0)_      |
-| `APPLICATIONDATADIRECTORY` | Path   | Specifies the directory to use for the configuration file directory tree. May only be provided on initial install; not valid for upgrades. Default: `c:\programdata\datadog`. _(since v6.11.0)_          |
-| `PROJECTLOCATION`          | Path   | Specifies the directory to use for the binary file directory tree. May only be provided on initial install; not valid for upgrades. Default: `c:\Program Files\Datadog\Datadog Agent`. _(since v6.11.0)_ |
+| `DDAGENTUSER_NAME`         | String | Creates/uses this `username` as user context for running the Datadog Agent. Default: `ddagentuser`. _(v6.11.0+)_                                                                                        |
+| `DDAGENTUSER_PASSWORD`     | String | Specifies a password to assign to the Datadog Agent user. Must be provided for installs on Domain Servers. Default: cryptographically secure password generated during the install. _(v6.11.0+)_           |
+| `APPLICATIONDATADIRECTORY` | Path   | Specifies the directory to use for the configuration file directory tree. May only be provided on initial install; not valid for upgrades. Default: `c:\programdata\datadog`. _(v6.11.0+)_               |
+| `PROJECTLOCATION`          | Path   | Specifies the directory to use for the binary file directory tree. May only be provided on initial install; not valid for upgrades. Default: `c:\Program Files\Datadog\Datadog Agent`. _(v6.11.0+)_      |
 
 **Note**: If a valid `datadog.yaml` is found and has an `API_KEY` configured, that file takes precedence over all specified command-line options.
 
@@ -100,7 +100,7 @@ Use the `start`, `stop`, and `restart` commands in the Datadog Agent Manager:
 
 {{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Manager snapshot" responsive="true" style="width:75%;">}}
 
-You can also use Windows Powershell if you are running a modern version of Windows:
+You can also use Windows Powershell, where available:
 `[start|stop|restart]-service datadogagent`
 
 {{% /tab %}}
