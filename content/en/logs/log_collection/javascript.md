@@ -23,16 +23,16 @@ further_reading:
 
 
 
-Send log to Datadog from web browsers or other Javascript client thanks to the Datadog Client-side JavaScript logging library.
+Send logs to Datadog from web browsers or other Javascript client thanks to the Datadog Client-side JavaScript logging library.
 
-With the `browser-agent-core` library you are able to send log directory to Datadog from JS clients and leverage the following features:
+With the `datadog-logs` library you are able to send log directory to Datadog from JS clients and leverage the following features:
 
-Use the library as a logger. Everything is forwarded to Datadog as JSON documents.
-Add `context` and extra attributes
-* Forward every JavaScript errors 
-* Forward JavaScript's console logs
-* Track real client IP address and user-agent
-* Automatic bulk posts 
+* Use the library as a logger. Everything is forwarded to Datadog as JSON documents.
+* Add `context` and extra attributes.
+* Forward every JavaScript errors.
+* Forward JavaScript's console logs.
+* Track real client IP address and useragent.
+* Automatic bulk posts.
 
 ## Get the Public API Key
 
@@ -64,7 +64,7 @@ The following parameters can be used to configure the library to send logs to Da
     <script>
       // Set your Public API key
       Datadog.init({
-        apiKey: '<PUBLIC_API_KEY>',
+        publicApiKey: '<PUBLIC_API_KEY>',
         isCollectingError: true,
     });
 
@@ -89,7 +89,7 @@ The following parameters can be used to configure the library to send logs to Da
     <script>
       // Set your Public API key
       Datadog.init({
-        apiKey: '<PUBLIC_API_KEY>',
+        publicApiKey: '<PUBLIC_API_KEY>',
         isCollectingError: true,
     });
 
