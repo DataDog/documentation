@@ -6,15 +6,22 @@ aliases:
     - /agent/faq/how-do-i-reset-my-datadog-api-keys/
 ---
 
-## API  Keys
+## API keys
 
 API keys are unique to your organization. An API key is required by the Datadog Agent to submit metrics and events to Datadog.
 
-## Application Keys
+## Application keys
 
 Application keys, in conjunction with your org's API key, give you full access to Datadog's programmatic API. Application keys are associated with the user account that created them and must be named. The application key is used to log all requests made to the API.
 
-### Add
+## Public API keys
+
+**Public API keys are in private beta**
+
+Public API keys are unique to your organization. A Public API key is required by the [web browser log collector][3] to submit logs to Datadog.
+Those keys can only be used to send web browser logs to Datadog.
+
+## Add
 
 To add a Datadog API or application or public API key, navigate to [Integration -> APIs][1], enter a name for your key, and click **Create API key** or **Create Application Key** or **Create Public Api Key**.
 
@@ -24,16 +31,11 @@ To add a Datadog API or application or public API key, navigate to [Integration 
 * Key names must be unique across your org.
 * Application key names cannot be blank.
 
-### Remove
+## Remove
 
 To remove a Datadog API or application or public API key, navigate to [Integration -> APIs][1] and select the **Revoke** button next to the key you want to remove:
 
 {{< img src="account_management/faq/Application_Keys.jpg" alt="Application Keys" responsive="true" >}}
-
-## Public API keys
-
-Public API keys are unique to your organization. A Public API key is required by the [web browser log collector][3] to submit logs to Datadog.
-Those keys can only be used to send web browser logs to Datadog.
 
 ## Troubleshooting
 
