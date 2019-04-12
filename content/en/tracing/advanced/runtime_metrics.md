@@ -49,11 +49,13 @@ By default, JVM metrics from your application are sent to the Datadog Agent over
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Python metrics collection can be enabled with one environment parameter when running with `ddtrace-run`:
+This feature is currently in **BETA**. Reach out to the [the Datadog support team][1] to be part of the beta.
+
+Runtime metrics collection can be enabled with one environment parameter when running with `ddtrace-run`:
 
 * Environment Variable: `DD_RUNTIME_METRICS_ENABLED=true`
 
-Python metrics can be viewed in correlation with your Python services. See the [Service page][1] in Datadog.
+Runtime metrics can be viewed in correlation with your Python services. See the [Service page][1] in Datadog.
 
 **Note**: For the runtime UI, `ddtrace` >= [`0.24.0`][2] is supported.
 
