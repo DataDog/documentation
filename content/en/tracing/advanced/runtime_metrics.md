@@ -149,9 +149,14 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
+The following metrics are collected by default after enabling Runtime metrics.
 
-[1]: /help
+{{< get-metrics-from-git "ruby" >}}
+
+Along with displaying these metrics in your APM Service Page, Datadog provides a [default Ruby Runtime Dashboard][1] with the `service` and `runtime-id` tags that are applied to these metrics.
+
+[1]: https://app.datadoghq.com/dash/integration/XYZ/ruby-runtime-metrics
+
 {{% /tab %}}
 {{% tab "Go" %}}
 
