@@ -88,19 +88,18 @@ metadata:
     ad.datadoghq.com/service.instances: |
       [
         {
-          "name": "My Nginx",
+          "name": "My Nginx Service",
           "url": "http://%%host%%",
           "timeout": 1
         }
       ]
-    ad.datadoghq.com/endpoints.check_names: '["http_check"]'
+    ad.datadoghq.com/endpoints.check_names: '["nginx"]'
     ad.datadoghq.com/endpoints.init_configs: '[{}]'
     ad.datadoghq.com/endpoints.instances: |
       [
         {
-          "name": "My Nginx",
-          "url": "http://%%host%%",
-          "timeout": 1
+          "name": "My Nginx Service Endpoints",
+          "nginx_status_url": "http://%%host%%/nginx_status/"
         }
       ]
 spec:
@@ -124,23 +123,22 @@ The Agent `configcheck` command should show the instance, with the `endpoints-ch
 ```
 # kubectl exec <NODE_AGENT_POD_NAME> agent configcheck
 ...
-=== http_check check ===
+=== nginx check ===
 Source: endpoints-checks
-Instance ID: http_check:My Nginx:57439fa243cf217c
-name: My Nginx
+Instance ID: nginx:My Nginx Service Endpoints:96eff84ce7d742b9
+name: My Nginx Service Endpoints
+nginx_status_url: http://10.0.0.116/nginx_status/
 tags:
-- pod_phase:running
-- kube_service:my-nginx
-- kube_deployment:my-nginx
+- kube_deployment:nginx
 - kube_namespace:default
-timeout: 1
-url: http://10.0.0.196
+- kube_service:nginx
+- pod_phase:running
 ~
 Init Config:
 {}
 Auto-discovery IDs:
-* kube_endpoint://default/my-nginx
-* kubernetes_pod://6c848f40-5d35-11e9-ae71-42010af0016b
+* kube_endpoint://default/nginx
+* kubernetes_pod://e8667db4-5f8e-11e9-ae71-42010af0016b
 * kube_service://6c964fcf-5d35-11e9-ae71-42010af0016b
 ===
 ```
@@ -152,14 +150,14 @@ The Agent `status` command should show the check instance running and reporting 
 ```
 # kubectl exec <NODE_AGENT_POD_NAME> agent status
 ...
-   http_check (3.2.1)
-    ------------------
-      Instance ID: http_check:My Nginx:57439fa243cf217c [OK]
-      Total Runs: 5
-      Metric Samples: Last Run: 3, Total: 15
+    nginx (3.1.0)
+    -------------
+      Instance ID: nginx:My Nginx Service Endpoints:96eff84ce7d742b9 [OK]
+      Total Runs: 2
+      Metric Samples: Last Run: 7, Total: 14
       Events: Last Run: 0, Total: 0
-      Service Checks: Last Run: 1, Total: 5
-      Average Execution Time : 61ms
+      Service Checks: Last Run: 1, Total: 2
+      Average Execution Time : 86ms
 ```
 
 ## Further Reading
