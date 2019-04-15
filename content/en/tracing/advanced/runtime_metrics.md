@@ -185,7 +185,7 @@ The following metrics are collected by default after enabling Runtime metrics.
 
 Along with displaying these metrics in your APM Service Page, Datadog provides a [default Ruby Runtime Dashboard][1] with the `service` and `runtime-id` tags that are applied to these metrics.
 
-[1]: https://app.datadoghq.com/dash/integration/30193/ruby-runtime-metrics
+[1]: https://app.datadoghq.com/dash/integration/30268/ruby-runtime-metrics
 
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -203,7 +203,7 @@ The following metrics are collected by default after enabling Runtime metrics.
 
 Along with displaying these metrics in your APM Service Page, Datadog provides a [default Node Runtime Dashboard][1] with the `service` and `runtime-id` tags that are applied to these metrics.
 
-[1]: https://app.datadoghq.com/dash/integration/30191/node-runtime-metrics
+[1]: https://app.datadoghq.com/dash/integration/30269/node-runtime-metrics
 {{% /tab %}}
 {{% tab ".NET" %}}
 
