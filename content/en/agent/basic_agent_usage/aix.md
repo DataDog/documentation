@@ -17,7 +17,17 @@ This page outlines the installation and configuration of the Datadog UNIX Agent 
 
 ## Installation
 
-An easy, one-step ksh install script has been provided on the [Agent download page](https://app.datadoghq.com/account/settings#agent/aix) within Datadog. Alternatively, download links for the latest releases can be found on [this page][1].
+An easy, one-step ksh install script has been provided on the [Agent download page](https://app.datadoghq.com/account/settings#agent/aix) within Datadog. The script supports the following environment variables:
+* **CHANNEL**: defaults to stable. Specifies the package repository channel
+  * Values: `stable`, `beta`, `unstable`
+* **VERSION**: defaults to latest. Specifies the package version
+* **PROXY**: defaults to none. Specifies the proxy uri
+  * Example: `http://proxy.foo.com`
+* **PROXY_USER**: defaults to empty. Specifies the proxy server username
+* **PROXY_PASSWORD**: defaults to empty. Specifies the proxy server password
+* **INSECURE**: defaults to `false`. Allows skipping TLS validation
+
+Alternatively, download links for the latest releases can be found on [this page][1].
 
 The installer may be executed as follows (as root):
 
