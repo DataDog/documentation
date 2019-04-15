@@ -1,5 +1,5 @@
 ---
-title: Running Cluster Checks with Autodiscovery
+title: Running Endpoints Checks with Autodiscovery
 kind: documentation
 further_reading:
 - link: "/agent/autodiscovery"

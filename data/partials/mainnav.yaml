@@ -89,6 +89,8 @@ main:
         children:
           - name: "Cluster Checks"
             url: "agent/autodiscovery/clusterchecks"
+          - name: "Endpoints Checks"
+            url: "agent/autodiscovery/endpointschecks"
       - name: "Proxy"
         url: "agent/proxy"
       ## Upgrade to Agent v6
