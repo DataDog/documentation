@@ -2,83 +2,16 @@
 title: Division in Monitor Evaluations
 kind: guide
 aliases:
-  - /monitors/faq/Division-in-Monitor-Evaluations
+  - /monitors/guide/division-in-monitor-evaluations
 ---
 
 ## Overview
 
-Creating an alert based on a query with division is a common practice. There are some tools and behaviors that should be considered to ensure monitor settings are appropriate for evaluating these queries as intended.
-
-## Error Rate Example
-
-Suppose you want to monitor an error rate over 5 minutes using the metrics, `requests.error` and `requests.total`. There are 2 possible ways to perform this calculation.
-
-Consider a single evaluation performed with these aligned timeseries points for the 5 min timeframe:
-
-**Numerator**: `sum:requests.error{*}`
-
-```
-| Timestamp             | Value       |
-| :-------------------- | :---------- |
-| 2018-03-13 11:00:30   | 1           |
-| 2018-03-13 11:01:30   | 2           |
-| 2018-03-13 11:02:40   | 3           |
-| 2018-03-13 11:03:30   | 4           |
-| 2018-03-13 11:04:40   | 5           |
-```
-
-**Denominator**: `sum:requests.total{*}`
-
-```
-| Timestamp             | Value    |
-| :-------------------- | :------- |
-| 2018-03-13 11:00:30   | 5        |
-| 2018-03-13 11:01:30   | 5        |
-| 2018-03-13 11:02:40   | 5        |
-| 2018-03-13 11:03:30   | 5        |
-| 2018-03-13 11:04:40   | 5        |
-```
-
-### Division with `as_count()`
-
-Monitors involving division and at least 1 `as_count()` modifier use a separate evaluation path than other monitors. This impacts queries of the format `queryA.as_count() / queryB.as_count()`. Queries without division (`+`, `-`, or `*`) are not impacted.
-
-Refer this query **`as_count_eval_path`**:
-
-```
-sum(last_5m): sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count()
-```
-
-and this query **`classic_eval_path`**\*:
-
-```
-sum(last_5m): sum:requests.error{*}.as_rate() / sum:requests.total{*}.as_rate()
-```
-
-Compare the result of the evaluation depending of the path:
-
-| Path                     | Behavior                                       | Expanded expression         | Result  |
-| :----------------------- | :--------------------------------------------- | :-------------------------- | :------ |
-| **`as_count_eval_path`** | Aggregation function applied _before_ division | **(1+2+...+5)/(5+5+...+5)** | **0.6** |
-| **`classic_eval_path`**  | Aggregation function applied _after_ division  | **(1/5 + 2/5 + ... + 5/5)** | **3**   |
-
-You could also use `avg` and `as_rate()` to get the same result as `sum` and `as_count()` :
-
-```
-avg(last_5m): sum:requests.error{*}.as_rate() / sum:requests.total{*}.as_rate()
-```
-
-| Path                    | Behavior                                      | Expanded expression           | Result  |
-| :---------------------- | :-------------------------------------------- | :---------------------------- | :------ |
-| **`classic_eval_path`** | Aggregation function applied _after_ division | **(1/5 + 2/5 + ... + 5/5)/5** | **0.6** |
-
-_Note that all evaluations above are mathematically correct. Choose a method to suit your intention._
-
-\*If the metric is a rate, you can optionally omit `.as_rate()`. Include this modifier to be explicit.
+Creating an alert based on a query with division is a common practice. There are some tools and behaviors that should be considered to ensure a monitor's settings are appropriate for evaluating these queries as intended.
 
 ## Sparse Metrics
 
-In case of sparse or _0_ metrics in the denominator some results are rejected in case of the `classic_eval_path`.
+In case of sparse or _0_ metrics in the denominator some results are rejected in case of the `classic_eval_path`.  For an explanation of the different eval paths, read [as_count() Monitor Evaluations][1]
 
 Let's consider the following metric values:
 
@@ -130,67 +63,65 @@ The `rollup()` function will create time buckets based on time intervals you def
 
 ## `.fill()`
 
-You can apply a `.fill()` function to ensure all time buckets have valid values. For **gauge** metric types, the default interpolation is linear or `.fill(linear)`. For **count** and **rate** type metrics, the default is `.fill(null)`, which disables interpolation.
+You can apply a `.fill()` function to ensure all time buckets have valid values. For **gauge** metric types, the default interpolation is linear or `.fill(linear)` for 5 minutes. For **count** and **rate** type metrics, the default is `.fill(null)`, which disables interpolation.
 
-**Original**: `sum:my_metric.misaligned.groups.rate{env:a} by {timer,env}`
+**Original**: `sum:my_metric.has_gaps.gauge{env:a} by {timer,env}`
 
 ```
-| Timestamp             | timer:1min,env:a    | timer:2min,env:a    |
+| Timestamp             | timer:norm,env:a    | timer:offset,env:a  |
 | :-------------------- | :------------------ | :------------------ |
-| 2019-03-29 12:00:00   | 1                   | 1                   |
-| 2019-03-29 12:01:00   | 1                   |                     |
-| 2019-03-29 12:02:00   | 1                   | 1                   |
-| 2019-03-29 12:03:00   | 1                   |                     |
-| 2019-03-29 12:04:00   | 1                   | 1                   |
+| 2019-03-29 12:00:00   | 1                   |                     |
+| 2019-03-29 12:05:00   |                     | 1                   |
+| 2019-03-29 12:10:00   | 0                   |                     |
+| 2019-03-29 12:15:00   |                     | 1                   |
+| 2019-03-29 12:20:00   | 1                   |                     |
+| 2019-03-29 12:25:00   |                     | 1                   |
+| 2019-03-29 12:30:00   | 1                   |                     |
 ```
 
-Let's assume that `my_metric.misaligned.groups` is metric type **rate** so there is no interpolation as default. Consider this query:
+Let's assume that `my_metric.has_gaps.gauge` is metric type **gauge** so there is linear interpolation for 5 minutes as default, but the metric reports once every 10 minutes. Consider this query:
 
 ```
-sum(last_5m):sum:my_metric.misaligned.groups.rate{timer:1min,env:a} / sum:my_metric.misaligned.groups.rate{timer:2min,env:a}
+sum(last_30m):sum:my_metric.has_gaps.gauge{timer:norm,env:a} / sum:my_metric.has_gaps.gauge{timer:offset,env:a}
 ```
 
-You would see the following
+You would see mainly "skipped" evaluations.
 
-| Path                | Evaluation                          | Result |
-| :------------------ | :---------------------------------- | :----- |
-| `classic_eval_path` | **1/1 + 1/Nan + 1/1 + 1/Nan + 1/1** | 3      |
+| Path                | Evaluation                               | Result |
+| :------------------ | :--------------------------------------- | :----- |
+| `classic_eval_path` | **1/Nan + Nan/1 + ... + 1/Nan + Nan/1**  |   N/A  |
 
-By adding interpolation, you can ensure that metrics at every time interval
+By adjusting the interpolation, you can ensure that there are metrics at every time interval
 
-**Modified**: `sum:my_metric.misaligned.groups.rate{env:a} by {timer,env}.fill(last)`
+**Modified**: `sum:my_metric.has_gaps.gauge{env:a} by {timer,env}.fill(last,900)`
 
 ```
-| Timestamp             | timer:1min,env:a    | timer:2min,env:a    |
+| Timestamp             | timer:norm,env:a    | timer:offset,env:a  |
 | :-------------------- | :------------------ | :------------------ |
-| 2019-03-29 12:00:00   | 1                   | 1                   |
-| 2019-03-29 12:01:00   | 1                   | 1                   |
-| 2019-03-29 12:02:00   | 1                   | 1                   |
-| 2019-03-29 12:03:00   | 1                   | 1                   |
-| 2019-03-29 12:04:00   | 1                   | 1                   |
+| 2019-03-29 12:00:00   | 1                   | (1)                 |
+| 2019-03-29 12:05:00   | 1                   | 1                   |
+| 2019-03-29 12:10:00   | 0                   | 1                   |
+| 2019-03-29 12:15:00   | 0                   | 1                   |
+| 2019-03-29 12:20:00   | 1                   | 1                   |
+| 2019-03-29 12:25:00   | 1                   | 1                   |
+| 2019-03-29 12:30:00   | 1                   | 1                   |
 ```
 
 Modified query:
 
 ```
-sum(last_5m):sum:my_metric.misaligned.groups.rate{timer:1min,env:a} / sum:my_metric.misaligned.groups.rate{timer:2min,env:a}.fill(last)
+sum(last_30m):sum:my_metric.has_gaps.gauge{timer:norm,env:a}.fill(last,900) / sum:my_metric.has_gaps.gauge{timer:offset,env:a}.fill(last,900)
 ```
 
-With `.fill(last)` the new result would be:
+With `.fill(last,900)` the new result would be:
 
-| Path                | Evaluation                      | Result |
-| :------------------ | :------------------------------ | :----- |
-| `classic_eval_path` | **1/1 + 1/1 + 1/1 + 1/1 + 1/1** | 5      |
+| Path                | Evaluation                                    | Result |
+| :------------------ | :-------------------------------------------- | :----- |
+| `classic_eval_path` | **(1)/1 + 1/1 + 0/1 + 0/1 + 1/1 + 1/1 + 1/1** | 5      |
 
 ## Short Evaluation Windows
 
-Monitors can have timing issues with division queries over short evaluation windows. While Datadog's pipeline is quite efficient, considering that the transmission of a metric commonly happens through this standard path outlined below, it is certainly not reasonable to expect this to happen instantaneously:
-
-```
-Datadog Agent (15-20s) -> The Web -> Datadog Intake and Processing -> Monitor Query
-```
-
-If your monitor query requires division over an evaluation window of 1 minute, the numerator and denominator represent time buckets on the order of a few seconds. Whether through a small delay in any part of the pipeline, or a query that is slowed due to a large number of contexts, querying the available values for the most recent time buckets could produce incomplete results for one of the operands, despite the metric being available soon after evaluation time.
+It is possible to have timing issues in monitors with division over short evaluation windows.  If your monitor query requires division over an evaluation window of 1 minute, the numerator and denominator represent time buckets on the order of a few seconds. Whether a query that is slow due to a large number of contexts, or there is a small delay in any part of the pipeline, if metrics for the numerator and denominator aren't both available at query time, you could get unwanted evaluation values.
 
 ```
 | Timestamp             | sum:my_num{*}       | sum:my_denom{*}     |
@@ -202,10 +133,11 @@ If your monitor query requires division over an evaluation window of 1 minute, t
 | 2019-03-29 13:30:56   | 120 (inc)           | 850 (inc)           |
 ```
 
-In the case of a query like `avg(last_1m):sum:my_num{*}/sum:my_denom{*}`, the average value could be skewed quite a bit and could trigger your monitor unintentionally.
+In the case of a query like `min(last_1m):sum:my_num{*}/sum:my_denom{*}`, the minimum value could be skewed quite a bit and could trigger your monitor unintentionally.
 
-Therefore, adding a short evaluation delay of 30-60 seconds to adjust for a reasonable expectation of data transmission and processing should be considered for queries with divison over short evaluation windows, especially for metrics with a large number of tags.
+Therefore, adding a short evaluation delay of 30-60 seconds to adjust for timing issues should be considered for queries with divison over short evaluation windows.  Alternatively, increasing to a 5 minute evaluation window can help.
 
-[Reach out to the Datadog support team][1] if you have any questions regarding this logic.
+[Reach out to the Datadog support team][2] if you have any questions regarding this logic.
 
-[1]: /help
+[1]: /monitors/guide/as-count-in-monitor-evaluations
+[2]: /help
