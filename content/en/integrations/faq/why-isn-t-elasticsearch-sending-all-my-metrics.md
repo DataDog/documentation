@@ -8,4 +8,4 @@ If this is the case, change your `elastic.yaml` configuration file to include `c
 
 Make sure to [restart your Agent][1] after updating this configuration, and you should be seeing more metrics coming in from this configuration.
 
-[1]: /agent/faq/agent-commands/#start-stop-restart-the-agent
+[1]: /agent/guide/agent-commands/#start-stop-restart-the-agent

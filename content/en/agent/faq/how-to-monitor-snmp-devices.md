@@ -172,4 +172,4 @@ In the Metrics Explorer or a dashboard, you can plot `snmp.ifInOctets`, filter b
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/faq/agent-commands
+[1]: /agent/guide/agent-commands

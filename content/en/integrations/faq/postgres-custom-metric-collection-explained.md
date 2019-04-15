@@ -92,8 +92,8 @@ Additionally, the [Agent's logs][5] may provide useful information.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/faq/agent-configuration-files/#agent-configuration-directory
-[2]: /agent/faq/agent-commands/?tab=agentv6#restart-the-agent
+[1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
 [3]: /graphing/metrics/explorer
-[4]: /agent/faq/agent-commands/#agent-status-and-information
-[5]: /agent/faq/agent-log-files
+[4]: /agent/guide/agent-commands/#agent-status-and-information
+[5]: /agent/guide/agent-log-files

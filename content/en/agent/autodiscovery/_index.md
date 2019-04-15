@@ -303,7 +303,7 @@ Again, the order of each list matters. The Agent can only generate the HTTP chec
 
 
 [1]: /integrations/consul
-[2]: /agent/faq/agent-commands
+[2]: /agent/guide/agent-commands
 [3]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
 {{% /tab %}}
 {{% tab "Kubernetes" %}}

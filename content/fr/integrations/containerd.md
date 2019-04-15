@@ -25,7 +25,7 @@ supported_os:
 ---
 ## Présentation
 
-Ce check surveille le délai d'exécution de conteneur de Containerd.
+Ce check surveille le délai de runtime de conteneur de Containerd.
 
 ## Implémentation
 

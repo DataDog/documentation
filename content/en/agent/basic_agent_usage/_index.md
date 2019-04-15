@@ -9,10 +9,10 @@ further_reading:
 - link: "agent/faq/how-datadog-agent-determines-the-hostname"
   tag: "FAQ"
   text: "How does Datadog determine the Agent hostname?"
-- link: "agent/faq/agent-commands"
+- link: "agent/guide/agent-commands"
   tag: "FAQ"
   text: "List of all Agent commands"
-- link: "agent/faq/agent-configuration-files"
+- link: "agent/guide/agent-configuration-files"
   tag: "FAQ"
   text: "Location of all Agent configuration files"
 ---
@@ -89,7 +89,7 @@ To send your Agent data to the [Datadog EU site][5], edit your [Agent main confi
 [1]: /integrations
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: /agent/guide/integration-management
-[4]: /agent/faq/agent-configuration-files
+[4]: /agent/guide/agent-configuration-files
 [5]: https://app.datadoghq.eu
-[6]: /agent/faq/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[7]: /agent/faq/agent-log-files
+[6]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[7]: /agent/guide/agent-log-files

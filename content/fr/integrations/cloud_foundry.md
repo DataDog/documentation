@@ -1,4 +1,7 @@
 ---
+{}
+---
+---
 integration_title: Cloud Foundry
 name: cloudfoundry
 kind: integration
@@ -194,7 +197,7 @@ Si vous souhaitez créer votre propre version, consultez le [référentiel de la
 
 #### Configurer l'Agent en tant que complément dans votre Director BOSH
 
-Ajoutez ce qui suit au fichier de configuration d'exécution de votre Director BOSH (par exemple, `runtime.yml`) :
+Ajoutez ce qui suit au fichier de configuration de runtime de votre Director BOSH (par exemple, `runtime.yml`) :
 
 ```
 ---
@@ -255,7 +258,7 @@ Tout ce que vous configurez dans `runtime.yml` s'applique à chaque nœud. Vous 
 
 Pour personnaliser la configuration pour les checks par défaut (système, réseau, disque et NTP), consultez la [liste complète des options de configuration][18] de la version BOSH de l'Agent Datadog.
 
-#### Synchroniser la configuration d'exécution pour le Director
+#### Synchroniser la configuration de runtime pour le Director
 
 ```
 # v1 de l'interface de ligne de commande BOSH
@@ -276,7 +279,7 @@ bosh -n deploy --recreate
 bosh -n -d <VOTRE_DÉPLOIEMENT> -e <ENV_BOSH> deploy --recreate <MANIFESTE_VOTRE_DÉPLOIEMENT>.yml
 ```
 
-Comme la configuration de l'exécution est appliquée de manière globale, BOSH redéploie chaque nœud dans votre déploiement. Si vous comptez plusieurs déploiements, redéployez-les tous afin d'installer l'Agent Datadog partout.
+Comme la configuration de runtime est appliquée de manière globale, BOSH redéploie chaque nœud dans votre déploiement. Si vous comptez plusieurs déploiements, redéployez-les tous afin d'installer l'Agent Datadog partout.
 
 #### Vérifier que l'Agent est installé partout
 
@@ -394,7 +397,7 @@ Depuis la page [Metrics Explorer][22] de Datadog, recherchez des métriques qui 
 
 ### Métriques
 
-Les métriques suivantes sont envoyées par le Firehose Nozzle de Datadog (`cloudfoundry.nozzle`). L'Agent Datadog n'envoie pas de métriques spéciales, mais uniquement les métriques habituelles des checks d'Agent que vous avez défini dans la configuration de l'exécution du Director (et, par défaut, les métriques [système][23], [réseau][24], [disque][25] et [NTP][26]).
+Les métriques suivantes sont envoyées par le Firehose Nozzle de Datadog (`cloudfoundry.nozzle`). L'Agent Datadog n'envoie pas de métriques spéciales, mais uniquement les métriques habituelles des checks d'Agent que vous avez défini dans la configuration de runtime du Director (et, par défaut, les métriques [système][23], [réseau][24], [disque][25] et [NTP][26]).
 
 Le Firehose Nozzle de Datadog recueille uniquement les CounterEvents (en tant que métriques et non en tant qu'événements), les ValueMetrics et les ContainerMetrics. Il ignore les LogMessages et les Errors.
 
