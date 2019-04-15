@@ -11,7 +11,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-The monitor uptime widget is in private beta. Private beta is currently closed for new requests, but you can <a href="https://goo.gl/forms/KmWpQebCeeOdpPAq1">sign up to be included in the beta waitlist</a>.
+The monitor uptime widget is in open beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on the feature for your account.
 </div>
 
 {{< img src="monitors/monitor_uptime_widget.png" alt="monitor uptime widget" responsive="true" >}}
