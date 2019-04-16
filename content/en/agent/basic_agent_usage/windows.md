@@ -23,7 +23,7 @@ This page outlines the basic features of the Windows Datadog Agent. If you haven
 
 ## Agent installation
 
-**Starting with release `6.11.0`, the Windows Agent main components (i.e. Core, APM/Trace, and Process) run under the `ddagentuser` account, created at install time, instead of running on prior version under the `LOCAL_SYSTEM` account.**
+**Starting with release `6.11.0`, the Windows Agent main components (i.e. Core and APM/Trace) run under the `ddagentuser` account, created at install time, instead of running on prior version under the `LOCAL_SYSTEM` account.**
 
 [Refer to the dedicated ddagentuser FAQ to learn more.][3]
 
@@ -38,7 +38,6 @@ Optionally, install the Agent with the command line to customize the settings an
 
 The following configuration command line options are available when installing the Agent:
 
-<<<<<<< HEAD
 | Variable                   | Type   | Description                                                                                                                                                                                                                       |
 |----------------------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `APIKEY`                   | String | Adds the Datadog API KEY to the configuration file.                                                                                                                                                                               |
