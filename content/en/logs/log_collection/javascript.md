@@ -43,7 +43,7 @@ To manage your Public API keys, go to your [Datadog API configuration page][4] i
 
 {{< img src="logs/log_collection/public_key.png" style="width:80%;" alt="Public API Keys" responsive="true" >}}
 
-Read our [Public API keys documentation][3] to learn more about the restrictions that applies.
+Read the [Public API keys documentation][3] to learn more about the restrictions that applies.
 
 ## Configure the Javascript logger
 
