@@ -4,7 +4,7 @@ kind: faq
 disable_toc: true
 ---
 
-**Starting with release `6.11`, the Windows Agent main components (i.e. Core, and APM/Trace) run under the `ddagentuser` account, created at install time, instead of running on prior version under the `LOCAL_SYSTEM` account.**
+**Starting with release `6.11.0`, the Core and APM/Trace components of the Windows Agent run under the `ddagentuser` account, created at install time, instead of running on prior versions under the `LOCAL_SYSTEM` account. If enabled, the Live Process component still runs under `LOCAL_SYSTEM`. **
 
 The user `ddagentuser` is created at install time for the Datadog Windows Agent. When installed on an Active Directory server, the username and password must be provided to the installer. The new user is a non-privileged user. It gains the following rights during installation:
 
@@ -65,7 +65,7 @@ The change to `ddagentuser` affects your JMX-based integrations if the Agent’s
 
 2. **AND** you’ve configured the integration with the `process_name_regex` setting instead of the `host` and `port` settings
 
-If you’re using the Attach API, the change in user context means that the Agent’s JMXFetch is only be able to connect to the JVMs that also run under the `ddagentuser` user context. In most cases, it's recommended that you switch JMXFetch by enabling JMX Remote on your target JVMs and configuring your JMX integrations using `host` and `port`. For more information, refer to the [JMX documentation][4].
+If you’re using the Attach API, the change in user context means that the Agent’s JMXFetch is only be able to connect to the JVMs that also run under the `ddagentuser` user context. In most cases, it's recommended that you switch JMXFetch to using JMX Remote by enabling JMX Remote on your target JVMs and configuring your JMX integrations using `host` and `port`. For more information, refer to the [JMX documentation][4].
 
 ### Process check
 
