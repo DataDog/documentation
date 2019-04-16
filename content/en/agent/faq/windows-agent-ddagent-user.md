@@ -80,6 +80,7 @@ For the Cassandra Nodetool integration to continue working, apply the following 
 
 * Grant access to the Nodetool installation directory to the `ddagentuser`.
 * Set the environment variables of the Nodetool installation directory (e.g. `CASSANDRA_HOME` and `DSCINSTALLDIR`) as system-wide variables instead of variables only for the user doing the Nodetool installation.
+
 [1]: /integrations/activemq
 [2]: /integrations/activemq/#activemq-xml-integration
 [3]: /integrations/cassandra
