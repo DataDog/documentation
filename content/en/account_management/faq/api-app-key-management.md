@@ -16,7 +16,9 @@ Application keys, in conjunction with your org's API key, give you full access t
 
 ## Public API keys
 
-**Public API keys are in private beta**
+<div class="alert alert-warning">
+Public API keys are in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on this feature for your account.
+</div>
 
 Public API keys are unique to your organization. A public API key is required by the [web browser log collector][3] to submit logs to Datadog.
 Those keys can only be used to send web browser logs to Datadog.
