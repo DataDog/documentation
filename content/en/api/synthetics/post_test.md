@@ -45,16 +45,15 @@ Create a Synthetics test to initiate and configure the tests you want Datadog to
 *   **`target`** - _required_ - The value of the parameter you want to test. For `header`, valid values are any of the valid values for the header key that you define in `property`. For `statusCode`, valid values are valid status codes. For `responseTime`, valid values are response times.
 *   **`request`** - _required_ - the array where you define your API that you want Datadog to test. Make sure to include any required authentication information.
 *   **`method`** - _required_ - The method of the API to test. Valid values are `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`.
-*   **`url`** - _required_ - The endpoint for the API Datadog is testing
+*   **`url`** - _required_ - The endpoint for the API Datadog is testing.
 *   **`timeout`** - _optional_ - When the API request will timeout.
-*   **`headers`** - _optional_ - Headers in the API request. [Is there a max nuber of headers?]
-*   **`body`** - _optional_ The JSON body for the API request. [do we just support JSON, or do we support things like multipart/form data?]
-*   **`locations`** - _optional_ - A list of the locations that you want the tests to be sent from. Valid values are `aws:` followed by any valid AWS region, for example, `aws:ap-south-1`. For a full list of valid AWS regions, see [the AWS documentation][2]. [do we really support all of them?]
+*   **`headers`** - _optional_ - Headers in the API request.
+*   **`body`** - _optional_ The JSON body for the API request.
+*   **`locations`** - _required_ - A list of the locations that you want the tests to be sent from. Valid values are `aws:` followed by any valid AWS region. Valid values are: `aws:eu-central-1`, `aws:ap-northeast-1`, `aws:us-west-2`, `aws:eu-west-2`, `aws: ca-central-1`, `aws:us-east-2`, and `aws:ap-southeast-2`. At least one value is required, and you can use all locations.
 *   **`message`** - _required_ - A description of the test.
 *   **`name`** - _required_ - A unique name for the test.
-*   **`options`** - _optional_ - Use advanced options to specify custom request headers, authentication credentials, body content, cookies, or to have the test follow redirects. Valid objects are ``, ``,  
+*   **`options`** - _optional_ - Use advanced options to specify custom request headers, authentication credentials, body content, cookies, or to have the test follow redirects.  
 *   **`tags`** - _optional_ - Tags you want to use to filter your test when you are viewing it in Datadog. For more info on custom tags, see [Using tags][1].
 *   **`type`** - _required_ - the type of test. Valid values are `api` and `browser`.
 
 [1]: /tagging/using_tags
-[2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html
