@@ -17,7 +17,7 @@ further_reading:
   text: "Configure an API Tests"
 ---
 
-<div class="alert alert-warning">Synthetics is only available on our US hosted instances. Browser tests are available in beta: to request access complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics Request form</a>.</div>
+<div class="alert alert-warning">Synthetics is only available on our US hosted instances.</div>
 
 ## Overview
 
