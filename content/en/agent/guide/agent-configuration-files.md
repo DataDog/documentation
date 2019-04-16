@@ -69,7 +69,7 @@ Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/
 | Suse                                 | `/etc/datadog-agent/conf.d/`   |
 | Ubuntu                               | `/etc/datadog-agent/conf.d/`   |
 | Windows Server 2008, Vista and newer | `\\ProgramData\Datadog\conf.d` |
-| Windows Server 2003, XP or older     | *unsupported Platform*         |
+| Windows Server 2003, XP or older     | *unsupported platform*         |
 
 ### Checks configuration files for Agent 6
 
