@@ -11,14 +11,14 @@ Beta functions are available by editing the query JSON directly.
 | ---------------- | --------------------------------------- | -------------------------------- |
 | `default_zero()` | Adds a default value to sparse metrics. | `default_zero(system.load.1{*})` |
 
-The `default_zero` function fills empty intervals using interpolation (if it is enabled, which is the default for `GAUGE` type metrics) or the value 0. Like most functions, it is evaluated **after** [time and space aggregation][1].
+The `default_zero` function fills empty intervals using interpolation (if interpolation is enabled, which is the default for `GAUGE` type metrics) or the value 0. Like most functions, it is evaluated **after** [time and space aggregation][1].
 
 ### Use Cases
 
 The `default_zero` function is intended to address the following use cases (though it may also work for other use cases):
 
 - Aligning gauges as 0 when performing arithmetic on sparse metrics (note: `COUNT` or `RATE` type metrics queried `as_count()` or `as_rate()` are _always_ aligned as 0, so using `default_zero` does not change how they are aligned; it  only affects `GAUGE` type metrics)
-- Resolving monitors from a no data condition. This works for both simple and multi alerts, however the value 0 must not cause the monitor to trigger. For example, this would not work for a monitor with the query `avg(last_10m):avg:system.cpu.idle{*} < 10` because this monitor triggers (instead of resolving) when it evaluates to 0. Avoid using this function for [error rate monitors with `as_count()` queries][2]; it isn't usually necessary, and it causes them to use the classic eval path.
+- Resolving monitors from a no data condition. This works for both simple and multi alerts, however the value 0 must not cause the monitor to trigger. For example, this would not work for a monitor with the query `avg(last_10m):avg:system.cpu.idle{*} < 10` because this monitor triggers (instead of resolving) when it evaluates to 0. Avoid using this function for [error rate monitors with `as_count()` queries][2]; it usually isn't necessary, and it causes them to use the classic eval path.
 - Filling in empty intervals in sparse (but nonempty) series for visual reasons or to affect the min/max/average of a timeseries in a monitor evaluation
 - Showing the value 0 on the query value widget when there is no data
 
@@ -30,7 +30,7 @@ To demonstrate how the `default_zero` function works, we created a single point 
 $ echo -n "custom_metric:1|g" | nc -4u -w0 127.0.0.1 8125
 ```
 
-When this metric is queried over the last 30 minutes, there is a single timestamp, because only one of the query's rollup intervals has a point:
+When this metric is queried over the past 30 minutes, there is a single timestamp, because only one of the query's rollup intervals has a point:
 
 ```
 avg:custom_metric{*}
@@ -100,5 +100,5 @@ default_zero(avg:custom_metric{*})
 {{< /whatsnext >}}
 
 [1]: /getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
-[2]: /monitors/guide/as-count-monitor-evaluation/#overview
+[2]: /monitors/guide/as-count-monitor-evaluation/
 [3]: /developers/dogstatsd/datagram_shell/#sending-metrics
