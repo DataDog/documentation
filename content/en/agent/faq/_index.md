@@ -25,7 +25,7 @@ private: true
 * [Why should I install the Datadog Agent on my cloud instances?][19]
 * [The Datadog Agent for Logs or Traces Only][20]
 * [Install the Agent with AWS SSM][21]
-* [How do I use Kubernetes secrets to set my APi key?][22]
+* [How do I use Kubernetes secrets to set my API key?][22]
 
 
 [1]: /agent/faq/getting-further-with-docker
