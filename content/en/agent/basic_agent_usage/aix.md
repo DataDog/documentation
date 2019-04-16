@@ -5,7 +5,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-The Datadog Unix Agent is being developed for specific system architectures, and is not the same as Agents 5 and 6.
+The Datadog Unix Agent is being developed for specific system architectures, <br> and is not the same as Agents 5 and 6.
 </div>
 
 This page outlines the installation and configuration of the Datadog UNIX Agent for AIX.
@@ -65,7 +65,7 @@ That said, configuration files are searched in this order (with the first match 
 
 A sample configuration file can be found in `/opt/datadog-agent/etc/datadog-agent`.
 
-A basic configuration typically requires your Datadog API key. To submit your metrics to the EU instance, the `site` configuration option is available. 
+A basic configuration typically requires your Datadog API key. To submit your metrics to the EU instance, the `site` configuration option is available.
 
 You can also override `dd_url` manually, but that should not be required.
 
