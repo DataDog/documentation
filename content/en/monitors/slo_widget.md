@@ -12,10 +12,6 @@ aliases:
     - /monitors/monitor_uptime_widget/
 ---
 
-<div class="alert alert-warning">
-The SLO and uptime widget (formerly the monitor uptime widget) is in public beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on the feature for your account.
-</div>
-
 {{< img src="monitors/monitor_uptime_widget.png" alt="monitor uptime widget" responsive="true" >}}
 
 Use the SLO and uptime widget to track your SLOs (Service Level Objectives) and uptime on screenboards and timeboards.
