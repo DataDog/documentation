@@ -23,35 +23,36 @@ further_reading:
 
 
 
-Send logs to Datadog from web browsers or other Javascript client thanks to the Datadog `datadog-logs` Client-side JavaScript logging library.
+Send logs to Datadog from web browsers or other Javascript client thanks to the Datadog's `datadog-logs` client-side JavaScript logging library.
 
-With the `datadog-logs` library you are able to send log directory to Datadog from JS clients and leverage the following features:
+With the `datadog-logs` library, you can send log directories to Datadog from JS clients and leverage the following features:
 
 * Use the library as a logger. Everything is forwarded to Datadog as JSON documents.
-* Add `context` and extra custom attributes to each logs sent.
-* Wrap and forward every JavaScript errors automatically.
+* Add `context` and extra custom attributes to each log sent.
+* Wrap and forward every JavaScript error automatically.
 * Forward JavaScript's console logs.
-* Record real client IP address and user agent.
+* Record real client IP addresses and user agents.
 * Optimised network usage with automatic bulk posts.
 
-## Get the Public API Key
+## Get a Public API Key
 
-**Public API Keys are in Private Beta** Reach out to [Datadog support team](/help) to get it enabled for your Account.
+**Public API Keys are in Private Beta** Reach out to [Datadog's support team](/help) to get it enabled for your Account.
 
-For security reasons, [API keys][2] cannot be used to configure the `datadog-logs` library as they would be exposed client side in the Javascript code. To collect Logs from web browsers, a [Public API keys][3] must be used.
-To manage your Public API keys, go to your [Datadog API configuration page][4] in the `Public API Key` section as shown here:
+For security reasons, [API keys][2] cannot be used to configure the `datadog-logs` library as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [public API key][3] must be used.
+
+To manage your public API keys, go to your [Datadog API configuration page][4] in the `Public API Key` section as shown here:
 
 {{< img src="logs/log_collection/public_key.png" style="width:80%;" alt="Public API Keys" responsive="true" >}}
 
 Read the [Public API keys documentation][3] to learn more about the restrictions that applies.
 
-## Configure the Javascript logger
+## Configure the JavaScript logger
 
 The following parameters can be used to configure the library to send logs to Datadog:
 
 * Set `isCollectingError` to `false` to turn off the automatic JS and console error collection.
 * Use `addGlobalContext` to add JSON attribute to all the generated logs
-* Set `publicApiKey` to the value of the Public API key (**only public api_key can be used in this library**)
+* Set `publicApiKey` to the value of the public API key (**only public api_key can be used in this library**)
 
 {{< tabs >}}
 {{% tab "US" %}}
@@ -118,7 +119,7 @@ Datadog.log(<MESSAGE>,<JSON_ATTRIBUTES>,<SEVERITY>)
 | ------              | -------                                                                                 |
 | `<MESSAGE>`         | The message of your log that is fully indexed by Datadog                                |
 | `<JSON_ATTRIBUTES>` | A valid JSON object that includes all attributes attached to the `<MESSAGE>`            |
-| `<SEVERITY>`        | Status of your log, the accepted severity value are `debug`, `info`, `warn` or `error`. |
+| `<SEVERITY>`        | Status of your log; the accepted severity values are `debug`, `info`, `warn` or `error`. |
 
 **Example:**
 
