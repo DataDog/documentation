@@ -49,7 +49,7 @@ Read the [Public API keys documentation][3] to learn more about the restrictions
 
 The following parameters can be used to configure the library to send logs to Datadog:
 
-* Set `isCollectingError` to false to turn off the automatic JS and console error collection
+* Set `isCollectingError` to `false` to turn off the automatic JS and console error collection.
 * Use `addGlobalContext` to add JSON attribute to all the generated logs
 * Set `publicApiKey` to the value of the Public api_key (**only public api_key can be used in this library**)
 
