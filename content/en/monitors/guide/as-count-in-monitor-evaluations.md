@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Using **`as_count()`** and **`as_rate()`** modifiers will yield different results in monitor evaluations.  Monitors involving arithmetic and at least 1 **`as_count()`** modifier use a separate evaluation path that impacts calculations by changing the order that arithmetic and time aggregation are performed.
+Queries using **`as_count()`** and **`as_rate()`** modifiers are calculated in ways that canw yield different results in monitor evaluations.  Monitors involving arithmetic and at least 1 **`as_count()`** modifier use a separate evaluation path that changes the order that arithmetic and time aggregation are performed.
 
 ## Error Rate Example
 

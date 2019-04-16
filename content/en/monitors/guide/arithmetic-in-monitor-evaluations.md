@@ -1,31 +1,28 @@
 ---
-title: Division in Monitor Evaluations
+title: Arithmetci in Monitor Evaluations
 kind: guide
 aliases:
-  - /monitors/guide/division-in-monitor-evaluations
+  - /monitors/guide/arithmetic-in-monitor-evaluations
 ---
 
 ## Overview
 
-Creating an alert based on a query with division is a common practice. There are some tools and behaviors that should be considered to ensure a monitor's settings are appropriate for evaluating these queries as intended.
+Creating an alert based on a query with arithmetic is a common practice. There are some tools and behaviors that should be considered to ensure a monitor's settings are appropriate for evaluating these queries as intended.
 
 ## Sparse Metrics
 
-In case of sparse or _0_ metrics in the denominator some results are rejected in case of the `classic_eval_path`.  For an explanation of the different eval paths, read [as_count() Monitor Evaluations][1]
+In case of sparse or _0_ metrics in the denominator some results can be rejected.
 
 Let's consider the following metric values:
 
 - `A = (10, 10, 10)`
 - `B = (0, 1, -)`
 
-Here is the behavior difference:
+For the formula `a/b` the monitor would evaluate:  
 
-| Path                 | Evaluation of `A/B`                | Result |
-| :------------------- | :--------------------------------- | :----- |
-| `as_count_eval_path` | **(10 + 10 + 10) / (0 + 1 + NaN)** | 30     |
-| `classic_eval_path`  | **10/0 + 10/1 + 10/NaN**           | 10     |
-
-_Note that both of these evaluations are mathematically correct._
+```
+10/0 + 10/1 + 10/NaN = 10
+```
 
 If the evaluation window includes many "null" buckets (**10/NaN + 10/Nan + ... + 10/Nan**) the evaluations will be "skipped" so you may need to make adjustments to your metric or use one of the workarounds below.
 
@@ -63,7 +60,7 @@ The `rollup()` function will create time buckets based on time intervals you def
 
 ## `.fill()`
 
-You can apply a `.fill()` function to ensure all time buckets have valid values. For **gauge** metric types, the default interpolation is linear or `.fill(linear)` for 5 minutes. For **count** and **rate** type metrics, the default is `.fill(null)`, which disables interpolation.
+You can apply a `.fill()` function to ensure all time buckets have valid values. For **gauge** metric types, the default interpolation is linear or `.fill(linear)` for 5 minutes. For **count** and **rate** type metrics, the default is `.fill(null)`, which disables interpolation.  We generally recommend against using interpolation for count/rate metrics in monitors.
 
 **Original**: `sum:my_metric.has_gaps.gauge{env:a} by {timer,env}`
 
@@ -121,7 +118,7 @@ With `.fill(last,900)` the new result would be:
 
 ## Short Evaluation Windows
 
-It is possible to have timing issues in monitors with division over short evaluation windows.  If your monitor query requires division over an evaluation window of 1 minute, the numerator and denominator represent time buckets on the order of a few seconds. Whether a query that is slow due to a large number of contexts, or there is a small delay in any part of the pipeline, if metrics for the numerator and denominator aren't both available at query time, you could get unwanted evaluation values.
+It is possible to have timing issues in monitors with division over short evaluation windows.  If your monitor query requires division over an evaluation window of 1 minute, the numerator and denominator represent time buckets on the order of a few seconds. If metrics for the numerator and denominator aren't both available at query time, you could get unwanted evaluation values.
 
 ```
 | Timestamp             | sum:my_num{*}       | sum:my_denom{*}     |
@@ -133,11 +130,10 @@ It is possible to have timing issues in monitors with division over short evalua
 | 2019-03-29 13:30:56   | 120 (inc)           | 850 (inc)           |
 ```
 
-In the case of a query like `min(last_1m):sum:my_num{*}/sum:my_denom{*}`, the minimum value could be skewed quite a bit and could trigger your monitor unintentionally.
+In the case of a query like `min(last_1m):sum:my_num{*}/sum:my_denom{*}`, the minimum value could be skewed and could trigger your monitor unintentionally.
 
-Therefore, adding a short evaluation delay of 30-60 seconds to adjust for timing issues should be considered for queries with divison over short evaluation windows.  Alternatively, increasing to a 5 minute evaluation window can help.
+Therefore, adding a short evaluation delay of 30-60 seconds to adjust for timing issues should be considered for queries with divison over short evaluation windows.  Alternatively, changing to a 5 minute evaluation window can help.
 
-[Reach out to the Datadog support team][2] if you have any questions regarding this logic.
+[Reach out to the Datadog support team][1] if you have any questions regarding this logic.
 
-[1]: /monitors/guide/as-count-in-monitor-evaluations
-[2]: /help
+[1]: /help
