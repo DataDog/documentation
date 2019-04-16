@@ -76,7 +76,7 @@ logs:
 **Note**: If you are using Windows with Agent v6 and tailing files for logs, make sure that those files have UTF8 encoding.
 
 
-[1]: /agent/faq/agent-configuration-files
+[1]: /agent/guide/agent-configuration-files
 {{% /tab %}}
 
 {{% tab "Stream logs from TCP/UDP" %}}
@@ -95,8 +95,7 @@ If you are using Serilog, `Serilog.Sinks.Network` is an option for connecting vi
 
 **Note**: The Agent supports raw string, JSON, and Syslog formatted logs. If you are sending logs in batch, use line break characters to separate your logs.
 
-
-[1]: /agent/faq/agent-configuration-files
+[1]: /agent/guide/agent-configuration-files
 {{% /tab %}}
 {{% tab "Stream logs from journald" %}}
 
@@ -109,11 +108,8 @@ logs:
 ```
 
 Refer to the [journald integration][2] documentation for more details regarding the setup for containerized environments and units filtering.
- 
 
-
-
-[1]: /agent/faq/agent-configuration-files
+[1]: /agent/guide/agent-configuration-files
 [2]: /integrations/journald
 {{% /tab %}}
 {{% tab "Windows Events" %}}
@@ -427,12 +423,12 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /agent
-[2]: /agent/faq/agent-configuration-files
-[3]: /agent/faq/agent-commands/#start-stop-and-restart-the-agent
-[4]: /agent/faq/agent-commands/#agent-status-and-information
+ [1]: /agent
+[2]: /agent/guide/agent-configuration-files
+[3]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: /agent/guide/agent-commands/#agent-status-and-information
 [5]: /tracing
 [6]: /developers/metrics/custom_metrics
 [7]: /tagging
 [8]: /agent/proxy/#proxy-for-logs
-[9]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information 
+[9]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information

@@ -27,7 +27,7 @@ The Agent installer creates the `ddagentuser` at install time, and then register
 
 The exception is on domain controllers (primary and backup). There is no notion of a local user on a domain controller. Therefore, the created user becomes a domain user rather than a local one.
 
-To support this environment, the Agent installer requires that the administrator provides a username and password under which the Agent will run. The username and password are provided as properties on the installation command line, i.e.
+To support this environment, the Agent installer requires that the administrator provides a username and password under which the Agent run. The username and password are provided as properties on the installation command line, i.e.
 
 ```shell
 	Msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNMAE> DDAGENTUSER_PASSWORD=<PASSWORD>

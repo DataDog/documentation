@@ -432,9 +432,6 @@ main:
       - name: "Logging without Limits"
         url: "logs/logging_without_limits/"
 
-      - name: "Log monitor"
-        url: "monitors/monitor_types/log"
-
       # LOGS - Archives
 
       - name: "Archives"

@@ -34,6 +34,8 @@ To share a Graph from a [Timeboard][1] or a [Screenboard][2]:
 
 {{< img src="graphing/dashboards/shared_graph/share_graph.png" alt="Shared graph" responsive="true" style="width:75%;">}}
 
+**Note**: The Share functionality is not available for APM and Log queries.
+
 ## Sharing a Screenboard
 
 Share a Screenboard entirely with the following process:
@@ -42,7 +44,7 @@ Share a Screenboard entirely with the following process:
 2. Click the *Generate public URL* option.
 3. Use the created URL to have live and read-only access to just the contents of that Screenboard.
 
-**Note**: If you've enabled [Templating][3], the template variable drop down isn't present in the shared views.
+**Note**: If you've enabled [Templating][3], the template variable drop down isn't present in the shared views and widgets based of APM and Log queries won't display any data.
 
 ### Applying restrictions
 

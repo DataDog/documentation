@@ -4,6 +4,9 @@ kind: documentation
 aliases:
   - /logs/languages/python
 further_reading:
+- link: "https://www.datadoghq.com/blog/python-logging-best-practices/"
+  tag: "Blog"
+  text: "How to collect, customize, and centralize Python logs"
 - link: "logs/processing"
   tag: "Documentation"
   text: "Learn how to process your logs"
@@ -13,9 +16,6 @@ further_reading:
 - link: "logs/explorer"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "logs/explorer/analytics"
-  tag: "Documentation"
-  text: "Perform Log Analytics"
 - link: "logs/faq/log-collection-troubleshooting-guide"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"

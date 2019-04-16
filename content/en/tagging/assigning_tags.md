@@ -400,7 +400,7 @@ The following [integration][5] sources create tags automatically in Datadog:
 [5]: /integrations
 [6]: /agent/faq/how-datadog-agent-determines-the-hostname
 [7]: /graphing/#arithmetic-between-two-metrics
-[8]: /agent/faq/agent-configuration-files
+[8]: /agent/guide/agent-configuration-files
 [9]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [10]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
 [11]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
