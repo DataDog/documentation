@@ -32,5 +32,3 @@ The `fill()` function has two parameters:
     {{< nextlink href="/graphing/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
     {{< nextlink href="/graphing/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
-
-[1]: /getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation

@@ -18,13 +18,13 @@ The `default_zero` function fills empty intervals using interpolation (if it is 
 The `default_zero` function is intended to address the following use cases (though it may also work for other use cases):
 
 - Aligning gauges as 0 when performing arithmetic on sparse metrics (note: `COUNT` or `RATE` type metrics queried `as_count()` or `as_rate()` are _always_ aligned as 0, so using `default_zero` does not change how they are aligned; it  only affects `GAUGE` type metrics)
-- Resolving monitors from a no data condition. This works for both simple and multi alerts, however the value 0 must not cause the monitor to trigger. For example, this would not work for a monitor with the query `avg(last_10m):avg:system.cpu.idle{*} < 10` because this monitor triggers (instead of resolving) when it evaluates to 0. Avoid using this function for [error rate monitors with `as_count()` queries](/monitors/guide/as-count-monitor-evaluation/#overview); it isn't usually necessary, and it causes them to use the classic eval path.
+- Resolving monitors from a no data condition. This works for both simple and multi alerts, however the value 0 must not cause the monitor to trigger. For example, this would not work for a monitor with the query `avg(last_10m):avg:system.cpu.idle{*} < 10` because this monitor triggers (instead of resolving) when it evaluates to 0. Avoid using this function for [error rate monitors with `as_count()` queries][2]; it isn't usually necessary, and it causes them to use the classic eval path.
 - Filling in empty intervals in sparse (but nonempty) series for visual reasons or to affect the min/max/average of a timeseries in a monitor evaluation
 - Showing the value 0 on the query value widget when there is no data
 
 ### Example
 
-To demonstrate how the `default_zero` function works, we created a single point for a custom metric [using dogstatsd](/developers/dogstatsd/datagram_shell/#sending-metrics):
+To demonstrate how the `default_zero` function works, we created a single point for a custom metric [using dogstatsd][3]:
 
 ```
 $ echo -n "custom_metric:1|g" | nc -4u -w0 127.0.0.1 8125
@@ -98,3 +98,7 @@ default_zero(avg:custom_metric{*})
     {{< nextlink href="/graphing/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
     {{< nextlink href="/graphing/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
+
+[1]: /getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
+[2]: /monitors/guide/as-count-monitor-evaluation/#overview
+[3]: /developers/dogstatsd/datagram_shell/#sending-metrics
