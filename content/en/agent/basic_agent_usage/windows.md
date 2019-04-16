@@ -29,7 +29,7 @@ This page outlines the basic features of the Windows Datadog Agent. If you haven
 
 To install the Agent, download and run the Datadog Agent MSI **as Administrator**.
 
-Optionally, install the Agent with the command line to customize the settings and/or run an unattended installation. Each configuration item is added as an property to the command line. For instance, the following command installs and pre-configures the Agent with the `<DATADOG_API_KEY>`.
+Optionally, install the Agent with the command line to customize the settings and/or run an unattended installation. Each configuration item is added as a property to the command line. For instance, the following command installs and pre-configures the Agent with the `<DATADOG_API_KEY>`.
 
 * cmd: `msiexec /i datadog-agent-6-latest.amd64.msi APIKEY="<DATADOG_API_KEY>"`
 * Powershell: `Start-Process msiexec -ArgumentList '/i datadog-agent-6-latest.amd64.msi APIKEY="<DATADOG_API_KEY>"'`
