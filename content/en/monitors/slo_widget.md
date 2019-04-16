@@ -113,7 +113,7 @@ Finally, give the widget a title and save it to your dashboard.
 
 ## Feature requests
 
-To submit feature requests, reach out to [Datadog Support][5], and someone from the team will assist you.
+To submit feature requests, reach out to [Datadog Support][2], and someone from the team will assist you.
 
 ## Widget behavior
 
@@ -127,4 +127,3 @@ While the widget is in public beta, the documentation is subject to change. Data
 [2]: /help
 [3]: /tagging/using_tags/?tab=assignment#monitors
 [4]: /api/?lang=python#create-a-monitor
-[5]: support@datadoghq.com
