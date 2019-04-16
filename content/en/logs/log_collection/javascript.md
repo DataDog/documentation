@@ -70,7 +70,7 @@ The following parameters can be used to configure the library to send logs to Da
 
       // OPTIONAL
       // add global metadata attributes
-      Datadog.addGlobalContext({'session_id': '1234'});
+      Datadog.addGlobalContext({'<META_KEY>': '<META_VALUE>'});
     </script>
     ...
   </head>
