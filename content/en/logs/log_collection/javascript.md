@@ -111,7 +111,7 @@ The following parameters can be used to configure the library to send logs to Da
 It is then possible to send custom log entries thanks to the `log` function:
 
 ```
-Datadog.log(<message>,<json_parameter>,<severity>)
+Datadog.log(<MESSAGE>,<JSON_ATTRIBUTES>,<SEVERITY>)
 ```
 
 The accepted severity value are `debug`, `info`, `warn` or `error`.
