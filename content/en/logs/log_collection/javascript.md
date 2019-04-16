@@ -36,7 +36,9 @@ With the `datadog-logs` library, you can send log directories to Datadog from JS
 
 ## Get a Public API Key
 
-**Public API Keys are in Private Beta** Reach out to [Datadog's support team](/help) to get it enabled for your Account.
+<div class="alert alert-warning">
+Public API keys are in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on this feature for your account.
+</div>
 
 For security reasons, [API keys][2] cannot be used to configure the `datadog-logs` library as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [public API key][3] must be used.
 
