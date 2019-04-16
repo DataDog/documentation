@@ -25,7 +25,7 @@ Those keys can only be used to send web browser logs to Datadog.
 
 ## Add a key
 
-To add a Datadog API or application or public API key, navigate to [Integration -> APIs][1], enter a name for your key, and click **Create API key** or **Create Application Key** or **Create Public Api Key**.
+To add a Datadog API, application, or public API key, navigate to [Integration -> APIs][1], enter a name for your key, and click **Create API key** or **Create Application Key** or **Create Public Api Key**.
 
 **Note**:
 
