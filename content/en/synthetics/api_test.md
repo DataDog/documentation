@@ -113,6 +113,8 @@ A check is considered `FAILED` if it doesn't satisfy the assertions configured f
 | SSL             | The SSL connection couldn't be performed; see below for more detailed explanations.                                                                                                          |
 | TIMEOUT         | The request couldn't be completed in a reasonable time.                                                                                                                                      |
 
+If a test fails, the uptime directly considers the endpoint as `down`. It is not retested until the next test run.
+
 ### SSL errors
 
 | Error                              | Description                                                                                                                                                            |
