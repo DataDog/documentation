@@ -70,11 +70,11 @@ In Agent v6, the service manager provided by the operating system is responsible
 {{% tab "Agent v6" %}}
 The configuration files and folders for the Agent are located in:
 
-* `/etc/datadog-agent/datadog.yaml` 
+* `/etc/datadog-agent/datadog.yaml`
 
 Configuration files for [Integrations][1]:
 
-* `/etc/datadog-agent/conf.d/` 
+* `/etc/datadog-agent/conf.d/`
 
 
 [1]: /integrations
@@ -83,11 +83,11 @@ Configuration files for [Integrations][1]:
 
 The configuration files and folders for the Agent are located in:
 
-* `/etc/dd-agent/datadog.conf`  
+* `/etc/dd-agent/datadog.conf`
 
 Configuration files for [Integrations][1]:
 
-* `/etc/dd-agent/conf.d/` 
+* `/etc/dd-agent/conf.d/`
 
 
 [1]: /integrations
