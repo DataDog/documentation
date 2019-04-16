@@ -1,4 +1,3 @@
-```json
 {  
    "public_id":"aaa-bbb-ccc",
    "tags":[  
@@ -56,4 +55,3 @@
       "min_location_failed":1
    }
 }
-```
