@@ -118,7 +118,7 @@ Vous pouvez programmer l'accès aux informations de host et obtenir les informat
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent/faq/agent-commands/#agent-status-and-information
+[1]: /fr/agent/guide/agent-commands/#agent-status-and-information
 [2]: https://github.com/DataDog/dd-agent/blob/5.14.1/utils/hostname.py#L104
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: /fr/integrations/chef

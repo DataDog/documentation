@@ -108,7 +108,7 @@ Si vous souhaitez approfondir vos connaissances sur le format des datagrammes ut
 [2]: https://github.com/DataDog/dd-agent/pull/2104
 [3]: /fr/developers/dogstatsd/data_types/#timers
 [4]: /fr/developers/metrics/custom_metrics
-[5]: /fr/agent/faq/agent-commands
+[5]: /fr/agent/guide/agent-commands
 [6]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
 [7]: /fr/developers/dogstatsd/unix_socket
 [8]: /fr/libraries
