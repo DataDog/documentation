@@ -108,7 +108,7 @@ The following parameters can be used to configure the library to send logs to Da
 
 ## Send a custom log entry
 
-It is then possible to send custom log entries thanks to the `log` function:
+Send a custom log entries directly to Datadog with the `log` function:
 
 ```
 Datadog.log(<MESSAGE>,<JSON_ATTRIBUTES>,<SEVERITY>)
