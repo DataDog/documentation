@@ -28,5 +28,5 @@ Les vidéos Datadog 101 vous permettent d'apprendre tout ce dont vous avez besoi
 * [Check custom](?wtime=535)
 * [Monitor d'événement](?wtime=548)
 * [Monitor outlier](?wtime=562)
-* [Managing your monitors](?wtime=574)
+* [Gestion de vos monitors](?wtime=574)
 

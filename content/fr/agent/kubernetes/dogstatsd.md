@@ -121,19 +121,18 @@ func main(){
 
   // autres codes main() omis par souci de concision
 
-  var err error
   // utiliser le port et l'IP du host pour définir l'endpoint
-  dogstatsd, err = statsd.New(os.Getenv("DOGSTATSD_HOST_IP") + ":8125")
+  dogstatsd, err := statsd.New(os.Getenv("DOGSTATSD_HOST_IP") + ":8125")
   // ou utiliser le chemin du socket Unix
   // dogstatsd, err = statsd.New(os.Getenv("DD_DOGSTATSD_SOCKET"))
   if err != nil{
     log.Printf("Impossible d'obtenir un client DogStatsD.")
   } else {
-    // // ajouter le nom de l'app devant chaque métrique et événement
+    // ajouter le nom de l'app devant chaque métrique et événement
     dogstatsd.Namespace = "Mon application"
 
-    // publier un événement sur Datadog au lancement de l'app
-    dogstatsd.Event(*statsd.Event{
+    // publie un événement sur Datadog au lancement de l'app
+    dogstatsd.Event(&statsd.Event{
       Title: "Mon application s'est lancée.",
       Text: "Mon application s'est lancée.",
       })
@@ -158,7 +157,7 @@ func InfoHandler(rw http.ResponseWriter, req *http.Request) {
 [1]: /fr/developers/dogstatsd
 [2]: https://github.com/etsy/statsd
 [3]: /fr/developers/dogstatsd/unix_socket
-[4]: /fr/agent/faq/agent-commands
+[4]: /fr/agent/guide/agent-commands
 [5]: https://github.com/containernetworking/cni
 [6]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [7]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information
