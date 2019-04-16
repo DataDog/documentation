@@ -5,7 +5,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-The Datadog Unix agent is being developed for specific system architectures, and is not the same as Agents 5 and 6.
+The Datadog Unix Agent is being developed for specific system architectures, and is not the same as Agents 5 and 6.
 </div>
 
 This page outlines the installation and configuration of the Datadog UNIX Agent for AIX.
@@ -17,15 +17,15 @@ This page outlines the installation and configuration of the Datadog UNIX Agent 
 
 ## Installation
 
-An easy, one-step ksh install script has been provided on the [Agent download page](https://app.datadoghq.com/account/settings#agent/aix) within Datadog. The script supports the following environment variables:
-* **CHANNEL**: defaults to stable. Specifies the package repository channel
+A one-step ksh install script is provided on the [Agent download page](https://app.datadoghq.com/account/settings#agent/aix) within Datadog. The script supports the following environment variables:
+* **CHANNEL**: defaults to stable. Specifies the package repository channel.
   * Values: `stable`, `beta`, `unstable`
-* **VERSION**: defaults to latest. Specifies the package version
-* **PROXY**: defaults to none. Specifies the proxy uri
+* **VERSION**: defaults to latest. Specifies the package version.
+* **PROXY**: defaults to none. Specifies the proxy URI.
   * Example: `http://proxy.foo.com`
-* **PROXY_USER**: defaults to empty. Specifies the proxy server username
-* **PROXY_PASSWORD**: defaults to empty. Specifies the proxy server password
-* **INSECURE**: defaults to `false`. Allows skipping TLS validation
+* **PROXY_USER**: defaults to empty. Specifies the proxy server username.
+* **PROXY_PASSWORD**: defaults to empty. Specifies the proxy server password.
+* **INSECURE**: defaults to `false`. Allows skipping TLS validation.
 
 Alternatively, download links for the latest releases can be found on [this page][1].
 
@@ -55,15 +55,15 @@ Note: Agent installation logs can be found in the `dd-aix-install.log` file. To 
 
 The configuration files and folders for the Agent are located in:
 `/etc/datadog-agent/datadog.yaml`
-That said, configuration file is searched in this order (with the first match being taken):
+That said, configuration files are searched in this order (with the first match being taken):
 
 * `/etc/datadog-agent/datadog.yaml`
 * `./etc/datadog-agent/datadog.yaml`
 * `./datadog.yaml`
 
-A sample configuration file may be found in `/opt/datadog-agent/etc/datadog-agent`.
+A sample configuration file can be found in `/opt/datadog-agent/etc/datadog-agent`.
 
-A basic configuration typically requires a destination `dd_url` and your Datadog API key. Occasionally, a proxy configuration must be specified depending on your network setup.
+A basic configuration typically requires a destination `dd_url` and your Datadog API key. Occasionally, a proxy configuration must be specified, depending on your network setup.
 
 
 **Configuration files for Integrations:**
@@ -84,7 +84,7 @@ To enable the above integrations, copy and edit the sample configuration files p
 
 DogStatsD allows collecting and submitting custom metrics to Datadog. It listens on a UDP port and StatsD metrics may be submitted to it. These are then relayed to Datadog.
 
-DogStatsD relies on the same configuration file defined for the agent and runs in a separate process. To enable DogStatsD do:
+DogStatsD relies on the same configuration file defined for the Agent and runs in a separate process. To enable DogStatsD:
 
 ```
 cd /opt/datadog-agent/agent
@@ -92,17 +92,17 @@ cd /opt/datadog-agent/agent
 ```
 **Note:** DogStatsD does not daemonize and runs in the foreground.
 
-There are also facilities to run the Agent via the known python supervisor, this might be your preferred way to manage the Agent daemon if you are familiar with the tool. There are entries for both the Agent and DogStatsD.
+There are also facilities to run the Agent via the known Python supervisor. This might be your preferred way to manage the Agent daemon if you are familiar with the tool. There are entries for both the Agent and DogStatsD.
 
 ## Uninstall
 
-To remove an installed Agent run the following `installp` command:
+To remove an installed Agent, run the following `installp` command:
 
 ```
 installp -e dd-aix-uninstall.log -uv datadog-unix-agent
 ```
 
-Note: Agent un-installation logs can be found in the `dd-aix-install.log` file. To disable this logging, remove the `-e` parameter in the un-installation command.
+Note: Agent uninstallation logs can be found in the `dd-aix-install.log` file. To disable this logging, remove the `-e` parameter in the uninstallation command.
 
 ## Further Reading
 
