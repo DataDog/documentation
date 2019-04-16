@@ -4,7 +4,7 @@ kind: faq
 disable_toc: true
 ---
 
-**Starting with release `6.11.0`, the Core and APM/Trace components of the Windows Agent run under the `ddagentuser` account, created at install time, instead of running on prior versions under the `LOCAL_SYSTEM` account. If enabled, the Live Process component still runs under `LOCAL_SYSTEM`. **
+**Starting with release `6.11.0`, the Core and APM/Trace components of the Windows Agent run under the `ddagentuser` account, created at install time, instead of running on prior versions under the `LOCAL_SYSTEM` account. If enabled, the Live Process component still runs under `LOCAL_SYSTEM`.**
 
 The user `ddagentuser` is created at install time for the Datadog Windows Agent. When installed on an Active Directory server, the username and password must be provided to the installer. The new user is a non-privileged user. It gains the following rights during installation:
 
