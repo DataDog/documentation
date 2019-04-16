@@ -36,7 +36,7 @@ Optionally, you can view uptime by monitor groups in three different ways:
 
 * Worst performing 5 groups
 * Best performing 5 groups
-* Custom (select up to 5 groups)
+* Custom (select up to 20 groups)
 
 You can view the uptime percentage for the overall monitor, by selected groups, or both. For calculation, the total uptime percentage when selected by group can be calculated, as well as on the total of the monitors (all groups regardless of what’s selected) or for only the selected groups.
 
@@ -92,11 +92,11 @@ Select the metrics that represent your successful events in the numerator, and s
 
 You can add up to as many metrics as you need for both fields and add a formula to calculate the total for each. 
 
-### Selecting youro time window
+### Selecting your time window
 
 Next, select the time window you want to report within. 
 
-For single monitors, you can select up to 3 windows. For monitor-by-group or multi-monitor selection, you can only select 1 window. The widget is currently not compatible with Global Time.
+The widget is currently not compatible with Global Time.
 
 Available windows are: 7 days, month-to-date, 30 days (rolling), Previous Month, and 90 days (rolling)
 
