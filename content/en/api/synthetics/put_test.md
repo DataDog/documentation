@@ -1,0 +1,60 @@
+---
+title: Edit a test
+type: apicontent
+order: 24.2
+external_redirect: /api/#edit-tests
+---
+
+## Edit a test
+
+Use this method to update an existing Synthetics test.
+
+##### Arguments
+
+*   **`assertions`** - _optional_ - The function where you define when you want Datadog to alert you. Assertions are defined by: `operator`, `property`, `type` and `target`.
+*   **`operator`** - _optional_ - The action that you want tested. Valid operators depend on the property `type` being tested.
+
+<table>
+  <tr>
+    <th><code>type</code></th>
+    <th>Valid <code>operator</code></th>
+    <th>Value type</th>
+  </tr>
+  <tr>
+    <td>Status Code</td>
+    <td><code>is</code>, <code>is not</code></td>
+    <td>Integer</td>
+  </tr>
+  <tr>
+    <td>Response time</td>
+    <td><code>less than</code></td>
+    <td>Integer</td>
+  </tr>
+  <tr>
+    <td>Headers</td>
+    <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>
+    <td>for <code>contains</code>/<code>does not contain</code>/<code>is</code>/<code>is not</code>: String &lt;br&gt; for <code>matches</code>/<code>does not match</code>: [RegexStrings][1]</td>
+  </tr>
+  <tr>
+    <td>Body</td>
+    <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>
+    <td>for <code>contains</code>/<code>does not contain/<code>is</code>/<code>is not</code>: String &lt;br&gt; for <code>matches</code>/<code>does not match</code>: [RegexStrings][1]</td>
+  </tr>
+</table>
+
+*   **`property`** - _optional_ - When you are setting up a `header` `type`, this is required to define the headers parameter key. Valid values are any header keys, like `Content-Type`, or `Authorization`.
+*   **`target`** - _optional_ - The value of the parameter you want to test. For `header`, valid values are any of the valid values for the header key that you define in `property`. For `statusCode`, valid values are valid status codes. For `responseTime`, valid values are response times.
+*   **`request`** - _optional_ - the array where you define your API that you want Datadog to test. Make sure to include any required authentication information.
+*   **`method`** - _optional_ - The method of the API to test. Valid values are `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`.
+*   **`url`** - _optional_ - The endpoint for the API Datadog is testing.
+*   **`timeout`** - _optional_ - When the API request will timeout.
+*   **`headers`** - _optional_ - Headers in the API request.
+*   **`body`** - _optional_ The JSON body for the API request.
+*   **`locations`** - _optional_ - A list of the locations that you want the tests to be sent from. Valid values are `aws:` followed by any valid AWS region. Valid values are: `aws:eu-central-1`, `aws:ap-northeast-1`, `aws:us-west-2`, `aws:eu-west-2`, `aws: ca-central-1`, `aws:us-east-2`, and `aws:ap-southeast-2`. At least one value is required, and you can use all locations.
+*   **`message`** - _optional_ - A description of the test.
+*   **`name`** - _optional_ - A unique name for the test.
+*   **`options`** - _optional_ - Use advanced options to specify custom request headers, authentication credentials, body content, cookies, or to have the test follow redirects.  
+*   **`tags`** - _optional_ - Tags you want to use to filter your test when you are viewing it in Datadog. For more info on custom tags, see [Using tags][1].
+*   **`type`** - _optional_ - the type of test. Valid values are `api` and `browser`.
+
+[1]: /tagging/using_tags
