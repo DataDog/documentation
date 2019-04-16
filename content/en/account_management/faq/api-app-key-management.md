@@ -18,10 +18,10 @@ Application keys, in conjunction with your org's API key, give you full access t
 
 **Public API keys are in private beta**
 
-Public API keys are unique to your organization. A Public API key is required by the [web browser log collector][3] to submit logs to Datadog.
+Public API keys are unique to your organization. A public API key is required by the [web browser log collector][3] to submit logs to Datadog.
 Those keys can only be used to send web browser logs to Datadog.
 
-## Add
+## Add a key
 
 To add a Datadog API or application or public API key, navigate to [Integration -> APIs][1], enter a name for your key, and click **Create API key** or **Create Application Key** or **Create Public Api Key**.
 
