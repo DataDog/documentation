@@ -23,7 +23,7 @@ further_reading:
 
 
 
-Send logs to Datadog from web browsers or other Javascript client thanks to the Datadog Client-side JavaScript logging library.
+Send logs to Datadog from web browsers or other Javascript client thanks to the Datadog `datadog-logs` Client-side JavaScript logging library.
 
 With the `datadog-logs` library you are able to send log directory to Datadog from JS clients and leverage the following features:
 
