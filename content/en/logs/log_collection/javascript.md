@@ -54,7 +54,7 @@ The following parameters can be used to configure the library to send logs to Da
 
 * Set `isCollectingError` to `false` to turn off the automatic JS and console error collection.
 * Use `addGlobalContext` to add JSON attribute to all the generated logs
-* Set `publicApiKey` to the value of the public API key (**only public api_key can be used in this library**)
+* Set `publicApiKey` to the value of the public API key (**only public API keys can be used in this library**)
 
 {{< tabs >}}
 {{% tab "US" %}}
