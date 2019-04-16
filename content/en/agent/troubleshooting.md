@@ -82,18 +82,18 @@ To enable the full debug mode:
 
 If your container is already running:
 
-1. To avoid that your process is restarted by S6, run:  
-    
+1. To avoid that your process is restarted by S6, run:
+
     `rm /var/run/s6/services/agent/finish`
 
 2. Then stop the Agent:
-    
+
     ```
     s6-svc -d /var/run/s6/services/agent/
     ```
 
 3. Restart then the Agent with debug log level by running:
-    
+
     ```
     DD_LOG_LEVEL=debug agent start
     ```
@@ -132,9 +132,9 @@ Or the container can be restarted.
 
 If you are running Agent 5.3+, you can send necessary troubleshooting information to the Datadog support team with one flare command.
 
-`flare` gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information including passwords, API keys, Proxy credentials, and SNMP community strings.  
-**Confirm the upload of the archive to immediately send it to Datadog support**.  
-Datadog Agent is completely open source, which allows you to [verify the code's behavior][10]. If needed, the flare can be reviewed prior to sending since the flare prompts a confirmation before uploading it.  
+`flare` gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information including passwords, API keys, Proxy credentials, and SNMP community strings.
+**Confirm the upload of the archive to immediately send it to Datadog support**.
+Datadog Agent is completely open source, which allows you to [verify the code's behavior][10]. If needed, the flare can be reviewed prior to sending since the flare prompts a confirmation before uploading it.
 
 In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if you don't specify a case ID, the command asks for an email address that is used to login in your organization and creates a new support case.
 
@@ -143,6 +143,7 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 
 | Platform     | Command                                                 |
 | ------------ | ------------------------------------------------------- |
+| AIX          | `datadog-agent flare <CASE_ID>`                         |
 | Docker       | `docker exec -it datadog-agent agent flare <CASE_ID>`   |
 | macOS        | `datadog-agent flare <CASE_ID>` or via the [web GUI][1] |
 | CentOS       | `sudo datadog-agent flare <CASE_ID>`                    |
@@ -207,7 +208,7 @@ If you want to include rate metrics, add `--check-rate` to your command, for ins
 ```
 sudo -u dd-agent datadog-agent check <CHECK_NAME> --check-rate
 ```
- 
+
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -271,7 +272,7 @@ For [systems using systemd][11], use `journalctl` to assist with debugging.
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
-The following command shows the status of the Datadog Agent. 
+The following command shows the status of the Datadog Agent.
 
 ```
 sudo systemctl status datadog-agent
@@ -285,7 +286,7 @@ sudo journalctl -u datadog-agent.service
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
-The following command shows the status of the Datadog Agent. 
+The following command shows the status of the Datadog Agent.
 
 ```
 sudo systemctl status dd-agent

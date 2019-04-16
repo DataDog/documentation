@@ -14,9 +14,18 @@ API keys are unique to your organization. An API key is required by the Datadog 
 
 Application keys, in conjunction with your org's API key, give you full access to Datadog's programmatic API. Application keys are associated with the user account that created them and must be named. The application key is used to log all requests made to the API.
 
-## Add
+## Public API keys
 
-To add a Datadog API or application key, navigate to [Integration -> APIs][1], enter a name for your key, and click **Create API key** or **Create Application Key**.
+<div class="alert alert-warning">
+Public API keys are in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on this feature for your account.
+</div>
+
+Public API keys are unique to your organization. A public API key is required by the [web browser log collector][1] to submit logs to Datadog.
+Those keys can only be used to send web browser logs to Datadog.
+
+## Add a key
+
+To add a Datadog API, application, or public API key, navigate to [Integration -> APIs][2], enter a name for your key, and click **Create API key** or **Create Application Key** or **Create Public Api Key**.
 
 **Note**:
 
@@ -26,13 +35,14 @@ To add a Datadog API or application key, navigate to [Integration -> APIs][1], e
 
 ## Remove
 
-To remove a Datadog API or application key, navigate to [Integration -> APIs][1] and select the **Revoke** button next to the key you want to remove:
+To remove a Datadog API or application or public API key, navigate to [Integration -> APIs][2] and select the **Revoke** button next to the key you want to remove:
 
 {{< img src="account_management/faq/Application_Keys.jpg" alt="Application Keys" responsive="true" >}}
 
 ## Troubleshooting
 
-Need help? Contact [Datadog support][2].
+Need help? Contact [Datadog support][3].
 
-[1]: https://app.datadoghq.com/account/settings#api
-[2]: /help
+[1]: https://docs.datadoghq.com/logs/log_collection/javascript
+[2]: https://app.datadoghq.com/account/settings#api
+[3]: /help
