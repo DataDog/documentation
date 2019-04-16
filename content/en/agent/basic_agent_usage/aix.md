@@ -84,12 +84,18 @@ To enable the above integrations, copy and edit the sample configuration files p
 
 DogStatsD allows collecting and submitting custom metrics to Datadog. It listens on a UDP port and StatsD metrics may be submitted to it. These are then relayed to Datadog.
 
-DogStatsD relies on the same configuration file defined for the Agent and runs in a separate process. To enable DogStatsD:
+DogStatsD relies on the same configuration file defined for the Agent, where a DogStatsD configuration section is available. The DogStatsD server typically runs within the same Agent process—but should you need a dedicated process, it may also be launched in standalone mode.
+
+To enable DogStatsD, edit `/etc/datadog-agent/datadog.yaml` and set the relevant configuration options.
 
 ```
-cd /opt/datadog-agent/agent
-./dogstatsd.py
+dogstatsd:                        # Dogstatsd configuration options
+  enabled: true                   # disabled by default
+  bind_host: localhost            # address we'll be binding to
+  port: 8125                      # dogstatsd UDP listening port
+  non_local_traffic: false        # listen to non-local traffic
 ```
+
 **Note:** DogStatsD does not daemonize and runs in the foreground.
 
 There are also facilities to run the Agent via the known Python supervisor. This might be your preferred way to manage the Agent daemon if you are familiar with the tool. There are entries for both the Agent and DogStatsD.
