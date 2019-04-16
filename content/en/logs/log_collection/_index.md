@@ -38,6 +38,8 @@ logs_enabled: true
 
 The Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
 
+**Note**: If you're using Kubernetes, make sure to [enable log collection in your DaemonSet setup][2]. If you're using Docker, [enable log collection for the containerized Agent][3].
+
 ## Enabling log collection from integrations
 
 To start collecting logs for a given integration, uncomment the logs section in that integration's yaml file and configure it for your environment.
@@ -52,11 +54,11 @@ If an integration does not support logs by default, use the custom file configur
 
 Datadog Agent v6 can collect logs and forward them to Datadog from files, the network (TCP or UDP), journald, and Windows channels:
 
-1. Create a new folder in the `conf.d/` directory at the root of your [Agent's configuration directory][2] named after your log source.
+1. Create a new folder in the `conf.d/` directory at the root of your [Agent's configuration directory][4] named after your log source.
 2. Create a new `conf.yaml` file in this new folder.
 3. Add a custom log collection configuration group with the parameters below.
-4. [Restart your Agent][3] to take into account this new configuration.
-5. [Run the Agent's status subcommand][4] to check if your custom configuration is correct.
+4. [Restart your Agent][5] to take into account this new configuration.
+5. [Run the Agent's status subcommand][6] to check if your custom configuration is correct.
 
 Below are examples of custom log collection setup:
 
@@ -164,12 +166,12 @@ List of all available parameters for log collection:
 | `port`           | Yes      | If `type` is **tcp** or **udp**, port to listen log from.                                                                                                                                                                                                                                                                                           |
 | `path`           | Yes      | If `type` is **file** or **journald**, path of the file to gather logs from.                                                                                                                                                                                                                                                                        |
 | `channel_path`   | Yes      | If `type` is **windows_event**, list of windows event channels to collect log from.                                                                                                                                                                                                                                                                 |
-| `service`        | Yes      | Name of the service owning the log. If you instrumented your service with [Datadog APM][5], this must be the same service name.                                                                                                                                                                                                                    |
-| `source`         | Yes      | Attribute that defines which integration is sending the logs. If the logs do not come from an existing integration, then this field may include a custom source name. However, it is recommended that you match this value to the namespace of any related [custom metrics][6] you are collecting, for example: `myapp` from `myapp.request.count`. |
+| `service`        | Yes      | Name of the service owning the log. If you instrumented your service with [Datadog APM][7], this must be the same service name.                                                                                                                                                                                                                    |
+| `source`         | Yes      | Attribute that defines which integration is sending the logs. If the logs do not come from an existing integration, then this field may include a custom source name. However, it is recommended that you match this value to the namespace of any related [custom metrics][8] you are collecting, for example: `myapp` from `myapp.request.count`. |
 | `include_units`  | No       | If `type` is **journald**, list of specific journald units to include.                                                                                                                                                                                                                                                                              |
 | `exclude_units`  | No       | If `type` is **journald**, list of specific journald units to exclude.                                                                                                                                                                                                                                                                              |
 | `sourcecategory` | No       | A multiple value attribute used to refine the source attribute, for example: `source:mongodb, sourcecategory:db_slow_logs`.                                                                                                                                                                                                                         |
-| `tags`           | No       | Add tags to each log collected ([learn more about tagging][7]).                                                                                                                                                                                                                                                                                    |
+| `tags`           | No       | Add tags to each log collected ([learn more about tagging][9]).                                                                                                                                                                                                                                                                                    |
 
 ## Advanced log collection functions
 
@@ -355,7 +357,7 @@ logs:
 
 ### Using a Proxy for Logs
 
-[Refer to the Agent proxy documentation][8] to learn how to forward your Logs with a proxy.
+[Refer to the Agent proxy documentation][10] to learn how to forward your Logs with a proxy.
 
 ### Global processing rules
 
@@ -390,7 +392,7 @@ DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_
 {{< /tabs >}}
 All the logs collected by the Datadog Agent are impacted by those processing rules.
 
-**Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the [Status Command][9] to troubleshoot any issues.
+**Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the [Status Command][11] to troubleshoot any issues.
 
 ## How to get the most of your application logs
 
@@ -423,12 +425,14 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 {{< partial name="whats-next/whats-next.html" >}}
 
 
- [1]: /agent
-[2]: /agent/guide/agent-configuration-files
-[3]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: /agent/guide/agent-commands/#agent-status-and-information
-[5]: /tracing
-[6]: /developers/metrics/custom_metrics
-[7]: /tagging
-[8]: /agent/proxy/#proxy-for-logs
-[9]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information
+[1]: /agent
+[2]: /agent/kubernetes/daemonset_setup/#log-collection
+[3]: /logs/log_collection/docker
+[4]: /agent/guide/agent-configuration-files
+[5]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: /agent/guide/agent-commands/#agent-status-and-information
+[7]: /tracing
+[8]: /developers/metrics/custom_metrics
+[9]: /tagging
+[10]: /agent/proxy/#proxy-for-logs
+[11]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information
