@@ -425,7 +425,7 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 {{< partial name="whats-next/whats-next.html" >}}
 
 
- [1]: /agent
+[1]: /agent
 [2]: /agent/kubernetes/daemonset_setup/#log-collection
 [3]: /logs/log_collection/docker
 [4]: /agent/guide/agent-configuration-files
