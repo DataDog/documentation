@@ -28,7 +28,7 @@ Send logs to Datadog from web browsers or other Javascript client thanks to the 
 With the `datadog-logs` library you are able to send log directory to Datadog from JS clients and leverage the following features:
 
 * Use the library as a logger. Everything is forwarded to Datadog as JSON documents.
-* Add `context` and extra attributes.
+* Add `context` and extra custom attributes to each logs sent.
 * Forward every JavaScript errors.
 * Forward JavaScript's console logs.
 * Track real client IP address and useragent.
