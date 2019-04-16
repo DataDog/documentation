@@ -51,7 +51,7 @@ Create a Synthetics test to initiate and configure the tests you want Datadog to
 *   **`timeout`** - _optional_ - When the API request will timeout.
 *   **`headers`** - _optional_ - Headers in the API request.
 *   **`body`** - _optional_ The JSON body for the API request.
-*   **`locations`** - _required_ - A list of the locations that you want the tests to be sent from. Valid values are `aws:` followed by any valid AWS region. Valid values are: `aws:eu-central-1`, `aws:ap-northeast-1`, `aws:us-west-2`, `aws:eu-west-2`, `aws: ca-central-1`, `aws:us-east-2`, and `aws:ap-southeast-2`. At least one value is required, and you can use all locations.
+*   **`locations`** - _required_ - A list of the locations that you want the tests to be sent from. At least one value is required, and you can use all locations. For a list of valid locations, use the `GET available locations` method.
 *   **`message`** - _required_ - A description of the test.
 *   **`name`** - _required_ - A unique name for the test.
 *   **`options`** - _optional_ - Use advanced options to specify custom request headers, authentication credentials, body content, cookies, or to have the test follow redirects.  
