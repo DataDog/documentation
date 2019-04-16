@@ -11,9 +11,9 @@ external_redirect: /api/#synthetics
 Synthetics is only available for the Datadog US site.
 </div>
 
-Datadog Synthetics uses simulated user requests and browser rendering to help you ensure uptime, identify regional issues and track your application performance.  
+Datadog Synthetics uses simulated user requests and browser rendering to help you ensure uptime, identify regional issues, and track your application performance.  
 
-Currently, you can use Datadog's API to create Synthetics  API tests programmatically. API tests are HTTP requests (GET, POST, PUT, PATCH, DELETE) executed by Datadog to your web properties or application endpoints at configurable periodic intervals from multiple locations around the world. These checks verify that your applications are responding to requests, as well as that they meet any conditions you define—such as response time, HTTP status code, and header or body contents.
+You can use Datadog's API to create Synthetics API tests programmatically. API tests are HTTP requests (GET, POST, PUT, PATCH, DELETE) executed by Datadog to your web properties or application endpoints at configurable periodic intervals from multiple locations around the world. These checks verify that your applications are responding to requests, as well as that they meet any conditions you define—such as response time, HTTP status code, and header or body contents.
 
 For more information about Synthetics, see the [Synthetics overview][1].
 
