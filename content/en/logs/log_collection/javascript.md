@@ -114,7 +114,11 @@ Send a custom log entries directly to Datadog with the `log` function:
 Datadog.log(<MESSAGE>,<JSON_ATTRIBUTES>,<SEVERITY>)
 ```
 
-The accepted severity value are `debug`, `info`, `warn` or `error`.
+| Placehodler         | Description                                                                             |
+| ------              | -------                                                                                 |
+| `<MESSAGE>`         | The message of your log that is fully indexed by Datadog                                |
+| `<JSON_ATTRIBUTES>` | A valid JSON object that includes all attributes attached to the `<MESSAGE>`            |
+| `<SEVERITY>`        | Status of your log, the accepted severity value are `debug`, `info`, `warn` or `error`. |
 
 **Example:**
 
