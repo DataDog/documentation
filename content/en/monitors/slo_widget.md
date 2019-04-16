@@ -30,7 +30,7 @@ Monitor uptime is available under the time-based SLI dropdown in the widget. Thi
 
 {{< img src="monitors/slo_widget/slo_uptime-choose_a_source.png" alt="Choose a monitor" responsive="true" >}}
 
-First, select a [monitor][#supported-monitor-types].
+First, select a [monitor](#supported-monitor-types).
 
 Optionally, you can view uptime by monitor groups in three different ways:
 
