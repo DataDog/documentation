@@ -11,7 +11,7 @@ Create a Synthetics test to initiate and configure the tests you want Datadog to
 
 ##### Arguments
 
-*   **`assertions`** - _required_ - The function where you define when you want Datadog to alert you. Assertions are defined by: `operator`, `property`, `type` and `target`.
+*   **`assertions`** - _required_ - The function where you define when you want Datadog to alert you. Assertions are defined by: `operator`, `property`, `type`, and `target`.
 *   **`operator`** - _required_ - The action that you want tested. Valid operators depend on the property `type` being tested.
 <table>
   <tr>
@@ -40,8 +40,8 @@ Create a Synthetics test to initiate and configure the tests you want Datadog to
     <td>for `contains`/`does not contain`/`is`/`is not`: String &lt;br&gt; for `matches`/`does not match`: [RegexStrings][1]</td>
   </tr>
 </table>
-*   **`type`** - _required_ - The API parameter that you want to be alerted on. Types of properties are `header`, `body`, `responseTime`, and `statusCode`. When you define a header, you must specify the header parameter key in the `property` parameter, and the header parameter value with the `target` parameter. For all other types, use the `target` to specify the body, the response time, and the error messages, for example, a `"type":"statusCode"` might have a `"target":403`.
-*   **`property`** - _optional_ - When you are setting up a `header` `type`, this is required to define the headers parameter key. Valid values are any header keys, like `Content-Type`, or `Authorization`.
+*   **`type`** - _required_ - The API parameter that you want to be alerted on. Types of properties are `header`, `body`, `responseTime`, and `statusCode`. When you define a header, you must specify the header parameter key in the `property` parameter, and the header parameter value with the `target` parameter. For all other types, use the `target` to specify the body, the response time, and the error messages. For example, a `"type":"statusCode"` might have a `"target":403`.
+*   **`property`** - _optional_ - When you are setting up a `header` `type`, this is required to define the headers parameter key. Valid values are any header keys, like `Content-Type` or `Authorization`.
 *   **`target`** - _required_ - The value of the parameter you want to test. For `header`, valid values are any of the valid values for the header key that you define in `property`. For `statusCode`, valid values are valid status codes. For `responseTime`, valid values are response times.
 *   **`request`** - _required_ - the array where you define your API that you want Datadog to test. Make sure to include any required authentication information.
 *   **`method`** - _required_ - The method of the API to test. Valid values are `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`.
@@ -54,6 +54,6 @@ Create a Synthetics test to initiate and configure the tests you want Datadog to
 *   **`name`** - _required_ - A unique name for the test.
 *   **`options`** - _optional_ - Use advanced options to specify custom request headers, authentication credentials, body content, cookies, or to have the test follow redirects.  
 *   **`tags`** - _optional_ - Tags you want to use to filter your test when you are viewing it in Datadog. For more info on custom tags, see [Using tags][1].
-*   **`type`** - _required_ - the type of test. Valid values are `api` and `browser`.
+*   **`type`** - _required_ - The type of test. Valid values are `api` and `browser`.
 
 [1]: /tagging/using_tags
