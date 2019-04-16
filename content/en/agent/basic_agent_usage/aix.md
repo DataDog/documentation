@@ -11,13 +11,15 @@ The Datadog Unix Agent is being developed for specific system architectures, and
 This page outlines the installation and configuration of the Datadog UNIX Agent for AIX.
 
 **Note:** The Datadog Unix Agent currently supports the following versions of AIX:
+
 * AIX 6.1 TL9 SP6+
 * AIX 7.1 TL5 SP3+
 * AIX 7.2 TL3 SP0+
 
 ## Installation
 
-A one-step ksh install script is provided on the [Agent download page](https://app.datadoghq.com/account/settings#agent/aix) within Datadog. The script supports the following environment variables:
+A one-step ksh install script is provided on the [Agent download page][1] within Datadog. The script supports the following environment variables:
+
 * **CHANNEL**: defaults to stable. Specifies the package repository channel.
   * Values: `stable`, `beta`, `unstable`
 * **VERSION**: defaults to latest. Specifies the package version.
@@ -27,7 +29,7 @@ A one-step ksh install script is provided on the [Agent download page](https://a
 * **PROXY_PASSWORD**: defaults to empty. Specifies the proxy server password.
 * **INSECURE**: defaults to `false`. Allows skipping TLS validation.
 
-Alternatively, download links for the latest releases can be found on [this page][1].
+Alternatively, download links for the latest releases can be found on [this page][2].
 
 The installer may be executed as follows (as root):
 
@@ -117,4 +119,5 @@ Note: Agent uninstallation logs can be found in the `dd-aix-install.log` file. T
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-unix-agent/releases
+[1]: https://app.datadoghq.com/account/settings#agent/aix
+[2]: https://github.com/DataDog/datadog-unix-agent/releases
