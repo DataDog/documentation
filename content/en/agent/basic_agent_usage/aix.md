@@ -63,11 +63,11 @@ That said, configuration files are searched in this order (with the first match 
 
 A sample configuration file can be found in `/opt/datadog-agent/etc/datadog-agent`.
 
-A basic configuration will typically require your datadog API key. Should you require to submit your metrics to the EU instance, the `site` configuration option is available. 
-You may also override the `dd_url` manually, but that should not be required.
+A basic configuration typically requires your Datadog API key. To submit your metrics to the EU instance, the `site` configuration option is available. 
+
+You can also override `dd_url` manually, but that should not be required.
 
 Occassionally a proxy configuration must be specified depending on your network setup.
-
 
 **Configuration files for Integrations:**
 `/etc/datadog-agent/conf.d/`
