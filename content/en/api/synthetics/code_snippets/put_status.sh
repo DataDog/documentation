@@ -4,7 +4,7 @@ api_key=<YOUR_API_KEY>
 app_key=<YOUR_APP_KEY>
 test_id=<the ID of the test you want to update>
 
-curl  -X POST -H "Content-type: application/json" \
+curl  -X PUT "Content-type: application/json" \
 -d '{
     "new_status": "paused",
 }
