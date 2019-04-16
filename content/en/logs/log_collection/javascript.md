@@ -32,7 +32,7 @@ With the `datadog-logs` library you are able to send log directory to Datadog fr
 * Wrap and forward every JavaScript errors automatically.
 * Forward JavaScript's console logs.
 * Record real client IP address and user agent.
-* Automatic bulk posts.
+* Optimised network usage with automatic bulk posts.
 
 ## Get the Public API Key
 
