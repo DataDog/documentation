@@ -26,7 +26,7 @@ Therefore, `datadog.conf` (v5) is now retired in favor of `datadog.yaml` (v6).
 | Suse                                 | `/etc/datadog-agent/datadog.yaml`    |
 | Ubuntu                               | `/etc/datadog-agent/datadog.yaml`    |
 | Windows Server 2008, Vista and newer | `\\ProgramData\Datadog\datadog.yaml` |
-| Windows Server 2003, XP or older     | *unsupported Platform*               |
+| Windows Server 2003, XP or older     | *unsupported platform*               |
 
 
 {{% /tab %}}
