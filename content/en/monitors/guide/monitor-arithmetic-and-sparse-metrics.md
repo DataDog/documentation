@@ -1,8 +1,8 @@
 ---
-title: Arithmetci in Monitor Evaluations
+title: Monitor Arithmetic and Sparse Metrics
 kind: guide
 aliases:
-  - /monitors/guide/arithmetic-in-monitor-evaluations
+  - /monitors/guide/monitor-arithmetic-and-sparse-metrics
 ---
 
 ## Overview
