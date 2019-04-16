@@ -11,7 +11,7 @@ To use Kubernetes `secret`s to set your API key, first encode your plaintext API
 echo -n <DD_API_KEY> | base64
 ```
 
-This command generates the value for `<YOUR_BASE64_ENCODED_DATADOG_API_KEY>`
+This command generates the value for `<YOUR_BASE64_ENCODED_DATADOG_API_KEY>`.
 
 Then, uncomment the "Secret" manifest section and the `valueFrom` section of the `DD_API_KEY` environment variable of the DaemonSet.
 
