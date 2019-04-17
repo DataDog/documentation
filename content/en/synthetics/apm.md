@@ -35,7 +35,7 @@ Create a check that hits your traced HTTP server, and Datadog automatically link
 
 ## Supported Libraries
 
-The following tracing libraries are supported:
+The following Datadog tracing libraries are supported:
 
 * [Python][2]
 * [Go][3]
