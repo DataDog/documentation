@@ -1973,7 +1973,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/hosts?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://api.datadoghq.com/api/v1/hosts?api_key={{dd_api_key}}&application_key={{dd_app_key}}&sort_field=cpu&sort_dir=desc&start=0&count=100",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -1995,9 +1995,25 @@
 									"value": "{{dd_app_key}}"
 								},
 								{
-									"key": "tags",
-									"value": "10.31.10.6",
+									"key": "filter",
+									"value": "",
 									"disabled": true
+								},
+								{
+									"key": "sort_field",
+									"value": "cpu"
+								},
+								{
+									"key": "sort_dir",
+									"value": "desc"
+								},
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "count",
+									"value": "100"
 								}
 							]
 						},
@@ -2041,11 +2057,6 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
-								},
-								{
-									"key": "tags",
-									"value": "10.31.10.6",
-									"disabled": true
 								}
 							]
 						},
