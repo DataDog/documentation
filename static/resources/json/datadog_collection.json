@@ -5655,12 +5655,73 @@
 			"item": [
 				{
 					"name": "Send traces",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "4498d5f5-38b7-41d5-ab34-6c83ed1246f0",
+								"exec": [
+									"// Set current date and time",
+									"// YYYY-MM-ddTHH:mm:ss.SSSZ",
+									"var curr_date = (new Date());",
+									"var from_date = (new Date());",
+									"var to_date = (new Date());",
+									"",
+									"// Set timeframe window in minutes",
+									"// Positive number sets to_date forward",
+									"// Negative number sets from_date backwards",
+									"var window_minutes = -30",
+									"if (window_minutes > 0) {",
+									"    // Look ahead: adjusts to_date",
+									"    to_date.setMinutes(curr_date.getMinutes()+window_minutes);",
+									"} else {",
+									"    // Look behind: adjusts from_date",
+									"    from_date.setMinutes(curr_date.getMinutes()+window_minutes);",
+									"}",
+									"",
+									"// timestamp in ms",
+									"var from_ts_ms = parseInt(Math.floor(from_date.getTime()));",
+									"var to_ts_ms = parseInt(Math.floor(to_date.getTime()));",
+									"// timestamp in seconds",
+									"var from_ts = parseInt(from_ts_ms/1000);",
+									"var to_ts = parseInt(to_ts_ms/1000);",
+									"// timestamp in ns",
+									"var from_ts_ns = parseInt(from_ts_ms*1000);",
+									"var to_ts_ns = parseInt(to_ts_ms*1000);",
+									"",
+									"//// Uncomment for debugging.",
+									"// console.log(from_date);",
+									"// console.log(from_ts_ms);",
+									"// console.log(from_ts);",
+									"",
+									"// console.log(to_date);",
+									"// console.log(to_ts_ms);",
+									"// console.log(to_ts);",
+									"",
+									"//// Set as Postman variables",
+									"pm.environment.set(\"from_date\", from_date);",
+									"pm.environment.set(\"from_ts_ms\", from_ts_ms);",
+									"pm.environment.set(\"from_ts\", from_ts);",
+									"",
+									"pm.environment.set(\"to_date\", to_date);",
+									"pm.environment.set(\"to_ts_ms\", to_ts_ms);",
+									"pm.environment.set(\"to_ts\", to_ts);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"method": "GET",
-						"header": [],
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "[\n    [\n        {\n            \"trace_id\": \"{{guid}}\",\n            \"span_id\": \"{{guid}}\",\n            \"name\": \"span_name\",\n            \"resource\": \"/home\",\n            \"service\": \"service_name\",\n            \"type\": \"web\",\n            \"start\": \"{{from_ts_ns}}\",\n            \"duration\": \"2000000000\"\n        }\n    ]\n]"
 						},
 						"url": {
 							"raw": "http://localhost:8126/v0.3/traces",
@@ -5677,9 +5738,38 @@
 						"description": "Datadog’s APM allows you to collect performance metrics by tracing your code to determine which parts of your application are slow or inefficient.\n\nTracing data is sent to the Datadog Agent via an HTTP API. We provide some official libraries that simplify sending metrics to the Datadog Agent, however you may want to interact directly with the API to instrument applications that cannot use the libraries or are written in languages that don’t yet have an official Datadog Tracing library.\n\nTraces can be sent as an array of traces:\n\n[ trace1, trace2, trace3 ]\nand each trace is an array of spans:\n\ntrace1 = [ span, span2, span3 ]\nand each span is a dictionary with a trace_id, span_id, resource..\n\n"
 					},
 					"response": []
+				},
+				{
+					"name": "Send services",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"service_name\": {\n        \"app\": \"my-app\",\n        \"app_type\": \"web\"\n    }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8126/v0.3/services",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8126",
+							"path": [
+								"v0.3",
+								"services"
+							]
+						},
+						"description": "https://docs.datadoghq.com/api/?lang=bash#send-traces"
+					},
+					"response": []
 				}
-			],
-			"description": "The tracing API is an Agent API rather than a service side API. Submit your traces to the http://localhost:8126/v0.3/traces local endpoint so your Agent can forward them to Datadog."
+			]
 		},
 		{
 			"name": "Usage Metering",
