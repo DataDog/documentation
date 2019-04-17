@@ -5278,6 +5278,54 @@
 							"raw": ""
 						},
 						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/org/:PUBLIC_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"org",
+								":PUBLIC_ID"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "PUBLIC_ID",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Organizations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/org?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
