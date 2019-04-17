@@ -17,7 +17,7 @@ further_reading:
   text: "Configure a Browser Test"
 ---
 
-<div class="alert alert-warning">Synthetics is only available for the Datadog US site. Browser tests are available in beta: to request access complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics Request form</a>.</div>
+<div class="alert alert-warning">Synthetics is only available for the Datadog US site.</div>
 
 ## Overview
 
@@ -112,6 +112,8 @@ A check is considered `FAILED` if it doesn't satisfy the assertions configured f
 | INVALID_REQUEST | The configuration of the check is invalid (e.g., typo in the URL).                                                                                                                             |
 | SSL             | The SSL connection couldn't be performed; see below for more detailed explanations.                                                                                                          |
 | TIMEOUT         | The request couldn't be completed in a reasonable time.                                                                                                                                      |
+
+If a test fails, the uptime directly considers the endpoint as `down`. It is not retested until the next test run.
 
 ### SSL errors
 

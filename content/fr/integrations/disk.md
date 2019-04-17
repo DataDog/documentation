@@ -56,14 +56,13 @@ Le check Disk n'inclut aucun événement.
 Renvoie `CRITICAL` si le système de fichiers est en mode lecture seule.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
+
+
+{{< get-dependencies >}}
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/disk/datadog_checks/disk/data/conf.yaml.default
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/disk/metadata.csv
-[6]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}
+[5]: https://docs.datadoghq.com/fr/help

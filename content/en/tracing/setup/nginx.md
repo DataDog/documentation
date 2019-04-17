@@ -101,7 +101,7 @@ After completing this configuration, HTTP requests to NGINX will initiate and pr
 
 ## NGINX Ingress Controller for Kubernetes
 
-The [Kubernetes ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller versions 0.23.0+ include the NGINX plugin for OpenTracing.
+The [Kubernetes ingress-nginx][6] controller versions 0.23.0+ include the NGINX plugin for OpenTracing.
 
 To enable this plugin, create or edit a ConfigMap to set `enable-opentracing: "true"` and the `datadog-collector-host` to which traces should be sent.
 The name of the ConfigMap will be cited explicitly by the nginx-ingress controller container's command line argument, defaulting to `--configmap=$(POD_NAMESPACE)/nginx-configuration`.
@@ -137,3 +137,4 @@ data:
 [3]: https://github.com/DataDog/dd-opentracing-cpp/releases/latest
 [4]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/nginx.conf
 [5]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/dd-config.json
+[6]: https://github.com/kubernetes/ingress-nginx

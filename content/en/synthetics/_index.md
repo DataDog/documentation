@@ -20,7 +20,7 @@ further_reading:
   text: "Identify Synthetics Bots"
 ---
 
-<div class="alert alert-warning">Synthetics is only available for the Datadog US site. Browser tests are available in beta: to request access complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics Request form</a>.</div>
+<div class="alert alert-warning">Synthetics is only available for the Datadog US site.</a>.</div>
 
 ## Overview
 
@@ -58,7 +58,7 @@ Finally, the following characters are reserved: `-`, `(`, `)`, `"`, `~`, `*`, `:
 
 ## Create a check
 
-Select **Create a New check +** in the upper right corner of the Synthetics page to create an [API tests][2] or a [browser test][3].
+Select **Create a New check +** in the upper right corner of the Synthetics page to create an [API tests][2] or a [browser test][3]. When a test fails, the endpoint is not retested: the uptime directly considers the endpoint as `down`. 
 
 {{< img src="synthetics/create_a_check.png" alt="Create a check" responsive="true" style="width:80%;">}}
 
