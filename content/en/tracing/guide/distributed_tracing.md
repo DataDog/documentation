@@ -265,7 +265,7 @@ Manually set trace priority:
 ```java
 import datadog.trace.api.Trace;
 import datadog.trace.api.interceptor.MutableSpan;
-import datadog.trace.common.sampling.PrioritySampling;
+import datadog.trace.common.sampling.ForcedTracing;
 import io.opentracing.util.GlobalTracer;
 
 public class MyClass {
@@ -273,8 +273,13 @@ public class MyClass {
     public static void myMethod() {
         // grab the active span out of the traced method
         MutableSpan ddspan = (MutableSpan) GlobalTracer.get().activeSpan();
+
         // ask the sampler to keep the current trace
-        ddspan.setSamplingPriority(PrioritySampling.USER_KEEP);
+        ddspan.setTag(ForcedTracing.manual_KEEP);
+
+        // ask the sampler to drop the current trace
+        ddspan.setTag(ForcedTracing.manual_DROP);
+
         // method impl follows
     }
 }
