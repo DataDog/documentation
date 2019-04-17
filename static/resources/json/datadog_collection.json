@@ -2545,7 +2545,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/integration/aws?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/integration/azure?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -2556,7 +2556,7 @@
 										"api",
 										"v1",
 										"integration",
-										"aws"
+										"azure"
 									],
 									"query": [
 										{
