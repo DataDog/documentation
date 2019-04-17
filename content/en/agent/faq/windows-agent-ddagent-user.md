@@ -4,7 +4,7 @@ kind: faq
 disable_toc: true
 ---
 
-**Starting with release `6.11.0`, the Core and APM/Trace components of the Windows Agent run under the `ddagentuser` account, created at install time, instead of running on prior versions under the `LOCAL_SYSTEM` account. If enabled, the Live Process component still runs under `LOCAL_SYSTEM`.**
+**Starting with release `6.11.0`, the Core and APM/Trace components of the Windows Agent run under the `ddagentuser` account, created at install time, instead of running under the `LOCAL_SYSTEM` account, as was the case on prior versions. If enabled, the Live Process component still runs under the `LOCAL_SYSTEM` account.**
 
 The user `ddagentuser` is created at install time for the Datadog Windows Agent. When installed on an Active Directory server, the username and password must be provided to the installer. The new user is a non-privileged user. It gains the following rights during installation:
 
@@ -30,7 +30,7 @@ The exception is on domain controllers (primary and backup). There is no notion 
 To support this environment, the Agent installer requires that the administrator provides a username and password under which the Agent run. The username and password are provided as properties on the installation command line, i.e.
 
 ```shell
-	Msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNMAE> DDAGENTUSER_PASSWORD=<PASSWORD>
+	Msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME> DDAGENTUSER_PASSWORD=<PASSWORD>
 ```
 
 **Note**: These options are honored even in a non-domain environment, if the user wishes to supply a username/password to use rather than have the installer generate one.

@@ -23,7 +23,7 @@ This page outlines the basic features of the Windows Datadog Agent. If you haven
 
 ## Agent installation
 
-**Starting with release `6.11.0`, the Core and APM/Trace components of the Windows Agent run under the `ddagentuser` account, created at install time, instead of running on prior versions under the `LOCAL_SYSTEM` account. If enabled, the Live Process component still runs under `LOCAL_SYSTEM`.**
+**Starting with release `6.11.0`, the Core and APM/Trace components of the Windows Agent run under the `ddagentuser` account, created at install time, instead of running under the `LOCAL_SYSTEM` account, as was the case on prior versions. If enabled, the Live Process component still runs under the `LOCAL_SYSTEM` account.**
 
 [Refer to the dedicated ddagentuser FAQ to learn more.][3]
 
