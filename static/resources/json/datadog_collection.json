@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "76de7dc7-6dfb-439d-9b21-f21fc33a2d9d",
+		"_postman_id": "05a8e9ca-715c-4b08-a51f-64f2b8f74387",
 		"name": "Datadog API Collection",
 		"description": "Top Level Folder For Datadog API calls",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -4128,10 +4128,10 @@
 							"listen": "prerequest",
 							"script": {
 								"id": "5edede57-369e-4c98-b74c-267e1aa0f014",
-								"type": "text/javascript",
 								"exec": [
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -5545,6 +5545,18 @@
 			"item": [
 				{
 					"name": "GET Hourly Usage For Hosts and Containers",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "86c2f87a-0c50-4e0e-82cc-a27b79513156",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -6086,6 +6098,20 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"id": "ae54c8e4-523f-43ae-9f0f-3cb148ffea5a",
+			"key": "dd_api_key",
+			"value": "xxxxx",
+			"type": "string"
+		},
+		{
+			"id": "a3db5baf-b743-4ff9-947b-37f23edce215",
+			"key": "dd_app_key",
+			"value": "yyyyy",
+			"type": "string"
 		}
 	]
 }
