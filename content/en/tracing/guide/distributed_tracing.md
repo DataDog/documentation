@@ -265,7 +265,7 @@ Manually set trace priority:
 ```java
 import datadog.trace.api.Trace;
 import datadog.trace.api.interceptor.MutableSpan;
-import datadog.trace.common.sampling.ForcedTracing;
+import datadog.trace.api.sampling.ForcedTracing;
 import io.opentracing.util.GlobalTracer;
 
 public class MyClass {
