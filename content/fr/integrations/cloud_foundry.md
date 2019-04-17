@@ -64,7 +64,7 @@ Pour les versions antérieures, Cloud Foundry propose un rétroportage de cette
     - `https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip`
     - `https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-x.y.z.zip`
 
-    N'utilisez pas la `dernière` version ici (remplacez `x.y.z` par la version que vous souhaitez utiliser).
+    N'utilisez pas la `latest` version ici (remplacez `x.y.z` par la version que vous souhaitez utiliser).
 
     **Important** : votre buildpack standard doit être le dernier manifeste à agir en tant que buildpack final. Pour en savoir plus, consultez la [documentation Cloud Foundry][8] relative aux buildpacks (en anglais).
 
@@ -203,7 +203,7 @@ Ajoutez ce qui suit au fichier de configuration de runtime de votre Director BOS
 ---
 releases:
   - name: datadog-agent
-    version: <VERSION_DÉJÀ_IMPORTÉE> # préciser le numéro de la version (x.y.z et non 'dernière')
+    version: <VERSION_DÉJÀ_IMPORTÉE> # préciser le numéro de la version (x.y.z et non 'latest')
 
  addons:
 - name: datadog
@@ -371,7 +371,7 @@ releases:
 #   version: <x.y.z>
 # ...
   - name: firehose-nozzle-datadog
-    version: <VERSION_DÉJÀ_IMPORTÉE> # préciser le numéro de la version (x.y.z et non 'dernière')
+    version: <VERSION_DÉJÀ_IMPORTÉE> # préciser le numéro de la version (x.y.z et non 'latest')
 ```
 
 Pour vérifier quelle version de `datadog-firehose-nozzle` a été importée, exécutez `bosh releases`.
