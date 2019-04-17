@@ -5298,11 +5298,6 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
-								},
-								{
-									"key": "public_id",
-									"value": "ox0uxa88vwyklfbz",
-									"disabled": true
 								}
 							]
 						}
