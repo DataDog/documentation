@@ -22,4 +22,4 @@ Find below a summary of Datadog data collection, resolution, and retention:
 | API Test metrics             | Datadog Synthetics application                                        | 1 min               | 1 min              | 15 months                               | Synthetics       |
 | Browser Test metrics         | Datadog Synthetics application                                        | 5 mins              | 5 min              | 15 months                               | Synthetics       |
 
-[1]: /tracing/getting_further/trace_sampling_and_storage
+[1]: /tracing/guide/trace_sampling_and_storage

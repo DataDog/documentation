@@ -1,12 +1,12 @@
 ---
 title: Remove host tags
 type: apicontent
-order: 21.5
+order: 23.5
 external_redirect: /api/#remove-host-tags
 ---
 
 ## Remove host tags
-This end point allows you to remove all tags in an integration source for a single host.
+This endpoint allows you to remove all tags in an integration source for a single host.
 
 ##### ARGUMENTS
 * **`source`** [*optional*, *default*=**users**]:  

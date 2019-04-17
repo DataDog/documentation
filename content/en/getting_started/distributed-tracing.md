@@ -191,6 +191,6 @@ The Datadog APM allows you to trace all interactions of a request with the diffe
 [6]: /tracing/visualization/service/#out-of-the-box-graphs
 [7]: /tracing/visualization/resource
 [8]: /tracing/visualization/resource/#out-of-the-box-graphs
-[9]: /tracing/getting_further/trace_sampling_and_storage
+[9]: /tracing/guide/trace_sampling_and_storage
 [10]: /tracing/visualization/trace
 [11]: /tracing/visualization/trace/#traces-special-meaning-tags

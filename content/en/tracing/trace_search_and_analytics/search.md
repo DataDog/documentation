@@ -233,7 +233,7 @@ All measure have their own unit that is then used for display in the Trace searc
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/visualization/#spans
-[2]: /tracing/getting_further/trace_sampling_and_storage
+[2]: /tracing/guide/trace_sampling_and_storage
 [3]: /tracing/trace_search_and_analytics/search/#search
 [4]: /tagging/assigning_tags/#traces
 [5]: /graphing/infrastructure

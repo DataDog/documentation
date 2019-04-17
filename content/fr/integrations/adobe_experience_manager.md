@@ -7,7 +7,7 @@ description: >-
   performances sont faibles.
 short_description: 'Recueillez des logs pour suivre les erreurs, obtenir des délais de réponse, etc.'
 categories:
-  - collecte de logs
+  - log collection
 doc_link: /integrations/adobe_experience_manager/
 aliases:
   - /fr/logs/log_collection/adobe_experience_manager
@@ -66,6 +66,6 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /fr/agent/faq/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[3]: /fr/agent/faq/agent-commands/#restart-the-agent
+[2]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[3]: /fr/agent/guide/agent-commands/#restart-the-agent
 [4]: /fr/help

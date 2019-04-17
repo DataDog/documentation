@@ -25,7 +25,7 @@ supported_os:
 ---
 ## Présentation
 
-Ce check surveille le délai d'exécution de conteneur de Containerd.
+Ce check surveille le délai de runtime de conteneur de Containerd.
 
 ## Implémentation
 
@@ -71,10 +71,10 @@ Le check Containerd peut recueillir des événements. Utilisez `filters` pour s
 
 Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
+
+
+{{< get-dependencies >}}
 [1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/containerd.d/conf.yaml.example
 [2]: https://docs.datadoghq.com/fr/help
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/cri/metadata.csv
-
-
-{{< get-dependencies >}}

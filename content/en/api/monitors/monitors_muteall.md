@@ -1,7 +1,7 @@
 ---
 title: Mute all monitors
 type: apicontent
-order: 18.07
+order: 19.07
 external_redirect: /api/#mute-all-monitors
 ---
 
@@ -10,6 +10,6 @@ Muting prevents all monitors from notifying through email and posts to the [even
 
 ##### ARGUMENTS
 
-This end point takes no JSON arguments.
+This endpoint takes no JSON arguments.
 
 [1]: /graphing/event_stream

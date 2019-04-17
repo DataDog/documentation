@@ -111,7 +111,7 @@ proxy_password: my_password
 Do not forget to [restart the Agent][1] for the new settings to take effect.
 
 
-[1]: /agent/faq/agent-commands
+[1]: /agent/guide/agent-commands
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -523,10 +523,10 @@ To use the Datadog Agent v6 as the logs collector, instruct the Agent to use the
 ```yaml
 logs_config:
   logs_dd_url: myProxyServer.myDomain:10514
-  dev_mode_no_ssl: true
+  logs_no_ssl: true
 ```
 
-The `dev_mode_no_ssl` parameter is set to `true` because establishing the SSL/TLS connection is handled by NGINX's `proxy_ssl on` option. **Note**: Set this option to `false` if you don't intend to use a proxy which can encrypt the connection to the logs intake.
+The `logs_no_ssl` parameter is set to `true` because establishing the SSL/TLS connection is handled by NGINX's `proxy_ssl on` option. **Note**: Set this option to `false` if you don't intend to use a proxy which can encrypt the connection to the logs intake.
 
 ## Using the Agent as a Proxy
 

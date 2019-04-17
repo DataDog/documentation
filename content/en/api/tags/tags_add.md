@@ -1,12 +1,12 @@
 ---
 title: Add tags to a host
 type: apicontent
-order: 21.3
+order: 23.3
 external_redirect: /api/#add-tags-to-a-host
 ---
 
 ## Add tags to a host
-This end point allows you to add new tags to a host, optionally specifying where these tags come from.
+This endpoint allows you to add new tags to a host, optionally specifying where these tags come from.
 
 ##### ARGUMENTS
 

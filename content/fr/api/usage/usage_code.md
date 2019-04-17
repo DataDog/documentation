@@ -1,6 +1,6 @@
 ---
 title: Mesure d'utilisation
 type: apicode
-order: 24
+order: 25
 external_redirect: /api/#mesure-d-utilisation
 ---

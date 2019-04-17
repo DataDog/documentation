@@ -77,6 +77,48 @@ When installing the containerized Datadog Agent, set your host tags using the en
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
 DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
+When using the `DD_DOCKER_LABELS_AS_TAGS` variable within a Docker Swarm `docker-compose.yaml` file, remove the apostrophes, for example:
+
+```shell
+DD_DOCKER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
+```
+When adding labels to Docker containers, the placement of the `labels:` keyword inside the `docker-compose.yaml` file is very important. If the container needs to be labeled then place the `labels:` keyword **inside** the `services:` section **not** inside the `deploy:` section. Place the `labels:` keyword inside the `deploy:` section only when the service needs to be labeled. The Datadog agent will not have any labels to extract from the containers without this placement. Below is a sample, working `docker-compose.yaml` file that shows this. In the example below, the labels in the `myapplication:` section, `my.custom.label.project` and `my.custom.label.version` each have unique values. Using the `DD_DOCKER_LABELS_AS_TAGS` environment variable in the `datadog:` section will extract the labels and produce these two tags for the `myapplication` container:
+
+Inside the `myapplication` container the labels are: `my.custom.label.project` and `my.custom.label.version`
+
+After the agent extracts the labels from the container the tags will be:
+`projecttag:projectA`
+`versiontag:1`
+
+**Sample docker-compose.yaml:**
+```shell
+services:
+  datadog:
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+      - '/proc:/host/proc:ro'
+      - '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro'
+    environment:
+      - DD_API_KEY=abcdefghijklmnop
+      - DD_DOCKER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
+      - DD_TAGS="key1:value1 key2:value2 key3:value3"
+    image: 'datadog/agent:latest'
+    deploy:
+      restart_policy:
+        condition: on-failure
+      mode: replicated
+      replicas: 1
+  myapplication:
+    image: 'myapplication'
+    labels:
+      my.custom.label.project: 'projectA'
+      my.custom.label.version: '1'
+    deploy:
+      restart_policy:
+        condition: on-failure
+      mode: replicated
+      replicas: 1
+```
 
 Either define the variables in your custom `datadog.yaml`, or set them as JSON maps in these environment variables. The map key is the source (`label/envvar`) name, and the map value is the Datadog tag name.
 
@@ -358,7 +400,7 @@ The following [integration][5] sources create tags automatically in Datadog:
 [5]: /integrations
 [6]: /agent/faq/how-datadog-agent-determines-the-hostname
 [7]: /graphing/#arithmetic-between-two-metrics
-[8]: /agent/faq/agent-configuration-files
+[8]: /agent/guide/agent-configuration-files
 [9]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [10]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
 [11]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go

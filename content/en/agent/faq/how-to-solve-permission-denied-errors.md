@@ -46,5 +46,5 @@ Then [restart the Agent][1].
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /agent/faq/agent-commands
-[2]: /agent/faq/agent-log-files
+[1]: /agent/guide/agent-commands
+[2]: /agent/guide/agent-log-files
