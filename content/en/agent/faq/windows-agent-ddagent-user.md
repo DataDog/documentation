@@ -43,7 +43,7 @@ If you use Chef and the official `datadog` cookbook to deploy the Agent on Windo
 
 ### General Permissions
 
-Every effort has been made to ensure that the transition from `LOCAL_SYSTEM` to `ddagentuser` is seamless. However, there is a class of problems that  requires specific, configuration-specific modification upon installation of the Agent. These problems arise where the Windows Agent previously relied on administrator rights that the new Agent lacks by default.
+Every effort has been made to ensure that the transition from `LOCAL_SYSTEM` to `ddagentuser` is seamless. However, there is a class of problems that requires specific, configuration-specific modification upon installation of the Agent. These problems arise where the Windows Agent previously relied on administrator rights that the new Agent lacks by default.
 
 For example, if the directory check is monitoring a directory that has specific access rights, e.g. allowing only members of the Administrators group read access, then the existing Agent currently can monitor that directory successfully since `LOCAL_SYSTEM` has administrator rights. Upon upgrading, the administrator must add `ddagentuser` to the access control list for that directory in order for the directory check to function.
 
@@ -53,7 +53,7 @@ For example, if the directory check is monitoring a directory that has specific 
 
 The change to `ddagentuser` affects your JMX-based integrations if the Agent’s JMXFetch is configured to connect to the monitored JVMs through the Attach API, i.e. if:
 
-1. you’re using a JMX-based integration, i.e. one of the following integrations:
+1. You’re using a JMX-based integration, i.e. one of the following integrations:
    * [ActiveMQ][1]
    * [ActiveMQ_XML][2]
    * [Cassandra][3]
@@ -63,7 +63,7 @@ The change to `ddagentuser` affects your JMX-based integrations if the Agent’s
    * [Tomcat][7]
    * [Kafka][8]
 
-2. **AND** you’ve configured the integration with the `process_name_regex` setting instead of the `host` and `port` settings
+2. **AND** you’ve configured the integration with the `process_name_regex` setting instead of the `host` and `port` settings.
 
 If you’re using the Attach API, the change in user context means that the Agent’s JMXFetch is only be able to connect to the JVMs that also run under the `ddagentuser` user context. In most cases, it's recommended that you switch JMXFetch to using JMX Remote by enabling JMX Remote on your target JVMs and configuring your JMX integrations using `host` and `port`. For more information, refer to the [JMX documentation][4].
 
