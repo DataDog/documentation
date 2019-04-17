@@ -1,6 +1,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   {{ range where (where .Data.Pages "Params.beta" "!=" true) ".Params.is_public" "!=" false }}
-  	  {{ if not .Params.private }}
+  	  {{ if (and (not .Params.private) (ne (.Language.Lang | default "en") "fr") ) }}
 	  <url>
 	    <loc>{{ .Permalink }}</loc>
       {{ if not .Lastmod.IsZero }}
