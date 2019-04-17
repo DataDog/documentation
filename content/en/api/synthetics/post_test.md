@@ -7,7 +7,7 @@ external_redirect: /api/#create-tests
 
 ## Create a test
 
-Create a Synthetics test to initiate and configure the tests you want Datadog to send to your API endpoints or to your browser app. You can configure the endpoints being tested, the number of tests, and where they are coming from. The parameters required are different for API and browser tests and they are marked accordingly - if a parameter is marked as _required_, it is required for both types of tests. Once you create a test, it shows up in the UI in your [Synthetics list][1]
+Create a Synthetics test to initiate and configure the tests you want Datadog to send to your API endpoints or to your browser app. You can configure the endpoints being tested, the number of tests, and where they are coming from. The parameters required are different for API and browser tests and they are marked accordingly—if a parameter is marked as _required_, it is required for both types of tests. Once you create a test, it shows up in the UI in your [Synthetics list][1]
 
 A browser test is treated like a GET API test. This method gives you the ability to create the browser test, but you have to use the UI to [record your test][2]. 
 
