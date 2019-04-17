@@ -206,33 +206,62 @@ To enable [Log collection][10] with your DaemonSet:
 
 Learn more about this in [the Docker log collection documentation][11].
 
-### Trace Collection
+### APM and Distributed Tracing
 
-To enable trace collection with your DaemonSet:
+To enable APM by allowing incoming data from port 8126, set the `DD_APM_NON_LOCAL_TRAFFIC` variable to true in your *env* section:
 
-1. Set the Node IP and port as environment variables for your application containers:
+```
+(...)
+      env:
+        (...)
+        - name: DD_APM_NON_LOCAL_TRAFFIC
+          value: "true"
+(...)
+```
 
-    ```
-    apiVersion: apps/v1
-    kind: Deployment
-    ...
-        spec:
-          containers:
-          - name: <CONTAINER_NAME>
-            image: <CONTAINER_IMAGE>/<TAG>
-            env:
-              - name: DD_AGENT_HOST
-                valueFrom:
-                  fieldRef:
-                    fieldPath: status.hostIP
-    ```
+Then, forward the port of the Agent to the host. 
 
-2. Uncomment the `# hostPort: 8126` line in your `datadog-agent.yaml` manifest:
-  This exposes the Datadog Agent tracing port on each of your Kubernetes nodes.
+```
+(...)
+      ports:
+        (...)
+        - containerPort: 8126
+          hostPort: 8126
+          name: traceport
+          protocol: TCP
+(...)
+```
 
-    **Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources. 
-    Another word of caution: some network plugins don't support `hostPorts` yet, so this won't work. 
-    The workaround in this case is to add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. It also means that all ports opened on the container are also opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod will not start. Not all Kubernetes installations allow this.
+Use the downward API to pull the host IP; the application container needs an environment variable that points to `status.hostIP`. The Datadog container Agent expects this to be named `DD_AGENT_HOST`:
+
+```
+apiVersion: apps/v1
+kind: Deployment
+...
+    spec:
+      containers:
+      - name: <CONTAINER_NAME>
+        image: <CONTAINER_IMAGE>/<TAG>
+        env:
+          - name: DD_AGENT_HOST
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
+```
+
+Finally, point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. For example, in Python:
+
+```
+import os
+from ddtrace import tracer
+
+tracer.configure(
+    hostname=os.environ['DD_AGENT_HOST'],
+    port=os.environ['DD_TRACE_AGENT_PORT'],
+)
+```
+
+Refer to the [language-specific APM instrumentation docs][11] for more examples.
 
 ### Process Collection
 
