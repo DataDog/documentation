@@ -104,7 +104,7 @@ clean-virt:  ## remove python virtual env.
 
 docker-start: clean docker-stop  ## start container and run default commands to start hugo site.
 	@docker run -ti --name "docs" -v `pwd`:/src:cached \
-		-e FETCH_INTEGRATIONS=${FETCH_INTEGRATIONS} \
+		-e FETCH_INTEGRATIONS=true \
 		-e GITHUB_TOKEN \
 		-e RUN_SERVER=${RUN_SERVER} \
 		-e CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS} \
