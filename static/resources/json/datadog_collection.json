@@ -5034,7 +5034,7 @@
 					"response": []
 				},
 				{
-					"name": "Validate a Monitor",
+					"name": "Validate a Monitor Definitions",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -5048,7 +5048,7 @@
 							"raw": "{\n    \"type\": \"metric alert\",\n    \"query\": \"THIS QUERY IS INVALID\",\n    \"name\": \"Bytes received on myhost\",\n    \"message\": \"We may need to add web hosts if this is consistently high.\",\n    \"tags\": [\n        \"app:webserver\",\n        \"frontend\"\n    ],\n    \"options\": {\n        \"notify_no_data\": true,\n        \"no_data_timeframe\": 20\n    }\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/monitor?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://api.datadoghq.com/api/v1/monitor/validate?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -5058,7 +5058,8 @@
 							"path": [
 								"api",
 								"v1",
-								"monitor"
+								"monitor",
+								"validate"
 							],
 							"query": [
 								{
