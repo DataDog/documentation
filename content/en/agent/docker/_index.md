@@ -113,7 +113,7 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 | Env Variable                        | Description                                                                                                      |
 |-------------------------------------|------------------------------------------------------------------------------------------------------------------|
 | `DD_PROCESS_AGENT_CONTAINER_SOURCE` | Overrides container source auto-detection to force a single source. e.g `"docker"`, `"ecs_fargate"`, `"kubelet"` |
-| `DD_HEALTH_PORT` | Set this to 5555 in order to expose a health check at port 5555. |
+| `DD_HEALTH_PORT` | Set this to `5555` in order to expose the Agent health check at port `5555`. |
 
 ### Configuration files
 
