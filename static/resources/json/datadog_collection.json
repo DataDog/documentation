@@ -939,6 +939,59 @@
 			"item": [
 				{
 					"name": "Schedule monitor downtime",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "7dbab6ff-c2b2-42d2-9251-42f2247d8762",
+								"exec": [
+									"// Set current date and time",
+									"// YYYY-MM-ddTHH:mm:ss.SSSZ",
+									"var curr_date = (new Date());",
+									"var from_date = (new Date());",
+									"var to_date = (new Date());",
+									"",
+									"// Set timeframe window in minutes",
+									"// Positive number sets to_date forward",
+									"// Negative number sets from_date backwards",
+									"var window_minutes = 30",
+									"if (window_minutes > 0) {",
+									"    // Look ahead: adjusts to_date",
+									"    to_date.setMinutes(curr_date.getMinutes()+window_minutes);",
+									"} else {",
+									"    // Look behind: adjusts from_date",
+									"    from_date.setMinutes(curr_date.getMinutes()+window_minutes);",
+									"}",
+									"",
+									"// timestamp in ms",
+									"var from_ts_ms = parseInt(Math.floor(from_date.getTime()));",
+									"var to_ts_ms = parseInt(Math.floor(to_date.getTime()));",
+									"// timestamp in seconds",
+									"var from_ts = parseInt(from_ts_ms/1000);",
+									"var to_ts = parseInt(to_ts_ms/1000);",
+									"",
+									"//// Uncomment for debugging.",
+									"// console.log(from_date);",
+									"// console.log(from_ts_ms);",
+									"// console.log(from_ts);",
+									"",
+									"// console.log(to_date);",
+									"// console.log(to_ts_ms);",
+									"// console.log(to_ts);",
+									"",
+									"//// Set as Postman variables",
+									"pm.environment.set(\"from_date\", from_date);",
+									"pm.environment.set(\"from_ts_ms\", from_ts_ms);",
+									"pm.environment.set(\"from_ts\", from_ts);",
+									"",
+									"pm.environment.set(\"to_date\", to_date);",
+									"pm.environment.set(\"to_ts_ms\", to_ts_ms);",
+									"pm.environment.set(\"to_ts\", to_ts);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -947,7 +1000,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/downtime?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start=1493343426&end=1556415426&type=weeks&period=1&week_days=Mon,Tue,Wed,Thu,Fri&until_date=1491026399&scope=region:midwest",
+							"raw": "https://app.datadoghq.com/api/v1/downtime?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start={{from_ts}}&end={{to_ts}}&type=weeks&period=1&week_days=Mon,Tue,Wed,Thu,Fri&until_date={{to_ts}}&scope=region:midwest",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -970,11 +1023,11 @@
 								},
 								{
 									"key": "start",
-									"value": "1493343426"
+									"value": "{{from_ts}}"
 								},
 								{
 									"key": "end",
-									"value": "1556415426"
+									"value": "{{to_ts}}"
 								},
 								{
 									"key": "type",
@@ -990,7 +1043,7 @@
 								},
 								{
 									"key": "until_date",
-									"value": "1491026399"
+									"value": "{{to_ts}}"
 								},
 								{
 									"key": "scope",
@@ -1004,6 +1057,59 @@
 				},
 				{
 					"name": "Update monitor downtime",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "52ac75f8-b1ab-4145-b9fc-eeeb5cfc64aa",
+								"exec": [
+									"// Set current date and time",
+									"// YYYY-MM-ddTHH:mm:ss.SSSZ",
+									"var curr_date = (new Date());",
+									"var from_date = (new Date());",
+									"var to_date = (new Date());",
+									"",
+									"// Set timeframe window in minutes",
+									"// Positive number sets to_date forward",
+									"// Negative number sets from_date backwards",
+									"var window_minutes = 60",
+									"if (window_minutes > 0) {",
+									"    // Look ahead: adjusts to_date",
+									"    to_date.setMinutes(curr_date.getMinutes()+window_minutes);",
+									"} else {",
+									"    // Look behind: adjusts from_date",
+									"    from_date.setMinutes(curr_date.getMinutes()+window_minutes);",
+									"}",
+									"",
+									"// timestamp in ms",
+									"var from_ts_ms = parseInt(Math.floor(from_date.getTime()));",
+									"var to_ts_ms = parseInt(Math.floor(to_date.getTime()));",
+									"// timestamp in seconds",
+									"var from_ts = parseInt(from_ts_ms/1000);",
+									"var to_ts = parseInt(to_ts_ms/1000);",
+									"",
+									"//// Uncomment for debugging.",
+									"// console.log(from_date);",
+									"// console.log(from_ts_ms);",
+									"// console.log(from_ts);",
+									"",
+									"// console.log(to_date);",
+									"// console.log(to_ts_ms);",
+									"// console.log(to_ts);",
+									"",
+									"//// Set as Postman variables",
+									"pm.environment.set(\"from_date\", from_date);",
+									"pm.environment.set(\"from_ts_ms\", from_ts_ms);",
+									"pm.environment.set(\"from_ts\", from_ts);",
+									"",
+									"pm.environment.set(\"to_date\", to_date);",
+									"pm.environment.set(\"to_ts_ms\", to_ts_ms);",
+									"pm.environment.set(\"to_ts\", to_ts);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -1012,7 +1118,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/downtime/:DOWNTIME_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start=1493343426&end=1556415426&type=weeks&period=1&week_days=Mon,Tue,Wed,Thu,Fri,Sat&until_date={{to_ts}}&scope=region:midwest",
+							"raw": "https://app.datadoghq.com/api/v1/downtime/:DOWNTIME_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start={{from_ts}}&end={{to_ts}}&type=weeks&period=1&week_days=Mon,Tue,Wed,Thu,Fri,Sat&until_date={{to_ts}}&scope=region:midwest",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1036,11 +1142,11 @@
 								},
 								{
 									"key": "start",
-									"value": "1493343426"
+									"value": "{{from_ts}}"
 								},
 								{
 									"key": "end",
-									"value": "1556415426"
+									"value": "{{to_ts}}"
 								},
 								{
 									"key": "type",
@@ -1056,7 +1162,7 @@
 								},
 								{
 									"key": "until_date",
-									"value": "1491026399"
+									"value": "{{to_ts}}"
 								},
 								{
 									"key": "scope",
@@ -1636,6 +1742,59 @@
 				},
 				{
 					"name": "Query the event stream",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "7b2fd1ea-4374-492b-bb28-f94a3bac8053",
+								"exec": [
+									"// Set current date and time",
+									"// YYYY-MM-ddTHH:mm:ss.SSSZ",
+									"var curr_date = (new Date());",
+									"var from_date = (new Date());",
+									"var to_date = (new Date());",
+									"",
+									"// Set timeframe window in minutes",
+									"// Positive number sets to_date forward",
+									"// Negative number sets from_date backwards",
+									"var window_minutes = -30",
+									"if (window_minutes > 0) {",
+									"    // Look ahead: adjusts to_date",
+									"    to_date.setMinutes(curr_date.getMinutes()+window_minutes);",
+									"} else {",
+									"    // Look behind: adjusts from_date",
+									"    from_date.setMinutes(curr_date.getMinutes()+window_minutes);",
+									"}",
+									"",
+									"// timestamp in ms",
+									"var from_ts_ms = parseInt(Math.floor(from_date.getTime()));",
+									"var to_ts_ms = parseInt(Math.floor(to_date.getTime()));",
+									"// timestamp in seconds",
+									"var from_ts = parseInt(from_ts_ms/1000);",
+									"var to_ts = parseInt(to_ts_ms/1000);",
+									"",
+									"//// Uncomment for debugging.",
+									"// console.log(from_date);",
+									"// console.log(from_ts_ms);",
+									"// console.log(from_ts);",
+									"",
+									"// console.log(to_date);",
+									"// console.log(to_ts_ms);",
+									"// console.log(to_ts);",
+									"",
+									"//// Set as Postman variables",
+									"pm.environment.set(\"from_date\", from_date);",
+									"pm.environment.set(\"from_ts_ms\", from_ts_ms);",
+									"pm.environment.set(\"from_ts\", from_ts);",
+									"",
+									"pm.environment.set(\"to_date\", to_date);",
+									"pm.environment.set(\"to_ts_ms\", to_ts_ms);",
+									"pm.environment.set(\"to_ts\", to_ts);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -1649,7 +1808,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/events?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start=1493127756&end=1493386969",
+							"raw": "https://app.datadoghq.com/api/v1/events?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start={{from_ts}}&end={{to_ts}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1672,11 +1831,11 @@
 								},
 								{
 									"key": "start",
-									"value": "1493127756"
+									"value": "{{from_ts}}"
 								},
 								{
 									"key": "end",
-									"value": "1493386969"
+									"value": "{{to_ts}}"
 								}
 							]
 						},
@@ -1692,6 +1851,59 @@
 			"item": [
 				{
 					"name": "Graph a Snapshot",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "845f4a29-943c-4069-9c7b-29a8a0312b85",
+								"exec": [
+									"// Set current date and time",
+									"// YYYY-MM-ddTHH:mm:ss.SSSZ",
+									"var curr_date = (new Date());",
+									"var from_date = (new Date());",
+									"var to_date = (new Date());",
+									"",
+									"// Set timeframe window in minutes",
+									"// Positive number sets to_date forward",
+									"// Negative number sets from_date backwards",
+									"var window_minutes = -30",
+									"if (window_minutes > 0) {",
+									"    // Look ahead: adjusts to_date",
+									"    to_date.setMinutes(curr_date.getMinutes()+window_minutes);",
+									"} else {",
+									"    // Look behind: adjusts from_date",
+									"    from_date.setMinutes(curr_date.getMinutes()+window_minutes);",
+									"}",
+									"",
+									"// timestamp in ms",
+									"var from_ts_ms = parseInt(Math.floor(from_date.getTime()));",
+									"var to_ts_ms = parseInt(Math.floor(to_date.getTime()));",
+									"// timestamp in seconds",
+									"var from_ts = parseInt(from_ts_ms/1000);",
+									"var to_ts = parseInt(to_ts_ms/1000);",
+									"",
+									"//// Uncomment for debugging.",
+									"// console.log(from_date);",
+									"// console.log(from_ts_ms);",
+									"// console.log(from_ts);",
+									"",
+									"// console.log(to_date);",
+									"// console.log(to_ts_ms);",
+									"// console.log(to_ts);",
+									"",
+									"//// Set as Postman variables",
+									"pm.environment.set(\"from_date\", from_date);",
+									"pm.environment.set(\"from_ts_ms\", from_ts_ms);",
+									"pm.environment.set(\"from_ts\", from_ts);",
+									"",
+									"pm.environment.set(\"to_date\", to_date);",
+									"pm.environment.set(\"to_ts_ms\", to_ts_ms);",
+									"pm.environment.set(\"to_ts\", to_ts);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -1700,7 +1912,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/graph/snapshot?api_key={{dd_api_key}}&application_key={{dd_app_key}}&metric_query=system.load.1{*}&start=1493127756&end=1493387140",
+							"raw": "https://app.datadoghq.com/api/v1/graph/snapshot?api_key={{dd_api_key}}&application_key={{dd_app_key}}&metric_query=system.load.1{*}&start={{from_ts}}&end={{to_ts}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1728,11 +1940,11 @@
 								},
 								{
 									"key": "start",
-									"value": "1493127756"
+									"value": "{{from_ts}}"
 								},
 								{
 									"key": "end",
-									"value": "1493387140"
+									"value": "{{to_ts}}"
 								}
 							]
 						},
@@ -1843,6 +2055,59 @@
 				},
 				{
 					"name": "Mute a Host",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5aa35b4d-447e-4099-a0ee-37451d29d751",
+								"exec": [
+									"// Set current date and time",
+									"// YYYY-MM-ddTHH:mm:ss.SSSZ",
+									"var curr_date = (new Date());",
+									"var from_date = (new Date());",
+									"var to_date = (new Date());",
+									"",
+									"// Set timeframe window in minutes",
+									"// Positive number sets to_date forward",
+									"// Negative number sets from_date backwards",
+									"var window_minutes = 30",
+									"if (window_minutes > 0) {",
+									"    // Look ahead: adjusts to_date",
+									"    to_date.setMinutes(curr_date.getMinutes()+window_minutes);",
+									"} else {",
+									"    // Look behind: adjusts from_date",
+									"    from_date.setMinutes(curr_date.getMinutes()+window_minutes);",
+									"}",
+									"",
+									"// timestamp in ms",
+									"var from_ts_ms = parseInt(Math.floor(from_date.getTime()));",
+									"var to_ts_ms = parseInt(Math.floor(to_date.getTime()));",
+									"// timestamp in seconds",
+									"var from_ts = parseInt(from_ts_ms/1000);",
+									"var to_ts = parseInt(to_ts_ms/1000);",
+									"",
+									"//// Uncomment for debugging.",
+									"// console.log(from_date);",
+									"// console.log(from_ts_ms);",
+									"// console.log(from_ts);",
+									"",
+									"// console.log(to_date);",
+									"// console.log(to_ts_ms);",
+									"// console.log(to_ts);",
+									"",
+									"//// Set as Postman variables",
+									"pm.environment.set(\"from_date\", from_date);",
+									"pm.environment.set(\"from_ts_ms\", from_ts_ms);",
+									"pm.environment.set(\"from_ts\", from_ts);",
+									"",
+									"pm.environment.set(\"to_date\", to_date);",
+									"pm.environment.set(\"to_ts_ms\", to_ts_ms);",
+									"pm.environment.set(\"to_ts\", to_ts);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -1853,7 +2118,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n      \"message\": \"Muting this host for a test!\"\n  }"
+							"raw": "{\n    \"end\": \"{{to_ts}}\",\n    \"message\": \"Muting this host for a test!\",\n    \"override\": \"False\"\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/host/:HOSTNAME/mute?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -3638,6 +3903,59 @@
 				},
 				{
 					"name": "Get a list of logs",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "0508c94e-6c5b-4440-9f9f-312195e3f325",
+								"exec": [
+									"// Set current date and time",
+									"// YYYY-MM-ddTHH:mm:ss.SSSZ",
+									"var curr_date = (new Date());",
+									"var from_date = (new Date());",
+									"var to_date = (new Date());",
+									"",
+									"// Set timeframe window in minutes",
+									"// Positive number sets to_date forward",
+									"// Negative number sets from_date backwards",
+									"var window_minutes = -30",
+									"if (window_minutes > 0) {",
+									"    // Look ahead: adjusts to_date",
+									"    to_date.setMinutes(curr_date.getMinutes()+window_minutes);",
+									"} else {",
+									"    // Look behind: adjusts from_date",
+									"    from_date.setMinutes(curr_date.getMinutes()+window_minutes);",
+									"}",
+									"",
+									"// timestamp in ms",
+									"var from_ts_ms = parseInt(Math.floor(from_date.getTime()));",
+									"var to_ts_ms = parseInt(Math.floor(to_date.getTime()));",
+									"// timestamp in seconds",
+									"var from_ts = parseInt(from_ts_ms/1000);",
+									"var to_ts = parseInt(to_ts_ms/1000);",
+									"",
+									"//// Uncomment for debugging.",
+									"// console.log(from_date);",
+									"// console.log(from_ts_ms);",
+									"// console.log(from_ts);",
+									"",
+									"// console.log(to_date);",
+									"// console.log(to_ts_ms);",
+									"// console.log(to_ts);",
+									"",
+									"//// Set as Postman variables",
+									"pm.environment.set(\"from_date\", from_date);",
+									"pm.environment.set(\"from_ts_ms\", from_ts_ms);",
+									"pm.environment.set(\"from_ts\", from_ts);",
+									"",
+									"pm.environment.set(\"to_date\", to_date);",
+									"pm.environment.set(\"to_ts_ms\", to_ts_ms);",
+									"pm.environment.set(\"to_ts\", to_ts);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -3650,7 +3968,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"query\": \"source:lambda status:error\",\n\"time\": \n{\"from\": \"2019-04-03T09:00Z\", \n\"to\": \"2019-04-04T10:00Z\"}, \n\"sort\": \"desc\", \n\"limit\": 50}"
+							"raw": "{\n    \"limit\": 50,\n    \"query\": \"source:agent status:error\",\n    \"sort\": \"desc\",\n    \"time\": {\n        \"from\": \"{{from_date}}\",\n        \"to\": \"{{to_date}}\"\n    }\n}"
 						},
 						"url": {
 							"raw": "https://api.datadoghq.com/api/v1/logs-queries/list?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -3711,6 +4029,59 @@
 			"item": [
 				{
 					"name": "Get All Active Metrics",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "757736b1-36c3-47a0-b919-3041e624db1f",
+								"exec": [
+									"// Set current date and time",
+									"// YYYY-MM-ddTHH:mm:ss.SSSZ",
+									"var curr_date = (new Date());",
+									"var from_date = (new Date());",
+									"var to_date = (new Date());",
+									"",
+									"// Set timeframe window in minutes",
+									"// Positive number sets to_date forward",
+									"// Negative number sets from_date backwards",
+									"var window_minutes = -30",
+									"if (window_minutes > 0) {",
+									"    // Look ahead: adjusts to_date",
+									"    to_date.setMinutes(curr_date.getMinutes()+window_minutes);",
+									"} else {",
+									"    // Look behind: adjusts from_date",
+									"    from_date.setMinutes(curr_date.getMinutes()+window_minutes);",
+									"}",
+									"",
+									"// timestamp in ms",
+									"var from_ts_ms = parseInt(Math.floor(from_date.getTime()));",
+									"var to_ts_ms = parseInt(Math.floor(to_date.getTime()));",
+									"// timestamp in seconds",
+									"var from_ts = parseInt(from_ts_ms/1000);",
+									"var to_ts = parseInt(to_ts_ms/1000);",
+									"",
+									"//// Uncomment for debugging.",
+									"// console.log(from_date);",
+									"// console.log(from_ts_ms);",
+									"// console.log(from_ts);",
+									"",
+									"// console.log(to_date);",
+									"// console.log(to_ts_ms);",
+									"// console.log(to_ts);",
+									"",
+									"//// Set as Postman variables",
+									"pm.environment.set(\"from_date\", from_date);",
+									"pm.environment.set(\"from_ts_ms\", from_ts_ms);",
+									"pm.environment.set(\"from_ts\", from_ts);",
+									"",
+									"pm.environment.set(\"to_date\", to_date);",
+									"pm.environment.set(\"to_ts_ms\", to_ts_ms);",
+									"pm.environment.set(\"to_ts\", to_ts);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -3719,7 +4090,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/metrics?api_key={{dd_api_key}}&application_key={{dd_app_key}}&from=1488386651",
+							"raw": "https://app.datadoghq.com/api/v1/metrics?api_key={{dd_api_key}}&application_key={{dd_app_key}}&from={{from_ts}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -3742,7 +4113,7 @@
 								},
 								{
 									"key": "from",
-									"value": "1488386651"
+									"value": "{{from_ts}}"
 								}
 							]
 						},
@@ -3806,6 +4177,59 @@
 				},
 				{
 					"name": "Query Time Series Points",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "059ebd69-505a-475f-ae87-ec5a88bf18a2",
+								"exec": [
+									"// Set current date and time",
+									"// YYYY-MM-ddTHH:mm:ss.SSSZ",
+									"var curr_date = (new Date());",
+									"var from_date = (new Date());",
+									"var to_date = (new Date());",
+									"",
+									"// Set timeframe window in minutes",
+									"// Positive number sets to_date forward",
+									"// Negative number sets from_date backwards",
+									"var window_minutes = -30",
+									"if (window_minutes > 0) {",
+									"    // Look ahead: adjusts to_date",
+									"    to_date.setMinutes(curr_date.getMinutes()+window_minutes);",
+									"} else {",
+									"    // Look behind: adjusts from_date",
+									"    from_date.setMinutes(curr_date.getMinutes()+window_minutes);",
+									"}",
+									"",
+									"// timestamp in ms",
+									"var from_ts_ms = parseInt(Math.floor(from_date.getTime()));",
+									"var to_ts_ms = parseInt(Math.floor(to_date.getTime()));",
+									"// timestamp in seconds",
+									"var from_ts = parseInt(from_ts_ms/1000);",
+									"var to_ts = parseInt(to_ts_ms/1000);",
+									"",
+									"//// Uncomment for debugging.",
+									"// console.log(from_date);",
+									"// console.log(from_ts_ms);",
+									"// console.log(from_ts);",
+									"",
+									"// console.log(to_date);",
+									"// console.log(to_ts_ms);",
+									"// console.log(to_ts);",
+									"",
+									"//// Set as Postman variables",
+									"pm.environment.set(\"from_date\", from_date);",
+									"pm.environment.set(\"from_ts_ms\", from_ts_ms);",
+									"pm.environment.set(\"from_ts\", from_ts);",
+									"",
+									"pm.environment.set(\"to_date\", to_date);",
+									"pm.environment.set(\"to_ts_ms\", to_ts_ms);",
+									"pm.environment.set(\"to_ts\", to_ts);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -3819,7 +4243,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/query?api_key={{dd_api_key}}&application_key={{dd_app_key}}&from=1493127756&to=1493388187&query=system.cpu.idle{*}by{host}",
+							"raw": "https://app.datadoghq.com/api/v1/query?api_key={{dd_api_key}}&application_key={{dd_app_key}}&from={{from_ts}}&to={{to_ts}}&query=system.cpu.idle{*}by{host}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -3842,11 +4266,11 @@
 								},
 								{
 									"key": "from",
-									"value": "1493127756"
+									"value": "{{from_ts}}"
 								},
 								{
 									"key": "to",
-									"value": "1493388187"
+									"value": "{{to_ts}}"
 								},
 								{
 									"key": "query",
