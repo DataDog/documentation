@@ -2375,6 +2375,147 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "List AWS Filtering rules",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"account_id\": \"YOUR_AWS_ACCOUNT_ID\"\n}"
+								},
+								"url": {
+									"raw": "https://api.datadoghq.com/api/v1/integration/aws/filtering?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"integration",
+										"aws",
+										"filtering"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{dd_api_key}}"
+										},
+										{
+											"key": "application_key",
+											"value": "{{dd_app_key}}"
+										}
+									]
+								},
+								"description": "List AWS Accounts (role-based only) in Datadog"
+							},
+							"response": []
+						},
+						{
+							"name": "Configure AWS Filtering rule Copy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"account_id\": \"YOUR_AWS_ACCOUNT_ID\",\n    \"namespace\": \"sqs\",\n    \"tag_filter_str\": \"include_tags,!exclude_tags\"\n}"
+								},
+								"url": {
+									"raw": "https://api.datadoghq.com/api/v1/integration/aws/filtering?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"integration",
+										"aws",
+										"filtering"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{dd_api_key}}"
+										},
+										{
+											"key": "application_key",
+											"value": "{{dd_app_key}}"
+										}
+									]
+								},
+								"description": "List AWS Accounts (role-based only) in Datadog"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete AWS Filtering rule Copy",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"account_id\": \"YOUR_AWS_ACCOUNT_ID\",\n    \"namespace\": \"sqs\"\n}"
+								},
+								"url": {
+									"raw": "https://api.datadoghq.com/api/v1/integration/aws/filtering?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"integration",
+										"aws",
+										"filtering"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{dd_api_key}}"
+										},
+										{
+											"key": "application_key",
+											"value": "{{dd_app_key}}"
+										}
+									]
+								},
+								"description": "List AWS Accounts (role-based only) in Datadog"
+							},
+							"response": []
 						}
 					],
 					"description": "Configure your Datadog-AWS integration directly through Datadog API.\n\nMore Details Here: https://docs.datadoghq.com/integrations/amazon_web_services/",
