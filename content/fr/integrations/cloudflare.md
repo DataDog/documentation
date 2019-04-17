@@ -22,11 +22,11 @@ Associez Datadog à votre compte Cloudflare pour consulter vos métriques relati
 
 ## Implémentation
 ### Installation
-Installez l'intégration avec le [carré d'intégration Cloudflare][3] de Datadog.
+Installez l'intégration avec le [carré d'intégration Cloudflare][1] de Datadog.
 
 ### Configuration
 
-1. Accédez à l'onglet Configuration dans le [carré d'intégration Cloudflare][3] de Datadog.
+1. Accédez à l'onglet Configuration dans le [carré d'intégration Cloudflare][1] de Datadog.
 2. Saisissez les adresses e-mail et les clés d'API des comptes que vous souhaitez surveiller. Il est conseillé de fournir une clé d'API disposant seulement des autorisations nécessaires (_#zone:read_ et _#analytics:read_). Vos clés d'API Cloudflare sont disponibles sur votre compte Cloudflare dans la section *Mon profil* (faites défiler vers le bas jusqu'à atteindre Clés API).
 3. Nommez le compte. Ce nom est arbitraire. Il est utilisé dans le tag `account` de vos métriques.
 
@@ -44,9 +44,8 @@ L'intégration Cloudflare n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
-[1]: https://github.com/DataDog/dogweb/blob/prod/integration/cloudflare/cloudflare_metadata.csv
-[2]: https://docs.datadoghq.com/fr/help/
-[3]: https://app.datadoghq.com/account/settings#integrations/cloudflare
 
 
 {{< get-dependencies >}}
+[1]: https://app.datadoghq.com/account/settings#integrations/cloudflare
+[2]: https://docs.datadoghq.com/fr/help

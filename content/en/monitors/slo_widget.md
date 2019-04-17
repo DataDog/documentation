@@ -48,15 +48,15 @@ Visually, you can view the overall uptime percentage only—or the overall, plus
 
 {{< img src="monitors/slo_widget/slo_uptime-view_mode2.png" alt="View Mode" responsive="true" >}}
 
-Datadog recommends searching by [monitor tags][3] to select multiple monitors. For example, you can select by service: `service:a`.
+Datadog recommends searching by [monitor tags][1] to select multiple monitors. For example, you can select by service: `service:a`.
 
 You can select up to 20 monitors.
 
 ### Supported monitor types
 
-Currently only [metric monitor types][4] and synthetics are supported in the widget. Only supported monitors will be available to select within the widget. All other monitor types are not currently supported. 
+Currently only [metric monitor types][2] and synthetics are supported in the widget. Only supported monitors will be available to select within the widget. All other monitor types are not currently supported. 
 
-Supported metric monitor types include: metric, anomaly, APM, forecast, outlier, and integration metrics. For more info, see [here][4] for monitor types.
+Supported metric monitor types include: metric, anomaly, APM, forecast, outlier, and integration metrics. For more info, see [here][2] for monitor types.
 
 ### Selecting your time window
 
@@ -113,7 +113,7 @@ Finally, give the widget a title and save it to your dashboard.
 
 ## Feature requests
 
-To submit feature requests, reach out to [Datadog Support][2], and someone from the team will assist you.
+To submit feature requests, reach out to [Datadog Support][3], and someone from the team will assist you.
 
 ## Widget behavior
 
@@ -123,7 +123,6 @@ While the widget is in public beta, the documentation is subject to change. Data
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/dashboards/screenboard
-[2]: /help
-[3]: /tagging/using_tags/?tab=assignment#monitors
-[4]: /api/?lang=python#create-a-monitor
+[1]: /tagging/using_tags/?tab=assignment#monitors
+[2]: /api/?lang=python#create-a-monitor
+[3]: /help

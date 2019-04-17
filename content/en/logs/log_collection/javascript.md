@@ -40,13 +40,13 @@ With the `datadog-logs` library, you can send log directories to Datadog from JS
 Public API keys are in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on this feature for your account.
 </div>
 
-For security reasons, [API keys][2] cannot be used to configure the `datadog-logs` library as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [public API key][3] must be used.
+For security reasons, [API keys][1] cannot be used to configure the `datadog-logs` library as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [public API key][2] must be used.
 
-To manage your public API keys, go to your [Datadog API configuration page][4] in the `Public API Key` section as shown here:
+To manage your public API keys, go to your [Datadog API configuration page][3] in the `Public API Key` section as shown here:
 
 {{< img src="logs/log_collection/public_key.png" style="width:80%;" alt="Public API Keys" responsive="true" >}}
 
-Read the [Public API keys documentation][3] to learn more about the restrictions that applies.
+Read the [Public API keys documentation][2] to learn more about the restrictions that applies.
 
 ## Configure the JavaScript logger
 
@@ -159,7 +159,6 @@ This gives the following result:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/parsing
-[2]: https://docs.datadoghq.com/account_management/faq/api-app-key-management/#api-keys
-[3]: https://docs.datadoghq.com/account_management/faq/api-app-key-management/#public-api-keys
-[4]: https://app.datadoghq.com/account/settings#api
+[1]: https://docs.datadoghq.com/account_management/faq/api-app-key-management/#api-keys
+[2]: https://docs.datadoghq.com/account_management/faq/api-app-key-management/#public-api-keys
+[3]: https://app.datadoghq.com/account/settings#api
