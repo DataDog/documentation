@@ -4021,7 +4021,7 @@
 							"raw": "{\n    \"message\": \"This is an example log message over HTTP!\",\n    \"http\": {\n        \"status_code\": 301,\n        \"method\": \"POST\",\n        \"request_id\": \"{{$randomInt}}\"\n    },\n    \"network\": {\n        \"client\": {\n            \"ip\": \"127.0.0.1\",\n            \"port\": \"80\"\n        },\n        \"destination\": {\n            \"ip\": \"10.0.0.1\"\n        }\n    },\n    \"duration\": 2000,\n    \"category\": \"test\"\n}"
 						},
 						"url": {
-							"raw": "https://http-intake.logs.datadoghq.com/v1/input/{{dd_api_key}}?ddsource=nginx&service=exampleService&hostname=exampleHost",
+							"raw": "https://http-intake.logs.datadoghq.com/v1/input/{{dd_api_key}}?ddsource=agent&service=myService&hostname=myhost",
 							"protocol": "https",
 							"host": [
 								"http-intake",
@@ -4037,15 +4037,15 @@
 							"query": [
 								{
 									"key": "ddsource",
-									"value": "nginx"
+									"value": "agent"
 								},
 								{
 									"key": "service",
-									"value": "exampleService"
+									"value": "myService"
 								},
 								{
 									"key": "hostname",
-									"value": "exampleHost"
+									"value": "myhost"
 								}
 							]
 						},
@@ -4545,7 +4545,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/search?q=metrics:system.cpu.system&api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://api.datadoghq.com/api/v1/search?q=metrics:system.cpu&api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -4560,7 +4560,7 @@
 							"query": [
 								{
 									"key": "q",
-									"value": "metrics:system.cpu.system"
+									"value": "metrics:system.cpu"
 								},
 								{
 									"key": "api_key",
