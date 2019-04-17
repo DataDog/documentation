@@ -57,4 +57,4 @@ curl  -X POST -H "Content-type: application/json" \
    ],
    "type":"api"
 }' \
-"https://api.datadoghq.com/api/v1/synthetics/tests/?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/synthetics/tests?api_key=${api_key}&application_key=${app_key}"

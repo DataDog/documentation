@@ -1,5 +1,5 @@
-```json
 {  
+   "status":"live",
    "public_id":"aaa-bbb-ccc",
    "tags":[  
       "foo:bar"
@@ -56,4 +56,3 @@
       "min_location_failed":1
    }
 }
-```

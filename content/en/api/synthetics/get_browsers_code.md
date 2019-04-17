@@ -6,7 +6,7 @@ external_redirect: /api/#get-browsers
 ---
 
 ##### Signature
-`POST /api/v1/synthetics/browsers/devices`
+`GET /api/v1/synthetics/browser/devices`
 
 ##### Example Request
 

@@ -33,12 +33,12 @@ Create a Synthetics test to initiate and configure the tests you want Datadog to
   <tr>
     <td>Headers</td>
     <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>
-    <td>for <code>contains</code>/<code>does not contain</code>/<code>is</code>/<code>is not</code>: String &lt;br&gt; for <code>matches</code>/<code>does not match</code>: [RegexStrings][1]</td>
+    <td>for <code>contains</code>/<code>does not contain</code>/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: [RegexStrings][1]</td>
   </tr>
   <tr>
     <td>Body</td>
     <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>
-    <td>for <code>contains</code>/<code>does not contain/<code>is</code>/<code>is not</code>: String &lt;br&gt; for <code>matches</code>/<code>does not match</code>: [RegexStrings][1]</td>
+    <td>for <code>contains</code>/<code>does not contain/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: [RegexStrings][1]</td>
   </tr>
 </table>
 
@@ -51,10 +51,14 @@ Create a Synthetics test to initiate and configure the tests you want Datadog to
 *   **`timeout`** - _optional_ - When the API request will timeout.
 *   **`headers`** - _optional_ - Headers in the API request.
 *   **`body`** - _optional_ The JSON body for the API request.
-*   **`locations`** - _required_ - A list of the locations that you want the tests to be sent from. At least one value is required, and you can use all locations. For a list of valid locations, use the `GET available locations` method.
+*   **`locations`** - _required_ - A list of the locations that you want the tests to be sent from. At least one value is required, and you can use all locations. For a list of valid locations, use the `GET available locations` method. At least one value is required, and you can use all locations.
 *   **`message`** - _required_ - A description of the test.
 *   **`name`** - _required_ - A unique name for the test.
-*   **`options`** - _optional_ - Use advanced options to specify custom request headers, authentication credentials, body content, cookies, or to have the test follow redirects.  
+*   **`options`** - _required_ - Use advanced options to specify custom request headers, authentication credentials, body content, cookies, or to have the test follow redirects. All optional parameters take their default value if you don't specify a value. Valid values in the request object are:
+    *  ** `tick_every`:** - _required_ -  How often the test should run (in seconds - current possible values are 60, 300, 900, 1800, 3600, 21600, 43200, 86400, 604800).
+    *  **`min_failure_duration`** - _optional_ - How long the test should be in failure before alerting (integer, number of seconds, max 7200). Default is 0.
+    *  **`min_location_failed`** - _optional_ - The minimum number of locations that must have been in failure at the same time during at least one moment in the `min_failure_duration` period (min_location_failed and min_failure_duration are part of the advanced alerting rules  - integer, >= 1. Default is 1.
+    *  **`follow_redirects`** - _optional_ - boolean - whether to follow redirects or not (max ten redirects can be followed before triggering a "Too many redirects" error). Valid values are `true` or `false`. Default value is `false`.
 *   **`tags`** - _optional_ - Tags you want to use to filter your test when you are viewing it in Datadog. For more info on custom tags, see [Using tags][1].
 *   **`type`** - _required_ - The type of test. Valid values are `api` and `browser`.
 

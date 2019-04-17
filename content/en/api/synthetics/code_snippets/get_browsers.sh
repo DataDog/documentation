@@ -1,4 +1,4 @@
 api_key=<YOUR_API_KEY>
 app_key=<YOUR_APP_KEY>
 
-curl "https://api.datadoghq.com/api/v1/synthetics/browsers/devices?api_key=${api_key}&application_key=${app_key}"
+curl "https://api.datadoghq.com/api/v1/synthetics/browser/devices?api_key=${api_key}&application_key=${app_key}"

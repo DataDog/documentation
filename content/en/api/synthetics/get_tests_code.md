@@ -6,7 +6,7 @@ external_redirect: /api/#get-tests
 ---
 
 ##### Signature
-`POST /api/v1/synthetics/tests`
+`GET /api/v1/synthetics/tests`
 
 ##### Example Request
 

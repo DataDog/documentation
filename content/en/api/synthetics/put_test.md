@@ -33,12 +33,12 @@ Use this method to update an existing Synthetics test.
   <tr>
     <td>Headers</td>
     <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>
-    <td>for <code>contains</code>/<code>does not contain</code>/<code>is</code>/<code>is not</code>: String &lt;br&gt; for <code>matches</code>/<code>does not match</code>: [RegexStrings][1]</td>
+    <td>for <code>contains</code>/<code>does not contain</code>/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: RegexStrings</td>
   </tr>
   <tr>
     <td>Body</td>
     <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>
-    <td>for <code>contains</code>/<code>does not contain/<code>is</code>/<code>is not</code>: String &lt;br&gt; for <code>matches</code>/<code>does not match</code>: [RegexStrings][1]</td>
+    <td>for <code>contains</code>/<code>does not contain/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: RegexStrings</td>
   </tr>
 </table>
 
@@ -50,11 +50,11 @@ Use this method to update an existing Synthetics test.
 *   **`timeout`** - _optional_ - When the API request will timeout.
 *   **`headers`** - _optional_ - Headers in the API request.
 *   **`body`** - _optional_ The JSON body for the API request.
-*   **`locations`** - _optional_ - A list of the locations that you want the tests to be sent from. Valid values are `aws:` followed by any valid AWS region. Valid values are: `aws:eu-central-1`, `aws:ap-northeast-1`, `aws:us-west-2`, `aws:eu-west-2`, `aws: ca-central-1`, `aws:us-east-2`, and `aws:ap-southeast-2`. At least one value is required, and you can use all locations.
+*   **`locations`** - _optional_ - A list of the locations that you want the tests to be sent from. At least one value is required, and you can use all locations. For a list of valid locations, use the `GET available locations` method. At least one value is required, and you can use all locations.
 *   **`message`** - _optional_ - A description of the test.
 *   **`name`** - _optional_ - A unique name for the test.
 *   **`options`** - _optional_ - Use advanced options to specify custom request headers, authentication credentials, body content, cookies, or to have the test follow redirects.  
 *   **`tags`** - _optional_ - Tags you want to use to filter your test when you are viewing it in Datadog. For more info on custom tags, see [Using tags][1].
 *   **`type`** - _optional_ - the type of test. Valid values are `api` and `browser`.
 
-[1]: /tagging/using_tags
+[1]: 

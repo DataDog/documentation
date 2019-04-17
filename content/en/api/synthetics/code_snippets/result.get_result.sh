@@ -11,7 +11,6 @@
          "download":0.1,
          "total":1565.7
       },
-      "healthChecksRatio":1,
       "mainDC":"us1.prod",
       "eventType":"finished",
       "httpStatusCode":200,
