@@ -1,7 +1,7 @@
 ---
 title: Synthetics
 type: apicode
-order: 24
+order: 22
 external_redirect: /api/#synthetics
 ---
 

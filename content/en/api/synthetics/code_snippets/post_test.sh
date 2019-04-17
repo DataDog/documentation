@@ -1,4 +1,4 @@
-#!/bin/bash
+### To create an API test
 
 api_key=<YOUR_API_KEY>
 app_key=<YOUR_APP_KEY>
@@ -56,5 +56,33 @@ curl  -X POST -H "Content-type: application/json" \
       "foo:bar"
    ],
    "type":"api"
+}' \
+"https://api.datadoghq.com/api/v1/synthetics/tests?api_key=${api_key}&application_key=${app_key}"
+
+### To create a browser test
+
+api_key=<YOUR_API_KEY>
+app_key=<YOUR_APP_KEY>
+
+curl  -X POST -H "Content-type: application/json" \
+-d '{
+  "locations": ["aws:ca-central-1", "aws:us-east-2"],
+  "options": {
+    "device_ids": ["laptop_large"],
+    "tick_every": 3600,
+    "min_failure_duration": 0,
+    "min_location_failed": 1
+  },
+  "name": "Test Doc",
+  "config": {
+    "assertions": [],
+    "request": {
+      "method": "GET",
+      "url": "https://example.com/"
+    }
+  },
+  "message": "Test message",
+  "tags": [],
+  "type": "browser"
 }' \
 "https://api.datadoghq.com/api/v1/synthetics/tests?api_key=${api_key}&application_key=${app_key}"

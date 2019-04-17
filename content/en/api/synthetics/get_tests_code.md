@@ -1,7 +1,7 @@
 ---
 title: Get all tests
 type: apicode
-order: 24.7
+order: 22.7
 external_redirect: /api/#get-tests
 ---
 

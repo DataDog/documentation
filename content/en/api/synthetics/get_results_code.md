@@ -1,7 +1,7 @@
 ---
 title: Get the most recent results
 type: apicode
-order: 24.5
+order: 22.5
 external_redirect: /api/#get-results
 ---
 

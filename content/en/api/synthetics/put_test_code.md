@@ -1,7 +1,7 @@
 ---
 title: Edit a test
 type: apicode
-order: 24.3
+order: 22.3
 external_redirect: /api/#edit-test
 ---
 
