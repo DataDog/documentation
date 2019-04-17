@@ -380,6 +380,8 @@ main:
         children:
           - name: "AWS"
             url: "integrations/amazon_web_services/#log-collection"
+          - name: "Browser"
+            url: "logs/log_collection/javascript/"
           - name: "Docker"
             url: "logs/log_collection/docker/"
           - name: "Csharp"
