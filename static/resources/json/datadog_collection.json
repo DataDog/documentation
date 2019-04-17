@@ -153,7 +153,7 @@
 							"raw": "{\n      \"message\" : \"Try Changing the Wording\"\n  }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/comments/<<INSERT_EVENT_ID>>?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/comments/:EVENT_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -164,7 +164,7 @@
 								"api",
 								"v1",
 								"comments",
-								"<<INSERT_EVENT_ID>>"
+								":EVENT_ID"
 							],
 							"query": [
 								{
@@ -174,6 +174,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "EVENT_ID",
+									"value": ""
 								}
 							]
 						},
@@ -238,7 +244,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/comments/<<INSERT_EVENT_ID>>?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/comments/:EVENT_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -249,7 +255,7 @@
 								"api",
 								"v1",
 								"comments",
-								"<<INSERT_EVENT_ID>>"
+								":EVENT_ID"
 							],
 							"query": [
 								{
@@ -259,6 +265,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "EVENT_ID",
+									"value": ""
 								}
 							]
 						},
@@ -331,7 +343,7 @@
 							"raw": "{\n      \"title\" : \"Sum of Memory Free 2\",\n      \"widgets\" : [{\n          \"definition\": {\n              \"type\": \"timeseries\",\n              \"requests\": [\n                  {\"q\": \"sum:system.mem.free{*}\"}\n              ],\n              \"title\": \"Sum Memory Free Shell\"\n          }\n      }],\n      \"layout_type\": \"ordered\",\n      \"description\" : \"An updated dashboard with memory info.\",\n      \"is_read_only\": true,\n      \"notify_list\": [\"user@domain.com\"],\n      \"template_variables\": [{\n          \"name\": \"host1\",\n          \"prefix\": \"host\",\n          \"default\": \"my-host\"\n      }]\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/dashboard/<<DASHBOARD_ID>>?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://api.datadoghq.com/api/v1/dashboard/:DASHBOARD_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -342,7 +354,7 @@
 								"api",
 								"v1",
 								"dashboard",
-								"<<DASHBOARD_ID>>"
+								":DASHBOARD_ID"
 							],
 							"query": [
 								{
@@ -352,6 +364,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "DASHBOARD_ID",
+									"value": ""
 								}
 							]
 						}
@@ -373,7 +391,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/dashboard/<<DASHBOARD_ID>>?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://api.datadoghq.com/api/v1/dashboard/:DASHBOARD_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -384,7 +402,7 @@
 								"api",
 								"v1",
 								"dashboard",
-								"<<DASHBOARD_ID>>"
+								":DASHBOARD_ID"
 							],
 							"query": [
 								{
@@ -394,6 +412,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "DASHBOARD_ID",
+									"value": ""
 								}
 							]
 						},
@@ -416,7 +440,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/dashboard/<<DASHBOARD_ID>>?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/dashboard/:DASHBOARD_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -427,7 +451,7 @@
 								"api",
 								"v1",
 								"dashboard",
-								"<<DASHBOARD_ID>>"
+								":DASHBOARD_ID"
 							],
 							"query": [
 								{
@@ -437,6 +461,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "DASHBOARD_ID",
+									"value": ""
 								}
 							]
 						},
@@ -464,7 +494,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/<<DASHBOARD_LIST_ID>>?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/:DASHBOARD_LIST_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -477,7 +507,7 @@
 								"dashboard",
 								"lists",
 								"manual",
-								"<<DASHBOARD_LIST_ID>>"
+								":DASHBOARD_LIST_ID"
 							],
 							"query": [
 								{
@@ -487,6 +517,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "DASHBOARD_LIST_ID",
+									"value": ""
 								}
 							]
 						},
@@ -597,7 +633,7 @@
 							"raw": "{\n        \"name\": \"My Updated Dashboard List\"\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/56487?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/:DASHBOARD_LIST_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -610,7 +646,7 @@
 								"dashboard",
 								"lists",
 								"manual",
-								"56487"
+								":DASHBOARD_LIST_ID"
 							],
 							"query": [
 								{
@@ -620,6 +656,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "DASHBOARD_LIST_ID",
+									"value": ""
 								}
 							]
 						},
@@ -642,7 +684,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/56487?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/:DASHBOARD_LIST_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -655,7 +697,7 @@
 								"dashboard",
 								"lists",
 								"manual",
-								"56487"
+								":DASHBOARD_LIST_ID"
 							],
 							"query": [
 								{
@@ -665,6 +707,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "DASHBOARD_LIST_ID",
+									"value": ""
 								}
 							]
 						},
@@ -690,7 +738,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/<<DASHBOARD_LIST_ID>>/dashboards?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/:DASHBOARD_LIST_ID/dashboards?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -703,7 +751,7 @@
 								"dashboard",
 								"lists",
 								"manual",
-								"<<DASHBOARD_LIST_ID>>",
+								":DASHBOARD_LIST_ID",
 								"dashboards"
 							],
 							"query": [
@@ -714,6 +762,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "DASHBOARD_LIST_ID",
+									"value": ""
 								}
 							]
 						},
@@ -736,7 +790,7 @@
 							"raw": "{\n        \"dashboards\": [\n            {\n                \"type\": \"custom_screenboard\",\n                \"id\": 1414\n            },\n            {\n                \"type\": \"custom_timeboard\",\n                \"id\": 5858\n            },\n            {\n                \"type\": \"integration_screenboard\",\n                \"id\": 67\n            },\n            {\n                \"type\": \"integration_timeboard\",\n                \"id\": 5\n            },\n            {\n                \"type\": \"host_timeboard\",\n                \"id\": 123456789\n            }\n        ]\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/<<DASHBOARD_LIST_ID>>/dashboards?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/:DASHBOARD_LIST_ID/dashboards?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -749,7 +803,7 @@
 								"dashboard",
 								"lists",
 								"manual",
-								"<<DASHBOARD_LIST_ID>>",
+								":DASHBOARD_LIST_ID",
 								"dashboards"
 							],
 							"query": [
@@ -760,6 +814,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "DASHBOARD_LIST_ID",
+									"value": ""
 								}
 							]
 						},
@@ -782,7 +842,7 @@
 							"raw": "{\n        \"dashboards\": [\n            {\n                \"type\": \"custom_screenboard\",\n                \"id\": 1414\n            },\n            {\n                \"type\": \"custom_timeboard\",\n                \"id\": 5858\n            },\n            {\n                \"type\": \"integration_screenboard\",\n                \"id\": 67\n            },\n            {\n                \"type\": \"integration_timeboard\",\n                \"id\": 5\n            },\n            {\n                \"type\": \"host_timeboard\",\n                \"id\": 123456789\n            }\n        ]\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/<<DASHBOARD_LIST_ID>>/dashboards?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/:DASHBOARD_LIST_ID/dashboards?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -795,7 +855,7 @@
 								"dashboard",
 								"lists",
 								"manual",
-								"<<DASHBOARD_LIST_ID>>",
+								":DASHBOARD_LIST_ID",
 								"dashboards"
 							],
 							"query": [
@@ -806,6 +866,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "DASHBOARD_LIST_ID",
+									"value": ""
 								}
 							]
 						},
@@ -828,7 +894,7 @@
 							"raw": "{\n        \"dashboards\": [\n            {\n                \"type\": \"custom_screenboard\",\n                \"id\": 1414\n            },\n            {\n                \"type\": \"custom_timeboard\",\n                \"id\": 5858\n            },\n            {\n                \"type\": \"integration_screenboard\",\n                \"id\": 67\n            },\n            {\n                \"type\": \"integration_timeboard\",\n                \"id\": 5\n            },\n            {\n                \"type\": \"host_timeboard\",\n                \"id\": 123456789\n            }\n        ]\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/<<DASHBOARD_LIST_ID>>/dashboards?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/:DASHBOARD_LIST_ID/dashboards?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -841,7 +907,7 @@
 								"dashboard",
 								"lists",
 								"manual",
-								"<<DASHBOARD_LIST_ID>>",
+								":DASHBOARD_LIST_ID",
 								"dashboards"
 							],
 							"query": [
@@ -852,6 +918,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "DASHBOARD_LIST_ID",
+									"value": ""
 								}
 							]
 						},
@@ -940,7 +1012,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/downtime/223886958?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start=1493343426&end=1556415426&type=weeks&period=1&week_days=Mon,Tue,Wed,Thu,Fri,Sat&until_date=1491026399&scope=region:midwest",
+							"raw": "https://app.datadoghq.com/api/v1/downtime/:DOWNTIME_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start=1493343426&end=1556415426&type=weeks&period=1&week_days=Mon,Tue,Wed,Thu,Fri,Sat&until_date={{to_ts}}&scope=region:midwest",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -951,7 +1023,7 @@
 								"api",
 								"v1",
 								"downtime",
-								"223886958"
+								":DOWNTIME_ID"
 							],
 							"query": [
 								{
@@ -990,6 +1062,12 @@
 									"key": "scope",
 									"value": "region:midwest"
 								}
+							],
+							"variable": [
+								{
+									"key": "DOWNTIME_ID",
+									"value": ""
+								}
 							]
 						},
 						"description": "Update a single Downtime by downtime_id.\n\nARGUMENTS\n\n* scope [required]\nThe scope(s) to which the downtime will apply, e.g. 'host:app2'. Provide multiple scopes as a comma-separated list, e.g. 'env:dev,env:prod'. The resulting downtime applies to sources that matches ALL provided scopes (i.e. env:dev AND env:prod), NOT any of them.\n\n*monitor_id [optional, default=None]\nA single monitor to which the downtime will apply. If not provided, the downtime will apply to all monitors.\n\n*start [optional, default=None]\nPOSIX timestamp to start the downtime. If not provided, the downtime starts the moment it is created.\n\n*end [optional, default=None]\nPOSIX timestamp to end the downtime. If not provided, the downtime will be in effect indefinitely (i.e. until you cancel it).\n\n*message [optional, default=None]\nA message to include with notifications for this downtime. Email notifications can be sent to specific users by using the same '@username' notation as events\n\n*monitor_id [optional, default=None]\nThe id of a specific monitor to apply the downtime to.\n\n*recurrence [optional, default=None]\nAn object defining the recurrence of the downtime with a variety of parameters:\n\n*type the type of recurrence. Choose from: days, weeks, months, years.\n\n*period how often to repeat as an integer. For example to repeat every 3 days, select a type of days and a period of 3.\n\n*week_days (optional) a list of week days to repeat on. Choose from: Mon, Tue, Wed, Thu, Fri, Sat or Sun. Only applicable when type is weeks. First letter must be capitalized.\n\n*until_occurrences (optional) how many times the downtime will be rescheduled. until_occurences and \n\n*until_date are mutually exclusive\nuntil_date (optional) the date at which the recurrence should end as a POSIX timestmap. until_occurences and until_date are mutually exclusive\n\n*timezone [optional, default=UTC]\nThe timezone for the downtime."
@@ -1006,7 +1084,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/downtime/223886958?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/downtime/:DOWNTIME_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1017,7 +1095,7 @@
 								"api",
 								"v1",
 								"downtime",
-								"223886958"
+								":DOWNTIME_ID"
 							],
 							"query": [
 								{
@@ -1027,6 +1105,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "DOWNTIME_ID",
+									"value": ""
 								}
 							]
 						},
@@ -1088,7 +1172,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/downtime/223886958?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/downtime/:DOWNTIME_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1099,7 +1183,7 @@
 								"api",
 								"v1",
 								"downtime",
-								"223886958"
+								":DOWNTIME_ID"
 							],
 							"query": [
 								{
@@ -1109,6 +1193,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "DOWNTIME_ID",
+									"value": ""
 								}
 							]
 						},
@@ -1271,7 +1361,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/graph/embed/45d8cf2d01e0673beadeb88f4368db271376eefd11d76e4eaf3cfae18f47e0f5?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/graph/embed/:EMBED_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1283,7 +1373,7 @@
 								"v1",
 								"graph",
 								"embed",
-								"45d8cf2d01e0673beadeb88f4368db271376eefd11d76e4eaf3cfae18f47e0f5"
+								":EMBED_ID"
 							],
 							"query": [
 								{
@@ -1293,6 +1383,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "EMBED_ID",
+									"value": ""
 								}
 							]
 						},
@@ -1310,7 +1406,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/graph/embed/9405f66beea59813e322e236da9dd31006267c4fc970442c5547f9fd7a676678/enable?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/graph/embed/:EMBED_ID/enable?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1322,7 +1418,7 @@
 								"v1",
 								"graph",
 								"embed",
-								"9405f66beea59813e322e236da9dd31006267c4fc970442c5547f9fd7a676678",
+								":EMBED_ID",
 								"enable"
 							],
 							"query": [
@@ -1333,6 +1429,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "EMBED_ID",
+									"value": ""
 								}
 							]
 						},
@@ -1350,7 +1452,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/graph/embed/9405f66beea59813e322e236da9dd31006267c4fc970442c5547f9fd7a676678/revoke?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/graph/embed/:EMBED_ID/revoke?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1362,7 +1464,7 @@
 								"v1",
 								"graph",
 								"embed",
-								"9405f66beea59813e322e236da9dd31006267c4fc970442c5547f9fd7a676678",
+								":EMBED_ID",
 								"revoke"
 							],
 							"query": [
@@ -1373,6 +1475,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "EMBED_ID",
+									"value": ""
 								}
 							]
 						},
@@ -1443,7 +1551,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/events/1044739812528776191?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/events/:EVENT_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1454,7 +1562,7 @@
 								"api",
 								"v1",
 								"events",
-								"1044739812528776191"
+								":EVENT_ID"
 							],
 							"query": [
 								{
@@ -1464,6 +1572,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "EVENT_ID",
+									"value": ""
 								}
 							]
 						},
@@ -1486,7 +1600,7 @@
 							"raw": "{\n\t\"title\":\"Something big happened!\",\n\"text\":\"And let me tell you all about it here!\",\n\"tags\":\"environment:prod\"\n}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/events/1044739812528776191?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/events/:EVENT_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1497,7 +1611,7 @@
 								"api",
 								"v1",
 								"events",
-								"1044739812528776191"
+								":EVENT_ID"
 							],
 							"query": [
 								{
@@ -1507,6 +1621,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "EVENT_ID",
+									"value": ""
 								}
 							]
 						},
@@ -1736,7 +1856,7 @@
 							"raw": "{\n      \"message\": \"Muting this host for a test!\"\n  }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/host/my_hostname/mute?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/host/:HOSTNAME/mute?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1747,7 +1867,7 @@
 								"api",
 								"v1",
 								"host",
-								"my_hostname",
+								":HOSTNAME",
 								"mute"
 							],
 							"query": [
@@ -1758,6 +1878,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "HOSTNAME",
+									"value": "myhost"
 								}
 							]
 						},
@@ -1780,7 +1906,7 @@
 							"raw": "{\n      \"message\": \"Un-Muting this host for a test!\"\n  }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/host/my_hostname/unmute?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/host/:HOSTNAME/unmute?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1791,7 +1917,7 @@
 								"api",
 								"v1",
 								"host",
-								"my_hostname",
+								":HOSTNAME",
 								"unmute"
 							],
 							"query": [
@@ -1802,6 +1928,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "HOSTNAME",
+									"value": "myhost"
 								}
 							]
 						},
@@ -3069,7 +3201,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/api_key/:api_key_to_get?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/api_key/:API_KEY?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -3080,7 +3212,7 @@
 										"api",
 										"v1",
 										"api_key",
-										":api_key_to_get"
+										":API_KEY"
 									],
 									"query": [
 										{
@@ -3090,16 +3222,11 @@
 										{
 											"key": "application_key",
 											"value": "{{dd_app_key}}"
-										},
-										{
-											"key": "API_KEY_TO_GET",
-											"value": null,
-											"disabled": true
 										}
 									],
 									"variable": [
 										{
-											"key": "api_key_to_get",
+											"key": "API_KEY",
 											"value": "<API_KEY_TO_GET>"
 										}
 									]
@@ -3123,7 +3250,7 @@
 									"raw": "{\n\t\"name\": \"<API_KEY_NAME>\"\n}"
 								},
 								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/api_key/:api_key_to_edit?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/api_key/:API_KEY?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -3134,7 +3261,7 @@
 										"api",
 										"v1",
 										"api_key",
-										":api_key_to_edit"
+										":API_KEY"
 									],
 									"query": [
 										{
@@ -3148,7 +3275,7 @@
 									],
 									"variable": [
 										{
-											"key": "api_key_to_edit",
+											"key": "API_KEY",
 											"value": "<API_KEY_TO_EDIT>"
 										}
 									]
@@ -3172,7 +3299,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/api_key/:api_key_to_delete?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/api_key/:API_KEY?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -3183,7 +3310,7 @@
 										"api",
 										"v1",
 										"api_key",
-										":api_key_to_delete"
+										":API_KEY"
 									],
 									"query": [
 										{
@@ -3193,16 +3320,11 @@
 										{
 											"key": "application_key",
 											"value": "{{dd_app_key}}"
-										},
-										{
-											"key": "API_KEY_TO_GET",
-											"value": null,
-											"disabled": true
 										}
 									],
 									"variable": [
 										{
-											"key": "api_key_to_delete",
+											"key": "API_KEY",
 											"value": "<API_KEY_TO_DELETE>"
 										}
 									]
@@ -3323,7 +3445,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/application_key/:app_key_to_get?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/application_key/:APP_KEY?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -3334,7 +3456,7 @@
 										"api",
 										"v1",
 										"application_key",
-										":app_key_to_get"
+										":APP_KEY"
 									],
 									"query": [
 										{
@@ -3344,16 +3466,11 @@
 										{
 											"key": "application_key",
 											"value": "{{dd_app_key}}"
-										},
-										{
-											"key": "API_KEY_TO_GET",
-											"value": null,
-											"disabled": true
 										}
 									],
 									"variable": [
 										{
-											"key": "app_key_to_get",
+											"key": "APP_KEY",
 											"value": "<APP_KEY_TO_GET>"
 										}
 									]
@@ -3377,7 +3494,7 @@
 									"raw": "{\n\t\"name\": \"<APP_KEY_NAME>\"\n}"
 								},
 								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/application_key/:app_key_to_edit?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/application_key/:APP_KEY?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -3388,7 +3505,7 @@
 										"api",
 										"v1",
 										"application_key",
-										":app_key_to_edit"
+										":APP_KEY"
 									],
 									"query": [
 										{
@@ -3402,7 +3519,7 @@
 									],
 									"variable": [
 										{
-											"key": "app_key_to_edit",
+											"key": "APP_KEY",
 											"value": "<APP_KEY_TO_EDIT>"
 										}
 									]
@@ -3426,7 +3543,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/application_key/:app_key_to_delete?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/application_key/:APP_KEY?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -3437,7 +3554,7 @@
 										"api",
 										"v1",
 										"application_key",
-										":app_key_to_delete"
+										":APP_KEY"
 									],
 									"query": [
 										{
@@ -3447,16 +3564,11 @@
 										{
 											"key": "application_key",
 											"value": "{{dd_app_key}}"
-										},
-										{
-											"key": "API_KEY_TO_GET",
-											"value": null,
-											"disabled": true
 										}
 									],
 									"variable": [
 										{
-											"key": "app_key_to_delete",
+											"key": "APP_KEY",
 											"value": "<APP_KEY_TO_DELETE>"
 										}
 									]
@@ -3756,7 +3868,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/metrics/system.cpu.system?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/metrics/:METRIC_NAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -3767,7 +3879,7 @@
 								"api",
 								"v1",
 								"metrics",
-								"system.cpu.system"
+								":METRIC_NAME"
 							],
 							"query": [
 								{
@@ -3777,6 +3889,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "METRIC_NAME",
+									"value": "system.cpu.system"
 								}
 							]
 						},
@@ -3799,7 +3917,7 @@
 							"raw": "{\n    \"description\": \"The percent of time the CPU spent running the kernel 2.\",\n    \"short_name\": \"cpu system\",\n    \"integration\": \"system\",\n    \"statsd_interval\": null,\n    \"per_unit\": null,\n    \"type\": \"gauge\",\n    \"unit\": \"percent\"\n}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/metrics/system.cpu.system?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/metrics/:METRIC_NAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -3810,7 +3928,7 @@
 								"api",
 								"v1",
 								"metrics",
-								"system.cpu.system"
+								":METRIC_NAME"
 							],
 							"query": [
 								{
@@ -3820,6 +3938,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "METRIC_NAME",
+									"value": "system.cpu.system"
 								}
 							]
 						},
@@ -3938,7 +4062,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/monitor/1959920?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/monitor/:MONITOR_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -3949,7 +4073,7 @@
 								"api",
 								"v1",
 								"monitor",
-								"1959920"
+								":MONITOR_ID"
 							],
 							"query": [
 								{
@@ -3959,6 +4083,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "MONITOR_ID",
+									"value": ""
 								}
 							]
 						},
@@ -3981,7 +4111,7 @@
 							"raw": "{\n        \"tags\": [],\n        \"deleted\": null,\n        \"query\": \"\\\"windows_service.state\\\".over(\\\"host:GamingPC\\\",\\\"service:termservice\\\").by(\\\"host\\\",\\\"service\\\").last(4).count_by_status()\",\n        \"message\": \"Example Windows Service Check for {{service.name}} on {{host.name}}\",\n        \"matching_downtimes\": [],\n        \"id\": 4769031,\n        \"multi\": true,\n        \"name\": \"Windows Service Check\",\n        \"created\": \"2018-04-25T16:06:10.564735+00:00\",\n        \"created_at\": 1524672370000,\n        \"creator\": {\n            \"id\": 580920,\n            \"handle\": \"test@example.com\",\n            \"name\": \"Joe Schmoe\",\n            \"email\": \"test@example.com\"\n        },\n        \"org_id\": 12345,\n        \"modified\": \"2018-04-25T16:06:10.564735+00:00\",\n        \"overall_state_modified\": null,\n        \"overall_state\": \"No Data\",\n        \"type\": \"service check\",\n        \"options\": {\n            \"notify_audit\": false,\n            \"locked\": false,\n            \"timeout_h\": 0,\n            \"silenced\": {},\n            \"thresholds\": {\n                \"warning\": 3,\n                \"ok\": 3,\n                \"critical\": 3\n            },\n            \"new_host_delay\": 300,\n            \"notify_no_data\": false,\n            \"renotify_interval\": 0,\n            \"no_data_timeframe\": 2\n        }\n    }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/monitor/4769031?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/monitor/:MONITOR_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -3992,7 +4122,7 @@
 								"api",
 								"v1",
 								"monitor",
-								"4769031"
+								":MONITOR_ID"
 							],
 							"query": [
 								{
@@ -4002,6 +4132,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "MONITOR_ID",
+									"value": ""
 								}
 							]
 						},
@@ -4024,7 +4160,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/monitor/1959920?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/monitor/:MONITOR_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -4035,7 +4171,7 @@
 								"api",
 								"v1",
 								"monitor",
-								"1959920"
+								":MONITOR_ID"
 							],
 							"query": [
 								{
@@ -4045,6 +4181,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "MONITOR_ID",
+									"value": ""
 								}
 							]
 						},
@@ -4280,7 +4422,7 @@
 							"raw": "{\n      \"type\": \"metric alert\",\n      \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100\",\n      \"name\": \"Bytes received on host0\",\n      \"message\": \"We may need to add web hosts if this is consistently high.\",\n      \"tags\": [\"app:webserver\", \"frontend\"],\n      \"options\": {\n      \t\"notify_no_data\": true,\n      \t\"no_data_timeframe\": 20\n      }\n    }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/monitor/1959920/unmute?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/monitor/:MONITOR_ID/unmute?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -4291,7 +4433,7 @@
 								"api",
 								"v1",
 								"monitor",
-								"1959920",
+								":MONITOR_ID",
 								"unmute"
 							],
 							"query": [
@@ -4302,6 +4444,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "MONITOR_ID",
+									"value": ""
 								}
 							]
 						},
@@ -4599,7 +4747,7 @@
 							"raw": "{\n        \"settings\": {\n            \"saml\": {\n                \"enabled\": false\n            },\n            \"saml_strict_mode\": {\n                \"enabled\": false\n            },\n            \"saml_idp_initiated_login\": {\n                \"enabled\": false\n            },\n            \"saml_autocreate_users_domains\": {\n                \"enabled\": false,\n                \"domains\": [\n                    \"my-org.com\",\n                    \"example.com\"\n                ]\n            }\n        }\n}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/org/<<PUBLIC_ID>>",
+							"raw": "https://app.datadoghq.com/api/v1/org/:PUBLIC_ID",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -4610,7 +4758,13 @@
 								"api",
 								"v1",
 								"org",
-								"<<PUBLIC_ID>>"
+								":PUBLIC_ID"
+							],
+							"variable": [
+								{
+									"key": "PUBLIC_ID",
+									"value": ""
+								}
 							]
 						},
 						"description": "ARGUMENTS\nname [optional]:\nThe organization name.\nsettings [optional]:\nA JSON array of settings. Settings include:\nsaml - Set the boolean property enabled to enable or disable single sign on with SAML. See the SAML documentation for more information about all SAML settings.\nsaml_idp_initiated_login - has one property enabled (boolean).v\nsaml_strict_mode - has one property enabled (boolean).\nsaml_autocreate_users_domains - has two properties: enabled (boolean) and domains which is a list of domains without the @ symbol."
@@ -4632,7 +4786,7 @@
 							"raw": "{\n        \"settings\": {\n            \"saml\": {\n                \"enabled\": true\n            },\n            \"saml_strict_mode\": {\n                \"enabled\": true\n            },\n            \"saml_idp_initiated_login\": {\n                \"enabled\": true\n            },\n            \"saml_autocreate_users_domains\": {\n                \"enabled\": true,\n                \"domains\": [\n                    \"my-org.com\",\n                    \"example.com\"\n                ]\n            }\n        }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/org/idp_metadata",
+							"raw": "https://app.datadoghq.com/api/v1/org/:PUBLIC_ID/idp_metadata",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -4643,7 +4797,14 @@
 								"api",
 								"v1",
 								"org",
+								":PUBLIC_ID",
 								"idp_metadata"
+							],
+							"variable": [
+								{
+									"key": "PUBLIC_ID",
+									"value": ""
+								}
 							]
 						},
 						"description": "ARGUMENTS\nidp_file [required]:\nThe path to the XML metadata file you wish to upload."
@@ -4736,7 +4897,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/<<HOSTNAME>>?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/:HOSTNAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -4748,7 +4909,7 @@
 								"v1",
 								"tags",
 								"hosts",
-								"<<HOSTNAME>>"
+								":HOSTNAME"
 							],
 							"query": [
 								{
@@ -4758,6 +4919,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "HOSTNAME",
+									"value": "myhost"
 								}
 							]
 						},
@@ -4780,7 +4947,7 @@
 							"raw": "{\n      \"tags\" : [\"environment:production\", \"role:webserver\"]\n}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/<<HOSTNAME>>?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/:HOSTNAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -4792,7 +4959,7 @@
 								"v1",
 								"tags",
 								"hosts",
-								"<<HOSTNAME>>"
+								":HOSTNAME"
 							],
 							"query": [
 								{
@@ -4802,6 +4969,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "HOSTNAME",
+									"value": "myhost"
 								}
 							]
 						},
@@ -4824,7 +4997,7 @@
 							"raw": "{\n      \"tags\" : [\"environment:production\", \"role:webserver\"]\n}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/<<HOSTNAME>>?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/:HOSTNAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -4836,7 +5009,7 @@
 								"v1",
 								"tags",
 								"hosts",
-								"<<HOSTNAME>>"
+								":HOSTNAME"
 							],
 							"query": [
 								{
@@ -4846,6 +5019,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "HOSTNAME",
+									"value": "myhost"
 								}
 							]
 						},
@@ -4868,7 +5047,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/<<HOSTNAME>>?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/:HOSTNAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -4880,7 +5059,7 @@
 								"v1",
 								"tags",
 								"hosts",
-								"<<HOSTNAME>>"
+								":HOSTNAME"
 							],
 							"query": [
 								{
@@ -4890,6 +5069,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "HOSTNAME",
+									"value": "myhost"
 								}
 							]
 						},
@@ -5288,7 +5473,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/user/email@domain.com?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/user/:USER_HANDLE?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -5299,7 +5484,7 @@
 								"api",
 								"v1",
 								"user",
-								"email@domain.com"
+								":USER_HANDLE"
 							],
 							"query": [
 								{
@@ -5309,6 +5494,13 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "USER_HANDLE",
+									"value": "test@datadoghq.com",
+									"description": "Usually the same as the email address"
 								}
 							]
 						},
@@ -5368,7 +5560,7 @@
 							"raw": "{\n  \"user\": {\n    \"disabled\": false,\n    \"handle\": \"email@domain.com\",\n    \"name\": \"Testy McTestingson\",\n    \"is_admin\": true,\n    \"role\": null,\n    \"access_role\": \"adm\",\n    \"verified\": true,\n    \"email\": \"email@domain.com\",\n    \"icon\": \"https://secure.gravatar.com/avatar/df46ee85ff1cbb518b20c8cab742b9ea?s=48&d=retro\"\n  }\n}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/user/email@domain.com?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/user/:USER_HANDLE?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -5379,7 +5571,7 @@
 								"api",
 								"v1",
 								"user",
-								"email@domain.com"
+								":USER_HANDLE"
 							],
 							"query": [
 								{
@@ -5389,6 +5581,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "USER_HANDLE",
+									"value": "test@datadoghq.com"
 								}
 							]
 						},
@@ -5406,7 +5604,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/user/test@gmail.com?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://app.datadoghq.com/api/v1/user/:USER_HANDLE?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -5417,7 +5615,7 @@
 								"api",
 								"v1",
 								"user",
-								"test@gmail.com"
+								":USER_HANDLE"
 							],
 							"query": [
 								{
@@ -5427,6 +5625,12 @@
 								{
 									"key": "application_key",
 									"value": "{{dd_app_key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "USER_HANDLE",
+									"value": "test@datadoghq.com"
 								}
 							]
 						},
