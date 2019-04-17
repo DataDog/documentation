@@ -11,7 +11,7 @@ Use this method to update an existing Synthetics test.
 
 ##### Arguments
 
-*   **`assertions`** - _optional_ - The function where you define when you want Datadog to alert you. Assertions are defined by: `operator`, `property`, `type` and `target`.
+*   **`assertions`** - _optional_ - The function where you define when you want Datadog to alert you. Assertions are defined by: `operator`, `property`, `type`, and `target`.
 *   **`operator`** - _optional_ - The action that you want tested. Valid operators depend on the property `type` being tested.
 
 <table>

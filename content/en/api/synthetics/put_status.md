@@ -11,4 +11,4 @@ Use this method to start or pause an existing Synthetics test.
 
 ##### Arguments
 
-*   **`new_status`** - _required_ - A key value pair where you define whether you want to start or pause a test. Valid values are `live` and `paused`.
+*   **`new_status`** - _required_ - A key-value pair where you define whether you want to start or pause a test. Valid values are `live` and `paused`.
