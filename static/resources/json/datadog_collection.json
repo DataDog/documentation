@@ -60,7 +60,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n      \"check\": \"app.is_ok\",\n      \"host_name\": \"my_hostname\",\n      \"status\": 0\n  }"
+							"raw": "{\n    \"check\": \"app.is_ok\",\n    \"host_name\": \"myhost\",\n    \"status\": 0\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/check_run?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -108,7 +108,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n      \"message\" : \"There is a problem with the database.\",\n      \"handle\":\"email@domain.com\"\n  }"
+							"raw": "{\n    \"message\": \"There is a problem with the database.\",\n    \"handle\": \"test@datadoghq.com\"\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/comments?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -150,7 +150,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n      \"message\" : \"Try Changing the Wording\"\n  }"
+							"raw": "{\n    \"message\": \"Try Changing the Wording\"\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/comments/:EVENT_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -199,7 +199,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n      \"message\" : \"Try embedded comment to previous post\",\n      \"handle\":\"email@domain.com\",\n      \"related_event_id\":\"<<INSERT_EVENT_ID>>\"\n  }"
+							"raw": "{\n    \"message\": \"Try embedded comment to previous post\",\n    \"handle\": \"test@datadoghq.com\",\n    \"related_event_id\": \"<<INSERT_EVENT_ID>>\"\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/comments?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -296,7 +296,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n      \"title\" : \"Average Memory Free Shell\",\n      \"widgets\" : [{\n          \"definition\": {\n              \"type\": \"timeseries\",\n              \"requests\": [\n                  {\"q\": \"avg:system.mem.free{*}\"}\n              ],\n              \"title\": \"Average Memory Free\"\n          }\n      }],\n      \"layout_type\": \"ordered\",\n      \"description\" : \"A dashboard with memory info.\",\n      \"is_read_only\": true,\n      \"notify_list\": [\"user@domain.com\"],\n      \"template_variables\": [{\n          \"name\": \"host1\",\n          \"prefix\": \"host\",\n          \"default\": \"my-host\"\n      }]\n}"
+							"raw": "{\n    \"title\": \"Average Memory Free Shell\",\n    \"widgets\": [\n        {\n            \"definition\": {\n                \"type\": \"timeseries\",\n                \"requests\": [\n                    {\n                        \"q\": \"avg:system.mem.free{*}\"\n                    }\n                ],\n                \"title\": \"Average Memory Free\"\n            }\n        }\n    ],\n    \"layout_type\": \"ordered\",\n    \"description\": \"A dashboard with memory info.\",\n    \"is_read_only\": true,\n    \"notify_list\": [\n        \"test@datadoghq.com\"\n    ],\n    \"template_variables\": [\n        {\n            \"name\": \"host1\",\n            \"prefix\": \"host\",\n            \"default\": \"myhost\"\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "https://api.datadoghq.com/api/v1/dashboard?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -340,7 +340,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n      \"title\" : \"Sum of Memory Free 2\",\n      \"widgets\" : [{\n          \"definition\": {\n              \"type\": \"timeseries\",\n              \"requests\": [\n                  {\"q\": \"sum:system.mem.free{*}\"}\n              ],\n              \"title\": \"Sum Memory Free Shell\"\n          }\n      }],\n      \"layout_type\": \"ordered\",\n      \"description\" : \"An updated dashboard with memory info.\",\n      \"is_read_only\": true,\n      \"notify_list\": [\"user@domain.com\"],\n      \"template_variables\": [{\n          \"name\": \"host1\",\n          \"prefix\": \"host\",\n          \"default\": \"my-host\"\n      }]\n}"
+							"raw": "{\n    \"title\": \"Sum of Memory Free 2\",\n    \"widgets\": [\n        {\n            \"definition\": {\n                \"type\": \"timeseries\",\n                \"requests\": [\n                    {\n                        \"q\": \"sum:system.mem.free{*}\"\n                    }\n                ],\n                \"title\": \"Sum Memory Free Shell\"\n            }\n        }\n    ],\n    \"layout_type\": \"ordered\",\n    \"description\": \"An updated dashboard with memory info.\",\n    \"is_read_only\": true,\n    \"notify_list\": [\n        \"test@datadoghq.com\"\n    ],\n    \"template_variables\": [\n        {\n            \"name\": \"host1\",\n            \"prefix\": \"host\",\n            \"default\": \"myhost\"\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "https://api.datadoghq.com/api/v1/dashboard/:DASHBOARD_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -586,7 +586,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n    \"name\": \"My Dashboard List\"\n}"
 						},
 						"url": {
 							"raw": "https://api.datadoghq.com/api/v1/dashboard/lists/manual?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -630,7 +630,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"name\": \"My Updated Dashboard List\"\n}"
+							"raw": "{\n    \"name\": \"My Updated Dashboard List\"\n}"
 						},
 						"url": {
 							"raw": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/:DASHBOARD_LIST_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -787,7 +787,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"dashboards\": [\n            {\n                \"type\": \"custom_screenboard\",\n                \"id\": 1414\n            },\n            {\n                \"type\": \"custom_timeboard\",\n                \"id\": 5858\n            },\n            {\n                \"type\": \"integration_screenboard\",\n                \"id\": 67\n            },\n            {\n                \"type\": \"integration_timeboard\",\n                \"id\": 5\n            },\n            {\n                \"type\": \"host_timeboard\",\n                \"id\": 123456789\n            }\n        ]\n}"
+							"raw": "{\n    \"dashboards\": [\n        {\n            \"type\": \"custom_screenboard\",\n            \"id\": 1414\n        },\n        {\n            \"type\": \"custom_timeboard\",\n            \"id\": 5858\n        },\n        {\n            \"type\": \"integration_screenboard\",\n            \"id\": 67\n        },\n        {\n            \"type\": \"integration_timeboard\",\n            \"id\": 5\n        },\n        {\n            \"type\": \"host_timeboard\",\n            \"id\": 123456789\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/:DASHBOARD_LIST_ID/dashboards?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -839,7 +839,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"dashboards\": [\n            {\n                \"type\": \"custom_screenboard\",\n                \"id\": 1414\n            },\n            {\n                \"type\": \"custom_timeboard\",\n                \"id\": 5858\n            },\n            {\n                \"type\": \"integration_screenboard\",\n                \"id\": 67\n            },\n            {\n                \"type\": \"integration_timeboard\",\n                \"id\": 5\n            },\n            {\n                \"type\": \"host_timeboard\",\n                \"id\": 123456789\n            }\n        ]\n}"
+							"raw": "{\n    \"dashboards\": [\n        {\n            \"type\": \"custom_screenboard\",\n            \"id\": 1414\n        },\n        {\n            \"type\": \"custom_timeboard\",\n            \"id\": 5858\n        },\n        {\n            \"type\": \"integration_screenboard\",\n            \"id\": 67\n        },\n        {\n            \"type\": \"integration_timeboard\",\n            \"id\": 5\n        },\n        {\n            \"type\": \"host_timeboard\",\n            \"id\": 123456789\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/:DASHBOARD_LIST_ID/dashboards?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -1236,7 +1236,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"scope\":\"region:midwest\"}"
+							"raw": "{\n    \"scope\": \"region:midwest\"\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/downtime/cancel/by_scope?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -1612,7 +1612,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"alert_type\": \"success\",\n        \"title\": \"prod auth build #{{$randomInt}} succeeded on PROD\",\n       \n        \"text\": \"Jenkins Build #{{$randomInt}} completed (16.48 secs) without error.\",\n        \"tags\": [\n           \n            \"result:success\"\n        ],\n        \"device_name\": null,\n        \"priority\": \"low\",\n        \"source_type_name\":\"jenkins\"\n    \n}"
+							"raw": "{\n    \"alert_type\": \"success\",\n    \"title\": \"prod auth build #{{$randomInt}} succeeded on PROD\",\n    \"text\": \"Jenkins Build #{{$randomInt}} completed (16.48 secs) without error.\",\n    \"tags\": [\n        \"result:success\"\n    ],\n    \"device_name\": null,\n    \"priority\": \"low\",\n    \"source_type_name\": \"jenkins\"\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/events?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -1692,7 +1692,7 @@
 					"response": []
 				},
 				{
-					"name": "DELETE An Event",
+					"name": "Delete An Event",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -2168,7 +2168,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n      \"message\": \"Un-Muting this host for a test!\"\n  }"
+							"raw": "{\n    \"message\": \"Un-Muting this host for a test!\"\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/host/:HOSTNAME/unmute?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -2264,7 +2264,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n        \"account_id\": \"YOUR_AWS_ACCOUNT_ID\",\n        \"filter_tags\": [\"env:staging\"],\n        \"host_tags\": [\"account:staging\",\"account:customer1\"],\n        \"role_name\": \"DatadogAWSIntegrationRole\",\n        \"account_specific_namespace_rules\": {\n        \t\"auto_scaling\": false,\n        \t\"opsworks\": false\n        }\n    }\n"
+									"raw": "{\n    \"account_id\": \"YOUR_AWS_ACCOUNT_ID\",\n    \"filter_tags\": [\n        \"env:staging\"\n    ],\n    \"host_tags\": [\n        \"account:staging\",\n        \"account:customer1\"\n    ],\n    \"role_name\": \"DatadogAWSIntegrationRole\",\n    \"account_specific_namespace_rules\": {\n        \"auto_scaling\": false,\n        \"opsworks\": false\n    }\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/integration/aws?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -2307,7 +2307,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n        \"account_id\": \"YOUR_AWS_ACCOUNT_ID\",\n        \"role_name\": \"DatadogAWSIntegrationRole\"\n    }\n"
+									"raw": "{\n    \"account_id\": \"YOUR_AWS_ACCOUNT_ID\",\n    \"role_name\": \"DatadogAWSIntegrationRole\"\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/integration/aws?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -2573,7 +2573,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n        \"tenant_name\": \"<AZURE_TENANT_NAME>\",\n        \"client_id\": \"<AZURE_CLIENT_ID>\",\n        \"client_secret\": \"<AZURE_CLIENT_SECRET>\",\n        \"host_filters\": \"<KEY_1>:<VALUE_1>,<KEY_2>:<VALUE_2>\"\n    }"
+									"raw": "{\n    \"tenant_name\": \"<AZURE_TENANT_NAME>\",\n    \"client_id\": \"<AZURE_CLIENT_ID>\",\n    \"client_secret\": \"<AZURE_CLIENT_SECRET>\",\n    \"host_filters\": \"<KEY_1>:<VALUE_1>,<KEY_2>:<VALUE_2>\"\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/integration/azure?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -2615,7 +2615,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n        \"tenant_name\": \"<AZURE_TENANT_NAME>\",\n        \"client_id\": \"<AZURE_CLIENT_ID>\",\n        \"host_filters\": \"<KEY_1>:<VALUE_1>,<KEY_2>:<VALUE_2>\"\n    }"
+									"raw": "{\n    \"tenant_name\": \"<AZURE_TENANT_NAME>\",\n    \"client_id\": \"<AZURE_CLIENT_ID>\",\n    \"host_filters\": \"<KEY_1>:<VALUE_1>,<KEY_2>:<VALUE_2>\"\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/integration/azure?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -2657,7 +2657,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n        \"tenant_name\": \"<AZURE_TENANT_NAME>\",\n        \"client_id\": \"<AZURE_CLIENT_ID>\"\n    }"
+									"raw": "{\n    \"tenant_name\": \"<AZURE_TENANT_NAME>\",\n    \"client_id\": \"<AZURE_CLIENT_ID>\"\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/integration/azure?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -2768,7 +2768,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n        \"type\": \"service_account\",\n        \"project_id\": \"<GCP_PROJECT_ID>\",\n        \"private_key_id\": \"<PRIVATE_KEY_ID>\",\n        \"private_key\": \"<PRIVATE_KEY>\",\n        \"client_email\": \"<CLIENT_EMAIL>\",\n        \"client_id\": \"<CLIENT_ID>\",\n        \"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\n        \"token_uri\": \"https://accounts.google.com/o/oauth2/token\",\n        \"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",\n        \"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>\",\n        \"host_filters\": \"<KEY_1>:<VALUE_1>,<KEY_2>:<VALUE_2>\"\n    }"
+									"raw": "{\n    \"type\": \"service_account\",\n    \"project_id\": \"<GCP_PROJECT_ID>\",\n    \"private_key_id\": \"<PRIVATE_KEY_ID>\",\n    \"private_key\": \"<PRIVATE_KEY>\",\n    \"client_email\": \"<CLIENT_EMAIL>\",\n    \"client_id\": \"<CLIENT_ID>\",\n    \"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\n    \"token_uri\": \"https://accounts.google.com/o/oauth2/token\",\n    \"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",\n    \"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>\",\n    \"host_filters\": \"<KEY_1>:<VALUE_1>,<KEY_2>:<VALUE_2>\"\n}"
 								},
 								"url": {
 									"raw": "https://api.datadoghq.com/api/v1/integration/gcp?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -2812,7 +2812,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n        \"project_id\": \"<GCP_PROJECT_ID>\",\n        \"client_email\": \"<CLIENT_EMAIL>\",\n        \"automute\": <AUTOMUTE> # true or false\n    }"
+									"raw": "{\n    \"project_id\": \"<GCP_PROJECT_ID>\",\n    \"client_email\": \"<CLIENT_EMAIL>\",\n    \"automute\": true\n}"
 								},
 								"url": {
 									"raw": "https://api.datadoghq.com/api/v1/integration/gcp?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -2856,7 +2856,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n        \"project_id\": \"<GCP_PROJECT_ID>\",\n        \"client_email\": \"<CLIENT_EMAIL>\",\n        \"host_filters\": \"<KEY_1>:<VALUE_1>,<KEY_2>:<VALUE_2>\"\n    }"
+									"raw": "{\n    \"project_id\": \"<GCP_PROJECT_ID>\",\n    \"client_email\": \"<CLIENT_EMAIL>\",\n    \"host_filters\": \"<KEY_1>:<VALUE_1>,<KEY_2>:<VALUE_2>\"\n}"
 								},
 								"url": {
 									"raw": "https://api.datadoghq.com/api/v1/integration/gcp?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -2900,7 +2900,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n        \"project_id\": \"<GCP_PROJECT_ID>\",\n        \"client_email\": \"<CLIENT_EMAIL>\"\n    }"
+									"raw": "{\n    \"project_id\": \"<GCP_PROJECT_ID>\",\n    \"client_email\": \"<CLIENT_EMAIL>\"\n}"
 								},
 								"url": {
 									"raw": "https://api.datadoghq.com/api/v1/integration/gcp?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -3035,7 +3035,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n       \"services\": [\n        {\n          \"service_name\": \"test_00\",\n          \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        },\n        {\n          \"service_name\": \"test_01\",\n          \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        }\n      ],\n      \"subdomain\": \"my-pd\",\n      \"schedules\": [\"https://my-pd.pagerduty.com/schedules#PCPYT4M\", \"https://my-pd.pagerduty.com/schedules#PKTPB7P\"],\n      \"api_token\": \"<PAGERDUTY_TOKEN>\"\n    }\n"
+									"raw": "{\n    \"services\": [\n        {\n            \"service_name\": \"test_00\",\n            \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        },\n        {\n            \"service_name\": \"test_01\",\n            \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        }\n    ],\n    \"subdomain\": \"my-pd\",\n    \"schedules\": [\n        \"https://my-pd.pagerduty.com/schedules#PCPYT4M\",\n        \"https://my-pd.pagerduty.com/schedules#PKTPB7P\"\n    ],\n    \"api_token\": \"<PAGERDUTY_TOKEN>\"\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/integration/pagerduty?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -3078,7 +3078,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n      \"services\": [\n        {\n          \"service_name\": \"test_00\",\n          \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        },\n        {\n          \"service_name\": \"test_01\",\n          \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        }\n      ],\n      \"schedules\": [\"<SCHEDULE_1>\", \"<SCHEDULE_2>\"],\n  }"
+									"raw": "{\n    \"services\": [\n        {\n            \"service_name\": \"test_00\",\n            \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        },\n        {\n            \"service_name\": \"test_01\",\n            \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        }\n    ],\n    \"schedules\": [\n        \"<SCHEDULE_1>\",\n        \"<SCHEDULE_2>\"\n    ]\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/integration/pagerduty?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -3130,7 +3130,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\"service_hooks\": [\n      {\n        \"account\": \"Main_Account\",\n        \"url\": \"https://hooks.slack.com/services/1/1\"\n      },\n      {\n        \"account\": \"doghouse\",\n        \"url\": \"https://hooks.slack.com/services/2/2\"\n      }\n    ],\n    \"channels\": [\n      {\n        \"channel_name\": \"#private\",\n        \"transfer_all_user_comments\": \"false\",\n        \"account\": \"Main_Account\"\n      },\n      {\n        \"channel_name\": \"#heresachannel\",\n        \"transfer_all_user_comments\": \"false\",\n        \"account\": \"doghouse\"\n      }\n    ]\n}"
+									"raw": "{\n    \"service_hooks\": [\n        {\n            \"account\": \"Main_Account\",\n            \"url\": \"https://hooks.slack.com/services/1/1\"\n        },\n        {\n            \"account\": \"doghouse\",\n            \"url\": \"https://hooks.slack.com/services/2/2\"\n        }\n    ],\n    \"channels\": [\n        {\n            \"channel_name\": \"#private\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"Main_Account\"\n        },\n        {\n            \"channel_name\": \"#heresachannel\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"doghouse\"\n        }\n    ]\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/integration/slack?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -3172,7 +3172,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\"service_hooks\": [\n      {\n        \"account\": \"Main_Account\",\n        \"url\": \"https://hooks.slack.com/services/1/1\"\n      },\n      {\n        \"account\": \"doghouse\",\n        \"url\": \"https://hooks.slack.com/services/2/2\"\n      }\n    ],\n    \"channels\": [\n      {\n        \"channel_name\": \"#private\",\n        \"transfer_all_user_comments\": \"false\",\n        \"account\": \"Main_Account\"\n      },\n      {\n        \"channel_name\": \"#heresachannel\",\n        \"transfer_all_user_comments\": \"false\",\n        \"account\": \"doghouse\"\n      }\n    ]\n}"
+									"raw": "{\n    \"service_hooks\": [\n        {\n            \"account\": \"Main_Account\",\n            \"url\": \"https://hooks.slack.com/services/1/1\"\n        },\n        {\n            \"account\": \"doghouse\",\n            \"url\": \"https://hooks.slack.com/services/2/2\"\n        }\n    ],\n    \"channels\": [\n        {\n            \"channel_name\": \"#private\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"Main_Account\"\n        },\n        {\n            \"channel_name\": \"#heresachannel\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"doghouse\"\n        }\n    ]\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/integration/slack?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -3214,7 +3214,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\"service_hooks\": [\n      {\n        \"account\": \"Main_Account\",\n        \"url\": \"https://hooks.slack.com/services/1/1\"\n      },\n      {\n        \"account\": \"doghouse\",\n        \"url\": \"https://hooks.slack.com/services/2/2\"\n      }\n    ],\n    \"channels\": [\n      {\n        \"channel_name\": \"#private\",\n        \"transfer_all_user_comments\": \"false\",\n        \"account\": \"Main_Account\"\n      },\n      {\n        \"channel_name\": \"#heresachannel\",\n        \"transfer_all_user_comments\": \"false\",\n        \"account\": \"doghouse\"\n      }\n    ]\n}"
+									"raw": "{\n    \"service_hooks\": [\n        {\n            \"account\": \"Main_Account\",\n            \"url\": \"https://hooks.slack.com/services/1/1\"\n        },\n        {\n            \"account\": \"doghouse\",\n            \"url\": \"https://hooks.slack.com/services/2/2\"\n        }\n    ],\n    \"channels\": [\n        {\n            \"channel_name\": \"#private\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"Main_Account\"\n        },\n        {\n            \"channel_name\": \"#heresachannel\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"doghouse\"\n        }\n    ]\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/integration/slack?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -3257,7 +3257,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"channels\": [\n      {\n        \"channel_name\": \"<CHANNEL_NAME_3>\",\n        \"transfer_all_user_comments\": \"false\",\n        \"account\": \"<SLACK_ACCOUNT_1>\"\n      },\n      {\n        \"channel_name\": \"<CHANNEL_NAME_4>\",\n        \"transfer_all_user_comments\": \"false\",\n        \"account\": \"<SLACK_ACCOUNT_2>\"\n      }\n    ]\n  }"
+									"raw": "{\n    \"channels\": [\n        {\n            \"channel_name\": \"<CHANNEL_NAME_3>\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"<SLACK_ACCOUNT_1>\"\n        },\n        {\n            \"channel_name\": \"<CHANNEL_NAME_4>\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"<SLACK_ACCOUNT_2>\"\n        }\n    ]\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/integration/slack?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -3309,7 +3309,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"hooks\": [\n      {\n        \"name\": \"somehook\",\n        \"url\": \"http://requestb.in/v1srg7v1\",\n        \"use_custom_payload\": \"false\",\n        \"custom_payload\": \"\",\n        \"encode_as_form\": \"false\",\n        \"headers\": \"\"\n    \t}\n]}"
+									"raw": "{\n    \"hooks\": [\n        {\n            \"name\": \"somehook\",\n            \"url\": \"http://requestb.in/v1srg7v1\",\n            \"use_custom_payload\": \"false\",\n            \"custom_payload\": \"\",\n            \"encode_as_form\": \"false\",\n            \"headers\": \"\"\n        }\n    ]\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/integration/webhooks?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -3351,7 +3351,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"hooks\": [\n      {\n        \"name\": \"somehook\",\n        \"url\": \"http://requestb.in/v1srg7v1\",\n        \"use_custom_payload\": \"false\",\n        \"custom_payload\": \"\",\n        \"encode_as_form\": \"false\",\n        \"headers\": \"\"\n    \t}\n]}"
+									"raw": "{\n    \"hooks\": [\n        {\n            \"name\": \"somehook\",\n            \"url\": \"http://requestb.in/v1srg7v1\",\n            \"use_custom_payload\": \"false\",\n            \"custom_payload\": \"\",\n            \"encode_as_form\": \"false\",\n            \"headers\": \"\"\n        }\n    ]\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/integration/webhooks?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -3393,7 +3393,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"hooks\": [\n      {\n        \"name\": \"somehook\",\n        \"url\": \"http://requestb.in/v1srg7v1\",\n        \"use_custom_payload\": \"false\",\n        \"custom_payload\": \"\",\n        \"encode_as_form\": \"false\",\n        \"headers\": \"\"\n    \t}\n]}"
+									"raw": "{\n    \"hooks\": [\n        {\n            \"name\": \"somehook\",\n            \"url\": \"http://requestb.in/v1srg7v1\",\n            \"use_custom_payload\": \"false\",\n            \"custom_payload\": \"\",\n            \"encode_as_form\": \"false\",\n            \"headers\": \"\"\n        }\n    ]\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/integration/webhooks?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -3436,7 +3436,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"hooks\": [\n      {\n        \"name\": \"anotherone\",\n        \"url\": \"http://requestb.in/v1srg7v1\"\n      }\n    ]\n}"
+									"raw": "{\n    \"hooks\": [\n        {\n            \"name\": \"anotherone\",\n            \"url\": \"http://requestb.in/v1srg7v1\"\n        }\n    ]\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/integration/webhooks?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -3559,7 +3559,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"name\": \"<API_KEY_NAME>\"\n}"
+									"raw": "{\n    \"name\": \"<API_KEY_NAME>\"\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/api_key?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -3653,7 +3653,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"name\": \"<API_KEY_NAME>\"\n}"
+									"raw": "{\n    \"name\": \"<API_KEY_NAME>\"\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/api_key/:API_KEY?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -3803,7 +3803,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"name\": \"<APP_KEY_NAME>\"\n}"
+									"raw": "{\n    \"name\": \"<APP_KEY_NAME>\"\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/application_key?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -4007,7 +4007,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{  \n   \"message\":\"This is an example log message over HTTP!\",\n   \"http\":{  \n      \"status_code\":301,\n      \"method\":\"POST\",\n      \"request_id\":\"{{$randomInt}}\"\n   },\n   \"network\":{  \n      \"client\":{  \n         \"ip\":\"127.0.0.1\",\n         \"port\":\"80\"\n      },\n      \"destination\":{  \n         \"ip\":\"10.0.0.1\"\n      }\n   },\n   \"duration\":2000,\n   \"category\":\"test\"\n}"
+							"raw": "{\n    \"message\": \"This is an example log message over HTTP!\",\n    \"http\": {\n        \"status_code\": 301,\n        \"method\": \"POST\",\n        \"request_id\": \"{{$randomInt}}\"\n    },\n    \"network\": {\n        \"client\": {\n            \"ip\": \"127.0.0.1\",\n            \"port\": \"80\"\n        },\n        \"destination\": {\n            \"ip\": \"10.0.0.1\"\n        }\n    },\n    \"duration\": 2000,\n    \"category\": \"test\"\n}"
 						},
 						"url": {
 							"raw": "https://http-intake.logs.datadoghq.com/v1/input/{{dd_api_key}}?ddsource=nginx&service=exampleService&hostname=exampleHost",
@@ -4286,7 +4286,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{ \"series\" :\n         [{\"metric\":\"test.metric\",\n          \"points\":[[\"{{$timestamp}}\", \"{{$randomInt}}\"]],\n          \"type\":\"gauge\",\n          \"tags\":\"source:Postman,test\",\n          \"host\":\"macbookPro\"\n         }\n        ]\n    }"
+							"raw": "{\n    \"series\": [\n        {\n            \"host\": \"myhost\",\n            \"metric\": \"test.metric\",\n            \"points\": [\n                [\n                    \"{{$timestamp}}\",\n                    \"{{$randomInt}}\"\n                ]\n            ],\n            \"tags\": \"source:Postman,test\",\n            \"type\": \"gauge\"\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/series?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -4582,7 +4582,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n      \"type\": \"metric alert\",\n      \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100\",\n      \"name\": \"Bytes received on host0\",\n      \"message\": \"We may need to add web hosts if this is consistently high.\",\n      \"tags\": [\"app:webserver\", \"frontend\"],\n      \"options\": {\n      \t\"notify_no_data\": true,\n      \t\"no_data_timeframe\": 20\n      }\n    }"
+							"raw": "{\n    \"message\": \"We may need to add web hosts if this is consistently high.\",\n    \"name\": \"Bytes received on host0\",\n    \"options\": {\n        \"no_data_timeframe\": 20,\n        \"notify_no_data\": true\n    },\n    \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:myhost} > 100\",\n    \"tags\": [\n        \"app:webserver\",\n        \"frontend\"\n    ],\n    \"type\": \"metric alert\"\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/monitor?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -4673,7 +4673,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"tags\": [],\n        \"deleted\": null,\n        \"query\": \"\\\"windows_service.state\\\".over(\\\"host:GamingPC\\\",\\\"service:termservice\\\").by(\\\"host\\\",\\\"service\\\").last(4).count_by_status()\",\n        \"message\": \"Example Windows Service Check for {{service.name}} on {{host.name}}\",\n        \"matching_downtimes\": [],\n        \"id\": 4769031,\n        \"multi\": true,\n        \"name\": \"Windows Service Check\",\n        \"created\": \"2018-04-25T16:06:10.564735+00:00\",\n        \"created_at\": 1524672370000,\n        \"creator\": {\n            \"id\": 580920,\n            \"handle\": \"test@example.com\",\n            \"name\": \"Joe Schmoe\",\n            \"email\": \"test@example.com\"\n        },\n        \"org_id\": 12345,\n        \"modified\": \"2018-04-25T16:06:10.564735+00:00\",\n        \"overall_state_modified\": null,\n        \"overall_state\": \"No Data\",\n        \"type\": \"service check\",\n        \"options\": {\n            \"notify_audit\": false,\n            \"locked\": false,\n            \"timeout_h\": 0,\n            \"silenced\": {},\n            \"thresholds\": {\n                \"warning\": 3,\n                \"ok\": 3,\n                \"critical\": 3\n            },\n            \"new_host_delay\": 300,\n            \"notify_no_data\": false,\n            \"renotify_interval\": 0,\n            \"no_data_timeframe\": 2\n        }\n    }"
+							"raw": "{\n    \"created\": \"2018-04-25T16:06:10.564735+00:00\",\n    \"created_at\": 1524672370000,\n    \"creator\": {\n        \"email\": \"test@datadoghq.com\",\n        \"handle\": \"test@datadoghq.com\",\n        \"id\": 580920,\n        \"name\": \"Testy McTestingson\"\n    },\n    \"deleted\": null,\n    \"id\": 4769031,\n    \"matching_downtimes\": [],\n    \"message\": \"Example Windows Service Check for {{service.name}} on {{host.name}}\",\n    \"modified\": \"2018-04-25T16:06:10.564735+00:00\",\n    \"multi\": true,\n    \"name\": \"Windows Service Check\",\n    \"options\": {\n        \"locked\": false,\n        \"new_host_delay\": 300,\n        \"no_data_timeframe\": 2,\n        \"notify_audit\": false,\n        \"notify_no_data\": false,\n        \"renotify_interval\": 0,\n        \"silenced\": {},\n        \"thresholds\": {\n            \"critical\": 3,\n            \"ok\": 3,\n            \"warning\": 3\n        },\n        \"timeout_h\": 0\n    },\n    \"org_id\": 12345,\n    \"overall_state\": \"No Data\",\n    \"overall_state_modified\": null,\n    \"query\": \"\\\"windows_service.state\\\".over(\\\"host:GamingPC\\\",\\\"service:termservice\\\").by(\\\"host\\\",\\\"service\\\").last(4).count_by_status()\",\n    \"tags\": [],\n    \"type\": \"service check\"\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/monitor/:MONITOR_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -4940,7 +4940,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n      \"type\": \"metric alert\",\n      \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100\",\n      \"name\": \"Bytes received on host0\",\n      \"message\": \"We may need to add web hosts if this is consistently high.\",\n      \"tags\": [\"app:webserver\", \"frontend\"],\n      \"options\": {\n      \t\"notify_no_data\": true,\n      \t\"no_data_timeframe\": 20\n      }\n    }"
+							"raw": "{\n    \"type\": \"metric alert\",\n    \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:myhost} > 100\",\n    \"name\": \"Bytes received on myhost\",\n    \"message\": \"We may need to add web hosts if this is consistently high.\",\n    \"tags\": [\n        \"app:webserver\",\n        \"frontend\"\n    ],\n    \"options\": {\n        \"notify_no_data\": true,\n        \"no_data_timeframe\": 20\n    }\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/monitor/1959920/mute?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -4984,7 +4984,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n      \"type\": \"metric alert\",\n      \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100\",\n      \"name\": \"Bytes received on host0\",\n      \"message\": \"We may need to add web hosts if this is consistently high.\",\n      \"tags\": [\"app:webserver\", \"frontend\"],\n      \"options\": {\n      \t\"notify_no_data\": true,\n      \t\"no_data_timeframe\": 20\n      }\n    }"
+							"raw": "{\n    \"type\": \"metric alert\",\n    \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:myhost} > 100\",\n    \"name\": \"Bytes received on myhost\",\n    \"message\": \"We may need to add web hosts if this is consistently high.\",\n    \"tags\": [\n        \"app:webserver\",\n        \"frontend\"\n    ],\n    \"options\": {\n        \"notify_no_data\": true,\n        \"no_data_timeframe\": 20\n    }\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/monitor/:MONITOR_ID/unmute?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -5034,7 +5034,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"type\": \"query alert\",\n    \"query\": \"min(last_5m):avg:fse_auto_process.request.duration{build:prod} + avg:cassandra.db.recent_read_latency_micros{host:fse-ldmx-f7-18} + avg:cassandra.db.recent_write_latency_micros{host:fse-ldmx-f7-18} + avg:redis.info.latency_ms{*} + avg:gunicorn.request.duration.avg{*} >= 550\"\n}"
+							"raw": "{\n    \"type\": \"metric alert\",\n    \"query\": \"THIS QUERY IS INVALID\",\n    \"name\": \"Bytes received on myhost\",\n    \"message\": \"We may need to add web hosts if this is consistently high.\",\n    \"tags\": [\n        \"app:webserver\",\n        \"frontend\"\n    ],\n    \"options\": {\n        \"notify_no_data\": true,\n        \"no_data_timeframe\": 20\n    }\n}"
 						},
 						"url": {
 							"raw": "https://api.datadoghq.com/api/v1/monitor?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -5221,7 +5221,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\" : \"Setup Child Org Via API\",\n    \"subscription\" : {\n        \"type\" : \"pro\"\n    },\n    \"billing\" : {\n        \"type\" : \"parent_billing\"\n    }\n}"
+							"raw": "{\n    \"name\": \"Setup Child Org Via API\",\n    \"subscription\": {\n        \"type\": \"pro\"\n    },\n    \"billing\": {\n        \"type\": \"parent_billing\"\n    }\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/org?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -5309,7 +5309,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"settings\": {\n            \"saml\": {\n                \"enabled\": false\n            },\n            \"saml_strict_mode\": {\n                \"enabled\": false\n            },\n            \"saml_idp_initiated_login\": {\n                \"enabled\": false\n            },\n            \"saml_autocreate_users_domains\": {\n                \"enabled\": false,\n                \"domains\": [\n                    \"my-org.com\",\n                    \"example.com\"\n                ]\n            }\n        }\n}"
+							"raw": "{\n    \"settings\": {\n        \"saml\": {\n            \"enabled\": false\n        },\n        \"saml_strict_mode\": {\n            \"enabled\": false\n        },\n        \"saml_idp_initiated_login\": {\n            \"enabled\": false\n        },\n        \"saml_autocreate_users_domains\": {\n            \"enabled\": false,\n            \"domains\": [\n                \"my-org.com\",\n                \"example.com\"\n            ]\n        }\n    }\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/org/:PUBLIC_ID",
@@ -5348,7 +5348,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"settings\": {\n            \"saml\": {\n                \"enabled\": true\n            },\n            \"saml_strict_mode\": {\n                \"enabled\": true\n            },\n            \"saml_idp_initiated_login\": {\n                \"enabled\": true\n            },\n            \"saml_autocreate_users_domains\": {\n                \"enabled\": true,\n                \"domains\": [\n                    \"my-org.com\",\n                    \"example.com\"\n                ]\n            }\n        }"
+							"raw": "{\n    \"settings\": {\n        \"saml\": {\n            \"enabled\": true\n        },\n        \"saml_autocreate_users_domains\": {\n            \"domains\": [\n                \"my-org.com\",\n                \"example.com\"\n            ],\n            \"enabled\": true\n        },\n        \"saml_idp_initiated_login\": {\n            \"enabled\": true\n        },\n        \"saml_strict_mode\": {\n            \"enabled\": true\n        }\n    }\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/org/:PUBLIC_ID/idp_metadata",
@@ -5509,7 +5509,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n      \"tags\" : [\"environment:production\", \"role:webserver\"]\n}"
+							"raw": "{\n    \"tags\": [\n        \"environment:production\",\n        \"role:webserver\"\n    ]\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/:HOSTNAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -5559,7 +5559,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n      \"tags\" : [\"environment:production\", \"role:webserver\"]\n}"
+							"raw": "{\n    \"tags\": [\n        \"environment:production\",\n        \"role:webserver\"\n    ]\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/:HOSTNAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -6100,7 +6100,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"disabled\": false,\n    \"handle\": \"test@gmail.com\",\n    \"name\": \"Testy McTestingson\",\n    \"is_admin\": true,\n    \"role\": null,\n    \"access_role\": \"adm\",\n    \"verified\": true,\n    \"email\": \"test@gmail.com\",\n    \"icon\": \"https://secure.gravatar.com/avatar/df46ee85ff1cbb518b20c8cab742b9ea?s=48&d=retro\"\n  }\n"
+							"raw": "{\n    \"disabled\": false,\n    \"handle\": \"test@datadoghq.com\",\n    \"name\": \"Test User\",\n    \"is_admin\": true,\n    \"role\": null,\n    \"access_role\": \"adm\",\n    \"verified\": true,\n    \"email\": \"test@datadoghq.com\",\n    \"icon\": \"https://secure.gravatar.com/avatar/df46ee85ff1cbb518b20c8cab742b9ea?s=48&d=retro\"\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/user?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -6224,7 +6224,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"user\": {\n    \"disabled\": false,\n    \"handle\": \"email@domain.com\",\n    \"name\": \"Testy McTestingson\",\n    \"is_admin\": true,\n    \"role\": null,\n    \"access_role\": \"adm\",\n    \"verified\": true,\n    \"email\": \"email@domain.com\",\n    \"icon\": \"https://secure.gravatar.com/avatar/df46ee85ff1cbb518b20c8cab742b9ea?s=48&d=retro\"\n  }\n}"
+							"raw": "{\n    \"user\": {\n        \"disabled\": false,\n        \"handle\": \"test@datadoghq.com\",\n        \"name\": \"Testy McTestingson\",\n        \"is_admin\": true,\n        \"role\": null,\n        \"access_role\": \"adm\",\n        \"verified\": true,\n        \"email\": \"test@datadoghq.com\",\n        \"icon\": \"https://secure.gravatar.com/avatar/df46ee85ff1cbb518b20c8cab742b9ea?s=48&d=retro\"\n    }\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/user/:USER_HANDLE?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
