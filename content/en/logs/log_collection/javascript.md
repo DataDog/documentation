@@ -68,7 +68,7 @@ The following parameters can be used to configure the library to send logs to Da
 <html>
   <head>
     <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-us.js"></script>
+    <script type="text/javascript" src="<COMING_SOON>"></script>
     <script>
       // Set your Public API key
       Datadog.init({
@@ -93,7 +93,7 @@ The following parameters can be used to configure the library to send logs to Da
 <html>
   <head>
     <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-eu.js"></script>
+    <script type="text/javascript" src="<COMING_SOON>"></script>
     <script>
       // Set your Public API key
       Datadog.init({
