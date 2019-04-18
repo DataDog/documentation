@@ -43,8 +43,8 @@ L'intégration Campfire n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
+[1]: https://launchpad.37signals.com/signin
+[2]: https://docs.datadoghq.com/fr/help/
 
 
 {{< get-dependencies >}}
-[1]: https://launchpad.37signals.com/signin
-[2]: https://docs.datadoghq.com/fr/help
