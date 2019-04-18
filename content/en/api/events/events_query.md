@@ -20,7 +20,7 @@ Note: if the event you're querying contains markdown formatting of any kind, you
 * **`sources`** [*optional*, *default*=**None**]:
     A comma separated string of sources.
 * **`tags`** [*optional*, *default*=**None**]:
-    A comma separated string of tags. To use a negative tag filter, prefix your tag with `-`
+    A comma separated string of tags. To use a negative tag filter, prefix your tag with `-`.
     See the [Event Stream documentation][2] to learn more.
 * **`unaggregated`** [*optional*, *default*=*false*]:
     Set unaggregated to `true` to return all events within the specified [`start`,`end`] timeframe. Otherwise if an event is aggregated to a parent event with a timestamp outside of the timeframe, it won't be available in the output.
