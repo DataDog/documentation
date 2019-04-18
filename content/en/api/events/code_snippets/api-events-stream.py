@@ -15,6 +15,6 @@ api.Event.query(
     start=start_time,
     end=end_time,
     priority="normal",
-    tags=["application:web"],
+    tags=["-env:dev,application:web"],
     unaggregated=True
 )
