@@ -26,6 +26,26 @@ To begin tracing applications written in any language, first [install and config
 
 **Note**: The .NET Tracer supports all .NET-based languages (C#, VB.Net, etc).
 
+### Configuration
+
+There are multiple ways to configure the .NET Tracer:
+
+- via code, using properties on `Tracer.Settings`
+- environment variables
+- `<appSettings>` section of the `app.config`/`web.config` file (.NET Framework only)
+
+The following table lists the supported configuration variables. Tracer settings can be accessed through properties on `Tracer.Settings`.
+
+Environment Variable or AppSetting       | Property Name  | Description                                                                                                                                                                                                                                                      |
+---------------------------------------- | -------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+`DD_TRACE_ENABLED`                       | `TraceEnabled` | Enables or disables the profiler. Valid values are: `true` (default) or `false`                                                                                                                                                                                  |
+`DD_TRACE_LOG_PATH`                      | N/A            | Sets the path for the profiler's log file.<br/><br/>Windows default: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br/><br/>Linux default: `/var/log/datadog/dotnet-profiler.log`                                                                 |
+`DD_TRACE_AGENT_URL`                     | `AgentUri`     | Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Default value is `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.                                                                                        |
+`DD_AGENT_HOST`                          | N/A            | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Default is value `localhost`.                                                                                      |
+`DD_TRACE_AGENT_PORT`                    | N/A            | Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Default value is `8126`.                                                                                                    |
+`DD_ENV`                                 | `Environment`  | Adds the `env` tag with the specified value to generated spans. See [Agent configuration][2] for more details about the `env` tag. Default is _empty_ (no `env` tag).                                                                                            |
+`DD_SERVICE_NAME`                        | `ServiceName`  | Sets the default service name. If not set, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). The default is to determine the service name automatically. |
+
 ## Automatic Instrumentation
 
 Automatic instrumentation uses the Profiling API provided by .NET Framework and .NET Core to modify IL instructions at runtime and inject instrumentation code into your application. With zero code changes and minimal configuration, the .NET Tracer automatically instruments all supported libraries out of the box.
@@ -266,17 +286,21 @@ ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
 
 ### Configuration
 
-The .NET Tracer is configured using environment variables as follows:
+In addition to the settings listed in [Getting Started][10], the following tables list configuration variables specific to automatic instrumentation.
 
-Environment Variable       | Description                                                                                           | Default Value |
--------------------------- | ----------------------------------------------------------------------------------------------------- | ------------- |
-`DD_TRACE_ENABLED`         | Determines whether the profiler is enabled. Valid values are: `true` or `false`                       | `true`        |
-`DD_AGENT_HOST`            | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. | `localhost`   |
-`DD_TRACE_AGENT_PORT`      | Sets the port where traces are sent (the port where the Agent is listening for connections).              | `8126`        |
-`DD_ENV`                   | Adds the `env` tag with the specified value to generated spans. See [Agent configuration][2] for more details about the `env` tag. | _empty_ (no `env` tag) |
-`DD_SERVICE_NAME`          | Sets the default service name. If not set, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). | _empty_ (determine service name automatically) |
-`DD_DISABLED_INTEGRATIONS` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][3] section below | _empty_ (all integrations enabled) |
-`DD_TRACE_LOG_PATH`        | Sets the path for the profiler's log file. | Windows: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br><br>Linux: `/var/log/datadog/dotnet-profiler.log` | |
+Tracer settings can be accessed through properties on `Tracer.Settings`:
+
+Environment Variable or AppSetting       | Property Name              | Description                                                                                                                                                                                                                                                        |
+---------------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+`DD_DISABLED_INTEGRATIONS`               | `DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][3] section below. |
+`DD_TRACE_ANALYTICS_ENABLED`             | `AnalyticsEnabled`         | Shorthand that enables default Trace Search and Analytics settings for web framework integrations. Valid values are: `true` or `false` (default).                                                                                                                  |
+
+Integration settings can be accessed through properties on `Tracer.Settings.Integrations["<INTEGRATION>"]`. Integration names are listed in the [Integrations][3] section below.
+
+Environment Variable or AppSetting       | Property Name              | Description                                                                                                                    |
+---------------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+`DD_<INTEGRATION>_ANALYTICS_ENABLED`     | `AnalyticsEnabled`         | Enables or disable Trace Search and Analytics for a specific integration. Valid values are: `true` or `false` (default).       |
+`DD_<INTEGRATION>_ANALYTICS_SAMPLE_RATE` | `AnalyticsSampleRate`      | Sets the Trace Search and Analytics sampling rate for a specific integration. A floating number between `0` and `1` (default). |
 
 ### Runtime Compatibility
 
@@ -301,7 +325,7 @@ The .NET Tracer can instrument the following libraries automatically:
 | ASP.NET Web API                 | `Microsoft.AspNet.WebApi.Core`           | 5.2+                 | `AspNetWebApi2`      |
 | ASP.NET Core MVC                | `Microsoft.AspNetCore.Mvc.Core`          | 2.0+                 | `AspNetCoreMvc2`     |
 | ASP.NET Web Forms <sup>1</sup>  | built-in                                 |                      | `AspNet`             |
-| WCF (_Coming soon_)             | built-in                                 |                      |                      |
+| WCF                             | built-in                                 |                      | `Wcf`                |
 | ADO.NET <sup>2</sup>            | built-in                                 |                      | `AdoNet`             |
 | WebClient / WebRequest          | built-in                                 |                      | `WebRequest`         |
 | HttpClient / HttpClientHandler  | built-in or `System.Net.Http`            | 4.0+                 | `HttpMessageHandler` |
@@ -312,7 +336,7 @@ The .NET Tracer can instrument the following libraries automatically:
 
 Notes:
 
-<sup>1</sup> The `AspNet` integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. To enable the `AspNet` integration, you must add the [`Datadog.Trace.ClrProfiler.Managed`][6] NuGet package to your application.
+<sup>1</sup> The `AspNet` integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. To enable the `AspNet` integration, you must add the [`Datadog.Trace.ClrProfiler.Managed`][9] NuGet package to your application.
 
 <sup>2</sup> The ADO.NET integration tries to instrument **all** ADO.NET providers. Datadog tested SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (MySQL, SQLite, Oracle) are untested but should work.
 
@@ -358,10 +382,12 @@ Tracer.Instance = tracer;
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/apm
-[2]: /agent/apm#environment
+[2]: /tracing/advanced/setting_primary_tags_to_scope/#environment
 [3]: #integrations
 [4]: https://github.com/dotnet/coreclr/issues/18448
 [5]: /help
 [6]: https://www.nuget.org/packages/Datadog.Trace
 [7]: /tracing/advanced/manual_instrumentation/?tab=net
 [8]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
+[9]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
+[10]: #getting-started
