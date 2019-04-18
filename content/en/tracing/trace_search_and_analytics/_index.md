@@ -85,6 +85,23 @@ After enabling, the Trace Search & Analytics UI starts showing results. Visit [T
 
 [1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}
+{{% tab ".NET" %}}
+
+Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the Tracing Client:
+
+* Environment Variable or AppSetting: `DD_TRACE_ANALYTICS_ENABLED=true`
+
+This setting can also be set in code:
+
+```csharp
+Tracer.Instance.Settings.AnalyticsEnabled = true;
+```
+
+After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
+
+
+[1]: https://app.datadoghq.com/apm/search
+{{% /tab %}}
 {{% tab "PHP" %}}
 
 Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the Tracing Client:
@@ -202,6 +219,34 @@ Integration names can be found on the [integrations table][1].
 
 [1]: /tracing/languages/nodejs/#integrations
 {{% /tab %}}
+{{% tab ".NET" %}}
+
+
+In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations.
+
+* Environment Variable or AppSetting: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
+
+Or in code:
+
+```csharp
+Tracer.Instance.Settings.Integrations["<INTEGRATION>"].AnalyticsEnabled = true;
+```
+
+For example, to enable Trace Search & Analytics for ASP.NET MVC:
+
+* Environment Variable or AppSetting: `DD_ASPNETMVC_ANALYTICS_ENABLED=true`
+
+Or in code:
+
+```csharp
+Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
+```
+
+Integration names can be found on the [integrations table][1].
+
+
+[1]: /tracing/setup/dotnet#integrations
+{{% /tab %}}
 {{% tab "PHP" %}}
 
 In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
@@ -264,6 +309,24 @@ tracer.use('mysql', {
 })
 ```
 
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+
+Database tracing is not captured by Trace Search & Analytics by default and you must enable collection manually for each integration. For example, to enable Trace Search & Analytics for ADO.NET:
+
+* Environment Variable or AppSetting: `DD_ADONET_ANALYTICS_ENABLED=true`
+
+Or in code:
+
+```csharp
+Tracer.Instance.Settings.Integrations["AdoNet"].AnalyticsEnabled = true;
+```
+
+Integration names can be found on the [integrations table][1].
+
+
+[1]: /tracing/setup/dotnet#integrations
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -353,6 +416,22 @@ Applications with custom instrumentation can enable trace analytics by setting t
 const { ANALYTICS } = require('dd-trace/ext/tags')
 
 span.setTag(ANALYTICS, true)
+```
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Applications with custom instrumentation can enable trace analytics by setting the `Tags.Analytics` tag on the service root span:
+
+```csharp
+using Datadog.Trace;
+
+using(var scope = Tracer.Instance.StartActive("web.request"))
+{
+    // enable Analytics on this span
+    scope.span.SetTag(Tags.Analytics, "true");
+}
+
 ```
 
 {{% /tab %}}
