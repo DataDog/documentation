@@ -5,13 +5,68 @@ kind: documentation
 
 Beta functions are available by editing the query JSON directly.
 
-## Default
+## Default Zero
 
-| Function    | Description                             | Example                                      |
-|-------------|-----------------------------------------|----------------------------------------------|
-| `default()` | Adds a default value to sparse metrics. | `default(system.load.1{*}, <default_value>)` |
+| Function         | Description                             | Example                          |
+| ---------------- | --------------------------------------- | -------------------------------- |
+| `default_zero()` | Adds a default value to sparse metrics. | `default_zero(system.load.1{*})` |
 
-**default_value**: The value to use when data is not present
+The `default_zero` function fills empty intervals using interpolation (if interpolation is enabled, which is the default for `GAUGE` type metrics) or the value 0. Like most functions, it is evaluated **after** [time and space aggregation][1].
+
+### Use Cases
+
+The `default_zero` function is intended to address the following use cases (though it may also work for other use cases):
+
+- Aligning gauges as 0 when performing arithmetic on sparse metrics (note: `COUNT` or `RATE` type metrics queried `as_count()` or `as_rate()` are _always_ aligned as 0, so using `default_zero` does not change how they are aligned; it only affects `GAUGE` type metrics).
+- Resolving monitors from a no-data condition. This works for both simple and multi-alerts, but the value 0 must not cause the monitor to trigger. For example, this would not work for a monitor with the query `avg(last_10m):avg:system.cpu.idle{*} < 10` because this monitor triggers (instead of resolving) when it evaluates to 0. Avoid using this function for error rate monitors with `as_count()` queries (see [this article][2] for details).
+- Filling in empty intervals in sparse (but nonempty) series for visual reasons or to affect the min/max/average of a timeseries in a monitor evaluation.
+- Showing the value 0 on the query value widget when there is no data.
+
+### Example
+
+To demonstrate how the `default_zero` function works, consider this single point created for a custom metric [using DogStatsD][3]:
+
+```
+$ echo -n "custom_metric:1|g" | nc -4u -w0 127.0.0.1 8125
+```
+
+When this metric is queried over the past 30 minutes, there is a single timestamp, because only one of the query's rollup intervals has a point:
+
+```
+avg:custom_metric{*}
+
++---------------------+---------------+
+| Timestamp           | custom_metric |
++---------------------+---------------+
+| ---------           | ---------     |
+| 2019-04-17 17:45:00 | 1             |
++---------------------+---------------+
+```
+
+The `default_zero` function interpolates this point five minutes forward in time (the default interpolation limit for gauges), then fills the remaining empty intervals with zeros:
+
+```
+default_zero(avg:custom_metric{*})
+
++---------------------+-----------------------------+
+| Timestamp           | default_zero(custom_metric) |
++---------------------+-----------------------------+
+| ---------           | ---------                   |
+| 2019-04-17 17:30:00 | 0                           |
+| 2019-04-17 17:31:00 | 0                           |
+...
+| 2019-04-17 17:44:00 | 0                           |
+| 2019-04-17 17:45:00 | 1                           |
+| 2019-04-17 17:46:00 | 1                           |
+| 2019-04-17 17:47:00 | 1                           |
+| 2019-04-17 17:48:00 | 1                           |
+| 2019-04-17 17:49:00 | 1                           |
+| 2019-04-17 17:50:00 | 1                           |
+| 2019-04-17 17:51:00 | 0                           |
+| 2019-04-17 17:52:00 | 0                           |
+...
++---------------------+-----------------------------+
+```
 
 ## Exclude Null
 
@@ -42,3 +97,7 @@ Beta functions are available by editing the query JSON directly.
     {{< nextlink href="/graphing/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
     {{< nextlink href="/graphing/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
+
+[1]: /getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
+[2]: /monitors/guide/as-count-in-monitor-evaluations/
+[3]: /developers/dogstatsd/datagram_shell/#sending-metrics
