@@ -1,6 +1,7 @@
 ---
 title: Browser Log Collection
 kind: documentation
+beta: true
 aliases:
   - /logs/log_collection/web_browser
 further_reading:
