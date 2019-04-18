@@ -95,7 +95,7 @@ The above example reports two metrics, `sqlserver.io_file_stats.num_of_reads` an
 
 Collecting metrics from a custom procedure produces a large amount of custom metrics that may affect your billing.
 
-**Note**: If you are using Agent < 6.11 you need to have setup `adodbapi` driver in order for this to work.
+**Note**: If you are using Agent < 6.11, you need to have set up the `adodbapi` driver in order for this to work.
 
 ### Setup a Stored Procedure
 
