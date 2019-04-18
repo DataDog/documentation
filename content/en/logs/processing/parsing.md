@@ -224,8 +224,6 @@ Other examples:
 | key:"/valueStr"         | `%{data::keyvalue(":", "/")}`       | {"key": "/valueStr"}           |
 | key:={valueStr}         | `%{data::keyvalue(":=", "", "{}")}` | {"key": "valueStr"}            |
 | key:=valueStr           | `%{data::keyvalue(":=", "")}`       | {"key": "valueStr"}            |
-| key1:=>val1,key2:=>val2 | `%{data::keyvalue(":=>", ",")}`     | {"key1": "val1","key2":"val2"} |
-
 
 ### Parsing dates
 
