@@ -28,6 +28,8 @@ main:
       - name: "Basic Agent Usage"
         url: "agent/basic_agent_usage/"
         children:
+          - name: "AIX"
+            url: "agent/basic_agent_usage/aix/"
           - name: "Amazon Linux"
             url: "agent/basic_agent_usage/amazonlinux/"
           - name: "CentOS"
@@ -263,8 +265,8 @@ main:
         url: "monitors/notifications/"
       - name: "Downtimes"
         url: "monitors/downtimes/"
-      - name: "Uptime Widget"
-        url: "monitors/monitor_uptime_widget/"
+      - name: "SLO Widget"
+        url: "monitors/slo_widget/"
       - name: "Guides"
         url: "monitors/guide"
       #- #  name: "FAQ"
@@ -380,6 +382,8 @@ main:
         children:
           - name: "AWS"
             url: "integrations/amazon_web_services/#log-collection"
+          - name: "Browser"
+            url: "logs/log_collection/javascript/"
           - name: "Docker"
             url: "logs/log_collection/docker/"
           - name: "Csharp"

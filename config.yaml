@@ -43,7 +43,7 @@ params:
   static_url: "http://localhost:1313/"
   announcement_banner:
     text: "<strong>Datadog Synthetics</strong> is now available!"
-    link: "blog/introducing-synthetic-monitoring/"
+    link: "blog/browser-tests/"
     exclude: []
   code_languages:
     - display_name: Python

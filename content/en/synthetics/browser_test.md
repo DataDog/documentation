@@ -9,15 +9,18 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introducing Datadog Synthetics"
+- link: "https://www.datadoghq.com/blog/browser-tests/"
+  tag: "Blog"
+  text: "User experience monitoring with browser tests"
 - link: "synthetics/"
   tag: "Documentation"
   text: "Manage your checks"
 - link: "synthetics/api_test"
   tag: "Documentation"
-  text: "Configure an API Tests"
+  text: "Configure an API Test"
 ---
 
-<div class="alert alert-warning">Synthetics is only available on our US hosted instances. Browser tests are available in beta: to request access complete the <a href="https://app.datadoghq.com/synthetics/beta">Datadog Synthetics Request form</a>.</div>
+<div class="alert alert-warning">Synthetics is only available on our US hosted instances.</div>
 
 ## Overview
 

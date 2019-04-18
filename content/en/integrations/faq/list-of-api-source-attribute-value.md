@@ -39,6 +39,7 @@ kind: faq
 |Amazon App Mesh|AMAZONAPPMESH|
 |Amazon Machine Learning|MACHINELEARNING|
 |Amazon Mq|MQ|
+|Amazon Msk|MSK|
 |Amazon Ops Works|OPSWORKS|
 |Amazon Polly|POLLY|
 |Amazon Rds|RDS|
@@ -98,6 +99,7 @@ kind: faq
 |Couchdb|COUCHDB|
 |Datadog|SYSTEM|
 |Desk|DESK|
+|Dingtalk|DINGTALK|
 |Docker|DOCKER|
 |Dyn|DYN|
 |Elasticsearch|ELASTICSEARCH|

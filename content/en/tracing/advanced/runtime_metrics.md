@@ -99,12 +99,11 @@ Runtime metrics can be viewed in correlation with your Ruby services. See the [S
 
  By default, Runtime metrics from your application are sent to the Datadog Agent over port 8125. If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][2], and that port 8125 is open on the Agent. For example: in Kubernetes, [bind the DogstatsD port to a host port][3]; in ECS, [set the appropriate flags in your task definition][4].
 
+
 [1]: https://rubygems.org/gems/dogstatsd-ruby
 [2]: https://app.datadoghq.com/apm/services
 [3]: /agent/docker/#dogstatsd-custom-metrics
 [4]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
-[5]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
-
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -185,8 +184,8 @@ The following metrics are collected by default after enabling Runtime metrics.
 
 Along with displaying these metrics in your APM Service Page, Datadog provides a [default Ruby Runtime Dashboard][1] with the `service` and `runtime-id` tags that are applied to these metrics.
 
-[1]: https://app.datadoghq.com/dash/integration/30193/ruby-runtime-metrics
 
+[1]: https://app.datadoghq.com/dash/integration/30268/ruby-runtime-metrics
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -203,7 +202,7 @@ The following metrics are collected by default after enabling Runtime metrics.
 
 Along with displaying these metrics in your APM Service Page, Datadog provides a [default Node Runtime Dashboard][1] with the `service` and `runtime-id` tags that are applied to these metrics.
 
-[1]: https://app.datadoghq.com/dash/integration/30191/node-runtime-metrics
+[1]: https://app.datadoghq.com/dash/integration/30269/node-runtime-metrics
 {{% /tab %}}
 {{% tab ".NET" %}}
 
