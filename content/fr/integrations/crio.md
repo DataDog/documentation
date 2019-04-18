@@ -66,13 +66,14 @@ CRI-O n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
-
-
-{{< get-dependencies >}}
 [1]: http://cri-o.io
 [2]: https://github.com/DataDog/integrations-core/blob/master/crio/datadog_checks/crio/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-information
-[5]: https://docs.datadoghq.com/fr/help
+[5]: https://github.com/DataDog/integrations-core/blob/master/crio/metadata.csv
+[6]: https://docs.datadoghq.com/fr/help
+
+
+{{< get-dependencies >}}
