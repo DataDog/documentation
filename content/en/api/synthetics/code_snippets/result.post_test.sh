@@ -1,6 +1,6 @@
 {  
    "status":"live",
-   "public_id":"aaa-bbb-ccc",
+   "public_id":"sti-s2m-ciz",
    "tags":[  
       "foo:bar"
    ],
@@ -17,16 +17,16 @@
    "deleted_at":null,
    "name":"Test",
    "type":"api",
-   "created_at":"2019-04-12T12:29:34.379537+00:00",
-   "modified_at":"2019-04-12T12:29:34.379537+00:00",
+   "created_at":"2019-04-18T14:35:28.378610+00:00",
+   "modified_at":"2019-04-18T14:35:28.378610+00:00",
    "config":{  
       "request":{  
          "url":"https://datadoghq.com",
          "headers":{  
-            "sdf":"fds",
-            "Cookie":"qds"
+            "header2":"value2",
+            "header1":"value1"
          },
-         "body":"fs",
+         "body":"body to send with the request",
          "method":"GET",
          "timeout":30
       },

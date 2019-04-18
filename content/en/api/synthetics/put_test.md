@@ -40,12 +40,12 @@ In order to update a request, you have to submit a full object, but only these p
   <tr>
     <td>Headers</td>
     <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>
-    <td>for <code>contains</code>/<code>does not contain</code>/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: [RegexStrings][2]</td>
+    <td>for <code>contains</code>/<code>does not contain</code>/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: RegexStrings</td>
   </tr>
   <tr>
     <td>Body</td>
     <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>
-    <td>for <code>contains</code>/<code>does not contain/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: [RegexStrings][2]</td>
+    <td>for <code>contains</code>/<code>does not contain/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: RegexStrings</td>
   </tr>
 </table>
    
@@ -61,7 +61,7 @@ In order to update a request, you have to submit a full object, but only these p
 *   **`message`** - _required_ - A description of the test.
 *   **`name`** - _required_ - A unique name for the test.
 *   **`options`** - _required_ - Use advanced options to specify custom request headers, authentication credentials, body content, cookies, or to have the test follow redirects. All optional parameters take their default value if you don't specify a value. Valid values in the request object are:
-    *  ** `tick_every`:** - _required_ -  How often the test should run (in seconds - current possible values are 60, 300, 900, 1800, 3600, 21600, 43200, 86400, 604800).
+    *  **`tick_every`:** - _required_ -  How often the test should run (in seconds - current possible values are 60, 300, 900, 1800, 3600, 21600, 43200, 86400, 604800).
     *  **`min_failure_duration`** - _optional_ - How long the test should be in failure before alerting (integer, number of seconds, max 7200). Default is 0.
     *  **`min_location_failed`** - _optional_ - The minimum number of locations that must have been in failure at the same time during at least one moment in the `min_failure_duration` period (min_location_failed and min_failure_duration are part of the advanced alerting rules  - integer, >= 1. Default is 1.
     *  **`follow_redirects`** - _optional_ - boolean - whether to follow redirects or not (max ten redirects can be followed before triggering a "Too many redirects" error). Valid values are `true` or `false`. Default value is `false`.
