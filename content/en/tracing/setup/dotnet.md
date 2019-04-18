@@ -266,7 +266,7 @@ ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
 
 ### Configuration
 
-The .NET Tracer is configured using environment variables as follows:
+The .NET Tracer is configured using environment variables or application settings in the `<appSettings> sections of the `app.config`/`web.config` file (.NET Framework only). The follow table lists the supported configuration variables:
 
 Environment Variable       | Description                                                                                           | Default Value |
 -------------------------- | ----------------------------------------------------------------------------------------------------- | ------------- |
