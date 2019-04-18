@@ -312,7 +312,7 @@ The .NET Tracer can instrument the following libraries automatically:
 
 Notes:
 
-<sup>1</sup> The `AspNet` integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. To enable the `AspNet` integration, you must add the [`Datadog.Trace.ClrProfiler.Managed`][6] NuGet package to your application.
+<sup>1</sup> The `AspNet` integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. To enable the `AspNet` integration, you must add the [`Datadog.Trace.ClrProfiler.Managed`][9] NuGet package to your application.
 
 <sup>2</sup> The ADO.NET integration tries to instrument **all** ADO.NET providers. Datadog tested SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (MySQL, SQLite, Oracle) are untested but should work.
 
@@ -365,3 +365,4 @@ Tracer.Instance = tracer;
 [6]: https://www.nuget.org/packages/Datadog.Trace
 [7]: /tracing/advanced/manual_instrumentation/?tab=net
 [8]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
+[9]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
