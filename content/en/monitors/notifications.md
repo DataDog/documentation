@@ -305,25 +305,19 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 
 ## Test monitor notifications
 
+**Testing notifications are supported for the following monitor types: Host, Metric, Anomaly, Outlier, Forecast, Integration (check only), Process (check only), Network (check only), Custom check, and Event.**
+
 After you define your monitor, test what your monitor's notification would look like in any applicable state with the *Test Notifications* button at the bottom right of the monitor page:
 
-1. Choose which monitor case you want to test in the following pop-up:
+1. Choose which monitor case you want to test in the following pop-up. You can only test states that are available in the monitor’s configuration and test for thresholds specified in the alerting conditions. [Recovery thresholds][4] are an exception, as Datadog sends a recovery notification once the monitor is no longer in alert or has no warn conditions.
 
-  {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" responsive="true" style="width:50%;" >}}
+    {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" responsive="true" style="width:50%;" >}}
 
-2. Click **Run test** to send the notification.
+2. Click **Run test** to send the notification to any notification handle available in the message box.
 
 **Notes**:
 
 * Test notifications produce events that can be searched for within the event stream. These notifications also indicate who initiated the test in the message body, and `[TEST]` is added into the test notification title.
-
-* You can only test states that are available in the monitor’s configuration and test for thresholds specified in the alerting conditions. [Recovery thresholds][4] are an exception, as Datadog sends a recovery notification once the monitor is no longer in alert or has no warn conditions.
-
-* Your test notifications are sent to any notification handle available in the message box.
-
-* You do not need to save the monitor to run the notification test.
-
-* Testing notifications are currently supported for the following monitor types: Host, Metric, Anomaly, Outlier, Forecast, Integration (check only), Process (check only), Network (check only), Custom check, and Event.
 
 * Message variables auto-populate with an available randomly selected group based on the scope of your monitor's definition.
 
