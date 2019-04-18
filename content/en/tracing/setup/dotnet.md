@@ -301,7 +301,7 @@ The .NET Tracer can instrument the following libraries automatically:
 | ASP.NET Web API                 | `Microsoft.AspNet.WebApi.Core`           | 5.2+                 | `AspNetWebApi2`      |
 | ASP.NET Core MVC                | `Microsoft.AspNetCore.Mvc.Core`          | 2.0+                 | `AspNetCoreMvc2`     |
 | ASP.NET Web Forms <sup>1</sup>  | built-in                                 |                      | `AspNet`             |
-| WCF (_Coming soon_)             | built-in                                 |                      |                      |
+| WCF                             | built-in                                 |                      | `Wcf`                |
 | ADO.NET <sup>2</sup>            | built-in                                 |                      | `AdoNet`             |
 | WebClient / WebRequest          | built-in                                 |                      | `WebRequest`         |
 | HttpClient / HttpClientHandler  | built-in or `System.Net.Http`            | 4.0+                 | `HttpMessageHandler` |
