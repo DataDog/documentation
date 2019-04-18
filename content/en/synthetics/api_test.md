@@ -38,7 +38,7 @@ Define the request you want to be executed by Datadog:
     * DELETE
     * OPTIONS
 
-2. Optionally, click on **Advanced options** to enrich your request with custom request headers, authentication credentials, body content, or cookies.
+2. Optionally, click on **Advanced options** to enrich your request with custom request headers, authentication credentials, body content, or cookies. Toggle **Follow redirects** to have the monitored endpoint follow up to ten redirects.
 
 3. Name your API test.
 4. Optionally, add tags to filter your API test in the [Synthetics page][1].
