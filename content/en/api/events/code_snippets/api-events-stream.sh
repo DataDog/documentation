@@ -6,7 +6,7 @@ curl -G -H "Content-type: application/json" \
     -d "start=${currenttime2}" \
     -d "end=${currenttime}" \
     -d "sources=My Apps" \
-    -d "tags=application:web,version:1" \
+    -d "tags=-env:dev,application:web" \
     -d "unaggregated=true"\
     -d "api_key=<YOUR_API_KEY>" \
     -d "application_key=<YOUR_APP_KEY>" \
