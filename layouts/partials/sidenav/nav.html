@@ -37,7 +37,7 @@
     -->
 
     <!-- For Rule (A) -->
-    {{ $plink := replace $dot.Page.RelPermalink (print "/" $ctx.Site.Language.Lang) "" }}
+    {{ $plink := replace $dot.Page.RelPermalink (print "/" $ctx.Site.Language.Lang "/") "/" }}
     {{ $spacedWords := (replace $plink "/" " ") }}
     {{ $currentUrlPartsLength := countwords $spacedWords }}
     {{ $url_part1 := index (split $plink "/") 1 }}
