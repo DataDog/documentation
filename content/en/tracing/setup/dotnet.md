@@ -29,6 +29,7 @@ To begin tracing applications written in any language, first [install and config
 ### Configuration
 
 There are multiple ways to configure the .NET Tracer:
+
 - via code, using properties on `Tracer.Settings`
 - environment variables
 - `<appSettings>` section of the `app.config`/`web.config` file (.NET Framework only)
