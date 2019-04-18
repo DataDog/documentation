@@ -92,11 +92,10 @@ Trace Search & Analytics can be enabled globally for all web integrations with o
 * Environment Variable or AppSetting: `DD_TRACE_ANALYTICS_ENABLED=true`
 
 This setting can also be set in code:
+
 ```csharp
 Tracer.Instance.Settings.AnalyticsEnabled = true;
 ```
-
-
 
 After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
 
@@ -219,6 +218,32 @@ Integration names can be found on the [integrations table][1].
 
 
 [1]: /tracing/languages/nodejs/#integrations
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+
+In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
+
+* Environment Variable or AppSetting: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
+
+Or in code:
+
+```csharp
+Tracer.Instance.Settings.Integrations["<INTEGRATION>"].AnalyticsEnabled = true;
+```
+
+Use this in addition to the global configuration for any integrations that submit custom services. For example, you can set the following to enable all ADO.NET spans in Trace Search & Analytics:
+
+* Environment Variable or AppSetting: `DD_ADONET_ANALYTICS_ENABLED=true`
+
+```csharp
+Tracer.Instance.Settings.Integrations["AdoNet"].AnalyticsEnabled = true;
+```
+
+Integration names can be found on the [integrations table][1].
+
+
+[1]: /tracing/setup/dotnet#integrations
 {{% /tab %}}
 {{% tab "PHP" %}}
 
