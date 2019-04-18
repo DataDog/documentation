@@ -222,7 +222,7 @@ Integration names can be found on the [integrations table][1].
 {{% tab ".NET" %}}
 
 
-In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
+In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations.
 
 * Environment Variable or AppSetting: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
@@ -232,12 +232,14 @@ Or in code:
 Tracer.Instance.Settings.Integrations["<INTEGRATION>"].AnalyticsEnabled = true;
 ```
 
-Use this in addition to the global configuration for any integrations that submit custom services. For example, you can set the following to enable all ADO.NET spans in Trace Search & Analytics:
+For example, to enable Trace Search & Analytics for ASP.NET MVC:
 
-* Environment Variable or AppSetting: `DD_ADONET_ANALYTICS_ENABLED=true`
+* Environment Variable or AppSetting: `DD_ASPNETMVC_ANALYTICS_ENABLED=true`
+
+Or in code:
 
 ```csharp
-Tracer.Instance.Settings.Integrations["AdoNet"].AnalyticsEnabled = true;
+Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
 ```
 
 Integration names can be found on the [integrations table][1].
