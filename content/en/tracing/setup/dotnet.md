@@ -295,12 +295,12 @@ Environment Variable or AppSetting       | Property Name              | Descript
 `DD_DISABLED_INTEGRATIONS`               | `DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][3] section below. |
 `DD_TRACE_ANALYTICS_ENABLED`             | `AnalyticsEnabled`         | Shorthand that enables default Trace Search and Analytics settings for web framework integrations. Valid values are: `true` or `false` (default).                                                                                                                  |
 
-Integration settings can be accessed through properties on `Tracer.Settings.Integrations["<integration>"]`. Integration names are listed in the [Integrations][3] section below.
+Integration settings can be accessed through properties on `Tracer.Settings.Integrations["<INTEGRATION>"]`. Integration names are listed in the [Integrations][3] section below.
 
 Environment Variable or AppSetting       | Property Name              | Description                                                                                                                    |
 ---------------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-`DD_<integration>_ANALYTICS_ENABLED`     | `AnalyticsEnabled`         | Enables or disable Trace Search and Analytics for a specific integration. Valid values are: `true` or `false` (default).       |
-`DD_<integration>_ANALYTICS_SAMPLE_RATE` | `AnalyticsSampleRate`      | Sets the Trace Search and Analytics sampling rate for a specific integration. A floating number between `0` and `1` (default). |
+`DD_<INTEGRATION>_ANALYTICS_ENABLED`     | `AnalyticsEnabled`         | Enables or disable Trace Search and Analytics for a specific integration. Valid values are: `true` or `false` (default).       |
+`DD_<INTEGRATION>_ANALYTICS_SAMPLE_RATE` | `AnalyticsSampleRate`      | Sets the Trace Search and Analytics sampling rate for a specific integration. A floating number between `0` and `1` (default). |
 
 ### Runtime Compatibility
 
