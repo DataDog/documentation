@@ -85,6 +85,24 @@ After enabling, the Trace Search & Analytics UI starts showing results. Visit [T
 
 [1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}
+{{% tab ".NET" %}}
+
+Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the Tracing Client:
+
+* Environment Variable or AppSetting: `DD_TRACE_ANALYTICS_ENABLED=true`
+
+This setting can also be set in code:
+```csharp
+Tracer.Instance.Settings.AnalyticsEnabled = true;
+```
+
+
+
+After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
+
+
+[1]: https://app.datadoghq.com/apm/search
+{{% /tab %}}
 {{% tab "PHP" %}}
 
 Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the Tracing Client:
