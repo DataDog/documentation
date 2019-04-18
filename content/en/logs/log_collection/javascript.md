@@ -1,6 +1,7 @@
 ---
 title: Browser Log Collection
 kind: documentation
+beta: true
 aliases:
   - /logs/log_collection/web_browser
 further_reading:
@@ -49,6 +50,10 @@ To manage your public API keys, go to your [Datadog API configuration page][3] i
 Read the [Public API keys documentation][2] to learn more about the restrictions that applies.
 
 ## Configure the JavaScript logger
+
+<div class="alert alert-warning">
+The Javascript logging library is in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to Datadog support team</a> to enable this feature for your account.
+</div>
 
 The following parameters can be used to configure the library to send logs to Datadog:
 
