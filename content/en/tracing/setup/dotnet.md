@@ -280,7 +280,7 @@ ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
 
 ### Configuration
 
-The .NET Tracer is configured using code, environment variables, or application settings in the `<appSettings>` section of the `app.config`/`web.config` file (.NET Framework only). In addition to the settings listed in ..., the following table lists configuration variables for automatic instrumentation:
+The .NET Tracer is configured using code, environment variables, or application settings in the `<appSettings>` section of the `app.config`/`web.config` file (.NET Framework only). In addition to the settings listed in [Getting Started][10], the following table lists configuration variables for automatic instrumentation:
 
 Variable Name                            | `Tracer.Settings` Property                          | Description                                                                                                                                                                                                                                                        | Default Value                                  |
 ---------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------- |
@@ -377,3 +377,4 @@ Tracer.Instance = tracer;
 [7]: /tracing/advanced/manual_instrumentation/?tab=net
 [8]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
 [9]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
+[10]: #getting-started
