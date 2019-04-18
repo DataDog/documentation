@@ -50,6 +50,10 @@ Read the [Public API keys documentation][2] to learn more about the restrictions
 
 ## Configure the JavaScript logger
 
+<div class="alert alert-warning">
+The Javascript logging library is in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on this feature for your account.
+</div>
+
 The following parameters can be used to configure the library to send logs to Datadog:
 
 * Set `isCollectingError` to `false` to turn off the automatic JS and console error collection.
