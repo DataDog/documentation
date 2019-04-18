@@ -310,6 +310,24 @@ tracer.use('mysql', {
 ```
 
 {{% /tab %}}
+{{% tab ".NET" %}}
+
+
+Database tracing is not captured by Trace Search & Analytics by default and you must enable collection manually for each integration. For example, to enable Trace Search & Analytics for ADO.NET:
+
+* Environment Variable or AppSetting: `DD_ADONET_ANALYTICS_ENABLED=true`
+
+Or in code:
+
+```csharp
+Tracer.Instance.Settings.Integrations["AdoNet"].AnalyticsEnabled = true;
+```
+
+Integration names can be found on the [integrations table][1].
+
+
+[1]: /tracing/setup/dotnet#integrations
+{{% /tab %}}
 {{% tab "PHP" %}}
 
 Database tracing is not captured by Trace Search & Analytics by default and you must enable collection manually for each integration. For example:
@@ -398,6 +416,22 @@ Applications with custom instrumentation can enable trace analytics by setting t
 const { ANALYTICS } = require('dd-trace/ext/tags')
 
 span.setTag(ANALYTICS, true)
+```
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Applications with custom instrumentation can enable trace analytics by setting the `Tags.Analytics` tag on the service root span:
+
+```csharp
+using Datadog.Trace;
+
+using(var scope = Tracer.Instance.StartActive("web.request"))
+{
+    // enable Analytics on this span
+    scope.span.SetTag(Tags.Analytics, "true");
+}
+
 ```
 
 {{% /tab %}}
