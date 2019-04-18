@@ -358,7 +358,7 @@ Tracer.Instance = tracer;
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/apm
-[2]: /agent/apm#environment
+[2]: /tracing/advanced/setting_primary_tags_to_scope/#environment
 [3]: #integrations
 [4]: https://github.com/dotnet/coreclr/issues/18448
 [5]: /help
