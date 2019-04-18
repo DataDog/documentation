@@ -1,7 +1,7 @@
 ---
 title: Récupérer des tags
 type: apicode
-order: 22.1
+order: 23.1
 external_redirect: /api/#recuperer-des-tags
 ---
 

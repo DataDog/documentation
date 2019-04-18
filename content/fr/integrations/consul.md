@@ -163,9 +163,9 @@ udp        0      0 127.0.0.1:53874         127.0.0.1:8125          ESTABLISHED 
 {{< get-metrics-from-git "consul" >}}
 
 
-Consultez la [documentation relative à la télémétrie de Consul][9] (en anglais) pour obtenir la description des métriques envoyées par l'Agent Consul à DogStatsD.
+Consultez la [documentation relative à la télémétrie de Consul][8] (en anglais) pour obtenir la description des métriques envoyées par l'Agent Consul à DogStatsD.
 
-Consultez la [documentation relative aux coordonnées réseau de Consul][10] (en anglais) pour découvrir comment les métriques de latence réseau sont calculées.
+Consultez la [documentation relative aux coordonnées réseau de Consul][9] (en anglais) pour découvrir comment les métriques de latence réseau sont calculées.
 
 ### Événements
 
@@ -183,14 +183,17 @@ L'Agent Datadog envoie un check de service pour chaque check de santé de Consul
 * `consul_service_id:<id>`, si Consul transmet un `ServiceID`
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][11].
+Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 ## Pour aller plus loin
 
-* [Surveiller la santé et les performances de Consul avec Datadog][12]
-* [Utilisation de Consul chez Datadog][13]
+* [Surveiller la santé et les performances de Consul avec Datadog][11]
+* [Utilisation de Consul chez Datadog][12]
 
 
+
+
+{{< get-dependencies >}}
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/consul/images/consul-dash.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
@@ -198,12 +201,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/fr/logs
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/consul/metadata.csv
-[9]: https://www.consul.io/docs/agent/telemetry.html
-[10]: https://www.consul.io/docs/internals/coordinates.html
-[11]: https://docs.datadoghq.com/fr/help
-[12]: https://www.datadoghq.com/blog/monitor-consul-health-and-performance-with-datadog
-[13]: https://engineering.datadoghq.com/consul-at-datadog
-
-
-{{< get-dependencies >}}
+[8]: https://www.consul.io/docs/agent/telemetry.html
+[9]: https://www.consul.io/docs/internals/coordinates.html
+[10]: https://docs.datadoghq.com/fr/help
+[11]: https://www.datadoghq.com/blog/monitor-consul-health-and-performance-with-datadog
+[12]: https://engineering.datadoghq.com/consul-at-datadog
