@@ -305,11 +305,13 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 
 ## Test monitor notifications
 
-After you define your monitor, test what your monitor's notification would look like in any applicable state with the *Test Notifications* button at the bottom right of the monitor page. Choose which monitor case you want to test in the following pop-up:
+After you define your monitor, test what your monitor's notification would look like in any applicable state with the *Test Notifications* button at the bottom right of the monitor page:
 
-{{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" responsive="true" style="width:50%;" >}}
+1. Choose which monitor case you want to test in the following pop-up:
 
-Then click **Run test** to send the notification.
+  {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" responsive="true" style="width:50%;" >}}
+
+2. Click **Run test** to send the notification.
 
 **Notes**:
 
