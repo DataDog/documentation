@@ -305,7 +305,7 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 
 ## Test monitor notifications
 
-**Testing notifications are supported for the following monitor types: Host, Metric, Anomaly, Outlier, Forecast, Integration (check only), Process (check only), Network (check only), Custom check, and Event.**
+**Testing notifications are supported for the following monitor types**: host, metric, anomaly, outlier, forecast, integration (check only), process (check only), network (check only), custom check, and event.
 
 After you define your monitor, test what your monitor's notification would look like in any applicable state with the *Test Notifications* button at the bottom right of the monitor page:
 
