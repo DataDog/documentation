@@ -54,10 +54,12 @@ Datadog officially supports the Java JRE 1.7 and higher of both Oracle JDK and O
 ### Integrations
 
 Most integrations are enabled by default. The following setting can change the default to disabled.
+
 * System Property: `-Ddd.integrations.enabled=false`
 * Environment Variable: `DD_INTEGRATIONS_ENABLED=false`
 
 Integrations can be enabled or disabled individually (overriding the default above).
+
 * System Property: `-Ddd.integration.<integration-name>.enabled=true`
 * Environment Variable: `DD_INTEGRATION_<INTEGRATION_NAME>_ENABLED=true`
 
