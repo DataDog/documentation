@@ -422,6 +422,25 @@ Priority sampling is enabled by default. The default sampler automatically assig
 
 Priority sampling is enabled by default.
 
+
+Manually set trace priority:
+
+```php
+
+$tracer = \OpenTracing\GLobalTracer::get();
+$span = $tracer->getActiveSpan();
+
+if (null !== $span) {
+
+  // Always keep this trace
+  $span->setTag('manual.keep', true);
+
+  // Always drop this trace
+  $span->setTag('manual.drop', true);
+}
+
+```
+
 {{% /tab %}}
 {{% tab "C++" %}}
 
