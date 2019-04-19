@@ -305,35 +305,23 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 
 ## Test monitor notifications
 
-After you define your monitor, you can test what your monitor's notification would look like in any applicable state. You can test what's specified in the "Say What's Happening" field by selecting "Select all" or selecting specific states.
+**Testing notifications are supported for the following monitor types**: host, metric, anomaly, outlier, forecast, integration (check only), process (check only), network (check only), custom check, and event.
 
-{{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" responsive="true" style="width:50%;" >}}
+After you define your monitor, test what your monitor's notification would look like in any applicable state with the *Test Notifications* button at the bottom right of the monitor page:
 
-You can only test states that are available in the monitor’s configuration and test for thresholds specified in the alerting conditions. [Recovery thresholds][4] are an exception, as Datadog sends a recovery notification once the monitor is no longer in alert or has no warn conditions.
+1. Choose which monitor case you want to test in the following pop-up. You can only test states that are available in the monitor’s configuration, and only for thresholds specified in the alerting conditions. [Recovery thresholds][4] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
-In the following, you are only able to test for ALERT because only an alert threshold has been specified:
+    {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" responsive="true" style="width:50%;" >}}
 
-{{< img src="monitors/notifications/test-notif-alert.png" alt="Set alert conditions" responsive="true" >}}
+2. Click **Run test** to send the notification to any notification handle available in the message box.
 
-In this next example, you can test for both ALERT and NO DATA:
+**Notes**:
 
-{{< img src="monitors/notifications/test-notif-alert-nodata.png" alt="Test the notifications for this monitor" responsive="true"  >}}
+* Test notifications produce events that can be searched for within the event stream. These notifications also indicate who initiated the test in the message body, and `[TEST]` is added into the test notification title.
 
-Message variables auto-populate with an available randomly selected group based on the scope of your monitor's definition.
+* Message variables auto-populate with an available randomly selected group based on the scope of your monitor's definition.
 
-{{< img src="monitors/notifications/test-notif-message.png" alt="Say what's happening" responsive="true" style="width:50%;" >}}
-
-### Managing test notifications
-
-Test notifications produce events that can be searched for within the event stream. These notifications also indicate who initiated the test in the message body, and [TEST] is added into the test notification title. 
-
-Your test notifications are sent to any notification handle available in the message box. You can also test webhooks.  
-
-**TIP**: Datadog recommends that you test using a test notification channel if you do not want to add these notifications to your on-call channels. 
-
-You do not need to save the monitor to run the notification test. Clicking **Run test** sends the notification, and you can continue to edit the monitor and notification box before saving. 
-
-Testing notifications are currently supported for the following monitor types: Host, Metric, Anomaly, Outlier, Forecast, Integration (check only), Process (check only), Network (check only), Custom check, and Event.
+  {{< img src="monitors/notifications/test-notif-message.png" alt="Say what's happening" responsive="true" style="width:50%;" >}}
 
 ## Advanced notification configuration
 ### Include links to appropriate dashboards
