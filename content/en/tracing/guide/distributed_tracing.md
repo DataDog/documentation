@@ -250,16 +250,6 @@ For a more detailed explanations of sampling and priority sampling, check the [s
 
 Priority sampling is enabled by default. To disable it, configure the `priority.sampling` flag to `false` ([see how to configure the java client][1]).
 
-
-Current Priority Values (more may be added in the future):
-
-| Sampling Value | Effect                                                                                                     |
-| -------------- | :--------------------------------------------------------------------------------------------------------- |
-| `SAMPLER_DROP` | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
-| `SAMPLER_KEEP` | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
-| `USER_DROP`    | The user asked to not keep the trace. The Agent will drop it.                                              |
-| `USER_KEEP`    | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
-
 Manually set trace priority:
 
 ```java
