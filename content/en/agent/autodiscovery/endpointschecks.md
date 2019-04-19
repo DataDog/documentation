@@ -63,11 +63,13 @@ nginx-758655469f-lk9p6   1/1     Running   0          20h
 ```
 By design, Endpoints Checks are scheduled by Agents that run on the same node as the pods that back the endpoints of `nginx` service, so only Agents running on the nodes `gke-cluster-default-pool-4658d5d4-k2sn` and `gke-cluster-default-pool-4658d5d4-p39c` will schedule the Checks on the `nginx` pods.
 
+This works like that to leverage [autodiscovery][3], and attach pod and container tags to the metrics coming from these pods.
+
 ## How to set it up
 
 ### Cluster Agent setup
 
-This feature requires a running [Cluster Agent with the Cluster Checks feature enabled][3].
+This feature requires a running [Cluster Agent with the Cluster Checks feature enabled][4].
 
 ### Agent setup
 
@@ -87,13 +89,13 @@ config_providers:
     polling: true
 ```
 
-[Restart the Agent][4] to apply the configuration change.
+[Restart the Agent][5] to apply the configuration change.
 
 **Note**: To enable both Cluster Checks and Endpoints Checks, `clusterchecks` and `endpointschecks` configuration providers should be both enabled on the Datadog **Node** Agent.
 
 ## Setting up Check Configurations via Kubernetes Service Annotations
 
-Similar to [annotating Kubernetes Pods][5], Services can be annotated with the following syntax:
+Similar to [annotating Kubernetes Pods][6], Services can be annotated with the following syntax:
 
 ```yaml
   ad.datadoghq.com/service.check_names: '[<CHECK_NAME>]'
@@ -104,13 +106,13 @@ Similar to [annotating Kubernetes Pods][5], Services can be annotated with the f
   ad.datadoghq.com/endpoints.instances: '[<INSTANCE_CONFIG>]'
 ```
 
-The `%%host%%` [template variable][6] is supported and is replaced by the service's and endpoints' IPs. The `kube_namespace` and `kube_service` tags are automatically added to the instances.
+The `%%host%%` [template variable][7] is supported and is replaced by the service's and endpoints' IPs. The `kube_namespace` and `kube_service` tags are automatically added to the instances.
 
 **Note**: For now, it is required to set both `ad.datadoghq.com/service.*` and `ad.datadoghq.com/endpoints.*` annotations to enable the Endpoints Checks on the service's endpoints.
 
 #### Example: HTTP check on an nginx-backed service with NGINX check on the service's endpoints
 
-The following Service definition exposes the Pods from the `my-nginx` deployment, it runs an [HTTP check][7] to measure the latency of the load-balanced service and an [NGINX check][8] on the pod(s) that backs the endpoint(s) of the service to collect `NGINX` metrics and service checks on the pod level:
+The following Service definition exposes the Pods from the `my-nginx` deployment, it runs an [HTTP check][8] to measure the latency of the load-balanced service and an [NGINX check][9] on the pod(s) that backs the endpoint(s) of the service to collect `NGINX` metrics and service checks on the pod level:
 
 ```yaml
 apiVersion: v1
@@ -149,7 +151,7 @@ spec:
 
 ## Troubleshooting
 
-Troubleshooting Endpoints Checks is similar to [troubleshooting Cluster Checks][8], the only difference is on the node-based Agents where scheduled Endpoints Checks appear along side the Cluster Check.
+Troubleshooting Endpoints Checks is similar to [troubleshooting Cluster Checks][10], the only difference is on the node-based Agents where scheduled Endpoints Checks appear along side the Cluster Check.
 
 **Note**: Endpoints Checks are scheduled by Agents that run on the same node as the pod(s) that backs the endpoint(s) of the service.
 
@@ -203,9 +205,11 @@ The Agent `status` command should show the check instance running and reporting 
 
 [1]: /agent/autodiscovery/clusterchecks
 [2]: /agent/kubernetes/cluster
-[3]: /agent/kubernetes/cluster/#cluster-checks-autodiscovery
-[4]: /agent/guide/agent-commands
-[5]: /agent/autodiscovery/?tab=kubernetes#template-source-kubernetes-pod-annotations
-[6]: /agent/autodiscovery/?tab=kubernetes#supported-template-variables
-[7]: /integrations/http_check
-[8]: /integrations/nginx
+[3]: /agent/autodiscovery
+[4]: /agent/kubernetes/cluster/#cluster-checks-autodiscovery
+[5]: /agent/guide/agent-commands
+[6]: /agent/autodiscovery/?tab=kubernetes#template-source-kubernetes-pod-annotations
+[7]: /agent/autodiscovery/?tab=kubernetes#supported-template-variables
+[8]: /integrations/http_check
+[9]: /integrations/nginx
+[10]: /agent/autodiscovery/clusterchecks/#troubleshooting
