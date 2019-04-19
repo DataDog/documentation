@@ -5161,7 +5161,7 @@
 										}
 									]
 								},
-								"description": "### Overview\n\nDelete your Datadog-AWS integration directly through Datadog API. [Read more about Datadog-AWS integration][1].\n\n### Arguments\n\n* **`account_id`** [*required*]: Your AWS Account ID without dashes. [Consult the Datadog AWS integration to learn more][2] about your AWS account ID.\n\n* **`access_key_id`** [*optional*, *default*=**None**]: If your AWS account is a GovCloud or China account, enter the corresponding Access Key ID.\n\n* **`role_name`** [*required*]: Your Datadog role delegation name. [Consult the Datadog AWS integration to learn more][3] about your AWS account Role name.\n\n[1]: https://docs.datadoghq.com/integrations/amazon_web_services\n[2]: https://docs.datadoghq.com/integrations/amazon_web_services/#configuration\n[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation"
+								"description": "### Overview\n\nDelete your Datadog-AWS integration directly through Datadog API. [Read more about Datadog-AWS integration][1].\n\n### Arguments\n\nThis endpoint takes no JSON argument.\n\n[1]: https://docs.datadoghq.com/integrations/amazon_web_services"
 							},
 							"response": []
 						},
@@ -5350,11 +5350,13 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "{{dd_api_key}}"
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
 								},
@@ -5474,7 +5476,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"account_id\": \"YOUR_AWS_ACCOUNT_ID\",\n    \"namespace\": \"sqs\",\n    \"tag_filter_str\": \"include_tags,!exclude_tags\"\n}"
+									"raw": "{\n    \"account_id\": \"<AWS_ACCOUNT_ID>\",\n    \"namespace\": \"sqs\",\n    \"tag_filter_str\": \"include_tags,!exclude_tags\"\n}"
 								},
 								"url": {
 									"raw": "https://api.datadoghq.com/api/v1/integration/aws/filtering?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -5494,20 +5496,22 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "{{dd_api_key}}"
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
 								},
-								"description": "List AWS Accounts (role-based only) in Datadog"
+								"description": "### Overview\n\nList AWS Accounts (role-based only) in Datadog. [Read more about Datadog-AWS integration][1].\n\n### Arguments\n\n* **`account_id`** [*required*]: Your AWS Account ID without dashes. [Consult the Datadog AWS integration to learn more][2] about your AWS account ID.\n\n* **`access_key_id`** [*optional*, *default*=**None**]: If your AWS account is a GovCloud or China account, enter the corresponding Access Key ID.\n\n[1]: https://docs.datadoghq.com/integrations/amazon_web_services\n[2]: https://docs.datadoghq.com/integrations/amazon_web_services/#configuration"
 							},
 							"response": []
 						},
 						{
-							"name": "Delete AWS Filtering rule Copy",
+							"name": "Delete AWS Filtering rule",
 							"request": {
 								"method": "DELETE",
 								"header": [
@@ -5540,15 +5544,17 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "{{dd_api_key}}"
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
 								},
-								"description": "List AWS Accounts (role-based only) in Datadog"
+								"description": "Delete a Datadog-AWS Filtering rule"
 							},
 							"response": []
 						}
@@ -5585,14 +5591,17 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "{{dd_api_key}}"
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
-								}
+								},
+								"description": "### Overview\n\nList all Datadog-Azure integrations configured for your Datadog Account.\n\n### Arguments\n\nThis endpoint takes no JSON argument."
 							},
 							"response": []
 						},
@@ -5627,14 +5636,17 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "{{dd_api_key}}"
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
-								}
+								},
+								"description": "### Overview\n\nCreate a Datadog-Azure integration\n\n### Arguments\n\nRefer to the [Datadog-Azure integration installation instructions][1] to see how to obtain the following field values for your organization.\n\n* **`tenant_name`** [*required*]: Your Azure Active Directory ID.\n\n* **`client_id`** [*required*]: Your Azure web application ID.\n\n* **`client_secret`** [*required*]: Your Azure web application secret key.\n\n* **`host_filters`** [*optional*, *default*=**None**]: Limit the Azure instances that are pulled into Datadog by using tags. Only hosts that match one of the defined tags are imported into Datadog.\n\n\n[1]: https://docs.datadoghq.com/integrations/azure/#installation"
 							},
 							"response": []
 						},
@@ -5669,14 +5681,17 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "{{dd_api_key}}"
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
-								}
+								},
+								"description": "### Overview \n\nUpdate Datadog-Azure host filtering.\n\n### Arguments\n\nRefer to the [Datadog-Azure integration installation instructions][1] to see how to obtain the following field values for your organization.\n\n* **`tenant_name`** [*required*]: Your Azure Active Directory ID.\n\n* **`client_id`** [*required*]: Your Azure web application ID.\n\n* **`host_filters`** [*optional*, *default*=**None**]: Limit the Azure instances that are pulled into Datadog by using tags. Only hosts that match one of the defined tags are imported into Datadog.\n\n[1]: https://docs.datadoghq.com/integrations/azure/#installation"
 							},
 							"response": []
 						},
@@ -5711,14 +5726,17 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "{{dd_api_key}}"
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
-								}
+								},
+								"description": "### Overview\n\nDelete a Datadog-Azure integration.\n\n### Arguments\n\nThis endpoint takes no JSON argument."
 							},
 							"response": []
 						}
@@ -5777,15 +5795,17 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "{{dd_api_key}}"
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
 								},
-								"description": "All of the following fields’ values are provided by the JSON service account key file created in the GCP Console for service accounts; Refer to the Datadog-Google Cloud Platform integration installation instructions to see how to generate one for your organization. For further references, consult the Google Cloud service account documentation.\n\ntype [required]:\n\nShould be service_account, it can be found in your JSON service account key.\n\nproject_id [required]:\n\nYour Google Cloud project ID found in your JSON service account key.\n\nprivate_key_id [required]:\n\nYour private key ID found in your JSON service account key.\n\nprivate_key [required]:\n\nYour private key name found in your JSON service account key.\n\nclient_email [required]:\n\nYour email found in your JSON service account key.\n\nclient_id [required]:\n\nYour ID found in your JSON service account key.\n\nauth_uri [required]:\n\nShould be https://accounts.google.com/o/oauth2/auth.\n\ntoken_uri [required]:\n\nShould be https://accounts.google.com/o/oauth2/token.\n\nauth_provider_x509_cert_url [required]:\n\nShould be https://www.googleapis.com/oauth2/v1/certs.\n\nclient_x509_cert_url [required]:\n\nShould be https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL> where <CLIENT_EMAIL> is the email found in your JSON service account key.\n\nhost_filters [optional]:\n\nLimit the GCE instances that are pulled into Datadog by using tags. Only hosts that match one of the defined tags are imported into Datadog.\n\nautomute [optional, default=false]:\n\nSilence monitors for expected GCE instance shutdowns."
+								"description": "### Overview\n\nList all Datadog-GCP integrations configured for your Datadog Account.\n\n### Arguments\n\nThis endpoint takes no JSON argument."
 							},
 							"response": []
 						},
@@ -5797,8 +5817,8 @@
 									{
 										"key": "Content-Type",
 										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
+										"type": "text",
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -5822,14 +5842,17 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "{{dd_api_key}}"
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
-								}
+								},
+								"description": "### Overview\n\nConfigure your Datadog-Google Cloud Platform integration directly through the Datadog API.  \n[Read more about Datadog-Google Cloud Platform integration][1].\n\n**Note**:  Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization. \n\n### Arguments\n\nAll of the following fields' values are provided by the JSON service account key file created in the [GCP Console for service accounts][2]; Refer to the [Datadog-Google Cloud Platform integration installation instructions][3] to see how to generate one for your organization. \nFor further references, consult the [Google Cloud service account documentation][4].\n\n* **`type`** [*required*]: Should be `service_account`, it can be found in your JSON service account key.\n\n* **`project_id`** [*required*]: Your Google Cloud project ID found in your JSON service account key.\n\n* **`private_key_id`** [*required*]: Your private key ID found in your JSON service account key.\n\n* **`private_key`** [*required*]: Your private key name found in your JSON service account key.\n\n* **`client_email`** [*required*]: Your email found in your JSON service account key.\n\n* **`client_id`** [*required*]: Your ID found in your JSON service account key.\n\n* **`auth_uri`** [*required*]: Should be `https://accounts.google.com/o/oauth2/auth`.\n\n* **`token_uri`** [*required*]: Should be `https://accounts.google.com/o/oauth2/token`.\n\n* **`auth_provider_x509_cert_url`** [*required*]:  Should be `https://www.googleapis.com/oauth2/v1/certs`.\n\n* **`client_x509_cert_url`** [*required*]: Should be `https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>` where `<CLIENT_EMAIL>` is the email found in your JSON service account key.\n\n* **`host_filters`** [*optional*]: Limit the GCE instances that are pulled into Datadog by using tags. Only hosts that match one of the defined tags are imported into Datadog.\n\n* **`automute`** [*optional*, *default*=**false**]: Silence monitors for expected GCE instance shutdowns.\n\n[1]: https://docs.datadoghq.com/integrations/google_cloud_platform\n[2]: https://console.cloud.google.com/iam-admin/serviceaccounts\n[3]: https://docs.datadoghq.com/integrations/google_cloud_platform/#installation\n[4]: https://cloud.google.com/iam/docs/creating-managing-service-account-keys"
 							},
 							"response": []
 						},
@@ -5866,14 +5889,17 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "{{dd_api_key}}"
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
-								}
+								},
+								"description": "### Overview\n\nUpdate your Datadog-Google Cloud Platform integration Automute options.\n[Read more about Datadog-Google Cloud Platform integration][1].\n\n### Arguments\n\n* **`project_id`** [*required*]: Your Google Cloud project ID found in your JSON service account key.\n\n* **`client_email`** [*required*]: Your email found in your JSON service account key.\n\n* **`automute`** [*optional*, *default*=**false**]: Silence monitors for expected GCE instance shutdowns.\n\n[1]: https://docs.datadoghq.com/integrations/google_cloud_platform"
 							},
 							"response": []
 						},
@@ -5910,14 +5936,17 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "{{dd_api_key}}"
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
-								}
+								},
+								"description": "### Overview\n\nUpdate your Datadog-Google Cloud Platform integration host filters.\n[Read more about Datadog-Google Cloud Platform integration][1].\n\n### Arguments\n\n* **`project_id`** [*required*]: Your Google Cloud project ID found in your JSON service account key.\n\n* **`client_email`** [*required*]: Your email found in your JSON service account key.\n\n* **`host_filters`** [*optional*]: Limit the GCE instances that are pulled into Datadog by using tags. Only hosts that match one of the defined tags are imported into Datadog.\n\n[1]: https://docs.datadoghq.com/integrations/google_cloud_platform"
 							},
 							"response": []
 						},
@@ -5929,13 +5958,13 @@
 									{
 										"key": "Content-Type",
 										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
+										"type": "text",
+										"value": "application/json"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"project_id\": \"<GCP_PROJECT_ID>\",\n    \"client_email\": \"<CLIENT_EMAIL>\"\n}"
+									"raw": ""
 								},
 								"url": {
 									"raw": "https://api.datadoghq.com/api/v1/integration/gcp?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -5954,14 +5983,17 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "{{dd_api_key}}"
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
-								}
+								},
+								"description": "### Overview\n\nDelete the Datadog-Google Cloud Platform integration. [Read more about Datadog-Google Cloud Platform integration][1].\n\n### Arguments\n\nThis endpoint takes no JSON argument.\n\n[1]: https://docs.datadoghq.com/integrations/google_cloud_platform"
 							},
 							"response": []
 						}
@@ -6005,14 +6037,17 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "{{dd_api_key}}"
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
-								}
+								},
+								"description": "### Overview\n\nList all Datadog-PagerDuty integrations configured for your Datadog Account.\n\n### Arguments\n\nThis endpoint takes no JSON argument."
 							},
 							"response": []
 						},
@@ -6047,21 +6082,24 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "{{dd_api_key}}"
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
-								}
+								},
+								"description": "### Overview\n\nDelete a Datadog-PagerDuty integration configured in your Datadog Account. [Read more about Datadog-PagerDuty integration][1].\n\n### Arguments\n\nThis endpoint takes no JSON arguments\n\n\n[1]: https://docs.datadoghq.com/integrations/pagerduty"
 							},
 							"response": []
 						},
 						{
-							"name": "Create / Replace PagerDuty Coniguration",
+							"name": "Create PagerDuty Configuration",
 							"request": {
-								"method": "PUT",
+								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
@@ -6089,20 +6127,22 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "{{dd_api_key}}"
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
 								},
-								"description": "Configure your Datadog-PagerDuty integration directly through Datadog API."
+								"description": "### Overview\n\nConfigure your Datadog-PagerDuty integration directly through the Datadog API.   [Read more about Datadog-PagerDuty integration][1].\n\n**Note**: * Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.\n\n### Arguments\n\n* **`services`** : Array of PagerDuty service objects. [Learn how to configure you Datadog service with PagerDuty documentation][2]. A PagerDuty service object is composed by:\n    * **`service_name`** [*required*]: Your Service name in PagerDuty.\n\t* **`service_key`** [*required*]: Your Service name associated service key in Pagerduty.\n* **`subdomain`** : Your PagerDuty account's personalized subdomain name.\n* **`schedules`** : Array of your schedule URLs, e.g: `[\"https://my-pd.pagerduty.com/schedules#PCPYT4M\", \"https://my-pd.pagerduty.com/schedules#PKTPB7P\"]`\n* **`api_token`** : Your PagerDuty API token.\n\n[1]: https://docs.datadoghq.com/integrations/pagerduty\n[2]: https://www.pagerduty.com/docs/guides/datadog-integration-guide"
 							},
 							"response": []
 						},
 						{
-							"name": "Update: Add New Services and Schedules",
+							"name": "Add New Services and Schedules",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -6132,14 +6172,17 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "{{dd_api_key}}"
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
-								}
+								},
+								"description": "### Overview\n\nAdd new services and schedules to your Datadog-PagerDuty integration. [Read more about Datadog-PagerDuty integration][1].\n\n### Arguments\n\n* **`services`** : Array of PagerDuty service objects. [Learn how to configure you Datadog service with PagerDuty documentation][2]. A PagerDuty service object is composed by:\n    * **`service_name`** [*required*]: Your Service name in PagerDuty.\n\t* **`service_key`** [*required*]: Your Service name associated service key in Pagerduty.\n* **`schedules`** : Array of your schedule URLs, e.g: `[\"https://my-pd.pagerduty.com/schedules#PCPYT4M\", \"https://my-pd.pagerduty.com/schedules#PKTPB7P\"]`\n\n[1]: https://docs.datadoghq.com/integrations/pagerduty\n[2]: https://www.pagerduty.com/docs/guides/datadog-integration-guide"
 							},
 							"response": []
 						}
@@ -6184,11 +6227,13 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "{{dd_api_key}}"
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
 								}
@@ -6226,11 +6271,13 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "{{dd_api_key}}"
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
 								}
@@ -6268,11 +6315,13 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "{{dd_api_key}}"
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
 								},
@@ -6311,11 +6360,13 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "{{dd_api_key}}"
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
 								}
@@ -9391,6 +9442,434 @@
 				}
 			],
 			"description": "You can create, edit, and disable users."
+		},
+		{
+			"name": "Synthetics",
+			"item": [
+				{
+					"name": "Create a test",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n   \"config\":{  \n      \"assertions\":[  \n         {  \n            \"operator\":\"is\",\n            \"type\":\"statusCode\",\n            \"target\":403\n         },\n         {  \n            \"operator\":\"is\",\n            \"property\":\"content-type\",\n            \"type\":\"header\",\n            \"target\":\"text/html\"\n         },\n         {  \n            \"operator\":\"lessThan\",\n            \"type\":\"responseTime\",\n            \"target\":2000\n         }\n      ],\n      \"request\":{  \n         \"method\":\"GET\",\n         \"url\":\"https://datadoghq.com\",\n         \"timeout\":30,\n         \"headers\":{  \n            \"header1\":\"value1\",\n            \"header2\":\"value2\"\n         },\n         \"body\":\"body to send with the request\"\n      }\n   },\n   \"locations\":[  \n      \"aws:us-east-2\",\n      \"aws:eu-central-1\",\n      \"aws:ca-central-1\",\n      \"aws:eu-west-2\",\n      \"aws:ap-northeast-1\",\n      \"aws:us-west-2\",\n      \"aws:ap-southeast-2\"\n   ],\n   \"message\":\"test\",\n   \"name\":\"Test\",\n   \"options\":{  \n      \"tick_every\":60,\n      \"min_failure_duration\":0,\n      \"min_location_failed\":1,\n      \"follow_redirects\":true\n   },\n   \"tags\":[  \n      \"foo:bar\"\n   ],\n   \"type\":\"api\"\n}"
+						},
+						"url": {
+							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests?api_key=${api_key}&application_key=${app_key}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"synthetics",
+								"tests"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "${api_key}"
+								},
+								{
+									"key": "application_key",
+									"value": "${app_key}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Start or pause a test",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"new_status\":\"paused\"}"
+						},
+						"url": {
+							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests/${test_id}/status?api_key=${api_key}&application_key=${app_key}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"synthetics",
+								"tests",
+								"${test_id}",
+								"status"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "${api_key}"
+								},
+								{
+									"key": "application_key",
+									"value": "${app_key}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit a test",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n   \"config\":{  \n      \"assertions\":[  \n         {  \n            \"operator\":\"is\",\n            \"type\":\"statusCode\",\n            \"target\":403\n         },\n         {  \n            \"operator\":\"is\",\n            \"property\":\"content-type\",\n            \"type\":\"header\",\n            \"target\":\"text/html\"\n         },\n         {  \n            \"operator\":\"lessThan\",\n            \"type\":\"responseTime\",\n            \"target\":2000\n         }\n      ],\n      \"request\":{  \n         \"method\":\"GET\",\n         \"url\":\"https://datadoghq.com\",\n         \"timeout\":30,\n         \"headers\":{  \n            \"header1\":\"value1\",\n            \"header2\":\"value2\"\n         },\n         \"body\":\"body to send with the request\"\n      }\n   },\n   \"locations\":[  \n      \"aws:us-east-2\",\n      \"aws:eu-central-1\",\n      \"aws:ap-northeast-1\",\n      \"aws:us-west-2\",\n      \"aws:ap-southeast-2\"\n   ],\n   \"message\":\"test\",\n   \"name\":\"Test\",\n   \"options\":{  \n      \"tick_every\":60,\n      \"min_failure_duration\":0,\n      \"min_location_failed\":1,\n      \"follow_redirects\":true\n   },\n   \"tags\":[  \n      \"foo:bar\"\n   ],\n   \"type\":\"api\"\n}"
+						},
+						"url": {
+							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests/${test_id}?api_key=${api_key}&application_key=${app_key}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"synthetics",
+								"tests",
+								"${test_id}"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "${api_key}"
+								},
+								{
+									"key": "application_key",
+									"value": "${app_key}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a test",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n   \"public_ids\":[  \n      \"aaa-bbb-ccc\",\n      \"bbb-ccc-ddd\"\n   ]\n}"
+						},
+						"url": {
+							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests/delete?api_key=${api_key}&application_key=${app_key}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"synthetics",
+								"tests",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "${api_key}"
+								},
+								{
+									"key": "application_key",
+									"value": "${app_key}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get the most recent results",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests/${test_id}/results?api_key=${api_key}&application_key=${app_key}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"synthetics",
+								"tests",
+								"${test_id}",
+								"results"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "${api_key}"
+								},
+								{
+									"key": "application_key",
+									"value": "${app_key}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a specific result",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests/${test_id}/results/${result_id}?api_key=${api_key}&application_key=${app_key}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"synthetics",
+								"tests",
+								"${test_id}",
+								"results",
+								"${result_id}"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "${api_key}"
+								},
+								{
+									"key": "application_key",
+									"value": "${app_key}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all tests",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests?api_key=${api_key}&application_key=${app_key}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"synthetics",
+								"tests"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "${api_key}"
+								},
+								{
+									"key": "application_key",
+									"value": "${app_key}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a test",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests/${test_id}?api_key=${api_key}&application_key=${app_key}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"synthetics",
+								"tests",
+								"${test_id}"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "${api_key}"
+								},
+								{
+									"key": "application_key",
+									"value": "${app_key}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get devices for browser checks",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.datadoghq.com/api/v1/synthetics/browser/devices?api_key=${api_key}&application_key=${app_key}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"synthetics",
+								"browser",
+								"devices"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "${api_key}"
+								},
+								{
+									"key": "application_key",
+									"value": "${app_key}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get available locations",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.datadoghq.com/api/v1/synthetics/locations?api_key=${api_key}&application_key=${app_key}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"synthetics",
+								"locations"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "${api_key}"
+								},
+								{
+									"key": "application_key",
+									"value": "${app_key}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
