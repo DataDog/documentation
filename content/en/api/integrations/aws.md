@@ -7,7 +7,7 @@ external_redirect: /api/#aws
 
 ## AWS
 
-Configure your Datadog-AWS integration directly through Datadog API.  
+Configure your Datadog-AWS integration directly through Datadog API.
 [Read more about Datadog-AWS integration][1].
 
 **Note**: Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.
