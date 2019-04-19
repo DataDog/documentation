@@ -65,12 +65,13 @@ CRI n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][4].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
-
-
-{{< get-dependencies >}}
 [1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/cri.d/conf.yaml.example
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/fr/help
+[4]: https://github.com/DataDog/integrations-core/blob/master/cri/metadata.csv
+[5]: https://docs.datadoghq.com/fr/help
+
+
+{{< get-dependencies >}}
