@@ -5,9 +5,9 @@ aliases:
   - /agent/faq/agent-configuration-files
 ---
 
-## Agent main configuration file 
+## Agent main configuration file
 
-The Agent v6 configuration file uses **YAML** to better support complex configurations, and to provide a consistent configuration experience, as Checks also use YAML configuration files. 
+The Agent v6 configuration file uses **YAML** to better support complex configurations, and to provide a consistent configuration experience, as Checks also use YAML configuration files.
 Therefore, `datadog.conf` (v5) is now retired in favor of `datadog.yaml` (v6).
 
 {{< tabs >}}
@@ -77,7 +77,7 @@ In order to provide a more flexible way to define the configuration for a check,
 
 `/datadog-agent/conf.d/<CHECK_NAME>.d/`.
 
-Note: For log collection, to prevent duplicate logs from being sent to Datadog, the agent does not accept multiple YAML files that point to the same log source. In the case where there is more than one YAML file that points to the same log source, the agent considers the files in alphabetical order and uses the first file.
+Note: For log collection, to prevent duplicate logs from being sent to Datadog, the Agent does not accept multiple YAML files that point to the same log source. In the case where there is more than one YAML file that points to the same log source, the Agent considers the files in alphabetical order and uses the first file.
 
 This way, complex configurations can be broken down into multiple files. For example, a configuration for the `http_check` might look like this:
 
