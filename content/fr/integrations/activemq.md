@@ -130,27 +130,15 @@ Le check ActiveMQ n'inclut aucun événement.
 Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance ActiveMQ qu'il surveille et d'y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 ## Pour aller plus loin
 Documentation, liens et articles supplémentaires utiles :
 
-* [Architecture et métriques clés d'ActiveMQ][11]
-* [Surveiller les métriques et performances d'ActiveMQ][12]
+* [Architecture et métriques clés d'ActiveMQ][10]
+* [Surveiller les métriques et performances d'ActiveMQ][11]
 
 
-[1]: https://raw.githubusercontent.com/DataDog/dd-agent/5.10.1/conf.d/activemq.yaml.example
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://github.com/DataDog/jmxfetch
-[4]: https://activemq.apache.org/jmx.html
-[5]: https://docs.datadoghq.com/fr/agent/faq/agent-configuration-files/#agent-configuration-directory
-[6]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
-[8]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-core/blob/master/activemq/metadata.csv
-[10]: https://docs.datadoghq.com/fr/help
-[11]: https://www.datadoghq.com/blog/activemq-architecture-and-metrics
-[12]: https://www.datadoghq.com/blog/monitor-activemq-metrics-performance
 
 
 {{< get-dependencies >}}
@@ -168,19 +156,19 @@ Recueillez des métriques du service ActiveMQ XML en temps réel pour :
 ## Implémentation
 ### Installation
 
-Le check ActiveMQ XML est inclus avec le paquet de l'[Agent Datadog][111] : vous n'avez donc rien d'autre à installer sur vos serveurs.
+Le check ActiveMQ XML est inclus avec le paquet de l'[Agent Datadog][12] : vous n'avez donc rien d'autre à installer sur vos serveurs.
 
 ### Configuration
 
-1. Modifiez `activemq_xml.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][112] en ajoutant vos statistiques `url`.
+1. Modifiez `activemq_xml.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][13] en ajoutant vos statistiques `url`.
 
-    Consultez le [fichier d'exemple activemq_xml.d/conf.yaml][113] pour découvrir toutes les options de configuration disponibles.
+    Consultez le [fichier d'exemple activemq_xml.d/conf.yaml][14] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][114].
+2. [Redémarrez l'Agent][15].
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][115] et cherchez `activemq_xml` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][16] et cherchez `activemq_xml` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -194,21 +182,31 @@ Le check ActiveMQ XML n'inclut aucun événement.
 Le check ActiveMQ XML n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][117].
+Besoin d'aide ? Contactez [l'assistance Datadog][17].
 
 ## Pour aller plus loin
 
-* [Surveiller les métriques et performances d'ActiveMQ][118]
+* [Surveiller les métriques et performances d'ActiveMQ][18]
 
 
-[111]: https://app.datadoghq.com/account/settings#agent
-[112]: https://docs.datadoghq.com/fr/agent/faq/agent-configuration-files/#agent-configuration-directory
-[113]: https://github.com/DataDog/integrations-core/blob/master/activemq_xml/datadog_checks/activemq_xml/data/conf.yaml.example
-[114]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
-[115]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#agent-status-and-information
-[116]: https://github.com/DataDog/integrations-core/blob/master/activemq_xml/metadata.csv
-[117]: https://docs.datadoghq.com/fr/help
-[118]: https://www.datadoghq.com/blog/monitor-activemq-metrics-performance
 
 
 {{< get-dependencies >}}
+[1]: https://raw.githubusercontent.com/DataDog/dd-agent/5.10.1/conf.d/activemq.yaml.example
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://github.com/DataDog/jmxfetch
+[4]: https://activemq.apache.org/jmx.html
+[5]: https://docs.datadoghq.com/fr/agent/faq/agent-configuration-files/#agent-configuration-directory
+[6]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example
+[7]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
+[8]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#agent-status-and-information
+[9]: https://docs.datadoghq.com/fr/help
+[10]: https://www.datadoghq.com/blog/activemq-architecture-and-metrics
+[11]: https://www.datadoghq.com/blog/monitor-activemq-metrics-performance
+[12]: https://app.datadoghq.com/account/settings#agent
+[13]: https://docs.datadoghq.com/fr/agent/faq/agent-configuration-files/#agent-configuration-directory
+[14]: https://github.com/DataDog/integrations-core/blob/master/activemq_xml/datadog_checks/activemq_xml/data/conf.yaml.example
+[15]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
+[16]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#agent-status-and-information
+[17]: https://docs.datadoghq.com/fr/help
+[18]: https://www.datadoghq.com/blog/monitor-activemq-metrics-performance

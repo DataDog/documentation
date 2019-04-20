@@ -27,5 +27,5 @@ For the Python client library, use `easy_install dogapi`.
 
 Another option to consider is PagerDuty's [cronner][1], a command line utility that wraps periodic (cron) jobs for statistics gathering and success monitoring:
 
-[1]: https://gowalker.org/github.com/PagerDuty/cronner
 
+[1]: https://gowalker.org/github.com/PagerDuty/cronner

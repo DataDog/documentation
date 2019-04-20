@@ -162,14 +162,14 @@ Depuis la version 6.11.0, l'Agent Datadog peut détecter automatiquement le nom
 
 Sur Google GKE et Azure AKS, le nom du cluster est récupéré depuis l'API du fournisseur de cloud. Pour AWS EKS, le nom du cluster est récupéré à partir des tags d'instance EC2.
 
-**Remarque** : sur AWS, vous devez ajouter l’[autorisation][12] `ec2:DescribeInstances` à votre stratégie IAM Datadog afin de permettre à l'Agent d'interroger les tags d'instance EC2.
+**Remarque** : sur AWS, vous devez ajouter l’[autorisation][8] `ec2:DescribeInstances` à votre stratégie IAM Datadog afin de permettre à l'Agent d'interroger les tags d'instance EC2.
 
 
 ## Activer les fonctionnalités
 
 ### Collecte de logs
 
-Pour activer la [collecte de logs][8] avec votre DaemonSet :
+Pour activer la [collecte de logs][9] avec votre DaemonSet :
 
 1. Définissez les variables `DD_LOGS_ENABLED` et `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` sur true dans votre section *env* :
 
@@ -201,7 +201,7 @@ Pour activer la [collecte de logs][8] avec votre DaemonSet :
       (...)
     ```
 
-Pour en savoir plus, consultez [la documentation relative à la collecte de logs Docker][9].
+Pour en savoir plus, consultez [la documentation relative à la collecte de logs Docker][10].
 
 ### Collecte de traces
 
@@ -233,7 +233,7 @@ Pour activer la collecte de traces avec votre DaemonSet :
 
 ### Collecte de processus
 
-Consultez la section relative à la [collecte de processus pour Kubernetes][10].
+Consultez la section relative à la [collecte de processus pour Kubernetes][11].
 
 ### DogStatsD
 
@@ -248,7 +248,7 @@ Pour envoyer des métriques custom via DogStatsD, définissez la variable `DD_DO
 (...)
 ```
 
-Pour en savoir plus, consultez [la documentation relative à DogStatsD de Kubernetes][11].
+Pour en savoir plus, consultez [la documentation relative à DogStatsD de Kubernetes][12].
 
 Pour envoyer des métriques custom via DogStatsD depuis vos pods d'application, supprimez la mise en commentaire de la ligne `# hostPort: 8125` dans votre manifeste `datadog-agent.yaml`. Vous exposez ainsi le port DogStatsD sur chacun de vos nœuds Kubernetes.
 
@@ -267,8 +267,8 @@ Pour y remédier, ajoutez `hostNetwork: true` aux spécifications de pod de votr
 [5]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information
 [6]: /fr/agent/docker/#environment-variables
 [7]: https://docs.datadoghq.com/fr/agent/autodiscovery
-[8]: /fr/logs
-[9]: /fr/logs/docker/#configuration-file-example
-[10]: /fr/graphing/infrastructure/process/?tab=kubernetes#installation
-[11]: /fr/agent/kubernetes/dogstatsd
-[12]: https://docs.datadoghq.com/fr/integrations/amazon_ec2/#configuration
+[8]: https://docs.datadoghq.com/fr/integrations/amazon_ec2/#configuration
+[9]: /fr/logs
+[10]: /fr/logs/docker/#configuration-file-example
+[11]: /fr/graphing/infrastructure/process/?tab=kubernetes#installation
+[12]: /fr/agent/kubernetes/dogstatsd

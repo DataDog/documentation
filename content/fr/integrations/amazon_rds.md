@@ -233,26 +233,25 @@ L'intégration AWS RDS comprend des événements liés aux instances de base de
 L'intégration AWS RDS n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][14].
+Besoin d'aide ? Contactez [l'assistance Datadog][13].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+ 
+
+{{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_rds.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_rds
 [6]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Monitoring.html
-[7]: https://docs.datadoghq.com/fr/graphing/
-[8]: https://docs.datadoghq.com/fr/monitors/
-[9]: https://www.datadoghq.com/blog/monitoring-rds-mysql-performance-metrics/
-[10]: https://aws.amazon.com/blogs/database/monitor-amazon-rds-for-mysql-and-mariadb-logs-with-amazon-cloudwatch/ 
+[7]: https://docs.datadoghq.com/fr/graphing
+[8]: https://docs.datadoghq.com/fr/monitors
+[9]: https://www.datadoghq.com/blog/monitoring-rds-mysql-performance-metrics
+[10]: https://aws.amazon.com/blogs/database/monitor-amazon-rds-for-mysql-and-mariadb-logs-with-amazon-cloudwatch
 [11]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
 [12]: https://app.datadoghq.com/logs
-[13]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_rds/amazon_rds_metadata.csv
-[14]: https://docs.datadoghq.com/fr/help/
-
-
-{{< get-dependencies >}}
+[13]: https://docs.datadoghq.com/fr/help

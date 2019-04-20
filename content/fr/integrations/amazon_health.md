@@ -57,11 +57,11 @@ L'intégration AWS Health n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
-[2]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
-[3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_health.html
-[4]: https://app.datadoghq.com/account/settings#integrations/amazon_health
-[5]: https://docs.datadoghq.com/fr/help/
 
 
 {{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
+[2]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
+[3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_health.html
+[4]: https://app.datadoghq.com/account/settings#integrations/amazon_health
+[5]: https://docs.datadoghq.com/fr/help

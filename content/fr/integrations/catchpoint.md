@@ -79,7 +79,7 @@ L'intégration Catchpoint n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][1].
 
-[1]: https://docs.datadoghq.com/fr/help/
 
 
 {{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/help

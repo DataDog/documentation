@@ -26,7 +26,7 @@ Associez CircleCI pour :
 ## Implémentation
 ### Installation
 
-Vous pouvez installer l'intégration CircleCI avec son [carré d'intégration][3].
+Vous pouvez installer l'intégration CircleCI avec son [carré d'intégration][1].
 
 ### Configuration
 
@@ -50,9 +50,8 @@ L'intégration CircleCI n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
-[1]: https://github.com/DataDog/dogweb/blob/prod/integration/circleci/circleci_metadata.csv
-[2]: https://docs.datadoghq.com/fr/help/
-[3]: https://app.datadoghq.com/account/settings#integrations/circleci
 
 
 {{< get-dependencies >}}
+[1]: https://app.datadoghq.com/account/settings#integrations/circleci
+[2]: https://docs.datadoghq.com/fr/help

@@ -70,13 +70,13 @@ Le check Buddy n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
+
+
+{{< get-dependencies >}}
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/buddy/images/datadog-integration.png
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: https://app.buddy.works/login
 [4]: https://buddy.works/knowledge/deployments/what-parameters-buddy-use
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/buddy/images/snapshot.png
-[6]: https://docs.datadoghq.com/fr/graphing/event_stream/
-[7]: http://docs.datadoghq.com/help/
-
-
-{{< get-dependencies >}}
+[6]: https://docs.datadoghq.com/fr/graphing/event_stream
+[7]: http://docs.datadoghq.com/help

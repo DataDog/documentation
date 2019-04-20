@@ -53,13 +53,12 @@ L'intégration Stockage Azure n'inclut aucun événement.
 L'intégration Stockage Azure n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
-[1]: https://docs.datadoghq.com/fr/integrations/azure/
-[2]: https://github.com/DataDog/azure-storage-dd
-[3]: https://app.datadoghq.com/account/settings#integrations/azure_storage
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_storage/azure_storage_metadata.csv
-[5]: https://docs.datadoghq.com/fr/help/
 
 
 {{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/integrations/azure
+[2]: https://github.com/DataDog/azure-storage-dd
+[3]: https://app.datadoghq.com/account/settings#integrations/azure_storage
+[4]: https://docs.datadoghq.com/fr/help

@@ -66,7 +66,10 @@ Le check Agent_metrics n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
- [1]: https://docs.datadoghq.com/integrations/go_expvar
+ 
+
+{{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/integrations/go_expvar
 [2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/go_expvar.d/agent_stats.yaml.example
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
@@ -75,6 +78,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/agent_metrics/metadata.csv
 [9]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

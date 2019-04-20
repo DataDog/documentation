@@ -117,25 +117,24 @@ L'intégration AWS ElastiCache comprend des événements pour le cluster, des g
 L'intégration AWS ElastiCache n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 ## Pour aller plus loin
 
-* [Surveiller les métriques de performance ElastiCache avec Redis ou Memcached][11]  
-* [Recueillir des métriques ElastiCache et ses métriques Redis/Memcached][12]  
+* [Surveiller les métriques de performance ElastiCache avec Redis ou Memcached][10]  
+* [Recueillir des métriques ElastiCache et ses métriques Redis/Memcached][11]  
 
-[1]: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached/
-[2]: https://www.coursera.org/
-[3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+
+
+{{< get-dependencies >}}
+[1]: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached
+[2]: https://www.coursera.org
+[3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [4]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticache.html
 [7]: https://app.datadoghq.com/account/settings#integrations/amazon_elasticache
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_elasticache/amazon_elasticache_metadata.csv
-[10]: https://docs.datadoghq.com/fr/help/
-[11]: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached/
-[12]: https://www.datadoghq.com/blog/collecting-elasticache-metrics-its-redis-memcached-metrics/
-
-
-{{< get-dependencies >}}
+[9]: https://docs.datadoghq.com/fr/help
+[10]: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached
+[11]: https://www.datadoghq.com/blog/collecting-elasticache-metrics-its-redis-memcached-metrics

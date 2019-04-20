@@ -112,12 +112,11 @@ Le check Ambassador ne comprend aucun événement.
 Le check Ambassador n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][4].
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
-[1]: https://www.getambassador.io
-[2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/ambassador/images/upstream-req-time.png
-[3]: https://github.com/DataDog/integrations-extras/blob/master/ambassador/metadata.csv
-[4]: http://docs.datadoghq.com/help/
 
 
 {{< get-dependencies >}}
+[1]: https://www.getambassador.io
+[2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/ambassador/images/upstream-req-time.png
+[3]: http://docs.datadoghq.com/help

@@ -47,7 +47,7 @@ Un fichier `Dockerrun.aws.json` est un fichier JSON propre à Elastic Beanstalk
 
 Un fichier `Dockerrun.aws.json` peut être utilisé de façon autonome ou compressé avec du code source supplémentaire dans une archive unique. Le code source archivé dans `Dockerrun.aws.json` est déployé dans les instances de conteneur et accessible dans le répertoire `/var/app/current/`. Utilisez la section `volumes` de la configuration pour fournir des points de montage aux conteneurs s'exécutant sur l'instance. Utilisez la section `mountPoints` des définitions de conteneurs intégrés pour les monter depuis les conteneurs.
 
-L'exemple de code suivant présente un `Dockerrun.aws.json` déclarant l'Agent Datadog. Mettez à jour la section `containerDefinitions` en ajoutant votre [clé d'API Datadog][11], vos tags et toutes les définitions de conteneurs supplémentaires. Si besoin, ce fichier peut être compressé avec du contenu supplémentaire, comme décrit ci-dessus. Pour obtenir plus d'informations sur la syntaxe de ce fichier, consultez la [documentation Beanstalk][4].
+L'exemple de code suivant présente un `Dockerrun.aws.json` déclarant l'Agent Datadog. Mettez à jour la section `containerDefinitions` en ajoutant votre [clé d'API Datadog][4], vos tags et toutes les définitions de conteneurs supplémentaires. Si besoin, ce fichier peut être compressé avec du contenu supplémentaire, comme décrit ci-dessus. Pour obtenir plus d'informations sur la syntaxe de ce fichier, consultez la [documentation Beanstalk][5].
 
 ```json
 {
@@ -111,18 +111,18 @@ L'exemple de code suivant présente un `Dockerrun.aws.json` déclarant l'Agent D
 
 #### Création de l'environnement
 
-Une fois la définition du conteneur prête, envoyez-la à Elastic Beanstalk. Pour obtenir des instructions spécifiques, consultez les [environnements Docker multiconteneurs][5] dans la documentation AWS Elastic Beanstalk.
+Une fois la définition du conteneur prête, envoyez-la à Elastic Beanstalk. Pour obtenir des instructions spécifiques, consultez les [environnements Docker multiconteneurs][6] dans la documentation AWS Elastic Beanstalk.
 
 ### Configuration alternative de l'Agent Datadog
-Suivez ces étapes pour installer l'Agent Datadog dans Elastic Beanstalk à l'aide de [la personnalisation d'environnement avancée avec fichiers de configuration (.ebextensions)][8].
+Suivez ces étapes pour installer l'Agent Datadog dans Elastic Beanstalk à l'aide de [la personnalisation d'environnement avancée avec fichiers de configuration (.ebextensions)][7].
 
-1. Créez un dossier intitulé `.ebextensions` dans la racine de votre [groupe source d'application][12].
-2. Téléchargez [99datadog.config][10] et placez-le dans `.ebextensions`.
-3. Dans `option_settings`, mettez à jour la configuration avec votre [clé d'API Datadog][11].
-4. Déployez votre application avec la [console Elastic Beanstalk][13], [l'interface de ligne de commande EB][14] ou [l'interface de ligne de commande AWS][15].
+1. Créez un dossier intitulé `.ebextensions` dans la racine de votre [groupe source d'application][8].
+2. Téléchargez [99datadog.config][9] et placez-le dans `.ebextensions`.
+3. Dans `option_settings`, mettez à jour la configuration avec votre [clé d'API Datadog][4].
+4. Déployez votre application avec la [console Elastic Beanstalk][10], [l'interface de ligne de commande EB][11] ou [l'interface de ligne de commande AWS][12].
 
 #### Paramètres supplémentaires
-Ajoutez des paramètres supplémentaires à `datadog.yaml` en mettant à jour la section `"/configure_datadog_yaml.sh"` de [99datadog.config][10]. La ligne ci-dessous active l'Agent de processus Datadog.
+Ajoutez des paramètres supplémentaires à `datadog.yaml` en mettant à jour la section `"/configure_datadog_yaml.sh"` de [99datadog.config][9]. La ligne ci-dessous active l'Agent de processus Datadog.
 
 ```
 echo -e "process_config:\n  enabled: \"true\"\n" >> /etc/datadog-agent/datadog.yaml
@@ -142,26 +142,25 @@ L'intégration AWS Elastic Beanstalk n'inclut aucun événement.
 L'intégration AWS Elastic Beanstalk n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][13].
 
 ## Pour aller plus loin
-- Article de blog : [Déployer Datadog sur AWS Elastic Beanstalk][9] (en anglais)
+- Article de blog : [Déployer Datadog sur AWS Elastic Beanstalk][14] (en anglais)
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
-[2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html
-[3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-cloudwatch.html#health-enhanced-cloudwatch-console
-[4]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_v2config.html
-[5]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_ecstutorial.html
-[6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_elasticbeanstalk/amazon_elasticbeanstalk_metadata.csv
-[7]: https://docs.datadoghq.com/fr/help/
-[8]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/ebextensions.html
-[9]: https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk/
-[10]: https://docs.datadoghq.com/fr/config/99datadog.config
-[11]: https://app.datadoghq.com/account/settings#api
-[12]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html
-[13]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-console-ebextensions
-[14]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli-ebextensions
-[15]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli-ebextensions
 
 
 {{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
+[2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html
+[3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-cloudwatch.html#health-enhanced-cloudwatch-console
+[4]: https://app.datadoghq.com/account/settings#api
+[5]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_v2config.html
+[6]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_ecstutorial.html
+[7]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/ebextensions.html
+[8]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html
+[9]: https://docs.datadoghq.com/fr/config/99datadog.config
+[10]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-console-ebextensions
+[11]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli-ebextensions
+[12]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli-ebextensions
+[13]: https://docs.datadoghq.com/fr/help
+[14]: https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk

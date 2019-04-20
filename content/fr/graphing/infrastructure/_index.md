@@ -65,7 +65,7 @@ résultat correspondant est sélectionné.
 Si le nom n'est manifestement pas unique (p. ex. `localhost.localdomain`),
 la règle actuelle échoue et la règle suivante est appliquée.
 
-**Remarque** : si une instance EC2 est un host ECS, Datadog utilise `instance-id` comme hostname, [même si le hostname du DNS n'est pas défini sur EC2 par défaut][2]. Si vous ne souhaitez pas utiliser l'`instance-id`, définissez le hostname dans le fichier de configuration de l'Agent.
+**Remarque** : si une instance EC2 est un host ECS, Datadog utilise `instance-id` comme hostname, [même si le hostname du DNS n'est pas défini sur EC2 par défaut][1]. Si vous ne souhaitez pas utiliser l'`instance-id`, définissez le hostname dans le fichier de configuration de l'Agent.
 
 <div class="alert alert-warning">
 Les hostnames doivent être uniques au sein d'un même compte Datadog.<br> 
@@ -99,11 +99,11 @@ Pour y parvenir, il vous suffit par exemple d'utiliser le script suivant, qui ti
 
 Ce script exporte tous les agents en cours d'exécution et leurs numéros de version dans un document distinct. Vous pouvez également modifier le script afin de saisir le numéro de version de votre choix pour filtrer les Agents en cours d'exécution à partir de ce numéro. Vous pouvez également convertir les résultats JSON en un fichier CSV distinct afin de pouvoir vous y référer.
 
-Une fois que vous avez déterminé les hosts que vous souhaitez mettre à jour, vous pouvez installer manuellement l'Agent à partir de la [page d'installation][3], ou utiliser une des intégrations d'automatisation Datadog comme [Chef][4], [Puppet][5] ou [Ansible][6].
+Une fois que vous avez déterminé les hosts que vous souhaitez mettre à jour, vous pouvez installer manuellement l'Agent à partir de la [page d'installation][2], ou utiliser une des intégrations d'automatisation Datadog comme [Chef][3], [Puppet][4] ou [Ansible][5].
 
 ### Liste des instances ec2 sans datadog-agent installé
 
-La liste des hosts et toutes leurs informations sur la page [Infrastructure List][7] de Datadog sont disponibles via le permalien « API JSON » en bas de la page.
+La liste des hosts et toutes leurs informations sur la page [Infrastructure List][6] de Datadog sont disponibles via le permalien « API JSON » en bas de la page.
 
 Vous pouvez programmer l'accès aux informations de host et obtenir les informations dont vous avez besoin. Par exemple, ce script python affiche la liste des hosts :
 
@@ -112,17 +112,16 @@ Vous pouvez programmer l'accès aux informations de host et obtenir les informat
 
 {{< img src="graphing/infrastructure/index/ec2_instances_without_dd_agent.png" alt="instances_ec2_sans_agent_dd" responsive="true" style="width:90%;">}}
 
-[Consultez le script pour afficher la liste des hosts][8].
+[Consultez le script pour afficher la liste des hosts][7].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent/guide/agent-commands/#agent-status-and-information
-[2]: https://github.com/DataDog/dd-agent/blob/5.14.1/utils/hostname.py#L104
-[3]: https://app.datadoghq.com/account/settings#agent
-[4]: /fr/integrations/chef
-[5]: /fr/integrations/puppet
-[6]: /fr/integrations/ansible
-[7]: https://app.datadoghq.com/infrastructure
-[8]: https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38
+[1]: https://github.com/DataDog/dd-agent/blob/5.14.1/utils/hostname.py#L104
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: /fr/integrations/chef
+[4]: /fr/integrations/puppet
+[5]: /fr/integrations/ansible
+[6]: https://app.datadoghq.com/infrastructure
+[7]: https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38

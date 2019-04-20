@@ -45,7 +45,7 @@ Pour recueillir des logs à partir d'Event Hubs, suivez cette méthode globale�
 * Configurez la fonction Datadog/Azure qui transmet les logs depuis votre Event Hub vers Datadog.
 * Envoyez vos logs Event Hubs au Event Hub que vous venez de créer.
 
-Pour obtenir des instructions détaillées, consultez la principale [section relative aux logs Azure][4].
+Pour obtenir des instructions détaillées, consultez la principale [section relative aux logs Azure][2].
 
 ## Données collectées
 ### Métriques
@@ -61,10 +61,9 @@ L'intégration Azure Event Hubs n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
-[1]: https://docs.datadoghq.com/fr/integrations/azure/
-[2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_event_hub/azure_event_hub_metadata.csv
-[3]: https://docs.datadoghq.com/fr/help/
-[4]: https://docs.datadoghq.com/fr/integrations/azure/#log-collection
 
 
 {{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/integrations/azure
+[2]: https://docs.datadoghq.com/fr/integrations/azure/#log-collection
+[3]: https://docs.datadoghq.com/fr/help

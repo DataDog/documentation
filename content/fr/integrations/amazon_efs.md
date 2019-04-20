@@ -59,15 +59,14 @@ L'intégration AWS Elastic File System n'inclut aucun événement.
 L'intégration AWS Elastic File System n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+
+
+{{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticfilesystem.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_efs
-[6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_efs/amazon_efs_metadata.csv
-[7]: https://docs.datadoghq.com/fr/help/
-
-
-{{< get-dependencies >}}
+[6]: https://docs.datadoghq.com/fr/help

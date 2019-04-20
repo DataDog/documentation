@@ -35,12 +35,12 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `API Gateway` est cochée dans la section concernant la collecte des métriques.
 
-2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][8] afin de récupérer les tags personnalisés appliqués aux étapes API Gateway :
+2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][3] afin de récupérer les tags personnalisés appliqués aux étapes API Gateway :
 
     * `apigateway:GET`
     * `tag:GetResources`
 
-3. Configurez l'[intégration Datadog/AWS API Gateway][3].
+3. Configurez l'[intégration Datadog/AWS API Gateway][4].
 
 ### Collecte de logs
 
@@ -71,13 +71,13 @@ Pour activer la journalisation API Gateway :
 
 #### Envoyer des logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][4].
+1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][5].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur dans la console AWS sur le groupe de logs Cloudwatch qui contient vos logs API Gateway :
 {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="groupes de logs cloudwatch" responsive="true" popup="true" style="width:70%;">}}
    Sélectionnez le groupe de logs CloudWatch correspondant, ajoutez un nom de filtre (vous pouvez toutefois laisser le filtre vide) et ajoutez le déclencheur :
 {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="Déclencheur cloudwatch" responsive="true" popup="true" style="width:70%;">}}
 
-Accédez ensuite à la [section Log de Datadog][5] pour commencer à explorer vos logs !
+Accédez ensuite à la [section Log de Datadog][6] pour commencer à explorer vos logs !
 
 ## Données collectées
 ### Métriques
@@ -95,14 +95,13 @@ L'intégration AWS API Gateway n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon_api_gateway
-[4]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
-[5]: https://app.datadoghq.com/logs
-[6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_api_gateway/amazon_api_gateway_metadata.csv
-[7]: https://docs.datadoghq.com/fr/help/
-[8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 
 
 {{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
+[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
+[4]: https://app.datadoghq.com/account/settings#integrations/amazon_api_gateway
+[5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
+[6]: https://app.datadoghq.com/logs
+[7]: https://docs.datadoghq.com/fr/help

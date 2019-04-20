@@ -52,21 +52,21 @@ Commencez par activer la journalisation sur votre cluster Redshift pour recueill
 
 #### Envoyer des logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog](/integrations/amazon_web_services/#creer-une-nouvelle-fonction-lambda).
+1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][8].
 2. Une fois la fonction Lambda installée, vous pouvez recueillir vos logs Redshift de deux façons :
 
-    * Solution automatique : nous gérons les logs Redshift si vous nous accordez les autorisations nécessaires. [Consultez le principal service Web d'Amazon pour configurer la collecte de logs automatique][8].
+    * Solution automatique : nous gérons les logs Redshift si vous nous accordez les autorisations nécessaires. [Consultez le principal service Web d'Amazon pour configurer la collecte de logs automatique][9].
     * Solution manuelle : ajoutez manuellement un déclencheur sur le compartiment s3 qui contient vos logs Redshift dans la console AWS.
 
 #### Étapes de l'installation manuelle
 
-1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog](/integrations/amazon_web_services/#creer-une-nouvelle-fonction-lambda).
+1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][8].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 contenant vos logs Redshift dans la console AWS. Dans votre Lambda, cliquez sur S3 dans la liste des déclencheurs :
 {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" responsive="true" popup="true" style="width:70%;">}}
     Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs Redshift et remplacez le type d'événement par `Object Created (All)`. Cliquez ensuite sur le bouton Add.
 {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3" responsive="true" popup="true" style="width:70%;">}}
 
-Accédez ensuite à la [section Log de Datadog][9] pour commencer à explorer vos logs !
+Accédez ensuite à la [section Log de Datadog][10] pour commencer à explorer vos logs !
 
 ## Données collectées
 ### Métriques
@@ -85,17 +85,17 @@ L'intégration AWS Redshift n'inclut aucun check de service.
 Besoin d'aide ? Contactez [l'assistance Datadog][11].
 
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+
+
+{{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_redshift.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_redshift
 [6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
 [7]: https://docs.aws.amazon.com/redshift/latest/mgmt/db-auditing-console.html
-[8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#collecting-logs-from-s3
-[9]: https://app.datadoghq.com/logs
-[10]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_redshift/amazon_redshift_metadata.csv
-[11]: https://docs.datadoghq.com/fr/help/
-
-
-{{< get-dependencies >}}
+[8]: /integrations/amazon_web_services/#creer-une-nouvelle-fonction-lambda
+[9]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#collecting-logs-from-s3
+[10]: https://app.datadoghq.com/logs
+[11]: https://docs.datadoghq.com/fr/help

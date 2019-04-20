@@ -99,15 +99,14 @@ L'intégration AWS SNS n'inclut aucun check de service.
 Nous ne prenons actuellement pas en charge les notifications SNS depuis Datadog vers les rubriques dans GovCloud ou Chine.
 
 ### Autres problèmes
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+
+
+{{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_sns.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_sns
-[6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_sns/amazon_sns_metadata.csv
-[7]: https://docs.datadoghq.com/fr/help/
-
-
-{{< get-dependencies >}}
+[6]: https://docs.datadoghq.com/fr/help

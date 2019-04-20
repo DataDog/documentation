@@ -74,19 +74,18 @@ Le check CoreDNS n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 ## Développement
 
 Consultez la [documentation sur les outils de développement][2]
 pour découvrir comment tester et développer des intégrations reposant sur l'Agent.
 
+
+
+{{< get-dependencies >}}
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/fr/developers
 [3]: https://github.com/DataDog/integrations-core/blob/master/coredns/datadog_checks/coredns/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[5]: https://github.com/DataDog/integrations-core/blob/master/coredns/metadata.csv
-[6]: http://docs.datadoghq.com/help
-
-
-{{< get-dependencies >}}
+[5]: http://docs.datadoghq.com/help

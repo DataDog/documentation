@@ -69,8 +69,8 @@ L'intégration Bugsnag n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
-[1]: https://bugsnag.com/
-[2]: https://docs.datadoghq.com/fr/help/
 
 
 {{< get-dependencies >}}
+[1]: https://bugsnag.com
+[2]: https://docs.datadoghq.com/fr/help

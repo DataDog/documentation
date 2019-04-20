@@ -43,20 +43,19 @@ L'intégration Machine Virtuelle Azure n'inclut aucun événement.
 L'intégration Machine Virtuelle Azure n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
+Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
 ## Pour aller plus loin
 
-* [Comment surveiller des machines virtuelles Microsoft Azure][4]  
-* [Comment recueillir des métriques Azure][5]  
-* [Surveiller des machines virtuelles Azure avec Datadog][6]  
+* [Comment surveiller des machines virtuelles Microsoft Azure][3]  
+* [Comment recueillir des métriques Azure][4]  
+* [Surveiller des machines virtuelles Azure avec Datadog][5]  
 
-[1]: https://docs.datadoghq.com/fr/integrations/azure/
-[2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_vm/azure_vm_metadata.csv
-[3]: https://docs.datadoghq.com/fr/help/
-[4]: https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms/
-[5]: https://www.datadoghq.com/blog/how-to-collect-azure-metrics/
-[6]: https://www.datadoghq.com/blog/monitor-azure-vms-using-datadog/
 
 
 {{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/integrations/azure
+[2]: https://docs.datadoghq.com/fr/help
+[3]: https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms
+[4]: https://www.datadoghq.com/blog/how-to-collect-azure-metrics
+[5]: https://www.datadoghq.com/blog/monitor-azure-vms-using-datadog

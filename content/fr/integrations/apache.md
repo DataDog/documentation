@@ -123,32 +123,30 @@ Renvoie CRITICAL si l'Agent n'est pas capable de se connecter à l'URL `apache_s
 
 ## Dépannage
 
-* [Problèmes liés à l'intégration Apache][9]
-* [Problèmes liés au certificat SSL Apache][10]
+* [Problèmes liés à l'intégration Apache][7]
+* [Problèmes liés au certificat SSL Apache][8]
 
 ## Pour aller plus loin
 Documentation, liens et articles supplémentaires utiles :
 
-* [Déployer et configurer Datadog avec CloudFormation][11]
-* [Surveiller les performances du serveur Web Apache][12]
-* [Comment recueillir des métriques de performance Apache][13]
-* [Comment surveiller un serveur Web Apache avec Datadog][14]
+* [Déployer et configurer Datadog avec CloudFormation][9]
+* [Surveiller les performances du serveur Web Apache][10]
+* [Comment recueillir des métriques de performance Apache][11]
+* [Comment surveiller un serveur Web Apache avec Datadog][12]
 
 
+
+
+{{< get-dependencies >}}
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/apache/images/apache_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/fr/agent/faq/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
 [6]: https://docs.datadoghq.com/fr/logs
-[7]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/apache/metadata.csv
-[9]: https://docs.datadoghq.com/fr/integrations/faq/issues-with-apache-integration
-[10]: https://docs.datadoghq.com/fr/integrations/faq/apache-ssl-certificate-issues
-[11]: https://www.datadoghq.com/blog/deploying-datadog-with-cloudformation
-[12]: https://www.datadoghq.com/blog/monitoring-apache-web-server-performance
-[13]: https://www.datadoghq.com/blog/collect-apache-performance-metrics
-[14]: https://www.datadoghq.com/blog/monitor-apache-web-server-datadog
-
-
-{{< get-dependencies >}}
+[7]: https://docs.datadoghq.com/fr/integrations/faq/issues-with-apache-integration
+[8]: https://docs.datadoghq.com/fr/integrations/faq/apache-ssl-certificate-issues
+[9]: https://www.datadoghq.com/blog/deploying-datadog-with-cloudformation
+[10]: https://www.datadoghq.com/blog/monitoring-apache-web-server-performance
+[11]: https://www.datadoghq.com/blog/collect-apache-performance-metrics
+[12]: https://www.datadoghq.com/blog/monitor-apache-web-server-datadog

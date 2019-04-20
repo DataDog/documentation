@@ -68,14 +68,13 @@ Cette intégration ne recueille aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
-[1]: https://concourse-ci.org/concepts.html
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics/
-[4]: https://concourse-ci.org/metrics.html#configuring-metrics
-[5]: https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/metadata.csv
-[6]: https://docs.datadoghq.com/fr/help/
 
 
 {{< get-dependencies >}}
+[1]: https://concourse-ci.org/concepts.html
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics
+[4]: https://concourse-ci.org/metrics.html#configuring-metrics
+[5]: https://docs.datadoghq.com/fr/help

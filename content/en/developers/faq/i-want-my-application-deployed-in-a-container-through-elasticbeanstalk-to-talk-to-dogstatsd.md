@@ -17,5 +17,5 @@ Datadog suggests the following workaround:
 If you choose to follow this workaround, putting `dd-agent` inside a container is not necessary. Put it on the Docker host by following the [instructions in this Datadog blog post][3].
 
 [1]: /developers/dogstatsd
-[2]: http://blog.michaelhamrah.com/2014/06/accessing-the-docker-host-server-within-a-container/
-[3]: https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk/
+[2]: http://blog.michaelhamrah.com/2014/06/accessing-the-docker-host-server-within-a-container
+[3]: https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk

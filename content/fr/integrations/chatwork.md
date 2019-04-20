@@ -43,7 +43,7 @@ Intégrez ChatWork à Datadog pour :
 7. Cochez la case si vous souhaitez recevoir une notification pour chaque commentaire. Le cas contraire, vous devez utiliser la syntaxe @chatwork-noms_conversation.
 {{< img src="integrations/chatwork/chatwork_tile.png" alt="Titre Chatwork" responsive="true" popup="true">}}
 
-8. [Enregistrez votre configuration.](https://app.datadoghq.com/account/settings#integrations/chatwork)
+8. [Enregistrez votre configuration.][4]
 
 ## Données collectées
 ### Métriques
@@ -58,12 +58,13 @@ L'intégration Chatwork n'inclut aucun événement.
 L'intégration Chatwork n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][4].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
-[1]: https://www.chatwork.com/login.php?redirect=apply_beta&package=chatwork&subpackage=api&args=
-[2]: http://developer.chatwork.com/ja/authenticate.html
-[3]: https://app.datadoghq.com/account/settings#integrations/chatwork
-[4]: https://docs.datadoghq.com/fr/help/
 
 
 {{< get-dependencies >}}
+[1]: https://www.chatwork.com/login.php?redirect=apply_beta&package=chatwork&subpackage=api&args=
+[2]: http://developer.chatwork.com/ja/authenticate.html
+[3]: https://app.datadoghq.com/account/settings#integrations/chatwork
+[4]: https://app.datadoghq.com/account/settings#integrations/chatwork
+[5]: https://docs.datadoghq.com/fr/help

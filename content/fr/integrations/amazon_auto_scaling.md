@@ -37,7 +37,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `AutoScaling` est cochée dans la section concernant la collecte des métriques.
 
-2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][3] afin de recueillir des métriques Amazon Auto Scaling. Pour en savoir plus sur les stratégies Auto Scaling, [consultez la documentation du site Web d'AWS][9].
+2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][3] afin de recueillir des métriques Amazon Auto Scaling. Pour en savoir plus sur les stratégies Auto Scaling, [consultez la documentation du site Web d'AWS][4].
 
     | Autorisation AWS                          | Description                                                                                                                                                                                                                                             |
     |-----------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -66,15 +66,14 @@ L'intégration AWS Auto-Scaling comprend des événements pour lancer et fermer
 L'intégration AWS Auto Scaling n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_application-autoscaling.html
-[5]: https://app.datadoghq.com/account/settings#integrations/amazon_auto_scaling
-[6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_auto_scaling/amazon_auto_scaling_metadata.csv
-[7]: https://docs.datadoghq.com/fr/help/
 
 
 {{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
+[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
+[4]: https://aws.amazon.com/autoscaling
+[5]: https://app.datadoghq.com/account/settings#integrations/amazon_auto_scaling
+[6]: https://docs.datadoghq.com/fr/help

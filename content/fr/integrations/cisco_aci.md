@@ -82,15 +82,14 @@ Le check Cisco ACI envoie les défaillances de locataire sous la forme d'évén
 Renvoie CRITICAL si l'Agent n'est pas capable de se connecter à l'API Cisco ACI pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
+
+
+{{< get-dependencies >}}
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/cisco_aci/datadog_checks/cisco_aci/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/cisco_aci/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}
+[6]: https://docs.datadoghq.com/fr/help

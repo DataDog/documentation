@@ -5,5 +5,5 @@ kind: faq
 
 See the [blog post written by the Loggly team][1].
 
-[1]: https://www.loggly.com/blog/how-to-monitor-logs-with-loggly-live-tail-and-datadog/
 
+[1]: https://www.loggly.com/blog/how-to-monitor-logs-with-loggly-live-tail-and-datadog

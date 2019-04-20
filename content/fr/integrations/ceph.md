@@ -120,21 +120,20 @@ Outre ce check de service, le check Ceph recueille également une liste configur
 * `ceph.request_stuck` : renvoie `OK` si les requêtes possèdent un délai normal de traitement, renvoie `WARNING` si la gravité est `HEALTH_WARN` ou renvoie `CRITICAL` pour les autres cas.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 ## Pour aller plus loin
 
-* [Surveillance de Ceph : des statuts de nœud aux performances dans l'ensemble du cluster][8] (en anglais)
+* [Surveillance de Ceph : des statuts de nœud aux performances dans l'ensemble du cluster][7] (en anglais)
 
 
+
+
+{{< get-dependencies >}}
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/ceph/images/ceph_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/ceph/datadog_checks/ceph/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/ceph/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help
-[8]: https://www.datadoghq.com/blog/monitor-ceph-datadog
-
-
-{{< get-dependencies >}}
+[6]: https://docs.datadoghq.com/fr/help
+[7]: https://www.datadoghq.com/blog/monitor-ceph-datadog

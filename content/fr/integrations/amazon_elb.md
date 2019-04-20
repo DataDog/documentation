@@ -63,7 +63,7 @@ Choisissez un intervalle de 5 minutes et saisissez vos compartiments S3 :
 
 #### Envoyer des logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog](/integrations/amazon_web_services/#creer-une-nouvelle-fonction-lambda).
+1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][8].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 contenant vos logs ELB dans la console AWS. Dans votre Lambda, cliquez sur S3 dans la liste des déclencheurs :
    {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" responsive="true" popup="true" style="width:70%;">}}
    Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs ELB et remplacez le type d'événement par `Object Created (All)`. Cliquez ensuite sur le bouton Add.
@@ -95,17 +95,17 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 Pour savoir comment surveiller les métriques de performance ELB, consultez [notre série d'articles à ce sujet][11]. Vous y trouverez des informations supplémentaires sur les principales métriques de performance, ainsi que des conseils pour les recueillir, et découvrirez comment utiliser Datadog afin de surveiller ELB.
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+
+
+{{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticloadbalancing.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_elb
 [6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
 [7]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html
-[8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#collecting-logs-from-s3
+[8]: /integrations/amazon_web_services/#creer-une-nouvelle-fonction-lambda
 [9]: https://app.datadoghq.com/logs
-[10]: https://docs.datadoghq.com/fr/help/
-[11]: https://www.datadoghq.com/blog/top-elb-health-and-performance-metrics/
-
-
-{{< get-dependencies >}}
+[10]: https://docs.datadoghq.com/fr/help
+[11]: https://www.datadoghq.com/blog/top-elb-health-and-performance-metrics

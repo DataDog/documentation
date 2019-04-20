@@ -52,22 +52,21 @@ L'intégration AWS EBS n'inclut aucun événement.
 L'intégration AWS EBS n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 ## Pour aller plus loin
 
-* [Métriques clés pour la surveillance d'Amazon EBS][6]
-* [Collecte des métriques d'Amazon EBS][7]
-* [Surveillance des volumes d'Amazon EBS avec Datadog][8]
+* [Métriques clés pour la surveillance d'Amazon EBS][5]
+* [Collecte des métriques d'Amazon EBS][6]
+* [Surveillance des volumes d'Amazon EBS avec Datadog][7]
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon_ebs
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ebs/amazon_ebs_metadata.csv
-[5]: https://docs.datadoghq.com/fr/help/
-[6]: https://www.datadoghq.com/blog/amazon-ebs-monitoring/
-[7]: https://www.datadoghq.com/blog/collecting-amazon-ebs-metrics/
-[8]: https://www.datadoghq.com/blog/monitoring-amazon-ebs-volumes-with-datadog/
 
 
 {{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
+[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[3]: https://app.datadoghq.com/account/settings#integrations/amazon_ebs
+[4]: https://docs.datadoghq.com/fr/help
+[5]: https://www.datadoghq.com/blog/amazon-ebs-monitoring
+[6]: https://www.datadoghq.com/blog/collecting-amazon-ebs-metrics
+[7]: https://www.datadoghq.com/blog/monitoring-amazon-ebs-volumes-with-datadog

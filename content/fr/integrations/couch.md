@@ -115,22 +115,21 @@ Le check CouchDB n'inclut aucun événement.
 `couchdb.can_connect` : renvoie `Critical` si l'Agent n'est pas capable de se connecter à CouchDB pour recueillir des métriques.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
 ## Pour aller plus loin
 
-* [Surveiller les performances de CouchDB avec Datadog][9]
+* [Surveiller les performances de CouchDB avec Datadog][8]
 
 
+
+
+{{< get-dependencies >}}
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/couch/images/couchdb_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/couch/datadog_checks/couch/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/couch/metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
-[9]: https://www.datadoghq.com/blog/monitoring-couchdb-with-datadog
-
-
-{{< get-dependencies >}}
+[7]: https://docs.datadoghq.com/fr/help
+[8]: https://www.datadoghq.com/blog/monitoring-couchdb-with-datadog

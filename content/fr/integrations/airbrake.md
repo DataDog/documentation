@@ -50,8 +50,8 @@ Lorsqu'une nouvelle erreur se produit, elle apparaît dans votre [flux d'événe
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
-[1]: https://docs.datadoghq.com/fr/graphing/event_stream/
-[2]: https://docs.datadoghq.com/fr/help/
 
 
 {{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/graphing/event_stream
+[2]: https://docs.datadoghq.com/fr/help

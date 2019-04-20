@@ -59,15 +59,14 @@ L'intégration AWS SES n'inclut aucun événement.
 L'intégration AWS SES n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+
+
+{{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ses.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_ses
-[6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ses/amazon_ses_metadata.csv
-[7]: https://docs.datadoghq.com/fr/help/
-
-
-{{< get-dependencies >}}
+[6]: https://docs.datadoghq.com/fr/help

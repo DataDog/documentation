@@ -66,9 +66,9 @@ L'intégration Capistrano n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
-[1]: http://capistranorb.com
-[2]: https://app.datadoghq.com/event/stream
-[3]: https://docs.datadoghq.com/fr/help/
 
 
 {{< get-dependencies >}}
+[1]: http://capistranorb.com
+[2]: https://app.datadoghq.com/event/stream
+[3]: https://docs.datadoghq.com/fr/help

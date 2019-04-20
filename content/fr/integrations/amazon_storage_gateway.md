@@ -52,13 +52,12 @@ L'intégration AWS Storage Gateway n'inclut aucun événement.
 L'intégration AWS Storage Gateway n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon_storage_gateway
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_storage_gateway/amazon_storage_gateway_metadata.csv
-[5]: https://docs.datadoghq.com/fr/help/
 
 
 {{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
+[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[3]: https://app.datadoghq.com/account/settings#integrations/amazon_storage_gateway
+[4]: https://docs.datadoghq.com/fr/help

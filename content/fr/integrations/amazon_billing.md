@@ -46,7 +46,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 4. Installez l'[intégration Datadog/AWS Billing][6].
 
-5. [Créez un budget AWS][8] afin de commencer à recevoir vos [métriques](#metriques) AWS Budgets.
+5. [Créez un budget AWS][7] afin de commencer à recevoir vos [métriques](#metriques) AWS Budgets.
 
 **Les métriques AWS Budgets ne peuvent être recueillies qu'à partir du compte principal AWS.**
 
@@ -74,17 +74,16 @@ Vérifiez les éléments ci-dessous pour tenter de résoudre votre problème d'i
 
 ### `aws.billing.actual_spend`, `aws.billing.forecasted_spend` et `aws.billing.budget_limit` n'apparaissent pas sur Datadog
 
-[Créez des budgets AWS][8] afin d'afficher ces métriques sur votre application Datadog. 
+[Créez des budgets AWS][7] afin d'afficher ces métriques sur votre application Datadog. 
 Sachez que les métriques AWS Billing sont recueillies toutes les 4 ou 8 heures par Datadog.
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+
+
+{{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_budgets.html
 [5]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html#turning_on_billing_metrics
 [6]: https://app.datadoghq.com/account/settings#integrations/amazon_billing
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_billing/amazon_billing_metadata.csv
-[8]: https://console.aws.amazon.com/billing/home?#/createbudget
-
-
-{{< get-dependencies >}}
+[7]: https://console.aws.amazon.com/billing/home?#/createbudget

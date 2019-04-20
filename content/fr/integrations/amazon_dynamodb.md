@@ -80,19 +80,18 @@ L'intégration AWS DynamoDB n'inclut aucun événement.
 L'intégration AWS DynamoDB n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][11].
+Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
-[1]: https://www.datadoghq.com/blog/top-dynamodb-performance-metrics/
-[2]: https://medium.com/
-[3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+
+
+{{< get-dependencies >}}
+[1]: https://www.datadoghq.com/blog/top-dynamodb-performance-metrics
+[2]: https://medium.com
+[3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [4]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_dynamodb.html
 [7]: https://app.datadoghq.com/account/settings#integrations/amazon_dynamodb
 [8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
 [9]: https://app.datadoghq.com/logs
-[10]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_dynamodb/amazon_dynamodb_metadata.csv
-[11]: https://docs.datadoghq.com/fr/help/
-
-
-{{< get-dependencies >}}
+[10]: https://docs.datadoghq.com/fr/help

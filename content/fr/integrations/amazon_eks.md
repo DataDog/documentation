@@ -65,6 +65,9 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 * [Surveiller Amazon EKS avec Datadog][10]
 
 
+
+
+{{< get-dependencies >}}
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/amazon_eks/images/amazon_eks_dashboard.png
 [2]: https://docs.datadoghq.com/fr/integrations/kubernetes
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
@@ -75,6 +78,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 [8]: https://docs.datadoghq.com/fr/logs/log_collection/docker/#option-2-container-installation
 [9]: https://docs.datadoghq.com/fr/help
 [10]: https://www.datadoghq.com/blog/announcing-eks
-
-
-{{< get-dependencies >}}

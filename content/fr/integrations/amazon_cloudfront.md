@@ -73,16 +73,15 @@ L'intégration AWS CloudFront n'inclut aucun événement.
 L'intégration AWS CloudFront n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
+
+
+{{< get-dependencies >}}
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon_cloudfront
 [4]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket
 [5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
 [6]: https://app.datadoghq.com/logs
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_cloudfront/amazon_cloudfront_metadata.csv
-[8]: https://docs.datadoghq.com/fr/help/
-
-
-{{< get-dependencies >}}
+[7]: https://docs.datadoghq.com/fr/help
