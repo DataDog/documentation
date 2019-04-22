@@ -23,7 +23,7 @@ The service map widget does not respond to time scoping and always shows service
 
 ### Configuration
 
-1. Select an [environment][1], primary tag (or `*` if it is set up for your account), and a [service][2].
+1. Select an [environment][1], primary tag (or `*` if enabled for your account), and a [service][2].
 2. Enter a title for your graph.
 
 ### Results
