@@ -87,7 +87,7 @@ Runtime metrics can be viewed in correlation with your Ruby services. See the [S
 
 
 [1]: https://rubygems.org/gems/dogstatsd-ruby
-[2]: developers/dogstatsd/#setup
+[2]: /developers/dogstatsd/#setup
 [3]: https://app.datadoghq.com/apm/service
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -206,4 +206,4 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 [1]: developers/dogstatsd/#setup
 [2]: /agent/docker/#dogstatsd-custom-metrics
 [3]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
-[4]: /integrations/amazon_ecs/create-an-ecs-task
+[4]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
