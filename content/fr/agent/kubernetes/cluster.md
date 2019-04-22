@@ -261,7 +261,7 @@ Pour activer le serveur de métriques custom :
 2. Configurez la `<CLÉ_APP_DD>` ainsi que la `<CLÉ_API_DD>` dans le déploiement de l'Agent de cluster Datadog.
 3. Créez un [service exposant le port 443][7] et [enregistrez-le en tant qu'APIService des métriques externes][8].
 
-Consultez [le guide sur les serveurs de métriques custom[1] (en anglais) pour configurer le serveur de métriques custom et obtenir plus de renseignements sur son fonctionnement.
+Consultez [le guide sur les serveurs de métriques custom][1] (en anglais) pour configurer le serveur de métriques custom et obtenir plus de renseignements sur son fonctionnement.
 
 **Remarque** : un [Autoscaler de pods horizontaux][9] est requis pour acheminer des valeurs via le processus de métriques externes.
 
