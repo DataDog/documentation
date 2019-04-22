@@ -6,7 +6,7 @@ aliases:
 ---
 
 <div class="alert alert-danger">
-This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api/?lang=python#dashboards"> new Dashboard endpoint</a> instead. 
+This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api/?lang=python#dashboards"> new Dashboard endpoint</a> instead.
 </div>
 
 The Timeboard endpoint allows you to programmatically create, update delete and query Timeboards. [Find more about Timeboard][1].
@@ -19,29 +19,29 @@ The Timeboard endpoint allows you to programmatically create, update delete and 
 
 ### Arguments
 
-* **`title`** [*required*]:  
+* **`title`** [*required*]:
     The name of the dashboard.
-* **`description`** [*required*]:  
+* **`description`** [*required*]:
     A description of the dashboard's content.
-* **`graphs`** [*optional*, *default*=**None**]:  
+* **`graphs`** [*optional*, *default*=**None**]:
     A list of graph definitions. Graph definitions follow this form:
-    * **`title`** [*required*]:  
+    * **`title`** [*required*]:
         The name of the graph.
-    * **`definition`** [*optional*, *default*=**None**]:  
-        * `events` [*optional*, *default*=**None**]:  
+    * **`definition`** [*optional*, *default*=**None**]:
+        * `events` [*optional*, *default*=**None**]:
           The query for event overlay.
-        * `requests` [*optional*, *default*=**None**]:  
+        * `requests` [*optional*, *default*=**None**]:
           The metric query, line type, style, conditional formats, and aggregator.
-        * `viz` [*optional*, *default*=**timeseries**]:  
+        * `viz` [*optional*, *default*=**timeseries**]:
           The type of visualization.
 
-* **`template_variables`** [*optional*, *default*=**None**]:  
+* **`template_variables`** [*optional*, *default*=**None**]:
     A list of template variables for using Dashboard templating. Template variable definitions follow this form:
-    * **`name`** [*required*]:  
+    * **`name`** [*required*]:
         The name of the variable.
-    * **`prefix`** [*optional*, *default*=**None**]:  
+    * **`prefix`** [*optional*, *default*=**None**]:
         The tag prefix associated with the variable. Only tags with this prefix appear in the variable dropdown.
-    * **`default`** [*optional*, *default*=**None**]:  
+    * **`default`** [*optional*, *default*=**None**]:
         The default value for the template variable on dashboard load.
 
 ### Examples
@@ -161,27 +161,27 @@ curl  -X POST -H "Content-type: application/json" \
 
 ### Arguments
 
-* **`title`** [*required*]:  
+* **`title`** [*required*]:
     The name of the dashboard.
-* **`description`** [*required*]:  
+* **`description`** [*required*]:
     A description of the dashboard's contents.
-* **`graphs`** [*required*]:  
+* **`graphs`** [*required*]:
     A list of graph definitions. Graph definitions follow this form:
-    * **`title`** [*required*]:  
+    * **`title`** [*required*]:
         The name of the graph.
-    * **`definition`** [*required*]:  
-    The graph definition. Read the [Graph Guide][1] for more on graphs. Example:  
+    * **`definition`** [*required*]:
+    The graph definition. Read the [Graph Guide][1] for more on graphs. Example:
     `{"requests": [{"q": "system.cpu.idle{*} by {host}"}`
 
-* **`template_variables`** [*optional*, *default*=**None**]:  
+* **`template_variables`** [*optional*, *default*=**None**]:
     A list of template variables for using Dashboard templating. Template variable definitions follow this form:
-    * **`name`** [*required*]:  
+    * **`name`** [*required*]:
      The name of the variable.
 
-    * **`prefix`** [*optional*, *default*=**None**]:  
+    * **`prefix`** [*optional*, *default*=**None**]:
     The tag prefix associated with the variable. Only tags with this prefix appear in the variable dropdown.
 
-    * **`default`** [*optional*, *default*=**None**]:  
+    * **`default`** [*optional*, *default*=**None**]:
     The default value for the template variable on dashboard load.
 
 
