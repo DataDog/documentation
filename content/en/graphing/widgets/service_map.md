@@ -38,7 +38,7 @@ The dedicated [widget JSON schema definition][3] for the service map widget is:
 
 ```
 {
-  "viz": "servicemap",
+  "type": "servicemap",
   "service": "metric-query",
   "filters": [
     "env:datad0g.com",
@@ -49,7 +49,7 @@ The dedicated [widget JSON schema definition][3] for the service map widget is:
 
 | Parameter | Type   | Required | Description                                                       |
 |-----------|--------|----------|-------------------------------------------------------------------|
-| viz       | string | yes      | The type of widget, for the service map widget, use `servicemap`. |
+| type      | string | yes      | The type of widget, for the service map widget, use `servicemap`. |
 | service   | string | yes      | The ID of the service you want to map.                            |
 | filters   | object | yes      | Your env and primary tag (or `*` if enabled for your account).      |
 
