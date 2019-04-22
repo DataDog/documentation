@@ -51,7 +51,7 @@ The dedicated [widget JSON schema definition][3] for the service map widget is:
 |-----------|--------|----------|-------------------------------------------------------------------|
 | viz       | string | yes      | The type of widget, for the service map widget, use `servicemap`. |
 | service   | string | yes      | The ID of the service you want to map.                            |
-| filters   | object | yes      | Your env and primary tag (or `*` if it is for your account).      |
+| filters   | object | yes      | Your env and primary tag (or `*` if enabled for your account).      |
 
 
 ## Further Reading
