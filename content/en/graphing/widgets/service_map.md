@@ -13,7 +13,7 @@ further_reading:
 
 This widget displays a map of a service to all of the services that call it, and all of the services that it calls. The node in the center of the widget represents the mapped service. Services that call the mapped service are shown to the left with arrows from the caller to the service. Services that the service calls are displayed to the right, with arrows in the direction of calls.
 
-The service map widget does not respond to time scoping and always shows services that made calls in the preceding two weeks.
+The service map widget does not respond to time scoping and always shows services that made calls in the preceding two weeks. Metrics are calculated for each services in real time for the previous hour.
 
 {{< img src="graphing/widgets/service_map/test_service_map.png" alt="service map setup" responsive="true" style="width:80%;">}}
 
@@ -23,7 +23,7 @@ The service map widget does not respond to time scoping and always shows service
 
 ### Configuration
 
-1. Choose your [environment][1] scope, primary tag (or `*`) if it is set up for your account, and [service][2] name.
+1. Choose your [environment][1] scope, [primary tag][4] (or `*`) if it is set up for your account, and [service][2] name.
 2. Enter a title for your graph.
 
 ### Results
@@ -61,3 +61,4 @@ The dedicated [widget JSON schema definition][3] for the service map widget is:
 [1]: /agent/apm/#environment
 [2]: /tracing/visualization/service
 [3]: /graphing/graphing_json/widget_json
+[4]: /tracing/advanced/setting_primary_tags_to_scope/
