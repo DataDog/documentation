@@ -66,7 +66,7 @@ Optional collection Agents are disabled by default for security or performance r
 
 #### DogStatsD (custom metrics)
 
-Send custom metrics via [the StatsD protocol][5]:
+Send custom metrics via [the statsd protocol][5]:
 
 | Env Variable                     | Description                                                                                       |
 |----------------------------------|---------------------------------------------------------------------------------------------------|

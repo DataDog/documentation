@@ -19,15 +19,15 @@ The Screenboard endpoint allows you to programmatically create, update, delete, 
 
 ### Arguments
 
-* **`board_title`** [*required*]:
-    The name of the dashboard.
-* **`description`** [*optional*, *default*=**None**]:
+* **`board_title`** [*required*]:  
+    The name of the dashboard.    
+* **`description`** [*optional*, *default*=**None**]:  
     A description of the dashboard's content.
-* **`widgets`** [*required*]:
+* **`widgets`** [*required*]:  
     A list of widget definitions. To get a widget definition, use the *JSON tab* in the widget configuration UI.
-* **`template_variables`** [*optional*, *default*=**None**]:
+* **`template_variables`** [*optional*, *default*=**None**]:  
     A list of template variables for using Dashboard templating.
-* **`read_only`** [*optional*, *default*=**False**]:
+* **`read_only`** [*optional*, *default*=**False**]:  
     The read-only status of the screenboard.
 
 ### Examples

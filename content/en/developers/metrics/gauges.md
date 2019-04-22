@@ -29,7 +29,7 @@ Gauges measure the value of a particular thing over time:
 {{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
-|dog.gauge(...)|Stored as a GAUGE type in the Datadog web application. Each value in the stored timeseries is the last gauge value submitted for that metric during the StatsD flush period.|
+|dog.gauge(...)|Stored as a GAUGE type in the Datadog web application. Each value in the stored timeseries is the last gauge value submitted for that metric during the statsd flush period.|
 {{% /table %}}
 
 #### Example

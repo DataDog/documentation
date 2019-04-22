@@ -69,7 +69,7 @@ Tags may be assigned using any (or all) of the following methods. Refer to the d
 
 | Method                        | Assign tags                                                                                  |
 |-------------------------------|----------------------------------------------------------------------------------------------|
-| [Configuration Files][4]     | Manually in your main Agent configuration files, or in your integrations configuration file. |
+| [Configuration Files][4]     | Manually in your main agent configuration files, or in your integrations configuration file. |
 | [Environment Variables][5]   | Using environment variables for the containerized Agent                                      |
 | [UI][6]                      | In your Datadog platform                                                                     |
 | [API][7]                     | Using Datadog's API                                                                          |

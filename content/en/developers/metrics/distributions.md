@@ -1,7 +1,6 @@
 ---
 title: Distributions
 kind: documentation
-beta: true
 further_reading:
 - link: "graphing/metrics/distributions"
   tag: "Documentation"

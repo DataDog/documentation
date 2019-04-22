@@ -1,7 +1,6 @@
 ---
 title: Runtime Metrics
 kind: documentation
-beta: true
 further_reading:
 - link: "tracing/advanced/connect_logs_and_traces"
   tags: "Enrich Tracing"
@@ -26,7 +25,10 @@ Enable runtime metrics collection in the tracing client to gain additional insig
 {{< tabs >}}
 {{% tab "Java" %}}
 
-JVM metrics collection can be enabled with one configuration parameter in the tracing client, either through a the System Property: `-Ddd.jmxfetch.enabled=true` or through the environment variable: `DD_JMXFETCH_ENABLED=true`.
+JVM metrics collection can be enabled with one configuration parameter in the tracing client:
+
+* System Property: `-Ddd.jmxfetch.enabled=true`
+* Environment Variable: `DD_JMXFETCH_ENABLED=true`
 
 JVM metrics can be viewed in correlation with your Java services. See the [Service page][1] in Datadog.
 
@@ -34,10 +36,16 @@ JVM metrics can be viewed in correlation with your Java services. See the [Servi
 
 **Note**: For the runtime UI, `dd-trace-java` >= [`0.24.0`][2] is supported.
 
+**Collecting JVM Metrics in Containerized Environments**
+
+By default, JVM metrics from your application are sent to the Datadog Agent over port 8125. If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][3], and that port 8125 is open on the Agent. For example: in Kubernetes, [bind the DogstatsD port to a host port][4]; in ECS, [set the appropriate flags in your task definition][5].
 
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.0
+[3]: /agent/docker/#dogstatsd-custom-metrics
+[4]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[5]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -46,7 +54,9 @@ This feature is currently in <strong>BETA</strong>.
 Reach out to <a href="/help">the Datadog support team</a> to be part of the beta.
 </div>
 
-Runtime metrics collection can be enabled with the `DD_RUNTIME_METRICS_ENABLED=true` environment parameter when running with `ddtrace-run`:
+Runtime metrics collection can be enabled with one environment parameter when running with `ddtrace-run`:
+
+* Environment Variable: `DD_RUNTIME_METRICS_ENABLED=true`
 
 Runtime metrics can be viewed in correlation with your Python services. See the [Service page][1] in Datadog.
 
@@ -62,7 +72,7 @@ This feature is currently in <strong>BETA</strong>.
 Reach out to <a href="/help">the Datadog support team</a> to be part of the beta.
 </div>
 
-Runtime metrics collection uses the [`dogstatsd-ruby`][1] gem to send metrics via DogStatsD to the Agent. To collect runtime metrics, you must add this gem to your Ruby application, and make sure that [DogStatsD is enabled for the Agent][2].
+Runtime metrics collection uses the [`dogstatsd-ruby`][1] gem to send metrics to the Statsd agent. To collect runtime metrics, you must add this gem to your Ruby application.
 
 Metrics collection is disabled by default. You can enable it by setting the `DD_RUNTIME_METRICS_ENABLED` environment variable to `true`, or by setting the following configuration in your Ruby application:
 
@@ -76,19 +86,24 @@ Datadog.configure do |c|
   # You can also set DD_RUNTIME_METRICS_ENABLED=true to configure this.
   c.runtime_metrics_enabled = true
 
-  # Optionally, you can configure the DogStatsD instance used for sending runtime metrics.
-  # DogStatsD is automatically configured with default settings if `dogstatsd-ruby` is available.
+  # Optionally, you can configure the Statsd instance used for sending runtime metrics.
+  # Statsd is automatically configured with default settings if `dogstatsd-ruby` is available.
   # You can configure with host and port of Datadog agent; defaults to 'localhost:8125'.
   c.runtime_metrics statsd: Datadog::Statsd.new
 end
 ```
 
-Runtime metrics can be viewed in correlation with your Ruby services. See the [Service page][3] in Datadog.
+Runtime metrics can be viewed in correlation with your Ruby services. See the [Service page][1] in Datadog.
+
+**Collecting Runtime Metrics in Containerized Environments**
+
+ By default, Runtime metrics from your application are sent to the Datadog Agent over port 8125. If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][2], and that port 8125 is open on the Agent. For example: in Kubernetes, [bind the DogstatsD port to a host port][3]; in ECS, [set the appropriate flags in your task definition][4].
 
 
 [1]: https://rubygems.org/gems/dogstatsd-ruby
-[2]: developers/dogstatsd/#setup
-[3]: https://app.datadoghq.com/apm/service
+[2]: https://app.datadoghq.com/apm/services
+[3]: /agent/docker/#dogstatsd-custom-metrics
+[4]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -104,12 +119,21 @@ This feature is currently in <strong>BETA</strong>.
 Reach out to <a href="/help">the Datadog support team</a> to be part of the beta.
 </div>
 
-Runtime metrics collection can be enabled with one configuration parameter in the tracing client either through the tracer option: `tracer.init({ runtimeMetrics: true })` or through the environment variable: `DD_RUNTIME_METRICS_ENABLED=true`
+Runtime metrics collection can be enabled with one configuration parameter in the tracing client:
+
+* Tracer Option: `tracer.init({ runtimeMetrics: true })`
+* Environment Variable: `DD_RUNTIME_METRICS_ENABLED=true`
 
 Runtime metrics can be viewed in correlation with your Node services. See the [Service page][1] in Datadog.
 
+**Collecting Runtime Metrics in Containerized Environments**
+
+By default, Runtime metrics from your application are sent to the Datadog Agent over port 8125. If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][2], and that port 8125 is open on the Agent. For example: in Kubernetes, [bind the DogstatsD port to a host port][3]; in ECS, [set the appropriate flags in your task definition][4].
 
 [1]: https://app.datadoghq.com/apm/services
+[2]: /agent/docker/#dogstatsd-custom-metrics
+[3]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[4]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -126,10 +150,6 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 [1]: /help
 {{% /tab %}}
 {{< /tabs >}}
-
-By default, Runtime metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`, make sure that [DogStatsD is enabled for the Agent][1].
-If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][2], and that port `8125` is open on the Agent.
-In Kubernetes, [bind the DogstatsD port to a host port][3]; in ECS, [set the appropriate flags in your task definition][4].
 
 ## Data Collected
 
@@ -203,7 +223,3 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: developers/dogstatsd/#setup
-[2]: /agent/docker/#dogstatsd-custom-metrics
-[3]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
-[4]: /integrations/amazon_ecs/create-an-ecs-task
