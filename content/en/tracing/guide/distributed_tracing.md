@@ -279,72 +279,34 @@ public class MyClass {
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Priority sampling is disabled by default. To enable it, configure the `priority_sampling` flag using the `tracer.configure` method:
+Priority sampling is enabled by default.
+
+To manually set trace priority:
 
 ```python
-tracer.configure(priority_sampling=True)
-```
-
-To set a custom priority to a trace:
-
-```python
-from ddtrace.ext.priority import USER_REJECT, USER_KEEP
-
 span = tracer.current_span()
 
-# indicate to not keep the trace
-span.context.sampling_priority = USER_REJECT
+# Always keep this trace
+span.set_tag('manual.keep')
+
+# Always drop this trace
+span.set_tag('manual.drop')
 ```
-
-The following priorities can be used.
-
-| Sampling Value | Effect                                                                                                     |
-| -------------- | :--------------------------------------------------------------------------------------------------------- |
-| AUTO_REJECT    | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
-| AUTO_KEEP      | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
-| USER_REJECT    | The user asked to not keep the trace. The Agent will drop it.                                              |
-| USER_KEEP      | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Priority sampling is disabled by default. Enabling it ensures that your sampled distributed traces will be complete. To enable the priority sampling:
+Priority sampling is enabled by default.
+
+Manually set trace priority:
 
 ```ruby
-Datadog.configure do |c|
-  c.tracer priority_sampling: true
-end
+# Always keep this trace
+span.set_tag('manual.keep')
+
+# Always drop this trace
+span.set_tag('manual.drop')
 ```
-
-Once enabled, the sampler automatically assigns a value of `AUTO_REJECT` or `AUTO_KEEP` to traces, depending on their service and volume.
-
-You can also set this priority manually to either drop a non-interesting trace or to keep an important one. For that, set the `Context#sampling_priority` to:
-
-```ruby
-# To reject the trace
-span.context.sampling_priority = Datadog::Ext::Priority::USER_REJECT
-
-# To keep the trace
-span.context.sampling_priority = Datadog::Ext::Priority::USER_KEEP
-```
-
-Possible values for the sampling priority tag are:
-
-| Sampling Value                        | Effect                                                                                                     |
-| ------------------------------------- | :--------------------------------------------------------------------------------------------------------- |
-| `Datadog::Ext::Priority::AUTO_REJECT` | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
-| `Datadog::Ext::Priority::AUTO_KEEP`   | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
-| `Datadog::Ext::Priority::USER_REJECT` | The user asked to not keep the trace. The Agent will drop it.                                              |
-| `Datadog::Ext::Priority::USER_KEEP`   | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
-
-When not using [distributed tracing](#distributed-tracing), you may change the priority at any time, as long as the trace is not finished yet. However, it must be done before any context propagation (e.g. fork, RPC calls) to be effective in a distributed context. Changing the priority after such context has been propagated causes different parts of a distributed trace to use different priorities. Some parts might be kept, some parts might be rejected, and consequently this can cause the trace to be partially stored and remain incomplete.
-
-It is recommended that changing priority be done as soon as possible, when the root span has just been created.
-
-See the [API documentation][1] for more details.
-
-
-[1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#priority-sampling
 {{% /tab %}}
 {{% tab "Go" %}}
 
