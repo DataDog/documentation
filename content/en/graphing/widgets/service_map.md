@@ -28,7 +28,7 @@ The service map widget does not respond to time scoping and always shows service
 
 ### Results
 
-Nodes are sized relative to one another based on the request. The circumference of a node is heavier and colored green for OK, yellow for Warn, red for Alert, and grey if there's no data.
+Nodes are sized relative to one another based on the request. The circumference of a node is heavier and colored green for OK, yellow for warn, red for alert, and grey if there's no data.
 
 Services connected to the mapped service are sorted outwards from the middle by requests. The five services with the highest requests are shown with labels by default. Additionally, any service with a monitor in alert state always has a label.
 
