@@ -1,6 +1,16 @@
 ---
-title: Troubleshooting
+title: APM Troubleshooting
 kind: documentation
+further_reading:
+- link: "/agent/docker/apm"
+  tag: "Documentation"
+  text: "Docker APM setup"
+- link: "/integrations/amazon_ecs/#trace-collection"
+  tag: "Documentation"
+  text: "ECS EC2 APM setup"
+- link: "/integrations/ecs_fargate/#trace-collection"
+  tag: "Documentation"
+  text: "ECS Fargate APM setup"
 ---
 
 ## Tracer debugging
@@ -151,3 +161,7 @@ make install
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
