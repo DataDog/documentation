@@ -15,11 +15,11 @@ further_reading:
 
 ## How it Works
 
-The [Cluster Checks][1] feature offers the possibility to autodiscover and perform checks on load-balanced cluster services (eg. Kubernetes services). The Endpoints Checks feature extends this mechanism to monitor every endpoint behind cluster services.
+The [Cluster Check][1] feature provides the ability to autodiscover and perform checks on load-balanced cluster services (eg. Kubernetes services). The Endpoints Checks feature extends this mechanism to monitor any endpoint behind cluster services.
 
 The [Cluster Agent][2] holds the configurations and exposes them to node-based Agents so they can consume and convert them into Endpoints Checks.
 
-Endpoints Checks are scheduled by Agents that run on the same node as the pod(s) that backs the endpoint(s) of the service.
+Endpoints Checks are scheduled by Agents that run on the same node as the pod(s) that back the endpoint(s) of the monitored service.
 
 The Agents connect to the Cluster Agent every 10 seconds and retrieve the check configurations to run. Metrics coming from Endpoints Checks will be submitted with service, pod, and host tags.
 
