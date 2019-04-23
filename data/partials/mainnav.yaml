@@ -574,6 +574,8 @@ main:
         url: "account_management/org_switching/"
       - name: "Billing"
         url: "account_management/billing/"
+      - name: "FAQ"
+        url: "account_management/faq/"
 
 
       #- #  name: "FAQ"
