@@ -9,111 +9,9 @@ aliases:
 
 [Trace Search & Analytics][1] is used to filter APM Data by [user-defined tags](#custom-tagging) such as `customer_id`, `error_type` or `app_name` to help troubleshoot and filter your requests. Apply the following configuration to your application to enable this feature.
 
-To enable it, first configure your services to emit the relevant analytics either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Then [setup your Datadog Agent in order to forward those analytics to Datadog][2].
+To enable it, first configure your services to emit the relevant analytics either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Then [enable Trace Search inside Datadog][1] in order to start forwarding these analytics. 
 
-## Automatic Configuration
-
-{{< tabs >}}
-{{% tab "Java" %}}
-
-Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the Tracing Client:
-
-* System Property: `-Ddd.trace.analytics.enabled=true`
-* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
-
-After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
-
-
-[1]: https://app.datadoghq.com/apm/search
-{{% /tab %}}
-{{% tab "Python" %}}
-
-Enable Trace Search & Analytics globally for all web integrations with one configuration parameter in the Tracing Client:
-
-* Tracer Configuration: `ddtrace.config.analytics_enabled = True`
-* Environment Variable: `DD_ANALYTICS_ENABLED=true`
-
-After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
-
-
-[1]: https://app.datadoghq.com/apm/search
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
-Trace search & analytics can be enabled for all web integrations with a global flag.
-
-To do so, set either `DD_TRACE_ANALYTICS_ENABLED=true` in your environment, or configure with:
-
-```ruby
-Datadog.configure { |c| c.analytics_enabled = true }
-```
-
-- `true` enables analytics for all web frameworks.
-- `false` or `nil` disables analytics, except for integrations that explicitly enable it. (Default)
-
-After enabling, the [Trace Search & Analytics][1] page populates.
-
-
-[1]: https://app.datadoghq.com/apm/search
-{{% /tab %}}
-{{% tab "Go" %}}
-
-Trace Search & Analytics can be enabled globally for all web integrations using the [`WithAnalytics`][1] tracer start option. For example:
-
-```go
-tracer.Start(tracer.WithAnalytics(true))
-```
-
-After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][2] to get started.
-
-
-[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
-[2]: https://app.datadoghq.com/apm/search
-{{% /tab %}}
-{{% tab "Node.js" %}}
-
-Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the tracing client:
-
-```javascript
-tracer.init({
-  analytics: true
-})
-```
-
-After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
-
-
-[1]: https://app.datadoghq.com/apm/search
-{{% /tab %}}
-{{% tab ".NET" %}}
-
-Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the Tracing Client:
-
-* Environment Variable or AppSetting: `DD_TRACE_ANALYTICS_ENABLED=true`
-
-This setting can also be set in code:
-
-```csharp
-Tracer.Instance.Settings.AnalyticsEnabled = true;
-```
-
-After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
-
-
-[1]: https://app.datadoghq.com/apm/search
-{{% /tab %}}
-{{% tab "PHP" %}}
-
-Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the Tracing Client:
-
-* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
-
-After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
-
-
-[1]: https://app.datadoghq.com/apm/search
-{{% /tab %}}
-{{< /tabs >}}
+**Note**: to use Trace Search, you must be using Agent v6.7+ and have logs enabled.
 
 
 ## Configure Additional Services (optional)
@@ -451,4 +349,3 @@ $span->setTag(Tag::ANALYTICS_KEY, true);
 {{< /tabs >}}
 
 [1]: https://app.datadoghq.com/apm/search
-[2]: /tracing/trace_search_and_analytics/agent_trace_search
