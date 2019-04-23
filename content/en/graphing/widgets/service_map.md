@@ -23,7 +23,7 @@ The service map widget does not respond to time scoping and always shows service
 
 ### Configuration
 
-1. Choose your [environment][1] scope, [primary tag][4] (or `*`) if it is set up for your account, and [service][2] name.
+1. Choose your [environment][1] scope, [primary tag][2] (or `*`) if it is set up for your account, and [service][3] name.
 2. Enter a title for your graph.
 
 ### Results
@@ -34,24 +34,28 @@ Services connected to the mapped service are sorted outwards from the middle by 
 
 ## API
 
-The dedicated [widget JSON schema definition][3] for the service map widget is:
+The dedicated [widget JSON schema definition][4] for the service map widget is:
 
 ```
-{
-  "type": "servicemap",
-  "service": "metric-query",
-  "filters": [
-    "env:datad0g.com",
-    "datacenter:*"
-  ]
-}
+SERVICEMAP_SCHEMA = {
+        "type": "object",
+        "properties": {
+            "type": {"enum": [WIDGET_TYPE]},
+            "filters": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+            "service": {"type": "string"},
+            "title": WidgetSchema.TITLE
+        },
+        "required": ["type", "filters", "service"],
+        "additionalProperties": False,
+    }
 ```
 
 | Parameter | Type   | Required | Description                                                       |
 |-----------|--------|----------|-------------------------------------------------------------------|
 | type      | string | yes      | The type of widget, for the service map widget, use `servicemap`. |
 | service   | string | yes      | The ID of the service you want to map.                            |
-| filters   | object | yes      | Your env and primary tag (or `*` if enabled for your account).      |
+| filters   | object | yes      | Your env and primary tag (or `*` if enabled for your account).    |
+| title     | string | no       | The title of your widget.                                         |
 
 
 ## Further Reading
@@ -59,6 +63,6 @@ The dedicated [widget JSON schema definition][3] for the service map widget is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/apm/#environment
-[2]: /tracing/visualization/service
-[3]: /graphing/graphing_json/widget_json
-[4]: /tracing/advanced/setting_primary_tags_to_scope/
+[2]: /tracing/advanced/setting_primary_tags_to_scope
+[3]: /tracing/visualization/service
+[4]: /graphing/graphing_json/widget_json
