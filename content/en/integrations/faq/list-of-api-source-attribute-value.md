@@ -173,6 +173,7 @@ kind: faq
 |Nginx|NGINX|
 |Node|NODE|
 |Office 365 Groups|OFFICE365GROUPS|
+|Okta|OKTA|
 |Openstack|OPENSTACK|
 |Opsgenie|OPSGENIE|
 |Opsmatic|OPSMATIC|
