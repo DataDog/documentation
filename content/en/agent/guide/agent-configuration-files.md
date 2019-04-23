@@ -48,7 +48,7 @@ The Agent v6 configuration file uses **YAML** to better support complex configur
 {{% /tab %}}
 {{< /tabs >}}
 
-Note: [A full example of the `datadog.yaml` file can be seen in the `datadog-agent` Github repository][1].
+Note: [A full example of the `datadog.yaml` file is available in the `datadog-agent` Github repository][1].
 
 ## Agent configuration directory
 
