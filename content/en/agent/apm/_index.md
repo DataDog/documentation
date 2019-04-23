@@ -10,13 +10,13 @@ aliases:
 further_reading:
 - link: "/agent/docker/apm"
   tag: "Documentation"
-  text: "Docker setup"
+  text: "Docker APM setup"
 - link: "/integrations/amazon_ecs/#trace-collection"
   tag: "Documentation"
-  text: "ECS EC2 setup"
+  text: "ECS EC2 APM setup"
 - link: "/integrations/ecs_fargate/#trace-collection"
   tag: "Documentation"
-  text: "ECS Fargate setup"
+  text: "ECS Fargate APM setup"
 ---
 
 This documentation covers Agent v6 only, to know how to set up APM tracing with Agent v5, [refer to the dedicated APM with Agent v5 doc][1].
