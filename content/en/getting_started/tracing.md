@@ -143,7 +143,7 @@ After a few minutes, your trace displays in Datadog under the `flask` service. C
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/guide/terminology
+[1]: /tracing
 [2]: https://www.datadoghq.com
 [3]: https://app.vagrantup.com/ubuntu/boxes/xenial64
 [4]: https://www.vagrantup.com/intro/getting-started/index.html

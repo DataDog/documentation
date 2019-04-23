@@ -11,6 +11,9 @@ further_reading:
 - link: "tracing/visualization/"
   tag: "Use the APM UI"
   text: "Explore your services, resources, and traces"
+- link: "https://www.datadoghq.com/blog/request-log-correlation/"
+  tag: "Correlate request logs with traces automatically"
+  text: "Learn how to start correlating logs and request traces without touching your application code"  
 ---
 
 The correlation between Datadog APM and Datadog Log Management is improved by automatically adding a `trace_id` and `span_id` in your logs with the Tracing Libraries. This can then be used in the platform to show you the exact logs correlated to the observed trace.
