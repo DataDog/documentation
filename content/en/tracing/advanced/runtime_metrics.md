@@ -203,7 +203,8 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: developers/dogstatsd/#setup
+
+[1]: /developers/dogstatsd/#setup
 [2]: /agent/docker/#dogstatsd-custom-metrics
 [3]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
 [4]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
