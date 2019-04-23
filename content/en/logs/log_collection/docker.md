@@ -103,7 +103,7 @@ The source and service values can be overridden with Autodiscovery as described 
 
 * Logs coming from container `Stderr` have a default status of `Error`.
 
-* Refer to the [journald integration][1] documentation for details regarding the setup for containerized environments if using the journald logging driver instead of Docker's default json-file logging driver.
+* If using the journald logging driver instead of Docker's default json-file logging driver, see the [journald integration][1] documentation for details regarding the setup for containerized environments.
 
 ### Activate Log Integrations
 
