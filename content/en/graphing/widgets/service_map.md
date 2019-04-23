@@ -1,11 +1,8 @@
 ---
 title: Service Map Widget
 kind: documentation
-description: "Displays the graphs of a chosen service in your screenboard."
+description: "Displays a map of a service to all of the services that call it, and all of the services that it calls."
 further_reading:
-- link: "graphing/dashboards/screenboard/"
-  tag: "Documentation"
-  text: "Screenboard"
 - link: "graphing/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
