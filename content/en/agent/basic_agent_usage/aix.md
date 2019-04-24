@@ -3,7 +3,7 @@ title: Basic Agent Usage for AIX
 kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/announcing-ibm-aix-agent/"
-  tag: "Monitor AIX with the Datadog Unix Agent"
+  tag: "Blog"
   text: "AIX tends to power large, complex systems that require accurate, real-time performance monitoring"
 ---
 
