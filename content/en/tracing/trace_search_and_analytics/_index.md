@@ -26,7 +26,7 @@ To enable it, first configure your services to emit the relevant analytics eithe
  After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.	
 
 
- 	[1]: https://app.datadoghq.com/apm/search
+[1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}	
 {{% tab "Python" %}}	
 
@@ -38,7 +38,7 @@ To enable it, first configure your services to emit the relevant analytics eithe
  After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.	
 
 
- 	[1]: https://app.datadoghq.com/apm/search
+[1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}	
 {{% tab "Ruby" %}}	
 
@@ -56,7 +56,7 @@ Datadog.configure { |c| c.analytics_enabled = true }
  After enabling, the [Trace Search & Analytics][1] page populates.	
 
 
- 	[1]: https://app.datadoghq.com/apm/search
+[1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}	
 {{% tab "Go" %}}	
 
@@ -69,7 +69,7 @@ tracer.Start(tracer.WithAnalytics(true))
  After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][2] to get started.	
 
 
-		[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
+[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
 [2]: https://app.datadoghq.com/apm/search
 {{% /tab %}}	
 {{% tab "Node.js" %}}	
@@ -85,7 +85,7 @@ tracer.init({
  After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.	
 
 
-	[1]: https://app.datadoghq.com/apm/search
+[1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}	
 {{% tab ".NET" %}}	
 
@@ -102,7 +102,7 @@ Tracer.Instance.Settings.AnalyticsEnabled = true;
  After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.	
 
 
- 	[1]: https://app.datadoghq.com/apm/search
+[1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}	
 {{% tab "PHP" %}}	
 
@@ -113,7 +113,7 @@ Tracer.Instance.Settings.AnalyticsEnabled = true;
  After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.	
 
 
-	[1]: https://app.datadoghq.com/apm/search
+[1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}	
 {{< /tabs >}}
 
