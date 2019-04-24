@@ -37,6 +37,11 @@ Selecting *Show expected bounds* in the corner reveals upper and lower threshold
 
 {{< img src="watchdog/watchdog_expected_values.png" alt="Watchdog expected value" responsive="true" >}}
 
+Clicking on *Show controls* in the upper left hand corner reveals facets. Use these to filter Watchdog stories by different categories (e.g. service, availability zone, etc.) and see the number of stories in each facet category.
+
+{{< img src="watchdog/watchdog-facets.png" alt="Watchdog facets" responsive="true" style="width:60%;">}}
+
+
 ## Watchdog in the Services List
 
 When an irregularity in a metric is detected, the yellow Watchdog binoculars icon appears next to the affected service in the [APM Services List][2]. The number next to the binoculars indicates the number of issues Watchdog has noticed within that service.
