@@ -50,7 +50,7 @@ Define the request you want to be executed by Datadog:
     * London (Request made from an AWS Datacenter)
 
 6. Choose a check frequency between "1 run per minute" and "1 run per week".
-7. Clicking on **Test URL** to try out the request configuration. You should see a response preview show up in the right side of your screen.
+7. Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
 ### Alert conditions
 
