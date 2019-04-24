@@ -60,14 +60,14 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 * [Collecte des métriques d'Amazon EBS][7]
 * [Surveillance des volumes d'Amazon EBS avec Datadog][8]
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon_ebs
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ebs/amazon_ebs_metadata.csv
-[5]: https://docs.datadoghq.com/fr/help/
-[6]: https://www.datadoghq.com/blog/amazon-ebs-monitoring/
-[7]: https://www.datadoghq.com/blog/collecting-amazon-ebs-metrics/
-[8]: https://www.datadoghq.com/blog/monitoring-amazon-ebs-volumes-with-datadog/
+[5]: https://docs.datadoghq.com/fr/help
+[6]: https://www.datadoghq.com/blog/amazon-ebs-monitoring
+[7]: https://www.datadoghq.com/blog/collecting-amazon-ebs-metrics
+[8]: https://www.datadoghq.com/blog/monitoring-amazon-ebs-volumes-with-datadog
 
 
 {{< get-dependencies >}}
