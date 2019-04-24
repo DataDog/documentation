@@ -59,7 +59,7 @@ Set alert conditions to determine the circumstances under which you want a test 
 * At least one location was in failure (at least one assertion failed) during the last *X* minutes, **AND**
 * At one moment during the last *X* minutes, at least *n* locations were in failure
 
-The uptime bar is displayed differently on your test result: location uptime is displayed on a per-evaluation basis (i.e. whether the last test was up or down). Total uptime is displayed based on the configured alert conditions. Notifications sent are based on the total uptime bar. 
+The uptime bar is displayed differently on your test result: location uptime is displayed on a per-evaluation basis (whether the last test was up or down). Total uptime is displayed based on the configured alert conditions. Notifications sent are based on the total uptime bar. 
 
 ### Validation
 
