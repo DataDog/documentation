@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/announcing-ibm-aix-agent/"
   tag: "Blog"
-  text: "AIX tends to power large, complex systems that require accurate, real-time performance monitoring"
+  text: "Monitor AIX with the Datadog Unix Agent"
 ---
 
 <div class="alert alert-info">
