@@ -56,7 +56,7 @@ Define the request you want to be executed by Datadog:
 
 Set alert conditions to determine the circumstances under which you want a test to send an alert. When you set the alert conditions to: `An alert is triggerd if any assertion fails for X minutes from any n of N locations`, an alert is triggered if:
 
-* At least one location was in failure (i.e. at least one assertion failed) during the last *X* minutes, **AND**
+* At least one location was in failure (at least one assertion failed) during the last *X* minutes, **AND**
 * At one moment during the last *X* minutes, at least *n* locations were in failure
 
 The uptime bar is displayed differently on your test result: location uptime is displayed on a per-evaluation basis (i.e. whether the last test was up or down). Total uptime is displayed based on the configured alert conditions. Notifications sent are based on the total uptime bar. 
