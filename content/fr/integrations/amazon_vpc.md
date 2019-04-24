@@ -77,11 +77,11 @@ L'intégration AWS VPC n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
-[3]: https://docs.datadoghq.com/fr/logs/explorer/
+[3]: https://docs.datadoghq.com/fr/logs/explorer
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_vpc/amazon_vpc_metadata.csv
-[5]: http://docs.datadoghq.com/help/
+[5]: http://docs.datadoghq.com/help
 
 
 {{< get-dependencies >}}

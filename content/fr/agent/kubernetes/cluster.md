@@ -21,7 +21,7 @@ further_reading:
     tag: Github
     text: Dépannage de l'Agent de cluster Datadog
 ---
-L'Agent de cluster Datadog fournit une méthode simplifiée et centralisée de collecte des données de surveillance au niveau des clusters. En agissant comme un proxy entre le serveur API et les Agents basés sur des nœuds, l'Agent de cluster permet de réduire la charge du serveur. Il transmet également les métadonnées de cluster aux Agents basés sur des nœuds afin d'enrichir les métadonnées des métriques recueillies localement.
+L'Agent de cluster Datadog fournit une méthode simplifiée et centralisée de collecte des données de surveillance au niveau des clusters. En agissant comme un proxy entre le serveur d'API et les Agents basés sur des nœuds, l'Agent de cluster permet de réduire la charge du serveur. Il transmet également les métadonnées de cluster aux Agents basés sur des nœuds afin d'enrichir les métadonnées des métriques recueillies localement.
 
 Grâce à l'Agent de cluster Datadog, vous pouvez :
 
@@ -76,7 +76,7 @@ Utilisez ce secret avec la variable d'environnement `DD_CLUSTER_AGENT_AUTH_TOKEN
 
 **Remarque** : cela doit être défini dans le manifeste de l'Agent de cluster **et** celui de l'Agent du nœud.
 
-Vous pouvez également monter le fichier `datadog.yaml` si vous ne souhaitez pas utiliser de variables d'environnement. Nous vous conseillons d'utiliser ConfigMap. Pour cela, ajoutez ce qui suit dans le manifeste de l'Agent de cluster :
+Vous pouvez également monter le fichier `datadog.yaml` si vous ne souhaitez pas utiliser de variables d'environnement. Nous vous conseillons d'utiliser une ConfigMap. Pour cela, ajoutez ce qui suit dans le manifeste de l'Agent de cluster :
 
 ```
 [...]
@@ -213,8 +213,8 @@ Les variables d'environnement suivantes sont prises en charge :
 | `DD_CLUSTER_AGENT_AUTH_TOKEN`                 | Token de 32 caractères qui doit être partagé entre l'Agent de nœud et l'Agent de cluster Datadog.                                                                        |
 | `DD_KUBE_RESOURCES_NAMESPACE`                 | Configure l'espace de nommage où l'Agent de cluster crée les ConfigMaps nécessaires pour l'élection de leader, la collecte d'événements (facultative) et la mise à l'échelle automatique des pods horizontaux. |
 | `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME`    | Nom du service Kubernetes auquel les Agents de cluster sont exposés. Valeur par défaut : `datadog-cluster-agent`. |
-| `DD_KUBERNETES_INFORMERS_RESYNC_PERIOD`       | Fréquence en secondes des interrogations du serveur API afin de resynchroniser cache local. Valeur par défaut : 5 minutes.                                                                             |
-| `DD_KUBERNETES_INFORMERS_RESTCLIENT_TIMEOUT`  | Délai d'expiration en secondes de la communication du client avec le serveur API. Valeur par défaut : 60 secondes.                                                                                    |
+| `DD_KUBERNETES_INFORMERS_RESYNC_PERIOD`       | Fréquence en secondes des interrogations du serveur d'API afin de resynchroniser cache local. Valeur par défaut : 5 minutes.                                                                             |
+| `DD_KUBERNETES_INFORMERS_RESTCLIENT_TIMEOUT`  | Délai d'expiration en secondes de la communication du client avec le serveur d'API. Valeur par défaut : 60 secondes.                                                                                    |
 | `DD_EXPVAR_PORT`                              | Modifie le port de récupération des variables publiques [expvar][6] à partir de l'Agent de cluster Datadog. Valeur par défaut : `5000`.                         |
 | `DD_EXTERNAL_METRICS_BATCH_WINDOW`            | Délai d'attente en secondes pour traiter un lot de métriques provenant de plusieurs Autoscalers. Valeur par défaut : 10 secondes.                                                                        |
 | `DD_EXTERNAL_METRICS_MAX_AGE`                 | Âge maximal en secondes d'un point de données avant qu'il soit considéré comme non valide et ne puisse pas être servi. Valeur par défaut : 90 secondes.                                                                      |
@@ -261,7 +261,7 @@ Pour activer le serveur de métriques custom :
 2. Configurez la `<CLÉ_APP_DD>` ainsi que la `<CLÉ_API_DD>` dans le déploiement de l'Agent de cluster Datadog.
 3. Créez un [service exposant le port 443][7] et [enregistrez-le en tant qu'APIService des métriques externes][8].
 
-Consultez [le guide sur les serveurs de métriques custom][1] (en anglais) pour configurer le serveur de métriques custom et obtenir plus de renseignements sur son fonctionnement.
+Consultez [le guide sur les serveurs de métriques custom[1] (en anglais) pour configurer le serveur de métriques custom et obtenir plus de renseignements sur son fonctionnement.
 
 **Remarque** : un [Autoscaler de pods horizontaux][9] est requis pour acheminer des valeurs via le processus de métriques externes.
 
@@ -276,7 +276,7 @@ Depuis la version 1.2.0, l'Agent de cluster Datadog peut améliorer le mécanis
 
 Deux sources de configuration sont actuellement prises en charge. Elles sont [décrites dans la documentation relative à Autodiscovery][10] :
 
-- Les fichiers yaml peuvent être montés à partir de ConfigMap dans le dossier `/conf.d`. Ils seront automatiquement importés par le point d'entrée de l'image.
+- Les fichiers yaml peuvent être montés à partir d'une ConfigMap dans le dossier `/conf.d`. Ils seront automatiquement importés par le point d'entrée de l'image.
 - Pour annoter les services Kubernetes, vous devez définir les variables d'environnement `DD_EXTRA_CONFIG_PROVIDERS` et `DD_EXTRA_LISTENERS` sur `kube_services`.
 
 Consultez [le guide dédié sur les checks de cluster avec Autodiscovery][11] pour obtenir plus d'informations sur la configuration et le dépannage de cette fonctionnalité.
