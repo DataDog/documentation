@@ -12,7 +12,7 @@ further_reading:
   tag: "Use the APM UI"
   text: "Explore your services, resources, and traces"
 - link: "https://www.datadoghq.com/blog/request-log-correlation/"
-  tag: "Correlate request logs with traces automatically"
+  tag: "Blog"
   text: "Learn how to start correlating logs and request traces without touching your application code"  
 ---
 
