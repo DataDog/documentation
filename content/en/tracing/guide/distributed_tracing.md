@@ -250,12 +250,12 @@ For a more detailed explanations of sampling and priority sampling, check the [s
 
 Priority sampling is enabled by default. To disable it, configure the `priority.sampling` flag to `false` ([see how to configure the java client][1]).
 
-Manually set trace priority:
+Manually keep or drop a trace:
 
 ```java
-import datadog.trace.api.Trace;
+import datadog.trace.api.DDTags;
 import datadog.trace.api.interceptor.MutableSpan;
-import datadog.trace.api.sampling.ForcedTracing;
+import datadog.trace.api.Trace;
 import io.opentracing.util.GlobalTracer;
 
 public class MyClass {
@@ -265,10 +265,10 @@ public class MyClass {
         MutableSpan ddspan = (MutableSpan) GlobalTracer.get().activeSpan();
 
         // ask the sampler to keep the current trace
-        ddspan.setTag(ForcedTracing.manual_KEEP);
+        ddspan.setTag(DDTags.MANUAL_KEEP, true);
 
         // ask the sampler to drop the current trace
-        ddspan.setTag(ForcedTracing.manual_DROP);
+        ddspan.setTag(DDTags.MANUAL_DROP, true);
 
         // method impl follows
     }
