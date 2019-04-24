@@ -29,7 +29,7 @@ Some parts of your system might not be available to robots without the right ide
 
 Choose any or a variety of the following methods to identify the robots to make sure they are performing the actions you expect.
 
-1. You can use the [**headers set for APM integration**][1]. The `x-datadog-origin: synthetics` header, for instance, is added to all the requests launched for both API and browser tests. Using one of these headers allows you to filter these bot requests once in your analytics tool.
+1. You can use the [**headers set for APM integration**][1]. The `x-datadog-origin: synthetics` header, for instance, is added to all the requests launched for API tests. Using one of these headers allows you to filter these bot requests once in your analytics tool. For now, no headers are added for browser tests.
 
 If you want these requests to be completely removed, and not sent at all to your analytics tool, you can use the below JavaScript variable on your website, wrapped around your analytics tool code snippet:
 
