@@ -50,7 +50,16 @@ Define the request you want to be executed by Datadog:
     * London (Request made from an AWS Datacenter)
 
 6. Choose a check frequency between "1 run per minute" and "1 run per week".
-7. Finish by clicking on **Test URL** to try out the request configuration. You should see a response preview show up in the right side of your screen.
+7. Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
+
+### Alert conditions
+
+Set alert conditions to determine the circumstances under which you want a test to send an alert. When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered if:
+
+* At least one location was in failure (at least one assertion failed) during the last *X* minutes, **AND**
+* At one moment during the last *X* minutes, at least *n* locations were in failure
+
+The uptime bar is displayed differently on your test result: location uptime is displayed on a per-evaluation basis (whether the last test was up or down). Total uptime is displayed based on the configured alert conditions. Notifications sent are based on the total uptime bar. 
 
 ### Validation
 
@@ -77,7 +86,7 @@ Use the **Test URL** response to quickly add status code, response time or heade
 
 ### Notifications
 
-A notification is sent if at least one of the assertion fails. To configure notifications:
+A notification is sent according to the set [alert conditions](#alert-conditions). To configure notifications:
 
 1. Select users and/or [services][3] to send the notifications to. Note that you can use the [`@-notification` feature][4] in the **message** field.
 2. Enter a **message** for the API test. This field allows standard [Markdown formatting][5]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
