@@ -58,7 +58,7 @@ The Javascript logging library is in private beta. <a href="https://docs.datadog
 The following parameters can be used to configure the library to send logs to Datadog:
 
 * Set `isCollectingError` to `false` to turn off the automatic JS and console error collection.
-* Use `addGlobalContext` to add JSON attribute to all the generated logs
+* Use `addLoggerGlobalContext` to add JSON attribute to all the generated logs
 * Set `publicApiKey` to the value of the public API key (**only public API keys can be used in this library**)
 
 {{< tabs >}}
@@ -68,7 +68,7 @@ The following parameters can be used to configure the library to send logs to Da
 <html>
   <head>
     <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="<COMING_SOON>"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-us.js"></script>
     <script>
       // Set your Public API key
       Datadog.init({
@@ -78,7 +78,7 @@ The following parameters can be used to configure the library to send logs to Da
 
       // OPTIONAL
       // add global metadata attributes
-      Datadog.addGlobalContext({'<META_KEY>': '<META_VALUE>'});
+      Datadog.addLoggerGlobalContext({<META_KEY>: <META_VALUE>});
     </script>
     ...
   </head>
@@ -93,7 +93,7 @@ The following parameters can be used to configure the library to send logs to Da
 <html>
   <head>
     <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="<COMING_SOON>"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-eu.js"></script>
     <script>
       // Set your Public API key
       Datadog.init({
@@ -103,7 +103,7 @@ The following parameters can be used to configure the library to send logs to Da
 
       // OPTIONAL
       // add global metadata attributes
-      Datadog.addGlobalContext({'<META_KEY>': '<META_VALUE>'});
+      Datadog.addLoggerGlobalContext({<META_KEY>: '<META_VALUE>'});
     </script>
     ...
   </head>
@@ -119,7 +119,7 @@ The following parameters can be used to configure the library to send logs to Da
 Send a custom log entries directly to Datadog with the `log` function:
 
 ```
-Datadog.log(<MESSAGE>,<JSON_ATTRIBUTES>,<SEVERITY>)
+Datadog.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<SEVERITY>)
 ```
 
 | Placehodler         | Description                                                                             |
@@ -128,13 +128,15 @@ Datadog.log(<MESSAGE>,<JSON_ATTRIBUTES>,<SEVERITY>)
 | `<JSON_ATTRIBUTES>` | A valid JSON object that includes all attributes attached to the `<MESSAGE>`            |
 | `<SEVERITY>`        | Status of your log; the accepted severity values are `debug`, `info`, `warn` or `error`. |
 
+Severity can also be used as a placeholder of the `log` function `Datadog.logger.debug(<MESSAGE>,<JSON_ATTRIBUTES>)`.
+
 **Example:**
 
 ```
 ...
 <script>
 ...
-Datadog.log('Button clicked', { name: 'buttonName' });
+Datadog.logger.info('Button clicked', { name: 'buttonName', id: 123 });
 ...
 </script>
 ...
@@ -147,6 +149,7 @@ This gives the following result:
   "severity": "info",
   "session_id": "1234", 
   "name": "buttonName",
+  "id": 123,
   "message": "Button clicked",
   http:{
     "url": "...",
@@ -159,6 +162,82 @@ This gives the following result:
   }
 }  
 ```
+
+The logger adds the following information by default:
+
+* `http.url`
+* `session_id`
+* `http.useragent`
+* `network.client.ip`
+
+## Advanced usage
+
+### Filter by severity
+
+In some cases, you might want to disable the debug mode or to only collect warning and errors. This can be achieved by changing the logging level thanks to the `logLevel` parameter to `debug` (default), `info`, `warn`, and `error` :
+
+```
+Datadog.logger.setLogLevel('<SEVERITY_LEVEL>')
+```
+
+Only logs with a severity equal or higher to the specified one are sent.
+
+### Change the destination
+
+By default, the loggers are sending logs to Datadog. It is also possible to configure the logger to send logs to the console or not to send logs at all. This can be used in the development environment to keep the logs locally.
+
+Use the `setLogHandler` function with the values `http` (default), `console`, or `silent`:
+```
+Datadog.logger.setLogHandler('<HANDLER>')
+```
+
+### Define multiple loggers
+
+The library contains a default logger, but it is also possible to define different loggers which can be convenient when several teams are working on the same project.
+
+Each logger can optionally be configured with its own log level, handler, and context. Note that the `Global Context` is added on top of each logger context. 
+
+Use the following to define a custom logger:
+
+```
+createLogger (<LOGGER_NAME>, {
+    logLevel?: 'debug' | 'info' | 'warn' | 'error'
+    logHandler?: 'http' | 'console' | 'silent'
+    context?: { <KEY>:'<VALUE>'}
+})
+```
+
+Those parameters can also be set thanks to the `addContext`, `setLogLevel`, and `setLogHandler` functions.
+After the creation of this logger, you can then get it in any part of your Javascript code thanks to the `getLogger` function:
+
+```
+const my_logger = getLogger('<LOGGER_NAME>') 
+```
+
+**Example:**
+
+
+Let's assume that there is a signup logger define with all the others logger:
+
+```
+# create a new logger
+const signupLogger = createLogger('signupLogger'})
+signupLogger.addContext({ env: 'staging'})
+```
+
+It can now be used in a different part of the code with:
+
+```
+...
+<script>
+...
+const signupLogger = getLogger('signupLogger')
+signupLogger.info('Test sign up completed')
+...
+</script>
+...
+```
+
 
 ## Further Reading
 
