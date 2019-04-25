@@ -76,7 +76,29 @@ span.set_tag('manual.drop')
 
 Manually keep or drop a trace:
 
-Coming soon!
+```Go
+package main
+
+import (
+    "log"
+    "net/http"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    // Create a span for a web request at the /posts URL.
+    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
+    defer span.Finish()
+
+    // To Manually Keep a Trace
+    span.SetTag(ext.SamplingPriority, ext.PriorityUserKeep)
+
+     // To Manually Keep a Trace
+    span.SetTag(ext.SamplingPriority, ext.PriorityUserDrop)
+}
+```
 
 
 {{% /tab %}}
@@ -84,10 +106,21 @@ Coming soon!
 
 Manually keep or drop a trace:
 
+```js
+const priority = require('dd-trace/ext/priority')
+
+// To reject the trace
+span.setTag('sampling.priority', priority.USER_REJECT)
+
+// To keep the trace
+span.setTag('sampling.priority', priority.USER_KEEP)
+````
+
+
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Manually keep or drop a trace:
+Coming Soon
 
 {{% /tab %}}
 {{% tab "PHP" %}}
@@ -115,6 +148,13 @@ if (null !== $span) {
 
 Manually keep or drop a trace:
 
+```cpp
+auto tracer = ...
+auto span = tracer->StartSpan("operation_name");
+span->SetTag("sampling.priority", 1); // Keep this span.
+auto another_span = tracer->StartSpan("operation_name");
+another_span->SetTag("sampling.priority", 0); // Discard this span.
+```
 
 
 {{% /tab %}}

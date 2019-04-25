@@ -107,7 +107,3 @@ Once a trace has been viewed, it continues to be available by using its trace ID
 [2]: /tracing/visualization/trace
 [3]: /tracing/visualization/resource
 [4]: /agent
-[5]: http://www.rubydoc.info/gems/ddtrace/#Priority_sampling
-[6]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#priority-sampling
-[7]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer/#Span.SetSamplingPriority
-[8]: /tracing/languages/java/#sampling-distributed-tracing
