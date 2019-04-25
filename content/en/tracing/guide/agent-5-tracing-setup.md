@@ -1,5 +1,5 @@
 ---
-title: APM and Distributed Tracing with Agent v5
+title: APM & Distributed Tracing with Agent v5
 kind: guide
 aliases:
   - /tracing/faq/agent-5-tracing-setup

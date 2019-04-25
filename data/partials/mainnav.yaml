@@ -274,7 +274,7 @@ main:
 
 
   # TRACING/APM
-  - name: "APM (Tracing)"
+  - name: "APM & Distributed Tracing"
     url: "tracing/"
     pre: "nav_tracing"
     children:

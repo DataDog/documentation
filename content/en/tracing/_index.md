@@ -1,5 +1,5 @@
 ---
-title: APM and Distributed Tracing
+title: APM & Distributed Tracing
 kind: documentation
 description: Instrument your code to improve performance
 further_reading:
@@ -14,7 +14,16 @@ disable_toc: true
 
 Datadog APM provides you with deep insight into your application's performance-from automatically generated dashboards monitoring key metrics, such as request volume and latency, to detailed traces of individual requests-side by side with your logs and infrastructure monitoring.
 
-Datadog APM is offered as an upgrade to the Pro and Enterprise plans. A free 14-day trial is available. Registered users can visit the [APM page of the Datadog application][1] to get started.
+## Distributed Tracing
+
+Distributed tracing allows you to propagate a single trace across multiple services and hosts, so you can see performance end-to-end. Linking is implemented by injecting Datadog Metadata into the request headers.
+
+Distributed tracing headers are language agnostic. A trace started in one language may propagate to another (for example, from Python to Java). Datadog sampling ensures completeness of traces distributed across hosts and services.
+
+Datadog APM & Distributed Tracing is offered as an upgrade to the Pro and Enterprise plans. A free 14-day trial is available. Registered users can visit the [APM page of the Datadog application][1] to get started.
+
+
+
 
 {{< whatsnext desc="Get started with Datadog APM:">}}
     {{< nextlink href="/agent/apm" >}} 1 - Configure your Agent to collect your application Traces{{< /nextlink >}}
