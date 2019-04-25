@@ -118,7 +118,7 @@ Container logs have a lot of metadata collected as tags. To exclude all logs com
 
 Order matters for exclusion filters. And contrary to where several pipelines can process a log, if a log matches several exclusion filters, only the first exclusion filter rule is applied. 
 
-Reorder your pipeline to make sure the proper exclusion filter will applies for your log. For instance, you probably want to setup the filters with the most inclusive queries after the others. 
+Reorder your pipeline to make sure the proper exclusion filters applies for your log. For instance, you probably want to set up the filters with the most inclusive queries after the others. 
 
 To reorder your exclusion filter, just drag and drop them
 
