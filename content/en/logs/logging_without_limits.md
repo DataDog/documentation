@@ -120,7 +120,7 @@ Order matters for exclusion filters. And contrary to where several pipelines can
 
 Reorder your pipeline to make sure the proper exclusion filters applies for your log. For instance, you probably want to set up the filters with the most inclusive queries after the others. 
 
-To reorder your exclusion filter, just drag and drop them
+To reorder your exclusion filter, drag and drop them into your preferred order.
 
 
 {{< img src="logs/logging_without_limits/reorder_index_filters.png" alt="" responsive="true" style="width:80%;">}}
