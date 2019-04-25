@@ -167,7 +167,7 @@ This gives the following result:
 
 ### Filter by severity
 
-In some cases, you might want to disable the debug mode or to only collect warning and errors. This can be achieved by changing the logging level thanks to the `logLevel` parameter to `debug`, `info`, `warn`, and `error` :
+In some cases, you might want to disable the debug mode or to only collect warning and errors. This can be achieved by changing the logging level thanks to the `logLevel` parameter to `debug` (default), `info`, `warn`, and `error` :
 
 ```
 Datadog.logger.setLogLevel('<SEVERITY_LEVEL>')
@@ -179,7 +179,7 @@ Only logs with a severity equal or higher to the specified one are sent.
 
 By default, the loggers are sending logs to Datadog. It is also possible to configure the logger to send logs to the console or to not send logs at all. This can be used in development environment to keep the logs locally.
 
-Use the `setLogHandler` function with the values `http`, `console`, or `silent`:
+Use the `setLogHandler` function with the values `http` (default), `console`, or `silent`:
 ```
 Datadog.logger.setLogHandler('<HANDLER>')
 ```
