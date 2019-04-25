@@ -37,7 +37,7 @@ Selecting *Show expected bounds* in the corner reveals upper and lower threshold
 
 {{< img src="watchdog/watchdog_expected_values.png" alt="Watchdog expected value" responsive="true" >}}
 
-Clicking on *Show controls* in the upper left hand corner reveals facets. Use these to filter Watchdog stories by different categories (e.g. service, availability zone, etc.) and see the number of stories in each facet category.
+Facets are listed in the left panel. Use these to filter Watchdog stories by different categories (e.g. service, availability zone, etc.) and see the number of stories in each facet category.
 
 {{< img src="watchdog/watchdog-facets2.png" alt="Watchdog facets" responsive="true" style="width:60%;">}}
 
