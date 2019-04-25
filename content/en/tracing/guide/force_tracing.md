@@ -12,7 +12,7 @@ APM enables priority sampling by default to allows traces between two Datadog en
 
 Forced tracing should be done only before any context propagation. If this happens after the propagation of a context, the system can’t ensure that the entire trace is sampled properly.
 
-For a more detailed explanations of sampling, check the [sampling and storage][5] documentation.
+For a more detailed explanations of sampling, check the [sampling and storage][1] documentation.
 
 
 {{< tabs >}}
