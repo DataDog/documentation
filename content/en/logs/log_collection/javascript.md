@@ -163,6 +163,13 @@ This gives the following result:
 }  
 ```
 
+The logger adds the following information by default:
+
+* `http.url`
+* `session_id`
+* `http.useragent`
+* `network.client.ip`
+
 ## Advanced usage
 
 ### Filter by severity
