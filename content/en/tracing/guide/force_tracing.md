@@ -2,7 +2,7 @@
 title: Force Tracing
 kind: documentation
 aliases:
-  - /tracing/guide/distributed-tracing
+  - /tracing/guide/force_tracing
 ---
 
 
