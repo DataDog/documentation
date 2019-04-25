@@ -5116,7 +5116,7 @@
 										}
 									]
 								},
-								"description": "### Overview\n\nConfigure your Datadog-AWS integration directly through Datadog API. [Read more about Datadog-AWS integration][1].\n\n### Arguments\n\n* **`account_id`** [*required*]: Your AWS Account ID without dashes. [Consult the Datadog AWS integration to learn more][2] about your AWS account ID.\n\n* **`access_key_id`** [*optional*, *default*=**None**]: If your AWS account is a GovCloud or China account, enter the corresponding Access Key ID.\n\n* **`role_name`** [*required*]: Your Datadog role delegation name. [Consult the Datadog AWS integration to learn more][3] about your AWS account Role name.\n\n* **`filter_tags`** [*optional*, *default*=**None**]: Array of EC2 tags (in the form `key:value`) defines a filter that Datadog use when collecting metrics from EC2. Wildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used.\n    Only hosts that match one of the defined tags will be imported into Datadog. The rest will be ignored. Host matching a given tag can also be excluded by adding `!` before the tag.\n    e.x. `env:production,instance-type:c1.*,!region:us-east-1`\n    [Read more about EC2 tagging in AWS tagging documentation][4].\n\n* **`host_tags`** [*optional*, *default*=**None**]: Array of tags (in the form `key:value`) to add to all hosts and metrics reporting through this integration.\n\n* **`account_specific_namespace_rules`** [*optional*, *default*=**None**]: An object (in the form `{\"namespace1\":true/false, \"namespace2\":true/false}`) that enables or disables metric collection for specific AWS namespaces for this AWS account only. A list of namespaces can be found at the `https://api.datadoghq.com/api/v1/integration/aws/available_namespace_rules` endpoint.\n\n[1]: https://docs.datadoghq.com/integrations/amazon_web_services\n[2]: https://docs.datadoghq.com/integrations/amazon_web_services/#configuration\n[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation\n[4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html"
+								"description": "### Overview\n\nConfigure your Datadog-AWS integration directly through Datadog API. [Read more about Datadog-AWS integration][1].\n\n**Note**:\n\n* Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.\n* Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.\n\n### Arguments\n\n* **`account_id`** [*required*]: Your AWS Account ID without dashes. [Consult the Datadog AWS integration to learn more][2] about your AWS account ID.\n\n* **`access_key_id`** [*optional*, *default*=**None**]: If your AWS account is a GovCloud or China account, enter the corresponding Access Key ID.\n\n* **`role_name`** [*required*]: Your Datadog role delegation name. [Consult the Datadog AWS integration to learn more][3] about your AWS account Role name.\n\n* **`filter_tags`** [*optional*, *default*=**None**]: Array of EC2 tags (in the form `key:value`) defines a filter that Datadog use when collecting metrics from EC2. Wildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used.\n    Only hosts that match one of the defined tags will be imported into Datadog. The rest will be ignored. Host matching a given tag can also be excluded by adding `!` before the tag.\n    e.x. `env:production,instance-type:c1.*,!region:us-east-1`\n    [Read more about EC2 tagging in AWS tagging documentation][4].\n\n* **`host_tags`** [*optional*, *default*=**None**]: Array of tags (in the form `key:value`) to add to all hosts and metrics reporting through this integration.\n\n* **`account_specific_namespace_rules`** [*optional*, *default*=**None**]: An object (in the form `{\"namespace1\":true/false, \"namespace2\":true/false}`) that enables or disables metric collection for specific AWS namespaces for this AWS account only. A list of namespaces can be found at the `https://api.datadoghq.com/api/v1/integration/aws/available_namespace_rules` endpoint.\n\n[1]: https://docs.datadoghq.com/integrations/amazon_web_services\n[2]: https://docs.datadoghq.com/integrations/amazon_web_services/#configuration\n[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation\n[4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html"
 							},
 							"response": []
 						},
@@ -6137,7 +6137,7 @@
 										}
 									]
 								},
-								"description": "### Overview\n\nConfigure your Datadog-PagerDuty integration directly through the Datadog API.   [Read more about Datadog-PagerDuty integration][1].\n\n**Note**: * Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.\n\n### Arguments\n\n* **`services`** : Array of PagerDuty service objects. [Learn how to configure you Datadog service with PagerDuty documentation][2]. A PagerDuty service object is composed by:\n    * **`service_name`** [*required*]: Your Service name in PagerDuty.\n\t* **`service_key`** [*required*]: Your Service name associated service key in Pagerduty.\n* **`subdomain`** : Your PagerDuty account's personalized subdomain name.\n* **`schedules`** : Array of your schedule URLs, e.g: `[\"https://my-pd.pagerduty.com/schedules#PCPYT4M\", \"https://my-pd.pagerduty.com/schedules#PKTPB7P\"]`\n* **`api_token`** : Your PagerDuty API token.\n\n[1]: https://docs.datadoghq.com/integrations/pagerduty\n[2]: https://www.pagerduty.com/docs/guides/datadog-integration-guide"
+								"description": "### Overview\n\nConfigure your Datadog-PagerDuty integration directly through the Datadog API.   [Read more about Datadog-PagerDuty integration][1].\n\n**Note**:\n\n* Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.\n* Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.\n\n### Arguments\n\n* **`services`** : Array of PagerDuty service objects. [Learn how to configure you Datadog service with PagerDuty documentation][2]. A PagerDuty service object is composed by:\n    * **`service_name`** [*required*]: Your Service name in PagerDuty.\n\t* **`service_key`** [*required*]: Your Service name associated service key in Pagerduty.\n* **`subdomain`** : Your PagerDuty account's personalized subdomain name.\n* **`schedules`** : Array of your schedule URLs, e.g: `[\"https://my-pd.pagerduty.com/schedules#PCPYT4M\", \"https://my-pd.pagerduty.com/schedules#PKTPB7P\"]`\n* **`api_token`** : Your PagerDuty API token.\n\n[1]: https://docs.datadoghq.com/integrations/pagerduty\n[2]: https://www.pagerduty.com/docs/guides/datadog-integration-guide"
 							},
 							"response": []
 						},
@@ -6236,7 +6236,8 @@
 											"description": "Your Datadog application key"
 										}
 									]
-								}
+								},
+								"description": "### Overview\n\nList all Datadog-Slack integrations configured for your Datadog Account.\n\n### Arguments\n\nThis endpoint takes no JSON argument."
 							},
 							"response": []
 						},
@@ -6280,14 +6281,15 @@
 											"description": "Your Datadog application key"
 										}
 									]
-								}
+								},
+								"description": "### Overview\n\nDelete a Datadog-Slack integration configured in your Datadog Account. [Read more about Datadog-Slack integration][1].\n\n### Arguments\n\nThis endpoint takes no JSON arguments\n\n\n[1]: https://docs.datadoghq.com/integrations/slack"
 							},
 							"response": []
 						},
 						{
 							"name": "Create Slack Configuration ",
 							"request": {
-								"method": "PUT",
+								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
@@ -6325,12 +6327,12 @@
 										}
 									]
 								},
-								"description": "Configure your Datadog-Slack integration directly through Datadog API."
+								"description": "### Overview\n\nConfigure your Datadog-Slack integration directly through Datadog API. [Read more about Datadog-Slack integration][1].\n\n**Note**:\n\n* Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.\n* Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.\n\n### Arguments\n\n* **`service_hooks`** [*required*]: Array of service hook objects (the service hook is generated for your slack account in your Slack account administration page). A service hook object is composed by:\n\n    * **`account`** [*required*]: Your Slack account name.\n\n    * **`url`** [*required*]: Your Slack Service Hook URL.\n\n**Note**: **`service_hooks`** are not required in the payload when adding (POST) or updating (PUT) an existing Slack configuration.\n\n* **`channels`** [*required*]: Array of slack channel objects to post to. A slack channel object is composed by:\n\n    * **`channel_name`** [*required*]: Your channel name e.g: `#general`, `#private`\n\n    * **`transfer_all_user_comments`** [*optional*, *default*=**False**]: To be notified for every comment on a graph, set it to `true`. If set to `False` use the `@slack-channel_name` syntax [for comments to be posted to slack][2].\n\n    * **`account`** [*required*]: Account to which the channel belongs to.\n\n[1]: https://docs.datadoghq.com/integrations/slack\n[2]: https://docs.datadoghq.com/monitors/notifications/#slack-integration"
 							},
 							"response": []
 						},
 						{
-							"name": "Update and Add Channels To Existing Configuration",
+							"name": "Add Channels To Existing Configuration",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -6369,7 +6371,8 @@
 											"description": "Your Datadog application key"
 										}
 									]
-								}
+								},
+								"description": "### Overview\n\nAdd channels to your existing Datadog-Slack integration directly through Datadog API. [Read more about Datadog-Slack integration][1].\n\n### Arguments\n\n* **`channels`** [*required*]: Array of slack channel objects to post to. A slack channel object is composed by:\n\n    * **`channel_name`** [*required*]: Your channel name e.g: `#general`, `#private`\n\n    * **`transfer_all_user_comments`** [*optional*, *default*=**False**]: To be notified for every comment on a graph, set it to `true`. If set to `False` use the `@slack-channel_name` syntax [for comments to be posted to slack][2].\n\n    * **`account`** [*required*]: Account to which the channel belongs to.\n\n[1]: https://docs.datadoghq.com/integrations/slack"
 							},
 							"response": []
 						}
@@ -6626,11 +6629,12 @@
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
 								},
-								"description": "Get all API key from a given Datadog Organization"
+								"description": "### Overview\n\nGet all API keys available for your account.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
 							},
 							"response": []
 						},
@@ -6669,11 +6673,12 @@
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									]
 								},
-								"description": "Create a new API key for your Datadog Account by providing its name."
+								"description": "### Overview\n\nCreate an API key with a given name.\n\n### Arguments\n\n* **`name`** [*required*]: Name of your API key."
 							},
 							"response": []
 						},
@@ -6716,17 +6721,20 @@
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									],
 									"variable": [
 										{
 											"key": "API_KEY",
-											"value": "{{api_key_to_get}}"
+											"value": "{{api_key_to_get}}",
+											"type": "string",
+											"description": "API to get information from"
 										}
 									]
 								},
-								"description": "Get a given API Key description from Datadog"
+								"description": "### Overview\n\nGet a given API key.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
 							},
 							"response": []
 						},
@@ -6766,17 +6774,20 @@
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									],
 									"variable": [
 										{
 											"key": "API_KEY",
-											"value": "<API_KEY_TO_EDIT>"
+											"value": "{{dd_api_key_to_edit}}",
+											"type": "string",
+											"description": "Datadog API Key to edit"
 										}
 									]
 								},
-								"description": "Edit the name of a given API key."
+								"description": "### Overview\n\nEdit an API key name.\n\n### Arguments\n\n* **`name`** [*required*]: Name of your API key."
 							},
 							"response": []
 						},
@@ -6816,17 +6827,20 @@
 										},
 										{
 											"key": "application_key",
-											"value": "{{dd_app_key}}"
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
 										}
 									],
 									"variable": [
 										{
 											"key": "API_KEY",
-											"value": "<API_KEY_TO_DELETE>"
+											"value": "{{dd_api_key-to_delete}}",
+											"type": "string",
+											"description": "API to delete"
 										}
 									]
 								},
-								"description": "Delete a given API key"
+								"description": "### Overview\n\nDelete a given API key.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
 							},
 							"response": []
 						}
@@ -6878,7 +6892,7 @@
 										}
 									]
 								},
-								"description": "Get all API key from a given Datadog Organization"
+								"description": "### Overview\n\nGet all application keys available for your account.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
 							},
 							"response": []
 						},
@@ -6920,7 +6934,7 @@
 										}
 									]
 								},
-								"description": "Create a new API key for your Datadog Account by providing its name."
+								"description": "### Overview\n\nCreate an application key with a given name.\n\n### Arguments\n\n* **`name`** [*required*]: Name of your application key."
 							},
 							"response": []
 						},
@@ -6967,12 +6981,14 @@
 									],
 									"variable": [
 										{
+											"id": "04a9097c-ccb7-4906-8030-3ce582e97140",
 											"key": "APP_KEY",
-											"value": "<APP_KEY_TO_GET>"
+											"value": "<APP_KEY_TO_GET>",
+											"type": "string"
 										}
 									]
 								},
-								"description": "Get a given API Key description from Datadog"
+								"description": "### Overview\n\nGet a given application key.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
 							},
 							"response": []
 						},
@@ -7017,11 +7033,12 @@
 									"variable": [
 										{
 											"key": "APP_KEY",
-											"value": "<APP_KEY_TO_EDIT>"
+											"value": "<APP_KEY_TO_EDIT>",
+											"type": "string"
 										}
 									]
 								},
-								"description": "Edit the name of a given API key."
+								"description": "### Overview\n\nEdit an application key name.\n\n### Arguments\n\n* **`name`** [*required*]: Name of your application key."
 							},
 							"response": []
 						},
@@ -7065,12 +7082,14 @@
 									],
 									"variable": [
 										{
+											"id": "f7b961e7-b2f8-4ec4-956d-9325dd2fd721",
 											"key": "APP_KEY",
-											"value": "<APP_KEY_TO_DELETE>"
+											"value": "<APP_KEY_TO_DELETE>",
+											"type": "string"
 										}
 									]
 								},
-								"description": "Delete a given API key"
+								"description": "### Overview\n\nDelete a given application key.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
 							},
 							"response": []
 						}
@@ -7101,7 +7120,7 @@
 							"raw": "{\n    \"message\": \"This is an example log message over HTTP!\",\n    \"http\": {\n        \"status_code\": 301,\n        \"method\": \"POST\",\n        \"request_id\": \"{{$randomInt}}\"\n    },\n    \"network\": {\n        \"client\": {\n            \"ip\": \"127.0.0.1\",\n            \"port\": \"80\"\n        },\n        \"destination\": {\n            \"ip\": \"10.0.0.1\"\n        }\n    },\n    \"duration\": 2000,\n    \"category\": \"test\"\n}"
 						},
 						"url": {
-							"raw": "https://http-intake.logs.datadoghq.com/v1/input/{{dd_api_key}}?ddsource=agent&service=myService&hostname=myhost",
+							"raw": "https://http-intake.logs.datadoghq.com/v1/input/{{dd_api_key}}?ddsource=postman&service=postman&hostname={{hostname}}",
 							"protocol": "https",
 							"host": [
 								"http-intake",
@@ -7117,19 +7136,22 @@
 							"query": [
 								{
 									"key": "ddsource",
-									"value": "agent"
+									"value": "postman",
+									"description": "Source to associate to your logs"
 								},
 								{
 									"key": "service",
-									"value": "myService"
+									"value": "postman",
+									"description": "Service that emitted the logs"
 								},
 								{
 									"key": "hostname",
-									"value": "myhost"
+									"value": "{{hostname}}",
+									"description": "Host from which the log is sent."
 								}
 							]
 						},
-						"description": "Protocols\thttp: 80 or https: 443\n\nQuery parameters\t \nddsource=<SOURCE>\nservice=<SERVICE>\nhostname=<HOSTNAME>\n"
+						"description": "### Overview\n\nSend your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n* Maximum content size per payload: 2MB\n* Maximum size for a single log: 256kB\n* Maximum array size if sending multiple logs in an array: 50 entries\n\n**Note**: If you are in the Datadog EU site (`app.datadoghq.eu`), the HTTP log endpoint is: `http-intake.logs.datadoghq.eu`.\n\n\n### Arguments\n\n| Item             | Description                                                                                                           |\n| ------           | ---------                                                                                                             |\n| Protocol         | http: 80<br>https: 443                                                                                                |\n| Host             | For Datadog US: `http-intake.logs.datadoghq.com` <br> For Datadog EU: `http-intake.logs.datadoghq.eu`                 |\n| Path             | `/v1/input/<DATADOG_API_KEY>`                                                                                         |\n| Query parameters | Query parameters available are the reserved log attribute. `?ddtags=<TAGS>&ddsource=<SOURCE>&service=<SERVICE>&hostname=<HOSTNAME>` |\n| Method           | `POST`                                                                                                                |\n| Content Type     | Available content type are: `text/plain`, `application/json`, `application/logplex-1`                                 |\n\n\n[Learn more about Log collection](https://docs.datadoghq.com/logs)"
 					},
 					"response": []
 				},
@@ -7194,8 +7216,8 @@
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"type": "text",
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -7219,15 +7241,17 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "{{dd_app_key}}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								}
 							]
 						},
-						"description": "List endpoint returns logs that match a log search query. Results are paginated.\n\nARGUMENTS\nquery [required]:\nThe search query - following the Log search syntax .\ntime.from [required]:\nMinimum timestamp for requested logs. Format can be either\nan ISO-8601 string\na unix timestamp (number representing the elapsed millisec since epoch)\ntime.to [required]:\nMaximum timestamp for requested logs. Format can be either\nan ISO-8601 string with minute, second or millisecond precision\na unix timestamp (number representing the elapsed millisec since epoch)\ntime.timezone [optional, default=None]: Can be specified both as an offset (e.g. “UTC+03:00”) or a regional zone (e.g. “Europe/Paris”)\ntime.offset [optional, default=None]: Equivalent to time.timezone. But value in seconds. If both timezone and offset are specified, timezone is ignored.\nstartAt [optional, default=None]:\nHash identifier of the first log to return in the list, available in a log id attribute. This parameter is used for the pagination feature. Note: this parameter is ignored if the corresponding log is out of the scope of the specified time window.\nsort [optional, default=desc]:\nTime-ascending asc or time-descending descresults.\nlimit [optional, default=10]:\nNumber of logs return in the response (maximum is 1000)\nindex [optional, default=main]:\nFor multi-index organizations, the log index in which the request is performed.\nPAGINATION\nRetrieve a log list longer than the 1000 logs limit with the Log List API Pagination feature:\n\nfor the first request, use no startAt parameter.\nfor the N-th request, use nextLogID of N-1th request result as the startAt parameter value.\nFor better control over pagination results, you should use an absolute time parameter - don’t use thenow keyword."
+						"description": "### Overview\n\nList endpoint returns logs that match a log search query. Results are paginated.\n\n### Arguments\n\n* **`query`** [*required*]: The search query - following the [Log search syntax][1] .\n* **`time.from`** [*required*]: Minimum timestamp for requested logs. Format can be either\n    - an ISO-8601 string\n    - a unix timestamp (number representing the elapsed millisec since epoch)\n    - a relative time (`now -10m`, `now - 1h`, `now - 1d`)\n* **`time.to`** [*required*]: Maximum timestamp for requested logs. Format can be either\n    - an ISO-8601 string with minute, second or millisecond precision\n    - a unix timestamp (number representing the elapsed millisec since epoch)\n    - a relative time (`now`, `now -10m`, `now - 1h`, `now - 1d`)\n* **`time.timezone`** [*optional*, *default*=**None**]: Can be specified both as an offset (e.g. \"UTC+03:00\") or a regional zone (e.g. \"Europe/Paris\")\n* **`time.offset`** [*optional*, *default*=**None**]: Equivalent to `time.timezone`. But value in seconds. If both timezone and offset are specified, timezone is ignored.\n* **`startAt`** [*optional*, *default*=**None**]: Hash identifier of the first log to return in the list, available in a log `id` attribute. This parameter is used for the [pagination feature](#pagination). **Note**: this parameter is ignored if the corresponding log is out of the scope of the specified time window.\n* **`sort`** [*optional*, *default*=**desc**]: Time-ascending `asc` or time-descending `desc`results.\n* **`limit`** [*optional*, *default*=**10**]: Number of logs return in the response (maximum is 1000)\n* **`index`** [*optional*, *default*=**main**]: For multi-index organizations, the log index in which the request is performed.\n\n#### Pagination\n\nRetrieve a log list longer than the 1000 logs limit with the Log List API Pagination feature:\n\n* for the first request, use no `startAt` parameter.\n* for the N-th request, use `nextLogID` of N-1th request result as the `startAt` parameter value.\n\nFor better control over pagination results, you should use an absolute `time` parameter - don't use the`now` keyword.\n\n**If you are thinking about archiving logs for your organization, consider using Datadog archive capabilities instead of the log list API. See [Datadog Logs Archive documentation][2].**\n\n[1]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax\n[2]: https://docs.datadoghq.com/logs/archives"
 					},
 					"response": []
 				}
@@ -7267,48 +7291,7 @@
 							"script": {
 								"id": "757736b1-36c3-47a0-b919-3041e624db1f",
 								"exec": [
-									"// Set current date and time",
-									"// YYYY-MM-ddTHH:mm:ss.SSSZ",
-									"var curr_date = (new Date());",
-									"var from_date = (new Date());",
-									"var to_date = (new Date());",
-									"",
-									"// Set timeframe window in minutes",
-									"// Positive number sets to_date forward",
-									"// Negative number sets from_date backwards",
-									"var window_minutes = -30",
-									"if (window_minutes > 0) {",
-									"    // Look ahead: adjusts to_date",
-									"    to_date.setMinutes(curr_date.getMinutes()+window_minutes);",
-									"} else {",
-									"    // Look behind: adjusts from_date",
-									"    from_date.setMinutes(curr_date.getMinutes()+window_minutes);",
-									"}",
-									"",
-									"// timestamp in ms",
-									"var from_ts_ms = parseInt(Math.floor(from_date.getTime()));",
-									"var to_ts_ms = parseInt(Math.floor(to_date.getTime()));",
-									"// timestamp in seconds",
-									"var from_ts = parseInt(from_ts_ms/1000);",
-									"var to_ts = parseInt(to_ts_ms/1000);",
-									"",
-									"//// Uncomment for debugging.",
-									"// console.log(from_date);",
-									"// console.log(from_ts_ms);",
-									"// console.log(from_ts);",
-									"",
-									"// console.log(to_date);",
-									"// console.log(to_ts_ms);",
-									"// console.log(to_ts);",
-									"",
-									"//// Set as Postman variables",
-									"pm.environment.set(\"from_date\", from_date);",
-									"pm.environment.set(\"from_ts_ms\", from_ts_ms);",
-									"pm.environment.set(\"from_ts\", from_ts);",
-									"",
-									"pm.environment.set(\"to_date\", to_date);",
-									"pm.environment.set(\"to_ts_ms\", to_ts_ms);",
-									"pm.environment.set(\"to_ts\", to_ts);"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -7337,24 +7320,27 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "{{dd_app_key}}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								},
 								{
 									"key": "from",
-									"value": "{{from_ts}}"
+									"value": "{{from_ts}}",
+									"description": "EPOCH Timestamp from which to list metrics."
 								}
 							]
 						},
-						"description": "ARGUMENTS\n\n* from [required]\nseconds since the unix epoch"
+						"description": "### Overview\n\nGet the list of actively reporting metrics from a given time until now. This endpoint is not available in the Python and Ruby libraries.\n\n### Arguments\n\n* **`from`** [*required*]: EPOCH timestamp from which to list metrics."
 					},
 					"response": []
 				},
 				{
-					"name": "POST Time Series Point",
+					"name": "Send Time Series Point",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -7395,15 +7381,17 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "{{dd_app_key}}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								}
 							]
 						},
-						"description": "The metrics end-point allows you to post time-series data that can be graphed on Datadog's dashboards.\n\nARGUMENTS\n\n*series [required]\nA JSON array of metrics where each item in the array contains the following arguments:\n\n*metric [required]\nThe name of the time series\n\n*points [required]\nA JSON array of points. Each point is of the form:\n[[POSIX_timestamp, numeric_value], ...]\nNote that the timestamp should be in seconds, must be current, and the numeric value is a 32bit float gauge-type value. Current is defined as not more than 10 minutes in the future or more than 1 hour in the past.\n\n*host [optional, default=None]\nThe name of the host that produced the metric.\n\n*tags [optional, default=None]\nA list of tags associated with the metric."
+						"description": "### Overview\n\nThe metrics end-point allows you to post time-series data that can be graphed on Datadog's dashboards. The limit for compressed payloads is 3.2 megabytes (3200000), and 62 megabytes (62914560) for decompressed payloads.\n\n### Arguments\n\n* **`series`** [*required*]: Pass a JSON array where each item in the array contains the following arguments:\n\n    * **`metric`** [*required*]: The name of the timeseries\n    * **`type`** [*optional*, *default*=**gauge**]: [Type][1] of your metric either: `gauge`, `rate`, or `count`\n    * **`interval`** [*optional*, *default*=**None**]: If the [type][1] of the metric is `rate` or `count`, define the corresponding interval.\n    * **`points`** [*required*]: A JSON array of points. Each point is of the form: `[[POSIX_timestamp, numeric_value], ...]`\n        **Note**: The timestamp should be in seconds, current, and its format should be a 32bit float gauge-type value. Current is defined as not more than 10 minutes in the future or more than 1 hour in the past.\n    * **`host`** [*optional*]: The name of the host that produced the metric.\n    * **`tags`** [*optional*, *default*=**None**]: A list of tags associated with the metric.\n\n[1]: https://docs.datadoghq.com/developers/metrics/#metric-types"
 					},
 					"response": []
 				},
@@ -7490,27 +7478,32 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "{{dd_app_key}}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								},
 								{
 									"key": "from",
-									"value": "{{from_ts}}"
+									"value": "{{from_ts}}",
+									"description": "EPOCH Timestamp from which to query metrics data."
 								},
 								{
 									"key": "to",
-									"value": "{{to_ts}}"
+									"value": "{{to_ts}}",
+									"description": " EPOCH Timestamp until which to query metrics data."
 								},
 								{
 									"key": "query",
-									"value": "system.cpu.idle{*}by{host}"
+									"value": "system.cpu.idle{*}by{host}",
+									"description": "Query string for the metric to retrieve"
 								}
 							]
 						},
-						"description": "This end point allows you to query for metrics from any time period.\n\nARGUMENTS\n\n*from [required]\nseconds since the unix epoch\n\n*to [required]\nseconds since the unix epoch\n\n*query [required]\nThe query string\n\n\nQUERY LANGUAGE\n\nAny query used for a graph can be used here. See here for more details. The time between from and to should be less than 24 hours. If it is longer, you will receive points with less granularity."
+						"description": "### Overview\n\nThis endpoint allows you to query for metrics from any time period.\n\n### Arguments\n\n* **`from`** [*required*]: EPOCH Timestamp from which to query metrics data.\n* **`to`** [*required*]: EPOCH Timestamp until which to query metrics data.\n* **`query`** [*required*]: The query string for the metric to retrieve. See [graphing documentation]() to learn how to build a metrics query."
 					},
 					"response": []
 				},
@@ -7540,21 +7533,25 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "{{dd_app_key}}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								}
 							],
 							"variable": [
 								{
 									"key": "METRIC_NAME",
-									"value": "system.cpu.system"
+									"value": "{{metrics_name}}",
+									"type": "string",
+									"description": "Name of the metric to retrieve metadata from."
 								}
 							]
 						},
-						"description": "ARGUMENTS\n\nThis endpoint takes no JSON arguments"
+						"description": "### Overview\n\nThe metrics metadata endpoint allows you to get metadata about a specific metric.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
 					},
 					"response": []
 				},
@@ -7570,7 +7567,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"description\": \"The percent of time the CPU spent running the kernel 2.\",\n    \"short_name\": \"cpu system\",\n    \"integration\": \"system\",\n    \"statsd_interval\": null,\n    \"per_unit\": null,\n    \"type\": \"gauge\",\n    \"unit\": \"percent\"\n}"
+							"raw": "{\n    \"description\": \"<METRIC_DESCRIPTION>\",\n    \"short_name\": \"<METRIC_SHORT_NAME>\",\n    \"type\": \"<METRIC_TYPE>\"\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/metrics/:METRIC_NAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -7589,21 +7586,25 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "{{dd_app_key}}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								}
 							],
 							"variable": [
 								{
 									"key": "METRIC_NAME",
-									"value": "system.cpu.system"
+									"value": "{{metric_name}}",
+									"type": "string",
+									"description": "Name of the metric to edit metadata from."
 								}
 							]
 						},
-						"description": "ARGUMENTS\n\nThe metrics metadata endpoint allows you to edit fields of a metric's metadata.\n\nARGUMENTS\n\n*type [optional, default=None]\nmetric type such as 'gauge' or 'rate'\n\n*description [optional, default=None]\nstring description of the metric\n\n*short_name [optional, default=None]\nshort name string of the metric\n\n*unit [optional, default=None]\nprimary unit of the metric such as 'byte' or 'operation'\n\n*per_unit [optional, default=None]\n'per' unit of the metric such as 'second' in 'bytes per second'\n\n*statsd_interval [optional, default=None]\nif applicable, statds flush interval in seconds for the metric"
+						"description": "### Overview\n\nThe metrics metadata endpoint allows you to edit fields of a metric's metadata. [Find more about supported types][1]\n\n### Arguments\n\n* **`type`** [*required*]: [Metric type][1] such as **gauge** or **rate**\n* **`description`** [*optional*, *default*=**None**]: String description of the metric\" default\n* **`short_name`** [*required*]: Short name string of the metric\n* **`unit`** [*optional*, *default*=**None**]: Primary unit of the metric such as **byte** or **operation**. [See the full list of allowed metrics unit][2]\n* **`per_unit`** [*optional*, *default*=**None**]: Per unit of the metric such as **second** in **bytes per second**\n* **`statsd_interval`** [*optional*, *default*=**None**]: If applicable, statds flush interval in seconds for the metric\n\n[1]: https://docs.datadoghq.com/developers/metrics\n[2]: https://docs.datadoghq.com/developers/metrics/#units"
 					},
 					"response": []
 				},
@@ -7625,7 +7626,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/search?q=metrics:system.cpu&api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"raw": "https://api.datadoghq.com/api/v1/search?q=metrics:{{metric_name}}&api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -7640,23 +7641,49 @@
 							"query": [
 								{
 									"key": "q",
-									"value": "metrics:system.cpu"
+									"value": "metrics:{{metric_name}}",
+									"description": "Name of the metric to search on"
 								},
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "{{dd_app_key}}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								}
 							]
-						}
+						},
+						"description": "### Overview\n\nThis endpoint allows you to search for metrics from the last 24 hours in Datadog.\n\n### Arguments\n\n* `q` [*required*]: The query string. Must be prefixed with `metrics:`."
 					},
 					"response": []
 				}
 			],
-			"description": "The metrics end-point allows you to:\n\n*Post metrics data so it can be graphed on Datadog's dashboards\n\n*Query metrics from any time period\n\nAs occurs within the Datadog UI, a graph can only contain a set number of points and as the timeframe over which a metric is viewed increases, aggregation between points will occur to stay below that set number.\n\nThus, if you are querying for larger timeframes of data, the points returned will be more aggregated. The max granularity within Datadog is one point per second, so if you had submitted points at that interval and requested a very small interval from the query API (in this case, probably less than 100 seconds), you could end up getting all of those points back. Otherwise, our algorithm tries to return about 150 points per any given time window, so you'll see coarser and coarser granularity as the amount of time requested increases. We do this time aggregation via averages."
+			"description": "The metrics end-point allows you to:\n\n* Post metrics data so it can be graphed on Datadog's dashboards\n* Query metrics from any time period\n\nAs occurs within the Datadog UI, a graph can only contain a set number of points and as the timeframe over which a metric is viewed increases, aggregation between points occurs to stay below that set number.\n\nThus, if you are querying for larger timeframes of data, the points returned is more aggregated. The max granularity within Datadog is one point per second, so if you had submitted points at that interval and requested a very small interval from the query API (in this case, probably less than 100 seconds), you could end up getting all of those points back. Otherwise, Datadog algorithm tries to return about 150 points per any given time window, so you'll see coarser and coarser granularity as the amount of time requested increases. Time aggregation is done via averages.\n\nMetric points are stored at the 1 second resolution, but it's optimal to submit points every 15 seconds. Any metrics with fractions of a second timestamps gets rounded to the nearest second, and if any points have the same timestamp, the latest point overwrites the previous ones.\n\nThere is a soft limit of 100 timeseries per host, where a timeseries is defined as a unique combination of a [metric name and its associated tags]().",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0b7857dc-49bc-4d0e-95d2-3e4cd6f0cf69",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "bad82d75-65f4-47c9-b07c-13a71923759f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
 		},
 		{
 			"name": "Monitors",
