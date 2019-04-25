@@ -177,7 +177,7 @@ Only logs with a severity equal or higher to the specified one are sent.
 
 ### Change the destination
 
-By default, the loggers are sending logs to Datadog. It is also possible to configure the logger to send logs to the console or to not send logs at all. This can be used in development environment to keep the logs locally.
+By default, the loggers are sending logs to Datadog. It is also possible to configure the logger to send logs to the console or not to send logs at all. This can be used in the development environment to keep the logs locally.
 
 Use the `setLogHandler` function with the values `http` (default), `console`, or `silent`:
 ```
@@ -186,9 +186,9 @@ Datadog.logger.setLogHandler('<HANDLER>')
 
 ### Define multiple loggers
 
-The library contains a default logger but it is also possible define different loggers which can be convenient when several team are working on the same project.
+The library contains a default logger, but it is also possible to define different loggers which can be convenient when several teams are working on the same project.
 
-Each logger can optionally be configure with its own log level, handler and context. Note that the `Global Context` is added on top of each logger context. 
+Each logger can optionally be configured with its own log level, handler, and context. Note that the `Global Context` is added on top of each logger context. 
 
 Use the following to define a custom logger:
 
@@ -218,7 +218,7 @@ const signupLogger = createLogger('signupLogger'})
 signupLogger.addContext({ env: 'staging'})
 ```
 
-It can now be used in different part of the code with:
+It can now be used in a different part of the code with:
 
 ```
 ...
