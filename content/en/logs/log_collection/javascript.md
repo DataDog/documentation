@@ -78,7 +78,7 @@ The following parameters can be used to configure the library to send logs to Da
 
       // OPTIONAL
       // add global metadata attributes
-      Datadog.addLoggerGlobalContext({<META_KEY>: '<META_VALUE>'});
+      Datadog.addLoggerGlobalContext({<META_KEY>: <META_VALUE>});
     </script>
     ...
   </head>
@@ -201,7 +201,7 @@ createLogger (<LOGGER_NAME>, {
 ```
 
 Those parameters can also be set thanks to the `addContext`, `setLogLevel`, and `setLogHandler` functions.
-You can then get this logger in any part of your Javascript code thanks to the `getLogger` function:
+After the creation of this logger, you can then get it in any part of your Javascript code thanks to the `getLogger` function:
 
 ```
 const my_logger = getLogger('<LOGGER_NAME>') 
