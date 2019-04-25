@@ -113,7 +113,7 @@ Le bouton **View in context** met à jour la requête de recherche afin d'affich
 {{% /tab %}}
 {{% tab "Analyses de logs" %}}
 
-Une fois les étapes de [traitement de Datadog][1], de parsing de logs et d'application des [facettes](#facettes) et des [mesures](#mesures) sur les attributs importants, vous pouvez représenter graphiquement des requêtes de log et afficher des valeurs maximales, des moyennes, des centiles, des valeurs uniques et plus encore.
+Une fois les étapes de [traitement de Datadog][1], de parsing de logs et d'application des [facettes](#facettes) et des [mesures](#mesures) sur les attributs importants, vous pouvez représenter graphiquement des requêtes de log et afficher des valeurs maximales, des moyennes, des centiles, des totaux uniques et plus encore.
 
 Suivez le [guide sur la représentation graphique de logs][2] pour découvrir les différentes options de graphiques.
 
