@@ -58,7 +58,7 @@ The Javascript logging library is in private beta. <a href="https://docs.datadog
 The following parameters can be used to configure the library to send logs to Datadog:
 
 * Set `isCollectingError` to `false` to turn off the automatic JS and console error collection.
-* Use `addGlobalContext` to add JSON attribute to all the generated logs
+* Use `addLoggerGlobalContext` to add JSON attribute to all the generated logs
 * Set `publicApiKey` to the value of the public API key (**only public API keys can be used in this library**)
 
 {{< tabs >}}
@@ -78,7 +78,7 @@ The following parameters can be used to configure the library to send logs to Da
 
       // OPTIONAL
       // add global metadata attributes
-      Datadog.addLoggerGlobalContext({'<META_KEY>': '<META_VALUE>'});
+      Datadog.addLoggerGlobalContext({<META_KEY>: '<META_VALUE>'});
     </script>
     ...
   </head>
