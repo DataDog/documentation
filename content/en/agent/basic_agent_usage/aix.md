@@ -2,6 +2,9 @@
 title: Basic Agent Usage for AIX
 kind: documentation
 further_reading:
+- link: "https://www.datadoghq.com/blog/announcing-ibm-aix-agent/"
+  tag: "Blog"
+  text: "Monitor AIX with the Datadog Unix Agent"
 ---
 
 <div class="alert alert-info">
