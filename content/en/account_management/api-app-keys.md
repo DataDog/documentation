@@ -1,9 +1,10 @@
 ---
-title: API and Application Key Management
+title: API and Application Keys
 kind: faq
 aliases:
     - /account_management/faq/how-do-i-reset-my-application-keys/
     - /agent/faq/how-do-i-reset-my-datadog-api-keys/
+    - /account_management/faq/api-app-key-management/
 ---
 
 ## API keys
@@ -37,7 +38,7 @@ To add a Datadog API, application, or public API key, navigate to [Integration -
 
 To remove a Datadog API or application or public API key, navigate to [Integration -> APIs][2] and select the **Revoke** button next to the key you want to remove:
 
-{{< img src="account_management/faq/Application_Keys.jpg" alt="Application Keys" responsive="true" >}}
+{{< img src="account_management/api_app_keys/application_keys.png" alt="Application Keys" responsive="true" >}}
 
 ## Transferring API/Application Keys
 Due to security reasons, Datadog does not transfer API/application keys from one user to another. The recommended best practice is to keep track of API/application keys and rotate those keys once a user has left the company. This way, a user that has left the company no longer has access to your account and Datadog’s API. Transferring the API/application key allows a user that no longer remains with the company to continue to send and receive data from the Datadog API. Customers have also asked to change the handle that the API/application keys are associated with. This, however, does not resolve the inherent issue: that a user that no longer remains with the company continues to have the ability to send and retrieve data from the Datadog API.

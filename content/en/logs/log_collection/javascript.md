@@ -243,6 +243,6 @@ signupLogger.info('Test sign up completed')
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/account_management/faq/api-app-key-management/#api-keys
-[2]: https://docs.datadoghq.com/account_management/faq/api-app-key-management/#public-api-keys
+[1]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
+[2]: https://docs.datadoghq.com/account_management/api-app-keys/#public-api-keys
 [3]: https://app.datadoghq.com/account/settings#api
