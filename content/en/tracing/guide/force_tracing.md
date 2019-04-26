@@ -6,13 +6,9 @@ aliases:
 ---
 
 
-## Force Tracing
-
-APM enables priority sampling by default to allows traces between two Datadog endpoints to be sampled together. This prevents trace sampling from removing segments of a distributed trace (i.e. ensures completeness) and helps removing unimportant ones. You can override this functionality to force keep a trace (critical transaction, debug mode, etc.) or force drop a trace (health checks, static assets, etc) by the agent and the server using forced tracing.
+APM enables priority sampling by default to allow traces between two Datadog endpoints to be sampled together. This prevents trace sampling from removing segments of a distributed trace (i.e. ensures completeness) and helps removing unimportant ones. You can override this functionality to force keep a trace (critical transaction, debug mode, etc.) or force drop a trace (health checks, static assets, etc) by the agent and the server using forced tracing.
 
 Forced tracing should be done only before any context propagation. If this happens after the propagation of a context, the system can’t ensure that the entire trace is sampled properly.
-
-For a more detailed explanations of sampling, check the [sampling and storage][1] documentation.
 
 
 {{< tabs >}}
@@ -159,5 +155,7 @@ another_span->SetTag("sampling.priority", 0); // Discard this span.
 
 {{% /tab %}}
 {{< /tabs >}}
+
+For a more detailed explanations of sampling, check the [sampling and storage][1] documentation.
 
 [1]: /tracing/guide/trace_sampling_and_storage
