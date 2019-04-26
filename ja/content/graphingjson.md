@@ -11,7 +11,7 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 
 -->
 
-グラフエディターの設定には、GUI(デフォルトの手法)とJSONの記述(より完全な手法)の2種類があります。このページではJSON形式を使用した手法について解説します。GUIでの設定については、[グラフ表示入門](/ja/graphing)を参照して下さい。
+グラフエディターの設定には、GUI(デフォルトの手法)とJSONの記述(より完全な手法)の2種類があります。このページではJSON形式を使用した手法について解説します。GUIでの設定については、[グラフ表示入門](/graphing)を参照して下さい。
 
 ## JSONエディターを使用したグラフ表示
 

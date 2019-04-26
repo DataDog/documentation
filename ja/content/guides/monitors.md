@@ -30,7 +30,7 @@ page as well as general monitor management on the
 [Manage Monitors](https://app.datadoghq.com/monitors) page.
  -->
 
-***Monitor(監視)機能のより詳しいレファレンスは、[Monitoringレファレンス](/ja/monitoring) ページを参照して下さい。***
+***Monitor(監視)機能のより詳しいレファレンスは、[Monitoringレファレンス](/monitoring) ページを参照して下さい。***
 
 インフラ全体を一箇所で監視しようとする場合、そのインフラが危機的な状況になっていることを検知する方法を確立するのは重要な作業です。
 Datadogでは、能動的にメトリクス, インテグレーション, ネットワークの接続状態, その他を監視してくれるMonitor機能を設定することができます。
@@ -59,8 +59,8 @@ Here is a quick overview of the different terms used in this guide.
 - **Status**: 各Agent Checkは、ホスト上で定期的に実行されOK, WARNING, CRITICALのステータスをDatadogに送信します。
 - **Check**: Agent Checkのことで、複数のステータスを送信します。
 - **Monitor**: Agent Checkのステータスやメトリクスの閾値の確認手順、その他のアラート条件を元に通知を送信します。
-- **Monitorタイプ**: host-, metric-, integration-, process-, network-, event-based, custom, APM-, composite- があります。 特定のMonitorタイプの詳細に関しては、[Monitoringレファレンス](/ja/monitoring) ページを参照して下さい。
-- **タグ**: 各メトリクスやホストに対して付けることができるラベルです。タグの詳細に関しては、[Tagging](/ja/guides/tagging) ページを参照して下さい。
+- **Monitorタイプ**: host-, metric-, integration-, process-, network-, event-based, custom, APM-, composite- があります。 特定のMonitorタイプの詳細に関しては、[Monitoringレファレンス](/monitoring) ページを参照して下さい。
+- **タグ**: 各メトリクスやホストに対して付けることができるラベルです。タグの詳細に関しては、[Tagging](/guides/tagging) ページを参照して下さい。
 
 <!--
 ## Creating a Monitor
@@ -74,7 +74,7 @@ page by hovering over **Monitors** in the main menu and clicking **New Monitor**
 on the left. This page shows how to setup a metric Monitor, but see the [Monitoring Reference](/monitoring) to learn more about other Monitor types.
  -->
 
-[Create Monitors](https://app.datadoghq.com/monitors#/create)のページへ移動するには、メインメニューの **Monitors** にマウスオーバーし現れるサブメニューの **New Monitor** を選択します(テーマの選択次第により、メインメニューは画面の左側あるいは上部に配置されています)。ページが表示されると各Monitorタイプが左側に一覧で表示されます。このガイドでは、メトリクスを対象にしたMonitorタイプについての設定方法を説明していきます。より詳しい各Monitorタイプの設定方法については、[Monitoringレファレンス](/ja/monitoring)ページを参照して下さい。
+[Create Monitors](https://app.datadoghq.com/monitors#/create)のページへ移動するには、メインメニューの **Monitors** にマウスオーバーし現れるサブメニューの **New Monitor** を選択します(テーマの選択次第により、メインメニューは画面の左側あるいは上部に配置されています)。ページが表示されると各Monitorタイプが左側に一覧で表示されます。このガイドでは、メトリクスを対象にしたMonitorタイプについての設定方法を説明していきます。より詳しい各Monitorタイプの設定方法については、[Monitoringレファレンス](/monitoring)ページを参照して下さい。
 
 {{< img src="guides/monitor/nav.png" >}}
 
@@ -146,7 +146,7 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
 
     Datadogに送信している全てのメトリクスをもとにMonitor設定を作成することができます。
     この項目では、グラフ表示に使っている標準的な対象範囲(スコープ)の指定の規則が適用されます。
-    この規則の詳細に関しては、グラフ表示入門のページの[対象範囲の指定(scope)](/ja/graphingjson/#対象範囲の指定-scope-スコープ)を参照してください。
+    この規則の詳細に関しては、グラフ表示入門のページの[対象範囲の指定(scope)](/graphingjson/#対象範囲の指定-scope-スコープ)を参照してください。
 
 <!--
 3. Select the alert grouping.
@@ -262,9 +262,9 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
       - 比較する値の変化は、設定された時間枠の範囲内で指定します。時間枠は5分から24時間の間で指定が可能です (最短で5分前の値と、最大で24時間前の値との比較)。
       - **threshold alert** とほぼ同じように、*集計期間* と *集計期間内に含まれるデータの集計方法* を設定します。
 
-    - Anomaly Detection のより詳しい設定方法は、[Anomaly Detection](/ja/guides/anomalies) ガイドを参照して下さい。
+    - Anomaly Detection のより詳しい設定方法は、[Anomaly Detection](/guides/anomalies) ガイドを参照して下さい。
 
-    - Outlier Detection のより詳しい設定方法は、[Outlier Detection](/ja/guides/outliers) ガイドを参照して下さい。
+    - Outlier Detection のより詳しい設定方法は、[Outlier Detection](/guides/outliers) ガイドを参照して下さい。
 
 <!--
 5. You can optionally **notify on no data** after a configurable timeframe. At
@@ -413,7 +413,7 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
    {{< img src="guides/monitor/downtime-silence.png" alt="downtime-silence" >}}
 
-   停止したい特定のMonitorを指定するか、ここでは特定のMonitorは指定せずすべてのMonitorを停止の対象とします。続いて、ダウンタイムの対象を限定するために、特定のホスト、デバイス、あるいは任意のタグによって範囲(スコープ)の設定をします。範囲(スコープ)の設定については、グラフ表示入門のページのJSONの使用方法、[対象範囲の指定(scope)](/ja/graphingjson/#対象範囲の指定-scope-スコープ)も併せて参照してください。
+   停止したい特定のMonitorを指定するか、ここでは特定のMonitorは指定せずすべてのMonitorを停止の対象とします。続いて、ダウンタイムの対象を限定するために、特定のホスト、デバイス、あるいは任意のタグによって範囲(スコープ)の設定をします。範囲(スコープ)の設定については、グラフ表示入門のページのJSONの使用方法、[対象範囲の指定(scope)](/graphingjson/#対象範囲の指定-scope-スコープ)も併せて参照してください。
 
    すべてのMonitorを停止の対象としたうえで範囲(スコープ)の設定によって対象を限定するような場合には、"Preview affected monitors" (対象となるMonitorをプレビューする)をクリックすることで、現在対象となっているMonitorのリストが表示されます。作成時に停止の対象としたMonitorの範囲(スコープ)は、ダウンタイムのスケジュール設定後でも修正することができます。
 
