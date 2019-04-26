@@ -19,7 +19,7 @@ This results in `metric.test` being reported without a host tag and only `box:va
 
 Refer to Datadog's [custom metrics][1] documentation for more information.
 
-**Note**: When removing the host tag, you are removing a unique identifier for the submission of [custom metrics][1]. When two datapoints are submitted with the same timestamp/metric/tag combination and do not have unique identifiers, the last received/processed value overwrites the value stored. To avoid this edge case, ensure that no two hosts are submitting the same exact metric/tag at any given timestamp.
+**Note**: When removing the host tag, you are removing a unique identifier for the submission of [custom metrics][1]. When two datapoints are submitted with the same timestamp/metric/tag combination and do not have unique identifiers, the last received/processed value overwrites the value stored. To avoid this edge case, ensure that no two hosts are submitting the same exact metric or tag at any given timestamp.
 
 [1]: /developers/metrics/custom_metrics
 
