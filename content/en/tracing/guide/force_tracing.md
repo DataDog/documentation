@@ -129,7 +129,7 @@ Manually keep or drop a trace:
 
 ```php
 
-$tracer = \OpenTracing\GLobalTracer::get();
+$tracer = \OpenTracing\GlobalTracer::get();
 $span = $tracer->getActiveSpan();
 
 if (null !== $span) {
