@@ -61,7 +61,7 @@ List of all environment variables available for tracing within the Docker Agent:
 
 ## Tracing from other containers
 
-As with DogStatsD, traces can be submitted to the Agent from other containers either using [Docker networks](#docker-network) or with the [Docker host IP](#host-ip).
+As with DogStatsD, traces can be submitted to the Agent from other containers either using [Docker networks](#docker-network) or with the [Docker host IP](#docker-host-ip ).
 
 ### Docker Network
 
