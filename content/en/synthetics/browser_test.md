@@ -34,15 +34,11 @@ Define the configuration of your browser test.
 
 {{< img src="synthetics/browser_test/browser_check_configuration.png" alt="Browser Tests make request" responsive="true" style="width:80%;">}}
 
-1. Give your browser test a name. 
+1. Give your browser test a name.
 2. Enter the Start URL. This is the URL from which your browser test starts the scenario.
 3. Define Tags with the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` in the Synthetics page.
 4. Define on which device to run your check. Available devices are: `Laptop Large`, `Tablet`, and `Mobile Small`.
-5. Pick-up locations to run the test from. Available locations are:
-    * Frankfurt (Request made from an AWS Datacenter)
-    * Tokyo (Request made from an AWS Datacenter)
-    * Oregon (Request made from an AWS Datacenter)
-    * London (Request made from an AWS Datacenter)
+5. Pick-up locations to run the test from. Many AWS locations from around the world are available (Frankfurt, Tokyo, Oregon, ...).
 6. Choose a Check frequency between "1 run per 5 minute interval" to "1 run per week":
 
     {{< img src="synthetics/browser_test/check_frequency.png" alt="Check frequency" responsive="true" style="width:80%;">}}
@@ -90,7 +86,7 @@ Assertions allow you to check if an element, a content, or some text is availabl
 
 #### Navigation
 
-The navigation action allow you to: 
+The navigation action allow you to:
 
 * Refresh the current page of the scenario.
 * Follow a specific link.
@@ -120,7 +116,7 @@ To define a variable, enter a capitalized name then choose its type between:
 
 ##### Use the variable
 
-Once created, use your variable to set an input text on a form or search bar. Use the little hand on your variable box to create an input step: 
+Once created, use your variable to set an input text on a form or search bar. Use the little hand on your variable box to create an input step:
 
 {{< img src="synthetics/browser_test/variable_input.gif" alt="Variable Input" responsive="true" style="width:80%;">}}
 
