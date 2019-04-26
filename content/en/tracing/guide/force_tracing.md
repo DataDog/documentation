@@ -103,15 +103,14 @@ func handler(w http.ResponseWriter, r *http.Request) {
 Manually keep or drop a trace:
 
 ```js
-const priority = require('dd-trace/ext/priority')
+const tags = require('dd-trace/ext/tags')
 
 // To reject the trace
-span.setTag('sampling.priority', priority.USER_REJECT)
+span.setTag(tags.MANUAL_DROP)
 
 // To keep the trace
-span.setTag('sampling.priority', priority.USER_KEEP)
-````
-
+span.setTag(tags.MANUAL_KEEP)
+```
 
 {{% /tab %}}
 {{% tab ".NET" %}}
