@@ -181,6 +181,10 @@ You can also specify:
 
 **Note**: The `proc_only_if` guard condition is useful for HA scenarios where a database can move between servers.
 
+If your custom metrics are not appearing in Datadog, check the agent log file. If you see the following error: `Could not call procedure <PROCEDURE_NAME>: You must supply -1 parameters for this stored procedure`, it could be one of the following issues:
+* The `<PROCEDURE_NAME>` is typed incorrectly.
+* The database username specified in the configuration may not have permission to run the stored procedure. 
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
