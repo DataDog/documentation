@@ -25,9 +25,9 @@ Cette section spécifie le format brut des datagrammes pour chaque type de donn�
 |---------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `metric.name` | Oui      | Une chaîne sans deux-points, barres ni « @ ». Consultez la [stratégie de nommage des métriques][1].                                                                                 |
 | `value`       | Oui      | Un nombre entier ou une valeur flottante.                                                                                                                                               |
-| `type`        | Oui      | `c` pour counter, `g` pour gauge, `ms` pour timer, `h` pour histogram, `s` pour ensemble.                                                                                    |
+| `type`        | Oui      | `c` pour counter, `g` pour gauge, `ms` pour timer, `h` pour histogram, `s` pour set.                                                                                    |
 | `sample rate` | Non       | Une valeur flottante entre 0 et 1 (inclusif). Elle ne fonctionne qu'avec des métriques counter, histogram et timer. Valeur par défaut : 1 (entraîne un échantillonnage 100 % du temps).                            |
-| `tags`        | Non       | Une liste de tags séparés par des virgules. Utilisez deux-points pour les tags clé/valeur, p. ex. `env:prod`. La clé `device` est réservée : Datadog ne prend pas en charge un tag ajouté par un utilisateur comme `device:foobar`. |
+| `tags`        | Non       | Une liste de tags séparés par des virgules. Utilisez deux-points pour les tags clé/valeur, p. ex. `env:prod`. La clé `device` est réservée : Datadog supprime un tag ajouté par un utilisateur comme `device:foobar`. |
 
 Voici quelques exemples de datagrammes :
 

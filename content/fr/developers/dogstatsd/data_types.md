@@ -19,7 +19,7 @@ Les exemples sont tous en Python, grâce au [client Python officiel de Datadog][
 
 ## Métriques
 
-Les utilisateurs de StatsD sont habitués à utiliser des counters, gauges et ensembles. Les histogrammes sont spécifiques à DogStatsD. Les minuteurs, qui existent dans StatsD, sont un sous-ensemble d'histogrammes dans DogStatsD.
+Les utilisateurs de StatsD sont habitués à utiliser des counters, gauges et sets. Les histogrammes sont spécifiques à DogStatsD. Les minuteurs, qui existent dans StatsD, sont un sous-ensemble d'histogrammes dans DogStatsD.
 
 ### Counters
 
@@ -220,9 +220,9 @@ Dans les deux cas, lorsque DogStatsD reçoit les données du minuteur, il calcul
 
 N'oubliez pas qu'en réalité, DogStatsD traite les minuteurs comme des histogrammes. Que vous utilisiez l'un ou l'autre, vous enverrez les mêmes données à Datadog.
 
-### Ensembles
+### Sets
 
-Les ensembles servent à compter le nombre d'éléments uniques dans un groupe, par exemple, le nombre de visiteurs uniques sur votre site :
+Les sets servent à compter le nombre d'éléments uniques dans un groupe, par exemple, le nombre de visiteurs uniques sur votre site :
 
 Pour Python :
 ```python
@@ -240,7 +240,7 @@ def login(self, user_id)
 end
 ```
 
-Apprenez-en plus sur le [type Ensembles dans la documentation relative aux métriques][8].
+Apprenez-en plus sur le [type Sets dans la documentation relative aux métriques][8].
 
 ## Option de métrique : taux d'échantillonnage
 

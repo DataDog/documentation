@@ -29,7 +29,7 @@ supported_os:
 Recueillez des métriques du service ASP.NET en temps réel pour :
 
 * Visualiser et surveiller les états de ASP.NET
-* Être informé des failovers et des événements de ASP.NET
+* Être informé des failovers et des événements d'ASP.NET
 
 ## Implémentation
 ### Installation
