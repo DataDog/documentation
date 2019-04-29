@@ -230,8 +230,8 @@ injection. By default only Datadog injection style is enabled.
 
 Extraction styles can be configured using:
 
-* System Property: `-Ddd.propagation.style.extraction=Datadog,B3`
-* Environment Variable: `DD_PROPAGATION_STYLE_EXTRACTION=Datadog,B3`
+* System Property: `-Ddd.propagation.style.extract=Datadog,B3`
+* Environment Variable: `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
 
 The value of the property or environment variable is a comma (or
 space) separated list of header styles that are enabled for
