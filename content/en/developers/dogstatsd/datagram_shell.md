@@ -177,5 +177,5 @@ PS C:\vagrant> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$t
 [3]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.
 [4]: /agent/kubernetes/dogstatsd
 [5]: /agent/kubernetes/daemonset_setup/#apm-and-distributed-tracing
-[6]: /agent/kubernetes/helm/enable-apm-and-distributed-tracing
+[6]: /agent/kubernetes/helm/#enable-apm-and-distributed-tracing
 [7]: /agent/docker/apm
