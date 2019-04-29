@@ -3,6 +3,7 @@ title: Application Tracing Setup
 kind: documentation
 aliases:
     - /tracing/languages
+    - /tracing/proxies
 disable_toc: true
 ---
 
