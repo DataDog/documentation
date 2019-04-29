@@ -45,7 +45,7 @@ Amazon Elastic Container Service register-task-definition --cli-input-json file:
 9. Click the large **Add container** button.
 10. For **Container name** enter ```dd-agent```.
 11. For **Image** enter ```datadog/docker-dd-agent:latest```.
-12. For **Maximum memory** enter ```256```.
+12. For **Maximum memory** enter ```256```. **Note**: For high resource usage, you may need a higher memory limit.
 13. Scroll down to the **Advanced container configuration** section and enter ```10``` in **CPU units**.
 14. For **Env Variables**, add a **Key** of ```API_KEY``` and enter your Datadog API Key in the value. *If you feel more comfortable storing secrets like this in s3, take a [look at the ECS Configuration guide][5].*
 15. Add another Environment Variable for any tags you want to add using the key ```TAGS```.

@@ -32,7 +32,7 @@ The given unique metrics **on a given host** are therefore:
 
 * `auth.exceptionCount` with tag `method:X`
 * `auth.exceptionCount` with tag `method:Y`
-* `auth.exceptionCount` with tags `method:X` and `exception:A` //unique because of new tag `exception:A`
+* `auth.exceptionCount` with tags `method:X` and `exception:A` (unique because of new tag `exception:A`)
 * `auth.exceptionCount` with tags `method:X` and `exception:B`
 * `auth.exceptionCount` with tags `method:Y` and `exception:A`
 * `auth.exceptionCount` with tags `method:Y` and `exception:B`

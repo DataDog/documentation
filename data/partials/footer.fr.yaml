@@ -1,59 +1,71 @@
 col1:
-  - name: product
+  - name: produit
     link: 'https://www.datadoghq.com/product/'
     title: Caractéristiques
+  - name: intégrations
+    link: 'https://www.datadoghq.com/product/integrations/'
+    title: Intégrations
   - name: apm
     link: 'https://www.datadoghq.com/apm/'
     title: APM
-  - name: integrations
-    link: 'https://www.datadoghq.com/product/integrations/'
-    title: Intégrations
-  - name: alerts
+  - name: logs
+    link: 'https://www.datadoghq.com/log-management/'
+    title: Log Management
+  - name: dashboards
+    link: 'https://www.datadoghq.com/dashboarding/'
+    title: Dashboards
+  - name: synthetics
+    link: 'https://www.datadoghq.com/synthetics/'
+    title: Synthetics
+  - name: alertes
     link: 'https://www.datadoghq.com/alerts/'
     title: Alertes
+col2:
+  - name: tarif
+    link: 'https://www.datadoghq.com/pricing/'
+    title: Tarif
+  - name: documentation
+    link: 'https://docs.datadoghq.com/'
+    title: Documentation
+  - name: assistance
+    link: 'https://www.datadoghq.com/support/'
+    title: Assistance
+  - name: ressources
+    link: 'https://www.datadoghq.com/resources/'
+    title: Ressources
+  - name: sécurité
+    link: 'https://www.datadoghq.com/security/'
+    title: Sécurité
   - name: api
     link: api/
     title: API
-  - name: pricing
-    link: 'https://www.datadoghq.com/pricing/'
-    title: Prix
-col2:
-  - name: documentation
-    link: "https://docs.datadoghq.com/"
-    title: Documentation
-  - name: support
-    link: 'https://www.datadoghq.com/support/'
-    title: Support
-  - name: resources
-    link: 'https://www.datadoghq.com/resources/'
-    title: Ressources
-  - name: security
-    link: 'https://www.datadoghq.com/security/'
-    title: Sécurité
 col3:
   - name: contact
     link: 'https://www.datadoghq.com/about/contact/'
-    title: Contactez nous
-  - name: partners
+    title: Contactez-nous
+  - name: partenaires
     link: 'https://www.datadoghq.com/partner-with-datadog/'
     title: Partenaires
-  - name: press
+  - name: presse
     link: 'https://www.datadoghq.com/about/press/'
     title: Presse
-  - name: ourteam
+  - name: notre équipe
     link: 'https://www.datadoghq.com/about/team/'
     title: Notre équipe
-  - name: careers
+  - name: recrutement
     link: 'https://www.datadoghq.com/careers/'
-    title: Carrières
-  - name: legal
+    title: Offres d'emploi
+  - name: mentions légales
     link: 'https://www.datadoghq.com/legal/'
-    title: Légal
+    title: Mentions légales
+  - name: analyst
+    link: 'https://www.datadoghq.com/about/analyst/'
+    title: Rapports d'analyse
 col4:
   - name: blog
     link: 'https://www.datadoghq.com/blog/'
     title: Blog
-  - name: bloges
+  - name: blogs
     link: 'https://www.datadoghq.com/es/blog/'
     title: Español
   - name: blogja

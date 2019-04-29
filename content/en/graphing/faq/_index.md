@@ -35,4 +35,5 @@ aliases:
     {{< nextlink href="graphing/faq/when-i-query-can-i-use-wildcards-in-metric-names-and-events" >}}When I query can I use wildcards in metric names and events?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/is-it-possible-to-query-historical-data-after-a-host-has-been-destroyed" >}}Is it possible to query historical data after a host has been destroyed?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/embeddable-graphs-with-template-variables" >}}Embeddable Graphs with Template Variables{{< /nextlink >}}
+    {{< nextlink href="graphing/faq/how-do-i-delete-a-host-or-metric-from-the-ui" >}}How do I delete a host or metric from the UI?{{< /nextlink >}}
 {{< /whatsnext >}}

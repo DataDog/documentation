@@ -35,7 +35,7 @@ supported_os:
 Recueillez des métriques du service Cassandra en temps réel pour :
 
 * Visualiser et surveiller les états de Cassandra
-* Être informé des failovers et des événements Cassandra
+* Être informé des failovers et des événements de Cassandra
 
 ## Implémentation
 ### Installation

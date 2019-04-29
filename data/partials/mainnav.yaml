@@ -533,7 +533,7 @@ main:
     url: "api/"
     pre: "nav_api"
     # ACCOUNT MANAGEMENT
-  - name: "Account management"
+  - name: "Account Management"
     url: "account_management/"
     pre: "nav_account"
     children:
@@ -574,6 +574,8 @@ main:
         url: "account_management/org_switching/"
       - name: "Billing"
         url: "account_management/billing/"
+      - name: "API and Application Keys"
+        url: "account_management/api-app-keys/"
 
 
       #- #  name: "FAQ"

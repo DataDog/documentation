@@ -54,10 +54,12 @@ Datadog officially supports the Java JRE 1.7 and higher of both Oracle JDK and O
 ### Integrations
 
 Most integrations are enabled by default. The following setting can change the default to disabled.
+
 * System Property: `-Ddd.integrations.enabled=false`
 * Environment Variable: `DD_INTEGRATIONS_ENABLED=false`
 
 Integrations can be enabled or disabled individually (overriding the default above).
+
 * System Property: `-Ddd.integration.<integration-name>.enabled=true`
 * Environment Variable: `DD_INTEGRATION_<INTEGRATION_NAME>_ENABLED=true`
 
@@ -180,11 +182,12 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.trace.agent.port`              | `DD_TRACE_AGENT_PORT`              | `8126`               | Port number the Agent is listening on for configured host.                                                                                                                                                              |
 | `dd.priority.sampling`             | `DD_PRIORITY_SAMPLING`             | `true`               | Enable priority sampling to ensure distributed traces are complete or to require sampling of specific traces. See [Distributed Tracing][2] for more details.                                                            |
 | `dd.trace.global.tags`             | `DD_TRACE_GLOBAL_TAGS`             | `null`               | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span and every JMX metric. This value is merged into `trace.span.tags` and `trace.jmx.tags` to provide single place to configure both. |
-| `dd.trace.span.tags`               | `DD_TRACE_SPAN_TAGS`               | `null`               | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span. Tags of the same name added directly to a span overwrite the defaults provided here.                                        |
-| `dd.trace.jmx.tags`                | `DD_TRACE_JMX_TAGS`                | `null`               | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every JMX metric. Tags of the same name added in JMX metrics configuration overwrite the defaults provided here.                        |
+| `dd.trace.span.tags`               | `DD_TRACE_SPAN_TAGS`               | `null`               | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span. Tags of the same name added directly to a span overwrite the defaults provided here.                                             |
+| `dd.trace.jmx.tags`                | `DD_TRACE_JMX_TAGS`                | `null`               | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every JMX metric. Tags of the same name added in JMX metrics configuration overwrite the defaults provided here.                             |
 | `dd.trace.header.tags`             | `DD_TRACE_HEADER_TAGS`             | `null`               | (Example: `CASE-insensitive-Header:my-tag-name,User-ID:userId`) A map of header keys to tag names.  Automatically apply header values as tags on traces.                                                                |
 | `dd.trace.annotations`             | `DD_TRACE_ANNOTATIONS`             | ([listed here][3])   | (Example: `com.some.Trace;io.other.Trace`) A list of method annotations to treat as `@Trace`.                                                                                                                           |
 | `dd.trace.methods`                 | `DD_TRACE_METHODS`                 | `null`               | (Example: `package.ClassName[method1,method2,...];AnonymousClass$1[call]`) List of class/interface and methods to trace.  Similar to adding `@Trace`, but without changing code.                                        |
+| `dd.trace.partial.flush.min.spans` | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS` | `1000`               | Set a number of partial spans to flush on. Useful to reduce memory overhead when dealing with heavy traffic or long running traces.                                                                                     |
 | `dd.jmxfetch.enabled`              | `DD_JMXFETCH_ENABLED`              | `false`              | Enable collection of JMX metrics by Java Tracing Agent.                                                                                                                                                                 |
 | `dd.jmxfetch.metrics-configs`      | `DD_JMXFETCH_METRICS_CONFIGS`      | `null`               | (Example: `/file/loction1,/file/location2`) Additional metrics configuration file for JMX metrics collection.                                                                                                           |
 | `dd.jmxfetch.check-period`         | `DD_JMXFETCH_CHECK_PERIOD`         | `1500`               | How often to send JMX metrics (in ms).                                                                                                                                                                                  |
@@ -227,8 +230,8 @@ injection. By default only Datadog injection style is enabled.
 
 Extraction styles can be configured using:
 
-* System Property: `-Ddd.propagation.style.extraction=Datadog,B3`
-* Environment Variable: `DD_PROPAGATION_STYLE_EXTRACTION=Datadog,B3`
+* System Property: `-Ddd.propagation.style.extract=Datadog,B3`
+* Environment Variable: `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
 
 The value of the property or environment variable is a comma (or
 space) separated list of header styles that are enabled for

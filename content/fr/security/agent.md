@@ -27,7 +27,7 @@ L'Agent Datadog génère des logs locaux afin de prendre en charge le [dépannag
 
 ## Serveur HTTPS local
 
-L'Agent v6 expose une API HTTPS locale pour faciliter la communication entre un Agent en cours d'exécution et des outils d'Agent (par ex., les commandes `datadog-agent`). Le serveur API n'est accessible qu'à partir de l'interface de réseau local (`localhost/127.0.0.1`), et l'authentification est exécutée par un jeton qui est seulement lisible par l'utilisateur avec lequel l'Agent s'exécute. La communication vers l'API HTTPS est chiffrée pendant l'envoi afin d'éviter les écoutes clandestines sur `localhost`.
+L'Agent v6 expose une API HTTPS locale pour faciliter la communication entre un Agent en cours d'exécution et des outils d'Agent (par ex., les commandes `datadog-agent`). Le serveur d'API n'est accessible qu'à partir de l'interface de réseau local (`localhost/127.0.0.1`), et l'authentification est exécutée par un jeton qui est seulement lisible par l'utilisateur avec lequel l'Agent s'exécute. La communication vers l'API HTTPS est chiffrée pendant l'envoi afin d'éviter les écoutes clandestines sur `localhost`.
 
 ## Interface graphique de l'Agent
 

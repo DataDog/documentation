@@ -2,6 +2,9 @@
 title: Basic Agent Usage for AIX
 kind: documentation
 further_reading:
+- link: "https://www.datadoghq.com/blog/announcing-ibm-aix-agent/"
+  tag: "Blog"
+  text: "Monitor AIX with the Datadog Unix Agent"
 ---
 
 <div class="alert alert-info">
@@ -37,7 +40,7 @@ The installer may be executed as follows (as root):
 installp -aXYgd ./datadog-unix-agent-<version>.powerpc.bff -e dd-aix-install.log datadog-unix-agent
 ```
 
-This installs the agent in `/opt/datadog-agent`.
+This installs the Agent in `/opt/datadog-agent`.
 
 Note: Agent installation logs can be found in the `dd-aix-install.log` file. To disable this logging, remove the `-e` parameter in the installation command.
 
@@ -65,7 +68,7 @@ That said, configuration files are searched in this order (with the first match 
 
 A sample configuration file can be found in `/opt/datadog-agent/etc/datadog-agent`.
 
-A basic configuration typically requires your Datadog API key. To submit your metrics to the EU instance, the `site` configuration option is available. 
+A basic configuration typically requires your Datadog API key. To submit your metrics to the EU instance, the `site` configuration option is available.
 
 You can also override `dd_url` manually, but that should not be required.
 
@@ -87,17 +90,17 @@ To enable the above integrations, copy and edit the sample configuration files p
 
 ## Running DogStatsD
 
-DogStatsD allows collecting and submitting custom metrics to Datadog. It listens on a UDP port and StatsD metrics may be submitted to it. These are then relayed to Datadog.
+DogStatsD allows collecting and submitting custom metrics to Datadog. It listens on a UDP port and DogStatsD metrics may be submitted to it. These are then relayed to Datadog.
 
 DogStatsD relies on the same configuration file defined for the Agent, where a DogStatsD configuration section is available. The DogStatsD server typically runs within the same Agent process—but should you need a dedicated process, it may also be launched in standalone mode.
 
 To enable DogStatsD, edit `/etc/datadog-agent/datadog.yaml` and set the relevant configuration options.
 
 ```
-dogstatsd:                        # Dogstatsd configuration options
+dogstatsd:                        # DogStatsD configuration options
   enabled: true                   # disabled by default
   bind_host: localhost            # address we'll be binding to
-  port: 8125                      # dogstatsd UDP listening port
+  port: 8125                      # DogStatsD UDP listening port
   non_local_traffic: false        # listen to non-local traffic
 ```
 

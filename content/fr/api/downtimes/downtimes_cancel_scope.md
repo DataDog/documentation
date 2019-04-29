@@ -7,7 +7,7 @@ external_redirect: /api/#annuler-les-downtimes-d-un-monitor-selon-le-contexte
 
 ## Annuler les downtimes d'un monitor selon le contexte
 ##### ARGUMENTS
-* **`scope`** [*obligatoire*] :
+* **`scope`** [*obligatoire*] :  
     Annulez tous les downtimes en fonction d'un ou plusieurs contextes donnés, comme :
 
     *  **env:prod** 

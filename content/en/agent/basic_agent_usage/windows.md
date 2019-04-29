@@ -331,26 +331,15 @@ While Windows does not offer this exact metric, there is an equivalent option th
 
 ### Monitoring Windows Processes
 
-You can monitor Windows processes via the [Process integration][8]. To set this up on Windows, select the **Process** integration from the list of integrations in the Datadog Agent Manager and edit the configuration.
+You can monitor Windows processes with [Live Process Monitoring][8]. To enable this on Windows, edit the [Agent main configuration file][9] by setting the following parameter to true:
 
-For example, to monitor Notepad, your configuration file would include:
-
+`datadog.yaml`:
 ```yaml
-init_config:
-instances:
-- name: notepad
-  search_string: ['notepad.exe']
+process_config:
+  enabled: "true"
 ```
 
-When adding your own processes, be sure to follow the formatting exactly as shown. If formatting is not correct the integration fails.
-
-When you're done editing the file, press "Save" to save it, then "Enable" to enable it.
-
-Any time you modify a Datadog integration you need to restart the Datadog Agent service. To do this, click the **Actions** button in the top left corner, then selecting **Restart**, or you can restart "Datadog Agent" in your Services Management Snap-in Console (services.msc).
-
-To verify that your Process check is working, click on **Logs and Status**, then **Agent Status**. Scroll down to the "Checks" section and you should see "process" reporting on each process instance you have setup in your configuration file.
-
-Due to the sensitivity of YAML, if you tried the above and cannot get it to work, use the example file to get started and confirm your syntax with a YAML validator.
+After configuration is complete, [restart the Agent][10].
 
 ## Further Reading
 
@@ -363,4 +352,6 @@ Due to the sensitivity of YAML, if you tried the above and cannot get it to work
 [5]: /#monitoring-windows-processes
 [6]: /integrations/wmi
 [7]: https://app.datadoghq.com/monitors#create/integration
-[8]: /integrations/process
+[8]: /graphing/infrastructure/process/?tab=linuxwindows#installation
+[9]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[10]: /agent/guide/agent-commands/#restart-the-agent

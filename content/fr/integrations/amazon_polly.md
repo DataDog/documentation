@@ -53,11 +53,11 @@ L'intégration AWS Polly n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon_polly
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_polly/amazon_polly_metadata.csv
-[5]: https://docs.datadoghq.com/fr/help/
+[5]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

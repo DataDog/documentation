@@ -14,7 +14,7 @@ further_reading:
 
 Histograms measure the statistical distribution of a set of values.
 
-Datadog histogram and timing metrics are essentially the same thing and are extensions on the [StatsD timing metric][1]: they aggregate the values that are sent during the flush interval (usually defaults to 10 seconds). 
+Datadog histogram and timing metrics are essentially the same thing and are extensions on the [StatsD timing metric][1]: they aggregate the values that are sent during the flush interval (usually defaults to 10 seconds).
 
 If you send 20 values for a metric `<METRIC_NAME>` during the flush interval, a Datadog histogram gives you the aggregation of those values for the flush interval, i.e.:
 
@@ -26,7 +26,7 @@ If you send 20 values for a metric `<METRIC_NAME>` during the flush interval, a 
 * `<METRIC_NAME>.min`: gives you the min value sent during the flush interval.
 * `<METRIC_NAME>.sum`: gives you the sum of values sent during the flush interval.
 
-Configure which aggregation you want to send to Datadog with the `histogram_aggregates` parameter in your [datadog.yaml configuration file][2]. 
+Configure which aggregation you want to send to Datadog with the `histogram_aggregates` parameter in your [datadog.yaml configuration file][2].
 By default only `max`, `median`, `avg`, and `count` aggregations are sent out to Datadog.
 
 ## Submission
@@ -42,7 +42,7 @@ By default only `max`, `median`, `avg`, and `count` aggregations are sent out to
 
 | Method             | Overview                                                                                  |
 | :---               | :---                                                                                      |
-| dog.histogram(...) | Used to track the statistical distribution of a set of values over a statsd flush period. |
+| dog.histogram(...) | Used to track the statistical distribution of a set of values over a StatsD flush period. |
 
 
 #### Example

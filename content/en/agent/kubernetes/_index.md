@@ -31,6 +31,8 @@ To gather metrics, traces, and logs from your Kubernetes clusters, there are two
 1. [Container installation][2] (**recommended**) -  The Agent runs inside a Pod. This implementation is sufficient for the majority of use cases, but note that it does not grant visibility into components of the system that exist outside Kubernetes. This method also does not monitor the starting phase of your Kubernetes cluster.
 2. [Host installation][3] (optional) - Installing the Agent on the host provides additional visibility into your ecosystem, independent of Kubernetes.
 
+**Note**: Only one Datadog Agent shound run on each node; a sidecar per node is not generally recommended and may not function as expected.
+
 ## RBAC
 
 In the context of using the Kubernetes integration, and when deploying Agents in a Kubernetes cluster, a set of rights are required for the Agent to integrate seamlessly.

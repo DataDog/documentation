@@ -63,7 +63,7 @@ For example:
 ```yaml
 apm_config:
   replace_tags:
-    # Replace all numbers following the `token/` string in the tag "http.url" with "?":
+    # Replace all characters starting at the `token/` string in the tag "http.url" with "?":
     - name: "http.url"
       pattern: "token/(.*)"
       repl: "?"
