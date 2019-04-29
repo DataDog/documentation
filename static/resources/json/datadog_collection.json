@@ -7718,15 +7718,17 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "{{dd_app_key}}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								}
 							]
 						},
-						"description": "http://docs.datadoghq.com/api/?lang=console#monitors"
+						"description": "### Overview\n\nIf you manage and deploy monitors programmatically, it's easier to define the monitor in the Datadog UI and [export its valid JSON][1].\n\n### Arguments\n\n*   **`type`** [*required*]: The [type of the monitor][2], chosen from:\n\n| Monitor Type | type attribute value |\n| :--------    | :-------             |\n| anomaly      | `query alert`        |\n| apm          | `query alert`        |\n| composite    | `composite`          |\n| custom       | `service check`      |\n| event        | `event alert`        |\n| forecast     | `query alert`        |\n| host         | `service check`      |\n| integration  | `query alert`        |\n| live process | `process alert`      |\n| logs         | `log alert`          |\n| metric       | `query alert`        |\n| network      | `service check`      |\n| outlier      | `query alert`        |\n| process      | `service check`      |\n\n*   **`query`** [*required*]: The query defines when the monitor triggers. Query syntax depends on what type of monitor you are creating:\n    \n##### Metric Alert Query\n    \n`time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`\n\n-   `time_aggr`: avg, sum, max, min, change, or pct_change\n-   `time_window`: `last_#m` (with `#` being 5, 10, 15, or 30) or `last_#h`(with `#` being 1, 2, or 4), or `last_1d`\n-   `space_aggr`: avg, sum, min, or max\n-   `tags`: one or more tags (comma-separated), or *\n-   `key`: a 'key' in key:value tag syntax; defines a separate alert for each tag in the group (multi-alert)\n-   `operator`: <, <=, >, >=, ==, or !=\n-   `#`: an integer or decimal number used to set the threshold\n\nIf you are using the `_change_` or `_pct_change_` time aggregator, instead use `change_aggr(time_aggr(time_window), timeshift):space_aggr:metric{tags} [by {key}] operator #` with:\n\n*   `change_aggr` change, pct_change\n*   `time_aggr` avg, sum, max, min [Learn more][3]\n*   `time_window` last_#m (1, 5, 10, 15, or 30), last_#h (1, 2, or 4), or last_#d (1 or 2)\n*   `timeshift` #m_ago (5, 10, 15, or 30), #h_ago (1, 2, or 4), or 1d_ago\n\nUse this to create an outlier monitor using the following query: `avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`\n\n##### Service Check Query\n\n`\"check\".over(tags).last(count).count_by_status()`\n\n*   **`check`** name of the check, e.g. datadog.agent.up\n*   **`tags`** one or more quoted tags (comma-separated), or \"*\". e.g.: `.over(\"env:prod\", \"role:db\")`\n*   **`count`** must be at >= your max threshold (defined in the `options`). e.g. if you want to notify on 1 critical, 3 ok and 2 warn statuses count should be 3.\n\n##### Event Alert Query\n\n`events('sources:nagios status:error,warning priority:normal tags: \"string query\"').rollup(\"count\").last(\"1h\")\"`\n\n*  **`event`**, the event query string:\n*   **`string_query`** free text query to match against event title and text.\n*   **`sources`** event sources (comma-separated). [Complete list of source attribute values][4]\n*   **`status`** event statuses (comma-separated). Valid options: error, warn, and info.\n*   **`priority`** event priorities (comma-separated). Valid options: low, normal, all.\n*   **`host`** event reporting host (comma-separated).\n*   **`tags`** event tags (comma-separated).\n*   **`excluded_tags`** exluded event tags (comma-separated).\n*   **`rollup`** the stats rollup method. `count` is the only supported method now.\n*   **`last`** the timeframe to roll up the counts. Examples: 60s, 4h. Supported timeframes: s, m, h and d.\n\n##### Process Alert Query\n\n`processes(search).over(tags).rollup('count').last(timeframe) operator #`\n\n*   **`search`** free text search string for querying processes. Matching processes match results on the [Live Processes][5] page\n*   **`tags`** one or more tags (comma-separated)\n*   **`timeframe`** the timeframe to roll up the counts. Examples: 60s, 4h. Supported timeframes: s, m, h and d\n*   **`operator`** <, <=, >, >=, ==, or !=\n*   **`#`** an integer or decimal number used to set the threshold\n\n##### Composite Query\n\n`12345 && 67890`, where `12345` and `67890` are the IDs of non-composite monitors\n\n* **`name`** [*required*, *default* = **dynamic, based on query**]: The name of the alert.\n* **`message`** [*required*, *default* = **dynamic, based on query**]: A message to include with notifications for this monitor. Email notifications can be sent to specific users by using the same '@username' notation as events.\n* **`tags`** [*optional*, *default* = **empty list**]: A list of tags to associate with your monitor. When getting all monitor details via the API, use the `monitor_tags` argument to filter results by these tags. It is only available via the API and isn't visible or editable in the Datadog UI.\n\n* **`options`** [*optional*, *default*=**{}**]: A dictionary of options for the monitor. There are options that are common to all types as well as options that are specific to certain monitor types.\n   \n##### Common Options\n\n*   **`silenced`** dictionary of scopes to timestamps or `None`. Each scope is muted until the given POSIX timestamp or forever if the value is `None`. Default: **None**\n    Examples:\n    *   To mute the alert completely: `{'*': None}`\n    *   To mute `role:db` for a short time: `{'role:db': 1412798116}`\n\n*   **`notify_no_data`** a boolean indicating whether this monitor notifies when data stops reporting. Default: **false**\n\n*   **`new_host_delay`** Time (in seconds) to allow a host to boot and applications to fully start before starting the evaluation of monitor results. Should be a non negative integer. Default: **300**\n\n*   **`no_data_timeframe`** the number of minutes before a monitor notifies when data stops reporting. Must be at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks. Default: **2x timeframe for metric alerts, 2 minutes for service checks**\n\n*   **`timeout_h`** the number of hours of the monitor not reporting data before it automatically resolves from a triggered state. Default: **None**.\n\n*   **`require_full_window`** a boolean indicating whether this monitor needs a full window of data before it's evaluated. We highly recommend you set this to `False` for sparse metrics, otherwise some evaluations are skipped. Default: **True** for \"on average\", \"at all times\" and \"in total\" aggregation. **False** otherwise.\n\n*   **`renotify_interval`** the number of minutes after the last notification before a monitor re-notifies on the current status. It only re-notifies if it's not resolved. Default: **None**.\n\n*   **`escalation_message`** a message to include with a re-notification. Supports the '@username' notification we allow elsewhere. Not applicable if `renotify_interval` is `None`. Default: **None**.\n\n*   **`notify_audit`** a boolean indicating whether tagged users is notified on changes to this monitor. Default: **False**\n\n*   **`locked`** a boolean indicating whether changes to to this monitor should be restricted to the creator or admins. Default: **False**\n\n*   **`include_tags`** a boolean indicating whether notifications from this monitor automatically inserts its triggering tags into the title. Default: **True** Examples:\n    *   True: `[Triggered on {host:h1}] Monitor Title`\n    *   False: `[Triggered] Monitor Title`\n\n##### Anomaly Options\n\n_These options only apply to anomaly monitors and are ignored for other monitor types._\n\n-   **`threshold_windows`** a dictionary containing `recovery_window` and `trigger_window`.\n    * `recovery_window` describes how long an anomalous metric must be normal before the alert recovers\n    * `trigger_window` describes how long a metric must be anomalous before an alert triggers\n\n        Example: `{'threshold_windows': {'recovery_window': 'last_15m', 'trigger_window': 'last_15m'}}`\n\n##### Metric Alert Options\n\n_These options only apply to metric alerts._\n\n-   **`thresholds`** a dictionary of thresholds by threshold type. There are two threshold types for metric alerts: *critical* and *warning*. *Critical* is defined in the query, but can also be specified in this option. *Warning* threshold can only be specified using the thresholds option.\nIf you want to use [recovery thresholds][6] for your monitor, use the attributes `critical_recovery` and `warning_recovery`.\n\n        Example: `{'critical': 90, 'warning': 80,  'critical_recovery': 70, 'warning_recovery': 50}`\n\n-   **`evaluation_delay`** Time (in seconds) to delay evaluation, as a non-negative integer. For example, if the value is set to 300 (5min), the timeframe is set to last_5m and the time is 7:00, the monitor evaluates data from 6:50 to 6:55. This is useful for AWS CloudWatch and other backfilled metrics to ensure the monitor always has data during evaluation.\n\n##### Service Check Options\n\n_These options only apply to service checks and are ignored for other monitor types._\n\n-   **`thresholds`** a dictionary of thresholds by status. Because service checks can have multiple thresholds, we don't define them directly in the query.\n\n        Example: `{'ok': 1, 'critical': 1, 'warning': 1}`\n\n[1]: https://docs.datadoghq.com/monitors/#export-your-monitor\n[2]: https://docs.datadoghq.com/monitors/monitor_types\n[3]: https://docs.datadoghq.com/monitors/monitor_types/#define-the-conditions\n[4]: https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value\n[5]: https://docs.datadoghq.com/graphing/infrastructure/process\n[6]: https://docs.datadoghq.com/monitors/faq/what-are-recovery-thresholds"
 					},
 					"response": []
 				},
@@ -7761,21 +7763,30 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "{{dd_app_key}}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								},
+								{
+									"key": "group_states",
+									"value": "",
+									"description": "Includes additional information if available",
+									"disabled": true
 								}
 							],
 							"variable": [
 								{
 									"key": "MONITOR_ID",
-									"value": ""
+									"value": "{{monitor_id}}",
+									"description": "Id of the monitor you want to get info from"
 								}
 							]
 						},
-						"description": "ARGUMENTS\n\n*group_states [optional, default=None]\n\nIf this argument is set, the returned data will include additional information (if available) regarding the specified group states, including the last notification timestamp, last resolution timestamp and details about the last time the monitor was triggered. The argument should include a string list indicating what, if any, group states to include. Choose one or more from 'all', 'alert', 'warn', or 'no data'. Example: 'alert,warn'"
+						"description": "### Overview\n\nGet a monitor details based on its monitor ID.\n\n### Arguments\n\n* **`group_states`** [*optional*, *default*=**None**]: If this argument is set, the returned data includes additional information (if available) regarding the specified group states, including the last notification timestamp, last resolution timestamp and details about the last time the monitor was triggered. The argument should include a string list indicating what, if any, group states to include. Choose one or more from **all**, **alert**, **warn**, or **no data**. Example: 'alert,warn'\""
 					},
 					"response": []
 				},
@@ -7810,26 +7821,29 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "{{dd_app_key}}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								}
 							],
 							"variable": [
 								{
 									"key": "MONITOR_ID",
-									"value": ""
+									"value": "{{monitor_id}}",
+									"description": "Id of the monitor you want to edit info from"
 								}
 							]
 						},
-						"description": "ARGUMENTS\n\n*query [required]\nThe metric query to alert on.\n\n*name [optional, default=dynamic, based on query]\nThe name of the monitor.\n\n*message [optional, default=dynamic, based on query]\nA message to include with notifications for this monitor. Email notifications can be sent to specific users by using the same '@username' notation as events.\n\n*options [optional, default=None]\nRefer to the create monitor documentation for details on the available options.\n\n*tags [optional, default=empty list]\nA list of tags to associate with your monitor. This can help you categorize and filter monitors."
+						"description": "### Overview\n\nEdit a monitor details based on its monitor ID.\n\n### Arguments\n\n* **`query`** [*required*]: The metric query to alert on.\n* **`name`** [*required*]: The name of the monitor.\n* **`message`** [*optional*, *default*=**dynamic, based on query**]: A message to include with notifications for this monitor. Email notifications can be sent to specific users by using the same '@username' notation as events.\n* **`options`** [*optional*, *default*=**{}**]: Refer to the create monitor documentation for details on the available options.\n* **`tags`** [*optional*, *default*=**None**]: A list of tags to associate with your monitor. This can help you categorize and filter monitors"
 					},
 					"response": []
 				},
 				{
-					"name": "DELETE a Monitor",
+					"name": "Delete a Monitor",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -7859,63 +7873,24 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "{{dd_app_key}}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								}
 							],
 							"variable": [
 								{
 									"key": "MONITOR_ID",
-									"value": ""
+									"value": "{{monitor_id}}",
+									"description": "Id of the monitor to Delete"
 								}
 							]
 						},
-						"description": "ARGUMENTS\n\nThis end point takes no JSON arguments."
-					},
-					"response": []
-				},
-				{
-					"name": "GET All Monitor Details",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/monitor?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"datadoghq",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"monitor"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{dd_api_key}}"
-								},
-								{
-									"key": "application_key",
-									"value": "{{dd_app_key}}"
-								}
-							]
-						},
-						"description": "ARGUMENTS\n\n*group_states [optional, default=None]\nIf this argument is set, the returned data will include additional information (if available) regarding the specified group states, including the last notification timestamp, last resolution timestamp and details about the last time the monitor was triggered. The argument should include a string list indicating what, if any, group states to include. Choose one or more from 'all', 'alert', 'warn', or 'no data'. Example: 'alert,warn'\n\n*name [optional, default=None]\nA string to filter monitors by name\n\n*tags [optional, default=None]\nA comma separated list indicating what tags, if any, should be used to filter the list of monitors by scope, e.g. host:host0. For more information, see the tags parameter for the appropriate query argument in the Create a monitor section above.\n\n*monitor_tags [optional, default=None]\nA comma separated list indicating what service and/or custom tags, if any, should be used to filter the list of monitors. Tags created in the Datadog UI will automatically have the \"service\" key prepended (e.g. service:my-app)"
+						"description": "### Overview\n\nDelete a monitor based on its monitor ID.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
 					},
 					"response": []
 				},
@@ -7931,7 +7906,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"resolve\": [\n        {\n            \"2376503\": \"*\"\n        }\n    ]\n}"
+							"raw": "{\n    \"resolve\": [\n        {\n            \"<MONITOR_ID>\": \"*\"\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "https://api.datadoghq.com/monitor/bulk_resolve?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -7948,15 +7923,123 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "{{dd_app_key}}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								}
 							]
 						},
-						"description": "Here you can resolve a monitor by monitorId & Group (can wildcard).\n\nresolve [required]: Array of group(s) to resolve for a given monitor_id, e.g.: {\"monitor_id\": \"group_to_resolve\"}\n\nIt supports multiple groups per monitor, e.g.: resolve: [{\"monitor_id\": \"group_1\"}, {\"monitor_id\": \"group_2\"}]\n\nIt can also resolve all triggered groups with the pseudo-group ALL_GROUPS: resolve: [{\"monitor_id\": \"ALL_GROUPS\"}]"
+						"description": "### Overview\n\nResolve a monitor by monitorId & Group.\n\n### Arguments\n\n* **`resolve`** [*required*]: Array of group(s) to resolve for a given monitor_id, e.g.: `{\"monitor_id\": \"group_to_resolve\"}`\n\n    * It supports multiple groups per monitor, e.g.: `resolve: [{\"monitor_id\": \"group_1\"}, {\"monitor_id\": \"group_2\"}]`\n\n    * It can also resolve all triggered groups with the pseudo-group `ALL_GROUPS`: `resolve: [{\"monitor_id\": \"ALL_GROUPS\"}]`"
+					},
+					"response": []
+				},
+				{
+					"name": "Mute A Specific Monitor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/monitor/:MONITOR_ID/mute?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"monitor",
+								":MONITOR_ID",
+								"mute"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"description": "ID of the monitor to mute.",
+									"key": "MONITOR_ID",
+									"value": "{{monitor_id}}"
+								}
+							]
+						},
+						"description": "### Overview\n\nMute a specific monitor base on its ID.\n\n### Arguments\n* **`scope`** [*optional*, *default*=**None**]: The scope to apply the mute to, e.g. **role:db**. For example, if your alert is grouped by `{host}`, you might mute `host:app1`.\n* **`end`** [*optional*, *default*=**None**]: A POSIX timestamp for when the mute should end."
+					},
+					"response": []
+				},
+				{
+					"name": "Unmute A Specific Monitor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/monitor/:MONITOR_ID/unmute?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"monitor",
+								":MONITOR_ID",
+								"unmute"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"description": "ID of the monitor to un-mute.",
+									"key": "MONITOR_ID",
+									"value": "{{monitor_id}}"
+								}
+							]
+						},
+						"description": "### Overview\n\n### Arguments\n\n* **`scope`** [*optional*, *default*=**None**]: The scope to apply the mute to. For example, if your alert is grouped by {host}, you might mute 'host:app1'\n* **`all_scopes`** [*optional*, *default* = **False**]: Clear muting across all scopes"
 					},
 					"response": []
 				},
@@ -7999,7 +8082,7 @@
 								}
 							]
 						},
-						"description": "Muting will prevent all monitors from notifying through email and posts to the event stream. State changes will only be visible by checking the alert page.\n\nARGUMENTS\n\nThis end point takes no JSON arguments."
+						"description": "### Overview\n\nMuting prevents all monitors from notifying through email and posts to the [event stream][1]. State changes are only visible by checking the alert page.\n\n### Arguments\n\nThis endpoint takes no JSON arguments.\n\n[1]: https://docs.datadoghq.com/graphing/event_stream"
 					},
 					"response": []
 				},
@@ -8034,109 +8117,17 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "{{dd_app_key}}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								}
 							]
 						},
-						"description": "Disables muting all monitors. Throws an error if mute all was not enabled previously.\n\nARGUMENTS\n\nThis end point takes no JSON arguments."
-					},
-					"response": []
-				},
-				{
-					"name": "Mute A Specific Monitor",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"type\": \"metric alert\",\n    \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:myhost} > 100\",\n    \"name\": \"Bytes received on myhost\",\n    \"message\": \"We may need to add web hosts if this is consistently high.\",\n    \"tags\": [\n        \"app:webserver\",\n        \"frontend\"\n    ],\n    \"options\": {\n        \"notify_no_data\": true,\n        \"no_data_timeframe\": 20\n    }\n}"
-						},
-						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/monitor/1959920/mute?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"datadoghq",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"monitor",
-								"1959920",
-								"mute"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{dd_api_key}}"
-								},
-								{
-									"key": "application_key",
-									"value": "{{dd_app_key}}"
-								}
-							]
-						},
-						"description": "ARGUMENTS\n\n*scope [optional, default=None]\nThe scope to apply the mute to, e.g. role:db\n\n*end [optional, default=None]\nA POSIX timestamp for when the mute should end"
-					},
-					"response": []
-				},
-				{
-					"name": "Unmute A Specific Monitor",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"type\": \"metric alert\",\n    \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:myhost} > 100\",\n    \"name\": \"Bytes received on myhost\",\n    \"message\": \"We may need to add web hosts if this is consistently high.\",\n    \"tags\": [\n        \"app:webserver\",\n        \"frontend\"\n    ],\n    \"options\": {\n        \"notify_no_data\": true,\n        \"no_data_timeframe\": 20\n    }\n}"
-						},
-						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/monitor/:MONITOR_ID/unmute?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"datadoghq",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"monitor",
-								":MONITOR_ID",
-								"unmute"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{dd_api_key}}"
-								},
-								{
-									"key": "application_key",
-									"value": "{{dd_app_key}}"
-								}
-							],
-							"variable": [
-								{
-									"key": "MONITOR_ID",
-									"value": ""
-								}
-							]
-						},
-						"description": "ARGUMENTS\n\n*scope [optional, default=None]\nThe scope to apply the mute to. For example, if your alert is grouped by {host}, you might mute 'host:app1'\n\n*all_scopes [optional, default=False]\nClear muting across all scopes"
+						"description": "### Overview\n\nDisables muting all monitors. Throws an error if mute all was not enabled previously.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
 					},
 					"response": []
 				},
@@ -8179,7 +8170,7 @@
 								}
 							]
 						},
-						"description": "ARGUMENTS\ntype [required]:\nThe type of the monitor, chosen from:\nMONITOR TYPE\tTYPE ATTRIBUTE VALUE\nanomaly\tquery alert\napm\tquery alert\ncomposite\tcomposite\ncustom\tservice check\nevent\tevent alert\nforecast\tquery alert\nhost\tservice check\nintegration\tquery alert\nlive process\tprocess alert\nlogs\tlog alert\nmetric\tquery alert\nnetwork\tservice check\noutlier\tquery alert\nprocess\tservice check\nquery [required]:\nThe query defines when the monitor triggers. Query syntax depends on monitor type. See Create a monitor for details."
+						"description": "### Overview\n\nValidates a monitor definition.\n\n### Arguments\n\nSee [Create a monitor][1] documentation for details on constructing a monitor definition.\n\n[1]: https://docs.datadoghq.com/api/#create-a-monitor"
 					},
 					"response": []
 				},
@@ -8201,7 +8192,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/monitor/search?api_key={{dd_api_key}}&application_key={{dd_app_key}}&query=CPU High",
+							"raw": "https://api.datadoghq.com/api/v1/monitor/search?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -8217,38 +8208,41 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "{{dd_app_key}}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								},
 								{
 									"key": "query",
-									"value": "CPU High",
-									"description": "[optional], After entering a search query in your Manage Monitor page use the query parameter value in the URL of the page as value for this parameter. Consult the dedicated manage monitor documentation page to learn more."
+									"value": "",
+									"description": "Query to filter your monitors",
+									"disabled": true
 								},
 								{
 									"key": "page",
-									"value": "insert pagination number here",
-									"description": "[optional, default = 0], Page to start paginating from.",
+									"value": "0",
+									"description": "Page to start paginating from.",
 									"disabled": true
 								},
 								{
 									"key": "per_page",
-									"value": "insert value here",
-									"description": "[optional, default=30],  Number of monitors to return per page.",
+									"value": "30",
+									"description": " Number of monitors to return per page.",
 									"disabled": true
 								},
 								{
 									"key": "sort",
-									"value": "insert value here",
-									"description": "[optional, default=null], Comma separated string for sort order (e.g. name,asc) supported fields:\n\nname\nstatus\ntags",
+									"value": "",
+									"description": "Comma separated string for sort order (e.g. name,asc) supported fields:\n\nname\nstatus\ntags",
 									"disabled": true
 								}
 							]
 						},
-						"description": "Search and filter your monitors details.\n\nARGUMENTS\nquery [optional]:\n\nAfter entering a search query in your Manage Monitor page use the query parameter value in the URL of the page as value for this parameter. Consult the dedicated manage monitor documentation page to learn more.\n\npage [optional, default = 0]:\n\nPage to start paginating from.\n\nper_page [optional, default=30]:\n\nNumber of monitors to return per page.\n\nsort [optional, default=null]:\n\nComma separated string for sort order (e.g. name,asc) supported fields:\n\nname\nstatus\ntags"
+						"description": "### Overview\n\nSearch and filter your monitors details.\n\n### Arguments\n\n* **`query`** [*optional*]: After entering a search query in your [Manage Monitor page][1] use the query parameter value in the URL of the page as value for this parameter. Consult the dedicated [manage monitor documentation][2] page to learn more. The query can contain any number of space-separated monitor attributes, for instance `query=\"type:metric status:alert\"`.\n\n* **`page`** [*optional*, *default* = **0**]: Page to start paginating from.\n\n* **`per_page`** [*optional*, *default*=**30**]: Number of monitors to return per page.\n\n* **`sort`** [*optional*, *default*=**null**]: Comma separated string for sort order (e.g. name,asc) supported fields:\n\n    * `name`\n    * `status`\n    * `tags`\n\n[1]: https://app.datadoghq.com/monitors/manage\n[2]: https://docs.datadoghq.com/monitors/manage_monitor/#find-the-monitors"
 					},
 					"response": []
 				},
@@ -8270,7 +8264,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/monitor/groups/search?api_key={{dd_api_key}}&application_key={{dd_app_key}}&query=ELB",
+							"raw": "https://api.datadoghq.com/api/v1/monitor/groups/search?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -8287,38 +8281,41 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "{{dd_app_key}}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								},
 								{
 									"key": "query",
-									"value": "ELB",
-									"description": "[optional], After entering a search query in your Manage Monitor page use the query parameter value in the URL of the page as value for this parameter. Consult the dedicated manage monitor documentation page to learn more."
+									"value": "",
+									"description": "After entering a search query in your Manage Monitor page use the query parameter value in the URL of the page as value for this parameter. Consult the dedicated manage monitor documentation page to learn more.",
+									"disabled": true
 								},
 								{
 									"key": "page",
-									"value": "insert pagination number here",
-									"description": "[optional, default = 0], Page to start paginating from.",
+									"value": "0",
+									"description": "Page to start paginating from.",
 									"disabled": true
 								},
 								{
 									"key": "per_page",
-									"value": "insert value here",
-									"description": "[optional, default=30],  Number of monitors to return per page.",
+									"value": "30",
+									"description": "Number of monitors to return per page.",
 									"disabled": true
 								},
 								{
 									"key": "sort",
-									"value": "insert value here",
-									"description": "[optional, default=null], Comma separated string for sort order (e.g. name,asc) supported fields:\n\nname\nstatus\ntags",
+									"value": "",
+									"description": "Comma separated string for sort order (e.g. name,asc) supported fields:\n\nname\nstatus\ntags",
 									"disabled": true
 								}
 							]
 						},
-						"description": "Search and filter your monitor groups details.\n\nARGUMENTS\nquery [optional]:\n\nAfter entering a search query in your Manage Monitor page use the query parameter value in the URL of the page as value for this parameter. Consult the dedicated manage monitor documentation page to learn more.\n\npage [optional, default = 0]:\n\nPage to start paginating from.\n\nper_page [optional, default=30]:\n\nNumber of monitors to return per page.\n\nsort [optional, default=null]:\n\nComma separated string for sort order (e.g. name,asc) supported fields:\n\nname\nstatus\ntags"
+						"description": "### Overview\n\nSearch and filter your monitor groups details.\n\n### ARGUMENTS\n\n* **`query`** [*optional*]: After entering a search query in your [Manage Monitor page][1] use the query parameter value in the URL of the page as value for this parameter. Consult the dedicated [manage monitor documentation][2] page to learn more.\n\n* **`page`** [*optional*, *default* = **0**]: Page to start paginating from.\n\n* **`per_page`** [*optional*, *default*=**30**]: Number of monitors to return per page.\n\n* **`sort`** [*optional*, *default*=**null**]: Comma separated string for sort order (e.g. `name,asc`) supported fields:\n\n    * `name`\n    * `status`\n    * `tags`\n\n[1]: https://app.datadoghq.com/monitors/manage\n[2]: https://docs.datadoghq.com/monitors/manage_monitor/#find-the-monitors"
 					},
 					"response": []
 				}
@@ -8340,7 +8337,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Setup Child Org Via API\",\n    \"subscription\": {\n        \"type\": \"pro\"\n    },\n    \"billing\": {\n        \"type\": \"parent_billing\"\n    }\n}"
+							"raw": "{\n    \"name\": \"Org Setup by API\",\n    \"subscription\": {\n        \"type\": \"pro\"\n    },\n    \"billing\": {\n        \"type\": \"parent_billing\"\n    }\n}"
 						},
 						"url": {
 							"raw": "https://app.datadoghq.com/api/v1/org?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -8358,15 +8355,17 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "{{dd_app_key}}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								}
 							]
 						},
-						"description": "create child org, based off api_key and app_key"
+						"description": "### Overview\n\nThis endpoint requires the [multi-org account][1] feature and must be enabled by [contacting support][2].\n\n### Arguments\n\n* **`name`** [*required*]: The name of the new child-organization, limited to 32 characters.\n* **`subscription`** [*required*]: A JSON array of subscription type. Types available are `trial`, `free`, and `pro`.\n* **`billing`** [*required*]: A JSON array of billing type. Note that only `parent_billing` is supported.\n\nOnce a new child-organization is created, you can interact with it by using the `org.public_id`, `api_key.key`, and `application_key.hash` provided in the response.\n\n[1]: https://docs.datadoghq.com/account_management/multi_organization\n[2]: https://docs.datadoghq.com/help"
 					},
 					"response": []
 				},
@@ -8401,20 +8400,24 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "{{dd_app_key}}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								}
 							],
 							"variable": [
 								{
 									"key": "PUBLIC_ID",
-									"value": ""
+									"value": "{{datadog_org_public_id}}",
+									"description": "Datadog public organization ID."
 								}
 							]
-						}
+						},
+						"description": "### Overview\nGet an organisation details based on its public ID.\n\n### Arguments\n\n* **`public_id`** [*required*]: The public id of the organization."
 					},
 					"response": []
 				},
@@ -8448,14 +8451,17 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "{{dd_app_key}}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								}
 							]
-						}
+						},
+						"description": "### Overview\n\nGet all child-organisation details for a given Master organisation.\n\n### Arguments\n\nThis endpoint takes no JSON argument."
 					},
 					"response": []
 				},
@@ -8471,10 +8477,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"settings\": {\n        \"saml\": {\n            \"enabled\": false\n        },\n        \"saml_strict_mode\": {\n            \"enabled\": false\n        },\n        \"saml_idp_initiated_login\": {\n            \"enabled\": false\n        },\n        \"saml_autocreate_users_domains\": {\n            \"enabled\": false,\n            \"domains\": [\n                \"my-org.com\",\n                \"example.com\"\n            ]\n        }\n    }\n}"
+							"raw": "{\n    \"settings\": {\n        \"saml\": {\n            \"enabled\": false\n        },\n        \"saml_strict_mode\": {\n            \"enabled\": false\n        },\n        \"saml_idp_initiated_login\": {\n            \"enabled\": false\n        },\n        \"saml_autocreate_users_domains\": {\n            \"enabled\": false,\n            \"domains\": [\n                \"example.com\"\n            ]\n        }\n    }\n}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/org/:PUBLIC_ID",
+							"raw": "https://app.datadoghq.com/api/v1/org/:PUBLIC_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -8487,14 +8493,27 @@
 								"org",
 								":PUBLIC_ID"
 							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
 							"variable": [
 								{
 									"key": "PUBLIC_ID",
-									"value": ""
+									"value": "{{datadog_org_public_id}}",
+									"description": "Public ID of a Datadog organisation."
 								}
 							]
 						},
-						"description": "ARGUMENTS\nname [optional]:\nThe organization name.\nsettings [optional]:\nA JSON array of settings. Settings include:\nsaml - Set the boolean property enabled to enable or disable single sign on with SAML. See the SAML documentation for more information about all SAML settings.\nsaml_idp_initiated_login - has one property enabled (boolean).v\nsaml_strict_mode - has one property enabled (boolean).\nsaml_autocreate_users_domains - has two properties: enabled (boolean) and domains which is a list of domains without the @ symbol."
+						"description": "### Overview\n\nUpdate a Datadog organization information.\n\n##### ARGUMENTS\n* **`name`** [*optional*]: The organization name.\n* **`settings`** [*optional*]: A JSON array of settings. Settings include:\n    * **`saml`** - Set the boolean property `enabled` to enable or disable single sign on with SAML. See the [SAML documentation][1] for more information about all SAML settings.\n    * **`saml_idp_initiated_login`** - has one property `enabled` (boolean).v\n    * **`saml_strict_mode`** - has one property `enabled` (boolean).\n    * **`saml_autocreate_users_domains`** - has two properties: `enabled` (boolean) and `domains` which is a list of domains without the @ symbol.\n\n[1]: https://docs.datadoghq.com/account_management/saml"
 					},
 					"response": []
 				},
@@ -8505,15 +8524,15 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json"
+								"value": "application/xml"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"settings\": {\n        \"saml\": {\n            \"enabled\": true\n        },\n        \"saml_autocreate_users_domains\": {\n            \"domains\": [\n                \"my-org.com\",\n                \"example.com\"\n            ],\n            \"enabled\": true\n        },\n        \"saml_idp_initiated_login\": {\n            \"enabled\": true\n        },\n        \"saml_strict_mode\": {\n            \"enabled\": true\n        }\n    }\n}"
+							"mode": "file",
+							"file": {}
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/org/:PUBLIC_ID/idp_metadata",
+							"raw": "https://app.datadoghq.com/api/v1/org/:PUBLIC_ID/idp_metadata?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -8527,19 +8546,32 @@
 								":PUBLIC_ID",
 								"idp_metadata"
 							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
 							"variable": [
 								{
 									"key": "PUBLIC_ID",
-									"value": ""
+									"value": "{{datadog_org_public_id}}",
+									"description": "Public ID of a Datadog organisation."
 								}
 							]
 						},
-						"description": "ARGUMENTS\nidp_file [required]:\nThe path to the XML metadata file you wish to upload."
+						"description": "### Overview\n\nThere are a couple of options for updating the Identity Provider (IdP) metadata from your SAML IdP.\n\n* **Multipart Form-Data**: Post the IdP metadata file using a form post.\n* **XML Body**: Post the IdP metadata file as the body of the request.\n\n### Multipart Form-Data\n\n#### Headers\n\n* **`Content-Type: multipart/form-data`**\n\n#### Arguments\n\n* **`idp_file`** [*required*]: The path to the XML metadata file you wish to upload.\n\n### XML Body\n\n#### Headers\n* **`Content-Type: application/xml`**\n\n#### Arguments\n\nThe body must contain the contents of your IdP metadata XML file."
 					},
 					"response": []
 				}
 			],
-			"description": "This endpoint requires the multi-org account feature and must be enabled by contacting support.\n\nMulti-org feature:https://docs.datadoghq.com/account_management/multi_organization\n",
+			"description": "This endpoint requires the [multi-org account feature](https://docs.datadoghq.com/account_management/multi_organization) and must be enabled by contacting support.\n\nYou can create, edit, and manage organizations. Read more about [multi-org accounts](https://docs.datadoghq.com/account_management/multi_organization).",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -8564,913 +8596,6 @@
 			]
 		},
 		{
-			"name": "Tags",
-			"item": [
-				{
-					"name": "Get Tags",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/tags/hosts?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"datadoghq",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"tags",
-								"hosts"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{dd_api_key}}"
-								},
-								{
-									"key": "application_key",
-									"value": "{{dd_app_key}}"
-								}
-							]
-						},
-						"description": "Return a mapping of tags to hosts for your whole infrastructure.\n\nARGUMENTS\nsource [optional, default=None]:\nOnly show tags from a particular source. Otherwise shows all tags.\nComplete list of source attribute values"
-					},
-					"response": []
-				},
-				{
-					"name": "Get host tags",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/:HOSTNAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"datadoghq",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"tags",
-								"hosts",
-								":HOSTNAME"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{dd_api_key}}"
-								},
-								{
-									"key": "application_key",
-									"value": "{{dd_app_key}}"
-								}
-							],
-							"variable": [
-								{
-									"key": "HOSTNAME",
-									"value": "myhost"
-								}
-							]
-						},
-						"description": "Get all host tags by hostname"
-					},
-					"response": []
-				},
-				{
-					"name": "Add tags to a host",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"tags\": [\n        \"environment:production\",\n        \"role:webserver\"\n    ]\n}"
-						},
-						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/:HOSTNAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"datadoghq",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"tags",
-								"hosts",
-								":HOSTNAME"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{dd_api_key}}"
-								},
-								{
-									"key": "application_key",
-									"value": "{{dd_app_key}}"
-								}
-							],
-							"variable": [
-								{
-									"key": "HOSTNAME",
-									"value": "myhost"
-								}
-							]
-						},
-						"description": "This end point allows you to add new tags to a host, optionally specifying where these tags come from.\n\nARGUMENTS\n\ntags [required]:\nA list of tags to apply to the host\n\nsource [optional, default=users]:\nThe source of the tags (e.g. chef, puppet).\n"
-					},
-					"response": []
-				},
-				{
-					"name": "Update host tags",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"tags\": [\n        \"environment:production\",\n        \"role:webserver\"\n    ]\n}"
-						},
-						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/:HOSTNAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"datadoghq",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"tags",
-								"hosts",
-								":HOSTNAME"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{dd_api_key}}"
-								},
-								{
-									"key": "application_key",
-									"value": "{{dd_app_key}}"
-								}
-							],
-							"variable": [
-								{
-									"key": "HOSTNAME",
-									"value": "myhost"
-								}
-							]
-						},
-						"description": "This end point allows you to update/replace all tags in an integration source with those supplied in the request.\n\nARGUMENTS\ntags [required]:\nA list of tags\nsource [optional, default=users]:\nThe source of the tags (e.g. chef, puppet).\nComplete list of source attribute values"
-					},
-					"response": []
-				},
-				{
-					"name": "Remove host tags",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/:HOSTNAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"datadoghq",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"tags",
-								"hosts",
-								":HOSTNAME"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{dd_api_key}}"
-								},
-								{
-									"key": "application_key",
-									"value": "{{dd_app_key}}"
-								}
-							],
-							"variable": [
-								{
-									"key": "HOSTNAME",
-									"value": "myhost"
-								}
-							]
-						},
-						"description": "This end point allows you to remove all tags in an integration source for a single host.\n\nARGUMENTS\nsource [optional, default=users]:\nThe source of the tags (e.g. chef, puppet)."
-					},
-					"response": []
-				}
-			],
-			"description": "The tag end point allows you to tag hosts with keywords meaningful to you - like role:database. All metrics sent from a host will have its tags applied. When fetching and applying tags to a particular host, you can refer to hosts by name (yourhost.example.com).\n\nThe component of your infrastructure responsible for a tag is identified by a source. Valid sources are: nagios, hudson, jenkins, users, feed, chef, puppet, git, bitbucket, fabric, capistrano."
-		},
-		{
-			"name": "Tracing",
-			"item": [
-				{
-					"name": "Send traces",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "4498d5f5-38b7-41d5-ab34-6c83ed1246f0",
-								"exec": [
-									"// Set current date and time",
-									"// YYYY-MM-ddTHH:mm:ss.SSSZ",
-									"var curr_date = (new Date());",
-									"var from_date = (new Date());",
-									"var to_date = (new Date());",
-									"",
-									"// Set timeframe window in minutes",
-									"// Positive number sets to_date forward",
-									"// Negative number sets from_date backwards",
-									"var window_minutes = -30",
-									"if (window_minutes > 0) {",
-									"    // Look ahead: adjusts to_date",
-									"    to_date.setMinutes(curr_date.getMinutes()+window_minutes);",
-									"} else {",
-									"    // Look behind: adjusts from_date",
-									"    from_date.setMinutes(curr_date.getMinutes()+window_minutes);",
-									"}",
-									"",
-									"// timestamp in ms",
-									"var from_ts_ms = parseInt(Math.floor(from_date.getTime()));",
-									"var to_ts_ms = parseInt(Math.floor(to_date.getTime()));",
-									"// timestamp in seconds",
-									"var from_ts = parseInt(from_ts_ms/1000);",
-									"var to_ts = parseInt(to_ts_ms/1000);",
-									"// timestamp in ns",
-									"var from_ts_ns = parseInt(from_ts_ms*1000);",
-									"var to_ts_ns = parseInt(to_ts_ms*1000);",
-									"",
-									"//// Uncomment for debugging.",
-									"// console.log(from_date);",
-									"// console.log(from_ts_ms);",
-									"// console.log(from_ts);",
-									"",
-									"// console.log(to_date);",
-									"// console.log(to_ts_ms);",
-									"// console.log(to_ts);",
-									"",
-									"//// Set as Postman variables",
-									"pm.environment.set(\"from_date\", from_date);",
-									"pm.environment.set(\"from_ts_ms\", from_ts_ms);",
-									"pm.environment.set(\"from_ts\", from_ts);",
-									"",
-									"pm.environment.set(\"to_date\", to_date);",
-									"pm.environment.set(\"to_ts_ms\", to_ts_ms);",
-									"pm.environment.set(\"to_ts\", to_ts);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "[\n    [\n        {\n            \"trace_id\": \"{{guid}}\",\n            \"span_id\": \"{{guid}}\",\n            \"name\": \"span_name\",\n            \"resource\": \"/home\",\n            \"service\": \"service_name\",\n            \"type\": \"web\",\n            \"start\": \"{{from_ts_ns}}\",\n            \"duration\": \"2000000000\"\n        }\n    ]\n]"
-						},
-						"url": {
-							"raw": "http://localhost:8126/v0.3/traces",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8126",
-							"path": [
-								"v0.3",
-								"traces"
-							]
-						},
-						"description": "Datadog’s APM allows you to collect performance metrics by tracing your code to determine which parts of your application are slow or inefficient.\n\nTracing data is sent to the Datadog Agent via an HTTP API. We provide some official libraries that simplify sending metrics to the Datadog Agent, however you may want to interact directly with the API to instrument applications that cannot use the libraries or are written in languages that don’t yet have an official Datadog Tracing library.\n\nTraces can be sent as an array of traces:\n\n[ trace1, trace2, trace3 ]\nand each trace is an array of spans:\n\ntrace1 = [ span, span2, span3 ]\nand each span is a dictionary with a trace_id, span_id, resource..\n\n"
-					},
-					"response": []
-				},
-				{
-					"name": "Send services",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"service_name\": {\n        \"app\": \"my-app\",\n        \"app_type\": \"web\"\n    }\n}"
-						},
-						"url": {
-							"raw": "http://localhost:8126/v0.3/services",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8126",
-							"path": [
-								"v0.3",
-								"services"
-							]
-						},
-						"description": "https://docs.datadoghq.com/api/?lang=bash#send-traces"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Usage Metering",
-			"item": [
-				{
-					"name": "GET Hourly Usage For Hosts and Containers",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "86c2f87a-0c50-4e0e-82cc-a27b79513156",
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/usage/hosts?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start_hr=2019-04-01T00&end_hr=2019-04-03T00",
-							"protocol": "https",
-							"host": [
-								"app",
-								"datadoghq",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"usage",
-								"hosts"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{dd_api_key}}"
-								},
-								{
-									"key": "application_key",
-									"value": "{{dd_app_key}}"
-								},
-								{
-									"key": "start_hr",
-									"value": "2019-04-01T00",
-									"description": "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour"
-								},
-								{
-									"key": "end_hr",
-									"value": "2019-04-03T00",
-									"description": "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour"
-								}
-							]
-						},
-						"description": "Get Hourly Usage For Hosts and Containers.\n\nArguments\nstart_hr [required]:\ndatetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour\nend_hr [optional, default=1d+start_hr]:\ndatetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour\n\n\nResponse\ncontainer_count:\nShows the total number of containers reporting via the Docker integration during the hour.\nhost_count:\nContains the total number of billable infrastructure hosts reporting during a given hour. This is the sum of agent_host_count, aws_host_count, and gcp_host_count.\nhour:\nThe hour for the usage.\napm_host_count:\nShows the total number of hosts using APM during the hour. For Pro plans, these are counted as billable (except during trial periods). For Enterprise plans, APM hosts are included in the price of infrastructure hosts (see host_count) and not billed separately.\nagent_host_count:\nContains the total number of infrastructure hosts reporting during a given hour that were running the Datadog Agent.\ngcp_host_count:\nContains the total number of hosts that reported via the Google Cloud integration (and were NOT running the Datadog Agent).\naws_host_count:\nContains the total number of hosts that reported via the AWS integration (and were NOT running the Datadog Agent). When AWS or GCP hosts are also running the Datadog Agent, they are counted as Agent hosts, NOT as AWS or GCP"
-					},
-					"response": []
-				},
-				{
-					"name": "Get hourly usage for logs",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/usage/logs?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start_hr=2019-04-01T00&end_hr=2019-04-03T00",
-							"protocol": "https",
-							"host": [
-								"app",
-								"datadoghq",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"usage",
-								"logs"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{dd_api_key}}"
-								},
-								{
-									"key": "application_key",
-									"value": "{{dd_app_key}}"
-								},
-								{
-									"key": "start_hr",
-									"value": "2019-04-01T00",
-									"description": "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour"
-								},
-								{
-									"key": "end_hr",
-									"value": "2019-04-03T00",
-									"description": "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour"
-								}
-							]
-						},
-						"description": "Get Hourly Usage For Logs.\n\nArguments\n\nstart_hr [required]: datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour\n\nend_hr [optional, default=1d+start_hr]: datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour\n\n\nResponse\n\ningested_events_bytes: Contains the number of log bytes ingested.\n\nindexed_events_count: Contains the number of log events indexed.\n\nhour: The hour for the usage."
-					},
-					"response": []
-				},
-				{
-					"name": "GET Hourly Usage for Custom Metrics",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/usage/timeseries?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start_hr=2019-04-01T00&end_hr=2019-04-03T00",
-							"protocol": "https",
-							"host": [
-								"app",
-								"datadoghq",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"usage",
-								"timeseries"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{dd_api_key}}"
-								},
-								{
-									"key": "application_key",
-									"value": "{{dd_app_key}}"
-								},
-								{
-									"key": "start_hr",
-									"value": "2019-04-01T00",
-									"description": "Required: datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour"
-								},
-								{
-									"key": "end_hr",
-									"value": "2019-04-03T00",
-									"description": "Optional: datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour"
-								}
-							]
-						},
-						"description": "Get Top Custom Metrics By Hourly Average.\n\nArguments\nmonth [required]:\ndatetime in ISO-8601 format, UTC, precise to month: [YYYY-MM] for usage beginning at this hour.\n\nnames [optional, default=None]:\nComma-separated list of metric names."
-					},
-					"response": []
-				},
-				{
-					"name": "GET Top 500 Custom Metrics by hourly average",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/usage/top_avg_metrics?api_key={{dd_api_key}}&application_key={{dd_app_key}}&month=2019-04&names=aws.ec2.spot_history,system.processes.number",
-							"protocol": "https",
-							"host": [
-								"app",
-								"datadoghq",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"usage",
-								"top_avg_metrics"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{dd_api_key}}"
-								},
-								{
-									"key": "application_key",
-									"value": "{{dd_app_key}}"
-								},
-								{
-									"key": "month",
-									"value": "2019-04",
-									"description": "Required: datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM] for usage beginning at this hour."
-								},
-								{
-									"key": "names",
-									"value": "aws.ec2.spot_history,system.processes.number",
-									"description": "optional: comma-separated list of metric names "
-								}
-							]
-						},
-						"description": "Get Top Custom Metrics By Hourly Average.\n\nArguments\nmonth [required]:\ndatetime in ISO-8601 format, UTC, precise to month: [YYYY-MM] for usage beginning at this hour.\nnames [optional, default=None]:\nComma-separated list of metric names."
-					},
-					"response": []
-				},
-				{
-					"name": "GET Multi-Org Usage Details",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/usage/summary?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start_month=2019-04",
-							"protocol": "https",
-							"host": [
-								"app",
-								"datadoghq",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"usage",
-								"summary"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{dd_api_key}}"
-								},
-								{
-									"key": "application_key",
-									"value": "{{dd_app_key}}"
-								},
-								{
-									"key": "start_month",
-									"value": "2019-04",
-									"description": "[required]:\nDatetime in ISO-8601 format, UTC, precise to month: [YYYY-MM] for usage beginning in this month. Maximum of 15 months ago."
-								},
-								{
-									"key": "end_month",
-									"value": "2019-04",
-									"description": "[optional, default=current_month-3d]: Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM] for usage ending this month.",
-									"disabled": true
-								},
-								{
-									"key": "include_org_ids",
-									"value": "",
-									"description": "[optional, default=true]: Include usage summaries for each sub-org.",
-									"disabled": true
-								}
-							]
-						},
-						"description": "Get usage across your multi-org account\n\nArguments\nstart_month [required]:\nDatetime in ISO-8601 format, UTC, precise to month: [YYYY-MM] for usage beginning in this month. Maximum of 15 months ago.\nend_month [optional, default=current_month-3d]: Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM] for usage ending this month.\ninclude_org_details [optional, default=true]: Include usage summaries for each sub-org."
-					},
-					"response": []
-				},
-				{
-					"name": "Get hourly usage for Trace Search",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/usage/traces?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start_hr=2019-04-04T02",
-							"protocol": "https",
-							"host": [
-								"app",
-								"datadoghq",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"usage",
-								"traces"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{dd_api_key}}"
-								},
-								{
-									"key": "application_key",
-									"value": "{{dd_app_key}}"
-								},
-								{
-									"key": "start_hr",
-									"value": "2019-04-04T02",
-									"description": "Required: datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour"
-								},
-								{
-									"key": "end_hr",
-									"value": "",
-									"description": "[optional, default=1d+start_hr]: datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour",
-									"disabled": true
-								}
-							]
-						},
-						"description": "Get hourly usage For Trace Search.\n\nArguments\n\nstart_hr [required]: datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour\n\nend_hr [optional, default=1d+start_hr]: datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour\n\n\nResponse\n\nindexed_events_count: Contains the number of Trace Search events indexed.\n\nhour: The hour for the usage."
-					},
-					"response": []
-				}
-			],
-			"description": "This API is currently in private beta. Python and Ruby clients are not yet supported.\n\nThe usage metering end-point allows you to:\n\nGet Hourly Usage For Hosts and Containers\nGet Hourly Usage For Custom Metrics\nGet Top Custom Metrics By Hourly Average\nUsage data is delayed by up to 72 hours from when it was incurred. It is retained for the past 15 months."
-		},
-		{
-			"name": "Users",
-			"item": [
-				{
-					"name": "Create user",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"disabled\": false,\n    \"handle\": \"test@datadoghq.com\",\n    \"name\": \"Test User\",\n    \"is_admin\": true,\n    \"role\": null,\n    \"access_role\": \"adm\",\n    \"verified\": true,\n    \"email\": \"test@datadoghq.com\",\n    \"icon\": \"https://secure.gravatar.com/avatar/df46ee85ff1cbb518b20c8cab742b9ea?s=48&d=retro\"\n}"
-						},
-						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/user?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"datadoghq",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{dd_api_key}}"
-								},
-								{
-									"key": "application_key",
-									"value": "{{dd_app_key}}"
-								}
-							]
-						},
-						"description": "ARGUMENTS\n\nhandle [required]:\nThe user handle, must be a valid email.\nname [optional, default=None]:\nThe name of the user.\naccess_role [optional, default=st]:\nThe access role of the user. Choose from:\nst (standard user),\nadm (admin user),\nro (read-only user).\nNote: users can be created with admin access role only with application keys belonging to administrators."
-					},
-					"response": []
-				},
-				{
-					"name": "Get user",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/user/:USER_HANDLE?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"datadoghq",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user",
-								":USER_HANDLE"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{dd_api_key}}"
-								},
-								{
-									"key": "application_key",
-									"value": "{{dd_app_key}}"
-								}
-							],
-							"variable": [
-								{
-									"key": "USER_HANDLE",
-									"value": "test@datadoghq.com",
-									"description": "Usually the same as the email address"
-								}
-							]
-						},
-						"description": "id [required]:\nThe handle of the user."
-					},
-					"response": []
-				},
-				{
-					"name": "Get all users",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/user?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"datadoghq",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{dd_api_key}}"
-								},
-								{
-									"key": "application_key",
-									"value": "{{dd_app_key}}"
-								}
-							]
-						},
-						"description": "This end point takes no JSON arguments."
-					},
-					"response": []
-				},
-				{
-					"name": "Update user",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"user\": {\n        \"disabled\": false,\n        \"handle\": \"test@datadoghq.com\",\n        \"name\": \"Testy McTestingson\",\n        \"is_admin\": true,\n        \"role\": null,\n        \"access_role\": \"adm\",\n        \"verified\": true,\n        \"email\": \"test@datadoghq.com\",\n        \"icon\": \"https://secure.gravatar.com/avatar/df46ee85ff1cbb518b20c8cab742b9ea?s=48&d=retro\"\n    }\n}"
-						},
-						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/user/:USER_HANDLE?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"datadoghq",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user",
-								":USER_HANDLE"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{dd_api_key}}"
-								},
-								{
-									"key": "application_key",
-									"value": "{{dd_app_key}}"
-								}
-							],
-							"variable": [
-								{
-									"key": "USER_HANDLE",
-									"value": "test@datadoghq.com"
-								}
-							]
-						},
-						"description": "ARGUMENTS\n\nid [required]:\nThe handle of the user.\nname [optional, default=None]:\nThe new name of the user.\nemail [optional, default=None]:\nThe new email of the user.\ndisabled [optional, default=None]:\nThe new disabled status of the user.\naccess_role [optional, default=st]:\nThe access role of the user. Choose from:\nst (standard user),\nadm (admin user),\nro (read-only user)."
-					},
-					"response": []
-				},
-				{
-					"name": "Disable user",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/user/:USER_HANDLE?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"datadoghq",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user",
-								":USER_HANDLE"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{dd_api_key}}"
-								},
-								{
-									"key": "application_key",
-									"value": "{{dd_app_key}}"
-								}
-							],
-							"variable": [
-								{
-									"key": "USER_HANDLE",
-									"value": "test@datadoghq.com"
-								}
-							]
-						},
-						"description": "ARGUMENTS\nid [required]:\nThe handle of the user."
-					},
-					"response": []
-				}
-			],
-			"description": "You can create, edit, and disable users."
-		},
-		{
 			"name": "Synthetics",
 			"item": [
 				{
@@ -9480,16 +8605,16 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"type": "text",
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{  \n   \"config\":{  \n      \"assertions\":[  \n         {  \n            \"operator\":\"is\",\n            \"type\":\"statusCode\",\n            \"target\":403\n         },\n         {  \n            \"operator\":\"is\",\n            \"property\":\"content-type\",\n            \"type\":\"header\",\n            \"target\":\"text/html\"\n         },\n         {  \n            \"operator\":\"lessThan\",\n            \"type\":\"responseTime\",\n            \"target\":2000\n         }\n      ],\n      \"request\":{  \n         \"method\":\"GET\",\n         \"url\":\"https://datadoghq.com\",\n         \"timeout\":30,\n         \"headers\":{  \n            \"header1\":\"value1\",\n            \"header2\":\"value2\"\n         },\n         \"body\":\"body to send with the request\"\n      }\n   },\n   \"locations\":[  \n      \"aws:us-east-2\",\n      \"aws:eu-central-1\",\n      \"aws:ca-central-1\",\n      \"aws:eu-west-2\",\n      \"aws:ap-northeast-1\",\n      \"aws:us-west-2\",\n      \"aws:ap-southeast-2\"\n   ],\n   \"message\":\"test\",\n   \"name\":\"Test\",\n   \"options\":{  \n      \"tick_every\":60,\n      \"min_failure_duration\":0,\n      \"min_location_failed\":1,\n      \"follow_redirects\":true\n   },\n   \"tags\":[  \n      \"foo:bar\"\n   ],\n   \"type\":\"api\"\n}"
+							"raw": "{\n    \"config\": {\n        \"assertions\": [\n            {\n                \"operator\": \"is\",\n                \"type\": \"statusCode\",\n                \"target\": 403\n            },\n            {\n                \"operator\": \"is\",\n                \"property\": \"content-type\",\n                \"type\": \"header\",\n                \"target\": \"text/html\"\n            },\n            {\n                \"operator\": \"lessThan\",\n                \"type\": \"responseTime\",\n                \"target\": 2000\n            }\n        ],\n        \"request\": {\n            \"method\": \"GET\",\n            \"url\": \"https://datadoghq.com\",\n            \"timeout\": 30,\n            \"headers\": {\n                \"header1\": \"value1\",\n                \"header2\": \"value2\"\n            },\n            \"body\": \"body to send with the request\"\n        }\n    },\n    \"locations\": [\n        \"aws:us-east-2\",\n        \"aws:eu-central-1\",\n        \"aws:ca-central-1\",\n        \"aws:eu-west-2\",\n        \"aws:ap-northeast-1\",\n        \"aws:us-west-2\",\n        \"aws:ap-southeast-2\"\n    ],\n    \"message\": \"test\",\n    \"name\": \"Test\",\n    \"options\": {\n        \"tick_every\": 60,\n        \"min_failure_duration\": 0,\n        \"min_location_failed\": 1,\n        \"follow_redirects\": true\n    },\n    \"tags\": [\n        \"foo:bar\"\n    ],\n    \"type\": \"api\"\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests?api_key=${api_key}&application_key=${app_key}",
+							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9505,14 +8630,17 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "${api_key}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "${app_key}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								}
 							]
-						}
+						},
+						"description": "### Overview\n\nCreate a Synthetics test to initiate and configure the tests you want Datadog to send to your API endpoints or to your browser app. You can configure the endpoints being tested, the number of tests, and where they are coming from. The parameters required are different for API and browser tests and they are marked accordingly—if a parameter is marked as _required_, it is required for both types of tests. Once you create a test, it shows up in the UI in your [Synthetics list][1]\n\nA browser test is treated like a GET API test. This method gives you the ability to create the browser test, but you have to use the UI to [record your test][2].\n\n##### Arguments\n\n*   **`assertions`** - _required_ - This is where you are defining exactly what should happen for a test to be considered passed. Each assertion has a: `type`, `operator`, `target`, and possibly a `property`.\n    *   **`type`** - _required API test_ - The part of the response that you want to assess. Possible types are `header`, `body`, `responseTime`, and `statusCode`. When you define a header, you must specify the header parameter key in the `property` parameter, and the header parameter value with the `target` parameter. For all other types, use the `target` to specify the body, the response time, and the error messages. For example, a `\"type\":\"statusCode\"` might have a `\"target\":403`.\n    *   **`operator`** - _required API test_ - Defines how to compare the target and the actual value from the response. Valid operators depend on the `type` of assertions. This is the list of valid operators per type:\n\n<table>\n <tr>\n    <th><code>type</code></th>\n    <th>Valid <code>operator</code></th>\n    <th>Value type</th>\n  </tr>\n  <tr>\n    <td>Status Code</td>\n    <td><code>is</code>, <code>is not</code></td>\n    <td>Integer</td>\n  </tr>\n  <tr>\n    <td>Response time</td>\n    <td><code>less than</code></td>\n    <td>Integer</td>\n  </tr>\n  <tr>\n    <td>Headers</td>\n    <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>\n    <td>for <code>contains</code>/<code>does not contain</code>/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: <a href=\"https://docs.datadoghq.com/tagging/using_tags\">RegexString</a></td>\n  </tr>\n  <tr>\n    <td>Body</td>\n    <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>\n    <td>for <code>contains</code>/<code>does not contain/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: <a href=\"https://docs.datadoghq.com/tagging/using_tags\">RegexString</a></td>\n  </tr>\n</table>\n\n   *   **`target`** - _required API test_ - The expected value for the assertion. For `header`, valid values are any of the valid values for the header key that you define in `property`. For `statusCode`, valid values are valid status codes. For `responseTime`, valid values are the expected response times.\n   *   **`property`** - _optional_ - When you are setting up a `header` `type`, this is required to define the headers parameter key. Valid values are any header keys, like `Content-Type` or `Authorization`.\n*   **`request`** - _required API test_ - An object containing all the necessary information to perform the request to your endpoint.\n   *   **`method`** - _required_ - The method of the API to test. Valid values are `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`. Use `GET` for a browser test.\n   *   **`url`** - _required_ - The endpoint for the API Datadog is testing. For a browser test, the URL for the website Datadog is testing.\n   *   **`timeout`** - _optional_ - When the API request will timeout.\n   *   **`headers`** - _optional_ - Headers in the API request.\n   *   **`body`** - _optional_ - The body for the API request. Accepts text strings (including a JSON as a text string). Specify the type using `Content-Type` `property` parameter and the type (like `application/json` or `text/plain` in the `headers` paramater.\n*   **`locations`** - _required_ - A list of the locations that you want the tests to be sent from. At least one value is required, and you can use all locations. For a list of valid locations, use the `GET available locations` method. At least one value is required, and you can use all locations.\n*   **`message`** - _required_ - A description of the test.\n*   **`name`** - _required_ - A unique name for the test.\n*   **`options`** - _required_ - Use advanced options to specify custom request headers, authentication credentials, body content, cookies, or to have the test follow redirects. All optional parameters take their default value if you don't specify a value. Valid values in the request object are:\n    *  ** `tick_every`:** - _required_ -  How often the test should run (in seconds - current possible values are 60, 300, 900, 1800, 3600, 21600, 43200, 86400, 604800).\n    *  **`min_failure_duration`** - _optional_ - How long the test should be in failure before alerting (integer, number of seconds, max 7200). Default is 0.\n    *  **`min_location_failed`** - _optional_ - The minimum number of locations that must have been in failure at the same time during at least one moment in the `min_failure_duration` period (min_location_failed and min_failure_duration are part of the advanced alerting rules  - integer, >= 1. Default is 1.\n    *  **`follow_redirects`** - _optional_ - boolean - whether to follow redirects or not (max ten redirects can be followed before triggering a \"Too many redirects\" error). Valid values are `true` or `false`. Default value is `false`.\n    *  **`device_ids`** - _required browser test_ - The type of device you want to use to test. To get a list of available devices, use the `GET devices for browser checkes` method and use the `id` from the response. At least one device is required.\n*   **`tags`** - _optional_ - Tags you want to use to filter your test when you are viewing it in Datadog. For more info on custom tags, see [Using tags][3].\n*   **`type`** - _required_ - The type of test. Valid values are `api` and `browser`.\n\n[1]: https://app.datadoghq.com/synthetics/list\n[2]: https://docs.datadoghq.com/synthetics/browser_test/#record-test\n[3]: https://docs.datadoghq.com/tagging/using_tags"
 					},
 					"response": []
 				},
@@ -9529,10 +8657,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"new_status\":\"paused\"}"
+							"raw": "{\n    \"new_status\": \"paused\"\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests/${test_id}/status?api_key=${api_key}&application_key=${app_key}",
+							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests/:TEST_ID/status?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9544,40 +8672,50 @@
 								"v1",
 								"synthetics",
 								"tests",
-								"${test_id}",
+								":TEST_ID",
 								"status"
 							],
 							"query": [
 								{
 									"key": "api_key",
-									"value": "${api_key}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "${app_key}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"key": "TEST_ID",
+									"value": "{{synthetics_test_id}}",
+									"description": "ID of the synthetics test to start/pause"
 								}
 							]
-						}
+						},
+						"description": "### Overview\n\nStart or pause an existing Synthetics test.\n\n##### Arguments\n\n*   **`new_status`** - _required_ - A key-value pair where you define whether you want to start or pause a test. Valid values are `live` and `paused`. Returns `true` if the status has been changed, and `false` if the status has stayed the same."
 					},
 					"response": []
 				},
 				{
 					"name": "Edit a test",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"type": "text",
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{  \n   \"config\":{  \n      \"assertions\":[  \n         {  \n            \"operator\":\"is\",\n            \"type\":\"statusCode\",\n            \"target\":403\n         },\n         {  \n            \"operator\":\"is\",\n            \"property\":\"content-type\",\n            \"type\":\"header\",\n            \"target\":\"text/html\"\n         },\n         {  \n            \"operator\":\"lessThan\",\n            \"type\":\"responseTime\",\n            \"target\":2000\n         }\n      ],\n      \"request\":{  \n         \"method\":\"GET\",\n         \"url\":\"https://datadoghq.com\",\n         \"timeout\":30,\n         \"headers\":{  \n            \"header1\":\"value1\",\n            \"header2\":\"value2\"\n         },\n         \"body\":\"body to send with the request\"\n      }\n   },\n   \"locations\":[  \n      \"aws:us-east-2\",\n      \"aws:eu-central-1\",\n      \"aws:ap-northeast-1\",\n      \"aws:us-west-2\",\n      \"aws:ap-southeast-2\"\n   ],\n   \"message\":\"test\",\n   \"name\":\"Test\",\n   \"options\":{  \n      \"tick_every\":60,\n      \"min_failure_duration\":0,\n      \"min_location_failed\":1,\n      \"follow_redirects\":true\n   },\n   \"tags\":[  \n      \"foo:bar\"\n   ],\n   \"type\":\"api\"\n}"
+							"raw": "{\n    \"config\": {\n        \"assertions\": [\n            {\n                \"operator\": \"is\",\n                \"type\": \"statusCode\",\n                \"target\": 403\n            },\n            {\n                \"operator\": \"is\",\n                \"property\": \"content-type\",\n                \"type\": \"header\",\n                \"target\": \"text/html\"\n            },\n            {\n                \"operator\": \"lessThan\",\n                \"type\": \"responseTime\",\n                \"target\": 2000\n            }\n        ],\n        \"request\": {\n            \"method\": \"GET\",\n            \"url\": \"https://datadoghq.com\",\n            \"timeout\": 30,\n            \"headers\": {\n                \"header1\": \"value1\",\n                \"header2\": \"value2\"\n            },\n            \"body\": \"body to send with the request\"\n        }\n    },\n    \"locations\": [\n        \"aws:us-east-2\",\n        \"aws:eu-central-1\",\n        \"aws:ap-northeast-1\",\n        \"aws:us-west-2\",\n        \"aws:ap-southeast-2\"\n    ],\n    \"message\": \"test\",\n    \"name\": \"Test\",\n    \"options\": {\n        \"tick_every\": 60,\n        \"min_failure_duration\": 0,\n        \"min_location_failed\": 1,\n        \"follow_redirects\": true\n    },\n    \"tags\": [\n        \"foo:bar\"\n    ],\n    \"type\": \"api\"\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests/${test_id}?api_key=${api_key}&application_key=${app_key}",
+							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests/:TEST_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9589,19 +8727,29 @@
 								"v1",
 								"synthetics",
 								"tests",
-								"${test_id}"
+								":TEST_ID"
 							],
 							"query": [
 								{
 									"key": "api_key",
-									"value": "${api_key}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "${app_key}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"description": "ID of the synthetics test to start/pause",
+									"key": "TEST_ID",
+									"value": "{{synthetics_test_id}}"
 								}
 							]
-						}
+						},
+						"description": "### Overview\n\nUse this method to update an existing Synthetics test. In order to update a test, you have to submit the same payload as creating a test.\n\nThe parameters required are different for API and browser tests and they are marked accordingly—if a parameter is marked as _required_, it is required for both types of tests.\n\nA browser test is treated like a GET API test. This method gives you the ability to update the browser test, but you have to use the UI to [record your test][1].\n\nIn order to update a request, you have to submit a full object, but only these parameters are editable: `name`, `tags`, `config` (anything defined in the `assertions` and anything defined in the `request`), `message`, `options`, `locations`, and `status`.\n\n### Arguments\n\n*   **`assertions`** - _required_ - This is where you are defining exactly what should happen for a test to be considered passed. Each assertion has a: `type`, `operator`, `target`, and possibly a `property`.\n    *   **`type`** - _required API test_ - The part of the response that you want to assess. Possible types are `header`, `body`, `responseTime`, and `statusCode`. When you define a header, you must specify the header parameter key in the `property` parameter, and the header parameter value with the `target` parameter. For all other types, use the `target` to specify the body, the response time, and the error messages. For example, a `\"type\":\"statusCode\"` might have a `\"target\":403`.\n    *   **`operator`** - _required API test_ - Defines how to compare the target and the actual value from the response. Valid operators depend on the `type` of assertions. This is the list of valid operators per type:\n\n<table>\n <tr>\n    <th><code>type</code></th>\n    <th>Valid <code>operator</code></th>\n    <th>Value type</th>\n  </tr>\n  <tr>\n    <td>Status Code</td>\n    <td><code>is</code>, <code>is not</code></td>\n    <td>Integer</td>\n  </tr>\n  <tr>\n    <td>Response time</td>\n    <td><code>less than</code></td>\n    <td>Integer</td>\n  </tr>\n  <tr>\n    <td>Headers</td>\n    <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>\n    <td>for <code>contains</code>/<code>does not contain</code>/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: <a href=\"https://docs.datadoghq.com/tagging/using_tags\">RegexString</a></td>\n  </tr>\n  <tr>\n    <td>Body</td>\n    <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>\n    <td>for <code>contains</code>/<code>does not contain/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: <a href=\"https://docs.datadoghq.com/tagging/using_tags\">RegexString</a></td>\n  </tr>\n</table>\n\n   *   **`target`** - _required API test_ - The expected value for the assertion. For `header`, valid values are any of the valid values for the header key that you define in `property`. For `statusCode`, valid values are valid status codes. For `responseTime`, valid values are the expected response times.\n   *   **`property`** - _optional_ - When you are setting up a `header` `type`, this is required to define the headers parameter key. Valid values are any header keys, like `Content-Type` or `Authorization`.\n*   **`request`** - _required API test_ - An object containing all the necessary information to perform the request to your endpoint.\n   *   **`method`** - _required_ - The method of the API to test. Valid values are `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`. Use `GET` for a browser test.\n   *   **`url`** - _required_ - The endpoint for the API Datadog is testing. For a browser test, the URL for the website Datadog is testing.\n   *   **`timeout`** - _optional_ - When the API request will timeout.\n   *   **`headers`** - _optional_ - Headers in the API request.\n   *   **`body`** - _optional_ The body for the API request. Accepts text strings (including a JSON as a text string). Specify the type using `Content-Type` `property` parameter and the type (like `application/json` or `text/plain` in the `headers` paramater.\n*   **`locations`** - _required_ - A list of the locations that you want the tests to be sent from. At least one value is required, and you can use all locations. For a list of valid locations, use the `GET available locations` method. At least one value is required, and you can use all locations.\n*   **`message`** - _required_ - A description of the test.\n*   **`name`** - _required_ - A unique name for the test.\n*   **`options`** - _required_ - Use advanced options to specify custom request headers, authentication credentials, body content, cookies, or to have the test follow redirects. All optional parameters take their default value if you don't specify a value. Valid values in the request object are:\n    *  **`tick_every`:** - _required_ -  How often the test should run (in seconds - current possible values are 60, 300, 900, 1800, 3600, 21600, 43200, 86400, 604800).\n    *  **`min_failure_duration`** - _optional_ - How long the test should be in failure before alerting (integer, number of seconds, max 7200). Default is 0.\n    *  **`min_location_failed`** - _optional_ - The minimum number of locations that must have been in failure at the same time during at least one moment in the `min_failure_duration` period (min_location_failed and min_failure_duration are part of the advanced alerting rules  - integer, >= 1. Default is 1.\n    *  **`follow_redirects`** - _optional_ - boolean - whether to follow redirects or not (max ten redirects can be followed before triggering a \"Too many redirects\" error). Valid values are `true` or `false`. Default value is `false`.\n    *  **`device_ids`** - _required browser test_ - The type of device you want to use to test. To get a list of available devices, use the `GET devices for browser checkes` method and use the `id` from the response. At least one device is required.\n*   **`tags`** - _optional_ - Tags you want to use to filter your test when you are viewing it in Datadog. For more info on custom tags, see [Using tags][2].\n*   **`type`** - _required_ - The type of test. Valid values are `api` and `browser`.\n\n[1]: https://docs.datadoghq.com/synthetics/browser_test/#record-test\n[2]: https://docs.datadoghq.com/tagging/using_tags"
 					},
 					"response": []
 				},
@@ -9612,16 +8760,16 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"type": "text",
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{  \n   \"public_ids\":[  \n      \"aaa-bbb-ccc\",\n      \"bbb-ccc-ddd\"\n   ]\n}"
+							"raw": "{\n    \"public_ids\": [\n        \"<TEST_ID_1>\",\n        \"<TEST_ID_2>\"\n    ]\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests/delete?api_key=${api_key}&application_key=${app_key}",
+							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests/delete?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9638,19 +8786,22 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "${api_key}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "${app_key}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								}
 							]
-						}
+						},
+						"description": "### Overview\n\nDelete one or many tests.\n\n### Arguments\n\n*   **`public_ids`** - _required_ - A JSON list of the ID or IDs of the tests that you want to delete."
 					},
 					"response": []
 				},
 				{
-					"name": "Get the most recent results",
+					"name": "Get all test results",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -9662,7 +8813,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests/${test_id}/results?api_key=${api_key}&application_key=${app_key}",
+							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests/:TEST_ID/results?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9674,25 +8825,35 @@
 								"v1",
 								"synthetics",
 								"tests",
-								"${test_id}",
+								":TEST_ID",
 								"results"
 							],
 							"query": [
 								{
 									"key": "api_key",
-									"value": "${api_key}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "${app_key}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"description": "ID of the synthetics test to get results from",
+									"key": "TEST_ID",
+									"value": "{{synthetics_test_id}}"
 								}
 							]
-						}
+						},
+						"description": "### Overview\n\nGet the most recent results for a specific test.\n\n### Arguments\n\n*This endpoint takes no JSON arguments.*"
 					},
 					"response": []
 				},
 				{
-					"name": "Get a specific result",
+					"name": "Get a specific test result",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -9704,7 +8865,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests/${test_id}/results/${result_id}?api_key=${api_key}&application_key=${app_key}",
+							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests/:TEST_ID/results/:RESULT_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9716,21 +8877,36 @@
 								"v1",
 								"synthetics",
 								"tests",
-								"${test_id}",
+								":TEST_ID",
 								"results",
-								"${result_id}"
+								":RESULT_ID"
 							],
 							"query": [
 								{
 									"key": "api_key",
-									"value": "${api_key}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "${app_key}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"description": "ID of the synthetics test to get result from",
+									"key": "TEST_ID",
+									"value": "{{synthetics_test_id}}"
+								},
+								{
+									"description": "ID of the synthetics test result.",
+									"key": "RESULT_ID",
+									"value": "{{synthetics_test_result_id}}"
 								}
 							]
-						}
+						},
+						"description": "### Overview\n\nGet a specific result for a specific test.\n\n### Arguments\n\n*This endpoint takes no JSON arguments.*"
 					},
 					"response": []
 				},
@@ -9747,7 +8923,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests?api_key=${api_key}&application_key=${app_key}",
+							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9763,14 +8939,17 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "${api_key}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "${app_key}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								}
 							]
-						}
+						},
+						"description": "### Overview\n\nGet a list of all existing tests.\n\n### Arguments\n\n*This endpoint takes no JSON arguments.*"
 					},
 					"response": []
 				},
@@ -9787,7 +8966,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests/${test_id}?api_key=${api_key}&application_key=${app_key}",
+							"raw": "https://api.datadoghq.com/api/v1/synthetics/tests/${test_id}?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9804,14 +8983,17 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "${api_key}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "${app_key}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								}
 							]
-						}
+						},
+						"description": "### Overview\n\nGet information on a specific test.\n\n### Arguments\n\n*This endpoint takes no JSON arguments.*"
 					},
 					"response": []
 				},
@@ -9852,7 +9034,8 @@
 									"value": "${app_key}"
 								}
 							]
-						}
+						},
+						"description": "### Overview\n\nGet a list of devices for browser checks.\n\n### Arguments\n\n*This endpoint takes no JSON arguments.*"
 					},
 					"response": []
 				},
@@ -9869,7 +9052,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/synthetics/locations?api_key=${api_key}&application_key=${app_key}",
+							"raw": "https://api.datadoghq.com/api/v1/synthetics/locations?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9885,16 +9068,1093 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "${api_key}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "${app_key}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								}
 							]
-						}
+						},
+						"description": "### Overview\n\nGet a list of available locations\n\n### Arguments\n\n*This endpoint takes no JSON arguments.*"
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tags",
+			"item": [
+				{
+					"name": "Get Tags",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/tags/hosts?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tags",
+								"hosts"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								}
+							]
+						},
+						"description": "### Overview\n\nReturn a mapping of tags to hosts for your whole infrastructure.\n\n### Arguments\n\n*This endpoint takes no JSON arguments.*"
+					},
+					"response": []
+				},
+				{
+					"name": "Get host tags",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/:HOSTNAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tags",
+								"hosts",
+								":HOSTNAME"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"key": "HOSTNAME",
+									"value": "{{dd_hostname}}",
+									"description": "Name of the host to retrieve tags from."
+								}
+							]
+						},
+						"description": "### Overview\n\nReturn the list of tags that apply to a given host.\n\n### Arguments\n\n*This endpoint takes no JSON arguments.*"
+					},
+					"response": []
+				},
+				{
+					"name": "Add tags to a host",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tags\": [\n        \"environment:postman\",\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ]\n}"
+						},
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/:HOSTNAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tags",
+								"hosts",
+								":HOSTNAME"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"description": "Host name to add tags to.",
+									"key": "HOSTNAME",
+									"value": "{{dd_hostname}}"
+								}
+							]
+						},
+						"description": "### Overview\n\nThis endpoint allows you to add new tags to a host, optionally specifying where these tags come from.\n\n### Arguments\n\n* **`tags`** [*required*]: A list of tags to apply to the host\n* **`source`** [*optional*, *default*=**users**]: The source of the tags (e.g. chef, puppet). [Complete list of source attribute values][1]\n\n[1]: https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value"
+					},
+					"response": []
+				},
+				{
+					"name": "Update host tags",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tags\": [\n        \"environment:postman\",\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ]\n}"
+						},
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/:HOSTNAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tags",
+								"hosts",
+								":HOSTNAME"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"key": "HOSTNAME",
+									"value": "{{dd_hostname}}",
+									"description": "Hostname to update tags of."
+								}
+							]
+						},
+						"description": "### Overview\n\nThis endpoint allows you to update/replace all tags in an integration source with those supplied in the request.\n\n### Arguments\n\n* **`tags`** [*required*]: A list of tags\n* **`source`** [*optional*, *default*=**users**]: The source of the tags (e.g. chef, puppet). [Complete list of source attribute values][1]\n\n[1]: https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value"
+					},
+					"response": []
+				},
+				{
+					"name": "Remove host tags",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/:HOSTNAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tags",
+								"hosts",
+								":HOSTNAME"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"key": "HOSTNAME",
+									"value": "{{dd_hostname}}",
+									"description": "Hostname to delete tag from."
+								}
+							]
+						},
+						"description": "### Overview\n\nRemove all tags in an integration source for a single host.\n\n### Arguments\n\n*This endpoint takes no JSON arguments.*"
+					},
+					"response": []
+				}
+			],
+			"description": "The tag end point allows you to tag hosts with keywords meaningful to you - like role:database. All metrics sent from a host will have its tags applied. When fetching and applying tags to a particular host, you can refer to hosts by name (yourhost.example.com).\n\nThe component of your infrastructure responsible for a tag is identified by a source. Valid sources are: nagios, hudson, jenkins, users, feed, chef, puppet, git, bitbucket, fabric, capistrano."
+		},
+		{
+			"name": "Tracing",
+			"item": [
+				{
+					"name": "Send traces",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "4498d5f5-38b7-41d5-ab34-6c83ed1246f0",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    [\n        {\n            \"trace_id\": \"{{guid}}\",\n            \"span_id\": \"{{guid}}\",\n            \"name\": \"span_name\",\n            \"resource\": \"/home\",\n            \"service\": \"service_name\",\n            \"type\": \"web\",\n            \"start\": \"{{from_ts_ns}}\",\n            \"duration\": \"2000000000\"\n        }\n    ]\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8126/v0.3/traces",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8126",
+							"path": [
+								"v0.3",
+								"traces"
+							]
+						},
+						"description": "### Overview\n\nDatadog's APM allows you to collect performance metrics by tracing your code to determine which parts of your application are slow or inefficient.\n\nTracing data is sent to the Datadog Agent via an HTTP API. We provide some [official libraries][1] that simplify sending metrics to the Datadog Agent, however you may want to interact directly with the API to instrument applications that cannot use the libraries or are written in languages that don't yet have an official Datadog Tracing library.\n\nTraces can be sent as an array of [traces][2]:\n```\n[ trace1, trace2, trace3 ]\n```\n\nand each trace is an array of [spans][3]:\n```\ntrace1 = [ span, span2, span3 ]\n```\n\nand each span is a dictionary with a `trace_id`, `span_id`, `resource`..\n\n[Learn more about the APM (tracing) terminology][4]\n\n**Note**: Each span within a trace should use the same trace_id.\n\n### Arguments\n\n*   **`trace_id`** - _required_ The unique integer (64-bit unsigned) ID of the trace containing this span.\n*   **`span_id`** - _required_ The span integer (64-bit unsigned) ID.\n*   **`name`** - _required_ The span name. The span name must not be longer than 100 characters.\n*   **`resource`** - _required_ The resource you are tracing. The resource name must not be longer than 5000 characters.\n*   **`service`** - _required_ The service you are tracing. The service name must not be longer than 100 characters.\n*   **`type`** - _optional, default=**custom**, case-sensitive_ The type of request. The options available are `web`, `db`, `cache`, and `custom`. \n*   **`start`** - _required._ The start time of the request in nanoseconds from the unix epoch.\n*   **`duration`** - _required_ The duration of the request in nanoseconds.\n*   **`parent_id`** - _optional_ The span integer ID of the parent span.\n*   **`error`** - _optional_ Set this value to 1 to indicate if an error occured. If an error occurs, you should pass additional information, such as the error message, type and stack information in the `meta` property.\n*   **`meta`** - _optional_ A dictionary of key-value metadata. e.g. tags.\n\n[1]: https://docs.datadoghq.com/tracing/#instrument-your-application\n[2]: https://docs.datadoghq.com/tracing/visualization/trace\n[3]: https://docs.datadoghq.com/tracing/visualization/trace/#spans\n[4]: https://docs.datadoghq.com/tracing/visualization/services_list"
+					},
+					"response": []
+				},
+				{
+					"name": "Send services",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"service_name\": {\n        \"app\": \"my-app\",\n        \"app_type\": \"web\"\n    }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8126/v0.3/services",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8126",
+							"path": [
+								"v0.3",
+								"services"
+							]
+						},
+						"description": "https://docs.datadoghq.com/api/?lang=bash#send-traces"
+					},
+					"response": []
+				}
+			],
+			"description": "Learn more about [tracing with Datadog][1] and [the APM terminology][2]\n\nThe tracing API is an Agent API rather than a service side API. Submit your traces to the `http://localhost:8126/v0.3/traces` local endpoint so your Agent can forward them to Datadog.\n\n[1]: https://docs.datadoghq.com/tracing\n[2]: https://docs.datadoghq.com/tracing/visualization/services_list\n",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a2982b1e-900c-4a44-8054-224a3673ea23",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "b3fd1c04-11ee-4b9e-989d-36e867465c8a",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Usage Metering",
+			"item": [
+				{
+					"name": "Get  Hosts and Containers hourly usage",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "86c2f87a-0c50-4e0e-82cc-a27b79513156",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/usage/hosts?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start_hr=yyyy-MM-ddThh",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usage",
+								"hosts"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								},
+								{
+									"key": "start_hr",
+									"value": "yyyy-MM-ddThh",
+									"description": "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour"
+								},
+								{
+									"key": "end_hr",
+									"value": "yyyy-MM-ddThh",
+									"description": "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour",
+									"disabled": true
+								}
+							]
+						},
+						"description": "### Overview\n\nGet Hourly Usage For Hosts and Containers.\n\n### Arguments\n\n* **`start_hr`** [*required*]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour\n* **`end_hr`** [*optional*, *default*=**1d+start_hr**]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour\n\n#### Response\n\n* **`container_count`**: Shows the total number of containers reporting via the Docker integration during the hour.\n* **`host_count`**: Contains the total number of billable infrastructure hosts reporting during a given hour. This is the sum of `agent_host_count`, `aws_host_count`, and `gcp_host_count`.\n* **`hour`**: The hour for the usage.\n* **`apm_host_count`**: Shows the total number of hosts using APM during the hour, these are counted as billable (except during trial periods).\n* **`agent_host_count`**: Contains the total number of infrastructure hosts reporting during a given hour that were running the Datadog Agent.\n* **`gcp_host_count`**: Contains the total number of hosts that reported via the Google Cloud integration (and were NOT running the Datadog Agent).\n* **`aws_host_count`**: Contains the total number of hosts that reported via the AWS integration (and were NOT running the Datadog Agent). When AWS or GCP hosts are also running the Datadog Agent, they are counted as Agent hosts, NOT as AWS or GCP."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Logs hourly Usage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/usage/logs?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start_hr=yyyy-MM-ddThh",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usage",
+								"logs"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								},
+								{
+									"key": "start_hr",
+									"value": "yyyy-MM-ddThh",
+									"description": "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour"
+								},
+								{
+									"key": "end_hr",
+									"value": "yyyy-MM-ddThh",
+									"description": "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour",
+									"disabled": true
+								}
+							]
+						},
+						"description": "### Overview\n\nGet Hourly Usage For Logs.\n\n### Arguments\n* **`start_hr`** [*required*]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour\n* **`end_hr`** [*optional*, *default*=**1d+start_hr**]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour\n\n#### Response\n\n* **`ingested_events_bytes`**: Contains the number of log bytes ingested.\n* **`indexed_events_count`**: Contains the number of log events indexed.\n* **`hour`**: The hour for the usage."
+					},
+					"response": []
+				},
+				{
+					"name": "Get  Custom Metrics hourly usage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/usage/timeseries?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start_hr=yyyy-MM-ddThh",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usage",
+								"timeseries"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								},
+								{
+									"key": "start_hr",
+									"value": "yyyy-MM-ddThh",
+									"description": "Required: datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour"
+								},
+								{
+									"key": "end_hr",
+									"value": "yyyy-MM-ddThh",
+									"description": "Optional: datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour",
+									"disabled": true
+								}
+							]
+						},
+						"description": "### Overview\n\nGet Hourly Usage For [Custom Metrics][1].\n\n### Arguments\n\n* **`start_hr`** [*required*]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour\n* **`end_hr`** [*optional*, *default*=**1d+start_hr**]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour\n\n[1]: https://docs.datadoghq.com/developers/metrics/custom_metrics"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Top 500 Custom Metrics by hourly average",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/usage/top_avg_metrics?api_key={{dd_api_key}}&application_key={{dd_app_key}}&month=yyyy-MM",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usage",
+								"top_avg_metrics"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								},
+								{
+									"key": "month",
+									"value": "yyyy-MM",
+									"description": "datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM] for usage beginning at this hour."
+								},
+								{
+									"key": "names",
+									"value": "",
+									"description": "comma-separated list of metric names ",
+									"disabled": true
+								}
+							]
+						},
+						"description": "### Overview\n\nGet Top [Custom Metrics][1] By Hourly Average.\n\n### Arguments\n* **`month`** [*required*]: Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM] for usage beginning at this hour.\n* **`names`** [*optional*, *default*=**None**]: Comma-separated list of metric names.\n\n[1]: https://docs.datadoghq.com/developers/metrics/custom_metrics"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Multi-Org Usage Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/usage/summary?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start_month=yyyy-MM",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usage",
+								"summary"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								},
+								{
+									"key": "start_month",
+									"value": "yyyy-MM",
+									"description": "Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM] for usage beginning in this month. Maximum of 15 months ago."
+								},
+								{
+									"key": "end_month",
+									"value": "",
+									"description": "Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM] for usage ending this month.",
+									"disabled": true
+								},
+								{
+									"key": "include_org_ids",
+									"value": "true",
+									"description": "Include usage summaries for each sub-org.",
+									"disabled": true
+								}
+							]
+						},
+						"description": "### Overview\n\nGet usage across your multi-org account\n\n### Arguments\n\n* **`start_month`** [*required*]: Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM] for usage beginning in this month. Maximum of 15 months ago.\n* **`end_month`** [*optional*, *default*=**current_month-3d**]: Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM] for usage ending this month.\n* **`include_org_details`** [*optional*, *default*=**true**]: Include usage summaries for each sub-org."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Trace Search hourly usage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/usage/traces?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start_hr=yyyy-MM-ddTHH",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usage",
+								"traces"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								},
+								{
+									"key": "start_hr",
+									"value": "yyyy-MM-ddTHH",
+									"description": "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour"
+								},
+								{
+									"key": "end_hr",
+									"value": "",
+									"description": "datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour",
+									"disabled": true
+								}
+							]
+						},
+						"description": "### Overview\n\nGet hourly usage For Trace Search.\n\n### Arguments\n* **`start_hr`** [*required*]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour\n* **`end_hr`** [*optional*, *default*=**1d+start_hr**]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour\n\n#### Response\n\n* **`indexed_events_count`**: Contains the number of Trace Search events indexed.\n* **`hour`**: The hour for the usage."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Synthetics hourly usage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/usage/synthetics?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start_hr=yyyy-MM-ddTHH",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usage",
+								"synthetics"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								},
+								{
+									"key": "start_hr",
+									"value": "yyyy-MM-ddTHH",
+									"description": "Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour"
+								},
+								{
+									"key": "end_hr",
+									"value": "",
+									"description": "Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Get Hourly Usage For [Synthetics][1].\n\n##### Arguments\n* **`start_hr`** [*required*]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour\n* **`end_hr`** [*optional*, *default*=**1d+start_hr**]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour\n\n[1]: https://docs.datadoghq.com/synthetics"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Fargate hourly usage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/usage/synthetics?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start_hr=yyyy-MM-ddTHH",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usage",
+								"synthetics"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								},
+								{
+									"key": "start_hr",
+									"value": "yyyy-MM-ddTHH",
+									"description": "Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour"
+								},
+								{
+									"key": "end_hr",
+									"value": null,
+									"description": "Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour\n",
+									"disabled": true
+								}
+							]
+						},
+						"description": "### Overview\n\nGet Hourly Usage For [Fargate][1].\n\n### Arguments\n\n* **`start_hr`** [*required*]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour\n* **`end_hr`** [*optional*, *default*=**1d+start_hr**]: Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour\n\n[1]: https://docs.datadoghq.com/integrations/ecs_fargate"
+					},
+					"response": []
+				}
+			],
+			"description": "This API is available to all customers. Python and Ruby clients are not yet supported.\n\nThe usage metering end-point allows you to:\n\n* Get Hourly Usage For Hosts and Containers\n* Get Hourly Usage For Logs\n* Get Hourly Usage For Custom Metrics\n* Get Top Custom Metrics By Hourly Average\n* Get Hourly Usage For Trace Search\n* Get Hourly Usage For Synthetics Checks\n* Get Hourly Usage For Fargate Tasks\n\n\nUsage data is delayed by up to 72 hours from when it was incurred. It is retained for the past 15 months.\n",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "91bb4174-dabb-4f1c-98f2-3f30d09163ce",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "1079cbb1-9274-40a4-98fb-f57a5e72d6c9",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"handle\": \"test@datadoghq.com\",\n    \"name\": \"test user\",\n    \"access_role\": \"st\"\n}"
+						},
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/user?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								}
+							]
+						},
+						"description": "### Overview\n\nCreate a user for your organization.\n\n### ARGUMENTS\n\n* **`handle`** [*required*]: The user handle, must be a valid email.\n* **`name`** [*optional*, *default*=**None**]: The name of the user.\n* **`access_role`** [*optional*, *default*=**st**]: The access role of the user. Choose from:\n    *  **st** (standard user),\n    *  **adm** (admin user),\n    *  **ro** (read-only user).\n    *Note: users can be created with admin access role only with application keys belonging to administrators.*"
+					},
+					"response": []
+				},
+				{
+					"name": "Get user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/user/:USER_HANDLE?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								":USER_HANDLE"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"key": "USER_HANDLE",
+									"value": "{{dd_user_handle}}",
+									"description": "Datadog user handle email, usually the same as the user email"
+								}
+							]
+						},
+						"description": "### Overview\n\nGet a user details.\n\n### Arguments\n\n* **`user_handle`** [*required*]: The handle of the user."
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/user?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								}
+							]
+						},
+						"description": "### Overview\n\nGet all user for your organization.\n\n### Arguments\n\nThis endpoint takes no JSON argument."
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@datadoghq.com\",\n    \"name\": \"new user\",\n    \"access_role\": \"ro\"\n}"
+						},
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/user/:USER_HANDLE?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								":USER_HANDLE"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"key": "USER_HANDLE",
+									"value": "{{dd_user_handle}}",
+									"description": "The handle of the user."
+								}
+							]
+						},
+						"description": "### Overview\n\nUpdate a user informations,\n\n**Note**: It can only be used with application keys belonging to administrators.\n\n##### ARGUMENTS\n* **`id`** [*required*]: The handle of the user.\n* **`name`** [*optional*, *default*=**None**]: The new name of the user.\n* **`email`** [*optional*, *default*=**None**]: The new email of the user.\n* **`disabled`** [*optional*, *default*=**None**]: The new disabled status of the user.\n* **`access_role`** [*optional*, *default*=**st**]: The access role of the user. Choose from:\n    *  **st** (standard user),\n    *  **adm** (admin user),\n    *  **ro** (read-only user)."
+					},
+					"response": []
+				},
+				{
+					"name": "Disable user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://app.datadoghq.com/api/v1/user/:USER_HANDLE?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"datadoghq",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								":USER_HANDLE"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"key": "USER_HANDLE",
+									"value": "{{dd_user_handle}}",
+									"description": "Datadog user handle."
+								}
+							]
+						},
+						"description": "### Overview\n\nDelete a user from an organization.\n\n**Note**: This endpoint can only be used with application keys belonging to administrators.\n\n### Arguments\n\n* **`id`** [*required*]: The handle of the user."
+					},
+					"response": []
+				}
+			],
+			"description": "\nCreate, edit, and disable users. [Read more about your team management][1]\n\n[1]: https://docs.datadoghq.com/account_management/team\n",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "dfc6442f-1a0b-4357-a802-06ae72359b98",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "7f7351ce-db98-4b03-924c-ffe556fd94c8",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		}
