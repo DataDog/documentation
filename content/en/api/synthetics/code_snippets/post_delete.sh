@@ -4,8 +4,8 @@ api_key=<YOUR_API_KEY>
 app_key=<YOUR_APP_KEY>
 
 curl -X POST -H "Content-type: application/json" \
--d '{  
-   "public_ids":[  
+-d '{
+   "public_ids":[
       "aaa-bbb-ccc",
       "bbb-ccc-ddd"
    ]

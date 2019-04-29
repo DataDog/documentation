@@ -13,7 +13,7 @@ The parameters required are different for API and browser tests and they are mar
 
 A browser test is treated like a GET API test. This method gives you the ability to update the browser test, but you have to use the UI to [record your test][1].
 
-In order to update a request, you have to submit a full object, but only these parameters are editable: `name`, `tags`, `config` (anything defined in the `assertions` and anything defined in the `request`), `message`, `options`, `locations`, and `status`. 
+In order to update a request, you have to submit a full object, but only these parameters are editable: `name`, `tags`, `config` (anything defined in the `assertions` and anything defined in the `request`), `message`, `options`, `locations`, and `status`.
 
 ##### Arguments
 
@@ -40,15 +40,15 @@ In order to update a request, you have to submit a full object, but only these p
   <tr>
     <td>Headers</td>
     <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>
-    <td>for <code>contains</code>/<code>does not contain</code>/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: RegexStrings</td>
+    <td>for <code>contains</code>/<code>does not contain</code>/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: <a href="https://docs.datadoghq.com/tagging/using_tags">RegexString</a></td>
   </tr>
   <tr>
     <td>Body</td>
     <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>
-    <td>for <code>contains</code>/<code>does not contain/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: RegexStrings</td>
+    <td>for <code>contains</code>/<code>does not contain/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: <a href="https://docs.datadoghq.com/tagging/using_tags">RegexString</a></td>
   </tr>
 </table>
-   
+
    *   **`target`** - _required API test_ - The expected value for the assertion. For `header`, valid values are any of the valid values for the header key that you define in `property`. For `statusCode`, valid values are valid status codes. For `responseTime`, valid values are the expected response times.
    *   **`property`** - _optional_ - When you are setting up a `header` `type`, this is required to define the headers parameter key. Valid values are any header keys, like `Content-Type` or `Authorization`.
 *   **`request`** - _required API test_ - An object containing all the necessary information to perform the request to your endpoint.
