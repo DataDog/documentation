@@ -38,7 +38,7 @@ Define the configuration of your browser test.
 2. Enter the Start URL. This is the URL from which your browser test starts the scenario.
 3. Define Tags with the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` in the Synthetics page.
 4. Define on which device to run your check. Available devices are: `Laptop Large`, `Tablet`, and `Mobile Small`.
-5. Pick-up locations to run the test from. Many AWS locations from around the world are available.
+5. Pick-up locations to run the test from. Many AWS locations from around the world are available, the full list can be retrieved [through Datadog API][1].
 6. Choose a Check frequency between "1 run per 5 minute interval" to "1 run per week":
 
     {{< img src="synthetics/browser_test/check_frequency.png" alt="Check frequency" responsive="true" style="width:80%;">}}
@@ -49,14 +49,14 @@ A notification is sent if at least one step of the browser test scenario fails. 
 
 {{< img src="synthetics/browser_test/browser_check_notification.png" alt="Browser test notification" responsive="true" style="width:80%;">}}
 
-1. Select users and/or [services][1] to send the notifications to.
-2. Enter a **message** for the browser test. This field allows standard [Markdown formatting][2]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
+1. Select users and/or [services][2] to send the notifications to.
+2. Enter a **message** for the browser test. This field allows standard [Markdown formatting][3]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
 3. Click **Save Details and Record Test** to save your browser test.
 4. Start to record your test.
 
 ## Record test
 
-**Tests can be only recorded from [Google Chrome][3]. To record your test, download the [Datadog Record Test extension for Google Chrome][4].**
+**Tests can be only recorded from [Google Chrome][4]. To record your test, download the [Datadog Record Test extension for Google Chrome][5].**
 
 {{< img src="synthetics/browser_test/browser_check_record_test.png" alt="Browser test record test" responsive="true" >}}
 
@@ -136,7 +136,8 @@ To use your variables in one of your assertions, hit *Use Variable* and select t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/#cat-notification
-[2]: http://daringfireball.net/projects/markdown/syntax
-[3]: https://www.google.com/chrome
-[4]: https://chrome.google.com/webstore/detail/datadog-test-recorder-sta/bfgpghinhlklmedgkkpnhphfgdliceel
+[1]: /api/?lang=bash#get-available-locations
+[2]: /integrations/#cat-notification
+[3]: http://daringfireball.net/projects/markdown/syntax
+[4]: https://www.google.com/chrome
+[5]: https://chrome.google.com/webstore/detail/datadog-test-recorder-sta/bfgpghinhlklmedgkkpnhphfgdliceel
