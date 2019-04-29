@@ -19,16 +19,16 @@ Il arrive que vous soyez contraint d'éteindre ou de mettre hors ligne des syst�
 
 Vous pouvez planifier des downtimes et/ou désactiver vos monitors Datadog afin qu'ils n'émettent pas d'alertes pendant les périodes de votre choix.
 
-Les monitors déclenchent des événements lorsque leur statut, à savoir `ALERT`, `WARNING` (si activé), `RESOLVED` et `NO DATA` (si activé), change. Lorsqu'un monitor est arrêté, en raison d'un downtime ou d'une désactivation, si son statut passe de `RESOLVED` à un autre statut, cela **ne déclenche aucun événement** et n'active aucun canal de notification associé.
+Les monitors déclenchent des événements lorsque leur état, à savoir `ALERT`, `WARNING` (si activé), `RESOLVED` et `NO DATA` (si activé), change. Lorsqu'un monitor est arrêté, en raison d'un downtime ou d'une désactivation, si son état passe de `RESOLVED` à un autre statut, cela **ne déclenche aucun événement** et n'active aucun canal de notification associé.
 
 **Remarque** : si vous désactivez ou réactivez un monitor via l'IU, les downtimes planifiés associés à ce monitor ne sont pas supprimés. Pour les supprimer, utilisez la fonctionnalité de gestion des downtimes ou passez directement par l'API.
 
 {{< img src="monitors/downtimes/downtime_on_alert.png" alt="downtime sur une alerte" responsive="true" style="width:80%;">}}
 
-Si le statut d'un monitor change durant un downtime (en passant par exemple de `OK` à `ALERT`, `WARNING`, ou `NO DATA`) et n'évolue pas après la fin du downtime planifié, cela ne déclenche **PAS** de notification.
-**Cependant, un événement de récupération SERA déclenché dès que des données seront renvoyées pour ce contexte ou dès que le monitor reviendra à un statut `OK`.**
+Si l'état d'un monitor change durant un downtime (en passant par exemple de `OK` à `ALERT`, `WARNING`, ou `NO DATA`) et n'évolue pas après la fin du downtime planifié, cela ne déclenche **PAS** de notification.
+**Cependant, un événement de récupération SERA déclenché dès que des données seront renvoyées pour ce contexte ou dès que le monitor reviendra à un état `OK`.**
 
-Ce comportement a été conçu dans le but d'empêcher l'envoi de nombreuses alertes de statut `NO DATA` lors de l'utilisation de la fonctionnalité *Autoresolve*. Si vous préférez que le monitor déclenche un événement de statut `NO DATA` chaque fois que la désactivation prend fin, [contactez l'équipe d'assistance Datadog][1] afin de demander l'activation de cette fonctionnalité pour votre compte. Cela concerne uniquement les situations où un monitor termine une période de downtime avec un statut `NO DATA`.
+Ce comportement a été conçu dans le but d'empêcher l'envoi de nombreuses alertes d'état `NO DATA` lors de l'utilisation de la fonctionnalité *Autoresolve*. Si vous préférez que le monitor déclenche un événement d'état `NO DATA` chaque fois que la désactivation prend fin, [contactez l'équipe d'assistance Datadog][1] afin de demander l'activation de cette fonctionnalité pour votre compte. Cela concerne uniquement les situations où un monitor termine une période de downtime avec un état `NO DATA`.
 
 ## Gérer un downtime
 
