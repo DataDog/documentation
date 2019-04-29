@@ -65,7 +65,7 @@ When running an API test, you must define at least one assertion that should be 
 | Headers       | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | for `contains`/`does not contain`/`is`/`is not`: String <br> for `matches`/`does not match`: [RegexStrings][3]    |
 | Body          | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | for `contains`/`does not contain`/`is`/`is not`: String <br> for `matches`/`does not match`: [RegexStrings][3]    |
 
-If you define an assertion on the content of `Headers`, you must define the `headers property` and the associated value.
+If you define an assertion on the content of `Headers`, you must define the `headers property` and its associated value.
 
 Click on **Add new assertion** to add up to 10 assertions for your API test.
 
