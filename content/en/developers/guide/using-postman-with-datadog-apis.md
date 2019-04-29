@@ -26,17 +26,17 @@ You have:
 
 After the prerequisites are met:
 
-1. Download the [Datadog Postman collection][3] (pre-configured API call templates).  
+1. Download the [Datadog Postman collection][3] (pre-configured API call templates).
     In Postman, a collection is a folder of organized API calls for easy editing, saving, and re-use.
 
-2. Import the Datadog Postman Collection:  
+2. Import the Datadog Postman Collection:
     * Open Postman
     * Click on File -> Import
     * Select the [datadog_collection.json][3] file downloaded in step 1.
 
 {{< img src="developers/faq/import_collection.gif" alt="postman_collection_import" responsive="true" >}}
 
-You now have a Datadog collection with many different API examples.  
+You now have a Datadog collection with many different API examples.
 
 **Note**: The API calls do not work at this point. See below to set your Datadog API and app keys.
 
@@ -54,7 +54,7 @@ Follow these steps to set up your environment:
 
 2. Click **Add** and enter an **Environment Name**.
 
-3. In the table, add the variables `dd_api_key` and `dd_app_key`. In the **Current Value** column, enter your actual [Datadog API and app keys][2]. 
+3. In the table, add the variables `dd_api_key` and `dd_app_key`. In the **Current Value** column, enter your actual [Datadog API and app keys][2].
 
 4. If you have multiple Datadog organizations, repeat steps 1-3 for each organization.
 
@@ -74,48 +74,20 @@ When you click on an API call in the collection, it loads in the `Builder` pane 
 
 {{< img src="developers/faq/apiGetCalls.png" alt="postman_api_response" responsive="true" >}}
 
+### Description
+
+When you click on the Endpoint name a description of the endpoint and all required/optional parameters is displayed to help you build your requests:
+
+{{< img src="developers/guide/postman/description.gif" alt="postman description" responsive="true" >}}
+
 ### Params
 
-The **Params** tab shows all parameters and values that are currently on the API call. Here, you are able to add parameters and values. View the available arguments in the corresponding section of the [Datadog API documentation][6]. 
+The **Params** tab shows all parameters and values that are currently on the API call. Here, you are able to add parameters and values. View the available arguments in the corresponding section of the [Datadog API documentation][6].
 
 {{< img src="developers/faq/parameters.png" alt="postman_param" responsive="true" >}}
 
-This tab is an alternative to viewing the `param1:value1&param2:value2` structure of the API call.  
+This tab is an alternative to viewing the `param1:value1&param2:value2` structure of the API call.
 **Note**: The ampersand (&) and colon (:) are not needed in the params table. Postman inserts these for you.
-
-### API calls
-
-#### GET
-
-Retrieving an entity (screenboard, monitor, metric, etc.) uses a GET API call. When making this call, additional parameters may be needed. If you want the output for a specific screenboard, the screenboard's ID is needed. Here is an example API call to get a screenboard:
-
-```
-https://app.datadoghq.com/api/v1/screen/{screenId}?api_key={{dd_api_key}}&application_key= {(dd_app_key}}
-```
-
-#### POST/PUT
-
-Creating an entity uses a POST API call, and updating a entity uses a PUT API call. Within the [datadog_collection.json][3] file you imported, there are several examples of these calls to set up new entities or update existing ones.
-
-When using these types of API calls within Postman, define the JSON payload within the **Body** tab and set the contentType to JSON. Postman has built-in notifications (red X) for improperly formatted JSON.
-
-This example uses the **Setup New Screenboard** API call to define a new screenboard:
-
-{{< img src="developers/faq/exampleGetCall.gif" alt="setup_new_screenboard" responsive="true" >}}
-
-When sending this API call, an HTTP status of 200 means the call was successful. Reference the [List of HTTP status codes][7] for other codes and descriptions.
-
-#### DELETE
-
-Deleting an entity uses a DELETE API call. When making a this request, additional parameters may be needed. If you want to delete a specific screenboard, the screenboard's ID is needed. Here is an example API call to delete a screenboard:
-
-```
-https://app.datadoghq.com/api/v1/screen/{screenId}?api_key={{dd_api_key}}&application_key= {{dd_app_key}}
-```
-
-{{< img src="developers/faq/apiDeleteCalls.gif" alt="screenboard_delete_api" responsive="true" >}}
-
-When sending this API call, an HTTP status of 200 means the call was successful. Reference the [List of HTTP status codes][7] for other codes and descriptions.
 
 [1]: https://www.getpostman.com
 [2]: https://app.datadoghq.com/account/settings#api
@@ -123,4 +95,3 @@ When sending this API call, an HTTP status of 200 means the call was successful.
 [4]: https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments
 [5]: /api/#organizations
 [6]: /api
-[7]: https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
