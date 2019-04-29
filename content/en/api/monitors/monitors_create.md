@@ -29,6 +29,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 | network      | `service check`      |
 | outlier      | `query alert`        |
 | process      | `service check`      |
+| watchdog     | `event alert`        |
     
 *   **`query`** [*required*]:  
     The query defines when the monitor triggers. Query syntax depends on what type of monitor you are creating:  
