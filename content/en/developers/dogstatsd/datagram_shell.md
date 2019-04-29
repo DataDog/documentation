@@ -140,6 +140,8 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
 sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```
 
+To send metrics on containerized environments, refer to the [DogStatsD on Kubernetes][4] documentation, in conjunction with the instructions for configuring APM on Kubernetes using [DaemonSets][5] or [Helm][6], depending on your installation. The [Docker APM][7] documentation may also be helpful.
+
 ### Sending events
 
 The format for sending events is:
@@ -172,4 +174,8 @@ PS C:\vagrant> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$t
 
 [1]: /developers/libraries/#api-and-dogstatsd-client-libraries
 [2]: /developers/metrics/#naming-metrics
-[3]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1
+[3]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.
+[4]: /agent/kubernetes/dogstatsd
+[5]: /agent/kubernetes/daemonset_setup/#apm-and-distributed-tracing
+[6]: /agent/kubernetes/helm/enable-apm-and-distributed-tracing
+[7]: /agent/docker/apm
