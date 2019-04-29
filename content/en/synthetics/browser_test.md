@@ -38,7 +38,7 @@ Define the configuration of your browser test.
 2. Enter the Start URL. This is the URL from which your browser test starts the scenario.
 3. Define Tags with the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` in the Synthetics page.
 4. Define on which device to run your check. Available devices are: `Laptop Large`, `Tablet`, and `Mobile Small`.
-5. Pick-up locations to run the test from. Many AWS locations from around the world are available, the full list can be retrieved [through Datadog API][1].
+5. Pick the locations to run the test from. Many AWS locations from around the world are available, the full list can be retrieved [through Datadog API][1].
 6. Choose a Check frequency between "1 run per 5 minute interval" to "1 run per week":
 
     {{< img src="synthetics/browser_test/check_frequency.png" alt="Check frequency" responsive="true" style="width:80%;">}}
