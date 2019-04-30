@@ -19,11 +19,11 @@ Les exemples sont tous en Python, grâce au [client Python officiel de Datadog][
 
 ## Métriques
 
-Les utilisateurs de StatsD sont habitués à utiliser des compteurs, jauges et ensembles. Les histogrammes sont spécifiques à DogStatsD. Les minuteurs, qui existent dans StatsD, sont un sous-ensemble d'histogrammes dans DogStatsD.
+Les utilisateurs de StatsD sont habitués à utiliser des counters, gauges et sets. Les histogrammes sont spécifiques à DogStatsD. Les minuteurs, qui existent dans StatsD, sont un sous-ensemble d'histogrammes dans DogStatsD.
 
-### Compteurs
+### Counters
 
-Les compteurs mesurent le nombre d'événements réalisés _par seconde_, comme les vues de page. Dans l'exemple qui suit, une métrique appelée `web.page_views` est incrémentée chaque fois que la fonction `render_page` est appelée.
+Les counters mesurent le nombre d'événements réalisés _par seconde_, comme les vues de page. Dans l'exemple qui suit, une métrique appelée `web.page_views` est incrémentée chaque fois que la fonction `render_page` est appelée.
 
 Pour Python :
 ```python
@@ -47,7 +47,7 @@ Grâce à cette unique ligne de code, les données peuvent être représentées 
 
 {{< img src="developers/metrics/graph-guides-metrics-page-views.png" alt="graphique guides métriques vues de page" responsive="true" >}}
 
-Vous remarquerez que les compteurs StatsD sont normalisés selon l'intervalle de transmission pour signaler des unités par seconde. Dans le graphique ci-dessus, le marqueur signale 35,33 vues de page Web par seconde à ~15:24. En revanche, si une personne avait consulté la page Web chaque seconde, le graphique serait une ligne droite à y = 1. Pour incrémenter ou mesurer les valeurs au fil du temps, consultez les [jauges](#jauges).
+Vous remarquerez que les counters StatsD sont normalisés selon l'intervalle de transmission pour signaler des unités par seconde. Dans le graphique ci-dessus, le marqueur signale 35,33 vues de page Web par seconde à ~15:24. En revanche, si une personne avait consulté la page Web chaque seconde, le graphique serait une ligne droite à y = 1. Pour incrémenter ou mesurer les valeurs au fil du temps, consultez les [gauges](#gauges).
 
 Vous pouvez également compter des nombres arbitraires. Imaginez que vous souhaitez compter le nombre d'octets traités par un service d'importation de fichiers. Incrémentez une métrique appelée `file_service.bytes_uploaded` en ajoutant la taille du fichier chaque fois que la fonction `upload_file` est appelée :
 
@@ -60,7 +60,7 @@ def upload_file(file):
     return 'Fichier importé !'
 ```
 
-Notez que pour les compteurs qui viennent d'une autre source, qui sont toujours croissants et qui ne sont jamais réinitialisés (par exemple, le nombre de requêtes de MySQL au fil du temps), Datadog surveille le taux entre les valeurs transmises. Pour obtenir les nombres bruts dans Datadog, appliquez une fonction à vos séries, comme une _somme cumulée_ ou une_intégrale_. [En savoir plus sur les fonctions Datadog][3].
+Notez que pour les counters qui viennent d'une autre source, qui sont toujours croissants et qui ne sont jamais réinitialisés (par exemple, le nombre de requêtes de MySQL au fil du temps), Datadog surveille le taux entre les valeurs transmises. Pour obtenir les nombres bruts dans Datadog, appliquez une fonction à vos séries, comme une _somme cumulée_ ou une_intégrale_. [En savoir plus sur les fonctions Datadog][3].
 
 Apprenez-en plus sur le [type Total dans la documentation relative aux métriques][4].
 
@@ -98,9 +98,9 @@ Cela signifie que la plupart des requêtes fonctionnent bien, mais que les pires
 
 Les distributions ne servent pas qu'à mesurer des durées. Elles peuvent aussi mesurer la distribution de *tout* type de valeur, comme le poids de fichiers importés ou les notes d'une classe.
 
-### Jauges
+### Gauges
 
-Les jauges mesurent la valeur d'un élément précis au fil du temps. Par exemple, pour surveiller la quantité de mémoire libre d'une machine, vous devez échantillonner régulièrement cette valeur avec la métrique `system.mem.free` :
+Les gauges mesurent la valeur d'un élément précis au fil du temps. Par exemple, pour surveiller la quantité de mémoire libre d'une machine, vous devez échantillonner régulièrement cette valeur avec la métrique `system.mem.free` :
 
 Pour Python :
 ```python
@@ -119,7 +119,7 @@ Pour Ruby :
 end
 ```
 
-Apprenez-en plus sur le [type Jauge dans la documentation relative aux métriques][6].
+Apprenez-en plus sur le [type Gauge dans la documentation relative aux métriques][6].
 
 ### Histogrammes
 
@@ -220,9 +220,9 @@ Dans les deux cas, lorsque DogStatsD reçoit les données du minuteur, il calcul
 
 N'oubliez pas qu'en réalité, DogStatsD traite les minuteurs comme des histogrammes. Que vous utilisiez l'un ou l'autre, vous enverrez les mêmes données à Datadog.
 
-### Ensembles
+### Sets
 
-Les ensembles servent à compter le nombre d'éléments uniques dans un groupe, par exemple, le nombre de visiteurs uniques sur votre site :
+Les sets servent à compter le nombre d'éléments uniques dans un groupe, par exemple, le nombre de visiteurs uniques sur votre site :
 
 Pour Python :
 ```python
@@ -240,7 +240,7 @@ def login(self, user_id)
 end
 ```
 
-Apprenez-en plus sur le [type Ensembles dans la documentation relative aux métriques][8].
+Apprenez-en plus sur le [type Sets dans la documentation relative aux métriques][8].
 
 ## Option de métrique : taux d'échantillonnage
 

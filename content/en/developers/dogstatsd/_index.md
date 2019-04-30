@@ -91,7 +91,7 @@ For Ruby:
 # Import the library
 require 'datadog/statsd'
 
-# Create a statsd client instance.
+# Create a DogStatsD client instance.
 statsd = Datadog::Statsd.new
 ```
 

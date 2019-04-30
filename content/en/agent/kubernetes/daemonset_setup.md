@@ -33,7 +33,8 @@ kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/maste
 ```
 
 ## Create manifest
-Create the following `datadog-agent.yaml` manifest:
+Create the following `datadog-agent.yaml` manifest.  
+**Note**: If you are using KMS or have high DogStatsD usage, you may need a higher memory limit.
 
 ```yaml
 # datadog-agent.yaml

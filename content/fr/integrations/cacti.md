@@ -28,7 +28,7 @@ supported_os:
 Recueillez des métriques du service cacti en temps réel pour :
 
 * Visualiser et surveiller les états de cacti
-* Être informé des failovers et des événements cacti
+* Être informé des failovers et des événements de cacti
 
 ## Implémentation
 ### Installation

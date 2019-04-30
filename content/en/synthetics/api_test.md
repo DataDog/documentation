@@ -39,31 +39,33 @@ Define the request you want to be executed by Datadog:
     * OPTIONS
 
 2. Optionally, click on **Advanced options** to enrich your request with custom request headers, authentication credentials, body content, or cookies. Toggle **Follow redirects** to have the monitored endpoint follow up to ten redirects.
-
 3. Name your API test.
 4. Optionally, add tags to filter your API test in the [Synthetics page][1].
-
-5. Pick locations to run the test from. Available locations are:
-    * Frankfurt (Request made from an AWS Datacenter)
-    * Tokyo (Request made from an AWS Datacenter)
-    * Oregon (Request made from an AWS Datacenter)
-    * London (Request made from an AWS Datacenter)
-
+5. Pick the locations to run the test from. Many AWS locations from around the world are available, the full list can be retrieved [through Datadog API][2].
 6. Choose a check frequency between "1 run per minute" and "1 run per week".
-7. Finish by clicking on **Test URL** to try out the request configuration. You should see a response preview show up in the right side of your screen.
+7. Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
+
+### Alert conditions
+
+Set alert conditions to determine the circumstances under which you want a test to send an alert. When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered if:
+
+* At least one location was in failure (at least one assertion failed) during the last *X* minutes, **AND**
+* At one moment during the last *X* minutes, at least *n* locations were in failure
+
+The uptime bar is displayed differently on your test result: location uptime is displayed on a per-evaluation basis (whether the last test was up or down). Total uptime is displayed based on the configured alert conditions. Notifications sent are based on the total uptime bar.
 
 ### Validation
 
 When running an API test, you must define at least one assertion that should be monitored by Datadog. An assertion is defined by a parameter, a comparator, and a value.
 
-| Parameter     | Comparators                           | Value type                                                                    |
+| Type          | Operator                              | Value type                                                                    |
 | ------------- | ------------------------------------- | ----------------------------------------------------------------------------- |
 | Status Code   | `is`, `is not`                        | Integer                                                                       |
 | Response time | `less than`                           | Integer                                                                       |
-| Headers       | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | for `contains`/`does not contain`/`is`/`is not`: String <br> for `matches`/`does not match`: [RegexStrings][2]    |
-| Body          | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | for `contains`/`does not contain`/`is`/`is not`: String <br> for `matches`/`does not match`: [RegexStrings][2]    |
+| Headers       | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | for `contains`/`does not contain`/`is`/`is not`: String <br> for `matches`/`does not match`: [RegexStrings][3]    |
+| Body          | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | for `contains`/`does not contain`/`is`/`is not`: String <br> for `matches`/`does not match`: [RegexStrings][3]    |
 
-If you define an assertion on the content of `Headers`, you must define the headers name and the associated value.
+If you define an assertion on the content of `Headers`, you must define the `headers property` and its associated value.
 
 Click on **Add new assertion** to add up to 10 assertions for your API test.
 
@@ -77,10 +79,10 @@ Use the **Test URL** response to quickly add status code, response time or heade
 
 ### Notifications
 
-A notification is sent if at least one of the assertion fails. To configure notifications:
+A notification is sent according to the set [alert conditions](#alert-conditions). To configure notifications:
 
-1. Select users and/or [services][3] to send the notifications to. Note that you can use the [`@-notification` feature][4] in the **message** field.
-2. Enter a **message** for the API test. This field allows standard [Markdown formatting][5]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
+1. Select users and/or [services][4] to send the notifications to. Note that you can use the [`@-notification` feature][5] in the **message** field.
+2. Enter a **message** for the API test. This field allows standard [Markdown formatting][6]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
 3. Click **Save** to save your API test.
 
 Notifications example:
@@ -153,7 +155,8 @@ If a test fails, the uptime directly considers the endpoint as `down`. It is not
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics
-[2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[3]: /integrations/#cat-notification
-[4]: /developers/faq/what-do-notifications-do-in-datadog
-[5]: http://daringfireball.net/projects/markdown/syntax
+[2]: /api/?lang=bash#get-available-locations
+[3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[4]: /integrations/#cat-notification
+[5]: /developers/faq/what-do-notifications-do-in-datadog
+[6]: http://daringfireball.net/projects/markdown/syntax

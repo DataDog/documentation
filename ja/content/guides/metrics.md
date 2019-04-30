@@ -41,7 +41,7 @@ In this tutorial, we'll cover some common instrumentation use cases, like:
 
 Datadogにアプリケーションのメトリクスを送信することで、アプリケーションの状態、ユーザの行動、システムの状態などを関連付けて把握できるようになります。
 
-メトリクスは、Datadog Agent にバンドルされているDogStatsD という負荷の少ないメトリクス集約サーバを介しDatadogに転送されています。DogStatsDの動作の詳細に関しては、["DogStatsDの解説"](/ja/guides/dogstatsd/)で理解を深めることができます。今すぐメトリクスを送信するためのコードを開発する必要のある場合は、このまま読み進めてください。
+メトリクスは、Datadog Agent にバンドルされているDogStatsD という負荷の少ないメトリクス集約サーバを介しDatadogに転送されています。DogStatsDの動作の詳細に関しては、["DogStatsDの解説"](/guides/dogstatsd/)で理解を深めることができます。今すぐメトリクスを送信するためのコードを開発する必要のある場合は、このまま読み進めてください。
 
 以下のチュートリアルでは、次のようなユースケースを取り上げます:
 

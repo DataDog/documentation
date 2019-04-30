@@ -66,7 +66,7 @@ Optional collection Agents are disabled by default for security or performance r
 
 #### DogStatsD (custom metrics)
 
-Send custom metrics via [the statsd protocol][5]:
+Send custom metrics via [the StatsD protocol][5]:
 
 | Env Variable                     | Description                                                                                       |
 |----------------------------------|---------------------------------------------------------------------------------------------------|
@@ -133,7 +133,7 @@ If you mount YAML configuration files in the `/conf.d` folder, they are automati
       -v /proc/:/host/proc/:ro \
       -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
       -v /opt/datadog-agent-conf.d:/conf.d:ro \
-      -e API_KEY={your_api_key_here} \
+      -e DD_API_KEY={your_api_key_here} \
        datadog/agent:latest
     ```
 

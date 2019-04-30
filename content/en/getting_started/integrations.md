@@ -157,7 +157,7 @@ If you continue to have problems, reach out to [our awesome Support team][35].
 [13]: /developers/integrations/new_check_howto/#developer-toolkit
 [14]: /agent/guide/integration-management
 [15]: https://github.com/DataDog/dd-agent
-[16]: /account_management/faq/api-app-key-management
+[16]: /account_management/api-app-keys
 [17]: https://app.datadoghq.com/account/settings#api
 [18]: /integrations
 [19]: https://app.datadoghq.com/account/settings#agent

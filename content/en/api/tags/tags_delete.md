@@ -6,7 +6,7 @@ external_redirect: /api/#remove-host-tags
 ---
 
 ## Remove host tags
-This endpoint allows you to remove all tags in an integration source for a single host.
+This endpoint allows you to remove all tags for a single host.
 
 ##### ARGUMENTS
 

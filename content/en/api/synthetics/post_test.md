@@ -41,7 +41,7 @@ A browser test is treated like a GET API test. This method gives you the ability
   <tr>
     <td>Body</td>
     <td><code>contains</code>, <code>does not contain</code>, <code>is</code>, <code>is not</code>, <code>matches</code>, <code>does not match</code></td>
-    <td>for <code>contains</code>/<code>does not contain/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: <a href="https://docs.datadoghq.com/tagging/using_tags">RegexString</a></td>
+    <td>for <code>contains</code>/<code>does not contain</code>/<code>is</code>/<code>is not</code>: String for <code>matches</code>/<code>does not match</code>: <a href="https://docs.datadoghq.com/tagging/using_tags">RegexString</a></td>
   </tr>
 </table>
 

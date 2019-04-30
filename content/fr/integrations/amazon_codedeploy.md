@@ -67,12 +67,12 @@ L'intégration AWS Codedeploy n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_codedeploy.html
 [4]: https://app.datadoghq.com/account/settings#integrations/amazon_codedeploy
 [5]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_codedeploy/amazon_codedeploy_metadata.csv
-[6]: https://docs.datadoghq.com/fr/help/
+[6]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

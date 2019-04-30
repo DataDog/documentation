@@ -10,19 +10,13 @@ aliases:
 further_reading:
 - link: "/agent/docker/apm"
   tag: "Documentation"
-  text: Docker setup
-- link: "tracing/languages/go"
+  text: "Docker APM setup"
+- link: "/integrations/amazon_ecs/#trace-collection"
   tag: "Documentation"
-  text: Go language instrumentation
-- link: "tracing/languages/java"
+  text: "ECS EC2 APM setup"
+- link: "/integrations/ecs_fargate/#trace-collection"
   tag: "Documentation"
-  text: Java language instrumentation
-- link: "tracing/languages/python"
-  tag: "Documentation"
-  text: Python language instrumentation
-- link: "tracing/languages/ruby"
-  tag: "Documentation"
-  text: Ruby language instrumentation
+  text: "ECS Fargate APM setup"
 ---
 
 This documentation covers Agent v6 only, to know how to set up APM tracing with Agent v5, [refer to the dedicated APM with Agent v5 doc][1].

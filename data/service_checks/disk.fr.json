@@ -1,0 +1,11 @@
+[
+    {
+        "agent_version": "6.5.0",
+        "integration":"disk",
+        "check": "disk.read_write",
+        "statuses": ["ok", "critical", "unknown"],
+        "groups": ["device"],
+        "name": "Disque lecture_écriture",
+        "description": "Renvoie `CRITICAL` si le système de fichiers est en mode lecture seule."
+    }
+]

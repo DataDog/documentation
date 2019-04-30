@@ -102,8 +102,8 @@ Once the library is in your classpath, attach the following layout to any target
 <nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-  <!-- 
-  See https://github.com/nlog/nlog/wiki/Configuration-file 
+  <!--
+  See https://github.com/nlog/nlog/wiki/Configuration-file
   for information on customizing logging rules and outputs.
    -->
   <targets async="true">
@@ -198,7 +198,7 @@ Once the library is in your classpath, attach the following layout to any target
       </layout>
     </appender>
   </log4net>
-  
+
   <!-- The rest of your configuration starts here ... -->
 ```
 
@@ -213,7 +213,7 @@ namespace Datadog
     {
         // Get the current class logger
         private static ILog logger = LogManager.GetLogger(typeof(Program));
-   
+
 
         static void Main(string[] args)
         {
@@ -223,8 +223,8 @@ namespace Datadog
 
              // Log a simple debug message
            logger.Debug("This is my first debug message");
-          
-          
+
+
             // your code continues here ...
         }
     }
@@ -261,7 +261,7 @@ Create a `csharp.d/conf.yaml` file in your `conf.d/` folder with the following c
 init_config:
 
 instances:
-    
+
 ##Log section
 logs:
 
@@ -292,8 +292,8 @@ It is possible to stream logs from your application to Datadog or to the Datadog
 {{< tabs >}}
 {{% tab "SeriLog" %}}
 
-Install the Datadog [Serilog sink][1], which send events and logs to Datadog. By default the sink forwards logs through HTTPS on port 443.
-Run the following command in the Package Manager Console: 
+Install the Datadog [Serilog sink][1], which sends events and logs to Datadog. By default the sink forwards logs through HTTPS on port 443.
+Run the following command in the Package Manager Console:
 
 ```
 PM> Install-Package Serilog.Sinks.Datadog.Logs
@@ -309,7 +309,8 @@ var log = new LoggerConfiguration()
 
 **Note**: To send logs to Datadog EU site, set the `url` property to `https://http-intake.logs.datadoghq.eu`
 
-You can also override the default behaviour and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, specify the `source`, `service`, `host`, and custom tags.
+You can also override the default behaviour and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. [Optionally, specify the `source`, `service`, `host`, and custom tags.][3]
+
 For instance to forward logs to the Datadog US site in TCP you would use the following sink configuration:
 
 ```
@@ -331,6 +332,7 @@ New logs are now directly sent to Datadog.
 
 [1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
 [2]: https://app.datadoghq.com/account/settings#api
+[3]: /logs/#reserved-attributes
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -103,11 +103,13 @@ The source and service values can be overridden with Autodiscovery as described 
 
 * Logs coming from container `Stderr` have a default status of `Error`.
 
+* If using the journald logging driver instead of Docker's default json-file logging driver, see the [journald integration][1] documentation for details regarding the setup for containerized environments.
+
 ### Activate Log Integrations
 
 In Datadog Agent 6.8+, `source` and `service` default to the `short_image` tag value. This allows Datadog to identify the log source for each container and automatically install the corresponding integration.
 
-The container short image name might not match the integration name for custom images, and can be overwritten to better reflect the name of your application. This can be done with [Datadog Autodiscovery][1] and [pod annotations in Kubernetes][2] or container labels.
+The container short image name might not match the integration name for custom images, and can be overwritten to better reflect the name of your application. This can be done with [Datadog Autodiscovery][2] and [pod annotations in Kubernetes][3] or container labels.
 
 Autodiscovery expects labels to follow this format, depending on the file type:
 
@@ -278,5 +280,6 @@ ac_exclude = ["name:datadog-agent"]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/autodiscovery
-[2]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
+[1]: /integrations/journald/
+[2]: /agent/autodiscovery
+[3]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
