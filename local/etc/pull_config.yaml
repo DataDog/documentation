@@ -12,7 +12,7 @@
       - dd/utils/context/source.py
 
     - action: integrations
-      branch: prod
+      branch: kaylyn/azure-deployment-manager
       globs:
       - integration/**/*_metadata.csv
       - integration/**/manifest.json
