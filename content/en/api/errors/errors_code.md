@@ -18,6 +18,7 @@ external_redirect: /api/#success-and-errors
 * `409 Conflict`
 * `413 Payload Too Large`
 * `422 Unprocessable`
+* `429 Too Many Requests`
 * `500 Server Error`
 
 ##### Example Error Response
