@@ -44,7 +44,7 @@ Une fois votre utilisateur Datadog en lecture seule créé :
 1. Configurez votre [intégration Dyn][2] dans l'app Datadog :
 {{< img src="integrations/dyn/dyn_integration.png" alt="Intégration Dyn" style="width:75%;" responsive="true" popup="true">}}
 
-2. Sélectionnez les zones (*notes Zone*) à partir desquelles vous souhaitez recueillir des événements et des métriques `dyn.changes` :<br>
+2. Sélectionnez les zones (*Zone notes*) à partir desquelles vous souhaitez recueillir des événements et des métriques `dyn.changes` :<br>
 
 {{< img src="integrations/dyn/dyn_zone.png" alt="Zone Dyn" style="width:75%;" responsive="true" popup="true">}}
 
