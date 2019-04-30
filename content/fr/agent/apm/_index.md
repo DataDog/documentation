@@ -212,7 +212,7 @@ Les tags primaires apparaissent en haut des pages APM. Utilisez ces sélecteurs 
 [13]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [14]: https://app.datadoghq.com/apm/services
 [15]: https://app.datadoghq.com/apm/docs/trace-search
-[16]: /fr/tracing/visualization/search/#apm-events
+[16]: /fr/tracing/trace_search_and_analytics/#apm-events
 [17]: /fr/tagging
 [18]: /fr/agent/faq/agent-configuration-files/?tab=agentv6
 [19]: /fr/tagging/assigning_tags/#traces
