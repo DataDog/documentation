@@ -35,7 +35,7 @@ Pour créer un monitor de détection d'anomalies, accédez à la page [New Monit
 
 Le formulaire ci-dessus apparaît alors. Il comporte plusieurs paramètres qui vous permettent de déterminer dans quelles circonstances une alerte doit être envoyée pour signaler un comportement anormal. Si vous ne vous souciez que des valeurs anormalement élevées ou faibles, choisissez d'envoyer des alertes uniquement lorsque les valeurs dépassent des limites supérieures et inférieures. Le prochain paramètre définit la période d'alerte, qui permet de préciser la durée d'anormalité d'une métrique avant le déclenchement d'une alerte. Attention : si la période d'alerte est trop courte, il se peut que vous receviez de fausses alertes pour de simples irrégularités. Enfin, la durée d'annulation désigne la durée pendant laquelle une métrique doit afficher un comportement normal pour que l'alerte soit annulée.
 
-Suivez toutes les étapes du formulaire New Monitor (**Say what's happening**, etc.) et cliquez sur **Save** pour créer un monitor d'anomalie.
+Suivez le reste des étapes du formulaire New Monitor (**Say what's happening**, etc.) et cliquez sur **Save** pour créer un monitor d'anomalie.
 
 ### Options avancées
 
@@ -70,7 +70,7 @@ L'algorithme *Agile* est une version robuste de l'algorithme [SARIMA][5]. Il int
 * **Robust** : utilisez cet algorithme pour les métriques saisonnières lorsque vous pensez qu'une métrique évolue peu et que vous souhaitez considérer les changements de niveaux légers comme des anomalies.
 L'algorithme *Robust* est un algorithme de [décomposition de tendance saisonnière][6] (article en anglais). Il est très stable et ses prédictions restent constantes même en cas d'anomalies sur le long terme, ce qui lui vaut un temps de réponse plus long pour les changements de niveaux prévus (par exemple, si le niveau d'une métrique change en cas de modification de code).
 
-Tous les algorithmes saisonniers peuvent utiliser au maximum plusieurs mois de données historiques lors du calcul de la plage normale de comportement attendue d'une métrique. En utilisant un volume conséquent de données passées, les algorithmes peuvent éviter de donner trop d'importance à un comportement anormal qui aurait pu avoir lieu il y a peu de temps.
+Tous les algorithmes saisonniers peuvent utiliser au maximum deux mois de données historiques lors du calcul de la plage normale de comportement attendue d'une métrique. En utilisant un volume conséquent de données passées, les algorithmes peuvent éviter de donner trop d'importance à un comportement anormal qui aurait pu avoir lieu il y a peu de temps.
 
 Les figures ci-dessous illustrent les situations pour lesquelles ces trois algorithmes agissent différemment ainsi que la nature de leurs différences. Dans la première figure, l'algorithme _Basic_ identifie avec succès les anomalies qui quittent la plage normale de valeurs, sans tenir compte des modèles saisonniers et récurrents pour déterminer la plage de valeurs prévues. À l'inverse, les algorithmes _Robust_ et _Agile_ reconnaissent le modèle saisonnier et peuvent détecter des anomalies plus nuancées (p. ex., si la métrique se stabilise au niveau de sa valeur minimale).
 
@@ -160,7 +160,7 @@ En général, si une anomalie disparaît lorsque vous zoomez, cela ne signifie p
 
 ### Je reçois une erreur de parsing de requête lorsque j'essaie d'associer certaines fonctions à une détection d'anomalies. Pourquoi ?
 
-Toutes les fonctions ne peuvent pas être imbriquées dans des appels de la fonction `anomalies()`. Vous ne pouvez notamment pas inclure les fonctions suivantes dans un monitor de détection d'anomalies ou dans une requête de dashboard : `cumsum()`, `integral()`, `outliers()`, `piecewise_constant()`, `robust_trend()` ou `trend_line()`.
+Les fonctions ne peuvent pas toutes être imbriquées dans des appels de la fonction `anomalies()`. Vous ne pouvez notamment pas inclure les fonctions suivantes dans un monitor de détection d'anomalies ou dans une requête de dashboard : `cumsum()`, `integral()`, `outliers()`, `piecewise_constant()`, `robust_trend()` ou `trend_line()`.
 
 La détection d'anomalies utilise des données historiques pour établir la base du comportement normal d'une série. Les fonctions citées prennent en compte le placement de la période de requête. La valeur de la série pour un seul timestamp peut fortement varier selon sa place dans la période de requête. Cette sensibilité empêche la détection d'anomalies de déterminer une base constante pour la série.
 

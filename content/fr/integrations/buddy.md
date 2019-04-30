@@ -49,7 +49,7 @@ Grâce à cette intégration, vous pouvez :
 
 ${'${execution.pipeline.name} execution #${execution.id}'}
 
-# Contenu
+# Content
 ${'${execution.to_revision.revision} - ${execution.to_revision.message}'}
 ```
 
