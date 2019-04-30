@@ -140,4 +140,4 @@ To use your variables in one of your assertions, hit *Use Variable* and select t
 [2]: /integrations/#cat-notification
 [3]: http://daringfireball.net/projects/markdown/syntax
 [4]: https://www.google.com/chrome
-[5]: https://chrome.google.com/webstore/detail/datadog-test-recorder-sta/bfgpghinhlklmedgkkpnhphfgdliceel
+[5]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
