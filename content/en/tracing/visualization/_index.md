@@ -67,8 +67,6 @@ Resource names:
 
 [Alert][12] on any resource level metric. Read more about monitoring resources in APM on the [resource dashboard][13] page.
 
-As a result we have a hard limit on the cardinality of resources for a given service.
-
 ### Trace
 
 **A trace is used to track the time spent by an application processing a single operation, each trace consists of one or more spans.**
