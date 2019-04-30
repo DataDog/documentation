@@ -8,7 +8,7 @@ further_reading:
   text: "Connect your Logs and Traces together"
 - link: "tracing/advanced/manual_instrumentation"
   tags: "Enrich Tracing"
-  text: "Instrument manually your application to create traces."
+  text: "Manually instrument your application to create traces."
 - link: "tracing/advanced/opentracing"
   tags: "Enrich Tracing"
   text: "Implement Opentracing across your applications."
@@ -17,7 +17,7 @@ further_reading:
   text: "Explore your services, resources, and traces"
 ---
 
-Enable runtime metrics collection in the tracing client to gain additional insight into an application's performance. Runtime metrics can be viewed in the context of a service, correlated in the Trace View at the time of a given request, and utilized anywhere in the platform.
+Enable runtime metrics collection in the tracing client to gain additional insights into an application's performance. Runtime metrics can be viewed in the context of a service, correlated in the Trace View at the time of a given request, and utilized anywhere in the platform.
 
 {{< img src="tracing/advanced/runtime_metrics/jvm_runtime_trace.png" alt="JVM Runtime Trace" responsive="true">}}
 
@@ -26,7 +26,7 @@ Enable runtime metrics collection in the tracing client to gain additional insig
 {{< tabs >}}
 {{% tab "Java" %}}
 
-JVM metrics collection can be enabled with one configuration parameter in the tracing client, either through a the System Property: `-Ddd.jmxfetch.enabled=true` or through the environment variable: `DD_JMXFETCH_ENABLED=true`.
+JVM metrics collection can be enabled with one configuration parameter in the tracing client, either through a system property, `-Ddd.jmxfetch.enabled=true`, or through an environment variable, `DD_JMXFETCH_ENABLED=true`.
 
 JVM metrics can be viewed in correlation with your Java services. See the [Service page][1] in Datadog.
 
@@ -34,7 +34,7 @@ JVM metrics can be viewed in correlation with your Java services. See the [Servi
 
 **Note**: For the runtime UI, `dd-trace-java` >= [`0.24.0`][2] is supported.
 
-By default, Runtime metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`, make sure that [DogStatsD is enabled for the Agent][3].
+By default, runtime metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][3].
 If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][4], and that port `8125` is open on the Agent.
 In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the appropriate flags in your task definition][6].
 
@@ -59,7 +59,7 @@ Runtime metrics can be viewed in correlation with your Python services. See the 
 
 **Note**: For the runtime UI, `ddtrace` >= [`0.24.0`][2] is supported.
 
-By default, Runtime metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`, make sure that [DogStatsD is enabled for the Agent][3].
+By default, runtime metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][3].
 If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][4], and that port `8125` is open on the Agent.
 In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the appropriate flags in your task definition][6].
 
@@ -101,7 +101,7 @@ end
 
 Runtime metrics can be viewed in correlation with your Ruby services. See the [Service page][3] in Datadog.
 
-By default, Runtime metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`, make sure that [DogStatsD is enabled for the Agent][4].
+By default, runtime metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][4].
 If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][5], and that port `8125` is open on the Agent.
 In Kubernetes, [bind the DogstatsD port to a host port][6]; in ECS, [set the appropriate flags in your task definition][7].
 
@@ -132,7 +132,7 @@ Runtime metrics collection can be enabled with one configuration parameter in th
 
 Runtime metrics can be viewed in correlation with your Node services. See the [Service page][1] in Datadog.
 
-By default, Runtime metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`, make sure that [DogStatsD is enabled for the Agent][2].
+By default, runtime metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][2].
 If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][3], and that port `8125` is open on the Agent.
 In Kubernetes, [bind the DogstatsD port to a host port][4]; in ECS, [set the appropriate flags in your task definition][5].
 
@@ -204,7 +204,7 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-The following metrics are collected by default after enabling Runtime metrics.
+The following metrics are collected by default after enabling runtime metrics.
 
 {{< get-metrics-from-git "node" >}}
 
