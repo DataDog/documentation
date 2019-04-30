@@ -67,15 +67,6 @@ Resource names:
 
 [Alert][12] on any resource level metric. Read more about monitoring resources in APM on the [resource dashboard][13] page.
 
-### Resource Cardinality
-
-When a resource such as URL or SQL query cannot be aggregated, it significantly increases the cardinality of resources (ie. the number of unique aggregate resources) to be stored in Datadog.
-
-Having a very high cardinality of resources makes Datadog less usable:
-
-* Too many entries in the resource list is not optimal for navigation.
-* Statistics are less relevant (as they are too fragmented).
-
 As a result we have a hard limit on the cardinality of resources for a given service.
 
 ### Trace
