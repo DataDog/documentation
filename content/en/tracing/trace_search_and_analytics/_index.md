@@ -18,7 +18,7 @@ To enable it, first configure your services to emit the relevant analytics eithe
 {{< tabs >}}
 {{% tab "Java" %}}
 
- Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the Tracing Client:
+ Trace Search & Analytics can be enabled globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
 * System Property: `-Ddd.trace.analytics.enabled=true`
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
@@ -30,7 +30,7 @@ To enable it, first configure your services to emit the relevant analytics eithe
 {{% /tab %}}
 {{% tab "Python" %}}
 
- Enable Trace Search & Analytics globally for all web integrations with one configuration parameter in the Tracing Client:
+ Enable Trace Search & Analytics globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
 * Tracer Configuration: `ddtrace.config.analytics_enabled = True`
 * Environment Variable: `DD_ANALYTICS_ENABLED=true`
@@ -42,7 +42,7 @@ To enable it, first configure your services to emit the relevant analytics eithe
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
- Trace search & analytics can be enabled for all web integrations with a global flag.
+ Trace search & analytics can be enabled for all **web** integrations with a global flag.
 
  To do so, set either `DD_TRACE_ANALYTICS_ENABLED=true` in your environment, or configure with:
 
@@ -60,7 +60,7 @@ Datadog.configure { |c| c.analytics_enabled = true }
 {{% /tab %}}
 {{% tab "Go" %}}
 
- Trace Search & Analytics can be enabled globally for all web integrations using the [`WithAnalytics`][1] tracer start option. For example:
+ Trace Search & Analytics can be enabled globally for all **web** integrations using the [`WithAnalytics`][1] tracer start option. For example:
 
  ```go
 tracer.Start(tracer.WithAnalytics(true))
@@ -89,7 +89,7 @@ tracer.init({
 {{% /tab %}}
 {{% tab ".NET" %}}
 
- Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the Tracing Client:
+ Trace Search & Analytics can be enabled globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
  * Environment Variable or AppSetting: `DD_TRACE_ANALYTICS_ENABLED=true`
 
@@ -106,7 +106,7 @@ Tracer.Instance.Settings.AnalyticsEnabled = true;
 {{% /tab %}}
 {{% tab "PHP" %}}
 
- Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the Tracing Client:
+ Trace Search & Analytics can be enabled globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
  * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
@@ -116,6 +116,8 @@ Tracer.Instance.Settings.AnalyticsEnabled = true;
 [1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: trace search only works for web integrations.
 
 ## Configure Additional Services (optional)
 
