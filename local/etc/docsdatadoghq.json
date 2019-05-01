@@ -1,5 +1,5 @@
 {
-  "index_name": "test_doc",
+  "index_name": "docsearch_docs_prod",
   "start_urls": [
     {
       "url": "https://docs.datadoghq.com/api/",
