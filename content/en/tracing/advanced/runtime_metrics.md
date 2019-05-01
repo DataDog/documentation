@@ -48,9 +48,8 @@ In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the app
 {{% /tab %}}
 {{% tab "Python" %}}
 
-<div class="alert alert-info">
-This feature is currently in <strong>BETA</strong>.
-Reach out to <a href="/help">the Datadog support team</a> to be part of the beta.
+<div class="alert alert-warning">
+This feature is currently in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on this feature for your account.
 </div>
 
 Runtime metrics collection can be enabled with the `DD_RUNTIME_METRICS_ENABLED=true` environment parameter when running with `ddtrace-run`:
@@ -73,9 +72,8 @@ In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the app
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-<div class="alert alert-info">
-This feature is currently in <strong>BETA</strong>.
-Reach out to <a href="/help">the Datadog support team</a> to be part of the beta.
+<div class="alert alert-warning">
+This feature is currently in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on this feature for your account.
 </div>
 
 Runtime metrics collection uses the [`dogstatsd-ruby`][1] gem to send metrics via DogStatsD to the Agent. To collect runtime metrics, you must add this gem to your Ruby application, and make sure that [DogStatsD is enabled for the Agent][2].
@@ -123,9 +121,8 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-<div class="alert alert-info">
-This feature is currently in <strong>BETA</strong>.
-Reach out to <a href="/help">the Datadog support team</a> to be part of the beta.
+<div class="alert alert-warning">
+This feature is currently in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on this feature for your account.
 </div>
 
 Runtime metrics collection can be enabled with one configuration parameter in the tracing client either through the tracer option: `tracer.init({ runtimeMetrics: true })` or through the environment variable: `DD_RUNTIME_METRICS_ENABLED=true`
