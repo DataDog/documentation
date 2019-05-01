@@ -144,11 +144,17 @@ if (null !== $span) {
 Manually keep or drop a trace:
 
 ```cpp
+...
+#include <datadog/tags.h>
+...
+
 auto tracer = ...
 auto span = tracer->StartSpan("operation_name");
-span->SetTag("sampling.priority", 1); // Keep this span.
+// Always keep this trace
+span->SetTag(datadog::tags::manual_keep, {});
 auto another_span = tracer->StartSpan("operation_name");
-another_span->SetTag("sampling.priority", 0); // Discard this span.
+// Always drop this trace
+another_span->SetTag(datadog::tags::manual_drop, {});
 ```
 
 
