@@ -120,12 +120,22 @@ metadata:
     app.kubernetes.io/part-of: ingress-nginx
 data:
   enable-opentracing: "true"
-  datadog-collector-host: datadogd.monitoring.svc.cluster.local
+  datadog-collector-host: $HOST_IP
   # Defaults
   # datadog-service-name: "nginx"
   # datadog-collector-port: "8126"
   # datadog-operation-name-override: "nginx.handle"
 ```
+
+Additionally, ensure that your nginx-ingress controller's pod spec has the `HOST_IP` environment variable set. Add this entry to the `env:` block that contains the environment variabeles `POD_NAME` and `POD_NAMESPACE`. 
+
+```yaml
+- name: HOST_IP
+  valueFrom:
+    fieldRef:
+      fieldPath: status.hostIP
+```
+  
 
 ## Further Reading
 
