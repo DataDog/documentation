@@ -127,7 +127,7 @@ data:
   # datadog-operation-name-override: "nginx.handle"
 ```
 
-Additionally, ensure that your nginx-ingress controller's pod spec has the `HOST_IP` environment variable set. Add this entry to the `env:` block that contains the environment variabeles `POD_NAME` and `POD_NAMESPACE`. 
+Additionally, ensure that your nginx-ingress controller's pod spec has the `HOST_IP` environment variable set. Add this entry to the `env:` block that contains the environment variables `POD_NAME` and `POD_NAMESPACE`. 
 
 ```yaml
 - name: HOST_IP
