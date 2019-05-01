@@ -22,7 +22,7 @@ Pour davantage d'informations, consultez la [documentation relative au compte de
 
 * **`type`** [*obligatoire*] :
 
-    Doit correspondre à `compte_service`. Peut être trouvé dans la clé de votre compte de service JSON.
+    Doit correspondre à `service_account`. Peut être trouvé dans la clé de votre compte de service JSON.
 
 * **`project_id`** [*obligatoire*] :
 
