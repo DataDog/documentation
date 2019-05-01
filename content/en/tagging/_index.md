@@ -6,6 +6,7 @@ aliases:
     - /guides/tagging/
     - /developers/tagging/
     - /getting_started/tagging
+    - /tagging/faq/
 further_reading:
 - link: "tagging/assigning_tags"
   tag: "Documentation"
