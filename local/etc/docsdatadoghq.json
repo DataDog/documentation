@@ -1,5 +1,5 @@
 {
-  "index_name": "docsearch_docs_prod",
+  "index_name": "test_doc",
   "start_urls": [
     {
       "url": "https://docs.datadoghq.com/api/",
@@ -45,7 +45,18 @@
       "url": "https://docs.datadoghq.com/(?P<section>.*?)/faq/",
       "selectors_key": "faq",
       "variables": {
-        "section": ["getting_started", "tagging", "agent", "graphing", "monitors", "tracing", "logs", "developers", "account_management", "synthetics"]
+        "section": [
+          "getting_started",
+          "tagging",
+          "agent",
+          "graphing",
+          "monitors",
+          "tracing",
+          "logs",
+          "developers",
+          "account_management",
+          "synthetics"
+        ]
       },
       "tags": [
         "faq"
@@ -56,7 +67,18 @@
       "url": "https://docs.datadoghq.com/fr/(?P<section>.*?)/faq/",
       "selectors_key": "faq",
       "variables": {
-        "section": ["getting_started", "tagging", "agent", "graphing", "monitors", "tracing", "logs", "developers", "account_management", "synthetics"]
+        "section": [
+          "getting_started",
+          "tagging",
+          "agent",
+          "graphing",
+          "monitors",
+          "tracing",
+          "logs",
+          "developers",
+          "account_management",
+          "synthetics"
+        ]
       },
       "tags": [
         "faq"
@@ -67,7 +89,14 @@
       "url": "https://docs.datadoghq.com/(?P<section>.*?)/guide/",
       "selectors_key": "guide",
       "variables": {
-        "section": ["agent","graphing","monitors","tracing","logs","developers"]
+        "section": [
+          "agent",
+          "graphing",
+          "monitors",
+          "tracing",
+          "logs",
+          "developers"
+        ]
       },
       "tags": [
         "guide"
@@ -78,7 +107,14 @@
       "url": "https://docs.datadoghq.com/fr/(?P<section>.*?)/guide/",
       "selectors_key": "guide",
       "variables": {
-        "section": ["agent","graphing","monitors","tracing","logs","developers"]
+        "section": [
+          "agent",
+          "graphing",
+          "monitors",
+          "tracing",
+          "logs",
+          "developers"
+        ]
       },
       "tags": [
         "guide"
@@ -109,7 +145,25 @@
       "lvl1": ".main h1",
       "lvl2": ".main h2",
       "lvl3": ".main h3",
-      "text": ".main p, table tbody tr td",
+      "lvl4": ".main h4",
+      "text": ".main p, .main ul > li > table tbody tr td",
+      "language": {
+        "selector": "/html/@lang",
+        "type": "xpath",
+        "global": true
+      }
+    },
+    "integrations": {
+      "lvl0": {
+        "selector": ".h-100 .sidenav-nav > ul >li.open > a",
+        "global": true,
+        "default_value": "Integrations"
+      },
+      "lvl1": ".main h1",
+      "lvl2": ".main h2",
+      "lvl3": ".main h3",
+      "lvl4": ".main h4",
+      "text": ".main p, .main ul > li > table tbody tr td > .table-metrics tr td",
       "language": {
         "selector": "/html/@lang",
         "type": "xpath",
@@ -135,26 +189,13 @@
       "lvl0": {
         "selector": ".h-100 .sidenav-nav > ul >li.open > a",
         "global": true,
-        "default_value": "FAQ"
+        "default_value": "Guide"
       },
       "lvl1": ".main h1",
       "lvl2": ".main h2",
-      "text": ".main p, table tbody tr td",
-      "language": {
-        "selector": "/html/@lang",
-        "type": "xpath",
-        "global": true
-      }
-    },
-    "integrations": {
-      "lvl0": {
-        "selector": ".h-100 .sidenav-nav > ul >li.open > a",
-        "global": true,
-        "default_value": "Integrations"
-      },
-      "lvl1": ".main h1",
-      "lvl2": ".main h2",
-      "text": ".main p, table tbody tr td, .table-metrics tr td",
+      "lvl3": ".main h3",
+      "lvl4": ".main h4",
+      "text": ".main p, .main ul > li > table tbody tr td",
       "language": {
         "selector": "/html/@lang",
         "type": "xpath",
@@ -183,7 +224,8 @@
     ".whatsnext",
     "#en-apprendre-plus",
     "#further-reading",
-    ".alert-info"
+    ".alert-info",
+    ".announcement_banner"
   ],
   "conversation_id": [
     "620036890"
@@ -194,9 +236,15 @@
     "attributesForFaceting": [
       "language",
       "tags"
+    ],
+    "synonyms": [
+      [
+        "agent",
+        "datadog agent"
+      ]
     ]
   },
   "only_content_level": true,
   "user_agent": "Googlebot",
-  "nb_hits": 17537
+  "nb_hits": 20672
 }
