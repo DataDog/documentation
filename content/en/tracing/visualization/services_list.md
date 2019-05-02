@@ -20,12 +20,12 @@ further_reading:
 
 ## Overview
 
-After you have [instrumented your application][1], your reporting services appear on [the APM services page][2]. The services list is a bird's eye view of all [services][3] reporting from your infrastructure.  
+After you have [instrumented your application][1], your reporting services appear on [the APM services page][2]. The services list is a bird's eye view of all [services][3] reporting from your infrastructure.
 Select an individual service to view detailed performance insights. [Read the dedicated service documentation to learn more][3].
 
 ## Filtering the service list
 
-Filter the services list depending on: 
+Filter the services list depending on:
 
 * [Environment][4]
 * [Primary Tag][5]
@@ -74,8 +74,8 @@ Choose what to display in your services list:
 [1]: /tracing/setup
 [2]: https://app.datadoghq.com/apm/services
 [3]: /tracing/visualization/service
-[4]: /tracing/setup/first_class_dimensions#environment
-[5]: /tracing/setup/first_class_dimensions#primary-tag
+[4]: /tracing/advanced/setting_primary_tags_to_scope/#environment
+[5]: /tracing/advanced/setting_primary_tags_to_scope
 [6]: /tracing/visualization/trace/#spans
 [7]: /tracing/visualization/trace
 [8]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
