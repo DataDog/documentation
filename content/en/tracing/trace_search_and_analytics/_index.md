@@ -7,9 +7,9 @@ aliases:
 
 {{< vimeo 278748711 >}}
 
-[Trace Search & Analytics][1] is used to filter APM Data by user-defined tags such as `customer_id`, `error_type` or `app_name` to help troubleshoot and filter your requests. To enable it either:
+[Trace Search & Analytics][1] is used to filter APM data by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
 
-* Configure your APM tracer to emit the relevant analytics either [automatically](#automatic-configuration) or [manually](#custom-instrumentation) from your services. Then [enable Trace Search inside Datadog][1] in order to start forwarding these analytics.
+* Configure your APM tracer to emit the relevant analytics from your services—this can be done either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Next, [enable Trace Search inside Datadog][1] to begin forwarding these analytics.
 * [Configure your Datadog Agent to emit the relevant analytics from your services][2].
 
 **Note**: to use Trace Search, you must be using Agent v6.7+ and have logs enabled.
@@ -19,7 +19,7 @@ aliases:
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Trace Search & Analytics can be enabled globally for all **web** integrations with one configuration parameter in the Tracing Client:
+Trace Search & Analytics can be enabled globally for all **web** integrations with one configuration parameter in the Tracing client:
 
 * System Property: `-Ddd.trace.analytics.enabled=true`
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`

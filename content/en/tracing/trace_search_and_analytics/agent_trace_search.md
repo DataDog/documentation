@@ -3,15 +3,15 @@ title: Agent trace Search Configuration
 kind: Documentation
 ---
 
-[Trace Search & Analytics][1] is used to filter APM Data by user-defined tags such as `customer_id`, `error_type` or `app_name` to help troubleshoot and filter your requests. To enable it either:
+[Trace Search & Analytics][1] is used to filter APM data by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
 
-* Configure your APM tracer to emit the relevant analytics either [automatically][2] or [manually][3] from your services.
-* Configure your Datadog Agent to emit the relevant analytics from your services (instructions below).
+* Configure your APM tracer to emit the relevant analytics from your services—either [automatically][2] or [manually][3].
+* Configure the Datadog Agent to emit the relevant analytics from your services (instructions below).
 
 **Note**: To enable trace search and analytics with the Agent, [services][1] must be already flowing into Datadog.
 
-1. Once [your services are set up][4], navigate to the [Trace Search & Analytics docs page][5] to find a list of services and resource names available for usage in Trace Search
-3. Select the `environment` and `services` to extract [APM events][6] from.
+1. Once [your services are set up][4], navigate to the [Trace Search & Analytics docs page][5] to find a list of services and resource names available for use in Trace Search.
+3. Select the `environment` and `services` from which to extract [APM events][6].
 2. Update your Datadog Agent configuration (based on Agent version) with the information below:
 
 {{< tabs >}}
