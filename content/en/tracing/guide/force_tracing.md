@@ -115,7 +115,19 @@ span.setTag(tags.MANUAL_KEEP)
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Coming Soon
+Manually keep or drop a trace:
+```cs
+using Datadog.Trace;
+
+// Access the active scope through the global tracer (can return null)
+var scope = Tracer.Instance.ActiveScope;
+
+// Always keep this trace
+scope.Span.SetTag(Tags.ManualKeep, true);
+
+// Always drop this trace
+scope.Span.SetTag(Tags.ManualDrop, true);
+```
 
 {{% /tab %}}
 {{% tab "PHP" %}}
