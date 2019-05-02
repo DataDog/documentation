@@ -33,6 +33,6 @@ Les monitors d'APM fonctionnent comment les [monitors de métrique][1], mais son
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/monitors/monitor_types/metric
-[2]: /fr/tracing/advanced/setting_primary_tags_to_scope/#environment
+[2]: /fr/tracing/setup/first_class_dimensions#environment
 [3]: /fr/tracing/visualization/service
 [4]: /fr/monitors/notifications
