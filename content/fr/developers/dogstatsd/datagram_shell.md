@@ -13,96 +13,102 @@ further_reading:
     tag: GitHub
     text: Code source de DogStatsD
 ---
-Cette section spécifie le format brut des datagrammes pour chaque type de données accepté par DogStatsD. Vous pouvez l'ignorer si vous utilisez l'une des bibliothèques client de DogStatsD. Toutefois, si vous souhaitez rédiger votre propre bibliothèque ou utiliser l'interface système pour envoyer des métriques ou des événements, lisez attentivement cette section.
+Cette section spécifie le format brut des datagrammes pour chaque type de données accepté par DogStatsD. Vous pouvez l'ignorer si vous utilisez l'une des [bibliothèques client de DogStatsD][1]. Toutefois, si vous souhaitez rédiger votre propre bibliothèque ou utiliser l'interface système pour envoyer des métriques ou des événements, lisez attentivement cette section.
 
 ## Format des datagrammes
 
 ### Métriques
 
-`metric.name:value|type|@sample_rate|#tag1:value,tag2`
+`<NOM_MÉTRIQUE>:<VALEUR>|<TYPE>|@<TAUX_ÉCHANTILLONNAGE>|#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>`
 
 | Paramètre     | Obligatoire | Description                                                                                                                                                        |
 |---------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `metric.name` | Oui      | Une chaîne sans deux-points, barres ni « @ ». Consultez la [stratégie de nommage des métriques][1].                                                                                 |
-| `value`       | Oui      | Un nombre entier ou une valeur flottante.                                                                                                                                               |
-| `type`        | Oui      | `c` pour counter, `g` pour gauge, `ms` pour timer, `h` pour histogram, `s` pour set.                                                                                    |
-| `sample rate` | Non       | Une valeur flottante entre 0 et 1 (inclusif). Elle ne fonctionne qu'avec des métriques counter, histogram et timer. Valeur par défaut : 1 (entraîne un échantillonnage 100 % du temps).                            |
-| `tags`        | Non       | Une liste de tags séparés par des virgules. Utilisez deux-points pour les tags clé/valeur, p. ex. `env:prod`. La clé `device` est réservée : Datadog supprime un tag ajouté par un utilisateur comme `device:foobar`. |
+| `<NOM_MÉTRIQUE>` | Oui      | Une chaîne sans deux-points, barres ni « @ ». Consultez la [stratégie de nommage des métriques][2].                                                                                 |
+| `<VALEUR>`       | Oui      | Un nombre entier ou une valeur flottante.                                                                                                                                               |
+| `<TYPE>`        | Oui      | `c` pour counter, `g` pour gauge, `ms` pour timer, `h` pour histogram, `s` pour set.                                                                                    |
+| `<TAUX_ÉCHANTILLONNAGE>` | Non       | Une valeur flottante entre 0 et 1 (inclusif). Elle ne fonctionne qu'avec des métriques counter, histogram et timer. Valeur par défaut : 1 (entraîne un échantillonnage 100 % du temps).                            |
+| `<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>`        | Non       | Une liste de tags séparés par des virgules. Utilisez deux-points pour les tags clé/valeur, p. ex. `env:prod`. La clé `device` est réservée : Datadog supprime un tag ajouté par un utilisateur comme `device:foobar`. |
 
 Voici quelques exemples de datagrammes :
 
-    # Incrémenter le counter page.views
-    page.views:1|c
+```
+## Incrémenter le counter page.views
+page.views:1|c
 
-    # Enregistrer le fait que le réservoir de carburant est à moitié vide
-    fuel.level:0.5|g
+## Enregistrer le fait que le réservoir de carburant est à moitié vide
+fuel.level:0.5|g
 
-    # Échantillonner l'histogramme de longueur de morceau une fois sur deux
-    song.length:240|h|@0.5
+## Échantillonner l'histogramme de longueur de morceau une fois sur deux
+song.length:240|h|@0.5
 
-    # Suivre un visiteur unique du site
-    users.uniques:1234|s
+## Suivre un visiteur unique du site
+users.uniques:1234|s
 
-    # Incrémenter le counter d'utilisateurs actifs tagués par pays d'origine
-    users.online:1|c|#country:china
+## Incrémenter le counter d'utilisateurs actifs tagués par pays d'origine
+users.online:1|c|#country:china
 
-    # Suivre les utilisateurs chinois actifs et utiliser un taux d'échantillonnage
-    users.online:1|c|@0.5|#country:china
+## Suivre les utilisateurs chinois et utiliser un taux d'échantillonnage
+users.online:1|c|@0.5|#country:china
+```
 
 ### Événements
 
-`_e{title.length,text.length}:title|text|d:timestamp|h:hostname|p:priority|t:alert_type|#tag1,tag2`
+`_e{<TITRE>.length,<TEXTE>.length}:<TITRE>|<TEXTE>|d:<TIMESTAMP>|h:<HOSTNAME>|p:<PRIORITÉ>|t:<TYPE_ALERTE>|#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>`
 
 | Paramètre                          | Obligatoire | Description                                                                                                            |
 |------------------------------------|----------|------------------------------------------------------------------------------------------------------------------------|
 | `_e`                               | Oui      | Le datagramme doit commencer par `_e`.                                                                                      |
-| `title`                            | Oui      | Titre de l'événement.                                                                                                           |
-| `text`                             | Oui      | Texte de l'événement. Ajoutez des sauts de ligne en échappant une barre oblique (`\\n`).                                                           |
-| `d:timestamp`                      | Non       | Ajoute un timestamp à l'événement. Valeur par défaut ; timestamp epoch Unix actuel.                                             |
-| `h:hostname`                       | Non       | Ajoute un hostname à l'événement. Pas de valeur par défaut.                                                                               |
+| `<TITRE>`                            | Oui      | Titre de l'événement.                                                                                                           |
+| `<TEXTE>`                             | Oui      | Texte de l'événement. Ajoutez des sauts de ligne en échappant une barre oblique (`\\n`).                                                           |
+| `d:<TIMESTAMP>`                      | Non       | Ajoute un timestamp à l'événement. Valeur par défaut ; timestamp epoch Unix actuel.                                             |
+| `h:<HOSTNAME>`                       | Non       | Ajoute un hostname à l'événement. Pas de valeur par défaut.                                                                               |
 | `k:aggregation_key`                | Non       | Ajoute une clé d'agrégation afin de regrouper les événements qui possèdent la même clé. Pas de valeur par défaut.                              |
-| `p:priority`                       | Non       | Défini sur « normal » ou « low ». Valeur par défaut : « normal ».                                                                            |
+| `p:<PRIORITÉ>`                       | Non       | Défini sur « normal » ou « low ». Valeur par défaut : « normal ».                                                                            |
 | `s:source_type_name`               | Non       | Ajoute un type de source à l'événement. Pas de valeur par défaut.                                                                            |
-| `t:alert_type`                     | Non       | Défini sur « error », « warning », « info » ou « success ». Valeur par défaut : « info ».                                                        |
-| `#tag1:value1,tag2,tag3:value3...` | Non       | La virgule dans les tags fait partie de la chaîne de liste de tags et ne fait pas l'objet d'un parsing comme pour les autres paramètres. Pas de valeur par défaut. |
+| `t:<TYPE_ALERTE>`                     | Non       | Défini sur « error », « warning », « info » ou « success ». Valeur par défaut : « info ».                                                        |
+| `#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>` | Non       | La virgule dans les tags fait partie de la chaîne de liste de tags et ne fait pas l'objet d'un parsing comme pour les autres paramètres. Pas de valeur par défaut. |
 
 Voici quelques exemples de datagrammes :
 
-    # Envoyer une exception
-    _e{21,36}:Une exception s'est produite|Impossible d'analyser le fichier CSV depuis 10.0.0.17|t:warning|#err_type:bad_file
+```
+## Envoyer une exception
+_e{21,36}:Une exception s'est produite|Impossible d'analyser le fichier CSV depuis 10.0.0.17|t:warning|#err_type:bad_file
 
-    # Envoyer un événement avec une nouvelle ligne dans le texte
-    _e{21,42}:Une exception s'est produite|Impossible d'analyser la requête JSON:\\n{"foo: "bar"}|p:low|#err_type:bad_request
+## Envoyer un événement avec une nouvelle ligne dans le texte
+_e{21,42}:Une exception s'est produite|Impossible d'analyser la requête JSON :\\n{"foo: "bar"}|p:low|#err_type:bad_request
+```
 
 ### Checks de service
 
-`_sc|name|status|d:timestamp|h:hostname|#tag1:value1,tag2,tag3:value3,...|m:service_check_message`
+`_sc|<NOM>|<STATUT>|d:<TIMESTAMP>|h:<HOSTNAME>|#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>|m:<MESSAGE_CHECK_SERVICE>`
 
 | Paramètre                           | Obligatoire | Description                                                                                                                                  |
 |-------------------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------|
 | `_sc`                               | Oui      | Le datagramme doit commencer par `_sc`.                                                                                                           |
-| `name`                              | Oui      | Nom du check de service.                                                                                                                          |
-| `status`                            | Oui      | Nombre entier correspondant à l'état du check (OK = 0, WARNING = 1, CRITICAL = 2, UNKNOWN = 3).                                                  |
-| `d:timestamp`                       | Non       | Ajoute un timestamp au check. Valeur par défaut ; timestamp epoch Unix actuel.                                                                   |
-| `h:hostname`                        | Non       | Ajoute un hostname à l'événement. Pas de valeur par défaut.                                                                                                     |
-| `#tag1:value1,tag2,tag3:value3,...` | Non       | La virgule dans les tags fait partie de la chaîne de liste de tags et ne fait pas l'objet d'un parsing comme pour les autres paramètres. Pas de valeur par défaut.                       |
-| `m:service_check_message`           | Non       | Ajoute un message décrivant l'état actuel du check de service. *Ce champ DOIT être placé en dernier parmi les champs des métadonnées.* Pas de valeur par défaut. |
+| `<NOM>`                              | Oui      | Nom du check de service.                                                                                                                          |
+| `<STATUT>`                            | Oui      | Nombre entier correspondant à l'état du check (OK = 0, WARNING = 1, CRITICAL = 2, UNKNOWN = 3).                                                  |
+| `d:<TIMESTAMP>`                       | Non       | Ajoute un timestamp au check. Valeur par défaut ; timestamp epoch Unix actuel.                                                                   |
+| `h:<HOSTNAME>`                        | Non       | Ajoute un hostname à l'événement. Pas de valeur par défaut.                                                                                                     |
+| `#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>` | Non       | La virgule dans les tags fait partie de la chaîne de liste de tags et ne fait pas l'objet d'un parsing comme pour les autres paramètres. Pas de valeur par défaut.                       |
+| `m:<MESSAGE_CHECK_SERVICE>`           | Non       | Ajoute un message décrivant l'état actuel du check de service. *Ce champ DOIT être placé en dernier parmi les champs des métadonnées.* Pas de valeur par défaut. |
 
 Voici un exemple de datagramme :
 
-    # Envoyer un statut CRITICAL pour une connexion à distance
-    _sc|Connexion Redis|2|#redis_instance:10.0.0.16:6379|m:La connexion Redis a expiré après 10 s
+```
+# Envoyer un statut CRITICAL pour une connexion à distance
+_sc|Connexion Redis|2|#redis_instance:10.0.0.16:6379|m:La connexion Redis a expiré après 10 s
+```
 
 ## Envoyer des statistiques et des événements à l'aide de DogStatsD et de l'interface système
 
 Pour Linux et d'autres systèmes d'exploitation comme Unix, utilisez Bash.
-Pour Windows, Powershell et [powershell-statsd][2] (une fonction Powershell simple qui gère des bits réseau) sont requis.
+Pour Windows, Powershell et [powershell-statsd][3] (une fonction Powershell simple qui gère des bits réseau) sont requis.
 
-DogStatsD repose sur un concept simple : créer un message qui contient des informations sur votre métrique ou événement, et l'envoyer à un collecteur via UDP sur le port 8125. [En savoir plus sur le format du message](#format-des-datagrammes).
+DogStatsD repose sur le concept suivant : créer un message qui contient des informations sur votre métrique ou événement, et l'envoyer à un collecteur via UDP sur le port 8125. [En savoir plus sur le format du message](#format-des-datagrammes).
 
 ### Envoyer des métriques
 
-Le format d'envoi des métriques est le suivant : `metric.name:value|type|@sample_rate|#tag1:value,tag2,`. Imaginons que nous envoyons des points de données pour une métrique de type gauge du nom de custom_metric avec le tag shell. Si vous utilisez un Agent installé localement en tant que collecteur, l'adresse IP de la destination est 127.0.0.1.
+Le format d'envoi des métriques est le suivant : `<NOM_MÉTRIQUE>:<VALEUR>|<TYPE>|@<TAUX_ÉCHANTILLONNAGE>|#<CLÉ_TAG_1>:<VALEUR_TAG_1><TAG_2>`. Imaginons que nous envoyons des points de données pour une métrique de type gauge du nom de `custom_metric` avec le tag shell. Si vous utilisez un Agent installé localement en tant que collecteur, l'adresse IP de la destination est `127.0.0.1`.
 
 Options sur Linux :
 
@@ -133,12 +139,14 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
 sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```
 
+Pour envoyer des métriques sur des environnements conteneurisés, consultez l'article relatif à [l'utilisation de DogStatsD sur Kubernetes][4], conjointement avec les instructions de configuration de l'APM sur Kubernetes avec [DaemonSets][5] ou [Helm][6], en fonction de votre installation. La documentation sur l'[APM Docker] peut également vous venir en aide.
+
 ### Envoyer des événements
 
 Voici le format d'envoi d'événements :
 
 ```
-_e{title.length,text.length}:title|text|d:date_happened|h:hostname|p:priority|t:alert_type|#tag1,tag2.
+_e{titre.length,texte.length}:title|text|d:date_happened|h:hostname|p:priority|t:alert_type|#tag1,tag2.
 ```
 
 Calculez ici la taille du titre et du corps de l'événement :
@@ -163,5 +171,10 @@ PS C:\vagrant> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/developers/metrics/#naming-metrics
-[2]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1
+[1]: /fr/developers/libraries/#api-and-dogstatsd-client-libraries
+[2]: /fr/developers/metrics/#naming-metrics
+[3]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.
+[4]: /fr/agent/kubernetes/dogstatsd
+[5]: /fr/agent/kubernetes/daemonset_setup/#apm-and-distributed-tracing
+[6]: /fr/agent/kubernetes/helm/#enable-apm-and-distributed-tracing
+[7]: /fr/agent/docker/apm

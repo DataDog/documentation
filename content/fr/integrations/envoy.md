@@ -141,8 +141,8 @@ Le filtrage a lieu avant l'extraction des tags. Vous pouvez donc utiliser certai
 ...
 'cluster.grpc.success': {
     'tags': (
-        ('nom_cluster', ),
-        ('service_grpc', 'methode_grpc', ),
+        ('<NOM_CLUSTER>', ),
+        ('<SERVICE_GRPC>', '<METHODE_GRPC>', ),
         (),
     ),
     ...
@@ -150,13 +150,13 @@ Le filtrage a lieu avant l'extraction des tags. Vous pouvez donc utiliser certai
 ...
 ```
 
-Voici `3` séquences de tags : `('nom_cluster')`, `('service_grpc', 'methode_grpc')` et `()` vide. Le nombre de séquences correspond exactement au nombre de sections de métriques. Pour cette métrique, il y a `3` sections : `cluster`, `grpc` et `success`. Envoy sépare chaque élément avec le caractère `.`. Le nom final de la métrique est donc :
+Voici `3` séquences de tags : `('<NOM_CLUSTER>')`, `('<SERVICE_GRPC>', '<MÉTHODE_GRPC>')` et `()` vide. Le nombre de séquences correspond exactement au nombre de sections de métriques. Pour cette métrique, il y a `3` sections : `cluster`, `grpc` et `success`. Envoy sépare chaque élément avec le caractère `.`. Le nom final de la métrique est donc :
 
-`cluster.<nom_cluster>.grpc.<service_grpc>.<methode_grpc>.success`
+`cluster.<NOM_CLUSTER>.grpc.<SERVICE_GRPC>.<MÉTHODE_GRPC>.success`
 
 Si seuls le nom de cluster et le service grpc vous intéressent, ajoutez le code suivant à votre liste d'inclusion :
 
-`^cluster\.(cluster5|cluster7)\.grpc\.serviceXYZ\.`
+`^cluster\.<NOM_CLUSTER>\.grpc\.<SERVICE_GRPC>\.`
 
 ### Validation
 

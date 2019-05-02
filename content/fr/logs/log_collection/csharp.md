@@ -101,12 +101,12 @@ Une fois la bibliothèque dans votre classpath, ajoutez la disposition suivante 
 <nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-  <!-- 
-  Consultez https://github.com/nlog/nlog/wiki/Configuration-file 
+  <!--
+  Consultez https://github.com/nlog/nlog/wiki/Configuration-file
   pour en savoir plus sur la personnalisation des règles et des sorties de la journalisation.
    -->
   <targets async="true">
-    <!-- Rédiger les logs au format Json dans un fichier -->
+    <!-- Rédiger les logs au format JSON dans un fichier -->
     <target name="json-file" xsi:type="File" fileName="application-logs.json">
       <layout xsi:type="JsonLayout">
         <attribute name="date" layout="${longdate}" />
@@ -118,7 +118,7 @@ Une fois la bibliothèque dans votre classpath, ajoutez la disposition suivante 
 
   </targets>
   <rules>
-    <!-- Enregistrer tous les événements dans la cible json-file-->
+    <!-- Enregistrer tous les événements dans la cible json-file -->
     <logger name="*" writeTo="json-file" minlevel="Trace" />
   </rules>
 </nlog>
@@ -308,7 +308,8 @@ var log = new LoggerConfiguration()
 
 **Remarque** : pour envoyer des logs au site européen de Datadog, définissez la propriété `url` sur `https://http-intake.logs.datadoghq.eu`.
 
-Vous pouvez également remplacer le comportement par défaut et transférer des logs via TCP en précisant manuellement les propriétés requises suivantes : `url`, `port`, `useSSL` et `useTCP`. Si vous le souhaitez, vous pouvez préciser les paramètres `source`, `service` `host` et ajouter des tags personnalisés.
+Vous pouvez également remplacer le comportement par défaut et transférer des logs via TCP en précisant manuellement les propriétés requises suivantes : `url`, `port`, `useSSL` et `useTCP`. [Si vous le souhaitez, vous pouvez préciser les paramètres `source`, `service` et `host` et ajouter des tags personnalisés][3].
+
 Par exemple, pour transférer des logs vers le site américain de Datadog via TCP, utilisez la configuration de récepteur suivante :
 
 ```
@@ -330,6 +331,7 @@ Désormais, les nouveaux logs sont directement envoyés à Datadog.
 
 [1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
 [2]: https://app.datadoghq.com/account/settings#api
+[3]: /fr/logs/#reserved-attributes
 {{% /tab %}}
 {{< /tabs >}}
 
