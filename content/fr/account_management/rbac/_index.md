@@ -1,7 +1,7 @@
 ---
 title: Contrôle d'accès à base de rôles (RBAC)
 kind: documentation
-disable_toc: true
+private: true
 beta: true
 aliases:
   - /fr/guides/rbac
