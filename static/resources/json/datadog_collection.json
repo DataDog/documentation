@@ -360,7 +360,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"message\": \"<MESSAGE>\",\n    \"handle\": \"pierre.guceski@datadoghq.com\"\n}"
+									"raw": "{\n    \"message\": \"<MESSAGE>\",\n    \"handle\": \"test@datadoghq.com\"\n}"
 								},
 								"url": {
 									"raw": "https://api.datadoghq.com/api/v1/comments?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -615,7 +615,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"message\": \"<NEW_COMMENT_MESSAGE>\",\n    \"handle\":\"pierre.guceski@datadoghq.com\"\n}"
+									"raw": "{\n    \"message\": \"<NEW_COMMENT_MESSAGE>\",\n    \"handle\":\"test@datadoghq.com\"\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/comments/:COMMENT_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -655,68 +655,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Date",
-									"value": "Fri, 19 Apr 2019 12:39:44 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Vary",
-									"value": "Accept-Encoding"
-								},
-								{
-									"key": "Pragma",
-									"value": "no-cache"
-								},
-								{
-									"key": "Cache-Control",
-									"value": "no-cache"
-								},
-								{
-									"key": "Set-Cookie",
-									"value": "DD-PSHARD=211; Max-Age=604800; Path=/; expires=Fri, 26-Apr-2019 12:39:44 GMT; secure; HttpOnly"
-								},
-								{
-									"key": "X-DD-VERSION",
-									"value": "35.1246853"
-								},
-								{
-									"key": "X-DD-Debug",
-									"value": "Z2FDofQAgH+UEZrkb7jgfWlhlCGLkFwQKWBizuErqTzFBKILPVl+pYSm/yB/pNdW"
-								},
-								{
-									"key": "Content-Encoding",
-									"value": "gzip"
-								},
-								{
-									"key": "DD-POOL",
-									"value": "dogweb_sameorig"
-								},
-								{
-									"key": "X-Frame-Options",
-									"value": "SAMEORIGIN"
-								},
-								{
-									"key": "X-Content-Type-Options",
-									"value": "nosniff"
-								},
-								{
-									"key": "Strict-Transport-Security",
-									"value": "max-age=15724800;"
-								}
-							],
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"comment\": {\n        \"url\": \"/event/event?id=4889126983613267970\",\n        \"resource\": \"/api/v1/comments/4889126983613267970\",\n        \"message\": \"<NEW_COMMENT_MESSAGE>\",\n        \"handle\": \"test@datadoghq.com\",\n        \"id\": 4889126983613267970\n    }\n}"
 						},
@@ -771,7 +710,7 @@
 							"_postman_previewlanguage": "json",
 							"header": [],
 							"cookie": [],
-							"body": "{\n    \"comment\": {\n        \"handle\": \"mattp+org-carlotest141@datadoghq.com\",\n        \"id\": 1382557387240472966,\n        \"message\": \"My new comment message.\",\n        \"resource\": \"/api/v1/comments/1382557387240472966\",\n        \"url\": \"/event/jump_to?event_id=1382557387240472966\"\n    }\n}"
+							"body": "{\n    \"comment\": {\n        \"handle\": \"test@datadoghq.com\",\n        \"id\": 1382557387240472966,\n        \"message\": \"My new comment message.\",\n        \"resource\": \"/api/v1/comments/1382557387240472966\",\n        \"url\": \"/event/jump_to?event_id=1382557387240472966\"\n    }\n}"
 						}
 					]
 				},
@@ -828,7 +767,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"message\": \"<MESSAGE_REPLIED_TO_COMMENT>\",\n    \"handle\": \"pierre.guceski@datadoghq.com\",\n    \"related_event_id\": \"4889126983613267970\"\n}"
+									"raw": "{\n    \"message\": \"<MESSAGE_REPLIED_TO_COMMENT>\",\n    \"handle\": \"<DATADOG_HANDLE>\",\n    \"related_event_id\": \"4889126983613267970\"\n}"
 								},
 								"url": {
 									"raw": "https://api.datadoghq.com/api/v1/comments?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
