@@ -46,7 +46,6 @@
       "selectors_key": "faq",
       "variables": {
         "section": [
-          "tagging",
           "agent",
           "graphing",
           "monitors",
@@ -67,7 +66,6 @@
       "selectors_key": "faq",
       "variables": {
         "section": [
-          "tagging",
           "agent",
           "graphing",
           "monitors",
