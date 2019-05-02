@@ -83,6 +83,10 @@ tracer.init({
 })
 ```
 
+You can also use the following configuration parameter:
+
+* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
+
  After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
 
 
