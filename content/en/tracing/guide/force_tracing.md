@@ -68,11 +68,13 @@ def handler():
 Manually keep or drop a trace:
 
 ```ruby
-# Always keep this trace
-span.set_tag('manual.keep')
-
-# Always drop this trace
-span.set_tag('manual.drop')
+Datadog.tracer.trace(name, options) do |span|
+  # Manually mark the trace to keep
+  span.set_tag(Datadog::Ext::ForcedTracing::TAG_KEEP)
+  
+  # Manually mark the span to drop
+  span.set_tag(Datadog::Ext::ForcedTracing::TAG_DROP)
+end
 ```
 {{% /tab %}}
 {{% tab "Go" %}}
