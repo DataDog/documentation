@@ -16,18 +16,18 @@ further_reading:
   text: "Explore your services, resources, and traces"
 ---
 
-Adding metadata in the form of key-value pairs to a span allows to correlate traces with other Datadog products to provide more details about specific spans. Metadata can be either added [to a single span](#adding-metadata-to-a-span) or [globally to all spans](#adding-metadata-globally-to-all-spans)
+Adding metadata in the form of key-value pairs to a span allows to correlate traces with other Datadog products to provide more details about specific spans. Metadata can be either added [to a single span](#adding-metadata-to-a-span-via-tags) or [globally to all spans](#adding-metadata-globally-to-all-spans-via-tags)
 
-## Adding Metadata to a span
+**Note**: Tracing has the idea of `tags` with OpenTracing, but tags having a specific meaning in the [Datadog ecosystem][1], tracing span *tags* are called **metadata**.
+
+## Adding Metadata to a Span via Tags
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The Datadog UI uses specific metadata to set UI properties, such as an application's service name. A full list of these metadata can be found in the [Datadog][1] and [OpenTracing][2] APIs.
+The Datadog UI uses tags to set span level metadata. A full list of these metadata can be found in the [Datadog][1] and [OpenTracing][2] APIs.
 
-**Note**: Custom metadata are set using the OpenTracing API.
-
-Custom metadata may be set for auto-instrumentation by grabbing the active span out of the global tracer.
+Custom metadata may be set for auto-instrumentation by grabbing the active span out of the global tracer and setting a tag with `setTag`.
 
 ```java
 import io.opentracing.Tracer;
@@ -137,7 +137,8 @@ func main() {
 }
 ```
 
-Datadog's integrations make use of the `Context` type to propagate the current active span. If you want to add a metadata to a span attached to a `Context` via automatic instrumentation, call the `SpanFromContext` function:
+Datadog's integrations make use of the `Context` type to propagate the current active span.
+If you want to add span metadata via a tag attached to a `Context`, call the `SpanFromContext` function:
 
 ```go
 package main
@@ -239,7 +240,7 @@ if (null !== $span) {
 {{% /tab %}}
 {{< /tabs >}}
 
-## Adding Metadata globally to all spans
+## Adding Metadata globally to all spans via tags
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -336,3 +337,4 @@ Values are of [variable type][1] and can be complex objects. Values are serializ
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+[1]: /tagging
