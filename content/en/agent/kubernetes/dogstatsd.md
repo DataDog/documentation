@@ -100,6 +100,19 @@ env:
 
 With this, any pod running your application is able to send DogStatsD metrics via port `8125` on `$DOGSTATSD_HOST_IP`.
 
+## Origin detection over UDP
+
+Add the following lines to your application manifest in order to enable origin detection over UDP:
+
+```yaml
+env:
+  - name: DD_ENTITY_ID
+    valueFrom:
+      fieldRef:
+        fieldPath: metadata.uid
+```
+
+
 ## Instrument your code to send metrics to DogStatsD
 
 Once your application can send metrics via DogStatsD on each node, you can instrument your application code to submit custom metrics. 
