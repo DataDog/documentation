@@ -16,7 +16,7 @@ further_reading:
   text: "Creating context with service maps (Datadog + Airbnb)"
 ---
 
-The Service Map decomposes your application into all its component services and draws the observed dependencies between these services in real time, so you can identify bottlenecks and understand how data flows through your architecture. 
+The Service Map decomposes your application into all its component services and draws the observed dependencies between these services in real time, so you can identify bottlenecks and understand how data flows through your architecture.
 
 {{< img src="tracing/visualization/services_map/service_map_overview.png" alt="Service Map Overview" responsive="true">}}
 
@@ -30,7 +30,7 @@ The Service Map was built to provide an overview of your services and their heal
 
 ## Filtering vs changing scopes
 
-The Service Map can be filtered based on the type of service (webserver, database, cache, etc.) or based on a fuzzy string match. This is particularly useful in a microservices environment with hundreds or thousands of nodes. 
+The Service Map can be filtered based on the type of service (webserver, database, cache, etc.) or based on a fuzzy string match. This is particularly useful in a microservices environment with hundreds or thousands of nodes.
 
 Services are also scoped by `env`, and, optionally, a [first-class dimension][2].  Using the dropdowns to select a different scope draws an entirely different map consisting of the services within that scope. These services cannot call or be called by services in other environments.
 
@@ -87,5 +87,5 @@ Monitors are not constrained to APM monitors. The service tag, described above, 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/guide/distributed_tracing
-[2]: /tracing/setup/first_class_dimensions
+[2]: /tracing/advanced/setting_primary_tags_to_scope
 [3]: https://app.datadoghq.com/apm/services
