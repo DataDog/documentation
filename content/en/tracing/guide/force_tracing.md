@@ -71,7 +71,7 @@ Manually keep or drop a trace:
 Datadog.tracer.trace(name, options) do |span|
   # Manually mark the trace to keep
   span.set_tag(Datadog::Ext::ForcedTracing::TAG_KEEP)
-  
+
   # Manually mark the span to drop
   span.set_tag(Datadog::Ext::ForcedTracing::TAG_DROP)
 end
@@ -112,12 +112,15 @@ func handler(w http.ResponseWriter, r *http.Request) {
 Manually keep or drop a trace:
 
 ```js
+const tracer = require('dd-trace')
 const tags = require('dd-trace/ext/tags')
 
-// To reject the trace
+const span = tracer.startSpan('web.request')
+
+// Always drop the trace
 span.setTag(tags.MANUAL_DROP)
 
-// To keep the trace
+// Always keep the trace
 span.setTag(tags.MANUAL_KEEP)
 ```
 
