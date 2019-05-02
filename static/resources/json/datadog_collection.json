@@ -1,8 +1,8 @@
 {
 	"info": {
-		"_postman_id": "097e99f5-7af9-4e1b-85be-ae445b2d2dfe",
+		"_postman_id": "6a90169e-0fd9-4d9b-8e64-911098484766",
 		"name": "Datadog API Collection",
-		"description": "Top Level Folder For Datadog API calls",
+		"description": "Collection of all Datadog Public endpoints.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -22,7 +22,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/validate?api_key={{dd_api_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -51,7 +51,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/validate?api_key={{dd_api_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/validate?api_key={{dd_api_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -158,7 +158,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/check_run?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -198,7 +198,7 @@
 									"raw": "{\n      \"check\": \"app.is_ok\",\n      \"host_name\": \"app1\",\n      \"timestamp\": {{$timestamp}},\n      \"status\": 0,\n      \"tags\": [\"env:test\"]\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/check_run?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/check_run?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -225,7 +225,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"status\": \"ok\"\n}"
 						}
@@ -277,7 +277,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/comments?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -320,7 +320,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/comments?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -344,102 +344,9 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"comment\": {\n        \"handle\": \"test@datadoghq.com\",\n        \"id\": 1382561676571697516,\n        \"message\": \"There is a problem with the database.\",\n        \"resource\": \"/api/v1/comments/1382561676571697516\",\n        \"url\": \"/event/jump_to?event_id=1382561676571697516\"\n    }\n}"
-						},
-						{
-							"name": "400 - Bad Request",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"message\": \"<MESSAGE>\",\n    \"handle\": \"<DATADOG_HANDLE>\"\n}"
-								},
-								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/comments?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
-									"protocol": "https",
-									"host": [
-										"app",
-										"datadoghq",
-										"com"
-									],
-									"path": [
-										"api",
-										"v1",
-										"comments"
-									],
-									"query": [
-										{
-											"key": "api_key",
-											"value": "{{dd_api_key}}",
-											"description": "Your Datadog API key"
-										},
-										{
-											"key": "application_key",
-											"value": "{{dd_app_key}}",
-											"description": "Your Datadog application key"
-										}
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Date",
-									"value": "Fri, 19 Apr 2019 12:38:35 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Content-Length",
-									"value": "68"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Pragma",
-									"value": "no-cache"
-								},
-								{
-									"key": "Cache-Control",
-									"value": "no-cache"
-								},
-								{
-									"key": "X-DD-VERSION",
-									"value": "35.1246853"
-								},
-								{
-									"key": "DD-POOL",
-									"value": "dogweb_sameorig"
-								},
-								{
-									"key": "X-Frame-Options",
-									"value": "SAMEORIGIN"
-								},
-								{
-									"key": "X-Content-Type-Options",
-									"value": "nosniff"
-								},
-								{
-									"key": "Strict-Transport-Security",
-									"value": "max-age=15724800;"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"errors\": [\n        \"The value provided for parameter 'handle' is invalid\"\n    ]\n}"
 						},
 						{
 							"name": "200 - OK",
@@ -459,7 +366,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/comments?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -549,6 +456,99 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"comment\": {\n        \"url\": \"/event/event?id=4889126983613267970\",\n        \"resource\": \"/api/v1/comments/4889126983613267970\",\n        \"message\": \"<MESSAGE>\",\n        \"handle\": \"test@datadoghq.com\",\n        \"id\": 4889126983613267970\n    }\n}"
+						},
+						{
+							"name": "400 - Bad Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"message\": \"<MESSAGE>\",\n    \"handle\": \"<DATADOG_HANDLE>\"\n}"
+								},
+								"url": {
+									"raw": "https://api.datadoghq.com/api/v1/comments?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"comments"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
+										},
+										{
+											"key": "application_key",
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 19 Apr 2019 12:38:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-DD-VERSION",
+									"value": "35.1246853"
+								},
+								{
+									"key": "DD-POOL",
+									"value": "dogweb_sameorig"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15724800;"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": [\n        \"The value provided for parameter 'handle' is invalid\"\n    ]\n}"
 						}
 					]
 				},
@@ -570,7 +570,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/comments/:COMMENT_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -618,7 +618,7 @@
 									"raw": "{\n    \"message\": \"<NEW_COMMENT_MESSAGE>\",\n    \"handle\":\"pierre.guceski@datadoghq.com\"\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/comments/:COMMENT_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/comments/:COMMENT_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -735,7 +735,7 @@
 									"raw": "{\n    \"message\": \"My new comment message.\"\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/comments/:EVENT_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/comments/:EVENT_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -769,7 +769,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"comment\": {\n        \"handle\": \"mattp+org-carlotest141@datadoghq.com\",\n        \"id\": 1382557387240472966,\n        \"message\": \"My new comment message.\",\n        \"resource\": \"/api/v1/comments/1382557387240472966\",\n        \"url\": \"/event/jump_to?event_id=1382557387240472966\"\n    }\n}"
 						}
@@ -793,7 +793,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/comments?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -834,7 +834,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/comments?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -943,7 +943,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/comments/:COMMENT_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -1203,9 +1203,9 @@
 							],
 							"variable": [
 								{
-									"description": "ID of the Dashboard to update",
 									"key": "DASHBOARD_ID",
-									"value": "{{dashboard_id}}"
+									"value": "{{dashboard_id}}",
+									"description": "ID of the Dashboard to update"
 								}
 							]
 						},
@@ -1256,9 +1256,9 @@
 									],
 									"variable": [
 										{
-											"description": "ID of the Dashboard to update",
 											"key": "DASHBOARD_ID",
-											"value": "civ-zbj-ag5"
+											"value": "civ-zbj-ag5",
+											"description": "ID of the Dashboard to update"
 										}
 									]
 								}
@@ -1375,9 +1375,9 @@
 							],
 							"variable": [
 								{
-									"description": "Id of the Dashboar to delete",
 									"key": "DASHBOARD_ID",
-									"value": "{{dashboard_id}}"
+									"value": "{{dashboard_id}}",
+									"description": "Id of the Dashboar to delete"
 								}
 							]
 						},
@@ -1426,9 +1426,9 @@
 									],
 									"variable": [
 										{
-											"description": "Id of the Dashboar to delete",
 											"key": "DASHBOARD_ID",
-											"value": "civ-zbj-ag5"
+											"value": "civ-zbj-ag5",
+											"description": "Id of the Dashboar to delete"
 										}
 									]
 								}
@@ -1521,7 +1521,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/dashboard/:DASHBOARD_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -1545,9 +1545,9 @@
 							],
 							"variable": [
 								{
-									"description": "Id of the Dashboard to GET",
 									"key": "DASHBOARD_ID",
-									"value": "{{dashboard_id}}"
+									"value": "{{dashboard_id}}",
+									"description": "Id of the Dashboard to GET"
 								}
 							]
 						},
@@ -1572,7 +1572,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/dashboard/:DASHBOARD_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -1596,9 +1596,9 @@
 									],
 									"variable": [
 										{
-											"description": "Id of the Dashboard to GET",
 											"key": "DASHBOARD_ID",
-											"value": "civ-zbj-ag5"
+											"value": "civ-zbj-ag5",
+											"description": "Id of the Dashboard to GET"
 										}
 									]
 								}
@@ -1691,7 +1691,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/dashboard/?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -2290,6 +2290,64 @@
 					},
 					"response": [
 						{
+							"name": "Update a Dashboard List Example",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"My Updated Dashboard List\"\n}"
+								},
+								"url": {
+									"raw": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/:DASHBOARD_LIST_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"dashboard",
+										"lists",
+										"manual",
+										":DASHBOARD_LIST_ID"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
+										},
+										{
+											"key": "application_key",
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
+										}
+									],
+									"variable": [
+										{
+											"key": "DASHBOARD_LIST_ID",
+											"value": "4741",
+											"description": "The ID of the Dashboard list to update"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"name\": \"My Updated Dashboard List\",\n    \"created\": \"2018-03-16T09:44:41.476018+00:00\",\n    \"author\": {\n        \"handle\": \"test1@datadoghq.com\",\n        \"name\": \"Author Name\"\n    },\n    \"dashboards\": \"None\",\n    \"modified\": \"2018-03-16T13:45:42.288026+00:00\",\n    \"is_favorite\": false,\n    \"dashboard_count\": 5,\n    \"type\": \"manual_dashboard_list\",\n    \"id\": 4741\n}"
+						},
+						{
 							"name": "200 - OK",
 							"originalRequest": {
 								"method": "PUT",
@@ -2407,64 +2465,6 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"is_favorite\": false,\n    \"name\": \"<NEW_DASHBOARD_LIST_TITLE>\",\n    \"dashboard_count\": 0,\n    \"author\": {\n        \"handle\": \"test@datadoghq.com\",\n        \"name\": \"John Doe\"\n    },\n    \"created\": \"2019-04-19T12:29:38.231231+00:00\",\n    \"type\": \"manual_dashboard_list\",\n    \"dashboards\": null,\n    \"modified\": \"2019-04-19T12:32:16.412326+00:00\",\n    \"id\": 57440\n}"
-						},
-						{
-							"name": "Update a Dashboard List Example",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\": \"My Updated Dashboard List\"\n}"
-								},
-								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/:DASHBOARD_LIST_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
-									"protocol": "https",
-									"host": [
-										"api",
-										"datadoghq",
-										"com"
-									],
-									"path": [
-										"api",
-										"v1",
-										"dashboard",
-										"lists",
-										"manual",
-										":DASHBOARD_LIST_ID"
-									],
-									"query": [
-										{
-											"key": "api_key",
-											"value": "{{dd_api_key}}",
-											"description": "Your Datadog API key"
-										},
-										{
-											"key": "application_key",
-											"value": "{{dd_app_key}}",
-											"description": "Your Datadog application key"
-										}
-									],
-									"variable": [
-										{
-											"key": "DASHBOARD_LIST_ID",
-											"value": "4741",
-											"description": "The ID of the Dashboard list to update"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": null,
-							"cookie": [],
-							"body": "{\n    \"name\": \"My Updated Dashboard List\",\n    \"created\": \"2018-03-16T09:44:41.476018+00:00\",\n    \"author\": {\n        \"handle\": \"test1@datadoghq.com\",\n        \"name\": \"Author Name\"\n    },\n    \"dashboards\": \"None\",\n    \"modified\": \"2018-03-16T13:45:42.288026+00:00\",\n    \"is_favorite\": false,\n    \"dashboard_count\": 5,\n    \"type\": \"manual_dashboard_list\",\n    \"id\": 4741\n}"
 						}
 					]
 				},
@@ -2754,7 +2754,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"total\": 2,\n    \"dashboards\": [\n        {\n            \"is_shared\": false,\n            \"author\": {\n                \"handle\": None,\n                \"name\": None\n            },\n            \"url\": \"/screen/integration/66/aws-dynamodb\",\n            \"title\": \"AWS DynamoDB\",\n            \"modified\": None,\n            \"created\": None,\n            \"is_favorite\": True,\n            \"is_read_only\": True,\n            \"type\": \"integration_screenboard\",\n            \"id\": 66,\n            \"icon\": \"/static/v/34.254868/images/saas_logos/small/amazon_dynamodb.png\"\n        },\n        {\n            \"is_shared\": false,\n            \"author\": {\n                \"handle\": None,\n                \"name\": None\n            },\n            \"url\": \"/dash/integration/17/postgres---metrics\",\n            \"title\": \"Postgres - Metrics\",\n            \"modified\": None,\n            \"created\": None,\n            \"is_favorite\": True,\n            \"is_read_only\": True,\n            \"type\": \"integration_timeboard\",\n            \"id\": 17,\n            \"icon\": \"/static/v/34.254868/images/saas_logos/small/postgres.png\"\n        }\n    ]\n}"
 						}
@@ -2985,7 +2985,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/downtime?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -3043,7 +3043,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/downtime/:DOWNTIME_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -3090,7 +3090,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/downtime/:DOWNTIME_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -3142,7 +3142,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/downtime/cancel/by_scope?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -3184,7 +3184,7 @@
 									"raw": "{\n      \"scope\": \"host:i-123\"\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/downtime/cancel/by_scope?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/downtime/cancel/by_scope?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -3213,7 +3213,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"cancelled_ids\": [\n        123456789,\n        123456790\n    ]\n}"
 						}
@@ -3232,7 +3232,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/downtime/:DOWNTIME_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -3278,7 +3278,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/downtime/:DOWNTIME_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -3310,7 +3310,7 @@
 								}
 							},
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "{\n  \"active\": true,\n  \"disabled\": false,\n  \"end\": 1420447087,\n  \"id\": 2910,\n  \"message\": \"Doing some testing on staging.\",\n  \"monitor_tags\": [\"*\"],\n  \"scope\": [\"env:staging\"],\n  \"start\": 1420387032\n}"
 						}
@@ -3329,7 +3329,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/downtime?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -3367,7 +3367,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/downtime?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -3393,7 +3393,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "[\n  {\n    \"active\": false,\n    \"disabled\": true,\n    \"end\": 1412793983,\n    \"id\": 1625,\n    \"monitor_tags\": [\"*\"],\n    \"scope\": [\n      \"env:staging\"\n    ],\n    \"start\": 1412792983\n  },\n  {\n    \"active\": false,\n    \"disabled\": true,\n    \"end\": null,\n    \"id\": 1626,\n    \"monitor_tags\": [\"*\"],\n    \"scope\": [\n      \"*\"\n    ],\n    \"start\": 1412792985\n  }\n]"
 						}
@@ -3440,7 +3440,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/graph/embed?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -3479,7 +3479,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/graph/embed?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -3506,7 +3506,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "{ \"embedded_graphs\": [\n    {\n      \"embed_id\": \"5f585b01c81b12ecdf5f40df0382738d0919170639985d3df5e2fc4232865b0c\",\n      \"template_variables\": [],\n      \"html\": \"&lt;iframe src=\\&quot;https://app.datadoghq.com/graph/embed?token=5f585b01c81b12ecdf5f40df0382738d0919170639985d3df5e2fc4232865b0c&amp;height=300&amp;width=600&amp;legend=true\\&quot; width=\\&quot;600\\&quot; height=\\&quot;300\\&quot; frameBorder=\\&quot;0\\&quot;&gt;&lt;/iframe&gt;\",\n      \"graph_title\": \"Embed created through API\",\n      \"revoked\": false,\n      \"dash_url\": null,\n      \"shared_by\": 3658,\n      \"dash_name\": null\n    }\n  ]\n}"
 						}
@@ -3532,7 +3532,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/graph/embed?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -3572,7 +3572,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/graph/embed/:EMBED_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -3597,9 +3597,9 @@
 							],
 							"variable": [
 								{
-									"description": "ID of the embed to fetch",
 									"key": "EMBED_ID",
-									"value": "{{embed_id}}"
+									"value": "{{embed_id}}",
+									"description": "ID of the embed to fetch"
 								}
 							]
 						},
@@ -3620,7 +3620,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/graph/embed/:EMBED_ID/enable?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -3669,7 +3669,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/graph/embed/:EMBED_ID/revoke?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -3695,9 +3695,9 @@
 							],
 							"variable": [
 								{
-									"description": "ID of the embed to revoke",
 									"key": "EMBED_ID",
-									"value": "{{embed_id}}"
+									"value": "{{embed_id}}",
+									"description": "ID of the embed to revoke"
 								}
 							]
 						},
@@ -3751,7 +3751,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/events?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -3794,7 +3794,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/events?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -3873,7 +3873,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/events/:EVENT_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -3924,7 +3924,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/events/:EVENT_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -4043,7 +4043,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/events/:EVENT_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -4067,9 +4067,9 @@
 							],
 							"variable": [
 								{
-									"description": "ID of the event to delete",
 									"key": "EVENT_ID",
-									"value": "{{event_id}}"
+									"value": "{{event_id}}",
+									"description": "ID of the event to delete"
 								}
 							]
 						},
@@ -4091,7 +4091,7 @@
 									"raw": "{\n\t\"title\":\"Something big happened!\",\n\"text\":\"And let me tell you all about it here!\",\n\"tags\":\"environment:prod\"\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/events/:EVENT_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/events/:EVENT_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -4228,7 +4228,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/events?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -4265,13 +4265,13 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"start\":1555670956,\n\t\"end\":1555674556\n}"
+									"raw": ""
 								},
 								"url": {
 									"raw": "https://api.datadoghq.com/api/v1/events?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -4297,7 +4297,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"events\": [\n        {\n            \"alert_type\": \"info\",\n            \"comments\": [],\n            \"date_happened\": 1346273496,\n            \"device_name\": null,\n            \"host\": null,\n            \"id\": 1375910067732769979,\n            \"is_aggregate\": false,\n            \"priority\": \"normal\",\n            \"resource\": \"/api/v1/events/1375910067732769979\",\n            \"source\": \"My Apps\",\n            \"tags\": [\n                \"application:web\",\n                \"version:1\"\n            ],\n            \"text\": \"And let me tell you all about it here!\",\n            \"title\": \"Something big happened!\",\n            \"url\": \"/event/jump_to?event_id=1375910067732769979\"\n        },\n        {\n            \"alert_type\": \"info\",\n            \"comments\": [],\n            \"date_happened\": 1346273469,\n            \"device_name\": null,\n            \"host\": null,\n            \"id\": 1375909614428331251,\n            \"is_aggregate\": false,\n            \"priority\": \"normal\",\n            \"resource\": \"/api/v1/events/1375909614428331251\",\n            \"source\": \"My Apps\",\n            \"tags\": [\n                \"application:web\",\n                \"version:1\"\n            ],\n            \"text\": \"And let me tell you all about it here!\",\n            \"title\": \"Something big happened!\",\n            \"url\": \"/event/jump_to?event_id=1375909614428331251\"\n        }\n    ]\n}"
 						}
@@ -4365,7 +4365,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/graph/snapshot?api_key={{dd_api_key}}&application_key={{dd_app_key}}&metric_query={{metric_query}}&start={{from_ts}}&end={{to_ts}}&title={{title}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -4430,7 +4430,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/graph/snapshot?api_key={{dd_api_key}}&application_key={{dd_app_key}}&metric_query=system.load.1{*}&start=1555670956&end=1555674556",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -4470,7 +4470,7 @@
 								}
 							},
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"metric_query\": \"system.load.1{*}\",\n    \"snapshot_url\": \"https://s3.amazonaws.com/dd-snapshots-prod/org_1499/2013-07-19/53fd79f024e7796f4ca399f1d90adf3cf95a9bb8.png\"\n}"
 						}
@@ -4779,7 +4779,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/host/:HOSTNAME/mute?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -4831,7 +4831,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/host/:HOSTNAME/mute?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -4866,7 +4866,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"action\": \"Muted\",\n    \"hostname\": \"test.host\",\n    \"message\": \"Muting this host for a test!\"\n}"
 						}
@@ -4890,7 +4890,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/host/:HOSTNAME/unmute?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -4942,7 +4942,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/host/:HOSTNAME/unmute?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -4977,7 +4977,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"action\": \"Unmuted\",\n    \"hostname\": \"test.host\",\n    \"message\": \"Un-Muting this host for a test!\"\n}"
 						}
@@ -5004,7 +5004,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/integration/aws?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -5043,7 +5043,7 @@
 											"raw": "https://api.datadoghq.com/api/v1/integration/aws?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 											"protocol": "https",
 											"host": [
-												"app",
+												"api",
 												"datadoghq",
 												"com"
 											],
@@ -5069,7 +5069,7 @@
 									},
 									"code": 200,
 									"_postman_previewlanguage": "json",
-									"header": null,
+									"header": [],
 									"cookie": [],
 									"body": "{\"accounts\":\n    [{\n        \"account_id\": 112233445566,\n        \"role_name\": \"SomeDatadogRole\",\n        \"filter_tags\": [\n        \t'filter123'\n        ],\n        \"host_tags\": [\n        \t'account:demo'\n        \t],\n        \"account_specific_namespace_rules\": {\"opsworks\":false}\n    }]\n}"
 								}
@@ -5093,7 +5093,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/integration/aws?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -5138,7 +5138,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/integration/aws?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -5377,7 +5377,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"account_id\": \"YOUR_AWS_ACCOUNT_ID\"\n}"
+											"raw": ""
 										},
 										"url": {
 											"raw": "https://api.datadoghq.com/api/v1/integration/aws/filtering?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -5575,7 +5575,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/integration/azure?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/integration/azure?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -5620,7 +5620,7 @@
 									"raw": "{\n    \"tenant_name\": \"<AZURE_TENANT_NAME>\",\n    \"client_id\": \"<AZURE_CLIENT_ID>\",\n    \"client_secret\": \"<AZURE_CLIENT_SECRET>\",\n    \"host_filters\": \"<KEY_1>:<VALUE_1>,<KEY_2>:<VALUE_2>\"\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/integration/azure?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/integration/azure?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -5665,7 +5665,7 @@
 									"raw": "{\n    \"tenant_name\": \"<AZURE_TENANT_NAME>\",\n    \"client_id\": \"<AZURE_CLIENT_ID>\",\n    \"host_filters\": \"<KEY_1>:<VALUE_1>,<KEY_2>:<VALUE_2>\"\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/integration/azure?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/integration/azure?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -5710,7 +5710,7 @@
 									"raw": "{\n    \"tenant_name\": \"<AZURE_TENANT_NAME>\",\n    \"client_id\": \"<AZURE_CLIENT_ID>\"\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/integration/azure?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/integration/azure?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -6021,7 +6021,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/integration/pagerduty?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/integration/pagerduty?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -6066,7 +6066,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/integration/pagerduty?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/integration/pagerduty?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -6111,7 +6111,7 @@
 									"raw": "{\n    \"services\": [\n        {\n            \"service_name\": \"test_00\",\n            \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        },\n        {\n            \"service_name\": \"test_01\",\n            \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        }\n    ],\n    \"subdomain\": \"my-pd\",\n    \"schedules\": [\n        \"https://my-pd.pagerduty.com/schedules#PCPYT4M\",\n        \"https://my-pd.pagerduty.com/schedules#PKTPB7P\"\n    ],\n    \"api_token\": \"<PAGERDUTY_TOKEN>\"\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/integration/pagerduty?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/integration/pagerduty?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -6156,7 +6156,7 @@
 									"raw": "{\n    \"services\": [\n        {\n            \"service_name\": \"test_00\",\n            \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        },\n        {\n            \"service_name\": \"test_01\",\n            \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        }\n    ],\n    \"schedules\": [\n        \"<SCHEDULE_1>\",\n        \"<SCHEDULE_2>\"\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/integration/pagerduty?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/integration/pagerduty?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -6211,7 +6211,7 @@
 									"raw": "{\n    \"service_hooks\": [\n        {\n            \"account\": \"Main_Account\",\n            \"url\": \"https://hooks.slack.com/services/1/1\"\n        },\n        {\n            \"account\": \"doghouse\",\n            \"url\": \"https://hooks.slack.com/services/2/2\"\n        }\n    ],\n    \"channels\": [\n        {\n            \"channel_name\": \"#private\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"Main_Account\"\n        },\n        {\n            \"channel_name\": \"#heresachannel\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"doghouse\"\n        }\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/integration/slack?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/integration/slack?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -6256,7 +6256,7 @@
 									"raw": "{\n    \"service_hooks\": [\n        {\n            \"account\": \"Main_Account\",\n            \"url\": \"https://hooks.slack.com/services/1/1\"\n        },\n        {\n            \"account\": \"doghouse\",\n            \"url\": \"https://hooks.slack.com/services/2/2\"\n        }\n    ],\n    \"channels\": [\n        {\n            \"channel_name\": \"#private\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"Main_Account\"\n        },\n        {\n            \"channel_name\": \"#heresachannel\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"doghouse\"\n        }\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/integration/slack?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/integration/slack?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -6301,7 +6301,7 @@
 									"raw": "{\n    \"service_hooks\": [\n        {\n            \"account\": \"Main_Account\",\n            \"url\": \"https://hooks.slack.com/services/1/1\"\n        },\n        {\n            \"account\": \"doghouse\",\n            \"url\": \"https://hooks.slack.com/services/2/2\"\n        }\n    ],\n    \"channels\": [\n        {\n            \"channel_name\": \"#private\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"Main_Account\"\n        },\n        {\n            \"channel_name\": \"#heresachannel\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"doghouse\"\n        }\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/integration/slack?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/integration/slack?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -6346,7 +6346,7 @@
 									"raw": "{\n    \"channels\": [\n        {\n            \"channel_name\": \"<CHANNEL_NAME_3>\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"<SLACK_ACCOUNT_1>\"\n        },\n        {\n            \"channel_name\": \"<CHANNEL_NAME_4>\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"<SLACK_ACCOUNT_2>\"\n        }\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/integration/slack?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/integration/slack?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -6401,7 +6401,7 @@
 									"raw": "{\n    \"hooks\": [\n        {\n            \"name\": \"somehook\",\n            \"url\": \"http://requestb.in/v1srg7v1\",\n            \"use_custom_payload\": \"false\",\n            \"custom_payload\": \"\",\n            \"encode_as_form\": \"false\",\n            \"headers\": \"\"\n        }\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/integration/webhooks?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/integration/webhooks?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -6443,7 +6443,7 @@
 									"raw": "{\n    \"hooks\": [\n        {\n            \"name\": \"somehook\",\n            \"url\": \"http://requestb.in/v1srg7v1\",\n            \"use_custom_payload\": \"false\",\n            \"custom_payload\": \"\",\n            \"encode_as_form\": \"false\",\n            \"headers\": \"\"\n        }\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/integration/webhooks?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/integration/webhooks?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -6485,7 +6485,7 @@
 									"raw": "{\n    \"hooks\": [\n        {\n            \"name\": \"somehook\",\n            \"url\": \"http://requestb.in/v1srg7v1\",\n            \"use_custom_payload\": \"false\",\n            \"custom_payload\": \"\",\n            \"encode_as_form\": \"false\",\n            \"headers\": \"\"\n        }\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/integration/webhooks?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/integration/webhooks?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -6528,7 +6528,7 @@
 									"raw": "{\n    \"hooks\": [\n        {\n            \"name\": \"anotherone\",\n            \"url\": \"http://requestb.in/v1srg7v1\"\n        }\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/integration/webhooks?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"raw": "https://app.datadoghq.com/api/v1/integration/webhooks?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -6612,7 +6612,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/api_key?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -6656,7 +6656,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/api_key?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -6703,7 +6703,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/api_key/:API_KEY?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -6729,7 +6729,6 @@
 										{
 											"key": "API_KEY",
 											"value": "{{api_key_to_get}}",
-											"type": "string",
 											"description": "API to get information from"
 										}
 									]
@@ -6756,7 +6755,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/api_key/:API_KEY?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -6782,7 +6781,6 @@
 										{
 											"key": "API_KEY",
 											"value": "{{dd_api_key_to_edit}}",
-											"type": "string",
 											"description": "Datadog API Key to edit"
 										}
 									]
@@ -6809,7 +6807,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/api_key/:API_KEY?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -6835,7 +6833,6 @@
 										{
 											"key": "API_KEY",
 											"value": "{{dd_api_key-to_delete}}",
-											"type": "string",
 											"description": "API to delete"
 										}
 									]
@@ -6872,7 +6869,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/application_key?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -6914,7 +6911,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/application_key?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -6959,7 +6956,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/application_key/:APP_KEY?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -6981,10 +6978,8 @@
 									],
 									"variable": [
 										{
-											"id": "04a9097c-ccb7-4906-8030-3ce582e97140",
 											"key": "APP_KEY",
-											"value": "<APP_KEY_TO_GET>",
-											"type": "string"
+											"value": "<APP_KEY_TO_GET>"
 										}
 									]
 								},
@@ -7010,7 +7005,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/application_key/:APP_KEY?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -7033,8 +7028,7 @@
 									"variable": [
 										{
 											"key": "APP_KEY",
-											"value": "<APP_KEY_TO_EDIT>",
-											"type": "string"
+											"value": "<APP_KEY_TO_EDIT>"
 										}
 									]
 								},
@@ -7060,7 +7054,7 @@
 									"raw": "https://api.datadoghq.com/api/v1/application_key/:APP_KEY?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 									"protocol": "https",
 									"host": [
-										"app",
+										"api",
 										"datadoghq",
 										"com"
 									],
@@ -7082,10 +7076,8 @@
 									],
 									"variable": [
 										{
-											"id": "f7b961e7-b2f8-4ec4-956d-9325dd2fd721",
 											"key": "APP_KEY",
-											"value": "<APP_KEY_TO_DELETE>",
-											"type": "string"
+											"value": "<APP_KEY_TO_DELETE>"
 										}
 									]
 								},
@@ -7308,7 +7300,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/metrics?api_key={{dd_api_key}}&application_key={{dd_app_key}}&from={{from_ts}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -7369,7 +7361,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/series?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -7466,7 +7458,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/query?api_key={{dd_api_key}}&application_key={{dd_app_key}}&from={{from_ts}}&to={{to_ts}}&query=system.cpu.idle{*}by{host}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -7520,7 +7512,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/metrics/:METRIC_NAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -7546,7 +7538,6 @@
 								{
 									"key": "METRIC_NAME",
 									"value": "{{metrics_name}}",
-									"type": "string",
 									"description": "Name of the metric to retrieve metadata from."
 								}
 							]
@@ -7573,7 +7564,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/metrics/:METRIC_NAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -7599,7 +7590,6 @@
 								{
 									"key": "METRIC_NAME",
 									"value": "{{metric_name}}",
-									"type": "string",
 									"description": "Name of the metric to edit metadata from."
 								}
 							]
@@ -7706,7 +7696,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/monitor?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -7750,7 +7740,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/monitor/:MONITOR_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -7808,7 +7798,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/monitor/:MONITOR_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -7860,7 +7850,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/monitor/:MONITOR_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -7955,7 +7945,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/monitor/:MONITOR_ID/mute?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -7980,9 +7970,9 @@
 							],
 							"variable": [
 								{
-									"description": "ID of the monitor to mute.",
 									"key": "MONITOR_ID",
-									"value": "{{monitor_id}}"
+									"value": "{{monitor_id}}",
+									"description": "ID of the monitor to mute."
 								}
 							]
 						},
@@ -8008,7 +7998,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/monitor/:MONITOR_ID/unmute?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -8033,9 +8023,9 @@
 							],
 							"variable": [
 								{
-									"description": "ID of the monitor to un-mute.",
 									"key": "MONITOR_ID",
-									"value": "{{monitor_id}}"
+									"value": "{{monitor_id}}",
+									"description": "ID of the monitor to un-mute."
 								}
 							]
 						},
@@ -8061,7 +8051,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/monitor/mute_all?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -8104,7 +8094,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/monitor/unmute_all?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -8343,7 +8333,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/org?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -8387,7 +8377,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/org/:PUBLIC_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -8439,7 +8429,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/org?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -8483,7 +8473,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/org/:PUBLIC_ID?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -8535,7 +8525,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/org/:PUBLIC_ID/idp_metadata?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -8743,9 +8733,9 @@
 							],
 							"variable": [
 								{
-									"description": "ID of the synthetics test to start/pause",
 									"key": "TEST_ID",
-									"value": "{{synthetics_test_id}}"
+									"value": "{{synthetics_test_id}}",
+									"description": "ID of the synthetics test to start/pause"
 								}
 							]
 						},
@@ -8842,9 +8832,9 @@
 							],
 							"variable": [
 								{
-									"description": "ID of the synthetics test to get results from",
 									"key": "TEST_ID",
-									"value": "{{synthetics_test_id}}"
+									"value": "{{synthetics_test_id}}",
+									"description": "ID of the synthetics test to get results from"
 								}
 							]
 						},
@@ -8895,14 +8885,14 @@
 							],
 							"variable": [
 								{
-									"description": "ID of the synthetics test to get result from",
 									"key": "TEST_ID",
-									"value": "{{synthetics_test_id}}"
+									"value": "{{synthetics_test_id}}",
+									"description": "ID of the synthetics test to get result from"
 								},
 								{
-									"description": "ID of the synthetics test result.",
 									"key": "RESULT_ID",
-									"value": "{{synthetics_test_result_id}}"
+									"value": "{{synthetics_test_result_id}}",
+									"description": "ID of the synthetics test result."
 								}
 							]
 						},
@@ -9105,7 +9095,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/tags/hosts?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -9150,7 +9140,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/tags/hosts/:HOSTNAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -9203,7 +9193,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/tags/hosts/:HOSTNAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -9228,9 +9218,9 @@
 							],
 							"variable": [
 								{
-									"description": "Host name to add tags to.",
 									"key": "HOSTNAME",
-									"value": "{{dd_hostname}}"
+									"value": "{{dd_hostname}}",
+									"description": "Host name to add tags to."
 								}
 							]
 						},
@@ -9256,7 +9246,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/tags/hosts/:HOSTNAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -9309,7 +9299,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/tags/hosts/:HOSTNAME?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -9475,7 +9465,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/usage/hosts?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start_hr=yyyy-MM-ddThh",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -9526,7 +9516,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/usage/logs?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start_hr=yyyy-MM-ddThh",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -9577,7 +9567,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/usage/timeseries?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start_hr=yyyy-MM-ddThh",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -9628,7 +9618,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/usage/top_avg_metrics?api_key={{dd_api_key}}&application_key={{dd_app_key}}&month=yyyy-MM",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -9679,7 +9669,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/usage/summary?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start_month=yyyy-MM",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -9736,7 +9726,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/usage/traces?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start_hr=yyyy-MM-ddTHH",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -9787,7 +9777,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/usage/synthetics?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start_hr=yyyy-MM-ddTHH",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -9838,7 +9828,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/usage/synthetics?api_key={{dd_api_key}}&application_key={{dd_app_key}}&start_hr=yyyy-MM-ddTHH",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -9922,7 +9912,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/user?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -9961,7 +9951,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/user/:USER_HANDLE?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -10008,7 +9998,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/user?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -10052,7 +10042,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/user/:USER_HANDLE?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
@@ -10099,7 +10089,7 @@
 							"raw": "https://api.datadoghq.com/api/v1/user/:USER_HANDLE?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
 							"protocol": "https",
 							"host": [
-								"app",
+								"api",
 								"datadoghq",
 								"com"
 							],
