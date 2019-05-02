@@ -11,17 +11,17 @@ external_redirect: /api/#graph-snapshot
 
 ##### ARGUMENTS
 
-* **`metric_query`** [*required*]:  
+* **`metric_query`** [*required*]:
     The metric query.
-* **`start`** [*required*]:  
+* **`start`** [*required*]:
     The POSIX timestamp of the start of the query.
-* **`end`** [*required*]:  
+* **`end`** [*required*]:
     The POSIX timestamp of the end of the query.
-* **`event_query`** [*optional*, *default*=**None**]:  
+* **`event_query`** [*optional*, *default*=**None**]:
     A query that adds event bands to the graph.
-* **`graph_def`** [*optional*, *default*=**None**]:  
+* **`graph_def`** [*optional*, *default*=**None**]:
     A JSON document defining the graph. `graph_def` can be used instead of `metric_query`. The JSON document uses the [grammar defined here][2] and should be formatted to a single line then URLEncoded.
-* **`title`** [*optional*, *default*=**None**]:  
+* **`title`** [*optional*, *default*=**None**]:
     A title for the graph. If no title is specified, the graph doesn't have a title.
 
 [1]: http://andreafalzetti.github.io/blog/2017/04/17/datadog-png-snapshot-not-showing.html

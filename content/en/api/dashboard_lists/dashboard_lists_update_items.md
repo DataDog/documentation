@@ -17,7 +17,7 @@ Update dashboards of an existing dashboard list.
     *   **`type`** [*required*]:
         The type of the dashboard.
         The type must be one of:
- 
+
         * `"custom_timeboard"`
         * `"custom_screenboard"`
         * `"integration_screenboard"`
