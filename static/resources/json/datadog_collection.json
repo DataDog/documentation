@@ -34,7 +34,8 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								}
 							]
 						},
@@ -744,11 +745,13 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{dd_api_key}}"
+									"value": "{{dd_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "{{dd_app_key}}"
+									"value": "{{dd_app_key}}",
+									"description": "Your Datadog application key"
 								}
 							]
 						},
