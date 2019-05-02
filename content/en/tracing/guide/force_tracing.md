@@ -141,7 +141,9 @@ scope.Span.SetTag(Tags.ManualDrop, "true");
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Manually keep or drop a trace:
+Anywhere in your code you can easily access the currently active span and force the current trace to be kept or dropped.
+
+Manually keep a trace:
 
 ```php
 
@@ -149,12 +151,22 @@ $tracer = \OpenTracing\GlobalTracer::get();
 $span = $tracer->getActiveSpan();
 
 if (null !== $span) {
-
   // Always keep this trace
-  $span->setTag('manual.keep', true);
+  $span->setTag(\DDTrace\Tag::MANUAL_KEEP, true);
+}
 
+```
+
+Manually drop a trace:
+
+```php
+
+$tracer = \OpenTracing\GlobalTracer::get();
+$span = $tracer->getActiveSpan();
+
+if (null !== $span) {
   // Always drop this trace
-  $span->setTag('manual.drop', true);
+  $span->setTag(\DDTrace\Tag::MANUAL_DROP, true);
 }
 
 ```
