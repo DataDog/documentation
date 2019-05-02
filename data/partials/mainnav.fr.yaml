@@ -450,8 +450,6 @@ main:
             url: account_management/saml/safenet
       - name: Comptes multi-organisations
         url: account_management/multi_organization/
-      - name: Contrôle d'accès à base de rôles (RBAC)
-        url: account_management/rbac/
         children:
           - name: Log Management
             url: account_management/rbac/log_management

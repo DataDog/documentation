@@ -1,6 +1,7 @@
 ---
 title: Role API
 kind: documentation
+private: true
 beta: true
 further_reading:
 - link: "account_management/rbac/log_management/"
