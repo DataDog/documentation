@@ -128,17 +128,20 @@ span.setTag(tags.MANUAL_KEEP)
 {{% tab ".NET" %}}
 
 Manually keep or drop a trace:
+
 ```cs
 using Datadog.Trace;
 
-// Access the active scope through the global tracer (can return null)
-var scope = Tracer.Instance.ActiveScope;
+using(var scope = Tracer.Instance.StartActive(operationName))
+{
+    var span = scope.Span;
 
-// Always keep this trace
-scope.Span.SetTag(Tags.ManualKeep, "true");
+    // Always keep this trace
+    span.SetTag(Tags.ManualKeep, "true");
 
-// Always drop this trace
-scope.Span.SetTag(Tags.ManualDrop, "true");
+    // Always drop this trace
+    span.SetTag(Tags.ManualDrop, "true");
+}
 ```
 
 {{% /tab %}}
