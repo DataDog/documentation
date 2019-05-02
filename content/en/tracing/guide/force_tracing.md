@@ -46,13 +46,20 @@ public class MyClass {
 Manually keep or drop a trace:
 
 ```python
-span = tracer.current_span()
+from ddtrace import tracer
+from ddtrace.constants import MANUAL_DROP_KEY, MANUAL_KEEP_KEY
 
-# Always keep this trace
-span.set_tag('manual.keep')
+@tracer.wrap()
+def handler():
+    span = tracer.current_span()
 
-# Always drop this trace
-span.set_tag('manual.drop')
+    # Manually choose to drop healthcheck traces
+    if is_healthcheck():
+        span.set_tag(MANUAL_DROP_KEY)
+
+    # Manually choose to keep error traces
+    elif is_error():
+        span.set_tag(MANUAL_KEEP_KEY)
 ```
 
 {{% /tab %}}
