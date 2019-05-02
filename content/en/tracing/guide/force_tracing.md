@@ -123,10 +123,10 @@ using Datadog.Trace;
 var scope = Tracer.Instance.ActiveScope;
 
 // Always keep this trace
-scope.Span.SetTag(Tags.ManualKeep, true);
+scope.Span.SetTag(Tags.ManualKeep, "true");
 
 // Always drop this trace
-scope.Span.SetTag(Tags.ManualDrop, true);
+scope.Span.SetTag(Tags.ManualDrop, "true");
 ```
 
 {{% /tab %}}
