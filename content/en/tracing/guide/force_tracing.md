@@ -88,11 +88,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
     span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
     defer span.Finish()
 
-    // To Manually Keep a Trace
-    span.SetTag(ext.SamplingPriority, ext.PriorityUserKeep)
+    // Always keep this trace:
+    span.SetTag(ext.ManualKeep, true)
 
-     // To Manually Keep a Trace
-    span.SetTag(ext.SamplingPriority, ext.PriorityUserDrop)
+    // Always drop this trace:
+    span.SetTag(ext.ManualDrop, true)
 }
 ```
 
