@@ -147,7 +147,7 @@ To send metrics on containerized environments, refer to the [DogStatsD on Kubern
 The format for sending events is:
 
 ```
-_e{title.length,text.length}:title|text|d:date_happened|h:hostname|p:priority|t:alert_type|#tag1,tag2.
+_e{<TITLE>.length,<TEXT>.length}:<TITLE>|<TEXT>|d:<DATE_EVENT>|h:<HOSTNAME>|p:<PRIORITY>|t:<ALERT_TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>.
 ```
 
 Here, calculate the size of the event's title and body:
