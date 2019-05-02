@@ -46,7 +46,6 @@
       "selectors_key": "faq",
       "variables": {
         "section": [
-          "getting_started",
           "tagging",
           "agent",
           "graphing",
