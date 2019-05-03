@@ -118,26 +118,28 @@ Origin detection is supported in Agent 6.10.0+ and in the following client libra
 
 | Library      | Version |
 | ------------ | ------- |
-| [Go][8]     | 2.2     |
-| [PHP][9]    | 1.4.0   |
+| [Go][8]      | 2.2     |
+| [PHP][9]     | 1.4.0   |
 | [Python][10] | 0.28.0  |
 | [Ruby][11]   | 4.2.0   |
 | [C#][12]     | 3.3.0   |
 | [Java][13]   | 2.6     |
 
+To set [tag cardinality][14] for the metrics collected using origin detection, use the environment variable `DD_DOGSTATSD_TAG_CARDINALITY`. 
+
 ## Instrument your code to send metrics to DogStatsD
 
 Once your application can send metrics via DogStatsD on each node, you can instrument your application code to submit custom metrics. 
 
-**[See the full list of Datadog DogStatsD Client Libraries][14]**
+**[See the full list of Datadog DogStatsD Client Libraries][15]**
 
-For instance, if your application is written in Go, import Datadog's [Go library][15], which provides a DogStatsD client library:
+For instance, if your application is written in Go, import Datadog's [Go library][16], which provides a DogStatsD client library:
 
 ```
 import "github.com/DataDog/datadog-go/statsd"
 ```
 
-Before you can add custom counters, gauges, etc., [initialize the StatsD client][16] with the location of the DogStatsD service, depending on the method you have chosen:
+Before you can add custom counters, gauges, etc., [initialize the StatsD client][17] with the location of the DogStatsD service, depending on the method you have chosen:
 
 - Unix Domain Socket: `$DD_DOGSTATSD_SOCKET`
 - hostPort: `$DOGSTATSD_HOST_IP`
@@ -194,6 +196,7 @@ func InfoHandler(rw http.ResponseWriter, req *http.Request) {
 [11]: https://github.com/DataDog/dogstatsd-ruby
 [12]: https://github.com/DataDog/dogstatsd-csharp-client
 [13]: https://github.com/DataDog/java-dogstatsd-client
-[14]: /developers/libraries/#api-and-dogstatsd-client-libraries
-[15]: https://github.com/DataDog/datadog-go
-[16]: https://gist.github.com/johnaxel/fe50c6c73442219c48bf2bebb1154f91
+[14]: tagging/assigning_tags/#environment-variables
+[15]: /developers/libraries/#api-and-dogstatsd-client-libraries
+[16]: https://github.com/DataDog/datadog-go
+[17]: https://gist.github.com/johnaxel/fe50c6c73442219c48bf2bebb1154f91
