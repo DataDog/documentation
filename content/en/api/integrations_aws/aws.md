@@ -1,0 +1,13 @@
+---
+title: AWS
+type: apicontent
+order: 15
+external_redirect: /api/#aws
+---
+
+## AWS
+
+Configure your Datadog-AWS integration directly through Datadog API.
+[Read more about Datadog-AWS integration][1].
+
+[1]: /integrations/amazon_web_services
