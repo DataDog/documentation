@@ -11,4 +11,18 @@ Delete a given Datadog-Azure integration
 
 ##### Arguments
 
-This endpoint takes no JSON arguments.
+Refer to the [Datadog-Azure integration installation instructions][1] to see how to obtain the following field values for your organization.
+
+* **`tenant_name`** [*required*]:
+
+    Your Azure Active Directory ID.
+
+* **`client_id`** [*required*]:
+
+    Your Azure web application ID.
+
+* **`host_filters`** [*optional*, *default*=**None**]:
+
+    Limit the Azure instances that are pulled into Datadog by using tags. Only hosts that match one of the defined tags are imported into Datadog.
+
+[1]: /integrations/azure/#installation

@@ -1,8 +1,8 @@
 ---
-title: Azure
+title: Azure Integration
 type: apicontent
 order: 16
-external_redirect: /api/#azure
+external_redirect: /api/#azure-integration
 ---
 
 ## Azure

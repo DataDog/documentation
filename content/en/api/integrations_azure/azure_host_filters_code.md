@@ -1,8 +1,8 @@
 ---
-title: Update a Datadog-Azure integration host filters
+title: Update an Azure integration host filters
 type: apicode
 order: 16.4
-external_redirect: /api/#update-a-datadog-azure-integration-host-filters
+external_redirect: /api/#update-an-azure-integration-host-filters
 ---
 
 ##### Signature

@@ -1,8 +1,8 @@
 ---
-title: AWS
+title: AWS Integration
 type: apicontent
 order: 15
-external_redirect: /api/#aws
+external_redirect: /api/#aws-integration
 ---
 
 ## AWS
