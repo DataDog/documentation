@@ -102,7 +102,9 @@ With this, any pod running your application is able to send DogStatsD metrics vi
 
 ## Origin detection over UDP
 
-Add the following lines to your application manifest in order to enable origin detection over UDP:
+Origin detection is a method to detect which pod DogStatsD packets are coming from. It consists of DogStatsD clients attaching an internal tag, `entity_id`, to points. The value of this tag is the content of the `DD_ENTITY_ID` environment variable, which is the pod's UID. (Note: if this variable does not exist, origin detection is disabled.) The DogStatsD server extracts this internal tag and accesses a local cache to get the list of tags associated with this pod; these tags are then added to the tag list.
+
+To enable origin detection over UDP, add the following lines to your application manifest: 
 
 ```yaml
 env:
@@ -112,20 +114,30 @@ env:
         fieldPath: metadata.uid
 ```
 
+Origin detection is supported in Agent 6.10.0+ and in the following client libraries:
+
+| Library      | Version |
+| ------------ | ------- |
+| [Go][8]     | 2.2     |
+| [PHP][9]    | 1.4.0   |
+| [Python][10] | 0.28.0  |
+| [Ruby][11]   | 4.2.0   |
+| [C#][12]     | 3.3.0   |
+| [Java][13]   | 2.6     |
 
 ## Instrument your code to send metrics to DogStatsD
 
 Once your application can send metrics via DogStatsD on each node, you can instrument your application code to submit custom metrics. 
 
-**[See the full list of Datadog DogStatsD Client Libraries][8]**
+**[See the full list of Datadog DogStatsD Client Libraries][14]**
 
-For instance, if your application is written in Go, import Datadog's [Go library][9], which provides a DogStatsD client library:
+For instance, if your application is written in Go, import Datadog's [Go library][15], which provides a DogStatsD client library:
 
 ```
 import "github.com/DataDog/datadog-go/statsd"
 ```
 
-Before you can add custom counters, gauges, etc., [initialize the StatsD client][10] with the location of the DogStatsD service, depending on the method you have chosen:
+Before you can add custom counters, gauges, etc., [initialize the StatsD client][16] with the location of the DogStatsD service, depending on the method you have chosen:
 
 - Unix Domain Socket: `$DD_DOGSTATSD_SOCKET`
 - hostPort: `$DOGSTATSD_HOST_IP`
@@ -168,6 +180,7 @@ func InfoHandler(rw http.ResponseWriter, req *http.Request) {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /developers/dogstatsd
 [2]: https://github.com/etsy/statsd
 [3]: /developers/dogstatsd/unix_socket
@@ -175,6 +188,12 @@ func InfoHandler(rw http.ResponseWriter, req *http.Request) {
 [5]: https://github.com/containernetworking/cni
 [6]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [7]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information
-[8]: /developers/libraries/#api-and-dogstatsd-client-libraries
-[9]: https://github.com/DataDog/datadog-go
-[10]: https://gist.github.com/johnaxel/fe50c6c73442219c48bf2bebb1154f91
+[8]: https://github.com/DataDog/datadog-go
+[9]: https://github.com/DataDog/php-datadogstatsd
+[10]: https://github.com/DataDog/datadogpy
+[11]: https://github.com/DataDog/dogstatsd-ruby
+[12]: https://github.com/DataDog/dogstatsd-csharp-client
+[13]: https://github.com/DataDog/java-dogstatsd-client
+[14]: /developers/libraries/#api-and-dogstatsd-client-libraries
+[15]: https://github.com/DataDog/datadog-go
+[16]: https://gist.github.com/johnaxel/fe50c6c73442219c48bf2bebb1154f91
