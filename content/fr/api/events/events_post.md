@@ -34,5 +34,5 @@ Cet endpoint vous permet d'envoyer des événements dans le flux. Taguez-les, d�
     [Liste complète des valeurs d'attributs source][3]
 
 [1]: https://github.com/DataDog/dogapi-rb
-[2]: /fr/graphing/event_stream/#markdown-events\
+[2]: /fr/graphing/event_stream/#markdown-events
 [3]: /fr/integrations/faq/list-of-api-source-attribute-value

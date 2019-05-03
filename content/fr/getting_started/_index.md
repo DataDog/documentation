@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /fr/overview
   - /fr/guides/overview/
+  - /fr/getting_started/faq/
 further_reading:
   - link: 'https://learn.datadoghq.com/course/view.php?id=2'
     tag: Centre d'apprentissage

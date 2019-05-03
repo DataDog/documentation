@@ -41,34 +41,33 @@ Si vous utilisez plusieurs Service ID provenant d'un compte unique, saisissez un
 
 #### Collecte de logs
 
-L'endpoint Syslog peut être utilisé pour transmettre des logs Fastly à votre application Datadog. 
+Configurez l'endpoint Syslog de façon à transmettre des logs Fastly à votre application Datadog.
 
 ##### Sélectionner l'endpoint de journalisation
 
-* Connectez-vous à l'interface Web de Fastly et cliquez sur **Configure link**.
-* Depuis le menu **Service**, sélectionnez le service approprié.
-* Cliquez sur le bouton **Configuration**, puis sélectionnez **Clone active**. La page Domains s'affiche.
-* Cliquez sur le lien **Logging**. La page des endpoints de journalisation s'affiche. Sélectionnez l'endpoint **Syslog**.
+1. Connectez-vous à l'interface Web de Fastly et cliquez sur **Configure link**.
+2. Depuis le menu **Service**, sélectionnez le service approprié.
+3. Cliquez sur le bouton **Configuration**, puis sélectionnez **Clone active**. La page Domains s'affiche.
+4. Cliquez sur le lien **Logging**. La page des endpoints de journalisation s'affiche. Sélectionnez l'endpoint **Syslog**.
 
 ##### Configurer l'endpoint Syslog
 
-* Attribuez un nom au endpoint, p. ex. `Datadog`.
-* Pour tirer le meilleur parti de votre application Datadog, **utilisez [le format de logs Fastly conseillé][2]** en précisant d'abord [votre `<CLÉ_API>`][3] :
+1. Attribuez un nom au endpoint, p. ex. `Datadog`.
+2. Configurez le format de log de façon à inclure **[le format de log Datadog/Fastly conseillé][2]** en précisant d'abord [votre clé d'API Datadog][3].
 
-```
-<CLÉ_API> <FORMAT_À_TÉLÉCHARGER_FASTLY>
-```
+    ```
+    <DATADOG_API_KEY> <DATADOG_FASTLY_LOG_FORMAT>
+    ```
 
-Découvrez plus de détails sur les variables de log dans la [documentation Fastly][4].
+    Remarque : si vous ne placez pas la clé d'API Datadog avant le format de log Datadog/Fastly, vos logs n’apparaîtront pas dans Datadog. Consultez la [documentation Fastly][4] (en anglais) pour en savoir plus sur les variables de log.
 
-* Définissez **Syslog Address** sur `intake.logs.datadoghq.com`.
-* Définissez **Port** sur `10516`.
-* Définissez **TLS** sur `yes`.
-* Définissez **TLS Hostname** sur `intake.logs.datadoghq.com`.
-* Copiez le [certificat TLS][5] dans la case **TLS CA Certificate**.
-* Dans la section des options avancées, sélectionnez le **log line format** `Blank`.
-
-Enfin, enregistrez l'endpoint et déployez le service. Patientez quelques secondes pour que [votre compte Datadog][6] reçoivent les premiers logs.
+3. Définissez **Syslog Address** sur `intake.logs.datadoghq.com`.
+4. Définissez **Port** sur `10516`.
+5. Définissez **TLS** sur `yes`.
+6. Définissez **TLS Hostname** sur `intake.logs.datadoghq.com`.
+7. Copiez le [certificat TLS][5] dans la case **TLS CA Certificate**.
+8. Dans la section des options avancées, sélectionnez le **log line format** `Blank`.
+9. Enfin, enregistrez l'endpoint et déployez le service. Patientez quelques secondes pour que [votre compte Datadog][6] reçoivent les premiers logs.
 
 ## Données collectées
 

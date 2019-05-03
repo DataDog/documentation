@@ -1,4 +1,7 @@
 ---
+{}
+---
+---
 title: Configuration de DaemonSet avec Kubernetes
 kind: documentation
 further_reading:
