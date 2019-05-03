@@ -1,8 +1,8 @@
 ---
-title: Create Datadog-AWS integration
+title: Create an AWS integration
 type: apicode
 order: 15.2
-external_redirect: /api/#create-datadog-aws-integration
+external_redirect: /api/#create-an-aws-integration
 ---
 
 ##### Signature

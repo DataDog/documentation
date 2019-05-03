@@ -1,8 +1,8 @@
 ---
-title: List Datadog-AWS integrations
+title: List all AWS integrations
 type: apicode
 order: 15.1
-external_redirect: /api/#list-datadog-aws-integrations
+external_redirect: /api/#list-all-aws-integrations
 ---
 
 ##### Signature

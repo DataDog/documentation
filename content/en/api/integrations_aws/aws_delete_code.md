@@ -1,8 +1,8 @@
 ---
-title: Delete Datadog-AWS integration
+title: Delete an AWS integration
 type: apicode
 order: 15.3
-external_redirect: /api/#delete-datadog-aws-integration
+external_redirect: /api/#delete-an-aws-integration
 ---
 
 ##### Signature
