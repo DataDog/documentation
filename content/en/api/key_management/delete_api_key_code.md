@@ -1,7 +1,7 @@
 ---
 title: Delete an API key
 type: apicode
-order: 16.05
+order: 21.05
 external_redirect: /api/#delete-an-api-key
 ---
 

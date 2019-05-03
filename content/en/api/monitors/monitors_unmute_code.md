@@ -1,7 +1,7 @@
 ---
 title: Unmute a monitor
 type: apicode
-order: 19.10
+order: 24.10
 external_redirect: /api/#unmute-a-monitor
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#unmute-a-monitor
 {{< code-snippets basename="api-monitor-unmute" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-monitor-unmute" >}}
-

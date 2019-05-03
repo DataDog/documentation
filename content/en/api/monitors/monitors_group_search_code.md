@@ -1,7 +1,7 @@
 ---
 title: Monitors Group Search
 type: apicode
-order: 19.13
+order: 24.13
 external_redirect: /api/#monitors-group-search
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#monitors-group-search
 {{< code-snippets basename="api-monitor-group-search" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-monitor-group-search" >}}
-

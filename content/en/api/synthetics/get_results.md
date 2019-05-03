@@ -1,7 +1,7 @@
 ---
 title: Get the most recent results
 type: apicontent
-order: 22.5
+order: 27.5
 external_redirect: /api/#get-results
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Upload IdP metadata
 type: apicode
-order: 20.4
+order: 25.4
 external_redirect: /api/#upload-idp-metadata
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#upload-idp-metadata
 {{< code-snippets basename="api-idp-upload" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-idp-upload" >}}
-

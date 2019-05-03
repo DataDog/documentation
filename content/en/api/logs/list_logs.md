@@ -1,7 +1,7 @@
 ---
 title: Get a list of logs
 type: apicontent
-order: 17.2
+order: 22.2
 external_redirect: /api/#list-logs
 ---
 
