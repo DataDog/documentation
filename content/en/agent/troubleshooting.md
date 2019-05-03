@@ -5,6 +5,7 @@ aliases:
     - /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
     - /agent/faq/how-to-get-more-logging-from-the-agent
     - /agent/faq/agent-5-container-more-log
+    - /agent/faq/agent-s-are-no-longer-reporting-data
 further_reading:
 - link: "/agent/guide/agent-commands/?tab=agentv6"
   tag: "FAQ"
