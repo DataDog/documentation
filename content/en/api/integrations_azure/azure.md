@@ -5,7 +5,7 @@ order: 16
 external_redirect: /api/#azure-integration
 ---
 
-## Azure
+## Azure Integration
 
 Configure your Datadog-Azure integration directly through the Datadog API.
 [Read more about Datadog-Azure integration][1].
