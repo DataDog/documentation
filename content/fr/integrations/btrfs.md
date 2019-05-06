@@ -61,7 +61,7 @@ Le check Btrfs n'inclut aucun événement.
 Le check Btrfs n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/btrfs/images/btrfs_metric.png
 [2]: https://app.datadoghq.com/account/settings#agent

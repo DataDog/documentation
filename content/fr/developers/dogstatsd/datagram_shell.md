@@ -139,14 +139,14 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
 sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```
 
-Pour envoyer des métriques sur des environnements conteneurisés, consultez l'article relatif à [l'utilisation de DogStatsD sur Kubernetes][4], conjointement avec les instructions de configuration de l'APM sur Kubernetes avec [DaemonSets][5] ou [Helm][6], en fonction de votre installation. La documentation sur l'[APM Docker] peut également vous venir en aide.
+Pour envoyer des métriques sur des environnements conteneurisés, consultez l'article relatif à [l'utilisation de DogStatsD sur Kubernetes][4], conjointement avec les instructions de configuration de l'APM sur Kubernetes avec [DaemonSets][5] ou [Helm][6], en fonction de votre installation. La documentation sur l'[APM Docker][7] peut également vous venir en aide.
 
 ### Envoyer des événements
 
 Voici le format d'envoi d'événements :
 
 ```
-_e{titre.length,texte.length}:title|text|d:date_happened|h:hostname|p:priority|t:alert_type|#tag1,tag2.
+_e{<TITRE>.length,<TEXTE>.length}:<TITRE>|<TEXTE>|d:<ÉVÉNEMENT_DATE>|h:<HOSTNAME>|p:<PRIORITÉ>|t:<TYPE_ALERTE>|#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>.
 ```
 
 Calculez ici la taille du titre et du corps de l'événement :

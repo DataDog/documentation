@@ -5,14 +5,16 @@ aliases:
   - /fr/integrations/faq/gathering-kubernetes-events
 ---
 Tout comme la version 5 de l'Agent, l'Agent v6 peut recueillir des événements à partir du serveur d'API Kubernetes.
-Définissez la variable `collect_kubernetes_events` sur `true` dans le fichier datadog.yaml. Pour y parvenir, vous pouvez utiliser la variable d'environnement `DD_COLLECT_KUBERNETES_EVENTS`, qui est résolue au démarrage.
-Vous devrez accorder certains droits à l'Agent pour activer cette fonctionnalité : consultez la section [RBAC][1].
+
+Définissez la variable `collect_kubernetes_events` sur `true` dans le fichier `datadog.yaml`. Pour y parvenir, vous pouvez utiliser la variable d'environnement `DD_COLLECT_KUBERNETES_EVENTS`, qui est résolue au démarrage.
+
+Remarque : vous devrez accorder certains droits à l'Agent pour activer cette fonctionnalité : consultez la section [RBAC][1].
 
 Une [ConfigMap][2] peut être utilisée pour stocker le `event.tokenKey` et le `event.tokenTimestamp`. Elle doit être déployée dans le même espace de nommage que les ressources, y compris l'Agent. L'espace de nommage des ressources peut être configuré avec `DD_KUBE_RESOURCES_NAMESPACE`.
+
 Vous pouvez exécuter `kubectl create configmap datadogtoken --from-literal="event.tokenKey"="0"`. Vous pouvez également utiliser l'exemple dans `manifests/datadog_configmap.yaml`.
 
-Lorsque vous utilisez une ConfigMap, si l'Agent en charge (via l'[élection de leader][3]) de la collecte d'événements échoue, le prochain leader élu utilisera la ConfigMap pour identifier les derniers événements récupérés.
-Ainsi, aucun événement recueilli n'est dupliqué et le serveur d'API fait l'objet de moins de requêtes.
+Lorsque vous utilisez une ConfigMap, si l'Agent en charge (via l'[élection de leader][3]) de la collecte d'événements échoue, le prochain leader élu utilise la ConfigMap pour identifier les derniers événements récupérés. Ainsi, aucun événement recueilli n'est dupliqué et le serveur d'API fait l'objet de moins de requêtes.
 
 ## Élection de leader
 

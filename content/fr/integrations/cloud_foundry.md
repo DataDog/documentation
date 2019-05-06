@@ -1,25 +1,21 @@
 ---
-{}
----
----
-integration_title: Cloud Foundry
+integration_title: "Cloud\_Foundry"
 name: cloudfoundry
 kind: integration
 git_integration_title: cloud_foundry
 newhlevel: true
-updated_for_agent: 6.0
-description: "Surveillez l'état de santé de vos machines virtuelles Cloud Foundry et des tâches qu'elles exécutent."
+updated_for_agent: 6
+description: "Surveillez l'état de santé de vos machines virtuelles Cloud\_Foundry et des tâches qu'elles exécutent."
 is_public: true
-public_title: Intégration Datadog/Cloud Foundry
-short_description: "Surveillez l'état de santé de vos machines virtuelles Cloud Foundry et des tâches qu'elles exécutent."
+public_title: "Intégration Datadog/Cloud\_Foundry"
+short_description: "Surveillez l'état de santé de vos machines virtuelles Cloud\_Foundry et des tâches qu'elles exécutent."
 categories:
-- provisioning
-- configuration & deployment
-- log collection
+  - provisioning
+  - configuration & deployment
+  - log collection
 doc_link: /integrations/cloud_foundry/
 ddtype: check
 ---
-
 ## Présentation
 
 Tous les déploiements Cloud Foundry peuvent envoyer des métriques et des événements à Datadog. Les données vous aident à surveiller l'état de santé et la disponibilité de tous les nœuds du déploiement, à surveiller les tâches qu'ils exécutent, à recueillir les métriques du Loggregator Firehose, et plus encore. Utilisez cette page pour apprendre à surveiller votre [application sur Cloud Foundry](#surveiller-vos-applications-sur-cloud-foundry) et votre [cluster Cloud Foundry](#surveiller-votre-cluster-cloud-foundry).
