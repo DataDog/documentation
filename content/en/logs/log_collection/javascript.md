@@ -77,7 +77,7 @@ The following parameters can be used to configure the library to send logs to Da
     });
 
       // OPTIONAL
-      // add global metadata attributes
+      // add global metadata attribute, one attribute can be added at a time
       Datadog.addLoggerGlobalContext('<META_KEY>', <META_VALUE>);
     </script>
     ...
@@ -102,7 +102,7 @@ The following parameters can be used to configure the library to send logs to Da
     });
 
       // OPTIONAL
-      // add global metadata attributes
+      // add global metadata attribute, one attribute can be added at a time
       Datadog.addLoggerGlobalContext('<META_KEY>', <META_VALUE>);
     </script>
     ...
