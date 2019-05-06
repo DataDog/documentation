@@ -98,7 +98,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 
 | Framework                | Versions    | Support Type    | Instrumentation Names (used for configuration) |
 |--------------------------|-------------|-----------------|------------------------------------------------|
-| Apache HTTP Client       | 4.3+        | Fully Supported | `httpclient`                                   |
+| Apache HTTP Client       | 4.0+        | Fully Supported | `httpclient`                                   |
 | Apache HTTP Async Client | 4.0+        | Fully Supported | `httpasyncclient`, apache-httpasyncclient      |
 | AWS Java SDK             | 1.11+, 2.2+ | Fully Supported | `aws-sdk`                                      |
 | gRPC                     | 1.5+        | Fully Supported | `grpc`, `grpc-client`, `grpc-server`           |
