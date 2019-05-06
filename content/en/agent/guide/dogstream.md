@@ -9,7 +9,7 @@ aliases:
 <div class="alert alert-danger">
 This is a deprecated feature of Agent 5. New feature releases are discontinued.
 <br>
-Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version </a> to benefit from all new functionality.
+Agent v6 is now available! <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">Upgrade to the newest version</a> to benefit from the new functionality.
 </div>
 
 Log files contain tons of valuable application and business data.
@@ -57,9 +57,9 @@ If your parser does **not** live on the Agent's `PYTHONPATH`, you can use an alt
 
 In this format, the Agent attempts to import a function called `custom_parser` from `/path/to/my/parsers_module.py`.
 
-If your custom log parser is not working, the first place to check is the Agent collector logs:
+If your custom log parser is not working, the first thing to check are the Agent collector logs:
 
-* If the Agent is unable to import your function, there is a line with `Could not load Dogstream line parser`.
+* If the Agent is unable to import your function, look for `Could not load Dogstream line parser`.
 
 * If all goes well you should see `dogstream: parsing {filename} with {function name} (requested {config option text})`.
 

@@ -7,7 +7,7 @@ When monitoring containers and orchestrators (Docker, ECS, and Kubernetes) you a
 
 As your containerized environment grows, containers and orchestrators start emitting a high volume of events that leads to more noise in the [events stream][1], [monitors][2], and overlays.
 
-To ensure that you don't have to worry about the eventual noise, events provided by default are limited to only severe and important events listed below.
+In order to reduce noise, only "severe" and "important"-level events are listed by default.
 
 If further access is needed to any other events in a specific integration, [reach out to Datadog support team][3] to have these events enabled for your organization.
 
