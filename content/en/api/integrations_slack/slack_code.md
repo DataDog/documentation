@@ -1,14 +1,6 @@
 ---
-title: Slack
+title: Slack Integration
 type: apicode
 order: 19
-external_redirect: /api/#slack
+external_redirect: /api/#slack-integration
 ---
-
-##### Signature
-`https://api.datadoghq.com/api/v1/integration/slack`
-
-##### Example Request
-{{< code-snippets basename="api-integrations-slack" >}}
-##### Example Response
-{{< code-snippets basename="result.api-integrations-slack" >}}
