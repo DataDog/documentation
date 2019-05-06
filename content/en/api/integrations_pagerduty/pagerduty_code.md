@@ -1,14 +1,6 @@
 ---
-title: PagerDuty
+title: PagerDuty Integration
 type: apicode
 order: 18
-external_redirect: /api/#pagerduty
+external_redirect: /api/#pagerduty-integration
 ---
-
-##### Signature
-`https://api.datadoghq.com/api/v1/integration/pagerduty`
-
-##### Example Request
-{{< code-snippets basename="api-integrations-pagerduty" >}}
-##### Example Response
-{{< code-snippets basename="result.api-integrations-pagerduty" >}}

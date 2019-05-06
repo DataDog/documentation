@@ -1,8 +1,8 @@
 ---
-title: Google Cloud Platform Integration
+title: GCP Integration
 type: apicontent
 order: 17
-external_redirect: /api/#google-cloud-platform-integration
+external_redirect: /api/#gcp-integration
 ---
 
 ## Google Cloud Platform
