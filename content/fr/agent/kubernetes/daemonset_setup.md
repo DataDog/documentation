@@ -299,9 +299,9 @@ Pour y remédier, ajoutez `hostNetwork: true` aux spécifications de pod de votr
 [5]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information
 [6]: /fr/agent/faq/kubernetes-secrets
 [7]: /fr/agent/docker/#environment-variables
-[8]: https://docs.datadoghq.com/fr/agent/autodiscovery
-[9]: https://docs.datadoghq.com/fr/integrations/amazon_ec2/#configuration
+[8]: /fr/agent/autodiscovery
+[9]: /fr/integrations/amazon_ec2/#configuration
 [10]: /fr/logs
-[11]: /fr/logs/docker/#configuration-file-example
+[11]: /fr/tracing/setup
 [12]: /fr/graphing/infrastructure/process/?tab=kubernetes#installation
 [13]: /fr/agent/kubernetes/dogstatsd
