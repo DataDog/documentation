@@ -96,18 +96,19 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 
 `dd-java-agent` includes support for automatically tracing the following networking frameworks.
 
-| Framework          | Versions    | Support Type    | Instrumentation Names (used for configuration) |
-|--------------------|-------------|-----------------|------------------------------------------------|
-| Apache HTTP Client | 4.3+        | Fully Supported | `httpclient`                                   |
-| AWS Java SDK       | 1.11+, 2.2+ | Fully Supported | `aws-sdk`                                      |
-| gRPC               | 1.5+        | Fully Supported | `grpc`, `grpc-client`, `grpc-server`           |
-| HttpURLConnection  | all         | Fully Supported | `httpurlconnection`, `urlconnection`           |
-| Kafka-Clients      | 0.11+       | Fully Supported | `kafka`                                        |
-| Kafka-Streams      | 0.11+       | Fully Supported | `kafka`, `kafka-streams`                       |
-| Jax RS Clients     | 1.11+       | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
-| JMS                | 1 and 2     | Fully Supported | `jms`                                          |
-| Rabbit AMQP        | 2.7+        | Fully Supported | `amqp`, `rabbitmq`                             |
-| OkHTTP             | 3.0+        | Fully Supported | `okhttp`, `okhttp-3`                           |
+| Framework                | Versions    | Support Type    | Instrumentation Names (used for configuration) |
+|--------------------------|-------------|-----------------|------------------------------------------------|
+| Apache HTTP Client       | 4.0+        | Fully Supported | `httpclient`                                   |
+| Apache HTTP Async Client | 4.0+        | Fully Supported | `httpasyncclient`, apache-httpasyncclient      |
+| AWS Java SDK             | 1.11+, 2.2+ | Fully Supported | `aws-sdk`                                      |
+| gRPC                     | 1.5+        | Fully Supported | `grpc`, `grpc-client`, `grpc-server`           |
+| HttpURLConnection        | all         | Fully Supported | `httpurlconnection`, `urlconnection`           |
+| Kafka-Clients            | 0.11+       | Fully Supported | `kafka`                                        |
+| Kafka-Streams            | 0.11+       | Fully Supported | `kafka`, `kafka-streams`                       |
+| Jax RS Clients           | 1.11+       | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
+| JMS                      | 1 and 2     | Fully Supported | `jms`                                          |
+| Rabbit AMQP              | 2.7+        | Fully Supported | `amqp`, `rabbitmq`                             |
+| OkHTTP                   | 3.0+        | Fully Supported | `okhttp`, `okhttp-3`                           |
 
 **Networking tracing provides:** timing request to response, tags for the request (e.g. response code), error and stacktrace capturing, and distributed tracing.
 
@@ -157,6 +158,7 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | JSP Rendering    | 2.3+     | Fully Supported | `jsp`, `jsp-render`                            |
 | Dropwizard Views | 0.7+     | Fully Supported | `dropwizard`, `dropwizard-view`                |
 | Hystrix          | 1.4+     | Fully Supported | `hystrix`                                      |
+| Twilio SDK       | 0+       | Fully Supported | `twilio-sdk`                                   |
 
 Don't see your desired framework? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
 
