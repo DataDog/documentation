@@ -19,7 +19,7 @@ aliases:
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Trace Search & Analytics can be enabled globally for all **web** integrations with one configuration parameter in the Tracing client:
+Trace Search & Analytics is available starting in version 0.25.0 of the Java tracing client. It can be enabled globally for all **web** integrations with one configuration parameter in the Tracing client:
 
 * System Property: `-Ddd.trace.analytics.enabled=true`
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
@@ -31,7 +31,7 @@ Trace Search & Analytics can be enabled globally for all **web** integrations wi
 {{% /tab %}}
 {{% tab "Python" %}}
 
- Enable Trace Search & Analytics globally for all **web** integrations with one configuration parameter in the Tracing Client:
+Trace Search & Analytics is available starting in version 0.19.0 of the Python tracing client. Enable Trace Search & Analytics globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
 * Tracer Configuration: `ddtrace.config.analytics_enabled = True`
 * Environment Variable: `DD_ANALYTICS_ENABLED=true`
@@ -43,7 +43,7 @@ Trace Search & Analytics can be enabled globally for all **web** integrations wi
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
- Trace search & analytics can be enabled for all **web** integrations with a global flag.
+Trace Search & Analytics is available starting in version 0.19.0 of the Ruby tracing client, and can be enabled for all **web** integrations with a global flag.
 
  To do so, set either `DD_TRACE_ANALYTICS_ENABLED=true` in your environment, or configure with:
 
@@ -61,9 +61,9 @@ Datadog.configure { |c| c.analytics_enabled = true }
 {{% /tab %}}
 {{% tab "Go" %}}
 
- Trace Search & Analytics can be enabled globally for all **web** integrations using the [`WithAnalytics`][1] tracer start option. For example:
+Trace Search & Analytics is available starting in version 1.11.0 of the Go tracing client, and can be enabled globally for all **web** integrations using the [`WithAnalytics`][1] tracer start option. For example:
 
- ```go
+```go
 tracer.Start(tracer.WithAnalytics(true))
 ```
 
@@ -75,9 +75,9 @@ tracer.Start(tracer.WithAnalytics(true))
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
- Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the tracing client:
+Trace Search & Analytics is available starting in version 0.10.0 of the Node.js tracing client, and can be enabled globally for all web integrations with one configuration parameter in the tracing client:
 
- ```javascript
+```javascript
 tracer.init({
   analytics: true
 })
@@ -94,13 +94,13 @@ You can also use the following configuration parameter:
 {{% /tab %}}
 {{% tab ".NET" %}}
 
- Trace Search & Analytics can be enabled globally for all **web** integrations with one configuration parameter in the Tracing Client:
+Trace Search & Analytics is available starting in version 1.1.0 of the .NET tracing client, and can be enabled globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
  * Environment Variable or AppSetting: `DD_TRACE_ANALYTICS_ENABLED=true`
 
  This setting can also be set in code:
 
- ```csharp
+```csharp
 Tracer.Instance.Settings.AnalyticsEnabled = true;
 ```
 
@@ -111,7 +111,7 @@ Tracer.Instance.Settings.AnalyticsEnabled = true;
 {{% /tab %}}
 {{% tab "PHP" %}}
 
- Trace Search & Analytics can be enabled globally for all **web** integrations with one configuration parameter in the Tracing Client:
+Trace Search & Analytics is available starting in version 0.17.0 of the PHP tracing client, and can be enabled globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
  * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
@@ -122,7 +122,7 @@ Tracer.Instance.Settings.AnalyticsEnabled = true;
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: trace search only works for web integrations.
+**Note**: Trace search only works for web integrations.
 
 ## Configure Additional Services (optional)
 
