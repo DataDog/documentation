@@ -23,7 +23,7 @@
       "tags": [
         "integrations"
       ],
-      "page_rank": 50
+      "page_rank": 90
     },
     {
       "url": "https://docs.datadoghq.com/fr/integrations/",
@@ -31,7 +31,7 @@
       "tags": [
         "integrations"
       ],
-      "page_rank": 50
+      "page_rank": 90
     },
     {
       "url": "https://docs.datadoghq.com/",
@@ -240,6 +240,18 @@
       [
         "agent",
         "datadog agent"
+      ],
+      [
+        "microsoft azure",
+        "azure"
+      ],
+      [
+        "gcp",
+        "google cloud platform"
+      ],
+      [
+        "aws",
+        "amazon web service"
       ]
     ]
   },
