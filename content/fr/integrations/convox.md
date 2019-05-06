@@ -11,7 +11,7 @@ guid: e8b1f8a7-8859-4c85-81bd-044400854e59
 integration_id: convox
 integration_title: Convox
 is_public: true
-kind: intégration
+kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.1
 name: convox

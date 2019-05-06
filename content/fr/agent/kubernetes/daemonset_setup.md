@@ -2,19 +2,18 @@
 title: Configuration de DaemonSet avec Kubernetes
 kind: documentation
 further_reading:
-- link: agent/autodiscovery
-  tag: documentation
-  text: Autodiscovery avec l'Agent Docker
-- link: agent/kubernetes/host_setup
-  tag: documentation
-  text: Configuration de host avec Kubernetes
-- link: agent/kubernetes/integrations
-  tag: documentation
-  text: Intégrations personnalisées
+  - link: agent/autodiscovery
+    tag: documentation
+    text: Autodiscovery avec l'Agent Docker
+  - link: agent/kubernetes/host_setup
+    tag: documentation
+    text: Configuration de host avec Kubernetes
+  - link: agent/kubernetes/integrations
+    tag: documentation
+    text: Intégrations personnalisées
 aliases:
   - /agent/kubernetes/apm
 ---
-
 Tirez profit des DaemonSets pour déployer l'Agent Datadog sur l'ensemble de vos nœuds (ou sur un nœud donné grâce [aux nodeSelectors][1]). 
 
 *Si vous ne pouvez pas utiliser de DaemonSets pour votre cluster Kubernetes, [installez l'Agent Datadog][2] en tant que déploiement sur chaque nœud Kubernetes.*

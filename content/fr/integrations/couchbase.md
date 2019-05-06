@@ -94,7 +94,7 @@ Renvoie `Ok` pour les autres bas.
 Renvoie `Critical` si le nœud n'est pas sain. Si ce n'est pas le cas, renvoie `Ok`.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
 ## Pour aller plus loin
 

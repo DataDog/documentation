@@ -11,7 +11,7 @@ guid: 3bb6a789-d1e3-465c-9bff-ea2a43ae2f59
 integration_id: filebeat
 integration_title: Filebeat
 is_public: true
-kind: intégration
+kind: integration
 maintainer: jean@tripping.com
 manifest_version: 1.0.0
 metric_prefix: filebeat.

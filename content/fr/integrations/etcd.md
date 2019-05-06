@@ -84,7 +84,7 @@ Renvoie « Critical » si l'Agent n'est pas capable de recueillir des métriqu
 Renvoie « Critical » si le nœud d'un membre n'est pas sain. Renvoie « Unknown » si l'Agent n'est pas capable d'atteindre l'endpoint `/health`, ou si le statut de santé est manquant.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
 ## Pour aller plus loin
 Pour mieux comprendre comment (ou pourquoi) intégrer etcd à Datadog, lisez notre [article de blog][9] à ce sujet.

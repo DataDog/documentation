@@ -2,9 +2,7 @@
 title: Adobe Experience Manager
 name: adobe_experience_manager
 kind: integration
-description: >-
-  Recueillez des logs Adobe Experience Manager pour suivre les erreurs, obtenir des délais de réponse et surveiller les pages Web dont les
-  performances sont faibles.
+description: 'Recueillez des logs Adobe Experience Manager pour suivre les erreurs, obtenir des délais de réponse et surveiller les pages Web dont les performances sont faibles.'
 short_description: 'Recueillez des logs pour suivre les erreurs, obtenir des délais de réponse, etc.'
 categories:
   - log collection
