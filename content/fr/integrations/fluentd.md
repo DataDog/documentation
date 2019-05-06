@@ -24,9 +24,7 @@ process_signatures:
   - fluentd
   - ruby td-agent
 public_title: Intégration Datadog/FluentD
-short_description: >-
-  Gérez les files d'attente de mise en mémoire tampon et le nombre de nouveaux essais pour chaque plug-in FluentD que vous avez activé. you've
-  enabled.
+short_description: Gérez les files d'attente de mise en mémoire tampon et le nombre de nouveaux essais pour chaque plug-in FluentD que vous avez activé. you've enabled.
 support: core
 supported_os:
   - linux
@@ -183,7 +181,7 @@ Le check FluentD n'inclut aucun événement.
 Renvoie « Critical » si l'Agent n'est pas capable de se connecter à Fluentd pour recueillir des métriques. Il s'agit du check que la plupart des intégrations désignent comme le check `can_connect`.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][15].
+Besoin d'aide ? Contactez [l'assistance Datadog][15].
 
 ## Pour aller plus loin
 

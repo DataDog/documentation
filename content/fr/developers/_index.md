@@ -1,9 +1,7 @@
 ---
 title: Outils de développement
 kind: documentation
-description: >-
-  Tout ce qu'il y a à savoir sur le développement pour la plateforme Datadog, notamment des exemples de configurations et de code, ainsi que de
-  nombreuses références.
+description: 'Tout ce qu''il y a à savoir sur le développement pour la plateforme Datadog, notamment des exemples de configurations et de code, ainsi que de nombreuses références.'
 ---
 Cette section comprend des détails techniques, des exemples de code et des articles de référence pour une mise en œuvre rapide.
 

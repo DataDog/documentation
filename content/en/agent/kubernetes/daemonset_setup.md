@@ -300,9 +300,9 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [5]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information
 [6]: /agent/faq/kubernetes-secrets
 [7]: /agent/docker/#environment-variables
-[8]: https://docs.datadoghq.com/agent/autodiscovery
-[9]: https://docs.datadoghq.com/integrations/amazon_ec2/#configuration
+[8]: /agent/autodiscovery
+[9]: /integrations/amazon_ec2/#configuration
 [10]: /logs
-[11]: /logs/docker/#configuration-file-example
+[11]: /tracing/setup
 [12]: /graphing/infrastructure/process/?tab=kubernetes#installation
 [13]: /agent/kubernetes/dogstatsd

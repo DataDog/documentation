@@ -135,7 +135,7 @@ Si ce n'est pas le cas, renvoie `UP`.
 Pour désactiver ce check, définissez `check_certificate_expiration` sur false.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][12].
+Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
