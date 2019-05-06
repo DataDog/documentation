@@ -1,6 +1,8 @@
 ---
 title: APM and Distributed Tracing with Agent v5
 kind: guide
+private: true
+disable_toc: true
 aliases:
   - /tracing/faq/agent-5-tracing-setup
 private: true
