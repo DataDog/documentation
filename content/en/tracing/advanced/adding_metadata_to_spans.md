@@ -18,7 +18,9 @@ further_reading:
 
 Adding metadata in the form of key-value pairs to a span allows to correlate traces with other Datadog products to provide more details about specific spans. Metadata can be either added [to a single span](#adding-metadata-to-a-span-via-tags) or [globally to all spans](#adding-metadata-globally-to-all-spans-via-tags).
 
-**Note**: Tracing has the idea of `tags` with OpenTracing, but tags having a specific meaning in the [Datadog ecosystem][1], tracing span *tags* are called **metadata**.
+**Note**: Tracing metadata is added via tags, but tags already have a specific meaning throughout [Datadog][1].
+
+When looking at a trace for a tag in Datadog, look for the tab called metadata.
 
 ## Adding Metadata to a Span via Tags
 
