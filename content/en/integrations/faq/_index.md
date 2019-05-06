@@ -56,7 +56,7 @@ aliases:
 
 * [Compose and the Datadog Agent][33]
 * [DogStatsD and Docker][34]
-* [Docker, ECS, & Kubernetes Events][35]
+* [Container Integration Events][35]
 
 ## Elasticsearch
 
@@ -182,7 +182,7 @@ aliases:
 [32]: /integrations/faq/azure-troubleshooting
 [33]: /integrations/faq/compose-and-the-datadog-agent
 [34]: /integrations/faq/dogstatsd-and-docker
-[35]: /integrations/faq/docker-ecs-kubernetes-events
+[35]: /integrations/faq/container-integration-event
 [36]: /integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics
 [37]: /integrations/faq/elastic-agent-can-t-connect
 [38]: /integrations/faq/why-events-don-t-appear-to-be-showing-up-in-the-event-stream-with-my-github-integration

@@ -89,7 +89,7 @@ For more information about the Datadog Agent, see the [dedicated doc page][13] o
 
 {{< partial name="whats-next/whats-next.html" >}}
 
- [1]: /tracing/faq/agent-5-tracing-setup
+[1]: /tracing/faq/agent-5-tracing-setup
 [2]: https://github.com/DataDog/dd-trace-py
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://github.com/DataDog/datadog-agent/tree/master/docs/trace-agent#run-on-macos

@@ -1,5 +1,5 @@
 ---
-title: Basic Agents Usage
+title: Basic Agent Usage
 kind: documentation
 aliases:
     - /guides/basic_agent_usage/
