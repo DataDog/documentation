@@ -16,7 +16,7 @@ further_reading:
   text: "Explore your services, resources, and traces"
 ---
 
-Adding metadata in the form of key-value pairs to a span allows to correlate traces with other Datadog products to provide more details about specific spans. Metadata can be either added [to a single span](#adding-metadata-to-a-span-via-tags) or [globally to all spans](#adding-metadata-globally-to-all-spans-via-tags)
+Adding metadata in the form of key-value pairs to a span allows to correlate traces with other Datadog products to provide more details about specific spans. Metadata can be either added [to a single span](#adding-metadata-to-a-span-via-tags) or [globally to all spans](#adding-metadata-globally-to-all-spans-via-tags).
 
 **Note**: Tracing has the idea of `tags` with OpenTracing, but tags having a specific meaning in the [Datadog ecosystem][1], tracing span *tags* are called **metadata**.
 
@@ -67,7 +67,7 @@ def handle_customer(customer_id):
     span.set_tag('customer.id', customer_id)
 ```
 
-The current span can be retrieved from the context in order to set its metadata. This way, if a span was started by the instrumentation, you can retrieve the span and add custom metadata. Note that if a span does not exist, `None` is returned:
+The current span can be retrieved from the context in order to set its metadata. This way, if a span was started by the instrumentation, you can retrieve the span and add custom metadata. **Note**: If a span does not exist, `None` is returned:
 
 ```python
 from ddtrace import tracer
@@ -96,7 +96,7 @@ get '/posts' do
 end
 ```
 
-Access the current active span from any method within your code. Note, however, that if the method is called and there is no span currently active, `active_span` is `nil`.
+Access the current active span from any method within your code. **Note**: If the method is called and there is no span currently active, `active_span` is `nil`.
 
 ```ruby
 # e.g. adding tag to active span
@@ -240,7 +240,7 @@ if (null !== $span) {
 {{% /tab %}}
 {{< /tabs >}}
 
-## Adding Metadata globally to all spans via tags
+## Adding metadata globally to all spans
 
 {{< tabs >}}
 {{% tab "Java" %}}
