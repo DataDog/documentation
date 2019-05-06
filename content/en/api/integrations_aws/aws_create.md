@@ -5,9 +5,14 @@ order: 15.2
 external_redirect: /api/#create-an-aws-integration
 ---
 
-## Create a Datadog-AWS integration
+## Create an AWS integration
 
-Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.
+Create a Datadog-Amazon Web Services integration.
+
+**Note**:
+
+* Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.
+* Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.
 
 ##### ARGUMENTS
 

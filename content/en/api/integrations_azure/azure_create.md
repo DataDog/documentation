@@ -5,9 +5,14 @@ order: 16.2
 external_redirect: /api/#create-an-azure-integration
 ---
 
-## Create a Datadog-Azure integration
+## Create an Azure integration
 
-Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.
+Create a Datadog-Azure integration.
+
+**Note**:
+
+* Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.
+* Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.
 
 ##### ARGUMENTS
 
