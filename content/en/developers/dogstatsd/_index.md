@@ -5,6 +5,7 @@ description: Introduction and setup instructions for DogStatsD.
 aliases:
   - /guides/dogstatsd/
   - /guides/DogStatsD/
+  - /developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd/
 further_reading:
 - link: "developers/metrics"
   tag: "Documentation"
