@@ -147,7 +147,7 @@ using(var scope = Tracer.Instance.StartActive(operationName))
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Anywhere in your code you can easily access the currently active span and force the current trace to be kept or dropped.
+From anywhere in your code, you can access the currently active span and force the current trace to be kept or dropped.
 
 Manually keep a trace:
 
