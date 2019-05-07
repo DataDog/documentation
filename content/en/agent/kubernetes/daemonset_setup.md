@@ -261,9 +261,9 @@ The Docker API is optimized to get logs from one container at a time. When there
       (...)
     ```
     
-The `pointdir` is used to store a file with a pointer on all the container that the agent is collecting log from to make sure none are lost when the agent is restarted or in case of network issue.
+The `pointdir` is used to store a file with a pointer to all the containers that the Agent is collecting logs from. This is to make sure none are lost when the Agent is restarted, or in the case of na etwork issue.
 
-Use the [Autodiscovery with Pod Annotations][14] to configure the log collection to add multiline processing rules or customise the `source` and `service` attribute.
+Use [Autodiscovery with Pod Annotations][14] to configure log collection to add multiline processing rules, or to customize the `source` and `service` attributes.
 
 ### APM and Distributed Tracing
 
