@@ -20,8 +20,6 @@ further_reading:
   text: "Configure an API Test"
 ---
 
-<div class="alert alert-warning">Synthetics is only available on our US hosted instances.</div>
-
 ## Overview
 
 Browser tests are scenarios executed by Datadog on your web applications. They run at configurable periodic intervals from multiple locations around the world, and from multiple devices. These checks verify both that your applications are up and responding to requests, and that any conditions defined in your scenarios are met.

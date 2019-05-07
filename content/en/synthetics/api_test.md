@@ -17,8 +17,6 @@ further_reading:
   text: "Configure a Browser Test"
 ---
 
-<div class="alert alert-warning">Synthetics is only available for the Datadog US site.</div>
-
 ## Overview
 
 API tests are HTTP requests (GET, POST, PUT, etc.) executed by Datadog to your web properties or application endpoints at configurable periodic intervals from multiple locations around the world. These checks verify that your applications are responding to requests, as well as that they meet any conditions you define—such as response time, HTTP status code, and header or body contents.

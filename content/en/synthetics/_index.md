@@ -20,8 +20,6 @@ further_reading:
   text: "Identify Synthetics Bots"
 ---
 
-<div class="alert alert-warning">Synthetics is only available for the Datadog US site.</a>.</div>
-
 ## Overview
 
 Datadog Synthetics gives you a new layer of visibility on the Datadog platform. By monitoring your applications and API endpoints via simulated user requests and browser rendering, Synthetics helps you ensure uptime, identify regional issues, and track application performance. By unifying Synthetics with your metrics, traces, and logs, Datadog allows you to observe how all your systems are performing as experienced by your users.
