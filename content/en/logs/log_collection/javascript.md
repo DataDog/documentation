@@ -119,16 +119,16 @@ The following parameters can be used to configure the library to send logs to Da
 Send a custom log entry directly to Datadog with the `log` function:
 
 ```
-Datadog.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<SEVERITY>)
+Datadog.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>)
 ```
 
 | Placeholder         | Description                                                                             |
 | ------              | -------                                                                                 |
 | `<MESSAGE>`         | The message of your log that is fully indexed by Datadog                                |
 | `<JSON_ATTRIBUTES>` | A valid JSON object that includes all attributes attached to the `<MESSAGE>`            |
-| `<SEVERITY>`        | Status of your log; the accepted severity values are `debug`, `info`, `warn`, or `error`. |
+| `<STATUS>`          | Status of your log; the accepted status values are `debug`, `info`, `warn`, or `error`. |
 
-Severity can also be used as a placeholder for the `log` function `Datadog.logger.debug(<MESSAGE>,<JSON_ATTRIBUTES>)`.
+Status can also be used as a placeholder for the `log` function `Datadog.logger.debug(<MESSAGE>,<JSON_ATTRIBUTES>)`.
 
 **Example:**
 
@@ -146,12 +146,12 @@ This gives the following result:
 
 ```
 {
-  "severity": "info",
+  "status": "info",
   "session_id": "1234", 
   "name": "buttonName",
   "id": 123,
   "message": "Button clicked",
-  http:{
+  "http":{
     "url": "...",
     "useragent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36"
     },
@@ -172,23 +172,23 @@ The logger adds the following information by default:
 
 ## Advanced usage
 
-### Filter by severity
+### Filter by status
 
-In some cases, you might want to disable the debug mode or to only collect warnings and errors. This can be achieved by changing the logging level: set the `logLevel` parameter to `debug` (default), `info`, `warn`, or `error` :
+In some cases, you might want to disable the debug mode or to only collect warnings and errors. This can be achieved by changing the logging level: set the `level` parameter to `debug` (default), `info`, `warn`, or `error` :
 
 ```
-Datadog.logger.setLogLevel('<SEVERITY_LEVEL>')
+Datadog.logger.setLevel('<LEVEL>')
 ```
 
-Only logs with a severity equal to or higher than the specified severity level are sent.
+Only logs with a status equal to or higher than the specified level are sent.
 
 ### Change the destination
 
 By default, the loggers are sending logs to Datadog. It is also possible to configure the logger to send logs to the console, or to not send logs at all. This can be used in the development environment to keep the logs locally.
 
-Use the `setLogHandler` function with the values `http` (default), `console`, or `silent`:
+Use the `setHandler` function with the values `http` (default), `console`, or `silent`:
 ```
-Datadog.logger.setLogHandler('<HANDLER>')
+Datadog.logger.setHandler('<HANDLER>')
 ```
 
 ### Define multiple loggers
@@ -201,13 +201,13 @@ Use the following to define a custom logger:
 
 ```
 createLogger (<LOGGER_NAME>, {
-    logLevel?: 'debug' | 'info' | 'warn' | 'error'
-    logHandler?: 'http' | 'console' | 'silent'
+    level?: 'debug' | 'info' | 'warn' | 'error'
+    handler?: 'http' | 'console' | 'silent'
     context?: <JSON_ATTRIBUTES>
 })
 ```
 
-Those parameters can also be set with the `addContext`, `setLogLevel`, and `setLogHandler` functions.
+Those parameters can also be set with the `setContext`, `setLevel`, and `setHandler` functions.
 After the creation of this logger, you can then access it in any part of your JavaScript code with the `getLogger` function:
 
 ```
