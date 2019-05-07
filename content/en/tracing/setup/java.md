@@ -49,7 +49,7 @@ Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mi
 
 ## Compatibility
 
-Datadog officially supports the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK.
+Datadog officially supports the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK. Datadog does not officially support any early-access versions of Java.
 
 ### Integrations
 
