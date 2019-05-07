@@ -1,3 +1,3 @@
-# Create an AWS Account in Datadog
-
-{'external_id': '123456789'}
+{
+    "external_id": "12345678910111213"
+}

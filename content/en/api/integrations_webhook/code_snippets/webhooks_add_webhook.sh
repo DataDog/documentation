@@ -5,7 +5,7 @@
 api_key=<DD_API_KEY>
 app_key=<DD_APP_KEY>
 
-curl -v -X PUT -H "Content-type: application/json" \
+curl -v -X POST -H "Content-type: application/json" \
 -d '{
     "hooks": [
       {

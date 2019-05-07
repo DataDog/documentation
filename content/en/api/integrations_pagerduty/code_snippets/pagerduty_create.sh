@@ -9,11 +9,11 @@ curl -v -X PUT -H "Content-type: application/json" \
 -d '{
       "services": [
         {
-          "service_name": "test_00",
+          "service_name": "<SERVICE_NAME_1>",
           "service_key": "<PAGERDUTY_SERVICE_KEY>"
         },
         {
-          "service_name": "test_01",
+          "service_name": "<SERVICE_NAME_2>",
           "service_key": "<PAGERDUTY_SERVICE_KEY>"
         }
       ],

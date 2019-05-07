@@ -12,9 +12,7 @@ curl -v -X POST -H "Content-type: application/json" \
         "name": "<WEBHOOK_NAME>",
         "url": "<WEBHOOK_URL>",
         "use_custom_payload": "false",
-        "custom_payload": "",
-        "encode_as_form": "false",
-        "headers": ""
+        "encode_as_form": "false"
       }
     ]
 }' \

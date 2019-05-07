@@ -21,6 +21,10 @@ Refer to the [Datadog-Azure integration installation instructions][1] to see how
 
     Your Azure web application ID.
 
+* **`client_secret`** [*required*]:
+
+    Your Azure web application secret key.
+
 * **`host_filters`** [*optional*, *default*=**None**]:
 
     Limit the Azure instances that are pulled into Datadog by using tags. Only hosts that match one of the defined tags are imported into Datadog.
