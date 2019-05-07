@@ -87,12 +87,21 @@ putenv('DD_TRACE_AGENT_PORT=8126');
 PHP APM supports the following PHP versions:
 
 | Version | Support type    |
-| :------ | :-------------  |
+|:--------|:----------------|
+| 7.3.x   | Fully Supported |
 | 7.2.x   | Fully Supported |
 | 7.1.x   | Fully Supported |
 | 7.0.x   | Fully Supported |
 | 5.6.x   | Fully Supported |
 | 5.4.x   | Fully Supported |
+
+PHP APM supports the following SAPI's:
+
+| SAPI           | Support type    |
+|:---------------|:----------------|
+| apache2handler | Fully Supported |
+| fpm            | Fully Supported |
+| cli            | _Coming Soon_   |
 
 ### Integrations
 
@@ -108,6 +117,7 @@ If the web framework that you use is not listed below, you can still see traces 
 | CakePHP        | 1.3, 2.8, 3.x | _Coming Soon_   |
 | CodeIgniter    | 2, 3          | _Coming Soon_   |
 | Drupal         |               | _Coming Soon_   |
+| Lumen          | 5.2+          | _Coming Soon_   |
 | Magento        | 2             | _Coming Soon_   |
 | Phalcon        | 1.3, 3.4      | _Coming Soon_   |
 | Slim           | 2, 3          | _Coming Soon_   |
