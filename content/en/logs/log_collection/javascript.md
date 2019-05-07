@@ -203,7 +203,7 @@ Use the following to define a custom logger:
 createLogger (<LOGGER_NAME>, {
     logLevel?: 'debug' | 'info' | 'warn' | 'error'
     logHandler?: 'http' | 'console' | 'silent'
-    context?: { <KEY>:'<VALUE>'}
+    context?: <JSON_ATTRIBUTES>
 })
 ```
 
@@ -222,7 +222,7 @@ Assume that there is a signup logger, defined with all the other loggers:
 ```
 # create a new logger
 const signupLogger = createLogger('signupLogger'})
-signupLogger.addContext({ env: 'staging'})
+signupLogger.addContext('env', 'staging')
 ```
 
 It can now be used in a different part of the code with:
@@ -238,6 +238,27 @@ signupLogger.info('Test sign up completed')
 ...
 ```
 
+### Overwrite context 
+
+It is possible to set the whole context in one call, it also overrides previously set attributes if any:
+
+```
+# For one logger
+my_logger.setContext(<JSON_ATTRIBUTES>)
+
+# For the global context
+Datadog.setLoggerGlobalContext(<JSON_ATTRIBUTES>)
+```
+
+**Example:**
+
+```
+const signupLogger = getLogger('signupLogger')
+signupLogger.setContext({
+  env: 'staging',
+  team: 'user-account'
+})
+```
 
 ## Further Reading
 
