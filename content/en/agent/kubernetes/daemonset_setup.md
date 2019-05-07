@@ -195,13 +195,14 @@ To enable [Log collection][10] with your DaemonSet:
 
 2. Mount the Docker socket or `/var/log/pods`
 
-The Agent has two ways to collect logs, from the Docker socket or the Kubernetes log files (automatically handled by Kubernetes). 
-You should use the log file collection when:
+The Agent has two ways to collect logs: from the Docker socket, and from the Kubernetes log files (automatically handled by Kubernetes). 
+
+Use log file collection when:
 
 * Docker is not the runtime
 * More than 10 containers are used within each pod 
 
-Indeed when there are many containers in the same pod, collecting logs through the Docker socket might be consuming much more resources than going through the files as the Docker API is optimised to get logs from one container at a time.
+The Docker API is optimized to get logs from one container at a time. When there are many containers in the same pod, collecting logs through the Docker socket might be consuming much more resources than going through the files.
 
 {{< tabs >}}
 {{% tab "K8s File" %}}
