@@ -16,26 +16,20 @@ further_reading:
   text: "Explore your services, resources, and traces"
 ---
 
-Adding metadata in the form of key-value pairs to a span allows to correlate traces with other Datadog products to provide more details about specific spans. [Read more about tagging][1]
+Adding metadata in the form of key-value pairs to a span allows to correlate traces with other Datadog products to provide more details about specific spans. Metadata can be either added [to a single span](#adding-metadata-to-a-span-via-tags) or [globally to all spans](#adding-metadata-globally-to-all-spans-via-tags).
 
-Metadata can be:
+**Note**: Tracing metadata is added via tags, but tags already have a specific meaning throughout [Datadog][1].
 
-- [Adding tags to a span](#adding-tags-to-a-span)
-- [Adding tags globally to all spans](#adding-tags-globally-to-all-spans)
-- [Further Reading](#further-reading)
+When looking at a trace for a tag in Datadog, look for the tab called metadata.
 
-## Adding tags to a span
+## Adding Metadata to a Span via Tags
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Tags are key-value pairs attached to spans. All tags share a single namespace.
+The Datadog UI uses tags to set span level metadata. A full list of these metadata can be found in the [Datadog][1] and [OpenTracing][2] APIs.
 
-The Datadog UI uses specific tags to set UI properties, such as an application's service name. A full list of these tags can be found in the [Datadog][1] and [OpenTracing][2] APIs.
-
-Custom tags are set using the OpenTracing API.
-
-Custom tags may be set for auto-instrumentation by grabbing the active span out of the global tracer.
+Custom metadata may be set for auto-instrumentation by grabbing the active span out of the global tracer and setting a tag with `setTag`.
 
 ```java
 import io.opentracing.Tracer;
@@ -64,7 +58,7 @@ class ServletImpl extends AbstractHttpServlet {
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Add tags directly to a span by calling `set_tag`. For example, with the following route handler:
+Add metadata directly to a span by calling `set_tag`. For example, with the following route handler:
 
 ```python
 from ddtrace import tracer
@@ -75,7 +69,7 @@ def handle_customer(customer_id):
     span.set_tag('customer.id', customer_id)
 ```
 
-The current span can be retrieved from the context in order to set tags. This way, if a span was started by the instrumentation, you can retrieve the span and add custom tags. Note that if a span does not exist, `None` is returned:
+The current span can be retrieved from the context in order to set its metadata. This way, if a span was started by the instrumentation, you can retrieve the span and add custom metadata. **Note**: If a span does not exist, `None` is returned:
 
 ```python
 from ddtrace import tracer
@@ -92,7 +86,7 @@ def handle_customer(customer_id):
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Add tags directly to `Datadog::Span` objects by calling `#set_tag`:
+Add metadata directly to `Datadog::Span` objects by calling `#set_tag`:
 
 ```ruby
 # An example of a Sinatra endpoint,
@@ -104,7 +98,7 @@ get '/posts' do
 end
 ```
 
-Access the current active span from any method within your code. Note, however, that if the method is called and there is no span currently active, `active_span` is nil.
+Access the current active span from any method within your code. **Note**: If the method is called and there is no span currently active, `active_span` is `nil`.
 
 ```ruby
 # e.g. adding tag to active span
@@ -116,7 +110,7 @@ current_span.set_tag('<TAG_KEY>', '<TAG_VALUE>') unless current_span.nil?
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Add tags directly to a `Span` interface by calling `SetTag`:
+Add metadata directly to a `Span` interface by calling `SetTag`:
 
 ```go
 package main
@@ -145,7 +139,8 @@ func main() {
 }
 ```
 
-Datadog's integrations make use of the `Context` type to propagate the current active span. If you want to add a tag to a span attached to a `Context` via automatic instrumentation, call the `SpanFromContext` function:
+Datadog's integrations make use of the `Context` type to propagate the current active span.
+If you want to add span metadata via a tag attached to a `Context`, call the `SpanFromContext` function:
 
 ```go
 package main
@@ -169,7 +164,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% tab "Node.js" %}}
 
 
-Add tags directly to span objects by calling `setTag` or `addTags`:
+Add metadata directly to span objects by calling `setTag` or `addTags`:
 
 ```javascript
 // An example of an Express endpoint,
@@ -197,7 +192,7 @@ span.setTag('<TAG_KEY>', '<TAG_VALUE>')
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Add tags directly to a `Datadog.Trace.Span` object by calling `Span.SetTag()`. For example:
+Add metadata directly to a `Datadog.Trace.Span` object by calling `Span.SetTag()`. For example:
 
 ```csharp
 using Datadog.Trace;
@@ -215,7 +210,7 @@ scope.Span.SetTag("<TAG_KEY>", "<TAG_VALUE>");
 {{% tab "PHP" %}}
 
 
-Add tags directly to a `DDTrace\Span` object by calling `Span::setTag()`.
+Add metadata directly to a `DDTrace\Span` object by calling `Span::setTag()`.
 
 ```php
 dd_trace('<FUNCTION_NAME>', function () {
@@ -247,7 +242,7 @@ if (null !== $span) {
 {{% /tab %}}
 {{< /tabs >}}
 
-## Adding tags globally to all spans
+## Adding metadata globally to all spans
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -259,7 +254,7 @@ Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Add tags to all spans by configuring the tracer with the `tracer.set_tags` method:
+Add metadata to all spans by configuring the tracer with the `tracer.set_tags` method:
 
 ```python
 from ddtrace import tracer
@@ -270,7 +265,7 @@ tracer.set_tags({ 'env': 'prod' })
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Add tags to all spans by configuring the tracer with the `tags` option:
+Add metadata to all spans by configuring the tracer with the `tags` option:
 
 ```ruby
 Datadog.configure do |c|
@@ -284,7 +279,7 @@ See the [API documentation][1] for more details.
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Add tags to all spans by configuring the tracer with the `tags` option:
+Add metadata to all spans by configuring the tracer with the `tags` option:
 
 ```go
 package main
@@ -315,7 +310,7 @@ Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Use the environment variable `DD_TRACE_GLOBAL_TAGS` to add tags to all the generated spans. See the [PHP configuration][1]
+Use the environment variable `DD_TRACE_GLOBAL_TAGS` to add metadata to all the generated spans. See the [PHP configuration][1]
 section for details on how environment variables should be set.
 
 ```ini
@@ -326,7 +321,7 @@ DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
 {{% /tab %}}
 {{% tab "C++" %}}
 
-Add tags directly to a span object by calling `Span::SetTag`. For example:
+Add metadata directly to a span object by calling `Span::SetTag`. For example:
 
 ```cpp
 auto tracer = ...
@@ -344,5 +339,4 @@ Values are of [variable type][1] and can be complex objects. Values are serializ
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /tagging
