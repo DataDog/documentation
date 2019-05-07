@@ -24,16 +24,16 @@ further_reading:
 
 
 
-Send logs to Datadog from web browsers or other Javascript client thanks to the Datadog's `datadog-logs` client-side JavaScript logging library.
+Send logs to Datadog from web browsers or other Javascript clients thanks to Datadog's `datadog-logs` client-side JavaScript logging library.
 
-With the `datadog-logs` library, you can send log directly to Datadog from JS clients and leverage the following features:
+With the `datadog-logs` library, you can send logs directly to Datadog from JS clients and leverage the following features:
 
 * Use the library as a logger. Everything is forwarded to Datadog as JSON documents.
 * Add `context` and extra custom attributes to each log sent.
 * Wrap and forward every JavaScript error automatically.
-* Forward JavaScript's console logs.
+* Forward JavaScript console logs.
 * Record real client IP addresses and user agents.
-* Optimised network usage with automatic bulk posts.
+* Optimized network usage with automatic bulk posts.
 
 ## Get a Public API Key
 
@@ -41,24 +41,24 @@ With the `datadog-logs` library, you can send log directly to Datadog from JS cl
 Public API keys are in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on this feature for your account.
 </div>
 
-For security reasons, [API keys][1] cannot be used to configure the `datadog-logs` library as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [public API key][2] must be used.
+For security reasons, [API keys][1] cannot be used to configure the `datadog-logs` library, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [public API key][2] must be used.
 
 To manage your public API keys, go to your [Datadog API configuration page][3] in the `Public API Key` section as shown here:
 
 {{< img src="logs/log_collection/public_key.png" style="width:80%;" alt="Public API Keys" responsive="true" >}}
 
-Read the [Public API keys documentation][2] to learn more about the restrictions that applies.
+Read the [Public API keys documentation][2] to learn more about the restrictions that apply.
 
 ## Configure the JavaScript logger
 
 <div class="alert alert-warning">
-The Javascript logging library is in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to Datadog support team</a> to enable this feature for your account.
+The Javascript logging library is in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to the Datadog support team</a> to enable this feature for your account.
 </div>
 
 The following parameters can be used to configure the library to send logs to Datadog:
 
-* Set `isCollectingError` to `false` to turn off the automatic JS and console error collection.
-* Use `addLoggerGlobalContext` to add JSON attribute to all the generated logs
+* Set `isCollectingError` to `false` to turn off automatic JS and console error collection.
+* Use `addLoggerGlobalContext` to add JSON attributes to all generated logs
 * Set `publicApiKey` to the value of the public API key (**only public API keys can be used in this library**)
 
 {{< tabs >}}
@@ -77,8 +77,8 @@ The following parameters can be used to configure the library to send logs to Da
     });
 
       // OPTIONAL
-      // add global metadata attributes
-      Datadog.addLoggerGlobalContext({<META_KEY>: <META_VALUE>});
+      // add global metadata attribute--one attribute can be added at a time
+      Datadog.addLoggerGlobalContext('<META_KEY>', <META_VALUE>);
     </script>
     ...
   </head>
@@ -102,8 +102,8 @@ The following parameters can be used to configure the library to send logs to Da
     });
 
       // OPTIONAL
-      // add global metadata attributes
-      Datadog.addLoggerGlobalContext({<META_KEY>: '<META_VALUE>'});
+      // add global metadata attribute--one attribute can be added at a time
+      Datadog.addLoggerGlobalContext('<META_KEY>', <META_VALUE>);
     </script>
     ...
   </head>
@@ -116,19 +116,19 @@ The following parameters can be used to configure the library to send logs to Da
 
 ## Send a custom log entry
 
-Send a custom log entries directly to Datadog with the `log` function:
+Send a custom log entry directly to Datadog with the `log` function:
 
 ```
 Datadog.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<SEVERITY>)
 ```
 
-| Placehodler         | Description                                                                             |
+| Placeholder         | Description                                                                             |
 | ------              | -------                                                                                 |
 | `<MESSAGE>`         | The message of your log that is fully indexed by Datadog                                |
 | `<JSON_ATTRIBUTES>` | A valid JSON object that includes all attributes attached to the `<MESSAGE>`            |
-| `<SEVERITY>`        | Status of your log; the accepted severity values are `debug`, `info`, `warn` or `error`. |
+| `<SEVERITY>`        | Status of your log; the accepted severity values are `debug`, `info`, `warn`, or `error`. |
 
-Severity can also be used as a placeholder of the `log` function `Datadog.logger.debug(<MESSAGE>,<JSON_ATTRIBUTES>)`.
+Severity can also be used as a placeholder for the `log` function `Datadog.logger.debug(<MESSAGE>,<JSON_ATTRIBUTES>)`.
 
 **Example:**
 
@@ -174,17 +174,17 @@ The logger adds the following information by default:
 
 ### Filter by severity
 
-In some cases, you might want to disable the debug mode or to only collect warning and errors. This can be achieved by changing the logging level thanks to the `logLevel` parameter to `debug` (default), `info`, `warn`, and `error` :
+In some cases, you might want to disable the debug mode or to only collect warnings and errors. This can be achieved by changing the logging level: set the `logLevel` parameter to `debug` (default), `info`, `warn`, or `error` :
 
 ```
 Datadog.logger.setLogLevel('<SEVERITY_LEVEL>')
 ```
 
-Only logs with a severity equal or higher to the specified one are sent.
+Only logs with a severity equal to or higher than the specified severity level are sent.
 
 ### Change the destination
 
-By default, the loggers are sending logs to Datadog. It is also possible to configure the logger to send logs to the console or not to send logs at all. This can be used in the development environment to keep the logs locally.
+By default, the loggers are sending logs to Datadog. It is also possible to configure the logger to send logs to the console, or to not send logs at all. This can be used in the development environment to keep the logs locally.
 
 Use the `setLogHandler` function with the values `http` (default), `console`, or `silent`:
 ```
@@ -193,7 +193,7 @@ Datadog.logger.setLogHandler('<HANDLER>')
 
 ### Define multiple loggers
 
-The library contains a default logger, but it is also possible to define different loggers which can be convenient when several teams are working on the same project.
+The library contains a default logger, but it is also possible to define different loggers, which can be convenient when several teams are working on the same project.
 
 Each logger can optionally be configured with its own log level, handler, and context. Note that the `Global Context` is added on top of each logger context. 
 
@@ -207,8 +207,8 @@ createLogger (<LOGGER_NAME>, {
 })
 ```
 
-Those parameters can also be set thanks to the `addContext`, `setLogLevel`, and `setLogHandler` functions.
-After the creation of this logger, you can then get it in any part of your Javascript code thanks to the `getLogger` function:
+Those parameters can also be set with the `addContext`, `setLogLevel`, and `setLogHandler` functions.
+After the creation of this logger, you can then access it in any part of your JavaScript code with the `getLogger` function:
 
 ```
 const my_logger = getLogger('<LOGGER_NAME>') 
@@ -217,7 +217,7 @@ const my_logger = getLogger('<LOGGER_NAME>')
 **Example:**
 
 
-Let's assume that there is a signup logger define with all the others logger:
+Assume that there is a signup logger, defined with all the other loggers:
 
 ```
 # create a new logger
