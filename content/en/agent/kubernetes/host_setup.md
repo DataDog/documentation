@@ -37,13 +37,13 @@ Note: these metrics are unavailable for Azure Kubernetes Service (AKS).
 
 There are two ways to collect logs from containers running in Kubernetes:
 
-- Through the Docker socket
-- Through the Kubernetes log files 
+- Through the Docker socket.
+- Through the Kubernetes log files.
 
-We recommend using the Kubernetes log files approach when you are either not using Docker or using more than 10 containers per pod.
+Datadog recommends using the Kubernetes log files approach when you are either not using Docker, or are using more than 10 containers per pod.
 
-We also recommend to take advantage of DaemonSets to [automatically deploy the Datadog Agent on all your nodes][4]. 
-Otherwise to manually enable log collection from one specific node, add the following parameters in the `datadog.yaml`:
+Datadog also recommends that you take advantage of DaemonSets to [automatically deploy the Datadog Agent on all your nodes][4]. 
+Otherwise, to manually enable log collection from one specific node, add the following parameters in the `datadog.yaml`:
 
 ```
 logs_enabled: true
@@ -58,7 +58,7 @@ logs_config:
 
 [Restart the Agent][7].
 
-Use the [Autodiscovery with Pod Annotations][8] to configure the log collection to add multiline processing rules or customise the `source` and `service` attribute.
+Use [Autodiscovery with Pod Annotations][8] to configure log collection to add multiline processing rules, or to customize the `source` and `service` attributes.
 
 ## Further Reading
 To get a better idea of how (or why) to integrate your Kubernetes service, see the related series of [Datadog blog posts][6].
