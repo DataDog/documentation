@@ -240,7 +240,7 @@ signupLogger.info('Test sign up completed')
 
 ### Overwrite context 
 
-It is possible to set the whole context in one call, it also overrides previously set attributes if any:
+It is possible to set the entire context in one call. This also overrides previously set attributes, if any:
 
 ```
 # For one logger
