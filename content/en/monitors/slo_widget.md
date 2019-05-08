@@ -54,7 +54,7 @@ You can select up to 20 monitors.
 
 ### Supported monitor types
 
-Currently only [metric monitor types][2] and synthetics are supported in the widget. Only supported monitors will be available to select within the widget. All other monitor types are not currently supported. 
+Currently only [metric monitor types][2], service checks, and synthetics are supported in the widget. Only supported monitors will be available to select within the widget. All other monitor types are not currently supported. 
 
 Supported metric monitor types include: metric, anomaly, APM, forecast, outlier, and integration metrics. For more info, see [here][2] for monitor types.
 
