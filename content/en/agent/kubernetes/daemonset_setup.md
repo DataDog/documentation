@@ -250,14 +250,14 @@ The Docker API is optimized to get logs from one container at a time. When there
       (...)
         volumeMounts:
           (...)
-          - name: pointerdir
+          - name: pointdir
               mountPath: /opt/datadog-agent/run
       (...)
       volumes:
         (...)
         - hostPath:
             path: /opt/datadog-agent/run
-            name: pointerdir
+            name: pointdir
       (...)
     ```
     
