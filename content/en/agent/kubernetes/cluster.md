@@ -102,8 +102,8 @@ kubectl create configmap dca-yaml --from-file datadog-cluster.yaml
 
 Locate the following manifests, and replace `<DD_API_KEY>` with [your API key][4]:
 
-* `Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml`
-* `Dockerfiles/manifests/cluster-agent/cluster-agent.yaml`
+* `[Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml](https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml)`
+* `[Dockerfiles/manifests/cluster-agent/cluster-agent.yaml](https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/cluster-agent.yaml)`
 
 Then, run:
 
