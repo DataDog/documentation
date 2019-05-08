@@ -42,8 +42,8 @@ params:
     gif: ""
   static_url: "http://localhost:1313/"
   announcement_banner:
-    text: "<strong>Datadog Synthetics</strong> is now available!"
-    link: "blog/browser-tests/"
+    text: "<strong>A Leader in 2019 Forrester Wave™"
+    link: "blog/forrester-wave-2019/"
     exclude: []
   code_languages:
     - display_name: Python
