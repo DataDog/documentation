@@ -15,7 +15,7 @@ Apdex is a numerical measure of user satisfaction with the performance of enterp
 * 0 = no users satisfied
 * 1 = all users satisfied
 
-To define your apdex, you need to be an administrator of your Datadog account. To define your apdex you need to first define a time threshold - **T** - separating satisfactory response times to unsatisfactory response time from your application or service. With one threshold you can then define three categories:
+To define your apdex, you need to be an administrator of your Datadog account. To define your apdex you need to first define a time threshold—**T**—separating satisfactory response times from unsatisfactory response times from your application or service. With one threshold you can then define three categories:
 
 * Satisfied requests have a response time below **T**
 * Tolerated requests have a response time equal to/above **T** and below/equal to **4T**
