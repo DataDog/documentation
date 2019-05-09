@@ -3,6 +3,8 @@ main:
     url: getting_started/
     pre: nav_start
     children:
+      - name: Les intégrations
+        url: getting_started/integrations
       - name: Recueillir vos traces
         url: getting_started/tracing
       - name: Centre d'apprentissage
@@ -22,6 +24,8 @@ main:
       - name: Utilisation de base de l'Agent
         url: agent/basic_agent_usage/
         children:
+          - name: AIX
+            url: agent/basic_agent_usage/aix/
           - name: "Amazon\_Linux"
             url: agent/basic_agent_usage/amazonlinux/
           - name: CentOS
@@ -128,7 +132,7 @@ main:
       - name: Infrastructure
         url: graphing/infrastructure/
         children:
-          - name: Map des Conteneurs
+          - name: Map des conteneurs
             url: graphing/infrastructure/containermap/
           - name: Hostmap
             url: graphing/infrastructure/hostmap/
@@ -145,7 +149,7 @@ main:
             url: graphing/functions/algorithms/
           - name: Opérations arithmétiques
             url: graphing/functions/arithmetic/
-          - name: Nombre
+          - name: Total
             url: graphing/functions/count/
           - name: Interpolation
             url: graphing/functions/interpolation/
@@ -219,8 +223,8 @@ main:
         url: monitors/notifications/
       - name: Downtimes
         url: monitors/downtimes/
-      - name: Widget d'uptime
-        url: monitors/monitor_uptime_widget/
+      - name: 'Widget pour les SLO '
+        url: monitors/slo_widget/
       - name: Guides
         url: monitors/guide
   - name: APM (tracing)
@@ -253,11 +257,11 @@ main:
       - name: Enrichir vos Traces
         url: tracing/advanced/
         children:
-          - name: Corréler des traces et des logs
+          - name: Connect Logs and Traces
             url: tracing/advanced/connect_logs_and_traces
           - name: Ajouter des Metadata aux Spans
             url: tracing/advanced/adding_metadata_to_spans
-          - name: Métriques d'exécution
+          - name: Métriques de runtime
             url: tracing/advanced/runtime_metrics
           - name: OpenTracing
             url: tracing/advanced/opentracing
@@ -304,6 +308,8 @@ main:
         children:
           - name: AWS
             url: 'integrations/amazon_web_services/#collecte-de-logs'
+          - name: Browser
+            url: logs/log_collection/javascript/
           - name: Docker
             url: logs/log_collection/docker/
           - name: Csharp
@@ -348,8 +354,6 @@ main:
             url: logs/explorer/patterns
       - name: Collecte illimitée de logs
         url: logs/logging_without_limits/
-      - name: Log monitor
-        url: monitors/monitor_types/log
       - name: Archives
         url: logs/archives/s3
         children:
@@ -389,7 +393,7 @@ main:
         children:
           - name: Métriques custom
             url: developers/metrics/custom_metrics/
-          - name: Counts
+          - name: Totaux
             url: developers/metrics/counts
           - name: Distributions
             url: developers/metrics/distributions
@@ -399,7 +403,7 @@ main:
             url: developers/metrics/histograms
           - name: Taux
             url: developers/metrics/rates
-          - name: Ensembles
+          - name: Sets
             url: developers/metrics/sets
       - name: Bibliothèques
         url: developers/libraries/
@@ -450,15 +454,12 @@ main:
             url: account_management/saml/safenet
       - name: Comptes multi-organisations
         url: account_management/multi_organization/
-        children:
-          - name: Log Management
-            url: account_management/rbac/log_management
-          - name: API Role
-            url: account_management/rbac/role_api
       - name: Changer d'organisation
         url: account_management/org_switching/
       - name: Facturation
         url: account_management/billing/
+      - name: Les clés d'API et d'application
+        url: account_management/api-app-keys/
   - name: Sécurité
     url: security/
     pre: nav_security

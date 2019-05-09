@@ -10,4 +10,6 @@ Get the list of actively reporting metrics from a given time until now. This end
 
 ##### ARGUMENTS
 * **`from`** [*required*]:
-    Seconds since the unix epoch
+    Seconds since the Unix epoch
+* **`host`** [*optional*]:
+    Hostname for filtering the list of metrics returned. If set, metrics retrieved are those with the corresponding hostname tag.

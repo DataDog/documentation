@@ -26,7 +26,6 @@ The schema is:
 AXIS_SCHEMA = {
     "type": "object",
     "properties": {
-        "label":        {"type": "string"},
         "scale":        {"type": "string"},
         "min":          {"type": "string"},
         "max":          {"type": "string"},
@@ -38,7 +37,6 @@ AXIS_SCHEMA = {
 
 | Parameter      | Type    | Description                                                                                          | Default  |
 | ------         | -----   | --------                                                                                             | ----     |
-| `label`        | string  | Label to display on the Y-scale.                                                                     |          |
 | `scale`        | string  | Specifies the scale type. Possible values: `linear`, `log`, `sqrt`, `pow##` (eg. `pow2`, `pow0.5`..) | `linear` |
 | `min`          | string  | Specifies minimum value to show on the y-axis. It takes a number, or `auto` for default behavior.        | `auto`   |
 | `max`          | string  | Specifies the maximum value to show on the y-axis. It takes a number, or `auto` for default behavior.    | `auto`   |

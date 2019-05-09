@@ -23,9 +23,9 @@ Manual instrumentation allows programmatic creation of traces to send to Datadog
 
 If you aren't using a [supported framework instrumentation][1], or you would like additional depth in your application’s traces, you may want to manually instrument your code.
 
-Do this either using the Trace annotation for simple method call tracing, or with the [OpenTracing API][2] for complex tracing.
+Do this either using the Trace annotation for simple method call tracing, or with the OpenTracing API for complex tracing.
 
-Datadog's Trace annotation is provided by the [dd-trace-api dependency][3].
+Datadog's Trace annotation is provided by the [dd-trace-api dependency][2].
 
 **Example Usage**
 
@@ -42,8 +42,7 @@ public class MyClass {
 
 
 [1]: /tracing/languages/java/#compatibility
-[2]: #opentracing
-[3]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
+[2]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 {{% /tab %}}
 {{% tab "Python" %}}
 
