@@ -23,32 +23,32 @@ When experiencing unexpected behavior with Datadog APM, there are a few common i
 
 2. **Ensure that the Agent is functioning properly**:
 
-    In some cases the Agent may have issues sending traces to Datadog. [Enable Agent debug mode][3] and check the [trace Agent logs][4] to see if there is any error.
+    In some cases the Agent may have issues sending traces to Datadog. [Enable Agent debug mode][3] and check the [Trace Agent logs][4] to see if there are any errors.
 
-3. **Verify if your Tracer is running correctly**:
+3. **Verify that your tracer is running correctly**:
 
-    After having [enabled your Tracer debug mode](#tracer-debug-mode), check the Agent logs:
+    After having [enabled tracer debug mode](#tracer-debug-mode), check the Agent logs:
 
     * If the trace was sent to the Agent properly, you should see `Response from the Agent: OK` log entries. This indicates that the tracer is working properly, therefore the problem may be with the Agent itself. Refer to the [Agent troubleshooting guide][5] for more information.
 
-    * If an error was reported by the Agent (or the Agent could not be reached), you should see `Error from the Agent` log entries. In this case, validate your network configuration to ensure [the Agent can be reached](#agent-troubleshooting). If you are confident the network is functional and that the error is coming from the Agent, refer to the [Agent troubleshooting guide][5].
+    * If an error was reported by the Agent (or the Agent could not be reached), you will see `Error from the Agent` log entries. In this case, validate your network configuration to ensure [the Agent can be reached](#agent-troubleshooting). If you are confident the network is functional and that the error is coming from the Agent, refer to the [Agent troubleshooting guide][5].
 
     If neither of these log entries is present, then no request was sent to the Agent, which means that the tracer is not instrumenting your application. In this case, [contact Datadog support][1] and provide the relevant log entries with [a flare][6].
 
 If there are errors that you don't understand, or traces are reported to be flushed to Datadog and you still cannot see them in the Datadog UI, [contact Datadog support][1].
 
-## Tracer Debug mode
+## Tracer debug mode
 
-Datadog debug settings are used to diagnose issues or audit trace data, you shouldn't enable debug mode in your production systems as it increases the number of events that are sent to your loggers. Use sparingly for debugging purposes only.
+Datadog debug settings are used to diagnose issues or audit trace data. Enabling debug mode in production systems is not recommended, as it increases the number of events that are sent to your loggers. Use it sparingly, for debugging purposes only.
 
 Debug mode is disabled by default. To enable it, follow the corresponding language tracer instructions:
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-To enable debug mode for the Datadog Java Tracer, set this flag `-Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug` when starting the JVM.
+To enable debug mode for the Datadog Java Tracer, set the flag `-Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug` when starting the JVM.
 
-**Note**: Datadog Java Tracer implements SL4J SimpleLogger, as such [all of its settings can be applied][1] like logging to a dedicated log file: `-Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>`
+**Note**: Datadog Java Tracer implements SL4J SimpleLogger. As such, [all of its settings can be applied][1] like logging to a dedicated log file: `-Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>`
 
 [1]: https://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html
 {{% /tab %}}
