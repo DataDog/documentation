@@ -37,7 +37,7 @@ Once created, notice that you have statistics upon your template variables usage
 
 {{< img src="graphing/dashboards/template_variables/stats_tv.png" alt="statistic TV" responsive="true" style="width:40%;">}}
 
-Decide if you want to remove/add this Template Variable to all of your graph widgets with the respective **Remove From All** and **Add to All** buttons.
+Decide if you want to remove/add this template variable to all of your graph widgets with the respective **Remove From All** and **Add to All** buttons.
 
 ## Use Template Variables
 
