@@ -370,7 +370,7 @@ main:
       - name: "API Tests"
         url: "synthetics/api_tests"
       - name: Browser Tests
-        url: synthetics/browser_test
+        url: synthetics/browser_tests
       - name: Intégration APM
         url: synthetics/apm
       - name: Identifier les Bots Synthetics

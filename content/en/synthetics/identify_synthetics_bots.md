@@ -10,7 +10,7 @@ further_reading:
 - link: "synthetics/"
   tag: "Documentation"
   text: "Manage your checks"
-- link: "synthetics/browser_test"
+- link: "synthetics/browser_tests"
   tag: "Documentation"
   text: "Configure a Browser Test"
 - link: "synthetics/api_tests"

@@ -12,7 +12,7 @@ further_reading:
   - link: synthetics/api_tests
     tag: Documentation
     text: Configurer un test API
-  - link: synthetics/browser_test
+  - link: synthetics/browser_tests
     tag: Documentation
     text: Configurer un test Browser
 ---
@@ -70,4 +70,4 @@ Les métriques suivantes sont générées par des checks.
 
 [1]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
 [2]: /fr/synthetics/api_tests
-[3]: /fr/synthetics/browser_test
+[3]: /fr/synthetics/browser_tests

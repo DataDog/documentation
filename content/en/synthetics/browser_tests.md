@@ -32,7 +32,7 @@ Browser tests are scenarios executed by Datadog on your web applications. They r
 
 Define the configuration of your browser test.
 
-{{< img src="synthetics/browser_test/browser_check_configuration.png" alt="Browser Tests make request" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/browser_tests/browser_check_configuration.png" alt="Browser Tests make request" responsive="true" style="width:80%;">}}
 
 1. Give your browser test a name.
 2. Enter the Start URL. This is the URL from which your browser test starts the scenario.
@@ -41,13 +41,13 @@ Define the configuration of your browser test.
 5. Pick the locations to run the test from. Many AWS locations from around the world are available, the full list can be retrieved [through Datadog API][1].
 6. Choose a Check frequency between "1 run per 5 minute interval" to "1 run per week":
 
-    {{< img src="synthetics/browser_test/check_frequency.png" alt="Check frequency" responsive="true" style="width:80%;">}}
+    {{< img src="synthetics/browser_tests/check_frequency.png" alt="Check frequency" responsive="true" style="width:80%;">}}
 
 ### Notifications
 
 A notification is sent if at least one step of the browser test scenario fails. To configure your notifications:
 
-{{< img src="synthetics/browser_test/browser_check_notification.png" alt="Browser test notification" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/browser_tests/browser_check_notification.png" alt="Browser test notification" responsive="true" style="width:80%;">}}
 
 1. Select users and/or [services][2] to send the notifications to.
 2. Enter a **message** for the browser test. This field allows standard [Markdown formatting][3]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
@@ -58,13 +58,13 @@ A notification is sent if at least one step of the browser test scenario fails. 
 
 **Tests can be only recorded from [Google Chrome][4]. To record your test, download the [Datadog Record Test extension for Google Chrome][5].**
 
-{{< img src="synthetics/browser_test/browser_check_record_test.png" alt="Browser test record test" responsive="true" >}}
+{{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test" responsive="true" >}}
 
 1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window in order to avoid sizing issues in the displayed window within Datadog's interface.
 2. Click on **Start recording** to begin recording your browser test.
 3. Your actions are recorded and used to create steps within your browser test scenario.
 4. Use the actions available in the upper left corner to enrich your scenario:
-    {{< img src="synthetics/browser_test/browser_check_assertions.png" alt="Browser Test assertions" responsive="true" style="width:80%;">}}
+    {{< img src="synthetics/browser_tests/browser_check_assertions.png" alt="Browser Test assertions" responsive="true" style="width:80%;">}}
 
     **Note**: **Your last browser test step must be an Assertion**, otherwise there is nothing to check.
 5. Once you have finished your Scenario, click on **Save and Launch Test**.
@@ -72,7 +72,7 @@ A notification is sent if at least one step of the browser test scenario fails. 
 ### Actions
 #### Assertion
 
-{{< img src="synthetics/browser_test/assertions_browser_check.png" alt="Assertion browser test" responsive="true" style="width:40%;">}}
+{{< img src="synthetics/browser_tests/assertions_browser_check.png" alt="Assertion browser test" responsive="true" style="width:40%;">}}
 
 Assertions allow you to check if an element, a content, or some text is available in the current page:
 
@@ -101,7 +101,7 @@ After selecting the Hover action, click on the element you want to choose to cre
 
 ##### Define a variable
 
-{{< img src="synthetics/browser_test/setup_variable.png" alt="Setup Variable" responsive="true" style="width:40%;">}}
+{{< img src="synthetics/browser_tests/setup_variable.png" alt="Setup Variable" responsive="true" style="width:40%;">}}
 
 To define a variable, enter a capitalized name then choose its type between:
 
@@ -118,7 +118,7 @@ To define a variable, enter a capitalized name then choose its type between:
 
 Once created, use your variable to set an input text on a form or search bar. Use the little hand on your variable box to create an input step:
 
-{{< img src="synthetics/browser_test/variable_input.gif" alt="Variable Input" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/browser_tests/variable_input.gif" alt="Variable Input" responsive="true" style="width:80%;">}}
 
 You can also use your variables in some assertions, including:
 
@@ -129,7 +129,7 @@ You can also use your variables in some assertions, including:
 
 To use your variables in one of your assertions, hit *Use Variable* and select the variable you want to use:
 
-{{< img src="synthetics/browser_test/use_variable_in_assertion.png" alt="Use variable in assertion" responsive="true" style="width:40%;">}}
+{{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Use variable in assertion" responsive="true" style="width:40%;">}}
 
 
 ## Further Reading

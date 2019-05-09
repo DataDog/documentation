@@ -465,7 +465,7 @@ main:
       - name: "API Tests"
         url: "synthetics/api_tests"
       - name: "Browser Tests"
-        url: "synthetics/browser_test"
+        url: "synthetics/browser_tests"
       - name: "APM Integration"
         url: "synthetics/apm"
       - name: "Identify Synthetics Bots"
