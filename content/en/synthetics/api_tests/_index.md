@@ -34,11 +34,7 @@ Available locations are:
 
 ## Configuration
 
-The configuration will depend on the type of API test you are creating.
-
-### Choose request type
-
-For now, we support 2 types of API tests:
+The configuration depends on the type of API test you are creating. There are two API test types:
 
 - [HTTP test](?tab=httptest#make-a-request)
 - [SSL test](?tab=ssltest#make-a-request)
