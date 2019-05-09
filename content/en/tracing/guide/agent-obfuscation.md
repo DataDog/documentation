@@ -5,51 +5,29 @@ private: true
 disable_toc: true
 ---
 
-Agent trace obfuscation is disabled by default. Enable it in your `datadog.yaml` configuration file to obfuscate all information attached to your traces, the general format is:
+Agent trace obfuscation is disabled by default. Enable it in your `datadog.yaml` configuration file to obfuscate all information attached to your traces.
+
+Currently this options only works with the following services:
+
+* `mongodb`
+* `elasticsearch`
+* `redis`
+* `memcached`
+* `http`
+* `remove_stack_traces`
+
+
+{{< tabs >}}
+{{% tab "MongoDB" %}}
+
+Applies to spans of type `mongodb`, more specifically: to the `mongodb.query` span metadata.
 
 ```
 apm_config:
   enabled: true
-  
+
   ## (...)
-  
-  obfuscation:
-    <SERVICE_NAME>:
-      enabled: true
-      keep_values:
-        - <VALUE_1>
-        - <VALUE_2>
-```
 
-* `enabled` should be set to true to have obfuscation enabled for the specified `<SERVICE_NAME>`.
-* `keep_values` are a set of keys from which the values are not obfuscated.
-
-Find below some examples:
-
-**ElasticSearch obfuscation rules**. Applies to spans of type `elasticsearch`, more specifically, to the `elasticsearch.body` span metadata:
-
-```
-apm_config:
-  enabled: true
-  
-  ## (...)
-  
-  obfuscation:
-    elasticsearch:
-      enabled: true
-      keep_values:
-        - user_id
-        - category_id
-```
-
-**MongoDB obfuscation rules**. Applies to spans of type `mongodb`, more specifically: to the `mongodb.query` span metadata.
-
-```
-apm_config:
-  enabled: true
-  
-  ## (...)
-  
   obfuscation:
     mongodb:
       enabled: true
@@ -58,21 +36,94 @@ apm_config:
         - cat_id
 ```
 
-For web services, there is a specific set of boolean parameters that can be applied:
+* `keep_values` are a set of keys from which the values are not obfuscated.
 
-* `remove_query_string`: If true, query strings in URLs are obfuscated.
-* `remove_paths_with_digits`: If true, path segments in URLs containing digits are replaced by "?".
+{{% /tab %}}
+{{% tab "ElasticSearch" %}}
 
-For instance, find below an example of HTTP obfuscation rules for `http.url` metadata in spans of type `http`:
+Applies to spans of type `elasticsearch`, more specifically, to the `elasticsearch.body` span metadata:
 
 ```
 apm_config:
   enabled: true
-  
+
   ## (...)
-  
+
+  obfuscation:
+    elasticsearch:
+      enabled: true
+      keep_values:
+        - user_id
+        - category_id
+```
+
+* `keep_values` are a set of keys from which the values are not obfuscated.
+
+{{% /tab %}}
+{{% tab "Redis" %}}
+
+Applies to spans of type `redis`, more specifically, to the `redis.raw_command` span metadata:
+
+```
+apm_config:
+  enabled: true
+
+  ## (...)
+
+  obfuscation:
+    redis:
+      enabled: true
+```
+
+{{% /tab %}}
+{{% tab "MemCached" %}}
+
+Applies to spans of type `memcached`, more specifically, to the `memcached.command` span metadata:
+
+```
+apm_config:
+  enabled: true
+
+  ## (...)
+
+  obfuscation:
+    memcached:
+      enabled: true
+```
+
+{{% /tab %}}
+{{% tab "Http" %}}
+
+HTTP obfuscation rules for `http.url` metadata in spans of type `http`:
+
+```
+apm_config:
+  enabled: true
+
+  ## (...)
+
   obfuscation:
     http:
       remove_query_string: true
       remove_paths_with_digits: true
 ```
+
+* `remove_query_string`: If true, query strings in URLs are obfuscated.
+* `remove_paths_with_digits`: If true, path segments in URLs containing digits are replaced by "?".
+
+{{% /tab %}}
+{{% tab "Stack Traces" %}}
+
+Set the `remove_stack_traces` parameter to true, to remove stack traces and replace them with `?`.
+```
+apm_config:
+  enabled: true
+
+  ## (...)
+
+  obfuscation:
+    remove_stack_traces: true
+```
+
+{{% /tab %}}
+{{< /tabs >}}
