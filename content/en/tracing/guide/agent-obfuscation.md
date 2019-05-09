@@ -8,12 +8,17 @@ disable_toc: true
 Agent trace obfuscation is disabled by default. Enable it in your `datadog.yaml` configuration file to obfuscate all information attached to your traces, the general format is:
 
 ```
-obfuscation:
-  <SERVICE_NAME>:
-    enabled: true
-    keep_values:
-      - <VALUE_1>
-      - <VALUE_2>
+apm_config:
+  enabled: true
+  
+  ## (...)
+  
+  obfuscation:
+    <SERVICE_NAME>:
+      enabled: true
+      keep_values:
+        - <VALUE_1>
+        - <VALUE_2>
 ```
 
 * `enabled` should be set to true to have obfuscation enabled for the specified `<SERVICE_NAME>`.
@@ -24,23 +29,33 @@ Find below some examples:
 **ElasticSearch obfuscation rules**. Applies to spans of type `elasticsearch`, more specifically, to the `elasticsearch.body` span metadata:
 
 ```
-obfuscation:
-  elasticsearch:
-    enabled: true
-    keep_values:
-      - user_id
-      - category_id
+apm_config:
+  enabled: true
+  
+  ## (...)
+  
+  obfuscation:
+    elasticsearch:
+      enabled: true
+      keep_values:
+        - user_id
+        - category_id
 ```
 
 **MongoDB obfuscation rules**. Applies to spans of type `mongodb`, more specifically: to the `mongodb.query` span metadata.
 
 ```
-obfuscation:
-  mongodb:
-    enabled: true
-    keep_values:
-      - uid
-      - cat_id
+apm_config:
+  enabled: true
+  
+  ## (...)
+  
+  obfuscation:
+    mongodb:
+      enabled: true
+      keep_values:
+        - uid
+        - cat_id
 ```
 
 For web services, there is a specific set of boolean parameters that can be applied:
@@ -51,8 +66,13 @@ For web services, there is a specific set of boolean parameters that can be appl
 For instance, find below an example of HTTP obfuscation rules for `http.url` metadata in spans of type `http`:
 
 ```
-obfuscation:
-  http:
-    remove_query_string: true
-    remove_paths_with_digits: true
+apm_config:
+  enabled: true
+  
+  ## (...)
+  
+  obfuscation:
+    http:
+      remove_query_string: true
+      remove_paths_with_digits: true
 ```
