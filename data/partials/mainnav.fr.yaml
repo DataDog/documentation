@@ -367,8 +367,8 @@ main:
     url: synthetics/
     pre: nav_synthetics
     children:
-      - name: API Tests
-        url: synthetics/api_test
+      - name: "API Tests"
+        url: "synthetics/api_tests"
       - name: Browser Tests
         url: synthetics/browser_test
       - name: Intégration APM

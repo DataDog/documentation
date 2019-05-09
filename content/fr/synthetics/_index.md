@@ -9,7 +9,7 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
     tag: Blog
     text: "Présentation de Datadog\_Synthetics"
-  - link: synthetics/api_test
+  - link: synthetics/api_tests
     tag: Documentation
     text: Configurer un test API
   - link: synthetics/browser_test
@@ -69,5 +69,5 @@ Les métriques suivantes sont générées par des checks.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
-[2]: /fr/synthetics/api_test
+[2]: /fr/synthetics/api_tests
 [3]: /fr/synthetics/browser_test

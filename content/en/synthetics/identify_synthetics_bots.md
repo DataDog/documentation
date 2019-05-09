@@ -13,7 +13,7 @@ further_reading:
 - link: "synthetics/browser_test"
   tag: "Documentation"
   text: "Configure a Browser Test"
-- link: "synthetics/api_test"
+- link: "synthetics/api_tests"
   tag: "Documentation"
   text: "Configure an API Test"
 
