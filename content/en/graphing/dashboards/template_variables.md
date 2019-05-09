@@ -53,8 +53,8 @@ After the graph is saved, the value of this template variable is the one selecte
 
 #### Template variables with Logs and APM queries
 
-Template variables work on Log and APM query based widgets, as Metrics, Logs, and APM share the same tags.
-Additionally, it is possible to define specific Log/APM template variable based on your [Log][2] or APM Facets. Those template variables start with `@`.
+Template variables work on log and APM query based widgets—since metrics, logs, and APM share the same tags.
+Additionally, it is possible to define specific log/APM template variables based on your [log][2] or APM facets. These template variables start with `@`.
 
 {{< img src="graphing/dashboards/template_variables/log_template_variables.png" alt="log template variables" responsive="true" style="width:85%;">}}
 
@@ -62,12 +62,12 @@ Additionally, it is possible to define specific Log/APM template variable based 
 
 #### Note widget
 
-Even if the Note widget doesn't contain any graph, you can display:
+Even if the note widget doesn't contain any graphs, you can display:
 
 * The selected template variable with the `$<TEMPLATE_VARIABLE_KEY>` syntax.
 * The selected template variable value in it with the `$<TEMPLATE_VARIABLE_KEY>.value` syntax.
 
-For instance, with the following Note widget configuration:
+For instance, with the following note widget configuration:
 
 ```
 $env
@@ -75,7 +75,7 @@ $env
 $env.value
 ```
 
-Selecting the `dev` value for the `$env` template variable would output the following result:
+Selecting the `dev` value for the `$env` template variable outputs the following result:
 
 {{< img src="graphing/dashboards/template_variables/template_variable_note_widget.png" alt="Note widget template variables" responsive="true" style="width:30%;">}}
 
