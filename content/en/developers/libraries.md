@@ -23,7 +23,7 @@ The following table lists Datadog-official and community contributed [Trace][2] 
 
 ### Dashboards Backup
 
-Using Datadog [APIs][3] it's possible to write a script to backup your Dashboard definitions as code. See the following projects as examples of how these backups can be accomplished:
+Using Datadog [APIs][3], it's possible to write a script to backup your Dashboard definitions as code. See the following projects as examples of how these backups can be accomplished:
 
 | Language   | Library          | Author          |
 | ---        | ---              | ---             |
@@ -34,7 +34,7 @@ Using Datadog [APIs][3] it's possible to write a script to backup your Dashboard
 
 ### Managing Monitors
 
-There are multiple community projects available to maintain, manage, or backup monitors by using the Datadog [API][3]:
+There are multiple community projects available to maintain, manage, or backup monitors using the Datadog [API][3]:
 
 | Language  | Library          | Author               |
 | ---       | ---              | ---                  |
