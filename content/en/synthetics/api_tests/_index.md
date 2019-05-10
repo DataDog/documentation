@@ -61,7 +61,7 @@ Define the HTTP request you want to be executed by Datadog:
 4. Optionally, add tags to filter your HTTP test in the [Synthetics page][1].
 5. Pick the locations to run the test from. Many AWS locations from around the world are available, the full list can be retrieved [through Datadog API][2].
 6. Choose a check frequency between "1 run per minute" and "1 run per week".
-7. Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
+7. Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
 
 [1]: /synthetics
 [2]: /api/?lang=bash#get-available-locations
