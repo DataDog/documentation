@@ -48,8 +48,8 @@ Find below the list of out of the box metrics send by a Datadog Agent when [APM 
 | `datadog.trace_agent.stats_writer.errors`             | Count | Errors that could not be retried.                                                                                               |
 | `datadog.trace_agent.service_writer.services`         | Count | Number of services flushed                                                                                                      |
 | `datadog.trace_agent.events.max_eps.max_rate`         | Gauge | Same as the Agent config's `max_events_per_second` parameter.                                                                   |
-| `datadog.trace_agent.events.max_eps.reached_max`      | Gauge | Increment by one every time `max_events_per_second` was reached.                                                                |
-| `datadog.trace_agent.events.max_eps.current_rate`     | Gauge |                                                                                                                                 |
-| `datadog.trace_agent.events.max_eps.sample_rate`      | Gauge |                                                                                                                                 |
+| `datadog.trace_agent.events.max_eps.reached_max`      | Gauge | Is set to `1` every time `max_events_per_second` is reached, otherwise it's `0`.                                                |
+| `datadog.trace_agent.events.max_eps.current_rate`     | Gauge | Count of APM Events per second received by the Agent                                                                            |
+| `datadog.trace_agent.events.max_eps.sample_rate`      | Gauge | Sample rate applied by the Agent to Events it received                                                                          |
 
 [1]: /tracing/setup
