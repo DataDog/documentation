@@ -25,24 +25,24 @@ The following table lists Datadog-official and community contributed [Trace][2] 
 
 Using Datadog [APIs][3] it's possible to write a script to backup your Dashboard definitions as code. See the following projects as examples of how these backups can be accomplished:
 
-| Language   | Library                                                  | Author          |
-| ---        | ---                                                      | ---             |
+| Language   | Library          | Author          |
+| ---        | ---              | ---             |
 | JavaScript | [dog-watcher][4] | [Brightcove][5] |
-| Ruby       | [doggy][6]                | [Shopify][7]    |
-| Ruby       | [kennel][8]              | [Zendesk][9]    |
+| Ruby       | [doggy][6]       | [Shopify][7]    |
+| Ruby       | [kennel][8]      | [Zendesk][9]    |
 
 
 ### Managing Monitors
 
 There are multiple community projects available to maintain, manage, or backup monitors by using the Datadog [API][3]:
 
-| Language  | Library                                                                     | Author                                              |
-| ---       | ---                                                                         | ---                                                 |
-| Python    | [DogPush][10]                            | [TrueAccord][11]         |
-| Ruby      | [barkdog][12]                        | [codenize-tools][13] |
-| Ruby      | [interferon][14]                          | [Airnb][15]                  |
-| Ruby      | [dogwatch][16]                              | [Rapid7][17]                 |
-| Terraform | [Terraform][18] | [Terraform][19]              |
+| Language  | Library          | Author               |
+| ---       | ---              | ---                  |
+| Python    | [DogPush][10]    | [TrueAccord][11]     |
+| Ruby      | [barkdog][12]    | [codenize-tools][13] |
+| Ruby      | [interferon][14] | [Airnb][15]          |
+| Ruby      | [dogwatch][16]   | [Rapid7][17]         |
+| Terraform | [Terraform][18]  | [Terraform][19]      |
 
 ## Community Integrations
 
