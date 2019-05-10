@@ -13,7 +13,7 @@ further_reading:
   text: "Discover all available Widgets for your Dashboard"
 ---
 
-## Change Screenboard name 
+## Change Screenboard name
 
 1. Click on Edit Board at the top of the Screenboard
     {{< img src="graphing/dashboards/screenboard/screenboard_name.png" alt="Screenboard name" responsive="true" style="width:75%;">}}
@@ -28,7 +28,7 @@ further_reading:
 
 **Click "Yes" on the confirmation window to make the Screenboard read-only**
 
-Only [account Administrators][1] and the Screenboard creator can activate read-only mode for a Screenboard.  
+Only [account Administrators][1] and the Screenboard creator can activate read-only mode for a Screenboard.
 Any user in the organization, regardless of administrator privileges, can sign up to receive change notifications for a particular Screenboard.
 
 If a user decides to track changes for a Screenboard, the following Screenboard changes are reported to the user through an event in the [event stream][2]:
@@ -42,12 +42,12 @@ If a user decides to track changes for a Screenboard, the following Screenboard 
 
 4. Screenboard deletion
 
-In order to prevent the above listed changes, an administrator (account admins + Screenboard creator) can activate read-only view disabling all non-administrators user edits to any tiles or text in the Screenboard, as well as Screenboard deletion.  
+In order to prevent the above listed changes, an administrator (account admins + Screenboard creator) can activate read-only view disabling all non-administrators user edits to any tiles or text in the Screenboard, as well as Screenboard deletion.
 Even in read-only mode, non-administrator users can still clone the Screenboard, rearrange the tiles, snapshot each tile, and view the tile in full-screen. Any tile rearrangement by a non-administrator user do not persist if the Screenboard is set to read-only.
 
 ## Global Time Selector
 
-Screenboards feature a global time option, which sets the same timeframe for all time-based widgets on the same screenboard. The global time selector can be set to a moving window in the past ("The Past Hour," "The Past 3 Months," etc.) or to a fixed period between two dates. If a moving window is chosen, all widgets update their timeframes every few milliseconds to move along with that window. 
+Screenboards feature a global time option, which sets the same timeframe for all time-based widgets on the same screenboard. The global time selector can be set to a moving window in the past ("The Past Hour," "The Past 3 Months," etc.) or to a fixed period between two dates. If a moving window is chosen, all widgets update their timeframes every few milliseconds to move along with that window.
 
 {{< img src="graphing/dashboards/screenboard/global_time_screenboard.png" alt="Global Time Selector" responsive="true" style="width:50%;">}}
 
@@ -82,23 +82,9 @@ This feature can be enabled by following these simple steps:
 2. Select **Notifications** option and enable the notifications:
     {{< img src="graphing/dashboards/faq/notifications_pop_up.png" alt=" notifications pop up" responsive="true" style="width:40%;">}}
 
-## Backup my Screenboard
-
-Using Datadog [APIs][3] it's possible to write a script to backup your Screenboard definitions as code. See the following projects as examples of how these backups can be accomplished:
-
-* https://github.com/brightcove/dog-watcher
-* https://github.com/Shopify/doggy
-* https://github.com/grosser/kennel
-
-Special thanks to [Brightcove][4], [Shopify][5], and [Zendesk][6] for sharing these projects!
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/team/#datadog-user-roles
 [2]: /graphing/event_stream
-[3]: /api
-[4]: https://www.brightcove.com
-[5]: https://www.shopify.com
-[6]: https://www.zendesk.com

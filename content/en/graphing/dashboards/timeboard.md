@@ -68,7 +68,7 @@ If a user decides to track changes for a Timeboard, the following Timeboard chan
 3. Timeboard cloning
 4. Timeboard deletion
 
-In order to prevent the above listed changes, an administrator (account administrators or Timeboard creator) can activate read-only view disabling all non-administrator user edits to any tiles or text in the Timeboard, as well as Timeboard deletion.  
+In order to prevent the above listed changes, an administrator (account administrators or Timeboard creator) can activate read-only view disabling all non-administrator user edits to any tiles or text in the Timeboard, as well as Timeboard deletion.
 
 Even in read-only mode, non-administrator users can still clone the Timeboard, rearrange the tiles, snapshot each tile, and view the tile in full screen. Any tile rearrangement by a non-administrator user does not persist if the Timeboard is set to read-only.
 
@@ -92,23 +92,9 @@ This feature can be enabled by following these steps:
 2. Select **Notifications** option and enable the notifications:
     {{< img src="graphing/dashboards/faq/notifications_pop_up.png" alt=" notifications pop up" responsive="true" style="width:30%;">}}
 
-## Backup my Timeboard
-
-Using Datadog [APIs][3], it's possible to write a script to backup your Timeboard definitions as code. See the following projects as examples of how these backups can be accomplished:
-
-* https://github.com/brightcove/dog-watcher
-* https://github.com/Shopify/doggy
-* https://github.com/grosser/kennel
-
-Special thanks to [Brightcove][4], [Shopify][5], and [Zendesk][6] for sharing these projects!
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing/event_stream
 [2]: /account_management/team/#datadog-user-roles
-[3]: /api
-[4]: https://www.brightcove.com
-[5]: https://www.shopify.com
-[6]: https://www.zendesk.com
