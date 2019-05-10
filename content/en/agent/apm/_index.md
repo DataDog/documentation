@@ -19,7 +19,7 @@ further_reading:
   text: "ECS Fargate APM setup"
 ---
 
-This documentation covers Agent v6 only, to know how to set up APM tracing with Agent v5, [refer to the dedicated APM with Agent v5 doc][1].
+Datadog Application Performance Monitoring (APM) provides you with deep insight into your application’s performance - from automatically generated dashboards monitoring key metrics, such as request volume and latency, to detailed traces of individual requests - side by side with your logs and infrastructure monitoring. This documentation covers Agent v6 only, for more information on setting up APM tracing with Agent v5, [see the APM with Agent v5 doc][1].
 
 ## Setup process
 
