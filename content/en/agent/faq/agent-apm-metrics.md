@@ -3,11 +3,11 @@ title: APM metrics send by the Datadog Agent
 kind: faq
 ---
 
-Find below the list of out of the box metrics send by a Datadog Agent when [APM is enabled][1]:
+Find below the list of out-of-the-box metrics sent by the Datadog Agent when [APM is enabled][1]:
 
 | Metric Name                                           | Type  | Description                                                                                                                     |
 | ----------------------------------------------------- | ----- | -----                                                                                                                           |
-| `datadog.trace_agent.started`                         | Count | Increment by one every time the agent starts.                                                                                   |
+| `datadog.trace_agent.started`                         | Count | Increment by one every time the Agent starts.                                                                                   |
 | `datadog.trace_agent.panic`                           | Gauge | Increment by one on every code panic.                                                                                           |
 | `datadog.trace_agent.heartbeat`                       | Gauge | Increment by one every 10 seconds.                                                                                              |
 | `datadog.trace_agent.heap_alloc`                      | Gauge | Heap allocations as reported by the Go runtime.                                                                                 |
@@ -46,7 +46,7 @@ Find below the list of out of the box metrics send by a Datadog Agent when [APM 
 | `datadog.trace_agent.stats_writer.retries`            | Count | Number of retries on failures to the Datadog API                                                                                |
 | `datadog.trace_agent.stats_writer.splits`             | Count | Number of times a payload was split into multiple ones.                                                                         |
 | `datadog.trace_agent.stats_writer.errors`             | Count | Errors that could not be retried.                                                                                               |
-| `datadog.trace_agent.service_writer.services`         | Count | Number of services flushed                                                                                                      |
+| `datadog.trace_agent.service_writer.services`         | Count | Number of services flushed.                                                                                                      |
 | `datadog.trace_agent.events.max_eps.max_rate`         | Gauge | Same as the Agent config's `max_events_per_second` parameter.                                                                   |
 | `datadog.trace_agent.events.max_eps.reached_max`      | Gauge | Is set to `1` every time `max_events_per_second` is reached, otherwise it's `0`.                                                |
 | `datadog.trace_agent.events.max_eps.current_rate`     | Gauge | Count of APM Events per second received by the Agent                                                                            |
