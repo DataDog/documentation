@@ -44,7 +44,7 @@ List endpoint returns logs that match a log search query. Results are paginated.
 Retrieve a log list longer than the 1000 logs limit with the Log List API Pagination feature:
 
 * for the first request, use no `startAt` parameter.
-* for the N-th request, use `nextLogID` of N-1th request result as the `startAt` parameter value.
+* for the N-th request, use `nextLogId` of N-1th request result as the `startAt` parameter value.
 
 For better control over pagination results, you should use an absolute `time` parameter - don't use the`now` keyword.
 
