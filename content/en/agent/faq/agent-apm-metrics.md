@@ -6,7 +6,7 @@ kind: faq
 Find below the list of out of the box metrics send by a Datadog Agent when [APM is enabled][1]:
 
 | Metric Name                                           | Type  | Description                                                                                                                     |
-| ----- ----------------------------------------------- | ----- | -----                                                                                                                           |
+| ----------------------------------------------------- | ----- | -----                                                                                                                           |
 | `datadog.trace_agent.started`                         | Count | Increment by one every time the agent starts.                                                                                   |
 | `datadog.trace_agent.panic`                           | Gauge | Increment by one on every code panic.                                                                                           |
 | `datadog.trace_agent.heartbeat`                       | Gauge | Increment by one every 10 seconds.                                                                                              |
