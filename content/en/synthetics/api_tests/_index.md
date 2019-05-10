@@ -76,7 +76,7 @@ Define the SSL request you want to be executed by Datadog:
 1. Specify the `Host` and the SSL `Port`. By default, the port is set to _443_.
 2. Name your SSL test.
 3. Optionally, add tags to filter your SSL test in the [Synthetics page][1].
-4. Pick the locations to run the test from. Many AWS locations from around the world are available, the full list can be retrieved [through Datadog API][2].
+4. Pick the locations to run the test from. Many AWS locations from around the world are available; the full list can be retrieved [through the Datadog API][2].
 5. Choose a check frequency between "1 run per minute" and "1 run per week".
 6. Click on **Test Connection** to try out the request configuration. You will see a response preview show up on the right side of your screen.
 
