@@ -98,7 +98,7 @@ The uptime bar is displayed differently on your test result: location uptime is 
 #### Assertions
 
 When running an API test, you must define at least one assertion that should be monitored by Datadog.
-An assertion is defined by a parameter, an optional property, a comparator and a target value.
+An assertion is defined by a parameter, an optional property, a comparator, and a target value.
 
 {{< tabs >}}
 
