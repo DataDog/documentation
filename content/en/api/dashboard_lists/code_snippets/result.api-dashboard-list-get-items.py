@@ -2,6 +2,7 @@
     'total': 5,
     'dashboards': [
         {
+            'popularity': 0,
             'is_shared': False,
             'author': {
                 'handle': None,
@@ -14,10 +15,11 @@
             'is_favorite': True,
             'is_read_only': True,
             'type': 'integration_screenboard',
-            'id': 66,
+            'id': 'rys-xwq-geh',
             'icon': '/static/v/34.254868/images/saas_logos/small/amazon_dynamodb.png'
         },
         {
+            'popularity': 0,
             'is_shared': False,
             'author': {
                 'handle': None,
@@ -30,10 +32,11 @@
             'is_favorite': True,
             'is_read_only': True,
             'type': 'integration_timeboard',
-            'id': 17,
+            'id': 'qts-q2k-yq6',
             'icon': '/static/v/34.254868/images/saas_logos/small/postgres.png'
         },
         {
+            'popularity': 0,
             'is_shared': False,
             'author': {
                 'handle': 'test1@datadoghq.com',
@@ -46,10 +49,11 @@
             'is_favorite': False,
             'is_read_only': False,
             'type': 'custom_timeboard',
-            'id': 757575,
+            'id': 'jk9-p5y-ii6',
             'icon': None
         },
         {
+            'popularity': 0,
             'is_shared': False,
             'author': {
                 'handle': 'test2@datadoghq.com',
@@ -62,10 +66,11 @@
             'is_favorite': False,
             'is_read_only': False,
             'type': 'custom_screenboard',
-            'id': 7373,
+            'id': 'nf5-aju-tmr',
             'icon': None
         },
         {
+            'popularity': 0,
             'is_shared': False,
             'author': {
                 'handle': None,
@@ -78,7 +83,7 @@
             'is_favorite': False,
             'is_read_only': True,
             'type': 'host_timeboard',
-            'id': 123456789,
+            'id': 'jsb-8sp-iz5',
             'icon': None
         }
     ]

@@ -13,4 +13,6 @@ disable_toc: true
 {{< whatsnext desc="Deprecated APIs:" >}}
     {{< nextlink href="graphing/guide/screenboard-api-doc" >}}Screenboard API{{< /nextlink >}}
     {{< nextlink href="graphing/guide/timeboard-api-doc" >}}Timeboard API{{< /nextlink >}}
+    {{< nextlink href="graphing/guide/dashboard-lists-api-doc" >}}Dashboard Lists API (v1){{< /nextlink >}}
+
 {{< /whatsnext >}}

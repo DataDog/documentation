@@ -4,9 +4,10 @@
         "total" => 5,
         "dashboards" => [
             {
+                "popularity" => 0,
                 "title" => "AWS DynamoDB",
                 "is_favorite" => true,
-                "id" => 66,
+                "id" => "rys-xwq-geh",
                 "icon" => "/static/v/34.254868/images/saas_logos/small/amazon_dynamodb.png",
                 "is_shared" => false,
                 "author" => {
@@ -20,9 +21,10 @@
                 "type" => "integration_screenboard"
             },
             {
+                "popularity" => 0,
                 "title" => "Postgres - Metrics",
                 "is_favorite" => true,
-                "id" => 17,
+                "id" => "qts-q2k-yq6",
                 "icon" => "/static/v/34.254868/images/saas_logos/small/postgres.png",
                 "is_shared" => false,
                 "author" => {
@@ -36,9 +38,10 @@
                 "type" => "integration_timeboard"
             },
             {
+                "popularity" => 0,
                 "title" => "Trace API",
                 "is_favorite" => false,
-                "id" => 757575,
+                "id" => "jk9-p5y-ii6",
                 "icon" => nil,
                 "is_shared" => false,
                 "author" => {
@@ -52,9 +55,10 @@
                 "type" => "custom_timeboard"
             },
             {
+                "popularity" => 0,
                 "title" => "Agent Stats",
                 "is_favorite" => false,
-                "id" => 7373,
+                "id" => "nf5-aju-tmr",
                 "icon" => nil,
                 "is_shared" => false,
                 "author" => {
@@ -68,9 +72,10 @@
                 "type" => "custom_screenboard"
             },
             {
+                "popularity" => 0,
                 "title" => "agent-gui",
                 "is_favorite" => false,
-                "id" => 123456789,
+                "id" => "jsb-8sp-iz5",
                 "icon" => nil,
                 "is_shared" => false,
                 "author" => {
