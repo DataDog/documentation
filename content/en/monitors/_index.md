@@ -77,16 +77,6 @@ Manually *Resolve*-ing a monitor is appropriate for cases where data is reported
 
 Typical use case: monitor based on error metrics that are not generated when there are no errors (e.g. `aws.elb.httpcode_elb_5xx`, or any DogStatsD counter in your code reporting an error _only when there is an error_)
 
-## Managing Monitors
-
-There are multiple community projects available to maintain, manage, or backup monitors by using the Datadog API:
-
-* https://github.com/trueaccord/DogPush
-* https://github.com/winebarrel/barkdog
-* https://github.com/airbnb/interferon
-* https://github.com/rapid7/dogwatch
-* https://www.terraform.io/docs/providers/datadog/r/monitor.html
-
 [1]: /graphing/event_stream
 [2]: https://app.datadoghq.com/monitors/triggered
 [3]: https://app.datadoghq.com/monitors
