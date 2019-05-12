@@ -96,80 +96,46 @@ Delete Pipeline | `DELETE` | `/api/v1/logs/config/pipelines/{id}` | \<none> | \<
 }
 ```
 
-### Processors
-
-#### attribute-remapper
-
-
-|   Parameters 	    | Values  	                                                                                  | 
-|---	              |---                                                                                         	|
-| sources      	    | list of source, can be a list of attributes or tags, the first existing one is used         |
-| sourceType        | (Optional) defaulted to `attribute`, defines if the sources are from log attributes or tags |
-| target          	| Final attribute or tag name for the first source element that exist                       	| 
-| targetType        | (Optional) defaulted to `attribute`, define if the target is a log attribute or a tag       |
-| preserveSource    | `true` or `false`, remove or preserve the remapped source element                           |
-| overrideOnConflict| `true` or `false`, override or not the target element if already set                        |
+`processors`
 
 ```
 type: attribute-remapper
 name: ''
 enabled: true
-sourceType: attribute
-sources:
+sourceType: attribute // (Optional) defaulted to `attribute`, defines if the sources are from log attributes or tags
+sources: // list of source, can be a list of attributes or tags, the first existing one is used  
   - dyno
-target: 'dyno'
-targetType: 'tag'
-preserveSource: false
-overrideOnConflict: false
+target: 'dyno' // Final attribute or tag name for the first source element that exist  
+targetType: 'tag' // (Optional) defaulted to `attribute`, define if the target is a log attribute or a tag  
+preserveSource: false // `true` or `false`, remove or preserve the remapped source element 
+overrideOnConflict: false // `true` or `false`, override or not the target element if already set
 ```
 
-#### url-parser
-
-|   Parameters 	    | Values  	                                                                                  | 
-|---	              |---                                                                                         	|
-| sources      	    | list of sources attribute, the first existing one is used                                   |
-| target          	| Name of the parent attribute that will contain all the extracted details from the source   	| 
 
 ```
 type: url-parser
 name: ''
 enabled: true
-sources:
+sources: // list of sources attribute, the first existing one is used    
   - http.url
-target: http.url_details
+target: http.url_details //  Name of the parent attribute that will contain all the extracted details from the source 
 ```
-
-#### user-agent-parser
-
-|   Parameters 	    | Values  	                                                                                  | 
-|---	              |---                                                                                         	|
-| sources      	    | list of sources attribute, the first existing one is used                                   |
-| target          	| Name of the parent attribute that will contain all the extracted details from the source   	| 
-| encoded          	| `true` or `false`, define if the source attribute is url encoded or not                     | 
-
 
 ```
 type: user-agent-parser
 name: ''
 enabled: true
-sources:
+sources: // list of sources attribute, the first existing one is used
   - http.useragent
-target: http.useragent_details
-encoded: false
+target: http.useragent_details // Name of the parent attribute that will contain all the extracted details from the source  
+encoded: false // `true` or `false`, define if the source attribute is url encoded or not
 ```
-
-#### category-processor
-
-|   Parameters 	    | Values  	                                                                                  | 
-|---	              |---                                                                                         	|
-| categories        | list of filter and corresponding name                                                       |
-| target          	| Name of the target attribute which value is defined by the matching category               	|  
 
 ```
 type: category-processor
 name: ''
 enabled: true
-categories:
+categories: // list of filter and corresponding name    
   - filter:
       query: '@http.status_code:[200 TO 299]'
     name: OK
@@ -182,22 +148,15 @@ categories:
   - filter:
       query: '@http.status_code:[500 TO 599]'
     name: error
-target: http.status_category
+target: http.status_category // Name of the target attribute which value is defined by the matching category
 ```
-
-#### grok-parser
-
-|   Parameters 	    | Values  	                                                       | 
-|---	              |---                                                               |
-| source            | name of the log attribute that is parsed (defaulted to `message`)|
-| grok            	| list of SupportRules (optional) and Match rules                  | 
 
 ```
 type: grok-parser
 name: ''
 enabled: true
-source: message
-grok:
+source: message // name of the log attribute that is parsed (defaulted to `message`)
+grok: list of SupportRules (optional) and Match rules  
   supportRules: |
     _date %{date("yyyy-MM-dd HH:mm:ss"):timestamp}
     _date_ms %{date("yyyy-MM-dd HH:mm:ss,SSS"):timestamp}
