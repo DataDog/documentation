@@ -175,91 +175,57 @@ grok: list of SupportRules (optional) and Match rules
     
 ```
 
-#### arithmetic-processor
-
-|   Parameters 	    | Values  	                                                                 | 
-|---	              |---                                                                         |
-| expression        | Arithmetic operation between log attributes                                |
-| target            | Name of the attribute that contains the result of the arithmetic operation |
-| replaceMissing    | `true` replaces all missing element of the expression by 0, `false` skip the operation if an attribute is missing  |
-
 
 ```
 type: arithmetic-processor
 name: ''
 enabled: true
-expression: (attribute1 - attribute2)
-target: "newattribute"
-replaceMissing: false
+expression: (attribute1 - attribute2) // Arithmetic operation between log attributes  
+target: "newattribute" // Name of the attribute that contains the result of the arithmetic operation
+replaceMissing: false // `true` replaces all missing element of the expression by 0, `false` skip the operation if an attribute is missing 
 ```
 
-#### date-remapper
-
-|   Parameters 	    | Values  	                                                       | 
-|---	              |---                                                               |
-| sources           | list of source attributes, the first existing one is used        |
 
 ```
 type: date-remapper
 name: Define timestamp as the official timestamp of the log
 enabled: true
-sources:
+sources: // list of source attributes, the first existing one is used   
   - timestamp
 ```
-
-#### status-remapper
-
-|   Parameters 	    | Values  	                                                       | 
-|---	              |---                                                               |
-| sources           | list of source attributes, the first existing one is used        |
 
 ```
 type: status-remapper
 name: Define level as the official status of the log
 enabled: true
-sources:
+sources: // list of source attributes, the first existing one is used   
   - level
 ```
 
-#### message-remapper
-
-|   Parameters 	    | Values  	                                                       | 
-|---	              |---                                                               |
-| sources           | list of source attributes, the first existing one is used        |
 
 ```
 type: message-remapper
 name: Define msg as the official message of the log
 enabled: true
-sources:
+sources: // list of source attributes, the first existing one is used   
   - msg
 ```
 
-#### trace-id-remapper
-
-|   Parameters 	    | Values  	                                                       | 
-|---	              |---                                                               |
-| sources           | list of source attributes, the first existing one is used        |
 
 ```
 type: trace-id-remapper
 name: Define dd.trace_id as the official trace id associate to this log
 enabled: true
-sources:
+sources: // list of source attributes, the first existing one is used   
   - dd.trace_id
 ```
 
-#### service-remapper
-
-|   Parameters 	    | Values  	                                                       | 
-|---	              |---                                                               |
-| sources           | list of source attributes, the first existing one is used        |
 
 ```
 type: service-remapper
 name: Define appname as the official log service
 enabled: true
-sources:
+sources: // list of source attributes, the first existing one is used   
   - appname
 ```
 
