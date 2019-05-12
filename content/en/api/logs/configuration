@@ -96,12 +96,11 @@ Delete Pipeline | `DELETE` | `/api/v1/logs/config/pipelines/{id}` | \<none> | \<
 }
 ```
 
-`processors`
+`processors:`
 
-```
+```javascript
+{
 type: attribute-remapper
-name: ''
-enabled: true
 sourceType: attribute // (Optional) defaulted to `attribute`, defines if the sources are from log attributes or tags
 sources: // list of source, can be a list of attributes or tags, the first existing one is used  
   - dyno
@@ -109,19 +108,23 @@ target: 'dyno' // Final attribute or tag name for the first source element that 
 targetType: 'tag' // (Optional) defaulted to `attribute`, define if the target is a log attribute or a tag  
 preserveSource: false // `true` or `false`, remove or preserve the remapped source element 
 overrideOnConflict: false // `true` or `false`, override or not the target element if already set
+}
 ```
 
 
-```
+```javascript
+{
 type: url-parser
 name: ''
 enabled: true
 sources: // list of sources attribute, the first existing one is used    
   - http.url
 target: http.url_details //  Name of the parent attribute that will contain all the extracted details from the source 
+}
 ```
 
-```
+```javascript
+{
 type: user-agent-parser
 name: ''
 enabled: true
@@ -129,9 +132,11 @@ sources: // list of sources attribute, the first existing one is used
   - http.useragent
 target: http.useragent_details // Name of the parent attribute that will contain all the extracted details from the source  
 encoded: false // `true` or `false`, define if the source attribute is url encoded or not
+}
 ```
 
-```
+```javascript
+{
 type: category-processor
 name: ''
 enabled: true
@@ -149,9 +154,11 @@ categories: // list of filter and corresponding name
       query: '@http.status_code:[500 TO 599]'
     name: error
 target: http.status_category // Name of the target attribute which value is defined by the matching category
+}
 ```
 
-```
+```javascript
+{
 type: grok-parser
 name: ''
 enabled: true
@@ -172,61 +179,73 @@ grok: list of SupportRules (optional) and Match rules
     
     #this is a comment
     java_log4j %{_date} %{_status}\s+%{_logger_name}:%{_line}\s+- (?>%{word:dd.trace_id} %{word:dd.span_id} - )?%{data:message}((\n|\t)%{data:error.stack})?
-    
+}    
 ```
 
 
-```
+```javascript
+{
 type: arithmetic-processor
 name: ''
 enabled: true
 expression: (attribute1 - attribute2) // Arithmetic operation between log attributes  
 target: "newattribute" // Name of the attribute that contains the result of the arithmetic operation
 replaceMissing: false // `true` replaces all missing element of the expression by 0, `false` skip the operation if an attribute is missing 
+}
 ```
 
 
-```
+```javascript
+{
 type: date-remapper
 name: Define timestamp as the official timestamp of the log
 enabled: true
 sources: // list of source attributes, the first existing one is used   
   - timestamp
+}
 ```
 
-```
+```javascript
+{
 type: status-remapper
 name: Define level as the official status of the log
 enabled: true
 sources: // list of source attributes, the first existing one is used   
   - level
+}
 ```
 
 
-```
+```javascript
+{
 type: message-remapper
 name: Define msg as the official message of the log
 enabled: true
 sources: // list of source attributes, the first existing one is used   
   - msg
+}
 ```
 
 
-```
+```javascript
+{
 type: trace-id-remapper
 name: Define dd.trace_id as the official trace id associate to this log
 enabled: true
 sources: // list of source attributes, the first existing one is used   
   - dd.trace_id
+}
 ```
 
 
-```
+```javascript
+{
 type: service-remapper
 name: Define appname as the official log service
 enabled: true
 sources: // list of source attributes, the first existing one is used   
   - appname
+}
 ```
 
 
