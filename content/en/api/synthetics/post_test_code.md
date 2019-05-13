@@ -1,7 +1,7 @@
 ---
 title: Create a test
 type: apicode
-order: 22.1
+order: 27.1
 external_redirect: /api/#create-tests
 ---
 

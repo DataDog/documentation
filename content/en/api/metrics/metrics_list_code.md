@@ -1,7 +1,7 @@
 ---
 title: Get list of active metrics
 type: apicode
-order: 18.1
+order: 23.1
 external_redirect: /api/#get-list-of-active-metrics
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#get-list-of-active-metrics
 {{< code-snippets basename="api-metrics-list" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-metrics-list" >}}
-

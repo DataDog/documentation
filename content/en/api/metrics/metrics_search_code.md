@@ -1,7 +1,7 @@
 ---
 title: Search metrics
 type: apicode
-order: 18.6
+order: 23.6
 external_redirect: /api/#search-metrics
 ---
 
