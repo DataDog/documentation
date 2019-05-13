@@ -33,9 +33,7 @@ Browser tests are scenarios executed by Datadog on your web applications. They r
 Define the configuration of your browser test.
 
 1. **Starting URL**: The URL from which your browser test starts the scenario.
-    * Advanced Options (optional):
-        * Headers
-        * Cookies
+    * Advanced Options (optional): Use custom request headers or cookies. For example, set the User Agent in the header to identify Datadog scripts.
 2. **Name**: The name of your browser test.
 3. **Select your tags**: The tags attached to your browswer test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the Synthetics page.
 4. **Devices**: The devices to run your check on. Available devices are `Laptop Large`, `Tablet`, and `Mobile Small`.
