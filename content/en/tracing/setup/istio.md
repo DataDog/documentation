@@ -14,29 +14,27 @@ further_reading:
 - link: "https://github.com/DataDog/dd-opentracing-cpp"
   tag: "Source Code"
   text: "Datadog OpenTracing C++ Client"
-aliases:
-  - /tracing/servicemesh/istio
 ---
 
-Support for Datadog APM is available for Istio on Kubernetes clusters.
-This was first available in Istio v1.1.3.
+Datadog APM is available for Istio v1.1.3+ on Kubernetes clusters.
 
 ## Configuration
 
 ### Datadog Agent Installation
 
-The Datadog Agent must be [installed][k8s-install] and [APM enabled][apm-enabled].
-The `hostPort` setting needs to be uncommented for Istio sidecars to connect to the agent and submit traces.
+1. [Install the Agent][1]
+2. [Make sure APM is enabled for your Agent][2].
+3. Set the `apm_non_local_traffic` parameter to `true` and uncomment the `hostPort` setting so that Istio sidecars can connect to the Agent and submit traces.
 
-If Istio's automatic sidecar injection is enabled on the namespace that Datadog Agent runs in, then the Datadog Agent pods will fail to start up.
-This can be corrected in one of two ways:
+**Note**: The Agent pods fails to start up if Istio's automatic sidecar injection is enabled on the namespace that Datadog Agent runs in. To avoid this:
 
-- disable sidecar injection for the Datadog Agent
-- create a headless service for the Datadog Agent
+- [Disabling Sidecar Injection for the Datadog Agent](#disabling-sidecar-injection-for-the-datadog-agent)
+- [Create a Headless Service for the Datadog Agent](#create-a-headless-service-for-the-datadog-agent)
 
 #### Disabling Sidecar Injection for the Datadog Agent
 
-Add the `sidecar.istio.io/inject: "false"` annotation to the `datadog-agent` daemonset.
+Add the `sidecar.istio.io/inject: "false"` annotation to the `datadog-agent` daemonset:
+
 ```yaml
 ...
 spec:
@@ -50,7 +48,8 @@ spec:
 ```
 
 This can also be done with the `kubectl patch` command.
-```
+
+```shell
 kubectl patch daemonset datadog-agent -p '{"spec":{"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"false"}}}}}'
 ```
 
@@ -82,14 +81,14 @@ spec:
 
 ### Istio Configuration and Installation
 
-To enable Datadog APM, a [custom installation][istio-custom] is required, to add two extra options before Istio is installed.
-These options are passed at the final `helm template` or `helm install` step:
+To enable Datadog APM, a [custom Istio installation][3] is required to add two extra options before Istio is installed. These options are passed at the final `helm template` or `helm install` step:
 
 - `--set pilot.traceSampling=100.0`
 - `--set global.proxy.tracer=datadog`
 
-Eg: an installation using the `default` configuration profile will use the following command:
-```
+Eg: an installation using the `default` configuration profile would use the following command:
+
+```shell
 helm template install/kubernetes/helm/istio --name istio --namespace istio-system --set pilot.traceSampling=100.0 --set global.proxy.tracer=datadog | kubectl apply -f -
 ```
 
@@ -97,6 +96,6 @@ helm template install/kubernetes/helm/istio --name istio --namespace istio-syste
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[k8s-install]: /agent/kubernetes/daemonset_setup/
-[apm-enabled]: /agent/kubernetes/daemonset_setup/#apm-and-distributed-tracing
-[istio-custom]: https://istio.io/docs/setup/kubernetes/install/helm/
+[1]: /agent/kubernetes/daemonset_setup
+[2]: /agent/kubernetes/daemonset_setup/#apm-and-distributed-tracing
+[3]: https://istio.io/docs/setup/kubernetes/install/helm
