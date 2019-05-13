@@ -36,7 +36,7 @@ apm_config:
         - cat_id
 ```
 
-* `keep_values` are a set of keys from which the values are not obfuscated.
+* `keep_values` - defines a set of keys to exclude from Agent trace obfuscation.
 
 {{% /tab %}}
 {{% tab "ElasticSearch" %}}
@@ -57,7 +57,7 @@ apm_config:
         - category_id
 ```
 
-* `keep_values` are a set of keys from which the values are not obfuscated.
+* `keep_values` - defines a set of keys to exclude from Agent trace obfuscation.
 
 {{% /tab %}}
 {{% tab "Redis" %}}
@@ -108,7 +108,7 @@ apm_config:
       remove_paths_with_digits: true
 ```
 
-* `remove_query_string`: If true, query strings in URLs are obfuscated.
+* `remove_query_string`: If true, obfuscates query strings in URLs.
 * `remove_paths_with_digits`: If true, path segments in URLs containing digits are replaced by "?".
 
 {{% /tab %}}
