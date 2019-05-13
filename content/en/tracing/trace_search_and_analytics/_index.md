@@ -144,7 +144,6 @@ Use this in addition to the global configuration for any integrations that submi
 
 Integration names can be found on the [integrations table][1].
 
-
 [1]: /tracing/languages/java/#integrations
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -154,21 +153,16 @@ In addition to setting globally, you can enable or disable Trace Search & Analyt
 * Tracer Configuration: `ddtrace.config.<INTEGRATION>.analytics_enabled = True`
 * Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-Use this in addition to the global configuration for any integrations that submit custom services. For example, for Boto spans which comes in as a custom service, you can set the following to enable all Boto Tracing in Trace Search & Analytics:
+Use this in addition to the global configuration for any integrations that submit custom services. For example, for Boto spans which comes in as a custom service, set the following to enable all Boto Tracing in Trace Search & Analytics:
 
 * Tracer Configuration: `ddtrace.config.boto.analytics_enabled = True`
 * Environment Variable: `DD_BOTO_ANALYTICS_ENABLED=true`
 
-Integration names can be found on the [integrations table][1].
+**Note**: Several integrations require non-standard configuration due to the integration-specific implementation of the tracer. Consult the library documentation on [Trace Search & Analytics][1] for details.
 
-Note several integrations require non-standard configuration due to the integration-specific implementation of the tracer. Consult the library documentation on [Trace Search & Analytics][2] for details.
-
-
-[1]: /tracing/languages/python/#integrations
-[2]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace_search_analytics
+[1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace_search_analytics
 {{% /tab %}}
 {{% tab "Ruby" %}}
-
 
 Trace search & analytics can be enabled for specific integrations.
 
