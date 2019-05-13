@@ -12,7 +12,7 @@ Add new services and schedules to your Datadog-PagerDuty integration.
 ##### Arguments
 
 * **`services`** :
-    Array of PagerDuty service objects. [Learn how to configure you Datadog service with PagerDuty documentation][1]. A PagerDuty service object is composed by:
+    The array of PagerDuty service objects. Learn how to configure your Datadog service with the [PagerDuty documentation][1]. A PagerDuty service object is composed by:
 
     * **`service_name`** [*required*]:
         Your Service name in PagerDuty.
@@ -21,7 +21,7 @@ Add new services and schedules to your Datadog-PagerDuty integration.
         Your Service name associated service key in Pagerduty.
 
 * **`schedules`** :
-    Array of your schedule URLs, e.g:
+    The array of your schedule URLs:
      `["https://my-pd.pagerduty.com/schedules#PCPYT4M", "https://my-pd.pagerduty.com/schedules#PKTPB7P"]`
 
 [1]: https://www.pagerduty.com/docs/guides/datadog-integration-guide

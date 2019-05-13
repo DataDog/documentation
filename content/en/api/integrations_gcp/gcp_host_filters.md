@@ -7,7 +7,7 @@ external_redirect: /api/#update-a-gcp-integration-host-filters
 
 ## Update a GCP integration host filters
 
-Updates the defined list of host filters for a given Datadog-GCP integration.
+Update the defined list of host filters for a given Datadog-GCP integration.
 
 ##### ARGUMENTS
 

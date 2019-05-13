@@ -7,7 +7,7 @@ external_redirect: /api/#list-namespace-rules
 
 ## List Namespace rules
 
-List all namespace rules for a given Datadog-AWS integration
+List all namespace rules for a given Datadog-AWS integration.
 
 ##### Arguments
 

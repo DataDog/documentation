@@ -7,7 +7,7 @@ external_redirect: /api/#update-an azure-integration-host-filters
 
 ## Update an Azure integration host filters
 
-Updates the defined list of host filters for a given Datadog-Azure integration.
+Update the defined list of host filters for a given Datadog-Azure integration.
 
 ##### ARGUMENTS
 

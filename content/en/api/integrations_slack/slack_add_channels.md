@@ -12,7 +12,7 @@ Add channels to your Datadog-Slack integration.
 ##### ARGUMENTS
 
 * **`channels`** [*required*]:
-    Array of slack channel objects to post to. A slack channel object is composed by:
+    The array of slack channel objects to post to. A slack channel object is composed by:
 
     * **`channel_name`** [*required*]:
         Your channel name e.g: `#general`, `#private`

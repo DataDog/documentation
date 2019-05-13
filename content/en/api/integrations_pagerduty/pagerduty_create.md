@@ -14,7 +14,7 @@ Create a new Datadog-PagerDuty integration.
 ##### ARGUMENTS
 
 * **`services`** :
-    Array of PagerDuty service objects. [Learn how to configure you Datadog service with PagerDuty documentation][1]. A PagerDuty service object is composed by:
+    The array of PagerDuty service objects. Learn how to configure your Datadog service with the [PagerDuty documentation][1]. A PagerDuty service object is composed by:
 
     * **`service_name`** [*required*]:
         Your Service name in PagerDuty.

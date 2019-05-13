@@ -7,7 +7,7 @@ external_redirect: /api/#delete-an-azure-integration
 
 ## Delete an Azure integration
 
-Delete a given Datadog-Azure integration
+Delete a given Datadog-Azure integration.
 
 ##### Arguments
 

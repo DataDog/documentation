@@ -7,7 +7,7 @@ external_redirect: /api/#list-all-aws-integrations
 
 ## List all AWS integrations
 
-List all Datadog-AWS integrations available in your Datadog Organization
+List all Datadog-AWS integrations available in your Datadog organization.
 
 ##### Arguments
 

@@ -21,7 +21,7 @@ For further references, consult the [Google Cloud service account documentation]
 
 * **`type`** [*required*]:
 
-    Should be `service_account`, it can be found in your JSON service account key.
+    The value for `service_account` found in your JSON service account key.
 
 * **`project_id`** [*required*]:
 

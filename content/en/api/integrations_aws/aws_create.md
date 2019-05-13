@@ -28,14 +28,14 @@ Create a Datadog-Amazon Web Services integration.
 * **`role_name`** [*required*]:
 
     Your Datadog role delegation name.
-    [Consult the Datadog AWS integration to learn more][2] about your AWS account Role name.
+    For more information about you AWS account Role name, [see the Datadog AWS integration configuration info][2].
 
 * **`filter_tags`** [*optional*, *default*=**None**]:
 
-    Array of EC2 tags (in the form `key:value`) defines a filter that Datadog use when collecting metrics from EC2. Wildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used.
+    The array of EC2 tags (in the form `key:value`) defines a filter that Datadog uses when collecting metrics from EC2. Wildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used.
     Only hosts that match one of the defined tags will be imported into Datadog. The rest will be ignored. Host matching a given tag can also be excluded by adding `!` before the tag.
     e.x. `env:production,instance-type:c1.*,!region:us-east-1`
-    [Read more about EC2 tagging in AWS tagging documentation][3].
+    For more information on EC2 tagging, see the [AWS tagging documentation][3].
 
 * **`host_tags`** [*optional*, *default*=**None**]:
 
