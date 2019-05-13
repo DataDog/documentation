@@ -35,12 +35,30 @@ Note: these metrics are unavailable for Azure Kubernetes Service (AKS).
 
 **Available for Agent >6.0**
 
-Two installations are possible:
+There are two ways to collect logs from containers running in Kubernetes:
 
-- On the node where the Agent is external to the Docker environment
-- Deployed with its containerized version in the Docker environment
+- Through the Docker socket.
+- Through the Kubernetes log files.
 
-Take advantage of DaemonSets to [automatically deploy the Datadog Agent on all your nodes][4]. Otherwise follow the [container log collection steps][5] to start collecting logs from all your containers.
+Datadog recommends using the Kubernetes log files approach when you are either not using Docker, or are using more than 10 containers per pod.
+
+Datadog also recommends that you take advantage of DaemonSets to [automatically deploy the Datadog Agent on all your nodes][4]. 
+Otherwise, to manually enable log collection from one specific node, add the following parameters in the `datadog.yaml`:
+
+```
+logs_enabled: true
+listeners:
+  - name: kubelet
+config_providers:
+  - name: kubelet
+    polling: true
+logs_config:
+  container_collect_all: true
+```
+
+[Restart the Agent][7].
+
+Use [Autodiscovery with Pod Annotations][8] to configure log collection to add multiline processing rules, or to customize the `source` and `service` attributes.
 
 ## Further Reading
 To get a better idea of how (or why) to integrate your Kubernetes service, see the related series of [Datadog blog posts][6].
@@ -51,3 +69,5 @@ To get a better idea of how (or why) to integrate your Kubernetes service, see t
 [4]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [5]: https://docs.datadoghq.com/agent/basic_agent_usage/kubernetes/#log-collection-setup
 [6]: https://www.datadoghq.com/blog/monitoring-kubernetes-era
+[7]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[8]: https://docs.datadoghq.com/agent/autodiscovery/?tab=kubernetes#setting-up-check-templates

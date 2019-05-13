@@ -326,11 +326,11 @@ Note that tagging is a [Datadog-specific extension][2] to StatsD.
 
 ### Host tag key
 
-The host tag is assigned automatically by the Datadog Agent aggregating the metrics. Metrics submitted with a host tag not matching the Agent hostname lose reference to the original host. The host tag submitted overrides any hostname collected by or configured in the Agent. If you need to remove the host tag from DogStatsD metrics, reference [How to remove the host tag when submitting metrics via DogStatsD][11].
+The host tag is assigned automatically by the Datadog Agent aggregating the metrics. Metrics submitted with a host tag not matching the Agent hostname lose reference to the original host. The host tag submitted overrides any hostname collected by or configured in the Agent.
 
 ### Distributions
 
-Because of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][12] page for more details.
+Because of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][11] page for more details.
 
 ## Further reading
 
@@ -346,5 +346,4 @@ Because of the global nature of Distributions, extra tools for tagging are provi
 [8]: /developers/metrics/sets
 [9]: /graphing/event_stream
 [10]: /monitors/monitor_types/custom_check
-[11]: /developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd
-[12]: /graphing/metrics/distributions
+[11]: /graphing/metrics/distributions
