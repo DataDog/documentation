@@ -1,6 +1,6 @@
 ---
-title: Azure Integration
+title: Integration Azure
 type: apicode
 order: 16
-external_redirect: /api/#azure-integration
+external_redirect: /api/#integration-azure
 ---

@@ -1,4 +1,4 @@
 ---
-title: Integrations - Azure
+title: Integration Azure
 external_redirect: /api/
 ---

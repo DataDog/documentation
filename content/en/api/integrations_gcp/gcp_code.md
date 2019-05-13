@@ -1,6 +1,6 @@
 ---
-title: Google Cloud Platform integration
+title: Integration GCP
 type: apicode
 order: 17
-external_redirect: /api/#gcp-integration
+external_redirect: /api/#integration-gcp
 ---

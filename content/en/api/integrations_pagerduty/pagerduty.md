@@ -1,11 +1,11 @@
 ---
-title: PagerDuty Integration
+title: Integration PagerDuty
 type: apicontent
 order: 18
-external_redirect: /api/#pagerduty-integration
+external_redirect: /api/#integration-pagerduty
 ---
 
-## PagerDuty Integration
+## Integration PagerDuty
 
 Configure your Datadog-PagerDuty integration directly through the Datadog API.
 For more informations, see the [PagerDuty integration page][1].

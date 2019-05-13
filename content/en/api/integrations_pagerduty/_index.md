@@ -1,4 +1,4 @@
 ---
-title: Integrations - PagerDuty
+title: Integration PagerDuty
 external_redirect: /api/
 ---

@@ -1,6 +1,6 @@
 ---
-title: Slack Integration
+title: Integration Slack
 type: apicode
 order: 19
-external_redirect: /api/#slack-integration
+external_redirect: /api/#integration-slack
 ---

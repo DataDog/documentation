@@ -1,4 +1,4 @@
 ---
-title: Integrations - Google Cloud Platform
+title: Integration GCP
 external_redirect: /api/
 ---

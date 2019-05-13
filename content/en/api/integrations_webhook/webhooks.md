@@ -1,11 +1,11 @@
 ---
-title: Webhooks Integration
+title: Integration Webhooks
 type: apicontent
 order: 20
-external_redirect: /api/#webhooks-integration
+external_redirect: /api/#integration-webhooks
 ---
 
-## Webhooks Integration
+## Integration Webhooks
 
 Configure your Datadog-Webhooks integration directly through the Datadog API.
 For more information about the Datadog-Webhooks integration, see the [integration page][1].
