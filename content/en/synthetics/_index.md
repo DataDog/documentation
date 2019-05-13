@@ -20,15 +20,13 @@ further_reading:
   text: "Identify Synthetics Bots"
 ---
 
-<div class="alert alert-warning">Synthetics is only available for the Datadog US site.</a>.</div>
-
 ## Overview
 
 Datadog Synthetics gives you a new layer of visibility on the Datadog platform. By monitoring your applications and API endpoints via simulated user requests and browser rendering, Synthetics helps you ensure uptime, identify regional issues, and track application performance. By unifying Synthetics with your metrics, traces, and logs, Datadog allows you to observe how all your systems are performing as experienced by your users.
 
 {{< img src="synthetics/synthetics_home_page.png" alt="Synthetics home page" responsive="true">}}
 
-## Search 
+## Search
 
 Advanced search lets you query checks by any combination of checks attributes:
 
@@ -37,7 +35,7 @@ Advanced search lets you query checks by any combination of checks attributes:
 * `creator`
 * `region`
 * `muted`
-* `notification` 
+* `notification`
 * `tags`
 
 To run a search, construct your query using the checkboxes on the left and/or the search bar along the top. The search bar updates with the equivalent query as you check the boxes. Likewise, when you modify the search bar query (or write one from scratch), the checkboxes update to reflect that change. Query results update in real-time as you edit the query; there's no 'Search' button to click.
@@ -58,7 +56,7 @@ Finally, the following characters are reserved: `-`, `(`, `)`, `"`, `~`, `*`, `:
 
 ## Create a check
 
-Select **Create a New check +** in the upper right corner of the Synthetics page to create an [API tests][2] or a [browser test][3]. When a test fails, the endpoint is not retested: the uptime directly considers the endpoint as `down`. 
+Select **Create a New check +** in the upper right corner of the Synthetics page to create an [API tests][2] or a [browser test][3]. When a test fails, the endpoint is not retested: the uptime directly considers the endpoint as `down`.
 
 {{< img src="synthetics/create_a_check.png" alt="Create a check" responsive="true" style="width:80%;">}}
 

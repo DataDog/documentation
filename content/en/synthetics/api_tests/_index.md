@@ -20,24 +20,11 @@ further_reading:
 ## Overview
 
 API tests are useful to help you monitor your API endpoints and alert you when they are failing or too slow.
-They are executed periodically from several locations around the world.
-
-Available locations are:
-
-- _Canada Central (AWS_)
-- _Ohio (AWS_)
-- _Oregon (AWS_)
-- _Sydney (AWS_)
-- _Tokyo (AWS_)
-- _Frankfurt (AWS_)
-- _London (AWS_)
+They are executed periodically from several locations around the world, the full list can be retrieved [through the Datadog API][1].
 
 ## Configuration
 
-The configuration depends on the type of API test you are creating. There are two API test types:
-
-- [HTTP test](?tab=httptest#make-a-request)
-- [SSL test](?tab=ssltest#make-a-request)
+API tests configuration depends on the type of API test you want to create. There are two API test types: [HTTP test](?tab=httptest) and [SSL test](?tab=ssltest).
 
 ### Make a request
 
@@ -145,11 +132,11 @@ A test is considered `FAILED` if it does not satisfy its assertions or if the re
 
 | Error           | Description                                                                                                                                                                                    |
 | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CONNRESET       | The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, loss of connectivity of the webserver, etc. |
+| `CONNRESET`       | The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, loss of connectivity of the webserver, etc. |
 | DNS             | DNS entry not found for the check URL. Possible causes include misconfigured check URL, wrong configuration of your DNS entries, etc.                                                          |
-| INVALID_REQUEST | The configuration of the check is invalid (e.g., typo in the URL).                                                                                                                             |
-| SSL             | The SSL connection couldn't be performed. [See the dedicated error page for more information][1].                                                                                     |
-| TIMEOUT         | The request couldn't be completed in a reasonable time.                                                                                                                                        |
+| `INVALID_REQUEST` | The configuration of the check is invalid (e.g., typo in the URL).                                                                                                                             |
+| `SSL`             | The SSL connection couldn't be performed. [See the dedicated error page for more information][2].                                                                                     |
+| `TIMEOUT`         | The request couldn't be completed in a reasonable time.                                                                                                                                        |
 
 If a test fails, the uptime directly considers the endpoint as `down`. It is not re-tested until the next test run.
 
@@ -157,7 +144,7 @@ If a test fails, the uptime directly considers the endpoint as `down`. It is not
 
 A notification is sent according to the set of alerting conditions. To configure notifications:
 
-1. Select users and/or [services][2] to send the notifications to. Note that you can use the [`@-notification` feature][3] in the **message** field.
+1. Select users and/or [services][1] to send the notifications to. Note that you can use the [`@-notification` feature][3] in the **message** field.
 2. Enter a **message** for the API test. This field allows standard [Markdown formatting][4]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
 3. Click **Save** to save your API test.
 
@@ -169,7 +156,7 @@ Notifications example:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/api_tests/errors#ssl-errors
-[2]: /integrations/#cat-notification
+[1]: /integrations/#cat-notification
+[2]: /synthetics/api_tests/errors#ssl-errors
 [3]: /developers/faq/what-do-notifications-do-in-datadog
 [4]: http://daringfireball.net/projects/markdown/syntax

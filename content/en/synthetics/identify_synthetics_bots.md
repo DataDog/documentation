@@ -19,8 +19,6 @@ further_reading:
 
 ---
 
-<div class="alert alert-warning">Synthetics is only available for the Datadog US site.</div>
-
 ## Overview
 
 Some parts of your system might not be available to robots without the right identification, or you might want to avoid collecting analytics from Datadog robots.
