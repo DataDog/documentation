@@ -50,10 +50,10 @@ left:
         link: "https://www.datadoghq.com/solutions/manufacturing-logistics/"
         title: "Manufacturing & Logistics"
       - name: solutions_financial
-        link: "/solutions/financial-services/"
+        link: "https://www.datadoghq.com/solutions/financial-services/"
         title: "Financial Services"
       - name: solutions_healthcare
-        link: "/solutions/healthcare/"
+        link: "https://www.datadoghq.com/solutions/healthcare/"
         title: "Healthcare/Life Sciences"
 right:
   - name: about
