@@ -302,6 +302,8 @@ main:
             url: "tracing/setup/envoy/"
           - name: "NGINX"
             url: "tracing/setup/nginx/"
+          - name: "Istio"
+            url: "tracing/setup/istio/"
 
       # Enrich Tracing
 
