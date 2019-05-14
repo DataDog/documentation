@@ -309,9 +309,9 @@ After setting up the [PagerDuty integration][1], type `@pagerduty` in your notif
 
 [1]: /integrations/pagerduty
 {{% /tab %}}
-{{% tab "Webhook" %}}
+{{% tab "Webhooks" %}}
 
-After setting up the [Webhook integration][1], type `@webhook` in your notification message to see the available list of webhooks to trigger. When the monitor alerts, a `POST` request is sent to the webhook URL.
+After setting up the [Webhooks integration][1], type `@webhook` in your notification message to see the available list of webhooks to trigger. When the monitor alerts, a `POST` request is sent to the webhook URL.
 
 
 [1]: /integrations/webhooks
