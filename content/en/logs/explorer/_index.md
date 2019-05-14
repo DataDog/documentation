@@ -104,7 +104,7 @@ Interact with the upper reserved attributes section:
 
 The **View in context** button updates the search request in order to show you the log lines dated just before and after a selected log—even if they don't match your filter. This context is different according to the situation, as Datadog uses the `Hostname`, `Service`, `filename`, and `container_id` attributes, along with tags, in order find the appropriate context for your logs.
 
-Copy the log content as a JSON into clipboard through the **Export** button.
+Copy the log content JSON to the clipboard through the **Export** button.
 
 {{< img src="logs/explorer/upper_log_panel.png" alt="configure display table" responsive="true" style="width:50%;">}}
 
