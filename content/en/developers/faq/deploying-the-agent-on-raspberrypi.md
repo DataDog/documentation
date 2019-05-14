@@ -5,8 +5,6 @@ kind: faq
 
 **Using raspbian**
 
-**Note**: Datadog does not officially support Raspbian.
-
 1. Begin with the update of your local cache
 ```
 sudo apt-get update
