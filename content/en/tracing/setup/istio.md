@@ -24,7 +24,7 @@ Datadog APM is available for Istio v1.1.3+ on Kubernetes clusters.
 
 1. [Install the Agent][1]
 2. [Make sure APM is enabled for your Agent][2].
-3. Set the `apm_non_local_traffic` parameter to `true` and uncomment the `hostPort` setting so that Istio sidecars can connect to the Agent and submit traces.
+3. Uncomment the `hostPort` setting so that Istio sidecars can connect to the Agent and submit traces.
 
 **Note**: The Agent pods fails to start up if Istio's automatic sidecar injection is enabled on the namespace that Datadog Agent runs in. To avoid this:
 
