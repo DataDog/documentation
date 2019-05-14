@@ -6,14 +6,13 @@ aliases:
 ---
 
 
-APM enables distributed tracing by default to allow trace propagation between tracing headers across multiple services/hosts. Tracing headers include a priority tag to ensure complete traces between upstream and downstream services during trace propagation. 
- 
-You can override this tag to manually keep a trace (critical transaction, debug mode, etc.) or drop a trace (health checks, static assets, etc). 
-Note that this tag should only be set before any context propagation. If this happens after the propagation of a context, the system can’t ensure that the entire trace is kept across services.
- 
-In regards to dropping unimportant traces, take a look at the agent docs[1] to ignore resources.
+APM enables distributed tracing by default to allow trace propagation between tracing headers across multiple services/hosts. Tracing headers include a priority tag to ensure complete traces between upstream and downstream services during trace propagation. You can override this tag to manually keep a trace (critical transaction, debug mode, etc.) or drop a trace (health checks, static assets, etc). 
 
+Note that trace priority should be manually controlled only before any context propagation. If this happens after the propagation of a context, the system can’t ensure that the entire trace is kept across services.
+ 
+In regards to dropping unimportant traces, it is recommended to use [resource filtering][1] at agent level to exlude traces from specific end points.
 
+[1]:/security/tracing/#resource-filtering
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -31,7 +30,6 @@ public class MyClass {
     public static void myMethod() {
         // grab the active span out of the traced method
         MutableSpan ddspan = (MutableSpan) GlobalTracer.get().activeSpan();
-
         // Always keep the trace
         ddspan.setTag(DDTags.MANUAL_KEEP, true);
         // method impl follows
@@ -51,7 +49,6 @@ public class MyClass {
     public static void myMethod() {
         // grab the active span out of the traced method
         MutableSpan ddspan = (MutableSpan) GlobalTracer.get().activeSpan();
-
         // Always Drop the trace
         ddspan.setTag(DDTags.MANUAL_DROP, true);
         // method impl follows
@@ -72,10 +69,8 @@ from ddtrace.constants import MANUAL_DROP_KEY, MANUAL_KEEP_KEY
 @tracer.wrap()
 def handler():
     span = tracer.current_span()
-
     // Always Keep the Trace
     span.set_tag(MANUAL_KEEP_KEY)
-
     // method impl follows
 ```
 
@@ -88,11 +83,9 @@ from ddtrace.constants import MANUAL_DROP_KEY, MANUAL_KEEP_KEY
 @tracer.wrap()
 def handler():
     span = tracer.current_span()
-
-        // Always Drop the Trace
+        //Always Drop the Trace
         span.set_tag(MANUAL_DROP_KEY)
-
-        // method impl follows
+        //method impl follows
 ```
 
 {{% /tab %}}
@@ -233,8 +226,6 @@ using(var scope = Tracer.Instance.StartActive(operationName))
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-From anywhere in your code, you can access the currently active span and force the current trace to be kept or dropped.
-
 Manually keep a trace:
 
 ```php
@@ -291,6 +282,7 @@ Manually drop a trace:
 auto tracer = ...
 auto another_span = tracer->StartSpan("operation_name");
 // Always drop this trace
+
 another_span->SetTag(datadog::tags::manual_drop, {});
 //method impl follows
 ```
@@ -298,6 +290,3 @@ another_span->SetTag(datadog::tags::manual_drop, {});
 {{% /tab %}}
 {{< /tabs >}}
 
-For a more detailed explanations of sampling, check the [sampling and storage][1] documentation.
-
-[1]: /tracing/guide/trace_sampling_and_storage
