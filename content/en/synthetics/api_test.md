@@ -26,23 +26,20 @@ API tests are HTTP requests (GET, POST, PUT, etc.) executed by Datadog to your w
 ## Configuration
 ### Request
 
-Define the request you want to be executed by Datadog:
+Define the request you want executed by Datadog:
 
-{{< img src="synthetics/api_test/uptime_check_make_request.png" alt="API Tests make request" responsive="true" style="width:80%;">}}
-
-1. Choose the `Method` and `URL` to query. Available `Method`s are:
-    * GET
-    * POST
-    * PATCH
-    * PUT
-    * DELETE
-    * OPTIONS
-
-2. Optionally, click on **Advanced options** to enrich your request with custom request headers, authentication credentials, body content, or cookies. Toggle **Follow redirects** to have the monitored endpoint follow up to ten redirects.
-3. Name your API test.
-4. Optionally, add tags to filter your API test in the [Synthetics page][1].
-5. Pick the locations to run the test from. Many AWS locations from around the world are available, the full list can be retrieved [through Datadog API][2].
-6. Choose a check frequency between "1 run per minute" and "1 run per week".
+1. **Choose request type**: `HTTP` or `SSL`
+2. Choose the **Method** and **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`.
+    * Advanced Options (optional): Use custom request headers, authentication credentials, body content, or cookies.
+        * Follow Redirects: Toggle to have the monitored endpoint follow up to ten redirects.
+        * Headers: Defined headers override the default browser headers. For example, set the User Agent in the header to [identify Datadog scripts][1].
+        * Authentication: HTTP basic authentication with username and password
+        * Body: Request body and body type (`text/plain`, `application/json`, `text/xml`, `text/html`, or `None`)
+        * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `cookie1=<YOUR_COOKIE_1>; cookie2=<YOUR_COOKIE_2>`.
+3. **Name**: The name of your API test.
+4. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetics page][2].
+5. **Locations**: The locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][3].
+6. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week.
 7. Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
 ### Alert conditions
@@ -62,8 +59,8 @@ When running an API test, you must define at least one assertion that should be 
 | ------------- | ------------------------------------- | ----------------------------------------------------------------------------- |
 | Status Code   | `is`, `is not`                        | Integer                                                                       |
 | Response time | `less than`                           | Integer                                                                       |
-| Headers       | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | for `contains`/`does not contain`/`is`/`is not`: String <br> for `matches`/`does not match`: [RegexStrings][3]    |
-| Body          | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | for `contains`/`does not contain`/`is`/`is not`: String <br> for `matches`/`does not match`: [RegexStrings][3]    |
+| Headers       | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | for `contains`/`does not contain`/`is`/`is not`: String <br> for `matches`/`does not match`: [RegexStrings][4]    |
+| Body          | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | for `contains`/`does not contain`/`is`/`is not`: String <br> for `matches`/`does not match`: [RegexStrings][4]    |
 
 If you define an assertion on the content of `Headers`, you must define the `headers property` and its associated value.
 
@@ -81,8 +78,8 @@ Use the **Test URL** response to quickly add status code, response time or heade
 
 A notification is sent according to the set [alert conditions](#alert-conditions). To configure notifications:
 
-1. Select users and/or [services][4] to send the notifications to. Note that you can use the [`@-notification` feature][5] in the **message** field.
-2. Enter a **message** for the API test. This field allows standard [Markdown formatting][6]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
+1. Select users and/or [services][5] to send the notifications to. Note that you can use the [`@-notification` feature][6] in the **message** field.
+2. Enter a **message** for the API test. This field allows standard [Markdown formatting][7]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
 3. Click **Save** to save your API test.
 
 Notifications example:
@@ -154,9 +151,10 @@ If a test fails, the uptime directly considers the endpoint as `down`. It is not
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics
-[2]: /api/?lang=bash#get-available-locations
-[3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[4]: /integrations/#cat-notification
-[5]: /developers/faq/what-do-notifications-do-in-datadog
-[6]: http://daringfireball.net/projects/markdown/syntax
+[1]: /synthetics/identify_synthetics_bots
+[2]: /synthetics
+[3]: /api/?lang=bash#get-available-locations
+[4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[5]: /integrations/#cat-notification
+[6]: /developers/faq/what-do-notifications-do-in-datadog
+[7]: http://daringfireball.net/projects/markdown/syntax
