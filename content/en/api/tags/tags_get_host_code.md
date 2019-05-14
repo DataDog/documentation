@@ -1,7 +1,7 @@
 ---
 title: Get host tags
 type: apicode
-order: 23.2
+order: 28.2
 external_redirect: /api/#get-host-tags
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#get-host-tags
 {{< code-snippets basename="api-tags-get-host" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-tags-get-host" >}}
-

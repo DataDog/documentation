@@ -1,7 +1,7 @@
 ---
 title: Disable user
 type: apicode
-order: 27.5
+order: 32.5
 external_redirect: /api/#disable-user
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#disable-user
 {{< code-snippets basename="api-user-disable" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-user-disable" >}}
-

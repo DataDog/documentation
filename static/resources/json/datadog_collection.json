@@ -4973,6 +4973,95 @@
 							},
 							"response": [
 								{
+									"name": "No AWS accounts",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "https://api.datadoghq.com/api/v1/integration/aws?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+											"protocol": "https",
+											"host": [
+												"api",
+												"datadoghq",
+												"com"
+											],
+											"path": [
+												"api",
+												"v1",
+												"integration",
+												"aws"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{dd_api_key}}",
+													"description": "Your Datadog API key"
+												},
+												{
+													"key": "application_key",
+													"value": "{{dd_app_key}}",
+													"description": "Your Datadog application key"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 06 May 2019 15:20:18 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "98"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "X-DD-VERSION",
+											"value": "35.1295692"
+										},
+										{
+											"key": "DD-POOL",
+											"value": "dogweb_sameorig"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800;"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"errors\": [\n        \"AWS Integration not yet installed. Please manually install it to add AWS accounts.\"\n    ]\n}"
+								},
+								{
 									"name": "List AWS Accounts Example",
 									"originalRequest": {
 										"method": "GET",
@@ -5029,7 +5118,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"account_id\": \"<YOUR_AWS_ACCOUNT_ID>\",\n    \"filter_tags\": [\n        \"env:staging\"\n    ],\n    \"host_tags\": [\n        \"account:staging\",\n        \"account:customer1\"\n    ],\n    \"role_name\": \"DatadogAWSIntegrationRole\",\n    \"account_specific_namespace_rules\": {\n        \"auto_scaling\": false,\n        \"opsworks\": false\n    }\n}"
+									"raw": "{\n    \"account_id\": \"<YOUR_AWS_ACCOUNT_ID>\",\n    \"filter_tags\": [\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ],\n    \"host_tags\": [\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ],\n    \"role_name\": \"DatadogAWSIntegrationRole\",\n    \"account_specific_namespace_rules\": {\n        \"auto_scaling\": false,\n        \"opsworks\": false\n    }\n}"
 								},
 								"url": {
 									"raw": "https://api.datadoghq.com/api/v1/integration/aws?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -5060,7 +5149,118 @@
 								},
 								"description": "### Overview\n\nConfigure your Datadog-AWS integration directly through Datadog API. [Read more about Datadog-AWS integration][1].\n\n**Note**:\n\n* Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.\n* Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.\n\n### Arguments\n\n* **`account_id`** [*required*]: Your AWS Account ID without dashes. [Consult the Datadog AWS integration to learn more][2] about your AWS account ID.\n\n* **`access_key_id`** [*optional*, *default*=**None**]: If your AWS account is a GovCloud or China account, enter the corresponding Access Key ID.\n\n* **`role_name`** [*required*]: Your Datadog role delegation name. [Consult the Datadog AWS integration to learn more][3] about your AWS account Role name.\n\n* **`filter_tags`** [*optional*, *default*=**None**]: Array of EC2 tags (in the form `key:value`) defines a filter that Datadog use when collecting metrics from EC2. Wildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used.\n    Only hosts that match one of the defined tags will be imported into Datadog. The rest will be ignored. Host matching a given tag can also be excluded by adding `!` before the tag.\n    e.x. `env:production,instance-type:c1.*,!region:us-east-1`\n    [Read more about EC2 tagging in AWS tagging documentation][4].\n\n* **`host_tags`** [*optional*, *default*=**None**]: Array of tags (in the form `key:value`) to add to all hosts and metrics reporting through this integration.\n\n* **`account_specific_namespace_rules`** [*optional*, *default*=**None**]: An object (in the form `{\"namespace1\":true/false, \"namespace2\":true/false}`) that enables or disables metric collection for specific AWS namespaces for this AWS account only. A list of namespaces can be found at the `https://api.datadoghq.com/api/v1/integration/aws/available_namespace_rules` endpoint.\n\n[1]: https://docs.datadoghq.com/integrations/amazon_web_services\n[2]: https://docs.datadoghq.com/integrations/amazon_web_services/#configuration\n[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation\n[4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html"
 							},
-							"response": []
+							"response": [
+								{
+									"name": "Creating an account",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"account_id\": \"<YOUR_AWS_ACCOUNT_ID>\",\n    \"filter_tags\": [\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ],\n    \"host_tags\": [\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ],\n    \"role_name\": \"DatadogAWSIntegrationRole\",\n    \"account_specific_namespace_rules\": {\n        \"auto_scaling\": false,\n        \"opsworks\": false\n    }\n}"
+										},
+										"url": {
+											"raw": "https://api.datadoghq.com/api/v1/integration/aws?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+											"protocol": "https",
+											"host": [
+												"api",
+												"datadoghq",
+												"com"
+											],
+											"path": [
+												"api",
+												"v1",
+												"integration",
+												"aws"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{dd_api_key}}",
+													"description": "Your Datadog API key"
+												},
+												{
+													"key": "application_key",
+													"value": "{{dd_app_key}}",
+													"description": "Your Datadog application key"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 06 May 2019 15:25:25 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "DD-PSHARD=193; Max-Age=604800; Path=/; expires=Mon, 13-May-2019 15:25:21 GMT; secure; HttpOnly"
+										},
+										{
+											"key": "X-DD-VERSION",
+											"value": "35.1295692"
+										},
+										{
+											"key": "X-DD-Debug",
+											"value": "c4aq40z3KDGIu7BkYTlUd0iZ+hCVqUX2FQHrdHjK4gPuZVw/LYvbdogVHHOtojAR"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "DD-POOL",
+											"value": "dogweb_sameorig"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800;"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"external_id\": \"1234567890\"\n}"
+								}
+							]
 						},
 						{
 							"name": "Delete an AWS Integration",
@@ -5252,6 +5452,112 @@
 									],
 									"cookie": [],
 									"body": "[\n    \"api_gateway\",\n    \"application_elb\",\n    \"appsync\",\n    \"auto_scaling\",\n    \"billing\",\n    \"budgeting\",\n    \"cloudfront\",\n    \"cloudsearch\",\n    \"cloudwatch_events\",\n    \"cloudwatch_logs\",\n    \"codebuild\",\n    \"collect_custom_metrics\",\n    \"crawl_alarms\",\n    \"ddos_protection\",\n    \"directconnect\",\n    \"dms\",\n    \"documentdb\",\n    \"dynamodb\",\n    \"ebs\",\n    \"ec2\",\n    \"ec2api\",\n    \"ec2spot\",\n    \"ecs\",\n    \"efs\",\n    \"elasticache\",\n    \"elasticbeanstalk\",\n    \"elastictranscoder\",\n    \"elb\",\n    \"emr\",\n    \"es\",\n    \"firehose\",\n    \"gamelift\",\n    \"iot\",\n    \"kinesis\",\n    \"kinesis_analytics\",\n    \"kms\",\n    \"lambda\",\n    \"lex\",\n    \"ml\",\n    \"mq\",\n    \"nat_gateway\",\n    \"network_elb\",\n    \"opsworks\",\n    \"polly\",\n    \"rds\",\n    \"redshift\",\n    \"rekognition\",\n    \"route53\",\n    \"s3\",\n    \"sagemaker\",\n    \"ses\",\n    \"sns\",\n    \"sqs\",\n    \"state_machine\",\n    \"storage_gateway\",\n    \"swf\",\n    \"vpn\",\n    \"waf\",\n    \"workspaces\",\n    \"xray\"\n]"
+								},
+								{
+									"name": "List available namespace rules",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "https://api.datadoghq.com/api/v1/integration/aws/available_namespace_rules?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+											"protocol": "https",
+											"host": [
+												"api",
+												"datadoghq",
+												"com"
+											],
+											"path": [
+												"api",
+												"v1",
+												"integration",
+												"aws",
+												"available_namespace_rules"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{dd_api_key}}",
+													"description": "Your Datadog API key"
+												},
+												{
+													"key": "application_key",
+													"value": "{{dd_app_key}}",
+													"description": "Your Datadog application key"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 06 May 2019 15:26:10 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "DD-PSHARD=193; Max-Age=604800; Path=/; expires=Mon, 13-May-2019 15:26:09 GMT; secure; HttpOnly"
+										},
+										{
+											"key": "X-DD-VERSION",
+											"value": "35.1295692"
+										},
+										{
+											"key": "X-DD-Debug",
+											"value": "c4aq40z3KDGIu7BkYTlUd0iZ+hCVqUX2FQHrdHjK4gPuZVw/LYvbdogVHHOtojAR"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "DD-POOL",
+											"value": "dogweb_sameorig"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800;"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    \"api_gateway\",\n    \"application_elb\",\n    \"appsync\",\n    \"auto_scaling\",\n    \"billing\",\n    \"budgeting\",\n    \"cloudfront\",\n    \"cloudsearch\",\n    \"cloudwatch_events\",\n    \"cloudwatch_logs\",\n    \"codebuild\",\n    \"collect_custom_metrics\",\n    \"crawl_alarms\",\n    \"ddos_protection\",\n    \"directconnect\",\n    \"dms\",\n    \"documentdb\",\n    \"dynamodb\",\n    \"ebs\",\n    \"ec2\",\n    \"ec2api\",\n    \"ec2spot\",\n    \"ecs\",\n    \"efs\",\n    \"elasticache\",\n    \"elasticbeanstalk\",\n    \"elastictranscoder\",\n    \"elb\",\n    \"emr\",\n    \"es\",\n    \"firehose\",\n    \"gamelift\",\n    \"iot\",\n    \"kinesis\",\n    \"kinesis_analytics\",\n    \"kms\",\n    \"lambda\",\n    \"lex\",\n    \"ml\",\n    \"mq\",\n    \"nat_gateway\",\n    \"network_elb\",\n    \"opsworks\",\n    \"polly\",\n    \"rds\",\n    \"redshift\",\n    \"rekognition\",\n    \"route53\",\n    \"s3\",\n    \"sagemaker\",\n    \"ses\",\n    \"sns\",\n    \"sqs\",\n    \"state_machine\",\n    \"storage_gateway\",\n    \"swf\",\n    \"vpn\",\n    \"waf\",\n    \"workspaces\",\n    \"xray\"\n]"
 								}
 							]
 						},
@@ -5418,7 +5724,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"account_id\": \"<AWS_ACCOUNT_ID>\",\n    \"namespace\": \"sqs\",\n    \"tag_filter_str\": \"include_tags,!exclude_tags\"\n}"
+									"raw": "{\n    \"account_id\": \"<AWS_ACCOUNT_ID>\",\n    \"namespace\": \"<AWS_NAMESPACE>\",\n    \"tag_filter_str\": \"<TAG_TO_INCLUDE>,!<TAGS_TO_EXCLUDE>\"\n}"
 								},
 								"url": {
 									"raw": "https://api.datadoghq.com/api/v1/integration/aws/filtering?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -5448,7 +5754,7 @@
 										}
 									]
 								},
-								"description": "### Overview\n\nList AWS Accounts (role-based only) in Datadog. [Read more about Datadog-AWS integration][1].\n\n### Arguments\n\n* **`account_id`** [*required*]: Your AWS Account ID without dashes. [Consult the Datadog AWS integration to learn more][2] about your AWS account ID.\n\n* **`access_key_id`** [*optional*, *default*=**None**]: If your AWS account is a GovCloud or China account, enter the corresponding Access Key ID.\n\n[1]: https://docs.datadoghq.com/integrations/amazon_web_services\n[2]: https://docs.datadoghq.com/integrations/amazon_web_services/#configuration"
+								"description": "### Overview\n\nList AWS Accounts (role-based only) in Datadog. [Read more about Datadog-AWS integration][1].\n\n### Arguments\n\n* **`account_id`** [*required*]: Your AWS Account ID without dashes. [Consult the Datadog AWS integration to learn more][2] about your AWS account ID.\n\n* **`access_key_id`** [*optional*, *default*=**None**]: If your AWS account is a GovCloud or China account, enter the corresponding Access Key ID.$\n\n* **`namespace`** [*required*]: The AWS namespace to apply filtering too (e.g. `sns`..) The full list of available namespace can be retrieve with the `List available namespace` endpoint.\n\n* **`tag_filter_str`** [*required*]: Tags to include/exclude to filter data collected for a specific couple of `account_id`, `namespace`.\n\n[1]: https://docs.datadoghq.com/integrations/amazon_web_services\n[2]: https://docs.datadoghq.com/integrations/amazon_web_services/#configuration"
 							},
 							"response": []
 						},
@@ -5545,7 +5851,97 @@
 								},
 								"description": "### Overview\n\nList all Datadog-Azure integrations configured for your Datadog Account.\n\n### Arguments\n\nThis endpoint takes no JSON argument."
 							},
-							"response": []
+							"response": [
+								{
+									"name": "No Azure Account",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "https://app.datadoghq.com/api/v1/integration/azure?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+											"protocol": "https",
+											"host": [
+												"app",
+												"datadoghq",
+												"com"
+											],
+											"path": [
+												"api",
+												"v1",
+												"integration",
+												"azure"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{dd_api_key}}",
+													"description": "Your Datadog API key"
+												},
+												{
+													"key": "application_key",
+													"value": "{{dd_app_key}}",
+													"description": "Your Datadog application key"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 06 May 2019 15:30:37 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "98"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "X-DD-VERSION",
+											"value": "35.1295692"
+										},
+										{
+											"key": "DD-POOL",
+											"value": "dogweb_sameorig"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800;"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"errors\": [\n        \"Azure Integration not yet installed. Please install before performing this action.\"\n    ]\n}"
+								}
+							]
 						},
 						{
 							"name": "Create an Azure Account",
@@ -5604,7 +6000,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"tenant_name\": \"<AZURE_TENANT_NAME>\",\n    \"client_id\": \"<AZURE_CLIENT_ID>\",\n    \"host_filters\": \"<KEY_1>:<VALUE_1>,<KEY_2>:<VALUE_2>\"\n}"
+									"raw": "{\n    \"tenant_name\": \"<AZURE_TENANT_NAME>\",\n    \"client_id\": \"<AZURE_CLIENT_ID>\",\n    \"client_secret\": \"<AZURE_CLIENT_SECRET>\",\n    \"host_filters\": \"<KEY_1>:<VALUE_1>,<KEY_2>:<VALUE_2>\"\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/integration/azure?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -5633,7 +6029,7 @@
 										}
 									]
 								},
-								"description": "### Overview \n\nUpdate Datadog-Azure host filtering.\n\n### Arguments\n\nRefer to the [Datadog-Azure integration installation instructions][1] to see how to obtain the following field values for your organization.\n\n* **`tenant_name`** [*required*]: Your Azure Active Directory ID.\n\n* **`client_id`** [*required*]: Your Azure web application ID.\n\n* **`host_filters`** [*optional*, *default*=**None**]: Limit the Azure instances that are pulled into Datadog by using tags. Only hosts that match one of the defined tags are imported into Datadog.\n\n[1]: https://docs.datadoghq.com/integrations/azure/#installation"
+								"description": "### Overview \n\nUpdate Datadog-Azure host filtering.\n\n### Arguments\n\nRefer to the [Datadog-Azure integration installation instructions][1] to see how to obtain the following field values for your organization.\n\n* **`tenant_name`** [*required*]: Your Azure Active Directory ID.\n\n* **`client_id`** [*required*]: Your Azure web application ID.\n\n* **`client_secret`** [*required*]: Your Azure web application secret key.\n\n* **`host_filters`** [*optional*, *default*=**None**]: Limit the Azure instances that are pulled into Datadog by using tags. Only hosts that match one of the defined tags are imported into Datadog.\n\n[1]: https://docs.datadoghq.com/integrations/azure/#installation"
 							},
 							"response": []
 						},
@@ -5749,7 +6145,97 @@
 								},
 								"description": "### Overview\n\nList all Datadog-GCP integrations configured for your Datadog Account.\n\n### Arguments\n\nThis endpoint takes no JSON argument."
 							},
-							"response": []
+							"response": [
+								{
+									"name": "No GCP account configured",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "https://api.datadoghq.com/api/v1/integration/gcp?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+											"protocol": "https",
+											"host": [
+												"api",
+												"datadoghq",
+												"com"
+											],
+											"path": [
+												"api",
+												"v1",
+												"integration",
+												"gcp"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{dd_api_key}}",
+													"description": "Your Datadog API key"
+												},
+												{
+													"key": "application_key",
+													"value": "{{dd_app_key}}",
+													"description": "Your Datadog application key"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Tue, 07 May 2019 11:41:04 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "96"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "X-DD-VERSION",
+											"value": "35.1298933"
+										},
+										{
+											"key": "DD-POOL",
+											"value": "dogweb_sameorig"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800;"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"errors\": [\n        \"GCP Integration not yet installed. Please install before performing this action.\"\n    ]\n}"
+								}
+							]
 						},
 						{
 							"name": "Create GCP Account",
@@ -5906,7 +6392,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": ""
+									"raw": "{\n    \"project_id\": \"<GCP_PROJECT_ID>\",\n    \"client_email\": \"<CLIENT_EMAIL>\"\n}"
 								},
 								"url": {
 									"raw": "https://api.datadoghq.com/api/v1/integration/gcp?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -5991,6 +6477,154 @@
 								},
 								"description": "### Overview\n\nList all Datadog-PagerDuty integrations configured for your Datadog Account.\n\n### Arguments\n\nThis endpoint takes no JSON argument."
 							},
+							"response": [
+								{
+									"name": "No PagerDuty configured",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "https://app.datadoghq.com/api/v1/integration/pagerduty?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+											"protocol": "https",
+											"host": [
+												"app",
+												"datadoghq",
+												"com"
+											],
+											"path": [
+												"api",
+												"v1",
+												"integration",
+												"pagerduty"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{dd_api_key}}",
+													"description": "Your Datadog API key"
+												},
+												{
+													"key": "application_key",
+													"value": "{{dd_app_key}}",
+													"description": "Your Datadog application key"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Tue, 07 May 2019 11:43:07 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "X-DD-VERSION",
+											"value": "35.1298933"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "DD-POOL",
+											"value": "dogweb_sameorig"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800;"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"errors\": [\n        \"pagerduty not found\"\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Create PagerDuty Configuration",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"services\": [\n        {\n            \"service_name\": \"<SERVICE_NAME_1>\",\n            \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        },\n        {\n            \"service_name\": \"<SERVICE_NAME_2>\",\n            \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        }\n    ],\n    \"subdomain\": \"<PAGERDUTY_SUB_DOMAIN>\",\n    \"schedules\": [\n        \"<SCHEDULE_1>\",\n        \"<SCHEDULE_2>\"\n    ],\n    \"api_token\": \"<PAGERDUTY_TOKEN>\"\n}"
+								},
+								"url": {
+									"raw": "https://app.datadoghq.com/api/v1/integration/pagerduty?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"protocol": "https",
+									"host": [
+										"app",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"integration",
+										"pagerduty"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
+										},
+										{
+											"key": "application_key",
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
+										}
+									]
+								},
+								"description": "### Overview\n\nConfigure your Datadog-PagerDuty integration directly through the Datadog API.   [Read more about Datadog-PagerDuty integration][1].\n\n**Note**:\n\n* Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.\n* Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.\n\n### Arguments\n\n* **`services`** : Array of PagerDuty service objects. [Learn how to configure you Datadog service with PagerDuty documentation][2]. A PagerDuty service object is composed by:\n    * **`service_name`** [*required*]: Your Service name in PagerDuty.\n\t* **`service_key`** [*required*]: Your Service name associated service key in Pagerduty.\n* **`subdomain`** : Your PagerDuty account's personalized subdomain name.\n* **`schedules`** : Array of your schedule URLs, e.g: `[\"https://my-pd.pagerduty.com/schedules#PCPYT4M\", \"https://my-pd.pagerduty.com/schedules#PKTPB7P\"]`\n* **`api_token`** : Your PagerDuty API token.\n\n[1]: https://docs.datadoghq.com/integrations/pagerduty\n[2]: https://www.pagerduty.com/docs/guides/datadog-integration-guide"
+							},
 							"response": []
 						},
 						{
@@ -6039,51 +6673,6 @@
 							"response": []
 						},
 						{
-							"name": "Create PagerDuty Configuration",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"services\": [\n        {\n            \"service_name\": \"test_00\",\n            \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        },\n        {\n            \"service_name\": \"test_01\",\n            \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        }\n    ],\n    \"subdomain\": \"my-pd\",\n    \"schedules\": [\n        \"https://my-pd.pagerduty.com/schedules#PCPYT4M\",\n        \"https://my-pd.pagerduty.com/schedules#PKTPB7P\"\n    ],\n    \"api_token\": \"<PAGERDUTY_TOKEN>\"\n}"
-								},
-								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/integration/pagerduty?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
-									"protocol": "https",
-									"host": [
-										"app",
-										"datadoghq",
-										"com"
-									],
-									"path": [
-										"api",
-										"v1",
-										"integration",
-										"pagerduty"
-									],
-									"query": [
-										{
-											"key": "api_key",
-											"value": "{{dd_api_key}}",
-											"description": "Your Datadog API key"
-										},
-										{
-											"key": "application_key",
-											"value": "{{dd_app_key}}",
-											"description": "Your Datadog application key"
-										}
-									]
-								},
-								"description": "### Overview\n\nConfigure your Datadog-PagerDuty integration directly through the Datadog API.   [Read more about Datadog-PagerDuty integration][1].\n\n**Note**:\n\n* Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.\n* Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.\n\n### Arguments\n\n* **`services`** : Array of PagerDuty service objects. [Learn how to configure you Datadog service with PagerDuty documentation][2]. A PagerDuty service object is composed by:\n    * **`service_name`** [*required*]: Your Service name in PagerDuty.\n\t* **`service_key`** [*required*]: Your Service name associated service key in Pagerduty.\n* **`subdomain`** : Your PagerDuty account's personalized subdomain name.\n* **`schedules`** : Array of your schedule URLs, e.g: `[\"https://my-pd.pagerduty.com/schedules#PCPYT4M\", \"https://my-pd.pagerduty.com/schedules#PKTPB7P\"]`\n* **`api_token`** : Your PagerDuty API token.\n\n[1]: https://docs.datadoghq.com/integrations/pagerduty\n[2]: https://www.pagerduty.com/docs/guides/datadog-integration-guide"
-							},
-							"response": []
-						},
-						{
 							"name": "Add New Services and Schedules",
 							"request": {
 								"method": "POST",
@@ -6095,7 +6684,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"services\": [\n        {\n            \"service_name\": \"test_00\",\n            \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        },\n        {\n            \"service_name\": \"test_01\",\n            \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        }\n    ],\n    \"schedules\": [\n        \"<SCHEDULE_1>\",\n        \"<SCHEDULE_2>\"\n    ]\n}"
+									"raw": "{\n    \"services\": [\n        {\n            \"service_name\": \"<SERVICE_NAME_1>\",\n            \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        },\n        {\n            \"service_name\": \"<SERVICE_NAME_2>\",\n            \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        }\n    ],\n    \"schedules\": [\n        \"<SCHEDULE_1>\",\n        \"<SCHEDULE_2>\"\n    ]\n}"
 								},
 								"url": {
 									"raw": "https://app.datadoghq.com/api/v1/integration/pagerduty?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
@@ -6181,6 +6770,154 @@
 								},
 								"description": "### Overview\n\nList all Datadog-Slack integrations configured for your Datadog Account.\n\n### Arguments\n\nThis endpoint takes no JSON argument."
 							},
+							"response": [
+								{
+									"name": "No Slack integration configured",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"service_hooks\": [\n        {\n            \"account\": \"Main_Account\",\n            \"url\": \"https://hooks.slack.com/services/1/1\"\n        },\n        {\n            \"account\": \"doghouse\",\n            \"url\": \"https://hooks.slack.com/services/2/2\"\n        }\n    ],\n    \"channels\": [\n        {\n            \"channel_name\": \"#private\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"Main_Account\"\n        },\n        {\n            \"channel_name\": \"#heresachannel\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"doghouse\"\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "https://app.datadoghq.com/api/v1/integration/slack?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+											"protocol": "https",
+											"host": [
+												"app",
+												"datadoghq",
+												"com"
+											],
+											"path": [
+												"api",
+												"v1",
+												"integration",
+												"slack"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{dd_api_key}}",
+													"description": "Your Datadog API key"
+												},
+												{
+													"key": "application_key",
+													"value": "{{dd_app_key}}",
+													"description": "Your Datadog application key"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Tue, 07 May 2019 11:45:49 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "X-DD-VERSION",
+											"value": "35.1298933"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "DD-POOL",
+											"value": "dogweb_sameorig"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800;"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"errors\": [\n        \"slack not found\"\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Create Slack Configuration ",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"service_hooks\": [\n        {\n            \"account\": \"Main_Account\",\n            \"url\": \"https://hooks.slack.com/services/1/1\"\n        },\n        {\n            \"account\": \"doghouse\",\n            \"url\": \"https://hooks.slack.com/services/2/2\"\n        }\n    ],\n    \"channels\": [\n        {\n            \"channel_name\": \"#private\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"Main_Account\"\n        },\n        {\n            \"channel_name\": \"#heresachannel\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"doghouse\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "https://app.datadoghq.com/api/v1/integration/slack?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"protocol": "https",
+									"host": [
+										"app",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"integration",
+										"slack"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{dd_api_key}}",
+											"description": "Your Datadog API key"
+										},
+										{
+											"key": "application_key",
+											"value": "{{dd_app_key}}",
+											"description": "Your Datadog application key"
+										}
+									]
+								},
+								"description": "### Overview\n\nConfigure your Datadog-Slack integration directly through Datadog API. [Read more about Datadog-Slack integration][1].\n\n**Note**:\n\n* Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.\n* Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.\n\n### Arguments\n\n* **`service_hooks`** [*required*]: Array of service hook objects (the service hook is generated for your slack account in your Slack account administration page). A service hook object is composed by:\n\n    * **`account`** [*required*]: Your Slack account name.\n\n    * **`url`** [*required*]: Your Slack Service Hook URL.\n\n**Note**: **`service_hooks`** are not required in the payload when adding (POST) or updating (PUT) an existing Slack configuration.\n\n* **`channels`** [*required*]: Array of slack channel objects to post to. A slack channel object is composed by:\n\n    * **`channel_name`** [*required*]: Your channel name e.g: `#general`, `#private`\n\n    * **`transfer_all_user_comments`** [*optional*, *default*=**False**]: To be notified for every comment on a graph, set it to `true`. If set to `False` use the `@slack-channel_name` syntax [for comments to be posted to slack][2].\n\n    * **`account`** [*required*]: Account to which the channel belongs to.\n\n[1]: https://docs.datadoghq.com/integrations/slack\n[2]: https://docs.datadoghq.com/monitors/notifications/#slack-integration"
+							},
 							"response": []
 						},
 						{
@@ -6225,51 +6962,6 @@
 									]
 								},
 								"description": "### Overview\n\nDelete a Datadog-Slack integration configured in your Datadog Account. [Read more about Datadog-Slack integration][1].\n\n### Arguments\n\nThis endpoint takes no JSON arguments\n\n\n[1]: https://docs.datadoghq.com/integrations/slack"
-							},
-							"response": []
-						},
-						{
-							"name": "Create Slack Configuration ",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"service_hooks\": [\n        {\n            \"account\": \"Main_Account\",\n            \"url\": \"https://hooks.slack.com/services/1/1\"\n        },\n        {\n            \"account\": \"doghouse\",\n            \"url\": \"https://hooks.slack.com/services/2/2\"\n        }\n    ],\n    \"channels\": [\n        {\n            \"channel_name\": \"#private\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"Main_Account\"\n        },\n        {\n            \"channel_name\": \"#heresachannel\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"doghouse\"\n        }\n    ]\n}"
-								},
-								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/integration/slack?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
-									"protocol": "https",
-									"host": [
-										"app",
-										"datadoghq",
-										"com"
-									],
-									"path": [
-										"api",
-										"v1",
-										"integration",
-										"slack"
-									],
-									"query": [
-										{
-											"key": "api_key",
-											"value": "{{dd_api_key}}",
-											"description": "Your Datadog API key"
-										},
-										{
-											"key": "application_key",
-											"value": "{{dd_app_key}}",
-											"description": "Your Datadog application key"
-										}
-									]
-								},
-								"description": "### Overview\n\nConfigure your Datadog-Slack integration directly through Datadog API. [Read more about Datadog-Slack integration][1].\n\n**Note**:\n\n* Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.\n* Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.\n\n### Arguments\n\n* **`service_hooks`** [*required*]: Array of service hook objects (the service hook is generated for your slack account in your Slack account administration page). A service hook object is composed by:\n\n    * **`account`** [*required*]: Your Slack account name.\n\n    * **`url`** [*required*]: Your Slack Service Hook URL.\n\n**Note**: **`service_hooks`** are not required in the payload when adding (POST) or updating (PUT) an existing Slack configuration.\n\n* **`channels`** [*required*]: Array of slack channel objects to post to. A slack channel object is composed by:\n\n    * **`channel_name`** [*required*]: Your channel name e.g: `#general`, `#private`\n\n    * **`transfer_all_user_comments`** [*optional*, *default*=**False**]: To be notified for every comment on a graph, set it to `true`. If set to `False` use the `@slack-channel_name` syntax [for comments to be posted to slack][2].\n\n    * **`account`** [*required*]: Account to which the channel belongs to.\n\n[1]: https://docs.datadoghq.com/integrations/slack\n[2]: https://docs.datadoghq.com/monitors/notifications/#slack-integration"
 							},
 							"response": []
 						},
@@ -6371,6 +7063,49 @@
 							"response": []
 						},
 						{
+							"name": "Add to Current Configuration",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"hooks\": [\n      {\n        \"name\": \"<WEBHOOK_NAME>\",\n        \"url\": \"<WEBHOOK_URL>\",\n        \"use_custom_payload\": \"false\",\n        \"encode_as_form\": \"false\"\n      }\n    ]\n}"
+								},
+								"url": {
+									"raw": "https://app.datadoghq.com/api/v1/integration/webhooks?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
+									"protocol": "https",
+									"host": [
+										"app",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"integration",
+										"webhooks"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{dd_api_key}}"
+										},
+										{
+											"key": "application_key",
+											"value": "{{dd_app_key}}"
+										}
+									]
+								},
+								"description": "ARGUMENTS\n\n"
+							},
+							"response": []
+						},
+						{
 							"name": "Delete Webhook Configurations",
 							"request": {
 								"method": "DELETE",
@@ -6409,49 +7144,6 @@
 										}
 									]
 								}
-							},
-							"response": []
-						},
-						{
-							"name": "Add to Current Configuration",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"hooks\": [\n        {\n            \"name\": \"somehook\",\n            \"url\": \"http://requestb.in/v1srg7v1\",\n            \"use_custom_payload\": \"false\",\n            \"custom_payload\": \"\",\n            \"encode_as_form\": \"false\",\n            \"headers\": \"\"\n        }\n    ]\n}"
-								},
-								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/integration/webhooks?api_key={{dd_api_key}}&application_key={{dd_app_key}}",
-									"protocol": "https",
-									"host": [
-										"app",
-										"datadoghq",
-										"com"
-									],
-									"path": [
-										"api",
-										"v1",
-										"integration",
-										"webhooks"
-									],
-									"query": [
-										{
-											"key": "api_key",
-											"value": "{{dd_api_key}}"
-										},
-										{
-											"key": "application_key",
-											"value": "{{dd_app_key}}"
-										}
-									]
-								},
-								"description": "ARGUMENTS\n\n"
 							},
 							"response": []
 						},
@@ -7239,7 +7931,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/metrics?api_key={{dd_api_key}}&application_key={{dd_app_key}}&from={{from_ts}}",
+							"raw": "https://api.datadoghq.com/api/v1/metrics?api_key={{dd_api_key}}&application_key={{dd_app_key}}&from={{from_ts}}&host={{hostname}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -7266,10 +7958,15 @@
 									"key": "from",
 									"value": "{{from_ts}}",
 									"description": "EPOCH Timestamp from which to list metrics."
+								},
+								{
+									"key": "host",
+									"value": "{{hostname}}",
+									"description": "Hostname for filtering the list of metrics returned. If set, metrics retrieved are those with the corresponding hostname tag."
 								}
 							]
 						},
-						"description": "### Overview\n\nGet the list of actively reporting metrics from a given time until now. This endpoint is not available in the Python and Ruby libraries.\n\n### Arguments\n\n* **`from`** [*required*]: EPOCH timestamp from which to list metrics."
+						"description": "### Overview\n\nGet the list of actively reporting metrics from a given time until now. This endpoint is not available in the Python and Ruby libraries.\n\n### Arguments\n\n* **`from`** [*required*]: EPOCH timestamp from which to list metrics.\n* **`host`** [*optional*]: Hostname for filtering the list of metrics returned. If set, metrics retrieved are those with the corresponding hostname tag."
 					},
 					"response": []
 				},

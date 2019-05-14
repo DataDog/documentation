@@ -40,6 +40,8 @@ Optionally, you can view uptime by monitor groups in three different ways:
 
 You can view the uptime percentage for the overall monitor, by selected groups, or both. For calculation, the total uptime percentage when selected by group can be calculated, as well as on the total of the monitors (all groups regardless of what’s selected) or for only the selected groups.
 
+**Note**: The overall uptime value represents the proportion of time that none of the groups in the widget's scope were in an alert state.  
+
 {{< img src="monitors/slo_widget/slo_uptime-view_mode.png" alt="View Mode" responsive="true" >}}
 
 You can also query multiple monitors and use the monitor search query to select your specific monitors.
@@ -54,7 +56,7 @@ You can select up to 20 monitors.
 
 ### Supported monitor types
 
-Currently only [metric monitor types][2] and synthetics are supported in the widget. Only supported monitors will be available to select within the widget. All other monitor types are not currently supported. 
+Currently only [metric monitor types][2], service checks, and synthetics are supported in the widget. Only supported monitors will be available to select within the widget. All other monitor types are not currently supported. 
 
 Supported metric monitor types include: metric, anomaly, APM, forecast, outlier, and integration metrics. For more info, see [here][2] for monitor types.
 

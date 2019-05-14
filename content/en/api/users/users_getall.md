@@ -1,7 +1,7 @@
 ---
 title: Get all users
 type: apicontent
-order: 27.3
+order: 32.3
 external_redirect: /api/#get-all-users
 ---
 

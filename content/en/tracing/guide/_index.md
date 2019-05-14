@@ -12,4 +12,5 @@ disable_toc: true
     {{< nextlink href="tracing/guide/security" >}}Scrub Sensitive information from your traces{{< /nextlink >}}
     {{< nextlink href="tracing/guide/resource_monitor" >}}Build monitor upon your resource metrics{{< /nextlink >}}
     {{< nextlink href="tracing/guide/trace_sampling_and_storage" >}}Trace Sampling and Storage{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/agent-obfuscation" >}}Agent Trace Obfuscation{{< /nextlink >}}
 {{< /whatsnext >}}

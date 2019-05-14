@@ -1,7 +1,7 @@
 ---
 title: Remove host tags
 type: apicode
-order: 23.5
+order: 28.5
 external_redirect: /api/#remove-host-tags
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#remove-host-tags
 {{< code-snippets basename="api-tags-remove" >}}
 ##### Example Response
 *This endpoint does not return JSON on successful requests.*
-

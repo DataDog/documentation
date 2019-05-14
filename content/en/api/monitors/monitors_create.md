@@ -1,7 +1,7 @@
 ---
 title: Create a monitor
 type: apicontent
-order: 19.01
+order: 24.01
 external_redirect: /api/#create-a-monitor
 ---
 
@@ -30,9 +30,9 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 | outlier      | `query alert`        |
 | process      | `service check`      |
 | watchdog     | `event alert`        |
-    
-*   **`query`** [*required*]:  
-    The query defines when the monitor triggers. Query syntax depends on what type of monitor you are creating:  
+
+*   **`query`** [*required*]:
+    The query defines when the monitor triggers. Query syntax depends on what type of monitor you are creating:
 
     ##### Metric Alert Query
     `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`

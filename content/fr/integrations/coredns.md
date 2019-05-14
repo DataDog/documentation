@@ -34,7 +34,7 @@ Le check CoreDNS est inclus avec le paquet de l'[Agent Datadog][1] : vous n'ave
 
 ### Configuration
 
-Modifiez le fichier `coredns.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2], afin de pointer vers votre serveur et votre port et de définir les masters à surveiller. Consultez le [fichier d'exemple coredns.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+Modifiez le fichier `coredns.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2], afin de rediriger vers votre serveur et votre port et de définir les masters à surveiller. Consultez le [fichier d'exemple coredns.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
 
 #### Utilisation de la découverte de services
 

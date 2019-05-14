@@ -18,7 +18,7 @@ The standard `datadog/agent:latest` image for running the [Datadog Agent contain
 
 If you want to add JMX-related integrations to the Datadog Agent container, use a Docker image that ends in `-jmx` to install a version that includes JMX, for example `datadog/agent:latest-jmx`.
 
-Execute a `docker-run` with a `-jmx` image and the `SD_JMX_ENABLE=true` environment variable. Then use [Autodiscovery][2] to collect metrics over JMX using your Datadog Agent.
+Execute a `docker-run` with a `-jmx` image, then use [Autodiscovery][2] to collect metrics over JMX using your Datadog Agent.
 
 ## Autodiscovery
 
@@ -33,7 +33,7 @@ Use the `datadog/agent:latest-jmx` image. This image is based on `datadog/agent:
 To check whether Autodiscovery is loading JMX-based checks:
 
 ```
-$ docker exec -it <agent_container_name> agent configcheck
+$ docker exec -it <AGENT_CONTAINER_NAME> agent configcheck
 
 === jmx check ===
 Source: Docker

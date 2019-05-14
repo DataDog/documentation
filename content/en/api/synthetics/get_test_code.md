@@ -1,7 +1,7 @@
 ---
 title: Get a test
 type: apicode
-order: 22.8
+order: 27.8
 external_redirect: /api/#get-test
 ---
 
