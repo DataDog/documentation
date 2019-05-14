@@ -27,7 +27,7 @@ If APM is enabled, [**other APM specific headers**][1] such as `x-datadog-trace-
 
 **Note**: No headers are added by default for browser tests.
 
-If you want these requests to be completely removed, and not sent at all to your analytics tool, use the below JavaScript variable in your website, wrapped around your analytics tool code snippet:
+If you want these requests to be completely removed and not sent at all to your analytics tool, use the JavaScript variable below in your website wrapped around your analytics tool code snippet:
 
 ```
 if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
