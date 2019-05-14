@@ -23,7 +23,7 @@
     contents:
 
     - action: integrations
-      branch: prod
+      branch: master
       globs:
       - "*/metadata.csv"
       - "*/manifest.json"
