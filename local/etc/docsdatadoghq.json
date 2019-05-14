@@ -119,7 +119,8 @@
     }
   ],
   "stop_urls": [
-    "/search/",
+    "docs.datadoghq.com/search/",
+    "docs.datadoghq.com/fr/search/",
     "/videos/",
     "/integrations/$",
     "/faq/$",
@@ -142,7 +143,7 @@
       "lvl2": ".main h2",
       "lvl3": ".main h3",
       "lvl4": ".main h4",
-      "text": ".main p, .main ul > li > table tbody tr td",
+      "text": ".main p, .main ul > li, table tbody tr, code-tabs table tbody tr td",
       "language": {
         "selector": "/html/@lang",
         "type": "xpath",
@@ -159,7 +160,7 @@
       "lvl2": ".main h2",
       "lvl3": ".main h3",
       "lvl4": ".main h4",
-      "text": ".main p, .main ul > li > table tbody tr td > .table-metrics tr td",
+      "text": ".main p, .main ul > li, table tbody tr, .table-metrics tr",
       "language": {
         "selector": "/html/@lang",
         "type": "xpath",
@@ -174,7 +175,7 @@
       },
       "lvl1": ".main h1",
       "lvl2": ".main h2",
-      "text": ".main p, table tbody tr td",
+      "text": ".main p, table tbody tr td, code-tabs table tbody tr td",
       "language": {
         "selector": "/html/@lang",
         "type": "xpath",
@@ -191,7 +192,7 @@
       "lvl2": ".main h2",
       "lvl3": ".main h3",
       "lvl4": ".main h4",
-      "text": ".main p, .main ul > li > table tbody tr td",
+      "text": ".main p, .main ul > li, table tbody tr td, code-tabs table tbody tr td",
       "language": {
         "selector": "/html/@lang",
         "type": "xpath",
@@ -257,5 +258,5 @@
   },
   "only_content_level": true,
   "user_agent": "Googlebot",
-  "nb_hits": 20672
+  "nb_hits": 55397
 }
