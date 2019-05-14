@@ -124,7 +124,7 @@ For example, at `9:00am UTC Wed, 12/20` you would see:
 * **1%** of traces sampled on `7/1 00:00` - `12/13 23:59`
 * **0%** of traces before `7/1 00:00`
 
-Once a trace has been viewed, it continues to be available by using its trace ID in the URL: `https://app.datadoghq.com/apm/trace/<trace_id>` This is true even if it "expires" from the UI. This behavior is independent of the UI retention time buckets.
+Once a trace has been viewed by opening a full page, it continues to be available by using its trace ID in the URL: `https://app.datadoghq.com/apm/trace/<trace_id>` This is true even if it "expires" from the UI. This behavior is independent of the UI retention time buckets.
 
 {{< img src="tracing/guide/trace_sampling_and_storage/trace_id.png" alt="Trace ID" responsive="true" >}}
 
