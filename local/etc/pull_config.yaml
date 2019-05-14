@@ -23,7 +23,7 @@
     contents:
 
     - action: integrations
-      branch: kaylyn/snmp-combine
+      branch: prod
       globs:
       - "*/metadata.csv"
       - "*/manifest.json"
