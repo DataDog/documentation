@@ -1,7 +1,7 @@
 ---
 title: Get a list of traces
 type: apicontent
-order: 22.2
+order: 30.2
 ---
 
 ## Get a list of traces
@@ -47,4 +47,3 @@ For better control over pagination results, you should use an absolute `time` pa
 
 
 [1]: https://docs.datadoghq.com/tracing/trace_search_and_analytics/search/#search-syntax
-

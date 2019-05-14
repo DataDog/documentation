@@ -1,16 +1,16 @@
 ---
 title: List traces
 type: apicode
-order: 22.2
+order: 30.2
 ---
 
 ##### Signature
 
-`POST api/v1/traces-queries/list`
+`POST /api/v1/traces-queries/list`
 
 ##### Example Request
 
-{{< code-snippets basename="list_trraces" >}}
+{{< code-snippets basename="list_traces" >}}
 
 ##### Example Response
 
