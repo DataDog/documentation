@@ -18,15 +18,15 @@ dashboards = [
     },
     {
         "type" => "integration_screenboard",
-        "id" => "jk9-p5y-ii6"
+        "id" => "87"
     },
     {
         "type" => "integration_timeboard",
-        "id" => "nf5-aju-tmr"
+        "id" => "23"
     },
     {
         "type" => "host_timeboard",
-        "id" => "jsb-8sp-iz5"
+        "id" => "3245468"
     }
 ]
 

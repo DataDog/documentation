@@ -5,13 +5,13 @@ aliases:
   - /graphing/faq/dashboard-lists-api-doc
 ---
 
-<div class="alert alert-danger">
-This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api/?lang=python#dashboard-lists">new Dashboard List endpoint version</a> instead.
-</div>
-
 Interact with your dashboard lists through the API to make it easier to organize, find, and share all of your dashboards with your team and organization.
 
 ## Get Items of a Dashboard List
+
+<div class="alert alert-danger">
+This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#get-items-of-a-dashboard-list"> Get Items of a Dashboard List V2 endpoint</a> instead.
+</div>
 
 ### Signature
 
@@ -42,10 +42,9 @@ api.DashboardList.get_items(4741)
 
 ```python
 {
-    'total': 2,
+    'total': 5,
     'dashboards': [
         {
-            'new_id': 99,
             'is_shared': False,
             'author': {
                 'handle': None,
@@ -62,7 +61,6 @@ api.DashboardList.get_items(4741)
             'icon': '/static/v/34.254868/images/saas_logos/small/amazon_dynamodb.png'
         },
         {
-            'new_id': 71,
             'is_shared': False,
             'author': {
                 'handle': None,
@@ -77,6 +75,59 @@ api.DashboardList.get_items(4741)
             'type': 'integration_timeboard',
             'id': 17,
             'icon': '/static/v/34.254868/images/saas_logos/small/postgres.png'
+        },
+        {
+            'new_id': 'qts-q2k-yq6',
+            'popularity': 0,
+            'is_shared': False,
+            'author': {
+                'handle': 'test1@datadoghq.com',
+                'name': 'Author Name'
+            },
+            'url': '/dash/75619/trace-api',
+            'title': 'Trace API',
+            'modified': '2018-03-16T13:39:39.517133+00:00',
+            'created': '2015-10-21T13:22:48.633391+00:00',
+            'is_favorite': False,
+            'is_read_only': False,
+            'type': 'custom_timeboard',
+            'id': 75619,
+            'icon': None
+        },
+        {
+            'new_id': 'rys-xwq-geh',
+            'popularity': 0,
+            'is_shared': False,
+            'author': {
+                'handle': 'test2@datadoghq.com',
+                'name': 'Other Author Name'
+            },
+            'url': '/screen/63572/agent-stats',
+            'title': 'Agent Stats',
+            'modified': '2018-03-16T12:54:25.968134+00:00',
+            'created': '2014-06-18T18:19:00.974763+00:00',
+            'is_favorite': False,
+            'is_read_only': False,
+            'type': 'custom_screenboard',
+            'id': 63572
+            'icon': None
+        },
+        {
+            'popularity': 0,
+            'is_shared': False,
+            'author': {
+                'handle': None,
+                'name': None
+            },
+            'url': '/dash/host/3245468',
+            'title': 'agent-gui',
+            'modified': None,
+            'created': None,
+            'is_favorite': False,
+            'is_read_only': True,
+            'type': 'host_timeboard',
+            'id': 3245468,
+            'icon': None
         }
     ]
 }
@@ -105,10 +156,9 @@ result = dog.get_items_of_dashboard_list(4741)
 [
     "200",
     {
-        "total" => 2,
+        "total" => 5,
         "dashboards" => [
             {
-                "new_id" => 99,
                 "title" => "AWS DynamoDB",
                 "is_favorite" => true,
                 "id" => 66,
@@ -125,7 +175,6 @@ result = dog.get_items_of_dashboard_list(4741)
                 "type" => "integration_screenboard"
             },
             {
-                "new_id" => 71,
                 "title" => "Postgres - Metrics",
                 "is_favorite" => true,
                 "id" => 17,
@@ -140,6 +189,59 @@ result = dog.get_items_of_dashboard_list(4741)
                 "modified" => nil,
                 "is_read_only" => true,
                 "type" => "integration_timeboard"
+            },
+            {
+                "new_id" => "qts-q2k-yq6",
+                "popularity" => 0,
+                "title" => "Trace API",
+                "is_favorite" => false,
+                "id" => 75619,
+                "icon" => nil,
+                "is_shared" => false,
+                "author" => {
+                    "handle" => "test1@datadoghq.com",
+                    "name" => "Author Name"
+                },
+                "url" => "/dash/75619/trace-api",
+                "created" => "2015-10-21T13:22:48.633391+00:00",
+                "modified" => "2018-03-16T13:39:39.517133+00:00",
+                "is_read_only" => false,
+                "type" => "custom_timeboard"
+            },
+            {
+                "new_id" => "rys-xwq-geh",
+                "popularity" => 0,
+                "title" => "Agent Stats",
+                "is_favorite" => false,
+                "id" => 63572,
+                "icon" => nil,
+                "is_shared" => false,
+                "author" => {
+                    "handle" => "test2@datadoghq.com",
+                    "name" => "Other Author Name"
+                },
+                "url" => "/screen/63572/agent-stats",
+                "created" => "2014-06-18T18:19:00.974763+00:00",
+                "modified" => "2018-03-16T12:54:25.968134+00:00",
+                "is_read_only" => false,
+                "type" => "custom_screenboard"
+            },
+            {
+                "popularity" => 0,
+                "title" => "agent-gui",
+                "is_favorite" => false,
+                "id" => 3245468,
+                "icon" => nil,
+                "is_shared" => false,
+                "author" => {
+                    "handle" => nil,
+                    "name" => nil
+                },
+                "url" => "/dash/host/3245468",
+                "created" => nil,
+                "modified" => nil,
+                "is_read_only" => true,
+                "type" => "host_timeboard"
             }
         ]
     }
@@ -167,10 +269,9 @@ curl -X GET \
 
 ```sh
 {
-    "total": 2,
+    "total": 5,
     "dashboards": [
         {
-            "new_id": 99,
             "is_shared": False,
             "author": {
                 "handle": None,
@@ -187,7 +288,6 @@ curl -X GET \
             "icon": "/static/v/34.254868/images/saas_logos/small/amazon_dynamodb.png"
         },
         {
-            "new_id": 71,
             "is_shared": False,
             "author": {
                 "handle": None,
@@ -202,6 +302,59 @@ curl -X GET \
             "type": "integration_timeboard",
             "id": 17,
             "icon": "/static/v/34.254868/images/saas_logos/small/postgres.png"
+        },
+        {
+            "new_id": "qts-q2k-yq6",
+            "popularity": 0,
+            "is_shared": False,
+            "author": {
+                "handle": "test1@datadoghq.com",
+                "name": "Author Name"
+            },
+            "url": "/dash/75619/trace-api",
+            "title": "Trace API",
+            "modified": "2018-03-16T13:39:39.517133+00:00",
+            "created": "2015-10-21T13:22:48.633391+00:00",
+            "is_favorite": False,
+            "is_read_only": False,
+            "type": "custom_timeboard",
+            "id": 75619,
+            "icon": None
+        },
+        {
+            "new_id": "rys-xwq-geh",
+            "popularity": 0,
+            "is_shared": False,
+            "author": {
+                "handle": "test2@datadoghq.com",
+                "name": "Other Author Name"
+            },
+            "url": "/screen/63572/agent-stats",
+            "title": "Agent Stats",
+            "modified": "2018-03-16T12:54:25.968134+00:00",
+            "created": "2014-06-18T18:19:00.974763+00:00",
+            "is_favorite": False,
+            "is_read_only": False,
+            "type": "custom_screenboard",
+            "id": 63572,
+            "icon": None
+        },
+        {
+            "popularity": 0,
+            "is_shared": False,
+            "author": {
+                "handle": None,
+                "name": None
+            },
+            "url": "/dash/host/3245468",
+            "title": "agent-gui",
+            "modified": None,
+            "created": None,
+            "is_favorite": False,
+            "is_read_only": True,
+            "type": "host_timeboard",
+            "id": 3245468,
+            "icon": None
         }
     ]
 }
@@ -212,7 +365,11 @@ curl -X GET \
 {{< /tabs >}}
 
 
-## Add Items of a Dashboard List
+## Add Items to a Dashboard List
+
+<div class="alert alert-danger">
+This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#add-items-to-a-dashboard-list"> Add Items to a Dashboard List V2 endpoint</a> instead.
+</div>
 
 ### Signature
 
@@ -456,6 +613,10 @@ curl -X ADD -H "Content-type: application/json" \
 
 ## Update Items of a Dashboard List
 
+<div class="alert alert-danger">
+This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#update-items-of-a-dashboard-list"> Update Items of a Dashboard List V2 endpoint</a> instead.
+</div>
+
 ### Signature
 
 `PUT https://api.datadoghq.com/api/v1/dashboard/lists/manual/<LIST_ID>/dashboards`
@@ -697,7 +858,11 @@ curl -X UPDATE -H "Content-type: application/json" \
 {{< /tabs >}}
 
 
-## Delete Items of a Dashboard List
+## Delete Items from a Dashboard List
+
+<div class="alert alert-danger">
+This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#delete-items-from-a-dashboard-list"> Delete Items from a Dashboard List V2 endpoint</a> instead.
+</div>
 
 ### Signature
 
