@@ -12,7 +12,7 @@
       - dd/utils/context/source.py
 
     - action: integrations
-      branch: kaylyn/snmp-combine
+      branch: prod
       globs:
       - integration/**/*_metadata.csv
       - integration/**/manifest.json
@@ -23,7 +23,7 @@
     contents:
 
     - action: integrations
-      branch: master
+      branch: kaylyn/snmp-combine
       globs:
       - "*/metadata.csv"
       - "*/manifest.json"
