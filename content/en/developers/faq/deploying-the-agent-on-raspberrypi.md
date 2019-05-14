@@ -5,6 +5,8 @@ kind: faq
 
 **Using raspbian**
 
+**Note**: Datadog does not officially support Raspbian.
+
 1. Begin with the update of your local cache
 ```
 sudo apt-get update
@@ -36,6 +38,8 @@ You now see metrics being ingested from your Raspberry PI device:
 {{< img src="developers/faq/rasberry_dashboard.png" alt="raspberry_dashboard"  responsive="true" >}}
 
 Thank you to Karim Vaes for the [excellent blog post][2]!
+
+**Note**: Datadog does not officially support Raspbian.
 
 [1]: https://app.datadoghq.com/account/settings#agent/source
 [2]: https://kvaes.wordpress.com/2015/12/29/datadog-on-raspberry-pi
