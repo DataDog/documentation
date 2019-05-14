@@ -1,5 +1,5 @@
 ---
-title: Force Tracing
+title: Manually Control Trace Priority
 kind: documentation
 aliases:
   - /tracing/guide/force_tracing
