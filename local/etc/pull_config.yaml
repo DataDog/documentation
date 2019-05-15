@@ -23,7 +23,7 @@
     contents:
 
     - action: integrations
-      branch: master
+      branch: nick/move_all_meta
       globs:
       - "*/metadata.csv"
       - "*/manifest.json"
