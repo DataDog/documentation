@@ -7,6 +7,11 @@ aliases:
 
 Interact with your dashboard lists through the API to make it easier to organize, find, and share all of your dashboards with your team and organization.
 
+- [Get Items of a Dashboard List](#get-items-of-a-dashboard-list)
+- [Add Items to a Dashboard List](#add-items-to-a-dashboard-list)
+- [Update Items of a Dashboard List](#update-items-of-a-dashboard-list)
+- [Delete Items from a Dashboard List](#delete-items-from-a-dashboard-list)
+
 ## Get Items of a Dashboard List
 
 <div class="alert alert-danger">
@@ -19,10 +24,10 @@ This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#get-i
 
 ### Examples
 
+#### Example Request
+
 {{< tabs >}}
 {{% tab "Python" %}}
-
-##### Example Request
 
 ```python
 from datadog import initialize, api
@@ -38,7 +43,43 @@ api.DashboardList.get_items(4741)
 
 ```
 
-##### Example Response
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+```ruby
+require 'rubygems'
+require 'dogapi'
+
+api_key = '<YOUR_API_KEY>'
+app_key = '<YOUR_APP_KEY>'
+
+dog = Dogapi::Client.new(api_key, app_key)
+
+result = dog.get_items_of_dashboard_list(4741)
+```
+
+{{% /tab %}}
+{{% tab "Curl" %}}
+
+```sh
+api_key=<YOUR_API_KEY>
+app_key=<YOUR_APP_KEY>
+
+list_id=4741
+
+curl -X GET \
+"https://api.datadoghq.com/api/v1/dashboard/lists/manual/${list_id}/dashboards?api_key=${api_key}&application_key=${app_key}"
+```
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+#### Example Response
+
+{{< tabs >}}
+{{% tab "Python" %}}
 
 ```python
 {
@@ -135,22 +176,6 @@ api.DashboardList.get_items(4741)
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
-
-##### Example Request
-
-```ruby
-require 'rubygems'
-require 'dogapi'
-
-api_key = '<YOUR_API_KEY>'
-app_key = '<YOUR_APP_KEY>'
-
-dog = Dogapi::Client.new(api_key, app_key)
-
-result = dog.get_items_of_dashboard_list(4741)
-```
-
-##### Example Response
 
 ```ruby
 [
@@ -249,23 +274,8 @@ result = dog.get_items_of_dashboard_list(4741)
 
 ```
 
-
 {{% /tab %}}
 {{% tab "Curl" %}}
-
-##### Example Request
-
-```sh
-api_key=<YOUR_API_KEY>
-app_key=<YOUR_APP_KEY>
-
-list_id=4741
-
-curl -X GET \
-"https://api.datadoghq.com/api/v1/dashboard/lists/manual/${list_id}/dashboards?api_key=${api_key}&application_key=${app_key}"
-```
-
-##### Example Response
 
 ```sh
 {
@@ -392,10 +402,12 @@ This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#add-i
     *   **`id`** [*required*]:
         The id of the dashboard.
 
+### Examples
+
+#### Example Request
+
 {{< tabs >}}
 {{% tab "Python" %}}
-
-##### Example Request
 
 ```python
 from datadog import initialize, api
@@ -435,39 +447,8 @@ api.DashboardList.add_items(list_id, dashboards=dashboards)
 
 ```
 
-##### Example Response
-
-```python
-{
-    'added_dashboards_to_list': [
-        {
-            'type': 'custom_timeboard',
-            'id': 5858
-        },
-        {
-            'type': 'custom_screenboard',
-            'id': 1414
-        },
-        {
-            'type': 'integration_timeboard',
-            'id': 5
-        },
-        {
-            'type': 'integration_screenboard',
-            'id': 67
-        },
-        {
-            'type': 'host_timeboard',
-            'id': 123456789
-        }
-    ]
-}
-```
-
 {{% /tab %}}
 {{% tab "Ruby" %}}
-
-##### Example Request
 
 ```ruby
 require 'rubygems'
@@ -505,43 +486,8 @@ dashboards = [
 result = dog.add_items_of_dashboard_list(list_id, dashboards)
 ```
 
-##### Example Response
-
-```ruby
-[
-    "200",
-    {
-        "dashboards" => [
-            {
-                "type" => "custom_timeboard",
-                "id" => 5858
-            },
-            {
-                "type" => "custom_screenboard",
-                "id" => 1414
-            },
-            {
-                "type" => "integration_timeboard",
-                "id" => 5
-            },
-            {
-                "type" => "integration_screenboard",
-                "id" => 67
-            },
-            {
-                "type" => "host_timeboard",
-                "id" => 123456789
-            }
-        ]
-    }
-]
-
-```
-
 {{% /tab %}}
 {{% tab "Curl" %}}
-
-##### Example Request
 
 ```sh
 api_key=<YOUR_API_KEY>
@@ -577,7 +523,77 @@ curl -X ADD -H "Content-type: application/json" \
 "https://api.datadoghq.com/api/v1/dashboard/lists/manual/${list_id}/dashboards?api_key=${api_key}&application_key=${app_key}"
 ```
 
-##### Example Response
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Example Response
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+```python
+{
+    'added_dashboards_to_list': [
+        {
+            'type': 'custom_timeboard',
+            'id': 5858
+        },
+        {
+            'type': 'custom_screenboard',
+            'id': 1414
+        },
+        {
+            'type': 'integration_timeboard',
+            'id': 5
+        },
+        {
+            'type': 'integration_screenboard',
+            'id': 67
+        },
+        {
+            'type': 'host_timeboard',
+            'id': 123456789
+        }
+    ]
+}
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+```ruby
+[
+    "200",
+    {
+        "dashboards" => [
+            {
+                "type" => "custom_timeboard",
+                "id" => 5858
+            },
+            {
+                "type" => "custom_screenboard",
+                "id" => 1414
+            },
+            {
+                "type" => "integration_timeboard",
+                "id" => 5
+            },
+            {
+                "type" => "integration_screenboard",
+                "id" => 67
+            },
+            {
+                "type" => "host_timeboard",
+                "id" => 123456789
+            }
+        ]
+    }
+]
+
+```
+
+{{% /tab %}}
+{{% tab "Curl" %}}
 
 ```sh
 {
@@ -610,7 +626,6 @@ curl -X ADD -H "Content-type: application/json" \
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ## Update Items of a Dashboard List
 
 <div class="alert alert-danger">
@@ -638,10 +653,12 @@ This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#updat
     *   **`id`** [*required*]:
         The id of the dashboard.
 
+### Examples
+
+#### Example Request
+
 {{< tabs >}}
 {{% tab "Python" %}}
-
-##### Example Request
 
 ``` python
 from datadog import initialize, api
@@ -681,40 +698,8 @@ api.DashboardList.update_items(list_id, dashboards=dashboards)
 
 ```
 
-##### Example Response
-
-```python
-{
-    'dashboards': [
-        {
-            'type': 'custom_timeboard',
-            'id': 5858
-        },
-        {
-            'type': 'custom_screenboard',
-            'id': 1414
-        },
-        {
-            'type': 'integration_timeboard',
-            'id': 5
-        },
-        {
-            'type': 'integration_screenboard',
-            'id': 67
-        },
-        {
-            'type': 'host_timeboard',
-            'id': 123456789
-        }
-    ]
-}
-
-```
-
 {{% /tab %}}
 {{% tab "Ruby" %}}
-
-#### Example Request
 
 ``` ruby
 require 'rubygems'
@@ -753,42 +738,8 @@ result = dog.update_items_of_dashboard_list(list_id, dashboards)
 
 ```
 
-#### Example Response
-
-```ruby
-[
-    "200",
-    {
-        "dashboards" => [
-            {
-                "type" => "custom_timeboard",
-                "id" => 5858
-            },
-            {
-                "type" => "custom_screenboard",
-                "id" => 1414
-            },
-            {
-                "type" => "integration_timeboard",
-                "id" => 5
-            },
-            {
-                "type" => "integration_screenboard",
-                "id" => 67
-            },
-            {
-                "type" => "host_timeboard",
-                "id" => 123456789
-            }
-        ]
-    }
-]
-```
-
 {{% /tab %}}
 {{% tab "Curl" %}}
-
-#### Example Request
 
 ```sh
 
@@ -825,7 +776,78 @@ curl -X UPDATE -H "Content-type: application/json" \
 "https://api.datadoghq.com/api/v1/dashboard/lists/manual/${list_id}/dashboards?api_key=${api_key}&application_key=${app_key}"
 
 ```
-#### Example Response
+
+{{% /tab %}}
+{{< /tabs >}}
+
+##### Example Response
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+```python
+{
+    'dashboards': [
+        {
+            'type': 'custom_timeboard',
+            'id': 5858
+        },
+        {
+            'type': 'custom_screenboard',
+            'id': 1414
+        },
+        {
+            'type': 'integration_timeboard',
+            'id': 5
+        },
+        {
+            'type': 'integration_screenboard',
+            'id': 67
+        },
+        {
+            'type': 'host_timeboard',
+            'id': 123456789
+        }
+    ]
+}
+
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+```ruby
+[
+    "200",
+    {
+        "dashboards" => [
+            {
+                "type" => "custom_timeboard",
+                "id" => 5858
+            },
+            {
+                "type" => "custom_screenboard",
+                "id" => 1414
+            },
+            {
+                "type" => "integration_timeboard",
+                "id" => 5
+            },
+            {
+                "type" => "integration_screenboard",
+                "id" => 67
+            },
+            {
+                "type" => "host_timeboard",
+                "id" => 123456789
+            }
+        ]
+    }
+]
+```
+
+{{% /tab %}}
+{{% tab "Curl" %}}
 
 ```sh
 {
@@ -885,10 +907,11 @@ This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#delet
     *   **`id`** [*required*]:
         The id of the dashboard.
 
+### Examples
+#### Example Request
+
 {{< tabs >}}
 {{% tab "Python" %}}
-
-##### Example Request
 
 ``` python
 from datadog import initialize, api
@@ -928,40 +951,8 @@ api.DashboardList.delete_items(list_id, dashboards=dashboards)
 
 ```
 
-##### Example Response
-
-```python
-{
-    'deleted_dashboards_from_list': [
-        {
-            'type': 'custom_timeboard',
-            'id': 5858
-        },
-        {
-            'type': 'custom_screenboard',
-            'id': 1414
-        },
-        {
-            'type': 'integration_timeboard',
-            'id': 5
-        },
-        {
-            'type': 'integration_screenboard',
-            'id': 67
-        },
-        {
-            'type': 'host_timeboard',
-            'id': 123456789
-        }
-    ]
-}
-
-```
-
 {{% /tab %}}
 {{% tab "Ruby" %}}
-
-#### Example Request
 
 ``` ruby
 require 'rubygems'
@@ -1000,43 +991,8 @@ result = dog.delete_items_from_dashboard_list(list_id, dashboards)
 
 ```
 
-#### Example Response
-
-```ruby
-[
-    "200",
-    {
-        "deleted_dashboards_from_list" => [
-            {
-                "type" => "custom_timeboard",
-                "id" => 5858
-            },
-            {
-                "type" => "custom_screenboard",
-                "id" => 1414
-            },
-            {
-                "type" => "integration_timeboard",
-                "id" => 5
-            },
-            {
-                "type" => "integration_screenboard",
-                "id" => 67
-            },
-            {
-                "type" => "host_timeboard",
-                "id" => 123456789
-            }
-        ]
-    }
-]
-```
-
-
 {{% /tab %}}
 {{% tab "Curl" %}}
-
-#### Example Request
 
 ```sh
 
@@ -1073,7 +1029,78 @@ curl -X DELETE -H "Content-type: application/json" \
 "https://api.datadoghq.com/api/v1/dashboard/lists/manual/${list_id}/dashboards?api_key=${api_key}&application_key=${app_key}"
 
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 #### Example Response
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+```python
+{
+    'deleted_dashboards_from_list': [
+        {
+            'type': 'custom_timeboard',
+            'id': 5858
+        },
+        {
+            'type': 'custom_screenboard',
+            'id': 1414
+        },
+        {
+            'type': 'integration_timeboard',
+            'id': 5
+        },
+        {
+            'type': 'integration_screenboard',
+            'id': 67
+        },
+        {
+            'type': 'host_timeboard',
+            'id': 123456789
+        }
+    ]
+}
+
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+```ruby
+[
+    "200",
+    {
+        "deleted_dashboards_from_list" => [
+            {
+                "type" => "custom_timeboard",
+                "id" => 5858
+            },
+            {
+                "type" => "custom_screenboard",
+                "id" => 1414
+            },
+            {
+                "type" => "integration_timeboard",
+                "id" => 5
+            },
+            {
+                "type" => "integration_screenboard",
+                "id" => 67
+            },
+            {
+                "type" => "host_timeboard",
+                "id" => 123456789
+            }
+        ]
+    }
+]
+```
+
+{{% /tab %}}
+{{% tab "Curl" %}}
 
 ```sh
 {
