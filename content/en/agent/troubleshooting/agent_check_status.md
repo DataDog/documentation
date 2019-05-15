@@ -3,6 +3,8 @@ title: Agent Check Status
 kind: documentation
 ---
 
+## Linux
+
 Agent checks must be called by the Agent. To test an Agent check, run:
 
 {{< tabs >}}
@@ -36,7 +38,7 @@ sudo -u dd-agent dd-agent check <CHECK_NAME> --check-rate
 
 If your issue continues, [reach out to the Datadog support team][1] with a [flare](#flare).
 
-### Windows
+## Windows
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}

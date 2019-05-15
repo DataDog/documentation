@@ -104,10 +104,14 @@ main:
         children:
           - name: "Debug Mode"
             url: "agent/troubleshooting/debug_mode"
-          - name: "Send a Flare"
+          - name: "Agent Flare"
             url: "agent/troubleshooting/send_a_flare"
           - name: "Agent Check Status"
             url: "agent/troubleshooting/agent_check_status"
+          - name: "NTP Issues"
+            url: "agent/troubleshooting/ntp"
+          - name: "Permission Issues"
+            url: "agent/troubleshooting/permissions"
       # Guides
       - name: "Guides"
         url: "agent/guide/"

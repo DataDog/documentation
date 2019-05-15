@@ -3,6 +3,7 @@ title: Agent Troubleshooting
 kind: documentation
 aliases:
     - /agent/faq/agent-s-are-no-longer-reporting-data
+    - /agent/faq/common-windows-agent-installation-error-1721
 further_reading:
 - link: "/agent/guide/agent-commands/?tab=agentv6"
   tag: "FAQ"
@@ -13,27 +14,15 @@ further_reading:
 - link: "/agent/faq/common-windows-agent-installation-error-1721"
   tag: "FAQ"
   text: "Common Windows Agent Installation Error 1721"
-- link: "/agent/faq/how-to-monitor-snmp-devices"
-  tag: "FAQ"
-  text: "How to monitor SNMP devices?"
 - link: "/agent/faq/i-stoped-my-agent-but-i-m-still-seeing-the-host"
   tag: "FAQ"
   text: "I stopped my Agent but I'm still seeing the host in my Datadog account."
-- link: "/agent/faq/network-time-protocol-ntp-offset-issues"
-  tag: "FAQ"
-  text: "Network Time Protocol (NTP) Offset Issues"
-- link: "/agent/faq/how-to-solve-permission-denied-errors"
-  tag: "FAQ"
-  text: "How to solve Permission denied errors?"
 - link: "/agent/faq/error-restarting-agent-already-listening-on-a-configured-port"
   tag: "FAQ"
   text: "Error Restarting Agent: Already Listening on a Configured Port"
 - link: "/agent/faq/forwarder-logs-contain-599-response-code"
   tag: "FAQ"
   text: "Forwarder logs contain 599 response code"
-- link: "/agent/faq/cannot-open-an-http-server-socket-error-reported-errno-eacces-13"
-  tag: "FAQ"
-  text: "Starting Datadog Agent (using supervisord):Error: Cannot open an HTTP server: socket.error reported errno.EACCES (13)"
 - link: "/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric"
   tag: "FAQ"
   text: "Why don't I see the 'system.processes.open_file_descriptors' metric?"

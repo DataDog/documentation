@@ -1,6 +1,7 @@
 ---
 title: Debug Mode
 kind: documentation
+disable_toc: true
 aliases:
     - /agent/faq/how-to-get-more-logging-from-the-agent
     - /agent/faq/agent-5-container-more-log
@@ -16,7 +17,7 @@ To enable the Agent full debug mode:
 
 4. Wait a few minutes to generate some logs. [See the Agent][3] docuementation for the location of the logs.
 
-### Obtaining debug logs from the container Agent
+## Obtaining debug logs from the container Agent
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
