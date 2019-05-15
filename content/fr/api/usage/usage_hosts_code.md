@@ -1,7 +1,7 @@
 ---
 title: Obtenir l'utilisation horaire pour les hosts et conteneurs
 type: apicode
-order: 26.1
+order: 31.1
 external_redirect: /api/#obtenir-l-utilisation-horaire-pour-les-hosts-et-conteneurs
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#obtenir-l-utilisation-horaire-pour-les-hosts-et-contene
 {{< code-snippets basename="api-billing-usage-hosts" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-billing-usage-hosts" >}}
-
