@@ -30,31 +30,32 @@ Browser tests are scenarios executed by Datadog on your web applications. They r
 
 Define the configuration of your browser test.
 
-{{< img src="synthetics/browser_test/browser_check_configuration.png" alt="Browser Tests make request" responsive="true" style="width:80%;">}}
+1. **Starting URL**: The URL from which your browser test starts the scenario.
+    * Advanced Options (optional): Use custom request headers or cookies.
+        * Headers: Defined headers override the default browser headers. For example, set the User Agent in the header to [identify Datadog scripts][1].
+        * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `cookie1=<YOUR_COOKIE_1>; cookie2=<YOUR_COOKIE_2>`.
+2. **Name**: The name of your browser test.
+3. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the Synthetics page.
+4. **Devices**: The devices to run your check on. Available devices are `Laptop Large`, `Tablet`, and `Mobile Small`.
+5. **Locations**: The locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2].
+6. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week.
 
-1. Give your browser test a name.
-2. Enter the Start URL. This is the URL from which your browser test starts the scenario.
-3. Define Tags with the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` in the Synthetics page.
-4. Define on which device to run your check. Available devices are: `Laptop Large`, `Tablet`, and `Mobile Small`.
-5. Pick the locations to run the test from. Many AWS locations from around the world are available, the full list can be retrieved [through Datadog API][1].
-6. Choose a Check frequency between "1 run per 5 minute interval" to "1 run per week":
+### Alert conditions
 
-    {{< img src="synthetics/browser_test/check_frequency.png" alt="Check frequency" responsive="true" style="width:80%;">}}
+An alert is triggered if any assertion fails for `<INSERT_NUMBER>` minutes from any `<INSERT_NUMBER>` of `<NUMBER_OF_CHOSEN>` locations.
 
 ### Notifications
 
-A notification is sent if at least one step of the browser test scenario fails. To configure your notifications:
+To configure your notifications:
 
-{{< img src="synthetics/browser_test/browser_check_notification.png" alt="Browser test notification" responsive="true" style="width:80%;">}}
-
-1. Select users and/or [services][2] to send the notifications to.
-2. Enter a **message** for the browser test. This field allows standard [Markdown formatting][3]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
+1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][3]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
+2. Choose your [services][4] and/or team members to notify.
 3. Click **Save Details and Record Test** to save your browser test.
 4. Start to record your test.
 
 ## Record test
 
-**Tests can be only recorded from [Google Chrome][4]. To record your test, download the [Datadog Record Test extension for Google Chrome][5].**
+Tests can be only recorded from **[Google Chrome][5]**. To record your test, download the [Datadog Record Test extension for Google Chrome][6].
 
 {{< img src="synthetics/browser_test/browser_check_record_test.png" alt="Browser test record test" responsive="true" >}}
 
@@ -134,8 +135,9 @@ To use your variables in one of your assertions, hit *Use Variable* and select t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/?lang=bash#get-available-locations
-[2]: /integrations/#cat-notification
+[1]: /synthetics/identify_synthetics_bots
+[2]: /api/?lang=bash#get-available-locations
 [3]: http://daringfireball.net/projects/markdown/syntax
-[4]: https://www.google.com/chrome
-[5]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[4]: /integrations/#cat-notification
+[5]: https://www.google.com/chrome
+[6]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
