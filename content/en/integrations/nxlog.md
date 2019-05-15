@@ -111,7 +111,7 @@ Configure NXLog to gather logs from your host, containers, & services.
 
 1. Download the [public key for TLS encryption][1] of logs.
 
-2. Download the [AWS CA certificate][2]
+2. Download the [CA certificate][2]
 
 3. Add the `om_sll` module in your NXLog configuration to enable secure transfer over port 10516:
 
@@ -217,7 +217,7 @@ Configure NXLog to gather logs from your host, containers, & services.
 
 1. Download the [public key for TLS encryption][1] of logs.
 
-2. Download the [AWS CA certificate][2]
+2. Download the [CA certificate][2]
 
 3. Add the `om_sll` module in your NXLog configuration to enable secure transfer over port 10516:
 
@@ -228,14 +228,14 @@ Configure NXLog to gather logs from your host, containers, & services.
       Port    443
       Exec    $raw_event="<DATADOG_API_KEY> " + $raw_event;
       CertFile <CERT_DIR>/intake.logs.datadoghq.eu.crt
-      CAFile   <CERT_DIR>/SFSRootCAG2.pem
+      CAFile   <CERT_DIR>/datadog.ca.eu.pem
       AllowUntrusted FALSE
     </Output>
     ```
 
 
 [1]: /resources/crt/FULL_intake.logs.datadoghq.eu.crt
-[2]: https://www.amazontrust.com/repository/SFSRootCAG2.pem
+[2]: /resources/crt/datadog.ca.eu.pem
 {{% /tab %}}
 {{< /tabs >}}
 
