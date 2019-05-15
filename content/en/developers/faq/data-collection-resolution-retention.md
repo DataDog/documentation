@@ -23,7 +23,6 @@ Find below a summary of Datadog data collection, resolution, and retention:
 | API Test results             | Datadog Synthetics application                                        | User-defined        | 1 min              | Result seen in the UI by user: 15 months <br/> Failed result not seen in the UI by user: 1 month <br/> Successful result not seen in the UI by user: 15 days                 | Synthetics       |
 | Browser Test metrics         | Datadog Synthetics application                                        | User-defined        | 5 min              | 15 months                               | Synthetics       |
 | Browser Test results         | Datadog Synthetics application                                        | User-defined        | 5 min              | Result seen in the UI by user: 15 months <br/> Failed result not seen in the UI by user: 1 month <br/> Successful result not seen in the UI by user: 15 days                 | Synthetics       |
-| Uptime data lines            | Datadog Synthetics application                                        |                     |                    | 3 months                                | Synthetics       |
 
 
 [1]: /tracing/guide/trace_sampling_and_storage
