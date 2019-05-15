@@ -71,8 +71,7 @@ push_translations:
   stage: post-deploy
   environment: "preview"
   script:
-    - git log -m -1 --name-only --pretty="format:" $CI_COMMIT_SHA
-    - EMAIL=$(git show -s --format="%ae" HEAD) && echo $EMAIL
+    - /local/bin/sh/push_translations.sh
   only:
    - /.+?\/[a-zA-Z0-9_-]+/
 
