@@ -1,7 +1,7 @@
 ---
 title: Add tags to a host
 type: apicode
-order: 28.3
+order: 30.3
 external_redirect: /api/#add-tags-to-a-host
 ---
 
