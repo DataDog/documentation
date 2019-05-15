@@ -101,6 +101,13 @@ main:
       # Troubleshooting
       - name: "Troubleshooting"
         url: "agent/troubleshooting/"
+        children:
+          - name: "Debug Mode"
+            url: "agent/troubleshooting/debug_mode"
+          - name: "Send a Flare"
+            url: "agent/troubleshooting/send_a_flare"
+          - name: "Agent Check Status"
+            url: "agent/troubleshooting/agent_check_status"
       # Guides
       - name: "Guides"
         url: "agent/guide/"
@@ -603,4 +610,3 @@ main:
   - name: "Help"
     url: "help/"
     pre: "nav_help"
-
