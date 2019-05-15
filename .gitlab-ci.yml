@@ -71,7 +71,7 @@ push_translations:
   stage: post-deploy
   environment: "preview"
   script:
-    - /local/bin/sh/push_translations.sh
+    - ./local/bin/sh/push_translations.sh
   only:
    - /.+?\/[a-zA-Z0-9_-]+/
 
