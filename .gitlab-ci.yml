@@ -65,6 +65,16 @@ test_preview_link_checks:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
+push_translations:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  script:
+    - git log -m -1 --name-only --pretty="format:" $CI_COMMIT_SHA
+    - echo $GITLAB_USER_EMAIL
+  only:
+   - /.+?\/[a-zA-Z0-9_-]+/
+
 # ================== live ================== #
 build_live:
   <<: *base_template
