@@ -1,7 +1,7 @@
 ---
 title: Get hourly usage for Fargate
 type: apicontent
-order: 26.7
+order: 31.7
 external_redirect: /api/#get-hourly-usage-for-fargate
 ---
 

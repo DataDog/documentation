@@ -1,7 +1,6 @@
 ---
 title: Screenboards
 type: apicode
-order: 21
+order: 26
 external_redirect: /api/#screenboards
 ---
-

@@ -1,7 +1,7 @@
 ---
 title: Get all monitor details
 type: apicode
-order: 19.05
+order: 24.05
 external_redirect: /api/#get-all-monitor-details
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#get-all-monitor-details
 {{< code-snippets basename="api-monitor-show-all" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-monitor-show-all" >}}
-

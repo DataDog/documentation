@@ -105,7 +105,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | HttpURLConnection        | all         | Fully Supported | `httpurlconnection`, `urlconnection`           |
 | Kafka-Clients            | 0.11+       | Fully Supported | `kafka`                                        |
 | Kafka-Streams            | 0.11+       | Fully Supported | `kafka`, `kafka-streams`                       |
-| Jax RS Clients           | 1.11+       | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
+| Jax RS Clients           | 2.0+        | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
 | JMS                      | 1 and 2     | Fully Supported | `jms`                                          |
 | Rabbit AMQP              | 2.7+        | Fully Supported | `amqp`, `rabbitmq`                             |
 | OkHTTP                   | 3.0+        | Fully Supported | `okhttp`, `okhttp-3`                           |

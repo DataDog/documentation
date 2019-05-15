@@ -1,7 +1,7 @@
 ---
 title: Get organization
 type: apicode
-order: 20.2
+order: 25.2
 external_redirect: /api/#get-organization
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#get-organization
 {{< code-snippets basename="api-org-get" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-org-get" >}}
-

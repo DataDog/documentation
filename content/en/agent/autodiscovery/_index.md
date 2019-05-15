@@ -97,20 +97,17 @@ Note: Tags are only set when a container starts.
 
 **Note**: this feature is available for Agent v6.10+.
 
-The Datadog Agent can autodiscover tags from Pod annotations, which allows it to
-associate tags to entire pods or individual containers. Use this format
-for annotation autodiscovery:
+The Datadog Agent can autodiscover tags from Pod annotations, which allows it to associate tags to entire pods or individual containers. Use this format for annotation autodiscovery:
 
 ```
 annotations:
   ad.datadoghq.com/tags: '{"<TAG_NAME>": "<TAG_VALUE>", ...}'
-  ad.datadoghq.com/<container identifier>.tags: '{"<TAG_NAME>": "<TAG_VALUE>", ...}'
+  ad.datadoghq.com/<CONTAINER_IDENTIFIER>.tags: '{"<TAG_NAME>": "<TAG_VALUE>", ...}'
 ```
 
 Note that autodiscovery identifies containers by _name_.
 
-The Datadog Agent can also extract pod labels and annotations as metric tags
-with the following configuration in your `datadog.yaml` file:
+The Datadog Agent can also extract pod labels and annotations as metric tags with the following configuration in your `datadog.yaml` file:
 
 ```
 kubernetes_pod_labels_as_tags:
@@ -265,8 +262,8 @@ With the key-value store enabled as a template source, the Agent looks for templ
 ```
 /datadog/
   check_configs/
-    docker_image_1/                 # container identifier, e.g. httpd
-      - check_names: [<CHECK_NAME>] # e.g. apache
+    <CONTAINER_IDENTIFIER>/
+      - check_names: [<CHECK_NAME>]
       - init_configs: [<INIT_CONFIG>]
       - instances: [<INSTANCE_CONFIG>]
     ...
@@ -316,24 +313,34 @@ Since version 6.5 of the Datadog Agent, it is also possible to configure log col
 
 Autodiscovery expects annotations to look like this:
 
-```
-annotations:
-  ad.datadoghq.com/<container identifier>.check_names: '[<CHECK_NAME>]'
-  ad.datadoghq.com/<container identifier>.init_configs: '[<INIT_CONFIG>]'
-  ad.datadoghq.com/<container identifier>.instances: '[<INSTANCE_CONFIG>]'
-  ad.datadoghq.com/<container identifier>.logs: '[<LOG_CONFIG>]'
+```yaml
+# (...)
+metadata:
+#(...)
+  annotations:
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: '[<CHECK_NAME>]'
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: '[<INIT_CONFIG>]'
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: '[<INSTANCE_CONFIG>]'
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: '[<LOG_CONFIG>]'
+spec:
+  containers:
+    - name: '<CONTAINER_IDENTIFIER>'
+# (...)
 ```
 
 The format is similar to that for key-value stores. The differences are:
 
 - Annotations must begin with `ad.datadoghq.com/` (for key-value stores, the starting indicator is `/datadog/check_configs/`).
-- For Annotations, Autodiscovery identifies containers by _name_, NOT image (as it does for auto-conf files and key-value stores). That is, it looks to match `<container identifier>` to `.spec.containers[0].name`, not `.spec.containers[0].image`.
+- For Annotations, Autodiscovery identifies containers by _name_, **NOT image** (as it does for auto-conf files and key-value stores). That is, it looks to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image`.
 
 If you define your Kubernetes Pods directly (i.e. `kind: Pod`), add each Pod's annotations directly under its `metadata` section (see the first example below). If you define Pods _indirectly_ via Replication Controllers, Replica Sets, or Deployments, add Pod annotations under `.spec.templates.metadata` (see the second example below).
 
 #### Pod Example: Apache check with website availability monitoring
 
 The following Pod annotation defines two templates&mdash;equivalent to those from the end of the previous section&mdash;for `apache` containers:
+
+* `<CONTAINER_IDENTIFIER>` is `apache`.
+* Check name are `apache` and `http_check` and their `<INIT_CONFIG>`, `<INSTANCE_CONFIG>`, and `<LOG_CONFIG>` configuration can be found in their respective documentation page: [Datadog-Apache integration][1], [Datadog-HTTP check integration][2].
 
 ```
 apiVersion: v1
@@ -373,8 +380,8 @@ metadata:
     name: apache
 spec:
   containers:
-    - name: apache # use this as the container identifier in your annotations
-      image: httpd # NOT this
+    - name: apache
+      image: httpd
       ports:
         - containerPort: 80
 ```
@@ -425,12 +432,14 @@ spec:
           ]
     spec:
       containers:
-      - name: apache # use this as the container identifier in your annotations
-        image: httpd # NOT this
+      - name: apache
+        image: httpd
         ports:
         - containerPort: 80
 ```
 
+[1]: /integrations/apache/#setup
+[2]: /integrations/http_check/#setup
 {{% /tab %}}
 {{% tab "Docker" %}}
 
