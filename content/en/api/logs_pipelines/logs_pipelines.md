@@ -15,35 +15,6 @@ Pipelines and processors operate on incoming logs, parsing and transforming them
 * See user [documentation here][2]
 
 
-### Pipeline Order Endpoint
-
-The pipeline order endpoints are for controlling the _order_ in which an organisation's pipelines are processed.
-
-/!\ Logs are processed sequentially. Reordering a pipeline may change the structure and content of the data processed by other pipelines and their processors.
-
-##### Signature
-
-Action | Verb | Path | Payload | Response |
------- | ---- | ---- | ------- | -------- |
-Get Pipeline Order | `GET` | `/api/v1/logs/config/pipeline-order` | \<none> | `[PipelineOrder]`
-Update Pipeline Order | `PUT` | `/api/v1/logs/config/pipeline-order` | `[PipelineOrder]` | `[PipelineOrder]`
-
-##### Structure
-
-`[PipelineOrder]`
-```javascript
-{
-  pipeline_ids: [ 'pipeline-1', 'pipeline-2', 'pipeline-3' ]
-}
-```
-
-##### Errors
-- The `PUT` will be rejected with:
-  - `400` if the payload does not contain a `pipeline_ids` entry or if the entry is not an array of strings.
-  - `422` if the `pipeline_ids` in the payload does not contain each and every id in the current pipeline order exactly once (it can not be used to add/copy/delete pipelines, nor to do partial reordering)
-- `405` if users try to `POST` or `DELETE` to `/api/v1/logs/config/pipeline-order`
-
-
 ### Pipelines Endpoint
 
 
@@ -77,32 +48,9 @@ Delete Pipeline | `DELETE` | `/api/v1/logs/config/pipelines/{id}` | \<none> | \<
 
   // Ordered list of child processors and nested pipelines (see below for definition)
   processors: [
-    {
-      name: 'Parsing Java Default formats'  // Name of the processor, for display only.
-      type: 'grok-parser'                   // Type of processor. See below for options.
-      is_enabled: true                      // True if this processor is enabled and processing logs.
-      // For the many other Processor-specific properties, see below
-    }
-    {
-      name: 'Define timestamp as the official timestamp of the log'
-      type: 'date-remapper'
-      ...
-    }
-    {
-      name: 'Define level as the official status of the log'
-      type: 'status-remapper'
-      ...
-    }
   ]
 }
 ```
-
-
-##### Errors
-- The `POST` and `PUT` operation will be rejected with:
-  - `400` if the `[Pipeline]` in the payload contains read-only values.
-  - `400` if the `[Pipeline]` in the payload does not contain all user-modifiable values.
-- The `DELETE` operation will be rejected with `403` if it is called on a read only pipeline.
 
 
 ##### Notes
