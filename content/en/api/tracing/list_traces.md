@@ -8,7 +8,6 @@ order: 30.2
 
 List endpoint returns traces that match a trace search query. Results are paginated.
 
-
 ##### ARGUMENTS
 
 * **`query`** [*required*]:
@@ -46,4 +45,4 @@ Retrieve a trace list longer than the 1000 traces limit with the Trace List API 
 For better control over pagination results, you should use an absolute `time` parameter - don't use the`now` keyword.
 
 
-[1]: https://docs.datadoghq.com/tracing/trace_search_and_analytics/search/#search-syntax
+[1]: /tracing/trace_search_and_analytics/search/#search-syntax
