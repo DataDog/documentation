@@ -5,33 +5,21 @@ aliases:
     - /agent/faq/agent-s-are-no-longer-reporting-data
     - /agent/faq/common-windows-agent-installation-error-1721
 further_reading:
-- link: "/agent/guide/agent-commands/?tab=agentv6"
-  tag: "FAQ"
-  text: "List of all Agent commands"
-- link: "/agent/guide/agent-configuration-files/?tab=agentv6"
-  tag: "FAQ"
-  text: "Agent configuration files"
-- link: "/agent/faq/common-windows-agent-installation-error-1721"
-  tag: "FAQ"
-  text: "Common Windows Agent Installation Error 1721"
-- link: "/agent/faq/i-stoped-my-agent-but-i-m-still-seeing-the-host"
-  tag: "FAQ"
-  text: "I stopped my Agent but I'm still seeing the host in my Datadog account."
-- link: "/agent/faq/error-restarting-agent-already-listening-on-a-configured-port"
-  tag: "FAQ"
-  text: "Error Restarting Agent: Already Listening on a Configured Port"
-- link: "/agent/faq/forwarder-logs-contain-599-response-code"
-  tag: "FAQ"
-  text: "Forwarder logs contain 599 response code"
-- link: "/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric"
-  tag: "FAQ"
-  text: "Why don't I see the 'system.processes.open_file_descriptors' metric?"
-- link: "/agent/faq/how-is-the-system-mem-used-metric-calculated"
-  tag: "FAQ"
-  text: "How is the 'system.mem.used' metric calculated?"
-- link: "/agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity"
-  tag: "FAQ"
-  text: "How do I install the Agent on a server with limited internet connectivity?"
+- link: "/agent/troubleshooting/debug_mode"
+  tag: "Agent Troubleshooting"
+  text: "Agent Debug Mode"
+- link: "/agent/troubleshooting/send_a_flare"
+  tag: "Agent Troubleshooting"
+  text: "Send an Agent Flare"
+- link: "/agent/troubleshooting/permissions"
+  tag: "Agent Troubleshooting"
+  text: "Agent Permission Issues"
+- link: "/agent/troubleshooting/ntp"
+  tag: "Agent Troubleshooting"
+  text: "Agent NTP issues"
+- link: "/agent/troubleshooting/agent_check_status"
+  tag: "Agent Troubleshooting"
+  text: "Get the Status of an Agent Check"
 ---
 
 If you have not yet installed the Datadog Agent, go [to the dedicated Agent integration page][1] for installation instructions. If you just installed the Agent, it may take a few moments before you start seeing metrics appear. The first place you should check for metrics is the [Metrics Explorer][2].
@@ -44,10 +32,9 @@ If you think you might be experiencing issues, follow this checklist first:
 * Is there only one Datadog Agent running on your host?
 * Did you restart the Datadog Agent after editing a yaml configuration file?
 
-If the answer to all questions above is `yes`, then [run the status command][5] for more details about your Agent and its integrations status. You can also check the [Agent logs][6] directly and enable debug mode to [get more logging from the Agent](#get-more-logging-from-the-agent).
+If the answer to all questions above is `yes`, then [run the status command][5] for more details about your Agent and its integrations status. You can also check the [Agent logs][6] directly and enable debug mode to [get more logging from the Agent][7].
 
-If you're still unsure about the issue, you may reach out to the [Datadog support team][7] with [a flare](#send-a-flare) from your Agent.
-
+If you're still unsure about the issue, you may reach out to the [Datadog support team][8] with [a flare][9] from your Agent.
 
 ## Further Reading
 
@@ -59,4 +46,6 @@ If you're still unsure about the issue, you may reach out to the [Datadog suppor
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: /agent/guide/agent-commands/#agent-status-and-information
 [6]: /agent/guide/agent-log-files
-[7]: /help
+[7]: /agent/troubleshooting/debug_mode
+[8]: /help
+[9]: /agent/troubleshooting/send_a_flare

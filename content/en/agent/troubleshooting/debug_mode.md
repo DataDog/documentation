@@ -5,6 +5,13 @@ disable_toc: true
 aliases:
     - /agent/faq/how-to-get-more-logging-from-the-agent
     - /agent/faq/agent-5-container-more-log
+further_reading:
+- link: "/agent/troubleshooting/send_a_flare"
+  tag: "Agent Troubleshooting"
+  text: "Send an Agent Flare"
+- link: "/agent/troubleshooting/agent_check_status"
+  tag: "Agent Troubleshooting"
+  text: "Get the Status of an Agent Check"
 ---
 
 To enable the Agent full debug mode:
@@ -71,6 +78,10 @@ Or the container can be restarted.
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/guide/agent-configuration-files/?tab=agentv6
 [2]: /agent/guide/agent-commands

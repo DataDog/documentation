@@ -1,7 +1,21 @@
 ---
 title: Agent Check Status
 kind: documentation
+further_reading:
+- link: "/agent/troubleshooting/debug_mode"
+  tag: "Agent Troubleshooting"
+  text: "Agent Debug Mode"
+- link: "/agent/troubleshooting/send_a_flare"
+  tag: "Agent Troubleshooting"
+  text: "Send an Agent Flare"
 ---
+
+If you are experiencing issues with a given Agent Check, find below the list of commands for your OS in order to get more troubleshooting information:
+
+- [Linux](#linux)
+- [Windows](#windows)
+- [Systemd](#systemd)
+- [Further Reading](#further-reading)
 
 ## Linux
 
@@ -111,6 +125,10 @@ sudo journalctl -u dd-agent.service
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help
 [2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands

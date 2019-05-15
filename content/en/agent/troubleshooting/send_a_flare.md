@@ -3,6 +3,13 @@ title: Agent Flare
 kind: documentation
 aliases:
   - /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
+further_reading:
+- link: "/agent/troubleshooting/debug_mode"
+  tag: "Agent Troubleshooting"
+  text: "Agent Debug Mode"
+- link: "/agent/troubleshooting/agent_check_status"
+  tag: "Agent Troubleshooting"
+  text: "Get the Status of an Agent Check"
 ---
 
 If you are running Agent 5.3+, you can send necessary troubleshooting information to the Datadog support team with one flare command.
@@ -66,5 +73,10 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 
 {{% /tab %}}
 {{< /tabs >}}
+
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-agent/blob/master/utils/flare.py
