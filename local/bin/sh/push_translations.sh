@@ -14,4 +14,8 @@ then
     echo "Skipping, guacbot commits"
 else
     echo "Ready to send translated files.."
+    echo "Files that were added or changed during this merge commit"
+    cat changelist.txt
+
+    # command to run pushing translated files here
 fi
