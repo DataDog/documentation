@@ -37,19 +37,20 @@ build_preview:
     MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
     UNTRACKED_EXTRAS: "data,content/en/integrations"
   script:
-    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
-    - version_static_assets
-    - sync_integration_descriptions
-    - placehold_translations
-    - build_hugo_site
-    - build_hugo_site_ja
-    - minify_html
-    - collect_static_assets
-    - push_site_to_s3
-    - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
-    - remove_static_from_repo
-    - create_artifact
-    - create_artifact_untracked
+    - echo "skip"
+#    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+#    - version_static_assets
+#    - sync_integration_descriptions
+#    - placehold_translations
+#    - build_hugo_site
+#    - build_hugo_site_ja
+#    - minify_html
+#    - collect_static_assets
+#    - push_site_to_s3
+#    - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
+#    - remove_static_from_repo
+#    - create_artifact
+#    - create_artifact_untracked
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
@@ -71,7 +72,7 @@ push_translations:
   environment: "preview"
   script:
     - git log -m -1 --name-only --pretty="format:" $CI_COMMIT_SHA
-    - echo $GITLAB_USER_EMAIL
+    - EMAIL=$(git show -s --format="%ae" HEAD) && echo $EMAIL
   only:
    - /.+?\/[a-zA-Z0-9_-]+/
 
