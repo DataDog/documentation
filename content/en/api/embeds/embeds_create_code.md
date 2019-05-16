@@ -6,7 +6,7 @@ external_redirect: /api/#create-embed
 ---
 
 ##### Signature
-`POST https://api.datadoghq.com/api/v1/graph/embed`
+`POST /v1/graph/embed`
 ##### Example Request
 {{< code-snippets basename="api-embeds-create" >}}
 ##### Example Response

@@ -6,7 +6,7 @@ external_redirect: /api/#mute-all-monitors
 ---
 
 ##### Signature
-`POST https://api.datadoghq.com/api/v1/monitor/mute_all`
+`POST /v1/monitor/mute_all`
 ##### Example Request
 {{< code-snippets basename="api-monitor-mute-all" >}}
 ##### Example Response

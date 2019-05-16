@@ -6,7 +6,7 @@ external_redirect: /api/#get-a-dashboard
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/dashboard/<DASHBOARD_ID>`
+`GET /v1/dashboard/<DASHBOARD_ID>`
 ##### Example Request
 {{< code-snippets basename="api-dashboard-get" >}}
 ##### Example Response
