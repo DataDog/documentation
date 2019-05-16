@@ -28,10 +28,10 @@ Datadog APM is available for Istio v1.1.3+ on Kubernetes clusters.
 
 **Note**: The Agent pods fails to start up if Istio's automatic sidecar injection is enabled on the namespace that Datadog Agent runs in. To avoid this:
 
-- [Disabling Sidecar Injection for the Datadog Agent](#disabling-sidecar-injection-for-the-datadog-agent)
+- [Disable Sidecar Injection for the Datadog Agent](#disable-sidecar-injection-for-the-datadog-agent)
 - [Create a Headless Service for the Datadog Agent](#create-a-headless-service-for-the-datadog-agent)
 
-#### Disabling Sidecar Injection for the Datadog Agent
+#### Disable Sidecar Injection for the Datadog Agent
 
 Add the `sidecar.istio.io/inject: "false"` annotation to the `datadog-agent` daemonset:
 
@@ -55,7 +55,7 @@ kubectl patch daemonset datadog-agent -p '{"spec":{"template":{"metadata":{"anno
 
 #### Create a Headless Service for the Datadog Agent
 
-Create a service using the YAML specified below.
+Create a headless service for the Datadog Agent using the YAML configuration specified below.
 
 ```yaml
 apiVersion: v1
