@@ -35,7 +35,7 @@ Define the `HTTP` or `SSL` request you want to be executed by Datadog:
 
 {{< img src="synthetics/api_tests/make-http-request.png" alt="Make HTTP Request" responsive="true" style="width:80%;" >}}
 
-Define the request you want executed by Datadog:
+Define the request you want to be executed by Datadog:
 
 1. **Choose request type**: `HTTP`
 2. Choose the **Method** and **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`.
