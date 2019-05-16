@@ -61,8 +61,10 @@ main:
       - name: "Docker"
         url: "agent/docker/"
         children:
-          - name: "APM"
-            url: "agent/docker/apm"
+          - name: APM
+            url: agent/docker/apm
+          - name: Log collection
+            url: agent/docker/log
       ## Kubernetes
       - name: "Kubernetes"
         url: "agent/kubernetes/"
@@ -385,7 +387,7 @@ main:
           - name: "Browser"
             url: "logs/log_collection/javascript/"
           - name: "Docker"
-            url: "logs/log_collection/docker/"
+            url: "agent/docker/log/"
           - name: "Csharp"
             url: "logs/log_collection/csharp/"
           - name: "Go"
@@ -605,4 +607,3 @@ main:
   - name: "Help"
     url: "help/"
     pre: "nav_help"
-
