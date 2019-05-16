@@ -10,7 +10,8 @@ external_redirect: /api/#generate-external-ids
 `PUT /api/v1/integration/aws/generate_new_external_id`
 
 ##### Example Request
-{{< code-snippets basename="generate_new_external_id" >}}
+
+{{< code-snippets basename="aws_generate_new_external_id" >}}
 
 ##### Example Response
-{{< code-snippets basename="result.generate_new_external_id" >}}
+{{< code-snippets basename="result.aws_generate_new_external_id" >}}
