@@ -3,7 +3,8 @@ title: Docker Log collection
 kind: documentation
 aliases:
   - /logs/docker
-  - /logs/languages/docker/
+  - /logs/languages/docker
+  - /logs/log_collection/docker
 further_reading:
 - link: "logs/explorer"
   tag: "Documentation"
@@ -103,7 +104,7 @@ The source and service values can be overridden with Autodiscovery as described 
 
 * Logs coming from container `Stderr` have a default status of `Error`.
 
-* If using the journald logging driver instead of Docker's default json-file logging driver, see the [journald integration][1] documentation for details regarding the setup for containerized environments.
+* If using the *journald* logging driver instead of Docker's default json-file logging driver, see the [journald integration][1] documentation for details regarding the setup for containerized environments.
 
 ### Activate Log Integrations
 
@@ -143,6 +144,8 @@ Add the following label as a run command:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+Where `<LOG_CONFIG>` is the log collection configuration you would find inside an integration configuration file. [See log collection configuration to learn more][4]
 
 #### Examples
 
@@ -280,6 +283,7 @@ ac_exclude = ["name:datadog-agent"]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/journald/
+[1]: /integrations/journald
 [2]: /agent/autodiscovery
 [3]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
+[4]: /logs/log_collection/#custom-log-collection

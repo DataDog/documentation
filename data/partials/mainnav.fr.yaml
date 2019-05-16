@@ -57,6 +57,8 @@ main:
         children:
           - name: APM
             url: agent/docker/apm
+          - name: Log collection
+            url: agent/docker/log
       - name: Kubernetes
         url: agent/kubernetes/
         children:
@@ -254,7 +256,7 @@ main:
             url: tracing/setup/envoy/
           - name: NGINX
             url: tracing/setup/nginx/
-          - name: Istio 
+          - name: Istio
             url: tracing/setup/istio/
       - name: Enrichir vos Traces
         url: tracing/advanced/
@@ -313,7 +315,7 @@ main:
           - name: Browser
             url: logs/log_collection/javascript/
           - name: Docker
-            url: logs/log_collection/docker/
+            url: agent/docker/log/
           - name: Csharp
             url: logs/log_collection/csharp/
           - name: Go
