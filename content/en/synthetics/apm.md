@@ -13,8 +13,6 @@ further_reading:
 
 ---
 
-<div class="alert alert-warning">Synthetics is only available for the Datadog US site.</div>
-
 {{< img src="synthetics/apm/synthetics-apm.gif" alt="APM and Synthetics" responsive="true" style="width:80%;">}}
 
 ## Overview

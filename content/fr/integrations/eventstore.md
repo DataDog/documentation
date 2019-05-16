@@ -41,7 +41,7 @@ Pour installer le check Event Store sur votre host :
 1. Installez le [kit de développement][1] sur n'importe quelle machine.
 2. Exécutez `ddev release build eventstore` pour générer le paquet.
 3. [Téléchargez l'Agent Datadog][2].
-4. Importez l'artefact du build sur tous les hosts avec un Agent et exécutez `datadog-agent integration install -w path/to/eventstore/dist/<NOM_ARTEFACT>.whl`.
+4. Importez l'artefact du build sur tous les hosts avec un Agent et exécutez `datadog-agent integration install -w chemin/vers/dist/eventstore/<NOM_ARTEFACT>.whl`.
 
 ### Configuration
 
