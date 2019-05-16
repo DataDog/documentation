@@ -27,6 +27,8 @@ API tests configuration depends on the type of API test you want to create. Ther
 
 ### Make a request
 
+Define the `HTTP` or `SSL` request you want to be executed by Datadog:
+
 {{< tabs >}}
 
 {{% tab "HTTP Test" %}}
@@ -55,8 +57,6 @@ Define the request you want executed by Datadog:
 {{% /tab %}}
 
 {{% tab "SSL Test" %}}
-
-Define the SSL request you want to be executed by Datadog:
 
 {{< img src="synthetics/api_tests/make-ssl-request.png" alt="Make SSL Request" responsive="true" style="width:80%;" >}}
 
