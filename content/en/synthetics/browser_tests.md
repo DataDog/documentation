@@ -130,7 +130,6 @@ To use your variables in one of your assertions, hit *Use Variable* and select t
 
 {{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Use variable in assertion" responsive="true" style="width:40%;">}}
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

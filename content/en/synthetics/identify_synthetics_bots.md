@@ -23,7 +23,6 @@ Some parts of your system might not be available to robots without the right ide
 
 `x-abuse-info: Request sent by a Datadog Synthetics API Check (https://docs.datadoghq.com/synthetics/) - check_id: <CHECK_ID>`
 
-
 If APM is enabled, [**other APM specific headers**][1] such as `x-datadog-trace-id` are added to all the requests launched for API tests.
 
 **Note**: No headers are added by default for browser tests.

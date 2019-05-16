@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-API tests are HTTP requests (`GET`, `POST`, `PUT`, etc.) executed by Datadog to your web properties or application endpoints at configurable periodic intervals [from multiple locations around the world](/api/?lang=bash#get-available-locations). These checks verify that your applications are responding to requests, as well as that they meet any conditions you define—such as response time, HTTP status code, and header or body contents.
+API tests are HTTP requests (`GET`, `POST`, `PUT`, etc.) executed by Datadog to your web properties or application endpoints at configurable periodic intervals [from multiple locations around the world][1]. These checks verify that your applications are responding to requests, as well as that they meet any conditions you define—such as response time, HTTP status code, and header or body contents.
 
 ## Configuration
 
@@ -103,7 +103,6 @@ If you click on **Test URL**, then the basic assertions are automatically filled
 - `Header content-type` _is_ "returned value"
 - `Status code` _is_ "returned value"
 
-
 [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 {{% /tab %}}
 
@@ -143,8 +142,8 @@ If a test fails, the uptime directly considers the endpoint as `down`. It is not
 
 A notification is sent according to the set of alerting conditions. To configure notifications:
 
-1. Select users and/or [services][1] to send the notifications to. Note that you can use the [`@-notification` feature][3] in the **message** field.
-2. Enter a **message** for the API test. This field allows standard [Markdown formatting][4]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
+1. Select users and/or [services][3] to send the notifications to. Note that you can use the [`@-notification` feature][4] in the **message** field.
+2. Enter a **message** for the API test. This field allows standard [Markdown formatting][5]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
 3. Click **Save** to save your API test.
 
 Notifications example:
@@ -169,7 +168,8 @@ Response time is the sum of these network timings.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/#cat-notification
+[1]: /api/?lang=bash#get-available-locations
 [2]: /synthetics/api_tests/errors#ssl-errors
-[3]: /developers/faq/what-do-notifications-do-in-datadog
-[4]: http://daringfireball.net/projects/markdown/syntax
+[3]: /integrations/#cat-notification
+[4]: /developers/faq/what-do-notifications-do-in-datadog
+[5]: http://daringfireball.net/projects/markdown/syntax
