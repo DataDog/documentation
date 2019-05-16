@@ -34,11 +34,11 @@ The minimal configuration of an instance includes:
 
 Your metrics are collected in the form `namespace.metric_name`. By default, you get a service check named `namespace.prometheus.health` to indicate the health of the Prometheus endpoint.
 
-For a comprehensive list of settings refer to the [Datadog-Prometheus integration][3] and its [example configuration][4].
+For a comprehensive list of settings refer to the [Datadog-Prometheus integration][3] and its [example configuration][4]. For instane in Prometheus it's common to have some placeholder metric holding all the labels because it's possible to do some label joins in the Prometheus query language. The Datadog Agent allows you to [join some labels during processing][5], so the metric is sent with all labels/tags wanted.
 
 ## Prometheus with Auto-discovery
 
-As all [Datadog Agent integrations][5], the Datadog-Prometheus Integration can be configured using [Autodiscovery][6]. This allows you to send your container/pod Prometheus metrics to Datadog by apply the following `annotations` to it:
+As all [Datadog Agent integrations][6], the Datadog-Prometheus Integration can be configured using [Autodiscovery][7]. This allows you to send your container/pod Prometheus metrics to Datadog by apply the following `annotations` to it:
 
 ```
 annotations:
@@ -64,7 +64,7 @@ With the following placeholder values:
 *  `<PROMETHEUS_METRIC_TO_FETCH>`: Prometheus metrics key to be fetched from the prometheus endpoint.
 * `<DATADOG_NEW_METRIC_NAME>`: Optional parameter which if set, transforms in Datadog the `<PROMETHEUS_METRIC_TO_FETCH>` metric key to `<DATADOG_NEW_METRIC_NAME>`.
 
-See the [Datadog-Prometheus Integration][3] to discover more options for the `ad.datadoghq.com/<CONTAINER_NAME>.instances` annotation or directly the [`sample prometheus.d/conf.yaml` configuration file][7].
+See the [Datadog-Prometheus Integration][3] to discover more options for the `ad.datadoghq.com/<CONTAINER_NAME>.instances` annotation or directly the [`sample prometheus.d/conf.yaml` configuration file][8].
 
 Example of Autodiscovery using pod annotations on a `linkerd` pod:
 
@@ -86,19 +86,7 @@ annotations:
       ]
 ```
 
-#### Custom join
-
-In Prometheus it's common to have some placeholder metric holding all the labels because it's possible to do some label joins in the Prometheus query language. The Datadog Agent allows you to [join some labels during processing][8], so the metric is sent with all labels/tags wanted. For instance, to add the `node` label on every metric with the `pod` label, use the following configuration lines  inside the `prometheus.d/conf.yaml` configuration file:
-
-```
-   label_joins:
-     target_metric:
-       label_to_match: pod
-       labels_to_get:
-         - node
-```
-
-### From custom to official integration
+## From custom to official integration
 
 By default, all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, don't hesitate to [contribute][2]!
 
@@ -112,8 +100,8 @@ Official integrations have their own dedicated directories. There's a default in
 [2]: /developers/prometheus
 [3]: /integrations/prometheus
 [4]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
-[5]: /getting_started/integrations
-[6]: /agent/autodiscovery
-[7]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
-[8]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example#L34
+[5]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example#L39
+[6]: /getting_started/integrations
+[7]: /agent/autodiscovery
+[8]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
 [9]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
