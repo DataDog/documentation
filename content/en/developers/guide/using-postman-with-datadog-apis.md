@@ -9,7 +9,7 @@ aliases:
 
 The Datadog API allows you to get data in and out of Datadog. It uses resource-oriented URLs and status codes to indicate the success or failure of requests, then returns JSON from all requests.
 
-This article explains how to use [Postman][1] to perform API calls to Datadog by showing the actions available within the Datadog API and providing a high-level introduction to using Postman to `GET`, `POST`, `PUT`, and `DELETE`.
+This article explains how to use [Postman][1] to perform API calls to Datadog by showing the actions available within the Datadog API, and by providing a high-level introduction to using Postman to `GET`, `POST`, `PUT`, and `DELETE`.
 
 ## Prerequisites
 
@@ -53,11 +53,11 @@ Follow these steps to set up your environment:
 
 2. Click **Add** and enter an **Environment Name**.
 
-3. In the table, add the variables `datadog_api_key` and `datadog_application_key`. In the **Current Value** column, enter your actual [Datadog API and app keys][2].
+3. In the table, add the variables `datadog_api_key` and `datadog_application_key`. In the **Current Value** column, enter your actual [Datadog API and application keys][2].
 
 4. Add the variable `datadog_site`. In the **Current Value** column enter `com` if you are on Datadog US site or `eu` if you are on Datadog EU site.
 
-5. Optional - If you have multiple Datadog organizations, repeat steps 1-4 for each organization.
+5. Optional: If you have multiple Datadog organizations, repeat steps 1-4 for each organization.
 
 {{< img src="developers/guide/postman/setAPIKeys2.png" alt="postman_api_template_variables" responsive="true" style="width:70%;">}}
 
