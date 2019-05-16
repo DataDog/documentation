@@ -82,7 +82,20 @@ const tracer = require('dd-trace').init({
 
 ## Compatibility
 
-Node `^4.7`, `^6.9` and `>=8` are supported by this library. However, it benefits significantly from the performance improvements introduced in Node `>=8.3`.
+Node `>=4` is supported by this library, however we recommend always using the latest LTS to avoid known issues and performance degradation. Odd version numbers are not officially supported.
+
+Known issues with older versions:
+
+* `<4.5` Context propagation may not work properly because `AsyncWrap` was still a work in progress.
+* `>=4 <4.7.1` Possible error due to `AsyncWrap` calling JavaScript code during garbage collection.
+* `>=6 <6.9.2` Possible error due to `AsyncWrap` calling JavaScript code during garbage collection.
+* `<8` No longer supported by the Node.js Foundation.
+* `<8.3` Possible performance issues since we use optimizations from TurboFan/Ignition introduced in `8.3`.
+* `<8.13.0` Possible memory leak when using HTTP keep-alive.
+* `<10.4` Context propagation may not work properly because of a bug in Node with async IDs.
+* `<10.14.2` Possible memory leak when using HTTP keep-alive.
+
+These issues should not happen in most cases but if you experience any of them make sure to update Node or contact support if that's not an option.
 
 ### Integrations
 
