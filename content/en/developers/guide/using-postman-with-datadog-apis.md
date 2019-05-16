@@ -38,14 +38,14 @@ You now have a Datadog collection with many different API examples.
 
 **Note**: The API calls do not work at this point. See below to set your Datadog-Postman Environment.
 
-### Setup Postman Environment
+### Postman environment setup
 
 After the Postman collection is imported, a full list of available Datadog API calls is structured by folder in the left pane of Postman.
 In the folders, the API calls have variables entered for `datadog_site`, `datadog_api_key`, and `datadog_application_key`:
 
 {{< img src="developers/guide/postman/SetAPIKeys.png" alt="postman_api_template_variables" responsive="true" style="width:70%;">}}
 
-This allows you to set up [Postman environments][4] and save your Datadog Site, API and application keys for authentication. If you have multiple Datadog organizations, set up multiple [Postman environments][4] to make API calls to different organizations without modifying the API calls in the Datadog Postman collection.
+This allows you to set up [Postman environments][4] and save your Datadog site, API, and application keys for authentication. If you have multiple Datadog organizations, set up multiple [Postman environments][4] to make API calls to different organizations without modifying the API calls in the Datadog Postman collection.
 
 Follow these steps to set up your environment:
 
@@ -55,7 +55,7 @@ Follow these steps to set up your environment:
 
 3. In the table, add the variables `datadog_api_key` and `datadog_application_key`. In the **Current Value** column, enter your actual [Datadog API and app keys][2].
 
-4. Add the variable `datadog_site`. In the **Current Value** column enter `com` if you are on Datadog US site, enter `eu` if you are on Datadog EU site.
+4. Add the variable `datadog_site`. In the **Current Value** column enter `com` if you are on Datadog US site or `eu` if you are on Datadog EU site.
 
 5. Optional - If you have multiple Datadog organizations, repeat steps 1-4 for each organization.
 
@@ -75,7 +75,7 @@ When you click on an API call in the collection, it loads in the `Builder` pane 
 
 When you click on the Endpoint name a description of the endpoint and all required/optional parameters is displayed to help you build your requests:
 
-{{< img src="developers/guide/postman/description.gif" alt="postman description" responsive="true" style="width:70%;">}}
+{{< img src="developers/guide/postman/description.gif" alt="postman description" responsive="true">}}
 
 ### Params
 
