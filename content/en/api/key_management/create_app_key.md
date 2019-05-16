@@ -1,7 +1,7 @@
 ---
 title: Create an application key
 type: apicontent
-order: 16.08
+order: 21.08
 external_redirect: /api/#create-an-application-key
 ---
 

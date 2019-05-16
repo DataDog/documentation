@@ -19,8 +19,7 @@ further_reading:
 
 ## Overview
 
-API tests are useful to help you monitor your API endpoints and alert you when they are failing or too slow.
-They are executed periodically from several locations around the world, the full list can be retrieved [through the Datadog API][1].
+API tests are HTTP requests (`GET`, `POST`, `PUT`, etc.) executed by Datadog to your web properties or application endpoints at configurable periodic intervals [from multiple locations around the world](/api/?lang=bash#get-available-locations). These checks verify that your applications are responding to requests, as well as that they meet any conditions you define—such as response time, HTTP status code, and header or body contents.
 
 ## Configuration
 
@@ -32,26 +31,25 @@ API tests configuration depends on the type of API test you want to create. Ther
 
 {{% tab "HTTP Test" %}}
 
-Define the HTTP request you want to be executed by Datadog:
+Define the request you want executed by Datadog:
 
-{{< img src="synthetics/api_tests/make-http-request.png" alt="Make HTTP Request" responsive="true" style="width:80%;" >}}
+1. **Choose request type**: `HTTP`
+2. Choose the **Method** and **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`.
+    * Advanced Options (optional): Use custom request headers, authentication credentials, body content, or cookies.
+        * Follow Redirects: Toggle to have the monitored endpoint follow up to ten redirects.
+        * Headers: Defined headers override the default browser headers. For example, set the User Agent in the header to [identify Datadog scripts][1].
+        * Authentication: HTTP basic authentication with username and password
+        * Body: Request body and body type (`text/plain`, `application/json`, `text/xml`, `text/html`, or `None`)
+        * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `cookie1=<YOUR_COOKIE_1>; cookie2=<YOUR_COOKIE_2>`.
+3. **Name**: The name of your API test.
+4. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetics page][2].
+5. **Locations**: The locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][3].
+6. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week.
+7. Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
-1. Choose the `Method` and `URL` to query. Available methods are:
-   - GET
-   - POST
-   - PATCH
-   - PUT
-   - DELETE
-   - OPTIONS
-2. Optionally, click on **Advanced options** to enrich your request with custom request headers, authentication credentials, body content, or cookies. Toggle **Follow redirects** to have the monitored endpoint follow up to ten redirects.
-3. Name your HTTP test.
-4. Optionally, add tags to filter your HTTP test in the [Synthetics page][1].
-5. Pick the locations to run the test from. Many AWS locations from around the world are available; the full list can be retrieved [through the Datadog API][2].
-6. Choose a check frequency between "1 run per minute" and "1 run per week".
-7. Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
-
-[1]: /synthetics
-[2]: /api/?lang=bash#get-available-locations
+[1]: /synthetics/identify_synthetics_bots
+[2]: /synthetics
+[3]: /api/?lang=bash#get-available-locations
 {{% /tab %}}
 
 {{% tab "SSL Test" %}}
@@ -60,12 +58,13 @@ Define the SSL request you want to be executed by Datadog:
 
 {{< img src="synthetics/api_tests/make-ssl-request.png" alt="Make SSL Request" responsive="true" style="width:80%;" >}}
 
-1. Specify the `Host` and the SSL `Port`. By default, the port is set to _443_.
-2. Name your SSL test.
-3. Optionally, add tags to filter your SSL test in the [Synthetics page][1].
-4. Pick the locations to run the test from. Many AWS locations from around the world are available; the full list can be retrieved [through the Datadog API][2].
-5. Choose a check frequency between "1 run per minute" and "1 run per week".
-6. Click on **Test Connection** to try out the request configuration. You will see a response preview show up on the right side of your screen.
+1. **Choose request type**: `SSL`
+2. Specify the `Host` and the SSL `Port`. By default, the port is set to _443_.
+3. **Name**: The name of your API test.
+4. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetics page][1].
+5. **Locations**: The locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2].
+6. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week.
+7. Click on **Test Connection** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
 [1]: /synthetics
 [2]: /api/?lang=bash#get-available-locations
@@ -151,6 +150,20 @@ A notification is sent according to the set of alerting conditions. To configure
 Notifications example:
 
 {{< img src="synthetics/api_tests/notifications-example.png" alt="API Test Notifications" responsive="true" style="width:80%;" >}}
+
+## Network timings
+
+The Synthetics details page displays the following network timings:
+
+| Timing                    | Description                                                                                           |
+|---------------------------|-------------------------------------------------------------------------------------------------------|
+| `DNS`                       | Time spent resolving the DNS name of the last request.                                                |
+| `Connect`                   | Time spent establishing a connection to the server.                                                   |
+| `SSL`                       | Time spent for the TLS handshake. If the last request is not over HTTPS, this metric does not appear. |
+| `TTFB (time to first byte)` | Time spent waiting for the first byte of response to be received.                                     |
+| `Download`                  | Time spent downloading the response.                                                                  |
+
+Response time is the sum of these network timings.
 
 ## Further Reading
 

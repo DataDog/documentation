@@ -1,7 +1,7 @@
 ---
 title: Resolve monitor
 type: apicode
-order: 19.06
+order: 24.06
 external_redirect: /api/#resolve-monitor
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#resolve-monitor
 {{< code-snippets basename="api-monitor-bulk-resolve" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-monitor-bulk-resolve" >}}
-

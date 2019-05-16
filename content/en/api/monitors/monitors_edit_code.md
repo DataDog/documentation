@@ -1,7 +1,7 @@
 ---
 title: Edit a monitor
 type: apicode
-order: 19.03
+order: 24.03
 external_redirect: /api/#edit-a-monitor
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#edit-a-monitor
 {{< code-snippets basename="api-monitor-edit" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-monitor-edit" >}}
-

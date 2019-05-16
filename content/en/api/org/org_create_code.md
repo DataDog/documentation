@@ -1,7 +1,7 @@
 ---
 title: Create child-organization
 type: apicode
-order: 20.1
+order: 25.1
 external_redirect: /api/#create-child-organization
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#create-child-organization
 {{< code-snippets basename="api-org-create" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-org-create" >}}
-

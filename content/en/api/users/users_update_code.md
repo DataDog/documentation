@@ -1,7 +1,7 @@
 ---
 title: Update user
 type: apicode
-order: 27.4
+order: 32.4
 external_redirect: /api/#update-user
 ---
 
@@ -12,4 +12,3 @@ external_redirect: /api/#update-user
 {{< code-snippets basename="api-user-update" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-user-update" >}}
-

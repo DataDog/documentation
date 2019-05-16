@@ -1,7 +1,7 @@
 ---
 title: Monitors Search
 type: apicode
-order: 19.12
+order: 24.12
 external_redirect: /api/#monitors-search
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#monitors-search
 {{< code-snippets basename="api-monitor-search" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-monitor-search" >}}
-

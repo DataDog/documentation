@@ -1,7 +1,7 @@
 ---
 title: Create a monitor
 type: apicode
-order: 19.01
+order: 24.01
 external_redirect: /api/#create-a-monitor
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#create-a-monitor
 {{< code-snippets basename="api-monitor-create" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-monitor-create" >}}
-
