@@ -82,7 +82,7 @@ const tracer = require('dd-trace').init({
 
 ## Compatibility
 
-Node `>=4` is supported by this library, however we recommend always using the latest LTS to avoid known issues and performance degradation. Odd version numbers are not officially supported.
+Node `>=4` is supported by this library. We recommend always using the latest LTS to avoid known issues and performance degradation. Odd version numbers are not officially supported.
 
 Known issues with older versions:
 
