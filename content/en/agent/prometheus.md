@@ -28,9 +28,7 @@ Starting with version 6.1.0, the Agent includes a new [Prometheus][2] check capa
 
 ### Configuration
 
-If running the Agent as a DaemonSet in Kubernetes, configure the Prometheus check using [auto-discovery][7].
-
-If running the Agent as a binary on a host, edit the `prometheus.yaml` file to add the different instances you want to retrieve custom metrics from.
+If running the Agent as a DaemonSet in Kubernetes, configure the Prometheus check using [auto-discovery](#auto-discovery). If running the Agent as a binary on a host, edit the `prometheus.d/conf.yaml` configuration file to add the different instances you want to retrieve custom metrics from.
 
 The minimal configuration of an instance includes:
 
@@ -38,17 +36,42 @@ The minimal configuration of an instance includes:
 * A `namespace` that is prepended to all metrics to avoid metric name collisions.
 * A list of `metrics` that you want to retrieve as custom metrics. For each metric you can either add it to the list `- metric_name` or rename it by specifying a new metric name `- metric_name: renamed`.
 
-Note: It's possible to use a `*` wildcard such as `- metric*` that would fetch all matching metrics. Use with caution; this can potentially generate a lot of custom metrics!
+**Note**: It's possible to use a `*` wildcard such as `- metric*` that would fetch all matching metrics. Use with caution; this can potentially generate a lot of custom metrics!
 
 Your metrics are collected in the form `namespace.metric_name`. By default, you get a service check named `namespace.prometheus.health` to indicate the health of the Prometheus endpoint.
-
-### Advanced settings
 
 For a comprehensive list of settings refer to the [example configuration][3].
 
 #### Auto-discovery
 
-You can configure the Prometheus check using [Autodiscovery][4] to quickly collect Prometheus metrics exposed by a container or pod.
+Configure the Prometheus check using [Autodiscovery][4] to collect Prometheus metrics exposed by a container or pod by applying on it following `annotations`:
+
+```
+annotations:
+    ad.datadoghq.com/<CONTAINER_NAME>.check_names: |
+      ["prometheus"]
+    ad.datadoghq.com/<CONTAINER_NAME>.init_configs: |
+      [{}]
+    ad.datadoghq.com/<CONTAINER_NAME>.instances: |
+      [
+        {
+          "prometheus_url": "http://%%host%%:9990/<PROMETHEUS_METRICS_ENDPOINT> ",
+          "namespace": "<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>",
+          " metrics": ["<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>"]
+         }
+      ]
+```
+
+With the following placeholder values:
+
+* `<CONTAINER_NAME>`: name of the container in the pod template section
+* `<PROMETHEUS_METRICS_ENDPOINT>`: URL for the metrics as served by the container in Prometheus format
+* `<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>`: set namespace to be prefixed to every metric when viewed in DataDog UI
+*  `<PROMETHEUS_METRIC_TO_FETCH>`: Prometheus metrics key to be fetched from the prometheus endpoint.
+* `<DATADOG_NEW_METRIC_NAME>`: Optional parameter which if set, transforms in Datadog the `<PROMETHEUS_METRIC_TO_FETCH>` metric key to `<DATADOG_NEW_METRIC_NAME>`.
+
+See the [Datadog-Prometheus Integration][5] to discover more options for the `ad.datadoghq.com/<CONTAINER_NAME>.instances` annotation or directly the [`sample prometheus.d/conf.yaml` configuration file][6].
+
 
 Example of Autodiscovery using pod annotations on a `linkerd` pod:
 
@@ -72,8 +95,7 @@ annotations:
 
 #### Custom join
 
-In Prometheus it's common to have some placeholder metric holding all the labels because it's possible to do some label joins in the Prometheus query language. The Datadog Agent allows you to [join some labels during processing][5], so the metric is sent with all labels/tags wanted.
-For instance, to add the `node` label on every metric with the `pod` label, use the following configuration lines:
+In Prometheus it's common to have some placeholder metric holding all the labels because it's possible to do some label joins in the Prometheus query language. The Datadog Agent allows you to [join some labels during processing][7], so the metric is sent with all labels/tags wanted. For instance, to add the `node` label on every metric with the `pod` label, use the following configuration lines  inside the `prometheus.d/conf.yaml` configuration file:
 
 ```
    label_joins:
@@ -87,7 +109,7 @@ For instance, to add the `node` label on every metric with the `pod` label, use 
 
 By default, all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, don't hesitate to [contribute][1]!
 
-Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For an example, reference the [kube-proxy][6] integration.
+Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For an example, reference the [kube-proxy][8] integration.
 
 ## Further Reading
 
@@ -97,6 +119,7 @@ Official integrations have their own dedicated directories. There's a default in
 [2]: https://github.com/DataDog/integrations-core/tree/master/prometheus
 [3]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
 [4]: /agent/autodiscovery
-[5]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example#L34
-[6]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
-[7]: /agent/prometheus/#auto-discovery
+[5]: /integrations/prometheus
+[6]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
+[7]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example#L34
+[8]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
