@@ -45,7 +45,7 @@ Pour installer le check Aqua sur votre host :
 1. Installez le [kit de développement][8] sur n'importe quelle machine.
 2. Exécutez `ddev release build aqua` pour générer le paquet.
 3. [Téléchargez l'Agent Datadog][2].
-4. Importez l'artefact du build sur tous les hosts avec un Agent et exécutez `datadog-agent integration install -w path/to/aqua/dist/<NOM_ARTEFACT>.whl`.
+4. Importez l'artefact du build sur tous les hosts avec un Agent et exécutez `datadog-agent integration install -w chemin/vers/dist/aqua/<NOM_ARTEFACT>.whl`.
 
 ### Configuration
 

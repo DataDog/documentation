@@ -12,9 +12,7 @@ For your AWS Trusted Advisor integration dashboard to populate with data:
 
 ## Support Permissions
 
-In the IAM Console, add support:* as an action in the policy document text box:
-
-{{< img src="graphing/faq/aws_trusted_permission.png" alt="aws trusted permission" responsive="true" >}}
+In the IAM Console, add `support:describe*` and `support: refresh*` as an action in the policy document text box.
 
 ## AWS Support Plan
 

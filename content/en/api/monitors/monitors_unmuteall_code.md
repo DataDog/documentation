@@ -1,7 +1,7 @@
 ---
 title: Unmute all monitors
 type: apicode
-order: 19.08
+order: 24.08
 external_redirect: /api/#unmute-all-monitors
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#unmute-all-monitors
 {{< code-snippets basename="api-monitor-unmute-all" >}}
 ##### Example Response
 *This endpoint does not return JSON on successful requests.*
-

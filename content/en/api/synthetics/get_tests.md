@@ -1,7 +1,7 @@
 ---
 title: Get all tests
 type: apicontent
-order: 22.7
+order: 27.7
 external_redirect: /api/#get-tests
 ---
 

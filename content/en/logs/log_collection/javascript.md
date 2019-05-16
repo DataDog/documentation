@@ -57,7 +57,7 @@ The Javascript logging library is in private beta. <a href="https://docs.datadog
 
 The following parameters can be used to configure the library to send logs to Datadog:
 
-* Set `isCollectingError` to `false` to turn off automatic JS and console error collection.
+* Set `forwardErrorsToLogs` to `false` to turn off automatic JS and console error collection.
 * Use `addLoggerGlobalContext` to add JSON attributes to all generated logs
 * Set `publicApiKey` to the value of the public API key (**only public API keys can be used in this library**)
 
@@ -71,14 +71,14 @@ The following parameters can be used to configure the library to send logs to Da
     <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-us.js"></script>
     <script>
       // Set your Public API key
-      Datadog.init({
+      DD_LOGS.init({
         publicApiKey: '<PUBLIC_API_KEY>',
-        isCollectingError: true,
+        forwardErrorsToLogs: true,
     });
 
       // OPTIONAL
       // add global metadata attribute--one attribute can be added at a time
-      Datadog.addLoggerGlobalContext('<META_KEY>', <META_VALUE>);
+      DD_LOGS.addLoggerGlobalContext('<META_KEY>', <META_VALUE>);
     </script>
     ...
   </head>
@@ -96,14 +96,14 @@ The following parameters can be used to configure the library to send logs to Da
     <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-eu.js"></script>
     <script>
       // Set your Public API key
-      Datadog.init({
+      DD_LOGS.init({
         publicApiKey: '<PUBLIC_API_KEY>',
-        isCollectingError: true,
+        forwardErrorsToLogs: true,
     });
 
       // OPTIONAL
       // add global metadata attribute--one attribute can be added at a time
-      Datadog.addLoggerGlobalContext('<META_KEY>', <META_VALUE>);
+      DD_LOGS.addLoggerGlobalContext('<META_KEY>', <META_VALUE>);
     </script>
     ...
   </head>
@@ -119,7 +119,7 @@ The following parameters can be used to configure the library to send logs to Da
 Send a custom log entry directly to Datadog with the `log` function:
 
 ```
-Datadog.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>)
+DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>)
 ```
 
 | Placeholder         | Description                                                                             |
@@ -128,7 +128,7 @@ Datadog.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>)
 | `<JSON_ATTRIBUTES>` | A valid JSON object that includes all attributes attached to the `<MESSAGE>`            |
 | `<STATUS>`          | Status of your log; the accepted status values are `debug`, `info`, `warn`, or `error`. |
 
-Status can also be used as a placeholder for the `log` function `Datadog.logger.debug(<MESSAGE>,<JSON_ATTRIBUTES>)`.
+Status can also be used as a placeholder for the `log` function `DD_LOGS.logger.debug(<MESSAGE>,<JSON_ATTRIBUTES>)`.
 
 **Example:**
 
@@ -136,7 +136,7 @@ Status can also be used as a placeholder for the `log` function `Datadog.logger.
 ...
 <script>
 ...
-Datadog.logger.info('Button clicked', { name: 'buttonName', id: 123 });
+DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id: 123 });
 ...
 </script>
 ...
@@ -177,7 +177,7 @@ The logger adds the following information by default:
 In some cases, you might want to disable the debug mode or to only collect warnings and errors. This can be achieved by changing the logging level: set the `level` parameter to `debug` (default), `info`, `warn`, or `error` :
 
 ```
-Datadog.logger.setLevel('<LEVEL>')
+DD_LOGS.logger.setLevel('<LEVEL>')
 ```
 
 Only logs with a status equal to or higher than the specified level are sent.
@@ -188,7 +188,7 @@ By default, the loggers are sending logs to Datadog. It is also possible to conf
 
 Use the `setHandler` function with the values `http` (default), `console`, or `silent`:
 ```
-Datadog.logger.setHandler('<HANDLER>')
+DD_LOGS.logger.setHandler('<HANDLER>')
 ```
 
 ### Define multiple loggers
@@ -247,7 +247,7 @@ It is possible to set the entire context in one call. This also overrides previo
 my_logger.setContext(<JSON_ATTRIBUTES>)
 
 # For the global context
-Datadog.setLoggerGlobalContext(<JSON_ATTRIBUTES>)
+DD_LOGS.setLoggerGlobalContext(<JSON_ATTRIBUTES>)
 ```
 
 **Example:**

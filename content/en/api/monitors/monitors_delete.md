@@ -1,7 +1,7 @@
 ---
 title: Delete a monitor
 type: apicontent
-order: 19.04
+order: 24.04
 external_redirect: /api/#delete-a-monitor
 ---
 

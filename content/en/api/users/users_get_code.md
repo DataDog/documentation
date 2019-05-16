@@ -1,7 +1,7 @@
 ---
 title: Get user
 type: apicode
-order: 27.2
+order: 32.2
 external_redirect: /api/#get-user
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#get-user
 {{< code-snippets basename="api-user-get" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-user-get" >}}
-

@@ -1,7 +1,7 @@
 ---
 title: Get available locations
 type: apicode
-order: 22.91
+order: 27.91
 external_redirect: /api/#get-locations
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Get tags
 type: apicode
-order: 23.1
+order: 28.1
 external_redirect: /api/#get-tags
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#get-tags
 {{< code-snippets basename="api-tags-get" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-tags-get" >}}
-

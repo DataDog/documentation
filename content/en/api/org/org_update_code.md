@@ -1,7 +1,7 @@
 ---
 title: Update organization
 type: apicode
-order: 20.3
+order: 25.3
 external_redirect: /api/#update-organization
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#update-organization
 {{< code-snippets basename="api-org-update" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-org-update" >}}
-

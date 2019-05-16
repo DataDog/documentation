@@ -1,7 +1,7 @@
 ---
 title: Start or pause a test
 type: apicode
-order: 22.2
+order: 27.2
 external_redirect: /api/#status-test
 ---
 

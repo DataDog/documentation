@@ -1,7 +1,7 @@
 ---
 title: Get hourly usage for Synthetics
 type: apicode
-order: 26.6
+order: 31.6
 external_redirect: /api/#get-hourly-usage-for-synthetics
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#get-hourly-usage-for-synthetics
 {{< code-snippets basename="api-billing-usage-synthetics" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-billing-usage-synthetics" >}}
-

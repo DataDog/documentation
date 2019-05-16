@@ -1,7 +1,7 @@
 ---
 title: Get tags
 type: apicontent
-order: 23.1
+order: 28.1
 external_redirect: /api/#get-tags
 ---
 
