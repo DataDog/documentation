@@ -31,6 +31,8 @@ API tests configuration depends on the type of API test you want to create. Ther
 
 {{% tab "HTTP Test" %}}
 
+{{< img src="synthetics/api_tests/make-http-request.png" alt="Make HTTP Request" responsive="true" style="width:80%;" >}}
+
 Define the request you want executed by Datadog:
 
 1. **Choose request type**: `HTTP`
