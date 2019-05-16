@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-API tests are HTTP requests (`GET`, `POST`, `PUT`, etc.) executed by Datadog to your web properties or application endpoints at configurable periodic intervals [from multiple locations around the world][1]. These checks verify that your applications are responding to requests, as well as that they meet any conditions you define—such as response time, HTTP status code, and header or body contents.
+API tests are useful to help you monitor your API endpoints and alert you when they are failing or too slow. These checks verify that your applications are responding to requests, as well as that they meet any conditions you define—such as response time, HTTP status code, and header or body contents. They are executed periodically from several locations around the world, the full list can be retrieved [through the Datadog API][1].
 
 ## Configuration
 
