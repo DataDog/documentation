@@ -8,6 +8,7 @@ public_title: Datadog-Cloudability Integration
 short_description: "Rule cloud spending with Cloudability and Datadog"
 categories:
 - cloud
+- Cost Management
 ddtype: crawler
 further_reading:
 - link: "https://support.cloudability.com/hc/en-us/articles/360011041074-Integration-with-Datadog-how-to-add-your-Datadog-Credentials-to-Cloudability"
