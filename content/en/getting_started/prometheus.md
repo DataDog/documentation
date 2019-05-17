@@ -43,19 +43,8 @@ First, edit the `prometheus.d/conf.yaml` file in the `conf.d/` folder at the roo
 init_config:
 
 instances:
-
-    ## The URL where your application metrics are exposed by Prometheus.
-    #
   - prometheus_url: '<PROMETHEUS_METRICS_ENDPOINT>'
-    ## The namespace to be appended before all metrics namespace
-    #
     namespace: '<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>'
-
-    ## List of `<METRIC_TO_FETCH>: <NEW_METRIC_NAME>` for metrics to be
-    ## fetched from the prometheus endpoint.
-    ## <NEW_METRIC_NAME> is optional. It transforms the name in Datadog if set.
-    ## This list should contain at least one metric
-    #
     metrics:
       - '<METRIC_TO_FETCH>: <NEW_METRIC_NAME>'
 ```
@@ -98,11 +87,11 @@ As all [Datadog Agent integrations][1], the Datadog-Prometheus Integration can b
 metadata:
 #(...)
   annotations:
-      ad.datadoghq.com/<CONTAINER_NAME>.check_names: |
+      ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: |
         ["prometheus"]
-      ad.datadoghq.com/<CONTAINER_NAME>.init_configs: |
+      ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: |
         [{}]
-      ad.datadoghq.com/<CONTAINER_NAME>.instances: |
+      ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: |
         [
           {
             "prometheus_url": "http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_METRICS_ENDPOINT> ",
@@ -120,11 +109,10 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-With the following placeholder values:
+With the following configuration placeholder values:
 
-* `<CONTAINER_NAME>`: name of the container in the pod template section
 * `<PROMETHEUS_METRICS_ENDPOINT>`: URL for the metrics as served by the container in Prometheus format
-* `<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>`: set namespace to be prefixed to every metric when viewed in DataDog UI
+* `<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>`: Set namespace to be prefixed to every metric when viewed in DataDog UI
 *  `<PROMETHEUS_METRIC_TO_FETCH>`: Prometheus metrics key to be fetched from the prometheus endpoint.
 * `<DATADOG_NEW_METRIC_NAME>`: Optional parameter which if set, transforms in Datadog the `<PROMETHEUS_METRIC_TO_FETCH>` metric key to `<DATADOG_NEW_METRIC_NAME>`.
 
