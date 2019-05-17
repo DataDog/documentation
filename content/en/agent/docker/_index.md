@@ -6,9 +6,6 @@ aliases:
   - /agent/docker
   - /agent/basic_agent_usage/docker/
 further_reading:
-- link: "agent/faq/getting-further-with-docker"
-  tag: "FAQ"
-  text: "Getting further with Docker"
 - link: "agent/faq/docker-jmx"
   tag: "FAQ"
   text: "Docker JMX"
