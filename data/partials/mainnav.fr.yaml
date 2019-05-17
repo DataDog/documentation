@@ -57,8 +57,6 @@ main:
         children:
           - name: APM
             url: agent/docker/apm
-          - name: Log collection
-            url: agent/docker/log
       - name: Kubernetes
         url: agent/kubernetes/
         children:
@@ -315,7 +313,7 @@ main:
           - name: Browser
             url: logs/log_collection/javascript/
           - name: Docker
-            url: agent/docker/log/
+            url: logs/log_collection/docker/
           - name: Csharp
             url: logs/log_collection/csharp/
           - name: Go
@@ -371,10 +369,10 @@ main:
     url: synthetics/
     pre: nav_synthetics
     children:
-      - name: "API Tests"
-        url: "synthetics/api_tests"
+      - name: API Tests
+        url: synthetics/api_test
       - name: Browser Tests
-        url: synthetics/browser_tests
+        url: synthetics/browser_test
       - name: Intégration APM
         url: synthetics/apm
       - name: Identifier les Bots Synthetics
