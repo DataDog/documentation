@@ -219,7 +219,7 @@ Configure NXLog to gather logs from your host, containers, & services.
 
 2. Download the [CA certificate][2]
 
-3. Add the `om_ssl` module in your NXLog configuration to enable secure transfer over port 10516:
+3. Add the `om_ssl` module in your NXLog configuration to enable secure transfer over port 443:
 
     ```
     <Output out>
