@@ -91,13 +91,13 @@ main:
         children:
           - name: "Cluster Checks"
             url: "agent/autodiscovery/clusterchecks"
+          - name: "Prometheus/Openmetrics"
+            url: "agent/autodiscovery/openmetrics"
       - name: "Proxy"
         url: "agent/proxy"
       ## Upgrade to Agent v6
       - name: "Upgrade to Agent v6"
         url: "agent/faq/upgrade-to-agent-v6"
-      - name: "Prometheus Checks"
-        url: "agent/prometheus"
       # Troubleshooting
       - name: "Troubleshooting"
         url: "agent/troubleshooting/"
@@ -605,4 +605,3 @@ main:
   - name: "Help"
     url: "help/"
     pre: "nav_help"
-
