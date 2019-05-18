@@ -7,95 +7,191 @@ external_redirect: /api/#logs-indexes
 
 ## Logs Indexes
 
-https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters
+### Objects
 
-### Index-Order Endpoint
+#### Index
 
-The index order endpoints are for controlling the _order_ in which an organisation's indexes are processed.
+The `Index` object describes the configuration of an log index. It has the following attributes:
 
-/!\ Logs are only stored in one index and they are routed sequentially through the index list to the first index with a matching filter. Re-ordering them may change the distribution of logs.
+* **`name`** (Read Only):
+    The name of the index.
+* **`filter.query`** :
+    Only logs matching the filter criteria will be considered for this index.
+    The search query followis the [Log search syntax][1]
+* **`num_retention_days`** (Read Only) :
+    The number of days before logs are deleted from this index
+* **`daily_limit`** (Read Only) :
+    The amount of log-events you can send in this index before you are rate-limited.  
+* **`is_rate_limited`** (Read Only) :
+    A boolean stating if the index is rate limited, meaning more logs than the daily limit have been sent. Rate limit is reset every-day at 2pm UTC.
+* **`exclusion_filters`** 
+    An array of `ExclusionFilter` objects (see hereafter). The logs are tested against the query of each `ExclusionFilter`, following the order of the array. Only the first matching active `ExclusionFilter` matters, others (if any) are ignored.
 
-`[IndexOrder]`
+```javascript
+{
+  "name": "team-a-index",
+  "filter": {
+    "query": "team:a"
+  },
+  "num_retention_days": 25,
+  "daily_limit": 123456789,
+  "is_rate_limited": true,
+  "exclusion_filters": [
+    {
+      "name": "exclude most debug logs",
+      "is_enabled": true,
+      "filter": {"query": "status:debug","sample_rate": 0.999 }
+    },
+    {
+      "name": "Exclude logs from service a',
+      "is_enabled": true,
+      "filter": { "query": "service:a status:debug", "sample_rate": 1 }
+    }
+  ]
+}
+```
+
+#### Index Update
+
+The `IndexUpdate` object is the object to be passed to update an index along with its exclusion filters of an index. It corresponds to the `Index` object without its read-only parameters.
+
+```javascript
+{
+  "filter": {
+    "query": "team:a"
+  },
+  "exclusion_filters": [
+    {
+      "name": "exclude most debug logs",
+      "is_enabled": true,
+      "filter": {"query": "status:debug","sample_rate": 0.999 }
+    },
+    {
+      "name": "Exclude logs from service a',
+      "is_enabled": true,
+      "filter": { "query": "service:a status:debug", "sample_rate": 1 }
+    }
+  ]
+}
+```
+
+#### Exclusion Filter
+
+The `ExclusionFilter` object describes the configuration of an [exclusion filter][2]. It has the following attributes:
+
+* **`name`** :
+    The name of the exclusion filter
+* **`is_enabled`** :
+    A boolean stating if the exclusion is active (will eventually exclude logs) or not.
+* **`filter.query`** :
+    Only logs matching the filter criteria AND the query of the parent index will be considered for this exclusion filter.
+    The search query follows the [Log search syntax][1]
+* **`filter.sample_rate`** :
+    The fraction of logs actually excluded by the exclusion filter, when active. The sampling is uniform.
+
+```javascript
+{
+  "name": "exclude most debug logs",
+  "is_enabled": true,
+  "filter": {"query": "status:debug","sample_rate": 0.999 }
+}
+```
+
+#### Index Order
+
+The `IndexOrder` object has a single attribute `index-names` which is an array of `Strings` identifying by their name(s) the index(es) of your organisation. Logs are tested against the query filter of each index one by one, following the order of the array. Logs are eventually stored in the first matching index.
+
 ```javascript
 {
   index_names: [ 'index-1', 'index-2', 'index-3' ]
 }
 ```
 
-Action | Verb | Path | Payload | Response | Notes
------- | ---- | ---- | ------- | -------- | -----
-Get Index Order | `GET` | `/api/v1/logs/config/index-order` | \<none> | `[IndexOrder]`
-Update Index Order | `PUT` | `/api/v1/logs/config/index-order` | `[IndexOrder]` | `[IndexOrder]`
+### Index-Order Endpoints
 
-Errors:
-- The `PUT` will be rejected with:
-  - `400` if the payload does not contain an `index_names` entry or if the entry is not an array of strings.
-  - `422` if the `index_names` in the payload does not contain each and every id in the current index order exactly once (it can not be used to add/copy/delete indexes, nor to do partial reordering)
-
-### Indexes Endpoint
+The index order endpoints are for controlling the _order_ in which an organisation's indexes are processed. You'll use this endpoint only if you have more than one index for logs in your organisation. Note that this index cannot be used to add or delete indexes.
 
 
-##### Signature
+#### Get Index Order
 
-Action | Verb | Path | Payload | Response
------- | ---- | ---- | ------- | --------
-Get All Indexes | `GET` | `/api/v1/logs/config/indexes` | \<none> | `Array<[Index]>` |
-Read Index | `GET` | `/api/v1/logs/config/indexes/{index_name}` | \<none> | `[Index]` |
-Update Index | `PUT` | `/api/v1/logs/config/indexes/{index_name}` | `[Index]` | `[Index]` |
+This endpoint returns the `IndexOrder` for your organisation.
 
+```bash
+api_key=<DD_API_KEY>
+app_key=<DD_APP_KEY>
 
-##### Structure
-
-`[Index]`
-```javascript
-{
-  name: "team-a-index"          // [Read Only] Name for the index
-
-  // Only logs that match the filter criteria will be considered for this index.
-  filter: {
-    query: "team:a"             // A query string. For search query syntax, see:
-                                // https://docs.datadoghq.com/logs/explorer/search/
-  }
-
-
-  num_retention_days: 25        // [Read Only] The number of days before logs are removed from this
-                                //             index.
-  daily_limit: 123456789        // [Read Only] The daily limit in lines for this index.
-  is_rate_limited: true         // [Read Only] True if the index is currently dropping all logs
-                                //             because it has reached its daily limit.
-
-  // Ordered list of exclusion filters to apply before saving logs in this index.
-  exclusion_filters: [
-    {
-      name: 'Exclude almost all debug logs'  // Name of the exclusion filter, for display only.
-      is_enabled: true                       // True if this exclusion filter is enabled and processing logs.
-
-      // Only logs that match the filter criteria will be excluded by this exclusion filter.
-      filter: {
-        query: 'status:debug'                // A query string. For search query syntax, see:
-                                             // https://docs.datadoghq.com/logs/explorer/search/
-        sample_rate: 0.994                   // A rate between 0 and 1 at which to (arbitrarily)
-                                             // drop logs.
-      }
-    },
-    {
-      name: 'Exclude all info logs from service a'
-      is_enabled: true
-      filter: { query: 'service:a status:debug', sample_rate: 1 }
-    },
-    ...
-  ]
-}
+curl -X GET \
+  "https://api.datadoghq.com/api/v1/logs/config/index-order?api_key=${api_key}&application_key=${app_key}" \
+  -H 'content-type: application/json'
 ```
 
-##### Errors
+#### Update Index Order
 
-- The `PUT` operation will be rejected with:
+This endpoint updates the `IndexOrder` of your organisation. It returns the `IndexOrder` object passed in the request body when the request is sucessful.
+
+```bash
+api_key=<DD_API_KEY>
+app_key=<DD_APP_KEY>
+
+curl -X PUT \
+  "https://api.datadoghq.com/api/v1/logs/config/index-order?api_key=${api_key}&application_key=${app_key}" \
+  -H 'content-type: application/json' \
+  -d '{IndexOrder Object}'
+```
+
+Errors:
+  - `400` if the payload does not contain an `index_names` entry or if the entry is not an array of strings.
+  - `422` if the `index_names` in the payload does not contain each and every id in the current index order exactly once
+
+
+### Index Endpoints
+
+#### Get All Indexes
+
+This endpoint returns an array of the `Index` objects of your organisation.
+
+```bash
+api_key=<DD_API_KEY>
+app_key=<DD_APP_KEY>
+
+curl -X GET \
+  "https://api.datadoghq.com/api/v1/logs/config/indexes?api_key=${api_key}&application_key=${app_key}" \
+  -H 'content-type: application/json'
+```
+
+#### Get an Index
+
+This endpoint returns an `Index` identified by its name. 
+
+```bash
+api_key=<DD_API_KEY>
+app_key=<DD_APP_KEY>
+
+curl -X GET \
+  "https://api.datadoghq.com/api/v1/logs/config/indexes/{index_names}?api_key=${api_key}&application_key=${app_key}" \
+  -H 'content-type: application/json'
+```
+
+
+#### Update an Index
+
+This endpoint updates an `Index` identified by its name. It returns the `Index` object passed in the request body when the request is sucessful.
+
+```bash
+api_key=<DD_API_KEY>
+app_key=<DD_APP_KEY>
+
+curl -X PUT \
+  "https://api.datadoghq.com/api/v1/logs/config/indexes/{index_name}?api_key=${api_key}&application_key=${app_key}" \
+  -H 'content-type: application/json' \
+  -d '{Index Object}'
+```
+
+Errors:
   - `400` if the `[Index]` in the payload contains read-only values.
   - `400` if the `[Index]` in the payload does not contain all user-modifiable values.
 
 
-##### Notes
 
-- Index creation or deletion is not enabled yet trhough API.
-- An Index can contain many ExclusionFilters, and they are executed _in order_.
+[1]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
+[2]: https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters
