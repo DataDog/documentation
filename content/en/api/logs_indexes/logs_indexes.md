@@ -34,7 +34,7 @@ The `Index` object describes the configuration of an log index. It has the follo
     "query": "team:a"
   },
   "num_retention_days": 25,
-  "daily_limit": 123456789,
+  "daily_limit": 200000000,
   "is_rate_limited": true,
   "exclusion_filters": [
     {
