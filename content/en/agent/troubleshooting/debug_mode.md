@@ -33,7 +33,7 @@ To enable the Agent full debug mode:
 
 If your container is already running:
 
-1. To avoid that your process is restarted by S6, run:
+1. To prevent your process from being restarted by S6, run:
 
     `rm /var/run/s6/services/agent/finish`
 
