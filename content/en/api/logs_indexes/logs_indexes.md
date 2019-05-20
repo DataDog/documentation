@@ -107,10 +107,6 @@ The `IndexOrder` object has a single attribute `index-names` which is an array o
 }
 ```
 
-### Index-Order Endpoints
-
-The index order endpoints are for controlling the _order_ in which an organisation's indexes are processed. You'll use this endpoint only if you have more than one index for logs in your organisation. Note that this index cannot be used to add or delete indexes.
-
 
 [1]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
 [2]: https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters
