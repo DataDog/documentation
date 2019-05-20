@@ -20,7 +20,7 @@ Generate a new AWS external id for a given AWS account id and role name pair.
 * **`role_name`** [*required*]:
 
     Your Datadog role delegation name.
-    For more information about you AWS account Role name, [see the Datadog AWS integration configuration info][2].
+    For more information about your AWS account Role name, [see the Datadog AWS integration configuration info][2].
 
 [1]: /integrations/amazon_web_services/#configuration
 [2]: /integrations/amazon_web_services/#installation
