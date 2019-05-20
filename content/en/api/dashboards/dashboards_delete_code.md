@@ -6,7 +6,7 @@ external_redirect: /api/#delete-a-dashboard
 ---
 
 ##### Signature
-`DELETE https://api.datadoghq.com/api/v1/dashboard/<DASHBOARD_ID>`
+`DELETE /v1/dashboard/<DASHBOARD_ID>`
 ##### Example Request
 {{< code-snippets basename="api-dashboard-delete" >}}
 ##### Example Response

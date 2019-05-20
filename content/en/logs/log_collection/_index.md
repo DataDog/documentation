@@ -427,7 +427,7 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 
 [1]: /agent
 [2]: /agent/kubernetes/daemonset_setup/#log-collection
-[3]: /logs/log_collection/docker
+[3]: /agent/docker/log
 [4]: /agent/guide/agent-configuration-files
 [5]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: /agent/guide/agent-commands/#agent-status-and-information

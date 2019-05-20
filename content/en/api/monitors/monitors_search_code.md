@@ -6,7 +6,7 @@ external_redirect: /api/#monitors-search
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/monitor/search`
+`GET /v1/monitor/search`
 ##### Example Request
 {{< code-snippets basename="api-monitor-search" >}}
 ##### Example Response

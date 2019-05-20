@@ -7,7 +7,7 @@ external_redirect: /api/#create-an-aws-integration
 
 ##### Signature
 
-`POST /api/v1/integration/aws`
+`POST /v1/integration/aws`
 
 ##### Example Request
 {{< code-snippets basename="aws_create" >}}

@@ -254,7 +254,7 @@ main:
             url: tracing/setup/envoy/
           - name: NGINX
             url: tracing/setup/nginx/
-          - name: Istio 
+          - name: Istio
             url: tracing/setup/istio/
       - name: Enrichir vos Traces
         url: tracing/advanced/

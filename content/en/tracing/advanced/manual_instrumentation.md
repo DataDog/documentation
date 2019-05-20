@@ -303,7 +303,7 @@ While this [has been deprecated][3] if you are using PHP 7.x, you still may use 
 [1]: /tracing/languages/php/#automatic-instrumentation
 [2]: https://github.com/DataDog/dd-trace-php/releases/latest
 [3]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
-[4]: #opentracing
+[4]: /tracing/advanced/opentracing/?tab=php
 {{% /tab %}}
 {{% tab "C++" %}}
 
