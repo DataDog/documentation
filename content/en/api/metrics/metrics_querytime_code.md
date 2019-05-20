@@ -6,7 +6,7 @@ external_redirect: /api/#query-time-series-points
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/query`
+`GET /v1/query`
 ##### Example Request
 {{< code-snippets basename="api-metrics-query" >}}
 ##### Example Response

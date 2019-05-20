@@ -7,7 +7,7 @@ external_redirect: /api/#delete-a-webhooks-integration
 
 ##### Signature
 
-`DELETE https://api.datadoghq.com/api/v1/integration/webhooks`
+`DELETE /v1/integration/webhooks`
 
 ##### Example Request
 {{< code-snippets basename="webhooks_delete" >}}

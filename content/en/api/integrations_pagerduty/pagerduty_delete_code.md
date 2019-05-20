@@ -6,7 +6,7 @@ external_redirect: /api/#delete-a-pagerduty-integration
 ---
 
 ##### Signature
-`DELETE https://api.datadoghq.com/api/v1/integration/pagerduty`
+`DELETE /v1/integration/pagerduty`
 
 ##### Example Request
 
