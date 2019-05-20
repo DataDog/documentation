@@ -41,7 +41,7 @@ If you're able to connect using the command above, run: `beans` and send to the 
 * Output of: `ps aux | grep jmxfetch`
 * Content of `/var/log/datadog/jmxfetch.log`
 * Output of: `sudo /etc/init.d/datadog-agent jmx list_everything`
-* A copy of the YAML integration (send the file)
+* A copy of the YAML integration.
 
 **Note**: if you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running. If you're targeting another application and not seeing related metrics, the likely issue is a misconfiguration in your YAML.
 
@@ -53,87 +53,97 @@ If you're able to connect using the command above, run: `beans` and send to the 
 
 ## Agent troubleshooting
 
-{{< tabs >}}
-{{% tab "Agent >= v6.2" %}}
 
-These commands are available since v6.2.0:
 
-| Command                                                | Description                                                                                                                                                             |
-| :----------------------------------------              | :---                                                                                                                                                                    |
-| `sudo -u dd-agent datadog-agent jmx list matching`     | List attributes that match at least one of your instances configuration.                                                                                                |
-| `sudo -u dd-agent datadog-agent jmx list limited`      | List attributes that do match one of your instances configuration but that are not being collected because it would exceed the number of metrics that can be collected. |
-| `sudo -u dd-agent datadog-agent jmx list collected`    | List attributes that are actually collected by your current instances configuration.                                                                                    |
-| `sudo -u dd-agent datadog-agent jmx list not-matching` | List attributes that don't match any of your instances configuration.                                                                                                   |
-| `sudo -u dd-agent datadog-agent jmx list everything`   | List every attributes available that has a type supported by JMXFetch.                                                                                                  |
-| `sudo -u dd-agent datadog-agent jmx collect`           | Start the collection of metrics based on your current configuration and display them in the console.                                                                    |
+## FAQs
 
-By default theses commands run on all the configured jmx checks. If you want to use them for specific checks, specify them using the `--checks` flag :
+### The 350 metric limit
 
-`sudo datadog-agent jmx list collected --checks tomcat`
+Due to the nature of these integrations, it is possible to submit an extremely high number of metrics directly to Datadog, note that Datadog sets the limit at maximum 350 metrics.
+It is recommended to create filters to refine what metrics are collected but if you believe you need more than 350 metrics, contact [Datadog support][3].
 
-{{% /tab %}}
-{{% tab "Agent v6.0 and v6.1" %}}
+### Java Path
 
-The Agent 6 ships JMXFetch and supports all of its features, except those listed below.
+The Agent does not come with a bundled JVM, but uses the one installed on your system. Therefore you must make sure that the Java home directory is present in the path of the user running the Agent.
 
-The Agent doesn't have a full featured interface to JMXFetch, so you may have to run some commands manually to debug the list of beans collected, JVMs, etc. A typical manual call will take the following form:
+Alternatively, you can specify the JVM path in the integration's configuration file with the `java_bin_path` parameter.
 
-```shell
-/usr/bin/java -Xmx200m -Xms50m -classpath /usr/lib/jvm/java-8-oracle/lib/tools.jar:/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch-0.18.2-jar-with-dependencies.jar org.datadog.jmxfetch.App --check <CHECK_LIST> --conf_directory /etc/datadog-agent/conf.d --log_level INFO --log_location /var/log/datadog/jmxfetch.log --reporter console <COMMAND>
+
+### Monitoring JBoss/WildFly applications
+
+The following instructions work on Agent v5.6.0+.
+
+JBoss/WildFly applications expose JMX over a specific protocol (Remoting JMX) that is not bundled by default with JMXFetch. To allow JMXFetch to connect to these applications, configure it as follows:
+
+* Locate the `jboss-cli-client.jar` file on your JBoss/WildFly server (by default, its path should be `$JBOSS_HOME/bin/client/jboss-cli-client.jar`).
+* If JMXFetch is running on a different host than the JBoss/WildFly application, copy `jboss-cli-client.jar` to a location on the host JMXFetch is running on.
+* Add the path of the jar to the `init_config` section of your configuration:
+
+```yaml
+  # Datadog Agent >= 5.6.0
+
+  init_config:
+    custom_jar_paths:
+      - /path/to/jboss-cli-client.jar
 ```
 
-where `<COMMAND>` is any of:
+* Specify a custom URL that JMXFetch connects to, in the `instances` section of your configuration:
 
-- `list_everything`
-- `list_collected_attributes`
-- `list_matching_attributes`
-- `list_not_matching_attributes`
-- `list_limited_attributes`
-- `list_jvms`
+  ```yaml
+  # Datadog Agent >= 5.6.0
 
-and `<CHECK_LIST>` corresponds to a list of valid `yaml` configurations in
-`/etc/datadog-agent/conf.d/`. For instance:
+  # The jmx_url may be different depending on the version of JBoss/WildFly you're using
+  # and the way you've set up JMX on your server
+  # Refer to the relevant documentation of JBoss/WildFly for more information
+  instances:
+    - jmx_url: "service:jmx:remote://localhost:4447"
+      name: jboss-application  # Mandatory, but can be set to any value,
+                               # is used to tag the metrics pulled from that instance
+  ```
 
-- `cassandra.d/conf.yaml`
-- `kafka.d/conf.yaml`
-- `jmx.d/conf.yaml`
+* [Restart the Agent][4].
 
-Example:
+### Monitoring Tomcat with JMX Remote Lifecycle Listener enabled
 
+The following instructions work on Agent v5.6.0+.
+
+If you're using Tomcat with JMX Remote Lifecycle Listener enabled (see the [Tomcat documentation][5] for more information), JMXFetch needs additional setup to be able to connect to your Tomcat application.
+
+* Locate the `catalina-jmx-remote.jar` file on your Tomcat server (by default, its path should be `$CATALINA_HOME/lib`).
+* If JMXFetch is running on a different host than the Tomcat application, copy `catalina-jmx-remote.jar` to a location on the host JMXFetch is running on.
+* Add the path of the jar to the `init_config` section of your configuration:
+
+```yaml
+# Datadog Agent >= 5.6.0
+
+init_config:
+  custom_jar_paths:
+    - /path/to/catalina-jmx-remote.jar
 ```
-/usr/bin/java -Xmx200m -Xms50m -classpath /usr/lib/jvm/java-8-oracle/lib/tools.jar:/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch-0.18.2-jar-with-dependencies.jar org.datadog.jmxfetch.App --check cassandra.d/conf.yaml jmx.d/conf.yaml --conf_directory /etc/datadog-agent/conf.d --log_level INFO --log_location /var/log/datadog/jmxfetch.log --reporter console list_everything
+
+* Specify a custom URL that JMXFetch connects to, in the `instances` section of your configuration:
+
+```yaml
+# Datadog Agent >= 5.6.0
+
+# The jmx_url may be different depending on the way you've set up JMX on your Tomcat server
+instances:
+  - jmx_url: "service:jmx:rmi://:10002/jndi/rmi://:10001/jmxrmi"
+    name: tomcat-application  # Mandatory, but can be set to any arbitrary value,
+                              # is used to tag the metrics pulled from that instance
 ```
 
-Note: the location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.jar` in the example) might reside elsewhere in your system. You should be able to easily find it with `sudo find / -type f -name 'tools.jar'`.
+* [Restart the Agent][4].
 
-**Note**: you may wish to specify alternative JVM heap parameters `-Xmx`, `-Xms`, the values used in the example correspond to the JMXFetch defaults.
-
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-| Command                                                           | Description                                                                                                                                                             |
-| :----------------------------------------                         | :---                                                                                                                                                                    |
-| `sudo /etc/init.d/datadog-agent jmx list_matching_attributes`     | List attributes that match at least one of your instance configurations.                                                                                                |
-| `sudo /etc/init.d/datadog-agent jmx list_limited_attributes`      | List attributes that do match one of your instance configurations but that are not being collected because it would exceed the number of metrics that can be collected. |
-| `sudo /etc/init.d/datadog-agent jmx list_collected_attributes`    | List attributes that are actually collected by your current instance configurations.                                                                                    |
-| `sudo /etc/init.d/datadog-agent jmx list_not_matching_attributes` | List attributes that don't match any of your instance configurations.                                                                                                   |
-| `sudo /etc/init.d/datadog-agent jmx list_everything`              | List every attributes available that has a type supported by JMXFetch.                                                                                                  |
-| `sudo /etc/init.d/datadog-agent jmx collect`                      | Start the collection of metrics based on your current configuration and display them in the console.                                                                    |
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## SSL troubleshooting
-
-### JMX & SSL=true
+### SSL troubleshooting
 
 Once JMX is enabled and your Agent check is successfully sending metrics to Datadog, you can secure the remote connection over an SSL Socket.
 
 **Note**: You cannot secure JMX over SSL without using the JMX remote user/password authentication files. If you are using system level permissions to run your application, add these files and run them at startup.
 
-This example shows the Datadog configuration for the Tomcat integration.
+This example shows the Datadog configuration for the [Tomcat integration][6].
 
-* Establish a certificate and key to apply to your [Java app keystore][3].
+* Establish a certificate and key to apply to your [Java app keystore][7].
 * Update your Datadog Tomcat `conf.yaml` file located in `conf.d/tomcat.d`:
 
 ```yaml
@@ -147,7 +157,7 @@ instances:
     trust_store_password: <KEY_PASSWORD>
 ```
 
-* [Restart the Agent][4].
+* [Restart the Agent][2].
 
 ## Further Reading
 
@@ -156,5 +166,8 @@ instances:
 
 [1]: https://docs.oracle.com/javase/8/docs/technotes/guides/management/faq.html
 [2]: /help
-[3]: https://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#SSL_and_Tomcat
+[3]: /help
 [4]: /agent/guide/agent-commands/#restart-the-agent
+[5]: https://tomcat.apache.org/tomcat-7.0-doc/config/listeners.html#JMX_Remote_Lifecycle_Listener_-_org.apache.catalina.mbeans.JmxRemoteLifecycleListener
+[6]: https://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#SSL_and_Tomcat
+[7]: http://docs.oracle.com/javase/1.5.0/docs/guide/management/agent.html
