@@ -53,7 +53,91 @@ If you're able to connect using the command above, run: `beans` and send to the 
 
 ## Agent troubleshooting
 
+{{< tabs >}}
+{{% tab "Agent >= v6.2" %}}
 
+These commands are available since v6.2.0:
+
+| Command                                                | Description                                                                                                                                                             |
+| :----------------------------------------              | :---                                                                                                                                                                    |
+| `sudo -u dd-agent datadog-agent jmx list matching`     | List attributes that match at least one of your instances configuration.                                                                                                |
+| `sudo -u dd-agent datadog-agent jmx list limited`      | List attributes that do match one of your instances configuration but that are not being collected because it would exceed the number of metrics that can be collected. |
+| `sudo -u dd-agent datadog-agent jmx list collected`    | List attributes that are actually collected by your current instances configuration.                                                                                    |
+| `sudo -u dd-agent datadog-agent jmx list not-matching` | List attributes that don't match any of your instances configuration.                                                                                                   |
+| `sudo -u dd-agent datadog-agent jmx list everything`   | List every attributes available that has a type supported by JMXFetch.                                                                                                  |
+| `sudo -u dd-agent datadog-agent jmx collect`           | Start the collection of metrics based on your current configuration and display them in the console.                                                                    |
+
+By default theses commands run on all the configured jmx checks. If you want to use them for specific checks, specify them using the `--checks` flag :
+
+`sudo datadog-agent jmx list collected --checks tomcat`
+
+{{% /tab %}}
+{{% tab "Agent v6.0 and v6.1" %}}
+
+The Agent 6 ships JMXFetch and supports all of its features, except those listed below.
+
+The Agent doesn't have a full featured interface to JMXFetch, so you may have to run some commands manually to debug the list of beans collected, JVMs, etc. A typical manual call will take the following form:
+
+```shell
+/usr/bin/java -Xmx200m -Xms50m -classpath /usr/lib/jvm/java-8-oracle/lib/tools.jar:/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch-0.18.2-jar-with-dependencies.jar org.datadog.jmxfetch.App --check <CHECK_LIST> --conf_directory /etc/datadog-agent/conf.d --log_level INFO --log_location /var/log/datadog/jmxfetch.log --reporter console <COMMAND>
+```
+
+where `<COMMAND>` is any of:
+
+- `list_everything`
+- `list_collected_attributes`
+- `list_matching_attributes`
+- `list_not_matching_attributes`
+- `list_limited_attributes`
+- `list_jvms`
+
+and `<CHECK_LIST>` corresponds to a list of valid `yaml` configurations in
+`/etc/datadog-agent/conf.d/`. For instance:
+
+- `cassandra.d/conf.yaml`
+- `kafka.d/conf.yaml`
+- `jmx.d/conf.yaml`
+
+Example:
+
+```
+/usr/bin/java -Xmx200m -Xms50m -classpath /usr/lib/jvm/java-8-oracle/lib/tools.jar:/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch-0.18.2-jar-with-dependencies.jar org.datadog.jmxfetch.App --check cassandra.d/conf.yaml jmx.d/conf.yaml --conf_directory /etc/datadog-agent/conf.d --log_level INFO --log_location /var/log/datadog/jmxfetch.log --reporter console list_everything
+```
+
+Note: the location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.jar` in the example) might reside elsewhere in your system. You should be able to easily find it with `sudo find / -type f -name 'tools.jar'`.
+
+**Note**: you may wish to specify alternative JVM heap parameters `-Xmx`, `-Xms`, the values used in the example correspond to the JMXFetch defaults.
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+| Command                                                           | Description                                                                                                                                                             |
+| :----------------------------------------                         | :---                                                                                                                                                                    |
+| `sudo /etc/init.d/datadog-agent jmx list_matching_attributes`     | List attributes that match at least one of your instance configurations.                                                                                                |
+| `sudo /etc/init.d/datadog-agent jmx list_limited_attributes`      | List attributes that do match one of your instance configurations but that are not being collected because it would exceed the number of metrics that can be collected. |
+| `sudo /etc/init.d/datadog-agent jmx list_collected_attributes`    | List attributes that are actually collected by your current instance configurations.                                                                                    |
+| `sudo /etc/init.d/datadog-agent jmx list_not_matching_attributes` | List attributes that don't match any of your instance configurations.                                                                                                   |
+| `sudo /etc/init.d/datadog-agent jmx list_everything`              | List every attributes available that has a type supported by JMXFetch.                                                                                                  |
+| `sudo /etc/init.d/datadog-agent jmx collect`                      | Start the collection of metrics based on your current configuration and display them in the console.                                                                    |
+
+{{% /tab %}}
+{{% /tab %}}
+{{% tab "Docker Agent" %}}
+
+To check whether Autodiscovery is loading JMX-based checks:
+
+```
+docker exec -it <AGENT_CONTAINER_NAME> datadog-agent configcheck
+```
+
+To see JMX-based checks status from the Agent:
+
+```
+$ docker exec -it <AGENT_CONTAINER_NAME> datadog-agent status
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## FAQs
 
