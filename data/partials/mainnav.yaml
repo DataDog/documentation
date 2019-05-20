@@ -474,6 +474,8 @@ main:
         url: "synthetics/apm"
       - name: "Identify Synthetics Bots"
         url: "synthetics/identify_synthetics_bots"
+      - name: "Settings"
+        url: "synthetics/settings"
 
   # DEVELOPERS
   - name: "Developer Tools"
