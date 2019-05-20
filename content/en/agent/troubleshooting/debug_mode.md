@@ -22,7 +22,7 @@ To enable the Agent full debug mode:
 
 3. Restart the Datadog Agent. See the [Agent Commands][2] page for OS-specific details.
 
-4. Wait a few minutes to generate some logs. [See the Agent][3] docuementation for the location of the logs.
+4. Wait a few minutes to generate some logs. [See the Agent][3] documentation for the location of the logs.
 
 ## Obtaining debug logs from the container Agent
 
