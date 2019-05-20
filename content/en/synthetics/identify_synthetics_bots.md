@@ -10,10 +10,10 @@ further_reading:
 - link: "synthetics/"
   tag: "Documentation"
   text: "Manage your checks"
-- link: "synthetics/browser_test"
+- link: "synthetics/browser_tests"
   tag: "Documentation"
   text: "Configure a Browser Test"
-- link: "synthetics/api_test"
+- link: "synthetics/api_tests"
   tag: "Documentation"
   text: "Configure an API Test"
 
@@ -27,13 +27,17 @@ If APM is enabled, [**other APM specific headers**][1] such as `x-datadog-trace-
 
 **Note**: No headers are added by default for browser tests.
 
-If you want these requests to be completely removed and not sent at all to your analytics tool, use the JavaScript variable below in your website wrapped around your analytics tool code snippet:
+Choose any or a variety of the following methods to identify the robots to make sure they are performing the actions you expect.
 
-```
-if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
-  initializeAnalytics()
-}
-```
+1. You can use the [**headers set for APM integration**][1]. The `x-datadog-origin: synthetics` header, for instance, is added to all the requests launched for API tests. Using one of these headers allows you to filter these bot requests once in your analytics tool. No headers are added for browser tests.
+
+    If you want these requests to be completely removed, and not sent at all to your analytics tool, you can use the below JavaScript variable on your website, wrapped around your analytics tool code snippet:
+
+    ```
+    if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
+      initializeAnalytics()
+    }
+    ```
 
 Alternatively, there are other ways to flag Datadog Synthetics robots:
 
