@@ -83,7 +83,7 @@ After making this change, the [Agent Start command][5] should successfully be ab
 ## Process Metrics permission issue
 
 If you enabled the [process check][7] in the Agent running on a Linux OS you may notice that the `system.processes.open_file_descriptors` metric is not collected or reported by default.
-This occurs when processes being monitored by the process check runs under a different user than the Agent user: `dd-agent`. In fact `dd-agent` user doesn't have full access to all files in `/proc`, which is where the Agent looks to collect data for this metric.
+This occurs when processes being monitored by the process check runs under a different user than the Agent user: `dd-agent`. In fact, `dd-agent` user doesn't have full access to all files in `/proc`, which is where the Agent looks to collect data for this metric.
 
 {{< tabs >}}
 {{% tab "Agent v6.3+" %}}
