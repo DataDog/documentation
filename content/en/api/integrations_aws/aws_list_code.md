@@ -6,6 +6,7 @@ external_redirect: /api/#list-all-aws-integrations
 ---
 
 ##### Signature
+
 `GET /v1/integration/aws`
 
 ##### Example Request

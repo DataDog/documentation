@@ -6,6 +6,7 @@ external_redirect: /api/#list-namespace-rules
 ---
 
 ##### Signature
+
 `GET /v1/integration/aws/available_namespace_rules`
 
 ##### Example Request

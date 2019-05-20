@@ -1,5 +1,3 @@
-# List AWS Accounts (role-based only) in Datadog
-
 {"accounts":
     [{
         "account_id": '112233445566',

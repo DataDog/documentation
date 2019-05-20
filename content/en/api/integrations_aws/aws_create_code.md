@@ -6,6 +6,7 @@ external_redirect: /api/#create-an-aws-integration
 ---
 
 ##### Signature
+
 `POST /v1/integration/aws`
 
 ##### Example Request
