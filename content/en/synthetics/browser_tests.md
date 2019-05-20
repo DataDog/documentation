@@ -98,14 +98,15 @@ After selecting the Hover action, click on the element you want to choose to cre
 
 #### Variable
 
-##### Define a variable
+##### Create a variable
 
-{{< img src="synthetics/browser_tests/setup_variable.png" alt="Setup Variable" responsive="true" style="width:40%;">}}
+{{< img src="synthetics/browser_tests/setup_variable.png" alt="Setup Variable" responsive="true" style="width:80%;">}}
 
-To define a variable, enter a capitalized name then choose its type between:
+To create a variable, first give it a name then define its value from:
 
-* `Select an element content`: this type allows you to create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
-* `From pattern`:
+* **An Element**: Create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
+* **A Secure Credential**: Store and use secure credential through [Synthetics Settings][7])
+* **A Pattern**:
 
 | Pattern                 | Description                                         |
 | ----                    | ---                                                 |
@@ -140,3 +141,4 @@ To use your variables in one of your assertions, hit *Use Variable* and select t
 [4]: /integrations/#cat-notification
 [5]: https://www.google.com/chrome
 [6]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[7]: /synthetics/settings/#secure-credential
