@@ -21,10 +21,10 @@ The `Index` object describes the configuration of an log index. It has the follo
 * **`num_retention_days`** (Read Only) :
     The number of days before logs are deleted from this index
 * **`daily_limit`** (Read Only) :
-    The amount of log-events you can send in this index before you are rate-limited.  
+    The amount of log-events you can send in this index before you are rate-limited.
 * **`is_rate_limited`** (Read Only) :
     A boolean stating if the index is rate limited, meaning more logs than the daily limit have been sent. Rate limit is reset every-day at 2pm UTC.
-* **`exclusion_filters`** 
+* **`exclusion_filters`**
     An array of `ExclusionFilter` objects (see hereafter). The logs are tested against the query of each `ExclusionFilter`, following the order of the array. Only the first matching active `ExclusionFilter` matters, others (if any) are ignored.
 
 ```javascript
@@ -110,87 +110,6 @@ The `IndexOrder` object has a single attribute `index-names` which is an array o
 ### Index-Order Endpoints
 
 The index order endpoints are for controlling the _order_ in which an organisation's indexes are processed. You'll use this endpoint only if you have more than one index for logs in your organisation. Note that this index cannot be used to add or delete indexes.
-
-
-#### Get Index Order
-
-This endpoint returns the `IndexOrder` for your organisation.
-
-```bash
-api_key=<DD_API_KEY>
-app_key=<DD_APP_KEY>
-
-curl -X GET \
-  "https://api.datadoghq.com/api/v1/logs/config/index-order?api_key=${api_key}&application_key=${app_key}" \
-  -H 'content-type: application/json'
-```
-
-#### Update Index Order
-
-This endpoint updates the `IndexOrder` of your organisation. It returns the `IndexOrder` object passed in the request body when the request is sucessful.
-
-```bash
-api_key=<DD_API_KEY>
-app_key=<DD_APP_KEY>
-
-curl -X PUT \
-  "https://api.datadoghq.com/api/v1/logs/config/index-order?api_key=${api_key}&application_key=${app_key}" \
-  -H 'content-type: application/json' \
-  -d '{IndexOrder Object}'
-```
-
-Errors:
-  - `400` if the payload does not contain an `index_names` entry or if the entry is not an array of strings.
-  - `422` if the `index_names` in the payload does not contain each and every id in the current index order exactly once
-
-
-### Index Endpoints
-
-#### Get All Indexes
-
-This endpoint returns an array of the `Index` objects of your organisation.
-
-```bash
-api_key=<DD_API_KEY>
-app_key=<DD_APP_KEY>
-
-curl -X GET \
-  "https://api.datadoghq.com/api/v1/logs/config/indexes?api_key=${api_key}&application_key=${app_key}" \
-  -H 'content-type: application/json'
-```
-
-#### Get an Index
-
-This endpoint returns an `Index` identified by its name. 
-
-```bash
-api_key=<DD_API_KEY>
-app_key=<DD_APP_KEY>
-
-curl -X GET \
-  "https://api.datadoghq.com/api/v1/logs/config/indexes/{index_names}?api_key=${api_key}&application_key=${app_key}" \
-  -H 'content-type: application/json'
-```
-
-
-#### Update an Index
-
-This endpoint updates an `Index` identified by its name. It returns the `Index` object passed in the request body when the request is sucessful.
-
-```bash
-api_key=<DD_API_KEY>
-app_key=<DD_APP_KEY>
-
-curl -X PUT \
-  "https://api.datadoghq.com/api/v1/logs/config/indexes/{index_name}?api_key=${api_key}&application_key=${app_key}" \
-  -H 'content-type: application/json' \
-  -d '{Index Object}'
-```
-
-Errors:
-  - `400` if the `[Index]` in the payload contains read-only values.
-  - `400` if the `[Index]` in the payload does not contain all user-modifiable values.
-
 
 
 [1]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
