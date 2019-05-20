@@ -121,7 +121,6 @@ Note: the location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.j
 | `sudo /etc/init.d/datadog-agent jmx collect`                      | Start the collection of metrics based on your current configuration and display them in the console.                                                                    |
 
 {{% /tab %}}
-{{% /tab %}}
 {{% tab "Docker Agent" %}}
 
 To check whether Autodiscovery is loading JMX-based checks:
@@ -241,7 +240,7 @@ instances:
     trust_store_password: <KEY_PASSWORD>
 ```
 
-* [Restart the Agent][2].
+* [Restart the Agent][4].
 
 ## Further Reading
 
@@ -250,7 +249,7 @@ instances:
 
 [1]: https://docs.oracle.com/javase/8/docs/technotes/guides/management/faq.html
 [2]: /help
-[3]: /help
+[3]: 
 [4]: /agent/guide/agent-commands/#restart-the-agent
 [5]: https://tomcat.apache.org/tomcat-7.0-doc/config/listeners.html#JMX_Remote_Lifecycle_Listener_-_org.apache.catalina.mbeans.JmxRemoteLifecycleListener
 [6]: https://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#SSL_and_Tomcat
