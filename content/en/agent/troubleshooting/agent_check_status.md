@@ -19,7 +19,7 @@ If you are experiencing issues with a given Agent Check, use these commands for 
 
 ## Linux
 
-Agent checks must be called by the Agent. To test an Agent check, run:
+To test an Agent check, run:
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
