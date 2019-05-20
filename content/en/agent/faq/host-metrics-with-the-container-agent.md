@@ -15,7 +15,7 @@ The [Disk check][1] reports host metrics with the container Agent for any storag
 ### Metrics for partitions
 The layered nature of Linux storage (block devices, logical volumes, and partitions) makes it necessary to have a partition mounted to report its free space.
 
-The container Agent reports disk metrics and rates for every partition that is accessible (even if only partially). This separation is enforced by cgroups and Docker. To allow disk usage reporting on a partition, you need to expose it through a Docker volume with the `-v` argument to `docker run`. The following options are available:
+The container Agent reports disk metrics and rates for every wholly or partially accessible partition. Cgroups and Docker enforce this separation. To allow disk usage reporting on a partition, you need to expose it through a Docker volume with the `-v` argument to `docker run`. The following options are available:
 
 * Create a dummy file in the filesystem to watch and expose it through Docker. The Agent can't access any other file on this partition.
     ```
@@ -34,7 +34,11 @@ The container Agent reports disk metrics and rates for every partition that is a
 
 ### Troubleshooting
 #### Missing disk metrics
-If you customized the Docker image or mount a custom directory to the Agent's `conf.d` folder, make sure the Disk check's default `conf.yaml` (or a customized `conf.yaml`) is present, or the check is disabled.
+If you customized the Docker image or mount a custom directory to the Agent's `conf.d` folder, do one of the following for the Disk check:
+
+- Make sure the default `conf.yaml` is present.
+- Enable a customized `conf.yaml`.
+- Disable the check.
 
 #### Permission denied errors
 You may see permission denied errors with the containerized Agent when collecting disk metrics from certain virtual mount points. This usually occurs when the host's entire root filesystem is exposed to the container. The Agent finds `shm` or `netns` mount points, which cannot generate metrics.
