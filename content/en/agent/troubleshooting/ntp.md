@@ -21,7 +21,7 @@ To check the NTP offset for a host, run the Agent [status command][1], using the
     System UTC time: 2015-02-12 22:10:49.524660
 ```
 
-Any significant offset can have undesired effects.To prevent NTP issues, leverage Datadog's monitor for NTP offset to alert you when there is drift on a host thanks to the [NTP Integration][2].
+Any significant offset can have undesired effects. To prevent NTP issues, leverage Datadog's monitor for NTP offset to alert you when there is drift on a host thanks to the [NTP Integration][2].
 Alternatively, use Datadog's [Check Summary page][3] and inspect the check `ntp.in_sync` to see the list of hosts that have NTP issues.
 
 **Note**: Outgoing UDP traffic over the port `123` should be allowed so the Agent can confirm that the local server time is reasonably accurate according to the Datadog NTP servers.
