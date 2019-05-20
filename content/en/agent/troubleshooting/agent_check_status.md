@@ -10,7 +10,7 @@ further_reading:
   text: "Send an Agent Flare"
 ---
 
-If you are experiencing issues with a given Agent Check, find below the list of commands for your OS in order to get more troubleshooting information:
+If you are experiencing issues with a given Agent Check, use these commands for your OS to get more troubleshooting information:
 
 - [Linux](#linux)
 - [Windows](#windows)
