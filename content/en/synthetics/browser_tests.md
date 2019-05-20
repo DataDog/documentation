@@ -5,6 +5,7 @@ beta: true
 description: Simulate and monitor user journeys from specific locations.
 aliases:
   - /synthetics/browser_check
+  - /synthetics/browser_test
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
