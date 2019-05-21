@@ -32,7 +32,7 @@ Starting with version 6.1.0, the Agent includes a new [Prometheus][2] check capa
 
 ### Configuration
 
-If running the Agent as a binary on a host, configure your Prometheus/Openmetrics check as any [other Agent integrations](#?tabs=host). If running the Agent as a DaemonSet in Kubernetes, configure your Prometheus/Openmetrics check using [auto-discovery](#?tabs=kubernetes).
+If running the Agent as a binary on a host, configure your Prometheus/Openmetrics check as any [other Agent integrations](?tab=host). If running the Agent as a DaemonSet in Kubernetes, configure your Prometheus/Openmetrics check using [auto-discovery](?tab=kubernetes).
 
 {{< tabs >}}
 {{% tab "Host" %}}
