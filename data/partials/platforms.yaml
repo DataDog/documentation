@@ -41,3 +41,46 @@ platforms:
   - name: source
     link: "agent/basic_agent_usage/source/"
     image: "platform_fromsource.png"
+gs:
+  - name: amazonlinux
+    link: "agent/basic_agent_usage/amazonlinux/"
+    image: "platform_amazonlinux.png"
+  - name: centos
+    link: "agent/basic_agent_usage/centos/"
+    image: "platform_centos.png"
+  - name: deb
+    link: "agent/basic_agent_usage/deb/"
+    image: "platform_debian.png"
+  - name: docker
+    link: "agent/docker/"
+    image: "platform_docker.png"
+  - name: fedora
+    link: "agent/basic_agent_usage/fedora/"
+    image: "platform_fedora.png"
+  - name: heroku
+    link: "agent/basic_agent_usage/heroku/"
+    image: "platform_heroku.png"
+  - name: kubernetes
+    link: "agent/kubernetes/"
+    image: "platform_kubernetes.png"
+  - name: osx
+    link: "https://app.datadoghq.com/account/settings#agent/mac"
+    image: "platform_macosx.png"
+  - name: redhat
+    link: "agent/basic_agent_usage/redhat/"
+    image: "platform_redhat.png"
+  - name: suse
+    link: "agent/basic_agent_usage/suse/"
+    image: "platform_suse.png"
+  - name: ubuntu
+    link: "agent/basic_agent_usage/ubuntu/"
+    image: "platform_ubuntu.png"
+  - name: windows
+    link: "agent/basic_agent_usage/windows/"
+    image: "platform_windows.png"
+  - name: aix
+    link: "agent/basic_agent_usage/aix/"
+    image: "platform_aix.png"
+  - name: source
+    link: "agent/basic_agent_usage/source/"
+    image: "platform_fromsource.png"

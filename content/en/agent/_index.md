@@ -31,7 +31,7 @@ Agent v6 is available. <a href="/agent/faq/upgrade-to-agent-v6">Upgrade to the n
 
 The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. The Datadog Agent is open-source, and its source code is available on GitHub at [DataDog/datadog-agent][1].
 
-{{< partial name="platforms/platforms.html" >}}
+{{< partial name="platforms/platforms.html" links="platforms" >}}
 
 ## Agent Architecture
 
