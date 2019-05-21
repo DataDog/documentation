@@ -1,7 +1,7 @@
 ---
 title: Edit metric metadata
 type: apicontent
-order: 23.5
+order: 25.5
 external_redirect: /api/#edit-metric-metadata
 ---
 ## Edit metric metadata

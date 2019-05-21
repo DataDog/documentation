@@ -1,7 +1,7 @@
 ---
 title: Query timeseries points
 type: apicontent
-order: 23.3
+order: 25.3
 external_redirect: /api/#query-time-series-points
 ---
 

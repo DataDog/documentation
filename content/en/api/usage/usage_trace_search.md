@@ -1,7 +1,7 @@
 ---
 title: Get hourly usage for Trace Search
 type: apicontent
-order: 31.5
+order: 33.5
 external_redirect: /api/#get-hourly-usage-for-trace-search
 ---
 
