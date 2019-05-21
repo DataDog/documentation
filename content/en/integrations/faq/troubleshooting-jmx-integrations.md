@@ -142,8 +142,8 @@ $ docker exec -it <AGENT_CONTAINER_NAME> datadog-agent status
 
 ### The 350 metric limit
 
-Due to the nature of these integrations, it is possible to submit an extremely high number of metrics directly to Datadog, note that Datadog sets the limit at maximum 350 metrics.
-It is recommended to create filters to refine what metrics are collected but if you believe you need more than 350 metrics, contact [Datadog support][3].
+Datadog accepts a maximum of 350 metrics.
+A best practice is to limit your metrics to less than 350 by creating filters to refine those metrics collected, but if you need more than 350 metrics, contact [Datadog support][3].
 
 ### Java Path
 
@@ -190,7 +190,7 @@ JBoss/WildFly applications expose JMX over a specific protocol (Remoting JMX) th
 
 The following instructions work on Agent v5.6.0+.
 
-If you're using Tomcat with JMX Remote Lifecycle Listener enabled (see the [Tomcat documentation][5] for more information), JMXFetch needs additional setup to be able to connect to your Tomcat application.
+If you're using Tomcat with JMX Remote Lifecycle Listener enabled (see the [Tomcat documentation][5] for more information), JMXFetch needs an additional setup to be able to connect to your Tomcat application.
 
 * Locate the `catalina-jmx-remote.jar` file on your Tomcat server (by default, its path should be `$CATALINA_HOME/lib`).
 * If JMXFetch is running on a different host than the Tomcat application, copy `catalina-jmx-remote.jar` to a location on the host JMXFetch is running on.
