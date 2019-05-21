@@ -1,0 +1,36 @@
+---
+title: Logs Indexes
+type: apicontent
+order: 23
+external_redirect: /api/#logs-indexes
+---
+
+## Logs Indexes
+
+The `Index` object describes the configuration of an log index. It has the following attributes:
+
+* **`name`** (Read Only):
+    The name of the index.
+* **`filter.query`** :
+    Only logs matching the filter criteria will be considered for this index.
+    The search query followis the [Log search syntax][1]
+* **`num_retention_days`** (Read Only) :
+    The number of days before logs are deleted from this index
+* **`daily_limit`** (Read Only) :
+    The amount of log-events you can send in this index before you are rate-limited.
+* **`is_rate_limited`** (Read Only) :
+    A boolean stating if the index is rate limited, meaning more logs than the daily limit have been sent. Rate limit is reset every-day at 2pm UTC.
+* **`exclusion_filters`**
+    An array of `ExclusionFilter` objects (see hereafter). The logs are tested against the query of each `ExclusionFilter`, following the order of the array. Only the first matching active `ExclusionFilter` matters, others (if any) are ignored.
+
+  * **`name`** :
+    The name of the exclusion filter
+  * **`is_enabled`** :
+    A boolean stating if the exclusion is active (will eventually exclude logs) or not.
+  * **`filter.query`** :
+    Only logs matching the filter criteria AND the query of the parent index will be considered for this exclusion filter.
+    The search query follows the [Log search syntax][1]
+  * **`filter.sample_rate`** :
+    The fraction of logs actually excluded by the exclusion filter, when active. The sampling is uniform.
+
+[1]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
