@@ -103,18 +103,18 @@ Individual traces are stored for up to 4 months. To determine how long a particu
 
 | Retention bucket       |  % of stream kept |
 | :--------------------- | :---------------- |
-| 6 hours                |              100% |
+| six hours                |              100% |
 | Current day (UTC time) |               25% |
-| 6 days                 |               10% |
-| 4 months               |                1% |
+| six days                 |               10% |
+| four months               |                1% |
 
 That is to say, on a given day you would see in the UI:
 
-* **100%** of sampled traces from the last 6 hours
+* **100%** of sampled traces from the last six hours
 * **25%** of those from the previous hours of the current calendar day (starting at `00:00 UTC`)
 * **10%** from the previous six calendar days
-* **1%** of those from the previous 4 months (starting from the first day of the month 4 months ago)
-* **0%** of traces older than 4 months
+* **1%** of those from the previous four months (starting from the first day of the month four months ago)
+* **0%** of traces older than four months
 
 For example, at `9:00am UTC Wed, 12/20` you would see:
 
