@@ -12,7 +12,7 @@ further_reading:
 - link: "agent/faq/docker-jmx"
   tag: "FAQ"
   text: "Docker JMX"
-- link: "logs/docker"
+- link: "agent/docker/log"
   tag: "Documentation"
   text: Collect your Docker logs
 - link: "graphing/infrastructure/process"

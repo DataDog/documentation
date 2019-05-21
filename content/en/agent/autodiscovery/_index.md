@@ -509,7 +509,7 @@ services:
 ```
 
 
-[1]: /logs/docker
+[1]: /agent/docker/log
 {{% /tab %}}
 {{% tab "Cluster Checks" %}}
 

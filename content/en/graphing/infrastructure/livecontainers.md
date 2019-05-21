@@ -45,7 +45,7 @@ config_providers:
 * Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexing and uniquely receiving Live Tail data.
 
 
-[1]: /logs/log_collection/docker/?tab=hostinstallation
+[1]: /agent/docker/log/?tab=hostinstallation
 [2]: /agent/guide/agent-configuration-files/?tab=agentv6
 {{% /tab %}}
 
@@ -60,7 +60,7 @@ Follow the instructions for the [Docker Agent][1], passing in the following attr
 
 **Note**: Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexing and uniquely receiving Live Tail data.
 
-[1]: /logs/log_collection/docker/?tab=containerinstallation
+[1]: /agent/docker/log/?tab=containerinstallation
 [2]: /logs/logging_without_limits/#exclusion-filters
 {{% /tab %}}
 
@@ -235,7 +235,7 @@ ac_include: ["name:frontend.*"]
 [3]: /integrations/kubernetes
 [4]: /integrations/amazon_ecs
 [5]: /agent/docker/#run-the-docker-agent
-[6]: /logs/log_collection/docker/?tab=hostinstallation#activate-log-integrations
+[6]: /agent/docker/log/?tab=hostinstallation#activate-log-integrations
 [7]: /logs/live_tail
 [8]: /tagging
 [9]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237
