@@ -43,7 +43,7 @@ First, edit the `prometheus.d/conf.yaml` file in the `conf.d/` folder at the roo
 init_config:
 
 instances:
-  - prometheus_url: '<PROMETHEUS_HOST>:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>'
+  - prometheus_url: 'localhost:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>'
     namespace: '<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>'
     metrics:
       - '<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>'
