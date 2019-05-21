@@ -103,10 +103,10 @@ Individual traces are stored for up to 4 months. To determine how long a particu
 
 | Retention bucket       |  % of stream kept |
 | :--------------------- | :---------------- |
-| six hours                |              100% |
+| 6 hours                |              100% |
 | Current day (UTC time) |               25% |
-| six days                 |               10% |
-| four months               |                1% |
+| 6 days                 |               10% |
+| 4 months               |                1% |
 
 That is to say, on a given day you would see in the UI:
 
