@@ -28,7 +28,7 @@ Starting with version 6.1.0, the Agent includes a new [Prometheus][2] check capa
 ## Setup
 ### Installation
 
-[Install the Datadog Agent for your corresponding Operating system][4]. The Prometheus/Openmetrics check is included in the [Datadog Agent][4] package, so you don't need to install anything else on your nodes or hosts.
+[Install the Datadog Agent for your corresponding Operating system][4]. The Prometheus/Openmetrics check is included in the [Datadog Agent][4] package, so you don't need to install anything else on your containers or hosts.
 
 ### Configuration
 
