@@ -157,7 +157,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
     ##### Errors and Validation
     If an invalid monitor option is included in the request, the response will be:
 
-        ```Error: 400 - ["Invalid monitor option:<invalid option>"]```
+            Error: 400 - ["Invalid monitor option:<invalid option>"]
 
 
 
