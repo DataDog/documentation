@@ -19,7 +19,7 @@ aliases:
   - /agent/prometheus
 ---
 
-Collect your exposed Prometheus metrics from your application [running inside containers](#container-auto-discovery) of directly [on your host](#host-agent) using the Datadog Agent and the [Datadog-Prometheus][1] integration.
+Collect your exposed Prometheus metrics from your application [running inside containers](#container-auto-discovery) or directly [on your host](#host-agent) using the Datadog Agent and the [Datadog-Prometheus][1] integration.
 
 ## Overview
 
