@@ -32,7 +32,7 @@ Starting with version 6.1.0, the Agent includes a new [Prometheus][2] check capa
 
 ### Configuration
 
-If running the Agent as a binary on a host, configure your Prometheus/Openmetrics check as any [other Agent integrations](?tab=host). If running the Agent as a DaemonSet in Kubernetes, configure your Prometheus/Openmetrics check using [auto-discovery](?tab=kubernetes).
+If running the Agent as a binary on a host, configure your Prometheus/Openmetrics check as any [other Agent integration](?tab=host). If running the Agent as a DaemonSet in Kubernetes, configure your Prometheus/Openmetrics check using [auto-discovery](?tab=kubernetes).
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -46,7 +46,7 @@ instances:
   - prometheus_url: '<PROMETHEUS_HOST>:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>'
     namespace: '<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>'
     metrics:
-      - '<METRIC_TO_FETCH>: <NEW_METRIC_NAME>'
+      - '<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>'
 ```
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
