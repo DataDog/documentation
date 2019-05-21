@@ -43,7 +43,7 @@ First, edit the `prometheus.d/conf.yaml` file in the `conf.d/` folder at the roo
 init_config:
 
 instances:
-  - prometheus_url: '<PROMETHEUS_METRICS_ENDPOINT>'
+  - prometheus_url: '<PROMETHEUS_HOST>:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>'
     namespace: '<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>'
     metrics:
       - '<METRIC_TO_FETCH>: <NEW_METRIC_NAME>'
@@ -61,7 +61,7 @@ The Agent detects if it's running on Docker and automatically searches all conta
 ```
 LABEL "com.datadoghq.ad.check_names"='["prometheus"]'
 LABEL "com.datadoghq.ad.init_configs"='["{}"]'
-LABEL "com.datadoghq.ad.instances"='["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_METRICS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[\"<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>\"]}"]'
+LABEL "com.datadoghq.ad.instances"='["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[\"<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>\"]}"]'
 ```
 
 **docker-compose.yaml**
@@ -69,12 +69,12 @@ LABEL "com.datadoghq.ad.instances"='["{\"prometheus_url\":\"http://%%host%%:<PRO
 labels:
   com.datadoghq.ad.check_names: '["prometheus"]'
   com.datadoghq.ad.init_configs: '["{}"]'
-  com.datadoghq.ad.instances: '["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_METRICS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[\"<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>\"]}"]'
+  com.datadoghq.ad.instances: '["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[\"<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>\"]}"]'
 ```
 
 **docker run command**
 ```
--l com.datadoghq.ad.check_names='["prometheus"]' -l com.datadoghq.ad.init_configs='["{}"]' -l com.datadoghq.ad.instances='["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_METRICS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[\"<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>\"]}"]'
+-l com.datadoghq.ad.check_names='["prometheus"]' -l com.datadoghq.ad.init_configs='["{}"]' -l com.datadoghq.ad.instances='["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[\"<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>\"]}"]'
 ```
 
 {{% /tab %}}
@@ -94,7 +94,7 @@ metadata:
       ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: |
         [
           {
-            "prometheus_url": "http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_METRICS_ENDPOINT> ",
+            "prometheus_url": "http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> ",
             "namespace": "<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>",
             "metrics": ["<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>"]
           }
@@ -111,7 +111,8 @@ spec:
 
 With the following configuration placeholder values:
 
-* `<PROMETHEUS_METRICS_ENDPOINT>`: URL for the metrics as served by the container in Prometheus format
+* `<PROMETHEUS_PORT>`: Port to connect to in order to access the Prometheus endpoint.
+* `<PROMETHEUS_ENDPOINT>`: URL for the metrics as served by the container in Prometheus format
 * `<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>`: Set namespace to be prefixed to every metric when viewed in DataDog UI
 *  `<PROMETHEUS_METRIC_TO_FETCH>`: Prometheus metrics key to be fetched from the prometheus endpoint.
 * `<DATADOG_NEW_METRIC_NAME>`: Optional parameter which if set, transforms in Datadog the `<PROMETHEUS_METRIC_TO_FETCH>` metric key to `<DATADOG_NEW_METRIC_NAME>`.
