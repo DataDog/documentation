@@ -11,4 +11,17 @@ This endpoint updates an `Index` identified by its name. It returns the `Index` 
 
 ##### Arguments
 
-This endpoint takes no JSON arguments.
+* **`filter.query`**  [*optional*]:
+    Only logs matching the filter criteria will be considered for this index. The search query followis the [Log search syntax][1]
+* **`exclusion_filters`** An array of `ExclusionFilter` objects (see hereafter). The logs are tested against the query of each `ExclusionFilter`, following the order of the array. Only the first matching active `ExclusionFilter` matters, others (if any) are ignored. The `ExclusionFilter` object describes the configuration of an [exclusion filter][2]. It has the following attributes:
+
+  * **`name`** [*required*]:
+    The name of the exclusion filter
+  * **`is_enabled`**  [*optional*, *default*=**False**]:
+    A boolean stating if the exclusion is active.
+  * **`filter.query`** [*optional*]:
+    Only logs matching the filter criteria AND the query of the parent index will be considered for this exclusion filter. The search query follows the [Log search syntax][1]
+  * **`filter.sample_rate`** [*required*]:
+    The fraction of logs actually excluded by the exclusion filter, when active. The sampling is uniform.
+[1]: 
+[2]: 
