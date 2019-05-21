@@ -1,7 +1,6 @@
 [
     {
         "agent_version": "5.8.0",
-        "integration":"kong",
         "check": "kong.can_connect",
         "statuses": ["ok", "critical"],
         "groups": ["host"],

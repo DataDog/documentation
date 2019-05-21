@@ -57,6 +57,8 @@ main:
         children:
           - name: APM
             url: agent/docker/apm
+          - name: Collecte de logs
+            url: agent/docker/log
       - name: Kubernetes
         url: agent/kubernetes/
         children:
@@ -91,6 +93,17 @@ main:
         url: agent/prometheus
       - name: Dépannage
         url: agent/troubleshooting/
+        children:
+          - name: Mode Debug
+            url: agent/troubleshooting/debug_mode
+          - name: Flare de l'Agent
+            url: agent/troubleshooting/send_a_flare
+          - name: Status d'un Check
+            url: agent/troubleshooting/agent_check_status
+          - name: NTP
+            url: agent/troubleshooting/ntp
+          - name: Problèmes d'Autorisations
+            url: agent/troubleshooting/permissions
       - name: Guides
         url: agent/guide/
       - name: Sécurité
@@ -313,7 +326,7 @@ main:
           - name: Browser
             url: logs/log_collection/javascript/
           - name: Docker
-            url: logs/log_collection/docker/
+            url: agent/docker/log/
           - name: Csharp
             url: logs/log_collection/csharp/
           - name: Go
@@ -370,13 +383,15 @@ main:
     pre: nav_synthetics
     children:
       - name: API Tests
-        url: synthetics/api_test
+        url: synthetics/api_tests
       - name: Browser Tests
-        url: synthetics/browser_test
+        url: synthetics/browser_tests
       - name: Intégration APM
         url: synthetics/apm
       - name: Identifier les Bots Synthetics
         url: synthetics/identify_synthetics_bots
+      - name: Paramètres
+        url: synthetics/settings
   - name: Outils de développement
     url: developers/
     pre: nav_developers

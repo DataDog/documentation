@@ -1,7 +1,6 @@
 [
     {
         "agent_version": "5.1.0",
-        "integration":"apache",
         "groups": ["host", "port"],
         "check": "apache.can_connect",
         "statuses": ["ok", "critical"],
