@@ -12,7 +12,7 @@ The `Index` object describes the configuration of an log index. It has the follo
 * **`name`** (Read Only):
     The name of the index.
 * **`filter.query`** :
-    Only logs matching the filter criteria will be considered for this index.
+    Only logs matching the filter criteria are considered for this index.
     The search query followis the [Log search syntax][1]
 * **`num_retention_days`** (Read Only) :
     The number of days before logs are deleted from this index
@@ -32,5 +32,8 @@ The `Index` object describes the configuration of an log index. It has the follo
     The search query follows the [Log search syntax][1]
   * **`filter.sample_rate`** :
     The fraction of logs actually excluded by the exclusion filter, when active. The sampling is uniform.
+
+
+**Note**:  You need an API and applications key with Admin right to interact with this endpoint.
 
 [1]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
