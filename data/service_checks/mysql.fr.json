@@ -1,20 +1,10 @@
 [
     {
         "agent_version": "5.1.0",
-        "integration":"mysql",
         "check": "mysql.can_connect",
         "statuses": ["ok", "critical"],
         "groups": ["host", "port"],
         "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter et de collecter des métriques depuis l'instance MySQL qu'il monitor. Sinon renvoie `OK`."
-    },
-    {
-        "agent_version": "5.1.0",
-        "integration":"mysql",
-        "check": "mysql.replication.slave_running",
-        "statuses": ["ok", "critical"],
-        "groups": ["host", "channel"],
-        "name": "Peut se connecter",
-        "description": "Renvoie CRITICAL si un slave n'est pas actif, sinon OK."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance MySQL qu'il surveille. Si ce n'est pas le cas, renvoie `OK`."
     }
 ]
