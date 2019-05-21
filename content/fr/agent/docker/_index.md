@@ -9,9 +9,6 @@ further_reading:
   - link: agent/faq/getting-further-with-docker
     tag: FAQ
     text: En apprendre plus sur Docker
-  - link: agent/faq/docker-jmx
-    tag: FAQ
-    text: JMX Docker
   - link: logs/docker
     tag: Documentation
     text: Recueillir vos logs Docker

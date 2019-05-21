@@ -1,6 +1,6 @@
 ---
 title: Timeboards
 type: apicode
-order: 23
+order: 29
 external_redirect: /api/#timeboards
 ---

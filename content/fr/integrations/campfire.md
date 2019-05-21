@@ -20,7 +20,7 @@ version: '1.0'
 
 Intégrez Campfire à Datadog pour :
 
-* Recevoir une notification lorsqu'un utilisateur envoie une publication sur votre flux
+* Être averti lorsque quelqu'un publie sur votre flux
 * Recevoir une notification lorsqu'une alerte de métrique se déclenche
 
 ## Implémentation
@@ -44,7 +44,7 @@ L'intégration Campfire n'inclut aucun check de service.
 Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
 [1]: https://launchpad.37signals.com/signin
-[2]: https://docs.datadoghq.com/fr/help/
+[2]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

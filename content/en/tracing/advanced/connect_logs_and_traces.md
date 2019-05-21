@@ -11,6 +11,9 @@ further_reading:
 - link: "tracing/visualization/"
   tag: "Use the APM UI"
   text: "Explore your services, resources, and traces"
+- link: "https://www.datadoghq.com/blog/request-log-correlation/"
+  tag: "Blog"
+  text: "Correlate request logs with traces automatically"
 ---
 
 The correlation between Datadog APM and Datadog Log Management is improved by automatically adding a `trace_id` and `span_id` in your logs with the Tracing Libraries. This can then be used in the platform to show you the exact logs correlated to the observed trace.
@@ -405,43 +408,9 @@ module.exports = Logger
 
 **Manual Trace ID Injection for Raw Formatted Logs**
 
-To ensure proper log correlation, verify the following is present in each log entry:
+Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
-- `dd.trace_id=<TRACE_ID>`: Where `<TRACE_ID>` is equal to `tracer.scope().active().context().toTraceId()`.
-- `dd.span_id=<SPAN_ID>`: Where `<SPAN_ID>` is equal to `tracer.scope().active().context().toSpanId()`.
-
-You should append or prepend these 2 strings directly to the message part of the log entry. This allows you to correlate trace and logs without having to alter your parsing rules.
-
-Example using `console` as the underlying logger:
-
-```javascript
-const tracer = require('dd-trace').init()
-
-class Logger {
-  log (level, message) {
-    const span = tracer.scope().active()
-    const time = (new Date()).toISOString()
-    const format = '[%s] [%s] - dd.trace_id=%s dd.span_id=%s %s'
-
-    let traceId = ''
-    let spanId = ''
-
-    if (span) {
-      traceId = span.context().toTraceId()
-      spanId = span.context().toSpanId()
-    }
-
-    console.log(format, time, level.toUpperCase(), traceId, spanId, message)
-  }
-}
-
-module.exports = Logger
-```
-
-**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][2].
-
-[1]: /logs/log_collection/nodejs
-[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
+[1]: /help
 {{% /tab %}}
 {{% tab "PHP" %}}
 

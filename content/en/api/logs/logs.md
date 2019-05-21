@@ -1,7 +1,7 @@
 ---
 title: Logs
 type: apicontent
-order: 17
+order: 22
 external_redirect: /api/#logs
 ---
 

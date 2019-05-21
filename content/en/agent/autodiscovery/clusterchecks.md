@@ -256,7 +256,7 @@ The Agent `status` command should show the check instance running and reporting 
 [1]: /agent/autodiscovery
 [2]: /agent/kubernetes/cluster
 [3]: /agent/kubernetes/cluster/#cluster-checks-autodiscovery
-[4]: /agent/faq/agent-commands
+[4]: /agent/guide/agent-commands
 [5]: /developers/write_agent_check
 [6]: /integrations/mysql
 [7]: /agent/autodiscovery/?tab=kubernetes#template-source-kubernetes-pod-annotations

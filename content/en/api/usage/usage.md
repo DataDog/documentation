@@ -1,7 +1,7 @@
 ---
 title: Usage metering
 type: apicontent
-order: 25
+order: 31
 external_redirect: /api/#usage-metering
 ---
 

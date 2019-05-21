@@ -19,10 +19,10 @@ further_reading:
   text: "Control the volume of logs indexed by Datadog"
 ---
 
-## Overview 
+## Overview
 
-If your logs are JSON-formatted, Datadog automatically parses them, but for other formats, Datadog allows you to enrich your logs with the help of Grok Parser.    
-The Grok syntax provides an easier way to parse logs than pure regular expressions.  
+If your logs are JSON-formatted, Datadog automatically parses them, but for other formats, Datadog allows you to enrich your logs with the help of Grok Parser.
+The Grok syntax provides an easier way to parse logs than pure regular expressions.
 The main usage of the Grok Parser is to extract attributes from semi-structured text messages.
 
 Grok comes with a lot of reusable patterns to parse integers, ip addresses, hostnames, etc...
@@ -35,7 +35,7 @@ Parsing rules can be written with the `%{MATCHER:EXTRACT:FILTER}` syntax:
 
 * **Filter** (optional): a post-processor of the match to transform it
 
-Example for this classic unstructured log:  
+Example for this classic unstructured log:
 ```
 john connected on 11/08/2017
 ```
@@ -49,7 +49,9 @@ You would have at the end this structured log:
 
 {{< img src="logs/processing/parsing/parsing_example_1.png" alt="Parsing example 1" responsive="true" style="width:80%;">}}
 
-**Note**: If you have multiple parsing rules in a single Grok parser, only one can match any given log. The first one that matches from top to bottom is the one that does the parsing. 
+**Note**: If you have multiple parsing rules in a single Grok parser, only one can match any given log. The first one that matches from top to bottom is the one that does the parsing.
+
+### Matcher and Filter
 
 Here is the list of all the matchers and filters natively implemented by Datadog:
 
@@ -127,7 +129,7 @@ At the bottom of your grok processor tiles there is an Advanced Settings section
 
 * Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules helps you factorize grok patterns across your parsing rules which is useful when you have several rules in the same grok parser that uses the same tokens.
 
-Example for this classic unstructured log:  
+Example for this classic unstructured log:
 
 ```
 john id:12345 connected on 11/08/2017 on server XYZ in production
@@ -161,9 +163,9 @@ This is the key value core filter : `keyvalue([separatorStr[, characterWhiteList
 * `characterWhiteList`: defines additional non escaped value chars. Default `\\w.\\-_@`
 * `quotingStr` : defines quotes. Default behavior detects quotes (`<>`, `"\"\""`, ...). When defined default behavior is replaced by allowing only defined quoting char. For example `<>` matches *test=<toto sda> test2=test*.
 
-Use filters such as **keyvalue()** to more-easily map strings to attributes: 
+Use filters such as **keyvalue()** to more-easily map strings to attributes:
 
-log: 
+log:
 
 ```
 user=john connect_date=11/08/2017 id=123 action=click
@@ -184,7 +186,7 @@ If you add an **extract** attribute `my_attribute` in your rule pattern you woul
 
 If `=` is not the default separator between your key and values, add a parameter in your parsing rule with the wanted splitter.
 
-log: 
+log:
 
 ```
 user: john connect_date: 11/08/2017 id: 123 action: click
@@ -200,7 +202,7 @@ rule %{data::keyvalue(": ")}
 
 If logs contain specials characters in an attribute value such as `/` in a url for instance, add it to the white-list in the parsing rule:
 
-log: 
+log:
 
 ```
 url=https://app.datadoghq.com/event/stream user=john
@@ -224,8 +226,6 @@ Other examples:
 | key:"/valueStr"         | `%{data::keyvalue(":", "/")}`       | {"key": "/valueStr"}           |
 | key:={valueStr}         | `%{data::keyvalue(":=", "", "{}")}` | {"key": "valueStr"}            |
 | key:=valueStr           | `%{data::keyvalue(":=", "")}`       | {"key": "valueStr"}            |
-| key1:=>val1,key2:=>val2 | `%{data::keyvalue(":=>", ",")}`     | {"key1": "val1","key2":"val2"} |
-
 
 ### Parsing dates
 
@@ -271,13 +271,13 @@ MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("M
 
 {{< img src="logs/processing/parsing/parsing_example_4_bis.png" alt="Parsing example 4 bis" responsive="true" style="width:80%;" >}}
 
-### Optional attribute 
+### Optional attribute
 
 Some logs contain values that only appear part of the time. In those cases, you can make attribute extraction optional with `()?` extracting it only when the attribute is contained in your log.
 
 **Log**:
 ```
-john 1234 connected on 11/08/2017 
+john 1234 connected on 11/08/2017
 ```
 
 **Rule**:
@@ -291,7 +291,7 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 
 {{< img src="logs/processing/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis" responsive="true" style="width:80%;" >}}
 
-### Regex 
+### Regex
 Use the regex matcher to match any substring of your log message based on literal regex rules.
 
 **Log**:

@@ -1,16 +1,16 @@
 ---
 title: Update organization
 type: apicontent
-order: 20.3
+order: 25.3
 external_redirect: /api/#update-organization
 ---
 
 ## Update organization
 
 ##### ARGUMENTS
-* **`name`** [*optional*]:  
+* **`name`** [*optional*]:
     The organization name.
-* **`settings`** [*optional*]:  
+* **`settings`** [*optional*]:
     A JSON array of settings. Settings include:
     * **`saml`** - Set the boolean property `enabled` to enable or disable single sign on with SAML. See the [SAML documentation][1] for more information about all SAML settings.
     * **`saml_idp_initiated_login`** - has one property `enabled` (boolean).v

@@ -16,7 +16,7 @@ To pull custom AWS tags for an EC2 instance through the Datadog Agent without us
 
 
 [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html
-[2]: /agent/faq/agent-commands/?tab=agentv6#restart-the-agent
+[2]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -28,7 +28,7 @@ To pull custom AWS tags for an EC2 instance through the Datadog Agent without us
 
 
 [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html
-[2]: /agent/faq/agent-commands/?tab=agentv5#restart-the-agent
+[2]: /agent/guide/agent-commands/?tab=agentv5#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 

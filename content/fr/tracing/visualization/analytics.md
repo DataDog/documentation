@@ -21,7 +21,7 @@ further_reading:
   - link: tracing/visualization/trace
     tag: Documentation
     text: Comprendre comment lire une trace Datadog
-  - link: tracing/visualization/search
+  - link: tracing/trace_search_and_analytics
     tag: Documentation
     text: Recherche globale sur toutes vos traces avec des tags
 ---
@@ -110,8 +110,8 @@ Exportez les [analyses de traces][6] de la recherche de traces ou créez-les dir
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing/visualization/search/#measures
-[2]: /fr/tracing/visualization/search/#facets
+[1]: /fr/tracing/trace_search_and_analytics/#measures
+[2]: /fr/tracing/trace_search_and_analytics/#facets
 [3]: /fr/monitors/monitor_types/apm
 [4]: /fr/graphing/dashboards/timeboard
 [5]: /fr/help

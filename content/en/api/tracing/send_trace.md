@@ -1,7 +1,7 @@
 ---
 title: Send traces
 type: apicontent
-order: 24.1
+order: 30.1
 external_redirect: /api/#send-traces
 ---
 
@@ -33,12 +33,13 @@ and each span is a dictionary with a `trace_id`, `span_id`, `resource`..
 *   **`name`** - _required_ The span name. The span name must not be longer than 100 characters.
 *   **`resource`** - _required_ The resource you are tracing. The resource name must not be longer than 5000 characters.
 *   **`service`** - _required_ The service you are tracing. The service name must not be longer than 100 characters.
-*   **`type`** - _optional, default=**custom**, case-sensitive_ The type of request. The options available are `web`, `db`, `cache`, and `custom`. 
+*   **`type`** - _optional, default=**custom**, case-sensitive_ The type of request. The options available are `web`, `db`, `cache`, and `custom`.
 *   **`start`** - _required._ The start time of the request in nanoseconds from the unix epoch.
 *   **`duration`** - _required_ The duration of the request in nanoseconds.
 *   **`parent_id`** - _optional_ The span integer ID of the parent span.
 *   **`error`** - _optional_ Set this value to 1 to indicate if an error occured. If an error occurs, you should pass additional information, such as the error message, type and stack information in the `meta` property.
-*   **`meta`** - _optional_ A dictionary of key-value metadata. e.g. tags.
+*   **`meta`** - _optional_ A set of key-value metadata. Keys and values must be strings.
+*   **`metrics`** - _optional_ A set of key-value metadata. Keys must be strings and values must be 64-bit floating point numbers.
 
 [1]: /tracing/#instrument-your-application
 [2]: /tracing/visualization/trace

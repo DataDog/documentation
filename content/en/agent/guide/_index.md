@@ -1,6 +1,8 @@
 ---
 title: Agent Guides
 kind: guide
+private: true
+disable_toc: true
 ---
 
 {{< whatsnext desc="General Guides:" >}}

@@ -1,22 +1,21 @@
 ---
-integration_title: Cloud Foundry
+integration_title: "Cloud\_Foundry"
 name: cloudfoundry
 kind: integration
 git_integration_title: cloud_foundry
 newhlevel: true
-updated_for_agent: 6.0
-description: "Surveillez l'état de santé de vos machines virtuelles Cloud Foundry et des tâches qu'elles exécutent."
+updated_for_agent: 6
+description: "Surveillez l'état de santé de vos machines virtuelles Cloud\_Foundry et des tâches qu'elles exécutent."
 is_public: true
-public_title: Intégration Datadog/Cloud Foundry
-short_description: "Surveillez l'état de santé de vos machines virtuelles Cloud Foundry et des tâches qu'elles exécutent."
+public_title: "Intégration Datadog/Cloud\_Foundry"
+short_description: "Surveillez l'état de santé de vos machines virtuelles Cloud\_Foundry et des tâches qu'elles exécutent."
 categories:
-- provisioning
-- configuration & deployment
-- log collection
+  - provisioning
+  - configuration & deployment
+  - log collection
 doc_link: /integrations/cloud_foundry/
 ddtype: check
 ---
-
 ## Présentation
 
 Tous les déploiements Cloud Foundry peuvent envoyer des métriques et des événements à Datadog. Les données vous aident à surveiller l'état de santé et la disponibilité de tous les nœuds du déploiement, à surveiller les tâches qu'ils exécutent, à recueillir les métriques du Loggregator Firehose, et plus encore. Utilisez cette page pour apprendre à surveiller votre [application sur Cloud Foundry](#surveiller-vos-applications-sur-cloud-foundry) et votre [cluster Cloud Foundry](#surveiller-votre-cluster-cloud-foundry).
@@ -61,7 +60,7 @@ Pour les versions antérieures, Cloud Foundry propose un rétroportage de cette
     - `https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip`
     - `https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-x.y.z.zip`
 
-    N'utilisez pas la `dernière` version ici (remplacez `x.y.z` par la version que vous souhaitez utiliser).
+    N'utilisez pas la `latest` version ici (remplacez `x.y.z` par la version que vous souhaitez utiliser).
 
     **Important** : votre buildpack standard doit être le dernier manifeste à agir en tant que buildpack final. Pour en savoir plus, consultez la [documentation Cloud Foundry][8] relative aux buildpacks (en anglais).
 
@@ -194,13 +193,13 @@ Si vous souhaitez créer votre propre version, consultez le [référentiel de la
 
 #### Configurer l'Agent en tant que complément dans votre Director BOSH
 
-Ajoutez ce qui suit au fichier de configuration d'exécution de votre Director BOSH (par exemple, `runtime.yml`) :
+Ajoutez ce qui suit au fichier de configuration de runtime de votre Director BOSH (par exemple, `runtime.yml`) :
 
 ```
 ---
 releases:
   - name: datadog-agent
-    version: <VERSION_DÉJÀ_IMPORTÉE> # préciser le numéro de la version (x.y.z et non 'dernière')
+    version: <VERSION_DÉJÀ_IMPORTÉE> # préciser le numéro de la version (x.y.z et non 'latest')
 
  addons:
 - name: datadog
@@ -255,7 +254,7 @@ Tout ce que vous configurez dans `runtime.yml` s'applique à chaque nœud. Vous 
 
 Pour personnaliser la configuration pour les checks par défaut (système, réseau, disque et NTP), consultez la [liste complète des options de configuration][18] de la version BOSH de l'Agent Datadog.
 
-#### Synchroniser la configuration d'exécution pour le Director
+#### Synchroniser la configuration de runtime pour le Director
 
 ```
 # v1 de l'interface de ligne de commande BOSH
@@ -276,7 +275,7 @@ bosh -n deploy --recreate
 bosh -n -d <VOTRE_DÉPLOIEMENT> -e <ENV_BOSH> deploy --recreate <MANIFESTE_VOTRE_DÉPLOIEMENT>.yml
 ```
 
-Comme la configuration de l'exécution est appliquée de manière globale, BOSH redéploie chaque nœud dans votre déploiement. Si vous comptez plusieurs déploiements, redéployez-les tous afin d'installer l'Agent Datadog partout.
+Comme la configuration de runtime est appliquée de manière globale, BOSH redéploie chaque nœud dans votre déploiement. Si vous comptez plusieurs déploiements, redéployez-les tous afin d'installer l'Agent Datadog partout.
 
 #### Vérifier que l'Agent est installé partout
 
@@ -368,7 +367,7 @@ releases:
 #   version: <x.y.z>
 # ...
   - name: firehose-nozzle-datadog
-    version: <VERSION_DÉJÀ_IMPORTÉE> # préciser le numéro de la version (x.y.z et non 'dernière')
+    version: <VERSION_DÉJÀ_IMPORTÉE> # préciser le numéro de la version (x.y.z et non 'latest')
 ```
 
 Pour vérifier quelle version de `datadog-firehose-nozzle` a été importée, exécutez `bosh releases`.
@@ -394,7 +393,7 @@ Depuis la page [Metrics Explorer][22] de Datadog, recherchez des métriques qui 
 
 ### Métriques
 
-Les métriques suivantes sont envoyées par le Firehose Nozzle de Datadog (`cloudfoundry.nozzle`). L'Agent Datadog n'envoie pas de métriques spéciales, mais uniquement les métriques habituelles des checks d'Agent que vous avez défini dans la configuration de l'exécution du Director (et, par défaut, les métriques [système][23], [réseau][24], [disque][25] et [NTP][26]).
+Les métriques suivantes sont envoyées par le Firehose Nozzle de Datadog (`cloudfoundry.nozzle`). L'Agent Datadog n'envoie pas de métriques spéciales, mais uniquement les métriques habituelles des checks d'Agent que vous avez défini dans la configuration de runtime du Director (et, par défaut, les métriques [système][23], [réseau][24], [disque][25] et [NTP][26]).
 
 Le Firehose Nozzle de Datadog recueille uniquement les CounterEvents (en tant que métriques et non en tant qu'événements), les ValueMetrics et les ContainerMetrics. Il ignore les LogMessages et les Errors.
 

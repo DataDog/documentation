@@ -3,6 +3,9 @@ title: Why do my logs show up with an Info status even for Warnings or Errors?
 kind: faq
 disable_toc: true
 further_reading:
+- link: "logs/faq/how-to-remap-custom-severity-values-to-the-official-log-status/#pagetitle"
+  tag: "FAQ"
+  text: "Learn how to remap custom severity values to the official log status"
 - link: "logs/processing"
   tag: "Documentation"
   text: "Learn how to process your logs"

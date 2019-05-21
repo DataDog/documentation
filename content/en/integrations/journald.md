@@ -88,9 +88,9 @@ logs:
 
 Tags are critical for finding information in highly dynamic containerized environments, which is why the Agent can collect container tags in journald logs.
 
-This works automatically when the Agent is running from the host. If you are using the containerized version of the Datadog Agent, mount your journald path and the following directory:
+This works automatically when the Agent is running from the host. If you are using the containerized version of the Datadog Agent, mount your journal path and the following file:
 
-- `/etc/machine-id`: this ensure that the Agent can query the journald that is stored on the host.
+- `/etc/machine-id`: this ensures that the Agent can query the journal that is stored on the host.
 
 Finally, [restart the agent][2].
 
@@ -103,6 +103,6 @@ Need help? Contact [Datadog Support][3].
 Learn more about infrastructure monitoring and all Datadog integrations on [our blog][4]
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /agent/faq/agent-commands/#start-stop-restart-the-agent
+[2]: /agent/guide/agent-commands/#start-stop-restart-the-agent
 [3]: /help
 [4]: https://www.datadoghq.com/blog

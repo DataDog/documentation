@@ -27,7 +27,7 @@ To make it available from *any host*, use `-p 8126:8126/tcp` instead.
 
 For example, the following command allows the Agent to receive traces from your host only:
 
-```bash
+```
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -53,15 +53,15 @@ List of all environment variables available for tracing within the Docker Agent:
 | `DD_APM_DD_URL`            | Datadog API endpoint where traces are sent. For Datadog EU site set `DD_APM_DD_URL` to `https://trace.agent.datadoghq.eu` |
 | `DD_APM_RECEIVER_PORT`     | Port that the Datadog Agent's trace receiver listens on. Default value is `8126`.                                          |
 | `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers](#tracing-from-other-containers).                             |
-| `DD_APM_IGNORE_RESOURCES`  | Configure resources for the agent to ignore. Format should be comma seperated, regular expressions. i.e. <code>"GET /ignore-me,(GET&#124;POST) /and-also-me"</code>. |
-| `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions. Format should be comma seperated instances of <code>\<SERVICE_NAME>&#124;\<OPERATION_NAME>=1</code>. i.e. <code>my-express-app&#124;express.request=1,my-dotnet-app&#124;aspnet_core_mvc.request=1</code>. |
-| `DD_APM_ENV`               | Sets the default [environment][2] for your traces.                                                                        |
+| `DD_APM_IGNORE_RESOURCES`  | Configure resources for the Agent to ignore. Format should be comma separated, regular expressions. i.e. <code>"GET /ignore-me,(GET&#124;POST) /and-also-me"</code>. |
+| `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions. Format should be comma separated instances of <code>\<SERVICE_NAME>&#124;\<OPERATION_NAME>=1</code>. i.e. <code>my-express-app&#124;express.request=1,my-dotnet-app&#124;aspnet_core_mvc.request=1</code>. You can also [enable it automatically][2] with the configuration parameter in the Tracing Client.|
+| `DD_APM_ENV`               | Sets the default [environment][3] for your traces.                                                                        |
 | `DD_APM_MAX_EPS`           | Sets the maximum APM events per second.                                                                                   |
 | `DD_APM_MAX_TPS`           | Sets the maximum traces per second.                                                                                       |
 
 ## Tracing from other containers
 
-As with DogStatsD, traces can be submitted to the Agent from other containers either using [Docker networks](#docker-network) or with the [Docker host IP](#host-ip).
+As with DogStatsD, traces can be submitted to the Agent from other containers either using [Docker networks](#docker-network) or with the [Docker host IP](#docker-host-ip).
 
 ### Docker Network
 
@@ -175,4 +175,5 @@ tracer.configure(hostname='172.17.0.1', port=8126)
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#api
-[2]: /agent/apm/#environment
+[2]: /tracing/trace_search_and_analytics/#automatic-configuration
+[3]: /agent/apm/#environment

@@ -36,7 +36,7 @@ Les logs d'audit sont activés par défaut pour CloudHSM.
 Accédez ensuite à la [section Log de Datadog][2] pour commencer à explorer vos logs !
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: /fr/integrations/amazon_web_services/#create-a-new-lambda-function
 [2]: https://app.datadoghq.com/logs

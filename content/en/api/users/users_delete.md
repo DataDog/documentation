@@ -1,7 +1,7 @@
 ---
 title: Disable user
 type: apicontent
-order: 26.5
+order: 32.5
 external_redirect: /api/#disable-user
 ---
 
@@ -9,6 +9,5 @@ external_redirect: /api/#disable-user
 Can only be used with application keys belonging to administrators.
 
 ##### ARGUMENTS
-* **`id`** [*required*]:  
+* **`id`** [*required*]:
     The handle of the user.
-

@@ -68,7 +68,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: http://capistranorb.com
 [2]: https://app.datadoghq.com/event/stream
-[3]: https://docs.datadoghq.com/fr/help/
+[3]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

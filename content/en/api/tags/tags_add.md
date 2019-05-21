@@ -1,7 +1,7 @@
 ---
 title: Add tags to a host
 type: apicontent
-order: 22.3
+order: 28.3
 external_redirect: /api/#add-tags-to-a-host
 ---
 
@@ -10,10 +10,10 @@ This endpoint allows you to add new tags to a host, optionally specifying where 
 
 ##### ARGUMENTS
 
-* **`tags`** [*required*]:  
+* **`tags`** [*required*]:
     A list of tags to apply to the host
-* **`source`** [*optional*, *default*=**users**]:  
-    The source of the tags (e.g. chef, puppet).  
+* **`source`** [*optional*, *default*=**users**]:
+    The source of the tags (e.g. chef, puppet).
     [Complete list of source attribute values][1]
 
 [1]: /integrations/faq/list-of-api-source-attribute-value

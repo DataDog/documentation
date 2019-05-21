@@ -33,7 +33,7 @@ Parameter descriptions:
 | `name`         | Name of your metric inside Datadog.                   |
 | `counter_name` | The counter name of [SQL server database objects][2]. |
 
-If a counter has multiple instances associated with it, you can choose to fetch a single instance with the `instance_name` parameter name: 
+If a counter has multiple instances associated with it, you can choose to fetch a single instance with the `instance_name` parameter name:
 
 ```
 custom_metrics:
@@ -76,7 +76,7 @@ custom_metrics:
 
 ```
 
-The above example reports two metrics, `sqlserver.LCK_M_S.max_wait_time.ms` and `sqlserver.LCK_M_S.signal_wait_time_ms`. 
+The above example reports two metrics, `sqlserver.LCK_M_S.max_wait_time.ms` and `sqlserver.LCK_M_S.signal_wait_time_ms`.
 
 **Note**: If metrics like `sys.dm_io_virtual_file_stats` and `sys.dm_os_memory_clerks` are not associated with a `counter_name` only the columns need to be specified:
 
@@ -93,7 +93,9 @@ The above example reports two metrics, `sqlserver.io_file_stats.num_of_reads` an
 
 ## Collecting metrics from a custom procedure
 
-Collecting metrics from a custom procedure produces a large amount of custom metrics that may affect your billing. Also, this feature is only available when using the `adodbapi` driver (set by default).
+Collecting metrics from a custom procedure produces a large amount of custom metrics that may affect your billing.
+
+**Note**: If you are using Agent < 6.11, you need to have set up the `adodbapi` driver in order for this to work.
 
 ### Setup a Stored Procedure
 
@@ -178,6 +180,13 @@ You can also specify:
 
 
 **Note**: The `proc_only_if` guard condition is useful for HA scenarios where a database can move between servers.
+
+### Troubleshooting
+
+If your custom metrics are not appearing in Datadog, check the Agent log file. If you see the following error: `Could not call procedure <PROCEDURE_NAME>: You must supply -1 parameters for this stored procedure`, it could be one of the following issues:
+
+- The `<PROCEDURE_NAME>` is typed incorrectly.
+- The database username specified in the configuration may not have permission to run the stored procedure. 
 
 ## Further Reading
 

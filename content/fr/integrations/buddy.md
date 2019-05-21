@@ -11,7 +11,7 @@ guid: 7b131269-e2ba-4279-b9dd-82e85764d389
 integration_id: buddy
 integration_title: Buddy
 is_public: true
-kind: intégration
+kind: integration
 maintainer: support@buddy.works
 manifest_version: 1.0.2
 name: buddy
@@ -49,7 +49,7 @@ Grâce à cette intégration, vous pouvez :
 
 ${'${execution.pipeline.name} execution #${execution.id}'}
 
-# Contenu
+# Content
 ${'${execution.to_revision.revision} - ${execution.to_revision.message}'}
 ```
 

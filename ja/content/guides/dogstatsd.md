@@ -144,7 +144,7 @@ You can see the list of StatsD clients on our [libraries page](/libraries/).　-
 
 ### DogStatsDクライアントについて
 
-プログラミング言語ごとのDogStatsDクライアントに関しては、[ライブラリー](/ja/libraries/)ページを参照してください。
+プログラミング言語ごとのDogStatsDクライアントに関しては、[ライブラリー](/libraries/)ページを参照してください。
 
 <!-- ## Metrics
 

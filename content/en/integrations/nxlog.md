@@ -109,9 +109,11 @@ Configure NXLog to gather logs from your host, containers, & services.
 
 ### NXLog TLS encryption
 
-1. Download the [public key for TLS encryption][1] of logs:
+1. Download the [public key for TLS encryption][1] of logs.
 
-2. Add the `om_sll` module in your NXLog configuration to enable secure transfer over port 10516:
+2. Download the [CA certificate][2]
+
+3. Add the `om_ssl` module in your NXLog configuration to enable secure transfer over port 10516:
 
     ```
     <Output out>
@@ -119,13 +121,15 @@ Configure NXLog to gather logs from your host, containers, & services.
       Host    intake.logs.datadoghq.com
       Port    10516
       Exec    $raw_event="<YOUR_API_KEY> " + $raw_event;
-      CAFile  <CERT_DIR>/intake.logs.datadoghq.com.crt
+      CertFile <CERT_DIR>/intake.logs.datadoghq.com.crt
+      CAFile   <CERT_DIR>/SFSRootCAG2.pem
       AllowUntrusted FALSE
     </Output>
     ```
 
 
 [1]: /resources/crt/FULL_intake.logs.datadoghq.com.crt
+[2]: https://www.amazontrust.com/repository/SFSRootCAG2.pem
 {{% /tab %}}
 {{% tab "Datadog EU site" %}}
 
@@ -213,7 +217,9 @@ Configure NXLog to gather logs from your host, containers, & services.
 
 1. Download the [public key for TLS encryption][1] of logs.
 
-2. Add the `om_sll` module in your NXLog configuration to enable secure transfer over port 10516:
+2. Download the [CA certificate][2]
+
+3. Add the `om_ssl` module in your NXLog configuration to enable secure transfer over port 443:
 
     ```
     <Output out>
@@ -221,13 +227,15 @@ Configure NXLog to gather logs from your host, containers, & services.
       Host    tcp-intake.logs.datadoghq.eu
       Port    443
       Exec    $raw_event="<DATADOG_API_KEY> " + $raw_event;
-      CAFile  <CERT_DIR>/intake.logs.datadoghq.eu.crt
+      CertFile <CERT_DIR>/intake.logs.datadoghq.eu.crt
+      CAFile   <CERT_DIR>/datadog.ca.eu.pem
       AllowUntrusted FALSE
     </Output>
     ```
 
 
 [1]: /resources/crt/FULL_intake.logs.datadoghq.eu.crt
+[2]: /resources/crt/datadog.ca.eu.pem
 {{% /tab %}}
 {{< /tabs >}}
 

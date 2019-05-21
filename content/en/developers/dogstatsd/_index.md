@@ -5,6 +5,7 @@ description: Introduction and setup instructions for DogStatsD.
 aliases:
   - /guides/dogstatsd/
   - /guides/DogStatsD/
+  - /developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd/
 further_reading:
 - link: "developers/metrics"
   tag: "Documentation"
@@ -91,7 +92,7 @@ For Ruby:
 # Import the library
 require 'datadog/statsd'
 
-# Create a statsd client instance.
+# Create a DogStatsD client instance.
 statsd = Datadog::Statsd.new
 ```
 
@@ -109,7 +110,7 @@ If you're interested in learning more about the datagram format used by DogStats
 [2]: https://github.com/DataDog/dd-agent/pull/2104
 [3]: /developers/dogstatsd/data_types/#timers
 [4]: /developers/metrics/custom_metrics
-[5]: /agent/faq/agent-commands
+[5]: /agent/guide/agent-commands
 [6]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
 [7]: /developers/dogstatsd/unix_socket
 [8]: /libraries

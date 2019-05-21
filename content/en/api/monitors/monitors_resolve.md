@@ -1,7 +1,7 @@
 ---
 title: Resolve monitor
 type: apicontent
-order: 19.06
+order: 24.06
 external_redirect: /api/#resolve-monitor
 ---
 
@@ -17,4 +17,3 @@ external_redirect: /api/#resolve-monitor
 
     It can also resolve all triggered groups with the pseudo-group `ALL_GROUPS`:
     `resolve: [{"monitor_id": "ALL_GROUPS"}]`
-

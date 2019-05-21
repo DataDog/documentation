@@ -1,6 +1,7 @@
 ---
 title: Autodiscovery with Agent v5
 kind: guide
+private: true
 aliases:
   - /agent/faq/agent-5-autodiscovery
 ---
@@ -404,5 +405,5 @@ checks:
 [19]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
 [20]: https://github.com/DataDog/docker-dd-agent#configuration-files
 [21]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[22]: /agent/faq/agent-commands/#start-stop-restart-the-agent
+[22]: /agent/guide/agent-commands/#start-stop-restart-the-agent
 [23]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example

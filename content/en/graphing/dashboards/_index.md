@@ -28,6 +28,8 @@ Search across your Dashboard with the search bar at the top of the page. Dashboa
 * `Modified`: Sort the Dashboard list by last modification date.
 * `Popularity`: Sort the Dashboard list by [Dashboard popularity](#popularity).
 
+To view suggested dashboards and active users, click on the caret icon next to the dashboard title. You can also add markdown supported dashboard descriptions in this view.
+
 ### Popularity
 
 A Dashboard's popularity is relative. An organization's most popular Dashboard appears as 5 bars; all other Dashboards are relative to that. Popularity is based upon the amount of traffic a Dashboard is getting and is updated daily, so new Dashboards have 0 popularity bars for up to the first 24 hours.

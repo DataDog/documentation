@@ -63,13 +63,13 @@ L'intégration AWS Kinesis n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_kinesis.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_kinesis
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_kinesis/amazon_kinesis_metadata.csv
-[7]: https://docs.datadoghq.com/fr/help/
+[7]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

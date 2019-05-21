@@ -1,7 +1,7 @@
 ---
 title: Récupérer des tags
 type: apicode
-order: 21.1
+order: 28.1
 external_redirect: /api/#recuperer-des-tags
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#recuperer-des-tags
 {{< code-snippets basename="api-tags-get" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-tags-get" >}}
-

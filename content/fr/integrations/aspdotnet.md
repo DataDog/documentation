@@ -29,7 +29,7 @@ supported_os:
 Recueillez des métriques du service ASP.NET en temps réel pour :
 
 * Visualiser et surveiller les états de ASP.NET
-* Être informé des failovers et des événements de ASP.NET
+* Être informé des failovers et des événements d'ASP.NET
 
 ## Implémentation
 ### Installation
@@ -68,7 +68,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/aspdotnet/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help/
+[7]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

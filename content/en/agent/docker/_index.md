@@ -9,10 +9,7 @@ further_reading:
 - link: "agent/faq/getting-further-with-docker"
   tag: "FAQ"
   text: "Getting further with Docker"
-- link: "agent/faq/docker-jmx"
-  tag: "FAQ"
-  text: "Docker JMX"
-- link: "logs/docker"
+- link: "agent/docker/log"
   tag: "Documentation"
   text: Collect your Docker logs
 - link: "graphing/infrastructure/process"
@@ -66,7 +63,7 @@ Optional collection Agents are disabled by default for security or performance r
 
 #### DogStatsD (custom metrics)
 
-Send custom metrics via [the statsd protocol][5]:
+Send custom metrics via [the StatsD protocol][5]:
 
 | Env Variable                     | Description                                                                                       |
 |----------------------------------|---------------------------------------------------------------------------------------------------|
@@ -113,6 +110,7 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 | Env Variable                        | Description                                                                                                      |
 |-------------------------------------|------------------------------------------------------------------------------------------------------------------|
 | `DD_PROCESS_AGENT_CONTAINER_SOURCE` | Overrides container source auto-detection to force a single source. e.g `"docker"`, `"ecs_fargate"`, `"kubelet"` |
+| `DD_HEALTH_PORT` | Set this to `5555` in order to expose the Agent health check at port `5555`. |
 
 ### Configuration files
 
@@ -132,7 +130,7 @@ If you mount YAML configuration files in the `/conf.d` folder, they are automati
       -v /proc/:/host/proc/:ro \
       -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
       -v /opt/datadog-agent-conf.d:/conf.d:ro \
-      -e API_KEY={your_api_key_here} \
+      -e DD_API_KEY={your_api_key_here} \
        datadog/agent:latest
     ```
 

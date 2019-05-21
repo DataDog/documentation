@@ -10,7 +10,7 @@ listorder: 5
 Monitoring in Datadog refers to the ability to notify your team when conditions are met. If you are just starting with monitors in Datadog, please refer to our [Guide to Monitors](/guides/monitors) for an introduction.
 -->
 
-このMonitoringレファレンスでは、条件が満たされた時にチームが通知を受けるための設定について解説します。DatadogのMonitor(監視)機能を使い始めたばかりの場合、まずは入門編の[Monitor(監視)機能の設定ガイド](/ja/guides/monitors) ページを参照して下さい。
+このMonitoringレファレンスでは、条件が満たされた時にチームが通知を受けるための設定について解説します。DatadogのMonitor(監視)機能を使い始めたばかりの場合、まずは入門編の[Monitor(監視)機能の設定ガイド](/guides/monitors) ページを参照して下さい。
 
 <!--
 Here is a quick overview of the different terms used in this guide.
@@ -238,7 +238,7 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
     Datadogに送信している全てのメトリクスをもとにMonitor設定を作成することができます。
     この項目では、グラフ表示に使っている標準的な対象範囲(スコープ)の指定の規則が適用されます。
-    この規則の詳細に関しては、グラフ表示入門のページの[対象範囲の指定(scope)](/ja/graphingjson/#対象範囲の指定-scope-スコープ)を参照してください。
+    この規則の詳細に関しては、グラフ表示入門のページの[対象範囲の指定(scope)](/graphingjson/#対象範囲の指定-scope-スコープ)を参照してください。
 
 3. アラートグループを選択します。
 
@@ -279,9 +279,9 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
       - 比較する値の変化は、設定された時間枠の範囲内で指定します。時間枠は5分から24時間の間で指定が可能です (最短で5分前の値と、最大で24時間前の値との比較)。
       - **threshold alert** とほぼ同じように、*集計期間* と*集計期間内に含まれるデータの集計方法* を設定します。
 
-    - Anomaly Detection のより詳しい設定方法は、[Anomaly Detection](/ja/guides/anomalies) ガイドを参照して下さい。
+    - Anomaly Detection のより詳しい設定方法は、[Anomaly Detection](/guides/anomalies) ガイドを参照して下さい。
 
-    - Outlier Detection のより詳しい設定方法は、[Outlier Detection](/ja/guides/outliers) ガイドを参照して下さい。
+    - Outlier Detection のより詳しい設定方法は、[Outlier Detection](/guides/outliers) ガイドを参照して下さい。
 
 5. 必要に応じて、一定時間以上データが届かない場合**notify on no data**(オプション)を設定することができます。このオプションを設定する時間枠は、先の条件設定で設定した時間枠の2倍以上の時間枠である必要があります。例えば、過去5分のメトリクスを基にアラートを設定しているなら、データが届いていないことを通知する前に、少なくとも10分間以上の時間を設定する必要があります。
 
@@ -342,7 +342,7 @@ point they should notify.
 
 プロセスを対象にしたMonitorは、Datadog Agentのサービスチェックによってレポートされる`process.up`の状態を監視しています。
 
-設定の詳細については、[Process チェック](/ja/integrations/process/)のページをお読みください。
+設定の詳細については、[Process チェック](/integrations/process/)のページをお読みください。
 
 各プロセスに対しサービスチェックのステータスが生成されます。プロセスを対象にしたMonitorの作成画面を介して、どのサービスチェックのステータスを監視し、どのような状態になったときに通知するか設定することができます。
 
@@ -382,7 +382,7 @@ configuration.
 
 {{< img src="guides/monitor/network_monitor.png" >}}
 
-ネットワークを対象にしたMonitorは、Datadog Agentで提供しているTCPおよびHTTPのチェックの情報を監視します。Datadog Agentでネットワークチェックを有効にする方法は、[guide to network checks](/ja/integrations/tcp_check) を参照してください。
+ネットワークを対象にしたMonitorは、Datadog Agentで提供しているTCPおよびHTTPのチェックの情報を監視します。Datadog Agentでネットワークチェックを有効にする方法は、[guide to network checks](/integrations/tcp_check) を参照してください。
 
 <!--
 **Network Status**
@@ -491,7 +491,7 @@ or service checks.
 
 カスタムチェックを対象にしたMonitorでは、独自に作成したAgent Checkによって収集しているサービスチェックのステータスを監視します。
 
-メトリクスやイベント、あるいはサービスチェックを送信する独自のCheckの作成方法については、[「Agent Checkの書き方」](/ja/guides/agent_checks/)を参照してください。
+メトリクスやイベント、あるいはサービスチェックを送信する独自のCheckの作成方法については、[「Agent Checkの書き方」](/guides/agent_checks/)を参照してください。
 
 <!--
 1. Select your **custom Agent check**.
@@ -538,7 +538,7 @@ No Article at this time.
 
 コンポジットMonitorを使用すると、多数の個々のMonitorを1つの複合条件Monitorとしてまとめることができ、より具体的なアラート条件を定義することができます。
 
-設定の詳細については、[Composite Monitor](/ja/guides/composite_monitors/) ガイドのページをお読みください。
+設定の詳細については、[Composite Monitor](/guides/composite_monitors/) ガイドのページをお読みください。
 
 コンポジットMonitorは、複合したトリガ条件が真となる値を個々のMonitorのステータスが同時に持つ場合にトリガされます。
 

@@ -96,8 +96,8 @@ The following attributes are related to the data used in network communication. 
 | :---                       | :---     | :----                                                                                    |
 | `network.client.ip`        | `string` | The IP address of the client that initiated the TCP connection.                          |
 | `network.destination.ip`   | `string` | The IP address the client connected to.                                                  |
-| `network.client.port`      | `string` | The port of the client that initiated the connection.                                    |
-| `network.destination.port` | `string` | The TCP port the client connected to.                                                    |
+| `network.client.port`      | `number` | The port of the client that initiated the connection.                                    |
+| `network.destination.port` | `number` | The TCP port the client connected to.                                                    |
 | `network.bytes_read`       | `number` | Total number of bytes transmitted from the client to the server when the log is emitted. |
 | `network.bytes_written`    | `number` | Total number of bytes transmitted from the server to the client when the log is emitted. |
 
@@ -200,7 +200,7 @@ These attributes are related to the data added by a syslog or a log-shipper agen
 | :---               | :---     | :----                                                                         |
 | `syslog.hostname`  | `string` | The hostname                                                                  |
 | `syslog.appname`   | `string` | The application name. Generally remapped to the `service` reserved attribute. |
-| `syslog.severity`  | `string` | The log severity. Generally remapped to the `status` reserved attribute.      |
+| `syslog.severity`  | `number` | The log severity. Generally remapped to the `status` reserved attribute.      |
 | `syslog.timestamp` | `string` | The log timestamp. Generally remapped to the `date` reserved attribute.       |
 | `syslog.env`       | `string` | The environment name where the source of logs come from.                      |
 

@@ -57,7 +57,7 @@ Refer to the standard [DaemonSet installation][6] and the [docker-dd-agent][4] i
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: /agent/faq/where-is-the-configuration-file-for-the-agent
-[3]: /agent/faq/agent-commands/#start-stop-restart-the-agent
+[3]: /agent/guide/agent-commands/#start-stop-restart-the-agent
 [4]: https://github.com/DataDog/docker-dd-agent
 [5]: https://github.com/DataDog/docker-dd-agent#configuration-files
 [6]: /integrations/kubernetes/#installation-via-daemonsets-kubernetes-110

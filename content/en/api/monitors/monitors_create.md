@@ -1,7 +1,7 @@
 ---
 title: Create a monitor
 type: apicontent
-order: 19.01
+order: 24.01
 external_redirect: /api/#create-a-monitor
 ---
 
@@ -10,8 +10,8 @@ external_redirect: /api/#create-a-monitor
 If you manage and deploy monitors programmatically, it's easier to define the monitor in the Datadog UI and [export its valid JSON][1].
 
 ##### ARGUMENTS
-*   **`type`** [*required*]:  
-    The [type of the monitor][2], chosen from:  
+*   **`type`** [*required*]:
+    The [type of the monitor][2], chosen from:
 
 | Monitor Type | type attribute value |
 | :--------    | :-------             |
@@ -29,9 +29,11 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 | network      | `service check`      |
 | outlier      | `query alert`        |
 | process      | `service check`      |
-    
-*   **`query`** [*required*]:  
-    The query defines when the monitor triggers. Query syntax depends on what type of monitor you are creating:  
+| watchdog     | `event alert`        |
+
+*   **`query`** [*required*]:
+    The query defines when the monitor triggers. Query syntax depends on what type of monitor you are creating:
+
     ##### Metric Alert Query
     `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`
 
@@ -88,18 +90,18 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     `12345 && 67890`, where `12345` and `67890` are the IDs of non-composite monitors
 
-* **`name`** [*required*, *default* = **dynamic, based on query**]: 
+* **`name`** [*required*, *default* = **dynamic, based on query**]:
     The name of the alert.
-* **`message`** [*required*, *default* = **dynamic, based on query**]:  
+* **`message`** [*required*, *default* = **dynamic, based on query**]:
     A message to include with notifications for this monitor. Email notifications can be sent to specific users by using the same '@username' notation as events.
-* **`tags`** [*optional*, *default* = **empty list**]: 
+* **`tags`** [*optional*, *default* = **empty list**]:
     A list of tags to associate with your monitor. When getting all monitor details via the API, use the `monitor_tags` argument to filter results by these tags. It is only available via the API and isn't visible or editable in the Datadog UI.
 
-* **`options`** [*optional*, *default*=**{}**]:  
-    A dictionary of options for the monitor. There are options that are common to all types as well as options that are specific to certain monitor types.  
+* **`options`** [*optional*, *default*=**{}**]:
+    A dictionary of options for the monitor. There are options that are common to all types as well as options that are specific to certain monitor types.
     ##### Common Options
 
-    *   **`silenced`** dictionary of scopes to timestamps or `None`. Each scope is muted until the given POSIX timestamp or forever if the value is `None`. Default: **None**  
+    *   **`silenced`** dictionary of scopes to timestamps or `None`. Each scope is muted until the given POSIX timestamp or forever if the value is `None`. Default: **None**
         Examples:
         *   To mute the alert completely: `{'*': None}`
         *   To mute `role:db` for a short time: `{'role:db': 1412798116}`
@@ -122,7 +124,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     *   **`locked`** a boolean indicating whether changes to to this monitor should be restricted to the creator or admins. Default: **False**
 
-    *   **`include_tags`** a boolean indicating whether notifications from this monitor automatically inserts its triggering tags into the title. Default: **True** Examples:  
+    *   **`include_tags`** a boolean indicating whether notifications from this monitor automatically inserts its triggering tags into the title. Default: **True** Examples:
         *   True: `[Triggered on {host:h1}] Monitor Title`
         *   False: `[Triggered] Monitor Title`
 

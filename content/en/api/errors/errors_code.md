@@ -6,25 +6,20 @@ external_redirect: /api/#success-and-errors
 ---
 ##### Status Codes
 
-* `200 200`
+* `200 OK`
 * `201 Created`
-* `202 accepted`
+* `202 Accepted`
 * `204 No Content`
-* `301 301`
+* `301 Moved Permanently`
 * `304 Not Modified`
-* `401 401`
-* `403 Forbidden 404`
+* `401 Unauthorized`
+* `403 Forbidden`
 * `404 Not Found`
-* `409 409`
-* `413 Request payload too large`
+* `409 Conflict`
+* `413 Payload Too Large`
 * `422 Unprocessable`
+* `429 Too Many Requests`
 * `500 Server Error`
-* `Accepted 204`
-* `Conflict 422`
-* `Entity 500`
-* `Moved Permanently 304`
-* `OK 201`
-* `Unauthorized 403`
 
 ##### Example Error Response
 {{< code-snippets basename="api-error" static="true" >}}

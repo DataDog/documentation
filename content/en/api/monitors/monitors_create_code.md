@@ -1,14 +1,13 @@
 ---
 title: Create a monitor
 type: apicode
-order: 19.01
+order: 24.01
 external_redirect: /api/#create-a-monitor
 ---
 
 ##### Signature
-`POST https://api.datadoghq.com/api/v1/monitor`
+`POST /v1/monitor`
 ##### Example Request
 {{< code-snippets basename="api-monitor-create" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-monitor-create" >}}
-

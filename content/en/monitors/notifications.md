@@ -1,6 +1,7 @@
 ---
 title: Notifications
 kind: documentation
+description: Setting up monitor notifications
 aliases:
   - /monitors/faq/how-do-i-add-custom-template-variables-to-my-monitor-message
   - /monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor
@@ -41,14 +42,14 @@ Notifications are a key component of any [monitor][1]. You want to make sure the
 
 Use variables to customize your monitor notifications, the available variables are:
 
-| Variable             | Description                                                                                    |
-| -------              | ------                                                                                         |
-| `{{value}}`          | Display the value that breached the alert.                                                     |
-| `{{threshold}}`      | Display the alert threshold selected in the monitor's *Set alert conditions* section.          |
-| `{{warn_threshold}}` | Display the warning threshold selected in the monitor's *Set alert conditions* section if any. |
-| `{{ok_threshold}}`   | Display the value that recovered the monitor.                                                  |
-| `{{comparator}}`     | Display the relational value selected in the monitor's *Set alert conditions* section.         |
-| `{{last_triggered_at}}`     | Display the UTC date/time when the monitor last triggered.         |
+| Variable                | Description                                                                                    |
+|-------------------------|------------------------------------------------------------------------------------------------|
+| `{{value}}`             | Display the value that breached the alert.                                                     |
+| `{{threshold}}`         | Display the alert threshold selected in the monitor's *Set alert conditions* section.          |
+| `{{warn_threshold}}`    | Display the warning threshold selected in the monitor's *Set alert conditions* section if any. |
+| `{{ok_threshold}}`      | Display the value that recovered the monitor.                                                  |
+| `{{comparator}}`        | Display the relational value selected in the monitor's *Set alert conditions* section.         |
+| `{{last_triggered_at}}` | Display the UTC date/time when the monitor last triggered.                                     |
 
 **Note**: When entering decimal values for thresholds, if your value is `<1`, add a leading `0` to the number. For example, use `0.5`, not `.5`.
 
@@ -102,28 +103,28 @@ Keep in mind when using conditional tags that they must have an open (example: `
 
 The conditional variables available are:
 
-| Conditional Variable       | Description                                           |
-| ------                     | -------                                               |
-| `{{#is_alert}}`            | Show when monitor alerts                              |
-| `{{^is_alert}}`            | Show unless monitor alerts                            |
-| `{{#is_match}}`            | Show when the context matches a string                |
-| `{{^is_match}}`            | Show unless the context matches a string              |
-| `{{#is_exact_match}}`      | Show when the context matches a string exactly        |
-| `{{^is_exact_match}}`      | Show unless the context matches a string exactly      |
-| `{{#is_no_data}}`          | Show when monitor notifies on missing data            |
-| `{{^is_no_data}}`          | Show unless monitor notifies on missing data          |
-| `{{#is_warning}}`          | Show when monitor warns                               |
-| `{{^is_warning}}`          | Show unless monitor warns                             |
-| `{{#is_recovery}}`         | Show when monitor recovers from either WARNING or ALERT    |
-| `{{^is_recovery}}`         | Show unless monitor recovers from either WARNING or ALERT  |
-| `{{#is_warning_recovery}}` | Show when monitor recovers from a warning to OK       |
-| `{{^is_warning_recovery}}` | Show unless monitor recovers from a warning to OK     |
-| `{{#is_alert_recovery}}`   | Show when monitor recovers from an alert to OK        |
-| `{{^is_alert_recovery}}`   | Show unless monitor recovers from an alert to OK      |
-| `{{#is_alert_to_warning}}` | Show when monitor transitions from alert to warning   |
-| `{{^is_alert_to_warning}}` | Show unless monitor transitions from alert to warning |
-| `{{#is_no_data_recovery}}` | Show when monitor recovers from a no data             |
-| `{{^is_no_data_recovery}}` | Show unless monitor recovers from a no data           |
+| Conditional Variable       | Description                                               |
+|----------------------------|-----------------------------------------------------------|
+| `{{#is_alert}}`            | Show when monitor alerts                                  |
+| `{{^is_alert}}`            | Show unless monitor alerts                                |
+| `{{#is_match}}`            | Show when the context matches a string                    |
+| `{{^is_match}}`            | Show unless the context matches a string                  |
+| `{{#is_exact_match}}`      | Show when the context matches a string exactly            |
+| `{{^is_exact_match}}`      | Show unless the context matches a string exactly          |
+| `{{#is_no_data}}`          | Show when monitor notifies on missing data                |
+| `{{^is_no_data}}`          | Show unless monitor notifies on missing data              |
+| `{{#is_warning}}`          | Show when monitor warns                                   |
+| `{{^is_warning}}`          | Show unless monitor warns                                 |
+| `{{#is_recovery}}`         | Show when monitor recovers from either WARNING or ALERT   |
+| `{{^is_recovery}}`         | Show unless monitor recovers from either WARNING or ALERT |
+| `{{#is_warning_recovery}}` | Show when monitor recovers from a warning to OK           |
+| `{{^is_warning_recovery}}` | Show unless monitor recovers from a warning to OK         |
+| `{{#is_alert_recovery}}`   | Show when monitor recovers from an alert to OK            |
+| `{{^is_alert_recovery}}`   | Show unless monitor recovers from an alert to OK          |
+| `{{#is_alert_to_warning}}` | Show when monitor transitions from alert to warning       |
+| `{{^is_alert_to_warning}}` | Show unless monitor transitions from alert to warning     |
+| `{{#is_no_data_recovery}}` | Show when monitor recovers from a no data                 |
+| `{{^is_no_data_recovery}}` | Show unless monitor recovers from a no data               |
 
 These can also be seen in the "Use message template variables" help box in
 Step 3 of the monitor editor.
@@ -260,10 +261,12 @@ Send the monitor notification to the appropriate endpoint:
 
 **Note**: A @-mention must have a space between it and the last line character: `{{value}}@slack-channel` is invalid `{{value}} @slack-channel` is valid.
 
-{{< tabs >}}
-{{% tab "Slack Integration" %}}
+### Integrations
 
-After having installed the Slack integration, type `@slack` in your notification message to see the available list of channels to send your notification to.
+{{< tabs >}}
+{{% tab "Slack" %}}
+
+After setting up the Slack integration, type `@slack` in your notification message to see the available list of channels to send your notification to.
 
 **@-mentions in Slack from monitor alert**:
 
@@ -300,39 +303,40 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 
 [1]: https://api.slack.com/methods/usergroups.list
 {{% /tab %}}
+{{% tab "PagerDuty" %}}
+
+After setting up the [PagerDuty integration][1], type `@pagerduty` in your notification message to see the available list of service names to send your notification to.
+
+[1]: /integrations/pagerduty
+{{% /tab %}}
+{{% tab "Webhooks" %}}
+
+After setting up the [Webhooks integration][1], type `@webhook` in your notification message to see the available list of webhooks to trigger. When the monitor alerts, a `POST` request is sent to the webhook URL.
+
+
+[1]: /integrations/webhooks
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Test monitor notifications
 
-After you define your monitor, you can test what your monitor's notification would look like in any applicable state. You can test what's specified in the "Say What's Happening" field by selecting "Select all" or selecting specific states.
+**Testing notifications are supported for the following monitor types**: host, metric, anomaly, outlier, forecast, integration (check only), process (check only), network (check only), custom check, and event.
 
-{{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" responsive="true" style="width:50%;" >}}
+After you define your monitor, test what your monitor's notification would look like in any applicable state with the *Test Notifications* button at the bottom right of the monitor page:
 
-You can only test states that are available in the monitor’s configuration and test for thresholds specified in the alerting conditions. [Recovery thresholds][4] are an exception, as Datadog sends a recovery notification once the monitor is no longer in alert or has no warn conditions.
+1. Choose which monitor case you want to test in the following pop-up. You can only test states that are available in the monitor’s configuration, and only for thresholds specified in the alerting conditions. [Recovery thresholds][4] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
-In the following, you are only able to test for ALERT because only an alert threshold has been specified:
+    {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" responsive="true" style="width:50%;" >}}
 
-{{< img src="monitors/notifications/test-notif-alert.png" alt="Set alert conditions" responsive="true" >}}
+2. Click **Run test** to send the notification to any notification handle available in the message box.
 
-In this next example, you can test for both ALERT and NO DATA:
+**Notes**:
 
-{{< img src="monitors/notifications/test-notif-alert-nodata.png" alt="Test the notifications for this monitor" responsive="true"  >}}
+* Test notifications produce events that can be searched for within the event stream. These notifications also indicate who initiated the test in the message body, and `[TEST]` is added into the test notification title.
 
-Message variables auto-populate with an available randomly selected group based on the scope of your monitor's definition.
+* Message variables auto-populate with an available randomly selected group based on the scope of your monitor's definition.
 
-{{< img src="monitors/notifications/test-notif-message.png" alt="Say what's happening" responsive="true" style="width:50%;" >}}
-
-### Managing test notifications
-
-Test notifications produce events that can be searched for within the event stream. These notifications also indicate who initiated the test in the message body, and [TEST] is added into the test notification title. 
-
-Your test notifications are sent to any notification handle available in the message box. You can also test webhooks.  
-
-**TIP**: Datadog recommends that you test using a test notification channel if you do not want to add these notifications to your on-call channels. 
-
-You do not need to save the monitor to run the notification test. Clicking **Run test** sends the notification, and you can continue to edit the monitor and notification box before saving. 
-
-Testing notifications are currently supported for the following monitor types: Host, Metric, Anomaly, Outlier, Forecast, Integration (check only), Process (check only), Network (check only), Custom check, and Event.
+  {{< img src="monitors/notifications/test-notif-message.png" alt="Say what's happening" responsive="true" style="width:50%;" >}}
 
 ## Advanced notification configuration
 ### Include links to appropriate dashboards

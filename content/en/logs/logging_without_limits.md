@@ -80,9 +80,12 @@ To configure an exclusion filter:
 1. Define the name of your filter
 2. Define the query for logs to exclude from your index
     **Note**: It is possible to use any attribute or tag in the Index filter query, even those that are not facets. If you are filtering by non-faceted attributes or tags, be sure to hit "enter/return" from the query bar
-3. Save the filter
+3. Define the sampling rate
+4. Save the filter
 
     {{< img src="logs/logging_without_limits/index_filter_details.png" alt="" responsive="true" style="width:80%;">}}
+    
+**Note**: If a log matches several exclusion filters, only the first exclusion filter rule is applied. A log is not sampled or excluded multiple times by different exclusion filters. 
 
 ### Example
 
@@ -110,6 +113,18 @@ We use the `duration` attribute and filter all logs that have a value below *100
 Container logs have a lot of metadata collected as tags. To exclude all logs coming from images that contains `httpd` in the `image_name` tag use the following filter:
 
 **Filter**: `image_name:*httpd*`
+
+## Reorder filters
+
+Order matters for exclusion filters. And contrary to where several pipelines can process a log, if a log matches several exclusion filters, only the first exclusion filter rule is applied. 
+
+Reorder your pipeline to make sure the proper exclusion filters applies for your log. For instance, you probably want to set up the filters with the most inclusive queries after the others. 
+
+To reorder your exclusion filter, drag and drop them into your preferred order.
+
+
+{{< img src="logs/logging_without_limits/reorder_index_filters.png" alt="" responsive="true" style="width:80%;">}}
+
 
 ## Enable/Disable filters
 

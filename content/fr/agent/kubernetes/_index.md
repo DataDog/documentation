@@ -35,8 +35,8 @@ Lorsque vous utilisez l'intégration Kubernetes et déployez les Agents dans un 
 
 L'Agent doit pouvoir effectuer les actions suivantes :
 
-- `get` et `update` les `Configmaps` intitulés `datadogtoken` pour mettre à jour et récupérer la dernière version du token correspondant au dernier événement enregistré dans ETCD.
-- `list` et `watch` les `Events` pour extraire les événements du serveur API, les formater et les envoyer.
+- `get` et `update` les `Configmaps` intitulées `datadogtoken` pour mettre à jour et récupérer la dernière version du token correspondant au dernier événement enregistré dans ETCD.
+- `list` et `watch` les `Events` pour extraire les événements du serveur d'API, les formater et les envoyer.
 - `get`, `update` et `create` pour le `Endpoint`. L'endpoint utilisé par l'Agent pour la fonction [d'élection de leader][4] s'appelle `datadog-leader-election`.
 - `list` la ressource `componentstatuses` afin d'envoyer des checks de service pour le statut des composants du plan de contrôle.
 

@@ -1,6 +1,7 @@
 ---
 title: Role Based Access Control
 kind: documentation
+private: true
 beta: true
 aliases:
   - /guides/rbac

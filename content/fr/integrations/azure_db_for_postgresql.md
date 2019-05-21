@@ -46,9 +46,9 @@ L'intégration Azure Database pour PostgreSQL n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
-[1]: https://docs.datadoghq.com/fr/integrations/azure/
+[1]: https://docs.datadoghq.com/fr/integrations/azure
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_db_for_postgresql/azure_db_for_postgresql_metadata.csv
-[3]: https://docs.datadoghq.com/fr/help/
+[3]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

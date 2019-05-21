@@ -20,7 +20,7 @@ version: 1
 ## Présentation
 Microsoft Azure Service Bus est un courtier de messages d'intégration d'entreprise entièrement géré.
 
-Recueillez des métriques d'Azure App Service pour :
+Recueillez des métriques d'Azure Service Bus pour :
 
 * Visualiser les performances de votre Service Bus
 * Corréler les performances de vos Service Bus avec vos applications
@@ -44,9 +44,9 @@ L'intégration Azure Service Bus n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
-[1]: https://docs.datadoghq.com/fr/integrations/azure/
+[1]: https://docs.datadoghq.com/fr/integrations/azure
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_service_bus/azure_service_bus_metadata.csv
-[3]: https://docs.datadoghq.com/fr/help/
+[3]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

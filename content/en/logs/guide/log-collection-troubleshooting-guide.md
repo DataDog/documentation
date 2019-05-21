@@ -161,7 +161,7 @@ Check Datadog lambda configuration parameter:
 
 Check that Datadog lambda function is actually triggered by leveraging `aws.lambda.invocations` and `aws.lambda.errors` metrics with the `functionname` tag of your Datadog lambda function within Datadog, or check for errors in Datadog lambda logs in Cloudwatch.
 
-#### Expectedly dropping logs
+## Expectedly dropping logs
 
 Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][12] that could match your logs.
 
@@ -175,8 +175,8 @@ Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live 
 [3]: https://en.wikipedia.org/wiki/Chmod
 [4]: https://docs.datadoghq.com/integrations/journald/#pagetitle
 [5]: https://codebeautify.org/yaml-validator
-[6]: /logs/log_collection/docker/?tab=containerinstallation#filter-containers
-[7]: /logs/log_collection/docker/?tab=dockerfile#examples
+[6]: /agent/docker/log/?tab=containerinstallation#filter-containers
+[7]: /agent/docker/log/?tab=dockerfile#examples
 [8]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
 [9]: /integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [10]: https://app.datadoghq.com/account/settings#api

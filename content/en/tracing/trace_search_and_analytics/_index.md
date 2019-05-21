@@ -2,69 +2,72 @@
 title: Trace Search and Analytics
 kind: documentation
 aliases:
-  - tracing/visualization/search/
+  - /tracing/visualization/search/
 ---
 
 {{< vimeo 278748711 >}}
 
-[Trace Search & Analytics][1] is used to filter APM Data by [user-defined tags](#custom-tagging) such as `customer_id`, `error_type` or `app_name` to help troubleshoot and filter your requests. Apply the following configuration to your application to enable this feature.
+[Trace Search & Analytics][1] is used to filter APM events by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
 
-To enable it, first configure your services to emit the relevant analytics either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Then [setup your Datadog Agent in order to forward those analytics to Datadog][2].
+* Configure your APM tracer to emit the relevant analytics from your services—this can be done either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Next, [enable Trace Search inside Datadog][1] to begin forwarding these analytics.
+* [Configure your Datadog Agent to emit the relevant analytics from your services][2].
+
+**Note**: to use Trace Search, you must be using Agent v6.7+ and have logs enabled.
 
 ## Automatic Configuration
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the Tracing Client:
+Trace Search & Analytics is available starting in version 0.25.0 of the Java tracing client. It can be enabled globally for all **web** integrations with one configuration parameter in the Tracing client:
 
 * System Property: `-Ddd.trace.analytics.enabled=true`
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
-After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
+ After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
 
 
 [1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Enable Trace Search & Analytics globally for all web integrations with one configuration parameter in the Tracing Client:
+Trace Search & Analytics is available starting in version 0.19.0 of the Python tracing client. Enable Trace Search & Analytics globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
 * Tracer Configuration: `ddtrace.config.analytics_enabled = True`
 * Environment Variable: `DD_ANALYTICS_ENABLED=true`
 
-After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
+ After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
 
 
 [1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Trace search & analytics can be enabled for all web integrations with a global flag.
+Trace Search & Analytics is available starting in version 0.19.0 of the Ruby tracing client, and can be enabled for all **web** integrations with a global flag.
 
-To do so, set either `DD_TRACE_ANALYTICS_ENABLED=true` in your environment, or configure with:
+ To do so, set either `DD_TRACE_ANALYTICS_ENABLED=true` in your environment, or configure with:
 
-```ruby
+ ```ruby
 Datadog.configure { |c| c.analytics_enabled = true }
 ```
 
-- `true` enables analytics for all web frameworks.
+ - `true` enables analytics for all web frameworks.
 - `false` or `nil` disables analytics, except for integrations that explicitly enable it. (Default)
 
-After enabling, the [Trace Search & Analytics][1] page populates.
+ After enabling, the [Trace Search & Analytics][1] page populates.
 
 
 [1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Trace Search & Analytics can be enabled globally for all web integrations using the [`WithAnalytics`][1] tracer start option. For example:
+Trace Search & Analytics is available starting in version 1.11.0 of the Go tracing client, and can be enabled globally for all **web** integrations using the [`WithAnalytics`][1] tracer start option. For example:
 
 ```go
 tracer.Start(tracer.WithAnalytics(true))
 ```
 
-After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][2] to get started.
+ After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][2] to get started.
 
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
@@ -72,7 +75,7 @@ After enabling, the Trace Search & Analytics UI starts showing results. Visit [T
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the tracing client:
+Trace Search & Analytics is available starting in version 0.10.0 of the Node.js tracing client, and can be enabled globally for all web integrations with one configuration parameter in the tracing client:
 
 ```javascript
 tracer.init({
@@ -80,24 +83,46 @@ tracer.init({
 })
 ```
 
-After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
+You can also use the following configuration parameter:
+
+* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
+
+ After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
+
+
+[1]: https://app.datadoghq.com/apm/search
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Trace Search & Analytics is available starting in version 1.1.0 of the .NET tracing client, and can be enabled globally for all **web** integrations with one configuration parameter in the Tracing Client:
+
+ * Environment Variable or AppSetting: `DD_TRACE_ANALYTICS_ENABLED=true`
+
+ This setting can also be set in code:
+
+```csharp
+Tracer.Instance.Settings.AnalyticsEnabled = true;
+```
+
+ After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
 
 
 [1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Trace Search & Analytics can be enabled globally for all web integrations with one configuration parameter in the Tracing Client:
+Trace Search & Analytics is available starting in version 0.17.0 of the PHP tracing client, and can be enabled globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
-* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
+ * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
-After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
+ After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
 
 
 [1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note**: Trace search only works for web integrations.
 
 ## Configure Additional Services (optional)
 
@@ -119,7 +144,6 @@ Use this in addition to the global configuration for any integrations that submi
 
 Integration names can be found on the [integrations table][1].
 
-
 [1]: /tracing/languages/java/#integrations
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -129,21 +153,16 @@ In addition to setting globally, you can enable or disable Trace Search & Analyt
 * Tracer Configuration: `ddtrace.config.<INTEGRATION>.analytics_enabled = True`
 * Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-Use this in addition to the global configuration for any integrations that submit custom services. For example, for Boto spans which comes in as a custom service, you can set the following to enable all Boto Tracing in Trace Search & Analytics:
+Use this in addition to the global configuration for any integrations that submit custom services. For example, for Boto spans which comes in as a custom service, set the following to enable all Boto Tracing in Trace Search & Analytics:
 
 * Tracer Configuration: `ddtrace.config.boto.analytics_enabled = True`
 * Environment Variable: `DD_BOTO_ANALYTICS_ENABLED=true`
 
-Integration names can be found on the [integrations table][1].
+**Note**: Several integrations require non-standard configuration due to the integration-specific implementation of the tracer. Consult the library documentation on [Trace Search & Analytics][1] for details.
 
-Note several integrations require non-standard configuration due to the integration-specific implementation of the tracer. Consult the library documentation on [Trace Search & Analytics][2] for details.
-
-
-[1]: /tracing/languages/python/#integrations
-[2]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace_search_analytics
+[1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace_search_analytics
 {{% /tab %}}
 {{% tab "Ruby" %}}
-
 
 Trace search & analytics can be enabled for specific integrations.
 
@@ -202,11 +221,39 @@ Integration names can be found on the [integrations table][1].
 
 [1]: /tracing/languages/nodejs/#integrations
 {{% /tab %}}
+{{% tab ".NET" %}}
+
+
+In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations.
+
+* Environment Variable or AppSetting: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
+
+Or in code:
+
+```csharp
+Tracer.Instance.Settings.Integrations["<INTEGRATION>"].AnalyticsEnabled = true;
+```
+
+For example, to enable Trace Search & Analytics for ASP.NET MVC:
+
+* Environment Variable or AppSetting: `DD_ASPNETMVC_ANALYTICS_ENABLED=true`
+
+Or in code:
+
+```csharp
+Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
+```
+
+Integration names can be found on the [integrations table][1].
+
+
+[1]: /tracing/setup/dotnet#integrations
+{{% /tab %}}
 {{% tab "PHP" %}}
 
 In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
 
-* System Property: `-Ddd.<integration>.analytics.enabled=true`
+* System Property: `-Ddd.<INTEGRATION>.analytics.enabled=true`
 * Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
 Use this in addition to the global configuration for any integrations that submit custom services. For example, for JMS spans which comes in as a custom service, you can set the following to enable all JMS Tracing in Trace Search & Analytics:
@@ -264,6 +311,24 @@ tracer.use('mysql', {
 })
 ```
 
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+
+Database tracing is not captured by Trace Search & Analytics by default and you must enable collection manually for each integration. For example, to enable Trace Search & Analytics for ADO.NET:
+
+* Environment Variable or AppSetting: `DD_ADONET_ANALYTICS_ENABLED=true`
+
+Or in code:
+
+```csharp
+Tracer.Instance.Settings.Integrations["AdoNet"].AnalyticsEnabled = true;
+```
+
+Integration names can be found on the [integrations table][1].
+
+
+[1]: /tracing/setup/dotnet#integrations
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -353,6 +418,22 @@ Applications with custom instrumentation can enable trace analytics by setting t
 const { ANALYTICS } = require('dd-trace/ext/tags')
 
 span.setTag(ANALYTICS, true)
+```
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Applications with custom instrumentation can enable trace analytics by setting the `Tags.Analytics` tag on the service root span:
+
+```csharp
+using Datadog.Trace;
+
+using(var scope = Tracer.Instance.StartActive("web.request"))
+{
+    // enable Analytics on this span
+    scope.span.SetTag(Tags.Analytics, "true");
+}
+
 ```
 
 {{% /tab %}}

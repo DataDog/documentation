@@ -5,11 +5,11 @@ creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/agent_metrics/README.md'
-display_name: Agent Metrics
+display_name: Métriques de l'Agent
 git_integration_title: agent_metrics
 guid: 032333e3-5272-4044-90d5-a05997667513
 integration_id: datadog-agent
-integration_title: Agent Metrics
+integration_title: Métriques de l'Agent
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -17,7 +17,7 @@ manifest_version: 1.0.0
 metric_prefix: datadog.agent.
 metric_to_check: datadog.agent.collector.cpu.used
 name: agent_metrics
-public_title: Intégration Datadog/Agent Metrics
+public_title: Intégration Datadog/Métriques de l'Agent
 short_description: Description agent_metrics.
 support: core
 supported_os:
@@ -32,14 +32,14 @@ Recueillez des métriques du service agent_metrics en temps réel pour :
 * Visualiser et surveiller les états du service agent_metrics
 * Être informé des failovers et des événements du service agent_metrics
 
-**REMARQUE** : le check Agent Metrics a été rédigé en Go pour l'Agent v6 afin de profiter de la nouvelle architecture interne. Il n'est donc pas obsolète, mais **fonctionne uniquement avec les versions de l'Agent antérieures à la version 6 principale**.
+**REMARQUE** : le check Métriques de l'Agent a été rédigé en Go pour l'Agent v6 afin de profiter de la nouvelle architecture interne. Il n'est donc pas obsolète, mais **fonctionne uniquement avec les versions de l'Agent antérieures à la version 6 principale**.
 
 Afin de recueillir les métriques de l'Agent pour les versions ultérieures à v6, utilisez le [check Go-expvar][1] avec [le fichier de configuration `agent_stats.yaml `][2] fourni avec l'Agent.
 
 ## Implémentation
 ### Installation
 
-Le check Agent Metrics est inclus avec le paquet de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos serveurs.
+Le check Métriques de l'Agent est inclus avec le paquet de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos serveurs.
 
 ### Configuration
 

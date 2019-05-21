@@ -4,6 +4,8 @@ main:
     url: "getting_started/"
     pre: "nav_start"
     children:
+      - name: "Integrations"
+        url: "getting_started/integrations"
       - name: "Collect traces"
         url: "getting_started/tracing"
       - name: "Learning Center"
@@ -26,6 +28,8 @@ main:
       - name: "Basic Agent Usage"
         url: "agent/basic_agent_usage/"
         children:
+          - name: "AIX"
+            url: "agent/basic_agent_usage/aix/"
           - name: "Amazon Linux"
             url: "agent/basic_agent_usage/amazonlinux/"
           - name: "CentOS"
@@ -57,8 +61,10 @@ main:
       - name: "Docker"
         url: "agent/docker/"
         children:
-          - name: "APM"
-            url: "agent/docker/apm"
+          - name: APM
+            url: agent/docker/apm
+          - name: Log collection
+            url: agent/docker/log
       ## Kubernetes
       - name: "Kubernetes"
         url: "agent/kubernetes/"
@@ -97,6 +103,17 @@ main:
       # Troubleshooting
       - name: "Troubleshooting"
         url: "agent/troubleshooting/"
+        children:
+          - name: "Debug Mode"
+            url: "agent/troubleshooting/debug_mode"
+          - name: "Agent Flare"
+            url: "agent/troubleshooting/send_a_flare"
+          - name: "Agent Check Status"
+            url: "agent/troubleshooting/agent_check_status"
+          - name: "NTP Issues"
+            url: "agent/troubleshooting/ntp"
+          - name: "Permission Issues"
+            url: "agent/troubleshooting/permissions"
       # Guides
       - name: "Guides"
         url: "agent/guide/"
@@ -259,8 +276,8 @@ main:
         url: "monitors/notifications/"
       - name: "Downtimes"
         url: "monitors/downtimes/"
-      - name: "Uptime Widget"
-        url: "monitors/monitor_uptime_widget/"
+      - name: "SLO Widget"
+        url: "monitors/slo_widget/"
       - name: "Guides"
         url: "monitors/guide"
       #- #  name: "FAQ"
@@ -298,6 +315,8 @@ main:
             url: "tracing/setup/envoy/"
           - name: "NGINX"
             url: "tracing/setup/nginx/"
+          - name: "Istio"
+            url: "tracing/setup/istio/"
 
       # Enrich Tracing
 
@@ -376,8 +395,10 @@ main:
         children:
           - name: "AWS"
             url: "integrations/amazon_web_services/#log-collection"
+          - name: "Browser"
+            url: "logs/log_collection/javascript/"
           - name: "Docker"
-            url: "logs/log_collection/docker/"
+            url: "agent/docker/log/"
           - name: "Csharp"
             url: "logs/log_collection/csharp/"
           - name: "Go"
@@ -430,9 +451,6 @@ main:
       - name: "Logging without Limits"
         url: "logs/logging_without_limits/"
 
-      - name: "Log monitor"
-        url: "monitors/monitor_types/log"
-
       # LOGS - Archives
 
       - name: "Archives"
@@ -460,13 +478,15 @@ main:
     pre: "nav_synthetics"
     children:
       - name: "API Tests"
-        url: "synthetics/api_test"
+        url: "synthetics/api_tests"
       - name: "Browser Tests"
-        url: "synthetics/browser_test"
+        url: "synthetics/browser_tests"
       - name: "APM Integration"
         url: "synthetics/apm"
       - name: "Identify Synthetics Bots"
         url: "synthetics/identify_synthetics_bots"
+      - name: "Settings"
+        url: "synthetics/settings"
 
   # DEVELOPERS
   - name: "Developer Tools"
@@ -530,7 +550,7 @@ main:
     url: "api/"
     pre: "nav_api"
     # ACCOUNT MANAGEMENT
-  - name: "Account management"
+  - name: "Account Management"
     url: "account_management/"
     pre: "nav_account"
     children:
@@ -559,18 +579,12 @@ main:
             url: "account_management/saml/safenet"
       - name: "Multi-org accounts"
         url: "account_management/multi_organization/"
-      - name: "Role Based Access Control"
-        url: "account_management/rbac/"
-        children:
-          # RBAC subnav
-          - name: "Log Management"
-            url: "account_management/rbac/log_management"
-          - name: "Role API"
-            url: "account_management/rbac/role_api"
       - name: "Switching between orgs"
         url: "account_management/org_switching/"
       - name: "Billing"
         url: "account_management/billing/"
+      - name: "API and Application Keys"
+        url: "account_management/api-app-keys/"
 
 
       #- #  name: "FAQ"
@@ -606,4 +620,3 @@ main:
   - name: "Help"
     url: "help/"
     pre: "nav_help"
-

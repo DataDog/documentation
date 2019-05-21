@@ -115,7 +115,7 @@ Le check CouchDB n'inclut aucun événement.
 `couchdb.can_connect` : renvoie `Critical` si l'Agent n'est pas capable de se connecter à CouchDB pour recueillir des métriques.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
 ## Pour aller plus loin
 

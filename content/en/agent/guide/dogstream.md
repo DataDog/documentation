@@ -1,6 +1,7 @@
 ---
 title: Dogstream
 kind: guide
+private: true
 aliases:
   - /agent/faq/dogstream
 ---
@@ -8,7 +9,7 @@ aliases:
 <div class="alert alert-danger">
 This is a deprecated feature of Agent 5. New feature releases are discontinued.
 <br>
-Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version </a> to benefit from all new functionality. 
+Agent v6 is now available! <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">Upgrade to the newest version</a> to benefit from the new functionality.
 </div>
 
 Log files contain tons of valuable application and business data.
@@ -56,9 +57,9 @@ If your parser does **not** live on the Agent's `PYTHONPATH`, you can use an alt
 
 In this format, the Agent attempts to import a function called `custom_parser` from `/path/to/my/parsers_module.py`.
 
-If your custom log parser is not working, the first place to check is the Agent collector logs: 
+If your custom log parser is not working, the first thing to check are the Agent collector logs:
 
-* If the Agent is unable to import your function, there is a line with `Could not load Dogstream line parser`. 
+* If the Agent is unable to import your function, look for `Could not load Dogstream line parser`.
 
 * If all goes well you should see `dogstream: parsing {filename} with {function name} (requested {config option text})`.
 
@@ -169,7 +170,7 @@ def my_log_parser(logger, line):
     # Convert the iso8601 date into a unix timestamp, assuming the timestamp
     # string is in the same timezone as the machine that's parsing it.
     date = datetime.strptime(date, "%Y-%m-%d %H:%M:%S.%f")
-    date = time.mktime(date.timetuple()) 
+    date = time.mktime(date.timetuple())
     logged_event = {
         'msg_title': title,
         'timestamp': date,
@@ -248,9 +249,9 @@ If you suspect there is some error occurring beyond the scope of your custom log
 [3]: https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py
 [4]: /graphing/event_stream
 [5]: https://github.com/DataDog/dd-agent/blob/5.13.x/checks/datadog.py#L210
-[6]: /agent/faq/agent-log-files
+[6]: /agent/guide/agent-log-files
 [7]: https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211
-[8]: /agent/faq/agent-commands
+[8]: /agent/guide/agent-commands
 [9]: https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278
 [10]: /help
 [11]: /agent/#send-a-flare

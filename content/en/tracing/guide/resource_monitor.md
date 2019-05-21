@@ -6,7 +6,7 @@ aliases:
     - /tracing/getting_further/resource_monitor
 ---
 
-Datadog's Application Performance Monitoring component consists of a few key components: [services][1] and [resources][2] being the top most layers.  
+Datadog's Application Performance Monitoring component consists of a few key components: [services][1] and [resources][2] being the top most layers.
 
 Each graph within the APM service and resource Dashboards consist of some `trace.*` metrics.
 Use [the download button at the top of the graph][3] to save those Metrics to an existing Timeboard. This can be done for both service level and resource level metrics:
@@ -17,16 +17,16 @@ Use [the download button at the top of the graph][3] to save those Metrics to an
 
 ## Creating a Monitor from this
 
-While the current APM monitor has the ability to set up Alerts on a per [service basis][4], use the metric query taken from above to setup a Metric or even Anomaly monitor over a specific service or resource.  
+While the current APM monitor has the ability to set up Alerts on a per [service basis][4], use the metric query taken from above to setup a Metric or even Anomaly monitor over a specific service or resource.
 
-Since these are regular Datadog Metrics and Tags, copy that query into a New Monitor.  
+Since these are regular Datadog Metrics and Tags, copy that query into a New Monitor.
 The downside here is that see the resource hash in the field, as opposed to the more readable name. However, to work around this, construct your Monitor message to send a link to the resource Page of the resource that caused the monitor to trigger. Each resource APM Page has the following format:
 
 ```
 /apm/resource/<Service>/<top_level_name>/<Resource_Name>?env=<env>
 ```
 
-Since each service contains a single Top Level Name and we can setup a multi alert by [environment][5] and resource and service, we only need to obtain the top level name to create the URL.  
+Since each service contains a single Top Level Name and we can setup a multi alert by [environment][5] and resource and service, we only need to obtain the top level name to create the URL.
 This Top Level Name can be found by clicking on the service you are interested in. For example, for Datadog's Mcnulty-Web service, the Top Level Name is `pylons.request`:
 
 {{< img src="tracing/faq/top_level_name.png" alt="Top level name" responsive="true" >}}
@@ -39,4 +39,4 @@ Then the Monitor configuration would resemble the following:
 [2]: /tracing/visualization/resource
 [3]: /tracing/visualization/service/#export-to-timeboard
 [4]: /monitors/monitor_types/apm
-[5]: /tracing/setup/first_class_dimensions#environment
+[5]: /tracing/advanced/setting_primary_tags_to_scope/#environment

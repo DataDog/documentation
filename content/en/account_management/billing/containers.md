@@ -17,9 +17,9 @@ Kubernetes creates pause containers to acquire the respective pod’s IP address
 
 Fargate is charged based on the concurrent number of tasks.
 
-- Infrastructure Monitoring 
-  - Pro: $1 / task / month  
-  - Enterprise: $1.50 / task / month 
+- Infrastructure Monitoring
+  - Pro: $1 / task / month
+  - Enterprise: $1.50 / task / month
 - APM
   - Additional $2 / task / month
 - Log Management: charged with [standard pricing][3]

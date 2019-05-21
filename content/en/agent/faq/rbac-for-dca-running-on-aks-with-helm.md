@@ -1,12 +1,11 @@
 ---
-title: Cluster Agent or Agent restart when using Azure Kubernetes Service (AKS).
+title: Datadog Cluster Agent when using Azure Kubernetes Service (AKS).
 kind: faq
 ---
 
 Depending on how you deployed the manifest, you might be using readiness probes. Azure AKS requires extra permissions in the Cluster Role in order for the health endpoint to be reachable.
 
-On AKS, the default RBAC does not allow access to `/healthz` for unauthenticated users.
-The following RBAC fixes that:
+On AKS, the default RBAC does not allow access to `/healthz` for unauthenticated users. The following RBAC fixes that:
 
 ```
 apiVersion: rbac.authorization.k8s.io/v1

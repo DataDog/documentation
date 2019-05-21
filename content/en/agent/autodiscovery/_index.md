@@ -97,20 +97,17 @@ Note: Tags are only set when a container starts.
 
 **Note**: this feature is available for Agent v6.10+.
 
-The Datadog Agent can autodiscover tags from Pod annotations, which allows it to
-associate tags to entire pods or individual containers. Use this format
-for annotation autodiscovery:
+The Datadog Agent can autodiscover tags from Pod annotations, which allows it to associate tags to entire pods or individual containers. Use this format for annotation autodiscovery:
 
 ```
 annotations:
   ad.datadoghq.com/tags: '{"<TAG_NAME>": "<TAG_VALUE>", ...}'
-  ad.datadoghq.com/<container identifier>.tags: '{"<TAG_NAME>": "<TAG_VALUE>", ...}'
+  ad.datadoghq.com/<CONTAINER_IDENTIFIER>.tags: '{"<TAG_NAME>": "<TAG_VALUE>", ...}'
 ```
 
 Note that autodiscovery identifies containers by _name_.
 
-The Datadog Agent can also extract pod labels and annotations as metric tags
-with the following configuration in your `datadog.yaml` file:
+The Datadog Agent can also extract pod labels and annotations as metric tags with the following configuration in your `datadog.yaml` file:
 
 ```
 kubernetes_pod_labels_as_tags:
@@ -265,8 +262,8 @@ With the key-value store enabled as a template source, the Agent looks for templ
 ```
 /datadog/
   check_configs/
-    docker_image_1/                 # container identifier, e.g. httpd
-      - check_names: [<CHECK_NAME>] # e.g. apache
+    <CONTAINER_IDENTIFIER>/
+      - check_names: [<CHECK_NAME>]
       - init_configs: [<INIT_CONFIG>]
       - instances: [<INSTANCE_CONFIG>]
     ...
@@ -303,7 +300,7 @@ Again, the order of each list matters. The Agent can only generate the HTTP chec
 
 
 [1]: /integrations/consul
-[2]: /agent/faq/agent-commands
+[2]: /agent/guide/agent-commands
 [3]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -316,24 +313,34 @@ Since version 6.5 of the Datadog Agent, it is also possible to configure log col
 
 Autodiscovery expects annotations to look like this:
 
-```
-annotations:
-  ad.datadoghq.com/<container identifier>.check_names: '[<CHECK_NAME>]'
-  ad.datadoghq.com/<container identifier>.init_configs: '[<INIT_CONFIG>]'
-  ad.datadoghq.com/<container identifier>.instances: '[<INSTANCE_CONFIG>]'
-  ad.datadoghq.com/<container identifier>.logs: '[<LOG_CONFIG>]'
+```yaml
+# (...)
+metadata:
+#(...)
+  annotations:
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: '[<CHECK_NAME>]'
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: '[<INIT_CONFIG>]'
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: '[<INSTANCE_CONFIG>]'
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: '[<LOG_CONFIG>]'
+spec:
+  containers:
+    - name: '<CONTAINER_IDENTIFIER>'
+# (...)
 ```
 
 The format is similar to that for key-value stores. The differences are:
 
 - Annotations must begin with `ad.datadoghq.com/` (for key-value stores, the starting indicator is `/datadog/check_configs/`).
-- For Annotations, Autodiscovery identifies containers by _name_, NOT image (as it does for auto-conf files and key-value stores). That is, it looks to match `<container identifier>` to `.spec.containers[0].name`, not `.spec.containers[0].image`.
+- For Annotations, Autodiscovery identifies containers by _name_, **NOT image** (as it does for auto-conf files and key-value stores). That is, it looks to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image`.
 
 If you define your Kubernetes Pods directly (i.e. `kind: Pod`), add each Pod's annotations directly under its `metadata` section (see the first example below). If you define Pods _indirectly_ via Replication Controllers, Replica Sets, or Deployments, add Pod annotations under `.spec.templates.metadata` (see the second example below).
 
 #### Pod Example: Apache check with website availability monitoring
 
 The following Pod annotation defines two templates&mdash;equivalent to those from the end of the previous section&mdash;for `apache` containers:
+
+* `<CONTAINER_IDENTIFIER>` is `apache`.
+* Check name are `apache` and `http_check` and their `<INIT_CONFIG>`, `<INSTANCE_CONFIG>`, and `<LOG_CONFIG>` configuration can be found in their respective documentation page: [Datadog-Apache integration][1], [Datadog-HTTP check integration][2].
 
 ```
 apiVersion: v1
@@ -373,8 +380,8 @@ metadata:
     name: apache
 spec:
   containers:
-    - name: apache # use this as the container identifier in your annotations
-      image: httpd # NOT this
+    - name: apache
+      image: httpd
       ports:
         - containerPort: 80
 ```
@@ -425,12 +432,14 @@ spec:
           ]
     spec:
       containers:
-      - name: apache # use this as the container identifier in your annotations
-        image: httpd # NOT this
+      - name: apache
+        image: httpd
         ports:
         - containerPort: 80
 ```
 
+[1]: /integrations/apache/#setup
+[2]: /integrations/http_check/#setup
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -500,7 +509,7 @@ services:
 ```
 
 
-[1]: /logs/docker
+[1]: /agent/docker/log
 {{% /tab %}}
 {{% tab "Cluster Checks" %}}
 
@@ -555,14 +564,16 @@ If you provide a template for the same check type via multiple template sources,
 
 Containers can be included or excluded from Autodiscovery via environment variables:
 
-* `DD_AC_INCLUDE`: whitelist of containers to always include
-* `DD_AC_EXCLUDE`: blacklist of containers to exclude
+* `DD_AC_INCLUDE`: Rules that whitelist of containers to always include
+* `DD_AC_EXCLUDE`: Rules that blacklist of containers to exclude
 
-The lists are formatted as space-separated strings. For example, if you only want to monitor two images, and exclude the rest, specify:
+Rules are Regexp applied to the `image` or the `name` of a container. If a container matches an exclude rule, it won't be included unless it first matches an include rule.
+
+The lists are formatted as space-separated strings. For example, if you only want to monitor `ubuntu` or `debian` images, and exclude the rest, specify:
 
 ```
 DD_AC_EXCLUDE = "image:.*"
-DD_AC_INCLUDE = "image:cp-kafka image:k8szk"
+DD_AC_INCLUDE = "image:ubuntu, image:debian"
 ```
 
 Or to exclude a specific container name:
@@ -570,6 +581,21 @@ Or to exclude a specific container name:
 ```
 DD_AC_EXCLUDE = "name:dd-agent"
 ```
+
+**Note**: the `docker.containers.running`, `.stopped`, `.running.total` and
+`.stopped.total` metrics are not affected by these settings and always count all containers. This does not affect your per-container billing too.
+
+#### Exclude default containers from DockerCloud
+
+The following configuration instructs the Agent to ignore the containers from Docker Cloud. You can remove the ones you want to collect:
+
+```
+DD_AC_EXCLUDE = "image:dockercloud/network-daemon, image:dockercloud/cleanup, image:dockercloud/logrotate, image:dockercloud/events, image:dockercloud/ntpd"
+
+DD_AC_INCLUDE = ""
+```
+
+Note: You can also use the regex to ignore them all `DD_AC_EXCLUDE = "image:dockercloud/*"`
 
 ## Troubleshooting
 

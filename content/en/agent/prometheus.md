@@ -50,7 +50,7 @@ For a comprehensive list of settings refer to the [example configuration][3].
 
 You can configure the Prometheus check using [Autodiscovery][4] to quickly collect Prometheus metrics exposed by a container or pod.
 
-Example of Autodiscovery using pod annotations on a `linkerd` pod:
+Example of Autodiscovery using pod annotations `linkerd` pod, retrieving metrics from its `l5d` container:
 
 ```
 annotations:

@@ -8,7 +8,7 @@ options = {
 initialize(**options)
 
 # Create a new monitor
-options = {
+monitor_options = {
     "notify_no_data": True,
     "no_data_timeframe": 20
 }
@@ -19,5 +19,5 @@ api.Monitor.create(
     name="Bytes received on host0",
     message="We may need to add web hosts if this is consistently high.",
     tags=tags,
-    options=options
+    options=monitor_options
 )

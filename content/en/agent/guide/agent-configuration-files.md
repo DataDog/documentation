@@ -5,16 +5,16 @@ aliases:
   - /agent/faq/agent-configuration-files
 ---
 
-## Agent main configuration file 
+## Agent main configuration file
 
-The Agent v6 configuration file uses **YAML** to better support complex configurations, and to provide a consistent configuration experience, as Checks also use YAML configuration files. 
-Therefore, `datadog.conf` (v5) is now retired in favor of `datadog.yaml` (v6).
+The Agent v6 configuration file uses **YAML** to better support complex configurations, and to provide a consistent configuration experience, as Checks also use YAML configuration files. Therefore, `datadog.conf` (v5) is now retired in favor of `datadog.yaml` (v6).
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
 | Platform                             | Command                              |
 | :--------                            | :--------                            |
+| AIX                                  | `/etc/datadog-agent/datadog.yaml`    |
 | Linux                                | `/etc/datadog-agent/datadog.yaml`    |
 | CentOS                               | `/etc/datadog-agent/datadog.yaml`    |
 | Debian                               | `/etc/datadog-agent/datadog.yaml`    |
@@ -25,7 +25,7 @@ Therefore, `datadog.conf` (v5) is now retired in favor of `datadog.yaml` (v6).
 | Suse                                 | `/etc/datadog-agent/datadog.yaml`    |
 | Ubuntu                               | `/etc/datadog-agent/datadog.yaml`    |
 | Windows Server 2008, Vista and newer | `\\ProgramData\Datadog\datadog.yaml` |
-| Windows Server 2003, XP or older     | *unsupported Platform*             |
+| Windows Server 2003, XP or older     | *unsupported platform*               |
 
 
 {{% /tab %}}
@@ -48,6 +48,8 @@ Therefore, `datadog.conf` (v5) is now retired in favor of `datadog.yaml` (v6).
 {{% /tab %}}
 {{< /tabs >}}
 
+Note: [A full example of the `datadog.yaml` file is available in the `datadog-agent` Github repository][1].
+
 ## Agent configuration directory
 
 Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/`. Starting with the 6.0 release, configuration files are stored in `/datadog-agent/conf.d/<CHECK_NAME>`.
@@ -57,6 +59,7 @@ Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/
 
 | Platform                             | Command                        |
 | :--------                            | :--------                      |
+| AIX                                  | `/etc/datadog-agent/conf.d/`   |
 | Linux                                | `/etc/datadog-agent/conf.d/`   |
 | CentOS                               | `/etc/datadog-agent/conf.d/`   |
 | Debian                               | `/etc/datadog-agent/conf.d/`   |
@@ -67,7 +70,7 @@ Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/
 | Suse                                 | `/etc/datadog-agent/conf.d/`   |
 | Ubuntu                               | `/etc/datadog-agent/conf.d/`   |
 | Windows Server 2008, Vista and newer | `\\ProgramData\Datadog\conf.d` |
-| Windows Server 2003, XP or older     | *unsupported Platform*       |
+| Windows Server 2003, XP or older     | *unsupported platform*         |
 
 ### Checks configuration files for Agent 6
 
@@ -75,7 +78,7 @@ In order to provide a more flexible way to define the configuration for a check,
 
 `/datadog-agent/conf.d/<CHECK_NAME>.d/`.
 
-Note: For log collection, to prevent duplicate logs from being sent to Datadog, the agent does not accept multiple YAML files that point to the same log source. In the case where there is more than one YAML file that points to the same log source, the agent considers the files in alphabetical order and uses the first file.
+Note: For log collection, to prevent duplicate logs from being sent to Datadog, the Agent does not accept multiple YAML files that point to the same log source. In the case where there is more than one YAML file that points to the same log source, the Agent considers the files in alphabetical order and uses the first file.
 
 This way, complex configurations can be broken down into multiple files. For example, a configuration for the `http_check` might look like this:
 
@@ -117,6 +120,7 @@ To preserve backwards compatibility, the Agent still picks up configuration file
 
 ## JMX configuration file
 
-JMX Agent checks have an additional `metrics.yaml` file in their configuration folder. It is a list of all the beans that the Datadog Agent collects by default. This way, you do not need to list all of the beans manually when you configure a check through [Docker labels or k8s annotations][1].
+JMX Agent checks have an additional `metrics.yaml` file in their configuration folder. It is a list of all the beans that the Datadog Agent collects by default. This way, you do not need to list all of the beans manually when you configure a check through [Docker labels or k8s annotations][2].
 
-[1]: /agent/autodiscovery
+[1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[2]: /agent/autodiscovery

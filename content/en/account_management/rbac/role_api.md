@@ -1,6 +1,7 @@
 ---
 title: Role API
 kind: documentation
+private: true
 beta: true
 further_reading:
 - link: "account_management/rbac/log_management/"
@@ -167,6 +168,8 @@ The UUID of the roles can be found from the `GET roles` api call.
 
 The UUIDs for the permissions are as follows:
 
+{{< tabs >}}
+{{% tab "Datadog US site" %}}
 |             name             |                 uuid                 |                 description                  |
 |------------------------------|--------------------------------------|----------------------------------------------|
 | admin                        | 984a2bd4-d3b4-11e8-a1ff-a7f660d43029 | Read and write permission to all of datadog  |
@@ -179,6 +182,22 @@ The UUIDs for the permissions are as follows:
 | logs_write_pipelines         | 811ac4ca-dd12-11e8-9e57-676a7f0beef9 | Update a subset of the log pipelines         |
 | logs_write_processors        | 84aa3ae4-dd12-11e8-9e58-a373a514ccd0 | Update the log processors in an index        |
 | logs_write_archives          | 87b00304-dd12-11e8-9e59-cbeb5f71f72f | Update the external archives configuration   |
+{{% /tab %}}
+{{% tab "Datadog EU site" %}}
+|             name             |                 uuid                 |                 description                  |
+|------------------------------|--------------------------------------|----------------------------------------------|
+| admin                        | f1624684-d87d-11e8-acac-efb4dbffab1c | Read and write permission to all of datadog  |
+| standard                     | f1666372-d87d-11e8-acac-6be484ba794a | Read and write permission to most of datadog |
+| read_only                    | f1682b6c-d87d-11e8-acac-9f3040c65f48 | Read permission to most of datadog           |
+| logs_read_index_data         | 4fbb1652-dd15-11e8-9308-77be61fbb2c7 | Read a subset of all log indexes             |
+| logs_modify_indexes          | 4fbd1e66-dd15-11e8-9308-53cb90e4ef1c | Update the definition of log indexes         |
+| logs_live_tail               | 4fbeec96-dd15-11e8-9308-d3aac44f93e5 | Access the live tail feature                 |
+| logs_write_exclusion_filters | 4fc2807c-dd15-11e8-9308-d3bfffb7f039 | Update a subset of the exclusion filters     |
+| logs_write_pipelines         | 4fc43656-dd15-11e8-9308-f3e2bb5e31b4 | Update a subset of the log pipelines         |
+| logs_write_processors        | 505f4538-dd15-11e8-9308-47a4732f715f | Update the log processors in an index        |
+| logs_write_archives          | 505fd138-dd15-11e8-9308-afd2db62791e | Update the external archives configuration   |
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 

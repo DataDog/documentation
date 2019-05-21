@@ -11,7 +11,7 @@ guid: e8b1f8a7-8859-4c85-81bd-044400854e59
 integration_id: convox
 integration_title: Convox
 is_public: true
-kind: intégration
+kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.1
 name: convox
@@ -73,7 +73,7 @@ Le check Convox n'inclut aucun check de service.
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/convox/images/snapshot.png
-[2]: https://convox.com/docs/datadog/
+[2]: https://docs.convox.com/external-services/datadog
 [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_cwet.html
 [4]: http://docs.datadoghq.com/help/
 
