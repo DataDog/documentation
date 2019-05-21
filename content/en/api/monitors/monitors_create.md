@@ -154,6 +154,13 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
             Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
 
+    ##### Errors and Validation
+    If an invalid monitor option is included in the request, the response will be:
+
+        ```Error: 400 - ["Invalid monitor option:<invalid option>"]```
+
+
+
 [1]: /monitors/#export-your-monitor
 [2]: /monitors/monitor_types
 [3]: /monitors/monitor_types/#define-the-conditions
