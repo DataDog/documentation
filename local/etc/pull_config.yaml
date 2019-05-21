@@ -23,7 +23,7 @@
     contents:
 
     - action: integrations
-      branch: master
+      branch: gus/service_checks
       globs:
       - "*/metadata.csv"
       - "*/manifest.json"

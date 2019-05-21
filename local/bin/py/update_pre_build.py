@@ -237,7 +237,7 @@ class PreBuild:
             re.DOTALL,
         )
         self.regex_service_check = re.compile(
-            r"(#{3} Service Checks\n)([\s\S]*does not include any service checks at this time.)([\s\S]*)(#{2} Troubleshooting\n)",
+            r"(#{3} Service Checks\n)([\s\S]*this integration.|[\s\S]*this check.)([\s\S]*)(#{2} Troubleshooting\n|#{2} Further Reading\n)",
             re.DOTALL,
         )
         self.regex_fm = re.compile(
@@ -678,7 +678,7 @@ class PreBuild:
 
     def pull_and_push_file(self, content):
         """
-        Takes the content from a file from a github repo and 
+        Takes the content from a file from a github repo and
         pushed it to the doc
         :param content: object with a file name and a file path
         """
