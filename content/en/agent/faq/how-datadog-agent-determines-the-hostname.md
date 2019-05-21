@@ -21,12 +21,12 @@ For Agent 6, there are differences in hostname resolution. For more information,
 {{% /tab %}}
 {{< /tabs >}}
 
-The Datadog Agent collects potential hostnames from many different sources. To see all the names the Agent is detecting, [run the Agent status command][1]. For example:
+### Potential host names
+
+The Datadog Agent collects potential host names from many different sources. To see all the names the Agent is detecting, [run the Agent status command][1]. For example:
 ```
 $ sudo /etc/init.d/datadog-agent status
-
 ...
-
 Hostnames
 =========
 
@@ -36,7 +36,6 @@ Hostnames
   instance-id: i-deadbeef
   socket-hostname: myhost
   socket-fqdn: myhost.mydomain
-
 ...
 ```
 
@@ -51,14 +50,26 @@ The canonical hostname is picked according to the following rules. The first mat
 
 If the name is recognized as obviously non-unique (like localhost.localdomain), the current rule fails and passes through to the next.
 
+#### AWS hosts
+
+When pulling information on your AWS hosts from the [Datadog API][2], the following attributes display based on availability:
+
+| Attribute      | Description                                         |
+|----------------|-----------------------------------------------------|
+| `aws_id`       | The instance id, fallback on host if no instance id |
+| `aws_name`     | The cloud `providername` tag                        |
+| `display_name` | The canonical hostname (value of host identifier)   |
+
 ### Host Aliases
 
 A single host running in EC2 might have an instance ID (i-abcd1234), a generic hostname provided by EC2 based on the host's IP address (ip-192-0-0-1), and a meaningful hostname provided by an internal DNS server or a config-managed hosts file (myhost.mydomain). Datadog creates aliases for hostnames when there are multiple uniquely identifiable names for a single host.
 
 The names collected by the Agent (detailed above) are added as aliases for the chosen canonical name.
 
-See a list of all the hosts in your account from the Infrastructure tab in Datadog. From the Inspect panel, which you get to by clicking the "Inspect" button while hovering over a host row, see (among other things) the list of aliases associated with each host.
+See a list of all the hosts in your account from the [Infrastructure List][3]. See the list of aliases associated with each host in the Inspect panel, which is accessed by clicking the "Inspect" button while hovering over a host row:
 
 {{< img src="agent/faq/host_aliases.png" alt="Host aliases" responsive="true" >}}
 
 [1]: /agent/guide/agent-commands/#agent-status-and-information
+[2]: /api/#hosts
+[3]: https://app.datadoghq.com/infrastructure
