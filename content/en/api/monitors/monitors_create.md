@@ -22,7 +22,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 | event        | `event alert`                   |
 | forecast     | `query alert`                   |
 | host         | `service check`                 |
-| integration  | `query alert or service check`  |
+| integration  | `query alert` or `service check`  |
 | live process | `process alert`                 |
 | logs         | `log alert`                     |
 | metric       | `query alert`                   |
