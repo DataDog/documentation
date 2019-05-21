@@ -6,7 +6,7 @@ external_redirect: /api/#delete-a-slack-integration
 ---
 
 ##### Signature
-`DELETE https://api.datadoghq.com/api/v1/integration/slack`
+`DELETE /v1/integration/slack`
 
 ##### Example Request
 

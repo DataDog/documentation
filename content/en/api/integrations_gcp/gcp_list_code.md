@@ -6,7 +6,7 @@ external_redirect: /api/#list-all-gcp-integrations
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/integration/gcp`
+`GET /v1/integration/gcp`
 
 ##### Example Request
 {{< code-snippets basename="gcp_list" >}}
