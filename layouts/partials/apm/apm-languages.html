@@ -1,0 +1,49 @@
+{{ $dot := . }}
+<div class="apm-languages">
+    <div class="container cards-dd tile-nav">
+        <div class="card-deck">
+            <a class="card" href="tracing/languages/java">
+                <div class="card-body text-center pb-4 pt-4">
+                    {{ partial "img.html" (dict "root" . "src" "agent/apm/java.png" "class" "" "alt" "Java" "width" "400") }}
+                </div>
+            </a>
+            <a class="card" href="tracing/languages/cpp">
+                <div class="card-body text-center pb-4 pt-4">
+                    {{ partial "img.html" (dict "root" . "src" "agent/apm/cpp.png" "class" "" "alt" "C++" "width" "400") }}
+                </div>
+            </a>
+            <a class="card" href="tracing/languages/python">
+                <div class="card-body text-center pb-4 pt-4">
+                    {{ partial "img.html" (dict "root" . "src" "agent/apm/python.png" "class" "" "alt" "Python" "width" "400") }}
+                </div>
+            </a>
+            <a class="card" href="tracing/languages/ruby">
+                <div class="card-body text-center pb-4 pt-4">
+                    {{ partial "img.html" (dict "root" . "src" "agent/apm/ruby.png" "class" "" "alt" "Ruby" "width" "400") }}
+                </div>
+            </a>
+        </div>
+        <div class="card-deck">    
+            <a class="card" href="tracing/languages/go">
+                <div class="card-body text-center pb-4 pt-4">
+                    {{ partial "img.html" (dict "root" . "src" "agent/apm/golang.png" "class" "" "alt" "Go" "width" "400") }}
+                </div>
+            </a>
+            <a class="card" href="tracing/languages/nodejs">
+                <div class="card-body text-center pb-4 pt-4">
+                    {{ partial "img.html" (dict "root" . "src" "agent/apm/nodejs.png" "class" "" "alt" "Node.js" "width" "400") }}
+                </div>
+            </a>
+            <a class="card" href="tracing/languages/dotnet">
+                <div class="card-body text-center pb-4 pt-4">
+                    {{ partial "img.html" (dict "root" . "src" "agent/apm/net.png" "class" "" "alt" ".Net" "width" "400") }}
+                </div>
+            </a>
+            <a class="card" href="tracing/languages/php">
+                <div class="card-body text-center pb-4 pt-4">
+                    {{ partial "img.html" (dict "root" . "src" "agent/apm/php.png" "class" "" "alt" "PHP" "width" "400") }}
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
