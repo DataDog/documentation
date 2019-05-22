@@ -7,7 +7,7 @@ aliases:
 - /agent/faq/agent-5-vs-agent-6-for-docker-kubernetes
 ---
 
-* [Getting further with Docker][1]
+* [Host Metrics with the Container Agent][1]
 * [APM metrics send by the Datadog Agent][2]
 * [Downgrade the Agent to a prior minor version][3]
 * [How does Datadog determine the Agent hostname?][4]
@@ -25,7 +25,7 @@ aliases:
 * [How do I use Kubernetes secrets to set my API key?][16]
 * [Datadog Windows Agent user][17]
 
-[1]: /agent/faq/getting-further-with-docker
+[1]: /agent/faq/host-metrics-with-the-container-agent
 [2]: /agent/faq/agent-apm-metrics
 [3]: /agent/faq/downgrade-datadog-agent
 [4]: /agent/faq/how-datadog-agent-determines-the-hostname
