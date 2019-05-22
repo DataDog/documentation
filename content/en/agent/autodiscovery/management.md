@@ -13,40 +13,124 @@ further_reading:
   text: "Collect your traces"
 ---
 
+Datadog Agent autodiscovers all containers available by default. To restrict its discovery perimeter and limit data collection to a subset of containers only, include or exclude them through a dedicated configuration.
 
-### Include or Exclude Containers
+**Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings and always count all containers. This does not affect your per-container billing.
 
-Containers can be included or excluded from Autodiscovery via environment variables:
+If running the Agent as a binary on a host, configure your Autodiscovery perimeter with the [Host Agent](?tab=host-agent) tab instructions. If running the Agent as a Container configure your Autodiscovery perimeter with the [Containerized Agent Tab](?tab=containerized-agent) instructions.
 
-* `DD_AC_INCLUDE`: Rules that whitelist of containers to always include
-* `DD_AC_EXCLUDE`: Rules that blacklist of containers to exclude
+## Exclude containers
 
-Rules are Regexp applied to the `image` or the `name` of a container. If a container matches an exclude rule, it won't be included unless it first matches an include rule.
+Exclude containers from the Agent Autodiscovery perimeter with an exclude rule based on their `name` or `image` to collect **NO DATA** out of it. If a container matches an exclude rule, it won't be included unless it first matches an include rule.
 
-The lists are formatted as space-separated strings. For example, if you only want to monitor `ubuntu` or `debian` images, and exclude the rest, specify:
+**Note**: Exclude rules support Regexp, and are defined as a list of comma-separated strings.
+
+{{< tabs >}}
+{{% tab "Host Agent" %}}
+
+To remove a given docker container with the image `<IMAGE_NAME>` from autodiscovery add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+
+```yaml
+ac_exclude: [image:<IMAGE_NAME>]
+```
+
+To remove a given docker container with the name `<NAME>` from autodiscovery add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+
+```yaml
+ac_exclude: [name:<NAME>]
+```
+
+
+[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+{{% /tab %}}
+{{% tab "Containerized Agent" %}}
+
+To remove a given docker container with the image `<IMAGE_NAME>` from autodiscovery  add the following environment variable to the Datadog Agent:
+
+```shell
+DD_AC_EXCLUDE = "image:<IMAGE_NAME>"
+```
+
+To remove a given docker container with the name `<NAME>` from autodiscovery  add the following environment variable to the Datadog Agent:
+
+```shell
+DD_AC_EXCLUDE = "name:<IMAGE_NAME>"
+```
+
+For instance to exclude the Agent container itself use this environment variable on it:
+
+```
+DD_AC_EXCLUDE = "name:dd-agent"
+```
+
+Another example, the following configuration instructs the Agent to ignore some containers from Docker Cloud:
+
+```shell
+DD_AC_EXCLUDE = "image:dockercloud/network-daemon, image:dockercloud/cleanup, image:dockercloud/logrotate, image:dockercloud/events, image:dockercloud/ntpd"
+```
+
+**Note**: You can also use the regex to ignore them all `DD_AC_EXCLUDE = "image:dockercloud/*"`
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Include Containers
+
+Include containers from the Agent Autodiscovery perimeter with an include rule based on their `name` or `image` to collect data **ONLY** from those containers. If a container matches an include rule, it's always included in the Autodiscovery perimeter.
+
+**Note**: Include rules support Regexp, and are defined as a list of comma-separated strings.
+
+{{< tabs >}}
+{{% tab "Host Agent" %}}
+
+To include a given docker container with the image `<IMAGE_NAME>` from autodiscovery add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+
+```yaml
+ac_include: [image:<IMAGE_NAME>]
+```
+
+To include a given docker container with the name `<NAME>` from autodiscovery add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+
+```yaml
+ac_include: [name:<NAME>]
+```
+
+
+[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+{{% /tab %}}
+{{% tab "Containerized Agent" %}}
+
+To remove a given docker container with the image `<IMAGE_NAME>` from autodiscovery  add the following environment variable to the Datadog Agent:
+
+```shell
+DD_AC_INCLUDE = "image:<IMAGE_NAME>"
+```
+
+To remove a given docker container with the name `<NAME>` from autodiscovery  add the following environment variable to the Datadog Agent:
+
+```shell
+DD_AC_INCLUDE = "name:<IMAGE_NAME>"
+```
+
+For example, if you only want to monitor `ubuntu` or `debian` images, and exclude the rest, specify:
 
 ```
 DD_AC_EXCLUDE = "image:.*"
 DD_AC_INCLUDE = "image:ubuntu, image:debian"
 ```
 
-Or to exclude a specific container name:
+{{% /tab %}}
+{{< /tabs >}}
 
-```
-DD_AC_EXCLUDE = "name:dd-agent"
-```
 
-**Note**: the `docker.containers.running`, `.stopped`, `.running.total` and
-`.stopped.total` metrics are not affected by these settings and always count all containers. This does not affect your per-container billing too.
+### Paused containers
 
-#### Exclude default containers from DockerCloud
+Datadog Agent excludes Kubernetes and OpenShift paused containers by default. They are still counted in the container count just like excluded containers though.
 
-The following configuration instructs the Agent to ignore the containers from Docker Cloud. You can remove the ones you want to collect:
+To disable this behavior and include paused containers in the Autodiscovery perimeter, set the parameter `exclude_pause_container` to `false` in the [Agent `datadog.yaml` configuration file][1] or through the Agent environment variable `DD_EXCLUDE_PAUSE_CONTAINER="false"`
 
-```
-DD_AC_EXCLUDE = "image:dockercloud/network-daemon, image:dockercloud/cleanup, image:dockercloud/logrotate, image:dockercloud/events, image:dockercloud/ntpd"
+## Further Reading
 
-DD_AC_INCLUDE = ""
-```
-
-Note: You can also use the regex to ignore them all `DD_AC_EXCLUDE = "image:dockercloud/*"`
+{{< partial name="whats-next/whats-next.html" >}}
+[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file

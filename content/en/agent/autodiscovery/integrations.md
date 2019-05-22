@@ -401,9 +401,10 @@ The [Cluster Checks feature][1] monitors non-containerized and out-of-cluster re
 {{< /tabs >}}
 
 **Note**: Some supported integrations require additional steps for Autodiscovery to work: [Ceph][1], [Varnish][2], [Postfix][3], [Cassandra Nodetools][4], and [Gunicorn][5]. Contact [Datadog support][6] for assistance.
-[1]: 
-[2]: 
-[3]: 
-[4]: 
-[5]: 
-[6]: 
+
+[1]: /integrations/ceph
+[2]: /integrations/varnish/#autodiscovery
+[3]: /integrations/postfix
+[4]: /integrations/cassandra/#agent-check-cassandra-nodetool
+[5]: /integrations/gunicorn
+[6]: /help

@@ -237,7 +237,6 @@ DD_DOCKER_ENV_AS_TAGS='{"ENVIRONMENT":"env"}'
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
