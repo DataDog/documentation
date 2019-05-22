@@ -7,7 +7,7 @@ external_redirect: /api/#update-indexes-order
 
 ## Update Indexes Order
 
-This endpoint updates the `IndexOrder` of your organisation. It returns the `IndexOrder` object passed in the request body when the request is sucessful.
+This endpoint updates the `IndexOrder` of your organization. It returns the `IndexOrder` object passed in the request body when the request is successful.
 
 ##### Arguments
 

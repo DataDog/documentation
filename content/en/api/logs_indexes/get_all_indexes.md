@@ -7,8 +7,8 @@ external_redirect: /api/#get-all-indexes
 
 ## Get all Indexes
 
-This endpoint returns an array of the `Index` objects of your organisation.
-This endpoint returns the `IndexOrder` for your organisation.
+This endpoint returns an array of the `Index` objects of your organization.
+This endpoint returns the `IndexOrder` for your organization.
 
 ##### Arguments
 
