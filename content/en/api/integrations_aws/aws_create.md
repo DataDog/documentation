@@ -9,10 +9,7 @@ external_redirect: /api/#create-an-aws-integration
 
 Create a Datadog-Amazon Web Services integration.
 
-**Note**:
-
-* Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.
-* Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.
+**Note**: Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.
 
 ##### ARGUMENTS
 
@@ -43,7 +40,7 @@ Create a Datadog-Amazon Web Services integration.
 
 * **`account_specific_namespace_rules`** [*optional*, *default*=**None**]:
 
-    An object (in the form `{"namespace1":true/false, "namespace2":true/false}`) that enables or disables metric collection for specific AWS namespaces for this AWS account only. A list of namespaces can be found at the `https://api.datadoghq.com/api/v1/integration/aws/available_namespace_rules` endpoint.
+    An object (in the form `{"namespace1":true/false, "namespace2":true/false}`) that enables or disables metric collection for specific AWS namespaces for this AWS account only. A list of namespaces can be found at the `/v1/integration/aws/available_namespace_rules` endpoint.
 
 [1]: /integrations/amazon_web_services/#configuration
 [2]: /integrations/amazon_web_services/#installation

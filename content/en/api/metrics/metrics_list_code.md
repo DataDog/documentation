@@ -6,7 +6,7 @@ external_redirect: /api/#get-list-of-active-metrics
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/metrics`
+`GET /v1/metrics`
 ##### Example Request
 {{< code-snippets basename="api-metrics-list" >}}
 ##### Example Response

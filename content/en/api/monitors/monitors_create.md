@@ -13,23 +13,23 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 *   **`type`** [*required*]:
     The [type of the monitor][2], chosen from:
 
-| Monitor Type | type attribute value |
-| :--------    | :-------             |
-| anomaly      | `query alert`        |
-| apm          | `query alert`        |
-| composite    | `composite`          |
-| custom       | `service check`      |
-| event        | `event alert`        |
-| forecast     | `query alert`        |
-| host         | `service check`      |
-| integration  | `query alert`        |
-| live process | `process alert`      |
-| logs         | `log alert`          |
-| metric       | `query alert`        |
-| network      | `service check`      |
-| outlier      | `query alert`        |
-| process      | `service check`      |
-| watchdog     | `event alert`        |
+| Monitor Type | type attribute value            |
+| :--------    | :-------                        |
+| anomaly      | `query alert`                   |
+| apm          | `query alert`                   |
+| composite    | `composite`                     |
+| custom       | `service check`                 |
+| event        | `event alert`                   |
+| forecast     | `query alert`                   |
+| host         | `service check`                 |
+| integration  | `query alert` or `service check`  |
+| live process | `process alert`                 |
+| logs         | `log alert`                     |
+| metric       | `query alert`                   |
+| network      | `service check`                 |
+| outlier      | `query alert`                   |
+| process      | `service check`                 |
+| watchdog     | `event alert`                   |
 
 *   **`query`** [*required*]:
     The query defines when the monitor triggers. Query syntax depends on what type of monitor you are creating:
@@ -153,6 +153,13 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
     -   **`thresholds`** a dictionary of thresholds by status. Because service checks can have multiple thresholds, we don't define them directly in the query.
 
             Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
+
+    ##### Errors and Validation
+    If an invalid monitor option is included in the request, the response will be:
+
+            Error: 400 - ["Invalid monitor option:<invalid option>"]
+
+
 
 [1]: /monitors/#export-your-monitor
 [2]: /monitors/monitor_types

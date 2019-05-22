@@ -6,7 +6,7 @@ external_redirect: /api/#delete-a-gcp-integration
 ---
 
 ##### Signature
-`DELETE https://api.datadoghq.com/api/v1/integration/gcp`
+`DELETE /v1/integration/gcp`
 
 ##### Example Request
 {{< code-snippets basename="gcp_delete" >}}

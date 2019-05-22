@@ -7,7 +7,7 @@ external_redirect: /api/#add-a-webhook-to-a-webhooks-integration
 
 ##### Signature
 
-`POST https://api.datadoghq.com/api/v1/integration/webhooks`
+`POST /v1/integration/webhooks`
 
 ##### Example Request
 {{< code-snippets basename="webhooks_add_webhook" >}}

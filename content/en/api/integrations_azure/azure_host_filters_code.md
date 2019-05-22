@@ -6,7 +6,7 @@ external_redirect: /api/#update-an-azure-integration-host-filters
 ---
 
 ##### Signature
-`POST https://api.datadoghq.com/api/v1/integration/azure/host_filters`
+`POST /v1/integration/azure/host_filters`
 
 ##### Example Request
 {{< code-snippets basename="azure_create" >}}

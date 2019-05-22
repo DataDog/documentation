@@ -6,7 +6,7 @@ external_redirect: /api/#delete-an-azure-integration
 ---
 
 ##### Signature
-`DELETE https://api.datadoghq.com/api/v1/integration/azure`
+`DELETE /v1/integration/azure`
 
 ##### Example Request
 {{< code-snippets basename="azure_create" >}}

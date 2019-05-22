@@ -1,7 +1,6 @@
 [
     {
         "agent_version": "5.2.0",
-        "integration":"marathon",
         "check": "marathon.can_connect",
         "statuses": ["ok", "critical"],
         "groups": ["host", "url"],

@@ -6,7 +6,8 @@ external_redirect: /api/#create-an-azure-integration
 ---
 
 ##### Signature
-`POST https://api.datadoghq.com/api/v1/integration/azure`
+
+`POST /v1/integration/azure`
 
 ##### Example Request
 {{< code-snippets basename="azure_create" >}}
