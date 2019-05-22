@@ -49,7 +49,7 @@ Define the request you want to be executed by Datadog:
 3. **Name**: The name of your API test.
 4. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetics page][2].
 5. **Locations**: The locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][3].
-6. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week.
+6. **How often should Datadog run the test?** Intervals are available between every one minute to once per week.
 7. Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
 [1]: /synthetics/identify_synthetics_bots
