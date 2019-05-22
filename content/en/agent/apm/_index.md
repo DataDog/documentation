@@ -25,7 +25,7 @@ further_reading:
 
  Tracing allows you to see a single request moving across your system and infrastructure, and it gives you systematic data about precisely what is happening to this request. This gives you better insight into your systems interdependencies, it allows you to see where requests are taking the longest, and it gives you visual cues for accurately troubleshooting outages and other system issues.
 
-## Setup process
+## Setup
 
 With Datadog's infrastructure monitoring, metrics are sent to the Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Agent: the application code instrumentation sends to the Agent every second ([see here for the Python client][2] for instance) and the Agent sends to the Datadog API every 10 seconds.
 
@@ -34,11 +34,11 @@ To start tracing your application:
 1. **Install the Datadog Agent**:
   Install and configure the latest [Datadog Agent][3]. (On macOS, install and run the Trace Agent in addition to the Datadog Agent. See the [macOS Trace Agent][4] documentation for more information).
 
-2. **[Configure the Datadog Agent to receive traces](#Trace-collection)**
+2. **[Configure the Datadog Agent to receive traces](#trace-collection)**
 
-3. **[Instrument your application with the tracing client](#Agent-configuration)**
+3. **[Instrument your application with the tracing client](#agent-configuration)**
 
-4. **[Enable Trace Search & Analytics](#Enable-Trace-Search-and-Analytics)**
+4. **[Enable Trace Search & Analytics](#enable-trace-search-and-analytics)**
 
 Within a few minutes of running APM, your services will appear in [the APM home page][5]. See [Using the APM UI][6] to learn more.
 
