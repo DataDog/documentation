@@ -11,8 +11,7 @@ external_redirect: /api/#get-all-indexes
 This endpoint is in public beta. Shall you have any feedback <a href="/help">Contact Datadog support</a>.
 </div>
 
-This endpoint returns an array of the `Index` objects of your organisation.
-This endpoint returns the `IndexOrder` for your organisation.
+This endpoint returns an array of the `Index` objects of your organization.
 
 ##### Arguments
 

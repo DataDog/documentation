@@ -12,7 +12,7 @@ external_redirect: /api/#logs-indexes
 This endpoint is in public beta. Shall you have any feedback <a href="/help">Contact Datadog support</a>.
 </div>
 
-The `Index` object describes the configuration of an log index. It has the following attributes:
+The `Index` object describes the configuration of a log index. It has the following attributes:
 
 * **`name`** (Read Only):
     The name of the index.
@@ -22,7 +22,7 @@ The `Index` object describes the configuration of an log index. It has the follo
 * **`num_retention_days`** (Read Only) :
     The number of days before logs are deleted from this index
 * **`daily_limit`** (Read Only) :
-    The amount of log-events you can send in this index before you are rate-limited.
+    The number of log-events you can send in this index before you are rate-limited.
 * **`is_rate_limited`** (Read Only) :
     A boolean stating if the index is rate limited, meaning more logs than the daily limit have been sent. Rate limit is reset every-day at 2pm UTC.
 * **`exclusion_filters`**
@@ -36,7 +36,7 @@ The `Index` object describes the configuration of an log index. It has the follo
     Only logs matching the filter criteria AND the query of the parent index will be considered for this exclusion filter.
     The search query follows the [Log search syntax][1]
   * **`filter.sample_rate`** :
-    The fraction of logs actually excluded by the exclusion filter, when active. The sampling is uniform.
+    The fraction of logs excluded by the exclusion filter, when active. The sampling is uniform.
 
 
 **Note**:  You need an API and applications key with Admin right to interact with this endpoint.

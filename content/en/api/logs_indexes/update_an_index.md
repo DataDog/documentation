@@ -11,7 +11,7 @@ external_redirect: /api/#update-an-index
 This endpoint is in public beta. Shall you have any feedback <a href="/help">Contact Datadog support</a>.
 </div>
 
-This endpoint updates an `Index` identified by its name. It returns the `Index` object passed in the request body when the request is sucessful.
+This endpoint updates an `Index` identified by its name. It returns the `Index` object passed in the request body when the request is successful.
 
 ##### Arguments
 
@@ -26,7 +26,7 @@ This endpoint updates an `Index` identified by its name. It returns the `Index` 
   * **`filter.query`** [*optional*]:
     Only logs matching the filter criteria AND the query of the parent index will be considered for this exclusion filter. The search query follows the [Log search syntax][1]
   * **`filter.sample_rate`** [*required*]:
-    The fraction of logs actually excluded by the exclusion filter, when active. The sampling is uniform.
+    The fraction of logs excluded by the exclusion filter, when active. The sampling is uniform.
 
 [1]: /logs/explorer/search
 [2]: /logs/logging_without_limits/#exclusion-filters
