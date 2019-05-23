@@ -2,22 +2,29 @@
 title: Autodiscovery Troubleshooting
 kind: documentation
 further_reading:
-- link: "logs/"
+- link: "agent/troubleshooting"
   tag: "Documentation"
-  text: "Collect your logs"
-- link: "graphing/infrastructure/process"
+  text: "Agent Troubleshooting"
+- link: "agent/troubleshooting/debug_mode"
   tag: "Documentation"
-  text: "Collect your processes"
-- link: "tracing"
+  text: "Agent Debug Mode"
+- link: "agent/troubleshooting/send_a_flare"
   tag: "Documentation"
-  text: "Collect your traces"
+  text: "Send an Agent Flare"
 ---
 
+To start troubleshooting the Agent Autodiscovery, run the `configcheck` init script command:
 
-When you're not sure if Autodiscovery is loading certain checks you've configured, use the Agent's `configcheck` init script command. For example, to confirm that your Redis template is being loaded from a Docker label annotation&mdash;not the default `redisdb.d/auto_conf.yaml` file:
+```shell
+docker exec -it <AGENT_CONTAINER_NAME> datadog-agent configcheck -v
+```
+
+**Note**: The `-v` option allows you to see all templates that are loaded but couldn't be resolved:
+
+For example, the following example is a valid Autodiscovery configuration for a Redis template being loaded from a Docker label annotation&mdash;not the default `redisdb.d/auto_conf.yaml` file:
 
 ```
-# docker exec -it <agent_container_name> agent configcheck
+# docker exec -it <AGENT_CONTAINER_NAME> agent configcheck -v
 .
 ..
 ...
@@ -37,10 +44,10 @@ Auto-discovery IDs:
 * docker://81e66fd4c948a502b4428417d8cf2ebc58caaff55a6e5879a41887057342aec2
 ```
 
-**Note**: Use the `-v` option to see all templates that are loaded but couldn't be resolved:
+The following examples shows issues that could appear when failing to load a valid Autodiscovery configuration for a Redis template:
 
 ```
-# docker exec -it <agent_container_name> agent configcheck -v
+# docker exec -it <AGENT_CONTAINER_NAME> agent configcheck -v
 .
 ..
 ...
@@ -59,3 +66,11 @@ instances:
 - host: '%%host%%'
   port: '%%port%%'
 ```
+
+If you're still unsure about the issue, you may reach out to the [Datadog support team][1] with [a flare][2] from your Agent.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+[1]: /help
+[2]: /agent/troubleshooting/send_a_flare
