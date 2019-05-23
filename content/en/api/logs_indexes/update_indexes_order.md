@@ -8,7 +8,7 @@ external_redirect: /api/#update-indexes-order
 ## Update Indexes Order
 
 <div class="alert alert-warning">
-This endpoint is in public beta. Shall you have any feedback <a href="/help">Contact Datadog support</a>.
+This endpoint is in public beta. If you have any feedback, <a href="/help">contact Datadog support</a>.
 </div>
 
 This endpoint updates the `IndexOrder` of your organization. It returns the `IndexOrder` object passed in the request body when the request is successful.
