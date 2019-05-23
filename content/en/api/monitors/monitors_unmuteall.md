@@ -1,7 +1,7 @@
 ---
 title: Unmute all monitors
 type: apicontent
-order: 24.08
+order: 26.08
 external_redirect: /api/#unmute-all-monitors
 ---
 

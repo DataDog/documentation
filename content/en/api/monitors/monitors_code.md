@@ -1,6 +1,6 @@
 ---
 title: Monitors
 type: apicode
-order: 24
+order: 26
 external_redirect: /api/#monitors
 ---
