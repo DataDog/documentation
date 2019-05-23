@@ -40,7 +40,7 @@ Cochez la case si vous souhaitez recevoir une notification pour chaque commentai
 Vous pouvez également partager des graphiques ou envoyer des alertes de monitor à des rooms HipChat en précisant `@hipchat-<nom_conversation>`.
 
 <div class="alert alert-warning">
-Si vous utilisez un token HipChat API V1 et que votre handle de conversation contient des caractères spéciaux, comme des virgules ou des crochets, vous n'avez pas besoin de les échapper lorsque vous saisissez le handle ; la zone de saisie automatique s'en charge pour vous.
+Si vous utilisez un token HipChat API V1 et que votre handle de conversation contient des caractères spéciaux, comme des virgules, des parenthèses ou des crochets, vous n'avez pas besoin de les échapper lorsque vous saisissez le handle ; la zone de saisie automatique s'en charge pour vous.
 </div>
 
 #### Serveur HipChat

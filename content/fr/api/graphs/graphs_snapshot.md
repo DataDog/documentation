@@ -19,7 +19,7 @@ external_redirect: '/api/#snapshot-de-graphique'
 * **`event_query`** [*facultatif*, *défaut*=**None**] :
     une requête qui ajoute des lignes d'événements au graphique.
 * **`graph_def`** [*facultatif*, *défaut*=**None**] :
-    un document JSON définissant le graphique. `graph_def` peut être utilisé à la place de `metric_query`. Le document JSON utilise la [grammaire définie ici][2] et doit être formaté sur une seule ligne, puis codé en URL.
+    un document JSON définissant le graphique. `graph_def` peut être utilisé à la place de `metric_query`. Le document JSON utilise la [grammaire définie ici][2] et doit être formaté sur une seule ligne. L'encodage URL convertit ensuite le contenu du document de façon à pouvoir le transmettre en ligne.
 * **`title`** [*facultatif*, *défaut*=**None**] :
     le titre du graphique. Si aucun titre n'est spécifié, le graphique n'a pas de titre.
 
