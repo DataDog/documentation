@@ -5,7 +5,12 @@ order: 23
 external_redirect: /api/#logs-indexes
 ---
 
+
 ## Logs Indexes
+
+<div class="alert alert-warning">
+This endpoint is in public beta. Shall you have any feedback <a href="/help">Contact Datadog support</a>.
+</div>
 
 The `Index` object describes the configuration of an log index. It has the following attributes:
 
