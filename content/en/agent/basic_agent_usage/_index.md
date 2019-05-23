@@ -17,7 +17,7 @@ further_reading:
   text: "Location of all Agent configuration files"
 ---
 
-{{< partial name="platforms/platforms.html" >}}
+{{< partial name="platforms/platforms.html" links="platforms" >}}
 
 ## Configuration management tools
 
