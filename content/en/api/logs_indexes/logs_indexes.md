@@ -9,7 +9,7 @@ external_redirect: /api/#logs-indexes
 ## Logs Indexes
 
 <div class="alert alert-warning">
-This endpoint is in public beta. Shall you have any feedback <a href="/help">Contact Datadog support</a>.
+This endpoint is in public beta. If you have any feedback, <a href="/help">contact Datadog support</a>.
 </div>
 
 The `Index` object describes the configuration of a log index. It has the following attributes:
