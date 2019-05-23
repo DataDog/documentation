@@ -1,39 +1,33 @@
 ---
 title: Autodiscovery Template Variables
 kind: documentation
+disable_toc: true
 further_reading:
-- link: "logs/"
+- link: "agent/autodiscovery/integrations"
   tag: "Documentation"
-  text: "Collect your logs"
-- link: "graphing/infrastructure/process"
-  tag: "Documentation"
-  text: "Collect your processes"
-- link: "tracing"
-  tag: "Documentation"
-  text: "Collect your traces"
+  text: "Setting up Check Templates"
 ---
 
-The following template variables are supported by the Agent:
-
-## Container IP
+Use the following Template Variables when configuring Autodiscovery in order to dynamically assign your containers values:
 
 
+| Template Variable           | Description                                                                                                                                                                                               |
+| --------------------------  | ---                                                                                                                                                                                                       |
+| `"%%host%%"`                | Auto-detects the network. For single-network containers, it returns its corresponding IP.                                                                                                                 |
+| `"%%host_<NETWORK NAME>%%"` | Specifies the network name to use, when attached to multiple networks                                                                                                                                     |
+| `"%%port%%"`                | Uses the highest exposed port **sorted numerically and in ascending order**,<br> e.g. it would return `8443` for a container that exposes ports `80`, `443`, and `8443`                                   |
+| `"%%port_<NUMBER_X>%%"`     | Uses the `<NUMBER_X>` port **sorted numerically and in ascending order**,<br> e.g if a container exposes ports `80`, `443`, and `8443`, `"%%port_0%%` refers to port `80`, `"%%port_1%%"` refers to `443` |
+| `"%%pid%%"`                 | Retrieves the container process ID as returned by `docker inspect --format '{{.State.Pid}}' <CONTAINER_NAME>`                                                                                             |
+| `"%%hostname%%"`            | Retrieves the `hostname` value from the container configuration. Only use it if the `"%%host%%"` variable cannot fetch a reliable IP (example: [ECS awsvpc mode][1]                                       |
+| `"%%env_<ENV_VAR>%%"`       | Uses the contents of the `$<ENV_VAR>` environment variable **as seen by the Agent process**                                                                                                               |
 
-- Container IP: `host`
-  - `"%%host%%"`: auto-detect the network. For single-network containers, returns its corresponding IP; falls back to `bridge` network IP.
-  - `"%%host_<NETWORK NAME>%%"`: specify the network name to use, when attached to multiple networks (e.g. `"%%host_bridge%%"`, `"%%host_myredisnetwork%%"`, ...); behaves like `"%%host%%"` if the network name specified was not found.
+**Fall backs**:
 
-- Container port: `port`
-  - `"%%port%%"`: use the highest exposed port **sorted numerically and in ascending order** (eg. 8443 for a container that exposes ports 80, 443, and 8443)
-  - `"%%port_0%%"`: use the first port **sorted numerically and in ascending order** (for the same container, `"%%port_0%%` refers to port 80, `"%%port_1%%"` refers to 443
-  - If your target port is constant, directly specify it without using the `port` variable
+* For the `"%%host%%"` template variable, in case the Agent is not able to find it, this template variable falls back to `bridge` network IP.
+* For the `"%%host_<NETWORK NAME>%%"`, if the `<NETWORK_NAME>` specified was not found this template variable behaves like `"%%host%%"`.
 
-- Container PID: `pid`
-  - `"%%pid%%"`: retrieves the container process ID as returned by `docker inspect --format '{{.State.Pid}}' <container>`
+## Further Reading
 
-- Container hostname: `hostname` (added in Agent 6.4, Docker listener only)
-  - `"%%hostname%%"`: retrieves the `hostname` value from the container configuration. Only use it if the `"%%host%%"` variable cannot fetch a reliable IP (example: [ECS awsvpc mode][1]
+{{< partial name="whats-next/whats-next.html" >}}
 
-- Environment variable: `env` (added in Agent 6.1)
-  - `"%%env_MYENVVAR%%"`: use the contents of the `$MYENVVAR` environment variable **as seen by the Agent process**
-[1]: 
+[1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
