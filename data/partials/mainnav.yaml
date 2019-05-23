@@ -93,7 +93,7 @@ main:
       - name: "Autodiscovery"
         url: "agent/autodiscovery"
         children:
-          - name: "Setting up Check Templates"
+          - name: "Integrations"
             url: "agent/autodiscovery/integrations"
           - name: "Container Identifier"
             url: "agent/autodiscovery/ad_identifiers"
@@ -101,7 +101,7 @@ main:
             url: "agent/autodiscovery/template_variables"
           - name: "Tag Extraction"
             url: "agent/autodiscovery/tag"
-          - name: "Container Discovery Management"
+          - name: "Discovery Management"
             url: "agent/autodiscovery/management"
           - name: "Troubleshooting"
             url: "agent/autodiscovery/troubleshooting"

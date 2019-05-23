@@ -72,5 +72,6 @@ If you're still unsure about the issue, you may reach out to the [Datadog suppor
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /help
 [2]: /agent/troubleshooting/send_a_flare
