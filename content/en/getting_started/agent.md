@@ -38,7 +38,7 @@ By default, the Agent collects metrics from the following checks. To collect met
 * [System][13]
 
 ### Events
-The Agent send events to Datadog when an Agent is started or restarted.
+The Agent sends events to Datadog when an Agent is started or restarted.
 
 ### Service Checks
 **datadog.agent.up**:  
