@@ -20,7 +20,7 @@
     <div id="popper" class="dropdown-menu" style="display:none;">
         <div class="px-4 py-3">
             <div class="row cards-dd platform-nav" style="margin-top:0">
-                {{ range (index $datafile (.Get "links")) }}
+                {{ range $datafile.platforms }}
                     <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-2-4">
                         <a class="card" href="{{ .link | absLangURL }}" style="margin-bottom:15px">
                             <div class="card-body text-center">
