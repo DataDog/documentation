@@ -3,9 +3,15 @@ title: Autodiscovery Template Variables
 kind: documentation
 disable_toc: true
 further_reading:
-- link: "agent/autodiscovery/integrations"
+- link: "/agent/autodiscovery/integrations"
   tag: "Documentation"
-  text: "Setting up Check Templates"
+  text: "Create and load an Autodiscovery Integration Template"
+- link: "/agent/autodiscovery/ad_identifiers"
+  tag: "Documentation"
+  text: "Match a container with the corresponding Integration Template"
+- link: "/agent/autodiscovery/management"
+  tag: "Documentation"
+  text: "Manage which Container to include in the Agent Autodiscovery"
 ---
 
 Use the following Template Variables when configuring Autodiscovery in order to dynamically assign your containers values:

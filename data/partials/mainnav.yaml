@@ -93,7 +93,7 @@ main:
       - name: "Autodiscovery"
         url: "agent/autodiscovery"
         children:
-          - name: "Integrations"
+          - name: "Integrations Template"
             url: "agent/autodiscovery/integrations"
           - name: "Container Identifier"
             url: "agent/autodiscovery/ad_identifiers"

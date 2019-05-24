@@ -1,5 +1,5 @@
 ---
-title: Setting up Datadog Integration Templates
+title: Autodiscovery Integration Templates
 kind: documentation
 further_reading:
 - link: "logs/"
@@ -29,6 +29,10 @@ Each tab in sections below shows a different way to apply Integration templates 
 * [Using Key-Value Store](?tab=keyvaluestore)
 * [Using Kubernetes Annotations](?tab=kubernetespodannotations)
 * [Using Docker Labels](?tab=dockerlabel)
+
+If you provide a template for the same Integration via multiple template sources, the Agent looks for templates in the following order (using the first one it finds):
+* Kubernetes annotations
+* Files
 
 **Note**: Some supported integrations require additional steps for Autodiscovery to work: [Ceph][3], [Varnish][4], [Postfix][5], [Cassandra Nodetools][6], and [Gunicorn][7]. Contact [Datadog support][8] for assistance.
 
@@ -88,7 +92,7 @@ Autodiscovery can use [Consul][1], Etcd, and Zookeeper as Integration template s
 
 **Configure in datadog.yaml**:
 
-1. In the `datadog.yaml` file, set the `<KEY_VALUE_STORE_IP>` address and `<KEY_VALUE_STORE_PORT>` of your key-value store:
+In the `datadog.yaml` file, set the `<KEY_VALUE_STORE_IP>` address and `<KEY_VALUE_STORE_PORT>` of your key-value store:
 
   ```yaml
   config_providers:
@@ -119,7 +123,7 @@ Autodiscovery can use [Consul][1], Etcd, and Zookeeper as Integration template s
       password:
   ```
 
-2. [Restart the Agent][2] to apply the configuration change.
+Then [Restart the Agent][2] to apply the configuration change.
 
 **Configure in environment variables**:
 
@@ -516,7 +520,6 @@ spec:
 {{% tab "Docker Label" %}}
 
 The following `docker-compose.yml` file applies the correct Apache and HTTP check integration templates:
-
 
 ```yaml
 labels:

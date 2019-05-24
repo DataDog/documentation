@@ -8,6 +8,15 @@ further_reading:
 - link: "tagging/using_tags"
   tag: "Documentation"
   text: "Using tags with Datadog"
+- link: "/agent/autodiscovery/integrations"
+  tag: "Documentation"
+  text: "Create and load an Autodiscovery Integration Template"
+- link: "/agent/autodiscovery/ad_identifiers"
+  tag: "Documentation"
+  text: "Match a container with the corresponding Integration Template"
+- link: "/agent/autodiscovery/management"
+  tag: "Documentation"
+  text: "Manage which Container to include in the Agent Autodiscovery"
 ---
 
 The Datadog Agent can create and assign tags to all metrics, traces, and logs emitted by a container based on its Labels or Environment Variables.

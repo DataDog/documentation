@@ -2,15 +2,12 @@
 title: Container Discovery Management
 kind: documentation
 further_reading:
-- link: "logs/"
+- link: "/agent/autodiscovery/integrations"
   tag: "Documentation"
-  text: "Collect your logs"
-- link: "graphing/infrastructure/process"
+  text: "Create and load an Autodiscovery Integration Template"
+- link: "/agent/autodiscovery/ad_identifiers"
   tag: "Documentation"
-  text: "Collect your processes"
-- link: "tracing"
-  tag: "Documentation"
-  text: "Collect your traces"
+  text: "Match a container with the corresponding Integration Template"
 ---
 
 Datadog Agent autodiscovers all containers available by default. To restrict its discovery perimeter and limit data collection to a subset of containers only, include or exclude them through a dedicated configuration.

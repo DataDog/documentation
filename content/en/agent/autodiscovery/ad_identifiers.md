@@ -1,10 +1,14 @@
 ---
 title: Autodiscovery Container Identifier
 kind: documentation
+disable_toc: true
 further_reading:
-- link: "/agent/autodiscovery/integrations/?tab=file#configuration"
+- link: "/agent/autodiscovery/integrations"
   tag: "Documentation"
-  text: "Autodiscovery File configuration"
+  text: "Create and load an Autodiscovery Integration Template"
+- link: "/agent/autodiscovery/management"
+  tag: "Documentation"
+  text: "Manage which Container to include in the Agent Autodiscovery"
 ---
 
 Autodiscovery Container Identifiers or `ad_identifiers` are used when configuring the Agent Autodiscovery with files. The use case solved is to properly match the configuration file defined for an Autodiscovery Integration with a given container.
@@ -72,4 +76,3 @@ The Agent then knows to apply the Autodiscovery configuration file to this speci
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
