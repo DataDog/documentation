@@ -393,12 +393,8 @@ main:
       - name: "Log Collection & Integrations"
         url: "logs/log_collection/"
         children:
-          - name: "AWS"
-            url: "integrations/amazon_web_services/#log-collection"
           - name: "Browser"
             url: "logs/log_collection/javascript/"
-          - name: "Docker"
-            url: "agent/docker/log/"
           - name: "Csharp"
             url: "logs/log_collection/csharp/"
           - name: "Go"
@@ -413,8 +409,6 @@ main:
             url: "logs/log_collection/python/"
           - name: "Ruby"
             url: "logs/log_collection/ruby/"
-
-
           - name: "Other Integrations"
             url: "integrations/#cat-log-collection"
 
