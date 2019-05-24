@@ -36,9 +36,9 @@ The configuration files are static, and any network-related options configured w
 
 The overall process of Datadog Agent Autodiscovery is:
 
-1. **Load Integration template**: When the Agent starts with Autodiscovery enabled, it loads integration templates from all [available template sources][2]; along with the [Autodiscovery container identifiers][3]. Static configuration files aren't suitable for checks that collect data from ever-changing network endpoints like host or ports, so Autodiscovery uses [**templates variables**][4] for integration template configuration. Those integration template configurations can be loaded into the Agent in 4 main ways:
+1. **Load Integration template**: When the Agent starts with Autodiscovery enabled, it loads integration templates from all [available template sources][2]; along with the [Autodiscovery container identifiers][3]. Static configuration files aren't suitable for checks that collect data from ever-changing network endpoints like host or ports, so Autodiscovery uses [**Template Variables**][4] for integration template configuration. Those integration template configurations can be loaded into the Agent in 4 main ways:
 
-  * [Using a configuration file mounted withing the Agent][5]
+  * [Using a configuration file mounted within the Agent][5]
   * [Using Key-Value Store][6]
   * [Using Kubernetes Annotations][7]
   * [Using Docker Labels][8]
@@ -57,4 +57,4 @@ The overall process of Datadog Agent Autodiscovery is:
 [6]: /agent/autodiscovery/integrations/?tab=keyvaluestore#configuration
 [7]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
 [8]: /agent/autodiscovery/integrations/?tab=dockerlabel#configuration
-[9]: /agent/autodiscovery/template_varibales
+[9]: /agent/autodiscovery/template_variables

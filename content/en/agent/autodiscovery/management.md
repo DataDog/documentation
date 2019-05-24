@@ -10,7 +10,7 @@ further_reading:
   text: "Match a container with the corresponding Integration Template"
 ---
 
-Datadog Agent autodiscovers all containers available by default. To restrict its discovery perimeter and limit data collection to a subset of containers only, include or exclude them through a dedicated configuration.
+Datadog Agent auto-discovers all containers available by default. To restrict its discovery perimeter and limit data collection to a subset of containers only, include or exclude them through a dedicated configuration.
 
 **Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings and always count all containers. This does not affect your per-container billing.
 
@@ -54,7 +54,7 @@ To remove a given docker container with the name `<NAME>` from autodiscovery  ad
 DD_AC_EXCLUDE = "name:<IMAGE_NAME>"
 ```
 
-For instance to exclude the Agent container itself use this environment variable on it:
+For instance, use this excluding rule to exclude the Agent container itself:
 
 ```
 DD_AC_EXCLUDE = "name:dd-agent"
