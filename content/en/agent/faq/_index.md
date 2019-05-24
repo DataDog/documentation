@@ -18,12 +18,11 @@ aliases:
 * [Error Restarting Agent: Already Listening on a Configured Port][9]
 * [Forwarder logs contain 599 response code][10]
 * [How is the 'system.mem.used' metric calculated?][11]
-* [Adding a custom Python package to the Agent][12]
-* [Why should I install the Datadog Agent on my cloud instances?][13]
-* [The Datadog Agent for Logs or Traces Only][14]
-* [Install the Agent with AWS SSM][15]
-* [How do I use Kubernetes secrets to set my API key?][16]
-* [Datadog Windows Agent user][17]
+* [Why should I install the Datadog Agent on my cloud instances?][12]
+* [The Datadog Agent for Logs or Traces Only][13]
+* [Install the Agent with AWS SSM][14]
+* [How do I use Kubernetes secrets to set my API key?][15]
+* [Datadog Windows Agent user][16]
 
 [1]: /agent/faq/host-metrics-with-the-container-agent
 [2]: /agent/faq/agent-apm-metrics
@@ -36,9 +35,8 @@ aliases:
 [9]: /agent/faq/error-restarting-agent-already-listening-on-a-configured-port
 [10]: /agent/faq/forwarder-logs-contain-599-response-code
 [11]: /agent/faq/how-is-the-system-mem-used-metric-calculated
-[12]: /agent/faq/custom_python_package
-[13]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances
-[14]: /agent/faq/the-datadog-agent-for-logs-or-traces-only
-[15]: /agent/faq/install-the-agent-with-aws-ssm
-[16]: /agent/faq/kubernetes-secrets
-[17]: /agent/faq/windows-agent-ddagent-user
+[12]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances
+[13]: /agent/faq/the-datadog-agent-for-logs-or-traces-only
+[14]: /agent/faq/install-the-agent-with-aws-ssm
+[15]: /agent/faq/kubernetes-secrets
+[16]: /agent/faq/windows-agent-ddagent-user
