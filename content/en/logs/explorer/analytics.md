@@ -123,7 +123,7 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 Visualize the top values from a [facet][1] according to a chosen [measure][2] (the first measure you choose in the list). And display the value of additional measures for elements appearing in this top. And update search query or drill through logs corresponding to either dimension.
 
 The following Table Log Analytics shows:
-The evolution of the **top 5 Status** according to the **Throughput**, along with the average **Duration** over the last 15 minutes.
+The evolution of the **top 5 Status** according to their **Throughput**, along with the average **Duration** and over the last 15 minutes.
 
 {{< img src="logs/explorer/analytics/logs_table_example.gif" alt="table example" responsive="true" style="width:90%;">}}
 
