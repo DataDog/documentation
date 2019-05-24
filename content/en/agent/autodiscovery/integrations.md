@@ -279,7 +279,7 @@ It looks like a minimal [Redis integration configuration][1], but notice the `ad
 Now let's suppose that your Redis requires an additional `password` when accessing his stats endpoint and you want to correctly flag logs coming out of it. In order to take into account this new logic:
 
 1. Create a `autodiscovery.d/` folder on your host.
-2. Add the following custom auto-configuration named `redis.yaml`file to this folder:
+2. Add the following custom auto-configuration named `redisdb.yaml`file to this folder:
   ```yaml
   ad_identifiers:
     - redis
@@ -312,7 +312,7 @@ The following etcd commands create an Redis integration template with a custom `
 
 ```
 etcdctl mkdir /datadog/check_configs/redis
-etcdctl set /datadog/check_configs/redis/check_names '["redis"]'
+etcdctl set /datadog/check_configs/redis/check_names '["redisdb"]'
 etcdctl set /datadog/check_configs/redis/init_configs '[{}]'
 etcdctl set /datadog/check_configs/redis/instances '[{"host": "%%host%%","port":"6379","password":"%%env_REDIS_PASSWORD%%"}]'
 etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "redis"}]'
@@ -338,7 +338,7 @@ metadata:
   annotations:
     ad.datadoghq.com/redis.check_names: |
       [
-        "redis"
+        "redisdb"
       ]
     ad.datadoghq.com/redis.init_configs: |
       [
@@ -381,7 +381,7 @@ The following `docker-compose.yml` file applies the correct Redis integration te
 
 ```yaml
 labels:
-  com.datadoghq.ad.check_names: '["redis"]'
+  com.datadoghq.ad.check_names: '["redisdb"]'
   com.datadoghq.ad.init_configs: '[{}]'
   com.datadoghq.ad.instances: '[{"host": "%%host%%","port":"6379","password":"%%env_REDIS_PASSWORD%%"}]'
   com.datadoghq.ad.logs: '[{"source": "redis", "service": "redis"}]'
