@@ -15,7 +15,6 @@ further_reading:
 
 **Note**: Some supported integrations require additional steps for Autodiscovery to work: [Ceph][1], [Varnish][2], [Postfix][3], [Cassandra Nodetools][4], and [Gunicorn][5]. Contact [Datadog support][6] for assistance.
 
-
 Cluster Checks with the Cluster Agent The [Cluster Checks feature][7] monitors non-containerized and out-of-cluster resources.
 
 ## Overview
@@ -34,15 +33,15 @@ Additionally if you use Agent v6.5+ you can also use the following parameter to 
 
 Each tab in sections below shows a different way to apply Integration templates to a given container, available documented method are:
 
-* [Using a configuration file mounted withing the Agent]()[10]
-* [Using Key-Value Store]()[10]
-* [Using Kubernetes Annotations]()[10]
-* [Using Docker Labels]()[10]
+* [Using a configuration file mounted withing the Agent](?tab=file)
+* [Using Key-Value Store](?tab=keyvaluestore)
+* [Using Kubernetes Annotations](?tab=kubernetespodannotations)
+* [Using Docker Labels](?tab=dockerlabel)
 
 Find at the bottom of this page two sections giving examples for all of the previous method:
 
-* [Example Datadog-Redis Integration]()[10]
-* [Example Datadog-Apache and Datadog-HTTP checks Integrations]()[10]
+* [Example Datadog-Redis Integration](#example-datadog-redis-integration)
+* [Example Datadog-Apache and Datadog-HTTP checks Integrations](#example-datadog-apache-and-http-checks-integrations)
 
 ## Configuration
 
@@ -68,7 +67,7 @@ Your auto-configuration file should have the following format:
 
 ```
 ad_identifier:
-TO EXPLAIN
+  <INTEGRATION_AUTODISCOVEY_IDENTIFIER>
 
 init_config:
   <INIT_CONFIG>
@@ -108,14 +107,14 @@ Autodiscovery can use [Consul][1], Etcd, and Zookeeper as Integration template s
     - name: etcd
       polling: true
       template_dir: /datadog/check_configs
-      template_url: <KV_STORE_IP>:<KV_STORE_PORT>
+      template_url: '<KV_STORE_IP>:<KV_STORE_PORT>'
       username:
       password:
 
     - name: consul
       polling: true
       template_dir: datadog/check_configs
-      template_url: <KV_STORE_IP>:<KV_STORE_PORT>
+      template_url: '<KV_STORE_IP>:<KV_STORE_PORT>'
       ca_file:
       ca_path:
       cert_file:
@@ -127,7 +126,7 @@ Autodiscovery can use [Consul][1], Etcd, and Zookeeper as Integration template s
     - name: zookeeper
       polling: true
       template_dir: /datadog/check_configs
-      template_url: <KV_STORE_IP>:<KV_STORE_PORT>
+      template_url: '<KV_STORE_IP>:<KV_STORE_PORT>'
       username:
       password:
   ```
@@ -158,20 +157,49 @@ With the key-value store enabled as a template source, the Agent looks for templ
 
 You can store your Integration templates in Kubernetes Pod annotations. With Autodiscovery enabled, the Agent detects if it's running on Kubernetes and automatically searches all Pod annotations for Integration templates.
 
-In order to apply a specific configuration to a given container, Autodiscovery identifies containers by _name_, **NOT image** (as it does for auto-configuration files and key-value stores). That is, it looks to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image`. To configure your Datadog-integration autodiscovery on a given `<CONTAINER_IDENTIFIER>` add the following annotations on your pod:
+In order to apply a specific configuration to a given container, Autodiscovery identifies containers by _name_, **NOT image** (as it does for auto-configuration files and key-value stores). That is, it looks to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image`. To configure your Datadog-integration autodiscovery on a given `<CONTAINER_IDENTIFIER>` within your pod add the following annotations to your pod:
 
 ```yaml
+apiVersion: v1
+kind: Pod
 # (...)
 metadata:
-#(...)
+  name: '<POD_NAME>'
   annotations:
     ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: '[<CHECK_NAME>]'
     ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: '[<INIT_CONFIG>]'
     ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: '[<INSTANCE_CONFIG>]'
     ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: '[<LOG_CONFIG>]'
+    # (...)
 spec:
   containers:
     - name: '<CONTAINER_IDENTIFIER>'
+# (...)
+```
+
+To apply two different integration template to two different containers: `<CONTAINER_IDENTIFIER_1>` and `<CONTAINER_IDENTIFIER_2>` within your pod, add the following annotations to your pod:
+
+```yaml
+apiVersion: v1
+kind: Pod
+# (...)
+metadata:
+  name: '<POD_NAME>'
+  annotations:
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER_1>.check_names: '[<CHECK_NAME_1>]'
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER_1>.init_configs: '[<INIT_CONFIG_1>]'
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER_1>.instances: '[<INSTANCE_CONFIG_1>]'
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER_1>.logs: '[<LOG_CONFIG_1>]'
+    # (...)
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER_2>.check_names: '[<CHECK_NAME_2>]'
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER_2>.init_configs: '[<INIT_CONFIG_2>]'
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER_2>.instances: '[<INSTANCE_CONFIG_2>]'
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER_2>.logs: '[<LOG_CONFIG_2>]'
+spec:
+  containers:
+    - name: '<CONTAINER_IDENTIFIER_1>'
+    # (...)
+    - name: '<CONTAINER_IDENTIFIER_2>'
 # (...)
 ```
 
@@ -212,7 +240,6 @@ labels:
 When using Swarm mode for Docker Cloud, labels must be applied to the image:
 
 ```yaml
-
 version: "1.0"
 services:
 ...
@@ -250,125 +277,194 @@ instances:
 
 It looks like a minimal [Redis integration configuration][1], but notice the `ad_identifiers` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `redis` image.
 
-See the dedicated [Autodiscovery Identifier][2] documentation to learn more.
+**See the dedicated [Autodiscovery Identifier][2] documentation to learn more.
 
-Now let's suppose that this Redis requires an additional `password` to use for the Agent connection, in order to take into account this new logics
+Now let's suppose that your Redis requires an additional `password` when accessing his stats endpoint and you want to correctly flag logs coming out of it. In order to take into account this new logic:
 
-1. Create a folder
-2. Create a new conf file
+1. Create a `autodiscovery.d/` folder on your host.
+2. Add the following custom auto-configuration named `redis.yaml`file to this folder:
+  ```yaml
+  ad_identifiers:
+    - redis
 
-```yaml
-ad_identifiers:
-  - redis
+  init_config:
 
-init_config:
+  instances:
 
-instances:
+    - host: "%%host%%"
+      port: "6379"
+      password: "%%env_REDIS_PASSWORD%%"
 
-  - host: "%%host%%"
-    port: "6379"
-    password: "%%env_REDIS_PASSWORD%%`
-```
+  logs:
+    source: redis
+    service: redis
+  ```
 
-Link to template variable, you need to share the env variable with the agent container
-Note: you can also hard code the value
-3. mount this file with the agent
+  **Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used in order to avoid to store the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][3].
 
-[15]: /agent/basic_agent_usage/kubernetes/#configmap
-[16]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
+3. Mount the `autodiscovery.d/` folder into the containerized Agent `conf.d/` folder.
 
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
+[2]: /agent/autodiscovery/ad_identifiers
+[3]: /agent/autodiscovery/template_variables
 {{% /tab %}}
 {{% tab "Key-value Store" %}}
 
-The following etcd commands create an Redis integration template:
+The following etcd commands create an Redis integration template with a custom `password` parameter and tags all its logs with the correct `source` and `service` attribute:
 
 ```
 etcdctl mkdir /datadog/check_configs/redis
-etcdctl set /datadog/check_configs/redis/check_names '["apache"]'
+etcdctl set /datadog/check_configs/redis/check_names '["redis"]'
 etcdctl set /datadog/check_configs/redis/init_configs '[{}]'
-etcdctl set /datadog/check_configs/redis/instances '[{"host": "%%host%%"}]'
+etcdctl set /datadog/check_configs/redis/instances '[{"host": "%%host%%","port":"6379","password":"%%env_REDIS_PASSWORD%%"}]'
+etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "redis"}]'
 ```
 
-Notice that each of the three values is a list. Autodiscovery assembles list items into check configurations based on shared list indexes. In this case, it composes the first (and only) check configuration from `check_names[0]`, `init_configs[0]` and `instances[0]`.
+**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used in order to avoid to store the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][1].
 
-Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, e.g. `httpd` OR `library/httpd:latest`. The next example uses a long name.
+Notice that each of the three values is a list. Autodiscovery assembles list items into the integration configurations based on shared list indexes. In this case, it composes the first (and only) check configuration from `check_names[0]`, `init_configs[0]` and `instances[0]`.
 
+Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, e.g. `redis` OR `redis:latest`.
 
-[1]: 
-[2]: /agent/autodiscovery/ad_identifiers
+[1]: /agent/autodiscovery/template_variables
 {{% /tab %}}
 {{% tab "Kubernetes Pod Annotations" %}}
 
+The following Pod annotation defines the integration template for `redis` containers with a custom `password` parameter and tags all its logs with the correct `source` and `service` attribute:
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: apache
+  annotations:
+    ad.datadoghq.com/redis.check_names: |
+      [
+        "redis"
+      ]
+    ad.datadoghq.com/redis.init_configs: |
+      [
+        {}
+      ]
+    ad.datadoghq.com/redis.instances: |
+      [
+        {
+          "host": "%%host%%",
+          "port":"6379",
+          "password":"%%env_REDIS_PASSWORD%%"
+        }
+      ]
+    ad.datadoghq.com/redis.logs: |
+      [
+        {
+          "source":"redis",
+          "service":"redis"
+        }
+      ]
+  labels:
+    name: redis
+spec:
+  containers:
+    - name: redis
+      image: httpd
+      ports:
+        - containerPort: 80
+```
+
+**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used in order to avoid to store the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][1].
+
+
+[1]: /agent/autodiscovery/template_variables
 {{% /tab %}}
 {{% tab "Docker Label" %}}
 
-The following Dockerfile launches an NGINX container with Autodiscovery enabled:
+The following `docker-compose.yml` file applies the correct Redis integration template with a custom `password` parameter:
 
-```
-FROM nginx
 
-EXPOSE 8080
-COPY nginx.conf /etc/nginx/nginx.conf
-LABEL "com.datadoghq.ad.check_names"='["nginx"]'
-LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%port%%/nginx_status"}]'
-LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
+```yaml
+labels:
+  com.datadoghq.ad.check_names: '["redis"]'
+  com.datadoghq.ad.init_configs: '[{}]'
+  com.datadoghq.ad.instances: '[{"host": "%%host%%","port":"6379","password":"%%env_REDIS_PASSWORD%%"}]'
+  com.datadoghq.ad.logs: '[{"source": "redis", "service": "redis"}]'
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Example Datadog-Apache and Datadog-HTTP checks Integrations
+## Example: Datadog Apache and HTTP checks Integrations
+
+Configurations below apply to an Apache container image with the `<CONTAINER_IDENTIFIER>`: `httpd`. The Audiscovery templates are configured to collect Metrics and logs from the Apache container, and setting up a Datadog-HTTP check in order to test two endpoints to monitor wether the websites created by the Apache container are available:
+
+Check name are `apache` and `http_check` and their `<INIT_CONFIG>`, `<INSTANCE_CONFIG>`, and `<LOG_CONFIG>` configuration can be found in their respective documentation page: [Datadog-Apache integration][10], [Datadog-HTTP check integration][11].
 
 {{< tabs >}}
 {{% tab "File" %}}
 
-Here's the `apache.yaml` template packaged with `datadog-agent`:
+1. Create a `autodiscovery.d/` folder on your host.
+2. Add the following custom auto-configuration named `apache.yaml`file to this folder:
 
-```yaml
-ad_identifiers:
-  - httpd
+  ```yaml
+  ad_identifiers:
+    - httpd
 
-init_config:
+  init_config:
 
-instances:
-  - apache_status_url: http://%%host%%/server-status?auto
-```
+  instances:
+    - apache_status_url: http://%%host%%/server-status?auto
 
-It looks like a minimal [Apache check configuration][1], but notice the `ad_identifiers` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `httpd` image.
+  logs:
+    source: apache
+    service: webapp
+  ```
 
-_Any_ `httpd` image. Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery applies the above template to both containers. When it's loading auto-conf files, Autodiscovery cannot distinguish between identically-named images from different sources or with different tags, and **you have to provide short names for container images**, e.g. `httpd`, NOT `library/httpd:latest`.
+  **Note**: It looks like a minimal [Apache check configuration][1], but notice the `ad_identifiers` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `httpd` image.
 
-If this is too limiting&mdash;if you need to apply different check configurations to different containers running the same image&mdash;[use labels to identify the containers][2]. Label each container differently, then add each label to any template file's `ad_identifiers` list (yes, `ad_identifiers` is where to put _any_ kind of container identifier, not just images).
+  **See the dedicated [Autodiscovery Identifier][2] documentation to learn more.
 
+3. Add the following custom auto-configuration named `http_check.yaml`file to this folder:
 
+  ```yaml
+  ad_identifiers:
+    - httpd
+
+  init_config:
+
+  instances:
+    - name: "<WEBSITE_1>"
+      url: "http://%%host%%/website_1"
+      timeout: 1
+
+    - name: "<WEBSITE_2>"
+      url: "http://%%host%%/website_2"
+      timeout: 1
+  ```
+
+3. Mount the `autodiscovery.d/` folder into the containerized Agent `conf.d/` folder.
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[2]: /agent/autodiscovery/#template-source-kubernetes-pod-annotations
+[2]: /agent/autodiscovery/ad_identifiers
 {{% /tab %}}
 {{% tab "Key-value Store" %}}
-### Example: Apache check with website availability monitoring
 
-The following etcd commands create the same Apache template and add an [HTTP check][1] template to monitor whether the website created by the Apache container is available:
+The following etcd commands create the an Apache integration template and an [HTTP check][1] integration template with two instances to monitor whether the websites created by the Apache container are available:
 
 ```
-etcdctl set /datadog/check_configs/library/httpd:latest/check_names '["apache", "http_check"]'
-etcdctl set /datadog/check_configs/library/httpd:latest/init_configs '[{}, {}]'
-etcdctl set /datadog/check_configs/library/httpd:latest/instances '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
+etcdctl set /datadog/check_configs/httpd/check_names '["apache", "http_check"]'
+etcdctl set /datadog/check_configs/httpd/init_configs '[{}, {}]'
+etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "http://%%host%%/server-status?auto"}],[{"name": "<WEBSITE_1>", "url": "http://%%host%%/website_1", timeout: 1},{"name": "<WEBSITE_2>", "url": "http://%%host%%/website_2", timeout: 1}]]'
+etcdctl set /datadog/check_configs/httpd/logs '[{"source": "apache", "service": "webapp"}]'
 ```
 
-Again, the order of each list matters. The Agent can only generate the HTTP check configuration correctly if all parts of its configuration have the same index across the three lists (they do; the index is 1).
+**Note**: the order of each list matters. The Agent can only generate the HTTP check configuration correctly if all parts of its configuration have the same index across the three lists.
+
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
 {{% /tab %}}
 {{% tab "Kubernetes Pod Annotations" %}}
 
-Pod Example: Apache check with website availability monitoring
-
-The following Pod annotation defines two templates&mdash;equivalent to those from the end of the previous section&mdash;for `apache` containers:
-
-* `<CONTAINER_IDENTIFIER>` is `apache`.
-* Check name are `apache` and `http_check` and their `<INIT_CONFIG>`, `<INSTANCE_CONFIG>`, and `<LOG_CONFIG>` configuration can be found in their respective documentation page: [Datadog-Apache integration][1], [Datadog-HTTP check integration][2].
+The following Pod annotation defines two integration templates for the apache containers:
 
 ```
 apiVersion: v1
@@ -388,14 +484,23 @@ metadata:
       ]
     ad.datadoghq.com/apache.instances: |
       [
-        {
-          "apache_status_url": "http://%%host%%/server-status?auto"
-        },
-        {
-          "name": "My service",
-          "url": "http://%%host%%",
-          timeout: 1
-        }
+        [
+          {
+            "apache_status_url": "http://%%host%%/server-status?auto"
+          }
+        ],
+        [
+          {
+            "name": "<WEBSITE_1>",
+            "url": "http://%%host%%/website_1",
+            "timeout": 1
+          },
+          {
+            "name": "<WEBSITE_2>",
+            "url": "http://%%host%%/website_2",
+            "timeout": 1
+          }
+        ]
       ]
     ad.datadoghq.com/apache.logs: |
       [
@@ -414,67 +519,27 @@ spec:
         - containerPort: 80
 ```
 
-
-If define pods via Deployments, don't add template annotations to the Deployment metadata; the Agent won't look there. Add them like this:
-
-```
-apiVersion: apps/v1beta1
-kind: Deployment
-metadata: # Don't add templates here
-  name: apache-deployment
-spec:
-  replicas: 2
-  template:
-    metadata:
-      labels:
-        name: apache
-      annotations:
-        ad.datadoghq.com/apache.check_names: |
-          [
-            "apache",
-            "http_check"
-          ]
-        ad.datadoghq.com/apache.init_configs: |
-          [
-            {},
-            {}
-          ]
-        ad.datadoghq.com/apache.instances: |
-          [
-            {
-              "apache_status_url": "http://%%host%%/server-status?auto"
-            },
-            {
-              "name": "My service",
-              "url": "http://%%host%%",
-              timeout: 1
-            }
-          ]
-        ad.datadoghq.com/apache.logs: |
-          [
-            {
-              "source":"apache",
-              "service":"webapp"
-            }
-          ]
-    spec:
-      containers:
-      - name: apache
-        image: httpd
-        ports:
-        - containerPort: 80
-```
-
-[1]: /integrations/apache/#setup
-[2]: /integrations/http_check/#setup
 {{% /tab %}}
 {{% tab "Docker Label" %}}
+
+The following `docker-compose.yml` file applies the correct Apache and HTTP check integration templates:
+
+
+```yaml
+labels:
+  com.datadoghq.ad.check_names: '["apache", "http_check"]'
+  com.datadoghq.ad.init_configs: '[{},{}]'
+  com.datadoghq.ad.instances: '[[{"apache_status_url": "http://%%host%%/server-status?auto"}],[{"name":"<WEBSITE_1>","url":"http://%%host%%/website_1","timeout":1},{"name":"<WEBSITE_2>","url":"http://%%host%%/website_2","timeout":1}]]'
+  com.datadoghq.ad.logs: '[{"source": "apache", "service": "webapp"}]'
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /integrations/ceph
 [2]: /integrations/varnish/#autodiscovery
 [3]: /integrations/postfix
@@ -484,4 +549,5 @@ spec:
 [7]: /agent/autodiscovery/clusterchecks
 [8]: /getting_started/integrations/#configuring-agent-integrations
 [9]: /logs
-[10]: )
+[10]: /integrations/apache/#setup
+[11]: /integrations/http_check/#setup
