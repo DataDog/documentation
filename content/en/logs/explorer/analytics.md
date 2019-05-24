@@ -120,7 +120,7 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 
 {{% tab "Table" %}}
 
-Visualize the top values from a [facet][1] according to a chosen [measure][2] (the first measure you choose in the list). And display the value of additional measures for elements appearing in this top. And update search query or drill through logs corresponding to either dimension.
+Visualize the top values from a [facet][1] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update search query or drill through logs corresponding to either dimension.
 
 The following Table Log Analytics shows:
 The evolution of the **top 5 Status** according to their **Throughput**, along with the average **Duration** and over the last 15 minutes.
