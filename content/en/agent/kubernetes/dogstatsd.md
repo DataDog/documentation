@@ -129,6 +129,8 @@ Origin detection is supported in Agent 6.10.0+ and in the following client libra
 
 To set [tag cardinality][14] for the metrics collected using origin detection, use the environment variable `DD_DOGSTATSD_TAG_CARDINALITY`. 
 
+There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`—as DogStatsD is priced differently, its tag cardinality setting is separated in order to provide the opportunity for finer configuration. Otherwise, these variables function the same way: they can have values `low`, `orchestrator`, or `high`. They both default to `low`.
+
 ## Instrument your code to send metrics to DogStatsD
 
 Once your application can send metrics via DogStatsD on each node, you can instrument your application code to submit custom metrics. 
