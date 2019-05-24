@@ -13,21 +13,13 @@ further_reading:
   text: "Collect your traces"
 ---
 
-**Note**: Some supported integrations require additional steps for Autodiscovery to work: [Ceph][1], [Varnish][2], [Postfix][3], [Cassandra Nodetools][4], and [Gunicorn][5]. Contact [Datadog support][6] for assistance.
-
-Cluster Checks with the Cluster Agent The [Cluster Checks feature][7] monitors non-containerized and out-of-cluster resources.
-
-## Overview
-
-The goal of Autodiscovery is to apply a Datadog integration configuration when running an Agent Check against a given container. See how to [Configure Agent integrations][8] when running the Agent on a host if you want more context on this logic.
-
-In order to configure an Integration with Autodiscovery the following parameter are required:
+The goal of Autodiscovery is to apply a Datadog integration configuration when running an Agent Check against a given container. See how to [Configure Agent integrations][1] when running the Agent on a host if you want more context on this logic. In order to configure an Integration with Autodiscovery the following parameter are required:
 
 * `<INTEGRATION_NAME>`: Name of the the Datadog Integration
 * `<INIT_CONFIG>`: Configuration for the `init_config:` section for the given Datadog-`<INTEGRATION_NAME>`.
 * `<INSTANCE_CONFIG>`: Configuration for the `instances:` section for the given Datadog-`<INTEGRATION_NAME>`.
 
-Additionally if you use Agent v6.5+ you can also use the following parameter to configure your [Log collection][9] with Autodiscovery:
+Additionally if you use Agent v6.5+ you can also use the following parameter to configure your [Log collection][2] with Autodiscovery:
 
 * `<LOG_CONFIG>`: Configuration for the `logs:` section for the given Datadog-`<INTEGRATION_NAME>`
 
@@ -38,10 +30,7 @@ Each tab in sections below shows a different way to apply Integration templates 
 * [Using Kubernetes Annotations](?tab=kubernetespodannotations)
 * [Using Docker Labels](?tab=dockerlabel)
 
-Find at the bottom of this page two sections giving examples for all of the previous method:
-
-* [Example Datadog-Redis Integration](#example-datadog-redis-integration)
-* [Example Datadog-Apache and Datadog-HTTP checks Integrations](#example-datadog-apache-and-http-checks-integrations)
+**Note**: Some supported integrations require additional steps for Autodiscovery to work: [Ceph][3], [Varnish][4], [Postfix][5], [Cassandra Nodetools][6], and [Gunicorn][7]. Contact [Datadog support][8] for assistance.
 
 ## Configuration
 
@@ -77,7 +66,6 @@ instances:
 ```
 
 **Note**: You don't need to setup the `<INTEGRATIONS_NAME>` there, since the Agent inferred it from the file name directly.
-
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/auto_conf.yaml
 [2]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/auto_conf.yaml
@@ -256,6 +244,11 @@ services:
 {{% /tab %}}
 {{< /tabs >}}
 
+Find below two sections giving examples for all of the previous method:
+
+* [Example Datadog-Redis Integration](#example-datadog-redis-integration)
+* [Example Datadog-Apache and Datadog-HTTP checks Integrations](#example-datadog-apache-and-http-checks-integrations)
+
 ## Example Datadog-Redis Integration
 
 {{< tabs >}}
@@ -333,7 +326,7 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 
 The following Pod annotation defines the integration template for `redis` containers with a custom `password` parameter and tags all its logs with the correct `source` and `service` attribute:
 
-```yaml
+```
 apiVersion: v1
 kind: Pod
 metadata:
@@ -397,7 +390,7 @@ labels:
 
 Configurations below apply to an Apache container image with the `<CONTAINER_IDENTIFIER>`: `httpd`. The Audiscovery templates are configured to collect Metrics and logs from the Apache container, and setting up a Datadog-HTTP check in order to test two endpoints to monitor wether the websites created by the Apache container are available:
 
-Check name are `apache` and `http_check` and their `<INIT_CONFIG>`, `<INSTANCE_CONFIG>`, and `<LOG_CONFIG>` configuration can be found in their respective documentation page: [Datadog-Apache integration][10], [Datadog-HTTP check integration][11].
+Check name are `apache` and `http_check` and their `<INIT_CONFIG>`, `<INSTANCE_CONFIG>`, and `<LOG_CONFIG>` configuration can be found in their respective documentation page: [Datadog-Apache integration][9], [Datadog-HTTP check integration][10].
 
 {{< tabs >}}
 {{% tab "File" %}}
@@ -540,14 +533,13 @@ labels:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/ceph
-[2]: /integrations/varnish/#autodiscovery
-[3]: /integrations/postfix
-[4]: /integrations/cassandra/#agent-check-cassandra-nodetool
-[5]: /integrations/gunicorn
-[6]: /help
-[7]: /agent/autodiscovery/clusterchecks
-[8]: /getting_started/integrations/#configuring-agent-integrations
-[9]: /logs
-[10]: /integrations/apache/#setup
-[11]: /integrations/http_check/#setup
+[1]: /getting_started/integrations/#configuring-agent-integrations
+[2]: /logs
+[3]: /integrations/ceph
+[4]: /integrations/varnish/#autodiscovery
+[5]: /integrations/postfix
+[6]: /integrations/cassandra/#agent-check-cassandra-nodetool
+[7]: /integrations/gunicorn
+[8]: /help
+[9]: /integrations/apache/#setup
+[10]: /integrations/http_check/#setup
