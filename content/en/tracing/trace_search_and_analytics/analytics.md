@@ -85,6 +85,15 @@ The top **pc99** **duration** of **Service**
 
 {{< img src="tracing/trace_search_and_analytics/analytics/top_list_example.png" alt="top list example" responsive="true" style="width:90%;">}}
 
+### Table
+
+Visualize the top values from a [facet][1] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update search query or drill through traces corresponding to either dimension.
+
+The following Table Log Analytics shows:
+The evolution of the **top 10 Status Codes** according to their **Throughput**, along with the average **Duration** and over the last 15 minutes.
+
+{{< img src="tracing/trace_search_and_analytics/analytics/trace_table_example.png" alt="top list example" responsive="true" style="width:90%;">}}
+
 ## Related Traces
 
 Select or click on a section of the graph to either zoom in the graph or see the list of traces corresponding to your selection:
