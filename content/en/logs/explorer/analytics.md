@@ -117,6 +117,21 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 [1]: /logs/explorer/?tab=facets#setup
 [2]: /logs/explorer/?tab=measures#setup
 {{% /tab %}}
+
+{{% tab "Table" %}}
+
+Visualize the top values from a [facet][1] according to a chosen [measure][2] (the first measure you choose in the list). And display the value of additional measures for elements appearing in this top.
+
+The following Table Log Analytics shows:
+The evolution of the **top 10 Status Codes** according to the **Throughput**, along with the average **average Execution Time** over the last 15 minutes.
+
+{{< img src="logs/explorer/analytics/table_example.png" alt="table example" responsive="true" style="width:90%;">}}
+
+
+[1]: /logs/explorer/?tab=facets#setup
+[2]: /logs/explorer/?tab=measures#setup
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Related logs
