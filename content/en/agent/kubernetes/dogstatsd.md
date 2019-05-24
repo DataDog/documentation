@@ -102,7 +102,9 @@ With this, any pod running your application is able to send DogStatsD metrics vi
 
 ## Origin detection over UDP
 
-Origin detection is a method to detect which pod DogStatsD packets are coming from. It consists of DogStatsD clients attaching an internal tag, `entity_id`, to points. The value of this tag is the content of the `DD_ENTITY_ID` environment variable, which is the pod's UID. (Note: if this variable does not exist, origin detection is disabled.) The DogStatsD server extracts this internal tag and accesses a local cache to get the list of tags associated with this pod; these tags are then added to the tag list.
+Origin detection allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received via UDP are tagged by the same container tags as Autodiscovery metrics.
+
+**Note**: as an alternative to UDP, you may also use [Unix Domain Sockets][18].
 
 To enable origin detection over UDP, add the following lines to your application manifest: 
 
@@ -200,3 +202,4 @@ func InfoHandler(rw http.ResponseWriter, req *http.Request) {
 [15]: /developers/libraries/#api-and-dogstatsd-client-libraries
 [16]: https://github.com/DataDog/datadog-go
 [17]: https://gist.github.com/johnaxel/fe50c6c73442219c48bf2bebb1154f91
+[18]: /developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
