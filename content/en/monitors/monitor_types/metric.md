@@ -76,6 +76,7 @@ further_reading:
 5. Select your **evaluation_delay** Time (in seconds) to delay evaluation, as a non-negative integer. For example, if the value is set to 300 (5min), the time frame is set to last_5m and the time is 7:00, the monitor evaluates data from 6:50 to 6:55. This is useful for AWS CloudWatch and other backfilled metrics to ensure the monitor always has data during evaluation.
 
 6. Optionally **notify on no data** after a configurable time frame. At the minimum, your chosen time frame must be greater than 2x the alerting window. For example, if you are alerting over the last 5 minutes then you would need to wait at least 10 minutes before notifying on missing data.
+*Note:* No Data Alerts have a default max of 24 hours. Please reach out to support to discuss increasing this value.
 
 7. Opt to **automatically resolve the monitor from a triggered state**.
     In general you'll want to leave this option off as you only want an alert to be resolved when it's fixed.
