@@ -36,14 +36,14 @@ The configuration files are static, and any network-related options configured w
 
 The overall process of Datadog Agent Autodiscovery is:
 
-1. **Load Integration template**: When the Agent starts with Autodiscovery enabled, it loads integration templates from all [available template sources][2]; along with the [Autodiscovery container identifiers][3]. Static configuration files aren't suitable for checks that collect data from ever-changing network endpoints like host or ports, so Autodiscovery uses [**Template Variables**][4] for integration template configuration. Those integration template configurations can be loaded into the Agent in 4 main ways:
+1. **Create and Load Integration template**: When the Agent starts with Autodiscovery enabled, it loads integration templates from all [available template sources][2]; along with the [Autodiscovery container identifiers][3]. Static configuration files aren't suitable for checks that collect data from ever-changing network endpoints like host or ports, so Autodiscovery uses [**Template Variables**][4] for integration template configuration. Those integration template configurations can be loaded into the Agent in 4 main ways:
 
   * [Using a configuration file mounted within the Agent][5]
   * [Using Key-Value Store][6]
   * [Using Kubernetes Annotations][7]
   * [Using Docker Labels][8]
 
-2. **Configure integration templates**: Unlike in a traditional Agent setup, the Agent doesn't run all checks all the time; it decides which checks to enable by inspecting all containers running on the same host as the Agent and the corresponding loaded integration templates. The Agent then watches for Docker events&mdash;container creation, destruction, starts, and stops&mdash;and enables, disables, and regenerates static check configurations on such events. As the Agent inspects each running container, it checks if the container matches any of the [Autodiscovery container identifiers][3] from any loaded integration templates. For each match, the Agent generates a static check configuration by substituting the [Template Variables][9] with the matching container's specific values. Then it enables the check using the static configuration.
+2. **Apply an integration template to a specific container**: Unlike in a traditional Agent setup, the Agent doesn't run all checks all the time; it decides which checks to enable by inspecting all containers running on the same host as the Agent and the corresponding loaded integration templates. The Agent then watches for Docker events&mdash;container creation, destruction, starts, and stops&mdash;and enables, disables, and regenerates static check configurations on such events. As the Agent inspects each running container, it checks if the container matches any of the [Autodiscovery container identifiers][3] from any loaded integration templates. For each match, the Agent generates a static check configuration by substituting the [Template Variables][9] with the matching container's specific values. Then it enables the check using the static configuration.
 
 ## Further Reading
 
