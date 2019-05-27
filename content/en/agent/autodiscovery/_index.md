@@ -78,10 +78,10 @@ config_providers:
 
 **Note**: For Kubernetes users, both a [CRI integration][1] and a [CRI-O integration][2] are available.
 
-[1]: 
-[2]: 
+[1]: /integrations/cri
+[2]: /integrations/crio
 {{% /tab %}}
-{{% tab "ECS" %}}
+{{% tab "ECS Fargate" %}}
 
 ```yaml
 listeners:

@@ -38,7 +38,7 @@ Depending of your platform, not all template variables might be supported:
 | Platform    | Auto-discovery identifiers  | Host | Port | Tag | Pid | Env | Hostname |
 | ----------- | ---                         | ---  | ---  | --- | --- | --- | ---      |
 | Docker      | ✅                          | ✅   | ✅   | ✅  | ✅  | ✅  | ✅      |
-| ECS         | ✅                          | ✅   | ❌   | ✅  | ❌  | ✅  | ❌      |
+| ECS Fargate | ✅                          | ✅   | ❌   | ✅  | ❌  | ✅  | ❌      |
 | Kubernetes  | ✅                          | ✅   | ✅   | ✅  | ❌  | ✅  | ❌      |
 
 
