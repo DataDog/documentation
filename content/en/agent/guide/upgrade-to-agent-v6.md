@@ -20,8 +20,8 @@ Agent 6 is the latest major version of the Datadog Agent. The big difference bet
   * It has an all around decreased footprint
 
 * Agent 6 uses [two additional ports][1]:
-    * `5000` to expose its runtime metrics
-    * `5001` for [its CLI/GUI commands][2].
+    * `5000` to expose its runtime metrics.
+    * `5001` for the [Agent CLI/GUI commands][2].
 
     **Note**: You can specify different ports for `expvar_port` and `cmd_port` in the `datadog.yaml` file.
 
