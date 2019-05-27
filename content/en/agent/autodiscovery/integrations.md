@@ -55,7 +55,7 @@ These integration templates may suit you in basic cases, but if you need to cust
 
 An alternative approach would be to:
 
-1. Create a `autodiscovery.d/<CUSTOM_FILE_NAME>.yaml` file on your host.
+1. Create a `autodiscovery.d/<INTEGRATION_NAME>.d/conf.yaml` file on your host.
 2. Mount this file inside the `conf.d/<INTEGRATION_NAME>.d/` folder of the containerized Agent.
 
 Your auto-configuration file should have the following format:
