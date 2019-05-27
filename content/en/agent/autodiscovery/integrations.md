@@ -31,7 +31,8 @@ Each tab in sections below shows a different way to apply Integration templates 
 * [Using Docker Labels](?tab=dockerlabel)
 
 If you provide a template for the same Integration via multiple template sources, the Agent looks for templates in the following order (using the first one it finds):
-* Kubernetes annotations
+
+* Kubernetes annotations / Docker Labels
 * Files
 
 **Note**: Some supported integrations requires additional steps for Autodiscovery to work: [Ceph][3], [Varnish][4], [Postfix][5], [Cassandra Nodetools][6], and [Gunicorn][7]. Contact [Datadog support][8] for assistance.
