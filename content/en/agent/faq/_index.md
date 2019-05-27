@@ -19,9 +19,8 @@ aliases:
 * [Forwarder logs contain 599 response code][10]
 * [How is the 'system.mem.used' metric calculated?][11]
 * [Why should I install the Datadog Agent on my cloud instances?][12]
-* [The Datadog Agent for Logs or Traces Only][13]
-* [How do I use Kubernetes secrets to set my API key?][14]
-* [Datadog Windows Agent user][15]
+* [How do I use Kubernetes secrets to set my API key?][13]
+* [Datadog Windows Agent user][14]
 
 [1]: /agent/faq/host-metrics-with-the-container-agent
 [2]: /agent/faq/agent-apm-metrics
@@ -35,6 +34,5 @@ aliases:
 [10]: /agent/faq/forwarder-logs-contain-599-response-code
 [11]: /agent/faq/how-is-the-system-mem-used-metric-calculated
 [12]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances
-[13]: /agent/faq/the-datadog-agent-for-logs-or-traces-only
-[14]: /agent/faq/kubernetes-secrets
-[15]: /agent/faq/windows-agent-ddagent-user
+[13]: /agent/faq/kubernetes-secrets
+[14]: /agent/faq/windows-agent-ddagent-user
