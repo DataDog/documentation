@@ -45,6 +45,23 @@ The overall process of Datadog Agent Autodiscovery is:
 
 2. **Apply an integration template to a specific container**: Unlike in a traditional Agent setup, the Agent doesn't run all checks all the time; it decides which checks to enable by inspecting all containers running on the same host as the Agent and the corresponding loaded integration templates. The Agent then watches for Docker events&mdash;container creation, destruction, starts, and stops&mdash;and enables, disables, and regenerates static check configurations on such events. As the Agent inspects each running container, it checks if the container matches any of the [Autodiscovery container identifiers][3] from any loaded integration templates. For each match, the Agent generates a static check configuration by substituting the [Template Variables][9] with the matching container's specific values. Then it enables the check using the static configuration.
 
+## How to set it up
+
+**The Datadog Docker Agent automatically auto-discovers other containers**.
+
+To use Autodiscovery on the Datadog **Host** Agent, add these settings to your [`datadog.yaml` configuration file][10]:
+
+```
+# Autodiscovery settings for Datadog Host Agent
+listeners:
+  - name: docker
+config_providers:
+  - name: docker
+    polling: true
+```
+
+**Note**: For Kubernetes users, both a [CRI integration][11] and a [CRI-O integration][12] are available.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -58,3 +75,6 @@ The overall process of Datadog Agent Autodiscovery is:
 [7]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
 [8]: /agent/autodiscovery/integrations/?tab=dockerlabel#configuration
 [9]: /agent/autodiscovery/template_variables
+[10]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[11]: /integrations/cri
+[12]: /integrations/crio
