@@ -11,7 +11,7 @@ further_reading:
   text: "Manage which Container to include in the Agent Autodiscovery"
 ---
 
-Autodiscovery Container Identifiers or `ad_identifiers` are used when configuring the Agent Autodiscovery with files. The use case solved is to properly match the configuration file defined for an Autodiscovery Integration with a given container.
+Use Autodiscovery Container Identifiers or `ad_identifiers` when configuring the Agent Autodiscovery with files. This gives you the ability to match the configuration file defined for an Autodiscovery Integration with a given container.
 
 The general format of an Autodiscovery file configuration is:
 
@@ -26,11 +26,11 @@ instances:
   <INSTANCES_CONFIG>
 ```
 
-With the other types of configuration: Key-Value, Docker labels, or Kubernetes pod annotations, the matching between an integration configuration and the corresponding container is based on the `<CONTAINER_IDENTIFIER>` included in the labels/annotations, but with file configuration there is a need of properly matching the configuration file with the corresponding container.
+With  Key-Value, Docker labels, or Kubernetes pod annotations, the matching between an integration configuration and the corresponding container is based on the `<CONTAINER_IDENTIFIER>` included in the labels/annotations.
 
 This can be achieved in two ways:
 
-1. Use the **container short image** name as `<INTEGRATION_AUTODISCOVEY_IDENTIFIER>` in order to apply the configuration file to it.
+1. Use the **container short image** name as `<INTEGRATION_AUTODISCOVEY_IDENTIFIER>` to apply the configuration file to it.
 2. Use a custom `<INTEGRATION_AUTODISCOVEY_IDENTIFIER>` and define the corresponding ID with the `com.datadoghq.ad.check.id:` label on your container.
 
 For instance, the following Autodiscovery integration template configuration file used by the Agent:
