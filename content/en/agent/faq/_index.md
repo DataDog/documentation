@@ -20,9 +20,8 @@ aliases:
 * [How is the 'system.mem.used' metric calculated?][11]
 * [Why should I install the Datadog Agent on my cloud instances?][12]
 * [The Datadog Agent for Logs or Traces Only][13]
-* [Install the Agent with AWS SSM][14]
-* [How do I use Kubernetes secrets to set my API key?][15]
-* [Datadog Windows Agent user][16]
+* [How do I use Kubernetes secrets to set my API key?][14]
+* [Datadog Windows Agent user][15]
 
 [1]: /agent/faq/host-metrics-with-the-container-agent
 [2]: /agent/faq/agent-apm-metrics
@@ -37,6 +36,5 @@ aliases:
 [11]: /agent/faq/how-is-the-system-mem-used-metric-calculated
 [12]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances
 [13]: /agent/faq/the-datadog-agent-for-logs-or-traces-only
-[14]: /agent/faq/install-the-agent-with-aws-ssm
-[15]: /agent/faq/kubernetes-secrets
-[16]: /agent/faq/windows-agent-ddagent-user
+[14]: /agent/faq/kubernetes-secrets
+[15]: /agent/faq/windows-agent-ddagent-user
