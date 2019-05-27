@@ -49,20 +49,14 @@ Since v6.2.0 (and v5.24.0), the default templates use the default port for the m
 
 These integration templates may suit you in basic cases, but if you need to customize your Datadog Integration configurations: such as enabling extra options, using different container identifiers, or using Template Variables indexing, you have to write your own auto-configuration files and use them with the Datadog Containerized Agent. To do this:
 
-1. Create a `autodiscovery.d/` folder on your host.
-2. Add your custom auto-configuration named `<INTEGRATION_NAME>.yaml`file to this folder.
-3. Mount this directory into the containerized Agent `conf.d/` folder. Note that on Kubernetes your can add them [using ConfigMaps][14].
-
-An alternative approach would be to:
-
-1. Create a `autodiscovery.d/<INTEGRATION_NAME>.d/conf.yaml` file on your host.
-2. Mount this file inside the `conf.d/<INTEGRATION_NAME>.d/` folder of the containerized Agent.
+1. Create a `autodiscovery.d/<INTEGRATION_NAME>.d/conf.yaml` file on your host with your custom auto-configuration in it.
+2. Mount this file inside the `conf.d/<INTEGRATION_NAME>.d/` folder of the containerized Agent. Note that on Kubernetes your can add them [using ConfigMaps][14].
 
 Your auto-configuration file should have the following format:
 
 ```
 ad_identifier:
-  <INTEGRATION_AUTODISCOVEY_IDENTIFIER>
+  <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 
 init_config:
   <INIT_CONFIG>
@@ -70,6 +64,8 @@ init_config:
 instances:
   <INSTANCES_CONFIG>
 ```
+
+See the dedicated [Autodiscovery Container Identifier][15] documentation to understand what the `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` refers to.
 
 **Note**: You don't need to set up the `<INTEGRATIONS_NAME>` there, since the Agent inferred it from the file name directly.
 
@@ -87,6 +83,7 @@ instances:
 [12]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
 [13]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
 [14]: /agent/kubernetes/integrations/#configmap
+[15]: /agent/autodiscovery/ad_identifiers
 {{% /tab %}}
 {{% tab "Key-value Store" %}}
 
@@ -142,7 +139,7 @@ With the key-value store enabled as a template source, the Agent looks for templ
     ...
 ```
 
-**Note**: `<CONTAINER_IDENTIFIER>` refers here to XXXXXXXXXXX
+**Note**: In order to apply a specific configuration to a given container, Autodiscovery identifies containers by **image** when using the key-value stores. That is, it looks to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].image`.
 
 [1]: /integrations/consul
 [2]: /agent/guide/agent-commands

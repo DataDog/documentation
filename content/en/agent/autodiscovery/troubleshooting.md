@@ -14,10 +14,10 @@ further_reading:
   text: "Send an Agent Flare"
 ---
 
-To start troubleshooting the Agent Autodiscovery, run the `configcheck` init script command:
+To start troubleshooting the Docker Agent Autodiscovery, run the `configcheck` init script command:
 
 ```shell
-docker exec -it <AGENT_CONTAINER_NAME> datadog-agent configcheck -v
+docker exec -it <AGENT_CONTAINER_NAME> agent configcheck -v
 ```
 
 **Note**: The `-v` option allows you to see all templates that are loaded but couldn't be resolved:

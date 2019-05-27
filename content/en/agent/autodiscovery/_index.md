@@ -43,7 +43,7 @@ The overall process of Datadog Agent Autodiscovery is:
   * [Using Kubernetes Annotations][7]
   * [Using Docker Labels][8]
 
-2. **Apply an integration template to a specific container**: Unlike in a traditional Agent setup, the Agent doesn't run all checks all the time; it decides which checks to enable by inspecting all containers running on the same host as the Agent and the corresponding loaded integration templates. The Agent then watches for Docker events&mdash;container creation, destruction, starts, and stops&mdash;and enables, disables, and regenerates static check configurations on such events. As the Agent inspects each running container, it checks if the container matches any of the [Autodiscovery container identifiers][3] from any loaded integration templates. For each match, the Agent generates a static check configuration by substituting the [Template Variables][9] with the matching container's specific values. Then it enables the check using the static configuration.
+2. **Apply an integration template to a specific container**: Unlike in a traditional Agent setup, the Agent doesn't run all checks all the time; it decides which checks to enable by inspecting all containers running on the same host as the Agent and the corresponding loaded integration templates. The Agent then watches for Kubernetes/Docker events&mdash;container creation, destruction, starts, and stops&mdash;and enables, disables, and regenerates static check configurations on such events. As the Agent inspects each running container, it checks if the container matches any of the [Autodiscovery container identifiers][3] from any loaded integration templates. For each match, the Agent generates a static check configuration by substituting the [Template Variables][9] with the matching container's specific values. Then it enables the check using the static configuration.
 
 ## How to set it up
 
@@ -51,8 +51,10 @@ The overall process of Datadog Agent Autodiscovery is:
 
 To use Autodiscovery on the Datadog **Host** Agent, add these settings to your [`datadog.yaml` configuration file][10]:
 
-```
-# Autodiscovery settings for Datadog Host Agent
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+```yaml
 listeners:
   - name: docker
 config_providers:
@@ -60,7 +62,37 @@ config_providers:
     polling: true
 ```
 
-**Note**: For Kubernetes users, both a [CRI integration][11] and a [CRI-O integration][12] are available.
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+```yaml
+listeners:
+  - name: kubelet
+config_providers:
+  - name: kubelet
+    polling: true
+  # needed to support legacy docker label config templates
+  - name: docker
+    polling: true
+```
+
+**Note**: For Kubernetes users, both a [CRI integration][1] and a [CRI-O integration][2] are available.
+
+[1]: 
+[2]: 
+{{% /tab %}}
+{{% tab "ECS" %}}
+
+```yaml
+listeners:
+  - name: ecs
+config_providers:
+  - name: ecs
+    polling: true
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
@@ -76,5 +108,3 @@ config_providers:
 [8]: /agent/autodiscovery/integrations/?tab=dockerlabel#configuration
 [9]: /agent/autodiscovery/template_variables
 [10]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[11]: /integrations/cri
-[12]: /integrations/crio

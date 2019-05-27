@@ -46,7 +46,7 @@ annotations:
 
 ### Extract Node Labels as Tags
 
-Starting with Agent v6.10+, the Agent can collect labels for a given node and use them as tags to attached to all metrics emitted by all pods on this node:
+Starting with Agent v6.0+, the Agent can collect labels for a given node and use them as tags to attach to all metrics emitted by all pods on this node:
 
 {{< tabs >}}
 {{% tab "Host Agent" %}}
@@ -72,13 +72,13 @@ kubernetes_node_labels_as_tags:
 To extract a given node label `<NODE_LABEL>` and transform it as a Tag Key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```shell
-DD_NODE_LABELS_AS_TAGS='{"<NODE_LABEL>": "<TAG_KEY>"}'
+DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"<NODE_LABEL>": "<TAG_KEY>"}'
 ```
 
 For example, you could set up:
 
 ```shell
-DD_NODE_LABELS_AS_TAGS='{"app":"kube_app"}'
+DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
 {{% /tab %}}
@@ -86,7 +86,7 @@ DD_NODE_LABELS_AS_TAGS='{"app":"kube_app"}'
 
 ### Extract Pod Labels as Tags
 
-Starting with Agent v6.10+, the Agent can collect labels for a given pod and use them as tags to attached to all metrics emitted by this pod:
+Starting with Agent v6.0+, the Agent can collect labels for a given pod and use them as tags to attach to all metrics emitted by this pod:
 
 {{< tabs >}}
 {{% tab "Host Agent" %}}
@@ -126,7 +126,7 @@ DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app"}'
 
 ### Extract Pod Annotations as Tags
 
-Starting with Agent v6.10+, the Agent can collect annotations for a given pod and use them as tags to attached to all metrics emitted by this pod:
+Starting with Agent v6.0+, the Agent can collect annotations for a given pod and use them as tags to attach to all metrics emitted by this pod:
 
 {{< tabs >}}
 {{% tab "Host Agent" %}}
@@ -134,14 +134,14 @@ Starting with Agent v6.10+, the Agent can collect annotations for a given pod an
 To extract a given pod annotation `<POD_ANNOTATION>` and transform it as a Tag Key `<TAG_KEY>` within Datadog, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
 ```yaml
-kubernetes_pod_labels_as_tags:
+kubernetes_pod_annotations_as_tags:
   <POD_ANNOTATION>: <TAG_KEY>
 ```
 
 For example, you could set up:
 
 ```yaml
-kubernetes_pod_labels_as_tags:
+kubernetes_pod_annotations_as_tags:
   app: kube_app
 ```
 
@@ -168,7 +168,7 @@ DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"app":"kube_app"}'
 
 ### Extract Labels as Tags
 
-Starting with Agent v6.5+, the Agent can collect Labels for a given container and use them as tags to attached to all data emitted by this container.
+Starting with Agent v6.0+, the Agent can collect Labels for a given container and use them as tags to attach to all data emitted by this container.
 
 {{< tabs >}}
 {{% tab "Host Agent" %}}
@@ -208,7 +208,7 @@ DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 
 ### Extract Environment Variables as Tags
 
-Starting with Agent v6.5+, the Agent can collect Environment variables for a given container and use them as tags to attached to all data emitted by this container.
+Starting with Agent v6.0+, the Agent can collect Environment variables for a given container and use them as tags to attach to all data emitted by this container.
 
 {{< tabs >}}
 {{% tab "Host Agent" %}}

@@ -51,12 +51,12 @@ DD_AC_EXCLUDE = "image:<IMAGE_NAME>"
 To remove a given docker container with the name `<NAME>` from autodiscovery  add the following environment variable to the Datadog Agent:
 
 ```shell
-DD_AC_EXCLUDE = "name:<IMAGE_NAME>"
+DD_AC_EXCLUDE = "name:<NAME>"
 ```
 
 For instance, use this excluding rule to exclude the Agent container itself:
 
-```
+```shell
 DD_AC_EXCLUDE = "name:dd-agent"
 ```
 
@@ -107,7 +107,7 @@ DD_AC_INCLUDE = "image:<IMAGE_NAME>"
 To remove a given docker container with the name `<NAME>` from autodiscovery  add the following environment variable to the Datadog Agent:
 
 ```shell
-DD_AC_INCLUDE = "name:<IMAGE_NAME>"
+DD_AC_INCLUDE = "name:<NAME>"
 ```
 
 For example, if you only want to monitor `ubuntu` or `debian` images, and exclude the rest, specify:

@@ -17,7 +17,7 @@ The general format of an Autodiscovery file configuration is:
 
 ```
 ad_identifier:
-  <INTEGRATION_AUTODISCOVEY_IDENTIFIER>
+  <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 
 init_config:
   <INIT_CONFIG>
@@ -30,8 +30,8 @@ With  Key-Value, Docker labels, or Kubernetes pod annotations, the matching betw
 
 This can be achieved in two ways:
 
-1. Use the **container short image** name as `<INTEGRATION_AUTODISCOVEY_IDENTIFIER>` to apply the configuration file to it.
-2. Use a custom `<INTEGRATION_AUTODISCOVEY_IDENTIFIER>` and define the corresponding ID with the `com.datadoghq.ad.check.id:` label on your container.
+1. Use the **container short image** name as `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` to apply the configuration file to it.
+2. Use a custom `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` and define the corresponding ID with the `com.datadoghq.ad.check.id:` label on your container.
 
 For instance, the following Autodiscovery integration template configuration file used by the Agent:
 
@@ -46,7 +46,7 @@ logs:
   service: webapp
 ```
 
-Matches **Any** `httpd` image on your host/pod. Suppose you have one container running `library/httpd:latest` and another running `<WHATEVER>/httpd:v2`. Autodiscovery applies the above template to both containers since you have to provide short names for container images, e.g. `httpd`, NOT `library/httpd:latest`:
+Matches **ANY** `httpd` image on your host. Suppose you have one container running `library/httpd:latest` and another running `<WHATEVER>/httpd:v2`. Autodiscovery applies the above template to both containers since you have to provide short names for container images, e.g. `httpd`, NOT `library/httpd:latest`:
 
 As a consequence **Autodiscovery cannot distinguish between identically named images from different sources or with different tags**.
 
@@ -54,7 +54,7 @@ If this is too limiting&mdash;if you need to apply different check configuration
 
 ```
 ad_identifier:
-  <INTEGRATION_AUTODISCOVEY_IDENTIFIER>
+  <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 
 init_config:
   <INIT_CONFIG>
@@ -66,7 +66,7 @@ instances:
 To **ONLY**  apply this Autodiscovery configuration file to your container, add to it the following label:
 
 ```
-com.datadoghq.ad.check.id: <INTEGRATION_AUTODISCOVEY_IDENTIFIER>
+com.datadoghq.ad.check.id: <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 ```
 
 The Agent then knows to apply the Autodiscovery configuration file to this specific container and not to another one.
