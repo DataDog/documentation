@@ -121,11 +121,11 @@ DD_AC_INCLUDE = "image:ubuntu, image:debian"
 {{< /tabs >}}
 
 
-### Paused containers
+### Pause containers
 
-Datadog Agent excludes Kubernetes and OpenShift paused containers by default. They are still counted in the container count just like excluded containers though.
+Datadog Agent excludes Kubernetes and OpenShift pause containers by default. They are still counted in the container count just like excluded containers though.
 
-To disable this behavior and include paused containers in the Autodiscovery perimeter, set the parameter `exclude_pause_container` to `false` in the [Agent `datadog.yaml` configuration file][1] or through the Agent environment variable `DD_EXCLUDE_PAUSE_CONTAINER="false"`
+To disable this behavior and include pause containers in the Autodiscovery perimeter, set the parameter `exclude_pause_container` to `false` in the [Agent `datadog.yaml` configuration file][1] or through the Agent environment variable `DD_EXCLUDE_PAUSE_CONTAINER="false"`
 
 ## Further Reading
 
