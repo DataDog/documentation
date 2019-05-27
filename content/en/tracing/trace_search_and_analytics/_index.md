@@ -448,6 +448,24 @@ $span->setTag(Tag::ANALYTICS_KEY, true);
 
 ```
 
+{{% /tab %}}
+{{% tab "C++" %}}
+
+Applications with custom instrumentation can enable trace analytics by setting the `analytics_event` tag on the service root span:
+
+```cpp
+...
+#include <datadog/tags.h>
+...
+auto tracer = ...
+auto span = tracer->StartSpan("operation_name");
+// A boolean value of true enables Trace Search & Analytics for the span,
+// with a sample rate of 1.0.
+span->SetTag(datadog::tags::analytics_event, true);
+// A double value between 0.0 and 1.0 enables Trace Search & Analytics
+// and sets the sample rate to the provided value.
+span->SetTag(datadog::tags::analytics_event, 0.5);
+```
 
 {{% /tab %}}
 {{< /tabs >}}

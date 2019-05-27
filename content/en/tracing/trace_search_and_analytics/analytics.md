@@ -35,19 +35,19 @@ Switch between the Trace search and the Trace Analytics modes by clicking on the
 
 Use the query to control what's displayed in your Trace Analytic:
 
-1. Choose a [Measure][1] or [Facet][2] to analyze. [Measure][1] lets you choose the aggregation function whereas [Facet][2] displays the unique count.
+1. Choose the `Duration` metric or a [Facet][1] to analyze. Selecting the `Duration` metric lets you choose the aggregation function whereas [Facet][1] displays the unique count.
 
     {{< img src="tracing/trace_search_and_analytics/analytics/choose_measure_facet.png" alt="choose measure facet" responsive="true" style="width:50%;">}}
 
-2. Select the aggregation function for the [Measure][1] you want to graph:
+2. Select the aggregation function for the `Duration` metric:
 
     {{< img src="tracing/trace_search_and_analytics/analytics/agg_function.png" alt="aggregation function" responsive="true" style="width:50%;">}}
 
-3. Use [Tag][1] or [Facet][2] to split your Analytic.
+3. Use [Tag][2] or [Facet][1] to split your Analytic.
 
     {{< img src="tracing/trace_search_and_analytics/analytics/split_by.png" alt="split by" responsive="true" style="width:50%;">}}
 
-4. Choose to display either the *X* **top** or **bottom** values according to the selected [Measure][1].
+4. Choose to display either the *X* **top** or **bottom** values according to the selected [Facet][1] or `Duration`.
 
     {{< img src="tracing/trace_search_and_analytics/analytics/top_bottom_button.png" alt="top bottom button" responsive="true" style="width:20%;">}}
 
@@ -69,7 +69,7 @@ Available visualizations:
 
 ### Timeseries
 
-Visualize the evolution of a single [Measure][1] (or a [Facet][2] unique count of values) over a selected time frame, and (optionally) split by an available [Facet][2].
+Visualize the evolution of the `Duration` metric (or a [Facet][1] unique count of values) over a selected time frame, and (optionally) split by an available [Facet][1].
 
 The following timeseries Trace Analytic shows:
 The evolution of the **pc99** **duration** by steps of **5min** for each **Service**
@@ -78,12 +78,21 @@ The evolution of the **pc99** **duration** by steps of **5min** for each **Servi
 
 ### Top List
 
-Visualize the top values from a [Facet][2] according to the chosen [Measure][1]:
+Visualize the top values from a [Facet][1] according to their `Duration` (or a [Facet][1] unique count of values):
 
 The following Top List Trace Analytic shows:
 The top **pc99** **duration** of **Service**
 
 {{< img src="tracing/trace_search_and_analytics/analytics/top_list_example.png" alt="top list example" responsive="true" style="width:90%;">}}
+
+### Table
+
+Visualize the top values from a [facet][1] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update search query or drill through traces corresponding to either dimension.
+
+The following Table Log Analytics shows:
+The evolution of the **top 10 Status Codes** according to their **Throughput**, along with the average **Duration** and over the last 15 minutes.
+
+{{< img src="tracing/trace_search_and_analytics/analytics/trace_table_example.png" alt="top list example" responsive="true" style="width:90%;">}}
 
 ## Related Traces
 
@@ -112,8 +121,8 @@ Export [Trace Analytics][6] from the Trace search or build them directly in your
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_search_and_analytics/search/#measures
-[2]: /tracing/trace_search_and_analytics/search/#facets
+[1]: /tracing/trace_search_and_analytics/search/#facets
+[2]: /tracing/trace_search_and_analytics/search/#measures
 [3]: /monitors/monitor_types/apm
 [4]: /graphing/dashboards/timeboard
 [5]: /help

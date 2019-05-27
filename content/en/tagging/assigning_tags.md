@@ -77,6 +77,9 @@ When installing the containerized Datadog Agent, set your host tags using the en
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
 DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
+
+When using `DD_KUBERNETES_POD_LABELS_AS_TAGS`, note that you can use wildcards in the format `{"foo", "bar_%%label%%"}`. For instance, `{"app*", "kube_%%label%%"}` resolves to the tag name `kube_application` for the label `application`. Further, `{"*", "kube_%%label%%"}` adds all pod labels as tags prefixed with `kube_`.
+
 When using the `DD_DOCKER_LABELS_AS_TAGS` variable within a Docker Swarm `docker-compose.yaml` file, remove the apostrophes, for example:
 
 ```shell

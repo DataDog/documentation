@@ -1,7 +1,7 @@
 ---
 title: Synthetics
 type: apicontent
-order: 27
+order: 29
 external_redirect: /api/#synthetics
 ---
 

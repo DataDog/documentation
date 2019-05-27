@@ -1,7 +1,7 @@
 ---
 title: Get user
 type: apicontent
-order: 32.2
+order: 34.2
 external_redirect: /api/#get-user
 ---
 
