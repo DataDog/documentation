@@ -51,7 +51,7 @@ These integration templates may suit you in basic cases, but if you need to cust
 
 1. Create a `autodiscovery.d/` folder on your host.
 2. Add your custom auto-configuration named `<INTEGRATION_NAME>.yaml`file to this folder.
-3. Mount this directory into the containerized Agent `conf.d/` folder. Note that On Kubernetes your can add them [using ConfigMaps][14].
+3. Mount this directory into the containerized Agent `conf.d/` folder. Note that on Kubernetes your can add them [using ConfigMaps][14].
 
 An alternative approach would be to:
 
@@ -250,7 +250,7 @@ services:
 {{% /tab %}}
 {{< /tabs >}}
 
-Find below two sections giving examples for all of the previous method:
+Find below two sections giving examples for all of the previous methods:
 
 * [Example Datadog-Redis Integration](#example-datadog-redis-integration)
 * [Example Datadog-Apache and Datadog-HTTP checks Integrations](#example-datadog-apache-and-http-checks-integrations)
@@ -310,7 +310,7 @@ Now let's suppose that your Redis requires an additional `password` when accessi
 {{% /tab %}}
 {{% tab "Key-value Store" %}}
 
-The following etcd commands create an Redis integration template with a custom `password` parameter and tags all its logs with the correct `source` and `service` attributes:
+The following etcd commands create a Redis integration template with a custom `password` parameter and tags all its logs with the correct `source` and `service` attributes:
 
 ```
 etcdctl mkdir /datadog/check_configs/redis
@@ -336,7 +336,7 @@ The following Pod annotation defines the integration template for `redis` contai
 apiVersion: v1
 kind: Pod
 metadata:
-  name: apache
+  name: redis
   annotations:
     ad.datadoghq.com/redis.check_names: |
       [
