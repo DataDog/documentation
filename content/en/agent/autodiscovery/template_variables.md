@@ -23,6 +23,7 @@ Use the following Template Variables when configuring Autodiscovery in order to 
 | `"%%host_<NETWORK NAME>%%"` | Specifies the network name to use, when attached to multiple networks.                                                                                                                                      |
 | `"%%port%%"`                | Uses the highest exposed port **sorted numerically and in ascending order**,<br> e.g. it would return `8443` for a container that exposes ports `80`, `443`, and `8443`.                                    |
 | `"%%port_<NUMBER_X>%%"`     | Uses the `<NUMBER_X>` port **sorted numerically and in ascending order**,<br> e.g. if a container exposes ports `80`, `443`, and `8443`, `"%%port_0%%` refers to port `80`, `"%%port_1%%"` refers to `443`. |
+| `"%%port_<NAME>%%"`     | Uses the port associated with the port name `<NAME>`.                                                                                                                                                           |
 | `"%%pid%%"`                 | Retrieves the container process ID as returned by `docker inspect --format '{{.State.Pid}}' <CONTAINER_NAME>`.                                                                                              |
 | `"%%hostname%%"`            | Retrieves the `hostname` value from the container configuration. Only use it if the `"%%host%%"` variable cannot fetch a reliable IP (example: [ECS awsvpc mode][1]).                                       |
 | `"%%env_<ENV_VAR>%%"`       | Uses the contents of the `$<ENV_VAR>` environment variable **as seen by the Agent process**.                                                                                                                |
@@ -31,6 +32,15 @@ Use the following Template Variables when configuring Autodiscovery in order to 
 
 * For the `"%%host%%"` template variable, in case the Agent is not able to find it, this template variable falls back to the `bridge` network IP.
 * For the `"%%host_<NETWORK NAME>%%"`, if the `<NETWORK_NAME>` specified was not found this template variable behaves like `"%%host%%"`.
+
+Depending of your platform, not all template variables might be supported:
+
+| Platform    | Auto-discovery identifiers  | Host | Port | Tag | Pid | Env | Hostname |
+| ----------- | ---                         | ---  | ---  | --- | --- | --- | ---      |
+| Docker      | ✅                          | ✅   | ✅   | ✅  | ✅  | ✅  | ✅      |
+| ECS         | ✅                          | ✅   | ❌   | ✅  | ❌  | ✅  | ❌      |
+| Kubernetes  | ✅                          | ✅   | ✅   | ✅  | ❌  | ✅  | ❌      |
+
 
 ## Further Reading
 

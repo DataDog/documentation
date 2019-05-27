@@ -25,13 +25,13 @@ Exclude containers from the Agent Autodiscovery perimeter with an exclude rule b
 {{< tabs >}}
 {{% tab "Host Agent" %}}
 
-To remove a given docker container with the image `<IMAGE_NAME>` from autodiscovery add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+To remove a given docker container with the image `<IMAGE_NAME>` from Autodiscovery add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
 ```yaml
 ac_exclude: [image:<IMAGE_NAME>]
 ```
 
-To remove a given docker container with the name `<NAME>` from autodiscovery add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+To remove a given docker container with the name `<NAME>` from Autodiscovery add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
 ```yaml
 ac_exclude: [name:<NAME>]
@@ -42,13 +42,13 @@ ac_exclude: [name:<NAME>]
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
-To remove a given docker container with the image `<IMAGE_NAME>` from autodiscovery  add the following environment variable to the Datadog Agent:
+To remove a given docker container with the image `<IMAGE_NAME>` from Autodiscovery  add the following environment variable to the Datadog Agent:
 
 ```shell
 DD_AC_EXCLUDE = "image:<IMAGE_NAME>"
 ```
 
-To remove a given docker container with the name `<NAME>` from autodiscovery  add the following environment variable to the Datadog Agent:
+To remove a given docker container with the name `<NAME>` from Autodiscovery  add the following environment variable to the Datadog Agent:
 
 ```shell
 DD_AC_EXCLUDE = "name:<NAME>"
@@ -81,13 +81,13 @@ Include containers from the Agent Autodiscovery perimeter with an include rule b
 {{< tabs >}}
 {{% tab "Host Agent" %}}
 
-To include a given docker container with the image `<IMAGE_NAME>` from autodiscovery add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+To include a given docker container with the image `<IMAGE_NAME>` from Autodiscovery add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
 ```yaml
 ac_include: [image:<IMAGE_NAME>]
 ```
 
-To include a given docker container with the name `<NAME>` from autodiscovery add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+To include a given docker container with the name `<NAME>` from Autodiscovery add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
 ```yaml
 ac_include: [name:<NAME>]
@@ -98,13 +98,13 @@ ac_include: [name:<NAME>]
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
-To remove a given docker container with the image `<IMAGE_NAME>` from autodiscovery  add the following environment variable to the Datadog Agent:
+To remove a given docker container with the image `<IMAGE_NAME>` from Autodiscovery  add the following environment variable to the Datadog Agent:
 
 ```shell
 DD_AC_INCLUDE = "image:<IMAGE_NAME>"
 ```
 
-To remove a given docker container with the name `<NAME>` from autodiscovery  add the following environment variable to the Datadog Agent:
+To remove a given docker container with the name `<NAME>` from Autodiscovery  add the following environment variable to the Datadog Agent:
 
 ```shell
 DD_AC_INCLUDE = "name:<NAME>"

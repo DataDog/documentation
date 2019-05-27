@@ -20,7 +20,7 @@ To start troubleshooting the Docker Agent Autodiscovery, run the `configcheck` i
 docker exec -it <AGENT_CONTAINER_NAME> agent configcheck -v
 ```
 
-**Note**: The `-v` option allows you to see all templates that are loaded but couldn't be resolved:
+**Note**: The `-v` option allows you to see all templates including the one that are unresolved.
 
 For example, the following example is a valid Autodiscovery configuration for a Redis template being loaded from a Docker label annotation&mdash;not the default `redisdb.d/auto_conf.yaml` file:
 

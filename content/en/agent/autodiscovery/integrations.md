@@ -273,7 +273,7 @@ instances:
 
 It looks like a minimal [Redis integration configuration][1], but notice the `ad_identifiers` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `redis` image.
 
-**See the dedicated [Autodiscovery Identifier][2] documentation to learn more.
+**See the dedicated [Autodiscovery Identifier][2] documentation to learn more.**
 
 Now let's suppose that your Redis requires an additional `password` when accessing his stats endpoint and you want to correctly flag logs coming out of it. In order to take into account this new logic:
 
