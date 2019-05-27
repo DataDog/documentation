@@ -81,17 +81,6 @@ config_providers:
 [1]: /integrations/cri
 [2]: /integrations/crio
 {{% /tab %}}
-{{% tab "ECS Fargate" %}}
-
-```yaml
-listeners:
-  - name: ecs
-config_providers:
-  - name: ecs
-    polling: true
-```
-
-{{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading
