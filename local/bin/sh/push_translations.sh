@@ -18,5 +18,5 @@ else
     cat changelist.txt
 
     # command to run pushing translated files here
-    # ./node_modules/.bin/translate -st ./changelist.txt ./translate.yaml "${1}" || fail_step "${FUNCNAME}"
+    ./node_modules/.bin/translate --dryrun -st ./changelist.txt ./translate.yaml "${1}" || fail_step "${FUNCNAME}"
 fi
