@@ -30,7 +30,7 @@ Run the Agent's [status command][8] to verify installation.
 ## Data Collected
 
 ### Metrics
-By default, the Agent collects metrics from the following checks. To collect metrics from other technologies, see the [Integrations][9] page.
+By default, the Agent collects metrics with the following checks. To collect metrics from other technologies, see the [Integrations][9] page.
 
 * [Disk][10]
 * [Network][11]
