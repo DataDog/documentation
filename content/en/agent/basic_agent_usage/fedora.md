@@ -111,4 +111,4 @@ See the instructions on how to [add packages to the embedded Agent][4] for more 
 [1]: https://app.datadoghq.com/account/settings#agent/fedora
 [2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
 [3]: /agent/troubleshooting
-[4]: /agent/faq/custom_python_package
+[4]: /developers/guide/custom-python-package
