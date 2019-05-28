@@ -106,7 +106,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
         *   To mute the alert completely: `{'*': None}`
         *   To mute `role:db` for a short time: `{'role:db': 1412798116}`
 
-    *   **`notify_no_data`** a boolean indicating whether this monitor notifies when data stops reporting. Default: **false**
+    *   **`notify_no_data`** a Boolean indicating whether this monitor notifies when data stops reporting. Default: **false**
 
     *   **`new_host_delay`** Time (in seconds) to allow a host to boot and applications to fully start before starting the evaluation of monitor results. Should be a non negative integer. Default: **300**
 
@@ -114,17 +114,17 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     *   **`timeout_h`** the number of hours of the monitor not reporting data before it automatically resolves from a triggered state. Default: **None**.
 
-    *   **`require_full_window`** a boolean indicating whether this monitor needs a full window of data before it's evaluated. We highly recommend you set this to `False` for sparse metrics, otherwise some evaluations are skipped. Default: **True** for "on average", "at all times" and "in total" aggregation. **False** otherwise.
+    *   **`require_full_window`** a Boolean indicating whether this monitor needs a full window of data before it's evaluated. We highly recommend you set this to `False` for sparse metrics, otherwise some evaluations are skipped. Default: **True** for "on average", "at all times" and "in total" aggregation. **False** otherwise.
 
     *   **`renotify_interval`** the number of minutes after the last notification before a monitor re-notifies on the current status. It only re-notifies if it's not resolved. Default: **None**.
 
     *   **`escalation_message`** a message to include with a re-notification. Supports the '@username' notification we allow elsewhere. Not applicable if `renotify_interval` is `None`. Default: **None**.
 
-    *   **`notify_audit`** a boolean indicating whether tagged users is notified on changes to this monitor. Default: **False**
+    *   **`notify_audit`** a Boolean indicating whether tagged users is notified on changes to this monitor. Default: **False**
 
-    *   **`locked`** a boolean indicating whether changes to to this monitor should be restricted to the creator or admins. Default: **False**
+    *   **`locked`** a Boolean indicating whether changes to to this monitor should be restricted to the creator or admins. Default: **False**
 
-    *   **`include_tags`** a boolean indicating whether notifications from this monitor automatically inserts its triggering tags into the title. Default: **True** Examples:
+    *   **`include_tags`** a Boolean indicating whether notifications from this monitor automatically inserts its triggering tags into the title. Default: **True** Examples:
         *   True: `[Triggered on {host:h1}] Monitor Title`
         *   False: `[Triggered] Monitor Title`
 
