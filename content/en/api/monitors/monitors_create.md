@@ -25,7 +25,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 | integration  | `query alert` or `service check`  |
 | live process | `process alert`                 |
 | logs         | `log alert`                     |
-| metric       | `query alert`                   |
+| metric       | `metric alert`                  |
 | network      | `service check`                 |
 | outlier      | `query alert`                   |
 | process      | `service check`                 |
