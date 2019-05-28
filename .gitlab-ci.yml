@@ -37,20 +37,19 @@ build_preview:
     MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
     UNTRACKED_EXTRAS: "data,content/en/integrations"
   script:
-    - echo "skip"
-#    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
-#    - version_static_assets
-#    - sync_integration_descriptions
-#    - placehold_translations
-#    - build_hugo_site
-#    - build_hugo_site_ja
-#    - minify_html
-#    - collect_static_assets
-#    - push_site_to_s3
-#    - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
-#    - remove_static_from_repo
-#    - create_artifact
-#    - create_artifact_untracked
+    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - version_static_assets
+    - sync_integration_descriptions
+    - placehold_translations
+    - build_hugo_site
+    - build_hugo_site_ja
+    - minify_html
+    - collect_static_assets
+    - push_site_to_s3
+    - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
+    - remove_static_from_repo
+    - create_artifact
+    - create_artifact_untracked
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
@@ -65,15 +64,6 @@ test_preview_link_checks:
     - node /etc/node_modules/link-checker/dd-link-checker.js -e preview -c ${CI_PROJECT_DIR}/local/etc/link-check-config.js
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
-
-push_translations:
-  <<: *base_template
-  stage: post-deploy
-  environment: "preview"
-  script:
-    - ./local/bin/sh/push_translations.sh
-  only:
-   - /.+?\/[a-zA-Z0-9_-]+/
 
 # ================== live ================== #
 build_live:
@@ -133,6 +123,15 @@ manage_translations:on-schedule:
     - if [[ $(date +%u) -lt 6 ]]; then manage_translations "${APIKEY}"; fi
   only:
     - schedules
+
+push_translations:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  script:
+    - ./local/bin/sh/push_translations.sh
+  only:
+   - /.+?\/[a-zA-Z0-9_-]+/
 
 #rollback_live:
 #  <<: *base_template
