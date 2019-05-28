@@ -131,7 +131,7 @@ push_translations:
   script:
     - ./local/bin/sh/push_translations.sh
   only:
-   - /.+?\/[a-zA-Z0-9_-]+/
+    - master
 
 #rollback_live:
 #  <<: *base_template
