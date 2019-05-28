@@ -15,11 +15,10 @@ aliases:
 * [I stopped my Agent but I'm still seeing the host in my Datadog account.][6]
 * [How do I uninstall the Agent?][7]
 * [Error Restarting Agent: Already Listening on a Configured Port][8]
-* [Forwarder logs contain 599 response code][9]
-* [How is the 'system.mem.used' metric calculated?][10]
-* [Why should I install the Datadog Agent on my cloud instances?][11]
-* [How do I use Kubernetes secrets to set my API key?][12]
-* [Datadog Windows Agent user][13]
+* [How is the 'system.mem.used' metric calculated?][9]
+* [Why should I install the Datadog Agent on my cloud instances?][10]
+* [How do I use Kubernetes secrets to set my API key?][11]
+* [Datadog Windows Agent user][12]
 
 [1]: /agent/faq/host-metrics-with-the-container-agent
 [2]: /agent/faq/agent-apm-metrics
@@ -29,8 +28,7 @@ aliases:
 [6]: /agent/faq/i-stopped-my-agent-but-i-m-still-seeing-the-host
 [7]: /agent/faq/how-do-i-uninstall-the-agent
 [8]: /agent/faq/error-restarting-agent-already-listening-on-a-configured-port
-[9]: /agent/faq/forwarder-logs-contain-599-response-code
-[10]: /agent/faq/how-is-the-system-mem-used-metric-calculated
-[11]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances
-[12]: /agent/faq/kubernetes-secrets
-[13]: /agent/faq/windows-agent-ddagent-user
+[9]: /agent/faq/how-is-the-system-mem-used-metric-calculated
+[10]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances
+[11]: /agent/faq/kubernetes-secrets
+[12]: /agent/faq/windows-agent-ddagent-user
