@@ -278,27 +278,27 @@ It looks like a minimal [Redis integration configuration][1], but notice the `ad
 Now let's suppose that your Redis requires an additional `password` when accessing his stats endpoint and you want to correctly flag logs coming out of it. In order to take into account this new logic:
 
 1. Create a `autodiscovery.d/` folder on your host.
-2. Add the following custom auto-configuration named `redisdb.yaml`file to this folder:
-  ```yaml
-  ad_identifiers:
-    - redis
-
-  init_config:
-
-  instances:
-
-    - host: "%%host%%"
-      port: "6379"
-      password: "%%env_REDIS_PASSWORD%%"
-
-  logs:
-    source: redis
-    service: redis
-  ```
-
-  **Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used in order to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][3].
-
+2. Add the custom auto-configuration named `redisdb.yaml`file below to this folder
 3. Mount the `autodiscovery.d/` folder into the containerized Agent `conf.d/` folder.
+
+```yaml
+ad_identifiers:
+  - redis
+
+init_config:
+
+instances:
+
+  - host: "%%host%%"
+    port: "6379"
+    password: "%%env_REDIS_PASSWORD%%"
+
+logs:
+  source: redis
+  service: redis
+```
+
+**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used in order to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][3].
 
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
@@ -335,14 +335,8 @@ kind: Pod
 metadata:
   name: redis
   annotations:
-    ad.datadoghq.com/redis.check_names: |
-      [
-        "redisdb"
-      ]
-    ad.datadoghq.com/redis.init_configs: |
-      [
-        {}
-      ]
+    ad.datadoghq.com/redis.check_names: ["redisdb"]
+    ad.datadoghq.com/redis.init_configs: [{}]
     ad.datadoghq.com/redis.instances: |
       [
         {
@@ -351,13 +345,7 @@ metadata:
           "password":"%%env_REDIS_PASSWORD%%"
         }
       ]
-    ad.datadoghq.com/redis.logs: |
-      [
-        {
-          "source":"redis",
-          "service":"redis"
-        }
-      ]
+    ad.datadoghq.com/redis.logs: [{"source":"redis","service":"redis"}]
   labels:
     name: redis
 spec:
@@ -463,16 +451,8 @@ kind: Pod
 metadata:
   name: apache
   annotations:
-    ad.datadoghq.com/apache.check_names: |
-      [
-        "apache",
-        "http_check"
-      ]
-    ad.datadoghq.com/apache.init_configs: |
-      [
-        {},
-        {}
-      ]
+    ad.datadoghq.com/apache.check_names: ["apache","http_check"]
+    ad.datadoghq.com/apache.init_configs: [{},{}]
     ad.datadoghq.com/apache.instances: |
       [
         [
@@ -493,13 +473,7 @@ metadata:
           }
         ]
       ]
-    ad.datadoghq.com/apache.logs: |
-      [
-        {
-          "source":"apache",
-          "service":"webapp"
-        }
-      ]
+    ad.datadoghq.com/apache.logs: [{"source":"apache","service":"webapp"}]
   labels:
     name: apache
 spec:
