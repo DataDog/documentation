@@ -17,6 +17,8 @@ else
     echo "Files that were added or changed during this merge commit"
     cat changelist.txt
 
-    # command to run pushing translated files here
-    ./node_modules/.bin/translate --dryrun --sendtrans ./changelist.txt ./translate.yaml "${1}" || fail_step "${FUNCNAME}"
+    if [ -s changelist.txt ]; then
+        # command to run pushing translated files here
+        ./node_modules/.bin/translate --dryrun --sendtrans ./changelist.txt ./translate.yaml "${1}" || fail_step "${FUNCNAME}"
+    fi
 fi
