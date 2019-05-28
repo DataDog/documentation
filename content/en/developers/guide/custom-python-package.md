@@ -3,6 +3,7 @@ title: Adding a custom Python package to the Agent
 kind: documentation
 aliases:
 - /agent/custom_python_package
+- /agent/faq/custom_python_package
 further_reading:
 - link: "logs/"
   tag: "Documentation"
@@ -47,7 +48,7 @@ Custom Python packages can be installed using the Agent's embedded Python using 
 C:\"Program Files"\Datadog\"Datadog Agent"\embedded\python -m install <package_name>
 ```
 
-Or the package can be added in the library zipped folder that can be found at 
+Or the package can be added in the library zipped folder that can be found at
 ```
 C:\Program Files (x86)\Datadog\Datadog Agent\files
 ```
@@ -64,5 +65,3 @@ then [restart your Agent][1].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-
