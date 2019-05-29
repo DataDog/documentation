@@ -131,6 +131,21 @@ To use your variables in one of your assertions, hit *Use Variable* and select t
 
 {{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Use variable in assertion" responsive="true" style="width:40%;">}}
 
+#### Test Failure
+
+A test is considered `FAILED` if it does not satisfy its assertions or if the request failed for another reason. These reasons include:
+
+| Error           | Description                                                                                                                                                                                    |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CONNRESET`       | The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, loss of connectivity of the webserver, etc. |
+| DNS             | DNS entry not found for the check URL. Possible causes include misconfigured check URL, wrong configuration of your DNS entries, etc.                                                          |
+| `INVALID_REQUEST` | The configuration of the check is invalid].                                                                                                                             |
+| `SSL`             | The SSL connection couldn't be performed..                                                                                     |
+| `TIMEOUT`         | The request couldn't be completed in a reasonable time. Browser tests timeout in 60 seconds. To override a timeout, change the time (in seconds)in the Assert that an element is present on the page step.
+ |
+
+If a test fails, the uptime directly considers the endpoint as `down`. It is not re-tested until the next test run.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
