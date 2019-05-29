@@ -25,7 +25,7 @@ To use APM, you need to download the Datadog Agent and then configure your agent
 
 With Datadog's infrastructure monitoring, metrics are sent to the Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Agent: the application code instrumentation sends to the Agent every second ([see here for the Python client][2] for instance) and the Agent sends to the Datadog API every 10 seconds.
 
-To start tracing your application, [install the Datadog Agent][3], and then [Configure the Datadog Agent to receive traces](#trace-collection)**
+To start tracing your application, [install the Datadog Agent][3], and then [Configure the Datadog Agent to receive traces](#setting-up-trace-collection).
 
 ## Setting up trace collection
 
@@ -79,7 +79,7 @@ For the full overview of all of the steps to set up APM, see the [APM overivew][
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: 
+[1]: /tracing
 [2]: https://github.com/DataDog/dd-trace-py
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
