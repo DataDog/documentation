@@ -39,7 +39,7 @@ Ce check permet de surveiller [IBM Websphere Application Server (WAS)][1] avec l
 
 L'intégration Datadog/IBM WAS permet de recueillir les compteurs PMI activés depuis l'environnement WebSphere Application Server. Son implémentation nécessite d'activer le servlet PerfServlet, qui offre un moyen à Datadog de récupérer les données de performance issues de WAS.
 
-Par défaut, ce check recueille les métriques associées à JDBC, à JVM, au pool de threads et au gestionnaire de sessions du servlet. Il est également possible de recueillir des métriques supplémentaires en les spécifiant dans la section « custom_queries ». Consultez le [fichier d'exemple de configuration du check][2] pour découvrir des exemples.
+Par défaut, ce check recueille les métriques associées à JDBC, au JVM, au pool de threads et au gestionnaire de sessions du servlet. Il est également possible de recueillir des métriques supplémentaires en les spécifiant dans la section « custom_queries ». Consultez le [fichier d'exemple de configuration du check][2] pour découvrir des exemples.
 
 ### Installation
 
