@@ -145,8 +145,6 @@ Common failure reasons include:
 | `SSL`             | The SSL connection couldn't be performed..                                                                                     |
 | `TIMEOUT`         | The request couldn't be completed in a reasonable time. Browser tests timeout in 60 seconds. To override a timeout, change the time (in seconds)in the Assert that an element is present on the page step.|
 
-If a test fails, the uptime directly considers the endpoint as `down`. It is not re-tested until the next test run.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
