@@ -1,7 +1,6 @@
 ---
 title: API Tests
 kind: documentation
-beta: true
 description: Simulate and monitor HTTP requests from specific locations
 aliases:
   - /synthetics/uptime_check
