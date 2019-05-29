@@ -176,7 +176,7 @@ Le check IIS n'inclut aucun événement.
 
 `iis.site_up` :
 
-L'Agent envoie ce check de service pour chaque site configuré dans `iis.yaml`. Il renvoie `Critical` si l'uptime du site est égal à zéro. Si ce n'est pas le cas, il renvoie `OK`.
+L'Agent envoie ce check de service pour chaque site configuré dans `iis.yaml`. Il renvoie `Critical` si la durée de fonctionnement du site est égale à zéro. Si ce n'est pas le cas, il renvoie `OK`.
 
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][11].
