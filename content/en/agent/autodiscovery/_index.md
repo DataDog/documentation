@@ -47,12 +47,14 @@ The overall process of Datadog Agent Autodiscovery is:
 
 ## How to set it up
 
-**The Datadog Docker Agent automatically auto-discovers other containers**.
+If running the Agent as a binary on a host, enable Autodiscovery with the [Host Agent](?tab=host-agent) tab instructions. If running the Agent as a container, enable Autodiscovery with the  [Containerized Agent Tab](?tab=containerized-agent) instructions.
 
-To use Autodiscovery on the Datadog **Host** Agent, add these settings to your [`datadog.yaml` configuration file][10]:
+### Docker Autodiscovery
 
 {{< tabs >}}
-{{% tab "Docker" %}}
+{{% tab "Host Agent" %}}
+
+To enable Autodiscovery over Docker containers, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
 ```yaml
 listeners:
@@ -62,8 +64,21 @@ config_providers:
     polling: true
 ```
 
+[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "Containerized Agent" %}}
+
+To automatically enable Autodiscovery over Docker containers, mount `/var/run/docker.sock` into the Containerized Agent.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Kubernetes Autodiscovery
+
+{{< tabs >}}
+{{% tab "Host Agent" %}}
+
+To enable Autodiscovery over containers within Kubernetes, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
 ```yaml
 listeners:
@@ -76,12 +91,20 @@ config_providers:
     polling: true
 ```
 
-**Note**: For Kubernetes users, both a [CRI integration][1] and a [CRI-O integration][2] are available.
+[1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+{{% /tab %}}
+{{% tab "Containerized Agent" %}}
 
-[1]: /integrations/cri
-[2]: /integrations/crio
+To enable Autodiscovery over containers within Kubernetes, add the following environment variable when starting the containerized Agent:
+
+```
+KUBERNETES=yes
+```
+
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: For Kubernetes users, both a [CRI integration][10] and a [CRI-O integration][11] are available.
 
 ## Further Reading
 
@@ -96,4 +119,5 @@ config_providers:
 [7]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
 [8]: /agent/autodiscovery/integrations/?tab=dockerlabel#configuration
 [9]: /agent/autodiscovery/template_variables
-[10]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[10]: /integrations/cri
+[11]: /integrations/crio
