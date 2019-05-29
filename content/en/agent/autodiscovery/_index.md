@@ -98,13 +98,32 @@ config_providers:
 To enable Autodiscovery over containers within Kubernetes, add the following environment variable when starting the containerized Agent:
 
 ```
-KUBERNETES=yes
+KUBERNETES=true
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
 **Note**: For Kubernetes users, both a [CRI integration][10] and a [CRI-O integration][11] are available.
+
+### ECS Fargate Autodiscovery
+
+{{< tabs >}}
+{{% tab "Host Agent" %}}
+
+ECS Fargate can't be monitored with the Datadog Agent running as a binary on a host, see to the [Containerized Agent Tab](?tab=containerized-agent#ecs-fargate-autodiscovery) instructions.
+
+{{% /tab %}}
+{{% tab "Containerized Agent" %}}
+
+To enable Autodiscovery over containers within ECS Fargate, add the following environment variable when starting the containerized Agent:
+
+```
+ECS_FARGATE=true
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
