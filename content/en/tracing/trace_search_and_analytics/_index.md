@@ -298,7 +298,12 @@ Datadog.configure { |c| c.use :mongo, analytics_enabled: true }
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Database tracing is not captured by Trace Search & Analytics by default and you must enable collection manually for each integration.
+Database tracing is not captured by Trace Search & Analytics by default and you must enable collection manually for each integration. For example:
+
+```go
+// Register the database driver with Analytics enabled.
+sqltrace.Register("mysql", &mysql.MySQLDriver{}, sqltrace.WithAnalytics(true))
+```
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
