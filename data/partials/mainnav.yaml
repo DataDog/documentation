@@ -281,7 +281,7 @@ main:
     pre: "nav_tracing"
     children:
       # Languages
-      - name: "Setup"
+      - name: "Collect traces"
         url: "tracing/setup/"
         children:
           - name: "Java"
@@ -536,7 +536,7 @@ main:
   - name: "API"
     url: "api/"
     pre: "nav_api"
-    # ACCOUNT MANAGEMENT
+  # ACCOUNT MANAGEMENT
   - name: "Account Management"
     url: "account_management/"
     pre: "nav_account"

@@ -1,0 +1,32 @@
+{{ $dot := . }}
+<div class="apm-languages">
+    <div class="container cards-dd tile-nav">
+        <div class="card-deck">
+            <a class="card" href="/agent/?tab=agentv6">
+                <div class="card-body text-center pb-4 pt-4">
+                    {{ partial "img.html" (dict "root" . "src" "tracing/install-black.png" "class" "" "alt" "Java" "width" "400") }}
+                </div>
+            </a>
+            <a class="card" href="/agent/apm/">
+                <div class="card-body text-center pb-4 pt-4">
+                    {{ partial "img.html" (dict "root" . "src" "tracing/agent-configure-black.png" "class" "" "alt" "C++" "width" "400") }}
+                </div>
+            </a>
+            <a class="card" href="/tracing/setup/">
+                <div class="card-body text-center pb-4 pt-4">
+                    {{ partial "img.html" (dict "root" . "src" "tracing/app-configure-black.png" "class" "" "alt" "Python" "width" "400") }}
+                </div>
+            </a>
+            <a class="card" href="/tracing/visualization/">
+                <div class="card-body text-center pb-4 pt-4">
+                    {{ partial "img.html" (dict "root" . "src" "tracing/visualize-black.png" "class" "" "alt" "Ruby" "width" "400") }}
+                </div>
+            </a>
+            <a class="card" href="/tracing/trace_search_and_analytics/">
+                <div class="card-body text-center pb-4 pt-4">
+                    {{ partial "img.html" (dict "root" . "src" "tracing/analytics-black.png" "class" "" "alt" "Go" "width" "400") }}
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
