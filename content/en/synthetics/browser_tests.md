@@ -131,9 +131,11 @@ To use your variables in one of your assertions, hit *Use Variable* and select t
 
 {{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Use variable in assertion" responsive="true" style="width:40%;">}}
 
-#### Test Failure
+#### Test failure and errors
 
-A test is considered `FAILED` if it does not satisfy its assertions or if the request failed for another reason. These reasons include:
+A test is considered `FAILED` if it does not satisfy its assertions or if the request failed for another reason. You can view specific browser test errors by clicking on the error in the step results.
+
+Common failure reasons include:
 
 | Error           | Description                                                                                                                                                                                    |
 | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
