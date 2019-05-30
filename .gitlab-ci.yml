@@ -124,6 +124,15 @@ manage_translations:on-schedule:
   only:
     - schedules
 
+push_translations:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  script:
+    - push_changed_translations
+  only:
+    - master
+
 #rollback_live:
 #  <<: *base_template
 #  stage: cleanup
