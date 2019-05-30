@@ -104,7 +104,7 @@ With this, any pod running your application is able to send DogStatsD metrics vi
 
 Origin detection allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received via UDP are tagged by the same container tags as Autodiscovery metrics.
 
-**Note**: as an alternative to UDP, you may also use [Unix Domain Sockets][18].
+**Note**: An alternative to UDP is [Unix Domain Sockets][18].
 
 To enable origin detection over UDP, add the following lines to your application manifest: 
 
