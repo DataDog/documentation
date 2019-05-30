@@ -232,6 +232,14 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 
 #### URL Resource Names
 
+<div class="alert alert-warning">
+Enabling this feature <strong>could impact your billing</strong>.
+
+Increasing the number of unique resource names also increases cardinality which is a metric used in billing.
+
+The PHP tracer will attempt to normalize URL's that contain numeric ID's, UUID's, and 32-to-512-bit hexadecimal hashes. In other cases, URL's are normalized manually using <a href="#custom-url-to-resource-mapping">custom URL-to-resource mapping</a>.
+</div>
+
 When `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=true`, the URL will be used to form the trace resource name in the format, `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>` with the query string removed from the URL.
 
 | HTTP Request                       | Resource Name |
