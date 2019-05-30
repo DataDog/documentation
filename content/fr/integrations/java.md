@@ -342,95 +342,11 @@ Les checks JMX possèdent également une configuration par défaut qui recueille
 
 Consultez la liste des [commandes et la FAQ de dépannage JMX][7].
 
-### Limite de 350 métriques
-
-En raison de la nature de ces intégrations, il est possible d'envoyer directement à Datadog un nombre très important de métriques. De nombreux clients s'accordent à dire que certaines de ces métriques ne sont pas requises. Ainsi, Datadog a défini une limite de 350 métriques.
-
-Pour consulter les métriques que vous recueillez et respecter la limite, commencez par utiliser les commandes ci-dessus afin d'identifier les métriques disponibles. Nous vous recommandons de créer des filtres pour réduire le nombre de métriques recueillies. Si vous estimez que vous avez besoin de plus de 350 métriques, contactez [l'assistance Datadog][8].
-
-### Chemin Java
-
-L'Agent n'est pas fourni avec un JVM groupé, mais utilise celui installé sur votre système. Ainsi, vous devez vous assurer que le répertoire de base Java est indiqué dans le chemin de l'utilisateur exécutant l'Agent.
-
-Vous pouvez également spécifier le chemin JVM dans le fichier de configuration de l'intégration :
-
-    java_bin_path: /chemin/vers/java
-
-
-### Surveillance d'applications JBoss/WildFly
-
-Les instructions suivantes fonctionnent sur la version 5.6.0+ de l'Agent.
-
-Les applications JBoss/WildFly exposent JMX avec un protocole spécifique (JMX à distance) qui n'est pas par défaut groupé avec JMXFetch. Pour que JMXFetch se connecte à ces applications, suivez les étapes suivantes :
-
-* Naviguez jusqu'au fichier `jboss-cli-client.jar` sur votre serveur JBoss/WildFly (par défaut, son chemin est  `$JBOSS_HOME/bin/client/jboss-cli-client.jar`).
-* Si JMXFetch s'exécute sur un host autre que l'application JBoss/WildFly, copiez `jboss-cli-client.jar` à un emplacement du host sur lequel JMXFetch s'exécute.
-* Ajoutez le chemin du fichier jar dans la section `init_config` de votre configuration :
-
-```yaml
-  # Datadog Agent >= 5.6.0
-
-  init_config:
-    custom_jar_paths:
-      - /chemin/vers/client-cli-jboss.jar
-```
-
-* Indiquez une URL personnalisée à laquelle JMXFetch doit se connecter dans la section `instances` de votre configuration :
-
-  ```yaml
-  # Datadog Agent >= 5.6.0
-
-  # The jmx_url may be different depending on the version of JBoss/WildFly you're using
-  # and the way you've set up JMX on your server
-  # Refer to the relevant documentation of JBoss/WildFly for more information
-  instances:
-    - jmx_url: "service:jmx:remote://localhost:4447"
-      name: jboss-application  # Mandatory, but can be set to any value,
-                               # is used to tag the metrics pulled from that instance
-  ```
-
-* [Redémarrez l'Agent][9].
-
-### Surveillance de Tomcat avec l'option d'écoute de cycle de vie à distance de JMX
-
-Les instructions suivantes fonctionnent sur la version 5.6.0+ de l'Agent.
-
-Si vous utilisez Tomcat avec l'option d'écoute de cycle de vie à distance de JMX activée (consultez la [documentation Tomcat][10] pour en savoir plus), vous devez suivre quelques étapes de configuration supplémentaires pour que JMXFetch se connecte à votre application Tomcat.
-
-* Naviguez jusqu'au fichier `catalina-jmx-remote.jar` sur votre serveur Tomcat (par défaut, son chemin est `$CATALINA_HOME/lib`).
-* Si JMXFetch s'exécute sur un host autre que l'application Tomcat, copiez `catalina-jmx-remote.jar` à un emplacement du host sur lequel JMXFetch s'exécute.
-* Ajoutez le chemin du fichier jar dans la section `init_config` de votre configuration :
-
-```yaml
-
-
-init_config:
-  custom_jar_paths:
-    - /chemin/vers/jmx-distance-catalina.jar
-```
-
-* Indiquez une URL personnalisée à laquelle JMXFetch doit se connecter dans la section `instances` de votre configuration :
-
-```yaml
-# Agent Datadog >= 5.6.0
-
-# Le jmx_url peut varier en fonction de votre configuration de JMX sur votre serveur Tomcat.
-instances:
-  - jmx_url: "service:jmx:rmi://:10002/jndi/rmi://:10001/jmxrmi"
-    name: tomcat-application  # Requis, mais peut être défini sur n'importe quelle valeur arbitraire,
-                              # est utilisé pour taguer les métriques récupérées à partir de cette instance
-```
-
-* [Redémarrez l'Agent][9].
-
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-{{< get-dependencies >}}
-
 [1]: http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html
-[2]: https://docs.datadoghq.com/fr//integrations/java
 [3]: http://docs.oracle.com/javase/1.5.0/docs/guide/management/agent.html
 [4]: http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
@@ -440,3 +356,6 @@ instances:
 [9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
 [10]: https://tomcat.apache.org/tomcat-7.0-doc/config/listeners.html#JMX_Remote_Lifecycle_Listener_-_org.apache.catalina.mbeans.JmxRemoteLifecycleListener
 [11]: https://docs.datadoghq.com/fr/getting_started/integrations/#setting-up-an-integration
+
+
+{{< get-dependencies >}}

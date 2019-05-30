@@ -60,7 +60,7 @@ Le servlet de performance se déploie de la même manière que tout autre servle
 
 #### Collecte de logs
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 ```
     logs_enabled: true
 ```

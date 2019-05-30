@@ -2,7 +2,7 @@
 title: Rechercher des groupes de monitors
 type: apicode
 order: 26.13
-external_redirect: "/api/#monitors-group-search"
+external_redirect: "/api/#rechercher-des-groupes-de-monitors"
 ---
 
 ##### Signature
