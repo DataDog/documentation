@@ -118,7 +118,7 @@ The `ddtrace` library includes support for the following libraries:
 | [aiobotocore][36] | >= 0.2.3          | http://pypi.datadoghq.com/trace/docs/other_integrations.html#aiobotocore |
 | [Boto2][36]       | >= 2.29.0         | http://pypi.datadoghq.com/trace/docs/other_integrations.html#boto2       |
 | [Botocore][36]    | >= 1.4.51         | http://pypi.datadoghq.com/trace/docs/other_integrations.html#botocore    |
-| [Celery][37]      | >= 3.1            | http://pypi.datadoghq.com/trace/docs/other_integrations.html#celery      |
+| [Celery][37]      | >= 4.0.2          | http://pypi.datadoghq.com/trace/docs/other_integrations.html#celery      |
 | [Futures][38]     | Fully Supported   | http://pypi.datadoghq.com/trace/docs/other_integrations.html#futures     |
 | [Grpc][39]        | >= 1.8.0          | http://pypi.datadoghq.com/trace/docs/other_integrations.html#grpc        |
 | [httplib][40]     | Fully Supported   | http://pypi.datadoghq.com/trace/docs/other_integrations.html#httplib     |
