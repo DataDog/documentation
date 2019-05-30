@@ -8,7 +8,7 @@ further_reading:
     text: En savoir plus sur l'interface utilisateur dédiée pour les métriques de distribution
   - link: developers/libraries
     tag: Documentation
-    text: Bibliothèques pour l'API et DogStatsD officielles et entretenues par la communauté
+    text: Bibliothèques de client pour l'API et DogStatsD officielles et entretenues par la communauté
 ---
 <div class="alert alert-warning">
 Cette fonctionnalité est en version bêta. <a href="/help">Contactez l'assistance Datadog</a> afin d'activer les métriques de distribution pour votre compte.
