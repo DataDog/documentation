@@ -143,7 +143,7 @@ Common failure reasons include:
 | `DNS`             | The DNS entry is not found for the check URL. Possible causes include misconfigured check URL, wrong configuration of your DNS entries, etc.                                                          |
 | `INVALID_REQUEST` | The configuration of the check is invalid.                                                                                                                             |
 | `SSL`             | The SSL connection couldn't be performed..                                                                                     |
-| `TIMEOUT`         | The request couldn't be completed in a reasonable time. Browser tests timeout in 60 seconds. To override a timeout, change the time (in seconds)in the Assert that an element is present on the page step.|
+| `TIMEOUT`         | The request couldn't be completed in a reasonable time. Browser tests timeout in 60 seconds. To override a timeout, change the time (in seconds) in the Assert that an element is present on the page step.|
 
 ## Further Reading
 
