@@ -22,10 +22,10 @@ The Agent can be installed on many different platforms. Most systems have a one-
 {{< partial name="platforms/platforms.html" desc="Choose your platform to see installation instructions:" links="gs" >}}
 
 ### Configuration
-The Agent's [main configuration file][5] is `datadog.yaml`. The only required parameter is your [Datadog API key][6] which is used to associate your Agent's data with your organization. See the [sample config_template.yaml][7] for all available configuration options.
+The Agent's [main configuration file][5] is `datadog.yaml`. The only required parameter is your [Datadog API key][6], which is used to associate your Agent's data with your organization. See the [sample config_template.yaml][7] for all available configuration options.
 
 ### Validation
-Run the Agent's [status command][8] to verify installation.
+Run the Agent's [status command][8] to verify the installation.
 
 ## Data Collected
 
