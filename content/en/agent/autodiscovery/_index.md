@@ -129,7 +129,6 @@ kubernetes_pod_annotations_as_tags:
   app: kube_app
 ```
 
-Note: Tags are only set when a pod starts.
 
 {{% /tab %}}
 {{< /tabs >}}
