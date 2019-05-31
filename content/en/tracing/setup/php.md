@@ -111,16 +111,16 @@ If the web framework that you use is not listed below, you can still see traces 
 
 | Module         | Versions           | Support Type    |
 |:---------------|:-------------------|:----------------|
+| CakePHP        | 2.x                | Fully Supported |
 | Laravel        | 4.2, 5.x           | Fully Supported |
 | Lumen          | 5.2+               | Fully Supported |
+| Slim           | 3.x                | Fully Supported |
 | Symfony        | 2.x, 3.3, 3.4, 4.x | Fully Supported |
 | Zend Framework | 1.12               | Fully Supported |
-| CakePHP        | 1.3, 2.8, 3.x      | _Coming Soon_   |
 | CodeIgniter    | 2, 3               | _Coming Soon_   |
 | Drupal         |                    | _Coming Soon_   |
 | Magento        | 2                  | _Coming Soon_   |
 | Phalcon        | 1.3, 3.4           | _Coming Soon_   |
-| Slim           | 2, 3               | _Coming Soon_   |
 | Wordpress      |                    | _Coming Soon_   |
 | Yii            | 1.1                | _Coming Soon_   |
 
@@ -142,6 +142,7 @@ Don’t see your desired CLI library? Datadog is continually adding additional s
 | Module                           | Versions                   | Support Type    |
 |:---------------------------------|:---------------------------|:----------------|
 | Amazon RDS (using PDO or MySQLi) | *(Any Supported PHP)*      | Fully Supported |
+| CakePHP Console                  | 2.x                        | Fully Supported |
 | Elasticsearch                    | 1.x                        | Fully Supported |
 | Eloquent                         | Laravel supported versions | Fully Supported |
 | Memcached                        | *(Any Supported PHP)*      | Fully Supported |
