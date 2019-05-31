@@ -6,7 +6,7 @@ external_redirect: /api/#create-a-gcp-integration
 ---
 
 ##### Signature
-`POST https://api.datadoghq.com/api/v1/integration/gcp`
+`POST /v1/integration/gcp`
 
 ##### Example Request
 {{< code-snippets basename="gcp_create" >}}

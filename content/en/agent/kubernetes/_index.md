@@ -54,9 +54,8 @@ For details on the usage of ConfigMaps in Kubernetes, consult [Datadog's Kuberne
 
 * [Can I install the Agent on my Kubernetes master node(s)][7]
 * [Why is the Kubernetes check failing with a ConnectTimeout error to port 10250?][8]
-* [How to report host disk metrics when dd-agent runs in a docker container?][9]
-* [Client Authentication against the apiserver and kubelet][10]
-* [Using RBAC permission with your Kubernetes integration][11]
+* [Client Authentication against the apiserver and kubelet][9]
+* [Using RBAC permission with your Kubernetes integration][10]
 
 ## Further Reading
 
@@ -70,6 +69,5 @@ For details on the usage of ConfigMaps in Kubernetes, consult [Datadog's Kuberne
 [6]: /agent/kubernetes/integrations
 [7]: /integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s
 [8]: /integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250
-[9]: /agent/faq/getting-further-with-docker
-[10]: /integrations/faq/client-authentication-against-the-apiserver-and-kubelet
-[11]: /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
+[9]: /integrations/faq/client-authentication-against-the-apiserver-and-kubelet
+[10]: /integrations/faq/using-rbac-permission-with-your-kubernetes-integration

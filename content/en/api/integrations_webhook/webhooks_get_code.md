@@ -7,7 +7,7 @@ external_redirect: /api/#get-a-webhooks-integration
 
 ##### Signature
 
-`GET https://api.datadoghq.com/api/v1/integration/webhooks`
+`GET /v1/integration/webhooks`
 
 ##### Example Request
 {{< code-snippets basename="webhooks_get" >}}

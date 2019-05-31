@@ -1,12 +1,12 @@
 ---
 title: Create user
 type: apicode
-order: 32.1
+order: 34.1
 external_redirect: /api/#create-user
 ---
 
 ##### Signature
-`POST https://api.datadoghq.com/api/v1/user`
+`POST /v1/user`
 ##### Example Request
 {{< code-snippets basename="api-user-create" >}}
 ##### Example Response

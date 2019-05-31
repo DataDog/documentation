@@ -1,12 +1,12 @@
 ---
 title: Get tags
 type: apicode
-order: 28.1
+order: 30.1
 external_redirect: /api/#get-tags
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/tags/hosts`
+`GET /v1/tags/hosts`
 ##### Example Request
 {{< code-snippets basename="api-tags-get" >}}
 ##### Example Response

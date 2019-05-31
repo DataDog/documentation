@@ -42,7 +42,7 @@ Pour installer le check Filebeat sur votre host :
 1. Installez le [kit de développement][7] sur n'importe quelle machine.
 2. Exécutez `ddev release build filebeat` pour générer le paquet.
 3. [Téléchargez l'Agent Datadog][1].
-4. Importez l'artefact du build sur tous les hosts avec un Agent et exécutez `datadog-agent integration install -w path/to/filebeat/dist/<NOM_ARTEFACT>.whl`.
+4. Importez l'artefact du build sur tous les hosts avec un Agent et exécutez `datadog-agent integration install -w chemin/vers/dist/filebeat/<NOM_ARTEFACT>.whl`.
 
 ### Configuration
 

@@ -1,12 +1,12 @@
 ---
 title: Search metrics
 type: apicode
-order: 23.6
+order: 25.6
 external_redirect: /api/#search-metrics
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/search`
+`GET /v1/search`
 ##### Example Request
 {{< code-snippets basename="api-metrics-search" >}}
 ##### Example Response

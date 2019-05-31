@@ -1,12 +1,12 @@
 ---
 title: Get all monitor details
 type: apicode
-order: 24.05
+order: 26.05
 external_redirect: /api/#get-all-monitor-details
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/monitor`
+`GET /v1/monitor`
 ##### Example Request
 {{< code-snippets basename="api-monitor-show-all" >}}
 ##### Example Response

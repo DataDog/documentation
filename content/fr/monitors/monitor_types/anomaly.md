@@ -15,7 +15,7 @@ further_reading:
     tag: Documentation
     text: Consulter le statut de votre monitor
 ---
-La détection d'anomalies est une fonction algorithmique qui vous permet d'identifier un comportement anormal d'une métrique en fonction de ses données historiques, comment les tendances et les variations saisonnières en fonction du jour de la semaine ou de l'heure. Cette fonctionnalité convient aux métriques qui possèdent de fortes tendances et des modèles récurrents qui sont difficiles voire impossibles à surveiller avec des alertes de seuil.
+La détection d'anomalies est une fonction algorithmique qui vous permet d'identifier un comportement anormal d'une métrique en fonction de ses données historiques, comme les tendances et les variations saisonnières en fonction du jour de la semaine ou de l'heure. Cette fonctionnalité convient aux métriques qui possèdent de fortes tendances et des modèles récurrents qui sont difficiles voire impossibles à surveiller avec des alertes de seuil.
 
 Par exemple, la détection d'anomalies peut vous aider à déterminer si votre trafic Web est anormalement bas pour un après-midi en semaine, même si ce même niveau de trafic serait parfaitement normal plus tard dans la soirée. Elle vous permet également d'étudier une métrique mesurant le nombre de connexions à votre site, même si celui-ci est en pleine croissance. Puisque le nombre de visiteurs augmente chaque jour, l'utilisation de seuils ne serait pas pertinente. À l'inverse, la détection d'anomalies peut rapidement vous envoyer une alerte en cas de baisse inattendue, qui pourrait être liée à un dysfonctionnement du système de connexion.
 

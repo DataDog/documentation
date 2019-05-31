@@ -7,7 +7,7 @@ external_redirect: /api/#get-all-dashboard-lists
 
 ##### Signature
 
-`GET https://api.datadoghq.com/api/v1/dashboard/lists/manual`
+`GET /v1/dashboard/lists/manual`
 
 ##### Example Request
 

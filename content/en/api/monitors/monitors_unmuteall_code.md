@@ -1,12 +1,12 @@
 ---
 title: Unmute all monitors
 type: apicode
-order: 24.08
+order: 26.08
 external_redirect: /api/#unmute-all-monitors
 ---
 
 ##### Signature
-`POST https://api.datadoghq.com/api/v1/monitor/unmute_all`
+`POST /v1/monitor/unmute_all`
 ##### Example Request
 {{< code-snippets basename="api-monitor-unmute-all" >}}
 ##### Example Response
