@@ -227,20 +227,12 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_GLOBAL_TAGS`               | ``          | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`                |
 | `DD_TRACE_REPORT_HOSTNAME`           | `false`     | Enable hostname reporting on the root span                                  |
 | `DD_TRACE_RESOURCE_URI_MAPPING`      | `null`      | CSV of URL-to-resource-name mapping rules; e.g., `/foo/*,/bar/$*/baz`; [see "Custom URL-To-Resource Mapping"][16] |
-| `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED` | `false` | Enable URL's as resource names; [see "URL Resource Names"][17]              |
+| `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED` | `false` | Enable URL's as resource names; [see "Map Resource Names To Normalized URI"][17] |
 | `DD_<INTEGRATION>_ANALYTICS_ENABLED` | `false`     | Flag to enable trace analytics for relevant spans in a specific integration |
 
-#### URL Resource Names
+#### Map Resource Names To Normalized URI
 
-<div class="alert alert-warning">
-Enabling this feature <strong>could impact your billing</strong>.
-
-Increasing the number of unique resource names also increases cardinality which is a metric used in billing.
-
-The PHP tracer will attempt to normalize URL's that contain numeric ID's, UUID's, and 32-to-512-bit hexadecimal hashes. In other cases, URL's are normalized manually using <a href="#custom-url-to-resource-mapping">custom URL-to-resource mapping</a>.
-</div>
-
-When `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=true`, the URL will be used to form the trace resource name in the format, `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>` with the query string removed from the URL.
+When `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=true`, the URL will be used to form the trace resource name in the format, `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>` with the query string removed from the URL. This allows better visibility in any custom framework that is not automatically instrumented by normalizing the URL's and grouping together generic endpoints under one resource.
 
 | HTTP Request                       | Resource Name |
 |:-----------------------------------|:--------------|
@@ -297,4 +289,4 @@ The `$*` wildcard will match without replacement.
 [14]: /tracing/guide/distributed_tracing/?tab=php
 [15]: /tracing/troubleshooting
 [16]: #custom-url-to-resource-mapping
-[17]: #url-resource-names
+[17]: #map-resource-names-to-normalized-uri
