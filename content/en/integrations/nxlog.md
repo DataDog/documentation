@@ -74,7 +74,7 @@ Configure NXLog to gather logs from your host, containers, & services.
     Do not forget to replace `<DATADOG_API_KEY>` in the format.
 
 2. Activate NXLog watchfile module
-    Foreach file you want to monitor add the following before the output section:
+    For each file you want to monitor, add the following before the output section:
     ```
     ##Module to watch a file
     <Input FILE_WATCH_1>
@@ -180,7 +180,7 @@ Configure NXLog to gather logs from your host, containers, & services.
     Do not forget to replace `<DATADOG_API_KEY>` in the format.
 
 2. Activate NXLog watchfile module
-    Foreach file you want to monitor add the following before the output section:
+    For each file you want to monitor, add the following before the output section:
     ```
     ##Module to watch a file
     <Input FILE_WATCH_1>
