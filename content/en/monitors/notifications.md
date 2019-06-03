@@ -271,17 +271,18 @@ After setting up the Slack integration, type `@slack` in your notification messa
 **@-mentions in Slack from monitor alert**:
 
 Wrap the `@username` in `< >` as seen below in your monitors message template to **@ notify** the defined user within slack notifications.
-For example this configuration:
 
+For example this configuration:
 {{< img src="monitors/notifications/notification_template.png" alt="notification_template" responsive="true" style="width:50%;" >}}
 
 Would produce this slack message:
-
 {{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview" responsive="true" style="width:50%;" >}}
+
+**Note**: If you are having trouble pinging someone, use their Slack `username` instead of the display name. The `username` is located in [Slack account settings][1] under **Username**.
 
 Mention **@here** or **@channel** by using `<!here>` or `<!channel>`, respectively.
 
-For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][1]. For example, for a user group named `testers` you would use the following syntax:
+For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][2]. For example, for a user group named `testers` you would use the following syntax:
 
 ```
 <!subteam^12345|testers>
@@ -301,7 +302,8 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 * `@slack-{{host.name}}` post a slack message to the #host.name channel in Slack.
 
 
-[1]: https://api.slack.com/methods/usergroups.list
+[1]: http://slack.com/account/settings
+[2]: https://api.slack.com/methods/usergroups.list
 {{% /tab %}}
 {{% tab "PagerDuty" %}}
 
