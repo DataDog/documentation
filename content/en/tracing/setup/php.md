@@ -232,14 +232,14 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 
 #### Map Resource Names To Normalized URI
 
-When `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=true`, the URL will be used to form the trace resource name in the format, `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>` with the query string removed from the URL. This allows better visibility in any custom framework that is not automatically instrumented by normalizing the URL's and grouping together generic endpoints under one resource.
+When `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=true`, the URL is used to form the trace resource name in the format `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>`, with the query string removed from the URL. This allows better visibility in any custom framework that is not automatically instrumented by normalizing the URLs and grouping together generic endpoints under one resource.
 
 | HTTP Request                       | Resource Name |
 |:-----------------------------------|:--------------|
 | **GET** request to `/foo?a=1&b=2`  | `GET /foo`    |
 | **POST** request to `/bar?foo=bar` | `POST /bar`   |
 
-Numeric ID's, UUID's (with and without dashes), and 32-to-512-bit hexadecimal hashes are automatically replaced with a `?` character.
+Numeric IDs, UUIDs (with and without dashes), and 32-to-512-bit hexadecimal hashes are automatically replaced with a `?` character.
 
 | URL (GET request)                              | Resource Name      |
 |:-----------------------------------------------|:-------------------|
@@ -250,11 +250,11 @@ Numeric ID's, UUID's (with and without dashes), and 32-to-512-bit hexadecimal ha
 
 ##### Custom URL-To-Resource Mapping
 
-When [URL resource names are enabled][17], custom URL mapping is configured via `DD_TRACE_RESOURCE_URI_MAPPING` which accepts a CSV list of mapping rules. The wildcards `*` (greedy with replacement `?` character) and `$*` (greedy without replacement) are supported. E.g. `DD_TRACE_RESOURCE_URI_MAPPING=/foo/*,/bar/$*/baz`.
+When [URL resource names are enabled][17], custom URL mapping is configured via `DD_TRACE_RESOURCE_URI_MAPPING` which accepts a CSV list of mapping rules. The wildcards `*` (greedy with replacement `?` character) and `$*` (greedy without replacement) are supported, e.g. `DD_TRACE_RESOURCE_URI_MAPPING=/foo/*,/bar/$*/baz`.
 
 Rules are applied in the same order as they appear in `DD_TRACE_RESOURCE_URI_MAPPING`. Less greedy rules should appear in the list before more greedy rules, e.g. `/foo/$*/bar,/foo/*`
 
-The `*` wildcard will be replaced with `?`.
+The `*` wildcard is replaced with `?`.
 
 | Mapping Rule   | URL (GET request)  | Resource Name    |
 |:---------------|:-------------------|:-----------------|
@@ -262,7 +262,7 @@ The `*` wildcard will be replaced with `?`.
 | `/foo/*/bar`   | `/foo/baz/faz/bar` | `GET /foo/?/bar` |
 | `/foo-*-bar`   | `/foo-secret-bar`  | `GET /foo-?-bar` |
 
-The `$*` wildcard will match without replacement.
+The `$*` wildcard matches without replacement.
 
 | Mapping Rule        | URL (GET request)           | Resource Name              |
 |:--------------------|:----------------------------|:---------------------------|
