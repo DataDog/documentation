@@ -129,6 +129,9 @@ kubernetes_pod_annotations_as_tags:
   app: kube_app
 ```
 
+Note: Tags are only set when a pod starts.
+Starting with version 6.12.0, the Datadog Agent will dynamically detect any changes in labels and annotations as tags, not only when a pod starts.
+
 
 {{% /tab %}}
 {{< /tabs >}}
