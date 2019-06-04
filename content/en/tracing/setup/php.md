@@ -75,12 +75,9 @@ Automatic instrumentation captures:
 
 Configure your application level tracers to submit traces to a custom Agent hostname:
 
-The PHP tracer automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
+The PHP tracer automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
-```php
-putenv('DD_AGENT_HOST=localhost');
-putenv('DD_TRACE_AGENT_PORT=8126');
-```
+See [tracer configuration][16] for more information on how to set these variables.
 
 ## Compatibility
 
@@ -211,10 +208,12 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_CLI_ENABLED`               | `false`     | Enable tracing of PHP scripts from the CLI                                  |
 | `DD_DISTRIBUTED_TRACING`             | `true`      | Whether to enable [distributed tracing][14]                                 |
 | `DD_INTEGRATIONS_DISABLED`           | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                        |
-| `DD_PRIORITY_SAMPLING`               | `true`      | Whether to enable priority sampling.                                   |
+| `DD_PRIORITY_SAMPLING`               | `true`      | Whether to enable priority sampling.                                        |
 | `DD_SAMPLING_RATE`                   | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default)         |
 | `DD_SERVICE_NAME`                    | ``          | The default app name                                                        |
 | `DD_TRACE_AGENT_PORT`                | `8126`      | The Agent port number                                                       |
+| `DD_TRACE_AGENT_TIMEOUT`             | `500`       | Maximum time the Agent is allowed to take (in milliseconds)                 |
+| `DD_TRACE_AGENT_CONNECT_TIMEOUT`     | `100`       | Maximum time the allowed for Agent connection setup (in milliseconds)       |
 | `DD_TRACE_ANALYTICS_ENABLED`         | `false`     | Flag to enable trace analytics for relevant spans in web integrations       |
 | `DD_TRACE_DEBUG`                     | `false`     | Enable [debug mode][15] for the tracer                                      |
 | `DD_TRACE_ENABLED`                   | `true`      | Enable the tracer globally                                                  |
@@ -240,3 +239,4 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 [13]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
 [14]: /tracing/guide/distributed_tracing/?tab=php
 [15]: /tracing/troubleshooting
+[16]: #configuration
