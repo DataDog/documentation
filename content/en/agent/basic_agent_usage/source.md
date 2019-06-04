@@ -28,8 +28,7 @@ By default, your Agent is installed in its own sandbox at `~/.datadog-agent`. Yo
 * Create a virtual environment in Python. Activate it and install Python dependencies with `pip install -r requirements.txt`
 * Install CMake version 3.12+.
 * Checkout the repo: `git clone https://github.com/DataDog/datadog-agent.git $GOPATH/src/github.com/DataDog/datadog-agent`
-* Install the project's dependencies with `invoke deps`. Ensure that `$GOPATH/bin` is in your `$PATH`.
-
+* Install the project's dependencies with `invoke deps`. 
 
 Next, build the Agent packages using [Omnibus][3]. In order to run Omnibus, install the following:
 
