@@ -77,7 +77,7 @@ Configure your application level tracers to submit traces to a custom Agent host
 
 The PHP tracer automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
-See [tracer configuration][16] for more information how to correctly set these variables.
+See [tracer configuration][16] for more information on how to set these variables.
 
 ## Compatibility
 
