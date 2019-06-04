@@ -21,7 +21,7 @@ This page outlines the basic features of the Datadog Agent. If you haven't insta
 
 By default, your Agent is installed in its own sandbox at `~/.datadog-agent`. You're free to move this folder wherever you like. However, this article assumes that the Agent is installed in its default location, so be sure to modify the instructions accordingly if you decide to move them.
 
-## Installation
+## Linux Installation
 
 * Install [Go][2] version 1.11.5 or later. Remember to set your `GOPATH` and have `$GOPATH/bin` in your path.
 * Install Python version 3.x, along with development libraries.
