@@ -24,9 +24,9 @@ By default, your Agent is installed in its own sandbox at `~/.datadog-agent`. Yo
 ## Linux Installation
 
 * Install [Go][2] version 1.11.5 or later. Remember to set your `GOPATH` and have `$GOPATH/bin` in your path.
-* Install Python version 3.x, along with development libraries.
+* Install Python version 3.x, along with development libraries. 
+* Create a virtual environment in Python. Activate it and install Python dependencies with `pip install -r requirements.txt`
 * Install CMake version 3.12+.
-* In your virtual environment, install Python dependencies. You may use `pip install -r requirements.txt`
 * Checkout the repo: `git clone https://github.com/DataDog/datadog-agent.git $GOPATH/src/github.com/DataDog/datadog-agent`
 * Install the project's dependencies with `invoke deps`. Ensure that `$GOPATH/bin` is in your `$PATH`.
 
