@@ -75,12 +75,9 @@ Automatic instrumentation captures:
 
 Configure your application level tracers to submit traces to a custom Agent hostname:
 
-The PHP tracer automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
+The PHP tracer automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
-```php
-putenv('DD_AGENT_HOST=localhost');
-putenv('DD_TRACE_AGENT_PORT=8126');
-```
+See [tracer configuration][16] for more information how to correctly set these variables.
 
 ## Compatibility
 
@@ -242,3 +239,4 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 [13]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
 [14]: /tracing/guide/distributed_tracing/?tab=php
 [15]: /tracing/troubleshooting
+[16]: #configuration
