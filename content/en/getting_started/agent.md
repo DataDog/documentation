@@ -17,7 +17,7 @@ The Agent is lightweight software installed on your hosts. It reports metrics an
 If you haven't already, create a [Datadog account][7].
 
 ### Installation
-The Agent can be installed on many different platforms either directly on the host or as [containerized version][8]. Most systems have a one-line install option.
+The Agent can be installed on many different platforms either directly on the host or as a [containerized version][8]. Most systems have a one-line install option.
 
 {{< partial name="platforms/platforms.html" desc="Choose your platform to see installation instructions:" links="gs" >}}
 
