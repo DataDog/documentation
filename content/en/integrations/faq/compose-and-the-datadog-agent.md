@@ -10,7 +10,7 @@ To do this, you'll need to combine integration YAML files with the base Datadog 
 
 ##### Example: Monitoring Redis
 
-Let's look at how you would monitor a Redis container using Compose. Our example file structure is:
+The following is an example of how you can monitor a Redis container using Compose. The example file structure is:
 
     |- docker-compose.yml
     |- datadog
@@ -18,7 +18,7 @@ Let's look at how you would monitor a Redis container using Compose. Our example
         |- conf.d
            |-redisdb.yaml
 
-First we'll take a look at the `docker-compose.yml` that describes how our containers work together and sets some of the configuration details for the containers.
+First, take a look at the `docker-compose.yml` that describes how your containers work together and sets some of the configuration details for the containers.
 
 ```yaml
 version: '3'
@@ -37,7 +37,7 @@ services:
      - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
 ```
 
-Finally our `redisdb.yaml` is patterned after the [redisdb.yaml.example file][3] and tells the Datadog Agent to look for Redis on the host named `redis` (defined in our `docker-compose.yaml` above) and the standard Redis port 6379:
+The `redisdb.yaml` is patterned after the [redisdb.yaml.example file][3] and tells the Datadog Agent to look for Redis on the host named `redis` (defined in `docker-compose.yaml` above) and the standard Redis port 6379:
 
     init_config:
 
@@ -45,7 +45,7 @@ Finally our `redisdb.yaml` is patterned after the [redisdb.yaml.example file][3]
       - host: redis
         port: 6379
 
-For a more complete example, see our [Docker Compose example project on GitHub][4].
+For a more complete example, see the [Docker Compose example project on GitHub][4].
 
 [1]: https://docs.docker.com/compose/overview
 [2]: /integrations/docker_daemon
