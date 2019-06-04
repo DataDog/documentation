@@ -18,10 +18,10 @@ further_reading:
 ---
 
 ## Setup
-If you haven't installed the Datadog Agent yet, see below or the [in-app installation instructions][1]. The [Supported OS versions][2] are available in the Agent documentation.
+If you haven't installed the Datadog Agent yet, see below or the [in-app installation instructions][1]. See the Agent documentation for [supported OS versions][2].
 
 ### Installation
-Starting with **Agent v6.11.0**, the Core and APM/Trace components of the Windows Agent run under the `ddagentuser` account created at install time instead of the `LOCAL_SYSTEM` account. If enabled, the Live Process component still runs under the `LOCAL_SYSTEM` account. [Learn more about the Datadog Windows Agent User][3].
+Starting with **Agent v6.11.0**, the core and APM/trace components of the Windows Agent run under the `ddagentuser` account created at install time instead of the `LOCAL_SYSTEM` account. The Live Process component, if enabled, runs under the `LOCAL_SYSTEM` account. [Learn more about the Datadog Windows Agent User][3].
 
 #### GUI
 
@@ -34,7 +34,7 @@ Starting with **Agent v6.11.0**, the Core and APM/Trace components of the Window
 Optionally, install the Agent with the command line to add custom settings.
 
 1. Download the [Datadog Agent installer][4].
-2. Run one of the following commands in the directory you downloaded the installer.  
+2. Run one of the following commands inside the directory where you downloaded the installer.  
    **Note**: The `/qn` option runs a quiet install. To see the GUI prompts, remove it.
 
 Command prompt:
@@ -52,7 +52,7 @@ Each configuration item is added as a property to the command line. The followin
 | Variable                   | Type   | Description                                                                                                                                                                                                                        |
 |----------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `APIKEY`                   | String | Adds the Datadog API KEY to the configuration file.                                                                                                                                                                                |
-| `TAGS`                     | String | Comma separated list of tags to assign in the configuration file. Example: `TAGS="key_1:val_1,key_2:val_2"`                                                                                                                        |
+| `TAGS`                     | String | Comma-separated list of tags to assign in the configuration file. Example: `TAGS="key_1:val_1,key_2:val_2"`                                                                                                                        |
 | `HOSTNAME`                 | String | Configures the hostname reported by the Agent to Datadog (overrides any hostname calculated at runtime).                                                                                                                           |
 | `LOGS_ENABLED`             | String | Enable (`"true"`) or disable (`"false"`) the log collection feature in the configuration file. Logs are disabled by default.                                                                                                       |
 | `APM_ENABLED`              | String | Enable (`"true"`) or disable (`"false"`) the APM Agent in the configuration file. APM is enabled by default.                                                                                                                       |
@@ -63,11 +63,11 @@ Each configuration item is added as a property to the command line. The followin
 | `PROXY_USER`               | String | If using a proxy, sets your proxy user. [Learn more about using a proxy with the Datadog Agent][6].                                                                                                                                |
 | `PROXY_PASSWORD`           | String | If using a proxy, sets your proxy password. [Learn more about using a proxy with the Datadog Agent][6].                                                                                                                            |
 | `DDAGENTUSER_NAME`         | String | Override the default `ddagentuser` username used during Agent installation _(v6.11.0+)_. [Learn more about the Datadog Windows Agent User][3].                                                                                     |
-| `DDAGENTUSER_PASSWORD`     | String | Override the cryptographically secure password generated for the `ddagentuser` user during Agent installation _(v6.11.0+)_. Must be provided for installs on Domain Servers. [Learn more about the Datadog Windows Agent User][3]. |
+| `DDAGENTUSER_PASSWORD`     | String | Override the cryptographically secure password generated for the `ddagentuser` user during Agent installation _(v6.11.0+)_. Must be provided for installs on domain servers. [Learn more about the Datadog Windows Agent User][3]. |
 | `APPLICATIONDATADIRECTORY` | Path   | Override the directory to use for the configuration file directory tree. May only be provided on initial install; not valid for upgrades. Default: `C:\ProgramData\Datadog`. _(v6.11.0+)_                                          |
 | `PROJECTLOCATION`          | Path   | Override the directory to use for the binary file directory tree. May only be provided on initial install; not valid for upgrades. Default: `C:\Program Files\Datadog\Datadog Agent`. _(v6.11.0+)_                                 |
 
-**Note**: If a valid `datadog.yaml` is found and has an API key configured, that file takes precedence over all specified command-line options.
+**Note**: If a valid `datadog.yaml` is found and has an API key configured, that file takes precedence over all specified command line options.
 
 ### Validation
 To verify your installation, follow the instructions in the [Agent Status and Information](#agent-status-and-information) section.
@@ -80,7 +80,7 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 {{% tab "Agent v6" %}}
 
 * The main executable name is `agent.exe`.
-* The configuration GUI is a browser based configuration application (for Windows 64-bit only).
+* The configuration GUI is a browser-based configuration application (for Windows 64-bit only).
 * Commands can be run from the command line `"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" <command>`. Command-line options are below:
 
 | Command         | Description                                                                      |
@@ -220,7 +220,7 @@ Need help? Contact [Datadog support][1].
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-For Windows Server 2008, Vista, and newer, the Agent logs are located in `C:\ProgramData\Datadog\logs`.
+For Windows Server 2008, Vista, and newer systems, the Agent logs are located in `C:\ProgramData\Datadog\logs`.
 
 **Note**: `ProgramData` is a hidden folder.
 
@@ -274,7 +274,7 @@ or cmd.exe:
 "C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
 ```
 
-#### Flare Fails to Upload
+#### Flare fails to upload
 
 On Linux and macOS, the output of the flare command tells you where the compressed flare archive is saved. In case the file fails to upload to Datadog, you can retrieve it from this directory and manually add as an attachment to an email.
 
@@ -305,7 +305,7 @@ Example:
 ## Use Cases
 ###  Monitoring a Windows Service
 
-On your target host, launch the Datadog Agent Manager and select the "Windows Service" Integration from the list. For this, there is an out-of-the-box example, however, this example uses DHCP.
+On your target host, launch the Datadog Agent Manager and select the "Windows Service" Integration from the list. For this, there is an out-of-the-box example; however, this example uses DHCP.
 
 To get the name of the service, open `services.msc` and locate your target service. Using DHCP as the target, you can see the service name at the top of the service properties window:
 
@@ -315,9 +315,9 @@ When adding your own services, be sure to follow the formatting exactly as shown
 
 {{< img src="agent/faq/windows_DHCP_service.png" alt="Windows DHCP Service" responsive="true" style="width:75%;">}}
 
-Also, any time you modify an integration the Datadog service needs to be restarted. You can do this from services.msc or from the UI sidebar.
+Also, whenever you modify an integration, the Datadog service needs to be restarted. You can do this from services.msc or from the UI sidebar.
 
-For Services, Datadog doesn't track the metrics, only their availability. (For metrics, use the [Process][7] or [WMI][8] integration). To set up a Monitor, select the [Integration monitor type][9] then search for **Windows Service**. From *Integration Status -> Pick Monitor Scope*, choose the service you would like to monitor.
+For Services, Datadog doesn't track the metrics—only their availability. (For metrics, use the [Process][7] or [WMI][8] integration). To set up a Monitor, select the [Integration monitor type][9] then search for **Windows Service**. From *Integration Status -> Pick Monitor Scope*, choose the service you would like to monitor.
 
 ### Monitoring system load for Windows
 
