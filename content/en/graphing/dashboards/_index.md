@@ -66,7 +66,7 @@ You have the capability to create and customize two types of Dashboards: [Screen
 
 ### Suggested dashboards and active users
 
-If you’re not sure where to look next, Datadog offers suggestions for viewing other, related dashboards. To view suggested dashboards and active users, click on the caret icon next to the dashboard title. These dashboards are recommended based on the user activity in your org and how often users go from this dashboard to other existing dashboards. You can also add or update markdown supported dashboard descriptions in this view, by clicking `edit`.
+If you’re not sure where to look next, Datadog offers suggestions for viewing related dashboards. To view suggested dashboards and active users, click on the caret icon next to the dashboard title. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. You can also add or update Markdown-supported dashboard descriptions in this view by clicking `edit`.
 
 {{< img src="graphing/dashboards/suggested_dashboards.png" alt="Suggested dashboards" responsive="true">}}
 
