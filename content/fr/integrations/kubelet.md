@@ -40,7 +40,7 @@ Le check Kubelet est inclus avec le paquet de l'[Agent Datadog][1] : vous n'ave
 
 ## Configuration
 
-Modifiez le fichier `kubelet.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2] pour le rediriger vers votre serveur et votre port. Définissez ensuite les tags à envoyer avec les métriques.
+Modifiez le fichier `kubelet.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2] afin de spécifier votre serveur et votre port. Définissez ensuite les tags à envoyer avec les métriques.
 
 ## Validation
 
