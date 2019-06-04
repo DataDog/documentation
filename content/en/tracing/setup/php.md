@@ -212,8 +212,8 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_SAMPLING_RATE`                   | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default)         |
 | `DD_SERVICE_NAME`                    | ``          | The default app name                                                        |
 | `DD_TRACE_AGENT_PORT`                | `8126`      | The Agent port number                                                       |
-| `DD_TRACE_AGENT_TIMEOUT`             | `500`       | Maximum time the agent is allowed to take (in milliseconds)                 |
-| `DD_TRACE_AGENT_CONNECT_TIMEOUT`     | `100`       | Maximum time the allowed for agent connection setup (in milliseconds)       |
+| `DD_TRACE_AGENT_TIMEOUT`             | `500`       | Maximum time the Agent is allowed to take (in milliseconds)                 |
+| `DD_TRACE_AGENT_CONNECT_TIMEOUT`     | `100`       | Maximum time the allowed for Agent connection setup (in milliseconds)       |
 | `DD_TRACE_ANALYTICS_ENABLED`         | `false`     | Flag to enable trace analytics for relevant spans in web integrations       |
 | `DD_TRACE_DEBUG`                     | `false`     | Enable [debug mode][15] for the tracer                                      |
 | `DD_TRACE_ENABLED`                   | `true`      | Enable the tracer globally                                                  |
