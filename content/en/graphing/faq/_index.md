@@ -4,7 +4,8 @@ kind: faq
 disable_toc: true
 private: true
 aliases:
-    - /graphing/faq/how-to-merge-screenboards/
+    - /graphing/faq/how-to-merge-screenboards
+    - /graphing/faq/false-spikes-sometimes-appear-on-my-sum-graph
 ---
 
 {{< whatsnext desc="List of Frequently Asked Questions:" >}}
