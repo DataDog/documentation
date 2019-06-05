@@ -23,8 +23,6 @@ sidebar:
       href: "guides/dogstatsd/"
     - text: FAQ よくあるご質問
       href: "faq/"
-    - text: 課金に関するFAQ
-      href: "guides/billing/"
 aliases:
     - /ja/guides/
     - /videos/tipsandtricks-k8s-autodiscovery/

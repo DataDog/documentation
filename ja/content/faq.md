@@ -572,18 +572,6 @@ Datadogの`team`タブ以下で設定したメンバー以外の任意のメー�
 
 請求書受信者のメールアドレスは、[Billing and Plan][19]のページから変更してください。
 
-<!--#### Where can I get a copy of the invoice? {#billing-invoice}
-
-As an admin you can check out past invoices [here][18].
-
-***You can read more about billing [here][20].***-->
-
-#### 請求書のコピーは、どこから入手できますか。 {#billing-invoice}
-
-管理者権限のあるユーザは、[Billing History][21]のページから過去の請求状況を確認することができます。
-
-**課金に関する詳しい情報は、[課金に関するFAQ][22]のページを参照してください。**
-
 <!--
 ===============================================================================
     Graphing
@@ -1042,7 +1030,7 @@ about on <a target="_blank" href="http://docs.datadoghq.com/api/">here</a>).
 
 <p>
 Here is an example:
-<pre><code>{�
+<pre><code>{�
 "title": "Host CPU above 75% for 5 minutes",
 "text": "Host CPU has been above 75% for the last 5 minutes ...etc",
 "priority": "normal",
@@ -1059,7 +1047,7 @@ Here is an example:
 
 次に例を示します:
 
-<pre><code>{�
+<pre><code>{�
 "title": "Host CPU above 75% for 5 minutes",
 "text": "Host CPU has been above 75% for the last 5 minutes ...etc",
 "priority": "normal",
@@ -1141,26 +1129,26 @@ You can send the request to support@datadoghq.com and we will add it to our feat
 #### サービスや機能に対する要望はどのように提出ればよいですか。 {#feature-request}
 
 要望は、support@datadoghq.comに送信してください。それらの要望は、Datadogの機能追加要求のバックログに随時追加され検討されていきます。
-[1]: 
+[1]:
 [2]: /api
-[3]: 
+[3]:
 [4]: /guides/dogstatsd
-[5]: 
+[5]:
 [6]: /guides/basic_agent_usage
 [7]: /guides/monitors
-[8]: 
-[9]: 
-[10]: 
+[8]:
+[9]:
+[10]:
 [11]: /hostnames
-[12]: 
-[13]: 
+[12]:
+[13]:
 [14]: /guides/metrics/#tags
 [15]: /integrations/aws
 [16]: https://app.datadoghq.com/account/settings#integrations/postgres
-[17]: 
-[18]: 
+[17]:
+[18]:
 [19]: https://app.datadoghq.com/account/billing
-[20]: 
+[20]:
 [21]: https://app.datadoghq.com/account/billing_history
 [22]: /guides/billing
 [23]: /graphing/#functions

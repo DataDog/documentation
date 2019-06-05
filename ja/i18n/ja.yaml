@@ -36,15 +36,12 @@
 
 - id: menu_references_logs
   translation: "Logs"
-  
+
 - id: menu_references_examples
   translation: "サンプルコード"
 
 - id: menu_references_videos
   translation: "ビデオ"
-
-- id: menu_references_billing
-  translation: "課金に関するFAQ"
 
 - id: menu_references_faq
   translation: "FAQ"
@@ -150,7 +147,7 @@
   translation: "Hostmap"
 
 - id: customnav_infrastructurenav_livecontainers
-  translation: "Containters" 
+  translation: "Containters"
 
 - id: customnav_infrastructurenav_process
   translation: "Processes"
@@ -174,7 +171,7 @@
 
 - id: customnav_lognav_explore
   translation: Explore
-  
+
 # Basic agent menu
 
 - id: amazonlinux
