@@ -24,16 +24,13 @@ To install from source:
 The minimum valid `dogwrap` command has the following layout:
 
 ```bash
-dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> --submit_mode <SUBMIT_MODE> "<COMMAND>"
+dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> "<COMMAND>"
 ```
 
 With the following placeholders:
 
 * `<EVENT_TITLE>`: Title of the Event to display in Datadog
 * `<DATADOG_API_KEY>`: [The Datadog API key associated with your organization][2]
-* `<SUBMIT_MODE>`: Defines when to send an event depending of the output of the wrapped script:
-    * `all`: send events on every run
-    * `errors`: send events if the script exits with a non-zero exit code
 * `<COMMAND>`: Command to wrap and generate events from. You must enclose your called command in quotes to prevent python from thinking the command line arguments belong to the python command instead of the wrapped one.
 
 **Note**: Use the dogwrap help command line `dogwrap help` to discover all available options.
@@ -49,5 +46,8 @@ Vacuuming is particularly resource-intensive though, so you might want Datadog e
 ```bash
 dogwrap -n "Vacuuming mytable" -k $DATADOG_API_KEY --submit_mode errors "psql -c 'vacuum verbose my_table' 2>&1 /var/log/postgres_vacuums.log"
 ```
+
+This calls the command at the end of the script and, if it exits with a non-zero exit code (i.e. an error), sends Datadog events. Using `--submit_mode all` would send events on every run of this command.
+
 [1]: https://github.com/DataDog/datadogpy
 [2]: https://app.datadoghq.com/account/settings#api
