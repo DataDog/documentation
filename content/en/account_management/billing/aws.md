@@ -17,7 +17,7 @@ Use the [Datadog-AWS integration tile][1] to control your metric collection. Go 
 
 {{< img src="account_management/billing/aws01.png" alt="AWS" responsive="true">}}
 
-**Note**: Datadog do not charge for Elastic Load Balancers metrics as they can’t be filtered out.
+**Note**: Datadog does not charge for ELB metrics, as they can’t be filtered out.
 
 When adding limits to existing AWS accounts within the integration tile, the previously discovered instances could stay in the [Infrastructure List][3] up to 24 hours. During the transition period, EC2 instances display a status of `???`. This does not count towards your billing.
 
