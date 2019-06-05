@@ -31,7 +31,7 @@ Notifications are a key component of any [monitor][1]. You want to make sure the
    what is going on.
 
 2. Enter a **message** for the monitor. This field allows standard [Markdown formatting][2] as well as in-line [variables](#variables) and tag variables.
-  Use [conditional variables](#conditional-variables) to modulate the notification text and send them to different contacts with the [Datadog's @-notification syntax](#notification).
+  Use [conditional variables](#conditional-variables) to modulate the notification text and send them to different contacts with the [Datadog's **@-notification** syntax](#notification).
   A common use-case for the monitor message is to include a step-by-step way to resolve the problem.
 
 3. Optionally enable **monitor renotification**. This option is useful to remind your team that a problem is not solved until the monitor is marked as [resolved][3]. If enabled, an escalation message can be configured to send any time the monitor renotifies. The original message is included as well.
@@ -99,7 +99,7 @@ For example, if you submit a metric tagged with `dot.key.test:five` and then set
 
 Conditional variables allow for different text to be [sent to different contacts](#toto) based on the state of the monitor and the details of how it was triggered. These condition variables can be used within either the subject or body of the notification set in section 3 of the monitor definition.
 
-Keep in mind when using conditional tags that they must have an open (example: `{{#is_alert}}`) and closing (example: `{{/is_alert}}`) pair with the desired text and @ mentions in between.
+Keep in mind when using conditional tags that they must have an open (example: `{{#is_alert}}`) and closing (example: `{{/is_alert}}`) pair with the desired text and **@-mentions** in between.
 
 The conditional variables available are:
 
@@ -259,7 +259,7 @@ Send the monitor notification to the appropriate endpoint:
 * Notify any non-Datadog users via email by adding `@<EMAIL>` to the notification message.
 * Install the Slack integration to send your notifications directly in the appropriate channel.
 
-**Note**: A @-mention must have a space between it and the last line character: `{{value}}@slack-channel` is invalid `{{value}} @slack-channel` is valid.
+**Note**: An **@-mention** must have a space between it and the last line character: `{{value}}@slack-channel` is invalid `{{value}} @slack-channel` is valid.
 
 ### Integrations
 
@@ -301,7 +301,7 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 
 * `@slack-{{host.name}}` post a slack message to the #host.name channel in Slack.
 
-Or create an **@-mentions** that goes directly to a specific email:
+Or create an **@-mention** that goes directly to a specific email:
 
 * `@team-{{team.name}}@company.com` sends an email right to the team's mailing list.
 
