@@ -105,7 +105,7 @@ spec:
 ```
 
 [1]: /getting_started/integrations
-[2]: /agent/autodiscovery
+[2]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
 {{% /tab %}}
 {{< /tabs >}}
 

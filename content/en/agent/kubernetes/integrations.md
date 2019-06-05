@@ -79,7 +79,7 @@ To mount a custom `datadog.yaml` in a container with a ConfigMap, employ the fol
             name: dd-agent-config
             items:
               - key: datadog-yaml
-                path: datadog.yaml 
+                path: datadog.yaml
 [...]
 ```
 
@@ -115,4 +115,4 @@ This can be done with Autodiscovery. For more details, see the [Autodiscovery][2
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/http_check
-[2]: /agent/autodiscovery
+[2]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
