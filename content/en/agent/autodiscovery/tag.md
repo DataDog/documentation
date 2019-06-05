@@ -19,8 +19,8 @@ further_reading:
   text: "Manage which Container to include in the Agent Autodiscovery"
 ---
 
-The Datadog Agent can create and assign tags to all metrics, traces, and logs emitted by a container based on its Labels or Environment Variables.
-If you are working with a Kubernetes environment, the Agent can create and assign tags to all metrics, traces, and logs emitted by a pod, based on its Labels or annotations.
+The Datadog Agent can create and assign tags to all metrics, traces, and logs emitted by a container based on its labels or environment variables.
+If you are working with a Kubernetes environment, the Agent can create and assign tags to all metrics, traces, and logs emitted by a Pod, based on its labels or annotations.
 
 If running the Agent as a binary on a host, configure your tag extractions with the [Host Agent](?tab=host-agent) tab instructions. If running the Agent as a container configure your tag extraction with the  [Containerized Agent Tab](?tab=containerized-agent) instructions.
 
@@ -51,7 +51,7 @@ Starting with Agent v6.0+, the Agent can collect labels for a given node and use
 {{< tabs >}}
 {{% tab "Host Agent" %}}
 
-To extract a given node label `<NODE_LABEL>` and transform it as a Tag Key `<TAG_KEY>` within Datadog, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+To extract a given node label `<NODE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
 ```yaml
 kubernetes_node_labels_as_tags:
@@ -69,7 +69,7 @@ kubernetes_node_labels_as_tags:
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
-To extract a given node label `<NODE_LABEL>` and transform it as a Tag Key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
+To extract a given node label `<NODE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```shell
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"<NODE_LABEL>": "<TAG_KEY>"}'
@@ -109,7 +109,7 @@ kubernetes_pod_labels_as_tags:
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
-To extract a given pod label `<POD_LABEL>` and transform it as a Tag Key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
+To extract a given pod label `<POD_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```shell
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"<POD_LABEL>": "<TAG_KEY>"}'
@@ -131,7 +131,7 @@ Starting with Agent v6.0+, the Agent can collect annotations for a given pod and
 {{< tabs >}}
 {{% tab "Host Agent" %}}
 
-To extract a given pod annotation `<POD_ANNOTATION>` and transform it as a Tag Key `<TAG_KEY>` within Datadog, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+To extract a given pod annotation `<POD_ANNOTATION>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
 ```yaml
 kubernetes_pod_annotations_as_tags:
@@ -149,7 +149,7 @@ kubernetes_pod_annotations_as_tags:
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
-To extract a given pod label `<POD_ANNOTATION>` and transform it as a Tag Key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
+To extract a given pod label `<POD_ANNOTATION>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```shell
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"<POD_ANNOTATION>": "<TAG_KEY>"}'
@@ -168,12 +168,12 @@ DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"app":"kube_app"}'
 
 ### Extract Labels as Tags
 
-Starting with Agent v6.0+, the Agent can collect Labels for a given container and use them as tags to attach to all data emitted by this container.
+Starting with Agent v6.0+, the Agent can collect labels for a given container and use them as tags to attach to all data emitted by this container.
 
 {{< tabs >}}
 {{% tab "Host Agent" %}}
 
-To extract a given docker label `<LABEL_NAME>` and transform it as a Tag Key `<TAG_KEY>` within Datadog, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+To extract a given docker label `<LABEL_NAME>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
 ```yaml
 docker_labels_as_tags:
@@ -191,7 +191,7 @@ docker_labels_as_tags:
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
-To extract a given docker label `<LABEL_NAME>` and transform it as a Tag Key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
+To extract a given docker label `<LABEL_NAME>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```shell
 DD_DOCKER_LABELS_AS_TAGS='{"<LABEL_NAME>": "<TAG_KEY>"}'
@@ -208,12 +208,12 @@ DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 
 ### Extract Environment Variables as Tags
 
-Starting with Agent v6.0+, the Agent can collect Environment variables for a given container and use them as tags to attach to all data emitted by this container.
+Starting with Agent v6.0+, the Agent can collect environment variables for a given container and use them as tags to attach to all data emitted by this container.
 
 {{< tabs >}}
 {{% tab "Host Agent" %}}
 
-To extract a given docker environment variable `<ENVVAR_NAME>` and transform it as a Tag Key `<TAG_KEY>` within Datadog, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+To extract a given Docker environment variable `<ENVVAR_NAME>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
 ```yaml
 docker_env_as_tags:
@@ -231,7 +231,7 @@ docker_env_as_tags:
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
-To extract a given docker environment variable `<ENVVAR_NAME>` and transform it as a Tag Key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
+To extract a given Docker environment variable `<ENVVAR_NAME>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```shell
 DD_DOCKER_ENV_AS_TAGS='{"<ENVVAR_NAME>": "<TAG_KEY>"}'
