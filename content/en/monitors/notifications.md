@@ -268,9 +268,9 @@ Send the monitor notification to the appropriate endpoint:
 
 After setting up the Slack integration, type `@slack` in your notification message to see the available list of channels to send your notification to.
 
-**@-mentions in Slack from monitor alert**:
+#### @-mentions in Slack from monitor alert
 
-Wrap the `@username` in `< >` as seen below in your monitors message template to **@ notify** the defined user within slack notifications.
+Wrap the `@username` in `< >` as seen below in your monitors message template to **@-notify** the defined user within slack notifications.
 
 For example this configuration:
 {{< img src="monitors/notifications/notification_template.png" alt="notification_template" responsive="true" style="width:50%;" >}}
@@ -291,7 +291,7 @@ For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [
 Note: Trailing special characters in a channel name are unsupported for the Slack @-notifications.
 e.g. `@----critical_alerts` works, but `@--critical_alerts--` won't receive any notifications.
 
-**Using message template variables to dynamically create @-mentions**:
+### Using message template variables to dynamically create @-mentions
 
 Use message template variables within a monitor message to dynamically build **@-mentions**.
 
@@ -300,6 +300,10 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 * `@slack-{{owner.name}}` post a message on the owner's channel for this monitor.
 
 * `@slack-{{host.name}}` post a slack message to the #host.name channel in Slack.
+
+Or create an **@-mentions** that goes directly to a specific email:
+
+* `@team-{{team.name}}@company.com` sends an email right to the team's mailing list.
 
 
 [1]: http://slack.com/account/settings
