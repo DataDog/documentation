@@ -5,16 +5,16 @@ disable_toc: true
 further_reading:
 - link: "/agent/autodiscovery/integrations"
   tag: "Documentation"
-  text: "Create and load an Autodiscovery Integration Template"
+  text: "Create and load an Autodiscovery integration template"
 - link: "/agent/autodiscovery/ad_identifiers"
   tag: "Documentation"
-  text: "Match a container with the corresponding Integration Template"
+  text: "Match a container with the corresponding integration template"
 - link: "/agent/autodiscovery/management"
   tag: "Documentation"
-  text: "Manage which Container to include in the Agent Autodiscovery"
+  text: "Manage which container to include in the Agent Autodiscovery"
 ---
 
-Use the following Template Variables when configuring Autodiscovery in order to dynamically assign your containers values:
+Use the following template variables when configuring Autodiscovery in order to dynamically assign your container's values:
 
 
 | Template Variable           | Description                                                                                                                                                                                                 |
@@ -30,10 +30,10 @@ Use the following Template Variables when configuring Autodiscovery in order to 
 
 **Fall back**:
 
-* For the `"%%host%%"` template variable, in case the Agent is not able to find it, this template variable falls back to the `bridge` network IP.
-* For the `"%%host_<NETWORK NAME>%%"`, if the `<NETWORK_NAME>` specified was not found this template variable behaves like `"%%host%%"`.
+* For the `"%%host%%"` template variable: in case the Agent is not able to find it, this template variable falls back to the `bridge` network IP.
+* For the `"%%host_<NETWORK NAME>%%"`: if the `<NETWORK_NAME>` specified was not found this template variable behaves like `"%%host%%"`.
 
-Depending of your platform, not all template variables might be supported:
+Depending on your platform, not all template variables are be supported:
 
 | Platform    | Auto-discovery identifiers  | Host | Port | Tag | Pid | Env | Hostname |
 | ----------- | ---                         | ---  | ---  | --- | --- | --- | ---      |
