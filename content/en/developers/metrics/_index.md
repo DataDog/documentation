@@ -49,6 +49,8 @@ There are a few rules regarding metric names:
 
 Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `http.nginx.response_time`). The hierarchy is neither enforced nor interpreted, but it can be used to infer things about servers. For example, if `hostA` and `hostB` are both reporting `http.nginx.*` those must be web frontends.
 
+**Note**: Metric names are case sensitive in Datadog.
+
 ## Metric Types
 
 The "Datadog in-app type" affects how a given metric is interpreted in query results and graph visualizations across the application. This type is visible and can be changed on the [metric summary page][12]. Be aware that changing the metric type may render historical data nonsensical.
@@ -100,7 +102,7 @@ is interpreted properly.
 
 If you are not willing to lose the historical data submitted as a `gauge`, create a new metric name with the new type, leaving the type of `app.requests.served` unchanged.
 
-**Note**: For the AgentCheck, `self.increment` does not calculate the delta for a monotonically increasing counter, rather it reports the value passed in at the check run. To send the delta value on a monotonically increasing counter, use `self.monotonic_count`. 
+**Note**: For the AgentCheck, `self.increment` does not calculate the delta for a monotonically increasing counter, rather it reports the value passed in at the check run. To send the delta value on a monotonically increasing counter, use `self.monotonic_count`.
 
 ## Units
 
