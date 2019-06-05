@@ -21,7 +21,7 @@ To install from source:
 2. Inside the root folder run: `python setup.py install`
 
 
-The minimum valid `dogwrap` command have the following layout:
+The minimum valid `dogwrap` command has the following layout:
 
 ```bash
 dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> --submit_mode <SUBMIT_MODE> "<COMMAND>"
