@@ -28,8 +28,6 @@ Search across your Dashboard with the search bar at the top of the page. Dashboa
 * `Modified`: Sort the Dashboard list by last modification date.
 * `Popularity`: Sort the Dashboard list by [Dashboard popularity](#popularity).
 
-To view suggested dashboards and active users, click on the caret icon next to the dashboard title. You can also add markdown supported dashboard descriptions in this view.
-
 ### Popularity
 
 A Dashboard's popularity is relative. An organization's most popular Dashboard appears as 5 bars; all other Dashboards are relative to that. Popularity is based upon the amount of traffic a Dashboard is getting and is updated daily, so new Dashboards have 0 popularity bars for up to the first 24 hours.
@@ -65,6 +63,12 @@ You have the capability to create and customize two types of Dashboards: [Screen
 | Can Share Graphs Individually  | Yes                              | No                                                |
 | Can Share the Entire Dashboard | No                               | Yes                                               |
 | Sharing can be Read-Only       | Yes                              | Yes                                               |
+
+### Suggested dashboards and active users
+
+If you’re not sure where to look next, Datadog offers suggestions for viewing related dashboards. To view suggested dashboards and active users, click on the caret icon next to the dashboard title. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. You can also add or update Markdown-supported dashboard descriptions in this view by clicking `edit`.
+
+{{< img src="graphing/dashboards/suggested_dashboards.png" alt="Suggested dashboards" responsive="true">}}
 
 ## Further Reading
 

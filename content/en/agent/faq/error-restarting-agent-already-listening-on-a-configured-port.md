@@ -7,12 +7,13 @@ further_reading:
   text: "Learn more about the Datadog Agent"
 ---
 
-When attempting to restart the Agent, you may encounter this error if the Agent didn't shut down correctly:
+When attempting to restart the Agent, you may encounter this error:
 
-Starting Datadog Agent (using supervisord) datadog-agent
 ```
 Error: Another program is already listening on a port that one of our HTTP servers is configured to use. Shut this program down first before starting supervisord.
 ```
+
+This indicates that the Agent did not shut down correctly.
 
 To resolve this issue, take the following steps:
 
@@ -25,14 +26,15 @@ To resolve this issue, take the following steps:
     top -U dd-agent
     ```
 
-If you do find processes running under `dd-agent`, kill them.
+    Kill any processes running under `dd-agent`, if you find any.
 
-After the above steps, start the Agent:
-```
-sudo /etc/init.d/datadog-agent start
-```
+3. Start the Agent again.
 
-If this doesn't solve your issue, reach out to [us][1]!
+	```
+	sudo /etc/init.d/datadog-agent start
+	```
+
+If this doesn't solve your issue, reach out to [Datadog Support][1].
 
 {{< partial name="whats-next/whats-next.html" >}}
 

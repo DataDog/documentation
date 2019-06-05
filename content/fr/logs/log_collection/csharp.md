@@ -264,14 +264,14 @@ instances:
 ##Section Log
 logs:
 
-    ## - type (obligatoire) : le type de fichier de la source d'entrée de log (tcp/udp/file).
-    ##   port / path (obligatoire) : définit le type tcp ou udp. Choisit le chemin si le type est défini sur file.
-    ##   service (obligatoire) : le nom du service propriétaire du log.
-    ##   source (obligatoire) : un attribut qui définit l'intégration qui envoie les logs.
+    ## - type (obligatoire) : type de fichier de la source d'entrée de log (tcp/udp/file).
+    ##   port / path (obligatoire) : définit le type tcp ou udp du port. Choisit le chemin si le type est défini sur file.
+    ##   service (obligatoire) : nom du service propriétaire du log.
+    ##   source (obligatoire) : attribut qui définit l'intégration qui envoie les logs.
     ##   sourcecategory (facultatif) : un attribut à valeur multiple. Il peut être utilisé pour préciser l'attribut source.
     ##   tags (facultatif) : ajoute des tags à chaque log recueilli.
 
-  - type: fichier
+  - type: file
     path: /chemin/vers/votre/log/csharp.log
     service: csharp
     source: csharp

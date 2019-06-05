@@ -111,17 +111,18 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 #### Data Store Compatibility
 
-| Module                 | Versions | Support Type    | Notes                                    |
-|------------------------|----------|-----------------|------------------------------------------|
-| [cassandra-driver][20] | `>=3`    | Fully Supported |                                          |
-| [elasticsearch][21]    | `>=10`   | Fully Supported |                                          |
-| [ioredis][22]          | `>=2`    | Fully Supported |                                          |
-| [memcached][23]        | `>=2.2`  | Fully Supported |                                          |
-| [mongodb-core][24]     | `>=2`    | Fully Supported | Supports Mongoose                        |
-| [mysql][25]            | `>=2`    | Fully Supported |                                          |
-| [mysql2][26]           | `>=1`    | Fully Supported |                                          |
-| [pg][27]               | `>=4`    | Fully Supported | Supports `pg-native` when used with `pg` |
-| [redis][28]            | `>=0.12` | Fully Supported |                                          |
+| Module                 | Versions | Support Type    | Notes                                            |
+|------------------------|----------|-----------------|--------------------------------------------------|
+| [cassandra-driver][20] | `>=3`    | Fully Supported |                                                  |
+| [elasticsearch][21]    | `>=10`   | Fully Supported | Supports `@elastic/elasticsearch` versions `>=5` |
+| [ioredis][22]          | `>=2`    | Fully Supported |                                                  |
+| [knex][40]             | `>=0.8`  | Fully Supported | This integration is only for context propagation |
+| [memcached][23]        | `>=2.2`  | Fully Supported |                                                  |
+| [mongodb-core][24]     | `>=2`    | Fully Supported | Supports Mongoose                                |
+| [mysql][25]            | `>=2`    | Fully Supported |                                                  |
+| [mysql2][26]           | `>=1`    | Fully Supported |                                                  |
+| [pg][27]               | `>=4`    | Fully Supported | Supports `pg-native` when used with `pg`         |
+| [redis][28]            | `>=0.12` | Fully Supported |                                                  |
 
 #### Worker Compatibility
 
@@ -192,3 +193,4 @@ For details about how to how to toggle and configure plugins, check out the [API
 [37]: https://github.com/trentm/node-bunyan
 [38]: http://getpino.io
 [39]: https://github.com/winstonjs/winston
+[40]: https://knexjs.org/

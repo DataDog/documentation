@@ -1,6 +1,8 @@
 ---
 title: Container Integration Events
 kind: faq
+aliases:
+- /integrations/faq/docker-ecs-kubernetes-events/
 ---
 
 When monitoring containers and orchestrators (Docker, ECS, and Kubernetes) you are familiar with the events that are available once an integration has been enabled and respective configuration steps followed.

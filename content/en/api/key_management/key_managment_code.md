@@ -1,6 +1,6 @@
 ---
 title: Key Management
 type: apicode
-order: 16
+order: 21
 external_redirect: /api/#key-management
 ---

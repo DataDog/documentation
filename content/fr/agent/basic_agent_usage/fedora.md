@@ -110,4 +110,4 @@ Pour en savoir plus, consultez les instructions afin de découvrir comment [ajou
 [1]: https://app.datadoghq.com/account/settings#agent/fedora
 [2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
 [3]: /fr/agent/troubleshooting
-[4]: /fr/agent/faq/custom_python_package
+[4]: /fr/developers/guide/custom-python-package

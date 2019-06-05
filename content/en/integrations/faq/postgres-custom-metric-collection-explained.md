@@ -10,7 +10,7 @@ further_reading:
   text: "Postgres Integration"
 ---
 
-To collect custom metrics with the Postgres integration, use the `custom_queries` option in the `conf.d/postgres.d/conf.yaml` file at the root of your [Agent's configuration directory][1].
+To collect custom metrics with the Postgres integration, use the `custom_queries` option in the `conf.d/postgres.d/conf.yaml` file at the root of your [Agent's configuration directory][1]. See the sample [postgres.d/conf.yaml][2] for more details.
 
 ## Configuration
 
@@ -67,17 +67,17 @@ custom_queries:
       - query:custom
 ```
 
-After updating the Postgres YAML file, [restart the Datadog Agent][2].
+After updating the Postgres YAML file, [restart the Datadog Agent][3].
 
 ### Validation
 
-To verify the result, search for the metrics using the [Metrics Explorer][3]:
+To verify the result, search for the metrics using the [Metrics Explorer][4]:
 
 {{< img src="integrations/faq/sql_metric_explorer.png" alt="sql_metric_explorer" responsive="true" >}}
 
 ### Debugging
 
-[Run the Agent's status subcommand][4] and look for `postgres` under the Checks section:
+[Run the Agent's status subcommand][5] and look for `postgres` under the Checks section:
 
 ```
 postgres
@@ -86,14 +86,15 @@ postgres
   - Collected 0 metrics, 0 events & 0 service checks
 ```
 
-Additionally, the [Agent's logs][5] may provide useful information.
+Additionally, the [Agent's logs][6] may provide useful information.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[2]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
-[3]: /graphing/metrics/explorer
-[4]: /agent/guide/agent-commands/#agent-status-and-information
-[5]: /agent/guide/agent-log-files
+[2]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
+[3]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[4]: /graphing/metrics/explorer
+[5]: /agent/guide/agent-commands/#agent-status-and-information
+[6]: /agent/guide/agent-log-files

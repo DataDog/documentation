@@ -1,7 +1,7 @@
 ---
 title: Metrics
 type: apicontent
-order: 18
+order: 25
 external_redirect: /api/#metrics
 ---
 ## Metrics
@@ -19,4 +19,3 @@ submitted points every 15 seconds. Any metrics with fractions of a second timest
 
 We have a soft limit of 100 timeseries per host, where a timeseries is
 defined as a unique combination of metric name and tag.
-

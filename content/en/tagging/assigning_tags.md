@@ -77,6 +77,9 @@ When installing the containerized Datadog Agent, set your host tags using the en
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
 DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
+
+When using `DD_KUBERNETES_POD_LABELS_AS_TAGS`, note that you can use wildcards in the format `{"foo", "bar_%%label%%"}`. For instance, `{"app*", "kube_%%label%%"}` resolves to the tag name `kube_application` for the label `application`. Further, `{"*", "kube_%%label%%"}` adds all pod labels as tags prefixed with `kube_`.
+
 When using the `DD_DOCKER_LABELS_AS_TAGS` variable within a Docker Swarm `docker-compose.yaml` file, remove the apostrophes, for example:
 
 ```shell
@@ -122,7 +125,7 @@ services:
 
 Either define the variables in your custom `datadog.yaml`, or set them as JSON maps in these environment variables. The map key is the source (`label/envvar`) name, and the map value is the Datadog tag name.
 
-The environment variables that set tag cardinality (`DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`) can have values `low`, `orchestrator`, or `high`. They both default to `low`.
+There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`—as DogStatsD is priced differently, its tag cardinality setting is separated in order to provide the opportunity for finer configuration. Otherwise, these variables function the same way: they can have values `low`, `orchestrator`, or `high`. They both default to `low`.
 
 Setting the variable to `orchestrator` adds the following tags: `pod_name` (Kubernetes), `oshift_deployment` (OpenShift), `task_arn` (ECS and Fargate), `mesos_task` (Mesos).
 
@@ -328,66 +331,51 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 
 ## Integration Inheritance
 
-The most efficient method for assigning tags is to rely on your integrations. Tags assigned to your Amazon Web Services instances, Chef recipes, and more are all automatically assigned to the hosts and metrics when they are brought into Datadog. **Note**: `CamelCase` tags are converted to underscores by Datadog, for example `TestTag` --> `test_tag`.
+The most efficient method for assigning tags is to rely on your integrations. Tags assigned to your Amazon Web Services instances, Chef recipes, and more are all automatically assigned to the hosts and metrics when they are brought into Datadog. **Note**: For web-based integrations, `CamelCase` tags are converted to underscores by Datadog, for example `TestTag` --> `test_tag`.
 
-The following [integration][5] sources create tags automatically in Datadog:
+### Amazon Web Services
 
-| Integration                             | Source                                                                                                                                                                                                                                                                                                                                        |
-|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Amazon CloudFront][15]                  | Distribution                                                                                                                                                                                                                                                                                                                                  |
-| [Amazon EC2][16]                         | AMI, Customer Gateway, DHCP Option, EBS Volume, Instance, Internet Gateway, Network ACL, Network Interface, Reserved Instance, Reserved Instance Listing, Route Table , Security Group - EC2 Classic, Security Group - VPC, Snapshot, Spot Batch, Spot Instance Request, Spot Instances, Subnet, Virtual Private Gateway, VPC, VPN Connection |
-| [Amazon Elastic File System][17]         | Filesystem                                                                                                                                                                                                                                                                                                                                    |
-| [Amazon Kinesis][18]                     | Stream State                                                                                                                                                                                                                                                                                                                                  |
-| [Amazon Machine Learning][19]            | BatchPrediction, DataSource, Evaluation, MLModel                                                                                                                                                                                                                                                                                              |
-| [Amazon Route 53][20]                    | Domains, Healthchecks, HostedZone                                                                                                                                                                                                                                                                                                             |
-| [Amazon WorkSpaces][21]                  | WorkSpaces                                                                                                                                                                                                                                                                                                                                    |
-| [AWS CloudTrail][22]                     | CloudTrail                                                                                                                                                                                                                                                                                                                                    |
-| [AWS Elastic Load Balancing][23]        | Loadbalancer, TargetGroups                                                                                                                                                                                                                                                                                                                    |
-| [AWS Identity and Access Management][21] | Profile Name                                                                                                                                                                                                                                                                                                                                  |
-| [AWS SQS][24]                           | Queue Name                                                                                                                                                                                                                                                                                                                                    |
-| [Apache][25]                            | Apache Host and Port                                                                                                                                                                                                                                                                                                                          |
-| [Azure][26]                             | Tenant Name, Status, Tags, Subscription ID and Name, Availability Zone in common with AWS tag after contacting Datadog support                                                                                                                                                                                                                |
-| [BTRFS][27]                             | Usage and Replication Type                                                                                                                                                                                                                                                                                                                    |
-| [Chef][28]                              | Chef Roles                                                                                                                                                                                                                                                                                                                                    |
-| [Consul][29]                            | Previous and Current Consul Leaders and Followers, Consul Datacenter, Service  Name, Service ID                                                                                                                                                                                                                                               |
-| [CouchDB][30]                           | Database Name,  Instance Name                                                                                                                                                                                                                                                                                                                 |
-| [CouchBase][31]                         | CouchBase Tags,  Instance Name                                                                                                                                                                                                                                                                                                                |
-| [Docker][32]                            | [Docker][33], [Kubernetes][34], [ECS][35], [Swarm, Mesos, Nomad and Rancher][33], collect more tag with [the Docker Agent tags collection options][36]                                                                                                                                                                                        |
-| [Dyn][37]                               | Zone, Record Type                                                                                                                                                                                                                                                                                                                             |
-| [Elasticsearch][38]                     | Cluster Name, Host Name, Port Number                                                                                                                                                                                                                                                                                                          |
-| [Etcd][39]                              | State Leader or Follower                                                                                                                                                                                                                                                                                                                      |
-| [Fluentd][40]                           | Host Name, Port Number                                                                                                                                                                                                                                                                                                                        |
-| [Google App Engine][41]                 | Project Name, Version ID, Task Queue                                                                                                                                                                                                                                                                                                          |
-| [Google Cloud Platform][42]             | Zone, Instance Type and ID, Automatic Restart, Project Name and ID, Name, Availability Zone in common with AWS tag after contacting Datadog support                                                                                                                                                                                           |
-| [Go Expvar][43]                         | Expvar Path                                                                                                                                                                                                                                                                                                                                   |
-| [Gunicorn][44]                          | State Idle or Working, App Name                                                                                                                                                                                                                                                                                                               |
-| [HAProxy][45]                           | Service Name, Availability, Backend Host, Status, Type                                                                                                                                                                                                                                                                                        |
-| [HTTP Check][46]                        | URL, Instance                                                                                                                                                                                                                                                                                                                                 |
-| [IIS][47]                               | Site                                                                                                                                                                                                                                                                                                                                          |
-| [Jenkins][48]                           | Job Name, Build Number, Branch, and Results                                                                                                                                                                                                                                                                                                   |
-| [JMX][49]                               | JMX Tags                                                                                                                                                                                                                                                                                                                                      |
-| [Kafka][50]                             | Topic                                                                                                                                                                                                                                                                                                                                         |
-| [Kubernetes][51]                        | Minion Name, Namespace, Replication Controller, Labels, Container Alias                                                                                                                                                                                                                                                                       |
-| [Marathon][52]                          | URL                                                                                                                                                                                                                                                                                                                                           |
-| [Memcached][53]                         | Host, Port, Request, Cache Hit or Miss                                                                                                                                                                                                                                                                                                        |
-| [Mesos][54]                             | Role, URL, PID, Slave or Master Role, Node, Cluster,                                                                                                                                                                                                                                                                                          |
-| [Mongo][55]                             | Server Name                                                                                                                                                                                                                                                                                                                                   |
-| [OpenStack][56]                         | Network ID, Network Name, Hypervisor Name, ID, and Type, Tenant ID, Availability Zone                                                                                                                                                                                                                                                         |
-| [PHP FPM][57]                           | Pool Name                                                                                                                                                                                                                                                                                                                                     |
-| [Pivotal][58]                           | Current State, Owner, Labels, Requester, Story Type                                                                                                                                                                                                                                                                                           |
-| [Postfix ][59]                          | Queue, Instance                                                                                                                                                                                                                                                                                                                               |
-| [Puppet][60]                            | Puppet Tags                                                                                                                                                                                                                                                                                                                                   |
-| [RabbitMQ][61]                          | Node, Queue Name, Vhost, Policy, Host                                                                                                                                                                                                                                                                                                         |
-| [Redis][62]                             | Host, Port, Slave or Master                                                                                                                                                                                                                                                                                                                   |
-| [RiakCS][63]                            | Aggregation Key                                                                                                                                                                                                                                                                                                                               |
-| [SNMP][64]                              | Device IP Address                                                                                                                                                                                                                                                                                                                             |
-| [Supervisord][65]                       | Server Name, Process Name                                                                                                                                                                                                                                                                                                                     |
-| [TeamCity][66]                          | Tags, Code Deployments, Build Number                                                                                                                                                                                                                                                                                                          |
-| [TokuMX][67]                            | Role Primary or Secondary, Replset, Replstate, Db, Coll, Shard                                                                                                                                                                                                                                                                                |
-| [Varnish][68]                           | Name, Backend                                                                                                                                                                                                                                                                                                                                 |
-| [VSphere][69]                           | Host, Datacenter, Server, Instance                                                                                                                                                                                                                                                                                                            |
-| [Win32 Events][70]                      | Event ID                                                                                                                                                                                                                                                                                                                                      |
-| [Windows Services][71]                  | Service Name                                                                                                                                                                                                                                                                                                                                  |
+The following tags are collected from AWS integrations. **Note**: Some tags only display on specific metrics.
+
+| Integration            | Datadog Tag Keys                                                                                                                                                                                              |
+|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| All                    | `region`                                                                                                                                                                                                      |
+| [API Gateway][15]      | `apiid`, `apiname`, `method`, `resource`, `stage`                                                                                                                                                             |
+| [Auto Scaling][16]     | `autoscalinggroupname`, `autoscaling_group`                                                                                                                                                                   |
+| [Billing][17]          | `account_id`, `budget_name`, `budget_type`, `currency`, `servicename`, `time_unit`                                                                                                                            |
+| [CloudFront][18]       | `distributionid`                                                                                                                                                                                              |
+| CodeBuild              | `project_name`                                                                                                                                                                                                |
+| [CodeDeploy][19]       | `application`, `creator`, `deployment_config`, `deployment_group`, `deployment_option`, `deployment_type`, `status`                                                                                           |
+| [DirectConnect][20]    | `connectionid`                                                                                                                                                                                                |
+| [DynamoDB][21]         | `globalsecondaryindexname`, `operation`, `streamlabel`, `tablename`                                                                                                                                           |
+| [EBS][22]              | `volumeid`, `volume-name`, `volume-type`                                                                                                                                                                      |
+| [EC2][23]              | `autoscaling_group`, `availability-zone`, `image`, `instance-id`, `instance-type`, `kernel`, `name`, `security_group_name`                                                                                    |
+| [ECS][24]              | `clustername`, `servicename`, `instance_id`                                                                                                                                                                   |
+| [EFS][25]              | `filesystemid`                                                                                                                                                                                                |
+| [ElastiCache][26]      | `cachenodeid`, `cache_node_type`, `cacheclusterid`, `cluster_name`, `engine`, `engine_version`, `prefered_availability-zone`, `replication_group`                                                             |
+| [ElasticBeanstalk][27] | `environmentname`, `enviromentid`                                                                                                                                                                             |
+| [ELB][28]              | `availability-zone`, `hostname`, `loadbalancername`, `name`, `targetgroup`                                                                                                                                    |
+| [EMR][29]              | `cluster_name`, `jobflowid`                                                                                                                                                                                   |
+| [ES][30]               | `dedicated_master_enabled`, `ebs_enabled`, `elasticsearch_version`, `instance_type`, `zone_awareness_enabled`                                                                                                 |
+| [Firehose][31]         | `deliverystreamname`                                                                                                                                                                                          |
+| [Health][32]           | `event_category`, `status`, `service`                                                                                                                                                                         |
+| [IoT][33]              | `actiontype`, `protocol`, `rulename`                                                                                                                                                                          |
+| [Kinesis][34]          | `streamname`, `name`, `state`                                                                                                                                                                                 |
+| [KMS][35]              | `keyid`                                                                                                                                                                                                       |
+| [Lambda][36]           | `functionname`, `resource`, `executedversion`, `memorysize`, `runtime`                                                                                                                                        |
+| [Machine Learning][37] | `mlmodelid`, `requestmode`                                                                                                                                                                                    |
+| [MQ][38]               | `broker`, `queue`, `topic`                                                                                                                                                                                    |
+| [OpsWorks][39]         | `stackid`, `layerid`, `instanceid`                                                                                                                                                                            |
+| [Polly][40]            | `operation`                                                                                                                                                                                                   |
+| [RDS][41]              | `auto_minor_version_upgrade`, `dbinstanceclass`, `dbclusteridentifier`, `dbinstanceidentifier`, `dbname`, `engine`, `engineversion`, `hostname`, `name`, `publicly_accessible`, `secondary_availability-zone` |
+| [Redshift][42]         | `clusteridentifier`, `latency`, `nodeid`, `service_class`, `stage`, `wlmid`                                                                                                                                   |
+| [Route 53][43]         | `healthcheckid`                                                                                                                                                                                               |
+| [S3][44]               | `bucketname`, `filterid`, `storagetype`                                                                                                                                                                       |
+| [SES][45]              | Tag keys are custom set in AWS.                                                                                                                                                                               |
+| [SNS][46]              | `topicname`                                                                                                                                                                                                   |
+| [SQS][47]              | `queuename`                                                                                                                                                                                                   |
+| [VPC][48]              | `nategatewayid`, `vpnid`, `tunnelipaddress`                                                                                                                                                                   |
+| [WorkSpaces][49]       | `directoryid`, `workspaceid`                                                                                                                                                                                  |
 
 ## Further Reading
 
@@ -407,60 +395,38 @@ The following [integration][5] sources create tags automatically in Datadog:
 [12]: /tracing/advanced/setting_primary_tags_to_scope
 [13]: /libraries
 [14]: /developers/dogstatsd/data_types/#host-tag-key
-[15]: /integrations/amazon_cloudfront
-[16]: /integrations/amazon_ec2
-[17]: /integrations/amazon_efs
-[18]: /integrations/amazon_kinesis
-[19]: /integrations/amazon_machine_learning
-[20]: /integrations/amazon_route53
-[21]: /integrations/amazon_workspaces
-[22]: /integrations/amazon_cloudtrail
-[23]: /integrations/amazon_elb
-[24]: /integrations/amazon_sqs
-[25]: /integrations/apache
-[26]: /integrations/azure
-[27]: /integrations/btrfs
-[28]: /integrations/chef
-[29]: /integrations/consul
-[30]: /integrations/couchdb
-[31]: /integrations/couchbase
-[32]: /integrations/docker
-[33]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
-[34]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
-[35]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
-[36]: /agent/docker/#tagging
-[37]: /integrations/dyn
-[38]: /integrations/elastic
-[39]: /integrations/etcd
-[40]: /integrations/fluentd
-[41]: /integrations/google_app_engine
-[42]: /integrations/google_cloud_platform
-[43]: /integrations/goexpvar
-[44]: /integrations/gunicorn
-[45]: /integrations/haproxy
-[46]: /integrations/httpcheck
-[47]: /integrations/iis
-[48]: /integrations/jenkins
-[49]: /integrations/java
-[50]: /integrations/kafka
-[51]: /integrations/kubernetes
-[52]: /integrations/marathon
-[53]: /integrations/memcached
-[54]: /integrations/mesos
-[55]: /integrations/mongodb
-[56]: /integrations/openstack
-[57]: /integrations/php_fpm
-[58]: /integrations/pivotal
-[59]: /integrations/postfix
-[60]: /integrations/puppet
-[61]: /integrations/rabbitmq
-[62]: /integrations/redisdb
-[63]: /integrations/riakcs
-[64]: /integrations/snmp
-[65]: /integrations/supervisor
-[66]: /integrations/teamcity
-[67]: /integrations/tokumx
-[68]: /integrations/varnish
-[69]: /integrations/vmware
-[70]: /integrations/wmi
-[71]: /integrations/winservices
+[15]: /integrations/amazon_api_gateway
+[16]: /integrations/amazon_auto_scaling
+[17]: /integrations/amazon_billing
+[18]: /integrations/amazon_cloudfront
+[19]: /integrations/amazon_codedeploy
+[20]: /integrations/amazon_directconnect
+[21]: /integrations/amazon_dynamodb
+[22]: /integrations/amazon_ebs
+[23]: /integrations/amazon_ec2
+[24]: /integrations/amazon_ecs
+[25]: /integrations/amazon_efs
+[26]: /integrations/amazon_elasticache
+[27]: /integrations/amazon_elasticbeanstalk
+[28]: /integrations/amazon_elb
+[29]: /integrations/amazon_emr
+[30]: /integrations/amazon_es
+[31]: /integrations/amazon_firehose
+[32]: /integrations/amazon_health
+[33]: /integrations/amazon_iot
+[34]: /integrations/amazon_kinesis
+[35]: /integrations/amazon_kms
+[36]: /integrations/amazon_lambda
+[37]: /integrations/amazon_machine_learning
+[38]: /integrations/amazon_mq
+[39]: /integrations/amazon_ops_works
+[40]: /integrations/amazon_polly
+[41]: /integrations/amazon_rds
+[42]: /integrations/amazon_redshift
+[43]: /integrations/amazon_route53
+[44]: /integrations/amazon_s3
+[45]: /integrations/amazon_ses
+[46]: /integrations/amazon_sns
+[47]: /integrations/amazon_sqs
+[48]: /integrations/amazon_vpc
+[49]: /integrations/amazon_workspaces

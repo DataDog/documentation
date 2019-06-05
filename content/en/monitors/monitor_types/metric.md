@@ -77,6 +77,8 @@ further_reading:
 
 6. Optionally **notify on no data** after a configurable time frame. At the minimum, your chosen time frame must be greater than 2x the alerting window. For example, if you are alerting over the last 5 minutes then you would need to wait at least 10 minutes before notifying on missing data.
 
+**Note:** No Data Alerts have a default max of 24 hours. Reach out to support to discuss increasing this value.
+
 7. Opt to **automatically resolve the monitor from a triggered state**.
     In general you'll want to leave this option off as you only want an alert to be resolved when it's fixed.
 

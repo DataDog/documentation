@@ -110,6 +110,8 @@ spec:
         volumeMounts:
           - name: dockersocket
             mountPath: /var/run/docker.sock
+          - name: logpath
+            mountPath: /var/log/pods
           - name: procdir
             mountPath: /host/proc
             readOnly: true
@@ -129,6 +131,9 @@ spec:
         - hostPath:
             path: /proc
           name: procdir
+        - hostPath:
+            path: /var/log/pods
+          name: logpath
         - hostPath:
             path: /sys/fs/cgroup
           name: cgroups
@@ -188,24 +193,77 @@ To enable [Log collection][10] with your DaemonSet:
     (...)
     ```
 
-2. Mount the `pointdir` volume in *volumeMounts*:
+2. Mount the Docker socket or `/var/log/pods`
+
+The Agent has two ways to collect logs: from the Docker socket, and from the Kubernetes log files (automatically handled by Kubernetes). 
+
+Use log file collection when:
+
+* Docker is not the runtime
+* More than 10 containers are used within each pod 
+
+The Docker API is optimized to get logs from one container at a time. When there are many containers in the same pod, collecting logs through the Docker socket might be consuming much more resources than going through the files.
+
+{{< tabs >}}
+{{% tab "K8s File" %}}
 
     ```
       (...)
         volumeMounts:
           (...)
-          - name: pointerdir
+          - name: logpath
+              mountPath: /var/log/pods
+      (...)
+      volumes:
+        (...)
+        - hostPath:
+            path: /var/log/pods
+            name: logpath
+      (...)
+    ```
+    
+{{% /tab %}}
+{{% tab "Docker Socket" %}}
+
+    ```
+      (...)
+        volumeMounts:
+          (...)
+          - name: dockersocket
+              mountPath: /var/run/docker.sock
+      (...)
+      volumes:
+        (...)
+        - hostPath:
+            path: /var/run/docker.sock
+            name: dockersocket
+      (...)
+    ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+3. Mount the `pointdir` volume in *volumeMounts*:
+
+    ```
+      (...)
+        volumeMounts:
+          (...)
+          - name: pointdir
               mountPath: /opt/datadog-agent/run
       (...)
       volumes:
         (...)
         - hostPath:
             path: /opt/datadog-agent/run
-            name: pointerdir
+            name: pointdir
       (...)
     ```
+    
+The `pointdir` is used to store a file with a pointer to all the containers that the Agent is collecting logs from. This is to make sure none are lost when the Agent is restarted, or in the case of a network issue.
 
-Learn more about this in [the Docker log collection documentation][11].
+Use [Autodiscovery with Pod Annotations][14] to configure log collection to add multiline processing rules, or to customize the `source` and `service` attributes.
 
 ### APM and Distributed Tracing
 
@@ -306,3 +364,4 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [11]: /tracing/setup
 [12]: /graphing/infrastructure/process/?tab=kubernetes#installation
 [13]: /agent/kubernetes/dogstatsd
+[14]: https://docs.datadoghq.com/agent/autodiscovery/?tab=kubernetes#setting-up-check-templates

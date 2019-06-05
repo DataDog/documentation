@@ -75,12 +75,9 @@ Automatic instrumentation captures:
 
 Configure your application level tracers to submit traces to a custom Agent hostname:
 
-The PHP tracer automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
+The PHP tracer automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
-```php
-putenv('DD_AGENT_HOST=localhost');
-putenv('DD_TRACE_AGENT_PORT=8126');
-```
+See [tracer configuration][16] for more information on how to set these variables.
 
 ## Compatibility
 
@@ -100,8 +97,8 @@ PHP APM supports the following SAPI's:
 | SAPI           | Support type    |
 |:---------------|:----------------|
 | apache2handler | Fully Supported |
+| cli            | Fully Supported |
 | fpm            | Fully Supported |
-| cli            | _Coming Soon_   |
 
 ### Integrations
 
@@ -109,28 +106,40 @@ PHP APM supports the following SAPI's:
 
 If the web framework that you use is not listed below, you can still see traces for your web requests in the UI. However, some metadata and spans that are very specific to that particular web framework may not display.
 
-| Module         | Versions      | Support Type    |
-|:---------------|:--------------|:----------------|
-| Laravel        | 4.2, 5.x      | Fully Supported |
+| Module         | Versions           | Support Type    |
+|:---------------|:-------------------|:----------------|
+| CakePHP        | 2.x                | Fully Supported |
+| Laravel        | 4.2, 5.x           | Fully Supported |
+| Lumen          | 5.2+               | Fully Supported |
+| Slim           | 3.x                | Fully Supported |
 | Symfony        | 2.x, 3.3, 3.4, 4.x | Fully Supported |
-| Zend Framework | 1.12          | Fully Supported |
-| CakePHP        | 1.3, 2.8, 3.x | _Coming Soon_   |
-| CodeIgniter    | 2, 3          | _Coming Soon_   |
-| Drupal         |               | _Coming Soon_   |
-| Lumen          | 5.2+          | _Coming Soon_   |
-| Magento        | 2             | _Coming Soon_   |
-| Phalcon        | 1.3, 3.4      | _Coming Soon_   |
-| Slim           | 2, 3          | _Coming Soon_   |
-| Wordpress      |               | _Coming Soon_   |
-| Yii            | 1.1           | _Coming Soon_   |
+| Zend Framework | 1.12               | Fully Supported |
+| CodeIgniter    | 2, 3               | _Coming Soon_   |
+| Drupal         |                    | _Coming Soon_   |
+| Magento        | 2                  | _Coming Soon_   |
+| Phalcon        | 1.3, 3.4           | _Coming Soon_   |
+| Wordpress      |                    | _Coming Soon_   |
+| Yii            | 1.1                | _Coming Soon_   |
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
+
+#### CLI Library Compatibility
+
+Tracing from the CLI SAPI is disabled by default. To enable tracing of PHP CLI scripts, set `DD_TRACE_CLI_ENABLED=true`.
+
+| Module          | Versions           | Support Type    |
+|:----------------|:-------------------|:----------------|
+| Laravel Artisan | 5.x                | Fully Supported |
+| Symfony Console |                    | _Coming Soon_   |
+
+Don’t see your desired CLI library? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
 
 #### Datastore Compatibility
 
 | Module                           | Versions                   | Support Type    |
 |:---------------------------------|:---------------------------|:----------------|
 | Amazon RDS (using PDO or MySQLi) | *(Any Supported PHP)*      | Fully Supported |
+| CakePHP Console                  | 2.x                        | Fully Supported |
 | Elasticsearch                    | 1.x                        | Fully Supported |
 | Eloquent                         | Laravel supported versions | Fully Supported |
 | Memcached                        | *(Any Supported PHP)*      | Fully Supported |
@@ -190,20 +199,25 @@ Set in the command line to start the server.
 DD_TRACE_DEBUG=true php -S localhost:8888
 ```
 
+### Environment Variable Configuration
+
 | Env variable                         | Default     | Note                                                                        |
 |:-------------------------------------|:------------|:----------------------------------------------------------------------------|
 | `DD_AGENT_HOST`                      | `localhost` | The Agent host name                                                         |
 | `DD_AUTOFINISH_SPANS`                | `false`     | Whether spans are automatically finished when the tracer is flushed         |
+| `DD_TRACE_CLI_ENABLED`               | `false`     | Enable tracing of PHP scripts from the CLI                                  |
 | `DD_DISTRIBUTED_TRACING`             | `true`      | Whether to enable [distributed tracing][14]                                 |
 | `DD_INTEGRATIONS_DISABLED`           | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                        |
-| `DD_PRIORITY_SAMPLING`               | `true`      | Whether to enable priority sampling.                                   |
+| `DD_PRIORITY_SAMPLING`               | `true`      | Whether to enable priority sampling.                                        |
 | `DD_SAMPLING_RATE`                   | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default)         |
+| `DD_SERVICE_NAME`                    | ``          | The default app name                                                        |
 | `DD_TRACE_AGENT_PORT`                | `8126`      | The Agent port number                                                       |
-| `DD_TRACE_APP_NAME`                  | ``          | The default app name                                                        |
+| `DD_TRACE_AGENT_TIMEOUT`             | `500`       | Maximum time the Agent is allowed to take (in milliseconds)                 |
+| `DD_TRACE_AGENT_CONNECT_TIMEOUT`     | `100`       | Maximum time the allowed for Agent connection setup (in milliseconds)       |
+| `DD_TRACE_ANALYTICS_ENABLED`         | `false`     | Flag to enable trace analytics for relevant spans in web integrations       |
 | `DD_TRACE_DEBUG`                     | `false`     | Enable [debug mode][15] for the tracer                                      |
 | `DD_TRACE_ENABLED`                   | `true`      | Enable the tracer globally                                                  |
 | `DD_TRACE_GLOBAL_TAGS`               | ``          | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`                |
-| `DD_TRACE_ANALYTICS_ENABLED`         | `false`     | Flag to enable trace analytics for relevant spans in web integrations       |
 | `DD_<INTEGRATION>_ANALYTICS_ENABLED` | `false`     | Flag to enable trace analytics for relevant spans in a specific integration |
 
 ## Further Reading
@@ -225,3 +239,4 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 [13]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
 [14]: /tracing/guide/distributed_tracing/?tab=php
 [15]: /tracing/troubleshooting
+[16]: #configuration

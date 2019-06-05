@@ -1,7 +1,6 @@
 [
     {
         "agent_version": "5.2.0",
-        "integration":"varnish",
         "check": "varnish.backend_healthy",
         "statuses": ["ok", "critical"],
         "groups": ["host", "backend"],

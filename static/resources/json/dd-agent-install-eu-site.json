@@ -1,0 +1,34 @@
+{
+	"schemaVersion": "2.2",
+	"description": "Installs Datadog.",
+	"parameters": {
+		"workingDirectory": {
+			"type": "String",
+			"default": "/tmp",
+			"description": "(Optional) The path to the working directory on your instance.",
+			"maxChars": 4096
+		}
+	},
+	"mainSteps": [
+		{
+			"action": "aws:runShellScript",
+			"name": "install_datadog",
+			"precondition": {
+				"StringEquals": [
+					"platformType",
+					"Linux"
+				]
+			},
+			"inputs": {
+				"runCommand": [
+					"wget -O ddinstall.sh https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh",
+					"export DD_API_KEY=$(aws --region <AWS_REGION> ssm get-parameters --names dd-api-key-for-ssm --with-decryption --query Parameters[].Value --output text)",
+					"export DD_SITE=datadoghq.eu",
+					"bash ./ddinstall.sh"
+				],
+				"workingDirectory": "{{ workingDirectory }}",
+				"timeoutSeconds": "3600"
+			}
+		}
+	]
+}

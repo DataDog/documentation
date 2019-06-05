@@ -1,7 +1,7 @@
 ---
 title: Edit an application key
 type: apicode
-order: 16.09
+order: 21.09
 external_redirect: /api/#edit-an-application-key
 ---
 

@@ -42,14 +42,14 @@ Notifications are a key component of any [monitor][1]. You want to make sure the
 
 Use variables to customize your monitor notifications, the available variables are:
 
-| Variable             | Description                                                                                    |
-| -------              | ------                                                                                         |
-| `{{value}}`          | Display the value that breached the alert.                                                     |
-| `{{threshold}}`      | Display the alert threshold selected in the monitor's *Set alert conditions* section.          |
-| `{{warn_threshold}}` | Display the warning threshold selected in the monitor's *Set alert conditions* section if any. |
-| `{{ok_threshold}}`   | Display the value that recovered the monitor.                                                  |
-| `{{comparator}}`     | Display the relational value selected in the monitor's *Set alert conditions* section.         |
-| `{{last_triggered_at}}`     | Display the UTC date/time when the monitor last triggered.         |
+| Variable                | Description                                                                                    |
+|-------------------------|------------------------------------------------------------------------------------------------|
+| `{{value}}`             | Display the value that breached the alert.                                                     |
+| `{{threshold}}`         | Display the alert threshold selected in the monitor's *Set alert conditions* section.          |
+| `{{warn_threshold}}`    | Display the warning threshold selected in the monitor's *Set alert conditions* section if any. |
+| `{{ok_threshold}}`      | Display the value that recovered the monitor.                                                  |
+| `{{comparator}}`        | Display the relational value selected in the monitor's *Set alert conditions* section.         |
+| `{{last_triggered_at}}` | Display the UTC date/time when the monitor last triggered.                                     |
 
 **Note**: When entering decimal values for thresholds, if your value is `<1`, add a leading `0` to the number. For example, use `0.5`, not `.5`.
 
@@ -103,28 +103,28 @@ Keep in mind when using conditional tags that they must have an open (example: `
 
 The conditional variables available are:
 
-| Conditional Variable       | Description                                           |
-| ------                     | -------                                               |
-| `{{#is_alert}}`            | Show when monitor alerts                              |
-| `{{^is_alert}}`            | Show unless monitor alerts                            |
-| `{{#is_match}}`            | Show when the context matches a string                |
-| `{{^is_match}}`            | Show unless the context matches a string              |
-| `{{#is_exact_match}}`      | Show when the context matches a string exactly        |
-| `{{^is_exact_match}}`      | Show unless the context matches a string exactly      |
-| `{{#is_no_data}}`          | Show when monitor notifies on missing data            |
-| `{{^is_no_data}}`          | Show unless monitor notifies on missing data          |
-| `{{#is_warning}}`          | Show when monitor warns                               |
-| `{{^is_warning}}`          | Show unless monitor warns                             |
-| `{{#is_recovery}}`         | Show when monitor recovers from either WARNING or ALERT    |
-| `{{^is_recovery}}`         | Show unless monitor recovers from either WARNING or ALERT  |
-| `{{#is_warning_recovery}}` | Show when monitor recovers from a warning to OK       |
-| `{{^is_warning_recovery}}` | Show unless monitor recovers from a warning to OK     |
-| `{{#is_alert_recovery}}`   | Show when monitor recovers from an alert to OK        |
-| `{{^is_alert_recovery}}`   | Show unless monitor recovers from an alert to OK      |
-| `{{#is_alert_to_warning}}` | Show when monitor transitions from alert to warning   |
-| `{{^is_alert_to_warning}}` | Show unless monitor transitions from alert to warning |
-| `{{#is_no_data_recovery}}` | Show when monitor recovers from a no data             |
-| `{{^is_no_data_recovery}}` | Show unless monitor recovers from a no data           |
+| Conditional Variable       | Description                                               |
+|----------------------------|-----------------------------------------------------------|
+| `{{#is_alert}}`            | Show when monitor alerts                                  |
+| `{{^is_alert}}`            | Show unless monitor alerts                                |
+| `{{#is_match}}`            | Show when the context matches a string                    |
+| `{{^is_match}}`            | Show unless the context matches a string                  |
+| `{{#is_exact_match}}`      | Show when the context matches a string exactly            |
+| `{{^is_exact_match}}`      | Show unless the context matches a string exactly          |
+| `{{#is_no_data}}`          | Show when monitor notifies on missing data                |
+| `{{^is_no_data}}`          | Show unless monitor notifies on missing data              |
+| `{{#is_warning}}`          | Show when monitor warns                                   |
+| `{{^is_warning}}`          | Show unless monitor warns                                 |
+| `{{#is_recovery}}`         | Show when monitor recovers from either WARNING or ALERT   |
+| `{{^is_recovery}}`         | Show unless monitor recovers from either WARNING or ALERT |
+| `{{#is_warning_recovery}}` | Show when monitor recovers from a warning to OK           |
+| `{{^is_warning_recovery}}` | Show unless monitor recovers from a warning to OK         |
+| `{{#is_alert_recovery}}`   | Show when monitor recovers from an alert to OK            |
+| `{{^is_alert_recovery}}`   | Show unless monitor recovers from an alert to OK          |
+| `{{#is_alert_to_warning}}` | Show when monitor transitions from alert to warning       |
+| `{{^is_alert_to_warning}}` | Show unless monitor transitions from alert to warning     |
+| `{{#is_no_data_recovery}}` | Show when monitor recovers from a no data                 |
+| `{{^is_no_data_recovery}}` | Show unless monitor recovers from a no data               |
 
 These can also be seen in the "Use message template variables" help box in
 Step 3 of the monitor editor.
@@ -261,25 +261,28 @@ Send the monitor notification to the appropriate endpoint:
 
 **Note**: A @-mention must have a space between it and the last line character: `{{value}}@slack-channel` is invalid `{{value}} @slack-channel` is valid.
 
-{{< tabs >}}
-{{% tab "Slack Integration" %}}
+### Integrations
 
-After having installed the Slack integration, type `@slack` in your notification message to see the available list of channels to send your notification to.
+{{< tabs >}}
+{{% tab "Slack" %}}
+
+After setting up the Slack integration, type `@slack` in your notification message to see the available list of channels to send your notification to.
 
 **@-mentions in Slack from monitor alert**:
 
 Wrap the `@username` in `< >` as seen below in your monitors message template to **@ notify** the defined user within slack notifications.
-For example this configuration:
 
+For example this configuration:
 {{< img src="monitors/notifications/notification_template.png" alt="notification_template" responsive="true" style="width:50%;" >}}
 
 Would produce this slack message:
-
 {{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview" responsive="true" style="width:50%;" >}}
+
+**Note**: If you are having trouble pinging someone, use their Slack `username` instead of the display name. The `username` is located in [Slack account settings][1] under **Username**.
 
 Mention **@here** or **@channel** by using `<!here>` or `<!channel>`, respectively.
 
-For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][1]. For example, for a user group named `testers` you would use the following syntax:
+For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][2]. For example, for a user group named `testers` you would use the following syntax:
 
 ```
 <!subteam^12345|testers>
@@ -299,7 +302,21 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 * `@slack-{{host.name}}` post a slack message to the #host.name channel in Slack.
 
 
-[1]: https://api.slack.com/methods/usergroups.list
+[1]: http://slack.com/account/settings
+[2]: https://api.slack.com/methods/usergroups.list
+{{% /tab %}}
+{{% tab "PagerDuty" %}}
+
+After setting up the [PagerDuty integration][1], type `@pagerduty` in your notification message to see the available list of service names to send your notification to.
+
+[1]: /integrations/pagerduty
+{{% /tab %}}
+{{% tab "Webhooks" %}}
+
+After setting up the [Webhooks integration][1], type `@webhook` in your notification message to see the available list of webhooks to trigger. When the monitor alerts, a `POST` request is sent to the webhook URL.
+
+
+[1]: /integrations/webhooks
 {{% /tab %}}
 {{< /tabs >}}
 

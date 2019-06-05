@@ -1,11 +1,10 @@
 [
     {
         "agent_version": "5.2.0",
-        "integration":"windows_service",
         "check": "windows_service.state",
         "statuses": ["ok", "warning", "critical", "unknown"],
         "groups": ["host", "service"],
-        "name": "Etat du service",
-        "description": "Renvoie `OK` si le service Windows est en cours d'exécution,` CRITICAL` s'il est arrêté, `UNKNOWN` s'il est inconnu et` WARNING` pour les autres états de service."
+        "name": "État du service",
+        "description": "Renvoie `OK` si le service Windows est en cours d'exécution, `CRITICAL` s'il est arrêté, `UNKNOWN` s'il est inconnu et `WARNING` pour les autres états de service."
     }
 ]
