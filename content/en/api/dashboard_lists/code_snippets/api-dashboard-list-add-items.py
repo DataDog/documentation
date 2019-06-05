@@ -10,25 +10,25 @@ initialize(**options)
 list_id = 4741
 dashboards = [
     {
-        "type": "custom_screenboard",
-        "id": 1414
+        'type': 'custom_screenboard',
+        'id': 'rys-xwq-geh'
     },
     {
-        "type": "custom_timeboard",
-        "id": 5858
+        'type': 'custom_timeboard',
+        'id': 'qts-q2k-yq6'
     },
     {
-        "type": "integration_screenboard",
-        "id": 67
+        'type': 'integration_screenboard',
+        'id': '87'
     },
     {
-        "type": "integration_timeboard",
-        "id": 5
+        'type': 'integration_timeboard',
+        'id': '23'
     },
     {
-        "type": "host_timeboard",
-        "id": 123456789
+        'type': 'host_timeboard',
+        'id': '3245468'
     }
 ]
 
-api.DashboardList.add_items(list_id, dashboards=dashboards)
+api.DashboardList.v2.add_items(list_id, dashboards=dashboards)
