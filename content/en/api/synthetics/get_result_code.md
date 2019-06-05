@@ -1,7 +1,7 @@
 ---
 title: Get a specific result
 type: apicode
-order: 22.6
+order: 29.6
 external_redirect: /api/#get-result
 ---
 

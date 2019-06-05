@@ -4,7 +4,8 @@ kind: faq
 disable_toc: true
 private: true
 aliases:
-    - /graphing/faq/how-to-merge-screenboards/
+    - /graphing/faq/how-to-merge-screenboards
+    - /graphing/faq/false-spikes-sometimes-appear-on-my-sum-graph
 ---
 
 {{< whatsnext desc="List of Frequently Asked Questions:" >}}
@@ -22,7 +23,6 @@ aliases:
     {{< nextlink href="graphing/faq/i-see-unexpected-drops-to-zero-on-my-graph-why" >}}I see unexpected drops to zero on my graph, why?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/interpolation-the-fill-modifier-explained" >}}Interpolation & the fill modifier explained{{< /nextlink >}}
     {{< nextlink href="graphing/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value" >}}How can I graph the percentage change between an earlier value and a current value?{{< /nextlink >}}
-    {{< nextlink href="graphing/faq/false-spikes-sometimes-appear-on-my-sum-graph" >}}False spikes sometimes appear on my `sum:` graph{{< /nextlink >}}
     {{< nextlink href="graphing/faq/there-are-too-many-lines-on-my-graph-can-i-only-display-the-most-important-ones" >}}There are too many lines on my graph, can I only display the most important ones?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/how-does-datadog-render-graphs-my-graph-doesn-t-show-the-values-i-m-expecting" >}}How does Datadog render graphs? My graph doesn't show the values I'm expecting.{{< /nextlink >}}
     {{< nextlink href="graphing/faq/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph" >}}What is the granularity of my graphs? Am I seeing raw data or aggregates on my graph?{{< /nextlink >}}

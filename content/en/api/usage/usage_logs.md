@@ -1,7 +1,7 @@
 ---
 title: Get hourly usage for logs
 type: apicontent
-order: 26.2
+order: 33.2
 external_redirect: /api/#get-hourly-usage-for-logs
 ---
 
@@ -23,4 +23,3 @@ Get Hourly Usage For Logs.
     Contains the number of log events indexed.
 * **`hour`**:
     The hour for the usage.
-

@@ -7,7 +7,7 @@ external_redirect: /api/#create-a-dashboard-list
 
 ##### Signature
 
-`POST https://api.datadoghq.com/api/v1/dashboard/lists/manual`
+`POST /v1/dashboard/lists/manual`
 
 ##### Example Request
 

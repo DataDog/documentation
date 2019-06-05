@@ -27,15 +27,9 @@ When experiencing unexpected behavior with Datadog APM, there are a few common i
 
 3. **Verify that your tracer is running correctly**:
 
-    After having [enabled tracer debug mode](#tracer-debug-mode), check the Agent logs:
+    After having [enabled tracer debug mode](#tracer-debug-mode), check your Agent logs to see if there is more info about your issue.
 
-    * If the trace was sent to the Agent properly, you should see `Response from the Agent: OK` log entries. This indicates that the tracer is working properly, therefore the problem may be with the Agent itself. Refer to the [Agent troubleshooting guide][5] for more information.
-
-    * If an error was reported by the Agent (or the Agent could not be reached), you will see `Error from the Agent` log entries. In this case, validate your network configuration to ensure [the Agent can be reached](#agent-troubleshooting). If you are confident the network is functional and that the error is coming from the Agent, refer to the [Agent troubleshooting guide][5].
-
-    If neither of these log entries is present, then no request was sent to the Agent, which means that the tracer is not instrumenting your application. In this case, [contact Datadog support][1] and provide the relevant log entries with [a flare][6].
-
-If there are errors that you don't understand, or traces are reported to be flushed to Datadog and you still cannot see them in the Datadog UI, [contact Datadog support][1].
+If there are errors that you don't understand, or traces are reported to be flushed to Datadog and you still cannot see them in the Datadog UI, [contact Datadog support][5] and provide the relevant log entries with [a flare][6].
 
 ## Tracer debug mode
 
@@ -140,11 +134,22 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-For more tracer settings, check out the [API documentation][2].
+Then check the Agent logs to see if there is more info about your issue:
+
+* If the trace was sent to the Agent properly, you should see `Response from the Agent: OK` log entries. This indicates that the tracer is working properly, therefore the problem may be with the Agent itself. Refer to the [Agent troubleshooting guide][2] for more information.
+
+* If an error was reported by the Agent (or the Agent could not be reached), you will see `Error from the Agent` log entries. In this case, validate your network configuration to ensure [the Agent can be reached](#agent-troubleshooting). If you are confident the network is functional and that the error is coming from the Agent, refer to the [Agent troubleshooting guide][2].
+
+If neither of these log entries is present, then no request was sent to the Agent, which means that the tracer is not instrumenting your application. In this case, [contact Datadog support][3] and provide the relevant log entries with [a flare][4].
+
+For more tracer settings, check out the [API documentation][5].
 
 
 [1]: https://datadog.github.io/dd-trace-js/Tracer.html#init
-[2]: https://datadog.github.io/dd-trace-js/#tracer-settings
+[2]: /agent/troubleshooting
+[3]: /help
+[4]: /agent/troubleshooting/#send-a-flare
+[5]: https://datadog.github.io/dd-trace-js/#tracer-settings
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -193,5 +198,5 @@ make install
 [2]: /tracing/setup/#agent-configuration
 [3]: /agent/troubleshooting/?tab=agentv6#get-more-logging-from-the-agent
 [4]: /agent/basic_agent_usage/#log-location
-[5]: /agent/troubleshooting
+[5]: /help
 [6]: /agent/troubleshooting/#send-a-flare

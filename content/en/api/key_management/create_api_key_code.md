@@ -1,7 +1,7 @@
 ---
 title: Create an API key
 type: apicode
-order: 16.03
+order: 21.03
 external_redirect: /api/#create-an-api-key
 ---
 

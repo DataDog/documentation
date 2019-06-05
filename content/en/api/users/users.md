@@ -1,7 +1,7 @@
 ---
 title: Users
 type: apicontent
-order: 27
+order: 34
 external_redirect: /api/#users
 ---
 

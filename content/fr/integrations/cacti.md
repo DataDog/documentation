@@ -65,12 +65,12 @@ instances:
     -   mysql_host: localhost
         mysql_user: datadog
         mysql_password: hx3beOpMFcvxn9gXcs0MU3jX
-        rrd_path: /path/to/cacti/rra
+        rrd_path: /chemin/vers/rra/cacti
         #field_names:
         #    - ifName
         #    - dskDevice
         #    - ifIndex
-        #rrd_whitelist: /path/to/rrd_whitelist.txt
+        #rrd_whitelist: /chemin/vers/whitelist_rrd.txt
 ```
 
 Accordez à l'utilisateur datadog-agent un accès aux fichiers RRD.

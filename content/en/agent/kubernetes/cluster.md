@@ -260,6 +260,7 @@ To enable the Custom Metrics Server:
 
 1. Set `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` to `true` in the Deployment of the Datadog Cluster Agent.
 2. Configure the `<DD_APP_KEY>` as well as the `<DD_API_KEY>` in the Deployment of the Datadog Cluster Agent.
+Set `DATADOG_HOST` to `https://app.datadoghq.eu` if you are using an EU account.
 3. Create a [service exposing the port 443][7] and [register it as an APIService for External Metrics][8].
 
 Refer to [the dedicated Custom metrics server guide][1] to configure the Custom Metrics Server and get more details about this feature.

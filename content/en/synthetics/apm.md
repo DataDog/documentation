@@ -1,7 +1,6 @@
 ---
 title: Synthetics APM
 kind: documentation
-beta: true
 description: APM and Distributed Tracing with Synthetics
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
@@ -12,8 +11,6 @@ further_reading:
   text: "APM and Distributed Tracing"
 
 ---
-
-<div class="alert alert-warning">Synthetics is only available for the Datadog US site.</div>
 
 {{< img src="synthetics/apm/synthetics-apm.gif" alt="APM and Synthetics" responsive="true" style="width:80%;">}}
 

@@ -97,9 +97,9 @@ Datadog’s integration processing Pipelines are available for the `source` tag 
 [24]: /integrations/couch/#log-collection
 [25]: https://github.com/DataDog/integrations-core/blob/master/couch/datadog_checks/couch/data/conf.yaml.example
 [26]: /logs/log_collection/?tab=tailexistingfiles#custom-log-collection
-[27]: /logs/log_collection/docker
-[28]: /logs/log_collection/docker/?tab=environmentvariable#one-step-install-to-collect-all-the-container-logs
-[29]: /logs/log_collection/docker/?tab=hostinstallation#one-step-install-to-collect-all-the-container-logs
+[27]: /agent/docker/log
+[28]: /agent/docker/log/?tab=environmentvariable#one-step-install-to-collect-all-the-container-logs
+[29]: /agent/docker/log/?tab=hostinstallation#one-step-install-to-collect-all-the-container-logs
 [30]: /integrations/elastic/#log-collection
 [31]: https://github.com/DataDog/integrations-core/blob/master/elastic/datadog_checks/elastic/data/conf.yaml.example
 [32]: /logs/log_collection/go

@@ -1,7 +1,7 @@
 ---
 title: Get all API keys
 type: apicode
-order: 16.01
+order: 21.01
 external_redirect: /api/#get-all-api-keys
 ---
 

@@ -18,6 +18,8 @@ Regarding API rate limit policy:
 * The rate limit for event submission is `1000` per aggregate per day per organization. An aggregate is a group of similar events.
 * The rate limit for the [query_batch API][4] and [Log Query API][5] call is `300` per hour per organization. This can be extended on demand.
 * The rate limit for the [graph_snapshot API][6] call is `60` per hour per organization. This can be extended on demand.
+* The rate limit for [Log Configuration API][7] is `6000` per minute per organization. This can be extended on demand.
+
 
 [1]: /help
 [2]: /api/#metrics
@@ -25,3 +27,4 @@ Regarding API rate limit policy:
 [4]: /api/#query-time-series-points
 [5]: /api/?lang=bash#get-a-list-of-logs
 [6]: /api/#graphs
+[7]: /api/?lang=bash#logs

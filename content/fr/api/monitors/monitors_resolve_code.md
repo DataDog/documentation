@@ -1,7 +1,7 @@
 ---
 title: Résoudre un monitor
 type: apicode
-order: 19.06
+order: 26.06
 external_redirect: /api/#resoudre-un-monitor
 ---
 
@@ -11,4 +11,3 @@ external_redirect: /api/#resoudre-un-monitor
 {{< code-snippets basename="api-monitor-bulk-resolve" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-monitor-bulk-resolve" >}}
-

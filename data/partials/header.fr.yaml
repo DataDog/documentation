@@ -12,28 +12,53 @@ left:
       - name: product_apm
         link: 'https://www.datadoghq.com/apm/'
         title: APM
+      - name: product_logs
+        link: 'https://www.datadoghq.com/log-management/'
+        title: Log Management
       - name: product_dashboards
         link: 'https://www.datadoghq.com/dashboarding/'
         title: Dashboards
+      - name: product_synthetics
+        link: 'https://www.datadoghq.com/synthetics/'
+        title: Synthetics
       - name: product_alerts
         link: 'https://www.datadoghq.com/alerts/'
         title: Alertes
       - name: product_api
         link: api
         title: API
-  - name: docs
-    link: ''
-    title: Docs
-  - name: pricing
-    link: 'https://www.datadoghq.com/pricing/'
-    title: Prix
   - name: customers
     link: 'https://www.datadoghq.com/customers/'
     title: Clients
+  - name: pricing
+    link: 'https://www.datadoghq.com/pricing/'
+    title: Tarif
+  - name: solutions
+    link: '#'
+    title: Solutions
+    children:
+      - name: solutions_retail
+        link: 'https://www.datadoghq.com/solutions/retail-ecommerce/'
+        title: Commerce de détail et électronique
+      - name: solutions_media
+        link: 'https://www.datadoghq.com/solutions/media-entertainment/'
+        title: Médias et divertissement
+      - name: solutions_gaming
+        link: 'https://www.datadoghq.com/solutions/gaming/'
+        title: Jeux vidéo
+      - name: solutions_manufacturing
+        link: 'https://www.datadoghq.com/solutions/manufacturing-logistics/'
+        title: Production et logistique
+      - name: solutions_financial
+        link: 'https://www.datadoghq.com/solutions/financial-services/'
+        title: Services financiers
+      - name: solutions_healthcare
+        link: 'https://www.datadoghq.com/solutions/healthcare/'
+        title: Santé et sciences de la vie
 right:
   - name: about
     link: 'https://www.datadoghq.com/about/'
-    title: Datadog
+    title: À propos de
     children:
       - name: about_contact
         link: 'https://www.datadoghq.com/about/contact/'
@@ -49,20 +74,29 @@ right:
         title: Équipe
       - name: about_careers
         link: 'https://www.datadoghq.com/careers/'
-        title: Carrières
+        title: Offres d'emploi
+      - name: about_analyst
+        link: 'https://www.datadoghq.com/about/analyst/'
+        title: Rapports d'analyse
   - name: blog
     link: 'https://www.datadoghq.com/blog/'
     title: Blog
     children:
       - name: blog_themonitor
         link: 'https://www.datadoghq.com/blog/'
-        title: Le Monitor
+        title: Le monitor
       - name: blog_engineering
         link: 'https://www.datadoghq.com/blog/engineering/'
-        title: Engineering
+        title: Ingénierie
+      - name: blog_community
+        link: 'https://www.datadoghq.com/blog/community/'
+        title: Communauté
       - name: blog_pupculture
         link: 'https://www.datadoghq.com/blog/pup-culture/'
-        title: Pup Culture
+        title: Actualité
+  - name: docs
+    link: ''
+    title: Docs
   - name: login
     link: 'https://app.datadoghq.com/'
-    title: Login
+    title: Connexion

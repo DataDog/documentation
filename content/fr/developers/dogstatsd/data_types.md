@@ -8,7 +8,7 @@ further_reading:
     text: Présentation de DogStatsD
   - link: developers/libraries
     tag: Documentation
-    text: Bibliothèques pour l'API et DogStatsD officielles et entretenues par la communauté
+    text: Bibliothèques de client pour l'API et DogStatsD officielles et entretenues par la communauté
   - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
     tag: GitHub
     text: Code source de DogStatsD
@@ -324,11 +324,11 @@ Veuillez noter que l'ajout de tags dans StatsD requiert une [extension Datadog][
 
 ### Clé du tag host
 
-Le tag host est attribué automatiquement par l'Agent Datadog chargé de l'agrégation des métriques. Les métriques envoyées avec un tag host qui ne correspond pas au hostname de l'Agent perdent la référence au host d'origine. Le tag host envoyé remplace n'importe quel hostname recueilli par l'Agent ou configuré par celui-ci. Si vous devez supprimer le tag host des métriques DogStatsD, consultez la section [Comment supprimer le tag host lors de l'envoi de métriques via DogStatsD][11].
+Le tag host est attribué automatiquement par l'Agent Datadog chargé de l'agrégation des métriques. Les métriques envoyées avec un tag host qui ne correspond pas au hostname de l'Agent perdent la référence au host d'origine. Le tag host envoyé remplace n'importe quel hostname recueilli par l'Agent ou configuré par celui-ci.
 
 ### Distributions
 
-En raison de la nature globale des distributions, des outils supplémentaires d'ajout de tags sont proposés. Consultez la page [Métriques de distribution][12] pour en savoir plus.
+En raison de la nature globale des distributions, des outils supplémentaires d'ajout de tags sont proposés. Consultez la page [Métriques de distribution][11] pour en savoir plus.
 
 ## Pour aller plus loin
 
@@ -344,5 +344,4 @@ En raison de la nature globale des distributions, des outils supplémentaires d'
 [8]: /fr/developers/metrics/sets
 [9]: /fr/graphing/event_stream
 [10]: /fr/monitors/monitor_types/custom_check
-[11]: /fr/developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd
-[12]: /fr/graphing/metrics/distributions
+[11]: /fr/graphing/metrics/distributions

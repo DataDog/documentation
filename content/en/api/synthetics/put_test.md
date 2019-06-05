@@ -1,7 +1,7 @@
 ---
 title: Edit a test
 type: apicontent
-order: 22.3
+order: 29.3
 external_redirect: /api/#edit-tests
 ---
 
@@ -69,5 +69,5 @@ In order to update a request, you have to submit a full object, but only these p
 *   **`tags`** - _optional_ - Tags you want to use to filter your test when you are viewing it in Datadog. For more info on custom tags, see [Using tags][2].
 *   **`type`** - _required_ - The type of test. Valid values are `api` and `browser`.
 
-[1]: /synthetics/browser_test/#record-test
+[1]: /synthetics/browser_tests/#record-test
 [2]: /tagging/using_tags

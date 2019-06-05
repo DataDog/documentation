@@ -26,7 +26,7 @@ Enable runtime metrics collection in the tracing client to gain additional insig
 {{< tabs >}}
 {{% tab "Java" %}}
 
-JVM metrics collection can be enabled with one configuration parameter in the tracing client, either through a system property, `-Ddd.jmxfetch.enabled=true`, or through an environment variable, `DD_JMXFETCH_ENABLED=true`.
+JVM metrics collection is enabled by default. It can be disabled with one configuration parameter in the tracing client, either through a system property, `-Ddd.jmxfetch.enabled=false`, or through an environment variable, `DD_JMXFETCH_ENABLED=false`.
 
 JVM metrics can be viewed in correlation with your Java services. See the [Service page][1] in Datadog.
 

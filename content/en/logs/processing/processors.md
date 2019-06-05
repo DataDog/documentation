@@ -74,7 +74,7 @@ However, be aware that each incoming status value is mapped as follows:
 * Strings beginning with **n** (case-insensitive) map to **notice (5)**
 * Strings beginning with **i** (case-insensitive) map to **info (6)**
 * Strings beginning with **d**, **trace** or **verbose** (case-insensitive) map to **debug (7)**
-* Strings matching **OK** or **Success** (case-insensitive) map to **OK**
+* Strings beginning with **o** or matching **OK** or **Success** (case-insensitive) map to **OK**
 * All others map to **info (6)**
 
 ## Service Remapper
@@ -166,6 +166,7 @@ An attribute is missing if it is not found in the log attributes, or if it canno
 
 * The operator `-` needs to be space split in the formula as it can also be contained in attribute names.
 * If the target attribute already exists, it is overwritten by the result of the formula.
+* Results are rounded up to the 9th decimal. For example, if the result of the formula is `0.1234567891`, the actual value stored for the attribute is `0.123456789`.
 
 ## Trace Remapper
 

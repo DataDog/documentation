@@ -1,7 +1,6 @@
 ---
 title: Tags
 type: apicode
-order: 23
+order: 30
 external_redirect: /api/#tags
 ---
-

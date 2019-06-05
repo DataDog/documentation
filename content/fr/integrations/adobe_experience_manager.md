@@ -35,7 +35,7 @@ Recueillez des logs Adobe Experience Manager pour suivre les erreurs, obtenir de
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 
-* La collecte des logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans votre fichier `datadog.yaml` avec :
+* La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans votre fichier `datadog.yaml` avec :
 
 ```
 logs_enabled: true
