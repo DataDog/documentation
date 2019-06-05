@@ -10,6 +10,8 @@ main:
         url: "getting_started/tracing"
       - name: "Learning Center"
         url: "getting_started/learning_center"
+      - name: "Prometheus/Openmetrics"
+        url: "getting_started/prometheus"
   # TAGGING
   - name: "Tagging"
     url: "tagging/"
@@ -98,11 +100,20 @@ main:
       ## Upgrade to Agent v6
       - name: "Upgrade to Agent v6"
         url: "agent/faq/upgrade-to-agent-v6"
-      - name: "Prometheus Checks"
-        url: "agent/prometheus"
       # Troubleshooting
       - name: "Troubleshooting"
         url: "agent/troubleshooting/"
+        children:
+          - name: "Debug Mode"
+            url: "agent/troubleshooting/debug_mode"
+          - name: "Agent Flare"
+            url: "agent/troubleshooting/send_a_flare"
+          - name: "Agent Check Status"
+            url: "agent/troubleshooting/agent_check_status"
+          - name: "NTP Issues"
+            url: "agent/troubleshooting/ntp"
+          - name: "Permission Issues"
+            url: "agent/troubleshooting/permissions"
       # Guides
       - name: "Guides"
         url: "agent/guide/"
@@ -382,12 +393,8 @@ main:
       - name: "Log Collection & Integrations"
         url: "logs/log_collection/"
         children:
-          - name: "AWS"
-            url: "integrations/amazon_web_services/#log-collection"
           - name: "Browser"
             url: "logs/log_collection/javascript/"
-          - name: "Docker"
-            url: "agent/docker/log/"
           - name: "Csharp"
             url: "logs/log_collection/csharp/"
           - name: "Go"
@@ -402,8 +409,6 @@ main:
             url: "logs/log_collection/python/"
           - name: "Ruby"
             url: "logs/log_collection/ruby/"
-
-
           - name: "Other Integrations"
             url: "integrations/#cat-log-collection"
 
@@ -474,6 +479,8 @@ main:
         url: "synthetics/apm"
       - name: "Identify Synthetics Bots"
         url: "synthetics/identify_synthetics_bots"
+      - name: "Settings"
+        url: "synthetics/settings"
 
   # DEVELOPERS
   - name: "Developer Tools"

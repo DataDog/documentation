@@ -1,7 +1,7 @@
 ---
 title: Delete a test
 type: apicode
-order: 27.4
+order: 29.4
 external_redirect: /api/#post-delete
 ---
 

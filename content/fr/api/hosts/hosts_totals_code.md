@@ -6,7 +6,7 @@ external_redirect: /api/#nombre-de-hosts
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/hosts/totals`
+`GET /v1/hosts/totals`
 ##### Exemple de requête
 {{< code-snippets basename="api-hosts-totals" >}}
 ##### Exemple de réponse

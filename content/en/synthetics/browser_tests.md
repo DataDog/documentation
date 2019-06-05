@@ -1,10 +1,10 @@
 ---
 title: Browser Test
 kind: documentation
-beta: true
 description: Simulate and monitor user journeys from specific locations.
 aliases:
   - /synthetics/browser_check
+  - /synthetics/browser_test
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
@@ -81,7 +81,7 @@ Assertions allow you to check if an element, a content, or some text is availabl
 | `Check an element's content`                            | Makes sure that a specific element is located or not on the current page.                                                        |
 | `Assert that some text is present anywhere on the page` | Asserts that some specific text is present on the current page.                                                                  |
 | `Assert that some text is nowhere on the page`          | Asserts that some specific text is **NOT** present on the current page.                                                          |
-| `Check main page URL's content`                         | This takes the URL of the current page, and asserts whether a specific value (`string`, `number`, `regex`) is present within it. |
+| `Check main page URL's content`                         | This takes the URL of the last page that was interacted with, then asserts whether a specific value (`string`, `number`, `regex`) is present within it. |
 
 #### Navigation
 
@@ -98,14 +98,15 @@ After selecting the Hover action, click on the element you want to choose to cre
 
 #### Variable
 
-##### Define a variable
+##### Create a variable
 
-{{< img src="synthetics/browser_tests/setup_variable.png" alt="Setup Variable" responsive="true" style="width:40%;">}}
+{{< img src="synthetics/browser_tests/setup_variable.png" alt="Setup Variable" responsive="true" style="width:80%;">}}
 
-To define a variable, enter a capitalized name then choose its type between:
+To create a variable, first give it a name then define its value from:
 
-* `Select an element content`: this type allows you to create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
-* `From pattern`:
+* **An Element**: Create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
+* **A Secure Credential**: Store and use secure credential through [Synthetics Settings][7])
+* **A Pattern**:
 
 | Pattern                 | Description                                         |
 | ----                    | ---                                                 |
@@ -130,6 +131,20 @@ To use your variables in one of your assertions, hit *Use Variable* and select t
 
 {{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Use variable in assertion" responsive="true" style="width:40%;">}}
 
+#### Test failure and errors
+
+A test is considered `FAILED` if it does not satisfy its assertions or if the request failed for another reason. You can view specific browser test errors by clicking on the error in the step results.
+
+Common failure reasons include:
+
+| Error           | Description                                                                                                                                                                                    |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CONNRESET`       | The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, loss of connectivity of the webserver, etc. |
+| `DNS`             | The DNS entry is not found for the check URL. Possible causes include misconfigured check URL, wrong configuration of your DNS entries, etc.                                                          |
+| `INVALID_REQUEST` | The configuration of the check is invalid.                                                                                                                             |
+| `SSL`             | The SSL connection couldn't be performed.                                                                                     |
+| `TIMEOUT`         | The request couldn't be completed in a reasonable time. Browser tests timeout in 60 seconds. To override a timeout, change the time (in seconds) in the Assert that an element is present on the page step.|
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -140,3 +155,4 @@ To use your variables in one of your assertions, hit *Use Variable* and select t
 [4]: /integrations/#cat-notification
 [5]: https://www.google.com/chrome
 [6]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[7]: /synthetics/settings/#secure-credential

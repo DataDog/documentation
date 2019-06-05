@@ -210,24 +210,6 @@ Use Facets to easily filters on your Traces. The search bar and url automaticall
 
 {{< img src="tracing/trace_search_and_analytics/search/facet_panel.png" alt="Facet panel" responsive="true" style="width:80%;">}}
 
-## Measures
-
-A Measure is a attribute with numerical value contained in your traces. Think of it as a "trace metric".
-
-### Create a Measure
-
-To start using an attribute as a measure, click on a numerical attribute of your trace:
-
-{{< img src="tracing/trace_search_and_analytics/search/create_a_mesure.png" alt="Create a measure" responsive="true" style="width:80%;">}}
-
-Once this is done, the value of this attribute is stored **for all new traces** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Trace graph query][8].
-
-### Select the Measure Unit
-
-All measure have their own unit that is then used for display in the Trace search columns, Trace stream widgets in dashboards, and in the Trace Graphs.
-
-{{< img src="tracing/trace_search_and_analytics/search/edit_a_measure.png" alt="Edit a measure" responsive="true" style="width:80%;">}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

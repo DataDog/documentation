@@ -6,7 +6,7 @@ external_redirect: /api/#list-all-azure-integrations
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/integration/azure`
+`GET /v1/integration/azure`
 
 ##### Example Request
 {{< code-snippets basename="azure_list" >}}

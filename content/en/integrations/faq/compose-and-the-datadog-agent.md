@@ -10,7 +10,7 @@ To do this, you'll need to combine integration YAML files with the base Datadog 
 
 ##### Example: Monitoring Redis
 
-Let's look at how you would monitor a Redis container using Compose. Our example file structure is:
+The following is an example of how you can monitor a Redis container using Compose. The example file structure is:
 
     |- docker-compose.yml
     |- datadog
@@ -18,35 +18,26 @@ Let's look at how you would monitor a Redis container using Compose. Our example
         |- conf.d
            |-redisdb.yaml
 
-First we'll take a look at the `docker-compose.yml` that describes how our containers work together and sets some of the configuration details for the containers.
+First, take a look at the `docker-compose.yml` that describes how your containers work together and sets some of the configuration details for the containers.
 
 ```yaml
-version: "2"
+version: '3'
 services:
-  # Redis container
   redis:
     image: redis
-  # Agent container
   datadog:
-    build: datadog
     links:
      - redis # Ensures datadog container can connect to redis container
+    image: datadog/agent:latest
     environment:
-     - API_KEY=__your_datadog_api_key_here__
+     - DD_API_KEY=${DD_API_KEY}
     volumes:
      - /var/run/docker.sock:/var/run/docker.sock
      - /proc/mounts:/host/proc/mounts:ro
      - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
 ```
 
-In this file, we can see that Compose will run the Docker image `redis` and it will also build and run a `datadog` container. By default it will look for a matching directory called `datadog` and run the `Dockerfile` in that directory.
-
-Our `Dockerfile` simply takes the standard [Datadog docker image][3] and places a copy of the `redisdb.yaml` integration configuration into the appropriate directory:
-
-    FROM datadog/docker-dd-agent
-    ADD conf.d/redisdb.yaml /etc/dd-agent/conf.d/redisdb.yaml
-
-Finally our `redisdb.yaml` is patterned after the [redisdb.yaml.example file][4] and tells the Datadog Agent to look for Redis on the host named `redis` (defined in our `docker-compose.yaml` above) and the standard Redis port 6379:
+The `redisdb.yaml` is patterned after the [redisdb.yaml.example file][3] and tells the Datadog Agent to look for Redis on the host named `redis` (defined in `docker-compose.yaml` above) and the standard Redis port 6379:
 
     init_config:
 
@@ -54,10 +45,9 @@ Finally our `redisdb.yaml` is patterned after the [redisdb.yaml.example file][4]
       - host: redis
         port: 6379
 
-For a more complete example, see our [Docker Compose example project on GitHub][5].
+For a more complete example, see the [Docker Compose example project on GitHub][4].
 
 [1]: https://docs.docker.com/compose/overview
 [2]: /integrations/docker_daemon
-[3]: https://hub.docker.com/r/datadog/docker-dd-agent
-[4]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
-[5]: https://github.com/DataDog/docker-compose-example
+[3]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
+[4]: https://github.com/DataDog/docker-compose-example

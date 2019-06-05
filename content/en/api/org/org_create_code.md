@@ -1,12 +1,12 @@
 ---
 title: Create child-organization
 type: apicode
-order: 25.1
+order: 27.1
 external_redirect: /api/#create-child-organization
 ---
 
 ##### Signature
-`POST https://api.datadoghq.com/api/v1/org`
+`POST /v1/org`
 ##### Example Request
 {{< code-snippets basename="api-org-create" >}}
 ##### Example Response

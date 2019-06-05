@@ -7,7 +7,7 @@ external_redirect: /api/#delete-items-from-a-dashboard-list
 
 ##### Signature
 
-`DELETE https://api.datadoghq.com/api/v1/dashboard/lists/manual/<LIST_ID>/dashboards`
+`DELETE /v2/dashboard/lists/manual/<LIST_ID>/dashboards`
 
 ##### Example Request
 

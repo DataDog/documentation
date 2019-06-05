@@ -1,7 +1,6 @@
 [
     {
         "agent_version": "5.3.0",
-        "integration":"supervisord",
         "check": "supervisord.can_connect",
         "statuses": ["ok", "critical"],
         "groups": ["supervisord_server", "host"],
@@ -10,7 +9,6 @@
     },
     {
         "agent_version": "5.3.0",
-        "integration":"supervisord",
         "groups": ["supervisord_server", "supervisord_process", "host"],
         "check": "supervisord.process.status",
         "statuses": ["ok", "critical", "unknown"],

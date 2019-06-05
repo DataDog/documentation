@@ -8,25 +8,24 @@ curl -X DELETE -H "Content-type: application/json" \
         "dashboards": [
             {
                 "type": "custom_screenboard",
-                "id": 1414
+                "id": "rys-xwq-geh"
             },
             {
                 "type": "custom_timeboard",
-                "id": 5858
+                "id": "qts-q2k-yq6"
             },
             {
                 "type": "integration_screenboard",
-                "id": 67
+                "id": "87"
             },
             {
                 "type": "integration_timeboard",
-                "id": 5
+                "id": "23"
             },
             {
                 "type": "host_timeboard",
-                "id": 123456789
+                "id": "3245468"
             }
         ]
 }' \
-"https://api.datadoghq.com/api/v1/dashboard/lists/manual/${list_id}/dashboards?api_key=${api_key}&application_key=${app_key}"
-
+"https://api.datadoghq.com/api/v2/dashboard/lists/manual/${list_id}/dashboards?api_key=${api_key}&application_key=${app_key}"
