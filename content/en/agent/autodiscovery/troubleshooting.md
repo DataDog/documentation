@@ -45,7 +45,7 @@ Auto-discovery IDs:
 * docker://81e66fd4c948a502b4428417d8cf2ebc58caaff55a6e5879a41887057342aec2
 ```
 
-The following examples shows issues that could appear when failing to load a valid Autodiscovery configuration for a Redis template:
+The following examples show issues that could appear when failing to load a valid Autodiscovery configuration for a Redis template:
 
 ```
 # docker exec -it <AGENT_CONTAINER_NAME> agent configcheck -v
@@ -68,7 +68,7 @@ instances:
   port: '%%port%%'
 ```
 
-If you're still unsure about the issue, you may reach out to the [Datadog support team][1] with [a flare][2] from your Agent.
+If you're still unsure about the issue, reach out to the [Datadog support team][1] with [a flare][2] from your Agent.
 
 ## Further Reading
 
