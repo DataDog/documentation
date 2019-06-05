@@ -28,6 +28,7 @@ sidebar:
 aliases:
     - /ja/guides/
     - /videos/tipsandtricks-k8s-autodiscovery/
+    - /billing
 
 ---
 <!--
