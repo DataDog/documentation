@@ -1,7 +1,6 @@
 ---
 title: API Test Errors
 kind: documentation
-beta: true
 description: Detailed description of API test errors
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"

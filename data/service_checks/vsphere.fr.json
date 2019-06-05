@@ -1,7 +1,6 @@
 [
     {
         "agent_version": "5.2.0",
-        "integration":"vsphere",
         "check": "vcenter.can_connect",
         "statuses": ["ok", "critical"],
         "groups": ["host", "vcenter_server", "vcenter_host"],

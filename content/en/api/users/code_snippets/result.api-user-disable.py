@@ -1,3 +1,1 @@
-{
-    'message': 'User test@datadoghq.com disabled'
-}
+{"message": "User test@datadoghq.com disabled"}

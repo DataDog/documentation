@@ -20,7 +20,9 @@ further_reading:
   text: "Don't fear the Agent"
 aliases:
   - /agent/faq/agent-check-directory-structure
-  - /agent/faq/install-core-extra/
+  - /agent/faq/install-core-extra
+  - /logs/faq/can-the-datadog-agent-be-used-to-send-only-logs
+  - /agent/faq/the-datadog-agent-for-logs-or-traces-only
 ---
 
 <div class="alert alert-info">

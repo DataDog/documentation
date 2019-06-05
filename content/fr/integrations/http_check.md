@@ -1,6 +1,10 @@
 ---
 aliases:
   - /fr/integrations/httpcheck
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - web
   - network
@@ -36,7 +40,7 @@ Surveillez le statut de disponibilité d'endpoints HTTP locaux ou à distance. L
 
 ### Installation
 
-Le check HTTP est inclus avec le paquet de [l'Agent Datadog][1]. Ainsi, vous n'avez pas besoin d'installer quoi que ce soit sur les serveurs à partir desquels vous sondez vos sites HTTP. Bien qu'il soit recommandé d'exécuter bon nombre des checks axés sur des métriques sur le(s) même(s) host(s) que le service surveillé, ce check axé sur des statuts peut être lancé sur des hosts qui n'exécutent pas les sites surveillés.
+Le check HTTP est inclus avec le paquet de [l'Agent Datadog][1]. Vous n'avez donc pas besoin d'installer quoi que ce soit sur les serveurs à partir desquels vous sondez vos sites HTTP. Bien qu'il soit recommandé d'exécuter bon nombre des checks axés sur des métriques sur le(s) même(s) host(s) que le service surveillé, ce check axé sur des statuts peut être lancé sur des hosts qui n'exécutent pas les sites surveillés.
 
 ### Configuration
 
@@ -48,7 +52,7 @@ init_config:
 instances:
   - name: Exemple de site Web
     url: https://example.com/
-    # disable_ssl_validation: false      # valeur par défaut : true. Remplacez la valeur par false pour vérifier la validation SSL.
+    # disable_ssl_validation: false      # valeur par défaut : true. Remplacer la valeur par false pour vérifier la validation SSL.
     # ca_certs: /chemin/vers/fichier/ca         # p.ex., /etc/ssl/certs/ca-certificates.crt
     # check_certificate_expiration: true # valeur par défaut : true
     # days_warning: 28                   # valeur par défaut : 14
@@ -72,9 +76,9 @@ Consultez le [fichier d'exemple http_check.d/conf.yaml][3] pour obtenir la liste
 | `method`                         | La méthode HTTP. Par défaut, ce paramètre a pour valeur GET. De nombreuses autres méthodes HTTP sont cependant prises en charge, notamment POST et PUT.                                                                                                                                                                                                        |
 | `data`                           | L'option « data » est uniquement disponible pour la méthode POST. Les données doivent être incluses sous la forme de paires clé/valeur et seront envoyées dans le corps de la requête.                                                                                                                                                                       |
 | `content_match`                  | Une chaîne de caractères ou une expression régulière Python. Le check HTTP recherche cette valeur dans la réponse et renvoie DOWN si la chaîne de caractères ou l'expression est introuvable.                                                                                                                                                          |
-| `reverse_content_match`          | Si ce paramètre a pour valeur true, inverse le comportement de l'option `content_match`. Ainsi, le check HTTP renverra DOWN si la chaîne ou l'expression dans `content_match` a été trouvée. Valeur par défaut : false.                                                                                                                                         |
+| `reverse_content_match`          | Si ce paramètre a pour valeur true, il inverse le comportement de l'option `content_match`. Ainsi, le check HTTP renverra DOWN si la chaîne ou l'expression dans `content_match` a été trouvée. Valeur par défaut : false.                                                                                                                                         |
 | `username` et `password`          | Si votre service utilise un système d'authentification de base, vous pouvez fournir avec ces paramètres le nom d'utilisateur et le mot de passe.                                                                                                                                                                                                                                  |
-| `http_response_status_code`      | Une chaîne de caractères ou une expression régulière Python pour un code de statut HTTP. Ce check renvoie DOWN pour tout code de statut ne correspondant pas. Par défaut, ce check couvre les codes de statut HTTP 1xx, 2xx et 3xx. Par exemple, `401` ou `4\d\d`.                                                                                                     |
+| `http_response_status_code`      | Une chaîne de caractères ou une expression régulière Python pour un code de statut HTTP. Ce check renvoie DOWN pour tout code de statut ne correspondant pas. Par défaut, ce check couvre les codes de statut HTTP 1xx, 2xx et 3xx. Exemple : `401` ou `4\d\d`.                                                                                                     |
 | `include_content`                | Lorsque ce paramètre est défini sur `true`, le check inclut les 200 premiers caractères du corps de la réponse HTTP dans les notifications. Valeur par défaut : `false`.                                                                                                                                                                               |
 | `collect_response_time`          | Par défaut, le check recueille le délai de réponse (en secondes) par l'intermédiaire de la métrique `network.http.response_time`. Pour désactiver cette option, définissez cette valeur sur `false`.                                                                                                                                                                        |
 | `disable_ssl_validation`         | Ce paramètre, activé par défaut, ignore la validation du certificat SSL. Si vous avez besoin de valider les certificats SSL, définissez-le sur `false`. Cette option est uniquement utilisée lors de la collecte du délai de réponse et de la disponibilité à partir du endpoint spécifié. Remarque : ce paramètre ne s'applique pas à l'option `check_certificate_expiration`. |
@@ -87,7 +91,7 @@ Consultez le [fichier d'exemple http_check.d/conf.yaml][3] pour obtenir la liste
 | `headers`                        | Ce paramètre vous permet d'envoyer des en-têtes supplémentaires avec la requête. Consultez [le fichier d'exemple YAML][5] pour obtenir des informations et des avertissements supplémentaires.                                                     |
 | `skip_proxy`                     | Si ce paramètre est défini, le check ignore les paramètres de proxy et tente d'accéder directement à l'URL de check. Valeur par défaut : `false`.                                                                                                                                                                                                         |
 | `allow_redirects`                | Ce paramètre permet au check de service de suivre les redirections HTTP. Valeur par défaut : `true`.                                                                                                                                                                                                                                      |
-| `tags`                           | La liste des tags arbitraires qui seront associés au check. Pour en savoir plus sur les tags, consultez notre [guide sur les tags][6] et notre article de blog, [The power of tagged metrics][7] (en anglais).                                                                                                                                      |
+| `tags`                           | La liste des tags arbitraires qui seront associés au check. Pour en savoir plus sur les tags, consultez notre [guide sur les tags][6] et notre article de blog, [L'utilité des métriques taguées][7] (en anglais).                                                                                                                                      |
 
 
 Une fois la configuration de `http_check.d/conf.yaml` terminée, [redémarrez l'Agent][8] pour commencer à envoyer des délais de réponse et des checks de service HTTP à Datadog.

@@ -1,7 +1,7 @@
 ---
 title: Validate a monitor
 type: apicode
-order: 24.11
+order: 26.11
 external_redirect: /api/#validate-a-monitor
 ---
 

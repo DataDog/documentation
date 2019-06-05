@@ -12,4 +12,5 @@ disable_toc: true
     {{< nextlink href="developers/guide/calling-on-datadog-s-api-with-the-webhooks-integration" tag="API">}}Calling on Datadog's API with the Webhooks Integration{{< /nextlink >}}
     {{< nextlink href="developers/guide/dogshell-quickly-use-datadog-s-api-from-terminal-shell" tag="API">}}Dogshell, Quickly Use Datadog's API from Terminal/Shell{{< /nextlink >}}
     {{< nextlink href="developers/guide/query-data-to-a-text-file-step-by-step" tag="API">}}Query data to a text file, step by step{{< /nextlink >}}
+    {{< nextlink href="developers/guide/custom-python-package" tag="API">}}Adding a custom Python package to the Agent{{< /nextlink >}}
 {{< /whatsnext >}}

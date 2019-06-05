@@ -66,6 +66,8 @@ config_providers:
     polling: true
 ```
 
+**Note**: For Kubernetes users, both a [CRI integration][3] and a [CRI-O integration][4] are available.
+
 ### Tag extraction
 
 {{< tabs >}}
@@ -521,7 +523,7 @@ The [Cluster Checks feature][1] monitors non-containerized and out-of-cluster re
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Some supported integrations require additional steps for Autodiscovery to work: [Ceph][3], [Varnish][4], [Postfix][5], [Cassandra Nodetools][6], and [Gunicorn][7]. Contact [Datadog support][8] for assistance.
+**Note**: Some supported integrations require additional steps for Autodiscovery to work: [Ceph][5], [Varnish][6], [Postfix][7], [Cassandra Nodetools][8], and [Gunicorn][9]. Contact [Datadog support][10] for assistance.
 
 ## Reference
 
@@ -542,7 +544,7 @@ The following template variables are handled by the Agent:
   - `"%%pid%%"`: retrieves the container process ID as returned by `docker inspect --format '{{.State.Pid}}' <container>`
 
 - Container hostname: `hostname` (added in Agent 6.4, Docker listener only)
-  - `"%%hostname%%"`: retrieves the `hostname` value from the container configuration. Only use it if the `"%%host%%"` variable cannot fetch a reliable IP (example: [ECS awsvpc mode][9]
+  - `"%%hostname%%"`: retrieves the `hostname` value from the container configuration. Only use it if the `"%%host%%"` variable cannot fetch a reliable IP (example: [ECS awsvpc mode][11]
 
 - Environment variable: `env` (added in Agent 6.1)
   - `"%%env_MYENVVAR%%"`: use the contents of the `$MYENVVAR` environment variable **as seen by the Agent process**
@@ -651,10 +653,12 @@ instances:
 
 [1]: /agent/faq/agent-5-autodiscovery
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
-[3]: /integrations/ceph
-[4]: /integrations/varnish/#autodiscovery
-[5]: /integrations/postfix
-[6]: /integrations/cassandra/#agent-check-cassandra-nodetool
-[7]: /integrations/gunicorn
-[8]: /help
-[9]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+[3]: /integrations/cri
+[4]: /integrations/crio
+[5]: /integrations/ceph
+[6]: /integrations/varnish/#autodiscovery
+[7]: /integrations/postfix
+[8]: /integrations/cassandra/#agent-check-cassandra-nodetool
+[9]: /integrations/gunicorn
+[10]: /help
+[11]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html

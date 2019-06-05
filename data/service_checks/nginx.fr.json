@@ -1,7 +1,6 @@
 [
     {
         "agent_version": "5.0.0",
-        "integration":"nginx",
         "check": "nginx.can_connect",
         "statuses": ["ok", "critical"],
         "groups": ["host", "port"],

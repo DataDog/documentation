@@ -1,7 +1,7 @@
 ---
 title: Edit a test
 type: apicontent
-order: 27.3
+order: 29.3
 external_redirect: /api/#edit-tests
 ---
 

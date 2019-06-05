@@ -1,7 +1,7 @@
 ---
 title: Get hourly usage for Synthetics
 type: apicode
-order: 31.6
+order: 33.6
 external_redirect: /api/#get-hourly-usage-for-synthetics
 ---
 

@@ -370,7 +370,7 @@ The .NET Tracer automatically reads the environment variables `DD_AGENT_HOST` an
 ```csharp
 using Datadog.Trace;
 
-var uri = new Uri("htt://localhost:8126/");
+var uri = new Uri("http://localhost:8126/");
 var tracer = Tracer.Create(agentEndpoint: uri);
 
 // optional: set the new tracer as the new default/global tracer
