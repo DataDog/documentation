@@ -28,21 +28,20 @@ This page is split in 3 main sections:
 These sections are open by default, and can be closed by using the little `>` icon to the left of the section name.
 
 ### Monitor status options
+
 Some options are available in the upper right corner of the page:
 
-* **Mute a monitor**:
-    Choose to mute a monitor directly on its status page. Use the *Scope* field to narrow your downtime.
+* **Mute**: Choose to mute a monitor directly on its status page. Use the *Scope* field to narrow your downtime.
     Refer to the [dedicated downtime documentation][2] to learn how to mute multiple scopes or multiple monitors at the same time.
 
     NOTE: muting or unmuting a monitor via the UI deletes all scheduled downtimes associated with that monitor.
 
     {{< img src="monitors/monitor_status/status_mute_monitor.png" alt="status mute monitor" responsive="true" style="width:30%;">}}
 
-* **Resolve a monitor**:
-    Resolve your monitor manually.
+* **Resolve**: Resolve your monitor manually.
 
-* **Configuration options**:
-  Use the *cog* icon to display options available:
+* **Configuration options**: Use the *cog* icon to display options available:
+
     * [Edit][1]
     * Clone
     * [Export][3]
@@ -54,12 +53,12 @@ Some options are available in the upper right corner of the page:
 
 The *Properties* section is the overview of your monitor:
 
-- The status of your monitor
-- The monitor creator
-- The monitor ID ([for the monitor API][4])
-- Tags attached to your monitor. *Edit the tag list by clicking on the pencil icon*.
-- The monitor [query][5]
-- The monitor message
+* The status of your monitor
+* The monitor creator
+* The monitor ID ([for the monitor API][4])
+* Tags attached to your monitor. *Edit the tag list by clicking on the pencil icon*.
+* The monitor [query][5]
+* The monitor message
 
 Use the *cog* icon in the upper right corner of the page to [edit][1] your monitor properties.
 
@@ -71,10 +70,11 @@ The *Status and History* section reflect the query and state changes over time, 
 
 For further investigation into your metrics evolution, use the [Metric Explorer][7] or a dedicated [Notebook][8].
 
-**Note**: For the *Status* graph, if you see `None` or `no groups found` as group names, this is usually because:  
-- The monitor is newly created and has not evaluated yet.  
-- The monitor's query was recently changed.  
-- A host's name previously included in query has changed. Host name changes age out of the UI within 24 hours.
+**Note**: For the *Status* graph, if you see `None` or `no groups found` as group names, this is usually because:
+
+* The monitor is newly created and has not evaluated yet.
+* The monitor's query was recently changed.
+* A host's name previously included in query has changed. Host name changes age out of the UI within 24 hours.
 
 ## Events
 
