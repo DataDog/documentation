@@ -404,7 +404,7 @@ logs:
 
 **Note**: It looks like a minimal [Apache check configuration][1], but notice the `ad_identifiers` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `httpd` image. **See the dedicated [Autodiscovery Identifier][2] documentation to learn more**.
 
-Then Add the following custom auto-configuration file named `http_check.yaml` to this folder:
+Then add the following custom auto-configuration file named `http_check.yaml` to this folder:
 
 ```yaml
 ad_identifiers:
