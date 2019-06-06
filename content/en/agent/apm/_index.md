@@ -19,53 +19,48 @@ further_reading:
   text: "ECS Fargate APM setup"
 ---
 
-To use APM, you need to download the Datadog Agent and then configure your agent to receive traces. For the full overview of all of the steps to set up APM, see the [APM overivew][1].
+To use APM, start by downloading the Datadog Agent and then configure your agent to receive traces. For the full overview of all of the steps to set up APM, see the [APM overivew][1].
 
-{{< partial name="apm/apm-steps.2.html" >}}
-
-With Datadog's infrastructure monitoring, metrics are sent to the Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Agent: the application code instrumentation sends to the Agent every second ([see here for the Python client][2] for instance) and the Agent sends to the Datadog API every 10 seconds.
+Tracing metrics are sent to the Agent from your application: the application code instrumentation sends to the Agent every second (for example, see [the Python client][2]) and the Agent sends to the Datadog API every 10 seconds.
 
 To start tracing your application, [install the Datadog Agent][3], and then [Configure the Datadog Agent to receive traces](#setting-up-trace-collection).
 
 ## Setting up trace collection
 
-APM is enabled by default in Agent 6. Set `apm_non_local_traffic: true` if you are sending traces from a nonlocal environment (like a container). To get an overview of all the possible settings for APM, take a look at the Agent’s [Agent `datadog.yaml` main configuration file][4] file. For more information about the Datadog Agent, see the [dedicated doc page] or check out the datadog.yaml templates.
+APM is enabled by default in Agent 6. Set `apm_non_local_traffic: true` if you are sending traces from a nonlocal environment (like a container). To get an overview of all the possible settings for APM, take a look at the Agent's [`datadog.example.yaml`][4] configuration file.
+For more information about the Datadog Agent, see the [dedicated doc page][5] or refer to the [`datadog.yaml` templates][6].
 
-Find below the list of all available parameters for your `datadog.yaml` configuration file:
+## Configure your environment
 
-| File setting              | Type        | Description                                                                                                                                                        |
-| ------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `enabled`                 | boolean     | When set to `true`, the Datadog Agent accepts trace metrics. Default value is `true`.                                                                              |
-| `apm_dd_url`              | string      | Datadog API endpoint where traces are sent.                                                                                                                        |
-| `env`                     | string      | Default environment to which traces should be registered under (e.g. *staging*, *production*, etc..).                                                              |
-| `extra_sample_rate`       | float       | Use this setting to adjust the trace sample rate. The value should be a float between `0` (no sampling) and `1` (normal sampling). Default value is `1`.           |
-| `max_traces_per_second`   | float       | Maximum number of traces to sample per second. Set to `0` to disable the limit (*not recommended*). The default value is `10`.                                     |
-| `ignore_resources`        | list        | A list of root span resources that the Agent should ignore.                                                                                                         |
-| `log_file`                | string      | Location of the log file.                                                                                                                                          |
-| `replace_tags`            | list        | A list of tag replacement rules. Read more about scrubbing sensitive data with [replace rules][5].                                              |
-| `receiver_port`           | number      | Port that the Datadog Agent's trace receiver listen on. Default value is `8126`.                                                                                   |
-| `apm_non_local_traffic`   | boolean     | Set to `true` to allow the Agent to receive outside connections, and then listen on all interfaces.                                                                                 |
-| `max_memory`              | float       | Maximum memory that the Agent is allowed to occupy. When this is exceeded the process is killed.                                                                   |
-| `max_cpu_percent`         | float       | Maximum CPU percentage that the Agent should use. The Agent automatically adjusts its pre-sampling rate to stay below this number.                                 |
+There are several ways to specify an environment when reporting data:
 
-To get ta an overview of all the possible settings for APM, take a look at the Agent's [`datadog.example.yaml`][6] configuration file.
-For more information about the Datadog Agent, see the [dedicated doc page][7] or refer to the [`datadog.yaml` templates][8].
+1. Host tag: Use a host tag with the format env:<ENVIRONMENT> to tag all traces from that Agent accordingly.
+2. Agent configuration: Override the default tag used by the Agent in the Agent configuration file. This tags all traces coming through the Agent, overriding the host tag value.
+  apm_config:
+  env: <ENVIRONMENT>
+4. Per trace: When submitting a single trace, specify an environment by tagging one of its spans with the metadata key env. This overrides the Agent configuration and the host tag’s value (if any). Consult the trace tagging documentationto learn how to assign a tag to your traces.
 
 ## Other ways to collect traces
 
 There are alternernates to the Agent that you can use to collect traces.
 
+### Containers
+
+Once your application is instrumented with the tracing client, by default traces will be sent to `localhost:8126`. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
+
+{{< partial name="apm/apm-containers.html" >}}
+
 ### Lamda - X-Ray
 
-For more information abut setting up Lamda - X-Ray, see the [Amazon X-Ray integration documentation][9]
+For more information abut setting up Lamda - X-Ray, see the [Amazon X-Ray integration documentation][7]
 
 ### Heroku
 
-Tracing is enabled by default when monitoring with Heroku. For more information abut configuring tracing for Heroku, see the [Heroku cloud documentation][10].
+Tracing is enabled by default when monitoring with Heroku. For more information abut configuring tracing for Heroku, see the [Heroku cloud documentation][8].
 
 ### Cloud Foundry
 
-Tracing is enabled by default when monitoring with Cloud Foundry. For more information abut configuring tracing for Cloud Foundry, see the [Cloud Foundry documentation][5].
+Tracing is enabled by default when monitoring with Cloud Foundry. For more information abut configuring tracing for Cloud Foundry, see the [Cloud Foundry documentation][9].
 
 ### Other(GAE, AAS, Serverless)
 
@@ -82,10 +77,9 @@ For the full overview of all of the steps to set up APM, see the [APM overivew][
 [1]: /tracing
 [2]: https://github.com/DataDog/dd-trace-py
 [3]: https://app.datadoghq.com/account/settings#agent
-[4]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-[5]: /integrations/cloud_foundry/#trace-collection
-[6]: https://github.com/DataDog/datadog-trace-agent/blob/6.4.1/datadog.example.yaml
-[7]: /agent
-[8]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[9]: /integrations/amazon_xray/#overview
-[10]: /agent/basic_agent_usage/heroku/#installation
+[4]: https://github.com/DataDog/datadog-trace-agent/blob/6.4.1/datadog.example.yaml
+[5]: /agent
+[6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[7]: /integrations/amazon_xray/#overview
+[8]: /agent/basic_agent_usage/heroku/#installation
+[9]: /integrations/cloud_foundry/#trace-collection
