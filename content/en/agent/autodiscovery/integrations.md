@@ -25,10 +25,10 @@ Additionally, if you use Agent v6.5+, you can also use the following parameter t
 
 Each tab in sections below shows a different way to apply integration templates to a given container. Available documented methods are:
 
-* [Using a configuration file mounted within the Agent](?tab=file)
-* [Using key-value stores](?tab=keyvaluestore)
-* [Using Kubernetes annotations](?tab=kubernetespodannotations)
-* [Using Docker labels](?tab=dockerlabel)
+* [Using a configuration file mounted within the Agent](?tab=file#configuration)
+* [Using key-value stores](?tab=keyvaluestore#configuration)
+* [Using Kubernetes annotations](?tab=kubernetespodannotations#configuration)
+* [Using Docker labels](?tab=dockerlabel#configuration)
 
 If you provide a template for the same integration via multiple template sources, the Agent looks for templates in the following order (using the first one it finds):
 
@@ -386,46 +386,43 @@ Check names are `apache` and `http_check` and their `<INIT_CONFIG>`, `<INSTANCE_
 {{< tabs >}}
 {{% tab "File" %}}
 
-1. Create a `autodiscovery.d/` folder on your host.
-2. Add the following custom auto-configuration file named `apache.yaml` to this folder:
+First, create a `autodiscovery.d/` folder on your host. Then add the following custom auto-configuration file named `apache.yaml` to this folder:
 
-  ```yaml
-  ad_identifiers:
-    - httpd
+```yaml
+ad_identifiers:
+  - httpd
 
-  init_config:
+init_config:
 
-  instances:
-    - apache_status_url: http://%%host%%/server-status?auto
+instances:
+  - apache_status_url: http://%%host%%/server-status?auto
 
-  logs:
-    source: apache
-    service: webapp
-  ```
+logs:
+  source: apache
+  service: webapp
+```
 
-  **Note**: It looks like a minimal [Apache check configuration][1], but notice the `ad_identifiers` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `httpd` image.
+**Note**: It looks like a minimal [Apache check configuration][1], but notice the `ad_identifiers` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `httpd` image. **See the dedicated [Autodiscovery Identifier][2] documentation to learn more**.
 
-  **See the dedicated [Autodiscovery Identifier][2] documentation to learn more.
+Then add the following custom auto-configuration file named `http_check.yaml` to this folder:
 
-3. Add the following custom auto-configuration file named `http_check.yaml` to this folder:
+```yaml
+ad_identifiers:
+  - httpd
 
-  ```yaml
-  ad_identifiers:
-    - httpd
+init_config:
 
-  init_config:
+instances:
+  - name: "<WEBSITE_1>"
+    url: "http://%%host%%/website_1"
+    timeout: 1
 
-  instances:
-    - name: "<WEBSITE_1>"
-      url: "http://%%host%%/website_1"
-      timeout: 1
+  - name: "<WEBSITE_2>"
+    url: "http://%%host%%/website_2"
+    timeout: 1
+```
 
-    - name: "<WEBSITE_2>"
-      url: "http://%%host%%/website_2"
-      timeout: 1
-  ```
-
-3. Mount the `autodiscovery.d/` folder into the containerized Agent `conf.d/` folder.
+Finally, mount the `autodiscovery.d/` folder into the containerized Agent `conf.d/` folder.
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
 [2]: /agent/autodiscovery/ad_identifiers
