@@ -29,7 +29,7 @@ vagrant up
 vagrant ssh
 ```
 
-[Datadog API キー][5]を付加した [1 行のインストールコマンド][6]を使用して、Datadog Host Agent をインストールします。
+[Datadog API キー][6]を付加した [1 行のインストールコマンド][5]を使用して、Datadog Host Agent をインストールします。
 
 ```
 DD_API_KEY=<YOUR_DD_API_KEY> bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
@@ -146,8 +146,8 @@ hello world
 [2]: https://www.datadoghq.com
 [3]: https://app.vagrantup.com/ubuntu/boxes/xenial64
 [4]: https://www.vagrantup.com/intro/getting-started/index.html
-[5]: https://app.datadoghq.com/account/settings#api
-[6]: https://app.datadoghq.com/account/settings#agent/ubuntu
+[5]: https://app.datadoghq.com/account/settings#agent/ubuntu
+[6]: https://app.datadoghq.com/account/settings#api
 [7]: /ja/agent/guide/agent-commands/?tab=agentv6#agent-information
 [8]: https://app.datadoghq.com/infrastructure
 [9]: /ja/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file

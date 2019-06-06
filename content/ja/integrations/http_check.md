@@ -112,7 +112,7 @@ HTTP チェックにはイベントは含まれません。
 
 ### サービスのチェック
 
-Datadog でこれらのサービスチェックのアラート条件を作成するには、[Create Monitor][10] ページで 'Integration' ではなく 'Network' を選択します。
+Datadog でこれらのサービスチェックのアラート条件を作成するには、[Create Monitor][11] ページで 'Integration' ではなく 'Network' を選択します。
 
 **`http.can_connect`**:
 
@@ -139,11 +139,8 @@ Datadog でこれらのサービスチェックのアラート条件を作成す
 このチェックを無効にするには、`check_certificate_expiration` を false に設定します。
 
 ## トラブルシューティング
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
-
-
-{{< get-dependencies >}}
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
@@ -153,5 +150,9 @@ Datadog でこれらのサービスチェックのアラート条件を作成す
 [7]: https://www.datadoghq.com/blog/the-power-of-tagged-metrics
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[10]: https://app.datadoghq.com/monitors#/create
-[11]: https://docs.datadoghq.com/ja/help
+[10]: https://github.com/DataDog/integrations-core/blob/master/http_check/metadata.csv
+[11]: https://app.datadoghq.com/monitors#/create
+[12]: https://docs.datadoghq.com/ja/help
+
+
+{{< get-dependencies >}}

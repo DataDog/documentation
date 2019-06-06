@@ -30,6 +30,7 @@ further_reading:
 
 
 [1]: https://github.com/DataDog/chef-datadog
+[2]: https://app.datadoghq.com/account/settings#integrations/chef
 {{% /tab %}}
 {{% tab "Puppet" %}}
 
@@ -38,6 +39,7 @@ further_reading:
 
 
 [1]: https://github.com/DataDog/puppet-datadog-agent
+[2]: https://app.datadoghq.com/account/settings#integrations/puppet
 {{% /tab %}}
 {{% tab "Ansible" %}}
 
@@ -46,12 +48,14 @@ further_reading:
 
 
 [1]: https://github.com/DataDog/ansible-datadog
+[2]: https://app.datadoghq.com/account/settings#agent/ansible
 {{% /tab %}}
 {{% tab "SaltStack" %}}
 
 * [Saltstack で Datadog Agent をインストールする[1]
 
 
+[1]: https://github.com/DataDog/datadog-formula
 {{% /tab %}}
 {{< /tabs >}}
 

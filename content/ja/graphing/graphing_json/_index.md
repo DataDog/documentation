@@ -13,7 +13,7 @@ further_reading:
     tag: Documentation
     text: リクエストの JSON スキーマ
 ---
-[ダッシュボード API][1] を使用して [Datadog タイムボード][2]をクエリすると、結果は、以下のレイアウトの JSON オブジェクトになります。
+[ダッシュボード API][2] を使用して [Datadog タイムボード][1]をクエリすると、結果は、以下のレイアウトの JSON オブジェクトになります。
 
 ```
 DASHBOARD_SCHEMA = {
@@ -73,7 +73,7 @@ Datadog UI でテンプレート変数を使用する方法については、[�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/api/#dashboards
-[2]: /ja/graphing/dashboards/timeboard
+[1]: /ja/graphing/dashboards/timeboard
+[2]: /ja/api/#dashboards
 [3]: /ja/graphing/graphing_json/widget_json
 [4]: /ja/graphing/dashboards/template_variables

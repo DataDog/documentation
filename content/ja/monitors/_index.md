@@ -16,7 +16,7 @@ description: 通知の作成と管理
 
 トリガーされたモニターは[イベントストリーム][1]に表示されます。このため、アプリケーションまたはインフラストラクチャーの問題に共同で取り組むことができます。Datadog では、[Triggered Monitors][2] ページに未解決の問題の詳細を表示したり、[Manage Monitors][3] ページで一般的なモニター管理を行うことができます。
 
-モニターはプログラムで管理できます。API で使用可能な[ライブラリ][4]または cURL を使用してモニターを管理する方法については、[Datadog API に関するドキュメント][5]をご参照ください。
+モニターはプログラムで管理できます。API で使用可能な[ライブラリ][5]または cURL を使用してモニターを管理する方法については、[Datadog API に関するドキュメント][4]をご参照ください。
 
 このセクションでは、以下について説明します。
 
@@ -79,8 +79,8 @@ Datadog には、自身が作成したモニターが変更されたことを通
 [1]: /ja/graphing/event_stream
 [2]: https://app.datadoghq.com/monitors/triggered
 [3]: https://app.datadoghq.com/monitors
-[4]: /ja/developers/libraries
-[5]: /ja/api/#monitors
+[4]: /ja/api/#monitors
+[5]: /ja/developers/libraries
 [6]: /ja/monitors/monitor_types
 [7]: /ja/monitors/notifications
 [8]: /ja/monitors/manage_monitor
