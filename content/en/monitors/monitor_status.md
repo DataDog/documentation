@@ -74,7 +74,7 @@ For further investigation into your metrics evolution, use the [Metric Explorer]
 
 * The monitor is newly created and has not evaluated yet.
 * The monitor's query was recently changed.
-* A host's name previously included in query has changed. Host name changes age out of the UI within 24 hours.
+* A host's name previously included in the query has changed. Host name changes age out of the UI within 24 hours.
 
 ## Events
 
