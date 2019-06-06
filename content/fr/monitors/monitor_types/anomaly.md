@@ -182,7 +182,7 @@ Si le cumul est explicitement défini dans la requête, l'option d'intervalle de
 
 ### Les anomalies liées à une métrique dont la valeur est inférieure à X ne m'intéressent pas. Est-il possible de les ignorer ?
 
-Créez **A**, un monitor d'anomalie envoyant des alertes lorsque les valeurs dépassent les limites, et **B**, un [monitor de métrique][10] distinct avec un seuil d'alerte pour les valeurs supérieures à X. Enfin, créez un [monitor composite][11] avec **A && B**.
+Créez **A**, un monitor d'anomalie envoyant des alertes lorsque les valeurs dépassent les limites, et **B**, un [monitor de métrique][10] distinct avec une alerte de seuil pour les valeurs supérieures à X. Enfin, créez un [monitor composite][11] avec **A && B**.
 
 ### Je ne peux pas enregistrer de monitor lorsqu'un message indique que les critères d'alertes et d'annulation d'alerte font que le monitor peut à la fois déclencher et annuler une alerte. Pourquoi ?
 
