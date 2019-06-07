@@ -134,6 +134,9 @@ push_translations:
     - push_changed_translations
   only:
     - master
+  except:
+    - triggers
+    - schedules
 
 #rollback_live:
 #  <<: *base_template
