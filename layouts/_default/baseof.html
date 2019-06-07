@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}" style="opacity:0" class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.text }}banner{{ end }}">
 <head>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-us.js"></script>
+    <script>
+      // Set your Public API key
+      DD_LOGS.init({
+        publicApiKey: 'pubf839012dcb041ba2b4478770b9e96d11',
+        forwardErrorsToLogs: false,
+      });
+
+      DD_LOGS.addLoggerGlobalContext('{{ $.Site.Params.environment }}', 'local');
+
+    </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-21102638-5"></script>
     <script>
@@ -9,6 +20,40 @@
         gtag('js', new Date());
 
         gtag('config', 'UA-21102638-5');
+
+        window.onload = function(){
+            console.log('loaded');
+            var elts = document.getElementsByTagName('a');
+            var show = function(event) { 
+                
+                var file = event.target.dataset+".txt";
+                
+                if (event.target.tagName !== "A")
+                    return;
+
+                // History API needed to make sure back and forward still work
+                if (history === null)
+                    return;
+
+                // External links should instead open in a new tab
+                var newUrl = event.target.href;
+                var domain = window.location.origin;
+                if (typeof domain !== "string" || newUrl.search(domain) !== 0) {
+                    event.preventDefault();
+                    window.open(newUrl, "_blank");
+                } else {
+                    event.preventDefault();
+                    loadPage(newUrl);
+                    history.pushState(null /*stateObj*/, "" /*title*/, newUrl);
+                }
+
+                
+            }
+            for (var i = elts.length - 1; i >= 0; --i) {
+                elts[i].onclick = show;
+            }
+        }
+
 
         function loadPage(newUrl) {
             var httpRequest = new XMLHttpRequest();
@@ -24,45 +69,39 @@
 
             // TODO: UI for this error
             var newContent = httpRequest.responseXML.getElementById("mainContent");
+            //var newContent = httpRequest.responseText;
             if (newContent === null)
                 return;
 
+            console.log('page size');
+            {{/* console.log(httpRequest.getResponseHeader("Content-Type")); */}}
+            console.log(httpRequest.getResponseHeader("Content-Length"));
+
             document.title = newDocument.title;
+
+            console.time('Replacing page content');
+
+            var start = window.performance.now();
             var contentElement = document.getElementById("mainContent");
             contentElement.replaceWith(newContent);
+            console.timeEnd('Replacing page content');
+            var end = window.performance.now();
+            var time = end - start;
+            var test = DD_LOGS.logger.log('html parsed page content inserted',{"timeEnd": time},'info');
+            console.log(test);
+
             console.log('New page loaded: ' + newDocument.title);
-        }
-        httpRequest.responseType = "document";
-        httpRequest.open("GET", newUrl);
-        httpRequest.send();
-        };
-        window.onload = function() {
-
-        // Make links load asynchronously
-        document.querySelector("#sidenav").addEventListener("click", function(event) {
-            if (event.target.tagName !== "A")
-                return;
-
-            // History API needed to make sure back and forward still work
-            if (history === null)
-                return;
-
-            // External links should instead open in a new tab
-            var newUrl = event.target.href;
-            var domain = window.location.origin;
-            if (typeof domain !== "string" || newUrl.search(domain) !== 0) {
-                event.preventDefault();
-                window.open(newUrl, "_blank");
-            } else {
-                event.preventDefault();
-                loadPage(newUrl);
-                history.pushState(null /*stateObj*/, "" /*title*/, newUrl);
             }
-        });
-        }
-        window.onpopstate = function(event) {
-        loadPage(window.location);
-        }
+            httpRequest.responseType = "document";
+            httpRequest.open("GET", newUrl);
+            //httpRequest.open("GET", newUrl+"api_tests.txt");
+            //httpRequest.overrideMimeType("text/plain; charset=x-user-defined");
+            //httpRequest.responseType = "text";
+            httpRequest.send();
+        };
+
+
+
     </script>
 
     <meta charset="utf-8">

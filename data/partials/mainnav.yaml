@@ -473,6 +473,7 @@ main:
     children:
       - name: "API Tests"
         url: "synthetics/api_tests"
+        id: "api_tests"
       - name: "Browser Tests"
         url: "synthetics/browser_tests"
       - name: "APM Integration"
