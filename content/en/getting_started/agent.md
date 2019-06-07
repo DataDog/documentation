@@ -109,7 +109,7 @@ For help troubleshooting the Agent:
 [11]: /agent/guide/agent-commands/#start-the-agent
 [12]: /agent/guide/agent-commands/#stop-the-agent
 [13]: /agent/guide/agent-commands/#restart-the-agent
-[14]: /integrations
+[14]: /getting_started/integrations
 [15]: /integrations/disk
 [16]: /integrations/network
 [17]: /integrations/ntp
