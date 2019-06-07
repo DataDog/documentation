@@ -24,12 +24,12 @@ Watchdog is an algorithmic feature for APM that automatically detects potential 
 
 Watchdog looks for irregularities in metrics, like a sudden spike in hit rate. For each irregularity, the [Watchdog page][1] displays a Watchdog story. Each story includes a graph of the detected metric irregularity and gives more information about the relevant timeframe and endpoint or endpoints. To avoid false alarms, Watchdog only reports issues after observing your data for a sufficient amount of time to establish a high degree of confidence.
 
-Stories can be filtered by environment and availability zone, as well as by the type of service or resource. Typing in the "Filter stories" search box also allows user to filter stories by service or resource name.
+Stories can be filtered by environment and availability zone, as well as by the type of service or resource. Typing in the "Filter stories" search box also allows user to filter stories by service or resource name. Use the date picker in the upper right to view stories detected in a specific time range.
 
 
-{{< img src="watchdog/watchdog_overview.png" alt="Watchdog overview" responsive="true" >}}
+{{< img src="watchdog/watchdog_overview-archive.png" alt="Watchdog overview" responsive="true" >}}
 
-Clicking on the Story shows further details about requests, errors, and latency at the time of the detected irregularity. 
+Clicking on the story shows further details about requests, errors, and latency at the time of the detected irregularity. Use the eye icon in the upper-right of a story to archive it. Archiving hides the story from the feed, but does not prevent Watchdog from flagging future issues related to the service or resource.
 
 {{< img src="watchdog/watchdog_story.png" alt="Watchdog story" responsive="true" >}}
 
