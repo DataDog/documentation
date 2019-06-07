@@ -257,7 +257,7 @@ The Docker API is optimized to get logs from one container at a time. When there
         (...)
         - hostPath:
             path: /opt/datadog-agent/run
-            name: pointdir
+          name: pointdir
       (...)
     ```
 
