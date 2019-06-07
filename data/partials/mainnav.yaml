@@ -300,6 +300,9 @@ main:
     url: "tracing/"
     pre: "nav_tracing"
     children:
+      # Enable tracing
+      - name: "Enable traces"
+      - url: "tracing/enable/"
       # Languages
       - name: "Collect traces"
         url: "tracing/setup/"
