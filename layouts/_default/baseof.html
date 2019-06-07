@@ -9,7 +9,7 @@
         forwardErrorsToLogs: false,
       });
 
-      DD_LOGS.addLoggerGlobalContext('{{ $.Site.Params.environment }}', 'local');
+      DD_LOGS.addLoggerGlobalContext('env', '{{ $.Site.Params.environment }}');
 
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
