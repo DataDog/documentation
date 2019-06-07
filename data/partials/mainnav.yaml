@@ -56,9 +56,6 @@ main:
             url: "agent/basic_agent_usage/windows/"
           - name: "From Source"
             url: "agent/basic_agent_usage/source/"
-      ## TRACING/APM - Setup basic
-      - name: "APM"
-        url: "agent/apm/"
       ## Docker
       - name: "Docker"
         url: "agent/docker/"
