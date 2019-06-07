@@ -87,7 +87,7 @@
             console.timeEnd('Replacing page content');
             var end = window.performance.now();
             var time = end - start;
-            DD_LOGS.logger.log('html parsed page content inserted',{"timeEnd": time.toString()},'info');
+            DD_LOGS.logger.log('html parsed page content inserted',{"timeEnd": time},'info');
             console.log({"timeEnd": time});
             console.log('New page loaded: ' + newDocument.title);
             }
