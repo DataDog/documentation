@@ -96,7 +96,7 @@ right:
         title: Actualité
   - name: docs
     link: ''
-    title: Documentation
+    title: Docs
   - name: login
     link: 'https://app.datadoghq.com/'
     title: Connexion
