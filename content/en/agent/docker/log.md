@@ -219,7 +219,7 @@ spec:
 Refer to the [Autodiscovery guide][1] for setup, examples, and more information about Autodiscovery.
 
 
-[1]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
+[1]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -285,5 +285,5 @@ ac_exclude = ["name:datadog-agent"]
 
 [1]: /integrations/journald
 [2]: /agent/autodiscovery
-[3]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
+[3]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
 [4]: /logs/log_collection/#custom-log-collection

@@ -28,19 +28,19 @@ Le check Jenkins de l'Agent Datadog est obsolète. Utilisez le <a href="https://
 
 _Ce plug-in nécessite [Jenkins 1.580.1][1] ou une version ultérieure._
 
-Installez [ce plug-in][2] depuis l'[Update Center][3] (disponible en accédant à **Manage Jenkins** -> **Manage Plugins**) dans votre installation Jenkins.
+Installez [ce plug-in][2] depuis le [Centre de mise à jour][3] (disponible en accédant à **Gérer Jenkins** -> **Gérer les plug-ins**) dans votre installation Jenkins.
 
 1. Accédez à l'interface Web de votre installation Jenkins.
 
-2. Depuis l'[Update Center][4] (disponible en accédant à Manage Jenkins -> Manage Plugins), sous l'onglet Available, accédez à la section **Datadog Plugin**.
+2. Depuis le [Centre de mise à jour][4] (disponible en accédant à Gérer Jenkins -> Gérer les plug-ins), sous l'onglet Disponible, accédez à la section **Plug-in Datadog**.
 
 3. Cochez la case à côté du plug-in et installez-le en cliquant sur l'un des deux boutons en bas de l'écran.
 
-4. Pour configurer le plug-in, accédez à la page **Manage Jenkins** -> **Configure System** et consultez la section *Datadog Plugin*.
+4. Pour configurer le plug-in, accédez à la page **Gérer Jenkins** -> **Configurer le système** et consultez la section *Plug-in Datadog*.
 
-5. Copiez votre clé d'API depuis la page [API Keys][5] de votre compte Datadog et colle-la dans la zone de texte `API Key` de l'écran de configuration.
+5. Copiez votre clé d'API depuis la page [API Keys][5] de votre compte Datadog et colle-la dans la zone de texte `Clé API` de l'écran de configuration.
 
-6. Avant d'enregistrer votre configuration, testez votre connexion à l'API en cliquant sur le bouton *Test Key*, directement sous la zone de texte `API Key`.
+6. Avant d'enregistrer votre configuration, testez votre connexion à l'API en cliquant sur le bouton *Tester la clé*, directement sous la zone de texte `API Key`.
 
 7. Redémarrez Jenkins pour activer le plugin.
 
