@@ -212,7 +212,7 @@ The Docker API is optimized to get logs from one container at a time. When there
         volumeMounts:
           (...)
           - name: logpath
-              mountPath: /var/log/pods
+            mountPath: /var/log/pods
       (...)
       volumes:
         (...)
@@ -230,7 +230,7 @@ The Docker API is optimized to get logs from one container at a time. When there
         volumeMounts:
           (...)
           - name: dockersocket
-              mountPath: /var/run/docker.sock
+            mountPath: /var/run/docker.sock
       (...)
       volumes:
         (...)
@@ -251,7 +251,7 @@ The Docker API is optimized to get logs from one container at a time. When there
         volumeMounts:
           (...)
           - name: pointdir
-              mountPath: /opt/datadog-agent/run
+            mountPath: /opt/datadog-agent/run
       (...)
       volumes:
         (...)
