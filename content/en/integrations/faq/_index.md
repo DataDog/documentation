@@ -104,7 +104,7 @@ aliases:
 * [Can I use a named instance in the SQL Server integration?][52]
 * [Can I set up the dd-agent MySQL check on my Google CloudSQL?][53]
 * [How to collect metrics from custom MySQL queries][54]
-* [Can I collect SQL Server performance metrics beyond what is available in the sys.dm_os_performance_counters table? Try WMI][55]
+* [Can I collect SQL Server performance metrics beyond what is available in the sys.dm_os_performance_counters table?][55]
 * [How can I collect more metrics from my SQL Server integration?][56]
 * [Database user lacks privileges][57]
 
