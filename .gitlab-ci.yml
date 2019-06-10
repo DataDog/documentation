@@ -44,7 +44,7 @@ build_preview:
     - build_hugo_site
     - build_hugo_site_ja
     - minify_html
-    #- collect_static_assets
+    - collect_static_assets
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
     - push_site_to_s3
