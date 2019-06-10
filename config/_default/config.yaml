@@ -1,7 +1,7 @@
 title: "Docs"
 metadataformat: "yaml"
 # enableGitInfo so lastmod in sitemap.xml is based off git
-enableGitInfo: true
+enableGitInfo: false
 canonifyURLs: true
 pygmentsuseclasses: true
 pygmentsCodeFences: true

@@ -21,7 +21,4 @@ footer_scripts:
   - snowplow: false
   - marketo: false
   - adroll: false
-home:
-    meta_image: datadog_logo_share_tt.png
-    meta_title: Getting Started with Datadog
-    meta_description: Datadog, the leading service for cloud-scale monitoring.
+
