@@ -75,5 +75,5 @@ To save a notebook, press `⌘ + S` or click the "Save" button in the notebook h
 
 To rename a notebook, click the name field in the notebook header.
 
-To delete a notebook that you've created, delete it from the Notebook List page.
+To delete a notebook that you've created, delete it from the Notebook List page, or from the individual notebook page using the settings cog.
 
