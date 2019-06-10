@@ -140,9 +140,9 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module           | Versions  | Support Type    |
 |------------------|-----------|-----------------|
 | [bluebird][34]   | `>=2`     | Fully Supported |
-| [q][35]          | `>=1`     | Fully Supported |
 | [promise][43]    | `>=7`     | Fully Supported |
 | [promise-js][44] | `>=0.0.3` | Fully Supported |
+| [q][35]          | `>=1`     | Fully Supported |
 | [when][36]       | `>=3`     | Fully Supported |
 
 #### Logger Compatibility
