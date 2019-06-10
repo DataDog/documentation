@@ -137,11 +137,13 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 #### Promise Library Compatibility
 
-| Module         | Versions | Support Type    |
-|----------------|----------|-----------------|
-| [bluebird][34] | `>=2`    | Fully Supported |
-| [q][35]        | `>=1`    | Fully Supported |
-| [when][36]     | `>=3`    | Fully Supported |
+| Module           | Versions  | Support Type    |
+|------------------|-----------|-----------------|
+| [bluebird][34]   | `>=2`     | Fully Supported |
+| [q][35]          | `>=1`     | Fully Supported |
+| [promise][43]    | `>=7`     | Fully Supported |
+| [promise-js][44] | `>=0.0.3` | Fully Supported |
+| [when][36]       | `>=3`     | Fully Supported |
 
 #### Logger Compatibility
 
@@ -197,3 +199,5 @@ For details about how to how to toggle and configure plugins, check out the [API
 [40]: https://knexjs.org/
 [41]: https://github.com/articulate/paperplane
 [42]: https://github.com/articulate/paperplane/blob/master/docs/API.md#serverless-deployment
+[43]: https://github.com/then/promise
+[44]: https://github.com/kevincennis/promise
