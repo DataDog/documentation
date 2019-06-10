@@ -27,8 +27,13 @@ def get_languages(config_location):
         c = config.read()
         c_yaml = yaml.load(c)
         d = {}
-        for l in c_yaml["languages"]:
-            d.update({l: c_yaml["languages"][l]})
+        if 'en' in c_yaml:
+            # this is languages.yaml
+            d = c_yaml
+        else:
+            # this is config.yaml
+            for l in c_yaml["languages"]:
+                d.update({l: c_yaml["languages"][l]})
         return d
 
 
@@ -78,7 +83,7 @@ def create_placeholder_file(template, new_glob, lang_as_dir, files_location):
         new_dest = "{content_path}{sub_path}{template}".format(content_path=content_path, sub_path=sub_path, template=ntpath.basename(template))
     else:
         new_dest = os.path.dirname(template) + '/' + ntpath.basename(template).replace('.md', '.%s.md' % new_glob['name'])
-    
+
     with open(template) as o_file:
         content = o_file.read()
         boundary = re.compile(r'^-{3,}$', re.MULTILINE)

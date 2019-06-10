@@ -48,7 +48,7 @@ if [ ${RUN_SERVER} == true ]; then
 	# placeholders
 	if [ ${CREATE_I18N_PLACEHOLDERS} == true ]; then
 		echo "creating i18n placeholder pages."
-		placehold_translations.py -c "config.yaml" -f "content/"
+		placehold_translations.py -c "config/_default/languages.yaml" -f "content/en/"
 	fi
 
 	# hugo
