@@ -56,7 +56,8 @@ if [ ${RUN_SERVER} == true ]; then
 	if [ ${RENDER_SITE_TO_DISK} != "false" ]; then
 		args="${args} --renderToDisk"
 	fi
-	hugo server ${args} &
+	# hugo server defaults to --environment development
+	./node_modules/.bin/hugo server ${args} &
 	sleep 5
 
 	if [ ${RUN_GULP} == true ]; then
