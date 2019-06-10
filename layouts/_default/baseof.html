@@ -90,6 +90,7 @@
 
             var pathName = new URL(newUrl).pathname;
 
+            console.log('click path '+pathName);
             DD_LOGS.logger.log('html parsed page content inserted',{"timeEnd": time, "pathName": pathName},'info');
             console.log({"timeEnd": time});
             console.log('New page loaded: ' + newDocument.title);
