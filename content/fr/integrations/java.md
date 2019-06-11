@@ -66,7 +66,7 @@ Si vous exécutez l'Agent en tant que binaire sur un host, configurez votre chec
 {{< tabs >}}
 {{% tab "Host" %}}
 
-Configurez l'Agent afin qu'il se connecte à l'aide de JMX, et modifiez-le selon vos besoins. Voici un exemple de fichier `jmx.d/conf.yaml` :
+Configurez l'Agent afin qu'il se connecte à l'aide de JMX, et modifiez-le selon vos besoins. Voici un fichier d'exemple `jmx.d/conf.yaml` :
 
 ```
 init_config:
