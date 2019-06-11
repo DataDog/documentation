@@ -131,9 +131,9 @@ Typing a complex query can be cumbersome. Use the search bar's autocomplete feat
 ### Escaping of special characters
 
 The following attributes are considered as special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping.
-For instance, to search traces that contain `user=12345` in their `url` the following search must be entered:
+For instance, to search traces that contain `user=JaneDoe` in their `url` the following search must be entered:
 
-`@url:*user\=JaneDoe`
+`@url:*user\=JaneDoe*`
 
 The same logic must be applied to spaces within trace attributes. It is not recommended to have spaces in trace attributes but in such cases, spaces require escaping.
 If an attribute is called `user.first name`, perform a search on this attribute by escaping the space:
