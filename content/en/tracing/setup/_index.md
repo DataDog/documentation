@@ -17,5 +17,5 @@ To instrument an application written in a language that does not yet have offici
 
 [1]: /agent
 [2]: /agent/apm
-[3]: /agent/apm/#containers
+[3]: /tracing/enable/#containers
 [4]: /developers/libraries/#apm-tracing-client-libraries

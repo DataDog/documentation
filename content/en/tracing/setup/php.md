@@ -77,7 +77,7 @@ Configure your application level tracers to submit traces to a custom Agent host
 
 The PHP tracer automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
-See [tracer configuration][16] for more information on how to set these variables.
+See [tracer configuration][11] for more information on how to set these variables.
 
 ## Compatibility
 
@@ -121,7 +121,7 @@ If the web framework that you use is not listed below, you can still see traces 
 | Wordpress      |                    | _Coming Soon_   |
 | Yii            | 1.1                | _Coming Soon_   |
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. Check with the [Datadog team][12] for help.
 
 #### CLI Library Compatibility
 
@@ -132,7 +132,7 @@ Tracing from the CLI SAPI is disabled by default. To enable tracing of PHP CLI s
 | Laravel Artisan | 5.x                | Fully Supported |
 | Symfony Console |                    | _Coming Soon_   |
 
-Don’t see your desired CLI library? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
+Don’t see your desired CLI library? Datadog is continually adding additional support. Check with the [Datadog team][12] for help.
 
 #### Datastore Compatibility
 
@@ -155,7 +155,7 @@ Don’t see your desired CLI library? Datadog is continually adding additional s
 | PHPredis                         | 4                          | _Coming Soon_   |
 | Solarium                         | 4.2                        | _Coming Soon_   |
 
-Don’t see your desired datastores? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
+Don’t see your desired datastores? Datadog is continually adding additional support. Check with the [Datadog team][12] for help.
 
 #### Library Compatibility
 
@@ -167,7 +167,7 @@ Don’t see your desired datastores? Datadog is continually adding additional su
 | Beanstalkd |                       | _Coming Soon_   |
 | ReactPHP   |                       | _Coming Soon_   |
 
-Don’t see your desired libraries? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
+Don’t see your desired libraries? Datadog is continually adding additional support. Check with the [Datadog team][12] for help.
 
 ## Configuration
 
@@ -177,7 +177,7 @@ The PHP tracer can be configured using environment variables.
 
 ### Apache
 
-Set using [`SetEnv`][12] from the server config, virtual host, directory, or **.htaccess** file.
+Set using [`SetEnv`][13] from the server config, virtual host, directory, or **.htaccess** file.
 
 ```
 SetEnv DD_TRACE_DEBUG true
@@ -185,7 +185,7 @@ SetEnv DD_TRACE_DEBUG true
 
 ### NGINX
 
-Set using [`fastcgi_param`][13] from the `http`, `server`, or `location` contexts.
+Set using [`fastcgi_param`][14] from the `http`, `server`, or `location` contexts.
 
 ```
 fastcgi_param DD_TRACE_DEBUG true;
@@ -206,7 +206,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_AGENT_HOST`                      | `localhost` | The Agent host name                                                         |
 | `DD_AUTOFINISH_SPANS`                | `false`     | Whether spans are automatically finished when the tracer is flushed         |
 | `DD_TRACE_CLI_ENABLED`               | `false`     | Enable tracing of PHP scripts from the CLI                                  |
-| `DD_DISTRIBUTED_TRACING`             | `true`      | Whether to enable [distributed tracing][14]                                 |
+| `DD_DISTRIBUTED_TRACING`             | `true`      | Whether to enable [distributed tracing][15]                                 |
 | `DD_INTEGRATIONS_DISABLED`           | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                        |
 | `DD_PRIORITY_SAMPLING`               | `true`      | Whether to enable priority sampling.                                        |
 | `DD_SAMPLING_RATE`                   | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default)         |
@@ -215,7 +215,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_AGENT_TIMEOUT`             | `500`       | Maximum time the Agent is allowed to take (in milliseconds)                 |
 | `DD_TRACE_AGENT_CONNECT_TIMEOUT`     | `100`       | Maximum time the allowed for Agent connection setup (in milliseconds)       |
 | `DD_TRACE_ANALYTICS_ENABLED`         | `false`     | Flag to enable trace analytics for relevant spans in web integrations       |
-| `DD_TRACE_DEBUG`                     | `false`     | Enable [debug mode][15] for the tracer                                      |
+| `DD_TRACE_DEBUG`                     | `false`     | Enable [debug mode][16] for the tracer                                      |
 | `DD_TRACE_ENABLED`                   | `true`      | Enable the tracer globally                                                  |
 | `DD_TRACE_GLOBAL_TAGS`               | ``          | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`                |
 | `DD_<INTEGRATION>_ANALYTICS_ENABLED` | `false`     | Flag to enable trace analytics for relevant spans in a specific integration |
@@ -229,14 +229,14 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 [3]: /agent/?tab=agentv6
 [4]: /tracing/setup/docker
 [5]: /agent/kubernetes/daemonset_setup/#trace-collection
-[6]: /agent/apm/?tab=agent630#agent-configuration
+[6]: /tracing/enable
 [7]: https://github.com/DataDog/dd-trace-php/releases/latest
 [8]: https://app.datadoghq.com/apm/services
 [9]: /tracing/faq/php-tracer-manual-installation
 [10]: #library-compatibility
-[11]: /help
-[12]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[13]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
-[14]: /tracing/guide/distributed_tracing/?tab=php
-[15]: /tracing/troubleshooting
-[16]: #configuration
+[11]: #configuration
+[12]: /help
+[13]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
+[14]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
+[15]: /tracing/guide/distributed_tracing/?tab=php
+[16]: /tracing/troubleshooting
