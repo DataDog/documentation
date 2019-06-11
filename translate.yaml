@@ -15,6 +15,8 @@ sources:
   dst: "*.{lang}.json"
 - src: "i18n/en.json"
   dst: "{lang}.json"
+- src: "config/_default/params.en.yaml"
+  dst: "config/_default/params.{lang}.yaml"
 ignores:
   - "content/en/**/faq/*.md"
   - "**/*.fr.md"

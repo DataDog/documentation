@@ -22,6 +22,15 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 
+def get_disclaimer_from_params(config_location, key):
+    try:
+        with open(os.path.dirname(config_location) + f'/params.{key}.yaml') as f:
+            c_yaml = yaml.load(f.read())
+            return c_yaml.get('disclaimer', '') or ''
+    except:
+        print("Error getting disclaimer")
+
+
 def get_languages(config_location):
     with open(config_location) as config:
         c = config.read()
@@ -30,6 +39,8 @@ def get_languages(config_location):
         if 'en' in c_yaml:
             # this is languages.yaml
             d = c_yaml
+            for key, data in d.items():
+              data['disclaimer'] = get_disclaimer_from_params(config_location, key)
         else:
             # this is config.yaml
             for l in c_yaml["languages"]:

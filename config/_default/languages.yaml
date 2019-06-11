@@ -1,10 +1,8 @@
 en:
   #languageName: "English"
   #languageCode: "en-US"
-  disclaimer: ""
   weight: 1
   contentDir: content/en
 fr:
-  disclaimer: "Cette page n'est pas encore disponible en Français, nous travaillons actuellement sur sa traduction.<br> Si vous avez des questions ou des retours sur ce projet de traduction, <a href=\"https://docs.datadoghq.com/fr/help/\">contactez-nous!</a>"
   weight: 2
   contentDir: content/fr

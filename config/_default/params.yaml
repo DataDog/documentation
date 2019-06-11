@@ -6,10 +6,6 @@ imgix:
   jpg: "?fm=jpg&auto=format&lossless=true"
   png: "?fm=png&auto=format&lossless=1"
   gif: ""
-announcement_banner:
-  text: "Join us at the Dash conference! July 16-17, NYC"
-  link: "https://www.dashcon.io/?utm_source=Trade+Show&utm_medium=DatadogOrganized&utm_campaign=Tradeshow-201907DashBanner"
-  exclude: []
 code_languages:
   - display_name: Python
     key: python
