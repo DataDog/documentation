@@ -15,7 +15,7 @@ After you have [installed the Datadog Agent][1], and [enabled trace collection][
 
 To instrument an application written in a language that does not yet have official library support, visit the list of [community tracing libraries][4].
 
- [1]: /agent
+[1]: /agent
 [2]: /agent/apm
 [3]: /agent/apm/#containers
 [4]: /developers/libraries/#apm-tracing-client-libraries

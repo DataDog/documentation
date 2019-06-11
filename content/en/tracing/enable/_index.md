@@ -7,6 +7,7 @@ aliases:
   - /tracing/setup/environment
   - /tracing/setup/first_class_dimensions
   - /tracing/getting_further/first_class_dimensions/
+  - /agent/apm/
 further_reading:
 - link: "/agent/docker/apm"
   tag: "Documentation"
