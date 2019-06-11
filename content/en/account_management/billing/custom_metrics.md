@@ -18,7 +18,7 @@ Some standard integrations can potentially emit custom metrics.
 
 Integrations limited to 350 metrics by default and emit custom metrics:
 
-* [ActiveMQ][4]
+* [ActiveMQ XML][4]
 * [Go-Expvar][5]
 
 Integrations with no default limit that emit custom metrics: 
@@ -40,7 +40,7 @@ For billing questions, contact your [Customer Success][3] Manager.
 [1]: /developers/metrics/custom_metrics
 [2]: mailto:sales@datadoghq.com
 [3]: mailto:success@datadoghq.com
-[4]: /integrations/activemq
+[4]: /integrations/activemq/#activemq-xml-integration
 [5]: /integrations/go_expvar
 [6]: /integrations/agent_metrics
 [7]: /integrations/directory
