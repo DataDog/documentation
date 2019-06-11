@@ -41,6 +41,7 @@ build_preview:
     #- sync_integration_descriptions
     - sync_integration_descriptions_cached
     - placehold_translations
+    - sed -i "s|^\([[:space:]]*baseURL: \).*|\1${PREVIEW_DOMAIN}${CI_COMMIT_REF_NAME}|" config/preview/config.yaml
     - build_hugo_site_new
     - build_hugo_site_ja
     - minify_html
