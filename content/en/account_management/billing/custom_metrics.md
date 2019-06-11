@@ -9,14 +9,18 @@ aliases:
 
 In general, [custom metrics][1] refers to any metrics that are not part of the regular integration suite, for example using custom checks or API-level metrics in your application stack.
 
-Pro plans include 100 custom metrics per host and Enterprise plans include 200 custom metrics per host. This number is averaged across all paid hosts. Additional custom metrics packages can be purchased.
+* Billable count is based on average number of `custom metrics / hour` for the month.
+* Pro plans include 100 custom metrics per host.
+* Enterprise plans include 200 custom metrics per host.
+* The number of metrics is averaged across all paid hosts.
+* Additional custom metrics packages can be purchased.
 
 Contact [Sales][2] or your [Customer Success][3] Manager to discuss custom metrics for your account.
 
 ### Standard integrations
 Some standard integrations can potentially emit custom metrics.
 
-Integrations limited to 350 metrics by default and emit custom metrics:
+Integrations limited to 350 metrics by default that emit custom metrics:
 
 * [ActiveMQ XML][4]
 * [Go-Expvar][5]
