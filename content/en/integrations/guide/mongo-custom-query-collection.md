@@ -23,16 +23,16 @@ To collect custom metrics with the Datadog-Mongo integration, use the `custom_qu
 The following optional options can also be used:
 
 * **`tags`**: A list of tags to apply to each metric (as specified above).
-* **`count_type`**: For `count` queries only, this is the submission method (`gauge`, `count`, `rate`, etc...) of the count result. Ignored for non count queries. | 
+* **`count_type`**: For `count` queries only, this is the submission method (`gauge`, `count`, `rate`, etc...) of the count result. Ignored for non count queries.
 
 ## Examples
 
 For the examples below, the following mongo collection `user_collection` is used:
 
 ```
-{ user: "foo", id: 12345, active: true }
-{ user: "bar", id: 67890, active: false}
-{ user: "foobar", id: 16273, active: true}
+{ user: "foo", id: 12345, active: true, age:45}
+{ user: "bar", id: 67890, active: false, age:25}
+{ user: "foobar", id: 16273, active: true, age:35}
 ```
 
 Choose the type of query you would like to see an example for:
@@ -51,17 +51,15 @@ Which would correspond to the following `custom_queries` YAML configuration insi
 ```
 custom_queries:
   - metric_prefix: mongo.users
-    query:
-      count: user_collection
-      query:
-        '1':
-          "$active": true
+    query: {count: user_collection, query: {active:true}
     count_type: gauge
     tags:
       - user:active
 ```
 
+**Note**: The metric type defined is `gauge`. See the [metric type documentation][2] to learn more.
 [1]: https://docs.mongodb.com/manual/reference/command
+[2]: /developers/metrics/#metric-types
 {{% /tab %}}
 {{% tab "Find" %}}
 
