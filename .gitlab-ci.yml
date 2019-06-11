@@ -18,7 +18,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:david.jones_config-updates
   tags:
     - "runner:main"
     - "size:large"
@@ -41,7 +41,8 @@ build_preview:
     #- sync_integration_descriptions
     - sync_integration_descriptions_cached
     - placehold_translations
-    - build_hugo_site
+    - update_preview_baseurl
+    - build_hugo_site_new
     - build_hugo_site_ja
     - minify_html
     - collect_static_assets
@@ -83,7 +84,7 @@ build_live:
     - sync_integration_descriptions
     - sync_integration_metrics
     - placehold_translations
-    - build_hugo_site
+    - build_hugo_site_new
     - build_hugo_site_ja
     - minify_html
     - collect_static_assets

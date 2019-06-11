@@ -1,0 +1,4 @@
+environment: local
+img_url: "http://localhost:1313/"
+corp_url: "https://www.datadoghq.com/"
+static_url: "http://localhost:1313/"
