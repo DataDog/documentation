@@ -16,7 +16,7 @@ further_reading:
     tag: FAQ
     text: Emplacement de l'ensemble des fichiers de configuration de l'Agent
 ---
-{{< partial name="platforms/platforms.html" >}}
+{{< partial name="platforms/platforms.html" links="platforms" >}}
 
 ## Outils de gestion de configurations
 

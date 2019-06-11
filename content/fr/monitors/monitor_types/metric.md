@@ -72,7 +72,7 @@ further_reading:
 
     - Pour plus d'informations sur la configuration de la détection des singularités, consultez [le guide dédié][3].
 
-5. Sélectionnez la durée **evaluation_delay** (en secondes) correspondant au délai avant l'évaluation (nombre entier non négatif). Par exemple, pour une valeur est définie sur 300 (5 min), si l'intervalle est défini sur last_5m et s'il est 7 h, le monitor évalue les données de 6 h 50 à 6 h 55. Cette option s'avère très utile pour AWS CloudWatch et pour d'autres métriques renvoyées pour s'assurer que le monitor dispose toujours de données lors de l'évaluation.
+5. Sélectionnez la durée **evaluation_delay** (en secondes) correspondant au délai avant l'évaluation (nombre entier non négatif). Par exemple, pour une valeur définie sur 300 (5 min), si l'intervalle est défini sur last_5m et s'il est 7 h, le monitor évalue les données de 6 h 50 à 6 h 55. Cette option s'avère très utile pour AWS CloudWatch et pour d'autres métriques renvoyées pour s'assurer que le monitor dispose toujours de données lors de l'évaluation.
 
 6. Vous pouvez aussi choisir de recevoir une notification en l'absence de données, après une période configurable, à l'aide de l'option **notify on no data**. Cette période doit être au moins 2 fois supérieure à l'intervalle d'alerte. Par exemple, si vous définissez une alerte pour les données des 5 dernières minutes, vous devez alors attendre au moins 10 minutes avant de recevoir une notification de données manquantes.
 

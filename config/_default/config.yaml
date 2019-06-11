@@ -1,0 +1,20 @@
+title: "Docs"
+metadataformat: "yaml"
+# enableGitInfo so lastmod in sitemap.xml is based off git
+enableGitInfo: false
+canonifyURLs: true
+pygmentsuseclasses: true
+pygmentsCodeFences: true
+
+# taxonomies
+taxonomies:
+  tag: "tags"
+  video: "videos"
+preserveTaxonomyNames: true
+
+# language
+defaultContentLanguage: "en"
+defaultContentLanguageInSubdir: false
+
+# set this as a default otherwise we get "Error: found overlapping content dirs"
+contentDir: "content/en"

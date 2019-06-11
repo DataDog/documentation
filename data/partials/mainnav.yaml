@@ -4,6 +4,8 @@ main:
     url: "getting_started/"
     pre: "nav_start"
     children:
+      - name: "Agent"
+        url: "getting_started/agent"
       - name: "Integrations"
         url: "getting_started/integrations"
       - name: "Collect traces"
