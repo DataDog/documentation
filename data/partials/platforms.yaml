@@ -97,7 +97,7 @@ gs:
     link: "https://app.datadoghq.com/account/settings#agent/cloud_foundry"
     image: "platform_cloud_foundry.png"
   - name: heroku
-    link: "/agent/basic_agent_usage/heroku/"
+    link: "agent/basic_agent_usage/heroku/"
     image: "platform_heroku.png"
   - name: source
     link: "https://app.datadoghq.com/account/settings#agent/source"
