@@ -5,9 +5,12 @@ order: 1
 external_redirect: '/api/#presentation'
 ---
 ### SIGNATURE
-De nombreuses bibliothèques client exploitent l'API Datadog. [Découvrez-les][1].
+
+De nombreuses [bibliothèques client][1] exploitent l'API Datadog.
 
 ### SIGNATURE
-https://api.datadoghq.com/api/
+
+* Si vous utilisez le site américain de Datadog : `https://api.datadoghq.com/api/`.
+* Si vous utilisez le site européen de Datadog : `https://api.datadoghq.eu/api/`.
 
 [1]: /fr/developers/libraries

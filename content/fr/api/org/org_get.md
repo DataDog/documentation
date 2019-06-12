@@ -1,7 +1,7 @@
 ---
 title: Récupérer une organisation
 type: apicontent
-order: 19.2
+order: 27.2
 external_redirect: /api/#recuperer-une-organisation
 ---
 
@@ -9,4 +9,3 @@ external_redirect: /api/#recuperer-une-organisation
 ##### ARGUMENTS
 * **`public_id`** [*obligatoire*] :
     L'ID public de l'organisation.
-

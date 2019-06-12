@@ -28,31 +28,31 @@ JIRA est un système de suivi de tickets et de projets pour les équipes logicie
 
 1. Accédez à votre compte Jira.
 
-2. Accédez aux paramètres (icône en forme d'engrenage) –> **Produits** :
+2. Accédez aux paramètres (icône en forme d'engrenage) –> **Applications** :
 
     {{< img src="integrations/jira/JiraInstallation2.png" alt="Accès à Jira" responsive="true" style="width:25%">}}
 
-3. Sous **INTÉGRATIONS** dans le menu de gauche, sélectionnez **Liens de l'application** :
+3. Sous **INTEGRATIONS** dans le menu de gauche, sélectionnez **Application links** :
 
     {{< img src="integrations/jira/JiraInstallation3.png" alt="Accès à Jira" responsive="true" style="width:25%">}}
 
-4. Saisissez `https://app.datadoghq.com/` comme URL et cliquez sur **Créez un nouveau lien**. **Remarque** : il est possible que le message d'avertissement suivant s'affiche : « *L'URL que vous avez saisie ne répond pas* ». Vous pouvez l'ignorer et appuyer sur Continuer.
+4. Saisissez `https://app.datadoghq.com/` comme URL et cliquez sur **Create new link**. **Remarque** : il est possible que le message d'avertissement suivant s'affiche : « *No response was received from the URL you entered* ». Vous pouvez l'ignorer et appuyer sur Continuer.
 
     {{< img src="integrations/jira/JiraInstallation4.png" alt="Configurer des liens d'application" responsive="true" style="width:75%">}}
 
-5. Dans le champ **Nom d'application**, ajoutez le nom de votre choix (utilisé pour l'identification).
+5. Dans le champ **Application Name**, ajoutez le nom de votre choix (utilisé pour l'identification).
 
-6. Conservez l'option **Application générique**.
+6. Conservez l'option **Generic Application**.
 
-7. Cochez la case **Créez un lien entrant**.
+7. Cochez la case **Create incoming link**.
 
-8. Cliquez sur **Continuer**.
+8. Cliquez sur **Continue**.
 
     {{< img src="integrations/jira/JiraInstallation5.png" alt="Associer des applications" responsive="true" style="width:50%">}}
 
 9. Pour la fenêtre suivante, vous trouverez la clé de consommateur, le nom du consommateur et la clé publique dans le [carré d'intégration Jira de Datadog][1].
 
-10. Cliquez sur **Continuer**.
+10. Cliquez sur **Continue**.
 
     {{< img src="integrations/jira/JiraInstallation6.png" alt="Associer les applications" responsive="true" style="width:50%">}}
 
