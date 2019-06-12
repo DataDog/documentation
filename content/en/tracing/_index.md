@@ -29,12 +29,12 @@ disable_toc: true
 
 ## Setting up APM
 
-With Datadog's infrastructure monitoring, metrics are sent to the Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Agent: the application code instrumentation sends to the Agent every second ([see here for the Python client][2] for instance) and the Agent sends to the Datadog API every 10 seconds. To get APM up and running and reporting data from your application, follow these steps:
+The application code instrumentation sends traces to the Agent every second. The Agent then calculates performances metrics over all traces and send those metrics along with [a sample of traces](/tracing/guide/trace_sampling_and_storage/#trace-sampling) to Datadog every 10 seconds. To get APM up, running, and reporting data from your application, follow these steps:
 
 
 
 1. **[Install and Configure the Datadog Agent to receive traces][3]**:
-   Install and configure the latest [Datadog Agent][2]. (On macOS, install and run the Trace Agent in addition to the Datadog Agent. See the [macOS Trace Agent][4] documentation for more information). APM is enabled by default in Agent 6, however there are additional configurations to be set in a containerized environment including setting `apm_non_local_traffic: true`. To get an overview of all the possible settings for APM including setting up APM in containerized environments such as [Docker][5] or [Kubernetes][6], get started [here][3].
+   Install and configure the latest [Datadog Agent][3]. (On macOS, install and run the Trace Agent in addition to the Datadog Agent. See the [macOS Trace Agent][4] documentation for more information). APM is enabled by default in Agent 6, however there are additional configurations to be set in a containerized environment including setting `apm_non_local_traffic: true`. To get an overview of all the possible settings for APM including setting up APM in containerized environments such as [Docker][5] or [Kubernetes][6], get started with the [Enable Trace collection documentation][3].
 
 2. **[Configure your application to send traces to your Datadog Agent][7]**:
   Datadog has libraries to support configuring your application in several different languages and containers. For more information about specific languages and containers, see [Application Tracing Setup][7].
@@ -53,7 +53,7 @@ Within a few minutes of running APM, your services will appear in [the APM home 
 
 [1]: /tracing/guide/agent-5-tracing-setup
 [2]: /tracing/setup/python
-[3]: /agent/apm
+[3]: /tracing/enable/
 [4]: https://github.com/DataDog/datadog-agent/tree/master/docs/trace-agent#run-on-macos
 [5]: /agent/docker/apm
 [6]: /agent/kubernetes/daemonset_setup
