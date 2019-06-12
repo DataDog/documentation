@@ -1,5 +1,5 @@
 ---
-title: Enable trace collection in Datadog
+title: Sending traces to Datadog
 kind: Documentation
 aliases:
   - /tracing/languages/
@@ -26,8 +26,6 @@ To use APM, start by enabling trace collection in Datadog. You can do this in mu
 
 APM is enabled by default in Agent 6. Set `apm_non_local_traffic: true` if you are sending traces from a nonlocal environment (like a container). To get an overview of all the possible settings for APM, take a look at the Agent's [`datadog.example.yaml`][2] configuration file. For more information about the Datadog Agent, see the [dedicated doc page][3] or refer to the [`datadog.yaml` templates][4].
 
-Tracing metrics are sent to the Agent from your application: the application code instrumentation sends to the Agent every second (for example, see [the Python client][5]) and the Agent sends to the Datadog API every 10 seconds.
-
 ## Containers
 
 See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
@@ -38,7 +36,7 @@ Once your application is instrumented with the tracing client, by default traces
 
 ## Configure your environment
 
-There are several ways to specify an environment when reporting data:
+There are several ways to specify [an environment][5] when reporting data:
 
 1. Host tag: Use a host tag with the format env:<ENVIRONMENT> to tag all traces from that Agent accordingly.
 2. Agent configuration: Override the default tag used by the Agent in the Agent configuration file. This tags all traces coming through the Agent, overriding the host tag value.
@@ -78,7 +76,7 @@ For the full overview of all of the steps to set up APM, see the [APM overivew][
 [2]: https://github.com/DataDog/datadog-trace-agent/blob/6.4.1/datadog.example.yaml
 [3]: /agent
 [4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[5]: https://github.com/DataDog/dd-trace-py
+[5]: 
 [6]: /integrations/amazon_xray/#overview
 [7]: /agent/basic_agent_usage/heroku/#installation
 [8]: /integrations/cloud_foundry/#trace-collection

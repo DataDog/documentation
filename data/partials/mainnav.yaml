@@ -303,11 +303,11 @@ main:
     pre: "nav_tracing"
     children:
       # Enable tracing
-      - name: "Enable traces"
+      - name: "Send traces to Datadog"
         url: "tracing/enable/"
 
       # Languages
-      - name: "Collect traces"
+      - name: "Enable traces"
         url: "tracing/setup/"
         children:
           - name: "Java"

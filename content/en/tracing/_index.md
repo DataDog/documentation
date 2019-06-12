@@ -25,7 +25,7 @@ disable_toc: true
 
  Datadog Application Performance Monitoring (APM or tracing) provides you with deep insight into your application's performance - from automatically generated dashboards for monitoring key metrics, like request volume and latency, to detailed traces of individual requests - side by side with your logs and infrastructure monitoring. This documentation covers Agent v6 only, for more information on setting up APM tracing with Agent v5, [see the APM with Agent v5 doc][1].
 
- Tracing allows you to see a single request moving across your system and infrastructure, and it gives you systematic data about precisely what is happening to this request. This gives you better insight into your systems interdependencies, it allows you to see where requests are taking the longest, and it gives you visual cues for accurately troubleshooting outages and other system issues.
+ Tracing allows you to see a single request moving across your system and infrastructure, and it gives you systematic data about precisely what is happening to this request. This gives you better insight into your systems interdependencies, it allows you to see where requests are taking the longest, it gives you visual cues for accurately troubleshooting outages and other system issues, and it allows you to see detailed traces of individual requests-side by side with your logs and infrastructure monitoring.
 
 ## Setting up APM
 
@@ -33,8 +33,8 @@ With Datadog's infrastructure monitoring, metrics are sent to the Agent, which t
 
 
 
-1. **[Install and Configure the Datadog Agent to receive traces][3]**:
-   Install and configure the latest [Datadog Agent][2]. (On macOS, install and run the Trace Agent in addition to the Datadog Agent. See the [macOS Trace Agent][4] documentation for more information). APM is enabled by default in Agent 6, however there are additional configurations to be set in a containerized environment including setting `apm_non_local_traffic: true`. To get an overview of all the possible settings for APM including setting up APM in containerized environments such as [Docker][5] or [Kubernetes][6], get started [here][3].
+1. **[Send traces to Datadog][3]**:
+   Install and configure the latest [Datadog Agent][2]. (On macOS, install and run the Trace Agent in addition to the Datadog Agent. See the [macOS Trace Agent][4] documentation for more information). APM is enabled by default in Agent 6, however there are additional configurations to be set in a containerized environment including setting `apm_non_local_traffic: true`. To get an overview of all the possible settings for APM including setting up APM in containerized environments such as [Docker][5] or [Kubernetes][6], get started [Sending traces to Datadog][3].
 
 2. **[Configure your application to send traces to your Datadog Agent][7]**:
   Datadog has libraries to support configuring your application in several different languages and containers. For more information about specific languages and containers, see [Application Tracing Setup][7].
@@ -53,7 +53,7 @@ Within a few minutes of running APM, your services will appear in [the APM home 
 
 [1]: /tracing/guide/agent-5-tracing-setup
 [2]: /tracing/setup/python
-[3]: /agent/apm
+[3]: /tracing/send_traces
 [4]: https://github.com/DataDog/datadog-agent/tree/master/docs/trace-agent#run-on-macos
 [5]: /agent/docker/apm
 [6]: /agent/kubernetes/daemonset_setup
