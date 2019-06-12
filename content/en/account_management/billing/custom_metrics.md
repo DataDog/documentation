@@ -18,14 +18,14 @@ In general, [custom metrics][1] refers to any metrics that are not part of the r
 Contact [Sales][2] or your [Customer Success][3] Manager to discuss custom metrics for your account.
 
 ### Standard integrations
-Some standard integrations can potentially emit custom metrics.
+The following standard integrations can potentially emit custom metrics.
 
-Integrations limited to 350 metrics by default that emit custom metrics:
+Integrations limited to 350 custom metrics by default:
 
 * [ActiveMQ XML][4]
 * [Go-Expvar][5]
 
-Integrations with no default limit that emit custom metrics: 
+Integrations with no default limit: 
 
 * [Agent Metrics][6]
 * [Directory][7]
