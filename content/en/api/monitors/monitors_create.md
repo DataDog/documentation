@@ -106,11 +106,11 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
         *   To mute the alert completely: `{'*': None}`
         *   To mute `role:db` for a short time: `{'role:db': 1412798116}`
 
-    *   **`notify_no_data`** a Boolean indicating whether this monitor notifies when data stops reporting. Default: **false**
-
     *   **`new_host_delay`** Time (in seconds) to allow a host to boot and applications to fully start before starting the evaluation of monitor results. Should be a non negative integer. Default: **300**
 
-    *   **`no_data_timeframe`** the number of minutes before a monitor notifies when data stops reporting. Must be at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks. Default: **2x timeframe for metric alerts, 2 minutes for service checks**
+    *   **`notify_no_data`** a Boolean indicating whether this monitor notifies when data stops reporting. Default: **false**
+
+    *   **`no_data_timeframe`** the number of minutes before a monitor notifies when data stops reporting. This parameter is mandatory when `notify_no_data​` is set to `true`. It must be at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks. Default: **2x timeframe for metric alerts, 2 minutes for service checks**
 
     *   **`timeout_h`** the number of hours of the monitor not reporting data before it automatically resolves from a triggered state. Default: **None**.
 
