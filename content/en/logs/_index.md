@@ -15,7 +15,6 @@ further_reading:
 - link: "logs/explorer/"
   tag: "Documentation"
   text: "Search through all of your logs and perform Log Analytics."
-further_reading:
 - link: "https://learn.datadoghq.com/course/view.php?id=5"
   tag: "Learning Center"
   text: "Introduction to Logs in Datadog"
