@@ -38,7 +38,7 @@ The application code instrumentation sends traces to the Agent every second. The
   Datadog has libraries to support configuring your application in several different languages and containers. For more information about specific languages and containers, see [Application Tracing Setup][8].
    
 3. **[Enable Trace Search & Analytics][9]**: 
-  [Trace Search & Analytics][9] is used to filter APM Data by user-defined tags such as customer_id, error_type, or app_name to help troubleshoot and filter your requests.
+  [Trace Search & Analytics][9] is used to filter APM Data by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests.
 
 4. **[Enrich tracing][9]**:
   [Enrich tracing][10] by automatically [injecting a trace-id into your logs][11], [adding metadata to your spans][12], and [collecting Runtime metrics associated with your traces][13].
