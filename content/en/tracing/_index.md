@@ -60,7 +60,7 @@ Within a few minutes of running APM, your services will appear in [the APM home 
 [9]: /tracing/trace_search_and_analytics
 [10]: /tracing/advanced
 [11]: /tracing/advanced/connect_logs_and_traces
-[12]: /tracing/advanced/adding_metadata_to_spans
-[13]: /tracing/advanced/runtime_metrics
+[12]: /tracing/advanced/adding_metadata_to_spans/?tab=java
+[13]: /tracing/advanced/runtime_metrics/?tab=java
 [14]: https://app.datadoghq.com/apm/home
 [15]: /tracing/visualization
