@@ -32,7 +32,7 @@ Agent v6 が利用可能です。<a href="/agent/faq/upgrade-to-agent-v6">最新
 
 Datadog Agent は、ホストで実行されるソフトウェアです。ホストからイベントとメトリクスを収集し、Datadog に送信します。ここで、モニタリングとパフォーマンスのデータを分析できます。Datadog Agent はオープンソースです。ソースコードは、GitHub の [DataDog/datadog-agent][1] から入手できます。
 
-{{< partial name="platforms/platforms.html" >}}
+{{< partial name="platforms/platforms.html" links="platforms" >}}
 
 ## Agent アーキテクチャ
 
