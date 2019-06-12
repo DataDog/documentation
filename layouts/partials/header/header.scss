@@ -158,6 +158,10 @@ body > header {
     }
   }
 
+  .mainnav li.dropdown:nth-child(4) .dropdown-menu {
+    min-width: 210px;
+  }
+
   // mobile
   .navbar {
     padding-left:0;
