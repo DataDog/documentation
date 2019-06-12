@@ -35,35 +35,35 @@ See the specific setup instructions to ensure that the Agent is configured to re
 
 Note: After having instrumented your application, the tracing client sends traces to `localhost:8126` by default. 
 
-## Configure your environment
-
-There are several ways to specify [an environment][6] when reporting data:
-
-1. **Host tag**: Use a host tag with the format `env:<ENVIRONMENT>` to tag all traces from that Agent accordingly.
-2. **Agent configuration**: Override the default tag used by the Agent in the Agent configuration file. This tags all traces coming through the Agent, overriding the host tag value.
-  apm_config:
-  env: <ENVIRONMENT>
-4. **Per trace**: When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the Agent configuration and the host tag’s value (if any). Consult the [trace tagging documentation][7] to learn how to assign a tag to your traces.
-
 ## Other ways to collect traces
 
 There are alternernates to the Agent and containers that you can use to collect traces.
 
 ### Lamda - X-Ray
 
-For more information abut setting up Lamda - X-Ray, see the [Amazon X-Ray integration documentation][8]
+For more information abut setting up Lamda - X-Ray, see the [Amazon X-Ray integration documentation][6]
 
 ### Heroku
 
-Tracing is enabled by default when monitoring with Heroku. For more information abut configuring tracing for Heroku, see the [Heroku cloud documentation][9].
+Tracing is enabled by default when monitoring with Heroku. For more information abut configuring tracing for Heroku, see the [Heroku cloud documentation][7].
 
 ### Cloud Foundry
 
-Tracing is enabled by default when monitoring with Cloud Foundry. For more information abut configuring tracing for Cloud Foundry, see the [Cloud Foundry documentation][10].
+Tracing is enabled by default when monitoring with Cloud Foundry. For more information abut configuring tracing for Cloud Foundry, see the [Cloud Foundry documentation][8].
 
 ### Other(GAE, AAS, Serverless)
 
 Datadog APM currently requires sending trace data to a running Agent. A workaround for enabling trace collection for a serverless setup is to setup a separate VM that accepts trace traffic externally.
+
+## Configure your environment
+
+There are several ways to specify [an environment][9] when reporting data:
+
+1. **Host tag**: Use a host tag with the format `env:<ENVIRONMENT>` to tag all traces from that Agent accordingly.
+2. **Agent configuration**: Override the default tag used by the Agent in the Agent configuration file. This tags all traces coming through the Agent, overriding the host tag value.
+  apm_config:
+  env: <ENVIRONMENT>
+4. **Per trace**: When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the Agent configuration and the host tag’s value (if any). Consult the [trace tagging documentation][10] to learn how to assign a tag to your traces.
 
 ## Next steps
 
@@ -78,8 +78,8 @@ For the full overview of all of the steps to set up APM, see the [APM overivew][
 [3]: https://github.com/DataDog/datadog-trace-agent/blob/6.4.1/datadog.example.yaml
 [4]: /agent
 [5]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[6]: /tracing/advanced/setting_primary_tags_to_scope/#definition
-[7]: /tracing/advanced/adding_metadata_to_spans/?tab=java
-[8]: /integrations/amazon_xray/#overview
-[9]: /agent/basic_agent_usage/heroku/#installation
-[10]: /integrations/cloud_foundry/#trace-collection
+[6]: /integrations/amazon_xray/#overview
+[7]: /agent/basic_agent_usage/heroku/#installation
+[8]: /integrations/cloud_foundry/#trace-collection
+[9]: /tracing/advanced/setting_primary_tags_to_scope/#definition
+[10]: /tracing/advanced/adding_metadata_to_spans/?tab=java
