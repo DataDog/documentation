@@ -229,7 +229,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 [3]: /agent/?tab=agentv6
 [4]: /tracing/setup/docker
 [5]: /agent/kubernetes/daemonset_setup/#trace-collection
-[6]: /tracing/enable
+[6]: /tracing/send_traces
 [7]: https://github.com/DataDog/dd-trace-php/releases/latest
 [8]: https://app.datadoghq.com/apm/services
 [9]: /tracing/faq/php-tracer-manual-installation
