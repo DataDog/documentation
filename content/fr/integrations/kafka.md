@@ -112,7 +112,7 @@ Dupliquez et modifiez le [pipeline d'intégration][10] si vous utilisez un autre
 
 * [Redémarrez l'Agent][9].
 
-**Pour en savoir plus sur la collecte de logs, consultez [la documentation relative aux logs][11]**
+**Pour en savoir plus sur la collecte de logs, consultez [la documentation relative aux logs][11].**
 
 ### Validation
 
