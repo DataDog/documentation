@@ -30,9 +30,9 @@ The following optional options can also be used:
 For the examples below, the following mongo collection `user_collection` is used:
 
 ```
-{ user: "foo", id: 12345, active: true, age:45}
-{ user: "bar", id: 67890, active: false, age:25}
-{ user: "foobar", id: 16273, active: true, age:35}
+{ name: "foo", id: 12345, active: true, age:45, is_admin: true}
+{ name: "bar", id: 67890, active: false, age:25, is_admin: true}
+{ name: "foobar", id: 16273, active: true, age:35, is_admin: false}
 ```
 
 Choose the type of query you would like to see an example for:
@@ -40,7 +40,7 @@ Choose the type of query you would like to see an example for:
 {{< tabs >}}
 {{% tab "Count" %}}
 
-To monitor how many users are active at a given time for example. Your [Mongo command][1] would be:
+To monitor how many users are active at a given time for example. Your [Mongo count command][1] would be:
 
 ```
 db.runCommand( {count: user_collection, query: {active:true}})
@@ -58,15 +58,17 @@ custom_queries:
 ```
 
 **Note**: The metric type defined is `gauge`. See the [metric type documentation][2] to learn more.
-[1]: https://docs.mongodb.com/manual/reference/command
+
+
+[1]: https://docs.mongodb.com/manual/reference/command/count/#dbcmd.count
 [2]: /developers/metrics/#metric-types
 {{% /tab %}}
 {{% tab "Find" %}}
 
-Your [Mongo command][1] would be:
+Your [Mongo find command][1] would be:
 
 ```
-db.runCommand( {})
+db.runCommand( {find: user_colleciton, filter: {active:true} )
 ```
 
 Which would correspond to the following `custom_queries` YAML configuration inside your `mongo.d/conf.yaml` file:
@@ -74,57 +76,57 @@ Which would correspond to the following `custom_queries` YAML configuration insi
 ```
 custom_queries:
   - metric_prefix: mongo.example2
-    query:
-        find: <COLLECTION_NAME>
-        filter:
-            qty:
-              "$gt": 30
-        sort:
-            qty: -1
+    query: {find: user_colleciton, filter: {active:true}
     fields:
-      - field_name: status
-        name: status_tag
+      - field_name: name
+        name: name
         type: tag
-      - field_name: qty
-        name: qty
+      - field_name: age
+        name: user.age
         type: gauge
 
 ```
 
-[1]: https://docs.mongodb.com/manual/reference/command
+This would emit one metric `mongo.example2.user.age` with two tags: `name:foo` and `name:foobar`
+
+[1]: https://docs.mongodb.com/manual/reference/command/find/#dbcmd.find
 {{% /tab %}}
 {{% tab "Aggregate" %}}
 
-Your [Mongo command][1] would be:
+Your [Mongo aggregate command][1] would be:
 ```
-db.runCommand( {})
+db.runCommand(
+              {
+                'aggregate': "user_collection",
+                'pipeline': [
+                  {"$match": {"is_actif": "true"}},
+                  {"$group": {"_id": "$is_admin", "age_avg": {"$avg": "$age"}}}
+                ],
+                'cursor': {}
+              }
+            )
 ```
 
 Which would correspond to the following `custom_queries` YAML configuration inside your `mongo.d/conf.yaml` file:
 
 ```
 custom_queries:
-  - metric_prefix: mongo.example1
-    query: # Same object as the one used in Mongo db.runCommand(<QUERY>)
-      aggregate: <COLLECTION_NAME>
-      pipeline:
-        - $match:
-            <FIELD_NAME>: <FIELD_VALUE>
-        - $group:
-            _id: <FIELD_NAME>
-      cursor: {} # Cursor is required for aggregate, can be an empty object
+  - metric_prefix: mongo.example3
+    query: {'aggregate': "user_collection",'pipeline': [{"$match": {"is_actif": "true"}},{"$group": {"_id": "$is_admin", "total": {"$avg": "$age"}}}],'cursor': {}}
     fields:
-      - field_name: <FIELD_NAME>
-        name: <METRIC_SUFFIX>
-        type: <gauge|count|rate|monotonic_count>
+      - field_name: age_avg
+        name: user.age
+        type: gauge
       - field_name: _id
-        name: cluster_id
+        name: is_admin
         type: tag
     tags:
       - test:mongodb
 ```
 
-[1]: https://docs.mongodb.com/manual/reference/command
+This would emit one metric `mongo.example3.user.age` with two tags: `is_admin:true` and `is_admin:true` representing the average age of users for each tags.
+
+[1]: https://docs.mongodb.com/manual/reference/command/aggregate/#dbcmd.aggregate
 {{% /tab %}}
 {{< /tabs >}}
 
