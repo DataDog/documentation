@@ -29,12 +29,12 @@ left:
         title: API
   - name: customers
     link: 'https://www.datadoghq.com/customers/'
-    title: ドキュメント
+    title: お客様
   - name: pricing
     link: 'https://www.datadoghq.com/pricing/'
     title: 料金
-  - name: お客様事例
-    link: 'https://www.datadoghq.com/customers/'
+  - name: solutions
+    link: '#'
     title: お客様事例
     children:
       - name: solutions_retail
@@ -96,7 +96,7 @@ right:
         title: 企業文化
   - name: docs
     link: ''
-    title: ログイン
+    title: ドキュメント
   - name: login
     link: 'https://app.datadoghq.com/'
     title: ログイン
