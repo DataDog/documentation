@@ -1,9 +1,9 @@
-site_name: "Datadog Infrastructure and Application Monitoring"
+site_name: Surveillance d'applications et d'infrastructures avec Datadog
 meta_image: datadog_logo_share_tt.png
-meta_title: Getting Started with Datadog
-meta_description: Datadog, the leading service for cloud-scale monitoring.
-disclaimer: "Cette page n'est pas encore disponible en Français, nous travaillons actuellement sur sa traduction.<br> Si vous avez des questions ou des retours sur ce projet de traduction, <a href=\"https://docs.datadoghq.com/fr/help/\">contactez-nous!</a>"
+meta_title: Débuter avec Datadog
+meta_description: 'Datadog, le principal prestataire de services de surveillance à l''échelle du cloud.'
+disclaimer: 'Cette page n''est pas encore disponible en français, sa traduction est en cours. <br> Si vous avez des questions ou des retours sur notre projet  de traduction actuel, <a href="https://docs.datadoghq.com/fr/help/">n''hésitez pas à nous contacter</a>.'
 announcement_banner:
-  text: "Join us at the Dash conference! July 16-17, NYC"
-  link: "https://www.dashcon.io/?utm_source=Trade+Show&utm_medium=DatadogOrganized&utm_campaign=Tradeshow-201907DashBanner"
+  text: "Rejoignez-nous à la conférence Dash, le 16 et 17\_juillet à New\_York\_!"
+  link: 'https://www.dashcon.io/?utm_source=Trade+Show&utm_medium=DatadogOrganized&utm_campaign=Tradeshow-201907DashBanner'
   exclude: []
