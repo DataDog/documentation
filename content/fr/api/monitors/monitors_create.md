@@ -100,7 +100,7 @@ Si vous programmez la gestion et le déploiement des monitors, vous pouvez défi
     un dictionnaire d'options pour le monitor. Certaines options sont couramment utilisées pour tous les types, tandis que d'autres sont spécifiques à certains types de monitors.
     ##### Options couramment utilisées
 
-    *   **`silenced`** : dictionnaire de contextes auxquels attribuer un timetamp ou la valeur `None`. Chaque contexte est désactivé jusqu'au timestamp POSIX. Les contextes peuvent également être définitivement désactivés avec la valeur `None`. Valeur par défaut : **None**.
+    *   **`silenced`** : dictionnaire de contextes caractérisés par des timestamps ou la valeur `None`. Chaque contexte est désactivé jusqu'au timestamp POSIX. Les contextes peuvent également être définitivement désactivés avec la valeur `None`. Valeur par défaut : **None**.
         Exemples :
         *   Pour désactiver complètement l'alerte : `{'*': None}`.
         *   Pour désactiver `role:db` à court terme : `{'role:db': 1412798116}`.
