@@ -1,0 +1,104 @@
+platforms:
+  - name: amazonlinux
+    link: "agent/basic_agent_usage/amazonlinux/"
+    image: "platform_amazonlinux.png"
+  - name: centos
+    link: "agent/basic_agent_usage/centos/"
+    image: "platform_centos.png"
+  - name: deb
+    link: "agent/basic_agent_usage/deb/"
+    image: "platform_debian.png"
+  - name: docker
+    link: "agent/docker/"
+    image: "platform_docker.png"
+  - name: fedora
+    link: "agent/basic_agent_usage/fedora/"
+    image: "platform_fedora.png"
+  - name: heroku
+    link: "agent/basic_agent_usage/heroku/"
+    image: "platform_heroku.png"
+  - name: kubernetes
+    link: "agent/kubernetes/"
+    image: "platform_kubernetes.png"
+  - name: osx
+    link: "agent/basic_agent_usage/osx/"
+    image: "platform_macosx.png"
+  - name: redhat
+    link: "agent/basic_agent_usage/redhat/"
+    image: "platform_redhat.png"
+  - name: suse
+    link: "agent/basic_agent_usage/suse/"
+    image: "platform_suse.png"
+  - name: ubuntu
+    link: "agent/basic_agent_usage/ubuntu/"
+    image: "platform_ubuntu.png"
+  - name: windows
+    link: "agent/basic_agent_usage/windows/"
+    image: "platform_windows.png"
+  - name: aix
+    link: "agent/basic_agent_usage/aix/"
+    image: "platform_aix.png"
+  - name: source
+    link: "agent/basic_agent_usage/source/"
+    image: "platform_fromsource.png"
+gs:
+  - name: osx
+    link: "https://app.datadoghq.com/account/settings#agent/mac"
+    image: "platform_macosx.png"
+  - name: windows
+    link: "https://app.datadoghq.com/account/settings#agent/windows"
+    image: "platform_windows.png"
+  - name: deb
+    link: "https://app.datadoghq.com/account/settings#agent/debian"
+    image: "platform_debian.png"
+  - name: ubuntu
+    link: "https://app.datadoghq.com/account/settings#agent/ubuntu"
+    image: "platform_ubuntu.png"
+  - name: amazonlinux
+    link: "https://app.datadoghq.com/account/settings#agent/aws"
+    image: "platform_amazonlinux.png"
+  - name: centos
+    link: "https://app.datadoghq.com/account/settings#agent/centos"
+    image: "platform_centos.png"
+  - name: redhat
+    link: "https://app.datadoghq.com/account/settings#agent/centos"
+    image: "platform_redhat.png"
+  - name: fedora
+    link: "https://app.datadoghq.com/account/settings#agent/fedora"
+    image: "platform_fedora.png"
+  - name: suse
+    link: "https://app.datadoghq.com/account/settings#agent/suse"
+    image: "platform_suse.png"
+  - name: aix
+    link: "https://app.datadoghq.com/account/settings#agent/aix"
+    image: "platform_aix.png"
+  - name: coreos
+    link: "https://app.datadoghq.com/account/settings#agent/coreos"
+    image: "platform_coreos.png"
+  - name: docker
+    link: "https://app.datadoghq.com/account/settings#agent/docker"
+    image: "platform_docker.png"
+  - name: kubernetes
+    link: "https://app.datadoghq.com/account/settings#agent/kubernetes"
+    image: "platform_kubernetes.png"
+  - name: openshift
+    link: "https://app.datadoghq.com/account/settings#agent/openshift"
+    image: "platform_openshift.png"
+  - name: chef
+    link: "https://app.datadoghq.com/account/settings#agent/chef"
+    image: "platform_chef.png"
+  - name: puppet
+    link: "https://app.datadoghq.com/account/settings#agent/puppet"
+    image: "platform_puppet.png"
+  - name: ansible
+    link: "https://app.datadoghq.com/account/settings#agent/ansible"
+    image: "platform_ansible.png"
+  - name: cloud_foundry
+    link: "https://app.datadoghq.com/account/settings#agent/cloud_foundry"
+    image: "platform_cloud_foundry.png"
+  - name: heroku
+    link: "agent/basic_agent_usage/heroku/"
+    image: "platform_heroku.png"
+  - name: source
+    link: "https://app.datadoghq.com/account/settings#agent/source"
+    image: "platform_fromsource.png"
