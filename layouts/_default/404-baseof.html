@@ -2,13 +2,13 @@
 <html lang="{{ .Site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}" style="opacity:0" class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.text }}banner{{ end }}">
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-21102638-5"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.ga }}"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'UA-21102638-5');
+        gtag('config', '{{ .Site.Params.ga }}');
     </script>
 
     <meta charset="utf-8">

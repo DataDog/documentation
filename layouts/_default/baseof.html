@@ -13,13 +13,13 @@
 
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-21102638-5"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.ga }}"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'UA-21102638-5');
+        gtag('config', '{{ .Site.Params.ga }}');
 
         window.onload = function(){
             console.log('loaded');
@@ -59,42 +59,52 @@
             var httpRequest = new XMLHttpRequest();
             httpRequest.onreadystatechange = function() {
 
-            if (httpRequest.readyState !== XMLHttpRequest.DONE)
-                return;
+                if (httpRequest.readyState !== XMLHttpRequest.DONE){
+                    return;
+                }
 
-            // TODO: UI for this error
-            var newDocument = httpRequest.responseXML;
-            if (newDocument === null)
-                return;
+                // TODO: UI for this error
+                var newDocument = httpRequest.responseXML;
+                if (newDocument === null){
+                    return;
+                }
 
-            // TODO: UI for this error
-            var newContent = httpRequest.responseXML.getElementById("mainContent");
-            //var newContent = httpRequest.responseText;
-            if (newContent === null)
-                return;
+                // TODO: UI for this error
+                var newContent = httpRequest.responseXML.getElementById("mainContent");
+                //var newContent = httpRequest.responseText;
+                if (newContent === null){
+                    return;
+                }
 
-            console.log('page size');
-            {{/* console.log(httpRequest.getResponseHeader("Content-Type")); */}}
-            console.log(httpRequest.getResponseHeader("Content-Length"));
+                console.log('page size');
+                {{/* console.log(httpRequest.getResponseHeader("Content-Type")); */}}
+                console.log(httpRequest.getResponseHeader("Content-Length"));
 
-            document.title = newDocument.title;
+                document.title = newDocument.title;
 
-            console.time('Replacing page content');
+                console.time('Replacing page content');
 
-            var start = window.performance.now();
-            var contentElement = document.getElementById("mainContent");
-            contentElement.replaceWith(newContent);
-            console.timeEnd('Replacing page content');
-            var end = window.performance.now();
-            var time = end - start;
+                var start = window.performance.now();
+                var contentElement = document.getElementById("mainContent");
+                contentElement.replaceWith(newContent);
+                console.timeEnd('Replacing page content');
+                var end = window.performance.now();
+                var time = end - start;
 
-            var pathName = new URL(newUrl).pathname;
+                var pathName = new URL(newUrl).pathname;
 
-            console.log('click path '+pathName);
-            DD_LOGS.logger.log('html parsed page content inserted',{"timeEnd": time, "pathName": pathName},'info');
-            console.log({"timeEnd": time});
-            console.log('New page loaded: ' + newDocument.title);
-            }
+                console.log('click path '+pathName);
+                DD_LOGS.logger.log('html parsed page content inserted',{"timeEnd": time, "pathName": pathName},'info');
+                console.log({"timeEnd": time});
+                console.log('New page loaded: ' + newDocument.title);
+                // Gtag virtual pageview
+                gtag('config', '{{ .Site.Params.ga }}', {'page_path': pathName});
+
+                // Marketo
+                Munchkin.munchkinFunction('clickLink', { href: newUrl});
+
+            }; // end onreadystatechange
+
             httpRequest.responseType = "document";
             httpRequest.open("GET", newUrl);
             //httpRequest.open("GET", newUrl+"api_tests.txt");
