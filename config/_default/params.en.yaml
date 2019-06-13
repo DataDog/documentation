@@ -7,7 +7,3 @@ announcement_banner:
   text: "Join us at the Dash conference! July 16-17, NYC"
   link: "https://www.dashcon.io/?utm_source=Trade+Show&utm_medium=DatadogOrganized&utm_campaign=Tradeshow-201907DashBanner"
   exclude: []
-footer_scripts:
-- snowplow: true
-- marketo: true
-- adroll: true

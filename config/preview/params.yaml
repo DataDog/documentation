@@ -2,3 +2,7 @@ environment: preview
 img_url: "https://datadog-docs.imgix.net/"
 static_url: "https://docs-staging.datadoghq.com/"
 ga: "UA-21102638-9"
+footer_scripts:
+- snowplow: true
+- marketo: true
+- adroll: true
