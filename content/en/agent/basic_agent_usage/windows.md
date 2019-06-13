@@ -39,12 +39,12 @@ Optionally, install the Agent with the command line to add custom settings.
 
 Command prompt:
 ```cmd
-msiexec /qn /i datadog-agent-6-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"
+start /wait msiexec /qn /i datadog-agent-6-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"
 ```
 
 Powershell:
 ```powershell
-Start-Process msiexec -ArgumentList '/qn /i datadog-agent-6-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"'
+Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-6-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"'
 ```
 
 Each configuration item is added as a property to the command line. The following configuration command line options are available when installing the Agent on Windows:
