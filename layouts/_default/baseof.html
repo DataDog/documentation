@@ -81,6 +81,44 @@
                 console.log(httpRequest.getResponseHeader("Content-Length"));
 
                 document.title = newDocument.title;
+                
+                var meta = {
+                    "itemprop": [
+                        "name",
+                        "description"
+                    ],
+                    "name": [
+                        "twitter\\:site",
+                        "twitter\\:title",
+                        "twitter\\:description",
+                        "twitter\\:creator",
+                    ],
+                    "property": [
+                        "og\\:title",
+                        "og\\:type",
+                        "og\\:url",
+                        "og\\:image",
+                        "og\\:description",
+                        "og\\:site_name",
+                        "article\\:author"
+                    ]
+                };
+
+                var keys = Object.keys(meta);
+                for(i=0;i<keys.length;i++){
+                    var key = keys[i];
+                    for(k=0;k<meta[key].length;k++){
+                        var selectorPart = meta[key][k];
+                        try {
+                            if( newDocument.head.querySelector('['+key+'='+selectorPart+']') ){
+                                var content = newDocument.head.querySelector('['+key+'='+selectorPart+'][content]').content;
+                                document.head.querySelector('['+key+'='+selectorPart+'][content]').content = content;
+                            }
+                        }catch(e){
+                            console.log(e);
+                        }
+                    }
+                }
 
                 console.time('Replacing page content');
 
@@ -97,6 +135,7 @@
                 DD_LOGS.logger.log('html parsed page content inserted',{"timeEnd": time, "pathName": pathName},'info');
                 console.log({"timeEnd": time});
                 console.log('New page loaded: ' + newDocument.title);
+
                 // Gtag virtual pageview
                 gtag('config', '{{ .Site.Params.ga }}', {'page_path': pathName});
 
