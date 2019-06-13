@@ -13,7 +13,7 @@ code_languages:
     key: ruby
   - display_name: Curl
     key: bash
-# footer_scripts:
-#   - snowplow: false
-#   - marketo: false
-#   - adroll: false
+footer_scripts:
+  - snowplow: false
+  - marketo: false
+  - adroll: false
