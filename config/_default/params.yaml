@@ -17,4 +17,3 @@ footer_scripts:
   - snowplow: false
   - marketo: false
   - adroll: false
-

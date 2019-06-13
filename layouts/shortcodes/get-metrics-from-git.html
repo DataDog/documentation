@@ -1,3 +1,4 @@
+{{ $SKIP_INTEGRATIONS := getenv "SKIP_INTEGRATIONS" }}
 {{ $params := .Params }}
 
 {{ $integration_name := .Page.Params.git_integration_title }}
