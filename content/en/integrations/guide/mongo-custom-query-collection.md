@@ -14,7 +14,7 @@ To collect custom metrics with the Datadog-Mongo integration, use the `custom_qu
 `custom_queries` has the following required options:
 
 * **`metric_prefix`**: Each metric starts with the chosen prefix.
-* **`query`**: This is the Mongo query to execute. The query needs to be written in a format compatible with only supports count, find and aggregates queries. The [Mongo runCommand][3]. Note that The Agent only supports `count`, `find` and `aggregates` queries.
+* **`query`**: This is the [Mongo runCommand][3] query to execute. Note that The Agent only supports `count`, `find` and `aggregates` queries.
 * **`field`**: Ignored for `count` queries. This is a list representing each field with no specific order. Unspecified and missing fields are ignored. There are 3 required pieces of data for each `field`:
   * `field_name`: This is the name of the field from which to fetch the data.
   * `name`: This is the suffix to append to the metric_prefix in order to form the full metric name. If `type` is `tag`, this column is instead considered as a tag that is applied to every metric collected by this particular query.
@@ -51,11 +51,13 @@ Which would correspond to the following `custom_queries` YAML configuration insi
 ```
 custom_queries:
   - metric_prefix: mongo.users
-    query: {count: user_collection, query: {active:true}
+    query: {"count": "user_collection", "query": {"active":"true"}}
     count_type: gauge
     tags:
       - user:active
 ```
+
+This would emit one `gauge` metric `mongo.users` with one tag: `user:active`.
 
 **Note**: The metric type defined is `gauge`. See the [metric type documentation][2] to learn more.
 
@@ -65,7 +67,7 @@ custom_queries:
 {{% /tab %}}
 {{% tab "Find" %}}
 
-Your [Mongo find command][1] would be:
+To monitor what's the average age per user, your [Mongo find command][1] would be:
 
 ```
 db.runCommand( {find: user_colleciton, filter: {active:true} )
@@ -76,7 +78,7 @@ Which would correspond to the following `custom_queries` YAML configuration insi
 ```
 custom_queries:
   - metric_prefix: mongo.example2
-    query: {find: user_colleciton, filter: {active:true}
+    query: {"find": "user_colleciton", "filter": {"active":"true"}}
     fields:
       - field_name: name
         name: name
@@ -87,13 +89,16 @@ custom_queries:
 
 ```
 
-This would emit one metric `mongo.example2.user.age` with two tags: `name:foo` and `name:foobar`
+This would emit one `gauge` metric `mongo.example2.user.age` with two tags: `name:foo` and `name:foobar`
+
+**Note**: The metric type defined is `gauge`. See the [metric type documentation][2] to learn more.
 
 [1]: https://docs.mongodb.com/manual/reference/command/find/#dbcmd.find
+[2]: /developers/metrics/#metric-types
 {{% /tab %}}
 {{% tab "Aggregate" %}}
 
-Your [Mongo aggregate command][1] would be:
+To monitor what's the average age for admin and non admin user, your [Mongo aggregate command][1] would be:
 ```
 db.runCommand(
               {
@@ -112,7 +117,7 @@ Which would correspond to the following `custom_queries` YAML configuration insi
 ```
 custom_queries:
   - metric_prefix: mongo.example3
-    query: {'aggregate': "user_collection",'pipeline': [{"$match": {"is_actif": "true"}},{"$group": {"_id": "$is_admin", "total": {"$avg": "$age"}}}],'cursor': {}}
+    query: {"aggregate": "user_collection","pipeline": [{"$match": {"is_actif": "true"}},{"$group": {"_id": "$is_admin", "total": {"$avg": "$age"}}}],"cursor": {}}
     fields:
       - field_name: age_avg
         name: user.age
@@ -124,7 +129,7 @@ custom_queries:
       - test:mongodb
 ```
 
-This would emit one metric `mongo.example3.user.age` with two tags: `is_admin:true` and `is_admin:true` representing the average age of users for each tags.
+This would emit one `gauge` metric `mongo.example3.user.age` with two tags: `is_admin:true` and `is_admin:true` representing the average age of users for each tags.
 
 [1]: https://docs.mongodb.com/manual/reference/command/aggregate/#dbcmd.aggregate
 {{% /tab %}}
