@@ -13,19 +13,19 @@ aliases:
 
 ## General
 
-* [What standard integrations emit custom metrics?][1]
-* [Issues getting integrations working][2]
+* [Issues getting integrations working][1]
 
 ## Amazon Web Services
 
-* [Using Datadog's AWS Billing Integration to monitor your CloudWatch usage][3]
-* [AWS Integration and CloudWatch FAQ][4]
-* [Get your AutoScaling Group events and metrics][5]
-* [How do I pull my EC2 tags without using the AWS integration ?][6]
-* [How do I monitor my AWS billing details?][7]
-* [Extra hosts with name "N/A" reporting data][8]
-* [Cloud Metric Delay][9]
-* [Do you believe you're seeing a discrepancy between your data in CloudWatch and Datadog?][10]
+* [Using Datadog's AWS Billing Integration to monitor your CloudWatch usage][2]
+* [AWS Integration and CloudWatch FAQ][3]
+* [Get your AutoScaling Group events and metrics][4]
+* [How do I pull my EC2 tags without using the AWS integration ?][5]
+* [How do I monitor my AWS billing details?][6]
+* [Extra hosts with name "N/A" reporting data][7]
+* [Cloud Metric Delay][8]
+* [Do you believe you're seeing a discrepancy between your data in CloudWatch and Datadog?][9]
+* [Why is there a delay in receiving my data?][10]
 * [Integration Setup for ECS Fargate][11]
 * [Error: Datadog is not authorized to perform sts:AssumeRole][12]
 * [The AWS Integration with Terraform][13]
@@ -137,16 +137,16 @@ aliases:
 * [How to monitor events from the Windows Event Logs][63]
 * [How to retrieve WMI metrics][64]
 
-[1]: /integrations/faq/what-standard-integrations-emit-custom-metrics
-[2]: /integrations/faq/issues-getting-integrations-working
-[3]: /integrations/faq/using-datadog-s-aws-billing-integration-to-monitor-your-cloudwatch-usage
-[4]: /integrations/faq/aws-integration-and-cloudwatch-faq
-[5]: /integrations/faq/get-your-autoscaling-group-events-and-metrics
-[6]: /integrations/faq/how-do-i-pull-my-ec2-tags-without-using-the-aws-integration
-[7]: /integrations/faq/how-do-i-monitor-my-aws-billing-details
-[8]: /integrations/faq/extra-hosts-with-name-n-a-reporting-data
-[9]: /integrations/faq/cloud-metric-delay
-[10]: /integrations/faq/do-you-believe-you-re-seeing-a-discrepancy-between-your-data-in-cloudwatch-and-datadog
+[1]: /integrations/faq/issues-getting-integrations-working
+[2]: /integrations/faq/using-datadog-s-aws-billing-integration-to-monitor-your-cloudwatch-usage
+[3]: /integrations/faq/aws-integration-and-cloudwatch-faq
+[4]: /integrations/faq/get-your-autoscaling-group-events-and-metrics
+[5]: /integrations/faq/how-do-i-pull-my-ec2-tags-without-using-the-aws-integration
+[6]: /integrations/faq/how-do-i-monitor-my-aws-billing-details
+[7]: /integrations/faq/extra-hosts-with-name-n-a-reporting-data
+[8]: /integrations/faq/cloud-metric-delay
+[9]: /integrations/faq/do-you-believe-you-re-seeing-a-discrepancy-between-your-data-in-cloudwatch-and-datadog
+[10]: /integrations/faq/why-is-there-a-delay-in-receiving-my-data
 [11]: /integrations/faq/integration-setup-ecs-fargate
 [12]: /integrations/faq/error-datadog-not-authorized-sts-assume-role
 [13]: /integrations/faq/aws-integration-with-terraform
