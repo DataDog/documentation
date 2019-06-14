@@ -29,7 +29,7 @@ disable_toc: true
 
 ## Setting up APM
 
-The application code instrumentation sends traces to the Agent every second. The Agent then calculates performances metrics over all traces and send those metrics along with [a sample of traces][2] to Datadog every 10 seconds. To get APM up, running, and reporting data from your application, follow these steps:
+The application code instrumentation sends traces to the Agent every second. The Agent then calculates performance metrics over all traces and send those metrics along with [a sample of traces][2] to Datadog every 10 seconds. To get APM up, running, and reporting data from your application, follow these steps:
 
 1. **[Enable Trace collection in the Datadog Agent][3]**:
    Install and configure the latest [Datadog Agent][4]. (On macOS, install and run the Trace Agent in addition to the Datadog Agent. See the [macOS Trace Agent][5] documentation for more information). APM is enabled by default in Agent 6, however there are additional configurations to be set in a containerized environment including setting `apm_non_local_traffic: true`. To get an overview of all the possible settings for APM including setting up APM in containerized environments such as [Docker][6] or [Kubernetes][7], get started [Sending traces to Datadog][3].
@@ -38,7 +38,7 @@ The application code instrumentation sends traces to the Agent every second. The
   Datadog has libraries to support configuring your application in several different languages and containers. For more information about specific languages and containers, see [Application Tracing Setup][8].
    
 3. **[Enable Trace Search & Analytics][9]**: 
-  [Trace Search & Analytics][9] is used to filter APM Data by user-defined tags such as customer_id, error_type, or app_name to help troubleshoot and filter your requests.
+  [Trace Search & Analytics][9] is used to filter APM Data by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests.
 
 4. **[Enrich tracing][9]**:
   [Enrich tracing][10] by automatically [injecting a trace-id into your logs][11], [adding metadata to your spans][12], and [collecting Runtime metrics associated with your traces][13].
