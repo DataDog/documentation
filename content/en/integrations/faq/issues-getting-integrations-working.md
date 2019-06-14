@@ -15,8 +15,9 @@ Here is a quick guide for troubleshooting getting integrations installed:
         3. If you moved or changed the file, [restart the Agent][3] and then rerun the info command to see if it is now showing up.
     * Yes, it's there.
         1. Check the Metrics Explorer to see if system metrics are showing up from the host. For example, look for system.cpu.user from the host that is running the Agent and has that integration setup.
-        2. If there are still no metrics, check the logs for errors and send them along, with the info command output, to support@datadoghq.com.
+        2. If there are still no metrics, check the logs for errors and send them along with the info command output to [Datadog support][4].
 
 [1]: /integrations
 [2]: /agent/guide/agent-commands/#agent-status-and-information
 [3]: /agent/guide/agent-commands/#start-stop-restart-the-agent
+[4]: /help

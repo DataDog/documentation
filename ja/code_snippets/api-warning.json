@@ -1,6 +1,0 @@
-{ 'some_thing': ...,
-  'some_other_thing': ...,
-  'warnings': [
-      'This is a deprecated API.'
-  ]
-}
