@@ -1,5 +1,5 @@
 ---
-title: Sending traces to Datadog
+title: Enable Trace collection in Datadog
 kind: Documentation
 aliases:
   - /tracing/languages/
@@ -18,9 +18,12 @@ further_reading:
 - link: "/integrations/ecs_fargate/#trace-collection"
   tag: "Documentation"
   text: "ECS Fargate APM setup"
+- link: "/integrations/ecs_fargate/#trace-collection"
+  tag: "Documentation"
+  text: "ECS Fargate APM setup"
 ---
 
-To use APM, start by sending your traces to Datadog, and then [configure your environment](#-configure-your-environment). You can send traces to Datadog in multiple different ways depending on your system setup: including using the [Datadog Agent locally](#datadog-agent), [on containers](#containers), and [several other ways](#other-ways-to-collect-traces). For the full overview of all of the steps to set up APM, see the [APM overivew][1].
+To use APM, start by sending your traces to Datadog, and then [configure your environment](#-configure-your-environment). You can send traces to Datadog in multiple different ways depending on your system setup: including using the [Datadog Agent locally](#datadog-agent), [on containers](#containers), and [several other ways](#-additional-environments). For the full overview of all of the steps to set up APM, see the [APM overivew][1].
 
 ## Datadog Agent
 
@@ -32,10 +35,10 @@ To get an overview of all the possible settings for APM, take a look at the Agen
 See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
 {{< partial name="apm/apm-containers.html" >}}
-
+</br>
 Note: After having instrumented your application, the tracing client sends traces to `localhost:8126` by default. 
 
-## Other ways to collect traces
+## Additional environments
 
 There are alternernates to the Agent and containers that you can use to collect traces.
 
@@ -69,7 +72,7 @@ There are several ways to specify [an environment][9] when reporting data:
 
 ## Next steps
 
-For the full overview of all of the steps to set up APM, see the [APM overivew][1].
+Next, [Instrument your application][11]. For the full overview of all of the steps to set up APM, see the [APM overivew][1]. 
 
 ## Further Reading
 
@@ -85,3 +88,4 @@ For the full overview of all of the steps to set up APM, see the [APM overivew][
 [8]: /integrations/cloud_foundry/#trace-collection
 [9]: /tracing/advanced/setting_primary_tags_to_scope/#definition
 [10]: /tracing/advanced/adding_metadata_to_spans/?tab=java
+[11]: /apm-setup/tracing/setup

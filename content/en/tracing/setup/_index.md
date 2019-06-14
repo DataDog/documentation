@@ -1,5 +1,5 @@
 ---
-title: Configure your application to emit traces
+title: Instrument your application
 kind: documentation
 aliases:
     - /tracing/languages
