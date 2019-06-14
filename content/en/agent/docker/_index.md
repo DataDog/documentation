@@ -142,14 +142,14 @@ These commands are run on the host.
 | Type    | Command                                         |
 |---------|-------------------------------------------------|
 | Start   | Use the [installation command](#installation).  |
-| Stop    | `docker exec -it <container_name> agent stop`   |
+| Stop    | `docker exec -it <CONTAINER_NAME> agent stop`   |
 | Restart | Use the [installation command](#installation).  |
-| Status  | `docker exec -it <container_name> agent status` |
+| Status  | `docker exec -it <CONTAINER_NAME> agent status` |
 
 ## Data collected
 
 ### Metrics
-By default, the Docker Agent collects metrics with the following checks. To collect metrics from other technologies, see the [Integrations](#integrations) section.
+By default, the Docker Agent collects metrics with the following core checks. To collect metrics from other technologies, see the [Integrations](#integrations) section.
 
 * [Docker][14]
 * [Disk][15]
