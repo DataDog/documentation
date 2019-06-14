@@ -1,5 +1,5 @@
 ---
-title: Enable Trace collection in Datadog
+title: Enable trace collection in Datadog
 kind: Documentation
 aliases:
   - /tracing/languages/
@@ -88,4 +88,4 @@ Next, [Instrument your application][11]. For the full overview of all of the ste
 [8]: /integrations/cloud_foundry/#trace-collection
 [9]: /tracing/advanced/setting_primary_tags_to_scope/#definition
 [10]: /tracing/advanced/adding_metadata_to_spans/?tab=java
-[11]: /apm-setup/tracing/setup
+[11]: /tracing/setup

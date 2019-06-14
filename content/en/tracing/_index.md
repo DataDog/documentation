@@ -1,5 +1,5 @@
 ---
-title: APM and Distributed Tracing
+title: APM and distributed tracing
 kind: documentation
 description: Instrument your code to improve performance
 further_reading:
