@@ -8,9 +8,7 @@ further_reading:
   text: "Datadog Pricing"
 ---
 
-## Overview
-
-Datadog has many pricing plans to fit your needs. Visit the [Pricing][1] page for more details.
+Datadog has many pricing plans to fit your needs. For more information,see the [Pricing][1] page.
 
 ## Calculating pricing
 
@@ -18,31 +16,31 @@ Unless otherwise stated in your Order, Datadog calculates fees based on product 
 
 ### Infrastructure monitoring
 
-- A **host** is a physical or virtual operating system instance.  Datadog records the number of hosts you are concurrently monitoring in the Datadog Infrastructure service once an hour. 
-   - On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.  
-  - On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
-- A **container** is a self-contained operating environment that includes application software and limited operating system libraries and settings.  Datadog records the number of containers you are concurrently monitoring in the Datadog Infrastructure service at five-minute intervals.  Datadog charges monthly based on the fractional hours of monitored containers.
-- A **custom metric** is a single, unique combination of a metric name, host ID and any tags.  Datadog charges based on the monthly average of unique custom metrics submitted to the Datadog Infrastructure service per hour.
-- A **device** is a physical sensor comprising one or more single-board computers in a  frame.  Datadog records and charges for the number of devices and hosts you are concurrently monitoring in the Datadog Infrastructure service.
-- A **cloud function** is application code setup to execute on a cloud platform’s serverless compute service in response to defined events or actions (for example, AWS Lambda, Google Cloud Function, and Azure Function).  The Datadog Infrastructure service records the number of functions executed or invoked one or more times each hour.  Datadog charges based on the average number of functions across all hours in a month. 
-- An AWS **Fargate task** is a collection of containers setup through AWS’s ECS container orchestration platform.  Datadog records the number of task instances you are monitoring in the Datadog Infrastructure (or APM) service at five-minute intervals.  Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored.
+* A **host** is a physical or virtual operating system instance.  Datadog records the number of hosts you are concurrently monitoring in the Datadog Infrastructure service once an hour. 
+   * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.  
+  * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
+* A **container** is a self-contained operating environment that includes application software and limited operating system libraries and settings.  Datadog records the number of containers you are concurrently monitoring in the Datadog Infrastructure service at five-minute intervals.  Datadog charges monthly based on the fractional hours of monitored containers.
+* A [**custom metric**][5] is a single, unique combination of a metric name, host ID and any tags.  Datadog charges based on the monthly average of unique custom metrics submitted to the Datadog Infrastructure service per hour.
+* A **device** is a physical sensor comprising one or more single-board computers in a  frame.  Datadog records and charges for the number of devices and hosts you are concurrently monitoring in the Datadog Infrastructure service.
+* A **cloud function** is application code setup to execute on a cloud platform’s serverless compute service in response to defined events or actions (for example, AWS Lambda, Google Cloud Function, and Azure Function).  The Datadog Infrastructure service records the number of functions executed or invoked one or more times each hour.  Datadog charges based on the average number of functions across all hours in a month. 
+* An AWS **Fargate task** is a collection of containers setup through AWS’s ECS container orchestration platform.  Datadog records the number of task instances you are monitoring in the Datadog Infrastructure (or APM) service at five-minute intervals.  Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored.
 
 ### APM
 
-- Datadog records the number of **APM hosts** you are concurrently monitoring in the Datadog APM service once an hour. 
-   - On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.  
-  - On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
-- A **trace event** is an individual request against an application.  Datadog charges based on the total number of trace events submitted to the Datadog APM service.
+* Datadog records the number of **APM hosts** you are concurrently monitoring in the Datadog APM service once an hour. 
+   * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.  
+  * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
+* A **trace event** is an individual request against an application.  Datadog charges based on the total number of trace events submitted to the Datadog APM service.
 
 ### Log management
 
-- A **log** is a text-based record of activity generated by an operating system, an application, or by other sources.  Datadog charges for ingested logs based on the total number of gigabytes submitted to the Datadog Logs service. 
-- A **log event** is a log that is indexed by the Datadog Logs service.  Datadog charges per million log events submitted for indexing at the rate designated for the retention policy you selected.
+* A **log** is a text-based record of activity generated by an operating system, an application, or by other sources.  Datadog charges for ingested logs based on the total number of gigabytes submitted to the Datadog Logs service. 
+* A **log event** is a log that is indexed by the Datadog Logs service.  Datadog charges per million log events submitted for indexing at the rate designated for the retention policy you selected.
 
 ### Synthetics
 
-- An **API test** is an HTTP or HTTPS request against a single URL.   Datadog charges per million API tests executed to the Datadog Synthetics service.
-- A **browser test** is a simulation of a scripted sequence of user actions on a web-based application using a virtualized web browser.  Datadog charges per thousand browser tests executed to the Datadog Synthetics service. 
+* An **API test** is an HTTP or HTTPS request against a single URL.   Datadog charges per million API tests executed to the Datadog Synthetics service.
+* A **browser test** is a simulation of a scripted sequence of user actions on a web-based application using a virtualized web browser.  Datadog charges per thousand browser tests executed to the Datadog Synthetics service. 
 
 ## Troubleshooting
 
@@ -54,3 +52,4 @@ Contact [Sales][2] or your [Customer Success][3] Manager to discuss hourly prici
 [2]: mailto:sales@datadoghq.com
 [3]: mailto:success@datadoghq.com
 [4]: /help/
+[5]: /developers/metrics/custom_metrics/
