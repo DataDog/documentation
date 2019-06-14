@@ -42,9 +42,9 @@ Note: After having instrumented your application, the tracing client sends trace
 
 There are alternernates to the Agent and containers that you can use to collect traces.
 
-### Lamda - X-Ray
+### Lambda - X-Ray
 
-For more information abut setting up Lamda - X-Ray, see the [Amazon X-Ray integration documentation][6]
+For more information abut setting up Lambda - X-Ray, see the [Amazon X-Ray integration documentation][6]
 
 ### Heroku
 
