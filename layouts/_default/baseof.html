@@ -14,45 +14,46 @@
       window.addEventListener('load', function(){
         let pageNav = performance.getEntriesByType("navigation")[0];
         let pageResources = performance.getEntriesByType("resource");
+        let pageNavStats = {}
         // Measuring DNS lookup time
-        pageNav.dnsTime = pageNav.domainLookupEnd - pageNav.domainLookupStart;
+        pageNavStats.dnsTime = pageNav.domainLookupEnd - pageNav.domainLookupStart;
         // Quantifying total connection time
-        pageNav.connectionTime = pageNav.connectEnd - pageNav.connectStart;
-        pageNav.tlsTime = 0; // <-- Assume 0 by default
+        pageNavStats.connectionTime = pageNav.connectEnd - pageNav.connectStart;
+        pageNavStats.tlsTime = 0; // <-- Assume 0 by default
 
         // Did any TLS stuff happen?
         if (pageNav.secureConnectionStart > 0) {
           // Awesome! Calculate it!
-          pageNav.tlsTime = pageNav.connectEnd - pageNav.secureConnectionStart;
+          pageNavStats.tlsTime = pageNav.connectEnd - pageNav.secureConnectionStart;
         }
         // Cache seek plus response time
-        pageNav.fetchTime = pageNav.responseEnd - pageNav.fetchStart;
+        pageNavStats.fetchTime = pageNav.responseEnd - pageNav.fetchStart;
 
         // Service worker time plus response time
-        pageNav.workerTime = 0;
+        pageNavStats.workerTime = 0;
 
         if (pageNav.workerStart > 0) {
-          pageNav.workerTime = pageNav.responseEnd - pageNav.workerStart;
+          pageNavStats.workerTime = pageNav.responseEnd - pageNav.workerStart;
         }
         // Request plus response time (network only)
-        pageNav.totalTime = pageNav.responseEnd - pageNav.requestStart;
+        pageNavStats.totalTime = pageNav.responseEnd - pageNav.requestStart;
 
         // Response time only (download)
-        pageNav.downloadTime = pageNav.responseEnd - pageNav.responseStart;
+        pageNavStats.downloadTime = pageNav.responseEnd - pageNav.responseStart;
 
         // Time to First Byte (TTFB)
-        pageNav.ttfb = pageNav.responseStart - pageNav.requestStart;
+        pageNavStats.ttfb = pageNav.responseStart - pageNav.requestStart;
 
         // HTTP header size
-        pageNav.headerSize = pageNav.transferSize - pageNav.encodedBodySize;
+        pageNavStats.headerSize = pageNav.transferSize - pageNav.encodedBodySize;
 
         // Compression ratio
-        pageNav.compressionRatio = pageNav.decodedBodySize / pageNav.encodedBodySize;
+        pageNavStats.compressionRatio = pageNav.decodedBodySize / pageNav.encodedBodySize;
 
         let pageStats = {
           "location": JSON.parse(JSON.stringify(window.location)),
           "performance": {
-            "navigation": pageNav,
+            "navigation": pageNavStats,
             "resources": {}
           }
         };
