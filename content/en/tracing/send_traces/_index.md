@@ -18,9 +18,6 @@ further_reading:
 - link: "/integrations/ecs_fargate/#trace-collection"
   tag: "Documentation"
   text: "ECS Fargate APM setup"
-- link: "/integrations/ecs_fargate/#trace-collection"
-  tag: "Documentation"
-  text: "ECS Fargate APM setup"
 ---
 
 To use APM, start by sending your traces to Datadog, and then [configure your environment](#-configure-your-environment). You can send traces to Datadog in multiple different ways depending on your system setup: including using the [Datadog Agent locally](#datadog-agent), [on containers](#containers), and [several other ways](#-additional-environments). For the full overview of all of the steps to set up APM, see the [APM overivew][1].
