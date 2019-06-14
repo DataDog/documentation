@@ -125,6 +125,8 @@ main:
             url: "agent/troubleshooting/ntp"
           - name: "Permission Issues"
             url: "agent/troubleshooting/permissions"
+          - name: "Integrations Issues"
+            url: "agent/troubleshooting/integrations"
       # Guides
       - name: "Guides"
         url: "agent/guide/"
