@@ -11,7 +11,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is in beta. <a href="/help">Contact Datadog support</a> to enable distribution metrics for your account.
+This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Datadog support</a> to enable distribution metrics for your account.
 </div>
 
 ## Overview
@@ -23,6 +23,8 @@ Global distributions are designed to instrument logical objects, like services, 
 Check out the [Developer Tools section][3] for more information on the internals of this metric type. Otherwise, read on to learn how to manipulate and visualize Distributions in the interface.
 
 ## Aggregations
+
+Like other metric types, such as gauges or histograms, distributions have the following 5 aggregations available: count, min, max, sum, avg. Distributions are initially tagged the same way as any other metric (via custom tags set in code) and are resolved to any host tag based on the host that shipped the metric.
 
 The new tagging workflow for Distributions allows you to define which aggregations are available in queries. Initially, Datadog maintain a single timeseries, for `*` (all points), and otherwise ignore all tags.  Manually aggregate your metric based on sets of tags, chosen from the list of tags normally available. For convenience, Datadog also creates aggregations for every combination of up to four custom tags applied to each metric.
 

@@ -12,7 +12,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is in beta. <a href="/help">Contact Datadog support</a> to enable distribution metrics for your account.
+This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Datadog support</a> to enable distribution metrics for your account.
 </div>
 
 ## Overview
@@ -56,7 +56,7 @@ A distribution metric, however, also uniquely has additional percentile aggregat
 | `90p`       | The 90th percentile of all values in the flush interval             |
 | `95p`       | The 95th percentile of all values in the flush interval             |
 | `99p`       | The 99th percentile of all values in the flush interval             |
-| `max`       | The maxiuù value sent during the flush interval                     |
+| `max`       | The maximum value sent during the flush interval                    |
 | `min`       | The minimum value sent during the flush interval                    |
 | `sum`       | The sum of all values sent during them flush interval               |
 
@@ -66,11 +66,9 @@ At each flush interval, each one of these values above is stored in their respec
 
 ### DogStatsD
 
-{{% table responsive="true" %}}
 | Method | Overview |
 | :----- | :------- |
-| dog.distribution(String metric.name, double value, String... tags) | Track the statistical distribution of a set of values over one or more hosts.<ul><li>Required: metric name and value.</li><li>Optional: tag(s)</li></ul> |
-{{% /table %}}
+| `dog.distribution(String metric.name, double value, String... tags)` | Track the statistical distribution of a set of values over one or more hosts. |
 
 #### Example
 
