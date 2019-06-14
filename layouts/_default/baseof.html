@@ -11,10 +11,50 @@
 
       DD_LOGS.addLoggerGlobalContext('env', '{{ $.Site.Params.environment }}');
       window.addEventListener('load', function(){
+        const pageNav = performance.getEntriesByType("navigation")[0];
+        const pageResources = performance.getEntriesByType("resource")[0];
+        // Measuring DNS lookup time
+        pageNav.dnsTime = pageNav.domainLookupEnd - pageNav.domainLookupStart;
+        // Quantifying total connection time
+        pageNav.connectionTime = pageNav.connectEnd - pageNav.connectStart;
+        pageNav.tlsTime = 0; // <-- Assume 0 by default
+
+        // Did any TLS stuff happen?
+        if (pageNav.secureConnectionStart > 0) {
+          // Awesome! Calculate it!
+          pageNav.tlsTime = pageNav.connectEnd - pageNav.secureConnectionStart;
+        }
+        // Cache seek plus response time
+        pageNav.fetchTime = pageNav.responseEnd - pageNav.fetchStart;
+
+        // Service worker time plus response time
+        pageNav.workerTime = 0;
+
+        if (pageNav.workerStart > 0) {
+          pageNav.workerTime = pageNav.responseEnd - pageNav.workerStart;
+        }
+        // Request plus response time (network only)
+        pageNav.totalTime = pageNav.responseEnd - pageNav.requestStart;
+
+        // Response time only (download)
+        pageNav.downloadTime = pageNav.responseEnd - pageNav.responseStart;
+
+        // Time to First Byte (TTFB)
+        pageNav.ttfb = pageNav.responseStart - pageNav.requestStart;
+
+        // HTTP header size
+        pageNav.headerSize = pageNav.transferSize - pageNav.encodedBodySize;
+
+        // Compression ratio
+        pageNav.compressionRatio = pageNav.decodedBodySize / pageNav.encodedBodySize;
+
         let page_stats = {
           "location": JSON.parse(JSON.stringify(window.location)),
-          "performance": JSON.parse(JSON.stringify(performance))
-        }
+          "performance": {
+            "navigation_raw": pageNav,
+            "resource_raw": pageResources
+          }
+        };
         DD_LOGS.logger.info('Page loaded', page_stats);
       });
     </script>
