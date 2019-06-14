@@ -17,7 +17,7 @@ This feature is in beta. <a href="/help">Contact Datadog support</a> to enable d
 
 ## Overview
 
-Distributions is a metric type only available in Agent 6 that compiles all values sent from multiple sources or hosts during a flush interval to calculate the statistical distributions across your entire infrastructure.  This can be thought of as a the existing [Histogram metric type]() but server-side.[1]
+Distributions is a metric type only available in Agent 6 that compiles all values sent from multiple sources or hosts during a flush interval to calculate the statistical distributions across your entire infrastructure.  This can be thought of as a the existing [Histogram metric type][1] but server-side.
 
 Global distributions are designed to instrument logical objects, like services, independently from the underlying hosts and solve the problem a host based aggregation poses. Unlike histograms which aggregate on the agent-side, global distributions send all raw data collected during the flush interval and aggregations occur server-side. Because the underlying data structure has not been aggregated and represents raw data, distributions provide two major features:
 
@@ -88,5 +88,4 @@ The above instrumentation calculates the following data: sum, count, average, mi
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: ) but server-side.
+[1]: /developers/metrics/histograms
