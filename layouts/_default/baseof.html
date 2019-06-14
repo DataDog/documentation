@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}" style="opacity:0" class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.text }}banner{{ end }}">
 <head>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-us.js"></script>
+    <script>
+      // Set your Public API key
+      DD_LOGS.init({
+        publicApiKey: 'pubf839012dcb041ba2b4478770b9e96d11',
+        forwardErrorsToLogs: true,
+      });
+
+      DD_LOGS.addLoggerGlobalContext('env', '{{ $.Site.Params.environment }}');
+    </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-21102638-5"></script>
     <script>
