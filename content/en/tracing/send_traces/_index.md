@@ -72,7 +72,7 @@ There are several ways to specify [an environment][9] when reporting data:
 
 ## Next steps
 
-Next, [Instrument your application][11]. For the full overview of all of the steps to set up APM, see the [APM overivew][1]. 
+Next, [Instrument your application][11]. For the full overview of all of the steps to set up APM, see the [APM overview][1]. 
 
 ## Further Reading
 
