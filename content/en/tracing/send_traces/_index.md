@@ -44,15 +44,15 @@ There are alternernates to the Agent and containers that you can use to collect 
 
 ### Lambda - X-Ray
 
-For more information abut setting up Lambda - X-Ray, see the [Amazon X-Ray integration documentation][6]
+For more information setting up Lambda - X-Ray, see the [Amazon X-Ray integration documentation][6]
 
 ### Heroku
 
-Tracing is enabled by default when monitoring with Heroku. For more information abut configuring tracing for Heroku, see the [Heroku cloud documentation][7].
+Tracing is enabled by default when monitoring with Heroku. For more information about configuring tracing for Heroku, see the [Heroku cloud documentation][7].
 
 ### Cloud Foundry
 
-Tracing is enabled by default when monitoring with Cloud Foundry. For more information abut configuring tracing for Cloud Foundry, see the [Cloud Foundry documentation][8].
+Tracing is enabled by default when monitoring with Cloud Foundry. For more information about configuring tracing for Cloud Foundry, see the [Cloud Foundry documentation][8].
 
 ### Other(GAE, AAS, Serverless)
 
