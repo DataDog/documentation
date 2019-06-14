@@ -12,8 +12,8 @@
       DD_LOGS.addLoggerGlobalContext('env', '{{ $.Site.Params.environment }}');
       DD_LOGS.addLoggerGlobalContext('service', 'docs');
       window.addEventListener('load', function(){
-        const pageNav = performance.getEntriesByType("navigation")[0];
-        const pageResources = performance.getEntriesByType("resource")[0];
+        let pageNav = performance.getEntriesByType("navigation")[0];
+        let pageResources = performance.getEntriesByType("resource");
         // Measuring DNS lookup time
         pageNav.dnsTime = pageNav.domainLookupEnd - pageNav.domainLookupStart;
         // Quantifying total connection time
@@ -49,14 +49,17 @@
         // Compression ratio
         pageNav.compressionRatio = pageNav.decodedBodySize / pageNav.encodedBodySize;
 
-        let page_stats = {
+        let pageStats = {
           "location": JSON.parse(JSON.stringify(window.location)),
           "performance": {
-            "navigation_raw": pageNav,
-            "resource_raw": pageResources
+            "navigation": pageNav,
+            "resources": {}
           }
         };
-        DD_LOGS.logger.info('Page loaded', page_stats);
+        pageResources.forEach(el => {
+          pageStats.performance.resources[el.name] = el
+        });
+        DD_LOGS.logger.info('Page loaded', pageStats);
       });
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
