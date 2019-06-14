@@ -122,7 +122,7 @@ La charge utile totale vaut \~ 100 octets. Cependant, avec l'API DogStatsD, cet
 [1]: /fr/developers/dogstatsd
 [2]: /fr/agent
 [3]: /fr/integrations
-[4]: /fr/account_management/billing/custom_metrics/#standard-integrations
+[4]: /fr/integrations/faq/what-standard-integrations-emit-custom-metrics
 [5]: /fr/api/#rate-limiting
 [6]: https://app.datadoghq.com/account/usage/hourly
 [7]: https://app.datadoghq.com/metric/summary
