@@ -11,6 +11,7 @@ disable_toc: true
     {{< nextlink href="agent/guide/agent-log-files" >}}Agent Log Files{{< /nextlink >}}
     {{< nextlink href="agent/guide/integration-management" >}}Integration Management{{< /nextlink >}}
     {{< nextlink href="agent/guide/network" >}}Network Traffic{{< /nextlink >}}
+    {{< nextlink href="agent/guide/secrets-management" >}}Secrets Management{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 {{< whatsnext desc="Agent 5 Guides:" >}}
