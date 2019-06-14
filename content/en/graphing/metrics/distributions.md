@@ -16,7 +16,7 @@ This feature is in beta. <a href="/help">Contact Datadog support</a> to enable d
 
 ## Overview
 
-Distributions are a [metric type][1] that can be thought of as a global version of the [Histogram metric][2], which measures the statistical distribution of discrete values on a single host. Distributions observe the values that are sent from multiple hosts to measure statistical distributions across your entire infrastructure, allowing you to compute global percentiles across your entire dataset.
+Distribution is a [metric type][1] that can be thought of as a global version of the [Histogram metric][2]. A histogram metric measures the statistical distribution of discrete values on a single host. A distributions metric observes the values that are sent from multiple hosts to measure statistical distributions across your entire infrastructure, allowing you to compute global percentiles across your entire dataset. Distributions can be thought of as a the existing [Histogram metric type][2] but server-side.
 
 Global distributions are designed to instrument logical objects, like services, independently from the underlying hosts and provide insight into metric behavior across your infrastructure .
 
