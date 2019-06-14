@@ -64,7 +64,7 @@ This would emit one `gauge` metric `mongo.users` with one tag: `user:active`.
 {{% /tab %}}
 {{% tab "Find" %}}
 
-To monitor what's the average age per user, your [Mongo find command][1] would be:
+To monitor what's the age per user, your [Mongo find command][1] would be:
 
 ```
 db.runCommand( {find: user_colleciton, filter: {active:true} )
@@ -101,7 +101,7 @@ db.runCommand(
               {
                 'aggregate': "user_collection",
                 'pipeline': [
-                  {"$match": {"is_actif": "true"}},
+                  {"$match": {"active": "true"}},
                   {"$group": {"_id": "$is_admin", "age_avg": {"$avg": "$age"}}}
                 ],
                 'cursor': {}
@@ -114,7 +114,7 @@ Which would correspond to the following `custom_queries` YAML configuration insi
 ```
 custom_queries:
   - metric_prefix: mongo.example3
-    query: {"aggregate": "user_collection","pipeline": [{"$match": {"is_actif": "true"}},{"$group": {"_id": "$is_admin", "total": {"$avg": "$age"}}}],"cursor": {}}
+    query: {"aggregate": "user_collection","pipeline": [{"$match": {"active": "true"}},{"$group": {"_id": "$is_admin", "age_avg": {"$avg": "$age"}}}],"cursor": {}}
     fields:
       - field_name: age_avg
         name: user.age
@@ -126,7 +126,7 @@ custom_queries:
       - test:mongodb
 ```
 
-This would emit one `gauge` metric `mongo.example3.user.age` with two tags: `is_admin:true` and `is_admin:true` representing the average age of users for each tags.
+This would emit one `gauge` metric `mongo.example3.user.age` with two tags: `is_admin:true` and `is_admin:false` representing the average age of users for each tags.
 
 [1]: https://docs.mongodb.com/manual/reference/command/aggregate/#dbcmd.aggregate
 {{% /tab %}}
