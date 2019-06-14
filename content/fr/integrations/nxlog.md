@@ -87,7 +87,7 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
     </Input>
     ```
 
-3. Vérifiez que ces fichiers sont ajoutés dans la section de sortie.
+3. Vérifiez que ces fichiers sont connectés à la section de sortie.
     ```
     <Route file1>
         Path    FILE_WATCH_1,FILE_WATCH_2,... => out

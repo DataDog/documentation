@@ -82,6 +82,9 @@ Heroku émet des métriques dyno par l'intermédiaire de logs. Pour convertir ce
 ### Jira
 Un [outil][37] qui permet de récupérer des données à partir de Jira et de les importer en tant que métriques dans Datadog.
 
+### LaunchDarkly
+Un gestionnaire de webhooks [LaunchDarkly][60] qui enregistre les changements sous la forme d'événements Datadog.
+
 ### Sortie Logstash
   * [Sortie Logstash pour Datadog][38]
   * [Sortie Logstash pour DogStatsD][39]
@@ -186,3 +189,4 @@ Si vous rédigez une bibliothèque Datadog et que vous souhaitez l'ajouter à ce
 [57]: https://github.com/urosgruber/dd-agent-FreeBSD
 [58]: https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/networking/dd-agent
 [59]: mailto:code@datadoghq.com
+[60]: https://github.com/meetup/launch-dogly

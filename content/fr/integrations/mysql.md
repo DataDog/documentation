@@ -387,7 +387,8 @@ Le check MySQL n'inclut aucun événement.
 ### Checks de service
 
 `mysql.replication.slave_running` :
-Renvoie CRITICAL si un esclave n'est pas en cours d'exécution. Si ce n'est pas le cas, renvoie OK.
+Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance MySQL qu'il surveille. Si ce n'est pas le cas, renvoie `OK`.
+Consultez [cette page][22] pour en savoir plus.
 
 `mysql.can_connect` :
 Renvoie CRITICAL si l'Agent n'est pas capable de se connecter à MySQL pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
@@ -428,6 +429,7 @@ Lisez notre [série d'articles de blog][21] à propos de la surveillance MySQL a
 [19]: https://docs.datadoghq.com/fr/integrations/faq/database-user-lacks-privileges
 [20]: https://docs.datadoghq.com/fr/integrations/faq/how-to-collect-metrics-with-sql-stored-procedure
 [21]: https://www.datadoghq.com/blog/monitoring-mysql-performance-metrics
+[22]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/SERVICE_CHECK_CLARIFICATION.md
 
 
 {{< get-dependencies >}}
