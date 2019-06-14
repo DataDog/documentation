@@ -57,8 +57,8 @@
           }
         };
         pageResources.forEach(el => {
-          const resourceName = str.match(/[0-9a-zA-Z\-_]+\.(js|css|jpg|mp4|mov|jpeg|gif|png)/g);
-          pageStats.performance.resources[el.name] = el
+          const resourceName = el.name.match(/[0-9a-zA-Z\-_]+\.(js|css|jpg|mp4|mov|jpeg|gif|png)/g);
+          pageStats.performance.resources[resourceName[0]] = el;
         });
         DD_LOGS.logger.info('Page loaded', pageStats);
       });
