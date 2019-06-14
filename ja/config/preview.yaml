@@ -1,8 +1,0 @@
----
-baseURL: https://docs-staging.datadoghq.com/ja/
-buildfuture: true
-builddrafts: true
-params:
-  environment: preview
-  img_url: "https://datadog-docs.imgix.net/"
-  static_url: "https://docs-staging.datadoghq.com/ja/"
