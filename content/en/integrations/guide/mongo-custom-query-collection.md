@@ -11,17 +11,14 @@ To collect custom metrics with the Datadog-Mongo integration, use the `custom_qu
 
 ## Configuration
 
-`custom_queries` has the following required options:
+`custom_queries` has the following options:
 
 * **`metric_prefix`**: Each metric starts with the chosen prefix.
-* **`query`**: This is the [Mongo runCommand][3] query to execute. Note that The Agent only supports `count`, `find` and `aggregates` queries.
-* **`field`**: Ignored for `count` queries. This is a list representing each field with no specific order. Unspecified and missing fields are ignored. There are 3 required pieces of data for each `field`:
+* **`query`**: This is the [Mongo runCommand][3] query to execute as a JSON object. Note that The Agent only supports `count`, `find` and `aggregates` queries.
+* **`fields`**: Ignored for `count` queries. This is a list representing each field with no specific order. Unspecified and missing fields are ignored. There are 3 required pieces of data for each `fields`:
   * `field_name`: This is the name of the field from which to fetch the data.
   * `name`: This is the suffix to append to the metric_prefix in order to form the full metric name. If `type` is `tag`, this column is instead considered as a tag that is applied to every metric collected by this particular query.
   * `type`: This is the submission method (`gauge`, `count`, `rate`, etc..). This can also be set to `tag` to tag each metric in the row with the name and value of the item in this column. You can use the `count` type to perform aggregation for queries that return multiple rows with the same or no tags.
-
-The following optional options can also be used:
-
 * **`tags`**: A list of tags to apply to each metric (as specified above).
 * **`count_type`**: For `count` queries only, this is the submission method (`gauge`, `count`, `rate`, etc...) of the count result. Ignored for non count queries.
 
