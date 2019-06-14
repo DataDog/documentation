@@ -10,6 +10,7 @@
       });
 
       DD_LOGS.addLoggerGlobalContext('env', '{{ $.Site.Params.environment }}');
+      DD_LOGS.addLoggerGlobalContext('service', 'docs');
       window.addEventListener('load', function(){
         const pageNav = performance.getEntriesByType("navigation")[0];
         const pageResources = performance.getEntriesByType("resource")[0];
