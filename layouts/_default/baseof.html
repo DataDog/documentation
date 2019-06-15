@@ -59,10 +59,10 @@
         };
         if (pageResources.length) {
           pageResources.forEach(el => {
-            const resourceName = el.name.match(/[0-9a-zA-Z\-_]+\.(js|css|jpg|mp4|mov|jpeg|gif|png|woff2?|ico|html)/g)
-              .replace(/-[a-z0-9]{8}/g, '');
+            const resourceName = el.name.match(/[0-9a-zA-Z\-_]+\.(js|css|jpg|mp4|mov|jpeg|gif|png|woff2?|ico|html)/g)[0]
+              .replace(/-[a-z0-9]{8}\./g, '__');
             if (resourceName) {
-              pageStats.performance.resources[resourceName[0].replace('.','_')] = el;
+              pageStats.performance.resources[resourceName[0]] = el;
 
             } else {
               DD_LOGS.logger.info('Could not load resource: ' + el.name);
