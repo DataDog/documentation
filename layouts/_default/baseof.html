@@ -11,10 +11,11 @@
 
       DD_LOGS.addLoggerGlobalContext('env', '{{ $.Site.Params.environment }}');
       DD_LOGS.addLoggerGlobalContext('service', 'docs');
+      DD_LOGS.addLoggerGlobalContext('host', window.location.host);
       window.addEventListener('load', function(){
         let pageNav = performance.getEntriesByType("navigation")[0];
         let pageResources = performance.getEntriesByType("resource");
-        let pageNavStats = {}
+        let pageNavStats = {};
         // Measuring DNS lookup time
         pageNavStats.dnsTime = pageNav.domainLookupEnd - pageNav.domainLookupStart;
         // Quantifying total connection time
@@ -59,11 +60,11 @@
         };
         if (pageResources.length) {
           pageResources.forEach(el => {
-            const resourceName = el.name.match(/[0-9a-zA-Z\-_]+\.(js|css|jpg|mp4|mov|jpeg|gif|png|woff2?|ico|html)/g)
+            const resourceName = el.name.match(/[0-9a-zA-Z\-_]+\.(js|css|jpg|mp4|mov|jpeg|gif|png|woff2?|ico|html)/g);
             if (resourceName) {
               const rN = resourceName[0].replace(/(-[a-z0-9]{8})?\./g, '__');
-              pageStats.performance.resources[resourceName[0]] = el;
-
+              el.shortName = rN;
+              pageStats.performance.resources[rN] = el;
             } else {
               DD_LOGS.logger.info('Could not load resource: ' + el.name);
             }
