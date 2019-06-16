@@ -12,65 +12,70 @@
       DD_LOGS.addLoggerGlobalContext('env', '{{ $.Site.Params.environment }}');
       DD_LOGS.addLoggerGlobalContext('service', 'docs');
       DD_LOGS.addLoggerGlobalContext('host', window.location.host);
-      window.addEventListener('load', function(){
+      window.addEventListener('load', function () {
         let pageNav = performance.getEntriesByType("navigation")[0];
         let pageResources = performance.getEntriesByType("resource");
         let pageNavStats = {};
-        // Measuring DNS lookup time
-        pageNavStats.dnsTime = pageNav.domainLookupEnd - pageNav.domainLookupStart;
-        // Quantifying total connection time
-        pageNavStats.connectionTime = pageNav.connectEnd - pageNav.connectStart;
-        pageNavStats.tlsTime = 0; // <-- Assume 0 by default
+        try {
+          // Measuring DNS lookup time
+          pageNavStats.dnsTime = pageNav.domainLookupEnd - pageNav.domainLookupStart;
+          // Quantifying total connection time
+          pageNavStats.connectionTime = pageNav.connectEnd - pageNav.connectStart;
+          pageNavStats.tlsTime = 0; // <-- Assume 0 by default
 
-        // Did any TLS stuff happen?
-        if (pageNav.secureConnectionStart > 0) {
-          // Awesome! Calculate it!
-          pageNavStats.tlsTime = pageNav.connectEnd - pageNav.secureConnectionStart;
-        }
-        // Cache seek plus response time
-        pageNavStats.fetchTime = pageNav.responseEnd - pageNav.fetchStart;
-
-        // Service worker time plus response time
-        pageNavStats.workerTime = 0;
-
-        if (pageNav.workerStart > 0) {
-          pageNavStats.workerTime = pageNav.responseEnd - pageNav.workerStart;
-        }
-        // Request plus response time (network only)
-        pageNavStats.totalTime = pageNav.responseEnd - pageNav.requestStart;
-
-        // Response time only (download)
-        pageNavStats.downloadTime = pageNav.responseEnd - pageNav.responseStart;
-
-        // Time to First Byte (TTFB)
-        pageNavStats.ttfb = pageNav.responseStart - pageNav.requestStart;
-
-        // HTTP header size
-        pageNavStats.headerSize = pageNav.transferSize - pageNav.encodedBodySize;
-
-        // Compression ratio
-        pageNavStats.compressionRatio = pageNav.decodedBodySize / pageNav.encodedBodySize;
-
-        let pageStats = {
-          "location": JSON.parse(JSON.stringify(window.location)),
-          "performance": {
-            "navigation": pageNavStats,
-            "resources": {}
+          // Did any TLS stuff happen?
+          if (pageNav.secureConnectionStart > 0) {
+            // Awesome! Calculate it!
+            pageNavStats.tlsTime = pageNav.connectEnd - pageNav.secureConnectionStart;
           }
-        };
-        if (pageResources.length) {
-          pageResources.forEach(el => {
-            const resourceName = el.name.match(/[0-9a-zA-Z\-_]+\.(js|css|jpg|mp4|mov|jpeg|gif|png|woff2?|ico|html)/g);
-            if (resourceName) {
-              const rN = resourceName[0].replace(/(-[a-z0-9]{8})?\./g, '__');
-              el.shortName = rN;
-              pageStats.performance.resources[rN] = el;
-            } else {
-              DD_LOGS.logger.info('Could not load resource: ' + el.name);
+          // Cache seek plus response time
+          pageNavStats.fetchTime = pageNav.responseEnd - pageNav.fetchStart;
+
+          // Service worker time plus response time
+          pageNavStats.workerTime = 0;
+
+          if (pageNav.workerStart > 0) {
+            pageNavStats.workerTime = pageNav.responseEnd - pageNav.workerStart;
+          }
+          // Request plus response time (network only)
+          pageNavStats.totalTime = pageNav.responseEnd - pageNav.requestStart;
+
+          // Response time only (download)
+          pageNavStats.downloadTime = pageNav.responseEnd - pageNav.responseStart;
+
+          // Time to First Byte (TTFB)
+          pageNavStats.ttfb = pageNav.responseStart - pageNav.requestStart;
+
+          // HTTP header size
+          pageNavStats.headerSize = pageNav.transferSize - pageNav.encodedBodySize;
+
+          // Compression ratio
+          pageNavStats.compressionRatio = pageNav.decodedBodySize / pageNav.encodedBodySize;
+
+          let pageStats = {
+            "location": JSON.parse(JSON.stringify(window.location)),
+            "performance": {
+              "navigation": pageNavStats,
+              "resources": {}
             }
-          });
+          };
+          if (pageResources.length) {
+            pageResources.forEach(el => {
+              const resourceName = el.name.match(/[0-9a-zA-Z\-_]+\.(js|css|jpg|mp4|mov|jpeg|gif|png|woff2?|ico|html)/g);
+              if (resourceName) {
+                const rN = resourceName[0].replace(/(-[a-z0-9]{8})?\./g, '__');
+                el.shortName = rN;
+                pageStats.performance.resources[rN] = el;
+              } else {
+                DD_LOGS.logger.info('Could not load resource: ' + el.name);
+              }
+            });
+          }
+          // send the page stats
+          DD_LOGS.logger.info('Page loaded', pageStats);
+        } catch (e) {
+          DD_LOGS.logger.error('Page stats collection error', {'message': e});
         }
-        DD_LOGS.logger.info('Page loaded', pageStats);
       });
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
