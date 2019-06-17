@@ -100,9 +100,7 @@ instances:
   #   - dev.exemple.com
 ```
 
-Pour recueillir des métriques par site, vous *devez* utiliser l'option `sites`. L'Agent recueille les métriques pour chaque site de votre liste et indique le nom du site dans un tag : `iis.net.num_connections` possède le tag `site:exemple.com` et `iis.net.num_connections` le tag `site:dev.exemple.com`.
-
-Si vous ne configurez pas `sites`, l'Agent recueille tout de même les métriques, mais leurs valeurs reflètent les totaux sur tous les sites : `iis.net.num_connections` est alors le nombre total de connexions sur le serveur IIS. Vous n'aurez aucun ainsi aucune visibilité sur les métriques par site.
+Utilisez l'option `sites` pour recueillir des métriques par site. Lors de la configuration, l'Agent recueille des métriques pour chaque site de votre liste et indique le nom du site correspondant dans un tag. Si vous ne configurez pas `sites`, l'Agent recueille les mêmes métriques, mais leurs valeurs correspondent aux totaux de l'ensemble des sites.
 
 Vous pouvez également surveiller les sites sur des serveurs IIS à distance. Consultez le [fichier d'exemple iis.d/conf.yaml][5] pour découvrir des options de configuration pertinentes. Par défaut, ce check est utilisé sur une seule instance : la machine actuelle sur laquelle l'Agent s'exécute. Il vérifiera les compteurs de performance WMI pour IIS sur cette machine.
 
@@ -169,7 +167,7 @@ Voici un exemple de configuration qui vérifie la machine actuelle ainsi qu'une 
 {{< get-metrics-from-git "iis" >}}
 
 
-### Événements
+### Events
 Le check IIS n'inclut aucun événement.
 
 ### Checks de service
