@@ -7,7 +7,7 @@
     contents:
 
     - action: source
-      branch: kaylyn/dingtalk
+      branch: prod
       globs:
       - dd/utils/context/source.py
 
