@@ -97,7 +97,7 @@ For example, if you submit a metric tagged with `dot.key.test:five` and then set
 
 ## Conditional variables
 
-Conditional variables allow for different text to be [sent to different contacts](#toto) based on the state of the monitor and the details of how it was triggered. These condition variables can be used within either the subject or body of the notification set in section 3 of the monitor definition.
+Conditional variables allow for different text to be [sent to different contacts](#notification) based on the state of the monitor and the details of how it was triggered. These condition variables can be used within either the subject or body of the notification set in section 3 of the monitor definition.
 
 Keep in mind when using conditional tags that they must have an open (example: `{{#is_alert}}`) and closing (example: `{{/is_alert}}`) pair with the desired text and **@-mentions** in between.
 

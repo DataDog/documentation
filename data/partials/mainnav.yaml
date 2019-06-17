@@ -58,9 +58,6 @@ main:
             url: "agent/basic_agent_usage/windows/"
           - name: "From Source"
             url: "agent/basic_agent_usage/source/"
-      ## TRACING/APM - Setup basic
-      - name: "APM"
-        url: "agent/apm/"
       ## Docker
       - name: "Docker"
         url: "agent/docker/"
@@ -128,6 +125,8 @@ main:
             url: "agent/troubleshooting/ntp"
           - name: "Permission Issues"
             url: "agent/troubleshooting/permissions"
+          - name: "Integrations Issues"
+            url: "agent/troubleshooting/integrations"
       # Guides
       - name: "Guides"
         url: "agent/guide/"
@@ -305,8 +304,12 @@ main:
     url: "tracing/"
     pre: "nav_tracing"
     children:
+      # Enable tracing
+      - name: "Enable trace collection"
+        url: "tracing/send_traces/"
+
       # Languages
-      - name: "Setup"
+      - name: "Instrument your application"
         url: "tracing/setup/"
         children:
           - name: "Java"
@@ -558,7 +561,7 @@ main:
   - name: "API"
     url: "api/"
     pre: "nav_api"
-    # ACCOUNT MANAGEMENT
+  # ACCOUNT MANAGEMENT
   - name: "Account Management"
     url: "account_management/"
     pre: "nav_account"

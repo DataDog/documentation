@@ -21,7 +21,7 @@ L'endpoint de métrique vous permet d'envoyer des données de séries temporelle
     * **`points`** [*obligatoire*] :
         un tableau de points JSON. Chaque point suit le format suivant :
         `[[timestamp_POSIC, valeur_numérique], ...]`
-        **Remarque** : le timestamp doit être exprimé en secondes, sa valeur doit être actuelle et son format doit être une valeur flottante de type gauge 32 bits.
+        **Remarque** : le timestamp doit être exprimé en secondes et sa valeur doit être actuelle. Le format de la valeur numérique doit être une valeur flottante de type gauge 32 bits.
         Une valeur actuelle correspond à une date jusqu'à 1 heure avant l'événement et jusqu'à 10 minutes après celui-ci.
     * **`host`** [*facultatif*] :
         le nom du host qui a généré la métrique.

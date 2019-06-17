@@ -78,7 +78,7 @@ Pour monter un fichier `datadog.yaml` dans un conteneur avec une ConfigMap, ajou
             name: dd-agent-config
             items:
               - key: datadog-yaml
-                path: datadog.yaml 
+                path: datadog.yaml
 [...]
 ```
 
@@ -114,4 +114,4 @@ Pour ce faire, vous pouvez utiliser Autodiscovery. Pour en savoir plus, consulte
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/integrations/http_check
-[2]: /fr/agent/autodiscovery
+[2]: /fr/agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration

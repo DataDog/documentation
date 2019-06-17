@@ -105,11 +105,11 @@ Si vous programmez la gestion et le déploiement des monitors, vous pouvez défi
         *   Pour désactiver complètement l'alerte : `{'*': None}`.
         *   Pour désactiver `role:db` à court terme : `{'role:db': 1412798116}`.
 
-    *   **`notify_no_data`** : une valeur booléenne qui indique si ce monitor envoie une notification en absence de transmission de données. Valeur par défaut : **false**.
-
     *   **`new_host_delay`** : durée (en secondes) autorisée pour le démarrage d'un host et le lancement complet des applications avant le début de l'évaluation des résultats du monitor. Doit être un nombre entier non négatif. Valeur par défaut : **300**.
 
-    *   **`no_data_timeframe`** : le nombre de minutes avant qu'un monitor envoie une notification en l'absence de transmission de données. Doit correspondre au moins au double de l'intervalle du monitor pour les alertes de métrique, ou à 2 minutes pour les checks de service. Valeur par défaut : **le double de l'intervalle pour les alertes de métrique, 2 minutes pour les checks de service**.
+    *   **`notify_no_data`** : une valeur booléenne qui indique si ce monitor envoie une notification en absence de transmission de données. Valeur par défaut : **false**.
+
+    *   **`no_data_timeframe`** : le nombre de minutes avant qu'un monitor envoie une notification en l'absence de transmission de données. Ce paramètre est obligatoire lorsque `notify_no_data​` est défini sur `true`. Il doit correspondre au moins au double de l'intervalle du monitor pour les alertes de métrique, ou à 2 minutes pour les checks de service. Valeur par défaut : **le double de l'intervalle pour les alertes de métrique, 2 minutes pour les checks de service**.
 
     *   **`timeout_h`** : le nombre d'heures durant lesquelles le monitor ne transmet pas les données avant qu'il ne procède à une résolution automatique à partir d'un état déclenché. Valeur par défaut : **None**.
 

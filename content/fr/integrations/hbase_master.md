@@ -1,4 +1,8 @@
 ---
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: /assets/service_checks.json
 categories:
   - data store
 creates_events: false
@@ -11,7 +15,7 @@ guid: b45e0f05-8ece-4d5c-946b-ce0ee8057e68
 integration_id: hbase-master
 integration_title: "Hbase\_master"
 is_public: true
-kind: intégration
+kind: integration
 maintainer: everpeace
 manifest_version: 1.0.0
 metric_prefix: hbase.
@@ -35,7 +39,7 @@ Recueillez des métriques du service Hbase_master en temps réel pour :
 
 Pour installer le check Hbase_master sur votre host :
 
-1. [Téléchargez l’Agent Datadog][1].
+1. [Téléchargez l'Agent Datadog][1].
 2. Créez un dossier `hbase_master.d/` dans le dossier `conf.d/` à la racine du répertoire de votre Agent.
 3. Créez un fichier `conf.yaml` dans le dossier `hbase_master.d/` précédemment créé.
 4. Consultez le [fichier d'exemple hbase_master.yaml][2] et copiez son contenu dans le fichier `conf.yaml`.
@@ -95,7 +99,7 @@ Le check HBase RegionServer n'est **PAS** inclus dans le paquet de l'[Agent Dat
 
 Pour installer le check HBase RegionServer sur votre host :
 
-1. [Téléchargez l’Agent Datadog][1].
+1. [Téléchargez l'Agent Datadog][1].
 2. Créez un dossier `hbase_regionserver.d/` dans le dossier `conf.d/` à la racine du répertoire de votre Agent. 
 3. Créez un fichier `conf.yaml` dans le dossier `hbase_regionserver.d/` précédemment créé.
 4. Consultez le [fichier d'exemple hbase_regionserver.yaml][2] et copiez son contenu dans le fichier `conf.yaml`.
