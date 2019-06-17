@@ -30,7 +30,7 @@ See the [Developer Tools section][2] for more implementation details.
 
 Like other metric types, such as `gauges` or `histograms`, distributions have the following 5 aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as any other metric (via custom tags set in code) and are resolved to any host tag based on the host that shipped the metric. Add additional percentile aggregations with the [distribution UI][3]: `p50`, `p75`, `p90`, `p95`, and `p99` for a set of tags (up to 10) you’ve elected to apply:
 
-{{< img src="graphing.metrics/distributions/global_metrics_selection.png" alt="Distribution Metric UI" responsive="true" style="width:80%;">}}
+{{< img src="graphing/metrics/distributions/global_metrics_selection.png" alt="Distribution Metric UI" responsive="true" style="width:80%;">}}
 
 After electing to apply percentile aggregations on a distribution metric, these aggregations are automatically available in the graphing UI:
 
