@@ -10,6 +10,10 @@ further_reading:
     text: "Using Distributions in DogStatsD"
 ---
 
+<div class="alert alert-warning">
+This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Datadog support</a> to enable distribution metrics for your account.
+</div>
+
 ## Overview
 
 Distributions are a metric type in Agent 6 that aggregate the values that are sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure server-side.  This can be thought of as a global version of the [Histogram metric][1], which measures at the Agent-level the statistical distribution of values on a single host.
