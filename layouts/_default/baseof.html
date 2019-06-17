@@ -63,22 +63,20 @@
                     return;
                 }
 
-                // TODO: UI for this error
                 var newDocument = httpRequest.responseXML;
                 if (newDocument === null){
                     return;
                 }
 
-                // TODO: UI for this error
                 var newContent = httpRequest.responseXML.getElementById("mainContent");
                 //var newContent = httpRequest.responseText;
                 if (newContent === null){
                     return;
                 }
 
-                console.log('page size');
-                {{/* console.log(httpRequest.getResponseHeader("Content-Type")); */}}
-                console.log(httpRequest.getResponseHeader("Content-Length"));
+                //console.log('page size');
+                //console.log(httpRequest.getResponseHeader("Content-Type"));
+                //console.log(httpRequest.getResponseHeader("Content-Length"));
 
                 document.title = newDocument.title;
                 
