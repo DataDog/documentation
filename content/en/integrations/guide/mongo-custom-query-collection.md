@@ -14,13 +14,13 @@ To collect custom metrics with the Datadog-Mongo integration, use the `custom_qu
 `custom_queries` has the following options:
 
 * **`metric_prefix`**: Each metric starts with the chosen prefix.
-* **`query`**: This is the [Mongo runCommand][3] query to execute as a JSON object. Note that The Agent only supports `count`, `find` and `aggregates` queries.
-* **`fields`**: Ignored for `count` queries. This is a list representing each field with no specific order. Unspecified and missing fields are ignored. There are 3 required pieces of data for each `fields`:
+* **`query`**: This is the [Mongo runCommand][3] query to execute as a JSON object. Note that The Agent only supports `count`, `find`, and `aggregates` queries.
+* **`fields`**: Ignored for `count` queries. This is a list representing each field with no specific order. Ignores unspecified and missing fields. There are three required pieces of data for each `fields`:
   * `field_name`: This is the name of the field from which to fetch the data.
-  * `name`: This is the suffix to append to the metric_prefix in order to form the full metric name. If `type` is `tag`, this column is instead considered as a tag that is applied to every metric collected by this particular query.
+  * `name`: This is the suffix to append to the metric_prefix to form the full metric name. If `type` is `tag`, this column is treated as a tag and applied to every metric collected by this particular query.
   * `type`: This is the submission method (`gauge`, `count`, `rate`, etc..). This can also be set to `tag` to tag each metric in the row with the name and value of the item in this column. You can use the `count` type to perform aggregation for queries that return multiple rows with the same or no tags.
 * **`tags`**: A list of tags to apply to each metric (as specified above).
-* **`count_type`**: For `count` queries only, this is the submission method (`gauge`, `count`, `rate`, etc...) of the count result. Ignored for non count queries.
+* **`count_type`**: For `count` queries only, this is the submission method (`gauge`, `count`, `rate`, etc...) of the count result. Ignored for non-count queries.
 
 ## Examples
 
@@ -37,7 +37,7 @@ Choose the type of query you would like to see an example for:
 {{< tabs >}}
 {{% tab "Count" %}}
 
-To monitor how many users are active at a given time for example. Your [Mongo count command][1] would be:
+To monitor how many users are active at a given time, your [Mongo count command][1] would be:
 
 ```
 db.runCommand( {count: user_collection, query: {active:true}})
@@ -64,7 +64,7 @@ This would emit one `gauge` metric `mongo.users` with one tag: `user:active`.
 {{% /tab %}}
 {{% tab "Find" %}}
 
-To monitor what's the age per user, your [Mongo find command][1] would be:
+To monitor the age per user, your [Mongo find command][1] would be:
 
 ```
 db.runCommand( {find: user_colleciton, filter: {active:true} )
@@ -95,7 +95,7 @@ This would emit one `gauge` metric `mongo.example2.user.age` with two tags: `nam
 {{% /tab %}}
 {{% tab "Aggregate" %}}
 
-To monitor what's the average age for admin and non admin user, your [Mongo aggregate command][1] would be:
+To monitor the average age for an admin and a non-admin user, your [Mongo aggregate command][1] would be:
 ```
 db.runCommand(
               {
