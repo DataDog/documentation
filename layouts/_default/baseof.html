@@ -14,7 +14,6 @@
       DD_LOGS.addLoggerGlobalContext('host', window.location.host);
       window.addEventListener('load', function () {
         let pageNav = performance.getEntriesByType("navigation")[0];
-        let pageResources = performance.getEntriesByType("resource");
         let pageNavStats = {};
         try {
           // Measuring DNS lookup time
@@ -55,26 +54,35 @@
           let pageStats = {
             "location": JSON.parse(JSON.stringify(window.location)),
             "performance": {
-              "navigation": pageNavStats,
-              "resources": {}
+              "navigation": pageNavStats
             }
           };
-          if (pageResources.length) {
-            pageResources.forEach(el => {
-              const resourceName = el.name.match(/[0-9a-zA-Z\-_]+\.(js|css|jpg|mp4|mov|jpeg|gif|png|woff2?|ico|html)/g);
-              if (resourceName) {
-                const rN = resourceName[0].replace(/(-[a-z0-9]{8})?\./g, '__');
-                el.shortName = rN;
-                pageStats.performance.resources[rN] = el;
-              } else {
-                DD_LOGS.logger.info('Could not load resource: ' + el.name);
-              }
-            });
-          }
           // send the page stats
           DD_LOGS.logger.info('Page loaded', pageStats);
         } catch (e) {
           DD_LOGS.logger.error('Page stats collection error', {'message': e});
+        }
+        try {
+          let pageResources = performance.getEntriesByType("resource");
+          if (pageResources) {
+            pageResources.forEach(el => {
+              const resourceName = el.name.match(/[0-9a-zA-Z\-_]+\.(js|css|jpg|mp4|mov|jpeg|gif|png|woff2?|ico|html)/g);
+              if (resourceName) {
+                const rN = resourceName[0].replace(/(-[a-z0-9]{8})?\./g, '.');
+                const resource = {
+                  'resourceName': rN.toString(),
+                  'resourceType': el.initiatorType,
+                  'resourceLocation': JSON.parse(JSON.stringify(window.location)),
+                  'resourceStats': el
+                };
+                DD_LOGS.logger.info('Resource loaded', resource);
+              } else {
+                DD_LOGS.logger.error('Could not load resource: ' + el.name);
+              }
+            });
+          }
+        } catch(e) {
+          DD_LOGS.logger.error('resource stats collection error' + e);
         }
       });
     </script>
