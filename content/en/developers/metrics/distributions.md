@@ -17,11 +17,11 @@ This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Data
 
 ## Overview
 
-Distributions are a new metric type in Agent 6 that aggregate the values that are sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure. This can be thought of as a global version of our existing [Histogram metric type][1], which measures the statistical distribution of values on a single host. 
+Distributions are a new metric type in Agent 6 that aggregate the values that are sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure. This can be thought of as a global version of our existing [Histogram metric type][1], which measures the statistical distribution of values on a single host.
 
 Distribution metrics are designed to instrument logical objects, like services, independently from the underlying hosts, and solve the problem created by Agent-level aggregation.
 
-Unlike the histogram metric type that aggregates on the Agent-side, distributions send all raw data collected during the flush interval and aggregations occur serverside. Because the underlying data structure has not been aggregated and represents raw data, distributions provide two major features:
+Unlike the histogram metric type that aggregates on the Agent-side, distributions send all raw data collected during the flush interval and aggregations occur server-side. Because the underlying data structure has not been aggregated and represents raw data, distributions provide two major features:
 
 * Calculation of percentile aggregations
 * Customization of tagging
@@ -30,25 +30,34 @@ Unlike the histogram metric type that aggregates on the Agent-side, distribution
 
 Say host `HOST_1` reports a metric with the values [1,1,1,2,2,2,3,3] and host `HOST_2` reports the same metric with the values [1,1,2] during a flush interval.
 
-Here, the p50 (median) for `HOST_1` is 2 and the p50 for `HOST_2` is 1.  Aggregating by the average value serverside would result in 1.5.
+Here, the p50 (median) for `HOST_1` is 2 and the p50 for `HOST_2` is 1.  Aggregating by the average value server-side would result in 1.5.
 
 In reality, the global p50 (median) is the median of the combined set: [1,1,1,1,1,2,2,2,2,3,3] which is 2. This is the statistically accurate value that can be returned by a distribution metric.
 
 ### Calculation of percentile aggregations
 
-Percentile aggregations (`p50`, `p75`, `p90`, `p95`, `p99`) are calculated from the raw data across all hosts, and are therefore globally accurate.
+Like other metric types, such as `gauge` or `histogram`, `distribution` metric type has the following 5 aggregations available: `count`, `min`, `max`, `sum`, `avg`. A distribution metric is initially tagged the same way as any other metrics (via custom tags set in code) and are resolved to any host tag based on the host that shipped the metric.
 
+A distribution metric, however, has additional percentile aggregations available (`p50`, `p75`, `p90`, `p95`, `p99`). That is, for a distribution metric with percentile aggregations during a 10 seconds flush interval, the following aggregation are available:
+
+| Aggregation | Description                                                         |
+| -------     | -------                                                             |
+| `avg`       | The average of all values in the flush interval.                    |
+| `count`     | The count, or amount, of values sent during the flush interval.     |
+| `50p`       | The 50th percentile, or median, of all values in the flush interval |
+| `75p`       | The 75th percentile of all values in the flush interval             |
+| `90p`       | The 90th percentile of all values in the flush interval             |
+| `95p`       | The 95th percentile of all values in the flush interval             |
+| `99p`       | The 99th percentile of all values in the flush interval             |
+| `max`       | The maximum value sent during the flush interval                    |
+| `min`       | The minimum value sent during the flush interval                    |
+| `sum`       | The sum of all values sent during them flush interval               |
+
+To benefit from all of those aggregation, enable them for a given tag in the [Datadog Distribution Metric page][2].
 
 ### Customization of Tagging
 
-This functionality allows you to control metric cardinality for metrics for which host-level granularity is not necessary (e.g. transactions per second for a checkout service).
-
-
-## Aggregations
-
-Like other metric types, such as `gauge` or `histogram`, a distribution metric type has the following 5 aggregations available: `count`, `min`, `max`, `sum`, `avg`. A distribution metric is initially tagged the same way as any other metrics (via custom tags set in code) and are resolved to any host tag based on the host that shipped the metric.
-
-A distribution metric , however, also uniquely has additional percentile aggregations available (`p50`, `p75`, `p90`, `p95`, `p99`). That is, for a distribution metric with percentile aggregations during a 10 seconds flush interval, the following aggregations are available:(avg, count, max, min, sum, p50, p75, p90, p95, p99). 
+This functionality allows you to control metric cardinality for metrics for which host-level granularity is not necessary see [the Distribution metrics custom tagging documentation]() to learn more..[3]
 
 ## Submission
 
@@ -75,4 +84,5 @@ The above instrumentation calculates the following aggregations: sum, count, ave
 
 {{< partial name="whats-next/whats-next.html" >}}
 [1]: /developers/metrics/histograms
-[2]: /graphing/metrics/distributions
+[2]: https://app.datadoghq.com/metric/distribution_metrics
+[3]: ) to learn more..
