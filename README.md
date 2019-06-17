@@ -11,7 +11,7 @@ Built with [hugo][1], a static website generation tool.
 
 3. Install gulp: ```npm install -g gulp```
 
-* Download the documentation repo ```git clone https://github.com/DataDog/documentation.git```
+4. Download the documentation repo ```git clone https://github.com/DataDog/documentation.git```
 
 ### Run the server
 
