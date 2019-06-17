@@ -38,13 +38,13 @@ In reality, the global p50 (median) is the median of the combined set: [1,1,1,1,
 
 Like other metric types, such as `gauge` or `histogram`, the  `distribution` metric type has the following 5 aggregations available: `count`, `min`, `max`, `sum`, `avg`. A distribution metric is initially tagged the same way as any other metrics (via custom tags set in code) and are resolved to any host tag based on the host that shipped the metric.
 
-A distribution metric, however, has additional percentile aggregations available (`p50`, `p75`, `p90`, `p95`, `p99`). That is, for a distribution metric with percentile aggregations during a 10 second flush interval, the following aggregations are available: count, sum, min, max, avg, p50, p75, p90, p95, p99.
+A distribution metric, however, has additional percentile aggregations available (`p50`, `p75`, `p90`, `p95`, `p99`). That is, for a distribution metric with percentile aggregations during a 10 second flush interval, the following aggregations are available: `count`, `sum`, `min`, `max`, `avg`, `p50`, `p75`, `p90`, `p95`, and `p99`.
 
 Percentile aggregations can be added in-app at the [Datadog Distribution Metric page][2].
 
 ### Customization of Tagging
 
-This functionality allows you to control tagging for metrics for which host-level granularity is not necessary see [the Distribution Metric page]() to learn more.[2]
+This functionality allows you to control tagging for metrics for which host-level granularity is not necessary see [the Distribution Metric page][3] to learn more.
 
 ## Submission
 
@@ -72,3 +72,4 @@ The above instrumentation calculates the following aggregations: sum, count, ave
 {{< partial name="whats-next/whats-next.html" >}}
 [1]: /developers/metrics/histograms
 [2]: https://app.datadoghq.com/metric/distribution_metrics
+[3]: /graphing/metrics/distributions/#customize-tagging

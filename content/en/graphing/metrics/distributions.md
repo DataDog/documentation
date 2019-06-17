@@ -34,11 +34,11 @@ Like other metric types, such as `gauges` or `histograms`, distributions have th
 
 Add additional percentile aggregations with the [distribution UI][3]: `p50`, `p75`, `p90`, `p95`, and `p99` for a set of tags (up to 10) you’ve elected to apply:
 
-{{< img src="graphing.metrics/distributons/global_metrics_seclection.png" alt="Distribution Metric UI" responsive="true" >}}
+{{< img src="graphing.metrics/distributions/global_metrics_selection.png" alt="Distribution Metric UI" responsive="true" style="width:80%;">}}
 
 After electing to apply percentile aggregations on a distribution metric, these aggregations are automatically available in the graphing UI:
 
-{{< img src="graphing/metrics/distributions/dogweb_latency_bis.png" alt="Distribution metric bis" responsive="true" >}}
+{{< img src="graphing/metrics/distributions/dogweb_latency_bis.png" alt="Distribution metric bis" responsive="true" style="width:80%;">}}
 
 ## Customize Tagging
 
@@ -95,7 +95,7 @@ As you can see, aggregating by multiple sets of tags increases the number of tim
 
 The following gif demonstrates inspecting the aggregations created for a metric, `intake.batch_api_keys_for_org`. You would query `{availability-zone, role}` or `{instance-type, role}`, but not `{availability-zone, instance-type}`.
 
-{{< img src="graphing/metrics/distributions/Distros_Tagging.gif" alt="Distros_Tagging" responsive="true" >}}
+{{< img src="graphing/metrics/distributions/Distros_Tagging.gif" alt="Distros_Tagging" responsive="true" style="width:80%;">}}
 
 ## Further reading
 
