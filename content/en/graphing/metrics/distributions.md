@@ -28,11 +28,7 @@ See the [Developer Tools section][2] for more implementation details.
 
 ## Aggregations
 
-Like other metric types, such as `gauges` or `histograms`, distributions have the following 5 aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as any other metric (via custom tags set in code) and are resolved to any host tag based on the host that shipped the metric.
-
-{{< img src="graphing/metrics/distributions/distribution_metric.png" alt="Distribution metric" responsive="true" >}}
-
-Add additional percentile aggregations with the [distribution UI][3]: `p50`, `p75`, `p90`, `p95`, and `p99` for a set of tags (up to 10) you’ve elected to apply:
+Like other metric types, such as `gauges` or `histograms`, distributions have the following 5 aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as any other metric (via custom tags set in code) and are resolved to any host tag based on the host that shipped the metric. Add additional percentile aggregations with the [distribution UI][3]: `p50`, `p75`, `p90`, `p95`, and `p99` for a set of tags (up to 10) you’ve elected to apply:
 
 {{< img src="graphing.metrics/distributions/global_metrics_selection.png" alt="Distribution Metric UI" responsive="true" style="width:80%;">}}
 
@@ -44,7 +40,9 @@ After electing to apply percentile aggregations on a distribution metric, these 
 
 Distributions provide new functionality that allows you to control the tagging for metrics for which host-level granularity does not make sense. This is designed to provide you with more value within existing budgets, but there is no additional accuracy or performance benefit/penalty incurred here.
 
-To customize tagging, hover over your metric in the table, and click on the pencil icon to edit. In the modal that pops up, select “Custom...”. There is a whitelist of the tags you have defined in code by default. You can remove any of these tags or add any host-level tags back in.
+To customize tagging, hover over your metric in the table, and click on the pencil icon to edit. In the modal that pops up, select *Custom...*. There is a whitelist of the tags you have defined in code by default. You can remove any of these tags or add any host-level tags back in.
+
+{{< img src="graphing/metrics/distributions/distribution_metric.png" alt="Distribution metric" responsive="true" style="width:80%;">}}
 
 ## Case Studies
 Distribution metrics are a new type of metric that allows you to obtain the global distribution values across all hosts. Therefore, metrics that are submitted as distribution metrics create custom metrics the same way other metric types do.
