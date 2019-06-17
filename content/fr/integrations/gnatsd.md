@@ -1,4 +1,8 @@
 ---
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: /assets/service_checks.json
 categories:
   - messaging
   - notification
@@ -45,7 +49,7 @@ Pour installer le check Gnatsd sur votre host :
 
 ### Configuration
 
-Modifiez le fichier `gnatsd.yaml` afin qu'il redirige vers votre serveur et votre port. Définissez ensuite les masters à surveiller.
+Modifiez le fichier `gnatsd.yaml` afin de spécifier votre serveur et votre port. Définissez ensuite les masters à surveiller.
 
 * host : permet de définir le host gnatsd à surveiller.
 * port : permet de définir le port de _surveillance_ utilisé par gnatsd.
@@ -73,7 +77,7 @@ Le check gnatsd est compatible avec toutes les principales plateformes.
 {{< get-metrics-from-git "gnatsd" >}}
 
 
-**Remarque** : si vous utilisez des noms de cluster Nats personnalisés, vos métriques peuvent suivre le format suit :  
+**Remarque** : si vous utilisez des noms de cluster Nats personnalisés, vos métriques possèdent le format suivant :  
 `gnatsd.connz.connections.nom_cluster.in_msgs`
 
 ### Événements
