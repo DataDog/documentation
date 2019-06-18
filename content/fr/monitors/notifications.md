@@ -269,7 +269,7 @@ Après avoir configuré l'intégration Slack, saisissez `@slack` dans le message
 
 #### Mentions « @ » dans Slack depuis l'alerte d'un monitor
 
-Ajoutez `< >` de chaque côté de `@nomutilisateur` comme ci-dessous dans votre modèle de message pour vos monitors afin de de prévenir l'utilisateur défini dans les notifications Slack à l'aide de la syntaxe **@ notify**.
+Ajoutez `< >` de chaque côté de `@nomutilisateur` comme ci-dessous dans votre modèle de message pour vos monitors afin de prévenir l'utilisateur défini dans les notifications Slack à l'aide de la syntaxe **@ notify**.
 
 Par exemple, cette configuration :
 {{< img src="monitors/notifications/notification_template.png" alt="modèle_notification" responsive="true" style="width:50%;" >}}
@@ -335,7 +335,7 @@ Après avoir défini votre monitor, testez la notification de votre monitor pour
 
 2. Cliquez sur **Run test** pour envoyer la notification à n'importe quel handle de notification disponible dans la zone de message.
 
-**Remarques** :
+**Remarques :**
 
 * Les notifications de test créent des événements qui peuvent être recherchés dans le flux d'événements. Ces notifications indiquent également la personne à l'origine du test dans le corps du message. La mention `[TEST]` est ajoutée au titre de la notification de test.
 
