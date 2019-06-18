@@ -21,7 +21,7 @@ Lorsque vous affichez l'onglet Integration, la liste des intégrations que vous 
 
 - Si vous choisissez **Integration Status**, un ou plusieurs checks de service vous sont proposés pour chaque intégration. Consulte la section relative aux [monitors personnalisés][1] pour en savoir plus les différentes options disponibles.
 
-- Si vous choisissez **Integration Metric**, une interface familière vous permet de surveiller une métrique. Vous pouvez ainsi choisir parmi toutes les métriques fournies par cette intégration. Consultez la section relative aux [conditions d'alerte] pour en savoir plus sur les différentes options disponibles.
+- Si vous choisissez **Integration Metric**, une interface familière vous permet de surveiller une métrique. Vous pouvez ainsi choisir parmi toutes les métriques fournies par cette intégration. Consultez la section relative aux [conditions d'alerte][2] pour en savoir plus sur les différentes options disponibles.
 
 ## Pour aller plus loin
 

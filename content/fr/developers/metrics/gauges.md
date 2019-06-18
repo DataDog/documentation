@@ -13,7 +13,7 @@ further_reading:
 
 Les gauges mesurent la valeur d'un élément précis au fil du temps :
 
-## Soumission
+## Envoi
 
 ### Check de l'Agent
 
