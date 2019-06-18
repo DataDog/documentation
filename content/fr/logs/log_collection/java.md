@@ -401,7 +401,7 @@ Configurez l'enregistreur Logback de façon à diffuser les logs directement à 
 </root>
 ```
 
-**Remarques** :
+**Remarques :**
 
 - Remplacez `<CLÉAPI>` par la valeur clé de votre API Datadog
 - `%mdc{cléNonExistante}` est ajouté, car la configuration XML supprime les espaces, comme expliqué [ici][4].

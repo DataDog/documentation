@@ -60,7 +60,7 @@ L'intégration LaunchDarkly n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][4].
+Besoin d'aide ? Contactez [l'assistance][4] Datadog.
 
 ## Pour aller plus loin
 

@@ -28,7 +28,7 @@ Pour recueillir vos métriques kube-state :
 
 Depuis l'[Agent v6][2], l'intégration Kubernetes DNS fonctionne automatiquement avec l'[Autodiscovery][3].
 
-Remarque : ces métriques ne sont actuellement pas disponibles pour Azure Kubernetes Service (AKS). 
+Remarque : ces métriques ne sont pas disponibles pour Azure Kubernetes Service (AKS). 
 
 ## Recueillir des logs de conteneur
 
