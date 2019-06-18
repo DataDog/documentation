@@ -1,6 +1,8 @@
 ---
-title: APM metrics send by the Datadog Agent
-kind: faq
+title: APM metrics sent by the Datadog Agent
+kind: Documentation
+aliases:
+  - /agent/faq/agent-apm-metrics/
 ---
 
 Find below the list of out-of-the-box metrics sent by the Datadog Agent when [APM is enabled][1]:
