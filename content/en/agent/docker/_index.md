@@ -153,11 +153,18 @@ These commands are run on the host.
 ### Metrics
 By default, the Docker Agent collects metrics with the following core checks. To collect metrics from other technologies, see the [Integrations](#integrations) section.
 
-* [Docker][18]
-* [Disk][19]
-* [Network][20]
-* [NTP][21]
-* [System][22]
+| Check       | Metrics       |
+|-------------|---------------|
+| CPU         | [System][18]  |
+| Disk        | [Disk][19]    |
+| Docker      | [Docker][20]  |
+| File Handle | [System][18]  |
+| IO          | [System][18]  |
+| Load        | [System][18]  |
+| Memory      | [System][18]  |
+| Network     | [Network][21] |
+| NTP         | [NTP][22]     |
+| Uptime      | [System][18]  |
 
 ### Events
 The Docker Agent sends events to Datadog when an Agent is started or restarted.
@@ -175,7 +182,7 @@ The Docker integration sends metrics automatically with the Docker Agent. To con
 ### Autodiscovery
 Autodiscovery is enabled for the Docker Agent when using the one-step install by mounting `/var/run/docker.sock`.
 
-To add integrations using Autodiscovery, see [Autodiscovery Integration Templates][23].
+To add integrations using Autodiscovery, see the [Autodiscovery Integration Templates][23] page.
 
 ### Mounting conf.d
 
@@ -224,9 +231,9 @@ The same can be done for the `/checks.d` folder. Any Python files in the `/check
 [15]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
 [16]: /agent/autodiscovery/tag/?tab=containerizedagent
 [17]: /agent/autodiscovery/management/?tab=containerizedagent
-[18]: /integrations/docker_daemon/#metrics
+[18]: /integrations/system/#metrics
 [19]: /integrations/disk/#metrics
-[20]: /integrations/network/#metrics
-[21]: /integrations/ntp/#metrics
-[22]: /integrations/system/#metrics
+[20]: /integrations/docker_daemon/#metrics
+[21]: /integrations/network/#metrics
+[22]: /integrations/ntp/#metrics
 [23]: /agent/autodiscovery/integrations
