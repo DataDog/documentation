@@ -469,6 +469,8 @@ main:
         children:
           - name: "AWS S3"
             url: "logs/archives/s3"
+          - name: "Archive Reloading"
+            url: "logs/archives/reloading/s3"
 
       #- #  name: "FAQ"
       #  url: "logs/faq/"
