@@ -116,17 +116,17 @@ aside.sidenav {
       margin-top:0px;
       padding-bottom:3px;
     }
-    & > ul {
+    & + ul {
       margin-top:5px;
     }
-    ul li > ul {
+    ul li + ul {
       display: none;
     }
-    ul li.open > ul {
+    ul li.open + ul {
       display:block;
     }
-    ul li.open > ul,
-    ul li.active > ul {
+    ul li.open + ul,
+    ul li.active + ul {
       li {
         padding-left:27px;
         a {
@@ -174,23 +174,23 @@ aside.sidenav {
             margin-top:4px;
           }
         }
-
-        // 2nd level
-        ul li {
-          a {
-            margin-left:5px;
-            font-weight:200;
-            line-height:24px;
-          }
-
-          // 3rd level
-          ul li a {
-            margin-left:5px;
-            font-size:15px;
-            line-height:22px;
-          }
-        }
       }
+    }
+
+    ul.sub-menu {
+      // 2nd level
+        a {
+          margin-left:5px;
+          font-weight:200;
+          line-height:24px;
+        }
+
+        // 3rd level
+        ul li a {
+          margin-left:5px;
+          font-size:15px;
+          line-height:22px;
+        }
     }
   }
 }
@@ -200,7 +200,7 @@ aside.sidenav-api {
     overflow-x: hidden;
     overflow-y: auto;
     margin:0;
-    ul li > ul {
+    ul li + ul {
       //display: block;
       list-style-type:none;
       padding-left:20px;
