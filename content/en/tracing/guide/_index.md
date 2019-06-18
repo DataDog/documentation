@@ -7,7 +7,6 @@ disable_toc: true
 
 
 {{< whatsnext desc="General Guides:" >}}
-    {{< nextlink href="tracing/guide/manual_priority" >}}Manually Control Trace Priority{{< /nextlink >}}
     {{< nextlink href="tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm" >}}Configure Apdex score by service{{< /nextlink >}}
     {{< nextlink href="tracing/guide/security" >}}Scrub Sensitive information from your traces{{< /nextlink >}}
     {{< nextlink href="tracing/guide/resource_monitor" >}}Build monitor upon your resource metrics{{< /nextlink >}}

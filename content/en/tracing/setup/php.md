@@ -205,27 +205,16 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 |:-------------------------------------|:------------|:----------------------------------------------------------------------------|
 | `DD_AGENT_HOST`                      | `localhost` | The Agent host name                                                         |
 | `DD_AUTOFINISH_SPANS`                | `false`     | Whether spans are automatically finished when the tracer is flushed         |
-<<<<<<< HEAD
 | `DD_TRACE_CLI_ENABLED`               | `false`     | Enable tracing of PHP scripts from the CLI                                  |
 | `DD_DISTRIBUTED_TRACING`             | `true`      | Whether to enable [distributed tracing][15]                                 |
 | `DD_INTEGRATIONS_DISABLED`           | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                        |
-| `DD_PRIORITY_SAMPLING`               | `true`      | Whether to enable priority sampling.                                        |
-=======
-| `DD_DISTRIBUTED_TRACING`             | `true`      | Whether to enable distributed tracing                                 |
-| `DD_INTEGRATIONS_DISABLED`           | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                        |
->>>>>>> 937e6708e2168fbad0e6562f6b8c6ced81673d17
 | `DD_SAMPLING_RATE`                   | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default)         |
 | `DD_SERVICE_NAME`                    | ``          | The default app name                                                        |
 | `DD_TRACE_AGENT_PORT`                | `8126`      | The Agent port number                                                       |
-<<<<<<< HEAD
 | `DD_TRACE_AGENT_TIMEOUT`             | `500`       | Maximum time the Agent is allowed to take (in milliseconds)                 |
 | `DD_TRACE_AGENT_CONNECT_TIMEOUT`     | `100`       | Maximum time the allowed for Agent connection setup (in milliseconds)       |
 | `DD_TRACE_ANALYTICS_ENABLED`         | `false`     | Flag to enable trace analytics for relevant spans in web integrations       |
 | `DD_TRACE_DEBUG`                     | `false`     | Enable [debug mode][16] for the tracer                                      |
-=======
-| `DD_TRACE_APP_NAME`                  | ``          | The default app name                                                        |
-| `DD_TRACE_DEBUG`                     | `false`     | Enable [debug mode][14] for the tracer                                      |
->>>>>>> 937e6708e2168fbad0e6562f6b8c6ced81673d17
 | `DD_TRACE_ENABLED`                   | `true`      | Enable the tracer globally                                                  |
 | `DD_TRACE_GLOBAL_TAGS`               | ``          | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`                |
 | `DD_<INTEGRATION>_ANALYTICS_ENABLED` | `false`     | Flag to enable trace analytics for relevant spans in a specific integration |
