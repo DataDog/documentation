@@ -127,14 +127,14 @@ aside.sidenav {
     }
     ul li.open + ul,
     ul li.active + ul {
-      li {
-        padding-left:27px;
-        a {
-          padding:0;
-          padding-bottom: 0px;
-          margin-top:0px;
-        }
-      }
+      // li {
+      //   padding-left:27px;
+      //   a {
+      //     padding:0;
+      //     padding-bottom: 0px;
+      //     margin-top:0px;
+      //   }
+      // }
     }
     ul {
       li {
@@ -176,8 +176,15 @@ aside.sidenav {
         }
       }
     }
-
     ul.sub-menu {
+      li {
+        padding-left:27px;
+        a {
+          padding:0;
+          padding-bottom: 0px;
+          margin-top:0px;
+        }
+      }
       // 2nd level
         a {
           margin-left:5px;
@@ -186,10 +193,16 @@ aside.sidenav {
         }
 
         // 3rd level
-        ul li a {
-          margin-left:5px;
-          font-size:15px;
-          line-height:22px;
+        ul.sub-menu {
+          li {
+            padding-left:52px;
+            a {
+                margin-left:5px;
+                font-size:15px;
+                line-height:22px;
+              
+            }
+          }
         }
     }
   }
