@@ -71,19 +71,19 @@ Beta integrations are disabled by default but can be enabled individually.
 
 `dd-java-agent` includes support for automatically tracing the following web frameworks.
 
-| Server                       | Versions   | Support Type    | Instrumentation Names (used for configuration)   |
-|------------------------------|------------|-----------------|--------------------------------------------------|
-| Akka-Http Server             | 10.0+      | Fully Supported | `akka-http`, `akka-http-server`                  |
-| Java Servlet Compatible      | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`              |
-| Jax-RS Annotations           | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`          |
-| Jetty (non-Servlet)          | 8+         | [Beta][7]  | `jetty`, `jetty-8`                               |
-| Netty Http Server and Client | 4.0+       | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`                |
-| Play                         | 2.4-2.6    | Fully Supported | `play`                                           |
-| Ratpack                      | 1.4+       | [Beta][7]  | `ratpack`                                        |
-| Spark Java                   | 2.3+       | [Beta][7]  | `sparkjava` (requires `jetty`)                   |
-| Spring Web (MVC)             | 4.0+       | Fully Supported | `spring-web`                                     |
-| Spring WebFlux               | 5.0+       | Fully Supported | `spring-webflux`                                 |
-| Vert.x-Web                   | 4.1.0+     | Fully Supported | (requires `netty`)                               |
+| Server                       | Versions   | Support Type    | Instrumentation Names (used for configuration) |
+|------------------------------|------------|-----------------|------------------------------------------------|
+| Akka-Http Server             | 10.0+      | Fully Supported | `akka-http`, `akka-http-server`                |
+| Java Servlet Compatible      | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`            |
+| Jax-RS Annotations           | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`        |
+| Jetty (non-Servlet)          | 8+         | [Beta][7]       | `jetty`, `jetty-8`                             |
+| Netty Http Server and Client | 4.0+       | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
+| Play                         | 2.4-2.6    | Fully Supported | `play`                                         |
+| Ratpack                      | 1.4+       | [Beta][7]       | `ratpack`                                      |
+| Spark Java                   | 2.3+       | [Beta][7]       | `sparkjava` (requires `jetty`)                 |
+| Spring Web (MVC)             | 4.0+       | Fully Supported | `spring-web`                                   |
+| Spring WebFlux               | 5.0+       | Fully Supported | `spring-webflux`                               |
+| Vert.x-Web                   | 4.1.0+     | Fully Supported | (requires `netty`)                             |
 
 **Web Framework tracing provides:** timing HTTP request to response, tags for the HTTP request (status code, method, etc), error and stacktrace capturing, linking work created within a web request and Distributed Tracing.
 
@@ -119,7 +119,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 `dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
 
 | Database                | Versions | Support Type    | Instrumentation Names (used for configuration)                                           |
-|---------------          |----------|-----------------|------------------------------------------------------------------------------------------|
+|-------------------------|----------|-----------------|------------------------------------------------------------------------------------------|
 | Couchbase               | 2.0+     | Fully Supported | `couchbase`                                                                              |
 | Cassandra               | 3.X      | Fully Supported | `cassandra`                                                                              |
 | Elasticsearch Transport | 2.0+     | Fully Supported | `elasticsearch`, `elasticsearch-transport`, `elasticsearch-transport-{2,5,6}` (pick one) |
@@ -200,7 +200,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.jmxfetch.metrics-configs`          | `DD_JMXFETCH_METRICS_CONFIGS`          | `null`               | (Example: `/file/loction1,/file/location2`) Additional metrics configuration file for JMX metrics collection.                                                                                                           |
 | `dd.jmxfetch.check-period`             | `DD_JMXFETCH_CHECK_PERIOD`             | `1500`               | How often to send JMX metrics (in ms).                                                                                                                                                                                  |
 | `dd.jmxfetch.refresh-beans-period`     | `DD_JMXFETCH_REFRESH_BEANS_PERIOD`     | `600`                | How often to refresh list of avalable JMX beans (in seconds).                                                                                                                                                           |
-| `dd.jmxfetch.statsd.host`              | `DD_JMXFETCH_STATSD_HOST`              | same as `agent.host` | Statsd host to send JMX metrics to.                                                                                                                                                                                     |
+| `dd.jmxfetch.statsd.host`              | `DD_JMXFETCH_STATSD_HOST`              | same as `agent.host` | StatsD host to send JMX metrics to. If you are using a Unix domain socket, prefix the path with `unix://`.                                                                                                              |
 | `dd.jmxfetch.statsd.port`              | `DD_JMXFETCH_STATSD_PORT`              | 8125                 | Statsd port to send JMX metrics to.                                                                                                                                                                                     |
 | `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                | Enabled automatic MDC key injection for Datadog trace and span ids. See [Advanced Usage][4] for details                                                                                                                 |
 [1]: /tracing/setup/docker
