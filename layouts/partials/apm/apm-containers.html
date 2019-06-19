@@ -1,0 +1,27 @@
+{{ $dot := . }}
+<div class="apm-containers">
+    <div class="container cards-dd">
+        <div class="card-deck">
+            <a class="card" href="/agent/docker/apm/?tab=java">
+                <div class="card-body text-center pb-4 pt-4">
+                    {{ partial "img.html" (dict "root" . "src" "integrations_logos/docker.png" "class" "img-fluid" "alt" "Docker" "width" "400") }}
+                </div>
+            </a>
+            <a class="card" href="/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing">
+                <div class="card-body text-center pb-4 pt-4">
+                    {{ partial "img.html" (dict "root" . "src" "integrations_logos/kubernetes.png" "class" "img-fluid" "alt" "Kubernetes" "width" "400") }}
+                </div>
+            </a>
+            <a class="card" href="/integrations/amazon_ecs/?tab=python#trace-collection">
+                <div class="card-body text-center pb-4 pt-4">
+                    {{ partial "img.html" (dict "root" . "src" "integrations_logos/amazon_ecs.png" "class" "img-fluid" "alt" "Amazon ECS" "width" "400") }}
+                </div>
+            </a>
+            <a class="card" href="/integrations/ecs_fargate/#trace-collection">
+                <div class="card-body text-center pb-4 pt-4">
+                    {{ partial "img.html" (dict "root" . "src" "integrations_logos/ecs_fargate.png" "class" "img-fluid" "alt" "ECS Fargate" "width" "400") }}
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

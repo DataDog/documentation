@@ -96,7 +96,7 @@ Par exemple, si vous envoyez une métrique avec le tag `dot.key.test:five` et qu
 
 ## Variables conditionnelles
 
-Les variables conditionnelles permettent l'[envoi de différents textes à différents contacts](#toto) en fonction de l'état du monitor et des détails de son déclenchement. Ces variables conditionnelles peuvent être utilisées dans le sujet ou dans le corps de la notification défini dans la section 3 du monitor.
+Les variables conditionnelles permettent l'[envoi de différents textes à différents contacts](#notifications) en fonction de l'état du monitor et des détails de son déclenchement. Ces variables conditionnelles peuvent être utilisées dans le sujet ou dans le corps de la notification défini dans la section 3 du monitor.
 
 N'oubliez pas que lorsque vous utilisez des tags conditionnels, vous devez inclure une paire d'ouverture (par exemple : `{{#is_alert}}`) et de fermeture (par exemple : `{{/is_alert}}`) avec le texte souhaité et la **mention « @ ** entre les deux paires.
 
@@ -269,7 +269,7 @@ Après avoir configuré l'intégration Slack, saisissez `@slack` dans le message
 
 #### Mentions « @ » dans Slack depuis l'alerte d'un monitor
 
-Ajoutez `< >` de chaque côté de `@nomutilisateur` comme ci-dessous dans votre modèle de message pour vos monitors afin de de prévenir l'utilisateur défini dans les notifications Slack à l'aide de la syntaxe **@ notify**.
+Ajoutez `< >` de chaque côté de `@nomutilisateur` comme ci-dessous dans votre modèle de message pour vos monitors afin de prévenir l'utilisateur défini dans les notifications Slack à l'aide de la syntaxe **@ notify**.
 
 Par exemple, cette configuration :
 {{< img src="monitors/notifications/notification_template.png" alt="modèle_notification" responsive="true" style="width:50%;" >}}
@@ -335,7 +335,7 @@ Après avoir défini votre monitor, testez la notification de votre monitor pour
 
 2. Cliquez sur **Run test** pour envoyer la notification à n'importe quel handle de notification disponible dans la zone de message.
 
-**Remarques** :
+**Remarques :**
 
 * Les notifications de test créent des événements qui peuvent être recherchés dans le flux d'événements. Ces notifications indiquent également la personne à l'origine du test dans le corps du message. La mention `[TEST]` est ajoutée au titre de la notification de test.
 

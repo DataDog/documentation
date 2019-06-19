@@ -5,6 +5,7 @@ aliases:
   - /basic_agent_usage/
   - /guides/
   - /faq/
+  - /docs/
 disable_toc: true
 ---
 
