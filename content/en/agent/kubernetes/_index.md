@@ -68,7 +68,7 @@ For details on the usage of ConfigMaps in Kubernetes, consult [Datadog's Kuberne
 [1]: /agent/kubernetes/legacy
 [2]: /agent/kubernetes/daemonset_setup
 [3]: /agent/kubernetes/helm
-[4]: https://helm.
+[4]: https://helm.sh
 [5]: /agent/kubernetes/host_setup
 [6]: /agent/kubernetes/cluster
 [7]: /agent/kubernetes/event_collection#leader-election
