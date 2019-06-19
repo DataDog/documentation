@@ -154,8 +154,8 @@ main:
     pre: "nav_graphing"
     children:
       # GRAPHING - Subnav start
-      - name: "Getting started with graphs"
-        url: "graphing/getting_started/"
+      - name: "Using graphs"
+        url: "graphing/using_graphs/"
       # GRAPHING - dashboards
       - name: "Dashboards"
         url: "graphing/dashboards/"
