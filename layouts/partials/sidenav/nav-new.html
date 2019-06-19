@@ -1,26 +1,25 @@
 {{ $dot := . }}
 {{ $ctx := . }}
 {{ $menu := .Site.Menus.main }}
-
 <ul class="list-unstyled">
     {{ $currentPage := . }}
     {{ range .Site.Menus.main }}
         {{ if .HasChildren }}
             <li class="js-subnav-toggle {{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
-                <a href="{{ .URL }}">
+                <a href="{{ .URL | absLangURL }}" data-path="{{ .URL | relLangURL }}">
                     {{ if .Pre }}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21" "disable_lazy" "true") -}}{{ end }} <span>{{ .Name }}</span>
                 </a>
                 <ul class="list-unstyled sub-menu">
                     {{ range .Children }}
                         <li class="js-subnav-toggle {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
-                            <a href="{{ .URL }}">
+                            <a href="{{ .URL | absLangURL }}" data-path="{{ .URL | relLangURL }}">
                                 {{ if .Pre }}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21" "disable_lazy" "true") -}}{{ end }} <span>{{ .Name }}</span>
                             </a>
                         {{ if .HasChildren }}
                             <ul class="list-unstyled sub-menu">
                             {{ range .Children }}
                                 <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
-                                    <a href="{{ .URL }}">
+                                    <a href="{{ .URL | absLangURL }}" data-path="{{ .URL | relLangURL }}">
                                         {{ if .Pre }}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21" "disable_lazy" "true") -}}{{ end }} <span>{{ .Name }}</span>
                                     </a>
                                 </li>
@@ -33,7 +32,7 @@
             </li>
         {{ else }}
             <li>
-                <a href="{{ .URL }}" data-path="{{ .URL | relLangURL }}">
+                <a href="{{ .URL | absLangURL }}" data-path="{{ .URL | relLangURL }}">
                     {{ if .Pre }}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21" "disable_lazy" "true") -}}{{ end }} <span>{{ .Name }}</span>
                 </a>
             </li>

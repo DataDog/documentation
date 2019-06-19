@@ -650,37 +650,176 @@ $(document).ready(function () {
     $(".sidenav-nav a[href^='#']").click(function(){
         moveToAnchor($(this).attr('href').substr(1), true);
     });
-
-
-// New sidebar js 
-
-// TODO: move to it's own JS file along with the async loading stuff. Make sure event stopping doesn't mess with loading
-// TODO: conver to vanilla JS binding to each js-subnav-toggle 
-// TODO: onclick run async stuff and update the nav. Or update when URL changes?
-    // js-subnav-toggle is set so dont have to check this
-    // (function($) {
-    //     $.fn.isAfter = function(sel){
-    //         return this.prevAll().filter(sel).length !== 0;
-    //     };
-
-    //     $.fn.isBefore= function(sel){
-    //         return this.nextAll().filter(sel).length !== 0;
-    //     };
-    // })(jQuery);
-
-    // Put js- class in li's which can open and bind to those only.
-
-    $('.js-subnav-toggle a').on('click', function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        // var isAfter = $('ul').isAfter(this);
-        // console.log('ul is after '+ isAfter);
-        // if(isAfter){
-            var ul = $(this).next('ul')
-            console.log(ul);
-            $(this).closest('li').addClass('open');
-            $(this).addClass('active');
-        // }
-    });
-
 });
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', '{{ .Site.Params.ga }}');
+
+window.onload = function(){
+    console.log('loaded');
+    // TODO: clicks may happen on span or li. Bind to LI
+    // var elts = document.getElementsByTagName('a');
+    var elts = document.querySelectorAll('.sidenav-nav li');
+    var show = function(event) {
+        event.stopPropagation();
+        var newUrl;
+        // If what is clicked is not the actual li tag, ie the img icon span
+        if (event.target !== this){
+        
+            // Get the targets parent li
+            var parentli = event.target.closest('li');
+
+            // Get the a
+            var a = parentli.querySelector('a');
+            newUrl = a.href;
+
+        }
+
+
+        // TODO: How to fall back to normal behavior?
+        // if (event.target.tagName !== "A")
+        //     return;
+
+        // History API needed to make sure back and forward still work
+        if (history === null)
+            return;
+
+        // External links should instead open in a new tab
+
+        newUrl = event.target.closest('li').querySelector('a').href;
+
+        var domain = window.location.origin;
+        if (typeof domain !== "string" || newUrl.search(domain) !== 0) {
+            event.preventDefault();
+            window.open(newUrl, "_blank");
+        } else {
+            event.preventDefault();
+            loadPage(newUrl);
+            updateSidebar(event);
+            history.pushState(null /*stateObj*/, "" /*title*/, newUrl);
+        }
+    }
+    for (var i = elts.length - 1; i >= 0; --i) {
+        elts[i].onclick = show;
+    }
+}
+function updateSidebar(event){
+
+    // Remove existing active class from a tag
+    var activeA = document.querySelector('.open > .active');
+    if(activeA){
+        activeA.classList.remove('active'); 
+    }
+    
+    var path = window.location.pathname;
+
+    // var matchingA = document.querySelector('[data-path="'+path+'"]');
+
+    var isLi = ( event.target.nodeName === "LI" ) ? true : false ;
+
+    if(isLi){
+        event.target.querySelector('a').classList.add('active');
+        event.target.classList.add('open');
+    }else{
+        event.target.closest('li').querySelector('a').classList.add('active');
+        event.target.closest('li').classList.add('open');
+    }
+};
+
+function loadPage(newUrl) {
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = function() {
+
+        if (httpRequest.readyState !== XMLHttpRequest.DONE){
+            return;
+        }
+
+        var newDocument = httpRequest.responseXML;
+        if (newDocument === null){
+            return;
+        }
+
+        var newContent = httpRequest.responseXML.getElementById("mainContent");
+        //var newContent = httpRequest.responseText;
+        if (newContent === null){
+            return;
+        }
+
+        //console.log('page size');
+        //console.log(httpRequest.getResponseHeader("Content-Type"));
+        //console.log(httpRequest.getResponseHeader("Content-Length"));
+
+        document.title = newDocument.title;
+        
+        var meta = {
+            "itemprop": [
+                "name",
+                "description"
+            ],
+            "name": [
+                "twitter\\:site",
+                "twitter\\:title",
+                "twitter\\:description",
+                "twitter\\:creator",
+            ],
+            "property": [
+                "og\\:title",
+                "og\\:type",
+                "og\\:url",
+                "og\\:image",
+                "og\\:description",
+                "og\\:site_name",
+                "article\\:author"
+            ]
+        };
+
+        var keys = Object.keys(meta);
+        for(i=0;i<keys.length;i++){
+            var key = keys[i];
+            for(k=0;k<meta[key].length;k++){
+                var selectorPart = meta[key][k];
+                try {
+                    if( newDocument.head.querySelector('['+key+'='+selectorPart+']') ){
+                        var content = newDocument.head.querySelector('['+key+'='+selectorPart+'][content]').content;
+                        document.head.querySelector('['+key+'='+selectorPart+'][content]').content = content;
+                    }
+                }catch(e){
+                    console.log(e);
+                }
+            }
+        }
+
+        console.time('Replacing page content');
+
+        var start = window.performance.now();
+        var contentElement = document.getElementById("mainContent");
+        contentElement.replaceWith(newContent);
+        console.timeEnd('Replacing page content');
+        var end = window.performance.now();
+        var time = end - start;
+
+        var pathName = new URL(newUrl).pathname;
+
+        console.log('click path '+pathName);
+        DD_LOGS.logger.log('html parsed page content inserted',{"timeEnd": time, "pathName": pathName},'info');
+        console.log({"timeEnd": time});
+        console.log('New page loaded: ' + newDocument.title);
+
+        // Gtag virtual pageview
+        gtag('config', '{{ .Site.Params.ga }}', {'page_path': pathName});
+
+        // Marketo
+        Munchkin.munchkinFunction('clickLink', { href: newUrl});
+
+    }; // end onreadystatechange
+
+    httpRequest.responseType = "document";
+    httpRequest.open("GET", newUrl);
+    //httpRequest.open("GET", newUrl+"api_tests.txt");
+    //httpRequest.overrideMimeType("text/plain; charset=x-user-defined");
+    //httpRequest.responseType = "text";
+    httpRequest.send();
+};
