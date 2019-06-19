@@ -17,7 +17,7 @@ further_reading:
 Datadog community integrations are stored in the [Integrations-extra][1] Github repository. Since they are non-officially supported by Datadog, they are not packaged with the Datadog Agent and needs to be build locally in order to be included in the Agent. Find below how to install them with your Datadog Agent running as a binary on a host or as a container.
 
 {{< tabs >}}
-{{% tab "Agent 6.8+" %}}
+{{% tab "Agent above v6.8" %}}
 
 To install the `<INTEGRATION_NAME>` check on your host:
 
@@ -36,7 +36,7 @@ To install the `<INTEGRATION_NAME>` check on your host:
 
 The best way to use an integration from integrations-extra with the Docker Agent is to build the Agent with this integration installed. Use the following Dockerfile to build an updated version of the Agent that includes the `<INTEGRATION_NAME>` integration from integrations-extras.
 
-```dockerfile
+```
 FROM python:2.7 AS wheel_builder
 WORKDIR /wheels
 RUN pip install "datadog-checks-dev[cli]"
@@ -53,7 +53,7 @@ The use this new Agent image in combination with [Autodiscovery][1] in order to 
 
 [1]: agent/autodiscovery
 {{% /tab %}}
-{{% tab "Agent 6.8-" %}}
+{{% tab "Agent prior to 6.8" %}}
 
 To install the `<INTEGRATION_NAME>` check on your host:
 
