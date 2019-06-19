@@ -1,12 +1,21 @@
+#!/usr/bin/env python2
+
 import datadog
 from datadog import initialize, api
 import time
-import os
 import glob
+import platform
 import csv
+from optparse import OptionParser
 
-def get_csv_metrics(env):
-  csv_files = glob.glob(env + 'integration/*/*metadata.csv')
+tempdir = (
+   "/tmp"
+   if platform.system() == "Darwin"
+   else tempfile.gettempdir()
+)
+
+def get_csv_metrics(tempdir):
+  csv_files = glob.glob(tempdir + "/extracted/**/*/*metadata.csv")
 
   csv_metrics = {}
   for csv_file in csv_files:
@@ -18,14 +27,14 @@ def get_csv_metrics(env):
             csv_metrics[row[0]] = 1
   return csv_metrics
 
-def get_dd_metrics(csv_metrics):
+def get_dd_metrics(csv_metrics, keys):
   cloud = ('aws','azure', 'gcp') # tuple
   ignore = ['isatap', '.p90', '.p95', '.p99', 'gcp.logging.user.', 'gcp.custom.']
 
   # Datadog Demo account
   options = {
-      'api_key': 'x', # dd-demo-api-key
-      'app_key': 'x' # dd-demo-app-key
+      'api_key': keys.demoapikey,
+      'app_key': keys.demoappkey
   }
   initialize(**options)
 
@@ -55,19 +64,26 @@ def get_dd_metrics(csv_metrics):
   print(len(metrics_send))
   return metrics_send
 
-def post_dd_metrics(metrics):
+def post_dd_metrics(metrics, keys):
 # Post to Corpsite Datadog account
   options = {
-      'api_key': 'x', # dd-corp-api-key
-      'app_key': 'x' # dd-corp-app-key
+      'api_key': keys.corpapikey,
+      'app_key': keys.corpappkey
   }
   datadog.initialize(**options)
   print(datadog.api.Metric.send(metrics))
 
 if __name__ == '__main__':
   print('Getting csv metrics...')
-  csv_metrics = get_csv_metrics(os.environ['DOGWEB'])
+  csv_metrics = get_csv_metrics(tempdir)
+  print('Parsing keys')
+  parser = OptionParser(usage="usage: %prog [options]")
+  parser.add_option("-k", "--demoapikey", help="corp api key", default=None)
+  parser.add_option("-p", "--demoappkey", help="corp app key", default=None)
+  parser.add_option("-a", "--corpapikey", help="demo api key", default=None)
+  parser.add_option("-b", "--corpappkey", help="demo app key", default=None)
+  options, args = parser.parse_args()
   print('Getting dd metrics...')
-  metrics = get_dd_metrics(csv_metrics)
+  metrics = get_dd_metrics(csv_metrics, options)
   print('Posting dd metrics...')
-  post_dd_metrics(metrics)
+  post_dd_metrics(metrics, options)

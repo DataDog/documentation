@@ -38,8 +38,8 @@ build_preview:
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - version_static_assets
-    #- sync_integration_descriptions
-    - sync_integration_descriptions_cached
+    - sync_integration_descriptions
+    #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
     - build_hugo_site_new
@@ -52,7 +52,7 @@ build_preview:
     #- remove_static_from_repo
     #- create_artifact
     #- create_artifact_untracked
-    #- ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') $(get_secret 'dd-corp-api-key') $(get_secret 'dd-corp-app-key')
+    - ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd_app_key')
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
