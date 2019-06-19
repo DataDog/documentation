@@ -18,7 +18,7 @@ Graphs are the window to your monitored systems. You see graphs throughout Datad
 ## Overview
 
 {{< whatsnext desc="This section includes the following topics:" >}}
-    {{< nextlink href="/graphing/getting_started/" >}}<u>Getting started with graphs</u>: Whether using metrics, monitors, dashboards, or notebooks, all graphs have basic functionality in common - start here for best practices for setting up graphs.{{< /nextlink >}}
+    {{< nextlink href="/graphing/using_graphs/" >}}<u>Using graphs</u>: Whether using metrics, monitors, dashboards, or notebooks, all graphs have basic functionality in common - start here for best practices for setting up graphs.{{< /nextlink >}}
     {{< nextlink href="/graphing/dashboards" >}}<u>Dashboards</u>: A dashboard is Datadogs tool that visually tracks, analyzes, and displays key performance metrics to monitor the health of your infrastructure. Learn more about using Screenboards, Timeboards, optimizing those dashboards with template variables, and sharing your graphs to people outside of your Datadog account.{{< /nextlink >}}
     {{< nextlink href="/graphing/metrics/" >}}<u>Metrics</u>: When you connect an integration to Datadog, the integration sends metrics about your system back to Datadog. Once Datadog receives these metrics, you can build graphs to explore the data. The Metrics Explorerlets you search for specific metrics and then create graphs based on your search parameters, and the Metrics Summary shows all of the metrics coming into Datadog.{{< /nextlink >}}
     {{< nextlink href="/graphing/notebooks" >}}<u>Notebooks</u>: Notebooks combine graphs and text in a linear, cell-based format. They’re designed to help you explore and share stories with your data.{{< /nextlink >}}
