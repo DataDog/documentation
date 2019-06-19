@@ -52,6 +52,13 @@ Le servlet de performance se déploie de la même manière que tout autre servle
 
 **Remarque** : depuis la version 6.1, vous devez activer la sécurité des applications pour faire fonctionner PerfServlet.
 
+### Modifier l'ensemble de statistiques actuellement surveillé
+Par défaut, votre serveur d'application est uniquement configuré pour la surveillance « Basic ». Pour bénéficier d'une visibilité totale sur votre JVM, vos connexions JDBC et vos connexions servlet, remplacez la valeur de l'ensemble de statistiques actuellement surveillé pour votre serveur d'application « Basic » par « All ».
+
+Depuis la console d'administration de WebSphere, vous pouvez accéder à ce réglage depuis `Application servers > <VOTRE_SERVEUR_APP> > Performance Monitoring Infrastructure (PMI)`.
+
+Une fois ce changement effectué, cliquez sur « Apply » pour enregistre la configuration et redémarrer votre serveur d'application. Les métriques JDBC, JVM et servlet supplémentaires apparaissent quelques instants plus tard dans Datadog.
+
 ### Configuration
 
 1. Modifiez le fichier `ibm_was.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance IBM WAS. Consultez le [fichier d'exemple ibm_was.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
