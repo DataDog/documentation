@@ -15,7 +15,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-RBAC is only available for Log Management. This feature is in private beta. Ask your sales representative or customer success manager to have it enabled.
+RBAC is only available for Log Management. Ask your sales representative or customer success manager to enable this feature.
 </div>
 
 ## Roles
