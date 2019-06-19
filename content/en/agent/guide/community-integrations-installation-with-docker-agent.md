@@ -14,7 +14,7 @@ further_reading:
   text: "Agent commands"
 ---
 
-Datadog community integrations are stored in the [Integrations-extra][1] Github repository. Since they are non-officially supported by Datadog, they are not packaged with the Datadog Agent and needs to be build locally in order to be included in the Agent. Find below how to install them with your Datadog Agent running as a binary on a host or as a container.
+Datadog community integrations are stored in the [Integrations-extra][1] Github repository. Since they are non-officially supported by Datadog, they are not packaged with the Datadog Agent and needs to be built locally in order to be included in the Agent. Find below how to install them with your Datadog Agent running as a binary on a host or as a container.
 
 {{< tabs >}}
 {{% tab "Agent above v6.8" %}}
@@ -64,13 +64,14 @@ To install the `<INTEGRATION_NAME>` check on your host:
 5. Rename this file into `conf.yaml`.
 6. Create a new `<INTEGRATION_NAME>.d/` folder in your [Agent configuration directory][3].
 7. Place the `conf.yaml` file in the directory created in step 6.
-8. Configure your integration like any other packaged integration.
-9. [Restart the Agent][4].
+8. Configure your integration like [any other packaged integration][4].
+9. [Restart the Agent][5].
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/integrations-extras
 [3]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[4]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[4]: /getting_started/integrations
+[5]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
