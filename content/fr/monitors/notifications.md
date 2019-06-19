@@ -96,7 +96,7 @@ Par exemple, si vous envoyez une métrique avec le tag `dot.key.test:five` et qu
 
 ## Variables conditionnelles
 
-Les variables conditionnelles permettent l'[envoi de différents textes à différents contacts](#toto) en fonction de l'état du monitor et des détails de son déclenchement. Ces variables conditionnelles peuvent être utilisées dans le sujet ou dans le corps de la notification défini dans la section 3 du monitor.
+Les variables conditionnelles permettent l'[envoi de différents textes à différents contacts](#notifications) en fonction de l'état du monitor et des détails de son déclenchement. Ces variables conditionnelles peuvent être utilisées dans le sujet ou dans le corps de la notification défini dans la section 3 du monitor.
 
 N'oubliez pas que lorsque vous utilisez des tags conditionnels, vous devez inclure une paire d'ouverture (par exemple : `{{#is_alert}}`) et de fermeture (par exemple : `{{/is_alert}}`) avec le texte souhaité et la **mention « @ ** entre les deux paires.
 

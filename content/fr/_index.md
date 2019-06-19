@@ -5,6 +5,7 @@ aliases:
   - /fr/basic_agent_usage/
   - /fr/guides/
   - /fr/faq/
+  - /fr/docs/
 disable_toc: true
 ---
 # Bienvenue dans la documentation de Datadog !

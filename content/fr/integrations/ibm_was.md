@@ -52,6 +52,13 @@ Le servlet de performance se déploie de la même manière que tout autre servle
 
 **Remarque** : depuis la version 6.1, vous devez activer la sécurité des applications pour faire fonctionner PerfServlet.
 
+### Modifier l'ensemble de statistiques actuellement surveillé
+Par défaut, votre serveur d'application est uniquement configuré pour la surveillance « Basic ». Pour bénéficier d'une visibilité totale sur votre JVM, vos connexions JDBC et vos connexions servlet, remplacez la valeur de l'ensemble de statistiques actuellement surveillé pour votre serveur d'application « Basic » par « All ».
+
+Depuis la console d'administration de WebSphere, vous pouvez accéder à ce réglage depuis `Application servers > <VOTRE_SERVEUR_APP> > Performance Monitoring Infrastructure (PMI)`.
+
+Une fois ce changement effectué, cliquez sur « Apply » pour enregistre la configuration et redémarrer votre serveur d'application. Les métriques JDBC, JVM et servlet supplémentaires apparaissent quelques instants plus tard dans Datadog.
+
 ### Configuration
 
 1. Modifiez le fichier `ibm_was.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance IBM WAS. Consultez le [fichier d'exemple ibm_was.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
@@ -96,15 +103,14 @@ IBM WAS n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
+
+
+{{< get-dependencies >}}
 [1]: https://www.ibm.com/cloud/websphere-application-platform
 [2]: https://github.com/DataDog/integrations-core/blob/master/ibm_was/datadog_checks/ibm_was/data/conf.yaml.example
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/ibm_was/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}
+[6]: https://docs.datadoghq.com/fr/help

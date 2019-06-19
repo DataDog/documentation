@@ -5,6 +5,7 @@ aliases:
   - /ja/basic_agent_usage/
   - /ja/guides/
   - /ja/faq/
+  - /ja/docs/
 disable_toc: true
 ---
 # Datadog Docsへようこそ！
@@ -21,7 +22,7 @@ Datadog なら、すべてのメトリクス、イベント、サービス状態
 
 ## すべてを収集
 
-コードを書かなくても、既存の豊富なデータを収集できます。すべてのサーバー、インスタンス、VM、ノード、[コンテナ実行ホスト][2]に [Datadog エージェントをインストール][1]し、すぐに使える 280 種類以上の[インテグレーション][3]から選んで有効化します。インストール後は、Datadog のバックエンドにメトリクスが流れ込みます。
+コードを書かなくても、既存の豊富なデータを収集できます。すべてのサーバー、インスタンス、VM、ノード、[コンテナ実行ホスト][1]に [Datadog エージェントをインストール][2]し、すぐに使える 280 種類以上の[インテグレーション][3]から選んで有効化します。インストール後は、Datadog のバックエンドにメトリクスが流れ込みます。
 
 簡単なコーディングで、カスタムアプリケーション メトリクスを送信できます。[DogStatsD][4] で独自のゲージ、カウンター、タイマー、ヒストグラムを実装したり、[APM][5] を使ってコードパスの実行時間をトレースし、要求から応答までの時間に対する影響を確認したりできます。[クライアントライブラリ][6]が[カスタムメトリクス][7]とトレースデータを Datadog エージェントに送信すると、その後データは Datadog に渡されます。
 
@@ -45,8 +46,8 @@ Datadog なら、すべてのメトリクス、イベント、サービス状態
 
 {{< partial name="support/support.html" >}}
 
-[1]: /ja/agent
-[2]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
+[1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
+[2]: /ja/agent
 [3]: /ja/integrations
 [4]: /ja/developers/dogstatsd
 [5]: /ja/tracing
