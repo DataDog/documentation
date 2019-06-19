@@ -5,7 +5,9 @@ aliases:
     - /monitoring
 ---
 
-{{< whatsnext desc="Choose your type of monitor">}}
+To [create a monitor][1] in Datadog, hover over **Monitors** in the main menu and click **New Monitor** in the sub-menu.
+
+{{< whatsnext desc="Select a monitor type:">}}
     {{< nextlink href="/monitors/monitor_types/anomaly" >}}Anomaly{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/apm" >}}APM{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/composite" >}}Composite{{< /nextlink >}}
@@ -21,3 +23,9 @@ aliases:
     {{< nextlink href="/monitors/monitor_types/process" >}}Process{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/watchdog" >}}Watchdog{{< /nextlink >}}
 {{< /whatsnext >}}
+
+**Note**: You can manage monitors programmatically with the [Datadog API][2] or [community maintained libraries][3].
+
+[1]: https://app.datadoghq.com/monitors#/create
+[2]: /api/#monitors
+[3]: /developers/libraries/#managing-monitors
