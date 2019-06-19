@@ -52,10 +52,8 @@ def get_dd_metrics(csv_metrics):
             'points': 1,
             'tags': ['docs_metric:' + metric, 'docs_cloud:' + docs_tags[0], 'docs_ns:' + docs_tags[1]]
           })
-          if metric.startswith(metrics_start_with):
-            metrics_print.append(metric)
   print(len(metrics_send))
-  return [metrics_send, metrics_print]
+  return metrics_send
 
 def post_dd_metrics(metrics):
 # Post to Corpsite Datadog account
@@ -72,4 +70,4 @@ if __name__ == '__main__':
   print('Getting dd metrics...')
   metrics = get_dd_metrics(csv_metrics)
   print('Posting dd metrics...')
-  post_dd_metrics(metrics[0])
+  post_dd_metrics(metrics)
