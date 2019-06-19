@@ -651,4 +651,36 @@ $(document).ready(function () {
         moveToAnchor($(this).attr('href').substr(1), true);
     });
 
+
+// New sidebar js 
+
+// TODO: move to it's own JS file along with the async loading stuff. Make sure event stopping doesn't mess with loading
+// TODO: conver to vanilla JS binding to each js-subnav-toggle 
+// TODO: onclick run async stuff and update the nav. Or update when URL changes?
+    // js-subnav-toggle is set so dont have to check this
+    // (function($) {
+    //     $.fn.isAfter = function(sel){
+    //         return this.prevAll().filter(sel).length !== 0;
+    //     };
+
+    //     $.fn.isBefore= function(sel){
+    //         return this.nextAll().filter(sel).length !== 0;
+    //     };
+    // })(jQuery);
+
+    // Put js- class in li's which can open and bind to those only.
+
+    $('.js-subnav-toggle a').on('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        // var isAfter = $('ul').isAfter(this);
+        // console.log('ul is after '+ isAfter);
+        // if(isAfter){
+            var ul = $(this).next('ul')
+            console.log(ul);
+            $(this).closest('li').addClass('open');
+            $(this).addClass('active');
+        // }
+    });
+
 });
