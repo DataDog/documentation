@@ -10,7 +10,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Ask your sales representative or customer success manager to have it enabled.
+Ask your sales representative or customer success manager to have this feature enabled.
 </div>
 
 ## Roles
