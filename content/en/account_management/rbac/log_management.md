@@ -10,7 +10,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is in private beta. Ask your sales representative or customer success manager to have it enabled.
+Ask your sales representative or customer success manager to enable this feature.
 </div>
 
 ## Roles
