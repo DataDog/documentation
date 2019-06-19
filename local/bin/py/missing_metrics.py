@@ -1,4 +1,5 @@
 #!/usr/bin/env python2
+import tempfile
 
 import datadog
 from datadog import initialize, api
@@ -14,6 +15,7 @@ tempdir = (
    else tempfile.gettempdir()
 )
 
+
 def get_csv_metrics(tempdir):
   csv_files = glob.glob(tempdir + "/extracted/**/*/*metadata.csv")
 
@@ -26,6 +28,7 @@ def get_csv_metrics(tempdir):
           if row[0] != 'metric_name':
             csv_metrics[row[0]] = 1
   return csv_metrics
+
 
 def get_dd_metrics(csv_metrics, keys):
   cloud = ('aws','azure', 'gcp') # tuple
@@ -64,8 +67,9 @@ def get_dd_metrics(csv_metrics, keys):
   print(len(metrics_send))
   return metrics_send
 
+
 def post_dd_metrics(metrics, keys):
-# Post to Corpsite Datadog account
+  # Post to Corpsite Datadog account
   options = {
       'api_key': keys.corpapikey,
       'app_key': keys.corpappkey
@@ -73,15 +77,16 @@ def post_dd_metrics(metrics, keys):
   datadog.initialize(**options)
   print(datadog.api.Metric.send(metrics))
 
+
 if __name__ == '__main__':
   print('Getting csv metrics...')
   csv_metrics = get_csv_metrics(tempdir)
   print('Parsing keys')
   parser = OptionParser(usage="usage: %prog [options]")
-  parser.add_option("-k", "--demoapikey", help="corp api key", default=None)
-  parser.add_option("-p", "--demoappkey", help="corp app key", default=None)
-  parser.add_option("-a", "--corpapikey", help="demo api key", default=None)
-  parser.add_option("-b", "--corpappkey", help="demo app key", default=None)
+  parser.add_option("-k", "--demoapikey", help="demo api key", default=None)
+  parser.add_option("-p", "--demoappkey", help="demo app key", default=None)
+  parser.add_option("-a", "--corpapikey", help="corp api key", default=None)
+  parser.add_option("-b", "--corpappkey", help="corp app key", default=None)
   options, args = parser.parse_args()
   print('Getting dd metrics...')
   metrics = get_dd_metrics(csv_metrics, options)
