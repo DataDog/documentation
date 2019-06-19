@@ -176,8 +176,8 @@ Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live 
 [4]: https://docs.datadoghq.com/integrations/journald/#pagetitle
 [5]: https://codebeautify.org/yaml-validator
 [6]: /agent/docker/log/?tab=containerinstallation#filter-containers
-[7]: /agent/docker/log/?tab=dockerfile#examples
-[8]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
+[7]: /agent/autodiscovery/integrations/?tab=dockerlabel#configuration
+[8]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
 [9]: /integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [10]: https://app.datadoghq.com/account/settings#api
 [11]: https://app.datadoghq.com/logs/livetail

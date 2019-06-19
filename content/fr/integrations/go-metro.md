@@ -1,4 +1,8 @@
 ---
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - languages
   - log collection
@@ -57,7 +61,7 @@ $ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 
 ### Configuration
 
-Modifiez le fichier ```go-metro.yaml``` dans le répertoire ```conf.d``` de votre Agent. Consultez [l'exemple de fichier go-metro.yaml][2] pour découvrir toutes les options de configuration disponibles. Voici un exemple de fichier qui affiche les durées RTT des connexions TCP pour app.datadoghq.com et 192.168.0.22 :
+Modifiez le fichier ```go-metro.yaml``` dans le répertoire ```conf.d``` de votre Agent. Consultez le [fichier d'exemple go-metro.yaml][2] pour découvrir toutes les options de configuration disponibles. Voici un fichier d'exemple qui affiche les durées RTT des connexions TCP pour app.datadoghq.com et 192.168.0.22 :
 
   ```yaml
     init_config:

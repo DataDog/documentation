@@ -99,22 +99,22 @@ It is possible to disable the instrumentation for a percentage of transactions. 
 
 ## Trace storage
 
-Individual traces are stored for up to 4 months. To determine how long a particular trace will be stored, the Agent makes a sampling decision early in the trace's lifetime. In Datadog backend, sampled traces are retained according to time buckets:
+Individual traces are stored for up to 6 months. To determine how long a particular trace will be stored, the Agent makes a sampling decision early in the trace's lifetime. In Datadog backend, sampled traces are retained according to time buckets:
 
 | Retention bucket       |  % of stream kept |
 | :--------------------- | :---------------- |
 | 6 hours                |              100% |
 | Current day (UTC time) |               25% |
 | 6 days                 |               10% |
-| 4 months               |                1% |
+| 6 months               |                1% |
 
 That is to say, on a given day you would see in the UI:
 
-* **100%** of sampled traces from the last 6 hours
+* **100%** of sampled traces from the last six hours
 * **25%** of those from the previous hours of the current calendar day (starting at `00:00 UTC`)
 * **10%** from the previous six calendar days
 * **1%** of those from the previous six months (starting from the first day of the month six months ago)
-* **0%** of traces older than 4 months
+* **0%** of traces older than six months
 
 For example, at `9:00am UTC Wed, 12/20` you would see:
 

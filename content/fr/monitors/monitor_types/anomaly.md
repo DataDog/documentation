@@ -15,7 +15,7 @@ further_reading:
     tag: Documentation
     text: Consulter le statut de votre monitor
 ---
-La détection d'anomalies est une fonction algorithmique qui vous permet d'identifier un comportement anormal d'une métrique en fonction de ses données historiques, comment les tendances et les variations saisonnières en fonction du jour de la semaine ou de l'heure. Cette fonctionnalité convient aux métriques qui possèdent de fortes tendances et des modèles récurrents qui sont difficiles voire impossibles à surveiller avec des alertes de seuil.
+La détection d'anomalies est une fonction algorithmique qui vous permet d'identifier un comportement anormal d'une métrique en fonction de ses données historiques, comme les tendances et les variations saisonnières en fonction du jour de la semaine ou de l'heure. Cette fonctionnalité convient aux métriques qui possèdent de fortes tendances et des modèles récurrents qui sont difficiles voire impossibles à surveiller avec des alertes de seuil.
 
 Par exemple, la détection d'anomalies peut vous aider à déterminer si votre trafic Web est anormalement bas pour un après-midi en semaine, même si ce même niveau de trafic serait parfaitement normal plus tard dans la soirée. Elle vous permet également d'étudier une métrique mesurant le nombre de connexions à votre site, même si celui-ci est en pleine croissance. Puisque le nombre de visiteurs augmente chaque jour, l'utilisation de seuils ne serait pas pertinente. À l'inverse, la détection d'anomalies peut rapidement vous envoyer une alerte en cas de baisse inattendue, qui pourrait être liée à un dysfonctionnement du système de connexion.
 
@@ -182,7 +182,7 @@ Si le cumul est explicitement défini dans la requête, l'option d'intervalle de
 
 ### Les anomalies liées à une métrique dont la valeur est inférieure à X ne m'intéressent pas. Est-il possible de les ignorer ?
 
-Créez **A**, un monitor d'anomalie envoyant des alertes lorsque les valeurs dépassent les limites, et **B**, un [monitor de métrique][10] distinct avec un seuil d'alerte pour les valeurs supérieures à X. Enfin, créez un [monitor composite][11] avec **A && B**.
+Créez **A**, un monitor d'anomalie envoyant des alertes lorsque les valeurs dépassent les limites, et **B**, un [monitor de métrique][10] distinct avec une alerte de seuil pour les valeurs supérieures à X. Enfin, créez un [monitor composite][11] avec **A && B**.
 
 ### Je ne peux pas enregistrer de monitor lorsqu'un message indique que les critères d'alertes et d'annulation d'alerte font que le monitor peut à la fois déclencher et annuler une alerte. Pourquoi ?
 

@@ -1,12 +1,12 @@
 ---
 title: Rechercher des métriques
 type: apicode
-order: 17.6
+order: 25.6
 external_redirect: /api/#rechercher-des-metriques
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/search`
+`GET /v1/search`
 ##### Exemple de requête
 {{< code-snippets basename="api-metrics-search" >}}
 ##### Exemple de réponse

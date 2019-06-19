@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+    var sidenavHTML = $('.container .sidenav-nav').clone();
+    $('header .sidenav-nav').html(sidenavHTML);
+
     // ie
     document.createElement('picture');
 

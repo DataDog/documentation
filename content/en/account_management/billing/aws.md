@@ -1,6 +1,8 @@
 ---
 title: AWS integration billing
 kind: faq
+aliases:
+- /integrations/faq/i-can-t-filter-out-my-elb-instances-will-i-be-charged-for-them/
 ---
 
 ## Overview
@@ -14,6 +16,8 @@ Other AWS resources (ELB, EBS, RDS, Dynamo, etc.) are not part of monthly billin
 Use the [Datadog-AWS integration tile][1] to control your metric collection. Go to the **Configuration** tab and select an account or add a new one. Each account is controlled under **Optionally limit metrics collection**. Limit metrics by [host tag][2] or per namespace:
 
 {{< img src="account_management/billing/aws01.png" alt="AWS" responsive="true">}}
+
+**Note**: Datadog does not charge for ELB metrics, as they can’t be filtered out.
 
 When adding limits to existing AWS accounts within the integration tile, the previously discovered instances could stay in the [Infrastructure List][3] up to 24 hours. During the transition period, EC2 instances display a status of `???`. This does not count towards your billing.
 

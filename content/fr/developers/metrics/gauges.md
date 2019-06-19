@@ -7,13 +7,13 @@ further_reading:
     text: En savoir plus sur les métriques
   - link: developers/libraries
     tag: Documentation
-    text: Bibliothèques pour l'API et DogStatsD officielles et entretenues par la communauté
+    text: Bibliothèques de client pour l'API et DogStatsD officielles et entretenues par la communauté
 ---
 ## Présentation
 
 Les gauges mesurent la valeur d'un élément précis au fil du temps :
 
-## Soumission
+## Envoi
 
 ### Check de l'Agent
 

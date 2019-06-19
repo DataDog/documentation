@@ -48,7 +48,7 @@ if [ ${RUN_SERVER} == true ]; then
 	# placeholders
 	if [ ${CREATE_I18N_PLACEHOLDERS} == true ]; then
 		echo "creating i18n placeholder pages."
-		placehold_translations.py -c "config.yaml" -f "content/"
+		placehold_translations.py -c "config/_default/languages.yaml"
 	fi
 
 	# hugo
@@ -56,7 +56,8 @@ if [ ${RUN_SERVER} == true ]; then
 	if [ ${RENDER_SITE_TO_DISK} != "false" ]; then
 		args="${args} --renderToDisk"
 	fi
-	hugo server ${args} &
+	# hugo server defaults to --environment development
+	./node_modules/.bin/hugo server ${args} &
 	sleep 5
 
 	if [ ${RUN_GULP} == true ]; then

@@ -1,12 +1,12 @@
 ---
 title: Remove host tags
 type: apicontent
-order: 28.5
+order: 30.5
 external_redirect: /api/#remove-host-tags
 ---
 
 ## Remove host tags
-This endpoint allows you to remove all tags for a single host.
+This endpoint allows you to remove all user-assigned tags for a single host.
 
 ##### ARGUMENTS
 
