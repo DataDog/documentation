@@ -10,7 +10,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Ask your sales representative or customer success manager to have this feature enabled.
+Ask your sales representative or customer success manager to enable this feature.
 </div>
 
 The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them.
