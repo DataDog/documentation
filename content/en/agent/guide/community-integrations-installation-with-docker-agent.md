@@ -1,5 +1,5 @@
 ---
-title: Install a community integration with the Agent
+title: Community integration installation
 kind: guide
 disable_toc: true
 further_reading:
@@ -14,7 +14,7 @@ further_reading:
   text: "Agent commands"
 ---
 
-Datadog community integrations are hosted in the [Integrations-extra][1] Github repository. As non-officially supported by Datadog, they are not packaged with the Datadog Agent and need to be built locally and installed in order to be included in the Agent. Find below how to install one community integration with your Datadog Agent running as a binary on a host or as a container.
+Datadog community integrations are hosted in the [Integrations-extra][1] Github repository. As non-officially supported by Datadog, they are not packaged with the Datadog Agent and need to be built locally and installed in order to be included in the Agent. Find below how to install one community integration with your Datadog Agent running as a binary on a host or as a container prior to use it as a normal Agent Check.
 
 {{< tabs >}}
 {{% tab "Agent above v6.8" %}}
