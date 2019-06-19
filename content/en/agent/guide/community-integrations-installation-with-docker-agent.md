@@ -73,4 +73,9 @@ To install the `<INTEGRATION_NAME>` check on your host:
 [4]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://github.com/DataDog/integrations-extras
