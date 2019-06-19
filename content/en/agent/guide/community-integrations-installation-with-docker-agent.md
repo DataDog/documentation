@@ -14,23 +14,26 @@ further_reading:
   text: "Agent commands"
 ---
 
-Datadog community integrations are stored in the [Integrations-extra][1] Github repository. Since they are non-officially supported by Datadog, they are not packaged with the Datadog Agent and needs to be built locally in order to be included in the Agent. Find below how to install them with your Datadog Agent running as a binary on a host or as a container.
+Datadog community integrations are hosted in the [Integrations-extra][1] Github repository. As non-officially supported by Datadog, they are not packaged with the Datadog Agent and need to be built locally and installed in order to be included in the Agent. Find below how to install one community integration with your Datadog Agent running as a binary on a host or as a container.
 
 {{< tabs >}}
 {{% tab "Agent above v6.8" %}}
 
 To install the `<INTEGRATION_NAME>` check on your host:
 
-1. Install the [developer toolkit][1] on one host.
-2. Run `ddev -e release build <INTEGRATION_NAME>` to build the `<INTEGRATION_NAME>` package.
-3. [Download the Datadog Agent][2].
-4. Upload the build artifact of step 2. to any host with an Agent and run `datadog-agent integration install -w <PATH_OF_INTEGRATION_NAME_PACKAGE>/<ARTIFACT_NAME>.whl`.
-5. Configure your integration like any other packaged integration.
-6. [Restart the Agent][3].
+1. Install the [developer toolkit][1].
+2. Clone the integrations-extras repository: `git clone https://github.com/DataDog/integrations-extras.git`.
+3. Update your `ddev` config with the `integrations-extras/` path: `ddev config set extras ./integrations-extras`.
+4. Run `ddev -e release build <INTEGRATION_NAME>` to build the `<INTEGRATION_NAME>` package.
+5. [Download and launch the Datadog Agent][2].
+6. Run `datadog-agent integration install -w <PATH_OF_INTEGRATION_NAME_PACKAGE>/<ARTIFACT_NAME>.whl`.
+7. Configure your integration like [any other packaged integration][3].
+8. [Restart the Agent][4].
 
 [1]: https://docs.datadoghq.com/developers/integrations/new_check_howto/#developer-toolkit
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
+[3]: /getting_started/integrations
+[4]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -49,7 +52,7 @@ COPY --from=wheel_builder /wheels/integrations-extras/<INTEGRATION_NAME>/dist/ /
 RUN agent integration install -r -w /dist/*.whl
 ```
 
-The use this new Agent image in combination with [Autodiscovery][1] in order to enable the `<INTEGRATION_NAME>` check.
+Then use this new Agent image in combination with [Autodiscovery][1] in order to enable the `<INTEGRATION_NAME>` check.
 
 [1]: agent/autodiscovery
 {{% /tab %}}
