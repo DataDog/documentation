@@ -24,8 +24,8 @@ def get_dd_metrics(csv_metrics):
 
   # Datadog Demo account
   options = {
-      'api_key': 'x', #
-      'app_key': 'x' # ruth-test
+      'api_key': 'x', # dd-demo-api-key
+      'app_key': 'x' # dd-demo-app-key
   }
   initialize(**options)
 
@@ -60,8 +60,8 @@ def get_dd_metrics(csv_metrics):
 def post_dd_metrics(metrics):
 # Post to Corpsite Datadog account
   options = {
-      'api_key': 'x',
-      'app_key': 'x'
+      'api_key': 'x', # dd-corp-api-key
+      'app_key': 'x' # dd-corp-app-key
   }
   datadog.initialize(**options)
   print(datadog.api.Metric.send(metrics))
