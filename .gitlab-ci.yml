@@ -52,7 +52,7 @@ build_preview:
     #- remove_static_from_repo
     #- create_artifact
     #- create_artifact_untracked
-    - ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd_app_key')
+    - ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
