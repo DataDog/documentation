@@ -45,7 +45,7 @@ Setting name          | Property Name          | Description                    
 `DD_TRACE_AGENT_PORT` | N/A                    | Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Default value is `8126`.                                                                                                    |
 `DD_ENV`              | `Environment`          | Adds the `env` tag with the specified value to generated spans. See [Agent configuration][2] for more details about the `env` tag. Default is _empty_ (no `env` tag).                                                                                            |
 `DD_SERVICE_NAME`     | `ServiceName`          | Sets the default service name. If not set, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). The default is to determine the service name automatically. |
-`DD_LOGS_INJECTION`   | `LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.
+`DD_LOGS_INJECTION`   | `LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                                                                        |
 
 ## Automatic Instrumentation
 
@@ -296,10 +296,11 @@ Setting name                 | Property Name              | Description         
 
 The following column lists integration-specific settings. The first column indicates the name used in environment variables or configuration files. The second column indicates the name of the propery on the `IntegrationSettings` class. You can access these properties in code through `Tracer.Instance.Settings.Integrations["<INTEGRATION>"]`. Integration names are listed in the [Integrations][3] section below.
 
-Setting name                             | Property Name              | Description                                                                                                                    |
----------------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-`DD_<INTEGRATION>_ANALYTICS_ENABLED`     | `AnalyticsEnabled`         | Enables or disable Trace Search and Analytics for a specific integration. Valid values are: `true` or `false` (default).       |
-`DD_<INTEGRATION>_ANALYTICS_SAMPLE_RATE` | `AnalyticsSampleRate`      | Sets the Trace Search and Analytics sampling rate for a specific integration. A floating number between `0` and `1` (default). |
+Setting name                             | Property Name              | Description                                                                                                                        |
+---------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+`DD_<INTEGRATION>_ENABLED`               | `Enabled`                  | Enables or disables a specific integration. Valid values are: `true` (default) or `false`.                                         |
+`DD_<INTEGRATION>_ANALYTICS_ENABLED`     | `AnalyticsEnabled`         | Enables or disable Trace Search and Analytics for a specific integration. Valid values are: `true` or `false` (default).           |
+`DD_<INTEGRATION>_ANALYTICS_SAMPLE_RATE` | `AnalyticsSampleRate`      | Sets the Trace Search and Analytics sampling rate for a specific integration. A floating number between `0.0` and `1.0` (default). |
 
 ### Runtime Compatibility
 
