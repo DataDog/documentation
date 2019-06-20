@@ -3,19 +3,19 @@ title: Agent Log collection
 kind: documentation
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
-- link: "agent/logs/advanced_log/collection/#filter-logs"
+- link: "agent/logs/advanced_log_collection/#filter-logs"
   tag: "Documentation"
   text: "Filter logs send to Datadog"
-- link: "agent/logs/advanced_log/collection/#scrub-sensitive-data-in-your-logs"
+- link: "agent/logs/advanced_log_collection/#scrub-sensitive-data-in-your-logs"
   tag: "Documentation"
   text: "Scrub sensitive data in your logs"
-- link: "agent/logs/advanced_log/collection/#multi-line-aggregation"
+- link: "agent/logs/advanced_log_collection/#multi-line-aggregation"
   tag: "Documentation"
   text: "Multi-line Log aggregation"
-- link: "agent/logs/advanced_log/collection/#tail-multiple-directories-or-whole-directories-by-using-wildcards"
+- link: "agent/logs/advanced_log_collection/#tail-multiple-directories-or-whole-directories-by-using-wildcards"
   tag: "Documentation"
   text: "Tail multiple directories or whole directories by using wildcards"
-- link: "agent/logs/advanced_log/collection/#global-processing-rules"
+- link: "agent/logs/advanced_log_collection/#global-processing-rules"
   tag: "Documentation"
   text: "Global processing rules"
 ---
