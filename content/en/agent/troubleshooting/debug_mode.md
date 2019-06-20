@@ -104,9 +104,9 @@ Or the container can be restarted.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Log level
+## Agent log level
 
-If you would like to see a different log level, the following options are available for `log_level` or `DD_LOG_LEVEL`:
+The following Agent log levels are available for `log_level` or `DD_LOG_LEVEL`:
 
 | Option  | Fatal logs | Error logs | Warn logs | Info logs | Debug logs | Trace logs | All logs |
 |---------|------------|------------|-----------|-----------|------------|------------|----------|
