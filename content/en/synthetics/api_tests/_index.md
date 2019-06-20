@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-API tests are useful to help you monitor your API endpoints and alert you when they are failing or too slow. These checks verify that your applications are responding to requests, as well as that they meet any conditions you define—such as response time, HTTP status code, and header or body contents. Use the[Datadog API][1] to see the full list.
+API tests are useful to help you monitor your API endpoints and alert you when they are failing or too slow. These checks verify that your applications are responding to requests, as well as that they meet any conditions you define—such as response time, HTTP status code, and header or body contents. Use the [Datadog API][1] to see the full list.
 
 ## Configuration
 
