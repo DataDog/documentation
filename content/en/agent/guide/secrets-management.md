@@ -212,8 +212,13 @@ instances:
     password: decrypted_db_prod_password
 ```
 
+## Troubleshooting secrets
+
+The Agent's public repository contains additional guidance on [troubleshooting secrets management][2].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/autodiscovery
+[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md#troubleshooting
