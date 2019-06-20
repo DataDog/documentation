@@ -40,7 +40,7 @@ If the logs are already JSON formatted, there is nothing left to do. If the logs
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
-[1]: /tracing/languages/java/#configuration
+[1]: /tracing/setup/java/#configuration
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -118,6 +118,26 @@ const tracer = require('dd-trace').init({
 This enables automatic trace ID injection for `winston`, `bunyan`, and `pino`.
 
 **Note**: Automatic injection only works for logs formatted as JSON.
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Enable injection in the .NET Tracer’s [configuration][1] by setting `DD_LOGS_INJECTION=true` through environment variables or configuration files, or in code:
+
+```csharp
+using Datadog.Trace;
+
+Tracer.Instance.Settings.LogsInjectionEnabled = true;
+```
+
+The .NET Tracer uses the [LibLog][2] library to integration into your application logs. It contains transparent built-in support for [NLog][3], [Log4Net][4], [Serilog][5] and [Loupe][6].
+
+[1]: /tracing/setup/dotnet/#configuration
+[2]: https://github.com/damianh/LibLog
+[3]: http://nlog-project.org/
+[4]: https://logging.apache.org/log4net/
+[5]: http://serilog.net/
+[6]: http://www.gibraltarsoftware.com/Loupe
 
 {{% /tab %}}
 {{% tab "PHP" %}}
@@ -411,6 +431,11 @@ module.exports = Logger
 Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
 [1]: /help
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Coming Soon. Reach out to [the Datadog support team][1] to learn more.
+
 {{% /tab %}}
 {{% tab "PHP" %}}
 
