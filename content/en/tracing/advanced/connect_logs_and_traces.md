@@ -122,7 +122,7 @@ This enables automatic trace ID injection for `winston`, `bunyan`, and `pino`.
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-The .NET Tracer uses the [LibLog][2] library to integration into your application logs. It contains transparent built-in support for [NLog][3], [Log4Net][4], [Serilog][5] and [Loupe][6].
+The .NET Tracer uses the [LibLog][2] library to integrate into your application logs. It contains transparent built-in support for [NLog][3], [Log4Net][4], [Serilog][5] and [Loupe][6].
 
 Enable injection in the .NET Tracer’s [configuration][1] by setting `DD_LOGS_INJECTION=true` through environment variables or configuration files, or in code:
 
