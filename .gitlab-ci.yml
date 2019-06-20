@@ -38,8 +38,8 @@ build_preview:
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - version_static_assets
-    - sync_integration_descriptions
-    #- sync_integration_descriptions_cached
+    #- sync_integration_descriptions
+    - sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
     - build_hugo_site_new
@@ -52,8 +52,6 @@ build_preview:
     #- remove_static_from_repo
     #- create_artifact
     #- create_artifact_untracked
-    - python3 -m pip install --upgrade datadog
-    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
@@ -102,6 +100,16 @@ test_live_link_checks:
     URL: ${LIVE_DOMAIN}
   script:
     - node /etc/node_modules/link-checker/dd-link-checker.js -e live -c ${CI_PROJECT_DIR}/local/etc/link-check-config.js
+  only:
+    - master
+
+missing_metrics:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  script:
+    - python3 -m pip install --upgrade datadog
+    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
   only:
     - master
 
