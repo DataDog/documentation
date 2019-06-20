@@ -436,6 +436,7 @@ Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
 Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
+[1]: /help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
