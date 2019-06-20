@@ -19,7 +19,7 @@ Secrets are supported in any configuration backend (e.g. file, etcd, consul) and
 
 Secrets are also supported in `datadog.yaml`. The agent first loads the main configuration and reloads it after decrypting the secrets. This means that secrets cannot be used in the `secret_*` settings.
 
-Secrets are always strings, i.e. you cannot use them to set an integer or boolean value.
+Secrets are always strings, i.e. you cannot use them to set an integer or Boolean value.
 
 Example:
 
