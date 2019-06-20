@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 import tempfile
-
-import datadog
 from datadog import initialize, api
 import time
 import glob
@@ -74,8 +72,8 @@ def post_dd_metrics(metrics, keys):
       'api_key': keys.corpapikey,
       'app_key': keys.corpappkey
   }
-  datadog.initialize(**options)
-  print(datadog.api.Metric.send(metrics))
+  initialize(**options)
+  print(api.Metric.send(metrics))
 
 
 if __name__ == '__main__':
