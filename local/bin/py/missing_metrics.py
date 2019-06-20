@@ -90,5 +90,5 @@ if __name__ == '__main__':
   options, args = parser.parse_args()
   print('Getting dd metrics...')
   metrics = get_dd_metrics(csv_metrics, options)
-  # print('Posting dd metrics...')
-  # post_dd_metrics(metrics, options)
+  print('Posting dd metrics...')
+  post_dd_metrics(metrics, options)
