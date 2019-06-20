@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 import tempfile
 
 import datadog
@@ -21,7 +21,7 @@ def get_csv_metrics(tempdir):
 
   csv_metrics = {}
   for csv_file in csv_files:
-    with open(csv_file, 'rb') as c_file:
+    with open(csv_file, 'r') as c_file:
       csv_reader = csv.reader(c_file, delimiter=',')
       for row in csv_reader:
         if len(row) > 0:
