@@ -134,7 +134,7 @@ var settings = new TracerSettings { LogsInjectionEnabled = true };
 var tracer = new Tracer(settings);
 ```
 
-This settings is only read during `Tracer` initialization. Changes to this setting after the `Tracer` instance is created are ignored.
+**Note**: This setting is only read during `Tracer` initialization. Changes to this setting after the `Tracer` instance is created are ignored.
 
 [1]: /tracing/setup/dotnet/#configuration
 [2]: https://github.com/damianh/LibLog
