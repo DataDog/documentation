@@ -17,7 +17,7 @@ tempdir = (
 
 
 def get_csv_metrics(tempdir):
-  csv_files = glob.glob(tempdir + "/extracted/**/*/*metadata.csv")
+  csv_files = glob.glob(tempdir + "/extracted/**/*/*metadata.csv", recursive=True)
 
   csv_metrics = {}
   for csv_file in csv_files:
