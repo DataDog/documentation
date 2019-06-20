@@ -27,8 +27,7 @@ further_reading:
 
 Trace Sampling is applicable for high-volume web-scale applications, where a sampled proportion of traces is kept in Datadog based on the following rules.
 
-Note that Statistics (requests, errors, latency, etc.), on the other hand, are calculated based on the full volume of traces at the Agent level, and are therefore always accurate.
-
+Note that Statistics (requests, errors, latency, etc.), are calculated based on the full volume of traces at the Agent level, and are therefore always accurate.
 
 ### Statistics (Requests, Errors, Latencies etc.)
 
@@ -44,11 +43,11 @@ Datadog APM computes following aggregate statistics over all the traces instrume
 
 ### Goal of Sampling
 
-The goal of sampling is to keep traces that matter the most. That is -
-* Keep distributed traces
-* Keep Low QPS Services
-* Keep representative variety set of traces
+The goal of sampling is to keep the traces that matter the most:
 
+* Distributed traces
+* Low QPS Services
+* Representative variety set of traces
 
 {{< img src="tracing/product_specs/trace_sampling_storage/sampling_trace.png" alt="Individual traces are sampled at the Agent, server, and client level." responsive="true" style="width:90%;">}}
 
@@ -56,35 +55,33 @@ The goal of sampling is to keep traces that matter the most. That is -
 
 For the lifecycle of a trace, decisions are made at Tracing Client, Agent, and Backend level in the following order.
 
-1. Tracing Client - The tracing client adds a context attribute `sampling.priority` to traces, allowing a single trace to be propagated in a distributed architecture across language agnostic request headers. `Sampling-priority` attribute is a hint to the agent to do its best to prioritize the trace or drop unimportant ones. 
+1. Tracing Client - The tracing client adds a context attribute `sampling.priority` to traces, allowing a single trace to be propagated in a distributed architecture across language agnostic request headers. `Sampling-priority` attribute is a hint to the Datadog Agent to do its best to prioritize the trace or drop unimportant ones. 
 
-| Value                  | Type                        | Action                                                                                               |
-| :--------------------- | :----------------           | :----------                                                                                          |
-| **MANUAL_DROP**                 | User input                  | The Agent drops the trace.                                                                           |
-| **AUTO_DROP**                  | Automatic sampling decision | The Agent drops the trace.                                                                           |
-| **AUTO_KEEP**                  | Automatic sampling decision | The Agent keeps the trace.                                                                           |
-| **MANUAL_KEEP**                  | User input                  | The Agent keeps the trace, and the backend will only apply sampling if above maximum volume allowed. |
+    | Value                  | Type                        | Action                                                                                               |
+    | :--------------------- | :----------------           | :----------                                                                                          |
+    | **MANUAL_DROP**                 | User input                  | The Agent drops the trace.                                                                           |
+    | **AUTO_DROP**                  | Automatic sampling decision | The Agent drops the trace.                                                                           |
+    | **AUTO_KEEP**                  | Automatic sampling decision | The Agent keeps the trace.                                                                           |
+    | **MANUAL_KEEP**                  | User input                  | The Agent keeps the trace, and the backend will only apply sampling if above maximum volume allowed. |
 
-<<<<<<< HEAD
-Traces are automatically assigned a priority of AUTO_DROP or AUTO_KEEP, with a proportion ensuring that the Agent won’t have to sample more than it is allowed. Users can [manually adjust](link_to_manual_section) this attribute to give priority to specific types of traces, or entirely drop uninteresting ones.
+    Traces are automatically assigned a priority of AUTO_DROP or AUTO_KEEP, with a proportion ensuring that the Agent won’t have to sample more than it is allowed. Users can [manually adjust][2] this attribute to give priority to specific types of traces, or entirely drop uninteresting ones.
 
-2. Trace Agent (Host or Container Level)- The agent receives traces from various tracing clients and filters requests based on two rules -
-* Ensure traces are kept across variety of traces. (across services, resources, HTTP status codes, errors)
-* Ensure traces are kept for low volume resources (web endpoints, DB queries).
+2. Trace Agent (Host or Container Level)- The Agent receives traces from various tracing clients and filters requests based on two rules -
+    * Ensure traces are kept across variety of traces. (across services, resources, HTTP status codes, errors)
+    * Ensure traces are kept for low volume resources (web endpoints, DB queries).
 
-The agent computes a `signature` for every trace reported, based on its services, resources, errors, etc.. Traces of the same signature are considered similar. For example, a signature could be:
+    The Agent computes a `signature` for every trace reported, based on its services, resources, errors, etc.. Traces of the same signature are considered similar. For example, a signature could be:
 
-* `env=prod`, `my_web_service`, `is_error=true`, `resource=/login`
-* `env=staging`, `my_database_service`, `is_error=false`, `query=SELECT...`
+    * `env=prod`, `my_web_service`, `is_error=true`, `resource=/login`
+    * `env=staging`, `my_database_service`, `is_error=false`, `query=SELECT...`
 
-A proportion of traces with each signature is then kept, so you get full visibility into all the different kinds of traces happening in your system. This method ensures traces for resources with low volumes are still kept.
+    A proportion of traces with each signature is then kept, so you get full visibility into all the different kinds of traces happening in your system. This method ensures traces for resources with low volumes are still kept.
 
-Moreover, the agent provides a service based rate to the prioritized traces from tracing client to ensure traces from low QPS services are prioritized to be kept.
+    Moreover, the Agent provides a service-based rate to the prioritized traces from tracing client to ensure traces from low QPS services are prioritized to be kept.
 
-Users can manually drop entire uninteresting resource endpoints at agent level by using [resource filtering](https://docs.datadoghq.com/security/tracing/#resource-filtering).
+    Users can manually drop entire uninteresting resource endpoints at Agent level by using [resource filtering][3].
 
-
-3. DD Backend/Server - The server receives traces from various agents running on hosts and applies sampling to ensure representation from every reporting agent. It does so by keeping traces on the basis of the signature marked by agent.
+3. DD Backend/Server - The server receives traces from various Agents running on hosts and applies sampling to ensure representation from every reporting Agent. It does so by keeping traces on the basis of the signature marked by Agent.
 
 ## Manually Control Trace Priority
 
@@ -366,7 +363,7 @@ another_span->SetTag(datadog::tags::manual_drop, {});
 {{% /tab %}}
 {{< /tabs >}}
 
-Note that trace priority should be manually controlled only before any context propagation. If this happens after the propagation of a context, the system can’t ensure that the entire trace is kept across services. Manually controlled trace priority is set at tracing client location, the trace can still be dropped by agent or server location based on the [sampling rules](link_to_sampling_rules).
+Note that trace priority should be manually controlled only before any context propagation. If this happens after the propagation of a context, the system can’t ensure that the entire trace is kept across services. Manually controlled trace priority is set at tracing client location, the trace can still be dropped by Agent or server location based on the [sampling rules][4].
 
 
 ## Trace Storage
@@ -407,6 +404,6 @@ Once a trace has been viewed by opening a full page, it continues to be availabl
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
-[2]: /tracing/visualization/trace
-[3]: /tracing/visualization/resource
-[4]: /agent
+[2]: link_to_manual_section
+[3]: https://docs.datadoghq.com/security/tracing/#resource-filtering
+[4]: link_to_sampling_rules

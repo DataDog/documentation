@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /tracing/setup/php/manual-installation
   - /agent/apm/php/manual-installation
+  - /tracing/guide/distributed_tracing/
 further_reading:
 - link: "tracing/advanced/connect_logs_and_traces"
   tags: "Enrich Tracing"
@@ -197,7 +198,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-Then, on the server side, to continue the trace, start a new Span from the extracted `Context`:
+**Then, on the server side, to continue the trace, start a new Span from the extracted `Context`:**
 
 ```go
 package main
@@ -406,9 +407,9 @@ void example() {
 }
 ```
 
+
 [1]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter
 [2]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/propagation.h
-
 {{% /tab %}}
 {{< /tabs >}}
 
