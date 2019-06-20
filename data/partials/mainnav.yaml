@@ -106,6 +106,13 @@ main:
             url: "agent/autodiscovery/troubleshooting"
           - name: "Cluster Checks"
             url: "agent/autodiscovery/clusterchecks"
+      - name: "Log Collection "
+        url: "agent/logs"
+        children:
+          - name: "Advanced Log Collection"
+            url: "agent/logs/advanced_log_collection"
+          - name: "Proxy"
+            url: "agent/logs/proxy"
       - name: "Proxy"
         url: "agent/proxy"
       ## Upgrade to Agent v6

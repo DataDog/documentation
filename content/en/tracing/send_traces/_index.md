@@ -24,7 +24,7 @@ To use APM, start by sending your traces to Datadog, and then [configure your en
 
 ## Datadog Agent
 
-APM is enabled by default in Agent 6. Set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][2] if you are sending traces from a nonlocal environment (like a container). 
+APM is enabled by default in Agent 6. Set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][2] if you are sending traces from a nonlocal environment (like a container).
 To get an overview of all the possible settings for APM, take a look at the Agent's [`datadog.example.yaml`][3] configuration file. For more information about the Datadog Agent, see the [Agent documentation][4] or refer to the [`datadog.yaml` configuration template][5].
 
 ## Containers
@@ -33,7 +33,7 @@ See the specific setup instructions to ensure that the Agent is configured to re
 
 {{< partial name="apm/apm-containers.html" >}}
 </br>
-Note: After having instrumented your application, the tracing client sends traces to `localhost:8126` by default. 
+Note: After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.
 
 ## Additional environments
 
@@ -69,7 +69,7 @@ There are several ways to specify [an environment][9] when reporting data:
 
 ## Next steps
 
-Next, [Instrument your application][11]. For the full overview of all of the steps to set up APM, see the [APM overview][1]. 
+Next, [Instrument your application][11]. For the full overview of all of the steps to set up APM, see the [APM overview][1].
 
 ## Further Reading
 
