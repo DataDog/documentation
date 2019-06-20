@@ -1,6 +1,10 @@
 ---
 aliases:
   - /fr/integrations/gearman
+assets:
+  dashboards: {}
+  monitors: {}
+  service_checks: assets/service_checks.json
 categories:
   - processing
 creates_events: false

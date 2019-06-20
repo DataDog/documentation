@@ -1,6 +1,6 @@
 ---
 title: Agent Configuration Files
-kind: faq
+kind: guide
 aliases:
   - /agent/faq/agent-configuration-files
 ---

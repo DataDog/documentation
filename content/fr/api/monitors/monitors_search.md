@@ -16,7 +16,7 @@ Recherchez et filtrez les informations de vos monitors.
 
     La requête peut contenir autant d'attributs de monitor que nécessaire (séparés par des espaces). Exemple : `query="type:metric status:alert"`.
 
-* **`page`** [*facultatif*, *défaut* = **0**] :
+* **`page`** [*facultatif*, *défaut*=**0**] :
 
     Page à partir de laquelle commencer la pagination.
 

@@ -18,9 +18,6 @@ further_reading:
 - link: "/integrations/ecs_fargate/#trace-collection"
   tag: "Documentation"
   text: "ECS Fargate APM setup"
-- link: "/integrations/ecs_fargate/#trace-collection"
-  tag: "Documentation"
-  text: "ECS Fargate APM setup"
 ---
 
 To use APM, start by sending your traces to Datadog, and then [configure your environment](#-configure-your-environment). You can send traces to Datadog in multiple different ways depending on your system setup: including using the [Datadog Agent locally](#datadog-agent), [on containers](#containers), and [several other ways](#-additional-environments). For the full overview of all of the steps to set up APM, see the [APM overivew][1].
@@ -42,17 +39,17 @@ Note: After having instrumented your application, the tracing client sends trace
 
 There are alternernates to the Agent and containers that you can use to collect traces.
 
-### Lamda - X-Ray
+### Lambda - X-Ray
 
-For more information abut setting up Lamda - X-Ray, see the [Amazon X-Ray integration documentation][6]
+For more information setting up Lambda - X-Ray, see the [Amazon X-Ray integration documentation][6]
 
 ### Heroku
 
-Tracing is enabled by default when monitoring with Heroku. For more information abut configuring tracing for Heroku, see the [Heroku cloud documentation][7].
+Tracing is enabled by default when monitoring with Heroku. For more information about configuring tracing for Heroku, see the [Heroku cloud documentation][7].
 
 ### Cloud Foundry
 
-Tracing is enabled by default when monitoring with Cloud Foundry. For more information abut configuring tracing for Cloud Foundry, see the [Cloud Foundry documentation][8].
+Tracing is enabled by default when monitoring with Cloud Foundry. For more information about configuring tracing for Cloud Foundry, see the [Cloud Foundry documentation][8].
 
 ### Other(GAE, AAS, Serverless)
 

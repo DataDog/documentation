@@ -62,12 +62,23 @@ Refer to the [Agent Commands][10] page to [Start][11], [Stop][12] or [Restart][1
 ## Data Collected
 
 ### Metrics
-By default, the Agent collects metrics with the following checks. To collect metrics from other technologies, see the [Integrations][14] page.
+Depending on your platform, the Agent has several core checks enabled by default that collect metrics.
 
-* [Disk][15]
-* [Network][16]
-* [NTP][17]
-* [System][18]
+| Check       | Metrics       | Platforms          |
+|-------------|---------------|--------------------|
+| CPU         | [System][14]  | All                |
+| Disk        | [Disk][15]    | All                |
+| Docker      | [Docker][16]  | Docker             |
+| File Handle | [System][14]  | All except Mac     |
+| IO          | [System][14]  | All                |
+| Load        | [System][14]  | All except Windows |
+| Memory      | [System][14]  | All                |
+| Network     | [Network][17] | All                |
+| NTP         | [NTP][18]     | All                |
+| Uptime      | [System][14]  | All                |
+| Winproc     | [System][14]  | Windows            |
+
+To collect metrics from other technologies, see the [Integrations][19] page.
 
 ### Events
 The Agent sends events to Datadog when an Agent is started or restarted.
@@ -82,9 +93,9 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 ## Troubleshooting
 For help troubleshooting the Agent:
 
-* Visit the [Agent Troubleshooting][19] page.
-* View the [Agent Log Files][20]
-* Contact [Datadog support][21]
+* Visit the [Agent Troubleshooting][20] page.
+* View the [Agent Log Files][21]
+* Contact [Datadog support][22]
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -109,11 +120,12 @@ For help troubleshooting the Agent:
 [11]: /agent/guide/agent-commands/#start-the-agent
 [12]: /agent/guide/agent-commands/#stop-the-agent
 [13]: /agent/guide/agent-commands/#restart-the-agent
-[14]: /getting_started/integrations
-[15]: /integrations/disk
-[16]: /integrations/network
-[17]: /integrations/ntp
-[18]: /integrations/system
-[19]: /agent/troubleshooting
-[20]: /agent/guide/agent-log-files
-[21]: /help
+[14]: /integrations/system/#metrics
+[15]: /integrations/disk/#metrics
+[16]: /integrations/docker_daemon/#metrics
+[17]: /integrations/network/#metrics
+[18]: /integrations/ntp/#metrics
+[19]: /getting_started/integrations
+[20]: /agent/troubleshooting
+[21]: /agent/guide/agent-log-files
+[22]: /help

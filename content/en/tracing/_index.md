@@ -6,10 +6,10 @@ further_reading:
 - link: "/tracing/advanced/connect_logs_and_traces/"
   tag: "Documentation"
   text: "Connect logs and traces"
-- link: "/advanced/adding_metadata_to_spans"
+- link: "/tracing/advanced/adding_metadata_to_spans"
   tag: "Documentation"
   text: "Adding metadata to spans"
-- link: "/advanced/runtime_metrics"
+- link: "/tracing/advanced/runtime_metrics"
   tag: "Documentation"
   text: "Runtime metrics"
 - link: "https://learn.datadoghq.com/course/view.php?id=4"
@@ -36,8 +36,8 @@ The application code instrumentation sends traces to the Agent every second. The
 
 2. **[Instrument your application to send traces to your Datadog Agent][8]**:
   Datadog has libraries to support configuring your application in several different languages and containers. For more information about specific languages and containers, see [Application Tracing Setup][8].
-   
-3. **[Enable Trace Search & Analytics][9]**: 
+
+3. **[Enable Trace Search & Analytics][9]**:
   [Trace Search & Analytics][9] is used to filter APM Data by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests.
 
 4. **[Enrich tracing][9]**:
