@@ -44,7 +44,7 @@ All system metrics are automatically tagged with `host:<HOST_NAME>`. Additionall
 
 * `system.disk.*`
 * `system.fs.inodes.*`
-* `system.io.*` - `device_label` for Docker
+* `system.io.*`
 * `system.net.*`
 
 ## Agent Check: System cores
