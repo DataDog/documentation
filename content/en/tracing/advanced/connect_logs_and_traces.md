@@ -128,6 +128,7 @@ Enable injection in the .NET Tracer’s [configuration][1] by setting `DD_LOGS_I
 
 ```csharp
 using Datadog.Trace;
+using Datadog.Trace.Configuration;
 
 var settings = new TracerSettings { LogsInjectionEnabled = true };
 var tracer = new Tracer(settings);
