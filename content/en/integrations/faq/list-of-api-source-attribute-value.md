@@ -7,9 +7,13 @@ kind: faq
 |:---|:---|
 |Activemq|ACTIVEMQ|
 |Airbrake|AIRBRAKE|
-|Akamai|AKAMAI|
+|Akamai Datastream|AKAMAIDATASTREAM|
+|Akamai Mpulse|AKAMAIMPULSE|
 |Alibaba Cloud|ALIBABACLOUD|
+|Amazon Appstream|APPSTREAM|
+|Amazon Appsync|APPSYNC|
 |Amazon Api Gateway|APIGATEWAY|
+|Amazon Athena|ATHENA|
 |Amazon Auto Scaling|AUTOSCALING|
 |Amazon Billing|BILLING|
 |Amazon Cloudfront|CLOUDFRONT|
@@ -17,42 +21,63 @@ kind: faq
 |Amazon Cloudtrail|CLOUDTRAIL|
 |Amazon Codebuild|CODEBUILD|
 |Amazon Codedeploy|CODEDEPLOY|
+|Amazon Cognito|COGNITO|
+|Amazon Connect|AWSCONNECT|
 |Amazon Directconnect|DIRECTCONNECT|
+|Amazon Database Migration Service|AWSDMS|
 |Amazon Documentdb|DOCUMENTDB|
 |Amazon Dynamodb|DYNAMODB|
 |Amazon Ebs|EBS|
 |Amazon Ec2|EC2|
+|Amazon Ec2 Spot|EC2SPOT|
 |Amazon Ecs|ECS|
 |Amazon Efs|EFS|
 |Amazon Elasticache|ELASTICACHE|
 |Amazon Elasticbeanstalk|ELASTICBEANSTALK|
+|Amazon Elastic Transcoder|ELASTICTRANSCODER|
+|Amazon Elemental Mediaconnect|MEDIACONNECT|
+|Amazon Elemental Mediaconvert|MEDIACONVERT|
+|Amazon Elemental Mediapackage|MEDIAPACKAGE|
+|Amazon Elemental Mediatailor|MEDIATAILOR|
 |Amazon Elb|ELB|
 |Amazon Emr|EMR|
 |Amazon Es|ES|
+|Amazon Event Hub|AWSEVENTHUB|
 |Amazon Firehose|FIREHOSE|
 |Amazon Gamelift|GAMELIFT|
+|Amazon Glue|GLUE|
 |Amazon Health|HEALTH|
+|Amazon Inspector|INSPECTOR|
 |Amazon Iot|IOT|
 |Amazon Kinesis|KINESIS|
 |Amazon Kms|KMS|
 |Amazon Lambda|LAMBDA|
+|Amazon Lex|AWSLEX|
 |Amazon App Mesh|AMAZONAPPMESH|
 |Amazon Machine Learning|MACHINELEARNING|
 |Amazon Mq|MQ|
 |Amazon Msk|MSK|
+|Amazon Natgateway|NATGATEWAY|
+|Amazon Neptune|NEPTUNE|
 |Amazon Ops Works|OPSWORKS|
 |Amazon Polly|POLLY|
 |Amazon Rds|RDS|
 |Amazon Redshift|REDSHIFT|
+|Amazon Rekognition|REKOGNITION|
 |Amazon Route53|ROUTE53|
 |Amazon S3|S3|
+|Amazon Sage Maker|SAGEMAKER|
 |Amazon Ses|SES|
+|Amazon Shield|SHIELD|
 |Amazon Sns|SNS|
 |Amazon Sqs|SQS|
-|Amazon States|STATEMACHINE|
+|Amazon States|STEPFUNCTIONS|
 |Amazon Storage Gateway|STORAGEGATEWAY|
 |Amazon Swf|SWF|
+|Amazon Translate|TRANSLATE|
+|Amazon Trusted Advisor|TRUSTEDADVISOR|
 |Amazon Waf|WAF|
+|Amazon Vpn|AWSVPN|
 |Amazon Web Services|CLOUDWATCH|
 |Amazon Workspaces|WORKSPACES|
 |Amazon Xray|AWSXRAY|
@@ -235,3 +260,4 @@ kind: faq
 |Yarn|YARN|
 |Zendesk|ZENDESK|
 |Zookeeper|ZOOKEEPER|
+
