@@ -81,7 +81,8 @@ def post_dd_metrics(metrics, keys):
 if __name__ == '__main__':
   print('Getting csv metrics from...')
   print(tempdir)
-  print(csv_metrics = get_csv_metrics(tempdir))
+  csv_metrics = get_csv_metrics(tempdir)
+  print(csv_metrics)
   print('Parsing keys')
   parser = OptionParser(usage="usage: %prog [options]")
   parser.add_option("-k", "--demoapikey", help="demo api key", default=None)
