@@ -1,6 +1,13 @@
 ---
 title: Secrets Management
 kind: documentation
+further_reading:
+- link: "agent/autodiscovery"
+  tag: "Documentation"
+  text: "Autodiscovery"
+- link: "https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md#troubleshooting"
+  tag: "github"
+  text: "Secrets Troubleshooting"
 ---
 
 If you wish to avoid storing secrets in plaintext in the Agent’s configuration files, you can use the secrets management package.
