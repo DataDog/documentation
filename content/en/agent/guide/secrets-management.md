@@ -3,11 +3,11 @@ title: Secrets Management
 kind: documentation
 ---
 
-If you wish to avoid storing secrets in plaintext in the Agent’s configuration files, you can use the secrets management package. 
+If you wish to avoid storing secrets in plaintext in the Agent’s configuration files, you can use the secrets management package.
 
-Starting with version 6.3.0 on Linux and 6.11 on Windows, the Agent is able to leverage the `secrets` package to call a user-provided executable to handle retrieval and decryption of secrets, which are then loaded in memory by the Agent.
+The Agent is able to leverage the `secrets` package to call a user-provided executable to handle retrieval and decryption of secrets, which are then loaded in memory by the Agent. This approach allows users to rely on any secrets management backend (such as HashiCorp Vault or AWS Secrets Manager), and select their preferred authentication method to establish initial trust with it.
 
-Starting with version 6.11, secrets management is also supported by APM (on Linux and Windows) and Process Monitoring (on Linux).
+Starting with version 6.12, the secrets management package is generally available on Linux for metrics, APM, and process monitoring, as well as on Windows for metrics and APM.
 
 ## Using secrets
 
@@ -15,11 +15,11 @@ Starting with version 6.11, secrets management is also supported by APM (on Linu
 
 Use the `ENC[]` notation to denote a secret as the value of any YAML field in your configuration.
 
-Secrets are supported in any configuration backend: file, etcd, consul, etc. Starting in Agent 6.10.0, secrets are supported in environment variables.
+Secrets are supported in any configuration backend (e.g. file, etcd, consul) and environment variables.
 
-Secrets are also supported in `datadog.yaml`. The agent first loads the main configuration and reloads it after decrypting the secrets. This means that secrest cannot be used in the `secret_*` settings.
+Secrets are also supported in `datadog.yaml`. The agent first loads the main configuration and reloads it after decrypting the secrets. This means that secrets cannot be used in the `secret_*` settings.
 
-Secrets are always strings, i.e. you cannot use them to set an integer or Boolean value.
+Secrets are always strings, i.e. you cannot use them to set an integer or boolean value.
 
 Example:
 
@@ -40,10 +40,10 @@ Here, there are two secrets: `db_prod_user` and `db_prod_password`. These are th
 Between the brackets, any character is allowed as long as the YAML configuration is valid. This means that quotes must be escaped. For instance:
 
 ```
-"ENC[{\"env\": \"prod\", \"check\": \"postgres\", \"id\": \"user_password\", \"az\": \"us-east-1a\"}]"
+"ENC[{\"env\": \"prod\", \"check\": \"postgres\", \"id\": \"user_password\"}]"
 ```
 
-In the above example, the secret’s handle is the string `{"env": "prod", "check": "postgres", "id": "user_password", "az": "us-east-1a"}`.
+In the above example, the secret’s handle is the string `{"env": "prod", "check": "postgres", "id": "user_password"}`.
 
 There is no need to escape inner `[` and `]`. For instance:
 
@@ -53,7 +53,7 @@ There is no need to escape inner `[` and `]`. For instance:
 
 In the above example, the secret’s handle is the string `user_array[1234]`.
 
-Secrets are resolved after Autodiscovery template variables are resolved, i.e. you can use them in a secret handle. For instance:
+Secrets are resolved after [Autodiscovery][1] template variables are resolved, i.e. you can use them in a secret handle. For instance:
 
 ```
 “ENC[db_prod_password_%%host%%]”
@@ -61,7 +61,7 @@ Secrets are resolved after Autodiscovery template variables are resolved, i.e. y
 
 ### Providing an executable
 
-To retrieve secrets, you must provide an executable that is able to authenticate to and fetch secrets from your secrets management backend. 
+To retrieve secrets, you must provide an executable that is able to authenticate to and fetch secrets from your secrets management backend.
 
 The Agent caches secrets internally in memory to reduce the number of calls (useful in a containerized environment for example). The Agent calls the executable every time it accesses a check configuration file that contains at least one secret handle for which the secret is not already loaded in memory. In particular, secrets that have already been loaded in memory do not trigger additional calls to the executable. In practice, this means that the Agent calls the user-provided executable once per file that contains a secret handle at startup, and might make additional calls to the executable later if the Agent or instance is restarted, or if the Agent dynamically loads a new check containing a secret handle (e.g. via Autodiscovery).
 
@@ -96,9 +96,9 @@ On Linux, the executable set as `secret_backend_command` must:
 
 On Windows, the executable set as `secret_backend_command` must:
 
-Have read/exec for `ddagentuser` (the user used to run the Agent).
-Have no rights for any user or group except `Administrator` or `LocalSystem`.
-Be a valid Win32 application so the Agent can execute it.
+* Have read/exec for `ddagentuser` (the user used to run the Agent).
+* Have no rights for any user or group except `Administrator` or `LocalSystem`.
+* Be a valid Win32 application so the Agent can execute it.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -211,3 +211,9 @@ instances:
     user: decrypted_db_prod_user
     password: decrypted_db_prod_password
 ```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/autodiscovery
