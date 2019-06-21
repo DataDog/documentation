@@ -54,7 +54,7 @@ Outre l'exemple ci-dessus, vous pouvez définir un certain nombre de variables d
 | `DD_AGENT_VERSION`           | *Facultatif*. Par défaut, le buildpack installe la dernière version de l'Agent Datadog disponible dans le référentiel de paquets. Utilisez cette variable pour installer une ancienne version de l'Agent Datadog (veuillez noter que toutes les versions de l'Agent ne sont pas nécessairement disponibles).|
 | `DD_DISABLE_HOST_METRICS`    | *Facultatif*. Par défaut, le buildpack transmet des métriques système pour la machine du host qui exécute le dyno. Définissez cette variable sur `true` pour désactiver la collecte des métriques système. Consultez la [section Métriques système](#metriques-système) ci-dessous pour en savoir plus.|
 
-Pour obtenir davantage d'informations, consultez la [documentation relative à l'Agent Datadog][7].
+Pour obtenir davantage d'informations, consultez la [documentation relative à l'Agent Datadog][9].
 
 ## Hostname
 
@@ -66,7 +66,7 @@ Selon vos besoins, vous pouvez choisir de définir votre hostname afin d'agrége
 
 Par défaut, le buildpack recueille des métriques système pour la machine du host qui exécute le dyno. Vous ne pouvez pas recueillir des métriques système pour un dyno spécifique à l'aide de ce buildpack. Pour désactiver la collecte des métriques système sur les hosts, définissez la variable d'environnement `DD_DISABLE_HOST_METRICS` sur `true`.
 
-Pour recueillir des métriques système pour vos dynos, utilisez un siphon de log afin de récupérer des logs de métriques depuis le Logplex Heroku et les transmettre à Datadog. Reportez-vous à la [documentation relative aux intégrations de la communauté][8] pour consultez la liste des siphons de logs de la communauté pris en charge.
+Pour recueillir des métriques système pour vos dynos, utilisez un siphon de log afin de récupérer des logs de métriques depuis le Logplex Heroku et les transmettre à Datadog. Reportez-vous à la [documentation relative aux intégrations de la communauté][17] pour consultez la liste des siphons de logs de la communauté pris en charge.
 
 ## Emplacements des fichiers
 
@@ -78,7 +78,7 @@ Pour recueillir des métriques système pour vos dynos, utilisez un siphon de lo
 
 Vous pouvez activer des intégrations de l'Agent Datadog en ajoutant un fichier YAML avec le nom correspondant dans le répertoire `datadog/conf.d` à la racine de votre application.
 
-Par exemple, pour activer l'[intégration PostgreSQL][9], créez un fichier `/datadog/conf.d/postgres.yaml` dans votre application avec ce qui suit :
+Par exemple, pour activer l'[intégration PostgreSQL][10], créez un fichier `/datadog/conf.d/postgres.yaml` dans votre application avec ce qui suit :
 
 ```
 init_config:
@@ -133,19 +133,19 @@ heroku config:add DD_LOG_LEVEL=ERROR
 
 ## Collecte de logs Heroku
 
-Le buildpack Heroku Datadog ne recueille pas de log. Pour configurer la collecte de logs, consultez le [guide dédié][10].
+Le buildpack Heroku Datadog ne recueille pas de log. Pour configurer la collecte de logs, consultez le [guide dédié][16].
 
 ## Éléments non pris en charge
 
-Les buildpacks Heroku ne peuvent pas être utilisés avec des images Docker. Pour créer une image Docker avec Datadog, consultez les [fichiers Docker de l'Agent Datadog][11].
+Les buildpacks Heroku ne peuvent pas être utilisés avec des images Docker. Pour créer une image Docker avec Datadog, consultez les [fichiers Docker de l'Agent Datadog][12].
 
 ## Contributions
 
-Consultez la [documentation relative aux contributions][12] (en anglais) pour découvrir comment créer une issue ou une pull request dans le référentiel Heroku-buildpack-datadog[13].
+Consultez la [documentation relative aux contributions][13] (en anglais) pour découvrir comment créer une issue ou une pull request dans le référentiel Heroku-buildpack-datadog[13].
 
 ## Historique
 
-Des versions antérieures de ce projet ont été dupliquées depuis le [projet heroku-buildpack-datadog de miketheman]. Il a en grande partie été modifié pour la version 6 de l'Agent Datadog. La liste des changements, ainsi que des informations supplémentaires, est disponible dans le [changelog][13].
+Des versions antérieures de ce projet ont été dupliquées depuis le [projet heroku-buildpack-datadog de miketheman]. Il a en grande partie été modifié pour la version 6 de l'Agent Datadog. La liste des changements, ainsi que des informations supplémentaires, est disponible dans le [changelog][15].
 
 [1]: https://devcenter.heroku.com/articles/buildpacks
 [2]: https://docs.datadoghq.com/fr/libraries
@@ -153,10 +153,13 @@ Des versions antérieures de ce projet ont été dupliquées depuis le [projet h
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: https://docs.datadoghq.com/fr/tagging
 [6]: /fr/graphing/faq/how-to-graph-percentiles-in-datadog
-[7]: https://docs.datadoghq.com/fr/agent
-[8]: https://docs.datadoghq.com/fr/developers/libraries/#heroku
-[9]: https://docs.datadoghq.com/fr/integrations/postgres
-[10]: https://docs.datadoghq.com/fr/logs/guide/collect-heroku-logs
-[11]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles
-[12]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CONTRIBUTING.md
-[13]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CHANGELOG.md
+[8]: https://docs.datadoghq.com/fr/tracing/setup/?tab=agent630#trace-search
+[9]: https://docs.datadoghq.com/fr/agent
+[10]: https://docs.datadoghq.com/fr/integrations/postgres
+[11]: https://devcenter.heroku.com/articles/log-drains#https-drains
+[12]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles
+[13]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CONTRIBUTING.md
+[14]: https://github.com/miketheman/heroku-buildpack-datadog
+[15]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CHANGELOG.md
+[16]: https://docs.datadoghq.com/fr/logs/guide/collect-heroku-logs
+[17]: https://docs.datadoghq.com/fr/developers/libraries/#heroku

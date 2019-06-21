@@ -47,7 +47,7 @@ Chaque instance est au minimum composée des paramètres suivants :
 
 * `prometheus_url` : indique l'itinéraire des métriques (**remarque :** doit être unique).
 * `namespace` : espace de nommage à ajouter en préfixe pour toutes les métriques (permet d'éviter les conflits entre les noms de métriques).
-* `metrics` : la liste des métriques à récupérer en tant que métriques custom. Il vous suffit d'ajouter vos métriques à la liste `- metric_name` ou de les renommer avec `- nom_métrique: renamed`. Vous pouvez également utiliser le wildcard `*`, par exemple `- metric*`, afin de récupérer toutes les métriques correspondantes. Utilisez prudemment ce wildcard, car il peut entraîner l'envoi de nombreuses métriques custom.
+* `metrics` : la liste des métriques à récupérer en tant que métriques custom. Il vous suffit d'ajouter vos métriques à la liste `- nom_métrique` ou de les renommer avec `- nom_métrique: renamed`. Vous pouvez également utiliser le wildcard `*`, par exemple `- metric*`, afin de récupérer toutes les métriques correspondantes. Utilisez prudemment ce wildcard, car il peut entraîner l'envoi de nombreuses métriques custom.
 
 Il existe également plusieurs paramètres plus avancés (`ssl`, `labels joining`, `tags`,...) dont l'utilisation est expliquée dans [l'exemple de configuration `conf.yaml`][4].
 

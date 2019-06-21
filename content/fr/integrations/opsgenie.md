@@ -65,20 +65,20 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 ## Pour aller plus loin
 ### Base de connaissances
 #### Comment utiliser Datadog et OpsGenie conjointement
-##### Créer des alertes OpsGenie, confirmer leur réception et les fermer depuis Datadog
+##### Créer des alertes OpsGenie, les acknowledge et les fermer depuis Datadog
 
 Pour créer une alerte OpsGenie, ajoutez @opsgenie-nom_service ou @opsgenie dans le champ *Say What's Happening*, à la section 5 de la page de modification d'une alerte de métrique. Lorsque cette alerte se déclenchera dans Datadog, une alerte sera envoyée aux destinataires de votre service OpsGenie.
 
-Pour confirmer la réception d'une alerte OpsGenie ou la fermer depuis Datadog, utilisez les mentions @opsgenie-acknowledge et @opsgenie-close dans le champ Comments d'un événement OpsGenie dans Datadog.
+Pour acknowledge une alerte OpsGenie ou la fermer depuis Datadog, utilisez les mentions @opsgenie-acknowledge et @opsgenie-close dans le champ Comments d'un événement OpsGenie dans Datadog.
 {{< img src="integrations/opsgenie/dd_ack_og_alert.png" alt="Confirmer la réception d'une alerte OpsGenie depuis Datadog" responsive="true" popup="true">}}
 
-##### Recevoir des alertes Datadog créées par OpsGenie, confirmer leur réception et les fermer
+##### Recevoir des alertes Datadog créées par OpsGenie, les acknowledge et les fermer
 
 Configurez une alerte dans OpsGenie. Lorsque cette alerte se déclenchera, un événement sera créé dans Datadog. Les champs Tags et Description de l'alerte OpsGenie seront transmis à Datadog.
 
 {{< img src="integrations/opsgenie/og_create_alert_dd_updated.png" alt="Créer une alerte OG et mettre à jour DD" responsive="true" popup="true">}}
 
-Confirmez la réception de vos alertes OpsGenie et fermez-les depuis OpsGenie. L'événement associé sera alors mis à jour dans Datadog avec le nom d'utilisateur de la personne ayant fermé l'alerte.
+Acknowledge vos alertes OpsGenie et fermez-les depuis OpsGenie. L'événement associé sera alors mis à jour dans Datadog avec le nom d'utilisateur de la personne ayant fermé l'alerte.
 
 {{< img src="integrations/opsgenie/og_closed_dd_updated.png" alt="Fermer une alerte OG et mettre à jour DD" responsive="true">}}
 
