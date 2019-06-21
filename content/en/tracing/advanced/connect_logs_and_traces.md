@@ -250,7 +250,7 @@ Then update your logger configuration to include `dd.trace_id` and `dd.span_id` 
 [See the Java logging documentation][1] for more details about specific logger implementation or to learn how to log in JSON.
 
 
-[1]: /logs/log_collection/java/?tab=log4j#raw-format
+[1]: /logs/log_collection/java/#raw-format
 [2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -397,7 +397,7 @@ The above example illustrates how to use the span's context in the standard libr
 **Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][2].
 
 
-[1]: /tracing/languages/go/#configuration
+[1]: /logs/log_collection/go/#configure-your-logger
 [2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Node.js" %}}
