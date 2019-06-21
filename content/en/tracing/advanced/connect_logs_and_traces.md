@@ -437,9 +437,22 @@ Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to learn more.
+To manually injection trace identifiers into your logs, access the necessary values through the `CorrelationIdentifier` static class. If your logging library supports structured logging, such as JSON messages, add the `dd.trace_id` and `dd.span_id` properties with their respective values. Otherwise, add the strings `dd.trace_id=<TRACE_ID>` and `dd.span_id=<SPAN_ID>` to your log message.
 
-[1]: /help
+```csharp
+using Datadog.Trace;
+
+var traceId = CorrelationIdentifier.TraceId;
+var spanId = CorrelationIdentifier.SpanId;
+
+var message = $"My log message. [dd.trace_id={traceId} dd.span_id={spanId}]";
+```
+
+**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][2].
+
+[1]: /logs/log_collection/csharp/#configure-your-logger
+[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
+
 {{% /tab %}}
 {{% tab "PHP" %}}
 
