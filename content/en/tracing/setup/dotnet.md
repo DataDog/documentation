@@ -34,7 +34,7 @@ There are multiple ways to configure the .NET Tracer:
 - environment variables
 - `<appSettings>` section of the `app.config`/`web.config` file (.NET Framework only)
 
-The following table lists the supported configuration variables. The first column indicates the name used in environment variables or configuration files. The second column indicates the name of the propery on the `TracerSettings` class. You can access these properties in code through `Tracer.Instance.Settings`.
+The following table lists the supported configuration variables. The first column indicates the name used in environment variables or configuration files. The second column indicates the name of the propery on the `TracerSettings` class. You can access these properties in the code through `Tracer.Instance.Settings`.
 
 Setting name          | Property Name          | Description                                                                                                                                                                                                                                                      |
 --------------------- | ---------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
