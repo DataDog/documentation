@@ -437,7 +437,7 @@ Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-To manually injection trace identifiers into your logs, access the necessary values through the `CorrelationIdentifier` static class. If your logging library supports structured logging, such as JSON messages, add the `dd.trace_id` and `dd.span_id` properties with their respective values. Otherwise, add the strings `dd.trace_id=<TRACE_ID>` and `dd.span_id=<SPAN_ID>` to your log message.
+To manually inject trace identifiers into your logs, access the necessary values through the `CorrelationIdentifier` static class. If your logging library supports structured logging, such as JSON messages, add the `dd.trace_id` and `dd.span_id` properties with their respective values. Otherwise, add the strings `dd.trace_id=<TRACE_ID>` and `dd.span_id=<SPAN_ID>` to your log message.
 
 ```csharp
 using Datadog.Trace;
