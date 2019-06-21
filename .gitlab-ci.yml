@@ -18,7 +18,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:david.jones_config-updates
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
   tags:
     - "runner:main"
     - "size:large"
@@ -91,6 +91,10 @@ build_live:
     - create_artifact_untracked
   only:
     - master
+  artifacts:
+    when: on_success
+    paths:
+      - /tmp/extracted/**/*/*metadata.csv
 
 test_live_link_checks:
   <<: *base_template
@@ -108,7 +112,6 @@ missing_metrics:
   stage: post-deploy
   environment: "live"
   script:
-    - python3 -m pip install --upgrade datadog
     - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
   only:
     - master
