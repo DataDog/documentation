@@ -287,7 +287,7 @@ ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
 
 ### Configuration
 
-In addition to the settings listed in [Getting Started][10], the following tables list configuration variables specific to automatic instrumentation. The first column indicates the name used in environment variables or configuration files. The second column indicates the name of the propery on the `TracerSettings` class. You can access these properties in code through `Tracer.Instance.Settings`.
+In addition to the settings listed in [Getting Started][10], the following tables list configuration variables specific to automatic instrumentation. The first column indicates the name used in environment variables or configuration files. The second column indicates the name of the propery on the `TracerSettings` class. You can access these properties in the code through `Tracer.Instance.Settings`.
 
 Setting name                 | Property Name              | Description                                                                                                                                                                                                                                                        |
 -----------------------------| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
