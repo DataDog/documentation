@@ -15,7 +15,7 @@ further_reading:
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that is used for log collection.
 
-Logs make use of a different set of proxy settings than other data types forwarded by the Datadog Agent. This is due to the fact that logs are transported over TCP/SSL, while other features submit data via HTTPS.
+Logs make use of a different [set of proxy settings][1] than other data types forwarded by the Datadog Agent. This is due to the fact that logs are transported over TCP/SSL, while other features submit data via HTTPS.
 
 {{< tabs >}}
 {{% tab "TCP" %}}
@@ -77,3 +77,4 @@ The parameter `use_port_443` does not affect logs sent through a proxy. You need
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+[1]: /agent/proxy

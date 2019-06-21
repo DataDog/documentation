@@ -20,8 +20,16 @@ further_reading:
   text: "Logging without limit"
 ---
 
+Apply a Log processing rule to a specific Log collection configuration block in order to:
 
-If you set up multiple processing rules, they are applied sequentially. Each rule is applied on the result of the previous one.
+* [Filter logs](#filter-logs)
+* [Scrub sensitive data in your logs](#scrub-sensitive-data-in-your-logs)
+* [Proceed to multi-line aggregation](#multi-line-aggregation)
+* [Tail multiple directories or whole directories by using wildcards](#tail-multiple-directories-or-whole-directories-by-using-wildcards)
+
+**Note**: If you set up multiple processing rules, they are applied sequentially and each rule is applied on the result of the previous one.
+
+To apply a processing rule to all logs collected by a Datadog Agent, see the [Global processing rules](#global-processing-rules) section.
 
 ## Filter logs
 
@@ -203,7 +211,7 @@ logs:
 
 ## Global processing rules
 
-Since Datadog Agent v6.10, the `exclude_at_match`, `include_at_match`, and `mask_sequences` rules can be defined globally.
+Since Datadog Agent v6.10, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the `datadog.yaml` main configuration file or through an environment variable:
 
 {{< tabs >}}
 {{% tab "Configuration files" %}}
