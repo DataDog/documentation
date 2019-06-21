@@ -89,13 +89,9 @@ build_live:
     - push_site_to_s3
     - create_artifact
     - create_artifact_untracked
-    - mkdir ./extracted && find /tmp/extracted -name '*metadata.csv' -type f -exec cp {} ./extracted \;
+    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
   only:
     - master
-  artifacts:
-    when: on_success
-    paths:
-      - extracted/**/*.csv
 
 test_live_link_checks:
   <<: *base_template
@@ -105,16 +101,6 @@ test_live_link_checks:
     URL: ${LIVE_DOMAIN}
   script:
     - node /etc/node_modules/link-checker/dd-link-checker.js -e live -c ${CI_PROJECT_DIR}/local/etc/link-check-config.js
-  only:
-    - master
-
-missing_metrics:
-  <<: *base_template
-  stage: post-deploy
-  environment: "live"
-  script:
-    - mkdir -p /tmp/extracted && cp -r ./extracted/* /tmp/extracted
-    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
   only:
     - master
 
