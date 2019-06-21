@@ -6,14 +6,22 @@ main:
     children:
       - name: "Agent"
         url: "getting_started/agent"
+      - name: "Datadog Application"
+        url: "getting_started/application"
       - name: "Integrations"
         url: "getting_started/integrations"
+        children:
+          - name: "Prometheus/Openmetrics"
+            url: "getting_started/prometheus"
       - name: "Collect traces"
         url: "getting_started/tracing"
+        childrent:
+          - name: "Distributed Tracing"
+            url: "getting_started/tracing/distributed_tracing"
+      - name: "API"
+        url: "getting_started/api"
       - name: "Learning Center"
         url: "getting_started/learning_center"
-      - name: "Prometheus/Openmetrics"
-        url: "getting_started/prometheus"
   # TAGGING
   - name: "Tagging"
     url: "tagging/"
