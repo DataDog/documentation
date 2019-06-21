@@ -89,12 +89,13 @@ build_live:
     - push_site_to_s3
     - create_artifact
     - create_artifact_untracked
+    - mkdir ./extracted && find /tmp/extracted -name '*metadata.csv' -type f -exec cp {} ./extracted \;
   only:
     - master
   artifacts:
     when: on_success
     paths:
-      - /tmp/extracted/**/*/*metadata.csv
+      - extracted/**/*.csv
 
 test_live_link_checks:
   <<: *base_template
@@ -112,6 +113,7 @@ missing_metrics:
   stage: post-deploy
   environment: "live"
   script:
+    - mkdir -p /tmp/extracted && cp -r ./extracted/* /tmp/extracted
     - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
   only:
     - master
