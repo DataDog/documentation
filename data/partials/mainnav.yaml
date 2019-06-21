@@ -309,7 +309,7 @@ main:
         url: "tracing/send_traces/"
         children:
           - name: "Agent APM metrics"
-          - url: "tracing/send_traces/agent-apm-metrics/"
+            url: "tracing/send_traces/agent-apm-metrics/"
 
       # Languages
       - name: "Instrument your application"
