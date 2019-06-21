@@ -81,7 +81,7 @@ Next, [Instrument your application][12]. For the full overview of all of the ste
 [1]: /tracing
 [2]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
 [3]: https://github.com/DataDog/datadog-trace-agent/blob/6.4.1/datadog.example.yaml
-[4]: tracing/send_traces/agent-apm-metrics
+[4]: /tracing/send_traces/agent-apm-metrics
 [5]: /agent
 [6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [7]: /integrations/amazon_xray/#overview
