@@ -2,7 +2,7 @@
 title: Prometheus metrics collection
 kind: documentation
 aliases:
-- /getting_started/prometheus
+    - /getting_started/prometheus
 further_reading:
 - link: "logs/log_collection"
   tag: "Documentation"

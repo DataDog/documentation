@@ -12,7 +12,7 @@ main:
         url: "getting_started/integrations"
         children:
           - name: "Prometheus/Openmetrics"
-            url: "getting_started/prometheus"
+            url: "getting_started/integrations/prometheus"
       - name: "Collect traces"
         url: "getting_started/tracing"
         childrent:
