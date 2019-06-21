@@ -15,7 +15,7 @@ main:
             url: "getting_started/integrations/prometheus/"
       - name: "Collect traces"
         url: "getting_started/tracing/"
-        childrent:
+        children:
           - name: "Distributed Tracing"
             url: "getting_started/tracing/distributed-tracing/"
       - name: "API"

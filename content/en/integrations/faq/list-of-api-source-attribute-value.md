@@ -24,7 +24,7 @@ kind: faq
 |Amazon Cognito|COGNITO|
 |Amazon Connect|AWSCONNECT|
 |Amazon Directconnect|DIRECTCONNECT|
-|Amazon Database Migration Service|AWSDMS|
+|Amazon Dms|AWSDMS|
 |Amazon Documentdb|DOCUMENTDB|
 |Amazon Dynamodb|DYNAMODB|
 |Amazon Ebs|EBS|
@@ -35,10 +35,10 @@ kind: faq
 |Amazon Elasticache|ELASTICACHE|
 |Amazon Elasticbeanstalk|ELASTICBEANSTALK|
 |Amazon Elastic Transcoder|ELASTICTRANSCODER|
-|Amazon Elemental Mediaconnect|MEDIACONNECT|
-|Amazon Elemental Mediaconvert|MEDIACONVERT|
-|Amazon Elemental Mediapackage|MEDIAPACKAGE|
-|Amazon Elemental Mediatailor|MEDIATAILOR|
+|Amazon Mediaconnect|MEDIACONNECT|
+|Amazon Mediaconvert|MEDIACONVERT|
+|Amazon Mediapackage|MEDIAPACKAGE|
+|Amazon Mediatailor|MEDIATAILOR|
 |Amazon Elb|ELB|
 |Amazon Emr|EMR|
 |Amazon Es|ES|
@@ -57,7 +57,7 @@ kind: faq
 |Amazon Machine Learning|MACHINELEARNING|
 |Amazon Mq|MQ|
 |Amazon Msk|MSK|
-|Amazon Natgateway|NATGATEWAY|
+|Amazon Nat Gateway|NATGATEWAY|
 |Amazon Neptune|NEPTUNE|
 |Amazon Ops Works|OPSWORKS|
 |Amazon Polly|POLLY|
@@ -66,12 +66,12 @@ kind: faq
 |Amazon Rekognition|REKOGNITION|
 |Amazon Route53|ROUTE53|
 |Amazon S3|S3|
-|Amazon Sage Maker|SAGEMAKER|
+|Amazon Sagemaker|SAGEMAKER|
 |Amazon Ses|SES|
 |Amazon Shield|SHIELD|
 |Amazon Sns|SNS|
 |Amazon Sqs|SQS|
-|Amazon States|STEPFUNCTIONS|
+|Amazon Step Functions|STEPFUNCTIONS|
 |Amazon Storage Gateway|STORAGEGATEWAY|
 |Amazon Swf|SWF|
 |Amazon Translate|TRANSLATE|
@@ -144,17 +144,31 @@ kind: faq
 |Github|GITHUB|
 |Go Expvar|GOEXPVAR|
 |Google App Engine|GAE|
+|Google Cloud Apis|GCPAPIS|
 |Google Cloud Big Query|GCPBIGQUERY|
+|Google Cloud Bigtable|GCPBIGTABLE|
+|Google Cloud Composer|GCPCOMPOSER|
+|Google Cloud Dataflow|GCPDATAFLOW|
+|Google Cloud Dataproc|GCPDATAPROC|
 |Google Cloud Datastore|GCPDATASTORE|
+|Google Cloud Filestore|GCPFILESTORE|
 |Google Cloud Firebase|GCPFIREBASE|
+|Google Cloud Firestore|GCPFILESTORE|
 |Google Cloud Functions|GCPCLOUDFUNCTIONS|
+|Google Cloud Interconnect|GCPINTERCONNECT|
+|Google Cloud Iot|GCPIOT|
+|Google Cloud Loadbalancing|GCPLOADBALANCING|
 |Google Stackdriver Logging|GCPLOGGING|
 |Google Cloud Ml|GCPML|
 |Google Cloud Platform|GCP|
 |Google Cloud Pubsub|GCPPUBSUB|
+|Google Cloud Redis|GCPREDIS|
+|Google Cloud Router|GCPROUTER|
 |Google Cloud Run|GCPCLOUDRUN|
 |Google Cloud Spanner|GCPSPANNER|
 |Google Cloud Storage|GCPSTORAGE|
+|Google Cloud Tasks|GCPTASKS|
+|Google Cloud Tpu|GCPTPU|
 |Google Cloud Vpn|GCPVPN|
 |Google Cloudsql|GCPCLOUDSQL|
 |Google Compute Engine|GCPCOMPUTE|
