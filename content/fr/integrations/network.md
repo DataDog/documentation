@@ -93,22 +93,21 @@ Le check réseau n'inclut aucun check de service.
 
 ## Dépannage
 
-* [Comment envoyer des métriques de host TCP/UDP via l'API Datadog ?][8]
+* [Comment envoyer des métriques de host TCP/UDP via l'API Datadog ?][7]
 
 ## Pour aller plus loin
 
-* [Créer un monitor réseau sur un check HTTP][9]
+* [Créer un monitor réseau sur un check HTTP][8]
 
 
+
+
+{{< get-dependencies >}}
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/network/images/netdashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/network/datadog_checks/network/data/conf.yaml.default
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/network/metadata.csv
-[8]: https://docs.datadoghq.com/fr/integrations/faq/how-to-send-tcp-udp-host-metrics-via-the-datadog-api
-[9]: https://docs.datadoghq.com/fr/monitors/monitor_types/network
-
-
-{{< get-dependencies >}}
+[7]: https://docs.datadoghq.com/fr/integrations/faq/how-to-send-tcp-udp-host-metrics-via-the-datadog-api
+[8]: https://docs.datadoghq.com/fr/monitors/monitor_types/network
