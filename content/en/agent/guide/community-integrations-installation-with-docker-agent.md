@@ -22,11 +22,31 @@ Community developed integrations for the Datadog Agent are stored in the [Integr
 To install the `<INTEGRATION_NAME>` check on your host:
 
 1. Install the [developer toolkit][1].
-2. Clone the integrations-extras repository: `git clone https://github.com/DataDog/integrations-extras.git`.
-3. Update your `ddev` config with the `integrations-extras/` path: `ddev config set extras ./integrations-extras`.
-4. Run `ddev -e release build <INTEGRATION_NAME>` to build the `<INTEGRATION_NAME>` package.
+2. Clone the integrations-extras repository:
+
+    ```
+    git clone https://github.com/DataDog/integrations-extras.git.
+    ```
+
+3. Update your `ddev` config with the `integrations-extras/` path:
+
+    ```
+    ddev config set extras ./integrations-extras
+    ```
+
+4. To build the `<INTEGRATION_NAME>` package, run:
+
+    ```
+    ddev -e release build <INTEGRATION_NAME>
+    ```
+
 5. [Download and launch the Datadog Agent][2].
-6. Run `datadog-agent integration install -w <PATH_OF_INTEGRATION_NAME_PACKAGE>/<ARTIFACT_NAME>.whl`.
+6. Run the following command to install the integrations wheel with the Agent:
+
+    ```
+    datadog-agent integration install -w <PATH_OF_INTEGRATION_NAME_PACKAGE>/<ARTIFACT_NAME>.whl
+    ```
+
 7. Configure your integration like [any other packaged integration][3].
 8. [Restart the Agent][4].
 
