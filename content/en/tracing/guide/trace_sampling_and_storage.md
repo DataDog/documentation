@@ -43,13 +43,13 @@ Datadog APM computes following aggregate statistics over all the traces instrume
 
 ### Goal of Sampling
 
-The goal of sampling is to keep the traces that matter the most:
+The goal of sampling is to *keep* the traces that matter the most:
 
 * Distributed traces
 * Low QPS Services
 * Representative variety set of traces
 
-{{< img src="tracing/product_specs/trace_sampling_storage/sampling_trace.png" alt="Individual traces are sampled at the Agent, server, and client level." responsive="true" style="width:90%;">}}
+{{< img src="tracing/product_specs/trace_sampling_storage/tracing-flow-chart.png" alt="Individual traces are sampled at the Client, Agent, and Server level." responsive="true" style="width:90%;">}}
 
 ### Sampling Rules
 
