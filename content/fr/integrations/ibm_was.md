@@ -103,14 +103,15 @@ IBM WAS n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
-
-
-{{< get-dependencies >}}
 [1]: https://www.ibm.com/cloud/websphere-application-platform
 [2]: https://github.com/DataDog/integrations-core/blob/master/ibm_was/datadog_checks/ibm_was/data/conf.yaml.example
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[6]: https://docs.datadoghq.com/fr/help
+[6]: https://github.com/DataDog/integrations-core/blob/master/ibm_was/metadata.csv
+[7]: https://docs.datadoghq.com/fr/help
+
+
+{{< get-dependencies >}}
