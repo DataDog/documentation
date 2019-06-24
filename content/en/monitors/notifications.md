@@ -261,7 +261,7 @@ Send the monitor notification to the appropriate endpoint:
 
 **Notes**:
 * An **@-mention** must have a space between it and the last line character: `{{value}}@slack-channel` is invalid `{{value}} @slack-channel` is valid.
-* An email address associated with a pending Datadog user invitation is considered inactive and will not receive notifications
+* An email address associated with a pending Datadog user invitation is considered inactive and does not receive notifications.
 
 ### Integrations
 
