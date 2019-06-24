@@ -54,7 +54,7 @@ Le check MySQL est inclus avec le paquet de l'[Agent Datadog][2]. Vous n'avez do
 
 ### Configuration
 
-Modifiez le fichier `mysql.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) MySQL. Consultez le [fichier d'exemple mysql.d/conf.yam][4] pour découvrir toutes les options de configuration disponibles.
+Modifiez le fichier `mysql.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) MySQL. Consultez le [fichier d'exemple mysql.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
 #### Préparer MySQL
 
