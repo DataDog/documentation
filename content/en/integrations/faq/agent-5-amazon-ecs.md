@@ -30,7 +30,7 @@ You may either configure the task using the [AWS CLI tools][2] or using the Amaz
 3. Execute the following command:
 
 ```
-Amazon Elastic Container Service register-task-definition --cli-input-json file://path/to/dd-agent-ecs.json
+Amazon Elastic Container Service register-task-definition --cli-input-json file:<PATH_TO_JSON_DD_AGENT_ECS>.json
 ```
 
 ##### Web UI
