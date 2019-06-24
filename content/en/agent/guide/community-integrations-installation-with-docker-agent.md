@@ -41,7 +41,7 @@ To install the `<INTEGRATION_NAME>` check on your host:
     ```
 
 5. [Download and launch the Datadog Agent][2].
-6. Run the folloxing command to install the integrations wheel with the Agent:
+6. Run the following command to install the integrations wheel with the Agent:
 
     ```
     datadog-agent integration install -w <PATH_OF_INTEGRATION_NAME_PACKAGE>/<ARTIFACT_NAME>.whl
