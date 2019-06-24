@@ -30,21 +30,22 @@ To begin tracing applications written in any language, first [install and config
 
 There are multiple ways to configure the .NET Tracer:
 
-- via code, using properties on `Tracer.Settings`
+- via code, using properties on the `TracerSettings` class
 - environment variables
 - `<appSettings>` section of the `app.config`/`web.config` file (.NET Framework only)
 
-The following table lists the supported configuration variables. Tracer settings can be accessed through properties on `Tracer.Settings`.
+The following table lists the supported configuration variables. The first column indicates the name used in environment variables or configuration files. The second column indicates the name of the propery on the `TracerSettings` class. You can access these properties in the code through `Tracer.Instance.Settings`.
 
-Environment Variable or AppSetting       | Property Name  | Description                                                                                                                                                                                                                                                      |
----------------------------------------- | -------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-`DD_TRACE_ENABLED`                       | `TraceEnabled` | Enables or disables the profiler. Valid values are: `true` (default) or `false`                                                                                                                                                                                  |
-`DD_TRACE_LOG_PATH`                      | N/A            | Sets the path for the profiler's log file.<br/><br/>Windows default: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br/><br/>Linux default: `/var/log/datadog/dotnet-profiler.log`                                                                 |
-`DD_TRACE_AGENT_URL`                     | `AgentUri`     | Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Default value is `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.                                                                                        |
-`DD_AGENT_HOST`                          | N/A            | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Default is value `localhost`.                                                                                      |
-`DD_TRACE_AGENT_PORT`                    | N/A            | Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Default value is `8126`.                                                                                                    |
-`DD_ENV`                                 | `Environment`  | Adds the `env` tag with the specified value to generated spans. See [Agent configuration][2] for more details about the `env` tag. Default is _empty_ (no `env` tag).                                                                                            |
-`DD_SERVICE_NAME`                        | `ServiceName`  | Sets the default service name. If not set, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). The default is to determine the service name automatically. |
+Setting name          | Property Name          | Description                                                                                                                                                                                                                                                      |
+--------------------- | ---------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+`DD_TRACE_ENABLED`    | `TraceEnabled`         | Enables or disables the profiler. Valid values are: `true` (default) or `false`                                                                                                                                                                                  |
+`DD_TRACE_LOG_PATH`   | N/A                    | Sets the path for the profiler's log file.<br/><br/>Windows default: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br/><br/>Linux default: `/var/log/datadog/dotnet-profiler.log`                                                                 |
+`DD_TRACE_AGENT_URL`  | `AgentUri`             | Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Default value is `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.                                                                                        |
+`DD_AGENT_HOST`       | N/A                    | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Default is value `localhost`.                                                                                      |
+`DD_TRACE_AGENT_PORT` | N/A                    | Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Default value is `8126`.                                                                                                    |
+`DD_ENV`              | `Environment`          | Adds the `env` tag with the specified value to generated spans. See [Agent configuration][2] for more details about the `env` tag. Default is _empty_ (no `env` tag).                                                                                            |
+`DD_SERVICE_NAME`     | `ServiceName`          | Sets the default service name. If not set, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). The default is to determine the service name automatically. |
+`DD_LOGS_INJECTION`   | `LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                                                                        |
 
 ## Automatic Instrumentation
 
@@ -286,21 +287,20 @@ ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
 
 ### Configuration
 
-In addition to the settings listed in [Getting Started][10], the following tables list configuration variables specific to automatic instrumentation.
+In addition to the settings listed in [Getting Started][10], the following tables list configuration variables specific to automatic instrumentation. The first column indicates the name used in environment variables or configuration files. The second column indicates the name of the propery on the `TracerSettings` class. You can access these properties in the code through `Tracer.Instance.Settings`.
 
-Tracer settings can be accessed through properties on `Tracer.Settings`:
+Setting name                 | Property Name              | Description                                                                                                                                                                                                                                                        |
+-----------------------------| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+`DD_DISABLED_INTEGRATIONS`   | `DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][3] section below. |
+`DD_TRACE_ANALYTICS_ENABLED` | `AnalyticsEnabled`         | Shorthand that enables default Trace Search and Analytics settings for web framework integrations. Valid values are: `true` or `false` (default).                                                                                                                  |
 
-Environment Variable or AppSetting       | Property Name              | Description                                                                                                                                                                                                                                                        |
----------------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-`DD_DISABLED_INTEGRATIONS`               | `DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][3] section below. |
-`DD_TRACE_ANALYTICS_ENABLED`             | `AnalyticsEnabled`         | Shorthand that enables default Trace Search and Analytics settings for web framework integrations. Valid values are: `true` or `false` (default).                                                                                                                  |
+The following table lists integration-specific settings. The first column indicates the name used in environment variables or configuration files. The second column indicates the name of the propery on the `IntegrationSettings` class. You can access these properties in the code through `Tracer.Instance.Settings.Integrations["<INTEGRATION>"]`. Integration names are listed in the [Integrations][3] section below.
 
-Integration settings can be accessed through properties on `Tracer.Settings.Integrations["<INTEGRATION>"]`. Integration names are listed in the [Integrations][3] section below.
-
-Environment Variable or AppSetting       | Property Name              | Description                                                                                                                    |
----------------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-`DD_<INTEGRATION>_ANALYTICS_ENABLED`     | `AnalyticsEnabled`         | Enables or disable Trace Search and Analytics for a specific integration. Valid values are: `true` or `false` (default).       |
-`DD_<INTEGRATION>_ANALYTICS_SAMPLE_RATE` | `AnalyticsSampleRate`      | Sets the Trace Search and Analytics sampling rate for a specific integration. A floating number between `0` and `1` (default). |
+Setting name                             | Property Name              | Description                                                                                                                        |
+---------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+`DD_<INTEGRATION>_ENABLED`               | `Enabled`                  | Enables or disables a specific integration. Valid values are: `true` (default) or `false`.                                         |
+`DD_<INTEGRATION>_ANALYTICS_ENABLED`     | `AnalyticsEnabled`         | Enables or disable Trace Search and Analytics for a specific integration. Valid values are: `true` or `false` (default).           |
+`DD_<INTEGRATION>_ANALYTICS_SAMPLE_RATE` | `AnalyticsSampleRate`      | Sets the Trace Search and Analytics sampling rate for a specific integration. A floating number between `0.0` and `1.0` (default). |
 
 ### Runtime Compatibility
 

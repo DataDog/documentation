@@ -9,6 +9,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-aws-fargate/"
   tag: "Blog"
   text: "Monitor AWS Fargate applications with Datadog"
+- link: "/agent/autodiscovery/?tab=hostagent"
+  tag: "Documentation"
+  text: "Autodiscovery"
 ---
 
 Set up integrations for [ECS Fargate][1] with [Docker Label Annotations][2].

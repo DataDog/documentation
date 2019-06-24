@@ -368,7 +368,7 @@ class MyClass {
     // Span provided by @Trace annotation.
     if (span != null) {
       span.setTag(DDTags.SERVICE_NAME, "my-custom-service");
-      span.setTag(DDTags.ANALYTICS_KEY, true);
+      span.setTag(DDTags.ANALYTICS_SAMPLE_RATE, true);
     }
   }
 }

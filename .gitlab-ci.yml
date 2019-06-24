@@ -18,7 +18,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:david.jones_config-updates
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
   tags:
     - "runner:main"
     - "size:large"
@@ -89,6 +89,7 @@ build_live:
     - push_site_to_s3
     - create_artifact
     - create_artifact_untracked
+    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
   only:
     - master
 
