@@ -1,5 +1,5 @@
 ---
-title: APM (Tracing) Security
+title: APM & Distributed Tracing Security
 kind: documentation
 aliases:
     - /tracing/security/
