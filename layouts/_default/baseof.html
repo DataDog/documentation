@@ -203,7 +203,7 @@
           // send the page stats
           DD_LOGS.logger.info('Page loaded', pageStats);
         } catch (e) {
-          DD_LOGS.logger.error('Page stats collection error', {'message': e});
+          DD_LOGS.logger.debug('Page stats collection error', {'message': e});
         }
         try {
           let pageResources = performance.getEntriesByType("resource");
@@ -221,12 +221,12 @@
                 };
                 DD_LOGS.logger.info('Resource loaded', resource);
               } else {
-                DD_LOGS.logger.error('Could not load resource: ' + el.name);
+                DD_LOGS.logger.debug('Could not load resource: ' + el.name);
               }
             }
           }
         } catch(e) {
-          DD_LOGS.logger.error('resource stats collection error' + e);
+          DD_LOGS.logger.debug('resource stats collection error' + e);
         }
       });
     </script>

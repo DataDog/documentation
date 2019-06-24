@@ -31,7 +31,7 @@ further_reading:
 
 This decision was taken after the POODLE problem. Versioned endpoints start with Agent v5.2.0, where each version of the Agent calls a different endpoint based on the version of the *Forwarder*. For example, Agent v5.2.0 calls `5-2-0-app.agent.datadoghq.com`. Therefore you must whitelist `*.agent.datadoghq.com` in your firewall(s).
 
-These domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at:  
+These domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at:
 
 * **[https://ip-ranges.datadoghq.com][4]**, or
 * **[https://ip-ranges.datadoghq.eu][5]** for Datadog EU
@@ -74,14 +74,14 @@ You should whitelist all of these IPs. While only a subset are active at any giv
 
 **All outbound traffic is sent over SSL via TCP / UDP.**
 
-Open the following ports in order to benefit from all the Agent functionalities: 
+Open the following ports in order to benefit from all the Agent functionalities:
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
 * **Outbound**:
 
-  * `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers) 
+  * `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers)
   * `123/udp`: NTP - [More details on the importance of NTP][1].
   * `10516/tcp`: port for the [Log collection][2]
   * `10255/tcp`: port for the [Kubernetes http kubelet][3]
@@ -92,12 +92,12 @@ Open the following ports in order to benefit from all the Agent functionalities:
   * `5000/tcp`: port for the [go_expvar server][4]
   * `5001/tcp`: port on which the IPC api listens
   * `5002/tcp`: port for [the Agent browser GUI to be served][5]
-  * `8125/udp`: dogstatsd. Unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: 
+  * `8125/udp`: dogstatsd. Unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost:
 
       * `127.0.0.1`
-      * `::1` 
+      * `::1`
       * `fe80::1`
-  
+
   * `8126/tcp`: port for the [APM Receiver][6]
 
 
@@ -112,15 +112,15 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
 * **Outbound**:
 
-  * `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers) 
+  * `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers)
   * `123/udp`: NTP - [More details on the importance of NTP][1].
 
 * **Inbound**:
 
-  * `8125/udp`: DogStatsd. Unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: 
+  * `8125/udp`: DogStatsd. Unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost:
 
       * `127.0.0.1`
-      * `::1` 
+      * `::1`
       * `fe80::1`
 
   * `8126/tcp`: port for the [APM Receiver][2]
