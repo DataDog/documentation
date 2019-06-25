@@ -3,7 +3,6 @@ title: Trace Search
 kind: documentation
 description: "Global search of all your traces with tags"
 aliases:
-  - tracing/trace_search_analytics/analytics
   - tracing/trace_search_analytics/
   - tracing/trace_search/
   - tracing/search
@@ -24,7 +23,7 @@ further_reading:
 - link: "tracing/visualization/trace"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
-- link: "tracing/trace_search_analytics/analytics"
+- link: "tracing/trace_search_and_analytics/analytics"
   tag: "Documentation"
   text: "Analytics on your APM data at infinite cardinality"
 ---
