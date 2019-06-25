@@ -60,5 +60,5 @@ If you have any questions about how the Log Management Service satisfies the app
 [1]: /security
 [2]: /logs/log_collection
 [3]: /agent/logs/advanced_log_collection/?tab=exclude_at_match#filter-logs
-[4]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-in-your-logs
+[4]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
 [5]: /integrations/amazon_lambda/#log-collection

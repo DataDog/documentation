@@ -1,5 +1,5 @@
 ---
-title: Agent Advanced log collection
+title: Advanced Log Collection
 kind: documentation
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
@@ -17,15 +17,15 @@ further_reading:
   text: "See how to explore your logs"
 - link: "logs/logging_without_limits"
   tag: "Documentation"
-  text: "Logging without limit"
+  text: "Logging without limits"
 ---
 
-Apply a Log processing rule to a specific Log collection configuration block in order to:
+Apply log processing rules to a specific log collection configurations to:
 
 * [Filter logs](#filter-logs)
-* [Scrub sensitive data in your logs](#scrub-sensitive-data-in-your-logs)
+* [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
 * [Proceed to multi-line aggregation](#multi-line-aggregation)
-* [Tail multiple directories or whole directories by using wildcards](#tail-multiple-directories-or-whole-directories-by-using-wildcards)
+* [Tail directories by using wildcards](#tail-directories-by-using-wildcards)
 
 **Note**: If you set up multiple processing rules, they are applied sequentially and each rule is applied on the result of the previous one.
 
@@ -82,11 +82,11 @@ logs:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Scrub sensitive data in your logs
+## Scrub sensitive data from your logs
 
-If your logs contain sensitive information that you want to redact, configure the Datadog Agent to scrub sensitive sequences by using the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`.
+If your logs contain sensitive information that need redacting, configure the Datadog Agent to scrub sensitive sequences by using the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`.
 
-This replaces all matched groups with `replace_placeholder` parameter value.
+This replaces all matched groups with the value of the `replace_placeholder` parameter.
 
 For example, redact credit card numbers:
 
@@ -106,7 +106,7 @@ logs:
 
 ## Multi-line aggregation
 
-If your logs are not sent in JSON and you want to aggregate several lines into one single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line. This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type` which aggregates all lines into one single entry until the given pattern is detected again.
+If your logs are not sent in JSON and you want to aggregate several lines into a single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line. This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type` which aggregates all lines into a single entry until the given pattern is detected again.
 
 For example, every Java log line starts with a timestamp in `yyyy-dd-mm` format. These lines include a stack trace that can be sent as two logs:
 
@@ -122,7 +122,7 @@ For example, every Java log line starts with a timestamp in `yyyy-dd-mm` format.
 {{< tabs >}}
 {{% tab "Configuration file" %}}
 
-To achieve this, you need to use the following `log_processing_rules`:
+To send the example logs above with a configuration file, use the following `log_processing_rules`:
 
 ```yaml
 logs:
@@ -139,7 +139,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-In a docker environment use the `com.datadoghq.ad.logs` labels on your container to make sure that the log is properly collected, for example:
+In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
 
 ```
  labels:
@@ -149,7 +149,7 @@ In a docker environment use the `com.datadoghq.ad.logs` labels on your container
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-In a Kubernetes environment use the `ad.datadoghq.com` pod annotations on your pods to make sure that the log is properly collected, for example:
+In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
 
 ```
 apiVersion: extensions/v1beta1
@@ -184,7 +184,7 @@ More examples:
 
 **Note**: Regex patterns for multi-line logs must start at the **beginning** of a log. Patterns cannot be matched mid-line.
 
-## Tail multiple directories or whole directories by using wildcards
+## Tail directories by using wildcards
 
 If your log files are labeled by date or all stored in the same directory, configure your Datadog Agent to monitor them all and automatically detect new ones by using wildcards in the `path` attribute.
 
@@ -211,7 +211,7 @@ logs:
 
 ## Global processing rules
 
-Since Datadog Agent v6.10, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the `datadog.yaml` main configuration file or through an environment variable:
+For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][2] or through an environment variable:
 
 {{< tabs >}}
 {{% tab "Configuration files" %}}
@@ -232,7 +232,7 @@ logs_config:
 {{% /tab %}}
 {{% tab "Environment Variable" %}}
 
-The `DD_LOGS_CONFIG_PROCESSING_RULES` can be used to configure global processing rules:
+Use the environment variable `DD_LOGS_CONFIG_PROCESSING_RULES` to configure global processing rules, for example:
 
 ```
 DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
@@ -240,13 +240,14 @@ DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_
 
 {{% /tab %}}
 {{< /tabs >}}
-All the logs collected by the Datadog Agent are impacted by those processing rules.
+All the logs collected by the Datadog Agent are impacted by the global processing rules.
 
-**Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the [Status Command][1] to troubleshoot any issues.
+**Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][1] to troubleshoot any issues.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information
+[1]: /agent/guide/agent-commands/#agent-information
+[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
