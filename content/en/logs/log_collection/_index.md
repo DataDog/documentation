@@ -24,15 +24,16 @@ further_reading:
   text: "Logging without limit"
 ---
 
-Datadog Log Management comes with a set of out of the box solutions to collect your logs and send them to Datadog:
+Follow the [Datadog Agent installation instructions][1] to start forwarding logs alongside your metrics and traces. The Agent can [tail log files][2] or [listen for logs sent over UDP / TCP][3], and you can configure it to [filter out logs][4], [scrub sensitive data][5], or  aggregate [multi line logs][6]. Finally choose your application language below in order to get dedicated logging best practices.
+If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][7], [Syslog-ng][8], [NXlog][9], [FluentD][10], and [Logstash][11].
 
-* [**Collect logs from your hosts**](#hosts-log-collection).
+Datadog Log Management also comes with a set of out of the box solutions to collect your logs and send them to Datadog:
+
+* [**Collect logs from your applications**](#application-log-collection).
 * [**Collect logs from a docker environment**](#container-log-collection).
 * [**Collect logs from your Cloud provider**](#cloud-provider-log-collection).
 
-If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][1], [Syslog-ng][2], [NXlog][3], [FluentD][4], and [Logstash][5].
-
-Datadog Integrations and Log Collection are tied together. Use an integration default configuration file to enable its dedicated [processing][6], [parsing][7], and [facets][8] in Datadog.
+Datadog Integrations and Log Collection are tied together. Use an integration default configuration file to enable its dedicated [processing][12], [parsing][13], and [facets][14] in Datadog.
 
 <div class="alert alert-warning">
 <a href="/integrations/#cat-log-collection">Consult the current list of available supported integrations</a>.
@@ -42,10 +43,9 @@ Find at the bottom of this page the [list of available Datadog Log collection en
 
 **Note**: When sending logs in a JSON format to Datadog, there is a set of reserved attributes that have a specific within Datadog. See the [Reserved Attributes section](#reserved-attributes) to learn more.
 
-## Hosts Log collection
+## Application Log collection
 
-Follow the [Datadog Agent installation instructions][9] to start forwarding logs alongside your metrics and traces.
-The Agent can [tail log files][10] or [listen for logs sent over UDP / TCP][11], and you can configure it to [filter out logs][12], [scrub sensitive data][13], or  aggregate [multi line logs][14]. Finally choose your application language below in order to get dedicated logging best practices.
+After you have [enabled log collection][1], configure your application language to generate logs:
 
 {{< partial name="logs/logs-languages.html" >}}
 
@@ -229,20 +229,20 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/rsyslog
-[2]: /integrations/syslog_ng
-[3]: /integrations/nxlog
-[4]: /integrations/fluentd/#log-collection
-[5]: /integrations/logstash/#log-collection
-[6]: /logs/processing
-[7]: /logs/processing/parsing
-[8]: /logs/explorer/?tab=facets#setup
-[9]: /agent/logs
-[10]: /agent/logs/#tail-existing-files
-[11]: /agent/logs/#stream-logs-through-tcp-udp
-[12]: /agent/logs/#filter-logs
-[13]: /agent/logs/#scrub-sensitive-data-in-your-logs
-[14]: /agent/logs/#multi-line-aggregation
+[1]: /agent/logs
+[2]: /agent/logs/#tail-existing-files
+[3]: /agent/logs/#stream-logs-through-tcp-udp
+[4]: /agent/logs/#filter-logs
+[5]: /agent/logs/#scrub-sensitive-data-in-your-logs
+[6]: /agent/logs/#multi-line-aggregation
+[7]: /integrations/rsyslog
+[8]: /integrations/syslog_ng
+[9]: /integrations/nxlog
+[10]: /integrations/fluentd/#log-collection
+[11]: /integrations/logstash/#log-collection
+[12]: /logs/processing
+[13]: /logs/processing/parsing
+[14]: /logs/explorer/?tab=facets#setup
 [15]: /agent/docker/log
 [16]: /autodiscovery/management
 [17]: /agent/autodiscovery/integrations
