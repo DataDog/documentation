@@ -55,7 +55,7 @@ The goal of sampling is to *keep* the traces that matter the most:
 
 For the lifecycle of a trace, decisions are made at Tracing Client, Agent, and Backend level in the following order.
 
-1. Tracing Client - The tracing client adds a context attribute `sampling.priority` to traces, allowing a single trace to be propagated in a distributed architecture across language agnostic request headers. `Sampling-priority` attribute is a hint to the Datadog Agent to do its best to prioritize the trace or drop unimportant ones. 
+1. Tracing Client - The tracing client adds a context attribute `sampling.priority` to traces, allowing a single trace to be propagated in a distributed architecture across language agnostic request headers. `Sampling-priority` attribute is a hint to the Datadog Agent to do its best to prioritize the trace or drop unimportant ones.
 
     | Value                  | Type                        | Action                                                                                               |
     | :--------------------- | :----------------           | :----------                                                                                          |
@@ -85,7 +85,7 @@ For the lifecycle of a trace, decisions are made at Tracing Client, Agent, and B
 
 ## Manually Control Trace Priority
 
-APM enables distributed tracing by default to allow trace propagation between tracing headers across multiple services/hosts. Tracing headers include a priority tag to ensure complete traces between upstream and downstream services during trace propagation. You can override this tag to manually keep a trace (critical transaction, debug mode, etc.) or drop a trace (health checks, static assets, etc). 
+APM enables distributed tracing by default to allow trace propagation between tracing headers across multiple services/hosts. Tracing headers include a priority tag to ensure complete traces between upstream and downstream services during trace propagation. You can override this tag to manually keep a trace (critical transaction, debug mode, etc.) or drop a trace (health checks, static assets, etc).
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -363,7 +363,7 @@ another_span->SetTag(datadog::tags::manual_drop, {});
 {{% /tab %}}
 {{< /tabs >}}
 
-Note that trace priority should be manually controlled only before any context propagation. If this happens after the propagation of a context, the system can’t ensure that the entire trace is kept across services. Manually controlled trace priority is set at tracing client location, the trace can still be dropped by Agent or server location based on the [sampling rules][4].
+Note that trace priority should be manually controlled only before any context propagation. If this happens after the propagation of a context, the system can’t ensure that the entire trace is kept across services. Manually controlled trace priority is set at tracing client location, the trace can still be dropped by Agent or server location based on the [sampling rules](#sampling-rules).
 
 
 ## Trace Storage
@@ -406,4 +406,3 @@ Once a trace has been viewed by opening a full page, it continues to be availabl
 [1]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
 [2]: link_to_manual_section
 [3]: https://docs.datadoghq.com/security/tracing/#resource-filtering
-[4]: link_to_sampling_rules
