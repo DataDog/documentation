@@ -3,7 +3,7 @@ title: Parsing
 kind: documentation
 description: "Parse your logs using the Grok Processor"
 aliases:
-    - logs/parsing/
+    - /logs/parsing/
 further_reading:
 - link: "logs/processing/processors"
   tag: "Documentation"

@@ -3,9 +3,9 @@ title: Trace Search
 kind: documentation
 description: "Global search of all your traces with tags"
 aliases:
-  - tracing/trace_search_analytics/
-  - tracing/trace_search/
-  - tracing/search
+  - /tracing/trace_search_analytics/
+  - /tracing/trace_search/
+  - /tracing/search
   - /tracing/getting_further/apm_events/
 further_reading:
 - link: "tracing/setup/"
