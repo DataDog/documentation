@@ -259,7 +259,9 @@ Send the monitor notification to the appropriate endpoint:
 * Notify any non-Datadog users via email by adding `@<EMAIL>` to the notification message.
 * Install the Slack integration to send your notifications directly in the appropriate channel.
 
-**Note**: An **@-mention** must have a space between it and the last line character: `{{value}}@slack-channel` is invalid `{{value}} @slack-channel` is valid.
+**Notes**:
+* An **@-mention** must have a space between it and the last line character: `{{value}}@slack-channel` is invalid `{{value}} @slack-channel` is valid.
+* An email address associated with a pending Datadog user invitation is considered inactive and does not receive notifications.
 
 ### Integrations
 
