@@ -1,5 +1,7 @@
 ---
-title: APM and distributed tracing
+
+title: APM & Distributed Tracing
+
 kind: documentation
 description: Instrument your code to improve performance
 further_reading:
@@ -18,6 +20,7 @@ further_reading:
 aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology
+  - /tracing/guide/distributed_tracing/
 disable_toc: true
 ---
 

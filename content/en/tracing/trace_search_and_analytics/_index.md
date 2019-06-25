@@ -353,7 +353,7 @@ tracer.use('mysqli', {
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS_KEY` tag on the service root span:
+Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS_SAMPLE_RATE` tag on the service root span:
 
 ```java
 import datadog.trace.api.DDTags;
@@ -368,7 +368,7 @@ class MyClass {
     // Span provided by @Trace annotation.
     if (span != null) {
       span.setTag(DDTags.SERVICE_NAME, "my-custom-service");
-      span.setTag(DDTags.ANALYTICS_SAMPLE_RATE, true);
+      span.setTag(DDTags.ANALYTICS_SAMPLE_RATE, 1.0);
     }
   }
 }
