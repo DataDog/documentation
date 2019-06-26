@@ -55,7 +55,7 @@ The following characters are considered special: `?`, `>`, `<`, `:`, `=`,`"`, `~
 
 ### Attributes search
 #### Message attribute search
-To search for logs that contain `user=12345` in the message attribute use the following search:
+To search for logs that contain `user=JaneDoe` in the message attribute use the following search:
 
 `user\=JaneDoe`
 

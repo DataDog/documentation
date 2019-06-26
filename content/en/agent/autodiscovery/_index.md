@@ -17,6 +17,9 @@ further_reading:
 - link: "/agent/autodiscovery/tag"
   tag: "Documentation"
   text: "Dynamically assign and collect tags from your application"
+- link: "/integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui"
+  tag: "faq"
+  text: "Integration Setup for ECS Fargate"
 ---
 
 ## QuickStart

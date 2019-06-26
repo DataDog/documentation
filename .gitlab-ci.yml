@@ -41,9 +41,8 @@ build_preview:
     #- sync_integration_descriptions
     - sync_integration_descriptions_cached
     - placehold_translations
-    - build_hugo_site
-    - build_hugo_site_ja
-    - minify_html
+    - update_preview_baseurl
+    - build_hugo_site_new
     - collect_static_assets
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
@@ -83,13 +82,12 @@ build_live:
     - sync_integration_descriptions
     - sync_integration_metrics
     - placehold_translations
-    - build_hugo_site
-    - build_hugo_site_ja
-    - minify_html
+    - build_hugo_site_new
     - collect_static_assets
     - push_site_to_s3
     - create_artifact
     - create_artifact_untracked
+    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
   only:
     - master
 
