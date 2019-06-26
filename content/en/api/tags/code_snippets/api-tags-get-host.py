@@ -9,4 +9,4 @@ initialize(**options)
 
 # Get tags by host id.
 hosts = api.Hosts.search(q='hosts:')
-print api.Tag.get(hosts['results']['hosts'][0])
+print api.Tag.get(hosts['host_list'][0])
