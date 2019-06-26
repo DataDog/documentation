@@ -17,7 +17,7 @@ So, you've just finished [installing][1] the Datadog Agent, or maybe you're just
 
 {{< img src="getting_started/integrations.png" alt="integrations" responsive="true" >}}
 
-* Over 200 integrations [officially listed][3], and we're always adding more.
+* Over 350 integrations [officially listed][3], and we're always adding more.
 * Custom integrations are available [via the Datadog API][4], many documented by Datadog active user community.
 * The Agent is [open source][5] and you can instrument your own if you'd like.
 * Once integrations have been configured, data living in a datacenter or
