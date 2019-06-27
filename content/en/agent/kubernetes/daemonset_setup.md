@@ -246,8 +246,8 @@ The Docker API is optimized to get logs from one container at a time. When there
 
 The Datadog Agent follows the below logic to know where logs should be picked up from:
 
-1. The Agent looks for the Docker socket, if available it collects logs from there
-2. If not available, it looks for `/var/log/pods` and if available collects logs from there.
+1. The Agent looks for the Docker socket, if available it collects logs from there.
+2. If Docker socket is not available, the Agent looks for `/var/log/pods` and if available collects logs from there.
 
 If you do want to collect logs from `/var/log/pods` even if the Docker socket is mounted, the environment variable `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` can be used (or `logs_config.k8s_container_use_file` in `datadog.yaml`) to force the Agent to go for the file collection mode.
 
