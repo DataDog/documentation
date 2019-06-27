@@ -204,6 +204,7 @@ Use log file collection when:
 
 The Docker API is optimized to get logs from one container at a time. When there are many containers in the same pod, collecting logs through the Docker socket might be consuming much more resources than going through the files.
 
+
 {{< tabs >}}
 {{% tab "K8s File" %}}
 
@@ -242,6 +243,13 @@ The Docker API is optimized to get logs from one container at a time. When there
 
 {{% /tab %}}
 {{< /tabs >}}
+
+The Datadog Agent follows the below logic to know where logs should be picked up from:
+
+1. The Agent looks for the Docker socket, if available it collects logs from there
+2. If not available, it looks for `/var/log/pods` and if available collects logs from there.
+
+If you do want to collect logs from `/var/log/pods` even if the Docker socket is mounted, the environment variable `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` can be used (or `logs_config.k8s_container_use_file` in `datadog.yaml`) to force the Agent to go for the file collection mode.
 
 
 3. Mount the `pointdir` volume in *volumeMounts*:
