@@ -153,11 +153,11 @@ cf set-env app01 STD_LOG_COLLECTION_PORT 10514
 cf set-env app01 LOGS_CONFIG '[{"type":"tcp","port":"10514","source":"java","service":"app01"}]'
 ```
 
-**Notification in case of misconfigured proxy**
+##### Notification in case of misconfigured proxy
 
-When using a [proxy configuration](https://docs.datadoghq.com/agent/proxy/?tab=agentv6#proxy-for-logs) with the Buildpack to send your logs to Datadog, a verification is made since Agent 6.12 to check if the connection can be established and depending on the result of this test to start the Log collection.
+For Agent v6.12+, when using a [proxy configuration][27] with the Buildpack, a verification is made to check if the connection can be established. Log collection is started depending on the result of this test.
 
-If the connection fails to be established and the Log collection is not start, an event like the below is sent to your Datadog platform. Setup a monitor to track them and be notified when a misconfigured Buildpack was deployed:
+If the connection fails to be established and the log collection is not started, an event like the one below is sent to your Datadog event stream. Set up a monitor to track these events and be notified when a misconfigured Buildpack is deployed:
 
 {{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="cloud-foundry-log-misconfigured_proxy" responsive="true" >}}
 
