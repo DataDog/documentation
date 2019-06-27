@@ -10,7 +10,7 @@ further_reading:
 
 ## The graphing editor
 
-There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using the GUI. To learn more about using JSON, see [Graphing Primer using JSON][1].
+There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more advanced method). This page covers using the GUI. To learn more about using JSON, see [Graphing Primer using JSON][1].
 
 On each graph, a pencil icon opens the graph editor:
 
