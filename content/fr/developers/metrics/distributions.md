@@ -29,7 +29,6 @@ Dans ce modèle, le nombre total de séries temporelles créées repose sur l'en
 ### DogStatsD
 
 {{% table responsive="true" %}}
-
 | Méthode | Présentation |
 | :----- | :------- |
 | dog.distribution(...) | Surveillez la distribution statistique d'un ensemble de valeurs pour un ou plusieurs hosts.<ul><li>Obligatoire : la valeur et le nom de la métrique.</li><li>Facultatif : tag(s)</li></ul> |
