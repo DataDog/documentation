@@ -396,7 +396,7 @@ main:
       # Libraries
 
       - name: "Community Libraries"
-        url: "developers/libraries/#apm-tracing-client-libraries"
+        url: "developers/libraries/#apm-distributed-tracing-client-libraries"
 
       - name: "Guides"
         url: "tracing/guide"

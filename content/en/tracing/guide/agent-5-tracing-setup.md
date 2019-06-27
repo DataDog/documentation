@@ -54,18 +54,16 @@ The Datadog Agent uses the configuration file for both infrastructure monitoring
 Additionally, some configuration options may be set as environment variables. Note that options set as environment variables overrides the settings defined in the configuration file.
 
 {{% table responsive="true" %}}
-| File setting | Environment variable | Description |
-|---|---|---|
-| **main** |
-| `apm_enabled` | `DD_APM_ENABLED` | The Datadog Agent accepts trace metrics when the value is set to `true`. The default value is `true`. |
-| **trace.sampler** |
-| `extra_sample_rate` | - | Use this setting to adjust the trace sample rate. The value should be a float between `0` (no sampling) and `1` (normal sampling rate). The default value is `1` |
-| `max_traces_per_second` | - | The maximum number of traces to sample per second. To disable the limit (*not recommended*), set to `0`. The default value is `10`.|
-| **trace.receiver** |
-| `receiver_port` | `DD_RECEIVER_PORT` | The port that the Datadog Agent's trace receiver should listen on. The default value is `8126`. |
-| `connection_limit` | - | The number of unique client connections to allow during one 30 second lease period. The default value is `2000`. |
-| **trace.ignore** |
-| `resource` | `DD_IGNORE_RESOURCE` | A blacklist of regular expressions to filter out traces by their resource name. |
+
+| File setting            | Environment variable       | Description                                                                                                                                                      |
+| ---                     | ---                        | ---                                                                                                                                                              |
+| `apm_enabled`           | `DD_APM_ENABLED`           | The Datadog Agent accepts trace metrics when the value is set to `true`. The default value is `true`.                                                            |
+| `extra_sample_rate`     | `DD_EXTRA_SAMPLE_RATE`     | Use this setting to adjust the trace sample rate. The value should be a float between `0` (no sampling) and `1` (normal sampling rate). The default value is `1` |
+| `max_traces_per_second` | `DD_MAX_TRACES_PER_SECOND` | The maximum number of traces to sample per second. To disable the limit (*not recommended*), set to `0`. The default value is `10`.                              |
+| `receiver_port`         | `DD_RECEIVER_PORT`         | The port that the Datadog Agent's trace receiver should listen on. The default value is `8126`.                                                                  |
+| `connection_limit`      | `DD_CONNECTION_LIMIT`      | The number of unique client connections to allow during one 30 second lease period. The default value is `2000`.                                                 |
+| `resource`              | `DD_IGNORE_RESOURCE`       | A blacklist of regular expressions to filter out traces by their resource name.                                                                                  |
+
 {{% /table %}}
 
 For more information about the Datadog Agent, see the [dedicated doc page][8] or refer to the [`datadog.conf.example` file][9].

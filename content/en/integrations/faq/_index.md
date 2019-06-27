@@ -14,7 +14,6 @@ aliases:
 ## Amazon Web Services
 
 * [AWS Integration and CloudWatch FAQ][1]
-* [Get your AutoScaling Group events and metrics][2]
 * [How do I pull my EC2 tags without using the AWS integration ?][3]
 * [How do I monitor my AWS billing details?][4]
 * [Extra hosts with name "N/A" reporting data][5]

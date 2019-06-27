@@ -27,7 +27,7 @@ Un système de détection des comportements anormaux surveille en permanence les
 
 En raison de leur nature sensible, des protocoles de sécurité supplémentaires sont mis en place lors de l'intégration avec les fournisseurs cloud lorsque cela est possible, notamment via l'utilisation d'identifiants spécifiques à Datadog avec des autorisations limitées. Par exemple :
 
-* L'[intégration avec Amazon Web Services][5] nécessite que le client configure la délégation des rôles par le biais d'AWS IAM, conformément au [guide des meilleures pratiques d'AWS IAM][6]. Le client doit également accorder les autorisations spécifiques avec une stratégie AWS.
+* L'[intégration avec Amazon Web Services][5] nécessite que le client configure la délégation des rôles par le biais d'AWS IAM, conformément au [guide des bonnes pratiques pour AWS IAM][6]. Le client doit également accorder les autorisations spécifiques avec une stratégie AWS.
 * Pour configurer l'intégration avec [Microsoft Azure][7], le client doit définir un locataire pour Datadog. L'accès à une application spécifique n'est accordé qu'au rôle « reader » pour les abonnements qu'il souhaite surveiller.
 * Pour configurer l'intégration avec [Google Cloud Platform][8], le client doit définir un compte de service pour Datadog. Il doit également octroyer les rôles « Compute Viewer » et « Monitoring Viewer » uniquement.
 
