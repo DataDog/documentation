@@ -265,6 +265,29 @@ The `pointdir` is used to store a file with a pointer to all the containers that
 
 Use [Autodiscovery with Pod Annotations][11] to configure log collection to add multiline processing rules, or to customize the `source` and `service` attributes.
 
+#### Short lived containers
+
+{{< tabs >}}
+{{% tab "K8s File" %}}
+
+By default the Agent looks every 5 seconds for new containers.
+
+For Agent v6.12+, short lived container logs (stopped or crashed) are automatically collected when using the K8s file log collection method (through `/var/log/pods`). This also includes the collection init container logs.
+
+{{% /tab %}}
+{{% tab "Docker Socket" %}}
+
+By default the Agent looks every 5 seconds for new containers. Any container with a shorter duration life does not have any data collected by the Agent.
+
+ You can override this autodiscovery interval with a shorter one by setting the `ad_config_poll_interval` parameter which correspond to the `DD_AD_CONFIG_POLL_INTERVAL` environment variable.
+The expected value is a integer in seconds.
+
+The other option is to use the `K8s file` collection method that supports init, stopped, and short lived containers collection without any extra setup.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ### APM and Distributed Tracing
 
 To enable APM by allowing incoming data from port 8126, set the `DD_APM_NON_LOCAL_TRAFFIC` variable to true in your *env* section:
