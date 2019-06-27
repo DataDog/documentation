@@ -272,17 +272,17 @@ Use [Autodiscovery with Pod Annotations][11] to configure log collection to add 
 
 By default the Agent looks every 5 seconds for new containers.
 
-Since Agent version 6.12+, short lived containers logs (stopped, or crashed) are automatically collected when using the K8s file log collection method (through `/var/log/pods`). This also includes the collection init container logs.
+For Agent v6.12+, short lived container logs (stopped or crashed) are automatically collected when using the K8s file log collection method (through `/var/log/pods`). This also includes the collection init container logs.
 
 {{% /tab %}}
 {{% tab "Docker Socket" %}}
 
-By default the Agent looks every 5 seconds for new containers, any container with a shorter duration life won't have any data collected by the Agent.
+By default the Agent looks every 5 seconds for new containers. Any container with a shorter duration life does not have any data collected by the Agent.
 
- You can override this autodiscovery interval with a shorter one by setting `ad_config_poll_interval` parameter which correspond to the `DD_AD_CONFIG_POLL_INTERVAL` environment variable.
+ You can override this autodiscovery interval with a shorter one by setting the `ad_config_poll_interval` parameter which correspond to the `DD_AD_CONFIG_POLL_INTERVAL` environment variable.
 The expected value is a integer in seconds.
 
-The other option is to use the `K8s file` collection method that supports init, stopped and short lived containers collection without any extra setup.
+The other option is to use the `K8s file` collection method that supports init, stopped, and short lived containers collection without any extra setup.
 
 {{% /tab %}}
 {{< /tabs >}}
