@@ -38,8 +38,8 @@ build_preview:
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - version_static_assets
-    #- sync_integration_descriptions
-    - sync_integration_descriptions_cached
+    - sync_integration_descriptions
+    #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
     - build_hugo_site_new
