@@ -8,5 +8,5 @@ curl -G -H "Content-type: application/json" \
     -d "end=${currenttime}" \
     -d "api_key=<YOUR_API_KEY>" \
     -d "application_key=<YOUR_APP_KEY>" \
-    'https://api.datadoghq.com/api/v1/graph/snapshot'
+    "https://api.datadoghq.com/api/v1/graph/snapshot"
 
