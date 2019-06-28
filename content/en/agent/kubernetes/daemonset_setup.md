@@ -204,6 +204,7 @@ Use log file collection when:
 
 The Docker API is optimized to get logs from one container at a time. When there are many containers in the same pod, collecting logs through the Docker socket might be consuming much more resources than going through the files.
 
+
 {{< tabs >}}
 {{% tab "K8s File" %}}
 
@@ -243,6 +244,13 @@ The Docker API is optimized to get logs from one container at a time. When there
 {{% /tab %}}
 {{< /tabs >}}
 
+The Datadog Agent follows the below logic to know where logs should be picked up from:
+
+1. The Agent looks for the Docker socket, if available it collects logs from there.
+2. If Docker socket is not available, the Agent looks for `/var/log/pods` and if available collects logs from there.
+
+If you do want to collect logs from `/var/log/pods` even if the Docker socket is mounted, the environment variable `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` can be used (or `logs_config.k8s_container_use_file` in `datadog.yaml`) to force the Agent to go for the file collection mode.
+
 
 3. Mount the `pointdir` volume in *volumeMounts*:
 
@@ -264,6 +272,29 @@ The Docker API is optimized to get logs from one container at a time. When there
 The `pointdir` is used to store a file with a pointer to all the containers that the Agent is collecting logs from. This is to make sure none are lost when the Agent is restarted, or in the case of a network issue.
 
 Use [Autodiscovery with Pod Annotations][11] to configure log collection to add multiline processing rules, or to customize the `source` and `service` attributes.
+
+#### Short lived containers
+
+{{< tabs >}}
+{{% tab "K8s File" %}}
+
+By default the Agent looks every 5 seconds for new containers.
+
+For Agent v6.12+, short lived container logs (stopped or crashed) are automatically collected when using the K8s file log collection method (through `/var/log/pods`). This also includes the collection init container logs.
+
+{{% /tab %}}
+{{% tab "Docker Socket" %}}
+
+By default the Agent looks every 5 seconds for new containers. Any container with a shorter duration life does not have any data collected by the Agent.
+
+ You can override this autodiscovery interval with a shorter one by setting the `ad_config_poll_interval` parameter which correspond to the `DD_AD_CONFIG_POLL_INTERVAL` environment variable.
+The expected value is a integer in seconds.
+
+The other option is to use the `K8s file` collection method that supports init, stopped, and short lived containers collection without any extra setup.
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ### APM and Distributed Tracing
 

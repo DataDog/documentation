@@ -104,6 +104,8 @@ main:
             url: "agent/autodiscovery/management"
           - name: "Troubleshooting"
             url: "agent/autodiscovery/troubleshooting"
+          - name: "Endpoints Checks"
+            url: "agent/autodiscovery/endpointschecks"
           - name: "Cluster Checks"
             url: "agent/autodiscovery/clusterchecks"
       - name: "Log Collection "
