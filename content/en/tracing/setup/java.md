@@ -182,7 +182,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.service.name`                      | `DD_SERVICE_NAME`                      | `unnamed-java-app`   | The name of a set of processes that do the same job. Used for grouping stats for your application.                                                                                                                      |
 | `dd.service.mapping`                   | `DD_SERVICE_MAPPING`                   | `null`               | (Example: `key1:value1,key2:value2`) Dynamically rename services via configuration. Useful for making databases have distinct names across different services.                                                          |
 | `dd.writer.type`                       | `DD_WRITER_TYPE`                       | `DDAgentWriter`      | Default value sends traces to the Agent. Configuring with `LoggingWriter` instead writes traces out to the console.                                                                                                     |
-| `dd.agent.host`                        | `DD_AGENT_HOST`                        | `localhost`          | Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP.  See [Tracing Docker Applications][2] for more details.                                                   |
+| `dd.agent.host`                        | `DD_AGENT_HOST`                        | `localhost`          | Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP.  See [Tracing Docker Applications][1] for more details.                                                   |
 | `dd.trace.agent.port`                  | `DD_TRACE_AGENT_PORT`                  | `8126`               | Port number the Agent is listening on for configured host.                                                                                                                                                              |
 | `dd.trace.global.tags`                 | `DD_TRACE_GLOBAL_TAGS`                 | `null`               | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span and every JMX metric. This value is merged into `trace.span.tags` and `trace.jmx.tags` to provide single place to configure both. |
 | `dd.trace.span.tags`                   | `DD_TRACE_SPAN_TAGS`                   | `null`               | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span. Tags of the same name added directly to a span overwrite the defaults provided here.                                             |
@@ -203,9 +203,9 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.jmxfetch.statsd.port`              | `DD_JMXFETCH_STATSD_PORT`              | 8125                 | Statsd port to send JMX metrics to.                                                                                                                                                                                     |
 | `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                | Enabled automatic MDC key injection for Datadog trace and span ids. See [Advanced Usage][3] for details                                                                                                                 |
 
-[1]: /tracing/setup/docker
-[2]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[3]: /tracing/advanced/connect_logs_and_traces/?tab=java
+[1]: 
+[2]: 
+[3]: 
 {{% /table %}}
 
 **Note**:
