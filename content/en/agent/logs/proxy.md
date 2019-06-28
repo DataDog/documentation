@@ -13,14 +13,14 @@ further_reading:
   text: "Collect your traces"
 ---
 
-Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that is used for log collection.
+Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do not include the `log collection` interface.
 
-Logs make use of a different [set of proxy settings][1] than other data types forwarded by the Datadog Agent. This is due to the fact that logs are transported over TCP/SSL, while other features submit data via HTTPS.
+Logs make use of a different [set of proxy settings][1] than other data types forwarded by the Datadog Agent. This is because logs are transported over TCP/SSL, while other features submit data with HTTPS.
 
 {{< tabs >}}
 {{% tab "TCP" %}}
 
-If you use a proxy for TCP transmission, configure the Datadog Agent to send logs to your proxy through TCP thanks to the following parameters in the `datadog.yaml` configuration file:
+If you use a proxy for TCP transmission, configure the Datadog Agent to send logs to your proxy through TCP using the following parameters in the `datadog.yaml` configuration file:
 
 ```
 logs_config:
@@ -28,12 +28,12 @@ logs_config:
   logs_no_ssl: true
 ```
 
-Those parameters can also be set with the following environment variables:
+The parameters above can also be set with the following environment variables:
 
 * `DD_LOGS_CONFIG_LOGS_DD_URL`
 * `DD_LOGS_CONFIG_LOGS_NO_SSL`
 
-**Important note**: The parameter `logs_no_ssl` is required to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`agent-intake.logs.datadoghq.com` or `agent-intake.logs.datadoghq.eu`) and your proxy hostname. You should use a SSL encrypted connection between your proxy and Datadog intake endpoint though.
+**Note**: The parameter `logs_no_ssl` is required to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`agent-intake.logs.datadoghq.com` or `agent-intake.logs.datadoghq.eu`) and your proxy hostname. It is recommended to use a SSL encrypted connection between your proxy and Datadog intake endpoint.
 
 * Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs to:
     * For `app.datadoghq.com`: `agent-intake.logs.datadoghq.com` on port `10516` and activate SSL encryption.
@@ -56,14 +56,14 @@ Those parameters can also be set with the following environment variables:
 {{% /tab %}}
 {{% tab "SOCKS5" %}}
 
-To send your logs to your Datadog account via a SOCKS5 proxy server use the following settings in your `datadog.yaml` configuration file:
+To send your logs to your Datadog account with a SOCKS5 proxy server use the following settings in your `datadog.yaml` configuration file:
 
 ```
 logs_config:
   socks5_proxy_address: <MY_SOCKS5_PROXY_URL>:<MY_SOCKS5_PROXY_PORT>
 ```
 
-This parameter can also be set with the following environment variable:
+The parameter above can also be set with the following environment variable:
 
 * `DD_LOGS_CONFIG_SOCKS5_PROXY_ADDRESS`
 
