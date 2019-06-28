@@ -43,9 +43,9 @@ The monitor `resolve` function is artificially switching the monitor status to `
 
 If a monitor is alerting because its current data corresponds to its `ALERT` state, `resolve` has the monitor follow the state switch `ALERT -> OK -> ALERT`. Thus, it's not appropriate for acknowledging that you have seen the alert or telling Datadog to ignore the alert.
 
-Manually `resolve`-ing a monitor is appropriate for cases where data is reported intermittently: after triggering an alert, the monitor doesn't receive further data so it can no longer evaluate alerting conditions and recover to the `OK` state. In that case the `resolve` function or the `Automatically resolve monitor after X hours` switches the monitor back to `OK` state.
+Manually `resolve`-ing a monitor is appropriate for cases where data is reported intermittently: after triggering an alert, the monitor doesn't receive further data so it can no longer evaluate alerting conditions and recover to the `OK` state. In that case, the `resolve` function or the `Automatically resolve monitor after X hours` switches the monitor back to `OK` state.
 
-**Typical use case**: A monitor based on error metrics that are not generated when there are no errors (e.g. `aws.elb.httpcode_elb_5xx`, or any DogStatsD counter in your code reporting an error _only when there is an error_).
+**Typical use case**: A monitor based on error metrics that are not generated when there are no errors (`aws.elb.httpcode_elb_5xx`, or any DogStatsD counter in your code reporting an error _only when there is an error_).
 
 ### Settings
 Click the settings cog to display the options available:
@@ -55,7 +55,7 @@ Click the settings cog to display the options available:
 | [Edit][1] | Edit the current monitor. More information is available in [Monitor Types][1].                                                                                                                                                             |
 | Clone     | Make a copy of the current monitor.                                                                                                                                                                                                        |
 | Export    | Export the JSON configuration for the current monitor. This option is also available when [creating your monitor][1]. If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON. |
-| Delete    | Delete the current monitor. You will be prompted to confirm deletion.                                                                                                                                                                      |
+| Delete    | Delete the current monitor. You will be prompted to confirm the deletion.                                                                                                                                                                      |
 
 ## Properties
 
@@ -74,7 +74,7 @@ Use the *cog* icon in the upper right corner of the page to [edit][1] your monit
 
 ## Status and History
 
-The *Status and History* section reflect the query and state changes over time, while the **Evaluation Graph** represents the exact query behavior within the timeframe bracket *on the history graph*. The Evaluation Graph has a fixed zoomed window that corresponds to your monitor evaluation timesteps, to ensure the displayed points are not [incorrectly aggregated][5]. Slide this bracket over the timeline in order to view previous monitor evaluation results:
+The *Status and History* section reflect the query and state changes over time, while the **Evaluation Graph** represents the exact query behavior within the timeframe bracket *on the history graph*. The Evaluation Graph has a fixed zoomed window that corresponds to your monitor evaluation timesteps, to ensure the displayed points are [aggregated correctly][5]. Slide this bracket over the timeline to view previous monitor evaluation results:
 
 {{< img src="monitors/monitor_status/status_monitor_history.gif" alt="status monitor history" responsive="true" style="width:80%;" >}}
 
