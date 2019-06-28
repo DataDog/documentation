@@ -16,7 +16,7 @@ Vous venez de terminer [l'installation][1] de l'Agent Datadog, ou aimeriez tout 
 
 {{< img src="getting_started/integrations.png" alt="intégrations" responsive="true" >}}
 
-* Plus de 200 intégrations officielles sont [répertoriées][3], et nous en ajoutons régulièrement.
+* Plus de 350 intégrations officielles sont [répertoriées][3], et nous en ajoutons régulièrement.
 * Des intégrations personnalisées sont disponibles [via l'API Datadog][4], et nombreuses d'entre elles sont documentées par notre communauté active d'utilisateurs.
 * L'Agent est [open source][5] et vous pouvez l'instrumenter directement si vous le souhaitez.
 * Une fois les intégrations configurées, les données stockées dans un centre de données ou
