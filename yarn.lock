@@ -2883,10 +2883,10 @@ http-signature@~1.2.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
-hugo-bin@0.43.6:
-  version "0.43.6"
-  resolved "https://registry.yarnpkg.com/hugo-bin/-/hugo-bin-0.43.6.tgz#e5777fae837d5591291627035229b95140e6c6ab"
-  integrity sha512-sop876hNNDCQ/s5tsVsnmeQII5wqYfWdQmul9IY/CKRVdiMkYtwGFcrKr2t0fROsr89m9QeV6c/95WTs0YeIFQ==
+hugo-bin@0.43.3:
+  version "0.43.3"
+  resolved "https://registry.yarnpkg.com/hugo-bin/-/hugo-bin-0.43.3.tgz#29d3b348cd03d6f5be99e127cf253a1e9f9e91c2"
+  integrity sha512-E+Xb+WH0Rvr8BQ9tLQ1CcClIEn1Bjd0LOOM0cRgz0M2aHunn7WDwRJs5oJYL3I2oWYXcdf8a0AVS/QgSCgupCQ==
   dependencies:
     bin-wrapper "^4.1.0"
     pkg-conf "^3.1.0"
