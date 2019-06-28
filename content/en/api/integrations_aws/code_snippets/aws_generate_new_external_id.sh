@@ -12,4 +12,4 @@ curl -X PUT -H "Content-type: application/json"
     "role_name": "DatadogAWSIntegrationRole"
     }'
 
-"https://dd.datadoghq.com/api/v1/integration/aws/generate_new_external_id?${api_key}&application_key=${app_key}
+"https://dd.datadoghq.com/api/v1/integration/aws/generate_new_external_id?${api_key}&application_key=${app_key}"
