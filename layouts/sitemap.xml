@@ -1,4 +1,4 @@
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   {{ range where (where .Data.Pages "Params.beta" "!=" true) ".Params.is_public" "!=" false }}
   	  {{ if (and (not .Params.private) (ne (.Language.Lang | default "en") "fr") (ne (.Language.Lang | default "en") "ja") ) }}
 	  <url>
@@ -8,6 +8,16 @@
       {{ end }}
       {{ with .Sitemap.ChangeFreq }}<changefreq>{{ . }}</changefreq>{{ end }}
       {{ if ge .Sitemap.Priority 0.0 }}<priority>{{ .Sitemap.Priority }}</priority>{{ end }}
+
+      {{/*
+      {{ if .IsTranslated }}
+        <xhtml:link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}"/>
+        {{ range .Translations }}
+            <xhtml:link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}"/>
+        {{ end}}
+      {{ end }}
+      */}}
+
 	  </url>
 	  {{ end }}
   {{ end }}
