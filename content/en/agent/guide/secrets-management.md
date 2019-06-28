@@ -81,7 +81,7 @@ By design, the user-provided executable needs to implement any error handling me
 Set the following variable in `datadog.yaml`:
 
 ```
-secret_backend_command: /path/to/your/executable
+secret_backend_command: <EXECUTABLE_PATH>
 ```
 
 #### Agent security requirements
