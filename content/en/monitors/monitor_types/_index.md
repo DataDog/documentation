@@ -1,5 +1,5 @@
 ---
-title: Monitor Types
+title: Monitors
 kind: documentation
 aliases:
     - /monitoring

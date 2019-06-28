@@ -242,7 +242,7 @@ main:
     pre: "nav_alerting"
     children:
       # ALERTING - Subnav start
-      - name: "Monitor Types"
+      - name: "Monitors"
         url: "monitors/monitor_types/"
         children:
           - name: "Anomaly"
@@ -275,7 +275,7 @@ main:
             url: "monitors/monitor_types/watchdog/"
 
       # Manage monitor
-      - name: "Manage Monitor"
+      - name: "Manage Monitors"
         url: "monitors/manage_monitor/"
 
       # Monitor status
