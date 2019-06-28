@@ -110,8 +110,11 @@ spec:
         volumeMounts:
           - name: dockersocket
             mountPath: /var/run/docker.sock
-          - name: logpath
+          - name: logpodpath
             mountPath: /var/log/pods
+          # Docker runtime directory, replace this path with your container runtime logs directory, or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
+          - name: logcontainerpath
+            mountPath: /var/lib/docker/containers
           - name: procdir
             mountPath: /host/proc
             readOnly: true
@@ -133,7 +136,11 @@ spec:
           name: procdir
         - hostPath:
             path: /var/log/pods
-          name: logpath
+          name: logpodpath
+        # Docker runtime directory, replace this path with your container runtime logs directory, or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
+        - hostPath:
+            path: /var/lib/docker/containers
+          name: logcontainerpath
         - hostPath:
             path: /sys/fs/cgroup
           name: cgroups
@@ -193,7 +200,7 @@ To enable [Log collection][10] with your DaemonSet:
     (...)
     ```
 
-2. Mount the Docker socket or `/var/log/pods`
+2. Mount the Docker socket or logs directories (`/var/log/pods` and `/var/lib/docker/containers` if docker runtime)
 
 The Agent has two ways to collect logs: from the Docker socket, and from the Kubernetes log files (automatically handled by Kubernetes).
 
@@ -204,6 +211,7 @@ Use log file collection when:
 
 The Docker API is optimized to get logs from one container at a time. When there are many containers in the same pod, collecting logs through the Docker socket might be consuming much more resources than going through the files.
 
+Mount `/var/lib/docker/containers` as well, since `/var/log/pods` is symlink to this directory.
 
 {{< tabs >}}
 {{% tab "K8s File" %}}
@@ -212,14 +220,21 @@ The Docker API is optimized to get logs from one container at a time. When there
       (...)
         volumeMounts:
           (...)
-          - name: logpath
-            mountPath: /var/log/pods
+          - name: logpodpath
+              mountPath: /var/log/pods
+          # Docker runtime directory, replace this path with your container runtime logs directory, or remove this configuration if `/var/log/pods` is not a symlink to any other directory.    
+          - name: logcontainerpath
+            mountPath: /var/lib/docker/containers
       (...)
       volumes:
         (...)
         - hostPath:
             path: /var/log/pods
-          name: logpath
+            name: logpodpath
+        # Docker runtime directory, replace this path with your container runtime logs directory, or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
+        - hostPath:
+            path: /var/lib/docker/containers
+          name: logcontainerpath
       (...)
     ```
 
@@ -294,7 +309,6 @@ The other option is to use the `K8s file` collection method that supports init, 
 
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ### APM and Distributed Tracing
 
@@ -392,7 +406,7 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [8]: /agent/autodiscovery/?tab=hostagent#how-to-set-it-up
 [9]: /integrations/amazon_ec2/#configuration
 [10]: /logs
-[11]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
+[11]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
 [12]: /tracing/setup
 [13]: /graphing/infrastructure/process/?tab=kubernetes#installation
 [14]: /agent/kubernetes/dogstatsd
