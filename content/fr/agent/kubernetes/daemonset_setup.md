@@ -12,7 +12,7 @@ further_reading:
     tag: documentation
     text: Intégrations personnalisées
 aliases:
-  - /agent/kubernetes/apm
+  - /fr/agent/kubernetes/apm
 ---
 Tirez profit des DaemonSets pour déployer l'Agent Datadog sur l'ensemble de vos nœuds (ou sur un nœud donné grâce [aux nodeSelectors][1]). 
 

@@ -2,8 +2,6 @@
 title: Postgres Custom Metric Collection
 kind: faq
 disable_toc: true
-aliases:
-    - /docs/
 further_reading:
 - link: "integrations/postgres/"
   tag: "Documentation"

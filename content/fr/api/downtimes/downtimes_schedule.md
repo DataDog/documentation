@@ -21,7 +21,7 @@ external_redirect: /api/#planifier-le-downtime-d-un-monitor
     Timestamp POSIX utilisé pour arrêter le downtime. S'il n'est pas fourni, le downtime continue indéfiniment (c'est-à-dire, jusqu'à ce que vous l'annuliez).
 * **`message`** [*facultatif*, *défaut*=**None**] :
     Un message à inclure avec les notifications pour ce downtime. Les notifications par e-mail peuvent être envoyées à des utilisateurs spécifiques en utilisant la même notation « @nomutilisateur » que les événements.
-* **`timezone`** [*facultatif*, *défaut* = **UTC**] :
+* **`timezone`** [*facultatif*, *défaut*=**UTC**] :
     Le fuseau horaire du downtime.
 * **`recurrence`** [*facultatif*, *défaut*=**None**] :
     Un objet définissant la récurrence du downtime avec une variété de paramètres :

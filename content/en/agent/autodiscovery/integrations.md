@@ -335,8 +335,8 @@ kind: Pod
 metadata:
   name: redis
   annotations:
-    ad.datadoghq.com/redis.check_names: ["redisdb"]
-    ad.datadoghq.com/redis.init_configs: [{}]
+    ad.datadoghq.com/redis.check_names: '["redisdb"]'
+    ad.datadoghq.com/redis.init_configs: '[{}]'
     ad.datadoghq.com/redis.instances: |
       [
         {

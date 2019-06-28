@@ -92,13 +92,14 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 #### Web Framework Compatibility
 
-| Module        | Versions | Support Type    | Notes                                      |
-|---------------|----------|-----------------|--------------------------------------------|
-| [express][10] | `>=4`    | Fully Supported | Supports Sails, Loopback, and [more][11]   |
-| [graphql][12] | `>=0.10` | Fully Supported | Supports Apollo Server and express-graphql |
-| [hapi][13]    | `>=2`    | Fully Supported |                                            |
-| [koa][14]     | `>=2`    | Fully Supported |                                            |
-| [restify][15] | `>=3`    | Fully Supported |                                            |
+| Module           | Versions | Support Type    | Notes                                      |
+|------------------|----------|-----------------|--------------------------------------------|
+| [express][10]    | `>=4`    | Fully Supported | Supports Sails, Loopback, and [more][11]   |
+| [graphql][12]    | `>=0.10` | Fully Supported | Supports Apollo Server and express-graphql |
+| [hapi][13]       | `>=2`    | Fully Supported |                                            |
+| [koa][14]        | `>=2`    | Fully Supported |                                            |
+| [paperplane][41] | `>=2.3`  | Fully Supported | Not supported in [serverless-mode][42]     |
+| [restify][15]    | `>=3`    | Fully Supported |                                            |
 
 #### Native Module Compatibility
 
@@ -136,11 +137,13 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 #### Promise Library Compatibility
 
-| Module         | Versions | Support Type    |
-|----------------|----------|-----------------|
-| [bluebird][34] | `>=2`    | Fully Supported |
-| [q][35]        | `>=1`    | Fully Supported |
-| [when][36]     | `>=3`    | Fully Supported |
+| Module           | Versions  | Support Type    |
+|------------------|-----------|-----------------|
+| [bluebird][34]   | `>=2`     | Fully Supported |
+| [promise][43]    | `>=7`     | Fully Supported |
+| [promise-js][44] | `>=0.0.3` | Fully Supported |
+| [q][35]          | `>=1`     | Fully Supported |
+| [when][36]       | `>=3`     | Fully Supported |
 
 #### Logger Compatibility
 
@@ -194,3 +197,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 [38]: http://getpino.io
 [39]: https://github.com/winstonjs/winston
 [40]: https://knexjs.org/
+[41]: https://github.com/articulate/paperplane
+[42]: https://github.com/articulate/paperplane/blob/master/docs/API.md#serverless-deployment
+[43]: https://github.com/then/promise
+[44]: https://github.com/kevincennis/promise

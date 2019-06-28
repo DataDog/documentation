@@ -52,7 +52,7 @@ Ce plug-in envoie des métriques à l'Agent Datadog à l'aide du serveur DogStat
 * Tomcat
 * Kafka
 
-**Remarque** : les checks JMX sont limités à 350 métriques par instance.
+**Remarque** : par défaut, les checks JMX sont limités à 350 métriques par instance. Si vous souhaitez utiliser davantage de métriques, contactez l'[assistance Datadog][8].
 
 ## Implémentation
 ### Installation
@@ -66,7 +66,7 @@ Si vous exécutez l'Agent en tant que binaire sur un host, configurez votre chec
 {{< tabs >}}
 {{% tab "Host" %}}
 
-Configurez l'Agent afin qu'il se connecte à l'aide de JMX, et modifiez-le selon vos besoins. Voici un exemple de fichier `jmx.d/conf.yaml` :
+Configurez l'Agent afin qu'il se connecte à l'aide de JMX, et modifiez-le selon vos besoins. Voici un fichier d'exemple `jmx.d/conf.yaml` :
 
 ```
 init_config:
