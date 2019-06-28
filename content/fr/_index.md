@@ -22,7 +22,7 @@ Datadog recueille l'ensemble de ces métriques, événements et états de servic
 
 ## Collecte exhaustive
 
-Recueillez une multitude de données déjà disponibles sans écrire de code. [Installez l'Agent Datadog][1] où bon vous semble : sur vos serveurs, instances, machines virtuelles, nœuds et [hosts exécutant des conteneurs][2]. Activez ensuite l'Agent et configurez l'une de nos 350 [intégrations][3] prêtes à l'emploi pour commencer à envoyer vos métriques au backend de Datadog.
+Recueillez une multitude de données déjà disponibles sans écrire de code. [Installez l'Agent Datadog][1] où bon vous semble : sur vos serveurs, instances, machines virtuelles, nœuds et [hosts exécutant des conteneurs][2]. Activez ensuite l'Agent et configurez l'une de nos 300 [intégrations][3] prêtes à l'emploi pour commencer à envoyer vos métriques au backend de Datadog.
 
 Envoyez des métriques d'application custom en rédigeant quelques lignes de code. Utilisez vos propres gauges, counters, timers et histograms avec [DogStatsD][4] ou consultez [l'APM][5] pour tracer le temps d'exécution de n'importe quel chemin de code et découvrir l'impact sur les délais de réponse. Les [bibliothèques client][6] envoient vos [métriques custom][7] et données de trace à l'Agent Datadog, qui les transmet ensuite à Datadog.
 
