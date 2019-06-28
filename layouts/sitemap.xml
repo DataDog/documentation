@@ -11,7 +11,6 @@
 
       {{/*
       {{ if .IsTranslated }}
-        <xhtml:link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}"/>
         {{ range .Translations }}
             <xhtml:link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}"/>
         {{ end}}
