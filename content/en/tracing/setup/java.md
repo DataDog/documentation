@@ -321,7 +321,7 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 [4]: https://github.com/DataDog/dd-trace-java/blob/master/CONTRIBUTING.md
 [5]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
 [6]: http://bytebuddy.net
-[7]: 
+[7]: /help
 [8]: /help
 [9]: https://github.com/DataDog/documentation#outside-contributors
 [10]: https://github.com/openzipkin/b3-propagation
