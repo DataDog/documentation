@@ -134,12 +134,12 @@ To use Markdown in the event text, start the text block with `%%% \n` and end th
 **Note**: If you are embedding a link in a Markdown block, make sure the URL is encoded properly.
 
 **Example**:
-<code block>
+```
 # Not encoded
 http://catchpoint.com/session_id:123456
 # Encoded
 http://catchpoint.com/session_id%3A123456
-</code block>
+```
 
 ## @ notifications
 
