@@ -90,7 +90,7 @@ Beta integrations are disabled by default but can be enabled individually.
 *Note:* Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Tomcat, Jetty, Websphere, Weblogic, etc.
 Also, frameworks like Spring Boot inherently work because it uses a Servlet compatible embedded application server.
 
-Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
+Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][7] if you need help.
 
 #### Networking Framework Compatibility
 
@@ -112,7 +112,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 
 **Networking tracing provides:** timing request to response, tags for the request (e.g. response code), error and stacktrace capturing, and distributed tracing.
 
-Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
+Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][7] if you need help.
 
 #### Data Store Compatibility
 
@@ -146,7 +146,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 
 **Datastore tracing provides:** timing request to response, query info (e.g. a sanitized query string), and error and stacktrace capturing.
 
-Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
+Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][7] if you need help.
 
 #### Other Framework Compatibility
 
@@ -160,18 +160,18 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | Hystrix          | 1.4+     | Fully Supported | `hystrix`                                      |
 | Twilio SDK       | 0+       | Fully Supported | `twilio-sdk`                                   |
 
-Don't see your desired framework? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
+Don't see your desired framework? Datadog is continually adding additional support. Contact [Datadog support][7] if you need help.
 
 To improve visibility into applications using unsupported frameworks, consider:
 
 * Adding custom instrumentation (with OpenTracing or the `@Trace` annotation).
-* [Submitting a pull request][9] with instrumentation for inclusion in a future release.
-* Contacting [Datadog support][8] and submitting a feature request.
+* [Submitting a pull request][8] with instrumentation for inclusion in a future release.
+* Contacting [Datadog support][7] and submitting a feature request.
 
 ## Configuration
 
 The tracer is configured using System Properties and Environment Variables as follows:
-(See integration specific config in the [integrations][7] section above.)
+(See integration specific config in the [integrations](#integrations) section above.)
 
 | System Property                        | Environment Variable                   | Default              | Description                                                                                                                                                                                                             |
 |----------------------------------------|----------------------------------------|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -180,7 +180,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.service.name`                      | `DD_SERVICE_NAME`                      | `unnamed-java-app`   | The name of a set of processes that do the same job. Used for grouping stats for your application.                                                                                                                      |
 | `dd.service.mapping`                   | `DD_SERVICE_MAPPING`                   | `null`               | (Example: `key1:value1,key2:value2`) Dynamically rename services via configuration. Useful for making databases have distinct names across different services.                                                          |
 | `dd.writer.type`                       | `DD_WRITER_TYPE`                       | `DDAgentWriter`      | Default value sends traces to the Agent. Configuring with `LoggingWriter` instead writes traces out to the console.                                                                                                     |
-| `dd.agent.host`                        | `DD_AGENT_HOST`                        | `localhost`          | Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP.  See [Tracing Docker Applications][2] for more details.                                                   |
+| `dd.agent.host`                        | `DD_AGENT_HOST`                        | `localhost`          | Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP.  See [Tracing Docker Applications][1] for more details.                                                   |
 | `dd.trace.agent.port`                  | `DD_TRACE_AGENT_PORT`                  | `8126`               | Port number the Agent is listening on for configured host.                                                                                                                                                              |
 | `dd.trace.global.tags`                 | `DD_TRACE_GLOBAL_TAGS`                 | `null`               | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span and every JMX metric. This value is merged into `trace.span.tags` and `trace.jmx.tags` to provide single place to configure both. |
 | `dd.trace.span.tags`                   | `DD_TRACE_SPAN_TAGS`                   | `null`               | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span. Tags of the same name added directly to a span overwrite the defaults provided here.                                             |
@@ -199,7 +199,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.jmxfetch.refresh-beans-period`     | `DD_JMXFETCH_REFRESH_BEANS_PERIOD`     | `600`                | How often to refresh list of avalable JMX beans (in seconds).                                                                                                                                                           |
 | `dd.jmxfetch.statsd.host`              | `DD_JMXFETCH_STATSD_HOST`              | same as `agent.host` | Statsd host to send JMX metrics to.                                                                                                                                                                                     |
 | `dd.jmxfetch.statsd.port`              | `DD_JMXFETCH_STATSD_PORT`              | 8125                 | Statsd port to send JMX metrics to.                                                                                                                                                                                     |
-| `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                | Enabled automatic MDC key injection for Datadog trace and span ids. See [Advanced Usage][11] for details                                                                                                                 |
+| `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                | Enabled automatic MDC key injection for Datadog trace and span ids. See [Advanced Usage][11] for details                                                                                                                |
 
 **Note**:
 
@@ -208,8 +208,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 
 ### B3 Headers Extraction and Injection
 
-Datadog APM tracer supports [B3 headers extraction][12] and injection for
-distributed tracing.
+Datadog APM tracer supports [B3 headers extraction][12] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by
 configuring injection/extraction styles. Currently two styles are
@@ -315,8 +314,8 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 [4]: https://github.com/DataDog/dd-trace-java/blob/master/CONTRIBUTING.md
 [5]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
 [6]: http://bytebuddy.net
-[7]: /help
-[8]: /help
+[7]: /help/
+[8]: /help/
 [9]: https://github.com/DataDog/documentation#outside-contributors
 [10]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
 [11]: /tracing/advanced/connect_logs_and_traces/?tab=java
