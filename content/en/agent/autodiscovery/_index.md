@@ -50,7 +50,7 @@ The overall process of Datadog Agent Autodiscovery is:
 
 ## How to set it up
 
-If running the Agent as a binary on a host, enable Autodiscovery with the [Host Agent](?tab=host-agent) tab instructions. If running the Agent as a container, enable Autodiscovery with the  [Containerized Agent Tab](?tab=containerizedagent) instructions.
+If running the Agent as a binary on a host, enable Autodiscovery with the [Host Agent](?tab=hostagent) tab instructions. If running the Agent as a container, enable Autodiscovery with the  [Containerized Agent Tab](?tab=containerizedagent) instructions.
 
 ### Docker Autodiscovery
 
