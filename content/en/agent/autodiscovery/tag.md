@@ -22,7 +22,7 @@ further_reading:
 The Datadog Agent can create and assign tags to all metrics, traces, and logs emitted by a container based on its labels or environment variables.
 If you are working with a Kubernetes environment, the Agent can create and assign tags to all metrics, traces, and logs emitted by a Pod, based on its labels or annotations.
 
-If running the Agent as a binary on a host, configure your tag extractions with the [Host Agent](?tab=host-agent) tab instructions. If running the Agent as a container configure your tag extraction with the  [Containerized Agent Tab](?tab=containerized-agent) instructions.
+If running the Agent as a binary on a host, configure your tag extractions with the [Host Agent](?tab=hostagent) tab instructions. If running the Agent as a container configure your tag extraction with the  [Containerized Agent Tab](?tab=containerizedagent) instructions.
 
 ## Kubernetes
 
