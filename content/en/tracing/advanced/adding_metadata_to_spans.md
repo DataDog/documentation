@@ -302,7 +302,7 @@ func main() {
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Add metadata to all spans by configuring the tracer with the `tags` option:
+Add metadata to all spans by configuring the tracer with the `tags` parameter:
 
 ```js
 const tracer = require('dd-trace').init({
