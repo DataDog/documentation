@@ -173,8 +173,6 @@ To improve visibility into applications using unsupported frameworks, consider:
 The tracer is configured using System Properties and Environment Variables as follows:
 (See integration specific config in the [integrations](#integrations) section above.)
 
-{{% table responsive="true" %}}
-
 | System Property                        | Environment Variable                   | Default              | Description                                                                                                                                                                                                             |
 |----------------------------------------|----------------------------------------|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `dd.trace.enabled`                     | `DD_TRACE_ENABLED`                     | `true`               | When `false` tracing agent is disabled.                                                                                                                                                                                 |
@@ -188,7 +186,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.trace.span.tags`                   | `DD_TRACE_SPAN_TAGS`                   | `null`               | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span. Tags of the same name added directly to a span overwrite the defaults provided here.                                             |
 | `dd.trace.jmx.tags`                    | `DD_TRACE_JMX_TAGS`                    | `null`               | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every JMX metric. Tags of the same name added in JMX metrics configuration overwrite the defaults provided here.                             |
 | `dd.trace.header.tags`                 | `DD_TRACE_HEADER_TAGS`                 | `null`               | (Example: `CASE-insensitive-Header:my-tag-name,User-ID:userId`) A map of header keys to tag names.  Automatically apply header values as tags on traces.                                                                |
-| `dd.trace.annotations`                 | `DD_TRACE_ANNOTATIONS`                 | ([listed here][1])   | (Example: `com.some.Trace;io.other.Trace`) A list of method annotations to treat as `@Trace`.                                                                                                                           |
+| `dd.trace.annotations`                 | `DD_TRACE_ANNOTATIONS`                 | ([listed here][9])   | (Example: `com.some.Trace;io.other.Trace`) A list of method annotations to treat as `@Trace`.                                                                                                                           |
 | `dd.trace.methods`                     | `DD_TRACE_METHODS`                     | `null`               | (Example: `package.ClassName[method1,method2,...];AnonymousClass$1[call]`) List of class/interface and methods to trace.  Similar to adding `@Trace`, but without changing code.                                        |
 | `dd.trace.partial.flush.min.spans`     | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`     | `1000`               | Set a number of partial spans to flush on. Useful to reduce memory overhead when dealing with heavy traffic or long running traces.                                                                                     |
 | `dd.trace.report-hostname`             | `DD_TRACE_REPORT_HOSTNAME`             | `false`              | When enabled, it adds the detected hostname to trace metadata                                                                                                                                                           |
@@ -201,11 +199,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.jmxfetch.refresh-beans-period`     | `DD_JMXFETCH_REFRESH_BEANS_PERIOD`     | `600`                | How often to refresh list of avalable JMX beans (in seconds).                                                                                                                                                           |
 | `dd.jmxfetch.statsd.host`              | `DD_JMXFETCH_STATSD_HOST`              | same as `agent.host` | Statsd host to send JMX metrics to.                                                                                                                                                                                     |
 | `dd.jmxfetch.statsd.port`              | `DD_JMXFETCH_STATSD_PORT`              | 8125                 | Statsd port to send JMX metrics to.                                                                                                                                                                                     |
-| `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                | Enabled automatic MDC key injection for Datadog trace and span ids. See [Advanced Usage][2] for details                                                                                                                 |
-
-[1]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[2]: /tracing/advanced/connect_logs_and_traces/?tab=java
-{{% /table %}}
+| `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                | Enabled automatic MDC key injection for Datadog trace and span ids. See [Advanced Usage][10] for details                                                                                                                |
 
 **Note**:
 
@@ -214,8 +208,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 
 ### B3 Headers Extraction and Injection
 
-Datadog APM tracer supports [B3 headers extraction][9] and injection for
-distributed tracing.
+Datadog APM tracer supports [B3 headers extraction][11] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by
 configuring injection/extraction styles. Currently two styles are
@@ -323,4 +316,6 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 [6]: http://bytebuddy.net
 [7]: /help
 [8]: https://github.com/DataDog/documentation#outside-contributors
-[9]: https://github.com/openzipkin/b3-propagation
+[9]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
+[10]: /tracing/advanced/connect_logs_and_traces/?tab=java
+[11]: https://github.com/openzipkin/b3-propagation
