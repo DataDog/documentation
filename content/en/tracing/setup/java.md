@@ -90,7 +90,7 @@ Beta integrations are disabled by default but can be enabled individually.
 *Note:* Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Tomcat, Jetty, Websphere, Weblogic, etc.
 Also, frameworks like Spring Boot inherently work because it uses a Servlet compatible embedded application server.
 
-Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
+Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][7] if you need help.
 
 #### Networking Framework Compatibility
 
@@ -112,7 +112,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 
 **Networking tracing provides:** timing request to response, tags for the request (e.g. response code), error and stacktrace capturing, and distributed tracing.
 
-Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
+Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][7] if you need help.
 
 #### Data Store Compatibility
 
@@ -146,7 +146,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 
 **Datastore tracing provides:** timing request to response, query info (e.g. a sanitized query string), and error and stacktrace capturing.
 
-Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
+Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][7] if you need help.
 
 #### Other Framework Compatibility
 
@@ -160,13 +160,13 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | Hystrix          | 1.4+     | Fully Supported | `hystrix`                                      |
 | Twilio SDK       | 0+       | Fully Supported | `twilio-sdk`                                   |
 
-Don't see your desired framework? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
+Don't see your desired framework? Datadog is continually adding additional support. Contact [Datadog support][7] if you need help.
 
 To improve visibility into applications using unsupported frameworks, consider:
 
 * Adding custom instrumentation (with OpenTracing or the `@Trace` annotation).
-* [Submitting a pull request][9] with instrumentation for inclusion in a future release.
-* Contacting [Datadog support][8] and submitting a feature request.
+* [Submitting a pull request][8] with instrumentation for inclusion in a future release.
+* Contacting [Datadog support][7] and submitting a feature request.
 
 ## Configuration
 
@@ -214,7 +214,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 
 ### B3 Headers Extraction and Injection
 
-Datadog APM tracer supports [B3 headers extraction][10] and injection for
+Datadog APM tracer supports [B3 headers extraction][9] and injection for
 distributed tracing.
 
 Distributed headers injection and extraction is controlled by
@@ -322,6 +322,5 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 [5]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
 [6]: http://bytebuddy.net
 [7]: /help
-[8]: /help
-[9]: https://github.com/DataDog/documentation#outside-contributors
-[10]: https://github.com/openzipkin/b3-propagation
+[8]: https://github.com/DataDog/documentation#outside-contributors
+[9]: https://github.com/openzipkin/b3-propagation
