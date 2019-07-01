@@ -50,7 +50,7 @@ The overall process of Datadog Agent Autodiscovery is:
 
 ## How to set it up
 
-If running the Agent as a binary on a host, enable Autodiscovery with the [Host Agent](?tab=host-agent) tab instructions. If running the Agent as a container, enable Autodiscovery with the  [Containerized Agent Tab](?tab=containerized-agent) instructions.
+If running the Agent as a binary on a host, enable Autodiscovery with the [Host Agent](?tab=host-agent) tab instructions. If running the Agent as a container, enable Autodiscovery with the  [Containerized Agent Tab](?tab=containerizedagent) instructions.
 
 ### Docker Autodiscovery
 
@@ -114,7 +114,7 @@ KUBERNETES=true
 {{< tabs >}}
 {{% tab "Host Agent" %}}
 
-ECS Fargate can't be monitored with the Datadog Agent running as a binary on a host, see to the [Containerized Agent Tab](?tab=containerized-agent#ecs-fargate-autodiscovery) instructions.
+ECS Fargate can't be monitored with the Datadog Agent running as a binary on a host, see the [Containerized Agent Tab](?tab=containerizedagent#ecs-fargate-autodiscovery) instructions.
 
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
