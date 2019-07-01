@@ -202,10 +202,11 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.jmxfetch.statsd.host`              | `DD_JMXFETCH_STATSD_HOST`              | same as `agent.host` | Statsd host to send JMX metrics to.                                                                                                                                                                                     |
 | `dd.jmxfetch.statsd.port`              | `DD_JMXFETCH_STATSD_PORT`              | 8125                 | Statsd port to send JMX metrics to.                                                                                                                                                                                     |
 | `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                | Enabled automatic MDC key injection for Datadog trace and span ids. See [Advanced Usage][3] for details                                                                                                                 |
+ 
 
-[1]: 
-[2]: 
-[3]: 
+[1]: /tracing/setup/docker
+[2]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
+[3]: /tracing/advanced/connect_logs_and_traces/?tab=java
 {{% /table %}}
 
 **Note**:
