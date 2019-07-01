@@ -247,10 +247,14 @@ if (null !== $span) {
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to learn more.
+Add metadata to all spans by configuring the tracer with the system property `dd.trace.global.tags`:
 
+```bash
+java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
+     -dd.trace.global.tags='env:dev,<TAG_KEY>:<TAG_VALUE>' \
+     -jar <YOUR_APPLICATION_PATH>.jar
+```
 
-[1]: /help
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -259,7 +263,7 @@ Add metadata to all spans by configuring the tracer with the `tracer.set_tags` m
 ```python
 from ddtrace import tracer
 
-tracer.set_tags({ 'env': 'prod' })
+tracer.set_tags({ 'env': 'dev' })
 ```
 
 {{% /tab %}}
@@ -269,7 +273,7 @@ Add metadata to all spans by configuring the tracer with the `tags` option:
 
 ```ruby
 Datadog.configure do |c|
-  c.tracer tags: { 'env' => 'prod' }
+  c.tracer tags: { 'env' => 'dev' }
 end
 ```
 
@@ -289,7 +293,7 @@ import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 func main() {
     tracer.Start(
         tracer.WithGlobalTag("datacenter", "us-1"),
-        tracer.WithGlobalTag("env", "prod"),
+        tracer.WithGlobalTag("env", "dev"),
     )
     defer tracer.Stop()
 }
@@ -298,9 +302,15 @@ func main() {
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to learn more.
+Add metadata to all spans by configuring the tracer with the `tags` option:
 
-[1]: /help
+```js
+const tracer = require('dd-trace').init({
+  tags: 'env:dev,<TAG_KEY>:<TAG_VALUE>'
+})
+```
+
+
 {{% /tab %}}
 {{% tab ".NET" %}}
 
