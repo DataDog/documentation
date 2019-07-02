@@ -14,7 +14,7 @@ further_reading:
   text: "Manage your monitors"
 ---
 
-You may occasionally need to shut systems down or take them off-line to perform maintenance or upgrades. Scheduling downtime allows you to do this without triggering monitors.
+Schedule downtimes for system shutdowns, off-line maintenance, or upgrades without triggering your monitors.
 
 ## What happens to a monitor when it is muted (or has a scheduled downtime)?
 
