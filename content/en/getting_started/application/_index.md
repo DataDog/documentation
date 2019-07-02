@@ -16,15 +16,15 @@ This page gives a high level overview of Datadog's capabilities.
 * Datadog has over 350 integrations [officially listed][3].
 * Custom integrations are available [via the Datadog API][4].
 * The Agent is [open source][5].
-* Once integrations have been configured, data living in a datacenter or in an online service is treated the same throughout Datadog.
+* Once integrations have been configured, all data is treated the same throughout Datadog, whether it is living in a datacenter or in an online service.
 
 ## Infrastructure
 
 {{< img src="getting_started/infrastructure.png" alt="infrastructure" responsive="true" >}}
 
 * All machines show up in the [infrastructure list][6].
-* Here you can see the tags applied to each machine. As they're assigned to perform certain roles, tagging allows you to indicate which machines have a particular purpose.
-* Datadog does as much as possible to automatically categorize your servers in order to create structure in your infrastructure. If a new machine is tagged, you can immediately see the stats for that machine based on what was previously set up for that tag. [Read more on tagging][7].
+* You can see the tags applied to each machine. Tagging allows you to indicate which machines have a particular purpose.
+* Datadog attempts to automatically categorize your servers. If a new machine is tagged, you can immediately see the stats for that machine based on what was previously set up for that tag. [Read more on tagging][7].
 
 ## Host Map
 
@@ -32,7 +32,7 @@ This page gives a high level overview of Datadog's capabilities.
 
 [The Host Map][8] can be found under the Infrastructure menu. It offers the ability to:
 
-* Quickly visualize your entire environment regardless of the number of hosts
+* Quickly visualize your environment
 * Identify outliers
 * Detect usage patterns
 * Optimize resources
@@ -45,11 +45,11 @@ To learn more about the Host Map, visit the [Host Map dedicated documentation pa
 
 [The Event Stream][9] is based on the same conventions as a blog:
 
-* Every event in the stream can be commented on.
-* Great for distributed [teams][10] and maintaining the focus of an investigation.
-* You can [filter][11] by: `user`, `source`, `tag`, `host`, `status`, `priority`, `incident`
+* Any event in the stream can be commented on.
+* Can be used for distributed [teams][10] and maintaining the focus of an investigation.
+* You can [filter][11] by `user`, `source`, `tag`, `host`, `status`, `priority`, and `incident`.
 
-For each incident users can:
+For each incident, users can:
 
 * Increase/decrease priority
 * Comment
@@ -63,27 +63,24 @@ For each incident users can:
 
 {{< img src="getting_started/dashboard.png" alt="dashboard" responsive="true" >}}
 
-Dashboards contain [graphs][14] with real-time performance metrics
+Dashboards contain [graphs][14] with real-time performance metrics.
 
 * Synchronous mousing across all graphs in a [screenboard][15].
-* Vertical bars are events in the context of the metric.
-* Click & drag on a graph to zoom in on a particular timeframe.
+* Vertical bars are events. They put a metric into context.
+* Click and drag on a graph to zoom in on a particular timeframe.
 * As you hover over the graph, the event stream moves with you.
 * Display by zone, host, or total usage.
-* Datadog exposes the JSON editor of the graph allowing for [arithmetic][16] and [functions][17] to be applied to metrics.
-* Share a graph snapshot that appears in the stream; clicking on that snapshot returns you to the original dashboard (via the camera in the upper right of a graph).
-* Graphs can be embedded in an iframe, giving a 3rd party a live graph without access to your data or any other information (via the pencil in the upper right of a graph).
+* Datadog exposes a JSON editor for the graph, allowing for [arithmetic][16] and [functions][17] to be applied to metrics.
+* Share a graph snapshot that appears in the stream.
+* Graphs can be embedded in an iframe. This enables you to give a 3rd party access to a live graph without also giving access to your data or any other information.
 
 ## Monitoring
 
 {{< img src="getting_started/monitor.png" alt="monitor" responsive="true" >}}
 
-[Monitoring][18] gives you the ability to be notified if the aggregate of a specific
-metric is above or below a certain threshold:
+[Monitoring][18] gives you the ability to be notified if the aggregate of a specific metric is above or below a certain threshold—across your entire infrastructure, or per machine (average, max, min, or sum).
 
-* Across your entire infrastructure
-* Per machine (average, max, min, or sum)
-* Applies to any metric you want, revenue: data center temperature, etc.
+* Applies to any metric, e.g., revenue, data center temperature, etc.
 * Multi alerts (by device, host, etc.)
 * Set alert notification message, including @ capabilities
 
