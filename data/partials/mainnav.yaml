@@ -114,6 +114,8 @@ main:
             url: "agent/autodiscovery/troubleshooting"
           - name: "Cluster Checks"
             url: "agent/autodiscovery/clusterchecks"
+          - name: "Endpoints Checks"
+            url: "agent/autodiscovery/endpointschecks"
       - name: "Proxy"
         url: "agent/proxy"
       ## Upgrade to Agent v6
@@ -162,6 +164,9 @@ main:
     pre: "nav_graphing"
     children:
       # GRAPHING - Subnav start
+      - name: "Using graphs"
+        url: "graphing/using_graphs/"
+      # GRAPHING - dashboards
       - name: "Dashboards"
         url: "graphing/dashboards/"
         children:
@@ -308,13 +313,16 @@ main:
 
 
   # TRACING/APM
-  - name: "APM (Tracing)"
+  - name: "APM & Distributed Tracing"
     url: "tracing/"
     pre: "nav_tracing"
     children:
       # Enable tracing
       - name: "Enable trace collection"
         url: "tracing/send_traces/"
+        children:
+          - name: "Agent APM metrics"
+            url: "tracing/send_traces/agent-apm-metrics/"
 
       # Languages
       - name: "Instrument your application"
@@ -394,7 +402,7 @@ main:
       # Libraries
 
       - name: "Community Libraries"
-        url: "developers/libraries/#apm-tracing-client-libraries"
+        url: "developers/libraries/#apm-distributed-tracing-client-libraries"
 
       - name: "Guides"
         url: "tracing/guide"

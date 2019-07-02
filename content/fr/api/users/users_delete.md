@@ -1,7 +1,7 @@
 ---
 title: Désactiver un utilisateur
 type: apicontent
-order: 27.5
+order: 34.5
 external_redirect: /api/#desactiver-un-utilisateur
 ---
 
@@ -9,6 +9,5 @@ external_redirect: /api/#desactiver-un-utilisateur
 Ne peut être utilisé qu'avec des clés d'application disponibles pour les administrateurs.
 
 ##### ARGUMENTS
-* **`id`** [*obligatoire*] :  
+* **`id`** [*obligatoire*] :
     Le handle de l'utilisateur.
-

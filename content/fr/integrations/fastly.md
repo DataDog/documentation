@@ -1,6 +1,7 @@
 ---
 categories:
   - web
+  - log collection
 ddtype: crawler
 dependencies: []
 description: 'Surveillez des métriques liées au cache, les requêtes d''origine, les codes de réponse, et plus encore.'

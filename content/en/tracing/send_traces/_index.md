@@ -9,6 +9,9 @@ aliases:
   - /tracing/getting_further/first_class_dimensions/
   - /agent/apm/
 further_reading:
+- link: "tracing/send_traces/agent-apm-metrics/"
+  tag: "Documentation"
+  text: "APM metrics sent by the Datadog Agent"
 - link: "/agent/docker/apm"
   tag: "Documentation"
   text: "Docker APM setup"
@@ -25,7 +28,7 @@ To use APM, start by sending your traces to Datadog, and then [configure your en
 ## Datadog Agent
 
 APM is enabled by default in Agent 6. Set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][2] if you are sending traces from a nonlocal environment (like a container). 
-To get an overview of all the possible settings for APM, take a look at the Agent's [`datadog.example.yaml`][3] configuration file. For more information about the Datadog Agent, see the [Agent documentation][4] or refer to the [`datadog.yaml` configuration template][5].
+To get an overview of all the possible settings for APM, take a look at the Agent's [`datadog.example.yaml`][3] configuration file. For all of the metrics sent to Datadog by the Agent, see [APM metrics sent by the Datadog Agent][4]. For more information about the Datadog Agent, see the [Agent documentation][5] or refer to the [`datadog.yaml` configuration template][6].
 
 ## Containers
 
@@ -41,15 +44,15 @@ There are alternernates to the Agent and containers that you can use to collect 
 
 ### Lambda - X-Ray
 
-For more information setting up Lambda - X-Ray, see the [Amazon X-Ray integration documentation][6]
+For more information setting up Lambda - X-Ray, see the [Amazon X-Ray integration documentation][7]
 
 ### Heroku
 
-Tracing is enabled by default when monitoring with Heroku. For more information about configuring tracing for Heroku, see the [Heroku cloud documentation][7].
+Tracing is enabled by default when monitoring with Heroku. For more information about configuring tracing for Heroku, see the [Heroku cloud documentation][8].
 
 ### Cloud Foundry
 
-Tracing is enabled by default when monitoring with Cloud Foundry. For more information about configuring tracing for Cloud Foundry, see the [Cloud Foundry documentation][8].
+Tracing is enabled by default when monitoring with Cloud Foundry. For more information about configuring tracing for Cloud Foundry, see the [Cloud Foundry documentation][9].
 
 ### Other(GAE, AAS, Serverless)
 
@@ -57,7 +60,7 @@ Datadog APM currently requires sending trace data to a running Agent. A workarou
 
 ## Configure your environment
 
-There are several ways to specify [an environment][9] when reporting data:
+There are several ways to specify [an environment][10] when reporting data:
 
 1. **Host tag**: Use a host tag with the format `env:<ENVIRONMENT>` to tag all traces from that Agent accordingly.
 2. **Agent configuration**: Override the default tag used by the Agent in the Agent configuration file. This tags all traces coming through the Agent, overriding the host tag value.
@@ -65,11 +68,11 @@ There are several ways to specify [an environment][9] when reporting data:
   apm_config:
   env: <ENVIRONMENT>
   ```
-3. **Per trace**: When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the Agent configuration and the host tag’s value (if any). Consult the [trace tagging documentation][10] to learn how to assign a tag to your traces.
+3. **Per trace**: When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the Agent configuration and the host tag’s value (if any). Consult the [trace tagging documentation][11] to learn how to assign a tag to your traces.
 
 ## Next steps
 
-Next, [Instrument your application][11]. For the full overview of all of the steps to set up APM, see the [APM overview][1]. 
+Next, [Instrument your application][12]. For the full overview of all of the steps to set up APM, see the [APM overview][1]. 
 
 ## Further Reading
 
@@ -78,11 +81,12 @@ Next, [Instrument your application][11]. For the full overview of all of the ste
 [1]: /tracing
 [2]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
 [3]: https://github.com/DataDog/datadog-trace-agent/blob/6.4.1/datadog.example.yaml
-[4]: /agent
-[5]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[6]: /integrations/amazon_xray/#overview
-[7]: /agent/basic_agent_usage/heroku/#installation
-[8]: /integrations/cloud_foundry/#trace-collection
-[9]: /tracing/advanced/setting_primary_tags_to_scope/#definition
-[10]: /tracing/advanced/adding_metadata_to_spans/?tab=java
-[11]: /tracing/setup
+[4]: /tracing/send_traces/agent-apm-metrics
+[5]: /agent
+[6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[7]: /integrations/amazon_xray/#overview
+[8]: /agent/basic_agent_usage/heroku/#installation
+[9]: /integrations/cloud_foundry/#trace-collection
+[10]: /tracing/advanced/setting_primary_tags_to_scope/#definition
+[11]: /tracing/advanced/adding_metadata_to_spans/?tab=java
+[12]: /tracing/setup

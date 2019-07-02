@@ -31,6 +31,7 @@ Les totaux servent à compter des éléments.
 ### DogStatsD
 
 {{% table responsive="true" %}}
+
 | Méthode | Présentation |
 | :----- | :------- |
 | dog.increment(...) | Permet d'incrémenter un compteur d'événements : <ul><li>Stocké en tant que RATE dans l'application Web de Datadog. Chaque valeur de la série temporelle stockée correspond à un delta normalisé temporellement de la valeur du compteur sur cette période de transmission de Statsd.</li></ul> |

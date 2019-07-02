@@ -86,7 +86,10 @@ The **Params** tab shows all parameters and values that are currently on the API
 
 This tab is an alternative to viewing the `param1:value1&param2:value2` structure of the API call.
 
-**Note**: The ampersand (&) and colon (:) are not needed in the params table. Postman inserts these for you.
+**Notes**:
+
+* The ampersand (&) and colon (:) are not needed in the params table. Postman inserts these for you.
+* All placeholders follow the format: `<PLACEHOLDER>` . They should be replaced before running a query.
 
 [1]: https://www.getpostman.com
 [2]: https://app.datadoghq.com/account/settings#api

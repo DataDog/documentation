@@ -4,7 +4,7 @@ api_key=<YOUR_API_KEY>
 app_key=<YOUR_APP_KEY>
 
 curl -X POST \
-  'https://api.datadoghq.com/api/v1/synthetics/tests?api_key=${api_key}&application_key=${app_key}' \
+  "https://api.datadoghq.com/api/v1/synthetics/tests?api_key=${api_key}&application_key=${app_key}" \
   -H 'Content-Type: application/json' \
   -d '{
    "config":{

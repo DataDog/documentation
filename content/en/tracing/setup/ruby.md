@@ -105,15 +105,15 @@ Ruby APM includes support for the following Ruby interpreters:
 
 | Type                               | Version | Support type    |
 | ---------------------------------- | -----   | --------------- |
-| [MRI][10]  | 1.9.1   | Experimental    |
-|                                    | 1.9.3   | Fully Supported |
+| [MRI][10]                          | 1.9.1   | Deprecated      |
+|                                    | 1.9.3   | Deprecated      |
 |                                    | 2.0     | Fully Supported |
 |                                    | 2.1     | Fully Supported |
 |                                    | 2.2     | Fully Supported |
 |                                    | 2.3     | Fully Supported |
 |                                    | 2.4     | Fully Supported |
 |                                    | 2.5     | Fully Supported |
-| [JRuby][11]         | 9.1.5   | Experimental    |
+| [JRuby][11]                        | 9.1.5   | Experimental    |
 
 #### Web Server Compatibility
 
@@ -121,9 +121,9 @@ Ruby APM includes support for the following web servers:
 
 | Type                                           | Version      | Support type    |
 | ---------------------------------------------- | ------------ | --------------- |
-| [Puma][12]                        | 2.16+ / 3.6+ | Fully Supported |
-| [Unicorn][13]       | 4.8+ / 5.1+  | Fully Supported |
-| [Passenger][14] | 5.0+         | Fully Supported |
+| [Puma][12]                                     | 2.16+ / 3.6+ | Fully Supported |
+| [Unicorn][13]                                  | 4.8+ / 5.1+  | Fully Supported |
+| [Passenger][14]                                | 5.0+         | Fully Supported |
 
 #### Library Compatibility
 
@@ -162,6 +162,8 @@ Ruby APM includes support for the following libraries and frameworks:
 *Fully Supported* support indicates all tracer features are available.
 
 *Experimental* indicates most features should be available, but unverified.
+
+*Deprecated* indicates support will be removed in a future release.
 
 ## Configuration
 

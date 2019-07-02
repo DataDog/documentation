@@ -3,9 +3,9 @@ title: Trace Analytics
 kind: documentation
 description: "Analytics on your APM data at infinite cardinality"
 aliases:
-  - tracing/trace_search_analytics/analytics
-  - tracing/analytics
-  - tracing/visualization/analytics
+  - /tracing/trace_search_analytics/analytics
+  - /tracing/analytics
+  - /tracing/visualization/analytics
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
