@@ -7,39 +7,32 @@ further_reading:
   text: "Introduction to Datadog"
 ---
 
-So, you've just finished [installing][1] the Datadog Agent, or maybe you're just curious about [what Datadog can do for you][2]. This page gives a high level overview of Datadog's capabilities and how it can help you bring your infrastructure to heel.
+This page gives a high level overview of Datadog's capabilities.
 
 ## Integrations
 
 {{< img src="getting_started/integrations.png" alt="integrations" responsive="true" >}}
 
-* Over 350 integrations [officially listed][3], and we're always adding more.
-* Custom integrations are available [via the Datadog API][4], many documented by Datadog active user community.
-* The Agent is [open source][5] and you can instrument your own if you'd like.
-* Once integrations have been configured, data living in a datacenter or
-in an online service is treated the same throughout Datadog.
+* Datadog has over 350 integrations [officially listed][3].
+* Custom integrations are available [via the Datadog API][4].
+* The Agent is [open source][5].
+* Once integrations have been configured, data living in a datacenter or in an online service is treated the same throughout Datadog.
 
 ## Infrastructure
 
 {{< img src="getting_started/infrastructure.png" alt="infrastructure" responsive="true" >}}
 
 * All machines show up in the [infrastructure list][6].
-* Here you can see the tags applied to each machine; as they're assigned to
-perform certain roles, tagging allows you to indicate machines have
-a certain purpose.
-* We do as much as possible to automatically categorize your servers
-for you, which helps create structure in your infrastructure with as little
-work as possible (unlike explicitly creating all your clusters).
-Thus if a new machine is tagged, you can immediately see the stats
-for that machine based on what was previously set up for that tag.[Read more on tagging][7].
+* Here you can see the tags applied to each machine. As they're assigned to perform certain roles, tagging allows you to indicate which machines have a particular purpose.
+* Datadog does as much as possible to automatically categorize your servers in order to create structure in your infrastructure. If a new machine is tagged, you can immediately see the stats for that machine based on what was previously set up for that tag. [Read more on tagging][7].
 
 ## Host Map
 
 {{< img src="getting_started/hostmap-overview.png" alt="hostmap overview" responsive="true" >}}
 
-[The Host Map][8] can be found under the Infrastructure menu and offers the ability to:
+[The Host Map][8] can be found under the Infrastructure menu. It offers the ability to:
 
-* Quickly visualize your entire environment regardless of whether it's 5, 500, or 50,000 hosts.
+* Quickly visualize your entire environment regardless of the number of hosts
 * Identify outliers
 * Detect usage patterns
 * Optimize resources
@@ -74,15 +67,12 @@ Dashboards contain [graphs][14] with real-time performance metrics
 
 * Synchronous mousing across all graphs in a [screenboard][15].
 * Vertical bars are events in the context of the metric.
-* Click & drag on a graph to zoom-in on a particular time-frame.
-* As you hover over the graph the event stream moves with you.
+* Click & drag on a graph to zoom in on a particular timeframe.
+* As you hover over the graph, the event stream moves with you.
 * Display by zone, host, or total usage.
-* We expose the JSON editor of the graph allowing for [arithmetic][16] and
-[functions][17] to be applied to metrics.
-* Share a graph snapshot that appears in the stream; clicking on
-that snapshot returns you to the original dashboard (via the camera in the upper right of a graph).
-* Graphs can be embedded in an iframe, giving a 3rd party a live graph
-without access to your data or any other information (via the pencil in the upper right of a graph).
+* Datadog exposes the JSON editor of the graph allowing for [arithmetic][16] and [functions][17] to be applied to metrics.
+* Share a graph snapshot that appears in the stream; clicking on that snapshot returns you to the original dashboard (via the camera in the upper right of a graph).
+* Graphs can be embedded in an iframe, giving a 3rd party a live graph without access to your data or any other information (via the pencil in the upper right of a graph).
 
 ## Monitoring
 
