@@ -12,28 +12,22 @@ def main(options):
     res = requests.get("https://api.transifex.com/organizations/datadog/projects/?details", auth=('api', options.apikey))
     projects = res.json()
 
-    docs_project = {}
     for project in projects:
-        if project.get('name', '') == 'Documentation':
-            docs_project = project
-
-    # build and send metrics if we have the docs project data
-    if docs_project:
         metrics = []
         metrics.append({
-          'metric': f'translations.{docs_project["slug"]}.stringcount',
-          'points': docs_project.get('stringcount', 0),
-          'tags': ['docs_translations']
+            'metric': f'translations.stringcount',
+            'points': project.get('stringcount', 0),
+            'tags': ['name:{}'.format(project["name"])]
         })
         metrics.append({
-          'metric': f'translations.{docs_project["slug"]}.wordcount',
-          'points': docs_project.get('wordcount', 0),
-          'tags': ['docs_translations']
+            'metric': f'translations.wordcount',
+            'points': project.get('wordcount', 0),
+            'tags': ['name:{}'.format(project["name"])]
         })
         metrics.append({
-          'metric': f'translations.{docs_project["slug"]}.total_resources',
-          'points': docs_project.get('total_resources', 0),
-          'tags': ['docs_translations']
+            'metric': f'translations.total_resources',
+            'points': project.get('total_resources', 0),
+            'tags': ['name:{}'.format(project["name"])]
         })
 
         # send metrics
@@ -42,8 +36,6 @@ def main(options):
             print(response)
         except Exception as e:
             print(e)
-    else:
-        print("There was a problem retrieving project stats")
 
 
 if __name__ == '__main__':
