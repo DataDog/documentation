@@ -475,5 +475,12 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 {{% /tab %}}
 {{< /tabs >}}
 
+## APM Event Filtering
+
+An APM Event represents the top span for a service including its metadata, and once enabled APM Event are sent at 100% throuhgput by default. For example, a java service with 100 requests will generate 100 APM Events from its servlet.request spans, as the servlet.request span generates an APM Event. [Filtering APM Events][3] has the benefit of reducing the number of billable APM Events and has no effect on trace sampling. Once a service has been filtered lower than 100%, APM Event analytics will be upscaled to display an estimate by default and have the option to display the filtered value. 
+
+{{< img src="tracing/trace_search_and_analytics/analytics/apm_event_filtering.png" alt="APM Event Filtering" responsive="true" style="width:100%;">}}
+
 [1]: https://app.datadoghq.com/apm/search
 [2]: /tracing/trace_search_and_analytics/agent_trace_search
+[3]: https://app.datadoghq.com/apm/settings
