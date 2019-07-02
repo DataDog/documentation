@@ -48,11 +48,7 @@ In the Trace Search view you can:
 When a request hits a service (e.g. webserver, database), the Datadog Agent creates an APM event. It's a record of the request including its duration, response code, and any [custom metadata][1].
 An APM event is represented by a single span with attached metadata for the handled request. For each service that receives a request, the agent creates an APM event. If a request runs through a web service, listing service, and database service, the request will generate 3 APM events. To reduce the amount of APM Events generated, [explicitly turn on/off any APM event collection for a specific service][2].
 
-To start collecting APM events, you need to perform three steps:
-
-* Install the Datadog Agent v6.7+
-* Enable APM and Logs in the `datadog.yaml` main configuration file.
-* [Enable Trace search for your services][3].
+To start collecting APM events, [enable Trace Search & Analytics for your services][3].
 
 ### Complete traces
 
