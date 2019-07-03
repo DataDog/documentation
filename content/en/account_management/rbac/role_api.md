@@ -22,7 +22,22 @@ Permissions related to specific account assets can be granted to roles in the Da
 Description: Returns all roles, including their names and uuids.  
 Method: GET  
 Endpoint: `api/v1/role`  
-Required Payload: No Payload  
+Required Payload: No Payload
+
+##### ARGUMENTS
+
+
+* **`sort_field`** [*optional*, *default*=**name**]:
+    Sort roles by the given field.
+    Options: **name**
+* **`sort_dir`** [*optional*, *default*=**asc**]:
+    Direction of sort.
+    Options: **asc**, **desc**
+* **`start`** [*optional*, *default*=**0**]:
+    Roles result to start search from.
+* **`count`** [*optional*, *default*=**10**]:
+    Number of roles results to return. 
+
 Example:
 
 ```sh
