@@ -15,7 +15,6 @@ further_reading:
 - link: "logs/explorer/"
   tag: "Documentation"
   text: "Search through all of your logs and perform Log Analytics."
-further_reading:
 - link: "https://learn.datadoghq.com/course/view.php?id=5"
   tag: "Learning Center"
   text: "Introduction to Logs in Datadog"
@@ -171,7 +170,7 @@ Your logs are collected and centralized into the [Log Explorer][3] view. You can
 [18]: /logs/log_collection/#filter-logs
 [19]: /logs/log_collection/#scrub-sensitive-data-in-your-logs
 [20]: /logs/log_collection/#multi-line-aggregation
-[21]: /logs/log_collection/docker
+[21]: /agent/docker/log
 [22]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
 [23]: /integrations/amazon_web_services/#log-collection
 [24]: /integrations/amazon_web_services/#enable-logging-for-your-aws-service

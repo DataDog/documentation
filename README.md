@@ -5,21 +5,19 @@ Built with [hugo][1], a static website generation tool.
 ## Setup
 ### Installation
 
-1. [Install hugo][2] 
+1. [Install npm][2]
 
-2. [Install npm][3]
+2. [Install Python3][3] (you can also use [pyenv][4])
 
-3. [Install Python3][4] (you can also use [pyenv][5])
+3. Install gulp: ```npm install -g gulp```
 
-4. Install gulp: ```npm install -g gulp```
-
-* Download the documentation repo ```git clone https://github.com/DataDog/documentation.git```
+4. Download the documentation repo ```git clone https://github.com/DataDog/documentation.git```
 
 ### Run the server
 
-Inside `documentation/` folder, create a `Makefile.config` file from the [Makefile.config.example][6]
+Inside `documentation/` folder, create a `Makefile.config` file from the [Makefile.config.example][5]
 
-If you are a Datadog employee, add your [Github personal token][7]
+If you are a Datadog employee, add your [Github personal token][6]
 
 To run the site and perform administrative tasks (compile metrics, create i18n placeholders, etc), just execute:
 
@@ -29,7 +27,7 @@ Documentation is available at `http://localhost:1313`
 
 ### Makefile
 
-To use the Makefile, create a Makefile.config. See the instructions at the top of the [Makefile.config.example][6].
+To use the Makefile, create a Makefile.config. See the instructions at the top of the [Makefile.config.example][5].
 
 After you have a config file you can run `make help` to see options:
 
@@ -53,17 +51,17 @@ stop                      stop the gulp/hugo server.
 * Always branch off of master; never commit directly to master.
 * Name your branch `slack_handle/your_feature` if you would like to create a preview site and run tests.
 * When you are ready to commit, create a new pull request to master from your branch.
-* Consult our [contributing guidelines][8].
+* Consult our [contributing guidelines][7].
 
 ### Outside Contributors
 
 * Fork the master branch.
 * When you are ready to commit make a pull request back to `DataDog/master`.
-* Consult our [contributing guidelines][8].
+* Consult our [contributing guidelines][7].
 
 ### A note about markdown
 
-This site uses Blackfriday for markdown. To learn about the syntax, [see this site][9].
+This site uses Blackfriday for markdown. To learn about the syntax, [see this site][8].
 
 If you include ANY Markdown in a file, give it an .md extension.
 
@@ -71,22 +69,21 @@ Make sure all files are lowercase. Macs are case insensitive when creating links
 
 ## Releasing
 
-If you receive an error regarding `There was a problem getting GitHub Metrics`, please see the [Github personal access token][10].
+If you receive an error regarding `There was a problem getting GitHub Metrics`, please see the [Github personal access token][9].
 
 Within 5 minutes of merging to master, it deploys automatically. You can see the status in the internal Datadog Slack *#documentation* channel.
 
 ## How to add a new integration
 
-[See the dedicated doc page][11]
+[See the dedicated doc page][10]
 
-[1]: https://gohugo.io/
-[2]: https://gohugo.io/overview/installing/
-[3]: https://nodejs.org/en/download/package-manager/
-[4]: https://www.python.org/downloads/
-[5]: https://github.com/pyenv/pyenv
-[6]: https://github.com/DataDog/documentation/blob/master/Makefile.config.example
-[7]: https://github.com/DataDog/documentation/wiki/Github-personal-token
-[8]: https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md
-[9]: https://github.com/russross/blackfriday
-[10]: https://github.com/DataDog/documentation/wiki/Github-personal-token
-[11]: https://docs.datadoghq.com/developers/integrations
+[1]: https://gohugo.io
+[2]: https://nodejs.org/en/download/package-manager
+[3]: https://www.python.org/downloads
+[4]: https://github.com/pyenv/pyenv
+[5]: https://github.com/DataDog/documentation/blob/master/Makefile.config.example
+[6]: https://github.com/DataDog/documentation/wiki/Github-personal-token
+[7]: https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md
+[8]: https://github.com/russross/blackfriday
+[9]: https://github.com/DataDog/documentation/wiki/Github-personal-token
+[10]: https://docs.datadoghq.com/developers/integrations

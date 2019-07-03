@@ -1,4 +1,5 @@
-{"user": {
+{
+  "user": {
     "handle": "test@datadoghq.com",
     "name": "test user",
     "access_role": "st",

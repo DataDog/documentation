@@ -13,7 +13,7 @@ The following table lists Datadog-official and community contributed API and [Do
 
 {{< classic-libraries-table >}}
 
-## APM (Tracing) Client Libraries
+## APM & Distributed Tracing Client Libraries
 
 The following table lists Datadog-official and community contributed [Trace][2] client libraries.
 
@@ -82,6 +82,9 @@ Heroku emits dyno metrics via logs. To convert these logs into metrics and send 
 
 ### Jira
 A [tool][37] to poll data from Jira and upload it as metrics to Datadog.
+
+### LaunchDarkly
+A [LaunchDarkly][60] webhook handler that records changes as Datadog events.
 
 ### Logstash Output
   * [Logstash Output for Datadog][38]
@@ -187,3 +190,4 @@ If you've written a Datadog library and would like to add it to this page, send 
 [57]: https://github.com/urosgruber/dd-agent-FreeBSD
 [58]: https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/networking/dd-agent
 [59]: mailto:code@datadoghq.com
+[60]: https://github.com/meetup/launch-dogly

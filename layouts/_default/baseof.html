@@ -1,6 +1,30 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}" style="opacity:0" class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.text }}banner{{ end }}">
 <head>
+    <script>
+      // Init browser logs when the lib is loaded.
+      window.blAsyncInit = function () {
+        // Set your Public API key
+        DD_LOGS.init({
+          publicApiKey: 'pub749f1865c95056099fe5280945238f49',
+          forwardErrorsToLogs: true,
+        });
+        DD_LOGS.addLoggerGlobalContext('env', '{{ $.Site.Params.environment }}');
+        DD_LOGS.addLoggerGlobalContext('service', 'docs');
+        DD_LOGS.addLoggerGlobalContext('host', window.location.host);
+      };
+
+      // Load the Browser logs lib asynchronously if it's not already loaded.
+      (function(d){
+         let js, id = 'browser-logs-js', ref = d.getElementsByTagName('script')[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement('script'); js.id = id; js.async = true;
+         js.src = "//www.datadoghq-browser-agent.com/datadog-logs-us.js";
+         const ddScript = ref.parentNode.insertBefore(js, ref);
+         ddScript.onload = function(){window.blAsyncInit();}
+       }(document));
+    </script>
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-21102638-5"></script>
     <script>
@@ -18,6 +42,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{ if .Params.external_redirect }} {{ partial "meta-http-equiv.html" . }} {{ end }}
     {{- partial "noindex.html" . -}}
+    {{- partial "hreflang.html" . -}}
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="icon" type="image/png" href="https://docs.datadoghq.com/favicon.ico">
     <link rel="stylesheet" href="{{ .Site.BaseURL }}css/{{ (index .Site.Data.manifests.css "main-dd.css" ) }}">
@@ -129,5 +154,83 @@
     });
     </script>
     <!--/ ALGOLIA DOCSEARCH -->
+    <!-- Browser logs -->
+    <script type="text/javascript">
+            window.addEventListener('load', function () {
+        let pageNav = performance.getEntriesByType("navigation")[0];
+        let pageNavStats = {};
+        try {
+          // Measuring DNS lookup time
+          pageNavStats.dnsTime = pageNav.domainLookupEnd - pageNav.domainLookupStart;
+          // Quantifying total connection time
+          pageNavStats.connectionTime = pageNav.connectEnd - pageNav.connectStart;
+          pageNavStats.tlsTime = 0; // <-- Assume 0 by default
+
+          // Did any TLS stuff happen?
+          if (pageNav.secureConnectionStart > 0) {
+            // Awesome! Calculate it!
+            pageNavStats.tlsTime = pageNav.connectEnd - pageNav.secureConnectionStart;
+          }
+          // Cache seek plus response time
+          pageNavStats.fetchTime = pageNav.responseEnd - pageNav.fetchStart;
+
+          // Service worker time plus response time
+          pageNavStats.workerTime = 0;
+
+          if (pageNav.workerStart > 0) {
+            pageNavStats.workerTime = pageNav.responseEnd - pageNav.workerStart;
+          }
+          // Request plus response time (network only)
+          pageNavStats.totalTime = pageNav.responseEnd - pageNav.requestStart;
+
+          // Response time only (download)
+          pageNavStats.downloadTime = pageNav.responseEnd - pageNav.responseStart;
+
+          // Time to First Byte (TTFB)
+          pageNavStats.ttfb = pageNav.responseStart - pageNav.requestStart;
+
+          // HTTP header size
+          pageNavStats.headerSize = pageNav.transferSize - pageNav.encodedBodySize;
+
+          // Compression ratio
+          pageNavStats.compressionRatio = pageNav.decodedBodySize / pageNav.encodedBodySize;
+
+          let pageStats = {
+            "location": JSON.parse(JSON.stringify(window.location)),
+            "performance": {
+              "navigation": pageNavStats
+            }
+          };
+          // send the page stats
+          DD_LOGS.logger.info('Page loaded', pageStats);
+        } catch (e) {
+          DD_LOGS.logger.debug('Page stats collection error', {'message': e});
+        }
+        try {
+          let pageResources = performance.getEntriesByType("resource");
+          if (pageResources) {
+            for (let i = 0; i < pageResources.length; i++) {
+              let el = pageResources[i];
+              const resourceName = el.name.match(/[0-9a-zA-Z\-_]+\.(js|css|jpg|mp4|mov|jpeg|gif|png|woff2?|ico|html)/g);
+              if (resourceName) {
+                const rN = resourceName[0].replace(/(-[a-z0-9]{8})?\./g, '.');
+                const resource = {
+                  'resourceName': rN.toString(),
+                  'resourceType': el.initiatorType,
+                  'resourceLocation': JSON.parse(JSON.stringify(window.location)),
+                  'resourceStats': el
+                };
+                DD_LOGS.logger.info('Resource loaded', resource);
+              } else {
+                DD_LOGS.logger.debug('Could not load resource: ' + el.name);
+              }
+            }
+          }
+        } catch(e) {
+          DD_LOGS.logger.debug('resource stats collection error' + e);
+        }
+      });
+    </script>
+    <!--/ Browser logs -->
 </body>
 </html>

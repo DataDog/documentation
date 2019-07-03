@@ -1,5 +1,5 @@
 ---
-title: Getting started with APM
+title: Visualizing your APM data
 kind: documentation
 aliases:
   - /tracing/terminology/

@@ -27,4 +27,3 @@ Regarding API rate limit policy:
 [5]: /api/?lang=bash#get-a-list-of-logs
 [6]: /api/#graphs
 [7]: /api/?lang=bash#logs
-

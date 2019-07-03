@@ -6,7 +6,7 @@ external_redirect: /api/#get-hourly-usage-for-synthetics
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/usage/synthetics`
+`GET /v1/usage/synthetics`
 ##### Example Request
 {{< code-snippets basename="api-billing-usage-synthetics" >}}
 ##### Example Response

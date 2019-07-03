@@ -4,12 +4,16 @@ main:
     url: "getting_started/"
     pre: "nav_start"
     children:
+      - name: "Agent"
+        url: "getting_started/agent"
       - name: "Integrations"
         url: "getting_started/integrations"
       - name: "Collect traces"
         url: "getting_started/tracing"
       - name: "Learning Center"
         url: "getting_started/learning_center"
+      - name: "Prometheus/Openmetrics"
+        url: "getting_started/prometheus"
   # TAGGING
   - name: "Tagging"
     url: "tagging/"
@@ -54,15 +58,14 @@ main:
             url: "agent/basic_agent_usage/windows/"
           - name: "From Source"
             url: "agent/basic_agent_usage/source/"
-      ## TRACING/APM - Setup basic
-      - name: "APM"
-        url: "agent/apm/"
       ## Docker
       - name: "Docker"
         url: "agent/docker/"
         children:
-          - name: "APM"
-            url: "agent/docker/apm"
+          - name: APM
+            url: agent/docker/apm
+          - name: Log collection
+            url: agent/docker/log
       ## Kubernetes
       - name: "Kubernetes"
         url: "agent/kubernetes/"
@@ -89,18 +92,43 @@ main:
       - name: "Autodiscovery"
         url: "agent/autodiscovery"
         children:
+          - name: "Integrations Templates"
+            url: "agent/autodiscovery/integrations"
+          - name: "Container Identifier"
+            url: "agent/autodiscovery/ad_identifiers"
+          - name: "Template Variables"
+            url: "agent/autodiscovery/template_variables"
+          - name: "Tag Extraction"
+            url: "agent/autodiscovery/tag"
+          - name: "Discovery Management"
+            url: "agent/autodiscovery/management"
+          - name: "Troubleshooting"
+            url: "agent/autodiscovery/troubleshooting"
           - name: "Cluster Checks"
             url: "agent/autodiscovery/clusterchecks"
+          - name: "Endpoints Checks"
+            url: "agent/autodiscovery/endpointschecks"
       - name: "Proxy"
         url: "agent/proxy"
       ## Upgrade to Agent v6
       - name: "Upgrade to Agent v6"
         url: "agent/faq/upgrade-to-agent-v6"
-      - name: "Prometheus Checks"
-        url: "agent/prometheus"
       # Troubleshooting
       - name: "Troubleshooting"
         url: "agent/troubleshooting/"
+        children:
+          - name: "Debug Mode"
+            url: "agent/troubleshooting/debug_mode"
+          - name: "Agent Flare"
+            url: "agent/troubleshooting/send_a_flare"
+          - name: "Agent Check Status"
+            url: "agent/troubleshooting/agent_check_status"
+          - name: "NTP Issues"
+            url: "agent/troubleshooting/ntp"
+          - name: "Permission Issues"
+            url: "agent/troubleshooting/permissions"
+          - name: "Integrations Issues"
+            url: "agent/troubleshooting/integrations"
       # Guides
       - name: "Guides"
         url: "agent/guide/"
@@ -128,6 +156,9 @@ main:
     pre: "nav_graphing"
     children:
       # GRAPHING - Subnav start
+      - name: "Using graphs"
+        url: "graphing/using_graphs/"
+      # GRAPHING - dashboards
       - name: "Dashboards"
         url: "graphing/dashboards/"
         children:
@@ -216,7 +247,7 @@ main:
     pre: "nav_alerting"
     children:
       # ALERTING - Subnav start
-      - name: "Monitor Types"
+      - name: "Monitors"
         url: "monitors/monitor_types/"
         children:
           - name: "Anomaly"
@@ -249,7 +280,7 @@ main:
             url: "monitors/monitor_types/watchdog/"
 
       # Manage monitor
-      - name: "Manage Monitor"
+      - name: "Manage Monitors"
         url: "monitors/manage_monitor/"
 
       # Monitor status
@@ -274,12 +305,19 @@ main:
 
 
   # TRACING/APM
-  - name: "APM (Tracing)"
+  - name: "APM & Distributed Tracing"
     url: "tracing/"
     pre: "nav_tracing"
     children:
+      # Enable tracing
+      - name: "Enable trace collection"
+        url: "tracing/send_traces/"
+        children:
+          - name: "Agent APM metrics"
+            url: "tracing/send_traces/agent-apm-metrics/"
+
       # Languages
-      - name: "Setup"
+      - name: "Instrument your application"
         url: "tracing/setup/"
         children:
           - name: "Java"
@@ -302,6 +340,8 @@ main:
             url: "tracing/setup/envoy/"
           - name: "NGINX"
             url: "tracing/setup/nginx/"
+          - name: "Istio"
+            url: "tracing/setup/istio/"
 
       # Enrich Tracing
 
@@ -354,7 +394,7 @@ main:
       # Libraries
 
       - name: "Community Libraries"
-        url: "developers/libraries/#apm-tracing-client-libraries"
+        url: "developers/libraries/#apm-distributed-tracing-client-libraries"
 
       - name: "Guides"
         url: "tracing/guide"
@@ -378,12 +418,8 @@ main:
       - name: "Log Collection & Integrations"
         url: "logs/log_collection/"
         children:
-          - name: "AWS"
-            url: "integrations/amazon_web_services/#log-collection"
           - name: "Browser"
             url: "logs/log_collection/javascript/"
-          - name: "Docker"
-            url: "logs/log_collection/docker/"
           - name: "Csharp"
             url: "logs/log_collection/csharp/"
           - name: "Go"
@@ -398,8 +434,6 @@ main:
             url: "logs/log_collection/python/"
           - name: "Ruby"
             url: "logs/log_collection/ruby/"
-
-
           - name: "Other Integrations"
             url: "integrations/#cat-log-collection"
 
@@ -463,13 +497,15 @@ main:
     pre: "nav_synthetics"
     children:
       - name: "API Tests"
-        url: "synthetics/api_test"
+        url: "synthetics/api_tests"
       - name: "Browser Tests"
-        url: "synthetics/browser_test"
+        url: "synthetics/browser_tests"
       - name: "APM Integration"
         url: "synthetics/apm"
       - name: "Identify Synthetics Bots"
         url: "synthetics/identify_synthetics_bots"
+      - name: "Settings"
+        url: "synthetics/settings"
 
   # DEVELOPERS
   - name: "Developer Tools"
@@ -532,7 +568,7 @@ main:
   - name: "API"
     url: "api/"
     pre: "nav_api"
-    # ACCOUNT MANAGEMENT
+  # ACCOUNT MANAGEMENT
   - name: "Account Management"
     url: "account_management/"
     pre: "nav_account"
@@ -603,4 +639,3 @@ main:
   - name: "Help"
     url: "help/"
     pre: "nav_help"
-

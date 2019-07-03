@@ -2,23 +2,23 @@
     "dashboards": [
         {
             "type": "custom_timeboard",
-            "id": 5858
+            "id": "qts-q2k-yq6"
         },
         {
             "type": "custom_screenboard",
-            "id": 1414
+            "id": "rys-xwq-geh"
         },
         {
             "type": "integration_timeboard",
-            "id": 5
+            "id": "23"
         },
         {
             "type": "integration_screenboard",
-            "id": 67
+            "id": "87"
         },
         {
             "type": "host_timeboard",
-            "id": 123456789
+            "id": "3245468"
         }
     ]
 }

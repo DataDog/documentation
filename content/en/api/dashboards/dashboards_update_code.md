@@ -6,7 +6,7 @@ external_redirect: /api/#update-a-dashboard
 ---
 
 ##### Signature
-`PUT https://api.datadoghq.com/api/v1/dashboard/<DASHBOARD_ID>`
+`PUT /v1/dashboard/<DASHBOARD_ID>`
 ##### Example Request
 {{< code-snippets basename="api-dashboard-update" >}}
 ##### Example Response

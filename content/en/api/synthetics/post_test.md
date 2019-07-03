@@ -66,5 +66,5 @@ A browser test is treated like a GET API test. This method gives you the ability
 *   **`type`** - _required_ - The type of test. Valid values are `api` and `browser`.
 
 [1]: https://app.datadoghq.com/synthetics/list
-[2]: /synthetics/browser_test/#record-test
+[2]: /synthetics/browser_tests/#record-test
 [3]: /tagging/using_tags

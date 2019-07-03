@@ -8,6 +8,9 @@
 
 // global to all pages
 @import "pages/global";
+// language specific
+@import "pages/ja";
+@import "pages/fr";
 
 // page specific styles that aren't partials go here
 // partial css lives with partial

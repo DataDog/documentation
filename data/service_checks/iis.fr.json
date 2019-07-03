@@ -1,11 +1,10 @@
 [
     {
         "agent_version": "5.1.0",
-        "integration":"iis",
         "check": "iis.site_up",
         "statuses": ["ok", "critical"],
         "groups": ["host", "site"],
         "name": "Site disponible",
-        "description": "Renvoie `CRITICAL` si la disponibilité pour un site est 0. Si ce n'est pas le cas, renvoie `OK`. La disponibilité du site est recueillie via Windows Performance Data Helper à l'aide du counter 'Web Service(*)\\Service Uptime'."
+        "description": "Renvoie `CRITICAL` si la durée de fonctionnement d'un site est égale à 0. Si ce n'est pas le cas, renvoie `OK`. La durée de fonctionnement d'un site est recueillie via WMI à l'aide de la [classe Win32_PerfFormattedData_W3SVC_WebService](http://msdn.microsoft.com/en-us/library/aa394298%28v=vs.85%29.aspx)"
     }
 ]

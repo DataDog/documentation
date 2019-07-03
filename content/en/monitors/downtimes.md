@@ -14,7 +14,7 @@ further_reading:
   text: "Manage your monitors"
 ---
 
-You may occasionally need to shut systems down or take them off-line to perform maintenance or upgrades. Scheduling downtime allows you to do this without triggering monitors.
+Schedule downtimes for system shutdowns, off-line maintenance, or upgrades without triggering your monitors.
 
 ## What happens to a monitor when it is muted (or has a scheduled downtime)?
 
@@ -27,9 +27,12 @@ Monitors trigger events when they change state between `ALERT`, `WARNING` (if en
 {{< img src="monitors/downtimes/downtime_on_alert.png" alt="downtime on alert" responsive="true" style="width:80%;">}}
 
 If a monitor transitions states during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`) and remains in that state once a scheduled downtime expires, it will **NOT** trigger a notification. 
-**However it WILL trigger a recovery event once data returns for that scope or the monitor returns to an `OK` state.**
+**However, it WILL trigger a recovery event once data returns for that scope or the monitor returns to an `OK` state.** 
 
 This behavior is designed to prevent spammy `NO DATA` state alerts when using the *Autoresolve* feature. If you would prefer that the monitor trigger a `NO DATA` state event at the time that the silencing expires, [reach out to the Datadog support team][1] to request that this feature is enabled for your account. This will only affect instances when a monitor exits a downtime period in a `NO DATA` state.
+
+If a monitor triggers an alert _before_ a downtime and recovers _during_ that downtime, then a recovery event is sent despite the downtime (if this is the first recovery during that downtime).
+
 
 ## Manage Downtime
 

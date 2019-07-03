@@ -54,7 +54,7 @@ If an integration does not support logs by default, use the custom file configur
 
 Datadog Agent v6 can collect logs and forward them to Datadog from files, the network (TCP or UDP), journald, and Windows channels:
 
-1. Create a new folder in the `conf.d/` directory at the root of your [Agent's configuration directory][4] named after your log source.
+1. Create a new `<CUSTOM_LOG_SOURCE>.d/` folder in the `conf.d/` directory at the root of your [Agent's configuration directory][4] named after your log source.
 2. Create a new `conf.yaml` file in this new folder.
 3. Add a custom log collection configuration group with the parameters below.
 4. [Restart your Agent][5] to take into account this new configuration.
@@ -427,7 +427,7 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 
 [1]: /agent
 [2]: /agent/kubernetes/daemonset_setup/#log-collection
-[3]: /logs/log_collection/docker
+[3]: /agent/docker/log
 [4]: /agent/guide/agent-configuration-files
 [5]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: /agent/guide/agent-commands/#agent-status-and-information

@@ -20,7 +20,9 @@ further_reading:
   text: "Don't fear the Agent"
 aliases:
   - /agent/faq/agent-check-directory-structure
-  - /agent/faq/install-core-extra/
+  - /agent/faq/install-core-extra
+  - /logs/faq/can-the-datadog-agent-be-used-to-send-only-logs
+  - /agent/faq/the-datadog-agent-for-logs-or-traces-only
 ---
 
 <div class="alert alert-info">
@@ -31,7 +33,7 @@ Agent v6 is available. <a href="/agent/faq/upgrade-to-agent-v6">Upgrade to the n
 
 The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. The Datadog Agent is open-source, and its source code is available on GitHub at [DataDog/datadog-agent][1].
 
-{{< partial name="platforms/platforms.html" >}}
+{{< partial name="platforms/platforms.html" links="platforms" >}}
 
 ## Agent Architecture
 

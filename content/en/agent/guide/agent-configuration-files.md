@@ -1,6 +1,6 @@
 ---
 title: Agent Configuration Files
-kind: faq
+kind: guide
 aliases:
   - /agent/faq/agent-configuration-files
 ---
@@ -123,4 +123,4 @@ To preserve backwards compatibility, the Agent still picks up configuration file
 JMX Agent checks have an additional `metrics.yaml` file in their configuration folder. It is a list of all the beans that the Datadog Agent collects by default. This way, you do not need to list all of the beans manually when you configure a check through [Docker labels or k8s annotations][2].
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[2]: /agent/autodiscovery
+[2]: /agent/autodiscovery/integrations/#configuration

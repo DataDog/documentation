@@ -30,6 +30,7 @@ Under this model, the total number of timeseries created is based on the set of 
 ### DogStatsD
 
 {{% table responsive="true" %}}
+
 | Method | Overview |
 | :----- | :------- |
 | dog.distribution(...) | Track the statistical distribution of a set of values over one or more hosts.<ul><li>Required: metric name and value.</li><li>Optional: tag(s)</li></ul> |

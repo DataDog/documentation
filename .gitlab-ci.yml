@@ -35,21 +35,22 @@ build_preview:
     URL: ${PREVIEW_DOMAIN}
     CONFIG: ${PREVIEW_CONFIG}
     MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
-    UNTRACKED_EXTRAS: "data,content/en/integrations"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - version_static_assets
-    - sync_integration_descriptions
+    #- sync_integration_descriptions
+    - sync_integration_descriptions_cached
     - placehold_translations
-    - build_hugo_site
-    - build_hugo_site_ja
-    - minify_html
+    - update_preview_baseurl
+    - build_hugo_site_new
     - collect_static_assets
+    # remove service_checks json as we don't need to s3 push that..
+    - rm -rf data/service_checks
     - push_site_to_s3
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
-    - remove_static_from_repo
-    - create_artifact
-    - create_artifact_untracked
+    #- remove_static_from_repo
+    #- create_artifact
+    #- create_artifact_untracked
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
@@ -73,7 +74,7 @@ build_live:
   variables:
     CONFIG: ${LIVE_CONFIG}
     URL: ${LIVE_DOMAIN}
-    UNTRACKED_EXTRAS: "data,content/en/integrations"
+    UNTRACKED_EXTRAS: "data,content/en/integrations,content/en/agent/basic_agent_usage/heroku.md,content/en/developers/integrations"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
@@ -81,13 +82,12 @@ build_live:
     - sync_integration_descriptions
     - sync_integration_metrics
     - placehold_translations
-    - build_hugo_site
-    - build_hugo_site_ja
-    - minify_html
+    - build_hugo_site_new
     - collect_static_assets
     - push_site_to_s3
     - create_artifact
     - create_artifact_untracked
+    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
   only:
     - master
 
@@ -121,7 +121,20 @@ manage_translations:on-schedule:
     CONFIG: ${PREVIEW_CONFIG}
   script:
     - if [[ $(date +%u) -lt 6 ]]; then manage_translations "${APIKEY}"; fi
+    - chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
   only:
+    - schedules
+
+push_translations:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  script:
+    - push_changed_translations
+  only:
+    - master
+  except:
+    - triggers
     - schedules
 
 #rollback_live:

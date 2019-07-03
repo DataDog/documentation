@@ -9,7 +9,7 @@
 <section id="main">
 <div>
   {{ $data := .Data}}
-  {{ range (sort .Data.Pages "BaseFileName") }}
+  {{ range (sort .Data.Pages ".File.BaseFileName") }}
       <h2><a href="{{ .URL }}">{{ .Title }}</a></h2>
       <p>{{ .Params.summary }}</p>
       {{ if isset .Params "wistiaid"}}{{ partial "video" .Params.wistiaid }}{{ end }}

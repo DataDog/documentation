@@ -27,7 +27,7 @@ To make it available from *any host*, use `-p 8126:8126/tcp` instead.
 
 For example, the following command allows the Agent to receive traces from your host only:
 
-```bash
+```
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -176,4 +176,4 @@ tracer.configure(hostname='172.17.0.1', port=8126)
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: /tracing/trace_search_and_analytics/#automatic-configuration
-[3]: /agent/apm/#environment
+[3]: /tracing/send_traces

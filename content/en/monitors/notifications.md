@@ -31,7 +31,7 @@ Notifications are a key component of any [monitor][1]. You want to make sure the
    what is going on.
 
 2. Enter a **message** for the monitor. This field allows standard [Markdown formatting][2] as well as in-line [variables](#variables) and tag variables.
-  Use [conditional variables](#conditional-variables) to modulate the notification text and send them to different contacts with the [Datadog's @-notification syntax](#notification).
+  Use [conditional variables](#conditional-variables) to modulate the notification text and send them to different contacts with the [Datadog's **@-notification** syntax](#notification).
   A common use-case for the monitor message is to include a step-by-step way to resolve the problem.
 
 3. Optionally enable **monitor renotification**. This option is useful to remind your team that a problem is not solved until the monitor is marked as [resolved][3]. If enabled, an escalation message can be configured to send any time the monitor renotifies. The original message is included as well.
@@ -97,9 +97,9 @@ For example, if you submit a metric tagged with `dot.key.test:five` and then set
 
 ## Conditional variables
 
-Conditional variables allow for different text to be [sent to different contacts](#toto) based on the state of the monitor and the details of how it was triggered. These condition variables can be used within either the subject or body of the notification set in section 3 of the monitor definition.
+Conditional variables allow for different text to be [sent to different contacts](#notification) based on the state of the monitor and the details of how it was triggered. These condition variables can be used within either the subject or body of the notification set in section 3 of the monitor definition.
 
-Keep in mind when using conditional tags that they must have an open (example: `{{#is_alert}}`) and closing (example: `{{/is_alert}}`) pair with the desired text and @ mentions in between.
+Keep in mind when using conditional tags that they must have an open (example: `{{#is_alert}}`) and closing (example: `{{/is_alert}}`) pair with the desired text and **@-mentions** in between.
 
 The conditional variables available are:
 
@@ -259,7 +259,9 @@ Send the monitor notification to the appropriate endpoint:
 * Notify any non-Datadog users via email by adding `@<EMAIL>` to the notification message.
 * Install the Slack integration to send your notifications directly in the appropriate channel.
 
-**Note**: A @-mention must have a space between it and the last line character: `{{value}}@slack-channel` is invalid `{{value}} @slack-channel` is valid.
+**Notes**:
+* An **@-mention** must have a space between it and the last line character: `{{value}}@slack-channel` is invalid `{{value}} @slack-channel` is valid.
+* An email address associated with a pending Datadog user invitation is considered inactive and does not receive notifications.
 
 ### Integrations
 
@@ -268,20 +270,21 @@ Send the monitor notification to the appropriate endpoint:
 
 After setting up the Slack integration, type `@slack` in your notification message to see the available list of channels to send your notification to.
 
-**@-mentions in Slack from monitor alert**:
+#### @-mentions in Slack from monitor alert
 
-Wrap the `@username` in `< >` as seen below in your monitors message template to **@ notify** the defined user within slack notifications.
+Wrap the `@username` in `< >` as seen below in your monitors message template to **@-notify** the defined user within slack notifications.
+
 For example this configuration:
-
 {{< img src="monitors/notifications/notification_template.png" alt="notification_template" responsive="true" style="width:50%;" >}}
 
 Would produce this slack message:
-
 {{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview" responsive="true" style="width:50%;" >}}
+
+**Note**: If you are having trouble pinging someone, use their Slack `username` instead of the display name. The `username` is located in [Slack account settings][1] under **Username**.
 
 Mention **@here** or **@channel** by using `<!here>` or `<!channel>`, respectively.
 
-For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][1]. For example, for a user group named `testers` you would use the following syntax:
+For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][2]. For example, for a user group named `testers` you would use the following syntax:
 
 ```
 <!subteam^12345|testers>
@@ -290,7 +293,7 @@ For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [
 Note: Trailing special characters in a channel name are unsupported for the Slack @-notifications.
 e.g. `@----critical_alerts` works, but `@--critical_alerts--` won't receive any notifications.
 
-**Using message template variables to dynamically create @-mentions**:
+### Using message template variables to dynamically create @-mentions
 
 Use message template variables within a monitor message to dynamically build **@-mentions**.
 
@@ -300,8 +303,13 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 
 * `@slack-{{host.name}}` post a slack message to the #host.name channel in Slack.
 
+Or create an **@-mention** that goes directly to a specific email:
 
-[1]: https://api.slack.com/methods/usergroups.list
+* `@team-{{team.name}}@company.com` sends an email right to the team's mailing list.
+
+
+[1]: http://slack.com/account/settings
+[2]: https://api.slack.com/methods/usergroups.list
 {{% /tab %}}
 {{% tab "PagerDuty" %}}
 

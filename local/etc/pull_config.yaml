@@ -27,7 +27,7 @@
       globs:
       - "*/metadata.csv"
       - "*/manifest.json"
-      - "*/service_checks.json"
+      - "*/assets/service_checks.json"
       - "*/README.md"
 
     - action: pull-and-push-folder
@@ -46,7 +46,7 @@
       globs:
       - "*/metadata.csv"
       - "*/manifest.json"
-      - "*/service_checks.json"
+      - "*/assets/service_checks.json"
       - "*/README.md"
 
   - repo_name: heroku-buildpack-datadog

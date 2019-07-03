@@ -85,6 +85,8 @@ If your logs don't contain any of the default attributes and you haven't defined
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
+**Note**: If multiple log date remapper processors can be applied to a given log, only the first one (according to the pipelines order) is taken into account.
+
 {{% /tab %}}
 {{% tab "API" %}}
 
@@ -127,8 +129,11 @@ However, be aware that each incoming status value is mapped as follows:
 * Strings beginning with **n** (case-insensitive) map to **notice (5)**
 * Strings beginning with **i** (case-insensitive) map to **info (6)**
 * Strings beginning with **d**, **trace** or **verbose** (case-insensitive) map to **debug (7)**
-* Strings matching **OK** or **Success** (case-insensitive) map to **OK**
+* Strings beginning with **o** or matching **OK** or **Success** (case-insensitive) map to **OK**
 * All others map to **info (6)**
+
+
+**Note**: If multiple log status remapper processors can be applied to a given log, only the first one (according to the pipelines order) is taken into account.
 
 [1]: 
 {{% /tab %}}
@@ -148,6 +153,7 @@ However, be aware that each incoming status value is mapped as follows:
 {{% /tab %}}
 {{< /tabs >}}
 
+
 ## Service Remapper
 
 {{< tabs >}}
@@ -156,6 +162,8 @@ However, be aware that each incoming status value is mapped as follows:
 Use this Processor if you want to assign one or more attributes as the official service. Define the attribute(s) in the Processor tile as follows:
 
 {{< img src="logs/processing/processors/service_remapper_processor_tile.png" alt="Service Remapper Processor tile" responsive="true" style="width:80%;" >}}
+
+**Note**: If multiple service remapper processors can be applied to a given log, only the first one (according to the pipelines order) is taken into account.
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -182,6 +190,8 @@ Use this Processor if you want to assign one or more attributes as the official 
 The message is a key attribute in Datadog. It is displayed in the message column of the Log Explorer and you can do full string search on it. Use this Processor to define one or more attributes as the official log message. Define the attribute(s) in the Processor tile as follows:
 
 {{< img src="logs/processing/processors/message_processor.png" alt="Message Processor" responsive="true" style="width:80%;">}}
+
+**Note**: If multiple log message remapper processors can be applied to a given log, only the first one (according to the pipelines order) is taken into account.
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -385,6 +395,7 @@ An attribute is missing if it is not found in the log attributes, or if it canno
 
 * The operator `-` needs to be space split in the formula as it can also be contained in attribute names.
 * If the target attribute already exists, it is overwritten by the result of the formula.
+* Results are rounded up to the 9th decimal. For example, if the result of the formula is `0.1234567891`, the actual value stored for the attribute is `0.123456789`.
 
 {{% /tab %}}
 {{% tab "API" %}}

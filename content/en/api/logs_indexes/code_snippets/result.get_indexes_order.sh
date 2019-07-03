@@ -1,6 +1,6 @@
 {
-    "index_names": [
-        "index-15d",
-        "index-30d"
-    ]
+	"index_names": [
+		"<INDEX_NAME_1>",
+		"<INDEX_NAME_2>"
+	]
 }

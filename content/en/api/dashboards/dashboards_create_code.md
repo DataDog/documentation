@@ -6,7 +6,7 @@ external_redirect: /api/#create-a-dashboard
 ---
 
 ##### Signature
-`POST https://api.datadoghq.com/api/v1/dashboard`
+`POST /v1/dashboard`
 ##### Example Request
 {{< code-snippets basename="api-dashboard-create" >}}
 ##### Example Response

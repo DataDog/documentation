@@ -6,7 +6,7 @@ external_redirect: /api/#create-a-pagerduty-integration
 ---
 
 ##### Signature
-`PUT https://api.datadoghq.com/api/v1/integration/pagerduty`
+`PUT /v1/integration/pagerduty`
 
 ##### Example Request
 

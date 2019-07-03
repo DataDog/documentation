@@ -13,11 +13,11 @@ Cet endpoint permet de rechercher les hosts selon leur nom, alias ou tag. Les ho
 * **`filter`** [*facultatif*, *défaut*=**None**] :
     chaîne de requête pour filtrer les résultats de la recherche.
 * **`sort_field`** [*facultatif*, *défaut*=**cpu**] :
-    triez les hosts selon un champ donné.
-    Options : **status**, **apps**, **cpu**, **iowait** ou **load**
+    trie les hosts selon un champ donné.
+    Valeurs autorisées : **status**, **apps**, **cpu**, **iowait** ou **load**.
 * **`sort_dir`** [*facultatif*, *défaut*=**desc**] :
     le sens du tri.
-    Options : **asc** ou **desc**
+    Valeurs autorisées : **asc** ou **desc**.
 * **`start`** [*facultatif*, *défaut*=**0**] :
     résultat des hosts à partir desquels commencer la recherche.
 * **`count`** [*facultatif*, *défaut*=**100**] :

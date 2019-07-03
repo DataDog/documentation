@@ -92,13 +92,14 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 #### Web Framework Compatibility
 
-| Module        | Versions | Support Type    | Notes                                      |
-|---------------|----------|-----------------|--------------------------------------------|
-| [express][10] | `>=4`    | Fully Supported | Supports Sails, Loopback, and [more][11]   |
-| [graphql][12] | `>=0.10` | Fully Supported | Supports Apollo Server and express-graphql |
-| [hapi][13]    | `>=2`    | Fully Supported |                                            |
-| [koa][14]     | `>=2`    | Fully Supported |                                            |
-| [restify][15] | `>=3`    | Fully Supported |                                            |
+| Module           | Versions | Support Type    | Notes                                      |
+|------------------|----------|-----------------|--------------------------------------------|
+| [express][10]    | `>=4`    | Fully Supported | Supports Sails, Loopback, and [more][11]   |
+| [graphql][12]    | `>=0.10` | Fully Supported | Supports Apollo Server and express-graphql |
+| [hapi][13]       | `>=2`    | Fully Supported |                                            |
+| [koa][14]        | `>=2`    | Fully Supported |                                            |
+| [paperplane][41] | `>=2.3`  | Fully Supported | Not supported in [serverless-mode][42]     |
+| [restify][15]    | `>=3`    | Fully Supported |                                            |
 
 #### Native Module Compatibility
 
@@ -111,17 +112,18 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 #### Data Store Compatibility
 
-| Module                 | Versions | Support Type    | Notes                                    |
-|------------------------|----------|-----------------|------------------------------------------|
-| [cassandra-driver][20] | `>=3`    | Fully Supported |                                          |
-| [elasticsearch][21]    | `>=10`   | Fully Supported |                                          |
-| [ioredis][22]          | `>=2`    | Fully Supported |                                          |
-| [memcached][23]        | `>=2.2`  | Fully Supported |                                          |
-| [mongodb-core][24]     | `>=2`    | Fully Supported | Supports Mongoose                        |
-| [mysql][25]            | `>=2`    | Fully Supported |                                          |
-| [mysql2][26]           | `>=1`    | Fully Supported |                                          |
-| [pg][27]               | `>=4`    | Fully Supported | Supports `pg-native` when used with `pg` |
-| [redis][28]            | `>=0.12` | Fully Supported |                                          |
+| Module                 | Versions | Support Type    | Notes                                            |
+|------------------------|----------|-----------------|--------------------------------------------------|
+| [cassandra-driver][20] | `>=3`    | Fully Supported |                                                  |
+| [elasticsearch][21]    | `>=10`   | Fully Supported | Supports `@elastic/elasticsearch` versions `>=5` |
+| [ioredis][22]          | `>=2`    | Fully Supported |                                                  |
+| [knex][40]             | `>=0.8`  | Fully Supported | This integration is only for context propagation |
+| [memcached][23]        | `>=2.2`  | Fully Supported |                                                  |
+| [mongodb-core][24]     | `>=2`    | Fully Supported | Supports Mongoose                                |
+| [mysql][25]            | `>=2`    | Fully Supported |                                                  |
+| [mysql2][26]           | `>=1`    | Fully Supported |                                                  |
+| [pg][27]               | `>=4`    | Fully Supported | Supports `pg-native` when used with `pg`         |
+| [redis][28]            | `>=0.12` | Fully Supported |                                                  |
 
 #### Worker Compatibility
 
@@ -135,11 +137,13 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 #### Promise Library Compatibility
 
-| Module         | Versions | Support Type    |
-|----------------|----------|-----------------|
-| [bluebird][34] | `>=2`    | Fully Supported |
-| [q][35]        | `>=1`    | Fully Supported |
-| [when][36]     | `>=3`    | Fully Supported |
+| Module           | Versions  | Support Type    |
+|------------------|-----------|-----------------|
+| [bluebird][34]   | `>=2`     | Fully Supported |
+| [promise][43]    | `>=7`     | Fully Supported |
+| [promise-js][44] | `>=0.0.3` | Fully Supported |
+| [q][35]          | `>=1`     | Fully Supported |
+| [when][36]       | `>=3`     | Fully Supported |
 
 #### Logger Compatibility
 
@@ -192,3 +196,8 @@ For details about how to how to toggle and configure plugins, check out the [API
 [37]: https://github.com/trentm/node-bunyan
 [38]: http://getpino.io
 [39]: https://github.com/winstonjs/winston
+[40]: https://knexjs.org/
+[41]: https://github.com/articulate/paperplane
+[42]: https://github.com/articulate/paperplane/blob/master/docs/API.md#serverless-deployment
+[43]: https://github.com/then/promise
+[44]: https://github.com/kevincennis/promise

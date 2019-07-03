@@ -1,7 +1,6 @@
 [
     {
         "agent_version": "5.1.0",
-        "integration":"haproxy",
         "check": "haproxy.backend_up",
         "statuses": ["ok", "critical", "unknown"],
         "groups": ["service", "backend"],

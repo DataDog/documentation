@@ -22,7 +22,7 @@ trace1 = [ span, span2, span3 ]
 
 and each span is a dictionary with a `trace_id`, `span_id`, `resource`..
 
-[Learn more about the APM (tracing) terminology][4]
+[Learn more about the APM & Distributed Tracing terminology][4]
 
 **Note**: Each span within a trace should use the same trace_id.
 
@@ -38,7 +38,8 @@ and each span is a dictionary with a `trace_id`, `span_id`, `resource`..
 *   **`duration`** - _required_ The duration of the request in nanoseconds.
 *   **`parent_id`** - _optional_ The span integer ID of the parent span.
 *   **`error`** - _optional_ Set this value to 1 to indicate if an error occured. If an error occurs, you should pass additional information, such as the error message, type and stack information in the `meta` property.
-*   **`meta`** - _optional_ A dictionary of key-value metadata. e.g. tags.
+*   **`meta`** - _optional_ A set of key-value metadata. Keys and values must be strings.
+*   **`metrics`** - _optional_ A set of key-value metadata. Keys must be strings and values must be 64-bit floating point numbers.
 
 [1]: /tracing/#instrument-your-application
 [2]: /tracing/visualization/trace

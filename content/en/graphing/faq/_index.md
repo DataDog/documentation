@@ -4,7 +4,8 @@ kind: faq
 disable_toc: true
 private: true
 aliases:
-    - /graphing/faq/how-to-merge-screenboards/
+    - /graphing/faq/how-to-merge-screenboards
+    - /graphing/faq/false-spikes-sometimes-appear-on-my-sum-graph
 ---
 
 {{< whatsnext desc="List of Frequently Asked Questions:" >}}
@@ -22,7 +23,6 @@ aliases:
     {{< nextlink href="graphing/faq/i-see-unexpected-drops-to-zero-on-my-graph-why" >}}I see unexpected drops to zero on my graph, why?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/interpolation-the-fill-modifier-explained" >}}Interpolation & the fill modifier explained{{< /nextlink >}}
     {{< nextlink href="graphing/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value" >}}How can I graph the percentage change between an earlier value and a current value?{{< /nextlink >}}
-    {{< nextlink href="graphing/faq/false-spikes-sometimes-appear-on-my-sum-graph" >}}False spikes sometimes appear on my `sum:` graph{{< /nextlink >}}
     {{< nextlink href="graphing/faq/there-are-too-many-lines-on-my-graph-can-i-only-display-the-most-important-ones" >}}There are too many lines on my graph, can I only display the most important ones?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/how-does-datadog-render-graphs-my-graph-doesn-t-show-the-values-i-m-expecting" >}}How does Datadog render graphs? My graph doesn't show the values I'm expecting.{{< /nextlink >}}
     {{< nextlink href="graphing/faq/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph" >}}What is the granularity of my graphs? Am I seeing raw data or aggregates on my graph?{{< /nextlink >}}
@@ -33,7 +33,6 @@ aliases:
     {{< nextlink href="graphing/faq/the-same-color-is-used-twice-in-my-graph" >}}The same color is used twice in my graph!{{< /nextlink >}}
     {{< nextlink href="graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same" >}}I'm switching between the sum/min/max/avg aggregators but the values look the same?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/when-i-query-can-i-use-wildcards-in-metric-names-and-events" >}}When I query can I use wildcards in metric names and events?{{< /nextlink >}}
-    {{< nextlink href="graphing/faq/is-it-possible-to-query-historical-data-after-a-host-has-been-destroyed" >}}Is it possible to query historical data after a host has been destroyed?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/embeddable-graphs-with-template-variables" >}}Embeddable Graphs with Template Variables{{< /nextlink >}}
-    {{< nextlink href="graphing/faq/how-do-i-delete-a-host-or-metric-from-the-ui" >}}How do I delete a host or metric from the UI?{{< /nextlink >}}
+    {{< nextlink href="graphing/faq/historical-data" >}}Historical Data{{< /nextlink >}}
 {{< /whatsnext >}}
