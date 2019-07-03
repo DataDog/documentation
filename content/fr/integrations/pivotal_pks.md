@@ -52,7 +52,7 @@ Suivez les [étapes de collecte de logs de conteneur][5] pour en savoir plus sur
 
 ## Dépannage
 
-Besoin d'aide ? Contactez l'[assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 
 [1]: https://pivotal.io/platform/pivotal-container-service
