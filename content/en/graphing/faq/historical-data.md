@@ -4,6 +4,7 @@ kind: faq
 aliases:
   - /graphing/faq/how-do-i-delete-a-host-or-metric-from-the-ui/
   - /graphing/faq/is-it-possible-to-query-historical-data-after-a-host-has-been-destroyed/
+  - /agent/faq/i-stopped-my-agent-but-i-m-still-seeing-the-host/
 ---
 
 ## Graphing
