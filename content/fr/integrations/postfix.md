@@ -162,7 +162,7 @@ Le check Postfix n'inclut aucun événement.
 Le check Postfix n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez l'[assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 ## Pour aller plus loin
 
