@@ -7,8 +7,6 @@ external_redirect: /api/#logs-pipelines
 
 ## Logs Pipelines
 
-## Configure Pipelines & Processors
-
 Pipelines and processors operate on incoming logs, parsing and transforming them into structured attributes for easier querying.
 
 * See the [Pipelines Configuration Page][1] to see the pipelines and processors currently configured in our UI.
