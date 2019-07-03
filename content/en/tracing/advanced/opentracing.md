@@ -125,29 +125,31 @@ If you’re not using `dd-java-agent.jar`, you must register a configured tracer
 
 ```java
 import datadog.opentracing.DDTracer;
-import datadog.trace.api.sampling.AllSampler;
-import datadog.trace.common.writer.DDAgentWriter;
-
 import io.opentracing.Tracer;
 import io.opentracing.util.GlobalTracer;
+import datadog.trace.common.sampling.AllSampler;
+import datadog.trace.common.writer.DDAgentWriter;
+
+//For the API Example
+        import datadog.trace.common.writer.Writer;
+        import datadog.trace.common.sampling.Sampler;
 
 public class Application {
 
     public static void main(String[] args) {
 
-        // Initialize the tracer from environment variables or system properties
-        Tracer tracer = new DDTracer();
+//         Initialize the tracer from environment variables or system properties
+        DDTracer tracer = new DDTracer();
         GlobalTracer.register(tracer);
         // register the same tracer with the Datadog API
         datadog.trace.api.GlobalTracer.registerIfAbsent(tracer);
 
-        // OR from the API
+//      OR from the API
         Writer writer = new DDAgentWriter();
         Sampler sampler = new AllSampler();
-        Tracer tracer = new DDTracer(writer, sampler);
+        String service = "Service Name";
+        Tracer tracer = new DDTracer(service,writer, sampler);
         GlobalTracer.register(tracer);
-        // register the same tracer with the Datadog API
-        datadog.trace.api.GlobalTracer.registerIfAbsent(tracer);
 
         // ...
     }
