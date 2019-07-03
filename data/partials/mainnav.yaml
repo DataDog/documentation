@@ -6,7 +6,7 @@ main:
     children:
       - name: "Agent"
         url: "getting_started/agent/"
-      - name: "Datadog Application"
+      - name: "Datadog"
         url: "getting_started/application/"
       - name: "Integrations"
         url: "getting_started/integrations/"
