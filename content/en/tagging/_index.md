@@ -1,6 +1,7 @@
 ---
 title: Getting started with tags
 kind: documentation
+description: "Tags add new dimensions to metrics"
 aliases:
     - /getting_started/getting_started_with_tags
     - /guides/tagging/
