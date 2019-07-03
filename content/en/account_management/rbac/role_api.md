@@ -34,9 +34,9 @@ Required Payload: No Payload
     Direction of sort.
     Options: **asc**, **desc**
 * **`start`** [*optional*, *default*=**0**]:
-    Roles result to start search from.
+    Page number
 * **`count`** [*optional*, *default*=**10**]:
-    Number of roles results to return. 
+    Number of roles to return for a given page
 
 Example:
 
