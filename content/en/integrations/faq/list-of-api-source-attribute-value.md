@@ -7,7 +7,7 @@ kind: faq
 |:---|:---|
 |Activemq|ACTIVEMQ|
 |Airbrake|AIRBRAKE|
-|Akamai Datastream|AKAMAIDATASTREAM|
+|Akamai|AKAMAI|
 |Akamai Mpulse|AKAMAIMPULSE|
 |Alibaba Cloud|ALIBABACLOUD|
 |Amazon Appstream|APPSTREAM|
