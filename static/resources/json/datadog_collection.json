@@ -7865,7 +7865,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/indexes/?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/indexes?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -7877,8 +7877,7 @@
 								"v1",
 								"logs",
 								"config",
-								"indexes",
-								""
+								"indexes"
 							],
 							"query": [
 								{
@@ -8052,7 +8051,7 @@
 							"raw": "{\n    \"index_names\": [\n        \"<INDEX_NAME_2>\",\n        \"<INDEX_NAME_1>\"\n    ]\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/indexes/?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/indexes?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -8064,8 +8063,7 @@
 								"v1",
 								"logs",
 								"config",
-								"indexes",
-								""
+								"indexes"
 							],
 							"query": [
 								{
@@ -8118,7 +8116,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipeline-order/?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipeline-order?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -8130,8 +8128,7 @@
 								"v1",
 								"logs",
 								"config",
-								"pipeline-order",
-								""
+								"pipeline-order"
 							],
 							"query": [
 								{
@@ -8156,7 +8153,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipeline-order/?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipeline-order?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -8168,8 +8165,7 @@
 								"v1",
 								"logs",
 								"config",
-								"pipeline-order",
-								""
+								"pipeline-order"
 							],
 							"query": [
 								{
@@ -8194,7 +8190,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipelines/?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipelines?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -8206,8 +8202,7 @@
 								"v1",
 								"logs",
 								"config",
-								"pipelines",
-								""
+								"pipelines"
 							],
 							"query": [
 								{
@@ -8288,7 +8283,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipelines/?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipelines?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -8300,8 +8295,7 @@
 								"v1",
 								"logs",
 								"config",
-								"pipelines",
-								""
+								"pipelines"
 							],
 							"query": [
 								{
@@ -8324,7 +8318,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipelines/:PIPELINE_ID/?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipelines/:PIPELINE_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -8337,8 +8331,7 @@
 								"logs",
 								"config",
 								"pipelines",
-								":PIPELINE_ID",
-								""
+								":PIPELINE_ID"
 							],
 							"query": [
 								{
