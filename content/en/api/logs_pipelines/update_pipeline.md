@@ -11,7 +11,6 @@ Update a given pipeline configuration to change it's processors or their order.
 
 ##### Arguments
 
-
 * **`name`** [*required*]:
     Your pipeline name.
 
@@ -20,4 +19,5 @@ Update a given pipeline configuration to change it's processors or their order.
 
 * **`filter.query`** [*optional*]: Defines your Pipeline Filter. Only logs that match the filter criteria are processed by this pipeline.
 
-* **`processors`** [*optional*]: Ordered Array of Processors or Nested Pipelines. See the Processor documentation to get the specific Scheme for each processor.
+* **`processors`** [*optional*]: Ordered Array of Processors or Nested Pipelines. See the [Processor documentation][1] to get the specific Scheme for each processor.
+[1]: /logs/processing/processors/?tab=api

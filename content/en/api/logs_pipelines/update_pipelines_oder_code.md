@@ -7,7 +7,7 @@ external_redirect: /api/#update-pipelines-order
 
 ##### Signature
 
-`PUT /api/v1/logs/config/pipeline-order`
+`PUT /v1/logs/config/pipeline-order`
 
 ##### Example Request
 {{< code-snippets basename="update_pipeline_order" >}}

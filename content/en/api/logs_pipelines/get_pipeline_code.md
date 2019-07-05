@@ -7,7 +7,7 @@ external_redirect: /api/#get-a-pipelines
 
 ##### Signature
 
-`GET /api/v1/logs/config/pipelines/<PIPELINE_ID>`
+`GET /v1/logs/config/pipelines/<PIPELINE_ID>`
 
 ##### Example Request
 {{< code-snippets basename="get_a_pipeline" >}}

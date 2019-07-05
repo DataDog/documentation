@@ -7,7 +7,7 @@ external_redirect: /api/#create-a-pipeline
 
 ##### Signature
 
-`POST /api/v1/logs/config/pipelines`
+`POST /v1/logs/config/pipelines`
 
 ##### Example Request
 {{< code-snippets basename="create_pipeline" >}}

@@ -21,4 +21,5 @@ Create a Pipeline in your Organization.
 
 * **`filter.query`** [*optional*]: Defines your Pipeline Filter. Only logs that match the filter criteria are processed by this pipeline.
 
-* **`processors`** [*optional*]: Ordered Array of Processors or Nested Pipelines. See the Processor documentation to get the specific Scheme for each processor.
+* **`processors`** [*optional*]: Ordered Array of Processors or Nested Pipelines. See the [Processor documentation][1] to get the specific Scheme for each processor.
+[1]: /logs/processing/processors/?tab=api

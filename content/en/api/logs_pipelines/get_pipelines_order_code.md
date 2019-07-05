@@ -7,7 +7,7 @@ external_redirect: /api/#get-pipelines-order
 
 ##### Signature
 
-`GET /api/v1/logs/config/pipeline-order`
+`GET /v1/logs/config/pipeline-order`
 
 ##### Example Request
 {{< code-snippets basename="get_pipelines_order" >}}

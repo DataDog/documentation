@@ -7,7 +7,7 @@ external_redirect: /api/#update-a-pipelines
 
 ##### Signature
 
-`PUT /api/v1/logs/config/pipelines/<PIPELINE_ID>`
+`PUT /v1/logs/config/pipelines/<PIPELINE_ID>`
 
 ##### Example Request
 {{< code-snippets basename="update_pipeline" >}}

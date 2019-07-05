@@ -7,7 +7,7 @@ external_redirect: /api/#delete-a-pipeline
 
 ##### Signature
 
-`DELETE /api/v1/logs/config/pipelines`
+`DELETE /v1/logs/config/pipelines`
 
 ##### Example Request
 

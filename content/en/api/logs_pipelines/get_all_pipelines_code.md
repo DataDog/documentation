@@ -7,7 +7,7 @@ external_redirect: /api/#get-all-pipelines
 
 ##### Signature
 
-`GET /api/v1/logs/config/pipelines`
+`GET /v1/logs/config/pipelines`
 
 ##### Example Request
 {{< code-snippets basename="get_all_pipeline" >}}

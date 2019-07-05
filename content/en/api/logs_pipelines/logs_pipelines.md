@@ -10,7 +10,7 @@ external_redirect: /api/#logs-pipelines
 Pipelines and processors operate on incoming logs, parsing and transforming them into structured attributes for easier querying.
 
 * See the [Pipelines Configuration Page][1] to see the pipelines and processors currently configured in our UI.
-* See user [documentation here][2]
+* See the [Pipeline documentation][2] to learn more
 
 [1]: https://app.datadoghq.com/logs/pipelines
 [2]: https://docs.datadoghq.com/logs/processing
