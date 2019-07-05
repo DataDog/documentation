@@ -251,7 +251,8 @@ main:
     parent: "agent"
     weight: 460
   - name: "Security"
-    url: "agent/security"
+    identifier: "agent_security"
+    url: "security/agent/"
     parent: "agent"
     weight: 470
       #- #  name: "FAQ"

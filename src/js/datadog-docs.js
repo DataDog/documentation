@@ -658,14 +658,65 @@ gtag('js', new Date());
 
 gtag('config', '{{ .Site.Params.ga }}');
 
+// On click remove all open and active classes from sidebar
+// Then check if target is li, a, img,  or span
+// If li apply active class to the nested a tag and then apply open classes to parent li's up to sidenav-nav
+
+// Get sidebar
+function hasParentLi(el){
+    var els = [];
+    while (el) {
+        // console.log(el);
+        if(el.classList){
+
+            if(el.classList.contains('sidenav-nav')){
+            break;
+            }
+
+            // Add open class to li if the li has a child ul
+            if(el.closest('li') && el.closest('li').querySelectorAll('ul')){
+                el.closest('li').classList.add('open');
+            }
+        }
+        
+        els.unshift(el);
+        el = el.parentNode;
+    }
+}
+
+
+
+function getPathElement(){
+    var path = window.location.pathname;
+
+    path = path.replace(/^\//, '');
+    path = path.replace(/\/$/, '');
+    var aPath = document.querySelector('.side [data-path="'+path+'"]');
+
+    if(aPath){
+        aPath.classList.add('active');
+        hasParentLi(aPath);
+    }
+
+    if(maPath){
+        // Get mobile nav
+        var maPath = document.querySelector('header [data-path="'+path+'"]');
+        maPath.classList.add('active');
+        hasParentLi(maPath);
+    }
+}
+
 window.onload = function(){
-    console.log('loaded');
-    // TODO: clicks may happen on span or li. Bind to LI
-    // var elts = document.getElementsByTagName('a');
-    var elts = document.querySelectorAll('.sidenav-nav li');
+    getPathElement();
+    var elts = document.querySelectorAll('.side .js-load');
+
     var show = function(event) {
         event.stopPropagation();
+        console.log('clicked on ');
+        console.log(event.target);
+        // Remove any existing open and active classes        
         var newUrl;
+        
         // If what is clicked is not the actual li tag, ie the img icon span
         if (event.target !== this){
         
@@ -677,7 +728,6 @@ window.onload = function(){
             newUrl = a.href;
 
         }
-
 
         // TODO: How to fall back to normal behavior?
         // if (event.target.tagName !== "A")
@@ -696,9 +746,10 @@ window.onload = function(){
             event.preventDefault();
             window.open(newUrl, "_blank");
         } else {
-            event.preventDefault();
+            
             loadPage(newUrl);
             updateSidebar(event);
+            event.preventDefault();
             history.pushState(null /*stateObj*/, "" /*title*/, newUrl);
         }
     }
@@ -706,26 +757,85 @@ window.onload = function(){
         elts[i].onclick = show;
     }
 }
+
 function updateSidebar(event){
 
-    // Remove existing active class from a tag
-    var activeA = document.querySelector('.open > .active');
-    if(activeA){
-        activeA.classList.remove('active'); 
-    }
+    // Remove active and open classes first
+        // Remove active class
+        var activeMenus = document.querySelectorAll('.side .sidenav-nav .active');
+        for(i=0;i<activeMenus.length;i++){
+            console.log('removing active class from');
+            console.log(activeMenus[i]);
+            activeMenus[i].classList.remove('active');
+        }
+        // $('a.active').removeClass('active');
     
-    var path = window.location.pathname;
+        // Clicked on menu in same sub nav. Don't close li / ul
+        // this might be span, a, or img tag
+        // if(e.target.closest('ul').parentNode.classList.contains('open')){
+        //     return;
+        // }
+    
+        // // Clicked parent li which is open
+        // if(e.target.closest('li').classList.contains('open')){
+        //     return;
+        // }
 
-    // var matchingA = document.querySelector('[data-path="'+path+'"]');
+        /// Done removing classes
 
+    getPathElement();
+
+    // Remove existing active class from a tag
+    // var activeA = document.querySelector('.open > .active');
+    // if(activeA){
+    //     activeA.classList.remove('active'); 
+    // }
+    
     var isLi = ( event.target.nodeName === "LI" ) ? true : false ;
 
     if(isLi){
+        console.log('li clicked');
         event.target.querySelector('a').classList.add('active');
-        event.target.classList.add('open');
+        // event.target.classList.add('open');
+        if(event.target.closest('li').querySelector('ul')){
+            console.log('adding open here');
+            
+            event.target.closest('li').classList.add('open');
+            console.log(event.target.closest('li'));
+        }
     }else{
         event.target.closest('li').querySelector('a').classList.add('active');
-        event.target.closest('li').classList.add('open');
+
+        // Remove opens?
+        console.log('li NOT clicked');
+
+        //If the target which is clicked has an active element within the same ul menu don't close the open class
+        var isSameMenu = event.target.closest('.open').querySelector('.active');
+
+        if(!isSameMenu){
+            // console.log("this item has ul dont close");
+            // Get ope navs
+            var openMenus = document.querySelectorAll('.side .sidenav-nav .open');
+            // console.log('close these open menus ');
+            // console.log(openMenus);
+            // Remove open classes
+            for(i=0;i<openMenus.length;i++){
+                // console.log('closing open class for');
+                // console.log(openMenus[i]);
+                openMenus[i].classList.remove('open');
+                // console.log('closed on');
+                // console.log(openMenus[i]);
+            }
+                            
+        }else{
+            console.log('menu in same sub nav dont remove open');
+        }
+
+        if(event.target.closest('li').querySelector('ul')){
+            console.log('adding open there');
+            event.target.closest('li').classList.add('open');
+            console.log(event.target.closest('li'));
+        }
     }
 };
 
@@ -747,10 +857,6 @@ function loadPage(newUrl) {
         if (newContent === null){
             return;
         }
-
-        //console.log('page size');
-        //console.log(httpRequest.getResponseHeader("Content-Type"));
-        //console.log(httpRequest.getResponseHeader("Content-Length"));
 
         document.title = newDocument.title;
         
@@ -792,21 +898,15 @@ function loadPage(newUrl) {
             }
         }
 
-        console.time('Replacing page content');
-
         var start = window.performance.now();
         var contentElement = document.getElementById("mainContent");
         contentElement.replaceWith(newContent);
-        console.timeEnd('Replacing page content');
         var end = window.performance.now();
         var time = end - start;
 
         var pathName = new URL(newUrl).pathname;
 
-        console.log('click path '+pathName);
         DD_LOGS.logger.log('html parsed page content inserted',{"timeEnd": time, "pathName": pathName},'info');
-        console.log({"timeEnd": time});
-        console.log('New page loaded: ' + newDocument.title);
 
         // Gtag virtual pageview
         gtag('config', '{{ .Site.Params.ga }}', {'page_path': pathName});
@@ -818,8 +918,5 @@ function loadPage(newUrl) {
 
     httpRequest.responseType = "document";
     httpRequest.open("GET", newUrl);
-    //httpRequest.open("GET", newUrl+"api_tests.txt");
-    //httpRequest.overrideMimeType("text/plain; charset=x-user-defined");
-    //httpRequest.responseType = "text";
     httpRequest.send();
 };
