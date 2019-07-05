@@ -84,7 +84,7 @@ const tracer = require('dd-trace').init({
 
 Node `>=8` is supported by this library. Only even versions like 8.x and 10.x are officially supported. Odd versions like 9.x and 11.x should work but are not officially supported.
 
-If you need support for Node 4 or Node 6, these versions are supported by version 0.13 of the tracer. We will support this version until *April 30th, 2020* to give you time to update, but no new feature will be added.
+If you need support for Node 4 or Node 6, these versions are supported by version 0.13 of the tracer. We will support this version until **April 30th, 2020** to give you time to update, but no new feature will be added.
 
 Our policy on Node support is 1 year after a release reached end-of-life, and only for bug fixes.
 
