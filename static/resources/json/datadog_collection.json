@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "027048d4-7d5e-46ed-913d-39f30b0343ea",
+		"_postman_id": "2f439139-33c5-4f05-8fec-940d9f8d398e",
 		"name": "Datadog API Collection",
 		"description": "Collection of all Datadog Public endpoints.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -296,115 +296,6 @@
 					},
 					"response": [
 						{
-							"name": "200 - OK",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"message\": \"<MESSAGE>\",\n    \"handle\": \"test@datadoghq.com\"\n}"
-								},
-								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/comments?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
-									"protocol": "https",
-									"host": [
-										"api",
-										"datadoghq",
-										"com"
-									],
-									"path": [
-										"api",
-										"v1",
-										"comments"
-									],
-									"query": [
-										{
-											"key": "api_key",
-											"value": "{{datadog_api_key}}",
-											"description": "Your Datadog API key"
-										},
-										{
-											"key": "application_key",
-											"value": "{{datadog_application_key}}",
-											"description": "Your Datadog application key"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Date",
-									"value": "Fri, 19 Apr 2019 12:39:04 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Vary",
-									"value": "Accept-Encoding"
-								},
-								{
-									"key": "Pragma",
-									"value": "no-cache"
-								},
-								{
-									"key": "Cache-Control",
-									"value": "no-cache"
-								},
-								{
-									"key": "Set-Cookie",
-									"value": "DD-PSHARD=211; Max-Age=604800; Path=/; expires=Fri, 26-Apr-2019 12:39:03 GMT; secure; HttpOnly"
-								},
-								{
-									"key": "X-DD-VERSION",
-									"value": "35.1246853"
-								},
-								{
-									"key": "X-DD-Debug",
-									"value": "6KMTMsFn0azCfQwSreWVM1dRjcjppIO02LqzrMPjk0hnBLuKtWs0FjCxblFGeg3A"
-								},
-								{
-									"key": "Content-Encoding",
-									"value": "gzip"
-								},
-								{
-									"key": "DD-POOL",
-									"value": "dogweb_sameorig"
-								},
-								{
-									"key": "X-Frame-Options",
-									"value": "SAMEORIGIN"
-								},
-								{
-									"key": "X-Content-Type-Options",
-									"value": "nosniff"
-								},
-								{
-									"key": "Strict-Transport-Security",
-									"value": "max-age=15724800;"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"comment\": {\n        \"url\": \"/event/event?id=4889126983613267970\",\n        \"resource\": \"/api/v1/comments/4889126983613267970\",\n        \"message\": \"<MESSAGE>\",\n        \"handle\": \"test@datadoghq.com\",\n        \"id\": 4889126983613267970\n    }\n}"
-						},
-						{
 							"name": "Create a Comment Example",
 							"originalRequest": {
 								"method": "POST",
@@ -542,6 +433,115 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"errors\": [\n        \"The value provided for parameter 'handle' is invalid\"\n    ]\n}"
+						},
+						{
+							"name": "200 - OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"message\": \"<MESSAGE>\",\n    \"handle\": \"test@datadoghq.com\"\n}"
+								},
+								"url": {
+									"raw": "https://api.datadoghq.com/api/v1/comments?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"comments"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{datadog_api_key}}",
+											"description": "Your Datadog API key"
+										},
+										{
+											"key": "application_key",
+											"value": "{{datadog_application_key}}",
+											"description": "Your Datadog application key"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 19 Apr 2019 12:39:04 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "DD-PSHARD=211; Max-Age=604800; Path=/; expires=Fri, 26-Apr-2019 12:39:03 GMT; secure; HttpOnly"
+								},
+								{
+									"key": "X-DD-VERSION",
+									"value": "35.1246853"
+								},
+								{
+									"key": "X-DD-Debug",
+									"value": "6KMTMsFn0azCfQwSreWVM1dRjcjppIO02LqzrMPjk0hnBLuKtWs0FjCxblFGeg3A"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "DD-POOL",
+									"value": "dogweb_sameorig"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15724800;"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"comment\": {\n        \"url\": \"/event/event?id=4889126983613267970\",\n        \"resource\": \"/api/v1/comments/4889126983613267970\",\n        \"message\": \"<MESSAGE>\",\n        \"handle\": \"test@datadoghq.com\",\n        \"id\": 4889126983613267970\n    }\n}"
 						}
 					]
 				},
@@ -4864,45 +4864,6 @@
 							},
 							"response": [
 								{
-									"name": "List AWS Accounts Example",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "https://api.datadoghq.com/api/v1/integration/aws?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
-											"protocol": "https",
-											"host": [
-												"api",
-												"datadoghq",
-												"com"
-											],
-											"path": [
-												"api",
-												"v1",
-												"integration",
-												"aws"
-											],
-											"query": [
-												{
-													"key": "api_key",
-													"value": "{{datadog_api_key}}",
-													"description": "Your Datadog API key"
-												},
-												{
-													"key": "application_key",
-													"value": "{{datadog_application_key}}",
-													"description": "Your Datadog application key"
-												}
-											]
-										}
-									},
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [],
-									"cookie": [],
-									"body": "{\"accounts\":\n    [{\n        \"account_id\": 112233445566,\n        \"role_name\": \"SomeDatadogRole\",\n        \"filter_tags\": [\n        \t'filter123'\n        ],\n        \"host_tags\": [\n        \t'account:demo'\n        \t],\n        \"account_specific_namespace_rules\": {\"opsworks\":false}\n    }]\n}"
-								},
-								{
 									"name": "No AWS accounts",
 									"originalRequest": {
 										"method": "GET",
@@ -4986,6 +4947,45 @@
 									],
 									"cookie": [],
 									"body": "{\n    \"errors\": [\n        \"AWS Integration not yet installed. Please manually install it to add AWS accounts.\"\n    ]\n}"
+								},
+								{
+									"name": "List AWS Accounts Example",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://api.datadoghq.com/api/v1/integration/aws?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+											"protocol": "https",
+											"host": [
+												"api",
+												"datadoghq",
+												"com"
+											],
+											"path": [
+												"api",
+												"v1",
+												"integration",
+												"aws"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{datadog_api_key}}",
+													"description": "Your Datadog API key"
+												},
+												{
+													"key": "application_key",
+													"value": "{{datadog_application_key}}",
+													"description": "Your Datadog application key"
+												}
+											]
+										}
+									},
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [],
+									"cookie": [],
+									"body": "{\"accounts\":\n    [{\n        \"account_id\": 112233445566,\n        \"role_name\": \"SomeDatadogRole\",\n        \"filter_tags\": [\n        \t'filter123'\n        ],\n        \"host_tags\": [\n        \t'account:demo'\n        \t],\n        \"account_specific_namespace_rules\": {\"opsworks\":false}\n    }]\n}"
 								}
 							]
 						},
@@ -7727,7 +7727,7 @@
 								}
 							]
 						},
-						"description": "### Overview\n\nSend your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n* Maximum content size per payload: 2MB\n* Maximum size for a single log: 256kB\n* Maximum array size if sending multiple logs in an array: 50 entries\n\n**Note**: If you are in the Datadog EU site (`app.datadoghq.eu`), the HTTP log endpoint is: `http-intake.logs.datadoghq.eu`.\n\n\n### Arguments\n\n| Item             | Description                                                                                                           |\n| ------           | ---------                                                                                                             |\n| Protocol         | http: 80<br>https: 443                                                                                                |\n| Host             | For Datadog US: `http-intake.logs.datadoghq.com` <br> For Datadog EU: `http-intake.logs.datadoghq.eu`                 |\n| Path             | `/v1/input/<DATADOG_API_KEY>`                                                                                         |\n| Query parameters | Query parameters available are the reserved log attribute. `?ddtags=<TAGS>&ddsource=<SOURCE>&service=<SERVICE>&hostname=<HOSTNAME>` |\n| Method           | `POST`                                                                                                                |\n| Content Type     | Available content type are: `text/plain`, `application/json`, `application/logplex-1`                                 |\n\n\n[Learn more about Log collection](https://docs.datadoghq.com/logs)"
+						"description": "### Overview\n\nSend your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n* Maximum content size per payload: 2MB\n* Maximum size for a single log: 256kB\n* Maximum array size if sending multiple logs in an array: 50 entries\n\n**Note**: If you are in the Datadog EU site (`app.datadoghq.eu`), the HTTP log endpoint is: `http-intake.logs.datadoghq.eu`.\n\n\n### Arguments\n\n| Item             | Description                                                                                                           |\n| ------           | ---------                                                                                                             |\n| Protocol         | http: 80<br>https: 443                                                                                                |\n| Host             | For Datadog US: `http-intake.logs.datadoghq.com` <br> For Datadog EU: `http-intake.logs.datadoghq.eu`                 |\n| Path             | `/v1/input/<DATADOG_API_KEY>`                                                                                         |\n| Query parameters | Query parameters available are the reserved log attribute. `?ddtags=<TAGS>&ddsource=<SOURCE>&service=<SERVICE>&hostname=<HOSTNAME>` |\n| Method           | `POST`                                                                                                                |\n| Content Type     | Available content type are: `text/plain`, `application/json`, `application/logplex-1`                                 |\n\n\n[Learn more about Log collection](https://docs.datadoghq.com/logs)"
 					},
 					"response": []
 				},
@@ -7848,6 +7848,584 @@
 					"listen": "test",
 					"script": {
 						"id": "53b8551e-05d1-4b29-a168-9f304aa33165",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Logs indexes",
+			"item": [
+				{
+					"name": "Get all indexes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/indexes/?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"indexes",
+								""
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							]
+						},
+						"description": "### Get all Indexes\n\n**This endpoint is in public beta. If you have any feedback, [contact Datadog support](https://docs.datadoghq.com/help/)**\n\nThis endpoint returns an array of the `Index` objects of your organization.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
+					},
+					"response": []
+				},
+				{
+					"name": "Get an Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/indexes/:INDEX_NAME?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"indexes",
+								":INDEX_NAME"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"key": "INDEX_NAME",
+									"value": "<INDEX_NAME>",
+									"description": "Name of the index to get."
+								}
+							]
+						},
+						"description": "### Get an Index\n\n**This endpoint is in public beta. If you have any feedback, [contact Datadog support](https://docs.datadoghq.com/help/)**\n\nThis endpoint returns an `Index` identified by its name.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
+					},
+					"response": []
+				},
+				{
+					"name": "Update an Index",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"filter\": {\n        \"query\": \"<NEW_INDEX_FILTER_QUERY>\"\n    },\n    \"exclusion_filters\": [\n        {\n            \"name\": \"<INDEX_EXCLUSTION_FILTER_1>\",\n            \"is_enabled\": true,\n            \"filter\": {\n                \"query\": \"<INDEX_EXCLUSTION_FILTER_QUERY>\",\n                \"sample_rate\": 1\n            }\n        },\n        {\n            \"name\": \"<INDEX_EXCLUSTION_FILTER_2>\",\n            \"is_enabled\": true,\n            \"filter\": {\n                \"query\": \"<INDEX_EXCLUSTION_FILTER_QUERY_2>\",\n                \"sample_rate\": 1\n            }\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/indexes/:INDEX_NAME?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"indexes",
+								":INDEX_NAME"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"key": "INDEX_NAME",
+									"value": "<INDEX_NAME>",
+									"description": "Name of the index"
+								}
+							]
+						},
+						"description": "### Update an Index\n\n**This endpoint is in public beta. If you have any feedback, [contact Datadog support](https://docs.datadoghq.com/help/)**\n\nThis endpoint updates an `Index` identified by its name. It returns the `Index` object passed in the request body when the request is successful.\n\n### Arguments\n\n* **`filter.query`**  [*optional*]:\n    Only logs matching the filter criteria will be considered for this index. The search query followis the [Log search syntax](https://docs.datadoghq.com/logs/explorer/search)\n* **`exclusion_filters`** An array of `ExclusionFilter` objects (see hereafter). The logs are tested against the query of each `ExclusionFilter`, following the order of the array. Only the first matching active `ExclusionFilter` matters, others (if any) are ignored. The `ExclusionFilter` object describes the configuration of an [exclusion filter](https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters). It has the following attributes:\n\n  * **`name`** [*required*]:\n    The name of the exclusion filter\n  * **`is_enabled`**  [*optional*, *default*=**False**]:\n    A boolean stating if the exclusion is active.\n  * **`filter.query`** [*optional*]:\n    Only logs matching the filter criteria AND the query of the parent index will be considered for this exclusion filter. The search query follows the [Log search syntax][1]\n  * **`filter.sample_rate`** [*required*]:\n    The fraction of logs excluded by the exclusion filter, when active. The sampling is uniform."
+					},
+					"response": []
+				},
+				{
+					"name": "Get indexes order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/index-order?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"index-order"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							]
+						},
+						"description": "### Get Indexes Order\n\n**This endpoint is in public beta. If you have any feedback, [contact Datadog support](https://docs.datadoghq.com/help/)**\n\nUse the index order endpoints to control the processing _order_ of an organization's indexes. Use this endpoint only if you have more than one index for logs in your organization. Note that this index cannot be used to add or delete indexes.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Indexes Order",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"index_names\": [\n        \"<INDEX_NAME_2>\",\n        \"<INDEX_NAME_1>\"\n    ]\n}"
+						},
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/indexes/?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"indexes",
+								""
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							]
+						},
+						"description": "### Update Indexes Order\n\n**This endpoint is in public beta. If you have any feedback, [contact Datadog support](https://docs.datadoghq.com/help/)**\n\nThis endpoint updates the `IndexOrder` of your organization. It returns the `IndexOrder` object passed in the request body when the request is successful.\n\n### Arguments\n\n* **`index_names`**  [*required*]: Array of `Strings` identifying by their name(s) the index(es) of your organisation. Logs are tested against the query filter of each index one by one, following the order of the array. Logs are eventually stored in the first matching index.\n"
+					},
+					"response": []
+				}
+			],
+			"description": "## Logs Indexes\n\nThis endpoint is in public beta. If you have any feedback, [contact Datadog support](https://docs.datadoghq.com/help/)\n\nThe `Index` object describes the configuration of a log index. It has the following attributes:\n\n* **`name`** (Read Only):\n    The name of the index.\n* **`filter.query`** :\n    Only logs matching the filter criteria are considered for this index.\n    The search query followis the [Log search syntax][1]\n* **`num_retention_days`** (Read Only) :\n    The number of days before logs are deleted from this index\n* **`daily_limit`** (Read Only) :\n    The number of log-events you can send in this index before you are rate-limited.\n* **`is_rate_limited`** (Read Only) :\n    A boolean stating if the index is rate limited, meaning more logs than the daily limit have been sent. Rate limit is reset every-day at 2pm UTC.\n* **`exclusion_filters`**\n    An array of `ExclusionFilter` objects (see hereafter). The logs are tested against the query of each `ExclusionFilter`, following the order of the array. Only the first matching active `ExclusionFilter` matters, others (if any) are ignored.\n\n  * **`name`** :\n    The name of the exclusion filter\n  * **`is_enabled`** :\n    A boolean stating if the exclusion is active (will eventually exclude logs) or not.\n  * **`filter.query`** :\n    Only logs matching the filter criteria AND the query of the parent index will be considered for this exclusion filter.\n    The search query follows the [Log search syntax][1]\n  * **`filter.sample_rate`** :\n    The fraction of logs excluded by the exclusion filter, when active. The sampling is uniform.\n\n\n**Note**:  You need an API and applications key with Admin right to interact with this endpoint.\n\n[1]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax\n",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b3fb9f17-ab4f-42ae-beb8-e2f3b529f633",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "f0d76bf9-68c2-44ef-8f28-43552805bf2d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Logs Pipelines",
+			"item": [
+				{
+					"name": "Get Pipeline Order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipeline-order/?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"pipeline-order",
+								""
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							]
+						},
+						"description": "### Get Pipelines Order\n\nGet the current order of your Pipelines.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Pipeline Order",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipeline-order/?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"pipeline-order",
+								""
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							]
+						},
+						"description": "### Update Pipelines Order\n\nUpdate the order of your Pipelines.\n\n**Note**: Logs are processed sequentially. Reordering a pipeline may change the structure and content of the data processed by other pipelines and their processors.\n\n### Arguments\n\n* **`pipeline_ids`** [*required*]:\n    Ordered Array of `<PIPELINE_ID>` strings, the order of pipeline IDs in the array define the overall Pipelines order for Datadog?\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Pipelines",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipelines/?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"pipelines",
+								""
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							]
+						},
+						"description": "### Get all Pipelines\n\nGet all pipelines from your Organization.\n\n### Arguments\n\nThis endpoint takes no JSON arguments.\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Pipeline",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipelines/:PIPELINE_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"pipelines",
+								":PIPELINE_ID"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"key": "PIPELINE_ID",
+									"value": "<PIPELINE_ID>",
+									"description": "ID of the Pipeline to get."
+								}
+							]
+						},
+						"description": "### Get a Pipeline\n\nGet a specific Pipeline from your Organization.\n\n### Arguments\n\nThis endpoint takes no JSON arguments.\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Create a Pipeline",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipelines/?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"pipelines",
+								""
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}"
+								}
+							]
+						},
+						"description": "### Create a Pipeline\n\nCreate a Pipeline in your Organization.\n\n### Arguments\n\n* **`name`** [*required*]:\n    Your pipeline name.\n\n* **`is_enabled`** [*optional*, *default*=**False**]:\n    Boolean value wether or note your pipeline is enabled\n\n* **`filter.query`** [*optional*]: Defines your Pipeline Filter. Only logs that match the filter criteria are processed by this pipeline.\n\n* **`processors`** [*optional*]: Ordered Array of Processors or Nested Pipelines. See the [Processor documentation](https://docs.datadoghq.com/logs/processing/processors/?tab=api) to get the specific Scheme for each processor."
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Pipeline",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipelines/:PIPELINE_ID/?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"pipelines",
+								":PIPELINE_ID",
+								""
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"key": "PIPELINE_ID",
+									"value": "<PIPELINE_ID>",
+									"description": "ID of the pipeline to update"
+								}
+							]
+						},
+						"description": "### Update a Pipeline\n\nUpdate a given pipeline configuration to change it's processors or their order.\n\n### Arguments\n\n* **`name`** [*required*]:\n    Your pipeline name.\n\n* **`is_enabled`** [*optional*, *default*=**False**]:\n    Boolean value wether or note your pipeline is enabled\n\n* **`filter.query`** [*optional*]: Defines your Pipeline Filter. Only logs that match the filter criteria are processed by this pipeline.\n\n* **`processors`** [*optional*]: Ordered Array of Processors or Nested Pipelines. See the [Processor documentation](https://docs.datadoghq.com/logs/processing/processors/?tab=api) to get the specific Scheme for each processor."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Pipeline",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipelines/:PIPELINE_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"datadoghq",
+								"{{datadog_site}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"config",
+								"pipelines",
+								":PIPELINE_ID"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
+								},
+								{
+									"key": "application_key",
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"key": "PIPELINE_ID",
+									"value": "<PIPELINE_ID>",
+									"description": "ID of the pipeline to delete"
+								}
+							]
+						},
+						"description": "### Delete a Pipeline\n\nDelete a given pipeline from your Organization.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
+					},
+					"response": []
+				}
+			],
+			"description": "Pipelines and processors operate on incoming logs, parsing and transforming them into structured attributes for easier querying.\n\n* See the [Pipelines Configuration Page](https://app.datadoghq.com/logs/pipelines) to see the pipelines and processors currently configured in our UI.\n* See the [Pipeline documentation](https://docs.datadoghq.com/logs/processing) to learn more",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f760b013-36f2-435b-b77e-f3d5ae8c7c44",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c75ef9c8-86fd-4115-ae29-8be6a4d05596",
 						"type": "text/javascript",
 						"exec": [
 							""
