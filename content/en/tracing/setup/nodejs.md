@@ -100,6 +100,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 |------------------|----------|-----------------|--------------------------------------------|
 | [connect][45]    | `>=2`    | Fully Supported |                                            |
 | [express][10]    | `>=4`    | Fully Supported | Supports Sails, Loopback, and [more][11]   |
+| [fastify][47]    | `>=1`    | Fully Supported |                                            |
 | [graphql][12]    | `>=0.10` | Fully Supported | Supports Apollo Server and express-graphql |
 | [hapi][13]       | `>=2`    | Fully Supported |                                            |
 | [koa][14]        | `>=2`    | Fully Supported |                                            |
@@ -209,3 +210,4 @@ For details about how to how to toggle and configure plugins, check out the [API
 [44]: https://github.com/kevincennis/promise
 [45]: https://github.com/senchalabs/connect
 [46]: http://tediousjs.github.io/tedious/
+[47]: https://www.fastify.io/
