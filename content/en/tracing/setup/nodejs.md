@@ -82,7 +82,11 @@ const tracer = require('dd-trace').init({
 
 ## Compatibility
 
-Node `^4.7`, `^6.9` and `>=8` are supported by this library. However, it benefits significantly from the performance improvements introduced in Node `>=8.3`.
+Node `>=8` is supported by this library. Only even versions like 8.x and 10.x are officially supported. Odd versions like 9.x and 11.x should work but are not officially supported.
+
+If you need support for Node 4 or Node 6, these versions are supported by version 0.13 of the tracer. We will support this version until *April 30th, 2020* to give you time to update, but no new feature will be added.
+
+Our policy on Node support is 1 year after a release reached end-of-life, and only for bug fixes.
 
 ### Integrations
 
@@ -94,6 +98,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 | Module           | Versions | Support Type    | Notes                                      |
 |------------------|----------|-----------------|--------------------------------------------|
+| [connect][45]    | `>=2`    | Fully Supported |                                            |
 | [express][10]    | `>=4`    | Fully Supported | Supports Sails, Loopback, and [more][11]   |
 | [graphql][12]    | `>=0.10` | Fully Supported | Supports Apollo Server and express-graphql |
 | [hapi][13]       | `>=2`    | Fully Supported |                                            |
@@ -124,6 +129,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [mysql2][26]           | `>=1`    | Fully Supported |                                                  |
 | [pg][27]               | `>=4`    | Fully Supported | Supports `pg-native` when used with `pg`         |
 | [redis][28]            | `>=0.12` | Fully Supported |                                                  |
+| [tedious][46]          | `>=1`    | Fully Supported | SQL Server driver for `mssql` and `sequelize`    |
 
 #### Worker Compatibility
 
@@ -201,3 +207,5 @@ For details about how to how to toggle and configure plugins, check out the [API
 [42]: https://github.com/articulate/paperplane/blob/master/docs/API.md#serverless-deployment
 [43]: https://github.com/then/promise
 [44]: https://github.com/kevincennis/promise
+[45]: https://github.com/senchalabs/connect
+[46]: http://tediousjs.github.io/tedious/
