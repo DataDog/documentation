@@ -73,11 +73,14 @@ Configure your application level tracers to submit traces to a custom Agent host
 
 The NodeJS Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
 
-```js
-const tracer = require('dd-trace').init({
-  hostname: process.env.DD_AGENT_HOST,
-  port: process.env.DD_TRACE_AGENT_PORT
-})
+```sh
+DD_AGENT_HOST=myhost DD_TRACE_AGENT_PORT=6218 node server
+```
+
+To use a different protocol, specify the entire URL as a single ENV variable `DD_TRACE_AGENT_URL`.
+
+```sh
+DD_TRACE_AGENT_URL=unix:/path/to/somesocket.sock node server
 ```
 
 ## Compatibility
