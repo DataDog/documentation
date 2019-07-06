@@ -77,7 +77,7 @@ The NodeJS Tracing Module automatically looks for and initializes with the ENV v
 DD_AGENT_HOST=myhost DD_TRACE_AGENT_PORT=6218 node server
 ```
 
-To use a different protocol, specify the entire URL as a single ENV variable `DD_TRACE_AGENT_URL`.
+To use a different protocol such as UDS, specify the entire URL as a single ENV variable `DD_TRACE_AGENT_URL`.
 
 ```sh
 DD_TRACE_AGENT_URL=unix:/path/to/somesocket.sock node server
