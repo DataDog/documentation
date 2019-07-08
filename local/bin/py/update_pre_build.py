@@ -1182,8 +1182,8 @@ if __name__ == "__main__":
 
     options.pull_config_file = (
         getenv("CONFIGURATION_FILE", options.configuration_file)
-        if not options.pull_config_file
-        else options.pull_config_file
+        if not options.configuration_file
+        else options.configuration_file
     )
 
     pre = PreBuild(options)
