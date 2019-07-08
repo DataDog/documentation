@@ -60,7 +60,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 | `grok.supportRules` | String           | yes      | List of Support rules for your grok parser.             |
 | `grok.matchRules`   | String           | yes      | List of Match rules for your grok parser.               |
 
-[1]: /api/#logs-pipelines
+[1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -115,7 +115,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Date Remap
 | `enabled` | Boolean          | no       | If the processors is enabled or not, default: `false` |
 | `sources` | Array of Strings | yes      | Array of source attributes.                           |
 
-[1]: /api/#logs-pipelines
+[1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -174,7 +174,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Status Rem
 | `enabled` | Boolean          | no       | If the processors is enabled or not, default: `false` |
 | `sources` | Array of Strings | yes      | Array of source attributes.                           |
 
-[1]: /api/#logs-pipelines
+[1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -213,7 +213,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Service Re
 | `enabled` | Boolean          | no       | If the processors is enabled or not, default: `false` |
 | `sources` | Array of Strings | yes      | Array of source attributes.                           |
 
-[1]: /api/#logs-pipelines
+[1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -253,7 +253,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Service Re
 | `sources` | Array of Strings | yes      | Array of source attributes, default: `msg`            |
 
 
-[1]: /api/#logs-pipelines
+[1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -308,7 +308,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Service Re
 | `preserveSource`     | Boolean          | no       | Remove or preserve the remapped source element, default: `false`               |
 | `overrideOnConflict` | Boolean          | no       | Override or not the target element if already set, default: `false`            |
 
-[1]: /api/#logs-pipelines
+[1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -391,7 +391,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following User-Agent par
 | `target`  | String           | yes      | Name of the parent attribute that contains all the extracted details from the `sources`, default: `http.useragent_details` |
 | `encoded` | Boolean          | no       | Define if the source attribute is url encoded or not, default: `false`                                                     |
 
-[1]: /api/#logs-pipelines
+[1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -451,7 +451,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Category proce
 | `categories` | Array of Object | yes      | Array of filters to match or not a log and their corresponding `name` to assign a custom value to the log. |
 | `target`     | String          | yes      | Name of the target attribute which value is defined by the matching category.                              |
 
-[1]: /api/#logs-pipelines
+[1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -506,7 +506,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 | `replaceMissing` | Boolean | no       | If `true`, it replaces all missing attributes of `expression` by 0, `false` skip the operation if an attribute is missing. Default: `false` |
 
 
-[1]: /api/#logs-pipelines
+[1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -547,7 +547,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 | `enabled` | Boolean          | no       | If the processors is enabled or not, default: `false` |
 | `sources` | Array of Strings | no       | Array of source attributes, default: `http.useragent` |
 
-[1]: /api/#logs-pipelines
+[1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
 
