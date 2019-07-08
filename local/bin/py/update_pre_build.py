@@ -28,9 +28,6 @@ from os.path import (
     dirname,
 )
 
-CONFIGURATION_FILE = "./local/etc/pull_config.yaml"
-
-
 def cache_by_sha(func):
     """ only downloads fresh file, if we don't have one or we do and the sha has changed """
 
@@ -678,7 +675,7 @@ class PreBuild:
 
     def pull_and_push_file(self, content):
         """
-        Takes the content from a file from a github repo and 
+        Takes the content from a file from a github repo and
         pushed it to the doc
         :param content: object with a file name and a file path
         """
@@ -1169,11 +1166,24 @@ if __name__ == "__main__":
         default=curdir,
     )
 
+    parser.add_option(
+        "-c",
+        "--configuration-file",
+        help="Configuration file for pre build script",
+        default=None,
+    )
+
     options, args = parser.parse_args()
     options.token = (
         getenv("GITHUB_TOKEN", options.token)
         if not options.token
         else options.token
+    )
+
+    options.pull_config_file = (
+        getenv("CONFIGURATION_FILE", options.pull_config_file)
+        if not options.pull_config_file
+        else options.pull_config_file
     )
 
     pre = PreBuild(options)
