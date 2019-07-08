@@ -55,7 +55,7 @@ def get_dd_metrics(csv_metrics, keys):
           if word in metric:
             i = 1
         if i == 0:
-          print(metric)
+          #print(metric)
           docs_tags = metric.split('.')
           metrics_send.append({
             'metric': 'docs.missing.metrics',
