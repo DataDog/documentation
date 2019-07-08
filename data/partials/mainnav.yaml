@@ -196,8 +196,8 @@ main:
             url: "graphing/infrastructure/livecontainers/"
           - name: "Live Processes"
             url: "graphing/infrastructure/process/"
-          - name: "Cloud Functions"
-            url: "graphing/infrastructure/cloudfunctions/"
+          - name: "Serverless Functions"
+            url: "graphing/infrastructure/serverless_functions/"
       # GRAPHING - Functions
       - name: "From the query to the graph "
         url: "graphing/functions/"
