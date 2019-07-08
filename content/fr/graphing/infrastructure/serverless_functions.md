@@ -2,7 +2,7 @@
 title: Fonctions Cloud
 kind: documentation
 aliases:
-- /graphing/infrastructure/cloudfunctions
+- /fr/graphing/infrastructure/cloudfunctions
 further_reading:
   - link: integrations/amazon_xray
     tag: Intégration X-Ray
