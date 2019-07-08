@@ -73,7 +73,7 @@ def post_dd_metrics(metrics, keys):
       'app_key': keys.corpappkey
   }
   initialize(**options)
-  #print(api.Metric.send(metrics))
+  api.Metric.send(metrics)
 
 
 if __name__ == '__main__':
