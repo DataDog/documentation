@@ -437,10 +437,10 @@ class PreBuild:
         """
         print(
             "Loading {} configuration file".format(
-                CONFIGURATION_FILE
+                getenv("CONFIGURATION_FILE")
             )
         )
-        configuration = yaml.load(open(CONFIGURATION_FILE))
+        configuration = yaml.load(open(getenv("CONFIGURATION_FILE")))
         for org in configuration:
             for repo in org["repos"]:
                 for content in repo["contents"]:
@@ -1166,24 +1166,11 @@ if __name__ == "__main__":
         default=curdir,
     )
 
-    parser.add_option(
-        "-c",
-        "--configuration-file",
-        help="Configuration file for pre build script",
-        default=None,
-    )
-
     options, args = parser.parse_args()
     options.token = (
         getenv("GITHUB_TOKEN", options.token)
         if not options.token
         else options.token
-    )
-
-    options.pull_config_file = (
-        getenv("CONFIGURATION_FILE", options.configuration_file)
-        if not options.configuration_file
-        else options.configuration_file
     )
 
     pre = PreBuild(options)
