@@ -74,22 +74,22 @@ Configure your application level tracers to submit traces to a custom Agent host
 The NodeJS Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
 
 ```sh
-DD_AGENT_HOST=myhost DD_TRACE_AGENT_PORT=6218 node server
+DD_AGENT_HOST=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
 ```
 
 To use a different protocol such as UDS, specify the entire URL as a single ENV variable `DD_TRACE_AGENT_URL`.
 
 ```sh
-DD_TRACE_AGENT_URL=unix:/path/to/somesocket.sock node server
+DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
 ```
 
 ## Compatibility
 
 Node `>=8` is supported by this library. Only even versions like 8.x and 10.x are officially supported. Odd versions like 9.x and 11.x should work but are not officially supported.
 
-If you need support for Node 4 or Node 6, these versions are supported by version 0.13 of the tracer. We will support this version until **April 30th, 2020** to give you time to update, but no new feature will be added.
+Node 4 or Node 6 versions are supported by version 0.13 of the `dd-trace-js` tracer. This version will be supported until **April 30th, 2020**, but no new feature will be added.
 
-Our policy on Node support is 1 year after a release reached end-of-life, and only for bug fixes.
+**Note**: The global policy is that the Datadog JS tracer supports (only for bug fixes) a Node version until 1 year after its release reached its end-of-life.
 
 ### Integrations
 
