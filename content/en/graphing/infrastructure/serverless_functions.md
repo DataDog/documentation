@@ -1,6 +1,8 @@
 ---
 title: Serverless Functions
 kind: documentation
+aliases:
+- /graphing/infrastructure/cloudfunctions
 further_reading:
 - link: "integrations/amazon_xray"
   tag: "X-Ray Integration"
@@ -14,7 +16,7 @@ further_reading:
 
 Serverless Functions are a service that run your code in response to events and automatically manage the underlying compute resources for you. [Datadog Serverless Functions][1] brings together metrics, traces, and logs from your AWS Lambda functions running serverless applications into one view.
 
-{{< img src="graphing/infrastructure/cloudfunctions/cf-overview.png" alt="Serverless Functions overview" responsive="true">}}
+{{< img src="graphing/infrastructure/serverless_functions/cf-overview.png" alt="Serverless Functions overview" responsive="true">}}
 
 ## Installation
 
@@ -99,7 +101,7 @@ Using the settings gear, you can check and uncheck metric columns on the functio
 
 Clicking on a particular function in the function summary table brings you to a function detail page. This page provides detailed trace and log level information for that function.
 
-{{< img src="graphing/infrastructure/cloudfunctions/cf-functiondetailview.png" alt="Serverless Functions - Function Detail View" responsive="true">}}
+{{< img src="graphing/infrastructure/serverless_functions/cf-functiondetailview.png" alt="Serverless Functions - Function Detail View" responsive="true">}}
 
 ### Summary graphs and time selector
 
@@ -109,19 +111,19 @@ Use the summary graphs across the top of screen and the time selector to focus i
 
 Via the AWS X-Ray integration, traces from the function currently being viewed are shown in the `Traces` section. You can sort these traces by attributes such as date, duration, and status.
 
-{{< img src="graphing/infrastructure/cloudfunctions/cf-traces.png" alt="Traces" responsive="true">}}
+{{< img src="graphing/infrastructure/serverless_functions/cf-traces.png" alt="Traces" responsive="true">}}
 
 ### Logs
 
 The `Logs` section aggregates logs from all recent invocations of the current function. It updates live as your functions send new logs to Datadog.
 
-{{< img src="graphing/infrastructure/cloudfunctions/cf-logs2.png" alt="Traces" responsive="true">}}
+{{< img src="graphing/infrastructure/serverless_functions/cf-logs2.png" alt="Traces" responsive="true">}}
 
 ## Trace detail view
 
 Clicking on a particular trace opens the trace detail view for that trace. The X-Ray subsegments are transformed into Datadog spans while preserving the naming paradigms, span metadata, and structure of the overall trace.
 
-{{< img src="graphing/infrastructure/cloudfunctions/cf-traces2.png" alt="Traces" responsive="true">}}
+{{< img src="graphing/infrastructure/serverless_functions/cf-traces2.png" alt="Traces" responsive="true">}}
 
 Datadog provides specially formatted serverless traces for readability and usability. Clicking on the span from another Lambda function creates a link to that function’s detail page so you can easily jump to another function that is part of the trace.
 
@@ -129,13 +131,13 @@ Datadog provides specially formatted serverless traces for readability and usabi
 
 All logs emitted from that function, and all functions it calls, are pulled into the function detail page as well. Narrow down the timeframe of the page to a specific moment of interest to view the logs during a critical point in time. Click on the logs in the table to see the full log in more detail.
 
-{{< img src="graphing/infrastructure/cloudfunctions/cf-logs.png" alt="logs" responsive="true">}}
+{{< img src="graphing/infrastructure/serverless_functions/cf-logs.png" alt="logs" responsive="true">}}
 
 ### Errors
 
 The errors tab bubbles up exceptions that occured during the duration of the trace. This is useful for quickly understanding what went wrong during execution.
 
-{{< img src="graphing/infrastructure/cloudfunctions/cf-errors.png" alt="logs" responsive="true">}}
+{{< img src="graphing/infrastructure/serverless_functions/cf-errors.png" alt="logs" responsive="true">}}
 
 ## Further Reading
 

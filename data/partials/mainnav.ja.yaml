@@ -154,7 +154,7 @@ main:
           - name: ライブプロセス
             url: graphing/infrastructure/process/
           - name: クラウド関数
-            url: graphing/infrastructure/cloudfunctions/
+            url: graphing/infrastructure/serverless_functions/
       - name: 'クエリからグラフまで '
         url: graphing/functions/
         children:
