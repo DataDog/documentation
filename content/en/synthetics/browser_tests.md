@@ -73,7 +73,7 @@ Tests can be only recorded from **[Google Chrome][5]**. To record your test, dow
 
 {{< img src="synthetics/browser_tests/assertions_browser_check.png" alt="Assertion browser test" responsive="true" style="width:40%;">}}
 
-Assertions allow you to check if an element, a content, or some text is available in the current page:
+Assertions allow you to check if an element, a content, or some text is available in the current page. The default timeout for each step is approximately 60 seconds. You can override the timeout for `Assert that an element is present on the page` by expanding the step and changing the `Timeout` value (in seconds).
 
 | Assertion                                               | Description                                                                                                                      |
 | ----                                                    | ----                                                                                                                             |
@@ -143,7 +143,7 @@ Common failure reasons include:
 | `DNS`             | The DNS entry is not found for the check URL. Possible causes include misconfigured check URL, wrong configuration of your DNS entries, etc.                                                          |
 | `INVALID_REQUEST` | The configuration of the check is invalid.                                                                                                                             |
 | `SSL`             | The SSL connection couldn't be performed.                                                                                     |
-| `TIMEOUT`         | The request couldn't be completed in a reasonable time. Browser tests timeout in 60 seconds. To override a timeout, change the time (in seconds) in the Assert that an element is present on the page step.|
+| `TIMEOUT`         | The request couldn't be completed in a reasonable time. Browser tests timeout in 60 seconds. |
 
 ## Further Reading
 
