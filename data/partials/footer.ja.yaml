@@ -77,13 +77,3 @@ col4:
   - name: twitter
     link: 'https://twitter.com/datadoghq'
     title: Twitter
-col5:
-  - name: english
-    link: "https://docs.datadoghq.com/"
-    title: "English"
-  - name: francais
-    link: "https://docs.datadoghq.com/fr/"
-    title: "Français"
-  - name: japanese
-    link: "https://docs.datadoghq.com/ja/"
-    title: "日本語"
