@@ -7,7 +7,7 @@ external_redirect: /api/#create-an-application-key
 
 ##### Signature
 
-`POST /api/v1/application_key/<APP_KEY>`
+`POST /v1/application_key/<APP_KEY>`
 
 ##### Example Request
 
