@@ -13,7 +13,7 @@ further_reading:
 
 ## Archives
 
-Configure your Datadog account to forward all the logs ingested to a cloud storage system. This allows you to keep in long-term storage all the logs that you used Datadog to aggregate. 
+Configure your Datadog account to forward all the logs ingested to a cloud storage system. This allows you to keep in long-term storage all the logs that you used Datadog to aggregate. You can then opt to rehydrate these archived log events in order to analyze them with the Log Explorer.
 
 Note: only Datadog users with admin status can create, modify, or delete log archive configurations.
 
@@ -23,6 +23,7 @@ Note: only Datadog users with admin status can create, modify, or delete log arc
 
 {{< whatsnext desc="This section includes the following topics:" >}}
     {{< nextlink href="/logs/archives/s3" >}}<u>Archive to S3</u>: Set up forwarding logs to your Amazon S3 bucket.{{< /nextlink >}}
+    {{< nextlink href="/logs/archives/rehydrating" >}}<u>Rehydrate from Archives</u>: Capture log events from your archives back into Datadog's Log Explorer.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading
