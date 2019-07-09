@@ -22,7 +22,7 @@ Note: only Datadog users with admin status can create, modify, or delete log arc
 ## Overview
 
 {{< whatsnext desc="This section includes the following topics:" >}}
-    {{< nextlink href="/graphing/using_graphs/" >}}<u>Archive to S3</u>: Set up forwarding logs to your Amazon S3 bucket.{{< /nextlink >}}
+    {{< nextlink href="/logs/archives/s3" >}}<u>Archive to S3</u>: Set up forwarding logs to your Amazon S3 bucket.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading
