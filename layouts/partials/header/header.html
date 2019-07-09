@@ -5,17 +5,7 @@
 {{ end }}
 
 <!-- get lang specific data file -->
-{{ $.Scratch.Set "data" "" }}
-{{ if ne $dot.Page.Lang "en"}}
-    {{ if (fileExists (print "data/partials/header." $dot.Page.Lang ".yaml")) }}
-      {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "header." $dot.Page.Lang)) }}
-    {{ else }}
-      {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.header }}
-    {{ end }}
-{{ else }}
-    {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.header }}
-{{ end }}
-{{ $datafile := ($.Scratch.Get "data") }}
+{{ $datafile := partial "datafile.html" (dict "context" $dot "filename" "partials/header") }}
 
 <header>
     <div class="container">

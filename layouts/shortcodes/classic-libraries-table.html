@@ -1,15 +1,6 @@
+{{ $dot := . }}
 <!-- get lang specific data file -->
-{{ $.Scratch.Set "data" "" }}
-{{ if ne $.Page.Lang "en"}}
-    {{ if (fileExists (print "data/libraries." $.Page.Lang ".yaml")) }}
-      {{ $.Scratch.Set "data" (index $.Site.Data (print "libraries." $.Page.Lang)) }}
-    {{ else }}
-      {{ $.Scratch.Set "data" $.Site.Data.libraries }}
-    {{ end }}
-{{ else }}
-    {{ $.Scratch.Set "data" $.Site.Data.libraries }}
-{{ end }}
-{{ $datafile := ($.Scratch.Get "data") }}
+{{ $datafile := partial "datafile.html" (dict "context" $dot "filename" "libraries") }}
 
 <div class="table-responsive-container">
   <div class="table-scroll">

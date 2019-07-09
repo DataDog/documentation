@@ -2,17 +2,7 @@
 {{ $ctx := . }}
 
 <!-- get lang specific data file -->
-{{ $.Scratch.Set "data" "" }}
-{{ if ne $dot.Page.Lang "en"}}
-    {{ if (fileExists (print "data/partials/mainnav." $dot.Page.Lang ".yaml")) }}
-      {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "mainnav." $dot.Page.Lang)) }}
-    {{ else }}
-      {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.mainnav }}
-    {{ end }}
-{{ else }}
-    {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.mainnav }}
-{{ end }}
-{{ $datafile := ($.Scratch.Get "data") }}
+{{ $datafile := partial "datafile.html" (dict "context" $dot "filename" "partials/mainnav") }}
 
 <ul class="list-unstyled">
     <!--

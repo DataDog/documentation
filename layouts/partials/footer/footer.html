@@ -2,17 +2,7 @@
 {{ $dot := . }}
 
 <!-- get lang specific data file -->
-{{ $.Scratch.Set "data" "" }}
-{{ if ne $dot.Page.Lang "en"}}
-    {{ if (fileExists (print "data/partials/footer." $dot.Page.Lang ".yaml")) }}
-      {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "footer." $dot.Page.Lang)) }}
-    {{ else }}
-      {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.footer }}
-    {{ end }}
-{{ else }}
-    {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.footer }}
-{{ end }}
-{{ $datafile := ($.Scratch.Get "data") }}
+{{ $datafile := partial "datafile.html" (dict "context" $dot "filename" "partials/footer") }}
 <footer>
     <div class="container">
         <div class="row pt-3 pb-0 pb-lg-6">
@@ -29,7 +19,7 @@
                 <div class="row align-items-center">
                     <div class="col-6 col-md-4 d-block d-lg-none">
                             {{ partial "img.html" (dict "root" . "src" "dd_logo_white.png" "class" "dd-logo d-inline-block w-100" "alt" "DataDog" "height" "" "img_param" "?ch=Width,DPR&fit=max&auto=format" "disable_lazy" "true") }}
-                        
+
                     </div>
                     <div class="col-6 col-sm-4 col-md-3 col-lg-10 col-xl-6 offset-0 offset-sm-2 offset-md-5 offset-lg-0 text-right text-lg-left">
                             <button type="button" class="btn d-block w-100 btn-outline-semi-trans" data-toggle="modal" data-target="#signupModal">{{ i18n "free_trial" }}</button>

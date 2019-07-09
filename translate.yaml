@@ -9,10 +9,10 @@ transifex:
 sources:
 - src: "content/en/**/*.md"
   dst: "content/{lang}/**/*.md"
-- src: "data/partials/*.yaml"
-  dst: "*.{lang}.yaml"
-- src: "data/service_checks/*.json"
-  dst: "*.{lang}.json"
+- src: "data/en/partials/*.yaml"
+  dst: "data/{lang}/partials/*.yaml"
+- src: "data/en/service_checks/*.json"
+  dst: "data/{lang}/service_checks/*.json"
 - src: "i18n/en.json"
   dst: "{lang}.json"
 - src: "config/_default/params.en.yaml"
@@ -27,7 +27,7 @@ ignores:
   - "**/*.fr.json"
   - "**/fr.json"
 filters:
-- src: "data/integrations/*.yaml"
+- src: "data/en/integrations/*.yaml"
   template: ".translate/templates/integrations.yaml"
 langs:
 - lang_country: "fr_FR"

@@ -19,13 +19,13 @@
   <!-- get lang specific data file -->
   {{ $.Scratch.Set "data" "" }}
   {{ if ne $.Page.Lang "en"}}
-      {{ if (fileExists (print "data/integrations/" $integration "." $.Page.Lang ".yaml")) }}
-        {{ $.Scratch.Set "data" (index $.Page.Site.Data.integrations (print $integration "." $.Page.Lang)) }}
+      {{ if (fileExists (print "data/" $.Page.Lang "/integrations/" $integration ".yaml")) }}
+        {{ $.Scratch.Set "data" (index (index (index $.Page.Site.Data $.Page.Lang) "integrations") $integration) }}
       {{ else }}
-        {{ $.Scratch.Set "data" (index $.Page.Site.Data.integrations $integration) }}
+        {{ $.Scratch.Set "data" (index $.Page.Site.Data.en.integrations $integration) }}
       {{ end }}
   {{ else }}
-      {{ $.Scratch.Set "data" (index $.Page.Site.Data.integrations $integration) }}
+      {{ $.Scratch.Set "data" (index $.Page.Site.Data.en.integrations $integration) }}
   {{ end }}
   {{ $data := ($.Scratch.Get "data") }}
 

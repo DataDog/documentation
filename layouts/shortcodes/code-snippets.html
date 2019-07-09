@@ -21,7 +21,7 @@
     {{ $file_extension := (index (split $file ".") $ext_index) }}
     {{ $file_basename := replace (replace $file (print "." $file_extension) "") $snipdir "" }}
     {{ if eq $basename $file_basename }}
-        {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
+        {{ $lang := index $dot.Site.Data.en.highlighting.languages $file_extension }}
         {{ if (or (eq $static true) (eq $static "true")) }}
             <pre lang="{{$lang.pygments_name}}"><code>{{ $file_content }}</code></pre>
         {{ else }}

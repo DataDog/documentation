@@ -1,7 +1,7 @@
 # Hugo
 public/
-data/integrations/
-data/service_checks/
+data/en/integrations/
+data/en/service_checks/
 integrations_data
 
 # Ignoring all automated content

@@ -29,7 +29,7 @@ class Integrations:
         self.data_dir = "{0}{1}{2}".format(
             abspath(normpath(source_file)),
             sep,
-            "data" + sep,
+            "data" + sep + "en" + sep,
         )
         self.content_dir = "{0}{1}{2}".format(
             abspath(normpath(source_file)),

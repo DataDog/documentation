@@ -1,0 +1,34 @@
+{{ $dot := .context }}
+{{ $datafilename := .filename | default "" }}
+{{ $datafilename_dotpath := replace $datafilename "/" "." }}
+{{ $lang := $dot.Page.Lang }}
+{{ $dot.Scratch.Set "data" "" }}
+{{ $fullfile := (print "data/" $lang "/" $datafilename ".yaml") }}
+{{ $fullenfile := (print "data/en/" $datafilename ".yaml") }}
+
+<!--
+1. Try to find lang specific datafile e.g data/fr/customers.yaml and set to $datafile
+2. If its not found try to load english e.g data/en/customers.yaml
+3. Anything else throw an error to say we can't find datafile
+-->
+{{ if (fileExists $fullfile) }}
+    {{ if in $datafilename "/"}}
+      <!-- if a path to a file e.g partials/foo/bar.yaml index each segment til we reach the end -->
+      {{ $datafilename_split := split $datafilename "/" }}
+      {{ $dot.Scratch.Set "data" (index $dot.Page.Site.Data $lang) }}
+      {{ range $datafilename_split }}
+          {{ $dot.Scratch.Set "data" (index ($dot.Scratch.Get "data") . ) }}
+      {{ end }}
+    {{ else }}
+      <!-- if just a single file index it -->
+      {{ $dot.Scratch.Set "data" (index (index $dot.Page.Site.Data $lang) $datafilename) }}
+    {{ end }}
+{{ else }}
+    {{ if (fileExists $fullenfile) }}
+        {{ $dot.Scratch.Set "data" (index $dot.Page.Site.Data.en $datafilename_dotpath) }}
+    {{ else }}
+        {{ errorf "Failed to find localized datafile %q or english datafile %q whilst on page %q" $fullfile $fullenfile .Path }}
+    {{ end }}
+{{ end }}
+{{ $datafile := ($dot.Scratch.Get "data") }}
+{{ return $datafile }}
