@@ -75,6 +75,7 @@ The `location` block within the server where tracing is desired should add the f
 ```nginx
             opentracing_operation_name "$request_method $uri";
             opentracing_tag "resource.name" "/";
+            opentracing_propagate_context;
 ```
 
 A config file for the Datadog tracing implementation is also required:
