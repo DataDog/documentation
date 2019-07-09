@@ -473,9 +473,9 @@ main:
       # LOGS - Archives
 
       - name: "Archives"
-        url: "logs/archives/s3"
+        url: "logs/archives"
         children:
-          - name: "AWS S3"
+          - name: "Archive to AWS S3"
             url: "logs/archives/s3"
 
       #- #  name: "FAQ"
