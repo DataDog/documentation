@@ -2,6 +2,8 @@
 title: Integrations
 kind: documentation
 disable_toc: true
+aliases:
+- /integrations/faq/list-of-api-source-attribute-value
 description: Gather data from all of your systems, apps, & services
 ---
 
