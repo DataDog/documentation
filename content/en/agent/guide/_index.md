@@ -13,6 +13,7 @@ disable_toc: true
     {{< nextlink href="agent/guide/network" >}}Network Traffic{{< /nextlink >}}
     {{< nextlink href="agent/guide/secrets-management" >}}Secrets Management{{< /nextlink >}}
     {{< nextlink href="agent/guide/community-integrations-installation-with-docker-agent" >}}Community integration installation{{< /nextlink >}}
+    {{< nextlink href="agent/guide/datadog-agent-manager-windows" >}}Datadog Agent Manager for Windows{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 {{< whatsnext desc="Agent 5 Guides:" >}}
