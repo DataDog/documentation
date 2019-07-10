@@ -36,7 +36,7 @@ See the specific setup instructions to ensure that the Agent is configured to re
 
 {{< partial name="apm/apm-containers.html" >}}
 </br>
-Note: After having instrumented your application, the tracing client sends traces to `localhost:8126` by default. 
+Note: After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.
 
 ## Additional environments
 
