@@ -61,7 +61,7 @@ L'intégration Papertrail n'inclut aucun événement.
 L'intégration Papertrail n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez l'[assistance Datadog][2].
+Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
 [1]: https://papertrailapp.com/events
 [2]: https://docs.datadoghq.com/fr/help

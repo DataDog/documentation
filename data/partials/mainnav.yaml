@@ -163,6 +163,9 @@ main:
     pre: "nav_graphing"
     children:
       # GRAPHING - Subnav start
+      - name: "Using graphs"
+        url: "graphing/using_graphs/"
+      # GRAPHING - dashboards
       - name: "Dashboards"
         url: "graphing/dashboards/"
         children:
@@ -200,8 +203,8 @@ main:
             url: "graphing/infrastructure/livecontainers/"
           - name: "Live Processes"
             url: "graphing/infrastructure/process/"
-          - name: "Cloud Functions"
-            url: "graphing/infrastructure/cloudfunctions/"
+          - name: "Serverless Functions"
+            url: "graphing/infrastructure/serverless_functions/"
       # GRAPHING - Functions
       - name: "From the query to the graph "
         url: "graphing/functions/"
@@ -251,7 +254,7 @@ main:
     pre: "nav_alerting"
     children:
       # ALERTING - Subnav start
-      - name: "Monitor Types"
+      - name: "Monitors"
         url: "monitors/monitor_types/"
         children:
           - name: "Anomaly"
@@ -284,7 +287,7 @@ main:
             url: "monitors/monitor_types/watchdog/"
 
       # Manage monitor
-      - name: "Manage Monitor"
+      - name: "Manage Monitors"
         url: "monitors/manage_monitor/"
 
       # Monitor status
@@ -477,9 +480,9 @@ main:
       # LOGS - Archives
 
       - name: "Archives"
-        url: "logs/archives/s3"
+        url: "logs/archives"
         children:
-          - name: "AWS S3"
+          - name: "Archive to AWS S3"
             url: "logs/archives/s3"
 
       #- #  name: "FAQ"

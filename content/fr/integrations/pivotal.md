@@ -45,7 +45,7 @@ L'intégration Pivotal Tracker n'inclut aucun événement.
 L'intégration Pivotal Tracker n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez l'[assistance Datadog][2].
+Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
 [1]: https://www.pivotaltracker.com/signin
 [2]: https://docs.datadoghq.com/fr/help

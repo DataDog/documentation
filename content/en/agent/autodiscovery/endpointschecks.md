@@ -138,7 +138,7 @@ metadata:
       [
         {
           "name": "My Nginx Service Endpoints",
-          "nginx_status_url": "http://%%host%%/nginx_status/"
+          "nginx_status_url": "http://%%host%%:%%port%%/nginx_status"
         }
       ]
 spec:

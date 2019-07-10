@@ -38,8 +38,8 @@ build_preview:
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - version_static_assets
-    #- sync_integration_descriptions
-    - sync_integration_descriptions_cached
+    - sync_integration_descriptions
+    #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
     - build_hugo_site_new
@@ -121,6 +121,7 @@ manage_translations:on-schedule:
     CONFIG: ${PREVIEW_CONFIG}
   script:
     - if [[ $(date +%u) -lt 6 ]]; then manage_translations "${APIKEY}"; fi
+    - chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
   only:
     - schedules
 

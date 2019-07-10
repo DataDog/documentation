@@ -6,7 +6,7 @@ external_redirect: /api/#post-delete
 ---
 
 ##### Signature
-`POST /api/v1/synthetics/tests/delete`
+`POST /v1/synthetics/tests/delete`
 
 ##### Example Request
 

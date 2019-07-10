@@ -73,16 +73,23 @@ Configure your application level tracers to submit traces to a custom Agent host
 
 The NodeJS Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
 
-```js
-const tracer = require('dd-trace').init({
-  hostname: process.env.DD_AGENT_HOST,
-  port: process.env.DD_TRACE_AGENT_PORT
-})
+```sh
+DD_AGENT_HOST=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
+```
+
+To use a different protocol such as UDS, specify the entire URL as a single ENV variable `DD_TRACE_AGENT_URL`.
+
+```sh
+DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
 ```
 
 ## Compatibility
 
-Node `^4.7`, `^6.9` and `>=8` are supported by this library. However, it benefits significantly from the performance improvements introduced in Node `>=8.3`.
+Node `>=8` is supported by this library. Only even versions like 8.x and 10.x are officially supported. Odd versions like 9.x and 11.x should work but are not officially supported.
+
+Node 4 or Node 6 versions are supported by version 0.13 of the `dd-trace-js` tracer. This version will be supported until **April 30th, 2020**, but no new feature will be added.
+
+**Note**: The global policy is that the Datadog JS tracer supports (only for bug fixes) a Node version until 1 year after its release reached its end-of-life.
 
 ### Integrations
 
@@ -94,7 +101,9 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 | Module           | Versions | Support Type    | Notes                                      |
 |------------------|----------|-----------------|--------------------------------------------|
+| [connect][45]    | `>=2`    | Fully Supported |                                            |
 | [express][10]    | `>=4`    | Fully Supported | Supports Sails, Loopback, and [more][11]   |
+| [fastify][47]    | `>=1`    | Fully Supported |                                            |
 | [graphql][12]    | `>=0.10` | Fully Supported | Supports Apollo Server and express-graphql |
 | [hapi][13]       | `>=2`    | Fully Supported |                                            |
 | [koa][14]        | `>=2`    | Fully Supported |                                            |
@@ -124,6 +133,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [mysql2][26]           | `>=1`    | Fully Supported |                                                  |
 | [pg][27]               | `>=4`    | Fully Supported | Supports `pg-native` when used with `pg`         |
 | [redis][28]            | `>=0.12` | Fully Supported |                                                  |
+| [tedious][46]          | `>=1`    | Fully Supported | SQL Server driver for `mssql` and `sequelize`    |
 
 #### Worker Compatibility
 
@@ -201,3 +211,6 @@ For details about how to how to toggle and configure plugins, check out the [API
 [42]: https://github.com/articulate/paperplane/blob/master/docs/API.md#serverless-deployment
 [43]: https://github.com/then/promise
 [44]: https://github.com/kevincennis/promise
+[45]: https://github.com/senchalabs/connect
+[46]: http://tediousjs.github.io/tedious/
+[47]: https://www.fastify.io/

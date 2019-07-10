@@ -245,7 +245,7 @@ Le matcher de date convertit votre timestamp au format EPOCH.
 
 <sup>1</sup> Utilisez ce format si vous effectuez vos propres localisations et que vos timestamps ne sont _pas_ au fuseau UTC. Les identifiants de fuseaux horaires sont extraits de la base de données TZ. Pour en savoir plus, consultez les [noms des bases de données TZ][1].
 
-**Remarque** : le parsing d'une date ne définit **pas** sa valeur comme étant la date officielle du log. Pour cela, utilisez le [processeur de remappage de dates de log][2] dans un processeur ultérieur.
+**Remarque** : le parsing d'une date ne définit **pas** sa valeur comme étant la date officielle du log. Pour cela, utilisez le [remappeur de dates de log][2] dans un processeur ultérieur.
 
 ### Modèle conditionnel
 

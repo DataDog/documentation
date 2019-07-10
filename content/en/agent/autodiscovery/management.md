@@ -14,7 +14,7 @@ Datadog Agent auto-discovers all containers available by default. To restrict it
 
 **Note**: The `docker.containers.running`, `.stopped`, `.running.total`, and `.stopped.total` metrics are not affected by these settings and always count all containers. This does not affect your per-container billing.
 
-If running the Agent as a binary on a host, configure your Autodiscovery perimeter with the [Host Agent](?tab=host-agent) tab instructions. If running the Agent as a container, configure your Autodiscovery perimeter with the [Containerized Agent Tab](?tab=containerized-agent) instructions.
+If running the Agent as a binary on a host, configure your Autodiscovery perimeter with the [Host Agent](?tab=hostagent) tab instructions. If running the Agent as a container, configure your Autodiscovery perimeter with the [Containerized Agent Tab](?tab=containerizedagent) instructions.
 
 ## Exclude containers
 

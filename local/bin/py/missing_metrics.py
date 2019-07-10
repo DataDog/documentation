@@ -55,14 +55,14 @@ def get_dd_metrics(csv_metrics, keys):
           if word in metric:
             i = 1
         if i == 0:
-          print(metric)
+          #print(metric)
           docs_tags = metric.split('.')
           metrics_send.append({
             'metric': 'docs.missing.metrics',
             'points': 1,
             'tags': ['docs_metric:' + metric, 'docs_cloud:' + docs_tags[0], 'docs_ns:' + docs_tags[1]]
           })
-  print(len(metrics_send))
+  #print(len(metrics_send))
   return metrics_send
 
 
@@ -73,14 +73,14 @@ def post_dd_metrics(metrics, keys):
       'app_key': keys.corpappkey
   }
   initialize(**options)
-  print(api.Metric.send(metrics))
+  api.Metric.send(metrics)
 
 
 if __name__ == '__main__':
   print('Getting csv metrics from...')
   print(tempdir)
   csv_metrics = get_csv_metrics(tempdir)
-  print(csv_metrics)
+  #print(csv_metrics)
   print('Parsing keys')
   parser = OptionParser(usage="usage: %prog [options]")
   parser.add_option("-k", "--demoapikey", help="demo api key", default=None)

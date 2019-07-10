@@ -95,7 +95,7 @@ Le check PgBouncer n'inclut aucun événement.
 Renvoie CRITICAL si l'Agent n'est pas capable de se connecter à PgBouncer pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
 
 ## Dépannage
-Besoin d'aide ? Contactez l'[assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
