@@ -478,7 +478,7 @@ main:
           - name: "Archive to AWS S3"
             url: "logs/archives/s3"
           - name: "Rehydrate from Archives"
-            url: "logs/rehydrating"
+            url: "logs/archives/rehydrating"
 
       #- #  name: "FAQ"
       #  url: "logs/faq/"
