@@ -203,7 +203,7 @@ main:
             url: "graphing/infrastructure/livecontainers/"
           - name: "Live Processes"
             url: "graphing/infrastructure/process/"
-          - name: "Serverless Functions"
+          - name: "Serverless"
             url: "graphing/infrastructure/serverless_functions/"
       # GRAPHING - Functions
       - name: "From the query to the graph "
