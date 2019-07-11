@@ -89,7 +89,7 @@ See the [sample config_template.yaml][2] for all available configuration options
 #### Manage checks
 The manage checks page displays the contents of enabled check configuration files. You can edit these files directly from the Datadog Agent Manager. After making a change, click **Save** in the upper right then [restart the Agent](#restart-agent).
 
-Additionally, you can add a check by selecting **Add a Check** in the drop-down. This displays a list of available checks to install. Reference the specific check's [integration][3] page for configuration details.
+To add a check, select **Add a Check** in the drop-down. This displays a list of available checks to install. Reference the specific check's [integration][3] page for configuration details.
 
 #### Checks summary
 The checks summary page displays a list of the checks running, number of instances for each check, and the check's status.
