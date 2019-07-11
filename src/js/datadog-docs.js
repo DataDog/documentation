@@ -658,10 +658,6 @@ gtag('js', new Date());
 
 gtag('config', '{{ .Site.Params.ga }}');
 
-// On click remove all open and active classes from sidebar
-// Then check if target is li, a, img,  or span
-// If li apply active class to the nested a tag and then apply open classes to parent li's up to sidenav-nav
-
 // Get sidebar
 function hasParentLi(el){
     var els = [];
