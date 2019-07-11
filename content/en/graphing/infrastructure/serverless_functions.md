@@ -1,5 +1,5 @@
 ---
-title: Serverless Functions
+title: Serverless
 kind: documentation
 aliases:
 - /graphing/infrastructure/cloudfunctions
@@ -14,13 +14,13 @@ further_reading:
 
 ## Overview
 
-Serverless Functions are a service that run your code in response to events and automatically manage the underlying compute resources for you. [Datadog Serverless Functions][1] brings together metrics, traces, and logs from your AWS Lambda functions running serverless applications into one view.
+Serverless is a concept where you write event-driven code and upload it to a cloud provider who manages all of the underlying compute resources. [Datadog Serverless][1] brings together metrics, traces, and logs from your AWS Lambda functions running serverless applications into one view.
 
-{{< img src="graphing/infrastructure/serverless_functions/cf-overview.png" alt="Serverless Functions overview" responsive="true">}}
+{{< img src="graphing/infrastructure/serverless_functions/cf-overview.png" alt="Serverless overview" responsive="true">}}
 
 ## Installation
 
-The Serverless Functions dashboard requires no installation of its own, but it relies on three data sources that require their own installation:
+The Serverless dashboard requires no installation of its own, but it relies on three data sources that require their own installation:
 
 1. [Amazon Web Services integration][2] (required)
 
@@ -101,7 +101,7 @@ Using the settings gear, you can check and uncheck metric columns on the functio
 
 Clicking on a particular function in the function summary table brings you to a function detail page. This page provides detailed trace and log level information for that function.
 
-{{< img src="graphing/infrastructure/serverless_functions/cf-functiondetailview.png" alt="Serverless Functions - Function Detail View" responsive="true">}}
+{{< img src="graphing/infrastructure/serverless_functions/cf-functiondetailview.png" alt="Serverless - Function Detail View" responsive="true">}}
 
 ### Summary graphs and time selector
 
