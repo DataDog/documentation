@@ -27,7 +27,7 @@ further_reading:
 
 Trace Sampling is applicable for high-volume web-scale applications, where a sampled proportion of traces is kept in Datadog based on the following rules.
 
-Note that Statistics (requests, errors, latency, etc.), are calculated based on the full volume of traces at the Agent level, and are therefore always accurate.
+Statistics (requests, errors, latency, etc.), are calculated based on the full volume of traces at the Agent level, and are therefore always accurate.
 
 ### Statistics (Requests, Errors, Latencies etc.)
 
@@ -376,6 +376,8 @@ Individual traces are stored for up to 6 months. To determine how long a particu
 | Current day (UTC time) |               25% |
 | 6 days                 |               10% |
 | 6 months               |                1% |
+
+**Note**: Datadog does not sample Synthetics traces, we store all of the received traces for 6 hours, and the stated percent of the traces over time.
 
 That is to say, on a given day you would see in the UI:
 
