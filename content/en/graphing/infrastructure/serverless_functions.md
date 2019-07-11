@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Serverless is a concept where you write event-driven code and upload it to a cloud provider, who manages all of the underlying compute resources. [Datadog Serverless][1] brings together metrics, traces, and logs from your AWS Lambda functions running serverless applications into one view.
+Serverless is a concept where you write event-driven code and upload it to a cloud provider who manages all of the underlying compute resources. [Datadog Serverless][1] brings together metrics, traces, and logs from your AWS Lambda functions running serverless applications into one view.
 
 {{< img src="graphing/infrastructure/serverless_functions/cf-overview.png" alt="Serverless overview" responsive="true">}}
 
