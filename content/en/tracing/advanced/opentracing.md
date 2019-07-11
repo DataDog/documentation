@@ -138,13 +138,13 @@ public class Application {
 
     public static void main(String[] args) {
 
-//         Initialize the tracer from environment variables or system properties
+          // Initialize the tracer from environment variables or system properties
         DDTracer tracer = new DDTracer();
         GlobalTracer.register(tracer);
         // register the same tracer with the Datadog API
         datadog.trace.api.GlobalTracer.registerIfAbsent(tracer);
 
-//      OR from the API
+        // OR from the API
         Writer writer = new DDAgentWriter();
         Sampler sampler = new AllSampler();
         String service = "Service Name";
