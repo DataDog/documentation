@@ -91,7 +91,7 @@ logs_config:
 
 
 [1]: /fr/agent/basic_agent_usage
-[2]: /fr/logs/log_collection/#custom-log-collection
+[2]: /fr/agent/logs/#custom-log-collection
 [3]: /fr/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
@@ -189,7 +189,7 @@ Appliquez l'étiquette `com.datadoghq.ad.logs` à vos conteneurs comme indiqué 
 Consultez la [documentation relative aux règles de traitement multiligne][1] pour obtenir d'autres d'exemples d'expressions.
 
 
-[1]: /fr/logs/log_collection/#multi-line-aggregation
+[1]: /fr/agent/logs/advanced_log_collection/#multi-line-aggregation
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -285,4 +285,4 @@ ac_exclude = ["name:datadog-agent"]
 [1]: /fr/integrations/journald
 [2]: /fr/agent/autodiscovery
 [3]: /fr/agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
-[4]: /fr/logs/log_collection/#custom-log-collection
+[4]: /fr/agent/logs/#custom-log-collection
