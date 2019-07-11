@@ -21,7 +21,7 @@ OpenTracing is a vendor-neutral, cross-language standard for tracing application
 
 Use the [OpenTracing API][1] and the Datadog Tracer (dd-trace-ot) library to measure execution times for specific pieces of code. This lets you trace your application more precisely than you can with the Java Agent alone.
 
-**Setup**:
+#### Setup
 
 For Maven, add this to `pom.xml`:
 
@@ -58,8 +58,7 @@ compile group: 'com.datadoghq', name: 'dd-trace-ot', version: "${dd-trace-java.v
 
 Configure your application using environment variables or system properties as discussed in the [configuration][2] section.
 
-
-**Manual Instrumentation with OpenTracing**:
+#### Manual instrumentation with OpenTracing
 
 Use a combination of these if the automatic instrumentation isn’t providing you enough depth or detail.
 
@@ -154,7 +153,7 @@ public class Application {
 }
 ```
 
-**Manual Instrumentation for Async Traces**:
+#### Manual instrumentation for async traces
 
 Create asynchronous traces with manual instrumentation using the OpenTracing API.
 
@@ -176,7 +175,7 @@ try (Scope scope = tracer.buildSpan("ServiceHandlerSpan").startActive(false)) {
 ```
 
 
-**Create a distributed trace using manual instrumentation with OpenTracing:**
+#### Create a distributed trace using manual instrumentation with OpenTracing
 
 ```java
 // Step 1: Inject the Datadog headers in the client code
