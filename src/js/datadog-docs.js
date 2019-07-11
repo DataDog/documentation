@@ -760,81 +760,38 @@ window.onload = function(){
 
 function updateSidebar(event){
 
-    // Remove active and open classes first
-        // Remove active class
-        var activeMenus = document.querySelectorAll('.side .sidenav-nav .active');
-        for(i=0;i<activeMenus.length;i++){
-            console.log('removing active class from');
-            console.log(activeMenus[i]);
-            activeMenus[i].classList.remove('active');
-        }
-        // $('a.active').removeClass('active');
-    
-        // Clicked on menu in same sub nav. Don't close li / ul
-        // this might be span, a, or img tag
-        // if(e.target.closest('ul').parentNode.classList.contains('open')){
-        //     return;
-        // }
-    
-        // // Clicked parent li which is open
-        // if(e.target.closest('li').classList.contains('open')){
-        //     return;
-        // }
-
-        /// Done removing classes
+    var activeMenus = document.querySelectorAll('.side .sidenav-nav .active');
+    for(i=0;i<activeMenus.length;i++){
+        activeMenus[i].classList.remove('active');
+    }
 
     getPathElement();
 
-    // Remove existing active class from a tag
-    // var activeA = document.querySelector('.open > .active');
-    // if(activeA){
-    //     activeA.classList.remove('active'); 
-    // }
-    
     var isLi = ( event.target.nodeName === "LI" ) ? true : false ;
 
     if(isLi){
-        console.log('li clicked');
         event.target.querySelector('a').classList.add('active');
-        // event.target.classList.add('open');
         if(event.target.closest('li').querySelector('ul')){
-            console.log('adding open here');
-            
             event.target.closest('li').classList.add('open');
-            console.log(event.target.closest('li'));
         }
     }else{
         event.target.closest('li').querySelector('a').classList.add('active');
-
-        // Remove opens?
-        console.log('li NOT clicked');
 
         //If the target which is clicked has an active element within the same ul menu don't close the open class
         var isSameMenu = event.target.closest('.open').querySelector('.active');
 
         if(!isSameMenu){
-            // console.log("this item has ul dont close");
             // Get ope navs
             var openMenus = document.querySelectorAll('.side .sidenav-nav .open');
-            // console.log('close these open menus ');
-            // console.log(openMenus);
             // Remove open classes
             for(i=0;i<openMenus.length;i++){
-                // console.log('closing open class for');
-                // console.log(openMenus[i]);
                 openMenus[i].classList.remove('open');
-                // console.log('closed on');
-                // console.log(openMenus[i]);
             }
                             
-        }else{
-            console.log('menu in same sub nav dont remove open');
         }
 
         if(event.target.closest('li').querySelector('ul')){
-            console.log('adding open there');
             event.target.closest('li').classList.add('open');
-            console.log(event.target.closest('li'));
         }
     }
 };
@@ -853,7 +810,6 @@ function loadPage(newUrl) {
         }
 
         var newContent = httpRequest.responseXML.getElementById("mainContent");
-        //var newContent = httpRequest.responseText;
         if (newContent === null){
             return;
         }
