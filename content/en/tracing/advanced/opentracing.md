@@ -131,8 +131,8 @@ import datadog.trace.common.sampling.AllSampler;
 import datadog.trace.common.writer.DDAgentWriter;
 
 //For the API Example
-        import datadog.trace.common.writer.Writer;
-        import datadog.trace.common.sampling.Sampler;
+import datadog.trace.common.writer.Writer;
+import datadog.trace.common.sampling.Sampler;
 
 public class Application {
 
