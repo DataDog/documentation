@@ -29,11 +29,12 @@ If you are already using a log-shipper daemon, refer to the dedicated documentat
 
 Datadog Log Management also comes with a set of out of the box solutions to collect your logs and send them to Datadog:
 
-* [**Collect logs from your applications**](#application-log-collection).
-* [**Collect logs from a docker environment**](#container-log-collection).
-* [**Collect logs from your Cloud provider**](#cloud-provider-log-collection).
+* [**Collect logs from your hosts**][12].
+* [**Collect logs from your applications**][13].
+* [**Collect logs from a docker environment**][14].
+* [**Collect logs from your Cloud provider**][15].
 
-Datadog Integrations and Log Collection are tied together. Use an integration default configuration file to enable its dedicated [processing][12], [parsing][13], and [facets][14] in Datadog.
+Datadog Integrations and Log Collection are tied together. Use an integration default configuration file to enable its dedicated [processing][16], [parsing][17], and [facets][18] in Datadog.
 
 <div class="alert alert-warning">
 <a href="/integrations/#cat-log-collection">Consult the current list of available supported integrations</a>.
@@ -51,8 +52,8 @@ After you have [enabled log collection][1], configure your application language 
 
 ## Container Log collection
 
-The Datadog Agent can [collect logs directly from container stdout/stderr][15] without using a logging driver. When the Agent's Docker check is enabled, container and orchestrator metadata are automatically added as tags to your logs.
-It is possible to collect logs from all your containers or [only a subset filtered by container image, label, or name][16]. Autodiscovery can also be used to [configure log collection directly in the container labels][17]. In Kubernetes environments you can also leverage [the daemonset installation][18].
+The Datadog Agent can [collect logs directly from container stdout/stderr][19] without using a logging driver. When the Agent's Docker check is enabled, container and orchestrator metadata are automatically added as tags to your logs.
+It is possible to collect logs from all your containers or [only a subset filtered by container image, label, or name][20]. Autodiscovery can also be used to [configure log collection directly in the container labels][21]. In Kubernetes environments you can also leverage [the daemonset installation][22].
 
 Choose your environment below to get dedicated log collection instructions:
 
@@ -66,7 +67,7 @@ Select your Cloud provider below to see how to automatically collect your logs a
 
 ## Custom Log forwarder
 
-Any custom process or [logging library][19] able to forward logs through **TCP** can be used in conjunction with Datadog Logs. Choose below to which Datadog Site you want to forward logs to:
+Any custom process or [logging library][23] able to forward logs through **TCP** can be used in conjunction with Datadog Logs. Choose below to which Datadog Site you want to forward logs to:
 
 {{< tabs >}}
 {{% tab "US Site" %}}
@@ -142,7 +143,7 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 ## Datadog Logs Endpoints
 
 Datadog provides logging endpoints for both SSL-encrypted connections and unencrypted connections.
-You should use the encrypted endpoint when possible. The Datadog Agent uses the encrypted endpoint to send logs to Datadog (more information available in the [Datadog security documentation][20]).
+You should use the encrypted endpoint when possible. The Datadog Agent uses the encrypted endpoint to send logs to Datadog (more information available in the [Datadog security documentation][24]).
 
 Endpoints that can be used to send logs to Datadog:
 
@@ -181,7 +182,7 @@ Endpoints that can be used to send logs to Datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-To send logs over HTTPs, refer to the [Datadog Log HTTP API documentation][21].
+To send logs over HTTPs, refer to the [Datadog Log HTTP API documentation][25].
 
 ## Reserved attributes
 
@@ -191,11 +192,11 @@ Here are some key attributes you should pay attention to when setting up your pr
 |-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `host`    | The name of the originating host as defined in metrics. We automatically retrieve corresponding host tags from the matching host in Datadog and apply them to your logs. The Agent sets this value automatically.                      |
 | `source`  | This corresponds to the integration name: the technology from which the log originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, etc. |
-| `status` | This corresponds to the level/severity of a log. It is used to define [patterns][22] and has a dedicated layout in the Datadog Log UI.|
+| `status` | This corresponds to the level/severity of a log. It is used to define [patterns][26] and has a dedicated layout in the Datadog Log UI.|
 | `service` | The name of the application or service generating the log events. It is used to switch from Logs to APM, so make sure you define the same value when you use both products.                                                            |
 | `message` | By default, Datadog ingests the value of the `message` attribute as the body of the log entry. That value is then highlighted and displayed in the Logstream, where it is indexed for full text search.                                |
 
-Your logs are collected and centralized into the [Log Explorer][23] view. You can also search, enrich, and alert on your logs.
+Your logs are collected and centralized into the [Log Explorer][27] view. You can also search, enrich, and alert on your logs.
 
 {{< img src="logs/log_explorer_view.png" alt="Log Explorer view" responsive="true" >}}
 
@@ -240,15 +241,19 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [9]: /integrations/nxlog
 [10]: /integrations/fluentd/#log-collection
 [11]: /integrations/logstash/#log-collection
-[12]: /logs/processing
-[13]: /logs/processing/parsing
-[14]: /logs/explorer/?tab=facets#setup
-[15]: /agent/docker/log
-[16]: /agent/autodiscovery/management
-[17]: /agent/autodiscovery/integrations
-[18]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
-[19]: /logs/log_collection/#how-to-get-the-most-of-your-application-logs
-[20]: /security/logs/#information-security
-[21]: /api/?lang=bash#send-logs-over-http
-[22]: /logs/explorer/patterns
-[23]: /logs/explore
+[12]: /agent/logs/?tab=tailexistingfiles#custom-log-collection
+[13]: /logs/log_collection/#application-log-collection
+[14]: /logs/log_collection/#container-log-collection
+[15]: /logs/log_collection/#cloud-provider-log-collection
+[16]: /logs/processing
+[17]: /logs/processing/parsing
+[18]: /logs/explorer/?tab=facets#setup
+[19]: /agent/docker/log
+[20]: /agent/autodiscovery/management
+[21]: /agent/autodiscovery/integrations
+[22]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
+[23]: /logs/log_collection/#how-to-get-the-most-of-your-application-logs
+[24]: /security/logs/#information-security
+[25]: /api/?lang=bash#send-logs-over-http
+[26]: /logs/explorer/patterns
+[27]: /logs/explore
