@@ -30,7 +30,7 @@ Estimated usage metrics are generally available for the following usage types:
 
 More usage types will be added in the near future.
 
-### Multi-Org Usage
+### Multi-Org usage
 
 For accounts with multiple organizations, you can roll up estimated usage from child organizations using the `from` field to monitor usage across your entire account.
 
