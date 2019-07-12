@@ -41,7 +41,9 @@ Here are a few examples for supported clients:
 Please Refer to your client documentation for additional details.
 
 {{< tabs >}}
-{{% tab "Go (datadog-go)" %}}
+{{% tab "Go" %}}
+Using Datadog's official Golang library [datadog-go](https://github.com/DataDog/datadog-go):
+
 ```go
 // Create a buffered dogstatsd client instance with 256 maximum buffered metrics
 client, err := statsd.New("127.0.0.1:8125",
@@ -54,7 +56,9 @@ client.Gauge("kafka.health", 1, []string{"env:production", "partition:1", "parti
 ```
 {{% /tab %}}
 
-{{% tab "Python (datadogpy)" %}}
+{{% tab "Python" %}}
+Using Datadog's official Python library [datadogpy](https://github.com/DataDog/datadogpy):
+
 ```python
 # Load the dogstats module.
 from datadog import DogStatsd
@@ -66,7 +70,9 @@ with DogStatsd(host="127.0.0.1", port=8125, max_buffer_size=25) as batch:
 ```
 {{% /tab %}}
 
-{{% tab "Ruby (dogstatsd-ruby)" %}}
+{{% tab "Ruby" %}}
+Using Datadog's official Ruby library [dogstatsd-ruby](https://github.com/DataDog/dogstatsd-ruby):
+
 ```ruby
 require 'datadog/statsd'
 
@@ -81,7 +87,9 @@ end
 ```
 {{% /tab %}}
 
-{{% tab "Java (java-dogstatsd-client)" %}}
+{{% tab "Java" %}}
+Using Datadog's official Java library [java-dogstatsd-client](https://github.com/DataDog/java-dogstatsd-client):
+
 ```java
 // Create a stats instance with a buffer size of 256
 private static final StatsDClient statsd = new NonBlockingStatsDClient("namespace", "127.0.0.1", 8125, 256);
@@ -95,7 +103,9 @@ public void foo() {
 ```
 {{% /tab %}}
 
-{{% tab "C# (dogstatsd-csharp-client)" %}}
+{{% tab "C#" %}}
+Using Datadog's official C# library [dogstatsd-csharp-client](https://github.com/DataDog/dogstatsd-csharp-client):
+
 ```csharp
 // Create the transport
 StatsdUDP udp = new StatsdUDP("127.0.0.1", 8125);
@@ -115,7 +125,9 @@ using (udp)
 ```
 {{% /tab %}}
 
-{{% tab "PHP (php-datadogstatsd)" %}}
+{{% tab "PHP" %}}
+Using Datadog's official PHP library [php-datadogstatsd](https://github.com/DataDog/php-datadogstatsd):
+
 ```php
 require __DIR__ . '/vendor/autoload.php';
 
