@@ -14,16 +14,16 @@ further_reading:
   text: "DogStatsD source code"
 ---
 
-DogStatsD works by sending your metrics from your application to the
+DogStatsD works by sending metrics generated from your application to the
 [agent](https://docs.datadoghq.com/agent/) over a transport protocol. This
 protocol can be either UDP (User Datagram Protocol) or UDS (Unix Domain Socket).
 
-When used to send a large volume of metrics to a single agent it's common to see
-the following symptoms:
+When used to send a large volume of metrics to a single agent if proper measures
+are not taken it is common to end up with the following symptoms:
 
 - High agent CPU usage
 - (UDP) Dropped datagrams / metrics
-- (UDS) DogStatsD client library returning errors
+- (UDS) DogStatsD client library returning lots of errors
 
 Most of the time those symptoms can be alleviated by tweaking some configuration
 options described below.
@@ -175,20 +175,27 @@ incoming metrics.
 
 ### Linux
 
-On most linux distribution the max size of is set to `212992` by default, or
-`208` KiB. This can be confirmed using the following commands:
+On most linux distribution the max size of is set to 212992 by default, or
+208 KiB. This can be confirmed using the following commands:
 
 ```bash
 $ sysctl net.core.rmem_max
 net.core.rmem_max = 212992
-$ sysctl net.core.rmem_default
-net.core.rmem_default = 212992
 ```
 
-### Windows
+To set the maximum size of the dogstatsd socket buffer to 25MiB:
 
-// TODO
+```bash
+$ sysctl -w net.core.rmem_max=26214400
+```
 
-## Over UDS (Unix Domain Socket) - Linux only
+Add the following to `/et/sysctl.conf` to make this change permanent:
+```
+net.core.rmem_max = 26214400
+```
 
-- Kernel
+Set the agent `dogstatsd_so_rcvbuf` confing option to the same number in `datadog.yaml`:
+```
+dogstatsd_so_rcvbuf: 26214400
+```
+
