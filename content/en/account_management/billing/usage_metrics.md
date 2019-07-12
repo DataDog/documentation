@@ -22,7 +22,7 @@ Estimated usage metrics are generally available for the following usage types:
 
 | Usage Type         | Metric                                                                                              |
 |--------------------|-----------------------------------------------------------------------------------------------------|
-| Infra. Hosts       | `datadog.estimated_usage.hosts`                                                                     |
+| Infrastructure Hosts       | `datadog.estimated_usage.hosts`                                                                     |
 | Containers         | `datadog.estimated_usage.containers`                                                                |
 | Custom Metrics     | `datadog.estimated_usage.metrics.custom`                                                            |
 
