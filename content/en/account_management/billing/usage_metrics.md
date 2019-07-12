@@ -16,7 +16,7 @@ Usage metrics are estimates of your current Datadog usage in near real-time. The
 
 {{< img src="account_management/billing/usage-metrics-01.png" alt="Dashboard Example" responsive="true">}}
 
-### Types of Usage
+### Types of usage
 
 Estimated usage metrics are generally available for the following usage types: 
 
