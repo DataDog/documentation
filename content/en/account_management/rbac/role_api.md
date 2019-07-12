@@ -213,7 +213,7 @@ The UUIDs for the permissions are as follows:
 | logs_write_pipelines         | 4fc43656-dd15-11e8-9308-f3e2bb5e31b4 | Update a subset of the log pipelines         |
 | logs_write_processors        | 505f4538-dd15-11e8-9308-47a4732f715f | Update the log processors in an index        |
 | logs_write_archives          | 505fd138-dd15-11e8-9308-afd2db62791e | Update the external archives configuration   |
-| logs_public_config_api       | xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx | Access the Logs Public Config API (r/w)      |
+| logs_public_config_api       | bd837a80-6cb2-11e9-8fc4-339b4b012214 | Access the Logs Public Config API (r/w)      |
 
 {{% /tab %}}
 {{< /tabs >}}
