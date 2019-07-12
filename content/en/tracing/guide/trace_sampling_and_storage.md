@@ -377,7 +377,7 @@ Individual traces are stored for up to 6 months. To determine how long a particu
 | 6 days                 |               10% |
 | 6 months               |                1% |
 
-**Note**: Datadog does not sample Synthetics traces, we store all of the received traces for 6 hours, and the stated percent of the traces over time.
+**Note**: Datadog does not sample Synthetics APM traces. All received traces are stored for 6 hours, and the stated percent of traces over time.
 
 That is to say, on a given day you would see in the UI:
 
