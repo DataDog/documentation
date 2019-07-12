@@ -662,7 +662,6 @@ gtag('config', '{{ .Site.Params.ga }}');
 function hasParentLi(el){
     var els = [];
     while (el) {
-        // console.log(el);
         if(el.classList){
 
             if(el.classList.contains('sidenav-nav')){
@@ -672,6 +671,9 @@ function hasParentLi(el){
             // Add open class to li if the li has a child ul
             if(el.closest('li') && el.closest('li').querySelectorAll('ul')){
                 el.closest('li').classList.add('open');
+            }
+            if (el.closest('.sub-menu')) {
+                el.closest('.sub-menu').previousElementSibling.classList.add('active');
             }
         }
         
@@ -684,6 +686,11 @@ function hasParentLi(el){
 
 function getPathElement(){
     var path = window.location.pathname;
+    var activeMenus = document.querySelectorAll('.side .sidenav-nav .active');
+
+    for(i = 0; i < activeMenus.length; i++){
+        activeMenus[i].classList.remove('active');
+    }
 
     path = path.replace(/^\//, '');
     path = path.replace(/\/$/, '');
@@ -708,9 +715,9 @@ window.onload = function(){
 
     var show = function(event) {
         event.stopPropagation();
-        console.log('clicked on ');
-        console.log(event.target);
-        // Remove any existing open and active classes        
+        // console.log('clicked on ');
+        // console.log(event.target);
+        // Remove any existing open and active classes
         var newUrl;
         
         // If what is clicked is not the actual li tag, ie the img icon span
@@ -744,9 +751,9 @@ window.onload = function(){
         } else {
             
             loadPage(newUrl);
-            updateSidebar(event);
             event.preventDefault();
             history.pushState(null /*stateObj*/, "" /*title*/, newUrl);
+            updateSidebar(event);
         }
     }
     for (var i = elts.length - 1; i >= 0; --i) {
@@ -757,8 +764,14 @@ window.onload = function(){
 function updateSidebar(event){
 
     var activeMenus = document.querySelectorAll('.side .sidenav-nav .active');
-    for(i=0;i<activeMenus.length;i++){
+    var openMenus = document.querySelectorAll('.side .sidenav-nav .open');
+
+    for(i = 0; i < activeMenus.length; i++){
         activeMenus[i].classList.remove('active');
+    }
+
+    for(i = 0; i < openMenus.length; i++){
+        openMenus[i].classList.remove('open');
     }
 
     getPathElement();
@@ -772,7 +785,7 @@ function updateSidebar(event){
         }
     }else{
         event.target.closest('li').querySelector('a').classList.add('active');
-
+        
         //If the target which is clicked has an active element within the same ul menu don't close the open class
         var isSameMenu = event.target.closest('.open').querySelector('.active');
 
@@ -783,7 +796,7 @@ function updateSidebar(event){
             for(i=0;i<openMenus.length;i++){
                 openMenus[i].classList.remove('open');
             }
-                            
+                                     
         }
 
         if(event.target.closest('li').querySelector('ul')){
