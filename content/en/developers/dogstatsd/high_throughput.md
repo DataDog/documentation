@@ -43,6 +43,7 @@ Please Refer to your client documentation for additional details.
 {{< tabs >}}
 {{% tab "Go (datadog-go)" %}}
 ```go
+// Create a buffered dogstatsd client instance with 256 maximum buffered metrics
 client, err := statsd.New("127.0.0.1:8125",
     statsd.Buffered(), // enable buffering
     statsd.WithMaxMessagesPerPayload(256), // sets the maximum number of messages in a single datagram
@@ -132,26 +133,31 @@ $client->increment('your.data.point', .5);
 
 ### Sample your metrics
 
-It is possible to reduce the volume of data sent by sending only 1 in `x` metrics.
-The agent will then take that into account and adjust the value so that it still
-report the right value to the datadog web application.
+It is possible to reduce the traffic from your DogStatsD client and the Agent by setting a sample
+rate value for your client. A sample rate of 0.5 cuts the number of UDP packets sent in half.
 
-A more in-depth explaination is available [here](https://docs.datadoghq.com/developers/faq/dog-statsd-sample-rate-parameter-explained/).
+It’s not useful in all cases, but can be interesting if you sample many metrics, and your DogStatsD
+client is not on the same host as the DogStatsD server. This is a trade off: you decrease traffic
+but slightly lose in precision/granularity.
+
+A more in-depth explaination with code examples is available
+[here](https://docs.datadoghq.com/developers/faq/dog-statsd-sample-rate-parameter-explained/).
 
 ### Use DogStatsD over UDS (Unix Domain Socket)
 
 UDS is an inter-process communication protocol that can
 be [used to transport dogstatsd payloads](https://docs.datadoghq.com/developers/dogstatsd/unix_socket/).
-It has very little overhead when compared to UDP and will allow lowering the
+It has very little overhead when compared to UDP and will lower the
 general overhead of dogstatsd on your system.
 
 ## Operating System kernel buffers
 
-Most OSs will add incoming UDP datagrams containing your metrics to a buffer
-with a maximum size. Once this size is reached, datagrams containing your metrics
-will start getting dropped.
+Most OSs will add incoming UDP and UDS datagrams containing your metrics to a
+buffer with a maximum size. Once this size is reached, datagrams containing your
+metrics will start getting dropped.
 
-Adjusting those values will give the agent more time to handle
+It is possible to adjust those values to give the agent more time to process
+incoming metrics.
 
 ### Over UDP (User Datagram Protocol)
 
