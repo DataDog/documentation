@@ -2,8 +2,6 @@
 title: インテグレーション
 kind: documentation
 disable_toc: true
-aliases:
-- /integrations/faq/list-of-api-source-attribute-value
 description: すべてのシステム、アプリケーション、およびサービスからデータを収集
 ---
 

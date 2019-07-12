@@ -2,8 +2,6 @@
 title: Intégrations
 kind: documentation
 disable_toc: true
-aliases:
-- /integrations/faq/list-of-api-source-attribute-value
 description: Rassembler des données de tous vos systèmes, toutes vos applications et tous vos services
 ---
 
