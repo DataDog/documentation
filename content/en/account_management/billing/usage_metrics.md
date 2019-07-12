@@ -28,7 +28,6 @@ Estimated usage metrics are generally available for the following usage types:
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" responsive="true">}}
 
-More usage types will be added in the near future.
 
 ### Multi-Org usage
 
