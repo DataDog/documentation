@@ -522,6 +522,8 @@ main:
             url: "developers/dogstatsd/datagram_shell"
           - name: "Unix Domain Socket usage"
             url: "developers/dogstatsd/unix_socket"
+          - name: "Sending large volumes of metrics"
+            url: "developers/dogstatsd/high_throughput"
       - name: "Metrics"
         url: "developers/metrics/"
         children:
