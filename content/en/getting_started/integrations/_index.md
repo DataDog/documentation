@@ -1,6 +1,8 @@
 ---
 title: Introduction to Integrations
 kind: documentation
+aliases:
+- /getting_started/integrations
 further_reading:
 - link: "https://learn.datadoghq.com/"
   tag: "Learning Center"
