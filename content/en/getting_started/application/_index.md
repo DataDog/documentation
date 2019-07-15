@@ -1,5 +1,5 @@
 ---
-title: Getting started over Datadog application
+title: Getting started with the Datadog application
 kind: documentation
 further_reading:
 - link: "https://learn.datadoghq.com/course/view.php?id=2"
