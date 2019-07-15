@@ -88,7 +88,7 @@ main:
       - name: Proxy
         url: agent/proxy
       - name: Upgrade vers Agent v6
-        url: agent/faq/upgrade-to-agent-v6
+        url: agent/guide/upgrade-to-agent-v6
       - name: Checks Prometheus
         url: agent/prometheus
       - name: Dépannage

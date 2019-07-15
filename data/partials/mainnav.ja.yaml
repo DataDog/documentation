@@ -90,7 +90,7 @@ main:
       - name: プロキシ
         url: agent/proxy
       - name: Agent v6 へのアップグレード
-        url: agent/faq/upgrade-to-agent-v6
+        url: agent/guide/upgrade-to-agent-v6
       - name: トラブルシューティング
         url: agent/troubleshooting/
         children:

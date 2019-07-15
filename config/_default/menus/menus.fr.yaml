@@ -212,7 +212,7 @@ main:
     weight: 430
   ## Upgrade to Agent v6
   - name: "Upgrade to Agent v6"
-    url: "agent/faq/upgrade-to-agent-v6"
+    url: "agent/guide/upgrade-to-agent-v6"
     parent: "agent"
     weight: 440
   # Troubleshooting
