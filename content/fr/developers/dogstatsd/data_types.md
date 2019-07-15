@@ -170,7 +170,7 @@ L'instrumentation ci-dessus génère les métriques suivantes :
 
 | Métriques                             | Description                             |
 |------------------------------------|-----------------------------------------|
-| `database.query.time.count`        | Le nombre d’échantillonnages de cette métrique |
+| `database.query.time.count`        | Le nombre d'échantillonnages de cette métrique |
 | `database.query.time.avg`          | La durée moyenne des valeurs échantillonnées      |
 | `database.query.time.median`       | La valeur échantillonnée médiane                    |
 | `database.query.time.max`          | La valeur échantillonnée maximale                   |

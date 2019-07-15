@@ -12,7 +12,7 @@ Recherchez et filtrez les informations des groupes de vos monitors.
 
 * **`query`** [*facultatif*] :
 
-    Après avoir saisi une requête de recherche dans votre [page Manager Monitor][1], utilisez la valeur du paramètre de requête dans l’URL de la page comme valeur de ce paramètre. Consultez la page de [documentation relative à la gestion des monitors][2] pour en savoir plus.
+    Après avoir saisi une requête de recherche dans votre [page Manager Monitor][1], utilisez la valeur du paramètre de requête dans l'URL de la page comme valeur de ce paramètre. Consultez la page de [documentation relative à la gestion des monitors][2] pour en savoir plus.
 
 * **`page`** [*facultatif*, *défaut*=**0**] :
 

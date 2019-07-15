@@ -6,15 +6,15 @@ kind: documentation
 
 ## Paramètres du plan
 
-Mettez à niveau votre compte ou passez à une version antérieure depuis l’onglet Plan sur la page Organization Account Settings.
+Mettez à niveau votre compte ou passez à une version antérieure depuis l'onglet Plan sur la page Organization Account Settings.
 
-**Remarque** : contactez votre chargé de compte ou envoyez un e-mail à l’adresse [success@datadoghq.com][3] pour ajouter ou supprimer des fonctionnalités payantes qui ne sont pas comprises dans les plans standard.
+**Remarque** : contactez votre chargé de compte ou envoyez un e-mail à l'adresse [success@datadoghq.com][3] pour ajouter ou supprimer des fonctionnalités payantes qui ne sont pas comprises dans les plans standard.
 
 ## Rapports d'utilisation
 
 Consultez l'utilisation horaire de votre compte pour tous les paramètres facturables, ainsi que les 500 principales métriques custom soumises. Si votre organisation est l'organisation parente d'un [compte multi-org][4], vous pourrez également consulter l'utilisation des comptes d'organisation enfants. Les comptes individuels des organisations enfants sont isolés et ne peuvent afficher que leurs propres données d'utilisation et leurs propres métriques custom.
 
-**Remarque** : comptez jusqu’à 72 heures pour la mise à jour de cette section.
+**Remarque** : comptez jusqu'à 72 heures pour la mise à jour de cette section.
 
 D'autres rapports d'utilisation détaillés peuvent également être créés [sur demande][3] auprès de votre chargé de compte.
 
