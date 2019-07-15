@@ -701,13 +701,16 @@ function getPathElement(){
     var aPath = document.querySelector('.side [data-path="'+path+'"]');
 
     // exception for agent/docker path, given that there are 2 anchors with this element, and clicking both should open agent/docker page.
-    if (path === 'agent/docker') {
-        aPath = document.querySelectorAll('.side [data-path="agent/docker"]')[1];
+    if (path.includes('agent/docker')) {
+        aPath = document.querySelectorAll('.side [data-path*="agent/docker"]')[1];
     }
 
     // exception for agent/guide path, there's no 3rd level for specific agent/guide/**
     if (path.includes('agent/guide')) {
-        aPath = document.querySelector('.side [data-path="agent/guide"]');
+        aPath = document.querySelector('.side [data-path*="agent/guide"]');
+    }
+    if (path.includes('tracing/guide')) {
+        aPath = document.querySelector('.side [data-path*="tracing/guide"]');
     }
 
 
