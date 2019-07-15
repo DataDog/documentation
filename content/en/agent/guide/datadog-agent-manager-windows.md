@@ -13,9 +13,9 @@ After the Agent is [installed][1] on your Windows host, use the Datadog Agent Ma
 ### Start the Datadog Agent Manager
 From the Windows start menu:
 
-* Click on the Datadog folder
-* Right click on Datadog Agent Manager
-* Choose `Run as Administrator`
+* Click on the Datadog folder.
+* Right click on Datadog Agent Manager.
+* Choose `Run as Administrator`.
 
 From an elevated Powershell prompt:
 ```powershell
@@ -33,16 +33,16 @@ The general status page displays by default when launching the Datadog Agent Man
 
 | Section     | Description                                                                    |
 |-------------|--------------------------------------------------------------------------------|
-| Agent Info  | Provides information on the Agent including version, log level, and file paths |
-| System Info | Includes information on system time, ntp offset, Go, and Python versions       |
-| Host Info   | Provides information on the host including OS, platform, procs, and uptime     |
-| Hostnames   | Displays the hostnames and host tags found by the Agent                        |
-| JMX Status  | A list of JMX checks with their status                                         |
-| Forwarder   | Information on the Agent's forwarder including the status of your API key      |
-| Endpoints   | Endpoints in use by the Agent                                                  |
-| Logs Agent  | Information on the Logs Agent (if enabled)                                     |
-| Aggregator  | Information on the Agent's data aggregator                                     |
-| DogStatsD   | Stats on data sent with DogStatsD                                              |
+| Agent Info  | Provides information on the Agent including version, log level, and file paths. |
+| System Info | Includes information on system time, ntp offset, Go, and Python versions.       |
+| Host Info   | Provides information on the host including OS, platform, procs, and uptime.     |
+| Hostnames   | Displays the hostnames and host tags found by the Agent.                        |
+| JMX Status  | A list of JMX checks with their status.                                         |
+| Forwarder   | Information on the Agent's forwarder including the status of your API key.      |
+| Endpoints   | Endpoints in use by the Agent.                                                 |
+| Logs Agent  | Information on the Logs Agent (if enabled).                                     |
+| Aggregator  | Information on the Agent's data aggregator.                                     |
+| DogStatsD   | Statistics on data sent with DogStatsD.                                           |
 
 #### Collector
 The collector status page displays details on the Agent's running checks, for example:
