@@ -791,6 +791,11 @@ window.onload = function(){
     }
 }
 
+window.onpopstate = function (event) {
+    // do stuff here
+    getPathElement();
+  }
+
 function updateSidebar(event){
 
     closeNav();
