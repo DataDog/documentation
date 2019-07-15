@@ -42,7 +42,7 @@ kind: faq
 |Amazon Elb|ELB|
 |Amazon Emr|EMR|
 |Amazon Es|ES|
-|Amazon Event Hub|AWSEVENTHUB|
+|Amazon Eventbridge|AWSEVENTHUB|
 |Amazon Firehose|FIREHOSE|
 |Amazon Gamelift|GAMELIFT|
 |Amazon Glue|GLUE|
@@ -84,23 +84,50 @@ kind: faq
 |Ansible|ANSIBLE|
 |Apache|APACHE|
 |Api|API|
+|Azure Analysis Services|AZUREANALYSISSERVICES|
+|Azure Api Management|AZUREAPIMANAGEMENT|
+|Azure App Service Environment|AZUREAPPSERVICEENVIRONMENT|
+|Azure App Service Plan|AZUREAPPSERVICEPLAN|
 |Azure App Services|AZUREAPPSERVICES|
+|Azure Application Gateway|AZUREAPPLICATIONGATEWAY|
+|Azure Automation|AZUREAUTOMATION|
 |Azure Batch|AZUREBATCH|
 |Azure Blob Storage|AZUREBLOBSTORAGE|
+|Azure Cognitive Services|AZURECOGNITIVESERVICES|
+|Azure Container Instances|AZURECONTAINERINSTANCES|
+|Azure Container Service|AZURECONTAINERSERVICE|
+|Azure Cosmosdb|AZURECOSMOSDB|
+|Azure Customer Insights|AZURECUSTOMERINSIGHTS|
+|Azure Data Factory|AZUREDATAFACTORY|
+|Azure Data Lake Analytics|AZUREDATALAKEANALYTICS|
+|Azure Data Lake Store|AZUREDATALAKESTORE|
+|Azure Db For Mariadb|AZUREDBFORMARIADB|
 |Azure Db For Mysql|AZUREDBFORMYSQL|
 |Azure Db For Postgresql|AZUREDBFORPOSTGRESQL|
+|Azure Event Grid|AZUREEVENTGRID|
 |Azure Event Hub|AZUREEVENTHUB|
+|Azure Express Route|AZUREEXPRESSROUTE|
+|Azure File Storage|AZUREFILESTORAGE|
+|Azure Hd Insight|AZUREHDINSIGHT|
 |Azure Iot Hub|AZUREIOTHUB|
+|Azure Key Vault|AZUREKEYVAULT|
+|Azure Load Balancer|AZURELOADBALANCER|
 |Azure Logic App|AZURELOGICAPP|
+|Azure Network Interface|AZURENETWORKINTERFACE|
+|Azure Notification Hubs|AZURENOTIFICATIONHUBS|
+|Azure Public Ip Address|AZUREPUBLICIPADDRESS|
 |Azure Queue Storage|AZUREQUEUESTORAGE|
 |Azure Redis Cache|AZUREREDISCACHE|
+|Azure Relay|AZURERELAY|
+|Azure Search|AZURESEARCH|
 |Azure Service Bus|AZURESERVICEBUS|
 |Azure Sql Database|AZURESQLDATABASE|
 |Azure Sql Elastic Pool|AZURESQLELASTICPOOL|
 |Azure Storage|AZURESTORAGE|
+|Azure Stream Analytics|AZURESTREAMANALYTICS|
 |Azure Table Storage|AZURETABLESTORAGE|
-|Azure Vm|AZUREVM|
 |Azure Vm Scale Set|AZUREVMSCALESET|
+|Azure Vm|AZUREVM|
 |Azure|AZURE|
 |Bitbucket|BITBUCKET|
 |Btrfs|BTRFS|
@@ -153,7 +180,7 @@ kind: faq
 |Google Cloud Datastore|GCPDATASTORE|
 |Google Cloud Filestore|GCPFILESTORE|
 |Google Cloud Firebase|GCPFIREBASE|
-|Google Cloud Firestore|GCPFILESTORE|
+|Google Cloud Firestore|GCPFIRESTORE|
 |Google Cloud Functions|GCPCLOUDFUNCTIONS|
 |Google Cloud Interconnect|GCPINTERCONNECT|
 |Google Cloud Iot|GCPIOT|
@@ -236,7 +263,6 @@ kind: faq
 |Riakcs|RIAKCS|
 |Rollbar|ROLLBAR|
 |Ruby|RUBY|
-|Segment|SEGMENT|
 |Sentry|SENTRY|
 |Servicenow|SERVICENOW|
 |Sketch|SKETCH|
@@ -274,4 +300,3 @@ kind: faq
 |Yarn|YARN|
 |Zendesk|ZENDESK|
 |Zookeeper|ZOOKEEPER|
-
