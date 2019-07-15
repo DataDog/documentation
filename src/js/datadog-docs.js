@@ -660,6 +660,7 @@ gtag('config', '{{ .Site.Params.ga }}');
 
 // Get sidebar
 function hasParentLi(el){
+    // var aPath = document.querySelectorAll('.side [data-path="'+path+'"]');
     var els = [];
     while (el) {
         if(el.classList){
@@ -675,6 +676,9 @@ function hasParentLi(el){
             if (el.closest('.sub-menu')) {
                 el.closest('.sub-menu').previousElementSibling.classList.add('active');
             }
+
+
+            // handle exceptions where there are two menu items with same url but different locations in nav (agent/docker)
         }
         
         els.unshift(el);
@@ -687,6 +691,7 @@ function hasParentLi(el){
 function getPathElement(){
     var path = window.location.pathname;
     var activeMenus = document.querySelectorAll('.side .sidenav-nav .active');
+    
 
     for(i = 0; i < activeMenus.length; i++){
         activeMenus[i].classList.remove('active');
@@ -694,7 +699,19 @@ function getPathElement(){
 
     path = path.replace(/^\//, '');
     path = path.replace(/\/$/, '');
+    
     var aPath = document.querySelector('.side [data-path="'+path+'"]');
+
+    // exception for agent/docker path, given that there are 2 anchors with this element, and clicking both should open agent/docker page.
+    if (path === 'agent/docker') {
+        aPath = document.querySelectorAll('.side [data-path="agent/docker"]')[1];
+    }
+
+    // exception for agent/guide path, there's no 3rd level for specific agent/guide/**
+    if (path.includes('agent/guide')) {
+        aPath = document.querySelector('.side [data-path="agent/guide"]');
+    }
+
 
     if(aPath){
         aPath.classList.add('active');
@@ -706,6 +723,19 @@ function getPathElement(){
         var maPath = document.querySelector('header [data-path="'+path+'"]');
         maPath.classList.add('active');
         hasParentLi(maPath);
+    }
+}
+
+function closeNav(){
+    var activeMenus = document.querySelectorAll('.side .sidenav-nav .active');
+    var openMenus = document.querySelectorAll('.side .sidenav-nav .open');
+
+    for(i = 0; i < activeMenus.length; i++){
+        activeMenus[i].classList.remove('active');
+    }
+
+    for(i = 0; i < openMenus.length; i++){
+        openMenus[i].classList.remove('open');
     }
 }
 
@@ -763,16 +793,7 @@ window.onload = function(){
 
 function updateSidebar(event){
 
-    var activeMenus = document.querySelectorAll('.side .sidenav-nav .active');
-    var openMenus = document.querySelectorAll('.side .sidenav-nav .open');
-
-    for(i = 0; i < activeMenus.length; i++){
-        activeMenus[i].classList.remove('active');
-    }
-
-    for(i = 0; i < openMenus.length; i++){
-        openMenus[i].classList.remove('open');
-    }
+    closeNav();
 
     getPathElement();
 
@@ -784,20 +805,23 @@ function updateSidebar(event){
             event.target.closest('li').classList.add('open');
         }
     }else{
-        event.target.closest('li').querySelector('a').classList.add('active');
+        if(event.target.closest('li').querySelector('a')) {
+            event.target.closest('li').querySelector('a').classList.add('active');
+        }
+        
         
         //If the target which is clicked has an active element within the same ul menu don't close the open class
-        var isSameMenu = event.target.closest('.open').querySelector('.active');
+        // var isSameMenu = event.target.closest('.open').querySelector('.active');
 
-        if(!isSameMenu){
-            // Get ope navs
-            var openMenus = document.querySelectorAll('.side .sidenav-nav .open');
-            // Remove open classes
-            for(i=0;i<openMenus.length;i++){
-                openMenus[i].classList.remove('open');
-            }
+        // if(!isSameMenu){
+        //     // Get ope navs
+        //     var openMenus = document.querySelectorAll('.side .sidenav-nav .open');
+        //     // Remove open classes
+        //     for(i=0;i<openMenus.length;i++){
+        //         openMenus[i].classList.remove('open');
+        //     }
                                      
-        }
+        // }
 
         if(event.target.closest('li').querySelector('ul')){
             event.target.closest('li').classList.add('open');
