@@ -6,7 +6,7 @@ external_redirect: /api/#get-results
 ---
 
 ##### Signature
-`GET /api/v1/synthetics/tests/${test_id}/results`
+`GET /v1/synthetics/tests/<TEST_ID>/results`
 
 ##### Example Request
 

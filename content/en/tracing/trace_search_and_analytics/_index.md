@@ -34,7 +34,7 @@ Trace Search & Analytics is available starting in version 0.25.0 of the Java tra
 Trace Search & Analytics is available starting in version 0.19.0 of the Python tracing client. Enable Trace Search & Analytics globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
 * Tracer Configuration: `ddtrace.config.analytics_enabled = True`
-* Environment Variable: `DD_ANALYTICS_ENABLED=true`
+* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
  After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
 

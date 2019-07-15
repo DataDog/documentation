@@ -103,28 +103,28 @@ Keep in mind when using conditional tags that they must have an open (example: `
 
 The conditional variables available are:
 
-| Conditional Variable       | Description                                               |
-|----------------------------|-----------------------------------------------------------|
-| `{{#is_alert}}`            | Show when monitor alerts                                  |
-| `{{^is_alert}}`            | Show unless monitor alerts                                |
-| `{{#is_match}}`            | Show when the context matches a string                    |
-| `{{^is_match}}`            | Show unless the context matches a string                  |
-| `{{#is_exact_match}}`      | Show when the context matches a string exactly            |
-| `{{^is_exact_match}}`      | Show unless the context matches a string exactly          |
-| `{{#is_no_data}}`          | Show when monitor notifies on missing data                |
-| `{{^is_no_data}}`          | Show unless monitor notifies on missing data              |
-| `{{#is_warning}}`          | Show when monitor warns                                   |
-| `{{^is_warning}}`          | Show unless monitor warns                                 |
-| `{{#is_recovery}}`         | Show when monitor recovers from either WARNING or ALERT   |
-| `{{^is_recovery}}`         | Show unless monitor recovers from either WARNING or ALERT |
-| `{{#is_warning_recovery}}` | Show when monitor recovers from a warning to OK           |
-| `{{^is_warning_recovery}}` | Show unless monitor recovers from a warning to OK         |
-| `{{#is_alert_recovery}}`   | Show when monitor recovers from an alert to OK            |
-| `{{^is_alert_recovery}}`   | Show unless monitor recovers from an alert to OK          |
-| `{{#is_alert_to_warning}}` | Show when monitor transitions from alert to warning       |
-| `{{^is_alert_to_warning}}` | Show unless monitor transitions from alert to warning     |
-| `{{#is_no_data_recovery}}` | Show when monitor recovers from a no data                 |
-| `{{^is_no_data_recovery}}` | Show unless monitor recovers from a no data               |
+| Conditional Variable       | Description                                                         |
+|----------------------------|---------------------------------------------------------------------|
+| `{{#is_alert}}`            | Show when monitor alerts                                            |
+| `{{^is_alert}}`            | Show unless monitor alerts                                          |
+| `{{#is_match}}`            | Show when the context matches a string                              |
+| `{{^is_match}}`            | Show unless the context matches a string                            |
+| `{{#is_exact_match}}`      | Show when the context matches a string exactly                      |
+| `{{^is_exact_match}}`      | Show unless the context matches a string exactly                    |
+| `{{#is_no_data}}`          | Show when monitor notifies on missing data                          |
+| `{{^is_no_data}}`          | Show unless monitor notifies on missing data                        |
+| `{{#is_warning}}`          | Show when monitor warns                                             |
+| `{{^is_warning}}`          | Show unless monitor warns                                           |
+| `{{#is_recovery}}`         | Show when monitor recovers from either WARNING, ALERT, or NO DATA   |
+| `{{^is_recovery}}`         | Show unless monitor recovers from either WARNING, ALERT, or NO DATA |
+| `{{#is_warning_recovery}}` | Show when monitor recovers from a WARNING to OK                     |
+| `{{^is_warning_recovery}}` | Show unless monitor recovers from a WARNING to OK                   |
+| `{{#is_alert_recovery}}`   | Show when monitor recovers from an ALERT to OK                      |
+| `{{^is_alert_recovery}}`   | Show unless monitor recovers from an ALERT to OK                    |
+| `{{#is_alert_to_warning}}` | Show when monitor transitions from ALERT to WARNING                 |
+| `{{^is_alert_to_warning}}` | Show unless monitor transitions from ALERT to WARNING               |
+| `{{#is_no_data_recovery}}` | Show when monitor recovers from NO DATA                             |
+| `{{^is_no_data_recovery}}` | Show unless monitor recovers from NO DATA                           |
 
 These can also be seen in the "Use message template variables" help box in
 Step 3 of the monitor editor.

@@ -112,10 +112,17 @@ main:
             url: "agent/autodiscovery/management"
           - name: "Troubleshooting"
             url: "agent/autodiscovery/troubleshooting"
-          - name: "Cluster Checks"
-            url: "agent/autodiscovery/clusterchecks"
           - name: "Endpoints Checks"
             url: "agent/autodiscovery/endpointschecks"
+          - name: "Cluster Checks"
+            url: "agent/autodiscovery/clusterchecks"
+      - name: "Log Collection "
+        url: "agent/logs"
+        children:
+          - name: "Advanced Log Collection"
+            url: "agent/logs/advanced_log_collection"
+          - name: "Proxy"
+            url: "agent/logs/proxy"
       - name: "Proxy"
         url: "agent/proxy"
       ## Upgrade to Agent v6
@@ -204,8 +211,8 @@ main:
             url: "graphing/infrastructure/livecontainers/"
           - name: "Live Processes"
             url: "graphing/infrastructure/process/"
-          - name: "Cloud Functions"
-            url: "graphing/infrastructure/cloudfunctions/"
+          - name: "Serverless"
+            url: "graphing/infrastructure/serverless_functions/"
       # GRAPHING - Functions
       - name: "From the query to the graph "
         url: "graphing/functions/"
@@ -481,9 +488,9 @@ main:
       # LOGS - Archives
 
       - name: "Archives"
-        url: "logs/archives/s3"
+        url: "logs/archives"
         children:
-          - name: "AWS S3"
+          - name: "Archive to AWS S3"
             url: "logs/archives/s3"
 
       #- #  name: "FAQ"

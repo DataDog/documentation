@@ -115,69 +115,6 @@ Do not forget to [restart the Agent][1] for the new settings to take effect.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Proxy for Logs
-
-Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that is used for log collection.
-
-Logs make use of a different set of proxy settings than other data types forwarded by the Datadog Agent. This is due to the fact that logs are transported over TCP/SSL, while other features submit data via HTTPS.
-
-{{< tabs >}}
-{{% tab "TCP" %}}
-
-If you use a proxy for TCP transmission, configure the Datadog Agent to send logs to your proxy through TCP thanks to the following parameters in the `datadog.yaml` configuration file:
-
-```
-logs_config:
-  logs_dd_url: <PROXY_ENDPOINT>:<PROXY_PORT>
-  logs_no_ssl: true
-```
-
-Those parameters can also be set with the following environment variables:
-
-* `DD_LOGS_CONFIG_LOGS_DD_URL`
-* `DD_LOGS_CONFIG_LOGS_NO_SSL`
-
-**Important note**: The parameter `logs_no_ssl` is required to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`agent-intake.logs.datadoghq.com` or `agent-intake.logs.datadoghq.eu`) and your proxy hostname. You should use a SSL encrypted connection between your proxy and Datadog intake endpoint though.
-
-* Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs to:
-    * For `app.datadoghq.com`: `agent-intake.logs.datadoghq.com` on port `10516` and activate SSL encryption.
-    * For `app.datadoghq.eu`: `agent-intake.logs.datadoghq.eu` on port `443` and activate SSL encryption.
-
-* Use the public key for TLS encryption for the SSL encryption:
-    * For [app.datadoghq.com][1] 
-    * For [app.datadoghq.eu][2]
-
-    On some systems, the full certificate chain may be required. If so, use this public key instead:
-
-    * For [app.datadoghq.com][3]
-    * For [app.datadoghq.eu][4]
-
-
-[1]: /resources/crt/intake.logs.datadoghq.com.crt
-[2]: /resources/crt/intake.logs.datadoghq.eu.crt
-[3]: /resources/crt/FULL_intake.logs.datadoghq.com.crt
-[4]: /resources/crt/FULL_intake.logs.datadoghq.eu.crt
-{{% /tab %}}
-{{% tab "SOCKS5" %}}
-
-To send your logs to your Datadog account via a SOCKS5 proxy server use the following settings in your `datadog.yaml` configuration file:
-
-```
-logs_config:
-  socks5_proxy_address: <MY_SOCKS5_PROXY_URL>:<MY_SOCKS5_PROXY_PORT>
-```
-
-This parameter can also be set with the following environment variable:
-
-* `DD_LOGS_CONFIG_SOCKS5_PROXY_ADDRESS`
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Port 443
-
-The parameter `use_port_443` does not affect logs sent through a proxy. You need to configure the proxy itself to forward logs to `agent-443-intake.logs.datadoghq.com:443`.
-
 ## Using HAProxy as a Proxy
 
 [HAProxy][1] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pools servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity.
@@ -242,7 +179,7 @@ frontend processes-forwarder
     bind *:3836
     mode tcp
     default_backend datadog-processes
-    
+
 # This declares the endpoint where your Agents connects for
 # sending Logs (e.g the value of "logs.config.logs_dd_url")
 frontend logs_frontend
@@ -333,7 +270,7 @@ frontend processes-forwarder
     bind *:3836
     mode tcp
     default_backend datadog-processes
-    
+
 # This declares the endpoint where your Agents connects for
 # sending Logs (e.g the value of "logs.config.logs_dd_url")
 frontend logs_frontend
@@ -361,7 +298,7 @@ backend datadog-processes
     mode tcp
     option tcplog
     server mothership process.datadoghq.eu:443 check port 80
-    
+
 backend datadog-logs
     balance roundrobin
     mode tcp
@@ -474,7 +411,7 @@ This example `nginx.conf` can be used to proxy logs to the Datadog intake. It do
 user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log;
-pid /run/nginx.pid; 
+pid /run/nginx.pid;
 
 include /usr/share/nginx/modules/*.conf;
 events {
@@ -497,7 +434,7 @@ stream {
 user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log;
-pid /run/nginx.pid; 
+pid /run/nginx.pid;
 
 include /usr/share/nginx/modules/*.conf;
 events {

@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /ja/getting_started/tagging/using_tags/
 further_reading:
-  - link: タグ付け
+  - link: /tagging
     tag: Documentation
     text: タグの概要
   - link: tagging/assigning_tags
@@ -22,7 +22,7 @@ further_reading:
 
 {{< img src="tagging/using_tags/eventtags.png" alt="Events List and Tags" responsive="true" style="width:80%;">}}
 
-## ダッシュボード  
+## ダッシュボード
 
 {{< tabs >}}
 {{% tab "Assignment" %}}
@@ -84,7 +84,7 @@ further_reading:
 {{< img src="tagging/using_tags/containermaptags.png" alt="Container Map Tags" responsive="true" style="width:80%;">}}
 {{% /tab %}}
 
-{{% tab "Infrastructure List" %}} 
+{{% tab "Infrastructure List" %}}
 
 以下は、インフラストラクチャーリストのページのテキストボックスによる絞り込みまたはグループ化です。
 
@@ -238,7 +238,7 @@ further_reading:
 - [モニターのダウンタイムのスケジューリング][19]
 - [イベントストリームのクエリ][20]
 - [ホストの検索][21]
-- [AWS][23] と [Google Cloud][24] の[インテグレーション][22]
+- [AWS][22] と [Google Cloud][23] の[インテグレーション][24]
 - [時系列ポイントのクエリ][25]
 - [すべてのモニターの詳細を取得][26]
 - [モニターのミュート][27]
@@ -272,9 +272,9 @@ further_reading:
 [19]: /ja/api/?lang=python#schedule-monitor-downtime
 [20]: /ja/api/?lang=python#query-the-event-stream
 [21]: /ja/api/?lang=python#search-hosts
-[22]: /ja/api/?lang=python#integrations
-[23]: /ja/api/?lang=python#aws
-[24]: /ja/api/?lang=python#google-cloud-platform
+[22]: /ja/api/?lang=python#aws
+[23]: /ja/api/?lang=python#google-cloud-platform
+[24]: /ja/api/?lang=python#integrations
 [25]: /ja/api/?lang=python#query-timeseries-points
 [26]: /ja/api/?lang=python#get-all-monitor-details
 [27]: /ja/api/?lang=python#mute-a-monitor

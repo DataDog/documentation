@@ -18,7 +18,7 @@ public_title: Intégration Datadog/Rollbar
 short_description: 'Envoyez les exceptions, erreurs et déploiements de code vers votre flux d''événements Datadog. stream.'
 version: '1.0'
 ---
-{{< img src="integrations/rollbar/rollbar_error.png" alt="événement d’erreur Rollbar" responsive="true" popup="true">}}
+{{< img src="integrations/rollbar/rollbar_error.png" alt="événement d'erreur Rollbar" responsive="true" popup="true">}}
 
 ## Présentation
 
@@ -43,7 +43,7 @@ La configuration s'effectue par projet dans Rollbar.
 
 * Dans Rollbar, accédez à la page Notification settings pour un projet : **Dashboard** → **Settings** → **Notifications** → **Datadog**.
 
-* Sur Datadog, [accédez à la page des API][1] pour obtenir votre clé d’API (copiez-la dans votre presse-papiers) : **Integrations** → **APIs**
+* Sur Datadog, [accédez à la page des API][1] pour obtenir votre clé d'API (copiez-la dans votre presse-papiers) : **Integrations** → **APIs**
 
 * Ajoutez votre clé d'API Datadog dans Rollbar.
 
