@@ -456,6 +456,8 @@ main:
             url: "logs/processing/parsing/"
           - name: "Naming Convention"
             url: "logs/processing/attributes_naming_convention/"
+          - name: "Generate Metrics from Ingested Logs"
+            url: "logs/processing/logs_to_metric/"
 
       # LOGS - Live tail
       - name: "Live Tail"
