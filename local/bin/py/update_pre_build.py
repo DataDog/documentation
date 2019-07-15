@@ -842,6 +842,7 @@ class PreBuild:
         and inserts them into the file something.md
         :param file_name: path to a source.py file
         """
+        pass
         for file_name in chain.from_iterable(
             glob.iglob(pattern, recursive=True)
             for pattern in content["globs"]

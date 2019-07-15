@@ -22,21 +22,21 @@ version: '1.0'
 Associez Opsmatic à Datadog pour :
 
 * Être immédiatement informé de toutes les modifications critiques
-* Obtenir une visibilité complète de l’historique et de l’état en direct de tous vos hosts
+* Obtenir une visibilité complète de l'historique et de l'état en direct de tous vos hosts
 
 ## Implémentation
 ### Installation
 
 Pour visualiser les événements Opsmatic dans votre flux Datadog :
 
-1.  Ajoutez la clé d’API de DataDog à votre page d’intégrations Opsmatic.
+1.  Ajoutez la clé d'API de DataDog à votre page d'intégrations Opsmatic.
 2.  Configurez l'envoi de vos notifications Opsmatic vers Datadog.
 
-Consultez la [documentation sur le site Web Opsmatic pour obtenir plus d’informations][1].
+Consultez la [documentation sur le site Web Opsmatic pour obtenir plus d'informations][1].
 
 ### Configuration
 
-Cliquez sur le bouton **Install Integration** sur le carré d’intégration Opsmatic. Les étapes de configuration sont obligatoires pour cette intégration.
+Cliquez sur le bouton **Install Integration** sur le carré d'intégration Opsmatic. Les étapes de configuration sont obligatoires pour cette intégration.
 
 ## Données collectées
 ### Métriques

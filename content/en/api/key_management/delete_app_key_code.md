@@ -7,7 +7,7 @@ external_redirect: /api/#delete-an-application-key
 
 ##### Signature
 
-`DELETE /api/v1/application_key/<APP_KEY>`
+`DELETE /v1/application_key/<APP_KEY>`
 
 ##### Example Request
 

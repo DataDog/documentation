@@ -7,7 +7,7 @@ external_redirect: /api/#create-an-api-key
 
 ##### Signature
 
-`POST /api/v1/api_key/<API_KEY>`
+`POST /v1/api_key/<API_KEY>`
 
 ##### Example Request
 

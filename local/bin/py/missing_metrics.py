@@ -30,7 +30,7 @@ def get_csv_metrics(tempdir):
 
 def get_dd_metrics(csv_metrics, keys):
   cloud = ('aws','azure', 'gcp') # tuple
-  ignore = ['isatap', '.p90', '.p95', '.p99', 'gcp.logging.user.', 'gcp.custom.']
+  ignore = ['isatap', '.p90', '.p95', '.p99', 'gcp.logging.user.', 'gcp.custom.','aws.ec2.iam_credentials_expiration_seconds']
 
   # Datadog Demo account
   options = {
@@ -55,7 +55,7 @@ def get_dd_metrics(csv_metrics, keys):
           if word in metric:
             i = 1
         if i == 0:
-          print(metric)
+          #print(metric)
           docs_tags = metric.split('.')
           metrics_send.append({
             'metric': 'docs.missing.metrics',
@@ -73,7 +73,7 @@ def post_dd_metrics(metrics, keys):
       'app_key': keys.corpappkey
   }
   initialize(**options)
-  #print(api.Metric.send(metrics))
+  api.Metric.send(metrics)
 
 
 if __name__ == '__main__':
