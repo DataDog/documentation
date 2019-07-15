@@ -26,7 +26,7 @@ Datadog propose trois rôles d'utilisateur :
 
 * Les **administrateurs** ont accès aux informations de facturation, sont autorisés à révoquer des clés API, sont en mesure de gérer les utilisateurs et peuvent configurer [les dashboards en lecture seule][2]. Ils peuvent également promouvoir des utilisateurs standard afin qu'ils deviennent des administrateurs.
 
-* Les **utilisateurs standard** sont autorisés à consulter et à modifier toutes les fonctionnalités de surveillance que Datadog offre, telles que les [dashboards][2], les [monitors][3], les [événements][4], et les [notebooks][5]. Ils peuvent également inviter d’autres utilisateurs à rejoindre les organisations.
+* Les **utilisateurs standard** sont autorisés à consulter et à modifier toutes les fonctionnalités de surveillance que Datadog offre, telles que les [dashboards][2], les [monitors][3], les [événements][4], et les [notebooks][5]. Ils peuvent également inviter d'autres utilisateurs à rejoindre les organisations.
 
 * Les **utilisateurs en lecture seule** sont créés par les administrateurs. Ils n'ont aucun droit de modification dans Datadog. Ce type d'utilisateurs est particulièrement utile lorsque vous souhaitez partager des vues spécifiques en lecture seule avec un client ou lorsqu'un membre d'une unité commerciale doit partager un [dashboard][6] avec une personne en dehors de son unité.
 
