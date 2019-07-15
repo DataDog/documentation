@@ -3,6 +3,7 @@ title: Serverless
 kind: documentation
 aliases:
 - /graphing/infrastructure/cloudfunctions
+- /graphing/infrastructure/serverless_functions
 further_reading:
 - link: "integrations/amazon_xray"
   tag: "X-Ray Integration"
