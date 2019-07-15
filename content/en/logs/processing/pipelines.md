@@ -57,12 +57,6 @@ The logstream shows which logs your Pipeline applies to:
 
 {{< img src="logs/processing/pipelines/pipeline_filters.png" alt="Pipelines filters" responsive="true" style="width:80%;">}}
 
-## Restrict Pipelines access to Admin users
-
-By default, all users can edit pipelines. Administrators can activate read-only mode, which disables all non-admin edits to your pipelines. Change these preferences at any time by clicking on the lock below:
-
-{{< img src="logs/processing/pipelines/pipeline_lock.png" alt="Pipeline Lock" responsive="true" style="width:70%;">}}
-
 ## Nested Pipelines
 
 Nested Pipelines are pipelines within a pipeline. Use Nested Pipelines to split the processing into two steps. For example, first use a high-level filtering such as team and then a second level of filtering based on the integration, service, or any other tag or attribute.
