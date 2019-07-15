@@ -686,8 +686,6 @@ function hasParentLi(el){
     }
 }
 
-
-
 function getPathElement(){
     var path = window.location.pathname;
     var activeMenus = document.querySelectorAll('.side .sidenav-nav .active');
@@ -792,7 +790,8 @@ window.onload = function(){
 }
 
 window.onpopstate = function (event) {
-    // do stuff here
+    loadPage(window.location.href)
+    closeNav();
     getPathElement();
   }
 
