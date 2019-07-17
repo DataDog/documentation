@@ -23,7 +23,7 @@ Surveillez vos données de connexion et vos messages en temps réel sur l'ensemb
 
 * Visualiser les connexions simultanées en temps réel
 
-* Suivre les messages envoyés par type, y compris les messages d’API, d’événements clients, de Webhooks et de diffusion
+* Suivre les messages envoyés par type, y compris les messages d'API, d'événements clients, de Webhooks et de diffusion
 
 * Obtenir des données statistiques détaillées concernant la taille du message, notamment la moyenne, la médiane, le maximum et le 95e centile
 
@@ -34,16 +34,16 @@ Surveillez vos données de connexion et vos messages en temps réel sur l'ensemb
 
 Afin de surveiller vos métriques depuis Pusher :
 
-1. Copiez votre [clé d’API Datadog][1] :
+1. Copiez votre [clé d'API Datadog][1] :
 
-2. Accédez aux paramètres de votre compte Pusher et sélectionnez l’intégration Datadog, ou rendez-vous [ici][2].
+2. Accédez aux paramètres de votre compte Pusher et sélectionnez l'intégration Datadog, ou rendez-vous [ici][2].
 
 3. Collez votre clé d'API Datadog et cliquez sur Save.
 
 4. Revenez sur le dashboard Datadog pour voir les métriques commencer à s'ajouter au dashboard Pusher par défaut.
 
 <div class="alert alert-info">
-Les métriques sont ajoutées en temps réel. Par conséquent, les données historiques commencent à s’ajouter lorsque votre intégration est terminée.
+Les métriques sont ajoutées en temps réel. Par conséquent, les données historiques commencent à s'ajouter lorsque votre intégration est terminée.
 </div>
 
 ## Données collectées

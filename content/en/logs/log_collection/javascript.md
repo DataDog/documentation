@@ -23,7 +23,6 @@ further_reading:
 ---
 
 
-
 Send logs to Datadog from web browsers or other Javascript clients thanks to Datadog's `datadog-logs` client-side JavaScript logging library.
 
 With the `datadog-logs` library, you can send logs directly to Datadog from JS clients and leverage the following features:
@@ -35,31 +34,23 @@ With the `datadog-logs` library, you can send logs directly to Datadog from JS c
 * Record real client IP addresses and user agents.
 * Optimized network usage with automatic bulk posts.
 
-## Get a Public API Key
+## Get a Client Token
 
-<div class="alert alert-warning">
-Public API keys are in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on this feature for your account.
-</div>
+For security reasons, [API keys][1] cannot be used to configure the `datadog-logs` library, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][2] must be used.
 
-For security reasons, [API keys][1] cannot be used to configure the `datadog-logs` library, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [public API key][2] must be used.
+To manage your client tokens, go to your [Datadog API configuration page][3] in the `Client Tokens` section as shown here:
 
-To manage your public API keys, go to your [Datadog API configuration page][3] in the `Public API Key` section as shown here:
+{{< img src="logs/log_collection/client_tokens.png" style="width:80%;" alt="Client tokens" responsive="true" >}}
 
-{{< img src="logs/log_collection/public_key.png" style="width:80%;" alt="Public API Keys" responsive="true" >}}
-
-Read the [Public API keys documentation][2] to learn more about the restrictions that apply.
+Read the [Client tokens documentation][2] to learn more about the restrictions that apply.
 
 ## Configure the JavaScript logger
-
-<div class="alert alert-warning">
-The Javascript logging library is in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to the Datadog support team</a> to enable this feature for your account.
-</div>
 
 The following parameters can be used to configure the library to send logs to Datadog:
 
 * Set `forwardErrorsToLogs` to `false` to turn off automatic JS and console error collection.
 * Use `addLoggerGlobalContext` to add JSON attributes to all generated logs
-* Set `publicApiKey` to the value of the public API key (**only public API keys can be used in this library**)
+* Set `clientToken` to the value of the client token (**only client tokens can be used in this library**)
 
 {{< tabs >}}
 {{% tab "US" %}}
@@ -70,9 +61,9 @@ The following parameters can be used to configure the library to send logs to Da
     <title>Example to send logs to Datadog</title>
     <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-us.js"></script>
     <script>
-      // Set your Public API key
+      // Set your client token
       DD_LOGS.init({
-        publicApiKey: '<PUBLIC_API_KEY>',
+        clientToken: '<CLIENT_TOKEN>',
         forwardErrorsToLogs: true,
     });
 
@@ -95,9 +86,9 @@ The following parameters can be used to configure the library to send logs to Da
     <title>Example to send logs to Datadog</title>
     <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-eu.js"></script>
     <script>
-      // Set your Public API key
+      // Set your client token
       DD_LOGS.init({
-        publicApiKey: '<PUBLIC_API_KEY>',
+        clientToken: '<CLIENT_TOKEN>',
         forwardErrorsToLogs: true,
     });
 
@@ -123,7 +114,7 @@ DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>)
 ```
 
 | Placeholder         | Description                                                                             |
-| ------              | -------                                                                                 |
+| ------------------- | --------------------------------------------------------------------------------------- |
 | `<MESSAGE>`         | The message of your log that is fully indexed by Datadog                                |
 | `<JSON_ATTRIBUTES>` | A valid JSON object that includes all attributes attached to the `<MESSAGE>`            |
 | `<STATUS>`          | Status of your log; the accepted status values are `debug`, `info`, `warn`, or `error`. |
@@ -265,5 +256,5 @@ signupLogger.setContext({
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
-[2]: https://docs.datadoghq.com/account_management/api-app-keys/#public-api-keys
+[2]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
 [3]: https://app.datadoghq.com/account/settings#api

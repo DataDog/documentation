@@ -20,12 +20,13 @@
     top: 0;
     width: 100%;
     z-index: 9999;
-    @include gradient(#6645EC, #6645EC, 1);
+    @include gradient(#6DFFBC, #6DFFBC, 1);
     a {
       display: block;
-      color: #fff;
+      color: #000000;
       font-size: 20px;
       margin-top: -2px;
+      font-weight: bold;
     }
     strong {
       font-size: 21px;

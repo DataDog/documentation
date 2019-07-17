@@ -30,7 +30,7 @@ def get_csv_metrics(tempdir):
 
 def get_dd_metrics(csv_metrics, keys):
   cloud = ('aws','azure', 'gcp') # tuple
-  ignore = ['isatap', '.p90', '.p95', '.p99', 'gcp.logging.user.', 'gcp.custom.']
+  ignore = ['isatap', '.p90', '.p95', '.p99', 'gcp.logging.user.', 'gcp.custom.','aws.ec2.iam_credentials_expiration_seconds']
 
   # Datadog Demo account
   options = {

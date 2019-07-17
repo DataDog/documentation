@@ -6,7 +6,7 @@ further_reading:
 - link: "logs/explorer"
   tag: "Documentation"
   text: "Log Explorer"
-- link: "logs/logging_without_lijmits"
+- link: "logs/logging_without_limits"
   tag: "Documentation"
   text: "Logging without Limits"
 ---
@@ -14,6 +14,7 @@ further_reading:
 ## Archives
 
 Configure your Datadog account to forward all the logs ingested to a cloud storage system. This allows you to keep in long-term storage all the logs that you used Datadog to aggregate. You can then opt to rehydrate these archived log events in order to analyze them with the Log Explorer.
+
 
 Note: only Datadog users with admin status can create, modify, or delete log archive configurations.
 
