@@ -298,9 +298,13 @@ main:
       - name: "Manage Monitors"
         url: "monitors/manage_monitor/"
 
-      # Monitor status
-      - name: "Monitor Status"
-        url: "monitors/monitor_status/"
+      # Network Flow Monitor
+      - name: "Network Flow Monitor"
+        url: "monitors/network_flow_monitors/"
+      
+      # Manage monitor
+      - name: "Manage Monitors"
+        url: "monitors/manage_monitor/"
 
       # Check summary
       - name: "Check Summary"
