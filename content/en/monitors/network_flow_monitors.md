@@ -4,7 +4,7 @@ kind: documentation
 description: Explore metrics for point to point communication on your infrastructure.
 beta: true
 further_reading:
-    - link: "www.datadoghq.com/blog/network-performance-monitoring"
+    - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
       tag: "Blog"
       text: "Network Performance Monitoring"
     - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
