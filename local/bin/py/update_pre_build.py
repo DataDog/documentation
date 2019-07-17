@@ -28,9 +28,6 @@ from os.path import (
     dirname,
 )
 
-CONFIGURATION_FILE = "./local/etc/pull_config.yaml"
-
-
 def cache_by_sha(func):
     """ only downloads fresh file, if we don't have one or we do and the sha has changed """
 
@@ -440,10 +437,10 @@ class PreBuild:
         """
         print(
             "Loading {} configuration file".format(
-                CONFIGURATION_FILE
+                getenv("CONFIGURATION_FILE")
             )
         )
-        configuration = yaml.load(open(CONFIGURATION_FILE))
+        configuration = yaml.load(open(getenv("CONFIGURATION_FILE")))
         for org in configuration:
             for repo in org["repos"]:
                 for content in repo["contents"]:

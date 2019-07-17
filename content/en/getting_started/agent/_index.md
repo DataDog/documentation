@@ -1,6 +1,8 @@
 ---
 title: Getting Started with the Agent
 kind: documentation
+aliases:
+- /getting_started/agent
 further_reading:
 - link: "/agent/basic_agent_usage/"
   tag: "Documentation"
