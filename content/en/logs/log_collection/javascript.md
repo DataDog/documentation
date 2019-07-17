@@ -23,7 +23,6 @@ further_reading:
 ---
 
 
-
 Send logs to Datadog from web browsers or other Javascript clients thanks to Datadog's `datadog-logs` client-side JavaScript logging library.
 
 With the `datadog-logs` library, you can send logs directly to Datadog from JS clients and leverage the following features:
@@ -37,10 +36,6 @@ With the `datadog-logs` library, you can send logs directly to Datadog from JS c
 
 ## Get a Client Token
 
-<div class="alert alert-warning">
-Client tokens are in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on this feature for your account.
-</div>
-
 For security reasons, [API keys][1] cannot be used to configure the `datadog-logs` library, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][2] must be used.
 
 To manage your client tokens, go to your [Datadog API configuration page][3] in the `Client Tokens` section as shown here:
@@ -50,10 +45,6 @@ To manage your client tokens, go to your [Datadog API configuration page][3] in 
 Read the [Client tokens documentation][2] to learn more about the restrictions that apply.
 
 ## Configure the JavaScript logger
-
-<div class="alert alert-warning">
-The Javascript logging library is in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to the Datadog support team</a> to enable this feature for your account.
-</div>
 
 The following parameters can be used to configure the library to send logs to Datadog:
 
