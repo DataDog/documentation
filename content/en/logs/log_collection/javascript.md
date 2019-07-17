@@ -1,7 +1,6 @@
 ---
 title: Browser Log Collection
 kind: documentation
-beta: true
 aliases:
   - /logs/log_collection/web_browser
 further_reading:
@@ -138,7 +137,7 @@ This gives the following result:
 ```
 {
   "status": "info",
-  "session_id": "1234", 
+  "session_id": "1234",
   "name": "buttonName",
   "id": 123,
   "message": "Button clicked",
@@ -151,7 +150,7 @@ This gives the following result:
       "ip" : "109.30.xx.xxx"
     }
   }
-}  
+}
 ```
 
 The logger adds the following information by default:
@@ -186,7 +185,7 @@ DD_LOGS.logger.setHandler('<HANDLER>')
 
 The library contains a default logger, but it is also possible to define different loggers, which can be convenient when several teams are working on the same project.
 
-Each logger can optionally be configured with its own log level, handler, and context. Note that the `Global Context` is added on top of each logger context. 
+Each logger can optionally be configured with its own log level, handler, and context. Note that the `Global Context` is added on top of each logger context.
 
 Use the following to define a custom logger:
 
@@ -202,7 +201,7 @@ Those parameters can also be set with the `setContext`, `setLevel`, and `setHand
 After the creation of this logger, you can then access it in any part of your JavaScript code with the `getLogger` function:
 
 ```
-const my_logger = getLogger('<LOGGER_NAME>') 
+const my_logger = getLogger('<LOGGER_NAME>')
 ```
 
 **Example:**
@@ -229,7 +228,7 @@ signupLogger.info('Test sign up completed')
 ...
 ```
 
-### Overwrite context 
+### Overwrite context
 
 It is possible to set the entire context in one call. This also overrides previously set attributes, if any:
 
