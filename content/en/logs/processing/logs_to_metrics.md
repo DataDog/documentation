@@ -18,11 +18,9 @@ This feature is in private beta. Contact <a href="/help">Contact Datadog support
 
 ## Overview
 
-Log data is rich in content, which is valuable during investigations into system health and performance. But it can be expensive to store high volumes of logs for long periods of time when you want to track aggregate trends and behaviors from your log data, such as the number of visitors to your website or errors from a web server.
-
 Datadog’s [Logging without Limits][1] lets you dynamically decide what to include or exclude from your indexes. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. This means that even if you use [exclusion filters][2] to limit indexes to operationally critical logs, you can still visualize trends and anomalies over all of your log data at full granularity for 15 months.
 
-With log-based metrics, generate custom metrics from the count of logs that match a filter query and apply log attributes as [metric tags][3].
+With log-based metrics, generate custom metrics from the count of logs that match a filter query and apply log attributes and tag keys as [metric tags][3] following the `<KEY>:<VALUE>` format.
 
 ## Generate a log-based metric
 
@@ -37,7 +35,7 @@ To generate a new log-based metric, go to the [Configuration page][4] of your Da
 {{< img src="logs/processing/logs_to_metrics/create_custom_metrics.png" alt="Create a Logs to metric" responsive="true" style="width:80%;">}}
 
 1. **Input a query to filter the log stream**: The query syntax is the same as for the [Log Explorer Search][6]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation.
-2. **Add dimensions to group by**: Add attributes or tag key to be applied to the generated log-based metric to transform them into [Tags][3] following the `<KEY>:<VALUE>` format. Log-based metrics are considered as [custom metrics][7], as such, avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, session IDs, etc.. Otherwise this may impact your billing.
+2. **Add dimensions to `group by`**: Add attributes or tag key to apply to the generated log-based metric to transform them into [Tags][3] following the `<KEY>:<VALUE>` format. Log-based metrics are considered as [custom metrics][7]. So, avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, and session IDs to avoid impacting your billing.
 3. **Name your metric**: Log-based metric names must follow the [naming metric convention][8].
 
 **Note**: Data points for Log-based metrics are generated at 1 minute intervals.
