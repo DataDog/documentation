@@ -7,7 +7,7 @@ options = {
 
 initialize(**options)
 
-# Get tags by hostname.
+# Get tags by hostname
 hostname='<YOUR_HOSTNAME>'
 hosts = api.Hosts.search(q='hosts:')
 
