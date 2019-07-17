@@ -22,7 +22,7 @@ With historical views, teams rehydrate archived log events precisely by timefram
 
 1. **Select the archive** from which you wish to rehydrate log events. Only archives that are [configured to use role delegation][4] are available for rehydrating.
 
-2. **Choose the time period** for which you wish to rehydrate log events.  The time period must be older than 24 hours.
+2. **Choose the time period** for which you wish to rehydrate log events. The time period must be older than 24 hours.
 
 3. **Input the query**. The query syntax is the same as that of the [log explorer search][5], but is limited to log attributes, [reserved attributes][6], and free text search on the message. You must include a service argument. 
 
