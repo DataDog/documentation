@@ -23,7 +23,7 @@ This feature is currently in beta.
 
 Network Flow Monitoring allows you to explore metrics for point-to-point communication between anything in your environment.
 
-Each end of any point-to-point communication represents a hash of a `{host | process ID | port}` or `{container | process ID | port}` for uniqueness.  This is resolved in Datadog to any tag we collect.  This allows you to aggregate communication based on arbitrary queries.
+Each end of any point-to-point communication represents a hash of a `{host | process ID | port}` or `{container | process ID | port}` for uniqueness. This is resolved in Datadog to any collected tag. This allows you to aggregate communication based on arbitrary queries.
 
 {{< img src="monitors/network_flow_monitoring/network_flow_overview.png" alt="notification" responsive="true" >}}
 
