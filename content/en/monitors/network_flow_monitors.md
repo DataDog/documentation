@@ -34,7 +34,7 @@ Network flow monitoring requires Datadog Agent 6.12+. To enable network flow mon
 
 ### Queries
 
-Queries aggregate and filter all flows based on tags, similar to a timeseries. The following is the default view, which aggregates by `service`. This means the throughput for every flow with the same source `service` and destination `service` are summed and represented as one row for that service to service communication.
+Queries aggregate and filter all flows based on tags, similar to a timeseries. The following is the default view, which aggregates by `service`. This means the throughput for every flow with the same source `service` and destination `service` are summed and represented as one row for that service-to-service communication.
 
 {{< img src="monitors/network_flow_monitoring/query_1.png" alt="notification" responsive="true" >}}
 
