@@ -21,7 +21,7 @@ This feature is currently in beta.
 
 ## Overview
 
-Network Flow Monitoring allows you to explore metrics for point to point communication between anything in your environment.
+Network Flow Monitoring allows you to explore metrics for point-to-point communication between anything in your environment.
 
 Each end of any point-to-point communication represents a hash of a `{host | process ID | port}` or `{container | process ID | port}` for uniqueness.  This is resolved in Datadog to any tag we collect.  This allows you to aggregate communication based on arbitrary queries.
 
