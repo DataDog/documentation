@@ -9,7 +9,7 @@ further_reading:
 ---
 
 ## Overview
-Browser tests with APM connect synthetic tests with your backend traces.
+Browser tests with APM connect synthetics tests with your backend traces.
 
 ## Test results
 Test results are accessed from the **Step Results** section on your browser test's status page.
@@ -23,7 +23,6 @@ The type of error is logged during interaction with the page. It corresponds to 
 
 The maximum number of errors that can be displayed is 8, for example 2 `network` + 6 `js`.
 
-<POSSIBLE_SCREENSHOT>
 
 ### Resources
 A resource corresponds to the combination of requests and assets. The Resources panel shows:
@@ -41,14 +40,12 @@ The maximum number of resources that can be displayed is 15. Typically, the reso
 #### Filter and Search
 Resources can be filtered by resource type. Also, a search can be performed over the displayed URLs.
 
-<POSSIBLE_SCREENSHOT>
 
 ### Traces
 The traces panel shows your traces associated with the browser synthetics test. The UI is similar to the APM [Trace View][1] except for the following difference. 
 
-One browser step can make multiple requests to different URLs/endpoints, which results in several associated traces (dependant on tracing and whitelisting setup). Choose the trace to view by using the dropdown.
+One browser step can make multiple requests to different URLs/endpoints, which results in several associated traces (dependent on tracing and whitelisting setup). Use the dropdown to choose the trace to view.
 
-<POSSIBLE_SCREENSHOT>
 
 ## Further Reading
 
