@@ -83,7 +83,7 @@ Assertions allow you to check if an element, a content, or some text is availabl
 | `Assert that some text is nowhere on the page`          | Asserts that some specific text is **NOT** present on the current page.                                                          |
 | `Check main page URL's content`                         | This takes the URL of the last page that was interacted with, then asserts whether a specific value (`string`, `number`, `regex`) is present within it. |
 
-Advanced options for assertions allow you to specify an X-path or a CSS class or ID that you want to use to perform the element selection for any HTML element. Once you define an element, hit **Test**, and it will highlight the element in the recording on the right.
+Advanced options for assertions allow you to specify an X-path or a CSS class or ID that you want to use to perform the element selection for any HTML element. For example, `div`, `h1`, or `.hero-body`. Once you define an element, hit **Test**, and it will highlight the element in the recording on the right.
 
 #### Navigation
 
