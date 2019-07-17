@@ -12,7 +12,8 @@ further_reading:
     tag: Documentation
     text: 新しいインテグレーションの設定
 aliases:
-  - /ja/developers/openmetrics/
+  - /ja/getting_started/openmetrics/
+  - /ja/getting_started/prometheus/
 ---
 ## 概要
 
