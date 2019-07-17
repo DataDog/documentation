@@ -23,7 +23,7 @@ Datadog’s Log Management provides features that allow you to perform deep anal
 
 ## Generate a log-based metric
 
-{{< img src="logs/processing/logs_to_metrics/logs_to_metrics.png" alt="Logs to metric" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="Generate Logs to metric" responsive="true" style="width:80%;">}}
 
 With log-based metrics, teams generate custom metrics from the count of logs that match a filter query and can apply log attributes as a metric dimensions.
 
@@ -41,6 +41,8 @@ Data points for Log-based metrics are generated at 1 minute intervals and so wil
 Avoid grouping by unbounded or extremely high cardinality attributes, such as timestamps, user IDs, request IDs, session IDs, etc. This may significantly increase the number of metrics for your organization and impact your billing.
 
 See the custom metrics documentation for more details.
+
+{{< img src="logs/processing/logs_to_metrics/create_custom_metrics.png" alt="Create a Logs to metric" responsive="true" style="width:80%;">}}
 
 ### Update a log-based metric
 
