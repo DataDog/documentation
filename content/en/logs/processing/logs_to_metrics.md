@@ -64,4 +64,4 @@ Datadog would love to receive your feedback on this feature. You can submit your
 [6]: /logs/explorer/search/#search-syntax
 [7]: /developers/metrics/custom_metrics
 [8]: /developers/metrics/#naming-metrics
-[9]: https://docs.google.com/forms/d/e/1FAIpQLSepcuHsNfJN7mpQp-8iBf9l6AslubKVSUHW21kmGg7VOJlxoA/viewform
+[9]: https://docs.google.com/forms/d/e/1FAIpQLSeylbYYmx8A6UgiAS5_SWkFHG_CRlbg9eR7FE0d7qwV2vRstQ/viewform
