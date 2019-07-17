@@ -38,11 +38,11 @@ To generate a new log-based metric, go to the [Configuration page][4] of your Da
 2. **Add dimensions to `group by`**: Add attributes or tag key to apply to the generated log-based metric to transform them into [Tags][3] following the `<KEY>:<VALUE>` format. Log-based metrics are considered as [custom metrics][7]. So, avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, and session IDs to avoid impacting your billing.
 3. **Name your metric**: Log-based metric names must follow the [naming metric convention][8].
 
-**Note**: Data points for Log-based metrics are generated at 1 minute intervals.
+**Note**: Data points for Log-based metrics are generated at one minute intervals.
 
 ### Update a log-based metric
 
-After a metric is created, only the following fields can be updated:
+After a metric is created, only these fields can be updated:
 
 * Stream filter query
 * Aggregation groups
@@ -51,7 +51,7 @@ To change the metric type or name, a new metric must be created.
 
 ## Feedback
 
-Datadog would love to receive your feedback on this feature. You can submit your feedback directly from this form.
+Datadog would love to receive your feedback on this feature. You can submit your feedback directly from [this form][9].
 
 ## Further Reading
 
@@ -64,3 +64,4 @@ Datadog would love to receive your feedback on this feature. You can submit your
 [6]: /logs/explorer/search/#search-syntax
 [7]: /developers/metrics/custom_metrics
 [8]: /developers/metrics/#naming-metrics
+[9]: https://docs.google.com/forms/d/e/1FAIpQLSepcuHsNfJN7mpQp-8iBf9l6AslubKVSUHW21kmGg7VOJlxoA/viewform
