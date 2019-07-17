@@ -38,7 +38,7 @@ Queries aggregate and filter all flows based on tags, similar to a timeseries. T
 
 {{< img src="monitors/network_flow_monitoring/query_1.png" alt="notification" responsive="true" >}}
 
-The following shows all flows from IP addresses to Security groups. Only flows where the source IP address represents a specific set of services is included. This complex query shows that no two fields have to match -- you can query for communication metrics between one `service` to any `consul` server, broken down by source `pod` and destination `host`, and many other things.
+The following shows all flows from IP addresses to Security groups. Only flows where the source IP address represents a specific set of services is included. This complex query shows that no two fields have to match—you can query for communication metrics between one `service` to any `consul` server, broken down by source `pod` and destination `host`, among other things.
 
 {{< img src="monitors/network_flow_monitoring/query_2.png" alt="notification" responsive="true" >}}
 
