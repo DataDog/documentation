@@ -23,9 +23,10 @@
     @include gradient(#6DFFBC, #6DFFBC, 1);
     a {
       display: block;
-      color: #fff;
+      color: #000000;
       font-size: 20px;
       margin-top: -2px;
+      font-weight: bold;
     }
     strong {
       font-size: 21px;
