@@ -523,8 +523,12 @@ main:
         url: "synthetics/api_tests"
       - name: "Browser Tests"
         url: "synthetics/browser_tests"
+        # SYNTHETICS APM
       - name: "APM Integration"
-        url: "synthetics/apm"
+        url: "synthetics/apm/"
+        children:
+          - name: "Browser Tests"
+            url: "synthetics/apm/browser_tests"
       - name: "Identify Synthetics Bots"
         url: "synthetics/identify_synthetics_bots"
       - name: "Settings"
