@@ -1,264 +1,319 @@
-# # GETTING STARTED
-# getting_started:
-#   - Identifier: "start"
-#     Name: "Getting Started"
-#     URL: "getting_started/"
-#     Pre: "nav_start"
-#   - Name: "Agent"
-#     URL: "getting_started/agentasdfasdf"
-#     Parent: "start"
 main:
 
-# GETTING STARTED
+#####################
+## GETTING STARTED ##
+#####################
+
   - name: "Getting Started"
+    identifier: "getting_started"
     url: "getting_started/"
     pre: "nav_start"
-    identifier: "getting_started"
-    weight: 100
+    weight: 10000
+
   - name: "Agent"
+    identifier: "getting_started_agent"
     url: "getting_started/agent/"
     parent: "getting_started"
-    weight: 10
-    identifier: "getting_started_agent"
+    weight: 1
+
+  - name: "Datadog"
+    url: "getting_started/application/"
+    parent: "getting_started"
+    weight: 2
+
+  ## GETTING STARTED - Integrations
+
   - name: "Integrations"
     identifier: "getting_started_integrations"
     url: "getting_started/integrations/"
     parent: "getting_started"
-    weight: 20
+    weight: 3
+  - name: "Prometheus/Openmetrics"
+    identifier: "getting_started_prometheus"
+    url: "getting_started/prometheus/"
+    parent: "getting_started_integrations"
+    weight: 301
+
+  ## GETTING STARTED - Traces
+
   - name: "Collect traces"
+    identifier: "getting_started_collect_traces"
     url: "getting_started/tracing/"
     parent: "getting_started"
-    weight: 30
+    weight: 4
+  - name: "Distributed Tracing"
+    identifier: "getting_started_distributed_tracing"
+    url: "getting_started/tracing/distributed-tracing/"
+    parent: "getting_started_collect_traces"
+    weight: 401
+
+  - name: "API"
+    identifier: "getting_started_api"
+    url: "getting_started/api/"
+    parent: "getting_started"
+    weight: 5
+
   - name: "Learning Center"
     url: "getting_started/learning_center/"
     parent: "getting_started"
-    weight: 40
-  - name: "Prometheus/Openmetrics"
-    url: "getting_started/prometheus/"
-    parent: "getting_started"
-    weight: 50
-    
-# TAGGING
+    weight: 6
+
+#############
+## TAGGING ##
+#############
+
   - name: "Tagging"
     url: "tagging/"
     pre: "nav_tagging"
-    identifier: "tagging"
-    weight: 200
+    identifier: "tagging_"
+    weight: 20000
+
   - name: "Assigning tags"
     url: "tagging/assigning_tags/"
-    parent: "tagging"
-    weight: 210
+    parent: "tagging_"
+    weight: 1
+
   - name: "Using tags"
     url: "tagging/using_tags/"
-    parent: "tagging"
-    weight: 220
+    parent: "tagging_"
+    weight: 2
 
-# AGENT
+###########
+## AGENT ##
+###########
+
   - name: "Agent"
     url: "agent/"
     pre: "nav_agent"
-    weight: 300
+    weight: 30000
     identifier: "agent"
-  ## Basic Agent usage
+
+  ## AGENT -  Basic Agent usage
+
   - name: "Basic Agent Usage"
     url: "agent/basic_agent_usage/"
     parent: "agent"
     identifier: "basic_agent_usage"
-    weight: 310
+    weight: 1
   - name: "AIX"
     url: "agent/basic_agent_usage/aix/"
-    weight: 320
+    weight: 101
     parent: "basic_agent_usage"
   - name: "Amazon Linux"
     url: "agent/basic_agent_usage/amazonlinux/"
-    weight: 330
+    weight: 102
     parent: "basic_agent_usage"
   - name: "CentOS"
     url: "agent/basic_agent_usage/centos/"
-    weight: 340
+    weight: 103
     parent: "basic_agent_usage"
   - name: "Debian"
     url: "agent/basic_agent_usage/deb/"
-    weight: 350
+    weight: 104
     parent: "basic_agent_usage"
   - name: "Docker"
     url: "agent/docker/"
-    weight: 360
+    weight: 105
     parent: "basic_agent_usage"
   - name: "Fedora"
     url: "agent/basic_agent_usage/fedora/"
-    weight: 370
+    weight: 106
     parent: "basic_agent_usage"
   - name: "Heroku"
     url: "agent/basic_agent_usage/heroku/"
-    weight: 380
+    weight: 107
     parent: "basic_agent_usage"
   - name: "Mac OS X"
     url: "agent/basic_agent_usage/osx/"
-    weight: 390
+    weight: 108
     parent: "basic_agent_usage"
   - name: "Red Hat"
     url: "agent/basic_agent_usage/redhat/"
-    weight: 400
+    weight: 109
     parent: "basic_agent_usage"
   - name: "SUSE"
     url: "agent/basic_agent_usage/suse/"
-    weight: 410
+    weight: 110
     parent: "basic_agent_usage"
   - name: "Ubuntu"
     url: "agent/basic_agent_usage/ubuntu/"
-    weight: 420
+    weight: 111
     parent: "basic_agent_usage"
   - name: "Windows"
     url: "agent/basic_agent_usage/windows/"
-    weight: 430
+    weight: 112
     parent: "basic_agent_usage"
   - name: "From Source"
     url: "agent/basic_agent_usage/source/"
-    weight: 440
+    weight: 113
     parent: "basic_agent_usage"
-  ## Docker
+
+  ## AGENT - Docker
+
   - name: "Docker"
     url: "agent/docker/"
     parent: "agent"
-    identifier: "docker"
-    weight: 400
+    identifier: "agent_docker"
+    weight: 2
   - name: APM
+    identifier: "agent_docker_apm"
     url: agent/docker/apm/
-    parent: "docker"
+    parent: "agent_docker"
+    weight: 201
   - name: Log collection
-    identifier: "docker_log_collection"
+    identifier: "agent_docker_log"
     url: agent/docker/log/
-    parent: "docker"
-  ## Kubernetes
+    parent: "agent_docker"
+    weight: 203
+
+  ## AGENT - Kubernetes
+
   - name: "Kubernetes"
     url: "agent/kubernetes/"
     parent: "agent"
-    identifier: "kubernetes"
-    weight: 410
+    identifier: "agent_kubernetes"
+    weight: 3
   - name: "DaemonSet Setup"
     url: "agent/kubernetes/daemonset_setup/"
-    parent: "kubernetes"
-    weight: 10
+    parent: "agent_kubernetes"
+    weight: 301
   - name: "Host Setup"
     url: "agent/kubernetes/host_setup/"
-    parent: "kubernetes"
-    weight: 20
+    parent: "agent_kubernetes"
+    weight: 302
   - name: "Cluster Agent"
     url: "agent/kubernetes/cluster/"
-    parent: "kubernetes"
-    weight: 30
+    parent: "agent_kubernetes"
+    weight: 303
   - name: "Using Helm"
     url: "agent/kubernetes/helm/"
-    parent: "kubernetes"
-    weight: 40
+    parent: "agent_kubernetes"
+    weight: 304
   - name: "Event Collection"
     url: "agent/kubernetes/event_collection/"
-    parent: "kubernetes"
-    weight: 50
+    parent: "agent_kubernetes"
+    weight: 305
   - name: "Custom Integrations"
     url: "agent/kubernetes/integrations/"
-    parent: "kubernetes"
-    weight: 60
+    parent: "agent_kubernetes"
+    weight: 306
   - name: "Metrics"
     url: "agent/kubernetes/metrics/"
-    parent: "kubernetes"
-    weight: 70
+    parent: "agent_kubernetes"
+    weight: 307
   - name: "Custom Metrics & DogStatsD"
     url: "agent/kubernetes/dogstatsd/"
-    parent: "kubernetes"
-    weight: 80
+    parent: "agent_kubernetes"
+    weight: 308
   - name: "Legacy Versions"
     url: "agent/kubernetes/legacy/"
-    parent: "kubernetes"
-    weight: 90
-  ## Autodiscovery
+    parent: "agent_kubernetes"
+    weight: 309
+
+  ## AGENT - Autodiscovery
+
   - name: "Autodiscovery"
     url: "agent/autodiscovery/"
-    identifier: "autodiscovery"
+    identifier: "agent_autodiscovery"
     parent: "agent"
-    weight: 420
+    weight: 4
   - name: "Integrations Templates"
     url: "agent/autodiscovery/integrations/"
-    parent: "autodiscovery"
-    weight: 10
+    parent: "agent_autodiscovery"
+    weight: 401
   - name: "Container Identifier"
     url: "agent/autodiscovery/ad_identifiers/"
-    parent: "autodiscovery"
-    weight: 20
+    parent: "agent_autodiscovery"
+    weight: 402
   - name: "Template Variables"
     url: "agent/autodiscovery/template_variables/"
-    parent: "autodiscovery"
-    weight: 30
+    parent: "agent_autodiscovery"
+    weight: 403
   - name: "Tag Extraction"
     url: "agent/autodiscovery/tag/"
-    parent: "autodiscovery"
-    weight: 40
+    parent: "agent_autodiscovery"
+    weight: 404
   - name: "Discovery Management"
     url: "agent/autodiscovery/management/"
-    parent: "autodiscovery"
-    weight: 50
+    parent: "agent_autodiscovery"
+    weight: 405
   - name: "Troubleshooting"
     url: "agent/autodiscovery/troubleshooting/"
-    parent: "autodiscovery"
-    weight: 60
+    parent: "agent_autodiscovery"
+    weight: 406
   - name: "Cluster Checks"
     url: "agent/autodiscovery/clusterchecks/"
-    parent: "autodiscovery"
-    weight: 70
+    parent: "agent_autodiscovery"
+    weight: 407
+
+  ## AGENT - LOGS
+
+  - name: "Log Collection"
+    url: "agent/logs/"
+    identifier: "agent_logs"
+    parent: "agent"
+    weight: 5
+  - name: "Advanced Log Collection"
+    url: "agent/logs/advanced_log_collection"
+    parent: "agent_logs"
+    weight: 501
+  - name: "Proxy"
+    url: "agent/logs/proxy"
+    parent: "agent_logs"
+    weight: 502
+
   - name: "Proxy"
     url: "agent/proxy/"
     parent: "agent"
-    weight: 430
-  ## Upgrade to Agent v6
+    weight: 6
+
   - name: "Upgrade to Agent v6"
     url: "agent/guide/upgrade-to-agent-v6/"
     parent: "agent"
-    weight: 440
-  # Troubleshooting
+    weight: 7
+
+  ## AGENT - Troubleshooting
   - name: "Troubleshooting"
     url: "agent/troubleshooting/"
     parent: "agent"
-    weight: 450
-    identifier: "troubleshooting"
+    weight: 8
+    identifier: "agent_troubleshooting"
   - name: "Debug Mode"
     url: "agent/troubleshooting/debug_mode/"
-    parent: "troubleshooting"
-    weight: 460
+    parent: "agent_troubleshooting"
+    weight: 801
   - name: "Agent Flare"
     url: "agent/troubleshooting/send_a_flare/"
-    parent: "troubleshooting"
-    weight: 470
+    parent: "agent_troubleshooting"
+    weight: 802
   - name: "Agent Check Status"
     url: "agent/troubleshooting/agent_check_status/"
-    parent: "troubleshooting"
-    weight: 480
+    parent: "agent_troubleshooting"
+    weight: 803
   - name: "NTP Issues"
     url: "agent/troubleshooting/ntp/"
-    parent: "troubleshooting"
-    weight: 490
+    parent: "agent_troubleshooting"
+    weight: 804
   - name: "Permission Issues"
     url: "agent/troubleshooting/permissions/"
-    parent: "troubleshooting"
-    weight: 500
+    parent: "agent_troubleshooting"
+    weight: 805
   - name: "Integrations Issues"
     url: "agent/troubleshooting/integrations/"
-    parent: "troubleshooting"
-    weight: 510
-  # Guides
+    parent: "agent_troubleshooting"
+    weight: 806
+
+  ## AGENT - Guides
   - name: "Guides"
     url: "agent/guide/"
     parent: "agent"
-    weight: 460
+    weight: 9
+
   - name: "Security"
     identifier: "agent_security"
     url: "security/agent/"
     parent: "agent"
-    weight: 470
-      #- #  name: "FAQ"
-      #  url: "agent/faq/"
-      #  #  parent: menu_references_agent
-      # AGENT - Subnav end
+    weight: 10
 
 # INTEGRATIONS
   - name: "Integrations"
@@ -273,7 +328,7 @@ main:
     url: "watchdog/"
     pre: "nav_watchdog"
     weight: 500
-  
+
 # GRAPHING
   - name: "Graphing"
     url: "graphing/"
@@ -1078,7 +1133,7 @@ main:
     url: "videos/"
     pre: "nav_videos"
     weight: 1600
-    
+
 # HELP
   - name: "Help"
     url: "help/"
