@@ -64,7 +64,7 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
   {{< img src="monitors/downtimes/downtime-notify.png" alt="downtime-notify" responsive="true" style="width:80%;">}}
   Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting][5] as well as Datadog's @-notification syntax. The *Notify your team* field allows you to specify team members or send the message to a service [integration][6].
 
-**Note**: Your downtime should be created in advance of the monitor or the appearance of a group being silenced.
+**Note**: Create the downtime before you create the monitor or before you mute the group.
 
 ## Recurring Downtimes
 
