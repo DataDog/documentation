@@ -302,10 +302,6 @@ main:
       - name: "Network Flow Monitor"
         url: "monitors/network_flow_monitors/"
 
-      # Manage monitor
-      - name: "Manage Monitors"
-        url: "monitors/manage_monitor/"
-
       # Check summary
       - name: "Check Summary"
         url: "monitors/check_summary/"
