@@ -5,7 +5,7 @@ description: "Capture log events from your archives back into Datadog."
 ---
 
 <div class="alert alert-warning">
-	Log Archive Rehydrating is in private beta. Request early access by contacting <a href="/help">Datadog Support</a>. Rehydrating is currently only supported for AWS S3 Archives, and for users of the Datadog US site. <a href="https://forms.gle/X4jhi13Rd2pFSuSHA">Send feedback for this feature</a>.
+	Log Archive Rehydrating is in public beta. Request early access by contacting <a href="/help">Datadog Support</a>. Rehydrating is currently only supported for AWS S3 Archives, and for users of the Datadog US site. <a href="https://forms.gle/X4jhi13Rd2pFSuSHA">Send feedback for this feature</a>.
 </div>
 
 ## Overview
@@ -14,7 +14,7 @@ Rehydration enables you to capture log events from customer-owned storage-optimi
 
 ## Historical views
 
-With historical views, teams rehydrate archived log events precisely by timeframe and query filter to meet specific, unexpected use cases efficiently. To create a historical view, go the [Configuration page][2] of your Datadog account and select the [“Rehydrate From Archives” tab][3], then the “New Historical View” button. 
+With historical views, teams rehydrate archived log events precisely by timeframe and query filter to meet specific, unexpected use cases efficiently. To create a historical view, go the [Configuration page][2] of your Datadog account and select the [“Rehydrate From Archives” tab][3], then the “New Historical View” button.
 
 {{< img src="logs/archives/log_archives_rehydrate_historical.png" alt="Historical Views" responsive="true" style="width:75%;">}}
 
@@ -24,15 +24,15 @@ With historical views, teams rehydrate archived log events precisely by timefram
 
 2. **Choose the time period** for which you wish to rehydrate log events. The time period must be older than 24 hours.
 
-3. **Input the query**. The query syntax is the same as that of the [log explorer search][5], but is limited to log attributes, [reserved attributes][6], and free text search on the message. You must include a service argument. 
+3. **Input the query**. The query syntax is the same as that of the [log explorer search][5], but is limited to log attributes, [reserved attributes][6], and free text search on the message. You must include a service argument.
 
-4. **Name your historical view**. Names must begin with a lowercase letter and can only contain lowercase letters, numbers, and the `-` character. 
+4. **Name your historical view**. Names must begin with a lowercase letter and can only contain lowercase letters, numbers, and the `-` character.
 
 5. (Optional) **Add a description** to give your team context about the purpose of the historical view.
 
 {{< img src="logs/archives/log_archives_rehydrate_reload.png" alt="Reload from Archive" responsive="true" style="width:75%;">}}
 
-A historical view can contain a maximum of 300 million log events. There is no limit to how large its time range can be, but if you expect a historical view may exceed that limit, make your query filter more specific. 
+A historical view can contain a maximum of 300 million log events. There is no limit to how large its time range can be, but if you expect a historical view may exceed that limit, make your query filter more specific.
 
 ### View historical view content
 
@@ -40,17 +40,17 @@ A historical view can contain a maximum of 300 million log events. There is no l
 
 After selecting “Rehydrate from Archive,” the historical view is marked as “pending” until its content is ready to be queried.
 
-Once the content is rehydrated, the historical view is marked as active, and the link in the query column leads to the historical view in the log explorer. 
+Once the content is rehydrated, the historical view is marked as active, and the link in the query column leads to the historical view in the log explorer.
 
 #### From the log explorer
 
-Alternatively, teams can find the historical view from the Log Explorer directly from the index selector. When selecting a historical view, a pop-up offers to set the timeframe to one that is relevant to the selected historical view. 
+Alternatively, teams can find the historical view from the Log Explorer directly from the index selector. When selecting a historical view, a pop-up offers to set the timeframe to one that is relevant to the selected historical view.
 
 {{< img src="logs/archives/log_archives_rehydrate_explorer.gif" alt="Log Explorer" responsive="true" style="width:75%;">}}
 
 ### Deleting historical views
 
-Historical views stay in Datadog until you opt to delete them. You can mark a historical view to be deleted by selecting and confirming the delete icon at the far right of the historical view. 
+Historical views stay in Datadog until you opt to delete them. You can mark a historical view to be deleted by selecting and confirming the delete icon at the far right of the historical view.
 
 24 hours later, the historical view is definitively deleted; until that time, the team is able to cancel the deletion.
 
@@ -115,7 +115,7 @@ Datadog only supports rehydrating from archives that have been configured to use
 
 ### Feedback
 
-Datadog would love to receive your feedback on this feature, especially as it is in early beta. You can submit your feedback directly [from this form][11]. 
+Datadog would love to receive your feedback on this feature, especially as it is in early beta. You can submit your feedback directly [from this form][11].
 
 
 
