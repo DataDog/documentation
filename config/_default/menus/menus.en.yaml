@@ -16,25 +16,25 @@ main:
     identifier: "getting_started"
     weight: 100
   - name: "Agent"
-    url: "getting_started/agent"
+    url: "getting_started/agent/"
     parent: "getting_started"
     weight: 10
     identifier: "getting_started_agent"
   - name: "Integrations"
     identifier: "getting_started_integrations"
-    url: "getting_started/integrations"
+    url: "getting_started/integrations/"
     parent: "getting_started"
     weight: 20
   - name: "Collect traces"
-    url: "getting_started/tracing"
+    url: "getting_started/tracing/"
     parent: "getting_started"
     weight: 30
   - name: "Learning Center"
-    url: "getting_started/learning_center"
+    url: "getting_started/learning_center/"
     parent: "getting_started"
     weight: 40
   - name: "Prometheus/Openmetrics"
-    url: "getting_started/prometheus"
+    url: "getting_started/prometheus/"
     parent: "getting_started"
     weight: 50
     
@@ -45,11 +45,11 @@ main:
     identifier: "tagging"
     weight: 200
   - name: "Assigning tags"
-    url: "tagging/assigning_tags"
+    url: "tagging/assigning_tags/"
     parent: "tagging"
     weight: 210
   - name: "Using tags"
-    url: "tagging/using_tags"
+    url: "tagging/using_tags/"
     parent: "tagging"
     weight: 220
 
@@ -124,11 +124,11 @@ main:
     identifier: "docker"
     weight: 400
   - name: APM
-    url: agent/docker/apm
+    url: agent/docker/apm/
     parent: "docker"
   - name: Log collection
     identifier: "docker_log_collection"
-    url: agent/docker/log
+    url: agent/docker/log/
     parent: "docker"
   ## Kubernetes
   - name: "Kubernetes"
@@ -137,82 +137,82 @@ main:
     identifier: "kubernetes"
     weight: 410
   - name: "DaemonSet Setup"
-    url: "agent/kubernetes/daemonset_setup"
+    url: "agent/kubernetes/daemonset_setup/"
     parent: "kubernetes"
     weight: 10
   - name: "Host Setup"
-    url: "agent/kubernetes/host_setup"
+    url: "agent/kubernetes/host_setup/"
     parent: "kubernetes"
     weight: 20
   - name: "Cluster Agent"
-    url: "agent/kubernetes/cluster"
+    url: "agent/kubernetes/cluster/"
     parent: "kubernetes"
     weight: 30
   - name: "Using Helm"
-    url: "agent/kubernetes/helm"
+    url: "agent/kubernetes/helm/"
     parent: "kubernetes"
     weight: 40
   - name: "Event Collection"
-    url: "agent/kubernetes/event_collection"
+    url: "agent/kubernetes/event_collection/"
     parent: "kubernetes"
     weight: 50
   - name: "Custom Integrations"
-    url: "agent/kubernetes/integrations"
+    url: "agent/kubernetes/integrations/"
     parent: "kubernetes"
     weight: 60
   - name: "Metrics"
-    url: "agent/kubernetes/metrics"
+    url: "agent/kubernetes/metrics/"
     parent: "kubernetes"
     weight: 70
   - name: "Custom Metrics & DogStatsD"
-    url: "agent/kubernetes/dogstatsd"
+    url: "agent/kubernetes/dogstatsd/"
     parent: "kubernetes"
     weight: 80
   - name: "Legacy Versions"
-    url: "agent/kubernetes/legacy"
+    url: "agent/kubernetes/legacy/"
     parent: "kubernetes"
     weight: 90
   ## Autodiscovery
   - name: "Autodiscovery"
-    url: "agent/autodiscovery"
+    url: "agent/autodiscovery/"
     identifier: "autodiscovery"
     parent: "agent"
     weight: 420
   - name: "Integrations Templates"
-    url: "agent/autodiscovery/integrations"
+    url: "agent/autodiscovery/integrations/"
     parent: "autodiscovery"
     weight: 10
   - name: "Container Identifier"
-    url: "agent/autodiscovery/ad_identifiers"
+    url: "agent/autodiscovery/ad_identifiers/"
     parent: "autodiscovery"
     weight: 20
   - name: "Template Variables"
-    url: "agent/autodiscovery/template_variables"
+    url: "agent/autodiscovery/template_variables/"
     parent: "autodiscovery"
     weight: 30
   - name: "Tag Extraction"
-    url: "agent/autodiscovery/tag"
+    url: "agent/autodiscovery/tag/"
     parent: "autodiscovery"
     weight: 40
   - name: "Discovery Management"
-    url: "agent/autodiscovery/management"
+    url: "agent/autodiscovery/management/"
     parent: "autodiscovery"
     weight: 50
   - name: "Troubleshooting"
-    url: "agent/autodiscovery/troubleshooting"
+    url: "agent/autodiscovery/troubleshooting/"
     parent: "autodiscovery"
     weight: 60
   - name: "Cluster Checks"
-    url: "agent/autodiscovery/clusterchecks"
+    url: "agent/autodiscovery/clusterchecks/"
     parent: "autodiscovery"
     weight: 70
   - name: "Proxy"
-    url: "agent/proxy"
+    url: "agent/proxy/"
     parent: "agent"
     weight: 430
   ## Upgrade to Agent v6
   - name: "Upgrade to Agent v6"
-    url: "agent/guide/upgrade-to-agent-v6"
+    url: "agent/guide/upgrade-to-agent-v6/"
     parent: "agent"
     weight: 440
   # Troubleshooting
@@ -222,27 +222,27 @@ main:
     weight: 450
     identifier: "troubleshooting"
   - name: "Debug Mode"
-    url: "agent/troubleshooting/debug_mode"
+    url: "agent/troubleshooting/debug_mode/"
     parent: "troubleshooting"
     weight: 460
   - name: "Agent Flare"
-    url: "agent/troubleshooting/send_a_flare"
+    url: "agent/troubleshooting/send_a_flare/"
     parent: "troubleshooting"
     weight: 470
   - name: "Agent Check Status"
-    url: "agent/troubleshooting/agent_check_status"
+    url: "agent/troubleshooting/agent_check_status/"
     parent: "troubleshooting"
     weight: 480
   - name: "NTP Issues"
-    url: "agent/troubleshooting/ntp"
+    url: "agent/troubleshooting/ntp/"
     parent: "troubleshooting"
     weight: 490
   - name: "Permission Issues"
-    url: "agent/troubleshooting/permissions"
+    url: "agent/troubleshooting/permissions/"
     parent: "troubleshooting"
     weight: 500
   - name: "Integrations Issues"
-    url: "agent/troubleshooting/integrations"
+    url: "agent/troubleshooting/integrations/"
     parent: "troubleshooting"
     weight: 510
   # Guides
@@ -311,15 +311,15 @@ main:
     identifier: "graphing_metrics"
     weight: 20
   - name: "Explorer"
-    url: "graphing/metrics/explorer"
+    url: "graphing/metrics/explorer/"
     parent: "graphing_metrics"
     weight: 10
   - name: "Summary"
-    url: "graphing/metrics/summary"
+    url: "graphing/metrics/summary/"
     parent: "graphing_metrics"
     weight: 20
   - name: "Distributions"
-    url: "graphing/metrics/distributions"
+    url: "graphing/metrics/distributions/"
     parent: "graphing_metrics"
     weight: 30
   - name: "Notebooks"
@@ -423,7 +423,7 @@ main:
     parent: "graphing"
     weight: 80
   - name: "Guides"
-    url: "graphing/guide"
+    url: "graphing/guide/"
     parent: "graphing"
     weight: 90
   # - #   name: "FAQ"
@@ -477,7 +477,7 @@ main:
     parent: "monitor_types"
     weight: 90
   - name: "Log"
-    url: "monitors/monitor_types/log"
+    url: "monitors/monitor_types/log/"
     parent: "monitor_types"
     weight: 100
   - name: "Metric"
@@ -529,7 +529,7 @@ main:
     weight: 70
     parent: "alerting"
   - name: "Guides"
-    url: "monitors/guide"
+    url: "monitors/guide/"
     weight: 80
     parent: "alerting"
       #- #  name: "FAQ"
@@ -606,27 +606,27 @@ main:
     identifier: "tracing_advanced"
     weight: 30
   - name: "Connect Logs and Traces"
-    url: "tracing/advanced/connect_logs_and_traces"
+    url: "tracing/advanced/connect_logs_and_traces/"
     parent: "tracing_advanced"
     weight: 10
   - name: "Adding Metadata to Spans"
-    url: "tracing/advanced/adding_metadata_to_spans"
+    url: "tracing/advanced/adding_metadata_to_spans/"
     parent: "tracing_advanced"
     weight: 20
   - name: "Runtime Metrics"
-    url: "tracing/advanced/runtime_metrics"
+    url: "tracing/advanced/runtime_metrics/"
     parent: "tracing_advanced"
     weight: 30
   - name: "OpenTracing"
-    url: "tracing/advanced/opentracing"
+    url: "tracing/advanced/opentracing/"
     parent: "tracing_advanced"
     weight: 40
   - name: "Manual Instrumentation"
-    url: "tracing/advanced/manual_instrumentation"
+    url: "tracing/advanced/manual_instrumentation/"
     parent: "tracing_advanced"
     weight: 50
   - name: "Setting Primary Tags to scope "
-    url: "tracing/advanced/setting_primary_tags_to_scope"
+    url: "tracing/advanced/setting_primary_tags_to_scope/"
     parent: "tracing_advanced"
     weight: 60
   # Using the APM UI
@@ -636,23 +636,23 @@ main:
     identifier: "tracing_vis"
     weight: 40
   - name: "Services List"
-    url: "tracing/visualization/services_list"
+    url: "tracing/visualization/services_list/"
     parent: "tracing_vis"
     weight: 10
   - name: "Service Page"
-    url: "tracing/visualization/service"
+    url: "tracing/visualization/service/"
     parent: "tracing_vis"
     weight: 10
   - name: "Resource Page"
-    url: "tracing/visualization/resource"
+    url: "tracing/visualization/resource/"
     parent: "tracing_vis"
     weight: 20
   - name: "Trace View"
-    url: "tracing/visualization/trace"
+    url: "tracing/visualization/trace/"
     parent: "tracing_vis"
     weight: 30
   - name: "Service Map"
-    url: "tracing/visualization/services_map"
+    url: "tracing/visualization/services_map/"
     parent: "tracing_vis"
     weight: 40
 
@@ -663,15 +663,15 @@ main:
     identifier: "tracing_search_analytics"
     weight: 50
   - name: "Agent Configuration"
-    url: "tracing/trace_search_and_analytics/agent_trace_search"
+    url: "tracing/trace_search_and_analytics/agent_trace_search/"
     parent: "tracing_search_analytics"
     weight: 10
   - name: "Trace Search"
-    url: "tracing/trace_search_and_analytics/search"
+    url: "tracing/trace_search_and_analytics/search/"
     parent: "tracing_search_analytics"
     weight: 20
   - name: "Trace Analytics"
-    url: "tracing/trace_search_and_analytics/analytics"
+    url: "tracing/trace_search_and_analytics/analytics/"
     parent: "tracing_search_analytics"
     weight: 30
   # Trace API
@@ -681,11 +681,11 @@ main:
     weight: 60
   # Libraries
   - name: "Community Libraries"
-    url: "developers/libraries/#apm-tracing-client-libraries"
+    url: "developers/libraries/#apm-tracing-client-libraries/"
     parent: "tracing"
     weight: 70
   - name: "Guides"
-    url: "tracing/guide"
+    url: "tracing/guide/"
     identifier: "tracing_guides"
     parent: "tracing"
     weight: 80
@@ -750,7 +750,7 @@ main:
     parent: "log_collection"
     weight: 80
   - name: "Other Integrations"
-    url: "integrations/#cat-log-collection"
+    url: "integrations/#cat-log-collection/"
     parent: "log_collection"
     weight: 90
 
@@ -790,19 +790,19 @@ main:
     identifier: "log_explorer"
     weight: 40
   - name: "Search"
-    url: "logs/explorer/search"
+    url: "logs/explorer/search/"
     parent: "log_explorer"
     weight: 10
   - name: "Log Analytics"
-    url: "logs/explorer/analytics"
+    url: "logs/explorer/analytics/"
     parent: "log_explorer"
     weight: 20
   - name: "Saved Views"
-    url: "logs/explorer/saved_views"
+    url: "logs/explorer/saved_views/"
     parent: "log_explorer"
     weight: 30
   - name: "Log Patterns"
-    url: "logs/explorer/patterns"
+    url: "logs/explorer/patterns/"
     parent: "log_explorer"
     weight: 40
 
@@ -813,12 +813,12 @@ main:
   # LOGS - Archives
 
   - name: "Archives"
-    url: "logs/archives/s3"
+    url: "logs/archives/s3/"
     parent: "log_management"
     identifier: "log_archives"
     weight: 60
   - name: "AWS S3"
-    url: "logs/archives/s3"
+    url: "logs/archives/s3/"
     parent: "log_archives"
     weight: 10
 
@@ -833,7 +833,7 @@ main:
     weight: 70
 
   - name: "Security"
-    url: "logs/security"
+    url: "logs/security/"
     parent: "log_management"
     weight: 80
 
@@ -846,24 +846,24 @@ main:
     identifier: "synthetics"
     weight: 1000
   - name: "API Tests"
-    url: "synthetics/api_tests"
+    url: "synthetics/api_tests/"
     parent: "synthetics"
     weight: 10
     id: "api_tests"
   - name: "Browser Tests"
-    url: "synthetics/browser_tests"
+    url: "synthetics/browser_tests/"
     parent: "synthetics"
     weight: 20
   - name: "APM Integration"
-    url: "synthetics/apm"
+    url: "synthetics/apm/"
     parent: "synthetics"
     weight: 30
   - name: "Identify Synthetics Bots"
-    url: "synthetics/identify_synthetics_bots"
+    url: "synthetics/identify_synthetics_bots/"
     parent: "synthetics"
     weight: 40
   - name: "Settings"
-    url: "synthetics/settings"
+    url: "synthetics/settings/"
     parent: "synthetics"
     weight: 50
 
@@ -880,13 +880,13 @@ main:
     identifier: "dev_tools_dogstatsd"
     weight: 10
   - name: "Data Types and Tags"
-    url: "developers/dogstatsd/data_types"
+    url: "developers/dogstatsd/data_types/"
     parent: "dev_tools_dogstatsd"
   - name: "Datagram and Shell Usage"
-    url: "developers/dogstatsd/datagram_shell"
+    url: "developers/dogstatsd/datagram_shell/"
     parent: "dev_tools_dogstatsd"
   - name: "Unix Domain Socket usage"
-    url: "developers/dogstatsd/unix_socket"
+    url: "developers/dogstatsd/unix_socket/"
     parent: "dev_tools_dogstatsd"
   - name: "Metrics"
     url: "developers/metrics/"
@@ -898,27 +898,27 @@ main:
     parent: "dev_tools_metrics"
     weight: 10
   - name: "Counts"
-    url: "developers/metrics/counts"
+    url: "developers/metrics/counts/"
     parent: "dev_tools_metrics"
     weight: 20
   - name: "Distributions"
-    url: "developers/metrics/distributions"
+    url: "developers/metrics/distributions/"
     parent: "dev_tools_metrics"
     weight: 30
   - name: "Gauges"
-    url: "developers/metrics/gauges"
+    url: "developers/metrics/gauges/"
     parent: "dev_tools_metrics"
     weight: 40
   - name: "Histograms"
-    url: "developers/metrics/histograms"
+    url: "developers/metrics/histograms/"
     parent: "dev_tools_metrics"
     weight: 50
   - name: "Rates"
-    url: "developers/metrics/rates"
+    url: "developers/metrics/rates/"
     parent: "dev_tools_metrics"
     weight: 60
   - name: "Sets"
-    url: "developers/metrics/sets"
+    url: "developers/metrics/sets/"
     parent: "dev_tools_metrics"
     weight: 70
   - name: "Libraries"
@@ -930,11 +930,11 @@ main:
     parent: "dev_tools"
     weight: 40
   - name: "Write a Custom Check"
-    url: "developers/write_agent_check"
+    url: "developers/write_agent_check/"
     parent: "dev_tools"
     weight: 50
   - name: "Write a Prometheus Check"
-    url: "developers/prometheus"
+    url: "developers/prometheus/"
     parent: "dev_tools"
     weight: 60
   # Integrations core doc
@@ -944,15 +944,15 @@ main:
     identifier: "dev_tools_integrations"
     weight: 70
   - name: "Create a new Integration"
-    url: "developers/integrations/new_check_howto"
+    url: "developers/integrations/new_check_howto/"
     parent: "dev_tools_integrations"
     weight: 10
   - name: "Python"
-    url: "developers/integrations/python"
+    url: "developers/integrations/python/"
     parent: "dev_tools_integrations"
     weight: 20
   - name: "Legacy"
-    url: "developers/integrations/legacy"
+    url: "developers/integrations/legacy/"
     parent: "dev_tools_integrations"
     weight: 30
   - name: "Guides"
@@ -993,31 +993,31 @@ main:
     weight: 30
   # SAML subnav
   - name: "Active Directory"
-    url: "account_management/saml/activedirectory"
+    url: "account_management/saml/activedirectory/"
     parent: "account_management_saml"
     weight: 10
   - name: "Auth0"
-    url: "account_management/saml/auth0"
+    url: "account_management/saml/auth0/"
     parent: "account_management_saml"
     weight: 20
   - name: "Azure"
-    url: "account_management/saml/azure"
+    url: "account_management/saml/azure/"
     parent: "account_management_saml"
     weight: 30
   - name: "Google"
-    url: "account_management/saml/google"
+    url: "account_management/saml/google/"
     parent: "account_management_saml"
     weight: 40
   - name: "NoPassword"
-    url: "account_management/saml/nopassword"
+    url: "account_management/saml/nopassword/"
     parent: "account_management_saml"
     weight: 50
   - name: "Okta"
-    url: "account_management/saml/okta"
+    url: "account_management/saml/okta/"
     parent: "account_management_saml"
     weight: 60
   - name: "SafeNet"
-    url: "account_management/saml/safenet"
+    url: "account_management/saml/safenet/"
     parent: "account_management_saml"
     weight: 70
   - name: "Multi-org accounts"
@@ -1051,19 +1051,19 @@ main:
     weight: 1400
   # SECURITY - Subnav start
   - name: "Agent"
-    url: "security/agent"
+    url: "security/agent/"
     parent: "security"
     weight: 10
   - name: "APM (Tracing)"
-    url: "security/tracing"
+    url: "security/tracing/"
     parent: "security"
     weight: 20
   - name: "Log Management"
-    url: "security/logs"
+    url: "security/logs/"
     parent: "security"
     weight: 30
   - name: "Other considerations"
-    url: "security/other"
+    url: "security/other/"
     parent: "security"
     weight: 40
 

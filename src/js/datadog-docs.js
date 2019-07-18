@@ -669,9 +669,10 @@ function hasParentLi(el){
             }
 
             // Add open class to li if the li has a child ul
-            if(el.closest('li') && el.closest('li').querySelectorAll('ul')){
+            if(el.closest('li') && el.closest('li').querySelectorAll('ul').length !== 0){
                 el.closest('li').classList.add('open');
             }
+
             if (el.closest('.sub-menu')) {
                 el.closest('.sub-menu').previousElementSibling.classList.add('active');
             }
@@ -709,6 +710,10 @@ function getPathElement(){
         aPath = document.querySelector('.side [data-path*="tracing/guide"]');
     }
 
+    if (path.includes('monitors/guide')) {
+        aPath = document.querySelector('.side [data-path*="monitors/guide"]');
+    }
+
     if(aPath){
         aPath.classList.add('active');
         hasParentLi(aPath);
@@ -722,6 +727,7 @@ function getPathElement(){
     }
 }
 
+// remove open class from li elements and active class from a elements
 function closeNav(){
     var activeMenus = document.querySelectorAll('.side .sidenav-nav .active');
     var openMenus = document.querySelectorAll('.side .sidenav-nav .open');
@@ -805,7 +811,7 @@ function updateSidebar(event){
         event.target.querySelector('a').classList.add('active');
         if(event.target.closest('li').querySelector('ul')){
             event.target.closest('li').classList.add('open');
-        }
+        } 
     }else{
         if(event.target.closest('li').querySelector('a')) {
             event.target.closest('li').querySelector('a').classList.add('active');
