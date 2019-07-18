@@ -246,7 +246,7 @@ Le Pub/Sub peut désormais recevoir des logs de Stackdriver et les transmettre �
 
 Consultez les différentes pages des intégrations Google Cloud pour en savoir plus sur les métriques associées.
 
-### Events
+### Événements
 
 Tous les événements de service générés par votre Google Cloud Platform sont transférés à votre [flux d'événements Datadog][27]. Les autres événements enregistrés dans Stackdriver ne sont actuellement pas disponibles, mais le seront prochainement grâce au [produit Log Management de Datadog][28].
 

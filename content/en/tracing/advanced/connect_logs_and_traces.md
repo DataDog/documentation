@@ -40,7 +40,7 @@ If the logs are already JSON formatted, there is nothing left to do. If the logs
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
-[1]: /tracing/languages/java/#configuration
+[1]: /tracing/setup/java/#configuration
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -118,6 +118,31 @@ const tracer = require('dd-trace').init({
 This enables automatic trace ID injection for `winston`, `bunyan`, and `pino`.
 
 **Note**: Automatic injection only works for logs formatted as JSON.
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+The .NET Tracer uses the [LibLog][2] library to automatically inject trace IDs into your application logs. It contains transparent built-in support for injecting into [NLog][3], [Log4Net][4], and [Serilog][5].
+
+Enable injection in the .NET Tracer’s [configuration][1] by setting `DD_LOGS_INJECTION=true` through environment variables or the configuration files.
+
+Additionally, injection can be enabled in the code:
+
+```csharp
+using Datadog.Trace;
+using Datadog.Trace.Configuration;
+
+var settings = new TracerSettings { LogsInjectionEnabled = true };
+var tracer = new Tracer(settings);
+```
+
+**Note**: This setting is only read during `Tracer` initialization. Changes to this setting after the `Tracer` instance is created are ignored.
+
+[1]: /tracing/setup/dotnet/#configuration
+[2]: https://github.com/damianh/LibLog
+[3]: http://nlog-project.org/
+[4]: https://logging.apache.org/log4net/
+[5]: http://serilog.net/
 
 {{% /tab %}}
 {{% tab "PHP" %}}
@@ -227,7 +252,7 @@ Then update your logger configuration to include `dd.trace_id` and `dd.span_id` 
 [See the Java logging documentation][1] for more details about specific logger implementation or to learn how to log in JSON.
 
 
-[1]: /logs/log_collection/java/?tab=log4j#raw-format
+[1]: /logs/log_collection/java/#raw-format
 [2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -374,7 +399,7 @@ The above example illustrates how to use the span's context in the standard libr
 **Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][2].
 
 
-[1]: /tracing/languages/go/#configuration
+[1]: /logs/log_collection/go/#configure-your-logger
 [2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -412,6 +437,27 @@ Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
 [1]: /help
 {{% /tab %}}
+{{% tab ".NET" %}}
+
+To manually inject trace identifiers into your logs, access the necessary values through the `CorrelationIdentifier` static class. If your logging library supports structured logging, such as JSON messages, add the `dd.trace_id` and `dd.span_id` properties with their respective values.
+
+Otherwise, add the strings `dd.trace_id=<TRACE_ID>` and `dd.span_id=<SPAN_ID>` to your log message. For example:
+
+```csharp
+using Datadog.Trace;
+
+var traceId = CorrelationIdentifier.TraceId;
+var spanId = CorrelationIdentifier.SpanId;
+
+var message = $"My log message. [dd.trace_id={traceId} dd.span_id={spanId}]";
+```
+
+**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][2].
+
+[1]: /logs/log_collection/csharp/#configure-your-logger
+[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
+
+{{% /tab %}}
 {{% tab "PHP" %}}
 
 Coming Soon. Reach out to [the Datadog support team][1] to learn more.
@@ -430,4 +476,4 @@ Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_collection/?tab=tailexistingfiles#enabling-log-collection-from-integrations
+[1]: /agent/logs/#enabling-log-collection-from-integrations

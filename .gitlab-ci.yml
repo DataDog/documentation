@@ -18,7 +18,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:david.jones_config-updates
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
   tags:
     - "runner:main"
     - "size:large"
@@ -35,15 +35,15 @@ build_preview:
     URL: ${PREVIEW_DOMAIN}
     CONFIG: ${PREVIEW_CONFIG}
     MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
+    CONFIGURATION_FILE: "./local/etc/pull_config_preview.yaml"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - version_static_assets
-    #- sync_integration_descriptions
-    - sync_integration_descriptions_cached
+    - sync_integration_descriptions
+    #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
     - build_hugo_site_new
-    - minify_html
     - collect_static_assets
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
@@ -76,6 +76,7 @@ build_live:
     CONFIG: ${LIVE_CONFIG}
     URL: ${LIVE_DOMAIN}
     UNTRACKED_EXTRAS: "data,content/en/integrations,content/en/agent/basic_agent_usage/heroku.md,content/en/developers/integrations"
+    CONFIGURATION_FILE: "./local/etc/pull_config.yaml"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
@@ -84,11 +85,11 @@ build_live:
     - sync_integration_metrics
     - placehold_translations
     - build_hugo_site_new
-    - minify_html
     - collect_static_assets
     - push_site_to_s3
     - create_artifact
     - create_artifact_untracked
+    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
   only:
     - master
 
@@ -122,6 +123,7 @@ manage_translations:on-schedule:
     CONFIG: ${PREVIEW_CONFIG}
   script:
     - if [[ $(date +%u) -lt 6 ]]; then manage_translations "${APIKEY}"; fi
+    - chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
   only:
     - schedules
 
