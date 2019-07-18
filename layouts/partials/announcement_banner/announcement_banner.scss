@@ -8,6 +8,11 @@
   //linear-gradient($direction, rgb($left) 0%, rgb($left) 100%)
 }
 
+// Announcement Banner Color Variables
+$announcement_banner_color: #6DFFBC;
+$announcement_banner_color_2: #6DFFBC;
+$announcement_banner_text_color: #000000;
+
 .announcement_banner {
   display: none;
 }
@@ -20,10 +25,10 @@
     top: 0;
     width: 100%;
     z-index: 9999;
-    @include gradient(#6DFFBC, #6DFFBC, 1);
+    @include gradient($announcement_banner_color, $announcement_banner_color_2, 1);
     a {
       display: block;
-      color: #000000;
+      color: $announcement_banner_text_color;
       font-size: 20px;
       margin-top: -2px;
       font-weight: bold;
@@ -41,7 +46,7 @@
   right: 10px;
   top: 0;
   font-size: 17px;
-  color: #fff;
+  color: $announcement_banner_text_color;
   cursor: pointer;
   padding: 6px;
 }
