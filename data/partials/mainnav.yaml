@@ -208,7 +208,7 @@ main:
           - name: "Host Map"
             url: "graphing/infrastructure/hostmap/"
           - name: "Network Performance Monitor"
-            url: "monitors/network_performance_monitor/"
+            url: "/graphing/infrastructure/network_performance_monitor/"
           - name: "Live Containers"
             url: "graphing/infrastructure/livecontainers/"
           - name: "Live Processes"

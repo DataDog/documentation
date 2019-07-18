@@ -4,7 +4,7 @@ kind: documentation
 description: Explore metrics for point to point communication on your infrastructure.
 beta: true
 aliases:
-  - /graphing/event_stream/
+  - monitors/network_flow_monitors/
 further_reading:
     - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
       tag: "Blog"
