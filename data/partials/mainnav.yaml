@@ -212,7 +212,7 @@ main:
           - name: "Live Processes"
             url: "graphing/infrastructure/process/"
           - name: "Network Performance Monitor"
-            url: "/graphing/infrastructure/network_performance_monitor/"
+            url: "graphing/infrastructure/network_performance_monitor/"
           - name: "Serverless"
             url: "graphing/infrastructure/serverless/"
       # GRAPHING - Functions
