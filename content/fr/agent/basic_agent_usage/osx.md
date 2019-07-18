@@ -100,7 +100,7 @@ Fichiers de configuration pour les [intégrations][1] :
 
 L'Agent intègre un environnement Python dans `/opt/datadog-agent/embedded/`. Les binaires courants comme `python` et `pip` se trouvent dans `/opt/datadog-agent/embedded/bin/`.
 
-Pour en savoir plus, consultez les instructions afin de découvrir comment [ajouter des paquets à l'Agent intégré][4].
+Pour en savoir plus, consultez les instructions relatives à l'[ajout de paquets à l'Agent intégré][4].
 
 ## Pour aller plus loin
 
