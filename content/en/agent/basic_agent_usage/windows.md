@@ -202,7 +202,7 @@ or cmd.exe:
 "C:\Program Files\Datadog\Datadog Agent\embedded2\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
-** Note **: For agent version <= 6.11 the path should be `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe` instead.
+**Note**: For agent version <= 6.11 the path should be `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe` instead.
 
 
 {{% /tab %}}

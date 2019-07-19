@@ -44,7 +44,7 @@ sudo dd-agent /opt/datadog-agent/embedded/bin/pip install <package_name>
 
 Custom Python packages can be installed using the Agent's embedded Python using the following command in Powershell:
 
-For agent version <= 6.11
+For agent version <= 6.11:
 ```
 C:\"Program Files"\Datadog\"Datadog Agent"\embedded\python -m install <package_name>
 ```
