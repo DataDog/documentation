@@ -20,7 +20,7 @@ further_reading:
 ---
 ## Installation et démarrage
 
-Pour obtenir une description de la terminologie utilisée dans l'APM, consultez la [documentation officielle][1].
+Pour connaître la définition des termes utilisés dans l'APM, consultez la [documentation officielle][1].
 
 Pour découvrir comment effectuer des contributions open source au traceur PHP, consultez le [guide relatif aux contributions][2].
 
