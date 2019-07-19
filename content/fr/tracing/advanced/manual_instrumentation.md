@@ -13,7 +13,7 @@ further_reading:
     tags: Enrichir vos traces
     text: Implémenter Opentracing dans vos applications
   - link: tracing/visualization/
-    tag: Interface de l'APM
+    tag: Utiliser l'UI de l'APM
     text: 'Explorer vos services, ressources et traces'
 ---
 Grâce à l'instrumentation manuelle, vous pouvez écrire des programmes afin de créer des traces à envoyer à Datadog. Cela vous permet d'effectuer un tracing du code interne qui n'est pas enregistré par l'instrumentation automatique. Avant d'instrumenter votre application, consultez la terminologie de l'APM de Datadog et passez en revue les concepts de base de l'APM.

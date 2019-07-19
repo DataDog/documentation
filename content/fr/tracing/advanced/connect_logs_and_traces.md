@@ -9,7 +9,7 @@ further_reading:
     tags: Enrichir vos Traces
     text: Implémenter Opentracing dans vos applications
   - link: tracing/visualization/
-    tag: Interface de l'APM
+    tag: Utiliser l'UI de l'APM
     text: 'Explorer vos services, ressources et traces'
   - link: 'https://www.datadoghq.com/blog/request-log-correlation/'
     tag: Blog
