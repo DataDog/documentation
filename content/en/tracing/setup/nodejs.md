@@ -107,7 +107,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [graphql][12]    | `>=0.10` | Fully Supported | Supports Apollo Server and express-graphql |
 | [hapi][13]       | `>=2`    | Fully Supported |                                            |
 | [koa][14]        | `>=2`    | Fully Supported |                                            |
-| [paperplane][41] | `>=2.3`  | Fully Supported | Not supported in [serverless-mode][42]     |
+| [paperplane][41] | `>=2.3.1`  | Fully Supported | Not supported in [serverless-mode][42]     |
 | [restify][15]    | `>=3`    | Fully Supported |                                            |
 
 #### Native Module Compatibility
