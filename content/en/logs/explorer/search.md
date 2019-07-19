@@ -84,15 +84,15 @@ To perform a multi-character wildcard search, use the `*` symbol as follows:
 * `web*` matches all log messages starting with `web`
 * `*web` matches all log messages that end with `web`
 
-Wildcard searches work within facets with this syntax. This query will return all the services that end with the string `mongo`:
+Wildcard searches work within facets with this syntax. This query returns all the services that end with the string `mongo`:
 
 `service:*mongo`
 
-Wildcard searches can also be used to search in the plain text of a log that is not part of a facet. This query will return all the logs that contain the string `NETWORK`:
+Wildcard searches can also be used to search in the plain text of a log that is not part of a facet. This query returns all the logs that contain the string `NETWORK`:
 
 `"*NETWORK*"`
 
-However, this search term will not return logs that contain the string `NETWORK` if it is in a facet.
+However, this search term does not return logs that contain the string `NETWORK` if it is in a facet.
 
 ### Numerical values
 Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all logs that have a response time over 100ms with:
