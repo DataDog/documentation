@@ -1,8 +1,10 @@
 ---
-title: Network Flow Monitoring
+title: Network Performance Monitoring
 kind: documentation
 description: Explore metrics for point to point communication on your infrastructure.
 beta: true
+aliases:
+  - /monitors/network_flow_monitors/
 further_reading:
     - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
       tag: "Blog"
