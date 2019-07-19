@@ -81,7 +81,7 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 
 * The main executable name is `agent.exe`.
 * The configuration GUI is a browser-based configuration application (for Windows 64-bit only).
-* Commands can be run from the command line `"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" <command>`. Command-line options are below:
+* Commands can be run from the command line `"C:\Program Files\Datadog\Datadog Agent\bin\agent.exe" <command>` for agent version >= 6.12 or `"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" <command>` for agent version <= 6.11. Command-line options are below:
 
 | Command         | Description                                                                      |
 |-----------------|----------------------------------------------------------------------------------|
@@ -163,7 +163,7 @@ To verify the Agent is running, check if the `DatadogAgent` service in the Servi
 To receive more information about the Agent's state, start the Datadog Agent Manager:
 
 * Right click on the Datadog Agent system tray icon -> Configure, or
-* Run `& "C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" launch-gui` from an admin Powershell prompt
+* Run  `& "C:\Program Files\Datadog\Datadog Agent\bin\agent.exe" launch-gui` for agent version >= 6.12 or `& "C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" launch-gui` for agent version <= 6.11 from an admin Powershell prompt
 
 Then, open the status page by going to *Status* -> *General*.
 Get more information on running checks in *Status* -> *Collector* and *Checks* -> *Summary*.
