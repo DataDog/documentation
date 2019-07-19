@@ -132,7 +132,7 @@ PS C:\vagrant> .\send-statsd.ps1 "custom_metric:123|g|#shell"
 PS C:\vagrant>
 ```
 
-On any platform with Python (on Windows, the Agent's embedded Python interpreter can be used, which is located at `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe` for agent versions <= 6.12 and in `C:\Program Files\Datadog\Datadog Agent\embedded2\python.exe` for agent versions >= 6.13):
+On any platform with Python (on Windows, the Agent's embedded Python interpreter can be used, which is located at `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe` for Agent versions <= 6.12 and in `C:\Program Files\Datadog\Datadog Agent\embedded2\python.exe` for Agent versions >= 6.13):
 
 ```python
 import socket
