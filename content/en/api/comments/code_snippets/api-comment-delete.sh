@@ -1,6 +1,5 @@
 api_key=<YOUR_API_KEY>
 app_key=<YOUR_APP_KEY>
-# comment_id=1382559936236196216
 
 # Create a comment to delete. Use jq (http://stedolan.github.io/jq/download/) to get the comment id.
 comment_id=$(curl -X POST -H "Content-type: application/json" \

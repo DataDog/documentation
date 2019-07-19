@@ -117,7 +117,7 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
 * **Inbound**:
 
-  * `8125/udp`: DogStatsd. Unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost:
+  * `8125/udp`: DogStatsd. Unless `non_local_traffic` is set to true. This port is available on localhost:
 
       * `127.0.0.1`
       * `::1`

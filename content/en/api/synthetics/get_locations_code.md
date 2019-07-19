@@ -6,7 +6,7 @@ external_redirect: /api/#get-locations
 ---
 
 ##### Signature
-`GET /api/v1/synthetics/locations`
+`GET /v1/synthetics/locations`
 
 ##### Example Request
 

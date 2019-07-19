@@ -92,7 +92,7 @@ logs_config:
 
 
 [1]: /agent/basic_agent_usage
-[2]: /logs/log_collection/#custom-log-collection
+[2]: /agent/logs/#custom-log-collection
 [3]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
@@ -190,7 +190,7 @@ Use the `com.datadoghq.ad.logs` label as below on your containers to make sure t
 See the [multi-line processing rule documentation][1] to get more pattern examples.
 
 
-[1]: /logs/log_collection/#multi-line-aggregation
+[1]: /agent/logs/advanced_log_collection/#multi-line-aggregation
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -286,4 +286,4 @@ ac_exclude = ["name:datadog-agent"]
 [1]: /integrations/journald
 [2]: /agent/autodiscovery
 [3]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
-[4]: /logs/log_collection/#custom-log-collection
+[4]: /agent/logs/#custom-log-collection

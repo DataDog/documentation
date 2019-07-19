@@ -34,7 +34,7 @@ Trace Search & Analytics is available starting in version 0.25.0 of the Java tra
 Trace Search & Analytics is available starting in version 0.19.0 of the Python tracing client. Enable Trace Search & Analytics globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
 * Tracer Configuration: `ddtrace.config.analytics_enabled = True`
-* Environment Variable: `DD_ANALYTICS_ENABLED=true`
+* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
  After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
 
@@ -353,7 +353,7 @@ tracer.use('mysqli', {
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS_KEY` tag on the service root span:
+Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS_SAMPLE_RATE` tag on the service root span:
 
 ```java
 import datadog.trace.api.DDTags;
@@ -368,7 +368,7 @@ class MyClass {
     // Span provided by @Trace annotation.
     if (span != null) {
       span.setTag(DDTags.SERVICE_NAME, "my-custom-service");
-      span.setTag(DDTags.ANALYTICS_SAMPLE_RATE, true);
+      span.setTag(DDTags.ANALYTICS_SAMPLE_RATE, 1.0);
     }
   }
 }
@@ -475,5 +475,12 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 {{% /tab %}}
 {{< /tabs >}}
 
+## APM Event Filtering
+
+An APM event represents the top span for a service, including its metadata. Once enabled, APM events are sent at 100% throughput by default. For example, a Java service with 100 requests will generate 100 APM events from its `servlet.request` spans, as each `servlet.request` span generates an APM event. [Filtering APM events][3] has the benefit of reducing the number of billable APM events and has no effect on trace sampling. Once a service has been filtered lower than 100%, APM event analytics are upscaled to display an estimate by default, and you have the option to display the filtered value. 
+
+{{< img src="tracing/trace_search_and_analytics/analytics/apm_event_filtering.png" alt="APM Event Filtering" responsive="true" style="width:100%;">}}
+
 [1]: https://app.datadoghq.com/apm/search
 [2]: /tracing/trace_search_and_analytics/agent_trace_search
+[3]: https://app.datadoghq.com/apm/settings

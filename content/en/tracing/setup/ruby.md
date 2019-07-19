@@ -200,6 +200,71 @@ Where `name` should be a `String` that describes the generic kind of operation b
 
 And `options` is an optional `Hash` that accepts the following parameters:
 
+### Integrations
+
+#### Interpreter Compatibility
+
+Ruby APM includes support for the following Ruby interpreters:
+
+
+| Type                               | Version | Support type    |
+| ---------------------------------- | -----   | --------------- |
+| [MRI][10]                          | 1.9.1   | Deprecated      |
+|                                    | 1.9.3   | Deprecated      |
+|                                    | 2.0     | Fully Supported |
+|                                    | 2.1     | Fully Supported |
+|                                    | 2.2     | Fully Supported |
+|                                    | 2.3     | Fully Supported |
+|                                    | 2.4     | Fully Supported |
+|                                    | 2.5     | Fully Supported |
+| [JRuby][11]                        | 9.1.5   | Experimental    |
+
+#### Web Server Compatibility
+
+Ruby APM includes support for the following web servers:
+
+| Type                                           | Version      | Support type    |
+| ---------------------------------------------- | ------------ | --------------- |
+| [Puma][12]                                     | 2.16+ / 3.6+ | Fully Supported |
+| [Unicorn][13]                                  | 4.8+ / 5.1+  | Fully Supported |
+| [Passenger][14]                                | 5.0+         | Fully Supported |
+
+#### Library Compatibility
+
+Ruby APM includes support for the following libraries and frameworks:
+
+| Name                           | Versions Supported     | Support type    | How to configure |
+| ------------------------------ | ---------------------- | --------------- | ---------------- |
+| [Active Model Serializers][15] | `>= 0.9`               | Fully Supported | *[Link][16]*     |
+| [Active Record][17]            | `>= 3.2, < 6.0`        | Fully Supported | *[Link][18]*     |
+| [AWS][19]                      | `>= 2.0`               | Fully Supported | *[Link][20]*     |
+| [Concurrent Ruby][21]          | `>= 0.9`               | Fully Supported | *[Link][22]*     |
+| [Dalli][23]                    | `>= 2.7`               | Fully Supported | *[Link][24]*     |
+| [DelayedJob][25]               | `>= 4.1`               | Fully Supported | *[Link][26]*     |
+| [Elastic Search][27]           | `>= 6.0`               | Fully Supported | *[Link][28]*     |
+| [Excon][29]                    | `>= 0.62`              | Fully Supported | *[Link][30]*     |
+| [Faraday][31]                  | `>= 0.14`              | Fully Supported | *[Link][32]*     |
+| [Grape][33]                    | `>= 1.0`               | Fully Supported | *[Link][34]*     |
+| [GraphQL][35]                  | `>= 1.7.9`             | Fully Supported | *[Link][36]*     |
+| [gRPC][37]                     | `>= 1.10`              | Fully Supported | *[Link][38]*     |
+| [MongoDB][39]                  | `>= 2.0`               | Fully Supported | *[Link][40]*     |
+| [MySQL2][41]                   | `>= 0.3.10`            | Fully Supported | *[Link][42]*     |
+| [Net/HTTP][43]                 | *(Any Supported Ruby)* | Fully Supported | *[Link][44]*     |
+| [Racecar][45]                  | `>= 0.3.5`             | Fully Supported | *[Link][46]*     |
+| [Rack][47]                     | `>= 1.4.7`             | Fully Supported | *[Link][48]*     |
+| [Rails][49]                    | `>= 3.2, < 6.0`        | Fully Supported | *[Link][50]*     |
+| [Rake][51]                     | `>= 12.0`              | Fully Supported | *[Link][52]*     |
+| [Redis][53]                    | `>= 3.2, < 4.0`        | Fully Supported | *[Link][54]*     |
+| [Resque][55]                   | `>= 1.0, < 2.0`        | Fully Supported | *[Link][56]*     |
+| [RestClient][57]               | `>= 1.8`               | Fully Supported | *[Link][58]*     |
+| [Sequel][59]                   | `>= 3.41`              | Fully Supported | *[Link][60]*     |
+| [Shoryuken][61]                | `>= 4.0.2`             | Fully Supported | *[Link][62]*     |
+| [Sidekiq][63]                  | `>= 4.0`               | Fully Supported | *[Link][64]*     |
+| [Sinatra][65]                  | `>= 1.4.5`             | Fully Supported | *[Link][66]*     |
+| [Sucker Punch][67]             | `>= 2.0`               | Fully Supported | *[Link][68]*     |
+
+*Fully Supported* support indicates all tracer features are available.
+
 | Key | Type | Description | Default |
 | --- | --- | --- | --- |
 | `service`     | `String` | The service name which this span belongs (e.g. `'my-web-service'`) | Tracer `default-service`, `$PROGRAM_NAME` or `'ruby'` |
@@ -305,6 +370,10 @@ end
 ```
 
 `options` is a `Hash` of integration-specific configuration settings.
+=======
+*Deprecated* indicates support will be removed in a future release.
+
+## Configuration
 
 For a list of available integrations, and their configuration options, please refer to the following:
 

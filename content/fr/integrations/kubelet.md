@@ -55,7 +55,7 @@ Le check Kubelet peut être exécuté avec deux modes :
 
 ## Prise en charge d'OpenShift < 3.7
 
-Le port 4194 cAdvisor est désactivé par défaut sur OpenShift. Pour l’activer, vous devez ajouter
+Le port 4194 cAdvisor est désactivé par défaut sur OpenShift. Pour l'activer, vous devez ajouter
 les lignes suivantes à votre [fichier node-config][4] :
 
 ```

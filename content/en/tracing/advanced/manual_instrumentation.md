@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /tracing/setup/php/manual-installation
   - /agent/apm/php/manual-installation
+  - /tracing/guide/distributed_tracing/
 further_reading:
 - link: "tracing/advanced/connect_logs_and_traces"
   tags: "Enrich Tracing"
@@ -173,6 +174,52 @@ func main() {
     span.SetTag("<TAG_KEY>", "<TAG_VALUE>")
 }
 ```
+**Create a distributed trace by manually propagating the tracing context:**
+
+```go
+package main
+
+import (
+    "net/http"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    span, ctx := tracer.StartSpanFromContext(r.Context(), "post.process")
+    req, err := http.NewRequest("GET", "http://example.com", nil)
+    req = req.WithContext(ctx)
+    // Inject the span Context in the Request headers
+    err = tracer.Inject(span.Context(), tracer.HTTPHeadersCarrier(r.Header))
+    if err != nil {
+        // Handle or log injection error
+    }
+    http.DefaultClient.Do(req)
+}
+```
+
+**Then, on the server side, to continue the trace, start a new Span from the extracted `Context`:**
+
+```go
+package main
+
+import (
+    "net/http"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    // Extract the span Context and continue the trace in this service
+    sctx, err := tracer.Extract(tracer.HTTPHeadersCarrier(r.Header))
+    if err != nil {
+        // Handle or log extraction error
+    }
+
+    span := tracer.StartSpan("post.filter", tracer.ChildOf(sctx))
+    defer span.Finish()
+}
+```
 
 
 [1]: /tracing/languages/go/#compatibility
@@ -322,6 +369,47 @@ To manually instrument your code, install the tracer as in the setup examples, a
 } // ... or when they are destructed (root_span finishes here).
 ```
 
+Distributed tracing can be accomplished by [using the `Inject` and `Extract` methods on the tracer][1], which accept [generic `Reader` and `Writer` types][2]. Priority sampling (enabled by default) should be on to ensure uniform delivery of spans.
+
+```cpp
+// Allows writing propagation headers to a simple map<string, string>.
+// Copied from https://github.com/opentracing/opentracing-cpp/blob/master/mocktracer/test/propagation_test.cpp
+struct HTTPHeadersCarrier : HTTPHeadersReader, HTTPHeadersWriter {
+  HTTPHeadersCarrier(std::unordered_map<std::string, std::string>& text_map_)
+      : text_map(text_map_) {}
+
+  expected<void> Set(string_view key, string_view value) const override {
+    text_map[key] = value;
+    return {};
+  }
+
+  expected<void> ForeachKey(
+      std::function<expected<void>(string_view key, string_view value)> f)
+      const override {
+    for (const auto& key_value : text_map) {
+      auto result = f(key_value.first, key_value.second);
+      if (!result) return result;
+    }
+    return {};
+  }
+
+  std::unordered_map<std::string, std::string>& text_map;
+};
+
+void example() {
+  auto tracer = ...
+  std::unordered_map<std::string, std::string> headers;
+  HTTPHeadersCarrier carrier(headers);
+
+  auto span = tracer->StartSpan("operation_name");
+  tracer->Inject(span->context(), carrier);
+  // `headers` now populated with the headers needed to propagate the span.
+}
+```
+
+
+[1]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter
+[2]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/propagation.h
 {{% /tab %}}
 {{< /tabs >}}
 

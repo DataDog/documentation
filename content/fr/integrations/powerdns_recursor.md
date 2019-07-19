@@ -98,7 +98,7 @@ Redémarrez votre recursor pour activer l'API de statistiques.
 
 
 ### Événements
-Le check PowerDNS Recursor n'inclut aucun événement.
+Le check PowerDNS n'inclut aucun événement.
 
 ### Checks de service
 **`powerdns.recursor.can_connect`** :

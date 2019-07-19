@@ -42,9 +42,11 @@ Regarding its Container Agent specifically, Datadog performs regular vulnerabili
 
 If you believe you've discovered a bug in Datadog's security, get in touch at [security@datadoghq.com][11] and we will get back to you within 24 hours. Datadog's [PGP key][12] is available for download in case you need to encrypt communications with us. We request that you not publicly disclose the issue until we have had a chance to address it.
 
-## [BETA] Secrets Management
+## Secrets Management
 
 Customers with a requirement to avoid storing secrets in plaintext in the Agent's configuration files can leverage the [secrets management][13] package. This package allows the Agent to call a user-provided executable to handle retrieval or decryption of secrets, which are then loaded in memory by the Agent. Users have the flexibility to design their executable according to their preferred key management service, authentication method, and continuous integration workflow.
+
+For more information, see the [Secrets Management][14] documentation.
 
 ### Further Reading
 
@@ -63,3 +65,4 @@ Customers with a requirement to avoid storing secrets in plaintext in the Agent'
 [11]: mailto:security@datadoghq.com
 [12]: https://www.datadoghq.com/8869756E.asc.txt
 [13]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
+[14]: /agent/guide/secrets-management

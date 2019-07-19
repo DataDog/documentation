@@ -1,11 +1,11 @@
 ---
 title: Timeboards
 type: apicontent
-order: 23
-external_redirect: /api/#timeboards
+order: 31
+external_redirect: "/api/#timeboards"
 ---
 ## Timeboards
 
 <div class="alert alert-danger">
-    This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api/#dashboards">new Dashboard endpoint</a> instead.
+    Cet endpoint est obsolète. Utilisez plutôt le <a href="https://docs.datadoghq.com/api/#dashboards">nouvel endpoint Dashboards</a>.
 </div>

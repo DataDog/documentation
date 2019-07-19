@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}" style="opacity:0" class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.text }}banner{{ end }}">
+<html lang="{{ .Site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}" style="opacity:0" class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner{{ end }}">
 <head>
     <script>
       // Init browser logs when the lib is loaded.
@@ -42,6 +42,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{ if .Params.external_redirect }} {{ partial "meta-http-equiv.html" . }} {{ end }}
     {{- partial "noindex.html" . -}}
+    {{- partial "hreflang.html" . -}}
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="icon" type="image/png" href="https://docs.datadoghq.com/favicon.ico">
     <link rel="stylesheet" href="{{ .Site.BaseURL }}css/{{ (index .Site.Data.manifests.css "main-dd.css" ) }}">

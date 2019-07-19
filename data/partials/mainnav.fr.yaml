@@ -154,7 +154,7 @@ main:
           - name: Live Processes
             url: graphing/infrastructure/process/
           - name: Fonctions Cloud
-            url: graphing/infrastructure/cloudfunctions/
+            url: graphing/infrastructure/serverless_functions/
       - name: De la requête au graphique
         url: graphing/functions/
         children:

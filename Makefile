@@ -157,6 +157,7 @@ start: clean source-helpers ## start the gulp/hugo server.
 		DOGWEB=${DOGWEB} \
 		INTEGRATIONS_CORE=${INTEGRATIONS_CORE} \
 		INTEGRATIONS_EXTRAS=${INTEGRATIONS_EXTRAS} \
+		CONFIGURATION_FILE=${CONFIGURATION_FILE} \
 		run-site.sh; \
 	else \
 		FETCH_INTEGRATIONS="false" \

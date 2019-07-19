@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "353a07af-928a-46d4-b5f7-7d9af1e4ffe9",
+		"_postman_id": "027048d4-7d5e-46ed-913d-39f30b0343ea",
 		"name": "Datadog API Collection",
 		"description": "Collection of all Datadog Public endpoints.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -296,145 +296,6 @@
 					},
 					"response": [
 						{
-							"name": "400 - Bad Request",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"message\": \"<MESSAGE>\",\n    \"handle\": \"<DATADOG_HANDLE>\"\n}"
-								},
-								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/comments?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
-									"protocol": "https",
-									"host": [
-										"api",
-										"datadoghq",
-										"com"
-									],
-									"path": [
-										"api",
-										"v1",
-										"comments"
-									],
-									"query": [
-										{
-											"key": "api_key",
-											"value": "{{datadog_api_key}}",
-											"description": "Your Datadog API key"
-										},
-										{
-											"key": "application_key",
-											"value": "{{datadog_application_key}}",
-											"description": "Your Datadog application key"
-										}
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Date",
-									"value": "Fri, 19 Apr 2019 12:38:35 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Content-Length",
-									"value": "68"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Pragma",
-									"value": "no-cache"
-								},
-								{
-									"key": "Cache-Control",
-									"value": "no-cache"
-								},
-								{
-									"key": "X-DD-VERSION",
-									"value": "35.1246853"
-								},
-								{
-									"key": "DD-POOL",
-									"value": "dogweb_sameorig"
-								},
-								{
-									"key": "X-Frame-Options",
-									"value": "SAMEORIGIN"
-								},
-								{
-									"key": "X-Content-Type-Options",
-									"value": "nosniff"
-								},
-								{
-									"key": "Strict-Transport-Security",
-									"value": "max-age=15724800;"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"errors\": [\n        \"The value provided for parameter 'handle' is invalid\"\n    ]\n}"
-						},
-						{
-							"name": "Create a Comment Example",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"message\": \"There is a problem with the database.\",\n    \"handle\": \"test@datadoghq.com\"\n}"
-								},
-								"url": {
-									"raw": "https://api.datadoghq.com/api/v1/comments?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
-									"protocol": "https",
-									"host": [
-										"api",
-										"datadoghq",
-										"com"
-									],
-									"path": [
-										"api",
-										"v1",
-										"comments"
-									],
-									"query": [
-										{
-											"key": "api_key",
-											"value": "{{datadog_api_key}}"
-										},
-										{
-											"key": "application_key",
-											"value": "{{datadog_application_key}}"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"comment\": {\n        \"handle\": \"test@datadoghq.com\",\n        \"id\": 1382561676571697516,\n        \"message\": \"There is a problem with the database.\",\n        \"resource\": \"/api/v1/comments/1382561676571697516\",\n        \"url\": \"/event/jump_to?event_id=1382561676571697516\"\n    }\n}"
-						},
-						{
 							"name": "200 - OK",
 							"originalRequest": {
 								"method": "POST",
@@ -542,6 +403,145 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"comment\": {\n        \"url\": \"/event/event?id=4889126983613267970\",\n        \"resource\": \"/api/v1/comments/4889126983613267970\",\n        \"message\": \"<MESSAGE>\",\n        \"handle\": \"test@datadoghq.com\",\n        \"id\": 4889126983613267970\n    }\n}"
+						},
+						{
+							"name": "Create a Comment Example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"message\": \"There is a problem with the database.\",\n    \"handle\": \"test@datadoghq.com\"\n}"
+								},
+								"url": {
+									"raw": "https://api.datadoghq.com/api/v1/comments?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"comments"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{datadog_api_key}}"
+										},
+										{
+											"key": "application_key",
+											"value": "{{datadog_application_key}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"comment\": {\n        \"handle\": \"test@datadoghq.com\",\n        \"id\": 1382561676571697516,\n        \"message\": \"There is a problem with the database.\",\n        \"resource\": \"/api/v1/comments/1382561676571697516\",\n        \"url\": \"/event/jump_to?event_id=1382561676571697516\"\n    }\n}"
+						},
+						{
+							"name": "400 - Bad Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"message\": \"<MESSAGE>\",\n    \"handle\": \"<DATADOG_HANDLE>\"\n}"
+								},
+								"url": {
+									"raw": "https://api.datadoghq.com/api/v1/comments?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"comments"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{datadog_api_key}}",
+											"description": "Your Datadog API key"
+										},
+										{
+											"key": "application_key",
+											"value": "{{datadog_application_key}}",
+											"description": "Your Datadog application key"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 19 Apr 2019 12:38:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-DD-VERSION",
+									"value": "35.1246853"
+								},
+								{
+									"key": "DD-POOL",
+									"value": "dogweb_sameorig"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15724800;"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": [\n        \"The value provided for parameter 'handle' is invalid\"\n    ]\n}"
 						}
 					]
 				},
@@ -588,7 +588,7 @@
 							"variable": [
 								{
 									"key": "COMMENT_ID",
-									"value": "{{comment_id}}",
+									"value": "<EVENT_ID>",
 									"description": "ID of the comment to edit."
 								}
 							]
@@ -596,6 +596,59 @@
 						"description": "### Overview\n\nThis POST call allows for you to change a previously posted comment by commentId\n\n### Arguments\n\n* **`message`** [*optional*, *default* = **original message**]: The comment text.\n\n* **`handle`** [*optional*, *default* = **Application key owner**]: The handle of the user making the comment."
 					},
 					"response": [
+						{
+							"name": "Edit a Comment Example",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"message\": \"My new comment message.\"\n}"
+								},
+								"url": {
+									"raw": "https://app.datadoghq.com/api/v1/comments/:EVENT_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"protocol": "https",
+									"host": [
+										"app",
+										"datadoghq",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"comments",
+										":EVENT_ID"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{datadog_api_key}}"
+										},
+										{
+											"key": "application_key",
+											"value": "{{datadog_application_key}}"
+										}
+									],
+									"variable": [
+										{
+											"key": "EVENT_ID",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"comment\": {\n        \"handle\": \"test@datadoghq.com\",\n        \"id\": 1382557387240472966,\n        \"message\": \"My new comment message.\",\n        \"resource\": \"/api/v1/comments/1382557387240472966\",\n        \"url\": \"/event/jump_to?event_id=1382557387240472966\"\n    }\n}"
+						},
 						{
 							"name": "200 - OK",
 							"originalRequest": {
@@ -651,59 +704,6 @@
 							"header": [],
 							"cookie": [],
 							"body": "{\n    \"comment\": {\n        \"url\": \"/event/event?id=4889126983613267970\",\n        \"resource\": \"/api/v1/comments/4889126983613267970\",\n        \"message\": \"<NEW_COMMENT_MESSAGE>\",\n        \"handle\": \"test@datadoghq.com\",\n        \"id\": 4889126983613267970\n    }\n}"
-						},
-						{
-							"name": "Edit a Comment Example",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"message\": \"My new comment message.\"\n}"
-								},
-								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/comments/:EVENT_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
-									"protocol": "https",
-									"host": [
-										"app",
-										"datadoghq",
-										"com"
-									],
-									"path": [
-										"api",
-										"v1",
-										"comments",
-										":EVENT_ID"
-									],
-									"query": [
-										{
-											"key": "api_key",
-											"value": "{{datadog_api_key}}"
-										},
-										{
-											"key": "application_key",
-											"value": "{{datadog_application_key}}"
-										}
-									],
-									"variable": [
-										{
-											"key": "EVENT_ID",
-											"value": ""
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"comment\": {\n        \"handle\": \"test@datadoghq.com\",\n        \"id\": 1382557387240472966,\n        \"message\": \"My new comment message.\",\n        \"resource\": \"/api/v1/comments/1382557387240472966\",\n        \"url\": \"/event/jump_to?event_id=1382557387240472966\"\n    }\n}"
 						}
 					]
 				},
@@ -902,7 +902,7 @@
 							"variable": [
 								{
 									"key": "COMMENT_ID",
-									"value": "{{comment_id}}",
+									"value": "<EVENT_ID>",
 									"description": "ID of the comment to edit."
 								}
 							]
@@ -1138,7 +1138,7 @@
 							"variable": [
 								{
 									"key": "DASHBOARD_ID",
-									"value": "{{dashboard_id}}",
+									"value": "<DASHBOARD_ID>",
 									"description": "ID of the Dashboard to update"
 								}
 							]
@@ -1310,7 +1310,7 @@
 							"variable": [
 								{
 									"key": "DASHBOARD_ID",
-									"value": "{{dashboard_id}}",
+									"value": "<DASHBOARD_ID>",
 									"description": "Id of the Dashboar to delete"
 								}
 							]
@@ -1476,7 +1476,7 @@
 							"variable": [
 								{
 									"key": "DASHBOARD_ID",
-									"value": "{{dashboard_id}}",
+									"value": "<DASHBOARD_ID>",
 									"description": "Id of the Dashboard to GET"
 								}
 							]
@@ -1610,7 +1610,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/dashboard/?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/dashboard?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -1620,8 +1620,7 @@
 							"path": [
 								"api",
 								"v1",
-								"dashboard",
-								""
+								"dashboard"
 							],
 							"query": [
 								{
@@ -1709,7 +1708,7 @@
 							"variable": [
 								{
 									"key": "DASHBOARD_LIST_ID",
-									"value": "{{dashboard_list_id}}",
+									"value": "<DASHBOARD_LIST_ID>",
 									"description": "Dashboard list ID to fetch"
 								}
 							]
@@ -2187,7 +2186,7 @@
 							"variable": [
 								{
 									"key": "DASHBOARD_LIST_ID",
-									"value": "{{dashboard_list_id}}",
+									"value": "<DASHBOARD_LIST_ID>",
 									"description": "The ID of the Dashboard list to update"
 								}
 							]
@@ -2419,7 +2418,7 @@
 							"variable": [
 								{
 									"key": "DASHBOARD_LIST_ID",
-									"value": "{{dashboard_list_id}}",
+									"value": "<DASHBOARD_LIST_ID>",
 									"description": "ID of the Dashboard list to delete"
 								}
 							]
@@ -2597,7 +2596,7 @@
 							"variable": [
 								{
 									"key": "DASHBOARD_LIST_ID",
-									"value": "{{dashboard_list_id}}",
+									"value": "<DASHBOARD_LIST_ID>",
 									"description": "ID of the Dashbord list to get items from"
 								}
 							]
@@ -2708,7 +2707,7 @@
 							"variable": [
 								{
 									"key": "DASHBOARD_LIST_ID",
-									"value": "{{dashboard_list_id}}",
+									"value": "<DASHBOARD_LIST_ID>",
 									"description": "ID of the Dashboard list to add item into"
 								}
 							]
@@ -2763,7 +2762,7 @@
 							"variable": [
 								{
 									"key": "DASHBOARD_LIST_ID",
-									"value": "{{dashboard_list_id}}",
+									"value": "<DASHBOARD_LIST_ID>",
 									"description": "ID of the Dashboard list to update"
 								}
 							]
@@ -2818,7 +2817,7 @@
 							"variable": [
 								{
 									"key": "DASHBOARD_LIST_ID",
-									"value": "{{dashboard_list_id}}",
+									"value": "<DASHBOARD_LIST_ID>",
 									"description": "ID of the Dashboard list to delete items from"
 								}
 							]
@@ -2970,7 +2969,7 @@
 							"variable": [
 								{
 									"key": "DOWNTIME_ID",
-									"value": "{{downtime_id}}",
+									"value": "<DOWNTIME_ID>",
 									"description": "ID of the downtime to update"
 								}
 							]
@@ -3017,7 +3016,7 @@
 							"variable": [
 								{
 									"key": "DOWNTIME_ID",
-									"value": "{{downtime_id}}",
+									"value": "<DOWNTIME_ID>",
 									"description": "ID of the downtime to delete"
 								}
 							]
@@ -3155,7 +3154,7 @@
 							"variable": [
 								{
 									"key": "DOWNTIME_ID",
-									"value": "{{downtime_id}}",
+									"value": "<DOWNTIME_ID>",
 									"description": "ID of the downtime to fetch"
 								}
 							]
@@ -3472,7 +3471,7 @@
 							"variable": [
 								{
 									"key": "EMBED_ID",
-									"value": "{{embed_id}}",
+									"value": "<EMBED_ID>",
 									"description": "ID of the embed to fetch"
 								}
 							]
@@ -3517,7 +3516,7 @@
 							"variable": [
 								{
 									"key": "EMBED_ID",
-									"value": "{{embed_id}}",
+									"value": "<EMBED_ID>",
 									"description": "ID of the Embed to enable"
 								}
 							]
@@ -3562,7 +3561,7 @@
 							"variable": [
 								{
 									"key": "EMBED_ID",
-									"value": "{{embed_id}}",
+									"value": "<EMBED_ID>",
 									"description": "ID of the embed to revoke"
 								}
 							]
@@ -3760,7 +3759,7 @@
 							"variable": [
 								{
 									"key": "EVENT_ID",
-									"value": "{{event_id}}",
+									"value": "<EVENT_ID>",
 									"description": "ID of the event to fetch"
 								}
 							]
@@ -3926,7 +3925,7 @@
 							"variable": [
 								{
 									"key": "EVENT_ID",
-									"value": "{{event_id}}",
+									"value": "<EVENT_ID>",
 									"description": "ID of the event to delete"
 								}
 							]
@@ -4216,7 +4215,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/graph/snapshot?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}&metric_query={{metric_query}}&start={{from_ts}}&end={{to_ts}}&title={{title}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/graph/snapshot?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}&metric_query=system.load.1{*}by{host}&start={{from_ts}}&end={{to_ts}}&title=Snapshot of system load by host",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -4242,7 +4241,7 @@
 								},
 								{
 									"key": "metric_query",
-									"value": "{{metric_query}}",
+									"value": "system.load.1{*}by{host}",
 									"description": "The metric query to graph for the snapshot"
 								},
 								{
@@ -4257,7 +4256,7 @@
 								},
 								{
 									"key": "title",
-									"value": "{{title}}",
+									"value": "Snapshot of system load by host",
 									"description": "A title for the graph. If no title is specified, the graph doesn't have a title."
 								}
 							]
@@ -4643,7 +4642,7 @@
 							"variable": [
 								{
 									"key": "HOSTNAME",
-									"value": "{{hostname}}",
+									"value": "<HOSTNAME>",
 									"description": "Name of the host to mute"
 								}
 							]
@@ -4754,7 +4753,7 @@
 							"variable": [
 								{
 									"key": "HOSTNAME",
-									"value": "{{hostname}}",
+									"value": "<HOSTNAME>",
 									"description": "Name of the host to unmute"
 								}
 							]
@@ -5228,108 +5227,6 @@
 							},
 							"response": [
 								{
-									"name": "200 - OK",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "https://api.datadoghq.com/api/v1/integration/aws/available_namespace_rules?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
-											"protocol": "https",
-											"host": [
-												"api",
-												"datadoghq",
-												"com"
-											],
-											"path": [
-												"api",
-												"v1",
-												"integration",
-												"aws",
-												"available_namespace_rules"
-											],
-											"query": [
-												{
-													"key": "api_key",
-													"value": "{{datadog_api_key}}",
-													"description": "Your Datadog API key"
-												},
-												{
-													"key": "application_key",
-													"value": "{{datadog_application_key}}",
-													"description": "Your Datadog application key"
-												}
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Date",
-											"value": "Fri, 19 Apr 2019 12:23:16 GMT"
-										},
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										},
-										{
-											"key": "Transfer-Encoding",
-											"value": "chunked"
-										},
-										{
-											"key": "Connection",
-											"value": "keep-alive"
-										},
-										{
-											"key": "Vary",
-											"value": "Accept-Encoding"
-										},
-										{
-											"key": "Pragma",
-											"value": "no-cache"
-										},
-										{
-											"key": "Cache-Control",
-											"value": "no-cache"
-										},
-										{
-											"key": "Set-Cookie",
-											"value": "DD-PSHARD=211; Max-Age=604800; Path=/; expires=Fri, 26-Apr-2019 12:23:16 GMT; secure; HttpOnly"
-										},
-										{
-											"key": "X-DD-VERSION",
-											"value": "35.1246853"
-										},
-										{
-											"key": "X-DD-Debug",
-											"value": "/GVHE8sGGDu2Pwj4vkrLHXcvRNw6txpVQGGgaqarvn67YsIjXAZ36tYtYz+JhwVU"
-										},
-										{
-											"key": "Content-Encoding",
-											"value": "gzip"
-										},
-										{
-											"key": "DD-POOL",
-											"value": "dogweb_sameorig"
-										},
-										{
-											"key": "X-Frame-Options",
-											"value": "SAMEORIGIN"
-										},
-										{
-											"key": "X-Content-Type-Options",
-											"value": "nosniff"
-										},
-										{
-											"key": "Strict-Transport-Security",
-											"value": "max-age=15724800;"
-										}
-									],
-									"cookie": [],
-									"body": "[\n    \"api_gateway\",\n    \"application_elb\",\n    \"appsync\",\n    \"auto_scaling\",\n    \"billing\",\n    \"budgeting\",\n    \"cloudfront\",\n    \"cloudsearch\",\n    \"cloudwatch_events\",\n    \"cloudwatch_logs\",\n    \"codebuild\",\n    \"collect_custom_metrics\",\n    \"crawl_alarms\",\n    \"ddos_protection\",\n    \"directconnect\",\n    \"dms\",\n    \"documentdb\",\n    \"dynamodb\",\n    \"ebs\",\n    \"ec2\",\n    \"ec2api\",\n    \"ec2spot\",\n    \"ecs\",\n    \"efs\",\n    \"elasticache\",\n    \"elasticbeanstalk\",\n    \"elastictranscoder\",\n    \"elb\",\n    \"emr\",\n    \"es\",\n    \"firehose\",\n    \"gamelift\",\n    \"iot\",\n    \"kinesis\",\n    \"kinesis_analytics\",\n    \"kms\",\n    \"lambda\",\n    \"lex\",\n    \"ml\",\n    \"mq\",\n    \"nat_gateway\",\n    \"network_elb\",\n    \"opsworks\",\n    \"polly\",\n    \"rds\",\n    \"redshift\",\n    \"rekognition\",\n    \"route53\",\n    \"s3\",\n    \"sagemaker\",\n    \"ses\",\n    \"sns\",\n    \"sqs\",\n    \"state_machine\",\n    \"storage_gateway\",\n    \"swf\",\n    \"vpn\",\n    \"waf\",\n    \"workspaces\",\n    \"xray\"\n]"
-								},
-								{
 									"name": "List available namespace rules",
 									"originalRequest": {
 										"method": "GET",
@@ -5406,6 +5303,108 @@
 										{
 											"key": "X-DD-Debug",
 											"value": "c4aq40z3KDGIu7BkYTlUd0iZ+hCVqUX2FQHrdHjK4gPuZVw/LYvbdogVHHOtojAR"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "DD-POOL",
+											"value": "dogweb_sameorig"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800;"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    \"api_gateway\",\n    \"application_elb\",\n    \"appsync\",\n    \"auto_scaling\",\n    \"billing\",\n    \"budgeting\",\n    \"cloudfront\",\n    \"cloudsearch\",\n    \"cloudwatch_events\",\n    \"cloudwatch_logs\",\n    \"codebuild\",\n    \"collect_custom_metrics\",\n    \"crawl_alarms\",\n    \"ddos_protection\",\n    \"directconnect\",\n    \"dms\",\n    \"documentdb\",\n    \"dynamodb\",\n    \"ebs\",\n    \"ec2\",\n    \"ec2api\",\n    \"ec2spot\",\n    \"ecs\",\n    \"efs\",\n    \"elasticache\",\n    \"elasticbeanstalk\",\n    \"elastictranscoder\",\n    \"elb\",\n    \"emr\",\n    \"es\",\n    \"firehose\",\n    \"gamelift\",\n    \"iot\",\n    \"kinesis\",\n    \"kinesis_analytics\",\n    \"kms\",\n    \"lambda\",\n    \"lex\",\n    \"ml\",\n    \"mq\",\n    \"nat_gateway\",\n    \"network_elb\",\n    \"opsworks\",\n    \"polly\",\n    \"rds\",\n    \"redshift\",\n    \"rekognition\",\n    \"route53\",\n    \"s3\",\n    \"sagemaker\",\n    \"ses\",\n    \"sns\",\n    \"sqs\",\n    \"state_machine\",\n    \"storage_gateway\",\n    \"swf\",\n    \"vpn\",\n    \"waf\",\n    \"workspaces\",\n    \"xray\"\n]"
+								},
+								{
+									"name": "200 - OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://api.datadoghq.com/api/v1/integration/aws/available_namespace_rules?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+											"protocol": "https",
+											"host": [
+												"api",
+												"datadoghq",
+												"com"
+											],
+											"path": [
+												"api",
+												"v1",
+												"integration",
+												"aws",
+												"available_namespace_rules"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{datadog_api_key}}",
+													"description": "Your Datadog API key"
+												},
+												{
+													"key": "application_key",
+													"value": "{{datadog_application_key}}",
+													"description": "Your Datadog application key"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Fri, 19 Apr 2019 12:23:16 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "DD-PSHARD=211; Max-Age=604800; Path=/; expires=Fri, 26-Apr-2019 12:23:16 GMT; secure; HttpOnly"
+										},
+										{
+											"key": "X-DD-VERSION",
+											"value": "35.1246853"
+										},
+										{
+											"key": "X-DD-Debug",
+											"value": "/GVHE8sGGDu2Pwj4vkrLHXcvRNw6txpVQGGgaqarvn67YsIjXAZ36tYtYz+JhwVU"
 										},
 										{
 											"key": "Content-Encoding",
@@ -7180,7 +7179,7 @@
 					"name": "API Key",
 					"item": [
 						{
-							"name": "Get all API Key",
+							"name": "Get all API Keys",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -7288,7 +7287,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/api_key/:API_KEY_TO_GET?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/api_key/:DD_API_KEY?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -7299,7 +7298,7 @@
 										"api",
 										"v1",
 										"api_key",
-										":API_KEY_TO_GET"
+										":DD_API_KEY"
 									],
 									"query": [
 										{
@@ -7315,8 +7314,8 @@
 									],
 									"variable": [
 										{
-											"key": "API_KEY_TO_GET",
-											"value": ""
+											"key": "DD_API_KEY",
+											"value": "<API_KEY_TO_GET>"
 										}
 									]
 								},
@@ -7339,7 +7338,7 @@
 									"raw": "{\n    \"name\": \"<API_KEY_NAME>\"\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/api_key/:API_KEY_TO_EDIT?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/api_key/:DD_API_KEY?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -7350,7 +7349,7 @@
 										"api",
 										"v1",
 										"api_key",
-										":API_KEY_TO_EDIT"
+										":DD_API_KEY"
 									],
 									"query": [
 										{
@@ -7366,8 +7365,8 @@
 									],
 									"variable": [
 										{
-											"key": "API_KEY_TO_EDIT",
-											"value": ""
+											"key": "DD_API_KEY",
+											"value": "<API_KEY_TO_EDIT>"
 										}
 									]
 								},
@@ -7390,7 +7389,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/api_key/:API_KEY_TO_DELETE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/api_key/:DD_API_KEY?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -7401,7 +7400,7 @@
 										"api",
 										"v1",
 										"api_key",
-										":API_KEY_TO_DELETE"
+										":DD_API_KEY"
 									],
 									"query": [
 										{
@@ -7417,8 +7416,8 @@
 									],
 									"variable": [
 										{
-											"key": "API_KEY_TO_DELETE",
-											"value": ""
+											"key": "DD_API_KEY",
+											"value": "<API_KEY_TO_DELETE>"
 										}
 									]
 								},
@@ -7434,7 +7433,7 @@
 					"name": "Application Key",
 					"item": [
 						{
-							"name": "Get all Application Key",
+							"name": "Get all Application Keys",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -7538,7 +7537,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/application_key/:APP_KEY?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/application_key/:DD_APPLICATION_KEY?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -7549,7 +7548,7 @@
 										"api",
 										"v1",
 										"application_key",
-										":APP_KEY"
+										":DD_APPLICATION_KEY"
 									],
 									"query": [
 										{
@@ -7563,8 +7562,8 @@
 									],
 									"variable": [
 										{
-											"key": "APP_KEY",
-											"value": "<APP_KEY_TO_GET>"
+											"key": "DD_APPLICATION_KEY",
+											"value": "<APPLICATION_KEY_TO_GET>"
 										}
 									]
 								},
@@ -7587,7 +7586,7 @@
 									"raw": "{\n\t\"name\": \"<APP_KEY_NAME>\"\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/application_key/:APP_KEY?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/application_key/:DD_APPLICATION_KEY?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -7598,7 +7597,7 @@
 										"api",
 										"v1",
 										"application_key",
-										":APP_KEY"
+										":DD_APPLICATION_KEY"
 									],
 									"query": [
 										{
@@ -7612,8 +7611,8 @@
 									],
 									"variable": [
 										{
-											"key": "APP_KEY",
-											"value": "<APP_KEY_TO_EDIT>"
+											"key": "DD_APPLICATION_KEY",
+											"value": "<APPLICATION_KEY_TO_EDIT>"
 										}
 									]
 								},
@@ -7636,7 +7635,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/application_key/:APP_KEY?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/application_key/:DD_APPLICATION_KEY?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -7647,7 +7646,7 @@
 										"api",
 										"v1",
 										"application_key",
-										":APP_KEY"
+										":DD_APPLICATION_KEY"
 									],
 									"query": [
 										{
@@ -7661,8 +7660,8 @@
 									],
 									"variable": [
 										{
-											"key": "APP_KEY",
-											"value": "<APP_KEY_TO_DELETE>"
+											"key": "DD_APPLICATION_KEY",
+											"value": "<APPLICATION_KEY_TO_DELETE>"
 										}
 									]
 								},
@@ -7697,7 +7696,7 @@
 							"raw": "{\n    \"message\": \"This is an example log message over HTTP!\",\n    \"http\": {\n        \"status_code\": 301,\n        \"method\": \"POST\",\n        \"request_id\": \"{{$randomInt}}\"\n    },\n    \"network\": {\n        \"client\": {\n            \"ip\": \"127.0.0.1\",\n            \"port\": \"80\"\n        },\n        \"destination\": {\n            \"ip\": \"10.0.0.1\"\n        }\n    },\n    \"duration\": 2000,\n    \"category\": \"test\"\n}"
 						},
 						"url": {
-							"raw": "https://http-intake.logs.datadoghq.{{datadog_site}}/v1/input/{{datadog_api_key}}?ddsource=postman&service=postman&hostname={{hostname}}",
+							"raw": "https://http-intake.logs.datadoghq.{{datadog_site}}/v1/input/{{datadog_api_key}}?ddsource=postman&service=postman&hostname=<HOSTNAME>",
 							"protocol": "https",
 							"host": [
 								"http-intake",
@@ -7723,7 +7722,7 @@
 								},
 								{
 									"key": "hostname",
-									"value": "{{hostname}}",
+									"value": "<HOSTNAME>",
 									"description": "Host from which the log is sent."
 								}
 							]
@@ -7878,7 +7877,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/metrics?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}&from={{from_ts}}&host={{hostname}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/metrics?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}&from={{from_ts}}&host=<HOSTNAME>",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -7908,7 +7907,7 @@
 								},
 								{
 									"key": "host",
-									"value": "{{hostname}}",
+									"value": "<HOSTNAME>",
 									"description": "Hostname for filtering the list of metrics returned. If set, metrics retrieved are those with the corresponding hostname tag."
 								}
 							]
@@ -8115,7 +8114,7 @@
 							"variable": [
 								{
 									"key": "METRIC_NAME",
-									"value": "{{metrics_name}}",
+									"value": "<METRIC_NAME>",
 									"description": "Name of the metric to retrieve metadata from."
 								}
 							]
@@ -8167,7 +8166,7 @@
 							"variable": [
 								{
 									"key": "METRIC_NAME",
-									"value": "{{metric_name}}",
+									"value": "<METRIC_NAME>",
 									"description": "Name of the metric to edit metadata from."
 								}
 							]
@@ -8194,7 +8193,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/search?q=metrics:{{metric_name}}&api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/search?q=metrics:<METRIC_NAME>&api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -8209,7 +8208,7 @@
 							"query": [
 								{
 									"key": "q",
-									"value": "metrics:{{metric_name}}",
+									"value": "metrics:<METRIC_NAME>",
 									"description": "Name of the metric to search on"
 								},
 								{
@@ -8345,7 +8344,7 @@
 							"variable": [
 								{
 									"key": "MONITOR_ID",
-									"value": "{{monitor_id}}",
+									"value": "<MONITOR_ID_TO_GET>",
 									"description": "Id of the monitor you want to get info from"
 								}
 							]
@@ -8397,7 +8396,7 @@
 							"variable": [
 								{
 									"key": "MONITOR_ID",
-									"value": "{{monitor_id}}",
+									"value": "<MONITOR_ID_TO_EDIT>",
 									"description": "Id of the monitor you want to edit info from"
 								}
 							]
@@ -8449,7 +8448,7 @@
 							"variable": [
 								{
 									"key": "MONITOR_ID",
-									"value": "{{monitor_id}}",
+									"value": "<MONITOR_ID_TO_DELETE>",
 									"description": "Id of the monitor to Delete"
 								}
 							]
@@ -8545,7 +8544,7 @@
 							"variable": [
 								{
 									"key": "MONITOR_ID",
-									"value": "{{monitor_id}}",
+									"value": "<MONITOR_ID_TO_MUTE>",
 									"description": "ID of the monitor to mute."
 								}
 							]
@@ -8598,7 +8597,7 @@
 							"variable": [
 								{
 									"key": "MONITOR_ID",
-									"value": "{{monitor_id}}",
+									"value": "<MONITOR_ID_TO_UNMUTE>",
 									"description": "ID of the monitor to un-mute."
 								}
 							]
@@ -8972,7 +8971,7 @@
 							"variable": [
 								{
 									"key": "PUBLIC_ID",
-									"value": "{{datadog_org_public_id}}",
+									"value": "<DATADOG_ORG_PUBLIC_ID_TO_GET>",
 									"description": "Datadog public organization ID."
 								}
 							]
@@ -9064,7 +9063,7 @@
 							"variable": [
 								{
 									"key": "PUBLIC_ID",
-									"value": "{{datadog_org_public_id}}",
+									"value": "<DATADOG_ORG_PUBLIC_ID_TO_UPDATE>",
 									"description": "Public ID of a Datadog organisation."
 								}
 							]
@@ -9119,7 +9118,7 @@
 							"variable": [
 								{
 									"key": "PUBLIC_ID",
-									"value": "{{datadog_org_public_id}}",
+									"value": "<DATADOG_ORG_PUBLIC_ID>",
 									"description": "Public ID of a Datadog organisation."
 								}
 							]
@@ -9248,7 +9247,7 @@
 							"variable": [
 								{
 									"key": "TEST_ID",
-									"value": "{{synthetics_test_id}}",
+									"value": "<SYNTHETICS_TEST_ID>",
 									"description": "ID of the synthetics test to start/pause"
 								}
 							]
@@ -9302,7 +9301,7 @@
 							"variable": [
 								{
 									"key": "TEST_ID",
-									"value": "{{synthetics_test_id}}",
+									"value": "<SYNTHETICS_TEST_ID>",
 									"description": "ID of the synthetics test to start/pause"
 								}
 							]
@@ -9401,7 +9400,7 @@
 							"variable": [
 								{
 									"key": "TEST_ID",
-									"value": "{{synthetics_test_id}}",
+									"value": "<SYNTHETICS_TEST_ID>",
 									"description": "ID of the synthetics test to get results from"
 								}
 							]
@@ -9454,12 +9453,12 @@
 							"variable": [
 								{
 									"key": "TEST_ID",
-									"value": "{{synthetics_test_id}}",
+									"value": "<SYNTHETICS_TEST_ID>",
 									"description": "ID of the synthetics test to get result from"
 								},
 								{
 									"key": "RESULT_ID",
-									"value": "{{synthetics_test_result_id}}",
+									"value": "<SYNTHETICS_TEST_RESULT_ID>",
 									"description": "ID of the synthetics test result."
 								}
 							]
@@ -9568,7 +9567,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/browser/devices?api_key=${api_key}&application_key=${app_key}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/browser/devices?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9585,11 +9584,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "${api_key}"
+									"value": "{{datadog_api_key}}"
 								},
 								{
 									"key": "application_key",
-									"value": "${app_key}"
+									"value": "{{datadog_application_key}}"
 								}
 							]
 						},
@@ -9726,7 +9725,7 @@
 							"variable": [
 								{
 									"key": "HOSTNAME",
-									"value": "{{dd_hostname}}",
+									"value": "<HOSTNAME>",
 									"description": "Name of the host to retrieve tags from."
 								}
 							]
@@ -9779,7 +9778,7 @@
 							"variable": [
 								{
 									"key": "HOSTNAME",
-									"value": "{{dd_hostname}}",
+									"value": "<HOSTNAME>",
 									"description": "Host name to add tags to."
 								}
 							]
@@ -9832,7 +9831,7 @@
 							"variable": [
 								{
 									"key": "HOSTNAME",
-									"value": "{{dd_hostname}}",
+									"value": "<HOSTNAME>",
 									"description": "Hostname to update tags of."
 								}
 							]
@@ -9885,7 +9884,7 @@
 							"variable": [
 								{
 									"key": "HOSTNAME",
-									"value": "{{dd_hostname}}",
+									"value": "<HOSTNAME>",
 									"description": "Hostname to delete tag from."
 								}
 							]
@@ -10472,7 +10471,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:DATADOG_USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -10483,7 +10482,7 @@
 								"api",
 								"v1",
 								"user",
-								":USER_HANDLE"
+								":DATADOG_USER_HANDLE"
 							],
 							"query": [
 								{
@@ -10499,9 +10498,8 @@
 							],
 							"variable": [
 								{
-									"key": "USER_HANDLE",
-									"value": "{{dd_user_handle}}",
-									"description": "Datadog user handle email, usually the same as the user email"
+									"key": "DATADOG_USER_HANDLE",
+									"value": "<DATADOG_USER_HANDLE>"
 								}
 							]
 						},
@@ -10559,7 +10557,7 @@
 							"raw": "{\n    \"email\": \"test@datadoghq.com\",\n    \"name\": \"new user\",\n    \"access_role\": \"ro\"\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:DATADOG_USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -10570,7 +10568,7 @@
 								"api",
 								"v1",
 								"user",
-								":USER_HANDLE"
+								":DATADOG_USER_HANDLE"
 							],
 							"query": [
 								{
@@ -10586,9 +10584,8 @@
 							],
 							"variable": [
 								{
-									"key": "USER_HANDLE",
-									"value": "{{dd_user_handle}}",
-									"description": "The handle of the user."
+									"key": "DATADOG_USER_HANDLE",
+									"value": "<DATADOG_USER_HANDLE>"
 								}
 							]
 						},
@@ -10606,7 +10603,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/user/:DATADOG_USER_HANDLE?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -10617,7 +10614,7 @@
 								"api",
 								"v1",
 								"user",
-								":USER_HANDLE"
+								":DATADOG_USER_HANDLE"
 							],
 							"query": [
 								{
@@ -10633,9 +10630,8 @@
 							],
 							"variable": [
 								{
-									"key": "USER_HANDLE",
-									"value": "{{dd_user_handle}}",
-									"description": "Datadog user handle."
+									"key": "DATADOG_USER_HANDLE",
+									"value": "<DATADOG_USER_HANDLE>"
 								}
 							]
 						},
@@ -10693,15 +10689,21 @@
 	],
 	"variable": [
 		{
-			"id": "ae54c8e4-523f-43ae-9f0f-3cb148ffea5a",
-			"key": "dd_api_key",
+			"id": "5a1497c2-0cf4-4f32-9191-724c75f45d48",
+			"key": "datadog_api_key",
 			"value": "xxxxx",
 			"type": "string"
 		},
 		{
-			"id": "a3db5baf-b743-4ff9-947b-37f23edce215",
-			"key": "dd_app_key",
+			"id": "2f92b8ea-c850-4e56-b0ca-56f5ca91bc6e",
+			"key": "datadog_application_key",
 			"value": "yyyyy",
+			"type": "string"
+		},
+		{
+			"id": "03904d68-6941-4383-94c9-cab1eadbbcb7",
+			"key": "datadog_site",
+			"value": "",
 			"type": "string"
 		}
 	]
