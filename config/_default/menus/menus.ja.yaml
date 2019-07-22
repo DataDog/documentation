@@ -1,1086 +1,1168 @@
-# # GETTING STARTED
-# getting_started:
-#   - Identifier: "start"
-#     Name: "Getting Started"
-#     URL: "getting_started/"
-#     Pre: "nav_start"
-#   - Name: "Agent"
-#     URL: "getting_started/agentasdfasdf"
-#     Parent: "start"
 main:
 
-# GETTING STARTED
-  - name: "Getting Started"
+#####################
+## GETTING STARTED ##
+#####################
+
+  - name: "はじめに"
+    identifier: "getting_started"
     url: "getting_started/"
     pre: "nav_start"
-    identifier: "getting_started"
-    weight: 100
-  - name: "Agent"
-    url: "getting_started/agent"
-    parent: "getting_started"
-    weight: 10
-    identifier: "getting_started_agent"
-  - name: "Integrations"
+    weight: 10000
+
+  ## GETTING STARTED - Integrations
+
+  - name: "インテグレーション"
     identifier: "getting_started_integrations"
-    url: "getting_started/integrations"
+    url: "getting_started/integrations/"
     parent: "getting_started"
-    weight: 20
-  - name: "Collect traces"
-    url: "getting_started/tracing"
+    weight: 3
+  
+  ## GETTING STARTED - Traces
+
+  - name: "トレースの収集"
+    identifier: "getting_started_collect_traces"
+    url: "getting_started/tracing/"
     parent: "getting_started"
-    weight: 30
-  - name: "Learning Center"
-    url: "getting_started/learning_center"
+    weight: 4
+
+  - name: "ラーニングセンター"
+    url: "getting_started/learning_center/"
     parent: "getting_started"
-    weight: 40
+    weight: 6
+    
   - name: "Prometheus/Openmetrics"
     identifier: "getting_started_prometheus"
-    url: "getting_started/integrations/prometheus"
-    parent: "getting_started_prometheus"
-    weight: 50
-    
-# TAGGING
-  - name: "Tagging"
+    url: "getting_started/prometheus"
+    parent: "getting_started"
+    weight: 301
+
+#############
+## TAGGING ##
+#############
+
+  - name: "タグ付け"
     url: "tagging/"
     pre: "nav_tagging"
-    identifier: "tagging"
-    weight: 200
-  - name: "Assigning tags"
-    url: "tagging/assigning_tags"
-    parent: "tagging"
-    weight: 210
-  - name: "Using tags"
-    url: "tagging/using_tags"
-    parent: "tagging"
-    weight: 220
+    identifier: "tagging_"
+    weight: 20000
 
-# AGENT
+  - name: "タグの付け方"
+    url: "tagging/assigning_tags/"
+    parent: "tagging_"
+    weight: 1
+
+  - name: "タグの使用方法"
+    url: "tagging/using_tags/"
+    parent: "tagging_"
+    weight: 2
+
+###########
+## AGENT ##
+###########
+
   - name: "Agent"
     url: "agent/"
     pre: "nav_agent"
-    weight: 300
+    weight: 30000
     identifier: "agent"
-  ## Basic Agent usage
-  - name: "Basic Agent Usage"
+
+  ## AGENT -  Basic Agent usage
+
+  - name: "基本的なエージェントの利用方法"
     url: "agent/basic_agent_usage/"
     parent: "agent"
     identifier: "basic_agent_usage"
-    weight: 310
+    weight: 1
   - name: "AIX"
+    identifier: "basic_agent_usage_aix"
     url: "agent/basic_agent_usage/aix/"
-    weight: 320
+    weight: 101
     parent: "basic_agent_usage"
   - name: "Amazon Linux"
+    identifier: "basic_agent_usage_amazon_linux"
     url: "agent/basic_agent_usage/amazonlinux/"
-    weight: 330
+    weight: 102
     parent: "basic_agent_usage"
   - name: "CentOS"
+    identifier: "basic_agent_usage_centos"
     url: "agent/basic_agent_usage/centos/"
-    weight: 340
+    weight: 103
     parent: "basic_agent_usage"
   - name: "Debian"
+    identifier: "basic_agent_usage_deb"
     url: "agent/basic_agent_usage/deb/"
-    weight: 350
+    weight: 104
     parent: "basic_agent_usage"
   - name: "Docker"
+    identifier: "basic_agent_usage_docker"
     url: "agent/docker/"
-    weight: 360
+    weight: 105
     parent: "basic_agent_usage"
   - name: "Fedora"
+    identifier: "basic_agent_usage_fedora"
     url: "agent/basic_agent_usage/fedora/"
-    weight: 370
+    weight: 106
     parent: "basic_agent_usage"
   - name: "Heroku"
+    identifier: "basic_agent_usage_heroku"
     url: "agent/basic_agent_usage/heroku/"
-    weight: 380
+    weight: 107
     parent: "basic_agent_usage"
   - name: "Mac OS X"
+    identifier: "basic_agent_usage_osx"
     url: "agent/basic_agent_usage/osx/"
-    weight: 390
+    weight: 108
     parent: "basic_agent_usage"
   - name: "Red Hat"
+    identifier: "basic_agent_usage_redhat"
     url: "agent/basic_agent_usage/redhat/"
-    weight: 400
+    weight: 109
     parent: "basic_agent_usage"
   - name: "SUSE"
+    identifier: "basic_agent_usage_suse"
     url: "agent/basic_agent_usage/suse/"
-    weight: 410
+    weight: 110
     parent: "basic_agent_usage"
   - name: "Ubuntu"
+    identifier: "basic_agent_usage_ubuntu"
     url: "agent/basic_agent_usage/ubuntu/"
-    weight: 420
+    weight: 111
     parent: "basic_agent_usage"
   - name: "Windows"
+    identifier: "basic_agent_usage_windows"
     url: "agent/basic_agent_usage/windows/"
-    weight: 430
+    weight: 112
     parent: "basic_agent_usage"
-  - name: "From Source"
+  - name: "ソースから"
+    identifier: "basic_agent_usage_source"
     url: "agent/basic_agent_usage/source/"
-    weight: 440
+    weight: 113
     parent: "basic_agent_usage"
-  ## Docker
+
+  ## AGENT - Docker
+
   - name: "Docker"
     url: "agent/docker/"
     parent: "agent"
-    identifier: "docker"
-    weight: 400
+    identifier: "agent_docker"
+    weight: 2
   - name: APM
-    url: agent/docker/apm
-    parent: "docker"
-  - name: Log collection
-    identifier: "docker_log_collection"
-    url: agent/docker/log
-    parent: "docker"
-  ## Kubernetes
+    identifier: "agent_docker_apm"
+    url: agent/docker/apm/
+    parent: "agent_docker"
+    weight: 201
+  - name: ログの収集
+    identifier: "agent_docker_log"
+    url: agent/docker/log/
+    parent: "agent_docker"
+    weight: 203
+
+  ## AGENT - Kubernetes
+
   - name: "Kubernetes"
     url: "agent/kubernetes/"
     parent: "agent"
-    identifier: "kubernetes"
-    weight: 410
-  - name: "DaemonSet Setup"
-    url: "agent/kubernetes/daemonset_setup"
-    parent: "kubernetes"
-    weight: 10
-  - name: "Host Setup"
-    url: "agent/kubernetes/host_setup"
-    parent: "kubernetes"
-    weight: 20
+    identifier: "agent_kubernetes"
+    weight: 3
+  - name: "DaemonSet セットアップ"
+    url: "agent/kubernetes/daemonset_setup/"
+    parent: "agent_kubernetes"
+    weight: 301
+  - name: "ホストセットアップ"
+    url: "agent/kubernetes/host_setup/"
+    parent: "agent_kubernetes"
+    weight: 302
   - name: "Cluster Agent"
-    url: "agent/kubernetes/cluster"
-    parent: "kubernetes"
-    weight: 30
-  - name: "Using Helm"
-    url: "agent/kubernetes/helm"
-    parent: "kubernetes"
-    weight: 40
-  - name: "Event Collection"
-    url: "agent/kubernetes/event_collection"
-    parent: "kubernetes"
-    weight: 50
-  - name: "Custom Integrations"
-    url: "agent/kubernetes/integrations"
-    parent: "kubernetes"
-    weight: 60
-  - name: "Metrics"
-    url: "agent/kubernetes/metrics"
-    parent: "kubernetes"
-    weight: 70
-  - name: "Custom Metrics & DogStatsD"
-    url: "agent/kubernetes/dogstatsd"
-    parent: "kubernetes"
-    weight: 80
-  - name: "Legacy Versions"
-    url: "agent/kubernetes/legacy"
-    parent: "kubernetes"
-    weight: 90
-  ## Autodiscovery
-  - name: "Autodiscovery"
-    url: "agent/autodiscovery"
-    identifier: "autodiscovery"
+    url: "agent/kubernetes/cluster/"
+    parent: "agent_kubernetes"
+    weight: 303
+  - name: "Helm の使用"
+    url: "agent/kubernetes/helm/"
+    parent: "agent_kubernetes"
+    weight: 304
+  - name: "イベント収集"
+    url: "agent/kubernetes/event_collection/"
+    parent: "agent_kubernetes"
+    weight: 305
+  - name: "カスタムインテグレーション"
+    url: "agent/kubernetes/integrations/"
+    parent: "agent_kubernetes"
+    weight: 306
+  - name: "メトリクス"
+    url: "agent/kubernetes/metrics/"
+    parent: "agent_kubernetes"
+    weight: 307
+  - name: "カスタムメトリクスと DogStatsD"
+    url: "agent/kubernetes/dogstatsd/"
+    parent: "agent_kubernetes"
+    weight: 308
+  - name: "レガシーバージョン"
+    url: "agent/kubernetes/legacy/"
+    parent: "agent_kubernetes"
+    weight: 309
+
+  ## AGENT - Autodiscovery
+
+  - name: "オートディスカバリー"
+    url: "agent/autodiscovery/"
+    identifier: "agent_autodiscovery"
     parent: "agent"
-    weight: 420
-  - name: "Integrations Templates"
-    url: "agent/autodiscovery/integrations"
-    parent: "autodiscovery"
-    weight: 10
-  - name: "Container Identifier"
-    url: "agent/autodiscovery/ad_identifiers"
-    parent: "autodiscovery"
-    weight: 20
-  - name: "Template Variables"
-    url: "agent/autodiscovery/template_variables"
-    parent: "autodiscovery"
-    weight: 30
-  - name: "Tag Extraction"
-    url: "agent/autodiscovery/tag"
-    parent: "autodiscovery"
-    weight: 40
-  - name: "Discovery Management"
-    url: "agent/autodiscovery/management"
-    parent: "autodiscovery"
-    weight: 50
-  - name: "Troubleshooting"
-    url: "agent/autodiscovery/troubleshooting"
-    parent: "autodiscovery"
-    weight: 60
-  - name: "Cluster Checks"
-    url: "agent/autodiscovery/clusterchecks"
-    parent: "autodiscovery"
-    weight: 70
-  - name: "Proxy"
-    url: "agent/proxy"
+    weight: 4
+  - name: "クラスターチェック"
+    url: "agent/autodiscovery/clusterchecks/"
+    parent: "agent_autodiscovery"
+    weight: 408
+
+  ## AGENT - LOGS
+
+  - name: "Agent v6 へのアップグレード"
+    url: "agent/guide/upgrade-to-agent-v6/"
     parent: "agent"
-    weight: 430
-  ## Upgrade to Agent v6
-  - name: "Upgrade to Agent v6"
-    url: "agent/guide/upgrade-to-agent-v6"
+    weight: 7
+
+  ## AGENT - Proxy
+
+  - name: "プロキシ"
+    url: "agent/proxy/"
     parent: "agent"
-    weight: 440
-  # Troubleshooting
-  - name: "Troubleshooting"
+    identifier: "agent_proxy"
+    weight: 6
+
+  ## AGENT - Troubleshooting
+  - name: "トラブルシューティング"
     url: "agent/troubleshooting/"
     parent: "agent"
-    weight: 450
-    identifier: "troubleshooting"
-  - name: "Debug Mode"
-    url: "agent/troubleshooting/debug_mode"
-    parent: "troubleshooting"
-    weight: 460
-  - name: "Agent Flare"
-    url: "agent/troubleshooting/send_a_flare"
-    parent: "troubleshooting"
-    weight: 470
-  - name: "Agent Check Status"
-    url: "agent/troubleshooting/agent_check_status"
-    parent: "troubleshooting"
-    weight: 480
-  - name: "NTP Issues"
-    url: "agent/troubleshooting/ntp"
-    parent: "troubleshooting"
-    weight: 490
-  - name: "Permission Issues"
-    url: "agent/troubleshooting/permissions"
-    parent: "troubleshooting"
-    weight: 500
-  - name: "Integrations Issues"
-    url: "agent/troubleshooting/integrations"
-    parent: "troubleshooting"
-    weight: 510
-  # Guides
-  - name: "Guides"
-    url: "agent/guide/"
-    parent: "agent"
-    weight: 460
-  - name: "Security"
-    url: "agent/security"
-    parent: "agent"
-    weight: 470
-      #- #  name: "FAQ"
-      #  url: "agent/faq/"
-      #  #  parent: menu_references_agent
-      # AGENT - Subnav end
+    weight: 8
+    identifier: "agent_troubleshooting"
+  - name: "デバッグモード"
+    url: "agent/troubleshooting/debug_mode/"
+    parent: "agent_troubleshooting"
+    weight: 801
+  - name: "Agent フレア"
+    url: "agent/troubleshooting/send_a_flare/"
+    parent: "agent_troubleshooting"
+    weight: 802
+  - name: "Agent チェックのステータス"
+    url: "agent/troubleshooting/agent_check_status/"
+    parent: "agent_troubleshooting"
+    weight: 803
+  - name: "NTP 関連の問題"
+    url: "agent/troubleshooting/ntp/"
+    parent: "agent_troubleshooting"
+    weight: 804
+  - name: "アクセス許可に関する問題"
+    url: "agent/troubleshooting/permissions/"
+    parent: "agent_troubleshooting"
+    weight: 805
 
-# INTEGRATIONS
-  - name: "Integrations"
+  ## AGENT - Guides
+  - name: "ガイド"
+    url: "agent/guide/"
+    identifier: "agent_guides"
+    parent: "agent"
+    weight: 9
+
+  - name: "セキュリティ"
+    identifier: "agent_security"
+    url: "security/agent/"
+    parent: "agent"
+    weight: 10
+
+##################
+## INTEGRATIONS ##
+##################
+
+  - name: "インテグレーション"
     url: "integrations/"
     pre: "nav_integrations"
-    weight: 400
-    # INTEGRATIONS - Subnav start
-  # INTEGRATIONS - Subnav end
+    weight: 40000
 
-# Watchdog
+##############
+## WATCHDOG ##
+##############
+
   - name: "Watchdog"
     url: "watchdog/"
     pre: "nav_watchdog"
-    weight: 500
-  
-# GRAPHING
-  - name: "Graphing"
+    weight: 50000
+
+##############
+## GRAPHING ##
+##############
+
+  - name: "グラフの作成方法"
     url: "graphing/"
     pre: "nav_graphing"
     identifier: "graphing"
-    weight: 600
-  # GRAPHING - Subnav start
-  - name: "Dashboards"
+    weight: 60000
+
+  ## GRAPHING - Dashboards
+
+  - name: "ダッシュボード"
     url: "graphing/dashboards/"
     parent: "graphing"
     identifier: "graphing_dashboards"
-    weight: 10
-  # Graphing dashboard subnav
+    weight: 2
   - name: "Screenboard"
     url: "graphing/dashboards/screenboard/"
     parent: "graphing_dashboards"
-    weight: 10
+    weight: 201
   - name: "Timeboard"
     url: "graphing/dashboards/timeboard/"
     parent: "graphing_dashboards"
-    weight: 20
-  - name: "Template Variables"
+    weight: 202
+  - name: "テンプレート変数"
     url: "graphing/dashboards/template_variables/"
     parent: "graphing_dashboards"
-    weight: 30
+    weight: 203
     identifier: "graphing_dashboards_temp_variables" # name is not unique so add identifier
-  - name: "Shared Graphs"
+  - name: "グラフの共有"
     url: "graphing/dashboards/shared_graph/"
     parent: "graphing_dashboards"
-    weight: 40
-  # Metrics
+    weight: 204
+
+  ## GRAPHING - Metrics
+
   - name: "Metrics"
     url: "graphing/metrics/"
     parent: "graphing"
     identifier: "graphing_metrics"
-    weight: 20
-  - name: "Explorer"
-    url: "graphing/metrics/explorer"
+    weight: 3
+  - name: "エクスプローラー"
+    url: "graphing/metrics/explorer/"
     parent: "graphing_metrics"
-    weight: 10
-  - name: "Summary"
-    url: "graphing/metrics/summary"
+    weight: 301
+  - name: "サマリー"
+    url: "graphing/metrics/summary/"
     parent: "graphing_metrics"
-    weight: 20
-  - name: "Distributions"
-    url: "graphing/metrics/distributions"
+    weight: 302
+  - name: "ディストリビューション"
+    url: "graphing/metrics/distributions/"
     parent: "graphing_metrics"
-    weight: 30
-  - name: "Notebooks"
+    weight: 303
+
+  - name: "ノートブック"
     url: "graphing/notebooks/"
     parent: "graphing"
-    weight: 30
-  - name: "Event Stream"
+    weight: 4
+
+  - name: "イベントストリーム"
     url: "graphing/event_stream/"
     parent: "graphing"
-    weight: 40
-  - name: "Infrastructure"
+    weight: 5
+
+  ## GRAPHING - Infrastructure
+
+  - name: "インフラストラクチャー"
     url: "graphing/infrastructure/"
     parent: "graphing"
     identifier: "graphing_infrastructure"
-    weight: 50
-  - name: "Container Map"
+    weight: 6
+  - name: "コンテナマップ"
     url: "graphing/infrastructure/containermap/"
     parent: "graphing_infrastructure"
-    weight: 10
+    weight: 601
   - name: "Host Map"
     url: "graphing/infrastructure/hostmap/"
     parent: "graphing_infrastructure"
-    weight: 20
-  - name: "Live Containers"
+    weight: 602
+  - name: "ライブコンテナ"
     url: "graphing/infrastructure/livecontainers/"
     parent: "graphing_infrastructure"
-    weight: 30
-  - name: "Live Processes"
+    weight: 603
+  - name: "ライブプロセス"
     url: "graphing/infrastructure/process/"
     parent: "graphing_infrastructure"
-    weight: 40
-  - name: "Cloud Functions"
-    url: "graphing/infrastructure/cloudfunctions/"
+    weight: 604
+  - name: "クラウド関数"
+    url: "graphing/infrastructure/serverless/"
     parent: "graphing_infrastructure"
-    weight: 50
-  # GRAPHING - Functions
-  - name: "From the query to the graph "
+    weight: 606
+
+  ## GRAPHING - Functions
+
+  - name: "クエリからグラフまで"
     url: "graphing/functions/"
     parent: "graphing"
     identifier: "graphing_functions"
-    weight: 60
-  - name: "Algorithms"
+    weight: 7
+  - name: "アルゴリズム"
     url: "graphing/functions/algorithms/"
     parent: "graphing_functions"
-    weight: 10
-  - name: "Arithmetic"
+    weight: 701
+  - name: "算術"
     url: "graphing/functions/arithmetic/"
     parent: "graphing_functions"
-    weight: 20
-  - name: "Count"
+    weight: 702
+  - name: "カウント"
     url: "graphing/functions/count/"
     parent: "graphing_functions"
-    weight: 30
-  - name: "Interpolation"
+    weight: 703
+  - name: "補間"
     url: "graphing/functions/interpolation/"
     parent: "graphing_functions"
-    weight: 40
-  - name: "Rank"
+    weight: 704
+  - name: "ランク"
     url: "graphing/functions/rank/"
     parent: "graphing_functions"
-    weight: 50
-  - name: "Rate"
+    weight: 705
+  - name: "レート"
     url: "graphing/functions/rate/"
     parent: "graphing_functions"
-    weight: 60
-  - name: "Regression"
+    weight: 706
+  - name: "回帰"
     url: "graphing/functions/regression/"
     parent: "graphing_functions"
-    weight: 70
-  - name: "Rollup"
+    weight: 707
+  - name: "ロールアップ"
     url: "graphing/functions/rollup/"
     parent: "graphing_functions"
-    weight: 80
-  - name: "Smoothing"
+    weight: 708
+  - name: "スムージング"
     url: "graphing/functions/smoothing/"
     parent: "graphing_functions"
-    weight: 90
-  - name: "Timeshift"
+    weight: 709
+  - name: "タイムシフト"
     url: "graphing/functions/timeshift/"
     parent: "graphing_functions"
-    weight: 100
-  - name: "Beta"
+    weight: 710
+  - name: "ベータ"
     url: "graphing/functions/beta/"
     parent: "graphing_functions"
-    weight: 110
-  - name: "Graphing with JSON"
+    weight: 711
+
+  ## GRAPHING - Graphing JSON
+
+  - name: "JSON を使用したグラフの作成方法"
     url: "graphing/graphing_json/"
     parent: "graphing"
     identifier: "graphing_json"
-    weight: 70
-  - name: "Widget JSON schema"
+    weight: 8
+
+  - name: "ウィジェット JSON スキーマ"
     url: "graphing/graphing_json/widget_json/"
     parent: "graphing_json"
-    weight: 10
-  - name: "Request JSON schema"
+    weight: 801
+  - name: "リクエスト JSON スキーマ"
     url: "graphing/graphing_json/request_json/"
     parent: "graphing_json"
-    weight: 20
-  - name: "Widgets"
+    weight: 802
+
+  - name: "ウィジェット"
     url: "graphing/widgets/"
     parent: "graphing"
-    weight: 80
-  - name: "Guides"
-    url: "graphing/guide"
-    parent: "graphing"
-    weight: 90
-  # - #   name: "FAQ"
-  #   url: "graphing/faq/"
-  #   #   parent: menu_references_graphing
-  # GRAPHING - Subnav end
+    weight: 9
 
-# ALERTING
-  - name: "Alerting"
+  - name: "ガイド"
+    url: "graphing/guide/"
+    parent: "graphing"
+    weight: 10
+
+##############
+## ALERTING ##
+##############
+
+  - name: "アラート設定"
     url: "monitors/"
     pre: "nav_alerting"
     identifier: "alerting"
-    weight: 700
-  # ALERTING - Subnav start
-  - name: "Monitor Types"
+    weight: 70000
+
+  ## ALERTING - Monitor Types
+
+  - name: "モニターの種類"
     url: "monitors/monitor_types/"
     parent: "alerting"
     identifier: "monitor_types"
-    weight: 10
-  - name: "Anomaly"
+    weight: 1
+  - name: "異常検知"
     url: "monitors/monitor_types/anomaly/"
     parent: "monitor_types"
-    weight: 20
+    weight: 101
   - name: "APM"
     url: "monitors/monitor_types/apm/"
     parent: "monitor_types"
-    weight: 30
+    weight: 102
     identifier: "monitor_apm"
-  - name: "Composite"
+  - name: "複合条件"
     url: "monitors/monitor_types/composite/"
     parent: "monitor_types"
-    weight: 40
-  - name: "Custom Check"
+    weight: 103
+  - name: "カスタムチェック"
     url: "monitors/monitor_types/custom_check/"
     parent: "monitor_types"
-    weight: 50
-  - name: "Event"
+    weight: 104
+  - name: "イベント"
     url: "monitors/monitor_types/event/"
     parent: "monitor_types"
-    weight: 60
-  - name: "Forecasts"
+    weight: 105
+  - name: "予測値"
     url: "monitors/monitor_types/forecasts/"
     parent: "monitor_types"
-    weight: 70
-  - name: "Host"
+    weight: 106
+  - name: "ホスト"
     url: "monitors/monitor_types/host/"
     parent: "monitor_types"
-    weight: 80
-  - name: "Integration"
+    weight: 107
+  - name: "インテグレーション"
     url: "monitors/monitor_types/integration/"
     parent: "monitor_types"
-    weight: 90
-  - name: "Log"
-    url: "monitors/monitor_types/log"
+    weight: 108
+  - name: "ログ"
+    url: "monitors/monitor_types/log/"
     parent: "monitor_types"
-    weight: 100
-  - name: "Metric"
+    weight: 109
+  - name: "メトリクス"
     url: "monitors/monitor_types/metric/"
     parent: "monitor_types"
     weight: 110
-  - name: "Network"
+  - name: "ネットワーク"
     url: "monitors/monitor_types/network/"
     parent: "monitor_types"
-    weight: 120
-  - name: "Outlier"
+    weight: 111
+  - name: "外れ値"
     url: "monitors/monitor_types/outlier/"
     parent: "monitor_types"
-    weight: 130
-  - name: "Process"
+    weight: 112
+  - name: "プロセス"
     url: "monitors/monitor_types/process/"
     parent: "monitor_types"
-    weight: 140
+    weight: 113
   - name: "Watchdog"
     url: "monitors/monitor_types/watchdog/"
     parent: "monitor_types"
-    weight: 150
-    identifier: "monitor_watchdog" # make it unique
-  # Manage monitor
-  - name: "Manage Monitor"
+    weight: 114
+    identifier: "monitor_watchdog"
+
+  ## MONITORS -  Manage monitor
+
+  - name: "モニターの管理"
     url: "monitors/manage_monitor/"
-    weight: 20
+    weight: 2
     parent: "alerting"
-  # Monitor status
-  - name: "Monitor Status"
+
+  - name: "ステータスの監視"
     url: "monitors/monitor_status/"
-    weight: 30
+    weight: 3
     parent: "alerting"
-  # Check summary
-  - name: "Check Summary"
+
+  - name: "チェック内容のサマリー"
     url: "monitors/check_summary/"
-    weight: 40
+    weight: 4
     parent: "alerting"
-  - name: "Notifications"
+
+  - name: "通知"
     url: "monitors/notifications/"
-    weight: 50
+    weight: 5
     parent: "alerting"
-  - name: "Downtimes"
+
+  - name: "ダウンタイム"
     url: "monitors/downtimes/"
-    weight: 60
+    weight: 6
     parent: "alerting"
-  - name: "SLO Widget"
+
+  - name: "SLO ウィジェット"
     url: "monitors/slo_widget/"
-    weight: 70
+    weight: 7
     parent: "alerting"
-  - name: "Guides"
-    url: "monitors/guide"
-    weight: 80
+
+  - name: "ガイド"
+    url: "monitors/guide/"
+    weight: 8
     parent: "alerting"
-      #- #  name: "FAQ"
-      #  url: "monitors/faq/"
-      #  #  parent: menu_references_monitoring
-      # ALERTING - Subnav end
 
+#################
+## TRACING/APM ##
+#################
 
-# TRACING/APM
-  - name: "APM (Tracing)"
+  - name: "APM（トレース）"
     url: "tracing/"
     pre: "nav_tracing"
     identifier: "tracing"
-    weight: 800
-  # Enable tracing
-  - name: "Enable trace collection"
-    url: "tracing/send_traces/"
-    parent: "tracing"
-    weight: 10
-  # Languages
-  - name: "Instrument your application"
+    weight: 80000
+
+  ## TRACING - Setup
+
+  - name: "セットアップ"
     url: "tracing/setup/"
     parent: "tracing"
     identifier: "tracing_setup"
-    weight: 20
+    weight: 2
   - name: "Java"
     url: "tracing/setup/java/"
     parent: "tracing_setup"
-    weight: 30
+    weight: 201
   - name: "Python"
     url: "tracing/setup/python/"
     parent: "tracing_setup"
-    weight: 40
+    weight: 202
   - name: "Ruby"
     url: "tracing/setup/ruby/"
     parent: "tracing_setup"
-    weight: 50
+    weight: 203
   - name: "Go"
     url: "tracing/setup/go/"
     parent: "tracing_setup"
-    weight: 60
+    weight: 204
   - name: "Node.js"
     url: "tracing/setup/nodejs/"
     parent: "tracing_setup"
-    weight: 70
+    weight: 205
   - name: ".NET"
     url: "tracing/setup/dotnet/"
     parent: "tracing_setup"
-    weight: 80
+    weight: 206
   - name: "PHP"
     url: "tracing/setup/php/"
     parent: "tracing_setup"
-    weight: 90
+    weight: 207
   - name: "C++"
     url: "tracing/setup/cpp/"
     parent: "tracing_setup"
-    weight: 100
+    weight: 208
   - name: "Envoy"
     url: "tracing/setup/envoy/"
     parent: "tracing_setup"
-    weight: 110
+    weight: 209
   - name: "NGINX"
     url: "tracing/setup/nginx/"
     parent: "tracing_setup"
-    weight: 120
+    weight: 210
   - name: "Istio"
     url: "tracing/setup/istio/"
     parent: "tracing_setup"
-    weight: 130
-  # Enrich Tracing
-  - name: "Enrich Tracing"
+    weight: 211
+
+  ## TRACING - Enrich Tracing
+
+  - name: "トレーシングの機能強化"
     url: "tracing/advanced/"
     parent: "tracing"
     identifier: "tracing_advanced"
-    weight: 30
-  - name: "Connect Logs and Traces"
-    url: "tracing/advanced/connect_logs_and_traces"
+    weight: 3
+  - name: "ログとトレースの接続"
+    url: "tracing/advanced/connect_logs_and_traces/"
     parent: "tracing_advanced"
-    weight: 10
-  - name: "Adding Metadata to Spans"
-    url: "tracing/advanced/adding_metadata_to_spans"
+    weight: 301
+  - name: "スパンへのメタデータの追加"
+    url: "tracing/advanced/adding_metadata_to_spans/"
     parent: "tracing_advanced"
-    weight: 20
-  - name: "Runtime Metrics"
-    url: "tracing/advanced/runtime_metrics"
+    weight: 302
+  - name: "ランタイムメトリクス"
+    url: "tracing/advanced/runtime_metrics/"
     parent: "tracing_advanced"
-    weight: 30
+    weight: 303
   - name: "OpenTracing"
-    url: "tracing/advanced/opentracing"
+    url: "tracing/advanced/opentracing/"
     parent: "tracing_advanced"
-    weight: 40
-  - name: "Manual Instrumentation"
-    url: "tracing/advanced/manual_instrumentation"
+    weight: 304
+  - name: "手動インスツルメンテーション"
+    url: "tracing/advanced/manual_instrumentation/"
     parent: "tracing_advanced"
-    weight: 50
-  - name: "Setting Primary Tags to scope "
-    url: "tracing/advanced/setting_primary_tags_to_scope"
+    weight: 305
+  - name: "スコープへのプライマリタグの設定"
+    url: "tracing/advanced/setting_primary_tags_to_scope/"
     parent: "tracing_advanced"
-    weight: 60
-  # Using the APM UI
-  - name: "Use the APM UI"
+    weight: 306
+
+  ## TACING - Using the APM UI
+
+  - name: "APM の UI を利用する"
     url: "tracing/visualization/"
     parent: "tracing"
     identifier: "tracing_vis"
-    weight: 40
-  - name: "Services List"
-    url: "tracing/visualization/services_list"
+    weight: 4
+  - name: "サービス一覧画面"
+    url: "tracing/visualization/services_list/"
     parent: "tracing_vis"
-    weight: 10
-  - name: "Service Page"
-    url: "tracing/visualization/service"
+    weight: 401
+  - name: "サービス詳細画面"
+    url: "tracing/visualization/service/"
     parent: "tracing_vis"
-    weight: 10
-  - name: "Resource Page"
-    url: "tracing/visualization/resource"
+    weight: 402
+  - name: "リソースステータス画面"
+    url: "tracing/visualization/resource/"
     parent: "tracing_vis"
-    weight: 20
-  - name: "Trace View"
-    url: "tracing/visualization/trace"
+    weight: 403
+  - name: "トレースビュー"
+    url: "tracing/visualization/trace/"
     parent: "tracing_vis"
-    weight: 30
-  - name: "Service Map"
-    url: "tracing/visualization/services_map"
+    weight: 404
+  - name: "サービスマッピング"
+    url: "tracing/visualization/services_map/"
     parent: "tracing_vis"
-    weight: 40
+    weight: 405
 
-  # Trace Search
-  - name: "Trace Search & Analytics"
+  ## TRACING - Trace Search
+
+  - name: "トレース検索と分析"
     url: "tracing/trace_search_and_analytics/"
     parent: "tracing"
     identifier: "tracing_search_analytics"
-    weight: 50
-  - name: "Agent Configuration"
-    url: "tracing/trace_search_and_analytics/agent_trace_search"
+    weight: 5
+  - name: "Agent 構成"
+    url: "tracing/trace_search_and_analytics/agent_trace_search/"
     parent: "tracing_search_analytics"
-    weight: 10
-  - name: "Trace Search"
-    url: "tracing/trace_search_and_analytics/search"
+    weight: 501
+  - name: "トレース検索"
+    url: "tracing/trace_search_and_analytics/search/"
     parent: "tracing_search_analytics"
-    weight: 20
-  - name: "Trace Analytics"
-    url: "tracing/trace_search_and_analytics/analytics"
+    weight: 502
+  - name: "トレース分析"
+    url: "tracing/trace_search_and_analytics/analytics/"
     parent: "tracing_search_analytics"
-    weight: 30
-  # Trace API
-  - name: "Trace API"
+    weight: 503
+
+  - name: "トレース API"
     url: "api/#tracing"
     parent: "tracing"
-    weight: 60
-  # Libraries
-  - name: "Community Libraries"
-    url: "developers/libraries/#apm-tracing-client-libraries"
+    weight: 6
+
+  - name: "コミュニティライブラリ"
+    url: "developers/libraries/#apm-tracing-client-libraries/"
     parent: "tracing"
-    weight: 70
-  - name: "Guides"
-    url: "tracing/guide"
+    weight: 7
+
+  - name: "ガイド"
+    url: "tracing/guide/"
     identifier: "tracing_guides"
     parent: "tracing"
-    weight: 80
-  - name: Troubleshooting
+    weight: 8
+
+  - name: トラブルシューティング
     url: "tracing/troubleshooting/"
     identifier: "tracing_troubleshooting"
     parent: "tracing"
-    weight: 90
-  #- #  name: "FAQ"
-  #  url: "tracing/faq/"
-  #  #  parent: menu_references_tracing
+    weight: 9
 
+##########
+## LOGS ##
+##########
 
-  # TRACING/APM - Subnav end
-
-# LOGS
-  - name: "Log Management"
+  - name: "ログ管理"
     url: "logs/"
     pre: "nav_logs"
     identifier: "log_management"
-    weight: 900
-  - name: "Log Collection & Integrations"
+    weight: 90000
+
+  ## LOGS -  Log Collection
+
+  - name: "ログの収集とインテグレーション"
     url: "logs/log_collection/"
     parent: "log_management"
     identifier: "log_collection"
-    weight: 10
-  # Log Collection Subnav
-  - name: "Browser"
-    identifier: "log_browser"
-    url: "logs/log_collection/javascript/"
-    parent: "log_collection"
-    weight: 10
+    weight: 1
   - name: "Csharp"
     url: "logs/log_collection/csharp/"
     parent: "log_collection"
-    weight: 20
+    weight: 101
   - name: "Go"
     identifier: "log_go"
     url: "logs/log_collection/go/"
     parent: "log_collection"
-    weight: 30
+    weight: 102
   - name: "Java"
     url: "logs/log_collection/java/"
     parent: "log_collection"
-    weight: 40
+    weight: 103
+  - name: "ブラウザ"
+    identifier: "log_browser"
+    url: "logs/log_collection/javascript/"
+    parent: "log_collection"
+    weight: 104
   - name: "Nodejs"
     url: "logs/log_collection/nodejs/"
     parent: "log_collection"
-    weight: 50
+    weight: 105
   - name: "PHP"
     identifier: "log_php"
     url: "logs/log_collection/php/"
     parent: "log_collection"
-    weight: 60
+    weight: 106
   - name: "Python"
     identifier: "log_python"
     url: "logs/log_collection/python/"
     parent: "log_collection"
-    weight: 70
+    weight: 107
   - name: "Ruby"
     url: "logs/log_collection/ruby/"
     parent: "log_collection"
-    weight: 80
-  - name: "Other Integrations"
-    url: "integrations/#cat-log-collection"
+    weight: 108
+  - name: "その他のインテグレーション"
+    url: "integrations/#cat-log-collection/"
     parent: "log_collection"
-    weight: 90
+    weight: 109
 
-  # LOGS - Processing
-  - name: "Processing"
+  ## LOGS - Processing
+
+  - name: "処理"
     url: "logs/processing/"
     parent: "log_management"
     identifier: "log_processing"
-    weight: 20
-  - name: "Pipelines"
+    weight: 2
+  - name: "パイプライン"
     url: "logs/processing/pipelines/"
     parent: "log_processing"
-    weight: 10
-  - name: "Processors"
+    weight: 201
+  - name: "プロセッサー"
     url: "logs/processing/processors/"
     parent: "log_processing"
-    weight: 20
-  - name: "Parsing"
+    weight: 202
+  - name: "パース"
     url: "logs/processing/parsing/"
     parent: "log_processing"
-    weight: 30
-  - name: "Naming Convention"
+    weight: 203
+  - name: "命名規則"
     url: "logs/processing/attributes_naming_convention/"
     parent: "log_processing"
-    weight: 40
+    weight: 204
 
-  # LOGS - Live tail
   - name: "Live Tail"
     url: "logs/live_tail/"
     parent: "log_management"
-    weight: 30
+    weight: 4
 
-  # LOGS - Explorer
-  - name: "Explorer"
+  ## LOGS - Explorer
+
+  - name: "エクスプローラー"
     url: "logs/explorer/"
     parent: "log_management"
     identifier: "log_explorer"
-    weight: 40
-  - name: "Search"
-    url: "logs/explorer/search"
+    weight: 4
+  - name: "検索"
+    url: "logs/explorer/search/"
     parent: "log_explorer"
-    weight: 10
-  - name: "Log Analytics"
-    url: "logs/explorer/analytics"
+    weight: 401
+  - name: "ログ分析"
+    url: "logs/explorer/analytics/"
     parent: "log_explorer"
-    weight: 20
-  - name: "Saved Views"
-    url: "logs/explorer/saved_views"
+    weight: 402
+  - name: "保存済みビュー"
+    url: "logs/explorer/saved_views/"
     parent: "log_explorer"
-    weight: 30
-  - name: "Log Patterns"
-    url: "logs/explorer/patterns"
+    weight: 403
+  - name: "ログパターン"
+    url: "logs/explorer/patterns/"
     parent: "log_explorer"
-    weight: 40
+    weight: 404
 
-  - name: "Logging without Limits"
+  - name: "無制限のログ"
     url: "logs/logging_without_limits/"
     parent: "log_management"
-    weight: 50
-  # LOGS - Archives
+    weight: 5
 
-  - name: "Archives"
-    url: "logs/archives/s3"
+  ## LOGS - Archives
+
+  - name: "アーカイブ"
+    url: "logs/archives/"
     parent: "log_management"
     identifier: "log_archives"
-    weight: 60
+    weight: 6
   - name: "AWS S3"
-    url: "logs/archives/s3"
+    url: "logs/archives/s3/"
     parent: "log_archives"
-    weight: 10
+    weight: 601
 
-  #- #  name: "FAQ"
-  #  url: "logs/faq/"
-  #  #  parent: menu_references_logs
-
-  # Guides
-  - name: "Guides"
+  - name: "ガイド"
     url: "logs/guide/"
     parent: "log_management"
-    weight: 70
+    weight: 7
 
-  - name: "Security"
-    url: "logs/security"
+  - name: "セキュリティ"
+    url: "logs/security/"
     parent: "log_management"
-    weight: 80
+    weight: 8
 
-  # LOGS - Subnav end
+################
+## SYNTHETICS ##
+################
 
-# SYNTHETICS
   - name: "Synthetics"
     url: "synthetics/"
     pre: "nav_synthetics"
     identifier: "synthetics"
-    weight: 1000
-  - name: "API Tests"
-    url: "synthetics/api_tests"
-    parent: "synthetics"
-    weight: 10
-    id: "api_tests"
-  - name: "Browser Tests"
-    url: "synthetics/browser_tests"
-    parent: "synthetics"
-    weight: 20
-  - name: "APM Integration"
-    url: "synthetics/apm"
-    parent: "synthetics"
-    weight: 30
-  - name: "Identify Synthetics Bots"
-    url: "synthetics/identify_synthetics_bots"
-    parent: "synthetics"
-    weight: 40
-  - name: "Settings"
-    url: "synthetics/settings"
-    parent: "synthetics"
-    weight: 50
+    weight: 100000
 
-# DEVELOPERS
-  - name: "Developer Tools"
+  - name: "API テスト"
+    url: "synthetics/api_tests/"
+    parent: "synthetics"
+    weight: 1
+    id: "api_tests"
+
+  - name: "ブラウザテスト"
+    url: "synthetics/browser_tests/"
+    parent: "synthetics"
+    weight: 2
+
+  ## SYNTHETICS - APM
+
+  - name: "APM インテグレーション"
+    url: "synthetics/apm/"
+    parent: "synthetics"
+    identifier: "synthetics_apm"
+    weight: 3
+
+  - name: "Synthetics ボットの特定"
+    url: "synthetics/identify_synthetics_bots/"
+    parent: "synthetics"
+    weight: 4
+
+  - name: "設定"
+    url: "synthetics/settings/"
+    parent: "synthetics"
+    weight: 5
+
+################
+## DEVELOPERS ##
+################
+
+  - name: "開発ツール"
     url: "developers/"
     pre: "nav_developers"
     identifier: "dev_tools"
-    weight: 1100
-  # DEVELOPERS - Subnav start
+    weight: 110000
+
+  ## DEVELOPERS - DogStatsD
+
   - name: "DogStatsD"
     url: "developers/dogstatsd/"
     parent: "dev_tools"
     identifier: "dev_tools_dogstatsd"
-    weight: 10
-  - name: "Data Types and Tags"
-    url: "developers/dogstatsd/data_types"
+    weight: 1
+  - name: "開発ツール"
+    url: "developers/dogstatsd/data_types/"
     parent: "dev_tools_dogstatsd"
-  - name: "Datagram and Shell Usage"
-    url: "developers/dogstatsd/datagram_shell"
+    weight: 101
+  - name: "データグラムとシェルの使用法"
+    url: "developers/dogstatsd/datagram_shell/"
     parent: "dev_tools_dogstatsd"
-  - name: "Unix Domain Socket usage"
-    url: "developers/dogstatsd/unix_socket"
+    weight: 102
+  - name: "Unix ドメインソケットの使用法"
+    url: "developers/dogstatsd/unix_socket/"
     parent: "dev_tools_dogstatsd"
-  - name: "Metrics"
+    weight: 103
+
+  ## DEVELOPERS - Metrics
+
+  - name: "メトリクス"
     url: "developers/metrics/"
     parent: "dev_tools"
     identifier: "dev_tools_metrics"
-    weight: 20
-  - name: "Custom Metrics"
+    weight: 2
+  - name: "カスタムメトリクス"
     url: "developers/metrics/custom_metrics/"
     parent: "dev_tools_metrics"
-    weight: 10
-  - name: "Counts"
-    url: "developers/metrics/counts"
+    weight: 201
+  - name: "カウント"
+    url: "developers/metrics/counts/"
     parent: "dev_tools_metrics"
-    weight: 20
-  - name: "Distributions"
-    url: "developers/metrics/distributions"
+    weight: 202
+  - name: "ディストリビューション"
+    url: "developers/metrics/distributions/"
     parent: "dev_tools_metrics"
-    weight: 30
-  - name: "Gauges"
-    url: "developers/metrics/gauges"
+    weight: 203
+  - name: "ゲージ"
+    url: "developers/metrics/gauges/"
     parent: "dev_tools_metrics"
-    weight: 40
-  - name: "Histograms"
-    url: "developers/metrics/histograms"
+    weight: 204
+  - name: "ヒストグラム"
+    url: "developers/metrics/histograms/"
     parent: "dev_tools_metrics"
-    weight: 50
-  - name: "Rates"
-    url: "developers/metrics/rates"
+    weight: 205
+  - name: "レート"
+    url: "developers/metrics/rates/"
     parent: "dev_tools_metrics"
-    weight: 60
-  - name: "Sets"
-    url: "developers/metrics/sets"
+    weight: 206
+  - name: "セット"
+    url: "developers/metrics/sets/"
     parent: "dev_tools_metrics"
-    weight: 70
-  - name: "Libraries"
+    weight: 207
+
+  - name: "ライブラリ"
     url: "developers/libraries/"
     parent: "dev_tools"
-    weight: 30
+    weight: 3
+
   - name: "Community Office Hours"
     url: "developers/office_hours/"
     parent: "dev_tools"
-    weight: 40
-  - name: "Write a Custom Check"
-    url: "developers/write_agent_check"
+    weight: 4
+
+  - name: "カスタムチェックの書き方"
+    url: "developers/write_agent_check/"
     parent: "dev_tools"
-    weight: 50
-  - name: "Write a Prometheus Check"
-    url: "developers/prometheus"
+    weight: 5
+
+  - name: "Prometheus チェックの書き方"
+    url: "developers/prometheus/"
     parent: "dev_tools"
-    weight: 60
-  # Integrations core doc
-  - name: "Integrations"
+    weight: 6
+
+  ## DEVELOPERS -  Integrations
+
+  - name: "インテグレーション"
     url: "developers/integrations/"
     parent: "dev_tools"
     identifier: "dev_tools_integrations"
-    weight: 70
-  - name: "Create a new Integration"
-    url: "developers/integrations/new_check_howto"
+    weight: 7
+  - name: "新しいインテグレーションの設定"
+    url: "developers/integrations/new_check_howto/"
     parent: "dev_tools_integrations"
-    weight: 10
+    weight: 701
   - name: "Python"
-    url: "developers/integrations/python"
+    url: "developers/integrations/python/"
     parent: "dev_tools_integrations"
-    weight: 20
-  - name: "Legacy"
-    url: "developers/integrations/legacy"
+    weight: 702
+  - name: "レガシー"
+    url: "developers/integrations/legacy/"
     parent: "dev_tools_integrations"
-    weight: 30
-  - name: "Guides"
+    weight: 703
+
+  - name: "ガイド"
     url: "developers/guide/"
     parent: "dev_tools"
-    weight: 80
-  #- #  name: "FAQ"
-  #  url: "developers/faq/"
-  #  #  parent: menu_references_developers
-  # DEVELOPERS - Subnav end
+    weight: 8
 
-# API
+#########
+## API ##
+#########
+
   - name: "API"
     url: "api/"
     pre: "nav_api"
     identifier: "api"
-    weight: 1200
+    weight: 120000
 
- # ACCOUNT MANAGEMENT
-  - name: "Account Management"
+########################
+## ACCOUNT MANAGEMENT ##
+########################
+
+  - name: "アカウントの管理"
     url: "account_management/"
     pre: "nav_account"
     identifier: "account_management"
-    weight: 1300
-  # ACCOUNT MANAGEMENT - Subnav start
-  - name: "Team management"
+    weight: 130000
+
+  - name: "チームの管理"
     url: "account_management/team/"
     parent: "account_management"
-    weight: 10
-  - name: "Organization settings"
+    weight: 1
+
+  - name: "オーガニゼーションの設定"
     url: "account_management/org_settings/"
     parent: "account_management"
-    weight: 20
-  - name: "SSO with SAML"
+    weight: 2
+
+  ## ACCOUNT MANAGEMENT - SAML
+
+  - name: "SAML を使用した SSO"
     url: "account_management/saml/"
     identifier: "account_management_saml"
     parent: "account_management"
-    weight: 30
-  # SAML subnav
+    weight: 3
   - name: "Active Directory"
-    url: "account_management/saml/activedirectory"
+    url: "account_management/saml/activedirectory/"
     parent: "account_management_saml"
-    weight: 10
+    weight: 301
   - name: "Auth0"
-    url: "account_management/saml/auth0"
+    url: "account_management/saml/auth0/"
     parent: "account_management_saml"
-    weight: 20
+    weight: 302
   - name: "Azure"
-    url: "account_management/saml/azure"
+    url: "account_management/saml/azure/"
     parent: "account_management_saml"
-    weight: 30
+    weight: 303
   - name: "Google"
-    url: "account_management/saml/google"
+    url: "account_management/saml/google/"
     parent: "account_management_saml"
-    weight: 40
+    weight: 304
   - name: "NoPassword"
-    url: "account_management/saml/nopassword"
+    url: "account_management/saml/nopassword/"
     parent: "account_management_saml"
-    weight: 50
+    weight: 305
   - name: "Okta"
-    url: "account_management/saml/okta"
+    url: "account_management/saml/okta/"
     parent: "account_management_saml"
-    weight: 60
+    weight: 306
   - name: "SafeNet"
-    url: "account_management/saml/safenet"
+    url: "account_management/saml/safenet/"
     parent: "account_management_saml"
-    weight: 70
-  - name: "Multi-org accounts"
+    weight: 307
+
+  - name: "マルチオーガニゼーションのアカウント"
     url: "account_management/multi_organization/"
     parent: "account_management"
-    weight: 40
-  - name: "Switching between orgs"
+    weight: 4
+
+  - name: "オーガニゼーションの切り替え"
     url: "account_management/org_switching/"
     parent: "account_management"
-    weight: 50
-  - name: "Billing"
+    weight: 5
+
+  - name: "課金"
     url: "account_management/billing/"
     parent: "account_management"
-    weight: 60
-  - name: "API and Application Keys"
+    weight: 6
+
+  - name: "API キーとアプリケーションキー"
     url: "account_management/api-app-keys/"
     parent: "account_management"
-    weight: 70
+    weight: 7
 
+##############
+## SECURITY ##
+##############
 
-      #- #  name: "FAQ"
-      #  url: "account_management/faq/"
-      #  #  parent: menu_references_account_management
-      # ACCOUNT MANAGEMENT - Subnav end
-
-# SECURITY
-  - name: "Security"
+  - name: "セキュリティ"
     url: "security/"
     pre: "nav_security"
     identifier: "security"
-    weight: 1400
-  # SECURITY - Subnav start
-  - name: "Agent"
-    url: "security/agent"
-    parent: "security"
-    weight: 10
-  - name: "APM (Tracing)"
-    url: "security/tracing"
-    parent: "security"
-    weight: 20
-  - name: "Log Management"
-    url: "security/logs"
-    parent: "security"
-    weight: 30
-  - name: "Other considerations"
-    url: "security/other"
-    parent: "security"
-    weight: 40
+    weight: 140000
 
-# GLOSSARY
-  - name: "Glossary"
+  - name: "Agent"
+    url: "security/agent/"
+    parent: "security"
+    weight: 1
+
+  - name: "APM（トレース）"
+    url: "security/tracing/"
+    parent: "security"
+    weight: 2
+
+  - name: "ログ管理"
+    url: "security/logs/"
+    parent: "security"
+    weight: 3
+
+  - name: "その他の考慮事項"
+    url: "security/other/"
+    parent: "security"
+    weight: 4
+
+##############
+## GLOSSARY ##
+##############
+
+  - name: "用語集"
     url: "glossary/"
     pre: "nav_glossary"
-    weight: 1500
+    weight: 150000
 
-# VIDEOS
-  - name: "Videos"
+############
+## VIDEOS ##
+############
+
+  - name: "ビデオ"
     url: "videos/"
     pre: "nav_videos"
-    weight: 1600
-    
-# HELP
-  - name: "Help"
+    weight: 160000
+
+##########
+## HELP ##
+##########
+
+  - name: "ヘルプ"
     url: "help/"
     pre: "nav_help"
-    weight: 1700
+    weight: 170000
