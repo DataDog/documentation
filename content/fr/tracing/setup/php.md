@@ -236,5 +236,3 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 [12]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [13]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
 [14]: /fr/tracing/troubleshooting
-[15]: 
-[16]: 
