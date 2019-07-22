@@ -41,6 +41,14 @@ Le check réseau recueille des statistiques TCP/IP à partir du système d'explo
 
 Le check réseau est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur.
 
+Pour recueillir des métriques avec cette intégration, assurez-vous que le module conntrack est activé sur votre host. Si ce n'est pas le cas, exécutez :
+
+```
+sudo modprobe nf_conntrack
+sudo modprobe nf_conntrack_ipv4
+sudo modprobe nf_conntrack_ipv6
+```
+
 ### Configuration
 
 1. L'Agent vous permet d'activer le check réseau par défaut. Si toutefois vous souhaitez le configurer vous-même, modifiez le fichier `network.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3].
@@ -61,8 +69,9 @@ Le check réseau est inclus avec le paquet de l'[Agent Datadog][2] : vous n'ave
 
 2. [Redémarrez l'Agent][5] pour prendre en compte le changement de configuration.
 
-Certaines métriques conntrack ne peuvent être recueillies que si conntrack a été exécuté avec une élévation des privilèges.
-Remarque : cela ne fonctionne que si les règles sudoers appropriées ont été configurées.
+
+**Remarque** : certaines métriques conntrack ne peuvent être recueillies que si conntrack a été exécuté avec une élévation des privilèges. Pour garantir leur bon fonctionnement, configurez la règle sudoers suivante :
+
 ```
 dd-agent ALL=NOPASSWD: /usr/sbin/conntrack -S
 ```

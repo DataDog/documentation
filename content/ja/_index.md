@@ -5,6 +5,7 @@ aliases:
   - /ja/basic_agent_usage/
   - /ja/guides/
   - /ja/faq/
+  - /ja/docs/
 disable_toc: true
 ---
 # Datadog Docsへようこそ！

@@ -7,7 +7,7 @@ external_redirect: /api/#get-an-api-key
 
 ##### Signature
 
-`GET /api/v1/api_key/<API_KEY>`
+`GET /v1/api_key/<API_KEY>`
 
 ##### Example Request
 

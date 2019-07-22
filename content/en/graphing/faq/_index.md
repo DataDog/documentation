@@ -33,7 +33,6 @@ aliases:
     {{< nextlink href="graphing/faq/the-same-color-is-used-twice-in-my-graph" >}}The same color is used twice in my graph!{{< /nextlink >}}
     {{< nextlink href="graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same" >}}I'm switching between the sum/min/max/avg aggregators but the values look the same?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/when-i-query-can-i-use-wildcards-in-metric-names-and-events" >}}When I query can I use wildcards in metric names and events?{{< /nextlink >}}
-    {{< nextlink href="graphing/faq/is-it-possible-to-query-historical-data-after-a-host-has-been-destroyed" >}}Is it possible to query historical data after a host has been destroyed?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/embeddable-graphs-with-template-variables" >}}Embeddable Graphs with Template Variables{{< /nextlink >}}
-    {{< nextlink href="graphing/faq/how-do-i-delete-a-host-or-metric-from-the-ui" >}}How do I delete a host or metric from the UI?{{< /nextlink >}}
+    {{< nextlink href="graphing/faq/historical-data" >}}Historical Data{{< /nextlink >}}
 {{< /whatsnext >}}

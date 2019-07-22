@@ -1,5 +1,5 @@
 ---
-title: Role API
+title: Roles API
 kind: documentation
 private: true
 beta: true
@@ -10,7 +10,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is in private beta. Ask your sales representative or customer success manager to have it enabled.
+Ask your sales representative or customer success manager to enable this feature.
 </div>
 
 The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them.
@@ -21,12 +21,27 @@ Permissions related to specific account assets can be granted to roles in the Da
 
 Description: Returns all roles, including their names and uuids.  
 Method: GET  
-Endpoint: `api/v1/role`  
-Required Payload: No Payload  
+Endpoint: `api/v1/roles`  
+Required Payload: No Payload
+
+##### ARGUMENTS
+
+
+* **`sort_field`** [*optional*, *default*=**name**]:
+    Sort roles by the given field.
+    Options: **name**
+* **`sort_dir`** [*optional*, *default*=**asc**]:
+    Direction of sort.
+    Options: **asc**, **desc**
+* **`start`** [*optional*, *default*=**0**]:
+    Page number
+* **`count`** [*optional*, *default*=**10**]:
+    Number of roles to return for a given page
+
 Example:
 
 ```sh
-curl -X GET "https://app.datadoghq.com/api/v1/role?api_key=${API_KEY}&application_key=${APP_KEY}"
+curl -X GET "https://app.datadoghq.com/api/v1/roles?api_key=${API_KEY}&application_key=${APP_KEY}"
 
 # Response:
 # [{
@@ -40,12 +55,12 @@ curl -X GET "https://app.datadoghq.com/api/v1/role?api_key=${API_KEY}&applicatio
 
 Description: Returns a specific role, including its name and uuid.  
 Method: GET  
-Endpoint: `api/v1/role/$ROLE_UUID`  
+Endpoint: `api/v1/roles/$ROLE_UUID`  
 Required Payload: No Payload  
 Example:
 
 ```sh
-curl -X GET "https://app.datadoghq.com/api/v1/role/${ROLEUUID}?api_key=${API_KEY}&application_key=${APP_KEY}"
+curl -X GET "https://app.datadoghq.com/api/v1/roles/${ROLEUUID}?api_key=${API_KEY}&application_key=${APP_KEY}"
 
 # Response:
 # {
@@ -59,48 +74,48 @@ curl -X GET "https://app.datadoghq.com/api/v1/role/${ROLEUUID}?api_key=${API_KEY
 
 Description: Creates a new role. Returns role name and uuid.  
 Method: POST  
-Endpoint: `api/v1/role`  
+Endpoint: `api/v1/roles`  
 Required Payload: "name"  
 Example:
 
 ```sh
-curl -X POST -H "Content-type: application/json" -d "{\"name\":\"${ROLENAME}\"}" "https://app.datadoghq.com/api/v1/role?api_key=${API_KEY}&application_key=${APP_KEY}"
+curl -X POST -H "Content-type: application/json" -d "{\"name\":\"${ROLENAME}\"}" "https://app.datadoghq.com/api/v1/roles?api_key=${API_KEY}&application_key=${APP_KEY}"
 ```
 
 ### Update Role
 
 Description: Updates an existing role's name. Returns role name and uuid.  
 Method: PUT  
-Endpoint: `api/v1/role/$ROLE_UUID`  
+Endpoint: `api/v1/roles/$ROLE_UUID`  
 Required Payload: "name"  
 Example:
 
 ```sh
-curl -X PUT -H "Content-type: application/json" -d "{\"name\":\"${ROLENAME}\"}" "https://app.datadoghq.com/api/v1/role/${ROLEUUID}?api_key=${API_KEY}&application_key=${APP_KEY}"
+curl -X PUT -H "Content-type: application/json" -d "{\"name\":\"${ROLENAME}\"}" "https://app.datadoghq.com/api/v1/roles/${ROLEUUID}?api_key=${API_KEY}&application_key=${APP_KEY}"
 ```
 
 ### Delete Role
 
 Description: Deletes a role.  
 Method: DELETE  
-Endpoint: `api/v1/role/$ROLE_UUID`  
+Endpoint: `api/v1/roles/$ROLE_UUID`  
 Required Payload: No Payload  
 Example:
 
 ```sh
-curl -X DELETE "https://app.datadoghq.com/api/v1/role/${ROLEUUID}?api_key=${API_KEY}&application_key=${APP_KEY}"
+curl -X DELETE "https://app.datadoghq.com/api/v1/roles/${ROLEUUID}?api_key=${API_KEY}&application_key=${APP_KEY}"
 ```
 
 ### Get Permissions
 
 Description: Returns a list of all permissions, including name, description, uuid.  
 Method: GET  
-Endpoint: `api/v1/permission`  
+Endpoint: `api/v1/permissions`  
 Required Payload: No Payload  
 Example:
 
 ```sh
-curl -X GET "https://app.datadoghq.com/api/v1/permission?api_key=${API_KEY}&application_key=${APP_KEY}"
+curl -X GET "https://app.datadoghq.com/api/v1/permissions?api_key=${API_KEY}&application_key=${APP_KEY}"
 
 # Response:
 # [{
@@ -116,48 +131,48 @@ curl -X GET "https://app.datadoghq.com/api/v1/permission?api_key=${API_KEY}&appl
 
 Description: Adds a permission to a role.  
 Method: POST  
-Endpoint: `api/v1/role/$ROLE_UUID/permission/$PERMISSION_UUID`  
+Endpoint: `api/v1/roles/$ROLE_UUID/permissions/$PERMISSION_UUID`  
 Required Payload: Empty (`{}`)  
 Example:
 
 ```sh
-curl -X POST -H "Content-type: application/json" -d "{}" "https://app.datadoghq.com/api/v1/role/${ROLEUUID}/permission/${PERMISSION}?api_key=${API_KEY}&application_key=${APP_KEY}"
+curl -X POST -H "Content-type: application/json" -d "{}" "https://app.datadoghq.com/api/v1/roles/${ROLEUUID}/permissions/${PERMISSION}?api_key=${API_KEY}&application_key=${APP_KEY}"
 ```
 
 ### Revoke Permission from Role
 
 Description: Removes a permission from a role.  
 Method: DELETE  
-Endpoint: `api/v1/role/$ROLE_UUID/permission/$PERMISSION_UUID`  
+Endpoint: `api/v1/roles/$ROLE_UUID/permissions/$PERMISSION_UUID`  
 Required Payload: Empty (`{}`)  
 Example:
 
 ```sh
-curl -X DELETE -H "Content-type: application/json" -d "{}" "https://app.datadoghq.com/api/v1/role/${ROLEUUID}/permission/${PERMISSION}?api_key=${API_KEY}&application_key=${APP_KEY}"
+curl -X DELETE -H "Content-type: application/json" -d "{}" "https://app.datadoghq.com/api/v1/roles/${ROLEUUID}/permissions/${PERMISSION}?api_key=${API_KEY}&application_key=${APP_KEY}"
 ```
 
 ### Add User to Role
 
 Description: Adds a user to a role.  
 Method: POST  
-Endpoint: `api/v1/role/$ROLE_UUID/user/$USER_HANDLE`  
+Endpoint: `api/v1/roles/$ROLE_UUID/users/$USER_HANDLE`  
 Required Payload: Empty (`{}`)  
 Example:
 
 ```sh
-curl -X POST -H "Content-type: application/json" -d "{}" "https://app.datadoghq.com/api/v1/role/${ROLEUUID}/user/${USER}?api_key=${API_KEY}&application_key=${APP_KEY}"
+curl -X POST -H "Content-type: application/json" -d "{}" "https://app.datadoghq.com/api/v1/roles/${ROLEUUID}/users/${USER}?api_key=${API_KEY}&application_key=${APP_KEY}"
 ```
 
 ### Remove User from Role
 
 Description: Removes a user from a role.  
 Method: DELETE  
-Endpoint: `api/v1/role/$ROLE_UUID/user/$USER_HANDLE`  
+Endpoint: `api/v1/roles/$ROLE_UUID/users/$USER_HANDLE`  
 Required Payload: Empty (`{}`)  
 Example:
 
 ```sh
-curl -X DELETE -H "Content-type: application/json" -d "{}" "https://app.datadoghq.com/api/v1/role/${ROLEUUID}/user/${USER}?api_key=${API_KEY}&application_key=${APP_KEY}"
+curl -X DELETE -H "Content-type: application/json" -d "{}" "https://app.datadoghq.com/api/v1/roles/${ROLEUUID}/users/${USER}?api_key=${API_KEY}&application_key=${APP_KEY}"
 ```
 
 ## Permission UUIDs
@@ -182,6 +197,8 @@ The UUIDs for the permissions are as follows:
 | logs_write_pipelines         | 811ac4ca-dd12-11e8-9e57-676a7f0beef9 | Update a subset of the log pipelines         |
 | logs_write_processors        | 84aa3ae4-dd12-11e8-9e58-a373a514ccd0 | Update the log processors in an index        |
 | logs_write_archives          | 87b00304-dd12-11e8-9e59-cbeb5f71f72f | Update the external archives configuration   |
+| logs_public_config_api       | 1a92ede2-6cb2-11e9-99c6-2b3a4a0cdf0a | Access the Logs Public Config API (r/w)      |
+
 {{% /tab %}}
 {{% tab "Datadog EU site" %}}
 |             name             |                 uuid                 |                 description                  |
@@ -196,6 +213,8 @@ The UUIDs for the permissions are as follows:
 | logs_write_pipelines         | 4fc43656-dd15-11e8-9308-f3e2bb5e31b4 | Update a subset of the log pipelines         |
 | logs_write_processors        | 505f4538-dd15-11e8-9308-47a4732f715f | Update the log processors in an index        |
 | logs_write_archives          | 505fd138-dd15-11e8-9308-afd2db62791e | Update the external archives configuration   |
+| logs_public_config_api       | bd837a80-6cb2-11e9-8fc4-339b4b012214 | Access the Logs Public Config API (r/w)      |
+
 {{% /tab %}}
 {{< /tabs >}}
 

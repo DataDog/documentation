@@ -156,6 +156,7 @@ Mettons que le monitor A soit caractérisé par des alertes multiples et regroup
 Le tableau précédent indiquait le statut du monitor composite pour quatre occurrences. À l'inverse, dans cet exemple, le tableau indique le statut de chaque situation à alertes multiples, pour une seule occurrence :
 
 {{% table responsive="true" %}}
+
 |source | monitor A    | monitor B| monitor C | statut du monitor composite (A && B && C) | alerte déclenchée ? |
 |-------|--------------|----------|-----------|--------------------------------|-------------------------|
 | web01 | Alert        | Warn     | Alert     | Alert                          |<i class="fa fa-check" aria-hidden="true"></i>|

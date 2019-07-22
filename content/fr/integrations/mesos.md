@@ -18,7 +18,7 @@ Ce check recueille des métriques des masters Mesos pour :
 * les ressources du cluster ;
 * les slaves enregistrés, actifs, inactifs, connectés, déconnectés, etc. ;
 * le nombre de tâches échouées, terminées, en cours d'exécution, etc. ;
-* Le nombre de frameworks actifs, inactifs, connectés ou déconnectés ;
+* le nombre de frameworks actifs, inactifs, connectés ou déconnectés ;
 
 et bien plus encore.
 ## Implémentation
@@ -82,7 +82,7 @@ Dans Datadog, recherchez `mesos.cluster` depuis la page Metrics Explorer.
 {{< get-metrics-from-git "mesos_master" >}}
 
 
-### Events
+### Événements
 Le check Mesos-master n'inclut aucun événement.
 
 ### Checks de service
@@ -211,7 +211,7 @@ Si vous n'utilisez pas DC/OS, vous trouverez datadog-agent dans la liste des app
 {{< get-metrics-from-git "mesos_slave" >}}
 
 
-### Events
+### Événements
 Le check Mesos-slave n'inclut aucun événement.
 
 ### Check de service
