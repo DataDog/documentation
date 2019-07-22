@@ -254,10 +254,14 @@ main:
     url: "agent/autodiscovery/troubleshooting/"
     parent: "agent_autodiscovery"
     weight: 406
+  - name: "Endpoints Checks"
+    url: "agent/autodiscovery/endpointschecks/"
+    parent: "agent_autodiscovery"
+    weight: 407
   - name: "Cluster Checks"
     url: "agent/autodiscovery/clusterchecks/"
     parent: "agent_autodiscovery"
-    weight: 407
+    weight: 408
 
   ## AGENT - LOGS
 
@@ -274,16 +278,18 @@ main:
     url: "agent/logs/proxy"
     parent: "agent_logs"
     weight: 502
-
-  - name: "Proxy"
-    url: "agent/proxy/"
-    parent: "agent"
-    weight: 6
-
   - name: "Upgrade to Agent v6"
     url: "agent/guide/upgrade-to-agent-v6/"
     parent: "agent"
     weight: 7
+
+  ## AGENT - Proxy
+
+  - name: "Proxy"
+    url: "agent/proxy/"
+    parent: "agent"
+    identifier: "agent_proxy"
+    weight: 6
 
   ## AGENT - Troubleshooting
   - name: "Troubleshooting"
@@ -319,6 +325,7 @@ main:
   ## AGENT - Guides
   - name: "Guides"
     url: "agent/guide/"
+    identifier: "agent_guides"
     parent: "agent"
     weight: 9
 

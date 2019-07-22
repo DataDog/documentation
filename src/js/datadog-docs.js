@@ -702,8 +702,10 @@ function getPathElement(){
     }
 
     // exception for agent/guide and tracing/guide path, there's no 3rd level for specific agent/guide/**
-    if (path.includes('agent/guide')) {
-        aPath = document.querySelector('.side [data-path*="agent/guide"]');
+    if (path.includes('agent/guide/upgrade-to-agent-v6')) {
+        aPath = document.querySelectorAll('.side [data-path*="agent/guide"]')[0];
+    } else if (path.includes('agent/guide')) {
+        aPath = document.querySelectorAll('.side [data-path*="agent/guide"]')[1];
     }
 
     if (path.includes('tracing/guide')) {
