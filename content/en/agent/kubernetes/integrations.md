@@ -27,6 +27,9 @@ metadata:
   namespace: default
 data:
   http-config: |-
+    ad_identifiers:
+      - httpd
+      - my-custom-httpd
     init_config:
     instances:
     - name: My service
@@ -52,6 +55,8 @@ And in the manifest of your Agent (DaemonSet/deployment) add the following:
               path: http_check.yaml
 [...]
 ```
+
+**Note**: See the [Autodiscovery Container Identifier][2] documentation for more information on using `ad_identifiers` to apply Autodiscovery configuration file templates to containers.
 
 ### Mounting a custom configuration file in a container with a ConfigMap
 
@@ -108,11 +113,12 @@ data:
 ## Annotations
 
 It is also possible to enable integrations via the annotations in the manifest of your application.
-This can be done with Autodiscovery. For more details, see the [Autodiscovery][2] section.
+This can be done with Autodiscovery. For more details, see the [Autodiscovery][3] section.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/http_check
-[2]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
+[2]: /agent/autodiscovery/ad_identifiers
+[3]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration

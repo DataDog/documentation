@@ -75,6 +75,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
     enabled=1
     gpgcheck=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```
 
 2. Update your local Yum repo and install the Agent:
@@ -125,6 +126,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
     enabled=1
     gpgcheck=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```
 
 2. Update your local Yum repo and install the Agent:
@@ -222,6 +224,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
     enabled=1
     gpgcheck=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```
 
 2. Update your local Yum repo and install the Agent:
@@ -290,6 +293,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
     enabled=1
     gpgcheck=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```
 
 2. Update your local Yum repo and install the Agent:
@@ -342,12 +346,14 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
   gpgcheck=1
   repo_gpgcheck=0
   gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+         https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
   ```
 
 2. Update your local Zypper repo and install the Agent:
   ```
   sudo zypper refresh
   sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+  sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
   sudo zypper install datadog-agent
   ```
 

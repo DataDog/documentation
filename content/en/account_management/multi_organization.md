@@ -13,6 +13,8 @@ further_reading:
 
 It is possible to manage multiple child-organizations from one parent-organization account. This is typically used by Managed Service Providers that have customers which should not have access to each others' data. Users can be added to the parent-organization and/or multiple child-organizations and switch between them from the [user account settings menu][1].
 
+Account settings, such as whitelisted IP addresses, are not inherited by child-organizations from their parent-organization.
+
 The Multi-organization Account feature is not enabled by default. Contact [Datadog support][2] to have it enabled.
 
 Here's a two-minute video walkthrough:

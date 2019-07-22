@@ -6,10 +6,9 @@ external_redirect: /api/#envoyer-le-resultat-d-un-check
 ---
 
 ##### Signature
-`POST https://api.datadoghq.com/api/v1/check_run`
+`POST /v1/check_run`
 ##### Exemple de requête
 {{< code-snippets basename="api-checks-post" >}}
 
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-checks-post" >}}
-

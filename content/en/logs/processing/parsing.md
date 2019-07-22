@@ -109,7 +109,7 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 | `keyvalue([separatorStr[, characterWhiteList [, quotingStr]])` | Extracts key value pattern and returns a JSON object. [See key-value Filter examples](#key-value).                                                        |
 | `scale(factor)`                                                | Multiplies the expected numerical value by the provided factor.                                                                                           |
 | `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | Parses a string sequence of tokens and returns it as an array.                                                                                            |
-| `url`                                                          | Parses a UFL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][2].                |
+| `url`                                                          | Parses a URL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][2].                |
 
 
 

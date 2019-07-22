@@ -149,6 +149,11 @@ document.addEventListener('DOMContentLoaded', function () {
         var filter = button.getAttribute('data-filter');
         activateButton(button, filters);
         updateData(filter, false);
+
+        if (history.pushState) {
+            var href = button.getAttribute('href');
+            history.pushState({}, document.title, href);
+        }
     }
 
     function updateData(filter, isSearch) {

@@ -143,7 +143,7 @@ $ docker exec -it <AGENT_CONTAINER_NAME> datadog-agent status
 ### The 350 metric limit
 
 Datadog accepts a maximum of 350 metrics.
-A best practice is to limit your metrics to less than 350 by creating filters to refine those metrics collected, but if you need more than 350 metrics, contact [Datadog support][3].
+A best practice is to limit your metrics to less than 350 by creating filters to refine those metrics collected, but if you need more than 350 metrics, contact [Datadog support][2].
 
 ### Java Path
 
@@ -184,13 +184,13 @@ JBoss/WildFly applications expose JMX over a specific protocol (Remoting JMX) th
                                # is used to tag the metrics pulled from that instance
   ```
 
-* [Restart the Agent][4].
+* [Restart the Agent][3].
 
 ### Monitoring Tomcat with JMX Remote Lifecycle Listener enabled
 
 The following instructions work on Agent v5.6.0+.
 
-If you're using Tomcat with JMX Remote Lifecycle Listener enabled (see the [Tomcat documentation][5] for more information), JMXFetch needs an additional setup to be able to connect to your Tomcat application.
+If you're using Tomcat with JMX Remote Lifecycle Listener enabled (see the [Tomcat documentation][4] for more information), JMXFetch needs an additional setup to be able to connect to your Tomcat application.
 
 * Locate the `catalina-jmx-remote.jar` file on your Tomcat server (by default, its path should be `$CATALINA_HOME/lib`).
 * If JMXFetch is running on a different host than the Tomcat application, copy `catalina-jmx-remote.jar` to a location on the host JMXFetch is running on.
@@ -216,7 +216,7 @@ instances:
                               # is used to tag the metrics pulled from that instance
 ```
 
-* [Restart the Agent][4].
+* [Restart the Agent][3].
 
 ### SSL troubleshooting
 
@@ -224,9 +224,9 @@ Once JMX is enabled and your Agent check is successfully sending metrics to Data
 
 **Note**: You cannot secure JMX over SSL without using the JMX remote user/password authentication files. If you are using system level permissions to run your application, add these files and run them at startup.
 
-This example shows the Datadog configuration for the [Tomcat integration][6].
+This example shows the Datadog configuration for the [Tomcat integration][5].
 
-* Establish a certificate and key to apply to your [Java app keystore][7].
+* Establish a certificate and key to apply to your [Java app keystore][6].
 * Update your Datadog Tomcat `conf.yaml` file located in `conf.d/tomcat.d`:
 
 ```yaml
@@ -240,7 +240,7 @@ instances:
     trust_store_password: <KEY_PASSWORD>
 ```
 
-* [Restart the Agent][4].
+* [Restart the Agent][3].
 
 ## Further Reading
 
@@ -249,8 +249,7 @@ instances:
 
 [1]: https://docs.oracle.com/javase/8/docs/technotes/guides/management/faq.html
 [2]: /help
-[3]: 
-[4]: /agent/guide/agent-commands/#restart-the-agent
-[5]: https://tomcat.apache.org/tomcat-7.0-doc/config/listeners.html#JMX_Remote_Lifecycle_Listener_-_org.apache.catalina.mbeans.JmxRemoteLifecycleListener
-[6]: https://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#SSL_and_Tomcat
-[7]: http://docs.oracle.com/javase/1.5.0/docs/guide/management/agent.html
+[3]: /agent/guide/agent-commands/#restart-the-agent
+[4]: https://tomcat.apache.org/tomcat-7.0-doc/config/listeners.html#JMX_Remote_Lifecycle_Listener_-_org.apache.catalina.mbeans.JmxRemoteLifecycleListener
+[5]: https://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#SSL_and_Tomcat
+[6]: http://docs.oracle.com/javase/1.5.0/docs/guide/management/agent.html
