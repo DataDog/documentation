@@ -851,11 +851,13 @@ function loadPage(newUrl) {
 
         var newDocument = httpRequest.responseXML;
         if (newDocument === null){
+            mainContent.classList.remove('loading');
             return;
         }
 
         var newContent = httpRequest.responseXML.getElementById("mainContent");
         if (newContent === null){
+            mainContent.classList.remove('loading');
             return;
         }
 
