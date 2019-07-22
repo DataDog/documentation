@@ -4,11 +4,11 @@ assets:
   monitors: {}
   service_checks: /assets/service_checks.json
 categories:
-- monitoring
+  - monitoring
 creates_events: false
 ddtype: check
 dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/logzio/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/logzio/README.md'
 display_name: Logz.io
 git_integration_title: logzio
 guid: 0e44f9bd-8c7b-426a-a0ba-8f4302808191
@@ -23,11 +23,10 @@ public_title: Intégration Datadog/Logz.io
 short_description: Suite ELK avec apprentissage automatique en tant que service
 support: contrib
 supported_os:
-- linux
-- mac_os
-- windows
+  - linux
+  - mac_os
+  - windows
 ---
-
 ## Présentation
 
 Intégrez les alertes Logz.io pour visualiser les événements en temps réel.
@@ -67,8 +66,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/logzio/images/import_alert_from_logz.jpg
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/logzio/images/dashboard.png
 [3]: https://app.datadoghq.com/account/settings#api
-[4]: http://logz.io/blog/log-correlation-datadog/
-[5]: http://docs.datadoghq.com/help/
+[4]: http://logz.io/blog/log-correlation-datadog
+[5]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

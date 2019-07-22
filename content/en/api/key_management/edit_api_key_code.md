@@ -7,7 +7,7 @@ external_redirect: /api/#edit-an-api-key
 
 ##### Signature
 
-`PUT /api/v1/api_key/<API_KEY>`
+`PUT /v1/api_key/<API_KEY>`
 
 ##### Example Request
 

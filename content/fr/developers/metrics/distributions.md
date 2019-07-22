@@ -24,7 +24,7 @@ Par exemple, imaginons que le host `Foo` transmet une métrique avec les valeurs
 
 Dans ce modèle, le nombre total de séries temporelles créées repose sur l'ensemble `tag:values` des tags appliqués à une métrique. Puisque ces agrégations sont par nature globales, Datadog applique par défaut seulement les tags des métriques custom à ces métriques. Vous pouvez modifier ce comportement si vous avez également besoin des tags de hosts.
 
-## Soumission
+## Envoi
 
 ### DogStatsD
 

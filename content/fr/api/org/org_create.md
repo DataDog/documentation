@@ -6,14 +6,14 @@ external_redirect: '/api/#creer-une-organisation-enfant'
 ---
 ## Créer une organisation enfant
 
-Cet endpoint requiert la fonctionnalité de [compte multi-org][1] et doit être activé en [contactant l’assistance][2].
+Cet endpoint requiert la fonctionnalité de [compte multi-org][1] et doit être activé en [contactant l'assistance][2].
 
 ##### ARGUMENTS
 
 * **`name`** [*obligatoire*] :
     Le nom de la nouvelle organisation enfant, limité à 32 caractères.
 * **`subscription`** [*obligatoire*] :
-    Un tableau JSON contenant les types d’abonnement. Les types disponibles sont les suivants : `trial`, `free` et `pro`.
+    Un tableau JSON contenant les types d'abonnement. Les types disponibles sont les suivants : `trial`, `free` et `pro`.
 * **`billing`** [*obligatoire*] :
     Un tableau JSON contenant les types de facturation. (seul le type `parent_billing` est pris en charge).
 

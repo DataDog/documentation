@@ -3,7 +3,7 @@ integration_title: Journald
 kind: integration
 public_title: Intégration Datadog/Journald
 categories:
-  - Collecte de logs
+  - log collection
 description: Transférer vos logs du journal à Datadog
 short_description: Transférer vos logs du journal à Datadog
 has_logo: true
@@ -38,7 +38,7 @@ Créez le fichier `journald.d/conf.yaml` dans le dossier `conf.d/` de l'Agent à
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` avec la commande :
+La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` avec la commande :
 
 ```
 logs_enabled: true
@@ -53,7 +53,7 @@ logs:
 
 Pour terminer, [redémarrez l'Agent][2].
 
-#### Options avancées
+#### Fonctions avancées
 
 ##### Changer l'emplacement du journal
 

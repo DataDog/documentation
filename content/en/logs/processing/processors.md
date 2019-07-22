@@ -49,6 +49,8 @@ If your logs don't contain any of the default attributes and you haven't defined
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
+**Note**: If multiple log date remapper processors can be applied to a given log, only the first one (according to the pipelines order) is taken into account.
+
 ## Log Status Remapper
 
 Use this Processor if you want to assign some attributes as the official status. Just enter the attribute path in the Processor tile as follows:
@@ -77,17 +79,23 @@ However, be aware that each incoming status value is mapped as follows:
 * Strings beginning with **o** or matching **OK** or **Success** (case-insensitive) map to **OK**
 * All others map to **info (6)**
 
+**Note**: If multiple log status remapper processors can be applied to a given log, only the first one (according to the pipelines order) is taken into account.
+
 ## Service Remapper
 
 Use this Processor if you want to assign one or more attributes as the official service. Define the attribute(s) in the Processor tile as follows:
 
 {{< img src="logs/processing/processors/service_remapper_processor_tile.png" alt="Service Remapper Processor tile" responsive="true" style="width:80%;" >}}
 
+**Note**: If multiple service remapper processors can be applied to a given log, only the first one (according to the pipelines order) is taken into account.
+
 ## Log Message Remapper
 
 The message is a key attribute in Datadog. It is displayed in the message column of the Log Explorer and you can do full string search on it. Use this Processor to define one or more attributes as the official log message. Define the attribute(s) in the Processor tile as follows:
 
 {{< img src="logs/processing/processors/message_processor.png" alt="Message Processor" responsive="true" style="width:80%;">}}
+
+**Note**: If multiple log message remapper processors can be applied to a given log, only the first one (according to the pipelines order) is taken into account.
 
 ## Remapper
 

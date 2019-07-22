@@ -19,6 +19,7 @@ Gauges measure the value of a particular thing over time:
 ### Agent check
 
 {{% table responsive="true" %}}
+
 |Method | Overview |
 |:---|:---|
 |self.gauge(...)|<ul><li>If called multiple times during a check's execution for a metric only the last sample is used.</li><li>Stored as a Web Application GAUGE type</li></ul>|
@@ -27,6 +28,7 @@ Gauges measure the value of a particular thing over time:
 ### DogStatsD
 
 {{% table responsive="true" %}}
+
 |Method | Overview |
 |:---|:---|
 |dog.gauge(...)|Stored as a GAUGE type in the Datadog web application. Each value in the stored timeseries is the last gauge value submitted for that metric during the StatsD flush period.|

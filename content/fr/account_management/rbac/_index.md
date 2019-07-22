@@ -29,9 +29,9 @@ Les rôles suivants sont disponibles par défaut. Les utilisateurs sont associé
 
 | Rôle                   | Description                                                                                 |
 |------------------------|---------------------------------------------------------------------------------------------|
-| Administrateur Datadog          | Dispose des autorisations de lecture/écriture sur toutes les données et ressources d'un compte Datadog.                 |
-| Rôle standard Datadog  | Dispose des autorisations de lecture sur toutes les données et des autorisations d'écriture sur la plupart des ressources d'un compte Datadog. |
-| Rôle en lecture seule Datadog | Dispose des autorisations de lecture sur toutes les données, mais ne possède aucune autorisation d'écriture sur les ressources d'un compte Datadog.   |
+| Admin Datadog          | Dispose des autorisations de lecture/écriture sur toutes les données et ressources d'un compte Datadog.                 |
+| Rôle Standard Datadog  | Dispose des autorisations de lecture sur toutes les données et des autorisations d'écriture sur la plupart des ressources d'un compte Datadog. |
+| Rôle Read-Only Datadog | Dispose des autorisations de lecture sur toutes les données, mais ne possède aucune autorisation d'écriture sur les ressources d'un compte Datadog.   |
 
 ## Rôles personnalisés
 

@@ -39,6 +39,14 @@ The System check is included in the [Datadog Agent][4] package, so you don't nee
 
 {{< get-metrics-from-git "system" "system.cpu system.fs system.io system.load system.mem system.proc. system.swap system.uptime" >}}
 
+### Tags
+All system metrics are automatically tagged with `host:<HOST_NAME>`. Additionally, the following namespaces are tagged with `device:<DEVICE_NAME>`.
+
+* `system.disk.*`
+* `system.fs.inodes.*`
+* `system.io.*`
+* `system.net.*`
+
 ## Agent Check: System cores
 
 This check collects the number of CPU cores on a host and CPU times (i.e. system, user, idle, etc).

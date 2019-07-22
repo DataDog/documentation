@@ -153,7 +153,7 @@ Voici un exemple de configuration qui vérifie la machine actuelle ainsi qu'une 
   ```
 
   Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
-  Consultez le [fichier d'exemple iis.yaml][5] pour découvrir toutes les options de configuration disponibles.
+  Consultez le [fichier d'exemple iis.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
   * [Redémarrez l'Agent][8].
 
@@ -167,7 +167,7 @@ Voici un exemple de configuration qui vérifie la machine actuelle ainsi qu'une 
 {{< get-metrics-from-git "iis" >}}
 
 
-### Events
+### Événements
 Le check IIS n'inclut aucun événement.
 
 ### Checks de service

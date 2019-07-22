@@ -25,12 +25,12 @@ Enregistrez votre activité Redmine dans Datadog pour :
   * Consulter les problèmes en suspens du flux d'événements Datadog.
   * Discuter des projets avec votre équipe.
 
-La configuration Redmine nécessite seulement une URL complète vers le flux d’activités souhaité. Vous pouvez ajouter plusieurs URL.
+La configuration Redmine nécessite seulement une URL complète vers le flux d'activités souhaité. Vous pouvez ajouter plusieurs URL.
 
 ## Implémentation
 ### Installation
 
-Consultez le [carré d’intégration Redmine][1] pour configurer votre intégration.
+Consultez le [carré d'intégration Redmine][1] pour configurer votre intégration.
 
 ## Données collectées
 ### Métriques

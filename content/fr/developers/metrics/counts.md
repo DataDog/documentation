@@ -1,5 +1,5 @@
 ---
-title: Counts
+title: Totaux
 kind: documentation
 further_reading:
   - link: developers/metrics
@@ -7,11 +7,11 @@ further_reading:
     text: En savoir plus sur les métriques
   - link: developers/libraries
     tag: Documentation
-    text: Bibliothèques pour l'API et DogStatsD officielles et entretenues par la communauté
+    text: Bibliothèques de client pour l'API et DogStatsD officielles et entretenues par la communauté
 ---
 ## Présentation
 
-Les totaux servent à compter des éléments.
+Les counters servent à compter des éléments.
 
 ## Soumission
 
@@ -21,9 +21,9 @@ Les totaux servent à compter des éléments.
 
 | Méthode | Présentation |
 | :----- | :------- |
-| self.increment()<br/><sup>obsolète</sup> | Permet de modifier un total d'événements identifiés par la chaîne de la clé de métrique : <ul><li>Peut faire l'objet de plusieurs appels durant l'exécution d'un check.</li><li>Stocké en tant que RATE dans l'application Web de Datadog. Chaque valeur de la série temporelle stockée correspond à un delta de la valeur du compteur entre les échantillons (normalisé temporellement par l'intervalle d'agrégation, qui est par défaut 1 pour les checks de l'Agent, afin que la valeur corresponde généralement à la valeur du total brut).</li><li>Géré par l'agrégateur de la classe Counter</li></ul> |
-| self.decrement()<br /><sup>obsolète</sup> | Permet de modifier un total d'événements identifiés par la chaîne de la clé de métrique :<ul><li>Peut faire l'objet de plusieurs appels durant l'exécution d'un check.</li><li>Stocké en tant que RATE dans l'application Web de Datadog. Chaque valeur de la série temporelle stockée correspond à un delta de la valeur du compteur entre les échantillons (normalisé temporellement par l'intervalle d'agrégation, qui est par défaut 1 pour les checks de l'Agent, afin que la valeur corresponde généralement à la valeur du total brut).</li><li>Géré par l'agrégateur de la classe Counter</li></ul> |
-| self.monotonic_count(...) | Surveille un compteur brut qui continue d'augmenter. Ne normalisez pas les valeurs au sein d'un taux et ne calculez pas les deltas avant d'envoyer les valeurs. En effet, cette méthode réalise ces étapes à votre place. Les échantillons qui possèdent une valeur plus faible que l'échantillon précédent sont ignorés (cela signifie généralement que le compteur brut sous-jacent a été réinitialisé) :<ul><li>Peut faire l'objet de plusieurs appels durant l'exécution d'un check. <br> Example : la transmission des échantillons 2, 3, 6 et 7 envoie 5 (à savoir, 7 moins 2) lors de la première exécution du check. Si vous transmettez ensuite les échantillons 10 et 11 sur le même monotic_count, cela envoie 4 (à savoir, 11 moins 7) lors de la deuxième exécution du check.</li><li>Stocké en tant que COUNT dans Datadog. Chaque valeur de la série temporelle stockée correspond au delta de la valeur du compteur entre les échantillons (pas de normalisation temporelle).</li></ul> |
+| self.increment()<br/><sup>obsolète</sup> | Permet de modifier un total d'événements identifiés par la chaîne de la clé de métrique : <ul><li>Peut faire l'objet de plusieurs appels durant l'exécution d'un check.</li><li>Stocké en tant que RATE dans l'application Web de Datadog. Chaque valeur de la série temporelle stockée correspond à un delta de la valeur du counter entre les échantillons (normalisé temporellement par l'intervalle d'agrégation, qui est par défaut 1 pour les checks de l'Agent, afin que la valeur corresponde généralement à la valeur du total brut).</li><li>Géré par l'agrégateur de la classe Counter</li></ul> |
+| self.decrement()<br /><sup>obsolète</sup> | Permet de modifier un total d'événements identifiés par la chaîne de la clé de métrique :<ul><li>Peut faire l'objet de plusieurs appels durant l'exécution d'un check.</li><li>Stocké en tant que RATE dans l'application Web de Datadog. Chaque valeur de la série temporelle stockée correspond à un delta de la valeur du counter entre les échantillons (normalisé temporellement par l'intervalle d'agrégation, qui est par défaut 1 pour les checks de l'Agent, afin que la valeur corresponde généralement à la valeur du total brut).</li><li>Géré par l'agrégateur de la classe Counter</li></ul> |
+| self.monotonic_count(...) | Surveille un counter brut qui continue d'augmenter. Ne normalisez pas les valeurs au sein d'un taux et ne calculez pas les deltas avant d'envoyer les valeurs. En effet, cette méthode réalise ces étapes à votre place. Les échantillons qui possèdent une valeur plus faible que l'échantillon précédent sont ignorés (cela signifie généralement que le counter brut sous-jacent a été réinitialisé) :<ul><li>Peut faire l'objet de plusieurs appels durant l'exécution d'un check. <br> Example : la transmission des échantillons 2, 3, 6 et 7 envoie 5 (à savoir, 7 moins 2) lors de la première exécution du check. Si vous transmettez ensuite les échantillons 10 et 11 sur le même monotic_count, cela envoie 4 (à savoir, 11 moins 7) lors de la deuxième exécution du check.</li><li>Stocké en tant que COUNT dans Datadog. Chaque valeur de la série temporelle stockée correspond au delta de la valeur du counter entre les échantillons (pas de normalisation temporelle).</li></ul> |
 | self.count(...) | Envoie le nombre d'événements qui se sont produits durant l'intervalle du check : <ul><li>Peut faire l'objet de plusieurs appels durant l'exécution d'un check, chaque échantillon étant ajouté à la valeur transmise.</li><li>Stocké en tant que COUNT dans Datadog.</li></ul> |
 
 {{% /table %}}
@@ -31,10 +31,11 @@ Les totaux servent à compter des éléments.
 ### DogStatsD
 
 {{% table responsive="true" %}}
+
 | Méthode | Présentation |
 | :----- | :------- |
-| dog.increment(...) | Permet d'incrémenter un compteur d'événements : <ul><li>Stocké en tant que RATE dans l'application Web de Datadog. Chaque valeur de la série temporelle stockée correspond à un delta normalisé temporellement de la valeur du compteur sur cette période de transmission de Statsd.</li></ul> |
-| dog.decrement(...) | Permet de décrémenter un compteur d'événements : <ul><li>Stocké en tant que RATE dans l'application Web de Datadog. Chaque valeur de la série temporelle stockée correspond à un delta normalisé temporellement de la valeur du compteur sur cette période de transmission de Statsd.</li></ul> |
+| dog.increment(...) | Utilisé pour incrémenter un counter d'événements :<ul><li>Stocké en tant que RATE dans l'application Web de Datadog. Chaque valeur de la série temporelle stockée correspond au delta normalisé de la valeur du counter durant la période de transmission de StatsD.</li></ul> |
+| dog.decrement(...) | Utilisé pour décrémenter un counter d'événements :<ul><li>Stocké en tant que RATE dans l'application Web de Datadog. Chaque valeur de la série temporelle stockée correspond au delta normalisé de la valeur du counter durant la période de transmission de StatsD.</li></ul> |
 {{% /table %}}
 
 #### Exemple

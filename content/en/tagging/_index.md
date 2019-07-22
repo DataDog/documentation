@@ -1,6 +1,7 @@
 ---
 title: Getting started with tags
 kind: documentation
+description: "Learn how to assign and use Tags with Datadog."
 aliases:
     - /getting_started/getting_started_with_tags
     - /guides/tagging/
@@ -25,7 +26,7 @@ Tagging binds different data types in Datadog, allowing for correlation and call
 | Tag Key     | Allows for                                                            |
 | ----------- | --------------------------------------------------------------------- |
 | `host`      | Correlation between metrics, traces, processes, and logs              |
-| `device`    | Segregation of metrics, traces, process, and logs by device or disk   |
+| `device`    | Segregation of metrics, traces, processes, and logs by device or disk   |
 | `source`    | Event filtering and automated pipeline creation for log management    |
 | `service`   | Correlation between metrics, traces, and logs                         |
 

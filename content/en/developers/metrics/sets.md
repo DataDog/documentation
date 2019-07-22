@@ -19,6 +19,7 @@ Sets are used to count the number of unique elements in a group.
 ### Agent check
 
 {{% table responsive="true" %}}
+
 |Method | Overview |
 |:---|:---|
 |self.set(...)|Used count the number of unique elements in a group:<ul><li>Should be called multiple times during an Agent check.</li><li>Stored as a GAUGE type in the Datadog web application.</li></ul>|
@@ -27,6 +28,7 @@ Sets are used to count the number of unique elements in a group.
 ### DogStatsD
 
 {{% table responsive="true" %}}
+
 |Method | Overview |
 |:---|:---|
 |dog.set(...)|Used count the number of unique elements in a group:<ul><li>Stored as GAUGE type in the Datadog web application. Each value in the stored timeseries is the count of unique values submitted to StatsD for a metric over that flush period.</li></ul>|

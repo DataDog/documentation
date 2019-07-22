@@ -7,7 +7,7 @@ external_redirect: /api/#delete-an-api-key
 
 ##### Signature
 
-`DELETE /api/v1/api_key/<API_KEY>`
+`DELETE /v1/api_key/<API_KEY>`
 
 ##### Example Request
 

@@ -208,7 +208,6 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_CLI_ENABLED`               | `false`     | Enable tracing of PHP scripts from the CLI                                  |
 | `DD_DISTRIBUTED_TRACING`             | `true`      | Whether to enable [distributed tracing][15]                                 |
 | `DD_INTEGRATIONS_DISABLED`           | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                        |
-| `DD_PRIORITY_SAMPLING`               | `true`      | Whether to enable priority sampling.                                        |
 | `DD_SAMPLING_RATE`                   | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default)         |
 | `DD_SERVICE_NAME`                    | ``          | The default app name                                                        |
 | `DD_TRACE_AGENT_PORT`                | `8126`      | The Agent port number                                                       |
@@ -234,9 +233,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 [8]: https://app.datadoghq.com/apm/services
 [9]: /tracing/faq/php-tracer-manual-installation
 [10]: #library-compatibility
-[11]: #configuration
-[12]: /help
-[13]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[14]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
-[15]: /tracing/guide/distributed_tracing/?tab=php
-[16]: /tracing/troubleshooting
+[11]: /help
+[12]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
+[13]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
+[14]: /tracing/troubleshooting
