@@ -34,8 +34,9 @@ main:
     parent: "getting_started"
     weight: 40
   - name: "Prometheus/Openmetrics"
-    url: "getting_started/prometheus"
-    parent: "getting_started"
+    identifier: "getting_started_prometheus"
+    url: "getting_started/integrations/prometheus"
+    parent: "getting_started_prometheus"
     weight: 50
     
 # TAGGING

@@ -13,7 +13,7 @@
     {{ $.Scratch.Set "branch_path" "" }}
 {{ end }}
 
-{{ $branchPath := $.Scratch.Get "branch_path" }}
+{{ $branchPath := trim ($.Scratch.Get "branch_path") "/" }}
 
 <ul class="list-unstyled">
     {{ $currentPage := . }}
