@@ -89,7 +89,7 @@ For Agent versions <= 6.11:
 C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'Files\Datadog\Datadog' 'Agent\agent\agent.py check disk
 ```
 
-For Agent versions <= 6.12:
+For Agent versions >= 6.12:
 ```
 C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded2\python.exe C:\Program' 'Files\Datadog\Datadog' 'Agent\agent\agent.py check disk
 ```
