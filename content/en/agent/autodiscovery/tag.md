@@ -105,7 +105,7 @@ kubernetes_pod_labels_as_tags:
   app: kube_app
 ```
 
-To add all pod labels as tags to your metrics where tags names are prefixed by `<PREFIX>_`, you can use the following environment variable:
+Use the following environment variable configuration to add all pod labels as tags to your metrics. In this example the tags names are prefixed by `<PREFIX>_`:
 
 ```yaml
 kubernetes_pod_labels_as_tags:
@@ -131,7 +131,7 @@ For example, you could set up:
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
-To add all pod labels as tags to your metrics where tags names are prefixed by `<PREFIX>_`, you can use the following environment variable:
+Use the following environment variable configuration to add all pod labels as tags to your metrics. In this example the tags names are prefixed by `<PREFIX>_`:
 
 ```shell
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
