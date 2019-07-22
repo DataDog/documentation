@@ -96,54 +96,67 @@ main:
     identifier: "basic_agent_usage"
     weight: 1
   - name: "AIX"
+    identifier: "basic_agent_usage_aix"
     url: "agent/basic_agent_usage/aix/"
     weight: 101
     parent: "basic_agent_usage"
   - name: "Amazon Linux"
+    identifier: "basic_agent_usage_amazon_linux"
     url: "agent/basic_agent_usage/amazonlinux/"
     weight: 102
     parent: "basic_agent_usage"
   - name: "CentOS"
+    identifier: "basic_agent_usage_centos"
     url: "agent/basic_agent_usage/centos/"
     weight: 103
     parent: "basic_agent_usage"
   - name: "Debian"
+    identifier: "basic_agent_usage_deb"
     url: "agent/basic_agent_usage/deb/"
     weight: 104
     parent: "basic_agent_usage"
   - name: "Docker"
+    identifier: "basic_agent_usage_docker"
     url: "agent/docker/"
     weight: 105
     parent: "basic_agent_usage"
   - name: "Fedora"
+    identifier: "basic_agent_usage_fedora"
     url: "agent/basic_agent_usage/fedora/"
     weight: 106
     parent: "basic_agent_usage"
   - name: "Heroku"
+    identifier: "basic_agent_usage_heroku"
     url: "agent/basic_agent_usage/heroku/"
     weight: 107
     parent: "basic_agent_usage"
   - name: "Mac OS X"
+    identifier: "basic_agent_usage_osx"
     url: "agent/basic_agent_usage/osx/"
     weight: 108
     parent: "basic_agent_usage"
   - name: "Red Hat"
+    identifier: "basic_agent_usage_redhat"
     url: "agent/basic_agent_usage/redhat/"
     weight: 109
     parent: "basic_agent_usage"
   - name: "SUSE"
+    identifier: "basic_agent_usage_suse"
     url: "agent/basic_agent_usage/suse/"
     weight: 110
     parent: "basic_agent_usage"
   - name: "Ubuntu"
+    identifier: "basic_agent_usage_ubuntu"
     url: "agent/basic_agent_usage/ubuntu/"
     weight: 111
     parent: "basic_agent_usage"
   - name: "Windows"
+    identifier: "basic_agent_usage_windows"
     url: "agent/basic_agent_usage/windows/"
     weight: 112
     parent: "basic_agent_usage"
   - name: "From Source"
+    identifier: "basic_agent_usage_source"
     url: "agent/basic_agent_usage/source/"
     weight: 113
     parent: "basic_agent_usage"
@@ -315,226 +328,256 @@ main:
     parent: "agent"
     weight: 10
 
-# INTEGRATIONS
+##################
+## INTEGRATIONS ##
+##################
+
   - name: "Integrations"
     url: "integrations/"
     pre: "nav_integrations"
-    weight: 400
-    # INTEGRATIONS - Subnav start
-  # INTEGRATIONS - Subnav end
+    weight: 40000
 
-# Watchdog
+##############
+## WATCHDOG ##
+##############
+
   - name: "Watchdog"
     url: "watchdog/"
     pre: "nav_watchdog"
-    weight: 500
+    weight: 50000
 
-# GRAPHING
+##############
+## GRAPHING ##
+##############
+
   - name: "Graphing"
     url: "graphing/"
     pre: "nav_graphing"
     identifier: "graphing"
-    weight: 600
-  # GRAPHING - Subnav start
+    weight: 60000
+
+  - name: "Using Graphs"
+    url: "graphing/using_graphs/"
+    parent: "graphing"
+    identifier: "graphing_using_graphs"
+    weight: 1
+
+  ## GRAPHING - Dashboards
+
   - name: "Dashboards"
     url: "graphing/dashboards/"
     parent: "graphing"
     identifier: "graphing_dashboards"
-    weight: 10
-  # Graphing dashboard subnav
+    weight: 2
   - name: "Screenboard"
     url: "graphing/dashboards/screenboard/"
     parent: "graphing_dashboards"
-    weight: 10
+    weight: 201
   - name: "Timeboard"
     url: "graphing/dashboards/timeboard/"
     parent: "graphing_dashboards"
-    weight: 20
+    weight: 202
   - name: "Template Variables"
     url: "graphing/dashboards/template_variables/"
     parent: "graphing_dashboards"
-    weight: 30
+    weight: 203
     identifier: "graphing_dashboards_temp_variables" # name is not unique so add identifier
   - name: "Shared Graphs"
     url: "graphing/dashboards/shared_graph/"
     parent: "graphing_dashboards"
-    weight: 40
-  # Metrics
+    weight: 204
+
+  ## GRAPHING - Metrics
+
   - name: "Metrics"
     url: "graphing/metrics/"
     parent: "graphing"
     identifier: "graphing_metrics"
-    weight: 20
+    weight: 3
   - name: "Explorer"
     url: "graphing/metrics/explorer/"
     parent: "graphing_metrics"
-    weight: 10
+    weight: 301
   - name: "Summary"
     url: "graphing/metrics/summary/"
     parent: "graphing_metrics"
-    weight: 20
+    weight: 302
   - name: "Distributions"
     url: "graphing/metrics/distributions/"
     parent: "graphing_metrics"
-    weight: 30
+    weight: 303
+
   - name: "Notebooks"
     url: "graphing/notebooks/"
     parent: "graphing"
-    weight: 30
+    weight: 4
+
   - name: "Event Stream"
     url: "graphing/event_stream/"
     parent: "graphing"
-    weight: 40
+    weight: 5
+
+  ## GRAPHING - Infrastructure
+
   - name: "Infrastructure"
     url: "graphing/infrastructure/"
     parent: "graphing"
     identifier: "graphing_infrastructure"
-    weight: 50
+    weight: 6
   - name: "Container Map"
     url: "graphing/infrastructure/containermap/"
     parent: "graphing_infrastructure"
-    weight: 10
+    weight: 601
   - name: "Host Map"
     url: "graphing/infrastructure/hostmap/"
     parent: "graphing_infrastructure"
-    weight: 20
+    weight: 602
   - name: "Live Containers"
     url: "graphing/infrastructure/livecontainers/"
     parent: "graphing_infrastructure"
-    weight: 30
+    weight: 603
   - name: "Live Processes"
     url: "graphing/infrastructure/process/"
     parent: "graphing_infrastructure"
-    weight: 40
-  - name: "Cloud Functions"
-    url: "graphing/infrastructure/cloudfunctions/"
+    weight: 604
+  - name: "Serverless"
+    url: "graphing/infrastructure/serverless/"
     parent: "graphing_infrastructure"
-    weight: 50
-  # GRAPHING - Functions
+    weight: 605
+
+  ## GRAPHING - Functions
+
   - name: "From the query to the graph "
     url: "graphing/functions/"
     parent: "graphing"
     identifier: "graphing_functions"
-    weight: 60
+    weight: 7
   - name: "Algorithms"
     url: "graphing/functions/algorithms/"
     parent: "graphing_functions"
-    weight: 10
+    weight: 701
   - name: "Arithmetic"
     url: "graphing/functions/arithmetic/"
     parent: "graphing_functions"
-    weight: 20
+    weight: 702
   - name: "Count"
     url: "graphing/functions/count/"
     parent: "graphing_functions"
-    weight: 30
+    weight: 703
   - name: "Interpolation"
     url: "graphing/functions/interpolation/"
     parent: "graphing_functions"
-    weight: 40
+    weight: 704
   - name: "Rank"
     url: "graphing/functions/rank/"
     parent: "graphing_functions"
-    weight: 50
+    weight: 705
   - name: "Rate"
     url: "graphing/functions/rate/"
     parent: "graphing_functions"
-    weight: 60
+    weight: 706
   - name: "Regression"
     url: "graphing/functions/regression/"
     parent: "graphing_functions"
-    weight: 70
+    weight: 707
   - name: "Rollup"
     url: "graphing/functions/rollup/"
     parent: "graphing_functions"
-    weight: 80
+    weight: 708
   - name: "Smoothing"
     url: "graphing/functions/smoothing/"
     parent: "graphing_functions"
-    weight: 90
+    weight: 709
   - name: "Timeshift"
     url: "graphing/functions/timeshift/"
     parent: "graphing_functions"
-    weight: 100
+    weight: 710
   - name: "Beta"
     url: "graphing/functions/beta/"
     parent: "graphing_functions"
-    weight: 110
+    weight: 711
+
+  ## GRAPHING - Graphing JSON
+
   - name: "Graphing with JSON"
     url: "graphing/graphing_json/"
     parent: "graphing"
     identifier: "graphing_json"
-    weight: 70
+    weight: 8
+
   - name: "Widget JSON schema"
     url: "graphing/graphing_json/widget_json/"
     parent: "graphing_json"
-    weight: 10
+    weight: 801
   - name: "Request JSON schema"
     url: "graphing/graphing_json/request_json/"
     parent: "graphing_json"
-    weight: 20
+    weight: 802
+
   - name: "Widgets"
     url: "graphing/widgets/"
     parent: "graphing"
-    weight: 80
+    weight: 9
+
   - name: "Guides"
     url: "graphing/guide/"
     parent: "graphing"
-    weight: 90
-  # - #   name: "FAQ"
-  #   url: "graphing/faq/"
-  #   #   parent: menu_references_graphing
-  # GRAPHING - Subnav end
+    weight: 10
 
-# ALERTING
+##############
+## ALERTING ##
+##############
+
   - name: "Alerting"
     url: "monitors/"
     pre: "nav_alerting"
     identifier: "alerting"
-    weight: 700
-  # ALERTING - Subnav start
+    weight: 70000
+
+  ## ALERTING - Monitor Types
+
   - name: "Monitor Types"
     url: "monitors/monitor_types/"
     parent: "alerting"
     identifier: "monitor_types"
-    weight: 10
+    weight: 1
   - name: "Anomaly"
     url: "monitors/monitor_types/anomaly/"
     parent: "monitor_types"
-    weight: 20
+    weight: 101
   - name: "APM"
     url: "monitors/monitor_types/apm/"
     parent: "monitor_types"
-    weight: 30
+    weight: 102
     identifier: "monitor_apm"
   - name: "Composite"
     url: "monitors/monitor_types/composite/"
     parent: "monitor_types"
-    weight: 40
+    weight: 103
   - name: "Custom Check"
     url: "monitors/monitor_types/custom_check/"
     parent: "monitor_types"
-    weight: 50
+    weight: 104
   - name: "Event"
     url: "monitors/monitor_types/event/"
     parent: "monitor_types"
-    weight: 60
+    weight: 105
   - name: "Forecasts"
     url: "monitors/monitor_types/forecasts/"
     parent: "monitor_types"
-    weight: 70
+    weight: 106
   - name: "Host"
     url: "monitors/monitor_types/host/"
     parent: "monitor_types"
-    weight: 80
+    weight: 107
   - name: "Integration"
     url: "monitors/monitor_types/integration/"
     parent: "monitor_types"
-    weight: 90
+    weight: 108
   - name: "Log"
     url: "monitors/monitor_types/log/"
     parent: "monitor_types"
-    weight: 100
+    weight: 109
   - name: "Metric"
     url: "monitors/monitor_types/metric/"
     parent: "monitor_types"
@@ -542,600 +585,680 @@ main:
   - name: "Network"
     url: "monitors/monitor_types/network/"
     parent: "monitor_types"
-    weight: 120
+    weight: 111
   - name: "Outlier"
     url: "monitors/monitor_types/outlier/"
     parent: "monitor_types"
-    weight: 130
+    weight: 112
   - name: "Process"
     url: "monitors/monitor_types/process/"
     parent: "monitor_types"
-    weight: 140
+    weight: 113
   - name: "Watchdog"
     url: "monitors/monitor_types/watchdog/"
     parent: "monitor_types"
-    weight: 150
-    identifier: "monitor_watchdog" # make it unique
-  # Manage monitor
+    weight: 114
+    identifier: "monitor_watchdog"
+
+  ## MONITORS -  Manage monitor
+
   - name: "Manage Monitor"
     url: "monitors/manage_monitor/"
-    weight: 20
+    weight: 2
     parent: "alerting"
-  # Monitor status
+
+  - name: "Network Flow Monitor"
+    url: "monitors/network_flow_monitors/"
+    weight: 3
+    parent: "alerting"
+
   - name: "Monitor Status"
     url: "monitors/monitor_status/"
-    weight: 30
+    weight: 4
     parent: "alerting"
-  # Check summary
+
   - name: "Check Summary"
     url: "monitors/check_summary/"
-    weight: 40
+    weight: 5
     parent: "alerting"
+
   - name: "Notifications"
     url: "monitors/notifications/"
-    weight: 50
+    weight: 6
     parent: "alerting"
+
   - name: "Downtimes"
     url: "monitors/downtimes/"
-    weight: 60
+    weight: 7
     parent: "alerting"
+
   - name: "SLO Widget"
     url: "monitors/slo_widget/"
-    weight: 70
+    weight: 8
     parent: "alerting"
+
   - name: "Guides"
     url: "monitors/guide/"
-    weight: 80
+    weight: 9
     parent: "alerting"
-      #- #  name: "FAQ"
-      #  url: "monitors/faq/"
-      #  #  parent: menu_references_monitoring
-      # ALERTING - Subnav end
 
+#################
+## TRACING/APM ##
+#################
 
-# TRACING/APM
   - name: "APM (Tracing)"
     url: "tracing/"
     pre: "nav_tracing"
     identifier: "tracing"
-    weight: 800
-  # Enable tracing
+    weight: 80000
+
+  ## TRACING - Enable tracing
+
   - name: "Enable trace collection"
     url: "tracing/send_traces/"
+    identifier: "tracing_send_traces"
     parent: "tracing"
-    weight: 10
-  # Languages
+    weight: 1
+  - name: "Agent APM metrics"
+    url: "tracing/send_traces/agent-apm-metrics/"
+    parent: "tracing_send_traces"
+    weight: 101
+
+  ## TRACING - Setup
+
   - name: "Instrument your application"
     url: "tracing/setup/"
     parent: "tracing"
     identifier: "tracing_setup"
-    weight: 20
+    weight: 2
   - name: "Java"
     url: "tracing/setup/java/"
     parent: "tracing_setup"
-    weight: 30
+    weight: 201
   - name: "Python"
     url: "tracing/setup/python/"
     parent: "tracing_setup"
-    weight: 40
+    weight: 202
   - name: "Ruby"
     url: "tracing/setup/ruby/"
     parent: "tracing_setup"
-    weight: 50
+    weight: 203
   - name: "Go"
     url: "tracing/setup/go/"
     parent: "tracing_setup"
-    weight: 60
+    weight: 204
   - name: "Node.js"
     url: "tracing/setup/nodejs/"
     parent: "tracing_setup"
-    weight: 70
+    weight: 205
   - name: ".NET"
     url: "tracing/setup/dotnet/"
     parent: "tracing_setup"
-    weight: 80
+    weight: 206
   - name: "PHP"
     url: "tracing/setup/php/"
     parent: "tracing_setup"
-    weight: 90
+    weight: 207
   - name: "C++"
     url: "tracing/setup/cpp/"
     parent: "tracing_setup"
-    weight: 100
+    weight: 208
   - name: "Envoy"
     url: "tracing/setup/envoy/"
     parent: "tracing_setup"
-    weight: 110
+    weight: 209
   - name: "NGINX"
     url: "tracing/setup/nginx/"
     parent: "tracing_setup"
-    weight: 120
+    weight: 210
   - name: "Istio"
     url: "tracing/setup/istio/"
     parent: "tracing_setup"
-    weight: 130
-  # Enrich Tracing
+    weight: 211
+
+  ## TRACING - Enrich Tracing
+
   - name: "Enrich Tracing"
     url: "tracing/advanced/"
     parent: "tracing"
     identifier: "tracing_advanced"
-    weight: 30
+    weight: 3
   - name: "Connect Logs and Traces"
     url: "tracing/advanced/connect_logs_and_traces/"
     parent: "tracing_advanced"
-    weight: 10
+    weight: 301
   - name: "Adding Metadata to Spans"
     url: "tracing/advanced/adding_metadata_to_spans/"
     parent: "tracing_advanced"
-    weight: 20
+    weight: 302
   - name: "Runtime Metrics"
     url: "tracing/advanced/runtime_metrics/"
     parent: "tracing_advanced"
-    weight: 30
+    weight: 303
   - name: "OpenTracing"
     url: "tracing/advanced/opentracing/"
     parent: "tracing_advanced"
-    weight: 40
+    weight: 304
   - name: "Manual Instrumentation"
     url: "tracing/advanced/manual_instrumentation/"
     parent: "tracing_advanced"
-    weight: 50
+    weight: 305
   - name: "Setting Primary Tags to scope "
     url: "tracing/advanced/setting_primary_tags_to_scope/"
     parent: "tracing_advanced"
-    weight: 60
-  # Using the APM UI
+    weight: 306
+
+  ## TACING - Using the APM UI
+
   - name: "Use the APM UI"
     url: "tracing/visualization/"
     parent: "tracing"
     identifier: "tracing_vis"
-    weight: 40
+    weight: 4
   - name: "Services List"
     url: "tracing/visualization/services_list/"
     parent: "tracing_vis"
-    weight: 10
+    weight: 401
   - name: "Service Page"
     url: "tracing/visualization/service/"
     parent: "tracing_vis"
-    weight: 10
+    weight: 402
   - name: "Resource Page"
     url: "tracing/visualization/resource/"
     parent: "tracing_vis"
-    weight: 20
+    weight: 403
   - name: "Trace View"
     url: "tracing/visualization/trace/"
     parent: "tracing_vis"
-    weight: 30
+    weight: 404
   - name: "Service Map"
     url: "tracing/visualization/services_map/"
     parent: "tracing_vis"
-    weight: 40
+    weight: 405
 
-  # Trace Search
+  ## TRACING - Trace Search
+
   - name: "Trace Search & Analytics"
     url: "tracing/trace_search_and_analytics/"
     parent: "tracing"
     identifier: "tracing_search_analytics"
-    weight: 50
+    weight: 5
   - name: "Agent Configuration"
     url: "tracing/trace_search_and_analytics/agent_trace_search/"
     parent: "tracing_search_analytics"
-    weight: 10
+    weight: 501
   - name: "Trace Search"
     url: "tracing/trace_search_and_analytics/search/"
     parent: "tracing_search_analytics"
-    weight: 20
+    weight: 502
   - name: "Trace Analytics"
     url: "tracing/trace_search_and_analytics/analytics/"
     parent: "tracing_search_analytics"
-    weight: 30
-  # Trace API
+    weight: 503
+
   - name: "Trace API"
     url: "api/#tracing"
     parent: "tracing"
-    weight: 60
-  # Libraries
+    weight: 6
+
   - name: "Community Libraries"
     url: "developers/libraries/#apm-tracing-client-libraries/"
     parent: "tracing"
-    weight: 70
+    weight: 7
+
   - name: "Guides"
     url: "tracing/guide/"
     identifier: "tracing_guides"
     parent: "tracing"
-    weight: 80
+    weight: 8
+
   - name: Troubleshooting
     url: "tracing/troubleshooting/"
     identifier: "tracing_troubleshooting"
     parent: "tracing"
-    weight: 90
-  #- #  name: "FAQ"
-  #  url: "tracing/faq/"
-  #  #  parent: menu_references_tracing
+    weight: 9
 
+##########
+## LOGS ##
+##########
 
-  # TRACING/APM - Subnav end
-
-# LOGS
   - name: "Log Management"
     url: "logs/"
     pre: "nav_logs"
     identifier: "log_management"
-    weight: 900
+    weight: 90000
+
+  ## LOGS -  Log Collection
+
   - name: "Log Collection & Integrations"
     url: "logs/log_collection/"
     parent: "log_management"
     identifier: "log_collection"
-    weight: 10
-  # Log Collection Subnav
-  - name: "Browser"
-    identifier: "log_browser"
-    url: "logs/log_collection/javascript/"
-    parent: "log_collection"
-    weight: 10
+    weight: 1
   - name: "Csharp"
     url: "logs/log_collection/csharp/"
     parent: "log_collection"
-    weight: 20
+    weight: 101
   - name: "Go"
     identifier: "log_go"
     url: "logs/log_collection/go/"
     parent: "log_collection"
-    weight: 30
+    weight: 102
   - name: "Java"
     url: "logs/log_collection/java/"
     parent: "log_collection"
-    weight: 40
+    weight: 103
+  - name: "Javascript"
+    identifier: "log_browser"
+    url: "logs/log_collection/javascript/"
+    parent: "log_collection"
+    weight: 104
   - name: "Nodejs"
     url: "logs/log_collection/nodejs/"
     parent: "log_collection"
-    weight: 50
+    weight: 105
   - name: "PHP"
     identifier: "log_php"
     url: "logs/log_collection/php/"
     parent: "log_collection"
-    weight: 60
+    weight: 106
   - name: "Python"
     identifier: "log_python"
     url: "logs/log_collection/python/"
     parent: "log_collection"
-    weight: 70
+    weight: 107
   - name: "Ruby"
     url: "logs/log_collection/ruby/"
     parent: "log_collection"
-    weight: 80
+    weight: 108
   - name: "Other Integrations"
     url: "integrations/#cat-log-collection/"
     parent: "log_collection"
-    weight: 90
+    weight: 109
 
-  # LOGS - Processing
+  ## LOGS - Processing
+
   - name: "Processing"
     url: "logs/processing/"
     parent: "log_management"
     identifier: "log_processing"
-    weight: 20
+    weight: 2
   - name: "Pipelines"
     url: "logs/processing/pipelines/"
     parent: "log_processing"
-    weight: 10
+    weight: 201
   - name: "Processors"
     url: "logs/processing/processors/"
     parent: "log_processing"
-    weight: 20
+    weight: 202
   - name: "Parsing"
     url: "logs/processing/parsing/"
     parent: "log_processing"
-    weight: 30
+    weight: 203
   - name: "Naming Convention"
     url: "logs/processing/attributes_naming_convention/"
     parent: "log_processing"
-    weight: 40
+    weight: 204
 
-  # LOGS - Live tail
+  - name: "Generate Metrics"
+    url: "logs/logs_to_metrics/"
+    parent: "log_management"
+    identifier: "log_processing"
+    weight: 3
+
   - name: "Live Tail"
     url: "logs/live_tail/"
     parent: "log_management"
-    weight: 30
+    weight: 4
 
-  # LOGS - Explorer
+  ## LOGS - Explorer
+
   - name: "Explorer"
     url: "logs/explorer/"
     parent: "log_management"
     identifier: "log_explorer"
-    weight: 40
+    weight: 4
   - name: "Search"
     url: "logs/explorer/search/"
     parent: "log_explorer"
-    weight: 10
+    weight: 401
   - name: "Log Analytics"
     url: "logs/explorer/analytics/"
     parent: "log_explorer"
-    weight: 20
+    weight: 402
   - name: "Saved Views"
     url: "logs/explorer/saved_views/"
     parent: "log_explorer"
-    weight: 30
+    weight: 403
   - name: "Log Patterns"
     url: "logs/explorer/patterns/"
     parent: "log_explorer"
-    weight: 40
+    weight: 404
 
   - name: "Logging without Limits"
     url: "logs/logging_without_limits/"
     parent: "log_management"
-    weight: 50
-  # LOGS - Archives
+    weight: 5
+
+  ## LOGS - Archives
 
   - name: "Archives"
-    url: "logs/archives/s3/"
+    url: "logs/archives/"
     parent: "log_management"
     identifier: "log_archives"
-    weight: 60
-  - name: "AWS S3"
+    weight: 6
+  - name: "Archive to AWS S3"
     url: "logs/archives/s3/"
     parent: "log_archives"
-    weight: 10
+    weight: 601
+  - name: "Rehydrate from Archives"
+    url: "logs/archives/rehydrating"
+    parent: "log_archives"
+    weight: 602
 
-  #- #  name: "FAQ"
-  #  url: "logs/faq/"
-  #  #  parent: menu_references_logs
-
-  # Guides
   - name: "Guides"
     url: "logs/guide/"
     parent: "log_management"
-    weight: 70
+    weight: 7
 
   - name: "Security"
     url: "logs/security/"
     parent: "log_management"
-    weight: 80
+    weight: 8
 
-  # LOGS - Subnav end
+################
+## SYNTHETICS ##
+################
 
-# SYNTHETICS
   - name: "Synthetics"
     url: "synthetics/"
     pre: "nav_synthetics"
     identifier: "synthetics"
-    weight: 1000
+    weight: 100000
+
   - name: "API Tests"
     url: "synthetics/api_tests/"
     parent: "synthetics"
-    weight: 10
+    weight: 1
     id: "api_tests"
+
   - name: "Browser Tests"
     url: "synthetics/browser_tests/"
     parent: "synthetics"
-    weight: 20
+    weight: 2
+
+  ## SYNTHETICS - APM
+
   - name: "APM Integration"
     url: "synthetics/apm/"
     parent: "synthetics"
-    weight: 30
+    identifier: "synthetics_apm"
+    weight: 3
+  - name: "Browser Tests"
+    url: "synthetics/apm/browser_tests"
+    parent: "synthetics_apm"
+    weight: 301
+
   - name: "Identify Synthetics Bots"
     url: "synthetics/identify_synthetics_bots/"
     parent: "synthetics"
-    weight: 40
+    weight: 4
+
   - name: "Settings"
     url: "synthetics/settings/"
     parent: "synthetics"
-    weight: 50
+    weight: 5
 
-# DEVELOPERS
+################
+## DEVELOPERS ##
+################
+
   - name: "Developer Tools"
     url: "developers/"
     pre: "nav_developers"
     identifier: "dev_tools"
-    weight: 1100
-  # DEVELOPERS - Subnav start
+    weight: 110000
+
+  ## DEVELOPERS - DogStatsD
+
   - name: "DogStatsD"
     url: "developers/dogstatsd/"
     parent: "dev_tools"
     identifier: "dev_tools_dogstatsd"
-    weight: 10
+    weight: 1
   - name: "Data Types and Tags"
     url: "developers/dogstatsd/data_types/"
     parent: "dev_tools_dogstatsd"
+    weight: 101
   - name: "Datagram and Shell Usage"
     url: "developers/dogstatsd/datagram_shell/"
     parent: "dev_tools_dogstatsd"
+    weight: 102
   - name: "Unix Domain Socket usage"
     url: "developers/dogstatsd/unix_socket/"
     parent: "dev_tools_dogstatsd"
+    weight: 103
+
+  ## DEVELOPERS - Metrics
+
   - name: "Metrics"
     url: "developers/metrics/"
     parent: "dev_tools"
     identifier: "dev_tools_metrics"
-    weight: 20
+    weight: 2
   - name: "Custom Metrics"
     url: "developers/metrics/custom_metrics/"
     parent: "dev_tools_metrics"
-    weight: 10
+    weight: 201
   - name: "Counts"
     url: "developers/metrics/counts/"
     parent: "dev_tools_metrics"
-    weight: 20
+    weight: 202
   - name: "Distributions"
     url: "developers/metrics/distributions/"
     parent: "dev_tools_metrics"
-    weight: 30
+    weight: 203
   - name: "Gauges"
     url: "developers/metrics/gauges/"
     parent: "dev_tools_metrics"
-    weight: 40
+    weight: 204
   - name: "Histograms"
     url: "developers/metrics/histograms/"
     parent: "dev_tools_metrics"
-    weight: 50
+    weight: 205
   - name: "Rates"
     url: "developers/metrics/rates/"
     parent: "dev_tools_metrics"
-    weight: 60
+    weight: 206
   - name: "Sets"
     url: "developers/metrics/sets/"
     parent: "dev_tools_metrics"
-    weight: 70
+    weight: 207
+
   - name: "Libraries"
     url: "developers/libraries/"
     parent: "dev_tools"
-    weight: 30
+    weight: 3
+
   - name: "Community Office Hours"
     url: "developers/office_hours/"
     parent: "dev_tools"
-    weight: 40
+    weight: 4
+
   - name: "Write a Custom Check"
     url: "developers/write_agent_check/"
     parent: "dev_tools"
-    weight: 50
+    weight: 5
+
   - name: "Write a Prometheus Check"
     url: "developers/prometheus/"
     parent: "dev_tools"
-    weight: 60
-  # Integrations core doc
+    weight: 6
+
+  ## DEVELOPERS -  Integrations
+
   - name: "Integrations"
     url: "developers/integrations/"
     parent: "dev_tools"
     identifier: "dev_tools_integrations"
-    weight: 70
+    weight: 7
   - name: "Create a new Integration"
     url: "developers/integrations/new_check_howto/"
     parent: "dev_tools_integrations"
-    weight: 10
+    weight: 701
   - name: "Python"
     url: "developers/integrations/python/"
     parent: "dev_tools_integrations"
-    weight: 20
+    weight: 702
   - name: "Legacy"
     url: "developers/integrations/legacy/"
     parent: "dev_tools_integrations"
-    weight: 30
+    weight: 703
+
   - name: "Guides"
     url: "developers/guide/"
     parent: "dev_tools"
-    weight: 80
-  #- #  name: "FAQ"
-  #  url: "developers/faq/"
-  #  #  parent: menu_references_developers
-  # DEVELOPERS - Subnav end
+    weight: 8
 
-# API
+#########
+## API ##
+#########
+
   - name: "API"
     url: "api/"
     pre: "nav_api"
     identifier: "api"
-    weight: 1200
+    weight: 120000
 
- # ACCOUNT MANAGEMENT
+########################
+## ACCOUNT MANAGEMENT ##
+########################
+
   - name: "Account Management"
     url: "account_management/"
     pre: "nav_account"
     identifier: "account_management"
-    weight: 1300
-  # ACCOUNT MANAGEMENT - Subnav start
+    weight: 130000
+
   - name: "Team management"
     url: "account_management/team/"
     parent: "account_management"
-    weight: 10
+    weight: 1
+
   - name: "Organization settings"
     url: "account_management/org_settings/"
     parent: "account_management"
-    weight: 20
+    weight: 2
+
+  ## ACCOUNT MANAGEMENT - SAML
+
   - name: "SSO with SAML"
     url: "account_management/saml/"
     identifier: "account_management_saml"
     parent: "account_management"
-    weight: 30
-  # SAML subnav
+    weight: 3
   - name: "Active Directory"
     url: "account_management/saml/activedirectory/"
     parent: "account_management_saml"
-    weight: 10
+    weight: 301
   - name: "Auth0"
     url: "account_management/saml/auth0/"
     parent: "account_management_saml"
-    weight: 20
+    weight: 302
   - name: "Azure"
     url: "account_management/saml/azure/"
     parent: "account_management_saml"
-    weight: 30
+    weight: 303
   - name: "Google"
     url: "account_management/saml/google/"
     parent: "account_management_saml"
-    weight: 40
+    weight: 304
   - name: "NoPassword"
     url: "account_management/saml/nopassword/"
     parent: "account_management_saml"
-    weight: 50
+    weight: 305
   - name: "Okta"
     url: "account_management/saml/okta/"
     parent: "account_management_saml"
-    weight: 60
+    weight: 306
   - name: "SafeNet"
     url: "account_management/saml/safenet/"
     parent: "account_management_saml"
-    weight: 70
+    weight: 307
+
   - name: "Multi-org accounts"
     url: "account_management/multi_organization/"
     parent: "account_management"
-    weight: 40
+    weight: 4
+
   - name: "Switching between orgs"
     url: "account_management/org_switching/"
     parent: "account_management"
-    weight: 50
+    weight: 5
+
   - name: "Billing"
     url: "account_management/billing/"
     parent: "account_management"
-    weight: 60
+    weight: 6
+
   - name: "API and Application Keys"
     url: "account_management/api-app-keys/"
     parent: "account_management"
-    weight: 70
+    weight: 7
 
+##############
+## SECURITY ##
+##############
 
-      #- #  name: "FAQ"
-      #  url: "account_management/faq/"
-      #  #  parent: menu_references_account_management
-      # ACCOUNT MANAGEMENT - Subnav end
-
-# SECURITY
   - name: "Security"
     url: "security/"
     pre: "nav_security"
     identifier: "security"
-    weight: 1400
-  # SECURITY - Subnav start
+    weight: 140000
+
   - name: "Agent"
     url: "security/agent/"
     parent: "security"
-    weight: 10
+    weight: 1
+
   - name: "APM (Tracing)"
     url: "security/tracing/"
     parent: "security"
-    weight: 20
+    weight: 2
+
   - name: "Log Management"
     url: "security/logs/"
     parent: "security"
-    weight: 30
+    weight: 3
+
   - name: "Other considerations"
     url: "security/other/"
     parent: "security"
-    weight: 40
+    weight: 4
 
-# GLOSSARY
+##############
+## GLOSSARY ##
+##############
+
   - name: "Glossary"
     url: "glossary/"
     pre: "nav_glossary"
-    weight: 1500
+    weight: 150000
 
-# VIDEOS
+############
+## VIDEOS ##
+############
+
   - name: "Videos"
     url: "videos/"
     pre: "nav_videos"
-    weight: 1600
+    weight: 160000
 
-# HELP
+##########
+## HELP ##
+##########
+
   - name: "Help"
     url: "help/"
     pre: "nav_help"
-    weight: 1700
+    weight: 170000
