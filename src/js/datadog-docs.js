@@ -838,6 +838,10 @@ function updateSidebar(event){
 };
 
 function loadPage(newUrl) {
+
+    var mainContent = document.getElementById("mainContent");
+    mainContent.classList.add('loading');
+
     var httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function() {
 
@@ -897,14 +901,9 @@ function loadPage(newUrl) {
 
         var start = window.performance.now();
 
-        var contentElement = document.getElementById("mainContent");
+        mainContent.classList.remove('loading');
+        mainContent.parentElement.replaceChild(newContent, mainContent);
 
-        $('#mainContent').fadeOut(150, function(){
-            $("#mainContent").hide();
-            $(this).replaceWith(newContent);
-            $('#mainContent').fadeIn(150);
-        });
-        
         var end = window.performance.now();
         var time = end - start;
 

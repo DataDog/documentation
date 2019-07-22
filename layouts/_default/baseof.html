@@ -59,8 +59,10 @@
             <div class="d-none d-lg-flex col-12 col-sm-3 side">
                 {{ partial "sidenav/sidenav.html" . }}
             </div>
-            <div class="col-12 col-lg-9 main {{ if and (eq $.Section "integrations") (eq $.Kind "page") }}integrations-single{{ end }}" id="mainContent">
+            <div class="mainContent-wrapper col-12 col-lg-9 main">
+              <div class="{{ if and (eq $.Section "integrations") (eq $.Kind "page") }}integrations-single{{ end }}" id="mainContent">
                 {{ block "main" . }}{{ end }}
+              </div>
             </div>
             {{ if not .Params.disable_toc}}
                 {{ partial "table-of-contents/table-of-contents.html" . }}
