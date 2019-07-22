@@ -440,10 +440,14 @@ main:
     url: "graphing/infrastructure/process/"
     parent: "graphing_infrastructure"
     weight: 604
+  - name: "Network Performance Monitor"
+    url: "graphing/infrastructure/network_performance_monitor/"
+    parent: "graphing_infrastructure"
+    weight: 605
   - name: "Serverless"
     url: "graphing/infrastructure/serverless/"
     parent: "graphing_infrastructure"
-    weight: 605
+    weight: 606
 
   ## GRAPHING - Functions
 
@@ -607,39 +611,34 @@ main:
     weight: 2
     parent: "alerting"
 
-  - name: "Network Flow Monitor"
-    url: "monitors/network_flow_monitors/"
-    weight: 3
-    parent: "alerting"
-
   - name: "Monitor Status"
     url: "monitors/monitor_status/"
-    weight: 4
+    weight: 3
     parent: "alerting"
 
   - name: "Check Summary"
     url: "monitors/check_summary/"
-    weight: 5
+    weight: 4
     parent: "alerting"
 
   - name: "Notifications"
     url: "monitors/notifications/"
-    weight: 6
+    weight: 5
     parent: "alerting"
 
   - name: "Downtimes"
     url: "monitors/downtimes/"
-    weight: 7
+    weight: 6
     parent: "alerting"
 
   - name: "SLO Widget"
     url: "monitors/slo_widget/"
-    weight: 8
+    weight: 7
     parent: "alerting"
 
   - name: "Guides"
     url: "monitors/guide/"
-    weight: 9
+    weight: 8
     parent: "alerting"
 
 #################
