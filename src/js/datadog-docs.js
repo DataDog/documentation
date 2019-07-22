@@ -456,97 +456,7 @@ $(document).ready(function () {
         }
     }
 
-    if($('.code-tabs').length > 0) {
-        // page load set code tab titles
-        $('.code-tabs .tab-content').find('.tab-pane').each(function(idx, item) {
-          var navTabsMobile = $(this).closest('.code-tabs').find('.nav-tabs-mobile .dropdown-menu');
-          var navTabs = $(this).closest('.code-tabs').find('.nav-tabs'),
-              title = $(this).attr('title');
-          var lang = title.toLowerCase().replace(/\W/g, '');
-          navTabs.append('<li><a href="#" data-lang="'+lang+'">'+title+'</a></li>');
-          navTabsMobile.append('<a class="dropdown-item" href="#" data-lang="'+lang+'">'+title+'</a>');
-        });
-
-        // page load if we have a lang in url activate those tabs, otherwise activate first
-        var sPageURL = decodeURIComponent(window.location.search.substring(1));
-        var sURLVariables = sPageURL.split('&');
-        var tab = sURLVariables.filter(function(item) {
-           return item.split('=')[0] === 'tab';
-        }).map(function(item) {
-            return item.split('=')[1];
-        }).toString();
-
-        function activateTab(el) {
-            var tab = el.parent(),
-                 tabIndex = tab.index(),
-                 tabPanel = el.closest('.code-tabs'),
-                 tabPane = tabPanel.find('.tab-pane').eq(tabIndex);
-             tabPanel.find('.active').removeClass('active');
-             tab.addClass('active');
-             tabPane.addClass('active');
-             tabPane.addClass('show');
-             el.closest('.code-tabs').find('.nav-tabs-mobile .title-dropdown').text(tab.text());
-        }
-
-        // clicking a tab open them all
-        $('.code-tabs .nav-tabs a').click(function(e){
-          e.preventDefault();
-
-          // prepare
-          var currentOffset = $(this).offset().top - $(document).scrollTop();
-
-          // find all
-          var lang = $(this).data('lang');
-          $('.code-tabs .nav-tabs').each(function() {
-             var navtabs = $(this);
-             var links = $(this).find('a:first');
-             var langLinks = $(this).find('a[data-lang="'+lang+'"]');
-             if(langLinks.length) {
-                 langLinks.each(function() {
-                     activateTab($(this));
-                 });
-             } else {
-                 // set first lang selected if nothing selected
-                 if(navtabs.find('.active').length === 0) {
-                     links.each(function() {
-                         activateTab($(this));
-                     });
-                 }
-             }
-          });
-
-          if (history.pushState) {
-            var url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
-            history.pushState(null, null, url + '?tab=' + lang + window.location.hash)
-          }
-
-          // restore
-          $(document).scrollTop($(this).offset().top - currentOffset);
-        });
-
-        // mobile tabs trigger desktop ones
-        $('.code-tabs .nav-tabs-mobile .dropdown-menu a').click(function(e){
-            e.preventDefault();
-            var ctabs = $(this).parents('.code-tabs');
-            var lang = $(this).data('lang');
-            var desktopTab = ctabs.find('.nav-tabs a[data-lang="'+lang+'"]');
-            if(desktopTab) {
-              desktopTab.click();
-            }
-        });
-
-        // activate language from url or first
-        if(tab === '') {
-            $('.code-tabs .nav-tabs li:first a').click();
-        } else {
-            var match = $('.code-tabs .nav-tabs a[data-lang="'+tab+'"]:first');
-            if(match.length) {
-                match.click();
-            } else {
-                $('.code-tabs .nav-tabs li:first a').click();
-            }
-        }
-    }
+    codeTabs();
 
     // slide to anchors
     function moveToAnchor(id, animate, amount) {
@@ -652,6 +562,100 @@ $(document).ready(function () {
     });
 });
 
+function codeTabs(){
+    if($('.code-tabs').length > 0) {
+        // page load set code tab titles
+        $('.code-tabs .tab-content').find('.tab-pane').each(function(idx, item) {
+          var navTabsMobile = $(this).closest('.code-tabs').find('.nav-tabs-mobile .dropdown-menu');
+          var navTabs = $(this).closest('.code-tabs').find('.nav-tabs'),
+              title = $(this).attr('title');
+          var lang = title.toLowerCase().replace(/\W/g, '');
+          navTabs.append('<li><a href="#" data-lang="'+lang+'">'+title+'</a></li>');
+          navTabsMobile.append('<a class="dropdown-item" href="#" data-lang="'+lang+'">'+title+'</a>');
+        });
+
+        // page load if we have a lang in url activate those tabs, otherwise activate first
+        var sPageURL = decodeURIComponent(window.location.search.substring(1));
+        var sURLVariables = sPageURL.split('&');
+        var tab = sURLVariables.filter(function(item) {
+           return item.split('=')[0] === 'tab';
+        }).map(function(item) {
+            return item.split('=')[1];
+        }).toString();
+
+        function activateTab(el) {
+            var tab = el.parent(),
+                 tabIndex = tab.index(),
+                 tabPanel = el.closest('.code-tabs'),
+                 tabPane = tabPanel.find('.tab-pane').eq(tabIndex);
+             tabPanel.find('.active').removeClass('active');
+             tab.addClass('active');
+             tabPane.addClass('active');
+             tabPane.addClass('show');
+             el.closest('.code-tabs').find('.nav-tabs-mobile .title-dropdown').text(tab.text());
+        }
+
+        // clicking a tab open them all
+        $('.code-tabs .nav-tabs a').click(function(e){
+          e.preventDefault();
+
+          // prepare
+          var currentOffset = $(this).offset().top - $(document).scrollTop();
+
+          // find all
+          var lang = $(this).data('lang');
+          $('.code-tabs .nav-tabs').each(function() {
+             var navtabs = $(this);
+             var links = $(this).find('a:first');
+             var langLinks = $(this).find('a[data-lang="'+lang+'"]');
+             if(langLinks.length) {
+                 langLinks.each(function() {
+                     activateTab($(this));
+                 });
+             } else {
+                 // set first lang selected if nothing selected
+                 if(navtabs.find('.active').length === 0) {
+                     links.each(function() {
+                         activateTab($(this));
+                     });
+                 }
+             }
+          });
+
+          if (history.pushState) {
+            var url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
+            history.pushState(null, null, url + '?tab=' + lang + window.location.hash)
+          }
+
+          // restore
+          $(document).scrollTop($(this).offset().top - currentOffset);
+        });
+
+        // mobile tabs trigger desktop ones
+        $('.code-tabs .nav-tabs-mobile .dropdown-menu a').click(function(e){
+            e.preventDefault();
+            var ctabs = $(this).parents('.code-tabs');
+            var lang = $(this).data('lang');
+            var desktopTab = ctabs.find('.nav-tabs a[data-lang="'+lang+'"]');
+            if(desktopTab) {
+              desktopTab.click();
+            }
+        });
+
+        // activate language from url or first
+        if(tab === '') {
+            $('.code-tabs .nav-tabs li:first a').click();
+        } else {
+            var match = $('.code-tabs .nav-tabs a[data-lang="'+tab+'"]:first');
+            if(match.length) {
+                match.click();
+            } else {
+                $('.code-tabs .nav-tabs li:first a').click();
+            }
+        }
+    }
+}
+
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
@@ -685,7 +689,7 @@ function hasParentLi(el){
 
 function getPathElement(){
     var path = window.location.pathname;
-    var activeMenus = document.querySelectorAll('.side .sidenav-nav .active');
+    var activeMenus = document.querySelectorAll('.side .sidenav-nav .active, header .sidenav-nav .active');
     
     for(i = 0; i < activeMenus.length; i++){
         activeMenus[i].classList.remove('active');
@@ -695,6 +699,7 @@ function getPathElement(){
     path = path.replace(/\/$/, '');
     
     var aPath = document.querySelector('.side [data-path="'+path+'"]');
+    var maPath = document.querySelector('header [data-path="'+path+'"]');
 
     // exception for agent/docker path, given that there are 2 anchors with this element, and clicking both should open agent/docker page.
     if (path.includes('agent/docker')) {
@@ -731,8 +736,8 @@ function getPathElement(){
 
 // remove open class from li elements and active class from a elements
 function closeNav(){
-    var activeMenus = document.querySelectorAll('.side .sidenav-nav .active');
-    var openMenus = document.querySelectorAll('.side .sidenav-nav .open');
+    var activeMenus = document.querySelectorAll('.side .sidenav-nav .active, header .sidenav-nav .active');
+    var openMenus = document.querySelectorAll('.side .sidenav-nav .open, header .sidenav-nav .open');
 
     for(i = 0; i < activeMenus.length; i++){
         activeMenus[i].classList.remove('active');
@@ -745,7 +750,8 @@ function closeNav(){
 
 window.onload = function(){
     getPathElement();
-    var elts = document.querySelectorAll('.side .js-load');
+    var sidenavElements = document.querySelectorAll('.side .js-load');
+    var mobilenavElements = document.querySelectorAll('header .sidenav-nav .js-load');
 
     var show = function(event) {
         event.stopPropagation();
@@ -764,6 +770,11 @@ window.onload = function(){
             var a = parentli.querySelector('a');
             newUrl = a.href;
 
+        }
+
+        // Hide mobile nav after clicking nav element
+        if ($('.navbar-collapse').hasClass('show')) {
+            $('.navbar-collapse').collapse('hide');
         }
 
         // TODO: How to fall back to normal behavior?
@@ -788,10 +799,16 @@ window.onload = function(){
             event.preventDefault();
             history.pushState(null /*stateObj*/, "" /*title*/, newUrl);
             updateSidebar(event);
+            // if mobile nav, close
+
         }
     }
-    for (var i = elts.length - 1; i >= 0; --i) {
-        elts[i].onclick = show;
+    for (var i = sidenavElements.length - 1; i >= 0; --i) {
+        sidenavElements[i].onclick = show;
+    }
+
+    for (var i = mobilenavElements.length - 1; i >= 0; --i) {
+        mobilenavElements[i].onclick = show;
     }
 }
 
@@ -806,6 +823,8 @@ function updateSidebar(event){
     closeNav();
 
     getPathElement();
+
+    
 
     var isLi = ( event.target.nodeName === "LI" ) ? true : false ;
 
@@ -918,6 +937,8 @@ function loadPage(newUrl) {
         var time = end - start;
 
         var pathName = new URL(newUrl).pathname;
+
+        codeTabs();
 
         DD_LOGS.logger.log('html parsed page content inserted',{"timeEnd": time, "pathName": pathName},'info');
 
