@@ -16,7 +16,6 @@ Narrow your search by filtering on certain event properties. See the list of fil
 
 | Filter                                            | Description                                                                              |
 | --------                                          | -------------                                                                            |
-| `user:pup@datadoghq.com`                          | Find all events with comments by pup@datadoghq.com.                                      |
 | `sources:github,chef`                             | Show events from GitHub OR Chef.                                                         |
 | `tags:env-prod OR db`                             | Show events tagged with #env-prod OR #db.                                                |
 | `tags:security-group:sg-123 AND role:common-node` | Show events tagged with `#security-group:sg-123` AND `#role:common-node`.                |
@@ -27,7 +26,7 @@ Narrow your search by filtering on certain event properties. See the list of fil
 
 Full text search works on all keywords provided in the search query after applying any filters. Full text search looks inside the event text, title, tags, users who commented on the event, host names, and devices tied to the event.
 
-Use tag search to find all events with the same key tag with the following query: 
+Use tag search to find all events with the same key tag with the following query:
 
 | Filter               | Description                                                                    |
 | ----                 | ---                                                                            |
@@ -83,7 +82,7 @@ In the source plain text email, you only have three fields to control: sender em
 ```
 Sender's email: Matt@Datadog
 Subject: Env:Test - System at 50% CPU - #test
-Body: This is a test message showing that env:test is at 50% CPU - #test 
+Body: This is a test message showing that env:test is at 50% CPU - #test
 ```
 
 #### Datadog Event
