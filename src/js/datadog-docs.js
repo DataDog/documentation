@@ -856,6 +856,8 @@ function loadPage(newUrl) {
         }
 
         var newContent = httpRequest.responseXML.getElementById("mainContent");
+        newContent.classList.add('loading');
+
         if (newContent === null){
             mainContent.classList.remove('loading');
             return;
@@ -903,8 +905,12 @@ function loadPage(newUrl) {
 
         var start = window.performance.now();
 
-        mainContent.classList.remove('loading');
         mainContent.parentElement.replaceChild(newContent, mainContent);
+        mainContent = newContent;
+
+        window.setTimeout(function () {
+            mainContent.classList.remove('loading');
+        }, 1);
 
         var end = window.performance.now();
         var time = end - start;
