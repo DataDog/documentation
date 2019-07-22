@@ -12,11 +12,11 @@ Recherchez et filtrez les informations de vos monitors.
 
 * **`query`** [*facultatif*] :
 
-    Après avoir saisi une requête de recherche dans votre [page Manager Monitor][1], utilisez la valeur du paramètre de requête dans l’URL de la page comme valeur de ce paramètre. Consultez la page de [documentation relative à la gestion des monitors][2] pour en savoir plus.
+    Après avoir saisi une requête de recherche dans votre [page Manager Monitor][1], utilisez la valeur du paramètre de requête dans l'URL de la page comme valeur de ce paramètre. Consultez la page de [documentation relative à la gestion des monitors][2] pour en savoir plus.
 
     La requête peut contenir autant d'attributs de monitor que nécessaire (séparés par des espaces). Exemple : `query="type:metric status:alert"`.
 
-* **`page`** [*facultatif*, *défaut* = **0**] :
+* **`page`** [*facultatif*, *défaut*=**0**] :
 
     Page à partir de laquelle commencer la pagination.
 

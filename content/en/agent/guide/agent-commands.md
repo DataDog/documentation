@@ -1,6 +1,6 @@
 ---
 title: Agent Commands
-kind: faq
+kind: guide
 aliases:
     - /agent/faq/agent-status-and-information
     - /agent/faq/start-stop-restart-the-datadog-agent
@@ -15,7 +15,7 @@ further_reading:
 For Linux based systems where the <code>service</code> wrapper command is not available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands">consult the list of alternatives</a>.
 </div>
 
-## Start, Stop, and Restart the Agent 
+## Start, Stop, and Restart the Agent
 
 ### Start the Agent
 
@@ -89,7 +89,7 @@ List of commands to stop the Datadog Agent:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Restart the Agent 
+### Restart the Agent
 
 List of commands to restart the Datadog Agent:
 

@@ -1,5 +1,5 @@
 ---
-title: Manage Monitor
+title: Manage Monitors
 kind: documentation
 further_reading:
 - link: "monitors/monitor_types"
@@ -23,7 +23,7 @@ Advanced search lets you query monitors by any combination of monitor attributes
 
 * `title` and `message` - text search
 * `status` - Alert, Warn, No Data, Ok
-* `scope` - e.g. *, role:master-db
+* `scope` - *, role:master-db
 * `type` - metric, integration, apm, etc
 * `muted`
 * `creator`
@@ -31,8 +31,8 @@ Advanced search lets you query monitors by any combination of monitor attributes
 * `service` - tags
 * `team` - tags
 * `env` - tags
-* `notification` - the monitor's notification target, e.g. you@example.com, slack-ops-oncall
-* `metric` - the metric _or_ service check monitored, e.g. system.cpu.user, http.can_connect
+* `notification` - The monitor's notification target: you@example.com, slack-ops-oncall
+* `metric` - The metric _or_ service check monitored: system.cpu.user, http.can_connect
 
 To run a search, construct your query using the checkboxes on the left and/or the search bar along the top. When you check the boxes, the search bar updates with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the checkboxes update to reflect the change. In any case, query results update in real-time as you edit the query; there's no 'Search' button to click.
 

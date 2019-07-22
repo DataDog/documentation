@@ -3,7 +3,7 @@ title: Metrics Summary
 kind: documentation
 description: "Consult the full list of metrics reporting to Datadog."
 aliases:
-  - graphing/faq/how-can-i-set-up-custom-units-for-custom-metrics
+  - /graphing/faq/how-can-i-set-up-custom-units-for-custom-metrics
 further_reading:
   - link: "graphing/metrics/explorer"
     tag: "Documentation"

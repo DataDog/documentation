@@ -46,6 +46,8 @@ This functionality allows you to control tagging for metrics for which host-leve
 
 ### DogStatsD
 
+{{% table responsive="true" %}}
+
 | Method | Overview |
 | :----- | :------- |
 | `dog.distribution(String metric.name, double value, String... tags)` | Track the statistical distribution of a set of values over one or more hosts. |

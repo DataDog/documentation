@@ -19,10 +19,10 @@ further_reading:
 
 ## Secure Credential
 
-Secure Credentials are a secure Username / password pair that can be used as [variables][1] for Browser Tests. These credentials are secured by Datadog so that only a subset of chosen users in your organization can access them. To create a new Secure Crendential
+Secure Credentials are a secure Username / password pair that can be used as [variables][1] for Browser Tests. These credentials are secured by Datadog so that only a subset of chosen users in your organization can access them. To create a new Secure Credential
 
-1. Click on *New Secure Crendential* in the upper right corner of the Setting page.
-2. Enter a **Crendential Name**.
+1. Click on *New Secure Credential* in the upper right corner of the Setting page.
+2. Enter a **Credential Name**.
 3. Enter the given  `Username`/`Password`.
 4. Select **tags** to associate to your Credential.
 5. Optional - Enter a Description for your Credential.

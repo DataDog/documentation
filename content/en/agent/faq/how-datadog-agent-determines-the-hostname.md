@@ -11,8 +11,11 @@ comments: <!–– Original flowchart is in lucidchart. Search Trello for link o
 
 For Agent 6, there are differences in hostname resolution. For more information, see [differences in hostname resolution between Agent v5 and Agent v6][1].
 
+**Note**: Starting from the Agent v6.3 a configuration option called `hostname_fqdn` has been introduced that allows Agent v6 to have the same behavior as Agent v5. This flag is disabled by default on version 6.3+. See the [example datadog.yaml][2] for enabling this option.
+
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/hostname-resolution.md
+[2]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -23,9 +26,8 @@ For Agent 6, there are differences in hostname resolution. For more information,
 
 ### Potential host names
 
-The Datadog Agent collects potential host names from many different sources. To see all the names the Agent is detecting, [run the Agent status command][1]. For example:
+The Datadog Agent collects potential host names from many different sources. To see all the names the Agent is detecting, run the Agent's [status subcommand][1].
 ```
-$ sudo /etc/init.d/datadog-agent status
 ...
 Hostnames
 =========

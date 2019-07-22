@@ -44,6 +44,8 @@ logs_config:
   logs_no_ssl: false
 ```
 
+With the Docker Agent, pass in ```DD_LOGS_CONFIG_LOGS_DD_URL=tcp-encrypted-intake.logs.datadoghq.com:10516``` as an environment variable.
+
 Additionally, certain features are not available at the moment to customers who have signed Datadog's BAA, notably:
 
 * Users cannot request support via chat
@@ -59,6 +61,6 @@ If you have any questions about how the Log Management Service satisfies the app
 
 [1]: /security
 [2]: /logs/log_collection
-[3]: /logs/log_collection/#filter-logs
-[4]: /logs/log_collection/#scrub-sensitive-data-in-your-logs
+[3]: /agent/logs/advanced_log_collection/?tab=exclude_at_match#filter-logs
+[4]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
 [5]: /integrations/amazon_lambda/#log-collection

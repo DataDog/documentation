@@ -1,7 +1,6 @@
 ---
 title: Utilisateurs
 type: apicode
-order: 25
+order: 34
 external_redirect: /api/#utilisateurs
 ---
-

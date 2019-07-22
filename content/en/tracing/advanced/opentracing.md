@@ -21,7 +21,7 @@ OpenTracing is a vendor-neutral, cross-language standard for tracing application
 
 Use the [OpenTracing API][1] and the Datadog Tracer (dd-trace-ot) library to measure execution times for specific pieces of code. This lets you trace your application more precisely than you can with the Java Agent alone.
 
-**Setup**:
+#### Setup
 
 For Maven, add this to `pom.xml`:
 
@@ -58,8 +58,7 @@ compile group: 'com.datadoghq', name: 'dd-trace-ot', version: "${dd-trace-java.v
 
 Configure your application using environment variables or system properties as discussed in the [configuration][2] section.
 
-
-**Manual Instrumentation with OpenTracing**:
+#### Manual instrumentation with OpenTracing
 
 Use a combination of these if the automatic instrumentation isn’t providing you enough depth or detail.
 
@@ -125,18 +124,21 @@ If you’re not using `dd-java-agent.jar`, you must register a configured tracer
 
 ```java
 import datadog.opentracing.DDTracer;
-import datadog.trace.api.sampling.AllSampler;
-import datadog.trace.common.writer.DDAgentWriter;
-
 import io.opentracing.Tracer;
 import io.opentracing.util.GlobalTracer;
+import datadog.trace.common.sampling.AllSampler;
+import datadog.trace.common.writer.DDAgentWriter;
+
+//For the API Example
+import datadog.trace.common.writer.Writer;
+import datadog.trace.common.sampling.Sampler;
 
 public class Application {
 
     public static void main(String[] args) {
 
         // Initialize the tracer from environment variables or system properties
-        Tracer tracer = new DDTracer();
+        DDTracer tracer = new DDTracer();
         GlobalTracer.register(tracer);
         // register the same tracer with the Datadog API
         datadog.trace.api.GlobalTracer.registerIfAbsent(tracer);
@@ -144,17 +146,16 @@ public class Application {
         // OR from the API
         Writer writer = new DDAgentWriter();
         Sampler sampler = new AllSampler();
-        Tracer tracer = new DDTracer(writer, sampler);
+        String service = "Service Name";
+        Tracer tracer = new DDTracer(service,writer, sampler);
         GlobalTracer.register(tracer);
-        // register the same tracer with the Datadog API
-        datadog.trace.api.GlobalTracer.registerIfAbsent(tracer);
 
         // ...
     }
 }
 ```
 
-**Manual Instrumentation for Async Traces**:
+#### Manual instrumentation for async traces
 
 Create asynchronous traces with manual instrumentation using the OpenTracing API.
 
@@ -174,8 +175,72 @@ try (Scope scope = tracer.buildSpan("ServiceHandlerSpan").startActive(false)) {
     // submission thread impl...
 }
 ```
-Notice the above examples only use the OpenTracing classes. Check the [OpenTracing API][1] for more details and information.
 
+
+#### Create a distributed trace using manual instrumentation with OpenTracing
+
+```java
+// Step 1: Inject the Datadog headers in the client code
+try (Scope scope = tracer.buildSpan("httpClientSpan").startActive(true)) {
+    final Span span = scope.span();
+    HttpRequest request = /* your code here */;
+
+    tracer.inject(span.context(),
+                  Format.Builtin.HTTP_HEADERS,
+                  new MyHttpHeadersInjectAdapter(request));
+
+    // http request impl...
+}
+
+public static class MyHttpHeadersInjectAdapter implements TextMap {
+  private final HttpRequest httpRequest;
+
+  public HttpHeadersInjectAdapter(final HttpRequest httpRequest) {
+    this.httpRequest = httpRequest;
+  }
+
+  @Override
+  public void put(final String key, final String value) {
+    httpRequest.addHeader(key, value);
+  }
+
+  @Override
+  public Iterator<Map.Entry<String, String>> iterator() {
+    throw new UnsupportedOperationException("This class should be used only with tracer#inject()");
+  }
+}
+
+// Step 2: Extract the Datadog headers in the server code
+HttpRequest request = /* your code here */;
+
+final SpanContext extractedContext =
+  GlobalTracer.get().extract(Format.Builtin.HTTP_HEADERS,
+                             new MyHttpRequestExtractAdapter(request));
+
+try (Scope scope = tracer.buildSpan("httpServerSpan").asChildOf(extractedContext).startActive(true)) {
+    final Span span = scope.span(); // is a child of http client span in step 1
+    // http server impl...
+}
+
+public class MyHttpRequestExtractAdapter implements TextMap {
+  private final HttpRequest request;
+
+  public HttpRequestExtractAdapter(final HttpRequest request) {
+    this.request = request;
+  }
+
+  @Override
+  public Iterator<Map.Entry<String, String>> iterator() {
+    return request.headers().iterator();
+  }
+
+  @Override
+  public void put(final String key, final String value) {
+    throw new UnsupportedOperationException("This class should be used only with Tracer.extract()!");
+  }
+}
+```
+Notice the above examples only use the OpenTracing classes. Check the [OpenTracing API][1] for more details and information.
 
 [1]: https://github.com/opentracing/opentracing-java
 [2]: /tracing/languages/java/#configuration

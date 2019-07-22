@@ -28,9 +28,6 @@ from os.path import (
     dirname,
 )
 
-CONFIGURATION_FILE = "./local/etc/pull_config.yaml"
-
-
 def cache_by_sha(func):
     """ only downloads fresh file, if we don't have one or we do and the sha has changed """
 
@@ -440,10 +437,10 @@ class PreBuild:
         """
         print(
             "Loading {} configuration file".format(
-                CONFIGURATION_FILE
+                getenv("CONFIGURATION_FILE")
             )
         )
-        configuration = yaml.load(open(CONFIGURATION_FILE))
+        configuration = yaml.load(open(getenv("CONFIGURATION_FILE")))
         for org in configuration:
             for repo in org["repos"]:
                 for content in repo["contents"]:
@@ -678,7 +675,7 @@ class PreBuild:
 
     def pull_and_push_file(self, content):
         """
-        Takes the content from a file from a github repo and 
+        Takes the content from a file from a github repo and
         pushed it to the doc
         :param content: object with a file name and a file path
         """
@@ -845,6 +842,7 @@ class PreBuild:
         and inserts them into the file something.md
         :param file_name: path to a source.py file
         """
+        pass
         for file_name in chain.from_iterable(
             glob.iglob(pattern, recursive=True)
             for pattern in content["globs"]

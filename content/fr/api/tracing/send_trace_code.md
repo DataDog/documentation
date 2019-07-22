@@ -1,7 +1,7 @@
 ---
 title: Envoyer des traces
 type: apicode
-order: 23.1
+order: 32.1
 external_redirect: /api/#envoyer-des-traces
 ---
 
