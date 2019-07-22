@@ -17,7 +17,7 @@ This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Data
 
 ## Overview
 
-Distributions are a new metric type in Agent 6 that aggregate the values that are sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure. This can be thought of as a global version of our existing [Histogram metric type][1], which measures the statistical distribution of values on a single host.
+Distributions are a new metric type in Agent v6 that aggregate the values that are sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure. This can be thought of as a global version of our existing [Histogram metric type][1], which measures the statistical distribution of values on a single host.
 
 Distribution metrics are designed to instrument logical objects, like services, independently from the underlying hosts, and solve the problem created by Agent-level aggregation.
 
@@ -36,15 +36,15 @@ In reality, the global p50 (median) is the median of the combined set: [1,1,1,1,
 
 ### Calculation of percentile aggregations
 
-Like other metric types, such as `gauge` or `histogram`, the  `distribution` metric type has the following 5 aggregations available: `count`, `min`, `max`, `sum`, `avg`. A distribution metric is initially tagged the same way as any other metrics (via custom tags set in code) and are resolved to any host tag based on the host that shipped the metric.
+Like other metric types, such as `gauge` or `histogram`, the  `distribution` metric type has the following aggregations available: `count`, `min`, `max`, `sum`, `avg`. A distribution metric is initially tagged the same way as other metrics (with custom tags set in the code) and are resolved to any host tag based on the host that reported the metric.
 
 A distribution metric, however, has additional percentile aggregations available (`p50`, `p75`, `p90`, `p95`, `p99`). That is, for a distribution metric with percentile aggregations during a 10 second flush interval, the following aggregations are available: `count`, `sum`, `min`, `max`, `avg`, `p50`, `p75`, `p90`, `p95`, and `p99`.
 
 Percentile aggregations can be added in-app at the [Datadog Distribution Metric page][2].
 
-### Customization of Tagging
+### Customization of tagging
 
-This functionality allows you to control tagging for metrics for which host-level granularity is not necessary see [the Distribution Metric page][3] to learn more.
+This functionality allows you to control tagging for metrics for which host-level granularity is not necessary see the [Distribution Metric page][3] to learn more.
 
 ## Submission
 
@@ -67,7 +67,7 @@ duration = time.time() - start_time
 statsd.distribution('http_request.time', duration,'env:dev')
 ```
 
-The above instrumentation calculates the following aggregations: sum, count, average, minimum, maximum. For percentiles, please refer to the [distributions page] [2].
+The above instrumentation calculates the following aggregations: sum, count, average, minimum, and maximum. For percentiles, refer to the [distributions page] [2].
 
 ## Further reading
 

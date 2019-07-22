@@ -15,7 +15,7 @@ This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Data
 
 ## Overview
 
-Distributions are a metric type in Agent 6 that aggregate the values that are sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure server-side.  This can be thought of as a global version of the [Histogram metric][1], which measures at the Agent-level the statistical distribution of values on a single host.
+Distributions are a metric type in Agent v6 that aggregate the values that are sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure server-side.  This can be thought of as a global version of the [Histogram metric][1], which measures at the Agent-level the statistical distribution of values on a single host.
 
 Global distributions are designed to instrument logical objects, like services, independently from the underlying hosts. Unlike histograms which aggregate on the Agent-side, global distributions send all raw data collected during the flush interval and the aggregation occurs server-side. Because the underlying data structure has not been aggregated and represents raw data, distributions provide two major features:
 
@@ -27,7 +27,7 @@ See the [Developer Tools section][2] for more implementation details.
 
 ## Aggregations
 
-Like other metric types, such as `gauges` or `histograms`, distributions have the following 5 aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as any other metric (via custom tags set in code) and are resolved to any host tag based on the host that shipped the metric. Add additional percentile aggregations with the [distribution UI][3]: `p50`, `p75`, `p90`, `p95`, and `p99` for a set of tags (up to 10) you’ve elected to apply:
+Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics (with custom tags set in code) and are resolved to any host tag based on the host that reported the metric. Add additional percentile aggregations with the [distribution UI][3]: `p50`, `p75`, `p90`, `p95`, and `p99` for a set of tags (up to 10) you’ve elected to apply:
 
 {{< img src="graphing/metrics/distributions/global_metrics_selection.png" alt="Distribution Metric UI" responsive="true" style="width:80%;">}}
 
@@ -37,14 +37,14 @@ After electing to apply percentile aggregations on a distribution metric, these 
 
 ## Customize Tagging
 
-Distributions provide new functionality that allows you to control the tagging for metrics for which host-level granularity does not make sense. This is designed to provide you with more value within existing budgets, but there is no additional accuracy or performance benefit/penalty incurred here.
+Distributions provide new functionality that allows you to control the tagging for metrics for which host-level granularity does not make sense. This is designed to provide you with more value within existing budgets, but there is no additional accuracy or performance benefit/penalty incurred.
 
 To customize tagging, hover over your metric in the table, and click on the pencil icon to edit. In the modal that pops up, select *Custom...*. There is a whitelist of the tags you have defined in code by default. You can remove any of these tags or add any host-level tags back in.
 
 {{< img src="graphing/metrics/distributions/distribution_metric.png" alt="Distribution metric" responsive="true" style="width:80%;">}}
 
 ## Case Studies
-Distribution metrics are a new type of metric that allows you to obtain the global distribution values across all hosts. Therefore, metrics that are submitted as distribution metrics create custom metrics the same way other metric types do.
+Distribution metrics are a new type of metric that allows you to obtain the global distribution values across all hosts. Therefore, metrics that are submitted as distribution metrics create custom metrics the same way as other metric types.
 
 `my.service.latency` is a metric that is being submitted on 500 hosts.
 
