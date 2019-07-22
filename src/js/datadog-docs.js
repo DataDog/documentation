@@ -898,9 +898,12 @@ function loadPage(newUrl) {
         var start = window.performance.now();
 
         var contentElement = document.getElementById("mainContent");
-        $("#mainContent").fadeOut(200, "linear", function() {
+
+        $('#mainContent').fadeOut(150, function(){
+            $("#mainContent").hide();
             $(this).replaceWith(newContent);
-          });
+            $('#mainContent').fadeIn(150);
+        });
         
         var end = window.performance.now();
         var time = end - start;
