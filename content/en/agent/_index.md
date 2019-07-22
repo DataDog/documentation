@@ -39,7 +39,7 @@ The Datadog Agent is software that runs on your hosts. It collects events and me
   {{< nextlink href="/agent/basic_agent_usage">}}<u>Basic Agent Usage</u>: Find out more about the Datadog Agent, including architecture details, CLI, overhead, and configuration management tools.{{< /nextlink >}}
   {{< nextlink href="/agent/docker">}}<u>Docker</u>: Install and configure the Datadog Agent on Docker. {{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes">}}<u>Kubernetes</u>: Install and configure the Datadog Agent on Kubernetes.{{< /nextlink >}}
-  {{< nextlink href="/agent/autodiscovery">}}<u>Autodiscovery</u>: Autodiscovery enables you to automatically track which services are running where..{{< /nextlink >}}
+  {{< nextlink href="/agent/autodiscovery">}}<u>Autodiscovery</u>: Autodiscovery enables you to automatically track which services are running where.{{< /nextlink >}}
   {{< nextlink href="/agent/logs">}}<u>Log Collection</u>: Enable and configure log collection in the Datadog Agent.{{< /nextlink >}}
   {{< nextlink href="/agent/proxy">}}<u>Proxy</u>: If your network configuration restricts outbound traffic, use a proxy for Agent traffic.{{< /nextlink >}}
   {{< nextlink href="/agent/faq/upgrade-to-agent-v6">}}<u>Upgrade to Agent v6</u>: Agent 6 is the latest major version of the Datadog Agent. Find out how to upgrade.{{< /nextlink >}}
