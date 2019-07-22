@@ -105,7 +105,17 @@ kubernetes_pod_labels_as_tags:
   app: kube_app
 ```
 
+For Agent v6.8.0+, use the following environment variable configuration to add all pod labels as tags to your metrics. In this example, the tag names are prefixed by `<PREFIX>_`:
+
+```yaml
+kubernetes_pod_labels_as_tags:
+  *: <PREFIX>_%%label%%
+```
+
+**Note**: Using this method may [increase the number of metrics][2] for your organization and impact your billing.
+
 [1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
+[2]: /developers/metrics/custom_metrics/#how-is-a-custom-metric-defined
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
@@ -121,6 +131,15 @@ For example, you could set up:
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
+For Agent v6.8.0+, use the following environment variable configuration to add all pod labels as tags to your metrics. In this example, the tags names are prefixed by `<PREFIX>_`:
+
+```shell
+DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
+```
+
+**Note**: Using this method may [increase the number of metrics][2] for your organization and impact your billing.
+
+[1]: /developers/metrics/custom_metrics/#how-is-a-custom-metric-defined
 {{% /tab %}}
 {{< /tabs >}}
 
