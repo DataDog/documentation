@@ -9,11 +9,10 @@
 ### Preview link
 <!-- Impacted pages preview links-->
 
-<!-- This is the base preview link. This currently only works if you are in the Datadog organization and working off of a branch - it will not work with a fork.
+<!-- This is the base preview link. This currently only works if you are in the Datadog organization and working off of a branch - it will not work with a fork. 
 
-Replace the branch name and add the complete path:
+Replace the branch name and add the complete path: -->
 https://docs-staging.datadoghq.com/<BRANCH_NAME>/<PATH>
--->
 
 ### Additional Notes
 <!-- Anything else we should know when reviewing?-->
