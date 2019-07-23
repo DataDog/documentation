@@ -1,3 +1,7 @@
+// Setup for large screen ToC
+var largeScreenThreshold = 1710;
+var mapping = [];
+
 $(document).ready(function () {
 
     var sidenavHTML = $('.container .sidenav-nav').clone();
@@ -358,13 +362,7 @@ $(document).ready(function () {
     });
 
     //
-    $('#TableOfContents a').on('click', function(e) {
-        var href = $(this).attr('href');
-        if(href.substr(0, 1) === '#') {
-            moveToAnchor(href.substr(1));
-            return false;
-        }
-    });
+    
 
     $('.sidenav-api a').on('click', function(e) {
         var href = $(this).attr('href');
@@ -458,51 +456,7 @@ $(document).ready(function () {
 
     codeTabs();
 
-    // slide to anchors
-    function moveToAnchor(id, animate, amount) {
-        if (animate === undefined) {
-            animate = true;
-        }
-        if (amount === undefined) {
-            // calc from objects instead
-            if($(window).width() <= 991) {
-                // at mobile
-                amount = $('body > header').height();
-                if($('.announcement_banner.open').length) {
-                    amount += $('.announcement_banner.open').height();
-                }
-                $('.api-nav > div').each(function() { amount += $(this).height(); });
-            } else {
-                // at desktop
-                amount = $('body > header').height();
-                if($('.announcement_banner.open').length) {
-                    amount += $('.announcement_banner.open').height();
-                }
-            }
-        }
-        var href = '#'+id;
-        var htag = $(href);
-        var customPadding = 10; // how much till it looks good with eye
-        var offset = amount + customPadding;
-        var url = window.location.href.replace(window.location.hash, '');
-        var newSt = 0 - offset;
-        var currentSt = $(document).scrollTop();
-        if(htag.length) {
-            newSt = htag.offset().top - offset;
-            if(window.scrollY < 64.5){
-                newSt += (64.5 - window.scrollY);
-            }
-            if(currentSt !== newSt) {
-                if(animate) {
-                    $("html, body").animate({scrollTop: newSt}, 300);
-                } else {
-                    $("body, html").scrollTop(newSt);
-                }
-                $(document).trigger( "moveToAnchor" );
-                window.history.pushState(null, null, url + href);
-            }
-        }
-    }
+    
 
     // API page
     if($('.api').length) {
@@ -560,7 +514,288 @@ $(document).ready(function () {
     $(".sidenav-nav a[href^='#']").click(function(){
         moveToAnchor($(this).attr('href').substr(1), true);
     });
+
+
+    // ------------- TODO: move TOC js back to own file when webpack migration complete and can import js modules
+
+    
+
+    // when the page loads, checking the window width
+    widthCheck();
+    tocWidthUpdate();
+    
+    if(innerWidth > largeScreenThreshold && window.scrollY < 60){
+        $('.toc').css('top', 189);
+        $('.mobile-toc-toggle').css('top', 189);
+    }else if(innerWidth > largeScreenThreshold && window.scrollY > 60){
+        $('.toc').css('top', 124.5);
+        $('.mobile-toc-toggle').css('top', 124.5);
+    }
+
+    $(window).on('resize scroll', function(e) {
+        var header_h = $('body > header').height();
+        var top = $('#TableOfContents').position() ? $('#TableOfContents').position().top : 0;
+        var offset = header_h + top;
+        $('.toc').css('maxHeight', document.documentElement.clientHeight - offset);
+    });
+
+    $(window).on('resize', function() {
+        widthCheck();
+        tocWidthUpdate();
+    });
+
+    updateTOC();
+
+    if($('#TableOfContents ul').length) {
+        // when page ready collect mapping of link to headers so we aren't checking the dom all the time
+    
+        $('.mobile-toc-toggle').on('click touch', function () {
+            var icon = $(this).find('i');
+            var open = icon.hasClass('icon-small-x');
+            if(open) {
+                $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
+            } else {
+                $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
+            }
+            $(this).find('i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
+            $( document ).trigger( "headerResize", [ parseInt($('body > header').height()) ] );
+        });
+
+        $(document).on( "moveToAnchor", function() {
+            var open = $('.mobile-toc-toggle i').hasClass('icon-small-x');
+            if(open) {
+                //$('.mobile-toc-toggle').click();
+            }
+        });
+
+        $(window).on('resize scroll', function(e) {
+            onScroll();
+            if($(window).width() > 530 && $(window).width() < largeScreenThreshold) {
+                var bottomOfBrowser = parseInt($(document).scrollTop()) + parseInt($(window).height());
+                var footerTop = $('body > footer').offset().top;
+                if(bottomOfBrowser >= footerTop) {
+                    if(!$('.mobile-toc-toggle').hasClass('d-none')) {
+                        $('.mobile-toc-toggle').toggleClass('d-none');
+                    }
+                    if(!$('.toc-container').hasClass('d-none')) {
+                        $('.mobile-toc-toggle').click();
+                    }
+                } else {
+                    if($('.mobile-toc-toggle').hasClass('d-none')) {
+                        $('.mobile-toc-toggle').toggleClass('d-none');
+                    }
+                }
+            }
+        }).trigger('scroll');
+
+        $(document).on( "headerResize", function( event, height) {
+            var offset = 30;
+            if($('.announcement_banner.open').length) {
+                offset = 60;
+            }
+            $('.mobile-toc-toggle').css('top', height + offset + 'px');
+            $('.toc').css('top', height + offset + 'px');
+        });
+
+        buildTOCMap();
+        onScroll();
+    } else {
+        hideToc();
+    }
+
+    
+
 });
+
+function buildTOCMap() {
+    mapping = [];
+    var link = null;
+    $('#TableOfContents ul a').each(function() {
+        var href = $(this).attr('href');
+        var id = href.replace('#', '').replace(' ','-');
+        var header = $('[id="'+id+'"]');
+        var navParentLinks = $(this).parents('#TableOfContents').find('ul > li').has($(this)).find('> a');
+
+        if(header.length) {
+            if(header.is('h2') || header.is('h3')) {
+                mapping.push({
+                    'navLink': $(this),
+                    'navLinkPrev': link,
+                    'navParentLinks': navParentLinks,
+                    'id': id,
+                    'header': header,
+                    'isH2': header.is('h2'),
+                    'isH3': header.is('h3')
+                });
+            }
+        }
+        link = $(this);
+    });
+}
+
+function onScroll() {
+    var winTop = $(window).scrollTop();
+    var localOffset = 120;
+
+    if($(window).scrollTop() + $(window).height() === $(document).height()) {
+        // we are at the bottom of the screen  just highlight the last item we can
+        $('.toc_open').removeClass('toc_open');
+        $('.toc_scrolled').removeClass('toc_scrolled');
+        var obj = mapping[mapping.length-1];
+        if(obj) {
+            if(obj.isH3) {
+                obj.navParentLinks.each(function() {
+                    var href = $(this).attr('href');
+                    var id = href.replace('#', '').replace(' ','-');
+                    var header = $('[id="'+id+'"]');
+                    if(header.is('h2')) {
+                        $(this).addClass('toc_open');
+                    }
+                });
+                obj.navLink.parent().addClass('toc_scrolled');
+            }
+            if(obj.isH2) {
+                obj.navLink.parent().addClass('toc_scrolled');
+            }
+        }
+    } else {
+        $('.toc_open').removeClass('toc_open');
+        for(var i = 0; i < mapping.length; i++) {
+            var obj = mapping[i];
+            var j = i+1;
+            if(j > mapping.length) { j = 0; }
+            var nextobj = mapping[j];
+            obj.navLink.parent().removeClass('toc_scrolled');
+
+            if( (winTop >= obj.header.offset().top - localOffset) && (typeof(nextobj) === 'undefined' || winTop < nextobj.header.offset().top - localOffset) ) {
+                obj.navLink.parent().addClass('toc_scrolled');
+                // add toc open to parents of this toc_scrolled
+                obj.navParentLinks.each(function() {
+                    var href = $(this).attr('href');
+                    var id = href.replace('#', '').replace(' ','-');
+                    var header = $('[id="'+id+'"]');
+                    if(header.is('h2')) {
+                        $(this).addClass('toc_open');
+                    }
+                });
+            }
+        }
+    }
+}
+
+function hideToc(){
+    // hide toc
+    $('.toc-container > div').hide();
+
+    // hide mobile toc button
+    $('.mobile-toc-toggle').removeClass('d-block').addClass('d-none');
+}
+
+// hiding + displaying the ToC depending on the window width
+function widthCheck(){
+    // if ToC elements exist
+    if($('#TableOfContents ul').length) {
+        if(innerWidth > largeScreenThreshold){
+            if($('.toc-container').hasClass('d-none') && $('.mobile-toc-toggle i').hasClass('icon-small-bookmark')){
+                $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
+                $('.mobile-toc-toggle i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
+            }
+        }else{
+            if($('.toc-container').hasClass('mobile-open') && $('.mobile-toc-toggle i').hasClass('icon-small-x')){
+                $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
+                $('.mobile-toc-toggle i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
+            }
+        }
+    }
+}
+
+// updating ToC width on large screens
+function tocWidthUpdate(){
+    if(innerWidth > largeScreenThreshold){
+        $('.toc-container.mobile-open').css("width", (innerWidth/2)-600 + "px");
+    }
+}
+
+// -------------- end TOC ---------------
+
+function showTOCIcon(){
+   
+    // $('.toc-container').addClass('mobile-open').removeClass('d-none');
+    $('.mobile-toc-toggle').removeClass('d-none');
+    $(this).find('i').addClass('icon-small-x').removeClass('icon-small-bookmark');
+    $( document ).trigger( "headerResize", [ parseInt($('body > header').height()) ] );
+}
+
+
+// slide to anchors
+function moveToAnchor(id, animate, amount) {
+    if (animate === undefined) {
+        animate = true;
+    }
+    if (amount === undefined) {
+        // calc from objects instead
+        if($(window).width() <= 991) {
+            // at mobile
+            amount = $('body > header').height();
+            if($('.announcement_banner.open').length) {
+                amount += $('.announcement_banner.open').height();
+            }
+            $('.api-nav > div').each(function() { amount += $(this).height(); });
+        } else {
+            // at desktop
+            amount = $('body > header').height();
+            if($('.announcement_banner.open').length) {
+                amount += $('.announcement_banner.open').height();
+            }
+        }
+    }
+    var href = '#'+id;
+    var htag = $(href);
+    var customPadding = 10; // how much till it looks good with eye
+    var offset = amount + customPadding;
+    var url = window.location.href.replace(window.location.hash, '');
+    var newSt = 0 - offset;
+    var currentSt = $(document).scrollTop();
+    if(htag.length) {
+        newSt = htag.offset().top - offset;
+        if(window.scrollY < 64.5){
+            newSt += (64.5 - window.scrollY);
+        }
+        if(currentSt !== newSt) {
+            if(animate) {
+                $("html, body").animate({scrollTop: newSt}, 300);
+            } else {
+                $("html, body").animate({scrollTop: newSt}, 300);
+            }
+            // $(document).trigger( "moveToAnchor" );
+            window.history.pushState(null, null, url + href);
+        }
+    }
+}
+
+function updateTOC(){
+
+    // if($('#TableOfContents ul').length) {
+        $('.toc').css('display', 'block');
+        $('#TableOfContents a').on('click', function(e) {
+            var href = $(this).attr('href');
+            if(href.substr(0, 1) === '#') {
+                moveToAnchor(href.substr(1));
+                return false;
+            }
+        });
+        
+    // } else {
+    //     hideToc();
+    // }
+    
+    
+
+    
+}
+
+
+
 
 function codeTabs(){
     if($('.code-tabs').length > 0) {
@@ -721,6 +956,14 @@ function getPathElement(){
         aPath = document.querySelector('.side [data-path*="monitors/guide"]');
     }
 
+    if (path.includes('graphing/widgets')) {
+        aPath = document.querySelector('.side [data-path*="graphing/widgets"]');
+    }
+
+    if (path.includes('graphing/guide')) {
+        aPath = document.querySelector('.side [data-path*="graphing/guide"]');
+    }
+
     if(aPath){
         aPath.classList.add('active');
         hasParentLi(aPath);
@@ -747,6 +990,178 @@ function closeNav(){
         openMenus[i].classList.remove('open');
     }
 }
+
+function updateSidebar(event){
+
+    
+    closeNav();
+   
+
+    getPathElement();
+
+    
+
+    var isLi = ( event.target.nodeName === "LI" ) ? true : false ;
+
+    if(isLi){
+        event.target.querySelector('a').classList.add('active');
+        if(event.target.closest('li').querySelector('ul')){
+            event.target.closest('li').classList.add('open');
+        } 
+    }else{
+        if(event.target.closest('li').querySelector('a')) {
+            event.target.closest('li').querySelector('a').classList.add('active');
+        }
+        
+        
+        // If the target which is clicked has an active element within the same ul menu don't close the open class
+        var isSameMenu = event.target.closest('.open').querySelector('.active');
+
+        if(!isSameMenu){
+            // Get ope navs
+            var openMenus = document.querySelectorAll('.side .sidenav-nav .open');
+            // Remove open classes
+            for(i=0;i<openMenus.length;i++){
+                openMenus[i].classList.remove('open');
+            }
+                                     
+        }
+
+        if(event.target.closest('li').querySelector('ul')){
+            event.target.closest('li').classList.add('open');
+        }
+    }
+};
+
+function loadPage(newUrl) {
+
+    
+
+    // scroll to top of page on new page load
+    window.scroll(0, 0);
+
+    if (document.querySelector('.toc-container.mobile-open')) {
+        document.querySelector('.mobile-toc-toggle').click();
+    }
+    
+
+    var mainContent = document.getElementById("mainContent");
+    var currentTOC = document.getElementById('TableOfContents');
+    mainContent.classList.add('loading');
+
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = function() {
+        // closeTOC();
+        
+        // cancel httprequest if hash is changed to prevent page replacing
+        window.addEventListener('hashchange', function(e){
+            httpRequest.abort();
+        })
+
+        if (httpRequest.readyState !== XMLHttpRequest.DONE){
+            return;
+        }
+
+        var newDocument = httpRequest.responseXML;
+
+        if (newDocument === null){
+            mainContent.classList.remove('loading');
+            return;
+        }
+
+        var newContent = httpRequest.responseXML.getElementById("mainContent");
+        var newTOC = httpRequest.responseXML.getElementById("TableOfContents");
+
+        newContent.classList.add('loading');
+
+        if (newContent === null){
+            mainContent.classList.remove('loading');
+            return;
+        }
+
+        document.title = newDocument.title;
+        
+        var meta = {
+            "itemprop": [
+                "name",
+                "description"
+            ],
+            "name": [
+                "twitter\\:site",
+                "twitter\\:title",
+                "twitter\\:description",
+                "twitter\\:creator",
+            ],
+            "property": [
+                "og\\:title",
+                "og\\:type",
+                "og\\:url",
+                "og\\:image",
+                "og\\:description",
+                "og\\:site_name",
+                "article\\:author"
+            ]
+        };
+
+        var keys = Object.keys(meta);
+        for(i=0;i<keys.length;i++){
+            var key = keys[i];
+            for(k=0;k<meta[key].length;k++){
+                var selectorPart = meta[key][k];
+                try {
+                    if( newDocument.head.querySelector('['+key+'='+selectorPart+']') ){
+                        var content = newDocument.head.querySelector('['+key+'='+selectorPart+'][content]').content;
+                        document.head.querySelector('['+key+'='+selectorPart+'][content]').content = content;
+                    }
+                }catch(e){
+                    console.log(e);
+                }
+            }
+        }
+
+        var start = window.performance.now();
+
+        mainContent.parentElement.replaceChild(newContent, mainContent);
+        mainContent = newContent;
+
+        if (newTOC && currentTOC) {
+            currentTOC.replaceWith(newTOC);
+                buildTOCMap();
+                updateTOC();
+                showTOCIcon();
+        } else if (!newTOC) {
+            hideToc();
+        }
+
+        window.setTimeout(function () {
+            mainContent.classList.remove('loading');
+            
+        }, 1);
+
+        var end = window.performance.now();
+        var time = end - start;
+
+        var pathName = new URL(newUrl).pathname;
+
+        // sets query params if code tabs are present
+
+        codeTabs();
+        // buildTOCMap();
+
+        DD_LOGS.logger.log('html parsed page content inserted',{"timeEnd": time, "pathName": pathName},'info');
+
+        // Gtag virtual pageview
+        gtag('config', '{{ .Site.Params.ga }}', {'page_path': pathName});
+
+        // Marketo
+        Munchkin.munchkinFunction('clickLink', { href: newUrl});
+
+    }; // end onreadystatechange
+
+    httpRequest.responseType = "document";
+    httpRequest.open("GET", newUrl);
+    httpRequest.send();
+};
 
 window.onload = function(){
     getPathElement();
@@ -818,139 +1233,3 @@ window.onpopstate = function (event) {
     getPathElement();
   }
 
-function updateSidebar(event){
-
-    closeNav();
-
-    getPathElement();
-
-    
-
-    var isLi = ( event.target.nodeName === "LI" ) ? true : false ;
-
-    if(isLi){
-        event.target.querySelector('a').classList.add('active');
-        if(event.target.closest('li').querySelector('ul')){
-            event.target.closest('li').classList.add('open');
-        } 
-    }else{
-        if(event.target.closest('li').querySelector('a')) {
-            event.target.closest('li').querySelector('a').classList.add('active');
-        }
-        
-        
-        // If the target which is clicked has an active element within the same ul menu don't close the open class
-        var isSameMenu = event.target.closest('.open').querySelector('.active');
-
-        if(!isSameMenu){
-            // Get ope navs
-            var openMenus = document.querySelectorAll('.side .sidenav-nav .open');
-            // Remove open classes
-            for(i=0;i<openMenus.length;i++){
-                openMenus[i].classList.remove('open');
-            }
-                                     
-        }
-
-        if(event.target.closest('li').querySelector('ul')){
-            event.target.closest('li').classList.add('open');
-        }
-    }
-};
-
-function loadPage(newUrl) {
-
-    var mainContent = document.getElementById("mainContent");
-    mainContent.classList.add('loading');
-
-    var httpRequest = new XMLHttpRequest();
-    httpRequest.onreadystatechange = function() {
-
-        if (httpRequest.readyState !== XMLHttpRequest.DONE){
-            return;
-        }
-
-        var newDocument = httpRequest.responseXML;
-        if (newDocument === null){
-            mainContent.classList.remove('loading');
-            return;
-        }
-
-        var newContent = httpRequest.responseXML.getElementById("mainContent");
-        newContent.classList.add('loading');
-
-        if (newContent === null){
-            mainContent.classList.remove('loading');
-            return;
-        }
-
-        document.title = newDocument.title;
-        
-        var meta = {
-            "itemprop": [
-                "name",
-                "description"
-            ],
-            "name": [
-                "twitter\\:site",
-                "twitter\\:title",
-                "twitter\\:description",
-                "twitter\\:creator",
-            ],
-            "property": [
-                "og\\:title",
-                "og\\:type",
-                "og\\:url",
-                "og\\:image",
-                "og\\:description",
-                "og\\:site_name",
-                "article\\:author"
-            ]
-        };
-
-        var keys = Object.keys(meta);
-        for(i=0;i<keys.length;i++){
-            var key = keys[i];
-            for(k=0;k<meta[key].length;k++){
-                var selectorPart = meta[key][k];
-                try {
-                    if( newDocument.head.querySelector('['+key+'='+selectorPart+']') ){
-                        var content = newDocument.head.querySelector('['+key+'='+selectorPart+'][content]').content;
-                        document.head.querySelector('['+key+'='+selectorPart+'][content]').content = content;
-                    }
-                }catch(e){
-                    console.log(e);
-                }
-            }
-        }
-
-        var start = window.performance.now();
-
-        mainContent.parentElement.replaceChild(newContent, mainContent);
-        mainContent = newContent;
-
-        window.setTimeout(function () {
-            mainContent.classList.remove('loading');
-        }, 1);
-
-        var end = window.performance.now();
-        var time = end - start;
-
-        var pathName = new URL(newUrl).pathname;
-
-        codeTabs();
-
-        DD_LOGS.logger.log('html parsed page content inserted',{"timeEnd": time, "pathName": pathName},'info');
-
-        // Gtag virtual pageview
-        gtag('config', '{{ .Site.Params.ga }}', {'page_path': pathName});
-
-        // Marketo
-        Munchkin.munchkinFunction('clickLink', { href: newUrl});
-
-    }; // end onreadystatechange
-
-    httpRequest.responseType = "document";
-    httpRequest.open("GET", newUrl);
-    httpRequest.send();
-};
