@@ -32,7 +32,7 @@ supported_os:
 Extrayez des métriques custom depuis n'importe quel endpoint Prometheus.
 
 <div class="alert alert-warning">
-Toutes les métriques récupérées par cette intégration sont considérées comme des [métriques custom][7].
+Toutes les métriques récupérées par cette intégration sont considérées comme des [métriques custom][1].
 </div>
 
 ## Implémentation
@@ -55,7 +55,7 @@ Chaque instance est au minimum composée des paramètres suivants :
 
 Lors de l'établissement de la liste de métriques, il est possible d'utiliser le wildcard `*` comme suit : `- <NOM_MÉTRIQUE>*` pour récupérer toutes les métriques correspondantes. **Remarque :** utilisez prudemment ce wildcard, car il peut entraîner l'envoi de nombreuses métriques custom.
 
-D'autres paramètres plus avancés (ssl, labels joining, tags personnalisés, etc.) sont documentés dans le [fichier d'exemple prometheus.d/conf.yaml][1]
+D'autres paramètres plus avancés (ssl, labels joining, tags personnalisés, etc.) sont documentés dans le [fichier d'exemple prometheus.d/conf.yaml][2]
 
 En raison de la nature de cette intégration, il est possible d'envoyer un nombre élevé de métriques custom à Datadog. Pour permettre aux utilisateurs de contrôler le nombre maximal de métriques envoyées en cas d'erreur de configuration ou de changement dans une entrée, le check présente une limite par défaut de 2 000 métriques. Cette limite peut être augmentée en définissant l'option `max_returned_metrics` dans le fichier `prometheus.d/conf.yaml` si vous le souhaitez.
 
@@ -63,7 +63,7 @@ Si `send_monotonic_counter: True`, l'Agent envoie les deltas des valeurs en ques
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][2] et cherchez `prometheus` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][3] et cherchez `prometheus` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -78,21 +78,21 @@ Le check Prometheus n'inclut aucun événement.
 Le check Prometheus n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
+Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 ## Pour aller plus loin
 
-* [Présentation de l'assistance Prometheus pour l'Agent Datadog 6][4]
-* [Configurer un check Prometheus][5]
-* [Écrire un check Prometheus custom][6]
+* [Prometheus rejoint la liste des services pris en charge par l'Agent Datadog 6][5]
+* [Configurer un check Prometheus][6]
+* [Écrire un check Prometheus personnalisé][7]
 
-[1]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[3]: https://docs.datadoghq.com/fr/help
-[4]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
-[5]: https://docs.datadoghq.com/fr/agent/prometheus
-[6]: https://docs.datadoghq.com/fr/developers/prometheus
-[7]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics
+[1]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics
+[2]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[4]: https://docs.datadoghq.com/fr/help
+[5]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
+[6]: https://docs.datadoghq.com/fr/agent/prometheus
+[7]: https://docs.datadoghq.com/fr/developers/prometheus
 
 
 {{< get-dependencies >}}

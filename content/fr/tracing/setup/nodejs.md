@@ -100,47 +100,47 @@ Pour découvrir comment activer et configurer des plug-ins, consultez la [docume
 
 | Module           | Versions | Type de prise en charge    | Remarques                                      |
 |------------------|----------|-----------------|--------------------------------------------|
-| [connect][45]    | `>=2`    | Complète |                                            |
-| [express][10]    | `>=4`    | Complète | Prend en charge Sails, Loopback et [plus encore][11]   |
-| [fastify][47]    | `>=1`    | Complète |                                            |
-| [graphql][12]    | `>=0.10` | Complète | Prend en charge Apollo Server et express-graphql |
-| [hapi][13]       | `>=2`    | Complète |                                            |
-| [koa][14]        | `>=2`    | Complète |                                            |
-| [paperplane][41] | `>=2.3`  | Complète | Non pris en charge en [mode sans serveur][42]     |
-| [restify][15]    | `>=3`    | Complète |                                            |
+| [connect][45]    | `>=2`    | Prise en charge complète |                                            |
+| [express][10]    | `>=4`    | Prise en charge complète | Prend en charge Sails, Loopback et [plus encore][11]   |
+| [fastify][47]    | `>=1`    | Prise en charge complète |                                            |
+| [graphql][12]    | `>=0.10` | Prise en charge complète | Prend en charge Apollo Server et express-graphql |
+| [hapi][13]       | `>=2`    | Prise en charge complète |                                            |
+| [koa][14]        | `>=2`    | Prise en charge complète |                                            |
+| [paperplane][41] | `>=2.3`  | Prise en charge complète | Non pris en charge en [mode sans serveur][42]     |
+| [restify][15]    | `>=3`    | Prise en charge complète |                                            |
 
 #### Compatibilité des modules natifs
 
 | Module      | Type de prise en charge    |
 |-------------|-----------------|
-| [dns][16]   | Complète |
-| [http][17]  | Complète |
-| [https][18] | Complète |
-| [net][19]   | Complète |
+| [dns][16]   | Prise en charge complète |
+| [http][17]  | Prise en charge complète |
+| [https][18] | Prise en charge complète |
+| [net][19]   | Prise en charge complète |
 
 #### Compatibilité des datastores
 
 | Module                 | Versions | Type de prise en charge    | Remarques                                            |
 |------------------------|----------|-----------------|--------------------------------------------------|
-| [cassandra-driver][20] | `>=3`    | Complète |                                                  |
-| [elasticsearch][21]    | `>=10`   | Complète | Prend en charge `@elastic/elasticsearch` versions `>=5` |
-| [ioredis][22]          | `>=2`    | Complète |                                                  |
-| [knex][40]             | `>=0.8`  | Complète | Cette intégration est uniquement pour la propagation en contexte |
-| [memcached][23]        | `>=2.2`  | Complète |                                                  |
-| [mongodb-core][24]     | `>=2`    | Complète | Prend en charge Mongoose                                |
-| [mysql][25]            | `>=2`    | Complète |                                                  |
-| [mysql2][26]           | `>=1`    | Complète |                                                  |
-| [pg][27]               | `>=4`    | Complète | Prend en charge `pg-native` si utilisé avec `pg`         |
-| [redis][28]            | `>=0.12` | Complète |                                                  |
-| [tedious][46]          | `>=1`    | Complète | Pilote SQL Server pour `mssql` et `sequelize`    |
+| [cassandra-driver][20] | `>=3`    | Prise en charge complète |                                                  |
+| [elasticsearch][21]    | `>=10`   | Prise en charge complète | Prend en charge `@elastic/elasticsearch` versions `>=5` |
+| [ioredis][22]          | `>=2`    | Prise en charge complète |                                                  |
+| [knex][40]             | `>=0.8`  | Prise en charge complète | Cette intégration est uniquement pour la propagation en contexte |
+| [memcached][23]        | `>=2.2`  | Prise en charge complète |                                                  |
+| [mongodb-core][24]     | `>=2`    | Prise en charge complète | Prend en charge Mongoose                                |
+| [mysql][25]            | `>=2`    | Prise en charge complète |                                                  |
+| [mysql2][26]           | `>=1`    | Prise en charge complète |                                                  |
+| [pg][27]               | `>=4`    | Prise en charge complète | Prend en charge `pg-native` si utilisé avec `pg`         |
+| [redis][28]            | `>=0.12` | Prise en charge complète |                                                  |
+| [tedious][46]          | `>=1`    | Prise en charge complète | Pilote SQL Server pour `mssql` et `sequelize`    |
 
 #### Compatibilité des workers
 
 | Module             | Versions | Type de prise en charge    | Remarques                                                  |
 |--------------------|----------|-----------------|--------------------------------------------------------|
-| [amqp10][29]       | `>=3`    | Complète | Prend en charge les agents AMQP 1.0 (p. ex. ActiveMQ, Apache Qpid) |
-| [amqplib][30]      | `>=0.5`  | Complète | Prend en charge les agents AMQP 0.9 (p. ex. RabbitMQ, Apache Qpid) |
-| [generic-pool][31] | `>=2`    | Complète |                                                        |
+| [amqp10][29]       | `>=3`    | Prise en charge complète | Prend en charge les agents AMQP 1.0 (p. ex. ActiveMQ, Apache Qpid) |
+| [amqplib][30]      | `>=0.5`  | Prise en charge complète | Prend en charge les agents AMQP 0.9 (p. ex. RabbitMQ, Apache Qpid) |
+| [generic-pool][31] | `>=2`    | Prise en charge complète |                                                        |
 | [kafka-node][32]   |          | Disponible prochainement     |                                                        |
 | [rhea][33]         |          | Disponible prochainement     |                                                        |
 
@@ -148,19 +148,19 @@ Pour découvrir comment activer et configurer des plug-ins, consultez la [docume
 
 | Module           | Versions  | Type de prise en charge    |
 |------------------|-----------|-----------------|
-| [bluebird][34]   | `>=2`     | Complète |
-| [promise][43]    | `>=7`     | Complète |
-| [promise-js][44] | `>=0.0.3` | Complète |
-| [q][35]          | `>=1`     | Complète |
-| [when][36]       | `>=3`     | Complète |
+| [bluebird][34]   | `>=2`     | Prise en charge complète |
+| [promise][43]    | `>=7`     | Prise en charge complète |
+| [promise-js][44] | `>=0.0.3` | Prise en charge complète |
+| [q][35]          | `>=1`     | Prise en charge complète |
+| [when][36]       | `>=3`     | Prise en charge complète |
 
 #### Compatibilité des enregistreurs
 
 | Module        | Versions | Type de prise en charge    |
 |---------------|----------|-----------------|
-| [bunyan][37]  | `>=1`    | Complète |
-| [pino][38]    | `>=2`    | Complète |
-| [winston][39] | `>=1`    | Complète |
+| [bunyan][37]  | `>=1`    | Prise en charge complète |
+| [pino][38]    | `>=2`    | Prise en charge complète |
+| [winston][39] | `>=1`    | Prise en charge complète |
 
 ## Pour aller plus loin
 
