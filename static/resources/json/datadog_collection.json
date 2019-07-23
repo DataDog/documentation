@@ -858,58 +858,6 @@
 							"body": "{\n    \"comment\": {\n        \"resource\": \"/api/v1/comments/4889128764784349185\",\n        \"url\": \"/event/event?id=4889128764784349185\",\n        \"handle\": \"test_1@datadoghq.com\",\n        \"message\": \"<MESSAGE_REPLIED_TO_COMMENT>\",\n        \"related_event_id\": \"4889126983613267970\",\n        \"id\": 4889128764784349185\n    }\n}"
 						}
 					]
-				},
-				{
-					"name": "Delete a Comment",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/comments/:COMMENT_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
-							"protocol": "https",
-							"host": [
-								"api",
-								"datadoghq",
-								"{{datadog_site}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"comments",
-								":COMMENT_ID"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{datadog_api_key}}",
-									"description": "Your Datadog API key"
-								},
-								{
-									"key": "application_key",
-									"value": "{{datadog_application_key}}",
-									"description": "Your Datadog application key"
-								}
-							],
-							"variable": [
-								{
-									"key": "COMMENT_ID",
-									"value": "<EVENT_ID>",
-									"description": "ID of the comment to edit."
-								}
-							]
-						},
-						"description": "### Overview\n\nThiscall allows for you to DELETE a previously posted comment by with a given <COMMENT_ID>.\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
-					},
-					"response": []
 				}
 			],
 			"description": "Comments are how discussion happens on Datadog. Create, edit, delete and reply to comments.",
@@ -3879,176 +3827,6 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"event\": {\n        \"date_happened\": 1555676790,\n        \"alert_type\": \"info\",\n        \"resource\": \"/api/v1/events/4889114353672951410\",\n        \"title\": \"<EVENT_TITLE>\",\n        \"url\": \"/event/event?id=4889114353672951410\",\n        \"text\": \"<EVENT_TEXT>\",\n        \"tags\": [\n            \"tag_key_:_tag_value\"\n        ],\n        \"device_name\": null,\n        \"priority\": \"normal\",\n        \"host\": null,\n        \"id\": 4889114353672951410\n    }\n}"
-						}
-					]
-				},
-				{
-					"name": "Delete an Event",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"title\":\"Something big happened!\",\n\"text\":\"And let me tell you all about it here!\",\n\"tags\":\"environment:prod\"\n}"
-						},
-						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/events/:EVENT_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
-							"protocol": "https",
-							"host": [
-								"api",
-								"datadoghq",
-								"{{datadog_site}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"events",
-								":EVENT_ID"
-							],
-							"query": [
-								{
-									"key": "api_key",
-									"value": "{{datadog_api_key}}",
-									"description": "Your Datadog API key"
-								},
-								{
-									"key": "application_key",
-									"value": "{{datadog_application_key}}",
-									"description": "Your Datadog application key"
-								}
-							],
-							"variable": [
-								{
-									"key": "EVENT_ID",
-									"value": "<EVENT_ID>",
-									"description": "ID of the event to delete"
-								}
-							]
-						},
-						"description": "### Overview\n\nDELETE event details by event_id\n\n### Arguments\n\nThis endpoint takes no JSON arguments."
-					},
-					"response": [
-						{
-							"name": "200 - OK",
-							"originalRequest": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"title\":\"Something big happened!\",\n\"text\":\"And let me tell you all about it here!\",\n\"tags\":\"environment:prod\"\n}"
-								},
-								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/events/:EVENT_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
-									"protocol": "https",
-									"host": [
-										"app",
-										"datadoghq",
-										"com"
-									],
-									"path": [
-										"api",
-										"v1",
-										"events",
-										":EVENT_ID"
-									],
-									"query": [
-										{
-											"key": "api_key",
-											"value": "{{datadog_api_key}}",
-											"description": "Your Datadog API key"
-										},
-										{
-											"key": "application_key",
-											"value": "{{datadog_application_key}}",
-											"description": "Your Datadog application key"
-										}
-									],
-									"variable": [
-										{
-											"key": "EVENT_ID",
-											"value": "4889114353672951410",
-											"description": "ID of the event to delete"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Date",
-									"value": "Fri, 19 Apr 2019 12:27:48 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Vary",
-									"value": "Accept-Encoding"
-								},
-								{
-									"key": "Pragma",
-									"value": "no-cache"
-								},
-								{
-									"key": "Cache-Control",
-									"value": "no-cache"
-								},
-								{
-									"key": "Set-Cookie",
-									"value": "DD-PSHARD=211; Max-Age=604800; Path=/; expires=Fri, 26-Apr-2019 12:27:48 GMT; secure; HttpOnly"
-								},
-								{
-									"key": "X-DD-VERSION",
-									"value": "35.1246853"
-								},
-								{
-									"key": "X-DD-Debug",
-									"value": "pEh3gYWQMYdKVVOh5Pkm23Q0brswOQx0EZl2X7y7zdDnXrgUIeNhlDkso3nnYL6e"
-								},
-								{
-									"key": "Content-Encoding",
-									"value": "gzip"
-								},
-								{
-									"key": "DD-POOL",
-									"value": "dogweb_sameorig"
-								},
-								{
-									"key": "X-Frame-Options",
-									"value": "SAMEORIGIN"
-								},
-								{
-									"key": "X-Content-Type-Options",
-									"value": "nosniff"
-								},
-								{
-									"key": "Strict-Transport-Security",
-									"value": "max-age=15724800;"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"deleted_event_id\": \"4889114353672951410\"\n}"
 						}
 					]
 				},
@@ -8151,7 +7929,18 @@
 					"name": "Update Pipeline Order",
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pipeline_ids\": [\n        \"<PIPELINE_1_ID>\",\n        \"<PIPELINE_2_ID>\",\n        \"<PIPELINE_3_ID>\"\n    ]\n}"
+						},
 						"url": {
 							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipeline-order?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
@@ -8280,7 +8069,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n    \"name\": \"<PIPELINE_NAME>\",\n    \"is_enabled\": true,\n    \"filter\": {\n        \"query\": \"<PIPELINE_QUERY>\"\n    },\n    \"processors\": [\n        {\n            \"name\": \"Define date as the official timestamp of the log\",\n            \"is_enabled\": true,\n            \"sources\": [\n                \"date\"\n            ],\n            \"type\": \"date-remapper\"\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipelines?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
@@ -8316,7 +8105,18 @@
 					"name": "Update a Pipeline",
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"<PIPELINE_NAME>\",\n    \"is_enabled\": true,\n    \"filter\": {\n        \"query\": \"<PIPELINE_QUERY>\"\n    },\n    \"processors\": [\n        {\n            \"name\": \"Define date as the official timestamp of the log\",\n            \"is_enabled\": true,\n            \"sources\": [\n                \"date\"\n            ],\n            \"type\": \"date-remapper\"\n        }\n    ]\n}"
+						},
 						"url": {
 							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs/config/pipelines/:PIPELINE_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
