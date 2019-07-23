@@ -78,8 +78,7 @@ To filter on all logs with a line number above 150 use the following query: `@li
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-
+<br>
 *Logging without limits is a trademark of Datadog, Inc. 
 
 [1]: /logs/processing/pipelines

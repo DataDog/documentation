@@ -58,7 +58,7 @@ Datadog would love to receive your feedback on this feature. You can submit your
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
+<br>
 *Logging without limits is a trademark of Datadog, Inc. 
 
 [1]: /logs/logging_without_limits

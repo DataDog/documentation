@@ -16,7 +16,7 @@ further_reading:
   text: "Learn more about parsing"
 - link: "https://www.datadoghq.com/blog/logging-without-limits/"
   tag: "Blog"
-  text: "Logging without limits blogpost"
+  text: "Logging without limits* blogpost"
 ---
 
 {{< vimeo 293195142 >}}
@@ -142,7 +142,7 @@ Enable or disable them in one click in the Pipeline page:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
+<br>
 *Logging without limits is a trademark of Datadog, Inc. 
 
 [1]: /logs/processing

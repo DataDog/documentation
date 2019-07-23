@@ -8,7 +8,7 @@ further_reading:
   text: "Log Explorer"
 - link: "logs/logging_without_limits"
   tag: "Documentation"
-  text: "Logging without Limits"
+  text: "Logging without Limits*"
 ---
 
 ## Archives
@@ -30,5 +30,5 @@ Note: only Datadog users with admin status can create, modify, or delete log arc
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
+<br>
 *Logging without limits is a trademark of Datadog, Inc. 

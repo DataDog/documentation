@@ -116,7 +116,7 @@ Datadog only supports rehydrating from archives that have been configured to use
 ### Feedback
 
 Datadog would love to receive your feedback on this feature, especially as it is in early beta. You can submit your feedback directly [from this form][11].
-
+<br>
 *Logs Rehydration is a trademark of Datadog, Inc. 
 
 [1]: /logs/explorer
