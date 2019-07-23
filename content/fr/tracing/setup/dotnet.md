@@ -3,7 +3,7 @@ title: Tracer des applications .NET
 kind: documentation
 aliases:
   - /fr/tracing/dotnet
-  - /fr/tracing/languages/dotnet
+  - /fr/tracing/language/dotnet
   - /fr/agent/apm/dotnet/
 further_reading:
   - link: 'https://github.com/DataDog/dd-trace-dotnet'
@@ -286,14 +286,14 @@ ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
 
 ### Configuration
 
-En plus des paramètres énumérés dans [Débuter][10], les tableaux suivants présentent les variables de configuration spécifiques à l'instrumentation automatique. La première colonne indique le nom utilisé dans les variables d'environnement ou les fichiers de configuration. La deuxième colonne indique le nom de la propriété dans la classe `TracerSettings`. Vous pouvez accéder à ces propriétés dans le code à l'aide de `Tracer.Instance.Settings`.
+En plus des paramètres énumérés dans [Débuter][3], les tableaux suivants présentent les variables de configuration spécifiques à l'instrumentation automatique. La première colonne indique le nom utilisé dans les variables d'environnement ou les fichiers de configuration. La deuxième colonne indique le nom de la propriété dans la classe `TracerSettings`. Vous pouvez accéder à ces propriétés dans le code à l'aide de `Tracer.Instance.Settings`.
 
 Nom du paramètre                 | Nom de la propriété              | Description                                                                                                                                                                                                                                                        |
 -----------------------------| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-`DD_DISABLED_INTEGRATIONS`   | `DisabledIntegrationNames` | Définit une liste des intégrations à désactiver. Toutes les autres intégrations restent activées. Si cette propriété n'est pas définie, toutes les intégrations sont activées. Accepte plusieurs valeurs séparées par des points-virgules. Les valeurs valides sont les noms d'intégration énumérés dans la section [Intégrations][3] ci-dessous. |
+`DD_DISABLED_INTEGRATIONS`   | `DisabledIntegrationNames` | Définit une liste des intégrations à désactiver. Toutes les autres intégrations restent activées. Si cette propriété n'est pas définie, toutes les intégrations sont activées. Accepte plusieurs valeurs séparées par des points-virgules. Les valeurs valides sont les noms d'intégration énumérés dans la section [Intégrations][4] ci-dessous. |
 `DD_TRACE_ANALYTICS_ENABLED` | `AnalyticsEnabled`         | Raccourci qui active les paramètres d'analyse et de recherche de trace par défaut pour les intégrations de framework Web. Valeurs acceptées : `true` ou `false` (par défaut)                                                                                                                  |
 
-Le tableau suivant énumère les paramètres pouvant être utilisés sur une intégration spécifique. La première colonne indique le nom utilisé dans les variables d'environnement ou les fichiers de configuration. La deuxième colonne indique le nom de la propriété dans la classe `IntegrationSettings`. Vous pouvez accéder à ces propriétés dans le code à l'aide de `Tracer.Instance.Settings.Integrations["<INTÉGRATION>"]`. Les noms d'intégration sont énumérés dans la section [Intégrations][3] ci-dessous.
+Le tableau suivant énumère les paramètres pouvant être utilisés sur une intégration spécifique. La première colonne indique le nom utilisé dans les variables d'environnement ou les fichiers de configuration. La deuxième colonne indique le nom de la propriété dans la classe `IntegrationSettings`. Vous pouvez accéder à ces propriétés dans le code à l'aide de `Tracer.Instance.Settings.Integrations["<INTÉGRATION>"]`. Les noms d'intégration sont énumérés dans la section [Intégrations][4] ci-dessous.
 
 Nom du paramètre                             | Nom de la propriété              | Description                                                                                                                        |
 ---------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
@@ -310,9 +310,9 @@ Le traceur .NET prend en charge l'instrumentation automatique sur les runtimes s
 | Framework .NET         | 4.5+     | Windows         |
 | Core .NET <sup>1</sup> | 2.0+     | Windows, Linux  |
 
-<sup>1</sup> Les versions 2.1.0, 2.1.1, et 2.1.2 de Core .NET souffrent d'un problème qui peut empêcher les profileurs de fonctionner correctement. Ce problème est résolu dans Core .NET 2.1.3. Consultez [ce problème GitHub][4] pour en savoir plus.
+<sup>1</sup> Les versions 2.1.0, 2.1.1, et 2.1.2 de Core .NET souffrent d'un problème qui peut empêcher les profileurs de fonctionner correctement. Ce problème est résolu dans Core .NET 2.1.3. Consultez [ce problème GitHub][5] pour en savoir plus.
 
-Votre framework préféré n'est pas disponible ? Datadog élargit continuellement la liste des frameworks pris en charge. Contactez l'[équipe Datadog][5] pour obtenir de l'aide.
+Votre framework préféré n'est pas disponible ? Datadog élargit continuellement la liste des frameworks pris en charge. Contactez l'[équipe Datadog][6] pour obtenir de l'aide.
 
 ### Intégrations
 
@@ -335,17 +335,17 @@ Le traceur .NET peut instrumenter automatiquement les bibliothèques suivantes 
 
 Remarques :
 
-<sup>1</sup> L'intégration `AspNet` permet l'instrumentation de n'importe quelle application ASP.NET basée sur `System.Web.HttpApplication`, notamment les applications développées avec Web Forms, MVC, API Web et d'autres frameworks Web. Pour activer l'intégration `AspNet`, vous devez ajouter le paquet NuGet [`Datadog.Trace.ClrProfiler.Managed`][9] à votre application.
+<sup>1</sup> L'intégration `AspNet` permet l'instrumentation de n'importe quelle application ASP.NET basée sur `System.Web.HttpApplication`, notamment les applications développées avec Web Forms, MVC, API Web et d'autres frameworks Web. Pour activer l'intégration `AspNet`, vous devez ajouter le paquet NuGet [`Datadog.Trace.ClrProfiler.Managed`][7] à votre application.
 
 <sup>2</sup> L'intégration ADO.NET tente d'instrumenter **tous** les fournisseurs ADO.NET. Datadog a testé SQL Server (`System.Data.SqlClient`) et PostgreSQL (`Npgsql`). Les autres fournisseurs (MySQL, SQLite, Oracle) n'ont pas été testés mais devraient fonctionner.
 
-Votre framework préféré n'est pas disponible ? Datadog élargit continuellement la liste des frameworks pris en charge. Contactez l'[équipe Datadog][5] pour obtenir de l'aide.
+Votre framework préféré n'est pas disponible ? Datadog élargit continuellement la liste des frameworks pris en charge. Contactez l'[équipe Datadog][6] pour obtenir de l'aide.
 
 ## Instrumentation manuelle
 
-Pour instrumenter manuellement votre code, ajoutez le [paquet NuGet][6] `Datadog.Trace` à votre application. Dans votre code, accédez au traceur global via la propriété `Datadog.Trace.Tracer.Instance` pour créer de nouvelles spans.
+Pour instrumenter manuellement votre code, ajoutez le [paquet NuGet][8] `Datadog.Trace` à votre application. Dans votre code, accédez au traceur global via la propriété `Datadog.Trace.Tracer.Instance` pour créer de nouvelles spans.
 
-Pour en savoir plus sur l'instrumentation manuelle et l'utilisation de tags personnalisé, consultez la [documentation relative à l'instrumentation manuelle][7].
+Pour en savoir plus sur l'instrumentation manuelle et l'utilisation de tags personnalisé, consultez la [documentation relative à l'instrumentation manuelle][9].
 
 ### Runtimes compatibles
 
@@ -357,7 +357,7 @@ L'instrumentation manuelle est prise en charge sur le Framework .NET 4.5+ pour 
 | Core .NET      | 2.0+     | Windows, Linux, macOS |
 | Mono           | 5.4+     | Windows, Linux, macOS |
 
-Pour en savoir plus sur les plateformes prises en charge, consultez la [documentation relative à .NET Standard][8].
+Pour en savoir plus sur les plateformes prises en charge, consultez la [documentation relative à .NET Standard][10].
 
 ## Modifier le hostname de l'Agent
 
@@ -382,11 +382,11 @@ Tracer.Instance = tracer;
 
 [1]: /fr/agent/apm
 [2]: /fr/tracing/advanced/setting_primary_tags_to_scope/#environment
-[3]: #integrations
-[4]: https://github.com/dotnet/coreclr/issues/18448
-[5]: /fr/help
-[6]: https://www.nuget.org/packages/Datadog.Trace
-[7]: /fr/tracing/advanced/manual_instrumentation/?tab=net
-[8]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
-[9]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
-[10]: #getting-started
+[3]: #getting-started
+[4]: #integrations
+[5]: https://github.com/dotnet/coreclr/issues/18448
+[6]: /fr/help
+[7]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
+[8]: https://www.nuget.org/packages/Datadog.Trace
+[9]: /fr/tracing/advanced/manual_instrumentation/?tab=net
+[10]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support

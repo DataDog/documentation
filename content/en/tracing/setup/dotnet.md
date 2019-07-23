@@ -3,7 +3,7 @@ title: Tracing .NET Applications
 kind: documentation
 aliases:
   - /tracing/dotnet
-  - /tracing/languages/dotnet
+  - /tracing/language/dotnet
   - /agent/apm/dotnet/
 further_reading:
   - link: "https://github.com/DataDog/dd-trace-dotnet"
@@ -287,14 +287,14 @@ ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
 
 ### Configuration
 
-In addition to the settings listed in [Getting Started][10], the following tables list configuration variables specific to automatic instrumentation. The first column indicates the name used in environment variables or configuration files. The second column indicates the name of the propery on the `TracerSettings` class. You can access these properties in the code through `Tracer.Instance.Settings`.
+In addition to the settings listed in [Getting Started][3], the following tables list configuration variables specific to automatic instrumentation. The first column indicates the name used in environment variables or configuration files. The second column indicates the name of the propery on the `TracerSettings` class. You can access these properties in the code through `Tracer.Instance.Settings`.
 
 Setting name                 | Property Name              | Description                                                                                                                                                                                                                                                        |
 -----------------------------| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-`DD_DISABLED_INTEGRATIONS`   | `DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][3] section below. |
+`DD_DISABLED_INTEGRATIONS`   | `DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][4] section below. |
 `DD_TRACE_ANALYTICS_ENABLED` | `AnalyticsEnabled`         | Shorthand that enables default Trace Search and Analytics settings for web framework integrations. Valid values are: `true` or `false` (default).                                                                                                                  |
 
-The following table lists integration-specific settings. The first column indicates the name used in environment variables or configuration files. The second column indicates the name of the propery on the `IntegrationSettings` class. You can access these properties in the code through `Tracer.Instance.Settings.Integrations["<INTEGRATION>"]`. Integration names are listed in the [Integrations][3] section below.
+The following table lists integration-specific settings. The first column indicates the name used in environment variables or configuration files. The second column indicates the name of the propery on the `IntegrationSettings` class. You can access these properties in the code through `Tracer.Instance.Settings.Integrations["<INTEGRATION>"]`. Integration names are listed in the [Integrations][4] section below.
 
 Setting name                             | Property Name              | Description                                                                                                                        |
 ---------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
@@ -311,9 +311,9 @@ The .NET Tracer supports automatic instrumentation on the following runtimes:
 | .NET Framework         | 4.5+     | Windows         |
 | .NET Core <sup>1</sup> | 2.0+     | Windows, Linux  |
 
-<sup>1</sup> There is an issue in .NET Core versions 2.1.0, 2.1.1, and 2.1.2 that can prevent profilers from working correctly. This issue is fixed in .NET Core 2.1.3. See [this GitHub issue][4] for more details.
+<sup>1</sup> There is an issue in .NET Core versions 2.1.0, 2.1.1, and 2.1.2 that can prevent profilers from working correctly. This issue is fixed in .NET Core 2.1.3. See [this GitHub issue][5] for more details.
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
 
 ### Integrations
 
@@ -336,17 +336,17 @@ The .NET Tracer can instrument the following libraries automatically:
 
 Notes:
 
-<sup>1</sup> The `AspNet` integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. To enable the `AspNet` integration, you must add the [`Datadog.Trace.ClrProfiler.Managed`][9] NuGet package to your application.
+<sup>1</sup> The `AspNet` integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. To enable the `AspNet` integration, you must add the [`Datadog.Trace.ClrProfiler.Managed`][7] NuGet package to your application.
 
 <sup>2</sup> The ADO.NET integration tries to instrument **all** ADO.NET providers. Datadog tested SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (MySQL, SQLite, Oracle) are untested but should work.
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
 
 ## Manual Instrumentation
 
-To manually instrument your code, add the `Datadog.Trace` [NuGet package][6] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
+To manually instrument your code, add the `Datadog.Trace` [NuGet package][8] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][7].
+For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][9].
 
 ### Runtime Compatibility
 
@@ -358,7 +358,7 @@ Manual instrumentation is supported on .NET Framework 4.5+ on Windows and on any
 | .NET Core      | 2.0+     | Windows, Linux, macOS |
 | Mono           | 5.4+     | Windows, Linux, macOS |
 
-For more details on supported platforms, see the [.NET Standard documentation][8].
+For more details on supported platforms, see the [.NET Standard documentation][10].
 
 ## Change Agent Hostname
 
@@ -383,11 +383,11 @@ Tracer.Instance = tracer;
 
 [1]: /agent/apm
 [2]: /tracing/advanced/setting_primary_tags_to_scope/#environment
-[3]: #integrations
-[4]: https://github.com/dotnet/coreclr/issues/18448
-[5]: /help
-[6]: https://www.nuget.org/packages/Datadog.Trace
-[7]: /tracing/advanced/manual_instrumentation/?tab=net
-[8]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
-[9]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
-[10]: #getting-started
+[3]: #getting-started
+[4]: #integrations
+[5]: https://github.com/dotnet/coreclr/issues/18448
+[6]: /help
+[7]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
+[8]: https://www.nuget.org/packages/Datadog.Trace
+[9]: /tracing/advanced/manual_instrumentation/?tab=net
+[10]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support

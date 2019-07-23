@@ -144,7 +144,7 @@ Use this in addition to the global configuration for any integrations that submi
 
 Integration names can be found on the [integrations table][1].
 
-[1]: /tracing/languages/java/#integrations
+[1]: /tracing/setup/java/#integrations
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -219,7 +219,7 @@ tracer.use('express', {
 Integration names can be found on the [integrations table][1].
 
 
-[1]: /tracing/languages/nodejs/#integrations
+[1]: /tracing/setup/nodejs/#integrations
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -264,7 +264,7 @@ Use this in addition to the global configuration for any integrations that submi
 Integration names can be found on the [integrations table][1].
 
 
-[1]: /tracing/languages/php/#integrations
+[1]: /tracing/setup/php/#integrations
 {{% /tab %}}
 {{< /tabs >}}
 

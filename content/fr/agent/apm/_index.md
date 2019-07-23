@@ -2,7 +2,7 @@
 title: Configuration de l'APM
 kind: Documentation
 aliases:
-  - /fr/tracing/languages/
+  - /fr/tracing/setup/
   - /fr/tracing/environments/
   - /fr/tracing/setup/environment
   - /fr/tracing/setup/first_class_dimensions
@@ -40,7 +40,7 @@ Pour commencer à tracer votre application :
 2. **Configurez votre environnement** :
   un environnement est un [tag primaire](#tags-primaires) obligatoire utilisé pour englober l'ensemble d'une application APM Datadog. Cela sert notamment à dissocier des métriques des environnements par étape, pour la production, le transit ou encore la pré-production. [Découvrez comment configurer des tags primaires](#tags-primaires).
 
-3. **Instrumentez votre application** :  
+3. **Instrumentez votre application** :
 
   {{< whatsnext desc="Sélectionnez l'un des langages pris en charge suivants :">}}
       {{< nextlink href="tracing/languages/java" tag="Java" >}}Instrumentation avec Java{{< /nextlink >}}

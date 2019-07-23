@@ -42,7 +42,7 @@ public class MyClass {
 ```
 
 
-[1]: /tracing/languages/java/#compatibility
+[1]: /tracing/setup/java/#compatibility
 [2]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -106,7 +106,7 @@ API details of the decorator can be found here:
 
 
 
-[1]: /tracing/languages/python/#compatibility
+[1]: /tracing/setup/python/#compatibility
 [2]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.wrap
 [3]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span
 [4]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#tracer
@@ -222,7 +222,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 ```
 
 
-[1]: /tracing/languages/go/#compatibility
+[1]: /tracing/setup/go/#compatibility
 [2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -242,7 +242,7 @@ span.finish()
 For more information on manual instrumentation, see the [API documentation][2].
 
 
-[1]: /tracing/languages/nodejs/#compatibility
+[1]: /tracing/setup/nodejs/#compatibility
 [2]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -266,7 +266,7 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 ```
 
 
-[1]: /tracing/languages/dotnet/#integrations
+[1]: /tracing/setup/dotnet/#integrations
 {{% /tab %}}
 
 {{% tab "PHP" %}}
@@ -347,7 +347,7 @@ While this [has been deprecated][3] if you are using PHP 7.x, you still may use 
 
 
 
-[1]: /tracing/languages/php/#automatic-instrumentation
+[1]: /tracing/setup/php/#automatic-instrumentation
 [2]: https://github.com/DataDog/dd-trace-php/releases/latest
 [3]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
 [4]: /tracing/advanced/opentracing/?tab=php

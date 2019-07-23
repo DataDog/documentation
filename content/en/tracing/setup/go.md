@@ -3,7 +3,7 @@ title: Tracing Go Applications
 kind: documentation
 aliases:
 - /tracing/go/
-- /tracing/languages/go
+- /tracing/language/go
 - /agent/apm/go/
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
@@ -172,7 +172,7 @@ func main() {
 [5]: /tracing/setup
 [6]: /tracing/setup/docker
 [7]: /agent/kubernetes/daemonset_setup/#trace-collection
-[8]: https://gin-gonic.com/
+[8]: https://gin-gonic.com
 [9]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin
 [10]: http://www.gorillatoolkit.org/pkg/mux
 [11]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux

@@ -3,7 +3,7 @@ title: Tracer des applications Python
 kind: documentation
 aliases:
   - /fr/tracing/python/
-  - /fr/tracing/languages/python/
+  - /fr/tracing/language/python/
   - /fr/agent/apm/python/
 further_reading:
   - link: 'https://github.com/DataDog/dd-trace-py'
