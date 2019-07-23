@@ -59,3 +59,13 @@
       options:
         dest_path: '/agent/basic_agent_usage/'
         file_name: 'heroku.md'
+
+  - repo_name: dd-trace-rb
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/GettingStarted.md'
+      options:
+        dest_path: '/tracing/setup/'
+        file_name: 'ruby.md'
