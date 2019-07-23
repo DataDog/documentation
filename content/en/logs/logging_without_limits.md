@@ -16,7 +16,7 @@ further_reading:
   text: "Learn more about parsing"
 - link: "https://www.datadoghq.com/blog/logging-without-limits/"
   tag: "Blog"
-  text: "Logging without limits* blogpost"
+  text: "Logging without limits*"
 ---
 
 {{< vimeo 293195142 >}}
