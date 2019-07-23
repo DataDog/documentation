@@ -145,7 +145,7 @@ end
 For more details about manual instrumentation, check out the [API documentation][2].
 
 
-[1]: /tracing/languages/ruby/#compatibility
+[1]: /tracing/setup/ruby/#compatibility
 [2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
 {{% /tab %}}
 {{% tab "Go" %}}

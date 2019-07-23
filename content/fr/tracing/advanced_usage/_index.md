@@ -639,7 +639,7 @@ end
 Pour en savoir plus sur l'instrumentation manuelle, consultez la [documentation relative à l'API][2].
 
 
-[1]: /fr/tracing/languages/ruby/#compatibility
+[1]: /fr/tracing/setup/ruby/#compatibility
 [2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -1798,7 +1798,7 @@ end
 
 **Injection automatique d'ID de trace pour les applications Rails par défaut**
 
-Les applications Rails qui sont configurées avec un enregistreur `ActiveSupport::TaggedLogging` peuvent ajouter des ID de trace en tant que tags à la sortie du log. L'enregistreur Rails par défaut applique cette journalisation avec des tags, ce qui simplifie l'ajout de tags de trace. 
+Les applications Rails qui sont configurées avec un enregistreur `ActiveSupport::TaggedLogging` peuvent ajouter des ID de trace en tant que tags à la sortie du log. L'enregistreur Rails par défaut applique cette journalisation avec des tags, ce qui simplifie l'ajout de tags de trace.
 
 Dans le fichier de configuration de votre environnement Rails (p. ex., `config/environments/production.rb`), ajoutez le code suivant :
 
@@ -2193,7 +2193,7 @@ apm_config:
         - client_id
         - product_id
 
-    # Règles d'obfuscation MongoDB. S'appliquent aux spans de type « mongodb », 
+    # Règles d'obfuscation MongoDB. S'appliquent aux spans de type « mongodb »,
     # et plus précisément au tag « mongodb.query ».
     mongodb:
       enabled: true

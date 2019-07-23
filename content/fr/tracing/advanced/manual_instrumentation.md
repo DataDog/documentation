@@ -23,7 +23,7 @@ Grâce à l'instrumentation manuelle, vous pouvez écrire des programmes afin de
 
 SI vous n'utilisez pas une [instrumentation de framework compatible][1], ou si vous souhaitez apporter de la profondeur aux traces de votre application, vous pouvez choisir d'instrumenter manuellement votre code.
 
-Pour ce faire, utilisez l'annotation de traces pour effectuer un tracing simple des appels de méthode, ou l'API OpenTracing pour un tracing plus complexe. 
+Pour ce faire, utilisez l'annotation de traces pour effectuer un tracing simple des appels de méthode, ou l'API OpenTracing pour un tracing plus complexe.
 
 La fonction d'annotation de traces de Datadog est fournie par la [dépendance dd-trace-api][2].
 
@@ -144,7 +144,7 @@ end
 Pour en savoir plus sur l'instrumentation manuelle, consultez la [documentation relative à l'API][2].
 
 
-[1]: /fr/tracing/languages/ruby/#compatibility
+[1]: /fr/tracing/setup/ruby/#compatibility
 [2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
 {{% /tab %}}
 {{% tab "Go" %}}
