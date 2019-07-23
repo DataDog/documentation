@@ -32,7 +32,7 @@ Set up event correlation at design time by editing any graph on both Timeboards 
 
 ### Entire dashboard
 
-{{< img src="graphing/dashboards/open-search-event.png" alt="guides event correlation" responsive="true" style="width:75%;">}}
+{{< img src="graphing/dashboards/event-search.png" alt="guides event correlation" responsive="true" style="width:75%;">}}
 
 Set up event correlation at view time by clicking the *Search Events or Logs* link in the upper left, then select **Events**. Next, type a query in the search box. This replaces any events added at design time, but applies the events to all graphs on that particular dashboard as an overlay. 
 
@@ -42,7 +42,7 @@ Set up event correlation at view time by clicking the *Search Events or Logs* li
 
 Click on the *Search Events or Logs* link in the upper left, then select **Logs**. Next, type a query in the search box. This overlays the frequency of logs on your timeseries widgets. Click on an individual log line to view its full content.
 
-{{< img src="graphing/dashboards/open-search-logs.png" alt="Open Search Logs" responsive="true" style="width:75%;">}}
+{{< img src="graphing/dashboards/log-search.png" alt="Open Search Logs" responsive="true" style="width:75%;">}}
  
 
 ### Jump from a metric to its logs
