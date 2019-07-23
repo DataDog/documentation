@@ -24,7 +24,7 @@ further_reading:
 
 Event Correlation refers to overlaying events on top of a dashboard graph. You can set up correlation at two different times: when you set up the dashboard, or ad-hoc when you view the dashboard.
 
-### On an individual graph (At design time)
+### Individual graphs
 
 {{< img src="graphing/dashboards/guides-eventcorrelation-screenboard.png" alt="guides-eventcorrelation-screenboard" responsive="true" style="width:90%;">}}
 
