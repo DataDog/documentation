@@ -10,7 +10,7 @@ description: "Capture log events from your archives back into Datadog."
 
 ## Overview
 
-Rehydration enables you to capture log events from customer-owned storage-optimized archives back into Datadog's search-optimized [Log Explorer][1], so that you can use Datadog to analyze or investigate log events that are either old or were excluded from indexing.
+Rehydration[^1] enables you to capture log events from customer-owned storage-optimized archives back into Datadog's search-optimized [Log Explorer][1], so that you can use Datadog to analyze or investigate log events that are either old or were excluded from indexing.
 
 ## Historical views
 
@@ -119,6 +119,8 @@ Datadog would love to receive your feedback on this feature, especially as it is
 
 
 
+
+ Rehydration is a trademark of Datadog, Inc. 
 [1]: /logs/explorer
 [2]: https://app.datadoghq.com/logs/pipelines
 [3]: https://app.datadoghq.com/logs/pipelines/historical-views

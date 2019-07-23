@@ -30,3 +30,5 @@ Note: only Datadog users with admin status can create, modify, or delete log arc
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+1. Logging without limits is a trademark of Datadog, Inc.
