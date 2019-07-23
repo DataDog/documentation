@@ -24,7 +24,7 @@ further_reading:
 
 Event Correlation refers to overlaying events on top of a dashboard graph. You can set up correlation at two different times: when you set up the dashboard, or ad-hoc when you view the dashboard.
 
-### On an individual graph (At design Time)
+### On an individual graph (At design time)
 
 {{< img src="graphing/dashboards/guides-eventcorrelation-screenboard.png" alt="guides-eventcorrelation-screenboard" responsive="true" style="width:90%;">}}
 
@@ -32,7 +32,7 @@ Set up event correlation at design time by editing any graph on both Timeboards 
 
 ### On whole dashboard
 
-{{< img src="graphing/dashboards/open-search-event.png" alt="guides event correlation" responsive="true" style="width:90%;">}}
+{{< img src="graphing/dashboards/open-search-event.png" alt="guides event correlation" responsive="true" style="width:75%;">}}
 
 Set up event correlation at view time by clicking on the "Search Events of Logs" link in the upper left hand side of the dashboard, and select "Events". Next, type a query in the search box at the top left of any Timeboard dashboard window. This replaces any events added at design time, but applies the events to all graphs on that particular dashboard as an overlay. 
 
@@ -40,9 +40,10 @@ Set up event correlation at view time by clicking on the "Search Events of Logs"
 
 ### Search for Logs in Timeboards
 
-Overlaying logs in your dashboard is easy. Simply click on the "Search Events of Logs" link in the upper left hand side of the dashboard, and select "Logs".
+Overlaying logs in your dashboard is easy. Click on the "Search Events of Logs" link in the upper left hand side of the dashboard, and select "Logs". This overlays the frequency of logs on your timeseries graphs. Click on the individual log line to view the full content.
 
-{{< img src="graphing/dashboards/open-search-logs.png" alt="Open Search Logs" responsive="true" style="width:90%;">}}
+{{< img src="graphing/dashboards/open-search-logs.png" alt="Open Search Logs" responsive="true" style="width:75%;">}}
+ 
 
 ### Jump from a metric to its logs
 
