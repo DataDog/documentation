@@ -36,7 +36,7 @@ Set up event correlation at design time by editing any graph on both Timeboards 
 
 Set up event correlation at view time by clicking the *Search Events or Logs* link in the upper left, then select **Events**. Next, type a query in the search box. This replaces any events added at design time, but applies the events to all graphs on that particular dashboard as an overlay. 
 
-## Correlation between Logs and Metrics
+## Correlation between logs and metrics
 
 ### Search for logs in timeboards
 
