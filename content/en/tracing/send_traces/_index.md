@@ -2,7 +2,7 @@
 title: Enable trace collection in Datadog
 kind: Documentation
 aliases:
-  - /tracing/languages/
+  - /tracing/setup/
   - /tracing/environments/
   - /tracing/setup/environment
   - /tracing/setup/first_class_dimensions
@@ -27,7 +27,7 @@ To use APM, start by sending your traces to Datadog, and then [configure your en
 
 ## Datadog Agent
 
-APM is enabled by default in Agent 6. Set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][2] if you are sending traces from a nonlocal environment (like a container). 
+APM is enabled by default in Agent 6. Set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][2] if you are sending traces from a nonlocal environment (like a container).
 To get an overview of all the possible settings for APM, take a look at the Agent's [`datadog.example.yaml`][3] configuration file. For all of the metrics sent to Datadog by the Agent, see [APM metrics sent by the Datadog Agent][4]. For more information about the Datadog Agent, see the [Agent documentation][5] or refer to the [`datadog.yaml` configuration template][6].
 
 ## Containers
@@ -72,7 +72,7 @@ There are several ways to specify [an environment][10] when reporting data:
 
 ## Next steps
 
-Next, [Instrument your application][12]. For the full overview of all of the steps to set up APM, see the [APM overview][1]. 
+Next, [Instrument your application][12]. For the full overview of all of the steps to set up APM, see the [APM overview][1].
 
 ## Further Reading
 

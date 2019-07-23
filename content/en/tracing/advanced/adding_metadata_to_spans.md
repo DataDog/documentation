@@ -327,7 +327,7 @@ section for details on how environment variables should be set.
 DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
 ```
 
-[1]: /tracing/languages/php/#configuration
+[1]: /tracing/setup/php/#configuration
 {{% /tab %}}
 {{% tab "C++" %}}
 
