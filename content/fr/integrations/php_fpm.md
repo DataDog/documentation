@@ -47,13 +47,16 @@ supported_os:
 Le check PHP-FPM permet de surveiller l'état de votre pool FPM ainsi que les performances de vos requêtes.
 
 ## Implémentation
-### Installation
 
-Le check PHP-FPM est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs utilisant PHP-FPM.
+Vous trouverez ci-dessous les instructions pour installer et configurer le check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
+### Utilisez ensuite la méthode `lambda_metric` pour envoyer des métriques custom depuis votre fonction vers Datadog :
+
+Le check PHP-FPM est inclus avec le paquet de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos serveurs utilisant PHP-FPM.
 
 ### Configuration
 
-Modifiez le fichier `php_fpm.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple php_fpm.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles :
+Modifiez le fichier `php_fpm.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4]. Consultez le [fichier d'exemple php_fpm.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles :
 
 ```
 init_config:
@@ -79,7 +82,7 @@ Options de configuration :
 * `password` (facultatif) : utilisé si les pages de statut et de ping nécessitent une authentification basique.
 * `http_host` (facultatif) : si votre pool FPM est uniquement accessible via un vhost HTTP spécifique, indiquez-le ici.
 
-[Redémarrez l'Agent][5] pour commencer à envoyer des métriques PHP-FPM à Datadog.
+[Redémarrez l'Agent][6] pour commencer à envoyer des métriques PHP-FPM à Datadog.
 
 #### Pools multiples
 
@@ -125,7 +128,7 @@ instances:
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][6] et cherchez `php_fpm` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][7] et cherchez `php_fpm` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -142,16 +145,17 @@ Le check PHP-FPM n'inclut aucun événement.
 Renvoie CRITICAL si l'Agent n'est pas capable de ping PHP-FPM sur le `ping_url` configuré. Si ce n'est pas le cas, renvoie OK.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/php_fpm/images/phpfpmoverview.png
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/php_fpm/datadog_checks/php_fpm/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/php_fpm/metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
+[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[5]: https://github.com/DataDog/integrations-core/blob/master/php_fpm/datadog_checks/php_fpm/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-core/blob/master/php_fpm/metadata.csv
+[9]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

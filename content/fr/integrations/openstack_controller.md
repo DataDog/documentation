@@ -19,7 +19,7 @@ kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: openstack.
-metric_to_check: openstack.nova.limits.max_total_cores
+metric_to_check: openstack.controller
 name: openstack_controller
 public_title: Intégration Datadog/Openstack_controller
 short_description: 'Surveillez l''utilisation des ressources de vos hyperviseurs et machines virtuelles, ainsi que vos métriques Neutron.'
@@ -63,12 +63,30 @@ L'intégration openstack_controller est conçue pour recueillir des informations
 ## Données collectées
 
 ### Métriques
+{{< get-metrics-from-git "openstack_controller" >}}
 
-Openstack_controller n'inclut aucune métrique.
 
 ### Checks de service
+**openstack.neutron.api.up**
 
-Openstack_controller n'inclut aucun check de service.
+Renvoie `CRITICAL` si l'Agent n'est pas capable d'interroger l'API Neutron, renvoie `UNKNOWN` en cas de problème avec l'API Keystone ou renvoie `OK` pour les autres cas.
+
+**openstack.nova.api.up**
+
+Renvoie `CRITICAL` si l'Agent n'est pas capable d'interroger l'API Nova, renvoie `UNKNOWN` en cas de problème avec l'API Keystone ou renvoie `OK` pour les autres cas.
+
+**openstack.keystone.api.up**
+
+Renvoie `CRITICAL` si l'Agent n'est pas capable d'interroger l'API Keystone. Si ce n'est pas le cas, renvoie `OK`.
+
+**openstack.nova.hypervisor.up**
+
+Renvoie `UNKNOWN` si l'Agent n'est pas capable d'obtenir l'état de l'hyperviseur, renvoie `CRITICAL` si l'hyperviseur est indisponible ou renvoie `OK` pour les autres cas.
+
+**openstack.neutron.network.up**
+
+Renvoie `CRITICAL` si le réseau est indisponible. Si ce n'est pas le cas, renvoie `OK`.
+
 
 ### Événements
 
@@ -83,6 +101,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [5]: https://docs.datadoghq.com/fr/help
+[6]: https://github.com/DataDog/integrations-core/blob/master/openstack_controller/metadata.csv
+
 
 
 {{< get-dependencies >}}

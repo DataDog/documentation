@@ -37,18 +37,42 @@ Recueillez des métriques à partir du service Portworx en temps réel pour :
 
 ### Installation
 
-Le check Portworx n'est **PAS** inclus avec le paquet de l'[Agent Datadog][1].
+Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Portworx sur votre host. Consultez notre guide relatif à l'[installation d'intégrations développées par la communauté][2] pour installer des checks avec une [version < 6.8 de l'Agent][3] ou avec l'[Agent Docker][4] :
 
-Pour installer le check Portworx sur votre host :
+1. Installez le [kit de développement][4].
+2. Clonez le référentiel e integrations-extras :
 
-1. Installez le [kit de développement][2] sur n'importe quelle machine.
-2. Exécutez `ddev release build portworx` pour générer le paquet.
-3. [Téléchargez l'Agent Datadog][2].
-4. Importez l'artefact du build sur tous les hosts avec un Agent et exécutez `datadog-agent integration install -w chemin/vers/portworx/dist/<NOM_ARTEFACT>.whl`.
+    ```
+    git clone https://github.com/DataDog/integrations-extras.git.
+    ```
+
+3. Mettez à jour votre `ddev` config avec le chemin `integrations-extras/` :
+
+    ```
+    ddev config set extras ./integrations-extras
+    ```
+
+4. Pour générer le paquet `portworx`, exécutez :
+
+    ```
+    ddev -e release build portworx
+    ```
+
+5. [Téléchargez et lancez l'Agent Datadog][5].
+6. Exécutez la commande suivante pour installer les intégrations de wheels à l'aide de l'Agent :
+
+    ```
+    datadog-agent integration install -w <PATH_OF_PORTWORX_ARTIFACT_>/<PORTWORX_ARTIFACT_NAME>.whl
+    ```
+
+7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][6].
 
 ### Configuration
 
-Créez un fichier `portworx.yaml` dans le répertoire `conf.d` de l'Agent.
+1. Modifiez le fichier `portworx.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][7] pour commencer à recueillir vos [métriques](#collecte-de-metriques) Portworx.
+  Consultez le [fichier d'exemple portworx.d/conf.yaml][8] pour découvrir toutes les options de configuration disponibles.
+
+2. [Redémarrez l'Agent][9].
 
 #### Collecte de métriques
 
@@ -64,21 +88,13 @@ instances:
 
 Configurez-la de façon à spécifier votre serveur et votre port.
 
-Consultez le [fichier d'exemple portworx.yaml][3] pour découvrir toutes les options de configuration disponibles.
+Consultez le [fichier d'exemple portworx.yaml][10] pour découvrir toutes les options de configuration disponibles.
 
-* [Redémarrez l'Agent][4] pour commencer à envoyer vos métriques Portworx à Datadog.
+* [Redémarrez l'Agent][11] pour commencer à envoyer vos métriques Portworx à Datadog.
 
 ### Validation
 
-Lorsque vous [exécutez la sous-commande `info` de l'Agent][5], voici ce qui s'affiche :
-
-    Checks
-    ======
-
-      portworx
-      -----------------
-        - instance #0 [OK]
-        - Collected 60 metrics, 0 events & 0 service check
+Lorsque vous [exécutez la sous-commande `info` de l'Agent][12], voici ce qui s'affiche :
 
 ## Compatibilité
 
@@ -109,15 +125,22 @@ Vérifiez que le paramètre `url` dans `portworx.yaml` est correctement configur
 
 ## Pour aller plus loin
 
-Consultez [notre blog][7] pour en savoir plus sur la surveillance d'infrastructures et sur toutes les autres intégrations disponibles.
+Consultez [notre blog][14] pour en savoir plus sur la surveillance d'infrastructure et sur toutes les autres intégrations disponibles.
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
-[3]: https://github.com/DataDog/integrations-extras/blob/master/portworx/datadog_checks/portworx/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/faq/agent-status-and-information/
-[6]: https://github.com/DataDog/integrations-extras/blob/master/portworx/metadata.csv
-[7]: https://www.datadoghq.com/blog/
+[1]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
+[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
+[3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
+[4]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
+[5]: https://app.datadoghq.com/account/settings#agent
+[6]: https://docs.datadoghq.com/fr/getting_started/integrations
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[8]: https://github.com/DataDog/integrations-extras/blob/master/portworx/datadog_checks/portworx/data/conf.yaml.example
+[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[10]: https://github.com/DataDog/integrations-extras/blob/master/portworx/datadog_checks/portworx/data/conf.yaml.example
+[11]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
+[12]: https://docs.datadoghq.com/fr/agent/faq/agent-status-and-information
+[13]: https://github.com/DataDog/integrations-extras/blob/master/portworx/metadata.csv
+[14]: https://www.datadoghq.com/blog
 
 
 {{< get-dependencies >}}

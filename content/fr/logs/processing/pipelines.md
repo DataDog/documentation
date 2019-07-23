@@ -56,12 +56,6 @@ Le flux de logs affiche les logs auxquels votre pipeline s'applique :
 
 {{< img src="logs/processing/pipelines/pipeline_filters.png" alt="filtres de pipeline" responsive="true" style="width:80%;">}}
 
-## Limiter l'accès aux pipelines aux administrateurs
-
-Par défaut, tous les utilisateurs peuvent modifier les pipelines. Les administrateurs peuvent activer le mode read-only, ce qui désactive toutes les modifications apportées à vos pipelines par des non-administrateurs. Modifiez ces préférences à tout moment en cliquant sur le verrou ci-dessous :
-
-{{< img src="logs/processing/pipelines/pipeline_lock.png" alt="verrouillage du pipeline" responsive="true" style="width:70%;">}}
-
 ## Pipelines imbriqués
 
 Les pipelines imbriqués sont des pipelines au sein d'un pipeline. Utilisez les pipelines imbriqués pour diviser le processing en deux étapes. Par exemple, vous pouvez commencer par appliquer un filtre de niveau supérieur tel que l'équipe, puis un deuxième niveau de filtrage basé sur l'intégration, le service ou tout autre tag ou attribut.
@@ -79,7 +73,7 @@ Les pipelines imbriqués sont des pipelines au sein d'un pipeline. Utilisez les 
 ### Pipeline d'attribut réservé
 
 Datadog dispose d’[une liste d'attributs réservés][2], tels que `timestamp`, `status`, `host`, `service` et même le `message` de log. Ces attributs ont un comportement spécifique au sein de l'application Datadog.
-Si vous avez des noms d'attributs différents pour ceux qui figurent dans vos logs JSON, utilisez le pipeline des attributs réservés pour remapper l'attribut de vos logs vers un attribut figurant dans la liste des attributs réservés.
+Si les attributs figurant dans vos logs JSON présentent des noms différents, utilisez le pipeline des attributs réservés pour remapper l'attribut de vos logs vers un attribut figurant dans la liste des attributs réservés.
 
 Par exemple, imaginons un service qui génère les logs ci-dessous :
 
@@ -93,7 +87,7 @@ Par exemple, imaginons un service qui génère les logs ci-dessous :
 }
 ```
 
-Accédez au pipeline de l'attribut réservé et remplacez le mappage par défaut par ce qui suit :
+Accédez au pipeline d'attribut réservé et remplacez le mappage par défaut par ce qui suit :
 
 {{< img src="logs/processing/pipelines/reserved_attribute_remapper.png" alt="remappage de l'attribut réservé" responsive="true" style="width:70%;">}}
 
@@ -105,7 +99,7 @@ Si vous souhaitez remapper un attribut vers un des attributs réservés dans un 
 
 ### Pipelines d'intégration
 
-Les pipelines de processing d'intégration de Datadog sont disponibles pour certaines sources lorsqu'elles sont configurées pour recueillir les logs. Ces pipelines sont en mode **read-only** et analysent vos logs en s'adaptant à chaque source. Pour modifier le pipeline d'intégration, clonez-le, puis modifiez le clone :
+Les pipelines de processing d'intégration de Datadog sont disponibles pour certaines sources lorsqu'elles sont configurées pour recueillir les logs. Ces pipelines sont en mode **lecture seule** et analysent vos logs en s'adaptant à chaque source. Pour modifier le pipeline d'intégration, clonez-le, puis modifiez le clone :
 
 {{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="cloner un pipeline" responsive="true" style="width:80%;">}}
 

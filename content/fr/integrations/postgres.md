@@ -47,13 +47,15 @@ Recueillez des métriques du service PostgreSQL en temps réel pour :
 
 ## Implémentation
 
+Vous trouverez ci-dessous les instructions pour installer et configurer le check lors de l'exécution de l'Agent sur un host. Consultez la [documentation Modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
-Le check PostgreSQL est fourni avec l'Agent. Pour commencer à recueillir vos logs et métriques PostgreSQL, [installez l'Agent][2].
+Le check PostgreSQL est fourni avec l'Agent. Pour commencer à recueillir vos logs et métriques PostgreSQL, [installez l'Agent][3].
 
 ### Configuration
 
-Modifiez le fichier `postgres.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) PostgreSQL. Consultez le [fichier d'exemple postgres.d/conf.yam][4] pour découvrir toutes les options de configuration disponibles.
+Modifiez le fichier `postgres.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) PostgreSQL. Consultez le [fichier d'exemple postgres.d/conf.yam][5] pour découvrir toutes les options de configuration disponibles.
 
 #### Préparer Postgres
 
@@ -86,7 +88,7 @@ Une fois invité à saisir un mot de passe, indiquez celui utilisé dans la prem
 
 #### Collecte de métriques
 
-* Modifiez le fichier `postgres.d/conf.yaml` afin de spécifier votre serveur et votre port et de définir les masters à surveiller. Consultez le [fichier d'exemple postgres.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+* Modifiez le fichier `postgres.d/conf.yaml` afin de spécifier votre serveur et votre port et de définir les masters à surveiller. Consultez le [fichier d'exemple postgres.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
 | Option                              | Obligatoire | Description                                                                                                                                                                                        |
 |-------------------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -94,7 +96,6 @@ Une fois invité à saisir un mot de passe, indiquez celui utilisé dans la prem
 | **`password`**                      | Non       | Le mot de passe du compte utilisateur.                                                                                                                                                                 |
 | **`dbname`**                        | Non       | Le nom de la base de données à surveiller.                                                                                                                                                      |
 | **`ssl`**                           | Non       | Valeur par défaut : `False`. Spécifie si une connexion SSL doit être utilisée.                                                                                                                                   |
-| **`use_psycopg2`**                  | Non       | Valeur par défaut : `False`. Définissez cette option sur `True` pour obliger l'Agent Datadog à recueillir les métriques PostgreSQL avec `psycopg2` au lieu de `pg8000`. Remarque : `pyscopg2` ne prend pas en charge les connexions SSL. |
 | **`tags`**                          | Non       | La liste des tags appliqués à l'ensemble des métriques recueillies. Les tags peuvent être des chaînes simples ou des paires clé-valeur.                                                                                                    |
 | **`relations`**                     | Non       | Tous les schémas sont inclus par défaut. Ajoutez des schémas spécifiques à cet endroit pour recueillir des métriques relatives aux relations entre les schémas. Chaque relation génère 10 métriques, ainsi que 10 métriques supplémentaires par index.                |
 | **`collect_function_metrics`**      | Non       | Permet de recueillir des métriques concernant les fonctions PL/pgSQL depuis `pg_stat_user_functions`.                                                                                                                        |
@@ -113,7 +114,7 @@ CREATE VIEW pg_stat_activity_dd AS SELECT * FROM pg_stat_activity();
 grant SELECT ON pg_stat_activity_dd to datadog;
 ```
 
-* [Redémarrez l'Agent][5] pour commencer à envoyer des métriques PostgreSQL à Datadog.
+* [Redémarrez l'Agent][6] pour commencer à envoyer des métriques PostgreSQL à Datadog.
 
 #### Collecte de logs
 
@@ -154,19 +155,19 @@ Par défaut, les logs PostgreSQL sont envoyés vers `stderr` et n'incluent aucun
         #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
         #    name: new_log_start_with_date
   ```
-* Modifiez les valeurs des paramètres `path` et `service` en fonction de votre environnement. Consultez le [fichier d'exemple postgres.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+* Modifiez les valeurs des paramètres `path` et `service` en fonction de votre environnement. Consultez le [fichier d'exemple postgres.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
-* [Redémarrez l'Agent][5].
+* [Redémarrez l'Agent][6].
 
-**Pour en savoir plus sur la collecte de logs, consultez [la documentation relative aux logs][6].**
+**Pour en savoir plus sur la collecte de logs, consultez [la documentation relative aux logs][7].**
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][7] et cherchez `postgres` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][8] et cherchez `postgres` dans la section Checks.
 
 ## Données collectées
 
-Certaines des métriques répertoriées ci-dessous nécessitent une configuration supplémentaire. Consultez le [fichier d'exemple postgres.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+Certaines des métriques répertoriées ci-dessous nécessitent une configuration supplémentaire. Consultez le [fichier d'exemple postgres.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
 ### Métriques
 {{< get-metrics-from-git "postgres" >}}
@@ -184,27 +185,28 @@ Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance Po
 Documentation, liens et articles supplémentaires utiles :
 
 ### FAQ
-* [Comment recueillir des métriques custom avec PostgreSQL][9]
+* [Comment recueillir des métriques custom avec PostgreSQL][10]
 
 ### Articles de blog
-* [Réduire les délais d'exécution des requêtes Postgres par 100 en modifiant une simple ligne][10]
-* [Métriques clés pour la surveillance PostgreSQL][11]
-* [Recueillir des métriques avec les outils de surveillance PostgreSQL][12]
-* [Comment recueillir et surveiller les données PostgreSQL avec Datadog][13]
+* [Réduire les délais d'exécution des requêtes Postgres par 100 en modifiant une simple ligne][11]
+* [Métriques clés pour la surveillance PostgreSQL][12]
+* [Recueillir des métriques avec les outils de surveillance PostgreSQL][13]
+* [Comment recueillir et surveiller les données PostgreSQL avec Datadog][14]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/postgres/images/postgresql_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/logs
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/postgres/metadata.csv
-[9]: https://docs.datadoghq.com/fr/integrations/faq/postgres-custom-metric-collection-explained
-[10]: https://www.datadoghq.com/blog/100x-faster-postgres-performance-by-changing-1-line
-[11]: https://www.datadoghq.com/blog/postgresql-monitoring
-[12]: https://www.datadoghq.com/blog/postgresql-monitoring-tools
-[13]: https://www.datadoghq.com/blog/collect-postgresql-data-with-datadog
+[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[5]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/fr/logs
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[9]: https://github.com/DataDog/integrations-core/blob/master/postgres/metadata.csv
+[10]: https://docs.datadoghq.com/fr/integrations/faq/postgres-custom-metric-collection-explained
+[11]: https://www.datadoghq.com/blog/100x-faster-postgres-performance-by-changing-1-line
+[12]: https://www.datadoghq.com/blog/postgresql-monitoring
+[13]: https://www.datadoghq.com/blog/postgresql-monitoring-tools
+[14]: https://www.datadoghq.com/blog/collect-postgresql-data-with-datadog
 
 
 {{< get-dependencies >}}
