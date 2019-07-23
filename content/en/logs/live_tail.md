@@ -20,7 +20,7 @@ further_reading:
 
 The Live Tail feature gives you the ability to see all your log events in near real time from anywhere in your infrastructure. It displays logs as soon as they get out of the [Pipeline section][1] and before they are [indexed][2] by Datadog, hence: 
 
-1. All logs ingested by Datadog are displayed. ([It's logging without limits][2].)
+1. All logs ingested by Datadog are displayed. ([It's logging without limits][2]*)
 2. Displayed logs have been processed.
 3. The stream can be paused.
 4. You can't go back in time.
@@ -78,6 +78,8 @@ To filter on all logs with a line number above 150 use the following query: `@li
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+<br>
+*Logging without limits is a trademark of Datadog, Inc. 
 
 [1]: /logs/processing/pipelines
 [2]: /logs/logging_without_limits
