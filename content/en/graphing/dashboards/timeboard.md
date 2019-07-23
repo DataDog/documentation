@@ -20,20 +20,29 @@ further_reading:
 2. Click on the pencil icon to edit the title and description
 3. Click the checkmark to save changes
 
-## Event Correlation at Design Time
+## Event Correlation 
+
 Event Correlation refers to overlaying events on top of a dashboard graph. You can set up correlation at two different times: when you set up the dashboard, or ad-hoc when you view the dashboard.
+
+### On an individual graph (At design Time)
 
 {{< img src="graphing/dashboards/guides-eventcorrelation-screenboard.png" alt="guides-eventcorrelation-screenboard" responsive="true" style="width:90%;">}}
 
 Set up event correlation at design time by editing any graph on both Timeboards and Screenboards and adding events to the graph. You can find details about adding events [using the UI][1] or via the JSON interface further down the page.
 
-## Event Correlation at View Time
+### On whole dashboard
 
-{{< img src="graphing/dashboards/guides-eventcorrelation-searchbox.png" alt="guides event correlation" responsive="true" style="width:90%;">}}
+{{< img src="graphing/dashboards/open-search-event.png" alt="guides event correlation" responsive="true" style="width:90%;">}}
 
-Set up event correlation at view time by adding a query in the search box at the top left of any Timeboard dashboard window. This replaces any events added at design time, but applies the events to all graphs on that particular dashboard.
+Set up event correlation at view time by clicking on the "Search Events of Logs" link in the upper left hand side of the dashboard, and select "Events". Next, type a query in the search box at the top left of any Timeboard dashboard window. This replaces any events added at design time, but applies the events to all graphs on that particular dashboard as an overlay. 
 
 ## Correlation between Logs and Metrics
+
+### Search for Logs in Timeboards
+
+Overlaying logs in your dashboard is easy. Simply click on the "Search Events of Logs" link in the upper left hand side of the dashboard, and select "Logs".
+
+{{< img src="graphing/dashboards/open-search-logs.png" alt="Open Search Logs" responsive="true" style="width:90%;">}}
 
 ### Jump from a metric to its logs
 
