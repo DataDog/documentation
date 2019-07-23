@@ -79,10 +79,10 @@ further_reading:
 
 **Note:** No Data Alerts have a default max of 24 hours. Reach out to support to discuss increasing this value.
 
-7. Opt to **automatically resolve the monitor from a triggered state**. By enabling this option, the monitor will resolve after a certain amount of time rather than meeting its defined recovery threshold. In general you would want to leave this option off as you only want an alert to be resolved when it's fixed.
+7. Opt to **automatically resolve the monitor from a triggered state**. By enabling this option, the monitor resolves after a certain amount of time rather than meeting its defined recovery threshold. In general, you want to leave this option off so the alert only resolves when it's fixed.
 
     The most common use-case for this option is when you have very sparse counters, e.g. for errors. When errors stop occurring, the metric stops reporting. This prevents the monitor from resolving because there are no more values to trigger a resolution. A [recovery threshold][6] can also be set.
-    However, if the monitor auto-resolves and the value of the query does not meet the recovery threshold at the next evaluation, the monitor will trigger an alert again.
+    However, if the monitor auto-resolves and the value of the query does not meet the recovery threshold at the next evaluation, the monitor triggers an alert again.
 
 
 
