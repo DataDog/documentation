@@ -20,4 +20,4 @@ external_redirect: /api/#get-all-monitor-details
 * **`page`** [*optional*, *default* = **0**]:
     Page to start paginating from. If this argument is not specified, the request will return all monitors without pagination.
 * **`per_page`** [*optional*, *default*=**100**]:
-    Number of monitors to return per page. If the `page` argument is not specified, the default behavior will be to return all monitors without a `per_page` limit. However, if `page` is specified and `per_page` is not, the argument will default to `100`.
+    The number of monitors to return per page. If the `page` argument is not specified, the default behavior returns all monitors without a `per_page` limit. However, if `page` is specified and `per_page` is not, the argument defaults to `100`.
