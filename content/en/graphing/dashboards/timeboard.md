@@ -30,7 +30,7 @@ Event Correlation refers to overlaying events on top of a dashboard graph. You c
 
 Set up event correlation at design time by editing any graph on both Timeboards and Screenboards and adding events to the graph. You can find details about adding events [using the UI][1] or via the JSON interface further down the page.
 
-### On whole dashboard
+### Entire dashboard
 
 {{< img src="graphing/dashboards/open-search-event.png" alt="guides event correlation" responsive="true" style="width:75%;">}}
 
