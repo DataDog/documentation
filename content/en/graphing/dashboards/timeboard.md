@@ -38,7 +38,7 @@ Set up event correlation at view time by clicking on the *Search Events of Logs*
 
 ## Correlation between Logs and Metrics
 
-### Search for Logs in Timeboards
+### Search for logs in timeboards
 
 Click on the *Search Events of Logs* link in the upper left hand side of the Timeboard, and select **Logs**. This overlays the frequency of logs on your timeseries widgets. Click on an individual log line to view its full content.
 
