@@ -20,7 +20,7 @@ This feature is in private beta. Contact <a href="/help">Contact Datadog support
 
 ## Overview
 
-Datadog’s [Logging without Limits][1][^1] lets you dynamically decide what to include or exclude from your indexes. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. This means that even if you use [exclusion filters][2] to limit indexes to operationally critical logs, you can still visualize trends and anomalies over all of your log data at full granularity for 15 months.
+Datadog’s [Logging without Limits][1]* lets you dynamically decide what to include or exclude from your indexes. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. This means that even if you use [exclusion filters][2] to limit indexes to operationally critical logs, you can still visualize trends and anomalies over all of your log data at full granularity for 15 months.
 
 With log-based metrics, generate custom metrics from the count of logs that match a filter query and apply log attributes and tag keys as [metric tags][3] following the `<KEY>:<VALUE>` format.
 
@@ -59,7 +59,8 @@ Datadog would love to receive your feedback on this feature. You can submit your
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[^1] Logging without limits is a trademark of Datadog, Inc. 
+*Logging without limits is a trademark of Datadog, Inc. 
+
 [1]: /logs/logging_without_limits
 [2]: /logs/logging_without_limits/#exclusion-filters
 [3]: /tagging

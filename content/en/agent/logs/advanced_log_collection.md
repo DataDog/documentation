@@ -248,8 +248,7 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+*Logging without limits is a trademark of Datadog, Inc. 
 
-
-1. Logging without limits is a trademark of Datadog, Inc.
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /agent/guide/agent-commands/#agent-information
