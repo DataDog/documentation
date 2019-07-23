@@ -3,7 +3,7 @@ title: Tracing C++ Applications
 kind: documentation
 aliases:
 - /tracing/cpp/
-- /tracing/language/cpp/
+- /tracing/languages/cpp/
 - /agent/apm/cpp/
 further_reading:
 - link: "https://github.com/DataDog/dd-opentracing-cpp"

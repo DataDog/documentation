@@ -2,7 +2,7 @@
 title: Tracing PHP Applications
 kind: documentation
 aliases:
-- /tracing/language/php
+- /tracing/languages/php
 - /agent/apm/php/
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-php-performance/"

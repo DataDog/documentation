@@ -3,8 +3,8 @@ title: Tracing Node.js Applications
 kind: documentation
 aliases:
 - /tracing/nodejs/
-- /tracing/language/nodejs/
-- /tracing/language/javascript/
+- /tracing/languages/nodejs/
+- /tracing/languages/javascript/
 - /tracing/setup/javascript/
 - /agent/apm/nodejs/
 further_reading:

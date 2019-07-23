@@ -3,7 +3,7 @@ title: Tracing Go Applications
 kind: documentation
 aliases:
 - /tracing/go/
-- /tracing/language/go
+- /tracing/languages/go
 - /agent/apm/go/
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"

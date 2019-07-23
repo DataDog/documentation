@@ -3,7 +3,7 @@ title: Tracer des applications .NET
 kind: documentation
 aliases:
   - /fr/tracing/dotnet
-  - /fr/tracing/language/dotnet
+  - /fr/tracing/languages/dotnet
   - /fr/agent/apm/dotnet/
 further_reading:
   - link: 'https://github.com/DataDog/dd-trace-dotnet'
