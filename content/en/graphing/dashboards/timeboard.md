@@ -20,7 +20,7 @@ further_reading:
 2. Click on the pencil icon to edit the title and description
 3. Click the checkmark to save changes
 
-## Event Correlation 
+## Event correlation
 
 Event Correlation refers to overlaying events on top of a dashboard graph. You can set up correlation at two different times: when you set up the dashboard, or ad-hoc when you view the dashboard.
 
