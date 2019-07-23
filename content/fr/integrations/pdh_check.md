@@ -33,21 +33,24 @@ Recueillez des métriques à partir des counters de performances Windows en temp
 * Visualiser et surveiller les counters de performance Windows via l'API PDH
 
 ## Implémentation
+
+Vous trouverez ci-dessous les instructions pour installer et configurer le check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
-Le check PDH est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs.
+Le check PDH est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs.
 
 ### Configuration
 
-Modifiez le fichier `pdh_check.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2] pour commencer à recueillir vos données de performance Windows. Consultez le [fichier d'exemple pdh_check.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+Modifiez le fichier `pdh_check.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos données de performance Windows. Consultez le [fichier d'exemple pdh_check.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][4] et cherchez `pdh_check` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][5] et cherchez `pdh_check` dans la section Checks.
 
 ## Données collectées
 ### Métriques
-Consultez [metadata.csv][5] pour découvrir la liste complète des métriques fournies par cette intégration.
+Consultez [metadata.csv][6] pour découvrir la liste complète des métriques fournies par cette intégration.
 
 ### Événements
 Le check PDH ne comprend aucun événement.
@@ -56,11 +59,12 @@ Le check PDH ne comprend aucun événement.
 Le check PDH n'inclut aucun check de service.
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/pdh_check/datadog_checks/pdh_check/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/pdh_check/metadata.csv
+[1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[4]: https://github.com/DataDog/integrations-core/blob/master/pdh_check/datadog_checks/pdh_check/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[6]: https://github.com/DataDog/integrations-core/blob/master/pdh_check/metadata.csv
 
 
 {{< get-dependencies >}}
