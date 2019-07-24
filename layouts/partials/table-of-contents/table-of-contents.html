@@ -4,6 +4,6 @@
         {{ .TableOfContents }}
     </div>
 </div>
-<div class="mobile-toc-toggle">
+<div class="mobile-toc-toggle {{ if .Params.disable_toc }} d-none js-disable-toc {{ else }} d-block {{ end }}">
     <i class="icon-small-bookmark"></i>
 </div>

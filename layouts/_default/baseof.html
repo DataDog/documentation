@@ -64,9 +64,9 @@
                 {{ block "main" . }}{{ end }}
               </div>
             </div>
-            {{ if not .Params.disable_toc}}
-                {{ partial "table-of-contents/table-of-contents.html" . }}
-            {{ end }}
+
+            {{ partial "table-of-contents/table-of-contents.html" . }}
+            
         </div>
     </div>
 
