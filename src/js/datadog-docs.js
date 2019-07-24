@@ -806,6 +806,7 @@ function updateTOC(){
 
 
 function codeTabs(){
+    console.log('called codeTabs');
     if($('.code-tabs').length > 0) {
         // page load set code tab titles
         $('.code-tabs .tab-content').find('.tab-pane').each(function(idx, item) {
@@ -864,11 +865,9 @@ function codeTabs(){
                  }
              }
           });
-
-          if (history.pushState) {
-            var url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
-            history.pushState(null, null, url + '?tab=' + lang + window.location.hash)
-          }
+          
+          var url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
+          history.replaceState(null, null, url + '?tab=' + lang + window.location.hash)
 
           // restore
           $(document).scrollTop($(this).offset().top - currentOffset);
