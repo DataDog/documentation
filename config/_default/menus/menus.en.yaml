@@ -968,7 +968,7 @@ main:
     weight: 7
 
   - name: "Security"
-    url: "logs/security/"
+    url: "security/logs/"
     parent: "log_management"
     weight: 8
 

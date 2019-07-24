@@ -970,6 +970,10 @@ function getPathElement(){
         aPath = document.querySelector('.side [data-path*="graphing/guide"]');
     }
 
+    if (path.includes('security/logs')) {
+        aPath = document.querySelectorAll('.side [data-path*="security/logs"]')[1];
+    }
+
     if(aPath){
         aPath.classList.add('active');
         hasParentLi(aPath);
@@ -1010,29 +1014,19 @@ function updateSidebar(event){
     var isLi = ( event.target.nodeName === "LI" ) ? true : false ;
 
     if(isLi){
-        event.target.querySelector('a').classList.add('active');
-        if(event.target.closest('li').querySelector('ul')){
+        if (event.target.querySelector('a')) {
+            event.target.querySelector('a').classList.add('active');
+        }
+        
+        if(event.target.closest('li').querySelector('ul') && event.target.closest('li')){
             event.target.closest('li').classList.add('open');
         } 
     }else{
+
         if(event.target.closest('li').querySelector('a')) {
             event.target.closest('li').querySelector('a').classList.add('active');
         }
         
-        
-        // If the target which is clicked has an active element within the same ul menu don't close the open class
-        var isSameMenu = event.target.closest('.open').querySelector('.active');
-
-        if(!isSameMenu){
-            // Get ope navs
-            var openMenus = document.querySelectorAll('.side .sidenav-nav .open');
-            // Remove open classes
-            for(i=0;i<openMenus.length;i++){
-                openMenus[i].classList.remove('open');
-            }
-                                     
-        }
-
         if(event.target.closest('li').querySelector('ul')){
             event.target.closest('li').classList.add('open');
         }
@@ -1040,8 +1034,6 @@ function updateSidebar(event){
 };
 
 function loadPage(newUrl) {
-
-    
 
     // scroll to top of page on new page load
     window.scroll(0, 0);
@@ -1219,7 +1211,9 @@ window.onload = function(){
         if (typeof domain !== "string" || newUrl.search(domain) !== 0) {
             event.preventDefault();
             window.open(newUrl, "_blank");
-        } else {
+        } else if(newUrl.includes(domain + '/api')){ // if nav link is to api page, dont link via ajax
+            window.location.href = domain + '/api/';
+        }  else {
             
             loadPage(newUrl);
             event.preventDefault();
@@ -1238,9 +1232,12 @@ window.onload = function(){
     }
 }
 
-window.onpopstate = function (event) {
-    loadPage(window.location.href)
-    closeNav();
-    getPathElement();
-  }
+window.addEventListener('popstate', function(event) {
+    // check state, don't fire loadPage on page load
+    if (event.state) {
+        loadPage(window.location.href)
+        closeNav();
+        getPathElement();
+    } 
 
+}, false);
