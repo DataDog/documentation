@@ -806,7 +806,6 @@ function updateTOC(){
 
 
 function codeTabs(){
-    console.log('called codeTabs');
     if($('.code-tabs').length > 0) {
         // page load set code tab titles
         $('.code-tabs .tab-content').find('.tab-pane').each(function(idx, item) {
