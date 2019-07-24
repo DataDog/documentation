@@ -518,7 +518,10 @@ $(document).ready(function () {
 
     // ------------- TODO: move TOC js back to own file when webpack migration complete and can import js modules
 
-    
+    if (!$('#TableOfContents ul').length) {
+        $('.mobile-toc-toggle').addClass('d-none');
+        $('.toc-container').addClass('d-none');
+    }
 
     // when the page loads, checking the window width
     widthCheck();
@@ -690,17 +693,23 @@ function hideToc(){
 
 // hiding + displaying the ToC depending on the window width
 function widthCheck(){
-        if(innerWidth > largeScreenThreshold){
-            if($('.toc-container').hasClass('d-none') && $('.mobile-toc-toggle i').hasClass('icon-small-bookmark')){
-                $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
-                $('.mobile-toc-toggle i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
-            }
-        }else{
-            if($('.toc-container').hasClass('mobile-open') && $('.mobile-toc-toggle i').hasClass('icon-small-x')){
-                $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
-                $('.mobile-toc-toggle i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
+    if (!$('.toc-container').hasClass('js-disable-toc')) {
+        if ($('#TableOfContents ul').length) {
+            if(innerWidth > largeScreenThreshold){
+                if($('.toc-container').hasClass('d-none') && $('.mobile-toc-toggle i').hasClass('icon-small-bookmark')){
+                    $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
+                    $('.mobile-toc-toggle i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
+                }
+            }else{
+                if($('.toc-container').hasClass('mobile-open') && $('.mobile-toc-toggle i').hasClass('icon-small-x')){
+                    $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
+                    $('.mobile-toc-toggle i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
+                }
             }
         }
+        
+    }
+        
 }
 
 // updating ToC width on large screens
@@ -768,7 +777,7 @@ function moveToAnchor(id, animate, amount) {
 
 function updateTOC(){
 
-    // if($('#TableOfContents ul').length) {
+    
         $('.toc').css('display', 'block');
         $('#TableOfContents a').on('click', function(e) {
             var href = $(this).attr('href');
@@ -777,9 +786,13 @@ function updateTOC(){
                 return false;
             }
         });
-        
+
+
+    // if(!$('#TableOfContents ul').length) {
+    //     // hideToc();
+    //     $('.toc-container').removeClass('mobile-open');
     // } else {
-    //     hideToc();
+    //     $('.toc-container').addClass('mobile-open');
     // }
     
     
@@ -1039,7 +1052,7 @@ function loadPage(newUrl) {
     
 
     var mainContent = document.getElementById("mainContent");
-    var currentTOC = document.getElementById('TableOfContents');
+    var currentTOC = document.querySelector('.toc-container');
     mainContent.classList.add('loading');
 
     var httpRequest = new XMLHttpRequest();
@@ -1063,7 +1076,7 @@ function loadPage(newUrl) {
         }
 
         var newContent = httpRequest.responseXML.getElementById("mainContent");
-        var newTOC = httpRequest.responseXML.getElementById("TableOfContents");
+        var newTOC = httpRequest.responseXML.querySelector(".toc-container");
 
         newContent.classList.add('loading');
 
@@ -1117,18 +1130,16 @@ function loadPage(newUrl) {
         mainContent.parentElement.replaceChild(newContent, mainContent);
         mainContent = newContent;
 
-        if (newTOC && currentTOC) {
+        if (newTOC.querySelector('#TableOfContents')) {
             currentTOC.replaceWith(newTOC);
                 buildTOCMap();
                 updateTOC();
                 showTOCIcon();
-        } else if (!newTOC) {
+                widthCheck();
+                tocWidthUpdate();
+        } else if (!newTOC.querySelector('#TableOfContents')) {
             hideToc();
-        } else if (newTOC) {
-            buildTOCMap();
-            updateTOC();
-            showTOCIcon();
-        }
+        } 
 
         window.setTimeout(function () {
             mainContent.classList.remove('loading');

@@ -33,7 +33,7 @@ main:
     
   - name: "Prometheus/Openmetrics"
     identifier: "getting_started_prometheus"
-    url: "getting_started/prometheus"
+    url: "getting_started/integrations/prometheus"
     parent: "getting_started"
     weight: 301
 
