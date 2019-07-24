@@ -18,7 +18,7 @@ L'APM de Datadog est fourni dès que vous optez pour un plan Pro et Enterprise. 
 
 {{< whatsnext desc="Commencer avec l'APM Datadog">}}
     {{< nextlink href="/agent/apm" >}}Configurer votre Agent pour recueillir les traces de votre application{{< /nextlink >}}
-    {{< nextlink href="/tracing/languages" >}}Configurer votre application pour envoyer des traces à votre Agent Datadog{{< /nextlink >}}
+    {{< nextlink href="/tracing/setup" >}}Configurer votre application pour envoyer des traces à votre Agent Datadog{{< /nextlink >}}
     {{< nextlink href="/tracing/visualization" >}}Visualiser les services, les ressources et les traces dans Datadog {{< /nextlink >}}
     {{< nextlink href="/tracing/getting_further" >}}En savoir plus sur les caractéristiques de l'APM de Datadog{{< /nextlink >}}
     {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Rejoindre le canal APM dans le Slack Datadog public pour obtenir plus d'aide de la part de l'équipe Datadog{{< /nextlink >}}

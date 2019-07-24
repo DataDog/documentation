@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /developers/faq/using-postman-with-datadog-apis
   - /getting_started/using-postman-with-datadog-apis
+  - /developers/guide/using-postman-with-datadog-apis
 ---
 
 ## Overview
