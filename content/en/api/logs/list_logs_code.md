@@ -7,7 +7,7 @@ external_redirect: /api/#list-logs
 
 ##### Signature
 
-`POST api/v1/logs-queries/list`
+`GET api/v1/logs-queries/list`
 
 ##### Example Request
 
