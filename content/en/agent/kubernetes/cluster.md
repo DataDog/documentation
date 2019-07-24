@@ -102,8 +102,8 @@ kubectl create configmap dca-yaml --from-file datadog-cluster.yaml
 
 Locate the following manifests, and replace `<DD_API_KEY>` with [your API key][4]:
 
-* [`Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml`](https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml)
-* [`Dockerfiles/manifests/cluster-agent/cluster-agent.yaml`](https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/cluster-agent.yaml)
+* [`Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml`][5]
+* [`Dockerfiles/manifests/cluster-agent/cluster-agent.yaml`][6]
 
 Then, run:
 
@@ -136,7 +136,7 @@ datadog-cluster-agent   ClusterIP      10.100.202.234   none               5005/
 
 ### Configure RBAC permissions for node-based Agents
 
-Review the manifest found at [`Dockerfiles/manifests/cluster-agent/rbac/rbac-agent.yaml`][5]. This limits an Agent's access to the kubelet API.
+Review the manifest found at [`Dockerfiles/manifests/cluster-agent/rbac/rbac-agent.yaml`][7]. This limits an Agent's access to the kubelet API.
 
 Run:
 
@@ -216,7 +216,7 @@ The following environment variables are supported:
 | `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME`    | Name of the Kubernetes service Cluster Agents are exposed through. Default is `datadog-cluster-agent`. |
 | `DD_KUBERNETES_INFORMERS_RESYNC_PERIOD`       | Frequency in seconds to query the API Server to resync the local cache. The default is 5 minutes.                                                                             |
 | `DD_KUBERNETES_INFORMERS_RESTCLIENT_TIMEOUT`  | Timeout in seconds of the client communicating with the API Server. Default is 60 seconds.                                                                                    |
-| `DD_EXPVAR_PORT`                              | Change the port for fetching [expvar][6] public variables from the Datadog Cluster Agent. The default is port is `5000`.                         |
+| `DD_EXPVAR_PORT`                              | Change the port for fetching [expvar][8] public variables from the Datadog Cluster Agent. The default is port is `5000`.                         |
 | `DD_EXTERNAL_METRICS_BATCH_WINDOW`            | Time waited in seconds to process a batch of metrics from multiple Autoscalers. Default to 10 seconds.                                                                        |
 | `DD_EXTERNAL_METRICS_MAX_AGE`                 | Maximum age in seconds of a datapoint before considering it invalid to be served. Default to 90 seconds.                                                                      |
 | `DD_EXTERNAL_METRICS_AGGREGATOR`              | Aggregator for the Datadog metrics. Applies to all Autoscalers processed. Chose among `sum`/`avg`/`max`/`min`.                                                                |
@@ -229,6 +229,7 @@ The following environment variables are supported:
 | `DD_CLUSTER_CHECKS_CLUSTER_TAG_NAME`          | Name of the instance tag set with the `DD_CLUSTER_NAME` option. Default is `cluster_name`. |
 | `DD_CLUSTER_CHECKS_NODE_EXPIRATION_TIMEOUT`   | Time after which node-based Agents are considered down and removed from the pool. Default is 30 seconds. |
 | `DD_CLUSTER_CHECKS_WARMUP_DURATION`           | Delay between acquiring leadership and starting the Cluster Checks logic, allows for all node-based Agents to register first. Default is 30 seconds. |
+| `DD_CLUSTER_CHECKS_EXTRA_TAGS`           | Adds extra tags to cluster checks metrics. |
 
 
 ## Feature Activation
@@ -261,11 +262,11 @@ To enable the Custom Metrics Server:
 1. Set `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` to `true` in the Deployment of the Datadog Cluster Agent.
 2. Configure the `<DD_APP_KEY>` as well as the `<DD_API_KEY>` in the Deployment of the Datadog Cluster Agent.
 Set `DATADOG_HOST` to `https://app.datadoghq.eu` if you are using an EU account.
-3. Create a [service exposing the port 443][7] and [register it as an APIService for External Metrics][8].
+3. Create a [service exposing the port 443][9] and [register it as an APIService for External Metrics][10].
 
 Refer to [the dedicated Custom metrics server guide][1] to configure the Custom Metrics Server and get more details about this feature.
 
-**Note**: An [HPA][9] is required for values to be served on the external metrics route.
+**Note**: An [HPA][11] is required for values to be served on the external metrics route.
 
 #### Cluster Checks Autodiscovery
 
@@ -276,12 +277,14 @@ Starting with version 1.2.0, the Datadog Cluster Agent can extend the Autodiscov
 1. The recommended leader election lease duration is 15 seconds. Set it with the `DD_LEADER_LEASE_DURATION` envvar.
 1. If the service name is different from the default `datadog-cluster-agent`, ensure the `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME` environment variable reflects that.
 
-Two configuration sources are currently supported, [described in the Autodiscovery documentation][10]:
+Two configuration sources are currently supported, [described in the Autodiscovery documentation][12]:
 
 - yaml files can be mounted from a ConfigMap in the `/conf.d` folder, they will be automatically imported by the image's entrypoint.
 - Kubernetes Services annotations requires setting both the `DD_EXTRA_CONFIG_PROVIDERS` and `DD_EXTRA_LISTENERS` environment variables to `kube_services`.
 
-Refer to [the dedicated Cluster Checks Autodiscovery guide][11] for more configuration and troubleshooting details on this feature.
+Note that hostnames are not linked to cluster checks metrics, which limits the use of host tags and the `DD_TAGS` environment variable. To add tags to cluster checks metrics, use the `DD_CLUSTER_CHECKS_EXTRA_TAGS` environment variable.
+
+Refer to [the dedicated Cluster Checks Autodiscovery guide][13] for more configuration and troubleshooting details on this feature.
 
 ## Further Reading
 
@@ -292,10 +295,12 @@ Refer to [the dedicated Cluster Checks Autodiscovery guide][11] for more configu
 [2]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/cluster-agent/rbac
 [3]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/dca-secret.yaml
 [4]: https://app.datadoghq.com/account/settings#api
-[5]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/rbac/rbac-agent.yaml
-[6]: https://golang.org/pkg/expvar
-[7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/cluster-agent-hpa-svc.yaml
-[8]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/rbac-hpa.yaml
-[9]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale
-[10]: /agent/autodiscovery/clusterchecks/#setting-up-check-configurations
-[11]: /agent/autodiscovery/clusterchecks
+[5]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml
+[6]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/cluster-agent.yaml
+[7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/rbac/rbac-agent.yaml
+[8]: https://golang.org/pkg/expvar
+[9]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/cluster-agent-hpa-svc.yaml
+[10]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/rbac-hpa.yaml
+[11]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale
+[12]: /agent/autodiscovery/clusterchecks/#setting-up-check-configurations
+[13]: /agent/autodiscovery/clusterchecks
