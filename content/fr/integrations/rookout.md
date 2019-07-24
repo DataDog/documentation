@@ -34,7 +34,7 @@ Recueillez des métriques custom pour votre application en quelques clics et env
 * Améliorez la surveillance et accélérez le debugging de production avec la collecte de données à la demande de Rookout
 * Recueillez des métriques custom ad-hoc depuis Rookout sans nouvelle instrumentation requise
 
-**Remarque : étant donné que cette intégration vous permet de recueillir des métriques custom, une facturation supplémentaire peut s'appliquer en fonction du nombre de métriques custom recueillies. [Cliquez ici][11] pour en savoir plus sur les métriques custom.**
+**Remarque : étant donné que cette intégration vous permet de recueillir des métriques custom, une facturation supplémentaire peut s'appliquer en fonction du nombre de métriques custom recueillies. [Cliquez ici][1] pour en savoir plus sur les métriques custom.**
 
 ## Implémentation
 
@@ -42,25 +42,25 @@ Recueillez des métriques custom pour votre application en quelques clics et env
 
 Rookout envoie des données à Datadog via le service DogStatsD disponible à partir de l'Agent Datadog.
 
-1. Installez l'[Agent Datadog][1] et [Rookout][2]
+1. Installez l'[Agent Datadog][2] et [Rookout][3]
 
-2. Connectez-vous à [l'application Web Rookout][3]
+2. Connectez-vous à [l'application Web Rookout][4]
 
 3. Dans le volet de droite (Rules), cliquez sur le bouton du menu
 
-    ![Menu des actions de règle](https://raw.githubusercontent.com/DataDog/integrations-extras/master/rookout/images/click_rule_action.png)
+    ![Menu des actions de règle][5]
 
 4. Cliquez sur *Create new template* pour créer un modèle de règle
 
-    ![Bouton Create new template](https://raw.githubusercontent.com/DataDog/integrations-extras/master/rookout/images/click_new_template.png)
+    ![Bouton Create new template][6]
 
-5. Copiez le modèle de règle de métrique custom Datadog [disponible ici][6] dans l'éditeur et remplacez le modèle de règle par défaut
+5. Copiez le modèle de règle de métrique custom Datadog [disponible ici][7] dans l'éditeur et remplacez le modèle de règle par défaut
 
-    ![Modèle de règle de métrique custom Datadog](https://raw.githubusercontent.com/DataDog/integrations-extras/master/rookout/images/datadog_rule_template.png)
+    ![Modèle de règle de métrique custom Datadog][8]
 
 6. Cliquez sur l'icône Enregistrer pour enregistrer le modèle
 
-    ![Icône Enregistrer](https://raw.githubusercontent.com/DataDog/integrations-extras/master/rookout/images/click_save.png)
+    ![Icône Enregistrer][9]
 
 7. Ajoutez la règle nouvellement créée à n'importe quelle application comme vous le feriez habituellement
 
@@ -94,7 +94,7 @@ En fonction des actions définies, des attributs supplémentaires sont nécessai
 |  distribution  | value       |
 ```
 
-Pour en savoir plus sur ces actions, consultez la [documentation relative à Dogstatsd][9]
+Pour en savoir plus sur ces actions, consultez la [documentation relative à Dogstatsd][10]
 
 Tous les attributs doivent être formatés de la manière suivante afin d'être acceptés par notre règle :
 
@@ -123,13 +123,16 @@ Vous pouvez recueillir des métriques custom et des événements en créant une 
 
 Si vous avez des questions, contactez-nous à l'adresse support@rookout.com.
 
-[1]: https://docs.datadoghq.com/fr/agent
-[2]: https://docs.rookout.com/docs/getting-started.html
-[3]: https://app.rookout.com
-[6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rookout/rule-template.json
-[9]: https://docs.datadoghq.com/fr/developers/dogstatsd/
-[10]: https://docs.datadog.com/
-[11]: https://docs.datadoghq.com/fr/getting_started/custom_metrics/
+[1]: https://docs.datadoghq.com/fr/getting_started/custom_metrics
+[2]: https://docs.datadoghq.com/fr/agent
+[3]: https://docs.rookout.com/docs/getting-started.html
+[4]: https://app.rookout.com
+[5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rookout/images/click_rule_action.png
+[6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rookout/images/click_new_template.png
+[7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rookout/rule-template.json
+[8]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rookout/images/datadog_rule_template.png
+[9]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rookout/images/click_save.png
+[10]: https://docs.datadoghq.com/fr/developers/dogstatsd
 
 
 {{< get-dependencies >}}
