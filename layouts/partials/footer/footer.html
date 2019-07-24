@@ -65,7 +65,7 @@
                         <p>Language</p>
                         <ul class="list-unstyled">
                             {{ range .Translations }}
-                                <li><a class="button is-small is-danger is-rounded" href="{{ .Permalink }}">{{ .Site.Language.LanguageName }}</a></li>
+                                <li><a class="button is-small is-danger is-rounded" href="{{ .Permalink }}?lang_pref={{ .Site.Language.Lang }}">{{ .Site.Language.LanguageName }}</a></li>
                             {{ end }}
                         </ul>
                     </div>
