@@ -92,6 +92,8 @@ The navigation action allow you to:
 * Refresh the current page of the scenario.
 * Follow a specific link.
 
+**Note**: In the "Enter link URL" box, users must prepend URLs with `http` or `https`.
+
 #### Hover
 
 This browser test step isn’t added through an actual hovering mechanism (otherwise each element you are hovering would be added as a step) but using a dedicated action with a click.
@@ -141,11 +143,11 @@ Common failure reasons include:
 
 | Error           | Description                                                                                                                                                                                    |
 | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CONNRESET`       | The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, loss of connectivity of the webserver, etc. |
-| `DNS`             | The DNS entry is not found for the check URL. Possible causes include misconfigured check URL, wrong configuration of your DNS entries, etc.                                                          |
-| `INVALID_REQUEST` | The configuration of the check is invalid.                                                                                                                             |
-| `SSL`             | The SSL connection couldn't be performed.                                                                                     |
-| `TIMEOUT`         | The request couldn't be completed in a reasonable time. Browser tests timeout in 60 seconds. |
+| `General test failure`       |  |
+| `Element located but it's invisible`             | The element is on the page but cannot be clicked on—for isntance, if another element is overlaid on top of it.                                                          |
+| `Cannot locate element` | Element cannot be not found in the HTML.                                                                                                                             |
+| `Select did not have option`             | The specified option is missing from the dropdown menu.                                                                                     |
+| `Forbidden URL`         | The test likely encountered a protocol that is not supported. Reach out to [Datadog support] for further details.  |
 
 ## Further Reading
 
