@@ -50,7 +50,7 @@ Distribution metrics are a new type of metric that allows you to obtain the glob
 
 Each host is tagged with one of 3 `Availability Zones` (as tagged by the AWS integration) and 20 `Roles` by Chef, Datadog provisioning system.
 
-Additionally, this metric has been tagged with `Status`, which has 2 values: `Status:Success` or `Status:Fail`, and `Result`, which also has 2 values: `Result:Open` or `Result:Close`. For the following scenarios, we'll assume that both values of the `Status` tag appear with both values of the `Result` tag.
+Additionally, this metric is tagged with `Status`, which has two values: `Status:Success` or `Status:Fail`, and `Result`, which also has two values: `Result:Open` or `Result:Close`. For the following scenarios, we'll assume that both values of the `Status` tag appear with both values of the `Result` tag.
 
 ##### Scenario 1
 Suppose `my.service.latency` is a distribution metric tagged by `Status` and `Result` that only needs to queried with the nonpercentile aggregations such as avg, min, max, sum, count.
