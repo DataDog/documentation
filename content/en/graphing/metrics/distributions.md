@@ -46,51 +46,28 @@ To customize tagging, hover over your metric in the table, and click on the penc
 ## Case Studies
 Distribution metrics are a new type of metric that allows you to obtain the global distribution values across all hosts. Therefore, metrics that are submitted as distribution metrics create custom metrics the same way as other metric types.
 
-`my.service.latency` is a metric that is being submitted on 500 hosts.
+`my.service.latency` is a distribution metric that is being submitted on 500 hosts.
 
 Each host is tagged with one of 3 `Availability Zones` (as tagged by the AWS integration) and 20 `Roles` by Chef, Datadog provisioning system.
 
-Additionally, this metric has been tagged with `Status`, which has 2 values: `Status:Success` or `Status:Fail`, and `Result`, which also has 2 values: `Result:Open` or `Result:Close`.
+Additionally, this metric has been tagged with `Status`, which has 2 values: `Status:Success` or `Status:Fail`, and `Result`, which also has 2 values: `Result:Open` or `Result:Close`. For the following scenarios, we'll assume that both values of the `Status` tag appear with both values of the `Result` tag.
 
 ##### Scenario 1
+Suppose `my.service.latency` is a distribution metric tagged by `Status` and `Result` that only needs to queried with the nonpercentile aggregations such as avg, min, max, sum, count.
 
-By default, Datadog creates aggregations for `my.service.latency` for each combination of custom metric tags `Status` and `Result`.
+Datadog stores 4 timeseries (one for each nonpercentile aggregation: min, max, sum, count -- avg is calculated as the quotient of sum/count) per unique tag value combination that appears. In this case, since every value of `Status` appears with every value of the `Result` tag. 
 
-You could then query, for example `{my.service.latency for Status:success, Result:closed}`, but not `{my.service.latency for Availability-Zone: US-East-1a}`
-
-This creates (2+1) * (2+1) * 10 = 90 timeseries.
+Therefore, the number of timeseries created for nonpercentile aggregations is: 4 * (2) * (2) = 16 timeseries.
 
 ##### Scenario 2
 
-You aggregate on `{Status, Result, Host}` instead of the defaults.
-Available queries include, eg,:
+Now suppose you're interested in the p99 value of `my.service.latency`. You've already added percentile aggregations to `my.service.latency` tagged by `Status` and `Result` using the Distributions UI. You could then query, for example {my.service.latency for Status:success, Result:closed}, but not {my.service.latency for Availability-Zone: US-East-1a}
 
-* `{my.service.latency for Status:success, Result:closed, Host: i-deadbeef}`
-* `{my.service.latency for Status:fail, host: i-deadbeef}`
+Datadog still stores the original 16 timeseries from Scenario 1 to allow you to continue querying by any nonpercentile aggregation. For percentile aggregations, we create timeseries for every potentially queryable combination of tag values (including null tag values).
 
-The following is unavailable:
+The additional timeseries created for percentile aggregations is: 5 * (2+1) * (2+1) = 45 timeseries. 
 
-* `{my.service.latency for Availability-Zone: US-East-1a}`
-
-This creates (2+1) * (2+1) * (500+1) * 10 = 45,090 timeseries.
-
-##### Scenario 3
-
-You aggregate by `{Availability-Zone, Status}`, in addition to `{Status, Result, Host}`.
-
-Available queries include:
-
-* `{my.service.latency for AZ: US-East-1a}`
-* `{my.service.latency for AZ: US-West-2b, Status: Success}`
-*  any in the previous scenario.
-
-The aggregate timeseries for `Availability-Zone` and `Host` has not been requested, so `{my.service.latency for AZ:US-East-1a, Host:i-deadbeef}` is unavailable.
-
-This creates (3 + 1) * (2 + 1) * 10 = 120, in addition to the 45,090, above, for a total of 45,210 timeseries.
-
-As you can see, aggregating by multiple sets of tags increases the number of timeseries additively, limiting timeseries growth.
-
-The following gif demonstrates inspecting the aggregations created for a metric, `intake.batch_api_keys_for_org`. You would query `{availability-zone, role}` or `{instance-type, role}`, but not `{availability-zone, instance-type}`.
+Therefore the total number of timeseries associated with `my.service.latency` is 16+45 = 51 timeseries.
 
 {{< img src="graphing/metrics/distributions/Distros_Tagging.gif" alt="Distros_Tagging" responsive="true" style="width:80%;">}}
 
