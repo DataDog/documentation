@@ -655,6 +655,7 @@ class PreBuild:
         """
         Goes through all files needed for integrations build
         and triggers the right function for the right type of file.
+        See https://github.com/DataDog/documentation/wiki/Documentation-Build#integrations to learn more.
         :param content: integrations content to process
         """
         for file_name in chain.from_iterable(
@@ -677,7 +678,8 @@ class PreBuild:
         """
         Takes the content from a file from a github repo and
         pushed it to the doc
-        :param content: object with a file name and a file path and options to apply
+        See https://github.com/DataDog/documentation/wiki/Documentation-Build#pull-and-push-files to learn more
+        :param content: object with a file_name, a file_path, and options to apply
         """
 
         with open(
@@ -707,6 +709,7 @@ class PreBuild:
         """
         Take the content from a folder following github logic
         and transform it to be displayed in the doc in dest_dir folder
+        See https://github.com/DataDog/documentation/wiki/Documentation-Build#pull-and-push-folder to learn more
         :param content: content to process
         """
 
