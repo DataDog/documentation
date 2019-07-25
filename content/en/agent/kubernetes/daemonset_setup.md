@@ -300,11 +300,11 @@ For Agent v6.12+, short lived container logs (stopped or crashed) are automatica
 {{% /tab %}}
 {{% tab "Docker Socket" %}}
 
-For Docker environment (not Kubernetes), the Agent receives container updates in real time through Docker events. However, the configuration that is extracted from the container labels (Autodiscovery) is updated every 10 seconds by the Agent. Therefore, any container with a shorter life may not have any data collected by the Agent.
+For a Docker environment, the Agent receives container updates in real time through Docker events. The Agent extracts and updates the configuration from the container labels (Autodiscovery) every 10 seconds. Therefore, by default, the Agent does not collect data for any container with a shorter life.
 
-You can override this interval with a shorter one by setting the `ad_config_poll_interval` parameter, which is equivalent to the `DD_AD_CONFIG_POLL_INTERVAL` environment variable.
+You can override the polling interval by setting the `ad_config_poll_interval` parameter, which is equivalent to the `DD_AD_CONFIG_POLL_INTERVAL` environment variable.
 
-For a Kubernetes environment, use the `K8s file` collection method that supports init, stopped, and short lived containers collection without any extra setup.
+For a Kubernetes environment, use the `K8s file` collection method that supports init, stopped, and short lived containers. No additional setup is required.
 
 {{% /tab %}}
 {{< /tabs >}}
