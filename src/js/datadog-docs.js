@@ -361,9 +361,6 @@ $(document).ready(function () {
         }
     });
 
-    //
-    
-
     $('.sidenav-api a').on('click', function(e) {
         var href = $(this).attr('href');
         if(href.substr(0, 1) === '#') {
@@ -400,22 +397,7 @@ $(document).ready(function () {
         }
     }*/
 
-    // make header tags with ids and make clickable as anchors
-    $('.main h2[id], .main h3[id], .main h4[id], .main h5[id]').each(function() {
-        var id = $(this).attr('id');
-        $(this).wrapInner('<a href="#'+id+'"></a>').on('click', function(e) {
-            moveToAnchor(id);
-            return false;
-        });
-    });
-
-    $(".main a[href^='#']").click(function(e) {
-        if(!e.target.parentElement.id) {
-            e.preventDefault();
-            var id = e.target.hash.split('#').join('');
-            moveToAnchor(id);
-        }
-    });
+    updateMainContentAnchors();
 
     $('.api-content h2[id]').each(function() {
         var id = $(this).attr('id');
@@ -609,6 +591,27 @@ $(document).ready(function () {
 
 });
 
+function updateMainContentAnchors(){
+    // make header tags with ids and make clickable as anchors
+    $('.main h2[id], .main h3[id], .main h4[id], .main h5[id]').each(function() {
+        var id = $(this).attr('id');
+        $(this).wrapInner('<a href="#'+id+'"></a>').on('click', function(e) {
+            e.preventDefault();
+            moveToAnchor(id);
+            return false;
+        });
+    });
+
+    $(".main a[href^='#']").click(function(e) {
+        if(!e.target.parentElement.id) {
+            e.preventDefault();
+            var id = e.target.hash.split('#').join('');
+            moveToAnchor(id);
+        }
+    });
+}
+
+
 function buildTOCMap() {
     mapping = [];
     var link = null;
@@ -732,7 +735,7 @@ function showTOCIcon(){
 
 
 // slide to anchors
-function moveToAnchor(id, animate, amount) {
+function moveToAnchor(id, animate, amount) {    
     if (animate === undefined) {
         animate = true;
     }
@@ -771,7 +774,7 @@ function moveToAnchor(id, animate, amount) {
             } else {
                 $("html, body").animate({scrollTop: newSt}, 300);
             }
-            // $(document).trigger( "moveToAnchor" );
+            $(document).trigger( "moveToAnchor" );
             window.history.pushState(null, null, url + href);
         }
     }
@@ -942,36 +945,38 @@ function getPathElement(){
     var aPath = document.querySelector('.side [data-path="'+path+'"]');
     var maPath = document.querySelector('header [data-path="'+path+'"]');
 
-    // exception for agent/docker path, given that there are 2 anchors with this element, and clicking both should open agent/docker page.
-    if (path.includes('agent/docker')) {
-        aPath = document.querySelectorAll('.side [data-path*="agent/docker"]')[1];
-    }
-
     // exception for agent/guide and tracing/guide path, there's no 3rd level for specific agent/guide/**
     if (path.includes('agent/guide/upgrade-to-agent-v6')) {
         aPath = document.querySelectorAll('.side [data-path*="agent/guide"]')[0];
+        maPath = document.querySelectorAll('header [data-path*="agent/guide"]')[0];
     } else if (path.includes('agent/guide')) {
         aPath = document.querySelectorAll('.side [data-path*="agent/guide"]')[1];
+        maPath = document.querySelectorAll('header [data-path*="agent/guide"]')[1];
     }
 
     if (path.includes('tracing/guide')) {
         aPath = document.querySelector('.side [data-path*="tracing/guide"]');
+        maPath = document.querySelector('header [data-path*="tracing/guide"]');
     }
 
     if (path.includes('monitors/guide')) {
         aPath = document.querySelector('.side [data-path*="monitors/guide"]');
+        maPath = document.querySelector('header [data-path*="monitors/guide"]');
     }
 
     if (path.includes('graphing/widgets')) {
         aPath = document.querySelector('.side [data-path*="graphing/widgets"]');
+        maPath = document.querySelector('header [data-path*="graphing/widgets"]');
     }
 
     if (path.includes('graphing/guide')) {
         aPath = document.querySelector('.side [data-path*="graphing/guide"]');
+        maPath = document.querySelector('header [data-path*="graphing/guide"]');
     }
 
     if (path.includes('security/logs')) {
         aPath = document.querySelectorAll('.side [data-path*="security/logs"]')[1];
+        maPath = document.querySelectorAll('header [data-path*="security/logs"]')[1];
     }
 
     if(aPath){
@@ -980,8 +985,6 @@ function getPathElement(){
     }
 
     if(maPath){
-        // Get mobile nav
-        var maPath = document.querySelector('header [data-path="'+path+'"]');
         maPath.classList.add('active');
         hasParentLi(maPath);
     }
@@ -1129,6 +1132,7 @@ function loadPage(newUrl) {
                 showTOCIcon();
                 widthCheck();
                 tocWidthUpdate();
+                updateMainContentAnchors();
         } else if (!newTOC.querySelector('#TableOfContents')) {
             if (document.querySelector('.toc-container #TableOfContents')) {
                 document.querySelector('.toc-container #TableOfContents').remove();
@@ -1233,11 +1237,15 @@ window.onload = function(){
 }
 
 window.addEventListener('popstate', function(event) {
-    // check state, don't fire loadPage on page load
-    if (event.state) {
+
+    // if page is /api, dont load via ajax
+    var domain = window.location.origin;
+    if (window.location.href.includes(domain + '/api')) {
+        window.location.href = domain + '/api/';
+    } else {
         loadPage(window.location.href)
         closeNav();
         getPathElement();
-    } 
+    }
 
 }, false);

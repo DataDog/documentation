@@ -115,11 +115,6 @@ main:
     url: "agent/basic_agent_usage/deb/"
     weight: 104
     parent: "basic_agent_usage"
-  - name: "Docker"
-    identifier: "basic_agent_usage_docker"
-    url: "agent/docker/"
-    weight: 105
-    parent: "basic_agent_usage"
   - name: "Fedora"
     identifier: "basic_agent_usage_fedora"
     url: "agent/basic_agent_usage/fedora/"
