@@ -32,12 +32,12 @@ Each end of any point-to-point communication represents a hash of a `{host | pro
 ## Setup
 ### Installation
 
-Network flow monitoring requires Datadog Agent 6.12+. To enable network flow monitoring, configure your `agent.yaml` file based on the your system setup.
+Network performance monitoring requires Datadog Agent v6.12+. To enable network performance monitoring, configure your `agent.yaml` file based on your system setup.
 
 {{< tabs >}}
 {{% tab "Agent" %}}
 
-To enable Network Performance monitoring on the Datadog Agent, use these configurations:
+To enable network performance monitoring on the Datadog Agent, use these configurations:
 
 ```
 apiVersion: extensions/v1beta1
@@ -131,7 +131,7 @@ $ docker run -e DD_API_KEY="YOUR_API_KEY" \
 {{% /tab %}}
 {{< /tabs >}}
 
-For more configurations, see the [configurations listed here][1].
+For more configurations, see the [example agent.yaml files][1].
 
 ### Queries
 
