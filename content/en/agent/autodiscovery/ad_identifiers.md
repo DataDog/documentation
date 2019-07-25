@@ -10,7 +10,7 @@ further_reading:
   text: "Manage which Container to include in the Agent Autodiscovery"
 ---
 
-Autodiscovery Container Identifiers, or `ad_identifiers`, allow you to apply an Autodiscovery configuration file template to a given container, either by [using the container short image](#short-image-container-identifiers) or with a [custom Autodiscovery container identifier](#custom-autodiscovery-container-identifiers).
+The Autodiscovery container identifier, or `ad_identifier`, allows you to apply an Autodiscovery configuration file template to a given container, either by [using the container short image](#short-image-container-identifiers) or with a [custom Autodiscovery container identifier](#custom-autodiscovery-container-identifiers).
 
 **Note**: With the other types of configuration—key-value stores, Docker labels, or Kubernetes pod annotations—the matching between an integration configuration template and the corresponding container is based on the `<CONTAINER_IDENTIFIER>` included in the key-value stores, labels, or annotations configuration.
 
@@ -32,7 +32,7 @@ instances:
 For instance, the following Apache Autodiscovery configuration file template used by the Agent:
 
 ```yaml
-ad_identifiers:
+ad_identifier:
   - httpd
 init_config:
 instances:
