@@ -399,6 +399,8 @@ main:
             url: "tracing/trace_search_and_analytics/search"
           - name: "Trace Analytics"
             url: "tracing/trace_search_and_analytics/analytics"
+          - name: "Monitors"
+            url: "tracing/trace_search_and_analytics/monitors"
 
       # Trace API
       - name: "Trace API"
