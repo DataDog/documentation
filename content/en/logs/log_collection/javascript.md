@@ -211,7 +211,7 @@ Assume that there is a signup logger, defined with all the other loggers:
 
 ```
 # create a new logger
-const signupLogger = createLogger('signupLogger'})
+const signupLogger = createLogger('signupLogger')
 signupLogger.addContext('env', 'staging')
 ```
 
