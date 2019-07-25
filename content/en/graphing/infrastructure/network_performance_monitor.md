@@ -148,7 +148,7 @@ The following shows all flows from IP addresses to Security groups. Only flows w
 - `Sent` metrics measure the value of something from the `source` to the `destination`
 - `Received` metrics measure the value of something from the `destination` to the `source` as measured from the source.
 
-The default collection interval is five minutes and retention is five days. Metrics might be different for `some.metric(a to b)` and `some.metric(b to a)` if there is a large number of packet drops on one leg of the trip. In this case, if `b` sends a lot of bytes to `a`, the flows that originate at `b` include those bytes, but the flows that originate at `a` do not see them as received.
+The default collection interval is five minutes and retention is five days. Metrics might be different for `some.metric(a to b)` and `some.metric(b to a)` if there is a large number of packet drops. In this case, if `b` sends a lot of bytes to `a`, the flows that originate at `b` include those bytes, but the flows that originate at `a` do not see them as received.
 
 - **Throughput** - The number of bytes sent or received over a period. Measured in bytes (or orders of magnitude thereof) bidirectionally.
 - **Bandwidth** - The rate of bytes sent or received over a period. Measured in bytes per second, bidirectionally.
