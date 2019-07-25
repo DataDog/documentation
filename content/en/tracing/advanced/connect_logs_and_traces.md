@@ -30,9 +30,9 @@ Your language level logs *must* be turned into Datadog attributes in order for t
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Enable injection in the Java Tracer's [configuration][1] by setting `Ddd.logs.injection=true` or through environment variable `DD_LOGS_INJECTION=true`.
+Enable injection in the Java Tracer's [configuration][1] by adding `-Ddd.logs.injection=true` as a jvm startup argument or through environment variable `DD_LOGS_INJECTION=true`.
 
-**Note**: Currently only **slf4j** is supported for MDC autoinjection.
+**Note**: Only `slf4j` and `log4j` are supported for MDC autoinjection.
 
 If the logs are already JSON formatted, there is nothing left to do. If the logs are raw formatted, update your formatter to include `dd.trace_id` and `dd.span_id` in your logger configuration:
 
