@@ -59,7 +59,7 @@ clean-integrations:  ## remove built integrations files.
 	    -exec rm -rf {} \; ;fi
 	@find ./content/en/integrations -type f -maxdepth 1 \
 	    -a -not -name '_index.md' \
-		  -a -not -name 'adobe_experience_manager.md' \
+		-a -not -name 'adobe_experience_manager.md' \
 	    -a -not -name 'amazon_guardduty.md' \
 	    -a -not -name 'amazon_vpc.md' \
 	    -a -not -name 'amazon_cloudhsm.md' \
@@ -89,6 +89,8 @@ clean-auto-doc: ##remove all doc automatically created
 	find ./content/en/developers/integrations -type f -maxdepth 1 -exec rm -rf {} \; ;fi
 	@if [ content/en/agent/basic_agent_usage/heroku.md ]; then \
 	rm -f content/en/agent/basic_agent_usage/heroku.md ;fi
+	@if [ content/en/tracing/setup/ruby.md ]; then \
+	rm -f content/en/tracing/setup/ruby.md ;fi
 
 clean-node:  ## remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi
