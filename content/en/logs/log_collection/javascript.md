@@ -190,7 +190,7 @@ Each logger can optionally be configured with its own log level, handler, and co
 Use the following to define a custom logger:
 
 ```
-createLogger (<LOGGER_NAME>, {
+DD_LOGS.createLogger (<LOGGER_NAME>, {
     level?: 'debug' | 'info' | 'warn' | 'error'
     handler?: 'http' | 'console' | 'silent'
     context?: <JSON_ATTRIBUTES>
@@ -201,7 +201,7 @@ Those parameters can also be set with the `setContext`, `setLevel`, and `setHand
 After the creation of this logger, you can then access it in any part of your JavaScript code with the `getLogger` function:
 
 ```
-const my_logger = getLogger('<LOGGER_NAME>')
+const my_logger = DD_LOGS.getLogger('<LOGGER_NAME>')
 ```
 
 **Example:**
@@ -211,7 +211,7 @@ Assume that there is a signup logger, defined with all the other loggers:
 
 ```
 # create a new logger
-const signupLogger = createLogger('signupLogger')
+const signupLogger = DD_LOGS.createLogger('signupLogger')
 signupLogger.addContext('env', 'staging')
 ```
 
@@ -221,7 +221,7 @@ It can now be used in a different part of the code with:
 ...
 <script>
 ...
-const signupLogger = getLogger('signupLogger')
+const signupLogger = DD_LOGS.getLogger('signupLogger')
 signupLogger.info('Test sign up completed')
 ...
 </script>
@@ -243,7 +243,7 @@ DD_LOGS.setLoggerGlobalContext(<JSON_ATTRIBUTES>)
 **Example:**
 
 ```
-const signupLogger = getLogger('signupLogger')
+const signupLogger = DD_LOGS.getLogger('signupLogger')
 signupLogger.setContext({
   env: 'staging',
   team: 'user-account'
