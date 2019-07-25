@@ -46,7 +46,7 @@ To customize tagging, hover over your metric in the table, and click on the penc
 ## Case Studies
 Distribution metrics are a new type of metric that allows you to obtain the global distribution values across all hosts. Therefore, metrics that are submitted as distribution metrics create custom metrics the same way as other metric types.
 
-`my.service.latency` is a distribution metric that is being submitted on 500 hosts.
+`my.service.latency` is a distribution metric submitted on 500 hosts.
 
 Each host is tagged with one of 3 `Availability Zones` (as tagged by the AWS integration) and 20 `Roles` by Chef, Datadog provisioning system.
 
