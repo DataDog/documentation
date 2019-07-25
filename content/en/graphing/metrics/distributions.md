@@ -53,7 +53,7 @@ Each host is tagged with one of 3 `Availability Zones` (as tagged by the AWS int
 Additionally, this metric is tagged with `Status`, which has two values: `Status:Success` or `Status:Fail`, and `Result`, which also has two values: `Result:Open` or `Result:Close`. For the following scenarios, we'll assume that both values of the `Status` tag appear with both values of the `Result` tag.
 
 ##### Scenario 1
-Suppose `my.service.latency` is a distribution metric tagged by `Status` and `Result` that only needs to queried with the nonpercentile aggregations such as avg, min, max, sum, count.
+Suppose `my.service.latency` is a distribution metric tagged by `Status` and `Result` that only needs to queried with the nonpercentile aggregations such as `avg`, `min`, `max`, `sum`, `count`.
 
 Datadog stores four timeseries (one for each nonpercentile aggregation: `min`, `max`, `sum`, `count` -- `avg` is calculated as the quotient of sum/count) per unique tag value combination that appears. In this case, since every value of `Status` appears with every value of the `Result` tag. 
 
