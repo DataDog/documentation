@@ -318,7 +318,7 @@ En outre, tous les hosts avec les étiquettes `<key>:<value>` comportent les tag
 [35]: https://docs.datadoghq.com/fr/integrations/google_cloud_composer
 [36]: https://docs.datadoghq.com/fr/integrations/google_cloud_dataproc
 [37]: https://docs.datadoghq.com/fr/integrations/google_cloud_firestore
-[38]: https://docs.datadoghq.com/fr/integrations/google_cloud_file
+[38]: https://docs.datadoghq.com/fr/integrations/google_cloud_filestore
 [39]: https://docs.datadoghq.com/fr/integrations/google_cloud_interconnect
 [40]: https://docs.datadoghq.com/fr/integrations/google_cloud_loadbalancing
 [41]: https://docs.datadoghq.com/fr/integrations/google_cloud_redis
