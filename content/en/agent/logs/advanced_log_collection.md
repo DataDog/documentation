@@ -17,7 +17,7 @@ further_reading:
   text: "See how to explore your logs"
 - link: "logs/logging_without_limits"
   tag: "Documentation"
-  text: "Logging without limits*"
+  text: "Logging without Limits*"
 ---
 
 Apply log processing rules to a specific log collection configurations to:
@@ -248,7 +248,7 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
-*Logging without limits is a trademark of Datadog, Inc. 
+*Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /agent/guide/agent-commands/#agent-information
