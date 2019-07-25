@@ -1,13 +1,14 @@
 ---
 title: Widgets
 kind: documentation
-disable_toc: true
 aliases:
     - /graphing/dashboards/widgets
     - /graphing/faq/widgets
 ---
 
-{{< whatsnext desc="Choose a widget:">}}
+## Overview
+
+{{< whatsnext desc="Choose a widget to learn how to use it in Datadog and through the API:">}}
     {{< nextlink href="/graphing/widgets/alert_graph" >}}Alert Graph{{< /nextlink >}}
     {{< nextlink href="/graphing/widgets/alert_value" >}}Alert Value{{< /nextlink >}}
     {{< nextlink href="/graphing/widgets/change" >}}Change{{< /nextlink >}}
@@ -31,3 +32,18 @@ aliases:
     {{< nextlink href="/graphing/widgets/timeseries" >}}Timeseries{{< /nextlink >}}
     {{< nextlink href="/graphing/widgets/top_list" >}}Top List{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Copy / Past Widgets
+
+Press `Ctrl + C` or `Cmd + C` (Mac only) in [Dashboards][1], [Notebooks][2], [APM Service][3], and [APM resource][4] pages in order to copy a widget.
+
+You can paste a copied widget within Datadog on:
+
+* **Dashboards**: this adds a new widget positioned under their mouse cursor.
+* **Notebooks**: this adds a new cell at the end of the notebook.
+
+A copied widget can also be shared outside of Datadog as a static image stored in the same Datadog Datacenter of your Datadog Site (US or EU).
+[1]: /grpahing/dashboards
+[2]: /graphing/notebooks
+[3]: /tracing/visualization/service
+[4]: /tracing/visualization/resource
