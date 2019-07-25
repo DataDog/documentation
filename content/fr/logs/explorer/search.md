@@ -83,6 +83,16 @@ Afin d'effectuer une recherche générique avec plusieurs caractères, utilisez 
 * `web*` renvoie tous les messages de log commençant par `web`
 * `*web` renvoie tous les messages de log finissant par `web`
 
+Les wildcards peuvent être utilisés au sein d'une facette avec cette syntaxe. La requête suivante renvoie tous les services se terminant par le texte `mongo` :
+
+`service:*mongo`
+
+Les wildcards peuvent également être utilisés pour effectuer une recherche de texte brut dans un log qui ne fait pas partie d'une facette. La requête suivante renvoie tous les logs contenant le texte `NETWORK` :
+
+`"*NETWORK*"`
+
+En revanche, les logs contenant le texte `NETWORK` et faisant partie d'une facette ne seront pas renvoyés.
+
 ### Valeurs numériques
 Utilisez les caractères `<`, `>`, `<=` ou `>=` pour effectuer une recherche avec des attributs numériques. Par exemple, pour récupérer tous les logs avec un délai de réponse supérieur à 100 ms :
 
