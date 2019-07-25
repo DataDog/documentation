@@ -7,6 +7,10 @@ external_redirect: /api/#integration-aws
 
 ## Integration AWS
 
+<div class="alert alert-warning">
+This endpoint is in public beta.</a>
+</div>
+
 Configure your Datadog-AWS integration directly through Datadog API.
 For more information, see the [AWS integration page][1].
 
