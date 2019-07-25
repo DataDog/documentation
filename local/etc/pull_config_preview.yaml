@@ -69,7 +69,7 @@
       options:
         dest_path: '/tracing/setup/'
         file_name: 'ruby.md'
-        front_param:
+        front_matters:
           title: Tracing Ruby Applications
           kind: documentation
           aliases:

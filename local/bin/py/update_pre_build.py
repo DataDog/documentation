@@ -688,9 +688,9 @@ class PreBuild:
             ## If options include front params, then the H1 title of the source file is striped
             ## and the options front params are inlined
 
-            if "front_param" in content["options"]:
-                front_params= "---\n" + yaml.dump(content["options"]["front_param"]) + "---\n"
-                file_content = re.sub(self.regex_h1_replace, front_params, file_content, count=0)
+            if "front_matters" in content["options"]:
+                front_matters= "---\n" + yaml.dump(content["options"]["front_matters"]) + "---\n"
+                file_content = re.sub(self.regex_h1_replace, front_matters, file_content, count=0)
 
         with open(
             "{}{}{}".format(
