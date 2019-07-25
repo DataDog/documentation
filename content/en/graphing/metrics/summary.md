@@ -34,7 +34,7 @@ Key information about your metric can be seen:
     * [Metric unit][8]
     * [Metric type][9] 
     * The integration name, if this metric is coming from an [integration][10]
-    * The interval of collection of this metric.
+    * The interval of collection of this metric
 
 ### Metric metadata 
 
