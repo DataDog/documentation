@@ -55,7 +55,7 @@ Additionally, this metric is tagged with `Status`, which has two values: `Status
 ##### Scenario 1
 Suppose `my.service.latency` is a distribution metric tagged by `Status` and `Result` that only needs to queried with the nonpercentile aggregations such as avg, min, max, sum, count.
 
-Datadog stores 4 timeseries (one for each nonpercentile aggregation: min, max, sum, count -- avg is calculated as the quotient of sum/count) per unique tag value combination that appears. In this case, since every value of `Status` appears with every value of the `Result` tag. 
+Datadog stores four timeseries (one for each nonpercentile aggregation: `min`, `max`, `sum`, `count` -- `avg` is calculated as the quotient of sum/count) per unique tag value combination that appears. In this case, since every value of `Status` appears with every value of the `Result` tag. 
 
 Therefore, the number of timeseries created for nonpercentile aggregations is: 4 * (2) * (2) = 16 timeseries.
 
