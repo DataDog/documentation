@@ -250,6 +250,10 @@ signupLogger.setContext({
 })
 ```
 
+## Supported Browsers
+
+The `datadog-logs` library supports all modern desktop and mobile browsers, and legacy browsers IE10 and IE11.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
