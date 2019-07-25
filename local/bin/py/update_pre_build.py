@@ -677,13 +677,20 @@ class PreBuild:
         """
         Takes the content from a file from a github repo and
         pushed it to the doc
-        :param content: object with a file name and a file path
+        :param content: object with a file name and a file path and options to apply
         """
 
         with open(
             "".join(content["globs"]), mode="r+"
         ) as f:
             file_content = f.read()
+
+            ## If options include front params, then the H1 title of the source file is striped
+            ## and the options front params are inlined
+
+            if "front_param" in content["options"]:
+                front_params= "---\n" + yaml.dump(content["options"]["front_param"]) + "---\n"
+                file_content = re.sub(self.regex_h1_replace, front_params, file_content, count=0)
 
         with open(
             "{}{}{}".format(
