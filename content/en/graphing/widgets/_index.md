@@ -33,16 +33,17 @@ aliases:
     {{< nextlink href="/graphing/widgets/top_list" >}}Top List{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Copy / Past Widgets
+## Copy / paste widgets
 
-Press `Ctrl + C` or `Cmd + C` (Mac only) in [Dashboards][1], [Notebooks][2], [APM Service][3], and [APM resource][4] pages in order to copy a widget.
+Widgets can be copied on [Dashboards][1], [Notebooks][2], [APM Service][3], and the [APM resource][4] page by using `Ctrl + C` (`Cmd + C` for Mac).
 
-You can paste a copied widget within Datadog on:
+The copied widget can be pasted within Datadog by using `Ctrl + V` (`Cmd + V` for Mac) on:
 
-* **Dashboards**: this adds a new widget positioned under their mouse cursor.
-* **Notebooks**: this adds a new cell at the end of the notebook.
+* **Dashboards**: Adds a new widget positioned under your mouse cursor.
+* **Notebooks**: Adds a new cell at the end of the notebook.
 
-A copied widget can also be shared outside of Datadog as a static image stored in the same Datadog Datacenter of your Datadog Site (US or EU).
+A copied widget can also be shared outside of Datadog as a static image stored in the same Datadog datacenter as your Datadog site (US or EU).
+
 [1]: /grpahing/dashboards
 [2]: /graphing/notebooks
 [3]: /tracing/visualization/service
