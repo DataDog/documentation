@@ -77,7 +77,7 @@ Beta integrations are disabled by default but can be enabled individually.
 | Java Servlet Compatible      | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`            |
 | Jax-RS Annotations           | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`        |
 | Jetty (non-Servlet)          | 8+         | [Beta][7]       | `jetty`, `jetty-8`                             |
-| Netty Http Server            | 4.0+       | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
+| Netty HTTP Server            | 4.0+       | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
 | Play                         | 2.4-2.6    | Fully Supported | `play`                                         |
 | Ratpack                      | 1.4+       | [Beta][7]       | `ratpack`                                      |
 | Spark Java                   | 2.3+       | [Beta][7]       | `sparkjava` (requires `jetty`)                 |
