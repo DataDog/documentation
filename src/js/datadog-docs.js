@@ -603,6 +603,9 @@ $(document).ready(function () {
                         }
                     }
                 }
+            } else {
+                $('.mobile-toc-toggle').addClass('d-none');
+                $('.toc-container').addClass('d-none');
             }
         }
     }).trigger('scroll');
@@ -788,6 +791,8 @@ function widthCheck(){
             }
         }
         
+    } else {
+        $('.mobile-toc-toggle').addClass('d-none');
     }
         
 }
@@ -858,27 +863,15 @@ function moveToAnchor(id, animate, amount) {
 
 function updateTOC(){
 
-    
-        $('.toc').css('display', 'block');
-        $('#TableOfContents a').on('click', function(e) {
-            var href = $(this).attr('href');
-            if(href.substr(0, 1) === '#') {
-                moveToAnchor(href.substr(1), false);
-                return false;
-            }
-        });
+    $('.toc').css('display', 'block');
+    $('#TableOfContents a').on('click', function(e) {
+        var href = $(this).attr('href');
+        if(href.substr(0, 1) === '#') {
+            moveToAnchor(href.substr(1), true);
+            return false;
+        }
+    });
 
-
-    // if(!$('#TableOfContents ul').length) {
-    //     // hideToc();
-    //     $('.toc-container').removeClass('mobile-open');
-    // } else {
-    //     $('.toc-container').addClass('mobile-open');
-    // }
-    
-    
-
-    
 }
 
 function codeTabs(){
