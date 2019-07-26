@@ -27,7 +27,7 @@ metadata:
   namespace: default
 data:
   http-config: |-
-    ad_identifier:
+    ad_identifiers:
       - httpd
       - my-custom-httpd
     init_config:
@@ -56,7 +56,7 @@ And in the manifest of your Agent (DaemonSet/deployment) add the following:
 [...]
 ```
 
-**Note**: See the [Autodiscovery Container Identifier][2] documentation for more information on using `ad_identifier` to apply Autodiscovery configuration file templates to containers.
+**Note**: See the [Autodiscovery Container Identifier][2] documentation for more information on using `ad_identifiers` to apply Autodiscovery configuration file templates to containers.
 
 ### Mounting a custom configuration file in a container with a ConfigMap
 
