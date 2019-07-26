@@ -209,7 +209,7 @@ The Datadog [entrypoint][10] copies files with a `.yaml` extension found in `/co
 datadog:
   confd:
     redisdb.yaml: |-
-      ad_identifiers:
+      ad_identifier:
         - redis
         - bitnami/redis
       init_config:
@@ -217,7 +217,7 @@ datadog:
         - host: "%%host%%"
           port: "%%port%%"
     jmx.yaml: |-
-      ad_identifiers:
+      ad_identifier:
         - openjdk
       instance_config:
       instances:
