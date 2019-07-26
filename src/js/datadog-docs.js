@@ -1307,16 +1307,34 @@ window.onload = function(){
     }
 }
 
+function replaceURL(input_url) {
+    var thisurl = window.location.protocol + '//' + window.location.host;
+    if (thisurl.indexOf("docs-staging") > -1) {
+      var path = window.location.pathname
+        .split("/")
+        .slice(0, -2)
+        .join("/");
+      thisurl = window.location.protocol + '//' + window.location.host + path;
+    }
+    return input_url.replace("https://www.docs.datadoghq.com", thisurl);
+  }
+
 window.addEventListener('popstate', function(event) {
 
     // if page is /api, dont load via ajax
-    var domain = window.location.origin;
-    if (window.location.href.includes(domain + '/api')) {
-        window.location.href = domain + '/api/';
-    } else {
+    var domain = replaceURL(window.location.origin);
+    if (!window.location.href.includes(domain + '/api')) {
         loadPage(window.location.href)
         closeNav();
         getPathElement();
+        
+    } else {
+        // window.history.replaceState()
+        // console.log('window.location.href: ', window.location.href);
+        // var url = window.location.href;
+        // window.location.href = url
+        // this.console.log('replaceURL(domain): ', replaceURL(domain));
+        // window.location.href = replaceURL(domain) + '/api/';
     }
 
 }, false);
