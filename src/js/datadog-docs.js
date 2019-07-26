@@ -1,6 +1,7 @@
 // Setup for large screen ToC
 var largeScreenThreshold = 1710;
-var mapping = [];
+var sidenavMapping = [];
+var apiNavMapping = [];
 
 $(document).ready(function () {
 
@@ -377,6 +378,36 @@ $(document).ready(function () {
             return false;
         }
     });
+
+
+    var searchParam = getParameterByName('s');
+    if(searchParam) {
+        $('.sidenav-search input[name="s"]').val(searchParam);
+    }
+
+    if($('.sidenav-api').length) {
+        $(window).on('resize scroll', function(e) {
+            onScroll();
+        }).trigger('scroll');
+
+        $(".sidenav-api ul").each(function() {
+            if($(this).children().length === 0) {
+                $(this).remove();
+            }
+        });
+
+        buildAPIMap();
+        onScroll();
+    }
+
+    //$('.side').addClass('side-condensed');
+    $(window).on('resize scroll', function(e) {
+        var header_h = $('body > header').height();
+        var footer_h = $('body > footer').height();
+        var padding = 105;
+        $('.sidenav-nav').css('maxHeight', document.documentElement.clientHeight - header_h - padding);
+    });
+
     /*if($('.api-nav').length) {
         var ref = document.querySelector('.api-popper-button');
         var pop = document.getElementById('api-popper');
@@ -488,7 +519,7 @@ $(document).ready(function () {
         });
     } else {
         if(window.location.hash) {
-            moveToAnchor(window.location.hash.substr(1), false);
+            moveToAnchor(window.location.hash.substr(1), true);
         }
     }
 
@@ -611,9 +642,37 @@ function updateMainContentAnchors(){
     });
 }
 
+function buildAPIMap() {
+    apiNavMapping = [];
+    var link = null;
+    $('.sidenav-api ul a').each(function() {
+        var href = $(this).attr('href');
+        var id = href.replace('#', '').replace(' ','-');
+        var header = $('[id="'+id+'"]');
+        var navParentLinks = $(this).parents('.sidenav-api').find('ul > li').has($(this)).find('> a');
+
+        if(header.length) {
+            if(header.is('h2') || header.is('h3')) {
+                apiNavMapping.push({
+                    'navLink': $(this),
+                    'navLinkPrev': link,
+                    'navParentLinks': navParentLinks,
+                    'id': id,
+                    'header': header,
+                    'isH2': header.is('h2'),
+                    'isH3': header.is('h3')
+                });
+            }
+        } else {
+            //console.log('could not find h2[id="'+id+'"]');
+        }
+        link = $(this);
+    });
+}
+
 
 function buildTOCMap() {
-    mapping = [];
+    sidenavMapping = [];
     var link = null;
     $('#TableOfContents ul a').each(function() {
         var href = $(this).attr('href');
@@ -623,7 +682,7 @@ function buildTOCMap() {
 
         if(header.length) {
             if(header.is('h2') || header.is('h3')) {
-                mapping.push({
+                sidenavMapping.push({
                     'navLink': $(this),
                     'navLinkPrev': link,
                     'navParentLinks': navParentLinks,
@@ -643,37 +702,20 @@ function onScroll() {
     var localOffset = 120;
 
     if($(window).scrollTop() + $(window).height() === $(document).height()) {
-        // we are at the bottom of the screen  just highlight the last item we can
-        $('.toc_open').removeClass('toc_open');
-        $('.toc_scrolled').removeClass('toc_scrolled');
-        var obj = mapping[mapping.length-1];
-        if(obj) {
-            if(obj.isH3) {
-                obj.navParentLinks.each(function() {
-                    var href = $(this).attr('href');
-                    var id = href.replace('#', '').replace(' ','-');
-                    var header = $('[id="'+id+'"]');
-                    if(header.is('h2')) {
-                        $(this).addClass('toc_open');
-                    }
-                });
-                obj.navLink.parent().addClass('toc_scrolled');
-            }
-            if(obj.isH2) {
-                obj.navLink.parent().addClass('toc_scrolled');
-            }
-        }
+        // we are at the bottom of the screen  just highlight the last item
     } else {
         $('.toc_open').removeClass('toc_open');
-        for(var i = 0; i < mapping.length; i++) {
-            var obj = mapping[i];
+
+        // tocMapping
+        for(var i = 0; i < sidenavMapping.length; i++) {
+            var obj = sidenavMapping[i];
             var j = i+1;
-            if(j > mapping.length) { j = 0; }
-            var nextobj = mapping[j];
-            obj.navLink.parent().removeClass('toc_scrolled');
+            if(j > sidenavMapping.length) { j = 0; }
+            var nextobj = sidenavMapping[j];
+            obj.navLink.removeClass('toc_scrolled');
 
             if( (winTop >= obj.header.offset().top - localOffset) && (typeof(nextobj) === 'undefined' || winTop < nextobj.header.offset().top - localOffset) ) {
-                obj.navLink.parent().addClass('toc_scrolled');
+                obj.navLink.addClass('toc_scrolled');
                 // add toc open to parents of this toc_scrolled
                 obj.navParentLinks.each(function() {
                     var href = $(this).attr('href');
@@ -685,7 +727,40 @@ function onScroll() {
                 });
             }
         }
+
+        // apiMapping
+        for(var i = 0; i < apiNavMapping.length; i++) {
+            var obj = apiNavMapping[i];
+            var j = i+1;
+            if(j > apiNavMapping.length) { j = 0; }
+            var nextobj = apiNavMapping[j];
+            obj.navLink.removeClass('toc_scrolled');
+
+            if( (winTop >= obj.header.offset().top - localOffset) && (typeof(nextobj) === 'undefined' || winTop < nextobj.header.offset().top - localOffset) ) {
+                obj.navLink.addClass('toc_scrolled');
+                // add toc open to parents of this toc_scrolled
+                obj.navParentLinks.each(function() {
+                    var href = $(this).attr('href');
+                    var id = href.replace('#', '').replace(' ','-');
+                    var header = $('[id="'+id+'"]');
+                    if(header.is('h2')) {
+                        $(this).addClass('toc_open');
+                    }
+                });
+            }
+        }
+
     }
+}
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
 function hideToc(){
@@ -772,9 +847,10 @@ function moveToAnchor(id, animate, amount) {
             if(animate) {
                 $("html, body").animate({scrollTop: newSt}, 300);
             } else {
-                $("html, body").animate({scrollTop: newSt}, 300);
+                $("html, body").scrollTop(newSt);
             }
             $(document).trigger( "moveToAnchor" );
+
             window.history.pushState(null, null, url + href);
         }
     }
@@ -787,7 +863,7 @@ function updateTOC(){
         $('#TableOfContents a').on('click', function(e) {
             var href = $(this).attr('href');
             if(href.substr(0, 1) === '#') {
-                moveToAnchor(href.substr(1));
+                moveToAnchor(href.substr(1), false);
                 return false;
             }
         });
@@ -804,9 +880,6 @@ function updateTOC(){
 
     
 }
-
-
-
 
 function codeTabs(){
     if($('.code-tabs').length > 0) {
@@ -977,6 +1050,11 @@ function getPathElement(){
     if (path.includes('security/logs')) {
         aPath = document.querySelectorAll('.side [data-path*="security/logs"]')[1];
         maPath = document.querySelectorAll('header [data-path*="security/logs"]')[1];
+    }
+
+    if (path.includes('videos')) {
+        aPath = document.querySelector('.side [data-path*="videos"]');
+        maPath = document.querySelector('header [data-path*="videos"]');
     }
 
     if(aPath){

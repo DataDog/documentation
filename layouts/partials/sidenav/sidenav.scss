@@ -120,10 +120,7 @@ aside.sidenav {
       margin-top:5px;
     }
     ul li > ul {
-      // display: none;
-      max-height: 0px;
-      overflow: hidden;
-      transition: max-height .5s ease;
+      display: none;
     }
     ul li.open > ul {
       display:block;
@@ -132,10 +129,6 @@ aside.sidenav {
       > a { // Style the first a tag nested in an open list element.
         color: $ddpurple;
         border: 1px solid transparent;
-      }
-      & > ul {
-        max-height: 1000px;
-        overflow: hidden;
       }
       > a > span { // The nested span in a
         // border-bottom: 1px solid $ddpurple;
@@ -149,10 +142,6 @@ aside.sidenav {
     }
     ul li.open > ul,
     ul li.active > ul {
-      & {
-        max-height: 1000px;
-        overflow: hidden;
-      }
       li {
         padding-left:27px;
         a {
