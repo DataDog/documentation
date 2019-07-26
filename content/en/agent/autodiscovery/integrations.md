@@ -156,7 +156,7 @@ These integration templates may suit you in basic cases, but if you need to cust
 Your auto-configuration file should have the following format:
 
 ```
-ad_identifier:
+ad_identifiers:
   <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 
 init_config:
