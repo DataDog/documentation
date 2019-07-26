@@ -83,7 +83,6 @@ Beta integrations are disabled by default but can be enabled individually.
 | Spark Java                   | 2.3+       | [Beta][7]       | `sparkjava` (requires `jetty`)                 |
 | Spring Web (MVC)             | 4.0+       | Fully Supported | `spring-web`                                   |
 | Spring WebFlux               | 5.0+       | Fully Supported | `spring-webflux`                               |
-| Vert.x-Web                   | 4.1.0+     | Fully Supported | (requires `netty`)                             |
 
 **Web Framework tracing provides:** timing HTTP request to response, tags for the HTTP request (status code, method, etc), error and stacktrace capturing, linking work created within a web request and Distributed Tracing.
 
