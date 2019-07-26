@@ -17,7 +17,7 @@ from functools import partial, wraps
 from itertools import chain, zip_longest
 from multiprocessing.pool import ThreadPool as Pool
 from optparse import OptionParser
-from os import sep, makedirs, getenv, remove, getcwd
+from os import sep, makedirs, getenv, remove
 from os.path import (
     isdir,
     exists,
@@ -27,7 +27,6 @@ from os.path import (
     join,
     abspath,
     normpath,
-    dirname,
 )
 
 def cache_by_sha(func):
