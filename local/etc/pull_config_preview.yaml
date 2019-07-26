@@ -64,7 +64,6 @@
           kind: documentation
           aliases:
           - /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
----
 
   - repo_name: dd-trace-rb
     contents:
