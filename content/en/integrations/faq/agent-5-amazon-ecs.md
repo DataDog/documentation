@@ -2,6 +2,7 @@
 title: Amazon Elastic Container Service with Agent v5
 kind: faq
 disable_toc: true
+beta: true
 ---
 
 <div class="alert alert-warning">
