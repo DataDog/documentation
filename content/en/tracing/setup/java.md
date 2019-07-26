@@ -101,7 +101,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Apache HTTP Client       | 4.0+        | Fully Supported | `httpclient`                                   |
 | Apache HTTP Async Client | 4.0+        | Fully Supported | `httpasyncclient`, apache-httpasyncclient      |
 | AWS Java SDK             | 1.11+, 2.2+ | Fully Supported | `aws-sdk`                                      |
-| Google Http Client       | 1.19.0+     | Fully Supported | `google-http-client`                           |
+| Google HTTP Client       | 1.19.0+     | Fully Supported | `google-http-client`                           |
 | gRPC                     | 1.5+        | Fully Supported | `grpc`, `grpc-client`, `grpc-server`           |
 | HttpURLConnection        | all         | Fully Supported | `httpurlconnection`, `urlconnection`           |
 | Kafka-Clients            | 0.11+       | Fully Supported | `kafka`                                        |
