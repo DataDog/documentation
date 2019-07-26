@@ -59,6 +59,12 @@
       options:
         dest_path: '/agent/basic_agent_usage/'
         file_name: 'heroku.md'
+        front_matters:
+          title: Datadog Heroku Buildpack
+          kind: documentation
+          aliases:
+          - /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
+---
 
   - repo_name: dd-trace-rb
     contents:
