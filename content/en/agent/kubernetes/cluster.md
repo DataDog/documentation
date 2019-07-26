@@ -245,6 +245,8 @@ In order to collect events, you need the following environment variables in your
 ```
 Enabling the leader election ensures that only one Agent collects the events.
 
+**Note**: You must disable leader election in the Datadog Agent on your nodes before enabling leader election in the Datadog Cluster Agent. Otherwise, leader election may fail and cluster-level metrics may become unavailable.
+
 #### Cluster metadata provider
 
 In the Node Agent, set the environment variable `DD_CLUSTER_AGENT_ENABLED` to true.
