@@ -1315,6 +1315,7 @@ function replaceURL(input_url) {
         .slice(0, -2)
         .join("/");
       thisurl = window.location.protocol + '//' + window.location.host + path;
+      return thisurl;
     }
     return input_url.replace("https://www.docs.datadoghq.com", thisurl);
   }
