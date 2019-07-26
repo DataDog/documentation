@@ -25,6 +25,8 @@ To run the site and perform administrative tasks (compile metrics, create i18n p
 
 Documentation is available at `http://localhost:1313`
 
+To learn more about how the documentation is build refer to the [Documentation Build Wiki][7].
+
 ### Makefile
 
 To use the Makefile, create a Makefile.config. See the instructions at the top of the [Makefile.config.example][5].
@@ -49,19 +51,19 @@ stop                      stop the gulp/hugo server.
 ### Datadog Staff
 
 * Always branch off of master; never commit directly to master.
-* Name your branch `slack_handle/your_feature` if you would like to create a preview site and run tests.
+* Name your branch `<SLACK_HANDLE>/<FEATURE_NAME>` if you would like to create a preview site and run tests.
 * When you are ready to commit, create a new pull request to master from your branch.
-* Consult our [contributing guidelines][7].
+* Consult our [contributing guidelines][8] and the [Documentation Build Wiki][7].
 
 ### Outside Contributors
 
 * Fork the master branch.
 * When you are ready to commit make a pull request back to `DataDog/master`.
-* Consult our [contributing guidelines][7].
+* Consult our [contributing guidelines][8].
 
 ### A note about markdown
 
-This site uses Blackfriday for markdown. To learn about the syntax, [see this site][8].
+This site uses Blackfriday for markdown. To learn about the syntax, [see this site][9].
 
 If you include ANY Markdown in a file, give it an .md extension.
 
@@ -69,13 +71,13 @@ Make sure all files are lowercase. Macs are case insensitive when creating links
 
 ## Releasing
 
-If you receive an error regarding `There was a problem getting GitHub Metrics`, please see the [Github personal access token][9].
+If you receive an error regarding `There was a problem getting GitHub Metrics`, please see the [Github personal access token][10].
 
-Within 5 minutes of merging to master, it deploys automatically. You can see the status in the internal Datadog Slack *#documentation* channel.
+Within 5 minutes of merging to master, it deploys automatically.
 
 ## How to add a new integration
 
-[See the dedicated doc page][10]
+[See the dedicated doc page][11]
 
 [1]: https://gohugo.io
 [2]: https://nodejs.org/en/download/package-manager
@@ -83,7 +85,8 @@ Within 5 minutes of merging to master, it deploys automatically. You can see the
 [4]: https://github.com/pyenv/pyenv
 [5]: https://github.com/DataDog/documentation/blob/master/Makefile.config.example
 [6]: https://github.com/DataDog/documentation/wiki/Github-personal-token
-[7]: https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md
-[8]: https://github.com/russross/blackfriday
-[9]: https://github.com/DataDog/documentation/wiki/Github-personal-token
-[10]: https://docs.datadoghq.com/developers/integrations
+[7]: https://github.com/DataDog/documentation/wiki/Documentation-Build
+[8]: https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md
+[9]: https://github.com/russross/blackfriday
+[10]: https://github.com/DataDog/documentation/wiki/Github-personal-token
+[11]: https://docs.datadoghq.com/developers/integrations
