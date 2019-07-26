@@ -7,6 +7,8 @@ external_redirect: /api/#delete-aws-log-collection
 
 ## Delete AWS log collection
 
+<mark>This endpoint is in public beta.</mark>
+
 Delete a Datadog-AWS log collection configuration by removing the specific Lambda ARN associated with a given AWS account.
 
 ##### ARGUMENTS
