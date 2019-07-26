@@ -108,9 +108,6 @@ docker-start: clean docker-stop  ## start container and run default commands to 
 		-e GITHUB_TOKEN \
 		-e RUN_SERVER=${RUN_SERVER} \
 		-e CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS} \
-		-e DOGWEB=${DOGWEB} \
-		-e INTEGRATIONS_CORE=${INTEGRATIONS_CORE} \
-		-e INTEGRATIONS_EXTRAS=${INTEGRATIONS_EXTRAS} \
 		-e USE_DOCKER=true \
 		-p 1313:1313 mstbbs/docker-dd-docs:${IMAGE_VERSION}
 
@@ -154,9 +151,6 @@ start: clean source-helpers ## start the gulp/hugo server.
 		GITHUB_TOKEN=${GITHUB_TOKEN} \
 		RUN_SERVER=${RUN_SERVER} \
 		CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS} \
-		DOGWEB=${DOGWEB} \
-		INTEGRATIONS_CORE=${INTEGRATIONS_CORE} \
-		INTEGRATIONS_EXTRAS=${INTEGRATIONS_EXTRAS} \
 		CONFIGURATION_FILE=${CONFIGURATION_FILE} \
 		run-site.sh; \
 	else \
