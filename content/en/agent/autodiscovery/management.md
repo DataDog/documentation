@@ -14,7 +14,7 @@ Datadog Agent auto-discovers all containers available by default. To restrict it
 
 **Note**: The `docker.containers.running`, `.stopped`, `.running.total`, and `.stopped.total` metrics are not affected by these settings and always count all containers. This does not affect your per-container billing.
 
-If running the Agent as a binary on a host, configure your Autodiscovery perimeter with the [Host Agent](?tab=hostagent) tab instructions. If running the Agent as a container, configure your Autodiscovery perimeter with the [Containerized Agent Tab](?tab=containerizedagent) instructions.
+If running the Agent as a binary on a host, configure your Autodiscovery perimeter with the [Agent](?tab=agent) tab instructions. If running the Agent as a container, configure your Autodiscovery perimeter with the [Containerized Agent](?tab=containerizedagent) tab instructions.
 
 ## Exclude containers
 
@@ -23,7 +23,7 @@ Exclude containers from the Agent Autodiscovery perimeter with an exclude rule b
 **Note**: Exclude rules support regexes, and are defined as a list of comma-separated strings.
 
 {{< tabs >}}
-{{% tab "Host Agent" %}}
+{{% tab "Agent" %}}
 
 To remove a given Docker container with the image `<IMAGE_NAME>` from Autodiscovery, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
@@ -79,7 +79,7 @@ Include containers from the Agent Autodiscovery perimeter with an include rule b
 **Note**: Include rules support regexes, and are defined as a list of comma-separated strings.
 
 {{< tabs >}}
-{{% tab "Host Agent" %}}
+{{% tab "Agent" %}}
 
 To include a given Docker container with the image `<IMAGE_NAME>` from Autodiscovery, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
