@@ -109,6 +109,7 @@ index_algolia:
   stage: post-deploy
   environment: "live"
   script:
+    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['js', 'images', 'fonts', 'en', 'css', 'search', 'json', 'error', 'matts quick tips', 'videos']" -l "['fr','ja']" -c "./local/etc/docsdatadoghq.json"
     - cp ./local/etc/docsdatadoghq.json /etc/
     - index_docsearch_algolia
   only:
