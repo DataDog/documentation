@@ -1065,6 +1065,11 @@ function getPathElement(){
         maPath = document.querySelector('header [data-path*="monitors/monitor_type/trace_search"]');
     }
 
+    if (path.includes('developers/guide')) {
+        aPath = document.querySelector('.side [data-path*="developers/guide"]');
+        maPath = document.querySelector('header [data-path*="developers/guide"]');
+    }
+
     if(aPath){
         aPath.classList.add('active');
         hasParentLi(aPath);
@@ -1131,7 +1136,6 @@ function loadPage(newUrl) {
         document.querySelector('.mobile-toc-toggle').click();
     }
     
-
     var mainContent = document.getElementById("mainContent");
     var currentTOC = document.querySelector('.toc-container');
     mainContent.classList.add('loading');
@@ -1157,6 +1161,7 @@ function loadPage(newUrl) {
         }
 
         var newContent = httpRequest.responseXML.getElementById("mainContent");
+        console.log('httpRequest.responseXML: ', httpRequest.responseXML);
         var newTOC = httpRequest.responseXML.querySelector(".toc-container");
 
         newContent.classList.add('loading');
@@ -1290,70 +1295,77 @@ function reloadWistiaVidScripts(vidId){
     }
 }
 
+var sideNav = document.querySelector('.side');
+
+sideNav.addEventListener('click', function (e){
+    
+    event.stopPropagation();
+    // console.log('clicked on ');
+    // console.log(event.target);
+    // Remove any existing open and active classes
+    var newUrl;
+    
+    // If what is clicked is not the actual li tag, ie the img icon span
+    if (event.target !== this){
+    
+        // Get the targets parent li
+        var parentli = event.target.closest('li');
+
+        // Get the a
+        var a = parentli.querySelector('a');
+        newUrl = a.href;
+
+    }
+
+    // Hide mobile nav after clicking nav element
+    if ($('.navbar-collapse').hasClass('show')) {
+        $('.navbar-collapse').collapse('hide');
+    }
+
+    // TODO: How to fall back to normal behavior?
+    // if (event.target.tagName !== "A")
+    //     return;
+
+    // History API needed to make sure back and forward still work
+    if (history === null)
+        return;
+
+    // External links should instead open in a new tab
+
+    newUrl = event.target.closest('li').querySelector('a').href;
+
+    var domain = window.location.origin;
+
+    if (typeof domain !== "string" || newUrl.search(domain) !== 0) {
+        event.preventDefault();
+        window.open(newUrl, "_blank");
+    } else if (loadViaAjax(e.target)) {
+        loadPage(newUrl);
+        event.preventDefault();
+        history.pushState(null /*stateObj*/, "" /*title*/, newUrl);
+        updateSidebar(event);
+    } else {
+        window.location.href = newUrl;
+    }
+
+});
+
+function loadViaAjax(element){
+    var hasClassOpen = element.closest('li').classList.contains('js-load') ? true : false;
+    var parentHasClassOpen = element.parentElement.classList.contains('js-load') ? true : false;
+
+    if (hasClassOpen) {
+        return true;
+    } else if (parentHasClassOpen){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 window.onload = function(){
     getPathElement();
-    var sidenavElements = document.querySelectorAll('.side .js-load');
-    var mobilenavElements = document.querySelectorAll('header .sidenav-nav .js-load');
-
-    var show = function(event) {
-        event.stopPropagation();
-        // console.log('clicked on ');
-        // console.log(event.target);
-        // Remove any existing open and active classes
-        var newUrl;
-        
-        // If what is clicked is not the actual li tag, ie the img icon span
-        if (event.target !== this){
-        
-            // Get the targets parent li
-            var parentli = event.target.closest('li');
-
-            // Get the a
-            var a = parentli.querySelector('a');
-            newUrl = a.href;
-
-        }
-
-        // Hide mobile nav after clicking nav element
-        if ($('.navbar-collapse').hasClass('show')) {
-            $('.navbar-collapse').collapse('hide');
-        }
-
-        // TODO: How to fall back to normal behavior?
-        // if (event.target.tagName !== "A")
-        //     return;
-
-        // History API needed to make sure back and forward still work
-        if (history === null)
-            return;
-
-        // External links should instead open in a new tab
-
-        newUrl = event.target.closest('li').querySelector('a').href;
-
-        var domain = window.location.origin;
-        if (typeof domain !== "string" || newUrl.search(domain) !== 0) {
-            event.preventDefault();
-            window.open(newUrl, "_blank");
-        } else if(newUrl.includes(domain + '/api')){ // if nav link is to api page, dont link via ajax
-            window.location.href = domain + '/api/';
-        }  else {
-            
-            loadPage(newUrl);
-            event.preventDefault();
-            history.pushState(null /*stateObj*/, "" /*title*/, newUrl);
-            updateSidebar(event);
-            // if mobile nav, close
-
-        }
-    }
-    for (var i = sidenavElements.length - 1; i >= 0; --i) {
-        sidenavElements[i].onclick = show;
-    }
-
-    for (var i = mobilenavElements.length - 1; i >= 0; --i) {
-        mobilenavElements[i].onclick = show;
-    }
 }
 
 function replaceURL(input_url) {
@@ -1378,14 +1390,7 @@ window.addEventListener('popstate', function(event) {
         closeNav();
         getPathElement();
         
-    } else {
-        // window.history.replaceState()
-        // console.log('window.location.href: ', window.location.href);
-        // var url = window.location.href;
-        // window.location.href = url
-        // this.console.log('replaceURL(domain): ', replaceURL(domain));
-        // window.location.href = replaceURL(domain) + '/api/';
-    }
+    } 
 
 }, false);
 

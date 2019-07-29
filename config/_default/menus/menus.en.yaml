@@ -336,6 +336,7 @@ main:
 
   - name: "Integrations"
     url: "integrations/"
+    identifier: "integrations_top_level"
     pre: "nav_integrations"
     weight: 40000
 
@@ -345,6 +346,7 @@ main:
 
   - name: "Watchdog"
     url: "watchdog/"
+    identifier: "watchdog_top_level"
     pre: "nav_watchdog"
     weight: 50000
 
@@ -814,11 +816,13 @@ main:
 
   - name: "Trace API"
     url: "api/#tracing"
+    identifier: "tracing api"
     parent: "tracing"
     weight: 6
 
   - name: "Community Libraries"
     url: "developers/libraries/#apm-tracing-client-libraries/"
+    identifier: "community_library"
     parent: "tracing"
     weight: 7
 
@@ -1266,6 +1270,7 @@ main:
   - name: "Glossary"
     url: "glossary/"
     pre: "nav_glossary"
+    identifier: "glossary_top_level"
     weight: 150000
 
 ############
@@ -1275,6 +1280,7 @@ main:
   - name: "Videos"
     url: "videos/"
     pre: "nav_videos"
+    identifier: "video_top_level"
     weight: 160000
 
 ##########
@@ -1284,4 +1290,5 @@ main:
   - name: "Help"
     url: "help/"
     pre: "nav_help"
+    identifier: "help_top_level"
     weight: 170000
