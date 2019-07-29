@@ -1011,9 +1011,7 @@ function getPathElement(){
     var aPath = document.querySelector('.side [data-path="'+path+'"]');
     var maPath = document.querySelector('header [data-path="'+path+'"]');
 
-    console.log('aPath: ', aPath);
-
-    // exception for agent/guide and tracing/guide path, there's no 3rd level for specific agent/guide/**
+    // TODO: fix exceptions for specific nav links that have the same url but both open the same place
     if (path.includes('agent/guide/upgrade-to-agent-v6')) {
         aPath = document.querySelectorAll('.side [data-path*="agent/guide"]')[0];
         maPath = document.querySelectorAll('header [data-path*="agent/guide"]')[0];
@@ -1060,6 +1058,11 @@ function getPathElement(){
     if (path.includes('account_management/billing')) {
         aPath = document.querySelector('.side [data-path*="account_management/billing"]');
         maPath = document.querySelector('header [data-path*="account_management/billing"]');
+    }
+
+    if (path.includes('monitors/monitor_type/trace_search')) {
+        aPath = document.querySelector('.side [data-path*="monitors/monitor_type/trace_search"]');
+        maPath = document.querySelector('header [data-path*="monitors/monitor_type/trace_search"]');
     }
 
     if(aPath){

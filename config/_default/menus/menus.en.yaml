@@ -601,10 +601,15 @@ main:
     url: "monitors/monitor_types/process/"
     parent: "monitor_types"
     weight: 113
+  - name: "Trace Search"
+    url: "monitors/monitor_types/trace_search"
+    parent: "monitor_types"
+    identifier: "monitors_trace_search"
+    weight: 114
   - name: "Watchdog"
     url: "monitors/monitor_types/watchdog/"
     parent: "monitor_types"
-    weight: 114
+    weight: 115
     identifier: "monitor_watchdog"
 
   ## MONITORS -  Manage monitor
@@ -802,6 +807,10 @@ main:
     url: "tracing/trace_search_and_analytics/analytics/"
     parent: "tracing_search_analytics"
     weight: 503
+  - name: "Monitors"
+    url: "monitors/monitor_types/trace_search"
+    parent: "tracing_search_analytics"
+    weight: 504
 
   - name: "Trace API"
     url: "api/#tracing"
