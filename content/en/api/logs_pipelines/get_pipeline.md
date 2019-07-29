@@ -7,7 +7,7 @@ external_redirect: /api/#get-a-pipelines
 
 ## Get a Pipeline
 
-Get a specific Pipeline from your Organization.
+Get a specific pipeline from your organization.
 
 ##### Arguments
 

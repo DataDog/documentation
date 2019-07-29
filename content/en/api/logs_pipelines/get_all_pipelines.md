@@ -7,7 +7,7 @@ external_redirect: /api/#get-all-pipelines
 
 ## Get all Pipelines
 
-Get all pipelines from your Organization.
+Get all pipelines from your organization.
 
 ##### Arguments
 

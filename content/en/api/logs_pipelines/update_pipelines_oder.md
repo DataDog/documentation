@@ -1,11 +1,11 @@
 ---
-title: Update Pipelines Order
+title: Update Pipeline Order
 type: apicontent
 order: 24.2
 external_redirect: /api/#update-pipelines-order
 ---
 
-## Update Pipelines Order
+## Update Pipeline Order
 
 Update the order of your Pipelines.
 

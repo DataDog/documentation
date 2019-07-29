@@ -1,5 +1,5 @@
 ---
-title: Get Pipelines Order
+title: Get Pipeline Order
 type: apicode
 order: 24.1
 external_redirect: /api/#get-pipelines-order

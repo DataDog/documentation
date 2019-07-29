@@ -7,7 +7,7 @@ external_redirect: /api/#create-a-pipeline
 
 ## Create a Pipeline
 
-Create a Pipeline in your Organization.
+Create a Pipeline in your organization.
 
 
 ##### Arguments
@@ -17,9 +17,9 @@ Create a Pipeline in your Organization.
     Your pipeline name.
 
 * **`is_enabled`** [*optional*, *default*=**False**]:
-    Boolean value wether or note your pipeline is enabled
+    Boolean value to enable your pipeline.
 
-* **`filter.query`** [*optional*]: Defines your Pipeline Filter. Only logs that match the filter criteria are processed by this pipeline.
+* **`filter.query`** [*optional*]: Defines your pipeline filter. Only logs that match the filter criteria are processed by this pipeline.
 
-* **`processors`** [*optional*]: Ordered Array of Processors or Nested Pipelines. See the [Processor documentation][1] to get the specific Scheme for each processor.
+* **`processors`** [*optional*]: Ordered array of processors or nested pipelines. See the [Processor documentation][1] to get the specific Scheme for each processor.
 [1]: /logs/processing/processors/?tab=api

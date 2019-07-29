@@ -1,13 +1,13 @@
 ---
-title: Get Pipelines Order
+title: Get Pipeline Order
 type: apicontent
 order: 24.1
 external_redirect: /api/#get-pipelines-order
 ---
 
-## Get Pipelines Order
+## Get Pipeline Order
 
-Get the current order of your Pipelines.
+Get the current order of your pipelines.
 
 ##### Arguments
 
