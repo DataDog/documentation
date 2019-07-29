@@ -70,7 +70,7 @@ spec:
         ports:
           - containerPort: 8125
             ## Custom metrics via DogStatsD - uncomment this section to enable custom metrics collection
-            ## Set also DD_DOGSTATSD_NON_LOCAL_TRAFFIC to true to collect StatsD metrics from other containers.
+            ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to true to collect StatsD metrics from other containers.
             # hostPort: 8125
             name: dogstatsdport
             protocol: UDP
