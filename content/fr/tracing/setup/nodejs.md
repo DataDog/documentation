@@ -156,11 +156,12 @@ Pour découvrir comment activer et configurer des plug-ins, consultez la [docume
 
 #### Compatibilité des enregistreurs
 
-| Module        | Versions | Type de prise en charge    |
-|---------------|----------|-----------------|
-| [bunyan][37]  | `>=1`    | Complète |
-| [pino][38]    | `>=2`    | Complète |
-| [winston][39] | `>=1`    | Complète |
+| Module           | Versions  | Type de prise en charge    |
+|------------------|-----------|-----------------|
+| [bunyan][37]     | `>=1`     | Complète |
+| [paperplane][48] | `>=2.3.2` | Complète |
+| [pino][38]       | `>=2`     | Complète |
+| [winston][39]    | `>=1`     | Complète |
 
 ## Pour aller plus loin
 
@@ -213,3 +214,4 @@ Pour découvrir comment activer et configurer des plug-ins, consultez la [docume
 [45]: https://github.com/senchalabs/connect
 [46]: http://tediousjs.github.io/tedious/
 [47]: https://www.fastify.io/
+[48]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger

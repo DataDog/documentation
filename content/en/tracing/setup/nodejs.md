@@ -107,7 +107,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [graphql][12]    | `>=0.10` | Fully Supported | Supports Apollo Server and express-graphql |
 | [hapi][13]       | `>=2`    | Fully Supported |                                            |
 | [koa][14]        | `>=2`    | Fully Supported |                                            |
-| [paperplane][41] | `>=2.3.1`  | Fully Supported | Not supported in [serverless-mode][42]     |
+| [paperplane][41] | `>=2.3`  | Fully Supported | Not supported in [serverless-mode][42]     |
 | [restify][15]    | `>=3`    | Fully Supported |                                            |
 
 #### Native Module Compatibility
@@ -157,11 +157,12 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 #### Logger Compatibility
 
-| Module        | Versions | Support Type    |
-|---------------|----------|-----------------|
-| [bunyan][37]  | `>=1`    | Fully Supported |
-| [pino][38]    | `>=2`    | Fully Supported |
-| [winston][39] | `>=1`    | Fully Supported |
+| Module           | Versions  | Support Type    |
+|------------------|-----------|-----------------|
+| [bunyan][37]     | `>=1`     | Fully Supported |
+| [paperplane][48] | `>=2.3.2` | Fully Supported |
+| [pino][38]       | `>=2`     | Fully Supported |
+| [winston][39]    | `>=1`     | Fully Supported |
 
 ## Further Reading
 
@@ -214,3 +215,4 @@ For details about how to how to toggle and configure plugins, check out the [API
 [45]: https://github.com/senchalabs/connect
 [46]: http://tediousjs.github.io/tedious/
 [47]: https://www.fastify.io/
+[48]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
