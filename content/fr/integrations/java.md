@@ -192,7 +192,7 @@ Pour lancer un check JMX sur l'un de vos conteneurs :
 | `tools_jar_path`                              | Non       | À définir lorsque `process_name_regex` est défini.                                                                                                                                                                                                                                                                                               |
 | `refresh_beans`                               | Non       | Période d'actualisation de la liste des Mbean correspondants. Valeur par défaut : 600 s. Toute valeur inférieure peut entraîner une augmentation de l'utilisation du processeur.                                                                                                                                                                                                |
 
-Le paramètre `conf` correspond à une liste des dictionnaires. Seules deux clés sont autorisées dans ce dictionnaire :
+Le paramètre `conf` correspond à une liste de dictionnaires. Seules deux clés sont autorisées dans ce dictionnaire :
 
 | Clé       | Obligatoire | Description                                                                                                                                |
 |-----------|----------|--------------------------------------------------------------------------------------------------------------------------------------------|

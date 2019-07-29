@@ -151,7 +151,7 @@ Le projet GCP peut désormais être configuré de façon à transmettre les logs
 [3]: https://console.cloud.google.com/apis/credentials/domainverification
 
 {{% /tab %}}
-{{% tab "Datadog EU site" %}}
+{{% tab "Site européen de Datadog" %}}
 
 Pour valider le domaine, vous devez demander à Google de générer un fichier HTML qui est utilisé comme identifiant unique. Cela permet à Google de valider l'endpoint Datadog et d'y transmettre les logs.
 
@@ -210,7 +210,7 @@ Le Pub/Sub peut désormais recevoir des logs de Stackdriver et les transmettre �
 **Remarque** : si vous constatez une erreur à l'étape 3, cela signifie que le site Datadog n'a pas été validé. Consultez les [étapes de validation du domaine](#valider-le-domaine) pour vérifier qu'il est bien validé.
 
 {{% /tab %}}
-{{% tab "Datadog EU site" %}}
+{{% tab "Site européen de Datadog" %}}
 
 1. Revenez sur le Pub/Sub créé plus tôt et ajoutez un `subscription` :
 

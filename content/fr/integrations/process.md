@@ -76,7 +76,7 @@ Remarque : cela ne fonctionne que si les règles sudoers appropriées ont été
 dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
 ```
 
-Consultez l’[exemple de configuration][2] pour en savoir plus sur les options de configuration disponibles.
+Consultez l'[exemple de configuration][2] pour en savoir plus sur les options de configuration disponibles.
 
 [Redémarrez l'Agent][6] pour commencer à envoyer vos métriques de processus et vos checks de service à Datadog.
 

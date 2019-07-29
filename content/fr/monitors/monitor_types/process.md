@@ -21,7 +21,7 @@ Les monitors de processus sont configurés pour vérifier le statut d'un ou de p
 
 {{< img src="monitors/monitor_types/process/live_process_monitor_select.png" alt="monitor de live processes" responsive="true" style="width:35%;">}}
 
-Les monitors de live processes tirent parti des données collectées par l’[Agent de processus][1], qui vous permet de créer des monitors de manière centralisée. Ces monitors envoient des états d'alerte ou d'avertissement en fonction du comportement des groupes de processus associés à un host ou un tag.
+Les monitors de live processes tirent parti des données collectées par l'[Agent de processus][1], qui vous permet de créer des monitors de manière centralisée. Ces monitors envoient des états d'alerte ou d'avertissement en fonction du comportement des groupes de processus associés à un host ou un tag.
 
 ### Configuration
 

@@ -50,7 +50,7 @@ config_providers:
 
 {{% tab "Docker" %}}
 
-Suivez les instructions pour l'[Agent Docker][1], en transmettant, en plus de tout autre réglage personnalisé, les attributs suivants (selon les cas) :
+Suivez les instructions pour l'[Agent Docker][1], en transmettant, en plus de tout autre paramètre personnalisé, les attributs suivants (selon les cas) :
 
 ```
 -e DD_LOGS_ENABLED=true
@@ -125,7 +125,7 @@ Pour combiner plusieurs recherches textuelles au sein d'une requête complexe, v
 |              |                                                                                                                                  |                                                                 |
 | :----        | :----                                                                                                                            | :----                                                           |
 | **Opérateur** | **Description**                                                                                                                  | **Exemple**                                                     |
-| `AND`        | **Intersection** : les deux termes sont dans les événements sélectionnés (AND est défini par défaut en l'absence d'opérateur).                           | java AND elasticsearch                                          |
+| `AND`        | **Intersection** : les deux termes sont inclus dans les événements sélectionnés (si aucun opérateur n'est ajouté, AND est utilisé par défaut).                           | java AND elasticsearch                                          |
 | `OR`         | **Union** : un des deux termes est inclus dans les événements sélectionnés.                                                                       | java OR python                                                  |
 | `NOT` / `!`  | **Exclusion** : le terme suivant n'est PAS dans l'événement. Vous pouvez utiliser le mot `NOT` ou le caractère `!` pour effectuer la même opération. | java NOT elasticsearch <br> **équivalent** : java !elasticsearch |
 
