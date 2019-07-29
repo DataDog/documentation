@@ -44,7 +44,7 @@ The copied widget can be pasted within Datadog by using `Ctrl + V` (`Cmd + V` fo
 
 A copied widget can also be shared outside of Datadog as a static image stored in the same Datadog datacenter as your Datadog site (US or EU).
 
-[1]: /grpahing/dashboards
+[1]: /graphing/dashboards
 [2]: /graphing/notebooks
 [3]: /tracing/visualization/service
 [4]: /tracing/visualization/resource
