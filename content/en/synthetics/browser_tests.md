@@ -160,3 +160,4 @@ Common failure reasons include:
 [5]: https://www.google.com/chrome
 [6]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [7]: /synthetics/settings/#secure-credential
+[8]: /help
