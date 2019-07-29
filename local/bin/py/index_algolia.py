@@ -56,7 +56,7 @@ def index_algolia(app_id, api_key, content_path=None):
                             html = BeautifulSoup(myfile, "html.parser")
 
                             # no crawl?
-                            private = html.find_all('meta', {'name': 'robots', 'content': 'noindex'})
+                            private = html.find_all('meta', {'name': 'robots', 'content': 'noindex, nofollow'})
                             refresh = html.find('meta', attrs={'http-equiv': 'refresh'})
                             if private or refresh:
                                 print('skipping beta or alias or refresh: %s' % dirpath)
