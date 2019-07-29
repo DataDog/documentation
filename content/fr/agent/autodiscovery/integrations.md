@@ -155,7 +155,7 @@ Ces modèles d'intégration peuvent convenir dans les cas simples. Toutefois, si
 Votre fichier de configuration automatique doit avoir le format suivant :
 
 ```
-ad_identifier:
+ad_identifiers:
   <IDENTIFIANT_INTÉGRATION_AUTODISCOVERY>
 
 init_config:

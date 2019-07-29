@@ -2,7 +2,7 @@
 title: Configuration de l'APM
 kind: Documentation
 aliases:
-  - /fr/tracing/languages/
+  - /fr/tracing/setup/
   - /fr/tracing/environments/
   - /fr/tracing/setup/environment
   - /fr/tracing/setup/first_class_dimensions
@@ -11,16 +11,16 @@ further_reading:
   - link: /agent/docker/apm
     tag: Documentation
     text: Configuration de Docker
-  - link: tracing/languages/go
+  - link: tracing/setup/go
     tag: Documentation
     text: Instrumentation avec Go
-  - link: tracing/languages/java
+  - link: tracing/setup/java
     tag: Documentation
     text: Instrumentation avec Java
-  - link: tracing/languages/python
+  - link: tracing/setup/python
     tag: Documentation
     text: Instrumentation avec Python
-  - link: tracing/languages/ruby
+  - link: tracing/setup/ruby
     tag: Documentation
     text: Instrumentation avec Ruby
 ---
@@ -40,17 +40,17 @@ Pour commencer à tracer votre application :
 2. **Configurez votre environnement** :
   un environnement est un [tag primaire](#tags-primaires) obligatoire utilisé pour englober l'ensemble d'une application APM Datadog. Cela sert notamment à dissocier des métriques des environnements par étape, pour la production, le transit ou encore la pré-production. [Découvrez comment configurer des tags primaires](#tags-primaires).
 
-3. **Instrumentez votre application** :  
+3. **Instrumentez votre application** :
 
   {{< whatsnext desc="Sélectionnez l'un des langages pris en charge suivants :">}}
-      {{< nextlink href="tracing/languages/java" tag="Java" >}}Instrumentation avec Java{{< /nextlink >}}
-      {{< nextlink href="tracing/languages/cpp" tag="C++" >}}Instrumentation avec C++{{< /nextlink >}}
-      {{< nextlink href="tracing/languages/python" tag="Python" >}}Instrumentation avec Python{{< /nextlink >}}
-      {{< nextlink href="tracing/languages/ruby" tag="Ruby" >}}Instrumentation avec Ruby{{< /nextlink >}}
-      {{< nextlink href="tracing/languages/go" tag="Go" >}}Instrumentation avec Go{{< /nextlink >}}
-      {{< nextlink href="tracing/languages/nodejs" tag="Nodejs" >}}Instrumentation avec Node.js{{< /nextlink >}}
-      {{< nextlink href="tracing/languages/dotnet" tag=".NET" >}}Instrumentation avec .NET{{< /nextlink >}}
-      {{< nextlink href="tracing/languages/php" tag="PHP" >}}Instrumentation avec PHP{{< /nextlink >}}
+      {{< nextlink href="tracing/setup/java" tag="Java" >}}Instrumentation avec Java{{< /nextlink >}}
+      {{< nextlink href="tracing/setup/cpp" tag="C++" >}}Instrumentation avec C++{{< /nextlink >}}
+      {{< nextlink href="tracing/setup/python" tag="Python" >}}Instrumentation avec Python{{< /nextlink >}}
+      {{< nextlink href="tracing/setup/ruby" tag="Ruby" >}}Instrumentation avec Ruby{{< /nextlink >}}
+      {{< nextlink href="tracing/setup/go" tag="Go" >}}Instrumentation avec Go{{< /nextlink >}}
+      {{< nextlink href="tracing/setup/nodejs" tag="Nodejs" >}}Instrumentation avec Node.js{{< /nextlink >}}
+      {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}Instrumentation avec .NET{{< /nextlink >}}
+      {{< nextlink href="tracing/setup/php" tag="PHP" >}}Instrumentation avec PHP{{< /nextlink >}}
   {{< /whatsnext >}}
 
 

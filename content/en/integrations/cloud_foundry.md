@@ -419,7 +419,7 @@ The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events)
 [9]: https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip
 [10]: https://github.com/cf-platform-eng/meta-buildpack
 [11]: /tracing/setup
-[12]: https://docs.datadoghq.com/agent/proxy/#proxy-for-logs
+[12]: https://docs.datadoghq.com/agent/logs/proxy
 [13]: /developers/dogstatsd
 [14]: /libraries
 [15]: https://bosh.io/docs/bosh-cli.html

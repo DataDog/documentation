@@ -75,7 +75,7 @@ Visit a tracing-enabled endpoint of your application and view the [APM UI][5] to
 
 **Note**: It might take a few minutes before traces appear in the UI.
 
-[1]: /tracing/languages/php/#install-the-extension
+[1]: /tracing/setup/php/#install-the-extension
 [2]: https://github.com/DataDog/dd-trace-php/releases
 [3]: #modify-the-ini-file
 [4]: https://github.com/DataDog/dd-trace-php/releases/latest
