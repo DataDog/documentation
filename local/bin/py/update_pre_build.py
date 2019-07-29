@@ -558,6 +558,7 @@ class PreBuild:
         """
         Goes through all files needed for integrations build
         and triggers the right function for the right type of file.
+        See https://github.com/DataDog/documentation/wiki/Documentation-Build#integrations to learn more.
         :param content: integrations content to process
         """
         for file_name in chain.from_iterable(
@@ -580,13 +581,21 @@ class PreBuild:
         """
         Takes the content from a file from a github repo and
         pushed it to the doc
-        :param content: object with a file name and a file path
+        See https://github.com/DataDog/documentation/wiki/Documentation-Build#pull-and-push-files to learn more
+        :param content: object with a file_name, a file_path, and options to apply
         """
 
         with open(
             "".join(content["globs"]), mode="r+"
         ) as f:
             file_content = f.read()
+
+            ## If options include front params, then the H1 title of the source file is striped
+            ## and the options front params are inlined
+
+            if "front_matters" in content["options"]:
+                front_matters= "---\n" + yaml.dump(content["options"]["front_matters"]) + "---\n"
+                file_content = re.sub(self.regex_h1_replace, front_matters, file_content, count=0)
 
         with open(
             "{}{}{}".format(
@@ -603,6 +612,7 @@ class PreBuild:
         """
         Take the content from a folder following github logic
         and transform it to be displayed in the doc in dest_dir folder
+        See https://github.com/DataDog/documentation/wiki/Documentation-Build#pull-and-push-folder to learn more
         :param content: content to process
         """
 
