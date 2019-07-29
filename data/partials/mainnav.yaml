@@ -293,7 +293,7 @@ main:
             url: "monitors/monitor_types/outlier/"
           - name: "Process"
             url: "monitors/monitor_types/process/"
-          - name: "Trace Search"
+          - name: "Trace Analytics"
             url: "monitors/monitor_types/trace_analytics/"
           - name: "Watchdog"
             url: "monitors/monitor_types/watchdog/"
