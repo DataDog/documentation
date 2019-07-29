@@ -145,7 +145,7 @@ Common failure reasons include:
 | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `General test failure`       |  |
 | `Element located but it's invisible`             | The element is on the page but cannot be clicked on—for instance, if another element is overlaid on top of it.                                                          |
-| `Cannot locate element` | Element cannot be not found in the HTML.                                                                                                                             |
+| `Cannot locate element` | The element cannot be found in the HTML.                                                                                                                             |
 | `Select did not have option`             | The specified option is missing from the dropdown menu.                                                                                     |
 | `Forbidden URL`         | The test likely encountered a protocol that is not supported. Reach out to [Datadog support] for further details.  |
 
