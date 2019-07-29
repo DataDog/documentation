@@ -53,6 +53,9 @@ build_preview:
     #- remove_static_from_repo
     #- create_artifact
     #- create_artifact_untracked
+  cache:
+    paths:
+      - public/
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
