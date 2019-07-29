@@ -27,7 +27,7 @@ if [ ${RUN_SERVER} == true ]; then
 			args="${args} --token ${GITHUB_TOKEN}"
 		else
 			echo "No GITHUB TOKEN was found. skipping any data sync that relies on pulling from web.\n"
-			echo "Add all source repositories in the same parent folder as for the documentation to build it locally."
+			echo "Add all source repositories in the same parent folder as the documentation/ folder to build the full doc locally.\n"
 			update_pre_build.py
 		fi
 		if [[ ${args} != "" ]]; then
