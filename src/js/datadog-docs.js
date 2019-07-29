@@ -1045,9 +1045,19 @@ function getPathElement(){
         maPath = document.querySelectorAll('header [data-path*="security/logs"]')[1];
     }
 
+    if (path.includes('security/agent')) {
+        aPath = document.querySelectorAll('.side [data-path*="security/agent"]')[1];
+        maPath = document.querySelectorAll('header [data-path*="security/agent"]')[1];
+    }
+
     if (path.includes('videos')) {
         aPath = document.querySelector('.side [data-path*="videos"]');
         maPath = document.querySelector('header [data-path*="videos"]');
+    }
+
+    if (path.includes('account_management/billing')) {
+        aPath = document.querySelector('.side [data-path*="account_management/billing"]');
+        maPath = document.querySelector('header [data-path*="account_management/billing"]');
     }
 
     if(aPath){
@@ -1196,6 +1206,13 @@ function loadPage(newUrl) {
         mainContent.parentElement.replaceChild(newContent, mainContent);
         mainContent = newContent;
 
+        var wistiaVid = document.querySelector('.wistia [data-wistia-id]');
+
+        var wistiaVidId;
+        if (wistiaVid) {
+            wistiaVidId = wistiaVid.dataset.wistiaId;
+        }
+
         if (newTOC.querySelector('#TableOfContents')) {
             currentTOC.replaceWith(newTOC);
                 buildTOCMap();
@@ -1204,6 +1221,7 @@ function loadPage(newUrl) {
                 widthCheck();
                 tocWidthUpdate();
                 updateMainContentAnchors();
+                reloadWistiaVidScripts(wistiaVidId);
         } else if (!newTOC.querySelector('#TableOfContents')) {
             if (document.querySelector('.toc-container #TableOfContents')) {
                 document.querySelector('.toc-container #TableOfContents').remove();
@@ -1240,6 +1258,32 @@ function loadPage(newUrl) {
     httpRequest.open("GET", newUrl);
     httpRequest.send();
 };
+
+// when navigating to asynced nav with a Wistia video, the video script tags need to be removed and readded for the video to load
+function reloadWistiaVidScripts(vidId){
+    var oldWistiaScripts = document.querySelectorAll('.wistia script');
+    var wistiaCont = document.querySelector('.wistia');
+    var i = 0;
+
+    if (wistiaCont && vidId){
+
+        // remove current script tags
+        for(i; i < oldWistiaScripts.length; i+=1){
+            oldWistiaScripts[i].remove();
+        }
+
+        // create new script tags
+        var wistaVideoScript = document.createElement('script');
+        var wistaVideoScript2 = document.createElement('script');
+        
+        wistaVideoScript.setAttribute('src','https://fast.wistia.com/assets/external/E-v1.js');
+        wistaVideoScript2.setAttribute('src','https://fast.wistia.com/embed/medias/'+ vidId +'.jsonp');
+        
+        wistiaCont.appendChild(wistaVideoScript);
+        wistiaCont.appendChild(wistaVideoScript2);
+
+    }
+}
 
 window.onload = function(){
     getPathElement();
@@ -1339,3 +1383,7 @@ window.addEventListener('popstate', function(event) {
     }
 
 }, false);
+
+
+
+

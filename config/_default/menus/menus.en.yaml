@@ -638,10 +638,14 @@ main:
     weight: 7
     parent: "alerting"
 
+  ## MONITORS -  Guides
+
   - name: "Guides"
     url: "monitors/guide/"
-    weight: 8
+    weight: 100
     parent: "alerting"
+
+  
 
 #################
 ## TRACING/APM ##
