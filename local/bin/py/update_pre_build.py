@@ -19,13 +19,14 @@ from multiprocessing.pool import ThreadPool as Pool
 from optparse import OptionParser
 from os import sep, makedirs, getenv, remove
 from os.path import (
+    isdir,
     exists,
     basename,
     curdir,
+    dirname,
     join,
     abspath,
     normpath,
-    dirname,
 )
 
 def cache_by_sha(func):
@@ -173,23 +174,6 @@ class PreBuild:
     def __init__(self, opts):
         super().__init__()
         self.options = opts
-        if (
-            self.options.dogweb
-            and not self.options.dogweb.endswith(sep)
-        ):
-            self.options.dogweb = self.options.dogweb + sep
-        if (
-            self.options.integrations
-            and not self.options.integrations.endswith(sep)
-        ):
-            self.options.integrations = (
-                self.options.integrations + sep
-            )
-        if (
-            self.options.extras
-            and not self.options.extras.endswith(sep)
-        ):
-            self.options.extras = self.options.extras + sep
         self.list_of_contents = []
         self.tempdir = (
             "/tmp"
@@ -482,113 +466,23 @@ class PreBuild:
         """
         This goes through the list_of_contents and check for each repo specified
         If a local version exists otherwise we download it from the upstream repo on Github
+        Local version of the repo should be in the same folder as the documentation/ folder.
         """
         for content in self.list_of_contents:
-            if content["repo_name"] == "dogweb":
-                if not self.options.dogweb:
-                    if self.options.token:
-                        print(
-                            "No local version of {} found, downloading content from upstream version".format(
-                                content["repo_name"]
-                            )
-                        )
-                        self.download_from_repo(
-                            content["org_name"],
-                            content["repo_name"],
-                            content["branch"],
-                            content["globs"],
-                        )
-                        content[
-                            "globs"
-                        ] = self.update_globs(
-                            "{0}{1}{2}".format(
-                                self.extract_dir,
-                                content["repo_name"],
-                                sep,
-                            ),
-                            content["globs"],
-                        )
-                else:
-                    print(
-                        "local version of {} found".format(
-                            content["repo_name"]
-                        )
-                    )
-                    content["globs"] = self.update_globs(
-                        self.options.dogweb,
-                        content["globs"],
-                    )
-
-            elif (
-                content["repo_name"] == "integrations-core"
-            ):
-                if not self.options.integrations:
-                    print(
-                        "No local version of {} found, downloading downloading content from upstream version".format(
-                            content["repo_name"]
-                        )
-                    )
-                    self.download_from_repo(
-                        content["org_name"],
-                        content["repo_name"],
-                        content["branch"],
-                        content["globs"],
-                    )
-                    content["globs"] = self.update_globs(
-                        "{0}{1}{2}".format(
-                            self.extract_dir,
-                            content["repo_name"],
-                            sep,
-                        ),
-                        content["globs"],
-                    )
-                else:
-                    print(
-                        "local version of {} found".format(
-                            content["repo_name"]
-                        )
-                    )
-                    content["globs"] = self.update_globs(
-                        self.options.integrations,
-                        content["globs"],
-                    )
-            elif (
-                content["repo_name"]
-                == "integrations-extras"
-            ):
-                if not self.options.extras:
-                    print(
-                        "No local version of {} found, downloading downloading content from upstream version".format(
-                            content["repo_name"]
-                        )
-                    )
-                    self.download_from_repo(
-                        content["org_name"],
-                        content["repo_name"],
-                        content["branch"],
-                        content["globs"],
-                    )
-                    content["globs"] = self.update_globs(
-                        "{0}{1}{2}".format(
-                            self.extract_dir,
-                            content["repo_name"],
-                            sep,
-                        ),
-                        content["globs"],
-                    )
-                else:
-                    print(
-                        "local version of {} found".format(
-                            content["repo_name"]
-                        )
-                    )
-                    content["globs"] = self.update_globs(
-                        self.options.extras,
-                        content["globs"],
-                    )
-            else:
+            repo_name = "../" + content["repo_name"] + sep
+            if isdir(repo_name):
                 print(
-                    "No local version of {} found, downloading downloading content from upstream version".format(
+                        "local version of {} found".format(
+                            content["repo_name"]
+                        )
+                    )
+                content["globs"] = self.update_globs(
+                    repo_name,
+                    content["globs"],
+                )
+            elif self.options.token:
+                print(
+                    "No local version of {} found, downloading content from upstream version".format(
                         content["repo_name"]
                     )
                 )
@@ -598,14 +492,23 @@ class PreBuild:
                     content["branch"],
                     content["globs"],
                 )
-                content["globs"] = self.update_globs(
+                content[
+                    "globs"
+                ] = self.update_globs(
                     "{0}{1}{2}".format(
                         self.extract_dir,
                         content["repo_name"],
                         sep,
                     ),
                     content["globs"],
+                        )
+            else:
+                print(
+                    "No local version of {} found, no GITHUB_TOKEN available. Stopping downloading.".format(
+                        content["repo_name"]
+                    )
                 )
+
 
     def update_globs(self, new_path, globs):
         """
@@ -1140,24 +1043,6 @@ if __name__ == "__main__":
         "-t",
         "--token",
         help="github access token",
-        default=None,
-    )
-    parser.add_option(
-        "-w",
-        "--dogweb",
-        help="path to dogweb local folder",
-        default=None,
-    )
-    parser.add_option(
-        "-i",
-        "--integrations",
-        help="path to integrations-core local folder",
-        default=None,
-    )
-    parser.add_option(
-        "-e",
-        "--extras",
-        help="path to integrations-extras local folder",
         default=None,
     )
     parser.add_option(
