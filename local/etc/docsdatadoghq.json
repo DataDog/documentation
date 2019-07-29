@@ -130,7 +130,9 @@
     "\\.json$"
   ],
   "sitemap_urls": [
-    "https://docs.datadoghq.com/sitemap.xml"
+    "https://docs.datadoghq.com/en/sitemap.xml",
+    "https://docs.datadoghq.com/fr/sitemap.xml",
+    "https://docs.datadoghq.com/ja/sitemap.xml",
   ],
   "selectors": {
     "docs": {
