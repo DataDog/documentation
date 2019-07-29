@@ -122,9 +122,9 @@ This enables automatic trace ID injection for `winston`, `bunyan`, and `pino`.
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-The .NET Tracer uses the [LibLog][2] library to automatically inject trace IDs into your application logs. It contains transparent built-in support for injecting into [NLog][3], [Log4Net][4], and [Serilog][5].
+The .NET Tracer uses the [LibLog][1] library to automatically inject trace IDs into your application logs. It contains transparent built-in support for injecting into [NLog][2], [Log4Net][3], and [Serilog][4].
 
-Enable injection in the .NET Tracer’s [configuration][1] by setting `DD_LOGS_INJECTION=true` through environment variables or the configuration files.
+Enable injection in the .NET Tracer’s [configuration][5] by setting `DD_LOGS_INJECTION=true` through environment variables or the configuration files.
 
 Additionally, injection can be enabled in the code:
 
@@ -138,12 +138,12 @@ var tracer = new Tracer(settings);
 
 **Note**: This setting is only read during `Tracer` initialization. Changes to this setting after the `Tracer` instance is created are ignored.
 
-[1]: /tracing/setup/dotnet/#configuration
-[2]: https://github.com/damianh/LibLog
-[3]: http://nlog-project.org/
-[4]: https://logging.apache.org/log4net/
-[5]: http://serilog.net/
 
+[1]: https://github.com/damianh/LibLog
+[2]: http://nlog-project.org
+[3]: https://logging.apache.org/log4net
+[4]: http://serilog.net
+[5]: /tracing/setup/dotnet/#configuration
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -454,9 +454,9 @@ var message = $"My log message. [dd.trace_id={traceId} dd.span_id={spanId}]";
 
 **Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][2].
 
+
 [1]: /logs/log_collection/csharp/#configure-your-logger
 [2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
-
 {{% /tab %}}
 {{% tab "PHP" %}}
 
