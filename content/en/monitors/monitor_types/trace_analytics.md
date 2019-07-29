@@ -1,5 +1,5 @@
 ---
-title: Trace \Analytics Monitors
+title: Trace Analytics Monitors
 kind: documentation
 description: "Analytics on your APM data at infinite cardinality"
 further_reading:
@@ -24,6 +24,7 @@ further_reading:
 ---
 ## Overview 
 
+Trace Search & Analytics enables you to search, filter, and aggregate APM data based on the APM events running through your system and based on tags that you create. Trace Analytics monitoring allows you to set up custom monitors based on this data. Use these monitors to visualize the data over time and to set up alerts based on APM events - for example, if there is a spike in slow requests or anything else you can use APM events to track.
 
 ## Creating a Trace Analytics Monitor
 
