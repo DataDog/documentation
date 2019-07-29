@@ -49,7 +49,7 @@ Le fonctionnement général de la fonction Autodiscovery de l'Agent Datadog est 
 
 ## Configuration
 
-Si vous exécutez l'Agent en tant que binaire sur un host, activez Autodiscovery en suivant les instructions de l'onglet [Agent Host](?tab=agent). Si vous exécutez l'Agent en tant que conteneur, activez Autodiscovery en suivant les instructions de l'onglet [Agent conteneurisé](?tab=containerizedagent).
+Si vous exécutez l'Agent en tant que binaire sur un host, activez Autodiscovery en suivant les instructions de l'onglet [Agent Host](?tab=hostagent). Si vous exécutez l'Agent en tant que conteneur, activez Autodiscovery en suivant les instructions de l'onglet [Agent conteneurisé](?tab=containerizedagent).
 
 ### Autodiscovery avec Docker
 
