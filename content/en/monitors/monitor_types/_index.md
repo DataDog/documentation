@@ -21,6 +21,7 @@ To [create a monitor][1] in Datadog, hover over **Monitors** in the main menu an
     {{< nextlink href="/monitors/monitor_types/network" >}}Network{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/outlier" >}}Outlier{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/process" >}}Process{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/trace_search" >}}Trace Search{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/watchdog" >}}Watchdog{{< /nextlink >}}
 {{< /whatsnext >}}
 
