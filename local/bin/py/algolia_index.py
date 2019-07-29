@@ -58,7 +58,7 @@ if __name__ == "__main__":
     options = vars(options)
 
     print("Detecting the list of URL to not index:\n")
-    private_urls = find_private_url('public/', options["excluded_directory"] + options["excluded_language"])
+    private_urls = find_private_url('public', options["excluded_directory"] + options["excluded_language"])
 
     print("Transforming links to make them match the algolia logic:\n")
     private_urls=transform_url(private_urls)
