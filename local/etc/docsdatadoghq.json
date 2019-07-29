@@ -121,8 +121,8 @@
   "stop_urls": [
     "docs.datadoghq.com/search/",
     "docs.datadoghq.com/fr/search/",
-    "/videos/",
-    "/integrations/$",
+    "docs.datadoghq.com/videos/",
+    "docs.datadoghq.com/integrations/$",
     "/faq/$",
     "/guide/$",
     "\\?",
