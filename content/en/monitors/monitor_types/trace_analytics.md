@@ -1,5 +1,5 @@
 ---
-title: Trace Search & Analytics Monitors
+title: Trace \Analytics Monitors
 kind: documentation
 description: "Analytics on your APM data at infinite cardinality"
 further_reading:
@@ -24,9 +24,8 @@ further_reading:
 ---
 ## Overview 
 
-Trace Search & Analytics enables you to search, filter, and aggregate APM data based on the APM events running through your system and based on tags that you create. Trace Search & Analytics monitoring allows you to set up custom monitors based on this data. Use these monitors to visualize the data over time and to set up alerts based on APM events - for example, if there is a spike in slow requests or anything else you can use APM events to track.
 
-## Creating a Trace Search & Analytics Monitor
+## Creating a Trace Analytics Monitor
 
 1. To [create a new monitor][1], hover over **Monitors** in the main menu and click **New Monitor** in the sub-menu. To create a monitor programmatically, see the [Datadog API][2] or [community maintained libraries][3].
 2. On the new monitor page, select **APM** monitor.

@@ -294,7 +294,7 @@ main:
           - name: "Process"
             url: "monitors/monitor_types/process/"
           - name: "Trace Search"
-            url: "monitors/monitor_types/trace_search/"
+            url: "monitors/monitor_types/trace_analytics/"
           - name: "Watchdog"
             url: "monitors/monitor_types/watchdog/"
 
@@ -402,7 +402,7 @@ main:
           - name: "Trace Analytics"
             url: "tracing/trace_search_and_analytics/analytics"
           - name: "Monitors"
-            url: "monitors/monitor_types/trace_search"
+            url: "monitors/monitor_types/trace_analytics"
 
       # Trace API
       - name: "Trace API"
