@@ -19,7 +19,7 @@ Autodiscovery Container Identifiers, or `ad_identifiers`, allow you to apply an 
 To apply the following Autodiscovery configuration template file to a given container, use the **container short image** name as `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`:
 
 ```
-ad_identifier:
+ad_identifiers:
   <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 
 init_config:
@@ -51,7 +51,7 @@ As a consequence, when using short image as Autodiscovery container identifiers,
 To apply different Autodiscovery Configuration file templates to different containers running the same image, use a custom value as `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` and apply it with the `com.datadoghq.ad.check.id` label to identify your container. Let's say you have the following configuration file:
 
 ```
-ad_identifier:
+ad_identifiers:
   <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 
 init_config:
