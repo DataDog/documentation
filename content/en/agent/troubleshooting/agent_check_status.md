@@ -59,8 +59,16 @@ If your issue continues, [reach out to the Datadog support team][1] with a [flar
 
 Run the following script, with the proper `<CHECK_NAME>`:
 
+For Agent versions >= 6.12:
+
 ```
-C:\Program Files\Datadog\Datadog agent\embedded\agent.exe check <CHECK_NAME>
+C:\Program Files\Datadog\Datadog Agent\bin\agent.exe check <CHECK_NAME>
+```
+
+For Agent versions <= 6.11:
+
+```
+C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe check <CHECK_NAME>
 ```
 
 {{% /tab %}}

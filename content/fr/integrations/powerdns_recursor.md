@@ -48,9 +48,12 @@ Analysez les performances de votre PowerDNS Recursor et surveillez le trafic in
 Et bien plus encore
 
 ## Implémentation
+
+Vous trouverez ci-dessous les instructions pour installer et configurer le check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
-Le check PowerDNS Recursor est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos recursors.
+Le check PowerDNS Recursor est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos recursors.
 
 ### Configuration
 #### Préparer PowerDNS
@@ -73,8 +76,8 @@ Redémarrez votre recursor pour activer l'API de statistiques.
 
 #### Associer l'Agent
 
-1. Modifiez le fichier `powerdns_recursor.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2].
-    Consultez le [fichier d'exemple powerdns_recursor.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
+1. Modifiez le fichier `powerdns_recursor.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3].
+    Consultez le [fichier d'exemple powerdns_recursor.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles :
 
     ```yaml
         init_config:
@@ -86,11 +89,11 @@ Redémarrez votre recursor pour activer l'API de statistiques.
             version: 4 # omit this line if you're running pdns_recursor version 3.x
     ```
 
-2. [Redémarrez l'Agent][4] pour commencer à envoyer vos métriques PowerDNS Recursor à Datadog.
+2. [Redémarrez l'Agent][5] pour commencer à envoyer vos métriques PowerDNS Recursor à Datadog.
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][5] et cherchez `powerdns_recursor` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][6] et cherchez `powerdns_recursor` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -106,15 +109,16 @@ Le check PowerDNS n'inclut aucun événement.
 Renvoie CRITICAL si l'Agent n'est pas capable de se connecter à l'API de statistiques du recursor. Si ce n'est pas le cas, renvoie OK.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/datadog_checks/powerdns_recursor/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help
+[1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[4]: https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/datadog_checks/powerdns_recursor/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[7]: https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/metadata.csv
+[8]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

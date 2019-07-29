@@ -23,7 +23,7 @@ Grâce à l'instrumentation manuelle, vous pouvez écrire des programmes afin de
 
 SI vous n'utilisez pas une [instrumentation de framework compatible][1], ou si vous souhaitez apporter de la profondeur aux traces de votre application, vous pouvez choisir d'instrumenter manuellement votre code.
 
-Pour ce faire, utilisez l'annotation de traces pour effectuer un tracing simple des appels de méthode, ou l'API OpenTracing pour un tracing plus complexe. 
+Pour ce faire, utilisez l'annotation de traces pour effectuer un tracing simple des appels de méthode, ou l'API OpenTracing pour un tracing plus complexe.
 
 La fonction d'annotation de traces de Datadog est fournie par la [dépendance dd-trace-api][2].
 
@@ -41,7 +41,7 @@ public class MyClass {
 ```
 
 
-[1]: /fr/tracing/languages/java/#compatibility
+[1]: /fr/tracing/setup/java/#compatibility
 [2]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -105,7 +105,7 @@ Consultez les ressources ci-dessous pour obtenir des détails sur l'API :
 
 
 
-[1]: /fr/tracing/languages/python/#compatibility
+[1]: /fr/tracing/setup/python/#compatibility
 [2]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.wrap
 [3]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span
 [4]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#tracer
@@ -144,7 +144,7 @@ end
 Pour en savoir plus sur l'instrumentation manuelle, consultez la [documentation relative à l'API][2].
 
 
-[1]: /fr/tracing/languages/ruby/#compatibility
+[1]: /fr/tracing/setup/ruby/#compatibility
 [2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -221,7 +221,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 ```
 
 
-[1]: /fr/tracing/languages/go/#compatibility
+[1]: /fr/tracing/setup/go/#compatibility
 [2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -241,7 +241,7 @@ span.finish()
 Pour en savoir plus sur l'instrumentation manuelle, consultez la [documentation relative à l'API][2].
 
 
-[1]: /fr/tracing/languages/nodejs/#compatibility
+[1]: /fr/tracing/setup/nodejs/#compatibility
 [2]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -265,7 +265,7 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 ```
 
 
-[1]: /fr/tracing/languages/dotnet/#integrations
+[1]: /fr/tracing/setup/dotnet/#integrations
 {{% /tab %}}
 
 {{% tab "PHP" %}}
@@ -346,7 +346,7 @@ Bien que cette version [soit désormais obsolète][3], si vous utilisez PHP 7.x
 
 
 
-[1]: /fr/tracing/languages/php/#automatic-instrumentation
+[1]: /fr/tracing/setup/php/#automatic-instrumentation
 [2]: https://github.com/DataDog/dd-trace-php/releases/latest
 [3]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
 [4]: /fr/tracing/advanced/opentracing/?tab=php

@@ -12,8 +12,7 @@ further_reading:
     tag: Documentation
     text: 新しいインテグレーションの設定
 aliases:
-  - /ja/getting_started/openmetrics/
-  - /ja/getting_started/prometheus/
+  - /ja/developers/openmetrics/
 ---
 ## 概要
 
@@ -216,7 +215,7 @@ class KubeDNSCheck(PrometheusCheck):
 `type_overrides` は、Prometheus メトリクス名をキーとし、メトリクスタイプ (文字列の名前) を値とする辞書です。これが、ペイロードにリストされているタイプの代わりに使用されます。タイプが指定されていないメトリクスにタイプを適用するために使用できます。
 使用可能なタイプは `counter`、`gauge`、`summary`、`untyped`、`histogram` です。
 
-**注**: これは基底クラスでは空ですが、最終的なチェックではカスタムメトリクスとしてカウントされないように、オーバーロード/ハードコードする必要があります。
+**注**: これは基本クラスでは空ですが、最終的なチェックではカスタムメトリクスとしてカウントされないように、オーバーロード/ハードコードする必要があります。
 
 ## その他の参考資料
 

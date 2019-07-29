@@ -47,26 +47,26 @@ Pour configurer RBLTracker à l'aide de Webhooks :
 3.  Collez la **clé d'API** Datadog.
 4.  (Facultatif) ajustez la fréquence de contact pour ce nouveau contact.
 
-RBLTracker enverra les alertes d'ajout à une liste et de suppression d'une liste vers votre dashboard d'événements Datadog. Cliquez [ici][4] pour consulter le guide d'intégration complet (en anglais).
+RBLTracker enverra les alertes d'ajout à une liste et de suppression d'une liste vers votre dashboard d'événements Datadog. Cliquez [ici][3] pour consulter le guide d'intégration complet (en anglais).
 
 ## Données collectées
 ### Métriques
 Le check RBLTracker n'inclut aucune métrique.
 
 ### Événements
-Envoie vos événements d'ajout à une liste et de suppression d'une liste vers votre [flux d'événements Datadog][5].
+Envoie vos événements d'ajout à une liste et de suppression d'une liste vers votre [flux d'événements Datadog][4].
 
 ### Checks de service
 Le check RBLTracker n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
-[1]: https://rbltracker.com/
+[1]: https://rbltracker.com
 [2]: https://app.datadoghq.com/account/settings#api
-[4]: https://rbltracker.com/docs/adding-a-datadog-contact-type/
-[5]: https://docs.datadoghq.com/fr/graphing/event_stream/
-[6]: http://docs.datadoghq.com/help/
+[3]: https://rbltracker.com/docs/adding-a-datadog-contact-type
+[4]: https://docs.datadoghq.com/fr/graphing/event_stream
+[5]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}

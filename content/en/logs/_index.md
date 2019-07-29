@@ -23,7 +23,7 @@ The Log Management solution is an all-in-one comprehensive solution that compris
   {{< nextlink href="/logs/processing">}}<u>Processing</u>: Process and enrich all of your logs with pipelines and processors. {{< /nextlink >}}
   {{< nextlink href="/logs/live_tail">}}<u>Live Tail</u>: See your ingested logs in real time across all your environments.{{< /nextlink >}}
   {{< nextlink href="/logs/explorer">}}<u>Explorer</u>: Explore your logs with Datadog Log Search, Analytics, and Patterns.{{< /nextlink >}}
-  {{< nextlink href="/logs/logging_without_limits">}}<u>Log without Limits</u>: Dynamically decide what to include or exclude from your indexes to control your costs.{{< /nextlink >}}
+  {{< nextlink href="/logs/logging_without_limits">}}<u>Logging without Limits*</u>: Dynamically decide what to include or exclude from your indexes to control your costs.{{< /nextlink >}}
   {{< nextlink href="/logs/archives">}}<u>Archives</u>: Archive all enriched logs into S3 buckets.{{< /nextlink >}}
   {{< nextlink href="/logs/guide">}}<u>Guides</u>: Additional helpful articles about log collection and processing.{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -31,6 +31,8 @@ The Log Management solution is an all-in-one comprehensive solution that compris
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+<br>
+*Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /agent/logs
 [2]: /logs/processing

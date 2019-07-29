@@ -11,7 +11,7 @@ creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/README.md'
-display_name: Kubernetes Scheduler
+display_name: Kube_scheduler
 git_integration_title: kube_scheduler
 guid: ec7c029f-86c2-4202-9368-1904998a646c
 integration_id: kube-scheduler
@@ -54,22 +54,22 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 
-* La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans votre [configuration daemonSet][4] :
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans votre [configuration daemonSet][4] :
 
-```
-(...)
-  env:
+    ```
     (...)
-    - name: DD_LOGS_ENABLED
-        value: "true"
-    - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
-        value: "true"
-(...)
-```
+      env:
+        (...)
+        - name: DD_LOGS_ENABLED
+            value: "true"
+        - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
+            value: "true"
+    (...)
+    ```
 
-* Assurez-vous que le socket Docker est monté sur l'Agent Datadog comme dans [ce manifeste][5].
+2. Assurez-vous que le socket Docker est monté sur l'Agent Datadog comme dans [ce manifeste][5].
 
-* [Redémarrez l'Agent][3].
+3. [Redémarrez l'Agent][3].
 
 ### Validation
 
@@ -83,13 +83,12 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Checks de service
 
-`kube_scheduler.prometheus.health` :
+**kube_scheduler.prometheus.health** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter aux endpoints de métriques. Si ce n'est pas le cas, renvoie `OK`.
 
-Renvoie CRITICAL si l'Agent ne peut pas accéder aux endpoints des métriques.
+### Événements
 
-### Events
-
-Kube_scheduler n'inclut aucun événement.
+Kube Scheduler n'inclut aucun événement.
 
 ## Dépannage
 

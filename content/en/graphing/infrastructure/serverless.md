@@ -17,17 +17,19 @@ further_reading:
 
 Serverless is a concept where you write event-driven code and upload it to a cloud provider who manages all of the underlying compute resources. [Datadog Serverless][1] brings together metrics, traces, and logs from your AWS Lambda functions running serverless applications into one view.
 
+Enable the [AWS Lambda][2] integration to begin collecting Cloudwatch and custom metrics from your Lambda functions.
+
 ## Installation
 
 The Serverless dashboard requires no installation of its own, but it relies on three data sources that require their own installation:
 
-1. [Amazon Web Services integration][2] (required)
+1. [Amazon Web Services integration][3] (required)
 
     This integration populates the summary graphs and the main functions table. Install this integration and ensure that Lambda metrics are reporting in your account.
 
-    **Note**: Metrics in the Cloud Function UI are delayed ~10 minutes, as this is the default speed at which Datadog polls AWS APIs. To find out if your delay can be decreased, contact [Datadog support][3].
+    **Note**: Metrics in the Cloud Function UI are delayed ~10 minutes, as this is the default speed at which Datadog polls AWS APIs. To find out if your delay can be decreased, contact [Datadog support][4].
 
-2. [AWS X-Ray integration][4] (optional)
+2. [AWS X-Ray integration][5] (optional)
     This integration provides traces for Lambda functions in the function detail page and allows the detection of Lambda function cold start.
 
     Install the X-Ray integration and add the following permissions to the policy document in your AWS/Datadog Role:
@@ -41,7 +43,7 @@ The Serverless dashboard requires no installation of its own, but it relies on t
 
     - Navigate to the Lambda function in the AWS console you want to instrument. In the “Debugging and error handling” section, check the box to “Enable active tracing”. This turns on X-Ray for that function.
 
-    - Import the X-Ray SDK in your function, and patch all supported libraries. This automatically causes X-Ray to trace all AWS calls and other X-Ray supported integrations. See an [example of this in Python][5].
+    - Import the X-Ray SDK in your function, and patch all supported libraries. This automatically causes X-Ray to trace all AWS calls and other X-Ray supported integrations. See an [example of this in Python][6].
 
     - Datadog's X-Ray integration supports custom subsegments and annotations as well.
 
@@ -51,7 +53,7 @@ The Serverless dashboard requires no installation of its own, but it relies on t
 
     Install this if you want to see logs from your Lambda functions in the function detail page. This also populates the additional metrics such as Memory Used (avg) and Last Start in your functions table.
 
-    To enable this, refer to the [documentation for sending Lambda logs to Datadog][6].
+    To enable this, refer to the [documentation for sending Lambda logs to Datadog][2].
 
 ## Searching, filtering, sorting
 
@@ -143,8 +145,8 @@ The errors tab bubbles up exceptions that occured during the duration of the tra
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://app.datadoghq.com/functions
-[2]: /integrations/amazon_web_services
-[3]: /help
-[4]: https://app.datadoghq.com/account/settings#integrations/amazon_xray
-[5]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-python-patching.html
-[6]: /integrations/amazon_lambda/#log-collection
+[2]: /integrations/amazon_lambda/#log-collection
+[3]: /integrations/amazon_web_services
+[4]: /help
+[5]: https://app.datadoghq.com/account/settings#integrations/amazon_xray
+[6]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-python-patching.html

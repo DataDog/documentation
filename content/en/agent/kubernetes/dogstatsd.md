@@ -14,7 +14,7 @@ To emit custom metrics from your Kubernetes application, use [DogStatsD][1], a m
 
 ## Use DogStatsD over a Unix Domain Socket
 
-You can use [DogStatsD over a Unix Domain Socket][3]. 
+You can use [DogStatsD over a Unix Domain Socket][3].
 
 ### Create a listening socket
 
@@ -63,27 +63,34 @@ For more details, see the [DogStatsD over a Unix Domain Socket documentation][3]
 
 ### Bind the DogStatsD port to a host port
 
-Add a `hostPort` to your `datadog-agent.yaml` file:
+1. Add a `hostPort` to your `datadog-agent.yaml` manifest:
 
-```yaml
-ports:
-  - containerPort: 8125
-    hostPort: 8125
-    name: dogstatsdport
-    protocol: UDP
-```
+      ```yaml
+      ports:
+        - containerPort: 8125
+          hostPort: 8125
+          name: dogstatsdport
+          protocol: UDP
+      ```
 
-This enables your applications to send metrics via DogStatsD on port `8125` on whichever node they happen to be running.
+    This enables your applications to send metrics via DogStatsD on port `8125` on whichever node they happen to be running.
 
-**Note**: `hostPort` functionality requires a networking provider that adheres to the [CNI specification][5], such as Calico, Canal, or Flannel. For more information, including a workaround for non-CNI network providers, consult the [Kubernetes documentation][6].
+    **Note**: `hostPort` functionality requires a networking provider that adheres to the [CNI specification][5], such as Calico, Canal, or Flannel. For more information, including a workaround for non-CNI network providers, consult the [Kubernetes documentation][6].
 
-To apply the change:
+2. Enable DogStatsD non local traffic to allow StatsD data collection, set `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true` in your `datadog-agent.yaml` manifest:
 
-```bash
-kubectl apply -f datadog-agent.yaml
-```
+        - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
+          value: "true"
 
-**Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources.  Another word of caution: some network plugins don't support `hostPorts` yet, so this won't work. 
+    This allows collecting StatsD data from other containers than the one running the Agent.
+
+3. Apply the change:
+
+      ```
+      kubectl apply -f datadog-agent.yaml
+      ```
+
+**Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources.  Another word of caution: some network plugins don't support `hostPorts` yet, so this won't work.
 The workaround in this case is to add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. It also means that all ports opened on the container are also opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod will not start. Not all Kubernetes installations allow this.
 
 ### Pass the node's IP address to your application
@@ -106,7 +113,7 @@ Origin detection allows DogStatsD to detect where the container metrics come fro
 
 **Note**: An alternative to UDP is [Unix Domain Sockets][8].
 
-To enable origin detection over UDP, add the following lines to your application manifest: 
+To enable origin detection over UDP, add the following lines to your application manifest:
 
 ```yaml
 env:
@@ -127,13 +134,13 @@ Origin detection is supported in Agent 6.10.0+ and in the following client libra
 | [C#][13]     | 3.3.0   |
 | [Java][14]   | 2.6     |
 
-To set [tag cardinality][15] for the metrics collected using origin detection, use the environment variable `DD_DOGSTATSD_TAG_CARDINALITY`. 
+To set [tag cardinality][15] for the metrics collected using origin detection, use the environment variable `DD_DOGSTATSD_TAG_CARDINALITY`.
 
 There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`—as DogStatsD is priced differently, its tag cardinality setting is separated in order to provide the opportunity for finer configuration. Otherwise, these variables function the same way: they can have values `low`, `orchestrator`, or `high`. They both default to `low`.
 
 ## Instrument your code to send metrics to DogStatsD
 
-Once your application can send metrics via DogStatsD on each node, you can instrument your application code to submit custom metrics. 
+Once your application can send metrics via DogStatsD on each node, you can instrument your application code to submit custom metrics.
 
 **[See the full list of Datadog DogStatsD Client Libraries][16]**
 

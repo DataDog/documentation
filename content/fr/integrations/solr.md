@@ -38,15 +38,18 @@ supported_os:
 Le check Solr permet de surveiller l'état et les performances d'un cluster Solr. Il recueille diverses métriques telles que le nombre de documents indexés, les hits et expulsions du cache, les délais de traitement moyens des requêtes, le nombre moyen de requêtes par seconde, et plus encore.
 
 ## Implémentation
+
+Vous trouverez ci-dessous les instructions pour installer et configurer le check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
-Le check Solr est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds Solr.
+Le check Solr est inclus avec le paquet de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos nœuds Solr.
 
-Ce check étant basé sur JMX, vous devez activer une connexion JMX à distance sur vos serveurs Solr. Consultez la [documentation relative au check JMX][3] pour en savoir plus à ce sujet.
+Ce check étant basé sur JMX, vous devez activer une connexion JMX à distance sur vos serveurs Solr. Consultez la [documentation relative au check JMX][4] pour en savoir plus à ce sujet.
 
 ### Configuration
 
-Modifiez le fichier `solr.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4]. Consultez le [fichier d'exemple solr.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles :
+Modifiez le fichier `solr.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][5]. Consultez le [fichier d'exemple solr.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles :
 
 ```
 instances:
@@ -125,9 +128,9 @@ init_config:
           metric_type: gauge
 ```
 
-Nous vous invitons à nouveau à consulter la [documentation relative au check JMX][3] pour découvrir la liste des options de configuration compatibles avec l'ensemble des checks basés sur JMX. Cette page décrit également comment l'Agent applique des tags aux métriques JMX.
+Nous vous invitons à nouveau à consulter la [documentation relative au check JMX][4] pour découvrir la liste des options de configuration compatibles avec l'ensemble des checks basés sur JMX. Cette page décrit également comment l'Agent applique des tags aux métriques JMX.
 
-[Redémarrez l'Agent][6] pour commencer à envoyer des métriques Solr à Datadog.
+[Redémarrez l'Agent][7] pour commencer à envoyer des métriques Solr à Datadog.
 
 Options de configuration
 
@@ -240,7 +243,7 @@ La liste de filtres est uniquement prise en charge pour les versions > 5.3.0 de
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][7] et cherchez `solr` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][8] et cherchez `solr` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -298,13 +301,14 @@ Vous pouvez utiliser le filtre `attribute` comme suit :
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/solr/images/solrgraph.png
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/integrations/java
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[5]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/solr/metadata.csv
+[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://docs.datadoghq.com/fr/integrations/java
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[6]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[9]: https://github.com/DataDog/integrations-core/blob/master/solr/metadata.csv
 
 
 {{< get-dependencies >}}

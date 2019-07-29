@@ -83,6 +83,10 @@ Heroku emits dyno metrics via logs. To convert these logs into metrics and send 
 ### Jira
 A [tool][37] to poll data from Jira and upload it as metrics to Datadog.
 
+### K6
+
+K6, a load and performance regression testing tool developed by Load Impact, can send test results to Datadog using [DogStatsD][1]. To enable this feature, see [the tutorial][61].
+
 ### LaunchDarkly
 A [LaunchDarkly][60] webhook handler that records changes as Datadog events.
 
@@ -191,3 +195,4 @@ If you've written a Datadog library and would like to add it to this page, send 
 [58]: https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/networking/dd-agent
 [59]: mailto:code@datadoghq.com
 [60]: https://github.com/meetup/launch-dogly
+[61]: https://blog.loadimpact.com/how-to-send-k6-metrics-to-datadog/

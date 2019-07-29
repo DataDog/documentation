@@ -108,7 +108,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 [2]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics
 [3]: https://docs.datadoghq.com/fr/developers/metrics
 [4]: https://docs.datadoghq.com/fr/api/?lang=python
-[5]: https://docs.datadoghq.com/fr/tracing/languages/python
+[5]: https://docs.datadoghq.com/fr/tracing/setup/python
 [6]: https://docs.datadoghq.com/fr/logs/log_collection/python
 [7]: https://docs.datadoghq.com/fr/help
 

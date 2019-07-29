@@ -3,6 +3,7 @@ title: Using Postman with Datadog APIs
 kind: documentation
 aliases:
   - /developers/faq/using-postman-with-datadog-apis
+  - /getting_started/using-postman-with-datadog-apis
   - /developers/guide/using-postman-with-datadog-apis
 ---
 
@@ -44,7 +45,7 @@ You now have a Datadog collection with many different API examples.
 After the Postman collection is imported, a full list of available Datadog API calls is structured by folder in the left pane of Postman.
 In the folders, the API calls have variables entered for `datadog_site`, `datadog_api_key`, and `datadog_application_key`:
 
-{{< img src="developers/guide/postman/SetAPIKeys.png" alt="postman_api_template_variables" responsive="true" style="width:70%;">}}
+{{< img src="getting_started/postman/SetAPIKeys.png" alt="postman_api_template_variables" responsive="true" style="width:70%;">}}
 
 This allows you to set up [Postman environments][4] and save your Datadog site, API, and application keys for authentication. If you have multiple Datadog organizations, set up multiple [Postman environments][4] to make API calls to different organizations without modifying the API calls in the Datadog Postman collection.
 
@@ -60,29 +61,33 @@ Follow these steps to set up your environment:
 
 5. Optional: If you have multiple Datadog organizations, repeat steps 1-4 for each organization.
 
-{{< img src="developers/guide/postman/setAPIKeys2.png" alt="postman_api_template_variables" responsive="true" style="width:70%;">}}
+{{< img src="getting_started/postman/setAPIKeys2.png" alt="postman_api_template_variables" responsive="true" style="width:70%;">}}
 
 ## Working with the Collection
 
 After setup is complete, you are ready to begin making API calls. In the Postman -> Datadog folder, there are subfolders for each type of API category listed in the [Datadog API Reference][5]. Expand the subfolders to see the HTTP methods and API call names.
 
+**Note**: Don't forget to set your defined Environment in the upper right corner of Postman interface:
+
+{{< img src="getting_started/postman/env_setup.png" alt="Environment Setup" responsive="true" style="width:40%;">}}
+
 ### Builder
 
 When you click on an API call in the collection, it loads in the `Builder` pane on the right. On this pane you can send the API call and see the returned status, response time, and API response code.
 
-{{< img src="developers/guide/postman/apiGetCalls.png" alt="postman_api_response" responsive="true" style="width:70%;">}}
+{{< img src="getting_started/postman/apiGetCalls.png" alt="postman_api_response" responsive="true" style="width:70%;">}}
 
 ### Description
 
 When you click on the Endpoint name a description of the endpoint and all required/optional parameters is displayed to help you build your requests:
 
-{{< img src="developers/guide/postman/description.gif" alt="postman description" responsive="true">}}
+{{< img src="getting_started/postman/description.gif" alt="postman description" responsive="true">}}
 
 ### Params
 
 The **Params** tab shows all parameters and values that are currently on the API call. Here, you are able to add parameters and values. View the available arguments in the corresponding section of the [Datadog API documentation][6].
 
-{{< img src="developers/guide/postman/parameters.png" alt="postman_param" responsive="true" style="width:70%;">}}
+{{< img src="getting_started/postman/parameters.png" alt="postman_param" responsive="true" style="width:70%;">}}
 
 This tab is an alternative to viewing the `param1:value1&param2:value2` structure of the API call.
 

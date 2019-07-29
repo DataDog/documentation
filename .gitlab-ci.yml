@@ -90,6 +90,12 @@ build_live:
     - create_artifact
     - create_artifact_untracked
     - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
+    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['js', 'images', 'fonts', 'en', 'css', 'search', 'json', 'error', 'matts quick tips', 'videos']" -l "['fr','ja']" -c "./local/etc/docsdatadoghq.json"
+  artifacts:
+    when: on_success
+    paths:
+      - local/etc/docsdatadoghq.json
+    expire_in: 1 week
   only:
     - master
 
@@ -111,6 +117,8 @@ index_algolia:
   script:
     - cp ./local/etc/docsdatadoghq.json /etc/
     - index_docsearch_algolia
+  dependencies:
+    - build_live
   only:
     - schedules
 
@@ -127,17 +135,17 @@ manage_translations:on-schedule:
   only:
     - schedules
 
-push_translations:
-  <<: *base_template
-  stage: post-deploy
-  environment: "live"
-  script:
-    - push_changed_translations
-  only:
-    - master
-  except:
-    - triggers
-    - schedules
+#push_translations:
+#  <<: *base_template
+#  stage: post-deploy
+#  environment: "live"
+#  script:
+#    - push_changed_translations
+#  only:
+#    - master
+#  except:
+#    - triggers
+#    - schedules
 
 #rollback_live:
 #  <<: *base_template

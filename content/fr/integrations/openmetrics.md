@@ -35,13 +35,15 @@ Extrayez des métriques custom depuis des endpoints OpenMetrics.
 
 ## Implémentation
 
+Vous trouverez ci-dessous les instructions pour installer et configurer le check lorsque vous exécutez l'Agent sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+
 ### Installation
 
-Le check OpenMetrics est fourni avec la [version de départ 6.6.0 de l'Agent Datadog][2].
+Le check OpenMetrics est inclus à partir de la [version 6.6.0 de l'Agent Datadog][3].
 
 ### Configuration
 
-Modifiez le fichier `openmetrics.d/conf.yaml` à la racine du [répertoire de configuration de votre Agent][3] pour ajouter les différentes instances OpenMetrics pour lesquelles vous souhaitez récupérer des métriques.
+Modifiez le fichier `openmetrics.d/conf.yaml` à la racine du [répertoire de configuration de votre Agent][4] pour ajouter les différentes instances OpenMetrics pour lesquelles vous souhaitez récupérer des métriques.
 
 Chaque instance est au minimum composée des paramètres suivants :
 
@@ -49,11 +51,11 @@ Chaque instance est au minimum composée des paramètres suivants :
 * `namespace` : espace de nommage à ajouter en préfixe pour toutes les métriques (permet d'éviter les conflits entre les noms de métriques).
 * `metrics` : la liste des métriques à récupérer en tant que métriques custom. Il vous suffit d'ajouter vos métriques à la liste `- nom_métrique` ou de les renommer avec `- nom_métrique: renamed`. Vous pouvez également utiliser le wildcard `*`, par exemple `- metric*`, afin de récupérer toutes les métriques correspondantes. Utilisez prudemment ce wildcard, car il peut entraîner l'envoi de nombreuses métriques custom.
 
-Il existe également plusieurs paramètres plus avancés (`ssl`, `labels joining`, `tags`,...) dont l'utilisation est expliquée dans [l'exemple de configuration `conf.yaml`][4].
+Il existe également plusieurs paramètres plus avancés (`ssl`, `labels joining`, `tags`,...) dont l'utilisation est expliquée dans [l'exemple de configuration `conf.yaml`][5].
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][5] et cherchez `openmetrics` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][6] et cherchez `openmetrics` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -70,21 +72,22 @@ Le check OpenMetrics n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
 ## Pour aller plus loin
 
-* [Configurer un check OpenMetrics][7]
-* [Rédiger un check OpenMetrics personnalisé][8]
+* [Configurer un check OpenMetrics][8]
+* [Écrire un check OpenMetrics personnalisé][9]
 
 [1]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[4]: https://docs.datadoghq.com/fr/agent/openmetrics
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[6]: https://docs.datadoghq.com/fr/help
-[7]: https://docs.datadoghq.com/fr/agent/openmetrics
-[8]: https://docs.datadoghq.com/fr/developers/openmetrics
+[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[5]: https://docs.datadoghq.com/fr/agent/openmetrics
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[7]: https://docs.datadoghq.com/fr/help
+[8]: https://docs.datadoghq.com/fr/agent/openmetrics
+[9]: https://docs.datadoghq.com/fr/developers/openmetrics
 
 
 {{< get-dependencies >}}

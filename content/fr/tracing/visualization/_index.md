@@ -96,15 +96,15 @@ Les spans sont associées à un [service][8] et éventuellement à une [ressourc
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer/#service
-[2]: /fr/tracing/languages/java/#configuration
+[2]: /fr/tracing/setup/java/#configuration
 [3]: http://pypi.datadoghq.com/trace/docs/index.html#getting-started
 [4]: http://www.rubydoc.info/gems/ddtrace
 [5]: /fr/developers/metrics
 [6]: /fr/monitors/monitor_types/apm
 [7]: /fr/tracing/visualization/services_list
 [8]: /fr/tracing/visualization/service
-[9]: /fr/tracing/languages/go
-[10]: /fr/tracing/languages/python
-[11]: /fr/tracing/languages/ruby
+[9]: /fr/tracing/setup/go
+[10]: /fr/tracing/setup/python
+[11]: /fr/tracing/setup/ruby
 [12]: /fr/tracing/faq/how-to-create-a-monitor-over-every-resource-apm
 [13]: /fr/tracing/visualization/resource

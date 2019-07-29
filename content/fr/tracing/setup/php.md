@@ -72,7 +72,7 @@ L'instrumentation automatique capture :
 
 ## Modifier le hostname de l'Agent
 
-Configurez vos traceurs au niveau des applications pour envoyer des traces à un hostname d'Agent personnalisé.
+Configurez vos traceurs d'applications de façon à envoyer des traces à un hostname d'Agent personnalisé :
 
 Le traceur PHP recherche automatiquement les variables ENV `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT` puis s'initialise avec celles-ci.
 
@@ -84,20 +84,20 @@ L'APM PHP prend en charge les versions PHP suivantes :
 
 | Version | Type de prise en charge    |
 |:--------|:----------------|
-| 7.3.x   | Complète |
-| 7.2.x   | Complète |
-| 7.1.x   | Complète |
-| 7.0.x   | Complète |
-| 5.6.x   | Complète |
-| 5.4.x   | Complète |
+| 7.3.x   | Prise en charge complète |
+| 7.2.x   | Prise en charge complète |
+| 7.1.x   | Prise en charge complète |
+| 7.0.x   | Prise en charge complète |
+| 5.6.x   | Prise en charge complète |
+| 5.4.x   | Prise en charge complète |
 
 L'APM PHP prend en charge les SAPI suivantes :
 
 | SAPI           | Type de prise en charge    |
 |:---------------|:----------------|
-| apache2handler | Complète |
-| cli            | Complète |
-| fpm            | Complète |
+| apache2handler | Prise en charge complète |
+| cli            | Prise en charge complète |
+| fpm            | Prise en charge complète |
 
 ### Les intégrations
 
@@ -107,12 +107,12 @@ Si le framework Web que vous utilisez ne figure pas dans la liste ci-dessous, vo
 
 | Module         | Versions           | Type de prise en charge    |
 |:---------------|:-------------------|:----------------|
-| CakePHP        | 2.x                | Complète |
-| Laravel        | 4.2, 5.x           | Complète |
-| Lumen          | 5.2+               | Complète |
-| Slim           | 3.x                | Complète |
-| Symfony        | 2.x, 3.3, 3.4, 4.x | Complète |
-| Framework Zend | 1.12               | Complète |
+| CakePHP        | 2.x                | Prise en charge complète |
+| Laravel        | 4.2, 5.x           | Prise en charge complète |
+| Lumen          | 5.2+               | Prise en charge complète |
+| Slim           | 3.x                | Prise en charge complète |
+| Symfony        | 2.x, 3.3, 3.4, 4.x | Prise en charge complète |
+| Framework Zend | 1.12               | Prise en charge complète |
 | CodeIgniter    | 2, 3               | _Disponible prochainement_   |
 | Drupal         |                    | _Disponible prochainement_   |
 | Magento        | 2                  | _Disponible prochainement_   |
@@ -128,7 +128,7 @@ Le tracing depuis le CLI SAPI est désactivé par défaut. Pour activer le traci
 
 | Module          | Versions           | Type de prise en charge    |
 |:----------------|:-------------------|:----------------|
-| Laravel Artisan | 5.x                | Complète |
+| Laravel Artisan | 5.x                | Prise en charge complète |
 | Console Symfony |                    | _Disponible prochainement_   |
 
 Votre bibliothèque CLI préférée n'est pas disponible ? Datadog élargit continuellement la liste des bibliothèques prises en charge. Contactez l'[équipe Datadog][12] pour obtenir de l'aide.
@@ -137,15 +137,15 @@ Votre bibliothèque CLI préférée n'est pas disponible ? Datadog élargit con
 
 | Module                           | Versions                   | Type de prise en charge    |
 |:---------------------------------|:---------------------------|:----------------|
-| Amazon RDS (avec PDO ou MySQLi) | *(Toute version de PHP prise en charge)*      | Complète |
-| Console CakePHP                  | 2.x                        | Complète |
-| Elasticsearch                    | 1.x                        | Complète |
-| Eloquent                         | Versions prises en charge par Laravel | Complète |
-| Memcached                        | *(Toute version de PHP prise en charge)*      | Complète |
-| MongoDB                          | 1.4.x                      | Complète |
-| MySQLi                           | *(Toute version de PHP prise en charge)*      | Complète |
-| PDO (MySQL, PostgreSQL, MariaDB) | *(Toute version de PHP prise en charge)*      | Complète |
-| Predis                           | 1.1                        | Complète |
+| Amazon RDS (avec PDO ou MySQLi) | *(Toute version de PHP prise en charge)*      | Prise en charge complète |
+| Console CakePHP                  | 2.x                        | Prise en charge complète |
+| Elasticsearch                    | 1.x                        | Prise en charge complète |
+| Eloquent                         | Versions prises en charge par Laravel | Prise en charge complète |
+| Memcached                        | *(Toute version de PHP prise en charge)*      | Prise en charge complète |
+| MongoDB                          | 1.4.x                      | Prise en charge complète |
+| MySQLi                           | *(Toute version de PHP prise en charge)*      | Prise en charge complète |
+| PDO (MySQL, PostgreSQL, MariaDB) | *(Toute version de PHP prise en charge)*      | Prise en charge complète |
+| Predis                           | 1.1                        | Prise en charge complète |
 | AWS Couchbase                    | AWS PHP SDK 3              | _Disponible prochainement_   |
 | AWS DynamoDB                     | AWS PHP SDK 3              | _Disponible prochainement_   |
 | AWS ElastiCache                  | AWS PHP SDK 3              | _Disponible prochainement_   |
@@ -160,9 +160,9 @@ Votre datastore préféré n'est pas disponible ? Datadog élargit continuellem
 
 | Module     | Versions              | Type de prise en charge    |
 |:-----------|:----------------------|:----------------|
-| Curl       | *(Toute version de PHP prise en charge)* | Complète |
-| Guzzle     | 5.x                   | Complète |
-| Guzzle     | 6.x                   | Complète |
+| Curl       | *(Toute version de PHP prise en charge)* | Prise en charge complète |
+| Guzzle     | 5.x                   | Prise en charge complète |
+| Guzzle     | 6.x                   | Prise en charge complète |
 | Beanstalkd |                       | _Disponible prochainement_   |
 | ReactPHP   |                       | _Disponible prochainement_   |
 
@@ -205,7 +205,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_AGENT_HOST`                      | `localhost` | Le hostname de l'Agent                                                         |
 | `DD_AUTOFINISH_SPANS`                | `false`     | Définit si les spans doivent être automatiquement finalisées ou non lorsque le traceur est vidé         |
 | `DD_TRACE_CLI_ENABLED`               | `false`     | Active le tracing de scripts PHP depuis le CLI                                  |
-| `DD_DISTRIBUTED_TRACING`             | `true`      | Définit si le [tracing distribué][15] doit être activé ou non                                 |
+| `DD_DISTRIBUTED_TRACING`             | `true`      | Définit si le tracing distribué doit être activé ou non                                       |
 | `DD_INTEGRATIONS_DISABLED`           | `null`      | Liste au format CSV des extensions désactivées ; p. ex. `curl,mysqli`                        |
 | `DD_SAMPLING_RATE`                   | `1.0`       | Le taux d'échantillonnage des traces. Entre `0.0` et `1.0` (par défaut)         |
 | `DD_SERVICE_NAME`                    | ``          | Le nom par défaut de l'application                                                        |
@@ -213,7 +213,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_AGENT_TIMEOUT`             | `500`       | Le temps maximum que l'Agent est autorisé à prendre (en millisecondes)                 |
 | `DD_TRACE_AGENT_CONNECT_TIMEOUT`     | `100`       | Le temps maximum autorisé pour la configuration de la connexion de l'Agent (en millisecondes)       |
 | `DD_TRACE_ANALYTICS_ENABLED`         | `false`     | Flag pour activer les analyses de traces pour les spans pertinentes dans les intégrations Web       |
-| `DD_TRACE_DEBUG`                     | `false`     | Activer le [mode debugging][16] pour le traceur                                      |
+| `DD_TRACE_DEBUG`                     | `false`     | Activer le [mode debugging][15] pour le traceur                                      |
 | `DD_TRACE_ENABLED`                   | `true`      | Activer le traceur partout                                                  |
 | `DD_TRACE_GLOBAL_TAGS`               | ``          | Tags à appliquer à toutes les spans : p. ex. `key1:value1,key2:value2`                |
 | `DD_<INTEGRATION>_ANALYTICS_ENABLED` | `false`     | Flag pour activer les analyses de traces pour les spans pertinentes dans une intégration spécifique |
@@ -236,3 +236,4 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 [12]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [13]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
 [14]: /fr/tracing/troubleshooting
+[15]: /fr/tracing/troubleshooting/?tab=php
