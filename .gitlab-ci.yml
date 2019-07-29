@@ -72,13 +72,8 @@ test_missing_tms_preview:
   <<: *base_template
   stage: post-deploy
   environment: "preview"
-  variables:
-    URL: ${PREVIEW_DOMAIN}
-    CONFIG: ${PREVIEW_CONFIG}
-    CONFIGURATION_FILE: "./local/etc/pull_config_preview.yaml"
   allow_failure: true
   script:
-    - build_hugo_site_new
     - ls
     - check_missing_tms
   only:
