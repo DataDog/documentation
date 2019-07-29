@@ -2,6 +2,8 @@
 title: Trace Analytics Monitors
 kind: documentation
 description: "Analytics on your APM data at infinite cardinality"
+aliases:
+  - /monitors/monitor_types/trace_search/
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
