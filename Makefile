@@ -64,7 +64,7 @@ clean-integrations:  ## remove built integrations files.
 	    -a -not -name 'amazon_vpc.md' \
 	    -a -not -name 'amazon_cloudhsm.md' \
 	    -a -not -name 'cloud_foundry.md' \
-		-a -not -name 'cloudability.md' \
+		  -a -not -name 'cloudability.md' \
 	    -a -not -name 'cloudcheckr.md' \
 	    -a -not -name 'integration_sdk.md' \
 	    -a -not -name 'jenkins.md' \
@@ -89,6 +89,8 @@ clean-auto-doc: ##remove all doc automatically created
 	find ./content/en/developers/integrations -type f -maxdepth 1 -exec rm -rf {} \; ;fi
 	@if [ content/en/agent/basic_agent_usage/heroku.md ]; then \
 	rm -f content/en/agent/basic_agent_usage/heroku.md ;fi
+	@if [ content/en/tracing/setup/ruby.md ]; then \
+	rm -f content/en/tracing/setup/ruby.md ;fi
 
 clean-node:  ## remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi
@@ -108,9 +110,6 @@ docker-start: clean docker-stop  ## start container and run default commands to 
 		-e GITHUB_TOKEN \
 		-e RUN_SERVER=${RUN_SERVER} \
 		-e CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS} \
-		-e DOGWEB=${DOGWEB} \
-		-e INTEGRATIONS_CORE=${INTEGRATIONS_CORE} \
-		-e INTEGRATIONS_EXTRAS=${INTEGRATIONS_EXTRAS} \
 		-e USE_DOCKER=true \
 		-p 1313:1313 mstbbs/docker-dd-docs:${IMAGE_VERSION}
 
@@ -154,9 +153,6 @@ start: clean source-helpers ## start the gulp/hugo server.
 		GITHUB_TOKEN=${GITHUB_TOKEN} \
 		RUN_SERVER=${RUN_SERVER} \
 		CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS} \
-		DOGWEB=${DOGWEB} \
-		INTEGRATIONS_CORE=${INTEGRATIONS_CORE} \
-		INTEGRATIONS_EXTRAS=${INTEGRATIONS_EXTRAS} \
 		CONFIGURATION_FILE=${CONFIGURATION_FILE} \
 		run-site.sh; \
 	else \

@@ -32,7 +32,7 @@ Trace Search & Analytics enables you to search, filter, and aggregate APM data b
 
 1. To [create a new monitor][1], hover over **Monitors** in the main menu and click **New Monitor** in the sub-menu. To create a monitor programmatically, see the [Datadog API][2] or [community maintained libraries][3].
 2. On the new monitor page, select **APM** monitor.
-3. Select *Trace Analytics* and then define your [Trace search query][4]:
+3. Select *Trace Analytics* and then define your [trace search query][4]:
     {{< img src="monitors/monitor_types/trace_search/trace_search.png" alt="Trace search monitor" responsive="true" style="width:75%;" >}}
 4. Set your alert conditions.
 5. Name and describe your monitor.

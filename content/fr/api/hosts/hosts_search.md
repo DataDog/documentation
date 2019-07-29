@@ -16,7 +16,7 @@ Cet endpoint permet de rechercher les hosts selon leur nom, alias ou tag. Les ho
     trie les hosts selon un champ donné.
     Valeurs autorisées : **status**, **apps**, **cpu**, **iowait** ou **load**.
 * **`sort_dir`** [*facultatif*, *défaut*=**desc**] :
-    le sens du tri.
+    l'ordre de tri.
     Valeurs autorisées : **asc** ou **desc**.
 * **`start`** [*facultatif*, *défaut*=**0**] :
     résultat des hosts à partir desquels commencer la recherche.

@@ -111,7 +111,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [3]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics
 [4]: https://docs.datadoghq.com/fr/developers/metrics
 [5]: https://docs.datadoghq.com/fr/api/?lang=ruby
-[6]: https://docs.datadoghq.com/fr/tracing/languages/ruby
+[6]: https://docs.datadoghq.com/fr/tracing/setup/ruby
 [7]: https://docs.datadoghq.com/fr/logs/log_collection/ruby
 [8]: https://docs.datadoghq.com/fr/help
 

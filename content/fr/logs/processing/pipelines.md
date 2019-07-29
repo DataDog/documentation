@@ -72,7 +72,7 @@ Les pipelines imbriqués sont des pipelines au sein d'un pipeline. Utilisez les 
 
 ### Pipeline d'attribut réservé
 
-Datadog dispose d’[une liste d'attributs réservés][2], tels que `timestamp`, `status`, `host`, `service` et même le `message` de log. Ces attributs ont un comportement spécifique au sein de l'application Datadog.
+Datadog dispose d'[une liste d'attributs réservés][2], tels que `timestamp`, `status`, `host`, `service` et même le `message` de log. Ces attributs ont un comportement spécifique au sein de l'application Datadog.
 Si les attributs figurant dans vos logs JSON présentent des noms différents, utilisez le pipeline des attributs réservés pour remapper l'attribut de vos logs vers un attribut figurant dans la liste des attributs réservés.
 
 Par exemple, imaginons un service qui génère les logs ci-dessous :

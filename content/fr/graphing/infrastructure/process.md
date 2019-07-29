@@ -142,7 +142,7 @@ Pour combiner plusieurs recherches textuelles au sein d'une requête complexe, u
 |              |                                                                                                        |                              |
 | :----        | :----                                                                                                  | :----                        |
 | **Opérateur** | **Description**                                                                                       | **Exemple**                 |
-| `AND`        | **Intersection** : les deux termes sont dans les événements sélectionnés (opérateur AND par défaut si rien n'est ajouté). | java AND elasticsearch   |
+| `AND`        | **Intersection** : les deux termes sont inclus dans les événements sélectionnés (si aucun opérateur n'est ajouté, AND est utilisé par défaut). | java AND elasticsearch   |
 | `OR`         | **Union** : un des deux termes est inclus dans les événements sélectionnés.                                             | java OR python   |
 | `NOT` / `!`      | **Exclusion** : le terme suivant n'est PAS dans l'événement. Vous pouvez utiliser le mot `NOT` ou le caractère `!` pour effectuer la même opération. | java NOT elasticsearch <br> **équivalent :** java !elasticsearch |
 

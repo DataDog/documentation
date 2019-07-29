@@ -21,4 +21,4 @@ Ne peut être utilisé qu'avec des clés d'application confiées aux administrat
     le rôle d'accès de l'utilisateur. Valeurs autorisées :
     *  **st** (standard)
     *  **adm** (admin)
-    *  **ro** (read-only)
+    *  **ro** (utilisateur read-only)

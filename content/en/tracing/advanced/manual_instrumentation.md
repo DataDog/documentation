@@ -33,9 +33,9 @@ Datadog's Trace annotation is provided by the [dd-trace-api dependency][2].
 ```java
 import datadog.trace.api.Trace;
 
-public class MyClass {
-  @Trace
-  public static void myMethod() {
+public class MyJob {
+  @Trace(operationName = "job.exec", resourceName = "MyJob.process")
+  public static void process() {
     // your method implementation here
   }
 }
