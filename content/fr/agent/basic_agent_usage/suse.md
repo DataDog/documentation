@@ -23,7 +23,7 @@ Cette page présente les fonctionnalités de base de l'Agent Datadog pour SUSE. 
 
 ## Commandes
 
-Dans l'Agent v6, le gestionnaire de service fourni par le système d'exploitation est responsable du cycle de vie de l'Agent, car d'autres commandes doivent être exécutées directement par le biais du binaire de l'Agent. Dans l'Agent v5, presque tout se fait par le biais du système d'exploitation.
+Dans l'Agent v6, le gestionnaire de service fourni par le système d'exploitation est responsable du cycle de vie de l'Agent, tandis que les autres commandes doivent être exécutées directement par le biais du binaire de l'Agent. Dans l'Agent v5, presque tout se fait par le biais du gestionnaire de service.
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
@@ -34,10 +34,10 @@ Dans l'Agent v6, le gestionnaire de service fourni par le système d'exploitatio
 | Arrêter l'Agent s'exécutant en tant que service    | `sudo service datadog-agent stop`                      |
 | Redémarrer l'Agent s'exécutant en tant que service | `sudo service datadog-agent restart`                   |
 | Statut du service de l'Agent            | `sudo service datadog-agent status`                    |
-| Page de statut de l'Agent       | `sudo datadog-agent status`                            |
+| Page de statut de l'Agent en cours d'exécution       | `sudo datadog-agent status`                            |
 | Envoyer un flare                         | `sudo datadog-agent flare`                             |
 | Afficher l'utilisation des commandes              | `sudo datadog-agent --help`                            |
-| Exécuter un check                        | `sudo -u dd-agent -- datadog-agent check <check_name>` |
+| Exécuter un check                        | `sudo -u dd-agent -- datadog-agent check <nom_check>` |
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -48,10 +48,10 @@ Dans l'Agent v6, le gestionnaire de service fourni par le système d'exploitatio
 | Arrêter l'Agent s'exécutant en tant que service    | `sudo service datadog-agent stop`                 |
 | Redémarrer l'Agent s'exécutant en tant que service | `sudo service datadog-agent restart`              |
 | Statut du service de l'Agent            | `sudo service datadog-agent status`               |
-| Page de statut de l'Agent       | `sudo service datadog-agent info`                 |
+| Page de statut de l'Agent en cours d'exécution       | `sudo service datadog-agent info`                 |
 | Envoyer un flare                         | `sudo service datadog-agent flare`                |
 | Afficher l'utilisation des commandes              | `sudo service datadog-agent`                      |
-| Exécuter un check                        | `sudo -u dd-agent -- dd-agent check <check_name>` |
+| Exécuter un check                        | `sudo -u dd-agent -- dd-agent check <nom_check>` |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -96,13 +96,13 @@ Fichiers de configuration pour les [intégrations][1] :
 
 ## Dépannage
 
-[Consultez la documentation dédiée relative au dépannage de l'Agent][3].
+[Consultez la documentation relative au dépannage de l'Agent][3].
 
 ## Utilisation de l'Agent intégré
 
-L'Agent comporte un environnement Python intégré dans `/opt/datadog-agent/embedded/`. Les binaires courants comme `python` et `pip` sont contenus dans `/opt/datadog-agent/embedded/bin/`.
+L'Agent intègre un environnement Python dans `/opt/datadog-agent/embedded/`. Les binaires courants comme `python` et `pip` se trouvent dans `/opt/datadog-agent/embedded/bin/`.
 
-Consultez les instructions pour savoir comment [ajouter des packages à l'Agent intégré][4] pour en savoir plus.
+Pour en savoir plus, consultez les instructions relatives à l'[ajout de paquets à l'Agent intégré][4].
 
 ## Pour aller plus loin
 

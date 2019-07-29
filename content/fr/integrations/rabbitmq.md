@@ -78,7 +78,7 @@ rabbitmqctl set_user_tags datadog monitoring
 
 Ici, `/` correspond au host par défaut. Définissez ce paramètre sur le hostname virtuel que vous avez spécifié. Consultez la [documentation de RabbitMQ][8] (en anglais) pour en savoir plus.
 
-#### Où :
+#### Collecte de métriques
 
 * Ajoutez ce bloc de configuration à votre fichier `rabbitmq.d/conf.yaml` pour commencer à recueillir vos [métriques RabbitMQ](#metriques) :
 
@@ -118,7 +118,7 @@ Options de configuration :
 
 [Redémarrez l'Agent][10] pour commencer à envoyer vos métriques, événements et checks de service RabbitMQ à Datadog.
 
-#### `<valeur>` DOIT être un nombre (c'est-à-dire un nombre entier ou une valeur de type float).
+#### Collecte de logs
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 

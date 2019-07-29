@@ -113,7 +113,7 @@ Dans Kubernetes, [associez le port DogstatsD à un port de host][6] ; dans ECS,
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour participer à la bêta.
+Prochainement disponible. Contactez l'[assistance Datadog][1] pour participer à la bêta.
 
 
 [1]: /fr/help
@@ -141,14 +141,14 @@ Dans Kubernetes, [associez le port DogstatsD à un port de host][4] ; dans ECS,
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour participer à la bêta.
+Prochainement disponible. Contactez l'[assistance Datadog][1] pour participer à la bêta.
 
 
 [1]: /fr/help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour participer à la bêta.
+Prochainement disponible. Contactez l'[assistance Datadog][1] pour participer à la bêta.
 
 
 [1]: /fr/help
@@ -193,7 +193,7 @@ Datadog fournit non seulement ces métriques sur votre page Service de l'APM, ma
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour participer à la bêta.
+Prochainement disponible. Contactez l'[assistance Datadog][1] pour participer à la bêta.
 
 
 [1]: /fr/help
@@ -210,14 +210,14 @@ Datadog fournit non seulement ces métriques sur votre page Service de l'APM, ma
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour participer à la bêta.
+Prochainement disponible. Contactez l'[assistance Datadog][1] pour participer à la bêta.
 
 
 [1]: /fr/help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour participer à la bêta.
+Prochainement disponible. Contactez l'[assistance Datadog][1] pour participer à la bêta.
 
 
 [1]: /fr/help

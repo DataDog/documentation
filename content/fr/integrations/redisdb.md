@@ -81,7 +81,7 @@ Consultez le [fichier d'exemple redisdb.d/conf.yaml][4] pour découvrir toutes l
 
 [Redémarrez l'Agent][5] pour commencer à envoyer des métriques Redis à Datadog.
 
-#### `<valeur>` DOIT être un nombre (c'est-à-dire un nombre entier ou une valeur de type float).
+#### Collecte de logs
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 

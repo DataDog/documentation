@@ -34,10 +34,10 @@ Dans l'Agent v6, le gestionnaire de service fourni par le système d'exploitatio
 | Arrêter l'Agent s'exécutant en tant que service    | `sudo service datadog-agent stop`                      |
 | Redémarrer l'Agent s'exécutant en tant que service | `sudo service datadog-agent restart`                   |
 | Statut du service de l'Agent            | `sudo service datadog-agent status`                    |
-| Page de statut de l'Agent       | `sudo datadog-agent status`                            |
+| Page de statut de l'Agent en cours d'exécution       | `sudo datadog-agent status`                            |
 | Envoyer un flare                         | `sudo datadog-agent flare`                             |
 | Afficher l'utilisation des commandes              | `sudo datadog-agent --help`                            |
-| Exécuter un check                        | `sudo -u dd-agent -- datadog-agent check <check_name>` |
+| Exécuter un check                        | `sudo -u dd-agent -- datadog-agent check <nom_check>` |
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -48,10 +48,10 @@ Dans l'Agent v6, le gestionnaire de service fourni par le système d'exploitatio
 | Arrêter l'Agent s'exécutant en tant que service    | `sudo service datadog-agent stop`                 |
 | Redémarrer l'Agent s'exécutant en tant que service | `sudo service datadog-agent restart`              |
 | Statut du service de l'Agent            | `sudo service datadog-agent status`               |
-| Page de statut de l'Agent       | `sudo service datadog-agent info`                 |
+| Page de statut de l'Agent en cours d'exécution       | `sudo service datadog-agent info`                 |
 | Envoyer un flare                         | `sudo service datadog-agent flare`                |
 | Afficher l'utilisation des commandes              | `sudo service datadog-agent`                      |
-| Exécuter un check                        | `sudo -u dd-agent -- dd-agent check <check_name>` |
+| Exécuter un check                        | `sudo -u dd-agent -- dd-agent check <nom_check>` |
 
 {{% /tab %}}
 {{< /tabs >}}

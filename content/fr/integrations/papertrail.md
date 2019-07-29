@@ -30,7 +30,7 @@ Utilisez Papertrail et Datadog pour :
 
 Pour enregistrer des métriques depuis Papertrail :
 
-1.  Dans l’[observateur d'événements][1] de Papertrail, enregistrez une recherche correspondant aux événements de log que vous souhaitez représenter graphiquement.
+1.  Dans l'[observateur d'événements][1] de Papertrail, enregistrez une recherche correspondant aux événements de log que vous souhaitez représenter graphiquement.
 1.  Donnez un nom à votre recherche et cliquez sur le bouton **Save & Setup an Alert**.
 1.  Choisissez Datadog dans Graphing & Metrics.
 

@@ -39,15 +39,9 @@ supported_os:
 
 Surveillez la connectivité TCP et le délai de réponse pour n'importe quel host ou port.
 
-## ```python
-from datadog import datadog_lambda_wrapper, lambda_metric
+## Implémentation
 
-@datadog_lambda_wrapper
-def lambda_handler(event, context):
-
-```
-
-Vous trouverez ci-dessous les instructions pour installer et configurer le check lorsque vous exécutez l'Agent sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Vous trouverez ci-dessous les instructions pour installer et configurer le check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
 
 ### Installation
 
