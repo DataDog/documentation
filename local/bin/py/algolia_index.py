@@ -29,7 +29,7 @@ def transform_url(private_urls):
     new_private_urls = []
 
     for url in private_urls:
-        new_private_urls.append(url.replace('public/','docs.datadoghq.com/'))
+        new_private_urls.append(url.replace('public/','docs.datadoghq.com/') + '/$')
 
     return new_private_urls
 
