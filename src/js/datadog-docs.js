@@ -1011,6 +1011,8 @@ function getPathElement(){
     var aPath = document.querySelector('.side [data-path="'+path+'"]');
     var maPath = document.querySelector('header [data-path="'+path+'"]');
 
+    console.log('aPath: ', aPath);
+
     // exception for agent/guide and tracing/guide path, there's no 3rd level for specific agent/guide/**
     if (path.includes('agent/guide/upgrade-to-agent-v6')) {
         aPath = document.querySelectorAll('.side [data-path*="agent/guide"]')[0];

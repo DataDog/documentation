@@ -407,6 +407,7 @@ main:
   - name: "Distributions"
     url: "graphing/metrics/distributions/"
     parent: "graphing_metrics"
+    identifier: "graphing_metrics_distributions"
     weight: 303
 
   - name: "Notebooks"
@@ -683,6 +684,7 @@ main:
   - name: "Python"
     url: "tracing/setup/python/"
     parent: "tracing_setup"
+    identifier: "python"
     weight: 202
   - name: "Ruby"
     url: "tracing/setup/ruby/"
@@ -840,23 +842,24 @@ main:
     parent: "log_management"
     identifier: "log_collection"
     weight: 1
+  - name: "Browser"
+    identifier: "log_browser"
+    url: "logs/log_collection/javascript/"
+    parent: "log_collection"
+    weight: 101
   - name: "Csharp"
     url: "logs/log_collection/csharp/"
     parent: "log_collection"
-    weight: 101
+    weight: 102
   - name: "Go"
     identifier: "log_go"
     url: "logs/log_collection/go/"
     parent: "log_collection"
-    weight: 102
+    weight: 103
   - name: "Java"
     url: "logs/log_collection/java/"
     parent: "log_collection"
-    weight: 103
-  - name: "Javascript"
-    identifier: "log_browser"
-    url: "logs/log_collection/javascript/"
-    parent: "log_collection"
+    identifier: "log_collection_java"
     weight: 104
   - name: "Nodejs"
     url: "logs/log_collection/nodejs/"
@@ -875,6 +878,7 @@ main:
   - name: "Ruby"
     url: "logs/log_collection/ruby/"
     parent: "log_collection"
+    identifier: "log_collection_ruby"
     weight: 108
   - name: "Other Integrations"
     url: "integrations/#cat-log-collection/"
@@ -891,6 +895,7 @@ main:
   - name: "Pipelines"
     url: "logs/processing/pipelines/"
     parent: "log_processing"
+    identifier: "log_pipelines"
     weight: 201
   - name: "Processors"
     url: "logs/processing/processors/"
@@ -908,12 +913,13 @@ main:
   - name: "Generate Metrics"
     url: "logs/logs_to_metrics/"
     parent: "log_management"
-    identifier: "log_processing"
+    identifier: "log_to_metrics"
     weight: 3
 
   - name: "Live Tail"
     url: "logs/live_tail/"
     parent: "log_management"
+    identifier: "log_live_tail"
     weight: 4
 
   ## LOGS - Explorer
@@ -964,6 +970,7 @@ main:
   - name: "Guides"
     url: "logs/guide/"
     parent: "log_management"
+    identifier: "log_guides"
     weight: 7
 
   - name: "Security"
@@ -990,6 +997,7 @@ main:
   - name: "Browser Tests"
     url: "synthetics/browser_tests/"
     parent: "synthetics"
+    identifier: "synthetics_browser_tests"
     weight: 2
 
   ## SYNTHETICS - APM
@@ -1123,6 +1131,7 @@ main:
   - name: "Guides"
     url: "developers/guide/"
     parent: "dev_tools"
+    identifier: "dev_tools_guides"
     weight: 8
 
 #########
