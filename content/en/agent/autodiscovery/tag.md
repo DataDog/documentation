@@ -137,9 +137,9 @@ For Agent v6.8.0+, use the following environment variable configuration to add a
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 ```
 
-**Note**: Using this method may [increase the number of metrics][1] for your organization and impact your billing.
+**Note**: Using this method may increase the number of [custom metrics][1] for your organization and impact your billing.
 
-[1]: 
+[1]: /developers/metrics/custom_metrics/#how-is-a-custom-metric-defined
 {{% /tab %}}
 {{< /tabs >}}
 
