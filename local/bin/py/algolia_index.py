@@ -43,7 +43,7 @@ def update_algolia_private_url(docs_index_config,private_urls):
         for url in private_urls:
             config["stop_urls"].append(url)
 
-    print("Addition complete, updating Algolia main configuration file.")
+    print("Addition complete, updating Algolia main configuration file with the new one: \n {} \n".format(config))
 
     with open(docs_index_config, 'w+', encoding='utf-8') as json_file:
         json.dump(config, json_file)
