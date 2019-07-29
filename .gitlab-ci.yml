@@ -54,6 +54,7 @@ build_preview:
     #- create_artifact
     #- create_artifact_untracked
   cache:
+    key: public-directory
     paths:
       - public/
   only:
@@ -76,6 +77,8 @@ test_missing_tms_preview:
   stage: post-deploy
   environment: "preview"
   allow_failure: true
+  cache:
+    key: public-directory
   script:
     - ls
     - check_missing_tms
