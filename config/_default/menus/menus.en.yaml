@@ -603,10 +603,10 @@ main:
     url: "monitors/monitor_types/process/"
     parent: "monitor_types"
     weight: 113
-  - name: "Trace Search"
-    url: "monitors/monitor_types/trace_search"
+  - name: "Trace Analytics"
+    url: "monitors/monitor_types/trace_analytics"
     parent: "monitor_types"
-    identifier: "monitors_trace_search"
+    identifier: "monitors_trace_analytics"
     weight: 114
   - name: "Watchdog"
     url: "monitors/monitor_types/watchdog/"
@@ -810,7 +810,7 @@ main:
     parent: "tracing_search_analytics"
     weight: 503
   - name: "Monitors"
-    url: "monitors/monitor_types/trace_search"
+    url: "monitors/monitor_types/trace_analytics"
     parent: "tracing_search_analytics"
     weight: 504
 
@@ -894,7 +894,8 @@ main:
     identifier: "log_collection_ruby"
     weight: 108
   - name: "Other Integrations"
-    url: "integrations/#cat-log-collection/"
+    url: "integrations/#cat-log-collection"
+    identifier: "other_integrations"
     parent: "log_collection"
     weight: 109
 
