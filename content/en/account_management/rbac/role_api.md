@@ -218,6 +218,26 @@ The UUIDs for the permissions are as follows:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Granting Permissions within limited scopes
+
+Certain permissions can be granted within a limited scope. This is easily done manually from the Datadog application in [the Pipelines Page][1], but can be done programmatically via the API the Role API if the correct "scope" is added in the payload. The following permissions can be granted within a limited scope:
+
+|       permission name        | scope name |                  format                  |                          Description                           |
+|------------------------------|------------|------------------------------------------|----------------------------------------------------------------|
+| logs_read_index_data         | indexes    | list of index names (string)             | Grant read on only certain log indexes                         |
+| logs_write_exclusion_filters | indexes    | list of index names (string)             | Grant update on the exclusion filters for only certain indexes |
+| logs_write_processors        | pipelines  | list of processing pipeline ids (string) | Grant update on only the processers of certain pipelines       |
+
+For example, if you wished to grant read access only on two indexes named "main" and "support" to a role named "support", your API call would look like this:
+```sh
+curl -X POST -H "Content-type: application/json" -d '{"scope": {"indexes": ["main", "support"]}}' "https://app.datadoghq.com/api/v1/roles/${ROLEUUID}/permissions/${PERMISSION}?api_key=${API_KEY}&application_key=${APP_KEY}"
+```
+
+If you wished to grant write access to only two processing pipelines whose IDs were "abcd-1234" and "bcde-2345" respectively, your API call would look like this:
+```sh
+curl -X POST -H "Content-type: application/json" -d '{"scope": {"pipelines": ["abcd-1234", "bcde-2345"]}}' "https://app.datadoghq.com/api/v1/roles/${ROLEUUID}/permissions/${PERMISSION}?api_key=${API_KEY}&application_key=${APP_KEY}"
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
