@@ -595,7 +595,7 @@ class PreBuild:
 
             if "front_matters" in content["options"]:
                 front_matters= "---\n" + yaml.dump(content["options"]["front_matters"]) + "---\n"
-                file_content = re.sub(self.regex_h1_replace, front_matters, file_content, count=1)
+                file_content = re.sub(r'^(#{1}).*', front_matters, file_content, count=1)
 
         with open(
             "{}{}{}".format(
