@@ -33,10 +33,10 @@ def find_private_url(path, exclusions):
 
 def transform_url(private_urls):
     """
-    Transforms URL returned by removing the public/ (name of the local folder with all hugo html file)
+    Transforms URL returned by removing the public/ (name of the local folder with all hugo html files)
     into "real" documentation links for Algolia
     :param private_urls: Array of file links in public/ to transform into doc links.
-    :return new_private_urls: A list of documentation URL links that correspond to private doc file.
+    :return new_private_urls: A list of documentation URL links that correspond to private doc files.
     """
     new_private_urls = []
 
