@@ -156,7 +156,7 @@ These integration templates may suit you in basic cases, but if you need to cust
 Your auto-configuration file should have the following format:
 
 ```
-ad_identifier:
+ad_identifiers:
   <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 
 init_config:
@@ -311,7 +311,7 @@ labels:
 Redis is one of the default Autodiscovery templates packaged with the Agent, so you don't need to mount this file. Here's the auto-conf `redis.yaml` template packaged with the Agent:
 
 ```yaml
-ad_identifier:
+ad_identifiers:
   - redis
 
 init_config:
@@ -322,7 +322,7 @@ instances:
     port: "6379"
 ```
 
-It looks like a minimal [Redis integration configuration][1], but notice the `ad_identifier` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run a `redis` image.
+It looks like a minimal [Redis integration configuration][1], but notice the `ad_identifiers` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run a `redis` image.
 
 **See the dedicated [Autodiscovery Identifier][2] documentation to learn more.**
 
@@ -333,7 +333,7 @@ Now let's suppose that your Redis requires an additional `password` when accessi
 3. Mount the `autodiscovery.d/` folder into the containerized Agent `conf.d/` folder.
 
 ```yaml
-ad_identifier:
+ad_identifiers:
   - redis
 
 init_config:
@@ -443,7 +443,7 @@ labels:
 First, create a `autodiscovery.d/` folder on your host. Then add the following custom auto-configuration file named `apache.yaml` to this folder:
 
 ```yaml
-ad_identifier:
+ad_identifiers:
   - httpd
 
 init_config:
@@ -456,12 +456,12 @@ logs:
   service: webapp
 ```
 
-**Note**: It looks like a minimal [Apache check configuration][1], but notice the `ad_identifier` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `httpd` image. **See the dedicated [Autodiscovery Identifier][2] documentation to learn more**.
+**Note**: It looks like a minimal [Apache check configuration][1], but notice the `ad_identifiers` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `httpd` image. **See the dedicated [Autodiscovery Identifier][2] documentation to learn more**.
 
 Then add the following custom auto-configuration file named `http_check.yaml` to this folder:
 
 ```yaml
-ad_identifier:
+ad_identifiers:
   - httpd
 
 init_config:

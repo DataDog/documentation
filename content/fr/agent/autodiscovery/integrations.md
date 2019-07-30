@@ -155,7 +155,7 @@ Ces modèles d'intégration peuvent convenir dans les cas simples. Toutefois, si
 Votre fichier de configuration automatique doit avoir le format suivant :
 
 ```
-ad_identifier:
+ad_identifiers:
   <IDENTIFIANT_INTÉGRATION_AUTODISCOVERY>
 
 init_config:
@@ -310,7 +310,7 @@ labels:
 Redis est l'un des modèles Autodiscovery par défaut inclus avec l'Agent : il n'est donc pas nécessaire de monter ce fichier. Voici le modèle de configuration automatique `redis.yaml` inclus avec l'Agent :
 
 ```yaml
-ad_identifier:
+ad_identifiers:
   - redis
 
 init_config:
@@ -321,7 +321,7 @@ instances:
     port: "6379"
 ```
 
-Cette [configuration d'intégration Redis][1] peut sembler succincte, mais notez l'option `ad_identifier`. Cette option obligatoire vous permet de spécifier les identifiants de conteneur. Autodiscovery applique ce modèle à tous les conteneurs sur le host qui exécute une image `redis`.
+Cette [configuration d'intégration Redis][1] peut sembler succincte, mais notez l'option `ad_identifiers`. Cette option obligatoire vous permet de spécifier les identifiants de conteneur. Autodiscovery applique ce modèle à tous les conteneurs sur le host qui exécute une image `redis`.
 
 **Consultez la documentation relative aux [identifiants Autodiscovery][2] pour en savoir plus.**
 
@@ -332,7 +332,7 @@ Supposons maintenant que votre Redis requiert un `password` supplémentaire pour
 3. Montez le répertoire `autodiscovery.d/` dans le répertoire `conf.d/` de l'Agent conteneurisé.
 
 ```yaml
-ad_identifier:
+ad_identifiers:
   - redis
 
 init_config:
@@ -442,7 +442,7 @@ labels:
 Créez d'abord un répertoire `autodiscovery.d/` sur votre host. Ajoutez ensuite le fichier de configuration automatique personnalisé suivant, appelé `apache.yaml`, à ce répertoire :
 
 ```yaml
-ad_identifier:
+ad_identifiers:
   - httpd
 
 init_config:
@@ -455,12 +455,12 @@ logs:
   service: webapp
 ```
 
-Remarque : cette [configuration de check Apache][1] peut sembler succincte, mais notez l'option `ad_identifier`. Cette option obligatoire vous permet de spécifier les identifiants de conteneur. Autodiscovery applique ce modèle à tous les conteneurs sur le host qui exécute une image `httpd`. **Consultez la documentation relative aux [identifiants Autodiscovery][2] pour en savoir plus**.
+Remarque : cette [configuration de check Apache][1] peut sembler succincte, mais notez l'option `ad_identifiers`. Cette option obligatoire vous permet de spécifier les identifiants de conteneur. Autodiscovery applique ce modèle à tous les conteneurs sur le host qui exécute une image `httpd`. **Consultez la documentation relative aux [identifiants Autodiscovery][2] pour en savoir plus**.
 
 Ajoutez ensuite le fichier de configuration automatique personnalisé suivant, appelé `http_check.yaml`, à ce répertoire :
 
 ```yaml
-ad_identifier:
+ad_identifiers:
   - httpd
 
 init_config:

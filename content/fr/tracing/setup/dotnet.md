@@ -71,7 +71,7 @@ La manière dont ces composants sont installés sur le host dépendent de l'envi
 
 {{% tab "Framework .NET sur Windows" %}}
 
-Installez le traceur .NET sur le host à l'aide du [programme d'installation MSI][1]. Choisissez la plateforme correspondant à votre application : x64 pour 64 bits ou x86 pour 32 bits. Vous pouvez installer les deux en parallèle si nécessaire.
+Installez le traceur .NET sur le host à l'aide du [programme d'installation MSI pour Windows][1]. Choisissez la plateforme correspondant à votre application : x64 pour 64 bits ou x86 pour 32 bits. Vous pouvez installer les deux en parallèle si nécessaire.
 
 - Bibliothèque native : déployée dans `Program Files` par défaut et enregistrée par le programme d'installation MSI comme bibliothèque COM dans le registre Windows.
 - Bibliothèques gérées : déployées dans le Global Assembly Cache (GAC) par le programme d'installation MSI, auquel n'importe quelle application .NET peut accéder.

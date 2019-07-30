@@ -9,7 +9,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-aws-fargate/"
   tag: "Blog"
   text: "Monitor AWS Fargate applications with Datadog"
-- link: "/agent/autodiscovery/?tab=hostagent"
+- link: "/agent/autodiscovery/?tab=agent"
   tag: "Documentation"
   text: "Autodiscovery"
 ---

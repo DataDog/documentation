@@ -10,7 +10,7 @@ further_reading:
   text: "Manage which Container to include in the Agent Autodiscovery"
 ---
 
-The Autodiscovery container identifier, or `ad_identifier`, allows you to apply an Autodiscovery configuration file template to a given container, either by [using the container short image](#short-image-container-identifiers) or with a [custom Autodiscovery container identifier](#custom-autodiscovery-container-identifiers).
+Autodiscovery Container Identifiers, or `ad_identifiers`, allow you to apply an Autodiscovery configuration file template to a given container, either by [using the container short image](#short-image-container-identifiers) or with a [custom Autodiscovery container identifier](#custom-autodiscovery-container-identifiers).
 
 **Note**: With the other types of configuration—key-value stores, Docker labels, or Kubernetes pod annotations—the matching between an integration configuration template and the corresponding container is based on the `<CONTAINER_IDENTIFIER>` included in the key-value stores, labels, or annotations configuration.
 
@@ -19,7 +19,7 @@ The Autodiscovery container identifier, or `ad_identifier`, allows you to apply 
 To apply the following Autodiscovery configuration template file to a given container, use the **container short image** name as `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`:
 
 ```
-ad_identifier:
+ad_identifiers:
   <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 
 init_config:
@@ -32,7 +32,7 @@ instances:
 For instance, the following Apache Autodiscovery configuration file template used by the Agent:
 
 ```yaml
-ad_identifier:
+ad_identifiers:
   - httpd
 init_config:
 instances:
@@ -51,7 +51,7 @@ As a consequence, when using short image as Autodiscovery container identifiers,
 To apply different Autodiscovery Configuration file templates to different containers running the same image, use a custom value as `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` and apply it with the `com.datadoghq.ad.check.id` label to identify your container. Let's say you have the following configuration file:
 
 ```
-ad_identifier:
+ad_identifiers:
   <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 
 init_config:

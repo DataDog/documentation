@@ -33,14 +33,14 @@ Datadog récupère les **métriques** provenant de Google Stackdriver Logging 
 ## Implémentation
 ### Installation
 
-Les métriques provenant des logs Stackdriver sont incluses avec l’[intégration Google Cloud Platform][1]. Aucune autre procédure d'installation n'est requise.
+Les métriques provenant des logs Stackdriver sont incluses avec l'[intégration Google Cloud Platform][1]. Aucune autre procédure d'installation n'est requise.
 
 ## Données collectées
 ### Métriques
 {{< get-metrics-from-git "google_stackdriver_logging" >}}
 
 
-**Remarque** : Datadog recueille des {métriques Google Stackdriver définis par l'uiilisateur] avec le préfixe `gcp.logging.user`.
+**Remarque** : Datadog recueille des {métriques Google Stackdriver définis par l'utilisateur][3] avec le préfixe `gcp.logging.user`.
 
 ### Événements
 L'intégration Google Stackdriver Logging n'inclut aucun événement.

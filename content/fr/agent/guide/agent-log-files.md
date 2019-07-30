@@ -26,7 +26,7 @@ L'Agent Datadog effectue une substitution des logs tous les 10 Mo. Lors d'une s
 |--------------------------------------|-------------------------------|
 | Linux                                | `/var/log/datadog/`           |
 | macOS                                | `/var/log/datadog/`           |
-| Windows Server 2008, Vista ou versions ultérieures | `C:\ProgramData\Datadog\logs` |
+| Windows Server 2008, Vista et versions ultérieures | `C:\ProgramData\Datadog\logs` |
 | Windows Server 2003, XP ou versions antérieures     | *Plateforme non prise en charge*        |
 
 
@@ -44,7 +44,7 @@ L'Agent Datadog effectue une substitution des logs tous les 10 Mo. Lors d'une s
 | Source                               | `~/.datadog-agent/supervisord/logs/`                                 |
 | SmartOS                              | `/opt/local/datadog/logs/supervisord/`                               |
 | Ubuntu                               | `/var/log/datadog/`                                                  |
-| Windows Server 2008, Vista ou versions ultérieures | `C:\ProgramData\Datadog\logs\`                                       |
+| Windows Server 2008, Vista et versions ultérieures | `C:\ProgramData\Datadog\logs\`                                       |
 | Windows Server 2003, XP ou versions antérieures     | `C:\Documents and Settings\All Users\Application Data\Datadog\logs\` |
 
 {{% /tab %}}

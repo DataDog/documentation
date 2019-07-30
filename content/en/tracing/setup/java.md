@@ -77,7 +77,7 @@ Beta integrations are disabled by default but can be enabled individually.
 | Java Servlet Compatible      | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`            |
 | Jax-RS Annotations           | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`        |
 | Jetty (non-Servlet)          | 8+         | [Beta][7]       | `jetty`, `jetty-8`                             |
-| Netty Http Server and Client | 4.0+       | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
+| Netty HTTP Server            | 4.0+       | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
 | Play                         | 2.4-2.6    | Fully Supported | `play`                                         |
 | Ratpack                      | 1.4+       | [Beta][7]       | `ratpack`                                      |
 | Spark Java                   | 2.3+       | [Beta][7]       | `sparkjava` (requires `jetty`)                 |
@@ -100,14 +100,18 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Apache HTTP Client       | 4.0+        | Fully Supported | `httpclient`                                   |
 | Apache HTTP Async Client | 4.0+        | Fully Supported | `httpasyncclient`, apache-httpasyncclient      |
 | AWS Java SDK             | 1.11+, 2.2+ | Fully Supported | `aws-sdk`                                      |
+| Google HTTP Client       | 1.19.0+     | Fully Supported | `google-http-client`                           |
 | gRPC                     | 1.5+        | Fully Supported | `grpc`, `grpc-client`, `grpc-server`           |
 | HttpURLConnection        | all         | Fully Supported | `httpurlconnection`, `urlconnection`           |
 | Kafka-Clients            | 0.11+       | Fully Supported | `kafka`                                        |
 | Kafka-Streams            | 0.11+       | Fully Supported | `kafka`, `kafka-streams`                       |
 | Jax RS Clients           | 2.0+        | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
+| Jersey Client            | 1.9+        | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
 | JMS                      | 1 and 2     | Fully Supported | `jms`                                          |
-| Rabbit AMQP              | 2.7+        | Fully Supported | `amqp`, `rabbitmq`                             |
+| Netty HTTP Client        | 4.0+        | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
 | OkHTTP                   | 3.0+        | Fully Supported | `okhttp`, `okhttp-3`                           |
+| Rabbit AMQP              | 2.7+        | Fully Supported | `amqp`, `rabbitmq`                             |
+| Spring WebClient         | 5.0+        | Fully Supported | `spring-webflux`, `spring-webflux-client`      |
 
 **Networking tracing provides:** timing request to response, tags for the request (e.g. response code), error and stacktrace capturing, and distributed tracing.
 

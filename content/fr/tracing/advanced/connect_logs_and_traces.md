@@ -99,7 +99,7 @@ Cela ajoute les tags de trace aux requêtes Web :
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour en savoir plus.
+Prochainement disponible. Contactez l'[assistance Datadog][1] pour en savoir plus.
 
 
 [1]: /fr/help
@@ -182,7 +182,7 @@ $logger->pushProcessor(function ($record) {
 {{% /tab %}}
 {{% tab "C++" %}}
 
-Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour en savoir plus.
+Prochainement disponible. Contactez l'[assistance Datadog][1] pour en savoir plus.
 
 [1]: /fr/help
 {{% /tab %}}
@@ -432,7 +432,7 @@ module.exports = Logger
 
 **Injection manuelle d'ID de trace pour les logs au format brut**
 
-Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour en savoir plus.
+Prochainement disponible. Contactez l'[assistance Datadog][1] pour en savoir plus.
 
 [1]: /fr/help
 {{% /tab %}}
@@ -459,7 +459,7 @@ var message = $"Mon message de log. [dd.trace_id={traceId} dd.span_id={spanId}]"
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour en savoir plus.
+Prochainement disponible. Contactez l'[assistance Datadog][1] pour en savoir plus.
 
 [1]: /fr/help
 {{% /tab %}}
