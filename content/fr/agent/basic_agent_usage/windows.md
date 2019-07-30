@@ -80,7 +80,7 @@ L'exécution de l'Agent est contrôlée par le gestionnaire de contrôle des ser
 
 * Le nom du fichier exécutable principal est `agent.exe`.
 * L'interface de configuration est une application basée sur un navigateur (pour Windows 64 bits uniquement).
-* Les commandes peuvent être exécutées avec la ligne de commande `"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" <commande>`. Options de ligne de commande :
+* Les commandes peuvent être exécutées avec la ligne de commande `"C:\Program Files\Datadog\Datadog Agent\bin\agent.exe" <commande>` pour les versions >= 6.12 de l'Agent ou `"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" <commande>` pour les versions <= 6.11 de l'Agent. Options de ligne de commande :
 
 | Commande         | Description                                                                      |
 |-----------------|----------------------------------------------------------------------------------|
@@ -162,7 +162,7 @@ Pour vous assurer que l'Agent est bien lancé, vérifiez si l'état du service `
 Pour obtenir davantage d'informations sur l'état de l'agent, démarrez Datadog Agent Manager :
 
 * Dans la barre d'état système, faites un clic droit sur l'icône de l'Agent Datadog -> Configure, ou
-* Exécutez `& "C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" launch-gui` dans une invite Powershell en tant qu'administrateur
+* Exécutez  `& "C:\Program Files\Datadog\Datadog Agent\bin\agent.exe" launch-gui` pour les versions >= 6.12 de l'Agent ou `& "C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" launch-gui` pour les versions <= 6.11 de l'Agent dans une invite Powershell en tant qu'administrateur
 
 Ouvrez ensuite la page d'état en accédant à *Status* -> *General*.
 Obtenez davantage d'informations sur les checks en cours d'exécution dans *Status* -> *Collector* et *Checks* -> *Summary*.
@@ -192,14 +192,17 @@ Pour connaître l'état de l'Agent version 3.9.1 à 5.1, accédez à `http://loc
 La commande info est disponible pour Powershell :
 
 ```
-& "C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
+& "C:\Program Files\Datadog\Datadog Agent\embedded2\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
 ou cmd.exe :
 
 ```
-"C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
+"C:\Program Files\Datadog\Datadog Agent\embedded2\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
 ```
+
+**Remarque** : pour les versions <= 6.11 de l'Agent, le chemin spécifié doit être `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe`.
+
 
 {{% /tab %}}
 {{< /tabs >}}

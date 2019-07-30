@@ -391,5 +391,5 @@ Datadog analyse automatiquement les logs au format JSON. C'est pour cela que si 
 [5]: /fr/tracing
 [6]: /fr/developers/metrics/custom_metrics
 [7]: /fr/tagging
-[8]: /fr/agent/proxy/#proxy-for-logs
+[8]: /fr/agent/logs/proxy
 [9]: https://docs.datadoghq.com/fr/agent/basic_agent_usage/windows/?tab=agentv6#agent-commands

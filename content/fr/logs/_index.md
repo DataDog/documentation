@@ -22,7 +22,7 @@ Log Management est une solution complète tout-en-un qui permet la [collecte][1]
   {{< nextlink href="/logs/processing">}}<u>Processing</u> : traitez et enrichissez l'ensemble des logs issus de vos pipelines et de vos processeurs. {{< /nextlink >}}
   {{< nextlink href="/logs/live_tail">}}<u>Live Tail</u> : visualisez les logs recueillis en temps réel pour tous vos environnements.{{< /nextlink >}}
   {{< nextlink href="/logs/explorer">}}<u>Explorer</u> : explorez vos logs avec la recherche, les outils d'analyse et les modèles de log.{{< /nextlink >}}
-  {{< nextlink href="/logs/logging_without_limits">}}<u>Collecte illimitée de logs</u> : déterminez de façon dynamique les éléments à inclure et à exclure de vos index afin de réduire vos coûts.{{< /nextlink >}}
+  {{< nextlink href="/logs/logging_without_limits">}}<u>Logging without Limits*</u> : déterminez de façon dynamique les éléments à inclure et à exclure de vos index afin de réduire vos coûts.{{< /nextlink >}}
   {{< nextlink href="/logs/archives">}}<u>Archives</u> : archivez tous vos logs enrichis dans des compartiments S3.{{< /nextlink >}}
   {{< nextlink href="/logs/guide">}}<u>Guides</u> : accédez à des articles d'aide supplémentaires à propos de la collecte et du traitement de logs.{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -30,6 +30,8 @@ Log Management est une solution complète tout-en-un qui permet la [collecte][1]
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+<br>
+*Logging without Limits est une marque déposée de Datadog, Inc.
 
 [1]: /fr/agent/logs
 [2]: /fr/logs/processing

@@ -33,7 +33,7 @@ Définissez différents serveurs de proxy pour les requêtes `https` et `http` d
 L'Agent utilise `https` pour envoyer des données à Datadog, mais les intégrations peuvent utiliser le protocole `http` pour recueillir des métriques. Quelles que soient les requêtes à faire passer par un proxy, vous pouvez activer le SSL sur votre serveur proxy. Vous trouverez ci-dessous des exemples de configuration pour votre fichier `datadog.yaml`.
 
 <div class="alert alert-warning">
-Le <code>&ltHOST&gt;:&ltPORT&gt;</code> utilisé pour le proxy des métriques ne doit PAS être utilisé pour le proxy des logs. Consultez la section <a href="#proxy-for-logs">Utilisation d'un proxy pour les logs</a>.
+Le <code>&ltHOST&gt;:&ltPORT&gt;</code> utilisé pour le proxy des métriques ne doit PAS être utilisé pour le proxy des logs. Consultez la section <a href="/agent/logs/proxy">Utilisation d'un proxy pour les logs</a>.
 </div>
 
 Définir un proxy HTTP pour toutes les requêtes `https` :
@@ -94,7 +94,7 @@ L'Agent utilise les valeurs suivantes par ordre de priorité :
 {{% tab "Agent v5" %}}
 
 <div class="alert alert-warning">
-Le <code>&ltHOST&gt;:&ltPORT&gt;</code> utilisé pour le proxy des métriques ne doit PAS être utilisé pour le proxy des logs. Consultez la section <a href="#proxy-for-logs">Utilisation d'un proxy pour les logs</a>.
+Le <code>&ltHOST&gt;:&ltPORT&gt;</code> utilisé pour le proxy des métriques ne doit PAS être utilisé pour le proxy des logs. Consultez la section <a href="/agent/logs/proxy">Utilisation d'un proxy pour les logs</a>.
 </div>
 
 Modifiez le fichier `datadog.conf` en ajoutant les informations de votre proxy :
@@ -113,69 +113,6 @@ N'oubliez pas de [redémarrer l'Agent][1] pour que les nouveaux paramètres soie
 [1]: /fr/agent/guide/agent-commands
 {{% /tab %}}
 {{< /tabs >}}
-
-## Utilisation d'un proxy pour les logs
-
-La collecte de logs nécessite la version >= 6.0 de l'Agent. Les anciennes versions de l'Agent n'incluent pas l'interface `Log collection`, qui est utilisée pour la collecte de logs.
-
-Les logs n'utilisent pas les mêmes paramètres de proxy que les autres types de données transmis par l'Agent Datadog. La raison est la suivante : les logs sont transmis par TCP/SSL, tandis que les données associées aux autres fonctionnalités sont envoyées via HTTPS.
-
-{{< tabs >}}
-{{% tab "TCP" %}}
-
-Si vous utilisez un proxy pour les transmissions TCP, configurez l'Agent Datadog de façon à envoyer les logs à votre proxy via TCP en ajoutant les paramètres suivants dans le fichier de configuration `datadog.yaml` :
-
-```
-logs_config:
-  logs_dd_url: <PROXY_ENDPOINT>:<PROXY_PORT>
-  logs_no_ssl: true
-```
-
-Ces paramètres peuvent également être configurés avec les variables d'environnement suivantes :
-
-* `DD_LOGS_CONFIG_LOGS_DD_URL`
-* `DD_LOGS_CONFIG_LOGS_NO_SSL`
-
-**Remarque importante** : le paramètre `logs_no_ssl` est requis pour que l'Agent ignore la différence entre le hostname du certificat SSL (`agent-intake.logs.datadoghq.com` ou `agent-intake.logs.datadoghq.eu`) et le hostname de votre proxy. Nous vous conseillons néanmoins d'utiliser une connexion chiffrée SSL entre votre proxy et l'endpoint d'admission de Datadog.
-
-* Configurez ensuite votre proxy de façon à le faire écouter `<PROXY_PORT>` et à transférer les logs reçus vers :
-    * Pour `app.datadoghq.com` : `agent-intake.logs.datadoghq.com` sur le port `10516` avec le chiffrement SSL activé.
-    * Pour `app.datadoghq.eu` : `agent-intake.logs.datadoghq.eu` sur le port `443` avec le chiffrement SSL activé.
-
-* Utilisez la clé de chiffrement TLS publique pour le chiffrement SSL :
-    * Pour [app.datadoghq.com][1] 
-    * Pour [app.datadoghq.eu][2]
-
-    Sur certains systèmes, la chaîne de certificat complète peut être requise. Si c'est le cas, utilisez plutôt la clé publique :
-
-    * Pour [app.datadoghq.com][3]
-    * Pour [app.datadoghq.eu][4]
-
-
-[1]: /resources/crt/intake.logs.datadoghq.com.crt
-[2]: /resources/crt/intake.logs.datadoghq.eu.crt
-[3]: /resources/crt/FULL_intake.logs.datadoghq.com.crt
-[4]: /resources/crt/FULL_intake.logs.datadoghq.eu.crt
-{{% /tab %}}
-{{% tab "SOCKS5" %}}
-
-Pour envoyer vos logs à votre compte Datadog via un serveur proxy SOCKS5, utilisez les paramètres suivants dans votre fichier de configuration `datadog.yaml` :
-
-```
-logs_config:
-  socks5_proxy_address: <URL_DU_PROXY_SOCKS5>:<PORT_DU_PROXY_SOCKS5>
-```
-
-Ce paramètre peut également être configuré avec la variable d'environnement suivante :
-
-* `DD_LOGS_CONFIG_SOCKS5_PROXY_ADDRESS`
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Port 443
-
-Le paramètre `use_port_443` n'affecte pas les logs envoyés par proxy. Vous devez configurer le proxy de façon à transférer les logs vers `agent-443-intake.logs.datadoghq.com:443`.
 
 ## Utiliser HAProxy en tant que proxy
 
@@ -408,7 +345,7 @@ Pour vérifier que tout fonctionne correctement, consultez les statistiques HAPr
 [1]: /fr/agent/#start-stop-restart-the-agent/#windows
 [2]: https://app.datadoghq.com/infrastructure
 {{% /tab %}}
-{{% tab "Agent v5" %}}
+{{% tab "Agent v5" %}}
 
 Connectez chaque Agent à HAProxy en définissant son `dd_url` sur l'adresse de HAProxy (par exemple, `haproxy.exemple.com`).
 Le paramètre `dd_url` se trouve dans le fichier `datadog.conf`.
@@ -473,16 +410,16 @@ Cet exemple de fichier `nginx.conf` peut être utilisé pour transmettre des log
 user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log;
-pid /run/nginx.pid; 
+pid /run/nginx.pid;
 
 include /usr/share/nginx/modules/*.conf;
 events {
     worker_connections 1024;
 }
-# Proxy TCP pour les logs Datadog
+# proxy TCP pour les logs Datadog
 stream {
     server {
-        listen 10514; #proxy listen port
+        listen 10514; # port d'écoute du proxy
         proxy_ssl on;
         proxy_pass agent-intake.logs.datadoghq.com:10516;
     }
@@ -496,16 +433,16 @@ stream {
 user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log;
-pid /run/nginx.pid; 
+pid /run/nginx.pid;
 
 include /usr/share/nginx/modules/*.conf;
 events {
     worker_connections 1024;
 }
-# Proxy TCP pour les logs Datadog
+# proxy TCP pour les logs Datadog
 stream {
     server {
-        listen 10514; #proxy listen port
+        listen 10514; # port d'écoute du proxy
         proxy_ssl on;
         proxy_pass agent-intake.logs.datadoghq.eu:443;
     }
@@ -531,7 +468,7 @@ Le paramètre `logs_no_ssl` est défini sur `true` car la connexion SSL/TLS est 
 
 **Cette fonction est uniquement disponible avec l'Agent v5**
 
-Nous vous conseillons d'utiliser un véritable proxy (un proxy web ou HAProxy) pour transférer votre trafic vers Datadog. Toutefois, si ce n'est pas possible, vous pouvez configurer une instance de l'Agent v5 pour vous en servir en tant que proxy.
+Nous vous conseillons d'utiliser un vrai proxy (un proxy web ou HAProxy) pour transférer votre trafic vers Datadog. Toutefois, si ce n'est pas possible, vous pouvez configurer une instance de l'Agent v5 pour vous en servir en tant que proxy.
 
 1. Désignez un nœud **running datadog-agent** comme proxy.
    Dans cet exemple, on part du principe que le nom du proxy est `proxy-node`. Ce nœud **doit** pouvoir atteindre `https://app.datadoghq.com`.

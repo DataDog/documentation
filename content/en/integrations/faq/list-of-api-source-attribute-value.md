@@ -1,6 +1,7 @@
 ---
 title: List of API source attribute values
 kind: faq
+private: true
 ---
 
 |Integration name | API source attribute|
@@ -263,6 +264,7 @@ kind: faq
 |Riakcs|RIAKCS|
 |Rollbar|ROLLBAR|
 |Ruby|RUBY|
+|Segment|SEGMENT|
 |Sentry|SENTRY|
 |Servicenow|SERVICENOW|
 |Sketch|SKETCH|
@@ -300,3 +302,4 @@ kind: faq
 |Yarn|YARN|
 |Zendesk|ZENDESK|
 |Zookeeper|ZOOKEEPER|
+

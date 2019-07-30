@@ -37,16 +37,16 @@ Recueillez des métriques à partir du service Portworx en temps réel pour :
 
 ### Installation
 
-Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Portworx sur votre host. Consultez notre guide relatif à l'[installation d'intégrations développées par la communauté][2] pour installer des checks avec une [version < 6.8 de l'Agent][3] ou avec l'[Agent Docker][4] :
+Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Portworx sur votre host. Consultez notre guide relatif à l'[installation d'intégrations développées par la communauté][1] pour installer des checks avec une [version < 6.8 de l'Agent][2] ou avec l'[Agent Docker][3] :
 
 1. Installez le [kit de développement][4].
-2. Clonez le référentiel e integrations-extras :
+2. Clonez le dépôt integrations-extras :
 
     ```
     git clone https://github.com/DataDog/integrations-extras.git.
     ```
 
-3. Mettez à jour votre `ddev` config avec le chemin `integrations-extras/` :
+3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :
 
     ```
     ddev config set extras ./integrations-extras
@@ -59,7 +59,7 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
     ```
 
 5. [Téléchargez et lancez l'Agent Datadog][5].
-6. Exécutez la commande suivante pour installer les intégrations de wheels à l'aide de l'Agent :
+6. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
 
     ```
     datadog-agent integration install -w <PATH_OF_PORTWORX_ARTIFACT_>/<PORTWORX_ARTIFACT_NAME>.whl

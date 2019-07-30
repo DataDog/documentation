@@ -14,7 +14,7 @@ further_reading:
   text: "Get the Status of an Agent Check"
 ---
 
-## Host Agent
+## Agent
 
 To enable the Agent full debug mode:
 
@@ -49,7 +49,7 @@ To enable the Agent full debug mode:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Container Agent
+## Containerized Agent
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}

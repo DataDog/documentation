@@ -13,7 +13,7 @@ further_reading:
 Demandez à votre représentant commercial ou responsable du succès client d'activer cette fonctionnalité.
 </div>
 
-L'API Role peut être utilisée pour créer et gérer des rôles Datadog, ainsi que pour définir les autorisations globales et les utilisateurs associés à chaque rôle.
+L'API Roles peut être utilisée pour créer et gérer des rôles Datadog, ainsi que pour définir les autorisations globales et les utilisateurs associés à chaque rôle.
 
 Les autorisations d'accès à des ressources de comptes spécifiques peuvent être accordées à des rôles dans l'application Datadog sans utiliser cette API. Par exemple, l'accès en lecture à un index de log spécifique peut être accordé à un rôle dans l'application Datadog depuis la [page Pipelines][1]. 
 

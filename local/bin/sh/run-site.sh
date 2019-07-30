@@ -2,9 +2,6 @@
 
 RUN_SERVER=${RUN_SERVER:=false}
 FETCH_INTEGRATIONS=${FETCH_INTEGRATIONS:=false}
-DOGWEB=${DOGWEB:=false}
-INTEGRATIONS_CORE=${INTEGRATIONS_CORE:=false}
-INTEGRATIONS_EXTRAS=${INTEGRATIONS_EXTRAS:=false}
 GITHUB_TOKEN=${GITHUB_TOKEN:="false"}
 RUN_WEBPACK=${RUN_WEBPACK:=true}
 CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS:=false}
@@ -18,19 +15,12 @@ if [ ${RUN_SERVER} == true ]; then
 	# integrations
 	if [ ${FETCH_INTEGRATIONS} == true ]; then
 		args=""
-		if [ ${DOGWEB} != "false" ]; then
-			args="${args} --dogweb ${DOGWEB}"
-		fi
-		if [ ${INTEGRATIONS_CORE} != "false" ]; then
-			args="${args} --integrations ${INTEGRATIONS_CORE}"
-		fi
-		if [ ${INTEGRATIONS_EXTRAS} != "false" ]; then
-			args="${args} --extras ${INTEGRATIONS_EXTRAS}"
-		fi
 		if [ ${GITHUB_TOKEN} != "false" ]; then
 			args="${args} --token ${GITHUB_TOKEN}"
 		else
-			echo "No GITHUB TOKEN was found. skipping any integration sync that relies on pulling from web."
+			echo "No GITHUB TOKEN was found. skipping any data sync that relies on pulling from web.\n"
+			echo "Add all source repositories in the same parent folder as the documentation/ folder to build the full doc locally.\n"
+			update_pre_build.py
 		fi
 		if [[ ${args} != "" ]]; then
 			update_pre_build.py ${args}

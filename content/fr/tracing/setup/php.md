@@ -72,7 +72,7 @@ L'instrumentation automatique capture :
 
 ## Modifier le hostname de l'Agent
 
-Configurez vos traceurs au niveau des applications pour envoyer des traces à un hostname d'Agent personnalisé.
+Configurez vos traceurs d'applications de façon à envoyer des traces à un hostname d'Agent personnalisé :
 
 Le traceur PHP recherche automatiquement les variables ENV `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT` puis s'initialise avec celles-ci.
 
@@ -205,7 +205,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_AGENT_HOST`                      | `localhost` | Le hostname de l'Agent                                                         |
 | `DD_AUTOFINISH_SPANS`                | `false`     | Définit si les spans doivent être automatiquement finalisées ou non lorsque le traceur est vidé         |
 | `DD_TRACE_CLI_ENABLED`               | `false`     | Active le tracing de scripts PHP depuis le CLI                                  |
-| `DD_DISTRIBUTED_TRACING`             | `true`      | Définit si le tracing distribué doit être activé ou non                                 |
+| `DD_DISTRIBUTED_TRACING`             | `true`      | Définit si le tracing distribué doit être activé ou non                                       |
 | `DD_INTEGRATIONS_DISABLED`           | `null`      | Liste au format CSV des extensions désactivées ; p. ex. `curl,mysqli`                        |
 | `DD_SAMPLING_RATE`                   | `1.0`       | Le taux d'échantillonnage des traces. Entre `0.0` et `1.0` (par défaut)         |
 | `DD_SERVICE_NAME`                    | ``          | Le nom par défaut de l'application                                                        |
