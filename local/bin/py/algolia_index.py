@@ -8,7 +8,7 @@ from optparse import OptionParser
 def find_private_url(path, exclusions):
     """
     Look at all files within a given folder tree (starting from path) except
-    For the `exclustions` folders
+    For the `exclusions` folders
     :param path: Root folder into which to look for private URL
     :param exclusions: Array of folder names to exclude for looking for private files.
     :return private_urls: A list of HTML doc private file paths.
@@ -53,7 +53,7 @@ def update_algolia_private_url(docs_index_config,private_urls):
     Updates the Algolia Docsearch configuration file with the list of private links to exclude from
     Algolia indexes.
     :param docs_index_config: Original configuration file for the Algolia Doc search
-    :param private_urls: A list of documentation URL links that correspond to private doc file.
+    :param private_urls: A list of documentation URL links that correspond to private doc files.
     """
     with open(docs_index_config, 'rt', encoding='utf-8') as json_file:
         print("Configuration file {} correctly loaded.".format(docs_index_config))
