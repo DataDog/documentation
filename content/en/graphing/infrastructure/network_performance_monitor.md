@@ -2,7 +2,6 @@
 title: Network Performance Monitoring
 kind: documentation
 description: Explore metrics for point to point communication on your infrastructure.
-beta: true
 aliases:
   - /monitors/network_flow_monitors/
 further_reading:
@@ -18,7 +17,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is currently in beta. Request access by filling out the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Beta Request form</a>. 
+This feature is currently in beta. Request access by filling out the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Beta Request form</a>.
 </div>
 
 ## Overview
