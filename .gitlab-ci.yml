@@ -79,7 +79,6 @@ test_missing_tms_preview:
   dependencies:
     - build_preview
   script:
-    - ls
     - check_missing_tms
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
@@ -107,6 +106,9 @@ build_live:
     - create_artifact
     - create_artifact_untracked
     - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
+  artifacts:
+    paths:
+      - public/
   only:
     - master
 
@@ -161,6 +163,8 @@ test_missing_tms_live:
   stage: post-deploy
   environment: "live"
   allow_failure: true
+  dependencies:
+    - build_live
   script:
     - check_missing_tms
   only:
