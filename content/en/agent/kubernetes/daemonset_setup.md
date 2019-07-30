@@ -408,7 +408,7 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [5]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information
 [6]: /agent/faq/kubernetes-secrets
 [7]: /agent/docker/#environment-variables
-[8]: /agent/autodiscovery/?tab=hostagent#how-to-set-it-up
+[8]: /agent/autodiscovery/?tab=agent#how-to-set-it-up
 [9]: /integrations/amazon_ec2/#configuration
 [10]: /logs
 [11]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
