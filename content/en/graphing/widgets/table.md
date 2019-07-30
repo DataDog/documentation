@@ -28,6 +28,7 @@ The table visualization is available on timeboards and screenboards. It displays
     * Metric: See the [main graphing documentation][1] to configure a metric query.
     * Log Events: See the [log search documentation][2] to configure a log event query.
 
+* Column headers can be renamed by setting a metric alias.
 * For the **Rows**, choose the tag key to **Group by**. The example below displays `service` rows.
 * Choose the limit for the number results (defaults to 10).
 * Choose the metric for sorting the table (defaults to the first column).
