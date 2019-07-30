@@ -26,8 +26,8 @@ The metric panel displays an overview for a given metric:
 Key information about your metric can be seen:
 
 * **Metric name**: The name of your metric in the [metric explorer][3], [dashboard widgets][4], etc.
-* **Number of distinct metrics**: A metric name can correspond to multiple distinct metrics depending of its associated tags. Consult the [custom metrics documentation][5] to learn more.
-* **Number of host**: The total number of hosts reporting this metric.
+* **Number of distinct metrics**: A metric name can correspond to multiple distinct metrics depending on its associated tags. Consult the [custom metrics documentation][5] to learn more.
+* **Number of hosts**: The total number of hosts reporting this metric.
 * **Number of tags**: The total number of tags attached to this metric. Read more about [tagging][6] and [assigning tags][7].
 * **Metrics metadata**: All metadata attached to your metric:
     * Metric description 
