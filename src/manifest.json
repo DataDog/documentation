@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "main-dd.js": {
+    "main-dd-js.js": {
       "files": [
         "src/js/datadog-docs.js"
       ],
@@ -22,7 +22,7 @@
       ],
       "main": true
     },
-    "main-dd.css": {
+    "main-dd-css.css": {
       "files": [
         "src/scss/style.scss"
       ],

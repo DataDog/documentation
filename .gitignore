@@ -1,11 +1,7 @@
 # Hugo
-public/
-static/css/
-static/js/
-static/images/
+dist/
 data/integrations/
 data/service_checks/
-data/manifests/
 
 # Ignoring all integrations file
 content/integrations/*.md

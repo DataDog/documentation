@@ -27,7 +27,6 @@ clean: stop  ## clean all make installs.
 	make clean-build
 	make clean-integrations
 	make clean-auto-doc
-	make clean-static
 
 clean-all: stop  ## clean everything.
 	make clean-build
@@ -92,12 +91,6 @@ clean-auto-doc: ##remove all doc automatically created
 
 clean-node:  ## remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi
-
-clean-static:  ## remove compiled static assets
-	@if [ -d static/css ]; then rm -r static/css; fi
-	@if [ -d static/images ]; then rm -r static/images; fi
-	@if [ -d static/js ]; then rm -r static/js; fi
-	@if [ -d data/manifests ]; then rm -r data/manifests; fi
 
 clean-virt:  ## remove python virtual env.
 	@if [ -d ${VIRENV} ]; then rm -rf $(VIRENV); fi
@@ -167,5 +160,5 @@ start: clean source-helpers ## start the gulp/hugo server.
 
 stop:  ## stop the gulp/hugo server.
 	@echo "stopping previous..."
-	@pkill -x gulp || true
+	@pkill -x webpack || true
 	@pkill -x hugo server --renderToDisk || true
