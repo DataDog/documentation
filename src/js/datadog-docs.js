@@ -1077,8 +1077,8 @@ function getPathElement(){
 
     // if url is domain + /integrations/**
     if ((replaceURL(domain)+ '/' +replacePath(path)).includes(replaceURL(domain) + '/integrations')) {
-        aPath = document.querySelector('.side [data-path="integrations"]');
-        maPath = document.querySelector('header [data-path="integrations"]');
+        aPath = document.querySelector('.side .nav-top-level > [data-path*="integrations"]');
+        maPath = document.querySelector('header .nav-top-level > [data-path*="integrations"]');
     }
 
     if(aPath){
@@ -1306,9 +1306,12 @@ function reloadWistiaVidScripts(vidId){
 }
 
 var sideNav = document.querySelector('.side');
+var mobileNav = document.querySelector('header .sidenav-nav');
 
-sideNav.addEventListener('click', function (event){
-    
+sideNav.addEventListener('click', navClickEventHandler);
+mobileNav.addEventListener('click', navClickEventHandler);
+
+function navClickEventHandler(event){
     event.stopPropagation();
     // console.log('clicked on ');
     // console.log(event.target);
@@ -1357,8 +1360,7 @@ sideNav.addEventListener('click', function (event){
     } else {
         window.location.href = newUrl;
     }
-
-});
+}
 
 function loadViaAjax(element){
     var hasClassLoad = element.closest('li').classList.contains('js-load') ? true : false;
