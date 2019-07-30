@@ -1076,7 +1076,7 @@ function getPathElement(){
     }
 
     // if url is domain + /integrations/**
-    if ((replaceURL(domain) + '/' + path).includes(replaceURL(domain) + '/integrations/')) {
+    if ((replaceURL(domain)+ '/' +replacePath(path)).includes(replaceURL(domain) + '/integrations')) {
         aPath = document.querySelector('.side [data-path="integrations"]');
         maPath = document.querySelector('header [data-path="integrations"]');
     }
@@ -1378,18 +1378,32 @@ window.onload = function(){
     getPathElement();
 }
 
+// remove branch name from path
+function replacePath(inputPath) {
+    var thisurl = window.location.protocol + '//' + window.location.host;
+    if (thisurl.indexOf("docs-staging") > -1) {
+      var path = inputPath
+        .split("/")
+        .slice(2, 4)
+        .join("/");
+     
+      return path;
+    }
+    return inputPath;
+}
+
 function replaceURL(input_url) {
     var thisurl = window.location.protocol + '//' + window.location.host;
     if (thisurl.indexOf("docs-staging") > -1) {
       var path = window.location.pathname
         .split("/")
-        .slice(0, -2)
+        .slice(0, -3)
         .join("/");
       thisurl = window.location.protocol + '//' + window.location.host + path;
       return thisurl;
     }
     return input_url.replace("https://www.docs.datadoghq.com", thisurl);
-  }
+}
 
 window.addEventListener('popstate', function(event) {
 
