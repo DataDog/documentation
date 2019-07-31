@@ -17,7 +17,7 @@ The `kubernetes_state` check, which monitors `kube-state-metrics`, is enabled au
 
 ## Configuration
 
-Refer to the [Running Cluster Checks with Autodiscovery][1] documentation for more information. See options that begin with `clusterchecksDeployment` in the Helm chart [readme][2].
+Refer to the [Running Cluster Checks with Autodiscovery][1] documentation for more information. See options that begin with `clusterchecksDeployment` in the Helm chart [README.md][2].
 
 **Note**: Mount an empty file to override `/etc/datadog-agent/conf.d/kubernetes_state.d/auto_conf.yaml` in the Agent DaemonSet. Otherwise, the Autodiscovered check still runs and may still consume a significant amount of RAM.
 
