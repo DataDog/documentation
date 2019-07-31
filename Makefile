@@ -38,7 +38,7 @@ clean-all: stop  ## clean everything.
 	make clean-docker
 
 clean-build:  ## remove build artifacts.
-	@if [ -d public ]; then rm -r public; fi
+	@if [ -d dist ]; then rm -r dist; fi
 
 clean-docker:  ## remove image.
 	@if [[ `docker ps -a | grep docs` ]]; then printf  "removing:" && docker rm -f docs; fi || true
@@ -58,12 +58,12 @@ clean-integrations:  ## remove built integrations files.
 	    -exec rm -rf {} \; ;fi
 	@find ./content/en/integrations -type f -maxdepth 1 \
 	    -a -not -name '_index.md' \
-		  -a -not -name 'adobe_experience_manager.md' \
+		-a -not -name 'adobe_experience_manager.md' \
 	    -a -not -name 'amazon_guardduty.md' \
 	    -a -not -name 'amazon_vpc.md' \
 	    -a -not -name 'amazon_cloudhsm.md' \
 	    -a -not -name 'cloud_foundry.md' \
-		  -a -not -name 'cloudability.md' \
+		-a -not -name 'cloudability.md' \
 	    -a -not -name 'cloudcheckr.md' \
 	    -a -not -name 'integration_sdk.md' \
 	    -a -not -name 'jenkins.md' \
@@ -154,7 +154,7 @@ start: clean source-helpers ## start the gulp/hugo server.
 		RUN_SERVER=${RUN_SERVER} \
 		run-site.sh; fi
 
-stop:  ## stop the gulp/hugo server.
+stop:  ## stop wepack watch/hugo server.
 	@echo "stopping previous..."
 	@pkill -x webpack || true
 	@pkill -x hugo server --renderToDisk || true
