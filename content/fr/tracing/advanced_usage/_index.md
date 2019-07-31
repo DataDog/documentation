@@ -300,7 +300,7 @@ DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
 ```
 
 
-[1]: /fr/tracing/languages/php/#configuration
+[1]: /fr/tracing/setup/php/#configuration
 {{% /tab %}}
 {{% tab "C++" %}}
 
@@ -535,7 +535,7 @@ public class MyClass {
 ```
 
 
-[1]: /fr/tracing/languages/java/#compatibility
+[1]: /fr/tracing/setup/java/#compatibility
 [2]: #opentracing
 [3]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 {{% /tab %}}
@@ -600,7 +600,7 @@ Consultez les ressources ci-dessous pour obtenir des détails sur l'API :
 
 
 
-[1]: /fr/tracing/languages/python/#compatibility
+[1]: /fr/tracing/setup/python/#compatibility
 [2]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.wrap
 [3]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span
 [4]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#tracer
@@ -639,7 +639,7 @@ end
 Pour en savoir plus sur l'instrumentation manuelle, consultez la [documentation relative à l'API][2].
 
 
-[1]: /fr/tracing/languages/ruby/#compatibility
+[1]: /fr/tracing/setup/ruby/#compatibility
 [2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -670,7 +670,7 @@ func main() {
 ```
 
 
-[1]: /fr/tracing/languages/go/#compatibility
+[1]: /fr/tracing/setup/go/#compatibility
 [2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -690,7 +690,7 @@ span.finish()
 Pour en savoir plus sur l'instrumentation manuelle, consultez la [documentation relative à l'API][2].
 
 
-[1]: /fr/tracing/languages/nodejs/#compatibility
+[1]: /fr/tracing/setup/nodejs/#compatibility
 [2]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -714,7 +714,7 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 ```
 
 
-[1]: /fr/tracing/languages/dotnet/#compatibility
+[1]: /fr/tracing/setup/dotnet/#compatibility
 {{% /tab %}}
 
 {{% tab "PHP" %}}
@@ -794,7 +794,7 @@ Bien que cette version [soit désormais obsolète][3], si vous utilisez PHP 7.x
 
 
 
-[1]: /fr/tracing/languages/php/#automatic-instrumentation
+[1]: /fr/tracing/setup/php/#automatic-instrumentation
 [2]: https://github.com/DataDog/dd-trace-php/releases/latest
 [3]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
 [4]: #opentracing
@@ -986,7 +986,7 @@ Veuillez noter que les exemples ci-dessus utilisent uniquement les classes OpenT
 
 
 [1]: https://github.com/opentracing/opentracing-java
-[2]: /fr/tracing/languages/java/#configuration
+[2]: /fr/tracing/setup/java/#configuration
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -1150,7 +1150,7 @@ $span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
 
 
 [1]: https://github.com/opentracing/opentracing-php
-[2]: /fr/tracing/languages/php/#automatic-instrumentation
+[2]: /fr/tracing/setup/php/#automatic-instrumentation
 {{% /tab %}}
 {{% tab "C++" %}}
 
@@ -1334,7 +1334,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 Le tracing distribué est activé par défaut pour toutes les intégrations prises en charge (voir la section [Compatibilité][1]).
 
 
-[1]: /fr/tracing/languages/nodejs/#compatibility
+[1]: /fr/tracing/setup/nodejs/#compatibility
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -1436,7 +1436,7 @@ public class MyClass {
 }
 ```
 
-[1]: /fr/tracing/languages/java/#configuration
+[1]: /fr/tracing/setup/java/#configuration
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -1686,7 +1686,7 @@ Modifiez ensuite la configuration de votre enregistreur en ajoutant `dd.trace_id
 
 [Consultez la documentation relative à la journalisation Java][2] pour en savoir plus sur l'implémentation d'un enregistreur spécifique ou découvrir comment créer des logs au format JSON.
 
-[1]: https://docs.datadoghq.com/fr/tracing/languages/java/#configuration
+[1]: https://docs.datadoghq.com/fr/tracing/setup/java/#configuration
 [2]: https://docs.datadoghq.com/fr/logs/log_collection/java/?tab=log4j#raw-format
 [3]: /fr/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
@@ -1798,7 +1798,7 @@ end
 
 **Injection automatique d'ID de trace pour les applications Rails par défaut**
 
-Les applications Rails qui sont configurées avec un enregistreur `ActiveSupport::TaggedLogging` peuvent ajouter des ID de trace en tant que tags à la sortie du log. L'enregistreur Rails par défaut applique cette journalisation avec des tags, ce qui simplifie l'ajout de tags de trace. 
+Les applications Rails qui sont configurées avec un enregistreur `ActiveSupport::TaggedLogging` peuvent ajouter des ID de trace en tant que tags à la sortie du log. L'enregistreur Rails par défaut applique cette journalisation avec des tags, ce qui simplifie l'ajout de tags de trace.
 
 Dans le fichier de configuration de votre environnement Rails (p. ex., `config/environments/production.rb`), ajoutez le code suivant :
 
@@ -1893,7 +1893,7 @@ L'exemple ci-dessus explique comment utiliser le contexte de la span dans le paq
 
 **Remarque** : si vous n'utilisez pas une [intégration de log de Datadog][1] pour analyser vos logs, des règles de parsing de log personnalisées doivent s'assurer que `trace_id` et `span_id` sont analysés en tant que chaînes de caractères. Pour en savoir plus, consultez la [FAQ à ce sujet][2].
 
-[1]: https://docs.datadoghq.com/fr/tracing/languages/go/#configuration
+[1]: https://docs.datadoghq.com/fr/tracing/setup/go/#configuration
 [2]: /fr/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -2193,7 +2193,7 @@ apm_config:
         - client_id
         - product_id
 
-    # Règles d'obfuscation MongoDB. S'appliquent aux spans de type « mongodb », 
+    # Règles d'obfuscation MongoDB. S'appliquent aux spans de type « mongodb »,
     # et plus précisément au tag « mongodb.query ».
     mongodb:
       enabled: true

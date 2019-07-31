@@ -10,6 +10,6 @@ Obtenez la liste des métriques de reporting actives depuis une date précise. C
 
 ##### ARGUMENTS
 * **`from`** [*obligatoire*] :
-    Secondes depuis l'epoch Unix
+    secondes depuis l'epoch Unix
 * **`host`** [*facultatif*] :
-    Le hostname qui permet de filtrer la liste des métriques renvoyées. Si ce paramètre est défini, les métriques récupérées sont celles avec le tag de hostname correspondant.
+    le hostname qui permet de filtrer la liste des métriques renvoyées. Si ce paramètre est défini, les métriques récupérées sont celles avec le tag de hostname correspondant.

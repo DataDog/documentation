@@ -17,3 +17,7 @@ external_redirect: /api/#get-all-monitor-details
     A comma separated list indicating what service and/or custom tags, if any, should be used to filter the list of monitors. Tags created in the Datadog UI automatically have the **service** key prepended (e.g. `service:my-app`)
 * **`with_downtimes`** [*optional*, *default* = **true**]:
     If this argument is set to `true`, then the returned data includes all current downtimes for each monitor.
+* **`page`** [*optional*, *default* = **0**]:
+    The page to start paginating from. If this argument is not specified, the request returns all monitors without pagination.
+* **`per_page`** [*optional*, *default*=**100**]:
+    The number of monitors to return per page. If the `page` argument is not specified, the default behavior returns all monitors without a `per_page` limit. However, if `page` is specified and `per_page` is not, the argument defaults to `100`.

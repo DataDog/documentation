@@ -72,7 +72,7 @@ L'instrumentation automatique capture :
 
 ## Modifier le hostname de l'Agent
 
-Configurez vos traceurs au niveau des applications pour envoyer des traces à un hostname d'Agent personnalisé.
+Configurez vos traceurs d'applications de façon à envoyer des traces à un hostname d'Agent personnalisé :
 
 Le traceur PHP recherche automatiquement les variables ENV `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT` puis s'initialise avec celles-ci.
 
@@ -205,7 +205,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_AGENT_HOST`                      | `localhost` | Le hostname de l'Agent                                                         |
 | `DD_AUTOFINISH_SPANS`                | `false`     | Définit si les spans doivent être automatiquement finalisées ou non lorsque le traceur est vidé         |
 | `DD_TRACE_CLI_ENABLED`               | `false`     | Active le tracing de scripts PHP depuis le CLI                                  |
-| `DD_DISTRIBUTED_TRACING`             | `true`      | Définit si le [tracing distribué][15] doit être activé ou non                                 |
+| `DD_DISTRIBUTED_TRACING`             | `true`      | Définit si le tracing distribué doit être activé ou non                                       |
 | `DD_INTEGRATIONS_DISABLED`           | `null`      | Liste au format CSV des extensions désactivées ; p. ex. `curl,mysqli`                        |
 | `DD_SAMPLING_RATE`                   | `1.0`       | Le taux d'échantillonnage des traces. Entre `0.0` et `1.0` (par défaut)         |
 | `DD_SERVICE_NAME`                    | ``          | Le nom par défaut de l'application                                                        |
@@ -213,7 +213,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_AGENT_TIMEOUT`             | `500`       | Le temps maximum que l'Agent est autorisé à prendre (en millisecondes)                 |
 | `DD_TRACE_AGENT_CONNECT_TIMEOUT`     | `100`       | Le temps maximum autorisé pour la configuration de la connexion de l'Agent (en millisecondes)       |
 | `DD_TRACE_ANALYTICS_ENABLED`         | `false`     | Flag pour activer les analyses de traces pour les spans pertinentes dans les intégrations Web       |
-| `DD_TRACE_DEBUG`                     | `false`     | Activer le [mode debugging][16] pour le traceur                                      |
+| `DD_TRACE_DEBUG`                     | `false`     | Activer le [mode debugging][15] pour le traceur                                      |
 | `DD_TRACE_ENABLED`                   | `true`      | Activer le traceur partout                                                  |
 | `DD_TRACE_GLOBAL_TAGS`               | ``          | Tags à appliquer à toutes les spans : p. ex. `key1:value1,key2:value2`                |
 | `DD_<INTEGRATION>_ANALYTICS_ENABLED` | `false`     | Flag pour activer les analyses de traces pour les spans pertinentes dans une intégration spécifique |
@@ -236,3 +236,4 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 [12]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [13]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
 [14]: /fr/tracing/troubleshooting
+[15]: /fr/tracing/troubleshooting/?tab=php

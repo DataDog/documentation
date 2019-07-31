@@ -6,7 +6,7 @@ external_redirect: /api/#create-user
 ---
 
 ##### Signature
-`POST /v1/user`
+`POST /v1/users`
 ##### Example Request
 {{< code-snippets basename="api-user-create" >}}
 ##### Example Response

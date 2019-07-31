@@ -243,7 +243,7 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 Notice the above examples only use the OpenTracing classes. Check the [OpenTracing API][1] for more details and information.
 
 [1]: https://github.com/opentracing/opentracing-java
-[2]: /tracing/languages/java/#configuration
+[2]: /tracing/setup/java/#configuration
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -408,7 +408,7 @@ $span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
 
 
 [1]: https://github.com/opentracing/opentracing-php
-[2]: /tracing/languages/php/#automatic-instrumentation
+[2]: /tracing/setup/php/#automatic-instrumentation
 {{% /tab %}}
 {{% tab "C++" %}}
 

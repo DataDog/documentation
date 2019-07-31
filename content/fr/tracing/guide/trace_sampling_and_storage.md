@@ -26,7 +26,7 @@ further_reading:
 
 L'échantillonnage de traces s'applique aux applications Web avec un volume élevé, pour lesquelles une petite quantité de traces est conservée dans Datadog selon les règles suivantes.
 
-Notez que les statistiques (requêtes, erreurs, latence, etc.) sont calculées en fonction du volume total de traces au niveau de l'Agent et sont donc toujours exactes.
+Les statistiques (requêtes, erreurs, latence, etc.) sont calculées en fonction du volume total de traces au niveau de l'Agent et sont donc toujours exactes.
 
 ### Statistiques (requêtes, erreurs, latences, etc.)
 
@@ -375,6 +375,8 @@ Les traces individuelles sont stockées pendant un maximum de 6 mois. Pour dét
 | Jour actuel (heure UTC) |               25 % |
 | 6 jours                 |               10 % |
 | 6 mois               |                1 % |
+
+**Remarque** : Datadog n'échantillonne pas les traces d'APM Synthetics. Toutes les traces reçues sont conservées pendant 6 heures, et un certain pourcentage d'entre elles sont conservées pendant plus longtemps (voir les durées ci-dessus).
 
 Pour un jour donné, vous verrez donc dans l'interface :
 

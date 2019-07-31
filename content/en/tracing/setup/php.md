@@ -206,7 +206,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_AGENT_HOST`                      | `localhost` | The Agent host name                                                         |
 | `DD_AUTOFINISH_SPANS`                | `false`     | Whether spans are automatically finished when the tracer is flushed         |
 | `DD_TRACE_CLI_ENABLED`               | `false`     | Enable tracing of PHP scripts from the CLI                                  |
-| `DD_DISTRIBUTED_TRACING`             | `true`      | Whether to enable [distributed tracing][15]                                 |
+| `DD_DISTRIBUTED_TRACING`             | `true`      | Whether to enable distributed tracing                                       |
 | `DD_INTEGRATIONS_DISABLED`           | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                        |
 | `DD_SAMPLING_RATE`                   | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default)         |
 | `DD_SERVICE_NAME`                    | ``          | The default app name                                                        |
@@ -214,7 +214,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_AGENT_TIMEOUT`             | `500`       | Maximum time the Agent is allowed to take (in milliseconds)                 |
 | `DD_TRACE_AGENT_CONNECT_TIMEOUT`     | `100`       | Maximum time the allowed for Agent connection setup (in milliseconds)       |
 | `DD_TRACE_ANALYTICS_ENABLED`         | `false`     | Flag to enable trace analytics for relevant spans in web integrations       |
-| `DD_TRACE_DEBUG`                     | `false`     | Enable [debug mode][16] for the tracer                                      |
+| `DD_TRACE_DEBUG`                     | `false`     | Enable [debug mode][15] for the tracer                                      |
 | `DD_TRACE_ENABLED`                   | `true`      | Enable the tracer globally                                                  |
 | `DD_TRACE_GLOBAL_TAGS`               | ``          | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`                |
 | `DD_<INTEGRATION>_ANALYTICS_ENABLED` | `false`     | Flag to enable trace analytics for relevant spans in a specific integration |
@@ -237,3 +237,4 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 [12]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [13]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
 [14]: /tracing/troubleshooting
+[15]: /tracing/troubleshooting/?tab=php
