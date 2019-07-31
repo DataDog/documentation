@@ -110,7 +110,8 @@ default       datadog-agent-2qqd3                      1/1       Running   0    
 default       datadog-cluster-agent-7b7f6d5547-cmdtc   1/1       Running   0          16m
 ```
 
-Now, it is time to create a Horizontal Pod Autoscaler manifest. If you take a look at [the hpa-manifest.yaml file][5], you will see that:
+Now, create a Horizontal Pod Autoscaler manifest. If you take a look at [the hpa-manifest.yaml file][5], you will see that:
+
 - The HPA is configured to autoscale the Deployment called "nginx"
 - The maximum number of replicas created is 5 and the minimum is 1
 - The metric used is `nginx.net.request_per_s` and the scope is `kube_container_name: nginx`. Note that this metric format corresponds to the Datadog one.
@@ -118,7 +119,7 @@ Now, it is time to create a Horizontal Pod Autoscaler manifest. If you take a lo
 Every 30 seconds (this can be configured) Kubernetes queries the Datadog Cluster Agent to get the value of this metric and autoscales proportionally if necessary.
 For advanced use cases, it is possible to have several metrics in the same HPA, as you can see [in the Kubernetes horizontal pod autoscale documentation][6], the largest of the proposed values is the one chosen.
 
-Now, create the NGINX deployment:
+Create the NGINX deployment:
 
 `kubectl apply -f Dockerfiles/manifests/cluster-agent/hpa-example/nginx.yaml`
 
