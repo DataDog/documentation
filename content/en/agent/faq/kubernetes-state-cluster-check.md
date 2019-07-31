@@ -34,7 +34,18 @@ The `kubernetes_state` check, which monitors `kube-state-metrics`, is enabled au
 	    ]
 	```
 
-2. Deploy the Datadog Cluster Agent with `DD_CLUSTER_CHECKS_ENABLED` set to `true`.
+	**Notes**: 8080 is the metrics port. The `prometheus_timeout` and `min_collection_interval` are set to 30 because this setup assumes very large payloads, so these metrics are being collected at a lower granularity. Set `send_pod_phase_service_checks` to `true` if you want the pod phase as a service check. Telemetry is only activated in v4.6.1+ of the Datadog `kube-state-metrics` check.
+
+2. Deploy the Datadog Cluster Agent with the following variables:
+
+	```
+		- name: DD_CLUSTER_CHECKS_ENABLED
+		  value: true
+		- name: DD_EXTRA_CONFIG_PROVIDERS
+		  value: "kube_services"
+		- name: DD_EXTRA_LISTENERS
+		  value: "kube_services" 
+	```          
 
 3. Mount an empty file to override `/etc/datadog-agent/conf.d/kubernetes_state.d/auto_conf.yaml` in the Agent DaemonSet. Otherwise, the Autodiscovered check still runs and may still consume a significant amount of RAM. Configure Agent deployment to mount an empty directory in `/etc/datadog-agent/conf.d/kubernetes_state.d`
 
