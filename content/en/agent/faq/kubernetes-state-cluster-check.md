@@ -55,6 +55,40 @@ The `kubernetes_state` check, which monitors `kube-state-metrics`, is enabled au
 
 Refer to the [Running Cluster Checks with Autodiscovery][2] documentation for more information. See options that begin with `clusterchecksDeployment` in the Helm chart [README.md][3].
 
+### Verify check dispatching
+
+Run:
+
+```
+kubectl exec -it <datadog-cluster-agent-leader> agent clusterchecks
+```
+
+This command displays something like:
+
+```
+===== Checks on gke-my-cluster-default-pool-b969f074-npsw =====
+
+=== kubernetes_state check ===
+Source: kubernetes-services
+Instance ID: kubernetes_state:4a95df9b407f14d7
+empty_default_hostname: true
+kube_state_url: http://10.59.249.74:8080/metrics
+min_collection_interval: 30
+prometheus_timeout: 30
+send_pod_phase_service_checks: false
+tags:
+- kube_service:kube-state-metrics
+- kube_namespace:kube-system
+- cluster_name:test-cluster
+telemetry: true
+~
+Init Config:
+{}
+===
+```
+
+The Agent running on the node returned above should also have a `kubernetes_state` check in its `agent status`
+
 ## Background
 
 If you use Autodiscovery from the DaemonSet, one of your Agents (the one running on the same node as `kube-state-metrics`) runs the check and uses a significant amount of memory, while other Agents in the DaemonSet use far less. To prevent the outlier Agent from getting killed, you could increase the memory limit for all Agents, but this wastes resources. The alternative is to use the DaemonSet for lightweight checks to keep the general memory usage low, and use a small (e.g. 2-3 pods) dedicated deployment for heavy checks, where each pod has a large amont of RAM and only runs cluster checks.
