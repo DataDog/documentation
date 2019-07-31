@@ -210,23 +210,7 @@ scope.Span.SetTag("<TAG_KEY>", "<TAG_VALUE>");
 {{% tab "PHP" %}}
 
 
-Add metadata directly to a `DDTrace\Span` object by calling `Span::setTag()`.
-
-```php
-dd_trace('<FUNCTION_NAME>', function () {
-    $scope = \DDTrace\GlobalTracer::get()
-      ->startActiveSpan('<FUNCTION_NAME>');
-    $span = $scope->getSpan();
-    $span->setTag('<TAG_KEY>', '<TAG_VALUE>');
-
-    $result = <FUNCTION_NAME>();
-
-    $scope->close();
-    return $result;
-});
-```
-
-Access the current active span from any method within your code:
+Add metadata directly to a `DDTrace\Span` object by calling `Span::setTag()`. For example:
 
 ```php
 // Get the currently active span (can be null)
@@ -313,7 +297,6 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -329,6 +312,7 @@ section for details on how environment variables should be set.
 ```ini
 DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
 ```
+
 
 [1]: /tracing/setup/php/#configuration
 {{% /tab %}}
