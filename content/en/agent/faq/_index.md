@@ -29,4 +29,4 @@ aliases:
 [8]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances
 [9]: /agent/faq/kubernetes-secrets
 [10]: /agent/faq/windows-agent-ddagent-user
-[11]: 
+[11]: /agent/faq/kubernetes-state-cluster-check
