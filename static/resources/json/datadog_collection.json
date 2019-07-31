@@ -9643,7 +9643,7 @@
 							"raw": "{\n    \"config\": {\n        \"assertions\": [\n            {\n                \"operator\": \"is\",\n                \"type\": \"statusCode\",\n                \"target\": 403\n            },\n            {\n                \"operator\": \"is\",\n                \"property\": \"content-type\",\n                \"type\": \"header\",\n                \"target\": \"text/html\"\n            },\n            {\n                \"operator\": \"lessThan\",\n                \"type\": \"responseTime\",\n                \"target\": 2000\n            }\n        ],\n        \"request\": {\n            \"method\": \"GET\",\n            \"url\": \"https://datadoghq.com\",\n            \"timeout\": 30,\n            \"headers\": {\n                \"header1\": \"value1\",\n                \"header2\": \"value2\"\n            },\n            \"body\": \"body to send with the request\"\n        }\n    },\n    \"locations\": [\n        \"aws:us-east-2\",\n        \"aws:eu-central-1\",\n        \"aws:ap-northeast-1\",\n        \"aws:us-west-2\",\n        \"aws:ap-southeast-2\"\n    ],\n    \"message\": \"test\",\n    \"name\": \"Test\",\n    \"options\": {\n        \"tick_every\": 60,\n        \"min_failure_duration\": 0,\n        \"min_location_failed\": 1,\n        \"follow_redirects\": true\n    },\n    \"tags\": [\n        \"foo:bar\"\n    ],\n    \"type\": \"api\"\n}"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/tests/:TEST_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/tests/:PUBLIC_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9655,7 +9655,7 @@
 								"v1",
 								"synthetics",
 								"tests",
-								":TEST_ID"
+								":PUBLIC_ID"
 							],
 							"query": [
 								{
@@ -9671,9 +9671,9 @@
 							],
 							"variable": [
 								{
-									"key": "TEST_ID",
-									"value": "<SYNTHETICS_TEST_ID>",
-									"description": "ID of the synthetics test to start/pause"
+									"key": "PUBLIC_ID",
+									"value": "<SYNTHETICS_TEST_PUBLIC_ID>",
+									"description": "ID of the test to Edit"
 								}
 							]
 						},
@@ -9694,7 +9694,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"public_ids\": [\n        \"<TEST_ID_1>\",\n        \"<TEST_ID_2>\"\n    ]\n}"
+							"raw": "{\n    \"public_ids\": [\n        \"<SYNTHETICS_TEST_PUBLIC_ID_1>\",\n        \"<SYNTHETICS_TEST_PUBLIC_ID_2>\"\n    ]\n}"
 						},
 						"url": {
 							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/tests/delete?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
@@ -9741,7 +9741,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/tests/:TEST_ID/results?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/tests/:PUBLIC_ID/results?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9753,7 +9753,7 @@
 								"v1",
 								"synthetics",
 								"tests",
-								":TEST_ID",
+								":PUBLIC_ID",
 								"results"
 							],
 							"query": [
@@ -9770,8 +9770,8 @@
 							],
 							"variable": [
 								{
-									"key": "TEST_ID",
-									"value": "<SYNTHETICS_TEST_ID>",
+									"key": "PUBLIC_ID",
+									"value": "<SYNTHETICS_TEST_PUBLIC_ID>",
 									"description": "ID of the synthetics test to get results from"
 								}
 							]
@@ -9793,7 +9793,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/tests/:TEST_ID/results/:RESULT_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/tests/:PUBLIC_ID/results/:RESULT_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9805,7 +9805,7 @@
 								"v1",
 								"synthetics",
 								"tests",
-								":TEST_ID",
+								":PUBLIC_ID",
 								"results",
 								":RESULT_ID"
 							],
@@ -9823,9 +9823,9 @@
 							],
 							"variable": [
 								{
-									"key": "TEST_ID",
-									"value": "<SYNTHETICS_TEST_ID>",
-									"description": "ID of the synthetics test to get result from"
+									"key": "PUBLIC_ID",
+									"value": "<SYNTHETICS_TEST_PUBLIC_ID>",
+									"description": "ID of the synthetics test to get results from"
 								},
 								{
 									"key": "RESULT_ID",
@@ -9894,7 +9894,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/tests/${test_id}?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/synthetics/tests/:PUBLIC_ID?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9906,7 +9906,7 @@
 								"v1",
 								"synthetics",
 								"tests",
-								"${test_id}"
+								":PUBLIC_ID"
 							],
 							"query": [
 								{
@@ -9918,6 +9918,13 @@
 									"key": "application_key",
 									"value": "{{datadog_application_key}}",
 									"description": "Your Datadog application key"
+								}
+							],
+							"variable": [
+								{
+									"key": "PUBLIC_ID",
+									"value": "SYNTHETICS_TEST_PUBLIC_ID",
+									"description": "ID of the synthetics test to get results from"
 								}
 							]
 						},
@@ -9955,11 +9962,13 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "{{datadog_api_key}}"
+									"value": "{{datadog_api_key}}",
+									"description": "Your Datadog API key"
 								},
 								{
 									"key": "application_key",
-									"value": "{{datadog_application_key}}"
+									"value": "{{datadog_application_key}}",
+									"description": "Your Datadog application key"
 								}
 							]
 						},
