@@ -13,21 +13,56 @@ further_reading:
   text: "Running Cluster Checks with Autodiscovery"
 ---
 
-The `kubernetes_state` check, which monitors `kube-state-metrics`, is enabled automatically by [Autodiscovery](/agent/autodiscovery/). In larger Kubernetes clusters, this check may consume too much RAM. In this case, consider running the `kubernetes_state` check as a [cluster check][1].
+The `kubernetes_state` check, which monitors `kube-state-metrics`, is enabled automatically by [Autodiscovery][1]. In larger Kubernetes clusters, this check may consume too much RAM. In this case, consider running the `kubernetes_state` check as a [cluster check][2].
 
 ## Configuration
 
-Refer to the [Running Cluster Checks with Autodiscovery][1] documentation for more information. See options that begin with `clusterchecksDeployment` in the Helm chart [README.md][2].
+1. Deploy `kube-state-metrics` with cluster check annotations on the service:
 
-**Note**: Mount an empty file to override `/etc/datadog-agent/conf.d/kubernetes_state.d/auto_conf.yaml` in the Agent DaemonSet. Otherwise, the Autodiscovered check still runs and may still consume a significant amount of RAM.
+	```
+	ad.datadoghq.com/service.check_names: '["kubernetes_state"]'
+	ad.datadoghq.com/service.init_configs: '[{}]'
+	ad.datadoghq.com/service.instances: |
+	    [
+	    {
+	        "kube_state_url": "http://%%host%%:8080/metrics",
+	        "prometheus_timeout": 30,
+	        "min_collection_interval": 30,
+	        "send_pod_phase_service_checks": false,
+	        "telemetry": true
+	    }
+	    ]
+	```
+
+2. Deploy the Datadog Cluster Agent with `DD_CLUSTER_CHECKS_ENABLED` set to `true`.
+
+3. Mount an empty file to override `/etc/datadog-agent/conf.d/kubernetes_state.d/auto_conf.yaml` in the Agent DaemonSet. Otherwise, the Autodiscovered check still runs and may still consume a significant amount of RAM. Configure Agent deployment to mount an empty directory in `/etc/datadog-agent/conf.d/kubernetes_state.d`
+
+	```
+	...
+	    volumeMounts:
+	    ...
+	      - name: empty-dir
+	      mountPath: /etc/datadog-agent/conf.d/kubernetes_state.d
+	    ...
+	  volumes:
+	    - name: empty-dir
+	    emptyDir: {}
+	    ...
+	```
+
+4. Deploy the Agent.
+
+Refer to the [Running Cluster Checks with Autodiscovery][2] documentation for more information. See options that begin with `clusterchecksDeployment` in the Helm chart [README.md][3].
 
 ## Background
 
-If you use Autodiscovery from the DaemonSet, one of your Agents (the one running on the same node as `kube-state-metrics`) runs the check and uses a significant amount of memory, while other Agents in the DaemonSet use far less. To prevent the outlier Agent from getting killed, you could increase the memory limit for all Agents, but this could be a waste. The alternative is to use the DaemonSet for lightweight checks to keep the general memory usage low, and use a small (e.g. 2-3 pods) dedicated deployment for heavy checks, where each pod has a large amont of RAM and only runs cluster checks.
+If you use Autodiscovery from the DaemonSet, one of your Agents (the one running on the same node as `kube-state-metrics`) runs the check and uses a significant amount of memory, while other Agents in the DaemonSet use far less. To prevent the outlier Agent from getting killed, you could increase the memory limit for all Agents, but this wastes resources. The alternative is to use the DaemonSet for lightweight checks to keep the general memory usage low, and use a small (e.g. 2-3 pods) dedicated deployment for heavy checks, where each pod has a large amont of RAM and only runs cluster checks.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/autodiscovery/clusterchecks
-[2]: https://github.com/helm/charts/blob/master/stable/datadog/README.md
+[1]: /agent/autodiscovery
+[2]: /agent/autodiscovery/clusterchecks
+[3]: https://github.com/helm/charts/blob/master/stable/datadog/README.md
