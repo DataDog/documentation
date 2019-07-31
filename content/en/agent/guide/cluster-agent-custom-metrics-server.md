@@ -250,7 +250,8 @@ The flare command generates a zip file containing the `custom-metrics-provider.l
  
 If the metric's flag `Valid` is set to false, the metric is not considered in the HPA pipeline.
 
-- If you see the following mesage when describing the hpa manifest
+- If you see the following mesage when describing the HPA manifest:
+
 ```
 Conditions:
   Type           Status  Reason                   Message
@@ -262,11 +263,13 @@ Conditions:
 
 Then it's likely that you don't have the proper RBAC set for the HPA.
 Make sure that `kubectl api-versions` shows:
+
 ```
 autoscaling/v2beta1
 [...]
 external.metrics.k8s.io/v1beta1 
 ```
+
 The latter will show up if the Datadog Cluster Agent properly registers as an External Metrics Provider—and if you have the same service name referenced in the APIService for the External Metrics Provider, as well as the one for the Datadog Cluster Agent on port 443.
 Also, make sure you have created the RBAC from the "Register the External Metrics Provider" step.
 
@@ -283,6 +286,7 @@ Make sure the Datadog Cluster Agent is running, and the service exposing the por
 As Kubernetes autoscales your resources the current target is weighted by the number of replicas of the scaled Deployment.
 So the value returned by the Datadog Cluster Agent is fetched from Datadog and should be proportionally equal to the current target times the number of replicas. 
 Example:
+
 ```
     hpa:
     - name: nginxext
@@ -295,12 +299,15 @@ Example:
     valid: true
     value: 2472
 ``` 
+
 2472 was fetched, but the HPA indicates:
+
 ```
 NAMESPACE   NAME       REFERENCE          TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
 default     nginxext   Deployment/nginx   824/9 (avg)   1         3         3          41m
 ```
-And indeed 824 * 3 replicas = 2472.
+
+And indeed, 824 * 3 replicas = 2472.
 
 *Disclaimer*: The Datadog Cluster Agent processes the metrics set in different HPA manifests and queries Datadog to get values every 30 seconds, by default. Kubernetes queries the Datadog Cluster Agent every 30 seconds, by default.
 Both frequencies are configurable.
