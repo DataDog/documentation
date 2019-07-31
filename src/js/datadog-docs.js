@@ -1560,7 +1560,7 @@ function initializeIntegrations(){
 
         if (history.pushState) {
             var href = button.getAttribute('href');
-            history.pushState({}, document.title, href);
+            history.pushState(null, document.title, href);
         }
     }
 
