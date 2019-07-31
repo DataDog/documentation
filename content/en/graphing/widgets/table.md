@@ -28,11 +28,11 @@ The table visualization is available on timeboards and screenboards. It displays
     * Metric: See the [main graphing documentation][1] to configure a metric query.
     * Log Events: See the [log search documentation][2] to configure a log event query.
 
-* Column headers can be renamed by setting a metric alias.
+* You can rename column headers by setting metric aliases.
 * For the **Rows**, choose the tag key to **Group by**. The example below displays `service` rows.
-* Choose the limit for the number results (defaults to 10).
-* Choose the metric for sorting the table (defaults to the first column).
-* Optional: Configure conditional formatting depending on the cell values for each column.
+* Choose a limit for the number results (defaults to 10).
+* Choose a metric for sorting the table (defaults to the first column).
+* Optional:cConfigure conditional formatting depending on the cell values for each column.
 
 {{< img src="graphing/widgets/table/table_setup.png" alt="Table setup" responsive="true" style="width:80%;">}}
 
@@ -60,7 +60,7 @@ TOPLIST_SCHEMA = {
 
 | Parameter  | Type             | Required | Description                                                                                                                                         |
 |------------|------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`     | String           | Yes      | The type of widget, for the table widget use `query_table`.                                                                                         |
+| `type`     | String           | Yes      | The type of widget; for the table widget use `query_table`.                                                                                         |
 | `requests` | Array of objects | Yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][4] for building the `REQUEST_SCHEMA`. |
 | `title`    | String           | No       | Title of your widget                                                                                                                                |
 
