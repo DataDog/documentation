@@ -13,7 +13,7 @@ further_reading:
   text: "Running Cluster Checks with Autodiscovery"
 ---
 
-The `kubernetes_state` check, which monitors `kube-state-metrics`, is enabled automatically by Autodiscovery. In larger Kubernetes clusters, this check may consume too much RAM. In this case, consider running the `kubernetes_state` check as a [cluster check][1].
+The `kubernetes_state` check, which monitors `kube-state-metrics`, is enabled automatically by [Autodiscovery](/agent/autodiscovery/). In larger Kubernetes clusters, this check may consume too much RAM. In this case, consider running the `kubernetes_state` check as a [cluster check][1].
 
 ## Configuration
 
