@@ -297,6 +297,7 @@ const tracer = require('dd-trace').init({
 })
 ```
 
+
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -312,7 +313,6 @@ section for details on how environment variables should be set.
 ```ini
 DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
 ```
-
 
 [1]: /tracing/setup/php/#configuration
 {{% /tab %}}
