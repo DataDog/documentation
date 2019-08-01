@@ -1,27 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}" style="opacity:0" class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner{{ end }}">
 <head>
-    <!-- Datadog RUM-->
-    <script
-    src="https://www.datadoghq-browser-agent.com/datadog-rum-us.js"
-    type="text/javascript">
-    </script>
-    {{ if eq .Site.Params.environment "preview" }}
-    <script>
-        window.DD_RUM.init({
-          clientToken: 'pub36877d3864fab670b5ae7e1d5d26cb08',
-          applicationId: 'c4e83ad8-4eda-4d2e-aae1-d943abce0463',
-        });
-    </script>
-    {{ end }}
-    {{ if eq .Site.Params.environment "live" }}
-    <script>
-        window.DD_RUM.init({
-          clientToken: 'pub16bb5ef3e9bf55f156338987e27246c7',
-          applicationId: '3493b4e7-ab12-4852-8836-ba96af7bc745',
-        });
-    </script>
-    {{ end }}
+
+    {{ partial "datadog_monitoring.html" . }}
+
+    {{ partial "hotjar.html" . }}
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.ga }}"></script>
@@ -36,20 +19,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="icon" type="image/png" href="https://docs.datadoghq.com/favicon.ico">
     <link rel="stylesheet" href="{{ .Site.BaseURL }}css/{{ (index .Site.Data.manifests.css "main-dd.css" ) }}">
+
     {{- if ne $.Params.disable_opengraph_meta_tags true -}}
     {{- partial "meta.html" . -}}
     {{- end -}}
-    <!-- Hotjar Tracking Code-->
-    <script>
-        (function(h,o,t,j,a,r){
-            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-            h._hjSettings={hjid:1021060,hjsv:6};
-            a=o.getElementsByTagName('head')[0];
-            r=o.createElement('script');r.async=1;
-            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-            a.appendChild(r);
-        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-    </script>
+
 </head>
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
 {{- $customClass := $.Params.customclass -}}
@@ -81,70 +55,17 @@
         </div>
     </div>
 
+    {{ partial "algolia.html" . }}
+
     {{ partial "footer/footer.html" . }}
 
     <script src="{{ .Site.BaseURL }}js/{{ (index .Site.Data.manifests.js "main-dd.js") }}"></script>
 
     {{ partial "footer-scripts.html" . }}
+
     {{ partial "footer-js-dd-docs-methods" . }}
+
     {{ partial "preview_banner/preview_banner" . }}
 
-    <!-- ALGOLIA DOCSEARCH -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
-    <script type="text/javascript">
-    var search_desktop = docsearch({
-         appId: 'EOIG7V0A2O',
-         apiKey: 'c7ec32b3838892b10610af30d06a4e42',
-         indexName: 'docsearch_docs_prod',
-         inputSelector: '.docssearch-input',
-         algoliaOptions: {
-            'facetFilters': ['language:{{ .Site.Language.Lang }}']
-         },
-         autocompleteOptions: {
-            autoselect: false
-         },
-         debug: false // Set debug to true if you want to inspect the dropdown
-    });
-    var desktop_enable_enter = true;
-    search_desktop.autocomplete.on('keyup', function(e) {
-       if(e.keyCode === 13 && desktop_enable_enter) {
-           window.location = '{{ .Site.BaseURL }}search/?s='+$(this).val();
-       }
-    });
-    search_desktop.autocomplete.on('autocomplete:cursorchanged', function(e) {
-       desktop_enable_enter = false;
-    });
-    search_desktop.autocomplete.on('autocomplete:cursorremoved', function(e) {
-       desktop_enable_enter = true;
-    });
-    </script>
-    <script type="text/javascript">
-    var search_mobile = docsearch({
-         appId: 'EOIG7V0A2O',
-         apiKey: 'c7ec32b3838892b10610af30d06a4e42',
-         indexName: 'docsearch_docs_prod',
-         inputSelector: '.docssearch-input-m',
-         algoliaOptions: {
-            'facetFilters': ['language:{{ .Site.Language.Lang }}']
-         },
-         autocompleteOptions: {
-            autoselect: false
-         },
-         debug: false // Set debug to true if you want to inspect the dropdown
-    });
-    var mobile_enable_enter = true;
-    search_mobile.autocomplete.on('keyup', function(e) {
-       if(e.keyCode === 13 && mobile_enable_enter) {
-           window.location = '{{ .Site.BaseURL }}search/?s='+$(this).val();
-       }
-    });
-    search_mobile.autocomplete.on('autocomplete:cursorchanged', function(e) {
-       mobile_enable_enter = false;
-    });
-    search_mobile.autocomplete.on('autocomplete:cursorremoved', function(e) {
-       mobile_enable_enter = true;
-    });
-    </script>
-    <!--/ ALGOLIA DOCSEARCH -->
 </body>
 </html>

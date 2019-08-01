@@ -156,11 +156,12 @@ Pour découvrir comment activer et configurer des plug-ins, consultez la [docume
 
 #### Compatibilité des enregistreurs
 
-| Module        | Versions | Type de prise en charge    |
-|---------------|----------|-----------------|
-| [bunyan][45]  | `>=1`    | Prise en charge complète |
-| [pino][46]    | `>=2`    | Prise en charge complète |
-| [winston][47] | `>=1`    | Prise en charge complète |
+| Module           | Versions  | Type de prise en charge    |
+|------------------|-----------|-----------------|
+| [bunyan][45]     | `>=1`     | Prise en charge complète |
+| [paperplane][48] | `>=2.3.2` | Prise en charge complète |
+| [pino][46]       | `>=2`     | Prise en charge complète |
+| [winston][47]    | `>=1`     | Prise en charge complète |
 
 ## Pour aller plus loin
 
@@ -213,3 +214,4 @@ Pour découvrir comment activer et configurer des plug-ins, consultez la [docume
 [45]: https://github.com/trentm/node-bunyan
 [46]: http://getpino.io
 [47]: https://github.com/winstonjs/winston
+[48]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
