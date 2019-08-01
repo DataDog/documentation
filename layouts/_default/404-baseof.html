@@ -19,6 +19,7 @@
             DD_LOGS.addLoggerGlobalContext('env', '{{ $.Site.Params.environment }}');
             DD_LOGS.addLoggerGlobalContext('service', 'docs');
             DD_LOGS.addLoggerGlobalContext('host', window.location.host);
+            DD_LOGS.logger.info('404');
     </script>
     {{ end }}
     {{ if eq .Site.Params.environment "live" }}
