@@ -1,9 +1,9 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
 <script type="text/javascript">
 var search_desktop = docsearch({
-     appId: 'EOIG7V0A2O',
-     apiKey: 'c7ec32b3838892b10610af30d06a4e42',
-     indexName: 'docsearch_docs_prod',
+     appId: '{{ $.Site.Params.algolia.appId }}',
+     apiKey: '{{ $.Site.Params.algolia.apiKey }}',
+     indexName: '{{ $.Site.Params.algolia.indexName }}',
      inputSelector: '.docssearch-input',
      algoliaOptions: {
         'facetFilters': ['language:{{ .Site.Language.Lang }}']
@@ -28,9 +28,9 @@ search_desktop.autocomplete.on('autocomplete:cursorremoved', function(e) {
 </script>
 <script type="text/javascript">
 var search_mobile = docsearch({
-     appId: 'EOIG7V0A2O',
-     apiKey: 'c7ec32b3838892b10610af30d06a4e42',
-     indexName: 'docsearch_docs_prod',
+     appId: '{{ $.Site.Params.algolia.appId }}',
+     apiKey: '{{ $.Site.Params.algolia.apiKey }}',
+     indexName: '{{ $.Site.Params.algolia.indexName }}',
      inputSelector: '.docssearch-input-m',
      algoliaOptions: {
         'facetFilters': ['language:{{ .Site.Language.Lang }}']
