@@ -1,0 +1,47 @@
+<script>
+    // Init browser logs when the lib is loaded.
+    window.logsAsyncInit = function () {
+
+        // Set your Public API key
+        DD_LOGS.init({
+            publicApiKey: 'pub36877d3864fab670b5ae7e1d5d26cb08',
+            forwardErrorsToLogs: true,
+        });
+
+        // global context
+        DD_LOGS.addLoggerGlobalContext('env', '{{ $.Site.Params.environment }}');
+        DD_LOGS.addLoggerGlobalContext('service', 'docs');
+        DD_LOGS.addLoggerGlobalContext('host', window.location.host);
+        DD_LOGS.addLoggerGlobalContext('lang', '{{ $.Site.Language.Lang }}');
+
+        // only send live logs to dd everything else console log
+        {{ if ne $.Site.Params.environment "live" }}
+            DD_LOGS.logger.setHandler('console');
+        {{ end }}
+    };
+    window.rumAsyncInit = function () {
+
+        DD_RUM.init({
+          clientToken: 'pub36877d3864fab670b5ae7e1d5d26cb08',
+          applicationId: 'c4e83ad8-4eda-4d2e-aae1-d943abce0463',
+        });
+
+    };
+    // Load the Browser logs lib asynchronously if it's not already loaded.
+    (function(d){
+        let js, id = 'browser-logs-js', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//www.datadoghq-browser-agent.com/datadog-logs-us.js";
+        const ddScript = ref.parentNode.insertBefore(js, ref);
+        ddScript.onload = function(){window.logsAsyncInit();}
+    }(document));
+    (function(d){
+        let js, id = 'browser-rum-js', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//www.datadoghq-browser-agent.com/datadog-rum-us.js";
+        const ddScript = ref.parentNode.insertBefore(js, ref);
+        ddScript.onload = function(){window.rumAsyncInit();}
+    }(document));
+</script>
