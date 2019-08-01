@@ -16,7 +16,9 @@
                 clientToken: 'pub36877d3864fab670b5ae7e1d5d26cb08',
                 forwardErrorsToLogs: true,
             });
-            DD_LOGS.addLoggerGlobalContext('env': 'preview');
+            DD_LOGS.addLoggerGlobalContext('env', '{{ $.Site.Params.environment }}');
+            DD_LOGS.addLoggerGlobalContext('service', 'docs');
+            DD_LOGS.addLoggerGlobalContext('host', window.location.host);
     </script>
     {{ end }}
     {{ if eq .Site.Params.environment "live" }}
@@ -31,7 +33,9 @@
                 clientToken: 'pub16bb5ef3e9bf55f156338987e27246c7',
                 forwardErrorsToLogs: true,
             });
-            DD_LOGS.addLoggerGlobalContext('env': 'live');
+            DD_LOGS.addLoggerGlobalContext('env', '{{ $.Site.Params.environment }}');
+            DD_LOGS.addLoggerGlobalContext('service', 'docs');
+            DD_LOGS.addLoggerGlobalContext('host', window.location.host);
         </script>
     {{ end }}
 
