@@ -21,11 +21,19 @@
     };
     window.rumAsyncInit = function () {
 
-        DD_RUM.init({
-          clientToken: 'pub36877d3864fab670b5ae7e1d5d26cb08',
-          applicationId: 'c4e83ad8-4eda-4d2e-aae1-d943abce0463',
-        });
+        {{ if eq .Site.Params.environment "preview" }}
+          DD_RUM.init({
+            clientToken: 'pub36877d3864fab670b5ae7e1d5d26cb08',
+            applicationId: 'c4e83ad8-4eda-4d2e-aae1-d943abce0463',
+          });
+        {{ end }}
 
+        {{ if eq .Site.Params.environment "live" }}
+            DD_RUM.init({
+              clientToken: 'pub16bb5ef3e9bf55f156338987e27246c7',
+              applicationId: '3493b4e7-ab12-4852-8836-ba96af7bc745',
+            });
+        {{ end }}
     };
     // Load the Browser logs lib asynchronously if it's not already loaded.
     (function(d){
