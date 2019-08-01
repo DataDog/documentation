@@ -469,7 +469,7 @@ $(document).ready(function () {
 
     codeTabs();
 
-    
+
 
     // API page
     if($('.api').length) {
@@ -539,7 +539,7 @@ $(document).ready(function () {
     // when the page loads, checking the window width
     widthCheck();
     tocWidthUpdate();
-    
+
     if(innerWidth > largeScreenThreshold && window.scrollY < 60){
         $('.toc').css('top', 189);
         $('.mobile-toc-toggle').css('top', 189);
@@ -561,7 +561,7 @@ $(document).ready(function () {
     });
 
     updateTOC();
-    
+
     // when page ready collect mapping of link to headers so we aren't checking the dom all the time
 
     $('.mobile-toc-toggle').on('click touch', function () {
@@ -794,11 +794,11 @@ function widthCheck(){
                 }
             }
         }
-        
+
     } else {
         $('.mobile-toc-toggle').addClass('d-none');
     }
-        
+
 }
 
 // updating ToC width on large screens
@@ -819,7 +819,7 @@ function showTOCIcon(){
 
 
 // slide to anchors
-function moveToAnchor(id, animate, amount) {    
+function moveToAnchor(id, animate, amount) {
     if (animate === undefined) {
         animate = true;
     }
@@ -937,7 +937,7 @@ function codeTabs(){
                  }
              }
           });
-          
+
           var url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
           history.replaceState(null, null, url + '?tab=' + lang + window.location.hash)
 
@@ -995,7 +995,7 @@ function hasParentLi(el){
                 el.closest('.sub-menu').previousElementSibling.classList.add('active');
             }
         }
-        
+
         els.unshift(el);
         el = el.parentNode;
     }
@@ -1005,14 +1005,14 @@ function getPathElement(){
     var domain = window.location.origin;
     var path = window.location.pathname;
     var activeMenus = document.querySelectorAll('.side .sidenav-nav .active, header .sidenav-nav .active');
-    
+
     for(i = 0; i < activeMenus.length; i++){
         activeMenus[i].classList.remove('active');
     }
 
     path = path.replace(/^\//, '');
     path = path.replace(/\/$/, '');
-    
+
     var aPath = document.querySelector('.side [data-path="'+path+'"]');
     var maPath = document.querySelector('header [data-path="'+path+'"]');
 
@@ -1068,7 +1068,7 @@ function getPathElement(){
     if (path.includes('monitors/monitor_types/trace_analytics')) {
         aPath = document.querySelector('.side [data-path*="monitors/monitor_types/trace_analytics"]');
         maPath = document.querySelector('header [data-path*="monitors/monitor_types/trace_analytics"]');
-    } 
+    }
 
     if (path.includes('developers/guide')) {
         aPath = document.querySelector('.side [data-path*="developers/guide"]');
@@ -1108,13 +1108,13 @@ function closeNav(){
 
 function updateSidebar(event){
 
-    
+
     closeNav();
-   
+
 
     getPathElement();
 
-    
+
 
     var isLi = ( event.target.nodeName === "LI" ) ? true : false ;
 
@@ -1122,16 +1122,16 @@ function updateSidebar(event){
         if (event.target.querySelector('a')) {
             event.target.querySelector('a').classList.add('active');
         }
-        
+
         if(event.target.closest('li').querySelector('ul') && event.target.closest('li')){
             event.target.closest('li').classList.add('open');
-        } 
+        }
     }else{
 
         if(event.target.closest('li').querySelector('a')) {
             event.target.closest('li').querySelector('a').classList.add('active');
         }
-        
+
         if(event.target.closest('li').querySelector('ul')){
             event.target.closest('li').classList.add('open');
         }
@@ -1145,7 +1145,7 @@ function loadPage(newUrl) {
     if (document.querySelector('.toc-container.mobile-open')) {
         document.querySelector('.mobile-toc-toggle').click();
     }
-    
+
     var mainContent = document.getElementById("mainContent");
     var currentTOC = document.querySelector('.toc-container');
     mainContent.classList.add('loading');
@@ -1153,7 +1153,7 @@ function loadPage(newUrl) {
     var httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function() {
         // closeTOC();
-        
+
         // cancel httprequest if hash is changed to prevent page replacing
         window.addEventListener('hashchange', function(e){
             httpRequest.abort();
@@ -1181,7 +1181,7 @@ function loadPage(newUrl) {
         }
 
         document.title = newDocument.title;
-        
+
         var meta = {
             "itemprop": [
                 "name",
@@ -1247,11 +1247,11 @@ function loadPage(newUrl) {
                 document.querySelector('.toc-container #TableOfContents').remove();
             }
             hideToc();
-        } 
+        }
 
         window.setTimeout(function () {
             mainContent.classList.remove('loading');
-            
+
         }, 1);
 
         var end = window.performance.now();
@@ -1262,9 +1262,6 @@ function loadPage(newUrl) {
         // sets query params if code tabs are present
 
         codeTabs();
-        // buildTOCMap();
-
-        DD_LOGS.logger.log('html parsed page content inserted',{"timeEnd": time, "pathName": pathName},'info');
 
         // Gtag virtual pageview
         gtag('config', '{{ .Site.Params.ga }}', {'page_path': pathName});
@@ -1295,10 +1292,10 @@ function reloadWistiaVidScripts(vidId){
         // create new script tags
         var wistaVideoScript = document.createElement('script');
         var wistaVideoScript2 = document.createElement('script');
-        
+
         wistaVideoScript.setAttribute('src','https://fast.wistia.com/assets/external/E-v1.js');
         wistaVideoScript2.setAttribute('src','https://fast.wistia.com/embed/medias/'+ vidId +'.jsonp');
-        
+
         wistiaCont.appendChild(wistaVideoScript);
         wistiaCont.appendChild(wistaVideoScript2);
 
@@ -1317,10 +1314,10 @@ function navClickEventHandler(event){
     // console.log(event.target);
     // Remove any existing open and active classes
     var newUrl;
-    
+
     // If what is clicked is not the actual li tag, ie the img icon span
     if (event.target !== this){
-    
+
         // Get the targets parent li
         var parentli = event.target.closest('li');
 
@@ -1388,7 +1385,7 @@ function replacePath(inputPath) {
         .split("/")
         .slice(2, 4)
         .join("/");
-     
+
       return path;
     }
     return inputPath;
@@ -1521,7 +1518,7 @@ function initializeIntegrations(){
         pop.style.display = 'none';
         $(window).scrollTop(0);
     });
-    
+
     var searchTimer;
 
     search.addEventListener('input', function(e) {
@@ -1649,9 +1646,3 @@ function initializeIntegrations(){
     }
 
 }
-
-
-
-
-
-
