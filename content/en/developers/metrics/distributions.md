@@ -17,9 +17,7 @@ This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Data
 
 ## Overview
 
-Distributions are a new metric type in Agent v6 that aggregate the values that are sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure. This can be thought of as a global version of our existing [Histogram metric type][1], which measures the statistical distribution of values on a single host.
-
-Distribution metrics are designed to instrument logical objects, like services, independently from the underlying hosts, and solve the problem created by Agent-level aggregation.
+Distributions are a new metric type that aggregate the values that are sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure. Distribution metrics are designed to instrument logical objects, like services, independently from the underlying hosts, and solve the problem created by Agent-level aggregation.
 
 Unlike the histogram metric type that aggregates on the Agent-side, distributions send all raw data collected during the flush interval and aggregations occur server-side. Because the underlying data structure has not been aggregated and represents raw data, distributions provide two major features:
 
@@ -47,6 +45,7 @@ Percentile aggregations can be added in-app at the [Datadog Distribution Metric 
 This functionality allows you to control tagging for metrics for which host-level granularity is not necessary see the [Distribution Metric page][3] to learn more.
 
 ## Submission
+Note: As distributions are a new metric type, it's recommended to name distributions differently than existing metrics you've already submitted. 
 
 ### DogStatsD
 
