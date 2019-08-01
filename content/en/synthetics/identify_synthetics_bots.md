@@ -18,15 +18,15 @@ further_reading:
 
 ---
 
-Some parts of your system might not be available to robots without the right identification, or you might want to avoid collecting analytics from Datadog robots. Use the headers added to Synthetics tests to spot Datadog robots and filter their requests once in your analytics tool. 
+Some parts of your system might not be available to robots without the right identification, or you might want to avoid collecting analytics from Datadog robots. Use the headers added to Synthetics tests to spot Datadog robots and filter their requests once in your analytics tool.
 
 Header attached to all Datadog API tests:
 
-`Sec-Datadog: Request sent by a Datadog Synthetics API Test (https://docs.datadoghq.com/synthetics/) - test_id: <TEST_ID>`
+`Sec-Datadog: Request sent by a Datadog Synthetics API Test (https://docs.datadoghq.com/synthetics/) - public_id: <SYNTHETICS_TEST_PUBLIC_ID>`
 
 Header attached to all Datadog Browser tests:
 
-`Sec-Datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - test_id: <TEST_ID>`
+`Sec-Datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - public_id: <SYNTHETICS_TEST_PUBLIC_ID>`
 
 
 If APM is enabled, [**other APM specific headers**][1] such as `x-datadog-trace-id` are added to all the requests launched for API tests.

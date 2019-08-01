@@ -2,7 +2,7 @@
 
 api_key=<YOUR_API_KEY>
 app_key=<YOUR_APP_KEY>
-test_id=<TEST_ID>
+public_id=<SYNTHETICS_TEST_PUBLIC_ID>
 
 curl -X PUT -H "Content-type: application/json" \
 -d '{
@@ -58,4 +58,4 @@ curl -X PUT -H "Content-type: application/json" \
    ],
    "type":"api"
 }' \
-"https://api.datadoghq.com/api/v1/synthetics/tests/${test_id}?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/synthetics/tests/${public_id}?api_key=${api_key}&application_key=${app_key}"
