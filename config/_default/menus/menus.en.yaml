@@ -545,7 +545,7 @@ main:
 
   ## ALERTING - Monitor Types
 
-  - name: "Monitor Types"
+  - name: "Monitors"
     url: "monitors/monitor_types/"
     parent: "alerting"
     identifier: "monitor_types"
@@ -616,7 +616,7 @@ main:
 
   ## MONITORS -  Manage monitor
 
-  - name: "Manage Monitor"
+  - name: "Manage Monitors"
     url: "monitors/manage_monitor/"
     weight: 2
     parent: "alerting"
