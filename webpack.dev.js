@@ -16,7 +16,7 @@ module.exports = merge(common(), {
         // copied from `'minimal'`
         all: false,
         modules: true,
-        maxModules: 0,
+        maxModules: 15,
         errors: true,
         warnings: true,
         // our additional options

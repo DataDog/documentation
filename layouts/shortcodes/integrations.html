@@ -22,9 +22,9 @@
         {{ $.Scratch.Add "curr_categories" (print "cat-" (replace $e "/" "" | urlize)) }}
     {{ end }}
     {{ $urlname := $v.File.TranslationBaseName }}
-    {{ $src := (print "integrations_logos/" ($urlname | lower) ".png")}}
+    {{ $src := (print "images/integrations_logos/" ($urlname | lower) ".png")}}
     {{ $indx :=  $src }}
-    {{ if $indx }}
+    {{ if and $indx (fileExists (print "static/" $src)) }}
         {{ $doc_link := (print "/integrations/" $v.Params.name "/") }}
         {{ $.Scratch.Add "ints" (dict "id" $k "name" $v.Params.name "tags" ($.Scratch.Get "curr_categories") "item_class" "" "redirect" $doc_link "blurb" $v.Params.short_description "public_title" $v.Params.public_title) }}
     {{ end }}
@@ -78,19 +78,20 @@
         {{ $formatname := $.Scratch.Get "formatname" }}
 
         {{ $urlname := $v.File.TranslationBaseName }}
-        {{ $src := (print "integrations_logos/" ($urlname | lower) ".png")}}
+        {{ $src := (print "images/integrations_logos/" ($urlname | lower) ".png")}}
         {{ $indx := $src }}
 
-        {{ if $indx }}
+        {{/* if  $src */}}
+        {{ if and $indx (fileExists (print "static/" $src)) }}
             {{ if $formatname }}
             <div id="mixid_{{$i}}" class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2-4 mix text-center {{ range $i, $e := $v.Params.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" data-id="{{ $i }}" data-ref="item">
                 <div id="{{ $v.Params.name | default ($urlname | lower) }}" class="card">
                     <a class="card-img" href="{{ (print "integrations/" ($urlname | lower)) | absLangURL }}">
                         {{ $.Scratch.Set "url" ""}}
                         {{ if $indx }}
-                            {{ $.Scratch.Set "url" (print (.Site.Params.img_url) "images/" $indx "?auto=format") | safeURL }}
+                            {{ $.Scratch.Set "url" (print (.Site.Params.img_url) $indx "?auto=format") | safeURL }}
                         {{ else }}
-                            {{ $.Scratch.Set "url" (print (.Site.Params.img_url) "images/" "integrations_logos/dd-noimage.png" "?auto=format") | safeURL }}
+                            {{ $.Scratch.Set "url" (print (.Site.Params.img_url) "integrations_logos/dd-noimage.png" "?auto=format") | safeURL }}
                         {{ end }}
                         {{ $url := $.Scratch.Get "url" }}
                         <picture class="mx-auto">

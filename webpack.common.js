@@ -2,19 +2,12 @@ const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
-const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
-const {
-    isString
-} = require('lodash');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { isString } = require('lodash');
 const config = require('./config-corp');
-require("@babel/polyfill");
+require('@babel/polyfill');
 
-
-
-const {
-    getEntry,
-    getAllEntryNames
-} = require('./src/build/entries.js');
+const { getEntry, getAllEntryNames } = require('./src/build/entries.js');
 
 function getConfig() {
     console.log('process.env.NODE_ENV: ', process.env.NODE_ENV);
@@ -30,20 +23,50 @@ function getConfig() {
 const entries = getAllEntryNames();
 const entryNames = isString(entries) ? entries.split(',') : entries;
 
-const commonConfig = (env) => {
+// const manifest2 = new WebpackAssetsManifest({
+//     customize(entry, original, manifest, asset) {
+//         console.log('manifest: ', manifest);
+//     }
+// });
 
+const commonConfig = env => {
     const plugins = [
+        new webpack.ProvidePlugin({
+            // fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch',
+            $: 'jquery',
+            jQuery: 'jquery'
+        }),
         new WebpackAssetsManifest({
             output: path.join(process.cwd(), 'data/manifest.json'),
             writeToDisk: true,
             sortManifest: true,
             publicPath: 'static/'
-        }),
-        new webpack.ProvidePlugin({
-            // fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch',
-            $: 'jquery',
-            jQuery: 'jquery'
         })
+        // new CopyPlugin([
+        //     {
+        //         from: 'images/',
+        //         to: '../images/[path][name].[contenthash:5].[ext]'
+        //     }
+        // ]),
+
+        // create manifest for images with hashes
+        // new StatsWriterPlugin({
+        //     fields  : ['assetsByChunkName', 'assets'],
+        //     filename: '../../data/image_manifest.json',
+        //     transform(stats) {
+        //         console.log('stats: ', stats);
+        //         const manifest = {};
+        //         stats.assets
+        //             .map(asset => asset.name)
+        //             .sort()
+        //             .forEach(file => {
+        //                 manifest[file.replace(/\.[a-f0-9]{5}\./, '.')] = file;
+        //                 // 5 is length of hash
+        //             });
+        //         return JSON.stringify(manifest, null, 2) + '\n';
+        //     }
+        // }),
+        // manifest2
     ];
 
     // check if the analyze script was run and add BundleAnalyzer plugin if true
@@ -54,12 +77,11 @@ const commonConfig = (env) => {
     }
 
     return {
-        entry: entryNames.reduce((definition, name) => {
-            const entry = getEntry(name);
-            return Object.assign({
-                [entry.name]: entry.path
-            }, definition);
-        }, {}),
+        entry: {
+            '@babel/polyfill': '@babel/polyfill',
+            'main-dd-js': './scripts/index.js',
+            'main-dd-css': './styles/style.scss'
+        },
         output: {
             path: path.join(__dirname, 'dist', 'static'),
             publicPath: 'static'
@@ -67,10 +89,11 @@ const commonConfig = (env) => {
 
         context: path.join(__dirname, 'src'),
         module: {
-            rules: [{
-                test: /\.((png)|(eot)|(woff)|(woff2)|(ttf)|(svg)|(gif))(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'file-loader?name=/[hash].[ext]'
-            },
+            rules: [
+                {
+                    test: /\.(ttf|eot|svg|gif|png|jpg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                    loader: 'file-loader?name=[path][name].[hash].[ext]'
+                },
                 {
                     test: /\.json$/,
                     loader: 'json-loader'
@@ -86,10 +109,11 @@ const commonConfig = (env) => {
                 },
                 {
                     test: require.resolve('jquery'),
-                    use: [{
-                        loader: 'expose-loader',
-                        options: 'jQuery'
-                    },
+                    use: [
+                        {
+                            loader: 'expose-loader',
+                            options: 'jQuery'
+                        },
                         {
                             loader: 'expose-loader',
                             options: '$'
@@ -99,30 +123,36 @@ const commonConfig = (env) => {
                 {
                     test: /\.(sa|sc|c)ss$/,
                     exclude: /node_modules/,
-                    use: [{
-                        loader: 'style-loader',
-                        options: {
-                            sourceMap: true
+                    use: [
+                        {
+                            loader: 'style-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        },
+                        {
+                            loader: MiniCssExtractPlugin.loader
+                        },
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                sourceMap: true,
+                                url: false
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true
+                            }
                         }
-                    }, {
-                        loader: MiniCssExtractPlugin.loader
-                    }, {
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: true,
-                            url: false
-                        }
-                    }, {
-                        loader: 'postcss-loader',
-                        options: {
-                            sourceMap: true
-                        }
-                    }, {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: true
-                        }
-                    }]
+                    ]
                 }
             ]
         },
@@ -150,12 +180,12 @@ const commonConfig = (env) => {
         resolve: {
             extensions: ['.json', '.js', '.jsx']
         },
-        externals: [/^vendor\/.+\.js$/,
+        externals: [
+            /^vendor\/.+\.js$/,
             {
-                'Config': JSON.stringify(getConfig())
+                Config: JSON.stringify(getConfig())
             }
         ]
-
     };
 };
 
