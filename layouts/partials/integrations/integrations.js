@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     var finder_state = 0;  // closed
     var container = document.querySelector('[data-ref="container"]');
@@ -101,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
         pop.style.display = 'none';
         $(window).scrollTop(0);
     });
-    
+
     var searchTimer;
 
     search.addEventListener('input', function(e) {
@@ -147,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (button.classList.contains('active') || !button.getAttribute('data-filter')) return;
 
         var filter = button.getAttribute('data-filter');
+        window.datadog_logger.log('Integration category selected', {"integration_category":button.innerText}, 'info')
         activateButton(button, filters);
         updateData(filter, false);
 
