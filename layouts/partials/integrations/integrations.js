@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }, 'info')
             }
-        }, 400);
+        }, 600);
     })
 
     // integrations dropdown select
