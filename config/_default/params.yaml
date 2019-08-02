@@ -15,3 +15,12 @@ code_languages:
     key: bash
 footer_scripts:
   - marketo: false
+
+algolia:
+  appId: EOIG7V0A2O
+  apiKey: c7ec32b3838892b10610af30d06a4e42
+  indexName: docsearch_docs_prod
+
+datadog:
+  clientToken: pube66a8c26c2159b101d6c36b5317fa7f9
+  forwardErrorsToLogs: true

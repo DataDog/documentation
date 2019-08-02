@@ -22,7 +22,7 @@ This feature is currently in beta. Request access by filling out the <a href="ht
 
 ## Overview
 
-Network Flow Monitoring allows you to explore metrics for point-to-point communication between anything in your environment.
+Network Performance Monitoring allows you to explore metrics for point-to-point communication between anything in your environment.
 
 Each end of any point-to-point communication represents a hash of a `{host | process ID | port}` or `{container | process ID | port}` for uniqueness. This is resolved in Datadog to any collected tag. This allows you to aggregate communication based on arbitrary queries.
 
@@ -31,12 +31,49 @@ Each end of any point-to-point communication represents a hash of a `{host | pro
 ## Setup
 ### Installation
 
-Network performance monitoring requires Datadog Agent v6.12+. To enable network performance monitoring, configure your `agent.yaml` file based on your system setup.
+Network performance monitoring requires Datadog Agent v6.12+. To enable network performance monitoring, configure your `agent.yaml` file based on your system setup. For more configurations, see the [example agent.yaml files][1].
 
 {{< tabs >}}
 {{% tab "Agent" %}}
 
-To enable network performance monitoring on the Datadog Agent, use these configurations:
+To enable network performance monitoring with the Datadog Agent, use these configurations:
+
+```
+# Copy the system-probe example configuration
+$ sudo -u dd-agent cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
+
+# Modify the system-probe configuration file to set the enable flag to true
+$ sudo -u dd-agent vim /etc/datadog-agent/system-probe.yaml
+
+
+##################################
+## System Probe Configuration ##
+##################################
+
+## @param system_probe_config - custom object - optional
+## Beta Agent
+## Enter specific configurations for your System Probe data collection.
+## Uncomment this parameter and the one below to enable them.
+#
+# system_probe_config:
+
+  ## @param enabled - boolean - optional - default: false
+  ## Set to true to enable the System Probe.
+  #
+  enabled: true
+
+
+# Start the system-probe
+$ sudo service datadog-agent-sysprobe start
+
+# Restart the main datadog-agent
+$ sudo service datadog-agent-sysprobe restart
+```
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+To enable network performance monitoring with Kubernetes, use these configurations:
 
 ```
 apiVersion: extensions/v1beta1
@@ -129,8 +166,6 @@ $ docker run -e DD_API_KEY="YOUR_API_KEY" \
 
 {{% /tab %}}
 {{< /tabs >}}
-
-For more configurations, see the [example agent.yaml files][1].
 
 ### Queries
 
