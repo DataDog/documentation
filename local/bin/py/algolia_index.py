@@ -83,8 +83,6 @@ if __name__ == "__main__":
     print("Transforming links to make them match the algolia logic:\n")
     private_urls=transform_url(private_urls)
 
-    print("List of URLs to not index with Algolia: \n")
-
     print("Updating Algolia docsearch configuration file:\n")
     update_algolia_private_url(options["config_location"],private_urls)
 
