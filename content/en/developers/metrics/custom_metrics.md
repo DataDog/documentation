@@ -21,7 +21,9 @@ Custom metrics generally refer to any metric that you send using statsd, [DogSta
 
 In order to fully leverage the capabilities of Datadog through scoping and alerting, you'll probably be using tags. As a consequence, one submitted metric actually leads to **multiple unique tag combinations**- counting towards your custom metrics count.
 
-For example:
+For example, suppose you were interested in measuring the average `temperature` in the US. We have collected the following temperature measurements every 10 seconds for the past minute from Orlando, Miami, New York, Boston and Seattle. Each `temperature` measurement is tagged with the information about `City`, `State`, `Region`, `Country`. 
+
+
 
 * You submit the following metric name: `auth.exceptionCount`
 * Your code instrumentation plans the following tags associated with that metric: `method:X`, `method:Y`, `exception:A`, `exception:B`.
