@@ -107,12 +107,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     search.addEventListener('input', function(e) {
         var allBtn = controls.querySelector('[data-filter="all"]');
-
         // search only executes after user is finished typing
         clearTimeout(searchTimer);
         searchTimer = setTimeout(function() {
             activateButton(allBtn, filters);
             updateData(e.target.value.toLowerCase(), true)
+            window.datadog_logger.log('Integrations Search:', {"browser": {"integrations":{"search":e.target.value.toLowerCase()}}}, 'info')
         }, 400);
     })
 
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (button.classList.contains('active') || !button.getAttribute('data-filter')) return;
 
         var filter = button.getAttribute('data-filter');
-        window.datadog_logger.log('Integration category selected', {"integration_category":button.innerText}, 'info')
+        window.datadog_logger.log('Integrations category selected', {"browser": {"integrations":{"category":button.innerText}}}, 'info')
         activateButton(button, filters);
         updateData(filter, false);
 
