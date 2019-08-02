@@ -13,39 +13,41 @@ further_reading:
   text: "Collect your traces"
 ---
 
-The goal of Autodiscovery is to apply a Datadog integration configuration when running an Agent Check against a given container. See how to [Configure Agent integrations][1] when running the Agent on a host if you want more context on this logic. In order to configure an integration with Autodiscovery, the following parameters are required:
+The goal of Autodiscovery is to apply a Datadog integration configuration when running an Agent check against a given container. See how to [configure Agent integrations][1] when running the Agent on a host for more context on this logic.
 
-* `<INTEGRATION_NAME>`: Name of the Datadog integration
-* `<INIT_CONFIG>`: Configuration for the `init_config:` section for the given Datadog-`<INTEGRATION_NAME>`.
-* `<INSTANCE_CONFIG>`: Configuration for the `instances:` section for the given Datadog-`<INTEGRATION_NAME>`.
+To configure an integration with Autodiscovery, use the following parameters:
 
-Additionally, if you use Agent v6.5+, you can also use the following parameter to configure your [log collection][2] with Autodiscovery:
+| Parameter            | Required | Description                                                                                       |
+|----------------------|----------|---------------------------------------------------------------------------------------------------|
+| `<INTEGRATION_NAME>` | Yes      | Name of the Datadog integration                                                                   |
+| `<INIT_CONFIG>`      | Yes      | Configuration for the `init_config:` section for the given Datadog-`<INTEGRATION_NAME>`           |
+| `<INSTANCE_CONFIG>`  | Yes      | Configuration for the `instances:` section for the given Datadog-`<INTEGRATION_NAME>`             |
+| `<LOG_CONFIG>`       | No       | For Agent v6.5+, configuration for the `logs:` section for the given Datadog-`<INTEGRATION_NAME>` |
 
-* `<LOG_CONFIG>`: Configuration for the `logs:` section for the given Datadog-`<INTEGRATION_NAME>`
+Each tab in sections below shows a different way to apply integration templates to a given container. The available methods are:
 
-Each tab in sections below shows a different way to apply integration templates to a given container. Available documented methods are:
+* [Kubernetes pod annotations](?tab=kubernetespodannotations#configuration)
+* [Docker labels](?tab=dockerlabel#configuration)
+* [A configuration file mounted within the Agent](?tab=file#configuration)
+* [Key-value stores](?tab=keyvaluestore#configuration)
 
-* [Using a configuration file mounted within the Agent](?tab=file#configuration)
-* [Using key-value stores](?tab=keyvaluestore#configuration)
-* [Using Kubernetes annotations](?tab=kubernetespodannotations#configuration)
-* [Using Docker labels](?tab=dockerlabel#configuration)
 
-If you provide a template for the same integration via multiple template sources, the Agent looks for templates in the following order (using the first one it finds):
+If you provide a template for the same integration with multiple template sources, the Agent looks for templates in the following order (using the first one it finds):
 
 * Kubernetes annotations
 * Docker Labels
 * Files
 
-**Note**: Some supported integrations requires additional steps for Autodiscovery to work: [Ceph][3], [Varnish][4], [Postfix][5], [Cassandra Nodetools][6], and [Gunicorn][7]. Contact [Datadog support][8] for assistance.
+**Note**: Some supported integrations require additional steps for Autodiscovery to work: [Ceph][2], [Varnish][3], [Postfix][4], [Cassandra Nodetools][5], and [Gunicorn][6]. Contact [Datadog support][7] for assistance.
 
 ## Configuration
 
 {{< tabs >}}
 {{% tab "Kubernetes Pod Annotations" %}}
 
-You can store your integration templates in Kubernetes Pod annotations. With Autodiscovery enabled, the Agent detects if it's running on Kubernetes and automatically searches all Pod annotations for integration templates.
+Integration templates can be stored in your Kubernetes pod annotations. With Autodiscovery, the Agent detects if it's running on Kubernetes and automatically searches all pod annotations for integration templates.
 
-In order to apply a specific configuration to a given container, Autodiscovery identifies containers by _name_, **NOT image** (as it does for auto-configuration files and key-value stores). That is, it looks to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image`. To configure your Datadog integration Autodiscovery on a given `<CONTAINER_IDENTIFIER>` within your Pod add the following annotations to your Pod:
+To apply a specific configuration to a given container, Autodiscovery identifies containers by **name**, NOT image. It tries to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image`. To configure your Datadog integration Autodiscovery on a given `<CONTAINER_IDENTIFIER>` within your pod add the following annotations to your pod:
 
 ```yaml
 apiVersion: v1
@@ -65,7 +67,7 @@ spec:
 # (...)
 ```
 
-To apply two different integration templates to two different containers: `<CONTAINER_IDENTIFIER_1>` and `<CONTAINER_IDENTIFIER_2>` within your Pod, add the following annotations to your Pod:
+To apply two different integration templates to two different containers: `<CONTAINER_IDENTIFIER_1>` and `<CONTAINER_IDENTIFIER_2>` within your pod, add the following annotations to your pod:
 
 ```yaml
 apiVersion: v1
@@ -91,12 +93,12 @@ spec:
 # (...)
 ```
 
-**Note**: If you define your Kubernetes Pods directly (i.e. `kind: Pod`), add each Pod's annotations directly under its `metadata` section. If you define Pods _indirectly_ with Replication Controllers, Replica Sets, or Deployments, add Pod annotations under `.spec.template.metadata`.
+**Note**: If you define your Kubernetes pods directly with `kind: Pod`, add each pod's annotations directly under its `metadata` section. If you define pods indirectly with replication controllers, replica sets, or deployments, add pod annotations under `.spec.template.metadata`.
 
 {{% /tab %}}
 {{% tab "Docker Label" %}}
 
-You can store your integrations templates as Docker labels since the Agent detects if it's running on Docker and automatically searches all labels for integration templates. Autodiscovery expects labels to look like these examples, depending on the file type:
+Integrations templates can be stored as Docker labels. With Autodiscovery, the Agent detects if it's running on Docker and automatically searches all labels for integration templates. Autodiscovery expects labels to look like the following examples:
 
 **Dockerfile**:
 
@@ -144,16 +146,16 @@ services:
 {{% /tab %}}
 {{% tab "File" %}}
 
-Storing templates as local files and mounting them inside the containerized Agent doesn't require an external service or a specific orchestration platform. The downside is that you have to restart your Agent containers each time you change, add, or remove templates. The Agent looks for Autodiscovery templates in the mounted `/conf.d` directory, which contains default templates for the following checks: [Apache][1], [Consul][2], [CouchDB][3], [Couchbase][4], [Elasticsearch][5], [Etcd][6], [Kubernetes_state][7], [Kube_dns][8], [Kube_proxy][9], [Kyototycoon][10], [Memcached][11], [Redis][12], and [Riak][13].
+Storing templates as local files and mounting them inside the containerized Agent doesn't require an external service or a specific orchestration platform. The downside is that you need to restart your Agent containers each time you change, add, or remove templates. The Agent looks for Autodiscovery templates in the mounted `/conf.d` directory.
 
-Since v6.2.0 (and v5.24.0), the default templates use the default port for the monitored software, instead of auto-detecting it. If you need to use a different port, provide a custom Autodiscovery template either in [Docker container labels](?tab=docker-labels) or [Kubernetes pod annotations](?tab=kubernetes-annotations).
+Since Agent v6.2.0 (and v5.24.0), the default templates use the default port for the monitored software, instead of auto-detecting it. If you need to use a different port, provide a custom Autodiscovery template either in [Docker container labels](?tab=docker-labels) or [Kubernetes pod annotations](?tab=kubernetes-annotations).
 
-These integration templates may suit you in basic cases, but if you need to customize your Datadog integration configurations—such as enabling extra options, using different container identifiers, or using Template Variables indexing— you have to write your own auto-configuration files and use them with the Datadog Containerized Agent. To do this:
+These integration templates are meant for basic cases. If you need a custom Datadog integration configuration to enable extra options, use different container identifiers—or use template variables indexing and write your own auto-configuration file:
 
-1. Create a `autodiscovery.d/<INTEGRATION_NAME>.d/conf.yaml` file on your host with your custom auto-configuration in it.
-2. Mount this file inside the `conf.d/<INTEGRATION_NAME>.d/` folder of the containerized Agent. Note that on Kubernetes, you can add them [using ConfigMaps][14].
+1. Create a `conf.d/<INTEGRATION_NAME>.d/conf.yaml` file on your host and add your custom auto-configuration.
+2. Mount your host `conf.d/` folder to the containerized Agent's `conf.d` folder. **Note**: On Kubernetes, you can use [ConfigMaps][1].
 
-Your auto-configuration file should have the following format:
+**Example auto-configuration file**:
 
 ```
 ad_identifiers:
@@ -166,29 +168,16 @@ instances:
   <INSTANCES_CONFIG>
 ```
 
-See the dedicated [Autodiscovery Container Identifier][15] documentation to understand what the `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` refers to.
+See the dedicated [Autodiscovery Container Identifier][2] documentation for information on the `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`.
 
-**Note**: You don't need to set up the `<INTEGRATIONS_NAME>` there, since the Agent infers it from the file name directly.
+**Note**: You don't need to set up the `<INTEGRATIONS_NAME>` since the Agent infers it from the file name directly.
 
-[1]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/auto_conf.yaml
-[2]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/auto_conf.yaml
-[3]: https://github.com/DataDog/integrations-core/blob/master/couch/datadog_checks/couch/data/auto_conf.yaml
-[4]: https://github.com/DataDog/integrations-core/blob/master/couchbase/datadog_checks/couchbase/data/auto_conf.yaml
-[5]: https://github.com/DataDog/integrations-core/blob/master/elastic/datadog_checks/elastic/data/auto_conf.yaml
-[6]: https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/auto_conf.yaml
-[7]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/auto_conf.yaml
-[8]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/data/auto_conf.yaml
-[9]: https://github.com/DataDog/integrations-core/blob/master/kube_proxy/datadog_checks/kube_proxy/data/conf.yaml.example
-[10]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/datadog_checks/kyototycoon/data/auto_conf.yaml
-[11]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/auto_conf.yaml
-[12]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
-[13]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
-[14]: /agent/kubernetes/integrations/#configmap
-[15]: /agent/autodiscovery/ad_identifiers
+[1]: /agent/kubernetes/integrations/#configmap
+[2]: /agent/autodiscovery/ad_identifiers
 {{% /tab %}}
 {{% tab "Key-value Store" %}}
 
-Autodiscovery can use [Consul][1], Etcd, and Zookeeper as integration template sources. To use a key-value store, you must configure it in the Agent `datadog.yaml` configuration file and mount this file inside the containerized Agent. Alternatively, pass your key-value store as environment variables to the containerized Agent.
+Autodiscovery can use [Consul][1], Etcd, and Zookeeper as integration template sources. To use a key-value store, configure it in the Agent `datadog.yaml` configuration file and mount this file inside the containerized Agent. Alternatively, pass your key-value store as environment variables to the containerized Agent.
 
 **Configure in datadog.yaml**:
 
@@ -240,7 +229,7 @@ With the key-value store enabled as a template source, the Agent looks for templ
     ...
 ```
 
-**Note**: In order to apply a specific configuration to a given container, Autodiscovery identifies containers by **image** when using the key-value stores. That is, it looks to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].image`.
+**Note**: To apply a specific configuration to a given container, Autodiscovery identifies containers by **image** when using the key-value stores by trying to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].image`.
 
 [1]: /integrations/consul
 [2]: /agent/guide/agent-commands
@@ -258,7 +247,7 @@ Find below two sections giving examples for all of the previous methods:
 {{< tabs >}}
 {{% tab "Kubernetes Pod Annotations" %}}
 
-The following Pod annotation defines the integration template for `redis` containers with a custom `password` parameter and tags all its logs with the correct `source` and `service` attributes:
+The following pod annotation defines the integration template for `redis` containers with a custom `password` parameter and tags all its logs with the correct `source` and `service` attributes:
 
 ```
 apiVersion: v1
@@ -287,7 +276,7 @@ spec:
         - containerPort: 80
 ```
 
-**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used in order to avoid to store the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][1].
+**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][1].
 
 
 [1]: /agent/autodiscovery/template_variables
@@ -308,7 +297,7 @@ labels:
 {{% /tab %}}
 {{% tab "File" %}}
 
-Redis is one of the default Autodiscovery templates packaged with the Agent, so you don't need to mount this file. Here's the auto-conf `redis.yaml` template packaged with the Agent:
+Redis is one of the default Autodiscovery templates packaged with the Agent, so you don't need to mount this file. The following Redis template is packaged with the Agent:
 
 ```yaml
 ad_identifiers:
@@ -322,15 +311,13 @@ instances:
     port: "6379"
 ```
 
-It looks like a minimal [Redis integration configuration][1], but notice the `ad_identifiers` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run a `redis` image.
+This looks like a minimal [Redis integration configuration][1], but notice the `ad_identifiers` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any container on the same host that run a `redis` image. See the dedicated [Autodiscovery Identifier][2] documentation to learn more.
 
-**See the dedicated [Autodiscovery Identifier][2] documentation to learn more.**
+If your Redis requires an additional `password` when accessing its stats endpoint, and you want to correctly flag logs coming out of it:
 
-Now let's suppose that your Redis requires an additional `password` when accessing its stats endpoint and you want to correctly flag logs coming out of it. In order to take into account this new logic:
-
-1. Create a `autodiscovery.d/` folder on your host.
-2. Add the custom auto-configuration named `redisdb.yaml`file below to this folder
-3. Mount the `autodiscovery.d/` folder into the containerized Agent `conf.d/` folder.
+1. Create the folders `conf.d/` and `conf.d/redis.d` on your host.
+2. Add the custom auto-configuration below to `conf.d/redis.d/conf.yaml` on your host.
+3. Mount the host `conf.d/` folder to the containerized Agent `conf.d/` folder.
 
 ```yaml
 ad_identifiers:
@@ -349,7 +336,7 @@ logs:
   service: redis
 ```
 
-**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used in order to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][3].
+**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][3].
 
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
@@ -368,9 +355,9 @@ etcdctl set /datadog/check_configs/redis/instances '[{"host": "%%host%%","port":
 etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "redis"}]'
 ```
 
-**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used in order to avoid to store the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][1].
-
 Notice that each of the three values is a list. Autodiscovery assembles list items into the integration configurations based on shared list indexes. In this case, it composes the first (and only) check configuration from `check_names[0]`, `init_configs[0]` and `instances[0]`.
+
+**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][1].
 
 Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, e.g. `redis` OR `redis:latest`.
 
@@ -380,9 +367,9 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 
 ### Datadog Apache and HTTP check integrations
 
-Configurations below apply to an Apache container image with the `<CONTAINER_IDENTIFIER>`: `httpd`. The Autodiscovery templates are configured to collect metrics and logs from the Apache container, and setting up a Datadog-HTTP check with two instances in order to test two endpoints to monitor whether the websites created by the Apache container are available:
+Configurations below apply to an Apache container image with the `<CONTAINER_IDENTIFIER>`: `httpd`. The Autodiscovery templates are configured to collect metrics and logs from the Apache container and set up a Datadog-HTTP check with instances for testing two endpoints.
 
-Check names are `apache` and `http_check` and their `<INIT_CONFIG>`, `<INSTANCE_CONFIG>`, and `<LOG_CONFIG>` full configurations can be found in their respective documentation page: [Datadog-Apache integration][9], [Datadog-HTTP check integration][10].
+Check names are `apache`, `http_check`, and their `<INIT_CONFIG>`, `<INSTANCE_CONFIG>`, and `<LOG_CONFIG>`. Full configurations can be found in their respective documentation page: [Datadog-Apache integration][8], [Datadog-HTTP check integration][9].
 
 {{< tabs >}}
 {{% tab "Kubernetes Pod Annotations" %}}
@@ -440,7 +427,8 @@ labels:
 {{% /tab %}}
 {{% tab "File" %}}
 
-First, create a `autodiscovery.d/` folder on your host. Then add the following custom auto-configuration file named `apache.yaml` to this folder:
+* Create the folders `conf.d/` and `conf.d/apache.d` on your host.
+* Add the custom auto-configuration below to `conf.d/apache.d/conf.yaml` on your host.
 
 ```yaml
 ad_identifiers:
@@ -456,9 +444,10 @@ logs:
   service: webapp
 ```
 
-**Note**: It looks like a minimal [Apache check configuration][1], but notice the `ad_identifiers` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `httpd` image. **See the dedicated [Autodiscovery Identifier][2] documentation to learn more**.
+**Note**: It looks like a minimal [Apache check configuration][1], but notice the `ad_identifiers` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `httpd` image. See the dedicated [Autodiscovery Identifier][2] documentation to learn more.
 
-Then add the following custom auto-configuration file named `http_check.yaml` to this folder:
+* Next, create the folder `conf.d/http_check.d` on your host.
+* Add the custom auto-configuration below to `conf.d/http_check.d/conf.yaml` on your host.
 
 ```yaml
 ad_identifiers:
@@ -476,7 +465,7 @@ instances:
     timeout: 1
 ```
 
-Finally, mount the `autodiscovery.d/` folder into the containerized Agent `conf.d/` folder.
+* Finally, mount the host `conf.d/` folder to the containerized Agent `conf.d/` folder.
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
 [2]: /agent/autodiscovery/ad_identifiers
@@ -501,12 +490,11 @@ etcdctl set /datadog/check_configs/httpd/logs '[{"source": "apache", "service": 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/integrations/#configuring-agent-integrations
-[2]: /logs
-[3]: /integrations/ceph
-[4]: /integrations/varnish/#autodiscovery
-[5]: /integrations/postfix
-[6]: /integrations/cassandra/#agent-check-cassandra-nodetool
-[7]: /integrations/gunicorn
-[8]: /help
-[9]: /integrations/apache/#setup
-[10]: /integrations/http_check/#setup
+[2]: /integrations/ceph
+[3]: /integrations/varnish/#autodiscovery
+[4]: /integrations/postfix
+[5]: /integrations/cassandra/#agent-check-cassandra-nodetool
+[6]: /integrations/gunicorn
+[7]: /help
+[8]: /integrations/apache/#setup
+[9]: /integrations/http_check/#setup
