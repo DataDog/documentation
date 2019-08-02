@@ -112,7 +112,9 @@ document.addEventListener('DOMContentLoaded', function () {
         searchTimer = setTimeout(function() {
             activateButton(allBtn, filters);
             updateData(e.target.value.toLowerCase(), true)
-            window.datadog_logger.log('Integrations Search:', {"browser": {"integrations":{"search":e.target.value.toLowerCase()}}}, 'info')
+            if (e.target.value.length > 0) {
+                window.datadog_logger.log('Integrations Search', {"browser": {"integrations":{"search":e.target.value.toLowerCase()}}}, 'info')
+            }
         }, 400);
     })
 
