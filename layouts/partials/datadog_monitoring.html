@@ -22,5 +22,12 @@
   DD_LOGS.addLoggerGlobalContext('service', 'docs');
   DD_LOGS.addLoggerGlobalContext('host', window.location.host);
 
-  window.datadog_logger = DD_LOGS.createLogger('datadog_logger', { handler:'{{ $.Site.Params.datadog.logging_handler }}', context: {"env": "{{ $.Site.Params.environment }}", "service": "docs","host": window.location.host }});
+  window.datadog_logger = DD_LOGS.createLogger('datadog_logger', {
+    handler: '{{ $.Site.Params.datadog.logging_handler }}',
+    context: {
+      "env": "{{ $.Site.Params.environment }}",
+      "service": "docs",
+      "host": window.location.host
+    }
+});
 </script>
