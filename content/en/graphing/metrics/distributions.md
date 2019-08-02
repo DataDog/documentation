@@ -23,7 +23,7 @@ Global distributions are designed to instrument logical objects, like services, 
 
 * **Customization of tagging**: This functionality allows you to control the tagging scheme for metrics for which host-level granularity is not necessary (e.g. transactions per second for a checkout service).
 
-See the [Developer Tools section][2] for more implementation details.
+See the [Developer Tools section][2] for more implementation details. Please note that since distributions are a new metric type, they should be instrumented under new metric names during submission to Datadog.
 
 ## Aggregations
 
