@@ -155,4 +155,4 @@ In the following example, each dot represents one log event. The X-axis is the t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/?tab=measures#setup
-[2]: /logs/explorer/?tab=facets#setup
+[2]: /logs/explorer/?tab=facets#setup 
