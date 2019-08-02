@@ -14,11 +14,7 @@
 
 {{ $integration := $.Scratch.Get "integration" }}
 
-{{/* export SKIP_INT="true" && ./node_modules/.bin/hugo ... */}}
-{{ $SKIP_INT := getenv "SKIP_INT" }}
-
-{{ if not (eq $SKIP_INT "true") }}
-{{ if or (not (eq $.Page.Site.Params.environment "local")) ($.Page.Site.Data.integrations) }}
+{{ if or (not (eq $.Page.Site.Params.environment "development")) ($.Page.Site.Data.integrations) }}
 
   <!-- get lang specific data file -->
   {{ $.Scratch.Set "data" "" }}
@@ -89,5 +85,4 @@
 
   {{ end }}
 
-{{ end }}
 {{ end }}

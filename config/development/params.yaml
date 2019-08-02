@@ -1,9 +1,7 @@
-environment: local
+environment: development
 img_url: "http://localhost:1313/"
 corp_url: "https://www.datadoghq.com/"
 static_url: "http://localhost:1313/"
-ga: UA-21102638-9
-footer_scripts:
-  - snowplow: true
-  - marketo: true
-  - adroll: true
+
+datadog:
+  logging_handler: console

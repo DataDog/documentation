@@ -4,7 +4,7 @@
 
   // Only initializing RUM if on preview or live env
 {{ if (or (eq $.Site.Params.environment "live") (eq $.Site.Params.environment "preview")) }}
-    window.DD_RUM.init({
+    DD_RUM.init({
       clientToken: '{{ $.Site.Params.datadog.clientToken }}',
       applicationId: '{{ $.Site.Params.datadog.applicationId }}',
     });
@@ -16,13 +16,20 @@
       forwardErrorsToLogs: {{ $.Site.Params.datadog.forwardErrorsToLogs }},
   });
 
+  // Configuration of Browser Logs to Datadog for default error logs collection.
+  DD_LOGS.logger.setHandler('{{ $.Site.Params.datadog.logging_handler }}');
+
   DD_LOGS.addLoggerGlobalContext('env', '{{ $.Site.Params.environment }}');
   DD_LOGS.addLoggerGlobalContext('service', 'docs');
   DD_LOGS.addLoggerGlobalContext('host', window.location.host);
 
-  // Locally log to console if in dev
-  {{ if (or (eq $.Site.Params.environment "default") (eq $.Site.Params.environment "development")) }}
-      DD_LOGS.logger.setHandler('console');
-  {{ end }}
-
+  // Creation of a custom global logger to be used in all part of the site.
+  window.datadog_logger = DD_LOGS.createLogger('datadog_logger', {
+    handler: '{{ $.Site.Params.datadog.logging_handler }}',
+    context: {
+      "env": "{{ $.Site.Params.environment }}",
+      "service": "docs",
+      "host": window.location.host
+  }
+});
 </script>

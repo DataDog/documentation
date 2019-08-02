@@ -1528,7 +1528,10 @@ function initializeIntegrations(){
         clearTimeout(searchTimer);
         searchTimer = setTimeout(function() {
             activateButton(allBtn, filters);
-            updateData(e.target.value.toLowerCase(), true)
+            updateData(e.target.value.toLowerCase(), true);
+            if (e.target.value.length > 0) {
+                window.datadog_logger.log('Integrations Search', {"browser": {"integrations":{"search":e.target.value.toLowerCase()}}}, 'info');
+            }
         }, 400);
     });
 
@@ -1552,6 +1555,7 @@ function initializeIntegrations(){
         if (button.classList.contains('active') || !button.getAttribute('data-filter')) return;
 
         var filter = button.getAttribute('data-filter');
+        window.datadog_logger.log('Integrations category selected', {"browser": {"integrations":{"category":button.innerText}}}, 'info');
         activateButton(button, filters);
         updateData(filter, false);
 
