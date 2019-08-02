@@ -103,6 +103,26 @@ The following attributes are related to the data used in network communication. 
 
 Typical integrations relying on these attributes include [Apache][1], [Varnish][2], [AWS ELB][3], [Nginx][4], [HAProxy][5], etc.
 
+### Geolocation
+
+The following attributes are related to the geolocation of ip addresses used in network communication. All fields are prefixed by `network.client.geoip` or `network.destination.geoip`.
+
+| **Fullname**                                 | **Type** | **Description**                                                         |
+| :---                                         | :---     | :----                                                                   |
+| `network.client.geoip.country.name`          | `string` | Name of the country
+|
+| `network.client.geoip.country.iso_code`      | `string` | [Iso Code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of the country (example: `US` for the United States, `FR` for France)                      
+|
+| `network.client.geoip.continent.code`        | `string` | Iso code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`)   
+|
+| `network.client.geoip.continent.name`        | `string` | Name of the Continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`)
+|
+| `network.client.geoip.subdivision.name`      | `string` | Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` Department in France)                   
+|
+| `network.client.geoip.subdivision.iso_code`  | `string` | [Iso Code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of the first subdivision level of the country (example: `CA` in the United States or the `SA` Department in France)                    
+|
+| `network.client.geoip.city.name`             | `String` | The Name of the city (example `Paris`, `New York`)                      |
+
 ### HTTP Requests
 
 These attributes are related to the data commonly used in HTTP requests and accesses. All attributes are prefixed by `http`.
