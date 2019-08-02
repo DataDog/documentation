@@ -1,5 +1,5 @@
 ---
-title: Update Indexes order
+title: Update Indexes Order
 type: apicontent
 order: 23.5
 external_redirect: /api/#update-indexes-order
