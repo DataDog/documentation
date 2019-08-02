@@ -150,7 +150,7 @@ Storing templates as local files and mounting them inside the containerized Agen
 
 Since Agent v6.2.0 (and v5.24.0), the default templates use the default port for the monitored software, instead of auto-detecting it. If you need to use a different port, provide a custom Autodiscovery template either in [Docker container labels](?tab=docker-labels) or [Kubernetes pod annotations](?tab=kubernetes-annotations).
 
-These integration templates are meant for basic cases. If you need a custom Datadog integration configuration to enable extra options, use different container identifiers, or use template variables indexing, write your own auto-configuration file:
+These integration templates are meant for basic cases. If you need a custom Datadog integration configuration to enable extra options, use different container identifiers—or use template variables indexing and write your own auto-configuration file:
 
 1. Create a `conf.d/<INTEGRATION_NAME>.d/conf.yaml` file on your host and add your custom auto-configuration.
 2. Mount your host `conf.d/` folder to the containerized Agent's `conf.d` folder. **Note**: On Kubernetes, you can use [ConfigMaps][1].
@@ -313,7 +313,7 @@ instances:
 
 This looks like a minimal [Redis integration configuration][1], but notice the `ad_identifiers` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any container on the same host that run a `redis` image. See the dedicated [Autodiscovery Identifier][2] documentation to learn more.
 
-If your Redis requires an additional `password` when accessing its stats endpoint and you want to correctly flag logs coming out of it. To add this new logic:
+If your Redis requires an additional `password` when accessing its stats endpoint, and you want to correctly flag logs coming out of it:
 
 1. Create the folders `conf.d/` and `conf.d/redis.d` on your host.
 2. Add the custom auto-configuration below to `conf.d/redis.d/conf.yaml` on your host.
@@ -369,7 +369,7 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 
 Configurations below apply to an Apache container image with the `<CONTAINER_IDENTIFIER>`: `httpd`. The Autodiscovery templates are configured to collect metrics and logs from the Apache container and set up a Datadog-HTTP check with instances for testing two endpoints.
 
-Check names are `apache` and `http_check` and their `<INIT_CONFIG>`, `<INSTANCE_CONFIG>`, and `<LOG_CONFIG>` full configurations can be found in their respective documentation page: [Datadog-Apache integration][8], [Datadog-HTTP check integration][9].
+Check names are `apache`, `http_check`, and their `<INIT_CONFIG>`, `<INSTANCE_CONFIG>`, and `<LOG_CONFIG>`. Full configurations can be found in their respective documentation page: [Datadog-Apache integration][8], [Datadog-HTTP check integration][9].
 
 {{< tabs >}}
 {{% tab "Kubernetes Pod Annotations" %}}
