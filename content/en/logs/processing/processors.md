@@ -176,6 +176,20 @@ An attribute is missing if it is not found in the log attributes, or if it canno
 * If the target attribute already exists, it is overwritten by the result of the formula.
 * Results are rounded up to the 9th decimal. For example, if the result of the formula is `0.1234567891`, the actual value stored for the attribute is `0.123456789`.
 
+## GeoIP parser
+
+The GeoIP parser takes a ip address attribute and does its best to extract the Continent, Country, Subdivision, and City information in the target attribute path.
+
+{{< img src="logs/processing/processors/geoip_processor.png" alt="GeoIP Processor" responsive="true" style="width:80%;">}}
+
+Most elements contains a `name` and `iso_code` (or `code` for continent) attribute. Subdivision is the first level of subdivision that the country uses such as States for the United States or Departments for France. 
+
+For example, using the above GeoIP Parser to extract gelocation from the `network.client.ip` attribute and to store that in the `network.client.geoip` attribute would provide the following result:
+
+{{< img src="logs/processing/processors/geoip_example.png" alt="GeoIP example" responsive="true" style="width:80%;">}}
+
+This processor uses GeoLite2 data created by [MaxMind](https://www.maxmind.com).
+
 ## Trace Remapper
 
 There are two ways to improve correlation between application traces and logs:
