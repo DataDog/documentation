@@ -188,7 +188,103 @@ If APM is enabled for this application and you wish to improve the correlation b
 {{% /tab %}}
 {{% tab "Log4j2" %}}
 
-There is a default log4j2 JSON Layout that can be used as shown in this [example][1].
+There is a default log4j2 JSON Layout that can be used. Here is an example:
+
+* `app.java`:
+
+```
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class App {
+
+
+    public static void main(String[] args) {
+
+        Logger logger = LogManager.getLogger(App.class);
+        logger.trace("Index :: Logging Message !");
+        String foo = "";
+        try {
+            foo.charAt(18);
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+}
+```
+* `log4j2.xml`: 
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <JSONLayout compact="true" eventEol="true" properties="true"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="TRACE">
+            <AppenderRef ref="Console" />
+        </Root>
+    </Loggers>
+</Configuration>
+```
+
+* `output.txt`: 
+
+```
+{"timeMillis":1477301898899,"thread":"main","level":"TRACE","loggerName":"App","message":"Index :: Logging Message !","endOfBatch":false,"loggerFqcn":"org.apache.logging.log4j.spi.AbstractLogger","contextMap":{},"threadId":1,"threadPriority":5}
+{"timeMillis":1477301898965,"thread":"main","level":"ERROR","loggerName":"App","message":"","thrown":{"commonElementCount":0,"localizedMessage":"String index out of range: 18","message":"String index out of range: 18","name":"java.lang.StringIndexOutOfBoundsException","extendedStackTrace":[{"class":"java.lang.String","method":"charAt","file":"String.java","line":658,"exact":false,"location":"?","version":"1.8.0_92"},{"class":"App","method":"main","file":"App.java","line":16,"exact":true,"location":"classes/","version":"?"},{"class":"sun.reflect.NativeMethodAccessorImpl","method":"invoke0","file":"NativeMethodAccessorImpl.java","line":-2,"exact":false,"location":"?","version":"1.8.0_92"},{"class":"sun.reflect.NativeMethodAccessorImpl","method":"invoke","file":"NativeMethodAccessorImpl.java","line":62,"exact":false,"location":"?","version":"1.8.0_92"},{"class":"sun.reflect.DelegatingMethodAccessorImpl","method":"invoke","file":"DelegatingMethodAccessorImpl.java","line":43,"exact":false,"location":"?","version":"1.8.0_92"},{"class":"java.lang.reflect.Method","method":"invoke","file":"Method.java","line":498,"exact":false,"location":"?","version":"1.8.0_92"},{"class":"com.intellij.rt.execution.application.AppMain","method":"main","file":"AppMain.java","line":144,"exact":true,"location":"idea_rt.jar","version":"?"}]},"endOfBatch":false,"loggerFqcn":"org.apache.logging.log4j.spi.AbstractLogger","contextMap":{},"threadId":1,"threadPriority":5}
+
+Process finished with exit code 0
+```
+
+* `pom.xml`:
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>datadog</groupId>
+    <artifactId>support</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.7</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.8.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.8.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.8.3</version>
+        </dependency>
+
+    </dependencies>
+
+
+</project>
+```
 
 **Inject trace IDs in your logs**
 
