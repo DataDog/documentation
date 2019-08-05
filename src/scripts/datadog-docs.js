@@ -1,5 +1,6 @@
 import Stickyfill from 'stickyfilljs';
 import Mousetrap from 'mousetrap';
+import mixitup from 'mixitup';
 // Setup for large screen ToC
 var largeScreenThreshold = 1710;
 var sidenavMapping = [];
