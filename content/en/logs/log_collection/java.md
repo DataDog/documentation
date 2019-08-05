@@ -188,31 +188,7 @@ If APM is enabled for this application and you wish to improve the correlation b
 {{% /tab %}}
 {{% tab "Log4j2" %}}
 
-There is a default log4j2 JSON Layout that can be used. Here is an example:
-
-* `app.java`:
-
-```
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-public class App {
-
-
-    public static void main(String[] args) {
-
-        Logger logger = LogManager.getLogger(App.class);
-        logger.trace("Index :: Logging Message !");
-        String foo = "";
-        try {
-            foo.charAt(18);
-        } catch (Exception e) {
-            logger.error(e);
-        }
-    }
-}
-```
-* `log4j2.xml`: 
+There is a default log4j2 JSON Layout that can be used. Add the following Appender to your `log4j2.xml` file: 
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -230,16 +206,7 @@ public class App {
 </Configuration>
 ```
 
-* `output.txt`: 
-
-```
-{"timeMillis":1477301898899,"thread":"main","level":"TRACE","loggerName":"App","message":"Index :: Logging Message !","endOfBatch":false,"loggerFqcn":"org.apache.logging.log4j.spi.AbstractLogger","contextMap":{},"threadId":1,"threadPriority":5}
-{"timeMillis":1477301898965,"thread":"main","level":"ERROR","loggerName":"App","message":"","thrown":{"commonElementCount":0,"localizedMessage":"String index out of range: 18","message":"String index out of range: 18","name":"java.lang.StringIndexOutOfBoundsException","extendedStackTrace":[{"class":"java.lang.String","method":"charAt","file":"String.java","line":658,"exact":false,"location":"?","version":"1.8.0_92"},{"class":"App","method":"main","file":"App.java","line":16,"exact":true,"location":"classes/","version":"?"},{"class":"sun.reflect.NativeMethodAccessorImpl","method":"invoke0","file":"NativeMethodAccessorImpl.java","line":-2,"exact":false,"location":"?","version":"1.8.0_92"},{"class":"sun.reflect.NativeMethodAccessorImpl","method":"invoke","file":"NativeMethodAccessorImpl.java","line":62,"exact":false,"location":"?","version":"1.8.0_92"},{"class":"sun.reflect.DelegatingMethodAccessorImpl","method":"invoke","file":"DelegatingMethodAccessorImpl.java","line":43,"exact":false,"location":"?","version":"1.8.0_92"},{"class":"java.lang.reflect.Method","method":"invoke","file":"Method.java","line":498,"exact":false,"location":"?","version":"1.8.0_92"},{"class":"com.intellij.rt.execution.application.AppMain","method":"main","file":"AppMain.java","line":144,"exact":true,"location":"idea_rt.jar","version":"?"}]},"endOfBatch":false,"loggerFqcn":"org.apache.logging.log4j.spi.AbstractLogger","contextMap":{},"threadId":1,"threadPriority":5}
-
-Process finished with exit code 0
-```
-
-* `pom.xml`:
+* Then the following dependencies into your `pom.xml`:
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
