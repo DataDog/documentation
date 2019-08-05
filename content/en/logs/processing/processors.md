@@ -524,7 +524,7 @@ Most elements contains a `name` and `iso_code` (or `code` for continent) attribu
 
 For example, using the above GeoIP Parser to extract gelocation from the `network.client.ip` attribute and to store that in the `network.client.geoip` attribute would provide the following result:
 
-{{< img src="logs/processing/processors/geoip_example.png" alt="GeoIP example" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/processors/geoip_example.png" alt="GeoIP example" responsive="true" style="width:60%;">}}
 
 This processor uses GeoLite2 data created by [MaxMind](https://www.maxmind.com).
 
@@ -535,7 +535,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 
 ```json
 {
-    "type": "geoip-parser",
+    "type": "geo-ip-parser",
     "name": "Parse the geolocation elements from network.client.ip attribute.",
     "enabled": true,
     "sources": ["network.client.ip"],
