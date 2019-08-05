@@ -1,5 +1,8 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
 <script type="text/javascript">
+
+var algoliaTimer;
+
 var search_desktop = docsearch({
      appId: '{{ $.Site.Params.algolia.appId }}',
      apiKey: '{{ $.Site.Params.algolia.apiKey }}',
@@ -11,6 +14,24 @@ var search_desktop = docsearch({
      autocompleteOptions: {
         autoselect: false
      },
+
+     queryHook: function(query){
+         clearTimeout(algoliaTimer);
+         algoliaTimer = setTimeout(
+            function(){
+               if (query.length > 0) {
+                     window.datadog_logger.log('Algolia Search', {
+                        "browser": {
+                           "algolia": {
+                              "search": query.toLowerCase()
+                           }
+                        }
+                     }, 'info')
+                  }
+            },400
+         )
+     },
+
      debug: false // Set debug to true if you want to inspect the dropdown
 });
 var desktop_enable_enter = true;
