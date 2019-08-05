@@ -38,7 +38,7 @@ All alerted states are included on the [weekly monitor report][3] even if the mo
 
 ## Manage Downtime
 
-Navigate to the [Manage Downtime][4] page by hovering over **Monitors** in the main menu, then select **Manage Downtime**. You may also navigate to the *Manage Downtime* page from other Monitor related pages by clicking the link at the top of the page.
+Navigate to the [Manage Downtime][4] page by hovering over **Monitors** in the main menu, then select **Manage Downtime**.
 
 {{< img src="monitors/downtimes/downtime-nav.png" alt="downtime-nav" responsive="true" >}}
 
