@@ -275,8 +275,8 @@ h5{
   }
   .tab-content a,
   & > a,
-  & > p > a,
-  & > ol li a,
+  & p a,
+  & ol li a,
   & > ul li a {
     color: #4a4a4a;
     border-bottom: 1px solid $gray-600;
@@ -681,4 +681,12 @@ table, .table {
   .wide-parent {
     width: 100%;
   }
+}
+
+#mainContent {
+  transition: opacity .25s linear;
+}
+
+#mainContent.loading {
+  opacity: 0.25;
 }

@@ -71,13 +71,13 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
 ## Configuration
 
 1. Modifiez le fichier `sortdb.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][7] pour commencer à recueillir vos [métriques](#collecte-de-metriques) Sortdb.
-  Consultez le [fichier d'exemple sortdb.d/conf.yaml][9] pour découvrir toutes les options de configuration disponibles.
+  Consultez le [fichier d'exemple sortdb.d/conf.yaml][8] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][10].
+2. [Redémarrez l'Agent][9].
 
 ## Validation
 
-[Lancez la sous-commande status de l'Agent][11] et cherchez `sortdb` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][10] et cherchez `sortdb` dans la section Checks.
 
 ## Compatibilité
 
@@ -97,6 +97,9 @@ Le check SortDB n'inclut aucun check de service pour le moment.
 
 Le check SortDB n'inclut aucun événement pour le moment.
 
+
+
+{{< get-dependencies >}}
 [1]: https://github.com/jehiah/sortdb
 [2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
 [3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
@@ -104,11 +107,6 @@ Le check SortDB n'inclut aucun événement pour le moment.
 [5]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
 [6]: https://app.datadoghq.com/account/settings#agent
 [7]: https://docs.datadoghq.com/fr/getting_started/integrations
-[8]: https://docs.datadoghq.com/fr/agent/faq/agent-configuration-files/#agent-configuration-directory
-[9]: https://github.com/DataDog/integrations-extras/blob/master/sortdb/datadog_checks/sortdb/data/conf.yaml.example
-[10]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
-[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#service-status
-[12]: https://github.com/DataDog/integrations-extras/blob/master/sortdb/metadata.csv
-
-
-{{< get-dependencies >}}
+[8]: https://github.com/DataDog/integrations-extras/blob/master/sortdb/datadog_checks/sortdb/data/conf.yaml.example
+[9]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
+[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#service-status

@@ -125,6 +125,21 @@ aside.sidenav {
     ul li.open > ul {
       display:block;
     }
+    > ul > li.open {
+      > a { // Style the first a tag nested in an open list element.
+        color: $ddpurple;
+        border: 1px solid transparent;
+      }
+      > a > span { // The nested span in a
+        // border-bottom: 1px solid $ddpurple;
+      }
+      .hover {
+        display: inline-block;
+      }
+      .static {
+        display: none;
+      }
+    }
     ul li.open > ul,
     ul li.active > ul {
       li {
@@ -136,7 +151,11 @@ aside.sidenav {
         }
       }
     }
-    ul {
+    // First level should get underline no other li nested
+    > ul {
+      > li.open > a > span { 
+        border-bottom: 1px solid $ddpurple;
+      }
       li {
         a {
           color:#000;
@@ -157,8 +176,8 @@ aside.sidenav {
             background:transparent;
             border-radius:0px;
             color: $ddpurple;
-            border:1px solid transparent;
-            border-bottom: 1px solid $ddpurple;
+            // border:1px solid transparent;
+            // border-bottom: 1px solid $ddpurple;
           }
           .hover {
             display:none;

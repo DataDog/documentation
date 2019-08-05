@@ -14,9 +14,7 @@ code_languages:
   - display_name: Curl
     key: bash
 footer_scripts:
-  - snowplow: false
   - marketo: false
-  - adroll: false
 
 algolia:
   appId: EOIG7V0A2O

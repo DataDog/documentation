@@ -102,6 +102,9 @@ Le check renvoie :
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
+
+
+{{< get-dependencies >}}
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
 [3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
@@ -114,6 +117,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][12].
 [10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#service-status
 [12]: http://docs.datadoghq.com/help
-
-
-{{< get-dependencies >}}
