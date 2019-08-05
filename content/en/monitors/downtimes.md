@@ -26,11 +26,11 @@ Monitors trigger events when they change state between `ALERT`, `WARNING` (if en
 
 {{< img src="monitors/downtimes/downtime_on_alert.png" alt="downtime on alert" responsive="true" style="width:80%;">}}
 
-If a monitor transitions states during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`) and remains in that state once a scheduled downtime expires, it does **NOT** trigger a notification. However, it does trigger a recovery event once data returns for that scope or the monitor returns to an `OK` state.
+If a monitor transitions states during a downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`) and remains in that state once a scheduled downtime expires, it does **NOT** trigger a notification. However, it does trigger a recovery event once data returns for that scope or the monitor returns to an `OK` state.
 
 This behavior is designed to prevent spammy `NO DATA` state alerts when using the *Autoresolve* feature. If you would prefer that the monitor trigger a `NO DATA` state event at the time that the silencing expires, [reach out to the Datadog support team][2] to request that this feature is enabled for your account. This only affects instances when a monitor exits a downtime period in a `NO DATA` state.
 
-If a monitor triggers an alert **before** a downtime and recovers **during** that downtime, then a recovery event is sent despite the downtime (if this is the first recovery during that downtime).
+If a monitor triggers an alert **before** a downtime and recovers **during** that downtime, then a recovery event is sent during the downtime (if this is the first recovery during that downtime).
 
 ### Monitor report
 
@@ -38,7 +38,7 @@ All alerted states are included on the [weekly monitor report][3] even if the mo
 
 ## Manage Downtime
 
-Navigate to the [Manage Downtime][4] page by highlighting the *Monitors* tab in the main menu and selecting the *Manage Downtime* link. You may also navigate to the *Manage Downtime* page from other Monitor related pages by clicking the link at the top of the page.
+Navigate to the [Manage Downtime][4] page by hovering over **Monitors** in the main menu, then select **Manage Downtime**. You may also navigate to the *Manage Downtime* page from other Monitor related pages by clicking the link at the top of the page.
 
 {{< img src="monitors/downtimes/downtime-nav.png" alt="downtime-nav" responsive="true" >}}
 
