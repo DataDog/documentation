@@ -109,20 +109,13 @@ The following attributes are related to the geolocation of ip addresses used in 
 
 | **Fullname**                                 | **Type** | **Description**                                                         |
 | :---                                         | :---     | :----                                                                   |
-| `network.client.geoip.country.name`          | `string` | Name of the country
-|
-| `network.client.geoip.country.iso_code`      | `string` | [Iso Code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of the country (example: `US` for the United States, `FR` for France)
-|
-| `network.client.geoip.continent.code`        | `string` | Iso code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`)
-|
-| `network.client.geoip.continent.name`        | `string` | Name of the Continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`)
-|
-| `network.client.geoip.subdivision.name`      | `string` | Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` Department in France)
-|
-| `network.client.geoip.subdivision.iso_code`  | `string` | [Iso Code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of the first subdivision level of the country (example: `CA` in the United States or the `SA` Department in France)
-|
-| `network.client.geoip.city.name`             | `String` | The Name of the city (example `Paris`, `New York`)
-|
+| `network.client.geoip.country.name`          | `string` | Name of the country |
+| `network.client.geoip.country.iso_code`      | `string` | [Iso Code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of the country (example: `US` for the United States, `FR` for France) |
+| `network.client.geoip.continent.code`        | `string` | Iso code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`) |
+| `network.client.geoip.continent.name`        | `string` | Name of the Continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`) |
+| `network.client.geoip.subdivision.name`      | `string` | Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` Department in France) |
+| `network.client.geoip.subdivision.iso_code`  | `string` | [Iso Code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of the first subdivision level of the country (example: `CA` in the United States or the `SA` Department in France) |
+| `network.client.geoip.city.name`             | `String` | The Name of the city (example `Paris`, `New York`) |
 
 ### HTTP Requests
 
@@ -152,8 +145,7 @@ These attributes provide details about the parsed parts of the HTTP URL. They ar
 | `http.url_details.host`        | `string` | The HTTP host part of the URL.                                                        |
 | `http.url_details.port`        | `number` | The HTTP port part of the URL.                                                        |
 | `http.url_details.path`        | `string` | The HTTP path part of the URL.                                                        |
-| `http.url_details.queryString` | `object` | The HTTP query string parts of the URL decomposed as query params key/value attributes.
-|
+| `http.url_details.queryString` | `object` | The HTTP query string parts of the URL decomposed as query params key/value attributes. |
 | `http.url_details.scheme`      | `string` | The protocol name of the URL (HTTP or HTTPS)                                          |
 
 #### User-Agent attributes
