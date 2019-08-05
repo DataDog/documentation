@@ -10,7 +10,7 @@ external_redirect: /api/#get-all-pipelines
 `GET /v1/logs/config/pipelines`
 
 ##### Example Request
-{{< code-snippets basename="get_all_pipeline" >}}
+{{< code-snippets basename="get_all_pipelines" >}}
 
 ##### Example Response
-{{< code-snippets basename="result.get_all_pipeline" >}}
+{{< code-snippets basename="result.get_all_pipelines" >}}
