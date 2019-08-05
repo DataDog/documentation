@@ -111,17 +111,18 @@ The following attributes are related to the geolocation of ip addresses used in 
 | :---                                         | :---     | :----                                                                   |
 | `network.client.geoip.country.name`          | `string` | Name of the country
 |
-| `network.client.geoip.country.iso_code`      | `string` | [Iso Code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of the country (example: `US` for the United States, `FR` for France)                      
+| `network.client.geoip.country.iso_code`      | `string` | [Iso Code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of the country (example: `US` for the United States, `FR` for France)
 |
-| `network.client.geoip.continent.code`        | `string` | Iso code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`)   
+| `network.client.geoip.continent.code`        | `string` | Iso code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`)
 |
 | `network.client.geoip.continent.name`        | `string` | Name of the Continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`)
 |
-| `network.client.geoip.subdivision.name`      | `string` | Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` Department in France)                   
+| `network.client.geoip.subdivision.name`      | `string` | Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` Department in France)
 |
-| `network.client.geoip.subdivision.iso_code`  | `string` | [Iso Code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of the first subdivision level of the country (example: `CA` in the United States or the `SA` Department in France)                    
+| `network.client.geoip.subdivision.iso_code`  | `string` | [Iso Code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of the first subdivision level of the country (example: `CA` in the United States or the `SA` Department in France)
 |
-| `network.client.geoip.city.name`             | `String` | The Name of the city (example `Paris`, `New York`)                      |
+| `network.client.geoip.city.name`             | `String` | The Name of the city (example `Paris`, `New York`)
+|
 
 ### HTTP Requests
 
@@ -132,26 +133,28 @@ Typical integrations relying on these attributes include [Apache][1], Rails, [AW
 #### Common attributes
 
 
-| **Fullname**       | **Type** | **Description**                                                                                          |
-| :---               | :---     | :----                                                                                                    |
-| `http.url`         | `string` | The URL of the HTTP request.                                                                              |
-| `http.status_code` | `number` | The HTTP response status code.                                                                            |
-| `http.method`      | `string` | Indicates the desired action to be performed for a given resource.                                          |
-| `http.referer`     | `string` | HTTP header field that identifies the address of the webpage that linked to the resource being requested.|
-| `http.request_id`  | `string` | The ID of the HTTP request.                                                                              |
+| **Fullname**       | **Type** | **Description**                                                                                    |
+| :---               | :---     | :----                                                                                              |
+| `http.url`         | `string` | The URL of the HTTP request.                                                                      |
+| `http.status_code` | `number` | The HTTP response status code.                                                                    |
+| `http.method`      | `string` | Indicates the desired action to be performed for a given resource.                                |
+| `http.referer`     | `string` | HTTP header field that identifies the address of the webpage that linked to the resource being requested.
+|
+| `http.request_id`  | `string` | The ID of the HTTP request.                                                                       |
 | `http.useragent`   | `string` | The User-Agent as it is sent (raw format). [See below for more details](#user-agent-attributes). |
 
 #### URL details attributes
 
 These attributes provide details about the parsed parts of the HTTP URL. They are generally generated thanks to the [URL parser][7]. All attributes are prefixed by `http.url_details`.
 
-| **Fullname**                   | **Type** | **Description**                                                                         |
-| :---                           | :---     | :----                                                                                   |
-| `http.url_details.host`        | `string` | The HTTP host part of the URL.                                                          |
-| `http.url_details.port`        | `number` | The HTTP port part of the URL.                                                          |
-| `http.url_details.path`        | `string` | The HTTP path part of the URL.                                                          |
-| `http.url_details.queryString` | `object` | The HTTP query string parts of the URL decomposed as query params key/value attributes. |
-| `http.url_details.scheme`      | `string` | The protocol name of the URL (HTTP or HTTPS)                                            |
+| **Fullname**                   | **Type** | **Description**                                                                        |
+| :---                           | :---     | :----                                                                                 |
+| `http.url_details.host`        | `string` | The HTTP host part of the URL.                                                        |
+| `http.url_details.port`        | `number` | The HTTP port part of the URL.                                                        |
+| `http.url_details.path`        | `string` | The HTTP path part of the URL.                                                        |
+| `http.url_details.queryString` | `object` | The HTTP query string parts of the URL decomposed as query params key/value attributes.
+|
+| `http.url_details.scheme`      | `string` | The protocol name of the URL (HTTP or HTTPS)                                          |
 
 #### User-Agent attributes
 
@@ -184,7 +187,7 @@ Database related attributes are prefixed by `db`.
 
 | **Fullname**   | **Type** | **Description**                                                                                                                       |
 | :---           | :---     | :----                                                                                                                                 |
-| `db.instance`  | `string` | Database instance name. E.g., in Java, if `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"`, the instance name is `customers`.       |
+| `db.instance`  | `string` | Database instance name. E.g., in Java, if `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"`, the instance name is `customers`.   |
 | `db.statement` | `string` | A database statement for the given database type. E.g., for mySQL: `"SELECT * FROM wuser_table";` for Redis: `"SET mykey 'WuValue'"`. |
 | `db.operation` | `string` | The operation that was performed ("query", "update", "delete",...).                                                                   |
 | `db.user`      | `string` | User that performs the operation.                                                                                                     |
