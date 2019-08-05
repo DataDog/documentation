@@ -70,10 +70,10 @@
            playsinline
            autoplay
            loop >
-      <source src="{{ print $local_ref | relURL }}"
+      <source src="{{ print $img | relURL }}"
               type="video/mp4"
               media="(min-width: 480px)" >
-      <source src="{{ print (replace $local_ref ".mp4" "_small.mp4") | relURL }}"
+      <source src="{{ print (replace $img ".mp4" "_small.mp4") | relURL }}"
               type="video/mp4"
               media="(min-width: 0px)" >
       <div class="play"></div>

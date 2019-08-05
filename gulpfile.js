@@ -236,8 +236,8 @@ gulp.task('jshint', function () {
 
 // IMAGES
 gulp.task("images", function () {
-  del(["static/images/**/*"]);
-  gulp.src("src/images/**/*")
+  del(["static/images/**/*.{png,gif,jpg}"]);
+  gulp.src("src/images/**/*.{png,gif,jpg}")
     .pipe(gulpif(enabled.hashStatic, hash()))
     .pipe(gulp.dest("static/images"))
     .pipe(hash.manifest("images.json"))
