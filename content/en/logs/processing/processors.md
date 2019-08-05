@@ -510,23 +510,24 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 {{% /tab %}}
 {{< /tabs >}}
 
-## GeoIP parser
+## GeoIP Parser
 
-The GeoIP parser takes a ip address attribute and does its best to extract the Continent, Country, Subdivision, and City information in the target attribute path.
+The GeoIP parser takes an IP address attribute and extracts if available the Continent, Country, Subdivision, and City information in the target attribute path.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
 {{< img src="logs/processing/processors/geoip_processor.png" alt="GeoIP Processor" responsive="true" style="width:80%;">}}
 
-Most elements contains a `name` and `iso_code` (or `code` for continent) attribute. Subdivision is the first level of subdivision that the country uses such as States for the United States or Departments for France. 
+Most elements contains a `name` and `iso_code` (or `code` for continent) attribute. `subdivision` is the first level of subdivision that the country uses such as "States" for the United States or "Departments" for France.
 
-For example, using the above GeoIP Parser to extract gelocation from the `network.client.ip` attribute and to store that in the `network.client.geoip` attribute would provide the following result:
+Find below an example of the GeoIP Parser that extracts gelocation from the `network.client.ip` attribute and stores it into the `network.client.geoip` attribute:
 
 {{< img src="logs/processing/processors/geoip_example.png" alt="GeoIP example" responsive="true" style="width:60%;">}}
 
-This processor uses GeoLite2 data created by [MaxMind](https://www.maxmind.com).
+**Note**: This processor uses GeoLite2 data created by [MaxMind][1].
 
+[1]: https://www.maxmind.com
 {{% /tab %}}
 {{% tab "API" %}}
 
