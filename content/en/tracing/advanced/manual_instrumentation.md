@@ -300,7 +300,7 @@ dd_trace("CustomDriver", "doWork", function (...$args) {
     $span->setTag(Tags\RESOURCE_NAME, $this->workToDo);
 
     try {
-        // Execute the original method. Note: dd_trace_forward_call() - will handle any parameters automatically
+        // Execute the original method. Note: dd_trace_forward_call() - handles any parameters automatically
         $result = dd_trace_forward_call();
         // Set a tag based on the return value
         $span->setTag('doWork.size', count($result));
