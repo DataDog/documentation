@@ -517,7 +517,6 @@ The GeoIP parser takes a ip address attribute and does its best to extract the C
 {{< tabs >}}
 {{% tab "UI" %}}
 
-
 {{< img src="logs/processing/processors/geoip_processor.png" alt="GeoIP Processor" responsive="true" style="width:80%;">}}
 
 Most elements contains a `name` and `iso_code` (or `code` for continent) attribute. Subdivision is the first level of subdivision that the country uses such as States for the United States or Departments for France. 
@@ -551,6 +550,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 | `sources` | Array of Strings | no       | Array of source attributes, default: `network.cient.ip`                                                                  |
 | `target`  | String           | yes      | Name of the parent attribute that contains all the extracted details from the `sources`, default: `network.client.geoip` |
 
+[1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
 
