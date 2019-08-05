@@ -1,5 +1,5 @@
 # Hugo
-dist/
+public/
 data/integrations/
 data/service_checks/
 

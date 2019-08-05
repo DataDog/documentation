@@ -28,8 +28,8 @@ const prodConfig = (env) => merge(common(env), {
 			new OptimizeCSSAssetsPlugin({}),
 			new CleanWebpackPlugin({
 				cleanOnceBeforeBuildPatterns: [
-				  "dist/**/*.js",
-				  "dist/**/*.css",
+				  "public/**/*.js",
+				  "public/**/*.css",
 				  "data/manifest.json"
 				]})
 		]

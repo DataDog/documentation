@@ -28,8 +28,8 @@ module.exports = merge(common(), {
     plugins: [
         new CleanWebpackPlugin({
             cleanOnceBeforeBuildPatterns: [
-                'dist/**/*.js',
-                'dist/**/*.css',
+                'public/**/*.js',
+                'public/**/*.css',
                 'data/manifest.json'
             ]
         }),

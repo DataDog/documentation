@@ -38,7 +38,7 @@ clean-all: stop  ## clean everything.
 	make clean-docker
 
 clean-build:  ## remove build artifacts.
-	@if [ -d dist ]; then rm -r dist; fi
+	@if [ -d public ]; then rm -r public; fi
 
 clean-docker:  ## remove image.
 	@if [[ `docker ps -a | grep docs` ]]; then printf  "removing:" && docker rm -f docs; fi || true

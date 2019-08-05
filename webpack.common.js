@@ -60,7 +60,7 @@ const commonConfig = env => {
             'main-dd-css': './styles/style.scss'
         },
         output: {
-            path: path.join(__dirname, 'dist', 'static'),
+            path: path.join(__dirname, 'public', 'static'),
             publicPath: 'static'
         },
 

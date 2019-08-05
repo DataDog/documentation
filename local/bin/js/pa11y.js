@@ -6,7 +6,7 @@ const { Parser } = require('json2csv');
 
 const fileArray = [];
 
-// some html files in dist have weird characters, pa11y fails to read them, must exclude.
+// some html files in public/ have weird characters, pa11y fails to read them, must exclude.
 const fileExclusions = [
     // '&ap=434&fe=21625&dc=11210&at=GUdVQ18ZT08%3D&jsonp=NREUM.setToken',
     // '%E2%80%8E',
@@ -17,7 +17,7 @@ const fileExclusions = [
 ];
 
 // create array of all html files in starting folder
-fromDir('./dist', '.html');
+fromDir('./public', '.html');
 
 function fromDir(startPath, filter) {
     // console.log('Starting from dir '+startPath+'/');
@@ -61,8 +61,8 @@ function fromDir(startPath, filter) {
 }
 
 const testUrls = [
-    './dist/about/press/index.html',
-    './dist/about/team/index.html'
+    './public/about/press/index.html',
+    './public/about/team/index.html'
 ];
 
 const pa11yConfig = {
