@@ -26,8 +26,6 @@ With log-based metrics, generate custom metrics from the count of logs that matc
 
 ## Generate a log-based metric
 
-**Creating and editing log-based metrics is limited to admin users.**
-
 {{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="Generate Logs to metric" responsive="true" style="width:80%;">}}
 
 To generate a new log-based metric, go to the [Configuration page][4] of your Datadog account and select the *[Generate Metrics][5]* tab, then the **New Metric+** button.
