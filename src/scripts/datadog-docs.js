@@ -1,6 +1,8 @@
 import Stickyfill from 'stickyfilljs';
 import Mousetrap from 'mousetrap';
 import mixitup from 'mixitup';
+import algoliasearch from 'algoliasearch';
+
 // Setup for large screen ToC
 var largeScreenThreshold = 1710;
 var sidenavMapping = [];
