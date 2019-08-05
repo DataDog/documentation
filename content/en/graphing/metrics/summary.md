@@ -15,7 +15,7 @@ further_reading:
 
 The [Metrics Summary page][1] displays a list of all the [metrics][2] reported to Datadog under a specified time frame: the past hour, day, or week. This list can be filtered by name. Clicking on a metric brings up a panel with more detailed information.
 
-{{< img src="graphing/metrics/summary/summary.gif" alt="Summary" responsive="true" style="width:80%;">}}
+{{< img src="graphing/metrics/summary/summary.mp4" alt="Summary" video="true" responsive="true" >}}
 
 ## Metric panel
 
@@ -30,19 +30,19 @@ Key information about your metric can be seen:
 * **Number of hosts**: The total number of hosts reporting this metric.
 * **Number of tags**: The total number of tags attached to this metric. Read more about [tagging][6] and [assigning tags][7].
 * **Metrics metadata**: All metadata attached to your metric:
-    * Metric description 
+    * Metric description
     * [Metric unit][8]
-    * [Metric type][9] 
+    * [Metric type][9]
     * The integration name, if this metric is coming from an [integration][10]
     * The interval of collection of this metric
 
-### Metric metadata 
+### Metric metadata
 
-Every piece of metric metadata can be manually edited: 
+Every piece of metric metadata can be manually edited:
 
 #### Edit the metric description
 
-Editing the metric description can help you understand what a metric does.  
+Editing the metric description can help you understand what a metric does.
 If a metric is coming from an integration and you notice a wrong description, [open an issue in the Datadog documentation GitHub repository][11].
 
 #### Edit the metric unit or add a custom unit
@@ -55,7 +55,7 @@ When submitting custom metrics to Datadog, it is possible to change the [unit of
 
 #### Edit the metric type
 
-Editing the metric type can help you match the real metric type send.  
+Editing the metric type can help you match the real metric type send.
 **Warning**: This changes your metric behavior in **ALL** your analytics and monitors; do this at your own risk.
 
 ## Further reading
