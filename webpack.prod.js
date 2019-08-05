@@ -30,7 +30,7 @@ const prodConfig = (env) => merge(common(env), {
 				cleanOnceBeforeBuildPatterns: [
 				  "dist/**/*.js",
 				  "dist/**/*.css",
-				  "site/data/manifest.json"
+				  "data/manifest.json"
 				]})
 		]
 	}

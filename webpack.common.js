@@ -3,31 +3,8 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const { isString } = require('lodash');
-const config = require('./config-corp');
+
 require('@babel/polyfill');
-
-const { getEntry, getAllEntryNames } = require('./src/build/entries.js');
-
-function getConfig() {
-    console.log('process.env.NODE_ENV: ', process.env.NODE_ENV);
-    if (process.env.NODE_ENV === 'production') {
-        return config['production'];
-    } else if (process.env.NODE_ENV === 'preview') {
-        return config['preview'];
-    } else {
-        return config['local'];
-    }
-}
-
-const entries = getAllEntryNames();
-const entryNames = isString(entries) ? entries.split(',') : entries;
-
-// const manifest2 = new WebpackAssetsManifest({
-//     customize(entry, original, manifest, asset) {
-//         console.log('manifest: ', manifest);
-//     }
-// });
 
 const commonConfig = env => {
     const plugins = [
@@ -179,13 +156,7 @@ const commonConfig = env => {
         },
         resolve: {
             extensions: ['.json', '.js', '.jsx']
-        },
-        externals: [
-            /^vendor\/.+\.js$/,
-            {
-                Config: JSON.stringify(getConfig())
-            }
-        ]
+        }
     };
 };
 

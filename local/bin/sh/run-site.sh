@@ -38,29 +38,11 @@ if [ ${RUN_SERVER} == true ]; then
 		echo "checking that node modules are installed and up-to-date"
     npm --global install yarn && \
     npm cache clean --force && yarn install --frozen-lockfile
-	webpackargs ="--config webpack.dev.js"
-	hugoargs ="-D -d ../dist -s site --port 3000 --navigateToChanged --noHTTPCache --ignoreCache --disableFastRender"
     echo "starting webpack and hugo build"
 	yarn run start
     
-    
-    
     sleep 5
 	fi
-
-	# # hugo
-	# args=""
-	# if [ ${RENDER_SITE_TO_DISK} != "false" ]; then
-	# 	args="${args} --renderToDisk"
-	# fi
-	# # hugo server defaults to --environment development
-	# ./node_modules/.bin/hugo server ${args} &
-	# sleep 5
-
-	# if [ ${RUN_WEBPACK} == true ]; then
-	# 	echo "webpack watch..."
-	# 	gulp watch
-	# fi
 
 else
 	exit 0

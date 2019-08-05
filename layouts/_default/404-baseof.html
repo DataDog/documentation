@@ -26,7 +26,6 @@
     {{- partial "hreflang.html" . -}}
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="icon" type="image/png" href="https://docs.datadoghq.com/favicon.ico">
-    {{/*  <link rel="stylesheet" href="{{ .Site.BaseURL }}css/{{ (index .Site.Data.manifests.css "main-dd-css" ) }}">  */}}
     <link rel="stylesheet" href="{{ (index $.Site.Data.manifest "main-dd-css") | relURL}}"></link>
 
     {{- if ne $.Params.disable_opengraph_meta_tags true -}}
@@ -62,7 +61,6 @@
 
     {{ partial "footer/footer.html" . }}
 
-    {{/*  <script src="{{ .Site.BaseURL }}js/{{ (index .Site.Data.manifests.js "main-dd-js.js") }}"></script>  */}}
     <script src="{{ (index $.Site.Data.manifest "vendor.js") | relURL}}"></script>
     <script src="{{ (index $.Site.Data.manifest "main-dd-js.js") | relURL}}"></script>
 
