@@ -103,8 +103,8 @@ Vous pouvez modifier le texte de ces événements en utilisant par exemple le co
 *Cette documentation a été vérifiée le 28 octobre 2015 avec l'[AMI Splunk Enterprise sur AWS][2]*
 
 
+[1]: https://app.datadoghq.com/account/settings#api
+[2]: https://aws.amazon.com/marketplace/pp/B00PUXWXNE/ref=sp_mpg_product_title?ie=UTF8&sr=0-3
 
 
 {{< get-dependencies >}}
-[1]: https://app.datadoghq.com/account/settings#api
-[2]: https://aws.amazon.com/marketplace/pp/B00PUXWXNE/ref=sp_mpg_product_title?ie=UTF8&sr=0-3
