@@ -17,8 +17,8 @@ sources:
   dst: "{lang}.json"
 - src: "config/_default/params.en.yaml"
   dst: "config/_default/params.{lang}.yaml"
-- src: "config/_default/menus.en.yaml"
-  dst: "config/_default/menus.{lang}.yaml"
+- src: "config/_default/menus/menus.en.yaml"
+  dst: "config/_default/menus/menus.{lang}.yaml"
 
 ignores:
   - "content/en/**/faq/*.md"
