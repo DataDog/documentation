@@ -6,7 +6,7 @@ external_redirect: /api/#edit-test
 ---
 
 ##### Signature
-`PUT /v1/synthetics/tests/<TEST_ID>`
+`PUT /v1/synthetics/tests/<SYNTHETICS_TEST_PUBLIC_ID>`
 
 ##### Example Request
 
