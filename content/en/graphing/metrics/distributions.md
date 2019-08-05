@@ -9,8 +9,8 @@ further_reading:
     tag: "Documentation"
     text: "Using Distributions in DogStatsD"
 ---
-<div class="alert alert-warning">	
-This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Datadog support</a> to enable distribution metrics for your account.	
+<div class="alert alert-warning">
+This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Datadog support</a> to enable distribution metrics for your account.
 </div>
 
 ## Overview
@@ -90,9 +90,9 @@ This creates (3 + 1) * (2 + 1) * 10 = 120, in addition to the 45,090, above, for
 
 As you can see, aggregating by multiple sets of tags increases the number of timeseries additively, limiting timeseries growth.
 
-The following gif demonstrates inspecting the aggregations created for a metric, `intake.batch_api_keys_for_org`. You would query `{availability-zone, role}` or `{instance-type, role}`, but not `{availability-zone, instance-type}`.
+The following video demonstrates inspecting the aggregations created for a metric, `intake.batch_api_keys_for_org`. You would query `{availability-zone, role}` or `{instance-type, role}`, but not `{availability-zone, instance-type}`.
 
-{{< img src="graphing/metrics/distributions/Distros_Tagging.gif" alt="Distros_Tagging" responsive="true" style="width:80%;">}}
+{{< img src="graphing/metrics/distributions/Distros_Tagging.mp4" alt="Distros_Tagging" video="true" responsive="true" >}}
 
 ## Further reading
 

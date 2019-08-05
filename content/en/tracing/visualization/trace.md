@@ -29,7 +29,7 @@ Calculate the breakdown of execution time and adjust the color scheme by either 
 
 To get a closer look at the flame graph, zoom in by scrolling:
 
-{{< img src="tracing/visualization/trace/trace_zoom.gif" alt="Trace Error" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/trace/trace_zoom.mp4" alt="Trace Error" video="true" responsive="true" >}}
 
 The List view aggregates resources by service and sorts them according to their corresponding count of spans. Services are sorted per relative percentage of execution time spent by the trace in each service:
 
@@ -44,7 +44,7 @@ Click on a span in the flame graph to show its metadata below the graph. If ther
 
 {{< img src="tracing/visualization/trace/trace_error.png" alt="Trace Error" responsive="true" style="width:90%;">}}
 
-If you are analyzing a trace reporting an error, the error has a specific display if you follow the special meaning tags rules. When submitting your traces you can add attributes to the `meta` parameter. 
+If you are analyzing a trace reporting an error, the error has a specific display if you follow the special meaning tags rules. When submitting your traces you can add attributes to the `meta` parameter.
 
 Some attributes have special meanings that lead to a dedicated display or specific behavior in Datadog:
 

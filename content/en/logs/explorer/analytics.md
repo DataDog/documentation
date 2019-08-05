@@ -137,7 +137,7 @@ The evolution of the **top Status Codes** according to their **Throughput**, alo
 
 Select or click on a section of the graph to either zoom in the graph or see the list of logs corresponding to your selection:
 
-{{< img src="logs/explorer/analytics/view_logs.gif" alt="view logs" responsive="true" style="width:80%;">}}
+{{< img src="logs/explorer/analytics/view_logs.mp4" alt="view logs" video="true" responsive="true" >}}
 
 ## How aggregations work behind the scenes
 
@@ -147,8 +147,7 @@ Let's illustrate this on a fictive bar timeline where each bar represents a time
 
 In the following example, each dot represents one log event. The X-axis is the timestamp of the log, and the Y-axis is the value of a duration attribute borne by logs. The timeseries displays a maximum-aggregation. Datadog displays a timeline with a rollout parameter; for example, there are 4 bars for the whole time frame.
 
-{{< img src="logs/explorer/analytics/aggregation_howto.gif" alt="top list example" responsive="true" style="width:90%;">}}
-
+{{< img src="logs/explorer/analytics/aggregation_howto.mp4" alt="top list example" video="true" responsive="true" >}}
 
 ## Further Reading
 

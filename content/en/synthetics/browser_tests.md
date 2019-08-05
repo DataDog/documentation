@@ -122,7 +122,7 @@ To create a variable, first give it a name then define its value from:
 
 Once created, use your variable to set an input text on a form or search bar. Use the little hand on your variable box to create an input step:
 
-{{< img src="synthetics/browser_tests/variable_input.gif" alt="Variable Input" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/browser_tests/variable_input.mp4" alt="Variable Input" video="true" responsive="true" >}}
 
 You can also use your variables in some assertions, including:
 

@@ -35,7 +35,7 @@ The `outliers()` function has three parameters:
 * `TOLERANCE`: The tolerance of the outliers algorithm.
 * `PERCENTAGE`: The percentage of outlying points required to mark a series as an outlier (available only for MAD and scaledMAD algorithms)
 
-{{< img src="graphing/functions/algorithms/outlier.gif" alt="outlier detection" responsive="true" style="width:70%;">}}
+{{< img src="graphing/functions/algorithms/outlier.mp4" alt="outlier detection" video="true" responsive="true" >}}
 
 See the [Outlier Monitor][2] page for more info.
 

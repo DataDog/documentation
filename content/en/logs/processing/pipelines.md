@@ -51,7 +51,7 @@ Filters let you limit what kinds of logs a Pipeline applies to.
 
 The filter syntax is the same as the [search bar][1].
 
-**Be aware that the Pipeline filtering is applied before any of the pipeline's Processors, hence you cannot filter on an attribute that is extracted in the Pipeline itself** 
+**Be aware that the Pipeline filtering is applied before any of the pipeline's Processors, hence you cannot filter on an attribute that is extracted in the Pipeline itself**
 
 The logstream shows which logs your Pipeline applies to:
 
@@ -61,13 +61,13 @@ The logstream shows which logs your Pipeline applies to:
 
 Nested Pipelines are pipelines within a pipeline. Use Nested Pipelines to split the processing into two steps. For example, first use a high-level filtering such as team and then a second level of filtering based on the integration, service, or any other tag or attribute.
 
- A pipeline can contain Nested Pipelines and Processors whereas a Nested Pipeline can only contain Processors.
+A pipeline can contain Nested Pipelines and Processors whereas a Nested Pipeline can only contain Processors.
 
- {{< img src="logs/processing/pipelines/nested_pipeline.png" alt="Nested Pipelines" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/nested_pipeline.png" alt="Nested Pipelines" responsive="true" style="width:80%;">}}
 
- It is possible to drag and drop a Pipeline into another Pipeline to transform it into a Nested Pipeline:
+It is possible to drag and drop a Pipeline into another Pipeline to transform it into a Nested Pipeline:
 
- {{< img src="logs/processing/pipelines/nested_pipeline_drag_drop.gif" alt="Drag and Drop Nested Pipelines" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/nested_pipeline_drag_drop.mp4" alt="Drag and Drop Nested Pipelines" video="true" responsive="true" >}}
 
 ## Special Pipelines
 

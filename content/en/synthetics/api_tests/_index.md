@@ -124,7 +124,7 @@ If you click on **Test URL**, then the basic assertion is automatically filled:
 
 You can create up to 10 assertions per API test by clicking on **Add new assertion** or by clicking directly on the response preview:
 
-{{< img src="synthetics/api_tests/assertions_setup.gif" alt="Assertions Setup" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/api_tests/assertions_setup.mp4" alt="Assertions Setup" video="true" responsive="true" >}}
 
 #### Test Failure
 

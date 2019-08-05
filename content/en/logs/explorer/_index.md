@@ -49,7 +49,7 @@ Use facets, measures, tags, or even [free text search][1] to filter your Logstre
 
 Follow the [guide to search your logs][1] for a detailed explanation of all the Log Explorer search features, including use of wildcards and queries of numerical values.
 
-{{< img src="logs/explorer/search_your_logs.gif" alt="Search your logs" responsive="true" >}}
+{{< img src="logs/explorer/search_your_logs.mp4" alt="Search your logs" video="true" responsive="true" >}}
 
 ### Saved views
 
@@ -69,7 +69,7 @@ The Logstream is the list of logs that match the selected context. A context is 
 
 ### Logs Table
 
-The logstream is displayed in the logs table. 
+The logstream is displayed in the logs table.
 
 Configure the logs table content according to your needs and preferences with the "Options" button. Among your custom attributes, only faceted or measures attributes are available for columns.
 
@@ -97,7 +97,7 @@ Interact with the attributes names and values in the lower JSON section to:
 
 Interact with the upper reserved attributes section:
 
-* with **Host**, to access the host dashboard or append the search request with the `host` of the log. 
+* with **Host**, to access the host dashboard or append the search request with the `host` of the log.
 * with **Service**, to see the trace in APM, append the search request with the trace ID (both require a `trace_id` attribute in the log: refer to [trace injection in logs][3]) or append search request with the `service` of the log.
 * with **Source**, to append the search request with the `source` of the log.
 
