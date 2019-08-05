@@ -20,7 +20,6 @@ Les limites de débit peuvent être augmentées par rapport aux valeurs par déf
 * La limite de débit pour l'appel [graph_snapshot API][6] est de `60` par heure et par organisation. Elle peut être augmentée sur demande.
 * La limite de débit pour [Log Configuration API][7] est de `6000` par minute et par organisation. Elle peut être augmentée sur demande.
 
-
 [1]: /fr/help
 [2]: /fr/api/#metrics
 [3]: /fr/developers/metrics/custom_metrics

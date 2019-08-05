@@ -75,7 +75,7 @@ end
 
 **Injection automatique d'ID de trace pour les applications Rails par défaut**
 
-Les applications Rails qui sont configurées avec un enregistreur `ActiveSupport::TaggedLogging` peuvent ajouter des ID de trace en tant que tags à la sortie du log. L'enregistreur Rails par défaut applique cette journalisation avec des tags, ce qui simplifie l'ajout de tags de trace. 
+Les applications Rails qui sont configurées avec un enregistreur `ActiveSupport::TaggedLogging` peuvent ajouter des ID de trace en tant que tags à la sortie du log. L'enregistreur Rails par défaut applique cette journalisation avec des tags, ce qui simplifie l'ajout de tags de trace.
 
 Dans le fichier de configuration de votre environnement Rails (p. ex., `config/environments/production.rb`), ajoutez le code suivant :
 
@@ -114,7 +114,7 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-Cela active l'injection automatique d'ID de trace pour `winston`, `bunyan` et `pino`.
+Cela active l'injection automatique d'ID de trace pour `bunyan`, `paperplane`, `pino`, et `winston`.
 
 **Remarque** : l'injection automatique fonctionne uniquement pour les logs au format JSON.
 

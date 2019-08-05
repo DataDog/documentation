@@ -1,5 +1,5 @@
 ---
-title: Autodiscovery Container Identifier
+title: Autodiscovery Container Identifiers
 kind: documentation
 further_reading:
 - link: "/agent/autodiscovery/integrations"
@@ -10,13 +10,13 @@ further_reading:
   text: "Manage which Container to include in the Agent Autodiscovery"
 ---
 
-Autodiscovery Container Identifiers, or `ad_identifiers`, allow you to apply an Autodiscovery configuration file template to a given container, either by [using the container short image](#short-image-container-identifiers) or with a [custom Autodiscovery container identifier](#custom-autodiscovery-container-identifiers).
+Autodiscovery container identifiers, or `ad_identifiers`, allow you to apply an Autodiscovery configuration file template to a given container, either by using the [container short image](#short-image-container-identifiers) or with a [custom Autodiscovery container identifier](#custom-autodiscovery-container-identifiers).
 
-**Note**: With the other types of configuration—key-value stores, Docker labels, or Kubernetes pod annotations—the matching between an integration configuration template and the corresponding container is based on the `<CONTAINER_IDENTIFIER>` included in the key-value stores, labels, or annotations configuration.
+**Note**: For other configuration types—key-value stores, Docker labels, or Kubernetes pod annotations—the matching between an integration configuration template and the corresponding container is based on the `<CONTAINER_IDENTIFIER>` included in the key-value stores, labels, or annotations configuration.
 
 ## Short image container identifiers
 
-To apply the following Autodiscovery configuration template file to a given container, use the **container short image** name as `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`:
+To apply the following Autodiscovery configuration template to a given container, use the **container short image** name as the `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`:
 
 ```
 ad_identifiers:
@@ -29,7 +29,7 @@ instances:
   <INSTANCES_CONFIG>
 ```
 
-For instance, the following Apache Autodiscovery configuration file template used by the Agent:
+For example, the following Apache Autodiscovery configuration template can be used by the Agent:
 
 ```yaml
 ad_identifiers:
@@ -42,13 +42,23 @@ logs:
   service: webapp
 ```
 
-Matches **ANY** `httpd` container image on your host. Suppose you have one container running `library/httpd:latest` and another running `<WHATEVER>/httpd:v2`. The Agent would apply the above template to both containers since you have to provide short names for container images, e.g. `httpd`, NOT `library/httpd:latest`:
+This matches **ANY** `httpd` container image on your host. Suppose you have one container running `library/httpd:latest` and another running `<WHATEVER>/httpd:v2`. The Agent applies the above template to both containers since you have to provide short names for container images, e.g. `httpd`, NOT `library/httpd:latest`.
 
-As a consequence, when using short image as Autodiscovery container identifiers, **the Agent cannot distinguish between identically named images from different sources or with different tags**.
+When using short image names as Autodiscovery container identifiers, **the Agent cannot distinguish between identically named images from different sources or with different tags**.
+
+### Multiple identifiers
+
+Specify multiple image names by adding to the `ad_identifiers` list, for example:
+
+```yaml
+ad_identifiers:
+  - httpd
+  - my-custom-httpd-image
+```
 
 ## Custom Autodiscovery container identifiers
 
-To apply different Autodiscovery Configuration file templates to different containers running the same image, use a custom value as `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` and apply it with the `com.datadoghq.ad.check.id` label to identify your container. Let's say you have the following configuration file:
+To apply different Autodiscovery configuration templates to containers running the same image, use a custom value `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` and apply it with the `com.datadoghq.ad.check.id` label to identify your container. Using the following configuration file:
 
 ```
 ad_identifiers:
@@ -61,13 +71,11 @@ instances:
   <INSTANCES_CONFIG>
 ```
 
-To **ONLY**  apply this Autodiscovery configuration file template to one of your container, add to it the following label:
+Add the following label to apply this Autodiscovery configuration template to a specific container.
 
 ```
 com.datadoghq.ad.check.id: <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 ```
-
-The Agent then knows to apply the Autodiscovery configuration file to this specific container and not to another one.
 
 **Note**: The `com.datadoghq.ad.check.id` label takes precedence over the image/name.
 

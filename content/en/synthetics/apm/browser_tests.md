@@ -35,7 +35,7 @@ A resource corresponds to the combination of requests and assets. The Resources 
 | % Total Time | The resource duration over the total interaction time           |
 | Size         | The size of the request response                                |
 
-The maximum number of resources that can be displayed is 15. Typically, the resources with the longest duration (slowest to load) are displayed first.
+The maximum number of resources that can be displayed is 50. Typically, the resources with the longest duration (slowest to load) are displayed first.
 
 #### Filter and Search
 Resources can be filtered by resource type. Also, a search can be performed over the displayed URLs.
