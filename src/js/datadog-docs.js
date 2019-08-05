@@ -39,14 +39,14 @@ $(document).ready(function () {
     $('.ds-hint').css('background', 'transparent');
     if (window.location.href.indexOf('/search/') > -1) {
 
-        var client = algoliasearch("{{ $.Site.Params.algolia.appId }}", '{{ $.Site.Params.algolia.apiKey }}');
+        var client = algoliasearch("EOIG7V0A2O", 'c7ec32b3838892b10610af30d06a4e42');
         var results = new RegExp('[\?&]' + "s" + '=([^&#]*)').exec(window.location.href);
         var $pagination = $('#tipue_search_content');
         var query = "";
         try {query = results[1];} catch (e) {}
 
         // get indexname by language
-        var indexName = "{{ $.Site.Params.algolia.indexName }}";
+        var indexName = "docsearch_docs_prod";
 
         var lang = 'en';
         if(window.location.pathname.indexOf("/fr/") > -1) {
