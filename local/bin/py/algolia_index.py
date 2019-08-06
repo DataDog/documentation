@@ -63,7 +63,7 @@ def update_algolia_private_url(docs_index_config,private_urls):
         for url in private_urls:
             config["stop_urls"].append(url)
 
-    print("Addition complete, updating Algolia main configuration file with the new one: \n {} \n".format(config))
+    print("Addition complete, updating Algolia main configuration file with the new one.")
 
     with open(docs_index_config, 'w+', encoding='utf-8') as json_file:
         json.dump(config, json_file)
@@ -82,8 +82,6 @@ if __name__ == "__main__":
 
     print("Transforming links to make them match the algolia logic:\n")
     private_urls=transform_url(private_urls)
-
-    print("List of URLs to not index with Algolia:\n {} \n".format(private_urls))
 
     print("Updating Algolia docsearch configuration file:\n")
     update_algolia_private_url(options["config_location"],private_urls)
