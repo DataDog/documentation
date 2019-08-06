@@ -30,7 +30,7 @@ A browser test is treated like a GET API test. This method gives you the ability
   </tr>
   <tr>
     <td>Response time</td>
-    <td><code>less than</code></td>
+    <td><code>lessThan</code></td>
     <td>Integer</td>
   </tr>
   <tr>
