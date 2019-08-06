@@ -45,18 +45,19 @@ To enable network performance monitoring with the Datadog Agent, use these confi
 3. Optionally uncomment the `@param system_probe_config` to add a custom object:
 `## @param system_probe_config - custom object - optional`
 4. Enter specific configurations for your System Probe data collection:
-```
-system_probe_config:
+  ```
+  system_probe_config:
 
-  ## @param enabled - boolean - optional - default: false
-  ## Set to true to enable the System Probe.
-  #
-  enabled: true
-```
+    ## @param enabled - boolean - optional - default: false
+    ## Set to true to enable the System Probe.
+    #
+    enabled: true
+  ```
 5. Start the system-probe:
 `sudo service datadog-agent-sysprobe start`
 6. Restart the main datadog-agent:
 `sudo service datadog-agent restart `
+
 **Note**: This command works for Linux, for a full list of Agent commands, see the [full list of Agent commands][1].
 
 
