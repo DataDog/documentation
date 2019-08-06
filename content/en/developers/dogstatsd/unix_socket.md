@@ -123,10 +123,7 @@ Origin detection allows DogStatsD to detect where the container metrics come fro
 
 To use origin detection, enable the `dogstatsd_origin_detection` option in your `datadog.yaml`, or set the environment variable `DD_DOGSTATSD_ORIGIN_DETECTION=true`, and [restart your Agent][2].
 
-When running inside a container, DogStatsd needs to run in the host PID namespace for origin detection to work reliably. You can enable this via the docker `--pid=host` flag.
-
-**Note**: This is supported by ECS with the parameter `"pidMode": "host"` in the task definition of the container.
-This option is not supported in Fargate. For more information, see the [AWS documentation][7].
+When running inside a container, DogStatsd needs to run in the host's PID namespace for origin detection to work reliably. You can enable this via the Docker `--pid=host` flag. **Note**: This is supported by ECS with the parameter `"pidMode": "host"` in the task definition of the container. This option is not supported in Fargate. For more information, see the [AWS documentation][7].
 
 ## Client library implementation guidelines
 
