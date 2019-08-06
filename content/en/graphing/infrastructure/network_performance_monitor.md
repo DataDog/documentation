@@ -38,38 +38,29 @@ Network performance monitoring requires Datadog Agent v6.12+. To enable network 
 
 To enable network performance monitoring with the Datadog Agent, use these configurations:
 
+1. Copy the system-probe example configuration:
+`sudo -u dd-agent cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml`
+2. Modify the system-probe configuration file to set the enable flag to `true`:
+`sudo -u dd-agent vim /etc/datadog-agent/system-probe.yaml`
+3. Optionally uncomment the `@param system_probe_config` to add a custom object:
+`## @param system_probe_config - custom object - optional`
+4. Enter specific configurations for your System Probe data collection:
 ```
-# Copy the system-probe example configuration
-$ sudo -u dd-agent cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
-
-# Modify the system-probe configuration file to set the enable flag to true
-$ sudo -u dd-agent vim /etc/datadog-agent/system-probe.yaml
-
-
-##################################
-## System Probe Configuration ##
-##################################
-
-## @param system_probe_config - custom object - optional
-## Beta Agent
-## Enter specific configurations for your System Probe data collection.
-## Uncomment this parameter and the one below to enable them.
-#
-# system_probe_config:
+system_probe_config:
 
   ## @param enabled - boolean - optional - default: false
   ## Set to true to enable the System Probe.
   #
   enabled: true
-
-
-# Start the system-probe
-$ sudo service datadog-agent-sysprobe start
-
-# Restart the main datadog-agent
-$ sudo service datadog-agent-sysprobe restart
 ```
+5. Start the system-probe:
+`sudo service datadog-agent-sysprobe start`
+6. Restart the main datadog-agent:
+`sudo service datadog-agent restart `
+**Note**: This command works for Linux, for a full list of Agent commands, see the [full list of Agent commands][1].
 
+
+[1]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
