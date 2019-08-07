@@ -19,8 +19,8 @@
             timestamp: "2019-01-02T09:42:36.320Z",
             tags: ['team:A'],
             attributes: {
-                customAttribute: 123,
-                duration: 2345
+                customAttribute: 321,
+                duration: 5432
             },
             host: 'i-123',
             service: 'agent',
