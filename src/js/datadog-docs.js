@@ -3,6 +3,24 @@ var largeScreenThreshold = 1710;
 var sidenavMapping = [];
 var apiNavMapping = [];
 
+// gTag
+window.dataLayer = window.dataLayer || [];
+
+var siteEnv = document.querySelector('html').dataset.env;
+var gaTag = '';
+if (siteEnv === 'preview') {
+    gaTag = 'UA-21102638-9';
+} else if (siteEnv === 'live') {
+    gaTag = 'UA-21102638-5';
+}
+
+function gtag(){
+    dataLayer.push(arguments);
+}
+gtag('js', new Date());
+
+gtag('config', gaTag);
+
 $(document).ready(function () {
 
     var sidenavHTML = $('.container .sidenav-nav').clone();
@@ -970,12 +988,6 @@ function codeTabs(){
     }
 }
 
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-gtag('config', '{{ .Site.Params.ga }}');
-
 // Get sidebar
 function hasParentLi(el){
     var els = [];
@@ -1242,6 +1254,7 @@ function loadPage(newUrl) {
                 updateMainContentAnchors();
                 reloadWistiaVidScripts(wistiaVidId);
                 initializeIntegrations();
+                triggerGaPageLoad();
         } else if (!newTOC.querySelector('#TableOfContents')) {
             if (document.querySelector('.toc-container #TableOfContents')) {
                 document.querySelector('.toc-container #TableOfContents').remove();
@@ -1264,7 +1277,7 @@ function loadPage(newUrl) {
         codeTabs();
 
         // Gtag virtual pageview
-        gtag('config', '{{ .Site.Params.ga }}', {'page_path': pathName});
+        gtag('config', gaTag, {'page_path': pathName});
 
         // Marketo
         Munchkin.munchkinFunction('clickLink', { href: newUrl});
@@ -1275,6 +1288,10 @@ function loadPage(newUrl) {
     httpRequest.open("GET", newUrl);
     httpRequest.send();
 };
+
+function triggerGaPageLoad (){
+
+}
 
 // when navigating to asynced nav with a Wistia video, the video script tags need to be removed and readded for the video to load
 function reloadWistiaVidScripts(vidId){
