@@ -1,6 +1,7 @@
 ---
 title: Identify Synthetics Bots
 kind: documentation
+disable_toc: true
 description: Identify incoming Synthetics requests
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
@@ -15,7 +16,6 @@ further_reading:
 - link: "synthetics/api_tests"
   tag: "Documentation"
   text: "Configure an API Test"
-
 ---
 
 Some parts of your system might not be available to robots without the right identification, or you might want to avoid collecting analytics from Datadog robots. Use the headers added to Synthetics tests to spot Datadog robots and filter their requests once in your analytics tool.
@@ -50,6 +50,10 @@ Alternatively, there are other ways to flag Datadog Synthetics robots:
 * You can locally add **cookies, headers or basic auth** to your API tests and **cookies and headers** to your Browser tests.
 
 * You can use Datadog's [**Synthetics IP ranges**][2].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/apm/#how-are-traces-linked-to-checks
 [2]: https://ip-ranges.datadoghq.com/synthetics.json
