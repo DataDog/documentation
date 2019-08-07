@@ -12,6 +12,20 @@
             service: 'agent',
             message: 'host connected to remote'
         }
+    },
+    {
+        id: "AABBBWgdOOFh3ZzZobm1mWXJFYTR0OAN8Xwgr1vKDQAAAABBV2",
+        content: {
+            timestamp: "2019-01-02T09:42:36.320Z",
+            tags: ['team:A'],
+            attributes: {
+                customAttribute: 123,
+                duration: 2345
+            },
+            host: 'i-123',
+            service: 'agent',
+            message: 'host connected to remote'
+        }
     }],
     nextLogId: "BBBBWgn...",
     status: "ok"
