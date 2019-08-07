@@ -23,9 +23,8 @@ further_reading:
 ## Overview
 
 To retrieve a log list longer than the maximum 1000 logs limit returned by the [Log List API][1], you must use the Pagination feature.
-Find below an example of how to use it:
 
-Start by creating a query to retrieve your logs for a given context, a.k.a for a given query and a given timeframe:
+Start by creating a query to retrieve your logs for a given context, for example, for a given query in a set timeframe:
 
 ```bash
 curl -X POST \
@@ -41,7 +40,7 @@ curl -X POST \
     }'
 ```
 
-The result has the following shape:
+Example result:
 
 ```json
 {
@@ -54,11 +53,11 @@ The result has the following shape:
 }
 ```
 
-The `logs` parameter is an array of Log objects and at maximum it contains as many logs as defined with the `limit` parameter in your query. This parameter equals `50` by default, but can be set up to `1000`. If the amount of logs that matched your query is superior to the `limit` then the `nextLogId` parameter is not equal to `null`.
+The `logs` parameter is an array of Log objects and at maximum it contains as many logs as defined with the `limit` parameter in your query. This parameter equals `50` by default, but can be set up to `1000`. If the amount of logs that matched your query is greater than the `limit`, then the `nextLogId` parameter is not equal to `null`.
 
-**When the `nextLogId` parameters is different than `null` it indicates that the query you entered matched more logs the one returned**.
+**When the `nextLogId` parameters returns something other than `null`, it indicates that the query you entered matched more logs than just the one returned**.
 
-In order to retrieve all your logs for your given context, you have to re-send your query but this time with the `startAt` parameter that takes the `nextLogId` value from the previous call:
+To retrieve the next page of logs, re-send your query, but this time with the `startAt` parameter that takes the `nextLogId` value from the previous call:
 
 ```bash
 curl -X POST \
@@ -75,7 +74,7 @@ curl -X POST \
     }'
 ```
 
-Which would produce the following results
+Which returns these results:
 
 ```json
 {
@@ -88,9 +87,9 @@ Which would produce the following results
 }
 ```
 
-And so on and so forth until the parameter `nextLogId` takes the value `null`. This indicates that you retrieved all Logs associated to your context.
+To see every page of your logs, continue to resend your query where the `startAt` parameter takes the `nextLogId` value from the previous call. When the `nextLogId` returns `null`, you returned all pages of logs associated to your query.
 
-**Notes**: For better control over pagination results, you should use an absolute `time` parameter - don't use the`now` keyword.
+**Notes**: For better control over pagination results, use an absolute `time` parameter - don't use the`now` keyword.
 
 ## Further Reading
 
