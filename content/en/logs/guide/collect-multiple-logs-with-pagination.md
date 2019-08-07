@@ -88,7 +88,7 @@ Which produce the following results
 }
 ```
 
-And so on and so forth until there is no more the `nextLogId` which indicates that you retrieved all Logs associated to your query on your time frame
+And so on and so forth until the parameter `nextLogId` is not included within the JSON response which indicates that you retrieved all Logs associated to your query on your time frame.
 
 **Notes**: For better control over pagination results, you should use an absolute `time` parameter - don't use the`now` keyword.
 
