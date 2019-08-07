@@ -1254,7 +1254,6 @@ function loadPage(newUrl) {
                 updateMainContentAnchors();
                 reloadWistiaVidScripts(wistiaVidId);
                 initializeIntegrations();
-                triggerGaPageLoad();
         } else if (!newTOC.querySelector('#TableOfContents')) {
             if (document.querySelector('.toc-container #TableOfContents')) {
                 document.querySelector('.toc-container #TableOfContents').remove();
@@ -1288,10 +1287,6 @@ function loadPage(newUrl) {
     httpRequest.open("GET", newUrl);
     httpRequest.send();
 };
-
-function triggerGaPageLoad (){
-
-}
 
 // when navigating to asynced nav with a Wistia video, the video script tags need to be removed and readded for the video to load
 function reloadWistiaVidScripts(vidId){
