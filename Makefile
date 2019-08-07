@@ -112,7 +112,7 @@ docker-stop:  ## kill the site and stop the running container.
 docker-tests: stop  ## run the tests through the docker container.
 	@docker run -tid --name "docs" -v `pwd`:/src:cached \
 		-e RUN_SERVER=true \
-		-e RUN_GULP=false \
+		-e RUN_WEBPACK=false \
 		-p 1313:1313 mstbbs/docker-dd-docs:${IMAGE_VERSION}
 	@printf "\e[93mSetting up test environment, this may take a minute...\033[0m\n"
 	@docker exec -ti docs run-tests.sh
@@ -138,7 +138,7 @@ source-helpers: hugpython  ## source the helper functions used in build, test, d
 link-formatting: source-helpers
 	@local/bin/sh/format-links.sh $(ARGS)
 
-start: clean source-helpers ## start the gulp/hugo server.
+start: clean source-helpers ## start the webpack/hugo server.
 	@echo "starting up..."
 	@if [ ${PY3} != "false" ]; then \
 		source ${VIRENV}/bin/activate;  \
