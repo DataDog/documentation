@@ -59,7 +59,7 @@ Use the top right selector of this graph to zoom on a given percentile of latenc
 
 Zoom on this graph to filter corresponding traces.
 
-## Span Statistics
+## Span Summary
 
 For a given resource, Datadog provides you a span analysis breakdown of all matching traces:
 

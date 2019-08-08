@@ -11,7 +11,7 @@ further_reading:
 - link: "logs/faq/how-to-investigate-a-log-parsing-issue"
   tag: "FAQ"
   text: "How to investigate a log parsing issue?"
-- link: "logs/faq/log-parsing-best-practice"
+- link: "/logs/guide/log-parsing-best-practice/"
   tag: "FAQ"
   text: "Log Parsing - Best Practice"
 - link: "logs/logging_without_limits"

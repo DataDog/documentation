@@ -160,9 +160,9 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module           | Versions  | Support Type    |
 |------------------|-----------|-----------------|
 | [bunyan][45]     | `>=1`     | Fully Supported |
-| [paperplane][48] | `>=2.3.2` | Fully Supported |
-| [pino][46]       | `>=2`     | Fully Supported |
-| [winston][47]    | `>=1`     | Fully Supported |
+| [paperplane][46] | `>=2.3.2` | Fully Supported |
+| [pino][47]       | `>=2`     | Fully Supported |
+| [winston][48]    | `>=1`     | Fully Supported |
 
 ## Further Reading
 
@@ -213,6 +213,6 @@ For details about how to how to toggle and configure plugins, check out the [API
 [43]: https://github.com/kriskowal/q
 [44]: https://github.com/cujojs/when
 [45]: https://github.com/trentm/node-bunyan
-[46]: http://getpino.io
-[47]: https://github.com/winstonjs/winston
-[48]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
+[46]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
+[47]: http://getpino.io
+[48]: https://github.com/winstonjs/winston

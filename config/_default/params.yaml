@@ -14,9 +14,7 @@ code_languages:
   - display_name: Curl
     key: bash
 footer_scripts:
-  - snowplow: false
   - marketo: false
-  - adroll: false
 
 algolia:
   appId: EOIG7V0A2O
@@ -26,3 +24,4 @@ algolia:
 datadog:
   clientToken: pube66a8c26c2159b101d6c36b5317fa7f9
   forwardErrorsToLogs: true
+  logging_handler: console

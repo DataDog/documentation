@@ -1,0 +1,7 @@
+{
+  "@babel/polyfill.js": "static/@babel/polyfill.js",
+  "main-dd-css.css": "static/main-dd-css.css",
+  "main-dd-css.js": "static/main-dd-css.js",
+  "main-dd-js.js": "static/main-dd-js.js",
+  "vendor.js": "static/vendor.js"
+}

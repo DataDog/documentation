@@ -14,7 +14,7 @@
 
 {{ $integration := $.Scratch.Get "integration" }}
 
-{{ if or (not (eq $.Page.Site.Params.environment "local")) ($.Page.Site.Data.service_checks) }}
+{{ if or (not (eq $.Page.Site.Params.environment "development")) ($.Page.Site.Data.service_checks) }}
 
   <!-- get lang specific data file -->
   {{ $.Scratch.Set "data" "" }}

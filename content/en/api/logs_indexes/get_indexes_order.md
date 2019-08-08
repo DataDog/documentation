@@ -1,5 +1,5 @@
 ---
-title: Get Indexes order
+title: Get Indexes Order
 type: apicontent
 order: 23.4
 external_redirect: /api/#get-indexes-order
