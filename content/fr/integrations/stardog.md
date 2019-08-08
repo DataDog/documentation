@@ -95,11 +95,8 @@ Le check Stardog n'inclut aucun événement.
 Le check Stardog n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][12].
+Besoin d'aide ? Contactez [l'assistance Datadog][13].
 
-
-
-{{< get-dependencies >}}
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
 [3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
@@ -111,4 +108,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][12].
 [9]: https://github.com/DataDog/integrations-extras/blob/master/stardog/datadog_checks/stardog/data/conf.yaml.example
 [10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#service-status
-[12]: http://docs.datadoghq.com/help
+[12]: https://github.com/DataDog/integrations-extras/blob/master/stardog/metadata.csv
+[13]: http://docs.datadoghq.com/help
+
+
+{{< get-dependencies >}}

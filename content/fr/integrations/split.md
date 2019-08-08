@@ -69,12 +69,12 @@ Le check Split n'inclut aucun check de service.
 ## Dépannage
 Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
-
-
-{{< get-dependencies >}}
 [1]: http://www.split.io
 [2]: http://www.split.io/articles/controlled-rollout
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/ilan/split-integration/split/images/in-split.png
 [4]: https://raw.githubusercontent.com/DataDog/integrations-extras/ilan/split-integration/split/images/integrations-datadog.png
 [5]: https://docs.datadoghq.com/fr/graphing/event_stream
 [6]: https://docs.datadoghq.com/fr/help
+
+
+{{< get-dependencies >}}
