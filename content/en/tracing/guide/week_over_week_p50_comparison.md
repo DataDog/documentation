@@ -1,8 +1,20 @@
 ---
 title: Compare a Service’s latency to the previous week
 kind: guide
-private: true
 disable_toc: true
+further_reading:
+- link: "tracing/setup/"
+  tag: "Documentation"
+  text: "Learn how to setup APM tracing with your application"
+- link: "tracing/visualization/services_list/"
+  tag: "Documentation"
+  text: "Discover the list of services reporting to Datadog"
+- link: "tracing/visualization/resource"
+  tag: "Documentation"
+  text: "Dive into your resource performance and traces"
+- link: "tracing/visualization/trace"
+  tag: "Documentation"
+  text: "Understand how to read a Datadog Trace"
 ---
 
 {{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_1.png" alt="Full view of latency chart with week-over-week display enabled" responsive="true" style="width:90%;">}}
@@ -32,5 +44,9 @@ Datadog can show you the latency of your application over time and how it compar
 {{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_3.gif" alt="" responsive="true" style="width:90%;">}}
 
 **Note**: As you conduct your analysis you can also export this graph to any dashboard from the Service view and display this data alongside any other chart generated in Datadog, including your custom metrics, host-level information and logs.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apm/services
