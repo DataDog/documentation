@@ -28,7 +28,6 @@ Header attached to all Datadog Browser tests:
 
 `Sec-Datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - public_id: <SYNTHETICS_TEST_PUBLIC_ID>`
 
-
 If APM is enabled, [**other APM specific headers**][1] such as `x-datadog-trace-id` are added to all the requests launched for API tests.
 
 Choose any or a variety of the following methods to identify the robots to make sure they are performing the actions you expect.
