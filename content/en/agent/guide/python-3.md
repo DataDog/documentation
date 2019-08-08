@@ -131,12 +131,6 @@ Python 2 treats unicode text and binary-encoded data in the same manner, and tri
 | str | '...' | binary | text |
 | unicode | u'...' | text | text |
 
-For string literals, it might be better to always use Unicode explicitly in Python 2, so they will work exactly the same when running in Python 3:
-
-```python
-s = u'This string will be the same in Python 2 and 3'
-```
-
 Text data are Unicode code points; you must encode with `.encode(encoding)` for storage or transmission. Binary data are encoded code points represented as a sequence of bytes that must be decoded with `.decode(encoding)` back to text. When reading text from a file, the `open` function from the `io` package is handy because the data read is already decoded into Unicode:
 
 ```python
