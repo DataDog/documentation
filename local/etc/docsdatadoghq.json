@@ -3,14 +3,14 @@
 	"start_urls": [
 		{
 			"url": "https://docs.datadoghq.com(?P<language>.*?)api/",
-      "selectors_key": "api",
-      "variables": {
-        "language": [
-          "/",
-          "/fr/",
-          "/ja/"
-        ]
-      },
+			"selectors_key": "api",
+			"variables": {
+				"language": [
+					"/",
+					"/fr/",
+					"/ja/"
+				]
+			},
 			"tags": [
 				"api"
 			],
@@ -18,14 +18,14 @@
 		},
 		{
 			"url": "https://docs.datadoghq.com(?P<language>.*?)integrations/",
-      "selectors_key": "integrations",
-      "variables": {
-        "language": [
-          "/",
-          "/fr/",
-          "/ja/"
-        ]
-      },
+			"selectors_key": "integrations",
+			"variables": {
+				"language": [
+					"/",
+					"/fr/",
+					"/ja/"
+				]
+			},
 			"tags": [
 				"integrations"
 			],
@@ -33,14 +33,14 @@
 		},
 		{
 			"url": "https://docs.datadoghq.com(?P<language>.*?)",
-      "selectors_key": "docs",
-      "variables": {
-        "language": [
-          "/",
-          "/fr/",
-          "/ja/"
-        ]
-      },
+			"selectors_key": "docs",
+			"variables": {
+				"language": [
+					"/",
+					"/fr/",
+					"/ja/"
+				]
+			},
 			"tags": [
 				"docs"
 			],
@@ -59,12 +59,12 @@
 					"developers",
 					"account_management",
 					"synthetics"
-        ],
-        "language": [
-          "/",
-          "/fr/",
-          "/ja/"
-        ]
+				],
+				"language": [
+					"/",
+					"/fr/",
+					"/ja/"
+				]
 			},
 			"tags": [
 				"faq"
@@ -83,11 +83,11 @@
 					"logs",
 					"developers"
 				],
-        "language": [
-          "/",
-          "/fr/",
-          "/ja/"
-        ]
+				"language": [
+					"/",
+					"/fr/",
+					"/ja/"
+				]
 			},
 			"tags": [
 				"guide"
@@ -97,14 +97,14 @@
 	],
 	"stop_urls": [
 		"docs.datadoghq.com/search/",
-    "docs.datadoghq.com/fr/search/",
-    "docs.datadoghq.com/ja/search/",
-    "docs.datadoghq.com/videos/",
-    "docs.datadoghq.com/fr/videos/",
-    "docs.datadoghq.com/ja/videos/",
-    "docs.datadoghq.com/integrations/$",
-    "docs.datadoghq.com/fr/integrations/$",
-    "docs.datadoghq.com/ja/integrations/$",
+		"docs.datadoghq.com/fr/search/",
+		"docs.datadoghq.com/ja/search/",
+		"docs.datadoghq.com/videos/",
+		"docs.datadoghq.com/fr/videos/",
+		"docs.datadoghq.com/ja/videos/",
+		"docs.datadoghq.com/integrations/$",
+		"docs.datadoghq.com/fr/integrations/$",
+		"docs.datadoghq.com/ja/integrations/$",
 		"/faq/$",
 		"/guide/$",
 		"\\?",
@@ -112,7 +112,9 @@
 		"\\.json$"
 	],
 	"sitemap_urls": [
-		"https://docs.datadoghq.com/en/sitemap.xml"
+    "https://docs.datadoghq.com/en/sitemap.xml",
+    "https://docs.datadoghq.com/ja/sitemap.xml",
+    "https://docs.datadoghq.com/fr/sitemap.xml"
 	],
 	"selectors": {
 		"docs": {
