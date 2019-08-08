@@ -54,7 +54,7 @@ Datadog s'intègre à Sumo Logic de deux façons : vous pouvez transférer des
 9. Dans Sumo Logic, enregistrez la recherche de votre choix et choisissez de planifier la recherche.
 10. Choisissez Webhook comme valeur pour **Alert Type**. Choisissez votre nouvelle connexion Datadog dans la liste des Webhooks. Vous pouvez personnaliser la charge utile si vous le souhaitez. Il est conseillé de modifier l'option sélectionnée dans **Alert condition** de façon à envoyer une notification uniquement si le nombre de résultats est supérieur à 0. {{< img src="integrations/summologic/integrations-sumo-savesearch.png" alt="Collection hébergée" responsive="true" popup="true">}}
 
-[1]: https://app.datadoghq.com/account/settings#integrations/sumo_logic
 
 
 {{< get-dependencies >}}
+[1]: https://app.datadoghq.com/account/settings#integrations/sumo_logic

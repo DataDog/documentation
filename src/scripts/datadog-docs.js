@@ -1,3 +1,8 @@
+import Stickyfill from 'stickyfilljs';
+import Mousetrap from 'mousetrap';
+import mixitup from 'mixitup';
+import algoliasearch from 'algoliasearch';
+
 // Setup for large screen ToC
 var largeScreenThreshold = 1710;
 var sidenavMapping = [];
@@ -479,7 +484,7 @@ $(document).ready(function () {
 
     // add targer-blank to external links
     var newLinks = document.getElementsByTagName("a");
-    for(i = 0; i < newLinks.length; i++) {
+    for(let i = 0; i < newLinks.length; i++) {
         if(!newLinks[i].href.includes("datadoghq.com") && !newLinks[i].href.includes("localhost:1313")){
             $("a[href='" + newLinks[i].href + "']").attr("target", "_blank");
         }
@@ -1018,7 +1023,7 @@ function getPathElement(){
     var path = window.location.pathname;
     var activeMenus = document.querySelectorAll('.side .sidenav-nav .active, header .sidenav-nav .active');
 
-    for(i = 0; i < activeMenus.length; i++){
+    for(let i = 0; i < activeMenus.length; i++){
         activeMenus[i].classList.remove('active');
     }
 
@@ -1109,11 +1114,11 @@ function closeNav(){
     var activeMenus = document.querySelectorAll('.side .sidenav-nav .active, header .sidenav-nav .active');
     var openMenus = document.querySelectorAll('.side .sidenav-nav .open, header .sidenav-nav .open');
 
-    for(i = 0; i < activeMenus.length; i++){
+    for(let i = 0; i < activeMenus.length; i++){
         activeMenus[i].classList.remove('active');
     }
 
-    for(i = 0; i < openMenus.length; i++){
+    for(let i = 0; i < openMenus.length; i++){
         openMenus[i].classList.remove('open');
     }
 }
@@ -1217,9 +1222,9 @@ function loadPage(newUrl) {
         };
 
         var keys = Object.keys(meta);
-        for(i=0;i<keys.length;i++){
+        for(let i=0;i<keys.length;i++){
             var key = keys[i];
-            for(k=0;k<meta[key].length;k++){
+            for(let k=0;k<meta[key].length;k++){
                 var selectorPart = meta[key][k];
                 try {
                     if( newDocument.head.querySelector('['+key+'='+selectorPart+']') ){
@@ -1297,7 +1302,7 @@ function reloadWistiaVidScripts(vidId){
     if (wistiaCont && vidId){
 
         // remove current script tags
-        for(i; i < oldWistiaScripts.length; i+=1){
+        for(let i; i < oldWistiaScripts.length; i+=1){
             oldWistiaScripts[i].remove();
         }
 

@@ -104,13 +104,16 @@ Renvoie CRITICAL si l'Agent n'est pas capable de recueillir les métriques Spark
 ## Dépannage
 ### Spark sur AWS EMR
 
-Pour recueillir des métriques Spark lorsque Spark est configuré sur AWS EMR, [utilisez les actions Bootstrap][9] pour installer l'[Agent Datadog][10] puis créez le fichier de configuration `/etc/dd-agent/conf.d/spark.yaml` avec [les valeurs appropriées pour chaque nœud EMR][11].
+Pour recueillir des métriques Spark lorsque Spark est configuré sur AWS EMR, [utilisez les actions Bootstrap][8] pour installer l'[Agent Datadog][9] puis créez le fichier de configuration `/etc/dd-agent/conf.d/spark.yaml` avec [les valeurs appropriées pour chaque nœud EMR][10].
 
 ## Pour aller plus loin
 
-* [Surveiller Hadoop et Spark avec Datadog][12]
+* [Surveiller Hadoop et Spark avec Datadog][11]
 
 
+
+
+{{< get-dependencies >}}
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/spark/images/sparkgraph.png
 [2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 [3]: https://app.datadoghq.com/account/settings#agent
@@ -118,11 +121,7 @@ Pour recueillir des métriques Spark lorsque Spark est configuré sur AWS EMR, [
 [5]: https://github.com/DataDog/integrations-core/blob/master/spark/datadog_checks/spark/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/spark/metadata.csv
-[9]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-bootstrap.html
-[10]: https://docs.datadoghq.com/fr/agent
-[11]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-master-node-ssh.html
-[12]: https://www.datadoghq.com/blog/monitoring-spark
-
-
-{{< get-dependencies >}}
+[8]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-bootstrap.html
+[9]: https://docs.datadoghq.com/fr/agent
+[10]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-master-node-ssh.html
+[11]: https://www.datadoghq.com/blog/monitoring-spark
