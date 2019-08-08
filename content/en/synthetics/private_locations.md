@@ -35,7 +35,7 @@ Once you created a private location, configuring a Synthetics API or Browser tes
 
     {{< img src="synthetics/private_locations/create_private_location.png" alt="create a private locations" responsive="true" style="width:70%;">}}
 
-2. Get the configuration file associated with your private location on your worker.
+2. Fill out the Location Details and click **Save and Generate** to generate the configuration file associated with your private location on your worker.
 
     {{< img src="synthetics/private_locations/private_location.gif" alt="Private locations" responsive="true" >}}
 
