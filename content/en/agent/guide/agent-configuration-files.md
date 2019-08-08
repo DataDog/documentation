@@ -82,7 +82,7 @@ An example for each Agent check configuration files can be found in the `conf.ya
 └── frontend.yaml
 ```
 
-Autodiscovery template files are stored in the configuration folder as well as a `auto_conf.yaml` file. For example, consider the Redis check, its configuration in `redisdb.d/` are:
+Autodiscovery template files are stored in the configuration folder with the `auto_conf.yaml` file. For example, for the Redis check, here is the configuration in `redisdb.d/`:
 
 ```
 /etc/datadog-agent/conf.d/redisdb.d/
@@ -90,7 +90,7 @@ Autodiscovery template files are stored in the configuration folder as well as a
 └── conf.yaml.example
 ```
 
-**Note**: For log collection, to prevent duplicate logs from being sent to Datadog, the Agent does not accept multiple YAML files that point to the same log source. In the case where there is more than one YAML file that points to the same log source, the Agent considers the files in alphabetical order and uses the first file.
+**Note**: For log collection, the Agent does not accept multiple YAML files that point to the same log source to prevent duplicate logs from being sent to Datadog. In the case where there is more than one YAML file that points to the same log source, the Agent considers the files in alphabetical order and uses the first file.
 
 To preserve backwards compatibility, the Agent still picks up configuration files in the form `/etc/datadog-agent/conf.d/<check_name>.yaml`, but migrating to the new layout is strongly recommended.
 
