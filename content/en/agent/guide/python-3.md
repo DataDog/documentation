@@ -72,7 +72,7 @@ Most modern IDEs and editors provide advanced linting automatically. Make sure t
 
 ### Package Imports
 
-In an effort to standardize Datadog package namespacing, all resources now live under the base subpackage. So for example,
+To standardize Datadog package namespacing, with Python3, all resources live under the base subpackage. For example:
 
 ```python
 from datadog_checks.checks import AgentCheck
