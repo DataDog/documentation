@@ -1017,7 +1017,7 @@ main:
   - name: "Private Locations"
     url: "synthetics/private_locations"
     parent: "synthetics"
-    identifier: "synthetics_browser_tests"
+    identifier: "synthetics_private_location"
     weight: 3
 
   ## SYNTHETICS - APM
