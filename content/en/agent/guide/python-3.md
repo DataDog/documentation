@@ -143,7 +143,7 @@ Text data are Unicode code points; you must encode with `.encode(encoding)` for 
 from io import open
 
 f = open('textfile.txt', encoding='utf-8')
-contents = f.read()  ;; contents will be decoded to unicode using ‘utf-8’; these are not bytes!
+contents = f.read()  # contents will be decoded to unicode using ‘utf-8’; these are not bytes!
 ```
 
 Consult Ned Batchelder’s [Pragmatic Unicode][7] for further details.
