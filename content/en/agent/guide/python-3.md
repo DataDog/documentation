@@ -124,7 +124,7 @@ Consult the [six documentation][6] for the list of renamed modules. Note that th
 
 ### Unicode
 
-Python 2 treats unicode text and binary-encoded data in the same manner, and tries to automatically convert between bytes and strings as needed. This works as long as all characters are ASCII, but leads to unexpected behavior when non-ASCII characters are encountered.
+Python 2 treats Unicode text and binary-encoded data the same, and tries to automatically convert between bytes and strings. This works as long as all characters are ASCII, but leads to unexpected behavior when it encounters non-ASCII characters.
 
 | type | literal | Python 2 | Python 3 |
 | --- | --- | --- | --- |
