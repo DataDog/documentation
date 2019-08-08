@@ -50,7 +50,7 @@ Validating python3 compatibility of ~/dev/my-check.py…
 ~/dev/foo.py is compatible with python3
 ```
 
-While ddev catches any issue that could prevent the Python 3 interpreter from running code at all, it cannot check for logical validity. After code changes are made, make sure to run the check and validate the output.
+While `ddev` catches any issue that could prevent the Python 3 interpreter from running code at all, it cannot check for logical validity. After code changes are made, make sure to run the check and validate the output.
 
 For more details about ddev, refer to the [ddev documentation][1].
 
