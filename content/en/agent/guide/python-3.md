@@ -62,7 +62,7 @@ For more details about ddev, refer to the [ddev documentation][1].
 $ 2to3 foo.py
 ```
 
-This prints a diff against the original source file. For more details about 2to3, refer to the official [2to3 documentation][2].
+Running 2to3 prints a diff against the original source file. For more details about 2to3, refer to the official [2to3 documentation][2].
 
 ### Editors
 
