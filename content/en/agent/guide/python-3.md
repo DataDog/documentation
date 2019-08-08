@@ -102,8 +102,8 @@ Also, in Python 3, the `dict.keys()`, `dict.items()`, `dict.values()` methods re
 | Python 2 | Python 2 and 3 |
 | --- | --- |
 | `mykeylist = mydict.keys()` | `mykeylist = list(mydict)` |
-| `myitemlist = mydict.items()` | `// The Python 2 syntax works in Python 3, but if the dictionary needs to be modified during iteration, it's necessary to make a copy first.` <br/><br/> `from six import iteritems` <br/><br/> `myitemlist = list(iteritems(mydict))` |
-| `myvaluelist = mydict.values()` | `from six import itervalues`<br/><br/> `myvaluelist = list(itervalues(mydict))` |
+| `myitemlist = mydict.items()` | `myitemlist = list(mydict.items())` |
+| `myvaluelist = mydict.values()` | `myvaluelist = list(mydict.values()` |
 
 The `dict.has_key()` method is deprecated in Python 2 and is removed in Python 3. Use the `in` operator instead.
 
