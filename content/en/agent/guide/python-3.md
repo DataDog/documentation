@@ -24,7 +24,7 @@ $ pip install "datadog-checks-dev[cli]"
 
 #### Usage
 
-Run the `validate` command to verify that a custom check or integration will run on Python 3. CHECK must be a valid path to a Python module or package folder:
+Run the `validate` command to verify that your custom check or integration runs on Python 3. Replace `CHECK` with a valid path to a Python module or package folder:
 
 ```bash
 $ ddev validate py3 [OPTIONS] CHECK
