@@ -86,7 +86,7 @@ from datadog_checks.base.checks import AgentCheck
 
 ### Six
 
-[Six][5] is a Python 2/3 compatibility library intended to allow developers to ship ubiquitous Python code. Some of the examples below make use of six to make legacy Python 2 code compatible with Python 3.
+[Six][5] is a Python 2/3 compatibility library intended to allow developers to ship Python code that works in both Python 2 and Python3. Some of the examples below make use of six to make legacy Python 2 code compatible with Python 3.
 
 ### Dictionary methods
 
