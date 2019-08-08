@@ -1,7 +1,7 @@
 ---
-title: Run test from Private Locations
+title: Run Synthetics tests from Private Locations
 kind: documentation
-description: Identify incoming Synthetics requests
+description: Run Synthetics API and browser tests from Private Locations
 beta: true
 further_reading:
 - link: "synthetics/"
