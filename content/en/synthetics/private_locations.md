@@ -15,13 +15,19 @@ further_reading:
   text: "Configure an API Test"
 ---
 
+<div class="alert alert-warning">
+This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Datadog support</a> to enable distribution metrics for your account.
+</div>
+
 ## Overview
 
 Private locations allow you to monitor internal-facing applications or any private URLs that aren’t accessible from the public internet. They can also be used to create a new custom Synthetics location.
 
 ## Setup
 
-The private location worker is shipped as a Docker container. By default, every second, your private location worker pulls your test configurations from Datadog’s servers using HTTPS, executes the test depending on the frequency defined in the configuration of the test, and returns the test results to Datadog’s servers. The behavior of private locations is completely identical to the one of Datadog managed locations.
+The private location worker is shipped as a Docker container. By default, every second, your private location worker pulls your test configurations from Datadog’s servers using HTTPS, executes the test depending on the frequency defined in the configuration of the test, and returns the test results to Datadog’s servers.
+
+Once you created a private location, configuring a Synthetics API or Browser test from a private location is completely identical to the one of Datadog managed locations.
 
 ### Create a new private location
 
