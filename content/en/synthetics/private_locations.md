@@ -16,7 +16,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Datadog support</a> to enable distribution metrics for your account.
+This feature is in beta. <a href="https://app.datadoghq.com/privatelocations/2019signup">Sign up for the beta</a> to enable Synthetics private locations for your account.
 </div>
 
 ## Overview
@@ -52,10 +52,12 @@ Once you created a private location, configuring a Synthetics API or Browser tes
 
     **Note**: To scale a private location, add or remove workers on your host.
 
-4. (Optional) - To pull test configurations and push test results, give the private location worker access to one of the Datadog API endpoints:
+4. To pull test configurations and push test results, the private location worker need access to one of the Datadog API endpoints:
 
-  * For the Datadog US site: `https://api.datadoghq.com/api/`.
-  * For the Datadog EU site: `https://api.datadoghq.eu/api/`.
+    * For the Datadog US site: `https://api.datadoghq.com/api/`.
+    * For the Datadog EU site: `https://api.datadoghq.eu/api/`.
+
+    Check if the endpoint corresponding to your Datadog Site is available from the host runing the worker.
 
 5. If your private location reports correctly to Datadog you should see the corresponding pills displayed if the private location polled your endpoint less than 5 seconds before loading the settings or create test pages:
 
