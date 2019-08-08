@@ -32,13 +32,13 @@ The table visualization is available on timeboards and screenboards. It displays
 * For the **Rows**, choose the tag key to **Group by**. The example below displays `service` rows.
 * Choose a limit for the number results (defaults to 10).
 * Choose a metric for sorting the table (defaults to the first column).
-* Optional:cConfigure conditional formatting depending on the cell values for each column.
+* Optional: Configure conditional formatting depending on the cell values for each column.
 
 {{< img src="graphing/widgets/table/table_setup.png" alt="Table setup" responsive="true" style="width:80%;">}}
 
 ## API
 
-The dedicated [widget JSON schema definition][3] for the top list widget is:
+The dedicated [widget JSON schema definition][3] for the table widget is:
 
 ```
 TOPLIST_SCHEMA = {
