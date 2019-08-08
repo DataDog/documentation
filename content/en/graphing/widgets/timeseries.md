@@ -12,6 +12,9 @@ further_reading:
 - link: "graphing/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
+- link: "https://www.datadoghq.com/blog/full-screen-graphs"
+  tag: "Blog"
+  text: "Explore your data in full-screen graph mode"
 ---
 
 The timeseries visualization allows you to display the evolution of one or more metrics, log events, or APM events over time. The time window depends on what is selected on the [timeboard][1] or [screenboard][2]:
