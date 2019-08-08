@@ -176,7 +176,7 @@ See the [Autodiscovery Container Identifiers][1] documentation for information o
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
-On Kubernetes, you can use [ConfigMaps][1]. Reference the template below and refer to the [Kubernetes Custom Integrations][2] documentation.
+On Kubernetes, you can use [ConfigMaps][1]. Reference the template below and the [Kubernetes Custom Integrations][2] documentation.
 
 ```
 kind: ConfigMap
