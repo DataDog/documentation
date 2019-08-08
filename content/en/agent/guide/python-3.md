@@ -89,7 +89,7 @@ from datadog_checks.base.checks import AgentCheck
 
 ### Dictionary methods
 
-In Python 3, the `dict.iter[keys|items|values]` methods are not available.
+In Python 3, the `dict.iterkeys()`, `dict.iteritems()` and `dict.itervalues()` methods are not available.
 
 | Python 2 | Python 2 and 3 |
 | --- | --- |
