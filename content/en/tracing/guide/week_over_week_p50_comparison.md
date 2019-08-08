@@ -30,7 +30,7 @@ Datadog can show you the latency of your application over time and how it compar
 
 3. **Open the Service Page**.
 
-    {{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_2.png" alt="" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_2.png" alt="comparaison 2" responsive="true" style="width:90%;">}}
 
     The Service page comes out of the box for every service in your stack that’s available in Datadog APM. See in-depth analyses of throughput, latency (including percentile distribution) and errors as well as a summary of the active Datadog monitors for the service and breakdown of the resources made available by the service.
 
@@ -41,7 +41,7 @@ Datadog can show you the latency of your application over time and how it compar
 5. Expand the Latency graph to view the full screen mode where you can conduct a more comprehensive analysis.
 6. Add the previous weeks’ p50 performance by checking the `Week` option in the *Compare to Last* section on the right
 
-{{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_3.gif" alt="" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_3.mp4" alt="comparaison video" video="true" responsive="true" style="width:90%;">}}
 
 **Note**: As you conduct your analysis you can also export this graph to any dashboard from the Service view and display this data alongside any other chart generated in Datadog, including your custom metrics, host-level information and logs.
 
