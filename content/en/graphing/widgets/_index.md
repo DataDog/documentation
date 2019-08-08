@@ -29,6 +29,7 @@ aliases:
     {{< nextlink href="/graphing/widgets/scatter_plot" >}}Scatter Plot{{< /nextlink >}}
     {{< nextlink href="/graphing/widgets/service_map" >}}Service Map{{< /nextlink >}}
     {{< nextlink href="/graphing/widgets/service_summary" >}}Service Summary{{< /nextlink >}}
+    {{< nextlink href="/graphing/widgets/table" >}}Table{{< /nextlink >}}
     {{< nextlink href="/graphing/widgets/timeseries" >}}Timeseries{{< /nextlink >}}
     {{< nextlink href="/graphing/widgets/top_list" >}}Top List{{< /nextlink >}}
 {{< /whatsnext >}}
