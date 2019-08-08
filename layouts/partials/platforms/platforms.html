@@ -52,7 +52,7 @@
               <a class="card" href="{{ .link | absLangURL }}">
                   <div class="card-body text-center">
                       {{ $src := (print "icons/" .image)}}
-                      {{ $url := (print ($dot.Site.Params.img_url) "images/" (index $dot.Site.Data.manifests.images $src ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
+                      {{ $url := (print ($dot.Site.Params.img_url) "images/" $src "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                       <picture class="mx-auto">
                           <source srcset="{{ $url }}&w=138 1x, {{ $url }}&w=138&dpr=2 2x" media="(min-width: 1200px)">
                           <source srcset="{{ $url }}&w=108 1x, {{ $url }}&w=108&dpr=2 2x" media="(min-width: 992px)">
