@@ -66,7 +66,7 @@ This prints a diff against the original source file. For more details about 2to3
 
 ### Editors
 
-Most modern IDEs and editors provide advanced linting automatically. Make sure that they are pointed to a Python 3 executable, so that when you open a legacy Python 2–only file, any syntax/import/etc. errors or warnings show up on the side as a colorful tick in [PyCharm][3] or as a clickable box on the bottom in [Visual Studio Code][4].
+Most modern IDEs and editors provide advanced linting automatically. Make sure that they are pointed to a Python 3 executable, so that when you open a legacy Python 2–only file, any linting errors or warnings show up on the side as a colorful tick in [PyCharm][3] or as a clickable box on the bottom in [Visual Studio Code][4].
 
 ## Python Migration
 
