@@ -812,7 +812,7 @@ main:
     url: logs/explorer/patterns/
     parent: log_explorer
     weight: 404
-  - name: Collecte illimitée de logs
+  - name: Logging without Limits
     url: logs/logging_without_limits/
     parent: log_management
     weight: 5
