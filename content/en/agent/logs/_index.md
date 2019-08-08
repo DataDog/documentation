@@ -64,7 +64,7 @@ logs:
   - type: file
     path: <PATH_LOG_FILE>/<LOG_FILE_NAME>.log
     service: <APP_NAME>
-    source: custom
+    source: <SOURCE>
 ```
 
 **Note**: When tailing files for logs, the Datadog Agent v6 for **Windows** requires the log files have UTF8 encoding.
