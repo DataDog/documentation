@@ -16,7 +16,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is in beta. <a href="https://app.datadoghq.com/privatelocations/2019signup">Sign up for the beta</a> to enable Synthetics private locations for your account.
+This feature is in beta. To enable Synthetics private locations for your account, use the corresponding sign-up form <a href="https://app.datadoghq.com/privatelocations/2019signup">for the Datadog US site</a> or <a href="https://app.datadoghq.eu/privatelocations/2019signup">for the Datadog EU site.</a>
 </div>
 
 ## Overview
@@ -52,7 +52,7 @@ Once you created a private location, configuring a Synthetics API or Browser tes
 
     **Note**: To scale a private location, add or remove workers on your host.
 
-4. To pull test configurations and push test results, the private location worker need access to one of the Datadog API endpoints:
+4. To pull test configurations and push test results, the private location worker needs access to one of the Datadog API endpoints:
 
     * For the Datadog US site: `https://api.datadoghq.com/api/`.
     * For the Datadog EU site: `https://api.datadoghq.eu/api/`.
