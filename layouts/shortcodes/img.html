@@ -74,9 +74,6 @@
            loop >
       <source src="{{ print $img | relURL }}"
               type="video/mp4"
-              media="(min-width: 480px)" >
-      <source src="{{ print (replace $img ".mp4" "_small.mp4") | relURL }}"
-              type="video/mp4"
               media="(min-width: 0px)" >
       <div class="play"></div>
       <div class="pause"></div>
