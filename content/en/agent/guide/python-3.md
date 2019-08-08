@@ -42,7 +42,7 @@ File ~/dev/my-check.py:
   Line 850, column 25: division w/o __future__ statement
 ```
 
-After addressing the incompatibilities, the same command would show:
+After addressing the incompatibilities, the same command returns:
 
 ```bash
 $ ddev validate py3 ~/dev/my-check.py  
