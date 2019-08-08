@@ -78,7 +78,7 @@ To standardize Datadog package namespacing, with Python3, all resources live und
 from datadog_checks.checks import AgentCheck
 ```
 
-would become
+becomes
 
 ```python
 from datadog_checks.base.checks import AgentCheck
@@ -98,7 +98,7 @@ In Python 3, the `dict.iterkeys()`, `dict.iteritems()` and `dict.itervalues()` m
 | `for key, value in mydict.iteritems():`<br/> &nbsp;&nbsp;`  ...` | `from six import iteritems` <br/><br/> `for key, value in iteritems(mydict):`<br/> &nbsp;&nbsp;`  ...`|
 | `for value in mydict.itervalues():`<br/> &nbsp;&nbsp;`  ...` | `from six import itervalues` <br/><br/> `for value in itervalues(mydict):`<br/> &nbsp;&nbsp;`  ...` |
 
-Also, in Python 3, the `dict.keys()`, `dict.items()`, `dict.values()` methods return iterators. Therefore, if the dictionary needs to be modified during iteration, it's necessary to make a copy first. To retrieve a dictionary’s keys/items/values as a list:
+Also, in Python 3, the `dict.keys()`, `dict.items()`, `dict.values()` methods return iterators. Therefore, if the dictionary needs to be modified during iteration, make a copy first. To retrieve a dictionary’s keys/items/values as a list:
 
 | Python 2 | Python 2 and 3 |
 | --- | --- |
