@@ -17,6 +17,7 @@ The Datadog developer package, also known as ddev, contains functions that can h
 
 #### Installation
 
+Start by installing the developer toolkit:
 ```bash
 $ pip install "datadog-checks-dev[cli]"
 ```
