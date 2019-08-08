@@ -5,7 +5,7 @@ kind: guide
 
 ## Overview
 
-This guide is meant to provide information about the changes between Python 2 and 3, as well as tips and best practices on how to convert checks to support Python 3.
+This guide provides information and best practices on migrating checks between Python 2 and 3.
 
 To provide flexibility in allowing code to run multiple on versions of the Agent, this guide focuses on retaining backwards compatibility.
 
