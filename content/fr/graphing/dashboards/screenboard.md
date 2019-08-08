@@ -41,7 +41,7 @@ Si un utilisateur décide d'activer le suivi des modifications pour un screenboa
 
 4. Les suppressions de screenboard
 
-Afin d'éviter les changements énumérés ci-dessus, un administrateur (à savoir, un administrateur de compte ou le créateur du screenboard) peut activer la vue en lecture seule. Cela désactive toutes les modifications de carrés ou de texte par des non-administrateurs dans le screenboard et empêche sa suppression.
+Afin d'empêcher les changements énumérés ci-dessus, un administrateur (à savoir, un administrateur de compte ou le créateur du screenboard) peut activer la vue en lecture seule. Cela désactive toutes les modifications de carrés ou de texte par des non-administrateurs dans le screenboard et empêche sa suppression.
 En mode lecture seule, les utilisateurs non-administrateurs peuvent toujours dupliquer le screenboard, réorganiser les carrés, prendre un snapshot de chaque carré et afficher le carré en plein écran. Si le screenboard est en mode lecture seule, les réarrangements de carrés par un non-administrateur sont uniquement temporaires.
 
 ## Sélecteur de période globale

@@ -13,7 +13,7 @@ disable_toc: true
 
 *If you're new here, read below for a high-level view of Datadog.*
 
-{{< partial name="tile-nav/tile-nav.html" >}}
+{{< tile-nav >}}
 
 Your application stack is teeming with unused metadata that's trying to tell a story: things aren't humming along as well as they should be.
 

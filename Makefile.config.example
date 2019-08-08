@@ -5,7 +5,7 @@ CREATE_I18N_PLACEHOLDERS := false
 FETCH_INTEGRATIONS := true
 GITHUB_TOKEN := ${github_personal_token}
 RUN_SERVER := true
-RUN_GULP := true
+RUN_WEBPACK := true
 CONFIGURATION_FILE := "./local/etc/pull_config_preview.yaml"
 
 LOCALBIN := local/bin

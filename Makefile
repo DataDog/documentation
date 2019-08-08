@@ -27,7 +27,6 @@ clean: stop  ## clean all make installs.
 	make clean-build
 	make clean-integrations
 	make clean-auto-doc
-	make clean-static
 
 clean-all: stop  ## clean everything.
 	make clean-build
@@ -59,12 +58,12 @@ clean-integrations:  ## remove built integrations files.
 	    -exec rm -rf {} \; ;fi
 	@find ./content/en/integrations -type f -maxdepth 1 \
 	    -a -not -name '_index.md' \
-		  -a -not -name 'adobe_experience_manager.md' \
+		-a -not -name 'adobe_experience_manager.md' \
 	    -a -not -name 'amazon_guardduty.md' \
 	    -a -not -name 'amazon_vpc.md' \
 	    -a -not -name 'amazon_cloudhsm.md' \
 	    -a -not -name 'cloud_foundry.md' \
-		  -a -not -name 'cloudability.md' \
+		-a -not -name 'cloudability.md' \
 	    -a -not -name 'cloudcheckr.md' \
 	    -a -not -name 'integration_sdk.md' \
 	    -a -not -name 'jenkins.md' \
@@ -95,12 +94,6 @@ clean-auto-doc: ##remove all doc automatically created
 clean-node:  ## remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi
 
-clean-static:  ## remove compiled static assets
-	@if [ -d static/css ]; then rm -r static/css; fi
-	@if [ -d static/images ]; then rm -r static/images; fi
-	@if [ -d static/js ]; then rm -r static/js; fi
-	@if [ -d data/manifests ]; then rm -r data/manifests; fi
-
 clean-virt:  ## remove python virtual env.
 	@if [ -d ${VIRENV} ]; then rm -rf $(VIRENV); fi
 
@@ -119,7 +112,7 @@ docker-stop:  ## kill the site and stop the running container.
 docker-tests: stop  ## run the tests through the docker container.
 	@docker run -tid --name "docs" -v `pwd`:/src:cached \
 		-e RUN_SERVER=true \
-		-e RUN_GULP=false \
+		-e RUN_WEBPACK=false \
 		-p 1313:1313 mstbbs/docker-dd-docs:${IMAGE_VERSION}
 	@printf "\e[93mSetting up test environment, this may take a minute...\033[0m\n"
 	@docker exec -ti docs run-tests.sh
@@ -145,7 +138,7 @@ source-helpers: hugpython  ## source the helper functions used in build, test, d
 link-formatting: source-helpers
 	@local/bin/sh/format-links.sh $(ARGS)
 
-start: clean source-helpers ## start the gulp/hugo server.
+start: clean source-helpers ## start the webpack/hugo server.
 	@echo "starting up..."
 	@if [ ${PY3} != "false" ]; then \
 		source ${VIRENV}/bin/activate;  \
@@ -161,7 +154,7 @@ start: clean source-helpers ## start the gulp/hugo server.
 		RUN_SERVER=${RUN_SERVER} \
 		run-site.sh; fi
 
-stop:  ## stop the gulp/hugo server.
+stop:  ## stop wepack watch/hugo server.
 	@echo "stopping previous..."
-	@pkill -x gulp || true
+	@pkill -x webpack || true
 	@pkill -x hugo server --renderToDisk || true

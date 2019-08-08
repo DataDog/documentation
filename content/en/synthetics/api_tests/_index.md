@@ -95,13 +95,13 @@ An assertion is defined by a parameter, an optional property, a comparator, and 
 | Type          | Operator                                                                        | Value type                            |
 | ------------- | ------------------------------------------------------------------------------- | ------------------------------------- |
 | Status Code   | `is`, `is not`                                                                  | _Integer_                             |
-| Response time | `less than`                                                                     | _Integer (ms)_                        |
+| Response time | `lessThan`                                                                     | _Integer (ms)_                        |
 | Headers       | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
 | Body          | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
 
 If you click on **Test URL**, then the basic assertions are automatically filled:
 
-- `Response time` _less than_ 2000 ms
+- `Response time` _lessThan_ 2000 ms
 - `Header content-type` _is_ "returned value"
 - `Status code` _is_ "returned value"
 

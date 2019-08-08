@@ -106,6 +106,7 @@ spec:
                 fieldPath: status.hostIP
           - name: DD_APM_ENABLED
             value: "true"
+        ## Note these are the minimum suggested values for requests and limits. The amount of resources required by the Agent varies depending on the number of checks, integrations, and features enabled.
         resources:
           requests:
             memory: "256Mi"
