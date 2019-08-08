@@ -12,7 +12,7 @@ disable_toc: true
 
 *Si vous accédez à cette documentation pour la première fois, consultez ci-dessous une vue d'ensemble de Datadog.*
 
-{{< partial name="tile-nav/tile-nav.html" >}}
+{{< tile-nav >}}
 
 Votre suite d'applications regorge de métadonnées inexploitées qui tentent de raconter une histoire : les choses ne fonctionnent pas aussi bien qu'elles le devraient.
 

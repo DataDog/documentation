@@ -21,7 +21,7 @@ further_reading:
 
 Centralizing logs from various technologies and applications tends to generate tens or hundreds of different attributes in a Log Management environment—especially when many teams' users, each one with their own personal usage patterns, are working within the same environment.
 
-This can generate confusion. For instance, a client IP might have the following attributes within your logs: `clientIP`, `client_ip_address`, `remote_address`, `client.ip`, etc. 
+This can generate confusion. For instance, a client IP might have the following attributes within your logs: `clientIP`, `client_ip_address`, `remote_address`, `client.ip`, etc.
 
 In this context, the number of created or provided attributes can lead to confusion and difficulty to configure or understand the environment. It is also cumbersome to know which attributes correspond to the the logs of interest and - for instance - correlating web proxy with web application logs would be difficult. Even if technologies define their respective logs attributes differently, a URL, client IP, or duration have universally consistent meanings.
 
@@ -34,7 +34,7 @@ The standard attribute table is available in Log Configuration pages, along with
 {{< img src="logs/processing/attribute_naming_convention/standard_attributes.png" alt="Standard Attributes" responsive="true" style="width:80%;">}}
 
 How these Standard Attributes will be suggested or enforced?
-Administrators have the right to re-copy an existing set of (non-standard) attributes into a standard one so to enforce non compliant logs sources to become compliant without loosing any previous information. 
+Administrators have the right to re-copy an existing set of (non-standard) attributes into a standard one so to enforce non compliant logs sources to become compliant without loosing any previous information.
 
 ## Standard Attribute list
 
@@ -103,39 +103,53 @@ The following attributes are related to the data used in network communication. 
 
 Typical integrations relying on these attributes include [Apache][1], [Varnish][2], [AWS ELB][3], [Nginx][4], [HAProxy][5], etc.
 
+### Geolocation
+
+The following attributes are related to the geolocation of IP addresses used in network communication. All fields are prefixed by `network.client.geoip` or `network.destination.geoip`.
+
+| **Fullname**                                 | **Type** | **Description**                                                         |
+| :---                                         | :---     | :----                                                                   |
+| `network.client.geoip.country.name`          | `string` | Name of the country |
+| `network.client.geoip.country.iso_code`      | `string` | [Iso Code][6] of the country (example: `US` for the United States, `FR` for France) |
+| `network.client.geoip.continent.code`        | `string` | Iso code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`) |
+| `network.client.geoip.continent.name`        | `string` | Name of the Continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`) |
+| `network.client.geoip.subdivision.name`      | `string` | Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` Department in France) |
+| `network.client.geoip.subdivision.iso_code`  | `string` | [Iso Code][6] of the first subdivision level of the country (example: `CA` in the United States or the `SA` Department in France) |
+| `network.client.geoip.city.name`             | `String` | The Name of the city (example `Paris`, `New York`) |
+
 ### HTTP Requests
 
 These attributes are related to the data commonly used in HTTP requests and accesses. All attributes are prefixed by `http`.
 
-Typical integrations relying on these attributes include [Apache][1], Rails, [AWS CloudFront][6], web applications servers, etc.
+Typical integrations relying on these attributes include [Apache][1], Rails, [AWS CloudFront][7], web applications servers, etc.
 
 #### Common attributes
 
 
-| **Fullname**       | **Type** | **Description**                                                                                          |
-| :---               | :---     | :----                                                                                                    |
-| `http.url`         | `string` | The URL of the HTTP request.                                                                              |
-| `http.status_code` | `number` | The HTTP response status code.                                                                            |
-| `http.method`      | `string` | Indicates the desired action to be performed for a given resource.                                          |
+| **Fullname**       | **Type** | **Description**                                                                                    |
+| :---               | :---     | :----                                                                                              |
+| `http.url`         | `string` | The URL of the HTTP request.                                                                      |
+| `http.status_code` | `number` | The HTTP response status code.                                                                    |
+| `http.method`      | `string` | Indicates the desired action to be performed for a given resource.                                |
 | `http.referer`     | `string` | HTTP header field that identifies the address of the webpage that linked to the resource being requested.|
-| `http.request_id`  | `string` | The ID of the HTTP request.                                                                              |
+| `http.request_id`  | `string` | The ID of the HTTP request.                                                                       |
 | `http.useragent`   | `string` | The User-Agent as it is sent (raw format). [See below for more details](#user-agent-attributes). |
 
 #### URL details attributes
 
-These attributes provide details about the parsed parts of the HTTP URL. They are generally generated thanks to the [URL parser][7]. All attributes are prefixed by `http.url_details`.
+These attributes provide details about the parsed parts of the HTTP URL. They are generally generated thanks to the [URL parser][8]. All attributes are prefixed by `http.url_details`.
 
-| **Fullname**                   | **Type** | **Description**                                                                         |
-| :---                           | :---     | :----                                                                                   |
-| `http.url_details.host`        | `string` | The HTTP host part of the URL.                                                          |
-| `http.url_details.port`        | `number` | The HTTP port part of the URL.                                                          |
-| `http.url_details.path`        | `string` | The HTTP path part of the URL.                                                          |
+| **Fullname**                   | **Type** | **Description**                                                                        |
+| :---                           | :---     | :----                                                                                 |
+| `http.url_details.host`        | `string` | The HTTP host part of the URL.                                                        |
+| `http.url_details.port`        | `number` | The HTTP port part of the URL.                                                        |
+| `http.url_details.path`        | `string` | The HTTP path part of the URL.                                                        |
 | `http.url_details.queryString` | `object` | The HTTP query string parts of the URL decomposed as query params key/value attributes. |
-| `http.url_details.scheme`      | `string` | The protocol name of the URL (HTTP or HTTPS)                                            |
+| `http.url_details.scheme`      | `string` | The protocol name of the URL (HTTP or HTTPS)                                          |
 
 #### User-Agent attributes
 
-These attributes provide details about the meanings of user-agents' attributes. They are generally generated thanks to the [User-Agent parser][8]. All attributes are prefixed by `http.useragent_details`.
+These attributes provide details about the meanings of user-agents' attributes. They are generally generated thanks to the [User-Agent parser][9]. All attributes are prefixed by `http.useragent_details`.
 
 | **Fullname**                            | **Type** | **Description**                                |
 | :---                                    | :---     | :----                                          |
@@ -146,7 +160,7 @@ These attributes provide details about the meanings of user-agents' attributes. 
 ### Source code
 
 These attributes are related to the data used when a log or an error is generated via a logger in a custom application. All attributes are prefixed either by `logger` or `error`.
- 
+
 | **Fullname**         | **Type** | **Description**                                                  |
 | :---                 | :---     | :----                                                            |
 | `logger.name`        | `string` | The name of the logger.                                          |
@@ -164,12 +178,12 @@ Database related attributes are prefixed by `db`.
 
 | **Fullname**   | **Type** | **Description**                                                                                                                       |
 | :---           | :---     | :----                                                                                                                                 |
-| `db.instance`  | `string` | Database instance name. E.g., in Java, if `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"`, the instance name is `customers`.       |
+| `db.instance`  | `string` | Database instance name. E.g., in Java, if `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"`, the instance name is `customers`.   |
 | `db.statement` | `string` | A database statement for the given database type. E.g., for mySQL: `"SELECT * FROM wuser_table";` for Redis: `"SET mykey 'WuValue'"`. |
 | `db.operation` | `string` | The operation that was performed ("query", "update", "delete",...).                                                                   |
 | `db.user`      | `string` | User that performs the operation.                                                                                                     |
 
-Typical integrations relying on these attributes are: [Cassandra][9], [MySQL][10], [RDS][11], [Elasticsearch][12], etc.
+Typical integrations relying on these attributes are: [Cassandra][10], [MySQL][11], [RDS][12], [Elasticsearch][13], etc.
 
 ### Performance
 
@@ -180,7 +194,7 @@ Performance metrics attributes.
 | `duration`   | `number` | A duration of any kind in **nanoseconds**: HTTP response time, database query time, latency, etc. |
 
 
-We advise you to rely or at least remap on this attribute as Datadog displays and uses it as a default [Measure][13] for [trace Search][14]. 
+We advise you to rely or at least remap on this attribute as Datadog displays and uses it as a default [Measure][14] for [trace Search][15].
 
 ### User related attributes
 
@@ -204,7 +218,7 @@ These attributes are related to the data added by a syslog or a log-shipper agen
 | `syslog.timestamp` | `string` | The log timestamp. Generally remapped to the `date` reserved attribute.       |
 | `syslog.env`       | `string` | The environment name where the source of logs come from.                      |
 
-Some integrations that rely on these are: [Rsyslog][15], [NxLog][16], [Syslog-ng][17], [Fluentd][18], [Logstash][19], etc.
+Some integrations that rely on these are: [Rsyslog][16], [NxLog][17], [Syslog-ng][18], [Fluentd][19], [Logstash][20], etc.
 
 ## Further Reading
 
@@ -215,17 +229,18 @@ Some integrations that rely on these are: [Rsyslog][15], [NxLog][16], [Syslog-ng
 [3]: /integrations/amazon_elb
 [4]: /integrations/nginx
 [5]: /integrations/haproxy
-[6]: /integrations/amazon_elb
-[7]: /logs/processing/processors/#url-parser
-[8]: /logs/processing/processors/#user-agent-parser
-[9]: /integrations/cassandra
-[10]: /integrations/mysql
-[11]: /integrations/amazon_rds
-[12]: /integrations/elastic
-[13]: /logs/explorer/?tab=measures#setup
-[14]: /tracing/trace_search_and_analytics/search
-[15]: /integrations/rsyslog
-[16]: /integrations/nxlog
-[17]: /integrations/syslog_ng
-[18]: /integrations/fluentd
-[19]: /integrations/logstash
+[6]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+[7]: /integrations/amazon_elb
+[8]: /logs/processing/processors/#url-parser
+[9]: /logs/processing/processors/#user-agent-parser
+[10]: /integrations/cassandra
+[11]: /integrations/mysql
+[12]: /integrations/amazon_rds
+[13]: /integrations/elastic
+[14]: /logs/explorer/?tab=measures#setup
+[15]: /tracing/trace_search_and_analytics/search
+[16]: /integrations/rsyslog
+[17]: /integrations/nxlog
+[18]: /integrations/syslog_ng
+[19]: /integrations/fluentd
+[20]: /integrations/logstash

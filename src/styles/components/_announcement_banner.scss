@@ -53,7 +53,7 @@ $announcement_banner_text_color: #000000;
 
 .blog .announcement_banner.open ~ .navbar + .main,
 .search .announcement_banner.open ~ .navbar + .main,
-.resources .announcement_banner.open ~ .navbar + .main, {
+.resources .announcement_banner.open ~ .navbar + .main {
     padding-top: 90px;
     .s-results {
       top: 60px;
