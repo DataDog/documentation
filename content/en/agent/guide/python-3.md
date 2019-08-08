@@ -13,7 +13,7 @@ To provide flexibility in allowing code to run multiple on versions of the Agent
 
 ### ddev
 
-The Datadog developer package, also known as ddev, contains functions that can help you verify that your custom checks are compatible with Python 3. 
+The Datadog developer package,`ddev`, contains functions to help you [verify that your custom checks are compatible with Python 3][8]. 
 
 #### Installation
 
@@ -264,3 +264,4 @@ Use the built-in `next` function instead of calling the `next` method. For insta
 [5]: https://pythonhosted.org/six/#
 [6]: https://pythonhosted.org/six/#module-six.moves
 [7]: https://nedbatchelder.com/text/unipain.html
+[8]: /developers/integrations/new_check_howto/#building
