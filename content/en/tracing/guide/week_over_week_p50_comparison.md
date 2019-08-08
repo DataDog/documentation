@@ -36,7 +36,7 @@ Datadog can show you the latency of your application over time and how it compar
 
 4. **Find the Latency graph** on the top of the Service Dashboard and deselect all the percentiles from the legend leaving only the p50 option.
 
-    Datadog APM allows you to compare the different percentiles of latency for the service over time but also to view the full distribution of latencies in the Latency Distribution graph below]
+    Datadog APM allows you to compare the different percentiles of latency for the service over time but also to view the full distribution of latencies in the Latency Distribution graph below.
 
 5. **Expand the Latency graph** to view the full screen mode where you can conduct a more comprehensive analysis.
 6. **Add the previous weeks p50 performance** by checking the `Week` option in the *Compare to Last* section on the right
