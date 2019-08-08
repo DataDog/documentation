@@ -1,0 +1,134 @@
+{
+    // Starts from a sane strict rule set
+    "extends": [
+        "airbnb-base",
+        "plugin:react/recommended",
+        "prettier",
+        "prettier/react"
+    ],
+    "rules": {
+        "func-names": "off",
+        "comma-dangle": ["error", "never"],
+        // Allow non-dot notation
+        "dot-notation": "off",
+        // Really specific, will review it later
+        "new-cap": "off",
+        // No _var but allow this._method
+        "no-underscore-dangle": [2, {
+            "allowAfterThis": true
+        }],
+        // Allow functions to be used before definition (as espected in other languages)
+        "no-use-before-define": [
+            "error",
+            {
+                "functions": false,
+                "classes": true
+            }
+        ],
+        // Don't allow modification of function parameters, but allow modification of parameter properties.
+        // Debatable but required for in-place functions.
+        "no-param-reassign": [2, {
+            "props": false
+        }],
+        // Don't be too strict on these yet
+        "object-shorthand": [1, "always"],
+        "arrow-body-style": [1, "as-needed"],
+        // Allow mixed operators
+        "no-mixed-operators": "off",
+        // Preference yet to be defined, be flexible for now
+        "import/prefer-default-export": "off",
+        // Allow i++, i--
+        "no-plusplus": "off",
+        // Simpler than Airbnb, closer to Prettier
+        // TODO: enable/auto-lint it everywhere
+        "arrow-parens": ["off", "as-needed"],
+        // Need to figure out first what convention we want here
+        "import/extensions": "off",
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": [
+                    "**/*.unit.{js,jsx}",
+                    "**/test/**/*.{js,jsx}",
+                    "webpack.dev.js",
+                    "webpack.common.js",
+                    "webpack.prod.js",
+                    "styleguide.config.js"
+                ]
+            }
+        ],
+        // Don't force class methods to be static when possible
+        "class-methods-use-this": "off",
+        // All import must exist in imported file
+        "import/no-unresolved": "error",
+        // AirBNB doesn't use it because it doesn't work with CommonJS, but we don't care so we want `named`
+        "import/named": "error",
+        // Allow parseInt without radix (we don't support any browsers that
+        // implement parseInt incorrectly)
+        "radix": "off",
+        // Always allow a final else in an if block
+        "no-else-return": "off",
+
+        // Accept only warn and error console methods
+        "no-console": ["error", {
+            "allow": ["warn", "error", "info"]
+        }],
+
+        // Differences from the React set
+        // Allow anonymous components
+        "react/display-name": "off",
+
+        // We use regenerator-runtime anyway, disable warning about it
+        "no-restricted-syntax": "off",
+        // Prettier handles this
+        "no-nested-ternary": "off",
+        // react is provided by a plugin
+        "react/react-in-jsx-scope": "off",
+        "react/no-danger": "error",
+        // Off temporarily, TODO: bring them back one by one
+        "react/prop-types": [2, {
+            "ignore": ["children"]
+        }],
+        "react/no-string-refs": "off",
+        "react/no-unescaped-entities": "off"
+    },
+    // Need babel parser for some missing features (for instance, object spread)
+    "parser": "babel-eslint",
+    // React plugin, configured with the right version
+    "plugins": ["react"],
+    "settings": {
+        "react": {
+            "pragma": "React",
+            "version": "15.6.1"
+        },
+        // "import/resolver": {
+        //     "webpack": {
+        //         "config": {
+        //             "resolve": {
+        //                 "modules": [
+        //                 ],
+        //                 "mainFields": ["browser", "main", "module"],
+        //                 "extensions": [".json", ".ts", ".tsx", ".jsx", ".js"]
+        //             }
+        //         }
+        //     },
+        //     "node": {
+        //         "paths": ["src"]
+        //       }
+        // }
+    },
+    "env": {
+        "browser": true,
+        "es6": true,
+        "jquery": true,
+        "node": true
+    },
+    // Some globals that we still use in our "strict" code
+    // False mean that they are read-only https://eslint.org/docs/user-guide/configuring#specifying-globals
+    "globals": {
+        // Datadog globals
+        "DD": false,
+        // Third party globals
+        "$": false
+    }
+}
