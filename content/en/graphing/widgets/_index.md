@@ -47,7 +47,6 @@ In full screen mode, you can:
 
 Additional options are available for [timeseries widgets][1].
 
-
 ## Copy / paste widgets
 
 Widgets can be copied on [Dashboards][2], [Notebooks][3], [APM Service][4], and the [APM resource][5] page by using `Ctrl + C` (`Cmd + C` for Mac).
@@ -59,7 +58,7 @@ The copied widget can be pasted within Datadog by using `Ctrl + V` (`Cmd + V` fo
 
 A copied widget can also be shared outside of Datadog as a static image stored in the same Datadog datacenter as your Datadog site (US or EU).
 
-[1]: /graphing/widgets/timeseries
+[1]: /graphing/widgets/timeseries#full-screen
 [2]: /graphing/dashboards
 [3]: /graphing/notebooks
 [4]: /tracing/visualization/service
