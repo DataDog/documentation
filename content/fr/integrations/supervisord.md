@@ -42,11 +42,11 @@ Ce check surveille la disponibilité, l'état et le nombre de processus s'exécu
 
 ## Implémentation
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][10] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
 
 ### Installation
 
-Le check Supervisor est inclus dans le paquet de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur les serveurs sur lesquels Supervisor s'exécute.
+Le check Supervisor est inclus dans le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur les serveurs sur lesquels Supervisor s'exécute.
 
 ### Créez un fichier `conf.yaml` dans le dossier `logstash.d/` précédemment créé.
 
@@ -86,7 +86,7 @@ Rechargez supervisord.
 
 #### Associer l'Agent
 
-Modifiez le fichier `supervisord.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de [configuration de votre Agent][4]. Consultez le [fichier d'exemple supervisord.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles :
+Modifiez le fichier `supervisord.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de [configuration de votre Agent][3]. Consultez le [fichier d'exemple supervisord.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles :
 
 ```
 init_config:
@@ -115,13 +115,13 @@ Options de configuration
 * `server_check` (facultatif) : true par défaut. Check de service pour la connexion au serveur supervisord.
 * `socket` (facultatif) : en cas d'utilisation de supervisorctl pour communiquer avec supervisor, un socket est requis.
 
-Consultez [un exemple de check de configuration][5] pour obtenir les descriptions complètes des autres options de check.
+Consultez [un exemple de check de configuration][4] pour obtenir les descriptions complètes des autres options de check.
 
-[Redémarrez l'Agent][6] pour commencer à envoyer des métriques Supervisord à Datadog.
+[Redémarrez l'Agent][5] pour commencer à envoyer des métriques Supervisord à Datadog.
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][7] et cherchez `supervisord` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][6] et cherchez `supervisord` dans la section Checks.
 
 ## Données collectées
 
@@ -163,15 +163,16 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 * [Supervisor surveille vos processus. Datadog surveille Supervisor.][9]
 
 
+[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/supervisord/images/supervisorevent.png
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[4]: https://github.com/DataDog/integrations-core/blob/master/supervisord/datadog_checks/supervisord/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[7]: https://github.com/DataDog/integrations-core/blob/master/supervisord/metadata.csv
+[8]: https://docs.datadoghq.com/fr/help
+[9]: https://www.datadoghq.com/blog/supervisor-monitors-your-processes-datadog-monitors-supervisor
+[10]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 
 
 {{< get-dependencies >}}
-[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/supervisord/images/supervisorevent.png
-[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[3]: https://app.datadoghq.com/account/settings#agent
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[5]: https://github.com/DataDog/integrations-core/blob/master/supervisord/datadog_checks/supervisord/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[8]: https://docs.datadoghq.com/fr/help
-[9]: https://www.datadoghq.com/blog/supervisor-monitors-your-processes-datadog-monitors-supervisor
