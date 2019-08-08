@@ -54,10 +54,13 @@ Once you created a private location, configuring a Synthetics API or Browser tes
 
 4. To pull test configurations and push test results, the private location worker needs access to one of the Datadog API endpoints:
 
-    * For the Datadog US site: `https://api.datadoghq.com/api/`.
-    * For the Datadog EU site: `https://api.datadoghq.eu/api/`.
+    * For the Datadog US site: `api.datadoghq.com/api/`.
+    * For the Datadog EU site: `api.datadoghq.eu/api/`.
 
-    Check if the endpoint corresponding to your Datadog Site is available from the host runing the worker.
+    Check if the endpoint corresponding to your Datadog Site is available from the host runing the worker:
+
+    * For the Datadog US site: `ping api.datadoghq.com`.
+    * For the Datadog EU site:   `ping api.datadoghq.eu`.
 
 5. If your private location reports correctly to Datadog you should see the corresponding pills displayed if the private location polled your endpoint less than 5 seconds before loading the settings or create test pages:
 
