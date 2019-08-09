@@ -29,7 +29,7 @@ For example, suppose you were interested in measuring the average `temperature` 
 | New York, NY, Northeast | 79 | 79 | 79 | 79 | 79 | 79 | 79 |
 | Seattle, WA, Northwest | 75 | 75 | 75 | 75 | 75 | 75 | 75 |
  
- Each unique tag combination of `City`, `State`, `Region`, `Country` represents a timeseries / custom metric. Using the 5 timeseries above, we can determine the average temperature in the US, Northeast or Florida.
+ Each unique tag combination of `city`, `state`, `region`, and `country` represents a timeseries / custom metric. Using the five timeseries above, you can determine the average temperature in the US, Northeast, or Florida.
 
 Example 2: 
 * You submit the following metric name: `auth.exceptionCount`
