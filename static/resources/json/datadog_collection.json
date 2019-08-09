@@ -4924,6 +4924,162 @@
 							]
 						},
 						{
+							"name": "Update an AWS integration",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"account_id\": \"<YOUR_AWS_ACCOUNT_ID>\",\n    \"filter_tags\": [\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ],\n    \"host_tags\": [\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ],\n    \"role_name\": \"DatadogAWSIntegrationRole\",\n    \"account_specific_namespace_rules\": {\n        \"auto_scaling\": false,\n        \"opsworks\": false\n    }\n}"
+								},
+								"url": {
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/aws?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"datadoghq",
+										"{{datadog_site}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"integration",
+										"aws"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{datadog_api_key}}",
+											"description": "Your Datadog API key"
+										},
+										{
+											"key": "application_key",
+											"value": "{{datadog_application_key}}",
+											"description": "Your Datadog application key"
+										}
+									]
+								},
+								"description": "### Overview\n\nCreate a Datadog-Amazon Web Services integration.\n\n**Note**: Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.\n\n### Arguments\n\n* **`account_id`** [*required*]:\n\n    Your AWS Account ID without dashes.\n    [Consult the Datadog AWS integration to learn more][1] about your AWS account ID.\n\n* **`access_key_id`** [*optional*, *default*=**None**]:\n\n    If your AWS account is a GovCloud or China account, enter the corresponding Access Key ID.\n\n* **`role_name`** [*required*]:\n\n    Your Datadog role delegation name.\n    For more information about you AWS account Role name, [see the Datadog AWS integration configuration info][2].\n\n* **`filter_tags`** [*optional*, *default*=**None**]:\n\n    The array of EC2 tags (in the form `key:value`) defines a filter that Datadog uses when collecting metrics from EC2. Wildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used.\n    Only hosts that match one of the defined tags will be imported into Datadog. The rest will be ignored. Host matching a given tag can also be excluded by adding `!` before the tag.\n    e.x. `env:production,instance-type:c1.*,!region:us-east-1`\n    For more information on EC2 tagging, see the [AWS tagging documentation][3].\n\n* **`host_tags`** [*optional*, *default*=**None**]:\n\n    Array of tags (in the form `key:value`) to add to all hosts and metrics reporting through this integration.\n\n* **`account_specific_namespace_rules`** [*optional*, *default*=**None**]:\n\n    An object (in the form `{\"namespace1\":true/false, \"namespace2\":true/false}`) that enables or disables metric collection for specific AWS namespaces for this AWS account only. A list of namespaces can be found at the `https://api.datadoghq.com/api/v1/integration/aws/available_namespace_rules` endpoint.\n\n[1]: /integrations/amazon_web_services/#configuration\n[2]: /integrations/amazon_web_services/#installation\n[3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html"
+							},
+							"response": [
+								{
+									"name": "Creating an account",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"account_id\": \"<YOUR_AWS_ACCOUNT_ID>\",\n    \"filter_tags\": [\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ],\n    \"host_tags\": [\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ],\n    \"role_name\": \"DatadogAWSIntegrationRole\",\n    \"account_specific_namespace_rules\": {\n        \"auto_scaling\": false,\n        \"opsworks\": false\n    }\n}"
+										},
+										"url": {
+											"raw": "https://api.datadoghq.com/api/v1/integration/aws?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+											"protocol": "https",
+											"host": [
+												"api",
+												"datadoghq",
+												"com"
+											],
+											"path": [
+												"api",
+												"v1",
+												"integration",
+												"aws"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{datadog_api_key}}",
+													"description": "Your Datadog API key"
+												},
+												{
+													"key": "application_key",
+													"value": "{{datadog_application_key}}",
+													"description": "Your Datadog application key"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 06 May 2019 15:25:25 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "DD-PSHARD=193; Max-Age=604800; Path=/; expires=Mon, 13-May-2019 15:25:21 GMT; secure; HttpOnly"
+										},
+										{
+											"key": "X-DD-VERSION",
+											"value": "35.1295692"
+										},
+										{
+											"key": "X-DD-Debug",
+											"value": "c4aq40z3KDGIu7BkYTlUd0iZ+hCVqUX2FQHrdHjK4gPuZVw/LYvbdogVHHOtojAR"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "DD-POOL",
+											"value": "dogweb_sameorig"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800;"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"external_id\": \"1234567890\"\n}"
+								}
+							]
+						},
+						{
 							"name": "Delete an AWS Integration",
 							"request": {
 								"method": "DELETE",
@@ -7576,7 +7732,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"limit\": 50,\n    \"query\": \"source:agent status:error\",\n    \"sort\": \"desc\",\n    \"time\": {\n        \"from\": \"{{from_date}}\",\n        \"to\": \"{{to_date}}\"\n    }\n}"
+							"raw": "{\n    \"limit\": 1000,\n    \"query\": \"source:agent status:error\",\n    \"sort\": \"desc\",\n    \"time\": {\n        \"from\": \"{{from_date}}\",\n        \"to\": \"{{to_date}}\"\n    }\n}"
 						},
 						"url": {
 							"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/logs-queries/list?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
@@ -7766,12 +7922,12 @@
 							"variable": [
 								{
 									"key": "INDEX_NAME",
-									"value": "<INDEX_NAME>",
+									"value": "main",
 									"description": "Name of the index"
 								}
 							]
 						},
-						"description": "### Update an Index\n\n**This endpoint is in public beta. If you have any feedback, [contact Datadog support](https://docs.datadoghq.com/help/)**\n\nThis endpoint updates an `Index` identified by its name. It returns the `Index` object passed in the request body when the request is successful.\n\n### Arguments\n\n* **`filter.query`**  [*optional*]:\n    Only logs matching the filter criteria will be considered for this index. The search query followis the [Log search syntax](https://docs.datadoghq.com/logs/explorer/search)\n* **`exclusion_filters`** An array of `ExclusionFilter` objects (see hereafter). The logs are tested against the query of each `ExclusionFilter`, following the order of the array. Only the first matching active `ExclusionFilter` matters, others (if any) are ignored. The `ExclusionFilter` object describes the configuration of an [exclusion filter](https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters). It has the following attributes:\n\n  * **`name`** [*required*]:\n    The name of the exclusion filter\n  * **`is_enabled`**  [*optional*, *default*=**False**]:\n    A boolean stating if the exclusion is active.\n  * **`filter.query`** [*optional*]:\n    Only logs matching the filter criteria AND the query of the parent index will be considered for this exclusion filter. The search query follows the [Log search syntax][1]\n  * **`filter.sample_rate`** [*required*]:\n    The fraction of logs excluded by the exclusion filter, when active. The sampling is uniform."
+						"description": "### Update an Index\n\n**This endpoint is in public beta. If you have any feedback, [contact Datadog support](https://docs.datadoghq.com/help/)**\n\nThis endpoint updates an `Index` identified by its name. It returns the `Index` object passed in the request body when the request is successful.\n\n### Arguments\n\n* **`filter.query`**  [*required*]:\n    Only logs matching the filter criteria will be considered for this index. The search query followis the [Log search syntax](https://docs.datadoghq.com/logs/explorer/search)\n* **`exclusion_filters`** An array of `ExclusionFilter` objects (see hereafter). The logs are tested against the query of each `ExclusionFilter`, following the order of the array. Only the first matching active `ExclusionFilter` matters, others (if any) are ignored. The `ExclusionFilter` object describes the configuration of an [exclusion filter](https://docs.datadoghq.com/logs/logging_without_limits/#exclusion-filters). It has the following attributes:\n\n  * **`name`** [*required*]:\n    The name of the exclusion filter\n  * **`is_enabled`**  [*optional*, *default*=**False**]:\n    A boolean stating if the exclusion is active.\n  * **`filter.query`** [*optional*]:\n    Only logs matching the filter criteria AND the query of the parent index will be considered for this exclusion filter. The search query follows the [Log search syntax][1]\n  * **`filter.sample_rate`** [*required*]:\n    The fraction of logs excluded by the exclusion filter, when active. The sampling is uniform."
 					},
 					"response": []
 				},
