@@ -11,8 +11,8 @@ Let's say you are running an online market-place, and your third-party payment p
 
 In datadog, you can access any single event (a log, an apm event, etc.), access and leverage its specific information. For instance, you'll search on `5xx` errors on your `/payment` microservice, and eventually find such logs : 
 
-```
-2:21:00 +00:00 ERROR service:payment host:i-1234567890 user_id:3141 referer:/account resource:third-party/refund 
+``` json
+2:21:00 +00:00 ERROR service:payment host:i-1234 user_id:3141 referer:/account resource:third-party/refund 
 ```
 
 But complementary, you might be interested in aggregated data, which gives you a higher perspective on your applications.
