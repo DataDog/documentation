@@ -510,6 +510,51 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 {{% /tab %}}
 {{< /tabs >}}
 
+## GeoIP Parser
+
+The GeoIP parser takes an IP address attribute and extracts if available the Continent, Country, Subdivision, and City information in the target attribute path.
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+{{< img src="logs/processing/processors/geoip_processor.png" alt="GeoIP Processor" responsive="true" style="width:80%;">}}
+
+Most elements contains a `name` and `iso_code` (or `code` for continent) attribute. `subdivision` is the first level of subdivision that the country uses such as "States" for the United States or "Departments" for France.
+
+Find below an example of the GeoIP Parser that extracts gelocation from the `network.client.ip` attribute and stores it into the `network.client.geoip` attribute:
+
+{{< img src="logs/processing/processors/geoip_example.png" alt="GeoIP example" responsive="true" style="width:60%;">}}
+
+**Note**: This processor uses GeoLite2 data created by [MaxMind][1].
+
+[1]: https://www.maxmind.com
+{{% /tab %}}
+{{% tab "API" %}}
+
+Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper JSON payload:
+
+```json
+{
+    "type": "geo-ip-parser",
+    "name": "Parse the geolocation elements from network.client.ip attribute.",
+    "enabled": true,
+    "sources": ["network.client.ip"],
+    "target": "network.client.geoip"
+}
+```
+
+| Parameter | Type             | Required | Description                                                                                                              |
+| ------    | -----            | -------- | -----                                                                                                                    |
+| `type`    | String           | yes      | Type of the processor.                                                                                                   |
+| `name`    | String           | no       | Name of the processor.                                                                                                   |
+| `enabled` | Boolean          | no       | If the processors is enabled or not, default: `false`                                                                    |
+| `sources` | Array of Strings | no       | Array of source attributes, default: `network.cient.ip`                                                                  |
+| `target`  | String           | yes      | Name of the parent attribute that contains all the extracted details from the `sources`, default: `network.client.geoip` |
+
+[1]: /api/?lang=bash#logs-pipelines
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Trace Remapper
 
 There are two ways to improve correlation between application traces and logs:

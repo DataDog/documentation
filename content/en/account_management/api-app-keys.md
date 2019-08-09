@@ -17,10 +17,6 @@ Application keys, in conjunction with your org's API key, give you full access t
 
 ## Client tokens
 
-<div class="alert alert-warning">
-Client tokens are in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on this feature for your account.
-</div>
-
 Client tokens are unique to your organization. A client token is required by the [web browser log collector][1] to submit logs to Datadog.
 These tokens can only be used to send web browser logs to Datadog.
 
