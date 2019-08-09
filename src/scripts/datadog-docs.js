@@ -1164,8 +1164,7 @@ function loadPage(newUrl) {
     }
 
     var mainContent = document.getElementById("mainContent");
-    var currentTOC = document.querySelector('.toc-container');
-    mainContent.classList.add('loading');
+    var currentTOC = document.querySelector('.toc-container');    
 
     var httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function() {
@@ -1183,17 +1182,13 @@ function loadPage(newUrl) {
         var newDocument = httpRequest.responseXML;
 
         if (newDocument === null){
-            mainContent.classList.remove('loading');
             return;
         }
 
         var newContent = httpRequest.responseXML.getElementById("mainContent");
         var newTOC = httpRequest.responseXML.querySelector(".toc-container");
 
-        newContent.classList.add('loading');
-
         if (newContent === null){
-            mainContent.classList.remove('loading');
             return;
         }
 
@@ -1265,11 +1260,6 @@ function loadPage(newUrl) {
             }
             hideToc();
         }
-
-        window.setTimeout(function () {
-            mainContent.classList.remove('loading');
-
-        }, 1);
 
         var end = window.performance.now();
         var time = end - start;
