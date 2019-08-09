@@ -36,7 +36,7 @@ For example, suppose you are interested in measuring the average `temperature` i
  Each unique tag combination of `city`, `state`, `region`, and `country` represents a timeseries / custom metric. Using the five timeseries above, you can determine the average temperature in the US, Northeast, or Florida.
 
 **Example 2**
- 
+
 * You submit the following metric name: `auth.exceptionCount`
 * Your code instrumentation plans the following tags associated with that metric: `method:X`, `method:Y`, `exception:A`, `exception:B`.
 * The logic behind your metric is the following :
@@ -124,7 +124,7 @@ Ultimately, you'll have 13 metrics using the following query: `count:service.req
 {{< img src="developers/metrics/custom_metrics/count_of_metrics.png" alt="count_of_metrics" responsive="true" style="width:70%;">}}
 
 ### Counting custom metrics from gauges, counts, histograms, and rates
-A gauge[8] represents one value per second (examples: temperature or Kafka queue offset).
+A [gauge][8] represents one value per second (examples: temperature or Kafka queue offset).
 
 Suppose you are interested in measuring the average `temperature` in the state of Florida. `temperature` is stored as a `gauge` metric type in Datadog. You collect the following temperature measurements every 10 seconds during the past minute from Orlando, Miami, Boston, New York and Seattle, each tagged with information about the `city`, `state`, `region`, and `country`.
 
@@ -226,3 +226,4 @@ The full payload is approximately \~ 100 bytes. However, with the DogStatsD API,
 [5]: /api/#rate-limiting
 [6]: https://app.datadoghq.com/account/usage/hourly
 [7]: https://app.datadoghq.com/metric/summary
+[8]: 
