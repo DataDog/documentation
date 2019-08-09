@@ -157,7 +157,7 @@ To obtain the maximum `age` in the state of New York, you can reaggregate the ti
 #### Distributions with percentile aggregations
 After submitting a distribution metric to Datadog, you have the option to add percentile aggregations to a distribution with the Distributions UI in-app. Distributions with percentile aggregations are counted differently compared to the metric types listed above since percentiles are not mathematically reaggregatable.
 
-Supposed we're interested in measuring the *median* `Age` in the state of New York where the `Age` distribution metric is still tagged by `City` and `State`. 
+Suppose you are interested in measuring the *median* `age` in the state of New York where the `age` distribution metric is tagged with `city` and `state`. 
 
 [Insert DIAGRAM WITH PERCENTILES OF NY VALUES] 
 
