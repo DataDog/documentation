@@ -125,7 +125,7 @@ Suppose you are interested in measuring the average `temperature` in the state o
 
 [INSERT DIAGRAM OF 5 TIMESERIES FROM ORLANDO, MIAMI, BOSTON, NY, SEATTLE]
 
-The total number of custom metrics associated with the `temperature` Gauge metric is 5. Each unique string combination of `City`, `State`, `Region` and `Country` that appears in our temperature data counts as a custom metric (in other words a timeseries of data that Datadog stores).
+The total number of custom metrics associated with the `temperature` gauge metric is five. Each unique string combination of `city`, `state`, `region` and `country` tagged to the temperature data counts as a custom metric (in other words a timeseries of data stored by Datadog).
 
 Using the 5 timeseries above, we're able to determine the average `temperature` in the US, Northeast or Florida at query time. 
 
