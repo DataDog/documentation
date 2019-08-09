@@ -154,7 +154,7 @@ The total number of custom metrics or timeseries emitted from the `age` distribu
 
 To obtain the maximum `age` in the state of New York, you can reaggregate the timeseries above: Maximum age in New York = `max`(`max`(Rochester, NY), `max`(New York, NY)) = 67.
 
-#### Distributions with Percentile Aggregations
+#### Distributions with percentile aggregations
 After submitting a distribution metric to Datadog, you have the option to add percentile aggregations to a Distribution via the Distributions UI in-app. Distributions with percentile aggregations are counted differently compared to the metric types listed above since percentiles are not mathematically reaggregatable.
 
 Supposed we're interested in measuring the *median* `Age` in the state of New York where the `Age` distribution metric is still tagged by `City` and `State`. 
