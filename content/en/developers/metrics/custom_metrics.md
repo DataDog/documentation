@@ -197,11 +197,11 @@ Therefore, Datadog needs to precalculate five timeseries (`p50`,`p75`,`p90`,`p95
 - New York, NY
 - (`Null` city), (`null` state) -- equivalent to * {all time series}
 
-There are 3 potentially queryable values for the `City` tag: {Rochester, New York, `null`}. And there are 2 values for `State`: {NY, `null`}. 
+There are three potentially queryable values for the `city` tag: {Rochester, New York, `null`} and two values for the `state` tag: {NY, `null`}.
 
-The total number of custom metrics emitted from the `Age` distribution metric with added percentile aggregations is: 
+The total number of custom metrics emitted from the `age` distribution metric with added percentile aggregations is: 
 
-[4 * (2)] + [5 * ((3) * (2))] = 38 timeseries.
+[4 x (2)] + [5 x ((3) x (2))] = 38 timeseries.
 
 
 
