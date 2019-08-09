@@ -682,11 +682,3 @@ table, .table {
     width: 100%;
   }
 }
-
-#mainContent {
-  transition: opacity .25s linear;
-}
-
-#mainContent.loading {
-  opacity: 0.25;
-}
