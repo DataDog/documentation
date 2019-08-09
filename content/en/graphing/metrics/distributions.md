@@ -27,7 +27,7 @@ See the [Developer Tools section][2] for more implementation details. Please not
 
 ## Aggregations
 
-Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics (with custom tags set in code) and are resolved to any host tag based on the host that reported the metric. You can also calculate percentile aggregations for a set of tags (up to 10) you specify in the [distribution UI][3]. This will provide aggregations for `p50`, `p75`, `p90`, `p95`, and `p99`.
+Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics (with custom tags set in code) and are resolved to any host tag based on the host that reported the metric. You can also calculate percentile aggregations for a set of tags (up to ten) specified on the [Distribution Metrics][3] page. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99`.
 
 {{< img src="graphing/metrics/distributions/global_metrics_selection.png" alt="Distribution Metric UI" responsive="true" style="width:80%;">}}
 
