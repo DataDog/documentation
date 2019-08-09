@@ -175,7 +175,7 @@ There are three potentially queryable values for the `city` tag: {Rochester, New
 
 The total number of custom metrics emitted from the `age` distribution metric with added percentile aggregations is: 
 
-[4 * (2)] + [5 * ((3) * (2))] = 38 timeseries.
+[4 x (2)] + [5 x ((3) x (2))] = 38 timeseries.
 
 
 
