@@ -150,7 +150,7 @@ Suppose you are interested in measuring the maximum `age` metric in the state of
 
 [ADD DIAGRAM OF NEWYORK VALUES] 
 
-The total number of custom metrics/timeseries emitted from the `Age` distribution metric is 4 * (2). For both unique tag value combinations above, (i.e. Rochester, NY and New York, NY), Datadog stores 4 timeseries (`sum`,`count`,`min`,`max`, `avg`). 
+The total number of custom metrics or timeseries emitted from the `age` distribution metric is eight (4 x 2). For both unique tag value combinations above (Rochester, NY and New York, NY), Datadog stores four timeseries (`sum`,`count`,`min`,`max`, `avg`). 
 
 To obtain the maximum `Age` in the state of New York, we can reaggregate the timeseries above: Maximum age in New York = `Max`(`Max`(Rochester, NY), `Max`(New York, NY)) = 67.
 
