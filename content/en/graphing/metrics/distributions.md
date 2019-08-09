@@ -35,7 +35,7 @@ After electing to apply percentile aggregations on a distribution metric, these 
 
 {{< img src="graphing/metrics/distributions/dogweb_latency_bis.png" alt="Distribution metric bis" responsive="true" style="width:80%;">}}
 
-## Customize Tagging
+## Customize tagging
 
 Distributions provide functionality that allows you to control the tagging for metrics where host-level granularity does not make sense. 
 
