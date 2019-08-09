@@ -37,7 +37,7 @@ After electing to apply percentile aggregations on a distribution metric, these 
 
 ## Customize Tagging
 
-Distributions provide new functionality that allows you to control the tagging for metrics for which host-level granularity does not make sense. 
+Distributions provide functionality that allows you to control the tagging for metrics where host-level granularity does not make sense. 
 
 To customize tagging, hover over your metric in the table, and click on the pencil icon to edit. In the modal that pops up, select *Custom...*. There is a _whitelist_ of the tags you have defined in code by default. You can remove any of these tags or add any host-level tags back in. 
 
