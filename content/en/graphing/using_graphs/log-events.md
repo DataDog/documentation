@@ -9,7 +9,11 @@ description: "Put your event-based data (logs, apm events, etc.) into perspectiv
 Let's say you are running an online market-place, and your third-party payment provider warned you about an isolated incident yesterday round 2pm in their own systems. This incident is likely to have impacted your own customers, and you need to know more about this. 
 
 
-In datadog, you can access any single event (a log, an apm event, etc.), access and leverage its specific information. For instance, you'll search on `5xx` errors on your `/payment` microservice, and eventually find such logs : "User `3141` experienced an error on  page `/account` while accessing `third-party/refund` throughout `/payment` microservice resource on host `i-1234567890` at `2.21pm UTC` yesterday". This is what explorer are fore.
+In datadog, you can access any single event (a log, an apm event, etc.), access and leverage its specific information. For instance, you'll search on `5xx` errors on your `/payment` microservice, and eventually find such logs : 
+
+```
+2:21:00 +00:00 ERROR service:payment host:i-1234567890 user_id:3141 referer:/account resource:third-party/refund 
+```
 
 But complementary, you might be interested in aggregated data, which gives you a higher perspective on your applications.
 
