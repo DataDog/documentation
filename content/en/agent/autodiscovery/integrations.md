@@ -389,7 +389,7 @@ data:
       service: redis
 ```
 
-In the manifest, define the volumeMounts and volumes:
+In the manifest, define the `volumeMounts` and `volumes`:
 
 ```
 [...]
