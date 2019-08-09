@@ -48,7 +48,8 @@ Note: The exclusion of tags is not supported in this whitelist-based customizati
 ## Counting Distribution Metrics
 Distribution metrics with percentile aggregations (p50,p75,p90,p95,p99) generate custom metrics / timeseries differently than gauges, counts, histograms and distributions with nonpercentile aggregations (sum, count, min, max, avg). Because percentiles aren't reaggregatable, Datadog preserves 5 timeseries for every potentially queryable tag combinations. This is different from the # of custom metrics generated from gauges, counts, histograms or distributions with nonpercentile aggregations (dependent on the unique # of tag value combinations that appear in your data).
 
-For more information on counting custom metrics created from gauge, count, histogram or distribution metrics with nonpercentile aggregations, please refer to the Custom Metrics page. [4]
+For more information on counting custom metrics created from gauge, count, histogram, or distribution metrics with nonpercentile aggregations, refer to the [Custom Metrics][4] page.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
