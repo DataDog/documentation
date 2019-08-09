@@ -570,7 +570,7 @@ data:
         timeout: 1
 ```
 
-In the manifest, define the volumeMounts and volumes:
+In the manifest, define the `volumeMounts` and `volumes`:
 
 ```
 [...]
