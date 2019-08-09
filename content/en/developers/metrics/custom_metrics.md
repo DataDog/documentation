@@ -138,7 +138,7 @@ Suppose you want to drop the `country` tag from the gauge `temperature` metric.
 
 Even though there are five cities, four states, three regions, and one country, there are still five unique tag value combinations of `city`, `state`, `region`, and `country` that appear in the data. The total number of custom metrics emitted from the `temperature` metric is still five. 
 
-Suppose we now dropped the `City` tag from the `temperature` metric.
+Suppose you drop the `city` tag from the gauge `temperature` metric.
 
 [INSERT THIRD DIAGRAM OF 4 TIMESERIES] 
 Now there are 4 unique tag value combinations that appear in our `temperature` data; therefore, the total number of custom metrics from the `temperature` metric tagged with `State` and `Region` is 4. 
