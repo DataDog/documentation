@@ -143,7 +143,7 @@ Suppose you drop the `city` tag from the gauge `temperature` metric.
 [INSERT THIRD DIAGRAM OF 4 TIMESERIES] 
 Now there are four unique tag value combinations that appear in the `temperature` data. Therefore, the total number of custom metrics from the `temperature` metric tagged with `state` and `region` is four. 
 
-### Counting Custom Metrics from Distributions  
+### Counting custom metrics from distributions  
 A distribution metric gathers all values across all hosts emitting metric values in 10 second flush intervals. Distributions emit a number of custom metrics that is proportional to the number of custom metrics emitted from `Gauges`. Distributions generate 4 timeseries for each unique tag value combination that appears in the data: `sum`, `count`, `min`, `max` (`avg` is calculated from the sum/count). 
 
 Suppose we're interested in measuring the maximum `Age` metric in the state of New York. `Age` is submitted to Datadog as a distribution metric tagged by `City` and `State`. 
