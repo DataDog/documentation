@@ -121,7 +121,7 @@ Ultimately, you'll have 13 metrics using the following query: `count:service.req
 ### Counting Custom Metrics from Gauges, Counts, Histograms, Rates
 A gauge[8] represents one value per second (examples: temperature or Kafka queue offset).
 
-Suppose we’re interested in measuring the average `temperature` metric in the state of Florida, `temperature` is stored as a`Gauge` metric type in Datadog. We have collected the following temperature measurements every 10 seconds during the past minute from Orlando, Miami, Boston, New York and Seattle, each tagged with the information about City, State, Region, Country.
+Suppose you are interested in measuring the average `temperature` in the state of Florida. `temperature` is stored as a `gauge` metric type in Datadog. You collect the following temperature measurements every 10 seconds during the past minute from Orlando, Miami, Boston, New York and Seattle, each tagged with information about the `city`, `state`, `region`, and `country`.
 
 [INSERT DIAGRAM OF 5 TIMESERIES FROM ORLANDO, MIAMI, BOSTON, NY, SEATTLE]
 
