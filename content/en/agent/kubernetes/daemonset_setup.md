@@ -69,25 +69,31 @@ spec:
         name: datadog-agent
         ports:
           - containerPort: 8125
-            # Custom metrics via DogStatsD - uncomment this section to enable custom metrics collection
+            ## Custom metrics via DogStatsD - uncomment this section to enable custom metrics collection
+            ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to true to collect StatsD metrics from other containers.
             # hostPort: 8125
             name: dogstatsdport
             protocol: UDP
           - containerPort: 8126
-            # Trace Collection (APM) - uncomment this section to enable APM
+            ## Trace Collection (APM) - uncomment this section to enable APM
             # hostPort: 8126
             name: traceport
             protocol: TCP
         env:
           - name: DD_API_KEY
-            # Kubernetes Secrets - uncomment this section to supply API Key with secrets
-#            valueFrom:
-#              secretKeyRef:
-#                name: datadog-secret
-#                key: api-key
+            ## Kubernetes Secrets - uncomment this section to supply API Key with secrets
+            # valueFrom:
+            #   secretKeyRef:
+            #     name: datadog-secret
+            #     key: api-key
+
+          ## Set DD_SITE to datadoghq.eu to send your Agent data to the Datadog EU site
           - name: DD_SITE
-            # Set DD_SITE to datadoghq.eu to send your Agent data to the Datadog EU site
             value: "datadoghq.com"
+
+          ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to true to allow StatsD collection.
+          - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
+            value: "false"
           - name: DD_COLLECT_KUBERNETES_EVENTS
             value: "true"
           - name: DD_LEADER_ELECTION
@@ -100,6 +106,7 @@ spec:
                 fieldPath: status.hostIP
           - name: DD_APM_ENABLED
             value: "true"
+        ## Note these are the minimum suggested values for requests and limits. The amount of resources required by the Agent varies depending on the number of checks, integrations, and features enabled.
         resources:
           requests:
             memory: "256Mi"
@@ -112,7 +119,7 @@ spec:
             mountPath: /var/run/docker.sock
           - name: logpodpath
             mountPath: /var/log/pods
-          # Docker runtime directory, replace this path with your container runtime logs directory, or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
+          ## Docker runtime directory, replace this path with your container runtime logs directory, or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
           - name: logcontainerpath
             mountPath: /var/lib/docker/containers
           - name: procdir
@@ -137,7 +144,7 @@ spec:
         - hostPath:
             path: /var/log/pods
           name: logpodpath
-        # Docker runtime directory, replace this path with your container runtime logs directory, or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
+        ## Docker runtime directory, replace this path with your container runtime logs directory, or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
         - hostPath:
             path: /var/lib/docker/containers
           name: logcontainerpath
@@ -222,7 +229,7 @@ Mount `/var/lib/docker/containers` as well, since `/var/log/pods` is symlink to 
           (...)
           - name: logpodpath
               mountPath: /var/log/pods
-          # Docker runtime directory, replace this path with your container runtime logs directory, or remove this configuration if `/var/log/pods` is not a symlink to any other directory.    
+          # Docker runtime directory, replace this path with your container runtime logs directory, or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
           - name: logcontainerpath
             mountPath: /var/lib/docker/containers
       (...)
@@ -300,12 +307,11 @@ For Agent v6.12+, short lived container logs (stopped or crashed) are automatica
 {{% /tab %}}
 {{% tab "Docker Socket" %}}
 
-By default the Agent looks every 5 seconds for new containers. Any container with a shorter duration life does not have any data collected by the Agent.
+For a Docker environment, the Agent receives container updates in real time through Docker events. The Agent extracts and updates the configuration from the container labels (Autodiscovery) every 10 seconds. Therefore, by default, the Agent does not collect data for any container with a shorter life.
 
- You can override this autodiscovery interval with a shorter one by setting the `ad_config_poll_interval` parameter which correspond to the `DD_AD_CONFIG_POLL_INTERVAL` environment variable.
-The expected value is a integer in seconds.
+You can override the polling interval by setting the `ad_config_poll_interval` parameter, which is equivalent to the `DD_AD_CONFIG_POLL_INTERVAL` environment variable.
 
-The other option is to use the `K8s file` collection method that supports init, stopped, and short lived containers collection without any extra setup.
+For a Kubernetes environment, use the `K8s file` collection method that supports init, stopped, and short lived containers. No additional setup is required.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -403,7 +409,7 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [5]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information
 [6]: /agent/faq/kubernetes-secrets
 [7]: /agent/docker/#environment-variables
-[8]: /agent/autodiscovery/?tab=hostagent#how-to-set-it-up
+[8]: /agent/autodiscovery/?tab=agent#how-to-set-it-up
 [9]: /integrations/amazon_ec2/#configuration
 [10]: /logs
 [11]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates

@@ -11,7 +11,7 @@ further_reading:
   text: "RBAC for Log Management"
 - link: "account_management/rbac/role_api"
   tag: "Documentation"
-  text: "Manage Roles and Permissions with the Role API"
+  text: "Manage Roles and Permissions with the Roles API"
 ---
 
 <div class="alert alert-warning">
@@ -38,9 +38,9 @@ The following roles are available out of the box. By default, users are associat
 
 Custom roles are imported via SAML integrations from identity providers. Datadog receives the user groups from your IdP and automatically generates roles to match those user groups. In this case, users who sign in via the IdP are automatically associated with those roles and have the permissions that are granted to those roles. 
 
-Alternatively, use [the Role API][1] to create roles, and associate users with those roles.
+Alternatively, use [the Roles API][1] to create roles, and associate users with those roles.
 
-For existing roles, you can grant/revoke permissions to/from via [the Role API][1] to manage the access of users associated with those roles.
+For existing roles, you can grant/revoke permissions to/from via [the Roles API][1] to manage the access of users associated with those roles.
 
 ## Further Reading
 

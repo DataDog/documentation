@@ -1,6 +1,7 @@
 ---
 title: Identify Synthetics Bots
 kind: documentation
+disable_toc: true
 description: Identify incoming Synthetics requests
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
@@ -15,19 +16,17 @@ further_reading:
 - link: "synthetics/api_tests"
   tag: "Documentation"
   text: "Configure an API Test"
-
 ---
 
-Some parts of your system might not be available to robots without the right identification, or you might want to avoid collecting analytics from Datadog robots. Use the headers added to Synthetics tests to spot Datadog robots and filter their requests once in your analytics tool. 
+Some parts of your system might not be available to robots without the right identification, or you might want to avoid collecting analytics from Datadog robots. Use the headers added to Synthetics tests to spot Datadog robots and filter their requests once in your analytics tool.
 
 Header attached to all Datadog API tests:
 
-`Sec-Datadog: Request sent by a Datadog Synthetics API Test (https://docs.datadoghq.com/synthetics/) - test_id: <TEST_ID>`
+`Sec-Datadog: Request sent by a Datadog Synthetics API Test (https://docs.datadoghq.com/synthetics/) - public_id: <SYNTHETICS_TEST_PUBLIC_ID>`
 
 Header attached to all Datadog Browser tests:
 
-`Sec-Datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - test_id: <TEST_ID>`
-
+`Sec-Datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - public_id: <SYNTHETICS_TEST_PUBLIC_ID>`
 
 If APM is enabled, [**other APM specific headers**][1] such as `x-datadog-trace-id` are added to all the requests launched for API tests.
 
@@ -50,6 +49,10 @@ Alternatively, there are other ways to flag Datadog Synthetics robots:
 * You can locally add **cookies, headers or basic auth** to your API tests and **cookies and headers** to your Browser tests.
 
 * You can use Datadog's [**Synthetics IP ranges**][2].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/apm/#how-are-traces-linked-to-checks
 [2]: https://ip-ranges.datadoghq.com/synthetics.json

@@ -33,7 +33,7 @@ Agent `datadog.yaml` 構成ファイルで、`https` リクエスト用と `http
 Agent は `https` を使用して Datadog にデータを送信しますが、インテグレーションは `http` を使用してメトリクスを収集することがあります。プロキシ転送されたリクエストでも、プロキシサーバーで SSL をアクティブにできます。`datadog.yaml` ファイルの構成例を以下にいくつか挙げます。
 
 <div class="alert alert-warning">
-メトリクスのプロキシ転送に使用される <code>&ltHOST&gt;:&ltPORT&gt;</code> をログのプロキシ転送に使用することはできません。「<a href="#proxy-for-logs">ログのプロキシ</a>」セクションを参照してください。
+メトリクスのプロキシ転送に使用される <code>&ltHOST&gt;:&ltPORT&gt;</code> をログのプロキシ転送に使用することはできません。「<a href="/agent/logs/proxy">ログのプロキシ</a>」セクションを参照してください。
 </div>
 
 すべての `https` リクエストに対して HTTP プロキシを設定する例
@@ -94,7 +94,7 @@ Agent は、これらの値を以下の優先順で使用します。
 {{% tab "Agent v5" %}}
 
 <div class="alert alert-warning">
-メトリクスのプロキシ転送に使用される <code>&ltHOST&gt;:&ltPORT&gt;</code> をログのプロキシ転送に使用することはできません。「<a href="#proxy-for-logs">ログのプロキシ</a>」セクションを参照してください。
+メトリクスのプロキシ転送に使用される <code>&ltHOST&gt;:&ltPORT&gt;</code> をログのプロキシ転送に使用することはできません。「<a href="/agent/logs/proxy">ログのプロキシ</a>」セクションを参照してください。
 </div>
 
 `datadog.conf` ファイルを編集してプロキシ情報を設定します。

@@ -26,9 +26,8 @@ For Agent 6, there are differences in hostname resolution. For more information,
 
 ### Potential host names
 
-The Datadog Agent collects potential host names from many different sources. To see all the names the Agent is detecting, [run the Agent status command][1]. For example:
+The Datadog Agent collects potential host names from many different sources. To see all the names the Agent is detecting, run the Agent's [status subcommand][1].
 ```
-$ sudo /etc/init.d/datadog-agent status
 ...
 Hostnames
 =========

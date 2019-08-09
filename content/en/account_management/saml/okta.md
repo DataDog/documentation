@@ -15,7 +15,7 @@ further_reading:
 
 It's recommended that you set up Datadog as an Okta application manually, as opposed to using a 'pre-configured' configuration.
 
-[Consult the dedicated Okta documentation, to know how to Configure SAML 2.0 for Datadog][1] 
+[Consult the dedicated Okta documentation, to know how to Configure SAML 2.0 for Datadog][1]
 
 ## General Details
 
@@ -28,7 +28,7 @@ It's recommended that you set up Datadog as an Okta application manually, as opp
 
 * **Audience URI (SP Entity ID)**: https://app.datadoghq.com/account/saml/metadata.xml
 
-* **Default Relay State**: 
+* **Default Relay State**:
 
 * **Name ID Format**: EmailAddress
 

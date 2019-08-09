@@ -24,6 +24,8 @@ aliases:
 disable_toc: true
 ---
 
+{{< vimeo 352332856 >}}
+
 ## What is APM?
 
  Datadog Application Performance Monitoring (APM or tracing) provides you with deep insight into your application's performance - from automatically generated dashboards for monitoring key metrics, like request volume and latency, to detailed traces of individual requests - side by side with your logs and infrastructure monitoring. This documentation covers Agent v6 only, for more information on setting up APM tracing with Agent v5, [see the APM with Agent v5 doc][1].

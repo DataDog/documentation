@@ -13,7 +13,7 @@ disable_toc: true
 
 *If you're new here, read below for a high-level view of Datadog.*
 
-{{< partial name="tile-nav/tile-nav.html" >}}
+{{< tile-nav >}}
 
 Your application stack is teeming with unused metadata that's trying to tell a story: things aren't humming along as well as they should be.
 
@@ -40,10 +40,6 @@ Before long, you'll create custom [Screenboards][11] that combine all the graphs
 Once your graphs have exposed the problem areas, set up alerting conditions on your metrics using [Monitors][15]. You receive [emails][16] when the alerts fire, or set up the [Slack][17] integration for a dedicated, in-app notifications.
 
 When you're well aware of an ongoing problem, [silence its alerts][18]. When you're about to bring a service down for maintenance, [schedule a downtime][18] so you won't get spammed with alerts. When you can't define some alert-worthy condition in terms of a single host, event, metric, or service, then create a [composite monitor][19] instead.
-
-<div class="col text-center">
-{{< img src="icons/fr-flag-round-50.png" alt="French Docs" responsive="true" popup="false" href="https://docs.datadoghq.com/fr/" >}}
-</div>
 
 {{< partial name="support/support.html" >}}
 

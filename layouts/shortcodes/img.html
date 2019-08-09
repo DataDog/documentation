@@ -12,9 +12,11 @@
 
 {{/* set img path based on page type and what is passed */}}
 {{- $local_ref := (.Get "src") -}}
-{{- $hash_ref := (index $.Site.Data.manifests.images $local_ref) -}}
-{{- $.Scratch.Add "_img" (print (replace $.Site.Params.img_url "images/" "") "images/" $hash_ref) -}}
-{{- $img := $.Scratch.Get "_img" -}}
+{{- $hash_ref := $local_ref -}}
+
+{{ $.Scratch.Add "_img" (print "images/" $hash_ref)  }}
+
+{{ $img := $.Scratch.Get "_img" }}
 
 {{- $image_type_arr := split (.Get "src") "." -}}
 

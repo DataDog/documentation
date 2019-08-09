@@ -5,7 +5,6 @@ order: 23
 external_redirect: /api/#logs-indexes
 ---
 
-
 ## Logs Indexes
 
 <div class="alert alert-warning">

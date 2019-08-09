@@ -54,7 +54,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 3. Installez l'[intégration AWS Lambda/Datadog][5].
 
-Une fois l'installation terminée, vous pouvez consulter toutes vos fonctions Lambda dans l'[IU Serverless Functions de Datadog][6]. Cette IU regroupe en une unique vue les métriques, les traces et les logs de vos fonctions AWS Lambda qui exécutent des applications sans serveur. Pour en savoir plus sur cette fonctionnalité, consultez la [documentation relative aux fonctions cloud de Datadog][7].
+Une fois l'installation terminée, vous pouvez consulter toutes vos fonctions Lambda dans l'[IU Serverless de Datadog][6]. Cette IU regroupe en une unique vue les métriques, les traces et les logs de vos fonctions AWS Lambda qui exécutent des applications sans serveur. Pour en savoir plus sur cette fonctionnalité, consultez la [documentation relative aux fonctions cloud de Datadog][7].
 
 ### Collecte de logs
 
@@ -68,7 +68,7 @@ Accédez ensuite à votre [section Log de Datadog][11] pour commencer à explore
 
 ### Collecte de traces
 
-Datadog s'intègre à [AWS X-Ray][12] pour recueillir et visualiser vos traces sans serveur à partir d'applications basées sur Lambda dans l'[IU Serverless Functions][6]. Vous pouvez en savoir plus sur la configuration de cette intégration dans la [documentation relative aux fonctions Datadog Cloud][7].
+Datadog s'intègre à [AWS X-Ray][12] pour recueillir et visualiser vos traces sans serveur à partir d'applications basées sur Lambda dans l'[IU Serverless][6]. Vous pouvez en savoir plus sur la configuration de cette intégration dans la [documentation relative aux fonctions Datadog Cloud][7].
 
 ### Métriques custom
 

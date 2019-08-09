@@ -34,7 +34,7 @@ Trace Search & Analytics is available starting in version 0.25.0 of the Java tra
 Trace Search & Analytics is available starting in version 0.19.0 of the Python tracing client. Enable Trace Search & Analytics globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
 * Tracer Configuration: `ddtrace.config.analytics_enabled = True`
-* Environment Variable: `DD_ANALYTICS_ENABLED=true`
+* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
  After enabling, the Trace Search & Analytics UI starts showing results. Visit [Trace Search page][1] to get started.
 
@@ -144,7 +144,7 @@ Use this in addition to the global configuration for any integrations that submi
 
 Integration names can be found on the [integrations table][1].
 
-[1]: /tracing/languages/java/#integrations
+[1]: /tracing/setup/java/#integrations
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -179,7 +179,7 @@ Where `integration` is the name of the integration. See the [list of available i
 - `nil` defers to global setting for analytics.
 
 
-[1]: /tracing/languages/ruby/#library-compatibility
+[1]: /tracing/setup/ruby/#library-compatibility
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -219,7 +219,7 @@ tracer.use('express', {
 Integration names can be found on the [integrations table][1].
 
 
-[1]: /tracing/languages/nodejs/#integrations
+[1]: /tracing/setup/nodejs/#integrations
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -253,18 +253,16 @@ Integration names can be found on the [integrations table][1].
 
 In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
 
-* System Property: `-Ddd.<INTEGRATION>.analytics.enabled=true`
 * Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-Use this in addition to the global configuration for any integrations that submit custom services. For example, for JMS spans which comes in as a custom service, you can set the following to enable all JMS Tracing in Trace Search & Analytics:
+Use this in addition to the global configuration for any integrations that submit custom services. For example, for Symfony spans which comes in as a custom service, you can set the following to enable all Symfony Tracing in Trace Search & Analytics:
 
-* System Property: `-Ddd.jms.analytics.enabled=true`
-* Environment Variable: `DD_JMS_ANALYTICS_ENABLED=true`
+* Environment Variable: `DD_SYMFONY_ANALYTICS_ENABLED=true`
 
 Integration names can be found on the [integrations table][1].
 
 
-[1]: /tracing/languages/php/#integrations
+[1]: /tracing/setup/php/#integrations
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -477,7 +475,7 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 ## APM Event Filtering
 
-An APM event represents the top span for a service, including its metadata. Once enabled, APM events are sent at 100% throuhgput by default. For example, a Java service with 100 requests will generate 100 APM events from its `servlet.request` spans, as each `servlet.request` span generates an APM event. [Filtering APM events][3] has the benefit of reducing the number of billable APM events and has no effect on trace sampling. Once a service has been filtered lower than 100%, APM event analytics are upscaled to display an estimate by default, and you have the option to display the filtered value. 
+An APM event represents the top span for a service, including its metadata. Once enabled, APM events are sent at 100% throughput by default. For example, a Java service with 100 requests will generate 100 APM events from its `servlet.request` spans, as each `servlet.request` span generates an APM event. [Filtering APM events][3] has the benefit of reducing the number of billable APM events and has no effect on trace sampling. Once a service has been filtered lower than 100%, APM event analytics are upscaled to display an estimate by default, and you have the option to display the filtered value.
 
 {{< img src="tracing/trace_search_and_analytics/analytics/apm_event_filtering.png" alt="APM Event Filtering" responsive="true" style="width:100%;">}}
 

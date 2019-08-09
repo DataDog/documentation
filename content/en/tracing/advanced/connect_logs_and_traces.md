@@ -30,9 +30,9 @@ Your language level logs *must* be turned into Datadog attributes in order for t
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Enable injection in the Java Tracer's [configuration][1] by setting `Ddd.logs.injection=true` or through environment variable `DD_LOGS_INJECTION=true`.
+Enable injection in the Java tracer's [configuration][1] by adding `-Ddd.logs.injection=true` as a jvm startup argument or through environment variable `DD_LOGS_INJECTION=true`.
 
-**Note**: Currently only **slf4j** is supported for MDC autoinjection.
+**Note**: Only `slf4j` and `log4j` are supported for MDC autoinjection.
 
 If the logs are already JSON formatted, there is nothing left to do. If the logs are raw formatted, update your formatter to include `dd.trace_id` and `dd.span_id` in your logger configuration:
 
@@ -115,16 +115,16 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-This enables automatic trace ID injection for `winston`, `bunyan`, and `pino`.
+This enables automatic trace ID injection for `bunyan`, `paperplane`, `pino`, and `winston`.
 
 **Note**: Automatic injection only works for logs formatted as JSON.
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-The .NET Tracer uses the [LibLog][2] library to automatically inject trace IDs into your application logs. It contains transparent built-in support for injecting into [NLog][3], [Log4Net][4], and [Serilog][5].
+The .NET Tracer uses the [LibLog][1] library to automatically inject trace IDs into your application logs. It contains transparent built-in support for injecting into [NLog][2], [Log4Net][3], and [Serilog][4].
 
-Enable injection in the .NET Tracer’s [configuration][1] by setting `DD_LOGS_INJECTION=true` through environment variables or the configuration files.
+Enable injection in the .NET Tracer’s [configuration][5] by setting `DD_LOGS_INJECTION=true` through environment variables or the configuration files.
 
 Additionally, injection can be enabled in the code:
 
@@ -138,12 +138,12 @@ var tracer = new Tracer(settings);
 
 **Note**: This setting is only read during `Tracer` initialization. Changes to this setting after the `Tracer` instance is created are ignored.
 
-[1]: /tracing/setup/dotnet/#configuration
-[2]: https://github.com/damianh/LibLog
-[3]: http://nlog-project.org/
-[4]: https://logging.apache.org/log4net/
-[5]: http://serilog.net/
 
+[1]: https://github.com/damianh/LibLog
+[2]: http://nlog-project.org
+[3]: https://logging.apache.org/log4net
+[4]: http://serilog.net
+[5]: /tracing/setup/dotnet/#configuration
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -454,9 +454,9 @@ var message = $"My log message. [dd.trace_id={traceId} dd.span_id={spanId}]";
 
 **Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][2].
 
+
 [1]: /logs/log_collection/csharp/#configure-your-logger
 [2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
-
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -476,4 +476,4 @@ Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_collection/?tab=tailexistingfiles#enabling-log-collection-from-integrations
+[1]: /agent/logs/#enabling-log-collection-from-integrations

@@ -18,7 +18,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:zach_upgrade-docs-webpack
   tags:
     - "runner:main"
     - "size:large"
@@ -35,6 +35,7 @@ build_preview:
     URL: ${PREVIEW_DOMAIN}
     CONFIG: ${PREVIEW_CONFIG}
     MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
+    CONFIGURATION_FILE: "./local/etc/pull_config_preview.yaml"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - version_static_assets
@@ -51,6 +52,9 @@ build_preview:
     #- remove_static_from_repo
     #- create_artifact
     #- create_artifact_untracked
+  artifacts:
+    paths:
+      - ${ARTIFACT_RESOURCE}
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
@@ -66,6 +70,18 @@ test_preview_link_checks:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
+test_missing_tms_preview:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  allow_failure: true
+  dependencies:
+    - build_preview
+  script:
+    - check_missing_tms
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+
 # ================== live ================== #
 build_live:
   <<: *base_template
@@ -75,6 +91,7 @@ build_live:
     CONFIG: ${LIVE_CONFIG}
     URL: ${LIVE_DOMAIN}
     UNTRACKED_EXTRAS: "data,content/en/integrations,content/en/agent/basic_agent_usage/heroku.md,content/en/developers/integrations"
+    CONFIGURATION_FILE: "./local/etc/pull_config.yaml"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
@@ -85,9 +102,16 @@ build_live:
     - build_hugo_site_new
     - collect_static_assets
     - push_site_to_s3
+    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['js', 'images', 'fonts', 'en', 'css', 'search', 'json', 'error', 'matts quick tips', 'videos']" -l "['fr','ja']" -c "./local/etc/docsdatadoghq.json"
     - create_artifact
     - create_artifact_untracked
     - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
+  artifacts:
+    when: on_success
+    paths:
+      - local/etc/docsdatadoghq.json
+      - ${ARTIFACT_RESOURCE}
+    expire_in: 1 week
   only:
     - master
 
@@ -109,6 +133,8 @@ index_algolia:
   script:
     - cp ./local/etc/docsdatadoghq.json /etc/
     - index_docsearch_algolia
+  dependencies:
+    - build_live
   only:
     - schedules
 
@@ -125,17 +151,29 @@ manage_translations:on-schedule:
   only:
     - schedules
 
-push_translations:
+#push_translations:
+#  <<: *base_template
+#  stage: post-deploy
+#  environment: "live"
+#  script:
+#    - push_changed_translations
+#  only:
+#    - master
+#  except:
+#    - triggers
+#    - schedules
+
+test_missing_tms_live:
   <<: *base_template
   stage: post-deploy
   environment: "live"
+  allow_failure: true
+  dependencies:
+    - build_live
   script:
-    - push_changed_translations
+    - check_missing_tms
   only:
     - master
-  except:
-    - triggers
-    - schedules
 
 #rollback_live:
 #  <<: *base_template

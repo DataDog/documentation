@@ -6,6 +6,7 @@ assets:
   service_checks: assets/service_checks.json
 categories:
   - data store
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -52,10 +53,10 @@ Si le backend `cn=Monitor` n'est pas configuré sur votre serveur, suivez ces é
 1. Vérifiez si la surveillance est activée sur votre installation.
 
     ```
-        sudo ldapsearch -Y EXTERNAL -H ldapi:/// -b cn=module{0},cn=config
+      sudo ldapsearch -Y EXTERNAL -H ldapi:/// -b cn=module{0},cn=config
     ```
 
-Si vous voyez une ligne comprenant `olcModuleLoad: back_monitor.la`, la surveillance est bien activée. Passez alors à l'étape 3.
+   Si vous voyez une ligne comprenant ``olcModuleLoad: back_monitor.la`, la surveillance est bien activée. Passez alors à l'étape 3.
 
 2. Activez la surveillance sur votre serveur.
 
@@ -68,23 +69,21 @@ Si vous voyez une ligne comprenant `olcModuleLoad: back_monitor.la`, la surveill
         EOF
     ```
 
-3. Créez un utilisateur pour accéder aux informations de surveillance.
+3. Créez un mot de passe chiffré avec `slappasswd`.
+4. Ajoutez un nouvel utilisateur :
 
-    1. Créez un mot de passe chiffré avec `slappasswd`.
-    2. Ajoutez un nouvel utilisateur.
+    ```
+        cat <<EOF | ldapadd -H ldapi:/// -D <YOUR BIND DN HERE> -w <YOUR PASSWORD HERE>
+        dn: <USER_DISTINGUISHED_NAME>
+        objectClass: simpleSecurityObject
+        objectClass: organizationalRole
+        cn: <COMMON_NAME_OF_THE_NEW_USER>
+        description: LDAP monitor
+        userPassword:<PASSWORD>
+        EOF
+    ```
 
-        ```
-            cat <<EOF | ldapadd -H ldapi:/// -D <YOUR BIND DN HERE> -w <YOUR PASSWORD HERE>
-            dn: <DN OF THE NEW USER>
-            objectClass: simpleSecurityObject
-            objectClass: organizationalRole
-            cn: <COMMON NAME OF THE NEW USER>
-            description: LDAP monitor
-            userPassword:<ENCRYPTED PASSWORD HERE>
-            EOF
-        ```
-
-4. Configurez la base de données du monitor.
+5. Configurez la base de données du monitor.
 
     ```
         cat <<EOF | sudo ldapadd -Y EXTERNAL -H ldapi:///
@@ -92,7 +91,7 @@ Si vous voyez une ligne comprenant `olcModuleLoad: back_monitor.la`, la surveill
         objectClass: olcDatabaseConfig
         objectClass: olcMonitorConfig
         olcDatabase: Monitor
-        olcAccess: to dn.subtree='cn=Monitor' by dn.base='<YOUR MONITOR USER DN HERE>' read by * none
+        olcAccess: to dn.subtree='cn=Monitor' by dn.base='<USER_DISTINGUISHED_NAME>' read by * none
         EOF
     ```
 
@@ -106,30 +105,41 @@ Ajoutez ce bloc de configuration à votre fichier `openldap.d/conf.yaml` pour co
   instances:
       - url: ldaps://localhost
         port: 686
-        username: <DN de l'utilisateur du monitor>
-        password: <mot de passe de l'utilisateur du monitor>
+        username: <NOM_DISTINCTIF_UTILISATEUR>
+        password: <MOTDEPASSE>
 ```
 
 Consultez le [fichier d'exemple openldap.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
 [Redémarrez l'Agent][3] pour commencer à envoyer vos métriques OpenLDAP à Datadog.
 
+#### Collecte de logs
+
+**Disponible à partir des versions > 6.0 de l'Agent**
+
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+
+    ```
+    logs_enabled: true
+    ```
+
+2. Ajoutez ce bloc de configuration à votre fichier `openldap.d/conf.yaml` pour commencer à recueillir vos logs Openldap :
+
+    ```yaml
+    logs:
+      - type: file
+      path: /var/log/slapd.log
+      source: openldap
+      service: <SERVICE_NAME>
+    ```
+
+   Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple openldap.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
+
+3. [Redémarrez l'Agent][3].
+
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][4] et cherchez `openldap` dans la section Checks :
-
-```
-  Checks
-  ======
-    [...]
-
-    openldap
-    --------
-      - instance #0 [OK]
-      - Collected 26 metrics, 0 events & 1 service check
-
-    [...]
-```
+[Lancez la sous-commande status de l'Agent][4] et cherchez `openldap` dans la section Checks.
 
 ## Compatibilité
 
