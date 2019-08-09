@@ -152,7 +152,7 @@ Suppose you are interested in measuring the maximum `age` metric in the state of
 
 The total number of custom metrics or timeseries emitted from the `age` distribution metric is eight (4 x 2). For both unique tag value combinations above (Rochester, NY and New York, NY), Datadog stores four timeseries (`sum`,`count`,`min`,`max`, `avg`). 
 
-To obtain the maximum `Age` in the state of New York, we can reaggregate the timeseries above: Maximum age in New York = `Max`(`Max`(Rochester, NY), `Max`(New York, NY)) = 67.
+To obtain the maximum `age` in the state of New York, you can reaggregate the timeseries above: Maximum age in New York = `max`(`max`(Rochester, NY), `max`(New York, NY)) = 67.
 
 #### Distributions with Percentile Aggregations
 After submitting a distribution metric to Datadog, you have the option to add percentile aggregations to a Distribution via the Distributions UI in-app. Distributions with percentile aggregations are counted differently compared to the metric types listed above since percentiles are not mathematically reaggregatable.
