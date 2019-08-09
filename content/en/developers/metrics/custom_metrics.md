@@ -21,7 +21,7 @@ Custom metrics generally refer to any metric that you send using StatsD, [DogSta
 
 Use tags to fully leverage the capabilities of Datadog through scoping and alerting. When using tags, one submitted metric actually leads to **multiple unique tag combinations**- counting towards your custom metrics count.
 
-For example, suppose you were interested in measuring the average `temperature` in the US. We have collected the following temperature measurements every 10 seconds for the past minute from Orlando, Miami, New York, Boston and Seattle. Each `temperature` measurement is tagged with the information about `City`, `State`, `Region`, `Country`. 
+For example, suppose you are interested in measuring the average `temperature` in the US. You collect the following temperature measurements every 10 seconds for the past minute from Orlando, Miami, New York, Boston and Seattle. Each `temperature` measurement is tagged with the information about `city`, `state`, `region`, and `country`. 
 
 | Orlando, FL, Southeast | 80 | 80 | 80 | 80 | 81 | 81 | 81 |
 | Miami, FL, Southeast | 82 | 82 | 82 | 82 | 82 | 82 | 82 |
