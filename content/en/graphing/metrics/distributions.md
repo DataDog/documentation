@@ -15,7 +15,7 @@ This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Data
 
 ## Overview
 
-Distributions are a metric type in that aggregate the values that are sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure server-side.
+Distributions are a metric type that aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure.
 
 Global distributions are designed to instrument logical objects, like services, independently from the underlying hosts. Unlike [histograms][1] which aggregate on the Agent-side, global distributions send all raw data collected during the flush interval and the aggregation occurs server-side. Because the underlying data structure has not been aggregated and represents raw data, distributions provide two major features:
 
