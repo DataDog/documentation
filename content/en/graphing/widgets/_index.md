@@ -35,7 +35,7 @@ aliases:
 
 ## Full screen
 
-Most widgets have a full screen mode. To access this view, click on the full-screen button in the upper right-hand side of the graph.
+Most widgets have a full screen mode. To access this view, click on the full-screen button in the upper right-hand side of the widget.
 
 In full screen mode, you can:
 
