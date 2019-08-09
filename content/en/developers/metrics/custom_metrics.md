@@ -129,7 +129,7 @@ The total number of custom metrics associated with the `temperature` gauge metri
 
 Using the five timeseries above, you can determine the average `temperature` in the US, Northeast, or Florida at query time. 
 
-Note: The same counting custom metrics scheme is applied to `Count`, `Histogram` and `Rate` metric types. 
+**Note**: The same scheme for counting custom metrics is applied to `count`, `histogram` and `rate` metric types. 
 
 #### Dropping Tags
 Suppose now we wanted to drop the `Country` tag from the Gauge `temperature` metric. 
