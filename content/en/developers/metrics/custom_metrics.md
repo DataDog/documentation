@@ -23,11 +23,11 @@ In order to fully leverage the capabilities of Datadog through scoping and alert
 
 For example, suppose you were interested in measuring the average `temperature` in the US. We have collected the following temperature measurements every 10 seconds for the past minute from Orlando, Miami, New York, Boston and Seattle. Each `temperature` measurement is tagged with the information about `City`, `State`, `Region`, `Country`. 
 
-| Orlando, FL, Southeast | 80 | 80 | 80 | 80 | 81 | 81 | 81 |
-| Miami, FL, Southeast | 82 | 82 | 82 | 82 | 82 | 82 | 82 |
-| Boston, MA, Northeast | 78 | 78 | 78 | 78 | 78 | 79 | 79 |
-| New York, NY, Northeast | 79 | 79 | 79 | 79 | 79 | 79 | 79 |
-| Seattle, WA, Northwest | 75 | 75 | 75 | 75 | 75 | 75 | 75 |
+| Orlando, FL, Southeast, USA | 80 | 80 | 80 | 80 | 81 | 81 | 81 |
+| Miami, FL, Southeast, USA | 82 | 82 | 82 | 82 | 82 | 82 | 82 |
+| Boston, MA, Northeast, USA | 78 | 78 | 78 | 78 | 78 | 79 | 79 |
+| New York, NY, Northeast, USA | 79 | 79 | 79 | 79 | 79 | 79 | 79 |
+| Seattle, WA, Northwest, USA | 75 | 75 | 75 | 75 | 75 | 75 | 75 |
  
  Each unique tag combination of `City`, `State`, `Region`, `Country` represents a timeseries / custom metric. Using the 5 timeseries above, we can determine the average temperature in the US, Northeast or Florida.
 
@@ -123,7 +123,11 @@ A gauge[8] represents one value per second (example: temperature, Kafka queue of
 
 Suppose we’re interested in measuring the average `temperature` metric in the state of Florida, `temperature` is stored as a`Gauge` metric type in Datadog. We have collected the following temperature measurements every 10 seconds during the past minute from Orlando, Miami, Boston, New York and Seattle, each tagged with the information about City, State, Region, Country.
 
-[INSERT DIAGRAM OF 5 TIMESERIES FROM ORLANDO, MIAMI, BOSTON, NY, SEATTLE]
+| Orlando, FL, Southeast, USA | 80 | 80 | 80 | 80 | 81 | 81 | 81 |
+| Miami, FL, Southeast, USA | 82 | 82 | 82 | 82 | 82 | 82 | 82 |
+| Boston, MA, Northeast, USA | 78 | 78 | 78 | 78 | 78 | 79 | 79 |
+| New York, NY, Northeast, USA | 79 | 79 | 79 | 79 | 79 | 79 | 79 |
+| Seattle, WA, Northwest, USA | 75 | 75 | 75 | 75 | 75 | 75 | 75 |
 
 The total number of custom metrics associated with the `temperature` Gauge metric is 5. Each unique string combination of `City`, `State`, `Region` and `Country` that appears in our temperature data counts as a custom metric (in other words a timeseries of data that Datadog stores).
 
@@ -134,13 +138,21 @@ Note: The same counting custom metrics scheme is applied to `Count`, `Histogram`
 #### Dropping Tags
 Suppose now we wanted to drop the `Country` tag from the Gauge `temperature` metric. 
 
-[INSERT SECOND DIAGRAM OF 5 TIMESERIES] 
+| Orlando, FL, Southeast | 80 | 80 | 80 | 80 | 81 | 81 | 81 |
+| Miami, FL, Southeast | 82 | 82 | 82 | 82 | 82 | 82 | 82 |
+| Boston, MA, Northeast | 78 | 78 | 78 | 78 | 78 | 79 | 79 |
+| New York, NY, Northeast | 79 | 79 | 79 | 79 | 79 | 79 | 79 |
+| Seattle, WA, Northwest | 75 | 75 | 75 | 75 | 75 | 75 | 75 |
 
 Even though there are 5 cities, 4 states, 3 regions and 1 country, there are still 5 unique tag value combinations of `City`, `State`, `Region`, `Country` that appear in the data. The total number of custom metrics emitted from the `temperature` metric is still 5. 
 
 Suppose we now dropped the `City` tag from the `temperature` metric.
 
-[INSERT THIRD DIAGRAM OF 4 TIMESERIES] 
+| FL, Southeast | 81 | 81 | 81 | 81 | 81.5 | 81.5 | 81.5 |
+| MA, Northeast | 78 | 78 | 78 | 78 | 78 | 79 | 79 |
+| NY, Northeast | 79 | 79 | 79 | 79 | 79 | 79 | 79 |
+| WA, Northwest | 75 | 75 | 75 | 75 | 75 | 75 | 75 |
+
 Now there are 4 unique tag value combinations that appear in our `temperature` data; therefore, the total number of custom metrics from the `temperature` metric tagged with `State` and `Region` is 4. 
 
 ### Counting Custom Metrics from Distributions  
@@ -148,7 +160,10 @@ A distribution metric gathers all values across all hosts emitting metric values
 
 Suppose we're interested in measuring the maximum `Age` metric in the state of New York. `Age` is submitted to Datadog as a distribution metric tagged by `City` and `State`. 
 
-[ADD DIAGRAM OF NEWYORK VALUES] 
+|  | Values in 10s flush interval | Sum | Count | Minimum | Maximum | Average (Sum/Count) |
+|---------------|------------------------------|-----|-------|---------|---------|---------------------|
+| Rochester, NY | 23,29,33,55,41,36,12,67 | 296 | 8 | 12 | 67 | 37 |
+| New York, NY | 18,22,26,31,29,40,23,35 | 215 | 8 | 18 | 40 | 28 |
 
 The total number of custom metrics/timeseries emitted from the `Age` distribution metric is 4 * (2). For both unique tag value combinations above, (i.e. Rochester, NY and New York, NY), Datadog stores 4 timeseries (`sum`,`count`,`min`,`max`, `avg`). 
 
@@ -159,7 +174,10 @@ After submitting a distribution metric to Datadog, you have the option to add pe
 
 Supposed we're interested in measuring the *median* `Age` in the state of New York where the `Age` distribution metric is still tagged by `City` and `State`. 
 
-[Insert DIAGRAM WITH PERCENTILES OF NY VALUES] 
+|  | Values in 10s flush interval | Sum | Count | Min | Max | Avg | p50 | p75 | p90 | p95 | p99 |
+|---------------|------------------------------|-----|-------|-----|-----|-----|-----|-----|-----|-----|-----|
+| Rochester, NY | 23,33,55,41,36,12,66 | 266 | 7 | 12 | 66 | 38 | 23 | 55 | 66 | 66 | 66 |
+| New York, NY | 18,26,31,29,40,23,36 | 203 | 7 | 18 | 40 | 29 | 29 | 36 | 40 | 40 | 40 | 
 
 Percentiles are NOT reaggregatable -- we can't reaggregate the same way Maximum ages were above. The median age in New York is not equal to the `median`(`median`(Rochester, NY), `median`(New York, NY)). 
 
