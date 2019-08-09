@@ -160,9 +160,13 @@ The stored procedure outputs the following custom metrics:
 
 ### Update the SQL Server integration configuration
 
-To collect metrics from a custom procedure, update the instance definition inside your `sqlserver.d/conf.yaml` file with the procedure to execute:
+To collect metrics from a custom procedure, create a new instance definition inside your `sqlserver.d/conf.yaml` file with the procedure to execute. A separate instance is required for any existing configuration. Instances with a stored procedure do not process anything but the stored procedure, for example:
 
 ```
+  - host: 127.0.0.1,1433
+    username: datadog
+    password: <PASSWORD>
+    database: master
   - host: 127.0.0.1,1433
     username: datadog
     password: <PASSWORD>

@@ -33,9 +33,9 @@ Datadog's Trace annotation is provided by the [dd-trace-api dependency][2].
 ```java
 import datadog.trace.api.Trace;
 
-public class MyClass {
-  @Trace
-  public static void myMethod() {
+public class MyJob {
+  @Trace(operationName = "job.exec", resourceName = "MyJob.process")
+  public static void process() {
     // your method implementation here
   }
 }
@@ -300,8 +300,8 @@ dd_trace("CustomDriver", "doWork", function (...$args) {
     $span->setTag(Tags\RESOURCE_NAME, $this->workToDo);
 
     try {
-        // Execute the original method
-        $result = $this->doWork(...$args);
+        // Execute the original method. Note: dd_trace_forward_call() - handles any parameters automatically
+        $result = dd_trace_forward_call();
         // Set a tag based on the return value
         $span->setTag('doWork.size', count($result));
         return $result;

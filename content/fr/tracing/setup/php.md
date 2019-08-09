@@ -72,7 +72,7 @@ L'instrumentation automatique capture :
 
 ## Modifier le hostname de l'Agent
 
-Configurez vos traceurs au niveau des applications pour envoyer des traces à un hostname d'Agent personnalisé.
+Configurez vos traceurs d'applications de façon à envoyer des traces à un hostname d'Agent personnalisé :
 
 Le traceur PHP recherche automatiquement les variables ENV `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT` puis s'initialise avec celles-ci.
 

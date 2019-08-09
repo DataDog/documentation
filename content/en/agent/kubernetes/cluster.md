@@ -209,14 +209,14 @@ The following environment variables are supported:
 | `DD_CLUSTER_AGENT_CMD_PORT`                   | Port for the Datadog Cluster Agent to serve, default is `5005`.                                                                                                               |
 | `DD_USE_METADATA_MAPPER`                      | Enables the cluster level metadata mapping, default is `true`.                                                                                                                |
 | `DD_COLLECT_KUBERNETES_EVENTS`                | Configures the Agent to collect Kubernetes events. Default to `false`. See the [Event collection section](#event-collection) for more details.                                |
-| `DD_LEADER_ELECTION`                          | Activates the [leader election](#leader-election). You must set `DD_COLLECT_KUBERNETES_EVENTS` to `true` to activate this feature. Default value is `false`.                  |
-| `DD_LEADER_LEASE_DURATION`                    | Used only if the leader election is activated. See the details [in the leader election section](#leader-election-lease). Value in seconds, 60 by default.                     |
+| `DD_LEADER_ELECTION`                          | Activates the [leader election][8]. You must set `DD_COLLECT_KUBERNETES_EVENTS` to `true` to activate this feature. Default value is `false`.                  |
+| `DD_LEADER_LEASE_DURATION`                    | Used only if the leader election is activated. See the details [in the leader election section][8]. Value in seconds, 60 by default.                     |
 | `DD_CLUSTER_AGENT_AUTH_TOKEN`                 | 32 characters long token that needs to be shared between the node Agent and the Datadog Cluster Agent.                                                                        |
 | `DD_KUBE_RESOURCES_NAMESPACE`                 | Configures the namespace where the Cluster Agent creates the configmaps required for the Leader Election, the Event Collection (optional) and the Horizontal Pod Autoscaling. |
 | `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME`    | Name of the Kubernetes service Cluster Agents are exposed through. Default is `datadog-cluster-agent`. |
 | `DD_KUBERNETES_INFORMERS_RESYNC_PERIOD`       | Frequency in seconds to query the API Server to resync the local cache. The default is 5 minutes.                                                                             |
 | `DD_KUBERNETES_INFORMERS_RESTCLIENT_TIMEOUT`  | Timeout in seconds of the client communicating with the API Server. Default is 60 seconds.                                                                                    |
-| `DD_EXPVAR_PORT`                              | Change the port for fetching [expvar][8] public variables from the Datadog Cluster Agent. The default is port is `5000`.                         |
+| `DD_EXPVAR_PORT`                              | Change the port for fetching [expvar][9] public variables from the Datadog Cluster Agent. The default is port is `5000`.                         |
 | `DD_EXTERNAL_METRICS_BATCH_WINDOW`            | Time waited in seconds to process a batch of metrics from multiple Autoscalers. Default to 10 seconds.                                                                        |
 | `DD_EXTERNAL_METRICS_MAX_AGE`                 | Maximum age in seconds of a datapoint before considering it invalid to be served. Default to 90 seconds.                                                                      |
 | `DD_EXTERNAL_METRICS_AGGREGATOR`              | Aggregator for the Datadog metrics. Applies to all Autoscalers processed. Chose among `sum`/`avg`/`max`/`min`.                                                                |
@@ -245,6 +245,8 @@ In order to collect events, you need the following environment variables in your
 ```
 Enabling the leader election ensures that only one Agent collects the events.
 
+**Note**: You must disable leader election in the Datadog Agent on your nodes before enabling leader election in the Datadog Cluster Agent. Otherwise, leader election may fail and some features such as the external metrics provider or the cluster level checks may not work.
+
 #### Cluster metadata provider
 
 In the Node Agent, set the environment variable `DD_CLUSTER_AGENT_ENABLED` to true.
@@ -262,11 +264,11 @@ To enable the Custom Metrics Server:
 1. Set `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` to `true` in the Deployment of the Datadog Cluster Agent.
 2. Configure the `<DD_APP_KEY>` as well as the `<DD_API_KEY>` in the Deployment of the Datadog Cluster Agent.
 Set `DATADOG_HOST` to `https://app.datadoghq.eu` if you are using an EU account.
-3. Create a [service exposing the port 443][9] and [register it as an APIService for External Metrics][10].
+3. Create a [service exposing the port 443][10] and [register it as an APIService for External Metrics][11].
 
 Refer to [the dedicated Custom metrics server guide][1] to configure the Custom Metrics Server and get more details about this feature.
 
-**Note**: An [HPA][11] is required for values to be served on the external metrics route.
+**Note**: An [HPA][12] is required for values to be served on the external metrics route.
 
 #### Cluster Checks Autodiscovery
 
@@ -277,14 +279,14 @@ Starting with version 1.2.0, the Datadog Cluster Agent can extend the Autodiscov
 1. The recommended leader election lease duration is 15 seconds. Set it with the `DD_LEADER_LEASE_DURATION` envvar.
 1. If the service name is different from the default `datadog-cluster-agent`, ensure the `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME` environment variable reflects that.
 
-Two configuration sources are currently supported, [described in the Autodiscovery documentation][12]:
+Two configuration sources are currently supported, [described in the Autodiscovery documentation][13]:
 
 - yaml files can be mounted from a ConfigMap in the `/conf.d` folder, they will be automatically imported by the image's entrypoint.
 - Kubernetes Services annotations requires setting both the `DD_EXTRA_CONFIG_PROVIDERS` and `DD_EXTRA_LISTENERS` environment variables to `kube_services`.
 
 Note that hostnames are not linked to cluster checks metrics, which limits the use of host tags and the `DD_TAGS` environment variable. To add tags to cluster checks metrics, use the `DD_CLUSTER_CHECKS_EXTRA_TAGS` environment variable.
 
-Refer to [the dedicated Cluster Checks Autodiscovery guide][13] for more configuration and troubleshooting details on this feature.
+Refer to [the dedicated Cluster Checks Autodiscovery guide][14] for more configuration and troubleshooting details on this feature.
 
 ## Further Reading
 
@@ -298,9 +300,10 @@ Refer to [the dedicated Cluster Checks Autodiscovery guide][13] for more configu
 [5]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml
 [6]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/cluster-agent.yaml
 [7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/rbac/rbac-agent.yaml
-[8]: https://golang.org/pkg/expvar
-[9]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/cluster-agent-hpa-svc.yaml
-[10]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/rbac-hpa.yaml
-[11]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale
-[12]: /agent/autodiscovery/clusterchecks/#setting-up-check-configurations
-[13]: /agent/autodiscovery/clusterchecks
+[8]: /agent/kubernetes/event_collection/#leader-election
+[9]: https://golang.org/pkg/expvar
+[10]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/cluster-agent-hpa-svc.yaml
+[11]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/rbac-hpa.yaml
+[12]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale
+[13]: /agent/autodiscovery/clusterchecks/#setting-up-check-configurations
+[14]: /agent/autodiscovery/clusterchecks

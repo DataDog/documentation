@@ -9,6 +9,6 @@ More than 350 built-in integrations. See across all your systems, apps, and serv
 
 What's an integration? See [Introduction to Integrations][1].
 
-{{< partial name="integrations/integrations.html" >}}
+{{< integrations >}}
 
 [1]: /getting_started/integrations

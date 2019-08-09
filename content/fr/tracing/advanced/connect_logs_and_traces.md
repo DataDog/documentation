@@ -75,7 +75,7 @@ end
 
 **Injection automatique d'ID de trace pour les applications Rails par défaut**
 
-Les applications Rails qui sont configurées avec un enregistreur `ActiveSupport::TaggedLogging` peuvent ajouter des ID de trace en tant que tags à la sortie du log. L'enregistreur Rails par défaut applique cette journalisation avec des tags, ce qui simplifie l'ajout de tags de trace. 
+Les applications Rails qui sont configurées avec un enregistreur `ActiveSupport::TaggedLogging` peuvent ajouter des ID de trace en tant que tags à la sortie du log. L'enregistreur Rails par défaut applique cette journalisation avec des tags, ce qui simplifie l'ajout de tags de trace.
 
 Dans le fichier de configuration de votre environnement Rails (p. ex., `config/environments/production.rb`), ajoutez le code suivant :
 
@@ -99,7 +99,7 @@ Cela ajoute les tags de trace aux requêtes Web :
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour en savoir plus.
+Prochainement disponible. Contactez l'[assistance Datadog][1] pour en savoir plus.
 
 
 [1]: /fr/help
@@ -114,16 +114,16 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-Cela active l'injection automatique d'ID de trace pour `winston`, `bunyan` et `pino`.
+Cela active l'injection automatique d'ID de trace pour `bunyan`, `paperplane`, `pino`, et `winston`.
 
 **Remarque** : l'injection automatique fonctionne uniquement pour les logs au format JSON.
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Le traceur .NET utilise la bibliothèque [LibLog][2] pour injecter automatiquement des identifiants de trace dans les logs de votre application. Il prend en charge l'injection dans les logs [NLog][3], [Log4Net][4] et [Serilog][5] par défaut.
+Le traceur .NET utilise la bibliothèque [LibLog][1] pour injecter automatiquement des identifiants de trace dans les logs de votre application. Il prend en charge l'injection dans les logs [NLog][2], [Log4Net][3] et [Serilog][4] par défaut.
 
-Activez l'injection dans la [configuration][1] du traceur .NET en définissant le paramètre `DD_LOGS_INJECTION=true` via les variables d'environnement ou dans les fichiers de configuration.
+Activez l'injection dans la [configuration][5] du traceur .NET en définissant le paramètre `DD_LOGS_INJECTION=true` via les variables d'environnement ou dans les fichiers de configuration.
 
 De plus, l'injection peut être activée dans le code :
 
@@ -137,12 +137,12 @@ var tracer = new Tracer(settings);
 
 **Remarque** : ce paramètre est uniquement lu à l'initialisation du `Tracer`. Toute modification de ce paramètre après la création de l'instance `Tracer` sera ignorée.
 
-[1]: /fr/tracing/setup/dotnet/#configuration
-[2]: https://github.com/damianh/LibLog
-[3]: http://nlog-project.org/
-[4]: https://logging.apache.org/log4net/
-[5]: http://serilog.net/
 
+[1]: https://github.com/damianh/LibLog
+[2]: http://nlog-project.org
+[3]: https://logging.apache.org/log4net
+[4]: http://serilog.net
+[5]: /fr/tracing/setup/dotnet/#configuration
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -182,7 +182,7 @@ $logger->pushProcessor(function ($record) {
 {{% /tab %}}
 {{% tab "C++" %}}
 
-Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour en savoir plus.
+Prochainement disponible. Contactez l'[assistance Datadog][1] pour en savoir plus.
 
 [1]: /fr/help
 {{% /tab %}}
@@ -432,7 +432,7 @@ module.exports = Logger
 
 **Injection manuelle d'ID de trace pour les logs au format brut**
 
-Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour en savoir plus.
+Prochainement disponible. Contactez l'[assistance Datadog][1] pour en savoir plus.
 
 [1]: /fr/help
 {{% /tab %}}
@@ -453,13 +453,13 @@ var message = $"Mon message de log. [dd.trace_id={traceId} dd.span_id={spanId}]"
 
 **Remarque** : si vous n'utilisez pas une [intégration de log de Datadog][1] pour analyser vos logs, des règles de parsing de log personnalisées doivent être utilisées pour s'assurer que `trace_id` et `span_id` sont analysés en tant que chaînes de caractères. Pour en savoir plus, consultez la [FAQ à ce sujet][2].
 
+
 [1]: /fr/logs/log_collection/csharp/#configure-your-logger
 [2]: /fr/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
-
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Prochainement disponible. Contactez [l'équipe d'assistance Datadog][1] pour en savoir plus.
+Prochainement disponible. Contactez l'[assistance Datadog][1] pour en savoir plus.
 
 [1]: /fr/help
 {{% /tab %}}

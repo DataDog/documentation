@@ -63,7 +63,7 @@ tags et métriques que vous souhaitez envoyer. Voici quelques notions à retenir
 - Seuls certains navigateurs prennent en charge la totalité des métriques.
 
 Si vous souhaitez que les checks Real Browser transmettent les calculs de temps provenant de
-l’[API User Timings][4],
+l'[API User Timings][4],
 sélectionnez l'option « Send All User Timings? ». Tous les marqueurs sont transmis dans l'espace de nommage
 `rigor.real_browser.marks`, et toutes les mesures sont transmises dans
 l'espace de nommage `rigor.real_browser.measures`. À noter que la sélection de cette option

@@ -30,7 +30,7 @@ vagrant up
 vagrant ssh
 ```
 
-Install the Datadog host Agent using the [one line install command][5] updated with your [Datadog API key][6]:
+To install the Datadog Agent on a host, use the [one line install command][5] updated with your [Datadog API key][6]:
 
 ```
 DD_API_KEY=<YOUR_DD_API_KEY> bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"

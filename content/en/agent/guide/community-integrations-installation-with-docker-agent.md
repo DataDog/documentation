@@ -74,7 +74,7 @@ RUN agent integration install -r -w /dist/*.whl
 
 Then use this new Agent image in combination with [Autodiscovery][1] in order to enable the `<INTEGRATION_NAME>` check.
 
-[1]: agent/autodiscovery
+[1]: /agent/autodiscovery
 {{% /tab %}}
 {{% tab "Agent prior to 6.8" %}}
 
