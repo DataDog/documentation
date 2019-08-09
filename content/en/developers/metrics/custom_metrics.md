@@ -132,7 +132,7 @@ Using the five timeseries above, you can determine the average `temperature` in 
 **Note**: The same scheme for counting custom metrics is applied to `count`, `histogram` and `rate` metric types. 
 
 #### Dropping Tags
-Suppose now we wanted to drop the `Country` tag from the Gauge `temperature` metric. 
+Suppose you want to drop the `country` tag from the gauge `temperature` metric. 
 
 [INSERT SECOND DIAGRAM OF 5 TIMESERIES] 
 
