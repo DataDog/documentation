@@ -1,15 +1,15 @@
 ---
-title: Create an AWS integration
+title: Update an AWS integration
 type: apicontent
-order: 15.02
-external_redirect: /api/#create-an-aws-integration
+order: 15.03
+external_redirect: /api/#update-an-aws-integration
 ---
 
-## Create an AWS integration
+## Update an AWS integration
 
-Create a Datadog-Amazon Web Services integration.
+Update a Datadog-Amazon Web Services integration.
 
-**Note**: Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.
+**Note**: Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.
 
 ##### ARGUMENTS
 

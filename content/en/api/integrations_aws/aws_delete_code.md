@@ -1,7 +1,7 @@
 ---
 title: Delete an AWS integration
 type: apicode
-order: 15.3
+order: 15.04
 external_redirect: /api/#delete-an-aws-integration
 ---
 

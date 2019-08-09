@@ -1,7 +1,7 @@
 ---
 title: List namespace rules
 type: apicode
-order: 15.4
+order: 15.05
 external_redirect: /api/#list-namespace-rules
 ---
 
