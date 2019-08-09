@@ -163,7 +163,7 @@ Suppose you are interested in measuring the *median* `age` in the state of New Y
 
 Percentiles are NOT reaggregatable -- you can't reaggregate the same way maximum ages were above. The median age in New York is not equal to the `median`(`median`(Rochester, NY), `median`(New York, NY)). 
 
-Therefore, Datadog needs to precalculate 5 timeseries (`p50`,`p75`,`p90`,`p95`,`p99`) for each potentially queryable tag value combination. In the New York example, we have the following potentially queryable tag value combinations: 
+Therefore, Datadog needs to precalculate five timeseries (`p50`,`p75`,`p90`,`p95`,`p99`) for each potentially queryable tag value combination. In the New York example, you have the following potentially queryable tag value combinations: 
 - Rochester, (`null` state)
 - New York, (`null` state)
 - (`Null` city), NY
