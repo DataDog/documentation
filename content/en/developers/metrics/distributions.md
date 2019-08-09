@@ -45,7 +45,8 @@ Percentile aggregations can be added in-app at the [Datadog Distribution Metric 
 This functionality allows you to control tagging for metrics where host-level granularity is not necessary. See the [Distribution Metric page][2] to learn more about whitelist-based tagging control. **Note**: The exclusion of tags with `!` is not accepted with this feature.
 
 ## Submission
-Note: As distributions are a new metric type, you should submit distributions under new metric names.
+
+Different metric types in Datadog should be submitted under different metric names.
 
 ### DogStatsD
 
