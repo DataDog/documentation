@@ -6,8 +6,14 @@ description: "Put your event-based data (logs, apm events, etc.) into perspectiv
 
 ## Overview
 
-Log analytics extend the log search page with log aggregation and split capabilities for troubleshooting and monitoring.
-You can access the analytics page from any log explorer view by clicking on the "Analytics" icon next to the search query bar.
+Let's say you are running an online market-place, and your third-party payment provider warned you about an isolated incident yesterday round 2pm in their own systems. This incident is likely to have impacted your own customers, and you need to know more about this. 
+
+
+In datadog, you can access any single event (a log, an apm event, etc.), access and leverage its specific information. For instance, you'll search on `5xx` errors on your `/payment` microservice, and eventually find such logs : "User `3141` experienced an error on  page `/account` while accessing `third-party/refund` throughout `/payment` microservice resource on host `i-1234567890` at `2.21pm UTC` yesterday". This is what explorer are fore.
+
+But complementary, you might be interested in aggregated data, which gives you a higher perspective on your applications.
+
+But 
 
 {{< img src="logs/explorer/analytics/explorer-button.png" alt="Logs Explorer" style="width:50%;" responsive="true">}}
 
