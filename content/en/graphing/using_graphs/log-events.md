@@ -12,9 +12,7 @@ Let's say you are running an online market-place, and your third-party payment p
 
 In datadog, you can access any single event (a log, an apm event, etc.), access and leverage its specific information. For instance, you'll search on errors on your `/payment` microservice, and eventually find a collection of events (logs in this example) telling you fine-grained information about the impact incident. 
 
-``` yaml
-2019-08-01 2:21:02+00:00 ERROR service:payment host:i-1234 http.referer:/account http.geoIP.country:UK http.status:500 resource:third-party/refund user_id:3141 payment.amount:199.90
-```
+`2019-08-01 2:21:02+00:00 ERROR service:payment host:i-1234 http.referer:/account http.geoIP.country:UK http.status:500 resource:third-party/refund user_id:3141 payment.amount:199.90`
 
 But complementary, you might be interested in aggregated data, which gives you a higher perspective on your applications. With the same input query, you can see typically slice and dice to address such questions:
 
@@ -40,17 +38,17 @@ In the following example, each dot represents one log event. The X-axis is the t
 {{< img src="logs/explorer/analytics/aggregation_howto.gif" alt="top list example" responsive="true" style="width:90%;">}}
 
 
-### Queries, Groups, Facets, Measures, Options
+### Queries, Groups, Facets, Measures
 
 The **query** delineates events considered in an Analytics, which are eventually aggregated into time and/or facet slices.
 
+A **facet** is an event tag or event attribute whose values are treated as identifying values (e.g. name of services, users ID, http status codes, etc.). Facets can be used for aggregations **groups**. 
+
 A **measure** is an event attributes whose values are treated as numeric values (e.g. execution time of a process, amount of a payment, memory size of a request, etc.). 
 
-A **facet** is an event tag or event attribute whose values are treated as identifying values (e.g. name of services, users ID, http status codes, etc.). Facets can be used for aggregations **groups**. If so, the analytics is sliced with top-most or bottom-most values.
+Numeric values are aggregated for events in each group according to either sum, min, max, mean and percentile operators. Besides measures, analytics display the count of logs in a group or the count of unique values for a specific facet in a group.
 
-
-
-Some facets are out-of-the-box. 
+Most facets and measures are out-of-the-box. Custom facets and measures can be configured based on whichever meaningful tag or attributes.
 
 
 ## Visualisations
