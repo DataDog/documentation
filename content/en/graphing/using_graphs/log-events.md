@@ -6,16 +6,60 @@ description: "Put your event-based data (logs, apm events, etc.) into perspectiv
 
 ## Overview
 
+### Typical Use-cases
+
 Let's say you are running an online market-place, and your third-party payment provider warned you about an isolated incident yesterday round 2pm in their own systems. This incident is likely to have impacted your own customers, and you need to know more about this. 
 
+In datadog, you can access any single event (a log, an apm event, etc.), access and leverage its specific information. For instance, you'll search on errors on your `/payment` microservice, and eventually find a collection of events (logs in this example) telling you fine-grained information about the impact incident. 
 
-In datadog, you can access any single event (a log, an apm event, etc.), access and leverage its specific information. For instance, you'll search on `5xx` errors on your `/payment` microservice, and eventually find such logs : 
-
-``` json
-2:21:00 +00:00 ERROR service:payment host:i-1234 user_id:3141 referer:/account resource:third-party/refund 
+```
+2019-08-01 2:21:02+00:00 ERROR service:payment host:i-1234 http.referer:/account http.geoIP.country:UK http.status:500 resource:third-party/refund user_id:3141 payment.amount:199.90
 ```
 
-But complementary, you might be interested in aggregated data, which gives you a higher perspective on your applications.
+But complementary, you might be interested in aggregated data, which gives you a higher perspective on your applications. With the same input query, you can see typically slice and dice to address such questions:
+
+- most significant values, *e.g. what are the top pages impacted on your website, or top users in term of payment on hold*  
+- computed results, *e.g. how many unique users were impacted by your incident, or what is the median amount of refund pending*
+- evolution in time, *e.g. for how long your marketplace was impacted by this incident, or is it still ongoing with stable or growing trends*
+- ponderations or correlations between values, *e.g. in UK you have higher number of users impacted, but lower amount at stake*
+
+And this is where Visualisations can help. User-defined visualisations are accessible in 
+
+- in [Log Analytics](https://app.datadoghq.com/logs/analytics) for Logs, [App Analytics](https://app.datadoghq.com/apm/search/analytics) for APM Events 
+- in [Dashboards](https://app.datadoghq.com/dashboard/lists) and [Notebooks](https://app.datadoghq.com/notebook/list).
+
+
+### How aggregations work behind the scenes
+
+Aggregations (count, mean, sum, percentiles, etc.) are processed on-the-fly from a bottom-up approach, where each single event indexed for your organisation count. Aggregations are based on all the events matching a **query**, and result in **groups** (or slices) by values in one or multiple dimensions (time and/or facets). 
+
+Let's illustrate this on a fictive bar timeline where each bar represents a time interval. In this example, Datadog creates one aggregation for each of the time intervals for the entire set of logs. Note that log events are not necessarily uniformly time-distributed, so you may create aggregations for different amount of logs.
+
+In the following example, each dot represents one log event. The X-axis is the timestamp of the log, and the Y-axis is the value of a duration attribute borne by logs. The timeseries displays a maximum-aggregation. Datadog displays a timeline with a rollout parameter; for example, there are 4 bars for the whole time frame.
+
+{{< img src="logs/explorer/analytics/aggregation_howto.gif" alt="top list example" responsive="true" style="width:90%;">}}
+
+
+### Queries, Groups, Facets, Measures, Options
+
+The **query** delineates events considered in an Analytics, which are eventually aggregated into time and/or facet slices.
+
+A **measure** is an event attributes whose values are treated as numeric values (e.g. execution time of a process, amount of a payment, memory size of a request, etc.). 
+
+A **facet** is an event tag or event attribute whose values are treated as identifying values (e.g. name of services, users ID, http status codes, etc.). Facets can be used for aggregations **groups**. If so, the analytics is sliced with top-most or bottom-most values.
+
+
+
+Some facets are out-of-the-box. 
+
+
+## Visualisations
+
+### Timeseries
+
+### Toplists
+
+### Table
 
 But 
 
@@ -133,15 +177,6 @@ Select or click on a section of the graph to either zoom in the graph or see the
 
 {{< img src="logs/explorer/analytics/view_logs.gif" alt="view logs" responsive="true" style="width:80%;">}}
 
-## How aggregations work behind the scenes
-
-Datadog computes an aggregation (whether it is a mean, a sum, a percentile, etc.) by using the set of logs included in the targeted time frame.
-
-Let's illustrate this on a fictive bar timeline where each bar represents a time interval. In this example, Datadog creates one aggregation for each of the time intervals for the entire set of logs. Note that log events are not necessarily uniformly time-distributed, so you can not necessarily create aggregations for the same amount of logs.
-
-In the following example, each dot represents one log event. The X-axis is the timestamp of the log, and the Y-axis is the value of a duration attribute borne by logs. The timeseries displays a maximum-aggregation. Datadog displays a timeline with a rollout parameter; for example, there are 4 bars for the whole time frame.
-
-{{< img src="logs/explorer/analytics/aggregation_howto.gif" alt="top list example" responsive="true" style="width:90%;">}}
 
 
 ## Further Reading
