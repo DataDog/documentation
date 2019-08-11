@@ -40,7 +40,7 @@ In the following example, each dot represents one log event. The X-axis is the t
 
 ### Queries, Groups, Facets, Measures
 
-The **query** delineates events considered in an Analytics, which are eventually aggregated into time and/or facet slices.
+The **query** delineates events considered in an Analytics, which are eventually aggregated into time and/or facet slices. [See query language documentation](/logs/explorer/search).
 
 A **facet** is an event tag or event attribute whose values are treated as identifying values (e.g. name of services, users ID, http status codes, etc.). Facets can be used for aggregations **groups**. 
 
@@ -50,77 +50,29 @@ Numeric values are aggregated for events in each group according to either sum, 
 
 Most facets and measures are out-of-the-box. Custom facets and measures can be configured based on whichever meaningful tag or attributes.
 
+{{< img src="graphing/log-event_viz_overview.png" alt="top list example" responsive="true" style="width:90%;">}} 
+
 
 ## Visualisations
 
+In **Analytics** pages, the different visualisation are available along with the query, measures and groups.
+{{< img src="graphing/log-event_viz_choice.png" alt="top list example" responsive="true" style="width:50%;">}} 
+
+In **Dashboards** and **Notebooks**, visualisations are available as widgets (one widget for one visualisation).
+
+
 ### Timeseries
 
-### Toplists
 
-### Table
-
-But 
-
-{{< img src="logs/explorer/analytics/explorer-button.png" alt="Logs Explorer" style="width:50%;" responsive="true">}}
-
-You can control:
-
-* the query that filters the set of logs to analyze
-* the dimensions over which to split data
-* the visualization method for aggregates and splits
-
-From an analytics visualization, you can, additionally:
-
-* create a widget in a dashboard out of that visualization
-* create a monitor out of that query
-* deep dive into subsets of the log list, depending on the interactions that the visualization enables
-
-Save a log analytics view with the "Save As" button. You can load your teammates' saved views from the "Saved Views" tab.
-
-
-## Build an analytics query
-
-Use the query to control what's displayed in your Log Analytics:
-
-1. Choose a [Measure][1] or [Facet][2] to graph. [Measure][1] lets you choose the aggregation function whereas [Facet][2] displays the unique count.
-
-    {{< img src="logs/explorer/analytics/choose_measure_facet.png" alt="choose measure facet" responsive="true" style="width:50%;">}}
-2. Select the aggregation function for the [Measure][1] you want to graph:
-
-    {{< img src="logs/explorer/analytics/agg_function_log_graph.png" alt="aggregation function for Log Analytics" responsive="true" style="width:50%;">}}
-
-3. Use [Tag][1] or [Facet][2] to split your graph.
-
-    {{< img src="logs/explorer/analytics/split_by_log_graph.png" alt="split by Log Analytics" responsive="true" style="width:50%;">}}
-
-4. Choose to display either the *X* **top** or **bottom** values according to the selected [measure][1].
-
-    {{< img src="logs/explorer/analytics/top_bottom_button.png" alt="top bottom button" responsive="true" style="width:20%;">}}
-
-5. Choose the Timesteps graph.
-  Changing the global timeframe changes the list of available Timesteps values.
-
-    {{< img src="logs/explorer/analytics/timesteps.png" alt="Timestep" responsive="true" style="width:30%;">}}
-
-
-## Visualizations
-
-Select a Log Analytics visualization type using the graph selector:
-
-{{< img src="logs/explorer/analytics/graph_selector.png" alt="Log Analytics selector" responsive="true" style="width:30%;">}}
-
-Available visualizations:
-
-{{< tabs >}}
-{{% tab "Timeseries" %}}
-
-Visualize the evolution of a single [measure][1] (or a [facet][2] unique count of values) over a selected time frame, and (optionally) split by an available [facet][2].
+Visualize the evolution of a single **measure** (or a **facet** unique count of values) over a selected time frame, and (optionally) split by an available **facet**.
 
 You have additional display options for timeseries:
 
 * whether you display lines, bars, or areas
 * data stacking option, by value, or by percentage
 * color set
+
+{{< img src="graphing/log-event_viz_timeseries.png" alt="top list example" responsive="true" style="width:90%;">}} 
 
 Noteworthy facts about stacking:
 
@@ -136,44 +88,37 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 {{< img src="logs/explorer/analytics/timeserie_example.png" alt="timeserie example" responsive="true" style="width:90%;">}}
 
 
-[1]: /logs/explorer/?tab=measures#setup
-[2]: /logs/explorer/?tab=facets#setup
-{{% /tab %}}
-
-{{% tab "Top List" %}}
-
-Visualize the top values from a [facet][1] according to the chosen [measure][2]:
+### Toplists
 
 The following Top List Log Analytics shows:
 The evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
 
 {{< img src="logs/explorer/analytics/top_list_example.png" alt="top list example" responsive="true" style="width:90%;">}}
 
+{{< img src="graphing/log-event_viz_toplist.png" alt="top list example" responsive="true" style="width:90%;">}} 
 
-[1]: /logs/explorer/?tab=facets#setup
-[2]: /logs/explorer/?tab=measures#setup
-{{% /tab %}}
+### Table
 
-{{% tab "Table" %}}
-
-Visualize the top values from a [facet][1] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update search query or drill through logs corresponding to either dimension.
+Visualize the top values from a **facet** according to a chosen **measure** (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update search query or drill through logs corresponding to either dimension.
 
 The following Table Log Analytics shows:
 The evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IP** and over the last 15 minutes.
 
 {{< img src="logs/explorer/analytics/logs_table_example.png" alt="table example" responsive="true" style="width:90%;">}}
 
-[1]: /logs/explorer/?tab=facets#setup
-[2]: /logs/explorer/?tab=measures#setup
-{{% /tab %}}
 
-{{< /tabs >}}
+{{< img src="graphing/log-event_viz_table.png" alt="top list example" responsive="true" style="width:90%;">}} 
 
-## Related logs
 
-Select or click on a section of the graph to either zoom in the graph or see the list of logs corresponding to your selection:
+## Analytics, and so what ?
 
-{{< img src="logs/explorer/analytics/view_logs.gif" alt="view logs" responsive="true" style="width:80%;">}}
+From an analytics visualization, you can, additionally:
+
+* create a widget in a dashboard out of that visualization
+* create a monitor out of that query
+* deep dive into subsets of the log list, depending on the interactions that the visualization enables
+
+Save a log analytics view with the "Save As" button. You can load your teammates' saved views from the "Saved Views" tab.
 
 
 
