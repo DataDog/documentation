@@ -38,8 +38,6 @@ var desktop_enable_enter = true;
 search_desktop.autocomplete.on('keyup', function(e) {
    if(e.keyCode === 13 && desktop_enable_enter) {
        window.location = '{{ absLangURL "search/" }}?s='+this.value;
-       console.log(window.location);
-       
    }
 });
 search_desktop.autocomplete.on('autocomplete:cursorchanged', function(e) {
