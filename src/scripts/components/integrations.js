@@ -1,7 +1,7 @@
 import Mousetrap from 'mousetrap';
 import mixitup from 'mixitup';
 
-$(document).ready(function () {
+export function initializeIntegrations(){
     var finder_state = 0;  // closed
     var container = document.querySelector('[data-ref="container"]');
 
@@ -18,9 +18,7 @@ $(document).ready(function () {
             finder_state = 1;
         }
     });
-});
 
-document.addEventListener('DOMContentLoaded', function () {
     var is_safari = navigator.userAgent.indexOf('Safari') !== -1;
     var ref = document.querySelector('.integration-popper-button');
     var pop = document.getElementById('integration-popper');
@@ -104,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
         pop.style.display = 'none';
         $(window).scrollTop(0);
     });
-    
+
     var searchTimer;
 
     search.addEventListener('input', function(e) {
@@ -114,21 +112,12 @@ document.addEventListener('DOMContentLoaded', function () {
         clearTimeout(searchTimer);
         searchTimer = setTimeout(function() {
             activateButton(allBtn, filters);
-            updateData(e.target.value.toLowerCase(), true)
+            updateData(e.target.value.toLowerCase(), true);
+            if (e.target.value.length > 0) {
+                window.datadog_logger.log('Integrations Search', {"browser": {"integrations":{"search":e.target.value.toLowerCase()}}}, 'info');
+            }
         }, 400);
-    })
-
-    // integrations dropdown select
-    /*$('.integrations-select').on('change', function(e) {
-        var filter = $(this).val();
-        updateData(filter);
-        // trigger same active on desktop
-        var desktopBtn = controls.querySelector('[data-filter=".'+filter.substr(1)+'"]');
-        activateButton(desktopBtn, filters);
-
-        var url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
-        history.pushState(null, null, url + filter)
-    });*/
+    });
 
     function activateButton(activeButton, siblings) {
         var button;
@@ -150,12 +139,13 @@ document.addEventListener('DOMContentLoaded', function () {
         if (button.classList.contains('active') || !button.getAttribute('data-filter')) return;
 
         var filter = button.getAttribute('data-filter');
+        window.datadog_logger.log('Integrations category selected', {"browser": {"integrations":{"category":button.innerText}}}, 'info');
         activateButton(button, filters);
         updateData(filter, false);
 
         if (history.pushState) {
             var href = button.getAttribute('href');
-            history.pushState({}, document.title, href);
+            history.pushState(null, document.title, href);
         }
     }
 
@@ -229,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var current_selected = $('.controls .active').attr('href');
         if(current_cat && current_selected) {
             if (current_cat !== current_selected) {
-                $('a[href="' + current_cat + '"]:visible').get(0).click();
+                $('a[href="' + current_cat + '"]').get(0).click();
             }
         }
         if(current_cat === "") {
@@ -242,4 +232,5 @@ document.addEventListener('DOMContentLoaded', function () {
     if (window.location.href.indexOf("#") > -1) {
         $(window).trigger('hashchange');
     }
-});
+
+}
