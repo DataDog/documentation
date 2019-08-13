@@ -41,7 +41,7 @@ With Datadog APM, you can easily investigate the performance of your endpoints, 
 
 4. Set the time filter to `1d One Day`. Scroll down to the Traces table and **sort it by duration**, hover over over the top trace in the table and **click View Trace**
 
-    This is the Flamegraph and associated information. Here you can see the duration of each step in the trace and whether it is erroneous. This is useful in identifying slow components and error prone ones. The Flamegraph can be zoomed, scrolled and explored naturally. Under the Flamegraph you can see associated metadata, Logs and Host information.
+    This is the Flamegraph and associated information. Here you can see the duration of each step in the trace and whether it is erroneous. This is useful in identifying slow components and error-prone ones. The Flamegraph can be zoomed, scrolled, and explored naturally. Under the Flamegraph you can see associated metadata, Logs, and Host information.
 
 5. **Click into the Host tab**, observe the CPU and memory performance of the underlying host while the request was hitting it.
 6. **Click Open Host Dashboard** to view all relevant data about the host
