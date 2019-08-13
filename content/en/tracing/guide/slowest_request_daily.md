@@ -23,7 +23,7 @@ With Datadog APM, you can easily investigate the performance of your endpoints, 
 
 1. **Open the [Services page][1]**.
 
-    This page contains a list of all instrumented services available in Datadog APM. Note you can search for keywords, filter by env-tag, and set the timeline.
+    This page contains a list of all instrumented services available in Datadog APM. Note you can search for keywords, filter by `env-tag`, and set the timeline.
 
 2. **Search for a relevant and active service and open the Service Page**.
 
