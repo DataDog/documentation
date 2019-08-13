@@ -31,7 +31,7 @@ With Datadog APM, you can easily investigate the performance of your endpoints, 
 
     {{< img src="tracing/guide/slowest_request_daily/slowest_trace_2.png" alt="Identifying the slowest trace and finding the Host metrics for it" responsive="true" style="width:90%;">}}
 
-    In addition to throughput, latency and error rate information, the Service Page contains a list of Resources (major operations like API endpoints, SQL queries and web requests) identified for the Service.
+    In addition to throughput, latency and error rate information, the Service Page contains a list of Resources (major operations like API endpoints, SQL queries, and web requests) identified for the service.
 
 3. **Find the Resource** you’d like to investigate from the table and click into the Resource Page.
 
