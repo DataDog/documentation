@@ -35,7 +35,7 @@ With Datadog APM, you can easily investigate the performance of your endpoints, 
 
 3. **Find the Resource** you’d like to investigate from the table and click into the Resource Page.
 
-    The Resource page contains high-level metrics about this resource like throughput, latency, error rate and breakdown of the time spent on each downstream service from the resource. In addition, it contains the specific traces that pass through the resource and an aggregate view of the spans that make up these traces.
+    The Resource page contains high-level metrics about this resource like throughput, latency, error rate, and a breakdown of the time spent on each downstream service from the resource. In addition, it contains the specific traces that pass through the resource and an aggregate view of the spans that make up these traces.
 
      {{< img src="tracing/guide/slowest_request_daily/slowest_trace_3.png" alt="Identifying the slowest trace and finding the Host metrics for it" responsive="true" style="width:90%;">}}
 
