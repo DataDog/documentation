@@ -25,7 +25,16 @@ further_reading:
 
 ## Trace sampling
 
-Trace Sampling is applicable for high-volume web-scale applications, where a sampled proportion of traces is kept in Datadog based on the following rules.
+
+Trace Sampling is applicable for high-volume web-scale applications, where a sampled proportion of traces is kept in Datadog based on the following rules. You can control sampling by limiting the ingestion rate and/or the storage rate of traces in APM. 
+
+Note that the goal of sampling is to *keep* the traces that matter the most:
+
+* Distributed traces
+* Low QPS Services
+* Representative variety set of traces
+
+{{< img src="tracing/product_specs/trace_sampling_storage/tracing-flow-chart.png" alt="Individual traces are sampled at the Client, Agent, and Server level." responsive="true" style="width:90%;">}}
 
 Statistics (requests, errors, latency, etc.), are calculated based on the full volume of traces at the Agent level, and are therefore always accurate.
 
@@ -41,17 +50,44 @@ Datadog APM computes following aggregate statistics over all the traces instrume
 
 {{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Aggregate statistics are generated on un-sampled data." responsive="true" style="width:90%;">}}
 
-### Goal of Sampling
+### Trace Ingestion and Storage
 
-The goal of sampling is to *keep* the traces that matter the most:
+//Insert Diagram
 
-* Distributed traces
-* Low QPS Services
-* Representative variety set of traces
+In high-volume web-scale applications, you might want to filter out trace noises to ensure you can see what's important and eliminate any performance impact on network bandwidth and application response time. To do so APM allows you to control what traces gets ingested and then stored in the system with the help of dynamically configurable ingestion and storage rules.
 
-{{< img src="tracing/product_specs/trace_sampling_storage/tracing-flow-chart.png" alt="Individual traces are sampled at the Client, Agent, and Server level." responsive="true" style="width:90%;">}}
+### Control Trace Ingestion 
 
-### Sampling Rules
+With trace ingestion, you can set a limit at following level to limit what gets sent to the backend by defining a set of rules. 
+
+### Rules for ingestion
+
+You can define explicit ingestion rates to be used if rule conditions match in a trace. A rule is a combination of service name, resource name, span name, all fields being optional. Rules are evaluated in order, and the first match is used. The ingestion rule priority based on granularity is Service Name > Span Name > Resource Name. For this reason, define more specific rules ar the top of the list of rules and broader rules at the bottom. If no rule matches, a default ingestion rate is applied. 
+
+
+    tracer.configure(sampler=DatadogSampler(
+        rules=[
+            IngestionRule(send_rate=1),  # send everything across all services
+            IngestionRule(send_rate=0.25, service='redis'),  # 25% sample rate for redis service traces
+            IngestionRule(send_rate=0, resource='GET /healthcheck'),  # 0% sample rate for healthcheck traces
+            IngestionRule(send_rate=0.5, service='myservice', spanName = 'pylons.request', resource='/^PUT\X.*$')
+        ],
+    ))
+
+
+You can also control globally the rate of ingestion and burst of traces sent out using the rate limiter. The default values are 100 traces per second with a burst of 500
+.
+
+    tracer.configure(sampler=DatadogSampler(
+        IngestionRule=[ ... ],  # Defined sampling rules
+        rate_limit=200,  # Update from 100 to 200 traces per second
+        burst=200 # Update burst from 500 to 200
+    ))
+
+
+Once the trace is ingested, you can prioritize if the trace gets stored/dropped based on the following storage level rules.
+
+### Control Trace Storage
 
 For the lifecycle of a trace, decisions are made at Tracing Client, Agent, and Backend level in the following order.
 
