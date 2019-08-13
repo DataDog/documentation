@@ -50,8 +50,7 @@ class ServletImpl extends AbstractHttpServlet {
   void doGet(HttpServletRequest req, HttpServletResponse resp) {
     final Span span = GlobalTracer.get().activeSpan();
     if (span != null) {
-      span.setTag("customer.id", 12345);
-      span.setTag("http.url", "/login");
+      span.setTag("customer_id", 12345);
     }
     // servlet impl
   }
@@ -91,25 +90,13 @@ def handle_customer(customer_id):
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Add metadata directly to `Datadog::Span` objects by calling `#set_tag`:
-
-```ruby
-# An example of a Sinatra endpoint,
-# with Datadog tracing around the request.
-get '/posts' do
-  Datadog.tracer.trace('web.request') do |span|
-    span.set_tag('http.url', request.path)
-  end
-end
-```
-
 Access the current active span from any method within your code. **Note**: If the method is called and there is no span currently active, `active_span` is `nil`.
 
 ```ruby
 # e.g. adding tag to active span
 
 current_span = Datadog.tracer.active_span
-current_span.set_tag('<TAG_KEY>', '<TAG_VALUE>') unless current_span.nil?
+current_span.set_tag('customer_id', 12345) unless current_span.nil?
 ```
 
 {{% /tab %}}
@@ -133,7 +120,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
     defer span.Finish()
 
     // Set tag
-    span.SetTag("http.url", r.URL.Path)
+    span.SetTag("customer_id", customer.id)
 }
 
 func main() {
@@ -160,7 +147,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
     // Retrieve a span for a web request attached to a Go Context.
     if span, ok := tracer.SpanFromContext(r.Context()); ok {
         // Set tag
-        span.SetTag("http.url", r.URL.Path)
+        span.SetTag("customer_id", customer.id)
     }
 }
 ```
@@ -177,9 +164,8 @@ Add metadata directly to span objects by calling `setTag` or `addTags`:
 app.get('/posts', (req, res) => {
   const span = tracer.startSpan('web.request')
 
-  span.setTag('http.url', req.url)
   span.addTags({
-    'http.method': req.method
+    'customer_id': customer.id
   })
 })
 ```
@@ -191,7 +177,7 @@ Access the current active span from any method within your code. **Note**: If th
 
 const span = tracer.scope().active()
 
-span.setTag('<TAG_KEY>', '<TAG_VALUE>')
+span.setTag('customer_id', customer.id)
 ```
 
 {{% /tab %}}
@@ -206,7 +192,7 @@ using Datadog.Trace;
 var scope = Tracer.Instance.ActiveScope;
 
 // add a tag to the span
-scope.Span.SetTag("<TAG_KEY>", "<TAG_VALUE>");
+scope.Span.SetTag("customer_id", customer.id);
 ```
 
 **Note**: `Datadog.Trace.Tracer.Instance.ActiveScope` returns `null` if there is no active span.
@@ -222,7 +208,7 @@ Add metadata directly to a `DDTrace\Span` object by calling `Span::setTag()`. Fo
 $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
 if (null !== $span) {
   // Add a tag to the span
-  $span->setTag('<TAG_KEY>', '<TAG_VALUE>');
+  $span->setTag('customer_id', customer.id);
 }
 ```
 
