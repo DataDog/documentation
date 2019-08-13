@@ -249,7 +249,7 @@ Secrets handle decrypted:
 ```
 
 Example on Windows (from an Administrator Powershell):
-```powershell
+```
 PS C:\> & 'C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe' secret
 === Checking executable rights ===
 Executable path: C:\path\to\you\executable.exe
@@ -351,24 +351,22 @@ To do so, follow those steps:
 
 1. Remove `ddagentuser` from the `Local Policies/User Rights Assignement/Deny Log on locally` list in the `Local Security Policy`.
 2. Set a new password for `ddagentuser` (since the one generated at install time is never saved anywhere). In Powershell, run:
-
   ```powershell
   $user = [ADSI]"WinNT://./ddagentuser";
   $user.SetPassword("a_new_password")
   ```
 
 3. Update the password to be used by `DatadogAgent` service in the Service Control Manager. In Powershell, run:
-
-   ```powershell
-   sc.exe config DatadogAgent password= "a_new_password"
-   ```
+  ```powershell
+  sc.exe config DatadogAgent password= "a_new_password"
+  ```
 
 You can now login as `ddagentuser` to test your executable. Datadog has a [Powershell script][2] to help you test your
 executable as another user. It switches user contexts and mimics how the Agent runs your executable.
 
 Example on how to use it:
 
-```powershell
+```
 .\secrets_tester.ps1 -user ddagentuser -password a_new_password -executable C:\path\to\your\executable.exe -payload '{"version": "1.0", "secrets": ["secret_ID_1", "secret_ID_2"]}'
 Creating new Process with C:\path\to\your\executable.exe
 Waiting a second for the process to be up and running
