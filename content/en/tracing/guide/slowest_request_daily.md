@@ -1,5 +1,5 @@
 ---
-title: Investigate the slowest request of a day and combine infrastructure data to find the root cause
+title: Investigate Infrastructure Latency
 kind: guide
 disable_toc: true
 further_reading:
