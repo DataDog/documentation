@@ -352,10 +352,10 @@ To do so, follow those steps:
 1. Remove `ddagentuser` from the `Local Policies/User Rights Assignement/Deny Log on locally` list in the `Local Security Policy`.
 2. Set a new password for `ddagentuser` (since the one generated at install time is never saved anywhere). In Powershell, run:
 
-   ```powershell
-   $user = [ADSI]"WinNT://./ddagentuser";
-   $user.SetPassword("a_new_password")
-   ```
+  ```powershell
+  $user = [ADSI]"WinNT://./ddagentuser";
+  $user.SetPassword("a_new_password")
+  ```
 
 3. Update the password to be used by `DatadogAgent` service in the Service Control Manager. In Powershell, run:
 
