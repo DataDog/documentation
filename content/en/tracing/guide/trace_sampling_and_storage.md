@@ -54,16 +54,13 @@ Datadog APM computes following aggregate statistics over all the traces instrume
 
 //Insert Diagram
 
-In high-volume web-scale applications, you might want to filter out trace noises to ensure you can see what's important and eliminate any performance impact on network bandwidth and application response time. To do so APM allows you to control what traces gets ingested and then stored in the system with the help of dynamically configurable ingestion and storage rules.
+In high-volume web-scale applications, use trace ingestion to filter out trace noises to ensure you see only important traces and eliminate any performance impact on network bandwidth and application response time. APM allows you to control what traces gets ingested and then stored in the system with the help of dynamically configurable ingestion and storage rules.
 
 ### Control Trace Ingestion 
 
-With trace ingestion, you can set a limit at following level to limit what gets sent to the backend by defining a set of rules. 
+You can define explicit ingestion rates to be used if rule conditions match in a trace. A rule is a combination of service name, resource name, span name, all fields being optional. Rules are evaluated in order, and the first match is used. The ingestion rule priority based on granularity is `Service Name > Span Name > Resource Name`. For this reason, define more specific rules ar the top of the list of rules and broader rules at the bottom. If no rule matches, a default ingestion rate is applied. 
 
-### Rules for ingestion
-
-You can define explicit ingestion rates to be used if rule conditions match in a trace. A rule is a combination of service name, resource name, span name, all fields being optional. Rules are evaluated in order, and the first match is used. The ingestion rule priority based on granularity is Service Name > Span Name > Resource Name. For this reason, define more specific rules ar the top of the list of rules and broader rules at the bottom. If no rule matches, a default ingestion rate is applied. 
-
+Some sample use-cases:
 
     tracer.configure(sampler=DatadogSampler(
         rules=[
@@ -75,8 +72,8 @@ You can define explicit ingestion rates to be used if rule conditions match in a
     ))
 
 
-You can also control globally the rate of ingestion and burst of traces sent out using the rate limiter. The default values are 100 traces per second with a burst of 500
-.
+You can also control globally the rate of ingestion and burst of traces sent out using the rate limiter. The default values are 100 traces per second with a burst of 500.
+
 
     tracer.configure(sampler=DatadogSampler(
         IngestionRule=[ ... ],  # Defined sampling rules
@@ -85,7 +82,7 @@ You can also control globally the rate of ingestion and burst of traces sent out
     ))
 
 
-Once the trace is ingested, you can prioritize if the trace gets stored/dropped based on the following storage level rules.
+Once your important trace gets ingested, you can prioritize if the trace gets stored/dropped based on the following storage level rules.
 
 ### Control Trace Storage
 
