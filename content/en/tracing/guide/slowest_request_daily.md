@@ -27,7 +27,7 @@ With Datadog APM, you can easily investigate the performance of your endpoints, 
 
 2. **Search for a relevant and active service and open the Service Page**.
 
-    The web-store service is used in this example because it is the primary server in the techstack and controls most calls to third party services. 
+    The web-store service is used in this example because it is the primary server in the tech stack and it controls most calls to third party services. 
 
     {{< img src="tracing/guide/slowest_request_daily/slowest_trace_2.png" alt="Identifying the slowest trace and finding the Host metrics for it" responsive="true" style="width:90%;">}}
 
