@@ -48,7 +48,7 @@ With Datadog APM, you can easily investigate the performance of your endpoints, 
 
     {{< img src="tracing/guide/slowest_request_daily/slowest_trace_4.png" alt="Identifying the slowest trace and finding the Host metrics for it" responsive="true" style="width:90%;">}}
 
-Datadog APM seamlessly integrates with any other Datadog information such as infrastructure metrics and Logs, from the Flamegraph, all of this information is available to you as well as any [custom metadata][2] you are sending with your traces.
+Datadog APM seamlessly integrates with the other Datadog metrics and information - like infrastructure metrics and Logs. Using the Flamegraph, this information is available to you as well as any [custom metadata][2] you are sending with your traces.
 
 
 ## Further Reading
