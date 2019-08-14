@@ -61,8 +61,10 @@ Note that most settings must be set on `TracerSettings` _before_ creating the `T
 
 {{% /tab %}}
 
-{{% tab "Environment variables on Windows" %}}
-To configure the Tracer using environment variables on Windows, set the variables before launching the instrumented application.
+{{% tab "Environment variables" %}}
+To configure the Tracer using environment variables, set the variables before launching the instrumented application.
+
+For example, on Windows:
 ```cmd
 rem Set environment variables
 SET DD_TRACE_AGENT_URL=http://localhost:8080
@@ -72,13 +74,9 @@ rem Launch application
 MyApplication.exe
 ```
 
-For Windows Services, you can set environment variables in the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment`.
+Note: To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
 
-{{% /tab %}}
-
-{{% tab "Environment variables on Linux" %}}
-
-To configure the Tracer using environment variables on Linux, set the variables before launching the instrumented application.
+On Linux:
 ```bash
 # Set environment variables
 export DD_TRACE_AGENT_URL=http://localhost:8080
@@ -89,7 +87,7 @@ dotnet MyApplication.dll
 ```
 {{% /tab %}}
 
-{{% tab "app.config/web.config" %}}
+{{% tab "web.config" %}}
 
 .NET Framework only: To configure the Tracer using an `app.config` or `web.config` file, use the `<appSettings>` section. For example:
 ```xml
@@ -103,7 +101,7 @@ dotnet MyApplication.dll
 
 {{% /tab %}}
 
-{{% tab "datadog.json" %}}
+{{% tab "JSON file" %}}
 
 To configure the Tracer using an JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be a hash with a key/value pair for each setting. For example:
 ```json
@@ -271,7 +269,7 @@ rem Start application
 example.exe
 ```
 
-For Windows Services, you can set environment variables in the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment`.
+Note: To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
 
 {{% /tab %}}
 
@@ -310,7 +308,7 @@ rem Start application
 dotnet.exe example.dll
 ```
 
-For Windows Services, you can set environment variables in the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment`.
+Note: To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
 
 {{% /tab %}}
 
