@@ -30,11 +30,94 @@ To begin tracing applications written in any language, first [install and config
 
 There are multiple ways to configure the .NET Tracer:
 
-- via code, using properties on the `TracerSettings` class
-- environment variables
-- `<appSettings>` section of the `app.config`/`web.config` file (.NET Framework only)
+- in .NET code
+- setting environment variables
+- editing the application's `app.config`/`web.config` file (.NET Framework only)
+- creating a `datadog.json` file
 
-The following table lists the supported configuration variables. The first column indicates the name used in environment variables or configuration files. The second column indicates the name of the propery on the `TracerSettings` class. You can access these properties in the code through `Tracer.Instance.Settings`.
+{{< tabs >}}
+{{% tab "Code" %}}
+
+To configure the Tracer in application code, create a `TracerSettings` from the default configuration sources. Set properties on this `TracerSettings` instance before passing it to a `Tracer` constructor. For example:
+
+```csharp
+using Datadog.Trace;
+
+// read default configuration sources (env vars, web.config, datadog.json)
+var settings = TracerSettings.FromDefaultSources();
+
+// change some settings
+settings.ServiceName = "MyService";
+settings.AgentUri = new Uri("http://localhost:8126/");
+
+// create a new Tracer using these settings
+var tracer = new Tracer(settings);
+
+// set the global tracer
+Tracer.Instance = tracer;
+```
+
+Note that most settings must be set on `TracerSettings` _before_ creating the `Tracer`. Changes made to `TracerSettings` properies after the `Tracer` is created are ignored.
+
+{{% /tab %}}
+
+{{% tab "Environment variables on Windows" %}}
+To configure the Tracer using environment variables on Windows, set the variables before launching the instrumented application.
+```cmd
+rem Set environment variables
+SET DD_TRACE_AGENT_URL=http://localhost:8080
+SET DD_SERVICE_NAME=MyService
+
+rem Launch application
+MyApplication.exe
+```
+
+For Windows Services, you can set environment variables in the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment`.
+
+{{% /tab %}}
+
+{{% tab "Environment variables on Linux" %}}
+
+To configure the Tracer using environment variables on Linux, set the variables before launching the instrumented application.
+```bash
+# Set environment variables
+export DD_TRACE_AGENT_URL=http://localhost:8080
+export DD_SERVICE_NAME=MyService
+
+# Launch application
+dotnet MyApplication.dll
+```
+{{% /tab %}}
+
+{{% tab "app.config/web.config" %}}
+
+.NET Framework only: To configure the Tracer using an `app.config` or `web.config` file, use the `<appSettings>` section. For example:
+```xml
+<configuration>
+  <appSettings>
+    <add key="DD_TRACE_AGENT_URL" value="http://localhost:8080"/>
+    <add key="DD_SERVICE_NAME" value="MyService"/>
+  </appSettings>
+</configuration>
+```
+
+{{% /tab %}}
+
+{{% tab "datadog.json" %}}
+
+To configure the Tracer using an JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be a hash with a key/value pair for each setting. For example:
+```json
+{
+  "DD_TRACE_AGENT_URL": "http://localhost:8080",
+  "DD_SERVICE_NAME": "MyService"
+}
+```
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+The following table lists the supported configuration variables. The first column indicates the name used in environment variables or configuration files. The second column indicates the name of the propery on the `TracerSettings` class.
 
 Setting name          | Property Name          | Description                                                                                                                                                                                                                                                      |
 --------------------- | ---------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
