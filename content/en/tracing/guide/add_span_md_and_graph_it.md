@@ -220,7 +220,7 @@ if (null !== $span) {
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">You might have to wait a few minutes between deploying your updated code and seeing the new metadata in the datadog UI</div>
+<div class="alert alert-info">You might have to wait a few minutes between deploying your updated code and seeing the new metadata in the Datadog UI</div>
 
 ## Leverage the Datadog UI to search for your custom metadata
 
