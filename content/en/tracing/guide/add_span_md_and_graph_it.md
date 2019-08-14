@@ -19,20 +19,26 @@ further_reading:
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.gif" alt="comparaison 2" responsive="true" style="width:90%;">}}
 
-Datadog APM allows you to customize your traces to include any additional information you might need to maintain observability into your business. In this example a customer ID will be added to traces allowing the customers that have the slowest performance to be identified. Customization of traces is based on tags that seamlessly integrate APM with the rest of Datadog and come in the form of key:value pairs of metadata that is added to spans. You can read more about tags and their use in Datadog in the [Tags Overview][1] page.
+Datadog APM allows you to customize your traces to include any additional information you might need to maintain observability into your business. In this example, a customer ID is added to traces allowing the customers that have the slowest performance to be identified. Customization of traces is based on tags that seamlessly integrate APM with the rest of Datadog and come in the form of `key:value` pairs of metadata added to spans. You can read more about tags and their use in Datadog in the [Tags Overview][1] page.
 
 ## Instrument your code with custom metadata
 
 1) **Follow the example to get your code instrumented**.
 
+<<<<<<< HEAD
 Depending on the language you are you using, you’ll need to set the metadata to add to your spans differently.
 
 **Note**: take note of the service and [resource names][2] you are working on, these will come in handy later. In this example the service is the Ruby server `web-store` and the resource (endpoint) is `ShoppingCartController#checkout`.
+=======
+    Depending on the programming language you are you using, you’ll need to set the metadata to add to your spans differently.
+
+    **Note**: take note of the service and [resource names][2] you are working on, these will come in handy later. In this example, the service is the Ruby server `web-store` and the resource (endpoint) is `ShoppingCartController#checkout`.
+>>>>>>> 45960468362fab2c7a70ec6b3bce6fb6fb1c7d5a
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The Datadog UI uses tags to set span level metadata. A full list of these metadata can be found in the [Datadog][1] and [OpenTracing][2] APIs.
+The Datadog UI uses tags to set span level metadata. A full list of the metadata can be found in the [Datadog][1] and [OpenTracing][2] APIs.
 
 Custom metadata may be set for auto-instrumentation by grabbing the active span out of the global tracer and setting a tag with `setTag`.
 
@@ -73,7 +79,8 @@ def handle_customer(customer_id):
     span.set_tag('customer.id', customer_id)
 ```
 
-The current span can be retrieved from the context in order to set its metadata. This way, if a span was started by the instrumentation, you can retrieve the span and add custom metadata. **Note**: If a span does not exist, `None` is returned:
+The current span can be retrieved from the context in order to set its metadata. This way, if a span was started by the instrumentation, you can retrieve the span and add custom metadata. 
+**Note**: If a span does not exist, `None` is returned:
 
 ```python
 from ddtrace import tracer
@@ -90,7 +97,8 @@ def handle_customer(customer_id):
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Access the current active span from any method within your code. **Note**: If the method is called and there is no span currently active, `active_span` is `nil`.
+Access the current active span from any method within your code. 
+**Note**: If the method is called and there is no span currently active, `active_span` is `nil`.
 
 ```ruby
 # e.g. adding tag to active span
@@ -132,7 +140,7 @@ func main() {
 ```
 
 Datadog's integrations make use of the `Context` type to propagate the current active span.
-If you want to add span metadata via a tag attached to a `Context`, call the `SpanFromContext` function:
+If you want to add span metadata using a tag attached to a `Context`, call the `SpanFromContext` function:
 
 ```go
 package main
@@ -170,7 +178,8 @@ app.get('/posts', (req, res) => {
 })
 ```
 
-Access the current active span from any method within your code. **Note**: If the method is called and there is no span currently active, `tracer.scope().active()` returns `null`.
+Access the current active span from any method within your code.
+**Note**: If the method is called and there is no span currently active, `tracer.scope().active()` returns `null`.
 
 ```javascript
 // e.g. adding tag to active span
@@ -217,7 +226,7 @@ if (null !== $span) {
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">You might have to wait a few minutes between deploying your updated code and seeing the new metadata in the datadog UI</div>
+<div class="alert alert-info">You might have to wait a few minutes between deploying your updated code and seeing the new metadata in the Datadog UI</div>
 
 ## Leverage the Datadog UI to search for your custom metadata
 
