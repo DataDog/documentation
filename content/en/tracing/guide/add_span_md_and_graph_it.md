@@ -172,7 +172,8 @@ app.get('/posts', (req, res) => {
 })
 ```
 
-Access the current active span from any method within your code. **Note**: If the method is called and there is no span currently active, `tracer.scope().active()` returns `null`.
+Access the current active span from any method within your code.
+**Note**: If the method is called and there is no span currently active, `tracer.scope().active()` returns `null`.
 
 ```javascript
 // e.g. adding tag to active span
