@@ -150,8 +150,6 @@ It is possible to reduce the traffic from your DogStatsD client and the Agent by
 rate value for your client. A sample rate of 0.5 cuts the number of UDP packets sent in half.
 This solution is a trade-off: you decrease traffic but slightly lose in precision/granularity.
 
-We do not recommend using sampling with distributions
-
 A more in-depth explanation with code examples is available
 [here](https://docs.datadoghq.com/developers/faq/dog-statsd-sample-rate-parameter-explained/).
 
