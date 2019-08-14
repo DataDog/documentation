@@ -32,7 +32,7 @@ Datadog APM allows you to customize your traces to include any additional inform
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The Datadog UI uses tags to set span level metadata. A full list of these metadata can be found in the [Datadog][1] and [OpenTracing][2] APIs.
+The Datadog UI uses tags to set span level metadata. A full list of the metadata can be found in the [Datadog][1] and [OpenTracing][2] APIs.
 
 Custom metadata may be set for auto-instrumentation by grabbing the active span out of the global tracer and setting a tag with `setTag`.
 
