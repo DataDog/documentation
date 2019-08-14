@@ -8,8 +8,6 @@ import { moveToAnchor } from './helpers/moveToAnchor';
 
 // Setup for large screen ToC
 
- let Munchkin;
-
 // gTag
 window.dataLayer = window.dataLayer || [];
 
@@ -1000,8 +998,10 @@ function loadPage(newUrl) {
         gtag('config', gaTag, {'page_path': pathName});
 
         // Marketo
-        if (Munchkin) {
+        if (typeof window.Munchkin !== "undefined") {
             Munchkin.munchkinFunction('clickLink', { href: newUrl});
+        } else {
+            window.datadog_logger.info("Munchkin called before ready..")
         }
         
 
