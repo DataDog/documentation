@@ -91,7 +91,8 @@ def handle_customer(customer_id):
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Access the current active span from any method within your code. **Note**: If the method is called and there is no span currently active, `active_span` is `nil`.
+Access the current active span from any method within your code. 
+**Note**: If the method is called and there is no span currently active, `active_span` is `nil`.
 
 ```ruby
 # e.g. adding tag to active span
