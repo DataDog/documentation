@@ -1,12 +1,12 @@
 import Stickyfill from 'stickyfilljs';
-import Mousetrap from 'mousetrap';
-import mixitup from 'mixitup';
 import algoliasearch from 'algoliasearch';
 
+import { initializeIntegrations } from './components/integrations';
+import { hideToc, widthCheck, tocWidthUpdate, showTOCIcon, updateTOC, buildTOCMap, buildAPIMap, onScroll } from './components/table-of-contents';
+
+import { moveToAnchor } from './helpers/moveToAnchor';
+
 // Setup for large screen ToC
-var largeScreenThreshold = 1710;
-var sidenavMapping = [];
-var apiNavMapping = [];
 
 // gTag
 window.dataLayer = window.dataLayer || [];
@@ -60,7 +60,8 @@ $(document).ready(function () {
 
     // algolia
     $('.ds-hint').css('background', 'transparent');
-    if (window.location.href.indexOf('/search/') > -1) {
+
+    if (document.documentElement.dataset.relpermalink === '/search/') {
 
         var client = algoliasearch("EOIG7V0A2O", 'c7ec32b3838892b10610af30d06a4e42');
         var results = new RegExp('[\?&]' + "s" + '=([^&#]*)').exec(window.location.href);
@@ -296,7 +297,7 @@ $(document).ready(function () {
                     }
 
                     window.onpopstate = function (event) {
-                        if (event.state.page) {
+                        if (event.state) {
                             current_page = event.state.page;
                             changePage(current_page);
                         }
@@ -554,34 +555,7 @@ $(document).ready(function () {
 
     // ------------- TODO: move TOC js back to own file when webpack migration complete and can import js modules
 
-    if (!$('#TableOfContents ul').length) {
-        $('.mobile-toc-toggle').addClass('d-none');
-        $('.toc-container').addClass('d-none');
-    }
-
-    // when the page loads, checking the window width
-    widthCheck();
-    tocWidthUpdate();
-
-    if(innerWidth > largeScreenThreshold && window.scrollY < 60){
-        $('.toc').css('top', 189);
-        $('.mobile-toc-toggle').css('top', 189);
-    }else if(innerWidth > largeScreenThreshold && window.scrollY > 60){
-        $('.toc').css('top', 124.5);
-        $('.mobile-toc-toggle').css('top', 124.5);
-    }
-
-    $(window).on('resize scroll', function(e) {
-        var header_h = $('body > header').height();
-        var top = $('#TableOfContents').position() ? $('#TableOfContents').position().top : 0;
-        var offset = header_h + top;
-        $('.toc').css('maxHeight', document.documentElement.clientHeight - offset);
-    });
-
-    $(window).on('resize', function() {
-        widthCheck();
-        tocWidthUpdate();
-    });
+    
 
     updateTOC();
 
@@ -606,41 +580,7 @@ $(document).ready(function () {
         }
     });
 
-    $(window).on('resize scroll', function(e) {
-        onScroll();
-        if($(window).width() > 530 && $(window).width() < largeScreenThreshold) {
-            var bottomOfBrowser = parseInt($(document).scrollTop()) + parseInt($(window).height());
-            var footerTop = $('body > footer').offset().top;
-            if (!$('.mobile-toc-toggle').hasClass('js-disable-toc')) {
-                if ($('#TableOfContents ul').length) {
-                    if(bottomOfBrowser >= footerTop) {
-                        if(!$('.mobile-toc-toggle').hasClass('d-none')) {
-                            $('.mobile-toc-toggle').toggleClass('d-none');
-                        }
-                        if(!$('.toc-container').hasClass('d-none')) {
-                            $('.mobile-toc-toggle').click();
-                        }
-                    } else {
-                        if($('.mobile-toc-toggle').hasClass('d-none')) {
-                            $('.mobile-toc-toggle').toggleClass('d-none');
-                        }
-                    }
-                }
-            } else {
-                $('.mobile-toc-toggle').addClass('d-none');
-                $('.toc-container').addClass('d-none');
-            }
-        }
-    }).trigger('scroll');
-
-    $(document).on( "headerResize", function( event, height) {
-        var offset = 30;
-        if($('.announcement_banner.open').length) {
-            offset = 60;
-        }
-        $('.mobile-toc-toggle').css('top', height + offset + 'px');
-        $('.toc').css('top', height + offset + 'px');
-    });
+    
 
     buildTOCMap();
     onScroll();
@@ -672,117 +612,6 @@ function updateMainContentAnchors(){
     });
 }
 
-function buildAPIMap() {
-    apiNavMapping = [];
-    var link = null;
-    $('.sidenav-api ul a').each(function() {
-        var href = $(this).attr('href');
-        var id = href.replace('#', '').replace(' ','-');
-        var header = $('[id="'+id+'"]');
-        var navParentLinks = $(this).parents('.sidenav-api').find('ul > li').has($(this)).find('> a');
-
-        if(header.length) {
-            if(header.is('h2') || header.is('h3')) {
-                apiNavMapping.push({
-                    'navLink': $(this),
-                    'navLinkPrev': link,
-                    'navParentLinks': navParentLinks,
-                    'id': id,
-                    'header': header,
-                    'isH2': header.is('h2'),
-                    'isH3': header.is('h3')
-                });
-            }
-        } else {
-            //console.log('could not find h2[id="'+id+'"]');
-        }
-        link = $(this);
-    });
-}
-
-
-function buildTOCMap() {
-    sidenavMapping = [];
-    var link = null;
-    $('#TableOfContents ul a').each(function() {
-        var href = $(this).attr('href');
-        var id = href.replace('#', '').replace(' ','-');
-        var header = $('[id="'+id+'"]');
-        var navParentLinks = $(this).parents('#TableOfContents').find('ul > li').has($(this)).find('> a');
-
-        if(header.length) {
-            if(header.is('h2') || header.is('h3')) {
-                sidenavMapping.push({
-                    'navLink': $(this),
-                    'navLinkPrev': link,
-                    'navParentLinks': navParentLinks,
-                    'id': id,
-                    'header': header,
-                    'isH2': header.is('h2'),
-                    'isH3': header.is('h3')
-                });
-            }
-        }
-        link = $(this);
-    });
-}
-
-function onScroll() {
-    var winTop = $(window).scrollTop();
-    var localOffset = 120;
-
-    if($(window).scrollTop() + $(window).height() === $(document).height()) {
-        // we are at the bottom of the screen  just highlight the last item
-    } else {
-        $('.toc_open').removeClass('toc_open');
-
-        // tocMapping
-        for(var i = 0; i < sidenavMapping.length; i++) {
-            var obj = sidenavMapping[i];
-            var j = i+1;
-            if(j > sidenavMapping.length) { j = 0; }
-            var nextobj = sidenavMapping[j];
-            obj.navLink.removeClass('toc_scrolled');
-
-            if( (winTop >= obj.header.offset().top - localOffset) && (typeof(nextobj) === 'undefined' || winTop < nextobj.header.offset().top - localOffset) ) {
-                obj.navLink.addClass('toc_scrolled');
-                // add toc open to parents of this toc_scrolled
-                obj.navParentLinks.each(function() {
-                    var href = $(this).attr('href');
-                    var id = href.replace('#', '').replace(' ','-');
-                    var header = $('[id="'+id+'"]');
-                    if(header.is('h2')) {
-                        $(this).addClass('toc_open');
-                    }
-                });
-            }
-        }
-
-        // apiMapping
-        for(var i = 0; i < apiNavMapping.length; i++) {
-            var obj = apiNavMapping[i];
-            var j = i+1;
-            if(j > apiNavMapping.length) { j = 0; }
-            var nextobj = apiNavMapping[j];
-            obj.navLink.removeClass('toc_scrolled');
-
-            if( (winTop >= obj.header.offset().top - localOffset) && (typeof(nextobj) === 'undefined' || winTop < nextobj.header.offset().top - localOffset) ) {
-                obj.navLink.addClass('toc_scrolled');
-                // add toc open to parents of this toc_scrolled
-                obj.navParentLinks.each(function() {
-                    var href = $(this).attr('href');
-                    var id = href.replace('#', '').replace(' ','-');
-                    var header = $('[id="'+id+'"]');
-                    if(header.is('h2')) {
-                        $(this).addClass('toc_open');
-                    }
-                });
-            }
-        }
-
-    }
-}
-
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -791,114 +620,6 @@ function getParameterByName(name, url) {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
-
-function hideToc(){
-    // hide toc
-    $('.toc-container > div').hide();
-
-    // hide mobile toc button
-    $('.mobile-toc-toggle').removeClass('d-block').addClass('d-none');
-}
-
-// hiding + displaying the ToC depending on the window width
-function widthCheck(){
-    if (!$('.toc-container').hasClass('js-disable-toc')) {
-        if ($('#TableOfContents ul').length) {
-            if(innerWidth > largeScreenThreshold){
-                if($('.toc-container').hasClass('d-none') && $('.mobile-toc-toggle i').hasClass('icon-small-bookmark')){
-                    $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
-                    $('.mobile-toc-toggle i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
-                }
-            }else{
-                if($('.toc-container').hasClass('mobile-open') && $('.mobile-toc-toggle i').hasClass('icon-small-x')){
-                    $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
-                    $('.mobile-toc-toggle i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
-                }
-            }
-        }
-
-    } else {
-        $('.mobile-toc-toggle').addClass('d-none');
-    }
-
-}
-
-// updating ToC width on large screens
-function tocWidthUpdate(){
-    if(innerWidth > largeScreenThreshold){
-        $('.toc-container.mobile-open').css("width", (innerWidth/2)-600 + "px");
-    }
-}
-
-// -------------- end TOC ---------------
-
-function showTOCIcon(){
-    // $('.toc-container').addClass('mobile-open').removeClass('d-none');
-    $('.mobile-toc-toggle').removeClass('d-none');
-    $(this).find('i').addClass('icon-small-x').removeClass('icon-small-bookmark');
-    $( document ).trigger( "headerResize", [ parseInt($('body > header').height()) ] );
-}
-
-
-// slide to anchors
-function moveToAnchor(id, animate, amount) {
-    if (animate === undefined) {
-        animate = true;
-    }
-    if (amount === undefined) {
-        // calc from objects instead
-        if($(window).width() <= 991) {
-            // at mobile
-            amount = $('body > header').height();
-            if($('.announcement_banner.open').length) {
-                amount += $('.announcement_banner.open').height();
-            }
-            $('.api-nav > div').each(function() { amount += $(this).height(); });
-        } else {
-            // at desktop
-            amount = $('body > header').height();
-            if($('.announcement_banner.open').length) {
-                amount += $('.announcement_banner.open').height();
-            }
-        }
-    }
-    var href = '#'+id;
-    var htag = $(href);
-    var customPadding = 10; // how much till it looks good with eye
-    var offset = amount + customPadding;
-    var url = window.location.href.replace(window.location.hash, '');
-    var newSt = 0 - offset;
-    var currentSt = $(document).scrollTop();
-    if(htag.length) {
-        newSt = htag.offset().top - offset;
-        if(window.scrollY < 64.5){
-            newSt += (64.5 - window.scrollY);
-        }
-        if(currentSt !== newSt) {
-            if(animate) {
-                $("html, body").animate({scrollTop: newSt}, 300);
-            } else {
-                $("html, body").scrollTop(newSt);
-            }
-            $(document).trigger( "moveToAnchor" );
-
-            window.history.pushState(null, null, url + href);
-        }
-    }
-}
-
-function updateTOC(){
-
-    $('.toc').css('display', 'block');
-    $('#TableOfContents a').on('click', function(e) {
-        var href = $(this).attr('href');
-        if(href.substr(0, 1) === '#') {
-            moveToAnchor(href.substr(1), true);
-            return false;
-        }
-    });
-
 }
 
 function codeTabs(){
@@ -1008,7 +729,7 @@ function hasParentLi(el){
                 el.closest('li').classList.add('open');
             }
 
-            if (el.closest('.sub-menu')) {
+            if (el.closest('.sub-menu') && el.closest('.sub-menu').previousElementSibling) {
                 el.closest('.sub-menu').previousElementSibling.classList.add('active');
             }
         }
@@ -1163,10 +884,10 @@ function loadPage(newUrl) {
         document.querySelector('.mobile-toc-toggle').click();
     }
 
-    var mainContent = document.getElementById("mainContent");
-    var currentTOC = document.querySelector('.toc-container');    
+    let mainContent = document.getElementById("mainContent");
+    const currentTOC = document.querySelector('.toc-container');    
 
-    var httpRequest = new XMLHttpRequest();
+    const httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function() {
         // closeTOC();
 
@@ -1179,14 +900,14 @@ function loadPage(newUrl) {
             return;
         }
 
-        var newDocument = httpRequest.responseXML;
+        const newDocument = httpRequest.responseXML;
 
         if (newDocument === null){
             return;
         }
 
-        var newContent = httpRequest.responseXML.getElementById("mainContent");
-        var newTOC = httpRequest.responseXML.querySelector(".toc-container");
+        const newContent = httpRequest.responseXML.getElementById("mainContent");
+        const newTOC = httpRequest.responseXML.querySelector(".toc-container");
 
         if (newContent === null){
             return;
@@ -1194,7 +915,7 @@ function loadPage(newUrl) {
 
         document.title = newDocument.title;
 
-        var meta = {
+        const meta = {
             "itemprop": [
                 "name",
                 "description"
@@ -1203,7 +924,7 @@ function loadPage(newUrl) {
                 "twitter\\:site",
                 "twitter\\:title",
                 "twitter\\:description",
-                "twitter\\:creator",
+                "twitter\\:creator"
             ],
             "property": [
                 "og\\:title",
@@ -1216,7 +937,7 @@ function loadPage(newUrl) {
             ]
         };
 
-        var keys = Object.keys(meta);
+        const keys = Object.keys(meta);
         for(let i=0;i<keys.length;i++){
             var key = keys[i];
             for(let k=0;k<meta[key].length;k++){
@@ -1232,14 +953,17 @@ function loadPage(newUrl) {
             }
         }
 
-        var start = window.performance.now();
+        // update data-relPermalink
+        document.documentElement.dataset.relpermalink = newDocument.documentElement.dataset.relpermalink;
+
+        const start = window.performance.now();
 
         mainContent.parentElement.replaceChild(newContent, mainContent);
         mainContent = newContent;
 
-        var wistiaVid = document.querySelector('.wistia [data-wistia-id]');
+        const wistiaVid = document.querySelector('.wistia [data-wistia-id]');
 
-        var wistiaVidId;
+        let wistiaVidId;
         if (wistiaVid) {
             wistiaVidId = wistiaVid.dataset.wistiaId;
         }
@@ -1261,10 +985,10 @@ function loadPage(newUrl) {
             hideToc();
         }
 
-        var end = window.performance.now();
-        var time = end - start;
+        let end = window.performance.now();
+        let time = end - start;
 
-        var pathName = new URL(newUrl).pathname;
+        const pathName = new URL(newUrl).pathname;
 
         // sets query params if code tabs are present
 
@@ -1274,7 +998,12 @@ function loadPage(newUrl) {
         gtag('config', gaTag, {'page_path': pathName});
 
         // Marketo
-        Munchkin.munchkinFunction('clickLink', { href: newUrl});
+        if (typeof window.Munchkin !== "undefined") {
+            Munchkin.munchkinFunction('clickLink', { href: newUrl});
+        } else {
+            window.datadog_logger.info("Munchkin called before ready..")
+        }
+        
 
     }; // end onreadystatechange
 
@@ -1309,7 +1038,7 @@ function reloadWistiaVidScripts(vidId){
     }
 }
 
-var sideNav = document.querySelector('.side');
+var sideNav = document.querySelector('.side .sidenav-nav');
 var mobileNav = document.querySelector('header .sidenav-nav');
 
 sideNav.addEventListener('click', navClickEventHandler);
@@ -1367,8 +1096,16 @@ function navClickEventHandler(event){
 }
 
 function loadViaAjax(element){
-    var hasClassLoad = element.closest('li').classList.contains('js-load') ? true : false;
-    var parentHasClassOpen = element.parentElement.classList.contains('js-load') ? true : false;
+    let hasClassLoad = false;
+    let parentHasClassOpen = false;
+
+    if (element.closest('li')) {
+        hasClassLoad = element.closest('li').classList.contains('js-load') ? true : false;
+    }
+
+    if (element.parentElement) {
+        parentHasClassOpen = element.parentElement.classList.contains('js-load') ? true : false;
+    }
 
     if (hasClassLoad) {
         return true;
@@ -1424,236 +1161,4 @@ window.addEventListener('popstate', function(event) {
 
 // TODO: move Integrations code to own file after webpack update
 
-function initializeIntegrations(){
-    var finder_state = 0;  // closed
-    var container = document.querySelector('[data-ref="container"]');
 
-    $(window).on('focus', function () {
-        if (finder_state) {
-            container.classList.remove('find');
-            finder_state = 0;
-        }
-    });
-
-    Mousetrap.bind(['command+f', 'control+f'], function (e) {
-        if (!finder_state) {
-            container.classList.add('find');
-            finder_state = 1;
-        }
-    });
-
-    var is_safari = navigator.userAgent.indexOf('Safari') !== -1;
-    var ref = document.querySelector('.integration-popper-button');
-    var pop = document.getElementById('integration-popper');
-    if(ref && pop) {
-        ref.addEventListener('click', function(e) {
-            pop.style.display = (pop.style.display === 'none') ? 'block' : 'none';
-            var p = new Popper(ref, pop, {
-                placement: "start-bottom",
-                modifiers: {
-                    preventOverflow: { enabled: false },
-                    hide: {
-                        enabled: false
-                    }
-                }
-            });
-            return false;
-        });
-    }
-
-
-    var mobileBtn = document.querySelector('#dropdownMenuLink');
-    var controls = document.querySelector('[data-ref="controls"]');
-    var filters = null;
-    var mobilecontrols = document.querySelector('[data-ref="mobilecontrols"]');
-    var mobilefilters = null;
-    var sorts = document.querySelectorAll('[data-ref="sort"]');
-    var container = document.querySelector('[data-ref="container"]');
-    var search = document.querySelector('[data-ref="search"]');
-    var items = window.integrations;
-
-    if(!container) return;
-
-    var collection = Array.prototype.slice.call(container.querySelectorAll('.mix'));
-
-    if(controls) {
-        filters = controls.querySelectorAll('[data-ref="filter"]');
-    }
-    if(mobilecontrols) {
-        mobilefilters = mobilecontrols.querySelectorAll('[data-ref="filter"]');
-    }
-
-    var config = {
-        animation: {
-            duration: 150
-        },
-        selectors: {
-            target: '[data-ref="item"]' // Query targets with an attribute selector to keep our JS and styling classes seperate
-        },
-        load: {
-            dataset: items // As we have pre-rendered targets, we must "prime" MixItUp with their underlying data
-        },
-        data: {
-            uidKey: 'id' // Our data model must have a unique id. In this case, its key is 'id'
-        }
-    };
-
-    if(parseInt($(window).width()) <= 575) {
-        config['animation']['enable'] = false;
-    }
-
-    var mixer = mixitup(container, config);
-
-    controls.addEventListener('click', function(e) {
-        //e.preventDefault();
-        handleButtonClick(e.target, filters);
-        // trigger same active on mobile
-        //$('.integrations-select').val('#'+e.target.getAttribute('href').substr(1));
-        var mobileBtn = controls.querySelector('[data-filter="'+e.target.getAttribute('data-filter')+'"]');
-        activateButton(mobileBtn, mobilefilters);
-        //return false;
-    });
-
-    mobilecontrols.addEventListener('click', function(e) {
-        e.stopPropagation();
-        //e.preventDefault();
-        handleButtonClick(e.target, mobilefilters);
-        // trigger same active on desktop
-        var desktopBtn = controls.querySelector('[data-filter="'+e.target.getAttribute('data-filter')+'"]');
-        activateButton(desktopBtn, filters);
-        //return false;
-        pop.style.display = 'none';
-        $(window).scrollTop(0);
-    });
-
-    var searchTimer;
-
-    search.addEventListener('input', function(e) {
-        var allBtn = controls.querySelector('[data-filter="all"]');
-
-        // search only executes after user is finished typing
-        clearTimeout(searchTimer);
-        searchTimer = setTimeout(function() {
-            activateButton(allBtn, filters);
-            updateData(e.target.value.toLowerCase(), true);
-            if (e.target.value.length > 0) {
-                window.datadog_logger.log('Integrations Search', {"browser": {"integrations":{"search":e.target.value.toLowerCase()}}}, 'info');
-            }
-        }, 400);
-    });
-
-    function activateButton(activeButton, siblings) {
-        var button;
-        var i;
-
-        if(activeButton && siblings) {
-            for (i = 0; i < siblings.length; i++) {
-                button = siblings[i];
-                button.classList[button === activeButton ? 'add' : 'remove']('active');
-            }
-            mobileBtn.textContent = activeButton.textContent;
-        }
-    }
-
-    function handleButtonClick(button, filters) {
-        // clear the search input
-        search.value = "";
-        // If button is already active, or an operation is in progress, ignore the click
-        if (button.classList.contains('active') || !button.getAttribute('data-filter')) return;
-
-        var filter = button.getAttribute('data-filter');
-        window.datadog_logger.log('Integrations category selected', {"browser": {"integrations":{"category":button.innerText}}}, 'info');
-        activateButton(button, filters);
-        updateData(filter, false);
-
-        if (history.pushState) {
-            var href = button.getAttribute('href');
-            history.pushState(null, document.title, href);
-        }
-    }
-
-    function updateData(filter, isSearch) {
-        var show = [];
-        var hide = [];
-        for(var i = 0; i < window.integrations.length; i++) {
-            var item = window.integrations[i];
-            var domitem = document.getElementById('mixid_'+item.id);
-            if(filter === 'all' || filter === '#all' || (isSearch && !filter)) {
-                if(!is_safari) {
-                    domitem.classList.remove('grayscale');
-                }
-                show.push(item);
-            } else {
-                var name = item.name ? item.name.toLowerCase() : '';
-                var public_title = item.public_title ? item.public_title.toLowerCase() : '';
-
-                if (filter
-                    && (isSearch && (name.includes(filter) || public_title.includes(filter)))
-                    || (!isSearch && item.tags.indexOf(filter.substr(1)) !== -1)) {
-                    if(!is_safari) {
-                        domitem.classList.remove('grayscale');
-                    }
-                    show.push(item);
-                } else {
-                    if(!is_safari) {
-                        domitem.classList.add('grayscale');
-                    }
-                    hide.push(item);
-                }
-            }
-        }
-        var items = [].concat(show, hide);
-        mixer.dataset(items).then(function(state) {
-            if(is_safari) {
-                for(var i = 0; i < window.integrations.length; i++) {
-                    var item = window.integrations[i];
-                    var domitem = document.getElementById('mixid_'+item.id);
-                    if (filter === 'all' || filter === '#all' || (isSearch && !filter)) {
-                        domitem.classList.remove('grayscale');
-                        //show.push(item);
-                    } else {
-                        var name = item.name ? item.name.toLowerCase() : '';
-                        var public_title = item.public_title ? item.public_title.toLowerCase() : '';
-
-                        if (filter
-                            && (isSearch && (name.includes(filter) || public_title.includes(filter)))
-                            || (!isSearch && item.tags.indexOf(filter.substr(1)) !== -1)) {
-                            domitem.classList.remove('grayscale');
-                            //show.push(item);
-                        } else {
-                            domitem.classList.add('grayscale');
-                            //hide.push(item);
-                        }
-                    }
-                }
-            }
-        });
-    }
-
-    // Set controls the active controls on startup
-    activateButton(controls.querySelector('[data-filter="all"]'), filters);
-    activateButton(mobilecontrols.querySelector('[data-filter="all"]'), mobilefilters);
-
-    $(window).on('hashchange', function(){
-        var current_cat = "";
-        if (window.location.href.indexOf("#") > -1) {
-            current_cat = window.location.href.substring(window.location.href.indexOf("#"));
-        }
-        var current_selected = $('.controls .active').attr('href');
-        if(current_cat && current_selected) {
-            if (current_cat !== current_selected) {
-                $('a[href="' + current_cat + '"]').get(0).click();
-            }
-        }
-        if(current_cat === "") {
-            activateButton(controls.querySelector('[data-filter="all"]'), filters);
-            activateButton(mobilecontrols.querySelector('[data-filter="all"]'), mobilefilters);
-            updateData("all", false);
-        }
-    });
-
-    if (window.location.href.indexOf("#") > -1) {
-        $(window).trigger('hashchange');
-    }
-
-}
