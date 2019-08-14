@@ -15,6 +15,7 @@ disable_toc: true
     {{< nextlink href="agent/guide/community-integrations-installation-with-docker-agent" >}}Community integration installation{{< /nextlink >}}
     {{< nextlink href="agent/guide/datadog-agent-manager-windows" >}}Datadog Agent Manager for Windows{{< /nextlink >}}
     {{< nextlink href="agent/guide/python-3" >}}Python 2 to 3 Custom Check Migration{{< /nextlink >}}
+    {{< nextlink href="agent/guide/cluster-agent-custom-metrics-server" >}}Cluster Agent and Horizontal Pod Autoscaling: Custom Metrics Server{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 {{< whatsnext desc="Agent 5 Guides:" >}}
