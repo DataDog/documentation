@@ -23,11 +23,11 @@ Datadog APM allows you to customize your traces to include any additional inform
 
 ## Instrument your code with custom metadata
 
-1. **Follow the example to get your code instrumented**.
+1) **Follow the example to get your code instrumented**.
 
-    Depending on the language you are you using, you’ll need to set the metadata to add to your spans differently.
+Depending on the language you are you using, you’ll need to set the metadata to add to your spans differently.
 
-    **Note**: take note of the service and [resource names][2] you are working on, these will come in handy later. In this example the service is the Ruby server `web-store` and the resource (endpoint) is `ShoppingCartController#checkout`.
+**Note**: take note of the service and [resource names][2] you are working on, these will come in handy later. In this example the service is the Ruby server `web-store` and the resource (endpoint) is `ShoppingCartController#checkout`.
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -221,44 +221,46 @@ if (null !== $span) {
 
 ## Leverage the Datadog UI to search for your custom metadata
 
-2. **Go to the Services page** and click on the service that you added metadata to. **Scroll down and click on the specific resource** where the metadata was added in the Resource table.
+2) **Go to the Services page** and click on the service that you added metadata to. **Scroll down and click on the specific resource** where the metadata was added in the Resource table.
 
-    {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_2.png" alt="comparaison 2" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_2.png" alt="comparaison 2" responsive="true" style="width:90%;">}}
 
-    The span summary table allows to quickly identify any particular units within the operations that impact the resource. For example, here you can easily find the spans that take the largest portion of average operation time and investigate if they can be optimized.
+The span summary table allows to quickly identify any particular units within the operations that impact the resource. For example, here you can easily find the spans that take the largest portion of average operation time and investigate if they can be optimized.
 
-3. **Scroll down to the Traces table** 
+3) **Scroll down to the Traces table** 
 
-    {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_3.png" alt="comparaison 2" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_3.png" alt="comparaison 2" responsive="true" style="width:90%;">}}
 
-    The Trace table shows you both the overall latency distribution of all traces in the current scope (service, resource and timeframe) and links to individual traces. You can sort this table by duration or error code to easily identify erroneous operation or opportunities for optimization.
+The Trace table shows you both the overall latency distribution of all traces in the current scope (service, resource and timeframe) and links to individual traces. You can sort this table by duration or error code to easily identify erroneous operation or opportunities for optimization.
 
-4. **Click into one of your traces**
+4) **Click into one of your traces**
 
-    {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_4.png" alt="comparaison 2" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_4.png" alt="comparaison 2" responsive="true" style="width:90%;">}}
 
-    In this view you can see the **flamegraph** on top and the additional information windows beneath it. The Datadog flamegraph allows you to have an at a glance view of the duration and status of every logical unit (span) that impacts a request. The flamegraph is fully interactive and you can pan it (by dragging) or zoom in and out (by scrolling). Clicking on any span provides more information about that span in particular in the bottom part of the view.
-    The bottom part of the view includes additional information about the trace or any selected span. Here you can see all default metadata as well as the metadata you manually include. In addition to these, you can also switch to view associated Host and Log information.
-    <div class="alert alert-info">In order to enable Logs in this view you need to have Logs collection enabled and then to [connect Logs and Traces][3]</div>
+In this view you can see the **flamegraph** on top and the additional information windows beneath it. The Datadog flamegraph allows you to have an at a glance view of the duration and status of every logical unit (span) that impacts a request. The flamegraph is fully interactive and you can pan it (by dragging) or zoom in and out (by scrolling). Clicking on any span provides more information about that span in particular in the bottom part of the view.
 
-5. Find the new metadata that you added to the trace. Click on it and select **Create facet** for `@[your facet name]` (remember, this is customer_id in our example)
+The bottom part of the view includes additional information about the trace or any selected span. Here you can see all default metadata as well as the metadata you manually include. In addition to these, you can also switch to view associated Host and Log information.
 
-    {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_5.png" alt="comparaison 2" responsive="true" style="width:90%;">}}
+<div class="alert alert-info">In order to enable Logs in this view you need to have Logs collection enabled and then to [connect Logs and Traces][3]</div>
+
+5) Find the new metadata that you added to the trace. Click on it and select **Create facet** for `@[your facet name]` (remember, this is customer_id in our example)
+
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_5.png" alt="comparaison 2" responsive="true" style="width:90%;">}}
 
 ## Leverage your custom metadata with Trace Search & Analytics
 **Note**: This section assumes that you have [enabled Trace Search and Analytics][4]
 
-6. Navigate to the [Trace Analytics][5] page
+6) Navigate to the [Trace Analytics][5] page
 
-    The Trace Analytics page is a visual query building tool that allows you to conduct an investigation into your traces with infinite cardinality. It relies on facets to filter and scope the query, read more in the [Trace Analytics overview][6].
+The Trace Analytics page is a visual query building tool that allows you to conduct an investigation into your traces with infinite cardinality. It relies on facets to filter and scope the query, read more in the [Trace Analytics overview][6].
 
-7. Choose the service you’ve been working on from the service facet list, choose Error from the status facet and select `customer_id` (or any other metadata you added to your spans) from the group by field.
+7) Choose the service you’ve been working on from the service facet list, choose Error from the status facet and select `customer_id` (or any other metadata you added to your spans) from the group by field.
 
-    {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.gif" alt="comparaison 2" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.gif" alt="comparaison 2" responsive="true" style="width:90%;">}}
 
-8. Remove the Error option from the search, change the `count *` measure to `Duration` and change the graph type to `Top List`. You can now see the customers that have the slowest average requests. **Note**: If you’d like to make sure your customers never pass a certain threshold of performance, you can export this query to a monitor.
+8) Remove the Error option from the search, change the `count *` measure to `Duration` and change the graph type to `Top List`. You can now see the customers that have the slowest average requests. **Note**: If you’d like to make sure your customers never pass a certain threshold of performance, you can export this query to a monitor.
 
-    {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_7.gif" alt="comparaison 2" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_7.gif" alt="comparaison 2" responsive="true" style="width:90%;">}}
 
 
 ## Further Reading
