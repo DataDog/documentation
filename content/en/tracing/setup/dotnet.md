@@ -362,18 +362,25 @@ For more details on supported platforms, see the [.NET Standard documentation][1
 
 ## Change Agent Hostname
 
-Configure your application level tracers to submit traces to a custom Agent hostname:
+Configure your application level tracers to submit traces to a custom Agent endpoint:
 
+The .NET Tracer automatically reams environment variables and configuration files to set the Agent endpoint. See [Configuration][11] for more details.
 
-The .NET Tracer automatically reads the environment variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` to set the Agent endpoint. The Agent endpoint can also be set when creating a new `Tracer` instance:
+To set the Agent endpoint in code, create a `TracerSettings` from the default configuration source, set `TracerSettings.AgentUri`, and create a new `Tracer` using these settings:
 
 ```csharp
 using Datadog.Trace;
 
-var uri = new Uri("http://localhost:8126/");
-var tracer = Tracer.Create(agentEndpoint: uri);
+// read default configuration sources (env vars, web.config, datadog.json)
+var settings = TracerSettings.FromDefaultSources();
 
-// optional: set the new tracer as the new default/global tracer
+// change the Agent endpoint
+settings.AgentUri = new Uri("http://localhost:8126/");
+
+// create a new Tracer using these settings
+var tracer = new Tracer(settings);
+
+// set the global tracer
 Tracer.Instance = tracer;
 ```
 
@@ -391,3 +398,4 @@ Tracer.Instance = tracer;
 [8]: https://www.nuget.org/packages/Datadog.Trace
 [9]: /tracing/advanced/manual_instrumentation/?tab=net
 [10]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
+[11]: #configuration
