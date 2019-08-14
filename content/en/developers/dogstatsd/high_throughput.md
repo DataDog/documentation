@@ -16,13 +16,13 @@ further_reading:
 
 DogStatsD works by sending metrics generated from your application to the
 [agent](https://docs.datadoghq.com/agent/) over a transport protocol. This
-protocol can be either UDP (User Datagram Protocol) or UDS (Unix Domain Socket).
+transport protocol can be either UDP (User Datagram Protocol) or UDS (Unix Domain Socket).
 
-When used to send a large volume of metrics to a single agent if proper measures
-are not taken it is common to end up with the following symptoms:
+When dogstatsd is used to send a large volume of metrics to a single agent if
+proper measures are not taken it is common to end up with the following symptoms:
 
 - High agent CPU usage
-- (UDP) Dropped datagrams / metrics
+- Dropped datagrams / metrics
 - (UDS) DogStatsD client library returning lots of errors
 
 Most of the time those symptoms can be alleviated by tweaking some configuration
@@ -148,10 +148,7 @@ $client->increment('your.data.point', .5);
 
 It is possible to reduce the traffic from your DogStatsD client and the Agent by setting a sample
 rate value for your client. A sample rate of 0.5 cuts the number of UDP packets sent in half.
-
-It’s not useful in all cases, but can be interesting if you sample many metrics, and your DogStatsD
-client is not on the same host as the DogStatsD server. This is a trade-off: you decrease traffic
-but slightly lose in precision/granularity.
+This solution is a trade-off: you decrease traffic but slightly lose in precision/granularity.
 
 A more in-depth explanation with code examples is available
 [here](https://docs.datadoghq.com/developers/faq/dog-statsd-sample-rate-parameter-explained/).
