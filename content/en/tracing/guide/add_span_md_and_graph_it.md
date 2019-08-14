@@ -134,7 +134,7 @@ func main() {
 ```
 
 Datadog's integrations make use of the `Context` type to propagate the current active span.
-If you want to add span metadata via a tag attached to a `Context`, call the `SpanFromContext` function:
+If you want to add span metadata using a tag attached to a `Context`, call the `SpanFromContext` function:
 
 ```go
 package main
