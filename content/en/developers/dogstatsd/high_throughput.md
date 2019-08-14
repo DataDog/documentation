@@ -30,15 +30,16 @@ options described below.
 
 ## General tips
 
-### Enable buffering on your clients
+### Enable buffering on your client
 
 Some statsd/dogstatsd clients, by default, will send one metric per datagram.
 This adds considerable overhead on the client, the operating system and the agent.
-If your client support buffering multiple metrics in one datagram
+If your client supports buffering multiple metrics in one datagram enabling this
+option could bring noticeable improvements.
 
 Here are a few examples for supported clients:
 
-Please Refer to your client documentation for additional details.
+Please refer to your client documentation for additional details.
 
 {{< tabs >}}
 {{% tab "Go" %}}
@@ -149,10 +150,10 @@ It is possible to reduce the traffic from your DogStatsD client and the Agent by
 rate value for your client. A sample rate of 0.5 cuts the number of UDP packets sent in half.
 
 It’s not useful in all cases, but can be interesting if you sample many metrics, and your DogStatsD
-client is not on the same host as the DogStatsD server. This is a trade off: you decrease traffic
+client is not on the same host as the DogStatsD server. This is a trade-off: you decrease traffic
 but slightly lose in precision/granularity.
 
-A more in-depth explaination with code examples is available
+A more in-depth explanation with code examples is available
 [here](https://docs.datadoghq.com/developers/faq/dog-statsd-sample-rate-parameter-explained/).
 
 ### Use DogStatsD over UDS (Unix Domain Socket)
@@ -173,10 +174,10 @@ incoming metrics.
 
 ### Over UDP (User Datagram Protocol)
 
-### Linux
+#### Linux
 
-On most linux distribution the max size of is set to 212992 by default, or
-208 KiB. This can be confirmed using the following commands:
+On most Linux distribution the maximum size of the kernel buffer is set to 212992
+by default (208 KiB). This can be confirmed using the following commands:
 
 ```bash
 $ sysctl net.core.rmem_max
@@ -189,7 +190,7 @@ To set the maximum size of the dogstatsd socket buffer to 25MiB:
 $ sysctl -w net.core.rmem_max=26214400
 ```
 
-Add the following to `/et/sysctl.conf` to make this change permanent:
+Add the following to `/etc/sysctl.conf` to make this change permanent:
 ```
 net.core.rmem_max = 26214400
 ```
