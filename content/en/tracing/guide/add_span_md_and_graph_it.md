@@ -19,7 +19,7 @@ further_reading:
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.gif" alt="comparaison 2" responsive="true" style="width:90%;">}}
 
-Datadog APM allows you to customize your traces to include any additional information you might need to maintain observability into your business. In this example a customer ID will be added to traces allowing the customers that have the slowest performance to be identified. Customization of traces is based on tags that seamlessly integrate APM with the rest of Datadog and come in the form of key:value pairs of metadata that is added to spans. You can read more about tags and their use in Datadog in the [Tags Overview][1] page.
+Datadog APM allows you to customize your traces to include any additional information you might need to maintain observability into your business. In this example, a customer ID is added to traces allowing the customers that have the slowest performance to be identified. Customization of traces is based on tags that seamlessly integrate APM with the rest of Datadog and come in the form of `key:value` pairs of metadata added to spans. You can read more about tags and their use in Datadog in the [Tags Overview][1] page.
 
 ## Instrument your code with custom metadata
 
