@@ -34,6 +34,13 @@ kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/maste
 
 ## Create manifest
 Create the following `datadog-agent.yaml` manifest.
+
+Remember to encode your API key using `base64`:
+
+```
+echo -n <DD_API_KEY> | base64
+```
+
 **Note**: If you are using KMS or have high DogStatsD usage, you may need a higher memory limit.
 
 ```yaml
