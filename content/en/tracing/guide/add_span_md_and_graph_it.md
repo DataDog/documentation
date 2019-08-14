@@ -25,15 +25,9 @@ Datadog APM allows you to customize your traces to include any additional inform
 
 1) **Follow the example to get your code instrumented**.
 
-<<<<<<< HEAD
-Depending on the language you are you using, you’ll need to set the metadata to add to your spans differently.
-
-**Note**: take note of the service and [resource names][2] you are working on, these will come in handy later. In this example the service is the Ruby server `web-store` and the resource (endpoint) is `ShoppingCartController#checkout`.
-=======
     Depending on the programming language you are you using, you’ll need to set the metadata to add to your spans differently.
 
     **Note**: take note of the service and [resource names][2] you are working on, these will come in handy later. In this example, the service is the Ruby server `web-store` and the resource (endpoint) is `ShoppingCartController#checkout`.
->>>>>>> 45960468362fab2c7a70ec6b3bce6fb6fb1c7d5a
 
 {{< tabs >}}
 {{% tab "Java" %}}
