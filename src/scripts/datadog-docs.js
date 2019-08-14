@@ -322,7 +322,7 @@ $(document).ready(function () {
                         listing_table.innerHTML = "";
 
                         // output our slice of formatted results
-                        for (var i = (page-1) * items_per_page; i < (page * items_per_page) && i < hits.length; i++) {
+                        for (let i = (page-1) * items_per_page; i < (page * items_per_page) && i < hits.length; i++) {
                             let formatted_results = '';
                             formatted_results += '<div class="hit row">';
                             formatted_results += '<div class="col-12">';
@@ -349,8 +349,8 @@ $(document).ready(function () {
 
                         // set active button class
                         const pagebtns = document.getElementsByClassName('page-num');
-                        for(var i = 0; i < pagebtns.length; i++) {
-                            var page = parseInt(pagebtns[i].getAttribute('data-pagenum'));
+                        for(let i = 0; i < pagebtns.length; i++) {
+                            const page = parseInt(pagebtns[i].getAttribute('data-pagenum'));
                             pagebtns[i].classList[current_page === page ? 'add' : 'remove']('active');
                         }
 
@@ -1141,7 +1141,7 @@ function replacePath(inputPath) {
 }
 
 function replaceURL(input_url) {
-    const thisurl = `${window.location.protocol  }//${  window.location.host}`;
+    let thisurl = `${window.location.protocol  }//${  window.location.host}`;
     if (thisurl.indexOf("docs-staging") > -1) {
       const path = window.location.pathname
         .split("/")
