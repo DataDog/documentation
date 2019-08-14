@@ -57,7 +57,7 @@ var tracer = new Tracer(settings);
 Tracer.Instance = tracer;
 ```
 
-Note that most settings must be set on `TracerSettings` _before_ creating the `Tracer`. Changes made to `TracerSettings` properies after the `Tracer` is created are ignored.
+**Note**: Settings must be set on `TracerSettings` _before_ creating the `Tracer`. Changes made to `TracerSettings` properies after the `Tracer` is created are ignored.
 
 {{% /tab %}}
 
@@ -74,7 +74,7 @@ rem Launch application
 MyApplication.exe
 ```
 
-Note: To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
+**Note**: To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
 
 On Linux:
 ```bash
@@ -230,7 +230,7 @@ apk add libc6-compat
 
 **Note:** If your application runs on IIS and you used the MSI installer, you don't need to configure environment variables manually and you may skip this section.
 
-**Note:** The .NET runtime tries to load a profiler into _any_ .NET process that is started while these environment variables are set. You should limit profiling only to the applications that need to be traced. **Do not set these environment variables globally as this causes _all_ .NET processes on the host to be profiled.**
+**Note:** The .NET runtime tries to load a profiler into _any_ .NET process that is started while these environment variables are set. You should limit profiling only to the applications that need to be traced. **Do not set these environment variables globally as this causes _all_ .NET processes on the host to load the profiler.**
 
 {{< tabs >}}
 
@@ -269,7 +269,7 @@ rem Start application
 example.exe
 ```
 
-Note: To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
+**Note**: To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
 
 {{% /tab %}}
 
@@ -308,7 +308,7 @@ rem Start application
 dotnet.exe example.dll
 ```
 
-Note: To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
+**Note**: To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
 
 {{% /tab %}}
 
