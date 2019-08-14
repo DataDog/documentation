@@ -244,14 +244,14 @@ In this view you can see the **flamegraph** on top and the additional informatio
 
 The bottom part of the view includes additional information about the trace or any selected span. Here you can see all default metadata as well as the metadata you manually include. In addition to these, you can also switch to view associated Host and Log information.
 
-<div class="alert alert-info">In order to enable Logs in this view you need to have Logs collection enabled and then to [connect Logs and Traces][3]</div>
+<div class="alert alert-info">In order to enable Logs in this view you need to have Logs collection enabled and then to <a href="https://docs.datadoghq.com/tracing/advanced/connect_logs_and_traces/?tab=java" target=_blank>connect Logs and Traces</a></div>
 
 5) Find the new metadata that you added to the trace. Click on it and select **Create facet** for `@[your facet name]` (remember, this is customer_id in our example)
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_5.png" alt="comparaison 2" responsive="true" style="width:90%;">}}
 
 ## Leverage your custom metadata with Trace Search & Analytics
-**Note**: This section assumes that you have [enabled Trace Search and Analytics][4]
+<div class="alert alert-info">This section assumes that you have <a href="https://docs.datadoghq.com/tracing/trace_search_and_analytics/?tab=java" target=_blank>enabled Trace Search and Analytics</a></div>
 
 6) Navigate to the [Trace Analytics][5] page
 
