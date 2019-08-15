@@ -391,7 +391,9 @@ dotnet MyApplication.dll
 
 {{% tab "web.config" %}}
 
-.NET Framework only: To configure the Tracer using an `app.config` or `web.config` file, use the `<appSettings>` section. For example:
+_This section applies only applications running on .NET Framework._
+
+To configure the Tracer using an `app.config` or `web.config` file, use the `<appSettings>` section. For example:
 ```xml
 <configuration>
   <appSettings>
