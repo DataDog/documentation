@@ -458,30 +458,6 @@ Setting Name                             | Property Name              | Descript
 `DD_<INTEGRATION>_ANALYTICS_ENABLED`     | `AnalyticsEnabled`         | Enables or disable Trace Search and Analytics for a specific integration. Valid values are: `true` or `false` (default).           |
 `DD_<INTEGRATION>_ANALYTICS_SAMPLE_RATE` | `AnalyticsSampleRate`      | Sets the Trace Search and Analytics sampling rate for a specific integration. A floating number between `0.0` and `1.0` (default). |
 
-## Change Agent Hostname
-
-Configure your application level tracers to submit traces to a custom Agent endpoint:
-
-The .NET Tracer automatically reads environment variables and configuration files to set the Agent endpoint. See [Configuration][11] for more details.
-
-To set the Agent endpoint in code, create a `TracerSettings` from the default configuration source, set `TracerSettings.AgentUri`, and create a new `Tracer` using these settings:
-
-```csharp
-using Datadog.Trace;
-
-// read default configuration sources (env vars, web.config, datadog.json)
-var settings = TracerSettings.FromDefaultSources();
-
-// change the Agent endpoint
-settings.AgentUri = new Uri("http://localhost:8126/");
-
-// create a new Tracer using these settings
-var tracer = new Tracer(settings);
-
-// set the global tracer
-Tracer.Instance = tracer;
-```
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
