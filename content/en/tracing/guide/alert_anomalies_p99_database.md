@@ -38,13 +38,16 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
     This means that all of the events for the selected duration have to be anomalous for the alert to trigger. This is a best practice for starting with Anomaly Detection. Over time, you’ll find the right values that fit your situation. You can find out more about Anomaly Detection Monitors in the [FAQ][4].
 
-5. **Change the alert notification**. In this example, you can either leave the notification content with the default text or choose team members to tag in the alert.
+5. **Change the alert notification**. 
+
+    In this example, you can either leave the notification content with the default text or choose team members to tag in the alert.
 
     {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_3.png" alt="Monitor view with ongoing alert" responsive="true" style="width:90%;">}}
 
     You can read more about the markup for notification text and what values and conditions you can set there in the [notifications overview][5].
 
-6. **Make sure your username appears in the *Notify your team* box** and add any additional team members that should be notified in case of a database latency anomaly. To add another user be sure to type `@` at the start. **Click on *Save***.
+6. **Make sure your username appears in the *Notify your team* box** and add any additional team members that should be notified in case of a database latency anomaly. 
+    **Note**: To add another user be sure to type `@` at the start. **Click on *Save***.
 
     Your alert is now set, you can tweak any of the parameters from this screen and follow the metric performance.
 
@@ -54,14 +57,17 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
     Here you can see the current status of your monitor, mute it, or explore deeper into the specifics of a triggered alert.
 
-8. **Navigate back to the [Services Page][6]** and from there find the service you just set the monitor on, click into the Service Page
-9. **Click on the Monitor bar** under the header, here you should **see the new monitor** alongside any other monitor set for the service and suggested monitors that are recommended to set.
+8. **Navigate back to the [Services Page][6]** and from there find the service you just set the monitor on, **click into the Service Page** and there **click on the Monitor bar** under the header.
+
+    Here you should **see the new monitor** alongside any other monitor set for the service and suggested monitors that are recommended to set.
 
     {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_5.png" alt="Monitor view with ongoing alert" responsive="true" style="width:90%;">}}
 
     As you create monitors you’ll find more services, metrics and events to include and more complex conditions to set for these. Each of these monitors is connected to a service and can be accessed from the Service page as well as the [Service Map][7].
 
     {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_6.png" alt="Service Map" responsive="true" style="width:90%;">}}
+
+    For each service on the map, a green circle means all monitors are quiet, yellow means one or more monitors are sending warnings but none are alerting, red means one or more monitor is alerting and gray means no monitor is set for the service.
 
 ## Further Reading
 
