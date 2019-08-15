@@ -1,5 +1,5 @@
 ---
-title: Alert on anomalies in database services p99 latency
+title: Alert on anomalous p99 latency of a database service
 kind: guide
 disable_toc: true
 further_reading:
@@ -22,9 +22,7 @@ further_reading:
 Datadog allows you to set monitors to keep track of the health of your services with APM instead of constantly monitoring it yourself. In this example, we’ll use an anomaly detection monitor. [Anomaly detection][1] is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week, and time-of-day patterns. It is well-suited for metrics with strong trends and recurring patterns that are hard or impossible to monitor with threshold-based alerting.
 
 1. **Open the [New Monitor Page][2] and choose [APM][3]**.
-2. **Select the APM Metrics option**.
-- **Choose your environment** under Primary Tags.
-- **Choose the database to monitor** under Service.
+2. **Choose your environment** under Primary Tags and **Choose the database to monitor** under Service.
     
     Under Resource, you can choose to monitor specific queries run in the database, but in this example, we’ll look at overall performance so leave it as `*`.
 
@@ -62,6 +60,8 @@ Datadog allows you to set monitors to keep track of the health of your services 
     {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_5.png" alt="Monitor view with ongoing alert" responsive="true" style="width:90%;">}}
 
     As you create monitors you’ll find more services, metrics and events to include and more complex conditions to set for these. Each of these monitors is connected to a service and can be accessed from the Service page as well as the [Service Map][7].
+
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_6.png" alt="Service Map" responsive="true" style="width:90%;">}}
 
 ## Further Reading
 
