@@ -10,7 +10,7 @@ further_reading:
 
 ## Introduction
 
-Kubernetes v1.2 introduced [Horizontal Pod Autoscaling][1]. This allows users to autoscale off of basic metrics like `CPU`, it but requires a resource called `metrics-server` to run alongside your application.
+Kubernetes v1.2 introduced [Horizontal Pod Autoscaling][1]. This allows users to autoscale off of basic metrics like `CPU`—it requires a resource called `metrics-server` to run alongside your application.
 As of Kubernetes v1.6, it is possible to autoscale off of [custom metrics][2].
 Custom metrics are user defined and are collected from within the cluster.
 Kubernetes v1.10 introduced support for external metrics, so that users can autoscale off of any metric from outside the cluster that is collected for you by Datadog.
@@ -37,21 +37,22 @@ The following assumptions are made:
 
 ### Spinning up the Datadog Cluster Agent
 
-In order to spin up the [Datadog Cluster Agent][9], create the appropriate RBAC rules.
-The Datadog Cluster Agent acts as a proxy between the API Server and the Node Agent, and to this extent it needs to have access to some cluster level resources.
+In order to spin up the [Datadog Cluster Agent][9], perform the following steps:
 
-`kubectl apply -f Dockerfiles/manifests/cluster-agent/rbac/rbac-cluster-agent.yaml`
+1. Create the appropriate RBAC rules. The Datadog Cluster Agent acts as a proxy between the API Server and the Node Agent, and to this extent it needs to have access to some cluster level resources.
+  `kubectl apply -f Dockerfiles/manifests/cluster-agent/rbac/rbac-cluster-agent.yaml`
 
-```
-clusterrole.rbac.authorization.k8s.io "dca" created
-clusterrolebinding.rbac.authorization.k8s.io "dca" created
-serviceaccount "dca" created
-```
+  ```
+  clusterrole.rbac.authorization.k8s.io "dca" created
+  clusterrolebinding.rbac.authorization.k8s.io "dca" created
+  serviceaccount "dca" created
+  ```
 
-Then, create the Datadog Cluster Agent and its services.
-Start by adding your `<API_KEY>` and `<APP_KEY>` in the Deployment manifest of the Datadog Cluster Agent.
-Then enable HPA processing by setting the `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` variable to `true`.
-Finally, spin up the resources:
+2. Create the Datadog Cluster Agent and its services. Add your `<API_KEY>` and `<APP_KEY>` in the Deployment manifest of the Datadog Cluster Agent.
+
+3. Enable HPA processing by setting the `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` variable to `true`.
+
+4. Spin up the resources:
 
 - `kubectl apply -f Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml`
 - `kubectl apply -f Dockerfiles/manifests/cluster-agent/hpa-example/cluster-agent-hpa-svc.yaml`
@@ -117,13 +118,11 @@ Now, create a Horizontal Pod Autoscaler manifest. If you take a look at [the hpa
 Every 30 seconds, Kubernetes queries the Datadog Cluster Agent to get the value of this metric and autoscales proportionally if necessary.
 For advanced use cases, it is possible to have several metrics in the same HPA, as you can see [in the Kubernetes horizontal pod autoscale documentation][6]. The largest of the proposed values is the one chosen.
 
-Create the NGINX deployment:
+1. Create the NGINX deployment:
+  `kubectl apply -f Dockerfiles/manifests/cluster-agent/hpa-example/nginx.yaml`
 
-`kubectl apply -f Dockerfiles/manifests/cluster-agent/hpa-example/nginx.yaml`
-
-Then, apply the HPA manifest.
-
-`kubectl apply -f Dockerfiles/manifests/cluster-agent/hpa-example/hpa-manifest.yaml`
+2. Then, apply the HPA manifest.
+  `kubectl apply -f Dockerfiles/manifests/cluster-agent/hpa-example/hpa-manifest.yaml`
 
 You should be seeing your NGINX pod running with the corresponding service:
 
