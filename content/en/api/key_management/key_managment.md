@@ -7,7 +7,7 @@ external_redirect: /api/#key-management
 
 ## Key Management
 
-<mark>The Key Management endpoints are not supported in our client libraries. To request this functionality, contact [Datadog Support][1].</mark>
+<mark>The Key Management endpoints are not supported in Datadog's client libraries. To request this functionality, contact [Datadog Support][1].</mark>
 
 Manage your Datadog API and application keys.
 

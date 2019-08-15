@@ -7,7 +7,7 @@ external_redirect: /api/#cancel-monitor-downtime-by-scope
 
 ## Cancel Monitor Downtimes By Scope
 
-<mark>This endpoint is not supported in our client libraries. To request this functionality, contact [Datadog Support][1].</mark>
+<mark>This endpoint is not supported in Datadog's client libraries. To request this functionality, contact [Datadog Support][1].</mark>
 
 ##### ARGUMENTS
 * **`scope`** [*required*]:  
@@ -16,4 +16,4 @@ external_redirect: /api/#cancel-monitor-downtime-by-scope
     *  **env:prod** 
     *  **role:db,role:db-slave**
 
-[1]: 
+[1]: /help

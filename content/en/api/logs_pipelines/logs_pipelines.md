@@ -7,7 +7,7 @@ external_redirect: /api/#logs-pipelines
 
 ## Logs Pipelines
 
-<mark>The Logs Pipelines endpoints are not supported in our client libraries. To request this functionality, contact [Datadog Support][1].</mark>
+<mark>The Logs Pipelines endpoints are not supported in Datadog's client libraries. To request this functionality, contact [Datadog Support][1].</mark>
 
 Pipelines and processors operate on incoming logs, parsing and transforming them into structured attributes for easier querying.
 

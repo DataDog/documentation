@@ -7,7 +7,7 @@ external_redirect: /api/#synthetics
 
 ## Synthetics
 
-<mark>The Synthetics endpoints are not supported in our client libraries. To request this functionality, contact [Datadog Support][1].</mark>
+<mark>The Synthetics endpoints are not supported in Datadog's client libraries. To request this functionality, contact [Datadog Support][1].</mark>
 
 Datadog Synthetics uses simulated user requests and browser rendering to help you ensure uptime, identify regional issues, and track your application performance.
 

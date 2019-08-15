@@ -7,7 +7,7 @@ external_redirect: /api/#logs
 
 ## Logs
 
-<mark>The Logs endpoints are not supported in our client libraries. To request this functionality, contact [Datadog Support][1].</mark>
+<mark>The Logs endpoints are not supported in Datadog's client libraries. To request this functionality, contact [Datadog Support][1].</mark>
 
 Send your logs to your Datadog platform over HTTP. Limits per HTTP request are:
 
