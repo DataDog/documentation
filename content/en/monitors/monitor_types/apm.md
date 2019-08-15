@@ -20,14 +20,14 @@ These work just like regular [metric monitors][1] - but with controls tailored s
 
 ## Setup
 
-1. Select your monitor scope - [environment][2], [service][3], and [resource][4]:
+1. Select your monitor scope—[environment][2], [service][3], and [resource][4]:
     {{< img src="monitors/monitor_types/apm/apm_select_scope.png" alt="APM select Scope" responsive="true" style="width:75%;" >}}
 2. Set your alert conditions:
     {{< img src="monitors/monitor_types/apm/apm_set_alert_conditions.png" alt="APM set alert conditions" responsive="true" style="width:75%;" >}}
 3. Configure your **notification options**:
-    Refer to the [Notifications][5] dedicated documentation page for a detailed options.
+    Refer to the [Notifications][5] dedicated documentation page for detailed options.
 
-**Note**: Find service level monitors on the [Services page][6] and on the [Service Map][7], and find resource level monitors the individual Resource pages (you can get there by clicking on the specific Resource listed on the [Services page][6]).
+**Note**: Find service level monitors on the [Services page][6] and on the [Service Map][7], and find resource level monitors on the individual Resource pages (you can get there by clicking on the specific Resource listed on the [Services page][6]).
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}

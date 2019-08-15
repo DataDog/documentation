@@ -306,11 +306,11 @@ The underlying Datadog tracer can be configured by passing options (which match 
 OpenTracing.global_tracer = Datadog::OpenTracer::Tracer.new(options)
 ```
 
-It can also be configured by using `Datadog.configure` described in the [Ruby tracer settings][2] section.
+It can also be configured by using `Datadog.configure` as described in the [Ruby tracer settings][2] section.
 
 **Activating and configuring integrations**
 
-By default, configuring OpenTracing with Datadog will not automatically activate any additional instrumentation provided by Datadog. You will only receive spans and traces from OpenTracing instrumentation you have in your application.
+By default, configuring OpenTracing with Datadog does not automatically activate any additional instrumentation provided by Datadog. You will only receive spans and traces from OpenTracing instrumentation you have in your application.
 
 However, additional instrumentation provided by Datadog can be activated alongside OpenTracing using `Datadog.configure`, which can be used to enhance your tracing further. To enable this, see [Ruby integration instrumentation][3] for more details.
 
@@ -319,7 +319,7 @@ However, additional instrumentation provided by Datadog can be activated alongsi
 | Type                           | Supported? | Additional information |
 | ------------------------------ | ---------- | ---------------------- |
 | `OpenTracing::FORMAT_TEXT_MAP` | Yes        |                        |
-| `OpenTracing::FORMAT_RACK`     | Yes        | Because of the loss of resolution in the Rack format, please note that baggage items with names containing either upper case characters or `-` will be converted to lower case and `_` in a round-trip respectively. We recommend avoiding these characters or accommodating accordingly on the receiving end. |
+| `OpenTracing::FORMAT_RACK`     | Yes        | Because of the loss of resolution in the Rack format, note that baggage items with names containing either upper case characters or `-` are be converted to lower case and `_` in a round-trip, respectively. Datadog recommends avoiding these characters or accommodating accordingly on the receiving end. |
 | `OpenTracing::FORMAT_BINARY`   | No         |                        |
 
 
