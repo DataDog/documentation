@@ -39,9 +39,8 @@ The following assumptions are made:
 
 In order to spin up the [Datadog Cluster Agent][9], perform the following steps:
 
-1. Create the appropriate RBAC rules. The Datadog Cluster Agent acts as a proxy between the API Server and the Node Agent, and to this extent it needs to have access to some cluster level resources.
-  `kubectl apply -f Dockerfiles/manifests/cluster-agent/rbac/rbac-cluster-agent.yaml`
-
+1. Create the appropriate RBAC rules. The Datadog Cluster Agent acts as a proxy between the API Server and the Node Agent, and to this extent it needs to have access to some cluster level resources.<br/>
+  `kubectl apply -f Dockerfiles/manifests/cluster-agent/rbac/rbac-cluster-agent.yaml`<br/>
   ```
   clusterrole.rbac.authorization.k8s.io "dca" created
   clusterrolebinding.rbac.authorization.k8s.io "dca" created
@@ -52,11 +51,10 @@ In order to spin up the [Datadog Cluster Agent][9], perform the following steps:
 
 3. Enable HPA processing by setting the `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` variable to `true`.
 
-4. Spin up the resources:
-
-- `kubectl apply -f Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml`
-- `kubectl apply -f Dockerfiles/manifests/cluster-agent/hpa-example/cluster-agent-hpa-svc.yaml`
-- `kubectl apply -f Dockerfiles/manifests/cluster-agent/cluster-agent.yaml`
+4. Spin up the resources:<br/>
+  - `kubectl apply -f Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml`
+  - `kubectl apply -f Dockerfiles/manifests/cluster-agent/hpa-example/cluster-agent-hpa-svc.yaml`
+  - `kubectl apply -f Dockerfiles/manifests/cluster-agent/cluster-agent.yaml`
 
 **Note**: the first service is used for the communication between the Node Agents and the Datadog Cluster Agent, but the second is used by Kubernetes to register the External Metrics Provider.
 
@@ -150,6 +148,7 @@ At this point, the setup is ready to be stressed.
 As a result of the stress, Kubernetes autoscales the NGINX pods.
 
 Curl the IP of the NGINX service as follows:
+
 `curl <nginx_svc>:8090/nginx_status`
 
 You should receive output resembling:
@@ -196,7 +195,7 @@ default     nginxext   Deployment/nginx   30/9 (avg)     1         3         3  
 * Make sure you have the aggregation layer and the certificates set up as per the requirements section.
 * Always make sure the metrics you want to autoscale on are available.
 * As you create the HPA, the Datadog Cluster Agent parses the manifest and queries Datadog to try to fetch the metric.
-* If there is a typographic issue with your metric name or if the metric does not exist within your Datadog application, the following error is raised:
+* If there is a typographic issue with your metric name or if the metric does not exist within your Datadog application, the following error is raised:<br/>
 	```
 	2018-07-03 13:47:56 UTC | ERROR | (datadogexternal.go:45 in queryDatadogExternal) | Returned series slice empty
 	```
