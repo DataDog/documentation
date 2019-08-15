@@ -446,7 +446,7 @@ For more details on supported platforms, see the [.NET Standard documentation][1
 
 Configure your application level tracers to submit traces to a custom Agent endpoint:
 
-The .NET Tracer automatically reams environment variables and configuration files to set the Agent endpoint. See [Configuration][11] for more details.
+The .NET Tracer automatically reads environment variables and configuration files to set the Agent endpoint. See [Configuration][11] for more details.
 
 To set the Agent endpoint in code, create a `TracerSettings` from the default configuration source, set `TracerSettings.AgentUri`, and create a new `Tracer` using these settings:
 
