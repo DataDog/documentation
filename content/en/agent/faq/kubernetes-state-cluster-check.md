@@ -103,7 +103,7 @@ Init Config:
 ===
 ```
 
-The Agent running on the node returned above should also have a `kubernetes_state` check in its `agent status`
+The Agent running on the node returned above should also have a `kubernetes_state` check in its `agent status`.
 
 ## Background
 
