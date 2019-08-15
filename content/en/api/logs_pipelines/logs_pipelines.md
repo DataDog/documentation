@@ -7,12 +7,13 @@ external_redirect: /api/#logs-pipelines
 
 ## Logs Pipelines
 
-<mark>This endpoint is in public beta.</mark>
+<mark>The Logs Pipelines endpoints are not supported in our client libraries. To request this functionality, contact [Datadog Support][1].</mark>
 
 Pipelines and processors operate on incoming logs, parsing and transforming them into structured attributes for easier querying.
 
-* See the [Pipelines Configuration Page][1] for a list of the pipelines and processors currently configured in our UI.
-* For more information about Pipelines, see the [Pipeline documentation][2].
+* See the [Pipelines Configuration Page][2] for a list of the pipelines and processors currently configured in our UI.
+* For more information about Pipelines, see the [Pipeline documentation][3].
 
-[1]: https://app.datadoghq.com/logs/pipelines
-[2]: https://docs.datadoghq.com/logs/processing
+[1]: /help
+[2]: https://app.datadoghq.com/logs/pipelines
+[3]: https://docs.datadoghq.com/logs/processing
