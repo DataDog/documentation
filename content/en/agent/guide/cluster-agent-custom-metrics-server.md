@@ -13,12 +13,12 @@ further_reading:
 Kubernetes v1.2 introduced [Horizontal Pod Autoscaling][1]. This allows users to autoscale off of basic metrics like `CPU`, it but requires a resource called `metrics-server` to run alongside your application.
 As of Kubernetes v1.6, it is possible to autoscale off of [custom metrics][2].
 Custom metrics are user defined and are collected from within the cluster.
-Kubernetes v1.10, introduced support for external metrics, so that users can autoscale off of any metric from outside the cluster that is collected for you by Datadog.
+Kubernetes v1.10 introduced support for external metrics, so that users can autoscale off of any metric from outside the cluster that is collected for you by Datadog.
 
 The custom and external metric providers, as opposed to the metrics server, are resources that have to be implemented and registered by the user.
 
 As of v1.0.0, the Custom Metrics Server in the Datadog Cluster Agent implements the External Metrics Provider interface for external metrics.
-This guide explains how to set it up and how to autoscale your Kubernetes workload based off of your Datadog metrics.
+This guide explains how to set up and autoscale your Kubernetes workload based off of your Datadog metrics.
 
 ## Requirements
 
@@ -57,7 +57,7 @@ Finally, spin up the resources:
 - `kubectl apply -f Dockerfiles/manifests/cluster-agent/hpa-example/cluster-agent-hpa-svc.yaml`
 - `kubectl apply -f Dockerfiles/manifests/cluster-agent/cluster-agent.yaml`
 
-Note that the first service is used for the communication between the Node Agents and the Datadog Cluster Agent, but the second is used by Kubernetes to register the External Metrics Provider.
+**Note**: the first service is used for the communication between the Node Agents and the Datadog Cluster Agent, but the second is used by Kubernetes to register the External Metrics Provider.
 
 At this point, you should see:
 
@@ -108,9 +108,9 @@ default       datadog-agent-2qqd3                      1/1       Running   0    
 default       datadog-cluster-agent-7b7f6d5547-cmdtc   1/1       Running   0          16m
 ```
 
-Now, create a Horizontal Pod Autoscaler manifest. If you take a look at [the hpa-manifest.yaml file][5], you will see that:
+Now, create a Horizontal Pod Autoscaler manifest. If you take a look at [the hpa-manifest.yaml file][5], you see that:
 
-* The HPA is configured to autoscale the Deployment called `nginx`
+* The HPA is configured to autoscale the deployment called `nginx`
 * The maximum number of replicas created is `5` and the minimum is `1`
 * The metric used is `nginx.net.request_per_s` and the scope is `kube_container_name: nginx`. Note that this metric format corresponds to the Datadog one.
 
@@ -194,7 +194,7 @@ default     nginxext   Deployment/nginx   30/9 (avg)     1         3         3  
 
 ### Troubleshooting
 
-* Make sure you have the Aggregation layer and the certificates set up as per the requirements section.
+* Make sure you have the aggregation layer and the certificates set up as per the requirements section.
 * Always make sure the metrics you want to autoscale on are available.
 * As you create the HPA, the Datadog Cluster Agent parses the manifest and queries Datadog to try to fetch the metric.
 * If there is a typographic issue with your metric name or if the metric does not exist within your Datadog application, the following error is raised:
@@ -212,7 +212,7 @@ You can run the `datadog-cluster-agent status` command to see the status of the 
     ConfigMap name: datadog-hpa
     Number of external metrics detected: 2
 ```
-Note: Errors with the External Metrics Provider process are displayed with this command.
+**Note**: Errors with the External Metrics Provider process are displayed with this command.
 If you want a more verbose output, run the flare command:
 `datadog-cluster-agent flare`.
 The flare command generates a zip file containing a `custom-metrics-provider.log` which displays the following information:
