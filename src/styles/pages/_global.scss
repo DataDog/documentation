@@ -164,59 +164,6 @@ code {
   font-family: $font-family-monospace;
 }
 
-/* codetabs inside content */
-.code-tabs {
-  &> ul {
-    list-style-type: none;
-    padding:0;
-    li {
-      padding-bottom:6px;
-      &:before {
-        content: "" !important;
-        margin:0 !important;
-        float:none !important;
-      }
-      &.active {
-        a {
-          color:$ddpurple;
-          border-bottom:1px solid $ddpurple;
-          font-weight:600;
-        }
-      }
-      a {
-        color: $ddgray;
-        font-weight:600;
-        padding: 10px 22px 10px 22px;
-        border-bottom:1px solid $ddgray;
-        display: inline-block;
-        &:hover {
-          color:$ddpurple;
-        }
-      }
-    }
-  }
-  .nav-tabs {
-    border-bottom:none;
-  }
-  .tab-content {
-    padding-top:26px;
-    h2 > a,
-    h3 > a,
-    h4 > a,
-    h5 > a {
-      color: #000;
-      border-bottom: 1px solid transparent;
-      &:hover {
-        color: #000;
-        border-bottom: 1px solid #000;
-      }
-    }
-    .text-center img {
-      border: 1px solid $ddgray;
-    }
-  }
-}
-
 p {
   // todo: can i set this with a bootstrap variable?
   font-size: 18px;
@@ -277,7 +224,7 @@ h5{
   & > a,
   & p a,
   & ol li a,
-  & > ul li a {
+  & ul li a {
     color: #4a4a4a;
     border-bottom: 1px solid $gray-600;
     &:hover {
@@ -349,6 +296,59 @@ h5{
     line-height: 27px;
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
+  }
+}
+
+/* codetabs inside content */
+.code-tabs {
+  &> ul {
+    list-style-type: none;
+    padding:0;
+    li {
+      padding-bottom:6px;
+      &:before {
+        content: "" !important;
+        margin:0 !important;
+        float:none !important;
+      }
+      &.active {
+        a {
+          color:$ddpurple;
+          border-bottom:1px solid $ddpurple;
+          font-weight:600;
+        }
+      }
+      a {
+        color: $ddgray;
+        font-weight:600;
+        padding: 10px 22px 10px 22px;
+        border-bottom:1px solid $ddgray;
+        display: inline-block;
+        &:hover {
+          color:$ddpurple;
+        }
+      }
+    }
+  }
+  .nav-tabs {
+    border-bottom:none;
+  }
+  .tab-content {
+    padding-top:26px;
+    h2 > a,
+    h3 > a,
+    h4 > a,
+    h5 > a {
+      color: #000;
+      border-bottom: 1px solid transparent;
+      &:hover {
+        color: #000;
+        border-bottom: 1px solid #000;
+      }
+    }
+    .text-center img {
+      border: 1px solid $ddgray;
+    }
   }
 }
 
