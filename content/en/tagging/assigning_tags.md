@@ -253,9 +253,9 @@ When creating a monitor, assign monitor tags under step 4 *Say what's happening*
 {{% /tab %}}
 {{% tab "Distribution Metrics" %}}
 
-Create percentile aggregations within [Distribution Metrics][1] by applying sets of tags to a metric, for which a timeseries is created for every potentially queryable combination of tag values. For more information on counting custom metrics/timeseries emitted from distribution metrics, see [2].
+Create percentile aggregations within [Distribution Metrics][1] by applying a whitelist of up to 10 tags to a metric, for which a timeseries is created for every potentially queryable combination of tag values. For more information on counting custom metrics/timeseries emitted from distribution metrics, see [2].
 
-** Apply up to ten tags **:
+** Apply up to ten tags. Exclusionary tags will not be accepted **:
 [REPLACE WITH THIS IMAGE HERE]
 
 
