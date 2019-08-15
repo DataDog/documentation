@@ -253,14 +253,14 @@ When creating a monitor, assign monitor tags under step 4 *Say what's happening*
 {{% /tab %}}
 {{% tab "Distribution Metrics" %}}
 
-Assign tag keys within [Distribution Metrics][1] (Beta) to create aggregate timeseries by applying sets of tags to a metric, for which a timeseries is created for every combination of tag values within the set.
+Create percentile aggregations within [Distribution Metrics][1] by applying sets of tags to a metric, for which a timeseries is created for every potentially queryable combination of tag values. For more information on counting custom metrics/timeseries emitted from distribution metrics, see [2].
 
-**Sets of tags are limited to groups of four**:
-
-{{< img src="tagging/assigning_tags/distributionmetricstags.png" alt="Distribution Metrics Tags" responsive="true" style="width:80%;">}}
+** Apply up to ten tags **:
+[REPLACE WITH THIS IMAGE HERE]
 
 
 [1]: /graphing/metrics/distributions
+[2]: /developers/metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
