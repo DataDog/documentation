@@ -425,20 +425,16 @@ To configure the Tracer using an JSON file, create `datadog.json` in the instrum
 
 The following tables list the supported configuration variables. In each table, the first column, _Setting Name_, indicates the variable name used when using environment variables or configuration files. The second column, _Propery Name_, indicates the name of the equivalent propery on the `TracerSettings` class when changing settings in the code.
 
-#### Automatic and Manual Instrumentation
+The first table below lists configuration variables that are available for both automatic and manual instrumentation.
 
-The following table lists configuration variables that are available for both automatic and manual instrumentation.
-
-Setting Name          | Property Name          | Description                                                                                                                                                                                                    |
---------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-`DD_TRACE_AGENT_URL`  | `AgentUri`             | Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Default value is `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.                                      |
-`DD_AGENT_HOST`       | N/A                    | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Default is value `localhost`.                                    |
-`DD_TRACE_AGENT_PORT` | N/A                    | Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Default value is `8126`.                                                  |
-`DD_ENV`              | `Environment`          | Adds the `env` tag with the specified value to generated spans. See [Agent configuration][2] for more details about the `env` tag. If not set, the `env` tag is not set automatically on all spans.            |
-`DD_SERVICE_NAME`     | `ServiceName`          | Sets the default service name. If not set (default), the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). |
-`DD_LOGS_INJECTION`   | `LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                      |
-
-#### Automatic Instrumentation Only
+Setting Name          | Property Name          | Description                                                                                                                                                                                                       |
+--------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+`DD_TRACE_AGENT_URL`  | `AgentUri`             | Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Default value is `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.                                         |
+`DD_AGENT_HOST`       | N/A                    | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Default is value `localhost`.                                       |
+`DD_TRACE_AGENT_PORT` | N/A                    | Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Default value is `8126`.                                                     |
+`DD_ENV`              | `Environment`          | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][2] for more details about the `env` tag.                                                              |
+`DD_SERVICE_NAME`     | `ServiceName`          | If specified, sets the default service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). |
+`DD_LOGS_INJECTION`   | `LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                         |
 
 The following table lists configuration variables that are available only when using automatic instrumentation.
 
@@ -450,7 +446,7 @@ Setting Name                 | Property Name              | Description         
 `DD_DISABLED_INTEGRATIONS`   | `DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][4] section above.                           |
 `DD_TRACE_ANALYTICS_ENABLED` | `AnalyticsEnabled`         | Shorthand that enables default Trace Search and Analytics settings for web framework integrations. Valid values are: `true` or `false` (default).                                                                                                                                            |
 
-The following table lists settings that can be set for each integration. The first column, _Setting Name_, indicates the variable name used when using environment variables or configuration files. The second column, _Propery Name_, indicates the name of the equivalent propery on the `IntegrationSettings` class when changing settings in the code. Access these properties through the `TracerSettings.Integrations[string integrationName]` indexer. Integration names are listed in the [Integrations][4] section above.
+The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. The first column, _Setting Name_, indicates the variable name used when using environment variables or configuration files. The second column, _Propery Name_, indicates the name of the equivalent propery on the `IntegrationSettings` class when changing settings in the code. Access these properties through the `TracerSettings.Integrations[string integrationName]` indexer. Integration names are listed in the [Integrations][4] section above.
 
 Setting Name                             | Property Name              | Description                                                                                                                        |
 ---------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
