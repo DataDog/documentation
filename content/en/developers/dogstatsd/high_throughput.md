@@ -127,7 +127,7 @@ using (udp)
 {{% /tab %}}
 
 {{% tab "PHP" %}}
-Using Datadog's official PHP library [php-datadogstatsd](https://github.com/DataDog/php-datadogstatsd):
+Use Datadog's official PHP library [php-datadogstatsd](https://github.com/DataDog/php-datadogstatsd):
 
 ```php
 require __DIR__ . '/vendor/autoload.php';
