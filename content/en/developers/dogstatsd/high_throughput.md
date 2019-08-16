@@ -173,7 +173,7 @@ incoming metrics.
 
 #### Linux
 
-On most Linux distribution the maximum size of the kernel buffer is set to 212992
+On most Linux distributions, the maximum size of the kernel buffer is set to 212992
 by default (208 KiB). This can be confirmed using the following commands:
 
 ```bash
