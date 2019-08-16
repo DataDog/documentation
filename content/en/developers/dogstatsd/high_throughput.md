@@ -192,7 +192,7 @@ Add the following to `/etc/sysctl.conf` to make this change permanent:
 net.core.rmem_max = 26214400
 ```
 
-Set the agent `dogstatsd_so_rcvbuf` confing option to the same number in `datadog.yaml`:
+Set the Agent `dogstatsd_so_rcvbuf` config option to the same number in `datadog.yaml`:
 ```
 dogstatsd_so_rcvbuf: 26214400
 ```
