@@ -181,7 +181,7 @@ $ sysctl net.core.rmem_max
 net.core.rmem_max = 212992
 ```
 
-To set the maximum size of the dogstatsd socket buffer to 25MiB:
+To set the maximum size of the DogStatsD socket buffer to 25MiB:
 
 ```bash
 $ sysctl -w net.core.rmem_max=26214400
