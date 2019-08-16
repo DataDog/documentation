@@ -304,7 +304,7 @@ password: <decrypted_password2>
 ===
 ```
 
-**Note**:  The Agent needs to be restarted to pick up changes on configuration files.
+**Note**: The Agent needs to be restarted to pick up changes on configuration files.
 
 ### Debugging your secret_backend_command
 
