@@ -63,7 +63,7 @@ DD_AC_EXCLUDE = "name:dd-agent"
 Another example, the following configuration instructs the Agent to ignore some containers from Docker Cloud:
 
 ```shell
-DD_AC_EXCLUDE = "image:dockercloud/network-daemon, image:dockercloud/cleanup, image:dockercloud/logrotate, image:dockercloud/events, image:dockercloud/ntpd"
+DD_AC_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/cleanup image:dockercloud/logrotate image:dockercloud/events image:dockercloud/ntpd"
 ```
 
 **Note**: You can also use a regex to ignore them all: `DD_AC_EXCLUDE = "image:dockercloud/*"`
@@ -114,7 +114,7 @@ For example, if you only want to monitor `ubuntu` or `debian` images, and exclud
 
 ```
 DD_AC_EXCLUDE = "image:.*"
-DD_AC_INCLUDE = "image:ubuntu, image:debian"
+DD_AC_INCLUDE = "image:ubuntu image:debian"
 ```
 
 {{% /tab %}}
