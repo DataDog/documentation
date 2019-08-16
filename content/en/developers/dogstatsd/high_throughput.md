@@ -151,7 +151,6 @@ rate value for your client. A sample rate of 0.5 cuts the number of UDP packets 
 This solution is a trade-off: you decrease traffic but slightly lose in precision/granularity.
 
 A more in-depth explanation with code examples is available
-[here](https://docs.datadoghq.com/developers/faq/dog-statsd-sample-rate-parameter-explained/).
 
 ### Use DogStatsD over UDS (Unix Domain Socket)
 
