@@ -89,7 +89,7 @@ end
 {{% /tab %}}
 
 {{% tab "Java" %}}
-Using Datadog's official Java library [java-dogstatsd-client](https://github.com/DataDog/java-dogstatsd-client):
+Use Datadog's official Java library [java-dogstatsd-client](https://github.com/DataDog/java-dogstatsd-client):
 
 ```java
 // Create a stats instance with a buffer size of 256
