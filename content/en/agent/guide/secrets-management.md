@@ -304,7 +304,7 @@ password: <decrypted_password2>
 ===
 ```
 
-**Note**: The Agent needs to be restarted to pick up changes on configuration files.
+**Note**: The Agent needs to be [restarted][3] to pick up changes on configuration files.
 
 ### Debugging your secret_backend_command
 
@@ -394,3 +394,4 @@ If you have secrets in `datadog.yaml` and the Agent refuses to start:
 
 [1]: /agent/autodiscovery
 [2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1
+[3]: /agent/guide/agent-commands/?tab=agentv6#restart-the-agent
