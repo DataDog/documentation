@@ -257,7 +257,7 @@ Create percentile aggregations within [Distribution Metrics][1] by applying a wh
 
 ** Apply up to ten tags. Exclusionary tags will not be accepted **:
 
-{{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Create Monitor Tags" responsive="true" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Create Monitor Tags" responsive="true" style="width:80%;">}}
 
 [1]: /graphing/metrics/distributions
 [2]: /developers/metrics/custom_metrics/
@@ -266,7 +266,7 @@ Create percentile aggregations within [Distribution Metrics][1] by applying a wh
 
 The [AWS][1] integration tile allows you to assign additional tags to all metrics at the account level. Use a comma separated list of tags in the form `<KEY>:<VALUE>`.
 
-{{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="AWS Tags" responsive="true" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS Tags" responsive="true" style="width:80%;">}}
 
 
 [1]: /integrations/amazon_web_services
