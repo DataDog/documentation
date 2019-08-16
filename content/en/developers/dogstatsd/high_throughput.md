@@ -166,7 +166,7 @@ Most OSs will add incoming UDP and UDS datagrams containing your metrics to a
 buffer with a maximum size. Once this size is reached, datagrams containing your
 metrics will start getting dropped.
 
-It is possible to adjust those values to give the agent more time to process
+It is possible to adjust those values to give the Agent more time to process
 incoming metrics.
 
 ### Over UDP (User Datagram Protocol)
