@@ -169,14 +169,14 @@ Now there are four unique tag value combinations that appear in the `temperature
 ### Counting custom metrics from distributions  
 A distribution metric gathers all values across all hosts emitting metric values in ten second flush intervals. Distributions emit a number of custom metrics that is proportional to the number of custom metrics emitted from `gauges`. Distributions generate four timeseries for each unique tag value combination that appears in the data: `sum`, `count`, `min`, and `max` (`avg` is calculated from the sum/count). 
 
-Suppose you are interested in measuring the maximum `age` metric in the state of New York. `age` is submitted to Datadog as a distribution metric tagged with `city` and `state`. 
+Suppose you are interested in measuring the maximum `age` metric in the state of New York. `age` is submitted to Datadog as a distribution metric tagged with `city` and `state` :
 
 |  | Values in 10s flush interval | Sum | Count | Minimum | Maximum | Average (Sum/Count) |
 |---------------|------------------------------|-----|-------|---------|---------|---------------------|
 | Rochester, NY | 23,29,33,55,41,36,12,67 | 296 | 8 | 12 | 67 | 37 |
 | New York, NY | 18,22,26,31,29,40,23,35 | 215 | 8 | 18 | 40 | 28 |
 
-The total number of custom metrics or timeseries emitted from the `age` distribution metric is eight (4 x 2). For both unique tag value combinations above (Rochester, NY and New York, NY), Datadog stores four timeseries (`sum`,`count`,`min`,`max`, `avg`). 
+The total number of custom metrics or timeseries emitted from the `age` distribution metric is **eight (4 x 2)**. For both unique tag value combinations above (Rochester, NY and New York, NY), Datadog stores four timeseries (`sum`,`count`,`min`,`max`, `avg`). 
 
 To obtain the maximum `age` in the state of New York, you can reaggregate the timeseries above: Maximum age in New York = `max`(`max`(Rochester, NY), `max`(New York, NY)) = 67.
 
@@ -193,19 +193,18 @@ Suppose you are interested in measuring the *median* `age` in the state of New Y
 Percentiles are NOT reaggregatable -- you can't reaggregate the same way maximum ages were above. The median age in New York is not equal to the `median`(`median`(Rochester, NY), `median`(New York, NY)). 
 
 Therefore, Datadog needs to precalculate five timeseries (`p50`,`p75`,`p90`,`p95`,`p99`) for each potentially queryable tag value combination. In the New York example, you have the following potentially queryable tag value combinations: 
-- Rochester, (`null` state)
-- New York, (`null` state)
-- (`Null` city), NY
-- Rochester, NY
-- New York, NY
-- (`Null` city), (`null` state) -- equivalent to * {all time series}
+ * Rochester, (`null` state)
+ * New York, (`null` state)
+ * (`Null` city), NY
+ * Rochester, NY
+ * New York, NY
+ * (`Null` city), (`null` state) -- equivalent to * {all time series}
 
 There are three potentially queryable values for the `city` tag: {Rochester, New York, `null`} and two values for the `state` tag: {NY, `null`}.
 
-The total number of custom metrics emitted from the `age` distribution metric with added percentile aggregations is: 
+The total number of custom metrics emitted from the `age` distribution metric WITH percentile aggregations is: 
 
-[4 x (2)] + [5 x ((3) x (2))] = 38 timeseries.
-
+[INSERT PRETTIER IMAGE HERE for [4 x (2)] + [5 x ((3) x (2))] = 38 timeseries.] 
 
 
 ## Overhead
@@ -226,4 +225,4 @@ The full payload is approximately \~ 100 bytes. However, with the DogStatsD API,
 [5]: /api/#rate-limiting
 [6]: https://app.datadoghq.com/account/usage/hourly
 [7]: https://app.datadoghq.com/metric/summary
-[8]: 
+[8]: https://docs.datadoghq.com/developers/metrics/gauges/
