@@ -148,7 +148,7 @@ $client->increment('your.data.point', .5);
 
 It is possible to reduce the traffic from your DogStatsD client to the Agent by setting a sample
 rate value for your client. A sample rate of 0.5 cuts the number of UDP packets sent by half.
-This solution is a trade-off: you decrease traffic but slightly lose in precision/granularity.
+This solution is a trade-off: you decrease traffic but slightly lose in precision and granularity.
 
 For more information, and code examples. see [DogStatsD "Sample Rate" Parameter Explained][1].
 
