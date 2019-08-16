@@ -18,7 +18,7 @@ DogStatsD works by sending metrics generated from your application to the
 [agent](https://docs.datadoghq.com/agent/) over a transport protocol. This
 transport protocol can be either UDP (User Datagram Protocol) or UDS (Unix Domain Socket).
 
-When DogStatsD is used to send a large volume of metrics to a single Agent if
+When DogStatsD is used to send a large volume of metrics to a single Agent, if
 proper measures are not taken, it is common to end up with the following symptoms:
 
 - High agent CPU usage
@@ -32,8 +32,8 @@ options described below.
 
 ### Enable buffering on your client
 
-Some statsd/DogStatsD clients, by default, will send one metric per datagram.
-This adds considerable overhead on the client, the operating system and the Agent.
+Some StatsD and DogStatsD clients, by default, will send one metric per datagram.
+This adds considerable overhead on the client, the operating system, and the Agent.
 If your client supports buffering multiple metrics in one datagram, enabling this
 option could bring noticeable improvements.
 
@@ -147,7 +147,7 @@ $client->increment('your.data.point', .5);
 ### Sample your metrics
 
 It is possible to reduce the traffic from your DogStatsD client to the Agent by setting a sample
-rate value for your client. A sample rate of 0.5 cuts the number of UDP packets sent by half.
+rate value for your client. For example, a sample rate of `0.5` halves number of UDP packets sent.
 This solution is a trade-off: you decrease traffic but slightly lose in precision and granularity.
 
 For more information, and code examples. see [DogStatsD "Sample Rate" Parameter Explained][1].
@@ -155,7 +155,7 @@ For more information, and code examples. see [DogStatsD "Sample Rate" Parameter 
 ### Use DogStatsD over UDS (Unix Domain Socket)
 
 UDS is an inter-process communication protocol used
-be [used to transport DogStatsD payloads](https://docs.datadoghq.com/developers/dogstatsd/unix_socket/).
+to [transport DogStatsD payloads][2].
 It has very little overhead when compared to UDP and lowers the
 general footprint of DogStatsD on your system.
 
