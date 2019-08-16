@@ -14,28 +14,21 @@ further_reading:
   text: "DogStatsD source code"
 ---
 
-DogStatsD works by sending metrics generated from your application to the
-[agent](https://docs.datadoghq.com/agent/) over a transport protocol. This
-transport protocol can be either UDP (User Datagram Protocol) or UDS (Unix Domain Socket).
+DogStatsD works by sending metrics generated from your application to the [agent](https://docs.datadoghq.com/agent/) over a transport protocol. This transport protocol can be either UDP (User Datagram Protocol) or UDS (Unix Domain Socket).
 
-When DogStatsD is used to send a large volume of metrics to a single Agent, if
-proper measures are not taken, it is common to end up with the following symptoms:
+When DogStatsD is used to send a large volume of metrics to a single Agent, if proper measures are not taken, it is common to end up with the following symptoms:
 
 - High agent CPU usage
 - Dropped datagrams / metrics
 - (UDS) DogStatsD client library returning lots of errors
 
-Most of the time those symptoms can be alleviated by tweaking some configuration
-options described below.
+Most of the time those symptoms can be alleviated by tweaking some configuration options described below.
 
 ## General tips
 
 ### Enable buffering on your client
 
-Some StatsD and DogStatsD clients, by default, will send one metric per datagram.
-This adds considerable overhead on the client, the operating system, and the Agent.
-If your client supports buffering multiple metrics in one datagram, enabling this
-option could bring noticeable improvements.
+Some StatsD and DogStatsD clients, by default, will send one metric per datagram. This adds considerable overhead on the client, the operating system, and the Agent. If your client supports buffering multiple metrics in one datagram, enabling this option could bring noticeable improvements.
 
 Here are a few examples for supported clients:
 
@@ -146,34 +139,25 @@ $client->increment('your.data.point', .5);
 
 ### Sample your metrics
 
-It is possible to reduce the traffic from your DogStatsD client to the Agent by setting a sample
-rate value for your client. For example, a sample rate of `0.5` halves number of UDP packets sent.
-This solution is a trade-off: you decrease traffic but slightly lose in precision and granularity.
+It is possible to reduce the traffic from your DogStatsD client to the Agent by setting a sample rate value for your client. For example, a sample rate of `0.5` halves number of UDP packets sent. This solution is a trade-off: you decrease traffic but slightly lose in precision and granularity.
 
 For more information, and code examples. see [DogStatsD "Sample Rate" Parameter Explained][1].
 
 ### Use DogStatsD over UDS (Unix Domain Socket)
 
-UDS is an inter-process communication protocol used
-to [transport DogStatsD payloads][2].
-It has very little overhead when compared to UDP and lowers the
-general footprint of DogStatsD on your system.
+UDS is an inter-process communication protocol used to [transport DogStatsD payloads][2]. It has very little overhead when compared to UDP and lowers the general footprint of DogStatsD on your system.
 
 ## Operating System kernel buffers
 
-Most OSs will add incoming UDP and UDS datagrams containing your metrics to a
-buffer with a maximum size. Once this size is reached, datagrams containing your
-metrics will start getting dropped.
+Most OSs will add incoming UDP and UDS datagrams containing your metrics to a buffer with a maximum size. Once this size is reached, datagrams containing your metrics will start getting dropped.
 
-It is possible to adjust those values to give the Agent more time to process
-incoming metrics.
+It is possible to adjust those values to give the Agent more time to process incoming metrics.
 
 ### Over UDP (User Datagram Protocol)
 
 #### Linux
 
-On most Linux distributions, the maximum size of the kernel buffer is set to 212992
-by default (208 KiB). This can be confirmed using the following commands:
+On most Linux distributions, the maximum size of the kernel buffer is set to 212992 by default (208 KiB). This can be confirmed using the following commands:
 
 ```bash
 $ sysctl net.core.rmem_max
