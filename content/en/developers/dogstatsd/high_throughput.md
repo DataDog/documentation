@@ -58,7 +58,7 @@ client.Gauge("kafka.health", 1, []string{"env:production", "partition:1", "parti
 {{% /tab %}}
 
 {{% tab "Python" %}}
-Using Datadog's official Python library [datadogpy](https://github.com/DataDog/datadogpy):
+Use Datadog's official Python library [datadogpy](https://github.com/DataDog/datadogpy):
 
 ```python
 # Load the dogstats module.
