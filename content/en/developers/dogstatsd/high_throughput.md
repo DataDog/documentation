@@ -150,7 +150,7 @@ It is possible to reduce the traffic from your DogStatsD client to the Agent by 
 rate value for your client. A sample rate of 0.5 cuts the number of UDP packets sent by half.
 This solution is a trade-off: you decrease traffic but slightly lose in precision/granularity.
 
-A more in-depth explanation with code examples is available
+For more information, and code examples. see [DogStatsD "Sample Rate" Parameter Explained][1].
 
 ### Use DogStatsD over UDS (Unix Domain Socket)
 
