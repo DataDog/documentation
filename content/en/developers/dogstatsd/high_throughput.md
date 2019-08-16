@@ -196,3 +196,5 @@ Set the Agent `dogstatsd_so_rcvbuf` config option to the same number in `datadog
 dogstatsd_so_rcvbuf: 26214400
 ```
 
+[1]: /developers/faq/dog-statsd-sample-rate-parameter-explained/
+[2]: /developers/dogstatsd/unix_socket/
