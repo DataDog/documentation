@@ -105,7 +105,7 @@ public void foo() {
 {{% /tab %}}
 
 {{% tab "C#" %}}
-Using Datadog's official C# library [dogstatsd-csharp-client](https://github.com/DataDog/dogstatsd-csharp-client):
+Use Datadog's official C# library [dogstatsd-csharp-client](https://github.com/DataDog/dogstatsd-csharp-client):
 
 ```csharp
 // Create the transport
