@@ -156,7 +156,7 @@ A more in-depth explanation with code examples is available
 ### Use DogStatsD over UDS (Unix Domain Socket)
 
 UDS is an inter-process communication protocol that can
-be [used to transport dogstatsd payloads](https://docs.datadoghq.com/developers/dogstatsd/unix_socket/).
+be [used to transport DogStatsD payloads](https://docs.datadoghq.com/developers/dogstatsd/unix_socket/).
 It has very little overhead when compared to UDP and will lower the
 general footprint of dogstatsd on your system.
 
