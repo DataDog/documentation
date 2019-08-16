@@ -32,7 +32,7 @@ options described below.
 
 ### Enable buffering on your client
 
-Some statsd/dogstatsd clients, by default, will send one metric per datagram.
+Some statsd/DogStatsD clients, by default, will send one metric per datagram.
 This adds considerable overhead on the client, the operating system and the Agent.
 If your client supports buffering multiple metrics in one datagram, enabling this
 option could bring noticeable improvements.
