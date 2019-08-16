@@ -43,7 +43,7 @@ Please refer to your client documentation for additional details.
 
 {{< tabs >}}
 {{% tab "Go" %}}
-Using Datadog's official Golang library [datadog-go](https://github.com/DataDog/datadog-go):
+Use Datadog's official Golang library [datadog-go](https://github.com/DataDog/datadog-go):
 
 ```go
 // Create a buffered dogstatsd client instance with 256 maximum buffered metrics
