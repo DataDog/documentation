@@ -72,7 +72,7 @@ with DogStatsd(host="127.0.0.1", port=8125, max_buffer_size=25) as batch:
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
-Using Datadog's official Ruby library [dogstatsd-ruby](https://github.com/DataDog/dogstatsd-ruby):
+Use Datadog's official Ruby library [dogstatsd-ruby](https://github.com/DataDog/dogstatsd-ruby):
 
 ```ruby
 require 'datadog/statsd'
