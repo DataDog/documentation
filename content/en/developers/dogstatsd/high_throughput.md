@@ -19,7 +19,7 @@ DogStatsD works by sending metrics generated from your application to the
 transport protocol can be either UDP (User Datagram Protocol) or UDS (Unix Domain Socket).
 
 When DogStatsD is used to send a large volume of metrics to a single Agent if
-proper measures are not taken it is common to end up with the following symptoms:
+proper measures are not taken, it is common to end up with the following symptoms:
 
 - High agent CPU usage
 - Dropped datagrams / metrics
