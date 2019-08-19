@@ -45,15 +45,17 @@ Define the request you want to be executed by Datadog:
         * Authentication: HTTP basic authentication with username and password
         * Body: Request body and body type (`text/plain`, `application/json`, `text/xml`, `text/html`, or `None`)
         * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `cookie1=<YOUR_COOKIE_1>; cookie2=<YOUR_COOKIE_2>`.
+
 3. **Name**: The name of your API test.
 4. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetics page][2].
-5. **Locations**: The locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][3].
+5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][3]. You can also set up a [Private Location][4] to run a Synthetics API test on a private endpoint not accessible from the public internet.
 6. **How often should Datadog run the test?** Intervals are available between every one minute to once per week.
 7. Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
 [1]: /synthetics/identify_synthetics_bots
 [2]: /synthetics
 [3]: /api/?lang=bash#get-available-locations
+[4]: /synthetics/private_locations
 {{% /tab %}}
 
 {{% tab "SSL Test" %}}
@@ -64,12 +66,13 @@ Define the request you want to be executed by Datadog:
 2. Specify the `Host` and the SSL `Port`. By default, the port is set to _443_.
 3. **Name**: The name of your API test.
 4. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetics page][1].
-5. **Locations**: The locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2].
+5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run a Synthetics API test on a private endpoint not accessible from the public internet.
 6. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week.
 7. Click on **Test Connection** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
 [1]: /synthetics
 [2]: /api/?lang=bash#get-available-locations
+[3]: /synthetics/private_locations
 {{% /tab %}}
 
 {{< /tabs >}}
