@@ -27,7 +27,7 @@ Au lieu d'utiliser un couple `IP:port` pour établir les connexions, les sockets
 
 Lorsque l'Agent redémarre, le socket existant est supprimé et remplacé par un nouveau socket. Les bibliothèques client détectent cette modification et se connectent automatiquement au nouveau socket.
 
-**Remarque :** de par sa nature, le trafic UDS est local à l'host, ce qui signifie que l'Agent Datadog doit fonctionner sur chaque host depuis lequel vous envoyez des métriques.
+**Remarque :** de par sa nature, le trafic UDS est local au host, ce qui signifie que l'Agent Datadog doit fonctionner sur chaque host depuis lequel vous envoyez des métriques.
 
 ## Implémentation
 
