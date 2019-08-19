@@ -162,9 +162,6 @@ Lorsque vous interrogez Traefik, le code de statut renvoyé doit être `200`.
 
 Consultez la [documentation principale sur les outils de développement][15] pour découvrir comment tester et développer des intégrations reposant sur l'Agent.
 
-
-
-{{< get-dependencies >}}
 [1]: https://traefik.io
 [2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
 [3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
@@ -180,3 +177,6 @@ Consultez la [documentation principale sur les outils de développement][15] pou
 [13]: https://docs.traefik.io/configuration/logs/#clf-common-log-format
 [14]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#service-status
 [15]: https://docs.datadoghq.com/fr/developers
+
+
+{{< get-dependencies >}}

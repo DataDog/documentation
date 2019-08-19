@@ -76,9 +76,6 @@ $(document).ready(function () {
         if(window.location.pathname.indexOf("/fr/") > -1) {
             lang = "fr";
         }
-        if(window.location.pathname.indexOf("/ja/") > -1) {
-          lang = "ja";
-        }
 
         function getTitle(hit) {
             let title = '';

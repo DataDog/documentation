@@ -74,15 +74,16 @@ Le check Twemproxy n'inclut aucun événement.
 Renvoie CRITICAL si l'Agent ne parvient pas à se connecter à l'endpoint de statistiques Twemproxy pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
-
-
-{{< get-dependencies >}}
 [1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/twemproxy/datadog_checks/twemproxy/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[7]: https://docs.datadoghq.com/fr/help
+[7]: https://github.com/DataDog/integrations-core/blob/master/twemproxy/metadata.csv
+[8]: https://docs.datadoghq.com/fr/help
+
+
+{{< get-dependencies >}}
