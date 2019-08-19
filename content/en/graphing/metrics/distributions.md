@@ -45,11 +45,8 @@ To customize tagging, hover over your metric in the table, and click on the penc
 
 {{< img src="graphing/metrics/distributions/distribution_metric.png" alt="Distribution metric" responsive="true" style="width:80%;">}}
 
-The following video demonstrates inspecting the aggregations created for a metric, `intake.batch_api_keys_for_org`. You would query `{availability-zone, role}` or `{instance-type, role}`, but not `{availability-zone, instance-type}`.
-
-{{< img src="graphing/metrics/distributions/Distros_Tagging.mp4" alt="Distros_Tagging" video="true" responsive="true" >}}
-
 ## Counting distribution metrics
+
 Distribution metrics with percentile aggregations (`p50`, `p75`, `p90`, `p95`, `p99`) generate custom metrics or timeseries differently than gauges, counts, histograms, and distributions with nonpercentile aggregations (`sum`, `count`, `min`, `max`, `avg`). Because percentiles aren't reaggregatable, Datadog preserves five timeseries for every potentially queryable tag combination. This is different from the number of custom metrics generated from gauges, counts, histograms, or distributions with nonpercentile aggregations (dependent on the unique number of tag value combinations that appear in your data).
 
 For more information on counting custom metrics created from gauge, count, histogram, or distribution metrics with nonpercentile aggregations, refer to the [Custom Metrics][2] page.
