@@ -25,14 +25,12 @@ disable_toc: true
 ---
 
 {{< wistia 2kgmb9wbsr >}}
-
+</br>
 ## What is Datadog APM?
 
- Datadog Application Performance Monitoring (APM or tracing) provides you with deep insight into your application's performance - from automatically generated dashboards for monitoring key metrics, like request volume and latency, to detailed traces of individual requests - side by side with your logs and infrastructure monitoring.
+ Datadog Application Performance Monitoring (APM or tracing) provides you with deep insight into your application's performance - from automatically generated dashboards for monitoring key metrics, like request volume and latency, to detailed traces of individual requests - side by side with your logs and infrastructure monitoring. When a request is made to an application, Datadog can see the traces across a distributed system, and we can show you systematic data about precisely what is happening to this request.
 
- When a request is made to an application, Datadog can see the traces across a distributed system, and we can show you systematic data about precisely what is happening to this request. This gives you better insight into your systems interdependencies, it allows you to see where requests are taking the longest, it gives you visual cues for accurately troubleshooting outages and other system issues, and it allows you to see detailed traces of individual requests - side by side with your logs and infrastructure monitoring.
-
-## Setting up APM
+## Overview
 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="/tracing/send_traces/" >}}<u>Enable trace collection</u>: Install and configure the latest Datadog Agent to start sending traces. See an overview of all the possible settings for APM, including setting up APM in containerized environments such as Docker or Kubernetes.{{< /nextlink >}}
