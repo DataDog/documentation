@@ -87,7 +87,7 @@ index_algolia_preview:
   stage: post-deploy
   environment: "preview"
   script:
-    - cp ./local/etc/algolia/docs_datadoghq_preview.json /etc/docsdatadoghq.json
+    - cp ./local/etc/algolia/docs_datadoghq_preview.json /etc/docs_datadoghq_preview.json
     - index_docsearch_algolia
   dependencies:
     - build_preview
@@ -144,7 +144,7 @@ index_algolia:
   stage: post-deploy
   environment: "live"
   script:
-    - cp ./local/etc/algolia/docs_datadoghq.json /etc/docsdatadoghq.com
+    - cp ./local/etc/algolia/docs_datadoghq.json /etc/docs_datadoghq.com
     - index_docsearch_algolia
   dependencies:
     - build_live
