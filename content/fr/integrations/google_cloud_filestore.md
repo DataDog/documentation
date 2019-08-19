@@ -39,11 +39,10 @@ L'intégration Google Cloud Filestore n'inclut aucun événement.
 L'intégration Google Cloud Filestore n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
+Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
-[1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform
-[2]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_file/google_cloud_filestore_metadata.csv
-[3]: https://docs.datadoghq.com/fr/help
 
 
 {{< get-dependencies >}}
+[1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform
+[2]: https://docs.datadoghq.com/fr/help

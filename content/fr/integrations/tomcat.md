@@ -316,7 +316,7 @@ init_config:
       %d [%t] %-5p %c - %m%n
     ```
 
-    Dupliquez et modifiez le [pipeline d'intégration][10]. Consultez la [documentation sur la journalisation][9] (en anglais) pour obtenir plus d'informations sur les fonctionnalités de journalisation de Tomcat.
+    Dupliquez et modifiez le [pipeline d'intégration][9]. Consultez la [documentation sur la journalisation][10] (en anglais) pour obtenir plus d'informations sur les fonctionnalités de journalisation de Tomcat.
 
 3. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -381,10 +381,13 @@ La commande `datadog-agent jmx` a été ajoutée dans la version 4.1.0.
 ## Pour aller plus loin
 Documentation, liens et articles supplémentaires utiles :
 
-* [Surveiller les métriques Tomcat avec Datadog][13]
-* [Métriques clés pour la surveillance Tomcat][14]
+* [Surveiller les métriques Tomcat avec Datadog][12]
+* [Métriques clés pour la surveillance Tomcat][13]
 
 
+
+
+{{< get-dependencies >}}
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/tomcat/images/tomcat_dashboard.png
 [2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 [3]: https://app.datadoghq.com/account/settings#agent
@@ -393,12 +396,8 @@ Documentation, liens et articles supplémentaires utiles :
 [6]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [8]: https://docs.datadoghq.com/fr/integrations/java
-[9]: https://tomcat.apache.org/tomcat-7.0-doc/logging.html
-[10]: https://docs.datadoghq.com/fr/logs/processing/#integration-pipelines
+[9]: https://docs.datadoghq.com/fr/logs/processing/#integration-pipelines
+[10]: https://tomcat.apache.org/tomcat-7.0-doc/logging.html
 [11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[12]: https://github.com/DataDog/integrations-core/blob/master/tomcat/metadata.csv
-[13]: https://www.datadoghq.com/blog/monitor-tomcat-metrics
-[14]: https://www.datadoghq.com/blog/tomcat-architecture-and-performance
-
-
-{{< get-dependencies >}}
+[12]: https://www.datadoghq.com/blog/monitor-tomcat-metrics
+[13]: https://www.datadoghq.com/blog/tomcat-architecture-and-performance

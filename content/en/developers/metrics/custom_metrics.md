@@ -224,4 +224,4 @@ The full payload is approximately \~ 100 bytes. However, with the DogStatsD API,
 [5]: /api/#rate-limiting
 [6]: https://app.datadoghq.com/account/usage/hourly
 [7]: https://app.datadoghq.com/metric/summary
-[8]: https://docs.datadoghq.com/developers/metrics/gauges/
+[8]: https://docs.datadoghq.com/developers/metrics/gauges

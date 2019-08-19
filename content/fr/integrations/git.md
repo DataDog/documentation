@@ -52,8 +52,8 @@ install post-receive <NOM_RÉFÉRENTIEL_GIT>/.git/hooks/post-receive
 
 5. Installez l'[intégration Datadog/Git][2].
 
-[1]: https://app.datadoghq.com/account/settings#api
-[2]:https://app.datadoghq.com/account/settings#integrations/git
 
 
 {{< get-dependencies >}}
+[1]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/account/settings#integrations/git

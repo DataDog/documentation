@@ -32,12 +32,12 @@ This guide explains how to set up and autoscale your Kubernetes workload based o
 Autoscaling over external metrics does not require the Node Agent to be running—you only need the metrics to be available in your Datadog account. Nevertheless, this guide describes autoscaling an NGINX deployment based off of NGINX metrics, collected by a Node Agent.
 
 The following assumptions are made:
-1. You have Node Agents running (ideally from a DaemonSet) with the [Autodiscovery][8] process enabled and functional.
-2. Agents are configured to securely communicate with the Datadog Cluster Agent. See [the security premise section][4] of the official documentation. This is not mandatory, but it enables the enrichment of the metadata collected by the Node Agents. 
+1. You have Node Agents running (ideally from a DaemonSet) with the [Autodiscovery][4] process enabled and functional.
+2. Agents are configured to securely communicate with the Datadog Cluster Agent. See [the security premise section][5] of the official documentation. This is not mandatory, but it enables the enrichment of the metadata collected by the Node Agents. 
 
 ### Spinning up the Datadog Cluster Agent
 
-In order to spin up the [Datadog Cluster Agent][9], perform the following steps:
+In order to spin up the [Datadog Cluster Agent][6], perform the following steps:
 
 1. Create the appropriate RBAC rules. The Datadog Cluster Agent acts as a proxy between the API Server and the Node Agent, and to this extent it needs to have access to some cluster level resources.<br/>
   `kubectl apply -f Dockerfiles/manifests/cluster-agent/rbac/rbac-cluster-agent.yaml`<br/>
@@ -107,14 +107,14 @@ default       datadog-agent-2qqd3                      1/1       Running   0    
 default       datadog-cluster-agent-7b7f6d5547-cmdtc   1/1       Running   0          16m
 ```
 
-Now, create a Horizontal Pod Autoscaler manifest. If you take a look at [the hpa-manifest.yaml file][5], you see that:
+Now, create a Horizontal Pod Autoscaler manifest. If you take a look at [the hpa-manifest.yaml file][7], you see that:
 
 * The HPA is configured to autoscale the deployment called `nginx`
 * The maximum number of replicas created is `5` and the minimum is `1`
 * The metric used is `nginx.net.request_per_s` and the scope is `kube_container_name: nginx`. Note that this metric format corresponds to the Datadog one.
 
 Every 30 seconds, Kubernetes queries the Datadog Cluster Agent to get the value of this metric and autoscales proportionally if necessary.
-For advanced use cases, it is possible to have several metrics in the same HPA, as you can see [in the Kubernetes horizontal pod autoscale documentation][6]. The largest of the proposed values is the one chosen.
+For advanced use cases, it is possible to have several metrics in the same HPA, as you can see [in the Kubernetes horizontal pod autoscale documentation][8]. The largest of the proposed values is the one chosen.
 
 1. Create the NGINX deployment:
   `kubectl apply -f Dockerfiles/manifests/cluster-agent/hpa-example/nginx.yaml`
@@ -163,7 +163,7 @@ Reading: 0 Writing: 1 Waiting: 0
 ```
 
 Behind the scenes, the number of requests per second also increased. 
-This metric is being collected by the Node Agent, as it Autodiscovered the NGINX pod through its annotations. For more information on how Autodiscovery works, see the [Autodiscovery documentation][7].
+This metric is being collected by the Node Agent, as it Autodiscovered the NGINX pod through its annotations. For more information on how Autodiscovery works, see the [Autodiscovery documentation][9].
 Therefore, if you stress it, you should see the uptick in your Datadog app.
 As you referenced this metric in your HPA manifest, the Datadog Cluster Agent is also pulling its latest value regularly.
 Then, as Kubernetes queries the Datadog Cluster Agent to get this value, it notices that the number is going above the threshold and autoscales accordingly.
@@ -314,9 +314,9 @@ As this process is done asynchronously, you should not expect to see the above r
 [1]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#before-you-begin
 [2]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-custom-metrics
 [3]: https://kubernetes.io/docs/tasks/access-kubernetes-api/configure-aggregation-layer
-[4]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/cluster-agent/README.md#security-premise
-[5]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/hpa-manifest.yaml
-[6]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-multiple-metrics
-[7]: /agent/autodiscovery/#template-source-kubernetes-pod-annotations
-[8]: /agent/autodiscovery
-[9]: /agent/kubernetes/cluster
+[4]: /agent/autodiscovery
+[5]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/cluster-agent/README.md#security-premise
+[6]: /agent/kubernetes/cluster
+[7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/hpa-manifest.yaml
+[8]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-multiple-metrics
+[9]: /agent/autodiscovery/#template-source-kubernetes-pod-annotations

@@ -260,7 +260,7 @@ Create percentile aggregations within [Distribution Metrics][1] by applying a wh
 {{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Create Monitor Tags" responsive="true" style="width:80%;">}}
 
 [1]: /graphing/metrics/distributions
-[2]: /developers/metrics/custom_metrics/
+[2]: /developers/metrics/custom_metrics
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
