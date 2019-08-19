@@ -82,6 +82,17 @@ test_missing_tms_preview:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
+index_algolia_preview:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  script:
+    - cp ./local/etc/docsdatadoghq_preview.json /etc/
+    - index_docsearch_algolia_preview
+  dependencies:
+    - build_preview
+  when: manual
+
 # ================== live ================== #
 build_live:
   <<: *base_template

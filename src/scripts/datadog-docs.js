@@ -69,8 +69,13 @@ $(document).ready(function () {
         let query = "";
         try {query = results[1];} catch (e) {}
 
-        // get indexname by language
-        const indexName = "docsearch_docs_prod";
+        let indexName = '';
+        if (siteEnv === 'preview') {
+          indexName = 'docsearch_docs_preview';
+        } else if (siteEnv === 'live') {
+          indexName = 'docsearch_docs_prod';
+        }
+
 
         let lang = 'en';
         if(window.location.pathname.indexOf("/fr/") > -1) {
@@ -124,7 +129,7 @@ $(document).ready(function () {
                         formatted_results += `${'<div class="tipue_search_content_url">' +
                             '<a href="'}${  hit["url"]  }">${  hit["url"].replace('https://docs.datadoghq.com', '')  }</a></div>`;
                         const text = hit._snippetResult.content.value;
-                        formatted_results += `<div class="tipue_search_content_text">${ 
+                        formatted_results += `<div class="tipue_search_content_text">${
                             text  }</div>`;
                         formatted_results += '</div>';
                     }
@@ -331,7 +336,7 @@ $(document).ready(function () {
                             formatted_results += `${'<div class="tipue_search_content_title">' +
                                 '<a href="'}${  hits[i]["url"]  }">${  getTitle(hits[i])  }</a></div>`;
                             const text = hits[i]._snippetResult.content.value;
-                            formatted_results += `<div class="tipue_search_content_text">${ 
+                            formatted_results += `<div class="tipue_search_content_text">${
                                 text  }</div>`;
 
                             formatted_results += '</div>';
@@ -556,7 +561,7 @@ $(document).ready(function () {
 
     // ------------- TODO: move TOC js back to own file when webpack migration complete and can import js modules
 
-    
+
 
     updateTOC();
 
@@ -581,7 +586,7 @@ $(document).ready(function () {
         }
     });
 
-    
+
 
     buildTOCMap();
     onScroll();
@@ -886,7 +891,7 @@ function loadPage(newUrl) {
     }
 
     let mainContent = document.getElementById("mainContent");
-    const currentTOC = document.querySelector('.toc-container');    
+    const currentTOC = document.querySelector('.toc-container');
 
     const httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function() {
@@ -967,7 +972,7 @@ function loadPage(newUrl) {
             window.location.href = newUrl;
         }
 
-        
+
 
         const wistiaVid = document.querySelector('.wistia [data-wistia-id]');
 
@@ -1011,7 +1016,7 @@ function loadPage(newUrl) {
         } else {
             window.datadog_logger.info("Munchkin called before ready..")
         }
-        
+
 
     }; // end onreadystatechange
 
@@ -1168,5 +1173,3 @@ window.addEventListener('popstate', function(event) {
 }, false);
 
 // TODO: move Integrations code to own file after webpack update
-
-
