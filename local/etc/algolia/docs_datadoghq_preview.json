@@ -1,11 +1,11 @@
 {
-  "index_name": "docsearch_docs_prod",
+  "index_name": "docsearch_docs_preview",
   "start_urls": [
     {
-      "url": "https://docs.datadoghq.com(?P<language>.*?)/api/",
+      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/api/",
       "selectors_key": "api",
       "variables": {
-        "language": [
+        "localisation": [
           "",
           "/fr",
           "/ja"
@@ -17,10 +17,10 @@
       "page_rank": 0
     },
     {
-      "url": "https://docs.datadoghq.com(?P<language>.*?)/integrations/",
+      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/integrations/",
       "selectors_key": "integrations",
       "variables": {
-        "language": [
+        "localisation": [
           "",
           "/fr",
           "/ja"
@@ -32,10 +32,10 @@
       "page_rank": 90
     },
     {
-      "url": "https://docs.datadoghq.com(?P<language>.*?)/",
+      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/",
       "selectors_key": "docs",
       "variables": {
-        "language": [
+        "localisation": [
           "",
           "/fr",
           "/ja"
@@ -47,7 +47,7 @@
       "page_rank": 100
     },
     {
-      "url": "https://docs.datadoghq.com(?P<language>.*?)/(?P<section>.*?)/faq/",
+      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)/faq/",
       "selectors_key": "faq",
       "variables": {
         "section": [
@@ -60,7 +60,7 @@
           "account_management",
           "synthetics"
         ],
-        "language": [
+        "localisation": [
           "",
           "/fr",
           "/ja"
@@ -72,7 +72,7 @@
       "page_rank": -100
     },
     {
-      "url": "https://docs.datadoghq.com(?P<language>.*?)/(?P<section>.*?)/guide/",
+      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)/guide/",
       "selectors_key": "guide",
       "variables": {
         "section": [
@@ -83,7 +83,7 @@
           "logs",
           "developers"
         ],
-        "language": [
+        "localisation": [
           "",
           "/fr",
           "/ja"
