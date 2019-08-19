@@ -19,5 +19,5 @@ external_redirect: /api/#get-all-monitor-details
     If this argument is set to `true`, then the returned data includes all current downtimes for each monitor.
 * **`page`** [*optional*, *default* = **0**]:
     The page to start paginating from. If this argument is not specified, the request returns all monitors without pagination.
-* **`per_page`** [*optional*, *default*=**100**]:
-    The number of monitors to return per page. If the `page` argument is not specified, the default behavior returns all monitors without a `per_page` limit. However, if `page` is specified and `per_page` is not, the argument defaults to `100`.
+* **`page_size`** [*optional*, *default*=**100**]:
+    The number of monitors to return per page. If the `page` argument is not specified, the default behavior returns all monitors without a `page_size` limit. However, if `page` is specified and `page_size` is not, the argument defaults to `100`.

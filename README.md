@@ -9,7 +9,7 @@ Built with [hugo][1], a static website generation tool.
 
 2. [Install Python3][3] (you can also use [pyenv][4])
 
-3. Install gulp: ```npm install -g gulp```
+3. Install yarn: ```npm install -g yarn```
 
 4. Download the documentation repo ```git clone https://github.com/DataDog/documentation.git```
 

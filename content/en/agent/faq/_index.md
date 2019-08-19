@@ -17,6 +17,7 @@ aliases:
 * [Why should I install the Datadog Agent on my cloud instances?][8]
 * [How do I use Kubernetes secrets to set my API key?][9]
 * [Datadog Windows Agent user][10]
+* [How do I run the kubernetes_state check as a cluster check?][11]
 
 [1]: /agent/faq/host-metrics-with-the-container-agent
 [2]: /agent/faq/downgrade-datadog-agent
@@ -28,3 +29,4 @@ aliases:
 [8]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances
 [9]: /agent/faq/kubernetes-secrets
 [10]: /agent/faq/windows-agent-ddagent-user
+[11]: /agent/faq/kubernetes-state-cluster-check

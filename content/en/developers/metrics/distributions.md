@@ -17,9 +17,7 @@ This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Data
 
 ## Overview
 
-Distributions are a new metric type in Agent v6 that aggregate the values that are sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure. This can be thought of as a global version of our existing [Histogram metric type][1], which measures the statistical distribution of values on a single host.
-
-Distribution metrics are designed to instrument logical objects, like services, independently from the underlying hosts, and solve the problem created by Agent-level aggregation.
+Distributions are a metric type that aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure. Distribution metrics are designed to instrument logical objects, like services, independently from the underlying hosts, and solve the problem created by Agent-level aggregation.
 
 Unlike the histogram metric type that aggregates on the Agent-side, distributions send all raw data collected during the flush interval and aggregations occur server-side. Because the underlying data structure has not been aggregated and represents raw data, distributions provide two major features:
 
@@ -40,13 +38,15 @@ Like other metric types, such as `gauge` or `histogram`, the  `distribution` met
 
 A distribution metric, however, has additional percentile aggregations available (`p50`, `p75`, `p90`, `p95`, `p99`). That is, for a distribution metric with percentile aggregations during a 10 second flush interval, the following aggregations are available: `count`, `sum`, `min`, `max`, `avg`, `p50`, `p75`, `p90`, `p95`, and `p99`.
 
-Percentile aggregations can be added in-app at the [Datadog Distribution Metric page][2].
+Percentile aggregations can be added in-app at the [Datadog Distribution Metric page][1].
 
 ### Customization of tagging
 
-This functionality allows you to control tagging for metrics for which host-level granularity is not necessary see the [Distribution Metric page][3] to learn more.
+This functionality allows you to control tagging for metrics where host-level granularity is not necessary. See the [Distribution Metric page][2] to learn more about whitelist-based tagging control. **Note**: The exclusion of tags with `!` is not accepted with this feature.
 
 ## Submission
+
+Different metric types in Datadog should be submitted under different metric names.
 
 ### DogStatsD
 
@@ -72,6 +72,5 @@ The above instrumentation calculates the following aggregations: sum, count, ave
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: /developers/metrics/histograms
-[2]: https://app.datadoghq.com/metric/distribution_metrics
-[3]: /graphing/metrics/distributions/#customize-tagging
+[1]: https://app.datadoghq.com/metric/distribution_metrics
+[2]: /graphing/metrics/distributions/#customize-tagging
