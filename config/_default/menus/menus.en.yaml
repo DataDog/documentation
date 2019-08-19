@@ -814,18 +814,6 @@ main:
     parent: "tracing_search_analytics"
     weight: 504
 
-  - name: "Trace API"
-    url: "api/#tracing"
-    identifier: "tracing api"
-    parent: "tracing"
-    weight: 6
-
-  - name: "Community Libraries"
-    url: "developers/libraries/#apm-tracing-client-libraries/"
-    identifier: "community_library"
-    parent: "tracing"
-    weight: 7
-
   - name: "Guides"
     url: "tracing/guide/"
     identifier: "tracing_guides"
