@@ -14,17 +14,13 @@ window.dataLayer = window.dataLayer || [];
 const siteEnv = document.querySelector('html').dataset.env;
 
 let gaTag = '';
+
 if (siteEnv === 'preview') {
     gaTag = 'UA-21102638-9';
+    const indexName = 'docsearch_docs_preview';
 } else if (siteEnv === 'live') {
     gaTag = 'UA-21102638-5';
-}
-
-let indexName = '';
-if (siteEnv === 'preview') {
-  indexName = 'docsearch_docs_preview';
-} else if (siteEnv === 'live') {
-  indexName = 'docsearch_docs_prod';
+    const indexName = 'docsearch_docs_prod';
 }
 
 function gtag(){
