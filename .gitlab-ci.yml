@@ -88,7 +88,7 @@ index_algolia_preview:
   environment: "preview"
   script:
     - cp ./local/etc/algolia/docs_datadoghq_preview.json /etc/docs_datadoghq_preview.json
-    - index_docsearch_algolia
+    - index_docsearch_algolia_preview
   dependencies:
     - build_preview
   when: manual
