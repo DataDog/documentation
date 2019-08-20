@@ -89,6 +89,7 @@ index_algolia_preview:
   script:
     - mkdir -p /etc/algolia
     - cp ./local/etc/algolia/docs_datadoghq_preview.json /etc/algolia/docs_datadoghq_preview.json
+    - cat /etc/algolia/docs_datadoghq_preview.json
     - index_docsearch_algolia
   dependencies:
     - build_preview
