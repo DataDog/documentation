@@ -244,7 +244,6 @@ The bottom part of the view includes additional information about the trace or a
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_5.png" alt="Create Facet" responsive="true" style="width:90%;">}}
 
-5) You can now create dashboard widgets TKTK.
 
 ## Leverage your custom metadata with Trace Search & Analytics
 <div class="alert alert-info">This section assumes that you have <a href="https://docs.datadoghq.com/tracing/trace_search_and_analytics/?tab=java" target=_blank>enabled Trace Search and Analytics</a></div>
@@ -257,7 +256,7 @@ The Trace Analytics page is a visual query building tool that allows you to cond
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.gif" alt="" responsive="true" style="width:90%;">}}
 
-7) Remove the Error option from the search, change the `count *` measure to `Duration` and change the graph type to `Top List`. You can now see the customers that have the slowest average requests. **Note**: If you’d like to make sure your customers never pass a certain threshold of performance, you can [export this query to a monitor][4].
+7) Remove the Error option from the search, change the `count *` measure to `Duration` and change the graph type to `Top List`. You can now see the customers that have the slowest average requests. **Note**: If you’d like to make sure your customers never pass a certain threshold of performance, you can [export this query to a monitor][4], alternatively, you can export this query to a dashboard and keep an eye over it over time.
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_7.gif" alt="" responsive="true" style="width:90%;">}}
 
