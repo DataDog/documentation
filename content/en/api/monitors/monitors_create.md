@@ -110,7 +110,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     *   **`notify_no_data`** a Boolean indicating whether this monitor notifies when data stops reporting. Default: **false**
 
-    *   **`no_data_timeframe`** the number of minutes before a monitor notifies when data stops reporting. This parameter is mandatory when `notify_no_data​` is set to `true`. It must be at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks. Default: **2x timeframe for metric alerts, 2 minutes for service checks**
+    *   **`no_data_timeframe`** the number of minutes before a monitor notifies when data stops reporting. This parameter is mandatory when `notify_no_data​` is set to `true`. It must be at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks. Default: **10** mins.
 
     *   **`timeout_h`** the number of hours of the monitor not reporting data before it automatically resolves from a triggered state. Default: **None**.
 
