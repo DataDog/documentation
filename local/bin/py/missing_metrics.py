@@ -77,18 +77,18 @@ def post_dd_metrics(metrics, keys):
 
 
 if __name__ == '__main__':
-  print('Getting csv metrics from...')
+  print('\x1b[32mINFO\x1b[0m: Getting csv metrics from...')
   print(tempdir)
   csv_metrics = get_csv_metrics(tempdir)
   #print(csv_metrics)
-  print('Parsing keys')
+  print('\x1b[32mINFO\x1b[0m: Parsing keys')
   parser = OptionParser(usage="usage: %prog [options]")
   parser.add_option("-k", "--demoapikey", help="demo api key", default=None)
   parser.add_option("-p", "--demoappkey", help="demo app key", default=None)
   parser.add_option("-a", "--corpapikey", help="corp api key", default=None)
   parser.add_option("-b", "--corpappkey", help="corp app key", default=None)
   options, args = parser.parse_args()
-  print('Getting dd metrics...')
+  print('\x1b[32mINFO\x1b[0m: Getting dd metrics...')
   metrics = get_dd_metrics(csv_metrics, options)
-  print('Posting dd metrics...')
+  print('\x1b[32mINFO\x1b[0m: Posting dd metrics...')
   post_dd_metrics(metrics, options)
