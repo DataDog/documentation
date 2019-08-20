@@ -48,6 +48,7 @@ build_preview:
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
     - push_site_to_s3
+    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['js', 'images', 'fonts', 'en', 'css', 'search', 'json', 'error', 'matts quick tips', 'videos']" -l "['fr','ja']" -c "./local/etc/algolia/docs_datadoghq.json"
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
     #- remove_static_from_repo
     #- create_artifact
@@ -115,7 +116,7 @@ build_live:
     - build_hugo_site_new
     - collect_static_assets
     - push_site_to_s3
-    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['js', 'images', 'fonts', 'en', 'css', 'search', 'json', 'error', 'matts quick tips', 'videos']" -l "['fr','ja']" -c "./local/etc/docsdatadoghq.json"
+    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['js', 'images', 'fonts', 'en', 'css', 'search', 'json', 'error', 'matts quick tips', 'videos']" -l "['fr','ja']" -c "./local/etc/algolia/docs_datadoghq.json"
     - create_artifact
     - create_artifact_untracked
     - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
