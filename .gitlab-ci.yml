@@ -48,7 +48,7 @@ build_preview:
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
     - push_site_to_s3
-    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['js', 'images', 'fonts', 'en', 'css', 'search', 'json', 'error', 'matts quick tips', 'videos']" -l "['fr','ja']" -c "./local/etc/algolia/docs_datadoghq.json"
+    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['js', 'images', 'fonts', 'en', 'css', 'search', 'json', 'error', 'matts quick tips', 'videos']" -l "['fr','ja']" -c "./local/etc/algolia/docs_datadoghq_preview.json"
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
     #- remove_static_from_repo
     #- create_artifact
