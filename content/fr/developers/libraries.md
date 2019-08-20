@@ -39,7 +39,7 @@ Plusieurs projets de notre communauté sont consacrés à la maintenance, à la 
 | ---       | ---              | ---                  |
 | Python    | [DogPush][10]    | [TrueAccord][11]     |
 | Ruby      | [barkdog][12]    | [codenize-tools][13] |
-| Ruby      | [interferon][14] | [Airnb][15]          |
+| Ruby      | [interferon][14] | [Airbnb][15]         |
 | Ruby      | [dogwatch][16]   | [Rapid7][17]         |
 | Terraform | [Terraform][18]  | [Terraform][19]      |
 
