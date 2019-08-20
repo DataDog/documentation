@@ -28,6 +28,8 @@ gtag('config', gaTag);
 
 $(document).ready(function () {
 
+    window.history.replaceState({}, '', window.location.href);
+
     const sidenavHTML = $('.container .sidenav-nav').clone();
     $('header .sidenav-nav').html(sidenavHTML);
 
