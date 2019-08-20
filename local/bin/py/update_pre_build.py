@@ -106,7 +106,7 @@ class GitHub:
         )
         headers = self.headers()
         print(
-            "\x1b[32mINFO\x1b[32m: Getting latest sha from {}/{}..".format(
+            "\x1b[32mINFO\x1b[0m: Getting latest sha from {}/{}..".format(
                 repo, branch
             )
         )
@@ -119,7 +119,7 @@ class GitHub:
             )
             if sha:
                 print(
-                    "\x1b[32mINFO\x1b[32m: Getting tree from {}/{} @ {}".format(
+                    "\x1b[32mINFO\x1b[0m: Getting tree from {}/{} @ {}".format(
                         repo, branch, sha
                     )
                 )
