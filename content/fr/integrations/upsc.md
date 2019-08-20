@@ -39,9 +39,9 @@ Le check UPSC n'est **PAS** inclus avec le paquet de l'[Agent Datadog][1].
 
 ### Installation
 
-Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check UPSD sur votre host. Consultez notre guide relatif à l'[installation d'intégrations développées par la communauté][2] pour installer des checks avec une [version < 6.8 de l'Agent][2] ou avec l'[Agent Docker][3] :
+Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check UPSD sur votre host. Consultez notre guide relatif à l'[installation d'intégrations développées par la communauté][2] pour installer des checks avec une [version < 6.8 de l'Agent][2] ou avec l'[Agent Docker][4] :
 
-1. Installez le [kit de développement][4].
+1. Installez le [kit de développement][5].
 2. Clonez le dépôt integrations-extras :
 
     ```
@@ -60,25 +60,25 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
     ddev -e release build upsc
     ```
 
-5. [Téléchargez et lancez l'Agent Datadog][5].
+5. [Téléchargez et lancez l'Agent Datadog][6].
 6. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
 
     ```
     datadog-agent integration install -w <PATH_OF_UPSC_ARTIFACT_>/<UPSC_ARTIFACT_NAME>.whl
     ```
 
-7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][6].
+7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][7].
 
 ### Configuration
 
-1. Modifiez le fichier `upsc.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][6] pour commencer à recueillir vos [métriques](#collecte-de-metriques) UPSC.
-  Consultez le [fichier d'exemple upsc.d/conf.yaml][7] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `upsc.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][7] pour commencer à recueillir vos [métriques](#collecte-de-metriques) UPSC.
+  Consultez le [fichier d'exemple upsc.d/conf.yaml][9] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][8].
+2. [Redémarrez l'Agent][10].
 
 ## Validation
 
-[Lancez la sous-commande `status` de l'Agent][9] et cherchez `upsc` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][11] et cherchez `upsc` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -92,18 +92,21 @@ Le check UPSC n'inclut aucun événement.
 Le check UPSC n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][13].
 
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
+[4]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
+[5]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
+[6]: https://app.datadoghq.com/account/settings#agent
+[7]: https://docs.datadoghq.com/fr/getting_started/integrations
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[9]: https://github.com/DataDog/integrations-extras/blob/master/upsc/datadog_checks/upsc/data/conf.yaml.example
+[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#service-status
+[12]: https://github.com/DataDog/integrations-extras/blob/master/upsc/metadata.csv
+[13]: http://docs.datadoghq.com/help
 
 
 {{< get-dependencies >}}
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
-[4]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
-[5]: https://app.datadoghq.com/account/settings#agent
-[6]: https://docs.datadoghq.com/fr/getting_started/integrations
-[7]: https://github.com/DataDog/integrations-extras/blob/master/upsc/datadog_checks/upsc/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#service-status
-[10]: http://docs.datadoghq.com/help
