@@ -1,5 +1,5 @@
 ---
-title: Add span metadata and graph it using Trace Analytics
+title: Add span tags and slice and dice them using Trace Analytics
 kind: guide
 disable_toc: true
 further_reading:
