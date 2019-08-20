@@ -653,7 +653,7 @@ main:
     weight: 100
     parent: "alerting"
 
-  
+
 
 #################
 ## TRACING/APM ##
@@ -813,18 +813,6 @@ main:
     url: "monitors/monitor_types/trace_analytics"
     parent: "tracing_search_analytics"
     weight: 504
-
-  - name: "Trace API"
-    url: "api/#tracing"
-    identifier: "tracing api"
-    parent: "tracing"
-    weight: 6
-
-  - name: "Community Libraries"
-    url: "developers/libraries/#apm-tracing-client-libraries/"
-    identifier: "community_library"
-    parent: "tracing"
-    weight: 7
 
   - name: "Guides"
     url: "tracing/guide/"
@@ -1014,27 +1002,33 @@ main:
     identifier: "synthetics_browser_tests"
     weight: 2
 
+  - name: "Private Locations"
+    url: "synthetics/private_locations"
+    parent: "synthetics"
+    identifier: "synthetics_private_location"
+    weight: 3
+
   ## SYNTHETICS - APM
 
   - name: "APM Integration"
     url: "synthetics/apm/"
     parent: "synthetics"
     identifier: "synthetics_apm"
-    weight: 3
+    weight: 4
   - name: "Browser Tests"
     url: "synthetics/apm/browser_tests"
     parent: "synthetics_apm"
-    weight: 301
+    weight: 401
 
   - name: "Identify Synthetics Bots"
     url: "synthetics/identify_synthetics_bots/"
     parent: "synthetics"
-    weight: 4
+    weight: 5
 
   - name: "Settings"
     url: "synthetics/settings/"
     parent: "synthetics"
-    weight: 5
+    weight: 6
 
 ################
 ## DEVELOPERS ##

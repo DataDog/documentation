@@ -150,6 +150,8 @@ datadog:
 
 ### Enable APM and Distributed Tracing
 
+**Note**: If you want to deploy the Datadog Agent as a deployment instead of a DaemonSet, configuration of APM via Helm is not supported.
+
 Update your [datadog-values.yaml][7] file with the following APM configuration:
 
 ```

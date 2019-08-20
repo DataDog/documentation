@@ -17,10 +17,6 @@ Application keys, in conjunction with your org's API key, give you full access t
 
 ## Client tokens
 
-<div class="alert alert-warning">
-Client tokens are in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on this feature for your account.
-</div>
-
 Client tokens are unique to your organization. A client token is required by the [web browser log collector][1] to submit logs to Datadog.
 These tokens can only be used to send web browser logs to Datadog.
 
@@ -39,6 +35,9 @@ To add a Datadog API key, application key, or client token, navigate to [Integra
 To remove a Datadog API key or application key or client token, navigate to [Integration -> APIs][2] and select the **Revoke** button next to the key or token you want to remove:
 
 {{< img src="account_management/api_app_keys/application_keys.png" alt="Application Keys" responsive="true" >}}
+
+## Disabling a User Account
+If a user's account is disabled, any application keys that the user created are deleted. Any API keys that were created by the disabled account are not deleted, and are still valid.
 
 ## Transferring API/Application Keys
 Due to security reasons, Datadog does not transfer API/application keys from one user to another. The recommended best practice is to keep track of API/application keys and rotate those keys once a user has left the company. This way, a user that has left the company no longer has access to your account and Datadog’s API. Transferring the API/application key allows a user that no longer remains with the company to continue to send and receive data from the Datadog API. Customers have also asked to change the handle that the API/application keys are associated with. This, however, does not resolve the inherent issue: that a user that no longer remains with the company continues to have the ability to send and retrieve data from the Datadog API.

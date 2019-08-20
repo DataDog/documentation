@@ -5,6 +5,7 @@ aliases:
   - /guides/multiaccountorg
   - /account_management/mult_account
   - /account_management/faq/what-data-from-my-sub-organizations-can-i-see-in-my-parent-account
+  - /account_management/multi_organisations
 further_reading:
 - link: "account_management/saml"
   tag: "Documentation"

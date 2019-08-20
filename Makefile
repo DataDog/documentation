@@ -1,5 +1,5 @@
 # make
-.PHONY: clean clean-all clean-build clean-docker clean-exe clean-integrations clean-auto-doc clean-node clean-virt docker-start docker-stop help start stop
+.PHONY: clean clean-all clean-build clean-exe clean-integrations clean-auto-doc clean-node clean-virt help start stop
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -35,14 +35,9 @@ clean-all: stop  ## clean everything.
 	make clean-auto-doc
 	make clean-node
 	make clean-virt
-	make clean-docker
 
 clean-build:  ## remove build artifacts.
 	@if [ -d public ]; then rm -r public; fi
-
-clean-docker:  ## remove image.
-	@if [[ `docker ps -a | grep docs` ]]; then printf  "removing:" && docker rm -f docs; fi || true
-	@if [[ `docker images | grep mstbbs/docker-dd-docs:${IMAGE_VERSION}` ]]; then printf  "removing:" && docker rmi -f mstbbs/docker-dd-docs:${IMAGE_VERSION}; fi || true
 
 clean-exe:  ## remove execs.
 	@rm -rf ${EXE_LIST}
@@ -96,27 +91,6 @@ clean-node:  ## remove node_modules.
 
 clean-virt:  ## remove python virtual env.
 	@if [ -d ${VIRENV} ]; then rm -rf $(VIRENV); fi
-
-docker-start: clean docker-stop  ## start container and run default commands to start hugo site.
-	@docker run -ti --name "docs" -v `pwd`:/src:cached \
-		-e FETCH_INTEGRATIONS=true \
-		-e GITHUB_TOKEN \
-		-e RUN_SERVER=${RUN_SERVER} \
-		-e CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS} \
-		-e USE_DOCKER=true \
-		-p 1313:1313 mstbbs/docker-dd-docs:${IMAGE_VERSION}
-
-docker-stop:  ## kill the site and stop the running container.
-	@if [[ `docker ps -a | grep docs` ]]; then printf  "removing:" && docker rm -f docs; fi || echo "nothing to clean."
-
-docker-tests: stop  ## run the tests through the docker container.
-	@docker run -tid --name "docs" -v `pwd`:/src:cached \
-		-e RUN_SERVER=true \
-		-e RUN_WEBPACK=false \
-		-p 1313:1313 mstbbs/docker-dd-docs:${IMAGE_VERSION}
-	@printf "\e[93mSetting up test environment, this may take a minute...\033[0m\n"
-	@docker exec -ti docs run-tests.sh
-	@make docker-stop
 
 hugpython: hugpython/bin/activate  ## build virtualenv used for tests.
 
