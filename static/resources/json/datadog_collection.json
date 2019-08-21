@@ -4938,7 +4938,7 @@
 									"raw": "{\n    \"account_id\": \"<YOUR_AWS_ACCOUNT_ID>\",\n    \"filter_tags\": [\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ],\n    \"host_tags\": [\n        \"<TAG_KEY>:<TAG_VALUE>\"\n    ],\n    \"role_name\": \"DatadogAWSIntegrationRole\",\n    \"account_specific_namespace_rules\": {\n        \"auto_scaling\": false,\n        \"opsworks\": false\n    }\n}"
 								},
 								"url": {
-									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/aws?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
+									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/aws?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}&account_id=<ACCOUNT_ID>&role_name=<ROLE_NAME>",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -4961,6 +4961,16 @@
 											"key": "application_key",
 											"value": "{{datadog_application_key}}",
 											"description": "Your Datadog application key"
+										},
+										{
+											"key": "account_id",
+											"value": "<ACCOUNT_ID>",
+											"description": "Your AWS Account ID without dashes you wish to update."
+										},
+										{
+											"key": "role_name",
+											"value": "<ROLE_NAME>",
+											"description": "Your Datadog role delegation name associated with the AWS Account ID you wish to update."
 										}
 									]
 								},

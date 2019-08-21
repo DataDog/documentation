@@ -7,15 +7,20 @@ app_key=<DD_APP_KEY>
 
 # Update an AWS Account in Datadog
 
-curl -X PUT -H "Content-type: application/json" \
--d '{
-        "account_id": "<AWS_ACCOUNT_ID>",
-        "filter_tags": ["<KEY>:<VALUE>"],
-        "host_tags": ["<KEY>:<VALUE>"],
-        "role_name": "DatadogAWSIntegrationRole",
-        "account_specific_namespace_rules": {
-        	"auto_scaling": false,
-        	"opsworks": false
-        }
-    }'\
-"https://api.datadoghq.com/api/v1/integration/aws?api_key=${api_key}&application_key=${app_key}"
+curl -X PUT \
+  "https://api.datadoghq.com/api/v1/integration/aws?api_key=${api_key}&application_key=${app_key}&account_id=<ACCOUNT_ID>&role_name=<ROLE_NAME>" \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "account_id": "<YOUR_AWS_ACCOUNT_ID>",
+    "filter_tags": [
+        "<TAG_KEY>:<TAG_VALUE>"
+    ],
+    "host_tags": [
+        "<TAG_KEY>:<TAG_VALUE>"
+    ],
+    "role_name": "DatadogAWSIntegrationRole",
+    "account_specific_namespace_rules": {
+        "auto_scaling": false,
+        "opsworks": false
+    }
+}'
