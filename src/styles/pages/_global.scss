@@ -402,11 +402,7 @@ h5{
 }
 
 //content images
-.shortcode-img img {
-  border: 1px solid $ddgray;
-}
-
-.shortcode-img expand {
+.shortcode-img img, video {
   border: 1px solid $ddgray;
 }
 
