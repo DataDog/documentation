@@ -83,14 +83,29 @@ def shopping_cart(customer_id):
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Access the current active span from any method within your code. 
-**Note**: If the method is called and there is no span currently active, `active_span` is `nil`.
+The Datadog UI uses tags to set span level metadata. Custom metadata may be set for auto-instrumentation by grabbing the active
+span from the global tracer and setting a tag with `set_tag` method.
 
 ```ruby
-# e.g. adding tag to active span
+require 'ddtrace'
 
-current_span = Datadog.tracer.active_span
-current_span.set_tag('customer_id', customer_id) unless current_span.nil?
+# get '/shopping_cart/:customer_id', to: 'shopping_cart#index'
+class ShoppingCartController < ApplicationController
+  # GET /shopping_cart
+  def index
+    # Get the active span
+    current_span = Datadog.tracer.active_span
+    # customer_id -> 254889
+    current_span.set_tag('customer.id', params[:customer_id]) unless current_span.nil?
+
+    # [...]
+  end
+
+  # POST /shopping_cart
+  def create
+    # [...]
+  end
+end
 ```
 
 {{% /tab %}}
