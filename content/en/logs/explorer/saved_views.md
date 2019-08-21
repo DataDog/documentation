@@ -49,7 +49,7 @@ To create a new Saved View:
 4. Click the *Save as* button at the top of the screen
 5. Name it and click on *Save*
 
-{{< img src="logs/explorer/saved_views/saved_views_creation.gif" alt="Saved Views creation" responsive="true">}}
+{{< img src="logs/explorer/saved_views/saved_views_creation.mp4" alt="Saved views creation" video="true" responsive="true" >}}
 
 ## Update or remove an existing Saved View
 

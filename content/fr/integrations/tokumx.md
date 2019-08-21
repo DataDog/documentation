@@ -117,13 +117,16 @@ Ce check émet un événement à chaque fois que l'état de réplication d'un n�
 Renvoie CRITICAL si l'Agent n'est pas capable de se connecter à TokuMX pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
 ## Pour aller plus loin
 
-* [Surveiller des métriques clés de TokuMX pour des applications MongoDB][10]
+* [Surveiller des métriques clés de TokuMX pour des applications MongoDB][9]
 
 
+
+
+{{< get-dependencies >}}
 [1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://www.mongodb.org/display/DOCS/Security+and+Authentication
@@ -131,9 +134,5 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 [5]: https://github.com/DataDog/integrations-core/blob/master/tokumx/datadog_checks/tokumx/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/tokumx/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help
-[10]: https://www.datadoghq.com/blog/monitor-key-tokumx-metrics-mongodb-applications
-
-
-{{< get-dependencies >}}
+[8]: https://docs.datadoghq.com/fr/help
+[9]: https://www.datadoghq.com/blog/monitor-key-tokumx-metrics-mongodb-applications

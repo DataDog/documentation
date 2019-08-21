@@ -81,7 +81,7 @@ When you click on an API call in the collection, it loads in the `Builder` pane 
 
 When you click on the Endpoint name a description of the endpoint and all required/optional parameters is displayed to help you build your requests:
 
-{{< img src="getting_started/postman/description.gif" alt="postman description" responsive="true">}}
+{{< img src="getting_started/postman/description.mp4" alt="Postman description" video="true" responsive="true" >}}
 
 ### Params
 

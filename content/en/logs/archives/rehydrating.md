@@ -48,7 +48,7 @@ Once the content is rehydrated, the historical view is marked as active, and the
 
 Alternatively, teams can find the historical view from the Log Explorer directly from the index selector. When selecting a historical view, a pop-up offers to set the timeframe to one that is relevant to the selected historical view.
 
-{{< img src="logs/archives/log_archives_rehydrate_explorer.gif" alt="Log Explorer" responsive="true" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_rehydrate_explorer.mp4" alt="Log Explorer" video="true" responsive="true" width="75%">}}
 
 ### Deleting historical views
 
@@ -56,7 +56,7 @@ Historical views stay in Datadog until you opt to delete them. You can mark a hi
 
 24 hours later, the historical view is definitively deleted; until that time, the team is able to cancel the deletion.
 
-{{< img src="logs/archives/log_archives_rehydrate_delete.gif" alt="Deleting Historical Views" responsive="true" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt="Deleting Historical Views" video="true" responsive="true" width="75%" >}}
 
 ## Setting up archive rehydrating
 

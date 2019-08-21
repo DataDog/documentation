@@ -87,7 +87,7 @@ See the list of resources associated with your service. Resources are particular
 ### Filtering the resources list
 Filter your resources list with a query for basic text filtering:
 
-{{< img src="tracing/visualization/service/resources_filtering.gif" alt="Resource filtering" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/service/resources_filtering.mp4" alt="Resource filtering" video="true" responsive="true" width="90%" >}}
 
 ### Columns
 

@@ -38,7 +38,7 @@ Define the configuration of your browser test.
 2. **Name**: The name of your browser test.
 3. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the Synthetics page.
 4. **Devices**: The devices to run your check on. Available devices are `Laptop Large`, `Tablet`, and `Mobile Small`.
-5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][3]. You can also set up a [Private Location][2] to run a Synthetics Browser test on a private URL not accessible from the public internet.
+5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run a Synthetics Browser test on a private URL not accessible from the public internet.
 6. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week.
 
 ### Alert conditions
@@ -123,7 +123,7 @@ To create a variable, first give it a name then define its value from:
 
 Once created, use your variable to set an input text on a form or search bar. Use the little hand on your variable box to create an input step:
 
-{{< img src="synthetics/browser_tests/variable_input.gif" alt="Variable Input" responsive="true" style="width:80%;">}}
+{{< img src="synthetics/browser_tests/variable_input.mp4" alt="Variable Input" video="true" responsive="true" width="80%" >}}
 
 You can also use your variables in some assertions, including:
 
@@ -155,8 +155,8 @@ Common failure reasons include:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/identify_synthetics_bots
-[2]: /synthetics/private_locations
-[3]: /api/?lang=bash#get-available-locations
+[2]: /api/?lang=bash#get-available-locations
+[3]: /synthetics/private_locations
 [4]: http://daringfireball.net/projects/markdown/syntax
 [5]: /integrations/#cat-notification
 [6]: https://www.google.com/chrome

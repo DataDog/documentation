@@ -13,7 +13,7 @@ further_reading:
 
 The groups widget allows you to keep similar graphs together on your [timeboard][1]. Each group has a custom header, can hold one to many graphs, and is collapsible:
 
-{{< img src="graphing/widgets/group/group.gif" alt="Group Widget" responsive="true">}}
+{{< img src="graphing/widgets/group/group.mp4" alt="Group Widget" video="true" responsive="true" >}}
 
 ## Setup
 

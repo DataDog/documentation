@@ -107,7 +107,7 @@ Streaming logs can be searched with simple string matching. For more details abo
 
 **Note**: Streaming logs are not persisted, and entering a new search or refreshing the page clears the stream.
 
-{{< img src="graphing/infrastructure/livecontainers/livecontainerlogssidepanel.gif" alt="Preview Logs Sidepanel" responsive="true" style="width:100%;">}}
+{{< img src="graphing/infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="Preview Logs Sidepanel" video="true" responsive="true" >}}
 
 ### Indexed Logs
 

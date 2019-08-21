@@ -49,7 +49,7 @@ Use facets, measures, tags, or even [free text search][1] to filter your Logstre
 
 Follow the [guide to search your logs][1] for a detailed explanation of all the Log Explorer search features, including use of wildcards and queries of numerical values.
 
-{{< img src="logs/explorer/search_your_logs.gif" alt="Search your logs" responsive="true" >}}
+{{< img src="logs/explorer/search_your_logs.mp4" alt="Search your logs" video="true" responsive="true" >}}
 
 ### Saved views
 
