@@ -62,30 +62,22 @@ class ShoppingCartServlet extends AbstractHttpServlet {
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Add metadata directly to a span by calling `set_tag`. For example, with the following route handler:
+The Datadog UI uses tags to set span level metadata. Custom metadata may be set for auto-instrumentation by grabbing the active
+span from the global tracer and setting a tag with `set_tag` method.
 
 ```python
 from ddtrace import tracer
 
-@app.route('/customer/<int:customer_id>')
-def handle_customer(customer_id):
-  with tracer.trace('web.request') as span:
-    span.set_tag('customer.id', customer_id)
-```
+@app.route('/shopping_cart/<int:customer_id>')
+@login_required
+def shopping_cart(customer_id):
+    # Get the active span
+    current_span = tracer.current_span()
+    if current_span:
+        # customer_id -> 254889
+        current_span.set_tag('customer.id', customer_id)
 
-The current span can be retrieved from the context in order to set its metadata. This way, if a span was started by the instrumentation, you can retrieve the span and add custom metadata. 
-**Note**: If a span does not exist, `None` is returned:
-
-```python
-from ddtrace import tracer
-
-@app.route('/customer/<int:customer_id>')
-@tracer.wrap()
-def handle_customer(customer_id):
-  # get the active span in the context, put there by tracer.wrap()
-  current_span = tracer.current_span()
-  if current_span:
-    current_span.set_tag('customer.id', customer_id)
+    # [...]
 ```
 
 {{% /tab %}}
