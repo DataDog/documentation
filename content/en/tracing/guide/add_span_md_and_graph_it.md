@@ -39,10 +39,6 @@ span from the global tracer and setting a tag with `setTag` method.
 import io.opentracing.Tracer;
 import io.opentracing.util.GlobalTracer;
 
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 @WebServlet
 class ShoppingCartServlet extends AbstractHttpServlet {
   @Override
