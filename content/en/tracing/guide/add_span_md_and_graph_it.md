@@ -147,30 +147,20 @@ func main() {
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-
-Add metadata directly to span objects by calling `setTag` or `addTags`:
+The Datadog UI uses tags to set span level metadata. Custom metadata may be set for auto-instrumentation by grabbing the active
+span from the global tracer and setting a tag with `setTag` method.
 
 ```javascript
-// An example of an Express endpoint,
-// with Datadog tracing around the request.
-app.get('/posts', (req, res) => {
-  const span = tracer.startSpan('web.request')
+app.get('/shopping_cart/:customer_id', (req, res) => {
+  // Get the active span
+  const span = tracer.scope().active()
+  if (span !== null) {
+    // customer_id -> 254889
+    span.setTag('customer.id', req.params.customer_id)
+  }
 
-  span.addTags({
-    'customer_id': customer.id
-  })
+  // [...]
 })
-```
-
-Access the current active span from any method within your code.
-**Note**: If the method is called and there is no span currently active, `tracer.scope().active()` returns `null`.
-
-```javascript
-// e.g. adding tag to active span
-
-const span = tracer.scope().active()
-
-span.setTag('customer_id', customer.id)
 ```
 
 {{% /tab %}}
