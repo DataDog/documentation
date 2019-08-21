@@ -106,7 +106,7 @@ class GitHub:
         )
         headers = self.headers()
         print(
-            "Getting latest sha from {}/{}..".format(
+            "\x1b[32mINFO\x1b[0m: Getting latest sha from {}/{}..".format(
                 repo, branch
             )
         )
@@ -119,7 +119,7 @@ class GitHub:
             )
             if sha:
                 print(
-                    "Getting tree from {}/{} @ {}".format(
+                    "\x1b[32mINFO\x1b[0m: Getting tree from {}/{} @ {}".format(
                         repo, branch, sha
                     )
                 )
@@ -403,7 +403,7 @@ class PreBuild:
         """
         This represents the overall workflow of the build of the documentation
         """
-        print("Processing")
+        print("\x1b[34mStarting Processing...\x1b[0m")
 
         self.extract_config()
 
@@ -420,7 +420,7 @@ class PreBuild:
         that needs to be pulled and processed.
         """
         print(
-            "Loading {} configuration file".format(
+            "\x1b[32mINFO\x1b[0m: Loading {} configuration file".format(
                 getenv("CONFIGURATION_FILE")
             )
         )
@@ -472,7 +472,7 @@ class PreBuild:
             repo_name = "../" + content["repo_name"] + sep
             if isdir(repo_name):
                 print(
-                        "local version of {} found".format(
+                        "\x1b[32mINFO\x1b[0m: Local version of {} found".format(
                             content["repo_name"]
                         )
                     )
@@ -482,7 +482,7 @@ class PreBuild:
                 )
             elif self.options.token:
                 print(
-                    "No local version of {} found, downloading content from upstream version".format(
+                    "\x1b[32mINFO\x1b[0m: No local version of {} found, downloading content from upstream version".format(
                         content["repo_name"]
                     )
                 )
@@ -504,7 +504,7 @@ class PreBuild:
                         )
             else:
                 print(
-                    "No local version of {} found, no GITHUB_TOKEN available. Stopping downloading.".format(
+                    "\x1b[33mWARNING\x1b[0m: No local version of {} found, no GITHUB_TOKEN available. Stopping downloading.".format(
                         content["repo_name"]
                     )
                 )
@@ -549,7 +549,7 @@ class PreBuild:
 
             else:
                 print(
-                    "[ERROR] Unsuccessful Processing of {}".format(
+                    "\x1b[31mERROR\x1b[0m: Unsuccessful Processing of {}".format(
                         content
                     )
                 )
@@ -710,7 +710,7 @@ class PreBuild:
                         remove(input_file)
                     except OSError:
                         print(
-                            "the file {} was not found and could not be removed during merge action".format(
+                            "\x1b[31mERROR\x1b[0m: The file {} was not found and could not be removed during merge action".format(
                                 input_file
                             )
                         )
@@ -736,7 +736,7 @@ class PreBuild:
                         remove(input_file)
                     except OSError:
                         print(
-                            "the file {} was not found and could not be removed during discard action".format(
+                            "\x1b[31mERROR\x1b[0m: The file {} was not found and could not be removed during discard action".format(
                                 input_file
                             )
                         )
@@ -913,7 +913,7 @@ class PreBuild:
             no_integration_issue = False
             manifest_json = {}
             print(
-                "WARNING: No manifest found for {}".format(
+                "\x1b[33mWARNING\x1b[0m: No manifest found for {}".format(
                     file_name
                 )
             )

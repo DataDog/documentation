@@ -26,7 +26,7 @@ def find_private_url(path, exclusions):
                         html = BeautifulSoup(current_file, "html.parser")
 
                         if html.find_all('meta', {'name': 'robots', 'content': 'noindex, nofollow'}):
-                            print('skipping private: %s' % dirpath)
+                            print('\x1b[33mWARNING\x1b[0m: Skipping private page: %s' % dirpath)
                             private_urls.append(dirpath)
 
     return private_urls
@@ -56,14 +56,14 @@ def update_algolia_private_url(docs_index_config,private_urls):
     :param private_urls: A list of documentation URL links that correspond to private doc files.
     """
     with open(docs_index_config, 'rt', encoding='utf-8') as json_file:
-        print("Configuration file {} correctly loaded.".format(docs_index_config))
+        print("\x1b[32mINFO\x1b[0m: Configuration file {} correctly loaded.".format(docs_index_config))
         config = json.load(json_file)
 
-        print("Adding list of private URLs.")
+        print("\x1b[32mINFO\x1b[0m: Adding list of private URLs.")
         for url in private_urls:
             config["stop_urls"].append(url)
 
-    print("Addition complete, updating Algolia main configuration file with the new one.")
+    print("\x1b[32mINFO\x1b[0m: Addition complete, updating Algolia main configuration file with the new one.")
 
     with open(docs_index_config, 'w+', encoding='utf-8') as json_file:
         json.dump(config, json_file)
@@ -77,13 +77,13 @@ if __name__ == "__main__":
     (options, args) = parser.parse_args()
     options = vars(options)
 
-    print("Detecting the list of URL to not index:\n")
+    print("\x1b[32mINFO\x1b[0m: Detecting the list of URL to not index:\n")
     private_urls = find_private_url('public', options["excluded_directory"] + options["excluded_language"])
 
-    print("Transforming links to make them match the algolia logic:\n")
+    print("\x1b[32mINFO\x1b[0m: Transforming links to make them match the algolia logic:\n")
     private_urls=transform_url(private_urls)
 
-    print("Updating Algolia docsearch configuration file:\n")
+    print("\x1b[32mINFO\x1b[0m: Updating Algolia docsearch configuration file:\n")
     update_algolia_private_url(options["config_location"],private_urls)
 
-    print("Algolia docsearch config update \o/")
+    print("\x1b[32mINFO\x1b[0m: Algolia docsearch config update \o/")
