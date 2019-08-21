@@ -28,16 +28,27 @@ Once in the edit mode click on **Add Variable +** to create your first Template 
 
 * A **Name** *-Mandatory-*:
     Value of your Template Variable displayed in your graphs query.
-* A **Tag Group** *-Mandatory-*:
-    If your tags follow [the tags best practice][1] with a `key:value` format, the Tag Group is the  `key` of your tags.
-* A **Default Tag** *-Optional-*:
-    Default value for your Template Variable Tag Group.
+* A **Tag or Attribute** *-Mandatory-*:
+
+    * For Tag: If your tag follow [the tags best practice][1] with a `key:value` format, the *Tag* is the `key` of your tags.
+    * For Attribute: Use a [facet or a Measure as Template variables](#template-variables-with-logs-and-apm-queries).
+* A **Default Value** *-Optional-*:
+    Default value for your Template Variable Tag or Attribute.
 
 Once created, notice that you have statistics upon your template variables usage in your graphs. In the picture below, the template variable is not used in both graph of the dashboard:
 
 {{< img src="graphing/dashboards/template_variables/stats_tv.png" alt="statistic TV" responsive="true" style="width:40%;">}}
 
 Decide if you want to remove/add this template variable to all of your graph widgets with the respective **Remove From All** and **Add to All** buttons.
+
+#### Template variables with Logs and APM queries
+
+Template variables work on log and APM query based widgets—since metrics, logs, and APM share the same tags.
+Additionally, it is possible to define specific log/APM template variables based on your [log][2] or APM facets. These template variables start with `@`.
+
+{{< img src="graphing/dashboards/template_variables/log_template_variables.png" alt="log template variables" responsive="true" style="width:85%;">}}
+
+**Note**: Using the `Add to all` button adds this template variable to all log/APM widgets only.
 
 ## Use Template Variables
 
@@ -50,15 +61,6 @@ Once you have defined a template variable, it appears in the options displayed i
 After the graph is saved, the value of this template variable is the one selected on top of your dashboard:
 
 {{< img src="graphing/dashboards/template_variables/selecting_template_variables.png" alt="Selecting template variables" responsive="true" style="width:75%;">}}
-
-#### Template variables with Logs and APM queries
-
-Template variables work on log and APM query based widgets—since metrics, logs, and APM share the same tags.
-Additionally, it is possible to define specific log/APM template variables based on your [log][2] or APM facets. These template variables start with `@`.
-
-{{< img src="graphing/dashboards/template_variables/log_template_variables.png" alt="log template variables" responsive="true" style="width:85%;">}}
-
-**Note**: Using the `Add to all` button adds this template variable to all log/APM widgets only.
 
 #### Note widget
 
