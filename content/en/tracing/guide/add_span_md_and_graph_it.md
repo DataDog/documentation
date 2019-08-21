@@ -183,19 +183,28 @@ scope.Span.SetTag("customer_id", customer.id);
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-
-Add metadata directly to a `DDTrace\Span` object by calling `Span::setTag()`. For example:
+The Datadog UI uses tags to set span level metadata. Custom metadata may be set for auto-instrumentation by grabbing the active
+span from the global tracer and setting a tag with `setTag` method.
 
 ```php
-// Get the currently active span (can be null)
-$span = \DDTrace\GlobalTracer::get()->getActiveSpan();
-if (null !== $span) {
-  // Add a tag to the span
-  $span->setTag('customer_id', customer.id);
+namespace App\Http\Controllers;
+
+use DDTrace\GlobalTracer;
+
+class ShoppingCartController extends Controller
+{
+    public shoppingCartAction (Request $request) {
+        // Get the currently active span
+        $span = GlobalTracer::get()->getActiveSpan();
+        if (null !== $span) {
+            // customer_id -> 254889
+            $span->setTag('customer_id', $request->get('customer_id'));
+        }
+
+        // [...]
+    }
 }
 ```
-
-**Note**: `Tracer::getActiveSpan()` returns `null` if there is no active span.
 
 {{% /tab %}}
 {{< /tabs >}}
