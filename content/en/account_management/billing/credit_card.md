@@ -12,7 +12,7 @@ By default, when you sign up with a credit card you are on a monthly plan. If yo
 
 ### Update
 
-Update your credit card through the [Plan][1] page by clicking the **Update Card** button:
+Update your credit card through the [Plan][1] page by clicking the **Edit** button.
 
 ### Remove
 
