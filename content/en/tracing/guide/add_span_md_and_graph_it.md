@@ -32,9 +32,8 @@ Depending on the programming language you are you using, you’ll need to set th
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The Datadog UI uses tags to set span level metadata. A full list of the metadata can be found in the [Datadog][1] and [OpenTracing][2] APIs.
-
-Custom metadata may be set for auto-instrumentation by grabbing the active span out of the global tracer and setting a tag with `setTag`.
+The Datadog UI uses tags to set span level metadata. Custom metadata may be set for auto-instrumentation by grabbing the active
+span from the global tracer and setting a tag with `setTag` method.
 
 ```java
 import io.opentracing.Tracer;
@@ -45,20 +44,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet
-class ServletImpl extends AbstractHttpServlet {
+class ShoppingCartServlet extends AbstractHttpServlet {
   @Override
   void doGet(HttpServletRequest req, HttpServletResponse resp) {
+    // Get the active span
     final Span span = GlobalTracer.get().activeSpan();
     if (span != null) {
-      span.setTag("customer_id", customer_id);
+      // customer_id -> 254889
+      span.setTag("customer.id", customer_id);
     }
-    // servlet impl
+
+    // [...]
   }
 }
 ```
 
-[1]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/DDTags.java
-[2]: https://github.com/opentracing/opentracing-java/blob/master/opentracing-api/src/main/java/io/opentracing/tag/Tags.java
 {{% /tab %}}
 {{% tab "Python" %}}
 
