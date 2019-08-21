@@ -5,8 +5,22 @@
   {{- $.Scratch.Set "popup" "true" -}}
 {{- end -}}
 {{- $isPopup := $.Scratch.Get "popup" -}}
-{{- $img_width := .Get "width" -}}
+
 {{- $img_height := .Get "height" -}}
+
+{{ if (not (isset .Params "width")) }}
+
+  {{- $.Scratch.Set "width" "100%" -}}
+  {{- $img_width := $.Scratch.Get "width" -}}
+
+{{- else -}}
+
+  {{- $img_width := $.Scratch.Get "width" -}}
+
+{{ end }}
+
+{{- $img_width := .Get "width" -}}
+
 {{- $wide :=  .Get "wide" -}}
 {{- $video :=  .Get "video" -}}
 
@@ -67,7 +81,7 @@
 {{- $figure_class :=  .Get "figure_class" -}}
 <div class="shortcode-wrapper shortcode-img expand {{- if $wide -}}wide-parent{{- end -}}"><figure class="text-center {{- if $wide -}}wide {{- end -}}{{ $figure_class -}}" {{- if .Get "figure_style" -}}style="{{- with .Get "figure_style" -}}{{- . | safeCSS -}}{{- end -}}"{{- end -}}>
 {{- if $video -}}
-    <video width="100%" height="auto"
+    <video width="{{$img_width}}" height="auto"
            muted
            playsinline
            autoplay

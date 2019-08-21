@@ -15,7 +15,7 @@ further_reading:
 
 The [Metrics Summary page][1] displays a list of all the [metrics][2] reported to Datadog under a specified time frame: the past hour, day, or week. This list can be filtered by name. Clicking on a metric brings up a panel with more detailed information.
 
-{{< img src="graphing/metrics/summary/summary.mp4" alt="Summary" video="true" responsive="true" >}}
+{{< img src="graphing/metrics/summary/summary.mp4" alt="Summary" video="true" responsive="true" width="80%" >}}
 
 ## Metric panel
 
