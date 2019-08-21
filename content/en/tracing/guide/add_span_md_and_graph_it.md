@@ -96,7 +96,7 @@ class ShoppingCartController < ApplicationController
     # Get the active span
     current_span = Datadog.tracer.active_span
     # customer_id -> 254889
-    current_span.set_tag('customer.id', params[:customer_id]) unless current_span.nil?
+    current_span.set_tag('customer.id', params.permit([:customer_id])) unless current_span.nil?
 
     # [...]
   end
