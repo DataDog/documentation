@@ -111,53 +111,36 @@ end
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Add metadata directly to a `Span` interface by calling `SetTag`:
+The Datadog UI uses tags to set span level metadata. Custom metadata may be set for auto-instrumentation by grabbing the active
+span from the global tracer and setting a tag with `SetTag` method.
 
 ```go
 package main
 
 import (
-    "log"
-    "net/http"
+    muxtrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux"
 
     "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-    // Create a span for a web request at the /posts URL.
-    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
-    defer span.Finish()
+    vars := mux.Vars(r)
+    // Get the active span from a Go Context
+    if span, ok := tracer.SpanFromContext(r.Context()); ok {
+      // customer_id -> 254889
+      span.SetTag("customer.id", vars["customerID"])
+    }
 
-    // Set tag
-    span.SetTag("customer_id", customer.id)
+    // [...]
 }
 
 func main() {
-    tracer.Start(tracer.WithServiceName("<SERVICE_NAME>"))
+    tracer.Start(tracer.WithServiceName("web-store"))
     defer tracer.Stop()
-    http.HandleFunc("/posts", handler)
-    log.Fatal(http.ListenAndServe(":8080", nil))
-}
-```
-
-Datadog's integrations make use of the `Context` type to propagate the current active span.
-If you want to add span metadata using a tag attached to a `Context`, call the `SpanFromContext` function:
-
-```go
-package main
-
-import (
-    "net/http"
-
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-)
-
-func handler(w http.ResponseWriter, r *http.Request) {
-    // Retrieve a span for a web request attached to a Go Context.
-    if span, ok := tracer.SpanFromContext(r.Context()); ok {
-        // Set tag
-        span.SetTag("customer_id", customer.id)
-    }
+    // Use auto-instrumentation
+    mux := muxtrace.NewRouter()
+    mux.HandleFunc("/shopping_cart/{customerID}", handler)
+    http.ListenAndServe(":8080", mux)
 }
 ```
 
