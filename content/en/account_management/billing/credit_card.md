@@ -13,8 +13,6 @@ By default, when you sign up with a credit card you are on a monthly plan. If yo
 
 Update your credit card through the [Plan][1] page by clicking the **Update Card** button:
 
-{{< img src="account_management/billing/credit-card01.png" alt="Update Credit Card" responsive="true">}}
-
 ### Remove
 
 To remove your credit card from Datadog, first downgrade to the **Free** plan. Then use the **Remove Card** button on the [Plan][1] page.
