@@ -1,20 +1,20 @@
 ---
-title: Add span tags and slice and dice your application performance.
+title: Add span tags and slice and dice your application performance
 kind: guide
 disable_toc: true
 further_reading:
-- link: "tracing/setup/"
-  tag: "Documentation"
-  text: "Learn how to setup APM tracing with your application"
-- link: "tracing/visualization/services_list/"
-  tag: "Documentation"
-  text: "Discover the list of services reporting to Datadog"
-- link: "tracing/visualization/resource"
-  tag: "Documentation"
-  text: "Dive into your resource performance and traces"
-- link: "tracing/visualization/trace"
-  tag: "Documentation"
-  text: "Understand how to read a Datadog Trace"
+- link: "/tracing/guide/alert_anomalies_p99_database/"
+  tag: "3 mins"
+  text: "Alert on anomalous p99 latency of a database service"
+- link: "tracing/guide/week_over_week_p50_comparison/"
+  tag: "2 mins"
+  text: "Compare a service’s latency to the previous week"
+- link: "/tracing/guide/slowest_request_daily/"
+  tag: "3 mins"
+  text: "Debug the slowest trace on the slowest endpoint of a web service"
+- link: "tracing/guide/"
+  tag: ""
+  text: "All guides"
 ---
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.gif" alt="Analytics View" responsive="true" style="width:90%;">}}
