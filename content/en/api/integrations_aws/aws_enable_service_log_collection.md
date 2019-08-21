@@ -7,8 +7,6 @@ external_redirect: /api/#enable-an-aws-service-log-collection
 
 ## Enable an AWS service log collection
 
-<mark>This endpoint is in public beta.</mark>
-
 Enable Automatic Log collection for your AWS services.
 
 ##### ARGUMENTS

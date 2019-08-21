@@ -12,5 +12,9 @@ disable_toc: true
     {{< nextlink href="tracing/guide/resource_monitor" >}}Build monitor upon your resource metrics{{< /nextlink >}}
     {{< nextlink href="tracing/guide/trace_sampling_and_storage" >}}Trace Sampling and Storage{{< /nextlink >}}
     {{< nextlink href="tracing/guide/agent-obfuscation" >}}Agent Trace Obfuscation{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/week_over_week_p50_comparison/" >}}Compare p50 latency week over week for a service{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/week_over_week_p50_comparison" >}}Compare p50 latency week over week for a service{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/alert_anomalies_p99_database" >}}Alert on anomalies in database services p99 latency{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/slowest_request_daily" >}}Debug the slowest trace on the slowest endpoint of a web service{{< /nextlink >}}
+    {{< nextlink href="/api/?lang=python#tracing" >}}Trace API{{< /nextlink >}}
+    {{< nextlink href="/developers/libraries/#apm-distributed-tracing-client-libraries" >}}Tracing Client Libraries{{< /nextlink >}}
 {{< /whatsnext >}}

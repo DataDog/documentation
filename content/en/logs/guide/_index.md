@@ -11,4 +11,5 @@ disable_toc: true
     {{< nextlink href="logs/guide/log-collection-troubleshooting-guide" >}}Log Collection Troubleshooting Guide{{< /nextlink >}}
     {{< nextlink href="logs/guide/log-parsing-best-practice" >}}Log Parsing Best Practices{{< /nextlink >}}
     {{< nextlink href="logs/guide/setting-file-permissions-for-rotating-logs" >}}Setting File Permissions for Rotating Logs (Linux){{< /nextlink >}}
+    {{< nextlink href="logs/guide/collect-multiple-logs-with-pagination" >}}Collect multiple logs with the Log List API and pagination.{{< /nextlink >}}
 {{< /whatsnext >}}
