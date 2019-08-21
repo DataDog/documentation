@@ -165,13 +165,27 @@ app.get('/shopping_cart/:customer_id', (req, res) => {
 Add metadata directly to a `Datadog.Trace.Span` object by calling `Span.SetTag()`. For example:
 
 ```csharp
-using Datadog.Trace;
+public class ShoppingCartController : Controller
+{
+    private IShoppingCartRepository _shoppingCartRepository;
 
-// access the active scope through the global tracer (can return null)
-var scope = Tracer.Instance.ActiveScope;
+    [HttpGet]
+    public IActionResult Index(int customerId)
+    {
+        // Access the active scope through the global tracer (can return null)
+        var scope = Tracer.Instance.ActiveScope;
 
-// add a tag to the span
-scope.Span.SetTag("customer_id", customer.id);
+        if (scope != null)
+        {
+            // Add a tag to the span for use in the datadog web UI
+            scope.Span.SetTag("customer.id", customerId.ToString());
+        }
+
+        var cart = _shoppingCartRepository.Get(customerId);
+
+        return View(cart);
+    }
+}
 ```
 
 **Note**: `Datadog.Trace.Tracer.Instance.ActiveScope` returns `null` if there is no active span.
