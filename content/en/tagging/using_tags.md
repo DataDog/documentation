@@ -199,7 +199,7 @@ When creating a [Notebook][12] graph, limit metrics by using tags in the **from*
 
 To exclude tags, use `</>` to edit the text then add the tag in the form `!<KEY>:<VALUE>`. In the example below, `service:coffeehouse` is excluded using `!service:coffeehouse`.
 
-{{< img src="tagging/using_tags/notebooktagsexclude.mp4" alt="Notebook Exclude Tags" video="true" responsive="true" >}}
+{{< img src="tagging/using_tags/notebooktagsexclude.mp4" alt="Notebook Exclude Tags" video="true" responsive="true" width="80%">}}
 
 ## Logs
 
@@ -223,7 +223,7 @@ For Logs [Search][13], [Analytics][14], [Patterns][15], and [Live Tail][16] filt
 {{% /tab %}}
 {{% tab "Live Tail" %}}
 
-{{< img src="tagging/using_tags/livetailtags.mp4" alt="Live Tail Tags" video="true" responsive="true" >}}
+{{< img src="tagging/using_tags/livetailtags.mp4" alt="Live Tail Tags" video="true" responsive="true" width="80%">}}
 
 {{% /tab %}}
 {{< /tabs >}}

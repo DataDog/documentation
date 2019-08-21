@@ -32,7 +32,7 @@ Filter the services list depending on:
 * [Service type](#services-types)
 * A query (basic text filtering)
 
-{{< img src="tracing/visualization/services_filtering.mp4" alt="Services filtering" video="true" responsive="true" >}}
+{{< img src="tracing/visualization/services_filtering.mp4" alt="Services filtering" video="true" responsive="true" width="75%" >}}
 
 ### Services types
 

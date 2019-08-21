@@ -67,7 +67,7 @@ A pipeline can contain Nested Pipelines and Processors whereas a Nested Pipeline
 
 It is possible to drag and drop a Pipeline into another Pipeline to transform it into a Nested Pipeline:
 
-{{< img src="logs/processing/pipelines/nested_pipeline_drag_drop.mp4" alt="Drag and Drop Nested Pipelines" video="true" responsive="true" >}}
+{{< img src="logs/processing/pipelines/nested_pipeline_drag_drop.mp4" alt="Drag and Drop Nested Pipelines" video="true" responsive="true" width="80%" >}}
 
 ## Special Pipelines
 

@@ -38,7 +38,7 @@ Services are also scoped by `env`, and, optionally, a [first-class dimension][1]
 
 Mousing over a service highlights it and shows its request traffic as animated lines to better emphasize directionality.
 
-{{< img src="tracing/visualization/services_map/servicemap-anim.mp4" alt="Service Map" video="true" responsive="true" >}}
+{{< img src="tracing/visualization/services_map/servicemap-anim.mp4" alt="Service Map" video="true" responsive="true" width="90%" >}}
 
 Clicking a service offers you the option to inspect that service. This isolates the service, displays the source of requests from other services, and the requests for data sent by this service to other services. Generally, the services on the left are closer to your customers, and the ones on the right are more likely root causes.
 
@@ -74,7 +74,7 @@ Nodes represent services exactly as instrumented in APM and match those in your 
 
 New services or connections appear within moments of being instrumented and age out if there are no corresponding traces seen for two weeks.  This takes into account services that do work infrequently, but are an important part of a functioning system.
 
-{{< img src="tracing/visualization/services_map/servicenodes.mp4" alt="Service Map nodes" video="true" responsive="true" >}}
+{{< img src="tracing/visualization/services_map/servicenodes.mp4" alt="Service Map nodes" video="true" responsive="true" width="90%">}}
 
 ### Color
 

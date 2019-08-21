@@ -40,7 +40,7 @@ Each pattern comes with highlights, to get you straight to its characteristic fe
 
 Click on a pattern to see a sample of underlying logs, and eventually display one single log.
 
-{{< img src="logs/explorer/patterns/patterns_overview.mp4" alt="Log Patterns" video="true" responsive="true" >}}
+{{< img src="logs/explorer/patterns/patterns_overview.mp4" alt="Log Patterns" video="true" responsive="true" width="90%" >}}
 
 **Note**: The pattern detection is based on 10,000 log samples. Refine the search to see patterns limited to a specific subset of logs.
 

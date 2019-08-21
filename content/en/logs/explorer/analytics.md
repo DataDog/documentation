@@ -137,7 +137,7 @@ The evolution of the **top Status Codes** according to their **Throughput**, alo
 
 Select or click on a section of the graph to either zoom in the graph or see the list of logs corresponding to your selection:
 
-{{< img src="logs/explorer/analytics/view_logs.mp4" alt="view logs" video="true" responsive="true" >}}
+{{< img src="logs/explorer/analytics/view_logs.mp4" alt="view logs" video="true" responsive="true" width="80%" >}}
 
 ## How aggregations work behind the scenes
 

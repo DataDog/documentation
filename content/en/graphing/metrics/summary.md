@@ -49,7 +49,7 @@ If a metric is coming from an integration and you notice a wrong description, [o
 
 When submitting custom metrics to Datadog, it is possible to change the [unit of measurement][1] which shows up when hovering over a certain metric in your graph. Do this by selecting your custom metric from the list and then selecting the unit of measurement you would like to use as depicted below:
 
-{{< img src="graphing/metrics/summary/metrics_metadata.mp4" alt="Metrics Metadata" video="true" responsive="true" >}}
+{{< img src="graphing/metrics/summary/metrics_metadata.mp4" alt="Metrics Metadata" video="true" responsive="true" width="80%" >}}
 
 **Note**: This does not change how a metric graph is displayed (only the units of measurement that raw values are considered as when hovering over a metric). Formatting is automatically applied for readability, for example bytes (`B`) may be displayed as kibibytes (`KiB`).
 

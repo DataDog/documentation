@@ -29,7 +29,7 @@ Calculate the breakdown of execution time and adjust the color scheme by either 
 
 To get a closer look at the flame graph, zoom in by scrolling:
 
-{{< img src="tracing/visualization/trace/trace_zoom.mp4" alt="Trace Error" video="true" responsive="true" >}}
+{{< img src="tracing/visualization/trace/trace_zoom.mp4" alt="Trace Error" video="true" responsive="true" width="90%" >}}
 
 The List view aggregates resources by service and sorts them according to their corresponding count of spans. Services are sorted per relative percentage of execution time spent by the trace in each service:
 

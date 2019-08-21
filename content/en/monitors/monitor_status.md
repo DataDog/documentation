@@ -76,7 +76,7 @@ Use the *cog* icon in the upper right corner of the page to [edit][1] your monit
 
 The *Status and History* section reflect the query and state changes over time, while the **Evaluation Graph** represents the exact query behavior within the timeframe bracket *on the history graph*. The Evaluation Graph has a fixed zoomed window that corresponds to your monitor evaluation timesteps, to ensure the displayed points are [aggregated correctly][5]. Slide this bracket over the timeline to view previous monitor evaluation results:
 
-{{< img src="monitors/monitor_status/status_monitor_history.mp4" alt="status monitor history" video="true" responsive="true" >}}
+{{< img src="monitors/monitor_status/status_monitor_history.mp4" alt="status monitor history" video="true" responsive="true" width="80%" >}}
 
 For further investigation into your metrics evolution, use the [Metric Explorer][6] or a dedicated [Notebook][7].
 
