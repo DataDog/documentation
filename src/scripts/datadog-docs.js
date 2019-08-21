@@ -12,11 +12,15 @@ import { moveToAnchor } from './helpers/moveToAnchor';
 window.dataLayer = window.dataLayer || [];
 
 const siteEnv = document.querySelector('html').dataset.env;
+
 let gaTag = '';
+let indexName = '';
 if (siteEnv === 'preview') {
     gaTag = 'UA-21102638-9';
+    indexName = 'docsearch_docs_preview';
 } else if (siteEnv === 'live') {
     gaTag = 'UA-21102638-5';
+    indexName = 'docsearch_docs_prod';
 }
 
 function gtag(){
@@ -68,9 +72,6 @@ $(document).ready(function () {
         const $pagination = $('#tipue_search_content');
         let query = "";
         try {query = results[1];} catch (e) {}
-
-        // get indexname by language
-        const indexName = "docsearch_docs_prod";
 
         let lang = 'en';
         if(window.location.pathname.indexOf("/fr/") > -1) {
