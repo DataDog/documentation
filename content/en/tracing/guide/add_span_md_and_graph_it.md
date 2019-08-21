@@ -1,5 +1,5 @@
 ---
-title: Add span tags and slice and dice them using Trace Analytics
+title: Add span tags and slice and dice your application performance.
 kind: guide
 disable_toc: true
 further_reading:
@@ -19,7 +19,9 @@ further_reading:
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.gif" alt="Analytics View" responsive="true" style="width:90%;">}}
 
-Datadog APM allows you to customize your traces to include any additional information you might need to maintain observability into your business. In this example, a customer ID is added to traces allowing the customers that have the slowest performance to be identified. Customization of traces is based on tags that seamlessly integrate APM with the rest of Datadog and come in the form of `key:value` pairs of metadata added to spans.
+Datadog APM allows you to customize your traces to include any additional information you might need to maintain observability into your business. You can use this to identify a spike in the throughput of a certain enterprise customer, or the user suffering the highest latecy, or to pinpoint the database shard generating the most errors. 
+
+In this example, a customer ID is added to traces allowing the customers that have the slowest performance to be identified. Customization of traces is based on tags that seamlessly integrate APM with the rest of Datadog and come in the form of `key:value` pairs of metadata added to spans.
 
 ## Instrument your code with custom metadata
 
@@ -239,32 +241,51 @@ The bottom part of the view includes additional information about the trace or a
 
 <div class="alert alert-info">In order to enable Logs in this view you need to have Logs collection enabled and then to <a href="https://docs.datadoghq.com/tracing/advanced/connect_logs_and_traces/?tab=java" target=_blank>connect Logs and Traces</a></div>
 
-4) Find the new metadata that you added to the trace. Click on it and select **Create facet** for `@[your facet name]` (remember, this is customer_id in our example)
-
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_5.png" alt="Create Facet" responsive="true" style="width:90%;">}}
-
 
 ## Leverage your custom metadata with Trace Search & Analytics
 <div class="alert alert-info">This section assumes that you have <a href="https://docs.datadoghq.com/tracing/trace_search_and_analytics/?tab=java" target=_blank>enabled Trace Search and Analytics</a></div>
 
-5) Navigate to the [Trace Analytics][2] page
+4) Navigate to the [Trace Search page][2]
 
-The Trace Analytics page is a visual query building tool that allows you to conduct an investigation into your traces with infinite cardinality. It relies on facets to filter and scope the query, read more in the [Trace Analytics overview][3].
+The Trace Search page allows you to identify specific [Traces][3] and APM Events you are interested in. Here you can filter by time a set of default tags (such as `Env`,`Service`, `Resource` and [many more][4]). 
 
-6) Choose the service you’ve been working on from the service facet list, choose Error from the status facet and select `customer_id` (or any other metadata you added to your spans) from the group by field.
+5) **Find a trace that has the new metadata info**. To do this use the facet explorer on the left to find the Resource name you set at the beginning of this guide and click into one of the rows you see there.
+
+6) **Find the new metadata that you added to the trace**. Click on it and select **Create facet** for `@[your facet name]` (remember, this is customer_id in our example)
+
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_5.png" alt="Create Facet Menu" responsive="true" style="width:90%;">}}
+
+You can now determine the displayed name of your facet and where to place it in the facet explorer.
+
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_8.png" alt="Create Facet Modal" responsive="true" style="width:90%;">}}
+
+You should now be able to see the facet you created in the Facet Explorer. The fastest way to find it is by using the `Search facets` box.
+
+6) Navigate to the [Trace Analytics][5] page
+
+The Trace Analytics page is a visual query building tool that allows you to conduct an investigation into your traces with infinite cardinality. It relies on facets to filter and scope the query, read more in the [Trace Analytics overview][6].
+
+7) Choose the service you’ve been working on from the service facet list, choose Error from the status facet and select `customer_id` (or any other metadata you added to your spans) from the group by field.
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.gif" alt="" responsive="true" style="width:90%;">}}
 
-7) Remove the Error option from the search, change the `count *` measure to `Duration` and change the graph type to `Top List`. You can now see the customers that have the slowest average requests. **Note**: If you’d like to make sure your customers never pass a certain threshold of performance, you can [export this query to a monitor][4], alternatively, you can export this query to a dashboard and keep an eye over it over time.
+8) Remove the Error option from the search, change the `count *` measure to `Duration` and change the graph type to `Top List`. You can now see the customers that have the slowest average requests. **Note**: If you’d like to make sure your customers never pass a certain threshold of performance, you can [export this query to a monitor][7], alternatively, you can save this visualization to a dashboard and keep an eye over it over time.
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_7.gif" alt="" responsive="true" style="width:90%;">}}
+
+Finally, you can also see all the traces relevant to your query by clicking the visualization and selecting `View traces`.
+
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_9.gif" alt="" responsive="true" style="width:90%;">}}
 
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
- [1]: https://docs.datadoghq.com/tracing/visualization/#resources
-[2]: https://app.datadoghq.com/apm/search/analytics
-[3]: https://docs.datadoghq.com/tracing/trace_search_and_analytics/analytics
-[4]: https://docs.datadoghq.com/tracing/guide/alert_anomalies_p99_database
+[1]: https://docs.datadoghq.com/tracing/visualization/#resources
+[2]: https://app.datadoghq.com/apm/search
+[3]: https://docs.datadoghq.com/tracing/visualization/#trace
+[4]: https://docs.datadoghq.com/tracing/trace_search_and_analytics/search
+[5]: https://app.datadoghq.com/apm/search/analytics
+[6]: https://docs.datadoghq.com/tracing/trace_search_and_analytics/analytics
+[7]: https://docs.datadoghq.com/tracing/guide/alert_anomalies_p99_database
