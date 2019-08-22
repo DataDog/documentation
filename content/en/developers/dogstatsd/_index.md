@@ -24,7 +24,7 @@ The easiest way to get your custom application metrics into Datadog is to send t
 * Service Checks and Events
 * Tagging
 
-Any compliant StatsD client works with DogStastD and the Agent, but you won't be able to use the [Datadog-specific extensions](#dive-into-dogstatsd).
+Any compliant StatsD client works with DogStatsD and the Agent, but you won't be able to use the [Datadog-specific extensions](#dive-into-dogstatsd).
 
 **Note**: DogStatsD does NOT implement the following from StatsD:
 
@@ -37,7 +37,7 @@ DogStatsD accepts [custom metrics][4], [events][5], and [Service Checks][6] over
 
 Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't skip a beat.
 
-{{< img src="developers/metrics/dogstastd_metrics_submission/dogstatsd.png" alt="dogstatsd"  responsive="true" >}}
+{{< img src="developers/metrics/dogstatsd_metrics_submission/dogstatsd.png" alt="dogstatsd"  responsive="true" >}}
 
 As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called *the flush interval* (ten seconds, by default).
 
@@ -103,19 +103,19 @@ statsd = Datadog::Statsd.new
 DogStatsD and StatsD are broadly similar, however, DogStatsD implements some things differently, and contains advanced features which are specific to Datadog, including available data types, events, Service Checks, and tags:
 
 {{< whatsnext desc="">}}
-    {{< nextlink href="/developers/metrics/dogstastd_metrics_submission/" >}}Send metrics to Datadog with DogStatsD.{{< /nextlink >}}
-    {{< nextlink href="/developers/events/dogstastd_events_submission/" >}}Send Events to Datadog with DogStatsD.{{< /nextlink >}}
-    {{< nextlink href="/developers/service_checks/dogstastd_service_checks_submission/" >}}Send Service Checks to Datadog with DogStatsD.{{< /nextlink >}}
+    {{< nextlink href="/developers/metrics/dogstatsd_metrics_submission/" >}}Send metrics to Datadog with DogStatsD.{{< /nextlink >}}
+    {{< nextlink href="/developers/events/dogstatsd_events_submission/" >}}Send Events to Datadog with DogStatsD.{{< /nextlink >}}
+    {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Send Service Checks to Datadog with DogStatsD.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][11] section, which also explains how to send metrics and events straight from the command line.
 
 [1]: https://github.com/etsy/statsd
 [2]: https://github.com/DataDog/dd-agent/pull/2104
-[3]: /developers/metrics/dogstastd_metrics_submission
+[3]: /developers/metrics/dogstatsd_metrics_submission
 [4]: /developers/metrics/custom_metrics
-[5]: /developers/events/dogstastd_events_submission
-[6]: /developers/service_checks/dogstastd_service_checks_submission
+[5]: /developers/events/dogstatsd_events_submission
+[6]: /developers/service_checks/dogstatsd_service_checks_submission
 [7]: /agent/guide/agent-commands
 [8]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
 [9]: /developers/dogstatsd/unix_socket

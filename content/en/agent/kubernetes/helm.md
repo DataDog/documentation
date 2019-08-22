@@ -244,6 +244,6 @@ This command removes all Kubernetes components associated with the chart and del
 [5]: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
 [6]: https://github.com/helm/charts/tree/master/stable/datadog#configuration
 [7]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
-[8]: /developers/metrics/dogstastd_metrics_submission
+[8]: /developers/metrics/dogstatsd_metrics_submission
 [9]: /tracing/setup
 [10]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/entrypoint/89-copy-customfiles.sh

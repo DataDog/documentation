@@ -101,7 +101,7 @@ $http_request.responseText
     $app_key = "<YOUR_APP_KEY>"
     ```
 
-2. Set up your parameters according to [the description in the host API][7]:
+2. Set up your parameters according to [the description in the host API][3]:
 
     ```
     $host_name = "test.host"
@@ -151,9 +151,7 @@ $http_request.responseText
 
 
 [1]: https://app.datadoghq.com/account/settings#api
-[2]: /developers/metrics/dogstastd_metrics_submission
-[3]: /developers/faq/powershell-api-examples
+[2]: /developers/metrics/dogstatsd_metrics_submission
+[3]: /api/#hosts
 [4]: /api/#metrics
 [5]: https://github.com/ncracker/dd_metric
-[6]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[7]: /api/#hosts

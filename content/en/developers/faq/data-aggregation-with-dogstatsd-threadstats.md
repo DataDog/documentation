@@ -56,7 +56,7 @@ For instance, during the flush interval of 10 seconds (between 10:00:00 and 10:0
 
 [Find more information about Threadstats aggregation][4].
 
-[1]: /developers/metrics/dogstastd_metrics_submission
+[1]: /developers/metrics/dogstatsd_metrics_submission
 [2]: /developers/faq/is-there-an-alternative-to-dogstatsd-and-the-api-to-submit-metrics-threadstats
 [3]: /developers/metrics
 [4]: https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/metrics.py

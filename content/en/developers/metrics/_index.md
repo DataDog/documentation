@@ -51,7 +51,7 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/metrics/custom_metrics
-[2]: /developers/metrics/dogstastd_metrics_submission
+[2]: /developers/metrics/dogstatsd_metrics_submission
 [3]: /developers/integrations
 [4]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
 [5]: /developers/libraries
@@ -61,4 +61,3 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
 [9]: http://www.vistarmedia.com
 [10]: https://www.coursera.org
 [11]: http://www.bazaarvoice.com
-[12]: https://app.datadoghq.com/metric/summary

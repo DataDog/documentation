@@ -162,5 +162,5 @@ and as a result the "submission type" does not always map exactly to the Datadog
 
 [1]: /graphing/metrics/summary
 [2]: /api/?lang=python#post-timeseries-points
-[3]: /developers/metrics/dogstastd_metrics_submission
+[3]: /developers/metrics/dogstatsd_metrics_submission
 [4]: /developers/integrations

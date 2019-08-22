@@ -1070,9 +1070,9 @@ main:
     identifier: "dev_tools_metrics_agent"
     weight: 203
   - name: "DogStatsD Submission"
-    url: "developers/metrics/dogstastd_metrics_submission/"
+    url: "developers/metrics/dogstatsd_metrics_submission/"
     parent: "dev_tools_metrics"
-    identifier: "dev_tools_metrics_dogstastd"
+    identifier: "dev_tools_metrics_dogstatsd"
     weight: 204
   - name: "API Submission"
     url: "api/#post-timeseries-points"
@@ -1109,7 +1109,7 @@ main:
     weight: 3
 
   - name: "DogStatsD Submission"
-    url: "developers/events/dogstastd_events_submission/"
+    url: "developers/events/dogstatsd_events_submission/"
     parent: "dev_tools_events"
     identifier: "dev_tools_events_dogstatsd"
     weight: 301
@@ -1138,7 +1138,7 @@ main:
     weight: 4
 
   - name: "DogStatsD Submission"
-    url: "developers/service_checks/dogstastd_service_checks_submission/"
+    url: "developers/service_checks/dogstatsd_service_checks_submission/"
     parent: "dev_tools_service_check"
     identifier: "dev_tools_service_check_dogstatsd"
     weight: 401

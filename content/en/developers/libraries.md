@@ -135,7 +135,7 @@ A Winston Datadog [transport][58].
 
 If you've written a Datadog library and would like to add it to this page, send an email to [code@datadoghq.com][61].
 
-[1]: /developers/metrics/dogstastd_metrics_submission
+[1]: /developers/metrics/dogstatsd_metrics_submission
 [2]: /tracing
 [3]: /api
 [4]: https://github.com/brightcove/dog-watcher

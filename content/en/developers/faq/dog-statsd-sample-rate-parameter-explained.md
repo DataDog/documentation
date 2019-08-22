@@ -52,5 +52,5 @@ statsd.gauge('foo', 42,sample_rate=0.5)
 Note 1: Don't change the value you send, only adjust the sample_rate.
 Note 2: Using low sample rates decreases the precision of the collection. It's not recommended unless you have a lot of data sampled by your code.
 
-[1]: /developers/metrics/dogstastd_metrics_submission
+[1]: /developers/metrics/dogstatsd_metrics_submission
 [2]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py

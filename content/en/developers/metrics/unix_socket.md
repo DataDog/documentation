@@ -135,7 +135,7 @@ Adding UDS support to existing libraries can be easily achieved as the protocol 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/metrics/dogstastd_metrics_submission
+[1]: /developers/metrics/dogstatsd_metrics_submission
 [2]: /agent/guide/agent-commands
 [3]: https://github.com/DataDog/datadog-go
 [4]: https://github.com/DataDog/java-dogstatsd-client

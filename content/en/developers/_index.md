@@ -32,7 +32,7 @@ Thanks for stopping by-and welcome to the contributor community!
 
 [1]: /developers/integrations
 [2]: /developers/prometheus
-[3]: /developers/metrics/dogstastd_metrics_submission
+[3]: /developers/metrics/dogstatsd_metrics_submission
 [4]: /developers/integrations
 [5]: /developers/libraries
 [6]: /developers/metrics

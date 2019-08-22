@@ -217,7 +217,7 @@ If you're submitting metrics directly to the Datadog API *without* using [DogSta
 
 The full payload is approximately \~ 100 bytes. However, with the DogStatsD API, compression is applied and the typical payload is very small.
 
-[1]: /developers/metrics/dogstastd_metrics_submission
+[1]: /developers/metrics/dogstatsd_metrics_submission
 [2]: /agent
 [3]: /integrations
 [4]: /account_management/billing/custom_metrics/#standard-integrations

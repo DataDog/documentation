@@ -260,7 +260,7 @@ Create percentile aggregations within [Distribution Metrics][1] by applying a wh
 {{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Create Monitor Tags" responsive="true" style="width:80%;">}}
 
 [1]: /graphing/metrics/distributions
-[2]: /developers/metrics/custom_metrics/
+[2]: /developers/metrics/custom_metrics
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
@@ -405,7 +405,7 @@ The following tags are collected from AWS integrations. **Note**: Some tags only
 [1]: /tagging/#defining-tags
 [2]: /agent/docker/#environment-variables
 [3]: /api
-[4]: /developers/metrics/dogstastd_metrics_submission
+[4]: /developers/metrics/dogstatsd_metrics_submission
 [5]: /integrations
 [6]: /agent/faq/how-datadog-agent-determines-the-hostname
 [7]: /graphing/#arithmetic-between-two-metrics
@@ -415,7 +415,7 @@ The following tags are collected from AWS integrations. **Note**: Some tags only
 [11]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
 [12]: /tracing/advanced/setting_primary_tags_to_scope
 [13]: /libraries
-[14]: /developers/metrics/dogstastd_metrics_submission/#host-tag-key
+[14]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
 [15]: /integrations/amazon_api_gateway
 [16]: /integrations/amazon_auto_scaling
 [17]: /integrations/amazon_billing
