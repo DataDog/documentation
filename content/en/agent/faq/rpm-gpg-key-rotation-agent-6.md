@@ -1,23 +1,22 @@
 ---
 title: RPM GPG key rotation for Agent 6 packages
 kind: faq
-private: false
 ---
 
 Starting with the 6.14.0 release, the RPM packages of the Agent are signed with a new GPG key.
 
 Hosts which are using our RPM packages located in our [yum repository][1] and want to install or upgrade the Agent 6.14.0 or later are affected by this change and need to trust this new key by importing the associated public key in their hosts' keyrings.
 
-The fingerprint of the associated public key is: `A4C0B90D7443CF6E4E8AA341F1068E14E09422B3`.
-
 Trying to install or upgrade the Agent package without trusting the new key will result in `NOKEY` errors when installing the package.
 
+The fingerprint of the associated public key is: `A4C0B90D7443CF6E4E8AA341F1068E14E09422B3`.
+
 If you're using the latest version of one of the following officially supported install methods:
-- the [Agent installation page][2],
-- the `datadog` [chef cookbook][3],
-- the `Datadog.datadog` [ansible role][4],
-- the `datadog_agent` [puppet module][5],
-- the `datadog` [saltstack formula][6],
+* the [Agent installation page][2],
+* the `datadog` [chef cookbook][3],
+* the `Datadog.datadog` [ansible role][4],
+* the `datadog_agent` [puppet module][5],
+* the `datadog` [saltstack formula][6],
 
 then your hosts will automatically trust the new key, and no further action needs to be done to be able to install Agent 6 packages signed with the new key.
 
