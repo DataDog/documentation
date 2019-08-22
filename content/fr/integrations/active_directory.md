@@ -53,4 +53,4 @@ Le check Active Directory n'inclut actuellement aucun check de service.
 
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/active_directory/conf.yaml.example
-[2]: /agent/guide/agent-commands/#agent-status-and-information
+[2]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#agent-status-and-information
