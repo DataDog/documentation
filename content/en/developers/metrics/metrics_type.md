@@ -19,7 +19,7 @@ further_reading:
 
 The "Datadog in-app type" affects how a given metric is interpreted in query results and graph visualizations across the application. This type is visible and can be changed on the [metric summary page][1]. Be aware that changing the metric type may render historical data nonsensical.
 
-In the Datadog web application there are five metric types (though one is deprecated):
+There are five metric types in the Datadog web application (though one is deprecated):
 
 * COUNT
 * COUNTER (deprecated)
@@ -31,46 +31,45 @@ A metric's type is stored as metrics metadata and is used to determine how a met
 
 ## Metric type definition.
 
-To better understand the different metrics types, what they represent and how to manipulate them within Datadog let's start with an example:
+To better understand the different metrics types, what they represent, and how to manipulate them within Datadog, let's start with an example:
 
-You have two web servers `web_1` and `web_2`, each one of them is dealing with HTTP requests over time.
+You have two web servers `web_1` and `web_2`. Each one of them deals with HTTP requests over time.
 
-They receive both:
+They both receive:
 
   * 1 request per second for 10 seconds
   * 2 requests per second for 10 seconds
   * 0 request for 10 seconds
 
-and so on and so fourth.
 
 {{< tabs >}}
 {{% tab "Count" %}}
 
-**Metrics typed with `Count` are used to count things over a period of time.**
+**Metrics of type `Count` are used to count things over a period of time.**
 
 For instance let's say the `number.of.requests` metrics is reported every 10 seconds to Datadog with the `count` type for `web_1`.
 
-The metric has then the following shape: 10, then 20 then 0
+The metric has then the following shape: 10, then 20, then 0.
 
-Each data point of this metrics represent the amount of request received during the 10 second interval.
+Each data point represents the number of requests received during the 10 second interval.
 
 {{% /tab %}}
 {{% tab "Gauge" %}}
 
-**Gauges measure the value of a particular thing over time. It's a snapshot of a value associated to a timestamp.**
+**Gauges measure the value of a particular thing over time. It's a snapshot of a value associated with a timestamp.**
 
 For instance let's say the `number.of.requests` metrics is reported every 10 seconds to Datadog with the `gauge` type for `web_1`.
 
-The metric has then the following shape: 10 , then 30 then 30.
+The metric has then the following shape: 10, then 30, then 30.
 
 {{% /tab %}}
 {{% tab "Rate" %}}
 
-**Rates represent the derivative of a metric, it's the value variation of a metric on a defined time interval.**
+**Rates represent the derivative of a metric: the value variation of a metric on a defined time interval.**
 
 For instance let's say the `number.of.requests` metrics is reported every 10 seconds to Datadog with the `gauge` type for `web_1`.
 
-The metric has then the following shape: 1 , then 2 then 0.
+The metric has then the following shape: 1, then 2, then 0.
 
 {{% /tab %}}
 
@@ -82,7 +81,7 @@ This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Data
 
 Distributions are a metric type that aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure. Distribution metrics are designed to instrument logical objects, like services, independently from the underlying hosts, and solve the problem created by Agent-level aggregation.
 
-Unlike the histogram metric type that aggregates on the Agent-side, distributions send all raw data collected during the flush interval and aggregations occur server-side. Because the underlying data structure has not been aggregated and represents raw data, distributions provide two major features:
+Unlike the histogram metric type that aggregates on the Agent-side, distributions send all raw data collected during the flush interval, and aggregations occur server-side. Because the underlying data structure has not been aggregated and represents raw data, distributions provide two major features:
 
 * Calculation of percentile aggregations
 * Customization of tagging

@@ -167,7 +167,7 @@ Suppose you drop the `city` tag from the gauge `temperature` metric.
 Now there are four unique tag value combinations that appear in the `temperature` data. Therefore, the total number of custom metrics from the `temperature` metric tagged with `state` and `region` is four.
 
 ### Counting custom metrics from distributions
-A distribution metric gathers all values across all hosts emitting metric values in ten second flush intervals. Distributions emit a number of custom metrics that is proportional to the number of custom metrics emitted from `gauges`. Distributions generate four timeseries for each unique tag value combination that appears in the data: `sum`, `count`, `min`, and `max` (`avg` is calculated from the sum/count).
+A distribution metric gathers all values across all hosts emitting metric values in ten-second flush intervals. Distributions emit a number of custom metrics that is proportional to the number of custom metrics emitted from `gauges`. Distributions generate four timeseries for each unique tag value combination that appears in the data: `sum`, `count`, `min`, and `max` (`avg` is calculated from the sum/count).
 
 Suppose you are interested in measuring the maximum `age` metric in the state of New York. `age` is submitted to Datadog as a distribution metric tagged with `city` and `state` :
 
@@ -190,7 +190,7 @@ Suppose you are interested in measuring the *median* `age` in the state of New Y
 | Rochester, NY | 23,33,55,41,36,12,66 | 266 | 7 | 12 | 66 | 38 | 23 | 55 | 66 | 66 | 66 |
 | New York, NY | 18,26,31,29,40,23,36 | 203 | 7 | 18 | 40 | 29 | 29 | 36 | 40 | 40 | 40 |
 
-Percentiles are NOT reaggregatable -- you can't reaggregate the same way maximum ages were above. The median age in New York is not equal to the `median`(`median`(Rochester, NY), `median`(New York, NY)).
+Percentiles are NOT reaggregatable—you can't reaggregate the same way maximum ages were above. The median age in New York is not equal to the `median`(`median`(Rochester, NY), `median`(New York, NY)).
 
 Therefore, Datadog needs to precalculate five timeseries (`p50`,`p75`,`p90`,`p95`,`p99`) for each potentially queryable tag value combination. In the New York example, you have the following potentially queryable tag value combinations:
  * Rochester, (`null` state)

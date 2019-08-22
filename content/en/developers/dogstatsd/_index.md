@@ -63,7 +63,7 @@ There are [DogStatsD client libraries][10] for many languages and environments. 
 {{< tabs >}}
 {{% tab "Python" %}}
 
-First install the Datadog python DogStatsD library:
+First install the DogStatsD library:
 
 ```shell
 $ pip install datadog
@@ -79,7 +79,7 @@ from datadog import statsd
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-First install the Datadog ruby DogStatsD library:
+First install the DogStatsD library:
 
 ```shell
 $ gem install dogstatsd-ruby
