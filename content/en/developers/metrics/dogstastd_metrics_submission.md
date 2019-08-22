@@ -371,7 +371,7 @@ Learn more about the [Rates in the Metrics documentation][3].
 
 ## Tagging
 
-Add tags to any metric, event, or service check you send to DogStatsD. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
+Add tags to any metric you send to DogStatsD. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
 
 ```python
 
@@ -383,8 +383,6 @@ def algorithm_one():
 def algorithm_two():
     # Do fancy things (maybe faster?) here ...
 ```
-
-Note that tagging is a [Datadog-specific extension][2] to StatsD.
 
 ### Host tag key
 

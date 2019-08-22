@@ -24,50 +24,41 @@ The easiest way to get your custom application metrics into Datadog is to send t
 * Service Checks and Events
 * Tagging
 
-Any compliant StatsD client will work, but you won't be able to use the [Datadog-specific extensions](#dive-into-dogstatsd).
+Any compliant StatsD client works with DogStastD and the Agent, but you won't be able to use the [Datadog-specific extensions](#dive-into-dogstatsd).
 
 **Note**: DogStatsD does NOT implement the following from StatsD:
 
-* Gauge deltas (see [this issue][2])
+* Gauge deltas (see [Gauge delta support #2104][2] Github issue)
 * Timers as a native metric type (though it [does support them via histograms][3])
 
 ## How it works
 
-DogStatsD accepts [custom metrics][4], events, and service Checks over UDP and periodically aggregates and forwards them to Datadog.
+DogStatsD accepts [custom metrics][4], [events][5], and [Service Checks][6] over UDP and periodically aggregates and forwards them to Datadog.
+
 Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't skip a beat.
 
 {{< img src="developers/metrics/dogstastd_metrics_submission/dogstatsd.png" alt="dogstatsd"  responsive="true" >}}
 
-As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called the flush interval. Consider the following example, wherein DogStatsD is instructed to increment a counter each time a given database query is called:
-
-```python
-def query_my_database():
-    dog.increment('database.query.count')
-    # Run the query ...
-```
-
-If this function executes one hundred times during a flush interval (ten seconds, by default), it sends DogStatsD one hundred UDP packets that say "increment the counter `database.query.count`". DogStatsD aggregates these points into a single metric value (100, in this case) and sends it to Datadog where it is stored and available for graphing alongside the rest of your metrics.
+As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called *the flush interval* (ten seconds, by default).
 
 ## Setup
-
 ### Agent
 
 First, edit your `datadog.yaml` file to uncomment the following lines:
+
 ```
 use_dogstatsd: true
-
-...
-
+(...)
 dogstatsd_port: 8125
 ```
 
-Then [restart your Agent][5].
+Then [restart your Agent][7].
 
-By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][6], and restart the client. You can also configure DogStatsD to use a [Unix Domain Socket][7].
+By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][8], and restart the Agent. You can also configure DogStatsD to use a [Unix Domain Socket][9].
 
 ### Code
 
-There are [DogStatsD client libraries][8] for many languages and environments. You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
+There are [DogStatsD client libraries][10] for many languages and environments. You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -109,16 +100,24 @@ statsd = Datadog::Statsd.new
 
 ## Dive into DogStatsD
 
-DogStatsD and StatsD are broadly similar, however, DogStatsD implements some things differently, and contains advanced features which are specific to Datadog. See the [data types and tags][9] section to learn more about the Datadog-specific extensions to DogStatsD, including available data types, events, service Checks, and tags.
+DogStatsD and StatsD are broadly similar, however, DogStatsD implements some things differently, and contains advanced features which are specific to Datadog, including available data types, events, Service Checks, and tags:
 
-If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][10] section, which also explains how to send metrics and events straight from the command line.
-[1]: 
-[2]: 
-[3]: 
-[4]: 
-[5]: 
-[6]: 
-[7]: 
-[8]: 
-[9]: 
-[10]: 
+{{< whatsnext desc="">}}
+    {{< nextlink href="/developers/metrics/dogstastd_metrics_submission/" >}}Send metrics to Datadog with DogStatsD.{{< /nextlink >}}
+    {{< nextlink href="/developers/events/dogstastd_events_submission/" >}}Send Events to Datadog with DogStatsD.{{< /nextlink >}}
+    {{< nextlink href="/developers/service_checks/dogstastd_service_checks_submission/" >}}Send Service Checks to Datadog with DogStatsD.{{< /nextlink >}}
+{{< /whatsnext >}}
+
+If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][11] section, which also explains how to send metrics and events straight from the command line.
+
+[1]: https://github.com/etsy/statsd
+[2]: https://github.com/DataDog/dd-agent/pull/2104
+[3]: /developers/metrics/dogstastd_metrics_submission
+[4]: /developers/metrics/custom_metrics
+[5]: /developers/events/dogstastd_events_submission
+[6]: /developers/service_checks/dogstastd_service_checks_submission
+[7]: /agent/guide/agent-commands
+[8]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
+[9]: /developers/dogstatsd/unix_socket
+[10]: /libraries
+[11]: /developers/metrics/datagram_shell

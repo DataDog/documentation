@@ -27,4 +27,20 @@ def render_page():
   except RenderError as err:
     statsd.event('Page render error!', err.message, alert_type='error')
 ```
-[1]: 
+
+## Tagging
+
+Add tags to any event you send to DogStatsD. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
+
+```python
+
+@statsd.timed('algorithm.run_time', tags=['algorithm:one'])
+def algorithm_one():
+    # Do fancy things here ...
+
+@statsd.timed('algorithm.run_time', tags=['algorithm:two'])
+def algorithm_two():
+    # Do fancy things (maybe faster?) here ...
+```
+
+[1]: /graphing/event_stream

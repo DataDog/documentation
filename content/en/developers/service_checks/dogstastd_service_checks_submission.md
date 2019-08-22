@@ -43,4 +43,20 @@ statsd.service_check(name, status, opts)
 
 After a service check is reported, use it to trigger a [custom check monitor][1].
 
+## Tagging
+
+Add tags to any service check you send to DogStatsD. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
+
+```python
+
+@statsd.timed('algorithm.run_time', tags=['algorithm:one'])
+def algorithm_one():
+    # Do fancy things here ...
+
+@statsd.timed('algorithm.run_time', tags=['algorithm:two'])
+def algorithm_two():
+    # Do fancy things (maybe faster?) here ...
+```
+
+
 [1]: /monitors/monitor_types/custom_check
