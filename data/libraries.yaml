@@ -194,6 +194,10 @@ Classic:
       dogstatsd: true
       authors: Datadog
   - Scala:
+    - name: scala-opentracing
+      link: https://github.com/Colisweb/scala-opentracing
+      api: true
+      authors: Colisweb
     - name: datadog-scala
       link: https://github.com/gphat/datadog-scala
       api: true
