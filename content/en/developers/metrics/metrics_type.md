@@ -105,10 +105,9 @@ Percentile aggregations can be added in-app at the [Datadog Distribution Metric 
 
 ### Customization of tagging
 
-This functionality allows you to control tagging for metrics where host-level granularity is not necessary. See the [Distribution Metric page][2] to learn more about whitelist-based tagging control. **Note**: The exclusion of tags with `!` is not accepted with this feature.
+This functionality allows you to control tagging for metrics where host-level granularity is not necessary. See the [Distribution Metric page][1] to learn more about whitelist-based tagging control. **Note**: The exclusion of tags with `!` is not accepted with this feature.
 
-[1]: 
-[2]: 
+[1]: /graphing/metrics/distributions
 {{% /tab %}}
 {{% tab "Histogram" %}}
 
@@ -161,7 +160,8 @@ and as a result the "submission type" does not always map exactly to the Datadog
 | [Agent check][4]     | `self.monotonic_count(...)`          | monotonic_count   | count               |
 | [Agent check][4]     | `self.rate(...)`                     | rate              | gauge               |
 | [Agent check][4]     | `self.set(...)`                      | set               | gauge               |
-[1]: 
-[2]: 
-[3]: 
-[4]: 
+
+[1]: /graphing/metrics/summary
+[2]: /api/?lang=python#post-timeseries-points
+[3]: /developers/metrics/dogstastd_metrics_submission
+[4]: /developers/integrations

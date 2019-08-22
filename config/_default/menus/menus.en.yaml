@@ -1070,22 +1070,26 @@ main:
     url: "developers/metrics/dogstastd_metrics_submission/"
     parent: "dev_tools_metrics"
     weight: 204
+  - name: "API Submission"
+    url: "api/#post-timeseries-points"
+    parent: "dev_tools_metrics"
+    weight: 205
   - name: "Datagram and Shell Usage"
     url: "developers/metrics/datagram_shell/"
     parent: "dev_tools_metrics"
-    weight: 205
+    weight: 206
   - name: "Unix Domain Socket usage"
     url: "developers/metrics/unix_socket/"
     parent: "dev_tools_metrics"
-    weight: 206
+    weight: 207
   - name: "Metrics Type Modifiers"
     url: "developers/metrics/metric_type_modifiers/"
     parent: "dev_tools_metrics"
-    weight: 207
+    weight: 208
   - name: "Metrics Units"
     url: "developers/metrics/metrics_units/"
     parent: "dev_tools_metrics"
-    weight: 208
+    weight: 209
 
   ## DEVELOPERS - Events
 
@@ -1095,17 +1099,23 @@ main:
     identifier: "dev_tools_events"
     weight: 3
 
-  - name: "DogStatsD submission"
+  - name: "DogStatsD Submission"
     url: "developers/events/dogstastd_events_submission/"
     parent: "dev_tools_events"
     identifier: "dev_tools_events_dogstatsd"
     weight: 301
 
-  - name: "Mail submission"
+  - name: "Mail Submission"
     url: "developers/events/email_events_submission/"
     parent: "dev_tools_events"
     identifier: "dev_tools_events_mail"
     weight: 302
+
+  - name: "API Submission"
+    url: "/api/#post-an-event"
+    parent: "dev_tools_events"
+    identifier: "dev_tools_events_api"
+    weight: 303
 
   ## DEVELOPERS - Service Checks
 
@@ -1115,10 +1125,15 @@ main:
     identifier: "dev_tools_service_check"
     weight: 4
 
-  - name: "DogStatsD submission"
-    url: "developers/service_checks/dogstasd_service_checks_submission/"
+  - name: "DogStatsD Submission"
+    url: "developers/service_checks/dogstastd_service_checks_submission/"
     parent: "dev_tools_service_check"
     weight: 401
+
+  - name: "API Submission"
+    url: "api/#service-checks"
+    parent: "dev_tools_service_check"
+    weight: 402
 
   - name: "Libraries"
     url: "developers/libraries/"
