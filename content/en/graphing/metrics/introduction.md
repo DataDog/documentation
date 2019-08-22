@@ -59,7 +59,7 @@ When you look at the data separated by host, `net.bytes_rcvd` is submitted at sl
 
 ### Space aggregation
 
-To combine the two time series, the data must be time-synced. One of the following methods is used:
+To combine the two time series, the data must be time-synced. Datadog uses one of the following methods:
 
   1. If no time aggregation is applied, the data points must be interpolated. A common timestamp must be decided, then the value for each time series is estimated at that time.
 
