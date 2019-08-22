@@ -1,5 +1,5 @@
 ---
-title: Visualizing your APM data
+title: APM Concepts & Walkthrough
 kind: documentation
 aliases:
   - /tracing/terminology/
@@ -22,79 +22,132 @@ further_reading:
   text: "Understand how to read a Datadog Trace"
 ---
 
-APM collects metrics on your app's performance at four levels of granularity: _services_, _resources_, _traces_, and _spans_ level.
+The APM UI provides many tools to troubleshoot application performance and correlate it throughout the product - making it easy to find and resolve anything slow or broken in highly distributed systems.
+
+| Concept               | Description             |
+|-----------------------|-------------------------|
+| Service               | Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints for the purposes of scaling instances.                                                            |
+| Resource              | In APM, a Service corresponds to a group of Resources that serve a particular domain of a customer application. Resources could typically be an instrumented web endpoint, database query, or background job   |
+| Trace                 | A trace is used to track the time spent by an application processing a single request and the status of this request, each trace consists of one or more spans.                                                          |
+| Span                  | Datadog APM will automatically collect trace metrics that can be used to identify and alert on hits, errors or latency and are tagged by the host receiving traces along with the service or resource.                                                                                                   |
+| Trace metrics         | Datadog APM will automatically collect trace metrics that can be used to identify and alert on hits, errors or latency and are tagged by the host receiving traces along with the service or resource.                                                                                                   |
+| Trace Search & Analytics                 | Trace Search & Analytics is used to filter [APM Events] by user-defined tags such as customer_id, error_type, or app_name or infrastructure tags to help troubleshoot and filter your requests.            |
+| APM Event                 | Building block of Trace Search & Analytics and represent 100% throughput             |
+| Tagging Spans                | Tag spans in the form of key-value pairs to isolate in the Trace View or slice/dice on in Trace Search & Analytics.            |
 
 ## Services
 
-**A service is a set of processes that do the same job.**
-For instance, a simple web application may consist of two services:
+After [instrumenting your application][1], the [Services List][2] will be your main landing page to get started with APM data. 
 
-* A single `webapp` service and a single `database` service.
+{{< img src="tracing/visualization/service_list.png" alt="service list" responsive="true">}}
 
-While a more complex environment may break it out into 6 services:
+Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints for the purposes of scaling instances. For example, a group of URL endpoints may be grouped together under an API service. Another example may be a group of DB queries that are grouped together within one database service. Yet another example may be a group of periodic jobs configured in the crond service. In the screenshot below - in this microservice distributed system for an e-commerce site builder, we have a `web-store`, `ad-server`, `payment-db`, `auth-service` all represented as services in APM.
 
-* 3 separate services: `webapp`, `admin`, and `query`.
-* 3 separate external service:  `master-db`,  `replica-db`, and `yelp-api`.
+{{< img src="tracing/visualization/service_map.png" alt="service map" responsive="true">}} 
 
-APM automatically assigns names to your services; however you can also name them explicitly. See instructions for: [Go][1], [Java][2], [Python][3], [Ruby][4].
+All services can be found in the [Service List][2] and visually represented on the [Service Map][3]. Each Service has its own [Service Page][4] where [trace metrics](#trace-metrics) like throughput, latency and error rates can be viewed and inspected. You can use these metrics for the service and create dashboard widgets, create monitors and see the performance of every resource such as a web endpoint or database query belonging to the service.
 
-Service names:
+{{< img src="tracing/visualization/service_page.gif" alt="service page" responsive="true">}} 
 
-* **Must be lowercase, alphanumeric characters**.
-* **Cannot have more than 50 characters**.
-* **Cannot contain spaces** (spaces are replaced with underscores).
-* must adhere to [metric naming rules][5].
-
-**Note**: Services must have a type attached, APM automatically assigns services one of four types: web, database, cache, custom.
-
-You can also [alert][6] on any service level metric. Read more about monitoring services in APM on the [service list][7] and [service dashboard][8] pages.
+<div class="alert alert-info">
+Don’t see the http endpoints you were expecting on the Service Page? In APM endpoints are connected to a service by more than the service name - it is also done via the span.name of the entry-point span of the trace. For example, on the web-store service above we’re viewing endpoints where `web.request` is the entry-point span. More info on this [here][12].
+</div>
 
 ## Resources
 
-**A Resource is a particular action for a service**.
+In APM, a Service corresponds to a group of Resources that serve a particular domain of a customer application. Resources could typically be an instrumented web endpoint, database query, or background job. For a web service, these resources can be dynamic web endpoints that are grouped by a static span name -  `web.request`. In a database service, these would be database queries with the span name `db.query`. For example the `web-store` service has automatically instrumented resources - web endpoints - which handle checkouts, updating_carts, add_item, etc. Each resource has its own [Resource Page][5] with [trace metrics](#trace-metrics) scoped to the specific endpoint. Trace metrics can be used like any other Datadog metric - they are exportable to a dashboard or can be used to create monitors. The Resource Page will also show the span summary widget with an aggregate view of [spans](#spans) for all [traces](#trace), latency distribution of requests, and then traces which show requests made to this endpoint.
 
-* **For a web application**: some examples might be a canonical URL, such as `/user/home` or a handler function like `web.user.home` (often referred to as "routes" in MVC frameworks).
-* **For a SQL database**: a resource is the query itself, such as `SELECT * FROM users WHERE id = ?`.
+{{< img src="tracing/visualization/resource_page.gif" alt="resource page" responsive="true">}} 
 
-Resources should be grouped together under a canonical name, like `/user/home` rather than have `/user/home?id=100` and `/user/home?id=200` as separate resources. APM automatically assigns names to your resources; however you can also name them explicitly. See instructions for: [Go][9], [Java][2], [Python][10], [Ruby][11].
+## Trace
 
-These resources can be found after clicking on a particular [service][8].
+A trace is used to track the time spent by an application processing a single request and the status of this request, each trace consists of one or more spans. During the lifetime of the request, we can see any distributed calls across services as a [trace-id will be injected/extracted through HTTP headers][6], along with [automatically instrumented libraries][1] and any [manual instrumentation][7] using open-source tools like [OpenTracing][8] in the flamegraph view. In the Trace View page - each trace collects information that allows it to be connected to other parts of the platform, including [connecting logs to traces][9], [adding tags to spans][10], and [collecting runtime metrics][11].
 
-Resource names:
+{{< img src="tracing/visualization/trace_view.png" alt="trace view" responsive="true">}} 
 
-* **Must be lowercase, alphanumeric characters**
-* **Cannot exceed 5000 bytes**
+## Spans
 
-[Alert][12] on any resource level metric. Read more about monitoring resources in APM on the [resource dashboard][13] page.
+A span represents a logical unit of work in the system for a given time period. Each span consists of a `span.name`, start time, duration, and [span tags][#span-tags]. For example, a span can describe the time spent on a distributed call on a separate machine, or the time spent in a small component within a larger request. Spans can be nested within each other, and in those instances will have a parent-child relationship. 
 
-### Trace
+For the example below, the span `web.request` is the entry-point span of the trace. This means the web-store service page is displaying resources that consist of traces with an entry-point span named `rack.request.` We can also see the tags that were added application side such as `merchant.name`, `merchant.tier`, etc. These user-defined tags can be used to search & analyze APM data in [Trace Search & Analytics][13].
 
-**A trace is used to track the time spent by an application processing a single operation, each trace consists of one or more spans.**
+{{< img src="tracing/visualization/span_with_metadata.png" alt="span" responsive="true">}} 
 
-For example, a trace can be used to track the entire time spent processing a complicated web request. Even though the request may require multiple resources and machines to handle the request, all of these function calls and sub-requests would be encapsulated within a single trace.
+## Trace Metrics
 
-### Spans
+Datadog APM will automatically collect trace metrics that can be used to identify and alert on hits, errors or latency and are tagged by the host receiving traces along with the service or resource. As an example, after instrumenting a web service we can see the trace metrics that are being collected for the entry-point span `web.request` in the Metric Summary. Trace metrics are retained for 15 months - similar to any other [Datadog metric]. 
 
-**A span represents a logical unit of work in the system.**
+{{< img src="tracing/visualization/trace_metrics.gif" alt="trace metrics" responsive="true">}} 
 
-Spans are associated with a [service][8] and optionally a [resource][13]. Each span consists of a start time, a duration, and optional tags. For example, a span can describe the time spent on a distributed call on a separate machine, or the time spent in a small component within a larger operation. Spans can be nested within each other, and in those instances will have a parent-child relationship.
+{{< tabs >}}
 
-{{< img src="getting_started/trace_span_image.png" alt="Trace span image" responsive="true" style="width:80%;">}}
+{{% tab "Dashboard" %}}
+
+### Dashboard
+
+Trace metrics can be exported to a dashboard directly from the Service or Resource page, and can also be queried directly in an existing dashboard.
+
+{{< img src="tracing/visualization/trace_metric_dashboard.gif" alt="trace metrics dashboard" responsive="true">}} 
+
+{{% /tab %}}
+
+{{% tab "Monitoring" %}}
+
+### Monitoring
+
+Trace metrics can be used in a monitor like any other datadog metric - APM monitors can be set up on the [service page] with a set of suggested monitors to get started, or on the [create monitors page].
+
+{{< img src="tracing/visualization/trace_metric_monitor.gif" alt="trace metrics monitor" responsive="true">}} 
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+
+## Trace Search & Analytics
+
+Trace Search & Analytics is used to filter [APM Events] by user-defined tags such as customer_id, error_type, or app_name or infrastructure tags to help troubleshoot and filter your requests. It allows deep exploration of the web requests flowing through your service along with being able to search, graph, and monitor on 100% throughput of hits, errors, and latency. This feature can be enabled with [automatic configuration][14].
+
+{{< vimeo 27748711 >}}
+
+### APM Event
+
+After enabling Trace Search & Analytics, the tracing client will analyze an entry-point span for web services by default, with the ability to enable [additional instrumentation] in your application. In this example `web-store` service, after setting `DD_TRACE_ANALYTICS_ENABLED=true` now all `rack.request` spans will be analyzed and are available to use in Trace Search & Analytics. We can then search, graph, and monitor based on the metadata included in these APM Events along with viewing any traces that are available for this request. For this example, you can graph the top 10 merchants highest latency in the 99th percentile. `merchant_name` is a user defined tag that was applied to the span in the application.
+
+{{< img src="tracing/visualization/analyzed_span.gif" alt="analyzed span" responsive="true">}} 
+
+
+## Tagging Spans
+
+You can tag spans in the form of key-value pairs to isolate in the Trace View or slice/dice on in Trace Search & Analytics. Tags can be either added to a single span or globally to all spans. On this request `merchant.store_name`, `merchant.tier`, etc. have been added as tags to the span.
+
+{{< img src="tracing/visualization/span_tag" alt="span tag" responsive="true">}} 
+
+To get started adding tags to span in your application our guide is [here][15].
+
+After a tag has been added to a span, to search and query on the tag in Trace Search & Analytics, click on it and add it as a [facet][16].
+
+{{< img src="tracing/trace_search_and_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:50%;">}}
+
+Once this is done, the value of this tag is stored for all new traces and can be used in the search bar, the Facet Panel, and in the Trace graph query.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer/#service
-[2]: /tracing/setup/java/#configuration
-[3]: http://pypi.datadoghq.com/trace/docs/index.html#getting-started
-[4]: http://www.rubydoc.info/gems/ddtrace
-[5]: /developers/metrics
-[6]: /monitors/monitor_types/apm
-[7]: /tracing/visualization/services_list
-[8]: /tracing/visualization/service
-[9]: /tracing/setup/go
-[10]: /tracing/setup/python
-[11]: /tracing/setup/ruby
-[12]: /tracing/faq/how-to-create-a-monitor-over-every-resource-apm
-[13]: /tracing/visualization/resource
+[1]: /tracing/setup/
+[2]: /tracing/visualization/services_list
+[3]: /tracing/visualization/services_map/
+[4]: /tracing/visualization/service
+[5]: /tracing/visualization/resource
+[6]: /tracing/advanced/opentracing/?tab=java#create-a-distributed-trace-using-manual-instrumentation-with-opentracing
+[7]: /tracing/advanced/manual_instrumentation
+[8]: /tracing/advanced/opentracing
+[9]: /tracing/advanced/connect_logs_and_traces/
+[10]: /tracing/advanced/adding_metadata_to_spans
+[11]: /tracing/advanced/runtime_metrics/
+[12]: /tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
+[13]: /tracing/trace_search_and_analytics
+[14]: /tracing/trace_search_and_analytics/#automatic-configuration
+[15]: /tracing/advanced/adding_metadata_to_spans/
+[16]: /tracing/trace_search_and_analytics/search/#facets
