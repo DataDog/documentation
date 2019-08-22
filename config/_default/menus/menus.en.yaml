@@ -1040,81 +1040,76 @@ main:
     identifier: "dev_tools"
     weight: 110000
 
-  ## DEVELOPERS - DogStatsD
-
-  - name: "DogStatsD"
-    url: "developers/dogstatsd/"
-    parent: "dev_tools"
-    identifier: "dev_tools_dogstatsd"
-    weight: 1
-  - name: "Data Types and Tags"
-    url: "developers/dogstatsd/data_types/"
-    parent: "dev_tools_dogstatsd"
-    weight: 101
-  - name: "Datagram and Shell Usage"
-    url: "developers/dogstatsd/datagram_shell/"
-    parent: "dev_tools_dogstatsd"
-    weight: 102
-  - name: "Unix Domain Socket usage"
-    url: "developers/dogstatsd/unix_socket/"
-    parent: "dev_tools_dogstatsd"
-    weight: 103
-
   ## DEVELOPERS - Metrics
 
   - name: "Metrics"
     url: "developers/metrics/"
     parent: "dev_tools"
     identifier: "dev_tools_metrics"
-    weight: 2
+    weight: 1
+
   - name: "Custom Metrics"
     url: "developers/metrics/custom_metrics/"
     parent: "dev_tools_metrics"
-    weight: 201
-  - name: "Counts"
-    url: "developers/metrics/counts/"
+    weight: 101
+  - name: "Metrics Types"
+    url: "developers/metrics/metrics_type/"
     parent: "dev_tools_metrics"
-    weight: 202
-  - name: "Distributions"
-    url: "developers/metrics/distributions/"
+    weight: 102
+  - name: "Agent Check Submission"
+    url: "developers/metrics/agent_metrics_submission/"
     parent: "dev_tools_metrics"
-    weight: 203
-  - name: "Gauges"
-    url: "developers/metrics/gauges/"
+    weight: 103
+  - name: "DogStatsD Submission"
+    url: "developers/metrics/data_types/"
     parent: "dev_tools_metrics"
-    weight: 204
-  - name: "Histograms"
-    url: "developers/metrics/histograms/"
+    weight: 104
+  - name: "Datagram and Shell Usage"
+    url: "developers/metrics/datagram_shell/"
     parent: "dev_tools_metrics"
-    weight: 205
-  - name: "Rates"
-    url: "developers/metrics/rates/"
+    weight: 105
+  - name: "Unix Domain Socket usage"
+    url: "developers/metrics/unix_socket/"
     parent: "dev_tools_metrics"
-    weight: 206
-  - name: "Sets"
-    url: "developers/metrics/sets/"
+    weight: 106
+  - name: "Metrics Type Modifiers"
+    url: "developers/metrics/metric_type_modifiers/"
     parent: "dev_tools_metrics"
-    weight: 207
+    weight: 107
+  - name: "Metrics Units"
+    url: "developers/metrics/metrics_units/"
+    parent: "dev_tools_metrics"
+    weight: 108
+
+  - name: "Events"
+    url: "developers/events/"
+    parent: "dev_tools"
+    weight: 2
+
+  - name: "Service Checks"
+    url: "developers/service_checks/"
+    parent: "dev_tools"
+    weight: 3
 
   - name: "Libraries"
     url: "developers/libraries/"
     parent: "dev_tools"
-    weight: 3
+    weight: 4
 
   - name: "Community Office Hours"
     url: "developers/office_hours/"
     parent: "dev_tools"
-    weight: 4
+    weight: 5
 
   - name: "Write a Custom Check"
     url: "developers/write_agent_check/"
     parent: "dev_tools"
-    weight: 5
+    weight: 6
 
   - name: "Write a Prometheus Check"
     url: "developers/prometheus/"
     parent: "dev_tools"
-    weight: 6
+    weight: 7
 
   ## DEVELOPERS -  Integrations
 
