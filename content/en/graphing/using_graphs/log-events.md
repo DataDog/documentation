@@ -44,9 +44,9 @@ The **query** delineates events considered in an Analytics, which are eventually
 
 A **facet** is an event tag or event attribute whose values are treated as identifying values (e.g. name of services, users ID, http status codes, etc.). Facets can be used for aggregations **groups**. 
 
-A **measure** is an event attributes whose values are treated as numeric values (e.g. execution time of a process, amount of a payment, memory size of a request, etc.). 
+A **measure** is an event attribute whose values are treated as numeric values (e.g. execution time of a process, amount of a payment, memory size of a request, etc.). Numeric values are aggregated for events in each group according to either sum, min, max, mean and percentile operators. 
 
-Numeric values are aggregated for events in each group according to either sum, min, max, mean and percentile operators. Besides measures, analytics display the count of logs in a group or the count of unique values for a specific facet in a group.
+By extension, log count and unique count of facet values are considered as measures as well - though statistic aggregation are not available for them since they would hardly make sense for them.
 
 Most facets and measures are out-of-the-box. Custom facets and measures can be configured based on whichever meaningful tag or attributes.
 
@@ -61,51 +61,45 @@ In **Analytics** pages, the different visualisation are available along with the
 In **Dashboards** and **Notebooks**, visualisations are available as widgets (one widget for one visualisation).
 
 
+### Toplists
+
+Toplist are helpful to visualise the top values of a **facet** according to a **measure** which makes sense for this facet. The whole timerange is considered for the measure.
+
+The following Top List shows the evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
+
+{{< img src="graphing/log-event_viz_toplist.png" alt="top list example" responsive="true" style="width:90%;">}} 
+
+
 ### Timeseries
 
-
-Visualize the evolution of a single **measure** (or a **facet** unique count of values) over a selected time frame, and (optionally) split by an available **facet**.
-
-You have additional display options for timeseries:
-
-* whether you display lines, bars, or areas
-* data stacking option, by value, or by percentage
-* color set
+Timeseries are helpful to visualize the evolution of a single **measure** over a selected time frame. Optionally, timeseries can be split by the top or bottom values of **facet** (the whole timerange is considered to decide which are the top of bottom values).
 
 {{< img src="graphing/log-event_viz_timeseries.png" alt="top list example" responsive="true" style="width:90%;">}} 
 
-Noteworthy facts about stacking:
+Timeseries come with specific display options:
 
-* Stacking is available only for query requests with a split.
-* Stacking options are for bar and area displays only. Line displays are always overlapping.
-* When you use a toplist option that hides part of your data, stacking does not show the total overall; rather, it shows only the subtotal for the top/bottom series.
-* Stacking may not make sense when you have non-unique values in the split facet.
-* Stacking may not make sense for some aggregration methods for measures.
+* the set of colours used in the display
+* whether the throughput is displayed lines, bars, or areas
+* (when split) by a facet how data are stacking option, by value, or by percentage. Noteworthy facts about stacking:
+   * When you use a toplist option that hides part of your data, stacking does not show the total overall; rather, it shows only the subtotal for the top/bottom series.
+   * Stacking options are for bar and area displays only. Line displays are always overlapping.
 
-The following timeseries Log Analytics shows:
-The evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
+The following timeseries Log Analytics shows the evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
 
 {{< img src="logs/explorer/analytics/timeserie_example.png" alt="timeserie example" responsive="true" style="width:90%;">}}
 
 
-### Toplists
-
-The following Top List Log Analytics shows:
-The evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
-
-{{< img src="logs/explorer/analytics/top_list_example.png" alt="top list example" responsive="true" style="width:90%;">}}
-
-{{< img src="graphing/log-event_viz_toplist.png" alt="top list example" responsive="true" style="width:90%;">}} 
-
 ### Table
 
-Visualize the top values from a **facet** according to a chosen **measure** (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update search query or drill through logs corresponding to either dimension.
+Table are helpful to visualize data across multiple **facets** and mutliple **measures**. 
 
-The following Table Log Analytics shows:
-The evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IP** and over the last 15 minutes.
+* When multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimensions.
+* When multiple measure, the top or bottom list is determined according to the first measure.
+* Subtotal may differ from the actual sum of values in a group since only a subset (top or bottom) is displayed. Besides, events with null or empty value for this dimension will not be displayed as a sub-group.
 
-{{< img src="logs/explorer/analytics/logs_table_example.png" alt="table example" responsive="true" style="width:90%;">}}
+Note that a table visualisation used for one single measure and one single dimension is nothing but a toplist, just with a different display.
 
+The following Table Log Analytics shows: The evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IP** and over the last 15 minutes.
 
 {{< img src="graphing/log-event_viz_table.png" alt="top list example" responsive="true" style="width:90%;">}} 
 
