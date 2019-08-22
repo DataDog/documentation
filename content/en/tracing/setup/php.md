@@ -21,6 +21,8 @@ further_reading:
 
 ## Installation and Getting Started
 
+<div class="alert alert-info">If you already have a Datadog account you can find step-by-step instructions in our in-app guides for <a href="https://app.datadoghq.com/apm/docs?architecture=host-based&language=php" target=_blank> host-based</a> and <a href="https://app.datadoghq.com/apm/docs?architecture=container-based&language=php" target=_blank>container-based</a> set ups.</div>
+
 For descriptions of terminology used in APM, take a look at the [official documentation][1].
 
 For details about open-source contributions to the PHP tracer, refer to the [contributing guide][2].

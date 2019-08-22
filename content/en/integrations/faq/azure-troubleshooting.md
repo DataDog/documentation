@@ -12,9 +12,7 @@ further_reading:
 
 1. Navigate to [portal.azure.com][1].
 2. In the left sidebar, select **Azure Active Directory**.
-3. Under **Properties**, your tenant name is the **Directory ID** value:
-
-    {{< img src="integrations/azure/Azure_tenant_name.png" alt="Azure tenant name" responsive="true" popup="true" style="width:70%;" >}}
+3. Under **Properties**, your tenant name is the **Directory ID** value.
 
 Your tenant name is also available from the URL when using the [classic portal][2]. It is the text in between (**not including**) the `@` and `#` symbol:
 

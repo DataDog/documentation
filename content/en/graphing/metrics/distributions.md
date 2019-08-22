@@ -9,8 +9,8 @@ further_reading:
     tag: "Documentation"
     text: "Using Distributions in DogStatsD"
 ---
-<div class="alert alert-warning">	
-This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Datadog support</a> to enable distribution metrics for your account.	
+<div class="alert alert-warning">
+This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Datadog support</a> to enable distribution metrics for your account.
 </div>
 
 ## Overview
@@ -37,15 +37,16 @@ After electing to apply percentile aggregations on a distribution metric, these 
 
 ## Customize tagging
 
-Distributions provide functionality that allows you to control the tagging for metrics where host-level granularity does not make sense. 
+Distributions provide functionality that allows you to control the tagging for metrics where host-level granularity does not make sense.
 
-To customize tagging, hover over your metric in the table, and click on the pencil icon to edit. In the modal that pops up, select *Custom...*. There is a _whitelist_ of the tags you have defined in code by default. You can remove any of these tags or add any host-level tags back in. 
+To customize tagging, hover over your metric in the table, and click on the pencil icon to edit. In the modal that pops up, select *Custom...*. There is a _whitelist_ of the tags you have defined in code by default. You can remove any of these tags or add any host-level tags back in.
 
 **Note**: The exclusion of tags is not supported in the whitelist-based customization of tags. Adding tags starting with `!` is not accepted.
 
 {{< img src="graphing/metrics/distributions/distribution_metric.png" alt="Distribution metric" responsive="true" style="width:80%;">}}
 
 ## Counting distribution metrics
+
 Distribution metrics with percentile aggregations (`p50`, `p75`, `p90`, `p95`, `p99`) generate custom metrics or timeseries differently than gauges, counts, histograms, and distributions with nonpercentile aggregations (`sum`, `count`, `min`, `max`, `avg`). Because percentiles aren't reaggregatable, Datadog preserves five timeseries for every potentially queryable tag combination. This is different from the number of custom metrics generated from gauges, counts, histograms, or distributions with nonpercentile aggregations (dependent on the unique number of tag value combinations that appear in your data).
 
 For more information on counting custom metrics created from gauge, count, histogram, or distribution metrics with nonpercentile aggregations, refer to the [Custom Metrics][2] page.
