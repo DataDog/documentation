@@ -1061,7 +1061,7 @@ main:
     parent: "dev_tools_metrics"
     weight: 103
   - name: "DogStatsD Submission"
-    url: "developers/metrics/data_types/"
+    url: "developers/metrics/dogstastd_metrics_submission/"
     parent: "dev_tools_metrics"
     weight: 104
   - name: "Datagram and Shell Usage"
