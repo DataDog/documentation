@@ -21,7 +21,7 @@ further_reading:
   text: "DogStatsD source code"
 ---
 
-The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][111] protocol and adds a few Datadog-specific extensions:
+The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][1] protocol and adds a few Datadog-specific extensions:
 
 * Histogram metric type
 * Service Checks and Events
@@ -31,15 +31,15 @@ Any compliant StatsD client will work, but you won't be able to use the [Datadog
 
 **Note**: DogStatsD does NOT implement the following from StatsD:
 
-* Gauge deltas (see [this issue][112])
-* Timers as a native metric type (though it [does support them via histograms][113])
+* Gauge deltas (see [this issue][2])
+* Timers as a native metric type (though it [does support them via histograms][3])
 
 ## How it works
 
-DogStatsD accepts [custom metrics][114], events, and service Checks over UDP and periodically aggregates and forwards them to Datadog.
+DogStatsD accepts [custom metrics][4], events, and service Checks over UDP and periodically aggregates and forwards them to Datadog.
 Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't skip a beat.
 
-{{< img src="developers/dogstatsd/dogstatsd.png" alt="dogstatsd"  responsive="true" >}}
+{{< img src="developers/metrics/dogstastd_metrics_submission/dogstatsd.png" alt="dogstatsd"  responsive="true" >}}
 
 As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called the flush interval. Consider the following example, wherein DogStatsD is instructed to increment a counter each time a given database query is called:
 
@@ -65,13 +65,13 @@ use_dogstatsd: true
 dogstatsd_port: 8125
 ```
 
-Then [restart your Agent][115].
+Then [restart your Agent][5].
 
-By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][116], and restart the client. You can also configure DogStatsD to use a [Unix Domain Socket][117].
+By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][6], and restart the client. You can also configure DogStatsD to use a [Unix Domain Socket][7].
 
 ### Code
 
-There are [DogStatsD client libraries][118] for many languages and environments. You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
+There are [DogStatsD client libraries][8] for many languages and environments. You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -113,26 +113,16 @@ statsd = Datadog::Statsd.new
 
 ## Dive into DogStatsD
 
-DogStatsD and StatsD are broadly similar, however, DogStatsD implements some things differently, and contains advanced features which are specific to Datadog. See the [data types and tags][119] section to learn more about the Datadog-specific extensions to DogStatsD, including available data types, events, service Checks, and tags.
+DogStatsD and StatsD are broadly similar, however, DogStatsD implements some things differently, and contains advanced features which are specific to Datadog. See the [data types and tags][9] section to learn more about the Datadog-specific extensions to DogStatsD, including available data types, events, service Checks, and tags.
 
-If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][1110] section, which also explains how to send metrics and events straight from the command line.
+If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][10] section, which also explains how to send metrics and events straight from the command line.
 
-[111]: https://github.com/etsy/statsd
-[112]: https://github.com/DataDog/dd-agent/pull/2104
-[113]: /developers/metrics/dogstastd_metrics_submission/#timers
-[114]: /developers/metrics/custom_metrics
-[115]: /agent/guide/agent-commands
-[116]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
-[117]: /developers/metrics/unix_socket
-[118]: /libraries
-[119]: /developers/metrics/dogstastd_metrics_submission
-[1110]: /developers/metrics/datagram_shell
 
 ## Metrics submission
 
 While StatsD accepts only metrics, DogStatsD accepts all three of the major Datadog data types: metrics, events, and service checks. This section shows typical use cases for each type, and introduces tagging, which is specific to DogStatsD.
 
-Each example is in Python using the [official Datadog Python client][1], but each data type shown is supported similarly in [other DogStatsD client libraries][2].
+Each example is in Python using the [official Datadog Python client][11], but each data type shown is supported similarly in [other DogStatsD client libraries][12].
 
 Counters, gauges, and sets are familiar to StatsD users. Histograms are specific to DogStatsD. Timers, which exist in StatsD, are a sub-set of histograms in DogStatsD.
 
@@ -145,9 +135,10 @@ Counters, gauges, and sets are familiar to StatsD users. Histograms are specific
 | dog.increment(...) | Used to increment a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that StatsD flush period.</li></ul> |
 | dog.decrement(...) | Used to decrement a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that StatsD flush period.</li></ul> |
 
-Note: Since StatsD counters can show a decimal value within Datadog since they are normalized over the flush interval to report a per-second units. [Read more about Datadog metrics types](/developers/metrics).
+Note: Since StatsD counters can show a decimal value within Datadog since they are normalized over the flush interval to report a per-second units. [Read more about Datadog metrics types][1].
 
 
+[1]: /developers/metrics
 {{% /tab %}}
 {{% tab "Gauge" %}}
 
@@ -215,7 +206,7 @@ end
 
 With this one line of code, the data is available to graph in Datadog. Here's an example:
 
-{{< img src="developers/metrics/graph-guides-metrics-page-views.png" alt="graph guides metrics page views" responsive="true" >}}
+{{< img src="developers/metrics/dogstastd_metrics_submission/graph-guides-metrics-page-views.png" alt="graph guides metrics page views" responsive="true" >}}
 
 Note that StatsD counters are normalized over the flush interval to report per-second units. In the graph above, the marker is reporting 35.33 web page views per second at ~15:24. In contrast, if one person visited the web page each second, the graph would be a flat line at y = 1. To increment or measure values over time, see [gauges](#gauges).
 
@@ -297,8 +288,8 @@ end
 
 Learn more about the [Gauge type in the Metrics documentation][1].
 
-[1]: /developers/metrics/metrics_type
 
+[1]: /developers/metrics/metrics_type
 {{% /tab %}}
 {{% tab "Histogram" %}}
 
@@ -355,7 +346,7 @@ The above instrumentation produces the following metrics:
 | `database.query.time.max`          | maximum sampled value                   |
 | `database.query.time.95percentile` | 95th percentile sampled value           |
 
-{{< img src="developers/metrics/graph-guides-metrics-query-times.png" alt="graph guides metrics query times" responsive="true" >}}
+{{< img src="developers/metrics/dogstastd_metrics_submission/graph-guides-metrics-query-times.png" alt="graph guides metrics query times" responsive="true" >}}
 
 For this toy example, say a query time of 1 second is acceptable. The median query time (graphed in purple) is usually less than 100 milliseconds, which is great. But unfortunately, the 95th percentile (graphed in blue) has large spikes sometimes nearing three seconds, which is unacceptable. This means that most of queries are running just fine, but the worst ones are very bad. If the 95th percentile was close to the median, then you would know that almost all of the queries are performing just fine.
 
@@ -436,9 +427,9 @@ duration = time.time() - start_time
 statsd.distribution('http_request.time', duration,'env:dev')
 ```
 
-The above instrumentation calculates the following aggregations: sum, count, average, minimum, and maximum. For percentiles, refer to the [distributions page][2].
+The above instrumentation calculates the following aggregations: sum, count, average, minimum, and maximum. For percentiles, refer to the [distributions page][1].
 
-[2]: /graphing/metrics/distributions/#customize-tagging
+[1]: /graphing/metrics/distributions/#customize-tagging
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -479,11 +470,11 @@ correct the metric value, i.e. to estimate what it would have been without sampl
 
 **Sample rates only work with counter, histogram, and timer metrics.**
 
-Learn more about the [Rates in the Metrics documentation][3].
+Learn more about the [Rates in the Metrics documentation][13].
 
 ## Events
 
-DogStatsD can emit events to your [Datadog event stream][4]. For example, you may want to see errors and exceptions in Datadog:
+DogStatsD can emit events to your [Datadog event stream][14]. For example, you may want to see errors and exceptions in Datadog:
 
 ```python
 
@@ -526,7 +517,7 @@ opts = {
 statsd.service_check(name, status, opts)
 ```
 
-After a service check is reported, use it to trigger a [custom check monitor][5].
+After a service check is reported, use it to trigger a [custom check monitor][15].
 
 ## Tagging
 
@@ -543,7 +534,7 @@ def algorithm_two():
     # Do fancy things (maybe faster?) here ...
 ```
 
-Note that tagging is a [Datadog-specific extension][2] to StatsD.
+Note that tagging is a [Datadog-specific extension][12] to StatsD.
 
 ### Host tag key
 
@@ -551,15 +542,25 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 
 ### Distributions
 
-Because of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][6] page for more details.
+Because of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][16] page for more details.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: http://datadogpy.readthedocs.io/en/latest
-[2]: /libraries
-[3]: /developers/metrics/sets
-[4]: /graphing/event_stream
-[5]: /monitors/monitor_types/custom_check
-[6]: /graphing/metrics/distributions
+[1]: https://github.com/etsy/statsd
+[2]: https://github.com/DataDog/dd-agent/pull/2104
+[3]: /developers/metrics/dogstastd_metrics_submission/#timers
+[4]: /developers/metrics/custom_metrics
+[5]: /agent/guide/agent-commands
+[6]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
+[7]: /developers/metrics/unix_socket
+[8]: /libraries
+[9]: /developers/metrics/dogstastd_metrics_submission
+[10]: /developers/metrics/datagram_shell
+[11]: http://datadogpy.readthedocs.io/en/latest
+[12]: /libraries
+[13]: /developers/metrics/sets
+[14]: /graphing/event_stream
+[15]: /monitors/monitor_types/custom_check
+[16]: /graphing/metrics/distributions

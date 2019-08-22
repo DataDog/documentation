@@ -32,12 +32,12 @@ To eliminate ambiguity and help you make sense of your systems, the following un
 
 Units are displayed automatically on timeseries graphs, query value widgets, and toplists, as shown in the screenshot of the Redis dashboard below:
 
-{{< img src="developers/metrics/redis_dash_metrics_units.png" alt="Redis dash metric units" responsive="true" style="width:70%;">}}
+{{< img src="developers/metrics/metrics_units/redis_dash_metrics_units.png" alt="Redis dash metric units" responsive="true" style="width:70%;">}}
 
 On timeseries graphs, move your cursor over any graph to see the relevant units. The raw data is automatically converted to readable display units (fractions of a second to ms, millions of bytes per second to MiB/s, etc.):
 
-{{< img src="developers/metrics/postgres_commits.png" alt="postgres commits" responsive="true" style="width:70%;">}}
+{{< img src="developers/metrics/metrics_units/postgres_commits.png" alt="postgres commits" responsive="true" style="width:70%;">}}
 
 Units are also displayed at the bottom of timeboard graphs, and metric descriptions are available by selecting **Metrics Info** from the gear dropdown:
 
-{{< img src="developers/metrics/annotated_ops.png" alt="Annotated ops" responsive="true" style="width:70%;">}}
+{{< img src="developers/metrics/metrics_units/annotated_ops.png" alt="Annotated ops" responsive="true" style="width:70%;">}}
