@@ -170,10 +170,10 @@ By default, the Docker Agent collects metrics with the following core checks. To
 The Docker Agent sends events to Datadog when an Agent is started or restarted.
 
 ### Service checks
-**datadog.agent.up**:  
+**datadog.agent.up**:
 Returns `CRITICAL` if the Agent is unable to connect to Datadog, otherwise returns `OK`.
 
-**datadog.agent.check_status**:  
+**datadog.agent.check_status**:
 Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, otherwise returns `OK`.
 
 ## Integrations
@@ -225,7 +225,7 @@ The same can be done for the `/checks.d` folder. Any Python files in the `/check
 [9]: /graphing/infrastructure/process
 [10]: /graphing/infrastructure/livecontainers
 [11]: https://docs.datadoghq.com/developers/dogstatsd
-[12]: /developers/dogstatsd/unix_socket
+[12]: /developers/metrics/unix_socket
 [13]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [14]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
 [15]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go

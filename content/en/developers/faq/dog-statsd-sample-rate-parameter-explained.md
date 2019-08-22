@@ -43,14 +43,14 @@ Dividing the traffic by 2 using the Python StatsD library:
 ```python
 from datadog import statsd
 # half the increment is sent; the dd-agent compensates by multiplying by 2 the value it gets
-statsd.increment('my.metric_name',1,sample_rate=0.5) 
+statsd.increment('my.metric_name',1,sample_rate=0.5)
 
 # remember: for gauge metrics, half the values are sent, but no good "compensation" can be done on the dd-agent side, you just lose in granularity.
-statsd.gauge('foo', 42,sample_rate=0.5) 
+statsd.gauge('foo', 42,sample_rate=0.5)
 ```
 
 Note 1: Don't change the value you send, only adjust the sample_rate.
 Note 2: Using low sample rates decreases the precision of the collection. It's not recommended unless you have a lot of data sampled by your code.
 
-[1]: /developers/dogstatsd
+[1]: /developers/metrics/dogstastd_metrics_submission
 [2]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py

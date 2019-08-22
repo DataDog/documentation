@@ -1,0 +1,130 @@
+---
+title: Metrics Types
+kind: documentation
+further_reading:
+- link: "developers/dogstatsd"
+  tag: "Documentation"
+  text: "Learn more about DogStatsD"
+- link: "developers/libraries"
+  tag: "Documentation"
+  text: "Official and Community-contributed API and DogStatsD client libraries"
+---
+
+The "Datadog in-app type" affects how a given metric is interpreted in query results and graph visualizations across the application. This type is visible and can be changed on the [metric summary page][12]. Be aware that changing the metric type may render historical data nonsensical.
+
+In the Datadog web application there are five metric types (though one is deprecated):
+
+* COUNT
+* COUNTER (deprecated)
+* GAUGE
+* RATE
+* DISTRIBUTION
+
+A metric's type is stored as metrics metadata and is used to determine how a metric is interpreted throughout the application by determining default time aggregation function and `as_rate()`/`as_count()` behavior. The `as_count()` and `as_rate()` modifiers behave differently for different web application metric types.
+
+## Metric type definition.
+
+To better understand the different metrics types, what they represent and how to manipulate them within Datadog let's start with an example:
+
+You have two web servers `web_1` and `web_2`, each one of them is dealing with HTTP requests over time.
+
+They receive both:
+  * 1 request per second for 10 seconds
+  * 2 requests per second for 10 seconds
+  * 0 request for 10 seconds
+
+and so on and so fourth.
+
+{{< tabs >}}
+{{% tab "Count" %}}
+
+**Metrics typed with `Count` are used to count things over a period of time.**
+
+For instance let's say the `number.of.requests` metrics is reported every 10 seconds to Datadog with the `count` type for `web_1`.
+
+The metric has then the following shape: 10, then 20 then 0
+
+Each data point of this metrics represent the amount of request received during the 10 second interval.
+
+{{% /tab %}}
+{{% tab "Gauge" %}}
+
+Gauges measure the value of a particular thing over time. It's a snapshot of a value associated to a timestamp.
+
+For instance let's say the `number.of.requests` metrics is reported every 10 seconds to Datadog with the `gauge` type for `web_1`.
+
+The metric has then the following shape: 10 , then 30 then 30.
+
+{{% /tab %}}
+{{% tab "Rate" %}}
+
+Rates represent the derivative of a metric, it's the value variation of a metric on a defined time interval.
+
+For instance let's say the `number.of.requests` metrics is reported every 10 seconds to Datadog with the `gauge` type for `web_1`.
+
+The metric has then the following shape: 1 , then 2 then 0.
+
+{{% /tab %}}
+
+{{% tab "Distribution" %}}
+
+<div class="alert alert-warning">
+This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Datadog support</a> to enable distribution metrics for your account.
+</div>
+
+Distributions are a metric type that aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure. Distribution metrics are designed to instrument logical objects, like services, independently from the underlying hosts, and solve the problem created by Agent-level aggregation.
+
+Unlike the histogram metric type that aggregates on the Agent-side, distributions send all raw data collected during the flush interval and aggregations occur server-side. Because the underlying data structure has not been aggregated and represents raw data, distributions provide two major features:
+
+* Calculation of percentile aggregations
+* Customization of tagging
+
+For instance let's say the `request.response_time` metrics is reported to Datadog with the `distribution` type for `web_1` and `web_2`
+
+Say host `web_1` reports a metric with the values [1,1,1,2,2,2,3,3] and host `web_2` reports the same metric with the values [1,1,2] during a flush interval.
+
+Here, the p50 (median) for `web_1` is 2 and the p50 for `web_2` is 1.  Aggregating by the average value server-side would result in 1.5.
+
+In reality, the global p50 (median) is the median of the combined set: [1,1,1,1,1,2,2,2,2,3,3] which is 2. This is the statistically accurate value that can be returned by a distribution metric.
+
+### Calculation of percentile aggregations
+
+Like other metric types, such as `gauge` or `histogram`, the  `distribution` metric type has the following aggregations available: `count`, `min`, `max`, `sum`, `avg`. A distribution metric is initially tagged the same way as other metrics (with custom tags set in the code) and are resolved to any host tag based on the host that reported the metric.
+
+A distribution metric, however, has additional percentile aggregations available (`p50`, `p75`, `p90`, `p95`, `p99`). That is, for a distribution metric with percentile aggregations during a 10 second flush interval, the following aggregations are available: `count`, `sum`, `min`, `max`, `avg`, `p50`, `p75`, `p90`, `p95`, and `p99`.
+
+Percentile aggregations can be added in-app at the [Datadog Distribution Metric page][1].
+
+### Customization of tagging
+
+This functionality allows you to control tagging for metrics where host-level granularity is not necessary. See the [Distribution Metric page][2] to learn more about whitelist-based tagging control. **Note**: The exclusion of tags with `!` is not accepted with this feature.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Submission types and Datadog in-app types
+
+Datadog accepts metrics submitted from a variety of sources:
+
+* Datadog API
+* DogStatsD
+* Agent Check
+
+and as a result the "submission type" does not always map exactly to the Datadog in-app type:
+
+| Submission Source    | Submission Method (python)           | Submission Type   | Datadog In-App Type |
+| -------------------  | ------------------------------------ | ----------------- | ------------------- |
+| [API][13]            | `api.Metric.send(type="count", ...)` | count             | count               |
+| [API][13]            | `api.Metric.send(type="gauge", ...)` | gauge             | gauge               |
+| [API][13]            | `api.Metric.send(type="rate", ...)`  | rate              | rate                |
+| [DogStatsD][14]      | `dog.gauge(...)`                     | gauge             | gauge               |
+| [DogStatsD][14]      | `dog.histogram(...)`                 | histogram         | gauge, rate         |
+| [DogStatsD][14]      | `dog.increment(...)`                 | counter           | rate                |
+| [DogStatsD][14]      | `dog.set(...)`                       | set               | gauge               |
+| [Agent check][3]     | `self.count(...)`                    | count             | count               |
+| [Agent check][3]     | `self.gauge(...)`                    | gauge             | gauge               |
+| [Agent check][3]     | `self.histogram(...)`                | histogram         | gauge, rate         |
+| [Agent check][3]     | `self.increment(...)`                | counter <sup>deprecated</sup> | rate    |
+| [Agent check][3]     | `self.monotonic_count(...)`          | monotonic_count   | count               |
+| [Agent check][3]     | `self.rate(...)`                     | rate              | gauge               |
+| [Agent check][3]     | `self.set(...)`                      | set               | gauge               |

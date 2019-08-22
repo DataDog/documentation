@@ -64,7 +64,7 @@ See the [Tracing documentation][8] for more information.
 [2]: /api
 [3]: /developers/libraries
 [4]: https://www.datadoghq.com/blog/statsd
-[5]: /developers/dogstatsd
+[5]: /developers/metrics/dogstastd_metrics_submission
 [6]: /developers/integrations
 [7]: /developers/libraries/#apm-tracing-client-libraries
 [8]: /tracing

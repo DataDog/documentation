@@ -2,6 +2,8 @@
 title: Developer Tools
 kind: documentation
 description: Everything you need to know about developing for the Datadog platform, including config and code examples, and a ton of reference material.
+aliases:
+- /developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog
 ---
 
 This section includes technical details, code examples, and reference documentation to help get you up and running quickly.
@@ -30,7 +32,7 @@ Thanks for stopping by-and welcome to the contributor community!
 
 [1]: /developers/integrations
 [2]: /developers/prometheus
-[3]: /developers/dogstatsd
+[3]: /developers/metrics/dogstastd_metrics_submission
 [4]: /developers/integrations
 [5]: /developers/libraries
 [6]: /developers/metrics

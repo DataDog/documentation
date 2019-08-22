@@ -194,14 +194,14 @@ func InfoHandler(rw http.ResponseWriter, req *http.Request) {
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /developers/dogstatsd
+[1]: /developers/metrics/dogstastd_metrics_submission
 [2]: https://github.com/etsy/statsd
-[3]: /developers/dogstatsd/unix_socket
+[3]: /developers/metrics/unix_socket
 [4]: /agent/guide/agent-commands
 [5]: https://github.com/containernetworking/cni
 [6]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [7]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information
-[8]: /developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
+[8]: /developers/metrics/unix_socket/#using-origin-detection-for-container-tagging
 [9]: https://github.com/DataDog/datadog-go
 [10]: https://github.com/DataDog/php-datadogstatsd
 [11]: https://github.com/DataDog/datadogpy

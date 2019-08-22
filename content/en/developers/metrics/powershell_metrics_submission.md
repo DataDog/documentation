@@ -1,9 +1,9 @@
 ---
-title: Submitting Metrics via PowerShell
-kind: faq
+title: Metric submission via Powershell
+kind: documentation
 aliases:
   - /developers/faq/powershell-api-examples
-
+  - /developers/faq/submitting-metrics-via-powershell
 ---
 
 Datadog can collect metrics via the Agent as well as via the API independently of which language you decide to use. This page gives examples of both using PowerShell.
@@ -74,21 +74,21 @@ dogstatsd($metric)
 
 ## Examples
 
-Here are two examples translated in Powershell, using Msxml2.XMLHTTP, fully documented [on Mozilla's documentation page][2]: 
+Here are two examples translated in Powershell, using Msxml2.XMLHTTP, fully documented [on Mozilla's documentation page][2]:
 
 ### The code that makes the API call
 
 ```
-$url_base = "https://app.datadoghq.com/" 
+$url_base = "https://app.datadoghq.com/"
 $url = $url_base + $url_signature + "?api_key=$api_key" + "&" + "application_key=$app_key"
 
-$http_request = New-Object -ComObject Msxml2.XMLHTTP 
-$http_request.open($http_method, $url, $false) 
+$http_request = New-Object -ComObject Msxml2.XMLHTTP
+$http_request.open($http_method, $url, $false)
 $http_request.setRequestHeader("Content-type", "application/json")
 
-$http_request.setRequestHeader("Connection", "close") 
-$http_request.send($parameters) 
-$http_request.status 
+$http_request.setRequestHeader("Connection", "close")
+$http_request.send($parameters)
+$http_request.status
 $http_request.responseText
 ```
 
@@ -97,7 +97,7 @@ $http_request.responseText
 1. Replace the API/app key with yours:
 
     ```
-    $api_key = "<YOUR_API_KEY>" 
+    $api_key = "<YOUR_API_KEY>"
     $app_key = "<YOUR_APP_KEY>"
     ```
 
@@ -110,8 +110,8 @@ $http_request.responseText
 
     $url_signature = "api/v1/tags/hosts/$host_name"
 
-    $parameters = "{ 
-    `"tags`" : [`"environment:production`", `"role:webserver`"] 
+    $parameters = "{
+    `"tags`" : [`"environment:production`", `"role:webserver`"]
     }"
     ```
 
@@ -122,7 +122,7 @@ $http_request.responseText
 1. Replace the API/app key with yours:
 
     ```
-    $api_key = "<YOUR_API_KEY>" 
+    $api_key = "<YOUR_API_KEY>"
     $app_key = "<YOUR_APP_KEY>"
     ```
 
@@ -151,7 +151,7 @@ $http_request.responseText
 
 
 [1]: https://app.datadoghq.com/account/settings#api
-[2]: /developers/dogstatsd
+[2]: /developers/metrics/dogstastd_metrics_submission
 [3]: /developers/faq/powershell-api-examples
 [4]: /api/#metrics
 [5]: https://github.com/ncracker/dd_metric

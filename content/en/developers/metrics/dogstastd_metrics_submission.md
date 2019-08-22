@@ -1,7 +1,14 @@
 ---
-title: Data Types and Tags
+title: Metric submission with DogStatsD
 kind: documentation
 description: Overview of the features of DogStatsD, including data types and tagging.
+aliases:
+  - /guides/dogstatsd/
+  - /guides/DogStatsD/
+  - /developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd/
+  - /developers/dogstatsd/
+  - /developers/faq/reduce-submission-rate
+  - /developers/faq/why-is-my-counter-metric-showing-decimal-values
 further_reading:
 - link: "developers/dogstatsd"
   tag: "Documentation"
@@ -14,15 +21,177 @@ further_reading:
   text: "DogStatsD source code"
 ---
 
+The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][111] protocol and adds a few Datadog-specific extensions:
+
+* Histogram metric type
+* Service Checks and Events
+* Tagging
+
+Any compliant StatsD client will work, but you won't be able to use the [Datadog-specific extensions](#dive-into-dogstatsd).
+
+**Note**: DogStatsD does NOT implement the following from StatsD:
+
+* Gauge deltas (see [this issue][112])
+* Timers as a native metric type (though it [does support them via histograms][113])
+
+## How it works
+
+DogStatsD accepts [custom metrics][114], events, and service Checks over UDP and periodically aggregates and forwards them to Datadog.
+Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't skip a beat.
+
+{{< img src="developers/dogstatsd/dogstatsd.png" alt="dogstatsd"  responsive="true" >}}
+
+As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called the flush interval. Consider the following example, wherein DogStatsD is instructed to increment a counter each time a given database query is called:
+
+```python
+
+def query_my_database():
+    dog.increment('database.query.count')
+    # Run the query ...
+```
+
+If this function executes one hundred times during a flush interval (ten seconds, by default), it sends DogStatsD one hundred UDP packets that say "increment the counter `database.query.count`". DogStatsD aggregates these points into a single metric value (100, in this case) and sends it to Datadog where it is stored and available for graphing alongside the rest of your metrics.
+
+## Setup
+
+### Agent
+
+First, edit your `datadog.yaml` file to uncomment the following lines:
+```
+use_dogstatsd: true
+
+...
+
+dogstatsd_port: 8125
+```
+
+Then [restart your Agent][115].
+
+By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][116], and restart the client. You can also configure DogStatsD to use a [Unix Domain Socket][117].
+
+### Code
+
+There are [DogStatsD client libraries][118] for many languages and environments. You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+First install the Datadog python DogStatsD library:
+
+```shell
+$ pip install datadog
+```
+
+And import it, so it's ready to use:
+
+For Python:
+```python
+from datadog import statsd
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+First install the Datadog ruby DogStatsD library:
+
+```shell
+$ gem install dogstatsd-ruby
+```
+
+And import it, so it's ready to use:
+
+```ruby
+# Import the library
+require 'datadog/statsd'
+
+# Create a DogStatsD client instance.
+statsd = Datadog::Statsd.new
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Dive into DogStatsD
+
+DogStatsD and StatsD are broadly similar, however, DogStatsD implements some things differently, and contains advanced features which are specific to Datadog. See the [data types and tags][119] section to learn more about the Datadog-specific extensions to DogStatsD, including available data types, events, service Checks, and tags.
+
+If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][1110] section, which also explains how to send metrics and events straight from the command line.
+
+[111]: https://github.com/etsy/statsd
+[112]: https://github.com/DataDog/dd-agent/pull/2104
+[113]: /developers/metrics/dogstastd_metrics_submission/#timers
+[114]: /developers/metrics/custom_metrics
+[115]: /agent/guide/agent-commands
+[116]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
+[117]: /developers/metrics/unix_socket
+[118]: /libraries
+[119]: /developers/metrics/dogstastd_metrics_submission
+[1110]: /developers/metrics/datagram_shell
+
+## Metrics submission
+
 While StatsD accepts only metrics, DogStatsD accepts all three of the major Datadog data types: metrics, events, and service checks. This section shows typical use cases for each type, and introduces tagging, which is specific to DogStatsD.
 
 Each example is in Python using the [official Datadog Python client][1], but each data type shown is supported similarly in [other DogStatsD client libraries][2].
 
-## Metrics
-
 Counters, gauges, and sets are familiar to StatsD users. Histograms are specific to DogStatsD. Timers, which exist in StatsD, are a sub-set of histograms in DogStatsD.
 
-### Counters
+
+{{< tabs >}}
+{{% tab "Count" %}}
+
+| Method | Overview |
+| :----- | :------- |
+| dog.increment(...) | Used to increment a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that StatsD flush period.</li></ul> |
+| dog.decrement(...) | Used to decrement a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that StatsD flush period.</li></ul> |
+
+Note: Since StatsD counters can show a decimal value within Datadog since they are normalized over the flush interval to report a per-second units. [Read more about Datadog metrics types](/developers/metrics).
+
+
+{{% /tab %}}
+{{% tab "Gauge" %}}
+
+|Method | Overview |
+|:---|:---|
+|dog.gauge(...)|Stored as a GAUGE type in the Datadog web application. Each value in the stored timeseries is the last gauge value submitted for that metric during the StatsD flush period.|
+
+{{% /tab %}}
+
+{{% tab "Set" %}}
+
+|Method | Overview |
+|:---|:---|
+|dog.set(...)|Used count the number of unique elements in a group:<ul><li>Stored as GAUGE type in the Datadog web application. Each value in the stored timeseries is the count of unique values submitted to StatsD for a metric over that flush period.</li></ul>|
+
+{{% /tab %}}
+{{% tab "Rate" %}}
+
+TOTO
+
+{{% /tab %}}
+
+{{% tab "Histogram" %}}
+
+| Method             | Overview                                                                                  |
+| :---               | :---                                                                                      |
+| dog.histogram(...) | Used to track the statistical distribution of a set of values over a StatsD flush period. |
+
+{{% /tab %}}
+
+{{% tab "Distribution" %}}
+
+| Method | Overview |
+| :----- | :------- |
+| `dog.distribution(String metric.name, double value, String... tags)` | Track the statistical distribution of a set of values over one or more hosts. |
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+## Examples
+
+{{< tabs >}}
+{{% tab "Counter" %}}
 
 Counters track how many times something happens _per second_, such as page views. In this example, a metric called `web.page_views` is incremented each time the `render_page` function is called.
 
@@ -61,13 +230,16 @@ def upload_file(file):
     return 'File uploaded!'
 ```
 
-Note that for counters coming from another source that are ever-increasing and never reset (for example, the number of queries from MySQL over time), Datadog tracks the rate between flushed values. To get raw counts within Datadog, apply a function to your series such as _cumulative sum_ or _integral_. [Read more about Datadog functions][3].
+Note that for counters coming from another source that are ever-increasing and never reset (for example, the number of queries from MySQL over time), Datadog tracks the rate between flushed values. To get raw counts within Datadog, apply a function to your series such as _cumulative sum_ or _integral_. [Read more about Datadog functions][1].
 
-Learn more about the [Count type in the Metrics documentation][4].
+Learn more about the [Count type in the Metrics documentation][2].
 
-### Distributions
+[1]: /graphing/functions/#apply-functions-optional
+[2]: /developers/metrics/metrics_type
+{{% /tab %}}
+{{% tab "Distribution" %}}
 
-**This feature is in BETA. [Contact Datadog support][5] for details on how to have it enabled for your account.**
+**This feature is in BETA. [Contact Datadog support][1] for details on how to have it enabled for your account.**
 
 Distributions are like a global version of Histograms (see below). They calculate statistical distributions across multiple hosts, allowing you to compute global percentiles across your entire dataset. Global distributions are designed to instrument logical objects, such as services, independently from the underlying hosts.
 
@@ -99,7 +271,9 @@ This means most of queries are running just fine, but the worst ones are bad. If
 
 Distributions are not only for measuring times. They can be used to measure the distribution of *any* type of value, such as the size of uploaded files, or classroom test scores, for example.
 
-### Gauges
+[1]: /help
+{{% /tab %}}
+{{% tab "Gauge" %}}
 
 Gauges measure the value of a particular thing over time. For example, in order to track the amount of free memory on a machine, periodically sample that value as the metric `system.mem.free`:
 
@@ -121,9 +295,12 @@ while true do
 end
 ```
 
-Learn more about the [Gauge type in the Metrics documentation][6].
+Learn more about the [Gauge type in the Metrics documentation][1].
 
-### Histograms
+[1]: /developers/metrics/metrics_type
+
+{{% /tab %}}
+{{% tab "Histogram" %}}
 
 Histograms are specific to DogStatsD. They calculate the statistical distribution of any kind of value, such as the size of files uploaded to your site:
 
@@ -182,10 +359,11 @@ The above instrumentation produces the following metrics:
 
 For this toy example, say a query time of 1 second is acceptable. The median query time (graphed in purple) is usually less than 100 milliseconds, which is great. But unfortunately, the 95th percentile (graphed in blue) has large spikes sometimes nearing three seconds, which is unacceptable. This means that most of queries are running just fine, but the worst ones are very bad. If the 95th percentile was close to the median, then you would know that almost all of the queries are performing just fine.
 
-Learn more about the [Histogram type in the Metrics documentation][7].
+Learn more about the [Histogram type in the Metrics documentation][1].
 
-### Timers
-
+[1]: /developers/metrics/metrics_type
+{{% /tab %}}
+{{% tab "Timer" %}}
 Timers in DogStatsD are an implementation of Histograms (not to be confused with timers in the standard StatsD). They measure timing data _only_: for example, the amount of time a section of code takes to execute, or how long it takes to fully render a page. In Python, timers are created with a decorator:
 
 ```python
@@ -221,8 +399,8 @@ In either case, as DogStatsD receives the timer data, it calculates the statisti
 - `mywebsite.page_render.time.95percentile` - the 95th percentile render time
 
 Remember: under the hood, DogStatsD treats timers as histograms. Whether you use timers or histograms, you'll be sending the same data to Datadog.
-
-### Sets
+{{% /tab %}}
+{{% tab "Sets" %}}
 
 Sets are used to count the number of unique elements in a group, for example, the number of unique visitors to your site:
 
@@ -242,9 +420,52 @@ def login(self, user_id)
 end
 ```
 
-Learn more about the [Sets type in the Metrics documentation][8].
+Learn more about the [Sets type in the Metrics documentation][1].
+
+[1]: /developers/metrics/metrics_type
+{{% /tab %}}
+
+{{% tab "Distribution" %}}
+
+To measure the duration of an HTTP request, represented by the metric `http_request.time`, use the following python code snippet:
+
+```python
+start_time = time.time()
+results = requests.get('https://google.com')
+duration = time.time() - start_time
+statsd.distribution('http_request.time', duration,'env:dev')
+```
+
+The above instrumentation calculates the following aggregations: sum, count, average, minimum, and maximum. For percentiles, refer to the [distributions page][2].
+
+[2]: /graphing/metrics/distributions/#customize-tagging
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Metric option: sample rates
+
+--------------------
+Each metric point is sent over UDP to the StatsD server. This can incur considerable overhead for performance-intensive code paths. To work around this, StatsD supports sample rates, which allows sending a metric a fraction of the time and scaling up correctly on the server.
+
+The following code only sends points half of the time:
+
+For Python:
+
+```python
+while True:
+  do_something_intense()
+  statsd.increment('loop.count', sample_rate=0.5)
+```
+
+For Ruby:
+
+```ruby
+while true do
+  do_something_intense()
+  statsd.increment('loop.count', :sample_rate => 0.5)
+end
+```
+---------------
 
 Since the overhead of sending UDP packets can be too great for some performance intensive code paths, DogStatsD clients support sampling, i.e. only sending metrics a percentage of the time. The following code sends a histogram metric only about half of the time:
 
@@ -258,11 +479,11 @@ correct the metric value, i.e. to estimate what it would have been without sampl
 
 **Sample rates only work with counter, histogram, and timer metrics.**
 
-Learn more about the [Rates in the Metrics documentation][8].
+Learn more about the [Rates in the Metrics documentation][3].
 
 ## Events
 
-DogStatsD can emit events to your [Datadog event stream][9]. For example, you may want to see errors and exceptions in Datadog:
+DogStatsD can emit events to your [Datadog event stream][4]. For example, you may want to see errors and exceptions in Datadog:
 
 ```python
 
@@ -305,7 +526,7 @@ opts = {
 statsd.service_check(name, status, opts)
 ```
 
-After a service check is reported, use it to trigger a [custom check monitor][10].
+After a service check is reported, use it to trigger a [custom check monitor][5].
 
 ## Tagging
 
@@ -330,7 +551,7 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 
 ### Distributions
 
-Because of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][11] page for more details.
+Because of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][6] page for more details.
 
 ## Further reading
 
@@ -338,12 +559,7 @@ Because of the global nature of Distributions, extra tools for tagging are provi
 
 [1]: http://datadogpy.readthedocs.io/en/latest
 [2]: /libraries
-[3]: /graphing/miscellaneous/functions
-[4]: /developers/metrics/counts
-[5]: /help
-[6]: /developers/metrics/gauges
-[7]: /developers/metrics/histograms
-[8]: /developers/metrics/sets
-[9]: /graphing/event_stream
-[10]: /monitors/monitor_types/custom_check
-[11]: /graphing/metrics/distributions
+[3]: /developers/metrics/sets
+[4]: /graphing/event_stream
+[5]: /monitors/monitor_types/custom_check
+[6]: /graphing/metrics/distributions

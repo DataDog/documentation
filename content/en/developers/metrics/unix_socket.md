@@ -2,6 +2,8 @@
 title: DogStatsD over Unix Domain Socket
 kind: documentation
 description: "Usage documentation for DogStatsD over Unix Domain Sockets"
+aliases:
+- /developers/metrics/unix_socket/
 further_reading:
 - link: "developers/dogstatsd"
   tag: "Documentation"
@@ -133,7 +135,7 @@ Adding UDS support to existing libraries can be easily achieved as the protocol 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd/data_types
+[1]: /developers/metrics/dogstastd_metrics_submission
 [2]: /agent/guide/agent-commands
 [3]: https://github.com/DataDog/datadog-go
 [4]: https://github.com/DataDog/java-dogstatsd-client

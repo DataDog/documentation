@@ -1,9 +1,11 @@
 ---
-title: How Can I Submit A Custom Status Check?
-kind: faq
+title: Service Check
+kind: documentation
+aliases:
+- /developers/faq/how-can-i-submit-a-custom-status-check
 ---
 
-Custom status checks can be submitted either through the Datadog API, DogStatsD, or through a custom Agent check. All status checks must have one of the following status codes:
+Service checks can be submitted either through the Datadog API, DogStatsD, or through a custom Agent check. All status checks must have one of the following status codes:
 
 * '0': 'OK'
 
@@ -27,7 +29,7 @@ curl  -X POST -H "Content-type: application/json" \
       \"timestamp\": $currenttime,
       \"message\": \"App1 is up and running\",
       \"tags\":[\"environment:production\", \"role:webserver\"]
-}" \ 
+}" \
 'https://api.datadoghq.com/api/v1/check_run?api_key=<api_key>'
 ```
 
@@ -46,4 +48,3 @@ When submitting a status check through a custom Agent check, the predefined serv
 ```
 self.service_check('app.is_ok', 0, tags=['environment:production','role:webserver'], hostname='app1', message='App1 is up and running')
 ```
-
