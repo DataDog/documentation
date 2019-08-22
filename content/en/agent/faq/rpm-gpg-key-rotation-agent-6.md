@@ -12,10 +12,15 @@ Trying to install or upgrade the Agent package without trusting the new key will
 The fingerprint of the associated public key is: `A4C0B90D7443CF6E4E8AA341F1068E14E09422B3`.
 
 If you're using the latest version of one of the following officially supported install methods:
+
 * the [Agent installation page][2],
+
 * the `datadog` [chef cookbook][3],
+
 * the `Datadog.datadog` [ansible role][4],
+
 * the `datadog_agent` [puppet module][5],
+
 * the `datadog` [saltstack formula][6],
 
 then your hosts will automatically trust the new key, and no further action needs to be done to be able to install Agent 6 packages signed with the new key.
