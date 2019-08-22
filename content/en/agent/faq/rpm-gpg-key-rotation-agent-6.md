@@ -1,6 +1,7 @@
 ---
 title: RPM GPG key rotation for Agent 6 packages
 kind: faq
+private: false
 ---
 
 Starting with the 6.14.0 release, the RPM packages of the Agent are signed with a new GPG key.
