@@ -50,7 +50,7 @@ All services can be found in the [Service List][2] and visually represented on t
 {{< img src="tracing/visualization/service_page.gif" alt="service page" responsive="true">}} 
 
 <div class="alert alert-info">
-Don’t see the http endpoints you were expecting on the Service Page? In APM endpoints are connected to a service by more than the service name - it is also done via the span.name of the entry-point span of the trace. For example, on the web-store service above we’re viewing endpoints where `web.request` is the entry-point span. More info on this [here][12].
+Don’t see the http endpoints you were expecting on the Service Page? In APM endpoints are connected to a service by more than the service name - it is also done via the `span.name` of the entry-point span of the trace. For example, on the web-store service above we’re viewing endpoints where `web.request` is the entry-point span. More info on this <a href="/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/"> here.
 </div>
 
 ## Resources
@@ -67,15 +67,15 @@ A trace is used to track the time spent by an application processing a single re
 
 ## Spans
 
-A span represents a logical unit of work in the system for a given time period. Each span consists of a `span.name`, start time, duration, and [span tags][#span-tags]. For example, a span can describe the time spent on a distributed call on a separate machine, or the time spent in a small component within a larger request. Spans can be nested within each other, and in those instances will have a parent-child relationship. 
+A span represents a logical unit of work in the system for a given time period. Each span consists of a `span.name`, start time, duration, and [span tags](#tagging-spans). For example, a span can describe the time spent on a distributed call on a separate machine, or the time spent in a small component within a larger request. Spans can be nested within each other, and in those instances will have a parent-child relationship. 
 
-For the example below, the span `web.request` is the entry-point span of the trace. This means the web-store service page is displaying resources that consist of traces with an entry-point span named `rack.request.` We can also see the tags that were added application side such as `merchant.name`, `merchant.tier`, etc. These user-defined tags can be used to search & analyze APM data in [Trace Search & Analytics][13].
+For the example below, the span `rack.request` is the entry-point span of the trace. This means the web-store service page is displaying resources that consist of traces with an entry-point span named `rack.request.` We can also see the tags that were added application side such as `merchant.name`, `merchant.tier`, etc. These user-defined tags can be used to search & analyze APM data in [Trace Search & Analytics][13].
 
 {{< img src="tracing/visualization/span_with_metadata.png" alt="span" responsive="true">}} 
 
 ## Trace Metrics
 
-Datadog APM will automatically collect trace metrics that can be used to identify and alert on hits, errors or latency and are tagged by the host receiving traces along with the service or resource. As an example, after instrumenting a web service we can see the trace metrics that are being collected for the entry-point span `web.request` in the Metric Summary. Trace metrics are retained for 15 months - similar to any other [Datadog metric]. 
+Datadog APM will automatically collect trace metrics that can be used to identify and alert on hits, errors or latency and are tagged by the host receiving traces along with the service or resource. As an example, after instrumenting a web service we can see the trace metrics that are being collected for the entry-point span `web.request` in the Metric Summary. Trace metrics are retained for 15 months - similar to any other [Datadog metric][17]. 
 
 {{< img src="tracing/visualization/trace_metrics.gif" alt="trace metrics" responsive="true">}} 
 
@@ -95,7 +95,7 @@ Trace metrics can be exported to a dashboard directly from the Service or Resour
 
 ### Monitoring
 
-Trace metrics can be used in a monitor like any other datadog metric - APM monitors can be set up on the [service page] with a set of suggested monitors to get started, or on the [create monitors page].
+Trace metrics can be used in a monitor like any other datadog metric - APM monitors can be set up on the [Service Page][4] or [Resource Page][5] with a set of suggested monitors to get started, or on the [New Monitors page][18].
 
 {{< img src="tracing/visualization/trace_metric_monitor.gif" alt="trace metrics monitor" responsive="true">}} 
 
@@ -106,13 +106,13 @@ Trace metrics can be used in a monitor like any other datadog metric - APM monit
 
 ## Trace Search & Analytics
 
-Trace Search & Analytics is used to filter [APM Events] by user-defined tags such as customer_id, error_type, or app_name or infrastructure tags to help troubleshoot and filter your requests. It allows deep exploration of the web requests flowing through your service along with being able to search, graph, and monitor on 100% throughput of hits, errors, and latency. This feature can be enabled with [automatic configuration][14].
+Trace Search & Analytics is used to filter [APM Events](#apm-event) by user-defined tags such as `customer_id`, `error_type`, or `app_name` or infrastructure tags to help troubleshoot and filter your requests. It allows deep exploration of the web requests flowing through your service along with being able to search, graph, and monitor on 100% throughput of hits, errors, and latency. This feature can be enabled with [automatic configuration][14].
 
-{{< vimeo 27748711 >}}
+{{< vimeo 278748711 >}}
 
-### APM Event
+## APM Event
 
-After enabling Trace Search & Analytics, the tracing client will analyze an entry-point span for web services by default, with the ability to enable [additional instrumentation] in your application. In this example `web-store` service, after setting `DD_TRACE_ANALYTICS_ENABLED=true` now all `rack.request` spans will be analyzed and are available to use in Trace Search & Analytics. We can then search, graph, and monitor based on the metadata included in these APM Events along with viewing any traces that are available for this request. For this example, you can graph the top 10 merchants highest latency in the 99th percentile. `merchant_name` is a user defined tag that was applied to the span in the application.
+After enabling Trace Search & Analytics, the tracing client will analyze an entry-point span for web services by default, with the ability to [configure additional services][19] in your application. In this example `web-store` service, after setting `DD_TRACE_ANALYTICS_ENABLED=true` now all `rack.request` spans will be analyzed and are available to use in Trace Search & Analytics. We can then search, graph, and monitor based on the metadata included in these APM Events along with viewing any traces that are available for this request. For this example, you can graph the top 10 merchants highest latency in the 99th percentile. `merchant_name` is a user defined tag that was applied to the span in the application.
 
 {{< img src="tracing/visualization/analyzed_span.gif" alt="analyzed span" responsive="true">}} 
 
@@ -121,15 +121,14 @@ After enabling Trace Search & Analytics, the tracing client will analyze an entr
 
 You can tag spans in the form of key-value pairs to isolate in the Trace View or slice/dice on in Trace Search & Analytics. Tags can be either added to a single span or globally to all spans. On this request `merchant.store_name`, `merchant.tier`, etc. have been added as tags to the span.
 
-{{< img src="tracing/visualization/span_tag" alt="span tag" responsive="true">}} 
+{{< img src="tracing/visualization/span_tag.png" alt="span tag" responsive="true">}} 
 
-To get started adding tags to span in your application our guide is [here][15].
+To get started tagging spans in your application, our walkthrough is [here][15].
 
-After a tag has been added to a span, to search and query on the tag in Trace Search & Analytics, click on it and add it as a [facet][16].
+After a tag has been added to a span, to search and query on the tag in Trace Search & Analytics, click on it and add it as a [facet][16]. Once this is done, the value of this tag is stored for all new traces and can be used in the search bar, the Facet Panel, and in the Trace graph query.
 
 {{< img src="tracing/trace_search_and_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:50%;">}}
 
-Once this is done, the value of this tag is stored for all new traces and can be used in the search bar, the Facet Panel, and in the Trace graph query.
 
 ## Further Reading
 
@@ -151,3 +150,6 @@ Once this is done, the value of this tag is stored for all new traces and can be
 [14]: /tracing/trace_search_and_analytics/#automatic-configuration
 [15]: /tracing/advanced/adding_metadata_to_spans/
 [16]: /tracing/trace_search_and_analytics/search/#facets
+[17]: /developers/faq/data-collection-resolution-retention/
+[18]: https://app.datadoghq.com/monitors#/create
+[19]: /tracing/trace_search_and_analytics/#configure-additional-services-optional
