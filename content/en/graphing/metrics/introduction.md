@@ -41,7 +41,7 @@ When the selected time span is small, all data points are displayed. However, as
 
 ### Time aggregation
 
-Datadog uses time aggregation to solve the display problem. Data points are placed into buckets of time with preset start and end points. For example, when examining four hours, data points are combined into five minute buckets. Combining data points in this way is referred to as a **rollup**:
+Datadog uses time aggregation to solve the display problem. Data points are placed into buckets of time with preset start and end points. For example, when examining four hours, data points are combined into five-minute buckets. Combining data points in this way is referred to as a **rollup**:
 
 {{< img src="graphing/metrics/introduction/time-aggregation.png" alt="Time Aggregation" responsive="true">}}
 
