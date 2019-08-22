@@ -8,9 +8,8 @@ aliases:
 ## Events email
 
 When you need to integrate an application or system with Datadog, you have a few choices. The first is using one of the existing [Datadog integrations][1].
-This gets you access to a wide variety of metrics and events with minimal configuration effort on your part. If your application isn't one of the integrated applications, opt to create [a custom check using the Agent][2]. This requires  more effort and potentially more knowledge on how the application and Datadog work.
-You have the option to email events to Datadog if your an application does not have an existing [Datadog integration][1], and you don't want to create an [Agent check][2]. There are two different ways to use events with email, depending on whether the application offers you the ability to customize the format of the email body being sent.
-There is another option available if you aren't using an application that has an integration, and you don't want to create an Agent check. Rely on your application or system sending an email instead. There are two different ways to use events via email, depending on whether the application offers you the ability to customize the format of the email body being sent.
+This gets you access to a wide variety of metrics and events with minimal configuration effort on your part. If your application isn't one of the integrated applications, you can create [a custom check using the Agent][2]; however, this requires additional effort and knowledge regarding both the application and Datadog itself.
+If your application does not have an existing [Datadog integration][1], and you don't want to create an [Agent check][2], you can send events via email. There are two different ways to use events with email, depending on whether you can customize the format of the email body being sent.
 
 <div class="alert alert-info">
 <b>JSON-Formatted vs Plain Text:</b> <br>
@@ -44,14 +43,14 @@ In the source JSON-formatted email, the following fields are available to contro
 - Sender email address
 - All arguments from the [Datadog Events API][3]
 
-**Note**: If your JSON is not properly formatted or the email is sent without a subject, the event won't appear in your Event Stream.
+**Note**: If your JSON is not properly formatted, or the email is sent without a subject, the event won't appear in your Event Stream.
 
 #### Datadog Event
 
 {{< img src="developers/events/json-event.png" alt="json event" responsive="true" >}}
 
-In a JSON-formatted email, the subject of the email message is irrelevant. It is replaced by the title in the JSON in the body of the email. All data that appears in the event is defined in JSON in the body of the email. This JSON must be well-formed or the message is ignored. This means it should be formatted properly with commas separating key value pairs and it must be pure JSON.
-**Note**: If you are testing the email with a standard email client, the body may be converted to HTML as a convenience to the user. This causes the JSON to no longer be JSON and the email is ignored by Datadog.
+In a JSON-formatted email, the subject of the email message is irrelevant. It is replaced by the title in the JSON in the body of the email. All data that appears in the event is defined in JSON in the body of the email. Furthermore, the body must be pure, well-formed JSON—if not, the message is ignored.
+**Note**: If you are testing the email with a standard email client, the body **may** be converted to HTML as a convenience to the user. This will cause the body to no longer be pure JSON, resulting in an ignored email.
 
 
 ### Setting Up The Email Address
@@ -60,7 +59,7 @@ To set up the email, first log in to your [Datadog account][4]. From the **Integ
 
 ## Markdown events
 Datadog event text supports [Markdown][5].
-**Note**: Embedding HTML in markdown is not supported in Datadog.
+**Note**: Embedding HTML in Markdown is not supported.
 
 To use Markdown in the event text, start the text block with `%%% \n` and end the text block with `\n %%%`
 

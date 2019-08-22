@@ -20,8 +20,8 @@ further_reading:
 * Effect of `as_rate()`:
     * Sets the time aggregator to SUM
     * Normalizes the input timeseries values by the query (rollup) interval. For example [1,1,1,1].as_rate() for rollup interval of 20s produces [0.05, 0.05, 0.05, 0.05].
-* The raw metric itself defaults to the time aggregator AVG, so querying the metric without either `as_rate()` or `as_count()` becomes nonsensical when time aggregation is applied.
-* Note that on very small intervals when no time-aggregation occurs, there is no normalization, and you get the raw metric value counts.
+* The raw metric itself defaults to the time aggregator AVG, so it must be queried with either `as_rate()` or `as_count()` when time aggregation is applied.
+* Note that there is no normalization on very small intervals (when no time-aggregation occurs), thus the raw metric value counts are returned.
 
 {{% /tab %}}
 {{% tab "Gauge" %}}
@@ -38,8 +38,8 @@ further_reading:
     * Uses the metadata interval to convert from raw rates to counts. Does not work if no metadata interval exists for the metric.
 * Effect of `as_rate()`:
     * Sets the time aggregator to SUM.
-    * Uses the query interval and metadata interval to calculate the time-aggregated rate. Does not work if no metadata interval exists for the metric.
-* Known Issue: Agent check submitted RATE metrics have no interval metadata, so as_rate() and as_count() don't work.
+    * Uses the query interval and metadata interval to calculate the time-aggregated rate. Requires that the metadata interval exists for the metric.
+* Known Issue: Agent check submitted RATE metrics have no interval metadata, so `as_rate()` and `as_count()` don't work.
 
 {{% /tab %}}
 
@@ -64,9 +64,8 @@ While it is not normally required, it is possible to change a metric's _type_. F
   * Your submission code, calling `dogstatsd.increment('app.requests.served', N)` after N requests are served.
   * The Datadog in-app type via the metric summary page to `rate`.
 
-This causes data submitted before the type change for `app.requests.served`to behave incorrectly because it was stored in a format to be interpreted as an in-app `gauge` not a `rate`. Data submitted after steps 3a and 3b
-is interpreted properly.
+This causes data submitted before the type change for `app.requests.served` to behave incorrectly because it was stored in a format to be interpreted as an in-app `gauge` (not a `rate`). Data submitted after step 3 is interpreted properly.
 
 If you are not willing to lose the historical data submitted as a `gauge`, create a new metric name with the new type, leaving the type of `app.requests.served` unchanged.
 
-**Note**: For the AgentCheck, `self.increment` does not calculate the delta for a monotonically increasing counter, rather it reports the value passed in at the check run. To send the delta value on a monotonically increasing counter, use `self.monotonic_count`.
+**Note**: For the AgentCheck, `self.increment` does not calculate the delta for a monotonically increasing counter; instead, it reports the value passed in at the check run. To send the delta value on a monotonically increasing counter, use `self.monotonic_count`.

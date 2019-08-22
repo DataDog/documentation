@@ -32,7 +32,7 @@ Counters, gauges, and sets are familiar to StatsD users. Histograms are specific
 | dog.increment(...) | Used to increment a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that StatsD flush period.</li></ul> |
 | dog.decrement(...) | Used to decrement a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that StatsD flush period.</li></ul> |
 
-Note: Since StatsD counters can show a decimal value within Datadog since they are normalized over the flush interval to report a per-second units. [Read more about Datadog metrics types][1].
+Note: StatsD counters can show a decimal value within Datadog since they are normalized over the flush interval to report a per-second units. [Read more about Datadog metrics types][1].
 
 
 [1]: /developers/metrics
@@ -245,7 +245,7 @@ The above instrumentation produces the following metrics:
 
 {{< img src="developers/metrics/dogstastd_metrics_submission/graph-guides-metrics-query-times.png" alt="graph guides metrics query times" responsive="true" >}}
 
-For this toy example, say a query time of 1 second is acceptable. The median query time (graphed in purple) is usually less than 100 milliseconds, which is great. But unfortunately, the 95th percentile (graphed in blue) has large spikes sometimes nearing three seconds, which is unacceptable. This means that most of queries are running just fine, but the worst ones are very bad. If the 95th percentile was close to the median, then you would know that almost all of the queries are performing just fine.
+In this example, let's say that a query time of 1 second is acceptable. The median query time (graphed in purple) is usually less than 100 milliseconds, which is great. Unfortunately, the 95th percentile (graphed in blue) has large spikes sometimes nearing three seconds, which is unacceptable. This means that most of queries are running just fine, but the worst ones are very bad. If the 95th percentile was close to the median, then you would know that almost all of the queries are performing just fine.
 
 Learn more about the [Histogram type in the Metrics documentation][1].
 
@@ -315,7 +315,7 @@ Learn more about the [Sets type in the Metrics documentation][1].
 
 {{% tab "Distribution" %}}
 
-To measure the duration of an HTTP request, represented by the metric `http_request.time`, use the following python code snippet:
+Measure the duration of an HTTP request, as represented by the metric `http_request.time`:
 
 ```python
 start_time = time.time()
