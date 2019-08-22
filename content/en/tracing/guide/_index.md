@@ -10,7 +10,7 @@ disable_toc: true
     {{< nextlink href="tracing/guide/alert_anomalies_p99_database" >}}1. Alert on anomalies in database services p99 latency [3 mins]{{< /nextlink >}}
     {{< nextlink href="tracing/guide/week_over_week_p50_comparison" >}}2. Compare p50 latency week over week for a service [2 mins]{{< /nextlink >}}
     {{< nextlink href="tracing/guide/slowest_request_daily" >}}3. Debug the slowest trace on the slowest endpoint of a web service [3 mins]{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/add_span_md_and_graph_it" >}}4. Add span tags and slice and dice your application performanc [7 mins]{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/add_span_md_and_graph_it" >}}4. Add span tags and slice and dice your application performance [7 mins]{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 {{< whatsnext desc="Additional Guides:" >}}
