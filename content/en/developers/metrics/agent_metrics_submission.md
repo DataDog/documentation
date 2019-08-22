@@ -44,7 +44,6 @@ further_reading:
 {{% /tab %}}
 {{% tab "Rate" %}}
 
-
 * **`self.rate(...)`**: Submit the sampled raw value of your counter. Don't normalize the values to a rate, or calculate the deltas before submitting - the Agent does both for you:
   * Should only be called once during a check.
   * Throws away any value that is less than a previously submitted value. IE the counter should be monotonically increasing.
@@ -55,7 +54,6 @@ further_reading:
 {{% tab "Histogram" %}}
 
 * **`self.histogram(...)`**: used to track the statistical distribution of a set of values.
-
 
 {{% /tab %}}
 {{% tab "Set" %}}

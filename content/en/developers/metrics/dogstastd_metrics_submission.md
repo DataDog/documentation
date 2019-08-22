@@ -3,10 +3,6 @@ title: Metric submission with DogStatsD
 kind: documentation
 description: Overview of the features of DogStatsD, including data types and tagging.
 aliases:
-  - /guides/dogstatsd/
-  - /guides/DogStatsD/
-  - /developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd/
-  - /developers/dogstatsd/
   - /developers/faq/reduce-submission-rate
   - /developers/faq/why-is-my-counter-metric-showing-decimal-values
 further_reading:
@@ -21,108 +17,9 @@ further_reading:
   text: "DogStatsD source code"
 ---
 
-The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][1] protocol and adds a few Datadog-specific extensions:
-
-* Histogram metric type
-* Service Checks and Events
-* Tagging
-
-Any compliant StatsD client will work, but you won't be able to use the [Datadog-specific extensions](#dive-into-dogstatsd).
-
-**Note**: DogStatsD does NOT implement the following from StatsD:
-
-* Gauge deltas (see [this issue][2])
-* Timers as a native metric type (though it [does support them via histograms][3])
-
-## How it works
-
-DogStatsD accepts [custom metrics][4], events, and service Checks over UDP and periodically aggregates and forwards them to Datadog.
-Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't skip a beat.
-
-{{< img src="developers/metrics/dogstastd_metrics_submission/dogstatsd.png" alt="dogstatsd"  responsive="true" >}}
-
-As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called the flush interval. Consider the following example, wherein DogStatsD is instructed to increment a counter each time a given database query is called:
-
-```python
-
-def query_my_database():
-    dog.increment('database.query.count')
-    # Run the query ...
-```
-
-If this function executes one hundred times during a flush interval (ten seconds, by default), it sends DogStatsD one hundred UDP packets that say "increment the counter `database.query.count`". DogStatsD aggregates these points into a single metric value (100, in this case) and sends it to Datadog where it is stored and available for graphing alongside the rest of your metrics.
-
-## Setup
-
-### Agent
-
-First, edit your `datadog.yaml` file to uncomment the following lines:
-```
-use_dogstatsd: true
-
-...
-
-dogstatsd_port: 8125
-```
-
-Then [restart your Agent][5].
-
-By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][6], and restart the client. You can also configure DogStatsD to use a [Unix Domain Socket][7].
-
-### Code
-
-There are [DogStatsD client libraries][8] for many languages and environments. You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
-
-{{< tabs >}}
-{{% tab "Python" %}}
-
-First install the Datadog python DogStatsD library:
-
-```shell
-$ pip install datadog
-```
-
-And import it, so it's ready to use:
-
-For Python:
-```python
-from datadog import statsd
-```
-
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
-First install the Datadog ruby DogStatsD library:
-
-```shell
-$ gem install dogstatsd-ruby
-```
-
-And import it, so it's ready to use:
-
-```ruby
-# Import the library
-require 'datadog/statsd'
-
-# Create a DogStatsD client instance.
-statsd = Datadog::Statsd.new
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## Dive into DogStatsD
-
-DogStatsD and StatsD are broadly similar, however, DogStatsD implements some things differently, and contains advanced features which are specific to Datadog. See the [data types and tags][9] section to learn more about the Datadog-specific extensions to DogStatsD, including available data types, events, service Checks, and tags.
-
-If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][10] section, which also explains how to send metrics and events straight from the command line.
-
-
-## Metrics submission
-
 While StatsD accepts only metrics, DogStatsD accepts all three of the major Datadog data types: metrics, events, and service checks. This section shows typical use cases for each type, and introduces tagging, which is specific to DogStatsD.
 
-Each example is in Python using the [official Datadog Python client][11], but each data type shown is supported similarly in [other DogStatsD client libraries][12].
+Each example is in Python using the [official Datadog Python client][1], but each data type shown is supported similarly in [other DogStatsD client libraries][2].
 
 Counters, gauges, and sets are familiar to StatsD users. Histograms are specific to DogStatsD. Timers, which exist in StatsD, are a sub-set of histograms in DogStatsD.
 
@@ -470,54 +367,7 @@ correct the metric value, i.e. to estimate what it would have been without sampl
 
 **Sample rates only work with counter, histogram, and timer metrics.**
 
-Learn more about the [Rates in the Metrics documentation][13].
-
-## Events
-
-DogStatsD can emit events to your [Datadog event stream][14]. For example, you may want to see errors and exceptions in Datadog:
-
-```python
-
-from datadog import statsd
-
-def render_page():
-  try:
-    # Render the page...
-    # ..
-  except RenderError as err:
-    statsd.event('Page render error!', err.message, alert_type='error')
-```
-
-## Service Checks
-
-DogStatsD can send service checks to Datadog. Use checks to track the status of services your application depends on:
-
-For Python:
-```python
-
-from datadog.api.constants import CheckStatus
-
-# Report the status of an app.
-name = 'web.app1'
-status = CheckStatus.OK
-message = 'Response: 200 OK'
-
-statsd.service_check(check_name=name, status=status, message=message)
-```
-
-For Ruby:
-```ruby
-# Report the status of an app.
-name = 'web.app1'
-status = Datadog::Statsd::OK
-opts = {
-  'message' => 'Response: 200 OK'
-}
-
-statsd.service_check(name, status, opts)
-```
-
-After a service check is reported, use it to trigger a [custom check monitor][15].
+Learn more about the [Rates in the Metrics documentation][3].
 
 ## Tagging
 
@@ -534,7 +384,7 @@ def algorithm_two():
     # Do fancy things (maybe faster?) here ...
 ```
 
-Note that tagging is a [Datadog-specific extension][12] to StatsD.
+Note that tagging is a [Datadog-specific extension][2] to StatsD.
 
 ### Host tag key
 
@@ -542,25 +392,13 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 
 ### Distributions
 
-Because of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][16] page for more details.
+Because of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][4] page for more details.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/etsy/statsd
-[2]: https://github.com/DataDog/dd-agent/pull/2104
-[3]: /developers/metrics/dogstastd_metrics_submission/#timers
-[4]: /developers/metrics/custom_metrics
-[5]: /agent/guide/agent-commands
-[6]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
-[7]: /developers/metrics/unix_socket
-[8]: /libraries
-[9]: /developers/metrics/dogstastd_metrics_submission
-[10]: /developers/metrics/datagram_shell
-[11]: http://datadogpy.readthedocs.io/en/latest
-[12]: /libraries
-[13]: /developers/metrics/sets
-[14]: /graphing/event_stream
-[15]: /monitors/monitor_types/custom_check
-[16]: /graphing/metrics/distributions
+[1]: http://datadogpy.readthedocs.io/en/latest
+[2]: /libraries
+[3]: /developers/metrics/sets
+[4]: /graphing/metrics/distributions

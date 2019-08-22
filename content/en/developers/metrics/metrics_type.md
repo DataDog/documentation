@@ -1,6 +1,13 @@
 ---
 title: Metrics Types
 kind: documentation
+aliases:
+ - /developers/metrics/counts/
+ - /developers/metrics/distributions/
+ - /developers/metrics/gauges/
+ - /developers/metrics/histograms/
+ - /developers/metrics/rates/
+ - /developers/metrics/sets/
 further_reading:
 - link: "developers/dogstatsd"
   tag: "Documentation"
@@ -10,7 +17,7 @@ further_reading:
   text: "Official and Community-contributed API and DogStatsD client libraries"
 ---
 
-The "Datadog in-app type" affects how a given metric is interpreted in query results and graph visualizations across the application. This type is visible and can be changed on the [metric summary page][12]. Be aware that changing the metric type may render historical data nonsensical.
+The "Datadog in-app type" affects how a given metric is interpreted in query results and graph visualizations across the application. This type is visible and can be changed on the [metric summary page][1]. Be aware that changing the metric type may render historical data nonsensical.
 
 In the Datadog web application there are five metric types (though one is deprecated):
 
@@ -29,6 +36,7 @@ To better understand the different metrics types, what they represent and how to
 You have two web servers `web_1` and `web_2`, each one of them is dealing with HTTP requests over time.
 
 They receive both:
+
   * 1 request per second for 10 seconds
   * 2 requests per second for 10 seconds
   * 0 request for 10 seconds
@@ -49,7 +57,7 @@ Each data point of this metrics represent the amount of request received during 
 {{% /tab %}}
 {{% tab "Gauge" %}}
 
-Gauges measure the value of a particular thing over time. It's a snapshot of a value associated to a timestamp.
+**Gauges measure the value of a particular thing over time. It's a snapshot of a value associated to a timestamp.**
 
 For instance let's say the `number.of.requests` metrics is reported every 10 seconds to Datadog with the `gauge` type for `web_1`.
 
@@ -58,7 +66,7 @@ The metric has then the following shape: 10 , then 30 then 30.
 {{% /tab %}}
 {{% tab "Rate" %}}
 
-Rates represent the derivative of a metric, it's the value variation of a metric on a defined time interval.
+**Rates represent the derivative of a metric, it's the value variation of a metric on a defined time interval.**
 
 For instance let's say the `number.of.requests` metrics is reported every 10 seconds to Datadog with the `gauge` type for `web_1`.
 
@@ -99,6 +107,31 @@ Percentile aggregations can be added in-app at the [Datadog Distribution Metric 
 
 This functionality allows you to control tagging for metrics where host-level granularity is not necessary. See the [Distribution Metric page][2] to learn more about whitelist-based tagging control. **Note**: The exclusion of tags with `!` is not accepted with this feature.
 
+[1]: 
+[2]: 
+{{% /tab %}}
+{{% tab "Histogram" %}}
+
+Histograms measure the statistical distribution of a set of values.
+
+Datadog histogram and timing metrics are essentially the same thing and are extensions on the [StatsD timing metric][1]: they aggregate the values that are sent during the flush interval (usually defaults to 10 seconds).
+
+If you send 20 values for a metric `<METRIC_NAME>` during the flush interval, a Datadog histogram gives you the aggregation of those values for the flush interval, i.e.:
+
+* `<METRIC_NAME>.avg`: gives you the avg of those 20 values during the flush interval
+* `<METRIC_NAME>.count`: gives you the count of the values (20 in this case) sent during the flush interval.
+* `<METRIC_NAME>.median`: gives you the median of those values in the flush interval.
+* `<METRIC_NAME>.95percentile`: gives you the 95th percentile value in the flush interval.
+* `<METRIC_NAME>.max`: gives you the max value sent during the flush interval.
+* `<METRIC_NAME>.min`: gives you the min value sent during the flush interval.
+* `<METRIC_NAME>.sum`: gives you the sum of values sent during the flush interval.
+
+Configure which aggregation you want to send to Datadog with the `histogram_aggregates` parameter in your [datadog.yaml configuration file][2].
+By default only `max`, `median`, `avg`, and `count` aggregations are sent out to Datadog.
+
+
+[1]: https://github.com/etsy/statsd/blob/master/docs/metric_types.md#timing
+[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -114,17 +147,21 @@ and as a result the "submission type" does not always map exactly to the Datadog
 
 | Submission Source    | Submission Method (python)           | Submission Type   | Datadog In-App Type |
 | -------------------  | ------------------------------------ | ----------------- | ------------------- |
-| [API][13]            | `api.Metric.send(type="count", ...)` | count             | count               |
-| [API][13]            | `api.Metric.send(type="gauge", ...)` | gauge             | gauge               |
-| [API][13]            | `api.Metric.send(type="rate", ...)`  | rate              | rate                |
-| [DogStatsD][14]      | `dog.gauge(...)`                     | gauge             | gauge               |
-| [DogStatsD][14]      | `dog.histogram(...)`                 | histogram         | gauge, rate         |
-| [DogStatsD][14]      | `dog.increment(...)`                 | counter           | rate                |
-| [DogStatsD][14]      | `dog.set(...)`                       | set               | gauge               |
-| [Agent check][3]     | `self.count(...)`                    | count             | count               |
-| [Agent check][3]     | `self.gauge(...)`                    | gauge             | gauge               |
-| [Agent check][3]     | `self.histogram(...)`                | histogram         | gauge, rate         |
-| [Agent check][3]     | `self.increment(...)`                | counter <sup>deprecated</sup> | rate    |
-| [Agent check][3]     | `self.monotonic_count(...)`          | monotonic_count   | count               |
-| [Agent check][3]     | `self.rate(...)`                     | rate              | gauge               |
-| [Agent check][3]     | `self.set(...)`                      | set               | gauge               |
+| [API][2]            | `api.Metric.send(type="count", ...)` | count             | count               |
+| [API][2]            | `api.Metric.send(type="gauge", ...)` | gauge             | gauge               |
+| [API][2]            | `api.Metric.send(type="rate", ...)`  | rate              | rate                |
+| [DogStatsD][3]      | `dog.gauge(...)`                     | gauge             | gauge               |
+| [DogStatsD][3]      | `dog.histogram(...)`                 | histogram         | gauge, rate         |
+| [DogStatsD][3]      | `dog.increment(...)`                 | counter           | rate                |
+| [DogStatsD][3]      | `dog.set(...)`                       | set               | gauge               |
+| [Agent check][4]     | `self.count(...)`                    | count             | count               |
+| [Agent check][4]     | `self.gauge(...)`                    | gauge             | gauge               |
+| [Agent check][4]     | `self.histogram(...)`                | histogram         | gauge, rate         |
+| [Agent check][4]     | `self.increment(...)`                | counter <sup>deprecated</sup> | rate    |
+| [Agent check][4]     | `self.monotonic_count(...)`          | monotonic_count   | count               |
+| [Agent check][4]     | `self.rate(...)`                     | rate              | gauge               |
+| [Agent check][4]     | `self.set(...)`                      | set               | gauge               |
+[1]: 
+[2]: 
+[3]: 
+[4]: 
