@@ -111,7 +111,7 @@ You can run an estimate on the number of APM Events that would be generated from
 
 ## Span tags
 
-You can tag spans in the form of key-value pairs to correlate a request in the Trace View or to use to filter in Trace Search & Analytics. Tags can be either added to a single span or globally to all spans. On this request `merchant.store_name`, `merchant.tier`, etc. have been added as tags to the span.
+Tag spans in the form of key-value pairs to correlate a request in the *Trace View* or filter in *Trace Search & Analytics*. Tags can be added to a single span or globally to all spans. For the example below, the requests (`merchant.store_name`, `merchant.tier`, etc.) have been added as tags to the span.
 
 {{< img src="tracing/visualization/span_tag.png" alt="span tag" responsive="true">}} 
 
