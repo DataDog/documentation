@@ -741,7 +741,7 @@ main:
     url: "tracing/advanced/connect_logs_and_traces/"
     parent: "tracing_advanced"
     weight: 301
-  - name: "Adding Metadata to Spans"
+  - name: "Adding Span Tags"
     url: "tracing/advanced/adding_metadata_to_spans/"
     parent: "tracing_advanced"
     weight: 302
@@ -764,7 +764,7 @@ main:
 
   ## TACING - Using the APM UI
 
-  - name: "Use the APM UI"
+  - name: "APM Concepts & Walkthrough"
     url: "tracing/visualization/"
     parent: "tracing"
     identifier: "tracing_vis"
