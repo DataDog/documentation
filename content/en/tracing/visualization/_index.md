@@ -106,7 +106,6 @@ APM Events represent 100% throughput of a request and can be used to search, que
 
 <div class="alert alert-info">
 You can run an estimate on the number of APM Events that would be generated from your services <a href="https://app.datadoghq.com/apm/docs/trace-search?env=datad0g.com"> here </a>. After ingestion, you can also filter APM Events from 100% to a lower percentage on a service-by-service level, reducing billable APM Events
-<a href="https://app.datadoghq.com/apm/settings?env=datad0g.com"> here </a>.  
 </div>
 
 ## Span tags
