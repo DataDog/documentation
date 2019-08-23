@@ -37,8 +37,6 @@ Once you created a private location, configuring a Synthetics API or Browser tes
 
 2. Fill out the Location Details and click **Save and Generate** to generate the configuration file associated with your private location on your worker.
 
-    {{< img src="synthetics/private_locations/private_location.gif" alt="Private locations" responsive="true" >}}
-
     **Note**: The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. Datadog does not store the secrets, so store them locally before leaving the Private Locations screen.
     **You need to be able to reference these secrets again if you decide to add more workers, or to install workers on another host.**
 
