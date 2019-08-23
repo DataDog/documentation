@@ -1,5 +1,5 @@
 ---
-title: APM Concepts & Walkthrough
+title: APM Glossary & Walkthrough
 kind: documentation
 aliases:
   - /tracing/terminology/
@@ -30,9 +30,9 @@ The APM UI provides many tools to troubleshoot application performance and corre
 | [Trace](#trace)                 | A trace is used to track the time spent by an application processing a single request and the status of this request, each trace consists of one or more spans.                                                          |
 | [Span](#spans)                  | A span represents a logical unit of work in a distributed system for a given time period - and together spans construct a trace.                                                                                                    |
 | [Trace metrics](#trace-metrics)         | Trace metrics will automatically be collected and kept at a 15 month retention similar to any other [Datadog metric][17]. They can be used to identify and alert on hits, errors or latency.                                                                                                    |
-| [Trace Search & Analytics](#trace_search_and_analytics)                 | Trace Search & Analytics is used to filter [APM Events] by user-defined tags such as customer_id, error_type, or app_name or infrastructure tags to help troubleshoot and filter your requests.            |
+| [Trace Search & Analytics](#trace_search_and_analytics)                 | Trace Search & Analytics is used to filter APM Events by user-defined tags such as customer_id, error_type, or app_name or infrastructure tags to help troubleshoot and filter your requests.            |
 | [APM Event](#apm-event)                 | APM Events represent 100% throughput of a request and can be used to search, query, and monitor in Trace Search & Analytics.             |
-| [Span Tags](#span-tags)                | Tag spans in the form of key-value pairs to isolate in the Trace View or slice/dice on in Trace Search & Analytics.            |
+| [Span Tags](#span-tags)                | You can tag spans in the form of key-value pairs to correlate a request in the Trace View or to use to filter in Trace Search & Analytics.            |
 
 ## Services
 
@@ -111,7 +111,7 @@ You can run an estimate on the number of APM Events that would be generated from
 
 ## Span Tags
 
-You can tag spans in the form of key-value pairs to isolate in the Trace View or to use to filter in Trace Search & Analytics. Tags can be either added to a single span or globally to all spans. On this request `merchant.store_name`, `merchant.tier`, etc. have been added as tags to the span.
+You can tag spans in the form of key-value pairs to correlate a request in the Trace View or to use to filter in Trace Search & Analytics. Tags can be either added to a single span or globally to all spans. On this request `merchant.store_name`, `merchant.tier`, etc. have been added as tags to the span.
 
 {{< img src="tracing/visualization/span_tag.png" alt="span tag" responsive="true">}} 
 
