@@ -86,7 +86,7 @@ Trace metrics can be exported to a dashboard directly from the Service or Resour
 
 ### Monitoring
 
-Trace metrics can be used in a monitor like any other datadog metric - APM monitors can be set up on the [Service Page][4] or [Resource Page][5] with a set of suggested monitors to get started, or on the [New Monitors page][18].
+Trace metrics can be used in a monitor - APM monitors can be set up on the [Service Page][4] or [Resource Page][5] with a set of suggested monitors to get started, or on the [New Monitors page][18].
 
 {{< img src="tracing/visualization/trace_metric_monitor.gif" alt="trace metrics monitor" responsive="true">}} 
 
