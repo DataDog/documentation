@@ -22,15 +22,15 @@ This section specifies the raw datagram format for Service Checks that DogStatsD
 
 `_sc|<NAME>|<STATUS>|d:<TIMESTAMP>|h:<HOSTNAME>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|m:<SERVICE_CHECK_MESSAGE>`
 
-| Parameter                           | Required | Description                                                                                                                                  |
-|-------------------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| `_sc`                               | Yes      | the datagram must begin with `_sc`                                                                                                           |
-| `<NAME>`                              | Yes      | Service check name.                                                                                                                          |
-| `<STATUS>`                            | Yes      | Integer corresponding to the check status (OK = 0, WARNING = 1, CRITICAL = 2, UNKNOWN = 3).                                                  |
-| `d:<TIMESTAMP>`                       | No       | Add a timestamp to the check. Default is the current Unix epoch timestamp.                                                                   |
-| `h:<HOSTNAME>`                        | No       | Add a hostname to the event. No default.                                                                                                     |
-| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default.                       |
-| `m:<SERVICE_CHECK_MESSAGE>`           | No       | Add a message describing the current state of the service check. *This field MUST be positioned last among the metadata fields.* No default. |
+| Parameter                             | Required   | Description                                                                                                                                    |
+| ------------------------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `_sc`                                 | Yes        | the datagram must begin with `_sc`                                                                                                             |
+| `<NAME>`                              | Yes        | Service check name.                                                                                                                            |
+| `<STATUS>`                            | Yes        | Integer corresponding to the check status (OK = 0, WARNING = 1, CRITICAL = 2, UNKNOWN = 3).                                                    |
+| `d:<TIMESTAMP>`                       | No         | Add a timestamp to the check. Default is the current Unix epoch timestamp.                                                                     |
+| `h:<HOSTNAME>`                        | No         | Add a hostname to the event. No default.                                                                                                       |
+| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`  | No         | The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default.                         |
+| `m:<SERVICE_CHECK_MESSAGE>`           | No         | Add a message describing the current state of the Service Check. *This field MUST be positioned last among the metadata fields.* No default.   |
 
 Here's an example datagram:
 

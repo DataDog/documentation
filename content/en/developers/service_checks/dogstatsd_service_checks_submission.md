@@ -15,7 +15,7 @@ further_reading:
   text: "DogStatsD source code"
 ---
 
-DogStatsD can send service checks to Datadog. Use checks to track the status of services your application depends on:
+DogStatsD can send Service Checks to Datadog. Use checks to track the status of services your application depends on:
 
 For Python:
 
@@ -51,11 +51,11 @@ statsd.service_check(name, status, opts)
 {{% /tab %}}
 {{< /tabs >}}
 
-After a service check is reported, use it to trigger a [custom check monitor][1].
+After a Service Check is reported, use it to trigger a [custom check monitor][1].
 
 ## Tagging
 
-Add tags to any service check you send to DogStatsD. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
+Add tags to any Service Check you send to DogStatsD. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
 
 ```python
 

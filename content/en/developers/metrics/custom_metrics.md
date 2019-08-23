@@ -25,13 +25,13 @@ Use tags to fully leverage the capabilities of Datadog through scoping and alert
 
 For example, suppose you are interested in measuring the average `temperature` in the US. You collect the following temperature measurements every 10 seconds for the past minute from Orlando, Miami, New York, Boston and Seattle. Each `temperature` measurement is tagged with the information about `city`, `state`, `region`, and `country`.
 
-|  |  |  |  |  |  |  |  |
-|------------------------------|----|----|----|----|----|----|----|
-| Orlando, FL, Southeast, USA | 80 | 80 | 80 | 80 | 81 | 81 | 81 |
-| Miami, FL, Southeast, USA | 82 | 82 | 82 | 82 | 82 | 82 | 82 |
-| Boston, MA, Northeast, USA | 78 | 78 | 78 | 78 | 78 | 79 | 79 |
-| New York, NY, Northeast, USA | 79 | 79 | 79 | 79 | 79 | 79 | 79 |
-| Seattle, WA, Northwest, USA | 75 | 75 | 75 | 75 | 75 | 75 | 75 |
+|                                |      |      |      |      |      |      |      |
+| ------------------------------ | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| Orlando, FL, Southeast, USA    | 80   | 80   | 80   | 80   | 81   | 81   | 81   |
+| Miami, FL, Southeast, USA      | 82   | 82   | 82   | 82   | 82   | 82   | 82   |
+| Boston, MA, Northeast, USA     | 78   | 78   | 78   | 78   | 78   | 79   | 79   |
+| New York, NY, Northeast, USA   | 79   | 79   | 79   | 79   | 79   | 79   | 79   |
+| Seattle, WA, Northwest, USA    | 75   | 75   | 75   | 75   | 75   | 75   | 75   |
 
  Each unique tag combination of `city`, `state`, `region`, and `country` represents a timeseries / custom metric. Using the five timeseries above, you can determine the average temperature in the US, Northeast, or Florida.
 
@@ -128,13 +128,13 @@ A [gauge][8] represents one value per second (examples: temperature or Kafka que
 
 Suppose you are interested in measuring the average `temperature` in the state of Florida. `temperature` is stored as a `gauge` metric type in Datadog. You collect the following temperature measurements every 10 seconds during the past minute from Orlando, Miami, Boston, New York and Seattle, each tagged with information about the `city`, `state`, `region`, and `country`.
 
-|  |  |  |  |  |  |  |  |
-|------------------------------|----|----|----|----|----|----|----|
-| Orlando, FL, Southeast, USA | 80 | 80 | 80 | 80 | 81 | 81 | 81 |
-| Miami, FL, Southeast, USA | 82 | 82 | 82 | 82 | 82 | 82 | 82 |
-| Boston, MA, Northeast, USA | 78 | 78 | 78 | 78 | 78 | 79 | 79 |
-| New York, NY, Northeast, USA | 79 | 79 | 79 | 79 | 79 | 79 | 79 |
-| Seattle, WA, Northwest, USA | 75 | 75 | 75 | 75 | 75 | 75 | 75 |
+|                                |      |      |      |      |      |      |      |
+| ------------------------------ | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| Orlando, FL, Southeast, USA    | 80   | 80   | 80   | 80   | 81   | 81   | 81   |
+| Miami, FL, Southeast, USA      | 82   | 82   | 82   | 82   | 82   | 82   | 82   |
+| Boston, MA, Northeast, USA     | 78   | 78   | 78   | 78   | 78   | 79   | 79   |
+| New York, NY, Northeast, USA   | 79   | 79   | 79   | 79   | 79   | 79   | 79   |
+| Seattle, WA, Northwest, USA    | 75   | 75   | 75   | 75   | 75   | 75   | 75   |
 
 The total number of custom metrics associated with the `temperature` gauge metric is five. Each unique string combination of `city`, `state`, `region` and `country` tagged to the temperature data counts as a custom metric (in other words a timeseries of data stored by Datadog).
 
@@ -145,24 +145,24 @@ Using the five timeseries above, you can determine the average `temperature` in 
 #### Dropping tags
 Suppose you want to drop the `country` tag from the gauge `temperature` metric.
 
-|  |  |  |  |  |  |  |  |
-|------------------------------|----|----|----|----|----|----|----|
-| Orlando, FL, Southeast | 80 | 80 | 80 | 80 | 81 | 81 | 81 |
-| Miami, FL, Southeast | 82 | 82 | 82 | 82 | 82 | 82 | 82 |
-| Boston, MA, Northeast | 78 | 78 | 78 | 78 | 78 | 79 | 79 |
-| New York, NY, Northeast | 79 | 79 | 79 | 79 | 79 | 79 | 79 |
-| Seattle, WA, Northwest | 75 | 75 | 75 | 75 | 75 | 75 | 75 |
+|                                |      |      |      |      |      |      |      |
+| ------------------------------ | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| Orlando, FL, Southeast         | 80   | 80   | 80   | 80   | 81   | 81   | 81   |
+| Miami, FL, Southeast           | 82   | 82   | 82   | 82   | 82   | 82   | 82   |
+| Boston, MA, Northeast          | 78   | 78   | 78   | 78   | 78   | 79   | 79   |
+| New York, NY, Northeast        | 79   | 79   | 79   | 79   | 79   | 79   | 79   |
+| Seattle, WA, Northwest         | 75   | 75   | 75   | 75   | 75   | 75   | 75   |
 
 Even though there are five cities, four states, three regions, and one country, there are still five unique tag value combinations of `city`, `state`, `region`, and `country` that appear in the data. The total number of custom metrics emitted from the `temperature` metric is still five.
 
 Suppose you drop the `city` tag from the gauge `temperature` metric.
 
-|  |  |  |  |  |  |  |  |
-|------------------------------|----|----|----|----|----|----|----|
-| FL, Southeast | 81 | 81 | 81 | 81 | 81.5 | 81.5 | 81.5 |
-| MA, Northeast | 78 | 78 | 78 | 78 | 78 | 79 | 79 |
-| NY, Northeast | 79 | 79 | 79 | 79 | 79 | 79 | 79 |
-| WA, Northwest | 75 | 75 | 75 | 75 | 75 | 75 | 75 |
+|                                |      |      |      |      |      |      |      |
+| ------------------------------ | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| FL, Southeast                  | 81   | 81   | 81   | 81   | 81.5 | 81.5 | 81.5 |
+| MA, Northeast                  | 78   | 78   | 78   | 78   | 78   | 79   | 79   |
+| NY, Northeast                  | 79   | 79   | 79   | 79   | 79   | 79   | 79   |
+| WA, Northwest                  | 75   | 75   | 75   | 75   | 75   | 75   | 75   |
 
 Now there are four unique tag value combinations that appear in the `temperature` data. Therefore, the total number of custom metrics from the `temperature` metric tagged with `state` and `region` is four.
 
@@ -171,10 +171,10 @@ A distribution metric gathers all values across all hosts emitting metric values
 
 Suppose you are interested in measuring the maximum `age` metric in the state of New York. `age` is submitted to Datadog as a distribution metric tagged with `city` and `state` :
 
-|  | Values in 10s flush interval | Sum | Count | Minimum | Maximum | Average (Sum/Count) |
-|---------------|------------------------------|-----|-------|---------|---------|---------------------|
-| Rochester, NY | 23,29,33,55,41,36,12,67 | 296 | 8 | 12 | 67 | 37 |
-| New York, NY | 18,22,26,31,29,40,23,35 | 215 | 8 | 18 | 40 | 28 |
+|                 | Values in 10s flush interval   | Sum   | Count   | Minimum   | Maximum   | Average (Sum/Count)   |
+| --------------- | ------------------------------ | ----- | ------- | --------- | --------- | --------------------- |
+| Rochester, NY   | 23,29,33,55,41,36,12,67        | 296   | 8       | 12        | 67        | 37                    |
+| New York, NY    | 18,22,26,31,29,40,23,35        | 215   | 8       | 18        | 40        | 28                    |
 
 The total number of custom metrics or timeseries emitted from the `age` distribution metric is **eight (4 x 2)**. For both unique tag value combinations above (Rochester, NY and New York, NY), Datadog stores four timeseries (`sum`,`count`,`min`,`max`, `avg`).
 
@@ -185,10 +185,10 @@ After submitting a distribution metric to Datadog, you have the option to add pe
 
 Suppose you are interested in measuring the *median* `age` in the state of New York where the `age` distribution metric is tagged with `city` and `state`.
 
-|  | Values in 10s flush interval | Sum | Count | Min | Max | Avg | p50 | p75 | p90 | p95 | p99 |
-|---------------|------------------------------|-----|-------|-----|-----|-----|-----|-----|-----|-----|-----|
-| Rochester, NY | 23,33,55,41,36,12,66 | 266 | 7 | 12 | 66 | 38 | 23 | 55 | 66 | 66 | 66 |
-| New York, NY | 18,26,31,29,40,23,36 | 203 | 7 | 18 | 40 | 29 | 29 | 36 | 40 | 40 | 40 |
+|                 | Values in 10s flush interval   | Sum   | Count   | Min   | Max   | Avg   | p50   | p75   | p90   | p95   | p99   |
+| --------------- | ------------------------------ | ----- | ------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
+| Rochester, NY   | 23,33,55,41,36,12,66           | 266   | 7       | 12    | 66    | 38    | 23    | 55    | 66    | 66    | 66    |
+| New York, NY    | 18,26,31,29,40,23,36           | 203   | 7       | 18    | 40    | 29    | 29    | 36    | 40    | 40    | 40    |
 
 Percentiles are NOT reaggregatable—you can't reaggregate the same way maximum ages were above. The median age in New York is not equal to the `median`(`median`(Rochester, NY), `median`(New York, NY)).
 

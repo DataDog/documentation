@@ -22,18 +22,18 @@ This section specifies the raw datagram format for events that DogStatsD accepts
 
 `_e{<TITLE>.length,<TEXT>.length}:<TITLE>|<TEXT>|d:<TIMESTAMP>|h:<HOSTNAME>|p:<PRIORITY>|t:<ALERT_TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
 
-| Parameter                          | Required | Description                                                                                                            |
-|------------------------------------|----------|------------------------------------------------------------------------------------------------------------------------|
-| `_e`                               | Yes      | The datagram must begin with `_e`                                                                                      |
-| `<TITLE>`                            | Yes      | Event title.                                                                                                           |
-| `<TEXT>`                             | Yes      | Event text. Insert line breaks with an escaped slash (`\\n`)                                                           |
-| `d:<TIMESTAMP>`                      | No       | Add a timestamp to the event. Default is the current Unix epoch timestamp.                                             |
-| `h:<HOSTNAME>`                       | No       | Add a hostname to the event. No default.                                                                               |
-| `k:aggregation_key`                | No       | Add an aggregation key to group the event with others that have the same key. No default.                              |
-| `p:<PRIORITY>`                       | No       | Set to 'normal' or 'low'. Default 'normal'.                                                                            |
-| `s:source_type_name`               | No       | Add a source type to the event. No default.                                                                            |
-| `t:<ALERT_TYPE>`                     | No       | Set to 'error', 'warning', 'info' or 'success'. Default 'info'.                                                        |
-| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default. |
+| Parameter                            | Required   | Description                                                                                                              |
+| ------------------------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `_e`                                 | Yes        | The datagram must begin with `_e`                                                                                        |
+| `<TITLE>`                            | Yes        | Event title.                                                                                                             |
+| `<TEXT>`                             | Yes        | Event text. Insert line breaks with an escaped slash (`\\n`)                                                             |
+| `d:<TIMESTAMP>`                      | No         | Add a timestamp to the event. Default is the current Unix epoch timestamp.                                               |
+| `h:<HOSTNAME>`                       | No         | Add a hostname to the event. No default.                                                                                 |
+| `k:aggregation_key`                  | No         | Add an aggregation key to group the event with others that have the same key. No default.                                |
+| `p:<PRIORITY>`                       | No         | Set to 'normal' or 'low'. Default 'normal'.                                                                              |
+| `s:source_type_name`                 | No         | Add a source type to the event. No default.                                                                              |
+| `t:<ALERT_TYPE>`                     | No         | Set to 'error', 'warning', 'info' or 'success'. Default 'info'.                                                          |
+| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No         | The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default.   |
 
 Here are some example datagrams:
 
@@ -47,7 +47,7 @@ _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low
 
 ## Send events using DogStatsD and the shell
 
-For Linux and other Unix-like OS, use Bash. For Windows, you need Powershell and [powershell-statsd][2] (a simple Powershell function that takes care of the network bits). The idea behind DogStatsD is: create a message that contains information about your metric, and send it to a collector over UDP on port `8125`.
+For Linux and other Unix-like OS, use Bash. For Windows, you need PowerShell and [PowerShell-statsd][2] (a simple PowerShell function that takes care of the network bits). The idea behind DogStatsD is: create a message that contains information about your metric, and send it to a collector over UDP on port `8125`.
 
 The format for sending events is:
 
@@ -69,8 +69,8 @@ On Windows:
 
 ```
 PS C:\vagrant> $title = "Event from the shell"
-PS C:\vagrant> $text = "This was sent from Powershell!"
-PS C:\vagrant> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$text|#shell,powershell"
+PS C:\vagrant> $text = "This was sent from PowerShell!"
+PS C:\vagrant> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$text|#shell,PowerShell"
 ```
 
 ## Further Reading

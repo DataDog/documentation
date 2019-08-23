@@ -22,13 +22,13 @@ This section specifies the raw datagram format for metrics that DogStatsD accept
 
 `<METRIC_NAME>:<VALUE>|<TYPE>|@<SAMPLE_RATE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
 
-| Parameter     | Required | Description                                                                                                                                                        |
-|---------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<METRIC_NAME>` | Yes      | a string with no colons, bars, or @ characters. See the [metric naming policy][2].                                                                                 |
-| `<VALUE>`       | Yes      | an integer or float.                                                                                                                                               |
-| `<TYPE>`        | Yes      | `c` for counter, `g` for gauge, `ms` for timer, `h` for histogram, `s` for set.                                                                                    |
-| `<SAMPLE_RATE>` | No       | a float between 0 and 1, inclusive. Only works with counter, histogram, and timer metrics. Default is 1 (i.e. sample 100% of the time).                            |
-| `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`        | No       | a comma separated list of tags. Use colons for key/value tags, i.e. `env:prod`. The key `device` is reserved; Datadog drops a user-added tag like `device:foobar`. |
+| Parameter                           | Required   | Description                                                                                                                                                          |
+| ---------------                     | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<METRIC_NAME>`                     | Yes        | a string with no colons, bars, or @ characters. See the [metric naming policy][2].                                                                                   |
+| `<VALUE>`                           | Yes        | an integer or float.                                                                                                                                                 |
+| `<TYPE>`                            | Yes        | `c` for counter, `g` for gauge, `ms` for timer, `h` for histogram, `s` for set.                                                                                      |
+| `<SAMPLE_RATE>`                     | No         | a float between 0 and 1, inclusive. Only works with counter, histogram, and timer metrics. Default is 1 (i.e. sample 100% of the time).                              |
+| `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No         | a comma separated list of tags. Use colons for key/value tags, i.e. `env:prod`. The key `device` is reserved; Datadog drops a user-added tag like `device:foobar`.   |
 
 Here are some example datagrams:
 
@@ -55,7 +55,7 @@ users.online:1|c|@0.5|#country:china
 
 ## Send metrics using DogStatsD and the shell
 
-For Linux and other Unix-like OS, use Bash. For Windows, you need Powershell and [powershell-statsd][3] (a simple Powershell function that takes care of the network bits). The idea behind DogStatsD is: create a message that contains information about your metric, and send it to a collector over UDP on port `8125`.
+For Linux and other Unix-like OS, use Bash. For Windows, you need PowerShell and [PowerShell-statsd][3] (a simple PowerShell function that takes care of the network bits). The idea behind DogStatsD is: create a message that contains information about your metric, and send it to a collector over UDP on port `8125`.
 
 The format for sending metrics is `<METRIC_NAME>:<VALUE>|<TYPE>|@<SAMPLE_RATE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`, to send datapoints for a gauge metric called `custom_metric` with the shell tag. Using a locally installed Agent as a collector, the destination IP address is `127.0.0.1`.
 

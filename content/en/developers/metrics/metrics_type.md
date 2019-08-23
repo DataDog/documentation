@@ -143,22 +143,22 @@ Datadog accepts metrics submitted from a variety of sources:
 
 and as a result the "submission type" does not always map exactly to the Datadog in-app type:
 
-| Submission Source    | Submission Method (python)           | Submission Type   | Datadog In-App Type |
-| -------------------  | ------------------------------------ | ----------------- | ------------------- |
-| [API][2]            | `api.Metric.send(type="count", ...)` | count             | count               |
-| [API][2]            | `api.Metric.send(type="gauge", ...)` | gauge             | gauge               |
-| [API][2]            | `api.Metric.send(type="rate", ...)`  | rate              | rate                |
-| [DogStatsD][3]      | `dog.gauge(...)`                     | gauge             | gauge               |
-| [DogStatsD][3]      | `dog.histogram(...)`                 | histogram         | gauge, rate         |
-| [DogStatsD][3]      | `dog.increment(...)`                 | counter           | rate                |
-| [DogStatsD][3]      | `dog.set(...)`                       | set               | gauge               |
-| [Agent check][4]     | `self.count(...)`                    | count             | count               |
-| [Agent check][4]     | `self.gauge(...)`                    | gauge             | gauge               |
-| [Agent check][4]     | `self.histogram(...)`                | histogram         | gauge, rate         |
-| [Agent check][4]     | `self.increment(...)`                | counter <sup>deprecated</sup> | rate    |
-| [Agent check][4]     | `self.monotonic_count(...)`          | monotonic_count   | count               |
-| [Agent check][4]     | `self.rate(...)`                     | rate              | gauge               |
-| [Agent check][4]     | `self.set(...)`                      | set               | gauge               |
+| Submission Source   | Submission Method (python)           | Submission Type               | Datadog In-App Type |
+| ------------------- | ------------------------------------ | -----------------             | ------------------- |
+| [API][2]            | `api.Metric.send(type="count", ...)` | count                         | count               |
+| [API][2]            | `api.Metric.send(type="gauge", ...)` | gauge                         | gauge               |
+| [API][2]            | `api.Metric.send(type="rate", ...)`  | rate                          | rate                |
+| [DogStatsD][3]      | `dog.gauge(...)`                     | gauge                         | gauge               |
+| [DogStatsD][3]      | `dog.histogram(...)`                 | histogram                     | gauge, rate         |
+| [DogStatsD][3]      | `dog.increment(...)`                 | counter                       | rate                |
+| [DogStatsD][3]      | `dog.set(...)`                       | set                           | gauge               |
+| [Agent check][4]    | `self.count(...)`                    | count                         | count               |
+| [Agent check][4]    | `self.gauge(...)`                    | gauge                         | gauge               |
+| [Agent check][4]    | `self.histogram(...)`                | histogram                     | gauge, rate         |
+| [Agent check][4]    | `self.increment(...)`                | counter <sup>deprecated</sup> | rate                |
+| [Agent check][4]    | `self.monotonic_count(...)`          | monotonic_count               | count               |
+| [Agent check][4]    | `self.rate(...)`                     | rate                          | gauge               |
+| [Agent check][4]    | `self.set(...)`                      | set                           | gauge               |
 
 [1]: /graphing/metrics/summary
 [2]: /api/?lang=python#post-timeseries-points

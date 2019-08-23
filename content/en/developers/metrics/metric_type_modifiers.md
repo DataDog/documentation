@@ -42,15 +42,12 @@ further_reading:
 * Known Issue: Agent check submitted RATE metrics have no interval metadata, so `as_rate()` and `as_count()` don't work.
 
 {{% /tab %}}
-
 {{% tab "Rate" %}}
 
 TO DO
 
 {{% /tab %}}
-
 {{< /tabs >}}
-
 
 ## Modify a metric's type within Datadog
 

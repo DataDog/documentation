@@ -1,5 +1,5 @@
 ---
-title: Metric submission via Powershell
+title: Metric submission via PowerShell
 kind: documentation
 aliases:
   - /developers/faq/powershell-api-examples
@@ -74,7 +74,7 @@ dogstatsd($metric)
 
 ## Examples
 
-Here are two examples translated in Powershell, using Msxml2.XMLHTTP, fully documented [on Mozilla's documentation page][2]:
+Here are two examples translated in PowerShell, using Msxml2.XMLHTTP, fully documented [on Mozilla's documentation page][2]:
 
 ### The code that makes the API call
 

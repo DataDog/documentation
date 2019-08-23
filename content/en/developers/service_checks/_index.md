@@ -12,12 +12,12 @@ aliases:
 
 Services Checks allow you to characterize the status of a service in order to monitor it within Datadog.  All status checks must have one of the following status codes:
 
-| Status Code | Description|
-| ----- | ---- |
-| `0` | OK|
-| `1` | Warning |
-| `2` | Critical |
-| `3` | Unknown |
+| Status Code | Description |
+| -----       | ----        |
+| `0`         | OK          |
+| `1`         | Warning     |
+| `2`         | Critical    |
+| `3`         | Unknown     |
 
 {{< whatsnext desc="Find below how to submit a Service Check to Datadog:">}}
     {{< nextlink href="/developers/service_checks/agent_service_checks_submission" >}}Submitting a check through a custom Agent Check.{{< /nextlink >}}
@@ -26,9 +26,9 @@ Services Checks allow you to characterize the status of a service in order to mo
     {{< nextlink href="/developers/service_checks/datagram_shell" >}}Datagram format for Service Checks used by DogStatsD as well as (advanced) shell usage{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Visualize your service check in the Datadog UI.
+## Visualize your Service Check in the Datadog UI.
 
-Service checks can be visualized and used in 3 Datadog sections:
+Service Check can be visualized and used in 3 Datadog sections:
 
 * [Check Summary][1]
 * [Screenboards][2]
@@ -54,7 +54,7 @@ After clicking on the *Check status* widget icon, the following pop-up appears:
 
 In this form you can:
 
-* **Check Name**: Select your service check name.
+* **Check Name**: Select your Service Check name.
 * **Reporting Timeframe**: Select the time frame on which you want to aggregate your status.
 * **Scoping**: Select a single check or a cluster of check statuses reported by a single tag value or a tag group.
 * **Widget Title**: Set your widget title.
@@ -80,7 +80,7 @@ In this form, you can:
 
 Service check monitors for out-of-the-box Datadog integrations can be set in *monitor tab* > *Integration* > *Integration status* tab on the left. For instance, with the HAProxy integration: 
 
-{{< img src="developers/service_checks/haproxy_service_check.mp4" alt="Haproxy service check" video="true" responsive="true" >}}
+{{< img src="developers/service_checks/haproxy_service_check.mp4" alt="Haproxy Service Check" video="true" responsive="true" >}}
 
 Learn how to write an integration with the [integration developer documentation][5].
 

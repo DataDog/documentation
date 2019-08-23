@@ -21,7 +21,7 @@ This page dives into the `PrometheusCheck` interface for more advanced usage, in
 
 ## Advanced usage: Prometheus check interface
 
-If you have more advanced needs than the generic check (metrics preprocessing for example) you can write a custom `PrometheusCheck`. It's [the base class][3] of the generic check and it provides a structure and some helpers to collect metrics, events, and service checks exposed via Prometheus. Minimal configuration for checks based on this class include:
+If you have more advanced needs than the generic check (metrics preprocessing for example) you can write a custom `PrometheusCheck`. It's [the base class][3] of the generic check and it provides a structure and some helpers to collect metrics, events, and Service Checks exposed via Prometheus. Minimal configuration for checks based on this class include:
 
 - Overriding `self.NAMESPACE`
 - Overriding `self.metrics_mapper`
@@ -213,7 +213,7 @@ If the `labels_mapper` dictionary is provided, the metrics labels in `labels_map
 
 ### `self.type_overrides`
 
-`type_overrides` is a dictionary where the keys are Prometheus metric names and the values are a metric type (name as string) to use instead of the one listed in the payload. It can be used to force a type on untyped metrics.  
+`type_overrides` is a dictionary where the keys are Prometheus metric names and the values are a metric type (name as string) to use instead of the one listed in the payload. It can be used to force a type on untyped metrics.
 Available types are: `counter`, `gauge`, `summary`, `untyped`, and `histogram`.
 
 **Note**: it is empty in the base class but needs to be overloaded/hardcoded in the final check not to be counted as custom metric.

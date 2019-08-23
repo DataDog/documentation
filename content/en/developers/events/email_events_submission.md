@@ -11,12 +11,7 @@ When you need to integrate an application or system with Datadog, you have a few
 This gets you access to a wide variety of metrics and events with minimal configuration effort on your part. If your application isn't one of the integrated applications, you can create [a custom check using the Agent][2]; however, this requires additional effort and knowledge regarding both the application and Datadog itself.
 If your application does not have an existing [Datadog integration][1], and you don't want to create an [Agent check][2], you can send events via email. There are two different ways to use events with email, depending on whether you can customize the format of the email body being sent.
 
-<div class="alert alert-info">
-<b>JSON-Formatted vs Plain Text:</b> <br>
-If you have complete control over the email sent by the application to Datadog, then you probably want to configure a JSON-formatted message to be sent.
-This allows you to set everything in the event that appears in the event
-stream. See below for examples of each.
-</div>
+<div class="alert alert-info"><b>JSON-Formatted vs Plain Text:</b> <br> If you have complete control over the email sent by the application to Datadog, then you probably want to configure a JSON-formatted message to be sent. This allows you to set everything in the event that appears in the event stream. See below for examples of each. </div>
 
 ### Plain Text Email
 #### Source Email

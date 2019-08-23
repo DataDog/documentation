@@ -99,7 +99,7 @@ A Moogsoft [listener][42] that ingests Datadog notifications.
 
 ### NGINX LUA
   * Emit [custom metrics][43] directly from NGINX configurations using the [nginx_lua_datadog][44] module in your LUA scripts.
-  * [lua-resty-dogstatsd][45] is an extension developed by [mediba inc][46], which enables emiting metrics, events, and service checks to [DogStatsD][1] protocol. lua-resty-dogstatsd is released as GPLv3 and relies on the nginx cosocket API.
+  * [lua-resty-dogstatsd][45] is an extension developed by [mediba inc][46], which enables emiting metrics, events, and Service Checks to [DogStatsD][1] protocol. lua-resty-dogstatsd is released as GPLv3 and relies on the nginx cosocket API.
 
 ### OpenVPN
   * Send OpenVPN [bandwidth usage][47] and the count of active connections to Datadog.

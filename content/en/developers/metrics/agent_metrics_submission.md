@@ -28,13 +28,13 @@ Find below the function usage:
 self. monotonic_count(name, value, tags=None, hostname=None, device_name=None)
 ```
 
-| Parameter | Type | Required | Default Value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| `name`    | String | yes | - | The name of the metric. |
-| `value`  | float |  yes  | - | The value for the metric. |
-| `tags`   | list of strings | no | `None`  | A list of tags to associate with this metric. |
-| `hostname`|  string |  no | current host |  A hostname to associate with this metric. Defaults to the.|
-| `device_name` | String | no | `None` | Deprecated add a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
+| Parameter     | Type            | Required | Default Value | Description                                                                       |
+| ---------     | ----            | -------- | ------------- | -----------                                                                       |
+| `name`        | String          | yes      | -             | The name of the metric.                                                           |
+| `value`       | float           | yes      | -             | The value for the metric.                                                         |
+| `tags`        | list of strings | no       | `None`        | A list of tags to associate with this metric.                                     |
+| `hostname`    | string          | no       | current host  | A hostname to associate with this metric. Defaults to the.                        |
+| `device_name` | String          | no       | `None`        | Deprecated add a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
 
 ### `count()`
 
@@ -48,17 +48,17 @@ Find below the function usage:
 self. count(name, value, tags=None, hostname=None, device_name=None)
 ```
 
-| Parameter | Type | Required | Default Value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| `name`    | String | yes | - | The name of the metric. |
-| `value`  | float |  yes  | - | The value for the metric. |
-| `tags`   | list of strings | no | `None`  | A list of tags to associate with this metric. |
-| `hostname`|  string |  no | current host |  A hostname to associate with this metric. Defaults to the.|
-| `device_name` | String | no | `None` | Deprecated add a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
+| Parameter     | Type            | Required | Default Value | Description                                                                       |
+| ---------     | ----            | -------- | ------------- | -----------                                                                       |
+| `name`        | String          | yes      | -             | The name of the metric.                                                           |
+| `value`       | float           | yes      | -             | The value for the metric.                                                         |
+| `tags`        | list of strings | no       | `None`        | A list of tags to associate with this metric.                                     |
+| `hostname`    | string          | no       | current host  | A hostname to associate with this metric. Defaults to the.                        |
+| `device_name` | String          | no       | `None`        | Deprecated add a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
 
 ### `increment()`/`decrement()`
 
-Those **deprecated** functions are used to modify a count of events identified by a metric key string by 1 at each call. It can be called multiple times during a check's execution, and is handled by the aggregator Counter class.
+Those **deprecated** functions are used to modify a count of events identified by a metric key string by 1 at each call. It can be called multiple times during a check's execution, and is handled by the aggregator Counter class. If you want to increment/decrement by more than one, you must use the `count()` function.
 
 **Note**: Metrics submitted with this function are stored with a **RATE** type in Datadog. Each value in the stored timeseries is a delta of the counter's value between samples (time-normalized by the aggregation interval which defaults to 1 for Agent checks—so the value is generally the raw count value).
 
@@ -72,13 +72,13 @@ self. increment(name, value=1, tags=None, hostname=None, device_name=None)
 self. decrement(name, value=1, tags=None, hostname=None, device_name=None)
 ```
 
-| Parameter | Type | Required | Default Value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| `name`    | String | yes | - | The name of the metric. |
-| `value`  | float |  yes  | 1 | The increment/decrement value for the metric. |
-| `tags`   | list of strings | no | `None`  | A list of tags to associate with this metric. |
-| `hostname`|  string |  no | current host |  A hostname to associate with this metric. Defaults to the.|
-| `device_name` | String | no | `None` | Deprecated add a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
+| Parameter     | Type            | Required | Default Value | Description                                                                       |
+| ---------     | ----            | -------- | ------------- | -----------                                                                       |
+| `name`        | String          | yes      | -             | The name of the metric.                                                           |
+| `value`       | float           | yes      | 1             | The increment/decrement value for the metric.                                     |
+| `tags`        | list of strings | no       | `None`        | A list of tags to associate with this metric.                                     |
+| `hostname`    | string          | no       | current host  | A hostname to associate with this metric. Defaults to the.                        |
+| `device_name` | String          | no       | `None`        | Deprecated add a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
 
 {{% /tab %}}
 {{% tab "Gauge" %}}
@@ -94,13 +94,13 @@ Find below the function usage:
 self.gauge(name, value, tags=None, hostname=None, device_name=None)
 ```
 
-| Parameter | Type | Required | Default Value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| `name`    | String | yes | - | The name of the metric. |
-| `value`  | float |  yes  | - | The value for the metric. |
-| `tags`   | list of strings | no | `None`  | A list of tags to associate with this metric. |
-| `hostname`|  string |  no | current host |  A hostname to associate with this metric. Defaults to the.|
-| `device_name` | String | no | `None` | Deprecated add a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
+| Parameter     | Type            | Required | Default Value | Description                                                                       |
+| ---------     | ----            | -------- | ------------- | -----------                                                                       |
+| `name`        | String          | yes      | -             | The name of the metric.                                                           |
+| `value`       | float           | yes      | -             | The value for the metric.                                                         |
+| `tags`        | list of strings | no       | `None`        | A list of tags to associate with this metric.                                     |
+| `hostname`    | string          | no       | current host  | A hostname to associate with this metric. Defaults to the.                        |
+| `device_name` | String          | no       | `None`        | Deprecated add a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
 
 {{% /tab %}}
 {{% tab "Rate" %}}
@@ -117,13 +117,13 @@ Find below the function usage:
 self.rate(name, value, tags=None, hostname=None, device_name=None)
 ```
 
-| Parameter | Type | Required | Default Value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| `name`    | String | yes | - | The name of the metric. |
-| `value`  | float |  yes  | - | The value for the metric. |
-| `tags`   | list of strings | no | `None`  | A list of tags to associate with this metric. |
-| `hostname`|  string |  no | current host |  A hostname to associate with this metric. Defaults to the.|
-| `device_name` | String | no | `None` | Deprecated add a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
+| Parameter     | Type            | Required | Default Value | Description                                                                       |
+| ---------     | ----            | -------- | ------------- | -----------                                                                       |
+| `name`        | String          | yes      | -             | The name of the metric.                                                           |
+| `value`       | float           | yes      | -             | The value for the metric.                                                         |
+| `tags`        | list of strings | no       | `None`        | A list of tags to associate with this metric.                                     |
+| `hostname`    | string          | no       | current host  | A hostname to associate with this metric. Defaults to the.                        |
+| `device_name` | String          | no       | `None`        | Deprecated add a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
 
 {{% /tab %}}
 
@@ -141,13 +141,13 @@ Find below the function usage:
 self.histogram(name, value, tags=None, hostname=None, device_name=None)
 ```
 
-| Parameter | Type | Required | Default Value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| `name`    | String | yes | - | The name of the metric. |
-| `value`  | float |  yes  | - | The value for the metric. |
-| `tags`   | list of strings | no | `None`  | A list of tags to associate with this metric. |
-| `hostname`|  string |  no | current host |  A hostname to associate with this metric. Defaults to the.|
-| `device_name` | String | no | `None` | Deprecated add a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
+| Parameter     | Type            | Required | Default Value | Description                                                                       |
+| ---------     | ----            | -------- | ------------- | -----------                                                                       |
+| `name`        | String          | yes      | -             | The name of the metric.                                                           |
+| `value`       | float           | yes      | -             | The value for the metric.                                                         |
+| `tags`        | list of strings | no       | `None`        | A list of tags to associate with this metric.                                     |
+| `hostname`    | string          | no       | current host  | A hostname to associate with this metric. Defaults to the.                        |
+| `device_name` | String          | no       | `None`        | Deprecated add a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -155,4 +155,5 @@ self.histogram(name, value, tags=None, hostname=None, device_name=None)
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /developers/metrics/metric_type
