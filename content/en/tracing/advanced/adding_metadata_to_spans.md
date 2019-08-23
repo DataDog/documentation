@@ -1,8 +1,6 @@
 ---
 title: Adding Span Tags
 kind: documentation
-aliases:
-  - /tracing/advanced/adding_metadata_to_spans/
 further_reading:
 - link: "tracing/advanced/connect_logs_and_traces"
   tags: "Enrich Tracing"
