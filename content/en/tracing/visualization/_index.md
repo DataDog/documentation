@@ -109,7 +109,7 @@ You can run an estimate on the number of APM Events that would be generated from
 <a href="https://app.datadoghq.com/apm/settings?env=datad0g.com"> here </a>.  
 </div>
 
-## Span Tags
+## Span tags
 
 You can tag spans in the form of key-value pairs to correlate a request in the Trace View or to use to filter in Trace Search & Analytics. Tags can be either added to a single span or globally to all spans. On this request `merchant.store_name`, `merchant.tier`, etc. have been added as tags to the span.
 
