@@ -115,7 +115,7 @@ You can tag spans in the form of key-value pairs to isolate in the Trace View or
 
 {{< img src="tracing/visualization/span_tag.png" alt="span tag" responsive="true">}} 
 
-To get started tagging spans in your application, our walkthrough is [here][15].
+To get started tagging spans in your application, check out our [walkthrough][15].
 
 After a tag has been added to a span, to search and query on the tag in Trace Search & Analytics, click on it and add it as a [facet][16]. Once this is done, the value of this tag is stored for all new traces and can be used in the search bar, the Facet Panel, and in the Trace graph query.
 
