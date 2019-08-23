@@ -1137,21 +1137,26 @@ main:
     identifier: "dev_tools_service_check"
     weight: 4
 
+  - name: "Agent Check Submission"
+    url: "developers/service_checks/agent_service_checks_submission/"
+    parent: "dev_tools_service_check"
+    identifier: "dev_tools_service_check_agent_check"
+    weight: 401
   - name: "DogStatsD Submission"
     url: "developers/service_checks/dogstatsd_service_checks_submission/"
     parent: "dev_tools_service_check"
     identifier: "dev_tools_service_check_dogstatsd"
-    weight: 401
+    weight: 402
   - name: "API Submission"
     url: "api/#service-checks"
     parent: "dev_tools_service_check"
     identifier: "dev_tools_service_check_api"
-    weight: 402
+    weight: 403
   - name: "Datagram and Shell Usage"
     url: "developers/service_checks/datagram_shell/"
     parent: "dev_tools_service_check"
     identifier: "dev_tools_service_check_datagram"
-    weight: 403
+    weight: 404
 
   - name: "Libraries"
     url: "developers/libraries/"

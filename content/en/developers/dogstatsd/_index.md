@@ -21,7 +21,8 @@ further_reading:
 The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][1] protocol and adds a few Datadog-specific extensions:
 
 * Histogram metric type
-* Service Checks and Events
+* Service Checks
+* Events
 * Tagging
 
 Any compliant StatsD client works with DogStatsD and the Agent, but you won't be able to use the [Datadog-specific extensions](#dive-into-dogstatsd).

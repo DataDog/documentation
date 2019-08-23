@@ -2,6 +2,7 @@
 title: Service Checks submission with DogStatsD
 kind: documentation
 description: Overview of the features of DogStatsD, including data types and tagging.
+disable_toc: true
 further_reading:
 - link: "developers/dogstatsd"
   tag: "Documentation"
@@ -17,6 +18,10 @@ further_reading:
 DogStatsD can send service checks to Datadog. Use checks to track the status of services your application depends on:
 
 For Python:
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
 ```python
 
 from datadog.api.constants import CheckStatus
@@ -29,7 +34,9 @@ message = 'Response: 200 OK'
 statsd.service_check(check_name=name, status=status, message=message)
 ```
 
-For Ruby:
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
 ```ruby
 # Report the status of an app.
 name = 'web.app1'
@@ -40,6 +47,9 @@ opts = {
 
 statsd.service_check(name, status, opts)
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 After a service check is reported, use it to trigger a [custom check monitor][1].
 

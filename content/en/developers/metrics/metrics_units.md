@@ -2,15 +2,12 @@
 title: Metrics Units
 kind: documentation
 further_reading:
-- link: "developers/dogstatsd"
+- link: "graphing/"
   tag: "Documentation"
-  text: "Learn more about DogStatsD"
-- link: "developers/libraries"
-  tag: "Documentation"
-  text: "Official and Community-contributed API and DogStatsD client libraries"
+  text: "Visualize your data to gain insight"
 ---
 
-To eliminate ambiguity and help you make sense of your systems, the following units may be associated with metrics submitted to Datadog.
+To eliminate ambiguity and help you make sense of your systems, the following units may be associated with metrics submitted to Datadog:
 
 | type         | unit(s)                                                                                                                                                                                                                                            |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -41,3 +38,7 @@ On timeseries graphs, move your cursor over any graph to see the relevant units.
 Units are also displayed at the bottom of timeboard graphs, and metric descriptions are available by selecting **Metrics Info** from the gear dropdown:
 
 {{< img src="developers/metrics/metrics_units/annotated_ops.png" alt="Annotated ops" responsive="true" style="width:70%;">}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

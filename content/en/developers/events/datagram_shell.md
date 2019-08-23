@@ -72,5 +72,10 @@ PS C:\vagrant> $title = "Event from the shell"
 PS C:\vagrant> $text = "This was sent from Powershell!"
 PS C:\vagrant> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$text|#shell,powershell"
 ```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /developers/libraries/#api-and-dogstatsd-client-libraries
 [2]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.
