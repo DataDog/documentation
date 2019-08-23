@@ -22,7 +22,7 @@ Add tags in the form of key-value pairs to correlate traces with other Datadog p
 
 **Note**: Tracing metadata is added via tags, but tags already have a specific meaning throughout [Datadog][1].
 
-## Adding Tags to a Span
+## Adding tags to a span
 
 {{< tabs >}}
 {{% tab "Java" %}}
