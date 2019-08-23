@@ -18,7 +18,7 @@ further_reading:
   text: "Explore your services, resources, and traces"
 ---
 
-Adding tags in the form of key-value pairs to a span allows to correlate traces with other Datadog products to provide more details about specific spans. Tags can be either added [to a single span](#adding-tags-to-a-span) or [globally to all spans](#adding-tags-globally-to-all-spans).
+Add tags in the form of key-value pairs to correlate traces with other Datadog products, which provides more details about specific spans. Tags can be added to a [single span](#adding-tags-to-a-span) or [globally to all spans](#adding-tags-globally-to-all-spans).
 
 **Note**: Tracing metadata is added via tags, but tags already have a specific meaning throughout [Datadog][1].
 
