@@ -43,4 +43,8 @@ _sc|Redis connection|2|#redis_instance:10.0.0.16:6379|m:Redis connection timed o
 
 TO DO
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /developers/libraries/#api-and-dogstatsd-client-libraries

@@ -1108,26 +1108,31 @@ main:
     identifier: "dev_tools_events"
     weight: 3
 
+  - name: "Agent Check Submission"
+    url: "developers/events/agent_events_submission/"
+    parent: "dev_tools_events"
+    identifier: "dev_tools_events_agent"
+    weight: 301
   - name: "DogStatsD Submission"
     url: "developers/events/dogstatsd_events_submission/"
     parent: "dev_tools_events"
     identifier: "dev_tools_events_dogstatsd"
-    weight: 301
+    weight: 302
   - name: "Mail Submission"
     url: "developers/events/email_events_submission/"
     parent: "dev_tools_events"
     identifier: "dev_tools_events_mail"
-    weight: 302
+    weight: 303
   - name: "API Submission"
     url: "/api/#post-an-event"
     parent: "dev_tools_events"
     identifier: "dev_tools_events_api"
-    weight: 303
+    weight: 304
   - name: "Datagram and Shell Usage"
     url: "developers/events/datagram_shell/"
     parent: "dev_tools_events"
     identifier: "dev_tools_events_datagram"
-    weight: 304
+    weight: 305
 
   ## DEVELOPERS - Service Checks
 

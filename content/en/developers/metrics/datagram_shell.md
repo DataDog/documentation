@@ -32,26 +32,13 @@ This section specifies the raw datagram format for metrics that DogStatsD accept
 
 Here are some example datagrams:
 
-```
-## Increment the page.views counter
-page.views:1|c
-
-## Record the fuel tank is half-empty
-fuel.level:0.5|g
-
-## Sample the song length histogram half of the time
-song.length:240|h|@0.5
-
-## Track a unique visitor to the site
-users.uniques:1234|s
-
-## Increment the active users counter, tag by country of origin
-users.online:1|c|#country:china
-
-## Track active China users and use a sample rate
-users.online:1|c|@0.5|#country:china
-```
-
+| Datagram | Description |
+| `page.views:1|c` | Increment the page.views counter. |
+|`fuel.level:0.5|g` |Record the fuel tank is half-empty. |
+| `song.length:240|h|@0.5` | Sample the song length histogram half of the time. |
+| `users.uniques:1234|s` | Track a unique visitor to the site. |
+| `users.online:1|c|#country:china` | Increment the active users counter, tag by country of origin. |
+| `users.online:1|c|@0.5|#country:china` | Track active China users and use a sample rate. |
 
 ## Send metrics using DogStatsD and the shell
 
@@ -61,23 +48,22 @@ The format for sending metrics is `<METRIC_NAME>:<VALUE>|<TYPE>|@<SAMPLE_RATE>|#
 
 Linux options:
 
-```
-vagrant@vagrant-ubuntu-14-04:~$ echo -n "custom_metric:60|g|#shell" >/dev/udp/localhost/8125
-```
-
-```
-vagrant@vagrant-ubuntu-14-04:~$ echo -n "custom_metric:60|g|#shell" | nc -4u -w0 127.0.0.1 8125
+```shell
+$ echo -n "custom_metric:60|g|#shell" >/dev/udp/localhost/8125
 ```
 
+```shell
+$ echo -n "custom_metric:60|g|#shell" | nc -4u -w0 127.0.0.1 8125
 ```
-vagrant@vagrant-ubuntu-14-04:~$ echo -n "custom.metric.name:1|c"|nc -4u -w1 localhost 8125
+
+```shell
+$ echo -n "custom.metric.name:1|c"|nc -4u -w1 localhost 8125
 ```
 
 Windows options:
 
 ```
-PS C:\vagrant> .\send-statsd.ps1 "custom_metric:123|g|#shell"
-PS C:\vagrant>
+PS C:\> .\send-statsd.ps1 "custom_metric:123|g|#shell"
 ```
 
 On any platform with Python (on Windows, the Agent's embedded Python interpreter can be used, which is located at `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe` for Agent versions <= 6.11 and in `C:\Program Files\Datadog\Datadog Agent\embedded2\python.exe` for Agent versions >= 6.12):

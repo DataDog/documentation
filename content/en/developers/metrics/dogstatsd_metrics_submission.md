@@ -374,7 +374,7 @@ Add tags to any metric you send to DogStatsD. For example, compare the performan
 
 ```python
 
-@statsd.timed('algorithm.run_time', tags=['algorithm:one'])
+@statsd.timed('algorithm.run_time'x)
 def algorithm_one():
     # Do fancy things here ...
 

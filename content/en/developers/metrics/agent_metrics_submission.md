@@ -1,5 +1,5 @@
 ---
-title: Metric submission with an custom Agent Check
+title: Metric submission with a custom Agent Check
 kind: documentation
 further_reading:
 - link: "developers/write_agent_check/?tab=agentv6"
@@ -65,11 +65,11 @@ Those **deprecated** functions are used to modify a count of events identified b
 Find below the functions usage:
 
 ```python
-self. increment(name, value=1, tags=None, hostname=None, device_name=None)
+self.increment(name, value=1, tags=None, hostname=None, device_name=None)
 ```
 
 ```python
-self. decrement(name, value=1, tags=None, hostname=None, device_name=None)
+self.decrement(name, value=1, tags=None, hostname=None, device_name=None)
 ```
 
 | Parameter     | Type            | Required | Default Value | Description                                                                       |

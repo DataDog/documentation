@@ -68,5 +68,8 @@ def algorithm_two():
     # Do fancy things (maybe faster?) here ...
 ```
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/monitor_types/custom_check

@@ -41,7 +41,6 @@ They both receive:
   * 2 requests per second for 10 seconds
   * 0 request for 10 seconds
 
-
 {{< tabs >}}
 {{% tab "Count" %}}
 
@@ -49,9 +48,11 @@ They both receive:
 
 For instance let's say the `number.of.requests` metrics is reported every 10 seconds to Datadog with the `count` type for `web_1`.
 
-The metric has then the following shape: 10, then 20, then 0.
+Each data point represents the number of requests received during the 10 second interval. The metric has then the following shape:
 
-Each data point represents the number of requests received during the 10 second interval.
+* `10` for the first 10 seconds
+* `20` for the second interval of 10 seconds
+* `0` for the last interval of 10 seconds
 
 {{% /tab %}}
 {{% tab "Gauge" %}}
@@ -60,7 +61,11 @@ Each data point represents the number of requests received during the 10 second 
 
 For instance let's say the `number.of.requests` metrics is reported every 10 seconds to Datadog with the `gauge` type for `web_1`.
 
-The metric has then the following shape: 10, then 30, then 30.
+Each data point represent the overall amount of requests received at a point in time. The metric has then the following shape:
+
+* `10` for the first 10 seconds
+* `30` for the second interval of 10 seconds
+* `30` for the last interval of 10 seconds
 
 {{% /tab %}}
 {{% tab "Rate" %}}
@@ -69,7 +74,11 @@ The metric has then the following shape: 10, then 30, then 30.
 
 For instance let's say the `number.of.requests` metrics is reported every 10 seconds to Datadog with the `gauge` type for `web_1`.
 
-The metric has then the following shape: 1, then 2, then 0.
+Each data point represent the "rate" of requests. The metric has then the following shape:
+
+* `1` for the first 10 seconds
+* `2` for the second interval of 10 seconds
+* `0` for the last interval of 10 seconds
 
 {{% /tab %}}
 
@@ -110,23 +119,24 @@ This functionality allows you to control tagging for metrics where host-level gr
 {{% /tab %}}
 {{% tab "Histogram" %}}
 
-Histograms measure the statistical distribution of a set of values.
+Histograms measure the statistical distribution of a set of values. Datadog histogram are extensions on the [StatsD timing metric][1]: they aggregate the values that are sent during the flush interval (usually defaults to 10 seconds) and produces different metric reprensenting the different aggregation possible for the set of value.
 
-Datadog histogram and timing metrics are essentially the same thing and are extensions on the [StatsD timing metric][1]: they aggregate the values that are sent during the flush interval (usually defaults to 10 seconds).
+**Note**: Depending of the aggregation, the metric type stored by Datadog is different.
 
-If you send 20 values for a metric `<METRIC_NAME>` during the flush interval, a Datadog histogram gives you the aggregation of those values for the flush interval, i.e.:
+For example: if you send `X` values for a metric `<METRIC_NAME>` during the flush interval, a Datadog histogram gives you the aggregation of those values for the flush interval, i.e.:
 
-* `<METRIC_NAME>.avg`: gives you the avg of those 20 values during the flush interval
-* `<METRIC_NAME>.count`: gives you the count of the values (20 in this case) sent during the flush interval.
-* `<METRIC_NAME>.median`: gives you the median of those values in the flush interval.
-* `<METRIC_NAME>.95percentile`: gives you the 95th percentile value in the flush interval.
-* `<METRIC_NAME>.max`: gives you the max value sent during the flush interval.
-* `<METRIC_NAME>.min`: gives you the min value sent during the flush interval.
-* `<METRIC_NAME>.sum`: gives you the sum of values sent during the flush interval.
+| Aggregation | Description | Datadog Metric Type |
+| --------- | --------- | ---------- |
+| `<METRIC_NAME>.avg` |  Gives you the average of those `X` values during the flush interval. | Gauge |
+| `<METRIC_NAME>.count` | Gives you the count of the values `X` sent during the flush interval.| Rate |
+| `<METRIC_NAME>.median` | Gives you the median of those `X` values in the flush interval. | Gauge |
+| `<METRIC_NAME>.95percentile` | Gives you the 95th percentile of those `X` values in the flush interval.| Gauge |
+| `<METRIC_NAME>.max` | Gives you the maximum value of those `X` values sent during the flush interval.| Gauge |
+| `<METRIC_NAME>.min` | Gives you the minimum value of those `X` sent during the flush interval. | Gauge |
+| `<METRIC_NAME>.sum` | Gives you the sum of all `X` values sent during the flush interval. | Gauge |
 
 Configure which aggregation you want to send to Datadog with the `histogram_aggregates` parameter in your [datadog.yaml configuration file][2].
 By default only `max`, `median`, `avg`, and `count` aggregations are sent out to Datadog.
-
 
 [1]: https://github.com/etsy/statsd/blob/master/docs/metric_types.md#timing
 [2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file

@@ -43,4 +43,8 @@ def algorithm_two():
     # Do fancy things (maybe faster?) here ...
 ```
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /graphing/event_stream
