@@ -22,7 +22,6 @@ further_reading:
   text: "Understand how to read a Datadog Trace"
 ---
 
-The APM UI provides many tools to troubleshoot application performance and correlate it throughout the product - making it easy to find and resolve anything slow or broken in highly distributed systems.
 
 | Concept               | Description             |
 |-----------------------|-------------------------|
