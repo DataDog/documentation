@@ -117,7 +117,7 @@ Tag spans in the form of key-value pairs to correlate a request in the *Trace Vi
 
 To get started tagging spans in your application, check out our [walkthrough][15].
 
-After a tag has been added to a span, to search and query on the tag in Trace Search & Analytics, click on it and add it as a [facet][16]. Once this is done, the value of this tag is stored for all new traces and can be used in the search bar, the Facet Panel, and in the Trace graph query.
+After a tag has been added to a span, search and query on the tag in Trace Search & Analytics by clicking on the tag to add it as a [facet][16]. Once this is done, the value of this tag is stored for all new traces and can be used in the search bar, facet panel, and trace graph query.
 
 {{< img src="tracing/trace_search_and_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:50%;">}}
 
