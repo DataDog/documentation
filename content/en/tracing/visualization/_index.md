@@ -1,5 +1,5 @@
 ---
-title: APM Concepts & Walkthrough
+title: APM Glossary & Walkthrough
 kind: documentation
 aliases:
   - /tracing/terminology/

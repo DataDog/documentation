@@ -764,7 +764,7 @@ main:
 
   ## TACING - Using the APM UI
 
-  - name: "APM Concepts & Walkthrough"
+  - name: "APM Glossary"
     url: "tracing/visualization/"
     parent: "tracing"
     identifier: "tracing_vis"
