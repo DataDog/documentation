@@ -308,7 +308,7 @@ Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 {{% tab "PHP" %}}
 
 Use the environment variable `DD_TRACE_GLOBAL_TAGS` to add tags to all the generated spans. See the [PHP configuration][1]
-section for details on how environment variables should be set.
+section for details on how environment variables are set.
 
 ```ini
 DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
