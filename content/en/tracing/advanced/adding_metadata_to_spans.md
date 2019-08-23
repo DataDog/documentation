@@ -69,7 +69,7 @@ def handle_customer(customer_id):
     span.set_tag('customer.id', customer_id)
 ```
 
-The current span can be retrieved from the context in order to set its tag. This way, if a span was started by the instrumentation, you can retrieve the span and add custom tags. **Note**: If a span does not exist, `None` is returned:
+The current span can be retrieved from the context to set its tag. This way, if a span was started by the instrumentation, you can retrieve the span and add custom tags. **Note**: If a span does not exist, `None` is returned:
 
 ```python
 from ddtrace import tracer
