@@ -16,6 +16,7 @@ further_reading:
   tag: ""
   text: "All guides"
 ---
+_7 minutes to complete_
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.gif" alt="Analytics View" responsive="true" style="width:90%;">}}
 

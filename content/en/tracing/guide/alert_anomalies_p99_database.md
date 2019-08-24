@@ -16,6 +16,8 @@ further_reading:
   tag: ""
   text: "All guides"
 ---
+_3 minutes to complete_
+
 
 {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_full.gif" alt="Monitor view with ongoing alert" responsive="true" style="width:90%;">}}
 
