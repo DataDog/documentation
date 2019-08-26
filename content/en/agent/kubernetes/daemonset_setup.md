@@ -216,7 +216,7 @@ To enable [Log collection][10] with your DaemonSet:
     (...)
     ```
     
-The `DD_AC_EXCLUDE` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs.
+Setting `DD_AC_EXCLUDE` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs.
 
 2. Mount the Docker socket or logs directories (`/var/log/pods` and `/var/lib/docker/containers` if docker runtime)
 
