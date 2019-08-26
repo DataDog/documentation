@@ -108,16 +108,16 @@ Or the container can be restarted.
 
 The following Agent log levels are available for `log_level` or `DD_LOG_LEVEL`:
 
-| Option  | Fatal logs | Error logs | Warn logs | Info logs | Debug logs | Trace logs | All logs |
-|---------|------------|------------|-----------|-----------|------------|------------|----------|
-| `OFF`   |            |            |           |           |            |            |          |
-| `FATAL` | X          |            |           |           |            |            |          |
-| `ERROR` | X          | X          |           |           |            |            |          |
-| `WARN`  | X          | X          | X         |           |            |            |          |
-| `INFO`  | X          | X          | X         | X         |            |            |          |
-| `DEBUG` | X          | X          | X         | X         | X          |            |          |
-| `TRACE` | X          | X          | X         | X         | X          | X          |          |
-| `ALL`   | X          | X          | X         | X         | X          | X          | X        |
+| Option  | Fatal logs                     | Error logs                     | Warn logs                      | Info logs                      | Debug logs                     | Trace logs                     | All logs                       |
+|---------|--------------------------------|--------------------------------|--------------------------------|--------------------------------|--------------------------------|--------------------------------|--------------------------------|
+| `OFF`   |                                |                                |                                |                                |                                |                                |                                |
+| `FATAL` | <i class="icon-checkmark"></i> |                                |                                |                                |                                |                                |                                |
+| `ERROR` | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> |                                |                                |                                |                                |                                |
+| `WARN`  | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> |                                |                                |                                |                                |
+| `INFO`  | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> |                                |                                |                                |
+| `DEBUG` | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> |                                |                                |
+| `TRACE` | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> |                                |
+| `ALL`   | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> | <i class="icon-checkmark"></i> |
 
 ## Further Reading
 
