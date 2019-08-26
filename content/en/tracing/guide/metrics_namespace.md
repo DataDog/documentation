@@ -21,15 +21,16 @@ aliases:
   - /tracing/getting_further/metrics_namespace
 ---
 
-The trace metrics namespace is `trace.<name>.<metrics>{<tags>}` where
+The trace metrics namespace is `trace.<NAME>.<METRIC>{<TAGS>}` where:
 
-* `<name>`: is the name of the operation i.e. the `span.name`: (*redis.command*, *pylons.request*, *rails.request*, *mysql.query*)
-* `<metrics>` is about the hits, errors or latency ("request.hits", etc.)
-* `<tags>` the metrics are tagged by service & resource
+| Parameter  | Description                                                                                                             |
+|------------|-------------------------------------------------------------------------------------------------------------------------|
+| `<NAME>`   | The name of the operation or `span.name` (examples: *redis.command*, *pylons.request*, *rails.request*, *mysql.query*). |
+| `<METRIC>` | The name of the metric (examples: *hits*, *errors*, *latency*).                                                         |
+| `<TAGS>`   | The tags attached to the metric (examples: *service*, *resource*).                                                                         |
 
 So for pylons it might be `trace.pylons.request.hits{service:web_server}`.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
