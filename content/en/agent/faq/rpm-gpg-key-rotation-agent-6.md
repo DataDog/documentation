@@ -1,29 +1,28 @@
 ---
-title: RPM GPG key rotation for Agent 6 packages
+title: RPM GPG Key Rotation for Agent v6
 kind: faq
 ---
 
-Starting with the 6.14.0 release, the RPM packages of the Agent are signed with a new GPG key.
+Starting with v6.14.0, the Agent RPM packages are signed with a new GPG key.
 
-Hosts which are using our RPM packages located in our [yum repository][1] and want to install or upgrade the Agent 6.14.0 or later are affected by this change and need to trust this new key by importing the associated public key in their hosts' keyrings.
+Hosts using RPM packages located in the [Datadog Yum repository][1] and want to install or upgrade the Agent v6.14.0+ are affected by this change and need to trust this new key by importing the associated public key in their hosts' keyrings.
 
-Trying to install or upgrade the Agent package without trusting the new key will result in `NOKEY` errors when installing the package.
+Trying to install or upgrade the Agent package without trusting the new key results in `NOKEY` errors when installing the package.
 
 The fingerprint of the associated public key is: `A4C0B90D7443CF6E4E8AA341F1068E14E09422B3`.
 
-If you're using the latest version of one of the following officially supported install methods:
+If you're using the latest version for one of the following officially supported install methods, then your hosts will automatically trust the new key and no further action is needed.
 
-* the [Agent installation page][2],
+* [Agent installation page][2]
 
-* the `datadog` [chef cookbook][3],
+* Datadog [Chef cookbook][3]
 
-* the `Datadog.datadog` [ansible role][4],
+* `Datadog.datadog` [Ansible role][4]
 
-* the `datadog_agent` [puppet module][5],
+* Datadog Agent [Puppet module][5]
 
-* the `datadog` [saltstack formula][6],
+* Datadog [SaltStack formula][6]
 
-then your hosts will automatically trust the new key, and no further action needs to be done to be able to install Agent 6 packages signed with the new key.
 
 ## How to check if a host trusts the new GPG key
 
@@ -32,25 +31,25 @@ To check that a particular host does trust the new key, run this command on the 
 rpm -q gpg-pubkey-e09422b3
 ```
 
-If the new key is indeed trusted, the command has a 0 exit code and its output is:
+If the new key is trusted, the command has a 0 exit code and outputs:
 ```bash
 gpg-pubkey-e09422b3-57744e9e
 ```
 
-Otherwise, the command will return with a non-0 exit code and the following output:
+Otherwise, the command returns a non-0 exit code and the following output:
 ```bash
 package gpg-pubkey-e09422b3 is not installed
 ```
 
 ## How to manually trust the new GPG key
 
-If you want to manually make a host trust the new key, run the following command on the host:
+To manually trust the new key, run the following command on the host:
 
 ```bash
 rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 ```
 
-You can then check that the new key is indeed trusted by following the steps in the [How to check if a host trusts the new GPG key](#how-to-check-if-a-host-trusts-the-new-GPG-key) section.
+Then check if the new key is trusted by following the steps in [How to check if a host trusts the new GPG key](#how-to-check-if-a-host-trusts-the-new-gpg-key).
 
 [1]: https://yum.datadoghq.com/
 [2]: https://app.datadoghq.com/account/settings#agent
