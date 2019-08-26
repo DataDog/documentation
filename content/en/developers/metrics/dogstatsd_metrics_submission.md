@@ -234,13 +234,13 @@ end
 
 The above instrumentation produces the following metrics:
 
-| Metric                             | Description                             |
-|------------------------------------|-----------------------------------------|
-| `database.query.time.count`        | number of times this metric was sampled |
-| `database.query.time.avg`          | average time of the sampled values      |
-| `database.query.time.median`       | median sampled value                    |
-| `database.query.time.max`          | maximum sampled value                   |
-| `database.query.time.95percentile` | 95th percentile sampled value           |
+| Metric                               | Description                               |
+| ------------------------------------ | ----------------------------------------- |
+| `database.query.time.count`          | number of times this metric was sampled   |
+| `database.query.time.avg`            | average time of the sampled values        |
+| `database.query.time.median`         | median sampled value                      |
+| `database.query.time.max`            | maximum sampled value                     |
+| `database.query.time.95percentile`   | 95th percentile sampled value             |
 
 {{< img src="developers/metrics/dogstatsd_metrics_submission/graph-guides-metrics-query-times.png" alt="graph guides metrics query times" responsive="true" >}}
 
@@ -279,11 +279,13 @@ def render_page():
 
 In either case, as DogStatsD receives the timer data, it calculates the statistical distribution of render times and sends the following metrics to Datadog:
 
-- `mywebsite.page_render.time.count` - the number of times the render time was sampled
-- `mywebsite.page_render.time.avg` - the average render time
-- `mywebsite.page_render.time.median` - the median render time
-- `mywebsite.page_render.time.max` - the maximum render time
-- `mywebsite.page_render.time.95percentile` - the 95th percentile render time
+| Metric                                    | Description                                      |
+| ------------------------------------      | -----------------------------------------        |
+| `mywebsite.page_render.time.count`        | The number of times the render time was sampled. |
+| `mywebsite.page_render.time.avg`          | The average render time.                         |
+| `mywebsite.page_render.time.median`       | The median render time.                          |
+| `mywebsite.page_render.time.max`          | The maximum render time.                         |
+| `mywebsite.page_render.time.95percentile` | The 95th percentile render time.                 |
 
 Remember: under the hood, DogStatsD treats timers as histograms. Whether you use timers or histograms, you'll be sending the same data to Datadog.
 {{% /tab %}}

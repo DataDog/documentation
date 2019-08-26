@@ -24,21 +24,21 @@ This section specifies the raw datagram format for metrics that DogStatsD accept
 
 | Parameter                           | Required   | Description                                                                                                                                                          |
 | ---------------                     | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<METRIC_NAME>`                     | Yes        | a string with no colons, bars, or @ characters. See the [metric naming policy][2].                                                                                   |
-| `<VALUE>`                           | Yes        | an integer or float.                                                                                                                                                 |
+| `<METRIC_NAME>`                     | Yes        | A string with no colons, bars, or @ characters. See the [metric naming policy][2].                                                                                   |
+| `<VALUE>`                           | Yes        | An integer or float.                                                                                                                                                 |
 | `<TYPE>`                            | Yes        | `c` for counter, `g` for gauge, `ms` for timer, `h` for histogram, `s` for set.                                                                                      |
-| `<SAMPLE_RATE>`                     | No         | a float between 0 and 1, inclusive. Only works with counter, histogram, and timer metrics. Default is 1 (i.e. sample 100% of the time).                              |
-| `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No         | a comma separated list of tags. Use colons for key/value tags, i.e. `env:prod`. The key `device` is reserved; Datadog drops a user-added tag like `device:foobar`.   |
+| `<SAMPLE_RATE>`                     | No         | A float between 0 and 1, inclusive. Only works with counter, histogram, and timer metrics. Default is 1 (i.e. sample 100% of the time).                              |
+| `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No         | A comma separated list of tags. Use colons for key/value tags, i.e. `env:prod`. The key `device` is reserved; Datadog drops a user-added tag like `device:foobar`.   |
 
 Here are some example datagrams:
 
-| Datagram | Description |
-| `page.views:1|c` | Increment the page.views counter. |
-|`fuel.level:0.5|g` |Record the fuel tank is half-empty. |
-| `song.length:240|h|@0.5` | Sample the song length histogram half of the time. |
-| `users.uniques:1234|s` | Track a unique visitor to the site. |
-| `users.online:1|c|#country:china` | Increment the active users counter, tag by country of origin. |
-| `users.online:1|c|@0.5|#country:china` | Track active China users and use a sample rate. |
+| Datagram            | Description |                                     |                                                               |                                                 |
+| `page.views:1       | c`          | Increment the page.views counter.   |                                                               |                                                 |
+| `fuel.level:0.5     | g`          | Record the fuel tank is half-empty. |                                                               |                                                 |
+| `song.length:240    | h           | @0.5`                               | Sample the song length histogram half of the time.            |                                                 |
+| `users.uniques:1234 | s`          | Track a unique visitor to the site. |                                                               |                                                 |
+| `users.online:1     | c           | #country:china`                     | Increment the active users counter, tag by country of origin. |                                                 |
+| `users.online:1     | c           | @0.5                                | #country:china`                                               | Track active China users and use a sample rate. |
 
 ## Send metrics using DogStatsD and the shell
 

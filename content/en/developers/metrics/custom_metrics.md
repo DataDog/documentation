@@ -40,6 +40,7 @@ For example, suppose you are interested in measuring the average `temperature` i
 * You submit the following metric name: `auth.exceptionCount`
 * Your code instrumentation plans the following tags associated with that metric: `method:X`, `method:Y`, `exception:A`, `exception:B`.
 * The logic behind your metric is the following :
+
 {{< img src="developers/metrics/custom_metrics/custom_metric_1.png" alt="custom_metric_1" responsive="true" >}}
 
 The given unique metrics **on a given host** are therefore:
