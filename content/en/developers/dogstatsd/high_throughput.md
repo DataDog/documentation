@@ -14,7 +14,7 @@ further_reading:
   text: "DogStatsD source code"
 ---
 
-DogStatsD works by sending metrics generated from your application to the [agent](https://docs.datadoghq.com/agent/) over a transport protocol. This transport protocol can be either UDP (User Datagram Protocol) or UDS (Unix Domain Socket).
+DogStatsD works by sending metrics generated from your application to the [Agent](https://docs.datadoghq.com/agent/) over a transport protocol. This transport protocol can be either UDP (User Datagram Protocol) or UDS (Unix Domain Socket).
 
 When DogStatsD is used to send a large volume of metrics to a single Agent, if proper measures are not taken, it is common to end up with the following symptoms:
 
