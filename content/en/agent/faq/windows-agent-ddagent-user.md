@@ -81,14 +81,9 @@ For the Cassandra Nodetool integration to continue working, apply the following 
 * Grant access to the Nodetool installation directory to the `ddagentuser`.
 * Set the environment variables of the Nodetool installation directory (e.g. `CASSANDRA_HOME` and `DSCINSTALLDIR`) as system-wide variables instead of variables only for the user doing the Nodetool installation.
 
-
-```
-Note: For the Security logs channel, make sure that your Datadog Agent user is added to the Event Log Readers list.
-```
-
 ## Security Logs channel
 
-If you are using the [Datadog- Win 32 event log Integration][9], the Datadog user `ddagentuser` must be added to the Event Log Reader Group:
+If you are using the [Datadog- Win 32 event log Integration][9], the Datadog user `ddagentuser` must be added to the Event Log Reader Group to collect logs from the Security logs channel:
 
 1. Open Run with *Windows+R* hotkeys, type `compmgmt.msc`.
 2. Navigate to *System Tools* -> *Local Users and Groups* -> *Groups*.
