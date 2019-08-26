@@ -15,17 +15,17 @@ Update a Datadog-Amazon Web Services integration.
 
 * **`account_id`** [*required*]:
 
-    Your AWS Account ID without dashes.
+    Your AWS Account ID without dashes. It needs to be passed as query parameter.
     [Consult the Datadog AWS integration to learn more][1] about your AWS account ID.
+
+* **`role_name`** [*required*]:
+
+    Your Datadog role delegation name. It needs to be passed as query parameter.
+    For more information about your AWS account Role name, [see the Datadog AWS integration configuration info][2].
 
 * **`access_key_id`** [*optional*, *default*=**None**]:
 
     If your AWS account is a GovCloud or China account, enter the corresponding Access Key ID.
-
-* **`role_name`** [*required*]:
-
-    Your Datadog role delegation name.
-    For more information about your AWS account Role name, [see the Datadog AWS integration configuration info][2].
 
 * **`filter_tags`** [*optional*, *default*=**None**]:
 
