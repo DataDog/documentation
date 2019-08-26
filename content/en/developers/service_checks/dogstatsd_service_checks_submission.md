@@ -17,7 +17,19 @@ further_reading:
 
 DogStatsD can send Service Checks to Datadog. Use checks to track the status of services your application depends on:
 
-For Python:
+```
+service_check(Name, Status, Tags, Hostname, Message)
+```
+
+| Parameter  | Type            | Required | Default Value | Description                                                                                                   |
+| ---------  | ----            | -------- | ------------- | -----------                                                                                                   |
+| `Name`     | String          | yes      | -             | The name of the service check.                                                                                |
+| `Status`   | float           | yes      | -             | A constant describing the service status: `0` for OK, `1` for Warning, `2` for Critical, and `3` for Unknown. |
+| `Tags`     | list of strings | no       | `None`        | A list of tags to associate with this Service Check.                                                          |
+| `Hostname` | string          | no       | current host  | A hostname to associate with this Service check. Defaults to the current host.                                |
+| `Message`  | String          | no       | `None`        | Additional information or a description of why this status occurred.                                          |
+
+Find below examples according to your language:
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -49,6 +61,25 @@ statsd.service_check(name, status, opts)
 ```
 
 {{% /tab %}}
+{{% tab "Go" %}}
+
+
+{{% /tab %}}
+{{% tab "Java" %}}
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+{{% /tab %}}
+{{% tab "C++" %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 After a Service Check is reported, use it to trigger a [custom check monitor][1].
@@ -57,16 +88,35 @@ After a Service Check is reported, use it to trigger a [custom check monitor][1]
 
 Add tags to any Service Check you send to DogStatsD. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
 
-```python
 
-@statsd.timed('algorithm.run_time', tags=['algorithm:one'])
-def algorithm_one():
-    # Do fancy things here ...
+{{< tabs >}}
+{{% tab "Python" %}}
 
-@statsd.timed('algorithm.run_time', tags=['algorithm:two'])
-def algorithm_two():
-    # Do fancy things (maybe faster?) here ...
-```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+
+{{% /tab %}}
+{{% tab "Java" %}}
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+{{% /tab %}}
+{{% tab "C++" %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further reading
 

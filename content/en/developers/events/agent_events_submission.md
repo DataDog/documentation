@@ -9,6 +9,23 @@ further_reading:
 
 An event in a custom Agent Check is a dictionary with the following keys and data types:
 
+```python
+self.event(
+            {
+              "timestamp": <TIMESTAMP_EPOCH>,
+              "event_type": "<EVENT_NAME>",
+              "msg_title": "<TITLE>",
+              "msg_text": "<MESSAGE>",
+              "aggregation_key": "<AGGREGATION_KEY>",
+              "alert_type": "<ALERT_TYPE>
+              "source_type_name": "<SOURCE_TYPE>",
+              "host": "<HOSTNAME>",
+              "tags": ["<TAGS>"],
+              "priority": "<PRIORITY>"
+            }
+)
+```
+
 | Key                | Type            | Required | Description                                                         |
 | -----              | ---             | ----     | ----                                                                |
 | `timestamp`        | Integer         | yes      | The epoch timestamp for the event.                                  |
@@ -28,14 +45,15 @@ To submit an event from a custom Agent Check use the `event(<EVENT_DICT>)` funct
 self.event(
             {
                 'timestamp': timestamp(),
-                'event_type': "<EVENT_TYPE>,
-                'msg_title': 'Title of the event',
-                'msg_text': 'Message of the event',
-                'alert_type': 'info',
+                'event_type': 'Error',
+                'msg_title': 'An error happend',
+                'msg_text': 'Starting service XYZ failed',
+                'alert_type': 'error',
             }
           )
 ```
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /integrations/faq/list-of-api-source-attribute-value

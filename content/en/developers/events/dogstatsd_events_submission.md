@@ -14,7 +14,29 @@ further_reading:
   text: "DogStatsD source code"
 ---
 
-DogStatsD can emit events to your [Datadog event stream][1]. For example, you may want to see errors and exceptions in Datadog:
+DogStatsD can emit events to your [Datadog event stream][1] with the following function:
+
+```
+event(Title, Text, Timestamp, Hostname, AggregationKey, Priority, SourceTypeName, AlertType, Tags)
+```
+
+| Parameter        | Type            | Required | Description                                                                                             |
+| ---------        | ---             | -------  | --------                                                                                                |
+| `Title`          | String          | yes      | The title of the event.                                                                                 |
+| `Text`           | String          | yes      | The text body of the event.                                                                             |
+| `Timestamp`      | Integer         | yes      | The epoch timestamp for the event. If not provided, the DogStatsD server sets this to the current time. |
+| `Hostname`       | String          | no       | The name of the host.                                                                                   |
+| `AggregationKey` | String          | no       | A key to use for aggregating events.                                                                    |
+| `Priority`       | String          | no       | Specifies the priority of the event (`normal` or `low`).                                                |
+| `SourceTypeName` | String          | no       | The [source type][2] name.                           |
+| `AlertType`      | String          | no       | One of (`error`, `warning`, `success`, `info`), defaults to `info`.                                     |
+| `Tags`           | List of Strings | no       | A list of tags to associate with this event.                                                            |
+
+For example, you may want to see errors and exceptions in Datadog:
+
+
+{{< tabs >}}
+{{% tab "Python" %}}
 
 ```python
 
@@ -28,9 +50,38 @@ def render_page():
     statsd.event('Page render error!', err.message, alert_type='error')
 ```
 
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+
+{{% /tab %}}
+{{% tab "Java" %}}
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+{{% /tab %}}
+{{% tab "C++" %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Tagging
 
 Add tags to any event you send to DogStatsD. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
+
+
+{{< tabs >}}
+{{% tab "Python" %}}
 
 ```python
 
@@ -43,8 +94,34 @@ def algorithm_two():
     # Do fancy things (maybe faster?) here ...
 ```
 
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+
+{{% /tab %}}
+{{% tab "Java" %}}
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+{{% /tab %}}
+{{% tab "C++" %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing/event_stream
+[2]: /integrations/faq/list-of-api-source-attribute-value
