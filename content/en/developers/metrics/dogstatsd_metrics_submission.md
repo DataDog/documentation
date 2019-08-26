@@ -5,19 +5,17 @@ description: Overview of the features of DogStatsD, including data types and tag
 aliases:
   - /developers/faq/reduce-submission-rate
   - /developers/faq/why-is-my-counter-metric-showing-decimal-values
+  - /developers/faq/dog-statsd-sample-rate-parameter-explained
 further_reading:
 - link: "developers/dogstatsd"
   tag: "Documentation"
   text: "Introduction to DogStatsD"
-- link: "developers/libraries"
+- link: "developers/metrics/metric_type"
   tag: "Documentation"
-  text: "Official and Community-contributed API and DogStatsD client libraries"
-- link: "https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd"
-  tag: "GitHub"
-  text: "DogStatsD source code"
+  text: "Discover Datadog metric types."
 ---
 
-While StatsD accepts only metrics, DogStatsD accepts all three of the major Datadog data types: metrics, events, and Service Checks. This section shows typical use cases for Metrics split down by metric types, and introduces [Sampling Rate](#sample-rates) and [Metrics tagging](#metrics-tagging), which is specific to DogStatsD.
+While StatsD accepts only metrics, DogStatsD accepts all three of the major Datadog data types: metrics, events, and Service Checks. This section shows typical use cases for Metrics split down by metric types, and introduces [Sampling Rate](#sample-rates) and [Metrics tagging](#metrics-tagging) options which are specific to DogStatsD.
 
 [Count](#count), [Gauge](#gauge), and [Set](#set) metric types are familiar to StatsD users. Histograms are specific to DogStatsD. Timers, which exist in StatsD, are a sub-set of histograms in DogStatsD. Additionally you can also submit [Rate](#rate) and [Distribution](#distribution) metric types using DogStatsD.
 
@@ -27,35 +25,29 @@ After having [installed DogStatsD][1], find below the functions available to sub
 
 ## Count
 
-| Method | Overview |
-| :----- | :------- |
-| dog.increment(...) | Used to increment a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that StatsD flush period.</li></ul> |
-| dog.decrement(...) | Used to decrement a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that StatsD flush period.</li></ul> |
+| Method | Description | Storage type |
+| :----- | :------- | :--- |
+| `increment(MetricName, SampleRate, Tags)` | Used to increment a count metric. | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the counter's value over that StatsD flush period.|
+| `decrement(MetricName, SampleRate, Tags)` | Used to decrement a count metric. | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the counter's value over that StatsD flush period.|
+| `count(MetricName, Value, SampleRate, Tags)` | Use to increment a count metric from an arbitrary `Value` | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the counter's value over that StatsD flush period.  |
 
 
-Note: StatsD counters can show a decimal value within Datadog since they are normalized over the flush interval to report a per-second units. [Read more about Datadog metrics types][2].
-
-Counters track how many times something happens _per second_, such as page views. Arbitrary numbers can also be counted. Suppose you wanted to count the number of bytes processed by a file uploading service.
+Note: Count type metrics can show a decimal value within Datadog since they are normalized over the flush interval to report a per-second units.
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
 ```python
-
-def upload_file(file):
-    statsd.increment('file_service.bytes_uploaded', file.size())
-    save_file(file)
-    return 'File uploaded!'
+statsd.increment('fuction.called')
 ```
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 ```ruby
-def render_page()
-  # Render a web page.
+def upload_file()
+  # (...)
   statsd.increment('web.page_views')
-  return 'Hello World!'
 end
 ```
 
@@ -90,9 +82,9 @@ Learn more about the [Count type in the Metrics documentation][4].
 
 ## Gauge
 
-|Method | Overview |
-|:---|:---|
-|dog.gauge(...)|Stored as a GAUGE type in the Datadog web application. Each value in the stored timeseries is the last gauge value submitted for that metric during the StatsD flush period.|
+| Method | Datadog Storage type |
+| :----- | :------- |
+|gauge(MetricName, Value, SampleRate, Tags)|Stored as a `GAUGE` type in Datadog. Each value in the stored timeseries is the last gauge value submitted for that metric during the StatsD flush period.|
 
 Gauges measure the value of a particular thing over time. For example, in order to track the amount of free memory on a machine, periodically sample that value as the metric `system.mem.free`:
 
@@ -141,12 +133,11 @@ Learn more about the [Gauge type in the Metrics documentation][4].
 
 ## Set
 
-|Method | Overview |
+|Method | Datadog Storage type |
 |:---|:---|
-|dog.set(...)|Used count the number of unique elements in a group:<ul><li>Stored as GAUGE type in the Datadog web application. Each value in the stored timeseries is the count of unique values submitted to StatsD for a metric over that flush period.</li></ul>|
+|set(MetricName, Value, SampleRate, Tags)|Stored as `GAUGE` type in Datadog. Each value in the stored timeseries is the count of unique values submitted to StatsD for a metric over that flush period.</li></ul>|
 
 Sets are used to count the number of unique elements in a group, for example, the number of unique visitors to your site:
-
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -221,9 +212,9 @@ Learn more about the [Sets type in the Metrics documentation][4].
 ## Histogram
 
 
-| Method             | Overview                                                                                  |
+| Method             | Datadog Storage type                                                                                  |
 | :---               | :---                                                                                      |
-| dog.histogram(...) | Used to track the statistical distribution of a set of values over a StatsD flush period. |
+| histogram(MetricName, Value, SampleRate, Tags) | Used to track the statistical distribution of a set of values over a StatsD flush period. |
 
 Histograms are specific to DogStatsD. They calculate the statistical distribution of any kind of value, such as timing data, for example, the duration of a metrics query:
 
@@ -298,9 +289,9 @@ Learn more about the [Histogram type in the Metrics documentation][4].
 
 **This feature is in BETA. [Contact Datadog support][5] for details on how to have it enabled for your account.**
 
-| Method | Overview |
+| Method | Datadog Storage type |
 | :----- | :------- |
-| `dog.distribution(String metric.name, double value, String... tags)` | Track the statistical distribution of a set of values over one or more hosts. |
+| `distribution(MetricName, Value, Tags)` | Track the statistical distribution of a set of values over one or more hosts. |
 
 Distributions are like a global version of Histograms (see below). They calculate statistical distributions across multiple hosts, allowing you to compute global percentiles across your entire dataset. Global distributions are designed to instrument logical objects, such as services, independently from the underlying hosts.
 
@@ -361,10 +352,17 @@ Distributions are not only for measuring times. They can be used to measure the 
 ### Sample rates
 
 Since the overhead of sending UDP packets can be too great for some performance intensive code paths, DogStatsD clients support sampling, i.e. only sending metrics a percentage of the time.
+It's not useful in all cases, but can be interesting if you sample many metrics, and your DogStatsD client is not on the same host as the DogStatsD server. This is a trade off: you decrease traffic but slightly lose in precision/granularity.
 
-Before sending the metric to Datadog, DogStatsD uses the `sample_rate` to correct the metric value, i.e. to estimate what it would have been without sampling.
+Before sending the metric to Datadog, DogStatsD uses the `sample_rate` to correct the metric value depending of the metric type, i.e. to estimate what it would have been without sampling:
 
-**Note**: **Sample rates only work with counter, histogram, and timer metrics.**
+| Metric Type | Sample rate correction |
+| `Count` | Values received are multiplied by (1/sample_rate), because it's reasonable to suppose in most cases that for 1 datapoint received, `1/sample_rate` were actually sampled with the same value. |
+| `Gauge` | No correction. The value received is kept as it is. |
+| `Set` | Bo correction. The value received is kept as it is. |
+| `Histogram` | The `histogram.count` statistic is a counter metric, and receives the correction outlined above. Other statistics are gauge metrics and aren't "corrected." |
+
+See the [Datadog Agent aggregation code](https://github.com/DataDog/dd-agent/blob/master/aggregator.py) to learn more about this behavior.
 
 The following code only sends points half of the time:
 

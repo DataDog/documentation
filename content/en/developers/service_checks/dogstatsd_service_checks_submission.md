@@ -63,18 +63,29 @@ statsd.service_check(name, status, opts)
 {{% /tab %}}
 {{% tab "Go" %}}
 
+TO DO
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
+```java
+ServiceCheck sc = ServiceCheck
+      .builder()
+      .withName("Service.check.name")
+      .withStatus(ServiceCheck.Status.OK)
+      .build();
+statsd.serviceCheck(sc);
+```
+
 {{% /tab %}}
 {{% tab ".NET" %}}
+
+TO DO
 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-{{% /tab %}}
-{{% tab "C++" %}}
+TO DO
 
 {{% /tab %}}
 {{< /tabs >}}

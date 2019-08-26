@@ -44,7 +44,7 @@ They both receive:
 {{< tabs >}}
 {{% tab "Count" %}}
 
-**Metrics of type `Count` are used to count things over a period of time.**
+**Metrics of type `Count` are used to count things over a period of time (usually _per second_).**
 
 For instance let's say the `number.of.requests` metrics is reported every 10 seconds to Datadog with the `count` type for `web_1`.
 
@@ -53,6 +53,8 @@ Each data point represents the number of requests received during the 10 second 
 * `10` for the first 10 seconds
 * `20` for the second interval of 10 seconds
 * `0` for the last interval of 10 seconds
+
+Note: StatsD counters can show a decimal value within Datadog since they are normalized over the flush interval to report a per-second units.
 
 {{% /tab %}}
 {{% tab "Gauge" %}}

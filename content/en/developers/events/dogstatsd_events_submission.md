@@ -39,29 +39,20 @@ For example, you may want to see errors and exceptions in Datadog:
 {{% tab "Python" %}}
 
 ```python
-
-from datadog import statsd
-
-def render_page():
-  try:
-    # Render the page...
-    # ..
-  except RenderError as err:
-    statsd.event('Page render error!', err.message, alert_type='error', tags=['env:dev'])
+#(...)
+try:
+  # do Something
+except RenderError as err:
+  statsd.event('An error occured', err.message, alert_type='error', tags=['env:dev'])
 ```
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 ```ruby
-require 'datadog/statsd'
-
-# Create a DogStatsD client instance.
-statsd = Datadog::Statsd.new
-
 begin
     #... process, may raise an exception
 rescue =>
-    statsd.event('Page render error', "Paged failed to load ", alert_type: 'error', tags: ['env:dev'])
+    statsd.event('An error occured', "Description of the error", alert_type: 'error', tags: ['env:dev'])
 else
     #... executes when no error
 ensure
@@ -72,18 +63,60 @@ end
 {{% /tab %}}
 {{% tab "Go" %}}
 
+```go
+if err != nil {
+  dogstatsd_client.Event("An error occured", err, alert_type: "error", []string{"env:dev"} )
+}
+```
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
+```java
+
+try {
+  //  Block of code to try
+}
+catch(Exception e) {
+  final Event event = Event.builder()
+          .withTitle("An error occured")
+          .withText(e)
+          .withAlertType(Event.AlertType.ERROR)
+          .build();
+  statsd.event(event)
+}
+```
+
 {{% /tab %}}
 {{% tab ".NET" %}}
+
+
+```csharp
+try
+{
+    // (...)
+}
+catch (InvalidOperationException ex)
+{
+    DogStatsd.Event(ex.GetType().FullName, ex.Message, alertType: "error", tags: new[] { "env:dev" });
+}
+```
 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-{{% /tab %}}
-{{% tab "C++" %}}
+```php
+try {
+  # (...)
+} catch (Exception $e) {
+  $statsd->event('An error occured.',
+    array(
+        'text'       => $e->getMessage(),
+        'alert_type' => 'error'
+    )
+  );
+}
+```
 
 {{% /tab %}}
 {{< /tabs >}}

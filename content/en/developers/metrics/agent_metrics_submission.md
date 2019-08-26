@@ -25,7 +25,7 @@ Example: Submitting samples 2, 3, 6, 7 sends 5 (i.e. 7-2) during the first check
 Find below the function usage:
 
 ```python
-self. monotonic_count(name, value, tags=None, hostname=None, device_name=None)
+self.monotonic_count(name, value, tags=None, hostname=None, device_name=None)
 ```
 
 | Parameter     | Type            | Required | Default Value | Description                                                                         |
@@ -45,7 +45,7 @@ This function submits the number of events that occurred during the check interv
 Find below the function usage:
 
 ```python
-self. count(name, value, tags=None, hostname=None, device_name=None)
+self.count(name, value, tags=None, hostname=None, device_name=None)
 ```
 
 | Parameter     | Type            | Required | Default Value | Description                                                                         |

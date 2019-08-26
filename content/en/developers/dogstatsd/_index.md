@@ -170,7 +170,7 @@ statsd = Datadog::Statsd.new
 {{% tab "Go" %}}
 
 ```go
-client, err := statsd.New("127.0.0.1:8125")
+dogstatsd_client, err := statsd.New("127.0.0.1:8125")
 if err != nil {
     log.Fatal(err)
 }
@@ -234,7 +234,7 @@ StatsdClient.DogStatsd.Configure(dogstatsdConfig);
 {{% /tab %}}
 {{< /tabs >}}
 
-### Client instantiation parameter
+### Client instantiation parameters
 
 In addition to the basic DogStatsD configuration, you can use the following parameters for your client:
 
