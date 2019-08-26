@@ -14,7 +14,7 @@ further_reading:
   text: "DogStatsD source code"
 ---
 
-This section specifies the raw datagram format for metrics, events, and Service Checks that DogStatsD accepts. This isn't required reading if you're using any of [the DogStatsD client libraries](/developers/libraries/#api-and-dogstatsd-client-libraries); however, if you want to write your own library, or use the shell to send metrics, then read on.
+This section specifies the raw datagram format for metrics, events, and Service Checks that DogStatsD accepts. This isn't required reading if you're using any of [the DogStatsD client libraries][1]; however, if you want to write your own library, or use the shell to send metrics, then read on.
 
 {{< tabs >}}
 {{% tab "Metrics" %}}
@@ -23,9 +23,9 @@ This section specifies the raw datagram format for metrics, events, and Service 
 
 | Parameter                           | Required   | Description                                                                                                                                                          |
 | ---------------                     | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<METRIC_NAME>`                     | Yes        | A string with no colons, bars, or @ characters. See the [metric naming policy](/developers/metrics/#naming-metrics).                                                                                   |
+| `<METRIC_NAME>`                     | Yes        | A string with no colons, bars, or @ characters. See the [metric naming policy][1].                                                                                   |
 | `<VALUE>`                           | Yes        | An integer or float.                                                                                                                                                 |
-| `<TYPE>`                            | Yes        | `c` for counter, `g` for gauge, `ms` for timer, `h` for histogram, `s` for set. See the [metric type documentation](/developers/metrics/metric_type))                                                                                     |
+| `<TYPE>`                            | Yes        | `c` for counter, `g` for gauge, `ms` for timer, `h` for histogram, `s` for set. See the [metric type documentation][2])                                                                                     |
 | `<SAMPLE_RATE>`                     | No         | A float between 0 and 1, inclusive. Only works with counter, histogram, and timer metrics. Default is 1 (i.e. sample 100% of the time).                              |
 | `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No         | A comma separated list of tags. Use colons for key/value tags, i.e. `env:prod`. The key `device` is reserved; Datadog drops a user-added tag like `device:foobar`.   |
 
@@ -38,6 +38,8 @@ Here are some example datagrams:
 * `users.online:1|c|#country:china`: Increment the active users counter, tag by country of origin
 * `users.online:1|c|@0.5|#country:china`: Track active China users and use a sample rate
 
+[1]: /developers/metrics/#naming-metrics
+[2]: /developers/metrics/metric_type
 {{% /tab %}}
 {{% tab "Events" %}}
 
@@ -85,23 +87,22 @@ Here's an example datagram:
 
 ```
 # Send a CRITICAL status for a remote connection
-_sc|Redis connection|2|#redis_instance:10.0.0.16:6379|m:Redis connection timed out after 10s
+_sc|Redis connection|2|#env:dev|m:Redis connection timed out after 10s
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ## Send metrics using DogStatsD and the shell
 
-For Linux and other Unix-like OS, use Bash. For Windows, you need PowerShell and [PowerShell-statsd][3] (a simple PowerShell function that takes care of the network bits). The idea behind DogStatsD is: create a message that contains information about your metric, event, or Service Check and send it to a collector over UDP on port `8125`.
+For Linux and other Unix-like OS, use Bash. For Windows, you need PowerShell and [PowerShell-statsd][2] (a simple PowerShell function that takes care of the network bits). The idea behind DogStatsD is: create a message that contains information about your metric, event, or Service Check and send it to a locally installed Agent as a collector, the destination IP address is then `127.0.0.1` and the collector port over UDP port is `8125`.
 
 {{< tabs >}}
 {{% tab "Metrics" %}}
 
-The format for sending metrics is `<METRIC_NAME>:<VALUE>|<TYPE>|@<SAMPLE_RATE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`, to send datapoints for a gauge metric called `custom_metric` with the shell tag. Using a locally installed Agent as a collector, the destination IP address is `127.0.0.1`.
+The format for sending metrics is `<METRIC_NAME>:<VALUE>|<TYPE>|@<SAMPLE_RATE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`, to send datapoints for a gauge metric called `custom_metric` with the shell tag.
 
-Linux options:
+On Linux:
 
 ```shell
 $ echo -n "custom_metric:60|g|#shell" >/dev/udp/localhost/8125
@@ -115,7 +116,7 @@ $ echo -n "custom_metric:60|g|#shell" | nc -4u -w0 127.0.0.1 8125
 $ echo -n "custom.metric.name:1|c"|nc -4u -w1 localhost 8125
 ```
 
-Windows options:
+On Windows:
 
 ```
 PS C:\> .\send-statsd.ps1 "custom_metric:123|g|#shell"
@@ -143,33 +144,52 @@ Here, calculate the size of the event's title and body:
 On Linux:
 
 ```
-vagrant@vagrant-ubuntu-14-04:~$ title="Event from the shell"
-vagrant@vagrant-ubuntu-14-04:~$ text="This was sent from Bash!"
-vagrant@vagrant-ubuntu-14-04:~$ echo "_e{${#title},${#text}}:$title|$text|#shell,bash"  >/dev/udp/localhost/8125
+$ title="Event from the shell"
+$ text="This was sent from Bash!"
+$ echo "_e{${#title},${#text}}:$title|$text|#shell,bash"  >/dev/udp/localhost/8125
 ```
 
 On Windows:
 
 ```
-PS C:\vagrant> $title = "Event from the shell"
-PS C:\vagrant> $text = "This was sent from PowerShell!"
-PS C:\vagrant> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$text|#shell,PowerShell"
+PS C:> $title = "Event from the shell"
+PS C:> $text = "This was sent from PowerShell!"
+PS C:> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$text|#shell,PowerShell"
 ```
 
 {{% /tab %}}
 {{% tab "Service Checks" %}}
 
+The format for sending Service Checks is:
+
+```
+_sc|<NAME>|<STATUS>|d:<TIMESTAMP>|h:<HOSTNAME>|#<TAG_KEY_1>:<TAG_VALUE_1>|m:<SERVICE_CHECK_MESSAGE>
+```
+
+On Linux:
+
+```shell
+$ echo -n "_sc|Redis connection|2|#env:dev|m:Redis connection timed out after 10s" >/dev/udp/localhost/8125
+```
+
+On Windows:
+
+```
+PS C:\> .\send-statsd.ps1 "_sc|Redis connection|2|#env:dev|m:Redis connection timed out after 10s"
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 
-To send metrics, events, or Service Checks on containerized environments, refer to the [DogStatsD on Kubernetes][4] documentation, in conjunction with the instructions for configuring APM on Kubernetes using [DaemonSets][5] or [Helm][6], depending on your installation. The [Docker APM][7] documentation may also be helpful.
+To send metrics, events, or Service Checks on containerized environments, refer to the [DogStatsD on Kubernetes][3] documentation, in conjunction with the instructions for configuring APM on Kubernetes using [DaemonSets][4] or [Helm][5], depending on your installation. The [Docker APM][6] documentation may also be helpful.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[3]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.
-[4]: /agent/kubernetes/dogstatsd
-[5]: /agent/kubernetes/daemonset_setup/#apm-and-distributed-tracing
-[6]: /agent/kubernetes/helm/#enable-apm-and-distributed-tracing
-[7]: /agent/docker/apm
+[1]: /developers/libraries/#api-and-dogstatsd-client-libraries
+[2]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.
+[3]: /agent/kubernetes/dogstatsd
+[4]: /agent/kubernetes/daemonset_setup/#apm-and-distributed-tracing
+[5]: /agent/kubernetes/helm/#enable-apm-and-distributed-tracing
+[6]: /agent/docker/apm
