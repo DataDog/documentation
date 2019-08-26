@@ -46,7 +46,7 @@ With Datadog APM, you can easily investigate the performance of your endpoints, 
 
     The Flamegraph is a great way of identifying the precise piece of your stack that is errneous or very latent. Errors are marked with red highlights and duration is represented by the horizontal length of the span, so very long spans are the slow ones. Learn more about using the Flamegraph in the [Trace View guide][2].
 
-    Under the Flamegraph you can see all of the metadata (including [custom metadata][3]) and create facets for searches. From here you can also see associated logs (if you [connected Logs to your Traces][4]), see Host-level information such as CPU and memory usage. 
+    Under the Flamegraph you can see all of the tags (including [custom ones][3]). From here you can also see associated logs (if you [connected Logs to your Traces][4]), see Host-level information such as CPU and memory usage. 
 
     {{< img src="tracing/guide/slowest_request_daily/slowest_trace_4.png" alt="Identifying the slowest trace and finding the bottleneck causing it" responsive="true" style="width:90%;">}}
 

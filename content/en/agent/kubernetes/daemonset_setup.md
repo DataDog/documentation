@@ -419,7 +419,7 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [8]: /agent/autodiscovery/?tab=agent#how-to-set-it-up
 [9]: /integrations/amazon_ec2/#configuration
 [10]: /logs
-[11]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
+[11]: /agent/autodiscovery/integrations/?tab=kubernetes
 [12]: /tracing/setup
 [13]: /graphing/infrastructure/process/?tab=kubernetes#installation
 [14]: /agent/kubernetes/dogstatsd
