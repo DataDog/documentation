@@ -14,7 +14,7 @@ further_reading:
   text: "DogStatsD source code"
 ---
 
-DogStatsD can emit events to your [Datadog event stream][1] with the following function:
+After [installing DogStatsD][1], you can emit events to your [Datadog event stream][2] with the following function:
 
 ```
 event(Title, Text, Timestamp, Hostname, AggregationKey, Priority, SourceTypeName, AlertType, Tags)
@@ -28,7 +28,7 @@ event(Title, Text, Timestamp, Hostname, AggregationKey, Priority, SourceTypeName
 | `Hostname`       | String          | no       | The name of the host.                                                                                   |
 | `AggregationKey` | String          | no       | A key to use for aggregating events.                                                                    |
 | `Priority`       | String          | no       | Specifies the priority of the event (`normal` or `low`).                                                |
-| `SourceTypeName` | String          | no       | The [source type][2] name.                           |
+| `SourceTypeName` | String          | no       | The [source type][3] name.                           |
 | `AlertType`      | String          | no       | One of (`error`, `warning`, `success`, `info`), defaults to `info`.                                     |
 | `Tags`           | List of Strings | no       | A list of tags to associate with this event.                                                            |
 
@@ -47,11 +47,27 @@ def render_page():
     # Render the page...
     # ..
   except RenderError as err:
-    statsd.event('Page render error!', err.message, alert_type='error')
+    statsd.event('Page render error!', err.message, alert_type='error', tags=['env:dev'])
 ```
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
+```ruby
+require 'datadog/statsd'
+
+# Create a DogStatsD client instance.
+statsd = Datadog::Statsd.new
+
+begin
+    #... process, may raise an exception
+rescue =>
+    statsd.event('Page render error', "Paged failed to load ", alert_type: 'error', tags: ['env:dev'])
+else
+    #... executes when no error
+ensure
+    #... always executed
+end
+```
 
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -59,53 +75,6 @@ def render_page():
 
 {{% /tab %}}
 {{% tab "Java" %}}
-
-{{% /tab %}}
-{{% tab "Node.js" %}}
-
-{{% /tab %}}
-{{% tab ".NET" %}}
-
-{{% /tab %}}
-{{% tab "PHP" %}}
-
-{{% /tab %}}
-{{% tab "C++" %}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## Tagging
-
-Add tags to any event you send to DogStatsD. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
-
-
-{{< tabs >}}
-{{% tab "Python" %}}
-
-```python
-
-@statsd.timed('algorithm.run_time', tags=['algorithm:one'])
-def algorithm_one():
-    # Do fancy things here ...
-
-@statsd.timed('algorithm.run_time', tags=['algorithm:two'])
-def algorithm_two():
-    # Do fancy things (maybe faster?) here ...
-```
-
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
-{{% /tab %}}
-{{% tab "Go" %}}
-
-
-{{% /tab %}}
-{{% tab "Java" %}}
-
-{{% /tab %}}
-{{% tab "Node.js" %}}
 
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -123,5 +92,6 @@ def algorithm_two():
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/event_stream
-[2]: /integrations/faq/list-of-api-source-attribute-value
+[1]: /developers/dogstatsd
+[2]: /graphing/event_stream
+[3]: /integrations/faq/list-of-api-source-attribute-value

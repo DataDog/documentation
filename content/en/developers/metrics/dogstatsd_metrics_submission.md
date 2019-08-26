@@ -19,16 +19,11 @@ further_reading:
 
 While StatsD accepts only metrics, DogStatsD accepts all three of the major Datadog data types: metrics, events, and Service Checks. This section shows typical use cases for Metrics split down by metric types, and introduces [Sampling Rate](#sample-rates) and [Metrics tagging](#metrics-tagging), which is specific to DogStatsD.
 
-Examples can be found for the official Datadog-DogStatsD client:
-
-* [Datadog-DogStatsD Python client][1]
-
-Feel free to refer to [other DogStatsD client libraries][2] if the official clients don't support your use-case.
-
-
 [Count](#count), [Gauge](#gauge), and [Set](#set) metric types are familiar to StatsD users. Histograms are specific to DogStatsD. Timers, which exist in StatsD, are a sub-set of histograms in DogStatsD. Additionally you can also submit [Rate](#rate) and [Distribution](#distribution) metric types using DogStatsD.
 
 **Note**: Depending of the submission method used, the submission metric type and the actual metric type stored within Datadog might differ:
+
+After having [installed DogStatsD][1], find below the functions available to submit your metrics to Datadog depending of their metric type.
 
 ## Count
 
@@ -38,7 +33,7 @@ Feel free to refer to [other DogStatsD client libraries][2] if the official clie
 | dog.decrement(...) | Used to decrement a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that StatsD flush period.</li></ul> |
 
 
-Note: StatsD counters can show a decimal value within Datadog since they are normalized over the flush interval to report a per-second units. [Read more about Datadog metrics types][3].
+Note: StatsD counters can show a decimal value within Datadog since they are normalized over the flush interval to report a per-second units. [Read more about Datadog metrics types][2].
 
 Counters track how many times something happens _per second_, such as page views. Arbitrary numbers can also be counted. Suppose you wanted to count the number of bytes processed by a file uploading service.
 
@@ -72,9 +67,6 @@ end
 {{% tab "Java" %}}
 
 {{% /tab %}}
-{{% tab "Node.js" %}}
-
-{{% /tab %}}
 {{% tab ".NET" %}}
 
 {{% /tab %}}
@@ -92,9 +84,9 @@ With this one line of code, the data is available to graph in Datadog. Here's an
 
 Note that StatsD counters are normalized over the flush interval to report per-second units. In the graph above, the marker is reporting 35.33 web page views per second at ~15:24. In contrast, if one person visited the web page each second, the graph would be a flat line at y = 1. To increment or measure values over time, see [gauges](#gauges).
 
-Note that for counters coming from another source that are ever-increasing and never reset (for example, the number of queries from MySQL over time), Datadog tracks the rate between flushed values. To get raw counts within Datadog, apply a function to your series such as _cumulative sum_ or _integral_. [Read more about Datadog functions][4].
+Note that for counters coming from another source that are ever-increasing and never reset (for example, the number of queries from MySQL over time), Datadog tracks the rate between flushed values. To get raw counts within Datadog, apply a function to your series such as _cumulative sum_ or _integral_. [Read more about Datadog functions][3].
 
-Learn more about the [Count type in the Metrics documentation][5].
+Learn more about the [Count type in the Metrics documentation][4].
 
 ## Gauge
 
@@ -134,9 +126,6 @@ end
 {{% tab "Java" %}}
 
 {{% /tab %}}
-{{% tab "Node.js" %}}
-
-{{% /tab %}}
 {{% tab ".NET" %}}
 
 {{% /tab %}}
@@ -148,7 +137,7 @@ end
 {{% /tab %}}
 {{< /tabs >}}
 
-Learn more about the [Gauge type in the Metrics documentation][5].
+Learn more about the [Gauge type in the Metrics documentation][4].
 
 ## Set
 
@@ -187,9 +176,6 @@ end
 {{% tab "Java" %}}
 
 {{% /tab %}}
-{{% tab "Node.js" %}}
-
-{{% /tab %}}
 {{% tab ".NET" %}}
 
 {{% /tab %}}
@@ -201,7 +187,7 @@ end
 {{% /tab %}}
 {{< /tabs >}}
 
-Learn more about the [Sets type in the Metrics documentation][5].
+Learn more about the [Sets type in the Metrics documentation][4].
 
 ## Rate
 
@@ -218,9 +204,6 @@ Learn more about the [Sets type in the Metrics documentation][5].
 
 {{% /tab %}}
 {{% tab "Java" %}}
-
-{{% /tab %}}
-{{% tab "Node.js" %}}
 
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -284,9 +267,6 @@ end
 {{% tab "Java" %}}
 
 {{% /tab %}}
-{{% tab "Node.js" %}}
-
-{{% /tab %}}
 {{% tab ".NET" %}}
 
 {{% /tab %}}
@@ -312,11 +292,11 @@ The above instrumentation produces the following metrics:
 
 In this example, let's say that a query time of 1 second is acceptable. The median query time (graphed in purple) is usually less than 100 milliseconds, which is great. Unfortunately, the 95th percentile (graphed in blue) has large spikes sometimes nearing three seconds, which is unacceptable. This means that most of queries are running just fine, but the worst ones are very bad. If the 95th percentile was close to the median, then you would know that almost all of the queries are performing just fine.
 
-Learn more about the [Histogram type in the Metrics documentation][5].
+Learn more about the [Histogram type in the Metrics documentation][4].
 
 ## Distribution
 
-**This feature is in BETA. [Contact Datadog support][6] for details on how to have it enabled for your account.**
+**This feature is in BETA. [Contact Datadog support][5] for details on how to have it enabled for your account.**
 
 | Method | Overview |
 | :----- | :------- |
@@ -353,9 +333,6 @@ statsd.distribution('dist.dd.website.latency', duration)
 
 {{% /tab %}}
 {{% tab "Java" %}}
-
-{{% /tab %}}
-{{% tab "Node.js" %}}
 
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -419,9 +396,6 @@ end
 {{% tab "Java" %}}
 
 {{% /tab %}}
-{{% tab "Node.js" %}}
-
-{{% /tab %}}
 {{% tab ".NET" %}}
 
 {{% /tab %}}
@@ -463,9 +437,6 @@ def algorithm_two():
 {{% tab "Java" %}}
 
 {{% /tab %}}
-{{% tab "Node.js" %}}
-
-{{% /tab %}}
 {{% tab ".NET" %}}
 
 {{% /tab %}}
@@ -481,15 +452,14 @@ def algorithm_two():
 
 The host tag is assigned automatically by the Datadog Agent aggregating the metrics. Metrics submitted with a host tag not matching the Agent hostname lose reference to the original host. The host tag submitted overrides any hostname collected by or configured in the Agent.
 
-**Note**: Because of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][7] page for more details.
+**Note**: Because of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][6] page for more details.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: http://datadogpy.readthedocs.io/en/latest
-[2]: /libraries
-[3]: /developers/metrics
-[4]: /graphing/functions/#apply-functions-optional
-[5]: /developers/metrics/metrics_type
-[6]: /help
-[7]: /graphing/metrics/distributions
+[1]: /developers/dogstatsd
+[2]: /developers/metrics
+[3]: /graphing/functions/#apply-functions-optional
+[4]: /developers/metrics/metrics_type
+[5]: /help
+[6]: /graphing/metrics/distributions

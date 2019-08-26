@@ -15,7 +15,7 @@ further_reading:
   text: "DogStatsD source code"
 ---
 
-DogStatsD can send Service Checks to Datadog. Use checks to track the status of services your application depends on:
+After [installing DogStatsD][1], you can send Service Checks to Datadog with the following function:
 
 ```
 service_check(Name, Status, Tags, Hostname, Message)
@@ -68,9 +68,6 @@ statsd.service_check(name, status, opts)
 {{% tab "Java" %}}
 
 {{% /tab %}}
-{{% tab "Node.js" %}}
-
-{{% /tab %}}
 {{% tab ".NET" %}}
 
 {{% /tab %}}
@@ -82,44 +79,11 @@ statsd.service_check(name, status, opts)
 {{% /tab %}}
 {{< /tabs >}}
 
-After a Service Check is reported, use it to trigger a [custom check monitor][1].
-
-## Tagging
-
-Add tags to any Service Check you send to DogStatsD. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
-
-
-{{< tabs >}}
-{{% tab "Python" %}}
-
-
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
-{{% /tab %}}
-{{% tab "Go" %}}
-
-
-{{% /tab %}}
-{{% tab "Java" %}}
-
-{{% /tab %}}
-{{% tab "Node.js" %}}
-
-{{% /tab %}}
-{{% tab ".NET" %}}
-
-{{% /tab %}}
-{{% tab "PHP" %}}
-
-{{% /tab %}}
-{{% tab "C++" %}}
-
-{{% /tab %}}
-{{< /tabs >}}
+After a Service Check is reported, use it to trigger a [custom check monitor][2].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/monitor_types/custom_check
+[1]: /developers/dogstatsd
+[2]: /monitors/monitor_types/custom_check
