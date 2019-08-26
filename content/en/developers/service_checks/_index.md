@@ -24,7 +24,6 @@ Services Checks allow you to characterize the status of a service in order to mo
     {{< nextlink href="/developers/service_checks/agent_service_checks_submission" >}}Submitting a check through a custom Agent Check.{{< /nextlink >}}
     {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission" >}}Submit a Service Check with DogStatsD.{{< /nextlink >}}
     {{< nextlink href="/api/#service-checks" >}}Submit a Service Check trough Datadog API.{{< /nextlink >}}
-    {{< nextlink href="/developers/service_checks/datagram_shell" >}}Datagram format for Service Checks used by DogStatsD as well as (advanced) shell usage{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Visualize your Service Check in the Datadog UI.

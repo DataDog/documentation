@@ -1050,6 +1050,11 @@ main:
     identifier: "dev_tools_dogstatsd"
     weight: 1
 
+  - name: "Datagram Format"
+    url: "developers/dogstatsd/datagram_shell"
+    parent: "dev_tools_dogstatsd"
+    weight: 101
+
   ## DEVELOPERS - Metrics
 
   - name: "Metrics"
@@ -1083,26 +1088,21 @@ main:
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_api"
     weight: 205
-  - name: "Datagram and Shell Usage"
-    url: "developers/metrics/datagram_shell/"
-    parent: "dev_tools_metrics"
-    identifier: "dev_tools_metrics_datagram"
-    weight: 206
   - name: "Unix Domain Socket usage"
     url: "developers/metrics/unix_socket/"
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_unix"
-    weight: 207
+    weight: 206
   - name: "Metrics Type Modifiers"
     url: "developers/metrics/metric_type_modifiers/"
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_modifiers"
-    weight: 208
+    weight: 207
   - name: "Metrics Units"
     url: "developers/metrics/metrics_units/"
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_units"
-    weight: 209
+    weight: 208
 
   ## DEVELOPERS - Events
 
@@ -1132,11 +1132,6 @@ main:
     parent: "dev_tools_events"
     identifier: "dev_tools_events_api"
     weight: 304
-  - name: "Datagram and Shell Usage"
-    url: "developers/events/datagram_shell/"
-    parent: "dev_tools_events"
-    identifier: "dev_tools_events_datagram"
-    weight: 305
 
   ## DEVELOPERS - Service Checks
 
@@ -1161,11 +1156,6 @@ main:
     parent: "dev_tools_service_check"
     identifier: "dev_tools_service_check_api"
     weight: 403
-  - name: "Datagram and Shell Usage"
-    url: "developers/service_checks/datagram_shell/"
-    parent: "dev_tools_service_check"
-    identifier: "dev_tools_service_check_datagram"
-    weight: 404
 
   - name: "Libraries"
     url: "developers/libraries/"
