@@ -32,8 +32,6 @@ Some StatsD and DogStatsD clients, by default, will send one metric per datagram
 
 Here are a few examples for supported clients:
 
-Please refer to your client documentation for additional details.
-
 {{< tabs >}}
 {{% tab "Go" %}}
 Use Datadog's official Golang library [datadog-go](https://github.com/DataDog/datadog-go):
@@ -136,6 +134,8 @@ $client->increment('your.data.point', .5);
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+Please refer to your client documentation for additional details.
 
 ### Sample your metrics
 
