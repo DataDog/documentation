@@ -81,6 +81,21 @@ For the Cassandra Nodetool integration to continue working, apply the following 
 * Grant access to the Nodetool installation directory to the `ddagentuser`.
 * Set the environment variables of the Nodetool installation directory (e.g. `CASSANDRA_HOME` and `DSCINSTALLDIR`) as system-wide variables instead of variables only for the user doing the Nodetool installation.
 
+
+```
+Note: For the Security logs channel, make sure that your Datadog Agent user is added to the Event Log Readers list.
+```
+
+## Security Logs channel
+
+If you are using the [Datadog- Win 32 event log Integration][9], the Datadog user `ddagentuser` must be added to the Event Log Reader Group:
+
+1. Open Run with *Windows+R* hotkeys, type `compmgmt.msc`.
+2. Navigate to *System Tools* -> *Local Users and Groups* -> *Groups*.
+3. Right-click **Event Log Readers** and select *Properties*.
+4. Click *Add* and enter `ddagentuser` -> *Check Names*.
+5. Click *OK* and *Apply*.
+
 [1]: /integrations/activemq
 [2]: /integrations/activemq/#activemq-xml-integration
 [3]: /integrations/cassandra
@@ -89,3 +104,4 @@ For the Cassandra Nodetool integration to continue working, apply the following 
 [6]: /integrations/solr
 [7]: /integrations/tomcat
 [8]: /integrations/kafka
+[9]: /integrations/win32_event_log
