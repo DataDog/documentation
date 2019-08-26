@@ -25,7 +25,7 @@ disable_toc: true
 </br>
 ## En quoi consiste l'APM Datadog ?
 
- La surveillance des performances d'application (APM ou traçage) de Datadog vous fournit des informations précises sur les performances de votre application, grâce aux dashboards générés automatiquement qui surveillent des métriques clés, comme le volume et la latence des requêtes, ou encore aux traces détaillées portant sur des requêtes individuelles. Lorsqu'une requête est envoyée à une application, Datadog peut surveiller les traces associées au sein d'un système distribué et vous montrer des données systématiques sur ce qu'il advient de cette requête.
+ La surveillance des performances d'application (APM ou tracing) de Datadog vous fournit des informations précises sur les performances de votre application, grâce aux dashboards générés automatiquement qui surveillent des métriques clés, comme le volume et la latence des requêtes, ou encore aux traces détaillées portant sur des requêtes individuelles. Lorsqu'une requête est envoyée à une application, Datadog peut surveiller les traces associées au sein d'un système distribué et vous montrer des données systématiques sur ce qu'il advient de cette requête.
 
 ## Présentation
 
