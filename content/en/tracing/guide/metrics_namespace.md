@@ -1,5 +1,5 @@
 ---
-title: Trace Metrics Namespace
+title: Tracing Application Metrics
 kind: guide
 disable_toc: true
 further_reading:
@@ -22,17 +22,35 @@ aliases:
   - /tracing/getting_further/metrics_namespace
 ---
 
-The trace metrics namespace is `trace.<NAME>.<METRIC>{<TAGS>}` where:
+## Overview
 
-| Parameter  | Description                                                                                                             |
-|------------|-------------------------------------------------------------------------------------------------------------------------|
-| `<NAME>`   | The name of the operation or `span.name` (examples: *redis.command*, *pylons.request*, *rails.request*, *mysql.query*). |
-| `<METRIC>` | The name of the metric (examples: *hits*, *errors*, *latency*).                                                         |
-| `<TAGS>`   | The tags attached to the metric (examples: *service*, *resource*).                                                      |
+Tracing application metrics are collected after [enabling trace collection][1] and [instrumenting your application][2]. These metrics are available for dashboards and monitors.
 
-So for pylons it might be `trace.pylons.request.hits{service:web_server}`.
+### Metric names
 
-Test
+Trace metric names are formatted as `trace.<NAME>.<METRIC>` or `trace.<NAME>.<METRIC_2ND_PRIM_TAG>`.
+
+| Parameter               | Description                                                                                                             |
+|-------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| `<NAME>`                | The name of the operation or `span.name` (examples: `redis.command`, `pylons.request`, `rails.request`, `mysql.query`). |
+| `<METRIC>`              | The name of the metric (examples: `duration`, `hits`, `span_count`).                                                    |
+| `<METRIC_2ND_PRIM_TAG>` | If the metric name accounts for the second primary tag, this tag is part of the metric name.                            |
+
+### Tags
+
+Trace metrics come with a variety of tags. The possible tags are:
+
+* `env`
+* `service`
+* `resource`
+* `sublayer_type`
+* `sublayer_service`
+* `http.status_code`
+* `http.status_class`
+* Datadog Agent tags (including host tag)
+* The second primary tag
+
+**Note**: Tags are attached based on the specific metric. See the metrics table below.
 
 ## Data collected
 ### Metrics
@@ -42,3 +60,6 @@ Test
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/send_traces
+[2]: /tracing/setup
