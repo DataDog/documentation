@@ -65,9 +65,14 @@ while(1):
 {{% tab "Ruby" %}}
 
 ```ruby
-def upload_file()
-  # (...)
-  statsd.increment('web.page_views')
+require 'datadog/statsd'
+statsd = Datadog::Statsd.new
+
+while true do
+    statsd.increment('example_metric.increment')
+    statsd.decrement('example_metric.decrement')
+    statsd.count('example_metric.count', 2)
+    sleep 10
 end
 ```
 
@@ -89,7 +94,7 @@ end
 
 With this code, the data is available to graph in Datadog. Here's an example:
 
-TO DO: Run the script and add a screenshoot/
+TO DO: Run the script and add a screenshoot
 
 **Notes**:
 
