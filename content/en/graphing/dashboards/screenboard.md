@@ -12,7 +12,7 @@ further_reading:
   tag: "Documentation"
   text: "Discover all available Widgets for your Dashboard"
 ---
-Screenboards are dashboards with free-form layout which can include a variety of objects such as images, graphs, logs, and more. They are commonly used as status boards or story-telling tableaus, and can either update in real-time, or represent one or more fixed points in the past.
+Screenboards are dashboards with free-form layouts which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling tableaux, and can either update in real-time, or represent one or more fixed points in the past.
 
 ## Read Only
 
