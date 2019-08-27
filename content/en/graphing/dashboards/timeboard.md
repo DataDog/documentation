@@ -13,7 +13,7 @@ further_reading:
   text: "Discover all available Widgets for your Dashboard"
 ---
 
-Timeboards are structured dashboards with automatic layout. They represent a single point in time - either fixed or real-time - across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
+Timeboards have a more structured automatic layout, and represent a single point in time—either fixed or real-time—across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
 
 ## Event correlation
 
