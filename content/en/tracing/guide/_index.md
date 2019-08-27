@@ -19,6 +19,7 @@ disable_toc: true
     {{< nextlink href="tracing/guide/resource_monitor" >}}Build monitor upon your resource metrics{{< /nextlink >}}
     {{< nextlink href="tracing/guide/trace_sampling_and_storage" >}}Trace Sampling and Storage{{< /nextlink >}}
     {{< nextlink href="tracing/guide/agent-obfuscation" >}}Agent Trace Obfuscation{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/metrics_namespace/" >}}Tracing Application Metrics{{< /nextlink >}}
     {{< nextlink href="/api/?lang=python#tracing" >}}Trace API{{< /nextlink >}}
     {{< nextlink href="/developers/libraries/#apm-distributed-tracing-client-libraries" >}}Tracing Client Libraries{{< /nextlink >}}
 {{< /whatsnext >}}
