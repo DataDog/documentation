@@ -156,4 +156,4 @@ self.histogram(name, value, tags=None, hostname=None, device_name=None)
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/metrics/metric_type
+[1]: /developers/metrics/metrics_type
