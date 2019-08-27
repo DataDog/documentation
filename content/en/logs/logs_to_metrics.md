@@ -62,10 +62,10 @@ Datadog would love to receive your feedback on this feature. You can submit your
 
 [1]: /logs/logging_without_limits
 [2]: /logs/logging_without_limits/#exclusion-filters
-[3]: https://app.datadoghq.com/logs/pipelines
-[4]: https://app.datadoghq.com/logs/pipelines/generate-metrics
-[5]: /logs/explorer/search/#search-syntax
-[6]: /tagging
+[3]: /tagging
+[4]: https://app.datadoghq.com/logs/pipelines
+[5]: https://app.datadoghq.com/logs/pipelines/generate-metrics
+[6]: /logs/explorer/search/#search-syntax
 [7]: /developers/metrics/custom_metrics
 [8]: /developers/metrics/#naming-metrics
 [9]: https://docs.google.com/forms/d/e/1FAIpQLSepcuHsNfJN7mpQp-8iBf9l6AslubKVSUHW21kmGg7VOJlxoA/viewform
