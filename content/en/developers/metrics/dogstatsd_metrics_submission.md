@@ -17,30 +17,50 @@ further_reading:
 
 While StatsD accepts only metrics, DogStatsD accepts all three of the major Datadog data types: metrics, events, and Service Checks. This section shows typical use cases for Metrics split down by metric types, and introduces [Sampling Rate](#sample-rates) and [Metrics tagging](#metrics-tagging) options which are specific to DogStatsD.
 
-[Count](#count), [Gauge](#gauge), and [Set](#set) metric types are familiar to StatsD users. Histograms are specific to DogStatsD. Timers, which exist in StatsD, are a sub-set of histograms in DogStatsD. Additionally you can also submit [Rate](#rate) and [Distribution](#distribution) metric types using DogStatsD.
+[Count](#count), [Gauge](#gauge), and [Set](#set) metric types are familiar to StatsD users. Histograms are specific to DogStatsD. Timers, which exist in StatsD, are a sub-set of histograms in DogStatsD. Additionally you can also submit [Histogram](#histogram) and [Distribution](#distribution) metric types using DogStatsD.
 
-**Note**: Depending of the submission method used, the submission metric type and the actual metric type stored within Datadog might differ:
+**Note**: Depending of the submission method used, the submission metric type and the actual metric type stored within Datadog might differ
 
 After having [installed DogStatsD][1], find below the functions available to submit your metrics to Datadog depending of their metric type.
 
 ## Count
 
-| Method | Description | Storage type |
-| :----- | :------- | :--- |
-| `increment(MetricName, SampleRate, Tags)` | Used to increment a count metric. | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the counter's value over that StatsD flush period.|
-| `decrement(MetricName, SampleRate, Tags)` | Used to decrement a count metric. | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the counter's value over that StatsD flush period.|
-| `count(MetricName, Value, SampleRate, Tags)` | Use to increment a count metric from an arbitrary `Value` | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the counter's value over that StatsD flush period.  |
+| Method                                       | Description                                               | Storage type                                                                                                                                             |
+| :-----                                       | :-------                                                  | :---                                                                                                                                                     |
+| `increment(MetricName, SampleRate, Tags)`    | Used to increment a count metric.                         | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the counter's value over that StatsD flush period. |
+| `decrement(MetricName, SampleRate, Tags)`    | Used to decrement a count metric.                         | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the counter's value over that StatsD flush period. |
+| `count(MetricName, Value, SampleRate, Tags)` | Use to increment a count metric from an arbitrary `Value` | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the counter's value over that StatsD flush period. |
 
+with the following parameters:
+
+| Parameter    | Type            | Required | Description                                                                                                                                                                |
+| --------     | -------         | -----    | ----------                                                                                                                                                                 |
+| `MetricName` | String          | yes      | Name of the metric to submit.                                                                                                                                              |
+| `Value`      | Double          | yes      | Value associated to your metric.                                                                                                                                           |
+| `SampleRate` | Double          | no       | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
+| `Tags`       | List of Strings | no       | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
 
 Note: Count type metrics can show a decimal value within Datadog since they are normalized over the flush interval to report a per-second units.
+
+Find below short code snippets depending of your language that you can run to emit a `COUNT` metric type-stored as `RATE` metric type-into Datadog. Learn more about the [`COUNT` type in the metric types documentation][2].
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
+After having [setup DogStatsD on your host][1] run the following code to submit a DogStatsD `COUNT` metric type,
+
 ```python
-statsd.increment('fuction.called')
+from datadog import statsd
+import time
+
+while(1):
+  statsd.increment('example_metric.increment')
+  statsd.decrement('example_metric.decrement')
+  statsd.count('example_metric.count', 2)
+  sleep(10)
 ```
 
+[1]: /developers/dogstatsd/?tab=python#setup
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
@@ -65,40 +85,51 @@ end
 {{% tab "PHP" %}}
 
 {{% /tab %}}
-{{% tab "C++" %}}
-
-{{% /tab %}}
 {{< /tabs >}}
 
-With this one line of code, the data is available to graph in Datadog. Here's an example:
+With this code, the data is available to graph in Datadog. Here's an example:
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/graph-guides-metrics-page-views.png" alt="graph guides metrics page views" responsive="true" >}}
+TO DO: Run the script and add a screenshoot/
 
-Note that StatsD counters are normalized over the flush interval to report per-second units. In the graph above, the marker is reporting 35.33 web page views per second at ~15:24. In contrast, if one person visited the web page each second, the graph would be a flat line at y = 1. To increment or measure values over time, see [gauges](#gauges).
+**Notes**:
 
-Note that for counters coming from another source that are ever-increasing and never reset (for example, the number of queries from MySQL over time), Datadog tracks the rate between flushed values. To get raw counts within Datadog, apply a function to your series such as _cumulative sum_ or _integral_. [Read more about Datadog functions][2].
-
-Learn more about the [Count type in the Metrics documentation][3].
+* StatsD counters are normalized over the flush interval to report per-second units. To increment or measure values over time, see [gauges](#gauges).
+* For counters coming from another source that are ever-increasing and never reset (for example, the number of queries from MySQL over time), Datadog tracks the rate between flushed values. To get raw counts within Datadog, apply a function to your series such as _cumulative sum_ or _integral_. [Read more about Datadog functions][3].
 
 ## Gauge
 
 | Method | Datadog Storage type |
 | :----- | :------- |
-|gauge(MetricName, Value, SampleRate, Tags)|Stored as a `GAUGE` type in Datadog. Each value in the stored timeseries is the last gauge value submitted for that metric during the StatsD flush period.|
+|`gauge(MetricName, Value, SampleRate, Tags)`| Stored as a `GAUGE` type in Datadog. Each value in the stored timeseries is the last gauge value submitted for that metric during the StatsD flush period.|
 
-Gauges measure the value of a particular thing over time. For example, in order to track the amount of free memory on a machine, periodically sample that value as the metric `system.mem.free`:
+with the following parameter:
+
+| Parameter    | Type            | Required | Description                                                                                                                                                                |
+| --------     | -------         | -----    | ----------                                                                                                                                                                 |
+| `MetricName` | String          | yes      | Name of the metric to submit.                                                                                                                                              |
+| `Value`      | Double          | yes      | Value associated to your metric.                                                                                                                                           |
+| `SampleRate` | Double          | no       | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
+| `Tags`       | List of Strings | no       | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
+
+Find below short code snippets depending of your language that you can run to emit a `GAUGE` metric type-stored as `GAUGE` metric type-into Datadog. Learn more about the [`GAUGE` type in the metric types documentation][4].
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
-```python
+After having [setup DogStatsD on your host][1] run the following code to submit a DogStatsD `GAUGE` metric type into Datadog:
 
-# Record the amount of free memory every ten seconds.
-while True:
-    statsd.gauge('system.mem.free', get_free_memory())
-    time.sleep(10)
+```python
+from datadog import statsd
+import time
+
+i = 0
+while(1):
+  i += 1
+  statsd.gauge('example_metric.gauge', i )
+  sleep(10)
 ```
 
+[1]: /developers/dogstatsd/?tab=python#setup
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
@@ -124,29 +155,40 @@ end
 {{% tab "PHP" %}}
 
 {{% /tab %}}
-{{% tab "C++" %}}
-
-{{% /tab %}}
 {{< /tabs >}}
 
-Learn more about the [Gauge type in the Metrics documentation][3].
+With this code, the data is available to graph in Datadog. Here's an example:
+
+TO DO: Run the script and add a screenshoot/
 
 ## Set
 
 |Method | Datadog Storage type |
 |:---|:---|
-|set(MetricName, Value, SampleRate, Tags)|Stored as `GAUGE` type in Datadog. Each value in the stored timeseries is the count of unique values submitted to StatsD for a metric over that flush period.</li></ul>|
+|`set(MetricName, Value, SampleRate, Tags)`| Stored as `GAUGE` type in Datadog. Each value in the stored timeseries is the count of unique values submitted to StatsD for a metric over that flush period.|
 
-Sets are used to count the number of unique elements in a group, for example, the number of unique visitors to your site:
+with the following parameter:
+
+| Parameter    | Type            | Required | Description                                                                                                                                                                |
+| --------     | -------         | -----    | ----------                                                                                                                                                                 |
+| `MetricName` | String          | yes      | Name of the metric to submit.                                                                                                                                              |
+| `Value`      | Double          | yes      | Value associated to your metric.                                                                                                                                           |
+| `SampleRate` | Double          | no       | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
+| `Tags`       | List of Strings | no       | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
+
+Find below short code snippets depending of your language that you can run to emit a `SET` metric type-stored as `GAUGE` metric type-into Datadog. Learn more about the [`SET` type in the metric types documentation][5].
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
 ```python
+from datadog import statsd
+import time
+import random
 
-def login(self, user_id):
-    # Log the user in ...
-    statsd.set('users.uniques', user_id)
+while(1):
+  statsd.set('example_metric.set', random.randint(0, 10))
+  sleep(10)
 ```
 
 {{% /tab %}}
@@ -173,66 +215,40 @@ end
 {{% tab "PHP" %}}
 
 {{% /tab %}}
-{{% tab "C++" %}}
-
-{{% /tab %}}
 {{< /tabs >}}
 
-Learn more about the [Sets type in the Metrics documentation][3].
+With this code, the data is available to graph in Datadog. Here's an example:
 
-## Rate
-
-
-{{< tabs >}}
-{{% tab "Python" %}}
-
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
-{{% /tab %}}
-{{% tab "Go" %}}
-
-
-{{% /tab %}}
-{{% tab "Java" %}}
-
-{{% /tab %}}
-{{% tab ".NET" %}}
-
-{{% /tab %}}
-{{% tab "PHP" %}}
-
-{{% /tab %}}
-{{% tab "C++" %}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
+TO DO: Run the script and add a screenshoot
 
 ## Histogram
 
-
 | Method             | Datadog Storage type                                                                                  |
 | :---               | :---                                                                                      |
-| histogram(MetricName, Value, SampleRate, Tags) | Used to track the statistical distribution of a set of values over a StatsD flush period. |
+| `histogram(MetricName, Value, SampleRate, Tags)` | Since multiple metrics are submitted, metric types stored depend of the metric. The two types stored are `GAUGE`, `Rate` See the [histogram metric type][6] documentation to learn more. |
 
-Histograms are specific to DogStatsD. They calculate the statistical distribution of any kind of value, such as timing data, for example, the duration of a metrics query:
+with the following parameter:
+
+| Parameter    | Type            | Required | Description                                                                                                                                                                |
+| --------     | -------         | -----    | ----------                                                                                                                                                                 |
+| `MetricName` | String          | yes      | Name of the metric to submit.                                                                                                                                              |
+| `Value`      | Double          | yes      | Value associated to your metric.                                                                                                                                           |
+| `SampleRate` | Double          | no       | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
+| `Tags`       | List of Strings | no       | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
+
+Histograms are specific to DogStatsD. Find below short code snippets depending of your language that you can run to emit a `HISTOGRAM` metric type-stored as `GAUGE` and `RATE` metric types-into Datadog. Learn more about the [`HISTOGRAM` type in the metric types documentation][6].
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
 ```python
+from datadog import statsd
+import time
+import random
 
-# Track the run time of the database query.
-start_time = time.time()
-results = db.query()
-duration = time.time() - start_time
-statsd.histogram('database.query.time', duration)
-
-# The `timed` decorator is a short-hand for timing functions.
-@statsd.timed('database.query.time')
-def get_data():
-    return db.query()
+while(1):
+  statsd.set('example_metric.histogram', random.randint(0, 10))
+  sleep(10)
 ```
 
 {{% /tab %}}
@@ -264,30 +280,25 @@ end
 {{% tab "PHP" %}}
 
 {{% /tab %}}
-{{% tab "C++" %}}
-
-{{% /tab %}}
 {{< /tabs >}}
 
 The above instrumentation produces the following metrics:
 
 | Metric                               | Description                               |
 | ------------------------------------ | ----------------------------------------- |
-| `database.query.time.count`          | number of times this metric was sampled   |
-| `database.query.time.avg`            | average time of the sampled values        |
-| `database.query.time.median`         | median sampled value                      |
-| `database.query.time.max`            | maximum sampled value                     |
-| `database.query.time.95percentile`   | 95th percentile sampled value             |
+| `example_metric.histogram.count`          | Number of times this metric was sampled   |
+| `example_metric.histogram.avg`            | Average time of the sampled values        |
+| `example_metric.histogram.median`         | Median sampled value                      |
+| `example_metric.histogram.max`            | Maximum sampled value                     |
+| `example_metric.histogram.95percentile`   | 95th percentile sampled value             |
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/graph-guides-metrics-query-times.png" alt="graph guides metrics query times" responsive="true" >}}
+And the data is available to graph in Datadog. Here's an example:
 
-In this example, let's say that a query time of 1 second is acceptable. The median query time (graphed in purple) is usually less than 100 milliseconds, which is great. Unfortunately, the 95th percentile (graphed in blue) has large spikes sometimes nearing three seconds, which is unacceptable. This means that most of queries are running just fine, but the worst ones are very bad. If the 95th percentile was close to the median, then you would know that almost all of the queries are performing just fine.
+TO DO: Run the script and add a screenshoot
 
-Learn more about the [Histogram type in the Metrics documentation][3].
+### Timers
 
-## Timers
-
-Timers in DogStatsD are an implementation of Histograms (not to be confused with timers in the standard StatsD). They measure timing data only: for example, the amount of time a section of code takes to execute, or how long it takes to fully render a page.
+Timers in DogStatsD are an implementation of Histograms (not to be confused with timers in the standard StatsD). They measure timing data only: for example, the amount of time a section of code takes to execute. Choose your language below to see how to implement them according to your needs:
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -296,24 +307,30 @@ In Python, timers are created with a decorator:
 
 ```python
 from datadog import statsd
+import time
+import random
 
-@statsd.timed('function.time')
+@statsd.timed('example_metric.timer')
 def my_function():
-  # Render the page...
+  sleep(random.randint(0, 10))
 ```
 
 or with a context manager:
 
 ```python
 from datadog import statsd
+import time
+import random
 
 def my_function():
+
   # First some stuff you don't want to time
-  boilerplate_setup()
+  sleep(1)
 
   # Now start the timer
-  with statsd.timed('function.time'):
+  with statsd.timed('example_metric.timer'):
     # do something to be measured
+    sleep(random.randint(0, 10))
 ```
 
 {{% /tab %}}
@@ -340,35 +357,48 @@ In either case, as DogStatsD receives the timer data, it calculates the statisti
 
 | Metric                               | Description                               |
 | ------------------------------------ | ----------------------------------------- |
-| `function.time.count` | The number of times the timer metric was called. |
-| `function.time.avg` | The average run time. |
-| `function.time.median` | The median run time. |
-| `function.time.max`  | The maximum run time. |
-| `function.time.95percentile` | The 95th percentile run time. |
+| `example_metric.histogram.count`          | Number of times this metric was sampled   |
+| `example_metric.histogram.avg`            | Average time of the sampled values        |
+| `example_metric.histogram.median`         | Median sampled value                      |
+| `example_metric.histogram.max`            | Maximum sampled value                     |
+| `example_metric.histogram.95percentile`   | 95th percentile sampled value             |
 
-Remember: under the hood, DogStatsD treats timers as histograms. Whether you use timers or histograms, you’ll be sending the same data to Datadog.
+And the data is available to graph in Datadog. Here's an example:
+
+TO DO: Run the script and add a screenshoot
+
+Remember: under the hood, DogStatsD treats timers as histograms. Whether you use timers or histograms, you are sending the same data to Datadog.
 
 ## Distribution
 
-**This feature is in BETA. [Contact Datadog support][4] for details on how to have it enabled for your account.**
+**This feature is in BETA. [Contact Datadog support][7] for details on how to have it enabled for your account.**
 
 | Method | Datadog Storage type |
 | :----- | :------- |
-| `distribution(MetricName, Value, Tags)` | Track the statistical distribution of a set of values over one or more hosts. |
+| `distribution(MetricName, Value, Tags)` | Stored as a `Distribution` type in Datadog. See the dedicated [Distribution documentation][8] to learn more. |
 
-Distributions are like a global version of Histograms (see below). They calculate statistical distributions across multiple hosts, allowing you to compute global percentiles across your entire dataset. Global distributions are designed to instrument logical objects, such as services, independently from the underlying hosts.
+with the following parameter:
 
-To measure the duration of an HTTP request, you could measure each request time with the metric `dist.dd.dogweb.latency`:
+| Parameter    | Type            | Required | Description                                                                                                                                                                |
+| --------     | -------         | -----    | ----------                                                                                                                                                                 |
+| `MetricName` | String          | yes      | Name of the metric to submit.                                                                                                                                              |
+| `Value`      | Double          | yes      | Value associated to your metric.                                                                                                                                           |
+| `SampleRate` | Double          | no       | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
+| `Tags`       | List of Strings | no       | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
+
+Distributoins are specific to DogStatsD. Find below short code snippets depending of your language that you can run to emit a `DISTRIBUTION` metric type-stored as `DISTRIBUTION` metric type-into Datadog. Learn more about the [`DISTRIBUTION` type in the metric types documentation][9].
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
 ```python
-# Track the run time of a request.
-start_time = time.time()
-results = requests.get('https://google.com')
-duration = time.time() - start_time
-statsd.distribution('dist.dd.website.latency', duration)
+from datadog import statsd
+import time
+import random
+
+while(1):
+  statsd.set('example_metric.distribution', random.randint(0, 10))
+  sleep(10)
 ```
 
 {{% /tab %}}
@@ -395,40 +425,31 @@ statsd.distribution('dist.dd.website.latency', duration)
 {{% tab "PHP" %}}
 
 {{% /tab %}}
-{{% tab "C++" %}}
-
-{{% /tab %}}
 {{< /tabs >}}
 
-The above instrumentation calculates the following data: `sum`, `count`, `average`, `minimum`, `maximum`, `50th percentile` (median), `75th percentile`, `90th percentile`, `95th percentile` and `99th percentile`. These metrics give insight into how different each request time is. Graph the median to see how long the request usually takes. Graph the 95th percentile to see how long most requests take.
+The data is now available to graph in Datadog:
 
-{{< img src="graphing/metrics/distributions/dogweb_latency.png" alt="Dogweb latency" responsive="true" >}}
 
-For this toy example, assume a request time of *500ms* is acceptable. The median query time (graphed in blue) is usually less than *100 milliseconds*, which is great. The 95th percentile (graphed in red) has spikes sometimes over one second, which is unacceptable.
-This means most of queries are running just fine, but the worst ones are bad. If the 95th percentile were close to the median, than you would know that almost all of the requests are performing just fine.
-
-Distributions are not only for measuring times. They can be used to measure the distribution of *any* type of value, such as the size of uploaded files, or classroom test scores, for example.
-
+The above instrumentation calculates the following data: `sum`, `count`, `average`, `minimum`, `maximum`, `50th percentile` (median), `75th percentile`, `90th percentile`, `95th percentile` and `99th percentile`. Distributions are not only for measuring times. They can be used to measure the distribution of *any* type of value, such as the size of uploaded files, or classroom test scores, for example.
 
 ## Metric Submission options
 
 ### Sample rates
 
-Since the overhead of sending UDP packets can be too great for some performance intensive code paths, DogStatsD clients support sampling, i.e. only sending metrics a percentage of the time.
-It's not useful in all cases, but can be interesting if you sample many metrics, and your DogStatsD client is not on the same host as the DogStatsD server. This is a trade off: you decrease traffic but slightly lose in precision/granularity.
+Since the overhead of sending UDP packets can be too great for some performance intensive code paths, DogStatsD clients support sampling, i.e. only sending metrics a percentage of the time. It's not useful in all cases, but can be interesting if you sample many metrics, and your DogStatsD client is not on the same host as the DogStatsD server. This is a trade off: you decrease traffic but slightly lose in precision/granularity.
 
 Before sending the metric to Datadog, DogStatsD uses the `sample_rate` to correct the metric value depending of the metric type, i.e. to estimate what it would have been without sampling:
 
 | Metric Type | Sample rate correction |
+| ----------- | ----------------- |
 | `Count` | Values received are multiplied by (1/sample_rate), because it's reasonable to suppose in most cases that for 1 datapoint received, `1/sample_rate` were actually sampled with the same value. |
 | `Gauge` | No correction. The value received is kept as it is. |
 | `Set` | Bo correction. The value received is kept as it is. |
 | `Histogram` | The `histogram.count` statistic is a counter metric, and receives the correction outlined above. Other statistics are gauge metrics and aren't "corrected." |
 
-See the [Datadog Agent aggregation code][5] to learn more about this behavior.
+See the [Datadog Agent aggregation code][10] to learn more about this behavior.
 
 The following code only sends points half of the time:
-
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -513,14 +534,19 @@ def algorithm_two():
 
 The host tag is assigned automatically by the Datadog Agent aggregating the metrics. Metrics submitted with a host tag not matching the Agent hostname lose reference to the original host. The host tag submitted overrides any hostname collected by or configured in the Agent.
 
-**Note**: Because of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][6] page for more details.
+**Note**: Because of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][11] page for more details.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 [1]: /developers/dogstatsd
-[2]: /graphing/functions/#apply-functions-optional
-[3]: /developers/metrics/metrics_type
-[4]: /help
-[5]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
-[6]: /graphing/metrics/distributions
+[2]: /developers/metrics/metrics_type/?tab=count#metric-type-definition
+[3]: /graphing/functions/#apply-functions-optional
+[4]: /developers/metrics/metrics_type/?tab=gauge#metric-type-definition
+[5]: /developers/metrics/metrics_type/?tab=set#metric-type-definition
+[6]: /developers/metrics/metrics_type/?tab=histogram#metric-type-definition
+[7]: /help
+[8]: /graphing/metrics/distributions
+[9]: /developers/metrics/metrics_type/?tab=distribution#metric-type-definition
+[10]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
+[11]: /graphing/metrics/distributions

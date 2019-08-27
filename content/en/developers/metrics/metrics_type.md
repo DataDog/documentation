@@ -143,6 +143,8 @@ By default only `max`, `median`, `avg`, and `count` aggregations are sent out to
 [1]: https://github.com/etsy/statsd/blob/master/docs/metric_types.md#timing
 [2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
+{{% tab "Set" %}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Submission types and Datadog in-app types
