@@ -444,7 +444,7 @@ With:
 
 [1]: /agent/?tab=agentv6#agent-architecture
 [2]: /agent/guide/agent-commands
-[3]: /developers/metrics/unix_socket
+[3]: /developers/dogstatsd/unix_socket
 [4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
 [5]: /developers/metrics/metrics_type
 [6]: /graphing/infrastructure/process

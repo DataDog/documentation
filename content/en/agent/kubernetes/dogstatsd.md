@@ -196,7 +196,7 @@ func InfoHandler(rw http.ResponseWriter, req *http.Request) {
 
 [1]: /developers/metrics/dogstatsd_metrics_submission
 [2]: https://github.com/etsy/statsd
-[3]: /developers/metrics/unix_socket
+[3]: /developers/dogstatsd/unix_socket
 [4]: /agent/guide/agent-commands
 [5]: https://github.com/containernetworking/cni
 [6]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work

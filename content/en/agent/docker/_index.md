@@ -225,7 +225,7 @@ The same can be done for the `/checks.d` folder. Any Python files in the `/check
 [9]: /graphing/infrastructure/process
 [10]: /graphing/infrastructure/livecontainers
 [11]: https://docs.datadoghq.com/developers/dogstatsd
-[12]: /developers/metrics/unix_socket
+[12]: /developers/dogstatsd/unix_socket
 [13]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [14]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
 [15]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
