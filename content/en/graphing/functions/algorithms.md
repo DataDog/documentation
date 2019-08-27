@@ -8,7 +8,7 @@ disable_toc: true
 
 | Function      | Description                                                                                | Example                                                    |
 | :----         | :-------                                                                                   | :---------                                                 |
-| `anomalies()` | Overlay a gray band on the metric showing the expected behavior of a series based on past. | `anomalies(<METRIC_NAME>{*}, '<ALGORITHM>', <BOUNDS>)` |
+| `anomalies()` | Overlay a gray band on the metric showing the expected behavior of a series based on past. | `anomalies(METRIC_NAME>{*}, '<ALGORITHM>', <BOUNDS>)` |
 
 The `anomalies()` function has two parameters:
 
