@@ -1063,45 +1063,45 @@ main:
     identifier: "dev_tools_metrics"
     weight: 2
 
-  - name: "Custom Metrics"
-    url: "developers/metrics/custom_metrics/"
-    parent: "dev_tools_metrics"
-    identifier: "dev_tools_metrics_custom_metrics"
-    weight: 201
   - name: "Metrics Types"
     url: "developers/metrics/metrics_type/"
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_metrics_type"
-    weight: 202
-  - name: "Agent Check Submission"
+    weight: 201
+  - name: "Submission - Agent Check "
     url: "developers/metrics/agent_metrics_submission/"
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_agent"
-    weight: 203
-  - name: "DogStatsD Submission"
+    weight: 202
+  - name: "Submission - DogStatsD"
     url: "developers/metrics/dogstatsd_metrics_submission/"
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_dogstatsd"
-    weight: 204
-  - name: "API Submission"
+    weight: 203
+  - name: "Submission - API "
     url: "api/#post-timeseries-points"
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_api"
-    weight: 205
+    weight: 204
   - name: "Unix Domain Socket usage"
     url: "developers/metrics/unix_socket/"
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_unix"
-    weight: 206
+    weight: 205
   - name: "Metrics Type Modifiers"
     url: "developers/metrics/metric_type_modifiers/"
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_modifiers"
-    weight: 207
+    weight: 206
   - name: "Metrics Units"
     url: "developers/metrics/metrics_units/"
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_units"
+    weight: 207
+  - name: "Custom Metrics"
+    url: "developers/metrics/custom_metrics/"
+    parent: "dev_tools_metrics"
+    identifier: "dev_tools_metrics_custom_metrics"
     weight: 208
 
   ## DEVELOPERS - Events
@@ -1112,22 +1112,22 @@ main:
     identifier: "dev_tools_events"
     weight: 3
 
-  - name: "Agent Check Submission"
+  - name: "Submission - Agent Check"
     url: "developers/events/agent_events_submission/"
     parent: "dev_tools_events"
     identifier: "dev_tools_events_agent"
     weight: 301
-  - name: "DogStatsD Submission"
+  - name: "Submission - DogStatsD"
     url: "developers/events/dogstatsd_events_submission/"
     parent: "dev_tools_events"
     identifier: "dev_tools_events_dogstatsd"
     weight: 302
-  - name: "Mail Submission"
+  - name: "Submission - Mail"
     url: "developers/events/email_events_submission/"
     parent: "dev_tools_events"
     identifier: "dev_tools_events_mail"
     weight: 303
-  - name: "API Submission"
+  - name: "Submission - API"
     url: "/api/#post-an-event"
     parent: "dev_tools_events"
     identifier: "dev_tools_events_api"
@@ -1141,17 +1141,17 @@ main:
     identifier: "dev_tools_service_check"
     weight: 4
 
-  - name: "Agent Check Submission"
+  - name: "Submission - Agent Check "
     url: "developers/service_checks/agent_service_checks_submission/"
     parent: "dev_tools_service_check"
     identifier: "dev_tools_service_check_agent_check"
     weight: 401
-  - name: "DogStatsD Submission"
+  - name: "Submission - DogStatsD"
     url: "developers/service_checks/dogstatsd_service_checks_submission/"
     parent: "dev_tools_service_check"
     identifier: "dev_tools_service_check_dogstatsd"
     weight: 402
-  - name: "API Submission"
+  - name: "Submission - API"
     url: "api/#service-checks"
     parent: "dev_tools_service_check"
     identifier: "dev_tools_service_check_api"
