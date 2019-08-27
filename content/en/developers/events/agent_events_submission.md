@@ -17,7 +17,7 @@ self.event(
               "msg_title": "<TITLE>",
               "msg_text": "<MESSAGE>",
               "aggregation_key": "<AGGREGATION_KEY>",
-              "alert_type": "<ALERT_TYPE>
+              "alert_type": "<ALERT_TYPE>",
               "source_type_name": "<SOURCE_TYPE>",
               "host": "<HOSTNAME>",
               "tags": ["<TAGS>"],

@@ -24,9 +24,9 @@ This section explains what metrics are and what they do. Whether you want to sen
 There are multiple ways to send metrics to Datadog:
 
 1. Via the Datadog Agent directly. Learn how to [write an integration][3], or examine the [Aggregator source code][4] directly.
-2. Via the DogStatsD server (bundled with the Datadog Agent) and a [client library][5].
-3. Directly via Datadog's [HTTP API][6].
-4. Via the [Dropwizard Java metrics library][7] with the [metrics-datadog][8] backend. Thanks to the people at [Vistar Media][9], [Coursera][10], and [Bazaarvoice][11] for their contributions.
+2. Via the [DogStatsD server][5] (bundled with the Datadog Agent) and a [client library][6].
+3. Directly via Datadog's [HTTP API][7].
+4. Via the [Dropwizard Java metrics library][8] with the [metrics-datadog][9] backend. Thanks to the people at [Vistar Media][10], [Coursera][11], and [Bazaarvoice][12] for their contributions.
 
 <div class="alert alert-warning">
 Metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past.
@@ -54,10 +54,11 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
 [2]: /developers/metrics/dogstatsd_metrics_submission
 [3]: /developers/integrations
 [4]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
-[5]: /developers/libraries
-[6]: /api
-[7]: https://github.com/dropwizard/metrics
-[8]: https://github.com/coursera/metrics-datadog
-[9]: http://www.vistarmedia.com
-[10]: https://www.coursera.org
-[11]: http://www.bazaarvoice.com
+[5]: /developers/dogstatsd
+[6]: /developers/libraries
+[7]: /api
+[8]: https://github.com/dropwizard/metrics
+[9]: https://github.com/coursera/metrics-datadog
+[10]: http://www.vistarmedia.com
+[11]: https://www.coursera.org
+[12]: http://www.bazaarvoice.com

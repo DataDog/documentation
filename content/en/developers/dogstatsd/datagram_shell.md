@@ -95,7 +95,7 @@ _sc|Redis connection|2|#env:dev|m:Redis connection timed out after 10s
 
 ## Send metrics using DogStatsD and the shell
 
-For Linux and other Unix-like OS, use Bash. For Windows, you need PowerShell and [PowerShell-statsd][2] (a simple PowerShell function that takes care of the network bits). The idea behind DogStatsD is: create a message that contains information about your metric, event, or Service Check and send it to a locally installed Agent as a collector, the destination IP address is then `127.0.0.1` and the collector port over UDP port is `8125`.
+For Linux and other Unix-like OS, use Bash. For Windows, you need PowerShell and [PowerShell-statsd][2] (a simple PowerShell function that takes care of the network bits). The idea behind DogStatsD is: create a message that contains information about your metric, event, or Service Check and send it to a locally installed Agent as a collector, the destination IP address is then `127.0.0.1` and the collector port over UDP port is `8125`. Refer to the [main DogStatsD documentation][3] to learn how to configure the Agent.
 
 {{< tabs >}}
 {{% tab "Metrics" %}}
@@ -181,7 +181,7 @@ PS C:\> .\send-statsd.ps1 "_sc|Redis connection|2|#env:dev|m:Redis connection ti
 {{% /tab %}}
 {{< /tabs >}}
 
-To send metrics, events, or Service Checks on containerized environments, refer to the [DogStatsD on Kubernetes][3] documentation, in conjunction with the instructions for configuring APM on Kubernetes using [DaemonSets][4] or [Helm][5], depending on your installation. The [Docker APM][6] documentation may also be helpful.
+To send metrics, events, or Service Checks on containerized environments, refer to the [DogStatsD on Kubernetes][4] documentation, in conjunction with the instructions for configuring APM on Kubernetes using [DaemonSets][5] or [Helm][6], depending on your installation. The [Docker APM][7] documentation may also be helpful.
 
 ## Further Reading
 
@@ -189,7 +189,8 @@ To send metrics, events, or Service Checks on containerized environments, refer 
 
 [1]: /developers/libraries/#api-and-dogstatsd-client-libraries
 [2]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.
-[3]: /agent/kubernetes/dogstatsd
-[4]: /agent/kubernetes/daemonset_setup/#apm-and-distributed-tracing
-[5]: /agent/kubernetes/helm/#enable-apm-and-distributed-tracing
-[6]: /agent/docker/apm
+[3]: /developers/dogstatsd
+[4]: /agent/kubernetes/dogstatsd
+[5]: /agent/kubernetes/daemonset_setup/#apm-and-distributed-tracing
+[6]: /agent/kubernetes/helm/#enable-apm-and-distributed-tracing
+[7]: /agent/docker/apm

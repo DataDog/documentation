@@ -76,9 +76,9 @@ With this one line of code, the data is available to graph in Datadog. Here's an
 
 Note that StatsD counters are normalized over the flush interval to report per-second units. In the graph above, the marker is reporting 35.33 web page views per second at ~15:24. In contrast, if one person visited the web page each second, the graph would be a flat line at y = 1. To increment or measure values over time, see [gauges](#gauges).
 
-Note that for counters coming from another source that are ever-increasing and never reset (for example, the number of queries from MySQL over time), Datadog tracks the rate between flushed values. To get raw counts within Datadog, apply a function to your series such as _cumulative sum_ or _integral_. [Read more about Datadog functions][3].
+Note that for counters coming from another source that are ever-increasing and never reset (for example, the number of queries from MySQL over time), Datadog tracks the rate between flushed values. To get raw counts within Datadog, apply a function to your series such as _cumulative sum_ or _integral_. [Read more about Datadog functions][2].
 
-Learn more about the [Count type in the Metrics documentation][4].
+Learn more about the [Count type in the Metrics documentation][3].
 
 ## Gauge
 
@@ -129,7 +129,7 @@ end
 {{% /tab %}}
 {{< /tabs >}}
 
-Learn more about the [Gauge type in the Metrics documentation][4].
+Learn more about the [Gauge type in the Metrics documentation][3].
 
 ## Set
 
@@ -178,7 +178,7 @@ end
 {{% /tab %}}
 {{< /tabs >}}
 
-Learn more about the [Sets type in the Metrics documentation][4].
+Learn more about the [Sets type in the Metrics documentation][3].
 
 ## Rate
 
@@ -283,11 +283,74 @@ The above instrumentation produces the following metrics:
 
 In this example, let's say that a query time of 1 second is acceptable. The median query time (graphed in purple) is usually less than 100 milliseconds, which is great. Unfortunately, the 95th percentile (graphed in blue) has large spikes sometimes nearing three seconds, which is unacceptable. This means that most of queries are running just fine, but the worst ones are very bad. If the 95th percentile was close to the median, then you would know that almost all of the queries are performing just fine.
 
-Learn more about the [Histogram type in the Metrics documentation][4].
+Learn more about the [Histogram type in the Metrics documentation][3].
+
+## Timers
+
+Timers in DogStatsD are an implementation of Histograms (not to be confused with timers in the standard StatsD). They measure timing data only: for example, the amount of time a section of code takes to execute, or how long it takes to fully render a page.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+In Python, timers are created with a decorator:
+
+```python
+from datadog import statsd
+
+@statsd.timed('function.time')
+def my_function():
+  # Render the page...
+```
+
+or with a context manager:
+
+```python
+from datadog import statsd
+
+def my_function():
+  # First some stuff you don't want to time
+  boilerplate_setup()
+
+  # Now start the timer
+  with statsd.timed('function.time'):
+    # do something to be measured
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+
+{{% /tab %}}
+{{% tab "Java" %}}
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+In either case, as DogStatsD receives the timer data, it calculates the statistical distribution of render times and sends the following metrics to Datadog:
+
+| Metric                               | Description                               |
+| ------------------------------------ | ----------------------------------------- |
+| `function.time.count` | The number of times the timer metric was called. |
+| `function.time.avg` | The average run time. |
+| `function.time.median` | The median run time. |
+| `function.time.max`  | The maximum run time. |
+| `function.time.95percentile` | The 95th percentile run time. |
+
+Remember: under the hood, DogStatsD treats timers as histograms. Whether you use timers or histograms, you’ll be sending the same data to Datadog.
 
 ## Distribution
 
-**This feature is in BETA. [Contact Datadog support][5] for details on how to have it enabled for your account.**
+**This feature is in BETA. [Contact Datadog support][4] for details on how to have it enabled for your account.**
 
 | Method | Datadog Storage type |
 | :----- | :------- |
@@ -362,7 +425,7 @@ Before sending the metric to Datadog, DogStatsD uses the `sample_rate` to correc
 | `Set` | Bo correction. The value received is kept as it is. |
 | `Histogram` | The `histogram.count` statistic is a counter metric, and receives the correction outlined above. Other statistics are gauge metrics and aren't "corrected." |
 
-See the [Datadog Agent aggregation code](https://github.com/DataDog/dd-agent/blob/master/aggregator.py) to learn more about this behavior.
+See the [Datadog Agent aggregation code][5] to learn more about this behavior.
 
 The following code only sends points half of the time:
 
@@ -456,8 +519,8 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 
 {{< partial name="whats-next/whats-next.html" >}}
 [1]: /developers/dogstatsd
-[2]: /developers/metrics
-[3]: /graphing/functions/#apply-functions-optional
-[4]: /developers/metrics/metrics_type
-[5]: /help
+[2]: /graphing/functions/#apply-functions-optional
+[3]: /developers/metrics/metrics_type
+[4]: /help
+[5]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
 [6]: /graphing/metrics/distributions
