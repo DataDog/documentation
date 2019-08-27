@@ -9,6 +9,7 @@ TODO: INSERT EVENT DEFINITION HERE
 {{< whatsnext desc="Find below how to submit an Event to Datadog:">}}
     {{< nextlink href="/developers/events/agent_events_submission" >}}Submitting an Event through a custom Agent Check.{{< /nextlink >}}
     {{< nextlink href="/developers/events/dogstatsd_events_submission" >}}Submit an Event with DogStatsD.{{< /nextlink >}}
+    {{< nextlink href="/developers/events/email_events_submission" >}}Submit an Event by email.{{< /nextlink >}}
     {{< nextlink href="/api/#post-an-event" >}}Submit an Event trough Datadog API.{{< /nextlink >}}
 {{< /whatsnext >}}
 
