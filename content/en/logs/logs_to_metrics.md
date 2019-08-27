@@ -36,8 +36,8 @@ To generate a new log-based metric, go to the [Configuration page][3] of your Da
 
 1. **Input a query to filter the log stream**: The query syntax is the same as for the [Log Explorer Search][5]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation.
 2. **Select the field you would like to track**: Select the `*` to generate a count of all logs matching your query or enter a log attribute to aggregate a numeric value into `count`, `min`, `max`, `sum`, and `avg` metrics.
-2. **Add dimensions to `group by`**: Add attributes or tag key to apply to the generated log-based metric to transform them into [Tags][6] following the `<KEY>:<VALUE>` format. Log-based metrics are considered as [custom metrics][7]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
-3. **Name your metric**: Log-based metric names must follow the [naming metric convention][8].
+3. **Add dimensions to `group by`**: Add attributes or tag key to apply to the generated log-based metric to transform them into [Tags][3] following the `<KEY>:<VALUE>` format. Log-based metrics are considered as [custom metrics][6]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
+4. **Name your metric**: Log-based metric names must follow the [naming metric convention][7].
 
 **Note**: Data points for Log-based metrics are generated at one minute intervals.
 
@@ -52,7 +52,7 @@ To change the metric type or name, a new metric must be created.
 
 ## Feedback
 
-Datadog would love to receive your feedback on this feature. You can submit your feedback directly from [this form][9].
+Datadog would love to receive your feedback on this feature. You can submit your feedback directly from [this form][8].
 
 ## Further Reading
 
@@ -64,8 +64,7 @@ Datadog would love to receive your feedback on this feature. You can submit your
 [2]: /logs/logging_without_limits/#exclusion-filters
 [3]: /tagging
 [4]: https://app.datadoghq.com/logs/pipelines
-[5]: https://app.datadoghq.com/logs/pipelines/generate-metrics
-[6]: /logs/explorer/search/#search-syntax
-[7]: /developers/metrics/custom_metrics
-[8]: /developers/metrics/#naming-metrics
-[9]: https://docs.google.com/forms/d/e/1FAIpQLSepcuHsNfJN7mpQp-8iBf9l6AslubKVSUHW21kmGg7VOJlxoA/viewform
+[5]: /logs/explorer/search/#search-syntax
+[6]: /developers/metrics/custom_metrics
+[7]: /developers/metrics/#naming-metrics
+[8]: https://docs.google.com/forms/d/e/1FAIpQLSepcuHsNfJN7mpQp-8iBf9l6AslubKVSUHW21kmGg7VOJlxoA/viewform
