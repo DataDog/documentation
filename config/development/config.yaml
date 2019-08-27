@@ -1,1 +1,2 @@
 baseURL: "http://localhost:1313/"
+timeout: 100000
