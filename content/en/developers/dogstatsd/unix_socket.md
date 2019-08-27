@@ -16,7 +16,7 @@ further_reading:
   text: "DogStatsD source code"
 ---
 
-Starting with version 6.0, the Datadog Agent is able to ingest metrics via a Unix Domain Socket (UDS), as an alternative to UDP, when running on Linux systems.
+Starting with version 6.0, the Agent is able to ingest metrics via a Unix Domain Socket (UDS), as an alternative to UDP, when running on Linux systems.
 
 While UDP works great on `localhost`, it can be a challenge to setup in containerized environments. Unix Domain Sockets allow you to easily establish the connection via a socket file, regardless of the IP of the Datadog Agent container. It also enables the following benefits:
 

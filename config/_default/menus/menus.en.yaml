@@ -1055,6 +1055,11 @@ main:
     parent: "dev_tools_dogstatsd"
     weight: 101
 
+  - name: "Unix Domain Socket"
+    url: "/developers/dogstatsd/unix_socket"
+    parent: "dev_tools_dogstatsd"
+    weight: 102
+
   ## DEVELOPERS - Metrics
 
   - name: "Metrics"
@@ -1083,26 +1088,21 @@ main:
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_api"
     weight: 204
-  - name: "Unix Domain Socket usage"
-    url: "developers/metrics/unix_socket/"
-    parent: "dev_tools_metrics"
-    identifier: "dev_tools_metrics_unix"
-    weight: 205
   - name: "Metrics Type Modifiers"
     url: "developers/metrics/metric_type_modifiers/"
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_modifiers"
-    weight: 206
+    weight: 205
   - name: "Metrics Units"
     url: "developers/metrics/metrics_units/"
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_units"
-    weight: 207
+    weight: 206
   - name: "Custom Metrics"
     url: "developers/metrics/custom_metrics/"
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_custom_metrics"
-    weight: 208
+    weight: 207
 
   ## DEVELOPERS - Events
 
