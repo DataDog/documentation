@@ -67,10 +67,10 @@ Select your Cloud provider below to see how to automatically collect your logs a
 
 ## Custom Log forwarder
 
-Any custom process or [logging library][20] able to forward logs through **TCP** can be used in conjunction with Datadog Logs. Choose below to which Datadog Site you want to forward logs to:
+Any custom process or [logging library][20] able to forward logs through **TCP** or **HTTP** can be used in conjunction with Datadog Logs. Choose below to which Datadog Site you want to forward logs to:
 
 {{< tabs >}}
-{{% tab "US Site" %}}
+{{% tab "TCP US Site" %}}
 
 The secure TCP endpoint is `intake.logs.datadoghq.com:10516` (or port `10514` for insecure connections).
 
@@ -104,7 +104,7 @@ telnet intake.logs.datadoghq.com 10514
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://app.datadoghq.com/logs/livetail
 {{% /tab %}}
-{{% tab "EU Site" %}}
+{{% tab "TCP EU Site" %}}
 
 The secure TCP endpoint is `tcp-intake.logs.datadoghq.eu:443` (or port `1883` for insecure connections).
 
@@ -138,6 +138,11 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://app.datadoghq.com/logs/livetail
 {{% /tab %}}
+{{% tab "HTTP" %}}
+
+To send logs over HTTPs for the **EU** or **US** site, refer to the [Datadog Log HTTP API documentation](https://docs.datadoghq.com/api/?lang=python#send-logs-over-http).
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Datadog Logs Endpoints
@@ -158,7 +163,6 @@ Endpoints that can be used to send logs to Datadog:
 | `lambda-intake.logs.datadoghq.com`      | `10516` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
 | `functions-intake.logs.datadoghq.com`   | `10516` | Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers. |
 
-
 | Endpoint for unencrypted connections | Port    | Description                                                                                              |
 |--------------------------------------|---------|----------------------------------------------------------------------------------------------------------|
 | `intake.logs.datadoghq.com`          | `10514` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an unecrypted TCP connection. |
@@ -173,7 +177,6 @@ Endpoints that can be used to send logs to Datadog:
 | `lambda-intake.logs.datadoghq.eu`       | `443` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
 | `functions-intake.logs.datadoghq.eu`    | `443` | Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers. |
 
-
 | Endpoint for unencrypted connections | Port   | Description                                                                                                     |
 |--------------------------------------|--------|-----------------------------------------------------------------------------------------------------------------|
 | `tcp-intake.logs.datadoghq.eu`       | `1883` | Used by custom forwarders to send logs in raw, Syslog, or JSON format format over an unecrypted TCP connection. |
@@ -183,6 +186,7 @@ Endpoints that can be used to send logs to Datadog:
 {{< /tabs >}}
 
 To send logs over HTTPs, refer to the [Datadog Log HTTP API documentation][22].
+
 
 ## Reserved attributes
 
