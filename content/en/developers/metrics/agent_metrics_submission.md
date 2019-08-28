@@ -1,6 +1,7 @@
 ---
 title: Metric submission with a custom Agent Check
 kind: documentation
+disable_toc: true
 further_reading:
 - link: "developers/write_agent_check/?tab=agentv6"
   tag: "Documentation"
@@ -169,19 +170,59 @@ Here is an example of a dummy Agent check sending all metrics type periodically,
 2. Create within this folder a custom check file named `metrics_example.py` with the content below:
 
     ```python
-    import time
+    import random
 
     try:
-      from checks import AgentCheck
+        from checks import AgentCheck
     except ImportError:
-      from datadog_checks.checks import AgentCheck
+        from datadog_checks.checks import AgentCheck
 
     __version__ = "1.0.0"
 
-
     class MyClass(AgentCheck):
-      def check(self, instance):
+        def check(self, instance):
+            self.count(
+                "example_metric.count",
+                2,
+                tags="metric_submission_type:count",
+            )
+            self.decrement(
+                "example_metric.decrement",
+                tags="metric_submission_type:count",
+            )
+            self.increment(
+                "example_metric.increment",
+                tags="metric_submission_type:count",
+            )
+            self.rate(
+                "example_metric.rate",
+                1,
+                tags="metric_submission_type:rate",
+            )
+            self.gauge(
+                "example_metric.gauge",
+                random.randint(0, 10),
+                tags="metric_submission_type:gauge",
+            )
+            self.monotonic_count(
+                "example_metric.monotonic_count",
+                2,
+                tags="metric_submission_type:monotonic_count",
+            )
 
+            # Calling the functions below twice in order to
+            # simulate several metrics submission during one Agent run.
+
+            self.histogram(
+                "example_metric.histogram",
+                random.randint(0, 10),
+                tags="metric_submission_type:histogram",
+            )
+            self.histogram(
+                "example_metric.histogram",
+                random.randint(0, 10),
+                tags="metric_submission_type:histogram",
+            )
     ```
 
 3. [Restart the Agent][3]
@@ -198,17 +239,20 @@ Here is an example of a dummy Agent check sending all metrics type periodically,
 
         (...)
 
-
+        metrics_example (1.0.0)
+        -----------------------
+          Instance ID: metrics_example:d884b5186b651429 [OK]
+          Total Runs: 2
+          Metric Samples: Last Run: 8, Total: 16
+          Events: Last Run: 0, Total: 0
+          Service Checks: Last Run: 0, Total: 0
+          Average Execution Time : 2ms
 
         (...)
     ```
-5. Finally go into your [Datadog Service Check summary page][5] to see your Service Check reporting.
+5. Finally go into your [Metric Summary page][5] to see your metrics reporting:
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-
+{{< img src="developers/metrics/agent_metrics_submission/metrics_metrics_summary.png" alt="Metrics in metric summary" responsive="true" style="width:80%;">}}
 
 ## Further Reading
 
@@ -218,4 +262,4 @@ Here is an example of a dummy Agent check sending all metrics type periodically,
 [2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /agent/guide/agent-commands/#restart-the-agent
 [4]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information
-[5]: https://app.datadoghq.com/check/summary
+[5]: https://app.datadoghq.com/metric/summary

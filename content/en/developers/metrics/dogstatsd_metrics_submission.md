@@ -341,9 +341,6 @@ func main() {
 ```
 
 {{% /tab %}}
-{{% tab "Java" %}}
-
-{{% /tab %}}
 {{% tab ".NET" %}}
 
 {{% /tab %}}

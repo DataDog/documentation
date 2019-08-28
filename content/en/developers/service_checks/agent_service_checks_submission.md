@@ -40,8 +40,6 @@ Here is an example of a dummy Agent check sending only one Service Check periodi
 2. Create within this folder a custom check file named `service_check_example.py` with the content below:
 
     ```python
-    import time
-
     try:
       from checks import AgentCheck
     except ImportError:
@@ -80,7 +78,9 @@ Here is an example of a dummy Agent check sending only one Service Check periodi
 
         (...)
     ```
-5. Finally go into your [Datadog Service Check summary page][5] to see your Service Check reporting.
+5. Finally go into your [Datadog Service Check summary page][5] to see your Service Check reporting:
+
+{{< img src="developers/service_checks/agent_service_checks_submission/service_check.png" alt="Service Checks" responsive="true" style="width:80%;">}}
 
 ## Further reading
 

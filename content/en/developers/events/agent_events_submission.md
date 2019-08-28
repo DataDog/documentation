@@ -1,6 +1,7 @@
 ---
 title: Event submission with a custom Agent Check
 kind: documentation
+disable_toc: true
 further_reading:
 - link: "developers/write_agent_check/?tab=agentv6"
   tag: "Documentation"
@@ -58,27 +59,20 @@ Here is an example of a dummy Agent check sending only one event periodically, r
 2. Create within this folder a custom check file named `event_example.py` with the content below:
 
     ```python
-    import time
-
     try:
-      from checks import AgentCheck
+        from checks import AgentCheck
     except ImportError:
-      from datadog_checks.checks import AgentCheck
+        from datadog_checks.checks import AgentCheck
 
     __version__ = "1.0.0"
 
-
     class MyClass(AgentCheck):
-      def check(self, instance):
-        self.event(
-                    {
-                        'timestamp': time.time(),
-                        'event_type': 'Error',
-                        'msg_title': 'Example Event.',
-                        'msg_text': 'This is an example event coming from the Datadog Documentation.',
-                        'alert_type': 'error'
-                    }
-                  )
+        def check(self, instance):
+            self.service_check(
+                "example_service_check",
+                0,
+                message="Example application is up and running.",
+            )
     ```
 
 3. [Restart the Agent][4]
@@ -108,7 +102,7 @@ Here is an example of a dummy Agent check sending only one event periodically, r
     ```
 5. Finally go into your [Datadog Event stream][6] to see your events flowing in:
 
-{{< img src="developers/events/agent_check/event_stream_example.png" alt="Event stream example" responsive="true" style="width:80%" >}}
+{{< img src="developers/events/agent_check/event_stream_example.png" alt="Event stream example" responsive="true" style="width:80%;">}}
 
 ## Further reading
 
