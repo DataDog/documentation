@@ -20,12 +20,14 @@ Datadog Saved Views allow you to save search customizations in the Log Explorer,
 
 * A [search query][1]
 * A [selected subset of facets][2]
-* A set of [columns][3]
-* A customized default visualization ([logstream][4] or [log analytic][5])
+* A customized default visualization ([logstream][4], [log patterns][5] or [log analytic][6] along with their specific visualisation properties)
 
-Saved Views can then be selected directly in the left panel or in the search bar thanks to auto-completion, which matches on either search name or query.
+Saved Views can then be selected directly in the left panel or in the search bar thanks to auto-completion, which matches on either search name or query. And for really recurring working context, saved views marked as favourites (starred) are available directly from the main navigation menu.
+
 
 {{< img src="logs/explorer/saved_views/saved_views_selection.png" alt="Saved Views selection" responsive="true">}}
+
+
 
 ## Log Explorer Default View
 
@@ -81,4 +83,5 @@ After selecting a Saved View, you can continue to refine and modify your search 
 [2]: /logs/explorer/?tab=facets#setup
 [3]: /logs/explorer/?tab=logstream#visualization
 [4]: /logs/explorer/?tab=logstream#visualization
-[5]: /logs/explorer/analytics
+[5]: /logs/explorer/patterns
+[6]: /logs/explorer/analytics
