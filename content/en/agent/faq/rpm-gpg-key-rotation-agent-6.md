@@ -5,6 +5,8 @@ kind: faq
 
 Starting with v6.14.0, the Agent RPM packages are signed with a new GPG key.
 
+The previous GPG key is over 4 years old, so to better follow security best practices we are rotating our key.
+
 Hosts using RPM packages located in the [Datadog Yum repository][1] to install or upgrade the Agent v6.14.0+ are affected by this change and need to trust this new key by importing the associated public key in their hosts' keyrings.
 
 Trying to install or upgrade the Agent package without trusting the new key results in `NOKEY` errors when installing the package.
