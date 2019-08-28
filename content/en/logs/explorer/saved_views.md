@@ -52,7 +52,7 @@ Saved views can be loaded directly from the search bar, either by title or by ei
 
 ### Manage Saved Views
 
-To create a new Saved View, click the *Save as* button at the top of the screen5. Give it a name, and click on *Save*. 
+To create a new Saved View, click the *Save as* button at the top of the screen. Give it a name, and click on *Save*. 
 
 Slice and dice starting from a saved view. And update if needed this saved view to keep track of query or page layout configuration, clicking on the "Save As" button. 
 
