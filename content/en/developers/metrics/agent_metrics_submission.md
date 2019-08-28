@@ -152,8 +152,70 @@ self.histogram(name, value, tags=None, hostname=None, device_name=None)
 {{% /tab %}}
 {{< /tabs >}}
 
+
+## Example
+
+Here is an example of a dummy Agent check sending all metrics type periodically, refer to the dedicated [Writing a custom Agent check][1] documentation to learn more.
+
+1. Create a new directory `metrics_example.d/` in the [`conf.d/` folder][2] of your Agent.
+
+2. In your `metrics_example.d/` folder, create an empty configuration file named `metrics_example.yaml` with the following content:
+
+    ```yaml
+    instances: [{}]
+    ```
+
+3. Go now in the `/datadog-agent/checks.d/` folder.
+2. Create within this folder a custom check file named `metrics_example.py` with the content below:
+
+    ```python
+    import time
+
+    try:
+      from checks import AgentCheck
+    except ImportError:
+      from datadog_checks.checks import AgentCheck
+
+    __version__ = "1.0.0"
+
+
+    class MyClass(AgentCheck):
+      def check(self, instance):
+
+    ```
+
+3. [Restart the Agent][3]
+
+4. Check that your custom check is correctly running with the [Agent Status command][4]. You should see something like this:
+
+    ```
+    =========
+    Collector
+    =========
+
+      Running Checks
+      ==============
+
+        (...)
+
+
+
+        (...)
+    ```
+5. Finally go into your [Datadog Service Check summary page][5] to see your Service Check reporting.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/metrics/metrics_type
+[2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: /agent/guide/agent-commands/#restart-the-agent
+[4]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information
+[5]: https://app.datadoghq.com/check/summary

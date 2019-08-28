@@ -10,7 +10,7 @@ further_reading:
 - link: "developers/dogstatsd"
   tag: "Documentation"
   text: "Introduction to DogStatsD"
-- link: "developers/metrics/metric_type"
+- link: "developers/metrics/metrics_type"
   tag: "Documentation"
   text: "Discover Datadog metric types."
 ---
@@ -50,14 +50,20 @@ Find below short code snippets depending of your language that you can run to em
 After having [setup DogStatsD on your host][1] run the following code to submit a DogStatsD `COUNT` metric type,
 
 ```python
-from datadog import statsd
+from datadog import initialize, statsd
 import time
+
+options = {
+    'statsd_host':'127.0.0.1',
+    'statsd_port':8125
+}
+
+initialize(**options)
 
 while(1):
   statsd.increment('example_metric.increment')
   statsd.decrement('example_metric.decrement')
-  statsd.count('example_metric.count', 2)
-  sleep(10)
+  time.sleep(10)
 ```
 
 [1]: /developers/dogstatsd/?tab=python#setup
@@ -66,7 +72,8 @@ while(1):
 
 ```ruby
 require 'datadog/statsd'
-statsd = Datadog::Statsd.new
+
+statsd = Datadog::Statsd.new('localhost', 8125)
 
 while true do
     statsd.increment('example_metric.increment')
@@ -79,6 +86,28 @@ end
 {{% /tab %}}
 {{% tab "Go" %}}
 
+```go
+package main
+
+import (
+	"log"
+	"time"
+	"github.com/DataDog/datadog-go/statsd"
+)
+
+func main() {
+	dogstatsd_client, err := statsd.New("127.0.0.1:8125")
+	if err != nil {
+    		log.Fatal(err)
+	}
+	for {
+		  dogstatsd_client.Incr("example_metric.increment", []string{}, 0.0)
+  		dogstatsd_client.Decr("example_metric.decrement", []string{}, 0.0)
+  		dogstatsd_client.Count("example_metric.count", 2, []string{}, 0.0)
+  		time.Sleep(10)
+	}
+}
+```
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -89,17 +118,36 @@ end
 {{% /tab %}}
 {{% tab "PHP" %}}
 
+```php
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use DataDog\DogStatsd;
+
+$statsd = new DogStatsd(
+    array('host' => '127.0.0.1',
+          'port' => 8125,
+     )
+  );
+
+while (TRUE) {
+    $statsd->increment('example_metric.increment');
+    $statsd->decrement('example_metric.decrement');
+    sleep(10);
+}
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 
-With this code, the data is available to graph in Datadog. Here's an example:
+After running the code above, your metrics data is available to graph in Datadog:
 
-TO DO: Run the script and add a screenshoot
+{{< img src="developers/metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="Increment Decrement" responsive="true">}}
 
-**Notes**:
+Since the value is submitted as a `COUNT` it's stored as `RATE` in Datadog. To get raw counts within Datadog, apply a function to your series such as [the Cumulative Sum function][3] or [the Integral function][4]:
 
-* StatsD counters are normalized over the flush interval to report per-second units. To increment or measure values over time, see [gauges](#gauges).
-* For counters coming from another source that are ever-increasing and never reset (for example, the number of queries from MySQL over time), Datadog tracks the rate between flushed values. To get raw counts within Datadog, apply a function to your series such as _cumulative sum_ or _integral_. [Read more about Datadog functions][3].
+{{< img src="developers/metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Increment Decrement with Cumsum" responsive="true">}}
 
 ## Gauge
 
@@ -109,14 +157,14 @@ TO DO: Run the script and add a screenshoot
 
 with the following parameter:
 
-| Parameter    | Type            | Required | Description                                                                                                                                                                |
-| --------     | -------         | -----    | ----------                                                                                                                                                                 |
-| `MetricName` | String          | yes      | Name of the metric to submit.                                                                                                                                              |
-| `Value`      | Double          | yes      | Value associated to your metric.                                                                                                                                           |
-| `SampleRate` | Double          | no       | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
-| `Tags`       | List of Strings | no       | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
+| Parameter    | Type            | Description                                                                                                                                                                |
+| --------     | -------         | ----------                                                                                                                                                                 |
+| `MetricName` | String          | Name of the metric to submit.                                                                                                                                              |
+| `Value`      | Double          | Value associated to your metric. Only used with the `count()` function.                                                                                                                                           |
+| `SampleRate` | Double          | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
+| `Tags`       | List of Strings | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
 
-Find below short code snippets depending of your language that you can run to emit a `GAUGE` metric type-stored as `GAUGE` metric type-into Datadog. Learn more about the [`GAUGE` type in the metric types documentation][4].
+Find below short code snippets depending of your language that you can run to emit a `GAUGE` metric type-stored as `GAUGE` metric type-into Datadog. Learn more about the [`GAUGE` type in the metric types documentation][5].
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -124,14 +172,22 @@ Find below short code snippets depending of your language that you can run to em
 After having [setup DogStatsD on your host][1] run the following code to submit a DogStatsD `GAUGE` metric type into Datadog:
 
 ```python
-from datadog import statsd
+from datadog import initialize, statsd
 import time
 
+options = {
+    'statsd_host':'127.0.0.1',
+    'statsd_port':8125
+}
+
+initialize(**options)
+
 i = 0
+
 while(1):
   i += 1
   statsd.gauge('example_metric.gauge', i )
-  sleep(10)
+  time.sleep(10)
 ```
 
 [1]: /developers/dogstatsd/?tab=python#setup
@@ -139,16 +195,45 @@ while(1):
 {{% tab "Ruby" %}}
 
 ```ruby
-# Record the amount of free memory every ten seconds.
+require 'datadog/statsd'
+
+statsd = Datadog::Statsd.new('localhost', 8125)
+
+i = 0
+
 while true do
-    statsd.gauge('system.mem.free', get_free_memory())
-    sleep(10)
+    i += 1
+    statsd.gauge('example_metric.gauge', i)
+    sleep 10
 end
 ```
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
+```go
+package main
+
+import (
+	"log"
+	"time"
+	"github.com/DataDog/datadog-go/statsd"
+)
+
+func main() {
+	dogstatsd_client, err := statsd.New("127.0.0.1:8125")
+	if err != nil {
+    		log.Fatal(err)
+	}
+	var i float64
+	for {
+		i += 1
+		dogstatsd_client.Gauge("example_metric.gauge", i, []string{}, 0.0)
+  	time.Sleep(10)
+	}
+}
+
+```
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -159,12 +244,33 @@ end
 {{% /tab %}}
 {{% tab "PHP" %}}
 
+```php
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use DataDog\DogStatsd;
+
+$statsd = new DogStatsd(
+    array('host' => '127.0.0.1',
+          'port' => 8125,
+     )
+  );
+
+$i = 0;
+while (TRUE) {
+    $i++;
+    $statsd->gauge('example_metric.gauge', $i);
+    sleep(10);
+}
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 
-With this code, the data is available to graph in Datadog. Here's an example:
+After running the code above, your metric data is available to graph in Datadog:
 
-TO DO: Run the script and add a screenshoot/
+{{< img src="developers/metrics/dogstatsd_metrics_submission/gauge.png" alt="Gauge" responsive="true">}}
 
 ## Set
 
@@ -174,41 +280,65 @@ TO DO: Run the script and add a screenshoot/
 
 with the following parameter:
 
-| Parameter    | Type            | Required | Description                                                                                                                                                                |
-| --------     | -------         | -----    | ----------                                                                                                                                                                 |
-| `MetricName` | String          | yes      | Name of the metric to submit.                                                                                                                                              |
-| `Value`      | Double          | yes      | Value associated to your metric.                                                                                                                                           |
-| `SampleRate` | Double          | no       | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
-| `Tags`       | List of Strings | no       | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
+| Parameter    | Type            | Description                                                                                                                                                                |
+| --------     | -------         | ----------                                                                                                                                                                 |
+| `MetricName` | String          | Name of the metric to submit.                                                                                                                                              |
+| `Value`      | Double          | Value associated to your metric.                                                                                                                                           |
+| `SampleRate` | Double          | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
+| `Tags`       | List of Strings | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
 
-Find below short code snippets depending of your language that you can run to emit a `SET` metric type-stored as `GAUGE` metric type-into Datadog. Learn more about the [`SET` type in the metric types documentation][5].
+Find below short code snippets depending of your language that you can run to emit a `SET` metric type-stored as `GAUGE` metric type-into Datadog. Learn more about the [`SET` type in the metric types documentation][6].
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
 ```python
-from datadog import statsd
+from datadog import initialize, statsd
 import time
 import random
 
+options = {
+    'statsd_host':'127.0.0.1',
+    'statsd_port':8125
+}
+
+initialize(**options)
+
 while(1):
   statsd.set('example_metric.set', random.randint(0, 10))
-  sleep(10)
+  time.sleep(10)
 ```
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-```ruby
-def login(self, user_id)
-    # Log the user in ...
-    statsd.set('users.uniques', user_id)
-end
-```
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
+```go
+package main
+
+import (
+	"log"
+	"time"
+  "math/rand"
+  "strconv"
+	"github.com/DataDog/datadog-go/statsd"
+)
+
+func main() {
+	dogstatsd_client, err := statsd.New("127.0.0.1:8125")
+	if err != nil {
+    		log.Fatal(err)
+  }
+
+	for {
+		dogstatsd_client.Set("example_metric.set", strconv.Itoa(rand.Intn(10)), []string{}, 0.0)
+  	time.Sleep(10)
+	}
+}
+```
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -218,6 +348,25 @@ end
 
 {{% /tab %}}
 {{% tab "PHP" %}}
+
+```php
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use DataDog\DogStatsd;
+
+$statsd = new DogStatsd(
+    array('host' => '127.0.0.1',
+          'port' => 8125,
+     )
+  );
+
+while (TRUE) {
+    $statsd->set('example_metric.set', rand(0, 10));
+    sleep(10);
+}
+```
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -230,30 +379,37 @@ TO DO: Run the script and add a screenshoot
 
 | Method             | Datadog Storage type                                                                                  |
 | :---               | :---                                                                                      |
-| `histogram(MetricName, Value, SampleRate, Tags)` | Since multiple metrics are submitted, metric types stored depend of the metric. The two types stored are `GAUGE`, `Rate` See the [histogram metric type][6] documentation to learn more. |
+| `histogram(MetricName, Value, SampleRate, Tags)` | Since multiple metrics are submitted, metric types stored depend of the metric. The two types stored are `GAUGE`, `Rate` See the [histogram metric type][7] documentation to learn more. |
 
 with the following parameter:
 
-| Parameter    | Type            | Required | Description                                                                                                                                                                |
-| --------     | -------         | -----    | ----------                                                                                                                                                                 |
-| `MetricName` | String          | yes      | Name of the metric to submit.                                                                                                                                              |
-| `Value`      | Double          | yes      | Value associated to your metric.                                                                                                                                           |
-| `SampleRate` | Double          | no       | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
-| `Tags`       | List of Strings | no       | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
+| Parameter    | Type            | Description                                                                                                                                                                |
+| --------     | -------         | ----------                                                                                                                                                                 |
+| `MetricName` | String          | Name of the metric to submit.                                                                                                                                              |
+| `Value`      | Double          | Value associated to your metric.                                                                                                                                           |
+| `SampleRate` | Double          | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
+| `Tags`       | List of Strings | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
 
-Histograms are specific to DogStatsD. Find below short code snippets depending of your language that you can run to emit a `HISTOGRAM` metric type-stored as `GAUGE` and `RATE` metric types-into Datadog. Learn more about the [`HISTOGRAM` type in the metric types documentation][6].
+Histograms are specific to DogStatsD. Find below short code snippets depending of your language that you can run to emit a `HISTOGRAM` metric type-stored as `GAUGE` and `RATE` metric types-into Datadog. Learn more about the [`HISTOGRAM` type in the metric types documentation][7].
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
 ```python
-from datadog import statsd
+from datadog import initialize, statsd
 import time
 import random
 
+options = {
+    'statsd_host':'127.0.0.1',
+    'statsd_port':8125
+}
+
+initialize(**options)
+
 while(1):
-  statsd.set('example_metric.histogram', random.randint(0, 10))
-  sleep(10)
+  statsd.histogram('example_metric.histogram', random.randint(0, 10))
+  time.sleep(10)
 ```
 
 {{% /tab %}}
@@ -274,6 +430,28 @@ end
 {{% /tab %}}
 {{% tab "Go" %}}
 
+```go
+package main
+
+import (
+	"log"
+	"time"
+	"math/rand"
+	"github.com/DataDog/datadog-go/statsd"
+)
+
+func main() {
+	dogstatsd_client, err := statsd.New("127.0.0.1:8125")
+	if err != nil {
+    		log.Fatal(err)
+  }
+
+	for {
+		dogstatsd_client.Histogram("example_metric.histogram", rand.Intn(10), []string{}, 0.0)
+  		time.Sleep(10)
+	}
+}
+```
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -283,6 +461,25 @@ end
 
 {{% /tab %}}
 {{% tab "PHP" %}}
+
+```php
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use DataDog\DogStatsd;
+
+$statsd = new DogStatsd(
+    array('host' => '127.0.0.1',
+          'port' => 8125,
+     )
+  );
+
+while (TRUE) {
+    $statsd->histogram('example_metric.histogram', rand(0, 10));
+    sleep(10);
+}
+```
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -311,13 +508,20 @@ Timers in DogStatsD are an implementation of Histograms (not to be confused with
 In Python, timers are created with a decorator:
 
 ```python
-from datadog import statsd
+from datadog import initialize, statsd
 import time
 import random
 
+options = {
+    'statsd_host':'127.0.0.1',
+    'statsd_port':8125
+}
+
+initialize(**options)
+
 @statsd.timed('example_metric.timer')
 def my_function():
-  sleep(random.randint(0, 10))
+  time.sleep(random.randint(0, 10))
 ```
 
 or with a context manager:
@@ -376,49 +580,71 @@ Remember: under the hood, DogStatsD treats timers as histograms. Whether you use
 
 ## Distribution
 
-**This feature is in BETA. [Contact Datadog support][7] for details on how to have it enabled for your account.**
+**This feature is in BETA. [Contact Datadog support][8] for details on how to have it enabled for your account.**
 
 | Method | Datadog Storage type |
 | :----- | :------- |
-| `distribution(MetricName, Value, Tags)` | Stored as a `Distribution` type in Datadog. See the dedicated [Distribution documentation][8] to learn more. |
+| `distribution(MetricName, Value, Tags)` | Stored as a `Distribution` type in Datadog. See the dedicated [Distribution documentation][9] to learn more. |
 
 with the following parameter:
 
-| Parameter    | Type            | Required | Description                                                                                                                                                                |
-| --------     | -------         | -----    | ----------                                                                                                                                                                 |
-| `MetricName` | String          | yes      | Name of the metric to submit.                                                                                                                                              |
-| `Value`      | Double          | yes      | Value associated to your metric.                                                                                                                                           |
-| `SampleRate` | Double          | no       | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
-| `Tags`       | List of Strings | no       | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
+| Parameter    | Type            | Description                                                                                                                                                                |
+| --------     | -------         | ----------                                                                                                                                                                 |
+| `MetricName` | String          | Name of the metric to submit.                                                                                                                                              |
+| `Value`      | Double          | Value associated to your metric.                                                                                                                                           |
+| `SampleRate` | Double          | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
+| `Tags`       | List of Strings | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
 
-Distributoins are specific to DogStatsD. Find below short code snippets depending of your language that you can run to emit a `DISTRIBUTION` metric type-stored as `DISTRIBUTION` metric type-into Datadog. Learn more about the [`DISTRIBUTION` type in the metric types documentation][9].
+Distributoins are specific to DogStatsD. Find below short code snippets depending of your language that you can run to emit a `DISTRIBUTION` metric type-stored as `DISTRIBUTION` metric type-into Datadog. Learn more about the [`DISTRIBUTION` type in the metric types documentation][10].
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
 ```python
-from datadog import statsd
+from datadog import initialize, statsd
 import time
 import random
 
+options = {
+    'statsd_host':'127.0.0.1',
+    'statsd_port':8125
+}
+
+initialize(**options)
+
 while(1):
-  statsd.set('example_metric.distribution', random.randint(0, 10))
-  sleep(10)
+  statsd.distribution('example_metric.distribution', random.randint(0, 10))
+  time.sleep(10)
 ```
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-```ruby
-start_time = Time.now
-results = Net::HTTP.get('https://google.com')
-duration = Time.now - start_time
-statsd.distribution('dist.dd.website.latency', duration)
-```
-
 {{% /tab %}}
 {{% tab "Go" %}}
 
+```go
+package main
+
+import (
+	"log"
+	"time"
+	"math/rand"
+	"github.com/DataDog/datadog-go/statsd"
+)
+
+func main() {
+	dogstatsd_client, err := statsd.New("127.0.0.1:8125")
+	if err != nil {
+    		log.Fatal(err)
+	}
+
+	for {
+		dogstatsd_client.Distribution("example_metric.distribution", rand.Intn(10), []string{}, 0.0)
+  		time.Sleep(10)
+	}
+}
+```
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -452,7 +678,7 @@ Before sending the metric to Datadog, DogStatsD uses the `sample_rate` to correc
 | `Set` | Bo correction. The value received is kept as it is. |
 | `Histogram` | The `histogram.count` statistic is a counter metric, and receives the correction outlined above. Other statistics are gauge metrics and aren't "corrected." |
 
-See the [Datadog Agent aggregation code][10] to learn more about this behavior.
+See the [Datadog Agent aggregation code][11] to learn more about this behavior.
 
 The following code only sends points half of the time:
 
@@ -498,7 +724,6 @@ end
 
 Add tags to any metric you send to DogStatsD. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
 
-
 {{< tabs >}}
 {{% tab "Python" %}}
 
@@ -539,19 +764,20 @@ def algorithm_two():
 
 The host tag is assigned automatically by the Datadog Agent aggregating the metrics. Metrics submitted with a host tag not matching the Agent hostname lose reference to the original host. The host tag submitted overrides any hostname collected by or configured in the Agent.
 
-**Note**: Because of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][11] page for more details.
+**Note**: Because of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][12] page for more details.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 [1]: /developers/dogstatsd
 [2]: /developers/metrics/metrics_type/?tab=count#metric-type-definition
-[3]: /graphing/functions/#apply-functions-optional
-[4]: /developers/metrics/metrics_type/?tab=gauge#metric-type-definition
-[5]: /developers/metrics/metrics_type/?tab=set#metric-type-definition
-[6]: /developers/metrics/metrics_type/?tab=histogram#metric-type-definition
-[7]: /help
-[8]: /graphing/metrics/distributions
-[9]: /developers/metrics/metrics_type/?tab=distribution#metric-type-definition
-[10]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
-[11]: /graphing/metrics/distributions
+[3]: /graphing/functions/arithmetic/#cumulative-sum
+[4]: /graphing/functions/arithmetic/#integral
+[5]: /developers/metrics/metrics_type/?tab=gauge#metric-type-definition
+[6]: /developers/metrics/metrics_type/?tab=set#metric-type-definition
+[7]: /developers/metrics/metrics_type/?tab=histogram#metric-type-definition
+[8]: /help
+[9]: /graphing/metrics/distributions
+[10]: /developers/metrics/metrics_type/?tab=distribution#metric-type-definition
+[11]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
+[12]: /graphing/metrics/distributions

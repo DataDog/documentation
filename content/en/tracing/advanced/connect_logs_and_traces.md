@@ -149,6 +149,7 @@ var tracer = new Tracer(settings);
 
 
 ```php
+<?php
 $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
 $append = sprintf(
     ' [dd.trace_id=%d dd.span_id=%d]',
@@ -161,6 +162,7 @@ my_error_logger('Error message.' . $append);
 If the logger implements the [**monolog/monolog** library][1], use `Logger::pushProcessor()` to automatically append the identifiers to all the log messages:
 
 ```php
+<?php
 $logger->pushProcessor(function ($record) {
     $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
     if (null === $span) {

@@ -19,7 +19,7 @@ further_reading:
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.gif" alt="Analytics View" responsive="true" style="width:90%;">}}
 
-Datadog APM allows you to customize your traces to include any additional information you might need to maintain observability into your business. You can use this to identify a spike in the throughput of a certain enterprise customer, or the user suffering the highest latency, or to pinpoint the database shard generating the most errors. 
+Datadog APM allows you to customize your traces to include any additional information you might need to maintain observability into your business. You can use this to identify a spike in the throughput of a certain enterprise customer, or the user suffering the highest latency, or to pinpoint the database shard generating the most errors.
 
 In this example, a customer ID is added to traces allowing the customers that have the slowest performance to be identified. Customization of traces is based on tags that seamlessly integrate APM with the rest of Datadog and come in the form of `key:value` pairs of metadata added to spans.
 
@@ -193,6 +193,7 @@ public class ShoppingCartController : Controller
 The Datadog UI uses tags to set span level metadata. Custom tags may be set for auto-instrumentation by grabbing the active span from the global tracer and setting a tag with `setTag` method.
 
 ```php
+<?php
 namespace App\Http\Controllers;
 
 use DDTrace\GlobalTracer;
@@ -219,7 +220,7 @@ class ShoppingCartController extends Controller
 
 ## Leverage the Datadog UI to search for your custom span tags
 
-2) **Go to the Services page** and click on the service that you added tags to. **Scroll down and click on the specific resource** where the tag was added in the Resource table. **Scroll down to the Traces table** 
+2) **Go to the Services page** and click on the service that you added tags to. **Scroll down and click on the specific resource** where the tag was added in the Resource table. **Scroll down to the Traces table**
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_3.png" alt="Resource Page" responsive="true" style="width:90%;">}}
 
@@ -241,7 +242,7 @@ The bottom part of the view includes additional information about the trace or a
 
 4) **Navigate to the [Trace Search page][2]**.
 
-The Trace Search page allows you to identify specific [Traces][3] and APM Events you are interested in. Here you can filter by time a set of default tags (such as `Env`,`Service`, `Resource` and [many more][4]). 
+The Trace Search page allows you to identify specific [Traces][3] and APM Events you are interested in. Here you can filter by time a set of default tags (such as `Env`,`Service`, `Resource` and [many more][4]).
 
 5) **Find a trace that has the new tag**. To do this use the facet explorer on the left to find the Resource name you set at the beginning of this guide and click into one of the rows you see there.
 
@@ -263,7 +264,7 @@ The Trace Analytics page is a visual query building tool that allows you to cond
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.gif" alt="" responsive="true" style="width:90%;">}}
 
-8) **Remove Error** from the query, **change the `count *` measure to `Duration`** and **change the graph type to `Top List`**. 
+8) **Remove Error** from the query, **change the `count *` measure to `Duration`** and **change the graph type to `Top List`**.
 
 You can now see the customers that have the slowest average requests. **Note**: If you’d like to make sure your customers never pass a certain threshold of performance, you can [export this query to a monitor][7], alternatively, you can save this visualization to a dashboard and keep an eye over it over time.
 

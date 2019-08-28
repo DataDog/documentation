@@ -209,10 +209,11 @@ public class Foo {
 Instantiate a new DogStatsd object using composer:
 
 ```php
+<?php
+
 require __DIR__ . '/vendor/autoload.php';
 
 use DataDog\DogStatsd;
-use DataDog\BatchedDogStatsd;
 
 $statsd = new DogStatsd(
     array('host' => '127.0.0.1',

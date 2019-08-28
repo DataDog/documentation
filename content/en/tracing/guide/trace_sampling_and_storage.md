@@ -302,7 +302,7 @@ using(var scope = Tracer.Instance.StartActive(operationName))
 Manually keep a trace:
 
 ```php
-
+<?php
 $tracer = \OpenTracing\GlobalTracer::get();
 $span = $tracer->getActiveSpan();
 
@@ -317,7 +317,7 @@ if (null !== $span) {
 Manually drop a trace:
 
 ```php
-
+<?php
 $tracer = \OpenTracing\GlobalTracer::get();
 $span = $tracer->getActiveSpan();
 

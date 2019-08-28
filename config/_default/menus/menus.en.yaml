@@ -1083,26 +1083,31 @@ main:
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_dogstatsd"
     weight: 203
+  - name: "Submission - Powershell"
+    url: "developers/metrics/powershell_metrics_submission"
+    parent: "dev_tools_metrics"
+    identifier: "dev_tools_metrics_powershell"
+    weight: 204
   - name: "Submission - API "
     url: "api/#post-timeseries-points"
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_api"
-    weight: 204
+    weight: 205
   - name: "Metrics Type Modifiers"
     url: "developers/metrics/metric_type_modifiers/"
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_modifiers"
-    weight: 205
+    weight: 206
   - name: "Metrics Units"
     url: "developers/metrics/metrics_units/"
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_units"
-    weight: 206
+    weight: 207
   - name: "Custom Metrics"
     url: "developers/metrics/custom_metrics/"
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_custom_metrics"
-    weight: 207
+    weight: 208
 
   ## DEVELOPERS - Events
 

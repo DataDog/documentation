@@ -106,6 +106,8 @@ catch (InvalidOperationException ex)
 {{% tab "PHP" %}}
 
 ```php
+<?php
+
 try {
   # (...)
 } catch (Exception $e) {

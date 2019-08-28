@@ -291,6 +291,7 @@ The `dd_trace()` function hooks into existing functions and methods to:
 For example, the following snippet traces the `CustomDriver::doWork()` method, adds custom tags, reports any exceptions as errors on the span, and then re-throws the exceptions.
 
 ```php
+<?php
 dd_trace("CustomDriver", "doWork", function (...$args) {
     // Start a new span
     $scope = GlobalTracer::get()->startActiveSpan('CustomDriver.doWork');
@@ -320,6 +321,7 @@ dd_trace("CustomDriver", "doWork", function (...$args) {
 The root span an be accessed later on directly from the global tracer via `Tracer::getRootScope()`. This is useful in contexts where the metadata to be added to the root span does not exist in early script execution.
 
 ```php
+<?php
 $rootSpan = \DDTrace\GlobalTracer::get()
     ->getRootScope()
     ->getSpan();

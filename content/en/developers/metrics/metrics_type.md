@@ -22,7 +22,6 @@ The "Datadog in-app type" affects how a given metric is interpreted in query res
 There are five metric types in the Datadog web application (though one is deprecated):
 
 * COUNT
-* COUNTER (deprecated)
 * GAUGE
 * RATE
 * DISTRIBUTION

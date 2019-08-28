@@ -445,7 +445,7 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 Applications with custom instrumentation can enable trace analytics by setting the `ANALYTICS_KEY` tag on the service root span:
 
 ```php
-
+<?php
 // ... your existing span that you want to enable for Trace Search & Analytics
 $span->setTag(Tag::ANALYTICS_KEY, true);
 
