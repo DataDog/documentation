@@ -17,6 +17,7 @@ If you stop reporting data to Datadog, after a certain period of time metrics, t
 | Metrics                              | 24 hours |
 | Tags in template variable drop-downs | 30 days  |
 | Tags in other drop-downs             | 12 hours |
+| APM `env` tags                       | 60 days  |
 
 Even though the data is not listed, you can still query the data with the [JSON editor][1]. A simple solution is to query for the host name or tags:
 
