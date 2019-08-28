@@ -13,15 +13,15 @@ further_reading:
 
 ## Log Explorer Default View
 
-The default log explorer view is loaded where you land on Search, Pattern, or Analytics Pages from the main navigation menu (or using corresponding URL in your browser).
+The default log explorer view is loaded where you land on the Logs Search, Analytics, or Patterns pages from the main navigation menu, or enter the corresponding URLs into your browser.
 
 The default view includes:
 
 * an empty query
 * a list of visible facets in the facet list
-* a basic page layout (e.g. table configuration for Search, vizualisation options for Analytics, etc.)
+* a basic page layout (e.g. table configuration for search, visualization options for analytics, etc.)
 
-The default view comes a "factory" configuration, but all edits on the facet list (see caption hereafter) or in the page layout are automatically saved in this default view.
+All edits on the facet list (see below) or in the page layout are automatically saved in this default view.
 
 {{< img src="logs/explorer/saved_views/edit_facet_list.png" alt="Saved Views selection" responsive="true">}}
 
