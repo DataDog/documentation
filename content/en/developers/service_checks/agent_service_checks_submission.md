@@ -8,11 +8,13 @@ further_reading:
   text: "Write an Agent Custom Check"
 ---
 
-When submitting a status check through a custom Agent check, the predefined `service_check()` function in the `AgentCheck` class can be used to pass the Agent check along to Datadog.
+To submit a Service Check to Datadog within a custom Agent check, use the predefined `service_check()` function in the `AgentCheck` class.
 
 ```python
 self.service_check(name, status, tags=None, hostname=None, message=None)
 ```
+
+Find bellow the different parameters and data types available for the `service_check()` function:
 
 | Parameter  | Type            | Required | Default Value | Description                                                                                                   |
 | ---------  | ----            | -------- | ------------- | -----------                                                                                                   |
@@ -22,12 +24,70 @@ self.service_check(name, status, tags=None, hostname=None, message=None)
 | `hostname` | string          | no       | current host  | A hostname to associate with this Service check. Defaults to the current host.                                |
 | `message`  | String          | no       | `None`        | Additional information or a description of why this status occurred.                                          |
 
-A call to this function must include a check name and a check status with optional parameters including tags you wish to associate with the check, a timestamp for the check status, the host submitting the check, and a message describing the status. An example call to the `service_check` function within a custom Agent check would look like:
+## Example
 
-```python
-self.service_check('app.is_ok', 0, tags=['environment:production','role:webserver'], hostname='app1', message='App1 is up and running')
-```
+Here is an example of a dummy Agent check sending only one Service Check periodically, refer to the dedicated [Writing a custom Agent check][1] documentation to learn more.
+
+1. Create a new directory `service_check_example.d/` in the [`conf.d/` folder][2] of your Agent.
+
+2. In your `service_check_example.d/` folder, create an empty configuration file named `service_check_example.yaml` with the following content:
+
+    ```yaml
+    instances: [{}]
+    ```
+
+3. Go now in the `/datadog-agent/checks.d/` folder.
+2. Create within this folder a custom check file named `service_check_example.py` with the content below:
+
+    ```python
+    import time
+
+    try:
+      from checks import AgentCheck
+    except ImportError:
+      from datadog_checks.checks import AgentCheck
+
+    __version__ = "1.0.0"
+
+
+    class MyClass(AgentCheck):
+      def check(self, instance):
+          self.service_check('example_service_check', 0, message='Example application is up and running.')
+    ```
+
+3. [Restart the Agent][3]
+
+4. Check that your custom check is correctly running with the [Agent Status command][4]. You should see something like this:
+
+    ```
+    =========
+    Collector
+    =========
+
+      Running Checks
+      ==============
+
+        (...)
+
+        service_check_example (1.0.0)
+        -----------------------------
+          Instance ID: service_check_example:d884b5186b651429 [OK]
+          Total Runs: 1
+          Metric Samples: Last Run: 0, Total: 0
+          Events: Last Run: 0, Total: 0
+          Service Checks: Last Run: 1, Total: 1
+          Average Execution Time : 2ms
+
+        (...)
+    ```
+5. Finally go into your [Datadog Service Check summary page][5] to see your Service Check reporting.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /developers/write_agent_check
+[2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: /agent/guide/agent-commands/#restart-the-agent
+[4]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information
+[5]: https://app.datadoghq.com/check/summary
