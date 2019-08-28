@@ -34,9 +34,9 @@ See the [Libraries documentation][3] for more information.
 
 Dashboards are one of the primary ways to visualize your data. There are two types of dashboards: Screenboards and Timeboards.
 
-[Screenboards][4] are dashboards with free-form layouts that can include a variety of objects, such as images, graphs, and logs. They are commonly used as status boards or storytelling tableaux, and can either update in real-time, or represent one or more fixed points in the past.
+[Screenboards][4] are dashboards with free-form layouts that can include a variety of objects, such as images, graphs, and logs. They are commonly used as status boards or storytelling views, and can either update in real-time, or represent one or more fixed points in the past.
 
-[Timeboards][5] have a more structured automatic layout, and represent a single point in time—either fixed or real-time—across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
+[Timeboards][5] have automatic layouts, and represent a single point in time—either fixed or real-time—across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
 
 #### DogStatsD
 
