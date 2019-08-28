@@ -13,20 +13,13 @@ further_reading:
 
 ## Overview
 
-When multiple teams share the same account, or when your logs have many different sources, it is critical to be able to promptly start investigating the right content.
-With Datadog, teams can define and share Log Explorer Views so everyone can start troubleshooting with the same predefined context.
+When multiple teams share the same account, or when your logs have many different sources, it is critical to be able to promptly start investigating the right content. With Datadog, teams can define and share Log Explorer Views so everyone can start troubleshooting with the same predefined context.
 
 Datadog Saved Views allow you to save search customizations in the Log Explorer, including:
 
 * A [search query][1]
 * A [selected subset of facets][2]
 * A customized default visualization ([logstream][4], [log patterns][5] or [log analytic][6] along with their specific visualisation properties)
-
-Saved Views can then be selected directly in the left panel or in the search bar thanks to auto-completion, which matches on either search name or query. And for really recurring working context, saved views marked as favourites (starred) are available directly from the main navigation menu.
-
-
-{{< img src="logs/explorer/saved_views/saved_views_selection.png" alt="Saved Views selection" responsive="true">}}
-
 
 
 ## Log Explorer Default View
@@ -41,39 +34,32 @@ Once this has been done, the Log Explorer uses the default list of facets whenev
 
 {{< img src="logs/explorer/saved_views/default_views_selection.png" alt="Saved Views selection" responsive="true" style="width:50%;">}}
 
-## Create a Saved View
 
-To create a new Saved View:
+## Use Saved Views
 
-1. Enter a query in the [search bar][1]
-2. Select the columns to display (from the cog icon at the top-right of the page, or from a log's contextual panel)
-3. Select the list of [facets][2] to display
-4. Click the *Save as* button at the top of the screen
-5. Name it and click on *Save*
+### Load a Saved View
 
-{{< img src="logs/explorer/saved_views/saved_views_creation.mp4" alt="Saved views creation" video="true" responsive="true" >}}
+Saved Views can then be selected directly in the left panel or in the search bar thanks to auto-completion, which matches on either search name or query. 
 
-## Update or remove an existing Saved View
+And for really recurring working context, saved views marked as favourites (starred) are available directly from the main navigation menu.
 
-### Remove a Saved View
+{{< img src="logs/explorer/saved_views/saved_view_load.gif" alt="Saved Views selection" responsive="true">}}
+
+Saved views can be loaded directly from the search bar, either by title or by either element of its query. 
+
+{{< img src="logs/explorer/saved_views/saved_view_load-from-bar.png" alt="Saved Views selection" responsive="true">}}
+
+
+### Manage Saved Views
+
+To create a new Saved View, click the *Save as* button at the top of the screen5. Give it a name, and click on *Save*. 
+
+Slice and dice starting from a saved view. And update if needed this saved view to keep track of query or page layout configuration, clicking on the "Save As" button. 
+
+{{< img src="logs/explorer/saved_views/saved_view_create-delete.gif" alt="Saved views creation" video="true" responsive="true" >}}
 
 Saved Views can be removed directly from the Saved View list in the Logs Explorer. Hover over the name of the Saved View to reveal its **delete** button. Click on it and confirm.
 
-{{< img src="logs/explorer/saved_views/remove_saved_views.png" alt="remove Saved Views" responsive="true" style="width:50%;">}}
-
-### Update a Saved View
-
-To update an existing Saved View, proceed exactly as if you were creating a new one but instead of saving it, select an existing Saved View from the drop down, click on *replace*, and confirm.
-
-{{< img src="logs/explorer/saved_views/update_saved_views.png" alt="Saved Views selection" responsive="true" style="width:50%;">}}
-
-## Revert a modification to a Saved View
-
-After selecting a Saved View, you can continue to refine and modify your search as needed for your troubleshooting purposes. After changing the view, you can always revert to the most recent saved version of the Saved View by selecting the **Revert** button.
-
-**Note**: The Revert button does not undo changes after they have been saved.
-
-{{< img src="logs/explorer/saved_views/revert_saved_views.png" alt="revert Saved Views" responsive="true" style="width:50%;">}}
 
 ## Further Reading
 
