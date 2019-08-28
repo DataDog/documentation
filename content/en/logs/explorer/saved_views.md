@@ -49,7 +49,7 @@ Star Saved Views to marked them as favorites. Starred Saved Views are available 
 
 To create a new Saved View, click the *Save as* button at the top of the screen. Give it a name, and click on *Save*. 
 
-Slice and dice starting from a Saved Vgiew. If needed, update this saved view to keep track of query or page layout configuration—use the "Save As" button. 
+Slice and dice starting from a Saved View. If needed, update this saved view to keep track of query or page layout configuration—use the "Save As" button. 
 
 {{< img src="logs/explorer/saved_views/saved_view_create-delete.gif" alt="Saved views creation" video="true" responsive="true" >}}
 
