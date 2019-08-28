@@ -88,12 +88,24 @@ func main() {
 {{% tab "Java" %}}
 
 ```java
-  final Event event = Event.builder()
+import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.StatsDClient;
+
+public class DogStatsdClient {
+
+    public static void main(String[] args) throws Exception {
+
+        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+
+        Event event = Event.builder()
           .withTitle("An error occured")
           .withText(e)
           .withAlertType(Event.AlertType.ERROR)
           .build();
-  statsd.event(event)
+
+        Statsd.event(event)
+    }
+}
 ```
 
 {{% /tab %}}

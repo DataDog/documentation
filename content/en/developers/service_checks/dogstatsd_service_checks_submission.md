@@ -69,12 +69,23 @@ TO DO
 {{% tab "Java" %}}
 
 ```java
-ServiceCheck sc = ServiceCheck
-      .builder()
-      .withName("Service.check.name")
-      .withStatus(ServiceCheck.Status.OK)
-      .build();
-statsd.serviceCheck(sc);
+import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.StatsDClient;
+
+public class DogStatsdClient {
+
+    public static void main(String[] args) throws Exception {
+
+        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+
+        ServiceCheck sc = ServiceCheck.builder()
+                          .withName("Service.check.name")
+                          .withStatus(ServiceCheck.Status.OK)
+                          .build();
+
+        Statsd.serviceCheck(sc);
+    }
+}
 ```
 
 {{% /tab %}}

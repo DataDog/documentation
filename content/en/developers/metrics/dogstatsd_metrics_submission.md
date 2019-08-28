@@ -47,7 +47,7 @@ Find below short code snippets depending of your language that you can run to em
 {{< tabs >}}
 {{% tab "Python" %}}
 
-After having [setup DogStatsD on your host][1] run the following code to submit a DogStatsD `COUNT` metric type,
+After having [setup DogStatsD on your host][1] run the following code to submit a DogStatsD `COUNT` metric type:
 
 ```python
 from datadog import initialize, statsd
@@ -70,6 +70,8 @@ while(1):
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
+After having [setup DogStatsD on your host][1] run the following code to submit a DogStatsD `COUNT` metric type:
+
 ```ruby
 require 'datadog/statsd'
 
@@ -83,8 +85,11 @@ while true do
 end
 ```
 
+[1]: /developers/dogstatsd/?tab=ruby#setup
 {{% /tab %}}
 {{% tab "Go" %}}
+
+After having [setup DogStatsD on your host][1] run the following code to submit a DogStatsD `COUNT` metric type:
 
 ```go
 package main
@@ -109,14 +114,43 @@ func main() {
 }
 ```
 
+[1]: /developers/dogstatsd/?tab=go#setup
 {{% /tab %}}
 {{% tab "Java" %}}
 
+After having [setup DogStatsD on your host][1] run the following code to submit a DogStatsD `COUNT` metric type:
+
+```java
+import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.StatsDClient;
+import java.util.Random;
+
+public class DogStatsdClient {
+
+    public static void main(String[] args) throws Exception {
+
+        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        for (int i = 0; i < 10; i++) {
+            Statsd.incrementCounter("example_metric.increment");
+            Statsd.decrementCounter("example_metric.decrement");
+            Statsd.count("example_metric.count", 2);
+            Thread.sleep(1000);
+        }
+    }
+}
+```
+
+[1]: /developers/dogstatsd/?tab=java#setup
 {{% /tab %}}
 {{% tab ".NET" %}}
 
+After having [setup DogStatsD on your host][1] run the following code to submit a DogStatsD `COUNT` metric type:
+
+[1]: /developers/dogstatsd/?tab=net#setup
 {{% /tab %}}
 {{% tab "PHP" %}}
+
+After having [setup DogStatsD on your host][1] run the following code to submit a DogStatsD `COUNT` metric type:
 
 ```php
 <?php
@@ -138,6 +172,7 @@ while (TRUE) {
 }
 ```
 
+[1]: /developers/dogstatsd/?tab=php#setup
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -237,6 +272,24 @@ func main() {
 
 {{% /tab %}}
 {{% tab "Java" %}}
+
+```java
+import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.StatsDClient;
+import java.util.Random;
+
+public class DogStatsdClient {
+
+    public static void main(String[] args) throws Exception {
+
+        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        for (int i = 0; i < 10; i++) {
+            Statsd.recordGaugeValue("example_metric.gauge", i);
+            Thread.sleep(1000);
+        }
+    }
+}
+```
 
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -339,6 +392,11 @@ func main() {
 	}
 }
 ```
+
+{{% /tab %}}
+{{% tab "Java" %}}
+
+The `SET` metric type is not supported with the official `java-dogstatsd-client`.
 
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -452,6 +510,24 @@ func main() {
 
 {{% /tab %}}
 {{% tab "Java" %}}
+
+```java
+import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.StatsDClient;
+import java.util.Random;
+
+public class DogStatsdClient {
+
+    public static void main(String[] args) throws Exception {
+
+        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        for (int i = 0; i < 10; i++) {
+            Statsd.recordHistogramValue("example_metric.histogram", new Random().nextInt(10));
+            Thread.sleep(1000);
+        }
+    }
+}
+```
 
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -645,6 +721,24 @@ func main() {
 
 {{% /tab %}}
 {{% tab "Java" %}}
+
+```java
+import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.StatsDClient;
+import java.util.Random;
+
+public class DogStatsdClient {
+
+    public static void main(String[] args) throws Exception {
+
+        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        for (int i = 0; i < 10; i++) {
+            Statsd.recordDistributionValue("example_metric.gauge", new Random().nextInt(10));
+            Thread.sleep(1000);
+        }
+    }
+}
+```
 
 {{% /tab %}}
 {{% tab ".NET" %}}

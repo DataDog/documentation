@@ -112,7 +112,7 @@ go get github.com/DataDog/datadog-go/statsd
 
 The Java DataDog StatsD Client is distributed via maven central, and can be [downloaded from Maven][1]. Start by adding the following configuration to your `pom.xml`:
 
-```yaml
+```
 <dependency>
     <groupId>com.datadoghq</groupId>
     <artifactId>java-dogstatsd-client</artifactId>
@@ -190,16 +190,16 @@ Find more information about the Datadog Go-DogStatsD Library with [the dedicated
 {{% tab "Java" %}}
 
 ```java
-import com.timgroup.statsd.ServiceCheck;
-import com.timgroup.statsd.StatsDClient;
 import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.StatsDClient;
 
-public class Foo {
+public class DogStatsdClient {
 
-  private static final StatsDClient statsd = new NonBlockingStatsDClient(
-    "localhost",
-    8125
-  );
+    public static void main(String[] args) throws Exception {
+
+        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+
+    }
 }
 ```
 
