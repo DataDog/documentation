@@ -51,7 +51,7 @@ To create a new Saved View, click the *Save as* button at the top of the screen.
 
 Slice and dice starting from a Saved View. If needed, update this saved view to keep track of query or page layout configuration—use the "Save As" button. 
 
-{{< img src="logs/explorer/saved_views/saved_view_create-delete.gif" alt="Saved views creation" video="true" responsive="true" >}}
+{{< img src="logs/explorer/saved_views/saved_view_create-delete.gif" alt="Saved views creation" responsive="true" >}}
 
 Saved Views can be removed directly from the Saved View list in the Logs Explorer. Hover over the name of the Saved View to reveal its **delete** button. Click on it and confirm.
 
