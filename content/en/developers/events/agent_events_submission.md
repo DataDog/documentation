@@ -10,7 +10,7 @@ further_reading:
 
 To submit an event from a custom Agent Check use the `event(<EVENT_DICT>)` function:
 
-```python
+```
 self.event(
             {
               "timestamp": <TIMESTAMP_EPOCH>,
@@ -68,10 +68,14 @@ Here is an example of a dummy Agent check sending only one event periodically, r
 
     class MyClass(AgentCheck):
         def check(self, instance):
-            self.service_check(
-                "example_service_check",
-                0,
-                message="Example application is up and running.",
+            self.event(
+                {
+                    "timestamp": time.time(),
+                    "event_type": "Error",
+                    "msg_title": "Example Event.",
+                    "msg_text": "This is an example event coming from the Datadog Documentation.",
+                    "alert_type": "error",
+                }
             )
     ```
 

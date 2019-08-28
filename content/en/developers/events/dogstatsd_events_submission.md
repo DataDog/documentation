@@ -39,32 +39,47 @@ For example, you may want to see errors and exceptions in Datadog:
 {{% tab "Python" %}}
 
 ```python
-#(...)
-try:
-  # do Something
-except RenderError as err:
-  statsd.event('An error occured', err.message, alert_type='error', tags=['env:dev'])
+from datadog import initialize, statsd
+
+options = {
+    'statsd_host':'127.0.0.1',
+    'statsd_port':8125
+}
+
+initialize(**options)
+
+statsd.event('An error occured', err.message, alert_type='error', tags=['env:dev'])
 ```
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 ```ruby
-begin
-    #... process, may raise an exception
-rescue =>
-    statsd.event('An error occured', "Description of the error", alert_type: 'error', tags: ['env:dev'])
-else
-    #... executes when no error
-ensure
-    #... always executed
-end
+require 'datadog/statsd'
+
+statsd = Datadog::Statsd.new('localhost', 8125)
+
+statsd.event('An error occured', "Description of the error", alert_type: 'error', tags: ['env:dev'])
 ```
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
 ```go
-if err != nil {
+package main
+
+import (
+	"log"
+	"github.com/DataDog/datadog-go/statsd"
+)
+
+func main() {
+
+  dogstatsd_client, err := statsd.New("127.0.0.1:8125")
+
+	if err != nil {
+    		log.Fatal(err)
+  }
+
   dogstatsd_client.Event("An error occured", err, alert_type: "error", []string{"env:dev"} )
 }
 ```
@@ -73,18 +88,12 @@ if err != nil {
 {{% tab "Java" %}}
 
 ```java
-
-try {
-  //  Block of code to try
-}
-catch(Exception e) {
   final Event event = Event.builder()
           .withTitle("An error occured")
           .withText(e)
           .withAlertType(Event.AlertType.ERROR)
           .build();
   statsd.event(event)
-}
 ```
 
 {{% /tab %}}
@@ -92,14 +101,7 @@ catch(Exception e) {
 
 
 ```csharp
-try
-{
-    // (...)
-}
-catch (InvalidOperationException ex)
-{
-    DogStatsd.Event(ex.GetType().FullName, ex.Message, alertType: "error", tags: new[] { "env:dev" });
-}
+DogStatsd.Event(ex.GetType().FullName, ex.Message, alertType: "error", tags: new[] { "env:dev" });
 ```
 
 {{% /tab %}}
@@ -108,16 +110,21 @@ catch (InvalidOperationException ex)
 ```php
 <?php
 
-try {
-  # (...)
-} catch (Exception $e) {
-  $statsd->event('An error occured.',
-    array(
-        'text'       => $e->getMessage(),
-        'alert_type' => 'error'
+require __DIR__ . '/vendor/autoload.php';
+
+use DataDog\DogStatsd;
+
+$statsd = new DogStatsd(
+    array('host' => '127.0.0.1',
+          'port' => 8125,
+     )
+  );
+
+$statsd->event('An error occured.',
+    array( 'text' => $e->getMessage(),
+           'alert_type' => 'error'
     )
   );
-}
 ```
 
 {{% /tab %}}
