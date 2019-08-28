@@ -11,7 +11,22 @@ further_reading:
   text: "Learn how to process your logs"
 ---
 
-## Overview
+## Log Explorer Default View
+
+The default log explorer view is loaded where you land on Search, Pattern, or Analytics Pages from the main navigation menu (or using corresponding URL in your browser).
+
+The default view includes:
+
+* an empty query
+* a list of visible facets in the facet list
+* a basic page configuration (e.g. table configuration for Search, vizualisation options for Analytics, etc.)
+
+The default view comes a "factory" configuration, but all edits on the facet list (see caption hereafter) or in the page layout are automatically saved in this default view.
+
+{{< img src="logs/explorer/saved_views/edit_facet_list.png" alt="Saved Views selection" responsive="true">}}
+
+
+## Use Saved Views
 
 When multiple teams share the same account, or when your logs have many different sources, it is critical to be able to promptly start investigating the right content. With Datadog, teams can define and share Log Explorer Views so everyone can start troubleshooting with the same predefined context.
 
@@ -21,21 +36,6 @@ Datadog Saved Views allow you to save search customizations in the Log Explorer,
 * A [selected subset of facets][2]
 * A customized default visualization ([logstream][4], [log patterns][5] or [log analytic][6] along with their specific visualisation properties)
 
-
-## Log Explorer Default View
-
-By default, all facets are displayed for all users.
-
-Each user can define their own list of default facets and facet groups to display by using the *Manage Facets* button and then selecting the desired facets.
-
-{{< img src="logs/explorer/saved_views/default_saved_views.png" alt="Saved Views selection" responsive="true">}}
-
-Once this has been done, the Log Explorer uses the default list of facets whenever it is opened. This also works when clicking on *Log Explorer - Default view* from the list of Saved Views:
-
-{{< img src="logs/explorer/saved_views/default_views_selection.png" alt="Saved Views selection" responsive="true" style="width:50%;">}}
-
-
-## Use Saved Views
 
 ### Load a Saved View
 
