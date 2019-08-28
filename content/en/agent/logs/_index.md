@@ -28,7 +28,16 @@ Collecting logs is **disabled** by default in the Datadog Agent. Enable log coll
 logs_enabled: true
 ```
 
-The Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
+**TCP**
+By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
+
+**HTTP**
+To send logs over HTTPS with the Datadog Agent, add the following in the Agent's [main configuration file][4] (`datadog.yaml`):
+
+```
+logs_config:
+  use_http: true
+```
 
 **Note**: If you're using Kubernetes, make sure to [enable log collection in your DaemonSet setup][2]. If you're using Docker, [enable log collection for the containerized Agent][3].
 
