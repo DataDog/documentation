@@ -19,7 +19,7 @@ The default view includes:
 
 * an empty query
 * a list of visible facets in the facet list
-* a basic page configuration (e.g. table configuration for Search, vizualisation options for Analytics, etc.)
+* a basic page layout (e.g. table configuration for Search, vizualisation options for Analytics, etc.)
 
 The default view comes a "factory" configuration, but all edits on the facet list (see caption hereafter) or in the page layout are automatically saved in this default view.
 
