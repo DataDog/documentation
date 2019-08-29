@@ -11,7 +11,7 @@ To setup Logs only, you have to disable part of the platform. This results in th
 
 To set up only Logs, you need to disable payloads. This disables metric data submission, so that hosts stop showing up in Datadog. To disable payloads, you must be running Agent v6.4+, and then follow these steps:
 
-1. Open the datadog.yaml configuration file.
+1. Open the [datadog.yaml configuration file][1].
 2. Add the enable_payloads attribute with the following settings: 
     
     ```
@@ -21,9 +21,9 @@ To set up only Logs, you need to disable payloads. This disables metric data sub
         service_checks: false
         sketches: false
     ```
-    
-3. [Configure the Agent to collect Logs][1].
-4. [Restart the Agent][2].
+
+3. [Configure the Agent to collect Logs][2].
+4. [Restart the Agent][3].
 
 ### Containers
 
@@ -38,5 +38,6 @@ DD_ENABLE_PAYLOADS_SKETCHES
 
 
 
-[1]: /logs/log_collection
-[2]: /agent/guide/agent-commands/#restart-the-agent
+[1]: /agent/guide/agent-configuration-files/?tab=agentv6
+[2]: /logs/log_collection
+[3]: /agent/guide/agent-commands/#restart-the-agent
