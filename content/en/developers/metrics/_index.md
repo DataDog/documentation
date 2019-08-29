@@ -46,6 +46,7 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
 {{< whatsnext desc="There are multiple ways to send metrics to Datadog:">}}
     {{< nextlink href="/developers/metrics/agent_metrics_submission" >}}Submit metrics with a custom Agent Check.{{< /nextlink >}}
     {{< nextlink href="/developers/metrics/dogstatsd_metrics_submission" >}}Submit metrics with DogStatsD.{{< /nextlink >}}
+    {{< nextlink href="/developers/metrics/pwershell_metrics_submission" >}}Submit metrics with PowerShell.{{< /nextlink >}}
     {{< nextlink href="/api/?lang=python#post-timeseries-points" >}}Submit metrics with Datadog's HTTP API.{{< /nextlink >}}
 {{< /whatsnext >}}
 

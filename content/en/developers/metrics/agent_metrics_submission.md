@@ -8,9 +8,7 @@ further_reading:
   text: "Write an Agent Custom Check"
 ---
 
-Different functions are available depending of the [Metric Type][1] to send metrics to Datadog through a custom Agent Check.
-
-**Note**: Depending of the function used, the submission metric type and the actual metric type stored within Datadog might differ:
+Different functions are available depending of the [Metric Type][1] to send metrics to Datadog through a custom Agent Check. Depending of the function used, the submission metric type and the actual metric type stored within Datadog might differ.
 
 {{< tabs >}}
 {{% tab "Count" %}}

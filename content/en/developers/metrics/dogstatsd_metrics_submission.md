@@ -576,7 +576,22 @@ TO DO: Run the script and add a screenshoot
 
 ### Timers
 
-Timers in DogStatsD are an implementation of Histograms (not to be confused with timers in the standard StatsD). They measure timing data only: for example, the amount of time a section of code takes to execute. Choose your language below to see how to implement them according to your needs:
+Timers in DogStatsD are an implementation of Histograms (not to be confused with timers in the standard StatsD). They measure timing data only: for example, the amount of time a section of code takes to execute.
+
+| Method             | Datadog Storage type                                                                                  |
+| :---               | :---                                                                                      |
+| `timed(MetricName, Value, SampleRate, Tags)` | Since multiple metrics are submitted, metric types stored depend of the metric. The two types stored are `GAUGE`, `Rate` See the [histogram metric type][7] documentation to learn more. |
+
+with the following parameter:
+
+| Parameter    | Type            | Description                                                                                                                                                                |
+| --------     | -------         | ----------                                                                                                                                                                 |
+| `MetricName` | String          | Name of the metric to submit.                                                                                                                                              |
+| `Value`      | Double          | Value associated to your metric.                                                                                                                                           |
+| `SampleRate` | Double          | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
+| `Tags`       | List of Strings | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
+
+Find below short code snippets depending of your language that you can run to emit a `TIMER` metric type-stored as `GAUGE` and `RATE` metric types-into Datadog. Learn more about the [`HISTOGRAM` type in the metric types documentation][7].
 
 {{< tabs >}}
 {{% tab "Python" %}}
