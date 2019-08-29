@@ -35,40 +35,59 @@ Find below examples according to your language:
 {{% tab "Python" %}}
 
 ```python
+from datadog import initialize, statsd
 
-from datadog.api.constants import CheckStatus
+options = {"statsd_host": "127.0.0.1", "statsd_port": 8125}
 
-# Report the status of an app.
-name = 'web.app1'
-status = CheckStatus.OK
-message = 'Response: 200 OK'
+initialize(**options)
 
-statsd.service_check(check_name=name, status=status, message=message)
+statsd.service_check(
+    name="application.service_check",
+    status=O,
+    message="Application is OK",
+)
 ```
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 ```ruby
-# Report the status of an app.
-name = 'web.app1'
-status = Datadog::Statsd::OK
-opts = {
-  'message' => 'Response: 200 OK'
-}
+require 'datadog/statsd'
 
-statsd.service_check(name, status, opts)
+statsd = Datadog::Statsd.new('localhost', 8125)
+
+statsd.service_check('application.service_check', 0, {'message' => 'Application is OK'})
 ```
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
-TO DO
+```go
+package main
+
+import (
+	"log"
+  "github.com/DataDog/datadog-go/statsd"
+  "time"
+)
+
+func main() {
+
+  dogstatsd_client, err := statsd.New("127.0.0.1:8125")
+
+	if err != nil {
+    		log.Fatal(err)
+  }
+
+  dogstatsd_client.ServiceCheck("application.service_check", 0,time.Time , []string{}, []string{"Application is OK"} []string{"env:dev"} )
+}
+```
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
 ```java
+import com.timgroup.statsd.ServiceCheck;
 import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 
@@ -96,7 +115,21 @@ TO DO
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-TO DO
+```php
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use DataDog\DogStatsd;
+
+$statsd = new DogStatsd(
+    array('host' => '127.0.0.1',
+          'port' => 8125,
+     )
+  );
+
+$statsd->service_check('Service.check.name', 0);
+```
 
 {{% /tab %}}
 {{< /tabs >}}

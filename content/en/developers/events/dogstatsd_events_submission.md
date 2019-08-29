@@ -48,7 +48,7 @@ options = {
 
 initialize(**options)
 
-statsd.event('An error occured', err.message, alert_type='error', tags=['env:dev'])
+statsd.event('An error occured', 'Error message', alert_type='error', tags=['env:dev'])
 ```
 
 {{% /tab %}}
@@ -58,7 +58,7 @@ require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
 
-statsd.event('An error occured', "Description of the error", alert_type: 'error', tags: ['env:dev'])
+statsd.event('An error occured', "Error message", alert_type: 'error', tags: ['env:dev'])
 ```
 
 {{% /tab %}}
@@ -80,7 +80,7 @@ func main() {
     		log.Fatal(err)
   }
 
-  dogstatsd_client.Event("An error occured", err, alert_type: "error", []string{"env:dev"} )
+  dogstatsd_client.Event("An error occured", "Error message", alert_type: "error", []string{"env:dev"} )
 }
 ```
 
@@ -88,6 +88,7 @@ func main() {
 {{% tab "Java" %}}
 
 ```java
+import com.timgroup.statsd.Event;
 import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 
@@ -99,7 +100,7 @@ public class DogStatsdClient {
 
         Event event = Event.builder()
           .withTitle("An error occured")
-          .withText(e)
+          .withText("Error message")
           .withAlertType(Event.AlertType.ERROR)
           .build();
 
@@ -133,7 +134,7 @@ $statsd = new DogStatsd(
   );
 
 $statsd->event('An error occured.',
-    array( 'text' => $e->getMessage(),
+    array( 'text' => 'Error message',
            'alert_type' => 'error'
     )
   );
