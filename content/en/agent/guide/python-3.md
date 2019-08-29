@@ -21,7 +21,7 @@ python_version: 3
 
 and restart the Agent.
 
-Alternatively, the `DD_PYTHON_VERSION` environment variable can be set to 3.
+Alternatively, the `DD_PYTHON_VERSION` environment variable can be set to `2` or `3` to choose which Python runtime is used.
 
 This is an Agent-wide configuration option: all Python checks launched by an Agent will use the same Python runtime.
 
