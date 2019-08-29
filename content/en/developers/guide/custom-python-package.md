@@ -51,7 +51,7 @@ C:\"Program Files"\Datadog\"Datadog Agent"\embedded\python -m install <package_n
 
 For Agent versions >= 6.12:
 ```
-C:\"Program Files"\Datadog\"Datadog Agent"\embedded2\python -m install <package_name>
+C:\"Program Files"\Datadog\"Datadog Agent"\embedded<python_major_version>\python -m install <package_name>
 ```
 
 Or the package can be added in the library zipped folder that can be found at
