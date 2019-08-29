@@ -1089,7 +1089,7 @@ main:
     identifier: "dev_tools_metrics_powershell"
     weight: 204
   - name: "Submission - API "
-    url: "api/#post-timeseries-points"
+    url: "https://docs.datadoghq.com/api/#post-timeseries-points"
     parent: "dev_tools_metrics"
     identifier: "dev_tools_metrics_api"
     weight: 205
@@ -1133,7 +1133,7 @@ main:
     identifier: "dev_tools_events_mail"
     weight: 303
   - name: "Submission - API"
-    url: "/api/#post-an-event"
+    url: "https://docs.datadoghq.com/api/#post-an-event"
     parent: "dev_tools_events"
     identifier: "dev_tools_events_api"
     weight: 304
@@ -1157,7 +1157,7 @@ main:
     identifier: "dev_tools_service_check_dogstatsd"
     weight: 402
   - name: "Submission - API"
-    url: "api/#service-checks"
+    url: "https://docs.datadoghq.com/api/#service-checks"
     parent: "dev_tools_service_check"
     identifier: "dev_tools_service_check_api"
     weight: 403

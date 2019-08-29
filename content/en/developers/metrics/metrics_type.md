@@ -19,12 +19,11 @@ further_reading:
 
 The "Datadog in-app type" affects how a given metric is interpreted in query results and graph visualizations across the application. This type is visible and can be changed on the [metric summary page][1]. Be aware that changing the metric type may render historical data nonsensical.
 
-There are five metric types in the Datadog web application (though one is deprecated):
+There are three metric types in the Datadog web application (though one is deprecated):
 
 * COUNT
 * GAUGE
 * RATE
-* DISTRIBUTION
 
 A metric's type is stored as metrics metadata and is used to determine how a metric is interpreted throughout the application by determining default time aggregation function and `as_rate()`/`as_count()` behavior. The `as_count()` and `as_rate()` modifiers behave differently for different web application metric types.
 
@@ -143,6 +142,9 @@ By default only `max`, `median`, `avg`, and `count` aggregations are sent out to
 [2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Set" %}}
+
+**Sets are used to count the number of unique elements in a group.**
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -150,30 +152,47 @@ By default only `max`, `median`, `avg`, and `count` aggregations are sent out to
 
 Datadog accepts metrics submitted from a variety of sources:
 
-* Datadog API
-* DogStatsD
-* Agent Check
+* [Datadog API][2]
+* [DogStatsD][3]
+* [Agent Check][4]
 
 and as a result the "submission type" does not always map exactly to the Datadog in-app type:
 
 | Submission Source   | Submission Method (python)           | Submission Type               | Datadog In-App Type |
 | ------------------- | ------------------------------------ | -----------------             | ------------------- |
-| [API][2]            | `api.Metric.send(type="count", ...)` | count                         | count               |
-| [API][2]            | `api.Metric.send(type="gauge", ...)` | gauge                         | gauge               |
-| [API][2]            | `api.Metric.send(type="rate", ...)`  | rate                          | rate                |
-| [DogStatsD][3]      | `dog.gauge(...)`                     | gauge                         | gauge               |
-| [DogStatsD][3]      | `dog.histogram(...)`                 | histogram                     | gauge, rate         |
-| [DogStatsD][3]      | `dog.increment(...)`                 | counter                       | rate                |
-| [DogStatsD][3]      | `dog.set(...)`                       | set                           | gauge               |
-| [Agent check][4]    | `self.count(...)`                    | count                         | count               |
-| [Agent check][4]    | `self.gauge(...)`                    | gauge                         | gauge               |
-| [Agent check][4]    | `self.histogram(...)`                | histogram                     | gauge, rate         |
-| [Agent check][4]    | `self.increment(...)`                | counter <sup>deprecated</sup> | rate                |
-| [Agent check][4]    | `self.monotonic_count(...)`          | monotonic_count               | count               |
-| [Agent check][4]    | `self.rate(...)`                     | rate                          | gauge               |
-| [Agent check][4]    | `self.set(...)`                      | set                           | gauge               |
+| [API][5]            | `api.Metric.send(type="count", ...)` | COUNT                         | COUNT               |
+| [API][5]            | `api.Metric.send(type="gauge", ...)` | GAUGE                         | GAUGE               |
+| [API][5]            | `api.Metric.send(type="rate", ...)`  | RATE                          | RATE                |
+| [DogStatsD][6]      | `dog.gauge(...)`                     | GAUGE                         | GAUGE               |
+| [DogStatsD][7]      | `dog.distribution(...)`                     | DISTRIBUTION                         | GAUGE, COUNT               |
+| [DogStatsD][8]      | `dog.count(...)`                     | COUNT                         | RATE               |
+| [DogStatsD][8]      | `dog.increment(...)`                 | COUNT                       | RATE                |
+| [DogStatsD][8]      | `dog.decrement(...)`                 | COUNT                       | RATE                |
+| [DogStatsD][9]      | `dog.set(...)`                       | SET                           | GAUGE               |
+| [DogStatsD][10]      | `dog.histogram(...)`                 | HISTOGRAM                     | GAUGE, RATE         |
+| [Agent check][11]    | `self.count(...)`                    | COUNT                         | COUNT               |
+| [Agent check][12]    | `self.increment(...)`                | COUNT  | RATE                |
+| [Agent check][12]    | `self.decrement(...)`                | COUNT  | RATE                |
+| [Agent check][13]    | `self.monotonic_count(...)`          | COUNT               | COUNT               |
+| [Agent check][14]    | `self.gauge(...)`                    | GAUGE                         | GAUGE               |
+| [Agent check][15]    | `self.histogram(...)`                | HISTOGRAM                     | GAUGE, RATE         |
+| [Agent check][16]    | `self.rate(...)`                     | RATE                          | GAUGE               |
+| [Agent check][17]    | `self.set(...)`                      | SET                           | GAUGE               |
 
 [1]: /graphing/metrics/summary
 [2]: /api/?lang=python#post-timeseries-points
 [3]: /developers/metrics/dogstatsd_metrics_submission
-[4]: /developers/integrations
+[4]: /developers/metrics/agent_metrics_submission
+[5]: /api/?lang=python#post-timeseries-points
+[6]: /developers/metrics/dogstatsd_metrics_submission/#gauge
+[7]: /developers/metrics/dogstatsd_metrics_submission/#distribution
+[8]: /developers/metrics/dogstatsd_metrics_submission/#count
+[9]: /developers/metrics/dogstatsd_metrics_submission/#set
+[10]: /developers/metrics/dogstatsd_metrics_submission/#histogram
+[11]: /developers/metrics/agent_metrics_submission/?tab=count#count
+[12]: /developers/metrics/agent_metrics_submission/?tab=count#increment-decrement
+[13]: /developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
+[14]: /developers/metrics/agent_metrics_submission/?tab=gauge
+[15]: /developers/metrics/agent_metrics_submission/?tab=histogram
+[16]: /developers/metrics/agent_metrics_submission/?tab=rate
+[17]: /developers/integrations

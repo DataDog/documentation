@@ -29,4 +29,4 @@ The metrics end-point allows you to post time-series data that can be graphed on
     * **`tags`** [*optional*, *default*=**None**]:
         A list of tags associated with the metric.
 
-[1]: /developers/metrics/#metric-types
+[1]: /developers/metrics/metrics_types
