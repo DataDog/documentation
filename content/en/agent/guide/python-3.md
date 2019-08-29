@@ -9,6 +9,31 @@ This guide provides information and best practices on migrating checks between P
 
 To provide flexibility in allowing code to run multiple on versions of the Agent, this guide focuses on retaining backwards compatibility.
 
+## Agent configuration
+
+Starting with v6.14.0, the Agent integrates both Python 2 and Python 3 runtimes. This means that checks can be run with either Python 2 or Python 3, depending on the Agent configuration.
+
+By default, the Agent v6 will use the Python 2 runtime. To switch to the Python 3 runtime, set the `python_version` configuration option in the `datadog.yaml` configuration file:
+
+```yaml
+python_version: 3
+```
+
+and restart the Agent.
+
+Alternatively, the `DD_PYTHON_VERSION` environment variable can be set to 3.
+
+This is an Agent-wide configuration option: all Python checks launched by an Agent will use the same Python runtime.
+
+### Containerized Agent
+
+The official Containerized Agent images only include one of the two Python runtimes.
+
+To switch to one of the other runtime, choose the appropriate image. For Agent v6, images with Python 2 included have the following format:
+`datadog/agent:<version>`, or `datadog/agent:<version>-jmx` for images supporting JMX checks. Images with Python 3 included have the following format: `datadog/agent:<version>-py3` or, `datadog/agent:<version>-py3-jmx`.
+
+For example, for the Containerized Agent v6.14.0, select the `datadog/agent:6.14.0` or `datadog/agent:6.14.0-jmx` images to use the default Python runtime (Python 2), and select the `datadog/agent:6.14.0-py3` or `datadog/agent:6.14.0-py3-jmx` images to use the Python 3 runtime.
+
 ## Editors and Tools
 
 ### ddev
