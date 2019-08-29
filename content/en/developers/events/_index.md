@@ -14,5 +14,6 @@ TODO: INSERT EVENT DEFINITION HERE
 {{< /whatsnext >}}
 
 Event can be visualize and searched upon in [Datadog Event Stream][1]. You can also build up an [Event monitor][2] to get alerted when a specific Event occurs.
+
 [1]: /graphing/event_stream
 [2]: /monitors/monitor_types/event

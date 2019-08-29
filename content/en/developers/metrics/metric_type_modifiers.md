@@ -51,7 +51,11 @@ TO DO
 
 ## Modify a metric's type within Datadog
 
-While it is not normally required, it is possible to change a metric's _type_. For example:
+While it is not normally required, it is possible to change a metric's type in the [metric summary page][1]:
+
+{{< img src="developers/metrics/metric_type_modifiers/metric_type.png" alt="Metric Type" responsive="true" style="width:70%;">}}
+
+For example:
 
 1. You have a metric `app.requests.served` that counts requests served, but accidentally submitted it via StatsD as a `gauge`. The metric's Datadog type is therefore `gauge`.
 
@@ -66,3 +70,4 @@ This causes data submitted before the type change for `app.requests.served` to b
 If you are not willing to lose the historical data submitted as a `gauge`, create a new metric name with the new type, leaving the type of `app.requests.served` unchanged.
 
 **Note**: For the AgentCheck, `self.increment` does not calculate the delta for a monotonically increasing counter; instead, it reports the value passed in at the check run. To send the delta value on a monotonically increasing counter, use `self.monotonic_count`.
+[1]: https://app.datadoghq.com/metric/summary

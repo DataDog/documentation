@@ -8,7 +8,7 @@ further_reading:
   text: "Write an Agent Custom Check"
 ---
 
-Different functions are available depending of the [Metric Type][1] to send metrics to Datadog through a custom Agent Check. Depending of the function used, the submission metric type and the actual metric type stored within Datadog might differ.
+Different functions are available depending of the [Metric Type][1] to send metrics to Datadog through a [custom Agent Check][2]. Depending of the function used, the submission metric type and the actual metric type stored within Datadog might differ.
 
 {{< tabs >}}
 {{% tab "Count" %}}
@@ -156,7 +156,7 @@ self.histogram(name, value, tags=None, hostname=None, device_name=None)
 
 Here is an example of a dummy Agent check sending all metrics type periodically, refer to the dedicated [Writing a custom Agent check][1] documentation to learn more.
 
-1. Create a new directory `metrics_example.d/` in the [`conf.d/` folder][2] of your Agent.
+1. Create a new directory `metrics_example.d/` in the [`conf.d/` folder][3] of your Agent.
 
 2. In your `metrics_example.d/` folder, create an empty configuration file named `metrics_example.yaml` with the following content:
 
@@ -223,9 +223,9 @@ Here is an example of a dummy Agent check sending all metrics type periodically,
             )
     ```
 
-3. [Restart the Agent][3]
+3. [Restart the Agent][4]
 
-4. Check that your custom check is correctly running with the [Agent Status command][4]. You should see something like this:
+4. Check that your custom check is correctly running with the [Agent Status command][5]. You should see something like this:
 
     ```
     =========
@@ -248,7 +248,7 @@ Here is an example of a dummy Agent check sending all metrics type periodically,
 
         (...)
     ```
-5. Finally go into your [Metric Summary page][5] to see your metrics reporting:
+5. Finally go into your [Metric Summary page][6] to see your metrics reporting:
 
 {{< img src="developers/metrics/agent_metrics_submission/metrics_metrics_summary.png" alt="Metrics in metric summary" responsive="true" style="width:80%;">}}
 
@@ -257,7 +257,8 @@ Here is an example of a dummy Agent check sending all metrics type periodically,
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/metrics/metrics_type
-[2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: /agent/guide/agent-commands/#restart-the-agent
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information
-[5]: https://app.datadoghq.com/metric/summary
+[2]: /developers/write_agent_check
+[3]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[4]: /agent/guide/agent-commands/#restart-the-agent
+[5]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-information
+[6]: https://app.datadoghq.com/metric/summary

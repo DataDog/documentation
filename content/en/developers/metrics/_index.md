@@ -15,7 +15,7 @@ further_reading:
   text: "Official and Community-contributed API and DogStatsD client libraries"
 ---
 
-A Datadog metric is defined by the four properties below. To discover how to graph metrics within Datadog refer to the [Metrics Introduction documentation][1].:
+A Datadog metric is defined by the four properties below. To discover how to graph metrics within Datadog refer to the [Metrics Introduction documentation][1]:
 
 | Property  | Description                                                                                                                                             |
 | ----      | ----                                                                                                                                                    |
@@ -25,7 +25,7 @@ A Datadog metric is defined by the four properties below. To discover how to gra
 | Context   | The set of tags associated to your metric.                                                                                                              |
 | Type      | The type of your metric. See the [metric type documentation][2].                                                                                       |
 
-**Note**: **If a metric is not submitted from one of the [350+ Datadog integrations][3] it's considered as a [Custom Metrics][4].**
+**Note**: **If a metric is not submitted from one of the [350+ Datadog integrations][3] it's considered as a [Custom Metric][4].**
 
 ### Naming metrics
 
@@ -55,7 +55,6 @@ Alternatively you can use the [Dropwizard Java metrics library][5] with the [met
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /graphing/metrics/introduction
 [2]: /developers/metrics/metrics_type
