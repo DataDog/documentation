@@ -178,6 +178,7 @@ logs_config:
 ```
 
 Or set the `DD_LOGS_CONFIG_USE_HTTP` environment variable to `true`.
+Then restart the Agent to sends logs through HTTPS to `agent-http-intake.logs.datadoghq.com` (US site) or `agent-http-intake.logs.datadoghq.eu` (EU site) on port 443.
 
 The Agent sends batches which have the following limits:
 
