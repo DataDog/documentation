@@ -46,12 +46,12 @@ Custom Python packages can be installed using the Agent's embedded Python using 
 
 For Agent versions <= 6.11:
 ```
-C:\"Program Files"\Datadog\"Datadog Agent"\embedded\python -m install <package_name>
+C:\"Program Files"\Datadog\"Datadog Agent"\embedded\python.exe -m install <package_name>
 ```
 
 For Agent versions >= 6.12:
 ```
-C:\"Program Files"\Datadog\"Datadog Agent"\embedded<python_major_version>\python -m install <package_name>
+C:\"Program Files"\Datadog\"Datadog Agent"\embedded<python_major_version>\python.exe -m install <package_name>
 ```
 
 Or the package can be added in the library zipped folder that can be found at
