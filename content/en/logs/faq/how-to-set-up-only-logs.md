@@ -9,7 +9,7 @@ beta: true
 To setup Logs only, you have to disable part of the platform. This results in the potential loss of metadata and tags on the logs you are collecting. Datadog does not recommend this. For more information about the impact of this configuration, contact <a href="/help/">Datadog Support</a>. 
 </div>
 
-To set up only Logs, you need to disable payloads. This disables metric data submission, so that hosts stop showing up in Datadog. To disable payloads, you must be running Agent v6.4+, and then follow these steps:
+To setup Log collection without metrics, you have to disable some payloads. This disables metric data submission, so that hosts stop showing up in Datadog. To disable payloads, you must be running Agent v6.4+, and then follow these steps:
 
 1. Open the [datadog.yaml configuration file][1].
 2. Add the enable_payloads attribute with the following settings: 
