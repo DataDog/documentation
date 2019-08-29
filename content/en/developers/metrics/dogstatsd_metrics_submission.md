@@ -364,6 +364,16 @@ while(1):
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
+```ruby
+require 'datadog/statsd'
+
+statsd = Datadog::Statsd.new('localhost', 8125)
+
+while true do
+    statsd.set('example_metric.gauge', rand 10)
+    sleep 10
+end
+```
 
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -391,11 +401,6 @@ func main() {
 	}
 }
 ```
-
-{{% /tab %}}
-{{% tab "Java" %}}
-
-The `SET` metric type is not supported with the official `java-dogstatsd-client`.
 
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -470,14 +475,13 @@ while(1):
 {{% tab "Ruby" %}}
 
 ```ruby
-start_time = Time.now
-results = db.query()
-duration = Time.now - start_time
-statsd.histogram('database.query.time', duration)
+require 'datadog/statsd'
 
-# The `time` helper is a short-hand for timing blocks of code.
-statsd.time('database.query.time') do
-  return db.query()
+statsd = Datadog::Statsd.new('localhost', 8125)
+
+while true do
+    statsd.set('example_metric.histogram', rand 10)
+    sleep 10
 end
 ```
 
@@ -615,23 +619,6 @@ def my_function():
 ```
 
 {{% /tab %}}
-{{% tab "Ruby" %}}
-
-
-{{% /tab %}}
-{{% tab "Go" %}}
-
-
-{{% /tab %}}
-{{% tab "Java" %}}
-
-{{% /tab %}}
-{{% tab ".NET" %}}
-
-{{% /tab %}}
-{{% tab "PHP" %}}
-
-{{% /tab %}}
 {{< /tabs >}}
 
 In either case, as DogStatsD receives the timer data, it calculates the statistical distribution of render times and sends the following metrics to Datadog:
@@ -643,10 +630,6 @@ In either case, as DogStatsD receives the timer data, it calculates the statisti
 | `example_metric.histogram.median`         | Median sampled value                      |
 | `example_metric.histogram.max`            | Maximum sampled value                     |
 | `example_metric.histogram.95percentile`   | 95th percentile sampled value             |
-
-And the data is available to graph in Datadog. Here's an example:
-
-TO DO: Run the script and add a screenshoot
 
 Remember: under the hood, DogStatsD treats timers as histograms. Whether you use timers or histograms, you are sending the same data to Datadog.
 
@@ -691,6 +674,17 @@ while(1):
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
+
+```ruby
+require 'datadog/statsd'
+
+statsd = Datadog::Statsd.new('localhost', 8125)
+
+while true do
+    statsd.distribution('example_metric.gauge', rand 10)
+    sleep 10
+end
+```
 
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -745,6 +739,25 @@ public class DogStatsdClient {
 {{% /tab %}}
 {{% tab "PHP" %}}
 
+```php
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use DataDog\DogStatsd;
+
+$statsd = new DogStatsd(
+    array('host' => '127.0.0.1',
+          'port' => 8125,
+     )
+  );
+
+while (TRUE) {
+    $statsd->distribution('example_metric.distribution', rand(0, 10));
+    sleep(10);
+}
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -776,19 +789,14 @@ The following code only sends points half of the time:
 {{% tab "Python" %}}
 
 ```python
-while True:
-  do_something_intense()
-  statsd.increment('loop.count', sample_rate=0.5)
+statsd.increment('loop.count', sample_rate=0.5)
 ```
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 ```ruby
-while true do
-  do_something_intense()
-  statsd.increment('loop.count', :sample_rate => 0.5)
-end
+statsd.increment('loop.count', :sample_rate => 0.5)
 ```
 
 {{% /tab %}}
@@ -812,21 +820,10 @@ end
 
 ### Metrics Tagging
 
-Add tags to any metric you send to DogStatsD. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
+Add tags to any metric you send to DogStatsD with the `tags` parameter:
 
 {{< tabs >}}
 {{% tab "Python" %}}
-
-```python
-
-@statsd.timed('algorithm.run_time'x)
-def algorithm_one():
-    # Do fancy things here ...
-
-@statsd.timed('algorithm.run_time', tags=['algorithm:two'])
-def algorithm_two():
-    # Do fancy things (maybe faster?) here ...
-```
 
 {{% /tab %}}
 {{% tab "Ruby" %}}

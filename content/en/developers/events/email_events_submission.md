@@ -23,20 +23,42 @@ To set up your dedicated email address:
 4. Choose the format for your messages from the **Format** dropdown.
 5. click **Create API Email**.
 
-## JSON-Formatted vs Plain Text
+## JSON vs Plain Text
 
 If you have complete control over the email sent by the application to Datadog, then you probably want to configure a JSON-formatted message to be sent. This allows you to set everything in the event that appears in the event stream. See below setup instructions for examples of each.
 
-### Plain Text Email
+{{< tabs >}}
+{{% tab "JSON Email" %}}
+
+#### Source Email
+
+In the source JSON-formatted email, the following fields are available to control:
+
+* Sender email address
+* All arguments from the [Datadog Events API][1]
+
+**Note**: If your JSON is not properly formatted, or the email is sent without a subject, the event won't appear in your Event Stream.
+
+#### Datadog Event
+
+{{< img src="developers/events/json-event.png" alt="json event" responsive="true" >}}
+
+In a JSON-formatted email, the subject of the email message is irrelevant. It is replaced by the title in the JSON in the body of the email. All data that appears in the event is defined in JSON in the body of the email. Furthermore, the body must be pure, well-formed JSON—if not, the message is ignored.
+**Note**: If you are testing the email with a standard email client, the body **may** be converted to HTML as a convenience to the user. This will cause the body to no longer be pure JSON, resulting in an ignored email.
+
+[1]: /api/#events
+{{% /tab %}}
+{{% tab "Plain Text Email" %}}
+
 #### Source Email
 
 In the source plain text email, you only have three fields to control:
 
-| Field | Required | Description |
-| ------ | ------ | ----------- |
-| Sender email address | yes | The email from the sender. |
-| Subject | yes | The subject of the email. |
-| Body | no | The body of the email. | 
+| Field                | Required | Description                |
+| ------               | ------   | -----------                |
+| Sender email address | yes      | The email from the sender. |
+| Subject              | yes      | The subject of the email.  |
+| Body                 | no       | The body of the email.     |
 
 For instance, the email below is a valid email:
 
@@ -52,26 +74,12 @@ Body: This is a test message showing that env:test is at 50% CPU - #test
 
 The subject of the email becomes the title of the event and the body of the email becomes the body of the event. Although it looks like a tag appears at the end of the title and body of the event, neither instance are actually tags. The sender of the email appears at the bottom of the event.
 
-### JSON Email
-#### Source Email
-
-In the source JSON-formatted email, the following fields are available to control:
-
-* Sender email address
-* All arguments from the [Datadog Events API][4]
-
-**Note**: If your JSON is not properly formatted, or the email is sent without a subject, the event won't appear in your Event Stream.
-
-#### Datadog Event
-
-{{< img src="developers/events/json-event.png" alt="json event" responsive="true" >}}
-
-In a JSON-formatted email, the subject of the email message is irrelevant. It is replaced by the title in the JSON in the body of the email. All data that appears in the event is defined in JSON in the body of the email. Furthermore, the body must be pure, well-formed JSON—if not, the message is ignored.
-**Note**: If you are testing the email with a standard email client, the body **may** be converted to HTML as a convenience to the user. This will cause the body to no longer be pure JSON, resulting in an ignored email.
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Markdown events
 
-Datadog event text supports [Markdown][5] but embedding HTML in Markdown is not supported. To use Markdown in the event text, start the text block with `%%% \n` and end the text block with `\n %%%`
+Datadog event text supports [Markdown][4] but embedding HTML in Markdown is not supported. To use Markdown in the event text, start the text block with `%%% \n` and end the text block with `\n %%%`
 
 **Example**:
 ```json
@@ -98,5 +106,4 @@ http://catchpoint.com/session_id%3A123456
 [1]: /integrations
 [2]: /agent/agent_checks
 [3]: https://app.datadoghq.com
-[4]: /api/#events
-[5]: http://daringfireball.net/projects/markdown/syntax#lin
+[4]: http://daringfireball.net/projects/markdown/syntax#lin

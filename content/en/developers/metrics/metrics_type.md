@@ -125,15 +125,15 @@ Histograms measure the statistical distribution of a set of values. Datadog hist
 
 For example: if you send `X` values for a metric `<METRIC_NAME>` during the flush interval, a Datadog histogram gives you the aggregation of those values for the flush interval, i.e.:
 
-| Aggregation | Description | Datadog Metric Type |
-| --------- | --------- | ---------- |
-| `<METRIC_NAME>.avg` |  Gives you the average of those `X` values during the flush interval. | Gauge |
-| `<METRIC_NAME>.count` | Gives you the count of the values `X` sent during the flush interval.| Rate |
-| `<METRIC_NAME>.median` | Gives you the median of those `X` values in the flush interval. | Gauge |
-| `<METRIC_NAME>.95percentile` | Gives you the 95th percentile of those `X` values in the flush interval.| Gauge |
-| `<METRIC_NAME>.max` | Gives you the maximum value of those `X` values sent during the flush interval.| Gauge |
-| `<METRIC_NAME>.min` | Gives you the minimum value of those `X` sent during the flush interval. | Gauge |
-| `<METRIC_NAME>.sum` | Gives you the sum of all `X` values sent during the flush interval. | Gauge |
+| Aggregation                  | Description                                                                     | Datadog Metric Type |
+| ---------                    | ---------                                                                       | ----------          |
+| `<METRIC_NAME>.avg`          | Gives you the average of those `X` values during the flush interval.            | Gauge               |
+| `<METRIC_NAME>.count`        | Gives you the count of the values `X` sent during the flush interval.           | Rate                |
+| `<METRIC_NAME>.median`       | Gives you the median of those `X` values in the flush interval.                 | Gauge               |
+| `<METRIC_NAME>.95percentile` | Gives you the 95th percentile of those `X` values in the flush interval.        | Gauge               |
+| `<METRIC_NAME>.max`          | Gives you the maximum value of those `X` values sent during the flush interval. | Gauge               |
+| `<METRIC_NAME>.min`          | Gives you the minimum value of those `X` sent during the flush interval.        | Gauge               |
+| `<METRIC_NAME>.sum`          | Gives you the sum of all `X` values sent during the flush interval.             | Gauge               |
 
 Configure which aggregation you want to send to Datadog with the `histogram_aggregates` parameter in your [datadog.yaml configuration file][2].
 By default only `max`, `median`, `avg`, and `count` aggregations are sent out to Datadog.
@@ -158,26 +158,26 @@ Datadog accepts metrics submitted from a variety of sources:
 
 and as a result the "submission type" does not always map exactly to the Datadog in-app type:
 
-| Submission Source   | Submission Method (python)           | Submission Type               | Datadog In-App Type |
-| ------------------- | ------------------------------------ | -----------------             | ------------------- |
-| [API][5]            | `api.Metric.send(type="count", ...)` | COUNT                         | COUNT               |
-| [API][5]            | `api.Metric.send(type="gauge", ...)` | GAUGE                         | GAUGE               |
-| [API][5]            | `api.Metric.send(type="rate", ...)`  | RATE                          | RATE                |
-| [DogStatsD][6]      | `dog.gauge(...)`                     | GAUGE                         | GAUGE               |
-| [DogStatsD][7]      | `dog.distribution(...)`                     | DISTRIBUTION                         | GAUGE, COUNT               |
-| [DogStatsD][8]      | `dog.count(...)`                     | COUNT                         | RATE               |
-| [DogStatsD][8]      | `dog.increment(...)`                 | COUNT                       | RATE                |
-| [DogStatsD][8]      | `dog.decrement(...)`                 | COUNT                       | RATE                |
-| [DogStatsD][9]      | `dog.set(...)`                       | SET                           | GAUGE               |
-| [DogStatsD][10]      | `dog.histogram(...)`                 | HISTOGRAM                     | GAUGE, RATE         |
-| [Agent check][11]    | `self.count(...)`                    | COUNT                         | COUNT               |
-| [Agent check][12]    | `self.increment(...)`                | COUNT  | RATE                |
-| [Agent check][12]    | `self.decrement(...)`                | COUNT  | RATE                |
-| [Agent check][13]    | `self.monotonic_count(...)`          | COUNT               | COUNT               |
-| [Agent check][14]    | `self.gauge(...)`                    | GAUGE                         | GAUGE               |
-| [Agent check][15]    | `self.histogram(...)`                | HISTOGRAM                     | GAUGE, RATE         |
-| [Agent check][16]    | `self.rate(...)`                     | RATE                          | GAUGE               |
-| [Agent check][17]    | `self.set(...)`                      | SET                           | GAUGE               |
+| Submission Source   | Submission Method (python)           | Submission Type   | Datadog In-App Type |
+| ------------------- | ------------------------------------ | ----------------- | ------------------- |
+| [API][5]            | `api.Metric.send(type="count", ...)` | COUNT             | COUNT               |
+| [API][5]            | `api.Metric.send(type="gauge", ...)` | GAUGE             | GAUGE               |
+| [API][5]            | `api.Metric.send(type="rate", ...)`  | RATE              | RATE                |
+| [DogStatsD][6]      | `dog.gauge(...)`                     | GAUGE             | GAUGE               |
+| [DogStatsD][7]      | `dog.distribution(...)`              | DISTRIBUTION      | GAUGE, COUNT        |
+| [DogStatsD][8]      | `dog.count(...)`                     | COUNT             | RATE                |
+| [DogStatsD][8]      | `dog.increment(...)`                 | COUNT             | RATE                |
+| [DogStatsD][8]      | `dog.decrement(...)`                 | COUNT             | RATE                |
+| [DogStatsD][9]      | `dog.set(...)`                       | SET               | GAUGE               |
+| [DogStatsD][10]     | `dog.histogram(...)`                 | HISTOGRAM         | GAUGE, RATE         |
+| [Agent check][11]   | `self.count(...)`                    | COUNT             | COUNT               |
+| [Agent check][12]   | `self.increment(...)`                | COUNT             | RATE                |
+| [Agent check][12]   | `self.decrement(...)`                | COUNT             | RATE                |
+| [Agent check][13]   | `self.monotonic_count(...)`          | COUNT             | COUNT               |
+| [Agent check][14]   | `self.gauge(...)`                    | GAUGE             | GAUGE               |
+| [Agent check][15]   | `self.histogram(...)`                | HISTOGRAM         | GAUGE, RATE         |
+| [Agent check][16]   | `self.rate(...)`                     | RATE              | GAUGE               |
+| [Agent check][17]   | `self.set(...)`                      | SET               | GAUGE               |
 
 [1]: /graphing/metrics/summary
 [2]: /api/?lang=python#post-timeseries-points

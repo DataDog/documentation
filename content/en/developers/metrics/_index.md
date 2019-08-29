@@ -15,26 +15,17 @@ further_reading:
   text: "Official and Community-contributed API and DogStatsD client libraries"
 ---
 
-## Overview
+A Datadog metric is defined by the four properties below. To discover how to graph metrics within Datadog refer to the [Metrics Introduction documentation][1].:
 
-This page provides an overview on submitting metrics. For additional information on metrics, see the following pages:
+| Property  | Description                                                                                                                                             |
+| ----      | ----                                                                                                                                                    |
+| Name      | The (name of your metric](#naming-metrics).                                                                                                             |
+| Value     | The value of your metric.                                                                                                                               |
+| Timestamp | The timestamp associated to the metric value. Note that Metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past. |
+| Context   | The set of tags associated to your metric.                                                                                                              |
+| Type      | The type of your metric. See the [metric type documentation][2].                                                                                       |
 
-* [Metrics Introduction][1]
-* [Custom Metrics][2]
-* [DogStatsD][3]
-
-### Submitting metrics
-
-There are multiple ways to send metrics to Datadog:
-
-1. Via the Datadog Agent directly. Learn how to [write an integration][4], or examine the [Aggregator source code][5] directly.
-2. Via the DogStatsD server (bundled with the Datadog Agent) and a [client library][6].
-3. Directly via Datadog's [HTTP API][7].
-4. Via the [Dropwizard Java metrics library][8] with the [metrics-datadog][9] backend. Thanks to the people at [Vistar Media][10], [Coursera][11], and [Bazaarvoice][12] for their contributions.
-
-<div class="alert alert-warning">
-Metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past.
-</div>
+**Note**: **If a metric is not submitted from one of the [350+ Datadog integrations][3] it's considered as a [Custom Metrics][4].**
 
 ### Naming metrics
 
@@ -50,20 +41,27 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
 
 **Note**: Metric names are case sensitive in Datadog.
 
+### Submitting metrics
+
+{{< whatsnext desc="There are multiple ways to send metrics to Datadog:">}}
+    {{< nextlink href="/developers/metrics/agent_metrics_submission" >}}Submit metrics with a custom Agent Check.{{< /nextlink >}}
+    {{< nextlink href="/developers/metrics/dogstatsd_metrics_submission" >}}Submit metrics with DogStatsD.{{< /nextlink >}}
+    {{< nextlink href="/api/?lang=python#post-timeseries-points" >}}Submit metrics with Datadog's HTTP API.{{< /nextlink >}}
+{{< /whatsnext >}}
+
+Alternatively you can use the [Dropwizard Java metrics library][5] with the [metrics-datadog][6] backend. Thanks to the people at [Vistar Media][7], [Coursera][8], and [Bazaarvoice][9] for their contributions.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /graphing/metrics/introduction
-[2]: /developers/metrics/custom_metrics
-[3]: /developers/dogstatsd
-[4]: /developers/integrations
-[5]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
-[6]: /developers/libraries
-[7]: /api
-[8]: https://github.com/dropwizard/metrics
-[9]: https://github.com/coursera/metrics-datadog
-[10]: http://www.vistarmedia.com
-[11]: https://www.coursera.org
-[12]: http://www.bazaarvoice.com
+[2]: /developers/metrics/metrics_type
+[3]: /integrations
+[4]: /developers/metrics/custom_metrics
+[5]: https://github.com/dropwizard/metrics
+[6]: https://github.com/coursera/metrics-datadog
+[7]: http://www.vistarmedia.com
+[8]: https://www.coursera.org
+[9]: http://www.bazaarvoice.com
