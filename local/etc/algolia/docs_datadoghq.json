@@ -47,7 +47,7 @@
 			"page_rank": 100
 		},
 		{
-			"url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)/faq/",
+			"url": "https://docs.datadoghq.com/(?P<section>.*?)/faq/",
 			"selectors_key": "faq",
 			"variables": {
 				"section": [
@@ -59,11 +59,6 @@
 					"developers",
 					"account_management",
 					"synthetics"
-				],
-				"localisation": [
-					"",
-					"/fr",
-					"/ja"
 				]
 			},
 			"tags": [
