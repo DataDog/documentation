@@ -1,7 +1,7 @@
-{{/*
 {{ if .IsTranslated }}
   {{ range .Translations }}
-    <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}"/>
+    {{ if in (slice "fr") .Lang }}
+      <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}"/>
+    {{ end }}
   {{ end}}
 {{ end }}
-*/}}

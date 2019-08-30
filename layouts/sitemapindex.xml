@@ -1,6 +1,6 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	{{ range . }}
-  {{ if not (or (eq .Language.Lang "fr") (eq .Language.Lang "ja")) }}
+  {{ if not (eq .Language.Lang "ja") }}
 	<sitemap>
 	  	<loc>{{ .SitemapAbsURL }}</loc>
 		{{ if not .LastChange.IsZero }}
