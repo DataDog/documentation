@@ -14,6 +14,8 @@ disable_toc: true
 {{< /whatsnext >}}
 <br>
 {{< whatsnext desc="Additional Guides:" >}}
+    
+    {{< nextlink href="tracing/guide/apm-billing" >}}APM Billing{{< /nextlink >}}
     {{< nextlink href="tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm" >}}Configure Apdex score by service{{< /nextlink >}}
     {{< nextlink href="tracing/guide/security" >}}Scrub Sensitive information from your traces{{< /nextlink >}}
     {{< nextlink href="tracing/guide/resource_monitor" >}}Build monitor upon your resource metrics{{< /nextlink >}}
