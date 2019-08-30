@@ -23,7 +23,9 @@ These resources, with a top level name of `web_identification` still appear in t
 An example of modifying the top level name for Python can be found below:
 
 ```
-   @tracer.wrap('tornado.notify', service='tornado-notification', resource='MainHandler.do_something')
+   @tracer.wrap('tornado.notify', 
+                service='tornado-notification', 
+                resource='MainHandler.do_something')
     @tornado.gen.coroutine
     def do_something(self):
         # do something
