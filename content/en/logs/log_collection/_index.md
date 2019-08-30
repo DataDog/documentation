@@ -67,7 +67,7 @@ Select your Cloud provider below to see how to automatically collect your logs a
 
 ## Custom Log forwarder
 
-Any custom process or [logging library][20] able to forward logs through **TCP** or **HTTP** can be used in conjunction with Datadog Logs. Choose below to which Datadog Site you want to forward logs to:
+Any custom process or [logging library][20] able to forward logs through **TCP** or **HTTP** can be used in conjunction with Datadog Logs. Choose below which Datadog site you want to forward logs to:
 
 {{< tabs >}}
 {{% tab "TCP US Site" %}}

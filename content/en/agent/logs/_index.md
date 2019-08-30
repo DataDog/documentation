@@ -180,15 +180,15 @@ logs_config:
 Or set the `DD_LOGS_CONFIG_USE_HTTP` environment variable to `true`.
 Then restart the Agent to sends logs through HTTPS to `agent-http-intake.logs.datadoghq.com` (US site) or `agent-http-intake.logs.datadoghq.eu` (EU site) on port 443.
 
-The Agent sends batches which have the following limits:
+The Agent sends batches that have the following limits:
 
 * Maximum content size per payload: 1MB
 * Maximum size for a single log: 256kB
 * Maximum array size if sending multiple logs in an array: 200 entries logs.
 
-The Agent waits up to 5 seconds to fill each batch (either in content size or number of logs). Therefore in worse case scenario (when very few logs are generated) switching to HTTPS might add a 5 seconds latency compared to TCP which sends all logs in real time.
+The Agent waits up to 5 seconds to fill each batch (either in content size or number of logs). Therefore, in the worst case scenario (when very few logs are generated) switching to HTTPS might add a 5-second latency compared to TCP, which sends all logs in real time.
 
-When logs are sent through HTTPS, use the same [set of proxy settings][10] than the other data types to send logs through a web proxy.
+When logs are sent through HTTPS, use the same [set of proxy settings][10] as the other data types to send logs through a web proxy.
 
 ## Further Reading
 
