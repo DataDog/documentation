@@ -53,7 +53,9 @@ They both receive:
 {{< tabs >}}
 {{% tab "Count" %}}
 
-**Metrics of type `Count` are used to count things over a period of time (usually _per second_).**
+**Metrics of type `Count` are used to count things over a period of time.**
+
+COUNT metric type represent an absolute gain/loss of a metric value over a defined time interval, contrary to the RATE metric type that express this variation normalized _per second_.
 
 For instance let's say the `number.of.requests` metrics is reported every 10 seconds to Datadog with the `count` type for `web_1`.
 
@@ -82,6 +84,8 @@ Each data point represent the overall amount of requests received at a point in 
 {{% tab "Rate" %}}
 
 **Rates represent the derivative of a metric: the value variation of a metric on a defined time interval.**
+
+RATE metric type express this value variation normalized _per second_ contrary to the COUNT metric type that represent this variation in an absolute gain/loss of a metric value over a defined time interval.
 
 For instance let's say the `number.of.requests` metrics is reported every 10 seconds to Datadog with the `gauge` type for `web_1`.
 
@@ -146,15 +150,20 @@ For example: if you send `X` values for a metric `<METRIC_NAME>` during the flus
 | `<METRIC_NAME>.min`          | Gives you the minimum value of those `X` sent during the flush interval.        | Gauge               |
 | `<METRIC_NAME>.sum`          | Gives you the sum of all `X` values sent during the flush interval.             | Gauge               |
 
-Configure which aggregation you want to send to Datadog with the `histogram_aggregates` parameter in your [datadog.yaml configuration file][2].
-By default only `max`, `median`, `avg`, and `count` aggregations are sent out to Datadog.
+**Note**:
+
+* Configure which aggregation you want to send to Datadog with the `histogram_aggregates` parameter in your [datadog.yaml configuration file][2]. By default only `max`, `median`, `avg`, and `count` aggregations are sent out to Datadog.
+* Configure which percentile aggregation you want to send to Datadog with the `histogram_percentiles` parameter in your [datadog.yaml configuration file][2]. By default only `95pc` percentile is sent out to Datadog.
+
 
 [1]: https://github.com/etsy/statsd/blob/master/docs/metric_types.md#timing
 [2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Set" %}}
 
-**Sets are used to count the number of unique elements in a group.**
+**SET count the amount of unique occurrences of events over a period of time.**
+
+Note that the value submission type of a SET is a string.
 
 {{% /tab %}}
 {{% tab "Timer" %}}
@@ -185,7 +194,7 @@ and as a result the "submission type" does not always map exactly to the Datadog
 | [DogStatsD][9]      | `dog.count(...)`                     | COUNT             | RATE                |
 | [DogStatsD][9]      | `dog.increment(...)`                 | COUNT             | RATE                |
 | [DogStatsD][9]      | `dog.decrement(...)`                 | COUNT             | RATE                |
-| [DogStatsD][10]      | `dog.set(...)`                       | SET               | GAUGE               |
+| [DogStatsD][10]     | `dog.set(...)`                       | SET               | GAUGE               |
 | [DogStatsD][11]     | `dog.histogram(...)`                 | HISTOGRAM         | GAUGE, RATE         |
 | [Agent check][12]   | `self.count(...)`                    | COUNT             | COUNT               |
 | [Agent check][13]   | `self.increment(...)`                | COUNT             | RATE                |

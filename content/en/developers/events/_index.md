@@ -4,7 +4,7 @@ kind: documentation
 disable_toc: true
 ---
 
-TODO: INSERT EVENT DEFINITION HERE
+An event represent any record of activity noteworthy for engineers (devs, ops, and security).
 
 {{< whatsnext desc="Find below how to submit an Event to Datadog:">}}
     {{< nextlink href="/developers/events/agent_events_submission" >}}Submitting an Event through a custom Agent Check.{{< /nextlink >}}

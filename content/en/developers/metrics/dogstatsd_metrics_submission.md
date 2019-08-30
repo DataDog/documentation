@@ -61,8 +61,8 @@ options = {
 initialize(**options)
 
 while(1):
-  statsd.increment('example_metric.increment')
-  statsd.decrement('example_metric.decrement')
+  statsd.increment('example_metric.increment', tags=["environment:dev"])
+  statsd.decrement('example_metric.decrement', tags=["environment:dev"])
   time.sleep(10)
 ```
 
@@ -78,9 +78,9 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 while true do
-    statsd.increment('example_metric.increment')
-    statsd.decrement('example_metric.decrement')
-    statsd.count('example_metric.count', 2)
+    statsd.increment('example_metric.increment', tags: ['environment:dev'])
+    statsd.decrement('example_metric.decrement', tags: ['environment:dev'])
+    statsd.count('example_metric.count', 2, tags: ['environment:dev'])
     sleep 10
 end
 ```
@@ -101,14 +101,14 @@ import (
 )
 
 func main() {
-	dogstatsd_client, err := statsd.New("127.0.0.1:8125")
+	statsd, err := statsd.New("127.0.0.1:8125")
 	if err != nil {
     		log.Fatal(err)
 	}
 	for {
-		  dogstatsd_client.Incr("example_metric.increment", []string{}, 0.0)
-  		dogstatsd_client.Decr("example_metric.decrement", []string{}, 0.0)
-  		dogstatsd_client.Count("example_metric.count", 2, []string{}, 0.0)
+		  statsd.Incr("example_metric.increment", []string{"environment:dev"}, 0.0)
+  		statsd.Decr("example_metric.decrement", []string{"environment:dev"}, 0.0)
+  		statsd.Count("example_metric.count", 2, []string{"environment:dev"}, 0.0)
   		time.Sleep(10)
 	}
 }
@@ -131,10 +131,10 @@ public class DogStatsdClient {
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
         for (int i = 0; i < 10; i++) {
-            Statsd.incrementCounter("example_metric.increment");
-            Statsd.decrementCounter("example_metric.decrement");
-            Statsd.count("example_metric.count", 2);
-            Thread.sleep(1000);
+            Statsd.incrementCounter("example_metric.increment", ["environment:dev"]);
+            Statsd.decrementCounter("example_metric.decrement", ["environment:dev"]);
+            Statsd.count("example_metric.count", 2, ["environment:dev"]);
+            Thread.sleep(100000);
         }
     }
 }
@@ -166,8 +166,8 @@ $statsd = new DogStatsd(
   );
 
 while (TRUE) {
-    $statsd->increment('example_metric.increment');
-    $statsd->decrement('example_metric.decrement');
+    $statsd->increment('example_metric.increment', array('environment'=>'dev'));
+    $statsd->decrement('example_metric.decrement', array('environment'=>'dev'));
     sleep(10);
 }
 ```
@@ -221,7 +221,7 @@ i = 0
 
 while(1):
   i += 1
-  statsd.gauge('example_metric.gauge', i )
+  statsd.gauge('example_metric.gauge', i, tags=["environment:dev"])
   time.sleep(10)
 ```
 
@@ -238,7 +238,7 @@ i = 0
 
 while true do
     i += 1
-    statsd.gauge('example_metric.gauge', i)
+    statsd.gauge('example_metric.gauge', i, tags: ['environment:dev'])
     sleep 10
 end
 ```
@@ -256,14 +256,14 @@ import (
 )
 
 func main() {
-	dogstatsd_client, err := statsd.New("127.0.0.1:8125")
+	statsd, err := statsd.New("127.0.0.1:8125")
 	if err != nil {
     		log.Fatal(err)
 	}
 	var i float64
 	for {
 		i += 1
-		dogstatsd_client.Gauge("example_metric.gauge", i, []string{}, 0.0)
+		statsd.Gauge("example_metric.gauge", i, []string{"environment:dev"}, 0.0)
   	time.Sleep(10)
 	}
 }
@@ -283,8 +283,8 @@ public class DogStatsdClient {
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
         for (int i = 0; i < 10; i++) {
-            Statsd.recordGaugeValue("example_metric.gauge", i);
-            Thread.sleep(1000);
+            Statsd.recordGaugeValue("example_metric.gauge", i, ["environment:dev"]);
+            Thread.sleep(10000);
         }
     }
 }
@@ -312,7 +312,7 @@ $statsd = new DogStatsd(
 $i = 0;
 while (TRUE) {
     $i++;
-    $statsd->gauge('example_metric.gauge', $i);
+    $statsd->gauge('example_metric.gauge', $i, array('environment'=>'dev'));
     sleep(10);
 }
 ```
@@ -335,7 +335,7 @@ with the following parameter:
 | Parameter    | Type            | Description                                                                                                                                                                |
 | --------     | -------         | ----------                                                                                                                                                                 |
 | `MetricName` | String          | Name of the metric to submit.                                                                                                                                              |
-| `Value`      | Double          | Value associated to your metric.                                                                                                                                           |
+| `Value`      | String          | Value associated to your metric.                                                                                                                                           |
 | `SampleRate` | Double          | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
 | `Tags`       | List of Strings | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
 
@@ -355,10 +355,11 @@ options = {
 }
 
 initialize(**options)
-
+i = 0
 while(1):
-  statsd.set('example_metric.set', random.randint(0, 10))
-  time.sleep(10)
+  i += 1
+  statsd.set('example_metric.set', i, tags=["environment:dev"])
+  time.sleep(random.randint(0, 10))
 ```
 
 {{% /tab %}}
@@ -369,9 +370,11 @@ require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
 
+i = 0
 while true do
-    statsd.set('example_metric.gauge', rand 10)
-    sleep 10
+    i += 1
+    statsd.set('example_metric.gauge', i, tags: ['environment:dev'])
+    sleep rand 10
 end
 ```
 
@@ -390,14 +393,15 @@ import (
 )
 
 func main() {
-	dogstatsd_client, err := statsd.New("127.0.0.1:8125")
+	statsd, err := statsd.New("127.0.0.1:8125")
 	if err != nil {
     		log.Fatal(err)
   }
-
+  var i float64
 	for {
-		dogstatsd_client.Set("example_metric.set", strconv.Itoa(rand.Intn(10)), []string{}, 0.0)
-  	time.Sleep(10)
+    i += 1
+		statsd.Set("example_metric.set", strconv.Itoa(i), []string{"environment:dev"}, 0.0)
+  	time.Sleep(rand.Intn(10))
 	}
 }
 ```
@@ -421,18 +425,21 @@ $statsd = new DogStatsd(
      )
   );
 
+$i = 0;
+
 while (TRUE) {
-    $statsd->set('example_metric.set', rand(0, 10));
-    sleep(10);
+    $i++;
+    $statsd->set('example_metric.set', i, array('environment'=>'dev'));
+    sleep(rand(0, 10));
 }
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-With this code, the data is available to graph in Datadog. Here's an example:
+After running the code above, your metrics data is available to graph in Datadog:
 
-TO DO: Run the script and add a screenshoot
+{{< img src="developers/metrics/dogstatsd_metrics_submission/set.png" alt="Set" responsive="true">}}
 
 ## Histogram
 
@@ -467,8 +474,8 @@ options = {
 initialize(**options)
 
 while(1):
-  statsd.histogram('example_metric.histogram', random.randint(0, 10))
-  time.sleep(10)
+  statsd.histogram('example_metric.histogram', random.randint(0, 20), tags=["environment:dev"])
+  time.sleep(2)
 ```
 
 {{% /tab %}}
@@ -480,8 +487,8 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 while true do
-    statsd.set('example_metric.histogram', rand 10)
-    sleep 10
+    statsd.set('example_metric.histogram', rand 20, tags: ['environment:dev'])
+    sleep 2
 end
 ```
 
@@ -499,14 +506,14 @@ import (
 )
 
 func main() {
-	dogstatsd_client, err := statsd.New("127.0.0.1:8125")
+	statsd, err := statsd.New("127.0.0.1:8125")
 	if err != nil {
     		log.Fatal(err)
   }
 
 	for {
-		dogstatsd_client.Histogram("example_metric.histogram", rand.Intn(10), []string{}, 0.0)
-  		time.Sleep(10)
+		statsd.Histogram("example_metric.histogram", rand.Intn(20), []string{"environment:dev"}, 0.0)
+  		time.Sleep(2)
 	}
 }
 ```
@@ -525,8 +532,8 @@ public class DogStatsdClient {
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
         for (int i = 0; i < 10; i++) {
-            Statsd.recordHistogramValue("example_metric.histogram", new Random().nextInt(10));
-            Thread.sleep(1000);
+            Statsd.recordHistogramValue("example_metric.histogram", new Random().nextInt(20), ["environment:dev"]);
+            Thread.sleep(2000);
         }
     }
 }
@@ -552,8 +559,8 @@ $statsd = new DogStatsd(
   );
 
 while (TRUE) {
-    $statsd->histogram('example_metric.histogram', rand(0, 10));
-    sleep(10);
+    $statsd->histogram('example_metric.histogram', rand(0, 20), array('environment'=>'dev'));
+    sleep(2);
 }
 ```
 
@@ -570,9 +577,14 @@ The above instrumentation produces the following metrics:
 | `example_metric.histogram.max`            | Maximum sampled value                     |
 | `example_metric.histogram.95percentile`   | 95th percentile sampled value             |
 
-And the data is available to graph in Datadog. Here's an example:
+After running the code above, your metrics data is available to graph in Datadog:
 
-TO DO: Run the script and add a screenshoot
+{{< img src="developers/metrics/dogstatsd_metrics_submission/histogram.png" alt="Histogram" responsive="true">}}
+
+**Note**:
+
+* Configure which aggregation you want to send to Datadog with the `histogram_aggregates` parameter in your [datadog.yaml configuration file][8]. By default only `max`, `median`, `avg`, and `count` aggregations are sent out to Datadog.
+* Configure which percentile aggregation you want to send to Datadog with the `histogram_percentiles` parameter in your [datadog.yaml configuration file][8]. By default only `95pc` percentile is sent out to Datadog.
 
 ### Timers
 
@@ -610,9 +622,12 @@ options = {
 
 initialize(**options)
 
-@statsd.timed('example_metric.timer')
+@statsd.timed('example_metric.timer', tags=["environment:dev,function:my_function"])
 def my_function():
   time.sleep(random.randint(0, 10))
+
+while(1):
+  my_function()
 ```
 
 or with a context manager:
@@ -628,33 +643,44 @@ def my_function():
   sleep(1)
 
   # Now start the timer
-  with statsd.timed('example_metric.timer'):
+  with statsd.timed('example_metric.timer', tags=["environment:dev"]):
     # do something to be measured
     sleep(random.randint(0, 10))
+
+while(1):
+  my_function()
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-In either case, as DogStatsD receives the timer data, it calculates the statistical distribution of render times and sends the following metrics to Datadog:
+As DogStatsD receives the timer data, it calculates the statistical distribution of render times and sends the following metrics to Datadog:
 
 | Metric                               | Description                               |
 | ------------------------------------ | ----------------------------------------- |
-| `example_metric.histogram.count`          | Number of times this metric was sampled   |
-| `example_metric.histogram.avg`            | Average time of the sampled values        |
-| `example_metric.histogram.median`         | Median sampled value                      |
-| `example_metric.histogram.max`            | Maximum sampled value                     |
-| `example_metric.histogram.95percentile`   | 95th percentile sampled value             |
+| `example_metric.timer.count`          | Number of times this metric was sampled   |
+| `example_metric.timer.avg`            | Average time of the sampled values        |
+| `example_metric.timer.median`         | Median sampled value                      |
+| `example_metric.timer.max`            | Maximum sampled value                     |
+| `example_metric.timer.95percentile`   | 95th percentile sampled value             |
 
-Remember: under the hood, DogStatsD treats timers as histograms. Whether you use timers or histograms, you are sending the same data to Datadog.
+Under the hood, DogStatsD treats timers as histograms. Whether you use timers or histograms, you are sending the same data to Datadog. After running the code above, your metrics data is available to graph in Datadog:
+
+{{< img src="developers/metrics/dogstatsd_metrics_submission/timer.png" alt="Timer" responsive="true">}}
+
+**Note**:
+
+* Configure which aggregation you want to send to Datadog with the `histogram_aggregates` parameter in your [datadog.yaml configuration file][8]. By default only `max`, `median`, `avg`, and `count` aggregations are sent out to Datadog.
+* Configure which percentile aggregation you want to send to Datadog with the `histogram_percentiles` parameter in your [datadog.yaml configuration file][8]. By default only `95pc` percentile is sent out to Datadog.
+
 
 ## Distribution
 
-**This feature is in BETA. [Contact Datadog support][8] for details on how to have it enabled for your account.**
+**This feature is in BETA. [Contact Datadog support][9] for details on how to have it enabled for your account.**
 
 | Method | Datadog Storage type |
 | :----- | :------- |
-| `distribution(MetricName, Value, Tags)` | Stored as a `Distribution` type in Datadog. See the dedicated [Distribution documentation][9] to learn more. |
+| `distribution(MetricName, Value, Tags)` | Stored as a `Distribution` type in Datadog. See the dedicated [Distribution documentation][10] to learn more. |
 
 with the following parameter:
 
@@ -665,7 +691,7 @@ with the following parameter:
 | `SampleRate` | Double          | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
 | `Tags`       | List of Strings | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
 
-Distributoins are specific to DogStatsD. Find below short code snippets depending of your language that you can run to emit a `DISTRIBUTION` metric type-stored as `DISTRIBUTION` metric type-into Datadog. Learn more about the [`DISTRIBUTION` type in the metric types documentation][10].
+Distributions are specific to DogStatsD. Find below short code snippets depending of your language that you can run to emit a `DISTRIBUTION` metric type-stored as `DISTRIBUTION` metric type-into Datadog. Learn more about the [`DISTRIBUTION` type in the metric types documentation][11].
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -683,8 +709,8 @@ options = {
 initialize(**options)
 
 while(1):
-  statsd.distribution('example_metric.distribution', random.randint(0, 10))
-  time.sleep(10)
+  statsd.distribution('example_metric.distribution', random.randint(0, 20), tags=["environment:dev"])
+  time.sleep(2)
 ```
 
 {{% /tab %}}
@@ -696,8 +722,8 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 while true do
-    statsd.distribution('example_metric.gauge', rand 10)
-    sleep 10
+    statsd.distribution('example_metric.gauge', rand 20, tags: ['environment:dev'])
+    sleep 2
 end
 ```
 
@@ -715,14 +741,14 @@ import (
 )
 
 func main() {
-	dogstatsd_client, err := statsd.New("127.0.0.1:8125")
+	statsd, err := statsd.New("127.0.0.1:8125")
 	if err != nil {
     		log.Fatal(err)
 	}
 
 	for {
-		dogstatsd_client.Distribution("example_metric.distribution", rand.Intn(10), []string{}, 0.0)
-  		time.Sleep(10)
+		statsd.Distribution("example_metric.distribution", rand.Intn(20), []string{"environment:dev"}, 0.0)
+  		time.Sleep(2)
 	}
 }
 ```
@@ -741,8 +767,8 @@ public class DogStatsdClient {
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
         for (int i = 0; i < 10; i++) {
-            Statsd.recordDistributionValue("example_metric.gauge", new Random().nextInt(10));
-            Thread.sleep(1000);
+            Statsd.recordDistributionValue("example_metric.gauge", new Random().nextInt(20), ["environment:dev"]);
+            Thread.sleep(2000);
         }
     }
 }
@@ -768,16 +794,13 @@ $statsd = new DogStatsd(
   );
 
 while (TRUE) {
-    $statsd->distribution('example_metric.distribution', rand(0, 10));
-    sleep(10);
+    $statsd->distribution('example_metric.distribution', rand(0, 20), array('environment'=>'dev'));
+    sleep(2);
 }
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
-
-The data is now available to graph in Datadog:
-
 
 The above instrumentation calculates the following data: `sum`, `count`, `average`, `minimum`, `maximum`, `50th percentile` (median), `75th percentile`, `90th percentile`, `95th percentile` and `99th percentile`. Distributions are not only for measuring times. They can be used to measure the distribution of *any* type of value, such as the size of uploaded files, or classroom test scores, for example.
 
@@ -786,6 +809,8 @@ The above instrumentation calculates the following data: `sum`, `count`, `averag
 ### Sample rates
 
 Since the overhead of sending UDP packets can be too great for some performance intensive code paths, DogStatsD clients support sampling, i.e. only sending metrics a percentage of the time. It's not useful in all cases, but can be interesting if you sample many metrics, and your DogStatsD client is not on the same host as the DogStatsD server. This is a trade off: you decrease traffic but slightly lose in precision/granularity.
+
+A sample rate of `1` sends metrics 100% of the time, a sample rate of `0` sends metrics 0% of the time.
 
 Before sending the metric to Datadog, DogStatsD uses the `sample_rate` to correct the metric value depending of the metric type, i.e. to estimate what it would have been without sampling:
 
@@ -796,7 +821,7 @@ Before sending the metric to Datadog, DogStatsD uses the `sample_rate` to correc
 | `Set` | Bo correction. The value received is kept as it is. |
 | `Histogram` | The `histogram.count` statistic is a counter metric, and receives the correction outlined above. Other statistics are gauge metrics and aren't "corrected." |
 
-See the [Datadog Agent aggregation code][11] to learn more about this behavior.
+See the [Datadog Agent aggregation code][12] to learn more about this behavior.
 
 The following code only sends points half of the time:
 
@@ -817,9 +842,16 @@ statsd.increment('loop.count', :sample_rate => 0.5)
 {{% /tab %}}
 {{% tab "Go" %}}
 
+```go
+statsd.Incr("example_metric.increment", []string{}, 0.5)
+```
 
 {{% /tab %}}
 {{% tab "Java" %}}
+
+```java
+Statsd.incrementCounter("example_metric.increment", sampleRate=0.5);
+```
 
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -827,28 +859,50 @@ statsd.increment('loop.count', :sample_rate => 0.5)
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-{{% /tab %}}
-{{% tab "C++" %}}
-
+```php
+<? php
+$statsd->increment('example_metric.increment', $sampleRate->0.5);
+```
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Metrics Tagging
 
-Add tags to any metric you send to DogStatsD with the `tags` parameter:
+Add tags to any metric you send to DogStatsD with the `tags` parameter. Find below examples according to your language to add the `environment:dev` tag to the `example_metric.increment` metric:
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
+```python
+statsd.increment('example_metric.increment', tags=["environment:dev"])
+```
+
 {{% /tab %}}
 {{% tab "Ruby" %}}
+
+```ruby
+statsd.increment('example_metric.increment', tags: ['environment:dev'])
+```
+
+You can also pass a Hash to Tag a metric:
+
+```ruby
+statsd.increment('example_metric.increment', :tags => {environment:dev})
+```
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
+```go
+statsd.Incr("example_metric.increment", []string{"environment:dev"}, 0.0)
+```
 
 {{% /tab %}}
 {{% tab "Java" %}}
+
+```java
+Statsd.incrementCounter("example_metric.increment", ["environment:dev"]);
+```
 
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -856,8 +910,19 @@ Add tags to any metric you send to DogStatsD with the `tags` parameter:
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-{{% /tab %}}
-{{% tab "C++" %}}
+The `tags` argument can be a string:
+
+```php
+$statsd->increment('example_metric.increment', "environment:dev");
+```
+
+or an array:
+
+```php
+<?php
+$statsd->increment('example_metric.increment', array('environment' => 'dev'));
+
+```
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -865,8 +930,6 @@ Add tags to any metric you send to DogStatsD with the `tags` parameter:
 #### Host tag key
 
 The host tag is assigned automatically by the Datadog Agent aggregating the metrics. Metrics submitted with a host tag not matching the Agent hostname lose reference to the original host. The host tag submitted overrides any hostname collected by or configured in the Agent.
-
-**Note**: Because of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][12] page for more details.
 
 ## Further reading
 
@@ -878,8 +941,8 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 [5]: /developers/metrics/metrics_type/?tab=gauge#metric-type-definition
 [6]: /developers/metrics/metrics_type/?tab=set#metric-type-definition
 [7]: /developers/metrics/metrics_type/?tab=histogram#metric-type-definition
-[8]: /help
-[9]: /graphing/metrics/distributions
-[10]: /developers/metrics/metrics_type/?tab=distribution#metric-type-definition
-[11]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
-[12]: /graphing/metrics/distributions
+[8]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[9]: /help
+[10]: /graphing/metrics/distributions
+[11]: /developers/metrics/metrics_type/?tab=distribution#metric-type-definition
+[12]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py

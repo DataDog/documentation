@@ -10,48 +10,70 @@ further_reading:
   text: "Official and Community-contributed API and DogStatsD client libraries"
 ---
 
+The type of the metric is an indication of what you tried to represent with your metric and it's emission source. If you refer to the [metric types][1] documentation you can see that the COUNT and RATE metric types are really close to one another as they represent the same concept: the variation of a metric value over time, but not with the same logic:
+
+* RATE: Normalized value variation over time (usually _per seconds_)
+* COUNT: Absolute value variation over a given time interval.
+
+Depending of your use-case and your submission method, one metric type may be more suited than the other, for instance:
+
+| Metric type submitted | Use-case | 
+| ------------ | ---------- |
+| RATE | You want to monitor across several hosts the amount of request received over time.|
+| RATE | You have no control over the consistency of count temporal submission across your sources, hence you normalize by each individual interval to be able to compare them upstream. |
+| COUNT | You want to count the amount of time a function is called. |
+| COUNT | Counting the amount of revenues have be made over a given amount of time. |
+
+Since RATE and COUNT aren't the same metric type, they don't have the same behavior within Datadog graphs and monitors. In some corner cases RATE metric type might encounter some issues, while in others it might be the COUNT metric type that is not the best suited.
+
+For instance:
+
+TO DO: Give example of temporal RATE aggregation when zooming out of a Graph
+
+In order to mitigate this, Datadog offers you In-application modifiers functions that you can apply to your metrics within your graphs and monitor in order to switch on the fly a RATE to a COUNT and vice-versa.
+
 ## In-application modifiers
+
+The two main in-application modifiers are `as_count()` and `as_rate()`
+
+| Modifiers | Description |
+| `as_count()` | This functions gives you the absolute variation of a metric value over [a rollup interval][2]. Note that since it's depending of the rollup interval, [graphing a longer time interval changes your graph shape][3]. |
+| `as_rate()` | |
+
+Depending of the metric type you applied them to, their behavior differs:
 
 {{< tabs >}}
 {{% tab "Count" %}}
 
 * Effect of `as_count()`:
-    * Sets the time aggregator to SUM.
+  * Disable any [interpolation][1].
+  * Sets the time aggregator to SUM.
 * Effect of `as_rate()`:
-    * Sets the time aggregator to SUM
-    * Normalizes the input timeseries values by the query (rollup) interval. For example [1,1,1,1].as_rate() for rollup interval of 20s produces [0.05, 0.05, 0.05, 0.05].
-* The raw metric itself defaults to the time aggregator AVG, so it must be queried with either `as_rate()` or `as_count()` when time aggregation is applied.
-* Note that there is no normalization on very small intervals (when no time-aggregation occurs), thus the raw metric value counts are returned.
+  * Disable any [interpolation][1].
+  * Sets the time aggregator to SUM
+  * Normalizes the input timeseries values by the query (rollup) interval. For example [1,1,1,1].as_rate() for rollup interval of 20s produces [0.05, 0.05, 0.05, 0.05].
 
-{{% /tab %}}
-{{% tab "Gauge" %}}
+The raw metric itself defaults to the time aggregator AVG, so it must be queried with either `as_rate()` or `as_count()` when time aggregation is applied.
 
-* Effect of `as_count()`: None
-* Effect of `as_rate()`: None
+**Note**: that there is no normalization on very small intervals (when no time-aggregation occurs), thus the raw metric value counts are returned.
 
-{{% /tab %}}
-
-{{% tab "Set" %}}
-
-* Effect of `as_count()`:
-    * Sets the time aggregator to SUM.
-    * Uses the metadata interval to convert from raw rates to counts. Does not work if no metadata interval exists for the metric.
-* Effect of `as_rate()`:
-    * Sets the time aggregator to SUM.
-    * Uses the query interval and metadata interval to calculate the time-aggregated rate. Requires that the metadata interval exists for the metric.
-* Known Issue: Agent check submitted RATE metrics have no interval metadata, so `as_rate()` and `as_count()` don't work.
-
+[1]: /graphing/faq/interpolation-the-fill-modifier-explained
 {{% /tab %}}
 {{% tab "Rate" %}}
 
 TO DO
 
 {{% /tab %}}
+{{% tab "Gauge" %}}
+
+GAUGE metric type representing the absolute and final value of a metric, `as_count()` and `as_rate()` modifiers have no effect on it.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Modify a metric's type within Datadog
 
-While it is not normally required, it is possible to change a metric's type in the [metric summary page][1]:
+While it is not normally required, it is possible to change a metric's type in the [metric summary page][4]:
 
 {{< img src="developers/metrics/metric_type_modifiers/metric_type.png" alt="Metric Type" responsive="true" style="width:70%;">}}
 
@@ -70,4 +92,7 @@ This causes data submitted before the type change for `app.requests.served` to b
 If you are not willing to lose the historical data submitted as a `gauge`, create a new metric name with the new type, leaving the type of `app.requests.served` unchanged.
 
 **Note**: For the AgentCheck, `self.increment` does not calculate the delta for a monotonically increasing counter; instead, it reports the value passed in at the check run. To send the delta value on a monotonically increasing counter, use `self.monotonic_count`.
-[1]: https://app.datadoghq.com/metric/summary
+[1]: /developers/metrics/metrics_type
+[2]: /graphing/metrics/introduction/#time-aggregation
+[3]: /graphing/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs
+[4]: https://app.datadoghq.com/metric/summary
