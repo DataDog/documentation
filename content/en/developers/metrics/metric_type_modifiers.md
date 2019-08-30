@@ -55,7 +55,7 @@ Depending of the metric type you applied them to, their behavior differ:
 
 **Note**: that there is no normalization on very small intervals (when no time-aggregation occurs), thus the raw metric value counts are returned.
 
-[1]: 
+[1]: /graphing/faq/interpolation-the-fill-modifier-explained
 {{% /tab %}}
 {{% tab "Rate" %}}
 
@@ -67,7 +67,7 @@ Depending of the metric type you applied them to, their behavior differ:
   * Disable any [interpolation][1].
   * Sets the time aggregator to SUM
 
-[1]: 
+[1]: /graphing/faq/interpolation-the-fill-modifier-explained
 {{% /tab %}}
 {{% tab "Gauge" %}}
 
