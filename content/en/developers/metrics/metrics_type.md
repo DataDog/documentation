@@ -163,8 +163,6 @@ For example: if you send `X` values for a metric `<METRIC_NAME>` during the flus
 
 **SET count the amount of unique occurrences of events over a period of time.**
 
-Note that the value submission type of a SET is a string.
-
 {{% /tab %}}
 {{% tab "Timer" %}}
 

@@ -10,23 +10,21 @@ further_reading:
   text: "Official and Community-contributed API and DogStatsD client libraries"
 ---
 
-The type of the metric is an indication of what you tried to represent with your metric and it's emission source. If you refer to the [metric types][1] documentation you can see that the COUNT and RATE metric types are really close to one another as they represent the same concept: the variation of a metric value over time, but not with the same logic:
+A metric type is an indication of what you tried to represent with your metric and it's emission source. If you refer to the [metric types][1] documentation you can see that the COUNT and RATE metric types are really close to one another as they represent the same concept: the variation of a metric value over time, but not with the same logic:
 
 * RATE: Normalized value variation over time (usually _per seconds_)
 * COUNT: Absolute value variation over a given time interval.
 
 Depending of your use-case and your submission method, one metric type may be more suited than the other, for instance:
 
-| Metric type submitted | Use-case | 
-| ------------ | ---------- |
-| RATE | You want to monitor across several hosts the amount of request received over time.|
-| RATE | You have no control over the consistency of count temporal submission across your sources, hence you normalize by each individual interval to be able to compare them upstream. |
-| COUNT | You want to count the amount of time a function is called. |
-| COUNT | Counting the amount of revenues have be made over a given amount of time. |
+| Metric type submitted | Use-case                                                                                                                                                                        |
+| ------------          | ----------                                                                                                                                                                      |
+| RATE                  | You want to monitor across several hosts the amount of request received over time.                                                                                              |
+| RATE                  | You have no control over the consistency of count temporal submission across your sources, hence you normalize by each individual interval to be able to compare them upstream. |
+| COUNT                 | You want to count the amount of time a function is called.                                                                                                                      |
+| COUNT                 | Counting the amount of revenues have be made over a given amount of time.                                                                                                       |
 
-Since RATE and COUNT aren't the same metric type, they don't have the same behavior within Datadog graphs and monitors. In some corner cases RATE metric type might encounter some issues, while in others it might be the COUNT metric type that is not the best suited.
-
-For instance:
+Since RATE and COUNT aren't the same metric type, they don't have the same behavior within Datadog graphs and monitors. In some corner cases RATE metric type might encounter some issues, for instance:
 
 TO DO: Give example of temporal RATE aggregation when zooming out of a Graph
 
@@ -34,13 +32,15 @@ In order to mitigate this, Datadog offers you In-application modifiers functions
 
 ## In-application modifiers
 
+ set the operations necessary to display the given metric in count form (increments per interval) or rate form (increments per second)
+
 The two main in-application modifiers are `as_count()` and `as_rate()`
 
 | Modifiers | Description |
-| `as_count()` | This functions gives you the absolute variation of a metric value over [a rollup interval][2]. Note that since it's depending of the rollup interval, [graphing a longer time interval changes your graph shape][3]. |
-| `as_rate()` | |
+| `as_count()` | This functions set the operations necessary to display the given metric in COUNT form: giving you the absolute variation of a metric value over [a rollup interval][2]. Note that since it's depending of the rollup interval, [graphing a longer time interval changes your graph shape][3]. |
+| `as_rate()` | This functions set the operations necessary to display the given metric in RATE form: giving you the absolute variation of a metric value per second. |
 
-Depending of the metric type you applied them to, their behavior differs:
+Depending of the metric type you applied them to, their behavior differ:
 
 {{< tabs >}}
 {{% tab "Count" %}}
@@ -51,18 +51,23 @@ Depending of the metric type you applied them to, their behavior differs:
 * Effect of `as_rate()`:
   * Disable any [interpolation][1].
   * Sets the time aggregator to SUM
-  * Normalizes the input timeseries values by the query (rollup) interval. For example [1,1,1,1].as_rate() for rollup interval of 20s produces [0.05, 0.05, 0.05, 0.05].
-
-The raw metric itself defaults to the time aggregator AVG, so it must be queried with either `as_rate()` or `as_count()` when time aggregation is applied.
+  * Divide the result post-aggregation isby the sampling interval in order to normalize it: For example `[1,1,1,1].as_rate()` for rollup interval of 20s produces `[0.05, 0.05, 0.05, 0.05]`.
 
 **Note**: that there is no normalization on very small intervals (when no time-aggregation occurs), thus the raw metric value counts are returned.
 
-[1]: /graphing/faq/interpolation-the-fill-modifier-explained
+[1]: 
 {{% /tab %}}
 {{% tab "Rate" %}}
 
-TO DO
+* Effect of `as_count()`:
+  * Disable any [interpolation][1].
+  * Sets the time aggregator to SUM.
+  * Multiply the result post-aggregation by the sampling interval: For example `[0.05, 0.05, 0.05, 0.05].as_count() for rollup interval of 20s produces `[1,1,1,1]`.
+* Effect of `as_rate()`:
+  * Disable any [interpolation][1].
+  * Sets the time aggregator to SUM
 
+[1]: 
 {{% /tab %}}
 {{% tab "Gauge" %}}
 
@@ -92,6 +97,7 @@ This causes data submitted before the type change for `app.requests.served` to b
 If you are not willing to lose the historical data submitted as a `gauge`, create a new metric name with the new type, leaving the type of `app.requests.served` unchanged.
 
 **Note**: For the AgentCheck, `self.increment` does not calculate the delta for a monotonically increasing counter; instead, it reports the value passed in at the check run. To send the delta value on a monotonically increasing counter, use `self.monotonic_count`.
+
 [1]: /developers/metrics/metrics_type
 [2]: /graphing/metrics/introduction/#time-aggregation
 [3]: /graphing/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs
