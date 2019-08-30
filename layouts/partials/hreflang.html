@@ -1,7 +1,9 @@
 {{ if .IsTranslated }}
   {{ range .Translations }}
     {{ if in (slice "fr") .Lang }}
-      <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}"/>
+      {{ if ne .Params.placeholder true }}
+        <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}"/>
+      {{ end }}
     {{ end }}
   {{ end}}
 {{ end }}
