@@ -76,7 +76,7 @@ Beta integrations are disabled by default but can be enabled individually.
 | Server                       | Versions   | Support Type    | Instrumentation Names (used for configuration) |
 |------------------------------|------------|-----------------|------------------------------------------------|
 | Akka-Http Server             | 10.0+      | Fully Supported | `akka-http`, `akka-http-server`                |
-| Grizzly                      | 2.0+       | Fully Supported | `grizzly` 
+| Grizzly                      | 2.0+       | Fully Supported | `grizzly`                                      |
 | Java Servlet Compatible      | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`            |
 | Jax-RS Annotations           | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`        |
 | Jetty (non-Servlet)          | 8+         | [Beta][7]       | `jetty`, `jetty-8`                             |
