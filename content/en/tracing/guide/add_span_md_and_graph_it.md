@@ -11,7 +11,7 @@ further_reading:
   text: "Compare a service’s latency to the previous week"
 - link: "/tracing/guide/apm_dashboard/"
   tag: "4 mins"
-  text: "Create an APM dashboard to track and correlate multiple metrics"
+  text: "Create a Dashboard to track and correlate APM metrics"
 - link: "/tracing/guide/slowest_request_daily/"
   tag: "3 mins"
   text: "Debug the slowest trace on the slowest endpoint of a web service"

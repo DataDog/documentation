@@ -11,7 +11,7 @@ further_reading:
   text: "Compare a service’s latency to the previous week"
 - link: "/tracing/guide/apm_dashboard/"
   tag: "4 mins"
-  text: "Create an APM dashboard to track and correlate multiple metrics"
+  text: "Create a Dashboard to track and correlate APM metrics"
 - link: "tracing/guide/add_span_md_and_graph_it/"
   tag: "7 mins"
   text: "Add span tags and slice and dice your application performance"
