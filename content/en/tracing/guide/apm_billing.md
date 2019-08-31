@@ -89,7 +89,7 @@ If you’re an admin of your account, you can monitor your account usage for APM
 To estimate the number of events a service is sending per day or per month, use the [Event Estimator page](link). This is designed to help you decide which services to configure with Trace Search and Analytics while keeping usage and cost in your control.
 
 ### Trace Analytics Monitors on volume
-To get alerts in case a code deployment causes a spike in APM events generated, set up trace analytics monitors [link] on APM events. Get notified at any moment if the volumes in any scope (service, availability-zone, etc…) of your infrastructure is growing unexpectedly:
+To get alerts in case a code deployment causes a spike in APM events generated, set up trace analytics monitors [link] on APM events. Get notified at any moment if the volumes in any scope (`service`, `availability-zone`, etc…) of your infrastructure is growing unexpectedly:
 * 1. Go to [Trace Analytics view](link) in APM
 * 2. Build a search query that represents the volume to monitor.
 * 3. Click on Export to monitor.
