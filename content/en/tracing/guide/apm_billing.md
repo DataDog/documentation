@@ -8,7 +8,7 @@ kind: documentation
 [APM & Distributed Tracing](link) powers you to find service bottlenecks and analyze distributed traces for your microservices architecture. Additionally, using [Trace Search and Analytics](link) feature with APM will allow you to slice and dice your application data with APM events using completely customizable tags.
 
 
-### Choose your deployment environment:*
+### Choose your deployment environment:
 
 {{< tabs >}}
 {{% tab "Host Based Deployment" %}}
