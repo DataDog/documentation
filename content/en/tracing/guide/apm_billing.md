@@ -90,11 +90,12 @@ To estimate the number of events a service is sending per day or per month, use 
 
 ### Trace Analytics Monitors on volume
 To get alerts in case a code deployment causes a spike in APM events generated, set up trace analytics monitors [link] on APM events. Get notified at any moment if the volumes in any scope (`service`, `availability-zone`, etc…) of your infrastructure is growing unexpectedly:
-* 1. Go to [Trace Analytics view](link) in APM
-* 2. Build a search query that represents the volume to monitor.
-* 3. Click on Export to monitor.
-* 4. Define the rate you would like to set as a warning or error.
-* 5. Define an explicit notification: The volume on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control.
+1. Go to [Trace Analytics view](link) in APM
+2. Build a search query that represents the volume to monitor.
+3. Click on Export to monitor.
+4. Define the rate you would like to set as a warning or error.
+5. Define an explicit notification: The volume on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control.
+
 <Image/GIF>
 
 ### Handling Sudden Host Upscale 
