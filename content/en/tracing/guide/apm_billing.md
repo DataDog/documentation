@@ -8,7 +8,7 @@ kind: documentation
 [APM & Distributed Tracing](link) powers you to find service bottlenecks and analyze distributed traces for your microservices architecture. Additionally, using [Trace Search and Analytics](link) feature with APM will allow you to slice and dice your application data with APM events using completely customizable tags.
 
 
-*Choose your deployment environment:*
+### Choose your deployment environment:*
 
 {{< tabs >}}
 {{% tab "Host Based Deployment" %}}
@@ -56,7 +56,7 @@ Using a combination of deployment environments? Find pricing for sample deployme
 {{% /tab %}}
 {{< /tabs >}}
 
-## Calculate APM event count and Retention
+### Calculate APM event count and Retention
 
 Once you have chosen your deployment to understand your agent usage, use this section to understand your bill for Trace Search and Analytics. You get 1 million APM events per host for free if you’re using host/container based deployment (No APM events included in pricing for Fargate Tasks based pricing). Additional APM events pricing starts at $1.27 per million APM events per month for a retention of 7 days. Trace Search and Analytics is priced on the basis of your APM event count. APM event represents the number of requests generated from the services that are Trace Search and Analytics enabled.
 
