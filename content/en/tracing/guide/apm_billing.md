@@ -6,13 +6,13 @@ kind: documentation
 
 
 [APM & Distributed Tracing]() powers you to find service bottlenecks and analyze distributed traces for your microservices architecture. Additionally, using [Trace Search and Analytics]() feature with APM will allow you to slice and dice your application data with APM events using completely customizable tags. Use this guide to:
+
 1. Understand your APM bill
 2. Understand APM Event count and retention
 3. Monitor Usage
 4. Estimate and control usage 
 5. Check out sample deployment scenarios
 
-                                                      |
 
 ## Choose your Deployment Environment
 
@@ -27,7 +27,6 @@ Number of hosts sending traces are calculated every hour. At the end of the mont
 {{% /tab %}}
 
 
-{{< tabs >}}
 {{% tab "Containerized Deployment" %}}
 
 Pricing: APM & Distributed Tracing pricing starts at $31 per host per month (billed annually) or $36 per host per month (billed monthly). This price includes 1 million APM events per host that you can slice and dice using Trace Search and Analytics. 
@@ -43,7 +42,6 @@ Number of hosts (or nodes in Kubernetes) sending traces are calculated every hou
 
 {{% /tab %}}
 
-{{< tabs >}}
 {{% tab "Fargate Deployment" %}}
 Pricing: Fargate is charged based on the concurrent number of tasks. For APM, it is charged at $2/task/month metered in 5 minute buckets. The recommended deployment setup is running the Datadog agent container in the same task definition as your application container. Note that Fargate task billing does not include free functionality for Trace Search and Analytics.
 For instance, if you’re running 3 Fargate tasks, the price for APM is $2 per task * 3 tasks = $6 per month.
@@ -53,13 +51,13 @@ Using a combination of deployment environments? Find a sample deployment scenari
 
 {{% /tab %}}
 
-{{< tabs >}}
+
 {{% tab "Serverless" %}}
 
 
 
 {{% /tab %}}
-{{% tab "" %}}
+{{< /tabs >}}
 
 ## Calculate APM event count and Retention
 
