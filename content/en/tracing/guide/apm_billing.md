@@ -85,22 +85,24 @@ If you’re an admin of your account, you can monitor your account usage for APM
 
 ## Estimate and Control Usage
 
-1. Event Estimator - To estimate the number of events a service is sending per day or per month, use the [Event Estimator page](link). This is designed to help you decide which services to configure with Trace Search and Analytics while keeping usage and cost in your control.
+###Event Estimator
+To estimate the number of events a service is sending per day or per month, use the [Event Estimator page](link). This is designed to help you decide which services to configure with Trace Search and Analytics while keeping usage and cost in your control.
 
-2. Trace Analytics Monitors on volume
+### Trace Analytics Monitors on volume
 To get alerts in case a code deployment causes a spike in APM events generated, set up trace analytics monitors [link] on APM events. Get notified at any moment if the volumes in any scope (service, availability-zone, etc…) of your infrastructure is growing unexpectedly:
-* 1. Go to [Trace Analytics view](link) in APM
-* 2. Build a search query that represents the volume to monitor.
-* 3. Click on Export to monitor.
-* 4. Define the rate you would like to set as a warning or error.
-* 5. Define an explicit notification: The volume on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control.
+1. Go to [Trace Analytics view](link) in APM
+2. Build a search query that represents the volume to monitor.
+3. Click on Export to monitor.
+4. Define the rate you would like to set as a warning or error.
+5. Define an explicit notification: The volume on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control.
 <Image/GIF>
 
-3. Handling Sudden Host Upscale 
+### Handling Sudden Host Upscale 
+
 Your APM bill is calculated using the top 99 percentile of active agents sending traces every month. This ensures even if you decide to scale your environment to handle for a sudden spike in traffic around certain hours, for instance on Black Friday, you will not be charged additional for that.
 You can choose to configure trace search and analytics per service or per integration your application instruments. This allows you to manually control the number of APM events generated. Note that this, however, limits Trace Search and Analytics functionality on those services and integrations.
 
-4. Event Filtering
+### Event Filtering
 
 An APM event represents the top span for a service, including its metadata. Once enabled, APM events are sent at 100% throughput by default. For example, a Java service with 100 requests will generate 100 APM events from its `servlet.request` spans, as each `servlet.request` span generates an APM event. [Filtering APM events][3] has the benefit of reducing the number of billable APM events and has no effect on trace sampling. Once a service has been filtered lower than 100%, APM event analytics are upscaled to display an estimate by default, and you have the option to display the filtered value.
 
