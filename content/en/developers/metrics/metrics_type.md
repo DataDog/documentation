@@ -68,7 +68,7 @@ Note: StatsD counters can show a decimal value within Datadog since they are nor
 Discover how to submit count metrics:
 
 * [With a custom Agent Check][1]
-* [With DogstatsD][2]
+* [With DogStatsD][2]
 * [With the Datadog API][3]
 
 [1]: /developers/metrics/agent_metrics_submission/?tab=count
@@ -90,7 +90,7 @@ Each data point represent the overall amount of requests received at a point in 
 Discover how to submit gauge metrics:
 
 * [With a custom Agent Check][1]
-* [With DogstatsD][2]
+* [With DogStatsD][2]
 * [With the Datadog API][3]
 
 [1]: /developers/metrics/agent_metrics_submission/?tab=gauge
@@ -141,7 +141,7 @@ For example: if you send `X` values for a HISTOGRAM metric `<METRIC_NAME>` durin
 Discover how to submit histogram metrics:
 
 * [With a custom Agent Check][3]
-* [With DogstatsD][4]
+* [With DogStatsD][4]
 
 [1]: https://github.com/etsy/statsd/blob/master/docs/metric_types.md#timing
 [2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
@@ -189,7 +189,7 @@ This functionality allows you to control tagging for metrics where host-level gr
 Discover how to submit set metrics:
 
 * [With a custom Agent Check][1]
-* [With DogstatsD][2]
+* [With DogStatsD][2]
 
 [1]: /developers/metrics/agent_metrics_submission/?tab=set
 [2]: /developers/metrics/dogstatsd_metrics_submission/#set
