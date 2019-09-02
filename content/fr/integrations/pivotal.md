@@ -24,7 +24,7 @@ version: '1.0'
 Connectez Pivotal Tracker à Datadog pour :
 
 * Consulter et discuter de la progression de vos articles dans votre flux d'événements.
-* Corréler l'achèvement de votre article avec d'autres événements et métriques de votre système.
+* Corréler l'achèvement de votre story avec d'autres événements et métriques de votre système.
 
 ## Implémentation
 ### Installation

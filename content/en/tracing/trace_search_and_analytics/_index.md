@@ -12,7 +12,7 @@ aliases:
 * Configure your APM tracer to emit the relevant analytics from your services—this can be done either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Next, [enable Trace Search inside Datadog][1] to begin forwarding these analytics.
 * [Configure your Datadog Agent to emit the relevant analytics from your services][2].
 
-**Note**: to use Trace Search, you must be using Agent v6.7+ and have logs enabled.
+**Note**: to use Trace Search, you must be using Agent v6.7+.
 
 ## Automatic Configuration
 
