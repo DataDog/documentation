@@ -6,7 +6,7 @@ external_redirect: /api/#add-new-services-and-schedules
 ---
 
 ##### Signature
-`PUT /v1/integration/pagerduty`
+`POST /v1/integration/pagerduty`
 
 ##### Example Request
 

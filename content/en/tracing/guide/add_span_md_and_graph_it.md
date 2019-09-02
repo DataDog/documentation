@@ -22,7 +22,7 @@ further_reading:
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.gif" alt="Analytics View" responsive="true" style="width:90%;">}}
 
-Datadog APM allows you to customize your traces to include any additional information you might need to maintain observability into your business. You can use this to identify a spike in the throughput of a certain enterprise customer, or the user suffering the highest latecy, or to pinpoint the database shard generating the most errors. 
+Datadog APM allows you to customize your traces to include any additional information you might need to maintain observability into your business. You can use this to identify a spike in the throughput of a certain enterprise customer, or the user suffering the highest latency, or to pinpoint the database shard generating the most errors. 
 
 In this example, a customer ID is added to traces allowing the customers that have the slowest performance to be identified. Customization of traces is based on tags that seamlessly integrate APM with the rest of Datadog and come in the form of `key:value` pairs of metadata added to spans.
 

@@ -132,7 +132,7 @@ Origin detection is supported in Agent 6.10.0+ and in the following client libra
 | [Python][11] | 0.28.0  |
 | [Ruby][12]   | 4.2.0   |
 | [C#][13]     | 3.3.0   |
-| [Java][14]   | 2.6     |
+| [Java][14]   | 2.8     |
 
 To set [tag cardinality][15] for the metrics collected using origin detection, use the environment variable `DD_DOGSTATSD_TAG_CARDINALITY`.
 
