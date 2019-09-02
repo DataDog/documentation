@@ -321,10 +321,10 @@ uaa:
   clients:
     datadog-firehose-nozzle:
       access-token-validity: 1209600
-      authorities: doppler.firehose
+      authorities: doppler.firehose,cloud_controller.admin_read_only
       authorized-grant-types: client_credentials
       override: true
-      scope: doppler.firehose
+      scope: doppler.firehose,cloud_controller.admin_read_only
       secret: <YOUR_SECRET>
 ```
 

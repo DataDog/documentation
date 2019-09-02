@@ -332,7 +332,7 @@ Manage the Datadog Agent and [Integrations][1] using configuration management to
 
 ### Update the Agent
 
-To manually update the Datadog Agent core between to minor versions on a given host, run the [corresponding install command for your platform][2].
+To manually update the Datadog Agent core between two minor versions on a given host, run the [corresponding install command for your platform][2].
 
 Note: If you want to manually update one specific Agent integration refer to the [Integration Management guide][3].
 
