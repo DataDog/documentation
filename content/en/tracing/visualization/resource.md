@@ -37,7 +37,11 @@ Datadog provides out of the box graphs for any given resource:
     * The **Total amount of errors**
     * The amount of **Errors per second**
     * The **% Error Rate**
-* Sub-Services: When there are multiple services involved, a fourth graph is available that breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*. For services like *Postgres* or *Redis*, which are "final" operations not calling other service underneath, there will be no Sub-services graph.
+* Sub-Services: When there are multiple services involved, a fourth graph is available that breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*.
+
+    This represents the total/relative/average time spent by traces from the current service to the other *services* or *type*.
+
+    **Note**: For services like *Postgres* or *Redis*, which are "final" operations that do not call other services, there is no sub-services graph.
 
 {{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Out of the bow resource graphs" responsive="true" style="width:90%;">}}
 
@@ -71,7 +75,7 @@ The displayed metrics represent, per span:
 | ------            | --------                                                                                                |
 | `Avg Span/trace`  | Average number of occurrences of the span, for traces including the current resource, where the span is present at least once. |
 | `% of traces`     | Percentage of traces including the current resource where the span is present at least once. |
-| `Avg duration`    | Average duration for which the span was active, for traces including the current resource, where the span is present at least once.                |
+| `Avg duration`    | Average duration of the span, for traces including the current resource, where the span is present at least once.                |
 | `Avg % Exec Time` | Average ratio of execution time for which the span was active, for traces including the current resource, where the span is present at least once. |
 
 **Note**: A span is considered active when it's not waiting for a child span to complete. The active spans at a given time, for a given trace, are all the leaf spans (i.e.: spans without children).

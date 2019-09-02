@@ -37,7 +37,7 @@ var search_desktop = docsearch({
 var desktop_enable_enter = true;
 search_desktop.autocomplete.on('keyup', function(e) {
    if(e.keyCode === 13 && desktop_enable_enter) {
-       window.location = '{{ absLangURL "search/" }}?s='+$(this).val();
+       window.location = '{{ absLangURL "search/" }}?s='+this.value;
    }
 });
 search_desktop.autocomplete.on('autocomplete:cursorchanged', function(e) {
@@ -64,7 +64,7 @@ var search_mobile = docsearch({
 var mobile_enable_enter = true;
 search_mobile.autocomplete.on('keyup', function(e) {
    if(e.keyCode === 13 && mobile_enable_enter) {
-       window.location = '{{ absLangURL "search/" }}?s='+$(this).val();
+       window.location = '{{ absLangURL "search/" }}?s='+this.value;
    }
 });
 search_mobile.autocomplete.on('autocomplete:cursorchanged', function(e) {

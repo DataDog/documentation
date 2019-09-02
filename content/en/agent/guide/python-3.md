@@ -195,7 +195,7 @@ In Python 2 the standard library round method uses the Round Half Up Strategy wh
 >> round(2.5)
 2
 >> round(3.5)
-5
+4
 ```
  
 Datadog provides a utility function, `round_value`, in `datadog_checks_base` to allow the replication of the Python 2 behavior in both Python 2 and 3. 

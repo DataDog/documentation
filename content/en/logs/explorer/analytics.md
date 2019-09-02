@@ -122,8 +122,13 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 
 Visualize the top values from a [facet][1] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update search query or drill through logs corresponding to either dimension.
 
-The following Table Log Analytics shows:
-The evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IP** and over the last 15 minutes.
+* When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
+* When there are multiple measures, the top or bottom list is determined according to the first measure.
+* The subtotal may differ from the actual sum of values in a group, since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
+
+ **Note**: A table visualisation used for one single measure and one single dimension is the same as a toplist, just with a different display.
+
+ The following Table Log Analytics shows the evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IPs**, and over the last 15 minutes:
 
 {{< img src="logs/explorer/analytics/logs_table_example.png" alt="table example" responsive="true" style="width:90%;">}}
 
@@ -137,7 +142,7 @@ The evolution of the **top Status Codes** according to their **Throughput**, alo
 
 Select or click on a section of the graph to either zoom in the graph or see the list of logs corresponding to your selection:
 
-{{< img src="logs/explorer/analytics/view_logs.gif" alt="view logs" responsive="true" style="width:80%;">}}
+{{< img src="logs/explorer/analytics/view_logs.mp4" alt="view logs" video="true" responsive="true" width="80%" >}}
 
 ## How aggregations work behind the scenes
 
@@ -147,8 +152,7 @@ Let's illustrate this on a fictive bar timeline where each bar represents a time
 
 In the following example, each dot represents one log event. The X-axis is the timestamp of the log, and the Y-axis is the value of a duration attribute borne by logs. The timeseries displays a maximum-aggregation. Datadog displays a timeline with a rollout parameter; for example, there are 4 bars for the whole time frame.
 
-{{< img src="logs/explorer/analytics/aggregation_howto.gif" alt="top list example" responsive="true" style="width:90%;">}}
-
+{{< img src="logs/explorer/analytics/aggregation_howto.mp4" alt="top list example" video="true" responsive="true" >}}
 
 ## Further Reading
 

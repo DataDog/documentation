@@ -67,15 +67,12 @@
 {{- $figure_class :=  .Get "figure_class" -}}
 <div class="shortcode-wrapper shortcode-img expand {{- if $wide -}}wide-parent{{- end -}}"><figure class="text-center {{- if $wide -}}wide {{- end -}}{{ $figure_class -}}" {{- if .Get "figure_style" -}}style="{{- with .Get "figure_style" -}}{{- . | safeCSS -}}{{- end -}}"{{- end -}}>
 {{- if $video -}}
-    <video width="100%" height="auto"
+    <video width="{{$img_width | default "100%" }}" height="auto"
            muted
            playsinline
            autoplay
            loop >
       <source src="{{ print $img | relURL }}"
-              type="video/mp4"
-              media="(min-width: 480px)" >
-      <source src="{{ print (replace $img ".mp4" "_small.mp4") | relURL }}"
               type="video/mp4"
               media="(min-width: 0px)" >
       <div class="play"></div>

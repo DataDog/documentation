@@ -166,9 +166,11 @@ int main(int argc, char* argv[]) {
 Just link against `libopentracing`, making sure that `libopentracing.so` is in your `LD_LIBRARY_PATH`:
 
 ```bash
-g++ -o tracer_example tracer_example.cpp -lopentracing
+g++ -std=c++11 -o tracer_example tracer_example.cpp -lopentracing
 ./tracer_example
 ```
+
+**Note**: OpenTracing requires C++ 11 or higher.
 
 ### Change Agent Hostname
 

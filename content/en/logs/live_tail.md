@@ -14,7 +14,7 @@ further_reading:
   text: "Learn more about parsing"
 ---
 
-{{< img src="logs/live_tail/live_tail_demo.gif" alt="Live tail" responsive="true" >}}
+{{< img src="logs/live_tail/live_tail_demo.mp4" alt="Live tail" video="true" responsive="true" >}}
 
 ## Overview
 

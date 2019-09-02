@@ -413,7 +413,7 @@ Les sources d'[intégration][5] suivantes créent automatiquement des tags dans 
 [61]: /fr/integrations/redisdb
 [62]: /fr/integrations/riakcs
 [63]: /fr/integrations/snmp
-[64]: /fr/integrations/supervisor
+[64]: /fr/integrations/supervisord
 [65]: /fr/integrations/teamcity
 [66]: /fr/integrations/tokumx
 [67]: /fr/integrations/varnish

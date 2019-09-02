@@ -71,7 +71,7 @@ If needed, add additional tags to narrow down the scope even further—for examp
 
 ## Infrastructure
 
-To filter the [Host Map][4], [Infrastructure List][5], [Containers][6], and [Processes][7], enter a tag in the **Filter by** textbox at the top of the page. Hosts and containers can be grouped by tag key using the **Group by** textbox. If you enter `service` in the group box, you see each service as a group heading. 
+To filter the [Host Map][4], [Infrastructure List][5], [Containers][6], and [Processes][7], enter a tag in the **Filter by** textbox at the top of the page. Hosts and containers can be grouped by tag key using the **Group by** textbox. If you enter `service` in the group box, you see each service as a group heading.
 
 {{< tabs >}}
 {{% tab "Host Map" %}}
@@ -85,23 +85,23 @@ Or Containers:
 {{< img src="tagging/using_tags/containermaptags.png" alt="Container Map Tags" responsive="true" style="width:80%;">}}
 {{% /tab %}}
 
-{{% tab "Infrastructure List" %}} 
+{{% tab "Infrastructure List" %}}
 
-Here are the filter and group by textboxes on the Infrastructure List page: 
+Here are the filter and group by textboxes on the Infrastructure List page:
 
 {{< img src="tagging/using_tags/infrastructuretags.png" alt="Tags in the Infrastructure List" responsive="true" style="width:80%;">}}
 {{% /tab %}}
 
 {{% tab "Containers" %}}
 
-Here are the filter and group by textboxes on the Live Containers page: 
+Here are the filter and group by textboxes on the Live Containers page:
 
 {{< img src="tagging/using_tags/livecontainertags.png" alt="Live Container Tags" responsive="true" style="width:80%;">}}
 {{% /tab %}}
 
 {{% tab "Processes" %}}
 
-Here are the filter and group by textboxes on the Live Processes page: 
+Here are the filter and group by textboxes on the Live Processes page:
 
 {{< img src="tagging/using_tags/liveprocessestags.png" alt="Live Process Tags" responsive="true" style="width:80%;">}}
 {{% /tab %}}
@@ -199,7 +199,7 @@ When creating a [Notebook][12] graph, limit metrics by using tags in the **from*
 
 To exclude tags, use `</>` to edit the text then add the tag in the form `!<KEY>:<VALUE>`. In the example below, `service:coffeehouse` is excluded using `!service:coffeehouse`.
 
-{{< img src="tagging/using_tags/notebooktagsexclude.gif" alt="Notebook Exclude Tags" responsive="true" style="width:80%;">}}
+{{< img src="tagging/using_tags/notebooktagsexclude.mp4" alt="Notebook Exclude Tags" video="true" responsive="true" width="80%">}}
 
 ## Logs
 
@@ -223,7 +223,7 @@ For Logs [Search][13], [Analytics][14], [Patterns][15], and [Live Tail][16] filt
 {{% /tab %}}
 {{% tab "Live Tail" %}}
 
-{{< img src="tagging/using_tags/livetailtags.gif" alt="Live Tail Tags" responsive="true" style="width:80%;">}}
+{{< img src="tagging/using_tags/livetailtags.mp4" alt="Live Tail Tags" video="true" responsive="true" width="80%">}}
 
 {{% /tab %}}
 {{< /tabs >}}

@@ -59,7 +59,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     *   **`check`** name of the check, e.g. datadog.agent.up
     *   **`tags`** one or more quoted tags (comma-separated), or "*". e.g.: `.over("env:prod", "role:db")`
-    *   **`count`** must be at >= your max threshold (defined in the `options`). e.g. if you want to notify on 1 critical, 3 ok and 2 warn statuses count should be 3.
+    *   **`count`** must be at >= your max threshold (defined in the `options`). e.g. if you want to notify on 1 critical, 3 ok and 2 warn statuses count should be 3. It is limited to 10.
 
     ##### Event Alert Query
 
@@ -110,7 +110,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     *   **`notify_no_data`** a Boolean indicating whether this monitor notifies when data stops reporting. Default: **false**
 
-    *   **`no_data_timeframe`** the number of minutes before a monitor notifies when data stops reporting. This parameter is mandatory when `notify_no_data​` is set to `true`. It must be at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks. Default: **2x timeframe for metric alerts, 2 minutes for service checks**
+    *   **`no_data_timeframe`** the number of minutes before a monitor notifies when data stops reporting. This parameter is mandatory when `notify_no_data​` is set to `true`. It must be at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks. Default: **10** mins.
 
     *   **`timeout_h`** the number of hours of the monitor not reporting data before it automatically resolves from a triggered state. Default: **None**.
 

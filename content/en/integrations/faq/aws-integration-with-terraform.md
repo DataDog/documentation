@@ -15,8 +15,8 @@ If you use [Terraform][1], the script below creates the Datadog IAM policy insid
 
 ```
 variable "datadog_aws_integration_external_id" {
-  default = ""
-  description = "<YOUR_DD_EXTERNAL_ID>"
+  default = "<YOUR_DD_EXTERNAL_ID>"
+  description = ""
 }
 
 data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
