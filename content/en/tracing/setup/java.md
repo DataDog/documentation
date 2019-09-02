@@ -19,6 +19,8 @@ further_reading:
 
 ## Installation and Getting Started
 
+<div class="alert alert-info">If you already have a Datadog account you can find step-by-step instructions in our in-app guides for <a href="https://app.datadoghq.com/apm/docs?architecture=host-based&language=java" target=_blank> host-based</a> and <a href="https://app.datadoghq.com/apm/docs?architecture=container-based&language=java" target=_blank>container-based</a> set ups.</div>
+
 To begin tracing applications written in any language, first [install and configure the Datadog Agent][1], see the additional documentation for [tracing Docker applications][2] or [Kubernetes applications][3].
 
 Next, download `dd-java-agent.jar` that contains the Agent class files:
@@ -74,11 +76,12 @@ Beta integrations are disabled by default but can be enabled individually.
 | Server                       | Versions   | Support Type    | Instrumentation Names (used for configuration) |
 |------------------------------|------------|-----------------|------------------------------------------------|
 | Akka-Http Server             | 10.0+      | Fully Supported | `akka-http`, `akka-http-server`                |
+| Grizzly                      | 2.0+       | Fully Supported | `grizzly`                                      |
 | Java Servlet Compatible      | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`            |
 | Jax-RS Annotations           | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`        |
 | Jetty (non-Servlet)          | 8+         | [Beta][7]       | `jetty`, `jetty-8`                             |
 | Netty HTTP Server            | 4.0+       | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
-| Play                         | 2.4-2.6    | Fully Supported | `play`                                         |
+| Play                         | 2.4-2.7    | Fully Supported | `play`                                         |
 | Ratpack                      | 1.4+       | [Beta][7]       | `ratpack`                                      |
 | Spark Java                   | 2.3+       | [Beta][7]       | `sparkjava` (requires `jetty`)                 |
 | Spring Web (MVC)             | 4.0+       | Fully Supported | `spring-web`                                   |
@@ -197,7 +200,9 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.http.client.tag.query-string`      | `DD_HTTP_CLIENT_TAG_QUERY_STRING`      | `false`              | When set to `true` query string parameters and fragment get added to web client spans                                                                                                                                   |
 | `dd.http.server.tag.query-string`      | `DD_HTTP_SERVER_TAG_QUERY_STRING`      | `false`              | When set to `true` query string parameters and fragment get added to web server spans                                                                                                                                   |
 | `dd.jmxfetch.enabled`                  | `DD_JMXFETCH_ENABLED`                  | `true`               | Enable collection of JMX metrics by Java Tracing Agent.                                                                                                                                                                 |
-| `dd.jmxfetch.metrics-configs`          | `DD_JMXFETCH_METRICS_CONFIGS`          | `null`               | (Example: `/file/loction1,/file/location2`) Additional metrics configuration file for JMX metrics collection.                                                                                                           |
+| `dd.jmxfetch.metrics-configs`          | `DD_JMXFETCH_METRICS_CONFIGS`          | `null`               | (Example: `/file/loction1,/file/location2`) Additional metrics configuration file for JMX metrics collection. For Java Datadog Trace Agent v0.29.0+, use `dd.jmxfetch.config.dir` and `dd.jmxfetch.config` instead.                                                                                                          |
+| `dd.jmxfetch.config.dir`          | `DD_JMXFETCH_CONFIG_DIR`          | `null`               | (Example: `/opt/datadog-agent/etc/conf.d`) Additional configuration directory for JMX metrics collection. Available in Java Datadog Trace Agent v0.29.0+.                                                                                                  |
+| `dd.jmxfetch.config`          | `DD_JMXFETCH_CONFIG`          | `null`               | (Example: `activemq.d/conf.yaml,jmx.d/conf.yaml`) Additional metrics configuration file for JMX metrics collection. Available in Java Datadog Trace Agent v0.29.0+.                                                                                                           |
 | `dd.jmxfetch.check-period`             | `DD_JMXFETCH_CHECK_PERIOD`             | `1500`               | How often to send JMX metrics (in ms).                                                                                                                                                                                  |
 | `dd.jmxfetch.refresh-beans-period`     | `DD_JMXFETCH_REFRESH_BEANS_PERIOD`     | `600`                | How often to refresh list of avalable JMX beans (in seconds).                                                                                                                                                           |
 | `dd.jmxfetch.statsd.host`              | `DD_JMXFETCH_STATSD_HOST`              | same as `agent.host` | Statsd host to send JMX metrics to.                                                                                                                                                                                     |

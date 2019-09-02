@@ -12,7 +12,7 @@ aliases:
 * Configure your APM tracer to emit the relevant analytics from your services—this can be done either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Next, [enable Trace Search inside Datadog][1] to begin forwarding these analytics.
 * [Configure your Datadog Agent to emit the relevant analytics from your services][2].
 
-**Note**: to use Trace Search, you must be using Agent v6.7+ and have logs enabled.
+**Note**: to use Trace Search, you must be using Agent v6.7+.
 
 ## Automatic Configuration
 
@@ -253,13 +253,11 @@ Integration names can be found on the [integrations table][1].
 
 In addition to setting globally, you can enable or disable Trace Search & Analytics for individual integrations using the following setting:
 
-* System Property: `-Ddd.<INTEGRATION>.analytics.enabled=true`
 * Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-Use this in addition to the global configuration for any integrations that submit custom services. For example, for JMS spans which comes in as a custom service, you can set the following to enable all JMS Tracing in Trace Search & Analytics:
+Use this in addition to the global configuration for any integrations that submit custom services. For example, for Symfony spans which comes in as a custom service, you can set the following to enable all Symfony Tracing in Trace Search & Analytics:
 
-* System Property: `-Ddd.jms.analytics.enabled=true`
-* Environment Variable: `DD_JMS_ANALYTICS_ENABLED=true`
+* Environment Variable: `DD_SYMFONY_ANALYTICS_ENABLED=true`
 
 Integration names can be found on the [integrations table][1].
 

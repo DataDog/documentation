@@ -12,9 +12,11 @@
 
 {{/* set img path based on page type and what is passed */}}
 {{- $local_ref := (.Get "src") -}}
-{{- $hash_ref := (index $.Site.Data.manifests.images $local_ref) -}}
-{{- $.Scratch.Add "_img" (print (replace $.Site.Params.img_url "images/" "") "images/" $hash_ref) -}}
-{{- $img := $.Scratch.Get "_img" -}}
+{{- $hash_ref := $local_ref -}}
+
+{{ $.Scratch.Add "_img" (print "images/" $hash_ref)  }}
+
+{{ $img := $.Scratch.Get "_img" }}
 
 {{- $image_type_arr := split (.Get "src") "." -}}
 
@@ -65,15 +67,12 @@
 {{- $figure_class :=  .Get "figure_class" -}}
 <div class="shortcode-wrapper shortcode-img expand {{- if $wide -}}wide-parent{{- end -}}"><figure class="text-center {{- if $wide -}}wide {{- end -}}{{ $figure_class -}}" {{- if .Get "figure_style" -}}style="{{- with .Get "figure_style" -}}{{- . | safeCSS -}}{{- end -}}"{{- end -}}>
 {{- if $video -}}
-    <video width="100%" height="auto"
+    <video width="{{$img_width | default "100%" }}" height="auto"
            muted
            playsinline
            autoplay
            loop >
       <source src="{{ print $img | relURL }}"
-              type="video/mp4"
-              media="(min-width: 480px)" >
-      <source src="{{ print (replace $img ".mp4" "_small.mp4") | relURL }}"
               type="video/mp4"
               media="(min-width: 0px)" >
       <div class="play"></div>

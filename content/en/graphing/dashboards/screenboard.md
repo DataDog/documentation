@@ -13,12 +13,7 @@ further_reading:
   text: "Discover all available Widgets for your Dashboard"
 ---
 
-## Change Screenboard name
-
-1. Click on Edit Board at the top of the Screenboard
-    {{< img src="graphing/dashboards/screenboard/screenboard_name.png" alt="Screenboard name" responsive="true" style="width:75%;">}}
-2. Change the name to whatever you like
-3. Click Save Changes
+Screenboards are dashboards with free-form layouts which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views, and can either update in real-time, or represent one or more fixed points in the past.
 
 ## Read Only
 

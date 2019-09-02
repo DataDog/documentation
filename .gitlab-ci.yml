@@ -74,11 +74,23 @@ test_missing_tms_preview:
   <<: *base_template
   stage: post-deploy
   environment: "preview"
-  allow_failure: true
   dependencies:
     - build_preview
   script:
     - check_missing_tms
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+
+index_algolia_preview:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  script:
+    - cp ./local/etc/algolia/docs_datadoghq_preview.json /etc/docs_datadoghq_preview.json
+    - index_docsearch_algolia_preview
+  dependencies:
+    - build_preview
+  when: manual
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
@@ -102,7 +114,7 @@ build_live:
     - build_hugo_site_new
     - collect_static_assets
     - push_site_to_s3
-    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['js', 'images', 'fonts', 'en', 'css', 'search', 'json', 'error', 'matts quick tips', 'videos']" -l "['fr','ja']" -c "./local/etc/docsdatadoghq.json"
+    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['js', 'images', 'fonts', 'en', 'css', 'search', 'json', 'error', 'matts quick tips', 'videos']" -l "['ja']" -c "./local/etc/algolia/docs_datadoghq.json"
     - create_artifact
     - create_artifact_untracked
     - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
@@ -131,7 +143,7 @@ index_algolia:
   stage: post-deploy
   environment: "live"
   script:
-    - cp ./local/etc/docsdatadoghq.json /etc/
+    - cp ./local/etc/algolia/docs_datadoghq.json /etc/docs_datadoghq.com
     - index_docsearch_algolia
   dependencies:
     - build_live
@@ -167,7 +179,6 @@ test_missing_tms_live:
   <<: *base_template
   stage: post-deploy
   environment: "live"
-  allow_failure: true
   dependencies:
     - build_live
   script:

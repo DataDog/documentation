@@ -215,7 +215,7 @@ spec:
 Consultez le [guide Autodiscovery][1] pour consulter des exemples et en savoir plus sur la configuration et le fonctionnement d'Autodiscovoery.
 
 
-[1]: /fr/agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
+[1]: /fr/agent/autodiscovery/integrations/?tab=kubernetes
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -281,4 +281,4 @@ ac_exclude = ["name:datadog-agent"]
 
 [1]: /fr/integrations/journald/
 [2]: /fr/agent/autodiscovery
-[3]: /fr/agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
+[3]: /fr/agent/autodiscovery/integrations/?tab=kubernetes

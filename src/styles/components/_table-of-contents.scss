@@ -1,0 +1,141 @@
+$ddpurple:    #632CA6;
+$highlightcolor: rgba(120,71,166,.15);
+
+
+body > header.scrolled ~ .container .mobile-toc-toggle {
+  top:90px;
+}
+.announcement_banner.open ~ .container .mobile-toc-toggle {
+  top:190px;
+}
+
+.mobile-toc-toggle {
+  position: fixed;
+  right: 20px;
+  top: 160px;
+  width: 43px;
+  height: 43px;
+  z-index: 99999;
+  cursor: pointer;
+  i {
+    border: 1px solid $ddpurple;
+    border-radius: 30px;
+    padding: 8px;
+    font-size: 25px;
+    color: $ddpurple;
+  }
+}
+
+.toc-container {
+  padding-top:80px;
+  &.mobile-open {
+    top:60px;
+    position:absolute;
+    max-width: 266px;
+    background: rgba(248, 248, 248, 0.8);
+    height: 100%;
+    right: 0px;
+    z-index: 3;
+
+    // for left aligned ToC layout for large screens
+    @media (min-width: 1720px){
+      max-width: none !important;
+      min-width: 240px !important;
+    }
+  }
+}
+
+
+.toc {
+  top:100px;
+  padding-top:2px;
+  padding-bottom:50px;
+  overflow-x:hidden;
+  overflow-y:auto;
+  z-index:1;
+  h5 {
+    font-size:18px;
+    font-weight:600;
+    padding-bottom:5px;
+    color: #000;
+  }
+  #TableOfContents {
+
+    // all ul's
+    ul {
+      padding:0;
+      margin:0;
+      list-style-type:none;
+      li {
+        a {
+          display: block;
+        }
+      }
+    }
+
+    // open adjacent ul to open link
+    .toc_open ~ ul {
+      display:block !important;
+    }
+
+    // all scrolled link styles
+    .toc_scrolled {
+      color: #555;
+      background:$highlightcolor;
+    }
+
+    // level 1 list
+    &> ul {
+      &> li {
+
+        // level 2 list
+        &> ul {
+          &> li {
+            margin-top: 10px;
+            &.toc_scrolled {
+              background:none;
+              &> a {
+                position: relative;
+                &:before {
+                  content: "";
+                  position: absolute;
+                  background: $highlightcolor;
+                  top: 0;
+                  bottom: 0;
+                  right: 0;
+                  left: 0;
+                }
+              }
+            }
+            a {
+              color: #555;
+              font-size: 18px;
+              line-height: 24px;
+              font-weight:600;
+            }
+
+            // level 3 list
+            &> ul {
+              display: none;
+              & > li {
+                a {
+                  font-weight: 200;
+                  font-size: 15px;
+                }
+
+                // level 4 list
+                &> ul {
+                  display:none !important;
+                }
+              }
+            }
+
+          }
+
+        }
+
+      }
+
+    }
+  }
+}

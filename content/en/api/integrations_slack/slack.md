@@ -7,7 +7,10 @@ external_redirect: /api/#integration-slack
 
 ## Integration Slack
 
-Configure your Datadog-Slack integration directly through Datadog API.
-For more information about the Datadog-Slack integration, see the [integration page][1].
+<mark>The Slack endpoints are not supported in Datadog's client libraries. To request this functionality, contact [Datadog Support][1].</mark>
 
-[1]: /integrations/slack
+Configure your Datadog-Slack integration directly through Datadog API.
+For more information about the Datadog-Slack integration, see the [integration page][2].
+
+[1]: /help
+[2]: /integrations/slack

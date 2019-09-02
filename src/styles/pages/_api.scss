@@ -1,0 +1,180 @@
+// API
+$ddpurple:    #632CA6;
+
+.announcement_banner.open ~ header.scrolled ~ .container-fluid .api-nav {
+  top:94px;
+}
+
+.api {
+  .announcement_banner.open ~ .container-fluid {
+    padding-top: 30px;
+  }
+  .api-content {
+    ul{
+      list-style-type: none;
+      -webkit-padding-start: 12px;
+      ul {
+        -webkit-padding-start: 20px;
+      }
+      li {
+        &:before {
+          content: "–";
+          position: relative;
+          margin-right: 10px;
+          margin-left: -12px;
+          float: left;
+        }
+        p {
+          margin-bottom: 0;
+          & + .highlight {
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+    h2 a {
+      border-bottom:1px solid transparent;
+      &:hover {
+        color:#000;
+        border-bottom: 1px solid #000;
+      }
+    }
+    a {
+      color: #4a4a4a;
+      border-bottom: 1px solid #6c757d;
+      &:hover {
+        color: $ddpurple;
+        border-bottom: 1px solid $ddpurple;
+      }
+    }
+  }
+
+  .api-code {
+
+    code {
+      color:#8DB8E9;
+      border:none;
+    }
+
+    pre {
+      display: block;
+      padding: 9.5px;
+      margin: 0 0 10px;
+      font-size: 13px;
+      line-height: 1.428571429;
+      word-break: break-all;
+      word-wrap: break-word;
+      color: #FFF;
+      background-color: #0F0F0F;
+      border-radius: 4px;
+      font-family: $font-family-monospace;
+      code {
+        padding: 0;
+        font-size: 12px;
+        white-space: pre-wrap;
+        background-color: transparent;
+        border-radius: 0;
+        font-family: $font-family-monospace;
+        color:#efefef;
+        border:none;
+        word-break: break-all;
+        word-wrap: break-word;
+      }
+    }
+    code {
+      padding-top:0;
+      padding-bottom:0;
+      font-size:90%;
+      word-break: break-all;
+      word-wrap: break-word;
+    }
+  }
+
+
+
+  // gross change this..
+  .col-sm-9 > div:nth-child(1) > div:nth-child(1) {
+    padding-top:70px;
+  }
+  .col-sm-9 > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) {
+    padding-top:0;
+  }
+  .api-nav {
+    margin-right: -15px;
+    margin-left: -15px;
+    height:50px;
+    z-index:9;
+    top:64px;
+  }
+  .api-content {
+    padding-top:40px;
+    border-bottom: 1px solid #D6D6D6;
+  }
+  .api-code {
+    background:#1D1D1D;
+    padding-left:0;
+    padding-right:0;
+    color:#FFFFFF;
+    border-bottom: 1px solid #323232;
+    h3 {
+      color:#787878;
+      font-size:18px;
+      font-weight:200;
+    }
+    p {
+      color:#fff;
+    }
+    a {
+      color:#7CAFE9;
+      text-decoration: underline;
+    }
+    &> div {
+      padding:80px 30px 40px 30px;
+    }
+  }
+
+  // hide the code blocks by default
+  .code-block {
+    //display:none;
+  }
+  // show python by default
+  .code-block.code-block-python {
+    //display:block;
+    //visibility: visible;
+  }
+
+
+  .api-code code {
+    background-color:#0F0F0F;
+    //color: rgba(50, 152, 204, 1);
+  }
+  .api-code ul {
+    list-style-type:none;
+    padding:0;
+    li {
+      margin:0 0 0 0;
+    }
+  }
+
+
+  // Breakpoint styles go here...
+
+  @media (max-width: 991px) {
+    .api-content {
+      padding-top: 24px;
+      padding-bottom:24px;
+    }
+    .api-code {
+      &.empty {
+        background:none;
+        border:none;
+      }
+      &> div {
+        padding:24px 15px;
+      }
+    }
+    .codenav {
+      padding-left:0;
+    }
+  }
+}

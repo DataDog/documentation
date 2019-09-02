@@ -6,13 +6,14 @@ aliases:
   - /fr/guides/
   - /fr/faq/
   - /fr/docs/
+  - /fr/guides/overview/
 disable_toc: true
 ---
 # Bienvenue dans la documentation de Datadog !
 
 *Si vous accédez à cette documentation pour la première fois, consultez ci-dessous une vue d'ensemble de Datadog.*
 
-{{< partial name="tile-nav/tile-nav.html" >}}
+{{< tile-nav >}}
 
 Votre suite d'applications regorge de métadonnées inexploitées qui tentent de raconter une histoire : les choses ne fonctionnent pas aussi bien qu'elles le devraient.
 
@@ -39,10 +40,6 @@ Vous pourrez rapidement créer des [screenboards][11] personnalisés qui combine
 Une fois que vos graphiques ont mis en évidence des problèmes potentiels, définissez des conditions d'alerte sur vos métriques à l'aide des [monitors][15]. Par défaut, vous [recevrez des e-mails][16] lorsque les alertes se déclenchent, mais vous pouvez également configurer l'intégration [Slack][17] pour recevoir des notifications spéciales dans l'application.
 
 Lorsque vous êtes conscient d'un problème récurrent, [désactivez les alertes associées][18]. Avant d'arrêter un service afin d'effectuer une maintenance, [planifiez un downtime][18] afin de ne pas recevoir d'alertes inutiles. Lorsque vous ne pouvez pas définir une condition d'alerte intéressante pour un host, un événement, une métrique ou un service, créez un [monitor composite][19].
-
-<div class="col text-center">
-{{< img src="icons/fr-flag-round-50.png" alt="Documentation française" responsive="true" popup="false" href="https://docs.datadoghq.com/fr/" >}}
-</div>
 
 {{< partial name="support/support.html" >}}
 

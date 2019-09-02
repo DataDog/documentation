@@ -34,6 +34,13 @@ kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/maste
 
 ## Create manifest
 Create the following `datadog-agent.yaml` manifest.
+
+Remember to encode your API key using `base64`:
+
+```
+echo -n <DD_API_KEY> | base64
+```
+
 **Note**: If you are using KMS or have high DogStatsD usage, you may need a higher memory limit.
 
 ```yaml
@@ -106,6 +113,7 @@ spec:
                 fieldPath: status.hostIP
           - name: DD_APM_ENABLED
             value: "true"
+        ## Note these are the minimum suggested values for requests and limits. The amount of resources required by the Agent varies depending on the number of checks, integrations, and features enabled.
         resources:
           requests:
             memory: "256Mi"
@@ -203,8 +211,12 @@ To enable [Log collection][10] with your DaemonSet:
             value: "true"
         - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
             value: "true"
+        - name: DD_AC_EXCLUDE 
+            value: "name:datadog-agent"
     (...)
     ```
+    
+Setting `DD_AC_EXCLUDE` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs.
 
 2. Mount the Docker socket or logs directories (`/var/log/pods` and `/var/lib/docker/containers` if docker runtime)
 
@@ -411,7 +423,7 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [8]: /agent/autodiscovery/?tab=agent#how-to-set-it-up
 [9]: /integrations/amazon_ec2/#configuration
 [10]: /logs
-[11]: /agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
+[11]: /agent/autodiscovery/integrations/?tab=kubernetes
 [12]: /tracing/setup
 [13]: /graphing/infrastructure/process/?tab=kubernetes#installation
 [14]: /agent/kubernetes/dogstatsd

@@ -2,6 +2,8 @@
 title: Rehydrating from Archives
 kind: Documentation
 description: "Capture log events from your archives back into Datadog."
+aliases:
+  - /logs/historical-views
 ---
 
 <div class="alert alert-warning">
@@ -46,7 +48,7 @@ Once the content is rehydrated, the historical view is marked as active, and the
 
 Alternatively, teams can find the historical view from the Log Explorer directly from the index selector. When selecting a historical view, a pop-up offers to set the timeframe to one that is relevant to the selected historical view.
 
-{{< img src="logs/archives/log_archives_rehydrate_explorer.gif" alt="Log Explorer" responsive="true" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_rehydrate_explorer.mp4" alt="Log Explorer" video="true" responsive="true" width="75%">}}
 
 ### Deleting historical views
 
@@ -54,7 +56,7 @@ Historical views stay in Datadog until you opt to delete them. You can mark a hi
 
 24 hours later, the historical view is definitively deleted; until that time, the team is able to cancel the deletion.
 
-{{< img src="logs/archives/log_archives_rehydrate_delete.gif" alt="Deleting Historical Views" responsive="true" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt="Deleting Historical Views" video="true" responsive="true" width="75%" >}}
 
 ## Setting up archive rehydrating
 
@@ -75,10 +77,11 @@ In order to rehydrate log events from your archives, Datadog uses the IAM Role i
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "DatadogUploadLogArchives",
+            "Sid": "DatadogUploadAndRehydrateLogArchives",
             "Effect": "Allow",
             "Action": [
-                "s3:PutObject"
+                "s3:PutObject",
+                "s3:GetObject"
             ],
             "Resource": [
                 "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
@@ -86,21 +89,12 @@ In order to rehydrate log events from your archives, Datadog uses the IAM Role i
             ]
         },
         {
-            "Sid": "DatadogReloadLogArchivesListBucket",
+            "Sid": "DatadogRehydrateLogArchivesListBucket",
             "Effect": "Allow",
             "Action": "s3:ListBucket",
             "Resource": [
                 "arn:aws:s3:::<MY_BUCKET_NAME_1>",
                 "arn:aws:s3:::<MY_BUCKET_NAME_2>"
-            ]
-        },
-        {
-            "Sid": "DatadogReloadLogArchivesGetObject",
-            "Effect": "Allow",
-            "Action": "s3:GetObject",
-            "Resource": [
-                "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
-                "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
             ]
         }
     ]

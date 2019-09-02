@@ -56,7 +56,8 @@ gunzip linux-amd64-libdd_opentracing_plugin.so.gz -c > /usr/local/lib/libdd_open
 The NGINX configuration must load the OpenTracing module.
 
 ```nginx
-load_module modules/ngx_http_opentracing_module.so; # Load OpenTracing module
+# Load OpenTracing module
+load_module modules/ngx_http_opentracing_module.so;
 ```
 
 The `http` directive's block enables the OpenTracing module and loads the Datadog tracer:
