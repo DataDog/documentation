@@ -14,35 +14,27 @@ further_reading:
   text: "DogStatsD source code"
 ---
 
-DogStatsD works by sending metrics generated from your application to the
-[agent](https://docs.datadoghq.com/agent/) over a transport protocol. This
-protocol can be either UDP (User Datagram Protocol) or UDS (Unix Domain Socket).
+DogStatsD works by sending metrics generated from your application to the [Agent](https://docs.datadoghq.com/agent/) over a transport protocol. This transport protocol can be either UDP (User Datagram Protocol) or UDS (Unix Domain Socket).
 
-When used to send a large volume of metrics to a single agent if proper measures
-are not taken it is common to end up with the following symptoms:
+When DogStatsD is used to send a large volume of metrics to a single Agent, if proper measures are not taken, it is common to end up with the following symptoms:
 
 - High agent CPU usage
-- (UDP) Dropped datagrams / metrics
+- Dropped datagrams / metrics
 - (UDS) DogStatsD client library returning lots of errors
 
-Most of the time those symptoms can be alleviated by tweaking some configuration
-options described below.
+Most of the time those symptoms can be alleviated by tweaking some configuration options described below.
 
 ## General tips
 
-### Enable buffering on your clients
+### Enable buffering on your client
 
-Some statsd/dogstatsd clients, by default, will send one metric per datagram.
-This adds considerable overhead on the client, the operating system and the agent.
-If your client support buffering multiple metrics in one datagram
+Some StatsD and DogStatsD clients, by default, will send one metric per datagram. This adds considerable overhead on the client, the operating system, and the Agent. If your client supports buffering multiple metrics in one datagram, enabling this option could bring noticeable improvements.
 
 Here are a few examples for supported clients:
 
-Please Refer to your client documentation for additional details.
-
 {{< tabs >}}
 {{% tab "Go" %}}
-Using Datadog's official Golang library [datadog-go](https://github.com/DataDog/datadog-go):
+Use Datadog's official Golang library [datadog-go](https://github.com/DataDog/datadog-go):
 
 ```go
 // Create a buffered dogstatsd client instance with 256 maximum buffered metrics
@@ -57,7 +49,7 @@ client.Gauge("kafka.health", 1, []string{"env:production", "partition:1", "parti
 {{% /tab %}}
 
 {{% tab "Python" %}}
-Using Datadog's official Python library [datadogpy](https://github.com/DataDog/datadogpy):
+Use Datadog's official Python library [datadogpy](https://github.com/DataDog/datadogpy):
 
 ```python
 # Load the dogstats module.
@@ -71,7 +63,7 @@ with DogStatsd(host="127.0.0.1", port=8125, max_buffer_size=25) as batch:
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
-Using Datadog's official Ruby library [dogstatsd-ruby](https://github.com/DataDog/dogstatsd-ruby):
+Use Datadog's official Ruby library [dogstatsd-ruby](https://github.com/DataDog/dogstatsd-ruby):
 
 ```ruby
 require 'datadog/statsd'
@@ -88,7 +80,7 @@ end
 {{% /tab %}}
 
 {{% tab "Java" %}}
-Using Datadog's official Java library [java-dogstatsd-client](https://github.com/DataDog/java-dogstatsd-client):
+Use Datadog's official Java library [java-dogstatsd-client](https://github.com/DataDog/java-dogstatsd-client):
 
 ```java
 // Create a stats instance with a buffer size of 256
@@ -104,7 +96,7 @@ public void foo() {
 {{% /tab %}}
 
 {{% tab "C#" %}}
-Using Datadog's official C# library [dogstatsd-csharp-client](https://github.com/DataDog/dogstatsd-csharp-client):
+Use Datadog's official C# library [dogstatsd-csharp-client](https://github.com/DataDog/dogstatsd-csharp-client):
 
 ```csharp
 // Create the transport
@@ -126,7 +118,7 @@ using (udp)
 {{% /tab %}}
 
 {{% tab "PHP" %}}
-Using Datadog's official PHP library [php-datadogstatsd](https://github.com/DataDog/php-datadogstatsd):
+Use Datadog's official PHP library [php-datadogstatsd](https://github.com/DataDog/php-datadogstatsd):
 
 ```php
 require __DIR__ . '/vendor/autoload.php';
@@ -143,59 +135,50 @@ $client->increment('your.data.point', .5);
 {{% /tab %}}
 {{< /tabs >}}
 
+Please refer to your client documentation for additional details.
+
 ### Sample your metrics
 
-It is possible to reduce the traffic from your DogStatsD client and the Agent by setting a sample
-rate value for your client. A sample rate of 0.5 cuts the number of UDP packets sent in half.
+It is possible to reduce the traffic from your DogStatsD client to the Agent by setting a sample rate value for your client. For example, a sample rate of `0.5` halves the number of UDP packets sent. This solution is a trade-off: you decrease traffic but slightly lose in precision and granularity.
 
-It’s not useful in all cases, but can be interesting if you sample many metrics, and your DogStatsD
-client is not on the same host as the DogStatsD server. This is a trade off: you decrease traffic
-but slightly lose in precision/granularity.
-
-A more in-depth explaination with code examples is available
-[here](https://docs.datadoghq.com/developers/faq/dog-statsd-sample-rate-parameter-explained/).
+For more information, and code examples. see [DogStatsD "Sample Rate" Parameter Explained][1].
 
 ### Use DogStatsD over UDS (Unix Domain Socket)
 
-UDS is an inter-process communication protocol that can
-be [used to transport dogstatsd payloads](https://docs.datadoghq.com/developers/dogstatsd/unix_socket/).
-It has very little overhead when compared to UDP and will lower the
-general overhead of dogstatsd on your system.
+UDS is an inter-process communication protocol used to [transport DogStatsD payloads][2]. It has very little overhead when compared to UDP and lowers the general footprint of DogStatsD on your system.
 
 ## Operating System kernel buffers
 
-Most OSs will add incoming UDP and UDS datagrams containing your metrics to a
-buffer with a maximum size. Once this size is reached, datagrams containing your
-metrics will start getting dropped.
+Most OSs will add incoming UDP and UDS datagrams containing your metrics to a buffer with a maximum size. Once this size is reached, datagrams containing your metrics will start getting dropped.
 
-It is possible to adjust those values to give the agent more time to process
-incoming metrics.
+It is possible to adjust those values to give the Agent more time to process incoming metrics.
 
 ### Over UDP (User Datagram Protocol)
 
-### Linux
+#### Linux
 
-On most linux distribution the max size of is set to 212992 by default, or
-208 KiB. This can be confirmed using the following commands:
+On most Linux distributions, the maximum size of the kernel buffer is set to 212992 by default (208 KiB). This can be confirmed using the following commands:
 
 ```bash
 $ sysctl net.core.rmem_max
 net.core.rmem_max = 212992
 ```
 
-To set the maximum size of the dogstatsd socket buffer to 25MiB:
+To set the maximum size of the DogStatsD socket buffer to 25MiB:
 
 ```bash
 $ sysctl -w net.core.rmem_max=26214400
 ```
 
-Add the following to `/et/sysctl.conf` to make this change permanent:
+Add the following to `/etc/sysctl.conf` to make this change permanent:
 ```
 net.core.rmem_max = 26214400
 ```
 
-Set the agent `dogstatsd_so_rcvbuf` confing option to the same number in `datadog.yaml`:
+Set the Agent `dogstatsd_so_rcvbuf` config option to the same number in `datadog.yaml`:
 ```
 dogstatsd_so_rcvbuf: 26214400
 ```
 
+[1]: /developers/faq/dog-statsd-sample-rate-parameter-explained/
+[2]: /developers/dogstatsd/unix_socket/
