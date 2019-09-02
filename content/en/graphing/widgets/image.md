@@ -13,7 +13,7 @@ further_reading:
 
 The image widget allows you to embed an image on your dashboard. An image can be a PNG, JPG, or animated GIF:
 
-{{< img src="graphing/widgets/image/image.gif" alt="Image" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/image/image.mp4" alt="Image" video="true" responsive="true" width="80%" >}}
 
 ## Setup
 

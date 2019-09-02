@@ -309,7 +309,7 @@ dd_trace("CustomDriver", "doWork", function (...$args) {
         // Inform the tracer that there was an exception thrown
         $span->setError($e);
         // Bubble up the exception
-        throw $e
+        throw $e;
     } finally {
         // Close the span
         $span->finish();

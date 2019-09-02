@@ -398,19 +398,23 @@ main:
     parent: "graphing"
     identifier: "graphing_metrics"
     weight: 3
+  - name: "Introduction"
+    url: "graphing/metrics/introduction/"
+    parent: "graphing_metrics"
+    weight: 301
   - name: "Explorer"
     url: "graphing/metrics/explorer/"
     parent: "graphing_metrics"
-    weight: 301
+    weight: 302
   - name: "Summary"
     url: "graphing/metrics/summary/"
     parent: "graphing_metrics"
-    weight: 302
+    weight: 303
   - name: "Distributions"
     url: "graphing/metrics/distributions/"
     parent: "graphing_metrics"
     identifier: "graphing_metrics_distributions"
-    weight: 303
+    weight: 304
 
   - name: "Notebooks"
     url: "graphing/notebooks/"
@@ -741,7 +745,7 @@ main:
     url: "tracing/advanced/connect_logs_and_traces/"
     parent: "tracing_advanced"
     weight: 301
-  - name: "Adding Metadata to Spans"
+  - name: "Adding Span Tags"
     url: "tracing/advanced/adding_metadata_to_spans/"
     parent: "tracing_advanced"
     weight: 302
@@ -764,7 +768,7 @@ main:
 
   ## TACING - Using the APM UI
 
-  - name: "Use the APM UI"
+  - name: "APM Glossary"
     url: "tracing/visualization/"
     parent: "tracing"
     identifier: "tracing_vis"
@@ -813,18 +817,6 @@ main:
     url: "monitors/monitor_types/trace_analytics"
     parent: "tracing_search_analytics"
     weight: 504
-
-  - name: "Trace API"
-    url: "api/#tracing"
-    identifier: "tracing api"
-    parent: "tracing"
-    weight: 6
-
-  - name: "Community Libraries"
-    url: "developers/libraries/#apm-tracing-client-libraries/"
-    identifier: "community_library"
-    parent: "tracing"
-    weight: 7
 
   - name: "Guides"
     url: "tracing/guide/"

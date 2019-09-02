@@ -7,7 +7,7 @@ external_redirect: /api/#mettre-a-jour-un-utilisateur
 
 
 ##### Signature
-`PUT /v1/user/<USER_ID>`
+`PUT /v1/users/<ID_UTILISATEUR>`
 ##### Exemple de requête
 {{< code-snippets basename="api-user-update" >}}
 ##### Exemple de réponse
