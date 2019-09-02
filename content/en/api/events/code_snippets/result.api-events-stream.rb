@@ -8,7 +8,6 @@
             "host" => null,
             "id" => 1375910067732769979,
             "is_aggregate" => false,
-            "priority" => "normal",
             "resource" => "/api/v1/events/1375910067732769979",
             "source" => "My Apps",
             "tags" => [
@@ -26,7 +25,6 @@
             "host" => null,
             "id" => 1375909614428331251,
             "is_aggregate" => false,
-            "priority" => "normal",
             "resource" => "/api/v1/events/1375909614428331251",
             "source" => "My Apps",
             "tags" => [

@@ -29,7 +29,6 @@ disable_toc: true
 
 * [Use the webhooks integration to create a Trello card][9]
 * [How to post AppDynamics events to Datadog][10]
-* [I'm receiving a 202 but not seeing data][11]
 * [Data aggregation with DogStatsD/Threadstats][12]
 * [Is there an alternative to DogStatsD and the api to submit metrics? Threadstats][13]
 
@@ -52,7 +51,6 @@ disable_toc: true
 [8]: /developers/faq/reduce-submission-rate
 [9]: /developers/faq/use-our-webhook-integration-to-create-a-trello-card
 [10]: /developers/faq/how-to-post-appdynamics-events-to-datadog
-[11]: /developers/faq/i-m-receiving-a-202-but-not-seeing-data
 [12]: /developers/faq/data-aggregation-with-dogstatsd-threadstats
 [13]: /developers/faq/is-there-an-alternative-to-dogstatsd-and-the-api-to-submit-metrics-threadstats
 [14]: /developers/faq/omnios-and-possibly-smartos-openindiana-nexenta-install-from-source-by-tweaking-the-agent-install-script

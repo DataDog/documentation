@@ -14,7 +14,6 @@ start_time = end_time - 100
 api.Event.query(
     start=start_time,
     end=end_time,
-    priority="normal",
     tags=["-env:dev,application:web"],
     unaggregated=True
 )

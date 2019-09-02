@@ -21,7 +21,6 @@ Narrow your search by filtering on certain event properties. See the list of fil
 | `tags:security-group:sg-123 AND role:common-node` | Show events tagged with `#security-group:sg-123` AND `#role:common-node`.                |
 | `hosts:i-0ade23e6,db.myapp.com`                   | Show events from i-0ade23e6 OR db.myapp.com.                                             |
 | `status:error`                                    | Show events with error status. (supports: **error**, **warning**, **success**)           |
-| `priority:low`                                    | Show only low-priority events. (supports: **low** or **normal**. defaults to **all**)    |
 | `cloud_provider:* NOT "azure"`                    | Show all cloud providers except the ones tagged with "azure"                             |
 
 Full text search works on all keywords provided in the search query after applying any filters. Full text search looks inside the event text, title, tags, users who commented on the event, host names, and devices tied to the event.
@@ -124,7 +123,6 @@ To use Markdown in the event text, start the text block with `%%% \n` and end th
 {
       "title": "Did you hear the news today?",
       "text": "%%% \n [an example link](http://catchpoint.com/session_id \"Title\") \n %%%",
-      "priority": "normal",
       "tags": ["environment:test"],
       "alert_type": "info"
 }

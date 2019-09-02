@@ -47,11 +47,10 @@ To learn more about the Host Map, visit the [Host Map dedicated documentation pa
 
 * Any event in the stream can be commented on.
 * Can be used for distributed [teams][10] and maintaining the focus of an investigation.
-* You can [filter][11] by `user`, `source`, `tag`, `host`, `status`, `priority`, and `incident`.
+* You can [filter][11] by `user`, `source`, `tag`, `host`, `status`, and `incident`.
 
 For each incident, users can:
 
-* Increase/decrease priority
 * Comment
 * See similar incidents
 * [@ notify team members][12], who receive an email

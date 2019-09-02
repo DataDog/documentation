@@ -6,7 +6,7 @@ external_redirect: /api/#post-an-event
 ---
 
 ## Post an event
-This endpoint allows you to post events to the stream. Tag them, set priority and event aggregate them with other events.
+This endpoint allows you to post events to the stream, tag them, and aggregate them with other events.
 
 ##### ARGUMENTS
 * **`title`** [*required*]:
@@ -18,8 +18,6 @@ This endpoint allows you to post events to the stream. Tag them, set priority an
     Use `msg_text` with [the Datadog Ruby library][1]
 * **`date_happened`** [*optional*, *default* = **now**]:
     POSIX timestamp of the event. Must be sent as an integer (i.e. no quotes). *Limited to events no older than 1 year, 24 days (389 days)*
-* **`priority`** [*optional*, *default* = **normal**]:
-    The priority of the event: **normal** or **low**.
 * **`host`** [*optional*, *default*=**None**]:
     Host name to associate with the event. Any tags associated with the host are also applied to this event.
 * **`tags`** [*optional*, *default*=**None**]:

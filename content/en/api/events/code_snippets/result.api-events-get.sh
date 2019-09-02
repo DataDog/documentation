@@ -6,7 +6,6 @@
     "host": null,
     "id": 1377281704830403917,
     "payload": "{}",
-    "priority": "normal",
     "resource": "/api/v1/events/1377281704830403917",
     "tags": [
       "environment:test"

@@ -63,13 +63,12 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     ##### Event Alert Query
 
-    `events('sources:nagios status:error,warning priority:normal tags: "string query"').rollup("count").last("1h")"`
+    `events('sources:nagios status:error,warning tags: "string query"').rollup("count").last("1h")"`
 
     *  **`event`**, the event query string:
     *   **`string_query`** free text query to match against event title and text.
     *   **`sources`** event sources (comma-separated). [Complete list of source attribute values][4]
     *   **`status`** event statuses (comma-separated). Valid options: error, warn, and info.
-    *   **`priority`** event priorities (comma-separated). Valid options: low, normal, all.
     *   **`host`** event reporting host (comma-separated).
     *   **`tags`** event tags (comma-separated).
     *   **`excluded_tags`** exluded event tags (comma-separated).

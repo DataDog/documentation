@@ -9,7 +9,6 @@
             "text" => "And let me tell you all about it here!",
             "tags" => ["application:web", "version:1"],
             "id" => 1375909614428331251,
-            "priority" => "normal",
             "host" => nil,
             "device_name" => nil,
             "payload" => "{}"

@@ -2,7 +2,6 @@
     "202", {
         "status" => "ok",
         "event" => {
-            "priority" => "normal",
             "date_happened" => 1346452418,
             "title" => "Title",
             "url" =>
