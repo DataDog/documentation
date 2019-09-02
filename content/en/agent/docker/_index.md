@@ -79,7 +79,7 @@ Optional collection Agents are disabled by default for security or performance r
 |----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_APM_ENABLED`           | Enable [trace collection][7] with the trace Agent.                                                                                                        |
 | `DD_LOGS_ENABLED`          | Enable [log collection][8] with the logs Agent.                                                                                                            |
-| `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][9] with the process Agent. The [live container view][10] is already enabled by default if the Docker socket is available. |
+| `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][9] with the process Agent. The [live container view][10] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][9] and the [live container view][10] are disabled.|
 
 ##### DogStatsD (custom metrics)
 
