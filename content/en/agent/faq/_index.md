@@ -18,6 +18,7 @@ aliases:
 * [How do I use Kubernetes secrets to set my API key?][9]
 * [Datadog Windows Agent user][10]
 * [How do I run the kubernetes_state check as a cluster check?][11]
+* [RPM GPG Key Rotation for Agent v6][12]
 
 [1]: /agent/faq/host-metrics-with-the-container-agent
 [2]: /agent/faq/downgrade-datadog-agent
@@ -30,3 +31,4 @@ aliases:
 [9]: /agent/faq/kubernetes-secrets
 [10]: /agent/faq/windows-agent-ddagent-user
 [11]: /agent/faq/kubernetes-state-cluster-check
+[12]: /agent/faq/rpm-gpg-key-rotation-agent-6
