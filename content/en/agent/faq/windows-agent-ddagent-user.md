@@ -32,7 +32,7 @@ To support this environment, the Agent installer requires that the administrator
 	Msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME> DDAGENTUSER_PASSWORD=<PASSWORD>
 ```
 
-For installs on a domain controller, the username and password supplied should **never** be an existing "real" (human) user. The installation process changes the rights of the user and they are denied login access.
+For installs on a domain controller, the `<USERNAME>` and `<PASSWORD>` supplied should **never** be an existing "real" (human) user. The installation process changes the rights of the user and they are denied login access.
 
 **Note**: These options are honored even in a non-domain environment, if the user wishes to supply a username/password to use rather than have the installer generate one.
 
