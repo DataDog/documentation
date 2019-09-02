@@ -22,6 +22,8 @@ further_reading:
 
 ## Getting Started
 
+<div class="alert alert-info">If you already have a Datadog account you can find step-by-step instructions in our in-app guides for <a href="https://app.datadoghq.com/apm/docs?architecture=host-based&language=net" target=_blank> host-based</a> and <a href="https://app.datadoghq.com/apm/docs?architecture=container-based&language=net" target=_blank>container-based</a> set ups.</div>
+
 To begin tracing applications written in any language, first [install and configure the Datadog Agent][1]. The .NET Tracer runs in-process to instrument your applications and sends traces to the Agent.
 
 **Note**: The .NET Tracer supports all .NET-based languages (C#, VB.Net, etc).
@@ -32,7 +34,7 @@ Automatic instrumentation uses the Profiling API provided by .NET Framework and 
 
 Automatic instrumentation captures:
 
-- Method execution time
+- Execution time of instrumented libraries
 - Relevant trace data, such as URL and status response codes for web requests or SQL queries for database access
 - Unhandled exceptions, including stacktraces if available
 - A total count of traces (e.g. web requests) flowing through the system
@@ -273,9 +275,9 @@ The .NET Tracer supports automatic instrumentation on the following runtimes:
 | .NET Framework         | 4.5+     | Windows         |
 | .NET Core <sup>1</sup> | 2.0+     | Windows, Linux  |
 
-<sup>1</sup> There is an issue in .NET Core versions 2.1.0, 2.1.1, and 2.1.2 that can prevent profilers from working correctly. This issue is fixed in .NET Core 2.1.3. See [this GitHub issue][5] for more details.
+<sup>1</sup> There is an issue in .NET Core versions 2.1.0, 2.1.1, and 2.1.2 that can prevent profilers from working correctly. This issue is fixed in .NET Core 2.1.3. See [this GitHub issue][2] for more details.
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
 
 ### Integrations
 
@@ -298,17 +300,17 @@ The .NET Tracer can instrument the following libraries automatically:
 
 Notes:
 
-<sup>1</sup> The `AspNet` integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. To enable the `AspNet` integration, you must add the [`Datadog.Trace.ClrProfiler.Managed`][7] NuGet package to your application.
+<sup>1</sup> The `AspNet` integration adds instrumentation to any ASP.NET application based on `System.Web.HttpApplication`, which can include applications developed with Web Forms, MVC, Web API, and other web frameworks. To enable the `AspNet` integration, you must add the [`Datadog.Trace.ClrProfiler.Managed`][4] NuGet package to your application.
 
 <sup>2</sup> The ADO.NET integration tries to instrument **all** ADO.NET providers. Datadog tested SQL Server (`System.Data.SqlClient`) and PostgreSQL (`Npgsql`). Other providers (MySQL, SQLite, Oracle) are untested but should work.
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
 
 ## Manual Instrumentation
 
-To manually instrument your code, add the `Datadog.Trace` [NuGet package][8] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
+To manually instrument your code, add the `Datadog.Trace` [NuGet package][5] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][9].
+For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][6].
 
 ### Runtime Compatibility
 
@@ -320,7 +322,7 @@ Manual instrumentation is supported on .NET Framework 4.5+ on Windows and on any
 | .NET Core      | 2.0+     | Windows, Linux, macOS |
 | Mono           | 5.4+     | Windows, Linux, macOS |
 
-For more details on supported platforms, see the [.NET Standard documentation][10].
+For more details on supported platforms, see the [.NET Standard documentation][7].
 
 ## Configuration
 
@@ -432,7 +434,7 @@ Setting Name          | Property Name          | Description                    
 `DD_TRACE_AGENT_URL`  | `AgentUri`             | Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Default value is `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.                                         |
 `DD_AGENT_HOST`       | N/A                    | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Default is value `localhost`.                                       |
 `DD_TRACE_AGENT_PORT` | N/A                    | Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Default value is `8126`.                                                     |
-`DD_ENV`              | `Environment`          | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][2] for more details about the `env` tag.                                                              |
+`DD_ENV`              | `Environment`          | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][8] for more details about the `env` tag.                                                              |
 `DD_SERVICE_NAME`     | `ServiceName`          | If specified, sets the default service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). |
 `DD_LOGS_INJECTION`   | `LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                         |
 
@@ -443,10 +445,10 @@ Setting Name                 | Property Name              | Description         
 `DD_TRACE_ENABLED`           | `TraceEnabled`             | Enables or disables all automatic instrumentation. Setting the environment variable to `false` completely disables the CLR profiler. For other configuration methods, the CLR profiler is still loaded, but traces will not be generated. Valid values are: `true` (default) or `false`.     |
 `DD_TRACE_DEBUG`             | N/A                        | Enables or disables the CLR profiler's debug mode. Valid values are: `true` or `false` (default).                                                                                                                                                                                            |
 `DD_TRACE_LOG_PATH`          | N/A                        | Sets the path for the CLR profiler's log file.<br/><br/>Windows default: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br/><br/>Linux default: `/var/log/datadog/dotnet-profiler.log`                                                                                         |
-`DD_DISABLED_INTEGRATIONS`   | `DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][4] section above.                           |
+`DD_DISABLED_INTEGRATIONS`   | `DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][9] section above.                           |
 `DD_TRACE_ANALYTICS_ENABLED` | `AnalyticsEnabled`         | Shorthand that enables default Trace Search and Analytics settings for web framework integrations. Valid values are: `true` or `false` (default).                                                                                                                                            |
 
-The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. The first column, _Setting Name_, indicates the variable name used when using environment variables or configuration files. The second column, _Propery Name_, indicates the name of the equivalent propery on the `IntegrationSettings` class when changing settings in the code. Access these properties through the `TracerSettings.Integrations[string integrationName]` indexer. Integration names are listed in the [Integrations][4] section above.
+The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. The first column, _Setting Name_, indicates the variable name used when using environment variables or configuration files. The second column, _Propery Name_, indicates the name of the equivalent propery on the `IntegrationSettings` class when changing settings in the code. Access these properties through the `TracerSettings.Integrations[string integrationName]` indexer. Integration names are listed in the [Integrations][9] section above.
 
 Setting Name                             | Property Name              | Description                                                                                                                        |
 ---------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
@@ -459,13 +461,11 @@ Setting Name                             | Property Name              | Descript
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/apm
-[2]: /tracing/advanced/setting_primary_tags_to_scope/#environment
-[3]: #getting-started
-[4]: #integrations
-[5]: https://github.com/dotnet/coreclr/issues/18448
-[6]: /help
-[7]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
-[8]: https://www.nuget.org/packages/Datadog.Trace
-[9]: /tracing/advanced/manual_instrumentation/?tab=net
-[10]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
-[11]: #configuration
+[2]: https://github.com/dotnet/coreclr/issues/18448
+[3]: /help
+[4]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
+[5]: https://www.nuget.org/packages/Datadog.Trace
+[6]: /tracing/advanced/manual_instrumentation/?tab=net
+[7]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
+[8]: /tracing/advanced/setting_primary_tags_to_scope/#environment
+[9]: #integrations

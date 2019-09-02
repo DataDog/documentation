@@ -21,7 +21,7 @@ further_reading:
 
 All of the search parameters are contained within the URL. You can share your view by sharing the URL.
 
-{{< img src="logs/explorer/search_your_logs.gif" alt="Search your logs" responsive="true" >}}
+{{< img src="logs/explorer/search_your_logs.mp4" alt="Search your logs" video="true" responsive="true" >}}
 
 ## Search syntax
 

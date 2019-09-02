@@ -204,7 +204,7 @@ There are three potentially queryable values for the `city` tag: {Rochester, New
 
 The total number of custom metrics emitted from the `age` distribution metric WITH percentile aggregations is:
 
-{{< img src="/developers/metrics/custom_metrics/38-timeseries.png" alt="[4 x (2)] + [5 x ((3) x (2))] = 38 timeseries." responsive="true" style="width:70%;">}}
+{{< img src="developers/metrics/custom_metrics/38-timeseries.png" alt="[4 x (2)] + [5 x ((3) x (2))] = 38 timeseries." responsive="true" style="width:70%;">}}
 
 ## Overhead
 
@@ -224,4 +224,4 @@ The full payload is approximately \~ 100 bytes. However, with the DogStatsD API,
 [5]: /api/#rate-limiting
 [6]: https://app.datadoghq.com/account/usage/hourly
 [7]: https://app.datadoghq.com/metric/summary
-[8]: https://docs.datadoghq.com/developers/metrics/gauges/
+[8]: https://docs.datadoghq.com/developers/metrics/gauges
