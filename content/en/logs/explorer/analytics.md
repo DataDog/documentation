@@ -122,8 +122,13 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 
 Visualize the top values from a [facet][1] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update search query or drill through logs corresponding to either dimension.
 
-The following Table Log Analytics shows:
-The evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IP** and over the last 15 minutes.
+* When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
+* When there are multiple measures, the top or bottom list is determined according to the first measure.
+* The subtotal may differ from the actual sum of values in a group, since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
+
+ **Note**: A table visualisation used for one single measure and one single dimension is the same as a toplist, just with a different display.
+
+ The following Table Log Analytics shows the evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IPs**, and over the last 15 minutes:
 
 {{< img src="logs/explorer/analytics/logs_table_example.png" alt="table example" responsive="true" style="width:90%;">}}
 
