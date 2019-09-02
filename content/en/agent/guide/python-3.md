@@ -13,13 +13,16 @@ To provide flexibility in allowing code to run multiple on versions of the Agent
 
 Starting with v6.14.0, the Agent integrates both Python 2 and Python 3 runtimes. This means that custom Agent Checks can be run either with Python 2 or Python 3, depending on the Agent configuration.
 
-By default, the Agent v6 uses the Python 2 runtime. To switch to the Python 3 runtime, set the `python_version` configuration option [in the `datadog.yaml` configuration file](/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file):
+By default, the Agent v6 uses the Python 2 runtime. 
+To switch to the Python 3 runtime:
+
+1. Set the `python_version` configuration option [in the `datadog.yaml` configuration file](/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file):
 
 ```yaml
 python_version: 3
 ```
 
-and restart the Agent.
+2. [Restart the Agent](/agent/guide/agent-commands/?tab=agentv6#restart-the-agent).
 
 Alternatively, the `DD_PYTHON_VERSION` environment variable can be set to `2` or `3` to choose which Python runtime is used. If it is set, the `python_version` option in `datadog.yaml` will be ignored.
 
