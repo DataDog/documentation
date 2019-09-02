@@ -34,7 +34,7 @@ Automatic instrumentation uses the Profiling API provided by .NET Framework and 
 
 Automatic instrumentation captures:
 
-- Method execution time
+- Execution time of instrumented libraries
 - Relevant trace data, such as URL and status response codes for web requests or SQL queries for database access
 - Unhandled exceptions, including stacktraces if available
 - A total count of traces (e.g. web requests) flowing through the system

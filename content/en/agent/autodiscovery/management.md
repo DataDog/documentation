@@ -98,13 +98,13 @@ ac_include: [name:<NAME>]
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
-To remove a given Docker container with the image `<IMAGE_NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
+To include a given Docker container with the image `<IMAGE_NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
 
 ```shell
 DD_AC_INCLUDE = "image:<IMAGE_NAME>"
 ```
 
-To remove a given Docker container with the name `<NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
+To include a given Docker container with the name `<NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
 
 ```shell
 DD_AC_INCLUDE = "name:<NAME>"
