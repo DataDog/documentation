@@ -181,4 +181,4 @@ Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live 
 [9]: /integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [10]: https://app.datadoghq.com/account/settings#api
 [11]: https://app.datadoghq.com/logs/livetail
-[12]: /logs/logging_without_limits/#exclusion-filters
+[12]: /logs/indexes/#exclusion-filters
