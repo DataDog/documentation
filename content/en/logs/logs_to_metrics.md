@@ -36,7 +36,7 @@ To generate a new log-based metric, go to the [Configuration page][4] of your Da
 
 1. **Input a query to filter the log stream**: The query syntax is the same as for the [Log Explorer Search][6]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation.
 2. **Select the field you would like to track**: Select `*` to generate a count of all logs matching your query or enter a log attribute to aggregate a numeric value into `count`, `min`, `max`, `sum`, and `avg` metrics.
-3. **Add dimensions to `group by`**: Add attributes or tag key to apply to the generated log-based metric to transform them into [Tags][3] following the `<KEY>:<VALUE>` format. Log-based metrics are considered as [custom metrics][7]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
+3. **Add dimensions to `group by`**: Select log attributes or tag keys to apply to the generated log-based metric to transform them into [Tags][3] following the `<KEY>:<VALUE>` format. Log-based metrics are considered [custom metrics][7]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
 4. **Name your metric**: Log-based metric names must follow the [naming metric convention][8].
 
 **Note**: Data points for Log-based metrics are generated at one minute intervals.
