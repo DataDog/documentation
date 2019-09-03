@@ -110,7 +110,25 @@ public class DogStatsdClient {
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-TO DO
+```csharp
+using StatsdClient;
+
+public class DogStatsdClient
+{
+    public static void Main()
+    {
+        var dogstatsdConfig = new StatsdConfig
+        {
+            StatsdServerName = "127.0.0.1",
+            StatsdPort = 8125,
+        };
+
+        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
+
+        DogStatsd.ServiceCheck("Service.check.name", 0, message: "Application is OK." , tags: new[] { "env:dev" });
+    }
+}
+```
 
 {{% /tab %}}
 {{% tab "PHP" %}}

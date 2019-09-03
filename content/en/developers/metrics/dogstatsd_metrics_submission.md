@@ -89,7 +89,7 @@ end
 {{% /tab %}}
 {{% tab "Go" %}}
 
-After having [setup DogStatsD on your host][1] run the following code to submit a DogStatsD `COUNT` metric type:
+After having [setup DogStatsD on your host][1] run the following code to submit DogStatsD `COUNT` metrics type:
 
 ```go
 package main
@@ -118,7 +118,7 @@ func main() {
 {{% /tab %}}
 {{% tab "Java" %}}
 
-After having [setup DogStatsD on your host][1] run the following code to submit a DogStatsD `COUNT` metric type:
+After having [setup DogStatsD on your host][1] run the following code to submit DogStatsD `COUNT` metrics:
 
 ```java
 import com.timgroup.statsd.NonBlockingStatsDClient;
@@ -144,7 +144,36 @@ public class DogStatsdClient {
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-After having [setup DogStatsD on your host][1] run the following code to submit a DogStatsD `COUNT` metric type:
+After having [setup DogStatsD on your host][1] run the following code to submit DogStatsD `COUNT` metrics:
+
+```csharp
+using StatsdClient;
+using System;
+
+public class DogStatsdClient
+{
+    public static void Main()
+    {
+        var dogstatsdConfig = new StatsdConfig
+        {
+            StatsdServerName = "127.0.0.1",
+            StatsdPort = 8125,
+        };
+
+        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
+
+        var random = new Random(0);
+
+        for (int i = 0; i < 10; i++)
+        {
+            DogStatsd.Increment("example_metric.increment", tags: new[] {"environment:dev"});
+            DogStatsd.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
+            DogStatsd.Counter("example_metric.count", 2, tags: new[] {"environment:dev"});
+            System.Threading.Thread.Sleep(random.Next(100000));
+        }
+    }
+}
+```
 
 [1]: /developers/dogstatsd/?tab=net#setup
 {{% /tab %}}
@@ -293,6 +322,33 @@ public class DogStatsdClient {
 {{% /tab %}}
 {{% tab ".NET" %}}
 
+```csharp
+using StatsdClient;
+using System;
+
+public class DogStatsdClient
+{
+    public static void Main()
+    {
+        var dogstatsdConfig = new StatsdConfig
+        {
+            StatsdServerName = "127.0.0.1",
+            StatsdPort = 8125,
+        };
+
+        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
+
+        var random = new Random(0);
+
+        for (int i = 0; i < 10; i++)
+        {
+            DogStatsd.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
+            System.Threading.Thread.Sleep(100000);
+        }
+    }
+}
+```
+
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -408,6 +464,33 @@ func main() {
 
 {{% /tab %}}
 {{% tab ".NET" %}}
+
+```csharp
+using StatsdClient;
+using System;
+
+public class DogStatsdClient
+{
+    public static void Main()
+    {
+        var dogstatsdConfig = new StatsdConfig
+        {
+            StatsdServerName = "127.0.0.1",
+            StatsdPort = 8125,
+        };
+
+        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
+
+        var random = new Random(0);
+
+        for (int i = 0; i < 10; i++)
+        {
+            DogStatsd.Set("example_metric.set", i, tags: new[] {"environment:dev"});
+            System.Threading.Thread.Sleep(random.Next(100000));
+        }
+    }
+}
+```
 
 {{% /tab %}}
 {{% tab "PHP" %}}
@@ -541,6 +624,33 @@ public class DogStatsdClient {
 
 {{% /tab %}}
 {{% tab ".NET" %}}
+
+```csharp
+using StatsdClient;
+using System;
+
+public class DogStatsdClient
+{
+    public static void Main()
+    {
+        var dogstatsdConfig = new StatsdConfig
+        {
+            StatsdServerName = "127.0.0.1",
+            StatsdPort = 8125,
+        };
+
+        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
+
+        var random = new Random(0);
+
+        for (int i = 0; i < 10; i++)
+        {
+            DogStatsd.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"});
+            System.Threading.Thread.Sleep(2000);
+        }
+    }
+}
+```
 
 {{% /tab %}}
 {{% tab "PHP" %}}
@@ -767,7 +877,7 @@ public class DogStatsdClient {
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
         for (int i = 0; i < 10; i++) {
-            Statsd.recordDistributionValue("example_metric.gauge", new Random().nextInt(20), ["environment:dev"]);
+            Statsd.recordDistributionValue("example_metric.distribution", new Random().nextInt(20), ["environment:dev"]);
             Thread.sleep(2000);
         }
     }
@@ -776,6 +886,33 @@ public class DogStatsdClient {
 
 {{% /tab %}}
 {{% tab ".NET" %}}
+
+```csharp
+using StatsdClient;
+using System;
+
+public class DogStatsdClient
+{
+    public static void Main()
+    {
+        var dogstatsdConfig = new StatsdConfig
+        {
+            StatsdServerName = "127.0.0.1",
+            StatsdPort = 8125,
+        };
+
+        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
+
+        var random = new Random(0);
+
+        for (int i = 0; i < 10; i++)
+        {
+            DogStatsd.Distribution("example_metric.distribution", random.Next(20), tags: new[] {"environment:dev"});
+            System.Threading.Thread.Sleep(2000);
+        }
+    }
+}
+```
 
 {{% /tab %}}
 {{% tab "PHP" %}}
@@ -856,6 +993,10 @@ Statsd.incrementCounter("example_metric.increment", sampleRate=0.5);
 {{% /tab %}}
 {{% tab ".NET" %}}
 
+```csharp
+DogStatsd.Increment("example_metric.increment", sampleRate: 0.5);
+```
+
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -906,6 +1047,10 @@ Statsd.incrementCounter("example_metric.increment", ["environment:dev"]);
 
 {{% /tab %}}
 {{% tab ".NET" %}}
+
+```csharp
+DogStatsd.Increment("example_metric.increment", tags: new[] {"environment:dev"})
+```
 
 {{% /tab %}}
 {{% tab "PHP" %}}

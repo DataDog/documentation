@@ -112,9 +112,24 @@ public class DogStatsdClient {
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-
 ```csharp
-DogStatsd.Event(ex.GetType().FullName, ex.Message, alertType: "error", tags: new[] { "env:dev" });
+using StatsdClient;
+
+public class DogStatsdClient
+{
+    public static void Main()
+    {
+        var dogstatsdConfig = new StatsdConfig
+        {
+            StatsdServerName = "127.0.0.1",
+            StatsdPort = 8125,
+        };
+
+        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
+
+        DogStatsd.Event("An error occured", "Error message", alertType: "error", tags: new[] { "env:dev" });
+    }
+}
 ```
 
 {{% /tab %}}
