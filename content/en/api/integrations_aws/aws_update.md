@@ -1,36 +1,36 @@
 ---
-title: Create an AWS integration
+title: Update an AWS integration
 type: apicontent
-order: 15.02
-external_redirect: /api/#create-an-aws-integration
+order: 15.03
+external_redirect: /api/#update-an-aws-integration
 ---
 
-## Create an AWS integration
+## Update an AWS integration
 
-Create a Datadog-Amazon Web Services integration.
+Update a Datadog-Amazon Web Services integration.
 
-**Note**: Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.
+**Note**: Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.
 
 ##### ARGUMENTS
 
 * **`account_id`** [*required*]:
 
-    Your AWS Account ID without dashes.
+    Your AWS Account ID without dashes. It needs to be passed as query parameter.
     [Consult the Datadog AWS integration to learn more][1] about your AWS account ID.
+
+* **`role_name`** [*required*]:
+
+    Your Datadog role delegation name. It needs to be passed as query parameter.
+    For more information about your AWS account Role name, [see the Datadog AWS integration configuration info][2].
 
 * **`access_key_id`** [*optional*, *default*=**None**]:
 
     If your AWS account is a GovCloud or China account, enter the corresponding Access Key ID.
 
-* **`role_name`** [*required*]:
-
-    Your Datadog role delegation name.
-    For more information about you AWS account Role name, [see the Datadog AWS integration configuration info][2].
-
 * **`filter_tags`** [*optional*, *default*=**None**]:
 
     The array of EC2 tags (in the form `key:value`) defines a filter that Datadog uses when collecting metrics from EC2. Wildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used.
-    Only hosts that match one of the defined tags will be imported into Datadog. The rest will be ignored. Host matching a given tag can also be excluded by adding `!` before the tag.
+    Only hosts that match one of the defined tags are imported into Datadog. The rest are ignored. Host matching a given tag can also be excluded by adding `!` before the tag.
     e.x. `env:production,instance-type:c1.*,!region:us-east-1`
     For more information on EC2 tagging, see the [AWS tagging documentation][3].
 
