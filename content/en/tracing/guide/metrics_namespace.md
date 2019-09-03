@@ -47,8 +47,7 @@ Trace metrics come with a variety of tags. The possible tags are:
 * `sublayer_service`
 * `http.status_code`
 * `http.status_class`
-* Datadog Agent tags (including host tag)
-* The second primary tag
+* Datadog Agent tags (including the host and second primary tag)
 
 **Note**: Tags are attached based on the specific metric. See the metrics table below.
 
