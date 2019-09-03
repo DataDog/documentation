@@ -17,7 +17,7 @@ further_reading:
   text: "All guides"
 ---
 
-{{< img src="tracing/guide/slowest_request_daily/slowest_trace_1.gif" alt="Identifying the slowest trace and finding the Host metrics for it" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/slowest_request_daily/slowest_trace_1.mp4" video="true" alt="Identifying the slowest trace and finding the Host metrics for it" responsive="true" style="width:90%;">}}
 
 With Datadog APM, you can easily investigate the performance of your endpoints, identify slow requests, and investigate the root cause of latency issues. This example shows the slowest trace of the day for an e-commerce checkout endpoint and how it slows down because of high CPU usage.
 
@@ -27,7 +27,7 @@ With Datadog APM, you can easily investigate the performance of your endpoints, 
 
 2. **Search for a relevant and active web service and open the Service Page**.
 
-    The web-store service is used in this example because it is the primary server in the tech stack and it controls most calls to third party services. 
+    The web-store service is used in this example because it is the primary server in the tech stack and it controls most calls to third party services.
 
     {{< img src="tracing/guide/slowest_request_daily/slowest_trace_2.png" alt="Identifying the slowest trace and finding the bottleneck causing it" responsive="true" style="width:90%;">}}
 
@@ -46,7 +46,7 @@ With Datadog APM, you can easily investigate the performance of your endpoints, 
 
     The Flamegraph is a great way of identifying the precise piece of your stack that is errneous or very latent. Errors are marked with red highlights and duration is represented by the horizontal length of the span, so very long spans are the slow ones. Learn more about using the Flamegraph in the [Trace View guide][2].
 
-    Under the Flamegraph you can see all of the tags (including [custom ones][3]). From here you can also see associated logs (if you [connected Logs to your Traces][4]), see Host-level information such as CPU and memory usage. 
+    Under the Flamegraph you can see all of the tags (including [custom ones][3]). From here you can also see associated logs (if you [connected Logs to your Traces][4]), see Host-level information such as CPU and memory usage.
 
     {{< img src="tracing/guide/slowest_request_daily/slowest_trace_4.png" alt="Identifying the slowest trace and finding the bottleneck causing it" responsive="true" style="width:90%;">}}
 
