@@ -6,8 +6,8 @@ private: true
 beta: true
 further_reading:
 - link: "account_management/rbac/log_management/"
-tag: "Documentation"
-text: "RBAC for Log Management"
+  tag: "Documentation"
+  text: "RBAC for Log Management"
 ---
 
 <div class="alert alert-warning">
@@ -457,6 +457,5 @@ curl -X POST -H "Content-type: application/json" -d '{"scope": {"pipelines": ["a
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://app.datadoghq.com/logs/pipelines
