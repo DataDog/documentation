@@ -28,7 +28,7 @@ Most of the time those symptoms can be alleviated by tweaking some configuration
 
 ### Enable buffering on your client
 
-Some StatsD and DogStatsD clients, by default, will send one metric per datagram. This adds considerable overhead on the client, the operating system, and the Agent. If your client supports buffering multiple metrics in one datagram, enabling this option could bring noticeable improvements.
+Some StatsD and DogStatsD clients, by default, send one metric per datagram. This adds considerable overhead on the client, the operating system, and the Agent. If your client supports buffering multiple metrics in one datagram, enabling this option brings noticeable improvements.
 
 Here are a few examples for supported clients:
 
@@ -149,7 +149,7 @@ UDS is an inter-process communication protocol used to [transport DogStatsD payl
 
 ## Operating System kernel buffers
 
-Most OSs will add incoming UDP and UDS datagrams containing your metrics to a buffer with a maximum size. Once this size is reached, datagrams containing your metrics will start getting dropped.
+Most OSs add incoming UDP and UDS datagrams containing your metrics to a buffer with a maximum size. Once this size is reached, datagrams containing your metrics starts getting dropped.
 
 It is possible to adjust those values to give the Agent more time to process incoming metrics.
 
@@ -157,25 +157,25 @@ It is possible to adjust those values to give the Agent more time to process inc
 
 #### Linux
 
-On most Linux distributions, the maximum size of the kernel buffer is set to 212992 by default (208 KiB). This can be confirmed using the following commands:
+On most Linux distributions, the maximum size of the kernel buffer is set to `212992` by default (208 KiB). This can be confirmed using the following commands:
 
 ```bash
 $ sysctl net.core.rmem_max
 net.core.rmem_max = 212992
 ```
 
-To set the maximum size of the DogStatsD socket buffer to 25MiB:
+To set the maximum size of the DogStatsD socket buffer to 25MiB run:
 
 ```bash
 $ sysctl -w net.core.rmem_max=26214400
 ```
 
-Add the following to `/etc/sysctl.conf` to make this change permanent:
+Add the following configuration to `/etc/sysctl.conf` to make this change permanent:
 ```
 net.core.rmem_max = 26214400
 ```
 
-Set the Agent `dogstatsd_so_rcvbuf` config option to the same number in `datadog.yaml`:
+Then set the Agent `dogstatsd_so_rcvbuf` configuration option to the same number in `datadog.yaml`:
 ```
 dogstatsd_so_rcvbuf: 26214400
 ```
