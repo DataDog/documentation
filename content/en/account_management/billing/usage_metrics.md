@@ -36,11 +36,9 @@ For accounts with multiple organizations, you can roll up estimated usage from c
 {{< img src="account_management/billing/usage-metrics-03.png" alt="Multi-Org Usage" responsive="true">}}
 
 ## Troubleshooting
-For technical questions, contact [Datadog support][3].
+For technical questions, contact [Datadog support][1].
 
-For billing questions, contact your [Customer Success][4] Manager.
+For billing questions, contact your [Customer Success][2] Manager.
 
-[1]: https://app.datadoghq.com/account/usage/hourly
-[2]: /developers/metrics/custom_metrics
-[3]: /help
-[4]: mailto:success@datadoghq.com
+[1]: /help
+[2]: mailto:success@datadoghq.com
