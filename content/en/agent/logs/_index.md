@@ -170,7 +170,7 @@ List of all available parameters for log collection:
 
 ## Send logs over HTTPS
 
-To send logs over HTTPS with the Datadog Agent, add the following in the Agent's [main configuration file][4] (`datadog.yaml`):
+To send logs over HTTPS with the Datadog Agent 6.14+, add the following in the Agent's [main configuration file][4] (`datadog.yaml`):
 
 ```
 logs_config:
