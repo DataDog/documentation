@@ -16,6 +16,7 @@ further_reading:
   tag: ""
   text: "All guides"
 ---
+_3 minutes to complete_
 
 {{< img src="tracing/guide/slowest_request_daily/slowest_trace_1.gif" alt="Identifying the slowest trace and finding the Host metrics for it" responsive="true" style="width:90%;">}}
 
