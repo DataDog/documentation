@@ -16,14 +16,16 @@ further_reading:
   tag: ""
   text: "All guides"
 ---
+_3 minutes to complete_
 
-{{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_full.gif" alt="Monitor view with ongoing alert" responsive="true" style="width:90%;">}}
+
+{{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_full.mp4" video="true" alt="Monitor view with ongoing alert" responsive="true" style="width:90%;">}}
 
 Datadog allows you to set monitors to keep track of the health of your services with APM instead of constantly monitoring it yourself. In this example, we’ll use an anomaly detection monitor. [Anomaly detection][1] is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week, and time-of-day patterns. It is well-suited for metrics with strong trends and recurring patterns that are hard or impossible to monitor with threshold-based alerting.
 
 1. **Open the [New Monitor Page][2] and choose [APM][3]**.
 2. **Choose your environment** under Primary Tags and **Choose the database to monitor** under Service.
-    
+
     Under Resource, you can choose to monitor specific queries run in the database, but in this example, we’ll look at overall performance so leave it as `*`.
 
     Once you choose a service, the next step becomes available for you to set, and a chart appears at the top of the page showing the performance of the metric that the new monitor tracks.
@@ -38,7 +40,7 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
     This means that all of the events for the selected duration have to be anomalous for the alert to trigger. This is a best practice for starting with Anomaly Detection. Over time, you’ll find the right values that fit your situation. You can find out more about Anomaly Detection Monitors in the [FAQ][4].
 
-5. **Change the alert notification**. 
+5. **Change the alert notification**.
 
     In this example, you can either leave the notification content with the default text or choose team members to tag in the alert.
 
@@ -46,7 +48,7 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
     You can read more about the markup for notification text and what values and conditions you can set there in the [notifications overview][5].
 
-6. **Make sure your username appears in the *Notify your team* box** and add any additional team members that should be notified in case of a database latency anomaly. 
+6. **Make sure your username appears in the *Notify your team* box** and add any additional team members that should be notified in case of a database latency anomaly.
     **Note**: To add another user be sure to type `@` at the start. **Click on *Save***.
 
     Your alert is now set, you can tweak any of the parameters from this screen and follow the metric performance.

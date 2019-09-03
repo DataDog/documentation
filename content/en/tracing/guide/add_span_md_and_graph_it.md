@@ -16,8 +16,9 @@ further_reading:
   tag: ""
   text: "All guides"
 ---
+_7 minutes to complete_
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.gif" alt="Analytics View" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt="Analytics View" video="true" responsive="true" style="width:90%;">}}
 
 Datadog APM allows you to customize your traces to include any additional information you might need to maintain observability into your business. You can use this to identify a spike in the throughput of a certain enterprise customer, or the user suffering the highest latency, or to pinpoint the database shard generating the most errors.
 
@@ -262,17 +263,17 @@ The Trace Analytics page is a visual query building tool that allows you to cond
 
 7) **Choose the service** you’ve been working on from the service facet list, **choose Error** from the status facet and **select `customer_id`** (or any other tags you added to your spans) from the group by field.
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.gif" alt="" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt="" responsive="true" video="true" style="width:90%;">}}
 
 8) **Remove Error** from the query, **change the `count *` measure to `Duration`** and **change the graph type to `Top List`**.
 
 You can now see the customers that have the slowest average requests. **Note**: If you’d like to make sure your customers never pass a certain threshold of performance, you can [export this query to a monitor][7], alternatively, you can save this visualization to a dashboard and keep an eye over it over time.
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_7.gif" alt="" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_7.mp4" alt="span md 7" video="true" responsive="true" style="width:90%;">}}
 
 Finally, you can also see all the traces relevant to your query by clicking the visualization and selecting `View traces`.
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_9.gif" alt="" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_9.mp4" alt="span md 9" video="true" responsive="true" style="width:90%;">}}
 
 
 ## Further Reading
