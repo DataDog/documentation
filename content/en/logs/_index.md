@@ -37,7 +37,7 @@ Datadog's log management removes these limitations by decoupling log ingestion f
   {{< nextlink href="/logs/explorer">}}<u>Search</u>: Search through all of your indexed logs.{{< /nextlink >}}
   {{< nextlink href="/logs/explorer/analytics">}}<u>Analytics</u>: Perform Log Analytics over your indexed logs.{{< /nextlink >}}
   {{< nextlink href="/logs/explorer/patterns">}}<u>Patterns</u>: Spot Log Patterns by clustering your indexed logs together.{{< /nextlink >}}
-  {{< nextlink href="/logs/explorer/saved_search">}}<u>Saved Views</u>: Use Saved Views to automatically configure your Log Explorer.{{< /nextlink >}}
+  {{< nextlink href="/logs/explorer/saved_views/">}}<u>Saved Views</u>: Use Saved Views to automatically configure your Log Explorer.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading
