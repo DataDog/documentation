@@ -2,6 +2,7 @@
 title: Indexes
 kind: documentation
 description: Control the volume of logs indexed by Datadog
+disable_toc: true
 aliases:
   - /logs/dynamic_volume_control
 further_reading:
@@ -19,9 +20,7 @@ further_reading:
   text: "Logging without Limits*"
 ---
 
-## Index details
-
-Indexes are located in the [pipeline page][1] within the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, and the retention period for those logs:
+Indexes are located in the [Configuration page][1] within the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, and the retention period for those logs:
 
 {{< img src="logs/indexes/index_details.png" alt="" responsive="true" style="width:70%;">}}
 
@@ -31,8 +30,6 @@ It is also possible to have multiple indexes with different retention periods (*
 Logs enter the first index whose filter they match on, so it is important to order your indexes carefully.
 
 For example, if you create a first index filtered to the `status:notice` attribute and a second index filtered to the `status:error` attribute and a final one without any filter (the equivalent of `*`), all your notice logs would go to the first index, all your error logs to the second index and the rest would go to the final one.
-
-{{< img src="logs/indexes/multi_indexes.png" alt="" responsive="true" style="width:70%;">}}
 
 Multiple indexes also provide the ability to define access rules on the data contained in each index. [More information available in the role base access control documentation][6].
 
@@ -58,34 +55,7 @@ To configure an exclusion filter:
 
 **Note**: If a log matches several exclusion filters, only the first exclusion filter rule is applied. A log is not sampled or excluded multiple times by different exclusion filters.
 
-### Example
-
-The following filter removes all logs that have a fast response time.
-We use the `duration` attribute and filter all logs that have a value below *100ms*.
-
-```json
-{
-    "http": {
-        "url": "https://app.datadoghq.com/logs",
-        "status_code": "200"
-    },
-    "duration":12,
-    "metadata": {
-        "version": 12,
-        "release": "sept18"
-    }
-}
-```
-
-**Filter**: `@duration:<100`
-
-### Container example
-
-Container logs have a lot of metadata collected as tags. To exclude all logs coming from images that contains `httpd` in the `image_name` tag use the following filter:
-
-**Filter**: `image_name:*httpd*`
-
-## Reorder filters
+### Reorder filters
 
 Order matters for exclusion filters. And contrary to where several pipelines can process a log, if a log matches several exclusion filters, only the first exclusion filter rule is applied.
 
@@ -93,11 +63,9 @@ Reorder your pipeline to make sure the proper exclusion filters applies for your
 
 To reorder your exclusion filter, drag and drop them into your preferred order.
 
-
 {{< img src="logs/indexes/reorder_index_filters.png" alt="" responsive="true" style="width:80%;">}}
 
-
-## Enable/Disable filters
+### Enable/Disable filters
 
 If all logs are not worth indexing on a daily basis, they might still be critical in some situations.
 Debug logs, for instance, are not always useful but during a complex troubleshooting or during a production release they become very interesting to get better insight into what is going on.
