@@ -74,7 +74,6 @@ test_missing_tms_preview:
   <<: *base_template
   stage: post-deploy
   environment: "preview"
-  allow_failure: true
   dependencies:
     - build_preview
   script:
@@ -180,7 +179,6 @@ test_missing_tms_live:
   <<: *base_template
   stage: post-deploy
   environment: "live"
-  allow_failure: true
   dependencies:
     - build_live
   script:

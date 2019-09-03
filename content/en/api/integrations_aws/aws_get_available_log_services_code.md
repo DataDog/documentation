@@ -1,7 +1,7 @@
 ---
 title: Get a list of AWS log ready services
 type: apicode
-order: 15.6
+order: 15.07
 external_redirect: /api/#get-list-of-aws-log-ready-services
 ---
 

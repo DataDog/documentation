@@ -1063,6 +1063,10 @@ main:
     url: "developers/dogstatsd/unix_socket/"
     parent: "dev_tools_dogstatsd"
     weight: 103
+  - name: "Sending large volumes of metrics"
+    url: "developers/dogstatsd/high_throughput/"
+    parent: "dev_tools_dogstatsd"
+    weight: 104
 
   ## DEVELOPERS - Metrics
 
