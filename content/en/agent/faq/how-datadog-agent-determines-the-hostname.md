@@ -27,10 +27,10 @@ From these names, a canonical name is chosen for the host. The Agent uses this n
 
 The canonical hostname is chosen according to the following rules. The first match is selected.
 
-* **agent-hostname**: A hostname explicitly set in the [Agent configuration file][2].
-* **hostname**: If the DNS hostname is not an EC2 default (e.g. ip-192-0-0-1).
-* **instance-id**: If the Agent can reach the EC2 metadata endpoint from the host.
-* **hostname**: Fall back on the DNS hostname even if it is an EC2 default.
+1. **agent-hostname**: A hostname explicitly set in the [Agent configuration file][2].
+2. **hostname**: If the DNS hostname is not an EC2 default (e.g. ip-192-0-0-1).
+3. **instance-id**: If the Agent can reach the EC2 metadata endpoint from the host.
+4. **hostname**: Fall back on the DNS hostname even if it is an EC2 default.
 
 If the name is recognized as obviously non-unique (example: `localhost.localdomain`), the current rule fails and passes through to the next.
 
@@ -67,7 +67,7 @@ When upgrading from Agent v5 to Agent v6, there might be a difference in the hos
 
 `sub.domain.tld` --> `sub`
 
-**Note**: Starting from Agent v6.3, a configuration option called `hostname_fqdn` was introduced that allows Agent v6 to have the same behavior as Agent v5. This flag is disabled by default on version 6.3+. See the [example datadog.yaml][1] for enabling this option.
+**Note**: Starting from Agent v6.3, the `hostname_fqdn` configuration option was introduced that allows Agent v6 to have the same behavior as Agent v5. This flag is disabled by default on version 6.3+. See the [example datadog.yaml][1] for enabling this option.
 
 #### Determine if you're affected
 
@@ -78,9 +78,9 @@ DEPRECATION NOTICE: The agent resolved your hostname as <HOSTNAME>. However in a
 
 You are not affected if any of the following are true:
 
-* You are running the Agent in GCE.
-* You are setting the hostname in the [Agent's main configuration][2] file or through the `DD_HOSTNAME` environment variable.
-* You are running the Agent in a container with access to the Docker or Kubernetes API.
+* The Agent runs in GCE.
+* The hostname is set the [Agent's main configuration][2] file or through the `DD_HOSTNAME` environment variable.
+* The Agent runs in a container with access to the Docker or Kubernetes API.
 * The hostname output of `cat /proc/sys/kernel/hostname` and `hostname -f` are the same.
 
 #### Recommended action
@@ -88,7 +88,7 @@ You are not affected if any of the following are true:
 If you're affected by this change, Datadog recommends taking the following action when you upgrade your Agent:
 
 * **Upgrading from Agent v5 to Agent v < 6.3**: Hardcode your hostname in the [Agent's main configuration][2] file.
-* **Upgrading from Agent v5 to Agent >= v6.3**: enable the `hostname_fqdn` option in the [Agent's main configuration][2] file. This ensures that you keep the same hostname.
+* **Upgrading from Agent v5 to Agent >= v6.3**: Enable the `hostname_fqdn` option in the [Agent's main configuration][2] file. This ensures that you keep the same hostname.
 * **Upgrading from Agent v5 to Agent v6 (a future version which uses the fqdn by default)**: you don’t need to take any action.
 * If you want to ensure the current default behavior of Agent v6 is preserved when you upgrade the Agent in the future, set `hostname_fqdn` to `false`. That said, Datadog recommends you switch `hostname_fqdn` to `true` whenever possible.
 
@@ -102,7 +102,7 @@ The Windows Agent honors the configuration flag starting with v6.5. Setting `hos
 
 By default, the recommended action is to do nothing. This preserves the existing behavior, especially if upgrading from Agent v5.
 
-If you want to have Windows hosts specifically report fully qualified host names, then add the `hostname_fqdn` flag to the configuration file.
+If you want to have Windows hosts specifically report fully qualified host names, then add `hostname_fqdn` set to `true` in your [Agent's main configuration file][2].
 
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
