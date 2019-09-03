@@ -1,3 +1,4 @@
+
 ---
 title: Roles API
 kind: documentation
@@ -43,50 +44,52 @@ Required Payload: No Payload
 * **`filter`**[*optional*, *default*=**None**]:
 	Filter all roles by the given string.
     
- ##### Expected Response code: 
+##### Expected Response code: 
+ 
 HTTP/2 200
 
- ##### Example:
+##### Example:
+ 
 
 ```sh
 curl -X GET "https://app.datadoghq.com/api/v2/roles" -H 'DD-API-KEY: ${API_KEY}' -H 'DD-APPLICATION-KEY: ${APP_KEY}'
 
 
 # Response:
-{
-    "meta": {
-        "page": {
-            "total_count": 7
-        }
-    },
-    "data": [
-	    {
-            "type": "roles",
-            "id": <ROLE_UUID>,
-                "attributes": {
-                "created_at": "2000-02-29T16:50:43.607749+00:00",
-                "user_count": 2122,
-                "modified_at": "2000-02-29T16:50:43.607749+00:00",
-                "uuid": <ROLE_UUID>,
-                "name": <ROLE_NAME>
-            },
-            "relationships": {
-                "permissions": {
-                    "data": [
-                        {
-                            "type": "permissions",
-                            "id": <PERMISSION_UUID>
-                        },
-                        {
-                            "type": "permissions",
-                            "id": <PERMISSION_UUID>
-                        }
-                    ]
-                }
-            }
-        }
-    ]
-}
+# {
+#     "meta": {
+#         "page": {
+#             "total_count": 7
+#         }
+#     },
+#     "data": [
+# 	    {
+#             "type": "roles",
+#             "id": $ROLE_UUID,
+#                 "attributes": {
+#                 "created_at": "2000-02-29T16:50:43.607749+00:00",
+#                 "user_count": 2122,
+#                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
+#                 "uuid": $ROLE_UUID,
+#                 "name": $ROLE_NAME
+#             },
+#             "relationships": {
+#                 "permissions": {
+#                     "data": [
+#                         {
+#                             "type": "permissions",
+#                             "id": $PERMISSION_UUID
+#                         },
+#                         {
+#                             "type": "permissions",
+#                             "id": $PERMISSION_UUID
+#                         }
+#                     ]
+#                 }
+#             }
+#         }
+#     ]
+# }
 ```
 
 ### Get One Role
@@ -96,7 +99,7 @@ Method: GET
 Endpoint: `api/v2/roles/$ROLE_UUID`  
 Required Payload: No Payload  
 
- ##### Response code: 
+##### Response code: 
 HTTP/2 200
 
 ##### Example:
@@ -105,33 +108,33 @@ HTTP/2 200
 curl -X GET "https://app.datadoghq.com/api/v2/roles/$ROLE_UUID" -H 'DD-API-KEY: ${API_KEY}' -H 'DD-APPLICATION-KEY: ${APP_KEY}'
 
 # Response:
-{
-	"data": {
-            "type": "roles",
-            "id": <ROLE_UUID>,
-                "attributes": {
-                "created_at": "2000-02-29T16:50:43.607749+00:00",
-                "user_count": 2122,
-                "modified_at": "2000-02-29T16:50:43.607749+00:00",
-                "uuid": <ROLE_UUID>,
-                "name": <ROLE_NAME>
-            },
-            "relationships": {
-                "permissions": {
-                    "data": [
-                        {
-                            "type": "permissions",
-                            "id": <PERMISSION_UUID>
-                        },
-                        {
-                            "type": "permissions",
-                            "id": <PERMISSION_UUID>
-                        }
-                    ]
-                }
-            }
-        }
-}
+# {
+# 	"data": {
+#             "type": "roles",
+#             "id": $ROLE_UUID,
+#                 "attributes": {
+#                 "created_at": "2000-02-29T16:50:43.607749+00:00",
+#                 "user_count": 2122,
+#                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
+#                 "uuid": $ROLE_UUID,
+#                 "name": $ROLE_NAME
+#             },
+#             "relationships": {
+#                 "permissions": {
+#                     "data": [
+#                         {
+#                             "type": "permissions",
+#                             "id": $PERMISSION_UUID
+#                         },
+#                         {
+#                             "type": "permissions",
+#                             "id": $PERMISSION_UUID
+#                         }
+#                     ]
+#                 }
+#             }
+#         }
+# }
 ```
 
 ### Create Role
@@ -140,8 +143,9 @@ Description: Creates a new role. Returns role name and uuid.
 Method: POST  
 Endpoint: `api/v2/roles`  
 Required Payload:
-- **type="roles"**
--  **attributes["name"]**  
+
+* **type="roles"**
+* **attributes["name"]**  
 
 ##### Response code
 HTTP/2 200
@@ -158,7 +162,7 @@ curl -X POST \
        "data": {
            "type": "roles",
            "attributes": {
-               "name": <ROLE_NAME>
+               "name": $ROLE_NAME
            }
       }
 }'
@@ -170,8 +174,9 @@ Description: Updates an existing role's name. Returns role name and uuid.
 Method: PATCH 
 Endpoint: `api/v2/roles/$ROLE_UUID`  
 Required Payload: 
-- **type="roles"**
--  **attributes["name"]**    
+
+* **type="roles"**
+* **attributes["name"]**    
 
 ##### Response code
 HTTP/2 200
@@ -188,7 +193,7 @@ curl -X PATCH \
        "data": {
            "type": "roles",
            "attributes": {
-               "name": <ROLE_NAME>
+               "name": $ROLE_NAME
            }
       }
 }'
@@ -228,21 +233,21 @@ curl -X GET "https://app.datadoghq.com/api/v2/permissions" \
 -H 'DD-APPLICATION-KEY: ${APP_KEY}'
 
 # Response:
-{
-	"data": [{
-		"type": "permissions",
-        "id": <PERMISSION_UUID>,
-        "attributes": {
-            "display_name": "Logs metrics write",
-            "description": "Update a custom metric",
-            "name": "logs_metrics_write",
-            "created": "2000-02-29T14:26:26.983187+00:00",
-            "group_name": "Logs",
-            "display_type": "other",
-            "uuid": <PERMISSION_UUID>
-        }
-    }]
-}
+# {
+# 	"data": [{
+# 		"type": "permissions",
+#         "id": $PERMISSION_UUID,
+#         "attributes": {
+#             "display_name": "Logs metrics write",
+#             "description": "Update a custom metric",
+#             "name": "logs_metrics_write",
+#             "created": "2000-02-29T14:26:26.983187+00:00",
+#             "group_name": "Logs",
+#             "display_type": "other",
+#             "uuid": $PERMISSION_UUID
+#         }
+#     }]
+# }
 ```
 
 ### Grant Permission to Role
@@ -251,8 +256,9 @@ Description: Adds a permission to a role.
 Method: POST  
 Endpoint: `api/v2/roles/$ROLE_UUID/permissions`  
 Required Payload: 
-- data["type"]="permissions" 
-- data["id"]=$PERMISSION_UUID
+
+* **data["type"]="permissions"**
+* **data["id"]=$PERMISSION_UUID**
 
 ##### Response code
 HTTP/2 200
@@ -261,16 +267,16 @@ HTTP/2 200
 
 ```sh
 curl -X POST \
-  'https://app.datadoghq.com/api/v2/roles/$ROLE_UUID/permissions \
+  https://app.datadoghq.com/api/v2/roles/$ROLE_UUID/permissions \
   -H 'Content-Type: application/json' \
   -H 'DD-API-KEY: ${API_KEY}' \
   -H 'DD-APPLICATION-KEY: ${APP_KEY}' \
-  -d '{
-	"data":
-        {
-        	"type": "permissions",
-			"id": <PERMISSION_UUID>
-        }
+  -d '{ 
+    "data":
+    {
+        "type": "permissions",
+        "id": $PERMISSION_UUID
+    }
 }'
 ```
 
@@ -279,28 +285,30 @@ curl -X POST \
 Description: Removes a permission from a role.  
 Method: DELETE  
 Endpoint: `api/v2/roles/$ROLE_UUID/permissions`  
-Required Payload: 
-- data["type"]="permissions" 
-- data["id"]=$PERMISSION_UUID
+Required Payload:
+
+* **data["type"]="permissions"**
+* **data["id"]=$PERMISSION_UUID**
 
 ##### Response code
 HTTP/2 200
 
-Example:
+##### Example:
 
 ```sh
 curl -X DELETE \
-  'https://app.datadoghq.com/api/v2/roles/$ROLE_UUID/permissions \
+  https://app.datadoghq.com/api/v2/roles/$ROLE_UUID/permissions \
   -H 'Content-Type: application/json' \
   -H 'DD-API-KEY: ${API_KEY}' \
   -H 'DD-APPLICATION-KEY: ${APP_KEY}' \
-  -d '{
-	"data":
-        {
-        	"type": "permissions",
-			"id": <PERMISSION_UUID>
-        }
+  -d '{ 
+    "data":
+    {
+        "type": "permissions",
+        "id": $PERMISSION_UUID
+    }
 }'
+
 ```
 
 ### Add User to Role
@@ -309,8 +317,9 @@ Description: Adds a user to a role.
 Method: POST  
 Endpoint: `api/v2/roles/$ROLE_UUID/users`  
 Required Payload:
-- data["type"]="users" 
-- data["id"]=$USER_HANDLE
+
+* **data["type"]="users"**
+* **data["id"]=$USER_HANDLE**
 
 ##### Response code
 HTTP/2 200
@@ -338,8 +347,9 @@ Description: Removes a user from a role.
 Method: DELETE  
 Endpoint: `api/v2/roles/$ROLE_UUID/users`  
 Required Payload: 
-- data["type"]="users" 
-- data["id"]=$USER_HANDLE
+
+* **data["type"]="users"** 
+* **data["id"]=$USER_HANDLE**
 
 ##### Response code
 HTTP/2 200
