@@ -6,8 +6,8 @@ private: true
 beta: true
 further_reading:
 - link: "account_management/rbac/log_management/"
-  tag: "Documentation"
-  text: "RBAC for Log Management"
+tag: "Documentation"
+text: "RBAC for Log Management"
 ---
 
 <div class="alert alert-warning">
@@ -35,21 +35,23 @@ Required Payload: No Payload
 ##### ARGUMENTS
 
 * **`page[size]`** [*optional*, *default*=**0**]:
-    Page Number of roles to return for a given page
+Page Number of roles to return for a given page
 * **`page[count]`** [*optional*, *default*=**10**]:
-    Number of roles to return for a given page
+Number of roles to return for a given page
 * **`sort`** [*optional*, *default*=**name**]:
-    Sort roles by the given field. Sort order is **ascending** by default. Sort order is **descending** if the field is prefixed by a negative sign (Eg: *sort=-name*)
+Sort roles by the given field. Sort order is **ascending** by default. Sort order is **descending** if the field is prefixed by a negative sign (Eg: *sort=-name*)
     Options: **name**, **modified_at**
 * **`filter`**[*optional*, *default*=**None**]:
-	Filter all roles by the given string.
-    
+    Filter all roles by the given string.
+
 ##### Expected Response code: 
- 
+
+```sh
 HTTP/2 200
+```
 
 ##### Example:
- 
+
 
 ```sh
 curl -X GET "https://app.datadoghq.com/api/v2/roles" -H "DD-API-KEY: ${API_KEY}" -H "DD-APPLICATION-KEY: ${APP_KEY}"
@@ -100,7 +102,9 @@ Endpoint: `api/v2/roles/$ROLE_UUID`
 Required Payload: No Payload  
 
 ##### Response code: 
+```sh
 HTTP/2 200
+```
 
 ##### Example:
 
@@ -148,24 +152,26 @@ Required Payload:
 * **attributes["name"]**  
 
 ##### Response code
+```sh
 HTTP/2 200
+```
 
 ##### Example:
 
 ```sh
 curl -X POST \
-"https://app.datadoghq.com/api/v2/roles" \
--H "Content-Type: application/json" \
--H "DD-API-KEY: ${API_KEY}" \
--H "DD-APPLICATION-KEY: ${APP_KEY}" \
--d '{
-       "data": {
-           "type": "roles",
-           "attributes": {
-               "name": $ROLE_NAME
-           }
-      }
-}'
+        "https://app.datadoghq.com/api/v2/roles" \
+        -H "Content-Type: application/json" \
+        -H "DD-API-KEY: ${API_KEY}" \
+        -H "DD-APPLICATION-KEY: ${APP_KEY}" \
+        -d '{
+            "data": {
+                "type": "roles",
+                    "attributes": {
+                        "name": $ROLE_NAME
+                    }
+            }
+        }'
 ```
 
 ### Update Role
@@ -179,24 +185,26 @@ Required Payload:
 * **attributes["name"]**    
 
 ##### Response code
+```sh
 HTTP/2 200
+```
 
 ##### Example:
 
 ```sh
 curl -X PATCH \
-"https://app.datadoghq.com/api/v2/roles" \
--H "Content-Type: application/json" \
--H "DD-API-KEY: ${API_KEY}" \
--H "DD-APPLICATION-KEY: ${APP_KEY}" \
--d '{
-       "data": {
-           "type": "roles",
-           "attributes": {
-               "name": $ROLE_NAME
-           }
-      }
-}'
+         "https://app.datadoghq.com/api/v2/roles" \
+         -H "Content-Type: application/json" \
+         -H "DD-API-KEY: ${API_KEY}" \
+         -H "DD-APPLICATION-KEY: ${APP_KEY}" \
+         -d '{
+             "data": {
+                 "type": "roles",
+                 "attributes": {
+                     "name": $ROLE_NAME
+                }
+             }
+         }'
 ```
 
 ### Delete Role
@@ -209,15 +217,16 @@ Example:
 
 
 ##### Response code
+```sh
 HTTP/2 204
-
+```
 
 ##### Example
 ```sh
 curl -X DELETE "https://app.datadoghq.com/api/v2/roles/${ROLE_UUID}" \
--H "Content-Type: application/json" \
--H "DD-API-KEY: ${API_KEY}" \
--H "DD-APPLICATION-KEY: ${APP_KEY}"
+         -H "Content-Type: application/json" \
+         -H "DD-API-KEY: ${API_KEY}" \
+         -H "DD-APPLICATION-KEY: ${APP_KEY}"
 ```
 
 ### Get Permissions
@@ -230,14 +239,14 @@ Example:
 
 ```sh
 curl -X GET "https://app.datadoghq.com/api/v2/permissions" \
--H "Content-Type: application/json" \
--H "DD-API-KEY: ${API_KEY}" \
--H "DD-APPLICATION-KEY: ${APP_KEY}"
+             -H "Content-Type: application/json" \
+             -H "DD-API-KEY: ${API_KEY}" \
+             -H "DD-APPLICATION-KEY: ${APP_KEY}"
 
 # Response:
 # {
 # 	"data": [{
-# 		"type": "permissions",
+#         "type": "permissions",
 #         "id": $PERMISSION_UUID,
 #         "attributes": {
 #             "display_name": "Logs metrics write",
@@ -263,23 +272,25 @@ Required Payload:
 * **data["id"]=$PERMISSION_UUID**
 
 ##### Response code
+```sh
 HTTP/2 200
+```
 
 ##### Example:
 
 ```sh
 curl -X POST \
-  https://app.datadoghq.com/api/v2/roles/$ROLE_UUID/permissions \
-  -H "Content-Type: application/json" \
-  -H "DD-API-KEY: ${API_KEY}" \
-  -H "DD-APPLICATION-KEY: ${APP_KEY}" \
-  -d '{ 
-    "data":
-    {
-        "type": "permissions",
-        "id": $PERMISSION_UUID
-    }
-}'
+        https://app.datadoghq.com/api/v2/roles/$ROLE_UUID/permissions \
+        -H "Content-Type: application/json" \
+        -H "DD-API-KEY: ${API_KEY}" \
+        -H "DD-APPLICATION-KEY: ${APP_KEY}" \
+        -d '{ 
+                "data":
+                {
+                    "type": "permissions",
+                    "id": $PERMISSION_UUID
+                }
+            }'
 ```
 
 ### Revoke Permission from Role
@@ -293,23 +304,25 @@ Required Payload:
 * **data["id"]=$PERMISSION_UUID**
 
 ##### Response code
+```sh
 HTTP/2 200
+```
 
 ##### Example:
 
 ```sh
 curl -X DELETE \
-  https://app.datadoghq.com/api/v2/roles/$ROLE_UUID/permissions \
-  -H "Content-Type: application/json" \
-  -H "DD-API-KEY: ${API_KEY}" \
-  -H "DD-APPLICATION-KEY: ${APP_KEY}" \
-  -d '{ 
-    "data":
-    {
-        "type": "permissions",
-        "id": $PERMISSION_UUID
-    }
-}'
+         https://app.datadoghq.com/api/v2/roles/$ROLE_UUID/permissions \
+         -H "Content-Type: application/json" \
+         -H "DD-API-KEY: ${API_KEY}" \
+         -H "DD-APPLICATION-KEY: ${APP_KEY}" \
+         -d '{ 
+             "data":
+             {
+                 "type": "permissions",
+                 "id": $PERMISSION_UUID
+             }
+         }'
 
 ```
 
@@ -324,23 +337,24 @@ Required Payload:
 * **data["id"]=$USER_HANDLE**
 
 ##### Response code
+```sh
 HTTP/2 200
-
+```
 
 ##### Example:
 
 ```sh
 curl -X POST \
-  https://app.datadoghq.com/api/v2/roles/$ROLE_UUID/users \
-  -H "Content-Type: application/json" \
-  -H "DD-API-KEY: ${API_KEY}" \
-  -H "DD-APPLICATION-KEY: ${APP_KEY}" \
-  -d '{
-    "data": {
-        "type": "users",
-        "id": "user@example.org"
-    }
-}'
+         https://app.datadoghq.com/api/v2/roles/$ROLE_UUID/users \
+         -H "Content-Type: application/json" \
+         -H "DD-API-KEY: ${API_KEY}" \
+         -H "DD-APPLICATION-KEY: ${APP_KEY}" \
+         -d '{
+             "data": {
+                 "type": "users",
+                 "id": "user@example.org"
+             }
+         }'
 ```
 
 ### Remove User from Role
@@ -354,24 +368,25 @@ Required Payload:
 * **data["id"]=$USER_HANDLE**
 
 ##### Response code
+```sh
 HTTP/2 200
-
+```
 
 
 ##### Example:
 
 ```sh
 curl -X DELETE \
-  https://app.datadoghq.com/api/v2/roles/$ROLE_UUID/users \
-  -H "Content-Type: application/json" \
-  -H "DD-API-KEY: ${API_KEY}" \
-  -H "DD-APPLICATION-KEY: ${APP_KEY}" \
-  -d '{
-    "data": {
-        "type": "users",
-        "id": "user@example.org"
-    }
-}'
+         https://app.datadoghq.com/api/v2/roles/$ROLE_UUID/users \
+         -H "Content-Type: application/json" \
+         -H "DD-API-KEY: ${API_KEY}" \
+         -H "DD-APPLICATION-KEY: ${APP_KEY}" \
+         -d '{
+             "data": {
+                 "type": "users",
+                 "id": "user@example.org"
+             }
+         }'
 ```
 
 ## Permission UUIDs
