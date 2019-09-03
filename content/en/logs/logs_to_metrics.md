@@ -28,15 +28,15 @@ With log-based metrics, you can record a count of logs that match a query or sum
 
 {{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="Generate Logs to metric" responsive="true" style="width:80%;">}}
 
-To generate a new log-based metric, go to the [Configuration page][4] of your Datadog account and select the *[Generate Metrics][5]* tab, then the **New Metric+** button.
+To generate a new log-based metric, go to the [Configuration page][3] of your Datadog account and select the *[Generate Metrics][4]* tab, then the **New Metric+** button.
 
 ### Add a new log-based metric
 
 {{< img src="logs/processing/logs_to_metrics/create_custom_metrics.png" alt="Create a Logs to metric" responsive="true" style="width:80%;">}}
 
-1. **Input a query to filter the log stream**: The query syntax is the same as for the [Log Explorer Search][6]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation.
-2. **Select the field you would like to track**: Select `*` to generate a count of all logs matching your query or enter a log attribute to aggregate a numeric value into `count`, `min`, `max`, `sum`, and `avg` metrics.
-3. **Add dimensions to `group by`**: Select log attributes or tag keys to apply to the generated log-based metric to transform them into [Tags][3] following the `<KEY>:<VALUE>` format. Log-based metrics are considered [custom metrics][7]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
+1. **Input a query to filter the log stream**: The query syntax is the same as for the [Log Explorer Search][5]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation.
+2. **Select the field you would like to track**: Select `*` to generate a count of all logs matching your query or enter a log attribute to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics.
+3. **Add dimensions to `group by`**: Select log attributes or tag keys to apply to the generated log-based metric to transform them into [Tags][6] following the `<KEY>:<VALUE>` format. Log-based metrics are considered [custom metrics][7]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
 4. **Name your metric**: Log-based metric names must follow the [naming metric convention][8].
 
 **Note**: Data points for Log-based metrics are generated at one minute intervals.
@@ -62,10 +62,10 @@ Datadog would love to receive your feedback on this feature. You can submit your
 
 [1]: /logs/logging_without_limits
 [2]: /logs/logging_without_limits/#exclusion-filters
-[3]: /tagging
-[4]: https://app.datadoghq.com/logs/pipelines
-[5]: https://app.datadoghq.com/logs/pipelines/generate-metrics
-[6]: /logs/explorer/search/#search-syntax
+[3]: https://app.datadoghq.com/logs/pipelines
+[4]: https://app.datadoghq.com/logs/pipelines/generate-metrics
+[5]: /logs/explorer/search/#search-syntax
+[6]: /tagging
 [7]: /developers/metrics/custom_metrics
 [8]: /developers/metrics/#naming-metrics
 [9]: https://docs.google.com/forms/d/e/1FAIpQLSepcuHsNfJN7mpQp-8iBf9l6AslubKVSUHW21kmGg7VOJlxoA/viewform
