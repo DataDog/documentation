@@ -52,7 +52,7 @@ HTTP/2 200
  
 
 ```sh
-curl -X GET "https://app.datadoghq.com/api/v2/roles" -H 'DD-API-KEY: ${API_KEY}' -H 'DD-APPLICATION-KEY: ${APP_KEY}'
+curl -X GET "https://app.datadoghq.com/api/v2/roles" -H "DD-API-KEY: ${API_KEY}" -H "DD-APPLICATION-KEY: ${APP_KEY}"
 
 
 # Response:
@@ -105,7 +105,7 @@ HTTP/2 200
 ##### Example:
 
 ```sh
-curl -X GET "https://app.datadoghq.com/api/v2/roles/$ROLE_UUID" -H 'DD-API-KEY: ${API_KEY}' -H 'DD-APPLICATION-KEY: ${APP_KEY}'
+curl -X GET "https://app.datadoghq.com/api/v2/roles/$ROLE_UUID" -H "DD-API-KEY: ${API_KEY}" -H "DD-APPLICATION-KEY: ${APP_KEY}"
 
 # Response:
 # {
@@ -156,8 +156,8 @@ HTTP/2 200
 curl -X POST \
 "https://app.datadoghq.com/api/v2/roles" \
 -H "Content-Type: application/json" \
--H 'DD-API-KEY: ${API_KEY}' \
--H 'DD-APPLICATION-KEY: ${APP_KEY}' \
+-H "DD-API-KEY: ${API_KEY}" \
+-H "DD-APPLICATION-KEY: ${APP_KEY}" \
 -d '{
        "data": {
            "type": "roles",
@@ -187,8 +187,8 @@ HTTP/2 200
 curl -X PATCH \
 "https://app.datadoghq.com/api/v2/roles" \
 -H "Content-Type: application/json" \
--H 'DD-API-KEY: ${API_KEY}' \
--H 'DD-APPLICATION-KEY: ${APP_KEY}' \
+-H "DD-API-KEY: ${API_KEY}" \
+-H "DD-APPLICATION-KEY: ${APP_KEY}" \
 -d '{
        "data": {
            "type": "roles",
@@ -214,9 +214,10 @@ HTTP/2 204
 
 ##### Example
 ```sh
-curl -X DELETE "https://app.datadoghq.com/api/v1/roles/${ROLEUUID}" \
--H 'DD-API-KEY: ${API_KEY}' \
--H 'DD-APPLICATION-KEY: ${APP_KEY}'
+curl -X DELETE "https://app.datadoghq.com/api/v2/roles/${ROLE_UUID}" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${API_KEY}" \
+-H "DD-APPLICATION-KEY: ${APP_KEY}"
 ```
 
 ### Get Permissions
@@ -229,8 +230,9 @@ Example:
 
 ```sh
 curl -X GET "https://app.datadoghq.com/api/v2/permissions" \
--H 'DD-API-KEY: ${API_KEY}' \
--H 'DD-APPLICATION-KEY: ${APP_KEY}'
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${API_KEY}" \
+-H "DD-APPLICATION-KEY: ${APP_KEY}"
 
 # Response:
 # {
@@ -268,9 +270,9 @@ HTTP/2 200
 ```sh
 curl -X POST \
   https://app.datadoghq.com/api/v2/roles/$ROLE_UUID/permissions \
-  -H 'Content-Type: application/json' \
-  -H 'DD-API-KEY: ${API_KEY}' \
-  -H 'DD-APPLICATION-KEY: ${APP_KEY}' \
+  -H "Content-Type: application/json" \
+  -H "DD-API-KEY: ${API_KEY}" \
+  -H "DD-APPLICATION-KEY: ${APP_KEY}" \
   -d '{ 
     "data":
     {
@@ -298,9 +300,9 @@ HTTP/2 200
 ```sh
 curl -X DELETE \
   https://app.datadoghq.com/api/v2/roles/$ROLE_UUID/permissions \
-  -H 'Content-Type: application/json' \
-  -H 'DD-API-KEY: ${API_KEY}' \
-  -H 'DD-APPLICATION-KEY: ${APP_KEY}' \
+  -H "Content-Type: application/json" \
+  -H "DD-API-KEY: ${API_KEY}" \
+  -H "DD-APPLICATION-KEY: ${APP_KEY}" \
   -d '{ 
     "data":
     {
@@ -330,9 +332,9 @@ HTTP/2 200
 ```sh
 curl -X POST \
   https://app.datadoghq.com/api/v2/roles/$ROLE_UUID/users \
-  -H 'Content-Type: application/json' \
-  -H 'DD-API-KEY: ${API_KEY}' \
-  -H 'DD-APPLICATION-KEY: ${APP_KEY}' \
+  -H "Content-Type: application/json" \
+  -H "DD-API-KEY: ${API_KEY}" \
+  -H "DD-APPLICATION-KEY: ${APP_KEY}" \
   -d '{
     "data": {
         "type": "users",
@@ -361,9 +363,9 @@ HTTP/2 200
 ```sh
 curl -X DELETE \
   https://app.datadoghq.com/api/v2/roles/$ROLE_UUID/users \
-  -H 'Content-Type: application/json' \
-  -H 'DD-API-KEY: ${API_KEY}' \
-  -H 'DD-APPLICATION-KEY: ${APP_KEY}' \
+  -H "Content-Type: application/json" \
+  -H "DD-API-KEY: ${API_KEY}" \
+  -H "DD-APPLICATION-KEY: ${APP_KEY}" \
   -d '{
     "data": {
         "type": "users",
