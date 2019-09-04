@@ -22,7 +22,7 @@ Depending on your use-case and your submission method, one metric type may be mo
 | RATE                  | You want to monitor across several hosts the amount of request received over time.                                                                                              |
 | RATE                  | You have no control over the consistency of count temporal submission across your sources, hence you normalize by each individual interval to be able to compare them upstream. |
 | COUNT                 | You want to count the amount of time a function is called.                                                                                                                      |
-| COUNT                 | Counting the amount of revenues that have been made over a given amount of time.                                                                                                       |
+| COUNT                 | Counting the amount of revenues that have been made over a given amount of time.                                                                                                |
 
 But since RATE and COUNT aren't the same metric type, they don't have the same behavior/shape within Datadog graphs and monitors. In order to allow you to change on the fly between a RATE and a COUNT metric representation, Datadog has in-application modifiers functions that you can apply to your metrics within your graphs and monitor.
 
@@ -30,10 +30,10 @@ But since RATE and COUNT aren't the same metric type, they don't have the same b
 
 The two main in-application modifiers are `as_count()` and `as_rate()`
 
-| Modifiers | Description |
-| ------- | ------- |
-| `as_count()` | This functions set the operations necessary to display the given metric in COUNT form: giving you the absolute variation of a metric value over [a rollup interval][2]. Note that since it's depending on the rollup interval, [graphing a longer time interval changes your graph shape][3]. |
-| `as_rate()` | This functions set the operations necessary to display the given metric in RATE form: giving you the absolute variation of a metric value per second. |
+| Modifiers    | Description                                                                                                                                                                                                                                                                                   |
+| -------      | -------                                                                                                                                                                                                                                                                                       |
+| `as_count()` | This functions set the operations necessary to display the given metric in COUNT form: giving you the absolute variation of a metric value over [a rollup interval][2]. Note that since it's depending on the rollup interval, [graphing a longer time interval changes your graph shape][3]. |
+| `as_rate()`  | This functions set the operations necessary to display the given metric in RATE form: giving you the absolute variation of a metric value per second.                                                                                                                                         |
 
 Depending on the metric type you applied them to, their behavior differ:
 

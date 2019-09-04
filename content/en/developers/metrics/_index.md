@@ -15,15 +15,16 @@ further_reading:
   text: "Officials and Community-contributed API and DogStatsD client libraries"
 ---
 
-A Datadog metric is defined by the four properties below. To discover how to graph metrics within Datadog refer to the [Metrics Introduction documentation][1]:
+A Datadog metric is defined by the properties below. To discover how to graph metrics within Datadog refer to the [Metrics Introduction documentation][1]:
 
-| Property  | Description                                                                                                                                             |
-| ----      | ----                                                                                                                                                    |
-| Name      | The (name of your metric](#naming-metrics).                                                                                                             |
-| Value     | The value of your metric.                                                                                                                               |
-| Timestamp | The timestamp associated to the metric value. Note that metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past. |
-| Context   | The set of tags associated to your metric.                                                                                                              |
-| Type      | The type of your metric. See the [metric type documentation][2].                                                                                       |
+| Property    | Description                                                                                                                                             |
+| ----        | ----                                                                                                                                                    |
+| `Name`      | The (name of your metric](#naming-metrics).                                                                                                             |
+| `Value`     | The value of your metric.                                                                                                                               |
+| `Timestamp` | The timestamp associated to the metric value. Note that metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past. |
+| `Context`   | The set of tags associated to your metric.                                                                                                              |
+| `Type`      | The type of your metric. See the [metric type documentation][2].                                                                                        |
+| `interval`  | If the `type` of the metric is RATE or COUNT, it defines the corresponding interval.                                                                    |
 
 **If a metric is not submitted from one of the [350+ Datadog integrations][3] it's considered as a [Custom Metric][4].** Except for some standard integrations that do [emit some custom metrics by default][5].
 

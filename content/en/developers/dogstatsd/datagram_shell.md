@@ -25,8 +25,8 @@ This section specifies the raw datagram format for metrics, events, and Service 
 | ---------------                     | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<METRIC_NAME>`                     | Yes        | A string with no colons, bars, or @ characters. See the [metric naming policy][1].                                                                                   |
 | `<VALUE>`                           | Yes        | An integer or float.                                                                                                                                                 |
-| `<TYPE>`                            | Yes        | `c` for COUNT, `g` for GAUGE, `ms` for TIMER, `h` for HISTOGRAM, `s` for SET. See the [metric type documentation][2])                                                                                     |
-| `<SAMPLE_RATE>`                     | No         | A float between `0` and `1`, inclusive. Only works with COUNT, HISTOGRAM, and TIMER metrics. Default is `1` (i.e. sample 100% of the time).                              |
+| `<TYPE>`                            | Yes        | `c` for COUNT, `g` for GAUGE, `ms` for TIMER, `h` for HISTOGRAM, `s` for SET. See the [metric type documentation][2])                                                |
+| `<SAMPLE_RATE>`                     | No         | A float between `0` and `1`, inclusive. Only works with COUNT, HISTOGRAM, and TIMER metrics. Default is `1` (i.e. sample 100% of the time).                          |
 | `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No         | A comma separated list of tags. Use colons for key/value tags, i.e. `env:prod`. The key `device` is reserved; Datadog drops a user-added tag like `device:foobar`.   |
 
 Here are some example datagrams:
@@ -49,7 +49,7 @@ Here are some example datagrams:
 | ------------------------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------ |
 | `_e`                                 | Yes        | The datagram must begin with `_e`                                                                                        |
 | `<TITLE>`                            | Yes        | Event title.                                                                                                             |
-| `<TEXT>`                             | Yes        | Event text. Insert line breaks with an escaped slash (`\\n`).                                                             |
+| `<TEXT>`                             | Yes        | Event text. Insert line breaks with an escaped slash (`\\n`).                                                            |
 | `d:<TIMESTAMP>`                      | No         | Add a timestamp to the event. Default is the current Unix epoch timestamp.                                               |
 | `h:<HOSTNAME>`                       | No         | Add a hostname to the event. No default.                                                                                 |
 | `k:aggregation_key`                  | No         | Add an aggregation key to group the event with others that have the same key. No default.                                |
@@ -77,7 +77,7 @@ _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low
 | ------------------------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | `_sc`                                 | Yes        | the datagram must begin with `_sc`                                                                                                             |
 | `<NAME>`                              | Yes        | Service check name.                                                                                                                            |
-| `<STATUS>`                            | Yes        | Integer corresponding to the check status (OK = `0`, WARNING = `1`, CRITICAL = `2`, UNKNOWN = `3`).                                                    |
+| `<STATUS>`                            | Yes        | Integer corresponding to the check status (OK = `0`, WARNING = `1`, CRITICAL = `2`, UNKNOWN = `3`).                                            |
 | `d:<TIMESTAMP>`                       | No         | Add a timestamp to the check. Default is the current Unix epoch timestamp.                                                                     |
 | `h:<HOSTNAME>`                        | No         | Add a hostname to the event. No default.                                                                                                       |
 | `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`  | No         | The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default.                         |

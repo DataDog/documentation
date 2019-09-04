@@ -28,7 +28,7 @@ event(Title, Text, Timestamp, Hostname, AggregationKey, Priority, SourceTypeName
 | `Hostname`       | String          | no       | The name of the host.                                                                                   |
 | `AggregationKey` | String          | no       | A key to use for aggregating events.                                                                    |
 | `Priority`       | String          | no       | Specifies the priority of the event (`normal` or `low`).                                                |
-| `SourceTypeName` | String          | no       | The [source type][3] name.                           |
+| `SourceTypeName` | String          | no       | The [source type][3] name.                                                                              |
 | `AlertType`      | String          | no       | One of (`error`, `warning`, `success`, `info`), defaults to `info`.                                     |
 | `Tags`           | List of Strings | no       | A list of tags to associate with this event.                                                            |
 

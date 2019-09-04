@@ -56,14 +56,14 @@ To enable the Agent DogStatsD server:
 
 The following official DogStatsD client libraries natively support UDS traffic. Refer to the library's documentation on how to enable UDS traffic. Note that as with UDP, enabling client-side buffering is highly recommended to improve performance on heavy traffic:
 
-| Language | Library                            |
-|----------|------------------------------------|
-| Golang   | [DataDog/datadog-go][3]            |
-| Java     | [DataDog/java-dogstatsd-client][4] |
-| Python   | [DataDog/datadogpy][5]             |
-| Ruby     | [DataDog/dogstatsd-ruby][6]        |
-| PHP      | [DataDog/php-datadogstatsd][7]        |
-| C#      | [DataDog/dogstatsd-csharp-client][8]        |
+| Language   | Library                              |
+| ---------- | ------------------------------------ |
+| Golang     | [DataDog/datadog-go][3]              |
+| Java       | [DataDog/java-dogstatsd-client][4]   |
+| Python     | [DataDog/datadogpy][5]               |
+| Ruby       | [DataDog/dogstatsd-ruby][6]          |
+| PHP        | [DataDog/php-datadogstatsd][7]       |
+| C#         | [DataDog/dogstatsd-csharp-client][8] |
 
 
 #### Using netcat
