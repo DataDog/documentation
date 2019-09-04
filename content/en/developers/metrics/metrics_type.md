@@ -36,7 +36,7 @@ But the following metric types are accepted:
 * [SET](?tab=set#metric-type-definition)
 * [TIMERS](?tab=timers#metric-type-definition)
 
-See the [Submission types and Datadog in-app types section](#submission-types-and-datadog-in-app-types) to see how each metric types behave between its submission and its storage within Datadog.
+Which submission metric type to choose depends of your use-case and how your application is designed. Sometimes incrementing a COUNT metric is easier than keeping track of a variable historical value that you would send with a GAUGE metric, sometimes it's the other way around. If you want to combine multiple sources of submission, for example to calculate the average response time of different instances of a given service, then a HISTOGRAM or a DISTRIBUTION metric might be more suited. Refer to the Metric type definition section below to learn more about the different metrics type available, then see the [Submission types and Datadog in-app types section](#submission-types-and-datadog-in-app-types) to see how each metric types behave between its submission and its storage within Datadog.
 
 ## Metric type definition.
 
@@ -46,22 +46,28 @@ You have two web servers `web_1` and `web_2`. Each one of them deals with HTTP r
 
 They both receive:
 
-  * 1 request per second for 10 seconds
-  * 2 requests per second for 10 seconds
-  * 0 request for 10 seconds
+  * 1 request per second for 30 seconds
+  * 2 requests per second for 30 seconds
+  * 0 request for 30 seconds
+
+Then this patterns starts again.
 
 {{< tabs >}}
 {{% tab "Count" %}}
 
-**COUNT metric type represents an absolute value variation of a metric value over a defined time interval**, contrary to the RATE metric type that express this variation normalized _per second_.
+**COUNT metric type represents an absolute value variation of a metric's value over a defined time interval**, contrary to the RATE metric type that express this variation normalized _per second_.
 
-For instance let's say the `number.of.requests` metrics is reported every 10 seconds to Datadog with the COUNT type for `web_1`.
+For instance let's say the `number.of.requests.count` metrics is reported every 30 seconds to Datadog with the COUNT type for `web_1`.
 
-Each data point represents the number of requests received during the 10 second interval. The metric has then the following shape:
+Each data point represents the number of requests, the "count" of requests, received during the 30 second interval. The metric has then the following shape:
 
-* `10` for the first 10 seconds
-* `20` for the second interval of 10 seconds
-* `0` for the last interval of 10 seconds
+* `10` for the first 30 seconds
+* `20` for the second interval of 30 seconds
+* `0` for the last interval of 30 seconds
+
+Then this patterns starts again since the COUNT is the absolute variation of the number of requests:
+
+{{< img src="developers/metrics/metric_types/count_metric.png" alt="Count Metric" responsive="true">}}
 
 Note: StatsD counters can show a decimal value within Datadog since they are normalized over the flush interval to report a per-second units.
 
@@ -75,17 +81,45 @@ Discover how to submit count metrics:
 [2]: /developers/metrics/dogstatsd_metrics_submission/#count
 [3]: /api/?lang=python#post-timeseries-points
 {{% /tab %}}
+{{% tab "Rate" %}}
+
+**RATE metric type represents a normalized per second variation of a metric's value over a defined time interval**, contrary to the COUNT metric type that represents this variation with an absolute value.
+
+For instance let's say the `number.of.requests.rate` metrics is reported every 30 seconds to Datadog with the RATE type for `web_1`.
+
+Each data point represent the "rate" of requests. The metric has then the following shape:
+
+* `1` for the first 30 seconds
+* `2` for the second interval of 30 seconds
+* `0` for the last interval of 30 seconds
+
+Then this patterns starts again, since the RATE is the normalized per second variation of the number of requests:
+
+{{< img src="developers/metrics/metric_types/rate_metric.png" alt="Rate Metric" responsive="true">}}
+
+Discover how to submit rate metrics:
+
+* [With a custom Agent Check][1]
+* [With the Datadog API][2]
+
+[1]: /developers/metrics/agent_metrics_submission/?tab=rate
+[2]: /api/?lang=python#post-timeseries-points
+{{% /tab %}}
 {{% tab "Gauge" %}}
 
 **GAUGE metric type represents the value of a particular thing over time.** It's a snapshot of a value associated with a timestamp.
 
-For instance let's say the `number.of.requests` metrics is reported every 10 seconds to Datadog with the GAUGE type for `web_1`.
+For instance let's say the `number.of.requests.gauge` metrics is reported every 30 seconds to Datadog with the GAUGE type for `web_1`.
 
 Each data point represent the overall amount of requests received at a point in time. The metric has then the following shape:
 
-* `10` for the first 10 seconds
-* `30` for the second interval of 10 seconds
-* `30` for the last interval of 10 seconds
+* `10` for the first 30 seconds
+* `30` for the second interval of 30 seconds
+* `30` for the last interval of 30 seconds
+
+Then this patterns starts again, but it increases over time since the GAUGE metric type keeps track of how many requests have already been received:
+
+{{< img src="developers/metrics/metric_types/gauge_metric.png" alt="Gauge Metric" responsive="true">}}
 
 Discover how to submit gauge metrics:
 
@@ -96,26 +130,6 @@ Discover how to submit gauge metrics:
 [1]: /developers/metrics/agent_metrics_submission/?tab=gauge
 [2]: /developers/metrics/dogstatsd_metrics_submission/#gauge
 [3]: /api/?lang=python#post-timeseries-points
-{{% /tab %}}
-{{% tab "Rate" %}}
-
-**RATE metric type represents a normalized per second variation of a metric value over a defined time interval**, contrary to the COUNT metric type that represents this variation with an absolute value.
-
-For instance let's say the `number.of.requests` metrics is reported every 10 seconds to Datadog with the RATE type for `web_1`.
-
-Each data point represent the "rate" of requests. The metric has then the following shape:
-
-* `1` for the first 10 seconds
-* `2` for the second interval of 10 seconds
-* `0` for the last interval of 10 seconds
-
-Discover how to submit rate metrics:
-
-* [With a custom Agent Check][1]
-* [With the Datadog API][2]
-
-[1]: /developers/metrics/agent_metrics_submission/?tab=rate
-[2]: /api/?lang=python#post-timeseries-points
 {{% /tab %}}
 {{% tab "Histogram" %}}
 

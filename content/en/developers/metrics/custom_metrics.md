@@ -5,7 +5,7 @@ aliases:
   - /getting_started/custom_metrics
 ---
 
-If a metric is not submitted from one of the [350+ Datadog integrations][1] it's considered as a custom metric, this page explains:
+If a metric is not submitted from one of the [350+ Datadog integrations][1] it's considered as a custom metric (Except for some standard integrations that do [emit some custom metrics by default][2]). This page explains:
 
 * [What a custom metric is, and how you can submit it to Datadog](#how-is-a-custom-metric-defined).
 * [How many custom metrics are allowed depending of your plan](#how-many-custom-metrics-am-i-allowed).
@@ -15,7 +15,7 @@ If a metric is not submitted from one of the [350+ Datadog integrations][1] it's
 
 **A custom metric refers to a single, unique combination of a metric name, host, and any tags.**
 
-Custom metrics generally refer to any metric that you send using StatsD, [DogStatsD][2], or through extensions made to the [Datadog Agent][3]. Some [integrations][4] can potentially emit an unlimited number of metrics that can also count as custom. See [standard integrations emit custom metrics][5] for details.
+Custom metrics generally refer to any metric that you send using StatsD, [DogStatsD][3], or through extensions made to the [Datadog Agent][4]. Some [integrations][5] can potentially emit an unlimited number of metrics that can also count as custom. See [standard integrations emit custom metrics][6] for details.
 
 Use tags to fully leverage the capabilities of Datadog through scoping and alerting. When using tags, one submitted metric actually leads to **multiple unique tag combinations**- counting towards your custom metrics count:
 
@@ -73,7 +73,7 @@ Using the aforementioned example, below shows three scenarios which would all be
 
 {{< img src="developers/metrics/custom_metrics/custom-metrics-1.jpg" alt="custom-metrics-1" responsive="true" style="width:75%;">}}
 
-There are no enforced [fixed rate limits][6] on custom metric submission. If you're exceeding your default allotment, a Datadog support agent will reach out to you.
+There are no enforced [fixed rate limits][7] on custom metric submission. If you're exceeding your default allotment, a Datadog support agent will reach out to you.
 
 ## How do I check my custom metrics count?
 
@@ -106,7 +106,7 @@ Across your 3 hosts, you'd have 13 distinct metrics, here is why :
 
 {{< img src="developers/metrics/custom_metrics/metric_count.png" alt="metric_count" responsive="true" style="width:75%;">}}
 
-If you are an administrator, you can see your total custom metrics per hour as well as the top 500 custom metrics by cardinality in your account in [the usage details page][7]. You can also see this metric count on your [metric summary page][8], where you'd see, clicking on the service.request.count metric, the exact number of unique tag combinations:
+If you are an administrator, you can see your total custom metrics per hour as well as the top 500 custom metrics by cardinality in your account in [the usage details page][8]. You can also see this metric count on your [metric summary page][9], where you'd see, clicking on the service.request.count metric, the exact number of unique tag combinations:
 
 So if you only had the first host from the example above reporting, you'd have this:
 
@@ -130,7 +130,7 @@ Ultimately, you'll have 13 metrics using the following query: `count:service.req
 
 ### Counting custom metrics from gauges, counts, histograms, and rates
 
-A [gauge][9] represents one value per second (examples: temperature or Kafka queue offset).
+A [gauge][10] represents one value per second (examples: temperature or Kafka queue offset).
 
 Suppose you are interested in measuring the average `temperature` in the state of Florida. `temperature` is stored as a `gauge` metric type in Datadog. You collect the following temperature measurements every 10 seconds during the past minute from Orlando, Miami, Boston, New York and Seattle, each tagged with information about the `city`, `state`, `region`, and `country`.
 
@@ -217,11 +217,12 @@ The total number of custom metrics emitted from the `age` distribution metric WI
 {{< img src="developers/metrics/custom_metrics/38-timeseries.png" alt="[4 x (2)] + [5 x ((3) x (2))] = 38 timeseries." responsive="true" style="width:70%;">}}
 
 [1]: /integrations
-[2]: /developers/metrics/dogstatsd_metrics_submission
-[3]: /agent
-[4]: /integrations
-[5]: /account_management/billing/custom_metrics/#standard-integrations
-[6]: /api/#rate-limiting
-[7]: https://app.datadoghq.com/account/usage/hourly
-[8]: https://app.datadoghq.com/metric/summary
-[9]: https://docs.datadoghq.com/developers/metrics/gauges
+[2]: /account_management/billing/custom_metrics/#standard-integrations
+[3]: /developers/metrics/dogstatsd_metrics_submission
+[4]: /agent
+[5]: /integrations
+[6]: /account_management/billing/custom_metrics/#standard-integrations
+[7]: /api/#rate-limiting
+[8]: https://app.datadoghq.com/account/usage/hourly
+[9]: https://app.datadoghq.com/metric/summary
+[10]: https://docs.datadoghq.com/developers/metrics/gauges

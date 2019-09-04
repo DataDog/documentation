@@ -25,7 +25,7 @@ A Datadog metric is defined by the four properties below. To discover how to gra
 | Context   | The set of tags associated to your metric.                                                                                                              |
 | Type      | The type of your metric. See the [metric type documentation][2].                                                                                       |
 
-**Note**: **If a metric is not submitted from one of the [350+ Datadog integrations][3] it's considered as a [Custom Metric][4].**
+**If a metric is not submitted from one of the [350+ Datadog integrations][3] it's considered as a [Custom Metric][4].** Except for some standard integrations that do [emit some custom metrics by default][5].
 
 ### Naming metrics
 
@@ -50,7 +50,7 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
     {{< nextlink href="/api/?lang=python#post-timeseries-points" >}}Submit metrics with Datadog's HTTP API.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-Alternatively you can use the [Dropwizard Java metrics library][5] with the [metrics-datadog][6] backend. Thanks to the people at [Vistar Media][7], [Coursera][8], and [Bazaarvoice][9] for their contributions.
+Alternatively you can use the [Dropwizard Java metrics library][6] with the [metrics-datadog][7] backend. Thanks to the people at [Vistar Media][8], [Coursera][9], and [Bazaarvoice][10] for their contributions.
 
 ## Further reading
 
@@ -60,8 +60,9 @@ Alternatively you can use the [Dropwizard Java metrics library][5] with the [met
 [2]: /developers/metrics/metrics_type
 [3]: /integrations
 [4]: /developers/metrics/custom_metrics
-[5]: https://github.com/dropwizard/metrics
-[6]: https://github.com/coursera/metrics-datadog
-[7]: http://www.vistarmedia.com
-[8]: https://www.coursera.org
-[9]: http://www.bazaarvoice.com
+[5]: /account_management/billing/custom_metrics/#standard-integrations
+[6]: https://github.com/dropwizard/metrics
+[7]: https://github.com/coursera/metrics-datadog
+[8]: http://www.vistarmedia.com
+[9]: https://www.coursera.org
+[10]: http://www.bazaarvoice.com

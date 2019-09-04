@@ -24,15 +24,13 @@ Depending of your use-case and your submission method, one metric type may be mo
 | COUNT                 | You want to count the amount of time a function is called.                                                                                                                      |
 | COUNT                 | Counting the amount of revenues have be made over a given amount of time.                                                                                                       |
 
-Since RATE and COUNT aren't the same metric type, they don't have the same behavior within Datadog graphs and monitors. In some corner cases RATE metric type might encounter some issues, for instance:
+Since RATE and COUNT aren't the same metric type, they don't have the same behavior within Datadog graphs and monitors. In some corner cases where a RATE metric would be sparse you might encounter some issues, for instance:
 
-TO DO: Give example of temporal RATE aggregation when zooming out of a Graph
+
 
 In order to mitigate this, Datadog offers you In-application modifiers functions that you can apply to your metrics within your graphs and monitor in order to switch on the fly a RATE to a COUNT and vice-versa.
 
 ## In-application modifiers
-
- set the operations necessary to display the given metric in count form (increments per interval) or rate form (increments per second)
 
 The two main in-application modifiers are `as_count()` and `as_rate()`
 
@@ -62,7 +60,7 @@ Depending of the metric type you applied them to, their behavior differ:
 * Effect of `as_count()`:
   * Disable any [interpolation][1].
   * Sets the time aggregator to SUM.
-  * Multiply the result post-aggregation by the sampling interval: For example `[0.05, 0.05, 0.05, 0.05].as_count() for rollup interval of 20s produces `[1,1,1,1]`.
+  * Multiply the result post-aggregation by the sampling interval: For example `[0.05, 0.05, 0.05, 0.05].as_count()` for rollup interval of 20s produces `[1,1,1,1]`.
 * Effect of `as_rate()`:
   * Disable any [interpolation][1].
   * Sets the time aggregator to SUM
