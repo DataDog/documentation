@@ -232,9 +232,10 @@ test_pa11y_live:
   <<: *base_template
   stage: post-deploy
   environment: "preview"
+  dependencies:
+    - build_preview
   allow_failure: true
   script:
-    - pull_artifact_from_s3
     - pa11y_test
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
