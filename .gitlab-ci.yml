@@ -236,6 +236,7 @@ test_pa11y_live:
     - build_preview
   allow_failure: true
   script:
+    - ls
     - pa11y_test
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
