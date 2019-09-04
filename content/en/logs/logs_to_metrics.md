@@ -60,8 +60,8 @@ Datadog would love to receive your feedback on this feature. You can submit your
 <br>
 *Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /logs/logging_without_limits
-[2]: /logs/logging_without_limits/#exclusion-filters
+[1]: /logs
+[2]: /logs/indexes/#exclusion-filters
 [3]: https://app.datadoghq.com/logs/pipelines
 [4]: https://app.datadoghq.com/logs/pipelines/generate-metrics
 [5]: /logs/explorer/search/#search-syntax

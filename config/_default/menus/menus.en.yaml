@@ -916,46 +916,17 @@ main:
     parent: "log_processing"
     weight: 204
 
-  - name: "Generate Metrics"
-    url: "logs/logs_to_metrics/"
-    parent: "log_management"
-    identifier: "log_to_metrics"
-    weight: 3
-
   - name: "Live Tail"
     url: "logs/live_tail/"
     parent: "log_management"
     identifier: "log_live_tail"
-    weight: 4
+    weight: 3
 
-  ## LOGS - Explorer
-
-  - name: "Explorer"
-    url: "logs/explorer/"
+  - name: "Generate Metrics"
+    url: "logs/logs_to_metrics/"
     parent: "log_management"
-    identifier: "log_explorer"
+    identifier: "log_to_metrics"
     weight: 4
-  - name: "Search"
-    url: "logs/explorer/search/"
-    parent: "log_explorer"
-    weight: 401
-  - name: "Log Analytics"
-    url: "logs/explorer/analytics/"
-    parent: "log_explorer"
-    weight: 402
-  - name: "Saved Views"
-    url: "logs/explorer/saved_views/"
-    parent: "log_explorer"
-    weight: 403
-  - name: "Log Patterns"
-    url: "logs/explorer/patterns/"
-    parent: "log_explorer"
-    weight: 404
-
-  - name: "Logging without Limits"
-    url: "logs/logging_without_limits/"
-    parent: "log_management"
-    weight: 5
 
   ## LOGS - Archives
 
@@ -963,26 +934,56 @@ main:
     url: "logs/archives/"
     parent: "log_management"
     identifier: "log_archives"
-    weight: 6
+    weight: 5
   - name: "Archive to AWS S3"
     url: "logs/archives/s3/"
     parent: "log_archives"
-    weight: 601
+    weight: 501
   - name: "Rehydrate from Archives"
     url: "logs/archives/rehydrating"
     parent: "log_archives"
-    weight: 602
+    weight: 502
+
+  - name: "Indexes"
+    url: "logs/indexes"
+    parent: "log_management"
+    identifier: "log_indexes"
+    weight: 6
+
+  ## LOGS - Explorer
+
+  - name: "Log Explorer"
+    url: "logs/explorer/"
+    parent: "log_management"
+    identifier: "log_explorer"
+    weight: 7
+  - name: "Search"
+    url: "logs/explorer/search/"
+    parent: "log_explorer"
+    weight: 701
+  - name: "Log Analytics"
+    url: "logs/explorer/analytics/"
+    parent: "log_explorer"
+    weight: 702
+  - name: "Saved Views"
+    url: "logs/explorer/saved_views/"
+    parent: "log_explorer"
+    weight: 703
+  - name: "Log Patterns"
+    url: "logs/explorer/patterns/"
+    parent: "log_explorer"
+    weight: 704
 
   - name: "Guides"
     url: "logs/guide/"
     parent: "log_management"
     identifier: "log_guides"
-    weight: 7
+    weight: 8
 
   - name: "Security"
     url: "security/logs/"
     parent: "log_management"
-    weight: 8
+    weight: 9
 
 ################
 ## SYNTHETICS ##
