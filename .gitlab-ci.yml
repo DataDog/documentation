@@ -18,7 +18,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:zach_add-pa11y-docs
   tags:
     - "runner:main"
     - "size:large"
@@ -229,3 +229,14 @@ post_failure_event_to_dd_live:
     - post_dd_metric "documentation.pipeline.completed" "0" "" "failure"
   only:
     - master
+
+test_pa11y_live:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  allow_failure: true
+  script:
+    - pull_artifact_from_s3
+    - pa11y_test
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
