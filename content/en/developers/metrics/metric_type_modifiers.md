@@ -35,6 +35,7 @@ In order to mitigate this, Datadog offers you In-application modifiers functions
 The two main in-application modifiers are `as_count()` and `as_rate()`
 
 | Modifiers | Description |
+| ------- | ------- |
 | `as_count()` | This functions set the operations necessary to display the given metric in COUNT form: giving you the absolute variation of a metric value over [a rollup interval][2]. Note that since it's depending of the rollup interval, [graphing a longer time interval changes your graph shape][3]. |
 | `as_rate()` | This functions set the operations necessary to display the given metric in RATE form: giving you the absolute variation of a metric value per second. |
 
