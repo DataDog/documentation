@@ -13,7 +13,7 @@ kind: faq
 {{< tabs >}}
 {{% tab "Host Based Deployment" %}}
 
-Any machine running its own OS - physical machine, virtual machine or cloud instance (virtual machine on a cloud) is considered a host. For billing APM, number of hosts sending traces are calculated every hour. At the end of the month, you are billed based on your 99th percentile usage. This includes 1 million APM events per host that you can slice and dice using with Trace Search and Analytics.
+Any machine running its own OS - physical machine, virtual machine or cloud instance (virtual machine on a cloud) is considered a host. For billing APM, number of hosts sending traces are calculated every hour. At the end of the month, you are billed based on your 99th percentile usage. This includes 1 million [APM events] [4] per host that you can slice and dice using with Trace Search and Analytics.
 
 {{% /tab %}}
 {{% tab "Containerized Deployment" %}}
@@ -46,11 +46,6 @@ Using a combination of deployment environments? Find pricing for sample deployme
 
 [1]: /integrations/ecs_fargate/#trace-collection
 {{% /tab %}}
-{{% tab "Serverless" %}}
-
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Calculate APM event count and Retention
 
@@ -109,7 +104,7 @@ You can choose to configure trace search and analytics per service or per integr
 
 ### Event Filtering
 
-Enable [Event Filtering](link) to send APM events at 100% throughput by default. For example, a Java service with 100 requests will generate 100 APM events from its `servlet.request` spans, as each `servlet.request` span generates an APM event. [Filtering APM events][9] has the benefit of reducing the number of billable APM events and has no effect on trace sampling. Once a service has been filtered lower than 100%, APM event analytics are upscaled to display an estimate by default, and you have the option to display the filtered value
+Enable [Event Filtering][9] to send APM events at 100% throughput by default. For example, a Java service with 100 requests will generate 100 APM events from its `servlet.request` spans, as each `servlet.request` span generates an APM event. [Filtering APM events][10] has the benefit of reducing the number of billable APM events and has no effect on trace sampling. Once a service has been filtered lower than 100%, APM event analytics are upscaled to display an estimate by default, and you have the option to display the filtered value
 
 {{< img src="tracing/trace_search_and_analytics/analytics/apm_event_filtering.png" alt="APM Event Filtering" responsive="true" style="width:100%;">}}
 
@@ -133,15 +128,17 @@ AWS environment with one application that scales between 20-40 containers on 4-8
 
 ### Sample 3
 Sample 2: 20 worker nodes in ECS AWS, where each worker node runs on an average 20 pods. Each pod is configured to run an application with Datadog APM enabled.
-Price: If you deploy one Agent container running per node, price is (Price per APM host) * (No. of Nodes = 20)
+
+*Price:* If you deploy one Agent container running per node, price is (Price per APM host) * (No. of Nodes = 20)
 
 
 [1]: /tracing
-[2]: tracing/trace_search_and_analytics
+[2]: /tracing/trace_search_and_analytics
 [3]: /tracing/visualization/#trace
 [4]: /tracing/visualization/#apm-event
 [5]: /tracing/trace_search_and_analytics/?tab=java#configure-additional-services-optional
 [6]: https://app.datadoghq.com/account/usage
 [7]: link
 [8]: https://app.datadoghq.com/apm/search/analytics
-[9]: 
+[9]: https://app.datadoghq.com/apm/docs/trace-search?env=datadoghq.com
+[10]: https://app.datadoghq.com/apm/settings?env=datadoghq.com&activeTab=0
