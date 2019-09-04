@@ -8,14 +8,14 @@ aliases:
 If a metric is not submitted from one of the [350+ Datadog integrations][1] it's considered as a custom metric (Except for some standard integrations that do [emit some custom metrics by default][2]). This page explains:
 
 * [What a custom metric is, and how you can submit it to Datadog](#how-is-a-custom-metric-defined).
-* [How many custom metrics are allowed depending of your plan](#how-many-custom-metrics-am-i-allowed).
+* [How many custom metrics are allowed depending on your plan](#how-many-custom-metrics-am-i-allowed).
 * [How to check your custom metric count over time](#how-do-i-check-my-custom-metrics-count).
 
 ## How is a custom metric defined ?
 
 **A custom metric refers to a single, unique combination of a metric name, host, and any tags.**
 
-Custom metrics generally refer to any metric that you send using StatsD, [DogStatsD][3], or through extensions made to the [Datadog Agent][4]. Some [integrations][5] can potentially emit an unlimited number of metrics that can also count as custom. See [standard integrations emit custom metrics][6] for details.
+Custom metrics generally refer to any metric that you send using StatsD, [DogStatsD][3], or through extensions made to the [Datadog Agent][4]. Some [integrations][5] can potentially emit an unlimited amount of metrics that can also count as custom. See [standard integrations emit custom metrics][6] for details.
 
 Use tags to fully leverage the capabilities of Datadog through scoping and alerting. When using tags, one submitted metric actually leads to **multiple unique tag combinations**- counting towards your custom metrics count:
 
@@ -43,8 +43,8 @@ In this situation, you would end up with 6 different metrics.
 
 Note that the ordering of tags does not matter, so the following two metrics would be considered non-unique:
 
-* auth.exceptionCount with tags `method:X` and `exception:A`
-* auth.exceptionCount with tags `exception:A` and `method:X`
+* `auth.exceptionCount` with tags `method:X` and `exception:A`
+* `auth.exceptionCount` with tags `exception:A` and `method:X`
 {{% /tab %}}
 {{% tab "Example 2" %}}
 
@@ -79,9 +79,9 @@ There are no enforced [fixed rate limits][7] on custom metric submission. If you
 
 When creating a custom metric, all the host tags are automatically added to that metric as one unique tag combination, to which you'll add the tags linked to the metric itself. Those are the most important as they add to the actual metric count.
 
-Let's say you want to have insight into the request.count from different services across your infrastructure.
+Let's say you want to have insight into the `request.count` from different services across your infrastructure.
 
-* You create your metric service.request.count
+* You create your metric `service.request.count`
 * You want to separate the requests that were successful from the failures. You create two tags to that effect:
     * `status:success`
     * `status:failure`
@@ -130,9 +130,9 @@ Ultimately, you'll have 13 metrics using the following query: `count:service.req
 
 ### Counting custom metrics from gauges, counts, histograms, and rates
 
-A [gauge][10] represents one value per second (examples: temperature or Kafka queue offset).
+A [GAUGE][10] represents one value per second (examples: temperature or Kafka queue offset).
 
-Suppose you are interested in measuring the average `temperature` in the state of Florida. `temperature` is stored as a `gauge` metric type in Datadog. You collect the following temperature measurements every 10 seconds during the past minute from Orlando, Miami, Boston, New York and Seattle, each tagged with information about the `city`, `state`, `region`, and `country`.
+Suppose you are interested in measuring the average `temperature` in the state of Florida. `temperature` is stored as a GAUGE metric type in Datadog. You collect the following temperature measurements every 10 seconds during the past minute from Orlando, Miami, Boston, New York and Seattle, each tagged with information about the `city`, `state`, `region`, and `country`.
 
 |                                |      |      |      |      |      |      |      |
 | ------------------------------ | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
@@ -142,7 +142,7 @@ Suppose you are interested in measuring the average `temperature` in the state o
 | New York, NY, Northeast, USA   | 79   | 79   | 79   | 79   | 79   | 79   | 79   |
 | Seattle, WA, Northwest, USA    | 75   | 75   | 75   | 75   | 75   | 75   | 75   |
 
-The total number of custom metrics associated with the `temperature` gauge metric is five. Each unique string combination of `city`, `state`, `region` and `country` tagged to the temperature data counts as a custom metric (in other words a timeseries of data stored by Datadog).
+The total number of custom metrics associated with the `temperature` GAUGE metric is five. Each unique string combination of `city`, `state`, `region` and `country` tagged to the temperature data counts as a custom metric (in other words a timeseries of data stored by Datadog).
 
 Using the five timeseries above, you can determine the average `temperature` in the US, Northeast, or Florida at query time.
 
@@ -150,7 +150,7 @@ Using the five timeseries above, you can determine the average `temperature` in 
 
 #### Dropping tags
 
-Suppose you want to drop the `country` tag from the gauge `temperature` metric.
+Suppose you want to drop the `country` tag from the GAUGE `temperature` metric.
 
 |                                |      |      |      |      |      |      |      |
 | ------------------------------ | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
@@ -162,7 +162,7 @@ Suppose you want to drop the `country` tag from the gauge `temperature` metric.
 
 Even though there are five cities, four states, three regions, and one country, there are still five unique tag value combinations of `city`, `state`, `region`, and `country` that appear in the data. The total number of custom metrics emitted from the `temperature` metric is still five.
 
-Suppose you drop the `city` tag from the gauge `temperature` metric.
+Suppose you drop the `city` tag from the GAUGE `temperature` metric.
 
 |                                |      |      |      |      |      |      |      |
 | ------------------------------ | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
@@ -175,7 +175,7 @@ Now there are four unique tag value combinations that appear in the `temperature
 
 ### Counting custom metrics from distributions
 
-A distribution metric gathers all values across all hosts emitting metric values in ten-second flush intervals. Distributions emit a number of custom metrics that is proportional to the number of custom metrics emitted from `gauges`. Distributions generate four timeseries for each unique tag value combination that appears in the data: `sum`, `count`, `min`, and `max` (`avg` is calculated from the sum/count).
+A distribution metric gathers all values across all hosts emitting metric values in ten-second flush intervals. Distributions emit a number of custom metrics that is proportional to the number of custom metrics emitted from GAUGE. Distributions generate four timeseries for each unique tag value combination that appears in the data: `sum`, `count`, `min`, and `max` (`avg` is calculated from the sum/count).
 
 Suppose you are interested in measuring the maximum `age` metric in the state of New York. `age` is submitted to Datadog as a distribution metric tagged with `city` and `state` :
 
@@ -208,7 +208,7 @@ Therefore, Datadog needs to precalculate five timeseries (`p50`,`p75`,`p90`,`p95
  * (`Null` city), NY
  * Rochester, NY
  * New York, NY
- * (`Null` city), (`null` state) -- equivalent to `*`: all time series.
+ * (`Null` city), (`null` state) -- equivalent to `*`: all timeseries.
 
 There are three potentially queryable values for the `city` tag: {Rochester, New York, `null`} and two values for the `state` tag: {NY, `null`}.
 

@@ -8,14 +8,14 @@ further_reading:
   text: "Write an Agent Custom Check"
 ---
 
-Different functions are available depending of the [Metric Type][1] to send metrics to Datadog through a [custom Agent Check][2]. Depending of the function used, the submission metric type and the actual metric type stored within Datadog might differ.
+Different functions are available depending on the [Metric Type][1] to send metrics to Datadog through a [custom Agent Check][2]. Depending on the function used, the submission metric type and the actual metric type stored within Datadog might differ.
 
 {{< tabs >}}
 {{% tab "Count" %}}
 
 ### `monotonic_count()`
 
-This functions is used to track a raw counter that **always increases**. You shouldn't normalize the values to a rate, or calculate the deltas before submitting, as the Agent does it for you. Samples that have a lower value than the previous sample are ignored (it usually means that the underlying raw counter has been reset). It can be called multiple times during a check's execution.
+This function is used to track a raw counter that **always increases**. You shouldn't normalize the values to a rate, or calculate the deltas before submitting, as the Agent does it for you. Samples that have a lower value than the previous sample are ignored (it usually means that the underlying raw counter has been reset). It can be called multiple times during a check's execution.
 
 Example: Submitting samples 2, 3, 6, 7 sends 5 (i.e. 7-2) during the first check execution; then, submitting samples 10, 11 on the same `monotonic_count` sends 4 (i.e. 11-7) during the second check execution.
 
@@ -59,7 +59,7 @@ self.count(name, value, tags=None, hostname=None, device_name=None)
 
 Those **deprecated** functions are used to modify a count of events identified by a metric key string by 1 at each call. It can be called multiple times during a check's execution, and is handled by the aggregator Counter class. If you want to increment/decrement by more than one, you must use the `count()` function.
 
-**Note**: Metrics submitted with this function are stored with a **RATE** type in Datadog. Each value in the stored timeseries is a delta of the counter's value between samples (time-normalized by the aggregation interval which defaults to 1 for Agent checks—so the value is generally the raw count value).
+**Note**: Metrics submitted with those functions are stored with a **RATE** type in Datadog. Each value in the stored timeseries is a delta of the counter's value between samples (time-normalized by the aggregation interval which defaults to 1 for Agent checks—so the value is generally the raw count value).
 
 Find below the functions usage:
 
@@ -83,6 +83,7 @@ self.decrement(name, value=1, tags=None, hostname=None, device_name=None)
 {{% tab "Gauge" %}}
 
 ### `gauge()`
+
 This function submits the value of a metric at a given timestamp. If called multiple times during a check's execution for a metric only the last sample is used.
 
 **Note**: Metrics submitted with this function are stored with a **GAUGE** metric type in Datadog.
@@ -248,7 +249,7 @@ Here is an example of a dummy Agent check sending all metrics type periodically,
 
         (...)
     ```
-5. Finally go into your [Metric Summary page][6] to see your metrics reporting:
+5. Finally, go to your [Metric Summary page][6] to see your metrics reporting:
 
 {{< img src="developers/metrics/agent_metrics_submission/metrics_metrics_summary.png" alt="Metrics in metric summary" responsive="true" style="width:80%;">}}
 

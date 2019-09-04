@@ -12,7 +12,7 @@ further_reading:
   text: "Introduction to DogStatsD"
 - link: "developers/libraries"
   tag: "Documentation"
-  text: "Official and Community-contributed API and DogStatsD client libraries"
+  text: "Officials and Community-contributed API and DogStatsD client libraries"
 - link: "https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd"
   tag: "GitHub"
   text: "DogStatsD source code"
@@ -44,13 +44,13 @@ As it receives data, DogStatsD aggregates multiple data points for each unique m
 
 ## Setup
 
-To setup DogStatsD, configure first your Agent to enable the DogStatsD server then instrument your code to send data to it.
+To set up DogStatsD, configure first your Agent to enable the DogStatsD server then instrument your code to send data to it.
 
 ### Agent
 
 To enable the Agent DogStatsD server:
 
-1. Edit your `datadog.yaml` file to uncomment the `use_dogstatsd` and  `dogstatsd_port` parameters:
+1. Edit your `datadog.yaml` file to un-comment the `use_dogstatsd` and  `dogstatsd_port` parameters:
 
     ```yaml
     ## @param use_dogstatsd - boolean - optional - default: true
@@ -67,11 +67,11 @@ To enable the Agent DogStatsD server:
 
 2. [Restart your Agent][7].
 
-By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][8], and restart the Agent. You can also configure DogStatsD to use a [Unix Domain Socket][9].
+By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][8], and restart the Agent. You can also configure DogStatsD to use a [Unix domain socket][9].
 
 ### Code
 
-The following officials Datadog-DogStatsD client libraries are available for your code depending of its language:
+The following officials Datadog-DogStatsD client libraries are available for your code depending on its language:
 
 * [Python][10]
 * [Ruby][11]
@@ -84,7 +84,7 @@ The following officials Datadog-DogStatsD client libraries are available for you
 
 #### Install the DogStatsD client
 
-Start by installing the DogStatsD client depending of your language:
+Start by installing the DogStatsD client depending on your language:
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -130,7 +130,7 @@ Add the following to your `composer.json`:
 "datadog/php-datadogstatsd": "1.4.*"
 ```
 
-Note: The first version shipped in composer is *0.0.3*
+Note: The first version shipped in Composer is *0.0.3*
 
 Or manually, clone the repository at [github.com/DataDog/php-datadogstatsd][1] and set it up with `require './src/DogStatsd.php'`;
 
@@ -256,9 +256,9 @@ In addition to the basic required DogStatsD configuration (the url and port to r
 | ----------             | ----            | -------     | ------------                                                                                            |
 | `statsd_host`          | String          | `localhost` | The host of your DogStatsD server.                                                                      |
 | `statsd_port`          | Integer         | `8125`      | The port of your DogStatsD server.                                                                      |
-| `statsd_socket_path`   | String          | `null`      | The path to the DogStatsD UNIX socket (overrides `host` and `port`, only supported with the Agent v6+). |
+| `statsd_socket_path`   | String          | `null`      | The path to the DogStatsD Unix domain socket (overrides `host` and `port`, only supported with the Agent v6+). |
 | `statsd_constant_tags` | List of Strings | `null`      | Tags to apply to all metrics, events, and Service Checks send by this client.                           |
-| `statsd_namespace`     | String          | `null`      | Namespace to prepend to all metrics, events, and service checks name send by this client.               |
+| `statsd_namespace`     | String          | `null`      | Namespace to prefix all metrics, events, and service checks name send by this client.               |
 
 Find more about the [DogStatsD module in the dedicated documentation][1]
 [1]: https://datadogpy.readthedocs.io/en/latest
@@ -269,17 +269,17 @@ Find more about the [DogStatsD module in the dedicated documentation][1]
 | --------      | ------          | -------     | ----------                                                                                              |
 | `host`        | String          | `localhost` | The host of your DogStatsD server.                                                                      |
 | `port`        | Integer         | `8125`      | The port of your DogStatsD server.                                                                      |
-| `socket_path` | String          | `null`      | The path to the DogStatsD UNIX socket (overrides `host` and `port`, only supported with the Agent v6+). |
+| `socket_path` | String          | `null`      | The path to the DogStatsD Unix domain socket (overrides `host` and `port`, only supported with the Agent v6+). |
 | `tags`        | List of Strings | `null`      | Tags to apply to all metrics, events, and Service Checks send by this client.                           |
-| `namespace`   | String          | `null`      | Namespace to prepend to all metrics, events, and service checks name send by this client.               |
+| `namespace`   | String          | `null`      | Namespace to prefix to all metrics, events, and service checks name send by this client.               |
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
 | Parameter               | Type            | Description                                                                                                                                                                                                                                                            |
 | ----------              | ----            | ---------                                                                                                                                                                                                                                                              |
-| `Namespace`             | String          | Namespace to prepend to all metrics, events and service checks name.                                                                                                                                                                                                   |
-| `Tags`                  | List of Strings | Global tags to be applied to every metrics, events, and Service Checks send by this client.                                                                                                                                                                            |
+| `Namespace`             | String          | Namespace to prefix to all metrics, events and service checks name.                                                                                                                                                                                                   |
+| `Tags`                  | List of Strings | Global tags to be applied to every metric, event, and Service Check send by this client.                                                                                                                                                                            |
 | `Buffered`              | Boolean         | `Buffered` allows to pack multiple DogStatsD messages in one payload. If `true` messages are buffered until the total size of the payload exceeds `MaxMessagesPerPayload` metrics, events, and/or service checks or after 100ms since the payload started to be built. |
 | `MaxMessagesPerPayload` | Integer         | The maximum number of metrics, events, and/or service checks a single payload can contain. This option only takes effect when the client is buffered.                                                                                                                  |
 | `AsyncUDS`              | Boolean         | Allows to switch between async and blocking mode for UDS. Blocking mode allows for error checking but does not guarantee that calls won't block the execution.                                                                                                         |
@@ -296,7 +296,7 @@ Find more about the [different options in the dedicated documentation][1]
 | `prefix`       | String          | The prefix to apply to all metrics, events, and Service Check sent via this client.         |
 | `hostname`     | String          | The host name of the targeted StatsD server.                                                |
 | `port`         | Integer         | The port of the targeted StatsD server.                                                     |
-| `constantTags` | List of Strings | Global tags to be applied to every metrics, events, and Service Checks send by this client. |
+| `constantTags` | List of Strings | Global tags to be applied to every metric, event, and Service Check send by this client. |
 
 Find more about the [NonBlockingStatsDClient Class in the dedicated documentation][1]
 
@@ -308,7 +308,7 @@ Find more about the [NonBlockingStatsDClient Class in the dedicated documentatio
 | ------        | --------        | --------    | ---------                                                                                                                                                                |
 | `host`        | String          | `localhost` | The host of your DogStatsD server, if not set tries to get it from the `DD_AGENT_HOST` environment variable.                                                             |
 | `port`        | Integer         | `8125`      | The port of your DogStatsD server, if not set, it tries to get it from the `DD_DOGSTATSD_PORT` environment variable.                                                     |
-| `socket_path` | String          | `null`      | The path to the DogStatsD UNIX socket (overrides `host` and `port`, only supported with the Agent v6+).                                                                  |
+| `socket_path` | String          | `null`      | The path to the DogStatsD Unix domain socket (overrides `host` and `port`, only supported with the Agent v6+).                                                                  |
 | `global_tags` | List of Strings | `null`      | Tags to apply to all metrics, events, and Service Checks sent, the `@dd.internal.entity_id` tag is appended to global_tags from the `DD_ENTITY_ID` environment variable. |
 
 {{% /tab %}}
@@ -318,8 +318,8 @@ Find more about the [NonBlockingStatsDClient Class in the dedicated documentatio
 | --------           | -------         | ----        | ---------                                                                                   |
 | `StatsdServerName` | String          | `localhost` | The host name of the targeted StatsD server.                                                |
 | `StatsdPort`       | Integer         | `8125`      | The port of the targeted StatsD server.                                                     |
-| `Prefix`           | String          | `null`      | The prefix to apply to all metrics, events, and Service Check sent via this client.         |
-| `ConstantTags`     | List of Strings | `null`      | Global tags to be applied to every metrics, events, and Service Checks send by this client. |
+| `Prefix`           | String          | `null`      | Prefix to apply to every metric, event, and Service Check sent via this client.         |
+| `ConstantTags`     | List of Strings | `null`      | Global tags to be applied to every metric, event, and Service Check send by this client. |
 
 {{% /tab %}}
 {{< /tabs >}}

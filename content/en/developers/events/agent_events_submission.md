@@ -27,7 +27,7 @@ self.event(
 )
 ```
 
-Find bellow the different keys and data types available for the Event dictionary:
+Find below the different keys and data types available for the Event dictionary:
 
 | Key                | Type            | Required | Description                                                         |
 | -----              | ---             | ----     | ----                                                                |
@@ -55,7 +55,7 @@ Here is an example of a dummy Agent check sending only one event periodically, r
     instances: [{}]
     ```
 
-3. Go now in the `/datadog-agent/checks.d/` folder.
+3. Go to the `/datadog-agent/checks.d/` folder.
 2. Create within this folder a custom check file named `event_example.py` with the content below:
 
     ```python
@@ -104,7 +104,7 @@ Here is an example of a dummy Agent check sending only one event periodically, r
 
         (...)
     ```
-5. Finally go into your [Datadog Event stream][6] to see your events flowing in:
+5. Finally, go to your [Datadog Event stream][6] to see your events flowing in:
 
 {{< img src="developers/events/agent_check/event_stream_example.png" alt="Event stream example" responsive="true" style="width:80%;">}}
 

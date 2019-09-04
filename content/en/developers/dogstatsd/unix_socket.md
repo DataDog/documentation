@@ -10,7 +10,7 @@ further_reading:
   text: "Introduction to DogStatsD"
 - link: "developers/libraries"
   tag: "Documentation"
-  text: "Official and Community-contributed API and DogStatsD client libraries"
+  text: "Officials and Community-contributed API and DogStatsD client libraries"
 - link: "https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd"
   tag: "GitHub"
   text: "DogStatsD source code"
@@ -18,7 +18,7 @@ further_reading:
 
 Starting with version 6.0, the Agent is able to ingest metrics via a Unix Domain Socket (UDS), as an alternative to UDP, when running on Linux systems.
 
-While UDP works great on `localhost`, it can be a challenge to setup in containerized environments. Unix Domain Sockets allow you to easily establish the connection via a socket file, regardless of the IP of the Datadog Agent container. It also enables the following benefits:
+While UDP works great on `localhost`, it can be a challenge to set up in containerized environments. Unix Domain Sockets allow you to easily establish the connection via a socket file, regardless of the IP of the Datadog Agent container. It also enables the following benefits:
 
 * Bypassing the networking stack brings a significant performance improvement for high traffic
 * While UDP has no error handling, UDS allows the Agent to detect dropped packets and connection errors, while still allowing a non-blocking use
@@ -38,7 +38,7 @@ To setup DogStatsD, configure first your Agent to enable the DogStatsD server th
 
 To enable the Agent DogStatsD server:
 
-1. Edit your `datadog.yaml` file to uncomment and set the `dogstatsd_socket` parameter to the path where DogStatsD should create its listening socket:
+1. Edit your `datadog.yaml` file to un-comment and set the `dogstatsd_socket` parameter to the path where DogStatsD should create its listening socket:
 
     ```yaml
     ## @param dogstatsd_socket - string - optional - default: ""

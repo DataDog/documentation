@@ -21,7 +21,7 @@ function unixTime() {
 
 function postMetric($metric,$tags) {
   $currenttime = unixTime
-  $host_name = $env:COMPUTERNAME #optional param .
+  $host_name = $env:COMPUTERNAME #optional parameter .
 
   # Construct JSON
   $points = ,@($currenttime, $metric.amount)
@@ -35,19 +35,19 @@ function postMetric($metric,$tags) {
   $response = Invoke-RestMethod -Method Post -Uri $url -Body $post_json -ContentType "application/json"
 }
 
-# Datadog account, API information and optional params
+# Datadog account, API information and optional parameters
 $app_key = "<YOUR_APP_KEY_HERE>" #provide your valid app key
 $api_key = "<YOUR_API_KEY_HERE>" #provide your valid api key
 $url_base = "https://app.datadoghq.com/"
 $url_signature = "api/v1/series"
 $url = $url_base + $url_signature + "?api_key=$api_key" + "&" + "application_key=$app_key"
-$tags = "[env:test]" #optional param
+$tags = "[env:test]" #optional parameter
 
 # Select what to send to Datadog. In this example we send the number of handles opened by process "mmc"
 $metric_ns = "ps1." # your desired metric namespace
 $temp = Get-Process mmc
 $metric = @{"name"=$metric_ns + $temp.Name; "amount"=$temp.Handles}
-postMetric($metric)($tags) # pass your metric as a param to postMetric()
+postMetric($metric)($tags) # pass your metric as a parameter to postMetric()
 ```
 
 ## Submitting metrics with PowerShell via DogStatsD
@@ -73,7 +73,7 @@ dogstatsd($metric)
 
 ## Examples
 
-Here are two examples translated in PowerShell, using Msxml2.XMLHTTP, fully documented [on Mozilla's documentation page][2]:
+Here are two examples translated in PowerShell, using `Msxml2.XMLHTTP`, fully documented [on Mozilla's documentation page][2]:
 
 ### The code that makes the API call
 
@@ -146,7 +146,7 @@ $http_request.responseText
 
 3. Execute the code presented in the [first section](#the-code-that-makes-the-api-call).
 
-[See here for more code examples][5].
+[See the ncracker/dd_metric GitHub repository for more code examples][5].
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: /developers/metrics/dogstatsd_metrics_submission

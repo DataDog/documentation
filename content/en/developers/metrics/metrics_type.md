@@ -15,7 +15,7 @@ further_reading:
   text: "Learn more about DogStatsD"
 - link: "developers/libraries"
   tag: "Documentation"
-  text: "Official and Community-contributed API and DogStatsD client libraries"
+  text: "Officials and Community-contributed API and DogStatsD client libraries"
 ---
 
 The metric type affects how a given metric is interpreted in query results and graph visualizations within Datadog by determining default time aggregation function and the impact of [Metric Type modifiers][1]. This type is visible and can be changed on the [metric summary page][2]. Be aware that changing the metric type may render historical data nonsensical.
@@ -36,7 +36,7 @@ But the following metric types are accepted:
 * [SET](?tab=set#metric-type-definition)
 * [TIMERS](?tab=timers#metric-type-definition)
 
-Which submission metric type to choose depends of your use-case and how your application is designed. Sometimes incrementing a COUNT metric is easier than keeping track of a variable historical value that you would send with a GAUGE metric, sometimes it's the other way around. If you want to combine multiple sources of submission, for example to calculate the average response time of different instances of a given service, then a HISTOGRAM or a DISTRIBUTION metric might be more suited. Refer to the Metric type definition section below to learn more about the different metrics type available, then see the [Submission types and Datadog in-app types section](#submission-types-and-datadog-in-app-types) to see how each metric types behave between its submission and its storage within Datadog.
+Which submission metric type to choose depends on your use-case and how your application is designed. Sometimes incrementing a COUNT metric is easier than keeping track of a variable historical value that you would send with a GAUGE metric, sometimes it's the other way around. If you want to combine multiple sources of submission, for example to calculate the average response time of different instances of a given service, then a HISTOGRAM or a DISTRIBUTION metric might be more suited. Refer to the Metric type definition section below to learn more about the different metrics type available, then see the [Submission types and Datadog in-app types section](#submission-types-and-datadog-in-app-types) to see how each metric types behave between its submission and its storage within Datadog.
 
 ## Metric type definition.
 
@@ -50,14 +50,14 @@ They both receive:
   * 2 requests per second for 30 seconds
   * 0 request for 30 seconds
 
-Then this patterns starts again.
+Then the pattern starts again.
 
 {{< tabs >}}
-{{% tab "Count" %}}
+{{% tab "COUNT" %}}
 
 **COUNT metric type represents an absolute value variation of a metric's value over a defined time interval**, contrary to the RATE metric type that express this variation normalized _per second_.
 
-For instance let's say the `number.of.requests.count` metrics is reported every 30 seconds to Datadog with the COUNT type for `web_1`.
+For instance let's say the `number.of.requests.count` metric is reported every 30 seconds to Datadog with the COUNT type for `web_1`.
 
 Each data point represents the number of requests, the "count" of requests, received during the 30 second interval. The metric has then the following shape:
 
@@ -65,7 +65,7 @@ Each data point represents the number of requests, the "count" of requests, rece
 * `20` for the second interval of 30 seconds
 * `0` for the last interval of 30 seconds
 
-Then this patterns starts again since the COUNT is the absolute variation of the number of requests:
+Then this pattern starts again since the COUNT is the absolute variation of the number of requests:
 
 {{< img src="developers/metrics/metric_types/count_metric.png" alt="Count Metric" responsive="true">}}
 
@@ -81,19 +81,19 @@ Discover how to submit count metrics:
 [2]: /developers/metrics/dogstatsd_metrics_submission/#count
 [3]: /api/?lang=python#post-timeseries-points
 {{% /tab %}}
-{{% tab "Rate" %}}
+{{% tab "RATE" %}}
 
 **RATE metric type represents a normalized per second variation of a metric's value over a defined time interval**, contrary to the COUNT metric type that represents this variation with an absolute value.
 
-For instance let's say the `number.of.requests.rate` metrics is reported every 30 seconds to Datadog with the RATE type for `web_1`.
+For instance, let's say the `number.of.requests.rate` metric is reported every 30 seconds to Datadog with the RATE type for `web_1`.
 
-Each data point represent the "rate" of requests. The metric has then the following shape:
+Each data point represents the "rate" of requests. The metric has then the following shape:
 
 * `1` for the first 30 seconds
 * `2` for the second interval of 30 seconds
 * `0` for the last interval of 30 seconds
 
-Then this patterns starts again, since the RATE is the normalized per second variation of the number of requests:
+Then this pattern starts again, since the RATE is the normalized per second variation of the number of requests:
 
 {{< img src="developers/metrics/metric_types/rate_metric.png" alt="Rate Metric" responsive="true">}}
 
@@ -105,19 +105,19 @@ Discover how to submit rate metrics:
 [1]: /developers/metrics/agent_metrics_submission/?tab=rate
 [2]: /api/?lang=python#post-timeseries-points
 {{% /tab %}}
-{{% tab "Gauge" %}}
+{{% tab "GAUGE" %}}
 
 **GAUGE metric type represents the value of a particular thing over time.** It's a snapshot of a value associated with a timestamp.
 
-For instance let's say the `number.of.requests.gauge` metrics is reported every 30 seconds to Datadog with the GAUGE type for `web_1`.
+For instance let's say the `number.of.requests.gauge` metric is reported every 30 seconds to Datadog with the GAUGE type for `web_1`.
 
-Each data point represent the overall amount of requests received at a point in time. The metric has then the following shape:
+Each data point represents the overall number of requests received at a point in time. The metric has then the following shape:
 
 * `10` for the first 30 seconds
 * `30` for the second interval of 30 seconds
 * `30` for the last interval of 30 seconds
 
-Then this patterns starts again, but it increases over time since the GAUGE metric type keeps track of how many requests have already been received:
+Then this pattern starts again, but it increases over time since the GAUGE metric type keeps track of how many requests have already been received:
 
 {{< img src="developers/metrics/metric_types/gauge_metric.png" alt="Gauge Metric" responsive="true">}}
 
@@ -131,9 +131,9 @@ Discover how to submit gauge metrics:
 [2]: /developers/metrics/dogstatsd_metrics_submission/#gauge
 [3]: /api/?lang=python#post-timeseries-points
 {{% /tab %}}
-{{% tab "Histogram" %}}
+{{% tab "HISTOGRAM" %}}
 
-HISTOGRAM metric type allows to measure the statistical distribution of a set of values. Datadog HISTOGRAM metric type is an extension of the [StatsD timing metric type][1]: it aggregates the values that are sent during a defined time interval (usually defaults to 10 seconds with the Agent) and produces different metrics representing the different aggregation possible for the set of value. Depending of the aggregation, the metric type stored by Datadog is different.
+HISTOGRAM metric type allows to measure the statistical distribution of a set of values. Datadog HISTOGRAM metric type is an extension of the [StatsD timing metric type][1]: it aggregates the values that are sent during a defined time interval (usually defaults to 10 seconds with the Agent) and produces different metrics representing the different aggregation possible for the set of value. Depending on the aggregation, the metric type stored by Datadog is different.
 
 For example: if you send `X` values for a HISTOGRAM metric `<METRIC_NAME>` during an Agent flush interval the following metrics are produced by the Agent:
 
@@ -162,7 +162,7 @@ Discover how to submit histogram metrics:
 [3]: /developers/metrics/agent_metrics_submission/?tab=histogram
 [4]: /developers/metrics/dogstatsd_metrics_submission/#histogram
 {{% /tab %}}
-{{% tab "Distribution" %}}
+{{% tab "DISTRIBUTION" %}}
 
 <div class="alert alert-warning">
 This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Datadog support</a> to enable distribution metrics for your account.
@@ -170,7 +170,7 @@ This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Data
 
 DISTRIBUTION is a metric type that allows to aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure. DISTRIBUTION metrics are designed to instrument logical objects, like services, independently from the underlying hosts, and solve the problem created by Agent-level aggregation.
 
-Unlike the HISTOGRAM metric type that aggregates on the Agent-side, all DISTRIBUTION metrics raw data collected during the flush interval is send to Datadog and aggregations occur server-side. Because the underlying data structure has not been aggregated and represents raw data, distributions provide two major features:
+Unlike the HISTOGRAM metric type that aggregates on the Agent-side, all DISTRIBUTION metrics raw data collected during the flush interval is sent to Datadog and aggregations occur server-side. Because the underlying data structure has not been aggregated and represents raw data, distributions provide two major features:
 
 * Calculation of percentile aggregations
 * Customization of tagging
@@ -196,9 +196,9 @@ This functionality allows you to control tagging for metrics where host-level gr
 [1]: /developers/metrics/dogstatsd_metrics_submission/#distribution
 [2]: /graphing/metrics/distributions
 {{% /tab %}}
-{{% tab "Set" %}}
+{{% tab "SET" %}}
 
-**SET count the amount of unique occurrences of events over a period of time.**
+**SET count the number of unique occurrences of events over a period of time.**
 
 Discover how to submit set metrics:
 
@@ -208,7 +208,7 @@ Discover how to submit set metrics:
 [1]: /developers/metrics/agent_metrics_submission/?tab=set
 [2]: /developers/metrics/dogstatsd_metrics_submission/#set
 {{% /tab %}}
-{{% tab "Timer" %}}
+{{% tab "TIMER" %}}
 
 **TIMER metric type is an implementation of HISTOGRAM metric type within DogStatsD** (not to be confused with timers in the standard StatsD). It measures timing data only: for example, the amount of time a section of code takes to execute, or how long it takes to fully render a page. See the [TIMER DogStatsD documentation][1] to learn how to instrument your code to submit them.
 
@@ -224,7 +224,7 @@ Datadog accepts metrics submitted from a variety of sources:
 * [DogStatsD][4]
 * [Agent Check][5]
 
-Each sources having its own limitations, a metric submission type does not always map exactly to the Datadog in-app stored type:
+Each source having its own limitations, a metric submission type does not always map exactly to the Datadog in-app stored type:
 
 | Submission Source   | Submission Method (python)           | Submission Type   | Datadog In-App Type |
 | ------------------- | ------------------------------------ | ----------------- | ------------------- |

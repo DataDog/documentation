@@ -28,7 +28,7 @@ To set up your dedicated email address:
 If you have complete control over the email sent by the application to Datadog, then you probably want to configure a JSON-formatted message to be sent. This allows you to set everything in the event that appears in the event stream. See below setup instructions for examples of each.
 
 {{< tabs >}}
-{{% tab "JSON Email" %}}
+{{% tab "JSON email" %}}
 
 #### Source Email
 
@@ -48,7 +48,7 @@ In a JSON-formatted email, the subject of the email message is irrelevant. It is
 
 [1]: /api/#events
 {{% /tab %}}
-{{% tab "Plain Text Email" %}}
+{{% tab "Plain Text email" %}}
 
 #### Source Email
 

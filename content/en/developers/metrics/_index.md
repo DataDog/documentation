@@ -12,7 +12,7 @@ further_reading:
   text: "Learn more about DogStatsD"
 - link: "developers/libraries"
   tag: "Documentation"
-  text: "Official and Community-contributed API and DogStatsD client libraries"
+  text: "Officials and Community-contributed API and DogStatsD client libraries"
 ---
 
 A Datadog metric is defined by the four properties below. To discover how to graph metrics within Datadog refer to the [Metrics Introduction documentation][1]:
@@ -21,7 +21,7 @@ A Datadog metric is defined by the four properties below. To discover how to gra
 | ----      | ----                                                                                                                                                    |
 | Name      | The (name of your metric](#naming-metrics).                                                                                                             |
 | Value     | The value of your metric.                                                                                                                               |
-| Timestamp | The timestamp associated to the metric value. Note that Metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past. |
+| Timestamp | The timestamp associated to the metric value. Note that metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past. |
 | Context   | The set of tags associated to your metric.                                                                                                              |
 | Type      | The type of your metric. See the [metric type documentation][2].                                                                                       |
 

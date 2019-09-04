@@ -8,7 +8,7 @@ further_reading:
   text: "Introduction to DogStatsD"
 - link: "developers/libraries"
   tag: "Documentation"
-  text: "Official and Community-contributed API and DogStatsD client libraries"
+  text: "Officials and Community-contributed API and DogStatsD client libraries"
 - link: "https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd"
   tag: "GitHub"
   text: "DogStatsD source code"
@@ -48,7 +48,7 @@ options = {
 
 initialize(**options)
 
-statsd.event('An error occured', 'Error message', alert_type='error', tags=['env:dev'])
+statsd.event('An error occurred', 'Error message', alert_type='error', tags=['env:dev'])
 ```
 
 {{% /tab %}}
@@ -58,7 +58,7 @@ require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
 
-statsd.event('An error occured', "Error message", alert_type: 'error', tags: ['env:dev'])
+statsd.event('An error occurred', "Error message", alert_type: 'error', tags: ['env:dev'])
 ```
 
 {{% /tab %}}
@@ -80,7 +80,7 @@ func main() {
         log.Fatal(err)
     }
 
-    dogstatsd_client.Event("An error occured", "Error message", alert_type: "error", [] string {
+    dogstatsd_client.Event("An error occurred", "Error message", alert_type: "error", [] string {
         "env:dev"
     })
 }
@@ -101,7 +101,7 @@ public class DogStatsdClient {
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
 
         Event event = Event.builder()
-          .withTitle("An error occured")
+          .withTitle("An error occurred")
           .withText("Error message")
           .withAlertType(Event.AlertType.ERROR)
           .build();
@@ -129,7 +129,7 @@ public class DogStatsdClient
 
         StatsdClient.DogStatsd.Configure(dogstatsdConfig);
 
-        DogStatsd.Event("An error occured", "Error message", alertType: "error", tags: new[] { "env:dev" });
+        DogStatsd.Event("An error occurred", "Error message", alertType: "error", tags: new[] { "env:dev" });
     }
 }
 ```
@@ -150,7 +150,7 @@ $statsd = new DogStatsd(
      )
   );
 
-$statsd->event('An error occured.',
+$statsd->event('An error occurred.',
     array( 'text' => 'Error message',
            'alert_type' => 'error'
     )

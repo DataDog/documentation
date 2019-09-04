@@ -14,7 +14,7 @@ To submit a Service Check to Datadog within a custom Agent check, use the predef
 self.service_check(name, status, tags=None, hostname=None, message=None)
 ```
 
-Find bellow the different parameters and data types available for the `service_check()` function:
+Find below the different parameters and data types available for the `service_check()` function:
 
 | Parameter  | Type            | Required | Default Value | Description                                                                                                   |
 | ---------  | ----            | -------- | ------------- | -----------                                                                                                   |
@@ -78,7 +78,7 @@ Here is an example of a dummy Agent check sending only one Service Check periodi
 
         (...)
     ```
-5. Finally go into your [Datadog Service Check summary page][5] to see your Service Check reporting:
+5. Finally, go to your [Datadog Service Check summary page][5] to see your Service Check reporting:
 
 {{< img src="developers/service_checks/agent_service_checks_submission/service_check.png" alt="Service Checks" responsive="true" style="width:80%;">}}
 

@@ -9,7 +9,7 @@ further_reading:
   text: "Introduction to DogStatsD"
 - link: "developers/libraries"
   tag: "Documentation"
-  text: "Official and Community-contributed API and DogStatsD client libraries"
+  text: "Officials and Community-contributed API and DogStatsD client libraries"
 - link: "https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd"
   tag: "GitHub"
   text: "DogStatsD source code"
