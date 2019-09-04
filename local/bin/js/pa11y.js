@@ -106,7 +106,7 @@ asyncPool(2, absFileArray, pally)
 
 // takes each url and runs pa11y command with config options.
 function pally(url) {
-    console.log('url: ', url);
+    // console.log('url: ', url);
     return pa11y(url, pa11yConfig);
 }
 
