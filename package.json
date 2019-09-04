@@ -53,6 +53,7 @@
         "pa11y": "^5.2.0",
         "picturefill": "3.0.2",
         "popper.js": "1.15.0",
+        "puppeteer": "1.17.0",
         "stickyfilljs": "2.1.0",
         "tiny-async-pool": "^1.0.4",
         "traverse": "0.6.6",
