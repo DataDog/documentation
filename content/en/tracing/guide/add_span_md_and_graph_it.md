@@ -262,7 +262,7 @@ The Trace Analytics page is a visual query building tool that allows you to cond
 
 7) **Choose the service** you’ve been working on from the service facet list, **choose Error** from the status facet and **select `customer_id`** (or any other tags you added to your spans) from the group by field.
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt="" responsive="true" video="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt=" span md 6" responsive="true" video="true" style="width:90%;">}}
 
 8) **Remove Error** from the query, **change the `count *` measure to `Duration`** and **change the graph type to `Top List`**.
 

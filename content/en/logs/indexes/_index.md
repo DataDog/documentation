@@ -22,7 +22,7 @@ further_reading:
 
 Indexes are located on the [Configuration page][1] in the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, as well as the retention period for those logs:
 
-{{< img src="logs/indexes/index_details.png" alt="" responsive="true" style="width:70%;">}}
+{{< img src="logs/indexes/index_details.png" alt="index details" responsive="true" style="width:70%;">}}
 
 You can use indexed logs for [faceted searching][2], [Log Analytics][3], [dashboarding][4], and [monitoring][5].
 
@@ -41,7 +41,7 @@ For example, if some logs were captured only for troubleshooting purposes, you m
 
 To define a new index filter, click on the "add" button:
 
-{{< img src="logs/indexes/index_filters.png" alt="" responsive="true" style="width:70%;">}}
+{{< img src="logs/indexes/index_filters.png" alt="index fileters" responsive="true" style="width:70%;">}}
 
 To configure an exclusion filter:
 
@@ -51,7 +51,7 @@ To configure an exclusion filter:
 3. Define the sampling rate.
 4. Save the filter.
 
-    {{< img src="logs/indexes/index_filter_details.png" alt="" responsive="true" style="width:80%;">}}
+    {{< img src="logs/indexes/index_filter_details.png" alt="index filter details" responsive="true" style="width:80%;">}}
 
 **Note**: If a log matches several exclusion filters, only the first exclusion filter rule is applied. A log is not sampled or excluded multiple times by different exclusion filters.
 
@@ -63,7 +63,7 @@ Reorder your pipeline to make sure the proper exclusion filters apply to your lo
 
 To reorder your exclusion filter, drag and drop them into your preferred order.
 
-{{< img src="logs/indexes/reorder_index_filters.png" alt="" responsive="true" style="width:80%;">}}
+{{< img src="logs/indexes/reorder_index_filters.png" alt="reorder index filters" responsive="true" style="width:80%;">}}
 
 ### Enable/Disable filters
 
@@ -74,7 +74,7 @@ Instead of changing your application logging level or using a complex internal f
 
 Enable or disable them in one click on the Pipeline page:
 
-{{< img src="logs/indexes/enable_index_filters.png" alt="" responsive="true" style="width:80%;">}}
+{{< img src="logs/indexes/enable_index_filters.png" alt="enable index filters" responsive="true" style="width:80%;">}}
 
 ## Further Reading
 
