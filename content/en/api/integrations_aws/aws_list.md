@@ -1,7 +1,7 @@
 ---
 title: List all AWS integrations
 type: apicontent
-order: 15.1
+order: 15.01
 external_redirect: /api/#list-all-aws-integrations
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Delete AWS log collection
 type: apicode
-order: 15.9
+order: 15.10
 external_redirect: /api/#delete-aws-log-collection
 ---
 

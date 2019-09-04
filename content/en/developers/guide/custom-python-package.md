@@ -24,7 +24,7 @@ The Agent contains an embedded Python environment at `/opt/datadog-agent/embedde
 Python packages can be installed via the embedded `pip`:
 
 ```shell
-sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install <package_name>
+sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install <PACKAGE_NAME>
 ```
 
 {{% /tab %}}
@@ -35,7 +35,7 @@ The Agent contains an embedded Python environment at `/opt/datadog-agent/embedde
 Python packages can be installed via the embedded `pip`:
 
 ```shell
-sudo dd-agent /opt/datadog-agent/embedded/bin/pip install <package_name>
+sudo /opt/datadog-agent/embedded/bin/pip install <PACKAGE_NAME>
 ```
 
 {{% /tab %}}
@@ -46,12 +46,12 @@ Custom Python packages can be installed using the Agent's embedded Python using 
 
 For Agent versions <= 6.11:
 ```
-C:\"Program Files"\Datadog\"Datadog Agent"\embedded\python -m install <package_name>
+C:\"Program Files"\Datadog\"Datadog Agent"\embedded\python -m pip install <PACKAGE_NAME>
 ```
 
 For Agent versions >= 6.12:
 ```
-C:\"Program Files"\Datadog\"Datadog Agent"\embedded2\python -m install <package_name>
+C:\"Program Files"\Datadog\"Datadog Agent"\embedded2\python -m pip install <PACKAGE_NAME>
 ```
 
 Or the package can be added in the library zipped folder that can be found at

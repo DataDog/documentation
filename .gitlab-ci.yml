@@ -74,7 +74,6 @@ test_missing_tms_preview:
   <<: *base_template
   stage: post-deploy
   environment: "preview"
-  allow_failure: true
   dependencies:
     - build_preview
   script:
@@ -115,7 +114,7 @@ build_live:
     - build_hugo_site_new
     - collect_static_assets
     - push_site_to_s3
-    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['js', 'images', 'fonts', 'en', 'css', 'search', 'json', 'error', 'matts quick tips', 'videos']" -l "['fr','ja']" -c "./local/etc/algolia/docs_datadoghq.json"
+    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['js', 'images', 'fonts', 'en', 'css', 'search', 'json', 'error', 'matts quick tips', 'videos']" -l "['ja']" -c "./local/etc/algolia/docs_datadoghq.json"
     - create_artifact
     - create_artifact_untracked
     - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
@@ -180,7 +179,6 @@ test_missing_tms_live:
   <<: *base_template
   stage: post-deploy
   environment: "live"
-  allow_failure: true
   dependencies:
     - build_live
   script:
