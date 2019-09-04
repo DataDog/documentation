@@ -95,22 +95,23 @@ After having [setup DogStatsD on your host][1] run the following code to submit 
 package main
 
 import (
-	"log"
-	"time"
-	"github.com/DataDog/datadog-go/statsd"
+    "log"
+    "time"
+    "github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
-	statsd, err := statsd.New("127.0.0.1:8125")
-	if err != nil {
-    		log.Fatal(err)
-	}
-	for {
-		  statsd.Incr("example_metric.increment", []string{"environment:dev"}, 0.0)
-  		statsd.Decr("example_metric.decrement", []string{"environment:dev"}, 0.0)
-  		statsd.Count("example_metric.count", 2, []string{"environment:dev"}, 0.0)
-  		time.Sleep(10)
-	}
+    statsd, err: = statsd.New("127.0.0.1:8125")
+    if err != nil {
+        log.Fatal(err)
+    }
+    for {
+
+        statsd.Incr("example_metric.increment", [] string {"environment:dev"}, 0.0)
+        statsd.Decr("example_metric.decrement", [] string {"environment:dev"}, 0.0)
+        statsd.Count("example_metric.count", 2, [] string {"environment:dev"}, 0.0)
+        time.Sleep(10)
+    }
 }
 ```
 
@@ -279,22 +280,22 @@ end
 package main
 
 import (
-	"log"
-	"time"
-	"github.com/DataDog/datadog-go/statsd"
+    "log"
+    "time"
+    "github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
-	statsd, err := statsd.New("127.0.0.1:8125")
-	if err != nil {
-    		log.Fatal(err)
-	}
-	var i float64
-	for {
-		i += 1
-		statsd.Gauge("example_metric.gauge", i, []string{"environment:dev"}, 0.0)
-  	time.Sleep(10)
-	}
+    statsd, err: = statsd.New("127.0.0.1:8125")
+    if err != nil {
+        log.Fatal(err)
+    }
+    var i float64
+    for {
+        i += 1
+        statsd.Gauge("example_metric.gauge", i, [] string {"environment:dev"}, 0.0)
+        time.Sleep(10)
+    }
 }
 ```
 
@@ -441,24 +442,24 @@ end
 package main
 
 import (
-	"log"
-	"time"
-  "math/rand"
-  "strconv"
-	"github.com/DataDog/datadog-go/statsd"
+    "log"
+    "time"
+    "math/rand"
+    "strconv"
+    "github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
-	statsd, err := statsd.New("127.0.0.1:8125")
-	if err != nil {
-    		log.Fatal(err)
-  }
-  var i float64
-	for {
-    i += 1
-		statsd.Set("example_metric.set", strconv.Itoa(i), []string{"environment:dev"}, 0.0)
-  	time.Sleep(rand.Intn(10))
-	}
+    statsd, err: = statsd.New("127.0.0.1:8125")
+    if err != nil {
+        log.Fatal(err)
+    }
+    var i float64
+    for {
+        i += 1
+        statsd.Set("example_metric.set", strconv.Itoa(i), [] string {"environment:dev"}, 0.0)
+        time.Sleep(rand.Intn(10))
+    }
 }
 ```
 
@@ -582,22 +583,24 @@ end
 package main
 
 import (
-	"log"
-	"time"
-	"math/rand"
-	"github.com/DataDog/datadog-go/statsd"
+    "log"
+    "time"
+    "math/rand"
+    "github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
-	statsd, err := statsd.New("127.0.0.1:8125")
-	if err != nil {
-    		log.Fatal(err)
-  }
+    statsd, err: = statsd.New("127.0.0.1:8125")
+    if err != nil {
+        log.Fatal(err)
+    }
 
-	for {
-		statsd.Histogram("example_metric.histogram", rand.Intn(20), []string{"environment:dev"}, 0.0)
-  		time.Sleep(2)
-	}
+    for {
+        statsd.Histogram("example_metric.histogram", rand.Intn(20), [] string {
+            "environment:dev"
+        }, 0.0)
+        time.Sleep(2)
+    }
 }
 ```
 
@@ -844,22 +847,24 @@ end
 package main
 
 import (
-	"log"
-	"time"
-	"math/rand"
-	"github.com/DataDog/datadog-go/statsd"
+    "log"
+    "time"
+    "math/rand"
+    "github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
-	statsd, err := statsd.New("127.0.0.1:8125")
-	if err != nil {
-    		log.Fatal(err)
-	}
+    statsd, err: = statsd.New("127.0.0.1:8125")
+    if err != nil {
+        log.Fatal(err)
+    }
 
-	for {
-		statsd.Distribution("example_metric.distribution", rand.Intn(20), []string{"environment:dev"}, 0.0)
-  		time.Sleep(2)
-	}
+    for {
+        statsd.Distribution("example_metric.distribution", rand.Intn(20), [] string {
+            "environment:dev"
+        }, 0.0)
+        time.Sleep(2)
+    }
 }
 ```
 

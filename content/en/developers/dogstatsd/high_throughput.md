@@ -47,9 +47,9 @@ import (
 func main() {
 
   statsd, err := statsd.New("127.0.0.1:8125",
-    statsd.Buffered(),
-    statsd.WithMaxMessagesPerPayload(256),
-  )
+                 statsd.Buffered(),
+                 statsd.WithMaxMessagesPerPayload(256),
+                )
 	if err != nil {
     		log.Fatal(err)
 	}

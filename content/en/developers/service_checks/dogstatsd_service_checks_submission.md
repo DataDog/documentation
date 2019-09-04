@@ -66,20 +66,25 @@ statsd.service_check('application.service_check', 0, {'message' => 'Application 
 package main
 
 import (
-	"log"
-  "github.com/DataDog/datadog-go/statsd"
-  "time"
+    "log"
+    "github.com/DataDog/datadog-go/statsd"
+    "time"
 )
 
 func main() {
 
-  dogstatsd_client, err := statsd.New("127.0.0.1:8125")
+    dogstatsd_client, err: = statsd.New("127.0.0.1:8125")
 
-	if err != nil {
-    		log.Fatal(err)
-  }
+    if err != nil {
+        log.Fatal(err)
+    }
 
-  dogstatsd_client.ServiceCheck("application.service_check", 0,time.Time , []string{}, []string{"Application is OK"} []string{"env:dev"} )
+    dogstatsd_client.ServiceCheck("application.service_check", 0,
+        time.Time, [] string {}, [] string {
+            "Application is OK"
+        }, [] string {
+            "env:dev"
+        })
 }
 ```
 

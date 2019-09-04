@@ -68,19 +68,21 @@ statsd.event('An error occured', "Error message", alert_type: 'error', tags: ['e
 package main
 
 import (
-	"log"
-	"github.com/DataDog/datadog-go/statsd"
+    "log"
+    "github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
 
-  dogstatsd_client, err := statsd.New("127.0.0.1:8125")
+    dogstatsd_client, err: = statsd.New("127.0.0.1:8125")
 
-	if err != nil {
-    		log.Fatal(err)
-  }
+    if err != nil {
+        log.Fatal(err)
+    }
 
-  dogstatsd_client.Event("An error occured", "Error message", alert_type: "error", []string{"env:dev"} )
+    dogstatsd_client.Event("An error occured", "Error message", alert_type: "error", [] string {
+        "env:dev"
+    })
 }
 ```
 
