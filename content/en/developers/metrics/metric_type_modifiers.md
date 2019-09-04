@@ -15,7 +15,7 @@ A metric type is an indication of what you tried to represent with your metric a
 * RATE: Normalized value variation over time (usually _per seconds_)
 * COUNT: Absolute value variation over a given time interval.
 
-Depending on your use-case and your submission method, one metric type may be more suited than the other, for instance:
+Depending on your use-case and your submission method, one metric type may be more suited than the other for submission, for instance:
 
 | Metric type submitted | Use-case                                                                                                                                                                        |
 | ------------          | ----------                                                                                                                                                                      |
@@ -24,11 +24,7 @@ Depending on your use-case and your submission method, one metric type may be mo
 | COUNT                 | You want to count the amount of time a function is called.                                                                                                                      |
 | COUNT                 | Counting the amount of revenues that have been made over a given amount of time.                                                                                                       |
 
-Since RATE and COUNT aren't the same metric type, they don't have the same behavior within Datadog graphs and monitors. In some corner cases where a RATE metric would be sparse you might encounter some issues, for instance:
-
-
-
-In order to mitigate this, Datadog offers you In-application modifiers functions that you can apply to your metrics within your graphs and monitor in order to switch on the fly a RATE to a COUNT and vice-versa.
+But since RATE and COUNT aren't the same metric type, they don't have the same behavior/shape within Datadog graphs and monitors. In order to allow you to change on the fly between a RATE and a COUNT metric representation, Datadog has in-application modifiers functions that you can apply to your metrics within your graphs and monitor.
 
 ## In-application modifiers
 

@@ -42,7 +42,7 @@ Which submission metric type to choose depends on your use-case and how your app
 
 To better understand the different metrics types, what they represent, and how to manipulate them within Datadog, let's start with an example:
 
-You have two web servers `web_1` and `web_2`. Each one of them deals with HTTP requests over time.
+You have two web servers `server:web_1` and `server:web_2`. Each one of them deals with HTTP requests over time.
 
 They both receive:
 
@@ -57,7 +57,7 @@ Then the pattern starts again.
 
 **COUNT metric type represents an absolute value variation of a metric's value over a defined time interval**, contrary to the RATE metric type that express this variation normalized _per second_.
 
-For instance let's say the `number.of.requests.count` metric is reported every 30 seconds to Datadog with the COUNT type for `web_1`.
+For instance let's say the `number.of.requests.count` metric is reported every 30 seconds to Datadog with the COUNT type for `server:web_1`.
 
 Each data point represents the number of requests, the "count" of requests, received during the 30 second interval. The metric has then the following shape:
 
@@ -77,6 +77,8 @@ Discover how to submit count metrics:
 * [With DogStatsD][2]
 * [With the Datadog API][3]
 
+**Note**: for a COUNT metric , when a `0` value is submitted then `null` is stored within Datadog.
+
 [1]: /developers/metrics/agent_metrics_submission/?tab=count
 [2]: /developers/metrics/dogstatsd_metrics_submission/#count
 [3]: /api/?lang=python#post-timeseries-points
@@ -85,7 +87,7 @@ Discover how to submit count metrics:
 
 **RATE metric type represents a normalized per second variation of a metric's value over a defined time interval**, contrary to the COUNT metric type that represents this variation with an absolute value.
 
-For instance, let's say the `number.of.requests.rate` metric is reported every 30 seconds to Datadog with the RATE type for `web_1`.
+For instance, let's say the `number.of.requests.rate` metric is reported every 30 seconds to Datadog with the RATE type for `server:web_1`.
 
 Each data point represents the "rate" of requests. The metric has then the following shape:
 
@@ -102,6 +104,8 @@ Discover how to submit rate metrics:
 * [With a custom Agent Check][1]
 * [With the Datadog API][2]
 
+**Note**: for a RATE metric , when a `0` value is submitted then `null` is stored within Datadog.
+
 [1]: /developers/metrics/agent_metrics_submission/?tab=rate
 [2]: /api/?lang=python#post-timeseries-points
 {{% /tab %}}
@@ -109,7 +113,7 @@ Discover how to submit rate metrics:
 
 **GAUGE metric type represents the value of a particular thing over time.** It's a snapshot of a value associated with a timestamp.
 
-For instance let's say the `number.of.requests.gauge` metric is reported every 30 seconds to Datadog with the GAUGE type for `web_1`.
+For instance let's say the `number.of.requests.gauge` metric is reported every 30 seconds to Datadog with the GAUGE type for `server:web_1`.
 
 Each data point represents the overall number of requests received at a point in time. The metric has then the following shape:
 
@@ -175,9 +179,9 @@ Unlike the HISTOGRAM metric type that aggregates on the Agent-side, all DISTRIBU
 * Calculation of percentile aggregations
 * Customization of tagging
 
-For instance let's say the `request.response_time` metrics is reported to Datadog with the DISTRIBUTION type for `web_1` and `web_2`
+For instance let's say the `request.response_time` metrics is reported to Datadog with the DISTRIBUTION type for `server:web_1` and `server:web_2`
 
-Say host `web_1` reports a metric with the values [1,1,1,2,2,2,3,3] and host `web_2` reports the same metric with the values [1,1,2] during a flush interval. Here, the p50 (median) for `web_1` is 2 and the p50 for `web_2` is 1.  Aggregating by the average value server-side would result in 1.5. In reality, the global p50 (median) is the median of the combined set: [1,1,1,1,1,2,2,2,2,3,3] which is 2. This is the statistically accurate value that can be returned by a distribution metric.
+Say `server:web_1` reports a metric with the values [1,1,1,2,2,2,3,3] and `server:web_2` reports the same metric with the values [1,1,2] during a flush interval. Here, the p50 (median) for `server:web_1` is 2 and the p50 for `server:web_2` is `1`.  Aggregating by the average value server-side would result in `1.5`. In reality, the global p50 (median) is the median of the combined set: [1,1,1,1,1,2,2,2,2,3,3] which is `2`. This is the statistically accurate value that can be returned by a distribution metric.
 
 Discover how to submit distribution metrics [with DogstatsD][1].
 

@@ -210,5 +210,5 @@ dogstatsd_so_rcvbuf: 26214400
 [1]: /agent
 [2]: /developers/dogstatsd/unix_socket
 [3]: /developers/dogstatsd/#code
-[4]: /developers/dogstatsd_metrics_submission/#sample-rates
+[4]: /developers/metrics/dogstatsd_metrics_submission/#sample-rates
 [5]: /developers/dogstatsd/unix_socket
