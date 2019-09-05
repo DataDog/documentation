@@ -106,7 +106,7 @@
     "docs.datadoghq.com/ja/integrations/$",
     "docs.datadoghq.com/fr/.*/faq/",
     "docs.datadoghq.com/ja/.*/faq/",
-    "docs.datadoghq.com/resources/"
+    "docs.datadoghq.com/resources/",
 		"/faq/$",
 		"/guide/$",
 		"\\?",
