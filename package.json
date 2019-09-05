@@ -50,7 +50,7 @@
         "minimist": "1.1.0",
         "mixitup": "3.3.1",
         "mousetrap": "1.6.1",
-        "pa11y": "^5.2.0",
+        "pa11y": "5.1.0",
         "picturefill": "3.0.2",
         "popper.js": "1.15.0",
         "puppeteer": "1.17.0",
