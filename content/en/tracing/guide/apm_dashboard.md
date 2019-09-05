@@ -24,10 +24,10 @@ _4 minutes to complete_
 {{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="dashboard 7" video="true" responsive="true" style="width:90%;">}}
 
 Datadog APM allows you to create dashboards based on your business priorities and metrics important to you:
-You can create widgets on these dashboards to keep track of any traditional infrastructure metrics like host memory usage alongside critical APM metrics based on throughput, latency, and error rate for correlation.
+You can create widgets on these dashboards to keep track of any traditional infrastructure, logs and custom metrics like host memory usage alongside critical APM metrics based on throughput, latency, and error rate for correlation.
 Next to these you can track latency of the user experience of your top customers or largest transactions and alongside these keep track of the throughput of your main web-server ahead of any major events like Black Friday.
 
-This guide takes the creation of a new dashboard to monitor the `web-store` service as an example. This service is the entry-point service that calls other services in Datadog demo stack. This guide covers adding widgets to the dashboard in three ways:
+This guides walks you through adding trace metrics to a dashboard, correlating them with infrastructure metrics and then how to export a Trace Analytics query. This guide covers adding widgets to the dashboard in three ways:
 
 * Copying an existing APM graph _( Step 1. 2. & 3.)_
 * Creating it manually. _(Step 4. & 5. )_
@@ -61,11 +61,11 @@ This guide takes the creation of a new dashboard to monitor the `web-store` serv
 
     {{< img src="tracing/guide/apm_dashboard/dashboard_4.mp4" video="true" alt="dashboard 4" responsive="true" style="width:90%;">}}
 
-    This specific breakdown is just one example of the many you get to choose. It is important to note that any metric that starts with `trace.` contains APM information. See the [APM metric documentation to learn more][3].
+    This specific breakdown is just one example of the many can choose. It is important to note that any metric that starts with `trace.` contains APM information. See the [APM metric documentation to learn more][3].
 
 6. **Drag another timeseries to the placeholder tile**
 
-    In this example two different types of metrics are added to a graph, a `trace.*` and a `runtime.*` one. Combined, these metrics allow to correlate information between requests and code runtime performances. Specificallly, the latency of a service is displayed next to the thread count, knowing that latency spikes might be assocaited with an increase in the thraed count:
+    In this example two different types of metrics are added to a graph, a `trace.*` and a `runtime.*` one. Combined, these metrics allow you to correlate information between requests and code runtime performances. Specificallly, the latency of a service is displayed next to the thread count, knowing that latency spikes might be assocaited with an increase in the thraed count:
 
     1. First, add `trace.rack.reqesusts.errors` metric into the widget:
 
@@ -85,7 +85,7 @@ This guide takes the creation of a new dashboard to monitor the `web-store` serv
 
     This setup can show whether a spike in latency is assocaited with a spike in the ruby thread count, immediately pointing out the cause for latency allowing for fast resolution.
 
-7. **Go to Trace Analytics**.
+7. **Go to [Trace Analytics][4]**.
 
     This example shows how to query the latency across the example application: breaking it down by merchants on the platform and view the top-10 merchants with highest latency. From the Trace Analytics screen, export the graph to the dashboard and view it there:
 
@@ -97,11 +97,11 @@ This guide takes the creation of a new dashboard to monitor the `web-store` serv
 
     With the dashboard you can also explore related events.
 
-9. **Click on the `Search Events or Logs`** button and add search for a relevant event stream. **Note**: in this example Ansible is used, your [event stream][4] might be different.
+9. **Click on the `Search Events or Logs`** button and add search for a relevant event stream. **Note**: in this example Ansible is used, your [event stream][5] might be different.
 
     {{< img src="tracing/guide/apm_dashboard/dashboard_1.png" alt="dashboard 1" responsive="true" style="width:90%;">}}
 
-    Here, alongside the view of our dashboard recent events that have happen can be seen such as: deployments, task completions, or monitors alerting. These events can then be correlated to what is happening to the metrics setup in the dashboard.
+    Here, alongside the view of our dashboard, recent events that have happened (in datadog or in external services like Ansible, Chef, etc.) can be seen such as: deployments, task completions, or monitors alerting. These events can then be correlated to what is happening to the metrics setup in the dashboard.
 
     One final capability to make sure you use are template variables. There are a set of values that dynamically control the widgets on the dashboards that every users can use without having to edit the widgets themselves.
 
@@ -131,4 +131,5 @@ This guide takes the creation of a new dashboard to monitor the `web-store` serv
 [1]: https://app.datadoghq.com/apm/services
 [2]: /graphing/widgets/timeseries
 [3]: /tracing/guide/metrics_namespace
-[4]: https://docs.datadoghq.com/graphing/event_stream
+[4]: https://app.datadoghq.com/apm/search/analytics
+[5]: https://docs.datadoghq.com/graphing/event_stream
