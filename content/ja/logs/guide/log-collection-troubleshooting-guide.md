@@ -180,4 +180,4 @@ Datadog lambda 関数が実際にトリガーされているかどうかを確�
 [9]: /ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [10]: https://app.datadoghq.com/account/settings#api
 [11]: https://app.datadoghq.com/logs/livetail
-[12]: /ja/logs/logging_without_limits/#exclusion-filters
+[12]: /ja/logs/indexes/#exclusion-filters
