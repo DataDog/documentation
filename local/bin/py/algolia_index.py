@@ -44,7 +44,7 @@ def transform_url(private_urls):
 
         ## We add /$ to all links in order to make them all "final", in fact
         ## Algolia stop_url parameter uses regex and not "perfect matching" link logic
-        new_private_urls.append(url.replace('public/','docs.datadoghq.com/') + '$')
+        new_private_urls.append(url.replace('public/','docs.datadoghq.com/') + '/$')
 
     return new_private_urls
 
