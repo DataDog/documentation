@@ -53,13 +53,13 @@ This guide takes the creation of a new dashboard to monitor the `web-store` serv
 
 5. **Click on the `system.cpu.user` box** and choose the metric and parameters relevant to you, in this example:
 
-    | Parameter | Value | Description |
-    | ------  | ----- | ----- |
-    | `metric` | `trace.rack.reqesusts.errors` | The Ruby Rack total set of erroneous requests. |
-    | `from` | `service:web-store` | The main service in this example stack, it is a Ruby service and all the information in the chart with come from it. |
-    | `sum by` | `http.status_code` | Breaking down the chart by http status codes.|
+    | Parameter | Value                         | Description                                                                                                          |
+    | ------    | -----                         | -----                                                                                                                |
+    | `metric`  | `trace.rack.reqesusts.errors` | The Ruby Rack total set of erroneous requests.                                                                       |
+    | `from`    | `service:web-store`           | The main service in this example stack, it is a Ruby service and all the information in the chart with come from it. |
+    | `sum by`  | `http.status_code`            | Breaking down the chart by http status codes.                                                                        |
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_4.gif" alt="" responsive="true" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_4.mp4" video="true" alt="dashboard 4" responsive="true" style="width:90%;">}}
 
     This specific breakdown is just one example of the many you get to choose. It is important to note that any metric that starts with `trace.` contains APM information. See the [APM metric documentation to learn more][3].
 
@@ -69,17 +69,17 @@ This guide takes the creation of a new dashboard to monitor the `web-store` serv
 
     1. First, add `trace.rack.reqesusts.errors` metric into the widget:
 
-        | Parameter | Value | Description |
-        | ------  | ----- | ----- |
-        | `metric` | `trace.rack.request.duration.by.service.99p` | The 99th percentile of latency of requests in our service. |
-        | `from` | `service:web-store` | The main service in this example stack, it is a Ruby service and all the information in the chart with come from it. |
+        | Parameter | Value                                        | Description                                                                                                          |
+        | ------    | -----                                        | -----                                                                                                                |
+        | `metric`  | `trace.rack.request.duration.by.service.99p` | The 99th percentile of latency of requests in our service.                                                           |
+        | `from`    | `service:web-store`                          | The main service in this example stack, it is a Ruby service and all the information in the chart with come from it. |
 
     2. Then click on the `Graph additional: Metrics` to add another metric to the chart:
 
-        | Parameter | Value | Description |
-        | ------  | ----- | ----- |
-        | `metric` | `runtime.ruby.thread_count` | Thread count taken from the Ruby runtime metrics. |
-        | `from` | `service:web-store` | The main service in this example stack, it is a Ruby service and all the information in the chart with come from it. |
+        | Parameter | Value                       | Description                                                                                                          |
+        | ------    | -----                       | -----                                                                                                                |
+        | `metric`  | `runtime.ruby.thread_count` | Thread count taken from the Ruby runtime metrics.                                                                    |
+        | `from`    | `service:web-store`         | The main service in this example stack, it is a Ruby service and all the information in the chart with come from it. |
 
         {{< img src="tracing/guide/apm_dashboard/dashboard_5.mp4" alt="dashboard_5" video="true" responsive="true" style="width:90%;">}}
 
