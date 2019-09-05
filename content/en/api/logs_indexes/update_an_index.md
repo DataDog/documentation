@@ -29,4 +29,4 @@ This endpoint updates an `Index` identified by its name. It returns the `Index` 
     The fraction of logs excluded by the exclusion filter, when active. The sampling is uniform.
 
 [1]: /logs/explorer/search
-[2]: /logs/logging_without_limits/#exclusion-filters
+[2]: /logs/indexes/#exclusion-filters

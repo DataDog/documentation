@@ -85,6 +85,7 @@ For more details about ddev, refer to the [ddev documentation][4].
 
 [2to3][5] converts Python 2 code to Python 3 code. If you have a custom check that is named `foo.py`, run 2to3:
 
+
 ```bash
 $ 2to3 foo.py
 ```

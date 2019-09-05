@@ -16,6 +16,8 @@ further_reading:
   tag: ""
   text: "All guides"
 ---
+_2 minutes to complete_
+
 
 {{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_3.mp4" alt="comparaison video" video="true" responsive="true" style="width:90%;">}}
 

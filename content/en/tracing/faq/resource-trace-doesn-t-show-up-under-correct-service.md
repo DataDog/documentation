@@ -23,13 +23,19 @@ These resources, with a top level name of `web_identification` still appear in t
 An example of modifying the top level name for Python can be found below:
 
 ```
-   @tracer.wrap('tornado.notify', service='tornado-notification')
+   @tracer.wrap('tornado.notify', 
+                service='tornado-notification', 
+                resource='MainHandler.do_something')
     @tornado.gen.coroutine
-    def notify(self):
+    def do_something(self):
         # do something
 ```
 
 This function explicitly sets both the service name and Top Level Name, being `tornado-notification` and `tornado.notify` respectively.
+
+Also note that the resource name is set manually, `MainHandler.do_something`. 
+
+By default the resource name would be set to this as it's the name of the function and the class for which it lives under in Tornado.
 
 More examples and documentation can be found on our language-specific instrumentation documentation pages:
 
