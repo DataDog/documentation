@@ -13,11 +13,9 @@ further_reading:
   text: "Agent Commands"
 ---
 
-## Overview
-
 The Agent status page displays information about your running Agent. See [Agent Commands][1] to find the status command for your environment. The sections below provide details on the contents of the status page.
 
-### Agent version
+## Agent version
 
 General information for Agent is displayed under the Agent version, for example:
 ```text
@@ -30,7 +28,7 @@ General information for Agent is displayed under the Agent version, for example:
   Log Level: info
 ```
 
-#### Paths
+### Paths
 
 This section displays the paths to the Datadog config file, `conf.d` directory, and `checks.d` directory, for example:
 ```text
@@ -39,7 +37,7 @@ This section displays the paths to the Datadog config file, `conf.d` directory, 
     checks.d: /etc/datadog-agent/checks.d
 ```
 
-#### Clocks
+### Clocks
 
 This section displays the [NTP offset][2] and system UTC time, for example:
 ```text
@@ -47,7 +45,7 @@ This section displays the [NTP offset][2] and system UTC time, for example:
     System UTC time: 2019-08-29 18:16:41.526203 UTC
 ```
 
-#### Host Info
+### Host Info
 
 This section displays information on the host the Agent is running on, for example:
 ```text
@@ -63,7 +61,7 @@ This section displays information on the host the Agent is running on, for examp
     virtualizationSystem: vbox
 ```
 
-#### Hostnames
+### Hostnames
 
 This section displays the hostnames found by the Agent, for example:
 ```text
@@ -77,8 +75,8 @@ This section displays the hostnames found by the Agent, for example:
       gce: unable to retrieve hostname from GCE: Get http://169.254.169.254/computeMetadata/v1/instance/hostname: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
 ```
 
-### Collector
-#### Running Checks
+## Collector
+### Running Checks
 
 This section displays a list of running check instances, for example:
 ```text
@@ -92,18 +90,20 @@ This section displays a list of running check instances, for example:
       Average Execution Time : 6ms
 ```
 
-##### Definitions
+Terms and descriptions:
 
-* **Instance ID**: The instance ID and the status of the check.
-* **Total Runs**: The total number of times the instance has run.
-* **Metric Samples**: The number of fetched metrics.
-* **Events**: The number of triggered events.
-* **Service Checks**: The number of service checks reported.
-* **Average Execution Time**: The average time taken to run the instance.
-* **Last Run**: The number during the last check run.
-* **Total**: The total number since the Agent's most recent start or restart.
+| Term                   | Description                                                      |
+|------------------------|------------------------------------------------------------------|
+| Instance ID            | The instance ID and the status of the check.                     |
+| Total Runs             | The total number of times the instance has run.                  |
+| Metric Samples         | The number of fetched metrics.                                   |
+| Events                 | The number of triggered events.                                  |
+| Service Checks         | The number of service checks reported.                           |
+| Average Execution Time | The average time taken to run the instance.                      |
+| Last Run               | The number during the last check run.                            |
+| Total                  | The total number since the Agent's most recent start or restart. |
 
-#### Config Errors
+### Config Errors
 
 This section only displays if there are checks with config errors, for example:
 ```text
@@ -112,7 +112,7 @@ This section only displays if there are checks with config errors, for example:
       Configuration file contains no valid instances
 ```
 
-#### Loading Errors
+### Loading Errors
 
 This section only displays if there are checks with loading errors, for example:
 ```text
@@ -128,7 +128,7 @@ This section only displays if there are checks with loading errors, for example:
         unable to import module 'test': No module named test
 ```
 
-### JMXFetch
+## JMXFetch
 
 This section displays a list of initialized and failed JMX checks even if there are no checks, for example:
 ```text
@@ -141,13 +141,13 @@ This section displays a list of initialized and failed JMX checks even if there 
     no checks
 ```
 
-### Forwarder
+## Forwarder
 
 The forwarder uses a number of workers to send payloads to Datadog.
 
 If you see the warning `the forwarder dropped transactions, there is probably an issue with your network`, this means that all the workers were busy. You should review your network performance and tune the `forwarder_num_workers` and `forwarder_timeout` options.
 
-#### Transactions
+### Transactions
 
 This section displays the transactions made by the forwarder, for example:
 ```text
@@ -169,21 +169,23 @@ This section displays the transactions made by the forwarder, for example:
     Errors: 1
 ```
 
-##### Definitions
+Terms and descriptions:
 
-* **CheckRunsV1**: The number of service check payloads sent.
-* **IntakeV1**: The number of event payloads sent.
-* **TimeseriesV1**: The number of metric payloads sent.
-* **Errors**: The number of errors while sending payloads.
+| Term         | Description                                  |
+|--------------|----------------------------------------------|
+| CheckRunsV1  | The number of service check payloads sent.   |
+| IntakeV1     | The number of event payloads sent.           |
+| TimeseriesV1 | The number of metric payloads sent.          |
+| Errors       | The number of errors while sending payloads. |
 
-#### API Keys status
+### API Keys status
 
 This sections shows the status of your configured API key, for example:
 ```text
     API key ending with ab123: API Key valid
 ```
 
-### Endpoints
+## Endpoints
 
 This section displays the list of endpoints in use by the Datadog Agent, for example:
 ```text
@@ -191,7 +193,7 @@ This section displays the list of endpoints in use by the Datadog Agent, for exa
       - ab123
 ```
 
-### Logs Agent
+## Logs Agent
 
 If the Logs Agent is enabled, this section displays information on the logs processed and sent, for example:
 ```text
@@ -199,7 +201,7 @@ If the Logs Agent is enabled, this section displays information on the logs proc
     LogsSent: 10
 ```
 
-### Aggregator
+## Aggregator
 
 This section displays information on the Agent's aggregator, for example:
 ```text
@@ -213,16 +215,18 @@ This section displays information on the Agent's aggregator, for example:
   Service Checks Flushed: 20
 ```
 
-##### Definitions
+Terms and descriptions:
 
-* **Checks Metric Sample**: The total number of metrics sent from the checks to the aggregator.
-* **Dogstatsd Metric Sample**: The total number of metrics sent from the DogStatsD server to the aggregator.
-* **Event**: The total number of events sent to the aggregator.
-* **Service Check**: The total number of service checks sent to the aggregator.
-* **Flush**: The aggregator stores data in a queue. The queue is emptied once per flush interval and the data is sent to the forwarder.
+| Term                    | Description                                                                                                                |
+|-------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Checks Metric Sample    | The total number of metrics sent from the checks to the aggregator.                                                        |
+| Dogstatsd Metric Sample | The total number of metrics sent from the DogStatsD server to the aggregator.                                              |
+| Event                   | The total number of events sent to the aggregator.                                                                         |
+| Service Check           | The total number of service checks sent to the aggregator.                                                                 |
+| Flush                   | The aggregator stores data in a queue. The queue is emptied once per flush interval and the data is sent to the forwarder. |
 
 
-### DogStatsD
+## DogStatsD
 
 This section displays the number of packets received by the DogStatsD server for each type of data and associated errors, for example:
 ```text
