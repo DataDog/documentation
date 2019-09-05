@@ -104,6 +104,7 @@
 		"docs.datadoghq.com/integrations/$",
 		"docs.datadoghq.com/fr/integrations/$",
     "docs.datadoghq.com/ja/integrations/$",
+    "docs.datadoghq.com/agent/guide/agent-5-autodiscovery$",
     "docs.datadoghq.com/fr/.*/faq/",
     "docs.datadoghq.com/ja/.*/faq/",
     "docs.datadoghq.com/resources/",
