@@ -15,7 +15,7 @@ further_reading:
   text: "Learn more about DogStatsD"
 - link: "developers/libraries"
   tag: "Documentation"
-  text: "Officials and Community-contributed API and DogStatsD client libraries"
+  text: "Official and Community created API and DogStatsD client libraries"
 ---
 
 The metric type affects how a given metric is interpreted in query results and graph visualizations within Datadog by determining default time aggregation function and the impact of [Metric Type modifiers][1]. This type is visible and can be changed on the [metric summary page][2]. Be aware that changing the metric type may render historical data nonsensical.

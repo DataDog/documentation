@@ -7,7 +7,7 @@ further_reading:
   text: "Learn more about DogStatsD"
 - link: "developers/libraries"
   tag: "Documentation"
-  text: "Officials and Community-contributed API and DogStatsD client libraries"
+  text: "Official and Community created API and DogStatsD client libraries"
 ---
 
 A metric type is an indication of what you tried to represent with your metric and its emission source. If you refer to the [metric types][1] documentation, you can see that the COUNT and RATE metric types are really close to one another as they represent the same concept: the variation of a metric value over time, but not with the same logic:

@@ -12,7 +12,7 @@ further_reading:
   text: "Learn more about DogStatsD"
 - link: "developers/libraries"
   tag: "Documentation"
-  text: "Officials and Community-contributed API and DogStatsD client libraries"
+  text: "Official and Community created API and DogStatsD client libraries"
 ---
 
 A Datadog metric is defined by the properties below. To discover how to graph metrics within Datadog refer to the [Metrics Introduction documentation][1]:
