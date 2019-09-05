@@ -238,6 +238,7 @@ test_pa11y_live:
   script:
     - cp -r /etc/node_modules .
     - ls ./node_modules/puppeteer/.local-chromium
+    - ls ./node_modules/pa11y/node_modules/puppeteer/.local-chromium
     - pa11y_test
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
