@@ -20,7 +20,7 @@ categories:
   - orchestration
   - log collection
 doc_link: /integrations/kubernetes/
-ddtype: チェック
+ddtype: check
 ---
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" >}}
 
