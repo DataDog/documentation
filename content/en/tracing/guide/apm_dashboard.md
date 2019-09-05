@@ -23,7 +23,7 @@ _4 minutes to complete_
 
 {{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="dashboard 7" video="true" responsive="true" style="width:90%;">}}
 
-Datadog APM allows you to create dashboards based on your business priorities and metrics important to you.:
+Datadog APM allows you to create dashboards based on your business priorities and metrics important to you:
 You can create widgets on these dashboards to keep track of any traditional infrastructure metrics like host memory usage alongside critical APM metrics based on throughput, latency, and error rate for correlation.
 Next to these you can track latency of the user experience of your top customers or largest transactions and alongside these keep track of the throughput of your main web-server ahead of any major events like Black Friday.
 
@@ -41,7 +41,7 @@ This guide takes the creation of a new dashboard to monitor the `web-store` serv
 
 3. **Click on `View Dashboard`** in the success message.
 
-    In the new dashboard, the `Hit/error count on service` graph for the `web-store` service is now available. It shows  the entire throughput of this service as well as its total amount of errors.
+    In the new dashboard, the `Hit/error count on service` graph for the `web-store` service is now available. It shows the entire throughput of this service as well as its total amount of errors.
 
     {{< img src="tracing/guide/apm_dashboard/dashboard_3.png" alt="dashboard 3" responsive="true" style="width:90%;">}}
 
