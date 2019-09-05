@@ -271,7 +271,7 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 
 {{% tab "PHP" %}}
 
-Even if Datdog does not officially support your web framework, you may not need to perform any manual instrumentation. See [automatic instrumentation][1] for more details.
+Even if Datadog does not officially support your web framework, you may not need to perform any manual instrumentation. See [automatic instrumentation][1] for more details.
 
 If you really need manual instrumentation, e.g., because you want to trace specific custom methods in your application, first install the PHP tracer dependency with Composer:
 
