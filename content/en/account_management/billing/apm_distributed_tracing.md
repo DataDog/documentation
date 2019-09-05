@@ -13,7 +13,7 @@ kind: faq
 {{< tabs >}}
 {{% tab "Host Based Deployment" %}}
 
-Any machine running its own OS - physical machine, virtual machine or cloud instance (virtual machine on a cloud) is considered a host. For billing APM, number of hosts sending traces are calculated every hour. At the end of the month, you are billed based on your 99th percentile usage. This includes 1 million [APM events][4] per host that you can slice and dice using with Trace Search and Analytics.
+Any machine running its own OS - physical machine, virtual machine or cloud instance (virtual machine on a cloud) is considered a host. For billing APM, number of hosts sending traces are calculated every hour. At the end of the month, you are billed based on your 99th percentile usage. This includes 1 million APM events per host that you can slice and dice using with Trace Search and Analytics.
 
 {{% /tab %}}
 {{% tab "Containerized Deployment" %}}
@@ -22,7 +22,7 @@ If you’re using container based environment (Kubernetes, Google Cloud Run, Ama
 
 ### Kubernetes Setup:
 
-Kubernetes creates pause containers to acquire the respective pod’s IP address and set up the network namespace for all other containers that join that pod. Datadog excludes all pause containers from your quota and does not charge for them (requires Agent 5.8+). For Kubernetes, APM is priced by node not by pods. For instance, find a [sample deployment scenario] [#sample-3].
+Kubernetes creates pause containers to acquire the respective pod’s IP address and set up the network namespace for all other containers that join that pod. Datadog excludes all pause containers from your quota and does not charge for them (requires Agent 5.8+). For Kubernetes, APM is priced by node not by pods. For instance, find a [sample deployment scenario][#sample-3].
 
 ### Agent Cluster Setup:
 
@@ -41,7 +41,7 @@ For instance, if you are running 3 Fargate tasks, the price for APM is $2 per ta
 
 *Note that the Fargate task billing does not include free functionality for Trace Search and Analytics.*
 
-Using a combination of deployment environments? Find pricing for sample deployment scenarios[link].
+Using a combination of deployment environments? Find pricing for [sample deployment scenarios][#sample-1].
 
 
 [1]: /integrations/ecs_fargate/#trace-collection
@@ -75,7 +75,7 @@ If you’re an admin of your account, you can monitor your account usage using t
 * APM Hosts: Shows the 99th percentile of all distinct APM hosts over all hours in the current month
 * Containers: Shows the average of all distinct containers over all hours in the current month
 * APM Events: Shows the sum of all APM events indexed over all hours in the current month
-* Fargate Tasks:Shows the average of all Fargate tasks over all hours in the current month
+* Fargate Tasks: Shows the average of all Fargate tasks over all hours in the current month
 
 
 ## Estimate and Control Usage
@@ -87,16 +87,16 @@ To estimate the number of events a service is sending per day or per month, use 
 ### Trace Analytics Monitors on volume
 
 To get alerts in case a code deployment causes a spike in APM events generated, set up [trace analytics monitors][8] on APM events. Get notified at any moment if the APM event volumes in any scope (`service`, `availability-zone`, etc…) of your infrastructure is growing unexpectedly:
+
 1. Go to [Trace Analytics view][9] in APM
-2. Select the env (you can select *)
-3. Select count (you can select *)
+2. Select the `env` (you can select `*`)
+3. Select `count` (you can select `*`)
 4. Select the time period you want to roll it up for.
 5. Select Export -> Export to Monitor
 6. Define the rate you would like to set as a warning or error.
 7. Define an explicit notification: The volume on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control
 
-
-<Image/GIF>
+{{< img src="tracing/trace_search_and_analytics/analytics/trace_analytics_monitors.png" alt="APM Event Filtering" responsive="true" style="width:100%;">}}
 
 ### Handling Sudden Host Upscale
 
