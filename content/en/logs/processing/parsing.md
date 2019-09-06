@@ -155,6 +155,13 @@ server on server %{notSpace:server.name} in %{notSpace:server.env}
 ## Examples
 Find below some examples demonstrating how to use parsers:
 
+* [Key value](#key-value)
+* [Parsing dates](#parsing-dates)
+* [Conditional patterns](#conditional-pattern)
+* [Optional attribute](#optional-attribute)
+* [Nested JSON](#nested-json)
+* [Regex](#regex)
+
 ### Key value
 
 This is the key value core filter : `keyvalue([separatorStr[, characterWhiteList [, quotingStr]])` where:
