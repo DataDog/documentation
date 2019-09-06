@@ -74,15 +74,15 @@ _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low
 
 `_sc|<NAME>|<STATUS>|d:<TIMESTAMP>|h:<HOSTNAME>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|m:<SERVICE_CHECK_MESSAGE>`
 
-| Parameter                            | Required | Description                                                                                                                                  |
-|--------------------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| `_sc`                                | Yes      | the datagram must begin with `_sc`                                                                                                           |
-| `<NAME>`                             | Yes      | Service check name.                                                                                                                          |
-| `<STATUS>`                           | Yes      | Integer corresponding to the check status (OK = `0`, WARNING = `1`, CRITICAL = `2`, UNKNOWN = `3`).                                          |
-| `d:<TIMESTAMP>`                      | No       | Add a timestamp to the check. Default is the current Unix epoch timestamp.                                                                   |
-| `h:<HOSTNAME>`                       | No       | Add a hostname to the event. No default.                                                                                                     |
-| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default.                       |
-| `m:<SERVICE_CHECK_MESSAGE>`          | No       | Add a message describing the current state of the Service Check. *This field MUST be positioned last among the metadata fields.* No default. |
+| Parameter                            | Required | Description                                                                                                                             |
+|--------------------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| `_sc`                                | Yes      | The datagram must begin with `_sc`.                                                                                                     |
+| `<NAME>`                             | Yes      | The service check name.                                                                                                                 |
+| `<STATUS>`                           | Yes      | An integer corresponding to the check status (OK = `0`, WARNING = `1`, CRITICAL = `2`, UNKNOWN = `3`).                                  |
+| `d:<TIMESTAMP>`                      | No       | Add a timestamp to the check. The default is the current Unix epoch timestamp.                                                          |
+| `h:<HOSTNAME>`                       | No       | Add a hostname to the event (no default).                                                                                               |
+| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | Set the tags of the event. A list of strings separated by comma (no default).                                                           |
+| `m:<SERVICE_CHECK_MESSAGE>`          | No       | A message describing the current state of the service check. This field MUST be positioned last among the metadata fields (no default). |
 
 Here's an example datagram:
 
@@ -96,12 +96,20 @@ _sc|Redis connection|2|#env:dev|m:Redis connection timed out after 10s
 
 ## Send metrics using DogStatsD and the shell
 
-For Linux and other Unix-like OS, use Bash. For Windows, you need PowerShell and [PowerShell-statsd][2] (a simple PowerShell function that takes care of the network bits). The idea behind DogStatsD is: create a message that contains information about your metric, event, or Service Check and send it to a locally installed Agent as a collector, the destination IP address is then `127.0.0.1` and the collector port over UDP port is `8125`. Refer to the [main DogStatsD documentation][3] to learn how to configure the Agent.
+For Linux and other Unix-like OS, use Bash. For Windows, use PowerShell and [PowerShell-statsd][2] (a simple PowerShell function that takes care of the network bits).
+
+DogStatsD creates a message that contains information about your metric, event, or service check and sends it to a locally installed Agent as a collector. The destination IP address is  `127.0.0.1` and the collector port over UDP port is `8125`. Refer to the [main DogStatsD documentation][3] to learn how to configure the Agent.
 
 {{< tabs >}}
 {{% tab "Metrics" %}}
 
-The format for sending metrics is `<METRIC_NAME>:<VALUE>|<TYPE>|@<SAMPLE_RATE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`, to send datapoints for a gauge metric called `custom_metric` with the shell tag.
+The format for sending metrics is:
+
+```
+<METRIC_NAME>:<VALUE>|<TYPE>|@<SAMPLE_RATE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>
+```
+
+The examples below send data points for a gauge metric called `custom_metric` with the `shell` tag.
 
 On Linux:
 
@@ -123,13 +131,15 @@ On Windows:
 PS C:\> .\send-statsd.ps1 "custom_metric:123|g|#shell"
 ```
 
-On any platform with Python (on Windows, the Agent's embedded Python interpreter can be used, which is located at `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe` for Agent versions <= 6.11 and in `C:\Program Files\Datadog\Datadog Agent\embedded2\python.exe` for Agent versions >= 6.12):
+On any platform with Python:
 
 ```python
 import socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
 sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```
+
+**Note**: The Agent's embedded Python interpreter can be used. On Windows, it is located at `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe` for Agent versions <= 6.11 and in `C:\Program Files\Datadog\Datadog Agent\embedded2\python.exe` for Agent versions >= 6.12.
 
 {{% /tab %}}
 {{% tab "Events" %}}
@@ -140,7 +150,7 @@ The format for sending events is:
 _e{<TITLE>.length,<TEXT>.length}:<TITLE>|<TEXT>|d:<DATE_EVENT>|h:<HOSTNAME>|p:<PRIORITY>|t:<ALERT_TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>.
 ```
 
-Here, calculate the size of the event's title and body:
+The examples below calculate the size of the event's title and body.
 
 On Linux:
 
@@ -161,7 +171,7 @@ PS C:> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$text|#she
 {{% /tab %}}
 {{% tab "Service Checks" %}}
 
-The format for sending Service Checks is:
+The format for sending service checks is:
 
 ```
 _sc|<NAME>|<STATUS>|d:<TIMESTAMP>|h:<HOSTNAME>|#<TAG_KEY_1>:<TAG_VALUE_1>|m:<SERVICE_CHECK_MESSAGE>
@@ -182,7 +192,7 @@ PS C:\> .\send-statsd.ps1 "_sc|Redis connection|2|#env:dev|m:Redis connection ti
 {{% /tab %}}
 {{< /tabs >}}
 
-To send metrics, events, or Service Checks on containerized environments, refer to the [DogStatsD on Kubernetes][4] documentation, in conjunction with the instructions for configuring APM on Kubernetes using [DaemonSets][5] or [Helm][6], depending on your installation. The [Docker APM][7] documentation may also be helpful.
+To send metrics, events, or service checks on containerized environments, refer to the [DogStatsD on Kubernetes][4] documentation, in conjunction with the instructions for configuring APM on Kubernetes using [DaemonSets][5] or [Helm][6], depending on your installation. The [Docker APM][7] documentation may also be helpful.
 
 ## Further Reading
 

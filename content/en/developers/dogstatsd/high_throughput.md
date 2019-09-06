@@ -14,15 +14,15 @@ further_reading:
   text: "DogStatsD source code"
 ---
 
-DogStatsD works by sending metrics generated from your application to the [Agent][1] over a transport protocol. This transport protocol can be either UDP (User Datagram Protocol) or [UDS (Unix Domain Socket)][2].
+DogStatsD works by sending metrics generated from your application to the [Agent][1] over a transport protocol. This protocol can be UDP (User Datagram Protocol) or [UDS (Unix Domain Socket)][2].
 
 When DogStatsD is used to send a large volume of metrics to a single Agent, if proper measures are not taken, it is common to end up with the following symptoms:
 
 - High Agent CPU usage
 - Dropped datagrams / metrics
-- (UDS) DogStatsD client library returning errors
+- The DogStatsD client library (UDS) returning errors
 
-Most of the time those symptoms can be alleviated by tweaking some configuration options described below.
+Most of the time the symptoms can be alleviated by tweaking some configuration options described below.
 
 ## General tips
 
@@ -34,7 +34,7 @@ Here are a few examples for [official DogStatsD supported clients][3]:
 
 {{< tabs >}}
 {{% tab "Go" %}}
-Using Datadog's official Golang library [datadog-go][1]. The example below creates a buffered DogStatsD client instance with `256` maximum buffered metrics which means that all metrics sent from this instance of the client are buffered and sent in packets containing a maximum of `256` metrics:
+By using Datadog's official Golang library [datadog-go][1], the example below creates a buffered DogStatsD client instance with `256` maximum buffered metrics which means that all metrics sent from this instance of the client are buffered and sent in packets containing a maximum of `256` metrics:
 
 ```go
 package main
@@ -61,7 +61,7 @@ func main() {
 {{% /tab %}}
 
 {{% tab "Python" %}}
-Using Datadog's official Python library [datadogpy][1]. The example below creates a buffered DogStatsD client instance that sends up to 25 metrics in one packet when the block completes:
+By using Datadog's official Python library [datadogpy][1], the example below creates a buffered DogStatsD client instance that sends up to 25 metrics in one packet when the block completes:
 
 ```python
 from datadog import DogStatsd
@@ -75,7 +75,7 @@ with DogStatsd(host="127.0.0.1", port=8125, max_buffer_size=25) as batch:
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
-Using Datadog's official Ruby library [dogstatsd-ruby][1]. The example below creates a buffered DogStatsD client instance that sends metrics in one packet when the block completes:
+By using Datadog's official Ruby library [dogstatsd-ruby][1], the example below creates a buffered DogStatsD client instance that sends metrics in one packet when the block completes:
 
 ```ruby
 require 'datadog/statsd'
@@ -92,7 +92,7 @@ end
 {{% /tab %}}
 
 {{% tab "Java" %}}
-Using Datadog's official Java library [java-dogstatsd-client][1]. The example below creates a buffered DogStatsD client instance with `256` maximum buffered metrics which means that all metrics sent from this instance of the client are buffered and sent in packets containing a maximum of `256` metrics:
+By using Datadog's official Java library [java-dogstatsd-client][1], the example below creates a buffered DogStatsD client instance with `256` maximum buffered metrics which means that all metrics sent from this instance of the client are buffered and sent in packets containing a maximum of `256` metrics:
 
 ```java
 import com.timgroup.statsd.NonBlockingStatsDClient;
@@ -114,7 +114,7 @@ public class DogStatsdClient {
 [1]: https://github.com/DataDog/java-dogstatsd-client
 {{% /tab %}}
 {{% tab ".NET" %}}
-Using Datadog's official C# library [dogstatsd-csharp-client][1]:
+By using Datadog's official C# library [dogstatsd-csharp-client][1], the example below:
 
 ```csharp
 using StatsdClient;
@@ -139,7 +139,7 @@ public class DogStatsdClient
 [1]: https://github.com/DataDog/dogstatsd-csharp-client
 {{% /tab %}}
 {{% tab "PHP" %}}
-Using Datadog's official PHP library [php-datadogstatsd][1]. The example below creates a buffered DogStatsD client instance that sends metrics in one packet when the block completes:
+By using Datadog's official PHP library [php-datadogstatsd][1], the example below creates a buffered DogStatsD client instance that sends metrics in one packet when the block completes:
 
 ```php
 <?php
@@ -166,7 +166,7 @@ $client->increment('example_metric.increment', $sampleRate->0.5 , array('environ
 
 It is possible to reduce the traffic from your DogStatsD client to the Agent by setting a sample rate value for your client. For example, a sample rate of `0.5` halves the number of UDP packets sent. This solution is a trade-off: you decrease traffic but slightly lose in precision and granularity.
 
-For more information, and code examples. see [DogStatsD "Sample Rate" Parameter Explained][4].
+For more information and code examples, see [DogStatsD "Sample Rate" Parameter Explained][4].
 
 ### Use DogStatsD over UDS (Unix Domain Socket)
 
@@ -174,7 +174,7 @@ UDS is an inter-process communication protocol used to [transport DogStatsD payl
 
 ## Operating System kernel buffers
 
-Most OSs add incoming UDP and UDS datagrams containing your metrics to a buffer with a maximum size. Once this size is reached, datagrams containing your metrics starts getting dropped. It is possible to adjust those values to give the Agent more time to process incoming metrics:
+Most operating systems add incoming UDP and UDS datagrams containing your metrics to a buffer with a maximum size. Once the max is reached, datagrams containing your metrics start getting dropped. It is possible to adjust the values to give the Agent more time to process incoming metrics:
 
 ### Over UDP (User Datagram Protocol)
 

@@ -16,13 +16,13 @@ further_reading:
   text: "DogStatsD source code"
 ---
 
-Starting with version 6.0, the Agent is able to ingest metrics via a Unix Domain Socket (UDS), as an alternative to UDP, when running on Linux systems.
+Starting with v6.0, the Agent can ingest metrics with a Unix Domain Socket (UDS) as an alternative to UDP when running on Linux systems.
 
-While UDP works great on `localhost`, it can be a challenge to set up in containerized environments. Unix Domain Sockets allow you to easily establish the connection via a socket file, regardless of the IP of the Datadog Agent container. It also enables the following benefits:
+While UDP works great on `localhost`, it can be a challenge to set up in containerized environments. Unix Domain Sockets allow you to establish the connection with a socket file, regardless of the IP of the Datadog Agent container. It also enables the following benefits:
 
 * Bypassing the networking stack brings a significant performance improvement for high traffic
 * While UDP has no error handling, UDS allows the Agent to detect dropped packets and connection errors, while still allowing a non-blocking use
-* DogStatsD is able to detect the container from which metrics originated, and tag those metrics accordingly
+* DogStatsD can detect the container from which metrics originated and tag those metrics accordingly.
 
 ## How it works
 
@@ -32,13 +32,13 @@ Instead of using an `IP:port` pair to establish connections, Unix Domain Sockets
 
 ## Setup
 
-To setup DogStatsD, configure first your Agent to enable the DogStatsD server through the `dogstatsd_socket` parameter then configure your DogStatsD client in your code to send data to it.
+To set up DogStatsD, enable the DogStatsD server through the `dogstatsd_socket` parameter. Then, configure the DogStatsD client in your code.
 
 ### Agent
 
 To enable the Agent DogStatsD server:
 
-1. Edit your `datadog.yaml` file to un-comment and set the `dogstatsd_socket` parameter to the path where DogStatsD should create its listening socket:
+1. Edit the [Agent's main configuration file][2] to set `dogstatsd_socket` to the path where DogStatsD should create its listening socket:
 
     ```yaml
     ## @param dogstatsd_socket - string - optional - default: ""
@@ -47,23 +47,23 @@ To enable the Agent DogStatsD server:
     dogstatsd_socket: "/var/run/datadog/dsd.socket"
     ```
 
-2. [Restart your Agent][2].
+2. [Restart your Agent][3].
 
-**Note**: You can also set the socket path via the `DD_DOGSTATSD_SOCKET` environment variable for the container Agent.
+**Note**: You can also set the socket path with the `DD_DOGSTATSD_SOCKET` environment variable for the container Agent.
 
 ### DogStatsD Client
 #### Native support in client libraries
 
-The following official DogStatsD client libraries natively support UDS traffic. Refer to the library's documentation on how to enable UDS traffic. Note that as with UDP, enabling client-side buffering is highly recommended to improve performance on heavy traffic:
+The following official DogStatsD client libraries natively support UDS traffic. Refer to the library's documentation on how to enable UDS traffic. **Note**: As with UDP, enabling client-side buffering is highly recommended to improve performance on heavy traffic:
 
 | Language   | Library                              |
 | ---------- | ------------------------------------ |
-| Golang     | [DataDog/datadog-go][3]              |
-| Java       | [DataDog/java-dogstatsd-client][4]   |
-| Python     | [DataDog/datadogpy][5]               |
-| Ruby       | [DataDog/dogstatsd-ruby][6]          |
-| PHP        | [DataDog/php-datadogstatsd][7]       |
-| C#         | [DataDog/dogstatsd-csharp-client][8] |
+| Golang     | [DataDog/datadog-go][4]              |
+| Java       | [DataDog/java-dogstatsd-client][5]   |
+| Python     | [DataDog/datadogpy][6]               |
+| Ruby       | [DataDog/dogstatsd-ruby][7]          |
+| PHP        | [DataDog/php-datadogstatsd][8]       |
+| C#         | [DataDog/dogstatsd-csharp-client][9] |
 
 
 #### Using netcat
@@ -82,7 +82,7 @@ If an application or a client library you use does not support UDS traffic, you 
 socat -s -u UDP-RECV:8125 UNIX-SENDTO:/var/run/datadog/dsd.socket
 ```
 
-Refer also to the implementation guidelines in the [datadog-agent github wiki][9] to see how you could add native support to your client library.
+For guidelines on creating additional implementation options, refer to the [datadog-agent github wiki][10].
 
 ## Accessing the socket across containers
 
@@ -133,11 +133,11 @@ volumes:
 
 Origin detection allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received via UDS are tagged by the same container tags as Autodiscovery metrics.
 
-**Note:** `container_id`, `container_name` and `pod_name` tags are not added to avoid creating too many [custom metrics][10].
+**Note:** `container_id`, `container_name`, and `pod_name` tags are not added to avoid creating too many [custom metrics][11].
 
 To use origin detection:
 
-1. Enable the `dogstatsd_origin_detection` option in your `datadog.yaml`:
+1. Enable the `dogstatsd_origin_detection` option in your [Agent's main configuration file][2]:
 
     ```yaml
     ## @param dogstatsd_origin_detection - boolean - optional - default: false
@@ -147,26 +147,27 @@ To use origin detection:
     dogstatsd_origin_detection: true
     ```
 
-    **Note**: You can also set the environment variable `DD_DOGSTATSD_ORIGIN_DETECTION=true` if working with the container Agent.
+    **Note**: For the containerized Agent, set the environment variable `DD_DOGSTATSD_ORIGIN_DETECTION` to true.
 
-2. [Restart your Agent][2].
+2. [Restart your Agent][3].
 
-When running inside a container, DogStatsd needs to run in the host's PID namespace for origin detection to work reliably. Enable this via the Docker `--pid=host` flag.
+When running inside a container, DogStatsd needs to run in the host's PID namespace for origin detection to work reliably. Enable this with the Docker `--pid=host` flag.
 
-**Note**: This is supported by ECS with the parameter `"pidMode": "host"` in the task definition of the container. This option is not supported in Fargate. For more information, see the [AWS documentation][11].
+**Note**: This is supported by ECS with the parameter `"pidMode": "host"` in the task definition of the container. This option is not supported in Fargate. For more information, see the [AWS documentation][12].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/metrics/dogstatsd_metrics_submission
-[2]: /agent/guide/agent-commands
-[3]: https://github.com/DataDog/datadog-go
-[4]: https://github.com/DataDog/java-dogstatsd-client
-[5]: https://github.com/DataDog/datadogpy
-[6]: https://github.com/DataDog/dogstatsd-ruby
-[7]: https://github.com/DataDog/php-datadogstatsd
-[8]: https://github.com/DataDog/dogstatsd-csharp-client
-[9]: https://github.com/DataDog/datadog-agent/wiki/Unix-Domain-Sockets-support
-[10]: /developers/metrics/custom_metrics
-[11]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
+[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[3]: /agent/guide/agent-commands
+[4]: https://github.com/DataDog/datadog-go
+[5]: https://github.com/DataDog/java-dogstatsd-client
+[6]: https://github.com/DataDog/datadogpy
+[7]: https://github.com/DataDog/dogstatsd-ruby
+[8]: https://github.com/DataDog/php-datadogstatsd
+[9]: https://github.com/DataDog/dogstatsd-csharp-client
+[10]: https://github.com/DataDog/datadog-agent/wiki/Unix-Domain-Sockets-support
+[11]: /developers/metrics/custom_metrics
+[12]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
