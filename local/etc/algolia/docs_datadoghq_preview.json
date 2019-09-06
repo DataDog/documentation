@@ -107,7 +107,6 @@
 		"docs.datadoghq.com/fr/.*/faq/",
 		"docs.datadoghq.com/ja/.*/faq/",
     "docs.datadoghq.com/resources/",
-    "https://docs.datadoghq.com/agent/guide/agent-5-autodiscovery/$",
 		"/faq/$",
 		"/guide/$",
 		"\\?",
