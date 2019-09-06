@@ -86,6 +86,7 @@ index_algolia_preview:
   stage: post-deploy
   environment: "preview"
   script:
+    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['config', 'error', 'examples', 'fonts', 'images', 'resources', 'static', 'videos']" -l "['ja']" -c "./local/etc/algolia/docs_datadoghq_preview.json"
     - cp ./local/etc/algolia/docs_datadoghq_preview.json /etc/docs_datadoghq_preview.json
     - index_docsearch_algolia_preview
   dependencies:
@@ -143,6 +144,7 @@ index_algolia:
   stage: post-deploy
   environment: "live"
   script:
+    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['config', 'error', 'examples', 'fonts', 'images', 'resources', 'static', 'videos']" -l "['ja']" -c "./local/etc/algolia/docs_datadoghq.json"
     - cp ./local/etc/algolia/docs_datadoghq.json /etc/docs_datadoghq.com
     - index_docsearch_algolia
   dependencies:
