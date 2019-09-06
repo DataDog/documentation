@@ -1,6 +1,7 @@
 ---
 title: タグの概要
 kind: documentation
+description: Datadog でのタグの使用方法
 aliases:
   - /ja/getting_started/getting_started_with_tags
   - /ja/guides/tagging/
@@ -57,7 +58,7 @@ further_reading:
 
 
    | タグ                | キー           | 値          |
-   |--------------------|---------------|----------------|
+    |--------------------|---------------|----------------|
    | `env:staging:east` | `env`         | `staging:east` |
    | `env_staging:east` | `env_staging` | `east`         |
 

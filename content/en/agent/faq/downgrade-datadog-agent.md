@@ -13,7 +13,7 @@ For DEB or RPM packages of the Datadog Agent, find below instructions to downgra
 ### CLI
 
 ```
-sudo apt-get update && sudo apt-get install --force-yes datadog-agent=1:6.X.Y-1
+sudo apt-get update && sudo apt-get install --allow-downgrades datadog-agent=1:6.X.Y-1
 ```
 
 ### Configuration management tools

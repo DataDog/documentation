@@ -6,6 +6,9 @@ further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"
   tag: "3 mins"
   text: "Alert on anomalous p99 latency of a database service"
+- link: "/tracing/guide/apm_dashboard/"
+  tag: "4 mins"
+  text: "Create a Dashboard to track and correlate APM metrics"
 - link: "/tracing/guide/slowest_request_daily/"
   tag: "3 mins"
   text: "Debug the slowest trace on the slowest endpoint of a web service"
@@ -16,6 +19,8 @@ further_reading:
   tag: ""
   text: "All guides"
 ---
+_2 minutes to complete_
+
 
 {{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_3.mp4" alt="comparaison video" video="true" responsive="true" style="width:90%;">}}
 

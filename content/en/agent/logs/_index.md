@@ -22,7 +22,7 @@ further_reading:
 
 Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do not include the `log collection` interface. If you are not using the Agent already, follow the [Agent installation instructions][1].
 
-Collecting logs is **disabled** by default in the Datadog Agent. Enable log collection in the Agent's [main configuration file][4] (`datadog.yaml`):
+Collecting logs is **disabled** by default in the Datadog Agent. Enable log collection in the Agent's [main configuration file][2] (`datadog.yaml`):
 
 ```
 logs_enabled: true
@@ -30,7 +30,7 @@ logs_enabled: true
 
 The Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
 
-**Note**: If you're using Kubernetes, make sure to [enable log collection in your DaemonSet setup][2]. If you're using Docker, [enable log collection for the containerized Agent][3].
+**Note**: If you're using Kubernetes, make sure to [enable log collection in your DaemonSet setup][3]. If you're using Docker, [enable log collection for the containerized Agent][4].
 
 ## Enabling log collection from integrations
 
@@ -46,7 +46,7 @@ If an integration does not support logs by default, use the custom log collectio
 
 Datadog Agent v6 can collect logs and forward them to Datadog from files, the network (TCP or UDP), journald, and Windows channels:
 
-1. Create a new `<CUSTOM_LOG_SOURCE>.d/` folder in the `conf.d/` directory at the root of your [Agent's configuration directory][4].
+1. Create a new `<CUSTOM_LOG_SOURCE>.d/` folder in the `conf.d/` directory at the root of your [Agent's configuration directory][2].
 2. Create a new `conf.yaml` file in this new folder.
 3. Add a custom log collection configuration group with the parameters below.
 4. [Restart your Agent][5] to take into account this new configuration.
@@ -171,9 +171,9 @@ List of all available parameters for log collection:
 
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /agent/kubernetes/daemonset_setup/#log-collection
-[3]: /agent/docker/log
-[4]: /agent/guide/agent-configuration-files
+[2]: /agent/guide/agent-configuration-files
+[3]: /agent/kubernetes/daemonset_setup/#log-collection
+[4]: /agent/docker/log
 [5]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: /agent/guide/agent-commands/#agent-status-and-information
 [7]: /tracing

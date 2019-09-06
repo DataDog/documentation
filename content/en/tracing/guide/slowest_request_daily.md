@@ -9,6 +9,9 @@ further_reading:
 - link: "tracing/guide/week_over_week_p50_comparison/"
   tag: "2 mins"
   text: "Compare a service’s latency to the previous week"
+- link: "/tracing/guide/apm_dashboard/"
+  tag: "4 mins"
+  text: "Create a Dashboard to track and correlate APM metrics"
 - link: "tracing/guide/add_span_md_and_graph_it/"
   tag: "7 mins"
   text: "Add span tags and slice and dice your application performance"
@@ -16,8 +19,9 @@ further_reading:
   tag: ""
   text: "All guides"
 ---
+_3 minutes to complete_
 
-{{< img src="tracing/guide/slowest_request_daily/slowest_trace_1.gif" alt="Identifying the slowest trace and finding the Host metrics for it" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/slowest_request_daily/slowest_trace_1.mp4" video="true" alt="Identifying the slowest trace and finding the Host metrics for it" responsive="true" style="width:90%;">}}
 
 With Datadog APM, you can easily investigate the performance of your endpoints, identify slow requests, and investigate the root cause of latency issues. This example shows the slowest trace of the day for an e-commerce checkout endpoint and how it slows down because of high CPU usage.
 
@@ -27,7 +31,7 @@ With Datadog APM, you can easily investigate the performance of your endpoints, 
 
 2. **Search for a relevant and active web service and open the Service Page**.
 
-    The web-store service is used in this example because it is the primary server in the tech stack and it controls most calls to third party services. 
+    The web-store service is used in this example because it is the primary server in the tech stack and it controls most calls to third party services.
 
     {{< img src="tracing/guide/slowest_request_daily/slowest_trace_2.png" alt="Identifying the slowest trace and finding the bottleneck causing it" responsive="true" style="width:90%;">}}
 
@@ -46,7 +50,7 @@ With Datadog APM, you can easily investigate the performance of your endpoints, 
 
     The Flamegraph is a great way of identifying the precise piece of your stack that is errneous or very latent. Errors are marked with red highlights and duration is represented by the horizontal length of the span, so very long spans are the slow ones. Learn more about using the Flamegraph in the [Trace View guide][2].
 
-    Under the Flamegraph you can see all of the tags (including [custom ones][3]). From here you can also see associated logs (if you [connected Logs to your Traces][4]), see Host-level information such as CPU and memory usage. 
+    Under the Flamegraph you can see all of the tags (including [custom ones][3]). From here you can also see associated logs (if you [connected Logs to your Traces][4]), see Host-level information such as CPU and memory usage.
 
     {{< img src="tracing/guide/slowest_request_daily/slowest_trace_4.png" alt="Identifying the slowest trace and finding the bottleneck causing it" responsive="true" style="width:90%;">}}
 

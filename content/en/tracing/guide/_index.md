@@ -9,8 +9,9 @@ disable_toc: true
 {{< whatsnext desc="Onboarding Guides:" >}}
     {{< nextlink href="tracing/guide/alert_anomalies_p99_database" tag="3 mins" >}}1. Alert on anomalies in database services p99 latency.{{< /nextlink >}}
     {{< nextlink href="tracing/guide/week_over_week_p50_comparison" tag="2 mins" >}}2. Compare p50 latency week over week for a service.{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/slowest_request_daily" tag="3 mins">}}3. Debug the slowest trace on the slowest endpoint of a web service. {{< /nextlink >}}
-    {{< nextlink href="tracing/guide/add_span_md_and_graph_it" tag="7 mins" >}}4. Add span tags and slice and dice your application performance.{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/apm_dashboard" tag="4 mins">}}3. Create a Dashboard to track and correlate APM metrics.{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/slowest_request_daily" tag="3 mins">}}4. Debug the slowest trace on the slowest endpoint of a web service. {{< /nextlink >}}
+    {{< nextlink href="tracing/guide/add_span_md_and_graph_it" tag="7 mins" >}}5. Add span tags and slice and dice your application performance.{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 {{< whatsnext desc="Additional Guides:" >}}
@@ -19,6 +20,7 @@ disable_toc: true
     {{< nextlink href="tracing/guide/resource_monitor" >}}Build monitor upon your resource metrics{{< /nextlink >}}
     {{< nextlink href="tracing/guide/trace_sampling_and_storage" >}}Trace Sampling and Storage{{< /nextlink >}}
     {{< nextlink href="tracing/guide/agent-obfuscation" >}}Agent Trace Obfuscation{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/metrics_namespace/" >}}Tracing Application Metrics{{< /nextlink >}}
     {{< nextlink href="/api/?lang=python#tracing" >}}Trace API{{< /nextlink >}}
     {{< nextlink href="/developers/libraries/#apm-distributed-tracing-client-libraries" >}}Tracing Client Libraries{{< /nextlink >}}
 {{< /whatsnext >}}

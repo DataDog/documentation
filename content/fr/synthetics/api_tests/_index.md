@@ -40,7 +40,7 @@ Définissez la requête que vous souhaitez que Datadog exécute :
 2. Choisissez la **Method** et l'**URL** à interroger. Les méthodes disponibles sont les suivantes : `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE` et `OPTIONS`.
     * Advanced Options (facultatif) : personnalisez les en-têtes de requête, les identifiants d'authentification, le contenu du corps ou les cookies à utiliser.
         * Follow Redirects : activez cette fonction pour que l'endpoint surveillé suive jusqu'à dix redirections.
-        * Headers : les en-têtes définis remplacent les en-têtes du navigateur par défaut. Par exemple, définissez le user-agent dans l'en-tête pour [identifier les scripts Datadog][1].
+        * Headers : les en-têtes définis remplacent les en-têtes par défaut du navigateur. Par exemple, vous pouvez modifier le user-agent dans l'en-tête de façon à [identifier les scripts Datadog][1].
         * Authentication : authentification HTTP de base avec nom d'utilisateur et mot de passe
         * Body : corps de la requête et type de corps (`text/plain`, `application/json`, `text/xml`, `text/html` ou `None`)
         * Cookies : les cookies définis sont ajoutés aux cookies du navigateur par défaut. Définissez plusieurs cookies en suivant le format `cookie1=<VOTRE_COOKIE_1>; cookie2=<VOTRE_COOKIE_2>`.
