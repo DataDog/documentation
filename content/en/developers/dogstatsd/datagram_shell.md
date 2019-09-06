@@ -14,7 +14,7 @@ further_reading:
   text: "DogStatsD source code"
 ---
 
-This section specifies the raw datagram format for metrics, events, and Service Checks that DogStatsD accepts. This isn't required reading if you're using any of [the DogStatsD client libraries][1]. However, if you want to write your own library, or use the shell to send metrics, then read on.
+This section specifies the raw datagram format for metrics, events, and service checks that DogStatsD accepts. This isn't required reading if you're using any of [the DogStatsD client libraries][1]; however, if you want to write your own library, or use the shell to send metrics, then read on.
 
 {{< tabs >}}
 {{% tab "Metrics" %}}
