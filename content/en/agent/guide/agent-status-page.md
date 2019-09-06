@@ -1,5 +1,5 @@
 ---
-title: Agent Status Page
+title: Agent v6 Status Page
 kind: guide
 further_reading:
 - link: "agent/troubleshooting/"
@@ -13,7 +13,9 @@ further_reading:
   text: "Agent Commands"
 ---
 
-The Agent status page displays information about your running Agent. See [Agent Commands][1] to find the status command for your environment. The sections below provide details on the contents of the status page.
+The Agent v6 status page displays information about your running Agent. See [Agent Commands][1] to find the status command for your environment. The sections below provide details on the contents of the status page.
+
+**Note**: The status page may have minor differences between Agent versions. 
 
 ## Agent version
 
@@ -63,7 +65,7 @@ This section displays information on the host the Agent is running on, for examp
 
 ### Hostnames
 
-This section displays the hostnames found by the Agent, for example:
+This section displays the hostnames found by the Agent (see the example below). The `hostname` is the final hostname reported to the backend. For more information, see [How does Datadog determine the Agent hostname][3].
 ```text
     hostname: ubuntu-xenial
     socket-fqdn: ubuntu-xenial
@@ -171,12 +173,14 @@ This section displays the transactions made by the forwarder, for example:
 
 Terms and descriptions:
 
-| Term         | Description                                  |
-|--------------|----------------------------------------------|
-| CheckRunsV1  | The number of service check payloads sent.   |
-| IntakeV1     | The number of event payloads sent.           |
-| TimeseriesV1 | The number of metric payloads sent.          |
-| Errors       | The number of errors while sending payloads. |
+| Term           | Description                                                                  |
+|----------------|------------------------------------------------------------------------------|
+| Success        | The number of transactions successfully sent.                                |
+| Errors         | The number of times a transaction failed to be sent and was retried.         |
+| RetryQueueSize | The current number of transactions waiting to be retried.                    |
+| Retried        | The number of times a transaction was retried.                               |
+| DroppedOnInput | The number of transactions that were dropped because all workers were busy.  |
+| Dropped        | The number of transactions dropped because they were retried too many times. |
 
 ### API Keys status
 
@@ -217,13 +221,13 @@ This section displays information on the Agent's aggregator, for example:
 
 Terms and descriptions:
 
-| Term                    | Description                                                                                                                |
-|-------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| Checks Metric Sample    | The total number of metrics sent from the checks to the aggregator.                                                        |
-| Dogstatsd Metric Sample | The total number of metrics sent from the DogStatsD server to the aggregator.                                              |
-| Event                   | The total number of events sent to the aggregator.                                                                         |
-| Service Check           | The total number of service checks sent to the aggregator.                                                                 |
-| Flush                   | The aggregator stores data in a queue. The queue is emptied once per flush interval and the data is sent to the forwarder. |
+| Term                    | Description                                                                              |
+|-------------------------|------------------------------------------------------------------------------------------|
+| Checks Metric Sample    | The total number of metrics sent from the checks to the aggregator.                      |
+| Dogstatsd Metric Sample | The total number of metrics sent from the DogStatsD server to the aggregator.            |
+| Event                   | The total number of events sent to the aggregator.                                       |
+| Service Check           | The total number of service checks sent to the aggregator.                               |
+| Flush                   | The number of times aggregated metrics were flushed to the forwarder to send to Datadog. |
 
 
 ## DogStatsD
@@ -251,3 +255,4 @@ This section displays the number of packets received by the DogStatsD server for
 
 [1]: /agent/guide/agent-commands/#agent-information
 [2]: /agent/troubleshooting/ntp
+[3]: /agent/faq/how-datadog-agent-determines-the-hostname
