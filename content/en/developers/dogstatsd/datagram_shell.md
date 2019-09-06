@@ -21,42 +21,43 @@ This section specifies the raw datagram format for metrics, events, and Service 
 
 `<METRIC_NAME>:<VALUE>|<TYPE>|@<SAMPLE_RATE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
 
-| Parameter                           | Required   | Description                                                                                                                                                          |
-| ---------------                     | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<METRIC_NAME>`                     | Yes        | A string with no colons, bars, or @ characters. See the [metric naming policy][1].                                                                                   |
-| `<VALUE>`                           | Yes        | An integer or float.                                                                                                                                                 |
-| `<TYPE>`                            | Yes        | `c` for COUNT, `g` for GAUGE, `ms` for TIMER, `h` for HISTOGRAM, `s` for SET. See the [metric type documentation][2])                                                |
-| `<SAMPLE_RATE>`                     | No         | A float between `0` and `1`, inclusive. Only works with COUNT, HISTOGRAM, and TIMER metrics. Default is `1` (i.e. sample 100% of the time).                          |
-| `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No         | A comma separated list of tags. Use colons for key/value tags, i.e. `env:prod`. The key `device` is reserved; Datadog drops a user-added tag like `device:foobar`.   |
+| Parameter                           | Required | Description                                                                                                                                      |
+|-------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| `<METRIC_NAME>`                     | Yes      | A string that contains only ASCII alphanumerics, underscores, and periods. See the [metric naming policy][1].                                    |
+| `<VALUE>`                           | Yes      | An integer or float.                                                                                                                             |
+| `<TYPE>`                            | Yes      | `c` for COUNT, `g` for GAUGE, `ms` for TIMER, `h` for HISTOGRAM, `s` for SET. See the [metric type documentation][2])                            |
+| `<SAMPLE_RATE>`                     | No       | A float between `0` and `1`, inclusive. Only works with COUNT, HISTOGRAM, and TIMER metrics. The default is `1`, which samples 100% of the time. |
+| `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | A comma separated list of strings. Use colons for key/value tags (`env:prod`). See the [tagging documentation][3] for guidance on defining tags. |
 
 Here are some example datagrams:
 
 * `page.views:1|c` : Increment the `page.views` counter.
 * `fuel.level:0.5|g`: Record the fuel tank is half-empty.
-* `song.length:240|h|@0.5`: Sample the song length histogram half of the time.
-* `users.uniques:1234|s`: Track a unique visitor to the site.
-* `users.online:1|c|#country:china`: Increment the active users counter, tag by country of origin.
+* `song.length:240|h|@0.5`: Sample the `song.length` histogram half of the time.
+* `users.uniques:1234|s`: Track unique visitors to the site.
+* `users.online:1|c|#country:china`: Increment the active users counter and tag by country of origin.
 * `users.online:1|c|@0.5|#country:china`: Track active China users and use a sample rate.
 
 [1]: /developers/metrics/#naming-metrics
 [2]: /developers/metrics/metrics_type
+[3]: /tagging
 {{% /tab %}}
 {{% tab "Events" %}}
 
 `_e{<TITLE>.length,<TEXT>.length}:<TITLE>|<TEXT>|d:<TIMESTAMP>|h:<HOSTNAME>|p:<PRIORITY>|t:<ALERT_TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
 
-| Parameter                            | Required   | Description                                                                                                              |
-| ------------------------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `_e`                                 | Yes        | The datagram must begin with `_e`                                                                                        |
-| `<TITLE>`                            | Yes        | Event title.                                                                                                             |
-| `<TEXT>`                             | Yes        | Event text. Insert line breaks with an escaped slash (`\\n`).                                                            |
-| `d:<TIMESTAMP>`                      | No         | Add a timestamp to the event. Default is the current Unix epoch timestamp.                                               |
-| `h:<HOSTNAME>`                       | No         | Add a hostname to the event. No default.                                                                                 |
-| `k:aggregation_key`                  | No         | Add an aggregation key to group the event with others that have the same key. No default.                                |
-| `p:<PRIORITY>`                       | No         | Set to `normal` or `low`. Default `normal`.                                                                              |
-| `s:source_type_name`                 | No         | Add a source type to the event. No default.                                                                              |
-| `t:<ALERT_TYPE>`                     | No         | Set to `error`, `warning`, `info` or `success`. Default `info`.                                                          |
-| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No         | The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default.   |
+| Parameter                            | Required | Description                                                                                                            |
+|--------------------------------------|----------|------------------------------------------------------------------------------------------------------------------------|
+| `_e`                                 | Yes      | The datagram must begin with `_e`.                                                                                     |
+| `<TITLE>`                            | Yes      | The event title.                                                                                                       |
+| `<TEXT>`                             | Yes      | The event text. Insert line breaks with: `\\n`.                                                                        |
+| `d:<TIMESTAMP>`                      | No       | Add a timestamp to the event. The default is the current Unix epoch timestamp.                                         |
+| `h:<HOSTNAME>`                       | No       | Add a hostname to the event. No default.                                                                               |
+| `k:aggregation_key`                  | No       | Add an aggregation key to group the event with others that have the same key. No default.                              |
+| `p:<PRIORITY>`                       | No       | Set to `normal` or `low`. Default `normal`.                                                                            |
+| `s:source_type_name`                 | No       | Add a source type to the event. No default.                                                                            |
+| `t:<ALERT_TYPE>`                     | No       | Set to `error`, `warning`, `info` or `success`. Default `info`.                                                        |
+| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default. |
 
 Here are some example datagrams:
 
@@ -73,15 +74,15 @@ _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low
 
 `_sc|<NAME>|<STATUS>|d:<TIMESTAMP>|h:<HOSTNAME>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|m:<SERVICE_CHECK_MESSAGE>`
 
-| Parameter                             | Required   | Description                                                                                                                                    |
-| ------------------------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `_sc`                                 | Yes        | the datagram must begin with `_sc`                                                                                                             |
-| `<NAME>`                              | Yes        | Service check name.                                                                                                                            |
-| `<STATUS>`                            | Yes        | Integer corresponding to the check status (OK = `0`, WARNING = `1`, CRITICAL = `2`, UNKNOWN = `3`).                                            |
-| `d:<TIMESTAMP>`                       | No         | Add a timestamp to the check. Default is the current Unix epoch timestamp.                                                                     |
-| `h:<HOSTNAME>`                        | No         | Add a hostname to the event. No default.                                                                                                       |
-| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`  | No         | The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default.                         |
-| `m:<SERVICE_CHECK_MESSAGE>`           | No         | Add a message describing the current state of the Service Check. *This field MUST be positioned last among the metadata fields.* No default.   |
+| Parameter                            | Required | Description                                                                                                                                  |
+|--------------------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| `_sc`                                | Yes      | the datagram must begin with `_sc`                                                                                                           |
+| `<NAME>`                             | Yes      | Service check name.                                                                                                                          |
+| `<STATUS>`                           | Yes      | Integer corresponding to the check status (OK = `0`, WARNING = `1`, CRITICAL = `2`, UNKNOWN = `3`).                                          |
+| `d:<TIMESTAMP>`                      | No       | Add a timestamp to the check. Default is the current Unix epoch timestamp.                                                                   |
+| `h:<HOSTNAME>`                       | No       | Add a hostname to the event. No default.                                                                                                     |
+| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default.                       |
+| `m:<SERVICE_CHECK_MESSAGE>`          | No       | Add a message describing the current state of the Service Check. *This field MUST be positioned last among the metadata fields.* No default. |
 
 Here's an example datagram:
 
