@@ -2,6 +2,7 @@
 title: Downgrade the Agent back to version 5
 kind: faq
 private: true
+disable_toc: true
 ---
 
 This guide assumes you upgraded to the Agent v6 using our [upgrade guide][1], choose your OS to see the detailed instructions on how to downgrade your Agent from version 6 to version 5:
