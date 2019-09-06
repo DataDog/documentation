@@ -7,65 +7,75 @@ kind: faq
 
 [APM & Distributed Tracing][1] powers you to find service bottlenecks and analyze distributed traces for your microservices architecture. Additionally, using the [Trace Search and Analytics][2] feature with APM allows you to slice and dice your application data with APM events using completely customizable tags.
 
+## Understanding Your Bill
 
-## Choose your deployment environment:
+| Deployment environment | Billable Unit | APM Events for Trace Search and Analytics |
+| -----------------------|---------------|-------------------------------------------|
+| Host  | $36 per host | No. of hosts * 1 million APM events included for free. Additional APM events charged per million per month.|
+| Containers | $36 per underlying host | |
+| Fargate | Per concurrent task | No free APM events included. APM events charged per million per month. |
 
-{{< tabs >}}
-{{% tab "Host Based Deployment" %}}
+* Pricing is calculated on the basis of 99th percentile of usage at the end of month
 
-Any machine running its own OS - physical machine, virtual machine or cloud instance (virtual machine on a cloud) is considered a host. For billing APM, number of hosts sending traces are calculated every hour. At the end of the month, you are billed based on your 99th percentile usage. This includes a number of free [APM events][1] per host ([depending of your subscription plan][2]) that you can slice and dice using with Trace Search and Analytics.
-
-[1]: /tracing/visualization/#apm-event
-[2]: https://www.datadoghq.com/pricing
-{{% /tab %}}
-{{% tab "Containerized Deployment" %}}
-
-If you’re using container based environment (Kubernetes, Google Cloud Run, Amazon EKS, Docker), APM is still billed on host basis, that is, physical servers and/or virtual machines those containers run on. This includes a number of free APM events ([depending of your subscription plan][1]) per host that you can slice and dice using with Trace Search and Analytics.
-
-### Kubernetes Setup:
-
-Kubernetes creates pause containers to acquire the respective pod’s IP address and set up the network namespace for all other containers that join that pod. Datadog excludes all pause containers from your quota and does not charge for them (requires Agent 5.8+). For Kubernetes, APM is priced by node not by pods. For instance, find a [sample deployment scenario][2].
-
-### Agent Cluster Setup:
-
-The default deployment setup for APM is to install an Agent on every host. In case you do not have access to your host to deploy the Agent, you can bundle it and divert all traffic to Datadog via a centralized set of container cluster, you can configure them using [these setup instructions][3]. Pricing is then calculated for the host you configure to send traces via the cluster of Agents.
-
-Number of hosts (or Kubernetes nodes) sending traces are calculated every hour. At the end of the month, you are billed based on your 99th percentile usage.
-
-[1]: https://www.datadoghq.com/pricing
-[2]: 
-[3]: /tracing/send_traces/#containers
-{{% /tab %}}
-{{% tab "Fargate Deployment" %}}
-
-Fargate pricing is based on the concurrent number of tasks. The recommended deployment setup is running the Datadog Agent container [in the same task definition as your application container][1].
-
-**Note**: The Fargate task billing does not include free functionality for Trace Search and Analytics.
-
-Using a combination of deployment environments? Find pricing for [sample deployment scenarios][2].
-
-[1]: /integrations/ecs_fargate/#trace-collection
-[2]: 
-{{% /tab %}}
-{{< /tabs >}}
-
-## Calculate APM event count and Retention
-
-Trace Search and Analytics is priced on the basis of your [APM event][3] count. You get a certain amount of APM events per host for free [depending of your plan][4]. If you are using a host/container based deployment (No APM events included in pricing for Fargate Tasks based pricing), you can enhance your subscription to get an additional number of APM events per month for a given retention retention period.
-
-**Note**: An [APM event][3] is not the same as [APM trace][5] in terms of count and retention. Read more about [APM events][6] and how to set the [configuration settings][7].*
+Using a combination of deployment? Check out the pricing for sample scenarios.
 
 
-## How is the bill generated?
+## Sample Deployment Scenarios
 
-`(Host count) * (APM host pricing) + (Fargate Tasks) * (Fargate Task Pricing) +  [(APM event count) * (Trace Search and Analytics Pricing) - (The amount of free APM events offered by your plan) ]`
+### Sample 1
 
-Trace Search and Analytics Pricing depends on the APM event retention policy you choose, refer to [Datadog Pricing page][4] to learn more.
+5 hosts, 20 Fargate Tasks, 30 million APM events.
+Deployment: One agent per host. One agent per application container.
+
+
+| Product | Quantity | Price |
+| --------|-----------|------|
+| APM Hosts | 5 | 5 * $36 = |
+| Fargate Tasks | 20 | 20 * $2 = |
+| APM events | 30 million | (30 million - 5 * 1 million) * $1.7 =  |
+| Total |     |   |
+
+### Sample 1
+
+Application 1 -> container 1. Application 2 -> container 2. Both Containers -> 1 host
+Sending 20 million APM events on Trace Search and Analytics.
+Deployment: One agent per host
+
+| Product | Quantity | Price |
+| --------|-----------|------|
+| APM Hosts | 1 | 1 * $36 = |
+| APM events | 20 million | (20 million - 5 * 1 million) * $1.7 =  |
+| Total |     |   |
+
+### Sample 3
+
+Application 1 -> 20-40 containers -> 4-8 EC2 instances. Application 2 ->  10-30 Fargate hosted containers. Not using Trace Search and Analytics.
+Deployment: One Agent per EC2 instance. One Agent per Application Fargate Container.
+
+| Product | Quantity | Price |
+| --------|-----------|------|
+| APM Hosts | 7 (p99 of usage) | 7 * $36 = |
+| Fargate Tasks | 28 (p99 of usage) | 28 * $2 = |
+| Total |     |   |
+
+### Sample 4
+
+Application 1 -> 20 worker nodes in Kubernetes -> average 30 pods. 20 million APM events
+Deployment: One Agent per Node.
+
+| Product | Quantity | Price |
+| --------|-----------|------|
+| APM Hosts (Nodes) | 20 | 20 * $36 = |
+| APM events | 20 million | (20 million - 20 * 1 million) * $1.7 =  0 |
+| Total |     |   |
+
 
 
 ## Monitor Usage
 
 If you are an admin of your account, you can monitor your account usage using the [Usage Page][8]. This page gets updated every 72 hours.
+
+{{< img src="tracing/faq/usage_page.png" alt="APM Event Filtering" responsive="true" style="width:100%;">}}
 
 | Metric | Description |
 | ------- | -------- |
@@ -78,6 +88,8 @@ If you are an admin of your account, you can monitor your account usage using th
 ## Estimate and Control Usage
 
 ### Event Estimator
+
+{{< img src="tracing/faq/event_estimator.png" alt="APM Event Filtering" responsive="true" style="width:100%;">}}
 
 To estimate the number of events a service is sending per day or per month, use the [Event Estimator page][9]. This is designed to help you decide which services to configure with Trace Search and Analytics while keeping usage and cost in your control.
 
@@ -93,7 +105,6 @@ To get alerts in case a code deployment causes a spike in APM events generated, 
 6. Define the rate you would like to set as a warning or error.
 7. Define an explicit notification: The volume on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control
 
-{{< img src="tracing/trace_search_and_analytics/analytics/trace_analytics_monitors.png" alt="APM Event Filtering" responsive="true" style="width:100%;">}}
 
 ### Handling Sudden Host Upscale
 
@@ -103,38 +114,27 @@ You can choose to configure trace search and analytics per service or per integr
 
 ### Event Filtering
 
+{{< img src="tracing/faq/event_filtering.mp4" alt="Analytics View" video="true" responsive="true" style="width:90%;">}}
+
 Enable [Event Filtering][12] to send APM events at 100% throughput by default. For example, a Java service with 100 requests generates 100 APM events from its `servlet.request` spans, as each `servlet.request` span generates an APM event. [Filtering APM events][13] has the benefit of reducing the number of billable APM events and has no effect on trace sampling. Once a service has been filtered lower than 100%, APM event analytics are upscaled to display an estimate by default, and you have the option to display the filtered value
 
-{{< img src="tracing/trace_search_and_analytics/analytics/apm_event_filtering.png" alt="APM Event Filtering" responsive="true" style="width:100%;">}}
+### FAQ
+1. What is classified as a host for billing?
+Any machine running its own OS - physical machine, virtual machine or cloud instance (virtual machine on a cloud) is considered a host. For billing APM, number of hosts sending traces are calculated every hour. At the end of the month, you are billed based on your 99th percentile usage. 
 
-## Sample Deployment Scenarios
+2. What happens to my bill if I have to suddenly scale my environment?
+Your APM bill is calculated using the top 99 percentile of active agents sending APM events every month. This ensures that even if you need to scale your environment to handle a sudden spike in traffic, for instance on Black Friday, you will not be charged additional for that.
 
-### Sample 1
+3. Do I get charged for pause containers in Kubernetes?
+Kubernetes creates pause containers to acquire the respective pod’s IP address and set up the network namespace for all other containers that join that pod. Datadog excludes all pause containers from your quota and does not charge for them (requires Agent 5.8+). For Kubernetes, APM is priced by node not by pods. 
 
-One application running on container 1, another application running on container 2, and both containers are running on a single host.
+4. How is billing calculated if I deploy one agent per container?
+If the agent runs on each container, then each container is treated as a single host. The price is then (Price Per APM host) * (No. of containers)
 
-*Price:* Decided on the basis of where the Datadog Agent is running irrespective of the application count.
-If the Agent runs on the host, then the price is `(Price Per APM host) * (No. of host = 1)`. Price includes `(No. of hosts) * (Number of free APM event host)`.
-
-If the Agent runs on each container, then each container is treated as a single host. The price is then `(Price Per APM host) * (No. of containers = 2)`. Price includes `(no. of containers) * (Number of free APM event per host)`.
-
-
-### Sample 2
-
-AWS environment with one application that scales between 20-40 containers on 4-8 EC2 instances. A different application scales between 10-30 Fargate hosted containers. Both applications have APM installed and running on every container instance.
-
-*Price:* If you deploy one Datadog Agent per EC2 instance and run Datadog Agent as a sidecar on each Fargate task,
-
-`(Price Per APM host) * (99th percentile of no. of EC2 instances) + (Price per Fargate Task) * (99th percentile of no. of Fargate Tasks)`.
-
-Price includes `(No. of hosts) * (Number of free APM event host)`.
+5. How is billing calculated if I deploy agent as a proxy for cluster of containers?
+The default deployment setup for APM is to install an agent on every host. In case you do not have access to your host to deploy the agent, you can bundle your agents and divert all traffic to Datadog via a centralized set of container cluster, you can configure using these setup instructions. Pricing will be calculated for the host you configure to send traces via the cluster of agents.
 
 
-### Sample 3
-
-20 worker nodes in ECS AWS, where each worker node runs on an average 20 pods. Each pod is configured to run an application with Datadog APM enabled.
-
-*Price:* If you deploy one Agent container running per node, price is `(Price per APM host) * (No. of Nodes = 20)`
 
 
 [1]: /tracing
