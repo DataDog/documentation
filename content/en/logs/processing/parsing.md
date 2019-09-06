@@ -300,7 +300,7 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 
 ### Nested JSON
 
-You might have logs that contains JSON nested after a raw prefix. In those cases, you can use the `json` **filter** to easily parse this JSON format.
+Use the `json` *filter* to parse a JSON object nested after a raw text prefix:
 
 **Log**: 
 
@@ -311,7 +311,7 @@ Sep 06 09:13:38 vagrant program[123]: server.1 {"method":"GET","status_code":200
 **Rule**:
 
 ```
-myparsingrule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{number:logger.thread_id}\]: %{notSpace:server} %{data::json}
+parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{number:logger.thread_id}\]: %{notSpace:server} %{data::json}
 ```
 
 {{< img src="logs/processing/parsing/nested_json.png" alt="Nested JSON Parsing example" responsive="true" style="width:80%;" >}}
