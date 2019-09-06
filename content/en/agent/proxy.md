@@ -212,10 +212,10 @@ backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
-    server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/FULL_intake.logs.datadoghq.com
+    server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/FULL_intake.logs.datadoghq.com.crt
 ```
 
-**Note**: Download the `datadog-logs` backend certificate [FULL_intake.logs.datadoghq.com][1] for logs configuration.
+**Note**: Download the `datadog-logs` backend certificate [FULL_intake.logs.datadoghq.com.crt][1] for logs configuration.
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
 
