@@ -30,7 +30,7 @@ The APM UI provides many tools to troubleshoot application performance and corre
 | [Trace](#trace)                 | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                                          |
 | [Span](#spans)                  | A span represents a logical unit of work in a distributed system for a given time period. Multiple spans construct a trace.                                                                                                    |
 | [Trace metrics](#trace-metrics)         | Trace metrics are automatically collected and kept with a 15-month retention policy similar to other [Datadog metrics][1]. They can be used to identify and alert on hits, errors, or latency.                                                                                                    |
-| [Trace Search & Analytics](#trace_search_and_analytics)                 | Trace Search & Analytics is used to filter APM events by user-defined tags (customer_id, error_type, app_name, etc.) or infrastructure tags.            |
+| [Trace Search & Analytics](#trace-search-analytics)                 | Trace Search & Analytics is used to filter APM events by user-defined tags (customer_id, error_type, app_name, etc.) or infrastructure tags.            |
 | [APM event](#apm-event)                 | APM events represent 100% throughput of a request and can be used to search, query, and monitor in Trace Search & Analytics.             |
 | [Span tags](#span-tags)                | Tag spans in the form of key-value pairs to correlate a request in the *Trace View* or filter in *Trace Search & Analytics*.            |
 
