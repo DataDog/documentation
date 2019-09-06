@@ -305,7 +305,7 @@ Use the `json` *filter* to parse a JSON object nested after a raw text prefix:
 **Log**: 
 
 ```
-Sep 06 09:13:38 vagrant program[123]: server.1 {"method":"GET","status_code":200,"url":"https://app.datadoghq.com/logs/pipelines","duration":123456}
+Sep 06 09:13:38 vagrant program[123]: server.1 {"method":"GET", "status_code":200, "url":"https://app.datadoghq.com/logs/pipelines", "duration":123456}
 ```
 
 **Rule**:
