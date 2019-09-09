@@ -75,7 +75,7 @@ For security reasons, [API keys][2] cannot be used to configure the data being s
 
 The datadog-logs library supports all modern desktop and mobile browsers, including IE10 and IE11.
 
-# Data collected
+## Data collected
 
 Adding the above JavaScript snippet to your website sends Datadog three main types of events:
 
