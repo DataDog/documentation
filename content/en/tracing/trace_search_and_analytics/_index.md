@@ -10,7 +10,6 @@ aliases:
 [Trace Search & Analytics][1] is used to filter APM events by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
 
 * Configure your APM tracer to emit the relevant analytics from your services—this can be done either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Next, [enable Trace Search inside Datadog][1] to begin forwarding these analytics.
-* [Configure your Datadog Agent to emit the relevant analytics from your services][2].
 
 **Note**: to use Trace Search, you must be using Agent v6.7+.
 
@@ -482,7 +481,7 @@ An [APM event][3] represents the top [span][4] for a [service], including its me
 
 
 [1]: https://app.datadoghq.com/apm/search
-[2]: /tracing/trace_search_and_analytics/agent_trace_search
+[2]: https://app.datadoghq.com/apm/settings
 [3]: /tracing/visualization/#apm-event
 [4]: /tracing/visualization/#spans
 [5]: https://app.datadoghq.com/apm/settings
