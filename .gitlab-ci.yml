@@ -157,7 +157,7 @@ index_algolia:
   only:
     - schedules
 
-evaluate_missing_metrics_live:
+evaluate_missing_metrics:
   <<: *base_template
   stage: post-deploy
   environment: "live"
