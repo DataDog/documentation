@@ -26,7 +26,10 @@
             </form>
 
             <div class="sidenav-nav">
-                <!-- This is placed with js now for build speed increase -->
+                <!-- This was placed with js for build speed increase -->
+                {{ if eq .Kind "home"  }}
+                    {{ partial "sidenav/nav-new.html" . }}
+                {{ end }}
             </div>
         </div>
     </div>

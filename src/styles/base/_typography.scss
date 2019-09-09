@@ -1,0 +1,30 @@
+// Typography
+
+small,
+.small {
+  font-weight: 200;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0px;
+
+  @media (max-width: 768) {
+    font-weight: 200;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0px;
+  }
+}
+
+.smaller {
+  font-weight: 200;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0px;
+}
+
+.font-light, .font-regular {
+  font-weight: 200!important;
+}
+.font-semibold, .font-bold {
+  font-weight: 600!important;
+}

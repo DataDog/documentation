@@ -1,0 +1,9 @@
+/* Drop-shadow style for tiles (i.e. /aws-monitoring)*/
+@mixin shadow-tile($default, $hover, $radius){
+    border-radius: $radius;
+    box-shadow: $default;
+
+    &:hover{
+      box-shadow: $hover;
+    }
+}

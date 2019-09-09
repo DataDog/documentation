@@ -15,7 +15,7 @@ const siteEnv = document.querySelector('html').dataset.env;
 
 let gaTag = '';
 let indexName = '';
-if (siteEnv === 'preview') {
+if (siteEnv === 'preview' || siteEnv === 'development' ) {
     gaTag = 'UA-21102638-9';
     indexName = 'docsearch_docs_preview';
 } else if (siteEnv === 'live') {
@@ -1058,8 +1058,13 @@ function reloadWistiaVidScripts(vidId){
 const sideNav = document.querySelector('.side .sidenav-nav');
 const mobileNav = document.querySelector('header .sidenav-nav');
 
-sideNav.addEventListener('click', navClickEventHandler);
-mobileNav.addEventListener('click', navClickEventHandler);
+if (sideNav) {
+    sideNav.addEventListener('click', navClickEventHandler);
+}
+
+if (mobileNav) {
+    mobileNav.addEventListener('click', navClickEventHandler);
+}
 
 function navClickEventHandler(event){
     event.stopPropagation();

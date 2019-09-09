@@ -1,15 +1,174 @@
 .kind-home {
-  .main {
-    h1 {
-      padding-bottom:10px;
-      & + p {
-        //color: #4A4A4A;
-      }
+    .home-hero {
+        background-image: url('../images/home-hero.png');
+        height: 300px;
+        h1 {
+            font-size: 32px;
+            @media (min-width: 768px) {
+                font-size: 42px;
+            }
+        }
+        @media (min-width: 768px) {
+            height: 346px;
+        }
+        .docssearch {
+            transform: none;
+            #docssearchWrapper {
+                box-shadow: 0px 1px 4px rgba(30, 5, 36, 0.24),
+                    0px 1px 1px rgba(30, 5, 36, 0.16);
+                position: relative;
+            }
+
+            .algolia-autocomplete {
+                background-color: white;
+                position: static !important;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: stretch;
+                width: 100%;
+                border-top-left-radius: 3px;
+                border-bottom-left-radius: 3px;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                position: relative;
+                -webkit-box-flex: 1;
+                -ms-flex: 1 1 auto;
+                flex: 1 1 auto;
+                width: 1%;
+                margin-bottom: 0;
+    
+                .docssearch-input,
+                .docssearch-input-m {
+                    width: 100%;
+                    height: 48px;
+                    border-radius: 0;
+                    padding: 10px;
+                    border: none;
+    
+                    &:focus {
+                        border: none;
+                        outline: none;
+                        box-shadow: none;
+                    }
+                }
+    
+                .ds-dropdown-menu {
+                    margin-top: 0;
+                    transform: none;
+                    width: 100%;
+                    min-width: auto;
+    
+                    & [class^='ds-dataset-'] {
+                        border-top-left-radius: 0;
+                        border-top-right-radius: 0;
+                    }
+                }
+            }
+            .input-group-append {
+                .btn {
+                    background-color: #b325b5;
+                    border-color: #b325b5;
+                    border-radius: 3px;
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                    &:focus {
+                        outline: none;
+                        box-shadow: none;
+                    }
+                }
+            }
+        }
     }
-    .tile-nav + p,
-    .tile-nav + p + p,
-    .tile-nav + p + p + p {
-      //color: #4A4A4A;
+
+    .guides {
+        margin: -60px auto 50px auto;
+        background-color: white;
+        border-radius: 3px;
+        box-shadow: 0px 1px 1px rgba(30, 5, 36, 0.16),
+            0px 1px 4px rgba(30, 5, 36, 0.24);
+        @media (min-width: 1200px) {
+            max-width: 900px;
+        }
+
+        .guide-col {
+            padding: 16px 24px;
+            flex: 1 1 auto;
+
+            &:not(:last-child) {
+                border-bottom: 1px solid $gray-lighter;
+            }
+
+            @media (min-width: 768px) {
+                border-bottom: none !important;
+                &:first-child {
+                    border-right: 1px solid $gray-lighter;
+                }
+                &:last-child {
+                    border-left: 1px solid $gray-lighter;
+                }
+            }
+        }
     }
-  }
+
+    .nav-tiles {
+        .nav-tile {
+            height: 70px;
+            .shadow-card {
+                padding: 27px;
+            }
+            svg {
+                width: 15px;
+                margin-right: 14px;
+            }
+        }
+    }
+
+    
+
+    .search-container {
+        display: none;
+    }
+
+    header {
+        .docssearch{
+            position:relative;
+            z-index:3;
+            transform: translateX(11px);
+            margin-top: 15px;
+            margin-bottom: 7px;
+          
+            .algolia-autocomplete{
+              width: 100%;
+          
+              .docssearch-input, .docssearch-input-m{
+                border-radius:0;
+                transition-duration: 0.125s;
+                width: 90%;
+                background-color: transparent;
+                border: 0px;
+                border-bottom: 1px solid #ced4da;;
+          
+                &:focus{
+                  border: 0px;
+                  border-bottom: 1px solid #632CA6;
+                  outline: none;
+                }
+              }
+            }
+          }
+    }
+
+
+        
+
+    
+
+    
+
+    .popular-search {
+        a {
+            color: white;
+            text-decoration: underline;
+        }
+    }
 }

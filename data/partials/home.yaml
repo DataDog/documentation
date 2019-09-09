@@ -1,0 +1,53 @@
+heading: Welcome to Datadog Docs!
+
+guides: 
+  - title: Install the agent
+    desc: Start collecting events and metrics from hosts and send them to Datadog.
+    link_text: View Guides
+    link: https://docs.datadoghq.com/getting_started/agent/?tab=datadogussite
+  - title: Getting Started in App
+    desc: Discover how to use Datadog to create dashboards, graphs, monitors and more.
+    link_text: View Guides
+    link: https://docs.datadoghq.com/getting_started/application/
+  - title: Setting Up Integrations
+    desc: Learn how to collect metrics, traces and logs with over 350+ integrations.
+    link_text: View Guides
+    link: https://docs.datadoghq.com/getting_started/integrations/
+
+navtiles: 
+  - title: Agent
+    link: https://docs.datadoghq.com/agent/
+    icon: agent.svg
+  - title: Integrations
+    link: https://docs.datadoghq.com/integrations/
+    icon: integration.svg
+  - title: Dashboards
+    link: https://docs.datadoghq.com/graphing/dashboards/
+    icon: dashboard.svg
+  - title: Alerting
+    link: https://docs.datadoghq.com/monitors/
+    icon: attention-circled.svg
+  - title: APM & Distributed Tracing
+    link: https://docs.datadoghq.com/tracing/
+    icon: trace.svg
+  - title: Logs
+    link: https://docs.datadoghq.com/logs/
+    icon: logs.svg
+  - title: Synthetics
+    link: https://docs.datadoghq.com/synthetics/
+    icon: synthetics.svg
+  - title: Watchdog
+    link: hhttps://docs.datadoghq.com/watchdog/
+    icon: watchdog.svg
+  - title: API & Developer Tools
+    link: https://docs.datadoghq.com/api/
+    icon: code.svg
+  - title: Account Management
+    link: https://docs.datadoghq.com/account_management/
+    icon: cog.svg
+  - title: Security
+    link: https://docs.datadoghq.com/security/
+    icon: lock.svg
+  - title: Troubleshooting
+    link: https://docs.datadoghq.com/agent/troubleshooting/
+    icon: wrench.svg

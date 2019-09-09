@@ -35,7 +35,49 @@ var search_desktop = docsearch({
      debug: false // Set debug to true if you want to inspect the dropdown
 });
 var desktop_enable_enter = true;
+var searchBtn = document.querySelector('.js-search-btn');
+var searchContainer = document.querySelector('.search-container');
+
 search_desktop.autocomplete.on('keyup', function(e) {
+   if ($('.algolia-docsearch-suggestion').length > 0 ) {
+
+      if ($('.algolia-autocomplete')) {
+         $('.algolia-autocomplete').css('borderBottomLeftRadius', '0px');
+         $('.algolia-autocomplete').css('borderBottomRightRadius', '0px');
+      }
+      
+   } else {
+      $('.algolia-autocomplete').css('borderTopLeftRadius', '3px');
+      $('.algolia-autocomplete').css('borderBottomLeftRadius', '3px');
+   }
+   if(e.keyCode === 13 && desktop_enable_enter) {
+       window.location = '{{ absLangURL "search/" }}?s='+this.value;
+   }
+});
+
+// if user clicks search button
+if (searchBtn) {
+   searchBtn.addEventListener('click', function (e){
+      var docsearchInput = document.querySelector('.docssearch-input.ds-input');
+      if (docsearchInput.value !== '') {
+         window.location = '{{ absLangURL "search/" }}?s='+docsearchInput.value;
+      }
+      
+   })
+}
+
+search_desktop.autocomplete.on('autocomplete:closed', function(e) {
+   if ($('.algolia-docsearch-suggestion').length > 0 ) {
+
+      if ($('.algolia-autocomplete')) {
+         $('.algolia-autocomplete').css('borderBottomLeftRadius', '0px');
+         $('.algolia-autocomplete').css('borderBottomRightRadius', '0px');
+      }
+      
+   } else {
+      $('.algolia-autocomplete').css('borderTopLeftRadius', '3px');
+      $('.algolia-autocomplete').css('borderBottomLeftRadius', '3px');
+   }
    if(e.keyCode === 13 && desktop_enable_enter) {
        window.location = '{{ absLangURL "search/" }}?s='+this.value;
    }
@@ -46,6 +88,11 @@ search_desktop.autocomplete.on('autocomplete:cursorchanged', function(e) {
 search_desktop.autocomplete.on('autocomplete:cursorremoved', function(e) {
    desktop_enable_enter = true;
 });
+
+if (searchContainer) {
+   document.querySelector('.search-container').style.display = 'block';
+}
+
 </script>
 <script type="text/javascript">
 var search_mobile = docsearch({
