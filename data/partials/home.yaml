@@ -37,7 +37,7 @@ navtiles:
     link: https://docs.datadoghq.com/synthetics/
     icon: synthetics.svg
   - title: Watchdog
-    link: hhttps://docs.datadoghq.com/watchdog/
+    link: https://docs.datadoghq.com/watchdog/
     icon: watchdog.svg
   - title: API & Developer Tools
     link: https://docs.datadoghq.com/api/
@@ -51,3 +51,18 @@ navtiles:
   - title: Troubleshooting
     link: https://docs.datadoghq.com/agent/troubleshooting/
     icon: wrench.svg
+
+popular_searches:
+  - title: API documentation
+    link: https://docs.datadoghq.com/api/
+    weight: 10
+  - title: Agent Installation
+    link: https://docs.datadoghq.com/getting_started/agent/
+    weight: 20
+  - title: Log Collection
+    link: https://docs.datadoghq.com/logs/log_collection/
+    weight: 30
+  - title: Integration Setup
+    link: https://docs.datadoghq.com/integrations/
+    weight: 40
+  

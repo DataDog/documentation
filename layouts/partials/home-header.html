@@ -31,10 +31,10 @@
                 </div>
                 <p class="smaller text-white text-center font-semibold popular-search">
                     Popular searches: 
-                    <a href="https://docs.datadoghq.com/api/">API documentation</a>, 
-                    <a href="https://docs.datadoghq.com/getting_started/agent/">Agent Installation</a>, 
-                    <a href="https://docs.datadoghq.com/logs/log_collection/">Log Collection</a>, and 
-                    <a href="https://docs.datadoghq.com/integrations/">Integration Setup</a>
+                    {{ $lenList := (len $datafile.popular_searches)}}
+                    {{ range $index, $popular_search := (sort $datafile.popular_searches "weight" "asc") }}
+                        <a href="{{ $popular_search.link }}">{{ $popular_search.title }}</a>{{ if eq (sub $lenList 2) $index }}, and{{ else if eq (sub $lenList 1) $index }}{{ else }},{{ end}}
+                    {{ end }}
                 </p>
             </div>
         </div>
