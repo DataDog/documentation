@@ -7,7 +7,7 @@ external_redirect: /api/#create-a-slack-integration
 
 ## Create a Slack integration
 
-Create a Datadog-Slack integration. Once created, add channel to it with the [Add channels to Slack integration endpoint](#add-channels-to-slack-integration).
+Create a Datadog-Slack integration. Once created, add a channel to it with the [Add channels to Slack integration endpoint](#add-channels-to-slack-integration).
 
 
 **Note**:
