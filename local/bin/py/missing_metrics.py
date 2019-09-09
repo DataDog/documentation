@@ -43,7 +43,13 @@ def get_dd_metrics(csv_metrics, keys):
   days = 5
   from_time = int(time.time()) - 60 * 60 * 24 * days
 
-  dd_metrics = api.Metric.list(from_time).get('metrics')
+  dd_metrics = {}
+
+  try:
+    dd_metrics = api.Metric.list(from_time).get('metrics')
+  except:
+    print('\x1b[31mERROR\x1b[0m: There was an error with the Datadog API call, current value of dd_metrics is: \n {}'.format(dd_metrics))
+
   metrics_send = []
   metrics_print = []
 
