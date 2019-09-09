@@ -55,6 +55,16 @@ build_preview:
   artifacts:
     paths:
       - ${ARTIFACT_RESOURCE}
+      - /tmp
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+
+evaluate_missing_metrics:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  script:
+    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
@@ -116,12 +126,12 @@ build_live:
     - push_site_to_s3
     - create_artifact
     - create_artifact_untracked
-    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
   artifacts:
     when: on_success
     paths:
       - local/etc/docsdatadoghq.json
       - ${ARTIFACT_RESOURCE}
+      - /tmp
     expire_in: 1 week
   only:
     - master
@@ -150,6 +160,16 @@ index_algolia:
   only:
     - schedules
 
+evaluate_missing_metrics_live:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  script:
+    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
+  only:
+    - master
+
+
 manage_translations:on-schedule:
   <<: *base_template
   stage: post-deploy
@@ -162,6 +182,8 @@ manage_translations:on-schedule:
     - chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
   only:
     - schedules
+
+
 
 #push_translations:
 #  <<: *base_template
