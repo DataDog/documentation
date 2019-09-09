@@ -10,7 +10,6 @@ aliases:
 [Trace Search & Analytics][1] is used to filter APM events by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
 
 * Configure your APM tracer to emit the relevant analytics from your services—this can be done either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Next, [enable Trace Search inside Datadog][1] to begin forwarding these analytics.
-* [Configure your Datadog Agent to emit the relevant analytics from your services][2].
 
 **Note**: to use Trace Search, you must be using Agent v6.7+.
 
@@ -475,10 +474,9 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 ## APM Event Filtering
 
-An APM event represents the top span for a service, including its metadata. Once enabled, APM events are sent at 100% throughput by default. For example, a Java service with 100 requests will generate 100 APM events from its `servlet.request` spans, as each `servlet.request` span generates an APM event. [Filtering APM events][3] has the benefit of reducing the number of billable APM events and has no effect on trace sampling. Once a service has been filtered lower than 100%, APM event analytics are upscaled to display an estimate by default, and you have the option to display the filtered value.
+An APM event represents the top span for a service, including its metadata. Once enabled, APM events are sent at 100% throughput by default. For example, a Java service with 100 requests will generate 100 APM events from its `servlet.request` spans, as each `servlet.request` span generates an APM event. [Filtering APM events][2] has the benefit of reducing the number of billable APM events and has no effect on trace sampling. Once a service has been filtered lower than 100%, APM event analytics are upscaled to display an estimate by default, and you have the option to display the filtered value.
 
 {{< img src="tracing/trace_search_and_analytics/analytics/apm_event_filtering.png" alt="APM Event Filtering" responsive="true" style="width:100%;">}}
 
 [1]: https://app.datadoghq.com/apm/search
-[2]: /tracing/trace_search_and_analytics/agent_trace_search
-[3]: https://app.datadoghq.com/apm/settings
+[2]: https://app.datadoghq.com/apm/settings
