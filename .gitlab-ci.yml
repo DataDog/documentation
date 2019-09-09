@@ -56,6 +56,8 @@ build_preview:
     paths:
       - ${ARTIFACT_RESOURCE}
       - ./integrations_data
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
 
 evaluate_missing_metrics:
   <<: *base_template
