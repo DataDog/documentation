@@ -41,7 +41,7 @@ As it receives data, DogStatsD aggregates multiple data points for each unique m
 
 ## Setup
 
-DogStatsD is enabled by default over UDP port `8125`. Edit the parameters below to change the default port the DogStatsD server is listening to.
+DogStatsD is enabled by default over UDP port `8125` for Agent v6+. If you don't need to change this port, see directly how to [setup DogStatsD in your code](#code).
 
 ### Agent
 
