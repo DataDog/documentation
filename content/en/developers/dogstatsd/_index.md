@@ -27,14 +27,11 @@ The easiest way to get your custom application metrics into Datadog is to send t
 
 Any compliant StatsD client works with DogStatsD and the Agent, but you won't be able to use the [Datadog-specific extensions](#dive-into-dogstatsd).
 
-**Note**: DogStatsD does NOT implement the following from StatsD:
-
-* Gauge deltas (see [Gauge delta support #2104][2] Github issue)
-* Timers as a native metric type (though it [does support them via histograms][3])
+**Note**: DogStatsD does NOT implement Timers from StatsD as a native metric type (though it [does support them via histograms][2]).
 
 ## How it works
 
-DogStatsD accepts [custom metrics][4], [events][5], and [service checks][6] over UDP and periodically aggregates and forwards them to Datadog.
+DogStatsD accepts [custom metrics][3], [events][4], and [service checks][5] over UDP and periodically aggregates and forwards them to Datadog.
 
 Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't experience an interruption.
 
@@ -44,11 +41,11 @@ As it receives data, DogStatsD aggregates multiple data points for each unique m
 
 ## Setup
 
-To set up DogStatsD, configure your Agent to enable the DogStatsD server then instrument your code to send data.
+DogStatsD is enabled by default over UDP port `8125`. Edit the parameters below to change the default port the DogStatsD server is listening to.
 
 ### Agent
 
-To enable the Agent DogStatsD server:
+By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][6], and restart the Agent. You can also configure DogStatsD to use a [Unix domain socket][7]. To enable a custom Agent DogStatsD server UDP port:
 
 1. Edit your `datadog.yaml` file to un-comment the `use_dogstatsd` and  `dogstatsd_port` parameters:
 
@@ -65,26 +62,12 @@ To enable the Agent DogStatsD server:
     dogstatsd_port: 8125
     ```
 
-2. [Restart your Agent][7].
-
-By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][8], and restart the Agent. You can also configure DogStatsD to use a [Unix domain socket][9].
+2. [Restart your Agent][8].
 
 ### Code
-
-Official Datadog-DogStatsD client libraries are available for the following languages:
-
-* [Python][10]
-* [Ruby][11]
-* [Go][12]
-* [Java][13]
-* [PHP][14]
-* [.Net][15]
-
-**Note**: You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
-
 #### Install the DogStatsD client
 
-Start by installing the DogStatsD client depending on your language:
+Official Datadog-DogStatsD client libraries are available for the following languages. You _can_ use any [generic StatsD client][9] to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above:
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -104,7 +87,7 @@ $ gem install dogstatsd-ruby
 {{% tab "Go" %}}
 
 ```go
-go get github.com/DataDog/datadog-go/statsd
+$ go get github.com/DataDog/datadog-go/statsd
 ```
 
 {{% /tab %}}
@@ -334,21 +317,15 @@ DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced f
     {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Send service checks to Datadog with DogStatsD.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][16] section, which also explains how to send metrics and events straight from the command line.
+If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][10] section, which also explains how to send metrics and events straight from the command line.
 
 [1]: https://github.com/etsy/statsd
-[2]: https://github.com/DataDog/dd-agent/pull/2104
-[3]: /developers/metrics/dogstatsd_metrics_submission
-[4]: /developers/metrics/custom_metrics
-[5]: /developers/events/dogstatsd_events_submission
-[6]: /developers/service_checks/dogstatsd_service_checks_submission
-[7]: /agent/guide/agent-commands
-[8]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
-[9]: /developers/dogstatsd/unix_socket
-[10]: https://github.com/DataDog/datadogpy
-[11]: https://github.com/DataDog/dogstatsd-ruby
-[12]: https://github.com/DataDog/datadog-go
-[13]: https://github.com/DataDog/java-dogstatsd-client
-[14]: https://github.com/DataDog/php-datadogstatsd
-[15]: https://github.com/DataDog/dogstatsd-csharp-client
-[16]: /developers/metrics/datagram_shell
+[2]: /developers/metrics/dogstatsd_metrics_submission
+[3]: /developers/metrics/custom_metrics
+[4]: /developers/events/dogstatsd_events_submission
+[5]: /developers/service_checks/dogstatsd_service_checks_submission
+[6]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
+[7]: /developers/dogstatsd/unix_socket
+[8]: /agent/guide/agent-commands
+[9]: /developers/libraries/#api-and-dogstatsd-client-libraries
+[10]: /developers/metrics/datagram_shell

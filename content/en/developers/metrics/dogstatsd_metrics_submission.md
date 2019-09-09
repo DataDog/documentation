@@ -38,7 +38,7 @@ with the following parameters:
 | `MetricName` | String          | yes      | Name of the metric to submit.                                                                                                                                              |
 | `Value`      | Double          | yes      | Value associated to your metric.                                                                                                                                           |
 | `SampleRate` | Double          | no       | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
-| `Tags`       | List of Strings | no       | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
+| `Tags`       | List of strings | no       | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
 
 Note: COUNT type metrics can show a decimal value within Datadog since they are normalized over the flush interval to report a per-second units.
 
@@ -227,7 +227,7 @@ with the following parameter:
 | `MetricName` | String          | Name of the metric to submit.                                                                                                                                              |
 | `Value`      | Double          | Value associated to your metric. Only used with the `count()` function.                                                                                                                                           |
 | `SampleRate` | Double          | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
-| `Tags`       | List of Strings | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
+| `Tags`       | List of strings | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
 
 Find below short code snippets depending on your language that you can run to emit a GAUGE metric type-stored as GAUGE metric type-into Datadog. Learn more about the [GAUGE type in the metric types documentation][5].
 
@@ -394,7 +394,7 @@ with the following parameter:
 | `MetricName` | String          | Name of the metric to submit.                                                                                                                                              |
 | `Value`      | String          | Value associated to your metric.                                                                                                                                           |
 | `SampleRate` | Double          | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
-| `Tags`       | List of Strings | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
+| `Tags`       | List of strings | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
 
 Find below short code snippets depending on your language that you can run to emit a SET metric type-stored as GAUGE metric type-into Datadog. Learn more about the [SET type in the metric types documentation][6].
 
@@ -538,7 +538,7 @@ with the following parameter:
 | `MetricName` | String          | Name of the metric to submit.                                                                                                                                              |
 | `Value`      | Double          | Value associated to your metric.                                                                                                                                           |
 | `SampleRate` | Double          | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
-| `Tags`       | List of Strings | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
+| `Tags`       | List of strings | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
 
 HISTOGRAM metric type is specific to DogStatsD. Find below short code snippets depending on your language that you can run to emit a HISTOGRAM metric type-stored as GAUGE and RATE metric types-into Datadog. Learn more about the [HISTOGRAM type in the metric types documentation][7].
 
@@ -714,7 +714,7 @@ with the following parameter:
 | `MetricName` | String          | Name of the metric to submit.                                                                                                                                              |
 | `Value`      | Double          | Value associated to your metric.                                                                                                                                           |
 | `SampleRate` | Double          | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
-| `Tags`       | List of Strings | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
+| `Tags`       | List of strings | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
 
 Find below short code snippets depending on your language that you can run to emit a TIMER metric type-stored as GAUGE and RATE metric types-into Datadog. Learn more about the [HISTOGRAM type in the metric types documentation][7].
 
@@ -802,7 +802,7 @@ with the following parameter:
 | `MetricName` | String          | Name of the metric to submit.                                                                                                                                              |
 | `Value`      | Double          | Value associated to your metric.                                                                                                                                           |
 | `SampleRate` | Double          | Sample rate, between `0` (no sample) and `1` (all datapoints are dropped), to apply to this particular metric. See the [Sample Rate section](#sample-rates) to learn more. |
-| `Tags`       | List of Strings | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
+| `Tags`       | List of strings | List of Tags to apply to this particular metric. See the [Metrics Tagging](#metrics-tagging) section to learn more.                                                        |
 
 Distributions are specific to DogStatsD. Find below short code snippets depending on your language that you can run to emit a DISTRIBUTION metric type-stored as DISTRIBUTION metric type-into Datadog. Learn more about the [DISTRIBUTION type in the metric types documentation][11].
 
