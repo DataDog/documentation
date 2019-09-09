@@ -59,7 +59,7 @@ build_preview:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
-evaluate_missing_metrics:
+evaluate_missing_metrics_preview:
   <<: *base_template
   stage: post-deploy
   environment: "preview"
@@ -68,7 +68,7 @@ evaluate_missing_metrics:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
-test_preview_link_checks:
+link_checks_preview:
   <<: *base_template
   stage: post-deploy
   environment: "preview"
@@ -80,7 +80,7 @@ test_preview_link_checks:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
-test_missing_tms_preview:
+missing_tms_preview:
   <<: *base_template
   stage: post-deploy
   environment: "preview"
