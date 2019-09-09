@@ -55,9 +55,7 @@ build_preview:
   artifacts:
     paths:
       - ${ARTIFACT_RESOURCE}
-      - /tmp
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
+      - /tmp/extracted/
 
 evaluate_missing_metrics:
   <<: *base_template
