@@ -63,7 +63,7 @@ def update_algolia_private_url(docs_index_config,private_urls):
         for url in private_urls:
             config["stop_urls"].append(url)
 
-    print("\x1b[32mINFO\x1b[0m: current config is: \n\n {} \n\n".format(json.dump(config)))
+    print("\x1b[32mINFO\x1b[0m: current config is: \n\n {} \n\n".format(config))
     print("\x1b[32mINFO\x1b[0m: Addition complete, updating Algolia main configuration file with the new one.")
 
     with open(docs_index_config, 'w+', encoding='utf-8') as json_file:
