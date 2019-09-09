@@ -178,7 +178,7 @@ class PreBuild:
         self.options = opts
         self.list_of_contents = []
         self.tempdir = (
-            "./integrations_data"
+            "./data/integrations_data"
         )
         self.data_dir = "{0}{1}{2}".format(
             abspath(normpath(options.source)),

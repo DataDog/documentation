@@ -55,7 +55,7 @@ build_preview:
   artifacts:
     paths:
       - ${ARTIFACT_RESOURCE}
-      - ./integrations_data
+      - ./data/integrations_data
 
 evaluate_missing_metrics:
   <<: *base_template
@@ -128,7 +128,7 @@ build_live:
     when: on_success
     paths:
       - ${ARTIFACT_RESOURCE}
-      - ./integrations_data
+      - ./data/integrations_data
     expire_in: 1 week
   only:
     - master

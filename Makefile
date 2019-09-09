@@ -42,7 +42,7 @@ clean-exe:  ## remove execs.
 	@rm -rf ${EXE_LIST}
 
 clean-integrations:  ## remove built integrations files.
-	@rm -rf ./integrations_data/
+	@rm -rf ./data/integrations_data/
 	@if [ -d data/integrations ]; then \
 		find ./data/integrations -type f -maxdepth 1 \
 	    -a -not -name '*.fr.yaml' \

@@ -9,7 +9,7 @@ import sys
 from optparse import OptionParser
 
 tempdir = (
-   "./integrations_data"
+   "./data/integrations_data"
 )
 
 
