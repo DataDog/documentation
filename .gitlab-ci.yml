@@ -153,6 +153,7 @@ index_algolia:
   script:
     - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['config', 'error', 'examples', 'fonts', 'images', 'resources', 'static', 'videos']" -l "['ja']" -c "./local/etc/algolia/docs_datadoghq.json"
     - cp ./local/etc/algolia/docs_datadoghq.json /etc/docs_datadoghq.com
+    - cat /etc/docs_datadoghq.com
     - index_docsearch_algolia
   dependencies:
     - build_live
