@@ -42,7 +42,7 @@ clean-exe:  ## remove execs.
 	@rm -rf ${EXE_LIST}
 
 clean-integrations:  ## remove built integrations files.
-	@rm -rf ./data/integrations_data/
+	@rm -rf ./integrations_data/
 	@if [ -d data/integrations ]; then \
 		find ./data/integrations -type f -maxdepth 1 \
 	    -a -not -name '*.fr.yaml' \
@@ -58,7 +58,7 @@ clean-integrations:  ## remove built integrations files.
 	    -a -not -name 'amazon_vpc.md' \
 	    -a -not -name 'amazon_cloudhsm.md' \
 	    -a -not -name 'cloud_foundry.md' \
-		-a -not -name 'cloudability.md' \
+		  -a -not -name 'cloudability.md' \
 	    -a -not -name 'cloudcheckr.md' \
 	    -a -not -name 'integration_sdk.md' \
 	    -a -not -name 'jenkins.md' \
