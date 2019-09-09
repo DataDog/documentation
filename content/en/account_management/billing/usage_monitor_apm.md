@@ -3,6 +3,8 @@ title: Monitor APM Usage
 kind: faq
 ---
 
+###Usage Page
+
 If you are an admin of your account, you can monitor your account usage using the [Usage Page][1]. This page gets updated every 72 hours.
 
 {{< img src="tracing/faq/usage_page.png" alt="APM Event Filtering" responsive="true" style="width:100%;">}}

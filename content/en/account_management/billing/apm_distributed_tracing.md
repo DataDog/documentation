@@ -31,7 +31,7 @@ If you're using 5 hosts, and sending 30 million APM events.
 
 ### Sample 2
 
-If you're using 5 hosts, and sending 30 million APM events and deployed 20 Fargate Tasks.
+If you're using 5 hosts, sending 30 million APM events and have deployed APM on 20 Fargate Tasks.
 
 | Product | Quantity | Price |
 | --------|-----------|------|
@@ -42,8 +42,8 @@ If you're using 5 hosts, and sending 30 million APM events and deployed 20 Farga
 
 ### Sample 3
 
-If you have app 1 running on container 1. App 2 running on container 2. Both Containers running on 1 host
-Sending 20 million APM events on Trace Search and Analytics.
+If you have app 1 running on container 1, app 2 running on container 2. Both Containers running on 1 host
+and are sending 20 million APM events on Trace Search and Analytics.
 
 | Product | Quantity | Price |
 | --------|-----------|------|
@@ -53,7 +53,7 @@ Sending 20 million APM events on Trace Search and Analytics.
 
 ### Sample 4
 
-If you have app 1 running on 20-40 containers which are deployed on 4-8 EC2 instances. App 2 running on  10-30 Fargate hosted containers. Not using Trace Search and Analytics.
+If you have app 1 running on 20-40 containers which are deployed on 4-8 EC2 instances, app 2 running on 10-30 Fargate hosted containers and you're not using Trace Search and Analytics.
 
 | Product | Quantity | Price |
 | --------|-----------|------|
@@ -95,7 +95,7 @@ The default deployment setup for APM is to install an agent on every host. In ca
 
 ## Further Reading
   
-{{< whatsnext desc="APM Billing topics">}}
+{{< whatsnext>}}
     {{< nextlink href="account_management/billing/usage_monitor_apm/" >}}Monitor APM Usage{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_control_apm/" >}}Control APM Usage{{< /nextlink >}}
 {{< /whatsnext >}}
