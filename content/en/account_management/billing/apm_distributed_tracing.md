@@ -5,71 +5,73 @@ kind: faq
 
 [APM & Distributed Tracing][1] powers you to find service bottlenecks and analyze distributed traces for your microservices architecture. Additionally, using the [Trace Search and Analytics][2] feature with APM allows you to slice and dice your application data with APM events using completely customizable tags.
 
-## Understanding Your Bill
-
-| Deployment environment | Billable Unit | [APM Events][3] for Trace Search and Analytics |
+| Billable Unit | Pricing | Features Offered |
 | -----------------------|---------------|-------------------------------------------|
-| Host/Containers  | $36 per underlying host | No. of hosts * 1 million APM events included. Additional APM events charged per million per month.|
-| Fargate | $2 per concurrent task | No APM events included in pricing. APM events charged per million per month. |
+| Host/Containers  | $31 per underlying host per month | APM and Distributed Tracing on purchased hosts. 1 million APM events included per month per host for using Trace Search and Analytics |
+| Fargate | $2 per concurrent task per month | APM and Distributed Tracing on purchased tasks. No APM events included in pricing. |
+| APM Events | $1.70 per million APM events per month | Additional APM Events with 15 days retention for using Trace Search and Analytics|
 
-*Pricing is calculated on the basis of 99th percentile of usage at the end of month*. More details on pricing also available on [pricing page][4].
+*Pricing is calculated by counting of hosts (fargate tasks) every hour (every 5 minutes) and then calculating its 99th percentile. That is, the top 1% of usage hours, in case you have a spike in scale, is not considered for billing.* 
 
-**Read more about how to [monitor][5] and [control][6] your APM usage.**
+Datadog has many pricing plans to fit your needs. For more information, see the [Pricing page][4].
+
 
 ## Sample Deployment Scenarios
 
-### Sample 1
+### Case 1: Hosts and APM Events
 
-If you're using 5 hosts, and sending 30 million APM events.
+Using 5 hosts and sending 30 million APM events with 15 days retention.
 
-| Product | Quantity | Price |
+| Billable Unit | Quantity | Price | Subtotal |
+| --------|-----------|------|----------|
+| APM Hosts | 5 | $31 per host | 5 * $31 = $155 |
+| APM events | 30 million | 5 million included. $1.70 per million for additional 25 million Events | 25 * $1.7 = $42.50
+| Total |  |  |  $155 + $42.50 = **$197.50 per month** |
+
+
+### Case 2: Hosts, Fargate, and APM Events
+
+Using 5 hosts, sending 30 million APM events with 15 days retention, and have deployed APM on 20 Fargate Tasks.
+
+| Billable Unit | Quantity | Price |
 | --------|-----------|------|
-| APM Hosts | 5 | 5 * $36 = $180 |
-| APM events | 30 million | (30 million - 5 * 1 million) * $1.7 per million =  $42.5 |
-| Total |  |    $180 + $42.5 = $222.5 pm with 15 days APM event retention |
-
-
-### Sample 2
-
-If you're using 5 hosts, sending 30 million APM events and have deployed APM on 20 Fargate Tasks.
-
-| Product | Quantity | Price |
-| --------|-----------|------|
-| APM Hosts | 5 | 5 * $36 = $180 |
+| APM Hosts | 5 | 5 * $31 = $180 |
 | Fargate Tasks | 20 | 20 * $2 = $40 |
-| APM events | 30 million | (30 million - 5 * 1 million) * $1.7 =  $42.5 |
-| Total |   |    $180 + $40 + $42.5 = $262.5 pm with 15 days APM event retention  |
+| APM events | 30 million | (30 million - 5 * 1 million) * $1.70 =  $42.50 |
+| Total |   |    $180 + $40 + $42.50 = $262.50 per month |
 
-### Sample 3
+### Case 3: Containers and APM Events
 
-If you have app 1 running on container 1, app 2 running on container 2. Both Containers running on 1 host
+*App 1* running on *container 1*, *app 2* running on *container 2*. Both Containers are running on 1 host
 and are sending 20 million APM events on Trace Search and Analytics.
 
-| Product | Quantity | Price |
+| Billable Unit | Quantity | Price |
 | --------|-----------|------|
-| APM Hosts | 1 | 1 * $36 = $36 |
-| APM events | 20 million | (20 million - 5 * 1 million) * $1.7 = $25.5 |
-| Total |    |  $36 + $25.5 = $61.5 pm with 15 days APM event retention |
+| APM Hosts | 1 | 1 * $31 = $31 |
+| APM events | 20 million | (20 million - 5 * 1 million) * $1.70 = $25.50 |
+| Total |    |  $31 + $25.50 = $61.50 per month |
 
-### Sample 4
+### Case 4: Dynamic Scaling Hosts, Containers, Fargate and no APM events
 
-If you have app 1 running on 20-40 containers which are deployed on 4-8 EC2 instances, app 2 running on 10-30 Fargate hosted containers and you're not using Trace Search and Analytics.
+App 1 running on 20-40 containers which are deployed on 4-8 EC2 instances, app 2 running on 10-30 Fargate hosted containers and you're not using Trace Search and Analytics. Note that the container count will not matter if the deployed agent is on the EC2 instances. Assuming, the p99 usage of EC2 instances is 7, and p99 usage of Fargate Tasks is 28. 
 
-| Product | Quantity | Price |
+| Billable Unit | Quantity | Price |
 | --------|-----------|------|
-| APM Hosts (EC2 instances) | 7 (p99 of usage) | 7 * $36 = $252 |
-| Fargate Tasks | 28 (p99 of usage) | 28 * $2 = $56|
-| Total |  |   $252 + $56 = $308 pm  |
+| APM Hosts | 7  | 7 * $31 = $252 |
+| Fargate Tasks | 28 | 28 * $2 = $56|
+| Total |  |   $252 + $56 = $308 per month  |
 
-### Sample 5
+### Case 5: Kubernetes Nodes and APM Events
 
-If you have an agent running on 20 worker nodes in Kubernetes deployed on an average of 30 pods sending 20 million APM events.
+Agent running on 20 worker nodes in Kubernetes deployed on an average of 30 pods sending 20 million APM events.
 
-| Product | Quantity | Price |
+| Billable Unit | Quantity | Price |
 | --------|-----------|------|
-| APM Hosts (Nodes) | 20 | 20 * $36 = $720 |
-| APM events | 20 million | (20 million - 20 * 1 million) * $1.7 =  0 |
-| Total |   |   $720 + $0 = $720 pm |
+| APM Hosts (Nodes) | 20 | 20 * $31 = $720 |
+| APM events | 20 million | (20 million - 20 * 1 million) * $1.70 =  0 |
+| Total |   |   $720 + $0 = $720 per month |
+
+**Note: Sample cases illustrate annual billing rates. Contact [Sales][5] or your [Customer Success][6] Manager to discuss volume discounts for your account.**
 
 
 ### FAQs
@@ -96,8 +98,8 @@ The default deployment setup for APM is to install an agent on every host. In ca
 ## Further Reading
   
 {{< whatsnext>}}
-    {{< nextlink href="account_management/billing/usage_monitor_apm/" >}}Monitor APM Usage{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/usage_control_apm/" >}}Control APM Usage{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/usage_monitor_apm/" >}}View and Alert on APM Usagee{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/usage_control_apm/" >}}Estimate and Control APM Usage{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
@@ -105,8 +107,8 @@ The default deployment setup for APM is to install an agent on every host. In ca
 [2]: /tracing/trace_search_and_analytics
 [3]: /tracing/visualization/#apm-event
 [4]: https://www.datadoghq.com/pricing
-[5]: /account_management/billing/usage_monitor_apm
-[6]: /account_management/billing/usage_control_apm
+[5]: mailto:sales@datadoghq.com
+[6]: mailto:success@datadoghq.com
 [7]: /tracing/send_traces/#containers
 
 
