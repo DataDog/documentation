@@ -4,65 +4,65 @@ guides:
   - title: Install the agent
     desc: Start collecting events and metrics from hosts and send them to Datadog.
     link_text: View Guides
-    link: https://docs.datadoghq.com/getting_started/agent/?tab=datadogussite
+    link: getting_started/agent/
   - title: Getting Started in App
     desc: Discover how to use Datadog to create dashboards, graphs, monitors and more.
     link_text: View Guides
-    link: https://docs.datadoghq.com/getting_started/application/
+    link: getting_started/application/
   - title: Setting Up Integrations
     desc: Learn how to collect metrics, traces and logs with over 350+ integrations.
     link_text: View Guides
-    link: https://docs.datadoghq.com/getting_started/integrations/
+    link: getting_started/integrations/
 
 navtiles: 
   - title: Agent
-    link: https://docs.datadoghq.com/agent/
+    link: agent/
     icon: agent.svg
   - title: Integrations
-    link: https://docs.datadoghq.com/integrations/
+    link: integrations/
     icon: integration.svg
   - title: Dashboards
-    link: https://docs.datadoghq.com/graphing/dashboards/
+    link: graphing/dashboards/
     icon: dashboard.svg
   - title: Alerting
-    link: https://docs.datadoghq.com/monitors/
+    link: monitors/
     icon: attention-circled.svg
   - title: APM & Distributed Tracing
-    link: https://docs.datadoghq.com/tracing/
+    link: tracing/
     icon: trace.svg
   - title: Logs
-    link: https://docs.datadoghq.com/logs/
+    link: logs/
     icon: logs.svg
   - title: Synthetics
-    link: https://docs.datadoghq.com/synthetics/
+    link: synthetics/
     icon: synthetics.svg
   - title: Watchdog
-    link: https://docs.datadoghq.com/watchdog/
+    link: watchdog/
     icon: watchdog.svg
   - title: API & Developer Tools
-    link: https://docs.datadoghq.com/api/
+    link: api/
     icon: code.svg
   - title: Account Management
-    link: https://docs.datadoghq.com/account_management/
+    link: account_management/
     icon: cog.svg
   - title: Security
-    link: https://docs.datadoghq.com/security/
+    link: security/
     icon: lock.svg
   - title: Troubleshooting
-    link: https://docs.datadoghq.com/agent/troubleshooting/
+    link: agent/troubleshooting/
     icon: wrench.svg
 
 popular_searches:
   - title: API documentation
-    link: https://docs.datadoghq.com/api/
+    link: api/
     weight: 10
   - title: Agent Installation
-    link: https://docs.datadoghq.com/getting_started/agent/
+    link: getting_started/agent/
     weight: 20
   - title: Log Collection
-    link: https://docs.datadoghq.com/logs/log_collection/
+    link: logs/log_collection/
     weight: 30
   - title: Integration Setup
-    link: https://docs.datadoghq.com/integrations/
+    link: integrations/
     weight: 40
   

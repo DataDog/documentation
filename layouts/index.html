@@ -37,7 +37,7 @@
                         <h5 class="text-black text-uppercase pt-0">{{ $guide.title}} </h5>
                         <p class="small">{{ $guide.desc }}</p>
                         <div class="mt-auto">
-                                <a class="smaller font-semibold text-primary" href="{{ $guide.link }}">{{ $guide.link_text }} ></a>
+                                <a class="smaller font-semibold text-primary" href="{{ $guide.link | absLangURL }}">{{ $guide.link_text }} ></a>
                         </div>
                         
                     </div>
@@ -46,7 +46,7 @@
         <section class="row nav-tiles">
                 {{ range $i, $tile := $datafile.navtiles }}
                 <div class="col-12 col-md-6 col-lg-4 nav-tile d-flex mb-2 mb-md-3">
-                        <a class="d-flex align-items-center w-100 shadow-card small font-semibold text-primary" href="{{ $tile.link }}">
+                        <a class="d-flex align-items-center w-100 shadow-card small font-semibold text-primary" href="{{ $tile.link | absLangURL }}">
                                 {{ partial "svg" (dict "context" $dot "src" $tile.icon "color" "#632CA6" )}}
                                   {{ $tile.title }}</a>
                         </a>
