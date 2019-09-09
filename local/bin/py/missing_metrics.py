@@ -9,9 +9,7 @@ import sys
 from optparse import OptionParser
 
 tempdir = (
-   "/tmp"
-   if platform.system() == "Darwin"
-   else tempfile.gettempdir()
+   "./integrations_data"
 )
 
 
