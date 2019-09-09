@@ -7,7 +7,8 @@ external_redirect: /api/#create-a-slack-integration
 
 ## Create a Slack integration
 
-Create a Datadog-Slack integration.
+Create a Datadog-Slack integration. Once created, add channel to it with the [Add channels to Slack integration endpoint](#add-channels-to-slack-integration).
+
 
 **Note**:
 
@@ -27,16 +28,3 @@ Create a Datadog-Slack integration.
 
 **Note**: **`service_hooks`** are not required in the payload when adding (POST) or updating (PUT) an existing Slack configuration.
 
-* **`channels`** [*required*]:
-    Array of slack channel objects to post to. A slack channel object is composed by:
-
-    * **`channel_name`** [*required*]:
-        Your channel name e.g: `#general`, `#private`
-
-    * **`transfer_all_user_comments`** [*optional*, *default*=**False**]:
-        To be notified for every comment on a graph, set it to `true`. If set to `False` use the `@slack-channel_name` syntax [for comments to be posted to slack][1].
-
-    * **`account`** [*required*]:
-        Account to which the channel belongs to.
-
-[1]: /monitors/notifications/#slack-integration
