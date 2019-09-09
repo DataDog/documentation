@@ -1,5 +1,6 @@
 {
   'total_returned': 1,
+  "last_reported_time": 1560000000,
   'host_list': [
     {
       'name': 'i-deadbeef',
