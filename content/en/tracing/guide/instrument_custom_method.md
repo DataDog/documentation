@@ -92,7 +92,7 @@ TBD - PHP
 {{% /tab %}}
 {{< /tabs >}}
 
-## Instrument individual componenets of your methods to control the precision of your spans
+## Instrument individual components of your methods to control the precision of your spans
 
 **Follow the example to get your code instrumented**.
 
