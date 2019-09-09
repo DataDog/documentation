@@ -31,7 +31,7 @@ The database call and sanitization methods are already instrumented automaticall
 
 **Follow the example to get your code instrumented**.
 
-This examples walks through tracing the entire `BackupLedger.write` method to measure it's execution time and status. `BackupLedger.write` is an action that saves the current state of our transaction ledger in memory before making a call to our payments database to post a new customer charge. This happens when the `charge` endpoint of our payments service is hit:
+These examples walks through tracing the entire `BackupLedger.write` method to measure it's execution time and status. `BackupLedger.write` is an action that saves the current state of our transaction ledger in memory before making a call to our payments database to post a new customer charge. This happens when the `charge` endpoint of our payments service is hit:
 
 {{< img src="tracing/guide/custom_span/custom_span_2.png" alt="Analytics View" responsive="true" style="width:90%;">}}
 
