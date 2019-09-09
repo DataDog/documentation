@@ -6784,7 +6784,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"service_hooks\": [\n        {\n            \"account\": \"Main_Account\",\n            \"url\": \"https://hooks.slack.com/services/1/1\"\n        },\n        {\n            \"account\": \"doghouse\",\n            \"url\": \"https://hooks.slack.com/services/2/2\"\n        }\n    ],\n    \"channels\": [\n        {\n            \"channel_name\": \"#private\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"Main_Account\"\n        },\n        {\n            \"channel_name\": \"#heresachannel\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"doghouse\"\n        }\n    ]\n}"
+									"raw": "{\n    \"service_hooks\": [\n        {\n            \"account\": \"Main_Account\",\n            \"url\": \"https://hooks.slack.com/services/1/1/1\"\n        },\n        {\n            \"account\": \"doghouse\",\n            \"url\": \"https://hooks.slack.com/services/2/2/2\"\n        }\n    ]\n}"
 								},
 								"url": {
 									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/slack?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
@@ -6874,7 +6874,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"channels\": [\n        {\n            \"channel_name\": \"<CHANNEL_NAME_3>\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"<SLACK_ACCOUNT_1>\"\n        },\n        {\n            \"channel_name\": \"<CHANNEL_NAME_4>\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"<SLACK_ACCOUNT_2>\"\n        }\n    ]\n}"
+									"raw": "{\n    \"channels\": [\n        {\n            \"channel_name\": \"#channel_name_main_account\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"Main_Account\"\n        },\n        {\n            \"channel_name\": \"#channel_name_doghouse\",\n            \"transfer_all_user_comments\": \"false\",\n            \"account\": \"doghouse\"\n        }\n    ]\n}"
 								},
 								"url": {
 									"raw": "https://api.datadoghq.{{datadog_site}}/api/v1/integration/slack?api_key={{datadog_api_key}}&application_key={{datadog_application_key}}",
