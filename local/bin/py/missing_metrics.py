@@ -5,12 +5,11 @@ import time
 import glob
 import platform
 import csv
+import sys
 from optparse import OptionParser
 
 tempdir = (
-   "/tmp"
-   if platform.system() == "Darwin"
-   else tempfile.gettempdir()
+   "./integrations_data"
 )
 
 
@@ -43,7 +42,13 @@ def get_dd_metrics(csv_metrics, keys):
   days = 5
   from_time = int(time.time()) - 60 * 60 * 24 * days
 
-  dd_metrics = api.Metric.list(from_time).get('metrics')
+  dd_metrics = {}
+
+  try:
+    dd_metrics = api.Metric.list(from_time).get('metrics', {})
+  except:
+    print('\x1b[31mERROR\x1b[0m: There was an error with the Datadog API call, current value of dd_metrics is: \n {}'.format(dd_metrics))
+
   metrics_send = []
   metrics_print = []
 
@@ -78,7 +83,7 @@ def post_dd_metrics(metrics, keys):
 
 if __name__ == '__main__':
   print('\x1b[32mINFO\x1b[0m: Getting csv metrics from...')
-  print(tempdir)
+  #print(tempdir)
   csv_metrics = get_csv_metrics(tempdir)
   #print(csv_metrics)
   print('\x1b[32mINFO\x1b[0m: Parsing keys')
@@ -90,5 +95,10 @@ if __name__ == '__main__':
   options, args = parser.parse_args()
   print('\x1b[32mINFO\x1b[0m: Getting dd metrics...')
   metrics = get_dd_metrics(csv_metrics, options)
-  print('\x1b[32mINFO\x1b[0m: Posting dd metrics...')
-  post_dd_metrics(metrics, options)
+
+  if len(metrics) != 0:
+    print('\x1b[32mINFO\x1b[0m: Posting dd metrics...')
+    post_dd_metrics(metrics, options)
+  else:
+    print('\x1b[31mERROR\x1b[0m: List of metrics recovered was empty.')
+    sys.exit(1)
