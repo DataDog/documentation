@@ -5,6 +5,7 @@ import time
 import glob
 import platform
 import csv
+import sys
 from optparse import OptionParser
 
 tempdir = (
@@ -102,3 +103,4 @@ if __name__ == '__main__':
     post_dd_metrics(metrics, options)
   else:
     print('\x1b[31mERROR\x1b[0m: List of metrics recovered was empty.')
+    sys.exit(1)
