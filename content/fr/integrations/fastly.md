@@ -91,7 +91,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [2]: https://docs.datadoghq.com/resources/json/fastly_format.json
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: https://docs.fastly.com/guides/streaming-logs/useful-variables-to-log
-[5]: https://docs.datadoghq.com/resources/crt/FULL_intake.logs.datadoghq.com.crt
+[5]: https://docs.datadoghq.com/resources/crt/intake.logs.datadoghq.com.crt
 [6]: https://app.datadoghq.com/logs
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/fastly/fastly_metadata.csv
 [8]: https://docs.datadoghq.com/fr/help
