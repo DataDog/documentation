@@ -11,7 +11,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-    Real User Monitoring is in private beta. To request access, sign up here.</a>
+This feature is in private beta. <a href="https://docs.datadoghq.com/help/">Contact Datadog support</a> to enable Datadog-Real User Monitoring for your account.
 </div>
 
 ## What is Real User Monitoring?
@@ -22,10 +22,10 @@ Datadog Real User Monitoring enables you to visualize and analyze the performanc
 
 ## Setup
 
-1. On the [Real User Monitoring page][1], click the **New Application** button. 
-2. Add in Application Details, and click **Generate Client Token**. This automatically creates a `clientToken` and an `applicationId` for your application. 
+1. On the [Real User Monitoring page][1], click the **New Application** button.
+2. Add in Application Details, and click **Generate Client Token**. This automatically creates a `clientToken` and an `applicationId` for your application.
 3. Paste the [generated code snippet](#generated-code-snippet) into the head tag (in front of any other script tags) of every HTML page you want to monitor in your application.
-4. Deploy the changes to your application. Once your deployment is live, Datadog starts collecting events and logs from your user's browsers. 
+4. Deploy the changes to your application. Once your deployment is live, Datadog starts collecting events and logs from your user's browsers.
 
 **Note**: Your application shows up on the application list page as "pending" until Datadog starts receiving data.
 
@@ -35,15 +35,16 @@ Paste the generated code snippet into the head tag (in front of any other script
 
 {{< tabs >}}
 {{% tab "US" %}}
-```
+
+```js
 <script
   src="https://www.datadoghq-browser-agent.com/datadog-rum-us.js"
   type="text/javascript">
 </script>
 <script>
   window.DD_RUM.init({
-    clientToken: '<clientToken>',
-    applicationId: '<applicationId>',
+    clientToken: '<CLIENT_TOKEN>',
+    applicationId: '<APPLICATION_ID>',
   });
 </script>
 ```
@@ -51,15 +52,15 @@ Paste the generated code snippet into the head tag (in front of any other script
 {{% /tab %}}
 {{% tab "EU" %}}
 
-```
+```js
 <script
   src="https://www.datadoghq-browser-agent.com/datadog-rum-eu.js"
   type="text/javascript">
 </script>
 <script>
   window.DD_RUM.init({
-    clientToken: '<clientToken>',
-    applicationId: '<applicationId>',
+    clientToken: '<CLIENT_TOKEN>',
+    applicationId: '<APPLICATION_ID>',
   });
 </script>
 ```
@@ -69,11 +70,11 @@ Paste the generated code snippet into the head tag (in front of any other script
 
 ### Client Tokens
 
-For security reasons, [API keys][2] cannot be used to configure the data being sent from browsers, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][3] must be used. For more information about setting up a client token, see the [Client tokens documentation][3].
+For security reasons, [API keys][2] cannot be used to configure the script to send data from browsers, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][3] must be used. For more information about setting up a client token, see the [Client tokens documentation][3].
 
 ### Supported browsers
 
-The datadog-logs library supports all modern desktop and mobile browsers, including IE10 and IE11.
+The `datadog-logs` library supports all modern desktop and mobile browsers, including IE10 and IE11.
 
 ## Data collected
 
@@ -86,7 +87,7 @@ Adding the above JavaScript snippet to your website sends Datadog three main typ
 - Events about resources loading
 - Custom events and measures
 
-In addition to these events, you'll also be able to see this context on your user: 
+The following context is then added to all of the data above:
 
 | Event | Data |
 |------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -96,6 +97,9 @@ In addition to these events, you'll also be able to see this context on your use
 | SessionID | The ID corresponding to the session of your user. |
 
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum
 [2]: /account_management/api-app-keys/#api-keys
