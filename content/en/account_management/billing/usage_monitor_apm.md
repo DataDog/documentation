@@ -8,7 +8,7 @@ Read APM documentation on [APM Billing][2] to understand how billing works for A
 
 ### Usage Page
 
-If you are an admin of your account, you can monitor your account usage using the [Usage Page][3]. This page gets updated every 72 hours.
+If you are an admin of your account, you can view your account usage using the [Usage Page][3] which gets updated every 72 hours.
 
 {{< img src="tracing/faq/usage_page.png" alt="APM Event Filtering" responsive="true" style="width:100%;">}}
 
@@ -39,14 +39,17 @@ To get alerts in case a code deployment causes a spike in APM events generated, 
 1. Go to [Trace Analytics view][6] in APM
 2. Select the `env` (you can select `*`)
 3. Select `count` (you can select `*`)
-4. Select the time period you want to roll it up for.
-5. Select Export -> Export to Monitor
-6. Define the rate you would like to set as a warning or error.
-7. Define an explicit notification: The volume of APM Events on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control
+4. Select Export -> Export to Monitor
+5. Define the APM event volume rate you would like to set as a warning or error.
+6. Define an explicit notification: The volume of APM Events on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control. 
+
+Learn more about Event Filtering and usage control [here][].
+
 
 [1]: https://www.datadoghq.com/pricing
-[2]: /billing/apm_distributed_tracing
+[2]: /account_management/billing/apm_distributed_tracing
 [3]: https://app.datadoghq.com/account/usage
 [4]: https://app.datadoghq.com/monitors#create/metric
 [5]: /monitors/monitor_types/trace_analytics
 [6]: https://app.datadoghq.com/apm/search/analytics
+[7]: /account_management/billing/usage_control_apm
