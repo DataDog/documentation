@@ -227,9 +227,9 @@
 		"code"
 	],
 	"sitemap_urls": [
-		"https://docs.datadoghq.com/en/sitemap.xml"
+		"https://docs.datadoghq.com/fr/sitemap.xml"
 	],
-	"sitemap_alternate_links": true,
+	"sitemap_alternate_links": false,
 	"selectors_exclude": [
 		".whatsnext",
 		"#en-apprendre-plus",
