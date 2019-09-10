@@ -24,7 +24,10 @@
                             <div class="input-group" id="docssearchWrapper">
                                 <input class="docssearch-input form-control" name="s" type="docssearch" placeholder="Search documentation...">
                                 <div class="input-group-append">
-                                    <button class="btn btn-lg btn-primary text-uppercase js-search-btn" type="button" role="button">Search</button>
+                                    <button class="btn btn-lg btn-primary text-uppercase js-search-btn" type="button" role="button">
+                                        <span class="d-none d-md-flex">Search</span>
+                                        <span class="d-flex d-md-none">{{ partial "svg" (dict "context" $dot "src" "search.svg" "color" "white" )}}</span>
+                                    </button>
                                 </div>
                             </div>
                         </form>
