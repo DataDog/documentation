@@ -6,8 +6,8 @@
 			"selectors_key": "api",
 			"variables": {
 				"localisation": [
-          "",
-          "/fr",
+					"",
+					"/fr",
 					"/ja"
 				]
 			},
@@ -21,8 +21,8 @@
 			"selectors_key": "integrations",
 			"variables": {
 				"localisation": [
-          "",
-          "/fr",
+					"",
+					"/fr",
 					"/ja"
 				]
 			},
@@ -36,8 +36,8 @@
 			"selectors_key": "docs",
 			"variables": {
 				"localisation": [
-          "",
-          "/fr"
+					"",
+					"/fr",
 					"/ja"
 				],
 				"section": [
@@ -95,8 +95,8 @@
 					"developers"
 				],
 				"localisation": [
-          "",
-          "/fr",
+					"",
+					"/fr",
 					"/ja"
 				]
 			},
