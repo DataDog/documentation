@@ -554,69 +554,70 @@ main:
     parent: "alerting"
     identifier: "monitor_types"
     weight: 1
-  - name: "Anomaly"
-    url: "monitors/monitor_types/anomaly/"
-    parent: "monitor_types"
-    weight: 101
-  - name: "APM"
-    url: "monitors/monitor_types/apm/"
-    parent: "monitor_types"
-    weight: 102
-    identifier: "monitor_apm"
-  - name: "Composite"
-    url: "monitors/monitor_types/composite/"
-    parent: "monitor_types"
-    weight: 103
-  - name: "Custom Check"
-    url: "monitors/monitor_types/custom_check/"
-    parent: "monitor_types"
-    weight: 104
-  - name: "Event"
-    url: "monitors/monitor_types/event/"
-    parent: "monitor_types"
-    weight: 105
-  - name: "Forecasts"
-    url: "monitors/monitor_types/forecasts/"
-    parent: "monitor_types"
-    weight: 106
   - name: "Host"
     url: "monitors/monitor_types/host/"
     parent: "monitor_types"
-    weight: 107
-  - name: "Integration"
-    url: "monitors/monitor_types/integration/"
-    parent: "monitor_types"
-    weight: 108
-  - name: "Log"
-    url: "monitors/monitor_types/log/"
-    parent: "monitor_types"
-    weight: 109
+    weight: 101
   - name: "Metric"
     url: "monitors/monitor_types/metric/"
     parent: "monitor_types"
-    weight: 110
-  - name: "Network"
-    url: "monitors/monitor_types/network/"
+    weight: 102
+  - name: "Anomaly"
+    url: "monitors/monitor_types/anomaly/"
     parent: "monitor_types"
-    weight: 111
+    weight: 103
   - name: "Outlier"
     url: "monitors/monitor_types/outlier/"
     parent: "monitor_types"
-    weight: 112
-  - name: "Process"
+    weight: 104
+  - name: "Forecast"
+    url: "monitors/monitor_types/forecasts/"
+    parent: "monitor_types"
+    weight: 105
+  - name: "Integration"
+    url: "monitors/monitor_types/integration/"
+    parent: "monitor_types"
+    weight: 106
+  - name: "Live Process"
     url: "monitors/monitor_types/process/"
     parent: "monitor_types"
-    weight: 113
-  - name: "Trace Analytics"
+    weight: 107
+  - name: "Network"
+    url: "monitors/monitor_types/network/"
+    parent: "monitor_types"
+    weight: 108
+  - name: "Custom Check"
+    url: "monitors/monitor_types/custom_check/"
+    parent: "monitor_types"
+    weight: 109
+  - name: "Event"
+    url: "monitors/monitor_types/event/"
+    parent: "monitor_types"
+    weight: 110
+  - name: "Logs"
+    url: "monitors/monitor_types/log/"
+    parent: "monitor_types"
+    weight: 111
+  - name: "APM Metrics"
+    url: "monitors/monitor_types/apm/"
+    parent: "monitor_types"
+    weight: 112
+    identifier: "monitor_apm"
+  - name: "APM Trace Analytics"
     url: "monitors/monitor_types/trace_analytics"
     parent: "monitor_types"
     identifier: "monitors_trace_analytics"
-    weight: 114
+    weight: 113
   - name: "Watchdog"
     url: "monitors/monitor_types/watchdog/"
     parent: "monitor_types"
-    weight: 115
+    weight: 114
     identifier: "monitor_watchdog"
+  - name: "Composite"
+    url: "monitors/monitor_types/composite/"
+    parent: "monitor_types"
+    weight: 115
+
 
   ## MONITORS -  Manage monitor
 

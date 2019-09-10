@@ -1,5 +1,5 @@
 ---
-title: Anomaly monitor
+title: Anomaly Monitor
 kind: documentation
 aliases:
     - /guides/anomalies
@@ -16,23 +16,27 @@ further_reading:
   text: "Consult your monitor status"
 ---
 
-Anomaly detection is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week, and time-of-day patterns. It is well-suited for metrics with strong trends and recurring patterns that are hard or impossible to monitor with threshold-based alerting.
+## Overview
 
-For example, anomaly detection can help you discover when your web traffic is unusually low on a weekday afternoon&mdash;even though that same level of traffic would be perfectly normal later in the evening. Or consider a metric measuring the number of logins to your steadily-growing site. As the number is increasing every day, any threshold would be quickly outdated, whereas anomaly detection can quickly alert you if there is an unexpected drop&mdash;potentially indicating an issue with the login system.
+Anomaly detection is an algorithmic feature that identifies when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week, and time-of-day patterns. It is well-suited for metrics with strong trends and recurring patterns that are hard to monitor with threshold-based alerting.
 
-## How to Create an Anomaly Detection Monitor
+For example, anomaly detection can help you discover when your web traffic is unusually low on a weekday afternoon&mdash;even though that same level of traffic is normal later in the evening. Or consider a metric measuring the number of logins to your steadily-growing site. Because the number increases daily, any threshold would be quickly outdated, whereas anomaly detection can alert you if there is an unexpected drop&mdash;potentially indicating an issue with the login system.
 
-There is an `anomalies` function in the Datadog query language. When you apply this function to a series, it returns the usual results along with an expected "normal" range.
+## Monitor creation
 
-Anomaly detection monitors provide both "Historical Context" (see how the metric behaved in the past) and a separate "Evaluation Window" that is longer than the alerting window to provide immediate context. This provides insight into what the anomalies algorithm takes into account when calculating the bounds.
+To [create an anomaly monitor][1] in Datadog, hover over **Monitors** in the main menu and click **New Monitor** in the sub-menu. Under **Select a monitor type**, choose **Anomaly**.
+
+Then fill out the **Define the metric** section just as you would for any other monitor.
+
+The anomaly detection monitor, use the `anomalies` function from the Datadog query language. When you apply this function to a series, it returns the usual results along with an expected "normal" range.
+
+When creating an anomaly detection monitor, you are provided with two graphs. The **Historical View** allows you to explore the monitored query at different time scales to better understand why data may be considered anomalous or non-anomalous. The **Evaluation Preview** does x.
+
+ that is longer than the alerting window to provide immediate context. This provides insight into what the anomalies algorithm takes into account when calculating the bounds.
 
 {{< img src="monitors/monitor_types/anomaly/context.png" alt="historical context" responsive="true" style="width:80%;">}}
 
 Keep in mind that `anomalies` uses the past to predict what is expected in the future, so using `anomalies` on a new metric, for which you have just started collecting data, may yield poor results.
-
-To create an anomaly detection monitor, navigate to the [New Monitor][1] page and click **Anomaly Detection**. Then fill out the **Define the metric** section just as you would for any other monitor.
-
-{{< img src="monitors/monitor_types/anomaly/monitor_options.png" alt="monitor options" responsive="true" style="width:80%;">}}
 
 You should now see the form above, with a handful of parameters that help determine when to alert on anomalous behavior. If you only care about unusually high or unusually low values, choose to only alert on values above or below the bounds. The next selection determines the length of the alert window, which specifies how long a metric needs to be anomalous before an alert triggers. Beware that if the alert window is too short, you might get false alarms due to spurious noise. Finally, the recovery period specifies for how long the metric must be normal before the alert recovers.
 
