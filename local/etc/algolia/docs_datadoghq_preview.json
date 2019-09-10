@@ -6,7 +6,8 @@
 			"selectors_key": "api",
 			"variables": {
 				"localisation": [
-					"",
+          "",
+          "/fr",
 					"/ja"
 				]
 			},
@@ -20,7 +21,8 @@
 			"selectors_key": "integrations",
 			"variables": {
 				"localisation": [
-					"",
+          "",
+          "/fr",
 					"/ja"
 				]
 			},
@@ -34,7 +36,8 @@
 			"selectors_key": "docs",
 			"variables": {
 				"localisation": [
-					"",
+          "",
+          "/fr"
 					"/ja"
 				],
 				"section": [
@@ -92,7 +95,8 @@
 					"developers"
 				],
 				"localisation": [
-					"",
+          "",
+          "/fr",
 					"/ja"
 				]
 			},
@@ -240,10 +244,6 @@
 	"keep_tags": [
 		"code"
 	],
-	"sitemap_urls": [
-		"https://docs.datadoghq.com/fr/sitemap.xml"
-	],
-	"sitemap_alternate_links": false,
 	"selectors_exclude": [
 		".whatsnext",
 		"#en-apprendre-plus",
