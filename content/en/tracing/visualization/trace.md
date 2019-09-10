@@ -38,7 +38,7 @@ The List view aggregates [resources][4] by [service][3] and sorts them according
 ### More Information
 
 {{< tabs >}}
-{{% tab "Span Metadata" %}}
+{{% tab "Span tags" %}}
 
 Click on a span in the flame graph to show its metadata below the graph. If there's an error, the stack trace is provided:
 
