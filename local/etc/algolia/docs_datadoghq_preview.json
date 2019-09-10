@@ -30,12 +30,26 @@
 			"page_rank": 90
 		},
 		{
-			"url": "https://docs.datadoghq.com(?P<localisation>.*?)/",
+			"url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)/",
 			"selectors_key": "docs",
 			"variables": {
 				"localisation": [
 					"",
 					"/ja"
+				],
+				"section": [
+					"account_management",
+					"agent",
+					"developers",
+					"getting_started",
+					"graphing",
+					"logs",
+					"monitors",
+					"security",
+					"synthetics",
+					"tagging",
+					"tracing",
+					"watchdog"
 				]
 			},
 			"tags": [
@@ -92,7 +106,6 @@
 		"/api/.+",
 		"/faq/$",
 		"/guide/$",
-		"/resources/",
 		"\\.json$",
 		"\\?",
 		"docs.datadoghq.com/account_management/faq/$",
@@ -109,10 +122,10 @@
 		"docs.datadoghq.com/developers/faq/$",
 		"docs.datadoghq.com/developers/guide/$",
 		"docs.datadoghq.com/developers/metrics/distributions/$",
-		"docs.datadoghq.com/fr/search/",
-		"docs.datadoghq.com/fr/videos/",
 		"docs.datadoghq.com/fr/.*/faq/",
 		"docs.datadoghq.com/fr/integrations/$",
+		"docs.datadoghq.com/fr/search/",
+		"docs.datadoghq.com/fr/videos/",
 		"docs.datadoghq.com/graphing/faq/$",
 		"docs.datadoghq.com/graphing/guide/$",
 		"docs.datadoghq.com/graphing/widgets/table/$",
@@ -131,6 +144,7 @@
 		"docs.datadoghq.com/monitors/faq/$",
 		"docs.datadoghq.com/monitors/guide/$",
 		"docs.datadoghq.com/monitors/slo_widget/$",
+		"docs.datadoghq.com/resources/",
 		"docs.datadoghq.com/search/",
 		"docs.datadoghq.com/synthetics/faq/$",
 		"docs.datadoghq.com/synthetics/private_locations/$",
