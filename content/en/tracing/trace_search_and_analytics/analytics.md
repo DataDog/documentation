@@ -58,14 +58,13 @@ Use the query to control what's displayed in your Trace Analytic:
 
 ## Visualizations
 
-Select a Trace Analytic visualization type using the Analytic selector:
-
-{{< img src="tracing/trace_search_and_analytics/analytics/graph_selector.png" alt="Graph selector" responsive="true" style="width:30%;">}}
+Select a Trace Analytic visualization type using the Analytic selector.
 
 Available visualizations:
 
 * [Timeseries](#timeseries)
 * [Top List](#top-list)
+* [Table](#table)
 
 ### Timeseries
 
