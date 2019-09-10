@@ -136,13 +136,17 @@
 
     .nav-tiles {
         .nav-tile {
-            height: 70px;
             .shadow-card {
                 padding: 27px;
+                @media (min-width: 768px) {
+                    padding: 10px 27px;
+                }
             }
             svg {
                 width: 15px;
-                margin-right: 14px;
+            }
+            span {
+                padding-top: 5px;
             }
         }
     }
