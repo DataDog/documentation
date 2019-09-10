@@ -222,7 +222,7 @@ CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
 DD_INTEGRATIONS=/opt/datadog/integrations.json
 ```
 
-For example, to set them from a bash file before starting you application:
+For example, to set them from a bash file before starting your application:
 
 ```bash
 # Set environment variables
