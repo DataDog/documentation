@@ -115,7 +115,7 @@ No. Trace Search and Analytics is an additional functionality available along wi
 ## Further Reading
   
 {{< whatsnext>}}
-    {{< nextlink href="account_management/billing/usage_monitor_apm/" >}}View and Alert on APM Usagee{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/usage_monitor_apm/" >}}View and Alert on APM Usage{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_control_apm/" >}}Estimate and Control APM Usage{{< /nextlink >}}
 {{< /whatsnext >}}
 

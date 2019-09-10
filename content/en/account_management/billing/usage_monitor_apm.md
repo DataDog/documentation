@@ -43,7 +43,7 @@ To get alerts in case a code deployment causes a spike in APM events generated, 
 5. Define the APM event volume rate you would like to set as a warning or error.
 6. Define an explicit notification: The volume of APM Events on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control. 
 
-Learn more about Event Filtering and usage control [here][].
+Learn more about Event Filtering and usage control [here][7].
 
 
 [1]: https://www.datadoghq.com/pricing
