@@ -8,10 +8,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/dash-2019-new-feature-roundup/#real-user-monitoring"
   tag: "Blog"
   text: "Real User Monitoring"
+- link: "/logs/processing/attributes_naming_convention/"
+  tag: "Documentation"
+  text: "Datadog Standard Attributes"
 ---
 
 <div class="alert alert-warning">
-This feature is in private beta. <a href="https://docs.datadoghq.com/help/">Contact Datadog support</a> to enable Datadog-Real User Monitoring for your account.
+This feature is in private beta. Signup for <a href="https://app.datadoghq.com/rum/2019signup">Datadog US Site</a> or <a href="https://app.datadoghq.eu/rum/2019signup">Datadog EU Site</a>  to enable Datadog-Real User Monitoring for your account.
 </div>
 
 ## What is Real User Monitoring?
@@ -36,7 +39,7 @@ Paste the generated code snippet into the head tag (in front of any other script
 {{< tabs >}}
 {{% tab "US" %}}
 
-```js
+```
 <script
   src="https://www.datadoghq-browser-agent.com/datadog-rum-us.js"
   type="text/javascript">
@@ -52,7 +55,7 @@ Paste the generated code snippet into the head tag (in front of any other script
 {{% /tab %}}
 {{% tab "EU" %}}
 
-```js
+```
 <script
   src="https://www.datadoghq-browser-agent.com/datadog-rum-eu.js"
   type="text/javascript">
@@ -78,24 +81,22 @@ The `datadog-logs` library supports all modern desktop and mobile browsers, incl
 
 ## Data collected
 
-Adding the above JavaScript snippet to your website sends Datadog three main types of events:
+The Datadog-Real User Monitoring script sends to Datadog three main types of events:
 
 - Events about pages loading:
-    - DOM interactive
-    - First paint
-    - First contentful paint
+    - DOM interactive time
+    - First paint time
+    - First contentful paint time
 - Events about resources loading
-- Custom events and measures
+- [Custom events and measures][4].
 
-The following context is then added to all of the data above:
+The following contexts-following the [Datadog Standard Attributes][5] logic-are then attached automatically to all events sent to Datadog:
 
-| Event | Data |
-|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Screen URL | URL of the page generating the events. Parsed in: <ul><li>hostpage</li><li>pathpage</li><li>schemepage</li><li>hostpage</li><li>pathpage</li><li>scheme</li></ul> |
-| GeoIP | Geographic information from the IP address. Parsed in: <ul><li>Continent</li><li>Country</li><li>Countryubdivision</li><li>City</li></ul> |
-| UserAgent | The UserAgent as it is sent. Parsed in:<ul><li>Browser patch version</li><li>Browser family</li><li>Browser major version</li><li>Browser minor version</li><li>Browser patch minor version</li><li>OS family</li><li>OS minor version</li><li>OS major version</li><li>OS patch version</li><li>Device family</li> |
-| SessionID | The ID corresponding to the session of your user. |
-
+* [HTTP Requests][6]
+* [URL details][7]
+* [Geolocation][8]
+* [User-Agent][9]
+* `sessionId`	The ID corresponding to the session of your user.
 
 ## Further Reading
 
@@ -104,3 +105,9 @@ The following context is then added to all of the data above:
 [1]: https://app.datadoghq.com/rum
 [2]: /account_management/api-app-keys/#api-keys
 [3]: /account_management/api-app-keys/#client-tokens
+[4]: /logs/log_collection/javascript/?tab=us#send-a-custom-log-entry
+[5]: /logs/processing/attributes_naming_convention
+[6]: /logs/processing/attributes_naming_convention/#http-requests
+[7]: /logs/processing/attributes_naming_convention/#url-details-attributes
+[8]: /logs/processing/attributes_naming_convention/#geolocation
+[9]: /logs/processing/attributes_naming_convention/#user-agent-attributes
