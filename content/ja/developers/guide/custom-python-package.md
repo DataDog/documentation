@@ -50,7 +50,7 @@ C:\"Program Files"\Datadog\"Datadog Agent"\embedded\python -m install <package_n
 
 Agent バージョン >= 6.12 の場合
 ```
-C:\"Program Files"\Datadog\"Datadog Agent"\embedded2\python -m install <package_name>
+C:\"Program Files"\Datadog\"Datadog Agent"\embedded<PYTHON_MAJOR_VERSION>\python -m install <package_name>
 ```
 
 または、次の場所にある zip 形式ライブラリフォルダーにパッケージを追加できます。

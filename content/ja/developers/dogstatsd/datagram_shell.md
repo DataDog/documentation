@@ -131,7 +131,7 @@ PS C:\vagrant> .\send-statsd.ps1 "custom_metric:123|g|#shell"
 PS C:\vagrant>
 ```
 
-任意のプラットフォームで Python を使用する場合 (Windows では、Agent の埋め込み Python インタープリターを使用できます。これは、Agent バージョン <= 6.11 の場合は `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe`、Agent バージョン >= 6.12 の場合は `C:\Program Files\Datadog\Datadog Agent\embedded2\python.exe` にあります。)
+任意のプラットフォームで Python を使用する場合 (Windows では、Agent の埋め込み Python インタープリターを使用できます。これは、Agent バージョン <= 6.11 の場合は `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe`、Agent バージョン >= 6.12 の場合は `C:\Program Files\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe` にあります。)
 
 ```python
 import socket
