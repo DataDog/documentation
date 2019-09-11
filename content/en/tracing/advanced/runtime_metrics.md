@@ -38,6 +38,8 @@ By default, runtime metrics from your application are sent to the Datadog Agent 
 If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][4], and that port `8125` is open on the Agent.
 In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the appropriate flags in your task definition][6].
 
+**Note**: To associate JVM metrics within Flame graphs, ensure the `env: tag`, (case-sensitive) is set and matching across your environment.
+
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.0

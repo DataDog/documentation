@@ -50,6 +50,12 @@ More examples and documentation can be found on our language-specific instrument
     {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## OpenTracing Top Level Spans
+
+To fix this when using OpenTracing, set the resource name to ensure that your resources are unique while sharing one consistent operation name for a service.
+
+In Java, this can be done by setting `DDTags.RESOURCE_NAME` from import `datadog.trace.api.DDTags`.
+
 [1]: /tracing/visualization/#resources
 [2]: /tracing/visualization/#services
 [3]: /tracing/visualization/#spans

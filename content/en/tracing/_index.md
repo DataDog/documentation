@@ -14,7 +14,7 @@ further_reading:
 - link: "/tracing/advanced/runtime_metrics"
   tag: "Documentation"
   text: "Runtime metrics"
-- link: "https://learn.datadoghq.com/course/view.php?id=4"
+- link: "https://learn.datadoghq.com/enrol/index.php?id=17"
   tag: "Learning Center"
   text: "Introduction to Application Performance Monitoring"
 aliases:

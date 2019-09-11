@@ -20,7 +20,7 @@ Currently this options only works with the following services:
 {{< tabs >}}
 {{% tab "MongoDB" %}}
 
-Applies to [spans][1] of type `mongodb`, more specifically: to the `mongodb.query` span metadata.
+Applies to [spans][1] of type `mongodb`, more specifically: to the `mongodb.query` span tags.
 
 ```
 apm_config:
@@ -41,7 +41,7 @@ apm_config:
 {{% /tab %}}
 {{% tab "ElasticSearch" %}}
 
-Applies to [spans][1] of type `elasticsearch`, more specifically, to the `elasticsearch.body` span metadata:
+Applies to [spans][1] of type `elasticsearch`, more specifically, to the `elasticsearch.body` span tags:
 
 ```
 apm_config:
@@ -62,7 +62,7 @@ apm_config:
 {{% /tab %}}
 {{% tab "Redis" %}}
 
-Applies to [spans][1] of type `redis`, more specifically, to the `redis.raw_command` span metadata:
+Applies to [spans][1] of type `redis`, more specifically, to the `redis.raw_command` span tags:
 
 ```
 apm_config:
@@ -78,7 +78,7 @@ apm_config:
 {{% /tab %}}
 {{% tab "MemCached" %}}
 
-Applies to [spans][1] of type `memcached`, more specifically, to the `memcached.command` span metadata:
+Applies to [spans][1] of type `memcached`, more specifically, to the `memcached.command` span tags:
 
 ```
 apm_config:
