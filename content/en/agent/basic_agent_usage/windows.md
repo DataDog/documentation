@@ -201,7 +201,7 @@ The info command is available for Powershell:
 or cmd.exe:
 
 ```
-"C:\Program Files\Datadog\Datadog Agent\embedded<python_major_version>\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
+"C:\Program Files\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
 **Note**: For Agent versions <= 6.11 the path should be `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe` instead.
