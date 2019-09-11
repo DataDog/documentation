@@ -17,7 +17,7 @@ further_reading:
   text: "Explore your services, resources, and traces"
 ---
 
-Enable runtime metrics collection in the tracing client to gain additional insights into an application's performance. Runtime metrics can be viewed in the context of a service, correlated in the Trace View at the time of a given request, and utilized anywhere in the platform.
+Enable runtime metrics collection in the tracing client to gain additional insights into an application's performance. Runtime metrics can be viewed in the context of a [service][1], correlated in the Trace View at the time of a given request, and utilized anywhere in the platform.
 
 {{< img src="tracing/advanced/runtime_metrics/jvm_runtime_trace.png" alt="JVM Runtime Trace" responsive="true">}}
 
@@ -37,6 +37,8 @@ JVM metrics can be viewed in correlation with your Java services. See the [Servi
 By default, runtime metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][3].
 If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][4], and that port `8125` is open on the Agent.
 In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the appropriate flags in your task definition][6].
+
+**Note**: To associate JVM metrics within Flame graphs, ensure the `env: tag`, (case-sensitive) is set and matching across your environment.
 
 
 [1]: https://app.datadoghq.com/apm/services
@@ -228,3 +230,5 @@ Coming Soon. Reach out to [the Datadog support team][1] to be part of the beta.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/visualization/#services

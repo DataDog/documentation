@@ -208,7 +208,7 @@ Tracer.Instance.ActiveScope.Span.SetTag("env", "<ENVIRONMENT>");
 
 **Note**: Span metadata must respect a typed tree structure. Each node of the tree is split by a `.` and a node can be of a single type: it can't be both an object (with sub-nodes) and a string for instance.
 
-So this example of span metadata is invalid:
+So this example of span tags is invalid:
 
 ```json
 {
@@ -260,7 +260,7 @@ Create percentile aggregations within [Distribution Metrics][1] by applying a wh
 {{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Create Monitor Tags" responsive="true" style="width:80%;">}}
 
 [1]: /graphing/metrics/distributions
-[2]: /developers/metrics/custom_metrics/
+[2]: /developers/metrics/custom_metrics
 {{% /tab %}}
 {{% tab "Integrations" %}}
 

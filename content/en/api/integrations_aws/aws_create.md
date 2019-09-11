@@ -1,7 +1,7 @@
 ---
 title: Create an AWS integration
 type: apicontent
-order: 15.2
+order: 15.02
 external_redirect: /api/#create-an-aws-integration
 ---
 

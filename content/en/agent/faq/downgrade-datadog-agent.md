@@ -1,7 +1,6 @@
 ---
 title: Downgrade the Agent to a prior minor version
 kind: faq
-further_reading:
 ---
 
 For DEB or RPM packages of the Datadog Agent, find below instructions to downgrade the Datadog Agent to version `6.X.Y`.
@@ -13,7 +12,7 @@ For DEB or RPM packages of the Datadog Agent, find below instructions to downgra
 ### CLI
 
 ```
-sudo apt-get update && sudo apt-get install --force-yes datadog-agent=1:6.X.Y-1
+sudo apt-get update && sudo apt-get install --allow-downgrades datadog-agent=1:6.X.Y-1
 ```
 
 ### Configuration management tools
@@ -128,4 +127,3 @@ datadog_agent_allow_downgrade: true
 
 {{% /tab %}}
 {{< /tabs >}}
-
