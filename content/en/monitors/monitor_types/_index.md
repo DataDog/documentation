@@ -8,21 +8,21 @@ aliases:
 To [create a monitor][1] in Datadog, hover over **Monitors** in the main menu and click **New Monitor** in the sub-menu. To create a monitor programmatically, see the [Datadog API][2] or [community maintained libraries][3].
 
 {{< whatsnext desc="Select a monitor type:">}}
+    {{< nextlink href="/monitors/monitor_types/host" >}}Host{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/metric" >}}Metric{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/anomaly" >}}Anomaly{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/apm" >}}APM{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/composite" >}}Composite{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/outlier" >}}Outlier{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/forecasts" >}}Forecast{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/integration" >}}Integration{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/process" >}}Live Process{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/network" >}}Network{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/custom_check" >}}Custom Check{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/event" >}}Event{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/host" >}}Host{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/forecasts" >}}Forecasts{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/integration" >}}Integration{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/log" >}}Log{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/metric" >}}Metric{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/network" >}}Network{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/outlier" >}}Outlier{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/process" >}}Process{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_types/trace_analytics" >}}Trace Analytics{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/log" >}}Logs{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/apm" >}}APM Metrics{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/trace_analytics" >}}APM Trace Analytics{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/watchdog" >}}Watchdog{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/composite" >}}Composite{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Auditing monitors

@@ -20,7 +20,7 @@ Every Datadog Agent reports a service check called `datadog.agent.up` with the s
 
 ## Monitor creation
 
-[Create a host monitor][1] in Datadog from the main navigation: *Monitors --> New Monitor --> Host*.
+To create a [host monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Host*.
 
 ### Pick hosts by name or tag
 
@@ -49,7 +49,7 @@ A cluster alert tracks if some percentage of hosts have stopped reporting for a 
 
 To set up a cluster alert:
 
-1. Decide whether or not to group your hosts according to a tag. `Ungrouped` calculates the status percentage across all included hosts. `Grouped` calculates status percentage on a per group basis.
+1. Decide whether or not to group your hosts according to a tag. `Ungrouped` calculates the status percentage across all included hosts. `Grouped` calculates the status percentage on a per group basis.
 2. Select the percentage for alert and warn thresholds. Only one setting (alert or warn) is required.
 3. Enter the number of minutes to check for missing data. The default value is 2 minutes.
 
@@ -60,7 +60,7 @@ If `datadog.agent.up` stops reporting an `OK` status for more than the minutes s
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections see the [Notifications][2] documentation.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][2] page.
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -22,6 +22,8 @@ Anomaly detection is an algorithmic feature that identifies when a metric is beh
 
 For example, anomaly detection can help you discover when your web traffic is unusually low on a weekday afternoon&mdash;even though that same level of traffic is normal later in the evening. Or consider a metric measuring the number of logins to your steadily-growing site. Because the number increases daily, any threshold would be quickly outdated, whereas anomaly detection can alert you if there is an unexpected drop&mdash;potentially indicating an issue with the login system.
 
+Anomaly detection is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week and time-of-day patterns. It is well- suited for metrics with strong trends and recurring patterns that are hard or impossible to monitor with threshold-based alerting.
+
 ## Monitor creation
 
 To [create an anomaly monitor][1] in Datadog, hover over **Monitors** in the main menu and click **New Monitor** in the sub-menu. Under **Select a monitor type**, choose **Anomaly**.
