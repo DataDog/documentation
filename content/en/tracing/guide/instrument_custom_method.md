@@ -22,22 +22,18 @@ _8 minutes to complete_
 
 In order to provide you deep visibility into your business logic, Datadog APM allows you to customize the spans that make up your traces based on your needs and implementation. This empowers you to trace any method in your codebase and even specific components within methods. You can use this to optimize and monitor critical areas of your application at the granularity that works for you.
 
-Custom spans are useful when you have methods that perform multiple actions like fetching data from a payments database, sanitizing, processing and verifying the response, and finally returning the results to a customer.
-The database call and sanitization methods are already instrumented automatically, but the processing is entirely tailored to your application. By creating spans for the processing, you can optimize the timing using the APM flamegraph and monitor for errors using Datadog monitors.
-
-**Note**: When using any framework that is integrated with Datadog APM, your web requests, database queries, and cache jobs are automatically traced.
+Datadog instruments many frameworks out-of-the-box such as web services, databases and caches and it enables you to instrument your own business logic to have the exact visibility you need. By creating spans for the pmethods, you can optimize timing and track errors using the APM flamegraph and Datadog monitors.
 
 ## Instrument a complete method with decorators
 
 **Follow the example to get your code instrumented**.
 
-These examples walks through tracing the entire `BackupLedger.write` method to measure it's execution time and status. `BackupLedger.write` is an action that saves the current state of our transaction ledger in memory before making a call to our payments database to post a new customer charge. This happens when the `charge` endpoint of our payments service is hit:
+These examples walk through tracing the entire `BackupLedger.write` method to measure it's execution time and status. `BackupLedger.write` is an action that saves the current state of our transaction ledger in memory before making a call to our payments database to post a new customer charge. This happens when the `charge` endpoint of our payments service is hit:
 
 {{< img src="tracing/guide/custom_span/custom_span_2.png" alt="Analytics View" responsive="true" style="width:90%;">}}
 
 Note that the `http.request POST /charge/` span is taking a lot of time without having any direct child spans. This is a clue that this request requires further instrumentation to gain better insights into its behavior. Depending on the programming language you are using, you need to decorate your functions differently:
 
-Spans are the building blocks of APM Traces. You can instrument entire methods in your code. Follow the code sample below to create a new span that traces your method and includes it within your traces.
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -92,7 +88,7 @@ TBD - PHP
 {{% /tab %}}
 {{< /tabs >}}
 
-## Instrument individual components of your methods to control the precision of your spans
+## Instrument individual components of your methods for better visibility into their performance
 
 **Follow the example to get your code instrumented**.
 
@@ -167,11 +163,12 @@ Now that you have instrumented your business logic, it's time to see the results
 
     {{< img src="tracing/guide/custom_span/custom_span_4.png" alt="Analytics View" responsive="true" style="width:90%;">}}
 
-You've now successfully added custom spans to your codebase. This is the first step towards taking full advantage of Datadog's tools. You can now [add custom tags to your spans][2] to make them even more powerful.
+You've now successfully added custom spans to your codebase making them available on the Flamegraph and in [Trace Search & Analytics][2]. This is the first step towards taking full advantage of Datadog's tools. You can now [add custom tags to your spans][3] to make them even more powerful.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apm/services
-[2]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
+[2]: https://app.datadoghq.com/apm/search/analytics
+[3]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
