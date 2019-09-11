@@ -6,7 +6,7 @@ kind: faq
 Datadog has many pricing plans to fit your needs. For more information, see the [Pricing page][1].
 Read APM documentation on [APM Billing][2] to understand how billing works for APM and Distributed Tracing.
 
-You can choose to configure [Trace Search and Analytics][3] per service to manually control the number of APM events being generated using the following tools. Note that this, however, limits Trace Search and Analytics functionality on those services or integration. 
+Trace Search and Analytics is billed on the basis of [APM event][] count. You can choose to configure [Trace Search and Analytics][3] per service to manually control the number of APM events being generated using the following tools. Note that this, however, limits Trace Search and Analytics functionality on those services or integration. 
 
 ### Choose APM Event Retention
 
@@ -34,8 +34,9 @@ To estimate the number of events a service is sending per day or per month, use 
 You can also choose to enable Trace Search and Analytics per service, or per integration in code using [these language specific instructions][7].
 
 [1]: https://www.datadoghq.com/pricing
-[2]: /billing/apm_distributed_tracing
+[2]: /account_management/billing/apm_distributed_tracing
 [3]: /tracing/trace_search_and_analytics
+[4]: /tracing/visualization/#apm-event
 [4]: https://app.datadoghq.com/apm/docs/trace-search
 [5]: https://app.datadoghq.com/apm/settings?env=datadoghq.com&activeTab=0
 [6]: https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage/

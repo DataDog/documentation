@@ -108,7 +108,7 @@ The default deployment setup for APM is to install an agent on every host. In ca
 
 APM is billed on the basis of hosts deployed with agents sending traces and not services. Trace Search and Analytics is billed on the basis of [APM event][3] count. To estimate how many APM events each of your service can send, use the [Event Estimator][9].
 
-**7 Can I use Trace Search and Analytics without APM?**
+**7. Can I use Trace Search and Analytics without APM?**
 
 No. Trace Search and Analytics is an additional functionality available along with APM to slice and dice your application data based on customizable tags.
 
