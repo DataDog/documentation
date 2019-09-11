@@ -212,13 +212,14 @@ backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
-    server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt
+    server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/FULL_intake.logs.datadoghq.com.crt
 ```
 
-Once the HAProxy configuration is in place, you can reload it or restart HAProxy.
+**Note**: Download the `datadog-logs` backend certificate [FULL_intake.logs.datadoghq.com.crt][1] for the logs proxy configuration.
 
-**It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
+Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
 
+[1]: /resources/crt/FULL_intake.logs.datadoghq.com.crt
 {{% /tab %}}
 {{% tab "Datadog EU site" %}}
 
@@ -303,13 +304,14 @@ backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
-    server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt
+    server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/FULL_intake.logs.datadoghq.eu.crt
 ```
 
-Once the HAProxy configuration is in place, you can reload it or restart HAProxy.
+**Note**: Download the `datadog-logs` backend certificate [FULL_intake.logs.datadoghq.eu.crt][1] for the logs proxy configuration.
 
-**It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
+Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
 
+[1]: /resources/crt/FULL_intake.logs.datadoghq.eu.crt
 {{% /tab %}}
 {{< /tabs >}}
 

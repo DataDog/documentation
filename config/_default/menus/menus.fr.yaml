@@ -326,19 +326,23 @@ main:
     parent: graphing
     identifier: graphing_metrics
     weight: 3
+  - name: Introduction
+    url: graphing/metrics/introduction/
+    parent: graphing_metrics
+    weight: 301
   - name: Explorer
     url: graphing/metrics/explorer/
     parent: graphing_metrics
-    weight: 301
+    weight: 302
   - name: Summary
     url: graphing/metrics/summary/
     parent: graphing_metrics
-    weight: 302
+    weight: 303
   - name: Distributions
     url: graphing/metrics/distributions/
     parent: graphing_metrics
     identifier: graphing_metrics_distributions
-    weight: 303
+    weight: 304
   - name: Notebooks
     url: graphing/notebooks/
     parent: graphing
@@ -389,7 +393,7 @@ main:
     url: graphing/functions/arithmetic/
     parent: graphing_functions
     weight: 702
-  - name: Total
+  - name: Count
     url: graphing/functions/count/
     parent: graphing_functions
     weight: 703
@@ -620,7 +624,7 @@ main:
     url: tracing/advanced/connect_logs_and_traces/
     parent: tracing_advanced
     weight: 301
-  - name: Ajouter des Metadata aux Spans
+  - name: Ajouter des tags de span
     url: tracing/advanced/adding_metadata_to_spans/
     parent: tracing_advanced
     weight: 302
@@ -640,7 +644,7 @@ main:
     url: tracing/advanced/setting_primary_tags_to_scope/
     parent: tracing_advanced
     weight: 306
-  - name: Utiliser l'UI de l'APM
+  - name: Glossaire de l'APM
     url: tracing/visualization/
     parent: tracing
     identifier: tracing_vis
@@ -686,16 +690,6 @@ main:
     url: monitors/monitor_types/trace_analytics
     parent: tracing_search_analytics
     weight: 504
-  - name: API des traces
-    url: 'api/#tracing'
-    identifier: tracing api
-    parent: tracing
-    weight: 6
-  - name: Bibliothèques
-    url: 'developers/libraries/#apm-tracing-client-libraries/'
-    identifier: community_library
-    parent: tracing
-    weight: 7
   - name: Guides
     url: tracing/guide/
     identifier: tracing_guides
@@ -781,63 +775,64 @@ main:
     url: logs/processing/attributes_naming_convention/
     parent: log_processing
     weight: 204
-  - name: Générer des métriques
-    url: logs/logs_to_metrics/
-    parent: log_management
-    identifier: log_to_metrics
-    weight: 3
   - name: "Live\_Tail"
     url: logs/live_tail/
     parent: log_management
     identifier: log_live_tail
-    weight: 4
-  - name: Explorer
-    url: logs/explorer/
+    weight: 3
+  - name: Générer des métriques
+    url: logs/logs_to_metrics/
     parent: log_management
-    identifier: log_explorer
+    identifier: log_to_metrics
     weight: 4
-  - name: Recherche
-    url: logs/explorer/search/
-    parent: log_explorer
-    weight: 401
-  - name: Analyse de logs
-    url: logs/explorer/analytics/
-    parent: log_explorer
-    weight: 402
-  - name: Vues enregistrées
-    url: logs/explorer/saved_views/
-    parent: log_explorer
-    weight: 403
-  - name: Modèles de logs
-    url: logs/explorer/patterns/
-    parent: log_explorer
-    weight: 404
-  - name: Logging without Limits
-    url: logs/logging_without_limits/
-    parent: log_management
-    weight: 5
   - name: Archives
     url: logs/archives/
     parent: log_management
     identifier: log_archives
-    weight: 6
+    weight: 5
   - name: "Archivage sur AWS\_S3"
     url: logs/archives/s3/
     parent: log_archives
-    weight: 601
+    weight: 501
   - name: Réintégration à partir des archives
     url: logs/archives/rehydrating
     parent: log_archives
-    weight: 602
+    weight: 502
+  - name: Index
+    url: logs/indexes
+    parent: log_management
+    identifier: log_indexes
+    weight: 6
+  - name: Log Explorer
+    url: logs/explorer/
+    parent: log_management
+    identifier: log_explorer
+    weight: 7
+  - name: Recherche
+    url: logs/explorer/search/
+    parent: log_explorer
+    weight: 701
+  - name: Analyse de logs
+    url: logs/explorer/analytics/
+    parent: log_explorer
+    weight: 702
+  - name: Vues enregistrées
+    url: logs/explorer/saved_views/
+    parent: log_explorer
+    weight: 703
+  - name: Modèles de logs
+    url: logs/explorer/patterns/
+    parent: log_explorer
+    weight: 704
   - name: Guides
     url: logs/guide/
     parent: log_management
     identifier: log_guides
-    weight: 7
+    weight: 8
   - name: Sécurité
     url: security/logs/
     parent: log_management
-    weight: 8
+    weight: 9
   - name: Synthetics
     url: 'https://www.datadoghq.com/synthetics/'
     pre: nav_synthetics
@@ -853,23 +848,28 @@ main:
     parent: synthetics
     identifier: synthetics_browser_tests
     weight: 2
+  - name: Emplacements privés
+    url: synthetics/private_locations
+    parent: synthetics
+    identifier: synthetics_private_location
+    weight: 3
   - name: Intégration APM
     url: synthetics/apm/
     parent: synthetics
     identifier: synthetics_apm
-    weight: 3
+    weight: 4
   - name: Browser Tests
     url: synthetics/apm/browser_tests
     parent: synthetics_apm
-    weight: 301
+    weight: 401
   - name: Identifier les Bots Synthetics
     url: synthetics/identify_synthetics_bots/
     parent: synthetics
-    weight: 4
+    weight: 5
   - name: Paramètres
     url: synthetics/settings/
     parent: synthetics
-    weight: 5
+    weight: 6
   - name: Outils de développement
     url: developers/
     pre: nav_developers
@@ -892,6 +892,10 @@ main:
     url: developers/dogstatsd/unix_socket/
     parent: dev_tools_dogstatsd
     weight: 103
+  - name: Envoyer des quantités importantes de métriques
+    url: developers/dogstatsd/high_throughput/
+    parent: dev_tools_dogstatsd
+    weight: 104
   - name: Métriques
     url: developers/metrics/
     parent: dev_tools

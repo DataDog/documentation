@@ -23,7 +23,7 @@ Les limites de débit peuvent être augmentées par rapport aux valeurs par déf
 [1]: /fr/help
 [2]: /fr/api/#metrics
 [3]: /fr/developers/metrics/custom_metrics
-[4]: /fr/api/#query-time-series-points
+[4]: /fr/api/#query-timeseries-points
 [5]: /fr/api/?lang=bash#get-a-list-of-logs
 [6]: /fr/api/#graphs
 [7]: /fr/api/?lang=bash#logs

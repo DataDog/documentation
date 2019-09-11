@@ -328,7 +328,7 @@ After setting up the [Webhooks integration][1], type `@webhook` in your notifica
 
 ## Test monitor notifications
 
-**Testing notifications are supported for the following monitor types**: host, metric, anomaly, outlier, forecast, integration (check only), process (check only), network (check only), custom check, and event.
+**Testing notifications are supported for the following monitor types**: host, metric, anomaly, outlier, forecast, integration (check only), process (check only), network (check only), custom check, event, and composite.
 
 After you define your monitor, test what your monitor's notification would look like in any applicable state with the *Test Notifications* button at the bottom right of the monitor page:
 

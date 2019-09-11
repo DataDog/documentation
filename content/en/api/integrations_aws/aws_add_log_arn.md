@@ -1,7 +1,7 @@
 ---
 title: Add AWS Log Lambda ARN
 type: apicontent
-order: 15.7
+order: 15.08
 external_redirect: /api/#add-aws-log-lambda-arn
 ---
 
