@@ -7,7 +7,7 @@ external_redirect: /api/#recuperer-les-elements-d-une-liste-de-dashboards
 
 ##### Signature
 
-`GET https://api.datadoghq.com/api/v1/dashboard/lists/manual/<ID_LISTE>/dashboards`
+`GET /v2/dashboard/lists/manual/<ID_LISTE>/dashboards`
 
 ##### Exemple de requête
 
