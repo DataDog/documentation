@@ -1,20 +1,39 @@
 ---
 title: SLO Widget
 kind: documentation
-description: "Track your monitor’s uptime via a widget in your Screenboard"
-disable_toc: true
-beta: true
+description: "Track your monitor’s uptime with a widget in your Screenboard"
 further_reading:
 - link: "https://www.datadoghq.com/blog/slo-monitoring-widget/"
   tag: "Blog"
   text: "Track the status of your SLOs with the new monitor uptime widget"
 aliases:
     - /monitors/monitor_uptime_widget/
+    - /monitors/slo_widget/
 ---
+
+<div class="alert alert-info">
+Service Level Objectives are now generally available.
+</div>
 
 {{< img src="monitors/monitor_uptime_widget.png" alt="monitor uptime widget" responsive="true" >}}
 
-Use the SLO and uptime widget to track your SLOs (Service Level Objectives) and uptime on screenboards and timeboards.
+Use the SLO and uptime widget to track your SLOs (Service Level Objectives) and uptime on screenboards and timeboards. Go to Datadog’s Service Level Objectives page to create new SLOs and view all existing ones in a central page. Using the new widget, you can select an existing SLO from the dropdown and view it on any dashboard.
+
+The SLO widget has been updated since its initial beta release. You are no longer required to create your objectives directly from the widget. Instead, go to Datadog’s Service Level Objectives (link to docs) to create new SLOs and view all existing ones in a central page. Using the new widget, you can select an existing SLO from the dropdown and view it on any dashboard. 
+
+Any time window  that’s been configured for your SLOs will be available for viewing on the widget but you can select and deselect them depending on what you want to see. You can also enable calendar time windows like week-to-date, month-to-date, previous week and previous month. These will be made available depending on the time windows you have previously configured. For instance, the 7-day window will enable week-to-date while the 30-day one will enable month-to-date, etc. Additional calendar windows will be available as the underlying data permits.
+
+To reconfigure your targets or enable more time windows, edit the source SLO. 
+
+SLOs in the preview can be clicked to open their related detail panels.
+
+### Viewing options
+
+For monitor based SLOs, you can select between displaying the monitor’s uptime percentage , its worst performing groups, or both. Those options are also available for SLOs aggregating multiple monitors so you can view those monitors individually instead of the groups. 
+
+The overall uptime value represents the proportion of time that none of the groups in the widget’s scope were in an alert state.
+
+Groups (or aggregated monitors in the case of multi monitor SLOs) will be sorted by worst status in the shortest time window. You can switch the sorting time window by clicking on that window’s label inside the preview. 
 
 *Uptime* is defined as the amount of time a monitor was in an *up* state (OK) compared to *down* state (non-OK). Similar to the monitor status page visualization, the status is represented in bars as green (up) and red (down). Example: `99% of the time latency is less than 200ms.`
 
