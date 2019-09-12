@@ -36,7 +36,7 @@ On each alert evaluation, Datadog calculates the average/minimum/maximum/sum ove
 
 A change alert compares the absolute or relative (%) change in value between `N` minutes ago and now against a given threshold. The compared data points aren't single points but are computed using the parameters in the *alert conditions* section.
 
-On each alert evaluation, Datadog calculates the raw difference (a positive or negative value) between the series now and `N` minutes ago then computes the average/minimum/maximum/sum over the selected period. An alert is triggered when this computed series crosses the threshold.
+On each alert evaluation, Datadog calculates the raw difference (a positive or negative value) between the series now and `N` minutes ago, then computes the average/minimum/maximum/sum over the selected period. An alert is triggered when this computed series crosses the threshold.
 
 This type of alert is useful to track spikes, drops, or slow changes in a metric when there is not an unexpected threshold.
 
@@ -45,9 +45,9 @@ This type of alert is useful to track spikes, drops, or slow changes in a metric
 
 An anomaly detection alert uses past behavior to detect when a metric is behaving abnormally.
 
-Anomaly alerts calculate an expected range of values for a series based on the past. Some of the anomaly algorithms use the time-of-day and day-of-week to determine the expected range, thus capturing abnormalities that could not be detected by a simple threshold alert (e.g. the series is unusually high for 5AM even though it would be considered normal at 10 AM).
+Anomaly alerts calculate an expected range of values for a series based on the past. Some of the anomaly algorithms use the time-of-day and day-of-week to determine the expected range, thus capturing abnormalities that could not be detected by a simple threshold alert. For example, the series is unusually high for 5AM even though it would be considered normal at 10 AM.
 
-On each alert evaluation, Datadog calculates the percentage of the series that falls above/below/outside of the expected range. An alert is triggered when this percentage crosses the configured threshold.
+On each alert evaluation, Datadog calculates the percentage of the series that falls above, below, and outside of the expected range. An alert is triggered when this percentage crosses the configured threshold.
 
 For more detailed information, see the [Anomaly Monitor][1] page.
 
@@ -56,9 +56,9 @@ For more detailed information, see the [Anomaly Monitor][1] page.
 {{% /tab %}}
 {{% tab "Outliers" %}}
 
-Outlier monitors detect when a member of a group (e.g., hosts, availability zones, partitions) is behaving unusually compared to the rest.
+Outlier monitors detect when a member of a group (hosts, availability zones, partitions, etc.) is behaving unusually compared to the rest.
 
-On each alert evaluation, Datadog checks whether or not all groups are clustered together and exhibiting the same behavior. An alert is triggered whenever at least one group diverges from the rest of the groups.
+On each alert evaluation, Datadog checks whether or not all groups are clustered together and exhibiting the same behavior. An alert is triggered when one or more groups diverges from the rest of the groups.
 
 For more detailed information, see the [Outlier Monitor][1] page.
 
@@ -80,76 +80,122 @@ For more detailed information, see the [Forecast Monitor][1] page.
 
 ### Define the metric
 
-Monitors can be created on any metrics that you are currently sending to Datadog.
-
-Select the metric and scope you want to monitor
-
+Any metric currently reporting to Datadog is available for monitors. Use the editor and these steps to define the metric:
 {{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope" responsive="true" >}}
 
-Select the alert grouping:
+| Step                | Required | Default    | Example           |
+|---------------------|----------|------------|-------------------|
+| Select a metric     | Yes      | None       | `system.cpu.user` |
+| Define the from     | No       | Everywhere | `env:prod`        |
+| Exclude tags        | No       | None       | `role:testing`    |
+| Specify aggregation | Yes      | `avg by`   | `sum by`          |
+| Group by            | No       | Everything | `host`            |
 
-* **Simple Alert** - aggregates over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host, like `avg` of `system.cpu.iowait` over `host:bits`, or for an aggregate metric across many hosts, like sum of `nginx.bytes.net` over `region:us-east`.
+**Note**: Defining metrics for monitors is similar to defining metrics for graphs. For details on using the `Advanced...` option, see [Advanced graphing][2].
 
-* **Multi Alert** - applies the alert to each source according to your group parameters. For example, to alert on disk space you might group by host and device by creating the query: `avg:system.disk.in_use{*} by {host,device}`. This triggers a separate alert for each device on each host that is running out of space. **Note**: Anything reporting this metric that does not have the chosen groups is ignored during alert evaluation.
+#### Alert grouping
+
+Alerts are grouped automatically based on your selection of the `group by` step when defining your metric. If no group is specified, grouping defaults to `Simple Alert`. If groups are selected, grouping defaults to `Multi Alert`.
+
+Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts.
+
+Multi alerts apply the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `host` and `device` to receive a separate alert for each host device that is running out of space.
 
 ### Set alert conditions
+
+The alert conditions vary slightly based on the chosen detection method.
 
 {{< tabs >}}
 {{% tab "Threshold" %}}
 
-The **threshold** options vary slightly depending on what alert type you choose. For either case, input a threshold and comparison type based on your metric. As you change the threshold, the graph updates with a marker showing the cutoff point.
+* Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`
+* the threshold `on average`, `at least once`, `at all times`, or `in total`
+* during the last `5 minutes`, `15 minutes`, `1 hour`, etc.
 
-{{< img src="monitors/monitor_types/metric/metric_threshold.png" alt="metric threshold" responsive="true" >}}
+**Definitions**:
 
-Formatted values can be used in this input based on the metric itself. For example, the threshold for `system.disk.used` can be entered as `20GB`.
+| Option                  | Description                                                                                                                                                                                                      |
+|-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| on&nbsp;average         | The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` function to your monitor query.                                                                      |
+| at&nbsp;least&nbsp;once | If any single value in the generated series crosses the threshold then an alert is triggered. This option adds a function to your monitor query based on your selection: `min()` for below or `max()` for above. |
+| at&nbsp;all&nbsp;times  | If every point in the generated series is outside the threshold then an alert is triggered. This option adds a function to your monitor query based on your selection: `min()` for above or `max()` for below.   |
+| in&nbsp;total           | If the summation of every point in the series is outside the threshold then an alert is triggered. It adds the `sum()` function to your monitor query.                                                           |
 
-For a **threshold alert** you are able to chose a *time aggregation* of the data. The alerting engine generates a single series and performs selected aggregation.
-
-The details of each option:
-
-* **on average**: The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` [functions][1] at the beginning of your monitor query.
-
-* **at least once**: If any single value in the generated series crosses the threshold then an alert is triggered. This option adds a [function][1] to the beginning of your monitor query based on your selection: `min()` for below or `max()` for above.
-
-* **at all times**: If every point in the generated series is outside the threshold then an alert is triggered. This option adds a [function][1] to the beginning of your monitor query based on your selection: `min()` for above or `max()` for below.
-
-* **in total**: If the summation of every point in the series is outside the threshold then an alert is triggered. It adds the `sum()` [functions][1] at the beginning of your monitor query.
-
-[1]: 
 {{% /tab %}}
 {{% tab "Change" %}}
 
-When you select the **change alert** option, these additional parameters are available:
+* The `average`, `maximum`, `minimum`, or `in total`
+* of the `change` or `% change`
+* over `5 minutes`, `15 minutes`, `1 hour`, etc.
+* compared to `5 minutes`, `15 minutes`, `1 hour`, etc. before
+* is `above`, `above or equal to`, `below`, or `below or equal to` the threshold.
 
-*change* is an absolute change of the value whereas *% change* is the percentage change of your value compared to its previous value (so if it was a value of 2 and now 4, the *% change* is 100%).
+**Definitions**:
 
-Compare the change of the value during a given time frame by selecting the period you want to compare against. This can range from 5 minutes to 2 days.
-
-Like the **threshold alert**, select the *time aggregation* and a *time window* on which the change is calculated.
+| Option        | Description                                                                                                                                                        |
+|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| change        | The absolute change of the value.                                                                                                                                  |
+| %&nbsp;change | The percentage change of the value compared to its previous value. For example, the percentage change for a previous value of 2 with a current value of 4 is 100%. |
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Select your **evaluation_delay** Time (in seconds) to delay evaluation, as a non-negative integer. For example, if the value is set to 300 (5min), the time frame is set to last_5m and the time is 7:00, the monitor evaluates data from 6:50 to 6:55. This is useful for AWS CloudWatch and other backfilled metrics to ensure the monitor always has data during evaluation.
+#### Thresholds
 
-Optionally **notify on no data** after a configurable time frame. At the minimum, your chosen time frame must be greater than 2x the alerting window. For example, if you are alerting over the last 5 minutes then you would need to wait at least 10 minutes before notifying on missing data.
+Use thresholds to set a numeric value for triggering an alert. Depending on your chosen metric, the editor displays the unit used (`byte`, `kibibyte`, `gibibyte`, etc).
 
-**Note:** No Data Alerts have a default max of 24 hours. Reach out to support to discuss increasing this value.
+Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][3].
 
-Opt to **automatically resolve the monitor from a triggered state**. By enabling this option, the monitor resolves after a certain amount of time rather than meeting its defined recovery threshold. In general, you want to leave this option off so the alert only resolves when it's fixed.
+| Option                     | Description                                                                     |
+|----------------------------|---------------------------------------------------------------------------------|
+| Alert threshold            | The value used to trigger an alert notification.                                |
+| Warning threshold          | The value used to trigger a warning notification.                               |
+| Alert recovery threshold   | An optional threshold to indicate an additional condition for alert recovery.   |
+| Warning recovery threshold | An optional threshold to indicate an additional condition for warning recovery. |
 
-The most common use-case for this option is when you have very sparse counters, e.g. for errors. When errors stop occurring, the metric stops reporting. This prevents the monitor from resolving because there are no more values to trigger a resolution. A [recovery threshold][2] can also be set.
+As you change a threshold, the preview graph in the editor displays a marker showing the cutoff point.
 
-However, if the monitor auto-resolves and the value of the query does not meet the recovery threshold at the next evaluation, the monitor triggers an alert again.
+#### Data window
+
+`Require` or `Do not require` a full window of data for evaluation.
+
+This setting allows you to change when the alerting engine considers a monitor as a candidate for evaluation.
+
+**Require** (default) - A monitor is not evaluated until the evaluation window is filled with data. For example, if a new host is provisioned it may have high CPU for a minute or two. You don't want alerts to trigger if the CPU drops shortly after.
+
+**Do not require** - A monitor is evaluated as soon as it is recognized. Consider using this value if your data points are very sparse. Otherwise, the monitor may not be evaluated because the window is never considered "full".
+
+#### No data
+
+`Do not notify` if data is missing or `Notify` if data is missing for more than `N` minutes.
+
+Notifications for missing data are useful if you expect a metric to always be reporting data under normal circumstances. For example, if a host with the Agent must be up continuously, you can expect the metric `system.cpu.idle` to always report data. For this case, you should enable notifications for missing data. **Note**: The missing data window must be at least two times the evaluation period to work.
+
+Alternatively, if you are monitoring a metric over an auto-scaling group of hosts that stop and start automatically, notifying for no data would produce a lot of notifications. For this case, you should not enable notifications for missing data.
+
+#### Auto Resolve
+
+`[Never]`, `After 1 hour`, `After 2 hours`, etc. automatically resolve this event from a triggered state.
+
+For some metrics that report periodically, it may make sense for triggered alerts to auto-resolve after a certain time period. For example, if you have a counter that reports only when an error is logged, the alert never resolves because the metric never reports `0` as the number of errors. In this case, set your alert to resolve after a certain time of inactivity on the metric. **Note**: If a monitor auto-resolves and the value of the query does not meet the recovery threshold at the next evaluation, the monitor triggers an alert again.
+
+In most cases this setting is not useful because you only want an alert to resolve once it is actually fixed. So, in the general, it makes sense to leave this as `[Never]` so alerts only resolve when the metric is above or below the set threshold.
+
+#### Evaluation delay
+
+Delay evaluation by `N` seconds.
+
+The time (in seconds) to delay evaluation. This should be a non-negative integer. So, if the delay is set to 300 seconds (5 minutes), the monitor evaluation is during the last `5 minutes`, and the time is 7:00, the monitor evaluates data from 6:50 to 6:55. This is useful for cloud metrics which are backfilled by service providers.
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/metric
-[2]: /monitors/faq/what-are-recovery-thresholds
-[3]: /monitors/notifications
+[2]: /graphing/using_graphs/#advanced-graphing
+[3]: /monitors/faq/what-are-recovery-thresholds
+[4]: /monitors/notifications
