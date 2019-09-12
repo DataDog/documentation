@@ -45,10 +45,10 @@
         </section>
         <section class="row nav-tiles">
                 {{ range $i, $tile := $datafile.navtiles }}
-                <div class="col-12 col-md-6 col-lg-4 nav-tile d-flex mb-2 mb-md-3">
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
                         <a class="d-flex flex-column justify-content-center align-items-center w-100 shadow-card small font-semibold" href="{{ $tile.link | absLangURL }}">
                                 {{ partial "svg" (dict "context" $dot "src" $tile.icon "color" "#632CA6" )}}
-                                  {{ $tile.title }}<span class="d-none d-md-block font-regular text-center smaller">{{ $tile.desc }}</span></a>
+                                  {{ $tile.title }}<span class="font-regular text-center smaller">{{ $tile.desc }}</span></a>
                         </a>
                         
                 </div>

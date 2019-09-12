@@ -47,7 +47,7 @@ navtiles:
     link: watchdog/
     icon: watchdog.svg
     desc: Automatically see trends in your applications metrics
-  - title: API & Developer Tools
+  - title: API
     link: api/
     icon: code.svg
     desc: Use the Datadog API, collect custom metrics, or create an integration
