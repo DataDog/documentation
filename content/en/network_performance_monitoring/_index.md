@@ -7,15 +7,15 @@ aliases:
   - /monitors/network_flow_monitors/
   - /graphing/infrastructure/network_performance_monitor/
 further_reading:
-    - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
-      tag: "Blog"
-      text: "Network Performance Monitoring"
-    - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
-      tag: "Blog"
-      text: "Monitoring 101: Alerting on what matters"
-    - link: "/api/#monitors"
-      tag: "Documentation"
-      text: "Datadog Monitors API"
+- link: "https://www.datadoghq.com/blog/network-performance-monitoring"
+  tag: "Blog"
+  text: "Network Performance Monitoring"
+- link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
+  tag: "Blog"
+  text: "Monitoring 101: Alerting on what matters"
+- link: "/api/#monitors"
+  tag: "Documentation"
+  text: "Datadog Monitors API"
 ---
 
 <div class="alert alert-warning">
