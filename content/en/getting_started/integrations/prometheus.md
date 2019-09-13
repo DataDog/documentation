@@ -26,9 +26,9 @@ Collect your exposed Prometheus and OpenMetrics metrics from your application [r
 
 ## Overview
 
-Starting with version 6.1.0, the Agent includes [OpenMetrics][3] and [Prometheus][4] checks capable of scraping Prometheus endpoints with a few lines of configuration. This page explains the basic usage of these checks, which enable you to scrape custom metrics from Prometheus endpoints. 
+Starting with version 6.5.0, the Agent includes [OpenMetrics][3] and [Prometheus][4] checks capable of scraping Prometheus endpoints with a few lines of configuration. This page explains the basic usage of these checks, which enable you to scrape custom metrics from Prometheus endpoints. 
 
-We recommend using the OpenMetrics check by default, which is more efficient and offers advanced capabilities. Use the Prometheus check only when the metrics end-point does not support a text-format.
+We recommend using the OpenMetrics check since it is more efficient and fully supports Prometheus text format. Use the Prometheus check only when the metrics end-point does not support a text-format.
 
 For more advanced usage of the `OpenMetricsCheck` interface, including writing a custom check, see the [Developer Tools][5] section.
 
