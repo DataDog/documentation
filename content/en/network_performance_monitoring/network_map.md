@@ -64,12 +64,6 @@ Clicking an entities offers you the option to inspect it. This isolates the enti
 
 {{< img src="network_performance_monitoring/network_map/network_entity_zoom.png" alt="network_entity_zoom" responsive="true" style="width:70%;">}}
 
-### Selecting an entity
-
-Clicking on an entity reveals further drill-down options:
-
-{{< img src="network_performance_monitoring/network_map/network_entity_click.png" alt="network_entity_click" responsive="true" style="width:40%;">}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
