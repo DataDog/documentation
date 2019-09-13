@@ -15,11 +15,10 @@ If you are an admin of your account, you can view your account usage using the [
 | Metric | Description |
 | ------- | -------- |
 | APM Hosts | Shows the 99th percentile of all distinct APM hosts over all hours in the current month. |
-| Containers | Shows the average of all distinct containers over all hours in the current month. |
 | APM Events | Shows the sum of all APM events indexed over all hours in the current month. |
 | Fargate Tasks | Shows the average of all Fargate tasks over all hours in the current month. |
 
-### Set Alert on Hosts
+### Set Alert on APM Hosts
 
 To get alerts in case a code deployment scales the number of hosts sending traces, set up monitor on APM host count. Get notified if the host volumes in any scope (`prod`, `availablity-zone`, etc…) of your infrastructure is growing unexpectedly:
 
