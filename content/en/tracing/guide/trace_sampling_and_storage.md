@@ -179,7 +179,7 @@ Manually drop a trace:
 ```ruby
 Datadog.tracer.trace(name, options) do |span|
   # Always Drop the Trace
-  span.set_tag(Datadog::Ext::ManualTracing::TAG_DROP)
+  span.set_tag(Datadog::Ext::ManualTracing::TAG_DROP, true)
   # method impl follows
 end
 ```
