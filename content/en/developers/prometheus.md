@@ -17,7 +17,7 @@ aliases:
 
 ## Overview
 
-This page dives into the `OpenMetricsBasicCheck` interface for more advanced usage, including an example of a simple check that collects timing metrics and status events from [Kube DNS][1]. For information on configuring a basic OpenMetrics check, see the [Agent Documentation][2].
+This page dives into the `OpenMetricsBaseCheck` interface for more advanced usage, including an example of a simple check that collects timing metrics and status events from [Kube DNS][1]. For information on configuring a basic OpenMetrics check, see the [Agent Documentation][2].
 
 ## Advanced usage: OpenMetrics check interface
 
