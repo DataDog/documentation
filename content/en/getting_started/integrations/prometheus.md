@@ -22,7 +22,7 @@ aliases:
   - /getting_started/prometheus
 ---
 
-Collect your exposed Prometheus/OpenMetrics metrics from your application [running inside containers](#container-auto-discovery) or directly [on your host](#host-agent) using the Datadog Agent and the [Datadog-OpenMetrics][1] or [Datadog-Prometheus][2] integrations.
+Collect your exposed Prometheus and OpenMetrics metrics from your application [running inside containers](#container-auto-discovery) or directly [on your host](#host-agent) by using the Datadog Agent, and the [Datadog-OpenMetrics][1] or [Datadog-Prometheus][2] integrations.
 
 ## Overview
 
