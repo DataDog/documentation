@@ -31,11 +31,11 @@ The network page is divided into 4 main part:
 
 Queries aggregate and filter all flows based on tags. The following is the default view, which aggregates by `service`. This means the throughput for every flow with the same source `service` and destination `service` are summed and represented as one row for that service-to-service communication.
 
-{{< img src="network_performance_monitoring/network_page/query_1.png" alt="notification" responsive="true" style="width:70%;">}}
+{{< img src="network_performance_monitoring/network_page/query_1.png" alt="network page query 1" responsive="true" style="width:80%;">}}
 
 The following shows all flows from IP addresses to Security groups. Only flows where the source IP address represents a specific set of services is included. This complex query shows that no two fields have to match—you can query for communication metrics between one `service` to any `consul` server, broken down by source `pod` and destination `host`, among other things.
 
-{{< img src="network_performance_monitoring/network_page/query_2.png" alt="notification" responsive="true" style="width:70%;">}}
+{{< img src="network_performance_monitoring/network_page/query_2.png" alt="network page query 2" responsive="true" style="width:80%;">}}
 
 ## Graphs
 
@@ -56,6 +56,7 @@ The default collection interval is five minutes and retention is five days. Metr
 
 On each graph, select the cog icon in the upper right corner of the graph in order to change the Y-axis scale or the graph type displayed:
 
+{{< img src="network_performance_monitoring/network_page/graph_settings.png" alt="Graph settings" responsive="true" style="width:50%;">}}
 
 ## Facet Panel
 
