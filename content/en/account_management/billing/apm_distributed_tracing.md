@@ -7,10 +7,11 @@ kind: faq
 
 **Trace Search and Analytics is billed on the basis of [APM event][3] count.**
 
-| Deployment Environment | APM  | Trace Search and Analytics  | Billing |
+| Billing Parameter | Price  | Trace Search and Analytics  | Billing |
 | -----------------------|---------------|-------------------------------------------|-------------|
-|  [Host][11]  | $31 per underlying [APM host][11] per month | 1 million APM events included per month per host for using Trace Search and Analytics. $1.70 per million APM events per month | Datadog records the number of [APM hosts][12] you are concurrently monitoring in the Datadog APM service once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. [More information.][12] |
-| [Fargate][11] | $2 per concurrent task per month | No APM events included in pricing. $1.70 per million APM events per month | Datadog records the number of task instances you are monitoring in the Datadog Infrastructure (or APM) service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored. [More information.][11]
+|  [Host][11]  | $31 per underlying [APM host][11] per month | 1 million APM events included per month per host for using Trace Search and Analytics. | Datadog records the number of [APM hosts][12] you are concurrently monitoring in the Datadog APM service once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. [More information.][12] |
+| [Fargate][11] | $2 per concurrent task per month | No APM events included in pricing. | Datadog records the number of task instances you are monitoring in the Datadog Infrastructure (or APM) service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored. [More information.][11]|
+| [APM Event][12] | $1.70 per million APM events per month | | An APM event is an individual request against an application. Datadog charges based on the total number of APM events submitted to the Datadog APM service at the end of the month. [More information.][12] | 
 
 
 Note: If you're using a [container][11] based environment, you get billed for [underlying host][11] deploying APM agent. 
