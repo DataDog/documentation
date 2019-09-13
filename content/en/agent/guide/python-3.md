@@ -11,7 +11,7 @@ To provide flexibility in allowing code to run multiple on versions of the Agent
 
 ## Agent configuration
 
-Starting with v6.14.0, the Agent integrates both Python 2 and Python 3 runtimes. This means that custom Agent Checks can be run either with Python 2 or Python 3, depending on the Agent configuration.
+Starting with v6.14.0, the Agent integrates both Python 2 and Python 3 runtimes. This means that Agent Checks can be run either with Python 2 or Python 3, depending on the Agent configuration.
 
 By default, the Agent v6 uses the Python 2 runtime. To switch to the Python 3 runtime:
 
