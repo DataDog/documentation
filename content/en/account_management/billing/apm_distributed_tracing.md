@@ -9,12 +9,11 @@ kind: faq
 
 | Deployment Environment | APM  | Trace Search and Analytics  | Billing |
 | -----------------------|---------------|-------------------------------------------|-------------|
-|  Host  | $31 per underlying APM host per month | 1 million APM events included per month per host for using Trace Search and Analytics. $1.70 per million APM events per month | 99th percentile of the host count is metered every hour and aggregated at the end of the month. That is, it excludes the top 1% of usage hours each month. |
-| Fargate | $2 per concurrent task per month | No APM events included in pricing. $1.70 per million APM events per month | The total number of concurrent tasks are metered every 5 minutes and averaged over the month.
+|  [Host][11]  | $31 per underlying [APM host][11] per month | 1 million APM events included per month per host for using Trace Search and Analytics. $1.70 per million APM events per month | Datadog records the number of [APM hosts][12] you are concurrently monitoring in the Datadog APM service once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. [More information.][12] |
+| [Fargate][11] | $2 per concurrent task per month | No APM events included in pricing. $1.70 per million APM events per month | Datadog records the number of task instances you are monitoring in the Datadog Infrastructure (or APM) service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored. [More information.][11]
 
 
-Note: If you're using a container based environment, you get billed for underlying host deploying APM agent. That is, physical servers and/or virtual machines those containers run on.
-
+Note: If you're using a [container][11] based environment, you get billed for [underlying host][11] deploying APM agent. 
 
 For more information, see the [Pricing page][4].
 
@@ -29,7 +28,7 @@ Using 5 hosts and sending 30 million APM events.
 | Billable Unit | Quantity | Price | Formula | Subtotal |
 | --------|-----------|------|----------| -------------|
 | APM Hosts | 5 | $31 per host | 5 * $31 | $155 |
-| APM events | 30 million | 5 million included with 5 APM hosts. $1.70 per million for additional 25 million Events | 25 * $1.70 |  $42.50 |
+| APM events | 30 million | 5 million included with 5 APM hosts. $1.70 per million for additional 25 million APM Events | 25 * $1.70 |  $42.50 |
 | Total |  |  |  $155 + $42.50 | **$197.50 per month** |
 
 
@@ -41,7 +40,7 @@ Using 5 hosts, sending 20 million APM events, and have deployed APM on average 2
 | --------|-----------|------|----------| -------------|
 | APM Hosts | 5 | $31 per host | 5 * $31 | $155 |
 | Fargate Tasks | 20 | $2 per task | 20 * $2 | $40 |
-| APM events | 20 million | 5 million included with 5 APM hosts. $1.70 per million for additional 15 million Events | 25 * $1.70 | $25.50 |
+| APM events | 20 million | 5 million included with 5 APM hosts. $1.70 per million for additional 15 million APM Events | 25 * $1.70 | $25.50 |
 | Total |  |  |  $155 + $40 + $25.50 | **$220.50 per month** |
 
 
@@ -52,7 +51,7 @@ Service 1 running on container 1, service 2 running on container 2. Both Contain
 | Billable Unit | Quantity | Price | Formula | Subtotal |
 | --------|-----------|------|----------| -------------|
 | APM Hosts | 1 | $31 per host | 1 * $31 | $31 |
-| APM events | 20 million | 1 million included with 1 APM host. $1.70 per million for additional 19 million Events | 19 * $1.70 | $32.30 |
+| APM events | 20 million | 1 million included with 1 APM host. $1.70 per million for additional 19 million APM Events | 19 * $1.70 | $32.30 |
 | Total |  |  |  $31 + $32.30 | **$63.30 per month** |
 
 
@@ -75,7 +74,7 @@ Agent running on 20 worker nodes in Kubernetes sending 20 million APM events.
 | Billable Unit | Quantity | Price | Formula | Subtotal |
 | --------|-----------|------|----------| -------------|
 | APM Hosts (Nodes) | 20 | $31 per host | 20 * $31 | $720 |
-| APM events | 20 million | 20 million included with 20 APM hosts (nodes). No additional APM events | 0 * $1.70 | 0  |
+| APM events | 20 million | 20 million included with 20 APM hosts (nodes). No additional APM Events | 0 * $1.70 | 0  |
 | Total |  |  |  $720 + $0 | **$720 per month** |
 
 For Kubernetes, APM is priced by nodes not by pods.
@@ -83,7 +82,7 @@ For Kubernetes, APM is priced by nodes not by pods.
 ### FAQs
 **1. What is classified as an APM host for billing?**
 
-Any machine running its own OS - physical machine, virtual machine or cloud instance (virtual machine on a cloud) is considered a host. For billing APM, number of hosts with [APM installed][7] and sending traces are calculated every hour. At the end of the month, you are billed based on your 99th percentile usage. 
+A [host][11] is a physical or virtual operating system instance. Datadog records the number of hosts you are concurrently monitoring in the Datadog Infrastructure service once an hour. For billing APM, number of hosts with [APM installed][7] and sending traces are calculated every hour. At the end of the month, you are billed based on your 99th percentile usage for [APM hosts][12]. 
 
 **2. How is billing calculated if I deploy one agent per container?**
 
@@ -101,7 +100,7 @@ Kubernetes creates pause containers to acquire the respective pod’s IP address
 
 **5. How is the host billing related to my services?**
 
-APM is billed on the basis of hosts deployed with agents sending traces and not services. Trace Search and Analytics is billed on the basis of [APM event][3] count. To estimate how many APM events each of your service can send, use the [Event Estimator][9].
+APM is billed on the basis of [hosts][11] deployed with agents sending traces and not services. Trace Search and Analytics is billed on the basis of [APM event][3] count. To estimate how many APM events each of your service can send, use the [Event Estimator][9].
 
 **6. Can I use Trace Search and Analytics without APM?**
 
@@ -125,6 +124,5 @@ No. Trace Search and Analytics is an additional functionality available along wi
 [8]: /tracing/send_traces/#containers
 [9]: /account_management/billing/
 [10]: /account_management/billing/apm_distributed_tracing/#case-1-hosts-and-apm-events
-
-
-
+[11]: /account_management/billing/pricing/#infrastructure-monitoring
+[12]: /account_management/billing/pricing/#apm
