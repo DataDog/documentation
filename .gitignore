@@ -2,6 +2,7 @@
 public/
 data/integrations/
 data/service_checks/
+integrations_data
 
 # Ignoring all integrations file
 content/integrations/*.md

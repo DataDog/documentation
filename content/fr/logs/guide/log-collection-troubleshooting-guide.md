@@ -180,4 +180,4 @@ Vérifiez que les logs apparaissent bien sur la page [Live Tail de Datadog][11].
 [9]: /fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [10]: https://app.datadoghq.com/account/settings#api
 [11]: https://app.datadoghq.com/logs/livetail
-[12]: /fr/logs/logging_without_limits/#exclusion-filters
+[12]: /fr/logs/indexes/#exclusion-filters

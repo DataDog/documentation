@@ -31,13 +31,21 @@ Integrations with no default limit:
 * [Directory][7]
 * [Linux Proc Extras][8]
 * [Nagios][9]
-* [Prometheus][10]
-* [SNMP][11]
-* [Windows Services][12]
-* [WMI][13]
+* [PDH Check][10]
+* [Prometheus][11]
+* [SNMP][12]
+* [Windows Services][13]
+* [WMI][14]
+
+Many other integrations can be configured to collect custom metrics, for example:
+
+* [MySQL][15]
+* [Oracle][16]
+* [Postgres][17]
+* [SQL Server][18]
 
 ## Troubleshooting
-For technical questions, contact [Datadog support][14].
+For technical questions, contact [Datadog support][19].
 
 For billing questions, contact your [Customer Success][3] Manager.
 
@@ -50,8 +58,13 @@ For billing questions, contact your [Customer Success][3] Manager.
 [7]: /integrations/directory
 [8]: /integrations/linux_proc_extras
 [9]: /integrations/nagios
-[10]: /integrations/prometheus
-[11]: /integrations/snmp
-[12]: /integrations/windows_service
-[13]: /integrations/wmi_check
-[14]: /help
+[10]: /integrations/pdh_check
+[11]: /integrations/prometheus
+[12]: /integrations/snmp
+[13]: /integrations/windows_service
+[14]: /integrations/wmi_check
+[15]: /integrations/mysql
+[16]: /integrations/oracle
+[17]: /integrations/postgres
+[18]: /integrations/sqlserver
+[19]: /help
