@@ -32,7 +32,7 @@ Starting with version 6.1.0, the Agent includes [OpenMetrics][3] and [Prometheus
 
 OpenMetrics is a newer standard for exposing metrics data, influeced by the Prometheus exposition format. The Agent's OpenMetrics check is recommended for text-format metrics and when configuring new checks. Additionaly, OpenMetrics check is recommended for Prometheus metrics end-points that use OpenMetrics format such as with  Kubernetes and many other Cloud Native Computing Foundation (CNCF) projects. OpenMetrics check also supports converting OpenMetrics historgams to Distribution metrics.
 
-Prometheus check is preffered when monitoring existing or legacy applications which use a protobuf format.
+Prometheus check is preferred when monitoring existing or legacy applications that use a protobuf format.
 
 ## Setup
 ### Installation
@@ -46,7 +46,7 @@ If running the Agent as a binary on a host, configure your OpenMetrics or Promet
 {{< tabs >}}
 {{% tab "Host" %}}
 
-First, edit the `openmetrics.d/conf.yaml` or `prometheus.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to configure your Datadog-OpenMetrics or Datadog-Prometheus integrations. Then [restart the Agent][2] to start collecting your metrics. Find below the minimum required configuration needed to enable the integration and see the [sample openmetrics.d/conf.yaml][3] or [sample prometheus.d/conf.yaml][4] for all available configuration options.
+First, edit the `openmetrics.d/conf.yaml` or `prometheus.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to configure your Datadog-OpenMetrics or Datadog-Prometheus integrations. Then [restart the Agent][2] to start collecting your metrics.  See the [sample openmetrics.d/conf.yaml][3] or [sample prometheus.d/conf.yaml][4] for all available configuration options. This is the minimum required configuration needed to enable the integration:
 
 ```yaml
 init_config:
@@ -151,7 +151,7 @@ Find below the full list of parameters that can be used for your `instances`:
 |`prometheus_timeout`|integer|optional|10| Set a timeout in seconds for the Prometheus/OpenMetrics query.|
 |`max_returned_metrics`|integer|optional|2000| The check limits itself to 2000 metrics by default. Increase this limit if needed.|
 
-Note: All parameters but `send_distribution_buckets` are supported by both OpenMetrics check and Prometheus check.
+**Note**: All parameters but `send_distribution_buckets` are supported by both OpenMetrics check and Prometheus check.
 
 ## From custom to official integration
 
