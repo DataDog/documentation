@@ -1,8 +1,7 @@
 ---
 title: Network Map
 kind: documentation
-disable_toc: true
-description:
+description: Map your Network data across all your entities.
 further_reading:
     - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
       tag: "Blog"
@@ -74,4 +73,5 @@ Clicking on an entity reveals further drill-down options:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/network/map

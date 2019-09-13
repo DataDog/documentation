@@ -2,7 +2,7 @@
 title: Network Performance Monitoring Installation
 kind: documentation
 disable_toc: true
-description: Explore metrics for point to point communication on your infrastructure.
+description: Collect your Network Data with the Agent.
 further_reading:
     - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
       tag: "Blog"

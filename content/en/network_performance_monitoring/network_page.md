@@ -2,7 +2,7 @@
 title: Network Page
 kind: documentation
 disable_toc: true
-description:
+description: Explore your Network data between each source and destination across your stack.
 further_reading:
     - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
       tag: "Blog"
