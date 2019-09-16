@@ -35,7 +35,7 @@ For monitor based SLOs, you can select between displaying the monitor’s uptime
 
 The overall uptime value represents the proportion of time that none of the groups in the widget’s scope were in an alert state.
 
-Groups (or aggregated monitors in the case of multi-monitor SLOs) will be sorted by worst status in the shortest time window. You can switch the sorting time window by clicking on that window’s label inside the preview. 
+Groups (or aggregated monitors in the case of multi-monitor SLOs) are sorted by worst status in the shortest time window. You can switch the sorting time window by clicking on that window’s label inside the preview. 
 
 ## Widget configuration for timeboards or screenboards
 
@@ -47,29 +47,29 @@ Monitor uptime is available under the time-based SLI dropdown in the widget. Thi
 
 {{< img src="graphing/widgets/slo/slo_uptime-choose_a_source.png" alt="Choose a monitor" responsive="true" >}}
 
-First, select a [monitor](#supported-monitor-types).
+1. First, select a [monitor](#supported-monitor-types).
 
-Optionally, you can view uptime by monitor groups in three different ways:
+2. Optionally, you can view uptime by monitor groups in three different ways:
 
-* Worst performing five groups
-* Best performing five groups
-* Custom (select up to 20 groups)
+    * Worst performing five groups
+    * Best performing five groups
+    * Custom (select up to 20 groups)
 
-You can view the uptime percentage for the overall monitor, by selected groups, or both. For calculation, the total uptime percentage when selected by the group can be calculated, as well as on the total of the monitors (all groups regardless of what’s selected) or for only the selected groups.
+3. You can view the uptime percentage for the overall monitor, by selected groups, or both. For calculation, the total uptime percentage when selected by the group can be calculated, as well as on the total of the monitors (all groups regardless of what’s selected) or for only the selected groups.
 
-**Note**: The overall uptime value represents the proportion of time that none of the groups in the widget’s scope were in an alert state. 
+    **Note**: The overall uptime value represents the proportion of time that none of the groups in the widget’s scope were in an alert state. 
 
-{{< img src="graphing/widgets/slo/slo_uptime-view_mode.png" alt="View Mode" responsive="true" >}}
+    {{< img src="graphing/widgets/slo/slo_uptime-view_mode.png" alt="View Mode" responsive="true" >}}
 
-You can also query multiple monitors and use the monitor search query to select your specific monitors.
+4. You can also query multiple monitors and use the monitor search query to select your specific monitors.
 
-Visually, you can view the overall uptime percentage only—or the overall percentage, plus the uptime for each monitor.
+5. Visually, you can view the overall uptime percentage only—or the overall percentage, plus the uptime for each monitor.
 
-{{< img src="graphing/widgets/slo/slo_uptime-view_mode2.png" alt="View Mode" responsive="true" >}}
+    {{< img src="graphing/widgets/slo/slo_uptime-view_mode2.png" alt="View Mode" responsive="true" >}}
 
-Datadog recommends searching by [monitor tags][2] to select multiple monitors. For example, you can choose by service: `service:a`.
+    Datadog recommends searching by [monitor tags][2] to select multiple monitors. For example, you can choose by service: `service:a`.
 
-You can select up to 20 monitors.
+    You can select up to 20 monitors.
 
 ## Further Reading
 
