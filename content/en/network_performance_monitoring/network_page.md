@@ -10,9 +10,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
   tag: "Blog"
   text: "Monitoring 101: Alerting on what matters"
-- link: "/api/#monitors"
+- link: "/network_performance_monitoring/network_installation"
   tag: "Documentation"
-  text: "Datadog Monitors API"
+  text: "Collect your Network Data with the Datadog Agent."
 ---
 
 <div class="alert alert-warning">
@@ -70,6 +70,12 @@ On each graph, select the cog icon in the upper right corner of the graph in ord
 {{< img src="network_performance_monitoring/network_page/graph_settings.png" alt="Graph settings" responsive="true" style="width:30%;">}}
 
 ## Data
+
+This section displays the raw data used for the Graphs above. It breaks down the _Throughput_, _Bandwith_, and _Retransmits_ metrics between each _Source_ and _Destination_ defined with your Queries:
+
+{{< img src="network_performance_monitoring/network_page/data_table.png" alt="Data table" responsive="true" style="width:80%;">}}
+
+**Note**: Use the *Show Unresolved Flows* toggle in the uper right corner of the data table to displays network data for flows with only one _Source_ or _Destination_.
 
 ## Further Reading
 

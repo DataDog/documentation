@@ -9,9 +9,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
   tag: "Blog"
   text: "Monitoring 101: Alerting on what matters"
-- link: "/api/#monitors"
+- link: "/network_performance_monitoring/network_installation"
   tag: "Documentation"
-  text: "Datadog Monitors API"
+  text: "Collect your Network Data with the Datadog Agent."
 ---
 
 <div class="alert alert-warning">
