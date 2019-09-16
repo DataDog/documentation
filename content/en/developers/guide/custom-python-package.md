@@ -51,7 +51,7 @@ C:\"Program Files"\Datadog\"Datadog Agent"\embedded\python -m pip install <PACKA
 
 For Agent versions >= 6.12:
 ```
-C:\"Program Files"\Datadog\"Datadog Agent"\embedded2\python -m pip install <PACKAGE_NAME>
+C:\"Program Files"\Datadog\"Datadog Agent"\embedded<PYTHON_MAJOR_VERSION>\python -m pip install <PACKAGE_NAME>
 ```
 
 Or the package can be added in the library zipped folder that can be found at
