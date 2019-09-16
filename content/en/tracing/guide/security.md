@@ -3,11 +3,11 @@ title: Security
 kind: documentation
 ---
 
-Sensitive information within your traces can be scrubbed [automatically](#automatic-scrubbing) or [manually](#replace-rules).
+Sensitive information within your [traces][1] can be scrubbed [automatically](#automatic-scrubbing) or [manually](#replace-rules).
 
 ## Automatic scrubbing
 
-Automatic scrubbing is available for some services, such as ElasticSearch, MongoDB, Redis, Memcached, and HTTP server and client request URLs. Below is an example configuration snippet documenting all the available options.
+Automatic scrubbing is available for some [services][2], such as ElasticSearch, MongoDB, Redis, Memcached, and HTTP server and client request URLs. Below is an example configuration snippet documenting all the available options.
 
 ```yaml
 apm_config:
@@ -52,7 +52,7 @@ apm_config:
 
 ## Replace rules
 
-To scrub sensitive data from your span's tags, use the `replace_tags` setting. It is a list containing one or more groups of parameters that describe how to perform replacements of sensitive data within your tags. These parameters are:
+To scrub sensitive data from your [span][3]'s tags, use the `replace_tags` setting. It is a list containing one or more groups of parameters that describe how to perform replacements of sensitive data within your tags. These parameters are:
 
 * `name`: The key of the tag to replace. To match all tags, use `*`. To match the resource, use `resource.name`.
 * `pattern`: The regexp pattern to match against.
@@ -75,3 +75,7 @@ apm_config:
     - name: "error.stack"
       pattern: "(?s).*"
 ```
+
+[1]: /tracing/visualization/#trace
+[2]: /tracing/visualization/#services
+[3]: /tracing/visualization/#spans

@@ -22,16 +22,10 @@ further_reading:
 
 Indexes are located on the [Configuration page][1] in the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, as well as the retention period for those logs:
 
-{{< img src="logs/indexes/index_details.png" alt="" responsive="true" style="width:70%;">}}
+{{< img src="logs/indexes/index_details.png" alt="index details" responsive="true" style="width:70%;">}}
 
 You can use indexed logs for [faceted searching][2], [Log Analytics][3], [dashboarding][4], and [monitoring][5].
 
-It is also possible to have multiple indexes with different retention periods (**currently in private beta**).
-Logs enter the first index whose filter they match on, so it is important to order your indexes carefully.
-
-For example, if you create a first index filtered to the `status:notice` attribute, a second index filtered to the `status:error` attribute, and a final one without any filter (the equivalent of `*`), all your notice logs would go to the first index, all your error logs to the second index, and the rest would go to the final one.
-
-Multiple indexes also provide the ability to define access rules on the data contained in each index. [More information available in the role base access control documentation][6].
 
 ## Exclusion Filters
 
@@ -41,7 +35,7 @@ For example, if some logs were captured only for troubleshooting purposes, you m
 
 To define a new index filter, click on the "add" button:
 
-{{< img src="logs/indexes/index_filters.png" alt="" responsive="true" style="width:70%;">}}
+{{< img src="logs/indexes/index_filters.png" alt="index filters" responsive="true" style="width:70%;">}}
 
 To configure an exclusion filter:
 
@@ -51,7 +45,7 @@ To configure an exclusion filter:
 3. Define the sampling rate.
 4. Save the filter.
 
-    {{< img src="logs/indexes/index_filter_details.png" alt="" responsive="true" style="width:80%;">}}
+    {{< img src="logs/indexes/index_filter_details.png" alt="index filter details" responsive="true" style="width:80%;">}}
 
 **Note**: If a log matches several exclusion filters, only the first exclusion filter rule is applied. A log is not sampled or excluded multiple times by different exclusion filters.
 
@@ -63,7 +57,7 @@ Reorder your pipeline to make sure the proper exclusion filters apply to your lo
 
 To reorder your exclusion filter, drag and drop them into your preferred order.
 
-{{< img src="logs/indexes/reorder_index_filters.png" alt="" responsive="true" style="width:80%;">}}
+{{< img src="logs/indexes/reorder_index_filters.png" alt="reorder index filters" responsive="true" style="width:80%;">}}
 
 ### Enable/Disable filters
 
@@ -74,7 +68,18 @@ Instead of changing your application logging level or using a complex internal f
 
 Enable or disable them in one click on the Pipeline page:
 
-{{< img src="logs/indexes/enable_index_filters.png" alt="" responsive="true" style="width:80%;">}}
+{{< img src="logs/indexes/enable_index_filters.png" alt="enable index filters" responsive="true" style="width:80%;">}}
+
+## Multi indexes
+
+It is also possible to have multiple indexes with different retention periods (**currently in private beta**).
+Logs enter the first index whose filter they match on, so it is important to order your indexes carefully.
+
+For example, if you create a first index filtered to the `status:notice` attribute, a second index filtered to the `status:error` attribute, and a final one without any filter (the equivalent of `*`), all your notice logs would go to the first index, all your error logs to the second index, and the rest would go to the final one.
+
+{{< img src="logs/indexes/multi_index.png" alt="Multi indexes" responsive="true" style="width:70%;">}}
+
+Multiple indexes also provide the ability to define access rules on the data contained in each index. [More information available in the role base access control documentation][6].
 
 ## Further Reading
 

@@ -12,6 +12,8 @@ import shutil
 import requests
 import yaml
 import pickle
+import markdown2
+
 from collections import OrderedDict
 from functools import partial, wraps
 from itertools import chain, zip_longest
@@ -176,9 +178,7 @@ class PreBuild:
         self.options = opts
         self.list_of_contents = []
         self.tempdir = (
-            "/tmp"
-            if platform.system() == "Darwin"
-            else tempfile.gettempdir()
+            "./integrations_data"
         )
         self.data_dir = "{0}{1}{2}".format(
             abspath(normpath(options.source)),
@@ -342,7 +342,7 @@ class PreBuild:
         )
 
     @staticmethod
-    def csv_to_yaml(key_name, csv_filename, yml_filename):
+    def metric_csv_to_yaml(key_name, csv_filename, yml_filename):
         """
         Given a file path to a single csv file convert it to a yaml file
 
@@ -357,6 +357,11 @@ class PreBuild:
                 dict(line) for line in reader
             ]
         if yaml_data[key_name]:
+            # Transforming the metric description to html in order to interpret markdown in
+            # integrations metrics table.
+            # the char strip is to compensate for the lib adding <p> </p><br> tags
+            for metric in yaml_data[key_name]:
+                metric['description'] = str(markdown2.markdown(metric['description']))[3:-5]
             with open(
                 file=yml_filename,
                 mode="w",
@@ -817,7 +822,7 @@ class PreBuild:
         new_file_name = "{}{}.yaml".format(
             self.data_integrations_dir, key_name
         )
-        self.csv_to_yaml(key_name, file_name, new_file_name)
+        self.metric_csv_to_yaml(key_name, file_name, new_file_name)
 
     def process_integration_manifest(self, file_name):
         """
