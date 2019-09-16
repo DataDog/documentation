@@ -84,7 +84,7 @@ Ou des conteneurs :
 {{< img src="tagging/using_tags/containermaptags.png" alt="Tags Map des conteneurs" responsive="true" style="width:80%;">}}
 {{% /tab %}}
 
-{{% tab "Liste des infrastructures" %}}
+{{% tab "Liste d'infrastructures" %}}
 
 Voici les zones de texte de filtrage et de regroupement de la page de la liste d'infrastructures :
 
@@ -198,7 +198,7 @@ Lors de la création d'un graphique de [notebook][12], limitez des métriques en
 
 Pour exclure des tags, utilisez `</>` afin de modifier le texte, puis ajoutez le tag en respectant le format `!<KEY>:<VALUE>`. Dans l'exemple ci-dessous, `service:coffeehouse` est exclu par l'expression `!service:coffeehouse`.
 
-{{< img src="tagging/using_tags/notebooktagsexclude.gif" alt="Tags exclusion notebook" responsive="true" style="width:80%;">}}
+{{< img src="tagging/using_tags/notebooktagsexclude.mp4" alt="Le notebook exclut les tags" video="true" responsive="true" width="80%">}}
 
 ## Logs
 
@@ -222,7 +222,7 @@ Pour [les recherches][13], [les analyses][14], [les modèles][15] et le [Live Ta
 {{% /tab %}}
 {{% tab "Live Tail" %}}
 
-{{< img src="tagging/using_tags/livetailtags.gif" alt="Tags Live Tail" responsive="true" style="width:80%;">}}
+{{< img src="tagging/using_tags/livetailtags.mp4" alt="Live Tail Tags" video="true" responsive="true" width="80%">}}
 
 {{% /tab %}}
 {{< /tabs >}}

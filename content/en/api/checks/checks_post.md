@@ -22,12 +22,13 @@ external_redirect: /api/#post-a-check-run
     * 2 : CRITICAL
     * 3 : UNKNOWN
 
-
+* **`tags`** *[required]*:
+    A list of key:val tags for this check
+    
 * **`timestamp`** *[optional]*:
     POSIX timestamp of the event.
 
 * **`message`** *[optional]*:
     A description of why this status occurred
 
-* **`tags`** *[optional]*:
-    A list of key:val tags for this check
+

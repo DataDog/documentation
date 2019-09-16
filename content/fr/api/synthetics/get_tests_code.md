@@ -1,8 +1,8 @@
 ---
-title: Passer tous les tests
+title: Obtenir tous les tests
 type: apicode
 order: 29.7
-external_redirect: "/api/#passer-tests"
+external_redirect: "/api/#obtenir-tous-les-tests"
 ---
 
 ##### Signature
