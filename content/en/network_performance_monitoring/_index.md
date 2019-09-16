@@ -21,8 +21,8 @@ This feature is currently in beta. Request access by completing the <a href="htt
 
 ## Overview
 
-Datadog Network Performance Monitoring (NPM) is designed to give you visibility into your network traffic across any tagged object in Datadog: from containers to hosts to services to availability zones. Connection data is aggregated into flows, each showing traffic between one _source_ and one _destination_, through a customizable [network table][1] and [network map][2].
-Each flow contains network metrics such as throughput, bandwidth, retransmit count, and source/destination information down to the IP, port, and pid levels.
+Datadog Network Performance Monitoring (NPM) is designed to give you visibility into your network traffic across any tagged object in Datadog: from containers to hosts and services to availability zones. Connection data is aggregated into flows, each showing traffic between one _source_ and one _destination_, through a customizable [network table][1] and [network map][2].
+Each flow contains network metrics such as throughput, bandwidth, retransmit count, and source/destination information down to the IP, port, and PID levels.
 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="network_performance_monitoring/installation" >}}<u>Installation</u>: Configure the Agent to collect network data.{{< /nextlink >}}
