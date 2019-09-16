@@ -1050,7 +1050,7 @@ main:
     parent: "npm"
     identifier: "npm_installation"
     weight: 1
-  - name: "Network Page"
+  - name: "Network Table"
     url: "network_performance_monitoring/network_page"
     parent: "npm"
     identifier: "npm_page"

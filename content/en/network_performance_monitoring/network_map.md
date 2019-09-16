@@ -38,7 +38,7 @@ To configure your Network Map use the header:
 
 Use the page header to configure your Network Map:
 
-1. Choose wich tag key to display as **Nodes** with the most left selector on the upper left side of the page. Tag keys available are coming from the tags submitted with your Network data.
+1. Choose which tag key to display as **Nodes** with the most left selector on the upper left side of the page. Tag keys available are coming from the tags submitted with your Network data.
 2. Select the data to display as **Edges** between:
     * Throughtput sent
     * Throughtput received
