@@ -32,8 +32,6 @@ The network map visualizes data collected by the Datadog Agent automatically. On
 
 {{< img src="network_performance_monitoring/network_map/configure_network_map.png" alt="configure_network_map" responsive="true" style="width:70%;">}}
 
-### Tags to display
-
 Use the page header to configure your network map:
 
 1. Choose the tag key to display as **Nodes** with the first selector at the top of the page. Available tag keys come from the tags submitted with your network data.
@@ -41,15 +39,10 @@ Use the page header to configure your network map:
     * Throughtput sent
     * Throughtput received
     * Retransmits
-3. Filter the connections you want to display.
-
-#### Filter connections
-
-To filter the connections displayed, you can choose:
-
-* Whether or not to **Show Unresolved Flows**.
-* Hide network flows outside spegcified percentile range of the active network metric.
-* Filter your tags based on a fuzzy string match.
+3. Filter the connections you want to display:
+    * Whether or not to **Show Unresolved Flows**.
+    * Hide network flows outside spegcified percentile range of the active network metric.
+    * Filter your tags based on a fuzzy string match.
 
 ## Inspection
 
