@@ -23,7 +23,7 @@ python_version: 3
 
 2. [Restart the Agent][2].
 
-Alternatively, the `DD_PYTHON_VERSION` environment variable can be set to `2` or `3` to choose which Python runtime is used. If it is set, the `python_version` option in `datadog.yaml` will be ignored.
+Alternatively, the `DD_PYTHON_VERSION` environment variable can be set to `2` or `3` to choose which Python runtime is used. If it is set, the `python_version` option in `datadog.yaml` is ignored.
 
 This is an Agent-wide configuration option: **all Python checks launched by an Agent use the same Python runtime**.
 
@@ -31,8 +31,8 @@ This is an Agent-wide configuration option: **all Python checks launched by an A
 
 The official Containerized Agent images only include one of the two Python runtimes. To switch to one of the other runtime, choose the appropriate Agent image:
 
-* **Python 2** runtime: Agent v6 images have the following format: `datadog/agent:<VERSION>`, or `datadog/agent:<VERSION>-jmx` for images supporting JMX checks.
-* **Python 3** runtime: Agent v6 images have the following format: `datadog/agent:<VERSION>-py3`, or `datadog/agent:<VERSION>-py3-jmx` for images supporting JMX checks.
+* **Python 2** runtime: Agent v6 images have the following format: `datadog/agent:<AGENT_VERSION>`, or `datadog/agent:<AGENT_VERSION>-jmx` for images supporting JMX checks.
+* **Python 3** runtime: Agent v6 images have the following format: `datadog/agent:<AGENT_VERSION>-py3`, or `datadog/agent:<AGENT_VERSION>-py3-jmx` for images supporting JMX checks.
 
 For example, for the Containerized Agent v6.14.0, select the `datadog/agent:6.14.0` or `datadog/agent:6.14.0-jmx` images to use the default Python runtime (Python 2), and select the `datadog/agent:6.14.0-py3` or `datadog/agent:6.14.0-py3-jmx` images to use the Python 3 runtime.
 
