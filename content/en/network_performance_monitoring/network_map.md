@@ -15,20 +15,23 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is currently in beta. Request access by filling out the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Beta Request form</a>.
+This feature is currently in beta. Request access by completing the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Beta Request form</a>.
 </div>
 
-[The Network map][1] provides a topology view of your network. With this map, you can visualize network partitions, dependencies, and bottlenecks.
+## Overview
+
+The [network map][1] provides a topology view of your network. With this map, you can visualize network partitions, dependencies, and bottlenecks.
+
+The network map was built to provide an overview of your tags and their network data. This helps to cut through noise and isolate problem areas. Also, you can access other telemetry collected by Datadog directly from this view.
 
 {{< img src="network_performance_monitoring/network_map/network_map.png" alt="network_map" responsive="true">}}
 
 ## Setup
 
-The Network Map visualizes data collected by Datadog Network automatically, once installed no extra steps are necessary.
+The Network Map visualizes data collected by the Datadog network automatically. Once installed, no extra steps are necessary.
 
-## Ways to use it
+## Configuration
 
-The Network Map was built to provide an overview of your tags and their network data. This helps to cut through noise and isolate problem areas. Also, you can access other telemetry collected by Datadog directly from this view.
 
 To configure your Network Map use the header:
 
@@ -38,7 +41,7 @@ To configure your Network Map use the header:
 
 Use the page header to configure your Network Map:
 
-1. Choose which tag key to display as **Nodes** with the most left selector on the upper left side of the page. Tag keys available are coming from the tags submitted with your Network data.
+1. Choose the tag key to display as **Nodes** with the first selector at the top of the page. Available tag keys come from the tags submitted with your network data.
 2. Select the data to display as **Edges** between:
     * Throughtput sent
     * Throughtput received
@@ -47,19 +50,19 @@ Use the page header to configure your Network Map:
 
 #### Filter connections
 
-To filter the connections displayed you can choose either:
+To filter the connections displayed you can choose:
 
-* Whether or not to display Unresolved flow.
+* Whether or not to **Show Unresolved Flows**.
 * Hide network flows outside specified percentile range of the active network metric.
-* Filter your Tags based on a fuzzy string match.
+* Filter your tags based on a fuzzy string match.
 
 ## Inspection
 
-Mousing over a tag highlights it and shows its network traffic as animated lines to better emphasize directionality:
+Mousing over a tag highlights it and shows the network traffic as animated lines to emphasize directionality:
 
 {{< img src="network_performance_monitoring/network_map/network_map_highlight.mp4" alt="Service Map" video="true" responsive="true" width="70%" >}}
 
-Clicking a tag offers you the option to inspect it by isolating it and displaying the network data from other tags according to the type of data selected:
+Clicking a tag displays a menu with the option to inspect the tag by isolating it and displaying the network data from other tags according to the type of data selected. Below is an example result of inspecting a tag:
 
 {{< img src="network_performance_monitoring/network_map/network_entity_zoom.png" alt="network_entity_zoom" responsive="true" style="width:70%;">}}
 

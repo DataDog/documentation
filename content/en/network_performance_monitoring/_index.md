@@ -16,17 +16,17 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is currently in beta. Request access by filling out the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Beta Request form</a>.
+This feature is currently in beta. Request access by completing the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Beta Request form</a>.
 </div>
 
 ## Overview
 
-Datadog Network Performance Monitoring (NPM) is designed to give you visibility into your network traffic across any tagged object in Datadog. Connection data is aggregated into flows, each showing traffic between one _source_ and one _destination_, through a customizable [Network table][1] as well as a [Network map][2].
+Datadog Network Performance Monitoring (NPM) is designed to give you visibility into your network traffic across any tagged object in Datadog. Connection data is aggregated into flows, each showing traffic between one _source_ and one _destination_, through a customizable [Network table][1] and [Network map][2].
 
 {{< whatsnext desc="This section includes the following topics:">}}
-    {{< nextlink href="network_performance_monitoring/network_installation" >}}<u>Installation</u>: Learn how to configure the Agent to collect network data.{{< /nextlink >}}
-    {{< nextlink href="network_performance_monitoring/network_page" >}}<u>Network Table</u>: Graph your network data between each source and destination available{{< /nextlink >}}
-    {{< nextlink href="network_performance_monitoring/network_map" >}}<u>Network Map</u>: Map your network data between your Tags.{{< /nextlink >}}
+    {{< nextlink href="network_performance_monitoring/network_installation" >}}<u>Installation</u>: Configure the Agent to collect network data.{{< /nextlink >}}
+    {{< nextlink href="network_performance_monitoring/network_page" >}}<u>Network Table</u>: Graph your network data between each source and destination available.{{< /nextlink >}}
+    {{< nextlink href="network_performance_monitoring/network_map" >}}<u>Network Map</u>: Map your network data between your tags.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading

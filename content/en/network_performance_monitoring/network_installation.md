@@ -13,10 +13,10 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is currently in beta. Request access by filling out the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Beta Request form</a>.
+This feature is currently in beta. Request access by completing the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Beta Request form</a>.
 </div>
 
-Network performance monitoring requires Datadog Agent v6.13+. To enable network performance monitoring, configure it in your [Agent main configuration file][1] based on your system setup:
+Network performance monitoring requires Datadog Agent v6.13+. To enable network performance monitoring, configure it in your [Agent's main configuration file][1] based on your system setup:
 
 {{< tabs >}}
 {{% tab "Agent" %}}
@@ -25,7 +25,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 
 1. Copy the system-probe example configuration:<br>
 `sudo -u dd-agent cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml`
-2. Modify the system-probe configuration file to set the enable flag to `true`:<br>
+2. Modify the system-probe configuration file to set the enable flag to `true`.<br>
 
 3. Optionally uncomment the `system_probe_config` parameter to add a custom object:
     ```
@@ -45,7 +45,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
     ```
 
 5. Start the system-probe: `sudo service datadog-agent-sysprobe start`
-6. [Restart the Agent][1]: `sudo service datadog-agent restart`
+6. [Restart the Agent][1].
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
 {{% /tab %}}
@@ -120,13 +120,13 @@ spec:
         - {name: debugfs, hostPath: {path: /sys/kernel/debug}}
 ```
 
-Don't forget to replace `<DATADOG_API_KEY>` with the [API key associated to your Datadog Account][1].
+Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-To enable Network Performance monitoring in Docker, use the following configuration when starting the container Agent:
+To enable network performance monitoring in Docker, use the following configuration when starting the container Agent:
 
 ```
 $ docker run -e DD_API_KEY="<DATADOG_API_KEY>" \
@@ -144,7 +144,7 @@ $ docker run -e DD_API_KEY="<DATADOG_API_KEY>" \
 	datadog/agent:latest
   ```
 
-Don't forget to replace `<DATADOG_API_KEY>` with the [API key associated to your Datadog Account][1].
+Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
