@@ -46,7 +46,7 @@ The facet panels mirror your chosen context. Switch between the facet panels wit
 Your network metrics are displayed through the graphs and the associated table. All data is shown from the `sent` and `received` perspective between the _source_ and _destination_:
 
 - **Sent metrics**: measure the value of something from the _source_ to the _destination_.
-- **Received metrics**: measure the value of something from the _destination_ to the _source_ as measured from the source.
+- **Received metrics**: measure the value of something from the _destination_ to the _source_ from the source's perspective.
 
 Values displayed might be different for `sent_metric(source to destination)` and `received_metric(destination to source)` if there is a large number of packet drops. In this case, if the `destination` sends a lot of bytes to the `source`, the flows that originate at `destination` include those bytes, but the flows that originate at `source` do not see them as received.
 
