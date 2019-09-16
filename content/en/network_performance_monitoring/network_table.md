@@ -43,9 +43,9 @@ The facet panels mirror your chosen context. Switch between the facet panels wit
 
 {{< img src="network_performance_monitoring/network_table/network_data.png" alt="network data" responsive="true" style="width:90%;" >}}
 
-Your network metrics are displayed through the graphs and the associated table. All data is shown from the `sent` and `received` perspective between the _source_ and _destination_:
+Your network metrics are displayed through the graphs and the associated table. All data is shown from the `sent` and `received` angle from the source perspective:
 
-- **Sent metrics**: measure the value of something from the _source_ to the _destination_.
+- **Sent metrics**: measure the value of something from the _source_ to the _destination_ from the source's perspective.
 - **Received metrics**: measure the value of something from the _destination_ to the _source_ from the source's perspective.
 
 Values displayed might be different for `sent_metric(source to destination)` and `received_metric(destination to source)` if there is a large number of packet drops. In this case, if the `destination` sends a lot of bytes to the `source`, the flows that originate at `destination` include those bytes, but the flows that originate at `source` do not see them as received.
@@ -64,21 +64,19 @@ The following graphs are available:
 | **Bandwidth** | The rate of bytes sent or received over a period. Measured in bytes per second, bidirectional. |
 | **Retransmits** | TCP is a connection-oriented protocol that guarantees in-order delivery of packets. Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the `source`. |
 
-### Graph Settings
-
-On each graph, select the settings cog in the upper right corner of the graph to change the Y-axis scale or the graph type displayed:
+On each graph, select the settings cog in the upper right corner to change the Y-axis scale or the graph type displayed:
 
 {{< img src="network_performance_monitoring/network_table/graph_settings.png" alt="Graph settings" responsive="true" style="width:30%;">}}
 
 ### Table
 
-The network table breaks down the _Throughput_, _Bandwith_, and _Retransmits_ metrics between each _Source_ and _Destination_ defined with your queries:
+The network table breaks down the _Throughput_, _Bandwith_, and _Retransmits_ metrics between each _source_ and _destination_ defined by your context.
 
 {{< img src="network_performance_monitoring/network_table/data_table.png" alt="Data table" responsive="true" style="width:80%;">}}
 
 **Note**: Use the *Show Unresolved Flows* toggle in the upper right corner of the data table to displays network data for flows with only one _source_ or _destination_.
 
-Select any line from the data table to get more in depth monitoring of a given _source_ <=> _destination_ network flow:
+Select any line from the data table to get more in depth monitoring of a given _source_ <=> _destination_ flow:
 
 {{< img src="network_performance_monitoring/network_table/flow_details.png" alt="Flow Details" responsive="true" style="width:80%;">}}
 
