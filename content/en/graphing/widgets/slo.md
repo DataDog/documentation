@@ -19,19 +19,28 @@ Service Level Objectives are now generally available.
 
 Use the SLO and uptime widget to track your SLOs (Service Level Objectives) and uptime on screenboards and timeboards. Go to Datadog’s [Service Level Objectives page][1] to create new SLOs and view all existing ones. Select an existing SLO from the dropdown and display it on any dashboard.
 
-Any time window that’s been configured for your SLOs will be available for viewing on the widget, but you can select and deselect them depending on what you want to see. You can also enable calendar time windows like a week-to-date, month-to-date, previous week, and the previous month. These will be made available depending on the time windows you have previously configured. For instance, the 7-day window will enable week-to-date while the 30-day one will enable month-to-date, etc. Additional calendar windows will be available as the underlying data permits.
+Any time window that’s been configured for your SLOs is available to view on the widget, but you can select and deselect them depending on what you want to see. You can also enable calendar time windows that are made available depending on the time windows you previously configured:
+
+| Time Window     | Enabled by      |
+| ---------------- | -------------- |
+| week-to-date     | 7-day window |
+| month-to-date    | xxx |
+| previous week    | xxx |
+| previous month   | xxx |
+
+Additional calendar windows are available as the underlying data permits.
 
 To reconfigure your targets or enable more time windows, edit the source SLO. 
 
 SLOs in the preview can be clicked to open their related detail panels.
 
-*Uptime* defined as the amount of time a monitor was in an *up* state (OK) compared to *down* state (non-OK). Similar to the monitor status page visualization, the status is represented in bars as green (up) and red (down). Example: ’99 % of the time latency is less than 200ms.`
+*Uptime* is defined as the amount of time a monitor was in an *up* state (OK) compared to *down* state (non-OK). Similar to the monitor status page visualization, the status is represented in bars as green (up) and red (down). Example: ’99 % of the time latency is less than 200ms.`
 
-You can also track success rate and event-based SLIs (Service Level Indicators). Example: ’99 % of requests are successful.`
+You can also track success rate and event-based SLIs (Service Level Indicators). Example: `99 % of requests are successful.`
 
 ### Viewing options
 
-For monitor based SLOs, you can select between displaying the monitor’s uptime percentage, its worst-performing groups, or both. Those options are also available for SLOs aggregating multiple monitors so you can view those monitors individually instead of the groups. 
+For monitor based SLOs, you can select between displaying the monitor’s uptime percentage, its worst-performing groups, or both. These options are also available for SLOs aggregating multiple monitors so you can view the monitors individually instead of the groups. 
 
 The overall uptime value represents the proportion of time that none of the groups in the widget’s scope were in an alert state.
 
@@ -55,7 +64,7 @@ Monitor uptime is available under the time-based SLI dropdown in the widget. Thi
     * Best performing five groups
     * Custom (select up to 20 groups)
 
-3. You can view the uptime percentage for the overall monitor, by selected groups, or both. For calculation, the total uptime percentage when selected by the group can be calculated, as well as on the total of the monitors (all groups regardless of what’s selected) or for only the selected groups.
+3. You can view the uptime percentage for the overall monitor, by selected groups, or both. For calculation, the total uptime percentage can be calculated by selected group, the total monitors (all groups regardless of what’s selected), or for the selected groups only.
 
     **Note**: The overall uptime value represents the proportion of time that none of the groups in the widget’s scope were in an alert state. 
 
@@ -69,7 +78,7 @@ Monitor uptime is available under the time-based SLI dropdown in the widget. Thi
 
     Datadog recommends searching by [monitor tags][2] to select multiple monitors. For example, you can choose by service: `service:a`.
 
-    You can select up to 20 monitors.
+    You can select up to 20 monitors at once.
 
 ## Further Reading
 

@@ -16,11 +16,11 @@ aliases:
 Service Level Objectives are now generally available.
 </div>
 
-## Configuring Service Level Objectives (SLOs) 
+## Configuration
 
 Select time or event based SLIs: 
 
-### Time based SLIs use Datadog Monitors
+### Time based SLIs
 
 Example: the latency of all user requests should be less than 250ms 99% of the time in any 30 day window.
 
