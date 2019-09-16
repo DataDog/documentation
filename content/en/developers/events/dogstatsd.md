@@ -1,5 +1,5 @@
 ---
-title: Events submission with DogStatsD
+title: Events with DogStatsD
 kind: documentation
 description: Overview of the features of DogStatsD, including data types and tagging.
 further_reading:
@@ -14,26 +14,31 @@ further_reading:
   text: "DogStatsD source code"
 ---
 
+## Submission
+
 After [installing DogStatsD][1], you can emit events to your [Datadog event stream][2] with the following function:
 
 ```
 event(Title, Text, Timestamp, Hostname, AggregationKey, Priority, SourceTypeName, AlertType, Tags)
 ```
 
-| Parameter        | Type            | Required | Description                                                                                             |
-| ---------        | ---             | -------  | --------                                                                                                |
-| `Title`          | String          | yes      | The title of the event.                                                                                 |
-| `Text`           | String          | yes      | The text body of the event.                                                                             |
-| `Timestamp`      | Integer         | yes      | The epoch timestamp for the event. If not provided, the DogStatsD server sets this to the current time. |
-| `Hostname`       | String          | no       | The name of the host.                                                                                   |
-| `AggregationKey` | String          | no       | A key to use for aggregating events.                                                                    |
-| `Priority`       | String          | no       | Specifies the priority of the event (`normal` or `low`).                                                |
-| `SourceTypeName` | String          | no       | The [source type][3] name.                                                                              |
-| `AlertType`      | String          | no       | One of (`error`, `warning`, `success`, `info`), defaults to `info`.                                     |
-| `Tags`           | List of Strings | no       | A list of tags to associate with this event.                                                            |
+**Definitions**:
 
-For example, you may want to see errors and exceptions in Datadog:
+| Parameter      | Type            | Required | Description                                                                                             |
+|----------------|-----------------|----------|---------------------------------------------------------------------------------------------------------|
+| Title          | String          | Yes      | The title of the event                                                                                  |
+| Text           | String          | Yes      | The text body of the event                                                                              |
+| Timestamp      | Integer         | Yes      | The epoch timestamp for the event (defaults to the current time from the DogStatsD server) |
+| Hostname       | String          | No       | The name of the host                                                                                    |
+| AggregationKey | String          | No       | A key to use for aggregating events                                                                     |
+| Priority       | String          | No       | Specifies the priority of the event (`normal` or `low`).                                                |
+| SourceTypeName | String          | No       | The [source type][3] name                                                                               |
+| AlertType      | String          | No       | `error`, `warning`, `success`, or `info` (defaults to `info`)                                           |
+| Tags           | List of strings | No       | A list of tags associated with this event.                                                              |
 
+### Examples
+
+View errors and exceptions in Datadog with a DogStatsD event:
 
 {{< tabs >}}
 {{% tab "Python" %}}

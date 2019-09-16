@@ -32,7 +32,7 @@ The following table lists Datadog-official and community contributed log managem
 Using Datadog [APIs][3], it's possible to write a script to backup your Dashboard definitions as code. See the following projects as examples of how these backups can be accomplished:
 
 | Language   | Library          | Author          |
-| ---        | ---              | ---             |
+|------------|------------------|-----------------|
 | JavaScript | [dog-watcher][4] | [Brightcove][5] |
 | Ruby       | [doggy][6]       | [Shopify][7]    |
 | Ruby       | [kennel][8]      | [Zendesk][9]    |
@@ -43,7 +43,7 @@ Using Datadog [APIs][3], it's possible to write a script to backup your Dashboar
 There are multiple community projects available to maintain, manage, or backup monitors using the Datadog [API][3]:
 
 | Language  | Library          | Author               |
-| ---       | ---              | ---                  |
+|-----------|------------------|----------------------|
 | Python    | [DogPush][10]    | [TrueAccord][11]     |
 | Ruby      | [barkdog][12]    | [codenize-tools][13] |
 | Ruby      | [interferon][14] | [Airbnb][15]         |
@@ -105,7 +105,7 @@ A Moogsoft [listener][42] that ingests Datadog notifications.
 
 ### NGINX LUA
   * Emit [custom metrics][43] directly from NGINX configurations using the [nginx_lua_datadog][44] module in your LUA scripts.
-  * [lua-resty-dogstatsd][45] is an extension developed by [mediba inc][46], which enables emiting metrics, events, and Service Checks to [DogStatsD][1] protocol. lua-resty-dogstatsd is released as GPLv3 and relies on the nginx cosocket API.
+  * [lua-resty-dogstatsd][45] is an extension developed by [mediba inc][46], which enables emiting metrics, events, and service checks to [DogStatsD][1] protocol. lua-resty-dogstatsd is released as GPLv3 and relies on the nginx cosocket API.
 
 ### OpenVPN
   * Send OpenVPN [bandwidth usage][47] and the count of active connections to Datadog.

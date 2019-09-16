@@ -313,7 +313,7 @@ DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced f
 
 {{< whatsnext desc="">}}
     {{< nextlink href="/developers/metrics/dogstatsd_metrics_submission/" >}}Send metrics to Datadog with DogStatsD.{{< /nextlink >}}
-    {{< nextlink href="/developers/events/dogstatsd_events_submission/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
+    {{< nextlink href="/developers/events/dogstatsd/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
     {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Send service checks to Datadog with DogStatsD.{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -322,7 +322,7 @@ If you're interested in learning more about the datagram format used by DogStats
 [1]: https://github.com/etsy/statsd
 [2]: /developers/metrics/dogstatsd_metrics_submission
 [3]: /developers/metrics/custom_metrics
-[4]: /developers/events/dogstatsd_events_submission
+[4]: /developers/events/dogstatsd
 [5]: /developers/service_checks/dogstatsd_service_checks_submission
 [6]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
 [7]: /developers/dogstatsd/unix_socket

@@ -1121,22 +1121,22 @@ main:
     identifier: "dev_tools_events"
     weight: 3
 
-  - name: "Submission - Agent Check"
-    url: "developers/events/agent_events_submission/"
+  - name: "Custom Agent Check"
+    url: "developers/events/agent/"
     parent: "dev_tools_events"
     identifier: "dev_tools_events_agent"
     weight: 301
-  - name: "Submission - DogStatsD"
-    url: "developers/events/dogstatsd_events_submission/"
+  - name: "DogStatsD"
+    url: "developers/events/dogstatsd/"
     parent: "dev_tools_events"
     identifier: "dev_tools_events_dogstatsd"
     weight: 302
-  - name: "Submission - Mail"
-    url: "developers/events/email_events_submission/"
+  - name: "Email"
+    url: "developers/events/email/"
     parent: "dev_tools_events"
     identifier: "dev_tools_events_mail"
     weight: 303
-  - name: "Submission - API"
+  - name: "API"
     url: "https://docs.datadoghq.com/api/#post-an-event"
     parent: "dev_tools_events"
     identifier: "dev_tools_events_api"
