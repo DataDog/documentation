@@ -116,7 +116,21 @@ TBD - Java
 {{% tab "Python" %}}
 
 ```python
-TBD - Python
+from ddtrace import tracer
+
+class BackupLedger:
+    def __init__(self):
+        self.ledger = dict()
+        
+    # Use `ddtrace.tracer.wrap` decorator to trace custom methods
+    @ddtrace.tracer.wrap()
+    def write(self, transactions):
+        for transaction in transactions:
+            # Use `ddtrace.tracer.trace` context manager to trace blocks of inline code
+            with ddtrace.trace.trace('persist_transaction') as span:
+                # Add custom metadata to the "persist_transaction" span
+                span.set_tag('transaction.id', transaction.id)
+                self.ledger[transaction.id] = transaction
 ```
 
 {{% /tab %}}
