@@ -6,7 +6,7 @@ external_redirect: /api/#activer-un-embed
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/graph/embed/<EMBED_ID>/enable`
+`GET /v1/graph/embed/<ID_EMBED>/enable`
 ##### Exemple de requête
 {{< code-snippets basename="api-embeds-enable" >}}
 ##### Exemple de réponse
