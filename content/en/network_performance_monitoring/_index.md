@@ -29,7 +29,7 @@ Datadog Network Performance Monitoring (NPM) is designed to give you visibility 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="network_performance_monitoring/network_installation" >}}<u>Installation</u>: Learn how to configure the Agent to collect network data.{{< /nextlink >}}
     {{< nextlink href="network_performance_monitoring/network_page" >}}<u>Network table view</u>: Graph your network data between each source and destination available{{< /nextlink >}}
-    {{< nextlink href="network_performance_monitoring/network_map" >}}<u>Network Map</u>: Map your network data between your entities.{{< /nextlink >}}
+    {{< nextlink href="network_performance_monitoring/network_map" >}}<u>Network Map</u>: Map your network data between your Tags.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading
