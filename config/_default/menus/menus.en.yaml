@@ -1046,12 +1046,12 @@ main:
     weight: 120000
 
   - name: "Installation"
-    url: "network_performance_monitoring/network_installation"
+    url: "network_performance_monitoring/installation"
     parent: "npm"
     identifier: "npm_installation"
     weight: 1
   - name: "Network Table"
-    url: "network_performance_monitoring/network_page"
+    url: "network_performance_monitoring/network_table"
     parent: "npm"
     identifier: "npm_page"
     weight: 2

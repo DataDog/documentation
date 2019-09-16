@@ -10,7 +10,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
   tag: "Blog"
   text: "Monitoring 101: Alerting on what matters"
-- link: "/network_performance_monitoring/network_installation"
+- link: "/network_performance_monitoring/installation"
   tag: "Documentation"
   text: "Collect your Network Data with the Datadog Agent."
 ---
@@ -43,10 +43,12 @@ The facet panels mirror your chosen context. Switch between the facet panels wit
 
 {{< img src="network_performance_monitoring/network_table/network_data.png" alt="network data" responsive="true" style="width:90%;" >}}
 
-Your network data is displayed through the graphs and the associated table. All data is shown from the `sent` and `received` perspective between the _source_ and _destination_:
+Your network metrics are displayed through the graphs and the associated table. All data is shown from the `sent` and `received` perspective between the _source_ and _destination_:
 
-- `Sent` metrics measure the value of something from the _source_ to the _destination_.
-- `Received` metrics measure the value of something from the _destination_ to the _source_ as measured from the source.
+- **Sent metrics**: measure the value of something from the _source_ to the _destination_.
+- **Received metrics**: measure the value of something from the _destination_ to the _source_ as measured from the source.
+
+Values displayed might be different for `sent_metric(source to destination)` and `received_metric(destination to source)` if there is a large number of packet drops. In this case, if the `destination` sends a lot of bytes to the `source`, the flows that originate at `destination` include those bytes, but the flows that originate at `source` do not see them as received.
 
 **Note**: The default collection interval is five minutes and retention is seven days.
 
@@ -61,8 +63,6 @@ The following graphs are available:
 | **Throughput** | The number of bytes sent or received over a period. Measured in bytes (or orders of magnitude thereof) bidirectional.|
 | **Bandwidth** | The rate of bytes sent or received over a period. Measured in bytes per second, bidirectional. |
 | **Retransmits** | TCP is a connection-oriented protocol that guarantees in-order delivery of packets. Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the `source`. |
-
-**Note**: Values displayed might be different for `metric(a to b)` and `metric(b to a)` if there is a large number of packet drops. In this case, if `b` sends a lot of bytes to `a`, the flows that originate at `b` include those bytes, but the flows that originate at `a` do not see them as received.
 
 ### Graph Settings
 
