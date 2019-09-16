@@ -155,7 +155,7 @@ COR_PROFILER_PATH=C:\Program Files\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler
 DD_INTEGRATIONS=C:\Program Files\Datadog\.NET Tracer\integrations.json
 ```
 
-For example, to set them from a batch file before starting you application:
+For example, to set them from a batch file before starting your application:
 
 ```bat
 rem Set environment variables
@@ -194,7 +194,7 @@ CORECLR_PROFILER_PATH=C:\Program Files\Datadog\.NET Tracer\Datadog.Trace.ClrProf
 DD_INTEGRATIONS=C:\Program Files\Datadog\.NET Tracer\integrations.json
 ```
 
-For example, to set them from a batch file before starting you application:
+For example, to set them from a batch file before starting your application:
 
 ```bat
 rem Set environment variables
@@ -222,7 +222,7 @@ CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
 DD_INTEGRATIONS=/opt/datadog/integrations.json
 ```
 
-For example, to set them from a bash file before starting you application:
+For example, to set them from a bash file before starting your application:
 
 ```bash
 # Set environment variables

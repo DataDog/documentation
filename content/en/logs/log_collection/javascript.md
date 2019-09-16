@@ -35,13 +35,7 @@ With the `datadog-logs` library, you can send logs directly to Datadog from JS c
 
 ## Get a Client Token
 
-For security reasons, [API keys][1] cannot be used to configure the `datadog-logs` library, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][2] must be used.
-
-To manage your client tokens, go to your [Datadog API configuration page][3] in the `Client Tokens` section as shown here:
-
-{{< img src="logs/log_collection/client_tokens.png" style="width:80%;" alt="Client tokens" responsive="true" >}}
-
-Read the [Client tokens documentation][2] to learn more about the restrictions that apply.
+For security reasons, [API keys][1] cannot be used to configure the `datadog-logs` library, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][2] must be used. For more information about setting up a client tolken, see the [Client tokens documentation][2].
 
 ## Configure the JavaScript logger
 
@@ -260,4 +254,3 @@ The `datadog-logs` library supports all modern desktop and mobile browsers. IE10
 
 [1]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
 [2]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
-[3]: https://app.datadoghq.com/account/settings#api

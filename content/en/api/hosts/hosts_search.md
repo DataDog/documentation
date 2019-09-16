@@ -22,3 +22,5 @@ This endpoint allows searching for hosts by name, alias, or tag. Hosts live with
     Host result to start search from.
 * **`count`** [*optional*, *default*=**100**]:
     Number of host results to return. Max 100.
+* **`from`** [*optional*, *default*=**now - 2 hours**]:
+    Number of seconds since UNIX epoch from which you want to search your hosts.

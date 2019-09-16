@@ -22,15 +22,15 @@ APM is enabled by default after Datadog Agent 5.13 (on Linux and Docker), but ca
 
 ### Installing the Agent
 
-Tracing metrics are sent to the Datadog through the Datadog Agent. To enable tracing:
+[Tracing metrics][4] are sent to the Datadog through the Datadog Agent. To enable tracing:
 
-Install the latest [Datadog Agent][4] (version 5.11.0+ is required).
+Install the latest [Datadog Agent][5] (version 5.11.0+ is required).
 
 ### Running the Agent in Docker
 
-To trace applications in Docker containers, use the [docker-dd-agent][5] image (tagged version 11.0.5110+) and enable tracing by passing `DD_APM_ENABLED=true` as an environment variable.
+To trace applications in Docker containers, use the [docker-dd-agent][6] image (tagged version 11.0.5110+) and enable tracing by passing `DD_APM_ENABLED=true` as an environment variable.
 
-For additional information, reference [the Docker page][6].
+For additional information, reference [the Docker page][7].
 
 ### Instrument your application
 
@@ -45,7 +45,7 @@ For additional information, reference [the Docker page][6].
     {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-To instrument an application written in a language that does not yet have official library support, reference the [Tracing API][7].
+To instrument an application written in a language that does not yet have official library support, reference the [Tracing API][8].
 
 ## Configuration
 
@@ -66,23 +66,24 @@ Additionally, some configuration options may be set as environment variables. No
 
 {{% /table %}}
 
-For more information about the Datadog Agent, see the [dedicated doc page][8] or refer to the [`datadog.conf.example` file][9].
+For more information about the Datadog Agent, see the [dedicated doc page][9] or refer to the [`datadog.conf.example` file][10].
 
 ### Trace search
-Trace search is available for Agent 5.25.0+. For more information, see the set up instructions in the main [APM documentation][10].
+Trace search is available for Agent 5.25.0+. For more information, see the set up instructions in the main [APM documentation][11].
 
 ## Troubleshooting
-Need help? Contact [Datadog support][11].
+Need help? Contact [Datadog support][12].
 
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/docs/trace-agent#run-on-macos
 [2]: https://github.com/DataDog/datadog-agent/tree/master/docs/trace-agent#run-on-windows
 [3]: /agent/faq/where-is-the-configuration-file-for-the-agent
-[4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://hub.docker.com/r/datadog/docker-dd-agent
-[6]: /tracing/docker
-[7]: /api/?lang=console#traces
-[8]: /agent
-[9]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
-[10]: /tracing/setup/?tab=agent5250#trace-search
-[11]: /help
+[4]: /tracing/visualization/#trace-metrics
+[5]: https://app.datadoghq.com/account/settings#agent
+[6]: https://hub.docker.com/r/datadog/docker-dd-agent
+[7]: /tracing/docker
+[8]: /api/?lang=console#traces
+[9]: /agent
+[10]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
+[11]: /tracing/setup/?tab=agent5250#trace-search
+[12]: /help
