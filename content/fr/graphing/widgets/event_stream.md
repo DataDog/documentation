@@ -38,7 +38,7 @@ Définissez sa taille et son alignement en option.
 
 ## API
 
-La [définition du schéma JSON du widget][2] dédiée pour le widget du flux d'événements est :
+Le [schéma JSON][2] utilisé pour le widget Flux d'événements est le suivant :
 
 ```
 EVENT_STREAM_SCHEMA = {
