@@ -28,18 +28,18 @@ The network map was built to provide an overview of your tags and their network 
 
 ## Setup
 
-The Network Map visualizes data collected by the Datadog network automatically. Once installed, no extra steps are necessary.
+The network map visualizes data collected by the Datadog network automatically. Once installed, no extra steps are necessary.
 
 ## Configuration
 
 
-To configure your Network Map use the header:
+To configure your network map use the header:
 
 {{< img src="network_performance_monitoring/network_map/configure_network_map.png" alt="configure_network_map" responsive="true" style="width:70%;">}}
 
 ### Tags to display
 
-Use the page header to configure your Network Map:
+Use the page header to configure your network map:
 
 1. Choose the tag key to display as **Nodes** with the first selector at the top of the page. Available tag keys come from the tags submitted with your network data.
 2. Select the data to display as **Edges** between:
