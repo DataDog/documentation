@@ -77,6 +77,7 @@ class BackupLedger:
 ```ruby
 class BackupLedger
   def write(transactions)
+    # Use global `Datadog.tracer.trace` to trace blocks of inline code
     Datadog.tracer.trace('BackupLedger.write') do |span|
       transactions.each do |transaction|
         ledger[transaction.id] = transaction
@@ -196,6 +197,7 @@ class BackupLedger:
 ```ruby
 class BackupLedger
   def write(transactions)
+    # Use global `Datadog.tracer.trace` to trace blocks of inline code
     Datadog.tracer.trace('BackupLedger.write') do |method_span|
       transactions.each do |transaction|
         Datadog.tracer.trace('BackupLedger.persist') do |span|
