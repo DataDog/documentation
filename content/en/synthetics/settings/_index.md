@@ -17,18 +17,18 @@ further_reading:
   text: "Identify Synthetics Bots"
 ---
 
-In Synthetics settings, you can adjust the following settings:
+On the [Synthetics settings page][1], you can adjust the following settings:
 
 - [Secure credentials](#secure-credentials)
-- [Private locations][1]
-- [Variables][2]
+- [Private locations][2]
+- [Variables][3]
 - [Default settings](#default-settings)
     - [Default locations](#default-locations)
     - [APM integration for Browser Tests](#apm-integration-for-browser-tests)
 
 ## Secure Credentials
 
-Secure Credentials are a secure Username / password pair that can be used as [variables][2] for Browser Tests. These credentials are secured by Datadog so that only a subset of chosen users in your organization can access them. To create a new Secure Credential
+Secure Credentials are a secure Username / password pair that can be used as [variables][3] for Browser Tests. These credentials are secured by Datadog so that only a subset of chosen users in your organization can access them. To create a new Secure Credential
 
 1. Click on *New Secure Credential* in the upper right corner of the Setting page.
 2. Enter a **Credential Name**.
@@ -55,5 +55,6 @@ If the endpoint is being traced and whitelisted, your browser test results are t
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: /synthetics/private_locations
-[2]: /synthetics/browser_tests/#variable
+[1]: https://app.datadoghq.com/synthetics/settings
+[2]: /synthetics/private_locations
+[3]: /synthetics/browser_tests/#variable
