@@ -1,5 +1,5 @@
 ---
-title: Settings
+title: Synthetics Settings
 kind: documentation
 disable_toc: true
 further_reading:
