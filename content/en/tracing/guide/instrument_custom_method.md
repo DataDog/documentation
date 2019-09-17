@@ -39,7 +39,19 @@ Note that the `http.request POST /charge/` span is taking a lot of time without 
 {{% tab "Java" %}}
 
 ```java
-TBD - Java
+import datadog.trace.api.Trace
+
+public class BackupLedger {
+
+  // Use @Trace annotation to trace custom methods
+  @Trace
+  public void write(List<Transaction> transactions) {
+    for (Transaction transaction : transactions) {
+      ledger.put(transaction.getId(), transaction);
+    }
+  }
+
+}
 ```
 
 {{% /tab %}}
@@ -117,7 +129,26 @@ In this example walks through adding child spans to the `BackupLedger.write` spa
 {{% tab "Java" %}}
 
 ```java
-TBD - Java
+import datadog.trace.api.Trace;
+import io.opentracing.Scope;
+import io.opentracing.util.GlobalTracer;
+
+public class BackupLedger {
+
+  // Use `@Trace` annotation to trace custom methods
+  @Trace
+  public void write(List<Transaction> transactions) {
+    for (Transaction transaction : transactions) {
+      // Use `GlobalTracer` to trace blocks of inline code
+      try (Scope scope = GlobalTracer.get().buildSpan('BackupLeger.persist').startActive(true)) {
+        // Add custom metadata to the span
+        scope.span().setTag("transaction.id", transaction.getId());
+        ledger.put(transaction.getId(), transaction);
+      }
+    }
+  }
+
+}
 ```
 
 {{% /tab %}}
