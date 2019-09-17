@@ -11,6 +11,7 @@ further_reading:
   text: "Track the status of your SLOs with the new monitor uptime widget"
 ---
 
+
 ## Setup
 
 Use the SLO and uptime widget to track your SLOs (Service Level Objectives) and uptime on screenboards and timeboards. You can use SLO by adding a widget to a dashboard, or by going to Datadog’s [Service Level Objectives page][1] to create new SLOs and view all existing ones. Select an existing SLO from the dropdown and display it on any dashboard.
@@ -84,3 +85,4 @@ To submit a feature request, reach out to [Datadog Support][2].
 [1]: https://app.datadoghq.com/slo
 [2]: /monitors
 [3]: https://app.datadoghq.com/monitors#create/metric
+
