@@ -17,9 +17,18 @@ further_reading:
   text: "Identify Synthetics Bots"
 ---
 
-## Secure Credential
+In Synthetics settings, you can adjust the following settings:
 
-Secure Credentials are a secure Username / password pair that can be used as [variables][1] for Browser Tests. These credentials are secured by Datadog so that only a subset of chosen users in your organization can access them. To create a new Secure Credential
+- [Secure credentials](#secure-credentials)
+- [Private locations][1]
+- [Variables][2]
+- [Default settings](#default-settings)
+    - [Default locations](#default-locations)
+    - [APM integration for Browser Tests](#apm-integration-for-browser-tests)
+
+## Secure Credentials
+
+Secure Credentials are a secure Username / password pair that can be used as [variables][2] for Browser Tests. These credentials are secured by Datadog so that only a subset of chosen users in your organization can access them. To create a new Secure Credential
 
 1. Click on *New Secure Credential* in the upper right corner of the Setting page.
 2. Enter a **Credential Name**.
@@ -29,7 +38,22 @@ Secure Credentials are a secure Username / password pair that can be used as [va
 
 {{< img src="synthetics/settings/credential.png" alt="Credential" responsive="true" style="width:80%;">}}
 
+## Default settings
+
+### Default locations
+
+Decide on the locations you want your Browser and API tests details to have on by default. Options include all of the available Managed Locations Datadog offers and the Private Locations that you set up for your account.
+
+### APM integration for Browser Tests
+
+Whitelist URLs to add APM integration headers to that URL. Datadog's APM integration headers allow Datadog to link Browser tests with APM. Define which endpoints should be sent the APM headers by adding a URL into this section. 
+
+Use `*` to whitelist wider domain names. For example, adding `https://*.datadoghq.com/*` whitelists everything on `https://datadoghq.com/`.
+
+If the endpoint is being traced and whitelisted, your browser test results are then automatically tied to its corresponding trace.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: /synthetics/browser_tests/#variable
+[1]: /synthetics/private_locations
+[2]: /synthetics/browser_tests/#variable
