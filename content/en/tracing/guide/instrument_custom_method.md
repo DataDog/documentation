@@ -106,13 +106,29 @@ TBD - js
 
 Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
-[1]: https://docs.datadoghq.com/help
 
+[1]: https://docs.datadoghq.com/help
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 ```php
-TBD - PHP
+class BackupLedger {
+  # [...]
+  public function write(array $transactions) {
+    foreach ($transactions as $transaction) {
+      $this->transactions[$transaction->getId()] = $transaction;
+    }
+    # [...]
+  }
+}
+
+// Use dd_trace() to trace custom methods
+dd_trace('BackupLedger', 'write', function () {
+  $tracer = \DDTrace\GlobalTracer::get();
+  $scope = $tracer->startActiveSpan('BackupLedger.write');
+  dd_trace_forward_call();
+  $scope->close();
+});
 ```
 
 {{% /tab %}}
@@ -242,7 +258,20 @@ public void Write(List<Transaction> transactions)
 {{% tab "PHP" %}}
 
 ```php
-TBD - PHP
+class BackupLedger {
+  # [...]
+  public function write(array $transactions) {
+    foreach ($transactions as $transaction) {
+      // Use global tracer to trace blocks of inline code
+      $scope = \DDTrace\GlobalTracer::get()->startActiveSpan('BackupLedger.persist');
+      // Add custom metadata to the span
+      $scope->getSpan()->setTag('transaction.id', $transaction->getId());
+      $this->transactions[$transaction->getId()] = $transaction;
+      $scope->close();
+    }
+    # [...]
+  }
+}
 ```
 
 {{% /tab %}}
