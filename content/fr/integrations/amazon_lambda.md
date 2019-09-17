@@ -7,7 +7,7 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: 'Mesurez les durées d''exécution des Lambdas, les erreurs, les nombres d''appels, et plus encore.'
+description: 'Mesurez les temps d''exécution, les erreurs et les nombres d''appels de vos fonctions Lambda, ainsi que d''autres paramètres.'
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_lambda/'
 further_reading:
   - link: 'https://www.datadoghq.com/blog/how-to-monitor-lambda-functions/'
@@ -15,16 +15,16 @@ further_reading:
     text: Comment surveiller des fonctions Lambda
   - link: 'https://www.datadoghq.com/blog/datadog-lambda-layer/'
     tag: Blog
-    text: "Couche Lambda de Datadog\_: surveillez les métriques custom sans serveur"
+    text: "Couche Lambda Datadog\_: surveiller des métriques custom sans serveur"
 git_integration_title: amazon_lambda
 has_logo: true
-integration_title: AWS Lambda
+integration_title: "Amazon\_Lambda"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_lambda
-public_title: Intégration Datadog/AWS Lambda
-short_description: 'Mesurez les durées d''exécution des Lambdas, les erreurs, les nombres d''appels, et plus encore.'
+public_title: "Intégration Datadog/Amazon\_Lambda"
+short_description: 'Mesurez les temps d''exécution, les erreurs et les nombres d''appels de vos fonctions Lambda, ainsi que d''autres paramètres.'
 version: '1.0'
 ---
 ## Présentation
@@ -32,6 +32,17 @@ version: '1.0'
 Amazon Lambda est un service de calcul qui exécute du code en réponse à des événements et qui gère automatiquement les ressources de calcul requises par ce code.
 
 Activez cette intégration pour commencer à recueillir des métriques custom et Cloudwatch depuis vos fonctions Lambda.
+
+Datadog prend en charge les fonctionnalités suivantes en fonction du langage de votre fonction Lambda AWS :
+
+|                                    | Python                                                                                             | Node                                                                                               | Java                                    | Go                                                                                               | Ruby                                                     | .NET Core                             |
+|------------------------------------|----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|-----------------------------------------|--------------------------------------------------------------------------------------------------|----------------------------------------------------------|-----------------------------------------|
+| [Métriques de runtime Lambda](#metrics) | {{< X >}}                                                                                          | {{< X >}}                                                                                          | {{< X >}}                               | {{< X >}}                                                                                        | {{< X >}}                                                | {{< X >}}                               |
+| [Tracing](#trace-collection)       | {{< X >}}                                                                                          | {{< X >}}                                                                                          | {{< X >}}                               | {{< X >}}                                                                                        | {{< X >}}                                                | {{< X >}}                               |
+| [Métriques custom](#custom-metrics)  | [Couche Lambda](#installing-and-using-the-datadog-layer)                                            | [Couche Lambda](#installing-and-using-the-datadog-layer)                                            | [Envoyées via logs](#using-cloudwatch-logs) | [Package Go](#installing-and-using-the-datadog-layer)                                            | [Couche Lambda](#installing-and-using-the-datadog-layer)  | [Envoyées via logs](#using-cloudwatch-logs) |
+| [Journalisation](#log-collection)         | {{< X >}}                                                                                          | {{< X >}}                                                                                          | {{< X >}}                               | {{< X >}}                                                                                        | {{< X >}}                                                | {{< X >}}                               |
+
+Le tracing distribué de bout en bout vous permet de tracer les requêtes qui s'étendent sur l'ensemble de votre infrastructure, à la fois sur les fonctions Lambda et sur les hosts exécutant l'Agent Datadog. Les traces X-Ray sont intégrées aux traces APM de Datadog, ce qui vous permet de bénéficier d'une vue globale de votre système.
 
 ## Implémentation
 ### Installation
@@ -49,102 +60,211 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
     | `lambda:List*`            | Énumère les tags, les métadonnées et les fonctions Lambda.                  |
     | `logs:DescribeLogGroups`  | Énumère les groupes de logs disponibles.                                  |
     | `logs:DescribeLogStreams` | Énumère les flux de logs disponibles pour un groupe.                     |
-    | `logs:FilterLogEvents`    | Recueille des événements de log spécifiques pour qu'un flux génère des métriques. |
+    | `logs:FilterLogEvents`    | Récupère des événements de log spécifiques depuis un flux pour générer des métriques. |
     | `tag:GetResources`        | Récupère des tags personnalisés appliqués aux fonctions Lambda.                |
 
-3. Installez l'[intégration AWS Lambda/Datadog][5].
+3. Installez l'[intégration Datadog/AWS Lambda][5].
 
-Une fois l'installation terminée, vous pouvez consulter toutes vos fonctions Lambda dans l'[IU Serverless de Datadog][6]. Cette IU regroupe en une unique vue les métriques, les traces et les logs de vos fonctions AWS Lambda qui exécutent des applications sans serveur. Pour en savoir plus sur cette fonctionnalité, consultez la [documentation relative aux fonctions cloud de Datadog][7].
+Une fois l'installation terminée, vous pouvez consulter l'ensemble de vos fonctions Lambda depuis l'[interface Serverless de Datadog][6]. Cette interface regroupe en une vue unique les métriques, les traces et les logs de vos fonctions Lambda AWS qui exécutent des applications sans serveur. Pour en savoir plus sur cette fonctionnalité, consultez la [documentation relative aux fonctions sans serveur de Datadog][7].
 
 ### Collecte de logs
 
 1. Configurez [la fonction Lambda de collecte de logs AWS avec Datadog][8] si vous ne l'avez pas déjà fait.
 2. Une fois la fonction Lambda installée, vous pouvez transmettre vos logs Lambda à Datadog de deux façons différentes :
 
-    * Solution automatique : nous gérons des déclencheurs Lambda pour la collecte de logs si vous nous accordez les autorisations nécessaires. [Consultez le principal service Web d'Amazon pour configurer la collecte automatique de logs ][9].
+    * Solution automatique : nous gérons des déclencheurs Lambda pour la collecte de logs si vous nous accordez les autorisations nécessaires. [Consultez la page principale Amazon Web Services pour configurer la collecte automatique de logs][9].
     * Solution manuelle : ajoutez manuellement un déclencheur sur le groupe de logs Cloudwatch qui contient vos logs Lambda dans la console AWS. Pour ce faire, suivez [ces étapes][10].
 
-Accédez ensuite à votre [section Log de Datadog][11] pour commencer à explorer vos logs.
+Accédez ensuite à la [section Logs de Datadog][11] pour commencer à explorer vos logs.
 
 ### Collecte de traces
 
-Datadog s'intègre à [AWS X-Ray][12] pour recueillir et visualiser vos traces sans serveur à partir d'applications basées sur Lambda dans l'[IU Serverless][6]. Vous pouvez en savoir plus sur la configuration de cette intégration dans la [documentation relative aux fonctions Datadog Cloud][7].
+Datadog s'intègre à [AWS X-Ray][12] pour vous permettre de recueillir et visualiser vos traces sans serveur à partir d'applications basées sur Lambda dans l'[interface Serverless][6]. Pour en savoir plus sur la configuration de cette intégration, consultez la [documentation relative aux fonctions Datadog sans serveur][7].
 
 ### Métriques custom
 
-Si votre fonction Lambda utilise un runtime Python, installez la couche Lambda de Datadog pour recueillir et envoyer des métriques custom. Si vous utilisez un autre runtime, enregistrez vos métriques custom sous un format spécifique pour qu'elles puissent être recueillies et analysées sous forme de métriques par Datadog.
+Si votre fonction Lambda utilise un runtime Python, installez la couche Lambda de Datadog pour recueillir et envoyer des métriques custom. Les métriques envoyées à partir de la couche Lambda de Datadog sont automatiquement agrégées sous la forme de [distributions][13], ce qui vous permet de représenter graphiquement les valeurs de moyenne, somme, maximum, minimum et total, ainsi que les 50e, 75e, 95e et 99e centiles. Si vous utilisez un autre runtime, enregistrez vos métriques custom sous un format spécifique pour qu'elles puissent être recueillies et analysées en tant que métriques par Datadog.
 
 #### Installer et utiliser la couche Datadog
 
-La couche Lambda de Datadog prend actuellement en charge les versions 2.7, 3.6 et 3.7 de Python. Si vous souhaitez que Datadog prenne en charge un certain runtime, contactez l'[équipe d'assistance Datadog][13].
+La couche Lambda de Datadog prend en charge Python, Node et Ruby. Go est également pris en charge avec un [package][23] à inclure dans votre projet. Si vous souhaitez que Datadog prenne en charge un certain runtime, contactez l'[équipe d'assistance Datadog][14].
 
-1.  Naviguez jusqu'à la fonction Lambda à laquelle vous souhaitez ajouter la couche dans votre console AWS.
-2.  Cliquez sur **Layers** sur la page principale de votre fonction.
-Faites défiler la page et cliquez sur **Provide a layer version ARN**.
-4.  Saisissez un ARN au format suivant et choisissez la région et la version Python de votre choix :
+1. Accédez à la fonction Lambda à laquelle vous souhaitez ajouter la couche dans votre console AWS.
+2. Cliquez sur **Layers** sur la page principale de votre fonction.
+3. Faites défiler la page et cliquez sur **Provide a layer version ARN**.
+4. Saisissez un ARN au format suivant et choisissez la région, le runtime et la dernière version de la couche Lambda disponibles dans le tableau ci-dessous :
 
     ~~~
-    arn:aws:lambda:<YOUR_AWS_REGION>:464622532012:layer:Datadog-Python36-metric:1
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
     ~~~
 
-5.  Naviguez jusqu'à la section **Environment Variables** de votre fonction et définissez deux variables d'environnement :
-      * DATADOG_API_KEY
-      * DATADOG_APP_KEY
+   Par exemple :
 
-  Vous trouverez ces valeurs dans la [page API de l'application Datadog][14].
+    ~~~
+    arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:3
+    ~~~
 
-Dans le code de votre fonction, vous devez importer les méthodes nécessaires à partir de la couche et ajouter un wrapper autour du gestionnaire de votre fonction :
+    | Langage | Runtime                                                    | Versions             |
+    |----------|------------------------------------------------------------|----------------------|
+    | Python   | `Python27`, `Python36`, `Python37`                         | [Dernière version][21] |
+    | Node     | `Node8-10`, `Node10-x`                                     | [Dernière version][22] |
+    | Ruby     | `Ruby`                                                     | [Dernière version][25] |
+
+    **Utilisateurs Go :** Go étant compilé de manière statique, vous devez inclure le [package][23] dans votre projet au lieu d'utiliser une couche Lambda.
+
+5. Accédez à la section **Environment Variables** de votre fonction et définissez les variables d'environnement suivantes avec votre [clé d'API Datadog][15] :
+    * DD_API_KEY ou DD_KMS_API_KEY (si la clé est chiffrée via KMS)
+6. Pour les **métriques custom totalement asynchrones et recueillies quasiment en temps réel**, vous pouvez définir la variable d'environnement `DD_FLUSH_TO_LOG` sur `True`. Les métriques seront envoyées via les logs CloudWatch au lieu des appels d'API. **Remarque** : cette option nécessite l'installation de la **dernière version** de la [fonction Lambda de collecte de logs AWS avec Datadog][8]. Si vous souhaitez que les métriques soient uniquement transmises à partir des logs CloudWatch, vous **DEVEZ** configurer la variable d'environnement `DD_FORWARD_LOG` sur `False` sur la [fonction Lambda de collecte de logs AWS avec Datadog[8] afin d'empêcher l'envoi des logs traditionnels à Datadog. 
+
+Dans le code de votre fonction, vous devez importer les méthodes nécessaires à partir de la couche et ajouter un wrapper autour du gestionnaire de votre fonction.
+
+{{< tabs >}}
+{{% tab "Python" %}}
 
 ```python
-from datadog import datadog_lambda_wrapper, lambda_metric
+from datadog_lambda.metric import lambda_metric
+from datadog_lambda.wrapper import datadog_lambda_wrapper
+
 
 @datadog_lambda_wrapper
 def lambda_handler(event, context):
-
+    lambda_metric(
+        "coffee_house.order_value",             # Nom de la métrique
+        12.45,                                  # Valeur de la métrique
+        tags=['product:latte', 'order:online']  # Tags associés
+    )
 ```
 
-Utilisez ensuite la méthode `lambda_metric` pour envoyer des métriques custom depuis votre fonction vers Datadog :
+{{% /tab %}}
+{{% tab "Node" %}}
+
+```javascript
+const { datadog, sendDistributionMetric } = require("datadog-lambda-js");
+
+async function myHandler(event, context) {
+  sendDistributionMetric(
+    "coffee_house.order_value",       // Nom de la métrique
+    12.45,                            // Valeur de la métrique
+    "product:latte", "order:online"   // Tags associés
+  );
+  return {
+    statusCode: 200,
+    body: "hello, dog!",
+  };
+}
+// Inclure la fonction de votre gestionnaire dans un wrapper :
+module.exports.myHandler = datadog(myHandler);
+
+/* OU utiliser les options de configuration manuelle
+module.exports.myHandler = datadog(myHandler, {
+    apiKey: "my-api-key"
+});
+*/
+```
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+```go
+package main
+
+import (
+  "github.com/aws/aws-lambda-go/lambda"
+  "github.com/DataDog/datadog-lambda-go"
+)
+
+func main() {
+  // Inclure la fonction de votre gestionnaire dans un wrapper :
+  lambda.Start(ddlambda.WrapHandler(myHandler, nil))
+  /* OU utiliser les options de configuration manuelle
+  lambda.Start(ddlambda.WrapHandler(myHandler, &ddlambda.Config{
+    BatchInterval: time.Second * 15
+    APIKey: "my-api-key",
+  }))
+  */
+}
+
+func myHandler(ctx context.Context, event MyEvent) (string, error) {
+  ddlambda.Distribution(
+    "coffee_house.order_value",     // Nom de la métrique
+    12.45,                          // Valeur de la métrique
+    "product:latte", "order:online" // Tags associés
+  )
+  // ...
+}
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+```ruby
+require 'datadog/lambda'
+
+def handler(event:, context:)
+    # Inclure la fonction de votre gestionnaire dans un wrapper :
+    Datadog::Lambda.wrap(event, context) do
+        Datadog::Lambda.metric(
+          'coffee_house.order_value',         # Nom de la métrique
+          12.45,                              # Valeur de la métrique
+          "product":"latte", "order":"online" # Tags associés
+        )
+        return { statusCode: 200, body: 'Hello World' }
+    end
+end
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Les arguments des méthodes d'envoi des métriques custom doivent respecter le format suivant :
 
 ```
-lambda_metric(nom_métrique, valeur_métrique, tags=[])
+lambda_metric(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, tags=[<LISTE_TAGS>])
 ```
 
 Où :
 
-* `<nom_métrique>` identifie de façon unique votre métrique et respecte la [stratégie de nommage des métriques][15].
+* `<NOM_MÉTRIQUE>` identifie de façon unique votre métrique et respecte la [stratégie de nommage des métriques][16].
 
-* `<valeur_métrique>` DOIT être un nombre (c'est-à-dire un nombre entier ou une valeur de type float).
+* `<VALEUR_MÉTRIQUE>` DOIT être un nombre (c'est-à-dire un nombre entier ou une valeur de type float).
 
-* `<liste_tags>` est facultatif et formaté, par exemple : `['owner:Datadog', 'env:demo', 'cooltag']`.
+* `<LISTE_TAGS>` est facultatif et formaté, par exemple : `['owner:Datadog', 'env:demo', 'cooltag']`.
 
-**Remarque** : à l'heure actuelle, jusqu'à 4 tags peuvent être appliqués à une métrique. Si vous avez besoin de plus de 4 tags sur ces métriques, contactez l'[équipe d'assistance Datadog][13] pour augmenter cette limite pour votre organisation.
+**Remarque** : à l'heure actuelle, jusqu'à 3 tags peuvent être appliqués à une métrique. Si vous souhaitez appliquer davantage de tags à ces métriques, contactez l'[équipe d'assistance Datadog][14] pour augmenter cette limite pour votre organisation.
 
-Vous trouverez des instructions détaillées pour installer et configurer les couches Lambda dans la [documentation principale d'AWS][16].
+Vous trouverez des instructions détaillées pour installer et configurer les couches Lambda dans la [documentation principale d'AWS][17].
+
+#### Exécution dans un VPC
+
+Si votre fonction Lambda est associée à un VPC et envoie des métriques custom de manière synchrone, vérifiez qu'elle a bien [accès à Internet][24].
+
 
 #### Utiliser les logs CloudWatch
 
 Pour envoyer des métriques custom à Datadog à partir de vos logs Lambda, affichez une ligne de log Lambda, en utilisant le format suivant :
 
 ```
-MONITORING|<timestamp_unix_epoch>|<valeur>|<type_métrique>|<nom_métrique>|#<liste_tags>
+MONITORING|<TIMESTAMP_UNIX_EPOCH>|<VALEUR_MÉTRIQUE>|<TYPE_MÉTRIQUE>|<NOM_MÉTRIQUE>|#<LISTE_TAGS>
 ```
 
 Où :
 
 * `MONITORING` signale à l'intégration Datadog que cette entrée de log doit être recueillie.
 
-* `<timestamp_unix_epoch>` est à définir en secondes, et non en millisecondes.
+* `<TIMESTAMP_UNIX_EPOCH>` est à définir en secondes, et non en millisecondes.
 
-* `<valeur>` DOIT être un nombre (c'est-à-dire un nombre entier ou une valeur de type float).
+* `<VALEUR_MÉTRIQUE>` DOIT être un nombre (c'est-à-dire un nombre entier ou une valeur de type float).
 
-* `<type_métrique>` correspond à `count`, `gauge`, `histogram` ou `check`.
+* `<TYPE_MÉTRIQUE>` correspond à `count`, `gauge`, `histogram` ou `check`.
 
-* `<nom_métrique>` identifie de façon unique votre métrique et respecte la [stratégie de nommage des métriques][15].
+* `<NOM_MÉTRIQUE>` identifie de façon unique votre métrique et respecte la [stratégie de nommage des métriques][16].
 
-* `<liste_tags>` est facultatif, doit être précédé du caractère `#` et ses valeurs sont séparées par une virgule.
+* `<LISTE_TAGS>` est facultatif et précédé du caractère `#`, et ses valeurs sont séparées par une virgule.
     Le tag `function_name:<nom_de_la_fonction>` est automatiquement appliqué aux métriques custom.
 
-**Remarque** : la somme de chaque timestamp est utilisée pour les counters et la dernière valeur d'un timestamp donné est utilisée pour les gauges. Nous ne conseillons pas d'afficher une déclaration de log chaque fois que vous incrémentez une métrique, car cela augmente la durée d'analyse de vos logs. Mettez à jour de façon continue la valeur de la métrique dans votre code et affichez une déclaration de log pour cette métrique avant la fin de la fonction.
+**Remarque** : la somme de chaque timestamp est utilisée pour les totaux et la dernière valeur d'un timestamp donné est utilisée pour les gauges. Nous ne conseillons pas d'afficher une déclaration de log chaque fois que vous incrémentez une métrique, car cela augmente la durée d'analyse de vos logs. Mettez à jour de façon continue la valeur de la métrique dans votre code et affichez une déclaration de log pour cette métrique avant la fin de la fonction.
+
+Pour fonctionner dans un [VPC][19], la couche Lambda doit avoir accès à [Internet][20]. Si vous utilisez un VPC, loguez vos métriques custom dans les logs CloudWatch afin de permettre à Datadog de les analyser.
 
 ## Données collectées
 ### Métriques
@@ -162,28 +282,37 @@ L'intégration AWS Lambda n'inclut aucun événement.
 L'intégration AWS Lambda n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][13].
+Besoin d'aide ? Contactez [l'assistance Datadog][14].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-
-{{< get-dependencies >}}
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_lambda.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_lambda
 [6]: https://app.datadoghq.com/functions
-[7]: https://docs.datadoghq.com/fr/graphing/infrastructure/cloudfunctions
+[7]: https://docs.datadoghq.com/fr/graphing/infrastructure/serverless
 [8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#set-up-the-datadog-lambda-function
 [9]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#automatically-setup-triggers
 [10]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#manually-setup-triggers
 [11]: https://app.datadoghq.com/logs
 [12]: https://aws.amazon.com/xray
-[13]: https://docs.datadoghq.com/fr/help
-[14]: https://app.datadoghq.com/account/settings#api
-[15]: https://docs.datadoghq.com/fr/developers/metrics
-[16]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[13]: https://docs.datadoghq.com/fr/developers/metrics/distributions
+[14]: https://docs.datadoghq.com/fr/help
+[15]: https://app.datadoghq.com/account/settings#api
+[16]: https://docs.datadoghq.com/fr/developers/metrics
+[17]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[18]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_lambda/amazon_lambda_metadata.csv
+[19]: https://docs.datadoghq.com/fr/integrations/amazon_vpc/
+[20]: https://aws.amazon.com/premiumsupport/knowledge-center/internet-access-lambda-function/
+[21]: https://github.com/DataDog/datadog-lambda-layer-python/releases
+[22]: https://github.com/DataDog/datadog-lambda-layer-js/releases
+[23]: https://github.com/DataDog/datadog-lambda-go/releases
+[24]: https://aws.amazon.com/premiumsupport/knowledge-center/internet-access-lambda-function/
+[25]: https://github.com/DataDog/datadog-lambda-layer-rb/releases
+
+
+{{< get-dependencies >}}
