@@ -63,7 +63,15 @@ class BackupLedger:
 {{% tab "Ruby" %}}
 
 ```ruby
-TBD - Ruby
+class BackupLedger
+  def write(transactions)
+    Datadog.tracer.trace('BackupLedger.write') do |span|
+      transactions.each do |transaction|
+        ledger[transaction.id] = transaction
+      end
+    end
+  end
+end
 ```
 
 {{% /tab %}}
@@ -135,7 +143,19 @@ class BackupLedger:
 {{% tab "Ruby" %}}
 
 ```ruby
-TBD - Ruby
+class BackupLedger
+  def write(transactions)
+    Datadog.tracer.trace('BackupLedger.write') do |method_span|
+      transactions.each do |transaction|
+        Datadog.tracer.trace('BackupLedger.persist') do |span|
+          # Add custom metadata to the "persist_transaction" span
+          span.set_tag('transaction.id', transaction.id)
+          ledger[transaction.id] = transaction
+        end
+      end
+    end
+  end
+end
 ```
 
 {{% /tab %}}
