@@ -28,28 +28,28 @@ const pa11yConfig = {
 const fileExclusions = '';
 
 // remove directories with many html files that share the same layout and add only single files from each to speed up pa11y process
-// const directoryExlcusions = 'api|fr|ja|config|account_management|agent|api|basic_agent_usage|developers|examples|getting_started|graphing|guides|infrastructure|integrations|logs|monitors|synthetics|tracing|videos';
-const directoryExlcusions = 'api|fr|ja|config';
+const directoryExlcusions = 'api|fr|ja|config|account_management|agent|api|basic_agent_usage|developers|examples|getting_started|graphing|guides|infrastructure|integrations|logs|monitors|synthetics|tracing|videos';
+// const directoryExlcusions = 'api|fr|ja|config';
 
 // html files to include
 const includeUrls = [
-    './public/api/index.html'
-//     './public/account_management/api-app-keys/index.html',
-//     './public/agent/apm/index.html',
-//     './public/api/authentication/index.html',
-//     './public/basic_agent_usage/index.html',
-//     './public/developers/guide/index.html',
-//     './public/examples/aws-metric/index.html',
-//     './public/getting_started/agent/index.html',
-//     './public/graphing/dashboards/index.html',
-//     './public/guides/alerting/index.html',
-//     './public/infrastructure/index.html',
-//     './public/integrations/kubernetes/index.html',
-//     './public/logs/analytics/index.html',
-//     './public/monitors/check_summary/index.html',
-//     './public/synthetics/api_tests/index.html',
-//     './public/tracing/advanced/index.html',
-//     './public/videos/anomaly_detection/index.html'
+    './public/api/index.html',
+    './public/account_management/api-app-keys/index.html',
+    './public/agent/apm/index.html',
+    './public/api/authentication/index.html',
+    './public/basic_agent_usage/index.html',
+    './public/developers/guide/index.html',
+    './public/examples/aws-metric/index.html',
+    './public/getting_started/agent/index.html',
+    './public/graphing/dashboards/index.html',
+    './public/guides/alerting/index.html',
+    './public/infrastructure/index.html',
+    './public/integrations/kubernetes/index.html',
+    './public/logs/analytics/index.html',
+    './public/monitors/check_summary/index.html',
+    './public/synthetics/api_tests/index.html',
+    './public/tracing/advanced/index.html',
+    './public/videos/anomaly_detection/index.html'
 ];
 
 const globPatterns = `./public/!(${directoryExlcusions}|${fileExclusions})/**/*.html`;
@@ -97,7 +97,7 @@ asyncPool(2, absFileArray, pally)
         const csvResults = json2csvParser.parse(cleanResults);
         const jsonResults = JSON.stringify(cleanResults);
 
-        fs.writeFile('pa11y-output-docs.csv', csvResults, function(err) {
+        fs.writeFile('pa11y-output.csv', csvResults, function(err) {
             // currently saves file to app's root directory
             if (err) throw err;
         });
@@ -115,11 +115,38 @@ function pally(url) {
 // sometimes results come back with null issues and a chrome error, need to filter
 function removeBadResults(results) {
     const cleanResults = [];
+
     for (let i = 0; i <= results.length; i += 1) {
         if (results[i]) {
-            if (results[i]['issues'].length !== 0) {
-                if (results[i]['pageUrl'] !== 'chrome-error://chromewebdata/') {
-                    cleanResults.push(results[i]);
+            const { documentTitle, pageUrl, issues } = results[i];
+
+            if (issues.length) {
+                const filteredIssues = issues.filter(issue => {
+
+                    // remove results from thrid party ad iframe
+                    if (issue.context.includes('bid.g.doubleclick.net')) {
+                        return false;
+                    }
+
+                    
+                    if (issue.context.includes('_hj')) {
+                        return false;
+                    }
+
+                    return true;
+                });
+
+                if (filteredIssues.length) {
+                    const filteredResult = {
+                        documentTitle,
+                        pageUrl,
+                        issues: filteredIssues
+                    };
+
+                    // include results only from corp domain (sometimes finds docs.datadoghq.com results)
+                    if (pageUrl.includes('https://docs.datadoghq.com/')) {
+                        cleanResults.push(filteredResult);
+                    }
                 }
             }
         }
