@@ -131,6 +131,7 @@ In this example walks through adding child spans to the `BackupLedger.write` spa
 ```java
 import datadog.trace.api.Trace;
 import io.opentracing.Scope;
+import io.opentracing.Tracer;
 import io.opentracing.util.GlobalTracer;
 
 public class BackupLedger {
@@ -140,7 +141,8 @@ public class BackupLedger {
   public void write(List<Transaction> transactions) {
     for (Transaction transaction : transactions) {
       // Use `GlobalTracer` to trace blocks of inline code
-      try (Scope scope = GlobalTracer.get().buildSpan('BackupLeger.persist').startActive(true)) {
+      Tracer tracer = GlobalTracer.get();
+      try (Scope scope = tracer.buildSpan("BackupLedger.persist").startActive(true)) {
         // Add custom metadata to the span
         scope.span().setTag("transaction.id", transaction.getId());
         ledger.put(transaction.getId(), transaction);
