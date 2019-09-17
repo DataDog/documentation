@@ -3,18 +3,13 @@ title: Service Level Objectives
 kind: documentation
 description: "Track the status of your SLOs"
 disable_toc: true
-beta: true
+aliases:
+  - /monitors/monitor_uptime_widget/
 further_reading:
 - link: "https://www.datadoghq.com/blog/slo-monitoring-widget/"
   tag: "Blog"
   text: "Track the status of your SLOs with the new monitor uptime widget"
-aliases:
-    - /monitors/monitor_uptime_widget/
 ---
-
-<div class="alert alert-info">
-Service Level Objectives are now generally available.
-</div>
 
 ## Setup
 
@@ -41,19 +36,20 @@ Once you have monitors set up, you can view the overall uptime percentage onlyâ€
 
 #### Define the source
 
-| Option | Description |
-|-------------------|-------------------------------------------------------------------------|
-| [Monitor](#monitor) | Define the percent uptime for your service. |
-| [Event](#event) | Define when you want Datadog to warn you about uptime for your service. |
+| Option              | Description                                                               |
+| ------------------- | ------------------------------------------------------------------------- |
+| [Monitor](#monitor) | Define the percent uptime for your service.                               |
+| [Event](#event)     | Define when you want Datadog to warn you about uptime for your service.   |
 
 ##### Monitor
 
-Select a monitor based source if you want to build your SLO based on existing or new Datadog monitors. For more information about monitors, see the [Monitor documentation][2]. To set up a new monitor, go to the [new monitor page][3]. An example SLO on a monitor is if the latency of all user requests should be less than 250ms 99% of the time in any 30 day window. To set this up, you would:
+Select a monitor based source if you want to build your SLO based on existing or new Datadog monitors. For more information about monitors, see the [Monitor documentation][2].
 
-a. Select a single monitor or, 
-b. Select multiple monitors (up to 20) or, 
-c. Select a single multi-alert monitor and select specific monitor groups (up to 20) to be
-included in SLO calculation 
+To set up a new SLO monitor, go to the [monitor page][3]. An example SLO on a monitor is if the latency of all user requests should be less than 250ms 99% of the time in any 30 day window. To set this up, you would:
+
+1. Select a single monitor or,
+2. Select multiple monitors (up to 20) or,
+3. Select a single multi-alert monitor and select specific monitor groups (up to 20) to be included in SLO calculation.
 
 **Supported monitor types**:
 
@@ -75,7 +71,7 @@ Available windows are: 7 days, month-to-date, 30 days (rolling), Previous Month,
 
 ### Show error budget
 
-By default, the widget displays the error budget. The error budget represents the amount of time you are allowed to be in the red until you breach your defined SLO. This is calculated using the value entered into your conditional formatting and the time window selected. If nothing is selected, you will see an error message that states: No Rules Specified. You can change this by editing the widget.
+By default, the widget displays the error budget. The error budget represents the amount of time you are allowed to be in the red until you breach your defined SLO. This is calculated using the value entered into your conditional formatting and the time window selected. If nothing is selected, you will see an error message that states: _No Rules Specified_. You can change this by editing the widget.
 
 ## Feature requests
 
@@ -86,5 +82,5 @@ To submit a feature request, reach out to [Datadog Support][2].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/slo
-[2]: /monitors/
+[2]: /monitors
 [3]: https://app.datadoghq.com/monitors#create/metric
