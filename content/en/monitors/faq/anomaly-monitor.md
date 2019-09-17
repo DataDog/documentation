@@ -5,7 +5,7 @@ kind: faq
 
 ### Should I use anomaly detection for everything?
 
-No. Anomaly detection is designed to assist with visualizing and monitoring metrics that have predictable patterns. For example, `my_site.page_views{*}` might be driven by user traffic and thus vary predictably by time of day and day of week. If your metric does not have a repeated or predictable pattern, then a simple chart overlay or threshold alert might be better.
+No. Anomaly detection is designed to assist with visualizing and monitoring metrics that have predictable patterns. For example, `my_site.page_views{*}` is driven by user traffic and varies predictably by time of day and day of week. Therefore, it is well suited for anomaly detection.
 
 **Note**: Anomaly detection requires historical data to make good predictions. If you have only been collecting a metric for a few hours or days, anomaly detection won't be useful.
 
@@ -33,7 +33,7 @@ The second graph shows the same metric a day later. Even though it uses the prev
 
 At different zoom levels, the same query can result in timeseries with very different characteristics. When looking at longer time periods, each point represents the aggregate of many more-granular points. Therefore, each of these aggregate points may hide noise observed in the more granular points. For example, charts that show one week often appear smoother (less noisy) than charts that show just 10 minutes.
 
-The width of the gray band is partly based on the noisiness of the timeseries in the plot. The band must be wide enough that ordinary noise is mostly inside the band and doesn't appear as anomalous. Unfortunately, when the band is wide enough to include ordinary noise, it might also be wide enough to hide some anomalies, especially when viewing short time windows.
+The width of the gray band is key to accurate anomaly monitoring. The band must be wide enough that ordinary noise is mostly inside the band and doesn't appear as anomalous. Unfortunately, when the band is wide enough to include ordinary noise, it might also be wide enough to hide some anomalies, especially when viewing short time windows.
 
 For example, the metric `app.requests` is noisy but has a constant average value of 8. On one day, there is a 10-minute anomalous period, starting a 9:00, during which the metric has an average value of 10. The graph below shows a series with a one-day time window; each point in the graph summarizes 5 minutes.
 
@@ -59,7 +59,7 @@ Datadog has evolved our algorithms to no longer use the adaptive algorithm. Exis
 
 ### What is the count_default_zero argument?
 
-Previously, Datadog treated count metrics as gauges, and thus interpolated between reported points. This led to some very odd-looking metrics for sparsely reported counts. Anomalies are no longer interpolating between counts, but for legacy monitors, the old behavior is preserved using the `count_default_zero` argument.
+Previously, Datadog treated count metrics as gauges, and thus interpolated between reported points. Anomalies are no longer interpolating between counts, but for legacy monitors, the old behavior is preserved using the `count_default_zero` argument.
 
 ### What if I want my count metric treated as a gauge?
 
