@@ -97,7 +97,7 @@ asyncPool(2, absFileArray, pally)
         const csvResults = json2csvParser.parse(cleanResults);
         const jsonResults = JSON.stringify(cleanResults);
 
-        fs.writeFile('pa11y-output.csv', csvResults, function(err) {
+        fs.writeFile('pa11y-output-docs.csv', csvResults, function(err) {
             // currently saves file to app's root directory
             if (err) throw err;
         });
