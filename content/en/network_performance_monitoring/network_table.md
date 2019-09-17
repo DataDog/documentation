@@ -21,7 +21,7 @@ This feature is currently in beta. Request access by completing the <a href="htt
 
 {{< img src="network_performance_monitoring/network_table/main_page.png" alt="Main page" responsive="true">}}
 
-## Context
+## Queries
 
 To refine your search to traffic between particular endpoints, aggregate and filter your network flows **with tags**. You can select tags for the **_source_** and **_destination_** by using the search bar at the top of the page. 
 
