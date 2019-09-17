@@ -84,9 +84,7 @@ TBD - js
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-```csharp
-TBD - C#
-```
+Coming soon.
 
 {{% /tab %}}
 {{% tab "PHP" %}}
@@ -167,7 +165,22 @@ TBD - Go
 {{% tab ".NET" %}}
 
 ```csharp
-TBD - C#
+using Datadog.Trace;
+
+public void Write(List<Transaction> transactions)
+{
+    foreach (var transaction in transactions)
+    {
+        // Use global tracer to trace blocks of inline code
+        using (var scope = Tracer.Instance.StartActive("BackupLedger.persist"))
+        {
+            // Add custom metadata to the span
+            scope.Span.SetTag("transaction.id", transaction.Id);
+
+            this.ledger[transaction.Id] = transaction;
+        }
+    }
+}
 ```
 
 {{% /tab %}}
