@@ -13,4 +13,5 @@ disable_toc: true
     {{< nextlink href="tracing/faq/distributed-tracing" >}} Example of distributed tracing{{< /nextlink >}}
     {{< nextlink href="tracing/faq/terminology" >}}Terminology{{< /nextlink >}}
     {{< nextlink href="tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel" >}}Why can't I see my correlated logs in the Trace ID panel?{{< /nextlink >}}
+    {{< nextlink href="tracing/faq/trace-agent-from-source" >}}Installing the trace Agent from source and on Windows{{< /nextlink >}}
 {{< /whatsnext >}}
