@@ -20,7 +20,7 @@ This feature is currently in beta. Request access by completing the <a href="htt
 
 ## Overview
 
-The [network map][1] provides a topology view of your network to help you visualize network partitions, dependencies, and bottlenecks. By consolidating network data into a directional map, this page can be used to cut through the noise and isolate problem areas. Also, you can access other telemetry collected by Datadog directly from this view.
+The [network map][1] provides a topology view of your network to help you visualize network partitions, dependencies, and bottlenecks. By consolidating network data into a directional map, this page can be used to cut through the noise and isolate problem areas. 
 
 {{< img src="network_performance_monitoring/network_map/network_map.png" alt="network_map" responsive="true">}}
 
@@ -34,13 +34,13 @@ The network map visualizes data collected by the Datadog Agent automatically. On
 
 Use the page header to configure your network map:
 
-1. Choose the tag key to display as **Nodes** with the first selector at the top of the page. Available tag keys come from the tags submitted with your network data.
+1. Choose the tag you want your **Nodes** to represent with the first selector at the top of the page. Available tags are the same as those offered in the network page.
 2. Select the metric for your **Edges** to represent between:
-    * Throughtput sent
-    * Throughtput received
+    * Throughput sent
+    * Throughput received
     * Retransmits
-3. Filter the connections you want to display:
-    * Whether or not to **Show Unresolved Flows**.
+3. Filter the connections you want to display. You can choose whether or not to:
+    * **Show unresolved flows**.
     * Hide network flows outside a specified percentile range of the active network metric.
     * Filter your tags based on a fuzzy string match.
 
@@ -50,7 +50,7 @@ Hovering over a node highlights it and animates the directionality of the networ
 
 {{< img src="network_performance_monitoring/network_map/network_map_highlight.mp4" alt="Service Map" video="true" responsive="true" width="70%" >}}
 
-Click on a node and choose _Inspect_ to isolate it and display network data from other nodes according to the type of metric selected. Below is an example result of inspecting a node:
+Click on a node and select _Inspect_ from the menu to contextualize it within the larger network. Below is an example of an inspected node:
 
 {{< img src="network_performance_monitoring/network_map/network_entity_zoom.png" alt="network_entity_zoom" responsive="true" style="width:70%;">}}
 

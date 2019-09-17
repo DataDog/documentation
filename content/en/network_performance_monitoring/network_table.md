@@ -1,5 +1,5 @@
 ---
-title: Network Table
+title: Network Page
 kind: documentation
 disable_toc: true
 description: Explore your Network data between each source and destination across your stack.
@@ -23,19 +23,19 @@ This feature is currently in beta. Request access by completing the <a href="htt
 
 ## Context
 
-To define a context for your Network Table, select how to aggregate and filter your network flows data **based on tags**. First, select the tag key to use as the **_source_** and **_destination_**. Next, select the tags to display for each one.
+To refine your search to traffic between particular endpoints, aggregate and filter your network flows **with tags**. You can select tags for the **_source_** and **_destination_** by using the search bar at the top of the page. 
 
-The following screenshot shows the default view, which aggregates by the tag key `service` (the _source_ and _destination_). This means the throughput for every flow with the same source `service` and destination `service` are summed and represented as one row in the table for service-to-service communication:
+The following screenshot shows the default view, which aggregates the _source_ and _destination_ by the `service` tag. Accordingly, each row in the table represents service-service flows when aggregated over a five-minute time period.
 
 {{< img src="network_performance_monitoring/network_table/context.png" alt="context" responsive="true" style="width:80%;">}}
 
-The next example shows all flows from some IP addresses representing a service (`service:web-store`) as a _source_ to an availability zone (`availability-zone:us-east1-b`) as _destination_:
+The next example shows all flows from IP addresses representing a service (`service:web-store`) to an availability zone (`availability-zone:us-east1-b`):
 
 {{< img src="network_performance_monitoring/network_table/flow_table_filtered.png" alt="Flow table filtered" responsive="true" style="width:80%;">}}
 
 ### Facet Panels
 
-The facet panels mirror your chosen context. Switch between the facet panels with the _Source_ and _Destination_ tabs on top:
+The facet panels mirror the tags in your search bar query. Switch between the facet panels with the _Source_ and _Destination_ tabs on top:
 
 {{< img src="network_performance_monitoring/network_table/facet_panels.png" alt="Facet panels" responsive="true" style="width:30%;">}}
 
@@ -43,7 +43,7 @@ The facet panels mirror your chosen context. Switch between the facet panels wit
 
 {{< img src="network_performance_monitoring/network_table/network_data.png" alt="network data" responsive="true" style="width:90%;" >}}
 
-Your network metrics are displayed through the graphs and the associated table. All data is shown from the `sent` and `received` angle from the source perspective:
+Your network metrics are displayed through the graphs and the associated table. All sent and received metrics are displayed from the perspective of the source :
 
 - **Sent metrics**: measure the value of something from the _source_ to the _destination_ from the source's perspective.
 - **Received metrics**: measure the value of something from the _destination_ to the _source_ from the source's perspective.
@@ -70,11 +70,11 @@ On each graph, select the settings cog in the upper right corner to change the Y
 
 ### Table
 
-The network table breaks down the _Throughput_, _Bandwith_, and _Retransmits_ metrics between each _source_ and _destination_ defined by your context.
+The network table breaks down the _Throughput_, _Bandwidth_, and _Retransmits_ metrics between each _source_ and _destination_ defined by your query.
 
 {{< img src="network_performance_monitoring/network_table/data_table.png" alt="Data table" responsive="true" style="width:80%;">}}
 
-**Note**: Use the *Show Unresolved Flows* toggle in the upper right corner of the data table to displays network data for flows with only one _source_ or _destination_.
+**Note**: Use the *Show Unresolved Flows* toggle in the upper right corner of the data table to filter out flows with unresolved (`N/A`) sources or destinations, which indicate external traffic outside of your private network.
 
 Select any line from the data table to get more in depth monitoring of a given _source_ <=> _destination_ flow:
 
