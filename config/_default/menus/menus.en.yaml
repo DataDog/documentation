@@ -645,8 +645,8 @@ main:
     weight: 6
     parent: "alerting"
 
-  - name: "SLO Widget"
-    url: "monitors/slo_widget/"
+  - name: "Service Level Objectives"
+    url: "monitors/slos/"
     weight: 7
     parent: "alerting"
 
