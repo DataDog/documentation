@@ -1,5 +1,5 @@
 ---
-title: Host monitor
+title: Host Monitor
 kind: documentation
 description: "Check if one or more hosts are reporting to Datadog"
 further_reading:
@@ -16,33 +16,54 @@ further_reading:
 
 ## Overview
 
-Every Datadog Agent collection reports a heartbeat called `datadog.agent.up`
-with a status `UP`. You can monitor this heartbeat across one or more hosts.
+Every Datadog Agent reports a service check called `datadog.agent.up` with the status `OK`. You can monitor this check across one or more hosts by using a host monitor.
 
-## Configuration
+## Monitor creation
 
-1. Select your **host by name or tag(s)**. Providing a tag monitors every host that has that tag or tag combination.
-    {{< img src="monitors/monitor_types/host/host_monitor_pick_hosts.png" alt="host monitor pick hosts" responsive="true" style="width:80%;">}}
+To create a [host monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Host*.
 
-2. Choose between a **Check Alert** or a **Cluster Alert**.
+### Pick hosts by name or tag
 
-3. **Check Alert**: An alert is triggered when a host stops reporting.
-    Select the **no-data timeframe**: If the heartbeat stops reporting for more than the number of minutes you have selected, you are notified.
-    {{< img src="monitors/monitor_types/host/no_data_timeframe.png" alt="host monitor no data timeframe" responsive="true" style="width:80%;">}}
+Select the hosts to monitor by choosing host names, tags, or choose `All Monitored Hosts`. If you need to exclude certain hosts, use the second field to list names or tags.
 
-4. **Cluster Alert**: An alert is triggered when a percentage of hosts stop reporting.
-    * Decide whether or not to cluster your hosts according to a tag.
-        {{< img src="monitors/monitor_types/host/cluster_alert.png" alt="Cluster alert" responsive="true" style="width:80%;">}}
+* The include field uses `AND` logic. All listed names and tags must be present on a host for it to be included.
+* The exclude field uses `OR` logic. Any host with a listed name or tag is excluded.
 
-    * Select the alerting/warning thresholds percentage for your host monitor. 
-        {{< img src="monitors/monitor_types/host/cluster_alert_setup.png" alt="cluster alert setup" responsive="true" style="width:75%;">}} 
+### Set alert conditions
 
-    * Select the **no-data timeframe**: If the heartbeat stops reporting for more than the number of minutes you have selected for the choosen percentage of host in the selected cluster, you are notified.
+In this section, choose between a **Check Alert** or **Cluster Alert**:
 
-5. Configure your **notification options**:  
-    Refer to the [Notifications][1] dedicated documentation page for a detailed walkthrough of the common notification options.
+{{< tabs >}}
+{{% tab "Check Alert" %}}
+
+A check alert tracks if a host stops reporting for a given amount of time. Too much time following a check run can be a sign of problems with data submission from the host.
+
+Enter the number of minutes to check for missing data. The default value is 2 minutes.
+
+If `datadog.agent.up` stops reporting an `OK` status for more than the minutes specified, an alert is triggered.
+
+{{% /tab %}}
+{{% tab "Cluster Alert" %}}
+
+A cluster alert tracks if some percentage of hosts have stopped reporting for a given amount of time.
+
+To set up a cluster alert:
+
+1. Decide whether or not to group your hosts according to a tag. `Ungrouped` calculates the status percentage across all included hosts. `Grouped` calculates the status percentage on a per group basis.
+2. Select the percentage for alert and warn thresholds. Only one setting (alert or warn) is required.
+3. Enter the number of minutes to check for missing data. The default value is 2 minutes.
+
+If `datadog.agent.up` stops reporting an `OK` status for more than the minutes specified and the percentage threshold is reached, an alert is triggered.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Notifications
+
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][2] page.
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/notifications
+[1]: https://app.datadoghq.com/monitors#create/host
+[2]: /monitors/notifications
