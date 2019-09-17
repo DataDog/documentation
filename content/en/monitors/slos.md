@@ -16,90 +16,75 @@ aliases:
 Service Level Objectives are now generally available.
 </div>
 
-## Configuration
+## Setup
 
-Select time or event based SLIs: 
+Use the SLO and uptime widget to track your SLOs (Service Level Objectives) and uptime on screenboards and timeboards. You can use SLO by adding a widget to a dashboard, or by going to Datadog’s [Service Level Objectives page][1] to create new SLOs and view all existing ones. Select an existing SLO from the dropdown and display it on any dashboard.
 
-### Time based SLIs
+*Uptime* is defined as the amount of time a monitor was in an *up* state (OK) compared to *down* state (non-OK). The status is represented in bars as green (up) and red (down). Example: ’99 % of the time latency is less than 200ms.`
 
-Example: the latency of all user requests should be less than 250ms 99% of the time in any 30 day window.
+You can also track success rate and event-based SLIs (Service Level Indicators). Example: `99 % of requests are successful.`
+
+{{< img src="graphing/widgets/slo/summary_editor.png" alt="monitor uptime widget" responsive="true" >}}
+
+### Configuration
+
+1. On the [SLO page][1], select **New SLO +**.
+2. Define the source for your monitors.
+3. Set your target uptime.
+4. Finally, give the SLO a title and save it.
+
+Once you have monitors set up, you can view the overall uptime percentage only—or the overall percentage, plus the uptime for each monitor.
+
+{{< img src="graphing/widgets/slo/slo_uptime-view_mode2.png" alt="View Mode" responsive="true" >}}
+
+### Options
+
+#### Define the source
+
+| Option | Description |
+|-------------------|-------------------------------------------------------------------------|
+| [Monitor](#monitor) | Define the percent uptime for your service. |
+| [Event](#event) | Define when you want Datadog to warn you about uptime for your service. |
+
+##### Monitor
+
+Select a monitor based source if you want to build your SLO based on existing or new Datadog monitors. For more information about monitors, see the [Monitor documentation][2]. To set up a new monitor, go to the [new monitor page][3]. An example SLO on a monitor is if the latency of all user requests should be less than 250ms 99% of the time in any 30 day window. To set this up, you would:
 
 a. Select a single monitor or, 
 b. Select multiple monitors (up to 20) or, 
 c. Select a single multi-alert monitor and select specific monitor groups (up to 20) to be
 included in SLO calculation 
 
-**Note**: We support up to 20 monitors. 
+**Supported monitor types**:
 
-If you need to create a new Monitor in-app go to https://app.datadoghq.com/monitors#create/metric. Check out the docs here: https://docs.datadoghq.com/monitors/ 
+- metric monitor types - including metric, anomaly, APM, forecast, outlier, and integration metrics
+- service checks
+- synthetics
 
-**Note**: for 7 days, the widget is restricted to 2 decimal places of accuracy. For 30 days and up, it’s restricted to 2-3 decimal places of accuracy. Currently, this is not customizable. 
+##### Event
 
-### Supported monitor types
+Select your metrics. Define a success rate through numerator and denominator fields. Select the metrics that represent your successful events in the numerator, and select the metrics that represent your total events in the denominator.
 
-Currently, [metric monitor types][1], service checks, and synthetics are supported in the widget. Only supported monitors will be available to select within the widget. All other monitor types are not currently supported. 
+You can add up to as many metrics as you need for both fields and add a formula to calculate the total for each.
 
-Supported metrics monitor types include metric, anomaly, APM, forecast, outlier, and integration metrics. For more info, see [here][1] for monitor types.
+#### Define your target
 
-### Selecting your time window
+Available windows are: 7 days, month-to-date, 30 days (rolling), Previous Month, and 90 days (rolling).
 
-Next, select the time window you want to report within.
+**Note**: For 7 days, the widget is restricted to two decimal places. For 30 days and up, it’s restricted to two to three decimal places.
 
-For single monitors, you can select up to 3 windows. For monitor-by-group or multi-monitor selection, you can only select one window. The widget is currently not compatible with Global Time.
-
-Available windows are: 7 days, month-to-date, 30 days (rolling), Previous Month, and 90 days (rolling)
-
-**Note**: for seven days, the widget displays two decimal places. For 30 days and up, it displays two to three decimal places.
-
-### Setting the conditional formatting
-
-Next, select the conditional formatting based on the uptime percentage. This can be red (`down`) or yellow (`warn`).
-
-### Save your widget
-
-Finally, give the widget a title and save it to your dashboard.
-
-## Show error budget
+### Show error budget
 
 By default, the widget displays the error budget. The error budget represents the amount of time you are allowed to be in the red until you breach your defined SLO. This is calculated using the value entered into your conditional formatting and the time window selected. If nothing is selected, you will see an error message that states: No Rules Specified. You can change this by editing the widget.
 
-### Selecting your data for event SLIs
-
-Toggle to event SLIs.
-
-{{< img src="graphing/widgets/slo/slo_uptime-choose_a_source2.png" alt="Choose a source" responsive="true" >}}
-
-Select your metrics. You are defining a success rate through numerator and denominator fields.
-
-Select the metrics that represent your successful events in the numerator, and select the metrics that represent your total events in the denominator.
-
-You can add up to as many metrics as you need for both fields and add a formula to calculate the total for each. 
-
-### Selecting your time window
-
-Next, select the time window you want to report within. 
-
-The widget is currently not compatible with Global Time.
-
-Available windows are: 7 days, month-to-date, 30 days (rolling), Previous Month, and 90 days (rolling)
-
-**Note**: Datadog displays up to 3 decimal places for all time windows.
-
-### Setting the conditional formatting
-
-Next, select the conditional formatting based on the uptime percentage. This can be red (`down`) or yellow (`warn`).
-
-### Save your widget
-
-Finally, give the widget a title and save it to your dashboard.
-
 ## Feature requests
 
-To submit feature requests, reach out to [Datadog Support][2], and someone from the team will assist you.
+To submit a feature request, reach out to [Datadog Support][2].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: 
-[2]: 
+[1]: https://app.datadoghq.com/slo
+[2]: /monitors/
+[3]: https://app.datadoghq.com/monitors#create/metric
