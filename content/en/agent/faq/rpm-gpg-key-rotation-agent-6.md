@@ -5,7 +5,7 @@ kind: faq
 
 Starting with v6.14.0, the Agent RPM packages are signed with a new GPG key.
 
-The previous GPG key is over 4 years old, so to better follow security best practices we are rotating our key.
+As a common best practice, we periodically update our GPG key.
 
 Hosts using RPM packages located in the [Datadog Yum repository][1] to install or upgrade the Agent v6.14.0+ are affected by this change and need to trust this new key by importing the associated public key in their hosts' keyrings.
 
@@ -17,13 +17,13 @@ If you're using the latest version for one of the following officially supported
 
 * [Agent installation page][2]
 
-* Datadog [Chef cookbook][3]
+* [Chef cookbook][3]
 
-* `Datadog.datadog` [Ansible role][4]
+* [Ansible role][4]
 
-* Datadog Agent [Puppet module][5]
+* [Puppet module][5]
 
-* Datadog [SaltStack formula][6]
+* [SaltStack formula][6]
 
 
 ## How to check if a host trusts the new GPG key
