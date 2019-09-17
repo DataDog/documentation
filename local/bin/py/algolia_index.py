@@ -41,9 +41,9 @@ def transform_url(private_urls):
     new_private_urls = []
     for url in private_urls:
 
-        ## We check if the url is not a localised FAQ url, if so we don't include it in list of stopped url
-        ## Since Localised FAQs are not indexed anyway.
-        if not (re.match(r"public/fr/.*/faq.*", url) or re.match(r"public/ja/.*/faq.*", url)):
+        ## We check if the url is not a localised FAQ url, or an API page if so we don't include it in list of stopped url
+        ## Since Localised FAQs are not indexed anyway and the API page is indexed as a whole
+        if not (re.match(r"public/fr/.*/faq/.*", url) or re.match(r"public/ja/.*/faq/.*", url) or re.match(r"public/ja/api/.*", url) or re.match(r"public/fr/api/.*", url)):
 
           ## We add /$ to all links in order to make them all "final", in fact
           ## Algolia stop_url parameter uses regex and not "perfect matching" link logic
