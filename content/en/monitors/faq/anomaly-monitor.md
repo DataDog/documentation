@@ -21,7 +21,7 @@ However, it is possible to add multiple series to a single graph one at a time. 
 
 ### Do past anomalies affect the current predictions?
 
-All the algorithms except `basic` use extensive amounts of historical data so they are robust to most anomalies. In the first graph, the gray band stays around 400K even after the metric has dropped to 0.
+All the algorithms except `basic` use extensive amounts of historical data, so they are robust to most anomalies. In the first graph, the gray band stays around 400K even after the metric has dropped to 0.
 
 {{< img src="monitors/monitor_types/anomaly/anomalous_history.png" alt="anomalous_history" responsive="true" style="width:80%;">}}
 
@@ -55,7 +55,7 @@ Anomaly detection uses historical data to establish a baseline of normal behavio
 
 ### What happened to the adaptive algorithm?
 
-Previously, Datadog used an algorithm called `adaptive`, which would try to figure out a metric's inherent seasonality and adjust the predictions accordingly. Now, the seasonality is automatically detected when setting up a monitor. There is less need for this algorithm, which was slower and required more data than the other algorithms. Existing monitors that use the `adaptive` algorithm are untouched and continue to work.
+Datadog has evolved our algorithms to no longer use the adaptive algorithm. Existing monitors that use the `adaptive` algorithm are untouched and continue to work.
 
 ### What is the count_default_zero argument?
 
@@ -82,7 +82,7 @@ Setting different windows for the alert and alert recovery periods might lead to
 
 ### How does daylight savings affect anomaly detection monitors?
 
-Datadog monitors use UTC time and by default are agnostic to local time zones (e.g. EST, PST, CST). User activity is shifted relative to UTC time because activity typically remains the same for the user's local time. This could be detected as unexpected anomaly. 
+Datadog monitors use UTC time and by default are agnostic to local time zones. User activity is shifted relative to UTC time because activity typically remains the same for the user's local time. This could be detected as an unexpected anomaly. 
 
 Datadog allows you to configure a timezone for each anomaly detection monitor that automatically corrects for the time shift. For more details, see [How to update an anomaly detection monitor to account for local timezone][5].
 
