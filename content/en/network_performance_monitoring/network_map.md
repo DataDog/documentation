@@ -35,7 +35,7 @@ The network map visualizes data collected by the Datadog Agent automatically. On
 Use the page header to configure your network map:
 
 1. Choose the tag you want your **Nodes** to represent with the first selector at the top of the page. Available tags are the same as those offered in the network page.
-2. Select the metric for your **Edges** to represent between:
+2. Select the metric you want your **Edges** to represent:
     * Throughput sent
     * Throughput received
     * Retransmits

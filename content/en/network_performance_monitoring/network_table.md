@@ -76,7 +76,7 @@ The network table breaks down the _Throughput_, _Bandwidth_, and _Retransmits_ m
 
 **Note**: Use the *Show Unresolved Flows* toggle in the upper right corner of the data table to filter out flows with unresolved (`N/A`) sources or destinations, which indicate external traffic outside of your private network.
 
-Select any line from the data table to get more in depth monitoring of a given _source_ <=> _destination_ flow:
+Select any row from the data table to see associated logs and traces for a given _source_ <=> _destination_ flow:
 
 {{< img src="network_performance_monitoring/network_table/flow_details.png" alt="Flow Details" responsive="true" style="width:80%;">}}
 
