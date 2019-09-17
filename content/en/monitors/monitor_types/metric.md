@@ -185,7 +185,9 @@ In most cases this setting is not useful because you only want an alert to resol
 
 Delay evaluation by `N` seconds.
 
-The time (in seconds) to delay evaluation. This should be a non-negative integer. So, if the delay is set to 300 seconds (5 minutes), the monitor evaluation is during the last `5 minutes`, and the time is 7:00, the monitor evaluates data from 6:50 to 6:55. This is useful for cloud metrics which are backfilled by service providers.
+The time (in seconds) to delay evaluation. This should be a non-negative integer. So, if the delay is set to 900 seconds (15 minutes), the monitor evaluation is during the last `5 minutes`, and the time is 7:00, the monitor evaluates data from 6:40 to 6:45.
+
+**Note**: A 15 minute delay is recommended for cloud metrics which are backfilled by service providers. Additionally, when using a division formula, a 60 second delay is helpful to ensure your monitor evaluates on complete values.
 
 ### Notifications
 
