@@ -92,7 +92,9 @@ TBD - js
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Coming soon.
+Coming Soon. Reach out to [the Datadog support team][1] to learn more.
+
+[1]: https://docs.datadoghq.com/help
 
 {{% /tab %}}
 {{% tab "PHP" %}}
