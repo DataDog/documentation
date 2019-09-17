@@ -1,5 +1,5 @@
 ---
-title: Outlier monitor
+title: Outlier Monitor
 kind: documentation
 aliases:
     - /guides/outliers
@@ -16,7 +16,9 @@ further_reading:
   text: "Consult your monitor status"
 ---
 
-Outlier Detection is an algorithmic feature that allows you to detect when some members of a group are behaving strangely compared to the others. For example, you could detect that one web server in a pool is processing an unusual number of requests, and hence should be a target for replacement. Or, you could get an early warning that significantly more 500s are happening in one AWS Availability Zone (AZ) than the others, which might indicate an issue brewing in that AZ.
+## Overview
+
+Outlier Detection is an algorithmic feature that allows you to detect when some members of a group are behaving strangely compared to the others. For example, you could detect that one web server in a pool is processing an unusual number of requests or receive an early warning that significantly more 500s are happening in one AWS availability zone than the others.
 
 {{< img src="monitors/monitor_types/outliers/outliers-metric-alert.png" alt="outliers metric alert" responsive="true" style="width:80%;">}}
 
