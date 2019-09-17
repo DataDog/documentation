@@ -49,14 +49,14 @@ TBD - Java
 from ddtrace import tracer
 
 class BackupLedger:
-    def __init__(self):
-        self.ledger = dict()
-        
-    # Use `ddtrace.tracer.wrap` decorator to trace custom methods
-    @ddtrace.tracer.wrap()
+
+    # Use `tracer.wrap` decorator to trace custom methods
+    @tracer.wrap()
     def write(self, transactions):
         for transaction in transactions:
             self.ledger[transaction.id] = transaction
+
+        # [...]
 ```
 
 {{% /tab %}}
@@ -119,18 +119,18 @@ TBD - Java
 from ddtrace import tracer
 
 class BackupLedger:
-    def __init__(self):
-        self.ledger = dict()
-        
-    # Use `ddtrace.tracer.wrap` decorator to trace custom methods
-    @ddtrace.tracer.wrap()
+
+    # Use `tracer.wrap` decorator to trace custom methods
+    @tracer.wrap()
     def write(self, transactions):
         for transaction in transactions:
-            # Use `ddtrace.tracer.trace` context manager to trace blocks of inline code
-            with ddtrace.trace.trace('persist_transaction') as span:
+            # Use `tracer.trace` context manager to trace blocks of inline code
+            with tracer.trace('BackupLedger.persist') as span:
                 # Add custom metadata to the "persist_transaction" span
                 span.set_tag('transaction.id', transaction.id)
                 self.ledger[transaction.id] = transaction
+
+        # [...]
 ```
 
 {{% /tab %}}
