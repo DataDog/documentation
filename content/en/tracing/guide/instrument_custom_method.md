@@ -151,7 +151,16 @@ TBD - Go
 {{% tab "Node.js" %}}
 
 ```javascript
-TBD - js
+  function write (transactions) {
+    for (const transaction of transactions) {
+      // Use `tracer.trace` context manager to trace blocks of inline code
+      tracer.trace('BackupLedger.persist', span => {
+        // Add custom metadata to the "persist_transaction" span
+        span.setTag('transaction.id', transaction.id)
+        this.ledger[transaction.id] = transaction
+      })
+    }
+  })
 ```
 
 {{% /tab %}}
