@@ -11,7 +11,6 @@ const pa11yConfig = {
     // rules to ignore
     chromeLaunchConfig: {
         ignoreHTTPSErrors: false,
-        // executablePath:'./node_modules/puppeteer/.local-chromium/linux-662092/chrome-linux/chrome',
         executablePath: process.env.CHROME_BIN || null,
         args: ['--no-sandbox'] // for launching a "headless" chrome browser in CI
     },
