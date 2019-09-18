@@ -180,6 +180,7 @@ public void Write(List<Transaction> transactions)
     $scope = $tracer->startActiveSpan('BackupLedger.write');
     dd_trace_forward_call();
     $scope->close();
+    return $result;
   });
 ?>
 ```
@@ -379,6 +380,7 @@ public void Write(List<Transaction> transactions)
     $scope = $tracer->startActiveSpan('BackupLedger.write');
     dd_trace_forward_call();
     $scope->close();
+    return $result;
   });
 ?>
 ```
