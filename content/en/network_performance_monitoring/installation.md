@@ -70,7 +70,7 @@ spec:
     spec:
       serviceAccountName: datadog-agent
       containers:
-      - image: datadog/agent:6.12.0
+      - image: datadog/agent:6.14.0
         imagePullPolicy: Always
         name: datadog-agent
         securityContext:
