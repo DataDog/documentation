@@ -92,7 +92,22 @@ end
 
 
 ```go
-TBD - Go
+func (bl *BackupLedger) write(ctx context.Context, transactions TransactionList) (err error) {
+	span, ctx := tracer.StartSpanFromContext(ctx, "BackupLedger.write")
+	defer func() {
+          // inside the defer, err holds its final value after the parent function returns;
+		// if it's non-nil, the span will be marked with it.
+		span.Finish(tracer.WithError(err)) 
+	}()
+
+	for _, t := range transactions {
+		// passing ctx down will allow that method to create child spans for a better
+		// hierarchical view
+		if err := bl.putTransaction(ctx, t); err != nil {
+			return err
+		}
+	}
+}
 ```
 
 {{% /tab %}}
