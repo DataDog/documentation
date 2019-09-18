@@ -244,14 +244,11 @@ post_failure_event_to_dd_live:
 test_pa11y_live:
   <<: *base_template
   stage: post-deploy
-  environment: "preview"
+  environment: "live"
   dependencies:
-    - build_preview
-  allow_failure: true
+    - build_live
   script:
     - cp -r /etc/node_modules .
-    #- ls ./node_modules/puppeteer/.local-chromium
-    # - ls ./node_modules/pa11y/node_modules/puppeteer/.local-chromium
     - pa11y_test
   only:
-    - /.+?\/[a-zA-Z0-9_-]+/
+    - schedules
