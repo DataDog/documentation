@@ -29,7 +29,6 @@ const fileExclusions = '';
 
 // remove directories with many html files that share the same layout and add only single files from each to speed up pa11y process
 const directoryExlcusions = 'api|fr|ja|config|account_management|agent|api|basic_agent_usage|developers|examples|getting_started|graphing|guides|infrastructure|integrations|logs|monitors|synthetics|tracing|videos';
-// const directoryExlcusions = 'api|fr|ja|config';
 
 // html files to include
 const includeUrls = [
@@ -128,7 +127,7 @@ function removeBadResults(results) {
                         return false;
                     }
 
-                    
+                    // remove issues related to hotjar inserted elements
                     if (issue.context.includes('_hj')) {
                         return false;
                     }
