@@ -49,8 +49,9 @@ public class BackupLedger {
     for (Transaction transaction : transactions) {
       ledger.put(transaction.getId(), transaction);
     }
-  }
 
+    // [...]
+  }
 }
 ```
 
@@ -75,6 +76,8 @@ class BackupLedger:
 {{% tab "Ruby" %}}
 
 ```ruby
+require 'ddtrace'
+
 class BackupLedger
   def write(transactions)
     # Use global `Datadog.tracer.trace` to trace blocks of inline code
@@ -82,6 +85,8 @@ class BackupLedger
       transactions.each do |transaction|
         ledger[transaction.id] = transaction
       end
+
+      # [...]
     end
   end
 end
@@ -92,12 +97,14 @@ end
 
 
 ```go
+import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+
 func (bl *BackupLedger) write(ctx context.Context, transactions TransactionList) (err error) {
 	span, ctx := tracer.StartSpanFromContext(ctx, "BackupLedger.write")
 	defer func() {
-		// inside the defer, err holds its final value after the parent function returns;
-		// if it's non-nil, the span will be marked with it.
-		span.Finish(tracer.WithError(err)) 
+		// inside the defer, err holds its final value after the parent function
+    // returns; if it's non-nil, the span will be marked with it.
+		span.Finish(tracer.WithError(err))
 	}()
 
 	for _, t := range transactions {
@@ -107,6 +114,8 @@ func (bl *BackupLedger) write(ctx context.Context, transactions TransactionList)
 			return err
 		}
 	}
+
+	// [...]
 }
 ```
 
@@ -114,37 +123,65 @@ func (bl *BackupLedger) write(ctx context.Context, transactions TransactionList)
 {{% tab "Node.js" %}}
 
 ```javascript
-TBD - js
+const tracer = require('dd-trace')
+
+function write (transactions) {
+  // Use `tracer.trace` context manager to trace blocks of inline code
+  tracer.trace('BackupLedger.persist', () => {
+    for (const transaction of transactions) {
+      this.ledger[transaction.id] = transaction
+    }
+  }
+
+	// [...]
+})
 ```
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Coming Soon. Reach out to [the Datadog support team][1] to learn more.
+```csharp
+using Datadog.Trace;
 
+public void Write(List<Transaction> transactions)
+{
+    // Use global tracer to trace blocks of inline code
+    using (var scope = Tracer.Instance.StartActive("BackupLedger.write"))
+    {
+        foreach (var transaction in transactions)
+        {
+            this.ledger[transaction.Id] = transaction;
+        }
+    }
 
-[1]: https://docs.datadoghq.com/help
+    // [...]
+}
+```
+
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 ```php
-class BackupLedger {
-  # [...]
-  public function write(array $transactions) {
-    foreach ($transactions as $transaction) {
-      $this->transactions[$transaction->getId()] = $transaction;
-    }
-    # [...]
-  }
-}
+<?php
+  class BackupLedger {
 
-// Use dd_trace() to trace custom methods
-dd_trace('BackupLedger', 'write', function () {
-  $tracer = \DDTrace\GlobalTracer::get();
-  $scope = $tracer->startActiveSpan('BackupLedger.write');
-  dd_trace_forward_call();
-  $scope->close();
-});
+    public function write(array $transactions) {
+      foreach ($transactions as $transaction) {
+        $this->transactions[$transaction->getId()] = $transaction;
+      }
+
+      # [...]
+    }
+  }
+
+  // Use dd_trace() to trace custom methods
+  dd_trace('BackupLedger', 'write', function () {
+    $tracer = \DDTrace\GlobalTracer::get();
+    $scope = $tracer->startActiveSpan('BackupLedger.write');
+    dd_trace_forward_call();
+    $scope->close();
+  });
+?>
 ```
 
 {{% /tab %}}
@@ -180,8 +217,9 @@ public class BackupLedger {
         ledger.put(transaction.getId(), transaction);
       }
     }
-  }
 
+    // [...]
+  }
 }
 ```
 
@@ -210,7 +248,10 @@ class BackupLedger:
 {{% tab "Ruby" %}}
 
 ```ruby
+require 'ddtrace'
+
 class BackupLedger
+
   def write(transactions)
     # Use global `Datadog.tracer.trace` to trace blocks of inline code
     Datadog.tracer.trace('BackupLedger.write') do |method_span|
@@ -222,6 +263,8 @@ class BackupLedger
         end
       end
     end
+
+    # [...]
   end
 end
 ```
@@ -237,15 +280,21 @@ TBD - Go
 {{% tab "Node.js" %}}
 
 ```javascript
+const tracer = require('dd-trace')
+
 function write (transactions) {
-  for (const transaction of transactions) {
-    // Use `tracer.trace` context manager to trace blocks of inline code
-    tracer.trace('BackupLedger.persist', span => {
-      // Add custom metadata to the "persist_transaction" span
-      span.setTag('transaction.id', transaction.id)
-      this.ledger[transaction.id] = transaction
-    })
+  // Use `tracer.trace` context manager to trace blocks of inline code
+  tracer.trace('BackupLedger.persist', () => {
+    for (const transaction of transactions) {
+      tracer.trace('BackupLedger.persist', span => {
+        // Add custom metadata to the "persist_transaction" span
+        span.setTag('transaction.id', transaction.id)
+        this.ledger[transaction.id] = transaction
+      })
+    }
   }
+
+  // [...]
 })
 ```
 
@@ -257,17 +306,21 @@ using Datadog.Trace;
 
 public void Write(List<Transaction> transactions)
 {
-    foreach (var transaction in transactions)
+    // Use global tracer to trace blocks of inline code
+    using (var scope = Tracer.Instance.StartActive("BackupLedger.write"))
     {
-        // Use global tracer to trace blocks of inline code
-        using (var scope = Tracer.Instance.StartActive("BackupLedger.persist"))
+        foreach (var transaction in transactions)
         {
-            // Add custom metadata to the span
-            scope.Span.SetTag("transaction.id", transaction.Id);
-
-            this.ledger[transaction.Id] = transaction;
+            using (var scope = Tracer.Instance.StartActive("BackupLedger.persist"))
+            {
+                // Add custom metadata to the span
+                scope.Span.SetTag("transaction.id", transaction.Id);
+                this.ledger[transaction.Id] = transaction;
+            }
         }
     }
+
+    // [...]
 }
 ```
 
@@ -275,20 +328,34 @@ public void Write(List<Transaction> transactions)
 {{% tab "PHP" %}}
 
 ```php
-class BackupLedger {
-  # [...]
-  public function write(array $transactions) {
-    foreach ($transactions as $transaction) {
-      // Use global tracer to trace blocks of inline code
-      $scope = \DDTrace\GlobalTracer::get()->startActiveSpan('BackupLedger.persist');
-      // Add custom metadata to the span
-      $scope->getSpan()->setTag('transaction.id', $transaction->getId());
-      $this->transactions[$transaction->getId()] = $transaction;
-      $scope->close();
+<?php
+  class BackupLedger {
+
+    public function write(array $transactions) {
+      foreach ($transactions as $transaction) {
+        // Use global tracer to trace blocks of inline code
+        $scope = \DDTrace\GlobalTracer::get()->startActiveSpan('BackupLedger.persist');
+
+        // Add custom metadata to the span
+        $scope->getSpan()->setTag('transaction.id', $transaction->getId());
+        $this->transactions[$transaction->getId()] = $transaction;
+
+        // Close the span
+        $scope->close();
+      }
+
+      # [...]
     }
-    # [...]
   }
-}
+
+  // Use dd_trace() to trace custom methods
+  dd_trace('BackupLedger', 'write', function () {
+    $tracer = \DDTrace\GlobalTracer::get();
+    $scope = $tracer->startActiveSpan('BackupLedger.write');
+    dd_trace_forward_call();
+    $scope->close();
+  });
+?>
 ```
 
 {{% /tab %}}
