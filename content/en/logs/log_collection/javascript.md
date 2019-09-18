@@ -58,7 +58,7 @@ The following parameters can be used to configure the library to send logs to Da
       DD_LOGS.init({
         clientToken: '<CLIENT_TOKEN>',
         forwardErrorsToLogs: true,
-    });
+      });
 
       // OPTIONAL
       // add global metadata attribute--one attribute can be added at a time
@@ -83,7 +83,7 @@ The following parameters can be used to configure the library to send logs to Da
       DD_LOGS.init({
         clientToken: '<CLIENT_TOKEN>',
         forwardErrorsToLogs: true,
-    });
+      });
 
       // OPTIONAL
       // add global metadata attribute--one attribute can be added at a time
