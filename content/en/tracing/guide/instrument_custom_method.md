@@ -103,7 +103,7 @@ func (bl *BackupLedger) write(ctx context.Context, transactions TransactionList)
 	span, ctx := tracer.StartSpanFromContext(ctx, "BackupLedger.write")
 	defer func() {
 		// inside the defer, err holds its final value after the parent function
-    // returns; if it's non-nil, the span will be marked with it.
+		// returns; if it's non-nil, the span will be marked with it.
 		span.Finish(tracer.WithError(err))
 	}()
 
@@ -133,7 +133,7 @@ function write (transactions) {
     }
   }
 
-	// [...]
+  // [...]
 })
 ```
 
@@ -272,8 +272,33 @@ end
 {{% /tab %}}
 {{% tab "Go" %}}
 
+
 ```go
-TBD - Go
+import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+
+func (bl *BackupLedger) write(ctx context.Context, transactions TransactionList) (err error) {
+	parent_span, ctx := tracer.StartSpanFromContext(ctx, "BackupLedger.write")
+	defer func() {
+		// inside the defer, err holds its final value after the parent function
+		// returns; if it's non-nil, the span will be marked with it.
+		parent_span.Finish(tracer.WithError(err))
+	}()
+
+	for _, t := range transactions {
+		span, ctx := tracer.StartSpanFromContext(ctx, "BackupLedger.persist")
+
+		// add custom metadata to the "persist_transaction" span.
+		span.SetTag("transaction.id", t.Id)
+		if err := bl.putTransaction(ctx, t); err != nil {
+			return err
+		}
+
+		// close the span
+		span.Finish()
+	}
+
+	// [...]
+}
 ```
 
 {{% /tab %}}
