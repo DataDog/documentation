@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Outlier Detection is an algorithmic feature that allows you to detect when some members of a group are behaving strangely compared to the others. For example, you could detect that one web server in a pool is processing an unusual number of requests, or significantly more 500 errors are happening in one AWS availability zone than the others.
+Outlier Detection is an algorithmic feature that allows you to detect when some members of a group are behaving different compared to the others. For example, you could detect that one web server in a pool is processing an unusual number of requests, or significantly more 500 errors are happening in one AWS availability zone than the others.
 
 {{< img src="monitors/monitor_types/outliers/outliers-metric-alert.png" alt="outliers metric alert" responsive="true" style="width:80%;">}}
 
@@ -44,7 +44,7 @@ The outlier monitor requires a metric with a group (hosts, availability zones, p
 
 When setting up an outlier monitor, the time window is an important consideration. If the time window is too large, you might not be alerted in time. If the time window is too short, the alerts are not as resilient to one-off spikes.
 
-To ensure your alert is properly calibrated, set the time window at the top of the screen and use the reverse (<<) button to look back in time at outliers that would have triggered an alert. Additionally, you can use this feature to tune your parameters to a specific outlier algorithm.
+To ensure your alert is properly calibrated, set the time window in the preview graph and use the reverse (<<) button to look back in time at outliers that would have triggered an alert. Additionally, you can use this feature to tune your parameters to a specific outlier algorithm.
 
 {{< img src="monitors/monitor_types/outliers/outliers-new-monitor-graph-calibrate.png" alt="outliers new monitor graph calibrate" responsive="true" style="width:80%;">}}
 
@@ -90,7 +90,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 ## Troubleshooting
 
-Both algorithms are set up to identify outliers that differ from the majority of metrics that are behaving similarly. If your hosts exhibit "banding" behavior as shown below (perhaps because each band represents a different shard), we recommend tagging each band with an identifier, and setting up outlier detection alerts on each band separately.
+The outlier algorithms are set up to identify outliers that differ from the majority of metrics that are behaving similarly. If your hosts exhibit "banding" behavior as shown below (maybe each band represents a different shard), we recommend tagging each band with an identifier, and setting up outlier detection alerts on each band separately.
 
 {{< img src="monitors/monitor_types/outliers/outliers-banding.png" alt="outliers banding" responsive="true" style="width:80%;">}}
 
