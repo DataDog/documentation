@@ -27,7 +27,7 @@ const pa11yConfig = {
 const fileExclusions = '';
 
 // remove directories with many html files that share the same layout and add only single files from each to speed up pa11y process
-const directoryExlcusions = 'api|fr|ja|config|account_management|agent|api|basic_agent_usage|developers|examples|getting_started|graphing|guides|infrastructure|integrations|logs|monitors|synthetics|tracing|videos';
+const directoryExlcusions = 'api|fr|en|ja|config|account_management|agent|api|basic_agent_usage|developers|examples|getting_started|graphing|guides|infrastructure|integrations|logs|monitors|synthetics|tracing|videos';
 
 // html files to include
 const includeUrls = [
