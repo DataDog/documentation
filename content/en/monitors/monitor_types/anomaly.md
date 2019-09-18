@@ -26,7 +26,7 @@ For example, anomaly detection can help you discover when your web traffic is un
 
 To create an [anomaly monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Anomaly*.
 
-The anomaly detection monitor, use the `anomalies` function from the Datadog query language. When you apply this function to a series, it returns the usual results along with an expected "normal" range.
+The anomaly detection monitor uses the `anomalies` function from the Datadog query language. When you apply this function to a series, it returns the usual results along with an expected "normal" range.
 
 ### Define the metric
 
@@ -109,14 +109,18 @@ This example shows how each algorithm handles a new metric. `Robust` and `agile`
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="algorithm comparison new metric" responsive="true" style="width:90%;">}}
 
-### API
+### Notifications
 
-Enterprise-level customers can create anomaly detection monitors using the [create-monitor API endpoint][8]. Add the `anomalies` function to the query:
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][8] page.
+
+## API
+
+Enterprise-level customers can create anomaly detection monitors using the [create-monitor API endpoint][9]. Add the `anomalies` function to the query:
 ```text
 time_aggr(eval_window_length):anomalies(space_aggr:metric{tags}, 'basic/agile/robust', deviation_number, direction='both/above/below', alert_window='alert_window_length', interval=seconds, count_default_zero='true') >= threshold_value
 ```
 
-**Note**: Anomaly detection monitors are only available to enterprise-level customers. Pro-level customers interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][9].
+**Note**: Anomaly detection monitors are only available to enterprise-level customers. Pro-level customers interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][10].
 
 Below is an example query for an anomaly detection monitor, which alerts when the average Cassandra node's CPU is three standard deviations above the ordinary value over the last 5 minutes:
 ```text
@@ -125,8 +129,8 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 
 ## Troubleshooting
 
-* [Anomaly Monitor FAQ][10]
-* [Contact Datadog support][11]
+* [Anomaly Monitor FAQ][11]
+* [Contact Datadog support][12]
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -138,7 +142,8 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 [5]: /graphing/functions/rollup
 [6]: https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average
 [7]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
-[8]: /api/#monitor-create
-[9]: mailto:billing@datadoghq.com
-[10]: /monitors/faq/anomaly-monitor
-[11]: /help
+[8]: /monitors/notifications
+[9]: /api/#monitor-create
+[10]: mailto:billing@datadoghq.com
+[11]: /monitors/faq/anomaly-monitor
+[12]: /help
