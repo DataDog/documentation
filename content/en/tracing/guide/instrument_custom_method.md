@@ -97,9 +97,13 @@ end
 
 
 ```go
+package ledger
+
 import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 
-func (bl *BackupLedger) write(ctx context.Context, transactions TransactionList) (err error) {
+// [...]
+
+func (bl *BackupLedger) write(ctx context.Context, transactions []*Transaction) (err error) {
 	span, ctx := tracer.StartSpanFromContext(ctx, "BackupLedger.write")
 	defer func() {
 		// inside the defer, err holds its final value after the parent function
@@ -110,12 +114,23 @@ func (bl *BackupLedger) write(ctx context.Context, transactions TransactionList)
 	for _, t := range transactions {
 		// passing ctx down will allow that method to create child spans for a better
 		// hierarchical view
-		if err := bl.putTransaction(ctx, t); err != nil {
+		if err := bl.persistTransaction(ctx, t); err != nil {
 			return err
 		}
 	}
+	return nil
+}
 
-	// [...]
+func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Transaction) error {
+	id := transaction.ID
+	span, _ := tracer.StartSpanFromContext(ctx, "BackupLedger.persist", tracer.Tag("transaction_id", id))
+	defer span.Finish() 
+
+	if t, ok := bl.transactions[id]; ok {
+		return errors.New("duplicate entry")
+	}
+	bl.transactions[id] = transaction
+	return nil
 }
 ```
 
