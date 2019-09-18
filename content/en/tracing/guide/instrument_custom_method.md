@@ -95,7 +95,7 @@ end
 func (bl *BackupLedger) write(ctx context.Context, transactions TransactionList) (err error) {
 	span, ctx := tracer.StartSpanFromContext(ctx, "BackupLedger.write")
 	defer func() {
-          // inside the defer, err holds its final value after the parent function returns;
+		// inside the defer, err holds its final value after the parent function returns;
 		// if it's non-nil, the span will be marked with it.
 		span.Finish(tracer.WithError(err)) 
 	}()
