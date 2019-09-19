@@ -23,9 +23,9 @@ Some parts of your system might not be available to robots without the right ide
 * [The headers attached](#headers) to all Datadog robot requests.
 * The Datadog's [**Synthetics IP ranges**][1].
 * The **Advanced options** configuration to set custom headers for your API and Browser tests. You can also locally add **cookies, headers or basic auth** to your API tests and **cookies and headers** to your Browser tests.
-* [The `window._DATADOG_SYNTHETICS_BROWSER` javascript variable in your application code](#datadog-synthetics-browser-variable).
+* The `window._DATADOG_SYNTHETICS_BROWSER` [javascript variable in your application code](#datadog-synthetics-browser-variable).
 
-## Headers
+#### Headers
 
 Use the header attached to Datadog robots to detect them for your API and Browser tests:
 
@@ -49,7 +49,7 @@ The following header is attached to all Datadog Browser tests robots:
 {{% /tab %}}
 {{< /tabs >}}
 
-### APM headers
+##### APM headers
 
 If APM is enabled, [**other APM specific headers**][2] such as `x-datadog-trace-id` are added to all the requests launched for API tests.
 
