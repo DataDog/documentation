@@ -98,7 +98,7 @@ The following parameters can be used to configure the library to send logs to Da
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note:** `window.DD_LOGS` check is added to prevent any issues in case of a loading failure of the library.
+**Note**: The `window.DD_LOGS` check is used to prevent issues if a loading failure occurs with the library.
 
 ## Send a custom log entry
 
@@ -156,7 +156,7 @@ The logger adds the following information by default:
 * `http.useragent`
 * `network.client.ip`
 
-**Note:** `window.DD_LOGS` check is added to prevent any issues in case of a loading failure of the library.
+**Note**: The `window.DD_LOGS` check is used to prevent issues if a loading failure occurs with the library.
 
 ## Advanced usage
 
@@ -170,7 +170,7 @@ window.DD_LOGS && DD_LOGS.logger.setLevel('<LEVEL>')
 
 Only logs with a status equal to or higher than the specified level are sent.
 
-**Note:** `window.DD_LOGS` check is added to prevent any issues in case of a loading failure of the library.
+**Note**: The `window.DD_LOGS` check is used to prevent issues if a loading failure occurs with the library.
 
 ### Change the destination
 
@@ -181,7 +181,7 @@ Use the `setHandler` function with the values `http` (default), `console`, or `s
 window.DD_LOGS && DD_LOGS.logger.setHandler('<HANDLER>')
 ```
 
-**Note:** `window.DD_LOGS` check is added to prevent any issues in case of a loading failure of the library.
+**Note**: The `window.DD_LOGS` check is used to prevent issues if a loading failure occurs with the library.
 
 ### Define multiple loggers
 
@@ -236,7 +236,7 @@ if (window.DD_LOGS) {
 ...
 ```
 
-**Note:** `window.DD_LOGS` check is added to prevent any issues in case of a loading failure of the library.
+**Note**: The `window.DD_LOGS` check is used to prevent issues if a loading failure occurs with the library.
 
 ### Overwrite context
 
@@ -264,7 +264,7 @@ if (window.DD_LOGS) {
 }
 ```
 
-**Note:** `window.DD_LOGS` check is added to prevent any issues in case of a loading failure of the library.
+**Note**: The `window.DD_LOGS` check is used to prevent issues if a loading failure occurs with the library.
 
 ## Supported browsers
 
