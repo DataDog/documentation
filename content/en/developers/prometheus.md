@@ -107,7 +107,7 @@ class KubeDNSCheck(OpenMetricsBaseCheck):
 
 #### Implementing the check method
 
-From `instance` we just need `endpoint` which is the Prometheus or OpenMetrics metrics endpoint to poll metrics from:
+From `instance`, use `endpoint`, which is the Prometheus or OpenMetrics metrics endpoint to poll metrics from:
 
 ```python
 def check(self, instance):
@@ -139,7 +139,7 @@ def check(self, instance):
         raise CheckException("Unable to find prometheus_endpoint in config file.")
 ```
 
-Then as soon as you have data available you just need to flush:
+Then as soon as you have data available, flush:
 
 ```python
 from datadog_checks.errors import CheckException
@@ -201,11 +201,11 @@ You can improve your OpenMetrics check with the following methods:
 
 ### `self.ignore_metrics`
 
-Some metrics are ignored because they are duplicates or introduce a very high cardinality. Metrics included in this list will be silently skipped without a `Unable to handle metric` debug line in the logs.
+Some metrics are ignored because they are duplicates or introduce a very high cardinality. Metrics included in this list are silently skipped without an `Unable to handle metric` debug line in the logs.
 
 ### `self.labels_mapper`
 
-If the `labels_mapper` dictionary is provided, the metrics labels in `labels_mapper` will use the corresponding value as tag name when sending the gauges.
+If the `labels_mapper` dictionary is provided, the metrics labels in `labels_mapper` use the corresponding value as tag name when sending the gauges.
 
 ### `self.exclude_labels`
 
@@ -213,10 +213,10 @@ If the `labels_mapper` dictionary is provided, the metrics labels in `labels_map
 
 ### `self.type_overrides`
 
-`type_overrides` is a dictionary where the keys are Prometheus or OpenMetrics metric names and the values are a metric type (name as string) to use instead of the one listed in the payload. It can be used to force a type on untyped metrics.  
+`type_overrides` is a dictionary where the keys are Prometheus or OpenMetrics metric names and the values are a metric type (name as string) to use instead of the one listed in the payload. This can be used to force a type on untyped metrics.  
 Available types are: `counter`, `gauge`, `summary`, `untyped`, and `histogram`.
 
-**Note**: it is empty in the base class but needs to be overloaded/hardcoded in the final check not to be counted as custom metric.
+**Note**: This value is empty in the base class, but needs to be overloaded/hardcoded in the final check in order to not be counted as a custom metric.
 
 ## Further Reading
 
