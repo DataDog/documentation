@@ -21,7 +21,7 @@ This page dives into the `OpenMetricsBaseCheck` interface for more advanced usag
 
 ## Advanced usage: OpenMetrics check interface
 
-If you have more advanced needs than the generic check (metrics preprocessing for example) you can write a custom `OpenMetricsBaseCheck`. It's [the base class][3] of the generic check and it provides a structure and some helpers to collect metrics, events, and service checks exposed via Prometheus. Minimal configuration for checks based on this class include:
+If you have more advanced needs than the generic check (metrics preprocessing for example) you can write a custom `OpenMetricsBaseCheck`. It's [the base class][3] of the generic check, and it provides a structure and some helpers to collect metrics, events, and service checks exposed via Prometheus. Minimal configuration for checks based on this class include:
 
 - Overriding `self.NAMESPACE`
 - Overriding `self.metrics_mapper`
@@ -31,7 +31,7 @@ AND/OR
 
 ## Writing a custom Prometheus check
 
-This is a simple example of writing a kube DNS check to illustrate the `OpenMetricsBaseCheck` class usage. The example below replicates the functionality of the following generic Prometheus check:
+This is a simple example of writing a Kube DNS check to illustrate usage of the `OpenMetricsBaseCheck` class. The example below replicates the functionality of the following generic Prometheus check:
 
 ```yaml
 instances:
