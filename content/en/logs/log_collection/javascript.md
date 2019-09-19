@@ -98,6 +98,8 @@ The following parameters can be used to configure the library to send logs to Da
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note:** `window.DD_LOGS` check is added to prevent any issues in case of a loading failure of the library.
+
 ## Send a custom log entry
 
 Send a custom log entry directly to Datadog with the `log` function:
@@ -154,6 +156,8 @@ The logger adds the following information by default:
 * `http.useragent`
 * `network.client.ip`
 
+**Note:** `window.DD_LOGS` check is added to prevent any issues in case of a loading failure of the library.
+
 ## Advanced usage
 
 ### Filter by status
@@ -166,6 +170,8 @@ window.DD_LOGS && DD_LOGS.logger.setLevel('<LEVEL>')
 
 Only logs with a status equal to or higher than the specified level are sent.
 
+**Note:** `window.DD_LOGS` check is added to prevent any issues in case of a loading failure of the library.
+
 ### Change the destination
 
 By default, the loggers are sending logs to Datadog. It is also possible to configure the logger to send logs to the console, or to not send logs at all. This can be used in the development environment to keep the logs locally.
@@ -174,6 +180,8 @@ Use the `setHandler` function with the values `http` (default), `console`, or `s
 ```
 window.DD_LOGS && DD_LOGS.logger.setHandler('<HANDLER>')
 ```
+
+**Note:** `window.DD_LOGS` check is added to prevent any issues in case of a loading failure of the library.
 
 ### Define multiple loggers
 
@@ -228,6 +236,8 @@ if (window.DD_LOGS) {
 ...
 ```
 
+**Note:** `window.DD_LOGS` check is added to prevent any issues in case of a loading failure of the library.
+
 ### Overwrite context
 
 It is possible to set the entire context in one call. This also overrides previously set attributes, if any:
@@ -253,6 +263,8 @@ if (window.DD_LOGS) {
     })
 }
 ```
+
+**Note:** `window.DD_LOGS` check is added to prevent any issues in case of a loading failure of the library.
 
 ## Supported browsers
 
