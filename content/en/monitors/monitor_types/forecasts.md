@@ -1,5 +1,5 @@
 ---
-title: Forecasts monitor
+title: Forecasts Monitor
 kind: documentation
 aliases:
 - /guides/forecasts/
