@@ -86,7 +86,7 @@ class KubeDNSCheck(OpenMetricsBaseCheck):
 #### Overriding `self.metrics_mapper`
 
 `metrics_mapper` is a dictionary where the key is the metric to capture and the value is the corresponding metric name in Datadog.
-The reason for the override is so metrics reported by the OpenMetrics checks are not counted as [custom metric][5]:
+The reason for the override is so that metrics reported by the OpenMetrics checks are not counted as [custom metric][5]:
 
 ```python
 from datadog_checks.checks.openmetrics import OpenMetricsBaseCheck
