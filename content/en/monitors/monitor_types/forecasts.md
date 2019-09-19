@@ -21,11 +21,9 @@ Forecasting is an algorithmic feature that allows you to predict where a metric 
 
 ## Monitor creation
 
-To create an [forecast monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Forecast*.
+To create a [forecast monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Forecast*.
 
 The forecast monitor uses the `forecast` function from the Datadog query language. When you apply this function to a series, it returns the usual results with a forecast of future values.
-
-When you create a forecast monitor, the alert triggers when any part of the range of forecasted values crosses the threshold.
 
 ### Define the metric
 
@@ -46,67 +44,63 @@ After defining the metric, the forecast monitor provides two preview graphs in t
 
 #### Advanced Options
 
-Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available for you to edit under **Advanced Options (auto)**:
+Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available to edit under **Advanced Options (auto)**:
 
 {{< img src="monitors/monitor_types/forecasts/advanced_options.png" alt="Advanced options" responsive="true" style="width:80%;">}}
 
-| Option                   | Description                                                                                                             |
-|--------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| [Algorithm](#algorithms) | The forecast algorithm (`linear` or `seasonal`)                                                                         |
-| Model                    | The forecast model (`default`, `simple`, or `reactive`) for the linear algorithm                                        |
-| Seasonality              | The forecast seasonality (`hourly`, `daily`, `weekly`, or `monthly`) for the seasonal algorithm                         |
-| [Rollup][4]              | The rollup interval&mdash;larger intervals between points avoids noise influence on the forecast.                       |
-| Deviations               | The width of the range of forecasted values&mdash;A value of 1 or 2 is generally large enough for most "normal" points. |
+| Option                     | Description                                                                                                             |
+|----------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| [Algorithm](#algorithms)   | The forecast algorithm (`linear` or `seasonal`)                                                                         |
+| Model                      | The forecast model (`default`, `simple`, or `reactive`) for the linear algorithm                                        |
+| Seasonality                | The forecast seasonality (`hourly`, `daily`, `weekly`, or `monthly`) for the seasonal algorithm                         |
+| [Daylight&nbsp;savings][4] | Available for `seasonal` forecast monitors with `daily`, `weekly`, or `monthly` seasonality.                            |
+| [Rollup][5]                | The rollup interval&mdash;larger intervals between points avoid noise influence on the forecast.                        |
+| Deviations                 | The width of the range of forecasted values&mdash;a value of 1 or 2 is generally large enough for most "normal" points. |
 
 ##### Algorithms
 
-There are two different forecast algorithms:
+The available forecast algorithms are `linear` and `seasonal`. 
 
-**Linear**: Use this algorithm for metrics that have no repeating seasonal pattern, and tend to have steady trends. On dashboards, linear uses the data within view to create a forecast of the same length. For example, if you set the time selector to "The Past Week", the forecast uses the past week of data to forecast the next week. For monitors, you can explicitly set the amount of history to use, and it is set to one week by default.
+**Linear**<br>
+Use the linear algorithm for metrics that have steady trends but no repeating seasonal pattern. There are three different _models_ which control the linear algorithm's sensitivity to level shifts:
 
-The linear algorithm has three different _models_ that control how sensitive the algorithm is to level shifts.
+| Model    | Description                                                                                |
+|----------|--------------------------------------------------------------------------------------------|
+| Default  | Adjusts to the most recent trend and extrapolates data while being robust to recent noise. |
+| Simple   | Does a robust linear regression through the entire history.                                |
+| Reactive | Extrapolates recent behavior better at the risk of overfitting to noise, spikes, or dips.  |
 
-| Model    | Description                                                                                    |
-|----------|------------------------------------------------------------------------------------------------|
-| Default  | Adjusts to the most recent trend and extrapolates data while being robust to recent noise.     |
-| Simple   | Does a robust linear regression through the entire history.                                    |
-| Reactive | More easily extrapolates recent behavior, at the risk of overfitting to noise, spikes or dips. |
+**Seasonal**<br>
+Use the seasonal algorithm for metrics with repeating patterns. There are four different _seasonality_ choices:
 
-**Examples**:
+| Option  | Description                                                                                                                                        |
+|---------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Hourly  | The algorithm expects the same minute after the hour behaves like past minutes after the hour, for example 5:15 behaves like 4:15, 3:15, etc.      |
+| Daily   | The algorithm expects the same time today behaves like past days, for example 5pm today behaves like 5pm yesterday.                                |
+| Weekly  | The algorithm expects that a given day of the week behaves like past days of the week, for example this Tuesday behaves like past Tuesdays.        |
+| Monthly | The algorithm expects that a given day of the month behaves like past days of the month, for example July 1st behaves like June 1st, May 1st, etc. |
 
-{{< img src="monitors/monitor_types/forecasts/linear_simple.png" alt="linear simple" responsive="true" style="width:80%;">}}
-
-{{< img src="monitors/monitor_types/forecasts/linear_reactive.png" alt="linear reactive" responsive="true" style="width:80%;" >}}
-
-{{< img src="monitors/monitor_types/forecasts/linear_default.png" alt="linear default" responsive="true" style="width:80%;">}}
-
-**Seasonal:** Use this algorithm for seasonal metrics. In monitors, Datadog auto-detects the seasonality of the metric and chooses between weekly, daily, and hourly seasonality. This algorithm requires at least two seasons of history for it to start forecasting, and potentially uses up to six.
-
-Examples of seasonality options:
-
-* **weekly**: the algorithm expects this Monday behaves like past Mondays.
-* **daily**: the algorithm assumes that 7 pm today is like 7 pm from previous days.
-* **hourly**: the algorithm expects that 7:15 behaves like 6:15, 5:15, 4:15, etc.
-
-{{< img src="monitors/monitor_types/forecasts/seasonal.png" alt="seasonal" responsive="true" style="width:80%;">}}
-
-### Accessing Advanced Options
-
-Access advanced options under the **Advanced** tab in the **New Monitor** page. To specify them in the dashboards (using the JSON tab) or in the API, use this format:
-
-For Linear: `forecast(metric_name, 'linear', 1, interval='60m', history='1w', model='default')`, where the options for `model` are: `default`, `simple`, and `reactive`.
-
-For Seasonal: `forecast(metric_name, 'seasonal', 1, interval='60m', seasonality='weekly')`, where the options for `seasonality` are: `hourly`, `daily`, and `weekly`.
-
-When using the API, specify the start and end times of the forecast itself. If you want the forecast for the next day, specify the start to be `now` and the end to be `1 day ahead`.
+**Note**: This algorithm requires at least two seasons of history and uses up to six seasons for forecasting.
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][6] page.
+
+## API
+
+To create forecast monitors programmatically, see the examples below and the [Datadog API reference][7].
+```text
+# Linear
+max(next_1w):forecast(avg:<METRIC_NAME>{*}, 'linear', 1, interval='60m', history='1w', model='default') >= 100
+
+# Seasonal
+max(next_1w):forecast(avg:<METRIC_NAME>{*}, 'seasonal', 1, interval='600m', seasonality='weekly') >= 100
+```
 
 ## Troubleshooting
 
-Not all functions may be nested inside of calls to the `forecast()` function. In particular, you may not include any of the following functions in a forecast monitor or dashboard query: `anomalies()`, `cumsum()`, `integral()`, `outliers()`, `piecewise_constant()`, `robust_trend()`, or `trend_line()`
+The following functions cannot be nested inside calls to the `forecast()` function:<br>
+`anomalies`, `cumsum`, `integral`, `outliers`, `piecewise_constant`, `robust_trend`, or `trend_line`
 
 ## Further Reading
 
@@ -115,5 +109,7 @@ Not all functions may be nested inside of calls to the `forecast()` function. In
 [1]: https://app.datadoghq.com/monitors#create/forecast
 [2]: /monitors/monitor_types/metric/#define-the-metric
 [3]: /monitors/faq/what-are-recovery-thresholds
-[4]: /graphing/functions/rollup
-[5]: /monitors/notifications
+[4]: /monitors/faq/how-to-update-anomaly-monitor-timezone
+[5]: /graphing/functions/rollup
+[6]: /monitors/notifications
+[7]: /api/#create-a-monitor

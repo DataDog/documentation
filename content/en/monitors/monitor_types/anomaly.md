@@ -59,10 +59,10 @@ Datadog automatically analyzes your chosen metric and sets several parameters fo
 
 | Option                      | Description                                                                                                  |
 |-----------------------------|--------------------------------------------------------------------------------------------------------------|
-| Deviations                  | The width of the gray band. This is equivalent to the bounds parameter used in the [anomalies function][3]. |
+| Deviations                  | The width of the gray band. This is equivalent to the bounds parameter used in the [anomalies function][3].  |
 | Algorithm                   | The [anomaly detection algorithm](#anomaly-detection-algorithms) (`basic`, `agile`, or `robust`).            |
-| [Seasonality](#seasonality) | The seasonality of the chosen metric (`hourly`, `daily`, or `weekly`).                                       |
-| [Daylight savings][4]       | Available for `agile` or `robost` anomaly detection with `weekly` or `daily` seasonality.                    |
+| [Seasonality](#seasonality) | The seasonality (`hourly`, `daily`, or `weekly`) of the chosen metric for the `agile` or `robust` algorithm. |
+| [Daylight&nbsp;savings][4]  | Available for `agile` or `robost` anomaly detection with `weekly` or `daily` seasonality.                    |
 | [Rollup][5]                 | The rollup interval.                                                                                         |
 | Thresholds                  | The percentage of points that need to be anomalous for alerting, warning, and recovery.                      |
 
