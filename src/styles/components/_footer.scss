@@ -93,6 +93,12 @@ body {
         font-size:16px;
       }
     }
+    // investor relation menu - col3 custom width
+    .footer-ir{
+      @media(min-width: 1199px){
+        width: 110%;
+      }
+    }
   }
   &.fr,
   &.ja {
