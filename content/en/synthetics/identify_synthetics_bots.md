@@ -18,7 +18,7 @@ further_reading:
   text: "Configure an API Test"
 ---
 
-Some parts of your system might not be available to robots without the right identification, or you might want to avoid collecting analytics from Datadog robots. In order to detect Datadog robots you can use:
+Some parts of your system might not be available to robots without the right identification, or you might want to avoid collecting analytics from Datadog robots. In order to detect Datadog robots, you can use:
 
 * [The headers attached](#headers) to all Datadog robot requests.
 * The Datadog's [**Synthetics IP ranges**][1].
@@ -37,7 +37,7 @@ The following header is attached to all Datadog API tests robots:
 `Sec-Datadog: Request sent by a Datadog Synthetics API Test (https://docs.datadoghq.com/synthetics/) - public_id: <SYNTHETICS_TEST_PUBLIC_ID>`
 
 
-The `x-datadog-origin: synthetics` header, is also added to all the requests launched for a Datadog API test.
+The `x-datadog-origin: synthetics` header is also added to all the requests launched for a Datadog API test.
 
 {{% /tab %}}
 {{% tab "Browser Tests" %}}
