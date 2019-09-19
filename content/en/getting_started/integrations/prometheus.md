@@ -28,7 +28,7 @@ Collect your exposed Prometheus and OpenMetrics metrics from your application [r
 
 Starting with version 6.5.0, the Agent includes [OpenMetrics][3] and [Prometheus][4] checks capable of scraping Prometheus endpoints with a few lines of configuration. This page explains the basic usage of these checks, which enable you to scrape custom metrics from Prometheus endpoints. 
 
-We recommend using the OpenMetrics check since it is more efficient and fully supports Prometheus text format. Use the Prometheus check only when the metrics end-point does not support a text-format.
+Datadog recommends using the OpenMetrics check since it is more efficient and fully supports Prometheus text format. Use the Prometheus check only when the metrics endpoint does not support a text format.
 
 For more advanced usage of the `OpenMetricsCheck` interface, including writing a custom check, see the [Developer Tools][5] section.
 
@@ -39,7 +39,7 @@ For more advanced usage of the `OpenMetricsCheck` interface, including writing a
 
 ### Configuration
 
-If running the Agent as a binary on a host, configure your OpenMetrics or Prometheus check as any [other Agent integration](?tab=host). If running the Agent as a DaemonSet in Kubernetes, configure your OpenMetrics or Prometheus check using [Autodiscovery](?tab=kubernetes).
+If you are running the Agent as a binary on a host, configure your OpenMetrics or Prometheus check as you would any [other Agent integration](?tab=host). If you are running the Agent as a DaemonSet in Kubernetes, configure your OpenMetrics or Prometheus check using [Autodiscovery](?tab=kubernetes).
 
 {{< tabs >}}
 {{% tab "Host" %}}
