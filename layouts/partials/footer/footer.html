@@ -52,7 +52,7 @@
                         <p>About</p>
                         <ul class="list-unstyled">
                             {{ range $datafile.col3 }}
-                                {{ if .link }}<li {{ if eq .title "Investor Relations" }}class="footer-ir"{{ end }}><a href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a></li>{{ end }}
+                                {{ if .link }}<li {{ if eq .title "Investor Relations" }}class="nowrap"{{ end }}><a href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a></li>{{ end }}
                             {{ end }}
                         </ul>
                     </div>

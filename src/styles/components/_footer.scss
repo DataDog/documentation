@@ -94,11 +94,8 @@ body {
         display:block;
       }
     }
-    // investor relation menu - col3 custom width
-    .footer-ir{
-      @media(min-width: 1199px){
-        width: 110%;
-      }
+    .nowrap{
+      white-space: nowrap;
     }
   }
   &.fr,
