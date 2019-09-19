@@ -25,7 +25,7 @@ Private locations allow you to monitor internal-facing applications or any priva
 
 ## Setup
 
-The private location worker is shipped as a Docker container, so you can run in on Linux based OS or Widows OS as long as you have the docker engine available on your host.
+The private location worker is shipped as a Docker container, so you can run in on Linux based OS or Windows OS as long as you have the docker engine available on your host.
 
 By default, every second, your private location worker pulls your test configurations from Datadog’s servers using HTTPS, executes the test depending on the frequency defined in the configuration of the test, and returns the test results to Datadog’s servers.
 
