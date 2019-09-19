@@ -18,16 +18,16 @@ further_reading:
   text: "Configure an API Test"
 ---
 
-Some parts of your system might not be available to robots without the right identification, or you might want to avoid collecting analytics from Datadog robots. In order to detect Datadog robots, you can use:
+Some parts of your system might not be available to robots without the right identification, or you might want to avoid collecting analytics from Datadog robots. To detect Datadog robots, use:
 
-* [The headers attached](#headers) to all Datadog robot requests.
-* The Datadog's [**Synthetics IP ranges**][1].
-* The **Advanced options** configuration to set custom headers for your API and Browser tests. You can also locally add **cookies, headers or basic auth** to your API tests and **cookies and headers** to your Browser tests.
-* The `window._DATADOG_SYNTHETICS_BROWSER` [javascript variable in your application code](#datadog-synthetics-browser-variable).
+* The [headers](#headers) attached to all Datadog robot requests.
+* Datadog's [**Synthetics IP ranges**][1].
+* The **Advanced options** configuration to set custom headers for your API and browser tests. You can also locally add **cookies, headers, or basic auth** to your API tests and **cookies and headers** to your browser tests.
+* The `window._DATADOG_SYNTHETICS_BROWSER` [JavaScript variable in your application code](#_datadog_synthetics_browser-variable).
 
 #### Headers
 
-Use the header attached to Datadog robots to detect them for your API and Browser tests:
+Use the header attached to Datadog robots to detect them for your API and browser tests:
 
 {{< tabs >}}
 {{% tab "API Tests" %}}
@@ -40,9 +40,9 @@ The following header is attached to all Datadog API tests robots:
 The `x-datadog-origin: synthetics` header is also added to all the requests launched for a Datadog API test.
 
 {{% /tab %}}
-{{% tab "Browser Tests" %}}
+{{% tab "Browser tests" %}}
 
-The following header is attached to all Datadog Browser tests robots:
+The following header is attached to all Datadog browser tests robots:
 
 `Sec-Datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - public_id: <SYNTHETICS_TEST_PUBLIC_ID>`
 
@@ -68,4 +68,4 @@ if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://ip-ranges.datadoghq.com/synthetics.json
-[2]: /synthetics/apm/#how-are-traces-linked-to-checks
+[2]: /synthetics/apm/#how-are-traces-linked-to-tests
