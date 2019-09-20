@@ -61,7 +61,7 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
     datadog-agent integration install -w <PATH_OF_REBOOT_REQUIRED_ARTIFACT_>/<REBOOT_REQUIRED_ARTIFACT_NAME>.whl
     ```
 
-7. Configurez votre intégration comme [n'importe quelle autre intégration sous forme de paquet][6].
+7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][6].
 
 ### Configuration
 
