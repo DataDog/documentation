@@ -1147,7 +1147,7 @@ main:
     parent: "dev_tools"
     weight: 5
 
-  - name: "Write a Prometheus Check"
+  - name: "Write a OpenMetrics Check"
     url: "developers/prometheus/"
     parent: "dev_tools"
     weight: 6
