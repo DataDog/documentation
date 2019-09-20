@@ -40,7 +40,7 @@ Choisissez si votre widget doit afficher un intervalle personnalisé ou l'interv
 
 ##### Légende
 
-Utilisez *Show legend on graph* pour activer/désactiver l'affichage de la légende sur votre widget. Vous pouvez également sélectionner le nombre d'entrées à afficher (en option).
+Utilisez *Show legend on graph* pour activer/désactiver l'affichage de la légende sur votre widget. Vous pouvez également sélectionner le nombre d'entrées à afficher si vous le souhaitez.
 
 #### Titre
 

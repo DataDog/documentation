@@ -79,10 +79,10 @@ Il s'agit d'une application [ESL de FreeSwitch][28] afin d'exporter les statisti
 Vous pouvez importer des données dans Datadog depuis Google Analytics via l'API Datadog avec [cette bibliothèque][30] de [Bithaus][31].
 
 ### Heroku
-Heroku émet des métriques dyno par l'intermédiaire de logs. Pour convertir ces logs en métriques et les envoyer à Datadog, utilisez l'un des siphons de log. Pour envoyer vos logs Heroku à Datadog, consultez [la documentation dédiée][32].
+Heroku émet des métriques dyno par l'intermédiaire de logs. Pour convertir ces logs en métriques et les envoyer à Datadog, utilisez l'un des drains de log suivants. Pour envoyer vos logs Heroku à Datadog, consultez [la documentation dédiée][32].
 
-  * [Siphonnage de logs Heroku pour Datadog][33] rédigé en NodeJS par [Oz][34].
-  * [Siphonnage de logs Heroku pour Datadog][35] rédigé en Go par [Apiary][36].
+  * [Drain de logs Heroku pour Datadog][33] écrit en NodeJS par [Oz][34].
+  * [Drain de logs Heroku pour Datadog][35] écrit en Go par [Apiary][36].
 
 
 ### Jira
