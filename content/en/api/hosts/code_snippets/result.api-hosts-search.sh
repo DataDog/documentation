@@ -1,11 +1,11 @@
 {
   "total_returned": 1,
-  "last_reported_time": 1560000000,
   "host_list": [
     {
       "name": "i-deadbeef",
       "up": true,
       "is_muted": false,
+      "last_reported_time": 1560000000,
       "apps": [
         "agent"
       ],
