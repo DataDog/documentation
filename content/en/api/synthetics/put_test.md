@@ -33,7 +33,7 @@ Find below the available configuration options depending on the test you want to
 
 #### Request
 
-The **`request`**  object argument is required for the browser, API, and SSL tests. It's an object containing all the necessary information to perform the request to your endpoint. Its arguments are:
+The **`request`**  argument is required for the browser, API, and SSL tests. It's an object containing all the necessary information to perform the request to your endpoint. It's a JSON object with the following attributes available:
 
 *   **`method`** - required API and browser test_ - The method of the API to test. Valid values are `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`. Use `GET` for a browser test.
 *   **`url`** - _required API and browser test_ - The endpoint for the API Datadog is testing. For a browser test, the URL for the website Datadog is testing.
@@ -47,7 +47,7 @@ The **`request`**  object argument is required for the browser, API, and SSL tes
 
 #### Options
 
-The **`options`** object argument is required for the browser, API and SSL tests. Use it to  specify custom request headers, authentication credentials, body content, cookies, or to have the test follow redirects. All optional parameters take their default value if you don't specify a value. Its arguments are:
+The **`options`** argument is required for the browser, API and SSL tests. Use it to specify custom request headers, authentication credentials, body content, cookies, or to have the test follow redirects. All optional parameters take their default value if you don't specify a value. It's a JSON object with the following attributes available:
 
 *  **`tick_every`:** - _required_ -  How often the test should run (in seconds - current possible values are 60, 300, 900, 1800, 3600, 21600, 43200, 86400, 604800).
 *  **`min_failure_duration`** - _optional_ - How long the test should be in failure before alerting (integer, number of seconds, max 7200). Default is 0.
@@ -57,7 +57,7 @@ The **`options`** object argument is required for the browser, API and SSL tests
 
 #### Assertions
 
-The **`assertions`**  argument is required for the API and SSL tests. It allows you to define exactly what should happen for a test to be considered passed. **It's an array of JSON objects** which arguments are:
+The **`assertions`**  argument is required for the API and SSL tests. It allows you to define exactly what should happen for a test to be considered passed. **It's an array of JSON objects** with the following attributes available:
 
 *   **`type`** - _required_ - The part of the response that you want to assess. Possible types are:
 
@@ -69,8 +69,8 @@ The **`assertions`**  argument is required for the API and SSL tests. It allows 
   * `property`: For SSL test only, when you define a certificate `property`, you must specify the certificate property key in the `property` parameter, and the certificate property value with the `target`parameter.
 
 *   **`target`** - _required_ - The expected value for the assertion.
-*   **`operator`** - _required_ - Defines how to compare the target and the actual value from the response. Valid operators depend on the `type` of assertions. This is the list of valid operators per type:
 *   **`property`** - _optional_ - When you are setting up a `header` for the `type` parameter, this is required to define the headers parameter key. Valid values are any header keys, like `Content-Type` or `Authorization`.
+*   **`operator`** - _required_ - Defines how to compare the target and the actual value from the response. Valid operators depend on the `type` of assertions. This is the list of valid operators per type:
 
 | `type`        | Valid `operator`                                                            | Value type                                                                                                                                           |
 | ---           | ---                                                                         | ---                                                                                                                                                  |
@@ -80,7 +80,6 @@ The **`assertions`**  argument is required for the API and SSL tests. It allows 
 | `statusCode`   | `is`, `is not`                                                              | Integer                                                                                                                                              |
 | `certificate` | `isInMoreThan` | Integer |
 | `property` | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | For `contains`/`does not contain`/`is`/`is not`: String for `matches`/`does not match`: [RegexString][3] |
-
 
 [1]: /synthetics/browser_tests/#record-test
 [2]: /tagging/using_tags
