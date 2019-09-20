@@ -45,6 +45,8 @@ package gpg-pubkey-e09422b3 is not installed
 
 ## How to manually trust the new GPG key
 
+### Manual import command
+
 To manually trust the new key, run the following command on the host:
 
 ```bash
@@ -52,6 +54,32 @@ rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 ```
 
 Then check if the new key is trusted by following the steps in [How to check if a host trusts the new GPG key](#how-to-check-if-a-host-trusts-the-new-gpg-key).
+
+### Yum repository file update
+
+Alternatively, on CentOS or RHEL, if a Yum repository file is used to define the Datadog repository (usually called `datadog.repo`), such as the following:
+
+```
+[datadog]
+name = Datadog, Inc.
+baseurl = https://yum.datadoghq.com/stable/6/x86_64/
+enabled=1
+gpgcheck=1
+gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+```
+
+update it to add the new key (`https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public`) as one of the trusted keys:
+
+```
+[datadog]
+name = Datadog, Inc.
+baseurl = https://yum.datadoghq.com/stable/6/x86_64/
+enabled=1
+gpgcheck=1
+gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+       https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+```
+
 
 [1]: https://yum.datadoghq.com/
 [2]: https://app.datadoghq.com/account/settings#agent
