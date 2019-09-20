@@ -112,24 +112,10 @@ func (bl *BackupLedger) write(ctx context.Context, transactions []*Transaction) 
 	}()
 
 	for _, t := range transactions {
-		// passing ctx down will allow that method to create child spans for a better
-		// hierarchical view
 		if err := bl.persistTransaction(ctx, t); err != nil {
 			return err
 		}
 	}
-	return nil
-}
-
-func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Transaction) error {
-	id := transaction.ID
-	span, _ := tracer.StartSpanFromContext(ctx, "BackupLedger.persist", tracer.Tag("transaction_id", id))
-	defer span.Finish() 
-
-	if t, ok := bl.transactions[id]; ok {
-		return errors.New("duplicate entry")
-	}
-	bl.transactions[id] = transaction
 	return nil
 }
 ```
@@ -290,30 +276,40 @@ end
 
 
 ```go
+package ledger
+
 import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 
-func (bl *BackupLedger) write(ctx context.Context, transactions TransactionList) (err error) {
-	parent_span, ctx := tracer.StartSpanFromContext(ctx, "BackupLedger.write")
+// [...]
+
+func (bl *BackupLedger) write(ctx context.Context, transactions []*Transaction) (err error) {
+	span, ctx := tracer.StartSpanFromContext(ctx, "BackupLedger.write")
 	defer func() {
 		// inside the defer, err holds its final value after the parent function
 		// returns; if it's non-nil, the span will be marked with it.
-		parent_span.Finish(tracer.WithError(err))
+		span.Finish(tracer.WithError(err))
 	}()
 
 	for _, t := range transactions {
-		span, ctx := tracer.StartSpanFromContext(ctx, "BackupLedger.persist")
-
-		// add custom metadata to the "persist_transaction" span.
-		span.SetTag("transaction.id", t.Id)
-		if err := bl.putTransaction(ctx, t); err != nil {
+		// ctx you pass down includes out-of-the-box Span references to create
+		// a parent/child relationship
+		if err := bl.persistTransaction(ctx, t); err != nil {
 			return err
 		}
-
-		// close the span
-		span.Finish()
 	}
+	return nil
+}
 
-	// [...]
+func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Transaction) error {
+	id := transaction.ID
+	span, _ := tracer.StartSpanFromContext(ctx, "BackupLedger.persist", tracer.Tag("transaction_id", id))
+	defer span.Finish()
+
+	if t, ok := bl.transactions[id]; ok {
+		return errors.New("duplicate entry")
+	}
+	bl.transactions[id] = transaction
+	return nil
 }
 ```
 
