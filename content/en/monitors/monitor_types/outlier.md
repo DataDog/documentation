@@ -54,7 +54,10 @@ Datadog offers two types of outlier detection algorithms: `DBSCAN`/`scaledDBSCAN
 
 ##### DBSCAN
 
-[DBSCAN][3] (density-based spatial clustering of applications with noise) is a popular clustering algorithm. Traditionally, DBSCAN takes: 1) a parameter 𝜀 that specifies a distance threshold under which two points are considered to be close; and 2) the minimum number of points that have to be within a point's 𝜀-radius before that point can start agglomerating. 
+[DBSCAN][3] (density-based spatial clustering of applications with noise) is a popular clustering algorithm. Traditionally, DBSCAN takes: 
+
+1. A parameter `𝜀` that specifies a distance threshold under which two points are considered to be close.
+2. The minimum number of points that have to be within a point's `𝜀-radius` before that point can start agglomerating. 
 
 Datadog uses a simplified form of DBSCAN to detect outliers on timeseries. Each host is considered to be a point in *d*-dimensions, where *d* is the number of elements in the timeseries. Any point can agglomerate, and any point not in the largest cluster is considered an outlier. The initial distance threshold is set by creating a new median timeseries by taking the median of the values from the existing timeseries at every time point. The Euclidean distance between each host and the median series is calculated. The threshold is set as the median of these distances, multiplied by a normalizing constant.
 
