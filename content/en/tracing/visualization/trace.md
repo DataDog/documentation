@@ -19,7 +19,7 @@ further_reading:
   text: "Understand how to read a Datadog Trace"
 ---
 
-View an individual trace to see all of its spans and associated metadata. Each trace can be viewed either as a flame graph or as a list (grouped by service or host).
+View an individual [trace][1] to see all of its [spans][2] and associated metadata. Each trace can be viewed either as a flame graph or as a list (grouped by [service][3] or host).
 
 {{< img src="tracing/visualization/trace/trace.png" alt="Trace" responsive="true" style="width:90%;">}}
 
@@ -31,20 +31,20 @@ To get a closer look at the flame graph, zoom in by scrolling:
 
 {{< img src="tracing/visualization/trace/trace_zoom.mp4" alt="Trace Error" video="true" responsive="true" width="90%" >}}
 
-The List view aggregates resources by service and sorts them according to their corresponding count of spans. Services are sorted per relative percentage of execution time spent by the trace in each service:
+The List view aggregates [resources][4] by [service][3] and sorts them according to their corresponding count of spans. Services are sorted per relative percentage of execution time spent by the trace in each service:
 
 {{< img src="tracing/visualization/trace/trace_list.png" alt="Trace list" responsive="true" style="width:90%;">}}
 
 ### More Information
 
 {{< tabs >}}
-{{% tab "Span Metadata" %}}
+{{% tab "Span tags" %}}
 
 Click on a span in the flame graph to show its metadata below the graph. If there's an error, the stack trace is provided:
 
 {{< img src="tracing/visualization/trace/trace_error.png" alt="Trace Error" responsive="true" style="width:90%;">}}
 
-If you are analyzing a trace reporting an error, the error has a specific display if you follow the special meaning tags rules. When submitting your traces you can add attributes to the `meta` parameter.
+If you are analyzing a [trace][1] reporting an error, the error has a specific display if you follow the special meaning tags rules. When submitting your traces you can add attributes to the `meta` parameter.
 
 Some attributes have special meanings that lead to a dedicated display or specific behavior in Datadog:
 
@@ -57,6 +57,7 @@ Some attributes have special meanings that lead to a dedicated display or specif
 
 {{< img src="tracing/visualization/trace/trace_error_formating.png" alt="Error Formating" responsive="true" >}}
 
+[1]: /tracing/visualization/#trace
 {{% /tab %}}
 {{% tab "Host Info" %}}
 
@@ -79,3 +80,8 @@ See logs related to your service at the time of the trace. When you hover over a
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/visualization/#trace
+[2]: /tracing/visualization/#spans
+[3]: /tracing/visualization/#services
+[4]: /tracing/visualization/#resources

@@ -266,6 +266,12 @@ Tracing:
       authors: Datadog
       notes: gem is called 'ddtrace'.
   - Scala:
-    - name: scala-opentracing                                                                       
-      link: https://github.com/Colisweb/scala-opentracing                                           
+    - name: scala-opentracing
+      link: https://github.com/Colisweb/scala-opentracing
       authors: Colisweb
+Log:
+  - Laravel:
+    - name: laravel-datadog-logger
+      link: https://github.com/myLocalInfluence/laravel-datadog-logger
+      notes: Logger, handler, and formatter created for DataDog log management on Laravel framework.
+      authors: Aurélien SCHILTZ

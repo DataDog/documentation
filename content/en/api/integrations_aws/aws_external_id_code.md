@@ -1,7 +1,7 @@
 ---
 title: Generate External IDs
 type: apicode
-order: 15.5
+order: 15.06
 external_redirect: /api/#generate-external-ids
 ---
 

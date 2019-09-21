@@ -32,29 +32,28 @@ Saved Views allow you to save search customizations in the Log Explorer, includi
 
 * A [search query][1]
 * A [selected subset of facets][2]
-* A customized default visualization ([log stream][4], [log patterns][5], or [log analytics][6] along with their specific visualization properties)
+* A customized default visualization ([log stream][3], [log patterns][4], or [log analytics][5] along with their specific visualization properties)
 
 
 ### Load a Saved View
 
-Select Saved Views directly in the left panel or in the search bar with autocompletion, which matches on either search name or query. 
+Select Saved Views directly in the left panel or in the search bar with autocompletion, which matches on either search name or query.
 
 {{< img src="logs/explorer/saved_views/saved_view_load-from-bar.png" alt="Saved Views selection" responsive="true">}}
 
 Star Saved Views to marked them as favorites. Starred Saved Views are available directly from the main navigation menu.
 
-{{< img src="logs/explorer/saved_views/saved_view_load.gif" alt="Saved Views selection" responsive="true">}}
+{{< img src="logs/explorer/saved_views/saved_view_load.mp4" alt="Saved Views load" video="true" responsive="true" >}}
 
 ### Manage Saved Views
 
-To create a new Saved View, click the *Save as* button at the top of the screen. Give it a name, and click on *Save*. 
+To create a new Saved View, click the *Save as* button at the top of the screen. Give it a name, and click on *Save*.
 
-Slice and dice starting from a Saved View. If needed, update this saved view to keep track of query or page layout configuration—use the "Save As" button. 
+Slice and dice starting from a Saved View. If needed, update this saved view to keep track of query or page layout configuration—use the "Save As" button.
 
-{{< img src="logs/explorer/saved_views/saved_view_create-delete.gif" alt="Saved views creation" responsive="true" >}}
+{{< img src="logs/explorer/saved_views/saved_view_create-delete.mp4" video="true" alt="Saved views creation" responsive="true" >}}
 
 Saved Views can be removed directly from the Saved View list in the Logs Explorer. Hover over the name of the Saved View to reveal its **delete** button. Click on it and confirm.
-
 
 ## Further Reading
 
@@ -63,6 +62,5 @@ Saved Views can be removed directly from the Saved View list in the Logs Explore
 [1]: /logs/explorer/search
 [2]: /logs/explorer/?tab=facets#setup
 [3]: /logs/explorer/?tab=logstream#visualization
-[4]: /logs/explorer/?tab=logstream#visualization
-[5]: /logs/explorer/patterns
-[6]: /logs/explorer/analytics
+[4]: /logs/explorer/patterns
+[5]: /logs/explorer/analytics

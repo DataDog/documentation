@@ -43,9 +43,7 @@ Once you created a private location, configuring a Synthetics API or Browser tes
 3. Launch your worker as a standalone container using the Docker run command provided and the previously created configuration file:
 
     ```
-    docker run --name synthetics-private-location-worker-<LOCATION_ID> \
-               --rm -v $(pwd)/synthetics-private-location-worker-<LOCATION_ID>.json:/etc/synthetics-private-location-worker-<LOCATION_ID>.json datadog/synthetics-private-location-worker node /datadog-synthetics-agent/dist/worker.js \
-               --config=/etc/synthetics-private-location-worker-<LOCATION_ID>.json
+    docker run --init --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
     ```
 
     **Note**: To scale a private location, add or remove workers on your host.
