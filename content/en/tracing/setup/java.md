@@ -92,9 +92,10 @@ Beta integrations are disabled by default but can be enabled individually.
 *Note:* Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Tomcat, Jetty, Websphere, Weblogic, etc.
 Also, frameworks like Spring Boot inherently work because it uses a Servlet compatible embedded application server.
 
-Grizzly Instrumentation is disabled by default - to enable, add one of the following configs:
-System Property: `dd.jmxfetch.grizzly.enabled=true`
-Environment Variable: `DD_JMXFETCH_GRIZZLY_ENABLED=true`k
+Grizzly Instrumentation is disabled by default - to enable, add one of the following configs.
+
+* System Property: `dd.jmxfetch.grizzly.enabled=true`
+* Environment Variable: `DD_JMXFETCH_GRIZZLY_ENABLED=true`
 
 Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][7] if you need help.
 
