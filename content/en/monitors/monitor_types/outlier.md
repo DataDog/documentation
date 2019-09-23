@@ -52,9 +52,10 @@ To ensure your alert is properly calibrated, set the time window in the preview 
 
 Datadog offers two types of outlier detection algorithms: `DBSCAN`/`scaledDBSCAN` and `MAD`/`scaledMAD`. It is recommended to use the default algorithm, DBSCAN. If you have trouble detecting the correct outliers, adjust the parameters of DBSCAN or try the MAD algorithm. The scaled algorithms may be useful if your metrics are large scale and closely clustered.
 
-##### DBSCAN
+{{< tabs >}}
+{{% tab "DBSCAN" %}}
 
-[DBSCAN][3] (density-based spatial clustering of applications with noise) is a popular clustering algorithm. Traditionally, DBSCAN takes: 
+[DBSCAN][1] (density-based spatial clustering of applications with noise) is a popular clustering algorithm. Traditionally, DBSCAN takes: 
 
 1. A parameter `𝜀` that specifies a distance threshold under which two points are considered to be close.
 2. The minimum number of points that have to be within a point's `𝜀-radius` before that point can start agglomerating. 
@@ -64,9 +65,11 @@ Datadog uses a simplified form of DBSCAN to detect outliers on timeseries. Each 
 **Parameters**<br>
 This implementation of DBSCAN takes one parameter, `tolerance`, the constant by which the initial threshold is multiplied to yield DBSCAN's distance parameter 𝜀. Set the tolerance parameter according to how similarly you expect your hosts to behave—larger values allow for more tolerance in how much a host can deviate from its peers.
 
-##### MAD
+[1]: https://en.wikipedia.org/wiki/DBSCAN
+{{% /tab %}}
+{{% tab "MAD" %}}
 
-[MAD][4] (median absolute deviation) is a robust measure of variability, and can be viewed as the robust analog for standard deviation. Robust statistics describe data in a way that is not influenced by outliers.
+[MAD][1] (median absolute deviation) is a robust measure of variability, and can be viewed as the robust analog for standard deviation. Robust statistics describe data in a way that is not influenced by outliers.
 
 **Parameters**<br>
 To use MAD for your outlier monitor, configure the parameters `tolerance` and `%`. 
@@ -75,9 +78,14 @@ Tolerance specifies the number of deviations a point needs to be away from the m
 
 Percent refers to the percentage of points in the series considered as outliers. If this percentage is exceeded, the whole series is marked as an outlier.
 
-##### Scaled
+[1]: https://en.wikipedia.org/wiki/Median_absolute_deviation
+{{% /tab %}}
+{{% tab "Scaled" %}}
 
 DBSCAN and MAD have scaled versions (scaledDBSCAN and scaledMAD). In most situations, the scaled algorithms behave the same as their regular counterparts. However, if DBSCAN/MAD algorithms are identifying outliers within a closely clustered group of metrics, and you would like the outlier detection algorithm to scale with the overall magnitude of the metrics, try the scaled algorithms.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ##### DBSCAN vs. MAD
 
@@ -89,7 +97,7 @@ In the following image, a group of hosts is flushing their buffers together, whi
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
 
 ## Troubleshooting
 
@@ -102,6 +110,4 @@ The outlier algorithms are set up to identify outliers that differ from the majo
 
 [1]: https://app.datadoghq.com/monitors#create/outlier
 [2]: /monitors/monitor_types/metric/#define-the-metric
-[3]: https://en.wikipedia.org/wiki/DBSCAN
-[4]: https://en.wikipedia.org/wiki/Median_absolute_deviation
-[5]: /monitors/notifications
+[3]: /monitors/notifications

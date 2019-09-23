@@ -59,9 +59,11 @@ Datadog automatically analyzes your chosen metric and sets several parameters fo
 
 ##### Algorithms
 
-The available forecast algorithms are `linear` and `seasonal`. 
+The available forecast algorithms are `linear` and `seasonal`.
 
-**Linear**<br>
+{{< tabs >}}
+{{% tab "Linear" %}}
+
 Use the linear algorithm for metrics that have steady trends but no repeating seasonal pattern. There are three different _models_ which control the linear algorithm's sensitivity to level shifts:
 
 | Model    | Description                                                                                |
@@ -70,7 +72,9 @@ Use the linear algorithm for metrics that have steady trends but no repeating se
 | Simple   | Does a robust linear regression through the entire history.                                |
 | Reactive | Extrapolates recent behavior better at the risk of overfitting to noise, spikes, or dips.  |
 
-**Seasonal**<br>
+{{% /tab %}}
+{{% tab "Seasonal" %}}
+
 Use the seasonal algorithm for metrics with repeating patterns. There are four different _seasonality_ choices:
 
 | Option  | Description                                                                                                                                        |
@@ -82,6 +86,9 @@ Use the seasonal algorithm for metrics with repeating patterns. There are four d
 
 **Note**: This algorithm requires at least two seasons of history and uses up to six seasons for forecasting.
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Notifications
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][6] page.
@@ -89,13 +96,23 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 ## API
 
 To create forecast monitors programmatically, see the examples below and the [Datadog API reference][7].
-```text
-# Linear
-max(next_1w):forecast(avg:<METRIC_NAME>{*}, 'linear', 1, interval='60m', history='1w', model='default') >= 100
 
-# Seasonal
+{{< tabs >}}
+{{% tab "Linear" %}}
+
+```text
+max(next_1w):forecast(avg:<METRIC_NAME>{*}, 'linear', 1, interval='60m', history='1w', model='default') >= 100
+```
+
+{{% /tab %}}
+{{% tab "Seasonal" %}}
+
+```
 max(next_1w):forecast(avg:<METRIC_NAME>{*}, 'seasonal', 1, interval='600m', seasonality='weekly') >= 100
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Troubleshooting
 
