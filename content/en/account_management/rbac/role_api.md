@@ -305,7 +305,7 @@ curl -X GET "https://app.datadoghq.com/api/v2/permissions" \
 {
 	"data": [{
         "type": "permissions",
-        "id": $PERMISSION_UUID,
+        "id": "$PERMISSION_UUID",
         "attributes": {
             "display_name": "Logs metrics write",
             "description": "Update a custom metric",
@@ -313,7 +313,7 @@ curl -X GET "https://app.datadoghq.com/api/v2/permissions" \
             "created": "2000-02-29T14:26:26.983187+00:00",
             "group_name": "Logs",
             "display_type": "other",
-            "uuid": $PERMISSION_UUID
+            "uuid": "$PERMISSION_UUID"
         }
     }]
 }
@@ -339,7 +339,7 @@ curl -X GET "https://app.datadoghq.com/api/v2/roles/$ROLE_UUID/permissions" \
 {
 	"data": [{
         "type": "permissions",
-        "id": $PERMISSION_UUID,
+        "id": "$PERMISSION_UUID",
         "attributes": {
             "display_name": "Logs metrics write",
             "description": "Update a custom metric",
@@ -347,7 +347,7 @@ curl -X GET "https://app.datadoghq.com/api/v2/roles/$ROLE_UUID/permissions" \
             "created": "2000-02-29T14:26:26.983187+00:00",
             "group_name": "Logs",
             "display_type": "other",
-            "uuid": $PERMISSION_UUID
+            "uuid": "$PERMISSION_UUID"
         }
     }]
 }
@@ -391,7 +391,7 @@ curl -X POST \
 {
 	"data": [{
         "type": "permissions",
-        "id": $PERMISSION_UUID,
+        "id": "$PERMISSION_UUID",
         "attributes": {
             "display_name": "Logs metrics write",
             "description": "Update a custom metric",
@@ -399,7 +399,7 @@ curl -X POST \
             "created": "2000-02-29T14:26:26.983187+00:00",
             "group_name": "Logs",
             "display_type": "other",
-            "uuid": $PERMISSION_UUID
+            "uuid": "$PERMISSION_UUID"
         }
     }]
 }
@@ -442,7 +442,7 @@ curl -X DELETE \
 {
 	"data": [{
         "type": "permissions",
-        "id": $DIFFERENT_PERMISSION_UUID,
+        "id": "$DIFFERENT_PERMISSION_UUID",
         "attributes": {
             "display_name": "Logs metrics read",
             "description": "Update a read metric",
@@ -450,7 +450,7 @@ curl -X DELETE \
             "created": "2000-02-29T14:26:26.983187+00:00",
             "group_name": "Logs",
             "display_type": "other",
-            "uuid": $DIFFERENT_PERMISSION_UUID
+            "uuid": "$DIFFERENT_PERMISSION_UUID"
         }
     }]
 }
