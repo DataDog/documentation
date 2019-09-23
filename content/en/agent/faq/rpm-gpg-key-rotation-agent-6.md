@@ -61,7 +61,7 @@ Then check if the new key is trusted by following the steps in [How to check if 
 
 ### Yum repository file update
 
-Alternatively, on CentOS, RHEL and Amazon Linux, if a Yum repository file is used to define the Datadog repository (usually called `datadog.repo`), such as the following:
+Alternatively, on CentOS, RHEL, and Amazon Linux, if your Yum repository file used to define the Datadog repository (usually called `datadog.repo`) looks like this:
 
 ```
 [datadog]
