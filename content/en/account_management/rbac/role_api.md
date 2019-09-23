@@ -61,43 +61,44 @@ HTTP/2 200
 
 ```sh
 curl -X GET "https://app.datadoghq.com/api/v2/roles" -H "DD-API-KEY: ${API_KEY}" -H "DD-APPLICATION-KEY: ${APP_KEY}"
+```
 
-
-# Response:
-# {
-#     "meta": {
-#         "page": {
-#             "total_count": 7
-#         }
-#     },
-#     "data": [
-# 	    {
-#             "type": "roles",
-#             "id": $ROLE_UUID,
-#                 "attributes": {
-#                 "created_at": "2000-02-29T16:50:43.607749+00:00",
-#                 "user_count": 2122,
-#                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
-#                 "uuid": $ROLE_UUID,
-#                 "name": $ROLE_NAME
-#             },
-#             "relationships": {
-#                 "permissions": {
-#                     "data": [
-#                         {
-#                             "type": "permissions",
-#                             "id": $PERMISSION_UUID
-#                         },
-#                         {
-#                             "type": "permissions",
-#                             "id": $PERMISSION_UUID
-#                         }
-#                     ]
-#                 }
-#             }
-#         }
-#     ]
-# }
+##### Response:
+```json
+{
+    "meta": {
+        "page": {
+            "total_count": 7
+        }
+    },
+    "data": [
+	    {
+            "type": "roles",
+            "id": $ROLE_UUID,
+                "attributes": {
+                "created_at": "2000-02-29T16:50:43.607749+00:00",
+                "user_count": 2122,
+                "modified_at": "2000-02-29T16:50:43.607749+00:00",
+                "uuid": $ROLE_UUID,
+                "name": $ROLE_NAME
+            },
+            "relationships": {
+                "permissions": {
+                    "data": [
+                        {
+                            "type": "permissions",
+                            "id": $PERMISSION_UUID
+                        },
+                        {
+                            "type": "permissions",
+                            "id": $PERMISSION_UUID
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
 ```
 
 ### Get One Role
@@ -116,35 +117,37 @@ HTTP/2 200
 
 ```sh
 curl -X GET "https://app.datadoghq.com/api/v2/roles/$ROLE_UUID" -H "DD-API-KEY: ${API_KEY}" -H "DD-APPLICATION-KEY: ${APP_KEY}"
+```
 
-# Response:
-# {
-# 	"data": {
-#             "type": "roles",
-#             "id": $ROLE_UUID,
-#                 "attributes": {
-#                 "created_at": "2000-02-29T16:50:43.607749+00:00",
-#                 "user_count": 2122,
-#                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
-#                 "uuid": $ROLE_UUID,
-#                 "name": $ROLE_NAME
-#             },
-#             "relationships": {
-#                 "permissions": {
-#                     "data": [
-#                         {
-#                             "type": "permissions",
-#                             "id": $PERMISSION_UUID
-#                         },
-#                         {
-#                             "type": "permissions",
-#                             "id": $PERMISSION_UUID
-#                         }
-#                     ]
-#                 }
-#             }
-#         }
-# }
+##### Response:
+```json
+{
+	"data": {
+            "type": "roles",
+            "id": $ROLE_UUID,
+                "attributes": {
+                "created_at": "2000-02-29T16:50:43.607749+00:00",
+                "user_count": 2122,
+                "modified_at": "2000-02-29T16:50:43.607749+00:00",
+                "uuid": $ROLE_UUID,
+                "name": $ROLE_NAME
+            },
+            "relationships": {
+                "permissions": {
+                    "data": [
+                        {
+                            "type": "permissions",
+                            "id": $PERMISSION_UUID
+                        },
+                        {
+                            "type": "permissions",
+                            "id": $PERMISSION_UUID
+                        }
+                    ]
+                }
+            }
+        }
+}
 ```
 
 ### Create Role
@@ -178,27 +181,28 @@ curl -X POST \
                     }
             }
         }'
+```
 
-
-# Response:
-# {
-# 	"data": {
-#             "type": "roles",
-#             "id": $ROLE_UUID,
-#                 "attributes": {
-#                 "created_at": "2000-02-29T16:50:43.607749+00:00",
-#                 "user_count": 0,
-#                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
-#                 "uuid": $ROLE_UUID,
-#                 "name": $ROLE_NAME
-#             },
-#             "relationships": {
-#                 "permissions": {
-#                     "data": []
-#                 }
-#             }
-#         }
-# }
+##### Response:
+```json
+{
+	"data": {
+            "type": "roles",
+            "id": $ROLE_UUID,
+                "attributes": {
+                "created_at": "2000-02-29T16:50:43.607749+00:00",
+                "user_count": 0,
+                "modified_at": "2000-02-29T16:50:43.607749+00:00",
+                "uuid": $ROLE_UUID,
+                "name": $ROLE_NAME
+            },
+            "relationships": {
+                "permissions": {
+                    "data": []
+                }
+            }
+        }
+}
 
 ```
 
@@ -233,27 +237,29 @@ curl -X PATCH \
                 }
              }
          }'
+```
 
 
-# Response:
-# {
-# 	"data": {
-#             "type": "roles",
-#             "id": $ROLE_UUID,
-#                 "attributes": {
-#                 "created_at": "2000-02-29T16:50:43.607749+00:00",
-#                 "user_count": 0,
-#                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
-#                 "uuid": $ROLE_UUID,
-#                 "name": $ROLE_NAME
-#             },
-#             "relationships": {
-#                 "permissions": {
-#                     "data": []
-#                 }
-#             }
-#         }
-# }
+##### Response:
+```json
+{
+	"data": {
+            "type": "roles",
+            "id": $ROLE_UUID,
+                "attributes": {
+                "created_at": "2000-02-29T16:50:43.607749+00:00",
+                "user_count": 0,
+                "modified_at": "2000-02-29T16:50:43.607749+00:00",
+                "uuid": $ROLE_UUID,
+                "name": $ROLE_NAME
+            },
+            "relationships": {
+                "permissions": {
+                    "data": []
+                }
+            }
+        }
+}
 
 ```
 
@@ -292,23 +298,25 @@ curl -X GET "https://app.datadoghq.com/api/v2/permissions" \
              -H "Content-Type: application/json" \
              -H "DD-API-KEY: ${API_KEY}" \
              -H "DD-APPLICATION-KEY: ${APP_KEY}"
+```
 
-# Response:
-# {
-# 	"data": [{
-#         "type": "permissions",
-#         "id": $PERMISSION_UUID,
-#         "attributes": {
-#             "display_name": "Logs metrics write",
-#             "description": "Update a custom metric",
-#             "name": "logs_metrics_write",
-#             "created": "2000-02-29T14:26:26.983187+00:00",
-#             "group_name": "Logs",
-#             "display_type": "other",
-#             "uuid": $PERMISSION_UUID
-#         }
-#     }]
-# }
+##### Response:
+```json
+{
+	"data": [{
+        "type": "permissions",
+        "id": $PERMISSION_UUID,
+        "attributes": {
+            "display_name": "Logs metrics write",
+            "description": "Update a custom metric",
+            "name": "logs_metrics_write",
+            "created": "2000-02-29T14:26:26.983187+00:00",
+            "group_name": "Logs",
+            "display_type": "other",
+            "uuid": $PERMISSION_UUID
+        }
+    }]
+}
 ```
 
 ### Get Permissions for a role
@@ -324,23 +332,25 @@ curl -X GET "https://app.datadoghq.com/api/v2/roles/$ROLE_UUID/permissions" \
              -H "Content-Type: application/json" \
              -H "DD-API-KEY: ${API_KEY}" \
              -H "DD-APPLICATION-KEY: ${APP_KEY}"
+```
 
-# Response:
-# {
-# 	"data": [{
-#         "type": "permissions",
-#         "id": $PERMISSION_UUID,
-#         "attributes": {
-#             "display_name": "Logs metrics write",
-#             "description": "Update a custom metric",
-#             "name": "logs_metrics_write",
-#             "created": "2000-02-29T14:26:26.983187+00:00",
-#             "group_name": "Logs",
-#             "display_type": "other",
-#             "uuid": $PERMISSION_UUID
-#         }
-#     }]
-# }
+##### Response:
+```json
+{
+	"data": [{
+        "type": "permissions",
+        "id": $PERMISSION_UUID,
+        "attributes": {
+            "display_name": "Logs metrics write",
+            "description": "Update a custom metric",
+            "name": "logs_metrics_write",
+            "created": "2000-02-29T14:26:26.983187+00:00",
+            "group_name": "Logs",
+            "display_type": "other",
+            "uuid": $PERMISSION_UUID
+        }
+    }]
+}
 ```
 
 
@@ -374,23 +384,25 @@ curl -X POST \
                     "id": $PERMISSION_UUID
                 }
             }'
+```
 
-# Response:
-# {
-# 	"data": [{
-#         "type": "permissions",
-#         "id": $PERMISSION_UUID,
-#         "attributes": {
-#             "display_name": "Logs metrics write",
-#             "description": "Update a custom metric",
-#             "name": "logs_metrics_write",
-#             "created": "2000-02-29T14:26:26.983187+00:00",
-#             "group_name": "Logs",
-#             "display_type": "other",
-#             "uuid": $PERMISSION_UUID
-#         }
-#     }]
-# }
+##### Response:
+```json
+{
+	"data": [{
+        "type": "permissions",
+        "id": $PERMISSION_UUID,
+        "attributes": {
+            "display_name": "Logs metrics write",
+            "description": "Update a custom metric",
+            "name": "logs_metrics_write",
+            "created": "2000-02-29T14:26:26.983187+00:00",
+            "group_name": "Logs",
+            "display_type": "other",
+            "uuid": $PERMISSION_UUID
+        }
+    }]
+}
 ```
 
 ### Revoke Permission from Role
@@ -423,23 +435,25 @@ curl -X DELETE \
                  "id": $PERMISSION_UUID
              }
          }'
+```
 
-# Response:
-# {
-# 	"data": [{
-#         "type": "permissions",
-#         "id": $DIFFERENT_PERMISSION_UUID,
-#         "attributes": {
-#             "display_name": "Logs metrics read",
-#             "description": "Update a read metric",
-#             "name": "logs_metrics_read",
-#             "created": "2000-02-29T14:26:26.983187+00:00",
-#             "group_name": "Logs",
-#             "display_type": "other",
-#             "uuid": $DIFFERENT_PERMISSION_UUID
-#         }
-#     }]
-# }
+##### Response:
+```json
+{
+	"data": [{
+        "type": "permissions",
+        "id": $DIFFERENT_PERMISSION_UUID,
+        "attributes": {
+            "display_name": "Logs metrics read",
+            "description": "Update a read metric",
+            "name": "logs_metrics_read",
+            "created": "2000-02-29T14:26:26.983187+00:00",
+            "group_name": "Logs",
+            "display_type": "other",
+            "uuid": $DIFFERENT_PERMISSION_UUID
+        }
+    }]
+}
 
 ```
 
@@ -472,23 +486,25 @@ curl -X POST \
                  "id": "user@example.org"
              }
          }'
+```
 
-# Response:
-# {
-# 	"data": [{
-#         "type": "users",
-#         "id": "user@example.org",
-#         "attributes": {
-#             "handle": "user@example.org",
-#             "name": "Example user",
-#             "title": null,
-#             "created_at": "2000-02-29T14:26:26.983187+00:00",
-#             "org_id": 99,
-#             "disabled": false,
-#             "verified": true,
-#             "email": "user@example.org",
-#     }]
-# }
+##### Response:
+```json
+{
+	"data": [{
+        "type": "users",
+        "id": "user@example.org",
+        "attributes": {
+            "handle": "user@example.org",
+            "name": "Example user",
+            "title": null,
+            "created_at": "2000-02-29T14:26:26.983187+00:00",
+            "org_id": 99,
+            "disabled": false,
+            "verified": true,
+            "email": "user@example.org",
+    }]
+}
 
 ```
 
@@ -522,23 +538,25 @@ curl -X DELETE \
                  "id": "user@example.org"
              }
          }'
+```
 
-# Response:
-# {
-# 	"data": [{
-#         "type": "users",
-#         "id": "user2@example.org",
-#         "attributes": {
-#             "handle": "user2@example.org",
-#             "name": "Example user 2",
-#             "title": null,
-#             "created_at": "2000-02-29T14:26:26.983187+00:00",
-#             "org_id": 99,
-#             "disabled": false,
-#             "verified": true,
-#             "email": "user2@example.org",
-#     }]
-# }
+##### Response:
+```json
+{
+	"data": [{
+        "type": "users",
+        "id": "user2@example.org",
+        "attributes": {
+            "handle": "user2@example.org",
+            "name": "Example user 2",
+            "title": null,
+            "created_at": "2000-02-29T14:26:26.983187+00:00",
+            "org_id": 99,
+            "disabled": false,
+            "verified": true,
+            "email": "user2@example.org",
+    }]
+}
 
 ```
 
