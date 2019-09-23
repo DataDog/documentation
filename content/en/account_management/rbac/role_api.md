@@ -22,8 +22,10 @@ Permissions related to specific account assets can be granted to roles in the Da
 ## Headers
 All requests are required to supply the following in headers
 ```json
-DD-API-KEY=${API_KEY}
-DD-APPLICATION-KEY=${APP_KEY}
+{
+    DD-API-KEY: ${API_KEY}
+    DD-APPLICATION-KEY: ${APP_KEY}
+}
 ```
 
 
