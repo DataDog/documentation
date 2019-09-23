@@ -77,7 +77,7 @@ The following Agent configuration options were changed or removed in Agent v6. C
 | `developer_mode`             |                                                                                                                       |
 | `use_forwarder`              |                                                                                                                       |
 | `autorestart`                |                                                                                                                       |
-| `dogstream_log`              |                                                                                                                       |
+| `dogstream_log`              | Deprecated feature, use the [Logs Agent][4] instead.                                                                  |
 | `use_curl_http_client`       |                                                                                                                       |
 | `collect_security_groups`    | Obsolete, feature is available with the [AWS integration][5].                                                         |
 
@@ -98,7 +98,7 @@ For example, configuration files for the `http_check` could be:
 └── frontend.yaml
 ```
 
-The Agent won't load configuration files from any sub-directories within a `<CHECK_NAME>.d` folder. This means this configuration is **NOT** loaded:
+The Agent won't load configuration files from any sub-directories within a `<CHECK_NAME>.d` folder. For example, this configuration is **NOT** loaded:
 ```text
 /etc/datadog-agent/conf.d/http_check.d/prod.d/
 ├── backend.yaml
@@ -155,7 +155,7 @@ The precedence order of Agent v6 proxy options is different from previous versio
 
 ## Logs
 
-The Agent logs are still located in `/var/log/datadog/` (Linux) and `C:\ProgramData\Datadog\logs` (Windows).
+The Agent log files are still located in `/var/log/datadog/` (Linux) and `C:\ProgramData\Datadog\logs` (Windows).
 
 Previous versions logged to multiple files (`collector.log`, `forwarder.log`, `dogstatsd.log`, etc). Starting with v6.0, the Agent logs to a single log file: `agent.log`.
 
@@ -171,34 +171,12 @@ To run a sub-command, the Agent binary must be invoked:
 <agent_binary> <sub_command> <options>
 ```
 
-Some options have their own set of flags and options detailed in a help message. For help with the `check` sub-command, run:
+Some options have flags and options detailed under `--help`. For example, use help with the `check` sub-command:
 ```shell
 <agent_binary> check --help
 ```
 
-Available sub-commands:
-
-| Command         | Notes                                                                      |
-|-----------------|----------------------------------------------------------------------------|
-| check           | Run the specified check                                                    |
-| configcheck     | Print all configurations loaded & resolved of a running agent              |
-| diagnose        | Execute some connectivity diagnosis on your system                         |
-| flare           | Collect a flare and send it to Datadog                                     |
-| health          | Print the current agent health                                             |
-| help            | Help about any command                                                     |
-| hostname        | Print the hostname used by the Agent                                       |
-| import          | Import and convert configuration files from previous versions of the Agent |
-| installservice  | Installs the agent within the service control manager                      |
-| launch-gui      | starts the Datadog Agent GUI                                               |
-| regimport       | Import the registry settings into datadog.yaml                             |
-| remove-service  | Removes the agent from the service control manager                         |
-| restart-service | restarts the agent within the service control manager                      |
-| start           | Start the Agent                                                            |
-| start-service   | starts the agent within the service control manager                        |
-| status          | Print the current status                                                   |
-| stopservice     | stops the agent within the service control manager                         |
-| jmx             | JMX troubleshooting                                                        |
-| version         | Print the version info                                                     |
+For a full list of available commands, see [Agent Commands][5].
 
 ### Operating system changes
 
@@ -248,7 +226,7 @@ If you're unsure which init system your distribution uses by default, refer to t
 
 Other functionalities are now provided by the Agent binary itself as sub-commands and shouldn't be invoked with `service`/`systemctl`/`initctl`. Here are a few examples:
 
-| Agent5 Command                                    | Agent6 Command                                         | Notes                          |
+| Agent v5 Command                                  | Agent v6 Command                                       | Notes                          |
 |---------------------------------------------------|--------------------------------------------------------|--------------------------------|
 | `sudo service datadog-agent info`                 | `sudo datadog-agent status`                            | Status page of a running Agent |
 | `sudo service datadog-agent flare`                | `sudo datadog-agent flare`                             | Send flare                     |
@@ -258,31 +236,31 @@ Other functionalities are now provided by the Agent binary itself as sub-command
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Agent v6 deprecated the Agent v5 Windows Agent Manager GUI, replacing it with a browser-based, cross-platform manager. For details, see the [Datadog Agent Manager for Windows][1].
+The major changes for Agent v6 on Windows are:
 
-There are a few major changes
-* the main executable name is now `agent.exe` (it was `ddagent.exe` previously)
-* Commands should be run with the command line `"c:\program files\datadog\datadog agent\embedded\agent.exe" <command>` from an "As Administrator" command prompt.
-* The configuration GUI is now a web-based configuration application, it can be easily accessed by running
-  the command `"c:\program files\datadog\datadog agent\embedded\agent.exe" launch-gui` or using the systray app.
-* The Windows service is now started "Automatic-Delayed"; it is started automatically on boot, but after
-  all other services.  This will result in a small delay in reporting of metrics after a reboot of a
+* The Agent v5 Windows Agent Manager GUI was replaced it with a browser-based, cross-platform manager. For details, see the [Datadog Agent Manager for Windows][1].
+* The main executable file is `agent.exe` (previously `ddagent.exe`).
+* Commands should be run with the command line `"C:\Program Files\datadog\datadog agent\embedded\agent.exe" <command>` from an **Administrator** command prompt.
+* The Windows service is now started as "Automatic-Delayed". It is started automatically on boot, but after
+  all other services. This results in a small delay in reporting of metrics after a reboot of a
   Windows device.
-* The Windows GUI and Windows system tray icon are now implemented separately.  See the [specific docs][1] for more details.
+* The Windows GUI and Windows system tray icon are now implemented separately. See the [Datadog Agent Manager for Windows][1] for more details.
 
 [1]: /agent/guide/datadog-agent-manager-windows
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
-* the _lifecycle commands_ (former `datadog-agent start`/`stop`/`restart`/`status` on the Agent 5) are replaced by `launchctl` commands on the `com.datadoghq.agent` service, and should be run under the logged-in user. For these commands, you can also use the Datadog Agent systray app
-* all the other commands can still be run with the `datadog-agent` command (located in the `PATH` (`/usr/local/bin/`) by default)
-* the `info` command has been renamed `status`
+The major changes for Agent v6 on MacOS are:
+
+* The _lifecycle commands_ (formerly `datadog-agent start`/`stop`/`restart`/`status`) are replaced by `launchctl` commands on the `com.datadoghq.agent` service, and should be run under the logged-in user. For these commands, you can also use the Datadog Agent systray app.
+* All the other commands can still be run with the `datadog-agent` command (located in the `PATH` (`/usr/local/bin/`) by default).
+* The `info` command has been renamed `status`.
 * The configuration GUI is now a web-based configuration application, it can be easily accessed by running
   the command `datadog-agent launch-gui` or using the systray app.
 
-A few examples:
+**Example changes**:
 
-| Agent5 Command                     | Agent6 Command                                       | Description                    |
+| Agent v5 Command                   | Agent v6 Command                                     | Description                    |
 |------------------------------------|------------------------------------------------------|--------------------------------|
 | `datadog-agent start`              | `launchctl start com.datadoghq.agent` or systray app | Start the Agent as a service   |
 | `datadog-agent stop`               | `launchctl stop com.datadoghq.agent` or systray app  | Stop the Agent service         |
@@ -296,31 +274,29 @@ A few examples:
 {{% /tab %}}
 {{< /tabs >}}
 
-## APM agent
+## Collection Agents
 
-The APM agent (also known as _trace agent_) is shipped by default with the
-Agent 6 in the Linux, MacOS and Windows packages.
+{{< tabs >}}
+{{% tab "APM Agent" %}}
 
-The APM agent is enabled by default on linux.
-To enable the check on other platforms or disable it on linux,
-you can update the `apm_config` key in your `datadog.yaml`:
+The APM Agent is shipped by default with Agent v6 for Linux, MacOS, and Windows packages.
+
+The APM Agent is enabled by default on Linux. To enable the check on other platforms or disable it on Linux, update the `apm_config` key in your `datadog.yaml`:
 
 ```
 apm_config:
   enabled: true
 ```
 
-For the Docker image, the APM agent is disabled by default. You can enable it by setting
-the `DD_APM_ENABLED` envvar to `true`. It will listen to all interfaces by default.
+For the Docker image, the APM Agent is disabled by default. Enable it by setting `DD_APM_ENABLED` to `true`. It listens to all interfaces by default. If you want to listen to non-local traffic on any other platform, set `DD_APM_NON_LOCAL_TRAFFIC` to `true`. For more details, see [Tracing Docker Applications][1].
 
-If you want to listen to non-local traffic on any other platform, you can set
-`apm_config.apm_non_local_traffic = true` in your `datadog.yaml`.
+[1]: /agent/docker/apm
+{{% /tab %}}
+{{% tab "Process Agent" %}}
 
-## Process agent
+The Process Agent is shipped by default with Agent v6 for the Linux packages only.
 
-The process agent is shipped by default with the Agent 6 in the Linux packages only.
-
-The process agent is not enabled by default. To enable the check you can update your `datadog.yaml` file to add the following:
+The Process Agent is not enabled by default. To enable it, update your `datadog.yaml` file with the following:
 
 ```
 process_config:
@@ -329,108 +305,134 @@ process_config:
 
 The `enabled` value is a string with the following options:
 
-* `"true"`: Enable the process-agent to collect processes and containers.
-* `"false"`: Only collect containers if available (the default)
-* `"disabled"`: Don't run the process-agent at all.
+* `"true"`: Enable the Process Agent to collect processes and containers.
+* `"false"`: Only collect containers if available (the default).
+* `"disabled"`: Don't run the Process Agent.
 
-## Docker check
+{{% /tab %}}
+{{< /tabs >}}
 
-Docker versions 1.12.1 and up are supported.
+## Checks
 
-The Docker check has been rewritten in Go to take advantage of the new
-internal architecture of the Agent, mainly bringing a consistent behaviour
-across every container related component. Therefore the Python version will
-never work within Agent 6.
+{{< tabs >}}
+{{% tab "Docker" %}}
 
-* The new check is named `docker` and no longer `docker_daemon`. All features
-are ported, excepted the following deprecations:
+Docker versions 1.12.1+ are supported.
 
-  * the `url`, `api_version` and `tags*` options are deprecated, direct use of the
-    [standard docker environment variables][5] is encouraged
-  * the `ecs_tags`, `performance_tags` and `container_tags` options are deprecated. Every
-    relevant tag is now collected by default
-  * the `collect_container_count` option to enable the `docker.container.count` metric
-    is not supported. `docker.containers.running` and `.stopped` are to be used
+The Docker check was rewritten in Go to take advantage of the internal architecture of the Agent. Therefore, the Python version (`docker_daemon`) is deprecated.
 
-* Some options have moved from `docker_daemon.yaml` to the main `datadog.yaml`:
-  * `collect_labels_as_tags` has been renamed `docker_labels_as_tags` and now
-    supports high cardinality tags, see the details in `datadog.yaml.example`
-  * `exclude` and `include` lists have been renamed `ac_include` and
-    `ac_exclude`. In order to make filtering consistent across all components of
-    the agent, we had to drop filtering on arbitrary tags. The only supported
-    filtering tags are `image` (image name) and `name` (container name).
-    Regexp filtering is still available, see `datadog.yaml.example` for examples
-  * `docker_root` option has been split in two options `container_cgroup_root`
-    and `container_proc_root`
-  * `exclude_pause_container` has been added to exclude pause containers on
-    Kubernetes and Openshift (default to true). This will avoid removing
-    them from the exclude list by error
+The new check is named `docker`. The [Agent import command](?tab=agent#configuration) imports settings from the legacy `docker_daemon.yaml` configuration. All features are ported, except the following:
 
-The [`import`](#configuration-files) will help you converting the old
-`docker_daemon.yaml` to the new `docker.yaml`. The command will also move
-needed settings from `docker_daemon.yaml` to `datadog.yaml`.
+* The `url`, `api_version`, and `tags*` options are deprecated. Direct use of the [standard docker environment variables][1] is recommended.
+* The `ecs_tags`, `performance_tags`, and `container_tags` options are deprecated. All relevant tags are collected by default.
+* The `collect_container_count` option to enable the `docker.container.count` metric is not supported. Use `docker.containers.running` and `.stopped`.
 
-## Kubernetes support
+Some options have moved from `docker_daemon.yaml` to the main `datadog.yaml`:
 
-### Kubernetes versions
+* `collect_labels_as_tags` was renamed to `docker_labels_as_tags` and supports high cardinality tags. See the details in `datadog.yaml.example`.
+* `exclude` and `include` were renamed to `ac_include` and `ac_exclude`. To make filtering consistent across all components of the Agent, there is no longer filtering on arbitrary tags. Tag filtering is only supported for `image` (image name) and `name` (container name). Regexp filtering is still available, see the `datadog.yaml.example` for examples.
+* The `docker_root` option has been split in two options: `container_cgroup_root` and `container_proc_root`.
+* `exclude_pause_container` was added to exclude pause containers on Kubernetes and Openshift (defaults to true).
 
-Agent 6 currently supports Kubernetes versions 1.3 and above.
+[1]: https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
-### Kubernetes metrics and events
+Kubernetes versions 1.3+ are supported.
 
-The `kubernetes` integration insights are provided combining:
-  * The [`kubelet`][6] check
-  retrieving metrics from the kubelet
-  * The [`kubernetes_apiserver`][7] check retrieving events and service checks from the apiserver
+The Kubernetes integration provides insights by combining:
 
-The `agent import` command (in versions 6.2 and higher) will import settings from the legacy `kubernetes.yaml` configuration, if found. The following  options are deprecated:
+* The [kubelet][1] check metrics from the kubelet
+* The [kubernetes_apiserver][2] check events and service checks from the API server
 
-  - API Server credentials (`api_server_url`, `apiserver_client_crt`, `apiserver_client_key`, `apiserver_ca_cert`) please provide a a kubeconfig file to the agent via the `kubernetes_kubeconfig_path` option
-  - `use_histogram`: please contact support to determine the best alternative for you
-  - `namespaces`, `namespace_name_regexp`: Agent6 now collects metrics from all available namespaces
+The [Agent import command](?tab=agent#configuration) (v6.2+) imports settings from the legacy `kubernetes.yaml` configuration. The following options are deprecated:
 
-The upgrade logic enables the new prometheus metric collection, that is compatible with Kubernetes versions 1.7.6 and up. If you run an older version or want to revert to the cadvisor collection logic, you can set the `cadvisor_port` option back to `4194` (or the port your kubelet exposes cadvisor at).
+* API Server credentials (`api_server_url`, `apiserver_client_crt`, `apiserver_client_key`, `apiserver_ca_cert`): Instead, provide a `kubeconfig` file to the Agent with the `kubernetes_kubeconfig_path` option.
+* `use_histogram`: Contact [Datadog support][3] to determine the best alternative for you.
+* `namespaces` and `namespace_name_regexp`: Agent v6 collects metrics from all available namespaces.
 
-The [`kubernetes_state` integration][8] works on both versions of the agent.
+The upgraded logic enables Prometheus metric collection compatible with Kubernetes versions 1.7.6+. If you run an older version or want to revert to the cadvisor collection logic, set `cadvisor_port` to `4194` (the port where your kubelet exposes cadvisor).
 
-### Tagging
+The [kubernetes_state][4] check works with Agent v5 or Agent v6.
 
-While Agent5 automatically collected every pod label as tags, Agent6 needs you to whilelist
-labels that are relevant to you. This is done with the `kubernetes_pod_labels_as_tags` option
-in `datadog.yaml`.
+#### Tagging
+
+While Agent v5 automatically collected every pod label as tags, Agent v6 needs you to whilelist labels that are relevant to you. This is done with the `kubernetes_pod_labels_as_tags` option in `datadog.yaml`.
 
 The following options and tags are deprecated:
 
-     - `label_to_tag_prefix` option is superseeded by kubernetes_pod_labels_as_tags
-     - `container_alias` tags are not collected anymore
-     - `kube_replicate_controller` is only added if the pod is created by a replication controller,
-     not systematically. Use the relevant creator tag (`kube_deployment` / `kube_daemon_set`...)
+* `label_to_tag_prefix` is superseded by `kubernetes_pod_labels_as_tags`.
+* `container_alias` tags are not collected.
+* `kube_replicate_controller` is only added if the pod is created by a replication controller. Instead, use the relevant creator tag (`kube_deployment`, `kube_daemon_set`, etc.).
+
+[1]: /integrations/kubelet
+[2]: /integrations/kube_apiserver_metrics
+[3]: /help
+[4]: /integrations/kubernetes
+{{% /tab %}}
+{{% tab "JMX" %}}
+
+The Agent 6 ships JMXFetch, with the following changes:
+
+#### JMXTerm JAR
+
+Agent v6 does not ship the `jmxterm` JAR. If you wish to download and use `jmxterm`, refer to the [upstream project][1].
+
+#### Troubleshooting commands
+
+Troubleshooting commands syntax have changed. These commands are available for v6.2.0+, for earlier versions, refer to [JMX Agent troubleshooting][2]:
+
+| Command                                                | Description                                                                                                                                                     |
+|--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `sudo -u dd-agent datadog-agent jmx list matching`     | List attributes that match at least one of your instance configurations.                                                                                        |
+| `sudo -u dd-agent datadog-agent jmx list limited`      | List attributes that match one of your instance configurations but are not being collected because it would exceed the number of metrics that can be collected. |
+| `sudo -u dd-agent datadog-agent jmx list collected`    | List attributes that are collected by your current instances configuration.                                                                        |
+| `sudo -u dd-agent datadog-agent jmx list not-matching` | List attributes that don’t match any of your instance configurations.                                                                                           |
+| `sudo -u dd-agent datadog-agent jmx list everything`   | List every attributes available that has a type supported by JMXFetch.                                                                                          |
+| `sudo -u dd-agent datadog-agent jmx collect`           | Start the collection of metrics based on your current configuration and display them in the console.                                                            |
+
+**Note**: By default, these commands run on all the configured JMX checks. To specify a check, use the `--checks` flag, for example:
+`sudo datadog-agent jmx list collected --checks tomcat`
+
+[1]: https://github.com/jiaqi/jmxterm
+[2]: /integrations/faq/troubleshooting-jmx-integrations/?tab=agentv60andv61#agent-troubleshooting
+{{% /tab %}}
+{{% tab "System" %}}
+
+_Only affects Windows Agents_
+
+When running the Windows Agent v5, the `system.mem.pagefile.*` metrics display inconsistent units (they're off by 10^6).
+
+This problem has been fixed on Windows Agent v6. However, the Agent v5 discrepancy remains for backwards compatibility.  Therefore, reported values (and associated monitors) will be different upon upgrade from Agent v5 to Agent v6.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Autodiscovery
 
-We reworked the [Autodiscovery][9] system from the ground up to be faster and more reliable.
-We also worked on decoupling container runtimes and orchestrators, to be more flexible in the future. This includes the move from `docker_images` to `ad_identifiers` in templates.
+The [Autodiscovery][6] system was reworked for Agent v6. Also, container runtimes and orchestrators were decoupled for to be more flexible. This includes the move from `docker_images` to `ad_identifiers` in templates.
 
-All documented use cases are supported, please contact our support team if you run into issues.
+{{< tabs >}}
+{{% tab "Kubernetes" %}}
 
-### Kubernetes
+When using Kubernetes, the Autodiscovery system sources information from the kubelet, instead of the Docker daemon. This allows Autodiscovery to work without access to the Docker socket. Also, the default behavior is to source Autodiscovery templates from pod annotations. You can enable the `docker` config-provider to use container labels, and replace the `kubelet` listener by the `kubelet` one if you need Autodiscovery on containers running out of pods.
 
-When using Kubernetes, the Autodiscovery system now sources information from the kubelet, instead of the Docker daemon. This will allow AD to work without access to the Docker socket, and enable a more consistent experience across all parts of the agent. Also, the default behaviour is to source AD templates from pod annotations. You can enable the `docker` config-provider to use container labels, and replace the `kubelet` listener by the `kubelet` one if you need AD on containers running out of pods.
+When specifying Autodiscovery templates in pod annotations, the annotation name prefix is `ad.datadoghq.com/`. The previous annotation prefix (`service-discovery.datadoghq.com/`) is still supported for Agent v6 but support will be removed in future versions.
 
-When specifying AD templates in pod annotations, the new annotation name prefix is `ad.datadoghq.com/`. the previous annotation prefix
-`service-discovery.datadoghq.com/` is still supported for Agent6 but support will be removed in Agent7.
+{{% /tab %}}
+{{% tab "Docker" %}}
 
-### Other orchestrators
+Autodiscovery templates in Docker labels work with the same name prefix `com.datadoghq.ad.`.
 
-Autodiscovery templates in Docker labels still work, with the same `com.datadoghq.ad.` name prefix.
+The identifier override label has been renamed from `com.datadoghq.sd.check.id` to `com.datadoghq.ad.check.id` for consistency. The previous name is still supported for Agent v6 but support will be removed in future versions.
 
-The identifier override label has been renamed from `com.datadoghq.sd.check.id` to `com.datadoghq.ad.check.id` for consistency. The previous
-name is still supported for Agent6 but support will be removed in Agent7.
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Python Modules
 
 All check-related Python code should now be imported from the `datadog_checks`
-[namespace][10].
+[namespace][7].
 
 While we are continuing to ship the python libraries that ship with Agent 5,
 some of the embedded libraries have been removed. `util.py` and its associated
@@ -444,12 +446,12 @@ Much of the `utils` directory has been removed from the agent as well. However,
 most of what was removed was not diretly related to checks and wouldn't be imported
 in almost anyone's checks. The flare module, for example, was removed and
 reimplemented in Go, but is unlikely to have been used by anyone in a custom check.
-To learn more, you can read about the details in the [development documentation][11].
+To learn more, you can read about the details in the [development documentation][8].
 
 ### Agent Integrations
 
 Even if the new Agent fully supports Python checks, a few of those provided
-by [integrations-core][12] are expected to fail if run within the
+by [integrations-core][9] are expected to fail if run within the
 Agent as they are not currently implemented:
 
 * agent_metrics
@@ -513,7 +515,7 @@ will only affect custom checks.
 
 With Agent 6, the order of precedence between custom
 checks (i.e. checks in the `/etc/datadog-agent/checks.d/` folder by default on Linux) and the checks shipped
-with the Agent by default (i.e. checks from [`integrations-core`][13]) has changed: the
+with the Agent by default (i.e. checks from [`integrations-core`][10]) has changed: the
 `integrations-core` checks now have precedence over custom checks.
 
 This affects your setup if you have custom checks that have the same name as existing `integrations-core`
@@ -560,33 +562,7 @@ packages already bundled with Agent 5 (see list above), those dependencies will
 be missing after the upgrade to Agent 6 and your custom checks will break.
 You will have to install the missing dependencies manually as described above.
 
-## JMX
 
-The Agent 6 ships JMXFetch, with the following changes:
-
-### JMXTerm JAR
-
-The Agent 6 does not ship the `jmxterm` JAR. If you wish to download and use `jmxterm`, please refer to the [upstream project][14].
-
-### Troubleshooting commands
-
-Troubleshooting commands syntax have changed. These commands are available since v6.2.0, for earlier v6 versions please refer to [the earlier docs][15]:
-
-* `sudo -u dd-agent datadog-agent jmx list matching`: List attributes that match at least one of your instances configuration.
-
-* `sudo -u dd-agent datadog-agent jmx list limited`: List attributes that do match one of your instances configuration but that are not being collected because it would exceed the number of metrics that can be collected.
-
-* `sudo -u dd-agent datadog-agent jmx list collected`: List attributes that will actually be collected by your current instances configuration.
-
-* `sudo -u dd-agent datadog-agent jmx list not-matching`: List attributes that don’t match any of your instances configuration.
-
-* `sudo -u dd-agent datadog-agent jmx list everything`: List every attributes available that has a type supported by JMXFetch.
-
-* `sudo -u dd-agent datadog-agent jmx collect`: Start the collection of metrics based on your current configuration and display them in the console.
-
-By default theses command will run on all the configured jmx checks. If you want to
-use them for specific checks, you can specify them using the `--checks` flag :
-`sudo datadog-agent jmx list collected --checks tomcat`
 
 ## GCE hostname
 
@@ -600,28 +576,15 @@ If you're upgrading from an Agent 5 with `gce_updated_hostname` unset or set to 
 of the Agent is not hardcoded in `datadog.conf`/`datadog.yaml`, the reported hostname on Datadog
 will change from the GCE instance _name_ to the full GCE instance _hostname_ (which includes the GCE project id).
 
-## System Metrics
-
-_Only affects Windows Agents_
-
-When running the Windows Agent 5, the metrics _system.mem.pagefile.*_ display inconsistent units (they're off by 10^6).
-This problem has been fixed on Windows Agent6; however, the Agent 5 discrepancy remains for backwards compatibility.  Therefore,
-reported values (and associated monitors) will be different upon upgrade from Agent v5 to Agent v6.
-
 
 
 [1]: /agent/proxy/#using-the-agent-as-a-proxy
 [2]: https://github.com/DataDog/dd-agent/wiki/Using-custom-emitters
 [3]: /agent/guide/dogstream
 [4]: /integrations/go-metro
-[5]: https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
-[6]: https://github.com/DataDog/integrations-core/tree/master/kubelet
-[7]: https://github.com/DataDog/datadog-agent/tree/master/cmd/agent/dist/conf.d/kubernetes_apiserver.d
-[8]: https://github.com/DataDog/integrations-core/tree/master/kubernetes_state
-[9]: https://docs.datadoghq.com/agent/autodiscovery
-[10]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base
-[11]: https://github.com/DataDog/datadog-agent/tree/master/docs/dev/checks#python-checks
-[12]: https://github.com/DataDog/integrations-core
-[13]: https://github.com/DataDog/integrations-core
-[14]: https://github.com/jiaqi/jmxterm
-[15]: https://github.com/DataDog/datadog-agent/blob/6.1.4/docs/agent/changes.md#jmx
+[5]: /agent/guide/agent-commands/?tab=agentv6
+[6]: https://docs.datadoghq.com/agent/autodiscovery
+[7]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base
+[8]: https://github.com/DataDog/datadog-agent/tree/master/docs/dev/checks#python-checks
+[9]: https://github.com/DataDog/integrations-core
+[10]: https://github.com/DataDog/integrations-core

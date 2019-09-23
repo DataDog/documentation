@@ -238,6 +238,49 @@ A properly configured integration is displayed under **Checks** with no warnings
 {{% /tab %}}
 {{< /tabs >}}
 
+## Other commands
+
+{{< tabs >}}
+{{% tab "Agent v6" %}}
+
+The Agent v6 command line interface is sub-command based. To see the list of available sub-commands, run:
+```shell
+<agent_binary> --help
+```
+
+To run a sub-command, the Agent binary must be invoked:
+```shell
+<agent_binary> <sub_command> <options>
+```
+
+Some options have flags and options detailed under `--help`. For example, use help with the `check` sub-command:
+```shell
+<agent_binary> check --help
+```
+
+| Command         | Notes                                                                       |
+|-----------------|-----------------------------------------------------------------------------|
+| check           | Run the specified check.                                                    |
+| configcheck     | Print all configurations loaded and resolved of a running Agent.            |
+| diagnose        | Execute some connectivity diagnosis on your system.                         |
+| flare           | Collect a flare and send it to Datadog.                                     |
+| health          | Print the current Agent health.                                             |
+| help            | Help about any command.                                                     |
+| hostname        | Print the hostname used by the Agent.                                       |
+| import          | Import and convert configuration files from previous versions of the Agent. |
+| installservice  | Installs the Agent within the service control manager.                      |
+| launch-gui      | Starts the Datadog Agent GUI.                                               |
+| regimport       | Import the registry settings into `datadog.yaml`.                           |
+| remove-service  | Removes the Agent from the service control manager.                         |
+| restart-service | Restarts the Agent within the service control manager.                      |
+| start-service   | Starts the Agent within the service control manager.                        |
+| stopservice     | Stops the Agent within the service control manager.                         |
+| jmx             | JMX troubleshooting                                                         |
+| version         | Print the version info.                                                     |
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
