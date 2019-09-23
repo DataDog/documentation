@@ -79,4 +79,4 @@ The **`assertions`**  argument is required for the API and SSL tests. It allows 
 
 [1]: https://app.datadoghq.com/synthetics/list
 [2]: /synthetics/browser_tests/#record-test
-[3]: /tagging/using_tags
+[3]: https://en.wikipedia.org/wiki/Regular_expression
