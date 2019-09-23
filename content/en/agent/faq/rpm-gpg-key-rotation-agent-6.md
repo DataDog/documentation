@@ -43,21 +43,24 @@ Otherwise, the command returns a non-0 exit code and the following output:
 package gpg-pubkey-e09422b3 is not installed
 ```
 
-## How to manually trust the new GPG key
+## How to trust the new GPG key
 
-### Manual import command
+This step is not required if hosts already trust the new key or if a recent version of an official installation method listed above is used.
 
-To manually trust the new key, run the following command on the host:
+### Import command
+
+Run the following commands on the host:
 
 ```bash
-rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+curl -o /tmp/DATADOG_RPM_KEY_E09422B3.public https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+rpm --import /tmp/DATADOG_RPM_KEY_E09422B3.public
 ```
 
 Then check if the new key is trusted by following the steps in [How to check if a host trusts the new GPG key](#how-to-check-if-a-host-trusts-the-new-gpg-key).
 
 ### Yum repository file update
 
-Alternatively, on CentOS or RHEL, if a Yum repository file is used to define the Datadog repository (usually called `datadog.repo`), such as the following:
+Alternatively, on CentOS, RHEL and Amazon Linux, if a Yum repository file is used to define the Datadog repository (usually called `datadog.repo`), such as the following:
 
 ```
 [datadog]
@@ -80,6 +83,7 @@ gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
        https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 ```
 
+This method doesn't work on SUSE-based systems. [Use the import command instead](#import-command).
 
 [1]: https://yum.datadoghq.com/
 [2]: https://app.datadoghq.com/account/settings#agent
