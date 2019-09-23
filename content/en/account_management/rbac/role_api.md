@@ -502,7 +502,8 @@ curl -X POST \
             "org_id": 99,
             "disabled": false,
             "verified": true,
-            "email": "user@example.org",
+            "email": "user@example.org"
+        }
     }]
 }
 
@@ -554,7 +555,8 @@ curl -X DELETE \
             "org_id": 99,
             "disabled": false,
             "verified": true,
-            "email": "user2@example.org",
+            "email": "user2@example.org"
+        }
     }]
 }
 
