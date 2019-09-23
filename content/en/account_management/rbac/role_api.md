@@ -74,24 +74,24 @@ curl -X GET "https://app.datadoghq.com/api/v2/roles" -H "DD-API-KEY: ${API_KEY}"
     "data": [
 	    {
             "type": "roles",
-            "id": $ROLE_UUID,
+            "id": "$ROLE_UUID",
                 "attributes": {
                 "created_at": "2000-02-29T16:50:43.607749+00:00",
                 "user_count": 2122,
                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
-                "uuid": $ROLE_UUID,
-                "name": $ROLE_NAME
+                "uuid": "$ROLE_UUID",
+                "name": "$ROLE_NAME"
             },
             "relationships": {
                 "permissions": {
                     "data": [
                         {
                             "type": "permissions",
-                            "id": $PERMISSION_UUID
+                            "id": "$PERMISSION_UUID"
                         },
                         {
                             "type": "permissions",
-                            "id": $PERMISSION_UUID
+                            "id": "$PERMISSION_UUID"
                         }
                     ]
                 }
@@ -124,24 +124,24 @@ curl -X GET "https://app.datadoghq.com/api/v2/roles/$ROLE_UUID" -H "DD-API-KEY: 
 {
 	"data": {
             "type": "roles",
-            "id": $ROLE_UUID,
+            "id": "$ROLE_UUID",
                 "attributes": {
                 "created_at": "2000-02-29T16:50:43.607749+00:00",
                 "user_count": 2122,
                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
-                "uuid": $ROLE_UUID,
-                "name": $ROLE_NAME
+                "uuid": "$ROLE_UUID",
+                "name": "$ROLE_NAME"
             },
             "relationships": {
                 "permissions": {
                     "data": [
                         {
                             "type": "permissions",
-                            "id": $PERMISSION_UUID
+                            "id": "$PERMISSION_UUID"
                         },
                         {
                             "type": "permissions",
-                            "id": $PERMISSION_UUID
+                            "id": "$PERMISSION_UUID"
                         }
                     ]
                 }
@@ -188,13 +188,13 @@ curl -X POST \
 {
 	"data": {
             "type": "roles",
-            "id": $ROLE_UUID,
+            "id": "$ROLE_UUID",
                 "attributes": {
                 "created_at": "2000-02-29T16:50:43.607749+00:00",
                 "user_count": 0,
                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
-                "uuid": $ROLE_UUID,
-                "name": $ROLE_NAME
+                "uuid": "$ROLE_UUID",
+                "name": "$ROLE_NAME"
             },
             "relationships": {
                 "permissions": {
@@ -245,13 +245,13 @@ curl -X PATCH \
 {
 	"data": {
             "type": "roles",
-            "id": $ROLE_UUID,
+            "id": "$ROLE_UUID",
                 "attributes": {
                 "created_at": "2000-02-29T16:50:43.607749+00:00",
                 "user_count": 0,
                 "modified_at": "2000-02-29T16:50:43.607749+00:00",
-                "uuid": $ROLE_UUID,
-                "name": $ROLE_NAME
+                "uuid": "$ROLE_UUID",
+                "name": "$ROLE_NAME"
             },
             "relationships": {
                 "permissions": {
