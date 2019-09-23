@@ -225,28 +225,28 @@ main:
     identifier: "agent_autodiscovery"
     parent: "agent"
     weight: 4
+  - name: "Auto-Configuration"
+    url: "agent/autodiscovery/auto_conf/"
+    parent: "agent_autodiscovery"
+    weight: 401
   - name: "Integrations Templates"
     url: "agent/autodiscovery/integrations/"
     parent: "agent_autodiscovery"
-    weight: 401
+    weight: 402
   - name: "Container Identifier"
     url: "agent/autodiscovery/ad_identifiers/"
     parent: "agent_autodiscovery"
-    weight: 402
+    weight: 403
   - name: "Template Variables"
     url: "agent/autodiscovery/template_variables/"
     parent: "agent_autodiscovery"
-    weight: 403
+    weight: 404
   - name: "Tag Extraction"
     url: "agent/autodiscovery/tag/"
     parent: "agent_autodiscovery"
-    weight: 404
+    weight: 405
   - name: "Discovery Management"
     url: "agent/autodiscovery/management/"
-    parent: "agent_autodiscovery"
-    weight: 405
-  - name: "Troubleshooting"
-    url: "agent/autodiscovery/troubleshooting/"
     parent: "agent_autodiscovery"
     weight: 406
   - name: "Endpoints Checks"
@@ -257,6 +257,10 @@ main:
     url: "agent/autodiscovery/clusterchecks/"
     parent: "agent_autodiscovery"
     weight: 408
+  - name: "Troubleshooting"
+    url: "agent/autodiscovery/troubleshooting/"
+    parent: "agent_autodiscovery"
+    weight: 409
 
   ## AGENT - LOGS
 
