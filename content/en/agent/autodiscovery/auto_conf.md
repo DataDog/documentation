@@ -11,15 +11,15 @@ further_reading:
   text: "Manage which Container to include in the Agent Autodiscovery"
 ---
 
-The Agent, when running as a container, is trying by default to auto-discover other containers around it thanks to the `auto_conf.yaml` integrations configuration files shipped with it. As a result, the following integrations are automatically discovered:
+When the Agent runs as a container, it tries by default to auto-discover other containers around it based on default autodiscovery configuration files named `auto_conf.yaml`. Those Autodiscovery default configuration files can be found in the corresponding `conf.d/<INTEGRATION>.d/` folder for the following integrations:
 
 | Integration            | Auto-configuration file |
 | ------                 | --------                |
 | [Apache][1]            | [auto_conf.yaml][2]     |
 | [Consul][3]            | [auto_conf.yaml][4]     |
-| [Coredns][5]           | [auto_conf.yaml][6]    |
-| [Couch][7]            | [auto_conf.yaml][8]    |
-| [Couchbase][9]        | [auto_conf.yaml][10]    |
+| [Coredns][5]           | [auto_conf.yaml][6]     |
+| [Couch][7]             | [auto_conf.yaml][8]     |
+| [Couchbase][9]         | [auto_conf.yaml][10]    |
 | [Elastic][11]          | [auto_conf.yaml][12]    |
 | [Etcd][13]             | [auto_conf.yaml][14]    |
 | [Harbor][15]           | [auto_conf.yaml][16]    |
@@ -33,9 +33,9 @@ The Agent, when running as a container, is trying by default to auto-discover ot
 | [Riak][29]             | [auto_conf.yaml][30]    |
 | [Tomcat][31]           | [auto_conf.yaml][32]    |
 
-For a given integration, the `auto_conf.yaml` covers all required parameters to set it up. The parameters corresponding [autodiscovery templates variables][33] are already in place to take into account the containerized environment.
+The `auto_conf.yaml` configuration files cover all required parameters to set up a specific integration, with their corresponding [Autodiscovery Templates Variables][33] in place to take into account the containerized environment.
 
-**Note**: The auto-configurations logic only support the default configuration for any integration above. If you want to customize your Datadog-integration configuration, refer to the Integrations Templates documentation to learn how to configure your Autodiscovery:
+**Note**: The auto-configuration logic only supports the default configuration for any integration above. If you want to customize your Datadog-integration configuration, refer to the Integrations Templates documentation to learn how to configure your Agent Autodiscovery:
 
 * [Using a configuration file mounted within the Agent][34]
 * [Using Key-Value Store][35]
