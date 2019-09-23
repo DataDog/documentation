@@ -72,6 +72,12 @@ Use the linear algorithm for metrics that have steady trends but no repeating se
 | Simple   | Does a robust linear regression through the entire history.                                |
 | Reactive | Extrapolates recent behavior better at the risk of overfitting to noise, spikes, or dips.  |
 
+{{< img src="monitors/monitor_types/forecasts/linear_default.png" alt="linear default" responsive="true" style="width:80%;">}}
+
+{{< img src="monitors/monitor_types/forecasts/linear_simple.png" alt="linear simple" responsive="true" style="width:80%;">}}
+
+{{< img src="monitors/monitor_types/forecasts/linear_reactive.png" alt="linear reactive" responsive="true" style="width:80%;" >}}
+
 {{% /tab %}}
 {{% tab "Seasonal" %}}
 
@@ -85,6 +91,8 @@ Use the seasonal algorithm for metrics with repeating patterns. There are four d
 | Monthly | The algorithm expects that a given day of the month behaves like past days of the month, for example July 1st behaves like June 1st, May 1st, etc. |
 
 **Note**: This algorithm requires at least two seasons of history and uses up to six seasons for forecasting.
+
+{{< img src="monitors/monitor_types/forecasts/seasonal.png" alt="seasonal" responsive="true" style="width:80%;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
