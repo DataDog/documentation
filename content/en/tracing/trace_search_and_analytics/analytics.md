@@ -58,14 +58,13 @@ Use the query to control what's displayed in your Trace Analytic:
 
 ## Visualizations
 
-Select a Trace Analytic visualization type using the Analytic selector:
-
-{{< img src="tracing/trace_search_and_analytics/analytics/graph_selector.png" alt="Graph selector" responsive="true" style="width:30%;">}}
+Select a Trace Analytic visualization type using the Analytic selector.
 
 Available visualizations:
 
 * [Timeseries](#timeseries)
 * [Top List](#top-list)
+* [Table](#table)
 
 ### Timeseries
 
@@ -101,7 +100,7 @@ Visualize the top values from a [facet][1] according to a chosen [measure][2] (t
 
 ## Related Traces
 
-Select or click on a section of the graph to either zoom in the graph or see the list of traces corresponding to your selection:
+Select or click on a section of the graph to either zoom in the graph or see the list of [traces][3] corresponding to your selection:
 
 {{< img src="tracing/trace_search_and_analytics/analytics/view_traces.png" alt="view Traces" responsive="true" style="width:40%;">}}
 
@@ -111,16 +110,16 @@ Select or click on a section of the graph to either zoom in the graph or see the
 
 Export your Trace analytic:
 
-* To create a new [APM monitor][3]:
+* To create a new [APM monitor][4]:
     This feature is not available yet.
-* To an existing [Timeboard][4]:
-    This functionality is in beta, [contact the Datadog support team][5] to activate it for your organization.
+* To an existing [Timeboard][5]:
+    This functionality is in beta, [contact the Datadog support team][6] to activate it for your organization.
 
 ## Traces in Dashboard
 
-Export [Trace Analytics][6] from the Trace search or build them directly in your [Dashboard][7] alongside metrics and logs.
+Export [Trace Analytics][7] from the Trace search or build them directly in your [Dashboard][8] alongside metrics and logs.
 
-[Learn more about the timeseries widget][8]
+[Learn more about the timeseries widget][9]
 
 ## Further Reading
 
@@ -128,9 +127,10 @@ Export [Trace Analytics][6] from the Trace search or build them directly in your
 
 [1]: /tracing/trace_search_and_analytics/search/#facets
 [2]: /tracing/trace_search_and_analytics/search/#measures
-[3]: /monitors/monitor_types/apm
-[4]: /graphing/dashboards/timeboard
-[5]: /help
-[6]: /graphing/widgets/timeseries
-[7]: /graphing/dashboards
-[8]: /graphing/widgets/timeseries
+[3]: /tracing/visualization/#trace
+[4]: /monitors/monitor_types/apm
+[5]: /graphing/dashboards/timeboard
+[6]: /help
+[7]: /graphing/widgets/timeseries
+[8]: /graphing/dashboards
+[9]: /graphing/widgets/timeseries

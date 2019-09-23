@@ -6,9 +6,8 @@ external_redirect: /api/#recuperer-un-evenement
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/events/<EVENT_ID>`
+`GET /v1/events/<ID_ÉVÉNEMENT>`
 ##### Exemple de requête
 {{< code-snippets basename="api-events-get" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-events-get" >}}
-

@@ -60,7 +60,7 @@ Suivez les instructions pour l'[Agent Docker][1], en transmettant, en plus de to
 **Remarque** : par défaut, les logs sont indexés. Toutefois, vous pouvez configurer des [filtres d'exclusion][2] pour bénéficier d'un contrôle précis sur l'indexation et recevoir uniquement des données Live Tail.
 
 [1]: /fr/agent/docker/log/?tab=containerinstallation
-[2]: /fr/logs/logging_without_limits/#exclusion-filters
+[2]: /fr/logs/indexes/#exclusion-filters
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
@@ -89,7 +89,7 @@ volumes:
 * Par défaut, les logs sont indexés. Toutefois, vous pouvez configurer des [filtres d'exclusion][2] pour bénéficier d'un contrôle précis sur les index et les données Live Tail uniquement.
 
 [1]: /fr/agent/kubernetes/daemonset_setup
-[2]: /fr/logs/logging_without_limits/#exclusion-filters
+[2]: /fr/logs/indexes/#exclusion-filters
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -106,7 +106,7 @@ Vous pouvez effectuer des recherches sur le contenu des logs de diffusion à l'a
 
 **Remarque** : les logs de diffusion ne sont pas persistants. Si vous saisissez une nouvelle recherche ou actualisez la page, cela efface le contenu de la diffusion.
 
-{{< img src="graphing/infrastructure/livecontainers/livecontainerlogssidepanel.gif" alt="Aperçu logs volet latéral" responsive="true" style="width:100%;">}}
+{{< img src="graphing/infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="Aperçu logs volet latéral" video="true" responsive="true" >}}
 
 ### Logs indexés
 

@@ -6,7 +6,10 @@ external_redirect: '/api/#integration-slack'
 ---
 ## Slackのインテグレーション
 
-DatadogのAPIを介してDatadogのSlackインテグレーションを設定。
-詳細についてはは [integration page][1]をご覧ください。
+<mark>Slack エンドポイントは、Datadog のクライアントライブラリでサポートされていません。この機能の使用を希望される場合は、[Datadog のサポートチーム][1]にお問い合わせください。</mark>
 
-[1]: /ja/integrations/slack
+Datadog-Slack インテグレーションの構成は、Datadog API から直接行います。
+Datadog-Slack インテグレーションの詳細については、[インテグレーションページ][2]を参照してください。
+
+[1]: /ja/help
+[2]: /ja/integrations/slack

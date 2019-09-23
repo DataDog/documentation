@@ -61,7 +61,7 @@ Follow the instructions for the [Docker Agent][1], passing in the following attr
 **Note**: Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexing and uniquely receiving Live Tail data.
 
 [1]: /agent/docker/log/?tab=containerinstallation
-[2]: /logs/logging_without_limits/#exclusion-filters
+[2]: /logs/indexes/#exclusion-filters
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
@@ -90,7 +90,7 @@ volumes:
 * Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexes and Live Tail data uniquely.
 
 [1]: /agent/kubernetes/daemonset_setup
-[2]: /logs/logging_without_limits/#exclusion-filters
+[2]: /logs/indexes/#exclusion-filters
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -5,9 +5,9 @@ kind: faq
 
 ## Overview
 
-Containers are supported in Pro and Enterprise plans. Pro subscriptions include 10 containers for each paid host. Enterprise subscriptions include 20 for each paid host. This container count is averaged across your entire infrastructure.
+Containers are supported in Pro and Enterprise plans. Depending on your plan, you can monitor 10 or 20 containers free for each host license. The container count is averaged across your entire infrastructure.
 
-Additional containers are billed at $0.002 per container per hour. In addition, you can purchase prepaid containers at $1 per container per month. Contact [Sales][1] or your [Customer Success][2] Manager to discuss containers for your account.
+Additional containers are billed at an [additional cost][1] per container per hour. In addition, you can purchase prepaid containers. Contact [Sales][2] or your [Customer Success][3] Manager to discuss containers for your account.
 
 ### Kubernetes
 
@@ -15,22 +15,15 @@ Kubernetes creates pause containers to acquire the respective pod’s IP address
 
 ### Fargate
 
-Fargate is charged based on the concurrent number of tasks.
-
-- Infrastructure Monitoring
-  - Pro: $1 / task / month
-  - Enterprise: $1.50 / task / month
-- APM
-  - Additional $2 / task / month
-- Log Management: charged with [standard pricing][3]
-
+Fargate is charged based on the concurrent number of tasks. For pricing, see the [Serverless][4] section on the pricing page.
 
 ## Troubleshooting
-For technical questions, contact [Datadog support][4].
+For technical questions, contact [Datadog support][5].
 
-For billing questions, contact your [Customer Success][2] Manager.
+For billing questions, contact your [Customer Success][3] Manager.
 
-[1]: mailto:sales@datadoghq.com
-[2]: mailto:success@datadoghq.com
-[3]: https://www.datadoghq.com/pricing
-[4]: /help
+[1]: https://www.datadoghq.com/pricing/#tab-faq-infrastructure
+[2]: mailto:sales@datadoghq.com
+[3]: mailto:success@datadoghq.com
+[4]: https://www.datadoghq.com/pricing/#section-infrastructure
+[5]: /help

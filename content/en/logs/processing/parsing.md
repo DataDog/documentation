@@ -155,6 +155,13 @@ server on server %{notSpace:server.name} in %{notSpace:server.env}
 ## Examples
 Find below some examples demonstrating how to use parsers:
 
+* [Key value](#key-value)
+* [Parsing dates](#parsing-dates)
+* [Conditional patterns](#conditional-pattern)
+* [Optional attribute](#optional-attribute)
+* [Nested JSON](#nested-json)
+* [Regex](#regex)
+
 ### Key value
 
 This is the key value core filter : `keyvalue([separatorStr[, characterWhiteList [, quotingStr]])` where:
@@ -290,6 +297,25 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 {{< img src="logs/processing/parsing/parsing_example_5.png" alt="Parsing example 5" responsive="true" style="width:80%;" >}}
 
 {{< img src="logs/processing/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis" responsive="true" style="width:80%;" >}}
+
+### Nested JSON
+
+Use the `json` *filter* to parse a JSON object nested after a raw text prefix:
+
+**Log**: 
+
+```
+Sep 06 09:13:38 vagrant program[123]: server.1 {"method":"GET", "status_code":200, "url":"https://app.datadoghq.com/logs/pipelines", "duration":123456}
+```
+
+**Rule**:
+
+```
+parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{number:logger.thread_id}\]: %{notSpace:server} %{data::json}
+```
+
+{{< img src="logs/processing/parsing/nested_json.png" alt="Nested JSON Parsing example" responsive="true" style="width:80%;" >}}
+
 
 ### Regex
 Use the regex matcher to match any substring of your log message based on literal regex rules.

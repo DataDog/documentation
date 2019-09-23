@@ -31,15 +31,16 @@ Browser tests are scenarios executed by Datadog on your web applications. They r
 Define the configuration of your browser test.
 
 1. **Starting URL**: The URL from which your browser test starts the scenario.
-    * Advanced Options (optional): Use custom request headers or cookies.
+    * Advanced Options (optional): Set custom request headers, cookies, or authenticate through Basic Auth.
         * Headers: Defined headers override the default browser headers. For example, set the User Agent in the header to [identify Datadog scripts][1].
+        * Authentication: Authenticate through HTTP Basic Authentication with a username and a password.
         * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `cookie1=<YOUR_COOKIE_1>; cookie2=<YOUR_COOKIE_2>`.
 
 2. **Name**: The name of your browser test.
 3. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the Synthetics page.
 4. **Devices**: The devices to run your check on. Available devices are `Laptop Large`, `Tablet`, and `Mobile Small`.
 5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run a Synthetics Browser test on a private URL not accessible from the public internet.
-6. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week.
+6. **How often should Datadog run the test?** Intervals are available between every 15 minutes to once per week. [Contact support][4] to enable additional frequencies for your test.
 
 ### Alert conditions
 
@@ -49,14 +50,14 @@ An alert is triggered if any assertion fails for `<INSERT_NUMBER>` minutes from 
 
 To configure your notifications:
 
-1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][4]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
-2. Choose your [services][5] and/or team members to notify.
+1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][5]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
+2. Choose your [services][6] and/or team members to notify.
 3. Click **Save Details and Record Test** to save your browser test.
 4. Start to record your test.
 
 ## Record test
 
-Tests can be only recorded from **[Google Chrome][6]**. To record your test, download the [Datadog Record Test extension for Google Chrome][7].
+Tests can be only recorded from **[Google Chrome][7]**. To record your test, download the [Datadog Record Test extension for Google Chrome][8].
 
 {{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test" responsive="true" >}}
 
@@ -110,7 +111,7 @@ After selecting the Hover action, click on the element you want to choose to cre
 To create a variable, first give it a name then define its value from:
 
 * **An Element**: Create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
-* **A Secure Credential**: Store and use secure credential through [Synthetics Settings][8])
+* **A Secure Credential**: Store and use secure credential through [Synthetics Settings][9])
 * **A Pattern**:
 
 | Pattern                 | Description                                         |
@@ -147,8 +148,8 @@ Common failure reasons include:
 | `Element located but it's invisible`             | The element is on the page but cannot be clicked on—for instance, if another element is overlaid on top of it.                                                          |
 | `Cannot locate element` | The element cannot be found in the HTML.                                                                                                                             |
 | `Select did not have option`             | The specified option is missing from the dropdown menu.                                                                                     |
-| `Forbidden URL`         | The test likely encountered a protocol that is not supported. Reach out to [Datadog support][9] for further details.  |
-| `General test failure`       | A general error message. [Contact support][9] for further details. |
+| `Forbidden URL`         | The test likely encountered a protocol that is not supported. Reach out to [Datadog support][4] for further details.  |
+| `General test failure`       | A general error message. [Contact support][4] for further details. |
 
 ## Further Reading
 
@@ -157,9 +158,9 @@ Common failure reasons include:
 [1]: /synthetics/identify_synthetics_bots
 [2]: /api/?lang=bash#get-available-locations
 [3]: /synthetics/private_locations
-[4]: http://daringfireball.net/projects/markdown/syntax
-[5]: /integrations/#cat-notification
-[6]: https://www.google.com/chrome
-[7]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[8]: /synthetics/settings/#secure-credential
-[9]: /help
+[4]: /help
+[5]: http://daringfireball.net/projects/markdown/syntax
+[6]: /integrations/#cat-notification
+[7]: https://www.google.com/chrome
+[8]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[9]: /synthetics/settings/#secure-credential

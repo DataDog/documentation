@@ -554,69 +554,70 @@ main:
     parent: "alerting"
     identifier: "monitor_types"
     weight: 1
-  - name: "Anomaly"
-    url: "monitors/monitor_types/anomaly/"
-    parent: "monitor_types"
-    weight: 101
-  - name: "APM"
-    url: "monitors/monitor_types/apm/"
-    parent: "monitor_types"
-    weight: 102
-    identifier: "monitor_apm"
-  - name: "Composite"
-    url: "monitors/monitor_types/composite/"
-    parent: "monitor_types"
-    weight: 103
-  - name: "Custom Check"
-    url: "monitors/monitor_types/custom_check/"
-    parent: "monitor_types"
-    weight: 104
-  - name: "Event"
-    url: "monitors/monitor_types/event/"
-    parent: "monitor_types"
-    weight: 105
-  - name: "Forecasts"
-    url: "monitors/monitor_types/forecasts/"
-    parent: "monitor_types"
-    weight: 106
   - name: "Host"
     url: "monitors/monitor_types/host/"
     parent: "monitor_types"
-    weight: 107
-  - name: "Integration"
-    url: "monitors/monitor_types/integration/"
-    parent: "monitor_types"
-    weight: 108
-  - name: "Log"
-    url: "monitors/monitor_types/log/"
-    parent: "monitor_types"
-    weight: 109
+    weight: 101
   - name: "Metric"
     url: "monitors/monitor_types/metric/"
     parent: "monitor_types"
-    weight: 110
-  - name: "Network"
-    url: "monitors/monitor_types/network/"
+    weight: 102
+  - name: "Anomaly"
+    url: "monitors/monitor_types/anomaly/"
     parent: "monitor_types"
-    weight: 111
+    weight: 103
   - name: "Outlier"
     url: "monitors/monitor_types/outlier/"
     parent: "monitor_types"
-    weight: 112
-  - name: "Process"
+    weight: 104
+  - name: "Forecast"
+    url: "monitors/monitor_types/forecasts/"
+    parent: "monitor_types"
+    weight: 105
+  - name: "Integration"
+    url: "monitors/monitor_types/integration/"
+    parent: "monitor_types"
+    weight: 106
+  - name: "Live Process"
     url: "monitors/monitor_types/process/"
     parent: "monitor_types"
-    weight: 113
-  - name: "Trace Analytics"
+    weight: 107
+  - name: "Network"
+    url: "monitors/monitor_types/network/"
+    parent: "monitor_types"
+    weight: 108
+  - name: "Custom Check"
+    url: "monitors/monitor_types/custom_check/"
+    parent: "monitor_types"
+    weight: 109
+  - name: "Event"
+    url: "monitors/monitor_types/event/"
+    parent: "monitor_types"
+    weight: 110
+  - name: "Logs"
+    url: "monitors/monitor_types/log/"
+    parent: "monitor_types"
+    weight: 111
+  - name: "APM Metrics"
+    url: "monitors/monitor_types/apm/"
+    parent: "monitor_types"
+    weight: 112
+    identifier: "monitor_apm"
+  - name: "APM Trace Analytics"
     url: "monitors/monitor_types/trace_analytics"
     parent: "monitor_types"
     identifier: "monitors_trace_analytics"
-    weight: 114
+    weight: 113
   - name: "Watchdog"
     url: "monitors/monitor_types/watchdog/"
     parent: "monitor_types"
-    weight: 115
+    weight: 114
     identifier: "monitor_watchdog"
+  - name: "Composite"
+    url: "monitors/monitor_types/composite/"
+    parent: "monitor_types"
+    weight: 115
+
 
   ## MONITORS -  Manage monitor
 
@@ -645,8 +646,8 @@ main:
     weight: 6
     parent: "alerting"
 
-  - name: "SLO Widget"
-    url: "monitors/slo_widget/"
+  - name: "Service Level Objectives"
+    url: "monitors/slos/"
     weight: 7
     parent: "alerting"
 
@@ -916,46 +917,17 @@ main:
     parent: "log_processing"
     weight: 204
 
-  - name: "Generate Metrics"
-    url: "logs/logs_to_metrics/"
-    parent: "log_management"
-    identifier: "log_to_metrics"
-    weight: 3
-
   - name: "Live Tail"
     url: "logs/live_tail/"
     parent: "log_management"
     identifier: "log_live_tail"
-    weight: 4
+    weight: 3
 
-  ## LOGS - Explorer
-
-  - name: "Explorer"
-    url: "logs/explorer/"
+  - name: "Generate Metrics"
+    url: "logs/logs_to_metrics/"
     parent: "log_management"
-    identifier: "log_explorer"
+    identifier: "log_to_metrics"
     weight: 4
-  - name: "Search"
-    url: "logs/explorer/search/"
-    parent: "log_explorer"
-    weight: 401
-  - name: "Log Analytics"
-    url: "logs/explorer/analytics/"
-    parent: "log_explorer"
-    weight: 402
-  - name: "Saved Views"
-    url: "logs/explorer/saved_views/"
-    parent: "log_explorer"
-    weight: 403
-  - name: "Log Patterns"
-    url: "logs/explorer/patterns/"
-    parent: "log_explorer"
-    weight: 404
-
-  - name: "Logging without Limits"
-    url: "logs/logging_without_limits/"
-    parent: "log_management"
-    weight: 5
 
   ## LOGS - Archives
 
@@ -963,26 +935,56 @@ main:
     url: "logs/archives/"
     parent: "log_management"
     identifier: "log_archives"
-    weight: 6
+    weight: 5
   - name: "Archive to AWS S3"
     url: "logs/archives/s3/"
     parent: "log_archives"
-    weight: 601
+    weight: 501
   - name: "Rehydrate from Archives"
     url: "logs/archives/rehydrating"
     parent: "log_archives"
-    weight: 602
+    weight: 502
+
+  - name: "Indexes"
+    url: "logs/indexes"
+    parent: "log_management"
+    identifier: "log_indexes"
+    weight: 6
+
+  ## LOGS - Explorer
+
+  - name: "Log Explorer"
+    url: "logs/explorer/"
+    parent: "log_management"
+    identifier: "log_explorer"
+    weight: 7
+  - name: "Search"
+    url: "logs/explorer/search/"
+    parent: "log_explorer"
+    weight: 701
+  - name: "Log Analytics"
+    url: "logs/explorer/analytics/"
+    parent: "log_explorer"
+    weight: 702
+  - name: "Saved Views"
+    url: "logs/explorer/saved_views/"
+    parent: "log_explorer"
+    weight: 703
+  - name: "Log Patterns"
+    url: "logs/explorer/patterns/"
+    parent: "log_explorer"
+    weight: 704
 
   - name: "Guides"
     url: "logs/guide/"
     parent: "log_management"
     identifier: "log_guides"
-    weight: 7
+    weight: 8
 
   - name: "Security"
     url: "security/logs/"
     parent: "log_management"
-    weight: 8
+    weight: 9
 
 ################
 ## SYNTHETICS ##
@@ -1034,6 +1036,32 @@ main:
     parent: "synthetics"
     weight: 6
 
+####################################
+## Network Performance Monitoring ##
+####################################
+
+  - name: "Network Monitoring"
+    url: "network_performance_monitoring/"
+    pre: "nav_network"
+    identifier: "npm"
+    weight: 120000
+
+  - name: "Installation"
+    url: "network_performance_monitoring/installation"
+    parent: "npm"
+    identifier: "npm_installation"
+    weight: 1
+  - name: "Network Page"
+    url: "network_performance_monitoring/network_table"
+    parent: "npm"
+    identifier: "npm_page"
+    weight: 2
+  - name: "Network Map"
+    url: "network_performance_monitoring/network_map"
+    parent: "npm"
+    identifier: "npm_map"
+    weight: 3
+
 ################
 ## DEVELOPERS ##
 ################
@@ -1042,7 +1070,7 @@ main:
     url: "developers/"
     pre: "nav_developers"
     identifier: "dev_tools"
-    weight: 110000
+    weight: 130000
 
   ## DEVELOPERS - DogStatsD
 
@@ -1119,7 +1147,7 @@ main:
     parent: "dev_tools"
     weight: 5
 
-  - name: "Write a Prometheus Check"
+  - name: "Write an OpenMetrics Check"
     url: "developers/prometheus/"
     parent: "dev_tools"
     weight: 6
@@ -1158,7 +1186,7 @@ main:
     url: "api/"
     pre: "nav_api"
     identifier: "api"
-    weight: 120000
+    weight: 140000
 
 ########################
 ## ACCOUNT MANAGEMENT ##
@@ -1168,7 +1196,7 @@ main:
     url: "account_management/"
     pre: "nav_account"
     identifier: "account_management"
-    weight: 130000
+    weight: 150000
 
   - name: "Team management"
     url: "account_management/team/"
@@ -1244,7 +1272,7 @@ main:
     url: "security/"
     pre: "nav_security"
     identifier: "security"
-    weight: 140000
+    weight: 160000
 
   - name: "Agent"
     url: "security/agent/"
@@ -1274,7 +1302,7 @@ main:
     url: "glossary/"
     pre: "nav_glossary"
     identifier: "glossary_top_level"
-    weight: 150000
+    weight: 170000
 
 ############
 ## VIDEOS ##
@@ -1284,7 +1312,7 @@ main:
     url: "videos/"
     pre: "nav_videos"
     identifier: "video_top_level"
-    weight: 160000
+    weight: 180000
 
 ##########
 ## HELP ##
@@ -1294,4 +1322,4 @@ main:
     url: "help/"
     pre: "nav_help"
     identifier: "help_top_level"
-    weight: 170000
+    weight: 190000
