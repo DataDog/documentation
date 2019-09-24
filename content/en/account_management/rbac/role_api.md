@@ -216,9 +216,9 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 ### Update Role
 
-Updates an existing role's name. Returns role name and uuid.
+Updates an existing role's name. Returns role name and UUID.
 
-| Method  | Enpoint path            | Required payload                           |
+| Method  | Endpoint path            | Required payload                           |
 |---------|-------------------------|--------------------------------------------|
 | `PATCH` | `/v2/roles/<ROLE_UUID>` | **type="roles"**<br>**attributes["name"]** |
 
@@ -241,7 +241,7 @@ curl -X PATCH \
          }'
 ```
 
-Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholder with the corresponding [API and application keys for your organization][1]. See the [Permission Uuid section](#permission-uuids) to see what roles are available for the `<ROLE_NAME>` placeholder.
+Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1]. See the [Permission UUID section](#permission-uuids) to see what roles are available for the `<ROLE_NAME>` placeholder.
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -276,7 +276,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 Deletes a role.
 
-| Method   | Enpoint path            | Required payload |
+| Method   | Endpoint path            | Required payload |
 |----------|-------------------------|------------------|
 | `DELETE` | `/v2/roles/<ROLE_UUID>` | No Payload       |
 
@@ -290,7 +290,7 @@ curl -X DELETE "https://app.datadoghq.com/api/v2/roles/<ROLE_UUID>" \
          -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
 ```
 
-Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholder with the corresponding [API and application keys for your organization][1].  See the [Permission Uuid section](#permission-uuids) to see what role UUIDs are available for the `<ROLE_UUID>` placeholder.
+Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1].  See the [Permission UUID section](#permission-uuids) to see what role UUIDs are available for the `<ROLE_UUID>` placeholder.
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -306,9 +306,9 @@ HTTP/2 204
 
 ### Get Permissions
 
-Returns a list of all permissions, including name, description, uuid.
+Returns a list of all permissions, including name, description, and UUID.
 
-| Method | Enpoint path      | Required payload |
+| Method | Endpoint path      | Required payload |
 |--------|-------------------|------------------|
 | `GET`  | `/v2/permissions` | No Payload       |
 
@@ -322,7 +322,7 @@ curl -X GET "https://app.datadoghq.com/api/v2/permissions" \
              -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
 ```
 
-Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholder with the corresponding [API and application keys for your organization][1].
+Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1].
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -349,11 +349,11 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% /tab %}}
 {{< /tabs >}}
 
-### Get Permissions for a role
+### Get permissions for a role
 
-Returns a list of all permissions for a single role
+Returns a list of all permissions for a single role.
 
-| Method | Enpoint path                        | Required payload |
+| Method | Endpoint path                        | Required payload |
 |--------|-------------------------------------|------------------|
 | `GET`  | `/v2/roles/<ROLE_UUID>/permissions` | No Payload       |
 
@@ -367,7 +367,7 @@ curl -X GET "https://app.datadoghq.com/api/v2/roles/<ROLE_UUID>/permissions" \
              -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
 ```
 
-Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholder with the corresponding [API and application keys for your organization][1]. See the [Permission Uuid section](#permission-uuids) to see what role UUIDs are available for the `<ROLE_UUID>` placeholder.
+Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1]. See the [Permission UUID section](#permission-uuids) to see what role UUIDs are available for the `<ROLE_UUID>` placeholder.
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -398,7 +398,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 Adds a permission to a role.
 
-| Method | Enpoint path                        | Required payload                                                  |
+| Method | Endpoint path                        | Required payload                                                  |
 |--------|-------------------------------------|-------------------------------------------------------------------|
 | `POST` | `/v2/roles/<ROLE_UUID>/permissions` | **data["type"]="permissions"**<br>**data["id"]=$PERMISSION_UUID** |
 
@@ -420,7 +420,7 @@ curl -X POST \
             }'
 ```
 
-Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholder with the corresponding [API and application keys for your organization][1]. See the [Permission Uuid section](#permission-uuids) to see what IDs are available for the `<PERMISSION_UUID>` and `<ROLE_UUID>` placeholders.
+Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1]. See the [Permission UUID section](#permission-uuids) to see what IDs are available for the `<PERMISSION_UUID>` and `<ROLE_UUID>` placeholders.
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -447,11 +447,11 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% /tab %}}
 {{< /tabs >}}
 
-### Revoke Permission from Role
+### Revoke permissions from role
 
 Removes a permission from a role.
 
-| Method   | Enpoint path                        | Required payload                                                  |
+| Method   | Endpoint path                        | Required payload                                                  |
 |----------|-------------------------------------|-------------------------------------------------------------------|
 | `DELETE` | `/v2/roles/<ROLE_UUID>/permissions` | **data["type"]="permissions"**<br>**data["id"]=$PERMISSION_UUID** |
 
@@ -473,7 +473,7 @@ curl -X DELETE \
          }'
 ```
 
-Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholder with the corresponding [API and application keys for your organization][1]. See the [Permission Uuid section](#permission-uuids) to see what IDs are available for the `<PERMISSION_UUID>` and `<ROLE_UUID>` placeholders.
+Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1]. See the [Permission UUID section](#permission-uuids) to see what IDs are available for the `<PERMISSION_UUID>` and `<ROLE_UUID>` placeholders.
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -500,11 +500,11 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% /tab %}}
 {{< /tabs >}}
 
-### Add User to Role
+### Add user to role
 
 Adds a user to a role.
 
-| Method | Enpoint path                  | Required payload                                        |
+| Method | Endpoint path                  | Required payload                                        |
 |--------|-------------------------------|---------------------------------------------------------|
 | `POST` | `/v2/roles/<ROLE_UUID>/users` | **data["type"]="users"**<br>**data["id"]=$USER_HANDLE** |
 
@@ -525,7 +525,7 @@ curl -X POST \
          }'
 ```
 
-Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholder with the corresponding [API and application keys for your organization][1]. See the [Permission Uuid section](#permission-uuids) to see what roles UUIDs are available for the `<ROLE_UUID>` placeholder.
+Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1]. See the [Permission UUID section](#permission-uuids) to see what roles UUIDs are available for the `<ROLE_UUID>` placeholder.
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -553,11 +553,11 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% /tab %}}
 {{< /tabs >}}
 
-### Remove User from Role
+### Remove user from role
 
 Removes a user from a role.
 
-| Method   | Enpoint path                  | Required payload                                        |
+| Method   | Endpoint path                  | Required payload                                        |
 |----------|-------------------------------|---------------------------------------------------------|
 | `DELETE` | `/v2/roles/<ROLE_UUID>/users` | **data["type"]="users"**<br>**data["id"]=$USER_HANDLE** |
 
@@ -578,7 +578,7 @@ curl -X DELETE \
          }'
 ```
 
-Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholder with the corresponding [API and application keys for your organization][1].  See the [Permission Uuid section](#permission-uuids) to see what role UUIDs are available for the `<ROLE_UUID>` placeholder.
+Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1].  See the [Permission UUID section](#permission-uuids) to see what role UUIDs are available for the `<ROLE_UUID>` placeholder.
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -608,15 +608,15 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 ## Permission UUIDs
 
-In order to grant or remove a global permission to/from a role, today you must know and use the UUID for (A) the role and (B) the permission.
+In order to grant or remove a global permission to/from a role, use the UUID for both the role and the permission.
 
-The UUID of the roles can be found from the `GET roles` api call.
+The UUID of the roles can be found from the `GET roles` API call.
 
 The UUIDs for the permissions are as follows:
 
 {{< tabs >}}
 {{% tab "Datadog US site" %}}
-| name                         | uuid                                 | description                                  |
+| name                         | UUID                                 | description                                  |
 |------------------------------|--------------------------------------|----------------------------------------------|
 | admin                        | 984a2bd4-d3b4-11e8-a1ff-a7f660d43029 | Read and write permission to all of datadog  |
 | standard                     | 984d2f00-d3b4-11e8-a200-bb47109e9987 | Read and write permission to most of datadog |
@@ -633,7 +633,7 @@ The UUIDs for the permissions are as follows:
 
 {{% /tab %}}
 {{% tab "Datadog EU site" %}}
-| name                         | uuid                                 | description                                  |
+| name                         | UUID                                 | description                                  |
 |------------------------------|--------------------------------------|----------------------------------------------|
 | admin                        | f1624684-d87d-11e8-acac-efb4dbffab1c | Read and write permission to all of datadog  |
 | standard                     | f1666372-d87d-11e8-acac-6be484ba794a | Read and write permission to most of datadog |
@@ -661,7 +661,7 @@ Certain permissions can be granted within a limited scope. This can be done manu
 | `logs_write_exclusion_filters` | indexes    | list of index names (string)             | Grant update on the exclusion filters for only certain indexes. |
 | `logs_write_processors`        | pipelines  | list of processing pipeline ids (string) | Grant update on only the processors of certain pipelines.       |
 
-For example, to grant read access only on two indexes named `main` and `support` to a role named `support`, your API call would look like this:
+For example, to grant read access only on two indexes named `main` and `support` to a role named `support`, your API call  looks like this:
 
 ```sh
 curl -X POST \
@@ -677,7 +677,7 @@ curl -X POST \
       }'
 ```
 
-To grant write access to only two processing pipelines whose IDs are `abcd-1234` and `bcde-2345` respectively, your API call would look like this:
+To grant write access to only two processing pipelines whose IDs are `abcd-1234` and `bcde-2345` respectively, your API call  looks like this:
 
 ```sh
 curl -X POST \
