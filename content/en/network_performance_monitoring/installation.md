@@ -54,12 +54,15 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 To enable network performance monitoring with Kubernetes, use the following configuration:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: datadog-agent
   namespace: default
 spec:
+  selector:
+    matchLabels:
+      app: datadog-agent
   template:
     metadata:
       labels:
