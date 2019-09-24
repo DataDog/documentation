@@ -152,11 +152,14 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
 
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
   name: postgres
 spec:
+  selector:
+    matchLabels:
+      app: database
   template:
     metadata:
       annotations:
