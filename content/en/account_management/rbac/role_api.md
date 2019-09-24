@@ -102,9 +102,9 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 ### Get One Role
 
-Returns a specific role, including its name and uuid.
+Returns a specific role, including its name and UUID.
 
-| Method | Enpoint path            | Required payload |
+| Method | Endpoint path            | Required payload |
 |--------|-------------------------|------------------|
 | `GET`  | `/v2/roles/<ROLE_UUID>` | No Payload       |
 
