@@ -39,7 +39,7 @@ Page number of roles to return for a given page.
 * **`page[count]`** [*optional*, *default*=**10**]:
 Number of roles to return for a given page.
 * **`sort`** [*optional*, *default*=**name**]:
-Sort roles depending of the given field. Sort order is **ascending** by default. Sort order is **descending** if the field is prefixed by a negative sign (Eg: *sort=-name*).
+Sort roles depending on the given field. Sort order is **ascending** by default. Sort order is **descending** if the field is prefixed by a negative sign (Eg: *sort=-name*).
     Options: **name**, **modified_at**
 * **`filter`**[*optional*, *default*=**None**]:
     Filter all roles by the given string.
