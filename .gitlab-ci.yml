@@ -95,6 +95,19 @@ index_algolia_preview:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
+test_pa11y:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  dependencies:
+    - build_preview
+  script:
+    - cp -r /etc/node_modules .
+    - node ./local/bin/js/pa11y.js --env preview --dd_api_key $(get_secret 'dd-demo-api-key')
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+
+
 # ================== live ================== #
 build_live:
   <<: *base_template
