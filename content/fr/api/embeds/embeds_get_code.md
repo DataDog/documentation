@@ -6,7 +6,7 @@ external_redirect: /api/#recuperer-un-embed-specifique
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/graph/embed/<EMBED_ID>`
+`GET /v1/graph/embed/<ID_EMBED>`
 ##### Exemple de requête
 {{< code-snippets basename="api-embeds-get" >}}
 ##### Exemple de réponse

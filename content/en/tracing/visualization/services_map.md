@@ -16,13 +16,13 @@ further_reading:
   text: "Creating context with service maps (Datadog + Airbnb)"
 ---
 
-The Service Map decomposes your application into all its component services and draws the observed dependencies between these services in real time, so you can identify bottlenecks and understand how data flows through your architecture.
+The Service Map decomposes your application into all its component [services][1] and draws the observed dependencies between these services in real time, so you can identify bottlenecks and understand how data flows through your architecture.
 
 {{< img src="tracing/visualization/services_map/service_map_overview.png" alt="Service Map Overview" responsive="true">}}
 
 ## Setup
 
-The Service Map visualizes data collected by Datadog APM. Setup is not required to view services.
+The Service Map visualizes data collected by Datadog APM. Setup is not required to view [services][1].
 
 ## Ways to use it
 
@@ -32,7 +32,7 @@ The Service Map was built to provide an overview of your services and their heal
 
 The Service Map can be filtered based on the type of service (webserver, database, cache, etc.) or based on a fuzzy string match. This is particularly useful in a microservices environment with hundreds or thousands of nodes.
 
-Services are also scoped by `env`, and, optionally, a [first-class dimension][1].  Using the dropdowns to select a different scope draws an entirely different map consisting of the services within that scope. These services cannot call or be called by services in other environments.
+Services are also scoped by `env`, and, optionally, a [first-class dimension][2].  Using the dropdowns to select a different scope draws an entirely different map consisting of the services within that scope. These services cannot call or be called by services in other environments.
 
 ## Inspection
 
@@ -70,7 +70,7 @@ Additionally, monitors can be tagged by service in the “Say what’s happening
 
 ### Nodes and edges
 
-Nodes represent services exactly as instrumented in APM and match those in your [Services][2] page. Edges represent aggregate calls from one service to another. These interactions are shown on the flame graph for each individual trace.
+Nodes represent services exactly as instrumented in APM and match those in your [Services][3] page. Edges represent aggregate calls from one service to another. These interactions are shown on the flame graph for each individual [trace][4].
 
 New services or connections appear within moments of being instrumented and age out if there are no corresponding traces seen for two weeks.  This takes into account services that do work infrequently, but are an important part of a functioning system.
 
@@ -87,5 +87,7 @@ Monitors are not constrained to APM monitors. The service tag, described above, 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/setup/first_class_dimensions
-[2]: https://app.datadoghq.com/apm/services
+[1]: /tracing/visualization/#services
+[2]: /tracing/setup/first_class_dimensions
+[3]: https://app.datadoghq.com/apm/services
+[4]: /tracing/visualization/#trace

@@ -6,7 +6,7 @@ kind: documentation
 
 ## Paramètres du plan
 
-Mettez à niveau votre compte ou passez à une version antérieure depuis l'onglet Plan sur la page Organization Account Settings.
+Pour passer à une offre supérieure ou inférieure, accédez à l'onglet Plan sur la page Organization Account Settings.
 
 **Remarque** : contactez votre chargé de compte ou envoyez un e-mail à l'adresse [success@datadoghq.com][3] pour ajouter ou supprimer des fonctionnalités payantes qui ne sont pas comprises dans les plans standard.
 

@@ -78,7 +78,7 @@ Use the top right selector of this graph to zoom on a given percentile of latenc
 
 ## Resources
 
-See the list of resources associated with your service. Resources are particular actions for your services (typically individual endpoints or queries). Read more about resources in [Getting Started with APM][1]. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that the these metric columns are configurable (see image below).
+See the list of [resources][6] associated with your service. Resources are particular actions for your services (typically individual endpoints or queries). Read more about resources in [Getting Started with APM][1]. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that the these metric columns are configurable (see image below).
 
 {{< img src="tracing/visualization/service/resources.png" alt="Resources" responsive="true" style="width:90%;">}}
 
@@ -110,3 +110,4 @@ Choose what to display in your resources list:
 [3]: /monitors/monitor_types/apm
 [4]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm
 [5]: /graphing/dashboards/timeboard
+[6]: /tracing/visualization/#resources

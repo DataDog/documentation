@@ -5,6 +5,7 @@
       'name': 'i-deadbeef',
       'up': True,
       'is_muted': False,
+      "last_reported_time": 1560000000,
       'apps': [
         'agent'
       ],

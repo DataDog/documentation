@@ -20,7 +20,7 @@ further_reading:
 ---
 Tous les paramètres de recherche sont contenus dans l'adresse URL. Vous pouvez partager votre vue en partageant l'URL.
 
-{{< img src="logs/explorer/search_your_logs.gif" alt="Effectuer une recherche dans vos logs" responsive="true" >}}
+{{< img src="logs/explorer/search_your_logs.mp4" alt="Effectuer une recherche dans vos logs" video="true" responsive="true" >}}
 
 ## Syntaxe de recherche
 

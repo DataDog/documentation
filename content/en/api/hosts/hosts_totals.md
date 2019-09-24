@@ -10,4 +10,5 @@ This endpoint returns the total number of active and up hosts in your Datadog ac
 
 ##### ARGUMENTS
 
-This endpoint takes no JSON arguments.
+* **`from`** [*optional*, *default*=**now - 2 hours**]:
+    Number of seconds since UNIX epoch from which you want to get the total number of active and up hosts.

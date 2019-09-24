@@ -15,7 +15,8 @@ further_reading:
 
 Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do not include the `log collection` interface.
 
-Logs make use of a different [set of proxy settings][1] than other data types forwarded by the Datadog Agent. This is because logs are transported over TCP/SSL, while other features submit data with HTTPS.
+By default, Datadog transports logs over TCP/SSL. Hence, there is a different [set of proxy settings][1] than other data types that the Datadog Agent forwards in HTTPS.
+Configure the Agent to send logs in HTTPS using the same set of proxy settings as other data types.
 
 {{< tabs >}}
 {{% tab "TCP" %}}
@@ -67,6 +68,13 @@ The parameter above can also be set with the following environment variable:
 
 * `DD_LOGS_CONFIG_SOCKS5_PROXY_ADDRESS`
 
+{{% /tab %}}
+{{% tab "HTTPS" %}}
+
+When the Agent is [configured to send logs through HTTPS][1], use the same [set of proxy settings][2] as the other data types in order to send logs through a web proxy.
+
+[1]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
+[2]: /agent/proxy
 {{% /tab %}}
 {{< /tabs >}}
 

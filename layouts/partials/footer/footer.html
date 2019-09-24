@@ -55,6 +55,9 @@
                         </ul>
                     </div>
                 </div>
+                <div class="row d-none d-lg-block d-xl-none mt-4">
+                    <span class="copyright">&copy; Datadog {{ $date := now }} {{ $date.Format "2006"}}</span>
+                </div>
             </div>
             <div class="col-12 col-lg-4 col-xl-4">
                 <div class="row">
@@ -62,7 +65,7 @@
                         <p>About</p>
                         <ul class="list-unstyled">
                             {{ range $datafile.col3 }}
-                                {{ if .link }}<li><a href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a></li>{{ end }}
+                                {{ if .link }}<li {{ if eq .title "Investor Relations" }}class="nowrap"{{ end }}><a href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a></li>{{ end }}
                             {{ end }}
                         </ul>
                     </div>
