@@ -18,7 +18,7 @@ Permissions related to specific account assets can be granted to roles in the Da
 
 ## Requests
 
-All the API endpoints below can have two different host endpoint:
+All the API endpoints below can have two different host endpoints:
 
 * If you are on the Datadog US site: `https://api.datadoghq.com/api/`
 * If you are on the Datadog EU site: `https://api.datadoghq.eu/api/`
