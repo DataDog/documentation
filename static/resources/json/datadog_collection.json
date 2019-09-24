@@ -9741,7 +9741,7 @@
 				{
 					"name": "Start or pause a test",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
