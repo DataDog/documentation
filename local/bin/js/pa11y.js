@@ -50,7 +50,7 @@ const options = {
     directoryExclusions, // any directories to exclude
     includeUrls, // any specific html files to include
     publicDir: 'public', // output directory name
-    baseUrl: 'http://docs.datadoghq.com', // site baseUrl to test
+    baseUrl: 'https://docs.datadoghq.com', // site baseUrl to test
     outputFileName: 'docs-pa11y-output',
     outputFileType: 'csv', // csv or json
     metricName: 'test.pa11y.num_errors' // metric name
