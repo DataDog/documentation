@@ -23,7 +23,7 @@ All the API endpoints below can have two different host endpoints:
 * If you are on the Datadog US site: `https://api.datadoghq.com/api/`
 * If you are on the Datadog EU site: `https://api.datadoghq.eu/api/`
 
-### Get All Roles
+### Get all roles
 
 
 Returns all roles, including their names and UUIDs.
@@ -100,7 +100,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% /tab %}}
 {{< /tabs >}}
 
-### Get One Role
+### Get one role
 
 Returns a specific role, including its name and UUID.
 
@@ -156,7 +156,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% /tab %}}
 {{< /tabs >}}
 
-### Create Role
+### Create role
 
 
 Creates a new role. Returns role name and UUID.
@@ -214,7 +214,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% /tab %}}
 {{< /tabs >}}
 
-### Update Role
+### Update role
 
 Updates an existing role's name. Returns role name and UUID.
 
@@ -272,7 +272,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% /tab %}}
 {{< /tabs >}}
 
-### Delete Role
+### Delete role
 
 Deletes a role.
 
@@ -304,7 +304,7 @@ HTTP/2 204
 {{< /tabs >}}
 
 
-### Get Permissions
+### Get permissions
 
 Returns a list of all permissions, including name, description, and UUID.
 
@@ -394,7 +394,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% /tab %}}
 {{< /tabs >}}
 
-### Grant Permission to Role
+### Grant permission to a role
 
 Adds a permission to a role.
 
@@ -447,7 +447,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% /tab %}}
 {{< /tabs >}}
 
-### Revoke permissions from role
+### Revoke permissions from a role
 
 Removes a permission from a role.
 
@@ -651,7 +651,7 @@ The UUIDs for the permissions are as follows:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Granting Permissions within limited scopes
+## Granting Permissions Within Limited Scopes
 
 Certain permissions can be granted within a limited scope. This can be done manually from the Datadog application in [the Pipelines Page][1], or programmatically via the Role API if the correct "scope" is added in the payload. The following permissions can be granted within a limited scope:
 
