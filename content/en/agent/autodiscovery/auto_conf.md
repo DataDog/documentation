@@ -11,7 +11,7 @@ further_reading:
   text: "Manage which Container to include in the Agent Autodiscovery"
 ---
 
-When the Agent runs as a container, it tries by default to auto-discover other containers around it based on default autodiscovery configuration files named `auto_conf.yaml`. Those Autodiscovery default configuration files can be found in the corresponding `conf.d/<INTEGRATION>.d/` folder for the following integrations:
+When the Agent runs as a container, it tries by default to Autodiscover other containers around it based on default Autodiscovery configuration files named `auto_conf.yaml`. You can find these files in the corresponding `conf.d/<INTEGRATION>.d/` folders for the following integrations:
 
 | Integration            | Auto-configuration file |
 | ------                 | --------                |
@@ -35,7 +35,7 @@ When the Agent runs as a container, it tries by default to auto-discover other c
 
 The `auto_conf.yaml` configuration files cover all required parameters to set up a specific integration, with their corresponding [Autodiscovery Templates Variables][33] in place to take into account the containerized environment.
 
-**Note**: The auto-configuration logic only supports the default configuration for any integration above. If you want to customize your Datadog-integration configuration, refer to the Integrations Templates documentation to learn how to configure your Agent Autodiscovery:
+**Note**: The auto configuration logic only supports the default configuration for any integration above. If you want to customize your Datadog integration configuration, refer to the Integrations Templates documentation to learn how to configure your Agent Autodiscovery:
 
 * [Using a configuration file mounted within the Agent][34]
 * [Using Key-Value Store][35]
