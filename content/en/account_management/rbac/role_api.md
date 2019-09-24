@@ -16,18 +16,19 @@ Ask your sales representative or customer success manager to enable this feature
 
 The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them.
 
-Permissions related to specific account assets can be granted to roles in the Datadog application without using this API. For example, granting read access on a specific log index to a role can be done in the Datadog application from [the Pipelines Page][1]. 
+Permissions related to specific account assets can be granted to roles in the Datadog application without using this API. For example, granting read access on a specific log index to a role can be done in Datadog from [the Pipelines Page][1]. 
 
 
 ## Headers
-All requests are required to supply the following in headers
+All requests are required to supply the following in headers:
+
 ```
 {
-    DD-API-KEY: ${API_KEY}
-    DD-APPLICATION-KEY: ${APP_KEY}
+    DD-API-KEY: <YOUR_DATADOG_API_KEY>
+    DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>
 }
 ```
-
+Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholder with the corresponding [API and application keys for your organization](https://app.datadoghq.com/account/settings#api). 
 
 ## Requests
 
@@ -41,11 +42,11 @@ Required Payload: No Payload
 ##### ARGUMENTS
 
 * **`page[size]`** [*optional*, *default*=**0**]:
-Page Number of roles to return for a given page
+Page number of roles to return for a given page.
 * **`page[count]`** [*optional*, *default*=**10**]:
-Number of roles to return for a given page
+Number of roles to return for a given page.
 * **`sort`** [*optional*, *default*=**name**]:
-Sort roles by the given field. Sort order is **ascending** by default. Sort order is **descending** if the field is prefixed by a negative sign (Eg: *sort=-name*)
+Sort roles depending of the given field. Sort order is **ascending** by default. Sort order is **descending** if the field is prefixed by a negative sign (Eg: *sort=-name*).
     Options: **name**, **modified_at**
 * **`filter`**[*optional*, *default*=**None**]:
     Filter all roles by the given string.
@@ -116,7 +117,7 @@ HTTP/2 200
 ##### Example:
 
 ```sh
-curl -X GET "https://app.datadoghq.com/api/v2/roles/$ROLE_UUID" -H "DD-API-KEY: ${API_KEY}" -H "DD-APPLICATION-KEY: ${APP_KEY}"
+curl -X GET "https://app.datadoghq.com/api/v2/roles/$ROLE_UUID" -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
 ```
 
 ##### Response:
