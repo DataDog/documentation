@@ -224,19 +224,28 @@ main:
   - name: "Setup"
     url: "agent/cluster_agent/setup/"
     parent: "agent_cluster"
+    identifier: "cluster_agent_setup"
     weight: 401
-  - name: "Features"
-    url: "agent/cluster_agent/features/"
+  - name: "Event Collection"
+    url: "agent/cluster_agent/event_collection/"
     parent: "agent_cluster"
+    identifier: "cluster_agent_event_collection"
     weight: 402
+  - name: "Custom & External Metrics"
+    url: "agent/cluster_agent/external_metrics/"
+    parent: "agent_cluster"
+    identifier: "cluster_agent_external_metrics"
+    weight: 403
   - name: "Commands & Options"
     url: "agent/cluster_agent/commands/"
-    parent: "agent_cluster"
-    weight: 403
-  - name: "Troubleshooting"
-    url: "agent/cluster_agent/troubleshooting/"
+    identifier: "cluster_agent_commands"
     parent: "agent_cluster"
     weight: 404
+  - name: "Troubleshooting"
+    url: "agent/cluster_agent/troubleshooting/"
+    identifier: "cluster_agent_troubleshooting"
+    parent: "agent_cluster"
+    weight: 405
 
   ## AGENT - Autodiscovery
 
