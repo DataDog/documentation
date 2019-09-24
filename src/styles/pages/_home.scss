@@ -110,34 +110,55 @@
         border-radius: 3px;
         box-shadow: 0px 1px 1px rgba(30, 5, 36, 0.16),
             0px 1px 4px rgba(30, 5, 36, 0.24);
+        position: relative;
         @media (min-width: 768px) {
             margin: -60px auto 50px auto;
         }
         @media (min-width: 1200px) {
-            max-width: 900px;
+            max-width: 1000px;
         }
 
         .guide-col {
             padding: 16px 24px;
             flex: 1 1 auto;
-
-            &:not(:last-child) {
-                border-bottom: 1px solid $gray-lighter;
-            }
+            width: 25%;
 
             @media (min-width: 768px) {
                 border-bottom: none !important;
-                &:first-child {
-                    border-right: 1px solid $gray-lighter;
+            }
+        }
+
+        .right-arrow-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            .right-arrow {
+                path {
+                    fill: none;
+                    stroke: $gray-lighter;
+                    stroke-width: 2;
+                    stroke-linejoin: round;
                 }
-                &:last-child {
-                    border-left: 1px solid $gray-lighter;
-                }
+            }
+        }
+
+        .down-arrow {
+            path {
+                fill: none;
+                stroke: $gray-lighter;
+                stroke-width: 2;
+                stroke-linejoin: round;
             }
         }
     }
 
     .nav-tiles {
+        h3 {
+            font-size: 32px;
+            line-height: 36px;
+            font-weight: 200;
+        }
         .nav-tile {
             .shadow-card {
                 padding: 10px 27px;

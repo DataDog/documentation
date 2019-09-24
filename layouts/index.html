@@ -33,7 +33,7 @@
 
         <section class="row guides justify-content-center">
                 {{ range $i, $guide := $datafile.guides }}
-                    <div class="col-12 col-md-4 guide-col d-flex flex-column">
+                    <div class=" guide-col d-flex flex-column">
                         <h5 class="text-black text-uppercase pt-0">{{ $guide.title}} </h5>
                         <p class="small">{{ $guide.desc }}</p>
                         <div class="mt-auto">
@@ -41,21 +41,48 @@
                         </div>
                         
                     </div>
+                    
+                    {{ if ne $i 2 }}
+                    <div class="px-0 mx-0 right-arrow-container d-none d-md-block">
+                        <svg class=" right-arrow" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+                            <path d="M0,0 L 100,50 L 0,100" />
+                        </svg>
+                    </div>
+                    
+                    <svg class="d-block d-md-none down-arrow" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="40" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <path d="M0 0 L 50 100 L 100 0" />
+                    </svg>
+                 
+                    {{ end }}
                 {{ end }}
         </section>
-        <section class="row nav-tiles">
-                {{ range $i, $tile := $datafile.navtiles }}
-                <div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
-                        <a class="d-flex flex-column justify-content-center align-items-center w-100 shadow-card small font-semibold" href="{{ $tile.link | absLangURL }}">
-                                {{ partial "svg" (dict "context" $dot "src" $tile.icon "color" "#632CA6" )}}
-                                  {{ $tile.title }}<span class="font-regular text-center smaller">{{ $tile.desc }}</span></a>
-                        </a>
+        {{ range $i, $nav_section := $datafile.nav_sections }}
+
+            <section class="row nav-tiles mb-2">
+
+                    {{ range $i, $tile := $nav_section }}
                         
-                </div>
-            {{ end }}
-        </section>
+                        {{ range $i, $section := $tile }}
+                            <div class="col-12">
+                                <h3 class="text-center mb-2">{{ $section.name }}</h3>
+                            </div>
+                            
+                            {{ range $i, $navtile := $section.navtiles }} 
+                                <div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+                                        <a class="d-flex flex-column justify-content-center align-items-center w-100 shadow-card small font-semibold" href="{{ $navtile.link | absLangURL }}">
+                                                {{ partial "svg" (dict "context" $dot "src" $navtile.icon "color" "#632CA6" )}}
+                                                {{ $navtile.title }}<span class="font-regular text-center smaller">{{ $navtile.desc }}</span></a>
+                                        </a>
+                                        
+                                </div>
+                            {{ end }}
+                            
+                        {{ end }}
+                    {{ end }}
+            </section>
 
-
+        {{ end }}
+        
     </main>
 
 
