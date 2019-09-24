@@ -117,7 +117,7 @@ curl -X GET "https://app.datadoghq.com/api/v2/roles/<ROLE_UUID>" \
      -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
 ```
 
-Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholder with the corresponding [API and application keys for your organization][1]. See the [Permission Uuid section](#permission-uuids) to see what role UUIDs are available for the `<ROLE_UUID>` placeholder.
+Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1]. See the [Permission UUID section](#permission-uuids) to see what role UUIDs are available for the `<ROLE_UUID>` placeholder.
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -159,9 +159,9 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 ### Create Role
 
 
-Creates a new role. Returns role name and uuid.
+Creates a new role. Returns role name and UUID.
 
-| Method | Enpoint path | Required payload                           |
+| Method | Endpoint path | Required payload                           |
 |--------|--------------|--------------------------------------------|
 | `POST` | `/v2/roles`  | **type="roles"**<br>**attributes["name"]** |
 
@@ -183,7 +183,7 @@ curl -X POST \
             }
         }'
 ```
-Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholder with the corresponding [API and application keys for your organization][1]. See the [Permission Uuid section](#permission-uuids) to see what roles are available for the `<ROLE_NAME>` placeholder.
+Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1]. See the [Permission UUID section](#permission-uuids) to see what roles are available for the `<ROLE_NAME>` placeholder.
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
