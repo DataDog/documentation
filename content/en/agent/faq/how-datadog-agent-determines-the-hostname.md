@@ -104,6 +104,14 @@ By default, the recommended action is to do nothing. This preserves the existing
 
 If you want to have Windows hosts specifically report fully qualified host names, then add `hostname_fqdn` set to `true` in your [Agent's main configuration file][2].
 
+### GCE
+
+_Only affects Agents running on GCE_
+
+By default, Agent v6 uses the instance's hostname provided by GCE. This matches the behavior of Agent v5.5.1+ if `gce_updated_hostname` is set to true in `datadog.conf`.
+
+If you're upgrading from Agent v5 with `gce_updated_hostname` unset or set to false, and the hostname of the Agent is not hardcoded in `datadog.conf`/`datadog.yaml`, the reported hostname on Datadog will change from the GCE instance `name` to the full GCE instance `hostname` (which includes the GCE project id).
+
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
