@@ -28,7 +28,7 @@ All the API endpoints below can have two different host endpoints:
 
 Returns all roles, including their names and UUIDs.
 
-| Method | Enpoint path | Required payload |
+| Method | Endpoint path | Required payload |
 |--------|--------------|------------------|
 | `GET`  | `/v2/roles`  | No Payload       |
 
