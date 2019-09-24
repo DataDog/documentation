@@ -14,11 +14,8 @@ further_reading:
 - link: "agent/kubernetes/daemonset_setup"
   tag: "Documentation"
   text: "Kubernetes DaemonSet Setup"
-- link: "agent/kubernetes/integrations"
+- link: "/agent/cluster_agent/troubleshooting"
   tag: "Documentation"
-  text: "Custom Integrations"
-- link: "https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting"
-  tag: "Github"
   text: "Troubleshooting the Datadog Cluster Agent"
 ---
 

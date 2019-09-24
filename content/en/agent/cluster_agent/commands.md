@@ -2,7 +2,6 @@
 title: Datadog Cluster Agent Commands and Options
 kind: documentation
 disable_toc: true
-further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
   tag: "Blog"
   text: "Introducing the Datadog Cluster Agent"
@@ -15,11 +14,8 @@ further_reading:
 - link: "agent/kubernetes/daemonset_setup"
   tag: "Documentation"
   text: "Kubernetes DaemonSet Setup"
-- link: "agent/kubernetes/integrations"
+- link: "/agent/cluster_agent/troubleshooting"
   tag: "Documentation"
-  text: "Custom Integrations"
-- link: "https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting"
-  tag: "Github"
   text: "Troubleshooting the Datadog Cluster Agent"
 ---
 

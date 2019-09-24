@@ -14,17 +14,21 @@ further_reading:
 - link: "agent/kubernetes/daemonset_setup"
   tag: "Documentation"
   text: "Kubernetes DaemonSet Setup"
-- link: "agent/kubernetes/integrations"
+- link: "/agent/cluster_agent/troubleshooting"
   tag: "Documentation"
-  text: "Custom Integrations"
-- link: "https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting"
-  tag: "Github"
   text: "Troubleshooting the Datadog Cluster Agent"
 ---
 
-To setup the Datadog Cluster Agent on your Kubernetes cluster, follow the instructions below:
+To setup the Datadog Cluster Agent on your Kubernetes cluster you must:
 
-## Configure RBAC permissions for the Cluster Agent
+1. Setup the Datadog Cluster Agent
+2. Configure your Agent to coomunicate with the Datadog Cluster Agent
+
+## Configure the Datadog Cluster Agent
+### Setup
+#### Step 1 - Configure RBAC permission
+
+The Datadog Cluster Agent needs a proper RBAC to be up and running:
 
 1. Review the manifests in the [Datadog Cluster Agent RBAC folder][1].
 
@@ -38,62 +42,100 @@ To setup the Datadog Cluster Agent on your Kubernetes cluster, follow the instru
 
   This creates the appropriate ServiceAccount, ClusterRole, and ClusterRoleBinding.
 
-### Secure Cluster-Agent-to-Agent Communication
+#### Step 2 - Secure Cluster-Agent-to-Agent Communication
 
-Secure communication between the Agent and the Cluster Agent by creating a secret.
+Depending on whether you are relying on a secret to secure the communication between the Datadog Agent and the Datadog Cluster Agent, either:
 
-Run:
+* Create a secret and access it with an environment variable.
+* Set a token in an environment variable.
+* Use ConfigMap to manage your secrets.
 
-```
-echo -n '<ThirtyX2XcharactersXlongXtoken>' | base64
-```
+Setting the value without a secret results in the token being readable in the PodSpec.
 
-Use this string in the `dca-secret.yaml` file located in the [`manifest/cluster-agent` directory][2].
+{{< tabs >}}
+{{% tab "Secret" %}}
 
-Alternatively, run this one-line command:
-```
-kubectl create secret generic datadog-auth-token --from-literal=token=<ThirtyX2XcharactersXlongXtoken>
-```
+1. Run the following command to create a secret token:
 
-Refer to this secret with the environment variable `DD_CLUSTER_AGENT_AUTH_TOKEN` in the manifests of the Cluster Agent and the node-based Agent.
+    ```
+    echo -n '<ThirtyX2XcharactersXlongXtoken>' | base64
+    ```
 
-```yaml
-          - name: DD_CLUSTER_AGENT_AUTH_TOKEN
-            valueFrom:
-              secretKeyRef:
-                name: datadog-auth-token
-                key: token
-```
+2. Use this string in the `dca-secret.yaml` file located in the [`manifest/cluster-agent` directory][1]. Alternatively, run this one-line command:
+
+    ```
+    kubectl create secret generic datadog-auth-token --from-literal=token=<ThirtyX2XcharactersXlongXtoken>
+    ```
+
+3. Refer to this secret with the environment variable `DD_CLUSTER_AGENT_AUTH_TOKEN` in the manifests of the Cluster Agent and the node-based Agent.
+
+    ```yaml
+              - name: DD_CLUSTER_AGENT_AUTH_TOKEN
+                valueFrom:
+                  secretKeyRef:
+                    name: datadog-auth-token
+                    key: token
+    ```
+
+
+[1]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/dca-secret.yaml
+{{% /tab %}}
+{{% tab "Environment Variable" %}}
+
+1. Run the following command to create a secret token:
+
+    ```
+    echo -n '<ThirtyX2XcharactersXlongXtoken>' | base64
+    ```
+
+2. Refer to this secret with the environment variable `DD_CLUSTER_AGENT_AUTH_TOKEN` in the manifests of the Cluster Agent and the node-based Agent.
+
+    ```
+              - name: DD_CLUSTER_AGENT_AUTH_TOKEN
+                value: "<ThirtyX2XcharactersXlongXtoken>"
+    ```
+
+{{% /tab %}}
+{{% tab "Config Maps" %}}
+
+1. Run the following command to create a secret token:
+
+    ```
+    echo -n '<ThirtyX2XcharactersXlongXtoken>' | base64
+    ```
+
+2. Mount the `datadog.yaml` file using a ConfigMap. To do so, add the following into the Cluster Agent manifest:
+
+    ```
+    # [...]
+          volumeMounts:
+            - name: "dca-yaml"
+              mountPath: "/etc/datadog-agent/datadog.yaml"
+              subPath: "datadog-cluster.yaml"
+          volumes:
+            - name: "dca-yaml"
+              configMap:
+                name: "dca-yaml"
+    # [...]
+    ```
+
+3. Create your `datadog-cluster.yaml` with the variables of your choice within the `datadog.yaml` file and create the ConfigMap accordingly:
+
+    ```
+    kubectl create configmap dca-yaml --from-file datadog-cluster.yaml
+    ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 **Note**: This needs to be set in the manifest of the Cluster Agent **and** the node agent.
 
-Alternatively, if you do not want to rely on environment variables, mount the `datadog.yaml` file. Datadog recommends using a ConfigMap. To do so, add the following into the Cluster Agent manifest:
+#### Step 4 - Create the Cluster Agent and its service
 
-```
-[...]
-        volumeMounts:
-        - name: "dca-yaml"
-          mountPath: "/etc/datadog-agent/datadog.yaml"
-          subPath: "datadog-cluster.yaml"
-      volumes:
-        - name: "dca-yaml"
-          configMap:
-            name: "dca-yaml"
-[...]
-```
+Locate the following manifests, and replace `<DD_API_KEY>` with [your Datadog API key][2]:
 
-Then, create your `datadog-cluster.yaml` with the variables of your choice. Create the ConfigMap accordingly:
-```
-kubectl create configmap dca-yaml --from-file datadog-cluster.yaml
-
-```
-
-### Create the Cluster Agent and its service
-
-Locate the following manifests, and replace `<DD_API_KEY>` with [your API key][3]:
-
-* [`Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml`][4]
-* [`Dockerfiles/manifests/cluster-agent/cluster-agent.yaml`][5]
+* [`Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml`][3]
+* [`Dockerfiles/manifests/cluster-agent/cluster-agent.yaml`][4]
 
 Then, run:
 
@@ -109,52 +151,81 @@ At this point, you should see:
 
 ```
 -> kubectl get deploy
+
 NAME                    DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 datadog-cluster-agent   1         1         1            1           1d
 
 -> kubectl get secret
+
 NAME                   TYPE                                  DATA      AGE
 datadog-auth-token     Opaque                                1         1d
 
 -> kubectl get pods -l app=datadog-cluster-agent
+
 datadog-cluster-agent-8568545574-x9tc9   1/1       Running   0          2h
 
 -> kubectl get service -l app=datadog-cluster-agent
+
 NAME                    TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(S)          AGE
 datadog-cluster-agent   ClusterIP      10.100.202.234   none               5005/TCP         1d
 ```
 
-### Configure RBAC permissions for node-based Agents
+## Configure the Datadog Agent
 
-Review the manifest found at [`Dockerfiles/manifests/cluster-agent/rbac/rbac-agent.yaml`][6]. This limits an Agent's access to the kubelet API.
+After having setup the Datadog Cluster Agent, you need to configure your Datadog Agent to communicate with the Datadog Cluster Agent.
 
-Run:
+### Setup
+#### Step 1 - Set Configure RBAC permissions for node-based Agents
+
+Review the manifest found at [`Dockerfiles/manifests/cluster-agent/rbac/rbac-agent.yaml`][5]. This limits an Agent's access to the kubelet API.
+
+Then run:
 
 ```
 kubectl apply -f Dockerfiles/manifests/cluster-agent/rbac/rbac-agent.yaml
 ```
 
-### Enable the Datadog Cluster Agent
+#### Step 2 - Enable the Datadog Cluster Agent
 
-Add the following environment variables to the `Dockerfiles/manifests/agent.yaml`:
+Add the following environment variables to the `Dockerfiles/manifests/agent.yaml` depending of how you setup your secure Cluster-Agent to Agent communication:
+
+{{< tabs >}}
+{{% tab "Secret" %}}
 
 ```yaml
     - name: DD_CLUSTER_AGENT_ENABLED
-            value: 'true'
+      value: 'true'
     - name: DD_CLUSTER_AGENT_AUTH_TOKEN
       valueFrom:
         secretKeyRef:
           name: datadog-auth-token
           key: token
-#      value: "<ThirtyX2XcharactersXlongXtoken>" # If you are not using the secret, just set the string.
 ```
 
-Create the DaemonSet with this command:
+{{% /tab %}}
+{{% tab "Environment Variable" %}}
+
+```yaml
+    - name: DD_CLUSTER_AGENT_ENABLED
+      value: 'true'
+    - name: DD_CLUSTER_AGENT_AUTH_TOKEN
+      value: "<ThirtyX2XcharactersXlongXtoken>"
+```
+
+{{% /tab %}}
+{{% tab "Config Maps" %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+Then create the DaemonSet with this command:
+
 ```
 kubectl apply -f Dockerfiles/manifests/agent.yaml
 ```
 
-### Final Verification
+### Verification
 
 Run:
 
@@ -183,8 +254,7 @@ Kubernetes events are beginning to flow into your Datadog account, and relevant 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/cluster-agent/rbac
-[2]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/dca-secret.yaml
-[3]: https://app.datadoghq.com/account/settings#api
-[4]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml
-[5]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/cluster-agent.yaml
-[6]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/rbac/rbac-agent.yaml
+[2]: https://app.datadoghq.com/account/settings#api
+[3]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml
+[4]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/cluster-agent.yaml
+[5]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/rbac/rbac-agent.yaml
