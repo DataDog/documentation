@@ -116,13 +116,17 @@ DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="datadoghq.eu" bash -c "$(curl -L https://r
 
 #### Validation
 
-Verify the Agent is running with the [status command][8]:
+Verify the Agent is running with the [status command][8] `sudo datadog-agent status`. Log collection isn't enabled yet so you should see:
 
 ```
-sudo datadog-agent status
+==========
+Logs Agent
+==========
+
+  Logs Agent is not running
 ```
 
-After a few minutes, verify the Agent is connected to your account by checking the [Infrastructure List][9] in Datadog.
+**Note**: After a few minutes, you can verify that the Agent is connected to your account by checking the [Infrastructure List][9] in Datadog.
 
 ### Enable Log collection
 
