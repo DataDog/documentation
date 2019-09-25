@@ -27,7 +27,7 @@ To create a [metric monitor][5] in Datadog, use the main navigation: *Monitors -
 
 ### Choose the detection method
 
-When you create a metric monitor, **Threshold Alert** is automatically selected as the detection method. A threshold alert compares metric values to a static threshold. The goal for this monitor is to alert on a static threshold, so no change is necessary.
+When you create a metric monitor, **Threshold Alert** is automatically selected as the detection method. A threshold alert compares metric values against user-defined thresholds. The goal for this monitor is to alert on a static threshold, so no change is necessary.
 
 ### Define the metric
 
@@ -53,7 +53,7 @@ Before a monitor can be saved, it must have a title and message.
 
 #### Title
 
-The title must be unique for each monitor. Since this is a multi alert monitor, names are available for each group (`host` and `device`) with message template variables:
+The title must be unique for each monitor. Since this is a multi alert monitor, names are available for each group element (`host` and `device`) with message template variables:
 ```text
 Disk space is low on {{device.name}} / {{host.name}}
 ```

@@ -80,8 +80,8 @@ Dashboards contain [graphs][14] with real-time performance metrics.
 
 * Use any metric reporting to Datadog
 * Set up multi-alerts (by device, host, etc.)
-* Alert notification messages have `@` capabilities
-* Schedule downtimes for system shutdowns, off-line maintenance, etc.
+* Use `@` in alert messages to direct notifications to the right people
+* Schedule downtimes to suppress notifications for system shutdowns, off-line maintenance, etc.
 
 {{< img src="getting_started/application/metric_monitor.png" alt="alert setup" responsive="true" >}}
 
