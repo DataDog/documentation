@@ -75,7 +75,7 @@ const options = {
     baseUrl: 'https://docs.datadoghq.com', // site baseUrl to test
     outputFileName: 'docs-pa11y-output',
     outputFileType: 'csv', // csv or json
-    metricName: 'test.pa11y.num_errors' // metric name
+    metricName: 'docs.pa11y.num_errors' // metric name
 };
 
 runPa11y(options);
