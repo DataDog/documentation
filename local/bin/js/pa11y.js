@@ -37,6 +37,7 @@ const directoryExclusions = [
     'logs',
     'monitors',
     'synthetics',
+    'tags',
     'tracing',
     'videos'
 ];
