@@ -75,8 +75,7 @@ The Agent's [main configuration file][6] is `datadog.yaml`. For the Docker Agent
 
 ##### Proxy Settings 
 
-Starting with Agent v6.4.0 (and v6.5.0 for the trace Agent), the agent proxy settings can be overridden with the following
-environment variables:
+Starting with Agent v6.4.0 (and v6.5.0 for the trace Agent), the Agent proxy settings can be overridden with the following environment variables:
 
 | Env Variable | Description |
 |---------------------|-------------------------------------------------------------------|
@@ -155,7 +154,7 @@ Additional examples are available on the [Container Discover Management][19] pag
 | `DD_PROCESS_AGENT_CONTAINER_SOURCE` | Overrides container source auto-detection to force a single source. e.g `"docker"`, `"ecs_fargate"`, `"kubelet"` |
 | `DD_HEALTH_PORT`                    | Set this to `5555` to expose the Agent health check at port `5555`.                                              |
 
-You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` and `DD_EXTRA_CONFIG_PROVIDERS` environment variables. They are added in addition to the variables defined in the `listeners` and `config_providers` section of the datadog.yaml configuration file.
+You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` and `DD_EXTRA_CONFIG_PROVIDERS` environment variables. They are added in addition to the variables defined in the `listeners` and `config_providers` section of the `datadog.yaml` configuration file.
 
 ### Validation
 Run the Docker Agent’s [status command](#commands) to verify installation.
