@@ -58,6 +58,9 @@ col3:
   - name: legal
     link: "https://www.datadoghq.com/legal/"
     title: "Legal"
+  - name: investors
+    link: "https://investors.datadoghq.com/"
+    title: "Investor Relations"
   - name: analyst
     link: "https://www.datadoghq.com/about/analyst/"
     title: "Analyst Reports"

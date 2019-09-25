@@ -11,12 +11,12 @@ description: Surveillez des métriques clés d'Amazon Direct Connect.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_directconnect/'
 git_integration_title: amazon_directconnect
 has_logo: true
-integration_title: AWS Direct Connect
+integration_title: "Amazon\_Direct\_Connect"
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_directconnect
-public_title: Intégration Datadog/AWS Direct Connect
+public_title: "Intégration Datadog/Amazon\_Direct\_Connect"
 short_description: Surveillez des métriques clés d'Amazon Direct Connect.
 version: '1.0'
 ---

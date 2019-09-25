@@ -27,6 +27,7 @@ aliases:
     {{< nextlink href="/graphing/widgets/note" >}}Notes and Links{{< /nextlink >}}
     {{< nextlink href="/graphing/widgets/query_value" >}}Query Value{{< /nextlink >}}
     {{< nextlink href="/graphing/widgets/scatter_plot" >}}Scatter Plot{{< /nextlink >}}
+    {{< nextlink href="/graphing/widgets/slo" >}}Service Level Objective (SLO){{< /nextlink >}}
     {{< nextlink href="/graphing/widgets/service_map" >}}Service Map{{< /nextlink >}}
     {{< nextlink href="/graphing/widgets/service_summary" >}}Service Summary{{< /nextlink >}}
     {{< nextlink href="/graphing/widgets/table" >}}Table{{< /nextlink >}}

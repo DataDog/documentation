@@ -221,7 +221,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [Ubuntu x86_64][3]                | Ubuntu 12.04+          |
 | [RedHat/CentOS x86_64][4]         | RedHat/CentOS 5+       |
 | [Docker][5]                       | Version 1.12+          |
-| [Kubernetes][6]                   | Version 1.3+           |
+| [Kubernetes][6]                   | Version 1.3 to 1.8     |
 | [SUSE Enterprise Linux x86_64][7] | SUSE 11 SP4+           |
 | [Fedora x86_64][8]                | Fedora 26+             |
 | [MacOS][9]                        | macOS 10.10+           |

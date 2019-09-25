@@ -5,13 +5,14 @@ description: Présentation et instructions de configuration de DogStatsD.
 aliases:
   - /fr/guides/dogstatsd/
   - /fr/guides/DogStatsD/
+  - /fr/developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd/
 further_reading:
   - link: developers/metrics
     tag: Documentation
     text: En savoir plus sur les métriques
   - link: developers/libraries
     tag: Documentation
-    text: Bibliothèques pour l'API et DogStatsD officielles et entretenues par la communauté
+    text: Bibliothèques de client pour l'API et DogStatsD officielles et entretenues par la communauté
   - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
     tag: GitHub
     text: Code source de DogStatsD
@@ -90,7 +91,7 @@ Pour Ruby :
 # Importer la bibliothèque
 require 'datadog/statsd'
 
-# Créer une instance client statsd.
+# Créer une instance client DogStatsD.
 statsd = Datadog::Statsd.new
 ```
 
