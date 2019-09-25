@@ -47,11 +47,11 @@ In this article, we walk through parsing a log from the Datadog Agent's collecto
     * word: matches all coming alphanumeric characters.
     * integer
 
-    Most of the rules can be written with those 4 matchers. You can see here the full list of available matchers.
+    Most of the rules can be written with those 4 matchers. You can see in the the full list of available matchers [in the parsing documentation][2].
 
 4. **KeyValue**:
     Never forget that there is a keyvalue filter than can automatically extract all your attributes.
-    Learn more about this with [our examples][2]
+    Learn more about this with [our examples][3]
 
 5. **How to skip some part of your log message that should not be extracted as attribute**:
     Let's use our example again:
@@ -67,4 +67,5 @@ In this article, we walk through parsing a log from the Datadog Agent's collecto
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/processing/parsing
-[2]: /logs/processing/parsing/#key-value
+[2]: /logs/processing/parsing/?tab=matcher#matcher-and-filter
+[3]: /logs/processing/parsing/#key-value

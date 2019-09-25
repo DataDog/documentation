@@ -24,13 +24,12 @@ The Agent stores a pointer for each tailed file. So, if there is a network conne
 
 #### Port Listening
 
-If the Agent is listening to a TCP or UDP port and faces a network issue, we store the logs in a local buffer until the network is available again.  
+If the Agent is listening to a TCP or UDP port and faces a network issue, we store the logs in a local buffer until the network is available again.
 However, there are some limits for this buffer as we do not want to create memory issues. That's why unfortunately new logs are dropped when the buffer is full.
 
 #### Container logs
 
-As for files, we are able to store a pointer for each tailed container. Therefore, in case of network issue we are able to know which logs have not been sent yet.  
+As for files, we are able to store a pointer for each tailed container. Therefore, in case of network issue we are able to know which logs have not been sent yet.
 However, if the tailed container is removed before the network is available again, the logs are not accessible anymore.
 
 {{< partial name="whats-next/whats-next.html" >}}
-
