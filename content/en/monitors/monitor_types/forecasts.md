@@ -23,8 +23,6 @@ Forecasting is an algorithmic feature that allows you to predict where a metric 
 
 To create a [forecast monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Forecast*.
 
-The forecast monitor uses the `forecast` function from the Datadog query language. When you apply this function to a series, it returns the usual results with a forecast of future values.
-
 ### Define the metric
 
 Any metric currently reporting to Datadog is available for monitors. For more information, see the [Metric Monitor][2] page.
@@ -102,24 +100,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 ## API
 
-To create forecast monitors programmatically, see the examples below and the [Datadog API reference][7].
-
-{{< tabs >}}
-{{% tab "Linear" %}}
-
-```text
-max(next_1w):forecast(avg:<METRIC_NAME>{*}, 'linear', 1, interval='60m', history='1w', model='default') >= 100
-```
-
-{{% /tab %}}
-{{% tab "Seasonal" %}}
-
-```
-max(next_1w):forecast(avg:<METRIC_NAME>{*}, 'seasonal', 1, interval='600m', seasonality='weekly') >= 100
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+To create forecast monitors programmatically, see the [Datadog API reference][7]. Datadog recommends [exporting a monitor's JSON][8] to build the query for the API.
 
 ## Troubleshooting
 
@@ -137,3 +118,4 @@ The following functions cannot be nested inside calls to the `forecast()` functi
 [5]: /graphing/functions/rollup
 [6]: /monitors/notifications
 [7]: /api/#create-a-monitor
+[8]: /monitors/monitor_status/#settings

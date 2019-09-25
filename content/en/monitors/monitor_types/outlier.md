@@ -26,8 +26,6 @@ Outlier detection is an algorithmic feature that allows you to detect when a spe
 
 To create an [outlier monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Outlier*.
 
-The outlier monitor uses the `outliers` function from the Datadog query language. When you apply this function to a series, it returns the usual results with an outlier series marked.
-
 ### Define the metric
 
 Any metric currently reporting to Datadog is available for monitors. For more information, see the [Metric Monitor][2] page.
@@ -60,10 +58,10 @@ Datadog offers two types of outlier detection algorithms: `DBSCAN`/`scaledDBSCAN
 1. A parameter `𝜀` that specifies a distance threshold under which two points are considered to be close.
 2. The minimum number of points that have to be within a point's `𝜀-radius` before that point can start agglomerating. 
 
-Datadog uses a simplified form of DBSCAN to detect outliers on timeseries. Each host is considered to be a point in *d*-dimensions, where *d* is the number of elements in the timeseries. Any point can agglomerate, and any point not in the largest cluster is considered an outlier. The initial distance threshold is set by creating a new median timeseries by taking the median of the values from the existing timeseries at every time point. The Euclidean distance between each host and the median series is calculated. The threshold is set as the median of these distances, multiplied by a normalizing constant.
+Datadog uses a simplified form of DBSCAN to detect outliers on timeseries. Each group is considered to be a point in *d*-dimensions, where *d* is the number of elements in the timeseries. Any point can agglomerate, and any point not in the largest cluster is considered an outlier. The initial distance threshold is set by creating a new median timeseries by taking the median of the values from the existing timeseries at every time point. The Euclidean distance between each group and the median series is calculated. The threshold is set as the median of these distances, multiplied by a normalizing constant.
 
 **Parameters**<br>
-This implementation of DBSCAN takes one parameter, `tolerance`, the constant by which the initial threshold is multiplied to yield DBSCAN's distance parameter 𝜀. Set the tolerance parameter according to how similarly you expect your hosts to behave—larger values allow for more tolerance in how much a host can deviate from its peers.
+This implementation of DBSCAN takes one parameter, `tolerance`, the constant by which the initial threshold is multiplied to yield DBSCAN's distance parameter 𝜀. Set the tolerance parameter according to how similarly you expect your groups to behave—larger values allow for more tolerance in how much a group can deviate from its peers.
 
 [1]: https://en.wikipedia.org/wiki/DBSCAN
 {{% /tab %}}
@@ -99,9 +97,13 @@ In the following image, a group of hosts is flushing their buffers together, whi
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
 
+## API
+
+To create outlier monitors programmatically, see the [Datadog API reference][4]. Datadog recommends [exporting a monitor's JSON][5] to build the query for the API.
+
 ## Troubleshooting
 
-The outlier algorithms are set up to identify outliers that differ from the majority of metrics that are behaving similarly. If your hosts exhibit "banding" behavior as shown below (maybe each band represents a different shard), we recommend tagging each band with an identifier, and setting up outlier detection alerts on each band separately.
+The outlier algorithms are set up to identify groups that are behaving differently from their peers. If your groups exhibit "banding" behavior as shown below (maybe each band represents a different shard), Datadog recommends tagging each band with an identifier, and setting up outlier detection alerts on each band separately.
 
 {{< img src="monitors/monitor_types/outliers/outliers-banding.png" alt="outliers banding" responsive="true" style="width:80%;">}}
 
@@ -111,3 +113,5 @@ The outlier algorithms are set up to identify outliers that differ from the majo
 [1]: https://app.datadoghq.com/monitors#create/outlier
 [2]: /monitors/monitor_types/metric/#define-the-metric
 [3]: /monitors/notifications
+[4]: /api/#create-a-monitor
+[5]: /monitors/monitor_status/#settings
