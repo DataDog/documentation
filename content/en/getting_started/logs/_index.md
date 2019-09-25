@@ -199,17 +199,17 @@ Logs Agent
 
 ### Add new logs to the file
 
-Now that everything is configured correctly add new entries to your log file to see them within Datadog:
+Now that everything is configured correctly, add new entries to your log file to see them within Datadog:
 
 ```
 $ echo "New line of log in the log file" >> log_file_to_monitor.log
 ```
 
-Which produces the following result in your [Log Explorer Page][2]:
+This produces the following result in the [Log Explorer Page][2]:
 
 {{< img src="getting_started/logs/file_log_example.png" alt="File log example" responsive="true">}}
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
