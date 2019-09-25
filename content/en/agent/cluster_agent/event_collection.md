@@ -38,3 +38,7 @@ In the Node Agent, set the environment variable `DD_CLUSTER_AGENT_ENABLED` to tr
 The environment variable `DD_KUBERNETES_METADATA_TAG_UPDATE_FREQ` can be set to specify how often the Node Agents hit the Datadog Cluster Agent.
 
 Disable the Kubernetes metadata tag collection with `DD_KUBERNETES_COLLECT_METADATA_TAGS`.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
