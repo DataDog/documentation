@@ -2,12 +2,15 @@
 title: Getting Started with Monitors
 kind: documentation
 further_reading:
-- link: "/monitors/monitor_types/metric/"
-  tag: "Documentation"
-  text: "Metric Monitors"
 - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
   tag: "Blog"
   text: "Monitoring 101: Alerting on what matters"
+- link: "/monitors/monitor_types/metric/"
+  tag: "Documentation"
+  text: "Metric Monitors"
+- link: "/monitors/notifications/"
+  tag: "Documentation"
+  text: "Monitor Notifications"
 ---
 
 ## Overview
@@ -46,12 +49,35 @@ For this example, the other settings in this section are left on the defaults. F
 
 ### Say what's happening
 
-X
+Before a monitor can be saved, it must have a title and message.
+
+#### Title
+
+The title must be unique for each monitor. Since this is a multi alert monitor, names are available for each group (`host` and `device`) with message template variables:
+```text
+Disk space is low on {{device.name}} / {{host.name}}
+```
+
+#### Message
+
+Use the message to tell your team how to resolve the issue, for example:
+```text
+Steps to free up disk space:
+1. Remove unused packages
+2. Clear APT cache
+3. Uninstall unnecessary applications
+4. Remove duplicate files
+```
+
+For different messages based on alert vs. warning thresholds, see the [Notification][8] documentation.
 
 ### Notify your team
 
-X
+Use this section to send notifications to your team through Email, Slack, PagerDuty, etc. You can search for team members and connected accounts with the drop-down box. When an `@notification` is added to this box, the notification is automatically added to the message box:
 
+{{< img src="getting_started/application/message_notify.png" alt="Message and Notifications" responsive="true" style="width:70%;" >}}
+
+Removing the `@notification` from either section removes it from both sections.
 
 ## Further Reading
 
@@ -64,3 +90,4 @@ X
 [5]: https://app.datadoghq.com/monitors#create/metric
 [6]: /integrations/disk
 [7]: /monitors/monitor_types/metric/?tab=threshold#set-alert-conditions
+[8]: /monitors/notifications/#conditional-variables
