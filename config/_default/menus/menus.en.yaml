@@ -453,10 +453,6 @@ main:
     url: "graphing/infrastructure/process/"
     parent: "graphing_infrastructure"
     weight: 604
-  - name: "Network Performance Monitor"
-    url: "graphing/infrastructure/network_performance_monitor/"
-    parent: "graphing_infrastructure"
-    weight: 605
   - name: "Serverless"
     url: "graphing/infrastructure/serverless/"
     parent: "graphing_infrastructure"
