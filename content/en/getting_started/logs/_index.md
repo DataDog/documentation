@@ -15,7 +15,7 @@ further_reading:
 Datadog Log Management collects logs from your application. This page shows you how get your first logs into Datadog. Follow the sections below:
 
 * [Create a Datadog account](#create-a-datadog-account)
-* [Send Logs manually](#sending-logs-manually)
+* [Send logs manually](#sending-logs-manually)
 * [Use the Agent to send logs from a file](#send-logs-from-a-file)
 
 Before moving forward:
