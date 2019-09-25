@@ -173,7 +173,6 @@ To specify to the Agent to monitor this log file:
         - type: file
           path: /home/ubuntu/log_file_to_monitor.log
           source: custom
-          sourcecategory: http_web_access
           service: user
       ```
 
