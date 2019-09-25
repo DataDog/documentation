@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Datadog Log management is used to collect logs from your application. This quickstart guide shows you how get your first logs into Datadog. Follow the sections below:
+Datadog Log management is used to collect logs from your application. This getting started documentation shows you how get your first logs into Datadog. Follow the sections below:
 
 * [Create a Datadog account](#create-a-datadog-account)
 * [Send Logs manually](#sending-logs-manually)
@@ -33,7 +33,7 @@ Before moving forward:
 
 To send logs manually, use the `telnet` command with your [Datadog API key][5] within the vagrant virtual machine.
 
-Logs can be a full text message:
+Logs can be a full-text message:
 
 {{< tabs >}}
 {{% tab "US Site" %}}
