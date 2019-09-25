@@ -44,7 +44,7 @@ After defining the metric, the forecast monitor provides two preview graphs in t
 
 #### Advanced Options
 
-Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available to edit under **Advanced Options (auto)**:
+Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available to edit under **Advanced Options**:
 
 {{< img src="monitors/monitor_types/forecasts/advanced_options.png" alt="Advanced options" responsive="true" style="width:80%;">}}
 
@@ -52,8 +52,8 @@ Datadog automatically analyzes your chosen metric and sets several parameters fo
 |----------------------------|-------------------------------------------------------------------------------------------------------------------------|
 | [Algorithm](#algorithms)   | The forecast algorithm (`linear` or `seasonal`)                                                                         |
 | Model                      | The forecast model (`default`, `simple`, or `reactive`) for the linear algorithm                                        |
-| Seasonality                | The forecast seasonality (`hourly`, `daily`, `weekly`, or `monthly`) for the seasonal algorithm                         |
-| [Daylight&nbsp;savings][4] | Available for `seasonal` forecast monitors with `daily`, `weekly`, or `monthly` seasonality.                            |
+| Seasonality                | The forecast seasonality (`hourly`, `daily`, or `weekly`) for the seasonal algorithm                         |
+| [Daylight&nbsp;savings][4] | Available for `seasonal` forecast monitors with `daily` or `weekly` seasonality.                            |
 | [Rollup][5]                | The rollup interval&mdash;larger intervals between points avoid noise influence on the forecast.                        |
 | Deviations                 | The width of the range of forecasted values&mdash;a value of 1 or 2 is generally large enough for most "normal" points. |
 
@@ -81,14 +81,13 @@ Use the linear algorithm for metrics that have steady trends but no repeating se
 {{% /tab %}}
 {{% tab "Seasonal" %}}
 
-Use the seasonal algorithm for metrics with repeating patterns. There are four different _seasonality_ choices:
+Use the seasonal algorithm for metrics with repeating patterns. There are three different _seasonality_ choices:
 
 | Option  | Description                                                                                                                                        |
 |---------|----------------------------------------------------------------------------------------------------------------------------------------------------|
 | Hourly  | The algorithm expects the same minute after the hour behaves like past minutes after the hour, for example 5:15 behaves like 4:15, 3:15, etc.      |
 | Daily   | The algorithm expects the same time today behaves like past days, for example 5pm today behaves like 5pm yesterday.                                |
 | Weekly  | The algorithm expects that a given day of the week behaves like past days of the week, for example this Tuesday behaves like past Tuesdays.        |
-| Monthly | The algorithm expects that a given day of the month behaves like past days of the month, for example July 1st behaves like June 1st, May 1st, etc. |
 
 **Note**: This algorithm requires at least two seasons of history and uses up to six seasons for forecasting.
 
