@@ -134,6 +134,8 @@
             align-items: center;
             width: 40px;
             .right-arrow {
+                width: 100%;
+                height: 100%;
                 path {
                     fill: none;
                     stroke: $gray-lighter;
@@ -144,6 +146,8 @@
         }
 
         .down-arrow {
+            width: 100%;
+            height: 40px;
             path {
                 fill: none;
                 stroke: $gray-lighter;
