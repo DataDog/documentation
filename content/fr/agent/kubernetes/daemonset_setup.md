@@ -14,7 +14,7 @@ further_reading:
 aliases:
   - /agent/kubernetes/apm
 ---
-Tirez profit des DaemonSets pour déployer l'Agent Datadog sur l'ensemble de vos nœuds (ou sur un nœud donné grâce [aux nodeSelectors][1]).
+Tirez profit des DaemonSets pour déployer l'Agent Datadog sur l'ensemble de vos nœuds (ou sur un nœud donné grâce [aux nodeSelectors][1]). 
 
 *Si vous ne pouvez pas utiliser de DaemonSets pour votre cluster Kubernetes, [installez l'Agent Datadog][2] en tant que déploiement sur chaque nœud Kubernetes.*
 
@@ -57,14 +57,11 @@ echo -n <CLÉ_API_DD> | base64
 # data:
 #   api-key: "<VOTRE_CLÉ_D_API_DATADOG_CHIFFRÉE_EN_BASE64>"
 ---
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
   name: datadog-agent
 spec:
-  selector:
-    matchLabels:
-      app: datadog-agent
   template:
     metadata:
       labels:
@@ -96,7 +93,7 @@ spec:
             #     name: datadog-secret
             #     key: api-key
 
-          ## Définissez DD_SITE sur datadoghq.eu pour envoyer les données de votre Agent au site européen de Datadog
+          ## Définissez DD_SITE sur datadoghq.eu pour envoyer les données de votre Agent au site européen de Datadog 
           - name: DD_SITE
             value: "datadoghq.com"
 
@@ -213,7 +210,7 @@ Pour activer la [collecte de logs][10] avec votre DaemonSet :
             value: "true"
         - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
             value: "true"
-        - name: DD_AC_EXCLUDE
+        - name: DD_AC_EXCLUDE 
             value: "name:datadog-agent"
     (...)
     ```
