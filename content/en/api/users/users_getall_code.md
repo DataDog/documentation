@@ -6,7 +6,7 @@ external_redirect: /api/#get-all-users
 ---
 
 ##### Signature
-`GET /v1/users`
+`GET /v1/user`
 ##### Example Request
 {{< code-snippets basename="api-user-get-all" >}}
 ##### Example Response
