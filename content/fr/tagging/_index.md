@@ -1,11 +1,13 @@
 ---
 title: Débuter avec les tags
 kind: documentation
+description: Apprenez à assigner et utiliser des tags dans Datadog.
 aliases:
   - /fr/getting_started/getting_started_with_tags
   - /fr/guides/tagging/
   - /fr/developers/tagging/
   - /fr/getting_started/tagging
+  - /fr/tagging/faq/
 further_reading:
   - link: tagging/assigning_tags
     tag: Documentation
@@ -68,7 +70,7 @@ Vous pouvez utiliser l'une (ou l'ensemble) des méthodes suivantes pour assigner
 
 | Méthode                        | Assignation de tags                                                                                  |
 |-------------------------------|----------------------------------------------------------------------------------------------|
-| [Fichiers de configuration][4]     | Assignation manuelle dans les principaux fichiers de configuration de votre Agent, ou dans les fichiers de configuration de vos intégrations |
+| [Fichiers de configuration][4]     | Assignation manuelle dans les principaux fichiers de configuration de votre Agent, ou dans les fichiers de configuration de vos intégrations. |
 | [Variables d'environnement][5]   | Utilisation de variables d'environnement pour l'Agent conteneurisé                                      |
 | [IU][6]                      | Dans votre plateforme Datadog                                                                     |
 | [API][7]                     | À l'aide de l'API de Datadog                                                                          |

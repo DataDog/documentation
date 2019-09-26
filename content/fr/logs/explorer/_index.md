@@ -48,7 +48,7 @@ Utilisez les facettes, les mesures, les tags ou même la [recherche en texte lib
 
 Suivez le [guide de recherche au sein de vos logs][1] pour obtenir une explication détaillée de l'ensemble des fonctions de recherche du Log Explorer, y compris l'utilisation de wildcards et de requêtes de valeurs numériques.
 
-{{< img src="logs/explorer/search_your_logs.gif" alt="Recherche dans vos logs" responsive="true" >}}
+{{< img src="logs/explorer/search_your_logs.mp4" alt="Effectuer une recherche dans vos logs" video="true" responsive="true" >}}
 
 ### Vues enregistrées
 
@@ -103,8 +103,9 @@ Interagissez avec la section supérieure relative aux attributs réservés :
 
 Le bouton **View in context** met à jour la requête de recherche afin d'afficher les lignes de log dont la date précède ou suit le log sélectionné, même si ces logs ne correspondent pas à votre filtre. Ce contexte diffère selon la situation, car Datadog utilise les attributs `Hostname`, `Service`, `filename` et `container_id`, ainsi que des tags, afin de trouver le contexte approprié pour vos logs.
 
-{{< img src="logs/explorer/upper_log_panel.png" alt="configurer le tableau d'affichage" responsive="true" style="width:50%;">}}
+Copiez le contenu de log JSON dans le presse-papiers via le bouton **Export** ou en utilisant ces touches : Ctrl + C / Cmd + C.
 
+{{< img src="logs/explorer/upper_log_panel.png" alt="configurer le tableau d'affichage" responsive="true" style="width:50%;">}}
 
 
 [1]: /fr/logs/explorer/search
@@ -125,11 +126,11 @@ Suivez le [guide sur la représentation graphique de logs][2] pour découvrir le
 {{% /tab %}}
 {{% tab "Modèles de logs" %}}
 
-Étudier de grands volumes de données de logs peut être chronophage : vous pouvez passer des heures dessus et malgré tout n'en comprendre qu'une infime partie. Cependant, les logs d'application sont souvent similaires, et seuls certains d'entre eux varient. C'est ce qu'on appelle des *modèles*.
+Étudier de grands volumes de données de logs peut être chronophage : vous pouvez passer des heures dessus et malgré tout n'en comprendre qu'une infime partie. Cependant, les logs d'application sont souvent similaires, et seuls certains d'entre eux varient. C'est ce qu'on appelle des *patterns*.
 
-Dans le Log Explorer, les modèles peuvent apparaître automatiquement pour structurer le problème et vous aider à mettre rapidement en avant les données pertinentes, tout en ignorant les informations non pertinentes.
+Dans le Log Explorer, les patterns peuvent apparaître automatiquement pour structurer le problème et vous aider à mettre rapidement en avant les données pertinentes, tout en ignorant les informations non pertinentes.
 
-Consultez la [section Modèles de logs][1] pour en savoir plus
+Consultez la [section Log Patterns][1] pour en savoir plus
 
 {{< img src="logs/explorer/log_patterns.png" alt="Modèles de logs" responsive="true" style="width:70%;">}}
 
@@ -169,7 +170,7 @@ Lorsque vous avez terminé, la valeur de cet attribut est stockée **pour tous l
 
 {{% tab "Mesures" %}}
 
-Une mesure est un attribut doté d'une valeur numérique contenue dans vos logs. Il s'agit en quelque sorte d'une métrique de log.
+Une mesure est un attribut doté d'une valeur numérique contenue dans vos logs.
 
 **Créer une mesure** :
 
@@ -203,7 +204,7 @@ Exportez votre visualisation de logs actuelle grâce la fonction *Export* :
 | Bouton                | Description                                                                                                          |
 | ----                  | -----                                                                                                                |
 | Export to Monitor     | Exporte la requête appliquée à votre flux de logs pour créer la requête de log monitor d'un nouveau [log monitor][1].       |
-| Export to CSV         | Exporte votre flux de logs actuel avec la colonne sélectionnée dans un fichier CSV. Vous pouvez exporter jusqu'à 5 000 logs à la fois. |
+| Export to CSV         | Exporte votre flux de logs actuel avec la colonne sélectionnée dans un fichier CSV. Vous pouvez exporter jusqu'à 5000 logs à la fois. |
 
 
 [1]: /fr/monitors/monitor_types/log
