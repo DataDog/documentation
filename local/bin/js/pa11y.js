@@ -50,7 +50,6 @@ const includeUrls = [
     'api/authentication/index.html',
     'basic_agent_usage/index.html',
     'developers/guide/index.html',
-    'examples/aws-metric/index.html',
     'getting_started/agent/index.html',
     'graphing/dashboards/index.html',
     'guides/alerting/index.html',
