@@ -26,7 +26,18 @@ These are `integer`, `float`, `double`, `long`, `boolean` etc ...
 You can use the `list` commands in order to get an idea of what your current JMX integration is collecting. Here is a snippet of that output showing a Simple attribute:
 
 ```
-Matching: x/350. Bean name: domain:mybeanname - Attribute name: myattribute - Attribute type: java.lang.Integer
+Matching: x/350. Bean name: java.lang - Attribute name: attribute_1 - Attribute type: java.lang.Integer
+```
+
+That would give you the following configuration:
+
+```yaml
+- include:
+     domain: java.lang
+     attribute:
+       attribute_1:
+         metric_type: counter
+         alias: java.lang.Integer
 ```
 
 JMXFetch extracts the attribute value directly and use it as the metric value. See [the JMX documentation][3] to learn how to collect it.
@@ -36,15 +47,23 @@ JMXFetch extracts the attribute value directly and use it as the metric value. S
 These can be seen as an array, a hashmap, or an object composed of 'simple' attributes.
 
 ```
-Matching: x/350. Bean name: domain:mybeanname - Attribute name: myattribute - Attribute type: javax.management.openmbean.CompositeData
+Matching: x/350. Bean name: java.lang - Attribute name: HeapMemoryUsage - Attribute type: javax.management.openmbean.CompositeData
 ```
 
 In this case, you need to add more details to JMXFetch on how to use this 'composite' attribute to create a numerical value for a metric. In order to do this, use a `.` to specify the component, i.e.:
 
-`myattribute.component`
-
-
-// INSERT EXAMPLE HERE \\
+```yaml
+- include:
+    domain: java.lang
+    type: Memory
+    attribute:
+      HeapMemoryUsage.used:
+        alias: jvm.heap_memory
+        metric_type: gauge
+      HeapMemoryUsage.committed:
+        alias: jvm.heap_memory_committed
+        metric_type: gauge
+```
 
 ### How can I get to see the next level of these composite attributes?
 
