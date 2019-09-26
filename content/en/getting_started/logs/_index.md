@@ -12,13 +12,7 @@ further_reading:
 
 ## Overview
 
-Datadog Log management is used to collect logs from your application. This getting started documentation shows you how get your first logs into Datadog. Follow the sections below:
-
-* [Create a Datadog account](#create-a-datadog-account)
-* [Send Logs manually](#sending-logs-manually)
-* [Use the Agent to send logs from a file](#send-logs-from-a-file)
-
-Before moving forward:
+Datadog Log management is used to collect logs from your application. This getting started documentation shows you how get your first logs into Datadog. Before moving forward:
 
 1. If you haven't already, create a [Datadog account][1] and [enable Datadog Log management][2].
 2. Set up a [Vagrant Ubuntu 16.04 virtual machine][3] using the following commands. For more information about Vagrant, see their [Getting Started][4] page:
@@ -28,6 +22,11 @@ Before moving forward:
     vagrant up
     vagrant ssh
     ```
+
+Once it's done, follow the sections below to discover how to:
+
+* [Send Logs manually](#sending-logs-manually)
+* [Use the Agent to send logs from a file](#send-logs-from-a-file)
 
 ## Sending logs Manually
 
