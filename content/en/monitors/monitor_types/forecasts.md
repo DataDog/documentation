@@ -35,7 +35,7 @@ After defining the metric, the forecast monitor provides two preview graphs in t
 
 ### Set alert conditions
 
-* Trigger an alert when the edge of the forecast confidence bounds goes `above` or `below`
+* Trigger an alert when the edge of the forecast confidence bounds goes `above` or `below`.
 * the threshold within the next `24 hours`, `1 week`, `1 month`, etc.
 * Alert threshold: >= `<NUMBER>`
 * Alert [recovery threshold][3]: < `<NUMBER>`
@@ -57,7 +57,7 @@ Datadog automatically analyzes your chosen metric and sets several parameters fo
 
 ##### Algorithms
 
-The available forecast algorithms are `linear` and `seasonal`.
+The available forecast algorithms are `linear` and `seasonal`:
 
 {{< tabs >}}
 {{% tab "Linear" %}}
