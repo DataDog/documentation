@@ -9,7 +9,9 @@ external_redirect: /api/#delete-a-gcp-integration
 
 Delete a given Datadog-GCP integration.
 
-##### ARGUMENTS
+
+**ARGUMENTS**:
+
 
 * **`project_id`** [*required*]:
 

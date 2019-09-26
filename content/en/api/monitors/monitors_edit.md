@@ -6,7 +6,9 @@ external_redirect: /api/#edit-a-monitor
 ---
 
 ## Edit A Monitor
-##### ARGUMENTS
+
+**ARGUMENTS**:
+
 * **`query`** [*required, optional on edit*]:
     The metric query to alert on.
 * **`name`** [*required, optional on edit*]:

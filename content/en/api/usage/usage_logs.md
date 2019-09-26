@@ -9,7 +9,9 @@ external_redirect: /api/#get-hourly-usage-for-logs
 
 Get Hourly Usage For Logs.
 
-##### Arguments
+
+**ARGUMENTS**:
+
 * **`start_hr`** [*required*]:
     datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour
 * **`end_hr`** [*optional*, *default*=**1d+start_hr**]:

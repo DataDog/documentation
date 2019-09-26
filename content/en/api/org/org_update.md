@@ -7,7 +7,9 @@ external_redirect: /api/#update-organization
 
 ## Update organization
 
-##### ARGUMENTS
+
+**ARGUMENTS**:
+
 * **`name`** [*optional*]:
     The organization name.
 * **`settings`** [*optional*]:

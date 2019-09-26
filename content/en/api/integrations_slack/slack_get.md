@@ -9,6 +9,8 @@ external_redirect: /api/#get-slack-integration
 
 Get all information about your Datadog-Slack integration.
 
-##### Arguments
+
+**ARGUMENTS**:
+
 
 This endpoint takes no JSON arguments.

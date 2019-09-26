@@ -9,6 +9,8 @@ external_redirect: /api/#get-an-application-key
 
 Get a given application key.
 
-##### ARGUMENTS
+
+**ARGUMENTS**:
+
 
 This endpoint takes no JSON arguments.

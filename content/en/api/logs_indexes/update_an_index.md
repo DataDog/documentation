@@ -13,7 +13,9 @@ This endpoint is in public beta. If you have any feedback, <a href="/help">conta
 
 This endpoint updates an `Index` identified by its name. It returns the `Index` object passed in the request body when the request is successful.
 
-##### Arguments
+
+**ARGUMENTS**:
+
 
 * **`filter.query`**  [*optional*]:
     Only logs matching the filter criteria will be considered for this index. The search query followis the [Log search syntax][1]

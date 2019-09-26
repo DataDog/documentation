@@ -9,6 +9,8 @@ external_redirect: /api/#list-all-gcp-integrations
 
 List all Datadog-GCP integrations configured for your organization.
 
-##### Arguments
+
+**ARGUMENTS**:
+
 
 This endpoint takes no JSON arguments.

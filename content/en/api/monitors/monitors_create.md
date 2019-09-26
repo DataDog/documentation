@@ -9,27 +9,29 @@ external_redirect: /api/#create-a-monitor
 
 If you manage and deploy monitors programmatically, it's easier to define the monitor in the Datadog UI and [export its valid JSON][1].
 
-##### ARGUMENTS
+
+**ARGUMENTS**:
+
 *   **`type`** [*required*]:
     The [type of the monitor][2], chosen from:
 
-| Monitor Type | type attribute value            |
-| :--------    | :-------                        |
-| anomaly      | `query alert`                   |
-| apm          | `query alert`                   |
-| composite    | `composite`                     |
-| custom       | `service check`                 |
-| event        | `event alert`                   |
-| forecast     | `query alert`                   |
-| host         | `service check`                 |
-| integration  | `query alert` or `service check`  |
-| live process | `process alert`                 |
-| logs         | `log alert`                     |
-| metric       | `metric alert`                  |
-| network      | `service check`                 |
-| outlier      | `query alert`                   |
-| process      | `service check`                 |
-| watchdog     | `event alert`                   |
+| Monitor Type | type attribute value             |
+|:-------------|:---------------------------------|
+| anomaly      | `query alert`                    |
+| apm          | `query alert`                    |
+| composite    | `composite`                      |
+| custom       | `service check`                  |
+| event        | `event alert`                    |
+| forecast     | `query alert`                    |
+| host         | `service check`                  |
+| integration  | `query alert` or `service check` |
+| live process | `process alert`                  |
+| logs         | `log alert`                      |
+| metric       | `metric alert`                   |
+| network      | `service check`                  |
+| outlier      | `query alert`                    |
+| process      | `service check`                  |
+| watchdog     | `event alert`                    |
 
 *   **`query`** [*required*]:
     The query defines when the monitor triggers. Query syntax depends on what type of monitor you are creating:

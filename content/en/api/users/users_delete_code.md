@@ -5,9 +5,15 @@ order: 34.5
 external_redirect: /api/#disable-user
 ---
 
-##### Signature
+
+**SIGNATURE**:
+
 `DELETE /v1/users/<USER_ID>`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-user-disable" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-user-disable" >}}

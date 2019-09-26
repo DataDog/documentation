@@ -9,7 +9,9 @@ external_redirect: /api/#edit-an-api-key
 
 Edit an API key name.
 
-##### ARGUMENTS
+
+**ARGUMENTS**:
+
 
 * **`name`** [*required*]:
 

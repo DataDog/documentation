@@ -9,7 +9,9 @@ external_redirect: /api/#set-gcp-integration-automute
 
 Enable or disable automute for a given Datadog-GCP integration.
 
-##### ARGUMENTS
+
+**ARGUMENTS**:
+
 
 * **`project_id`** [*required*]:
 

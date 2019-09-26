@@ -9,6 +9,8 @@ external_redirect: /api/#delete-a-slack-integration
 
 Delete a Datadog-Slack integration.
 
-##### Arguments
+
+**ARGUMENTS**:
+
 
 This endpoint takes no JSON arguments.

@@ -6,7 +6,8 @@ external_redirect: /api/#get-a-monitor-downtime
 ---
 
 ## Get a monitor downtime
-##### ARGUMENTS
+
+**ARGUMENTS**:
+
 
 This endpoint takes no JSON arguments.
-

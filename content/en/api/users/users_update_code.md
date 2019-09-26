@@ -6,9 +6,15 @@ external_redirect: /api/#update-user
 ---
 
 
-##### Signature
+
+**SIGNATURE**:
+
 `PUT /v1/users/<USER_ID>`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-user-update" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-user-update" >}}
