@@ -13,7 +13,7 @@ This endpoint is in public beta. If you have any feedback, <a href="/help">conta
 
 This endpoint updates an `Index` identified by its name. It returns the `Index` object passed in the request body when the request is successful.
 
-**Note**: Using the `PUT` method updates your indexes configuration by **replacing** your current configuration with the new one sent to your Datadog organization.
+**Note**: Using the `PUT` method updates your index's configuration by **replacing** your current configuration with the new one sent to your Datadog organization.
 
 ##### Arguments
 
