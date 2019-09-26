@@ -30,14 +30,14 @@ Once it's done, follow the sections below to discover how to:
 
 ## Sending logs Manually
 
-To send logs manually, use the `telnet` command with your [Datadog API key][5] within the vagrant virtual machine.
+To send logs manually, use the `telnet` command with your [Datadog API key][5] within the Vagrant virtual machine.
 
 Logs can be a full-text message:
 
 {{< tabs >}}
 {{% tab "US Site" %}}
 
-The secure TCP endpoint is `intake.logs.datadoghq.com:10516` (or port `10514` for insecure connections).
+The secure TCP endpoint is `intake.logs.datadoghq.com:10516` (or port `10514` for nonsecure connections).
 
 ```
 telnet intake.logs.datadoghq.com 10514
@@ -48,7 +48,7 @@ telnet intake.logs.datadoghq.com 10514
 {{% /tab %}}
 {{% tab "EU Site" %}}
 
-The secure TCP endpoint is `tcp-intake.logs.datadoghq.eu:443` (or port `1883` for insecure connections).
+The secure TCP endpoint is `tcp-intake.logs.datadoghq.eu:443` (or port `1883` for nonsecure connections).
 
 ```
 telnet tcp-intake.logs.datadoghq.eu 1883
@@ -59,7 +59,7 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 {{% /tab %}}
 {{< /tabs >}}
 
-This produces the following result in your [Log Explorer Page][2]:
+This produces the following result in the [Log Explorer Page][2]:
 
 {{< img src="getting_started/logs/plain_text_log.png" alt="Custom telnet" responsive="true">}}
 
@@ -86,7 +86,7 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 {{% /tab %}}
 {{< /tabs >}}
 
-This produces the following result in your [Log Explorer Page][2]:
+This produces the following result in the [Log Explorer Page][2]:
 
 {{< img src="getting_started/logs/json_log.png" alt="JSON logs" responsive="true">}}
 
@@ -115,7 +115,7 @@ DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="datadoghq.eu" bash -c "$(curl -L https://r
 
 #### Validation
 
-Verify the Agent is running with the [status command][8] `sudo datadog-agent status`. Log collection isn't enabled yet so you should see:
+Verify the Agent is running with the [status command][8] `sudo datadog-agent status`. You have not enabled log collection yet, so you should see:
 
 ```
 ==========
@@ -127,9 +127,9 @@ Logs Agent
 
 **Note**: After a few minutes, you can verify that the Agent is connected to your account by checking the [Infrastructure List][9] in Datadog.
 
-### Enable Log collection
+### Enable log collection
 
-To enable Log collection with the Agent, edit your `datadog.yaml` [configuration file][10] located at `/etc/datadog-agent/datadog.yaml` and set `logs_enabled:true`:
+To enable log collection with the Agent, edit the `datadog.yaml` [configuration file][10] located at `/etc/datadog-agent/datadog.yaml` and set `logs_enabled:true`:
 
 ```yaml
 ## @param logs_enabled - boolean - optional - default: false
@@ -141,7 +141,7 @@ logs_enabled: true
 ### Monitor a custom file
 #### Create the log file
 
-In order to collect logs from a custom file, first create the file and add one line of log to it:
+In order to collect logs from a custom file, first create the file and add one line of logs to it:
 
 ```
 $ touch log_file_to_monitor.log
@@ -165,7 +165,7 @@ To specify to the Agent to monitor this log file:
     sudo touch /etc/datadog-agent/conf.d/custom_log_collection.d/conf.yaml
     ```
 
-3. Copy and Past the following content within this `conf.yaml` file:
+3. Copy and paste the following content within this `conf.yaml` file:
 
       ```
       logs:
@@ -179,7 +179,7 @@ To specify to the Agent to monitor this log file:
 
 ##### Validation
 
-If the Log configuration is correct the [status command][8] `sudo datadog-agent status` should output:
+If the log configuration is correct, the [status command][8] `sudo datadog-agent status` outputs:
 
 ```
 ==========
@@ -198,17 +198,17 @@ Logs Agent
 
 ### Add new logs to the file
 
-Now that everything is configured correctly add new entries to your log file to see them within Datadog:
+Now that everything is configured correctly, add new entries to your log file to see them within Datadog:
 
 ```
 $ echo "New line of log in the log file" >> log_file_to_monitor.log
 ```
 
-Which produces the following result in your [Log Explorer Page][2]:
+This produces the following result in the [Log Explorer Page][2]:
 
 {{< img src="getting_started/logs/file_log_example.png" alt="File log example" responsive="true">}}
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
