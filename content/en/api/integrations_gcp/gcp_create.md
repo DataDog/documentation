@@ -14,7 +14,7 @@ Create a Datadog-Google Cloud Platform integration.
 * Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.
 * Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 All of the following fields' values are provided by the JSON service account key file created in the [GCP Console for service accounts][1]; Refer to the [Datadog-Google Cloud Platform integration installation instructions][2] to see how to generate one for your organization.
 For further references, consult the [Google Cloud service account documentation][3].

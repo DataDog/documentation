@@ -9,7 +9,7 @@ external_redirect: /api/#delete-an-aws-integration
 
 Delete a given Datadog-AWS integration.
 
-##### Arguments
+**ARGUMENTS**:
 
 * **`account_id`** [*required*]:
 

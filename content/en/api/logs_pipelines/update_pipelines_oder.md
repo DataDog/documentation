@@ -11,7 +11,7 @@ Update the order of your pipelines. Since logs are processed sequentially, reord
 
 **Note**: Using the `PUT` method updates your pipeline order by **replacing** your current order with the new one sent to your Datadog organization.
 
-##### Arguments
+**ARGUMENTS**:
 
 * **`pipeline_ids`** [*required*]:
     Ordered Array of `<PIPELINE_ID>` strings, the order of pipeline IDs in the array define the overall Pipelines order for Datadog?

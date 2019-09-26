@@ -15,26 +15,27 @@ Note: If an embed already exists for the exact same query in a given organizatio
 
 If you are interested in using template variables, see [Embeddable Graphs with Template Variables][1].
 
-##### ARGUMENTS
-* **`graph_json`** [*required*]:  
+**ARGUMENTS**:
+
+* **`graph_json`** [*required*]:
     The graph definition in JSON. Same format that is available on the JSON tab of the graph editor
-* **`timeframe`** [*optional*, *default*=**1_hour**]:  
+* **`timeframe`** [*optional*, *default*=**1_hour**]:
     The timegrame for the graph. Must be one of:
     * **1_hour**,
-    * **4_hours**, 
-    * **1_day**, 
+    * **4_hours**,
+    * **1_day**,
     * **2_days**,
     * **1_week**.
-* **`size`** [*optional*, *default*=**medium**]:  
+* **`size`** [*optional*, *default*=**medium**]:
     The size of the graph. Must be one:
-    * **small**, 
-    * **medium**, 
-    * **large**, 
+    * **small**,
+    * **medium**,
+    * **large**,
     * **xlarge**.
-* **`legend`** [*optional*, *default*=**no**]:  
+* **`legend`** [*optional*, *default*=**no**]:
     The flag determining if the graph includes a legend. Must be one of **yes** or **no**.
-* **`title`** [*optional*, *default*=**Embed created through API**]:  
-    Determines graph title.  
+* **`title`** [*optional*, *default*=**Embed created through API**]:
+    Determines graph title.
     *Must be at least 1 character.*
 
 [1]: /graphing/faq/embeddable-graphs-with-template-variables

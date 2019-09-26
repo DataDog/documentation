@@ -5,12 +5,14 @@ order: 15.09
 external_redirect: /api/#enable-an-aws-service-log-collection
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `POST /v1/integration/aws/logs/services`
 
-##### Example Request
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="aws_enable_service_log_collection" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.aws_enable_service_log_collection" >}}
