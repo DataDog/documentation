@@ -141,7 +141,7 @@ To use your variables in one of your assertions, hit *Use Variable* and select t
 
 By default, Datadog waits for a page to be fully loaded before performing an action or a next step—with a timeout after 60 seconds. In some cases, however, you may wish to set a custom waiting time. For instance, if you know that a page or a page element is taking more than 60 seconds to load, you can leverage the wait step in order to extend that default timeout. If you choose to use this functionality, the value for your wait step must not exceed 300 seconds. 
 
-**Note**: This additional time is systematically added to **each step** of your browser test scenario.
+**Note**: This additional time is systematically added to **each run** of your browser test scenario.
 
 #### Test failure and errors
 
