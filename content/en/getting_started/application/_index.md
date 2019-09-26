@@ -7,7 +7,7 @@ further_reading:
   text: "Introduction to Datadog"
 ---
 
-This page gives a high level overview of the capabilities for the Datadog [US site][1] / [EU site][2].
+This page gives a high level overview of the capabilities for the Datadog [US site][1] and [EU site][2].
 
 ## Integrations
 
