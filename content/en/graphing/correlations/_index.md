@@ -16,11 +16,13 @@ further_reading:
   text: "Watchdog"
 ---
 
+<div class="alert alert-warning">
+Correlations are in public beta for all Datadog accounts. No setup is required.
+</div>
+
 ## Overview
 
 Correlations search for related metrics that exhibit irregular behavior around a selected metric. Correlations scans your metrics from different sources such as dashboards, integrations, APM, and custom metrics. It looks for related, but abnormal behavior to your selected metric, and identifies likely root causes.
-
-Correlations are in public beta for all Datadog accounts. No setup is required.
 
 ## Search
 
