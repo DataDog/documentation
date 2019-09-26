@@ -137,6 +137,16 @@ To use your variables in one of your assertions, hit *Use Variable* and select t
 
 {{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Use variable in assertion" responsive="true" style="width:40%;">}}
 
+#### Wait
+
+By default Datadog automatically waits for a page to be stable before performing the action on the next step. It's consequently generally useless to add manual wait. 
+
+The default timeout for a step is 60 seconds. In some cases (for instance if you know that a page or a page element is taking more than 60 seconds to load) you might want to leverage the wait step in order to extend that default timeout.
+
+You should make sure to use that step with caution as this additional time will systematically be added to the journey.
+
+The value for your wait step must not exceed 300 seconds. 
+
 #### Test failure and errors
 
 A test is considered `FAILED` if it does not satisfy its assertions or if the request failed for another reason. You can view specific browser test errors by clicking on the error in the step results.
