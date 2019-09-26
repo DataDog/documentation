@@ -27,7 +27,7 @@ further_reading:
 
     **注**: 一部のプロバイダーでは、イベントが**ポスト**されてから実際に発生するまでにかなりの遅延が生じます。このような場合、Datadog はイベントを発生時刻にさかのぼって記録しますが、それがモニターに異常な評価動作を引き起こす可能性があります。このような動作が見られた場合は、[Datadog のサポートチーム][1]までお問い合わせください。
 4. **通知オプション**を構成します。
-    詳細については、[通知](#monitor-notifications)ドキュメントを参照してください。
+    詳細については、[通知][2]ドキュメントを参照してください。
 
 ## イベントモニターでのイベントタグの使用
 
@@ -41,12 +41,12 @@ further_reading:
 
 イベントモニター通知にイベント固有の情報を含めることができます。使用できるテンプレート変数は、以下のとおりです。
 
-| テンプレート変数        | 定義                                                               |
-| ------                   | ------                                                                   |
-| `{{event.id}}`           | イベントの ID                                                         |
-| `{{event.title}}`        | イベントのタイトル                                                       |
-| `{{event.text}}`         | イベントのテキスト                                                        |
-| `{{event.host.name}}`    | イベントを生成したホスト名                                        |
+| テンプレート変数         | 定義                                                                       |
+|--------------------------|----------------------------------------------------------------------------|
+| `{{event.id}}`           | イベントの ID                                                              |
+| `{{event.title}}`        | イベントのタイトル                                                         |
+| `{{event.text}}`         | イベントのテキスト                                                         |
+| `{{event.host.name}}`    | イベントを生成したホスト名                                                 |
 | `{{event.tags.tagname}}` | イベントにアタッチされるタグ。`tagname` をタグの名前に置き換えてください。 |
 
 {{< img src="monitors/monitor_types/event/event_notification_template.png" alt="event_notification_template" responsive="true" style="width:60%;">}}
@@ -59,7 +59,8 @@ further_reading:
 
 {{< img src="monitors/monitor_types/event/triggered_event.png" alt="triggered_event" responsive="true" style="width:60%;">}}
 
-## その他の参考資料 
+## その他の参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/help
+[2]: /monitors/notifications
