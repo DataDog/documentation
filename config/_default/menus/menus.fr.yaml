@@ -186,28 +186,28 @@ main:
     identifier: agent_autodiscovery
     parent: agent
     weight: 4
+  - name: Auto-Configuration
+    url: agent/autodiscovery/auto_conf/
+    parent: agent_autodiscovery
+    weight: 401
   - name: Modèles d'intégration
     url: agent/autodiscovery/integrations/
     parent: agent_autodiscovery
-    weight: 401
+    weight: 402
   - name: Identificateur de conteneur
     url: agent/autodiscovery/ad_identifiers/
     parent: agent_autodiscovery
-    weight: 402
+    weight: 403
   - name: Template Variables
     url: agent/autodiscovery/template_variables/
     parent: agent_autodiscovery
-    weight: 403
+    weight: 404
   - name: Extraction de tag
     url: agent/autodiscovery/tag/
     parent: agent_autodiscovery
-    weight: 404
+    weight: 405
   - name: Gestion de découverte
     url: agent/autodiscovery/management/
-    parent: agent_autodiscovery
-    weight: 405
-  - name: Dépannage
-    url: agent/autodiscovery/troubleshooting/
     parent: agent_autodiscovery
     weight: 406
   - name: Checks d'endpoints
@@ -218,6 +218,10 @@ main:
     url: agent/autodiscovery/clusterchecks/
     parent: agent_autodiscovery
     weight: 408
+  - name: Dépannage
+    url: agent/autodiscovery/troubleshooting/
+    parent: agent_autodiscovery
+    weight: 409
   - name: Collecte de logs
     url: agent/logs/
     identifier: agent_logs
@@ -253,7 +257,7 @@ main:
     url: agent/troubleshooting/send_a_flare/
     parent: agent_troubleshooting
     weight: 802
-  - name: Status d'un Check
+  - name: Statut d'un check de l'Agent
     url: agent/troubleshooting/agent_check_status/
     parent: agent_troubleshooting
     weight: 803
@@ -372,10 +376,6 @@ main:
     url: graphing/infrastructure/process/
     parent: graphing_infrastructure
     weight: 604
-  - name: Monitor de performance réseau
-    url: graphing/infrastructure/network_performance_monitor/
-    parent: graphing_infrastructure
-    weight: 605
   - name: Informatique sans serveur
     url: graphing/infrastructure/serverless/
     parent: graphing_infrastructure
@@ -434,11 +434,11 @@ main:
     parent: graphing
     identifier: graphing_json
     weight: 8
-  - name: Schéma JSON des Widgets
+  - name: Schéma JSON des widgets
     url: graphing/graphing_json/widget_json/
     parent: graphing_json
     weight: 801
-  - name: Schema JSON des requètes
+  - name: Schéma JSON des requêtes
     url: graphing/graphing_json/request_json/
     parent: graphing_json
     weight: 802
@@ -838,7 +838,7 @@ main:
     pre: nav_synthetics
     identifier: synthetics
     weight: 100000
-  - name: API Tests
+  - name: Tests d'API
     url: synthetics/api_tests/
     parent: synthetics
     weight: 1
@@ -961,7 +961,7 @@ main:
     url: developers/write_agent_check/
     parent: dev_tools
     weight: 5
-  - name: Écrire un check Prometheus
+  - name: Écrire un check OpenMetrics
     url: developers/prometheus/
     parent: dev_tools
     weight: 6
