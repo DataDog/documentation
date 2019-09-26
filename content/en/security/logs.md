@@ -49,7 +49,7 @@ With the Docker Agent, pass in ```DD_LOGS_CONFIG_LOGS_DD_URL=tcp-encrypted-intak
 Additionally, certain features are not available at the moment to customers who have signed Datadog's BAA, notably:
 
 * Users cannot request support via chat
-* The logs Live Tail is disabled
+* The logs Live Tail, Rehydrate from Archives, and Generate Metrics features are disabled
 * Notifications from Log Monitors cannot include log samples
 * Log Monitors cannot be configured with a `group-by` clause
 
