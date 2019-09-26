@@ -93,7 +93,7 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
     npm install -g lighthouse
     ```
 
-3. Assurez-vous d'avoir installé Google Chrome ou Puppereer (ce check d'Agent custom exécute Chrome en mode sans affichage).
+3. Assurez-vous d'avoir installé Google Chrome ou Puppereer (ce check d'Agent custom exécute Chrome en mode headless).
 
     ```
     # example

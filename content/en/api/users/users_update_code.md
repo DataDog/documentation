@@ -8,7 +8,7 @@ external_redirect: /api/#update-user
 
 **SIGNATURE**:
 
-`PUT /v1/users/<USER_ID>`
+`PUT /v1/user/<USER_ID>`
 
 **EXAMPLE REQUEST**:
 

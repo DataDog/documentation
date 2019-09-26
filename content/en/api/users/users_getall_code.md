@@ -7,7 +7,7 @@ external_redirect: /api/#get-all-users
 
 **SIGNATURE**:
 
-`GET /v1/users`
+`GET /v1/user`
 
 **EXAMPLE REQUEST**:
 

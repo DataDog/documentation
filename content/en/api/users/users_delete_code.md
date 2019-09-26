@@ -7,7 +7,7 @@ external_redirect: /api/#disable-user
 
 **SIGNATURE**:
 
-`DELETE /v1/users/<USER_ID>`
+`DELETE /v1/user/<USER_ID>`
 
 **EXAMPLE REQUEST**:
 
