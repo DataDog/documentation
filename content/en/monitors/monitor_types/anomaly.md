@@ -26,8 +26,6 @@ For example, anomaly detection can help you discover when your web traffic is un
 
 To create an [anomaly monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Anomaly*.
 
-The anomaly detection monitor, use the `anomalies` function from the Datadog query language. When you apply this function to a series, it returns the usual results along with an expected "normal" range.
-
 ### Define the metric
 
 Any metric currently reporting to Datadog is available for monitors. For more information, see the [Metric Monitor][2] page.
@@ -57,14 +55,14 @@ Datadog automatically analyzes your chosen metric and sets several parameters fo
 
 {{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="advanced options" responsive="true" style="width:80%;">}}
 
-| Option                      | Description                                                                                                  |
-|-----------------------------|--------------------------------------------------------------------------------------------------------------|
-| Deviations                  | The width of the gray band. This is equivalent to the bounds parameter used in the [anomalies function][3]. |
-| Algorithm                   | The [anomaly detection algorithm](#anomaly-detection-algorithms) (`basic`, `agile`, or `robust`).            |
-| [Seasonality](#seasonality) | The seasonality of the chosen metric (`hourly`, `daily`, or `weekly`).                                       |
-| [Daylight savings][4]       | Available for `agile` or `robost` anomaly detection with `weekly` or `daily` seasonality.                    |
-| [Rollup][5]                 | The rollup interval.                                                                                         |
-| Thresholds                  | The percentage of points that need to be anomalous for alerting, warning, and recovery.                      |
+| Option                      | Description                                                                                                                |
+|-----------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Deviations                  | The width of the gray band. This is equivalent to the bounds parameter used in the [anomalies function][3].                |
+| Algorithm                   | The [anomaly detection algorithm](#anomaly-detection-algorithms) (`basic`, `agile`, or `robust`).                          |
+| [Seasonality](#seasonality) | The seasonality (`hourly`, `daily`, or `weekly`) of the cycle for the `agile` or `robust` algorithm to analyze the metric. |
+| [Daylight&nbsp;savings][4]  | Available for `agile` or `robust` anomaly detection with `weekly` or `daily` seasonality.                                  |
+| [Rollup][5]                 | The rollup interval.                                                                                                       |
+| Thresholds                  | The percentage of points that need to be anomalous for alerting, warning, and recovery.                                    |
 
 ##### Seasonality
 
@@ -109,24 +107,25 @@ This example shows how each algorithm handles a new metric. `Robust` and `agile`
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="algorithm comparison new metric" responsive="true" style="width:90%;">}}
 
-### API
+### Notifications
 
-Enterprise-level customers can create anomaly detection monitors using the [create-monitor API endpoint][8]. Add the `anomalies` function to the query:
-```text
-time_aggr(eval_window_length):anomalies(space_aggr:metric{tags}, 'basic/agile/robust', deviation_number, direction='both/above/below', alert_window='alert_window_length', interval=seconds, count_default_zero='true') >= threshold_value
-```
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][8] page.
 
-**Note**: Anomaly detection monitors are only available to enterprise-level customers. Pro-level customers interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][9].
+## API
+
+Enterprise-level customers can create anomaly detection monitors using the [create-monitor API endpoint][9]. Datadog recommends [exporting a monitor's JSON][10] to build the query for the API.
 
 Below is an example query for an anomaly detection monitor, which alerts when the average Cassandra node's CPU is three standard deviations above the ordinary value over the last 5 minutes:
 ```text
 avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direction='above', alert_window='last_5m', interval=20, count_default_zero='true') >= 1
 ```
 
+**Note**: Anomaly detection monitors are only available to enterprise-level customers. Pro-level customers interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][11].
+
 ## Troubleshooting
 
-* [Anomaly Monitor FAQ][10]
-* [Contact Datadog support][11]
+* [Anomaly Monitor FAQ][12]
+* [Contact Datadog support][13]
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -138,7 +137,9 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 [5]: /graphing/functions/rollup
 [6]: https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average
 [7]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
-[8]: /api/#monitor-create
-[9]: mailto:billing@datadoghq.com
-[10]: /monitors/faq/anomaly-monitor
-[11]: /help
+[8]: /monitors/notifications
+[9]: /api/#monitor-create
+[10]: /monitors/monitor_status/#settings
+[11]: mailto:billing@datadoghq.com
+[12]: /monitors/faq/anomaly-monitor
+[13]: /help
