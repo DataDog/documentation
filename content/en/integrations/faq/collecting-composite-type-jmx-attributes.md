@@ -63,6 +63,8 @@ In this case, you need to add more details to JMXFetch on how to use this 'compo
       HeapMemoryUsage.committed:
         alias: jvm.heap_memory_committed
         metric_type: gauge
+
+      # (...)
 ```
 
 ### How can I get to see the next level of these composite attributes?
