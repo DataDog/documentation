@@ -5,7 +5,6 @@ order: 33.3
 external_redirect: /api/#get-hourly-usage-for-custom-metrics
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/usage/timeseries`

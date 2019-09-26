@@ -9,7 +9,6 @@ external_redirect: /api/#get-hourly-usage-for-hosts-and-containers
 
 Get Hourly Usage For Hosts and Containers.
 
-
 **ARGUMENTS**:
 
 * **`start_hr`** [*required*]:

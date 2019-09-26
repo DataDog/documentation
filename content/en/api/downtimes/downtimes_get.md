@@ -9,5 +9,4 @@ external_redirect: /api/#get-a-monitor-downtime
 
 **ARGUMENTS**:
 
-
 This endpoint takes no JSON arguments.

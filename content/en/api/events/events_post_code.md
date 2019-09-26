@@ -5,7 +5,6 @@ order: 12.1
 external_redirect: /api/#post-an-event
 ---
 
-
 **SIGNATURE**:
 
 `POST /v1/events`

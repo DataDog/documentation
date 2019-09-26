@@ -5,7 +5,6 @@ order: 11.5
 external_redirect: /api/#revoke-embed
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/graph/embed/<EMBED_ID>/revoke`

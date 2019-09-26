@@ -5,7 +5,6 @@ order: 27.2
 external_redirect: /api/#get-organization
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/org`

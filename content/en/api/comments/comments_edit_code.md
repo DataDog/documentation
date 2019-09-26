@@ -5,7 +5,6 @@ order: 7.2
 external_redirect: /api/#edit-a-comment
 ---
 
-
 **SIGNATURE**:
 
 `PUT /v1/comments/<COMMENT_ID>`

@@ -7,9 +7,7 @@ external_redirect: /api/#update-a-dashboard
 
 ## Update a Dashboard
 
-
 **ARGUMENTS**:
-
 
 * **`title`** [*required*]:
     Title of the dashboard.

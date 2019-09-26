@@ -9,7 +9,6 @@ external_redirect: /api/#get-top-500-custom-metrics-by-hourly-average
 
 Get Top [Custom Metrics][1] By Hourly Average.
 
-
 **ARGUMENTS**:
 
 * **`month`** [*required*]:

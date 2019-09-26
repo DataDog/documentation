@@ -5,7 +5,6 @@ order: 33.7
 external_redirect: /api/#get-hourly-usage-for-fargate
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/usage/fargate`

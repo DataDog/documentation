@@ -5,7 +5,6 @@ order: 33.6
 external_redirect: /api/#get-hourly-usage-for-synthetics
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/usage/synthetics`

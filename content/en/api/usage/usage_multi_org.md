@@ -9,7 +9,6 @@ external_redirect: /api/#get-usage-across-your-multi-org-account
 
 Get usage across your multi-org account
 
-
 **ARGUMENTS**:
 
 * **`start_month`** [*required*]:

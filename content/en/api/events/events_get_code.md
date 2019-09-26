@@ -5,7 +5,6 @@ order: 12.2
 external_redirect: /api/#get-an-event
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/events/<EVENT_ID>`

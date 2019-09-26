@@ -5,7 +5,6 @@ order: 12.4
 external_redirect: /api/#query-the-event-stream
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/events`

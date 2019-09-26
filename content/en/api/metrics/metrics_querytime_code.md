@@ -5,7 +5,6 @@ order: 25.3
 external_redirect: /api/#query-time-series-points
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/query`

@@ -17,7 +17,6 @@ There are a couple of options for updating the Identity Provider (IdP) metadata 
 ##### HEADERS
 * **`Content-Type: multipart/form-data`**
 
-
 **ARGUMENTS**:
 
 * **`idp_file`** [*required*]:
@@ -27,7 +26,6 @@ There are a couple of options for updating the Identity Provider (IdP) metadata 
 
 ##### HEADERS
 * **`Content-Type: application/xml`**
-
 
 **ARGUMENTS**:
 

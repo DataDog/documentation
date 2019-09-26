@@ -5,7 +5,6 @@ order: 27.1
 external_redirect: /api/#create-child-organization
 ---
 
-
 **SIGNATURE**:
 
 `POST /v1/org`

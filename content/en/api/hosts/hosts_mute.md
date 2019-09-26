@@ -9,7 +9,6 @@ external_redirect: /api/#mute-a-host
 
 **ARGUMENTS**:
 
-
 * **`end`** [*optional*, *default*=**None**]:
     POSIX timestamp when the host is unmuted. If omitted, the host remains muted until explicitly unmuted.
 * **`message`** [*optional*, *default*=**None**]:

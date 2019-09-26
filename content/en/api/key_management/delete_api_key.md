@@ -9,8 +9,6 @@ external_redirect: /api/#delete-an-api-key
 
 Delete a given API key.
 
-
 **ARGUMENTS**:
-
 
 This endpoint takes no JSON arguments.

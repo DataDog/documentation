@@ -5,7 +5,6 @@ order: 26.09
 external_redirect: /api/#mute-a-monitor
 ---
 
-
 **SIGNATURE**:
 
 `POST /v1/monitor/<MONITOR_ID>/mute`

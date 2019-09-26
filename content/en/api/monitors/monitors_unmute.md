@@ -7,7 +7,6 @@ external_redirect: /api/#unmute-a-monitor
 
 ## Unmute a monitor
 
-
 **ARGUMENTS**:
 
 * **`scope`** [*optional*, *default*=**None**]:

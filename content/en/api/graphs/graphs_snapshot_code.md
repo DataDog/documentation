@@ -5,7 +5,6 @@ order: 13.1
 external_redirect: /api/#graph-snapshot
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/graph/snapshot`

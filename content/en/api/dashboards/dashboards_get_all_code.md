@@ -5,7 +5,6 @@ order: 8.5
 external_redirect: /api/#get-all-dashboards
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/dashboard`

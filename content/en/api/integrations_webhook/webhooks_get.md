@@ -9,8 +9,6 @@ external_redirect: /api/#get-a-webhooks-integration
 
 Get all Datadog-Webhooks integration information.
 
-
 **ARGUMENTS**:
-
 
 This endpoint takes no JSON arguments.

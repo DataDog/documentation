@@ -9,9 +9,7 @@ external_redirect: /api/#update-a-pipelines
 
 Update a given pipeline configuration to change it's processors or their order.
 
-
 **ARGUMENTS**:
-
 
 * **`name`** [*required*]:
     Your pipeline name.

@@ -9,7 +9,6 @@ external_redirect: /api/#get-hourly-usage-for-fargate
 
 Get Hourly Usage For [Fargate][1].
 
-
 **ARGUMENTS**:
 
 * **`start_hr`** [*required*]:

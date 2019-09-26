@@ -6,7 +6,6 @@ external_redirect: /api/#update-user
 ---
 
 
-
 **SIGNATURE**:
 
 `PUT /v1/users/<USER_ID>`

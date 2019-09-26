@@ -15,7 +15,6 @@ Note: If an embed already exists for the exact same query in a given organizatio
 
 If you are interested in using template variables, see [Embeddable Graphs with Template Variables][1].
 
-
 **ARGUMENTS**:
 
 * **`graph_json`** [*required*]:

@@ -5,7 +5,6 @@ order: 10.5
 external_redirect: /api/#get-a-monitor-downtime
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/downtime/<DOWNTIME_ID>`

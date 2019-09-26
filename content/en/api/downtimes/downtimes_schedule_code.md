@@ -5,7 +5,6 @@ order: 10.1
 external_redirect: /api/#schedule-monitor-downtime
 ---
 
-
 **SIGNATURE**:
 
 `POST /v1/downtime`

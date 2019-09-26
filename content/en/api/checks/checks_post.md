@@ -7,9 +7,7 @@ external_redirect: /api/#post-a-check-run
 
 ## Post a check run
 
-
 **ARGUMENTS**:
-
 
 * **`check`** *[required]*:
     The text for the message

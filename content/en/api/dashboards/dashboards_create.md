@@ -9,7 +9,6 @@ external_redirect: /api/#create-a-dashboard
 
 **ARGUMENTS**:
 
-
 * **`title`** [*required*]:
     Title of the dashboard.
 * **`widgets`** [*required*]:

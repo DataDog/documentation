@@ -9,7 +9,6 @@ external_redirect: /api/#get-hourly-usage-for-logs
 
 Get Hourly Usage For Logs.
 
-
 **ARGUMENTS**:
 
 * **`start_hr`** [*required*]:

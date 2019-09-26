@@ -5,7 +5,6 @@ order: 33.8
 external_redirect: /api/#get-usage-across-your-multi-org-account
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/usage/summary`

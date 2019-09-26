@@ -5,7 +5,6 @@ order: 7.1
 external_redirect: /api/#create-a-comment
 ---
 
-
 **SIGNATURE**:
 
 `POST /v1/comments`

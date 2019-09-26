@@ -5,7 +5,6 @@ order: 25.4
 external_redirect: /api/#view-metric-metadata
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/metrics/<METRIC_NAME>`

@@ -9,7 +9,6 @@ external_redirect: /api/#get-hourly-usage-for-synthetics
 
 Get Hourly Usage For [Synthetics][1].
 
-
 **ARGUMENTS**:
 
 * **`start_hr`** [*required*]:

@@ -5,7 +5,6 @@ order: 33.5
 external_redirect: /api/#get-hourly-usage-for-trace-search
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/usage/traces`

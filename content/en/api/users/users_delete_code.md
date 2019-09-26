@@ -5,7 +5,6 @@ order: 34.5
 external_redirect: /api/#disable-user
 ---
 
-
 **SIGNATURE**:
 
 `DELETE /v1/users/<USER_ID>`

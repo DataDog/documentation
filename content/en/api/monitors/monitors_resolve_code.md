@@ -5,7 +5,6 @@ order: 26.06
 external_redirect: /api/#resolve-monitor
 ---
 
-
 **SIGNATURE**:
 
 `POST https://api.datadoghq.com/monitor/bulk_resolve`

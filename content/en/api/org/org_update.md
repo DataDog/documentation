@@ -7,7 +7,6 @@ external_redirect: /api/#update-organization
 
 ## Update organization
 
-
 **ARGUMENTS**:
 
 * **`name`** [*optional*]:

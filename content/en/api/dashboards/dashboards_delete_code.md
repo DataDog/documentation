@@ -5,7 +5,6 @@ order: 8.3
 external_redirect: /api/#delete-a-dashboard
 ---
 
-
 **SIGNATURE**:
 
 `DELETE /v1/dashboard/<DASHBOARD_ID>`

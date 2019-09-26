@@ -5,7 +5,6 @@ order: 26.11
 external_redirect: /api/#validate-a-monitor
 ---
 
-
 **SIGNATURE**:
 
 `POST /v1/monitor/validate`

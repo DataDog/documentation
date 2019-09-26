@@ -20,8 +20,6 @@ Returns: A JSON object with 8 elements:
 
 On failure, the return value is a JSON containing an error message {errors: [messages]}.
 
-
 **ARGUMENTS**:
-
 
 This endpoint takes no JSON arguments.

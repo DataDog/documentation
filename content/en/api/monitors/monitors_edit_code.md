@@ -5,7 +5,6 @@ order: 26.03
 external_redirect: /api/#edit-a-monitor
 ---
 
-
 **SIGNATURE**:
 
 `PUT /v1/monitor/<MONITOR_ID>`

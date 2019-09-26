@@ -5,7 +5,6 @@ order: 26.01
 external_redirect: /api/#create-a-monitor
 ---
 
-
 **SIGNATURE**:
 
 `POST /v1/monitor`

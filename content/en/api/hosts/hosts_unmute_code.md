@@ -5,7 +5,6 @@ order: 14.4
 external_redirect: /api/#unmute-a-host
 ---
 
-
 **SIGNATURE**:
 
 `POST /v1/host/<HOSTNAME>/unmute`

@@ -9,7 +9,6 @@ external_redirect: /api/#create-a-monitor
 
 If you manage and deploy monitors programmatically, it's easier to define the monitor in the Datadog UI and [export its valid JSON][1].
 
-
 **ARGUMENTS**:
 
 *   **`type`** [*required*]:
@@ -160,7 +159,6 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
     If an invalid monitor option is included in the request, the response will be:
 
             Error: 400 - ["Invalid monitor option:<invalid option>"]
-
 
 
 [1]: /monitors/#export-your-monitor

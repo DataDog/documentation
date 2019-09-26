@@ -5,17 +5,13 @@ order: 15.10
 external_redirect: /api/#delete-aws-log-collection
 ---
 
-
 **SIGNATURE**:
 
-
 `DELETE /v1/integration/aws/logs`
-
 
 **EXAMPLE REQUEST**:
 
 {{< code-snippets basename="aws_delete_log_collection" >}}
-
 
 **EXAMPLE RESPONSE**:
 

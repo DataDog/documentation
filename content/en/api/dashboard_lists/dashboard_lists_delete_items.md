@@ -16,9 +16,7 @@ This endpoint has been updated to reflect the new Dashboard API changes. Documen
     </ul>
 </div>
 
-
 **ARGUMENTS**:
-
 
 *   **`dashboards`** [*required*]:
     A list of dashboards to remove from the list.

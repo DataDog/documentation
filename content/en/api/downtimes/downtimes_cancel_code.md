@@ -5,7 +5,6 @@ order: 10.3
 external_redirect: /api/#cancel-monitor-downtime
 ---
 
-
 **SIGNATURE**:
 
 `DELETE /v1/downtime/<DOWNTIME_ID>`

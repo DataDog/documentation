@@ -5,7 +5,6 @@ order: 8.1
 external_redirect: /api/#create-a-dashboard
 ---
 
-
 **SIGNATURE**:
 
 `POST /v1/dashboard`

@@ -5,7 +5,6 @@ order: 26.12
 external_redirect: /api/#monitors-search
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/monitor/search`

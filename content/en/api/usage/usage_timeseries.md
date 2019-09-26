@@ -9,7 +9,6 @@ external_redirect: /api/#get-hourly-usage-for-custom-metrics
 
 Get Hourly Usage For [Custom Metrics][1].
 
-
 **ARGUMENTS**:
 
 * **`start_hr`** [*required*]:

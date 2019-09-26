@@ -5,7 +5,6 @@ order: 10.2
 external_redirect: /api/#update-monitor-downtime
 ---
 
-
 **SIGNATURE**:
 
 `PUT /v1/downtime/<DOWNTIME_ID>`

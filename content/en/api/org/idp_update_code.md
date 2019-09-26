@@ -5,7 +5,6 @@ order: 27.4
 external_redirect: /api/#upload-idp-metadata
 ---
 
-
 **SIGNATURE**:
 
 `POST /v1/org/<PUBLIC_ID>/idp_metadata`

@@ -5,7 +5,6 @@ order: 34.3
 external_redirect: /api/#get-all-users
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/users`

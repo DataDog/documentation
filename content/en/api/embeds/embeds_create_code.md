@@ -5,7 +5,6 @@ order: 11.2
 external_redirect: /api/#create-embed
 ---
 
-
 **SIGNATURE**:
 
 `POST /v1/graph/embed`

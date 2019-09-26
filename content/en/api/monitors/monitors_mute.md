@@ -7,7 +7,6 @@ external_redirect: /api/#mute-a-monitor
 
 ## Mute a monitor
 
-
 **ARGUMENTS**:
 
 * **`scope`** [*optional*, *default*=**None**]:

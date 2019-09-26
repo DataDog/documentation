@@ -5,7 +5,6 @@ order: 30.2
 external_redirect: /api/#get-host-tags
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/tags/hosts/<HOSTNAME>`

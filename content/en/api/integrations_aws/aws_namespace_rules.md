@@ -9,8 +9,6 @@ external_redirect: /api/#list-namespace-rules
 
 List all namespace rules for a given Datadog-AWS integration.
 
-
 **ARGUMENTS**:
-
 
 This endpoint takes no JSON arguments.

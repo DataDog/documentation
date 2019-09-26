@@ -9,8 +9,6 @@ external_redirect: /api/#delete-an-application-key
 
 Delete a given application key.
 
-
 **ARGUMENTS**:
-
 
 This endpoint takes no JSON arguments.

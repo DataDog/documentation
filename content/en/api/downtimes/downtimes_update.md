@@ -9,7 +9,6 @@ external_redirect: /api/#update-monitor-downtime
 
 **ARGUMENTS**:
 
-
 * **`id`** [*required*]:
     The integer id of the downtime to be updated
 * **`scope`** [*required*]:

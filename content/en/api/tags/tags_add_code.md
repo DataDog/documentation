@@ -5,7 +5,6 @@ order: 30.3
 external_redirect: /api/#add-tags-to-a-host
 ---
 
-
 **SIGNATURE**:
 
 `POST /v1/tags/hosts/<HOSTNAME>`

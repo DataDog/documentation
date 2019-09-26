@@ -5,7 +5,6 @@ order: 11.4
 external_redirect: /api/#enable-embed
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/graph/embed/<EMBED_ID>/enable`

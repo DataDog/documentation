@@ -5,7 +5,6 @@ order: 26.07
 external_redirect: /api/#mute-all-monitors
 ---
 
-
 **SIGNATURE**:
 
 `POST /v1/monitor/mute_all`

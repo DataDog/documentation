@@ -5,7 +5,6 @@ order: 30.5
 external_redirect: /api/#remove-host-tags
 ---
 
-
 **SIGNATURE**:
 
 `DELETE /v1/tags/hosts/<HOSTNAME>`

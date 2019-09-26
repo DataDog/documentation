@@ -9,8 +9,6 @@ external_redirect: /api/#get-results
 
 Use this method to get the most recent results for a specific test.
 
-
 **ARGUMENTS**:
-
 
 *This endpoint takes no JSON arguments.*

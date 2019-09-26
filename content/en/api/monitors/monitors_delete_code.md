@@ -5,7 +5,6 @@ order: 26.04
 external_redirect: /api/#delete-a-monitor
 ---
 
-
 **SIGNATURE**:
 
 `DELETE /v1/monitor/<MONITOR_ID>`

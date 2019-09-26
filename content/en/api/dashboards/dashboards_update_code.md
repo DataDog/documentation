@@ -5,7 +5,6 @@ order: 8.2
 external_redirect: /api/#update-a-dashboard
 ---
 
-
 **SIGNATURE**:
 
 `PUT /v1/dashboard/<DASHBOARD_ID>`

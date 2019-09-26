@@ -5,7 +5,6 @@ order: 14.2
 external_redirect: /api/#host-totals
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/hosts/totals`

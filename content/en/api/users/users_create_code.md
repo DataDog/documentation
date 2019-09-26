@@ -5,7 +5,6 @@ order: 34.1
 external_redirect: /api/#create-user
 ---
 
-
 **SIGNATURE**:
 
 `POST /v1/users`

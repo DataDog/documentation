@@ -5,7 +5,6 @@ order: 25.6
 external_redirect: /api/#search-metrics
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/search`

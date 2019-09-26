@@ -9,8 +9,6 @@ external_redirect: /api/#get-all-dashboard-lists
 
 Fetch all of your existing dashboard list definitions.
 
-
 **ARGUMENTS**:
-
 
 This endpoint takes no JSON arguments.

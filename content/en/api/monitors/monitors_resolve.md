@@ -7,7 +7,6 @@ external_redirect: /api/#resolve-monitor
 
 ## Resolve monitor
 
-
 **ARGUMENTS**:
 
 * **`resolve`** [*required*]:

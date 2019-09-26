@@ -9,9 +9,7 @@ external_redirect: /api/#monitors-search
 
 Search and filter your monitors details.
 
-
 **ARGUMENTS**:
-
 
 * **`query`** [*optional*]:
 

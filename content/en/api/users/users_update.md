@@ -8,7 +8,6 @@ external_redirect: /api/#update-user
 ## Update user
 Can only be used with application keys belonging to administrators.
 
-
 **ARGUMENTS**:
 
 * **`id`** [*required*]:

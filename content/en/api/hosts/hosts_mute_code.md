@@ -5,7 +5,6 @@ order: 14.3
 external_redirect: /api/#mute-a-host
 ---
 
-
 **SIGNATURE**:
 
 `POST /v1/host/<HOSTNAME>/mute`

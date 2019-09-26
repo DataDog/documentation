@@ -9,8 +9,6 @@ external_redirect: /api/#get-all-application-keys
 
 Get all application keys available for your account.
 
-
 **ARGUMENTS**:
-
 
 This endpoint takes no JSON arguments.

@@ -5,7 +5,6 @@ order: 26.05
 external_redirect: /api/#get-all-monitor-details
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/monitor`

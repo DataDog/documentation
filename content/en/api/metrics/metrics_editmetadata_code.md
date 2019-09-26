@@ -5,7 +5,6 @@ order: 25.5
 external_redirect: /api/#edit-metric-metadata
 ---
 
-
 **SIGNATURE**:
 
 `PUT /v1/metrics/<METRIC_NAME>`

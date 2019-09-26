@@ -5,7 +5,6 @@ order: 33.1
 external_redirect: /api/#get-hourly-usage-for-hosts-and-containers
 ---
 
-
 **SIGNATURE**:
 
 `GET /v1/usage/hosts`

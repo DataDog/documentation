@@ -9,5 +9,4 @@ external_redirect: /api/#delete-a-monitor
 
 **ARGUMENTS**:
 
-
 This endpoint takes no JSON arguments.

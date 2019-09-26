@@ -9,7 +9,6 @@ external_redirect: /api/#search-metrics
 This endpoint allows you to search for metrics from the last 24 hours in Datadog.
 
 
-
 **ARGUMENTS**:
 
 * `q` [*required*]:

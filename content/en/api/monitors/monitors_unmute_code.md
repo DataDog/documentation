@@ -5,7 +5,6 @@ order: 26.10
 external_redirect: /api/#unmute-a-monitor
 ---
 
-
 **SIGNATURE**:
 
 `POST /v1/monitor/<MONITOR_ID>/unmute`

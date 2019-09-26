@@ -5,7 +5,6 @@ order: 6.1
 external_redirect: /api/#post-a-check-run
 ---
 
-
 **SIGNATURE**:
 
 `POST /v1/check_run`
@@ -13,7 +12,6 @@ external_redirect: /api/#post-a-check-run
 **EXAMPLE REQUEST**:
 
 {{< code-snippets basename="api-checks-post" >}}
-
 
 **EXAMPLE RESPONSE**:
 
