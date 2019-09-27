@@ -1,5 +1,5 @@
 ---
-title: Datadog Cluster Agent for Kubernetes
+title: Cluster Agent for Kubernetes
 kind: documentation
 aliases:
 - /agent/kubernetes/cluster/
@@ -35,6 +35,14 @@ Using the Datadog Cluster Agent allows you to:
 * Provide cluster level metadata that can only be found in the API server to the Node Agents for them to enrich the metadata of the locally collected metrics.
 * Enable the collection of cluster level data such as the monitoring of services or SPOF and events.
 * Leverage horizontal pod autoscaling with custom Kubernetes metrics. Refer to [the dedicated guide][1] for more details about this feature.
+
+{{< whatsnext desc="This section includes the following topics:">}}
+    {{< nextlink href="/agent/cluster_agent/setup" >}}<u>Setup</u>: Setup your Datadog Cluster Agent in your Kubernetes Cluster.{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/commands" >}}<u>Commands</u>:List of all commands and options available for the Cluster Agent.{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/event_collection" >}}<u>Event Collection</u>: Use the Cluster Agent to collect all events from your Kubernetes Cluster.{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/external_metrics" >}}<u>External Metrics</u>: Leverage the Cluster Agent Custom metrics server to auto-scale your applications thanks to all your Datadog Metrics.{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/troubleshooting" >}}<u>Troubleshooting</u>: Find troubleshooting information for the Datadog Cluster Agent.{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Limitations
 

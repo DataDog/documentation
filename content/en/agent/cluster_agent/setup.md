@@ -1,5 +1,5 @@
 ---
-title: Datadog Cluster Agent Setup
+title: Cluster Agent Setup
 kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
@@ -21,8 +21,8 @@ further_reading:
 
 To setup the Datadog Cluster Agent on your Kubernetes cluster you must:
 
-1. [Setup the Datadog Cluster Agent]().[1]
-2. [Configure your Agent to coomunicate with the Datadog Cluster Agent]().[1]
+1. [Setup the Datadog Cluster Agent]().[1][1]
+2. [Configure your Agent to coomunicate with the Datadog Cluster Agent]().[1][1]
 
 ## Configure the Datadog Cluster Agent
 ### Setup
@@ -253,7 +253,7 @@ Kubernetes events are beginning to flow into your Datadog account, and relevant 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: ).
+[1]: ).[1]
 [2]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/cluster-agent/rbac
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml

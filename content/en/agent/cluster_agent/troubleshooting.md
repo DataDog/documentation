@@ -1,5 +1,5 @@
 ---
-title: Datadog Cluster Agent Troubleshooting
+title: Cluster Agent Troubleshooting
 kind: documentation
 disable_toc: true
 further_reading:
@@ -242,7 +242,7 @@ autoscaling/v2beta1
 external.metrics.k8s.io/v1beta1
 ```
 
-The latter shows up if the Datadog Cluster Agent properly registers as an External Metrics Provider—and if you have the same service name referenced in the APIService for the External Metrics Provider, as well as the one for the Datadog Cluster Agent on port `443`. Also make sure you have created the RBAC from the [Register the External Metrics Provider]() step.[1]
+The latter shows up if the Datadog Cluster Agent properly registers as an External Metrics Provider—and if you have the same service name referenced in the APIService for the External Metrics Provider, as well as the one for the Datadog Cluster Agent on port `443`. Also make sure you have created the RBAC from the [Register the External Metrics Provider]() step.[1][1]
 
 If you see the following error when describing the hpa manifest
 
@@ -286,4 +286,5 @@ And indeed `824 * 3 replicas = 2472`.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: ) step.
+ step.
+[1]: ) step.[1]
