@@ -38,13 +38,13 @@ To enforce standard attributes, administrators have the right to re-copy an exis
 
 ### Standard attributes in Log Explorer
 
-It's likely that standard attributes coexist in your organisation along with their non-standard version. Typically when arranging a transition period. And to help your users cherry-pick the standard attribute in this context, they are identified as such in the explorer (e.g. in the facet list, or in measure or group selectors in Analytics). 
+Typically, during a transitional period, standard attributes may coexist in your organization along with their non-standard versions. To help your users cherry-pick the standard attributes in this context, they are identified as such in the explorer (e.g. in the facet list, or in measure or group selectors in Analytics). 
 
 {{< img src="logs/processing/attribute_naming_convention/standard_attribute_explorer.png" alt="Standard Attributes" responsive="true" style="width:60%;">}}
 
-As an administrator or prescriptor of the naming convention in your organisation, you can take this opportunity to educate them with standard attributes, and nudge them to align. 
+If you are an administrator or prescriptor of the naming convention in your organization, you can take this opportunity to educate other users with standard attributes, and nudge them to align. 
 
-## Standard Attribute list
+## Standard attribute list
 
 The standard attribute table comes with a set of [predefined standard attributes](#default-standard-attribute-list). You can append that list with your own attributes, and edit or delete existing standard attributes:
 
