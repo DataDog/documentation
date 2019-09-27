@@ -16,7 +16,7 @@ Get hourly usage For Trace Search.
 * **`end_hr`** [*optional*, *default*=**1d+start_hr**]:
     datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour
 
-##### Response
+**RESPONSE**:
 
 * **`indexed_events_count`**:
     Contains the number of Trace Search events indexed.
