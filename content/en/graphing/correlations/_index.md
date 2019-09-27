@@ -22,7 +22,7 @@ Correlations are in public beta for all Datadog accounts. No setup is required.
 
 ## Overview
 
-Correlations search for related metrics that exhibit irregular behavior around a selected metric. Correlations scans your metrics from different sources such as dashboards, integrations, APM, and custom metrics. It looks for related, but abnormal behavior to your selected metric, and identifies likely root causes.
+Correlations search for other metrics that exhibit irregular behavior around a selected metric. Correlations scans your metrics from different sources such as dashboards, integrations, APM, and custom metrics.
 
 ## Search
 
@@ -31,7 +31,7 @@ You can search for metric correlations from any of your dashboards, notebooks, A
 * Left click on any graph and select **Find correlated metrics**.
 * From a full-screen graph, click the **Correlations** tab.
 * Correlations *tries* to automatically detect the area of interest (anomalous behavior) for the metric.
-* If the area of interest is not selected automatically, [edit the search](#edit).
+* If the area of interest is not selected automatically, [edit the area of interest](#edit).
 * Datadog searches for other metrics that exhibited anomalous behavior in a time aligned with the area of interest.
 
 {{< img src="graphing/correlations/dashboard_search1.png" alt="Dashboard search" responsive="true" style="width:80%;">}}
@@ -45,7 +45,7 @@ You can search for metric correlations from any of your dashboards, notebooks, A
 After you identify the correlation to search, you can customize the search you are running on that correlation. Click the **Edit Search** button to update the default search settings.
 
 * Click and drag on the graph to set the timeframe for your correlations search. If an area is already selected (pink box), you can move or resize the selection.
-* Define where the correlations are from (APM services, integrations, dashboards, or custom metrics).
+* Define the sources you want correlations to search from (APM services, integrations, dashboards, or custom metrics).
 * `Auto-select` or `Custom select` from specific categories. For custom metrics, at least one selection is required.
 * Custom metrics is the only category not selected by default. Choose metric namespaces or single metrics to search.
 
@@ -56,7 +56,7 @@ After you identify the correlation to search, you can customize the search you a
 A list of search results is displayed below the search graph with the following:
 
 * **Type**: A graphic representing the source type (APM service, integration, dashboard, or custom metric)
-* **Source**: The name of the source for the correlated metrics
+* **Source**: The name of the source, error trace sample, or tags for the correlated metrics
 * **Correlations**: The number of correlated metrics found
 * **Preview**: A preview graph of the correlated metrics
 
