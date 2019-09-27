@@ -8,7 +8,7 @@ external_redirect: '/api/#generer-desID-externes'
 
 Générer un nouvel ID externe AWS pour une paire compte AWS/nom de rôle donnée.
 
-##### Arguments
+**ARGUMENTS**:
 
 
 * **`account_id`** [*obligatoire*] :

@@ -10,7 +10,7 @@ Créer une intégration Datadog/Amazon Web Services.
 
 **Remarque** : la méthode `POST` permet de mettre à jour la configuration de votre intégration en **ajoutant** votre nouvelle configuration à celle déjà existante dans votre organisation Datadog.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`account_id`** [*obligatoire*] :
 

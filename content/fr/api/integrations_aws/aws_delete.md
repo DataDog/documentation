@@ -8,7 +8,7 @@ external_redirect: '/api/#supprimer-une-integration-aws'
 
 Supprimer une intégration Datadog/AWS donnée.
 
-##### Arguments
+**ARGUMENTS**:
 
 * **`account_id`** [*obligatoire*] :
 

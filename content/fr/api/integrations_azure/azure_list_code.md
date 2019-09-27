@@ -5,11 +5,14 @@ order: 16.1
 external_redirect: "/api/#enumerer-toutes-les-integrations-azure"
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/integration/azure`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="azure_list" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.azure_list" >}}

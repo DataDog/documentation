@@ -36,7 +36,6 @@ L'objet `Index` décrit la configuration d'un index de log. Voici ses attributs�
   * **`filter.sample_rate`** :
     pourcentage de logs exclus par le filtre d'exclusion, lorsque celui-ci est actif. L'échantillonnage est uniforme.
 
-
 **Remarque** : vous avez besoin d'une clé d'API et d'application ainsi que de droits administrateur pour interagir avec cet endpoint.
 
 [1]: https://docs.datadoghq.com/fr/logs/explorer/search/#search-syntax

@@ -5,12 +5,14 @@ order: 24.1
 external_redirect: "/api/#obtenir-la-sequence-des-pipelines"
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `GET /v1/logs/config/pipeline-order`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="get_pipelines_order" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.get_pipeline_order" >}}

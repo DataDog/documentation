@@ -14,7 +14,7 @@ Un test Browser est traité comme un test d'API GET. Cette méthode vous permet 
 
 Vous devez envoyer un objet complet afin de mettre à jour la requête. Seuls ces paramètres sont modifiables : `name`, `tags`, `config` (tous les paramètres définis dans `assertions` et dans `request`), `message`, `options`, `locations` et `status`.
 
-##### Arguments
+**ARGUMENTS**:
 
 *   **`assertions`** (_obligatoire_) : ce paramètre permet de définir exactement ce qui doit se produire pour qu'un test soit considéré comme réussi. Chaque assertion dispose des éléments suivants : `type`, `operator`, `target` et éventuellement une `property`.
     *   **`type`** (_test d'API obligatoire_) : la partie de la réponse que vous souhaitez évaluer. Les types possibles sont `header`, `body`, `responseTime` et `statusCode`. Lorsque vous définissez un en-tête, vous devez indiquer la clé du paramètre d'en-tête dans le paramètre `property` et la valeur du paramètre d'en-tête avec le paramètre `target`. Pour tous les autres types, utilisez `target` pour spécifier le corps, le délai de réponse et les messages d'erreur. Par exemple, `"type":"statusCode"` peut avoir `"target":403`.

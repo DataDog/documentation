@@ -8,7 +8,7 @@ external_redirect: '/api/#ajouter-un-webhook-a-une-integration-webhooks'
 
 Ajoutez un Webhook spécifique à une intégration Datadog/Webhooks.
 
-##### Arguments
+**ARGUMENTS**:
 
 
 * **`hooks`** [*obligatoire*] :

@@ -6,7 +6,8 @@ external_redirect: '/api/#mettre-a-jour-une-organisation'
 ---
 ## Mettre à jour une organisation
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`name`** [*facultatif*] :
     Le nom de l'organisation.
 * **`settings`** [*facultatif*] :
