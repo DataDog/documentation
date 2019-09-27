@@ -1046,6 +1046,11 @@ main:
     parent: "synthetics"
     weight: 6
 
+  - name: "Troubleshooting"
+    url: "synthetics/troubleshooting/"
+    parent: "synthetics"
+    weight: 6.1
+
 ####################################
 ## Network Performance Monitoring ##
 ####################################
