@@ -17,7 +17,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Correlations are in public beta for all Datadog accounts. No setup is required.
+Correlations is in public beta for all Datadog accounts. No setup is required.
 </div>
 
 ## Overview
