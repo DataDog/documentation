@@ -70,17 +70,17 @@ The Agent's [main configuration file][6] is `datadog.yaml`. For the Docker Agent
 | `DD_HOSTNAME` | Hostname to use for metrics (if autodetection fails)                                                                                                        |
 | `DD_TAGS`     | Host tags separated by spaces. For example: `simple-tag-0 tag-key-1:tag-value-1`                                                                            |
 | `DD_SITE`     | Destination site for your metrics, traces, and logs. Valid options are `datadoghq.com` for the Datadog US site, and `datadoghq.eu` for the Datadog EU site. |
-| `DD_DD_URL`   | Optional setting to override the url for metric submission. |
+| `DD_DD_URL`   | Optional setting to override the URL for metric submission. |
 | `DD_CHECK_RUNNERS` | The Agent runs all checks concurrently by default (default value = `4` runners). To run the checks sequentially, set the value to `1`. If you need to run a high number of checks (or slow checks) the `collector-queue` component might fall behind and fail the healthcheck. You can increase the number of runners to run checks in parallel. |
 
 ##### Proxy Settings 
 
-Starting with Agent v6.4.0 (and v6.5.0 for the trace Agent), the Agent proxy settings can be overridden with the following environment variables:
+Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override the Agent proxy settings with the following environment variables:
 
 | Env Variable | Description |
 |---------------------|-------------------------------------------------------------------|
-| `DD_PROXY_HTTP` | A http URL to use as a proxy for `http` requests. |
-| `DD_PROXY_HTTPS` | A https URL to use as a proxy for `https` requests. |
+| `DD_PROXY_HTTP` | An HTTP URL to use as a proxy for `http` requests. |
+| `DD_PROXY_HTTPS` | An HTTPS URL to use as a proxy for `https` requests. |
 | `DD_PROXY_NO_PROXY` | A space-separated list of URLs for which no proxy should be used. |
 
 For more information about proxy settings, see the [Agent v6 Proxy documentation][7].
@@ -91,9 +91,9 @@ Optional collection Agents are disabled by default for security or performance r
 
 | Env Variable               | Description                                                                                                                                                |
 |----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_APM_ENABLED`           | Enable [trace collection][8] with the trace Agent.                                                                                                        |
-| `DD_LOGS_ENABLED`          | Enable [log collection][9] with the logs Agent.                                                                                                            |
-| `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][10] with the process Agent. The [live container view][11] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][10] and the [live container view][11] are disabled.|
+| `DD_APM_ENABLED`           | Enable [trace collection][8] with the Trace Agent.                                                                                                        |
+| `DD_LOGS_ENABLED`          | Enable [log collection][9] with the Logs Agent.                                                                                                            |
+| `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][10] with the Process Agent. The [live container view][11] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][10] and the [live container view][11] are disabled.|
 
 ##### DogStatsD (custom metrics)
 
@@ -106,7 +106,7 @@ Send custom metrics with [the StatsD protocol][12]:
 | `DD_HISTOGRAM_AGGREGATES`        | The histogram aggregates to compute (separated by spaces). The default is "max median avg count". |
 | `DD_DOGSTATSD_SOCKET`            | Path to the unix socket to listen to. Must be in a `rw` mounted volume.                           |
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Enable container detection and tagging for unix socket metrics.                                   |
-| `DD_DOGSTATSD_TAGS`  | Additional tags to append to all metrics, events and service checks received by this dogstatsd server, for example: `["env:golden", "group:retrievers"]`. |
+| `DD_DOGSTATSD_TAGS`  | Additional tags to append to all metrics, events, and service checks received by this DogStatsD server, for example: `["env:golden", "group:retrievers"]`. |
 
 Learn more about [DogStatsD over Unix Domain Sockets][13].
 
