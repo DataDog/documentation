@@ -32,8 +32,7 @@ const directoryExclusions = [
 
 // html files to include
 const includeUrls = [
-  'api/index.html',
-  'api/authentication/index.html'
+  'api/index.html'
 ];
 
 // some results will contain errors from third parties, or should be excluded from pa11y output.
