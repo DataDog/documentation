@@ -9,6 +9,6 @@ external_redirect: /api/#recuperer-une-liste-de-dashboards
 
 Récupérez la définition d'une liste de dashboards existant.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.

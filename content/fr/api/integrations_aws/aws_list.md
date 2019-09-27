@@ -9,6 +9,6 @@ external_redirect: "/api/#enumerer-toutes-les-integrations-aws"
 
 Énumérer toutes les intégrations Datadog/AWS disponibles au sein de votre organisation Datadog.
 
-##### Arguments
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.

@@ -5,14 +5,14 @@ order: 21.09
 external_redirect: "/api/#edit-an-application-key"
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `PUT /v1/application_key/<CLÉ_APPLICATION>`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE**:
 
 {{< code-snippets basename="edit_app_key" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE**:
 
 {{< code-snippets basename="result.edit_app_key" >}}

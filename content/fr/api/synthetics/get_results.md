@@ -9,6 +9,6 @@ external_redirect: "/api/#obtenir-des-resultats"
 
 Utilisez cette méthode pour obtenir les résultats les plus récents pour un test en particulier.
 
-##### Arguments
+**ARGUMENTS**:
 
 *Cet endpoint ne prend aucun argument JSON*.

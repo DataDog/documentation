@@ -5,9 +5,14 @@ order: 8.2
 external_redirect: "/api/#mettre-a-jour-un-dashboard"
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `PUT /v1/dashboard/<ID_DASHBOARD>`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-dashboard-update" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-dashboard-update" >}}

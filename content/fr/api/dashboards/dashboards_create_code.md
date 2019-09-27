@@ -5,9 +5,14 @@ order: 8.1
 external_redirect: "/api/#creer-un-dashboard"
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/dashboard`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-dashboard-create" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-dashboard-create" >}}

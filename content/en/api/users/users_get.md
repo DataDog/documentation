@@ -14,7 +14,7 @@ Get a user in the organization specified by the user's handle.
 * **`id`** [*required*]:
     The handle of the user.
 
-##### RESPONSE
+**RESPONSE**:
 
 - `user`: A user object.
 

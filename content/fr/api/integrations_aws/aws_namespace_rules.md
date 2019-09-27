@@ -9,6 +9,6 @@ external_redirect: "/api/#enumerer-les-regles-d-espace-de-nommage"
 
 Énumérer toutes les règles d'espace de nommage pour une intégration Datadog/AWS donnée.
 
-##### Arguments
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.

@@ -5,12 +5,14 @@ order: 16.2
 external_redirect: "/api/#creer-une-integration-azure"
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `POST /v1/integration/azure`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="azure_create" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.azure_create" >}}

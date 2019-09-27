@@ -9,7 +9,7 @@ external_redirect: "/api/#ajout-de-nouveaux-services-et-calendriers"
 
 Ajoutez de nouveaux services et calendriers à votre intégration Datadog/PagerDuty.
 
-##### Arguments
+**ARGUMENTS**:
 
 * **`services`** :
     Le tableau des objets de service PagerDuty. Découvrez  comment configurer votre service Datadog avec la [documentation de PagerDuty][1]. Un objet de service PagerDuty est composé de :
