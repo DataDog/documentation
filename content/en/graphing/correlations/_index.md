@@ -22,7 +22,7 @@ Correlations is in public beta for all Datadog accounts. No setup is required.
 
 ## Overview
 
-Correlations search for other metrics that exhibit irregular behavior around a selected metric. Correlations scans your metrics from different sources such as dashboards, integrations, APM, and custom metrics.
+Metric Correlations can help you to find potential root causes for an observed issue, by searching for other metrics that exhibited irregular behavior around the same time. Correlations scans your metrics from different sources such as dashboards, integrations, APM, and custom metrics.
 
 ## Search
 
@@ -30,8 +30,8 @@ You can search for metric correlations from any of your dashboards, notebooks, A
 
 * Left click on any graph and select **Find correlated metrics**.
 * From a full-screen graph, click the **Correlations** tab.
-* Correlations *tries* to automatically detect the area of interest (anomalous behavior) for the metric.
-* If the area of interest is not selected automatically, [edit the area of interest](#edit).
+* Correlations *tries* to automatically detect the area of interest (anomalous behavior) for your metric.
+* If the area of interest is not selected automatically or needs adjustment, you can manually draw the area of interest from the [edit search](#edit) option.
 * Datadog searches for other metrics that exhibited anomalous behavior in a time aligned with the area of interest.
 
 {{< img src="graphing/correlations/dashboard_search1.png" alt="Dashboard search" responsive="true" style="width:80%;">}}
@@ -42,7 +42,7 @@ You can search for metric correlations from any of your dashboards, notebooks, A
 
 ### Edit
 
-After you identify the correlation to search, you can customize the search you are running on that correlation. Click the **Edit Search** button to update the default search settings.
+You can customize the default search parameters by clicking the **Edit Search** button.
 
 * Click and drag on the graph to set the timeframe for your correlations search. If an area is already selected (pink box), you can move or resize the selection.
 * Define the sources you want correlations to search from (APM services, integrations, dashboards, or custom metrics).
