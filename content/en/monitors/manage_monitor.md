@@ -79,7 +79,7 @@ Export your monitor’s configuration in JSON format in order to use it to manag
 1. Navigate to an existing monitor’s [Monitor Status page][5] and select **Export** from its [Settings menu][6] in the top right corner of the page.
 2. Click the Export Monitor button at the bottom of the screen when [creating a new monitor][7].
 
-### Importing Monitors
+### Importing
 
 Import a monitor JSON configuration from one Datadog accounts to another from within the Datadog UI by following these instructions:
 
