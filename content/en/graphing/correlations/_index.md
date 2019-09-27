@@ -56,7 +56,7 @@ After you identify the correlation to search, you can customize the search you a
 A list of search results is displayed below the search graph with the following:
 
 * **Type**: A graphic representing the source type (APM service, integration, dashboard, or custom metric)
-* **Source**: The name of the source, error trace sample, or tags for the correlated metrics
+* **Source**: The name of the source for the correlated metrics
 * **Correlations**: The number of correlated metrics found
 * **Preview**: A preview graph of the correlated metrics
 
