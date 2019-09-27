@@ -77,11 +77,11 @@ There are a few caveats regarding quoted fields:
 Export your monitor’s configuration in JSON format in order to use it to manage and deploy monitors programmatically. You can export a monitor’s JSON configuration in one of two ways using the Datadog UI:
 
 1. Navigate to an existing monitor’s [Monitor Status page][5] and select **Export** from its [Settings menu][6] in the top right corner of the page.
-2. Click the Export Monitor button at the bottom of the screen when [creating a new monitor][7].
+2. Click the **Export Monitor** button at the bottom of the screen when [creating a new monitor][7].
 
 ### Importing
 
-Import a monitor JSON configuration from one Datadog accounts to another from within the Datadog UI by following these instructions:
+Import a monitor JSON configuration from one Datadog account to another from within the Datadog UI by following these instructions:
 
 1. Navigate to your desired monitor’s [Monitor Status page][5].
 2. Select the **Export** option from the [Settings][6] menu in the top right corner of the page..
@@ -103,7 +103,7 @@ To edit an individual monitor, hover over it and use the buttons to the far righ
 
 ### Manage Triggered Monitors with group-level granularity
 
-You can mute or [resolve][2] triggered monitors in bulk using the [Triggered Monitors page][9]. It's similar to the [Manage Monitors page](#managing-monitors)-you can find monitors by their attributes using the same easy tickboxes or query syntax-but there are a few differences. Aside from only showing monitors with a triggered status (Alert, Warn, or No Data), the main difference is that the Triggered Monitors page shows a row for _each group_ (i.e. each reporting source) of each monitor.
+You can mute or [resolve][2] triggered monitors in bulk using the [Triggered Monitors page][9]. It's similar to the [Manage Monitors page](#managing-monitors) - you can find monitors by their attributes using the same easy tickboxes or query syntax-but there are a few differences. Aside from only showing monitors with a triggered status (`Alert`, `Warn`, or `No Data`), the main difference is that the Triggered Monitors page shows a row for _each group_ (i.e. each reporting source) of each monitor.
 
 Say you have a monitor called "high latency" that is grouped by host. If there are 20 hosts reporting and 14 have a triggered status, the Triggered Monitor page shows 14 rows if you search for the monitor by title in the query search bar (e.g. `high latency` or `title:
 "high latency"`). This lets you easily mute or [resolve][2] a monitor for some reporting sources, but not all (though of course you can mute or resolve all, too).
