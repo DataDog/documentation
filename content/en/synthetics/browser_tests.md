@@ -80,7 +80,7 @@ Assertions allow you to check if an element, a content, or some text is availabl
 | Assertion                                               | Description                                                                                                                      |
 | ----                                                    | ----                                                                                                                             |
 | `Assert that an element is present on the page`         | Asserts that an element (such as a specific `span`, `div`, `h`, `a`, etc.) is present on the current page.                       |
-| `Check an element's content`                            | Makes sure that a specific element is located or not on the current page.                                                        |
+| `Check an element's content`                            | Select any element and check if it contains a specific value. For instance, you could select a `div` and check whether it contains the word "hello".                                                        |
 | `Assert that some text is present anywhere on the page` | Asserts that some specific text is present on the current page.                                                                  |
 | `Assert that some text is nowhere on the page`          | Asserts that some specific text is **NOT** present on the current page.                                                          |
 | `Check main page URL's content`                         | This takes the URL of the last page that was interacted with, then asserts whether a specific value (`string`, `number`, `regex`) is present within it. |
