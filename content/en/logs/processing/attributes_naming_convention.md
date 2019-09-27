@@ -41,7 +41,7 @@ Administrators have the right to re-copy an existing set of (non-standard) attri
 
 It's likely that standard attributes coexist in your organisation along with their non-standard version. Typically when arranging a transition period. And to help your users cherry-pick the standard attribute in this context, they are identified as such in the explorer (e.g. in the facet list, or in measure or group selectors in Analytics). 
 
-{{< img src="logs/processing/attribute_naming_convention/standard_attributes_explorer.png" alt="Standard Attributes" responsive="true" style="width:60%;">}}
+{{< img src="logs/processing/attribute_naming_convention/standard_attribute_explorer.png" alt="Standard Attributes" responsive="true" style="width:60%;">}}
 
 As an administrator or prescriptor of the naming convention in your organisation, you can take this opportunity to educate them with standard attributes, and nudge them to align. 
 
