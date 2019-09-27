@@ -19,6 +19,7 @@ const pa11yConfig = {
 // some html files in dist have weird characters, pa11y fails to read them, must exclude.
 // remove directories with many html files that share the same layout and add only single files from each to speed up pa11y process
 const directoryExclusions = [
+  'api',
   'fr',
   'en',
   'ja',
@@ -30,7 +31,9 @@ const directoryExclusions = [
 ];
 
 // html files to include
-const includeUrls = [];
+const includeUrls = [
+  'api/index.html'
+];
 
 // some results will contain errors from third parties, or should be excluded from pa11y output.
 // If you find an error from a 3rd party, exclude it by adding the string in this array from the issue.context result
