@@ -32,16 +32,18 @@ Standard Attributes have been designed to help your organization to define its o
 Log Integrations are natively relying on the [default provided set](#default-standard-attribute-list) but your organization can decide to extend or modify this list.
 The standard attribute table is available in Log Configuration pages, along with pipelines and other logs intake capabilities (metrics generation, archives, exclusion filters, etc.).
 
-{{< img src="logs/processing/attribute_naming_convention/standard_attributes.png" alt="Standard Attributes" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/attribute_naming_convention/standard_attributes_config.png" alt="Standard Attributes" responsive="true" style="width:60%;">}}
 
 How these Standard Attributes will be suggested or enforced?
 Administrators have the right to re-copy an existing set of (non-standard) attributes into a standard one so to enforce non compliant logs sources to become compliant without loosing any previous information.
 
 ### Standard attributes in Log Explorer
 
-It's likely that standard attribute coexist in your organisation with non-standard attributes, at least for a migration pedio in your organisatin 
+It's likely that standard attributes coexist in your organisation along with their non-standard version. Typically when arranging a transition period. And to help your users cherry-pick the standard attribute in this context, they are identified as such in the explorer (e.g. in the facet list, or in measure or group selectors in Analytics). 
 
-As an administrator or prescriptor of naming convention in your organisation, you can take this opportunity to educate and nudge your teammates with standard attributes.  
+{{< img src="logs/processing/attribute_naming_convention/standard_attributes_explorer.png" alt="Standard Attributes" responsive="true" style="width:60%;">}}
+
+As an administrator or prescriptor of the naming convention in your organisation, you can take this opportunity to educate them with standard attributes, and nudge them to align. 
 
 ## Standard Attribute list
 
