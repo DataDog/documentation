@@ -27,14 +27,21 @@ In this context, the number of created or provided attributes can lead to confus
 
 Standard Attributes have been designed to help your organization to define its own Naming Convention and to enforce it as much as possible across users and functional teams. The goal is to define a subset of attributes that would be the recipient of shared semantics that everyone agrees to use by convention.
 
-Log Integrations are natively relying on the [default provided set](#default-standard-attribute-list) but your organization can decide to extend or modify this list.
-The standard attribute table is available in Log Configuration pages, along with pipelines, indexes, and archives.
+### Setup standard attributes
 
+Log Integrations are natively relying on the [default provided set](#default-standard-attribute-list) but your organization can decide to extend or modify this list.
+The standard attribute table is available in Log Configuration pages, along with pipelines and other logs intake capabilities (metrics generation, archives, exclusion filters, etc.).
 
 {{< img src="logs/processing/attribute_naming_convention/standard_attributes.png" alt="Standard Attributes" responsive="true" style="width:80%;">}}
 
 How these Standard Attributes will be suggested or enforced?
 Administrators have the right to re-copy an existing set of (non-standard) attributes into a standard one so to enforce non compliant logs sources to become compliant without loosing any previous information.
+
+### Standard attributes in Log Explorer
+
+It's likely that standard attribute coexist in your organisation with non-standard attributes, at least for a migration pedio in your organisatin 
+
+As an administrator or prescriptor of naming convention in your organisation, you can take this opportunity to educate and nudge your teammates with standard attributes.  
 
 ## Standard Attribute list
 
