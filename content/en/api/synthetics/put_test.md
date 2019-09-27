@@ -15,7 +15,7 @@ A browser test is treated like a GET API test. This method gives you the ability
 
 In order to update a request, you have to submit a full object, but only these parameters are editable: `name`, `tags`, `config` (anything defined in the `assertions` and anything defined in the `request`), `message`, `options`, `locations`, and `status`.
 
-##### Arguments
+**ARGUMENTS**:
 
 *   **`assertions`** - _required_ - This is where you are defining exactly what should happen for a test to be considered passed. Each assertion has a: `type`, `operator`, `target`, and possibly a `property`.
     *   **`type`** - _required API test_ - The part of the response that you want to assess. Possible types are `header`, `body`, `responseTime`, and `statusCode`. When you define a header, you must specify the header parameter key in the `property` parameter, and the header parameter value with the `target` parameter. For all other types, use the `target` to specify the body, the response time, and the error messages. For example, a `"type":"statusCode"` might have a `"target":403`.

@@ -9,6 +9,6 @@ external_redirect: /api/#list-all-azure-integrations
 
 List all Datadog-Azure integrations configured for your organization.
 
-##### Arguments
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

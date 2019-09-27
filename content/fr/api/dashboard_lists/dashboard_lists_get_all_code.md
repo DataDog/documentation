@@ -5,14 +5,14 @@ order: 9.2
 external_redirect: /api/#recuperer-toutes-les-listes-de-dashboards
 ---
 
-##### Signature
+**SIGNATURE**:
 
-`GET https://api.datadoghq.com/api/v1/dashboard/lists/manual`
+`GET /v1/dashboard/lists/manual`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE**:
 
 {{< code-snippets basename="api-dashboard-list-get-all" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE**:
 
 {{< code-snippets basename="result.api-dashboard-list-get-all" >}}

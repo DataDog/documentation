@@ -5,9 +5,14 @@ order: 33.3
 external_redirect: /api/#get-hourly-usage-for-custom-metrics
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/usage/timeseries`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-billing-usage-timeseries" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-billing-usage-timeseries" >}}

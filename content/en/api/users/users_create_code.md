@@ -5,9 +5,14 @@ order: 34.1
 external_redirect: /api/#create-user
 ---
 
-##### Signature
-`POST /v1/users`
-##### Example Request
+**SIGNATURE**:
+
+`POST /v1/user`
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-user-create" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-user-create" >}}

@@ -17,12 +17,17 @@ Application keys, in conjunction with your org's API key, give you full access t
 
 ## Client tokens
 
-Client tokens are unique to your organization. A client token is required by the [web browser log collector][1] to submit logs to Datadog.
-These tokens can only be used to send web browser logs to Datadog.
+To manage your client tokens, go to your [Datadog API configuration page][1] in the `Client Tokens` section as shown here:
+
+{{< img src="account_management/api_app_keys/client_tokens.png" style="width:80%;" alt="Client tokens" responsive="true" >}}
+
+Client tokens are unique to your organization. A client token is required by the [web browser log collector][2] to submit logs to Datadog, and is required by the [Real User Monitoring][3] to submit events and logs to Datadog.
+
+For security reasons, API keys cannot be used to send data from a browser, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a client token must be used.
 
 ## Add a key
 
-To add a Datadog API key, application key, or client token, navigate to [Integration -> APIs][2], enter a name for your key or token, and click **Create API key** or **Create Application Key** or **Create Client Token**.
+To add a Datadog API key, application key, or client token, navigate to [Integration -> APIs][4], enter a name for your key or token, and click **Create API key** or **Create Application Key** or **Create Client Token**.
 
 **Note**:
 
@@ -32,7 +37,7 @@ To add a Datadog API key, application key, or client token, navigate to [Integra
 
 ## Remove
 
-To remove a Datadog API key or application key or client token, navigate to [Integration -> APIs][2] and select the **Revoke** button next to the key or token you want to remove:
+To remove a Datadog API key or application key or client token, navigate to [Integration -> APIs][4] and select the **Revoke** button next to the key or token you want to remove:
 
 {{< img src="account_management/api_app_keys/application_keys.png" alt="Application Keys" responsive="true" >}}
 
@@ -46,8 +51,9 @@ Alternatively, organizations have asked whether they can create a “service acc
 
 ## Troubleshooting
 
-Need help? Contact [Datadog support][3].
+Need help? Contact [Datadog support][1].
 
-[1]: https://docs.datadoghq.com/logs/log_collection/javascript
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: /help
+[1]: /help
+[2]: https://docs.datadoghq.com/logs/log_collection/javascript
+[3]: /real_user_monitoring
+[4]: https://app.datadoghq.com/account/settings#api

@@ -195,13 +195,13 @@ For the status of Agent v3.9.1 to v5.1, navigate to `http://localhost:17125/stat
 The info command is available for Powershell:
 
 ```
-& "C:\Program Files\Datadog\Datadog Agent\embedded2\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
+& "C:\Program Files\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
 or cmd.exe:
 
 ```
-"C:\Program Files\Datadog\Datadog Agent\embedded2\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
+"C:\Program Files\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
 **Note**: For Agent versions <= 6.11 the path should be `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe` instead.

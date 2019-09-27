@@ -7,7 +7,7 @@ external_redirect: /api/#planifier-le-downtime-d-un-monitor
 
 ## Planifier le downtime d'un monitor
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`scope`** [*obligatoire*] :
     Le contexte auquel s'applique le downtime, p. ex. `host:app2`. Vous pouvez fournir plusieurs contextes sous la forme d'une liste séparée par des virgules, p. ex. `env:dev,env:prod`. Le downtime obtenu s'applique aux sources qui correspondent à TOUS les contextes fournis (à savoir, `env:dev` **ET** `env:prod`), et PAS seulement à certains d'entre eux.
@@ -30,4 +30,3 @@ external_redirect: /api/#planifier-le-downtime-d-un-monitor
     *   **`week_days`** (facultatif) : la liste des jours de la semaine pour laquelle la répétition est activée. Valeurs autorisées : `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat` or `Sun`. Seulement applicable lorsque la variable `type` a pour valeur `weeks`. **La première lettre doit être en majuscule.**
     *   **`until_occurrences`** (facultatif) ; nombre de récurrences du downtime. **`until_occurences` et `until_date`** sont mutuellement exclusifs.
     *   **`until_date`** (facultatif) : timestamp POSIX correspondant à la date à laquelle la récurrence doit se terminer. **`until_occurences` et` until_date`** sont mutuellement exclusifs.
-

@@ -15,7 +15,7 @@ Si vous vous sentez prêt à découvrir des concepts plus avancés sur la collec
 
 #### Bibliothèques
 
-Vous souhaitez en savoir plus sur les ressources Datadog pour votre langue ou votre plateforme préférée ? La [section Bibliothèques][5] énumère les bibliothèques de client pour l'API et DogStatsD officielles et entretenues par la communauté, les bibliothèques pour l'APM (tracing) et les intégrations de la communauté soutenues par des ressources extérieures pour une grande variété de plateformes.
+Vous souhaitez en savoir plus sur les ressources Datadog pour votre langue ou votre plateforme préférée ? La [section Bibliothèques][5] énumère les bibliothèques de client pour l'API et DogStatsD officielles et entretenues par la communauté, les bibliothèques pour l'APM et le tracing distribué et les intégrations de la communauté soutenues par des ressources extérieures pour une grande variété de plateformes.
 
 #### Métriques
 

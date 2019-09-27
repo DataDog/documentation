@@ -17,20 +17,24 @@ further_reading:
     text: En savoir plus sur DogStatsD
   - link: developers/libraries
     tag: Documentation
-    text: Bibliothèques pour l'API et DogStatsD officielles et entretenues par la communauté
+    text: Bibliothèques de client pour l'API et DogStatsD officielles et entretenues par la communauté
 ---
-## Introduction
+## Présentation
 
-Cette section décrit le fonctionnement et l'utilité des métriques. Après avoir lu cette section, vous saurez comment envoyer des [métriques custom][1] et comprendrez plus clairement le fonctionnement de Datadog. Pour obtenir plus d'informations sur DogStatsD (qui permet d'implémenter ces métriques), consultez la [documentation relative à DogStatsD][2].
+Cette page fournit un aperçu sur la soumission de métriques. Pour plus d'informations sur les métriques, reportez-vous aux pages suivantes :
+
+* [Présentation des métriques][1]
+* [Métriques custom][2]
+* [DogStatsD][3]
 
 ### Envoyer des métriques
 
 Il existe plusieurs façons d'envoyer des métriques à Datadog :
 
-1. Directement via l'Agent Datadog. Découvrez comment [rédiger une intégration][3] ou jetez directement un œil au [code source de l'agrégateur][4].
-2. Via le serveur DogStatsD (fourni avec l'Agent Datadog) et une [bibliothèque client][5].
-3. Directement via l’[API HTTP][6] de Datadog.
-4. Via la [bibliothèque de métriques Java Dropwizard][7] avec le backend [metrics-datadog][8]. Nous tenons à remercier les équipes de [Vistar Media][9], [Coursera][10] et [Bazaarvoice][11] pour leurs contributions.
+1. Directement via l'Agent Datadog. Découvrez comment [rédiger une intégration][4] ou jetez directement un œil au [code source de l'agrégateur][5].
+2. Via le serveur DogStatsD (fourni avec l'Agent Datadog) et une [bibliothèque client][6].
+3. Directement via l'[API HTTP][7] de Datadog.
+4. Via la [bibliothèque de métriques Java Dropwizard][8] avec le backend [metrics-datadog][9]. Nous tenons à remercier les équipes de [Vistar Media][10], [Coursera][11] et [Bazaarvoice][12] pour leurs contributions.
 
 <div class="alert alert-warning">
 Les timestamps de métrique ne peuvent pas correspondre à une date plus d'une heure avant l'événement et plus de 10 minutes après celui-ci.
@@ -48,9 +52,11 @@ Il convient de suivre les règles suivantes concernant les noms de métriques :
 
 Les métriques renvoyées par l'Agent respectent un format pseudo hiérarchique séparé par des points (p. ex., `http.nginx.response_time`). La hiérarchie n'est ni appliquée ni interprétée, mais elle peut être utilisée pour déduire des éléments concernant les serveurs. Par exemple, si `hostA` et `hostB` renvoient tous les deux `http.nginx.*`, il doit s'agir de front-ends web.
 
+**Remarque** : Le nom des métriques est sensible à la majuscule dans Datadog.
+
 ## Types de métriques
 
-Dans l'application Datadog, le type des métriques affecte leur interprétation dans les résultats de requêtes et les visualisations graphiques. Ce type est visible et peut être modifié sur la [page de résumé des métriques][12]. Attention, si vous modifiez le type de métrique, toutes les données historiques seront peut-être incompréhensibles.
+Dans l'application Datadog, le type des métriques affecte leur interprétation dans les résultats de requêtes et les visualisations graphiques. Ce type est visible et peut être modifié sur la [page de résumé des métriques][13]. Attention, si vous modifiez le type de métrique, toutes les données historiques seront peut-être incompréhensibles.
 
 Il existe quatre types de métriques dans l'application Web de Datadog (l'une d'entre elles est cependant obsolète) :
 
@@ -67,20 +73,20 @@ Datadog prend en charge l'envoi de métriques à partir de diverses sources. Par
 
 | Source de l'envoi   | Méthode d'envoi (python)           | Type d'envoi   | Type au sein de l'application Datadog |
 | ------------------- | ------------------------------------ | ----------------- | ------------------- |
-| [API][13]            | `api.Metric.send(type="count", ...)` | count             | count               |
-| [API][13]            | `api.Metric.send(type="gauge", ...)` | gauge             | gauge               |
-| [API][13]            | `api.Metric.send(type="rate", ...)`  | rate              | rate                |
-| [DogStatsD][14]      | `dog.gauge(...)`                     | gauge             | gauge               |
-| [DogStatsD][14]      | `dog.histogram(...)`                 | histogram         | gauge, rate         |
-| [DogStatsD][14]      | `dog.increment(...)`                 | counter           | rate                |
-| [DogStatsD][14]      | `dog.set(...)`                       | set               | gauge               |
-| [Check de l'Agent][3]    | `self.count(...)`                    | count             | count               |
-| [Check de l'Agent][3]    | `self.gauge(...)`                    | gauge             | gauge               |
-| [Check de l'Agent][3]    | `self.histogram(...)`                | histogram         | gauge, rate         |
-| [Check de l'Agent][3]    | `self.increment(...)`                | counter <sup>obsolète</sup> | rate    |
-| [Check de l'Agent][3]    | `self.monotonic_count(...)`          | monotonic_count   | count               |
-| [Check de l'Agent][3]    | `self.rate(...)`                     | rate              | gauge               |
-| [Check de l'Agent][3]    | `self.set(...)`                      | set               | gauge               |
+| [API][14]            | `api.Metric.send(type="count", ...)` | count             | count               |
+| [API][14]            | `api.Metric.send(type="gauge", ...)` | gauge             | gauge               |
+| [API][14]            | `api.Metric.send(type="rate", ...)`  | rate              | rate                |
+| [DogStatsD][15]      | `dog.gauge(...)`                     | gauge             | gauge               |
+| [DogStatsD][15]      | `dog.histogram(...)`                 | histogram         | gauge, rate         |
+| [DogStatsD][15]      | `dog.increment(...)`                 | counter           | rate                |
+| [DogStatsD][15]      | `dog.set(...)`                       | set               | gauge               |
+| [Check de l'Agent][4]    | `self.count(...)`                    | count             | count               |
+| [Check de l'Agent][4]    | `self.gauge(...)`                    | gauge             | gauge               |
+| [Check de l'Agent][4]    | `self.histogram(...)`                | histogram         | gauge, rate         |
+| [Check de l'Agent][4]    | `self.increment(...)`                | counter <sup>obsolète</sup> | rate    |
+| [Check de l'Agent][4]    | `self.monotonic_count(...)`          | monotonic_count   | count               |
+| [Check de l'Agent][4]    | `self.rate(...)`                     | rate              | gauge               |
+| [Check de l'Agent][4]    | `self.set(...)`                      | set               | gauge               |
 
 ### Modifier le type d'une métrique
 
@@ -88,9 +94,9 @@ Bien que cette opération ne soit généralement pas requise, vous pouvez modifi
 
 1. Vous disposez d'une métrique `app.requests.served` qui compte les requêtes traitées, mais vous l'avez envoyée par inadvertance via StatsD en tant que `gauge`. Le type de métrique dans Datadog est donc `gauge`.
 
-2. Vous souhaitez envoyer `app.requests.served` en tant que métrique `counter` StatsD pour l'agréger temporellement. Cela vous permettrait de déterminer le _nombre de requêtes traitées lors des dernières 24 heures_, en envoyant `sum:app.requests.served{*}`. Cette requête est cependant illogique pour une métrique de type `gauge`.
+2. Vous souhaitez envoyer `app.requests.served` en tant que métrique `count` StatsD pour l'agréger temporellement. Cela vous permettrait de déterminer le _nombre de requêtes traitées lors des dernières 24 heures_, en envoyant `sum:app.requests.served{*}`. Cette requête est cependant illogique pour une métrique de type `gauge`.
 
-3. Vous souhaitez conserver le nom `app.requests.served`. Ainsi, au lieu d'envoyer un nouveau nom de métrique avec un type `counter` plus approprié, vous pouvez modifier le type de `app.requests.served` en mettant à jour :
+3. Vous souhaitez conserver le nom `app.requests.served`. Ainsi, au lieu d'envoyer un nouveau nom de métrique avec un type `count` plus approprié, vous pouvez modifier le type de `app.requests.served` en mettant à jour :
   * Votre code d'envoi, en appelant `dogstatsd.increment('app.requests.served', N)` après le traitement de N requêtes.
   * Le type au sein de l'application Datadog, via la page de résumé des métriques, en le définissant sur `rate`.
 
@@ -139,17 +145,18 @@ Les unités sont également affichées en bas des graphiques de timeboard. Vous 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/developers/metrics/custom_metrics
-[2]: /fr/developers/dogstatsd
-[3]: /fr/developers/integrations
-[4]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
-[5]: /fr/developers/libraries
-[6]: /fr/api
-[7]: https://github.com/dropwizard/metrics
-[8]: https://github.com/coursera/metrics-datadog
-[9]: http://www.vistarmedia.com
-[10]: https://www.coursera.org
-[11]: http://www.bazaarvoice.com
-[12]: https://app.datadoghq.com/metric/summary
-[13]: /fr/api/#metrics
-[14]: /fr/developers/dogstatsd
+[1]: /fr/graphing/metrics/introduction
+[2]: /fr/developers/metrics/custom_metrics
+[3]: /fr/developers/dogstatsd
+[4]: /fr/developers/integrations
+[5]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
+[6]: /fr/developers/libraries
+[7]: /fr/api
+[8]: https://github.com/dropwizard/metrics
+[9]: https://github.com/coursera/metrics-datadog
+[10]: http://www.vistarmedia.com
+[11]: https://www.coursera.org
+[12]: http://www.bazaarvoice.com
+[13]: https://app.datadoghq.com/metric/summary
+[14]: /fr/api/#metrics
+[15]: /fr/developers/dogstatsd

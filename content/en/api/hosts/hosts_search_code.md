@@ -5,9 +5,14 @@ order: 14.1
 external_redirect: /api/#search-hosts
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/hosts`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-hosts-search" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-hosts-search" >}}

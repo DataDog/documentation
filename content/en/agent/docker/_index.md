@@ -135,6 +135,8 @@ Additional examples are available on the [Container Discover Management][17] pag
 | `DD_PROCESS_AGENT_CONTAINER_SOURCE` | Overrides container source auto-detection to force a single source. e.g `"docker"`, `"ecs_fargate"`, `"kubelet"` |
 | `DD_HEALTH_PORT`                    | Set this to `5555` to expose the Agent health check at port `5555`.                                              |
 
+**Note**: If you are using the containerd runtime, set `DD_PROCESS_AGENT_CONTAINER_SOURCE="kubelet"` in order to see your containers on the containers page.
+
 ### Validation
 Run the Docker Agent’s [status command](#commands) to verify installation.
 

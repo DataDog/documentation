@@ -9,7 +9,7 @@ external_redirect: /api/#delete-an-azure-integration
 
 Delete a given Datadog-Azure integration.
 
-##### Arguments
+**ARGUMENTS**:
 
 Refer to the [Datadog-Azure integration installation instructions][1] to see how to obtain the following field values for your organization.
 

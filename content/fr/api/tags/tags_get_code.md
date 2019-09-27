@@ -5,9 +5,14 @@ order: 30.1
 external_redirect: /api/#recuperer-des-tags
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/tags/hosts`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-tags-get" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-tags-get" >}}

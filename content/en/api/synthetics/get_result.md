@@ -9,6 +9,6 @@ external_redirect: /api/#get-result
 
 Use this method to get a specific result for a specific test.
 
-##### Arguments
+**ARGUMENTS**:
 
 *This endpoint takes no JSON arguments.*

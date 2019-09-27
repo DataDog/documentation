@@ -9,6 +9,6 @@ external_redirect: /api/#get-a-pagerduty-integration
 
 Get all information about your Datadog-PagerDuty integration.
 
-##### Arguments
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

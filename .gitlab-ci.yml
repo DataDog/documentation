@@ -59,15 +59,6 @@ build_preview:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
-evaluate_missing_metrics_preview:
-  <<: *base_template
-  stage: post-deploy
-  environment: "preview"
-  script:
-    - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
-
 link_checks_preview:
   <<: *base_template
   stage: post-deploy
@@ -151,7 +142,7 @@ index_algolia:
   stage: post-deploy
   environment: "live"
   script:
-    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['config', 'error', 'examples', 'fonts', 'images', 'resources', 'static', 'videos']" -l "['ja']" -c "./local/etc/algolia/docs_datadoghq.json"
+    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['config', 'api', 'error', 'examples', 'fonts', 'images', 'resources', 'static', 'videos']" -l "['ja']" -c "./local/etc/algolia/docs_datadoghq.json"
     - cp ./local/etc/algolia/docs_datadoghq.json /etc/docs_datadoghq.com
     - cat /etc/docs_datadoghq.com
     - index_docsearch_algolia
@@ -207,6 +198,18 @@ test_missing_tms_live:
     - check_missing_tms
   only:
     - master
+
+test_pa11y:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  dependencies:
+    - build_live
+  script:
+    - cp -r /etc/node_modules .
+    - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd_api_key')
+  only:
+    - schedules
 
 #rollback_live:
 #  <<: *base_template

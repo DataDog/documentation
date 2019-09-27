@@ -58,11 +58,14 @@ echo -n <DD_API_KEY> | base64
 # data:
 #   api-key: "<YOUR_BASE64_ENCODED_DATADOG_API_KEY>"
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: datadog-agent
 spec:
+  selector:
+    matchLabels:
+      app: datadog-agent
   template:
     metadata:
       labels:
@@ -211,11 +214,11 @@ To enable [Log collection][10] with your DaemonSet:
             value: "true"
         - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
             value: "true"
-        - name: DD_AC_EXCLUDE 
+        - name: DD_AC_EXCLUDE
             value: "name:datadog-agent"
     (...)
     ```
-    
+
 Setting `DD_AC_EXCLUDE` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs.
 
 2. Mount the Docker socket or logs directories (`/var/log/pods` and `/var/lib/docker/containers` if docker runtime)
@@ -318,11 +321,8 @@ For Agent v6.12+, short lived container logs (stopped or crashed) are automatica
 {{% /tab %}}
 {{% tab "Docker Socket" %}}
 
-For a Docker environment, the Agent receives container updates in real time through Docker events. The Agent extracts and updates the configuration from the container labels (Autodiscovery) every 10 seconds. Therefore, by default, the Agent does not collect data for any container with a shorter life.
-
-You can override the polling interval by setting the `ad_config_poll_interval` parameter, which is equivalent to the `DD_AD_CONFIG_POLL_INTERVAL` environment variable.
-
-For a Kubernetes environment, use the `K8s file` collection method that supports init, stopped, and short lived containers. No additional setup is required.
+For a Docker environment, the Agent receives container updates in real time through Docker events. The Agent extracts and updates the configuration from the container labels (Autodiscovery) every 1 seconds.
+Since Agent v6.14+, the Agent collects logs for all containers (running or stopped) which means that short lived containers logs that have started and stopped in the past second are still collected as long as they are not removed.
 
 {{% /tab %}}
 {{< /tabs >}}

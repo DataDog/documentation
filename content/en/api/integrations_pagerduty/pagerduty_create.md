@@ -11,7 +11,7 @@ Create a new Datadog-PagerDuty integration.
 
 **Note**: All arguments are required when creating (`PUT`) a new PagerDuty configuration.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`services`** :
     The array of PagerDuty service objects. Learn how to configure your Datadog service with the [PagerDuty documentation][1]. A PagerDuty service object is composed by:
