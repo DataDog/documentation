@@ -29,13 +29,12 @@ Standard Attributes have been designed to help your organization to define its o
 
 ### Setup standard attributes
 
-Log Integrations are natively relying on the [default provided set](#default-standard-attribute-list) but your organization can decide to extend or modify this list.
+Log Integrations are natively relying on the [default provided set](#default-standard-attribute-list), but your organization can decide to extend or modify this list.
 The standard attribute table is available in Log Configuration pages, along with pipelines and other logs intake capabilities (metrics generation, archives, exclusion filters, etc.).
 
 {{< img src="logs/processing/attribute_naming_convention/standard_attribute_config.png" alt="Standard Attributes" responsive="true" style="width:60%;">}}
 
-How these Standard Attributes will be suggested or enforced?
-Administrators have the right to re-copy an existing set of (non-standard) attribute into a standard one so to enforce non compliant logs sources to become compliant without loosing any previous information.
+To enforce standard attributes, administrators have the right to re-copy an existing set of non-standard attributes into a set of standard ones. This enables noncompliant logs sources to become compliant without losing any previous information.
 
 ### Standard attributes in Log Explorer
 
