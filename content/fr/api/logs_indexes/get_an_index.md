@@ -13,6 +13,6 @@ Cet endpoint est en bêta public. Si vous souhaitez nous faire part de vos remar
 
 Cet endpoint renvoie un `Index` identifié par son nom.
 
-##### Arguments
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.

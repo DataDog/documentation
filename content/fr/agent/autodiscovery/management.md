@@ -13,7 +13,7 @@ Par défaut, l'Agent Datadog découvre automatiquement tous les conteneurs dispo
 
 **Remarque** : ces paramètres n'ont aucun effet sur les métriques `docker.containers.running`, `.stopped`, `.running.total` et `.stopped.total`, qui prennent toujours en compte l'ensemble des conteneurs. Cela n'a aucune incidence sur le nombre de conteneurs facturés.
 
-Si vous exécutez l'Agent en tant que binaire sur un host, configurez votre périmètre Autodiscovery avec les instructions de l'onglet [Agent](?tab=agent). Si vous exécutez l'Agent en tant que conteneur, configurez votre périmètre Autodiscovery avec les instructions de l'onglet [Agent conteneurisé](?tab=containerizedagent).
+Si vous exécutez l'Agent en tant que binaire sur un host, configurez votre périmètre Autodiscovery avec les instructions de l'onglet [Agent](?tab=agent). Si vous exécutez l'Agent en tant que conteneur, configurez votre périmètre Autodiscovery avec les instructions de l'onglet [Agent conteneurisé](?tab=Agent-conteneurise).
 
 ## Exclure des conteneurs
 

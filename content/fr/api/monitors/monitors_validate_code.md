@@ -5,9 +5,14 @@ order: 26.11
 external_redirect: "/api/#valider-un-monitor"
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/monitor/validate`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-monitor-validate" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-monitor-validate" >}}

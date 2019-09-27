@@ -8,7 +8,8 @@ external_redirect: '/api/#get-hourly-usage-for-fargate'
 
 Obtenez l'utilisation horaire pour [Fargate][1].
 
-##### Arguments
+**ARGUMENTS**:
+
 * **`start_hr`** [*obligatoire*] :
     datetime au format ISO-8601, UTC, à l'heure près : [AAAA-MM-JJThh] pour une utilisation commençant à cette heure
 * **`end_hr`** [*facultatif*, *défaut*=**1d+start_hr**] :

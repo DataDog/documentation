@@ -9,7 +9,8 @@ external_redirect: "/api/#obtenir-l-utilisation-horaire-pour-la-recherche-de-tra
 
 Obtenez l'utilisation horaire pour la recherche de traces.
 
-##### Arguments
+**ARGUMENTS**:
+
 * **`start_hr`** [*obligatoire*] :
     datetime au format ISO-8601, UTC, à l'heure près : [AAAA-MM-JJThh] pour une utilisation commençant à cette heure
 * **`end_hr`** [*facultatif*, *défaut*=**1d+start_hr**] :

@@ -27,7 +27,7 @@ Les monitors d'événements vous permettent de recevoir une alerte lorsqu'un év
 
     **Remarque** : certains fournisseurs accumulent un retard considérable entre l'**envoi** d'un événement et sa réalisation. Lorsque c'est le cas, Datadog antidate l'événement afin d'indiquer la date de sa réalisation. Cela peut entraîner des comportements anormaux pour les monitors. En cas de problème, contactez l'[assistance Datadog][1].
 4. Configurez vos **options de notification** :
-   Reportez-vous à la page de la documentation relative aux [notifications][2] pour obtenir plus d'informations.
+   Reportez-vous à la page de la documentation relative aux [notifications] (#monitor-notifications) pour obtenir plus d'informations.
 
 ## Utiliser des tags d'événement dans la page Event Monitors
 
@@ -41,12 +41,12 @@ Depuis la page Event Monitors, vous pouvez utiliser les tags envoyés par des é
 
 Ajoutez des informations spécifiques à un événement dans les notifications de votre monitor d'événement. Voici les template variables disponibles :
 
-| Template variable        | Définition                                                             |
-|--------------------------|------------------------------------------------------------------------|
-| `{{event.id}}`           | ID de l'événement.                                                     |
-| `{{event.title}}`        | Titre de l'événement.                                                  |
-| `{{event.text}}`         | Texte de l'événement.                                                  |
-| `{{event.host.name}}`    | Hostname à l'origine de l'événement.                                   |
+| Template variable        | Définition                                                               |
+| ------                   | ------                                                                   |
+| `{{event.id}}`           | ID de l'événement.                                                         |
+| `{{event.title}}`        | Titre de l'événement.                                                       |
+| `{{event.text}}`         | Texte de l'événement.                                                        |
+| `{{event.host.name}}`    | Hostname à l'origine de l'événement.                                        |
 | `{{event.tags.tagname}}` | Tags liés à l'événement ; remplacez `tagname` par le nom de votre tag. |
 
 {{< img src="monitors/monitor_types/event/event_notification_template.png" alt="notification_événément_modèle" responsive="true" style="width:60%;">}}
@@ -63,4 +63,3 @@ Lorsque votre alerte se déclenche, tous les événements correspondants qui pos
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/help
-[2]: /monitors/notifications

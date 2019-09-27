@@ -5,9 +5,14 @@ order: 14.4
 external_redirect: /api/#reactiver-un-host
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/host/<HOSTNAME>/unmute`
-##### Exemple de requête
+
+**EXEMPLE DE REQUÊTE**:
+
 {{< code-snippets basename="api-host-unmute" >}}
-##### Exemple de réponse
+
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.api-host-unmute" >}}
