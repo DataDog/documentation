@@ -170,7 +170,7 @@ Manually keep a trace:
 Datadog.tracer.trace(name, options) do |span|
 
   # Always Keep the Trace
-  span.set_tag(Datadog::Ext::ManualTracing::TAG_KEEP)
+  span.set_tag(Datadog::Ext::ManualTracing::TAG_KEEP, true)
   # method impl follows
 end
 ```
