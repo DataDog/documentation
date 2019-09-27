@@ -42,7 +42,7 @@ If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL
 **Notes**:
 
 * For the runtime UI, `dd-trace-java` >= [`0.24.0`][6] is supported.
-* To associate JVM metrics within flame graphs, ensure the `env: tag`, (case-sensitive) is set and matching across your environment.
+* To associate JVM metrics within flame graphs, ensure the `env: tag` (case-sensitive) is set and matching across your environment.
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: /developers/dogstatsd/#setup
