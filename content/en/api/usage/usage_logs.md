@@ -16,7 +16,7 @@ Get Hourly Usage For Logs.
 * **`end_hr`** [*optional*, *default*=**1d+start_hr**]:
     datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour
 
-##### Response
+**RESPONSE**:
 
 * **`ingested_events_bytes`**:
     Contains the number of log bytes ingested.
