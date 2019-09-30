@@ -294,8 +294,6 @@ For more advanced usage and configuration information see [Datadog Python Opentr
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-### Setup
-
 To set up Datadog with OpenTracing, see the Ruby [Quickstart for OpenTracing][1] for details.
 
 **Configuring Datadog tracer settings**
@@ -317,11 +315,11 @@ However, additional instrumentation provided by Datadog can be activated alongsi
 
 **Supported serialization formats**
 
-| Type                           | Supported? | Additional information |
-| ------------------------------ | ---------- | ---------------------- |
-| `OpenTracing::FORMAT_TEXT_MAP` | Yes        |                        |
+| Type                           | Supported? | Additional information                                                                                                                                                                                                                                                                                        |
+|--------------------------------|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `OpenTracing::FORMAT_TEXT_MAP` | Yes        |                                                                                                                                                                                                                                                                                                               |
 | `OpenTracing::FORMAT_RACK`     | Yes        | Because of the loss of resolution in the Rack format, note that baggage items with names containing either upper case characters or `-` are be converted to lower case and `_` in a round-trip, respectively. Datadog recommends avoiding these characters or accommodating accordingly on the receiving end. |
-| `OpenTracing::FORMAT_BINARY`   | No         |                        |
+| `OpenTracing::FORMAT_BINARY`   | No         |                                                                                                                                                                                                                                                                                                               |
 
 
 [1]: /tracing/setup/ruby/#quickstart-for-opentracing
