@@ -1,7 +1,7 @@
 ---
-title: Widget Flux d'événements
+title: Widget Chronologie des événements
 kind: documentation
-description: Affichez des événements filtrés à partir du flux d'événements.
+description: Affichez votre flux d'événements sous forme de chronologie dans un widget.
 further_reading:
   - link: graphing/dashboards/screenboard/
     tag: Documentation
@@ -10,21 +10,18 @@ further_reading:
     tag: Documentation
     text: Créer des dashboards avec JSON
 ---
-Le flux d'événements affiche les événements de la [vue Flux d'événements][1] sous forme de widget.
+La chronologie des événements est une version widget de la chronologie qui apparaît en haut de la [vue Chronologie des événements[1] :
 
-Remarque : **ce widget n'affiche que les 100 événements les plus récents**.
-
-{{< img src="graphing/widgets/event_stream/event_stream.png" alt="flux d'événements" responsive="true">}}
+{{< img src="graphing/widgets/event_timeline/event_timeline.png" alt="Exemple de chronologie des événements" responsive="true" >}}
 
 ## Implémentation
 
-{{< img src="graphing/widgets/event_stream/event_stream_setup.png" alt="configuration du flux d'événements" responsive="true" style="width:80%;">}}
+{{< img src="graphing/widgets/event_timeline/event_timeline_setup.png" alt="Exemple de chronologie des événements" responsive="true" style="width:80%;">}}
 
 ### Configuration
 
 1. Saisissez une [requête de recherche][1] pour filtrer le flux d'événements.
 2. Choisissez si votre widget doit afficher un intervalle personnalisé ou l'intervalle global du screenboard (disponible sur les screenboards uniquement).
-3. Utilisez le paramètre de taille pour choisir de n'afficher que le titre des événements ou d'en afficher l'intégralité.
 
 ### Options
 #### Titre
@@ -38,15 +35,14 @@ Définissez sa taille et son alignement si vous le souhaitez.
 
 ## API
 
-Le [schéma JSON][2] utilisé pour le widget Flux d'événements est le suivant :
+Le [schéma JSON][2] utilisé pour le widget Chronologie des événements est le suivant :
 
 ```
-EVENT_STREAM_SCHEMA = {
+EVENT_TIMELINE_SCHEMA = {
     "type": "object",
     "properties": {
-        "type": {"enum": ["event_stream"]},
+        "type": {"enum": ["event_timeline"]},
         "query": {"type": "string"},
-        "event_size": {"enum": ["s", "l"]},
         "title": {"type": "string"},
         "title_size": {"type": "string"},
         "title_align": {"enum": ["center", "left", "right"]}
@@ -59,13 +55,13 @@ EVENT_STREAM_SCHEMA = {
 
 | Paramètre  | Type            | Obligatoire | Description                                                                                                                                                  |
 | ------     | -----           | -----    | -----                                                                                                                                                        |
-| `type`| chaîne|oui|Type de widget (utilisez `event_stream` pour le widget Flux d'événements)|
-|`query`|chaîne|oui|Requête à l'aide de laquelle le flux d'événements est filtré|
-|`event_size`|chaîne|non|Taille d'affichage des événements (petite ou grande). Valeurs disponibles : `s` ou `l`
+| `type`| chaîne|oui|Type de widget (utilisez `event_timeline` pour le widget Chronologie des événements)|
+|`query`|chaîne|oui|Requête à l'aide de laquelle la chronologie des événements est filtrée|
 |`title`|chaîne|non|Titre du widget|
 |`title_size`|chaîne|non|Taille du titre|
 |`title_align`|chaîne|non|Définit comment aligner le titre. Valeurs disponibles : `center`, `left` ou `right`
 |`time`|objet|non|Définit le paramètre temporel utilisé par le widget. Consultez la [documentation relative au schéma JSON du temps][3] pour apprendre à élaborer le `TIME_SCHEMA`
+
 
 
 ## Pour aller plus loin
