@@ -117,6 +117,9 @@ aliases:
 ## Unix
 * [How can I gather metrics from the UNIX shell?][55]
 
+## Vertica
+* [How to collect metrics from custom Vertica queries][63]
+
 ## VMWare
 * [Can I limit the number of VMs that are pulled in via the VMWare integration?][56]
 
@@ -193,3 +196,4 @@ aliases:
 [60]: /integrations/faq/windows-status-based-check
 [61]: /integrations/faq/how-to-monitor-events-from-the-windows-event-logs
 [62]: /integrations/faq/how-to-retrieve-wmi-metrics
+[63]: /integrations/faq/how-to-collect-metrics-from-custom-vertica-queries
