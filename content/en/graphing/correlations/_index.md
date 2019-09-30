@@ -1,6 +1,7 @@
 ---
 title: Metric Correlations
 kind: documentation
+beta: true
 further_reading:
 - link: "graphing/dashboards"
   tag: "Documentation"
@@ -17,7 +18,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Correlations is in public beta. No setup is required.
+Correlations is in private beta. You may not have access.
 </div>
 
 ## Overview
