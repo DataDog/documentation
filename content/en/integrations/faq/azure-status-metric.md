@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Datadog provides an `azure.*.status` metric for each [Azure integration][1]. For example, Azure Virtual Machines monitored by Datadog should report `azure.vm.status`, which identifies if the machine is currently running.
+Datadog provides an `azure.*.status` metric for each resource monitored with the [Azure integration][1]. For example, Azure Virtual Machines monitored by Datadog should report `azure.vm.status`, which identifies if the machine is currently running.
 
 ## Troubleshooting
 
