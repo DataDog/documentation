@@ -6,12 +6,13 @@ aliases:
     - /guides/service_level_objective/
     - /guides/slos/
     - /guides/slo/
+    - /monitors/monitor_uptime_widget/
 description: Create & manage your Service Level Objectives
 further_reading:
     - link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
       tag: "Blog"
       text: "Track the status of all your SLOs in Datadog"
-    - link: "/api/#servicelevelobjectives"
+    - link: "/api/#service-level-objectives"
       tag: "Documentation"
       text: "Datadog Service Level Objectives API"
 ---
