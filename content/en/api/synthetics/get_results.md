@@ -7,7 +7,7 @@ external_redirect: /api/#get-results
 
 ## Get the most recent results
 
-Use this method to get the most recent results for a specific test.
+Use this method to return up to 50 of the most recent results for a specific test.
 
 **ARGUMENTS**:
 
