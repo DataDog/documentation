@@ -36,7 +36,6 @@ external_redirect: '/api/#logs-indexes'
   * **`filter.sample_rate`** :
     この除外フィルターがアクティブな場合に除外されるログの割合。サンプリングは均一です。
 
-
 **注**: このエンドポイントを使用するには、API キーおよびアプリケーションキーと共に管理者権限が必要です。
 
 [1]: https://docs.datadoghq.com/ja/logs/explorer/search/#search-syntax

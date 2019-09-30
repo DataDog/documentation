@@ -5,14 +5,14 @@ order: 9.6
 external_redirect: /api/#get-items-of-a-dashboard-list
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `GET /v2/dashboard/lists/manual/<LIST_ID>/dashboards`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="api-dashboard-list-get-items" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.api-dashboard-list-get-items" >}}

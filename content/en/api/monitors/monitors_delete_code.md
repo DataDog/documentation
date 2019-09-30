@@ -5,9 +5,14 @@ order: 26.04
 external_redirect: /api/#delete-a-monitor
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `DELETE /v1/monitor/<MONITOR_ID>`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-monitor-delete" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-monitor-delete" >}}

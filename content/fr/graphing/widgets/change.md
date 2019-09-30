@@ -93,7 +93,7 @@ CHANGE_SCHEMA = {
 | Paramètre  | Type            | Obligatoire | Description                                                                                                                                                  |
 | ------     | -----           | -------- | -----                                                                                                                                                        |
 | `type`     | chaîne          | oui      | Type de widget (utilisez `change` pour le widget Évolution)                                                                                                       |
-| `requests` | tableau d'objets | oui      | Tableau d'un objet `request` à afficher dans le widget. Consultez la [documentation relative au schéma JSON des requêtes][2] pour apprendre à générer le `REQUEST_SCHEMA`. |
+| `requests` | tableau d'objets | oui      | Tableau d'un objet `request` à afficher dans le widget. Consultez la [documentation relative au schéma JSON des requêtes][2] pour apprendre à élaborer le `REQUEST_SCHEMA`. |
 | `title`    | chaîne          | non       | Titre de votre widget.                                                                                                                                        |
 
 

@@ -5,9 +5,14 @@ order: 26.13
 external_redirect: /api/#monitors-group-search
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/monitor/groups/search`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-monitor-group-search" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-monitor-group-search" >}}

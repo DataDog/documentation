@@ -1,7 +1,7 @@
 ---
-title: Widget du flux d'événements
+title: Widget Flux d'événements
 kind: documentation
-description: Afficher les événements filtrés à partir du flux d'événements.
+description: Affichez des événements filtrés à partir du flux d'événements.
 further_reading:
   - link: graphing/dashboards/screenboard/
     tag: Documentation
@@ -10,7 +10,7 @@ further_reading:
     tag: Documentation
     text: Créer des dashboards avec JSON
 ---
-Le flux d'événements est une version widget du flux d'événements de la [vue du flux d'événements][1].
+Le flux d'événements affiche les événements de la [vue Flux d'événements][1] sous forme de widget.
 
 Remarque : **ce widget n'affiche que les 100 événements les plus récents**.
 
@@ -23,7 +23,7 @@ Remarque : **ce widget n'affiche que les 100 événements les plus récents**.
 ### Configuration
 
 1. Saisissez une [requête de recherche][1] pour filtrer le flux d'événements.
-2. Choisissez si votre widget affiche un intervalle personnalisé ou l'intervalle global du screenboard (disponible sur les screenboards uniquement).
+2. Choisissez si votre widget doit afficher un intervalle personnalisé ou l'intervalle global du screenboard (disponible sur les screenboards uniquement).
 3. Utilisez le paramètre de taille pour choisir de n'afficher que le titre des événements ou d'en afficher l'intégralité.
 
 ### Options
@@ -33,7 +33,7 @@ Affichez un titre personnalisé pour votre widget en cochant la case `Show a Tit
 
 {{< img src="graphing/widgets/options/title.png" alt="Titre du widget" responsive="true" style="width:80%;">}}
 
-Définissez sa taille et son alignement en option.
+Définissez sa taille et son alignement si vous le souhaitez.
 
 
 ## API
@@ -59,13 +59,13 @@ EVENT_STREAM_SCHEMA = {
 
 | Paramètre  | Type            | Obligatoire | Description                                                                                                                                                  |
 | ------     | -----           | -----    | -----                                                                                                                                                        |
-| `type`| string|oui|Type du widget (utilisez `event_stream` pour le widget du flux d'événements)|
-|`query`|string|oui|Requête à l'aide de laquelle le flux d'événements est filtré|
-|`event_size`|string|non|Taille à utiliser pour afficher un événement (petite ou grande). Les valeurs disponibles sont : `s` ou `l`
-|`title`|string|non|Titre du widget|
-|`title_size`|string|non|Taille du titre|
-|`title_align`|string|non|Définit comment aligner le titre. Valeurs disponibles : `center`, `left` ou `right`
-|`time`|objet|non|Définit le paramètre temporel lié au widget. Consultez la [documentation relative au schéma JSON du temps][3] pour apprendre à élaborer le `TIME_SCHEMA`
+| `type`| chaîne|oui|Type de widget (utilisez `event_stream` pour le widget Flux d'événements)|
+|`query`|chaîne|oui|Requête à l'aide de laquelle le flux d'événements est filtré|
+|`event_size`|chaîne|non|Taille d'affichage des événements (petite ou grande). Valeurs disponibles : `s` ou `l`
+|`title`|chaîne|non|Titre du widget|
+|`title_size`|chaîne|non|Taille du titre|
+|`title_align`|chaîne|non|Définit comment aligner le titre. Valeurs disponibles : `center`, `left` ou `right`
+|`time`|objet|non|Définit le paramètre temporel utilisé par le widget. Consultez la [documentation relative au schéma JSON du temps][3] pour apprendre à élaborer le `TIME_SCHEMA`
 
 
 ## Pour aller plus loin

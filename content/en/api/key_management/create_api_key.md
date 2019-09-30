@@ -9,7 +9,7 @@ external_redirect: /api/#create-an-api-key
 
 Create an API key with a given name.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`name`** [*required*]:
 

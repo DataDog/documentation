@@ -9,7 +9,10 @@ external_redirect: /api/#update-a-pipelines
 
 Update a given pipeline configuration to change it's processors or their order.
 
-##### Arguments
+
+**ARGUMENTS**:
+
+**Note**: Using the `PUT` method updates your pipeline configuration by **replacing** your current configuration with the new one sent to your Datadog organization.
 
 * **`name`** [*required*]:
     Your pipeline name.

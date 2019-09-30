@@ -5,11 +5,14 @@ order: 22.1
 external_redirect: /api/#send-logs-over-http
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `https://http-intake.logs.datadoghq.com/v1/input/<DATADOG_API_KEY>`
 
-##### Example Request
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="send_logs_datadog" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.send_logs_datadog" >}}

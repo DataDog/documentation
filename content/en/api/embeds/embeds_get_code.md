@@ -5,9 +5,14 @@ order: 11.3
 external_redirect: /api/#get-specific-embed
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/graph/embed/<EMBED_ID>`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-embeds-get" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-embeds-get" >}}

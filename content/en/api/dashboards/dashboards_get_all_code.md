@@ -5,9 +5,14 @@ order: 8.5
 external_redirect: /api/#get-all-dashboards
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/dashboard`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-dashboard-get_all" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-dashboard-get_all" >}}

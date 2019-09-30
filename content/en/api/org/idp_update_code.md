@@ -5,9 +5,14 @@ order: 27.4
 external_redirect: /api/#upload-idp-metadata
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/org/<PUBLIC_ID>/idp_metadata`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-idp-upload" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-idp-upload" >}}

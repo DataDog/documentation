@@ -5,14 +5,14 @@ order: 9.9
 external_redirect: /api/#delete-items-from-a-dashboard-list
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `DELETE /v2/dashboard/lists/manual/<LIST_ID>/dashboards`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="api-dashboard-list-delete-items" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.api-dashboard-list-delete-items" >}}

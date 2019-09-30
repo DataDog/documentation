@@ -5,12 +5,14 @@ order: 20.1
 external_redirect: /api/#get-a-webhooks-integration
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `GET /v1/integration/webhooks`
 
-##### Example Request
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="webhooks_get" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.webhooks_get" >}}

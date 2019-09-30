@@ -9,6 +9,7 @@ external_redirect: /api/#rechercher-des-metriques
 Cet endpoint vous permet de rechercher des métriques parmi celles recueillies au cours des dernières 24 heures dans Datadog.
 
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * `q` [*obligatoire*] :
   La chaîne de requête. Doit commencer par `metrics:`.

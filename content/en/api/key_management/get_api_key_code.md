@@ -5,14 +5,14 @@ order: 21.02
 external_redirect: /api/#get-an-api-key
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `GET /v1/api_key/<API_KEY>`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="get_api_key" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.get_api_key" >}}
