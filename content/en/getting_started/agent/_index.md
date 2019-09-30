@@ -71,9 +71,9 @@ The metrics below are available with Agent v6. For Agent v5, see the [Agent Metr
 
 | Metric                           | Description                                                                                                        |
 |----------------------------------|--------------------------------------------------------------------------------------------------------------------|
-| **datadog.agent.python.version** | Shows a value of 1 if the Agent is currently reporting to Datadog. The metric is tagged with the `python_version`. |
-| **datadog.agent.running**        | Shows a value of 1 if the Agent is currently reporting to Datadog.                                                 |
-| **datadog.agent.started**        | A count sent with a value of 1 when the Agent starts (available in v6.12+).                                        |
+| **datadog.agent.python.version** | Shows a value of `1` if the Agent is currently reporting to Datadog. The metric is tagged with the `python_version`. |
+| **datadog.agent.running**        | Shows a value of `1` if the Agent is currently reporting to Datadog.                                                 |
+| **datadog.agent.started**        | A count sent with a value of `1` when the Agent starts (available in v6.12+).                                        |
 
 #### Checks
 
