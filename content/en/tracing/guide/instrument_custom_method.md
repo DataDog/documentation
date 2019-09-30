@@ -24,7 +24,7 @@ In order to provide you deep visibility into your business logic, Datadog APM al
 
 Datadog instruments many frameworks out-of-the-box such as web services, databases and caches and it enables you to instrument your own business logic to have the exact visibility you need. By creating spans for the methods, you can optimize timing and track errors using the APM flamegraph and Datadog monitors.
 
-## Instrument a complete method with decorators
+## Instrumenting your code
 
 **Follow the example to get your code instrumented**.
 
@@ -37,6 +37,10 @@ Note that the `http.request POST /charge/` span is taking a lot of time without 
 
 {{< tabs >}}
 {{% tab "Java" %}}
+  In Java, Datadog APM allows you to instrument your code to generate custom spans either by using method decorators or by instrumenting specific code blocks.
+
+### Instument a method with a decorator
+  This example walks through adding a span to the `BackupLedger.write` method. This method adds new rows to a transaction ledger. This example adds one span to track all posted transactions as a single unit.
 
 ```java
 import datadog.trace.api.Trace
@@ -55,149 +59,8 @@ public class BackupLedger {
 }
 ```
 
-{{% /tab %}}
-{{% tab "Python" %}}
-
-```python
-from ddtrace import tracer
-
-class BackupLedger:
-
-    # Use `tracer.wrap` decorator to trace custom methods
-    @tracer.wrap()
-    def write(self, transactions):
-        for transaction in transactions:
-            self.ledger[transaction.id] = transaction
-
-        # [...]
-```
-
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
-```ruby
-require 'ddtrace'
-
-class BackupLedger
-  def write(transactions)
-    # Use global `Datadog.tracer.trace` to trace blocks of inline code
-    Datadog.tracer.trace('BackupLedger.write') do |span|
-      transactions.each do |transaction|
-        ledger[transaction.id] = transaction
-      end
-
-      # [...]
-    end
-  end
-end
-```
-
-{{% /tab %}}
-{{% tab "Go" %}}
-
-
-```go
-package ledger
-
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-
-// [...]
-
-func (bl *BackupLedger) write(ctx context.Context, transactions []*Transaction) (err error) {
-	span, ctx := tracer.StartSpanFromContext(ctx, "BackupLedger.write")
-	defer func() {
-		// inside the defer, err holds its final value after the parent function
-		// returns; if it's non-nil, the span will be marked with it.
-		span.Finish(tracer.WithError(err))
-	}()
-
-	for _, t := range transactions {
-		if err := bl.persistTransaction(ctx, t); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-```
-
-{{% /tab %}}
-{{% tab "Node.js" %}}
-
-```javascript
-const tracer = require('dd-trace')
-
-function write (transactions) {
-  // Use `tracer.trace` context manager to trace blocks of inline code
-  tracer.trace('BackupLedger.persist', () => {
-    for (const transaction of transactions) {
-      this.ledger[transaction.id] = transaction
-    }
-  }
-
-  // [...]
-})
-```
-
-{{% /tab %}}
-{{% tab ".NET" %}}
-
-```csharp
-using Datadog.Trace;
-
-public void Write(List<Transaction> transactions)
-{
-    // Use global tracer to trace blocks of inline code
-    using (var scope = Tracer.Instance.StartActive("BackupLedger.write"))
-    {
-        foreach (var transaction in transactions)
-        {
-            this.ledger[transaction.Id] = transaction;
-        }
-    }
-
-    // [...]
-}
-```
-
-{{% /tab %}}
-{{% tab "PHP" %}}
-
-```php
-<?php
-  class BackupLedger {
-
-    public function write(array $transactions) {
-      foreach ($transactions as $transaction) {
-        $this->transactions[$transaction->getId()] = $transaction;
-      }
-
-      # [...]
-    }
-  }
-
-  // Use dd_trace() to trace custom methods
-  dd_trace('BackupLedger', 'write', function () {
-    $tracer = \DDTrace\GlobalTracer::get();
-    $scope = $tracer->startActiveSpan('BackupLedger.write');
-    dd_trace_forward_call();
-    $scope->close();
-    return $result;
-  });
-?>
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## Instrument individual components of your methods for better visibility into their performance
-
-**Follow the example to get your code instrumented**.
-
-In this example walks through adding child spans to the `BackupLedger.write` span created above. This method adds a row to the transaction ledger, saves the entire ledger in memory, and then notifies the service that the ledger is saved. This examples adds spans to track each of the three actions.
-
-
-{{< tabs >}}
-{{% tab "Java" %}}
+### Instrument a specific code block
+  This example walks through adding child spans to the `BackupLedger.write` span created above. This method adds a child span for every every transaction in the ledger and adds a [custom tag][1] with the specific transaction ID.
 
 ```java
 import datadog.trace.api.Trace;
@@ -224,9 +87,30 @@ public class BackupLedger {
   }
 }
 ```
-
+[1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "Python" %}}
+  In Python, Datadog APM allows you to instrument your code to generate custom spans either by using method decorators or by instrumenting specific code blocks.
+
+### Instument a method with a decorator
+  This example walks through adding a span to the `BackupLedger.write` method. This method adds new rows to a transaction ledger. This example adds one span to track all posted transactions as a single unit.
+
+```python
+from ddtrace import tracer
+
+class BackupLedger:
+
+    # Use `tracer.wrap` decorator to trace custom methods
+    @tracer.wrap()
+    def write(self, transactions):
+        for transaction in transactions:
+            self.ledger[transaction.id] = transaction
+
+        # [...]
+```
+
+### Instrument a specific code block
+  This example walks through adding child spans to the `BackupLedger.write` span created above. This method adds a child span for every every transaction in the ledger and adds a [custom tag][1] with the specific transaction ID.
 
 ```python
 from ddtrace import tracer
@@ -246,8 +130,12 @@ class BackupLedger:
         # [...]
 ```
 
+[1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "Ruby" %}}
+  In Ruby, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
+
+  This example walk through the process of creating a new span for every transaction posted to the ledger and adding a [custom tag][1] with the specific transaction ID to the span.
 
 ```ruby
 require 'ddtrace'
@@ -270,10 +158,12 @@ class BackupLedger
   end
 end
 ```
-
+[1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "Go" %}}
+  In Go, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
 
+  This example walk through the process of creating a new span for every transaction posted to the ledger and adding a [custom tag][1] with the specific transaction ID to the span.
 
 ```go
 package ledger
@@ -283,38 +173,42 @@ import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 // [...]
 
 func (bl *BackupLedger) write(ctx context.Context, transactions []*Transaction) (err error) {
-	span, ctx := tracer.StartSpanFromContext(ctx, "BackupLedger.write")
-	defer func() {
-		// inside the defer, err holds its final value after the parent function
-		// returns; if it's non-nil, the span will be marked with it.
-		span.Finish(tracer.WithError(err))
-	}()
+  span, ctx := tracer.StartSpanFromContext(ctx, "BackupLedger.write")
+  defer func() {
+    // inside the defer, err holds its final value after the parent function
+    // returns; if it's non-nil, the span will be marked with it.
+    span.Finish(tracer.WithError(err))
+  }()
 
-	for _, t := range transactions {
-		// ctx you pass down includes out-of-the-box Span references to create
-		// a parent/child relationship
-		if err := bl.persistTransaction(ctx, t); err != nil {
-			return err
-		}
-	}
-	return nil
+  for _, t := range transactions {
+    // ctx you pass down includes out-of-the-box Span references to create
+    // a parent/child relationship
+    if err := bl.persistTransaction(ctx, t); err != nil {
+      return err
+    }
+  }
+  return nil
 }
 
 func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Transaction) error {
-	id := transaction.ID
-	span, _ := tracer.StartSpanFromContext(ctx, "BackupLedger.persist", tracer.Tag("transaction_id", id))
-	defer span.Finish()
+  id := transaction.ID
+  span, _ := tracer.StartSpanFromContext(ctx, "BackupLedger.persist", tracer.Tag("transaction_id", id))
+  defer span.Finish()
 
-	if t, ok := bl.transactions[id]; ok {
-		return errors.New("duplicate entry")
-	}
-	bl.transactions[id] = transaction
-	return nil
+  if t, ok := bl.transactions[id]; ok {
+    return errors.New("duplicate entry")
+  }
+  bl.transactions[id] = transaction
+  return nil
 }
 ```
 
+[1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "Node.js" %}}
+  In Node.js, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
+
+  This example walk through the process of creating a new span for every transaction posted to the ledger and adding a [custom tag][1] with the specific transaction ID to the span.
 
 ```javascript
 const tracer = require('dd-trace')
@@ -323,20 +217,21 @@ function write (transactions) {
   // Use `tracer.trace` context manager to trace blocks of inline code
   tracer.trace('BackupLedger.persist', () => {
     for (const transaction of transactions) {
-      tracer.trace('BackupLedger.persist', span => {
-        // Add custom metadata to the "persist_transaction" span
-        span.setTag('transaction.id', transaction.id)
-        this.ledger[transaction.id] = transaction
-      })
+      // Add custom metadata to the "persist_transaction" span
+      span.setTag('transaction.id', transaction.id)
+      this.ledger[transaction.id] = transaction
     }
-  }
+  })
 
   // [...]
-})
+}
 ```
-
+[1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab ".NET" %}}
+  In .NET, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
+
+  This example walk through the process of creating a new span for every transaction posted to the ledger and adding a [custom tag][1] with the specific transaction ID to the span.
 
 ```csharp
 using Datadog.Trace;
@@ -360,9 +255,40 @@ public void Write(List<Transaction> transactions)
     // [...]
 }
 ```
-
+[1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "PHP" %}}
+  In PHP, Datadog APM allows you to instrument your code to generate custom spans either by using method wrappers or by instrumenting specific code blocks.
+
+### Instument a method with a wrapper
+  This example walks through adding a span to the `BackupLedger.write` method. This method adds new rows to a transaction ledger. This example adds one span to track all posted transactions as a single unit by using the `dd_trace()` function.
+
+```php
+<?php
+  class BackupLedger {
+
+    public function write(array $transactions) {
+      foreach ($transactions as $transaction) {
+        $this->transactions[$transaction->getId()] = $transaction;
+      }
+
+      # [...]
+    }
+  }
+
+  // Use dd_trace() to trace custom methods
+  dd_trace('BackupLedger', 'write', function () {
+    $tracer = \DDTrace\GlobalTracer::get();
+    $scope = $tracer->startActiveSpan('BackupLedger.write');
+    dd_trace_forward_call();
+    $scope->close();
+    return $result;
+  });
+?>
+```
+
+### Instrument a specific code block
+  This example walks through adding child spans to the `BackupLedger.write` span created above. This method adds a child span for every every transaction in the ledger and adds a [custom tag][1] with the specific transaction ID.
 
 ```php
 <?php
@@ -395,7 +321,7 @@ public void Write(List<Transaction> transactions)
   });
 ?>
 ```
-
+[1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -409,18 +335,19 @@ Now that you have instrumented your business logic, it's time to see the results
 
     *You should now be able to find the new spans you've added*
 
-    The Span Summary table is a great way to have an at-a-glance view of aggregate information about the spans that make up your traces. Here you can identify spans that repeat an abnormal amount of times indicating some looping or database access inefficiency (like the `n+1` issue).
+    The Span Summary table is a great way to have an at-a-glance view of aggregate information about the spans that make up your traces. Here you can identify spans that repeat an abnormal amount of times indicating some looping or database access inefficiency (like the [`n+1` issue][2]).
 
 2. **Scroll down to the Traces list** and click into one of the traces you see there.
 
     {{< img src="tracing/guide/custom_span/custom_span_4.png" alt="Analytics View" responsive="true" style="width:90%;">}}
 
-You've now successfully added custom spans to your codebase making them available on the Flamegraph and in [Trace Search & Analytics][2]. This is the first step towards taking full advantage of Datadog's tools. You can now [add custom tags to your spans][3] to make them even more powerful.
+You've now successfully added custom spans to your codebase making them available on the Flamegraph and in [Trace Search & Analytics][3]. This is the first step towards taking full advantage of Datadog's tools. You can now [add custom tags to your spans][4] to make them even more powerful.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apm/services
-[2]: https://app.datadoghq.com/apm/search/analytics
-[3]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
+[2]: https://bojanv91.github.io/posts/2018/06/select-n-1-problem
+[3]: https://app.datadoghq.com/apm/search/analytics
+[4]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it

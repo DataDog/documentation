@@ -12,7 +12,7 @@ disable_toc: true
     {{< nextlink href="tracing/guide/apm_dashboard" tag="4 mins">}}3. Create a Dashboard to track and correlate APM metrics.{{< /nextlink >}}
     {{< nextlink href="tracing/guide/slowest_request_daily" tag="3 mins">}}4. Debug the slowest trace on the slowest endpoint of a web service. {{< /nextlink >}}
     {{< nextlink href="tracing/guide/add_span_md_and_graph_it" tag="7 mins" >}}5. Add span tags and slice and dice your application performance.{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/add_span_md_and_graph_it" tag="8 mins" >}}6. Instrument a custom method to get deep visibility into your business logic.{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/instrument_custom_method" tag="8 mins" >}}6. Instrument a custom method to get deep visibility into your business logic.{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 {{< whatsnext desc="Additional Guides:" >}}
