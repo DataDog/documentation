@@ -7,7 +7,7 @@ external_redirect: '/api/#ajouter-des-tags-a-un-host'
 ## Ajouter des tags à un host
 Cet endpoint vous permet d'ajouter de nouveaux tags à un host. Vous pouvez également spécifier d'où proviennent ces tags si vous le souhaitez.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`tags`** [*obligatoire*] :
     La liste des tags à appliquer au host.

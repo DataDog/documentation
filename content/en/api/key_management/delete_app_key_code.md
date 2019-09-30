@@ -5,14 +5,14 @@ order: 21.10
 external_redirect: /api/#delete-an-application-key
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `DELETE /v1/application_key/<APP_KEY>`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="delete_app_key" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
 
 {{< code-snippets basename="result.delete_app_key" >}}

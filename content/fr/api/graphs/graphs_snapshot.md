@@ -8,7 +8,7 @@ external_redirect: '/api/#snapshot-de-graphique'
 
 **Remarque** : lorsqu'un snapshot est créé, [vous devez attendre un certain temps][1] avant de pouvoir y accéder.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`metric_query`** [*obligatoire*] :
     la requête de la métrique.

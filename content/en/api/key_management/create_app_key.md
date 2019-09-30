@@ -9,7 +9,7 @@ external_redirect: /api/#create-an-application-key
 
 Create an application key with a given name.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`name`** [*required*]:
 

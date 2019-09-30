@@ -5,12 +5,14 @@ order: 18.1
 external_redirect: /api/#get-a-pagerduty-integration
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/integration/pagerduty`
 
-##### Example Request
+**EXAMPLE REQUEST**:
 
 {{< code-snippets basename="pagerduty_get" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.pagerduty_get" >}}

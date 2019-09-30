@@ -50,12 +50,12 @@ Manually `resolve`-ing a monitor is appropriate for cases where data is reported
 ### Settings
 Click the settings cog to display the options available:
 
-| Option    | Description                                                                                                                                                                                                                                |
-|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Edit][1] | Edit the current monitor. More information is available in [Monitor Types][1].                                                                                                                                                             |
-| Clone     | Make a copy of the current monitor.                                                                                                                                                                                                        |
-| Export    | Export the JSON configuration for the current monitor. This option is also available when [creating your monitor][1]. If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON. |
-| Delete    | Delete the current monitor. You will be prompted to confirm the deletion.                                                                                                                                                                      |
+| Option | Description                                                                                                                                                                                                                                |
+|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Edit   | Edit the current monitor. More information is available in [Monitor Types][1].                                                                                                                                                             |
+| Clone  | Make a copy of the current monitor.                                                                                                                                                                                                        |
+| Export | Export the JSON configuration for the current monitor. This option is also available when [creating your monitor][1]. If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON. |
+| Delete | Delete the current monitor. You will be prompted to confirm the deletion.                                                                                                                                                                  |
 
 ## Properties
 

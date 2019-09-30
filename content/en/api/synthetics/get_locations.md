@@ -9,6 +9,6 @@ external_redirect: /api/#get-locations
 
 Get a list of available locations
 
-##### Arguments
+**ARGUMENTS**:
 
 *This endpoint takes no JSON arguments.*

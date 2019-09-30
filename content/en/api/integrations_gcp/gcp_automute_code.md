@@ -5,11 +5,14 @@ order: 17.4
 external_redirect: /api/#set-gcp-integration-automute
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `PUT /v1/integration/gcp`
 
-##### Example Request
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="gcp_automute" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.gcp_automute" >}}

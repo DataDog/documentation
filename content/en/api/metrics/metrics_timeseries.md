@@ -8,7 +8,7 @@ external_redirect: /api/#post-time-series-points
 ## Post timeseries points
 The metrics end-point allows you to post time-series data that can be graphed on Datadog's dashboards. The limit for compressed payloads is 3.2 megabytes (3200000), and 62 megabytes (62914560) for decompressed payloads.
 
-##### Overhead
+**Overhead**:
 
 If you're submitting metrics directly to the Datadog API *without* using [DogStatsD][1], expect:
 
@@ -19,7 +19,7 @@ If you're submitting metrics directly to the Datadog API *without* using [DogSta
 
 The full payload is approximately \~ 100 bytes. However, with the DogStatsD API, compression is applied, which reduces the payload size.
 
-#### ARGUMENTS
+**ARGUMENTS**:
 
 * **`series`** [*required*]:
     Pass a JSON array where each item in the array contains the following arguments:

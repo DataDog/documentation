@@ -10,16 +10,13 @@ main:
     pre: "nav_start"
     weight: 10000
 
+  ## GETTING STARTED - Agent
+
   - name: "Agent"
     identifier: "getting_started_agent"
     url: "getting_started/agent/"
     parent: "getting_started"
     weight: 1
-
-  - name: "Datadog"
-    url: "getting_started/application/"
-    parent: "getting_started"
-    weight: 2
 
   ## GETTING STARTED - Integrations
 
@@ -27,16 +24,29 @@ main:
     identifier: "getting_started_integrations"
     url: "getting_started/integrations/"
     parent: "getting_started"
-    weight: 3
+    weight: 2
   - name: "Prometheus/Openmetrics"
     identifier: "getting_started_prometheus"
     url: "getting_started/integrations/prometheus"
     parent: "getting_started_integrations"
+    weight: 201
+
+  ## GETTING STARTED - Application
+
+  - name: "Datadog"
+    identifier: "getting_started_datadog"
+    url: "getting_started/application/"
+    parent: "getting_started"
+    weight: 3
+  - name: "Monitors"
+    identifier: "getting_started_monitors"
+    url: "getting_started/application/monitors"
+    parent: "getting_started_datadog"
     weight: 301
 
   ## GETTING STARTED - Traces
 
-  - name: "Collect traces"
+  - name: "Tracing"
     identifier: "getting_started_collect_traces"
     url: "getting_started/tracing/"
     parent: "getting_started"
@@ -453,10 +463,6 @@ main:
     url: "graphing/infrastructure/process/"
     parent: "graphing_infrastructure"
     weight: 604
-  - name: "Network Performance Monitor"
-    url: "graphing/infrastructure/network_performance_monitor/"
-    parent: "graphing_infrastructure"
-    weight: 605
   - name: "Serverless"
     url: "graphing/infrastructure/serverless/"
     parent: "graphing_infrastructure"

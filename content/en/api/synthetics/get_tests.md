@@ -9,6 +9,6 @@ external_redirect: /api/#get-tests
 
 Use this method to get a list of all existing tests.
 
-##### Arguments
+**ARGUMENTS**:
 
 *This endpoint takes no JSON arguments.*

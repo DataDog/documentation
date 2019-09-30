@@ -5,9 +5,14 @@ order: 10.4
 external_redirect: /api/#cancel-monitor-downtime-by-scope
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/downtime/cancel/by_scope`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-monitor-cancel-downtime-by-scope" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-monitor-cancel-downtime-by-scope" >}}
