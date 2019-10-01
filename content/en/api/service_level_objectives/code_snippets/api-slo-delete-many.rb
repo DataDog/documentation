@@ -1,2 +1,12 @@
-# This is not yet supported by the Ruby Client for Datadog API
-# Consult the curl example
+require 'rubygems'
+require 'dogapi'
+
+api_key = '<YOUR_API_KEY>'
+app_key = '<YOUR_APP_KEY>'
+slo_ids = ['<YOUR_SLO_ID>', '<YOUR_SLO_ID>']
+
+dog = Dogapi::Client.new(api_key, app_key)
+
+# Delete multiple timeframes
+
+dog.delete_many_service_level_objective(thresholds)

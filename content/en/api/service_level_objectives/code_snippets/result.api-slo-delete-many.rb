@@ -1,2 +1,4 @@
-# This is not yet supported by the Ruby Client for Datadog API
-# Consult the curl example
+{
+  "data": ["12341234123412341234123412341234"],
+  "error": null
+}
