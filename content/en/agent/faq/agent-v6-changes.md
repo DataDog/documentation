@@ -51,7 +51,7 @@ The following Agent configuration options were changed or removed in Agent v6. C
 | Previous Name               | Updated Name                 | Notes                                                                                             |
 |-----------------------------|------------------------------|---------------------------------------------------------------------------------------------------|
 | `proxy_host`                | `proxy`                      | Proxy settings are now expressed as a list of URIs. See the [proxy][3] documentation for details. |
-| `collect_instance_metadata` | `enable_metadata_collection` | Enables metadata collection                                                                       |
+| `collect_instance_metadata` | `enable_metadata_collection` | Enables metadata collection.                                                                       |
 | `collector_log_file`        | `log_file`                   |                                                                                                   |
 | `syslog_host`               | `syslog_uri`                 | The Syslog configuration is now expressed as a URI.                                               |
 |                             | `syslog_pem`                 | Syslog configuration client certificate for TLS client validation.                                |
@@ -106,7 +106,7 @@ For example, configuration files for the `http_check` could be:
 └── frontend.yaml
 ```
 
-The Agent won't load configuration files from any sub-directories within the `<CHECK_NAME>.d` folder. For example, this configuration is **NOT** loaded:
+The Agent doesn't load configuration files from any sub-directories within the `<CHECK_NAME>.d` folder. For example, this configuration is **NOT** loaded:
 ```text
 /etc/datadog-agent/conf.d/http_check.d/prod.d/
 ├── backend.yaml
@@ -121,11 +121,11 @@ Autodiscovery template files (`auto_conf.yaml`) are stored in the configuration 
 
 The YAML files within a `<CHECK_NAME>.d` folder can have any name, as long as they have a `.yaml` or `.yml` extension. The standard name is `conf.yaml`.
 
-To keep backwards compatibility, the Agent still picks up configuration files in the form: `<AGENT_DIRECTORY>/conf.d/<CHECK_NAME>.yaml` but migrating to the updated layout is strongly recommended.
+To keep backwards compatibility, the Agent picks up configuration files in the form: `<AGENT_DIRECTORY>/conf.d/<CHECK_NAME>.yaml` but migrating to the updated layout is strongly recommended.
 
 #### Configuration options
 
-Agent v6 supports the following advanced options in a check's `instance` section:
+Agent v6 supports the following options in a check's `instance` section:
 
 | Option                    | Description                                                                                                               |
 |---------------------------|---------------------------------------------------------------------------------------------------------------------------|
@@ -177,17 +177,17 @@ Previous versions logged to multiple files (`collector.log`, `forwarder.log`, `d
 
 The Agent v6 command line interface is sub-command based. To see the list of available sub-commands, run:
 ```shell
-<agent_binary> --help
+<AGENT_BINARY> --help
 ```
 
 To run a sub-command, the Agent binary must be invoked:
 ```shell
-<agent_binary> <sub_command> <options>
+<AGENT_BINARY> <SUB_COMMAND> <OPTIONS>
 ```
 
 Some options have flags and options detailed under `--help`. For example, use help with the `check` sub-command:
 ```shell
-<agent_binary> check --help
+<AGENT_BINARY> check --help
 ```
 
 For a full list of available commands, see [Agent Commands][5].
@@ -211,10 +211,10 @@ For example, on Ubuntu, the _lifecycle commands_ are:
 
 | Command                              | Description                           |
 |--------------------------------------|---------------------------------------|
-| `sudo service datadog-agent start`   | Start the Agent as a service          |
-| `sudo service datadog-agent stop`    | Stop the Agent service                |
-| `sudo service datadog-agent restart` | Restart the Agent service             |
-| `sudo service datadog-agent status`  | Print the status of the Agent service |
+| `sudo service datadog-agent start`   | Start the Agent as a service.          |
+| `sudo service datadog-agent stop`    | Stop the Agent service.                |
+| `sudo service datadog-agent restart` | Restart the Agent service.             |
+| `sudo service datadog-agent status`  | Print the status of the Agent service. |
 
 If the `service` wrapper command is not available on your system, use:
 
@@ -238,14 +238,14 @@ If you're unsure which init system your distribution uses by default, refer to t
 
 #### Agent commands
 
-Other functionalities are now provided by the Agent binary itself as sub-commands and shouldn't be invoked with `service`/`systemctl`/`initctl`. Here are a few examples:
+With Agent v6+, other functionalities are provided by the Agent binary itself as sub-commands and shouldn't be invoked with `service`/`systemctl`/`initctl`. Here are a few examples:
 
 | Agent v5 Command                                  | Agent v6 Command                                       | Notes                          |
 |---------------------------------------------------|--------------------------------------------------------|--------------------------------|
 | `sudo service datadog-agent info`                 | `sudo datadog-agent status`                            | Status page of a running Agent |
 | `sudo service datadog-agent flare`                | `sudo datadog-agent flare`                             | Send flare                     |
 | `sudo service datadog-agent`                      | `sudo datadog-agent --help`                            | Display Agent usage            |
-| `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check                    |
+| `sudo -u dd-agent -- dd-agent check <CHECK_NAME>` | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` | Run a check                    |
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -281,7 +281,7 @@ The major changes for Agent v6 on MacOS are:
 | `datadog-agent info`               | `datadog-agent status` or web GUI                    | Status page of a running Agent |
 | `datadog-agent flare`              | `datadog-agent flare` or web GUI                     | Send flare                     |
 | _not implemented_                  | `datadog-agent --help`                               | Display command usage          |
-| `datadog-agent check <check_name>` | `datadog-agent check <check_name>`                   | Run a check (unchanged)        |
+| `datadog-agent check <CHECK_NAME>` | `datadog-agent check <CHECK_NAME>`                   | Run a check (unchanged)        |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -342,7 +342,7 @@ Some options have moved from `docker_daemon.yaml` to the main `datadog.yaml`:
 * `collect_labels_as_tags` was renamed to `docker_labels_as_tags` and supports high cardinality tags. See the details in `datadog.yaml.example`.
 * `exclude` and `include` were renamed to `ac_include` and `ac_exclude`. To make filtering consistent across all components of the Agent, there is no longer filtering on arbitrary tags. Tag filtering is only supported for `image` (image name) and `name` (container name). Regexp filtering is still available, see the `datadog.yaml.example` for examples.
 * The `docker_root` option has been split in two options: `container_cgroup_root` and `container_proc_root`.
-* `exclude_pause_container` was added to exclude pause containers on Kubernetes and Openshift (defaults to true).
+* `exclude_pause_container` was added to exclude pause containers on Kubernetes and Openshift (defaults to `true`).
 
 [1]: https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
 {{% /tab %}}
@@ -352,8 +352,8 @@ For Agent v6, Kubernetes versions 1.3+ are supported.
 
 The Kubernetes integration provides insights by combining:
 
-* The [kubelet][1] check metrics from the kubelet
-* The [kubernetes_apiserver][2] check events and service checks from the API server
+* The [kubelet][1] check metrics from the kubelet.
+* The [kubernetes_apiserver][2] check events and service checks from the API server.
 
 The [Agent import command](?tab=agent#configuration) (v6.2+) imports settings from the legacy `kubernetes.yaml` configuration. The following options are deprecated:
 
@@ -367,7 +367,7 @@ The [kubernetes_state][4] check works with Agent v5 or Agent v6.
 
 #### Tagging
 
-While Agent v5 automatically collected every pod label as tags, Agent v6 needs a whilelist. This is done with the `kubernetes_pod_labels_as_tags` option in `datadog.yaml`.
+While Agent v5 automatically collected every pod label as tags, Agent v6 needs a whitelist. This is done with the `kubernetes_pod_labels_as_tags` option in `datadog.yaml`.
 
 The following options and tags are deprecated:
 
