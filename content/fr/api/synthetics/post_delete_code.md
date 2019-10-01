@@ -5,13 +5,14 @@ order: 29.4
 external_redirect: "/api/#envoyer-une-suppression"
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `POST /v1/synthetics/tests/delete`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE**:
 
 {{< code-snippets basename="post_delete" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE**:
 
 {{< code-snippets basename="result.post_delete" >}}

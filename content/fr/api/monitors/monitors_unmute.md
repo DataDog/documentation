@@ -7,7 +7,8 @@ external_redirect: /api/#reactiver-un-monitor
 
 ## Réactiver un monitor
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`scope`** [*facultatif*, *défaut*=**None**] :
     Le contexte auquel appliquer la désactivation.
     Par exemple, si votre alerte est groupée par {host}, vous pouvez désactiver 'host:app1'.

@@ -11,7 +11,7 @@ further_reading:
     text: Screenboard
   - link: graphing/graphing_json/
     tag: Documentation
-    text: Créer des dashboards JSON
+    text: Créer des dashboards avec JSON
 ---
 La hostmap représente n'importe quelle métrique d'un sous-ensemble de hosts sur une unique visualisation, disponible depuis le menu [Infrastructure Host Map][1] :
 
@@ -39,7 +39,7 @@ Affichez un titre personnalisé pour votre widget en cochant la case `Show a Tit
 
 {{< img src="graphing/widgets/options/title.png" alt="Titre du widget" responsive="true" style="width:80%;">}}
 
-Vous pouvez également définir sa taille et son alignement.
+Définissez sa taille et son alignement si vous le souhaitez.
 
 ## API
 

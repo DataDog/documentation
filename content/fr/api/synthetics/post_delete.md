@@ -9,6 +9,6 @@ external_redirect: "/api/#envoyer-une-suppression"
 
 Utilisez cette méthode pour supprimer des tests.
 
-##### Arguments
+**ARGUMENTS**:
 
 *   **`public_ids`** - _obligatoire_ - Liste JSON de l’ID ou des ID des tests que vous souhaitez supprimer.

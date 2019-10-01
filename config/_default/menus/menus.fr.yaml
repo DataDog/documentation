@@ -826,7 +826,7 @@ main:
     url: logs/explorer/saved_views/
     parent: log_explorer
     weight: 703
-  - name: Modèles de logs
+  - name: Log Patterns
     url: logs/explorer/patterns/
     parent: log_explorer
     weight: 704
