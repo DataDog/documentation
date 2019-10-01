@@ -1,7 +1,7 @@
 ---
 title: Send traces
 type: apicode
-order: 32.1
+order: 33.1
 external_redirect: /api/#send-traces
 ---
 

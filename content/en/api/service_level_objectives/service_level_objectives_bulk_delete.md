@@ -1,11 +1,11 @@
 ---
 title: Bulk Delete Service Level Objective Timeframes
 type: apicontent
-order: 29.07
-external_redirect: /api/#bulk-delete-service-level-objective-timeframes
+order: 29.06
+external_redirect: /api/#bulk-delete-service-level-objectives-timeframes
 ---
 
-## Bulk Delete Service Level Objectives time frames
+## Bulk Delete Service Level Objective Timeframes
 
 **ARGUMENTS**:
 

@@ -1,7 +1,7 @@
 ---
 title: Get all users
 type: apicode
-order: 34.3
+order: 35.3
 external_redirect: /api/#get-all-users
 ---
 

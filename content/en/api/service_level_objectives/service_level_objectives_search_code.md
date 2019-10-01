@@ -1,7 +1,7 @@
 ---
 title: Search Service Level Objectives
 type: apicode
-order: 29.12
+order: 29.07
 external_redirect: /api/#search-service-level-objectives
 ---
 
