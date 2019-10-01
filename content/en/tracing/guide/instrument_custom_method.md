@@ -189,7 +189,7 @@ func (bl *BackupLedger) write(ctx context.Context, transactions []*Transaction) 
 
 // persistTransaction is an inner function you may want to Trace. You can use the
 // same approach as before because the `ctx` you pass down includes out-of-the-box span
-// references to create a parent/child relationship
+// references to create a parent/child relationships.
 func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Transaction) error {
   id := transaction.ID
   span, _ := tracer.StartSpanFromContext(ctx, "BackupLedger.persist", tracer.Tag("transaction_id", id))
