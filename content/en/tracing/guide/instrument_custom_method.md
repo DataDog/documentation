@@ -181,7 +181,7 @@ func (bl *BackupLedger) write(ctx context.Context, transactions []*Transaction) 
   }()
 
   for _, t := range transactions {
-    // ctx you pass down includes out-of-the-box Span references to create
+    // ctx you pass down includes out-of-the-box span references to create
     // a parent/child relationship
     if err := bl.persistTransaction(ctx, t); err != nil {
       return err
