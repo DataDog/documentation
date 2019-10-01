@@ -112,7 +112,7 @@ The Agent doesn't load configuration files from any sub-directories within the `
 ├── backend.yaml
 ```
 
-Autodiscovery template files (`auto_conf.yaml`) are stored in the configuration folder as well. This is an example of the `redisdb` check configuration folder:
+[Autodiscovery][1] template files (`auto_conf.yaml`) are stored in the configuration folder as well. This is an example of the `redisdb` check configuration folder:
 ```text
 /etc/datadog-agent/conf.d/redisdb.d/
 ├── auto_conf.yaml
@@ -133,6 +133,7 @@ Agent v6 supports the following options in a check's `instance` section:
 | `empty_default_hostname`  | Submit metrics, events, and service checks with no hostname when set to `true`.                                           |
 | `tags`                    | Send custom tags in addition to the tags sent by the check.                                                               |
 
+[1]: /agent/autodiscovery
 {{% /tab %}}
 {{% tab "Environment variables" %}}
 
@@ -169,7 +170,7 @@ There are differences in hostname resolution between Agent v5 and Agent v6. For 
 
 ## Logs
 
-The Agent log files are still located in `/var/log/datadog/` (Linux) and `C:\ProgramData\Datadog\logs` (Windows).
+The [Agent log files][5] are still located in `/var/log/datadog/` (Linux) and `C:\ProgramData\Datadog\logs` (Windows).
 
 Previous versions logged to multiple files (`collector.log`, `forwarder.log`, `dogstatsd.log`, etc). Agent v6 logs to a single log file: `agent.log`.
 
@@ -190,7 +191,7 @@ Some options have flags and options detailed under `--help`. For example, use he
 <AGENT_BINARY> check --help
 ```
 
-For a full list of available commands, see [Agent Commands][5].
+For a full list of available commands, see [Agent Commands][6].
 
 ### Operating system changes
 
@@ -255,8 +256,7 @@ The major changes for Agent v6 on Windows are:
 * The Agent v5 Windows Agent Manager GUI was replaced with a browser-based, cross-platform manager. For details, see the [Datadog Agent Manager for Windows][1].
 * The main executable file is `agent.exe` (previously `ddagent.exe`).
 * Commands should be run with the command line `"C:\Program Files\datadog\datadog agent\embedded\agent.exe" <COMMAND>` from an **Administrator** command prompt.
-* The Windows service is now started as "Automatic-Delayed". It is started automatically on boot, but after
-  all other services. This results in a small delay in reporting metrics after a reboot.
+* The Windows service is now started as "Automatic-Delayed". It is started automatically on boot, but after all other services. This results in a small delay in reporting metrics after a reboot.
 * The Windows GUI and Windows system tray icon are now implemented separately. See the [Datadog Agent Manager for Windows][1] for more details.
 
 [1]: /agent/guide/datadog-agent-manager-windows
@@ -339,12 +339,14 @@ The new check is named `docker`. The [Agent import command](?tab=agent#configura
 
 Some options have moved from `docker_daemon.yaml` to the main `datadog.yaml`:
 
-* `collect_labels_as_tags` was renamed to `docker_labels_as_tags` and supports high cardinality tags. See the details in `datadog.yaml.example`.
-* `exclude` and `include` were renamed to `ac_include` and `ac_exclude`. To make filtering consistent across all components of the Agent, there is no longer filtering on arbitrary tags. Tag filtering is only supported for `image` (image name) and `name` (container name). Regexp filtering is still available, see the `datadog.yaml.example` for examples.
+* `collect_labels_as_tags` was renamed to `docker_labels_as_tags` and supports high cardinality tags. See [Tag Assignment and Extraction][2] for details.
+* `exclude` and `include` were renamed to `ac_include` and `ac_exclude`. To make filtering consistent across all components of the Agent, there is no longer filtering on arbitrary tags. Tag filtering is only supported for `image` (image name) and `name` (container name). Regexp filtering is still available. See [Container Discovery Management][3] for details.
 * The `docker_root` option has been split in two options: `container_cgroup_root` and `container_proc_root`.
 * `exclude_pause_container` was added to exclude pause containers on Kubernetes and Openshift (defaults to `true`).
 
 [1]: https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
+[2]: /agent/autodiscovery/tag/#docker
+[3]: /agent/autodiscovery/management
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -367,7 +369,7 @@ The [kubernetes_state][4] check works with Agent v5 or Agent v6.
 
 #### Tagging
 
-While Agent v5 automatically collected every pod label as tags, Agent v6 needs a whitelist. This is done with the `kubernetes_pod_labels_as_tags` option in `datadog.yaml`.
+While Agent v5 automatically collected every pod label as tags, Agent v6 needs a whitelist. This is done with the `kubernetes_pod_labels_as_tags` option in `datadog.yaml`. See [Tag Assignment and Extraction][5] for details.
 
 The following options and tags are deprecated:
 
@@ -379,6 +381,7 @@ The following options and tags are deprecated:
 [2]: /integrations/kube_apiserver_metrics
 [3]: /help
 [4]: /integrations/kubernetes
+[5]: /agent/autodiscovery/tag/#extract-node-labels-as-tags
 {{% /tab %}}
 {{% tab "JMX" %}}
 
@@ -405,7 +408,7 @@ Troubleshooting command syntax has changed. These commands are available for v6.
 `sudo datadog-agent jmx list collected --checks tomcat`
 
 [1]: https://github.com/jiaqi/jmxterm
-[2]: /integrations/faq/troubleshooting-jmx-integrations/?tab=agentv60andv61#agent-troubleshooting
+[2]: /integrations/faq/troubleshooting-jmx-integrations/?tab=agentv62#agent-troubleshooting
 {{% /tab %}}
 {{% tab "System" %}}
 
@@ -420,35 +423,37 @@ This problem is fixed on the Windows Agent v6. However, the Agent v5 discrepancy
 
 ## Autodiscovery
 
-The [Autodiscovery][6] system was reworked for Agent v6. Also, container runtimes and orchestrators were decoupled to be more flexible. This includes the move from `docker_images` to `ad_identifiers` in templates.
+The [Autodiscovery][7] system was reworked for Agent v6. Also, container runtimes and orchestrators were decoupled to be more flexible. This includes the move from `docker_images` to `ad_identifiers` in templates.
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
 When using Kubernetes, Autodiscovery sources information from the kubelet, instead of Docker daemon. This allows Autodiscovery to work without access to the Docker socket. Also, the default behavior is to source Autodiscovery templates from pod annotations. You can enable the `docker` config-provider to use container labels, and replace the `kubelet` listener by the `kubelet` one if you need Autodiscovery on containers running out of pods.
 
-When specifying Autodiscovery templates in pod annotations, the annotation name prefix is `ad.datadoghq.com/`. The previous annotation prefix (`service-discovery.datadoghq.com/`) is still supported for Agent v6 but support will be removed in future versions.
+When specifying [Autodiscovery templates][1] in pod annotations, the annotation name prefix is `ad.datadoghq.com/`. The previous annotation prefix (`service-discovery.datadoghq.com/`) is still supported for Agent v6 but support will be removed in future versions.
 
+[1]: /agent/autodiscovery/integrations/?tab=kubernetes
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Autodiscovery templates in Docker labels work with the same name prefix `com.datadoghq.ad.*`.
+[Autodiscovery templates][1] in Docker labels work with the same name prefix `com.datadoghq.ad.*`.
 
 The identifier override label has been renamed from `com.datadoghq.sd.check.id` to `com.datadoghq.ad.check.id` for consistency. The previous name is still supported for Agent v6 but support will be removed in future versions.
 
+[1]: /agent/autodiscovery/integrations/?tab=docker
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Python modules
 
-For Agent v6, all check-related Python code is imported from the `datadog_checks` [namespace][7]. Most Python libraries included with Agent v5 are shipped with Agent v6. The following has changed:
+For Agent v6, all check-related Python code is imported from the `datadog_checks` [namespace][8]. Most Python libraries included with Agent v5 are shipped with Agent v6. The following has changed:
 
 * `util.py` and its associated functions were removed from the Agent v6.
 * `util.headers(...)` is still included with Agent v6, but implemented in C and Go and passed through to the check.
 
 **Note**: All official integrations were updated to remove obsolete modules, so these changes only affect custom checks.
 
-A lot of the `utils` directory was removed from Agent v6, but most of the removed content was not directly related to checks. The flare module, for example, was removed and reimplemented in Go, but is unlikely to have been used by anyone in a custom check. Fore more details, see the [development documentation][8].
+A lot of the `utils` directory was removed from Agent v6, but most of the removed content was not directly related to checks. The flare module, for example, was removed and reimplemented in Go, but is unlikely to have been used by anyone in a custom check. Fore more details, see the [development documentation][9].
 
 {{< tabs >}}
 {{% tab "Integrations" %}}
@@ -558,7 +563,8 @@ Similarly, you may have added a PIP package to meet a requirement for a custom c
 [2]: https://github.com/DataDog/dd-agent/wiki/Using-custom-emitters
 [3]: /agent/guide/dogstream
 [4]: /integrations/go-metro
-[5]: /agent/guide/agent-commands/?tab=agentv6
-[6]: https://docs.datadoghq.com/agent/autodiscovery
-[7]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base
-[8]: https://github.com/DataDog/datadog-agent/tree/master/docs/dev/checks
+[5]: /agent/guide/agent-log-files/?tab=agentv6
+[6]: /agent/guide/agent-commands/?tab=agentv6
+[7]: https://docs.datadoghq.com/agent/autodiscovery
+[8]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base
+[9]: https://github.com/DataDog/datadog-agent/tree/master/docs/dev/checks
