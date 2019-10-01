@@ -32,7 +32,7 @@ These examples walk through tracing the entire `BackupLedger.write` method to me
 
 {{< img src="tracing/guide/custom_span/custom_span_2.png" alt="Analytics View" responsive="true" style="width:90%;">}}
 
-Note that the `http.request POST /charge/` span is taking a lot of time without having any direct child spans. This is a clue that this request requires further instrumentation to gain better insights into its behavior. Depending on the programming language you are using, you need to decorate your functions differently:
+The `http.request POST /charge/` span is taking a lot of time without having any direct child spans. This is a clue that this request requires further instrumentation to gain better insights into its behavior. Depending on the programming language you are using, you need to decorate your functions differently:
 
 
 {{< tabs >}}
