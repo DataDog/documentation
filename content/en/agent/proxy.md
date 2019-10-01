@@ -345,7 +345,7 @@ Finally [restart the Agent][1].
 
 To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][2].
 
-[1]: /agent/#start-stop-restart-the-agent/#windows
+[1]: /agent/guide/agent-commands/#restart-the-agent
 [2]: https://app.datadoghq.com/infrastructure
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -390,7 +390,7 @@ Finally [restart the Agent][1].
 To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][2].
 
 
-[1]: /agent/#start-stop-restart-the-agent/#windows
+[1]: /agent/guide/agent-commands/#restart-the-agent
 [2]: https://app.datadoghq.com/infrastructure
 {{% /tab %}}
 {{< /tabs >}}

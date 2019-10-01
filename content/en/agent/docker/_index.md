@@ -239,7 +239,7 @@ The same can be done for the `/checks.d` folder. Any Python files in the `/check
 [1]: /agent
 [2]: https://hub.docker.com/r/datadog/agent
 [3]: https://app.datadoghq.com/account/settings#agent/docker
-[4]: /agent/#supported-os-versions
+[4]: /agent/basic_agent_usage/#supported-os-versions
 [5]: https://app.datadoghq.com/account/settings#api
 [6]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [7]: /agent/proxy/#agent-v6

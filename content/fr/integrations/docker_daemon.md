@@ -188,31 +188,34 @@ Ce check de service est seulement disponible pour l'Agent v5. Renvoie `CRITICAL
 **docker.exit** :
 Renvoie `CRITICAL` si un conteneur est fermé avec un code de sortie différent de zéro. Si ce n'est pas le cas, renvoie `OK`.
 
-**Remarque** : pour utiliser `docker.exit`, ajoutez `collect_exit_code: true` dans votre [fichier YAML Docker][20] et redémarrez l'Agent.
+**Remarque** : pour utiliser `docker.exit`, ajoutez `collect_exit_code: true` dans votre [fichier YAML Docker][19] et redémarrez l'Agent.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][21].
+Besoin d'aide ? Contactez [l'assistance Datadog][20].
 
 ## Pour aller plus loin
 ### Base de connaissances
 
-* [Compose et l'Agent Datadog][22]
-* [DogStatsD et Docker][23]
+* [Compose et l'Agent Datadog][21]
+* [DogStatsD et Docker][22]
 
 ### Blog Datadog
 
-Pour savoir comment surveiller les métriques de performance Docker, consultez [notre série d'articles à ce sujet][24]. Vous y trouverez des informations supplémentaires sur les défis rencontrés lors de la surveillance du Docker, ses principales métriques de performance, des conseils pour les recueillir ainsi qu'une étude de cas sur l'utilisation de Docker à l'aide de Datadog par la principale station de radio et de télévision des États-Unis.
+Pour savoir comment surveiller les métriques de performance Docker, consultez [notre série d'articles à ce sujet][23]. Vous y trouverez des informations supplémentaires sur les défis rencontrés lors de la surveillance du Docker, ses principales métriques de performance, des conseils pour les recueillir ainsi qu'une étude de cas sur l'utilisation de Docker à l'aide de Datadog par la principale station de radio et de télévision des États-Unis.
 
 Nous avons également rédigé plusieurs autres articles de blog détaillés pour vous aider à tirer le meilleur parti de Datadog et de Docker :
 
-* [Comment surveiller les métriques de ressource Docker][25]
-* [Comment recueillir des métriques Docker][26]
-* [8 faits surprenants sur l'adoption concrète de Docker][27]
-* [Surveiller Docker sur AWS ECS][28]
-* [Dockeriser Datadog][29]
-* [Surveiller Docker avec Datadog][30]
+* [Comment surveiller les métriques de ressource Docker][24]
+* [Comment recueillir des métriques Docker][25]
+* [8 faits surprenants sur l'adoption concrète de Docker][26]
+* [Surveiller Docker sur AWS ECS][27]
+* [Dockeriser Datadog][28]
+* [Surveiller Docker avec Datadog][29]
 
 
+
+
+{{< get-dependencies >}}
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/docker_daemon/images/docker.png
 [2]: https://github.com/DataDog/docker-dd-agent
 [3]: https://github.com/DataDog/docker-dd-agent#cgroups
@@ -230,19 +233,15 @@ Nous avons également rédigé plusieurs autres articles de blog détaillés pou
 [15]: https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
 [16]: https://hub.docker.com/r/datadog/docker-dd-agent
 [17]: https://hub.docker.com/r/datadog/agent
-[18]: https://docs.datadoghq.com/fr/agent/#cli
-[19]: https://github.com/DataDog/integrations-core/blob/master/docker_daemon/metadata.csv
-[20]: https://github.com/DataDog/integrations-core/blob/master/docker_daemon/datadog_checks/docker_daemon/data/conf.yaml.example#L124
-[21]: https://docs.datadoghq.com/fr/help
-[22]: https://docs.datadoghq.com/fr/integrations/faq/compose-and-the-datadog-agent
-[23]: https://docs.datadoghq.com/fr/integrations/faq/dogstatsd-and-docker
-[24]: https://www.datadoghq.com/blog/the-docker-monitoring-problem
-[25]: https://www.datadoghq.com/blog/how-to-monitor-docker-resource-metrics
-[26]: https://www.datadoghq.com/blog/how-to-collect-docker-metrics
-[27]: https://www.datadoghq.com/docker-adoption
-[28]: https://www.datadoghq.com/blog/monitor-docker-on-aws-ecs
-[29]: https://www.datadoghq.com/blog/docker-performance-datadog
-[30]: https://www.datadoghq.com/blog/monitor-docker-datadog
-
-
-{{< get-dependencies >}}
+[18]: /fr/agent/basic_agent_usage/?tab=agentv6#cli
+[19]: https://github.com/DataDog/integrations-core/blob/master/docker_daemon/datadog_checks/docker_daemon/data/conf.yaml.example#L124
+[20]: https://docs.datadoghq.com/fr/help
+[21]: https://docs.datadoghq.com/fr/integrations/faq/compose-and-the-datadog-agent
+[22]: https://docs.datadoghq.com/fr/integrations/faq/dogstatsd-and-docker
+[23]: https://www.datadoghq.com/blog/the-docker-monitoring-problem
+[24]: https://www.datadoghq.com/blog/how-to-monitor-docker-resource-metrics
+[25]: https://www.datadoghq.com/blog/how-to-collect-docker-metrics
+[26]: https://www.datadoghq.com/docker-adoption
+[27]: https://www.datadoghq.com/blog/monitor-docker-on-aws-ecs
+[28]: https://www.datadoghq.com/blog/docker-performance-datadog
+[29]: https://www.datadoghq.com/blog/monitor-docker-datadog

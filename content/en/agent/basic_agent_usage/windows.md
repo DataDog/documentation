@@ -360,7 +360,7 @@ After configuration is complete, [restart the Agent][14].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/windows
-[2]: /agent/#supported-os-versions
+[2]: /agent/basic_agent_usage/#supported-os-versions
 [3]: /agent/faq/windows-agent-ddagent-user
 [4]: /agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment
 [5]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
