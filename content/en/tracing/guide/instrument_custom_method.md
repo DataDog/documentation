@@ -261,7 +261,7 @@ public void Write(List<Transaction> transactions)
   In PHP, Datadog APM allows you to instrument your code to generate custom spans either by using method wrappers or by instrumenting specific code blocks.
 
 ### Instument a method with a wrapper
-  This example walks through adding a span to the `BackupLedger.write` method. This method adds new rows to a transaction ledger. This example adds one span to track all posted transactions as a single unit by using the `dd_trace()` function.
+This example adds a span to the `BackupLedger.write` method, which adds new rows to a transaction ledger. One span is added to track all posted transactions as a single unit by using the `dd_trace()` function.
 
 ```php
 <?php
