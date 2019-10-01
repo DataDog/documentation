@@ -329,7 +329,7 @@ This example adds child spans to the `BackupLedger.write` span created above. Th
 
 Now that you have instrumented your business logic, it's time to see the results in the Datadog APM UI.
 
-1. **Go to the [Service List][1]**, identify the service you added custom spans to and **go to the Service Page**, from there, **click on the specific resource** you worked on. Change the time filter to `The past 15 minutes` and scroll down to the Span Summary table:
+1. Go to the **[Service List][1]**, identify the service you added custom spans to, then go to the **Service Page**. On the service page, click on the **specific resource** you added, change the time filter to `The past 15 minutes`, and scroll down to the span summary table:
 
     {{< img src="tracing/guide/custom_span/custom_span_3.png" alt="Span Summary Table" responsive="true" style="width:90%;">}}
 
