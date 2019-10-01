@@ -135,7 +135,7 @@ class BackupLedger:
 {{% tab "Ruby" %}}
   In Ruby, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
 
-  This example creates a new span for call to the `BackupLedger.write` method and a child span for every transaction posted to the ledger with a [custom tag][1] with the specific transaction ID.
+  This example creates a new span for the call to the `BackupLedger.write` method and a child span for every transaction posted to the ledger with a [custom tag][1] with the specific transaction ID.
 
 ```ruby
 require 'ddtrace'
@@ -208,7 +208,7 @@ func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Tra
 {{% tab "Node.js" %}}
   In Node.js, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
 
-This example creates a new span for every transaction posted to the ledger and adds a [custom tag][1] with the specific transaction ID to the span.
+This example creates a new span for the call to the `BackupLedger.write` method and a child span for every transaction posted to the ledger with a [custom tag][1] with the specific transaction ID.
 
 ```javascript
 const tracer = require('dd-trace')
