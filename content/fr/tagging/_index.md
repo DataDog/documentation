@@ -91,7 +91,7 @@ Vous pouvez utiliser l'une (ou l'ensemble) des méthodes suivantes pour assigner
 | [Intégrations][16]   | Définir des limites facultatives pour AWS, Google Cloud et Azure                                        |
 | [APM][17]            | Filtrer la recherche de traces et les analyses ou accéder facilement à d'autres sections avec la Service map                    |
 | [Notebooks][18]      | Filtrer et regrouper des métriques sur des graphiques                                                               |
-| [Logs][19]           | Filtrer la recherche de logs, les analyses, les modèles, le live tailing et les pipelines                                |
+| [Logs][19]           | Filtrer la recherche de logs, les analyses, les patterns, le live tailing et les pipelines                                |
 | [Outils de développement][20]     | Récupérer des informations ou configurer différentes sections dans l'IU avec l'API                                 |
 
 ### Pour aller plus loin

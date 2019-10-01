@@ -202,7 +202,7 @@ Pour exclure des tags, utilisez `</>` afin de modifier le texte, puis ajoutez le
 
 ## Logs
 
-Pour [les recherches][13], [les analyses][14], [les modèles][15] et le [Live Tailing][16] de logs, filtrez les logs avec des tags à l'aide de la barre de recherche ou des cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>`. Indiquez par exemple `service:coffee-house`. Pour effectuer une recherche avancée, consultez la page [sur les recherches de logs][13].
+Pour [les recherches][13], [les analyses][14], [les patterns][15] et le [Live Tailing][16] de logs, filtrez les logs avec des tags à l'aide de la barre de recherche ou des cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>`. Indiquez par exemple `service:coffee-house`. Pour effectuer une recherche avancée, consultez la page [sur les recherches de logs][13].
 
 {{< tabs >}}
 {{% tab "Recherche" %}}
@@ -215,9 +215,9 @@ Pour [les recherches][13], [les analyses][14], [les modèles][15] et le [Live Ta
 {{< img src="tagging/using_tags/loganalyticstags.png" alt="Tags d'analyse de logs" responsive="true" style="width:80%;">}}
 
 {{% /tab %}}
-{{% tab "Modèles" %}}
+{{% tab "Patterns" %}}
 
-{{< img src="tagging/using_tags/logpatternstags.png" alt="Tags de modèle de logs" responsive="true" style="width:80%;">}}
+{{< img src="tagging/using_tags/logpatternstags.png" alt="Tags de Log Patterns" responsive="true" style="width:80%;">}}
 
 {{% /tab %}}
 {{% tab "Live Tail" %}}
