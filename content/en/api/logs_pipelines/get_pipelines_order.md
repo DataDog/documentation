@@ -9,6 +9,6 @@ external_redirect: /api/#get-pipelines-order
 
 Get the current order of your pipelines.
 
-##### Arguments
+**ARGUMENTS**:
 
 This endpoint takes no JSON arguments.

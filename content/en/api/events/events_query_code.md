@@ -5,9 +5,14 @@ order: 12.4
 external_redirect: /api/#query-the-event-stream
 ---
 
-##### Signature
+**SIGNATURE**:
+
 `GET /v1/events`
-##### Example Request
+
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="api-events-stream" >}}
-##### Example Response
+
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.api-events-stream" >}}

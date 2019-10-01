@@ -9,6 +9,6 @@ external_redirect: /api/#get-browsers
 
 Get a list of devices for browser checks.
 
-##### Arguments
+**ARGUMENTS**:
 
 *This endpoint takes no JSON arguments.*

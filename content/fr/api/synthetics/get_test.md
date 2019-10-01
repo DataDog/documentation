@@ -9,6 +9,6 @@ external_redirect: "/api/#obtenir-un-test"
 
 Utilisez cette méthode pour obtenir des informations relatives à un test en particulier.
 
-##### Arguments
+**ARGUMENTS**:
 
 *Cet endpoint ne prend aucun argument JSON*.

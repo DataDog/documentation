@@ -8,5 +8,6 @@ external_redirect: /api/#get-all-dashboards
 ## Get all Dashboards
 Fetch all dashboards.
 
-##### Arguments
+**ARGUMENTS**:
+
 *This end point takes no JSON arguments.*

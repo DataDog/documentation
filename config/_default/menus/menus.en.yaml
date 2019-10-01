@@ -10,16 +10,13 @@ main:
     pre: "nav_start"
     weight: 10000
 
+  ## GETTING STARTED - Agent
+
   - name: "Agent"
     identifier: "getting_started_agent"
     url: "getting_started/agent/"
     parent: "getting_started"
     weight: 1
-
-  - name: "Datadog"
-    url: "getting_started/application/"
-    parent: "getting_started"
-    weight: 2
 
   ## GETTING STARTED - Integrations
 
@@ -27,36 +24,57 @@ main:
     identifier: "getting_started_integrations"
     url: "getting_started/integrations/"
     parent: "getting_started"
-    weight: 3
+    weight: 2
   - name: "Prometheus/Openmetrics"
     identifier: "getting_started_prometheus"
     url: "getting_started/integrations/prometheus"
     parent: "getting_started_integrations"
+    weight: 201
+
+  ## GETTING STARTED - Application
+
+  - name: "Datadog"
+    identifier: "getting_started_datadog"
+    url: "getting_started/application/"
+    parent: "getting_started"
+    weight: 3
+  - name: "Monitors"
+    identifier: "getting_started_monitors"
+    url: "getting_started/application/monitors"
+    parent: "getting_started_datadog"
     weight: 301
+
+  ## GETTING STARTED - Logs
+
+  - name: "Logs"
+    identifier: "getting_started_logs"
+    url: "getting_started/logs/"
+    parent: "getting_started"
+    weight: 4
 
   ## GETTING STARTED - Traces
 
-  - name: "Collect traces"
+  - name: "Tracing"
     identifier: "getting_started_collect_traces"
     url: "getting_started/tracing/"
     parent: "getting_started"
-    weight: 4
+    weight: 5
   - name: "Distributed Tracing"
     identifier: "getting_started_distributed_tracing"
     url: "getting_started/tracing/distributed-tracing/"
     parent: "getting_started_collect_traces"
-    weight: 401
+    weight: 501
 
   - name: "API"
     identifier: "getting_started_api"
     url: "getting_started/api/"
     parent: "getting_started"
-    weight: 5
+    weight: 6
 
   - name: "Learning Center"
     url: "getting_started/learning_center/"
     parent: "getting_started"
-    weight: 6
+    weight: 7
 
 #############
 ## TAGGING ##
@@ -225,28 +243,28 @@ main:
     identifier: "agent_autodiscovery"
     parent: "agent"
     weight: 4
+  - name: "Auto-Configuration"
+    url: "agent/autodiscovery/auto_conf/"
+    parent: "agent_autodiscovery"
+    weight: 401
   - name: "Integrations Templates"
     url: "agent/autodiscovery/integrations/"
     parent: "agent_autodiscovery"
-    weight: 401
+    weight: 402
   - name: "Container Identifier"
     url: "agent/autodiscovery/ad_identifiers/"
     parent: "agent_autodiscovery"
-    weight: 402
+    weight: 403
   - name: "Template Variables"
     url: "agent/autodiscovery/template_variables/"
     parent: "agent_autodiscovery"
-    weight: 403
+    weight: 404
   - name: "Tag Extraction"
     url: "agent/autodiscovery/tag/"
     parent: "agent_autodiscovery"
-    weight: 404
+    weight: 405
   - name: "Discovery Management"
     url: "agent/autodiscovery/management/"
-    parent: "agent_autodiscovery"
-    weight: 405
-  - name: "Troubleshooting"
-    url: "agent/autodiscovery/troubleshooting/"
     parent: "agent_autodiscovery"
     weight: 406
   - name: "Endpoints Checks"
@@ -257,6 +275,10 @@ main:
     url: "agent/autodiscovery/clusterchecks/"
     parent: "agent_autodiscovery"
     weight: 408
+  - name: "Troubleshooting"
+    url: "agent/autodiscovery/troubleshooting/"
+    parent: "agent_autodiscovery"
+    weight: 409
 
   ## AGENT - LOGS
 
@@ -449,10 +471,6 @@ main:
     url: "graphing/infrastructure/process/"
     parent: "graphing_infrastructure"
     weight: 604
-  - name: "Network Performance Monitor"
-    url: "graphing/infrastructure/network_performance_monitor/"
-    parent: "graphing_infrastructure"
-    weight: 605
   - name: "Serverless"
     url: "graphing/infrastructure/serverless/"
     parent: "graphing_infrastructure"

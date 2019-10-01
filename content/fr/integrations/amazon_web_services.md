@@ -336,15 +336,16 @@ Utilisez le [référentiel sans serveur AWS][43] pour déployer la fonction Lamb
 4. Si vous utilisez le site européen de Datadog, définissez `DD_SITE` sur `datadoghq.eu` en tant que variable d'environnement ou directement dans le code.
 5. Faites défiler jusqu'à atteindre **Basic Settings** sous la zone de code intégrée.
 6. Définissez la mémoire sur une valeur **proche de 1 Go**.
-7. Définissez le délai d'expiration (nous recommandons d'indiquer **120 secondes**).
+7. Définissez le délai d'expiration sur **120 secondes**.
     {{< img src="logs/aws/basic_settings.png" alt="Réglages de base" responsive="true" style="width:80%;" >}}
-8. Définissez Execution Role sur le [rôle créé précédemment][46].
+8. Définissez l'option Execution Role sur le [rôle créé précédemment][46].
     {{< img src="logs/aws/execution_role.png" alt="Réglages de base" responsive="true" style="width:80%;" >}}
-9. Ajoutez la [couche Lambda de Datadog][96] à l'aide de l'ARN suivante. Remplacez `us-east-1` par la région où votre fonction est déployée et remplacez `Python27` par le runtime Python que votre fonction utilise (`Python27`, `Python36`, ou `Python37`).
+10. Faites défiler vers le bas vers la section Concurrency et définissez l'option [Reserve concurrency][124] sur **100**.
+11. Ajoutez la [couche Lambda de Datadog][96] à l'aide de l'ARN suivante. Remplacez `us-east-1` par la région où votre fonction est déployée et remplacez `Python27` par le runtime Python que votre fonction utilise (`Python27`, `Python36` ou `Python37`).
    ```
    arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python27:5
    ```
-10. Faites défiler vers le haut de la page et cliquez sur **Save**.
+12. Faites défiler vers le haut de la page et cliquez sur **Save**.
 
 #### Tester votre Lambda
 
@@ -354,7 +355,23 @@ Utilisez le [référentiel sans serveur AWS][43] pour déployer la fonction Lamb
 2. Saisissez un nom unique pour l'événement, puis cliquez sur **Create**.
 3. Cliquez sur Test et vérifiez qu'aucune erreur ne survient (les logs de test n'apparaîtront pas dans votre plateforme Datadog).
 
-#### Paramètres avancés (rédaction et filtrage facultatifs)
+#### Paramètres avancés
+
+##### Site Datadog
+
+La variable d'environnement `DD_SITE` définit le site Datadog vers lequel les informations doivent être envoyées. Utilisez `datadoghq.com` pour le site américain de Datadog (valeur par défaut) ou `datadoghq.eu` pour le site européen de Datadog.
+
+##### Proxy
+
+Deux variables d'environnement sont disponibles pour faire passer les logs par un proxy :
+
+* `DD_URL` : définit l'endpoint du proxy vers lequel les logs doivent être transmis.
+* `DD_PORT` : définit le port du proxy vers lequel les logs doivent être transmis.
+
+#### Envoyer les logs par TCP ou HTTP
+
+Par défaut, le forwarder envoie les logs en HTTPS par l'intermédiaire du port `443`. Pour envoyer les logs en passant par une connexion TCP chiffrée par SSL, définissez la variable d'environnement `DD_USE_TCP` sur `true`.
+Lorsque le TCP est activé, le port `10516` est utilisé pour le site américain de Datadog et le port `1883` est utilisé pour le site européen de Datadog.
 
 ##### Ajouter des règles de filtrage ou de remplacement à l'aide de variables d'environnement
 
@@ -382,6 +399,12 @@ Utilisez les variables d'environnement `EXCLUDE_AT_MATCH` OU `INCLUDE_AT_MATCH` 
 - Les règles de filtrage sont appliquées à l'intégralité du log au format JSON, y compris aux métadonnées automatiquement ajoutées par la fonction.
 
 Pensez à tester votre Lambda après avoir configuré les paramètres avancés pour vérifier qu'aucune erreur ne se produit.
+
+###### Prise en charge des logs multiligne pour S3
+
+Pour traiter les logs multiligne dans S3, définissez la variable d'environnement `DD_MULTILINE_LOG_REGEX_PATTERN` sur l'expression régulière spécifiée pour la détection d'une nouvelle ligne de log.
+
+**Exemple :** pour les logs multiligne commençant par l'expression `11/10/2014`, utilisez : `DD_MULTILINE_LOG_REGEX_PATTERN="\d{2}\/\d{2}\/\d{4}"`
 
 ### Activer la journalisation pour votre service AWS
 
@@ -482,7 +505,7 @@ Si vous stockez des logs dans un groupe de logs CloudWatch, suivez les étapes c
    Sélectionnez le groupe de logs CloudWatch correspondant, ajoutez un nom de filtre (vous pouvez toutefois laisser le filtre vide) et ajoutez le déclencheur :
 {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="déclencheur cloudwatch" responsive="true" popup="true" style="width:70%;">}}
 
-Accédez ensuite à votre [section Log de Datadog][88] pour commencer à explorer vos logs !
+Accédez ensuite à la [section Log de Datadog][88] pour commencer à explorer vos logs !
 
 ##### Collecte de logs depuis des compartiments S3
 
@@ -498,7 +521,7 @@ Si vous stockez des logs dans un compartiment S3, suivez les étapes ci-dessous 
 4. Définissez le bon type d'événement sur les compartiments S3 :
     {{< img src="logs/aws/object_created.png" alt="Objet créé" responsive="true" popup="true" style="width:80%;">}}
 
-Accédez ensuite à votre [section Log de Datadog][88] pour commencer à explorer vos logs !
+Accédez ensuite à la [section Log de Datadog][88] pour commencer à explorer vos logs !
 
 ## Données collectées
 
@@ -519,7 +542,7 @@ Il est important de tenir compte des deux distinctions suivantes :
 1. Pour les counters AWS, un graphique défini sur « sum » « 1minute » affiche le nombre total d'occurrences en l'espace d'une minute, soit le taux par minute. Datadog affiche les données brutes à partir des valeurs AWS normalisées par seconde, peu importe l'intervalle sélectionné dans AWS. Cela explique pourquoi la valeur affichée dans Datadog peut être plus faible.
 2. Les valeurs minimales, maximales et moyennes n'ont généralement pas la même signification dans AWS et dans Datadog. Dans AWS, les latences moyenne, minimale et maximale correspondent à trois métriques distinctes recueillies. Lorsque Datadog récupère des métriques à partir d'AWS CloudWatch, la latence moyenne est transmise sous la forme de séries temporelles distinctes par ELB. Dans Datadog, lorsque vous sélectionnez les valeurs « min », « max » ou « avg », vous définissez les critères de rassemblement de séries temporelles. Par exemple, si vous cherchez à obtenir `system.cpu.idle` sans appliquer de filtre, une série est envoyée pour chaque host qui renvoie cette métrique. Ces séries doivent être combinées pour être représentées graphiquement. À l'inverse, si vous cherchez à obtenir `system.cpu.idle` pour un seul host, aucune agrégation n'est nécessaire. Les valeurs maximale et moyenne sont identiques.
 
-### Retard des métriques
+### Métriques en retard
 
 Lorsque vous utilisez l'intégration AWS, Datadog récupère vos métriques via l'API CloudWatch. Il est possible que les données des métriques AWS accusent un léger retard, en raison des contraintes liées à l'API.
 
@@ -538,7 +561,7 @@ L'API CloudWatch renvoie uniquement les métriques avec des points de données. 
 Lorsque l'option d'équilibrage des charges entre zones est activée sur un ELB, toutes les instances liées à cet ELB font partie de toutes les zones de disponibilité (pour CloudWatch). Ainsi, si vous possédez deux instances dans 1a et trois dans ab, la métrique affiche cinq instances par zone de disponibilité.
 Puisque cela peut s'avérer contre-intuitif, nous avons ajouté de nouvelles métriques, **aws.elb.healthy_host_count_deduped** et **aws.elb.un_healthy_host_count_deduped**, qui affichent le nombre d'instances saines et non saines par zone de disponibilité, que vous ayez activé ou non l'option d'équilibrage des charges entre zones.
 
-### Certains hosts sont dupliqués durant l'installation de l'Agent ?
+### Hosts dupliqués lors de l'installation de l'Agent
 
 Lors de l'installation de l'Agent sur un host AWS, il est possible que des hosts soient dupliqués pendant quelques heures sur la page d'infrastructure si vous avez défini manuellement le hostname dans la configuration de l'Agent. Ces doublons disparaîtront après quelques heures et ne seront pas pris en compte durant la facturation.
 
@@ -666,6 +689,7 @@ Lors de l'installation de l'Agent sur un host AWS, il est possible que des hosts
 [121]: http://docs.datadoghq.com/integrations/amazon_sagemaker/
 [122]: http://docs.datadoghq.com/integrations/amazon_vpc/
 [123]: https://app.datadoghq.com/account/settings#api
+[124]: https://docs.aws.amazon.com/lambda/latest/dg/per-function-concurrency.html
 
 
 {{< get-dependencies >}}

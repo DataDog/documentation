@@ -11,7 +11,7 @@ List endpoint returns logs that match a log search query. [Results are paginated
 
 **If you are thinking about archiving logs for your organization, consider using Datadog archive capabilities instead of the log list API. See [Datadog Logs Archive documentation][2].**
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`query`** [*required*]:
     The search query - following the [Log search syntax][3] .

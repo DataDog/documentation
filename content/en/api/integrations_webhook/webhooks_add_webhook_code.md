@@ -5,12 +5,14 @@ order: 20.3
 external_redirect: /api/#add-a-webhook-to-a-webhooks-integration
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `POST /v1/integration/webhooks`
 
-##### Example Request
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="webhooks_add_webhook" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.webhooks_add_webhook" >}}

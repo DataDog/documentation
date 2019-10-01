@@ -9,6 +9,7 @@ external_redirect: /api/#search-metrics
 This endpoint allows you to search for metrics from the last 24 hours in Datadog.
 
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * `q` [*required*]:
     The query string. Must be prefixed with `metrics:`.

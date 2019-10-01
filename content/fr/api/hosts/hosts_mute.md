@@ -6,7 +6,8 @@ external_redirect: /api/#desactiver-un-host
 ---
 
 ## Désactiver un host
-##### ARGUMENTS
+
+**ARGUMENTS**:
 
 * **`end`** [*facultatif*, *défaut*=**None**] :
     timestamp POSIX du moment où le host est réactivé. S'il est omis, le host reste désactivé jusqu'à ce qu'il soit explicitement réactivité.

@@ -12,6 +12,5 @@ external_redirect: /api/#integration-azure
 Configure your Datadog-Azure integration directly through the Datadog API.
 For more information, see the [Datadog-Azure integration page][2].
 
-
 [1]: /help
 [2]: /integrations/azure

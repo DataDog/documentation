@@ -20,17 +20,16 @@ When a file is rotated, the Agent keeps tailing the old file until its end befor
 ### Network issues
 #### File Tailing
 
-The Agent stores a pointer for each tailed file. So, if there is a network connection issue, we stop sending logs until the connection is restored and automatically pick up where we stopped to ensure no logs are lost.
+The Agent stores a pointer for each tailed file. If there is a network connection issue, the Agent stops sending logs until the connection is restored and automatically picks up where it stopped to ensure no logs are lost.
 
 #### Port Listening
 
-If the Agent is listening to a TCP or UDP port and faces a network issue, we store the logs in a local buffer until the network is available again.  
-However, there are some limits for this buffer as we do not want to create memory issues. That's why unfortunately new logs are dropped when the buffer is full.
+If the Agent is listening to a TCP or UDP port and faces a network issue, the logs are stored in a local buffer until the network is available again.
+However, there are some limits for this buffer in order to avoid memory issues. New logs are dropped when the buffer is full.
 
 #### Container logs
 
-As for files, we are able to store a pointer for each tailed container. Therefore, in case of network issue we are able to know which logs have not been sent yet.  
+As for files, Datadog storse a pointer for each tailed container. Therefore, in the case of network issues, it is possible for the Agent to know which logs have not been sent yet.
 However, if the tailed container is removed before the network is available again, the logs are not accessible anymore.
 
 {{< partial name="whats-next/whats-next.html" >}}
-

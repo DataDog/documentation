@@ -29,7 +29,7 @@ sudo yum localinstall datadog-agent-<AGENT_VERSION>-1.x86_64.rpm
 Once installed, add a `datadog.yaml` file by copying `datadog.yaml.example`. Then update `datadog.yaml` with the [API key][4] for your organization. This can be done with a single command:
 
 ```bash
-sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_DATADOG_API_KEY>/' /etc/dd-agent/datadog.yaml.example > /etc/dd-agent/datadog.yaml"
+sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_DATADOG_API_KEY>/' /etc/datadog-aent/datadog.yaml.example > /etc/datadog-aent/datadog.yaml.example"
 ```
 
 Then, [start the Agent][5] using the appropriate command for your system.

@@ -5,13 +5,14 @@ order: 15.06
 external_redirect: "/api/#generer-desidentifiants-externes"
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `PUT /v1/integration/aws/generate_new_external_id`
 
-##### Exemple de requête
+**EXEMPLE DE REQUÊTE**:
 
 {{< code-snippets basename="aws_generate_new_external_id" >}}
 
-##### Exemple de réponse
+**EXEMPLE DE RÉPONSE**:
+
 {{< code-snippets basename="result.aws_generate_new_external_id" >}}

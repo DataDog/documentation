@@ -20,12 +20,12 @@
         <div class="col">
             <a href="{{ "" | absLangURL }}"><h4>{{ i18n "datadog_docs" }}</h4></a>
             <form class="docssearch" method="GET" action="{{ "search/" | absLangURL }}">
-                <div id="docssearchWrapper">
+                <div>
                     <input class="docssearch-input" name="s" type="docssearch" placeholder="Search documentation...">
                 </div>
             </form>
 
-            <div class="sidenav-nav" id="sidenav">
+            <div class="sidenav-nav">
                 {{ partial "sidenav/nav-new.html" . }}
             </div>
         </div>

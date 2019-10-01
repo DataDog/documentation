@@ -193,11 +193,14 @@ Consultez la [documentation relative aux règles de traitement multiligne][1] po
 Si vous exécutez Kubernetes, vous pouvez utiliser les annotations de pod.
 
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
   name: nginx
 spec:
+  selector:
+    matchLabels:
+      app: webapp
   template:
     metadata:
       annotations:
@@ -279,6 +282,6 @@ ac_exclude = ["name:datadog-agent"]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/integrations/journald/
+[1]: /fr/integrations/journald
 [2]: /fr/agent/autodiscovery
 [3]: /fr/agent/autodiscovery/integrations/?tab=kubernetes

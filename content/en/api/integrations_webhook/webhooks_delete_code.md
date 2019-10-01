@@ -5,12 +5,14 @@ order: 20.4
 external_redirect: /api/#delete-a-webhooks-integration
 ---
 
-##### Signature
+**SIGNATURE**:
 
 `DELETE /v1/integration/webhooks`
 
-##### Example Request
+**EXAMPLE REQUEST**:
+
 {{< code-snippets basename="webhooks_delete" >}}
 
-##### Example Response
+**EXAMPLE RESPONSE**:
+
 {{< code-snippets basename="result.webhooks_delete" >}}
