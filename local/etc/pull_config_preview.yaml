@@ -12,7 +12,7 @@
     #   - dd/utils/context/source.py
 
     - action: integrations
-      branch: prod
+      branch: ruth/aws-app-mesh
       globs:
       - integration/**/*_metadata.csv
       - integration/**/manifest.json
