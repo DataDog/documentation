@@ -110,7 +110,7 @@ class BackupLedger:
 ```
 
 ### Instrument a specific code block
-  This example walks through adding child spans to the `BackupLedger.write` span created above. This method adds a child span for every every transaction in the ledger and adds a [custom tag][1] with the specific transaction ID.
+This example adds child spans to the `BackupLedger.write` span created above. This method adds a child span for every transaction in the ledger and a [custom tag][1] with the specific transaction ID.
 
 ```python
 from ddtrace import tracer
