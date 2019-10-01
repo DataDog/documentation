@@ -337,7 +337,7 @@ Now that you have instrumented your business logic, it's time to see the results
 
 The span summary table provides aggregate information about the spans that make up your traces. Here you can identify spans that repeat an abnormal amount of times indicating some looping or database access inefficiency (like the [`n+1` issue][2]).
 
-2. **Scroll down to the Traces list** and click into one of the traces you see there.
+2. Scroll down to the **Traces list** and click into one of the your traces.
 
     {{< img src="tracing/guide/custom_span/custom_span_4.png" alt="Analytics View" responsive="true" style="width:90%;">}}
 
