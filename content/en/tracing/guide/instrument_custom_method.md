@@ -215,7 +215,7 @@ const tracer = require('dd-trace')
 
 function write (transactions) {
   // Use `tracer.trace` context manager to trace blocks of inline code
-  tracer.trace('BackupLedger.persist', () => {
+  tracer.trace('BackupLedger.write', () => {
     for (const transaction of transactions) {
       // Add custom metadata to the "persist_transaction" span
       span.setTag('transaction.id', transaction.id)
