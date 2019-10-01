@@ -22,7 +22,7 @@ _8 minutes to complete_
 
 To provide you with deep visibility into your business logic, Datadog APM allows you to customize the spans that make up your traces based on your needs and implementation. This empowers you to trace any method in your codebase and even specific components within methods. You can use this to optimize and monitor critical areas of your application at the granularity that works for you.
 
-Datadog instruments many frameworks out-of-the-box such as web services, databases and caches and it enables you to instrument your own business logic to have the exact visibility you need. By creating spans for the methods, you can optimize timing and track errors using the APM flamegraph and Datadog monitors.
+Datadog instruments many frameworks out-of-the-box such as web services, databases, and caches and enables you to instrument your own business logic to have the exact visibility you need. By creating spans for methods, you can optimize timing and track errors using the APM flame graph and monitors.
 
 ## Instrumenting your code
 
