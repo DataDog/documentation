@@ -103,7 +103,7 @@ Vous avez la possibilité d'ajouter des tags directement à vos monitors afin de
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors/manage
-[2]: /fr/monitors/#manually-resolve-your-monitor
+[2]: /fr/monitors/monitor_status/#resolve
 [3]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax
 [4]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
 [5]: https://app.datadoghq.com/monitors/triggered
