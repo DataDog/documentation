@@ -208,7 +208,7 @@ func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Tra
 {{% tab "Node.js" %}}
   In Node.js, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
 
-  This example walk through the process of creating a new span for every transaction posted to the ledger and adding a [custom tag][1] with the specific transaction ID to the span.
+This example creates a new span for every transaction posted to the ledger and adds a [custom tag][1] with the specific transaction ID to the span.
 
 ```javascript
 const tracer = require('dd-trace')
