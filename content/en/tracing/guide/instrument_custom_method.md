@@ -173,16 +173,13 @@ import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 // [...]
 
 func (bl *BackupLedger) write(ctx context.Context, transactions []*Transaction) (err error) {
+  // Trace the `write` function and capture the error if present
   span, ctx := tracer.StartSpanFromContext(ctx, "BackupLedger.write")
   defer func() {
-    // inside the defer, err holds its final value after the parent function
-    // returns; if it's non-nil, the span is marked with it.
     span.Finish(tracer.WithError(err))
   }()
 
   for _, t := range transactions {
-    // ctx you pass down includes out-of-the-box span references to create
-    // a parent/child relationship
     if err := bl.persistTransaction(ctx, t); err != nil {
       return err
     }
@@ -190,6 +187,9 @@ func (bl *BackupLedger) write(ctx context.Context, transactions []*Transaction) 
   return nil
 }
 
+// persistTransaction is an inner function you may want to Trace. You can use the
+// same approach as before because the `ctx` you pass down includes out-of-the-box span
+// references to create a parent/child relationship
 func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Transaction) error {
   id := transaction.ID
   span, _ := tracer.StartSpanFromContext(ctx, "BackupLedger.persist", tracer.Tag("transaction_id", id))
