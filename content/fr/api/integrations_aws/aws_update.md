@@ -10,7 +10,7 @@ Mettre à jour une intégration Datadog/Amazon Web Services.
 
 **Remarque** : la méthode `PUT` permet de mettre à jour la configuration de votre intégration en **remplaçant** votre configuration actuelle par une nouvelle, envoyée à votre organisation Datadog.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`account_id`** [*obligatoire*] :
 

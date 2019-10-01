@@ -20,10 +20,6 @@ public_title: Datadog-Alibaba Cloud インテグレーション
 short_description: Alibaba Cloud サービスを Datadog と統合
 version: 1
 ---
-<div class="alert alert-warning">
-このインテグレーションは、現在、公開ベータ版です。
-</div>
-
 ## 概要
 
 Alibaba Cloud に接続して、以下からメトリクスを取得します。
@@ -104,6 +100,7 @@ Alibaba Cloud のイベントは、Alibaba Cloud サービスごとに収集さ�
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

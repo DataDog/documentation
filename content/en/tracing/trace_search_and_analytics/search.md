@@ -66,7 +66,7 @@ A query is composed of *terms* and *operators*.
 
 There are two types of *terms*:
 
-* A [**Facet**](#facets-search)
+* A [**Facet**](#facet-search)
 
 * A [**Tag**](#tags-search)
 

@@ -54,7 +54,7 @@ Si le parser ne se trouve **pas** dans le `PYTHONPATH` de l'Agent, vous pouvez u
 
 Dans ce format, l'Agent tente d'importer une fonction appelée `custom_parser` à partir de `/chemin/vers/mon/parsers_module.py`.
 
-Si votre parser de log personnalisé ne fonctionne pas, vérifiez tout d'abord les logs du collecteur de l'Agent :
+Si votre parser de log personnalisé ne fonctionne pas, vérifiez tout d'abord les logs du Collector de l'Agent :
 
 * Si l'Agent n'est pas en mesure d'importer votre fonction, recherchez `Could not load Dogstream line parser`.
 

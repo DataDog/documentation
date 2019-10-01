@@ -44,29 +44,37 @@ main:
     parent: "getting_started_datadog"
     weight: 301
 
+  ## GETTING STARTED - Logs
+
+  - name: "Logs"
+    identifier: "getting_started_logs"
+    url: "getting_started/logs/"
+    parent: "getting_started"
+    weight: 4
+
   ## GETTING STARTED - Traces
 
   - name: "Tracing"
     identifier: "getting_started_collect_traces"
     url: "getting_started/tracing/"
     parent: "getting_started"
-    weight: 4
+    weight: 5
   - name: "Distributed Tracing"
     identifier: "getting_started_distributed_tracing"
     url: "getting_started/tracing/distributed-tracing/"
     parent: "getting_started_collect_traces"
-    weight: 401
+    weight: 501
 
   - name: "API"
     identifier: "getting_started_api"
     url: "getting_started/api/"
     parent: "getting_started"
-    weight: 5
+    weight: 6
 
   - name: "Learning Center"
     url: "getting_started/learning_center/"
     parent: "getting_started"
-    weight: 6
+    weight: 7
 
 #############
 ## TAGGING ##
