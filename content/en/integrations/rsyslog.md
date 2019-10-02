@@ -82,7 +82,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     If you did not specify any hostname in your configuration file for the metrics via `datadog.conf` or `datadog.yaml`, then you do not need to change anything.
     If you did specify a custom hostname for your metric, replace the **%HOSTNAME%** value in the format to match the same custom name.
 
-7. Use Datadog Integrations
+7. Use Datadog integrations.
     To get the best use out of your logs in Datadog, set the source on your logs. The source can be set directly in the Agent if you forward your logs to the Datadog Agent.
 
     Otherwise you need a specific format per log source, which means you need a specific configuration file per source in `/etc/rsyslog.d/`.
@@ -117,7 +117,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 {{% tab "Datadog EU site" %}}
 
 1. (Optional) Activate Rsyslog file monitoring module.
-    If you want to watch/monitor specific log files, then you have to activate the imfile module by adding this to  your `rsyslog.conf`:
+    If you want to watch or monitor specific log files, activate the `imfile` module by adding this to your `rsyslog.conf`:
 
         ```
         module(load="imfile" PollingInterval="10") #needs to be done just once
@@ -159,16 +159,17 @@ Configure Rsyslog to gather logs from your host, containers, & services.
         }
         ```
 
-5. Restart Rsyslog and your new logs are forwarded directly to your Datadog account.
+5. Restart Rsyslog, and your new logs are forwarded directly to your Datadog account.
+
     ```
     sudo service rsyslog restart
     ```
     
 6. Associate those logs with the host metrics and tags.
-    To make sure these logs in your Datadog account are associated with the metrics and tags from the same host, it is important to set the same HOSTNAME in your `rsyslog.conf` so that its value matches the hostname of your Datadog metrics.
-    **Note**: If you did not specify any hostname in your configuration file for the metrics via the `datadog.conf` or `datadog.yaml`, then you do not need to change anything. If you did specify a custom hostname for your metric, make sure to replace the **%HOSTNAME%** value in the format to match the same custom name.
+    To make sure these logs are associated with the metrics and tags from the same host in your Datadog account, set the same `HOSTNAME` in your `rsyslog.conf` so that its value matches the hostname of your Datadog metrics.
+    **Note**: If you did not specify any hostname in your configuration file for the metrics via  `datadog.conf` or `datadog.yaml`, you do not need to change anything. If you did specify a custom hostname for your metric, make sure to replace the **%HOSTNAME%** value in the format to match the same custom name.
 
-7. Use Datadog Integrations
+7. Use Datadog integrations.
     To get the best use out of your logs in Datadog, set the source on your logs. The source can be set directly in the Agent if you forward your logs to the Datadog Agent.
 
     Otherwise you need a specific format per log source which means you need a specific configuration file per source in `/etc/rsyslog.d/`.
@@ -208,7 +209,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 {{% tab "Datadog US site" %}}
 
 1. (Optional) Activate Rsyslog file monitoring module.
-    If you want to watch/monitor specific log files, then you have to activate the imfile module by adding this to  your `rsyslog.conf`:
+    If you want to watch or monitor specific log files, activate the `imfile` module by adding this to your `rsyslog.conf`:
 
         ```
         $ModLoad imfile
@@ -264,11 +265,10 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     ```
 
 6. Associate those logs with the host metrics and tags.
-    To make sure that in your Datadog account these logs are associated with the metrics and tags from the same host, it is important to set the same HOSTNAME in your `rsyslog.conf` so that its value matches the hostname of your Datadog metrics.
-    Note that if you did not specify any hostname in your configuration file for the metrics via the `datadog.conf` or datadog.yaml, then you do not need to change anything.
-    If you did specify a custom Hostname for your metric, make sure to replace the **%HOSTNAME%** value in the format to match the same custom name.
+    To make sure these logs are associated with the metrics and tags from the same host in your Datadog account, set the same `HOSTNAME` in your `rsyslog.conf` so that its value matches the hostname of your Datadog metrics.
+    **Note**: If you did not specify any hostname in your configuration file for the metrics via  `datadog.conf` or `datadog.yaml`, you do not need to change anything. If you did specify a custom hostname for your metric, make sure to replace the **%HOSTNAME%** value in the format to match the same custom name.
 
-7. Use Datadog Integrations
+7. Use Datadog integrations.
     To get the best use out of your logs in Datadog, set the source on your logs. The source can be set directly in the Agent if you forward your logs to the Datadog Agent.
 
     Otherwise you need a specific format per log source which means you need a specific configuration file per source in `/etc/rsyslog.d/`.
@@ -303,7 +303,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 {{% tab "Datadog EU site" %}}
 
 1. (Optional) Activate Rsyslog file monitoring module.
-    If you want to watch/monitor specific log files, then you have to activate the imfile module by adding this to  your `rsyslog.conf`:
+    If you want to watch or monitor specific log files, activate the `imfile` module by adding this to your `rsyslog.conf`:
 
         ```
         $ModLoad imfile
@@ -359,10 +359,10 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     ```
 
 6. Associate those logs with the host metrics and tags.
-    To make sure these logs in your Datadog account are associated with the metrics and tags from the same host, it is important to set the same HOSTNAME in your `rsyslog.conf` so that its value matches the hostname of your Datadog metrics.
-    **Note**: If you did not specify any hostname in your configuration file for the metrics via the `datadog.conf` or `datadog.yaml`, then you do not need to change anything. If you did specify a custom hostname for your metric, make sure to replace the **%HOSTNAME%** value in the format to match the same custom name.
+    To make sure these logs are associated with the metrics and tags from the same host in your Datadog account, set the same `HOSTNAME` in your `rsyslog.conf` so that its value matches the hostname of your Datadog metrics.
+    **Note**: If you did not specify any hostname in your configuration file for the metrics via  `datadog.conf` or `datadog.yaml`, you do not need to change anything. If you did specify a custom hostname for your metric, make sure to replace the **%HOSTNAME%** value in the format to match the same custom name.
 
-7. Use Datadog Integrations
+7. Use Datadog integrations.
     To get the best use out of your logs in Datadog, set the source on your logs. The source can be set directly in the Agent if you forward your logs to the Datadog Agent.
 
     Otherwise you need a specific format per log source which means you need a specific configuration file per source in `/etc/rsyslog.d/`.
