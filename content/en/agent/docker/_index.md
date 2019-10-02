@@ -208,7 +208,7 @@ To add integrations using Autodiscovery, see the [Autodiscovery Integration Temp
 
 ### Mounting conf.d
 
-Your integration configuration files can be copied to `/etc/datadog-agent/conf.d/` when starting the Docker Agent by mounting a `/conf.d` folder.
+Your integration configuration files can be copied to `/etc/dd-agent/conf.d/` when starting the Docker Agent by mounting a `/conf.d` folder.
 
 1. Create a configuration folder on the host with your YAML files:
     ```shell
@@ -227,9 +227,9 @@ Your integration configuration files can be copied to `/etc/datadog-agent/conf.d
                   datadog/agent:latest
     ```
 
-When the container starts, all files on the host in `/opt/datadog-agent-conf.d` with a `.yaml` extension are copied to `/etc/datadog-agent/conf.d/`. **Note**: If you add new YAML files to `/opt/datadog-agent-conf.d`, restart the Docker Agent.
+When the container starts, all files on the host in `/opt/datadog-agent-conf.d` with a `.yaml` extension are copied to `/etc/dd-agent/conf.d/`. **Note**: If you add new YAML files to `/opt/datadog-agent-conf.d`, restart the Docker Agent.
 
-The same can be done for the `/checks.d` folder. Any Python files in the `/checks.d` folder are automatically copied to `/etc/datadog-agent/checks.d/` when starting the Docker Agent.
+The same can be done for the `/checks.d` folder. Any Python files in the `/checks.d` folder are automatically copied to `/etc/dd-agent/checks.d/` when starting the Docker Agent.
 
 
 ## Further Reading
