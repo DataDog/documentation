@@ -39,7 +39,7 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 | Heroku       | Consult the dedicated [Heroku documentation][3]         |
 
 
-[1]: /agent/#using-the-gui
+[1]: /agent/basic_agent_usage/?tab=agentv6#gui
 [2]: /agent/basic_agent_usage/windows/#agent-v6
 [3]: https://docs.datadoghq.com/agent/faq/heroku-troubleshooting/#send-a-flare
 {{% /tab %}}
