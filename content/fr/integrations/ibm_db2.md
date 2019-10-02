@@ -145,7 +145,7 @@ Si vous exécutez désormais `get dbm cfg`, voici ce qui s'affiche :
 Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à la base de données IBM Db2 qu'il surveille. Si ce n'est pas le cas, renvoie `OK`.
 
 **ibm_db2.status** :<br>
-Renvoie `CRITICAL` si la base de données IBM Db2 surveillée est en veille, `WARNING` pour l'attente de mise en veille ou les restaurations ou renvoie `OK` dans les autres cas.
+Renvoie `CRITICAL` si la base de données IBM Db2 surveillée est en veille, `WARNING` pour l'attente de mise en veille ou les restaurations ou renvoie `OK` pour les autres cas.
 
 ### Événements
 
