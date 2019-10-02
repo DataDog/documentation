@@ -78,14 +78,14 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     ```
 
 6. Associate those logs with the host metrics and tags.
-    To make sure that in your Datadog account these logs are associated with the metrics and tags from the same host, it is important to set the same HOSTNAME in your `rsyslog.conf` so that its value matches the hostname of your Datadog metrics.
-    Note that if you did not specify any hostname in your configuration file for the metrics via the `datadog.conf` or datadog.yaml, then you do not need to change anything.
-    If you did specify a custom Hostname for your metric, make sure to replace the **%HOSTNAME%** value in the format to match the same custom name.
+    To make sure that these logs are associated with the metrics and tags from the same host in your Datadog account, set the `HOSTNAME` in your `rsyslog.conf` to match the hostname of your Datadog metrics.
+    If you did not specify any hostname in your configuration file for the metrics via `datadog.conf` or `datadog.yaml`, then you do not need to change anything.
+    If you did specify a custom hostname for your metric, replace the **%HOSTNAME%** value in the format to match the same custom name.
 
 7. Use Datadog Integrations
     To get the best use out of your logs in Datadog, set the source on your logs. The source can be set directly in the Agent if you forward your logs to the Datadog Agent.
 
-    Otherwise you need a specific format per log source which means you need a specific configuration file per source in `/etc/rsyslog.d/`.
+    Otherwise you need a specific format per log source, which means you need a specific configuration file per source in `/etc/rsyslog.d/`.
 
     To set the source, use the following format (if you have several sources, change the name of the format in each file):
 
