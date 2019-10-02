@@ -468,7 +468,7 @@ logs_config:
   logs_dd_url: myProxyServer.myDomain:10514
 ```
 
-Do not change the `logs_no_ssl` parameter as Nginx is simply forwarding the traffic to Datadog and does not decrypt or encrypt the traffic.
+Do not change the `logs_no_ssl` parameter as NGINX is simply forwarding the traffic to Datadog and does not decrypt or encrypt the traffic.
 
 ## Using the Agent as a Proxy
 
