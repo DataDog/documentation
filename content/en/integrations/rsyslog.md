@@ -40,7 +40,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 3. Set the log files to monitor and configure the destination endpoint.
     Add the following in `/etc/rsyslog.d/datadog.conf`.
 
-        ```
+          ```
         # For each file to send
         input(type="imfile" ruleset="infiles" Tag="<APP_NAME_OF_FILE1>" File="<PATH_TO_FILE1>" StateFile="<UNIQUE_FILE_ID>")
         
@@ -51,7 +51,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
         ruleset(name="infiles") {
             action(type="omfwd" target="intake.logs.datadoghq.com" protocol="tcp" port="10514" template="DatadogFormat")
         }
-        ```
+          ```
 
 4. (Optional) TLS Encryption:
     While sending your logs directly from Rsyslog to your Datadog account, if you want to add TLS encryption, take the following steps.
@@ -66,7 +66,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 
         ```
         #Define the destination for the logs
-        $DefaultNetstreamDriverCAFile /etc/ssl/certs/intake.logs.datadoghq.com.crt
+        $DefaultNetstreamDriverCAFile /etc/ssl/certs/ca-certificates.crt
         ruleset(name="infiles") {
           action(type="omfwd" protocol="tcp" target="intake.logs.datadoghq.com" port="10516" template="DatadogFormat"           StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.com" )
         }
@@ -127,7 +127,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 3. Set the log files to monitor and configure the destination endpoint.
     Add the following in `/etc/rsyslog.d/datadog.conf`.
 
-        ```
+       ```
         # For each file to send
         input(type="imfile" ruleset="infiles" Tag="<APP_NAME_OF_FILE1>" File="<PATH_TO_FILE1>" StateFile="<UNIQUE_FILE_ID>")
         
@@ -138,7 +138,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
         ruleset(name="infiles") {
             action(type="omfwd" target="tcp-intake.logs.datadoghq.eu" protocol="tcp" port="1883" template="DatadogFormat")
         }
-        ```
+       ```
 
 4. (Optional) TLS Encryption:
     While sending your logs directly from Rsyslog to your Datadog account, if you want to add TLS encryption, take the following steps.
@@ -153,7 +153,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 
         ```
         #Define the destination for the logs
-        $DefaultNetstreamDriverCAFile /etc/ssl/certs/intake.logs.datadoghq.com.crt
+        $DefaultNetstreamDriverCAFile /etc/ssl/certs/ca-certificates.crt
         ruleset(name="infiles") {
           action(type="omfwd" protocol="tcp" target="tcp-intake.logs.datadoghq.eu" port="443" template="DatadogFormat"           StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.com" )
         }
