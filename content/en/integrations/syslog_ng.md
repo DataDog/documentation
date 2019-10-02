@@ -77,7 +77,7 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
 
 4. (Optional) TLS Encryption:  
 
-    * Download the ca-certificate:
+    * Download the CA certificate:
     
      ```
     sudo apt-get install ca-certificates
