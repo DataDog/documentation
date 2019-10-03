@@ -17,7 +17,19 @@ For Serverless pricing information, see the infrastructure section in [Datadogs 
 
 You can track the number of billable Serverless Functions in your account by checking the application [Usage Page][4]. You can see both the Month-To-Date summary, as well as usage over time.
 
-To control the number of functions Datadog is monitoring, filter out particular functions by sorting by tag with the API:
+To control the number of functions Datadog is monitoring, filter out particular functions by sorting by tag with the [UI](#ui) or by using the [API](#api).
+
+### UI
+
+To use the UI to control the number of functions Datadog is monitoring, navigate to the [AWS Integration page][5] and add tags as `key:value` sets to the **to Lambdas with tag:** field.
+
+To add a blacklisted tag, include a `!` before the tag key. For example:
+
+`!env:staging,!env:test1`
+
+This filter excludes anything that is tagged with `env:staging` or `env:test1`.
+
+### API
 
 **Listing the current tag filter rules**
 ```
@@ -40,7 +52,7 @@ curl -X DELETE 'https://app.datadoghq.com/api/v1/integration/aws/filtering?api_k
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][5].
+For technical questions, contact [Datadog support][6].
 
 For billing questions, contact your [Customer Success][3] Manager.
 
@@ -48,4 +60,5 @@ For billing questions, contact your [Customer Success][3] Manager.
 [2]: mailto:sales@datadoghq.com
 [3]: mailto:success@datadoghq.com
 [4]: app.datadoghq.com/account/usage
-[5]: /help
+[5]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
+[6]: /help
