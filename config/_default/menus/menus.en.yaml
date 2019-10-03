@@ -664,56 +664,30 @@ main:
     weight: 6
     parent: "alerting"
 
+  ## MONITORS -  SLOs
+  
+  - name: "Service Level Objectives"
+    url: "monitors/service_level_objectives/"
+    weight: 7
+    parent: "alerting"
+    identifier: "slos"
+  
+  - name: "Monitor SLO"
+    url: "monitors/service_level_objectives/monitor/"
+    parent: "slos"
+    weight: 7.1
+  
+  - name: "Event SLO"
+    url: "monitors/service_level_objectives/event/"
+    parent: "slos"
+    weight: 7.2
+
   ## MONITORS -  Guides
 
   - name: "Guides"
     url: "monitors/guide/"
     weight: 100
     parent: "alerting"
-
-
-##############################
-## SERVICE LEVEL OBJECTIVES ##
-##############################
-
-  - name: "Service Level Objectives"
-    url: "service_level_objectives/"
-    pre: "nav_slo"
-    identifier: "slo"
-    weight: 75000
-
-  ## SLO - Monitor Types
-
-  - name: "Service Level Objectives"
-    url: "service_level_objectives/slo_types/"
-    parent: "slo"
-    identifier: "slo_types"
-    weight: 1
-  - name: "Monitor"
-    url: "service_level_objectives/slo_types/monitor/"
-    parent: "slo_types"
-    weight: 101
-  - name: "Metric"
-    url: "service_level_objectives/slo_types/metric/"
-    parent: "slo_types"
-    weight: 102
-
-  ## SLO
-  - name: "List Service Level Objectives"
-    url: "service_level_objectives/list_slos/"
-    weight: 2
-    parent: "slo"
-
-  - name: "Service Level Objective Status"
-    url: "service_level_objectives/slo_status/"
-    weight: 3
-    parent: "slo"
-
-  - name: "Service Level Objective Dashboard Widget"
-    url: "service_level_objectives/widget/"
-    weight: 4
-    parent: "slo"
-
 
 #################
 ## TRACING/APM ##
