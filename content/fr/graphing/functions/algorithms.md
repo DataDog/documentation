@@ -7,7 +7,7 @@ disable_toc: true
 
 | Fonction      | Description                                                                                | Exemple                                                    |
 | :----         | :-------                                                                                   | :---------                                                 |
-| `anomalies()` | Applique une bande grise sur la métrique pour montrer le comportement attendu d'une série d'après les données historiques. | `anomalies(avg:<NOM_MÉTRIQUE>{*}, '<ALGORITHME>', <BORNES>)` |
+| `anomalies()` | Applique une bande grise sur la métrique pour montrer le comportement attendu d'une série d'après les données historiques. | `anomalies(<NOM_MÉTRIQUE>{*}, '<ALGORITHME>', <BORNES>)` |
 
 La fonction `anomalies()` comprend deux paramètres :
 
@@ -26,7 +26,7 @@ Consultez la page [Monitor d'anomalies][1] pour en savoir plus.
 
 | Fonction     | Description                | Exemple                                                                    |
 | :----        | :-------                   | :---------                                                                 |
-| `outliers()` | Mettre en valeur les séries de singularités. | `outliers(avg:<NOM_MÉTRIQUE>{*}, '<ALGORITHME>', <TOLÉRANCE>, <POURCENTAGE>)` |
+| `outliers()` | Mettre en valeur les séries de singularités. | `outliers(<NOM_MÉTRIQUE>{*}, '<ALGORITHME>', <TOLÉRANCE>, <POURCENTAGE>)` |
 
 La fonction `outliers()` comprend trois paramètres :
 
@@ -34,9 +34,24 @@ La fonction `outliers()` comprend trois paramètres :
 * `TOLÉRANCE` : la tolérance de l'algorithme de singularité.
 * `POURCENTAGE` : le pourcentage de points extrêmes nécessaires pour considérer qu'une série constitue une singularité (disponible uniquement pour les algorithmes MAD et scaledMAD).
 
-{{< img src="graphing/functions/algorithms/outlier.gif" alt="détection de singularités" responsive="true" style="width:70%;">}}
+{{< img src="graphing/functions/algorithms/outlier.mp4" alt="détection de singularités" video="true" responsive="true" width="70%" >}}
 
 Consultez la page [Monitor outlier][2] pour en savoir plus.
+
+## Prévision
+
+| Fonction     | Description                | Exemple                                                                    |
+| :----        | :-------                   | :---------                                                                 |
+| `forecast()`  | Prédit la direction future d'une métrique. | `forecast(<NOM_MÉTRIQUE>{*}, '<ALGORITHME>', <DÉVIATIONS>)` |
+
+La fonction `forecast()` comprend deux paramètres :
+
+* `ALGORITHME` : l'algorithme de prévision à utiliser. Les options disponibles sont `linear` et `seasonal`. Pour en savoir plus sur ces algorithmes, consultez la section [Algorithmes de prévision][3].
+* `DÉVIATIONS` : la largeur de la plage des valeurs prédites. Une valeur de 1 ou 2 devrait être suffisante pour prévoir avec précision la plupart des points « normaux ».
+
+La visualisation des prévisions étant unique, certaines options de création de graphique ne sont pas disponibles.  Une fois votre **prévision** ajoutée, votre éditeur devrait ressembler à ceci :
+
+{{< img src="graphing/functions/algorithms/forecast_query.png" alt="éditeur de requête" responsive="true" style="width:80%;">}}
 
 ## Autres fonctions
 
@@ -48,9 +63,10 @@ Consultez la page [Monitor outlier][2] pour en savoir plus.
     {{< nextlink href="/graphing/functions/rate" >}}Taux : calculez une dérivée personnalisée sur votre métrique.{{< /nextlink >}}
     {{< nextlink href="/graphing/functions/regression" >}}Régression : appliquez une fonction d'apprentissage automatique sur votre métrique.{{< /nextlink >}}
     {{< nextlink href="/graphing/functions/rollup" >}}Cumul : contrôlez le nombre de points bruts utilisés dans votre métrique. {{< /nextlink >}}
-    {{< nextlink href="/graphing/functions/smoothing" >}}Lissage : lissez les variations de votre métrique.{{< /nextlink >}}
+    {{< nextlink href="/graphing/functions/smoothing" >}}Lissage : lissez les variations de votre métrique.{{< /nextlink >}}
     {{< nextlink href="/graphing/functions/timeshift" >}}Décalage temporel : modifiez la période d'un point de données de votre métrique. {{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /fr/monitors/monitor_types/anomaly
 [2]: /fr/monitors/monitor_types/outlier
+[3]: /fr/monitors/monitor_types/forecasts/#forecast-algorithms

@@ -9,6 +9,7 @@ aliases:
     - /integrations/faq/using-events-for-service-checks-is-deprecated-in-favor-of-monitors
     - /integrations/faq/i-removed-my-aws-ec2-integration-why-do-my-hosts-still-have-aws-tags
     - /integrations/faq/i-just-set-up-my-aws-integration-why-am-i-seeing-duplicate-hosts
+    - /integrations/faq/extra-hosts-with-name-n-a-reporting-data
 ---
 
 ## Amazon Web Services
@@ -32,7 +33,7 @@ aliases:
 ## Azure
 * [My Azure VM is powered down. Why is it still listed in my infrastructure list?][13]
 * [Azure VMs are showing up in the App but not reporting metrics][14]
-* [Azure VM status is not reporting][15]
+* [Azure Status Metric][15]
 * [Azure Troubleshooting][16]
 
 ## Docker
@@ -143,7 +144,7 @@ aliases:
 [12]: /integrations/faq/apache-ssl-certificate-issues
 [13]: /integrations/faq/my-azure-vm-is-powered-down-why-is-it-still-listed-in-my-infrastructure-list
 [14]: /integrations/faq/azure-vms-are-showing-up-in-the-app-but-not-reporting-metrics
-[15]: /integrations/faq/azure-vm-status-is-not-reporting
+[15]: /integrations/faq/azure-status-metric
 [16]: /integrations/faq/azure-troubleshooting
 [17]: /integrations/faq/compose-and-the-datadog-agent
 [18]: /integrations/faq/dogstatsd-and-docker
