@@ -29,11 +29,11 @@ To create an [integration monitor][1] in Datadog:
 
 ### Integration Metric
 
-Create an integration metric monitor by following the instructions in the [metric monitor][2] documentation.
+Create an integration metric monitor by following the instructions in the [metric monitor][2] documentation. Using the integration metric monitor type ensures the monitor can be selected by the integration monitor type facet on the [Manage Monitors][] page.
 
 ### Integration Status
 
-If the integration has a status metric, the **Integration Status** tab is selectable.
+If the integration has a service check, the **Integration Status** tab is selectable.
 
 #### Pick a check
 
@@ -63,7 +63,7 @@ Set up the check alert:
     
 2. Trigger the alert after selected consecutive failures: `<NUMBER>`
 
-    Each check run submits a single status of `OK`, `WARN`, or `CRITICAL`. Choose how many consecutive runs with the `CRITICAL` status trigger a notification. For example, your database might have a single blip where connection fails. If you set this value to `> 1`, the blip is ignored but a problem with more than one failure triggers a notification.
+    Each check run submits a single status of `OK`, `WARN`, `CRITICAL`, or `UNKNOWN`. Choose how many consecutive runs with the `CRITICAL` status trigger a notification. For example, your database might have a single blip where connection fails. If you set this value to `> 1`, the blip is ignored but a problem with more than one consecutive failure triggers a notification.
 
 3. Resolve the alert after selected consecutive successes: `<NUMBER>`
 
