@@ -29,9 +29,9 @@ further_reading:
 ---
 ## Présentation
 
-Utilisez l'analyse et recherche de traces pour filtrer les métriques de performance d'application et les [événements APM](#evenements-apm) par tags définis par l'utilisateur. Elle permet l'exploration approfondie des requêtes Web passant par votre service.
+Utilisez [l'analyse et la recherche de traces][1] pour filtrer les métriques de performances des applications et les [événements APM](#evenements-apm) avec des tags définis par l'utilisateur. Ces fonctionnalités vous permettent de plonger au cœur des requêtes Web transitant par votre service.
 
-L'analyse et recherche de traces peut être activée par service APM et par host. Un service sur lequel elle est activée expose tous ses événements APM à Datadog.
+L'analyse et la recherche de traces peuvent être activées au niveau des [services][2] APM et hosts individuels. Lorsqu'elles sont activées sur un service, tous ses événements APM sont transmis à Datadog.
 
 Les services en aval comme les bases de données et les couches de cache ne font pas partie des services disponibles (car ils ne génèrent pas leurs propres traces), mais leur information est récupérée par les services de haut niveau qui les appellent.
 
@@ -44,16 +44,16 @@ Dans la vue Recherche de traces, vous pouvez :
 
 ## Événements APM
 
-Lorsqu'une requête atteint un service (p. ex. serveur Web, base de données), l'Agent Datadog crée un événement APM. C'est un enregistrement de la requête comprenant sa durée, son code de réponse et toutes les [métadonnées personnalisées][1] éventuelles.
-Un événement APM est représenté par une span unique avec les métadonnées jointes pour la requête traitée. Pour chaque service qui reçoit une requête, l'Agent crée un événement APM. Si une requête passe par un service Web, un service de listing et un service de base de données, la requête générera trois événements APM. Pour réduire la quantité d'événements APM générés, [activez/désactivez explicitement la collecte d'événements APM pour un service spécifique][2].
+Lorsqu'une requête parvient à un [service][2] (par exemple, un serveur Web ou une base de données), l'Agent Datadog crée un événement APM. Il s'agit d'un enregistrement de la requête qui inclut sa durée, le code de réponse et toutes les [métadonnées personnalisées][3].
+Un événement APM est représenté par une seule span avec des métadonnées associées pour la requête gérée. Pour chaque service qui reçoit une requête, l'Agent crée un événement APM. Si une requête transite par un service Web, un service de référencement et un service de base de données, cette requête générera 3 événements APM. Pour réduire le nombre d'événements APM générés, [activez ou désactivez explicitement toute collecte d'événements APM pour un service spécifique][4].
 
-Pour démarrer la collecte d'événements APM, [activez l'analyse et recherche de traces pour vos services][3].
+Pour commencer à recueillir des événements APM, [activez l'analyse et la recherche de traces pour vos services][5].
 
 ### Traces complètes
 
 {{< img src="tracing/trace_search_and_analytics/search/complete_trace.png" alt="Liste de traces" responsive="true">}}
 
-Si la case est cochée, les événements APM énumérés dans le flux de traces sont associés à une trace. Vous pouvez donc afficher la trace complète avec toutes les spans associées.
+Si cette option est sélectionnée, les événements APM répertoriés dans le flux de traces disposent d'une trace, ce qui vous permet d'afficher la [trace][6] complète avec l'intégralité de la [span][7] associée.
 
 ## Barre de recherche
 
@@ -65,15 +65,14 @@ Une requête est composée de *termes* et d'*opérateurs*.
 
 Il existe deux types de *termes* :
 
-* Une [**Facette**](#facettes)
+* Une [**facette**](#recherche-de-facettes)
 
-* Un [**Tag**](#tags)
+* Un [**tag**](#recherche-de-tags)
 
 Pour combiner plusieurs *termes* dans une requête complexe, utilisez l'un des opérateurs booléens suivants :
 
-|              |                                                                                                        |                              |
-| :----        | :----                                                                                                  | :----                        |
 | **Opérateur** | **Description**                                                                                       | **Exemple**                 |
+|:-------------|:-------------------------------------------------------------------------------------------------------|:-----------------------------|
 | `AND`        | **Intersection** : les deux termes sont inclus dans les événements sélectionnés (si aucun opérateur n'est ajouté, AND est utilisé par défaut). | authentication AND failure   |
 | `OR`         | **Union** : un des deux termes est inclus dans les événements sélectionnés.                                            | authentication OR password   |
 | `-`          | **Exclusion** : le terme suivant n'est PAS inclus dans les événements sélectionnés.                                                  | authentication AND -password |
@@ -88,15 +87,15 @@ Par exemple, si le nom de votre facette est **url** et que vous souhaitez filtre
 
 ### Recherche de tags
 
-Vos traces héritent des tags des [hosts][4] et des [intégrations][5] qui les génèrent. Ils peuvent être utilisés dans une recherche ainsi que comme facettes :
+Vos traces héritent des tags des [hosts][8] et des [intégrations][9] qui les génèrent. Elles peuvent être utilisées dans une recherche ainsi que sous la forme de facettes :
 
 | Requête                                                          | Correspondance                                                                       |
-| :----                                                          | :---                                                                        |
+|:---------------------------------------------------------------|:----------------------------------------------------------------------------|
 | `("env:prod" OR test)`                                         | Toutes les traces avec le tag `#env:prod` ou le tag `#test`                      |
 | `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` | Toutes les traces qui contiennent les tags `#service:srvA` ou `#service:srvB`.            |
 | `("env:prod" AND -"version:beta")`                             | Toutes les traces qui contiennent `#env:prod` et qui ne contiennent pas `#version:beta` |
 
-Si vos tags ne respectent pas les [recommandations relatives aux tags][6] et n'utilisent pas la syntaxe `key:value`, utilisez cette requête de recherche :
+Si vos tags ne respectent pas les [recommandations relatives aux tags][10] et n'utilisent pas la syntaxe `key:value`, utilisez cette requête de recherche :
 
 * `tags:<MON_TAG>`
 
@@ -197,7 +196,7 @@ Pour commencer à utiliser un attribut en tant que facette ou dans une recherche
 
 {{< img src="tracing/trace_search_and_analytics/search/create_facet.png" style="width:50%;" alt="Créer une facette" responsive="true" style="width:50%;">}}
 
-Lorsque vous avez terminé, la valeur de cet attribut est stockée **pour toutes les nouvelles traces** et peut être utilisée dans [la barre de recherche](#barre-de-recherche), [le volet Facettes](#volet-facettes) et dans la [requête de graphique de traces][7].
+Lorsque vous avez terminé, la valeur de cet attribut est stockée **pour toutes les nouvelles traces** et peut être utilisée dans [la barre de recherche](#barre-de-recherche), [le volet Facettes](#volet-facettes) et la [requête de graphique de trace][11].
 
 ### Volet Facettes
 
@@ -209,10 +208,15 @@ Utilisez les facettes pour filtrer facilement vos traces. La barre de recherche 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing/advanced/adding_metadata_to_spans/?tab=java
-[2]: /fr/tracing/trace_search_and_analytics/?tab=java#configure-by-integration
-[3]: /fr/tracing/trace_search_and_analytics/?tab=php#automatic-configuration
-[4]: /fr/graphing/infrastructure
-[5]: /fr/integrations
-[6]: /fr/tagging/#tags-best-practices
-[7]: /fr/tracing/trace_search_and_analytics/analytics
+
+[1]: /fr/tracing/visualization/#trace-search-analytics
+[2]: /fr/tracing/visualization/#services
+[3]: /fr/tracing/advanced/adding_metadata_to_spans/?tab=java
+[4]: /fr/tracing/trace_search_and_analytics/?tab=java#configure-by-integration
+[5]: /fr/tracing/trace_search_and_analytics/?tab=php#automatic-configuration
+[6]: /fr/tracing/visualization/#trace
+[7]: /fr/tracing/visualization/#spans
+[8]: /fr/graphing/infrastructure
+[9]: /fr/integrations
+[10]: /fr/tagging/#tags-best-practices
+[11]: /fr/tracing/trace_search_and_analytics/analytics
