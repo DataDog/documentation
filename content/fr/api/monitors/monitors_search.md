@@ -8,7 +8,7 @@ external_redirect: '/api/#rechercher-des-monitors'
 
 Recherchez et filtrez les informations de vos monitors.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`query`** [*facultatif*] :
 

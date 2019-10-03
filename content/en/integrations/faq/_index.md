@@ -9,6 +9,7 @@ aliases:
     - /integrations/faq/using-events-for-service-checks-is-deprecated-in-favor-of-monitors
     - /integrations/faq/i-removed-my-aws-ec2-integration-why-do-my-hosts-still-have-aws-tags
     - /integrations/faq/i-just-set-up-my-aws-integration-why-am-i-seeing-duplicate-hosts
+    - /integrations/faq/extra-hosts-with-name-n-a-reporting-data
 ---
 
 ## Amazon Web Services

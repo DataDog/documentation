@@ -16,7 +16,19 @@ further_reading:
 This feature is currently in beta. Request access by completing the <a href="https://app.datadoghq.com/network/2019signup">Datadog Network Performance Monitoring Beta Request form</a>.
 </div>
 
-Network performance monitoring requires Datadog Agent v6.13+. To enable network performance monitoring, configure it in your [Agent's main configuration file][1] based on your system setup:
+Network performance monitoring requires Datadog Agent v6.13+ and a Linux kernel version 4.4.0+ for eBPF support. The following platforms are supported:
+
+* Ubuntu 16.04+
+* Debian 9+
+* Fedora 26+
+* SUSE 15+
+* CentOS/RHEL 7.6+
+
+**Note**: Windows and macOS platforms are not supported.
+
+## Setup
+
+To enable network performance monitoring, configure it in your [Agent's main configuration file][1] based on your system setup:
 
 {{< tabs >}}
 {{% tab "Agent" %}}

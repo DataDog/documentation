@@ -405,7 +405,7 @@ main:
             url: logs/explorer/analytics
           - name: Vues enregistrées
             url: logs/explorer/saved_views
-          - name: Modèles de logs
+          - name: Log Patterns
             url: logs/explorer/patterns
       - name: Logging without Limits
         url: logs/logging_without_limits/

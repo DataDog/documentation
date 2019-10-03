@@ -37,6 +37,15 @@ left:
     link: "#"
     title: "Solutions"
     children:
+      - name: solutions_financial
+        link: "https://www.datadoghq.com/solutions/financial-services/"
+        title: "Financial Services"
+      - name: solutions_manufacturing
+        link: "https://www.datadoghq.com/solutions/manufacturing-logistics/"
+        title: "Manufacturing & Logistics"
+      - name: solutions_healthcare
+        link: "https://www.datadoghq.com/solutions/healthcare/"
+        title: "Healthcare/Life Sciences"
       - name: solutions_retail
         link: "https://www.datadoghq.com/solutions/retail-ecommerce/"
         title: "Retail/E-Commerce"
@@ -46,15 +55,16 @@ left:
       - name: solutions_gaming
         link: "https://www.datadoghq.com/solutions/gaming/"
         title: "Gaming"
-      - name: solutions_manufacturing
-        link: "https://www.datadoghq.com/solutions/manufacturing-logistics/"
-        title: "Manufacturing & Logistics"
-      - name: solutions_financial
-        link: "https://www.datadoghq.com/solutions/financial-services/"
-        title: "Financial Services"
-      - name: solutions_healthcare
-        link: "https://www.datadoghq.com/solutions/healthcare/"
-        title: "Healthcare/Life Sciences"
+      - name: solutions_cloudmigration
+        link: "https://www.datadoghq.com/solutions/cloud-migration/"
+        title: "Cloud Migration"
+      - name: solutions_monitoringconsolidation
+        link: "https://www.datadoghq.com/solutions/monitoring-consolidation/"
+        title: "Monitoring Consolidation"
+      - name: solutions_devops
+        link: "https://www.datadoghq.com/solutions/devops/"
+        title: "DevOps"
+
 right:
   - name: about
     link: "https://www.datadoghq.com/about/"
