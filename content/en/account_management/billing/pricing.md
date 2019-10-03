@@ -45,8 +45,8 @@ Unless otherwise stated in your Order, Datadog calculates fees based on product 
 ### Network Performance Monitoring
 
 * Datadog records the number of **Network Performance Monitoring** (NPM) hosts you are concurrently monitoring with the Datadog NPM service once per hour.
-  * These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.
-* Additionally, Datadog measures the total amount of flows used by all NPM hosts per month. A **flow** is a record of traffic sent and received between a source (IP:Port) and destination (IP:Port), as measured over a five minute time period.
+  * These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth-highest measurement.
+* Additionally, Datadog measures the total number of flows used by all NPM hosts per month. A **flow** is a record of traffic sent and received between a source (IP:Port) and destination (IP:Port), as measured over a five-minute time period.
 
 ## Troubleshooting
 
