@@ -11,6 +11,8 @@ Purchase serverless functions on [Datadog Pro and Enterprise plans][1]. Datadog 
 
 Every hour, Datadog records the number of functions that execute one or more times on your Datadog account. At the end of the month, Datadog charges by calculating the average of of the hourly number of functions recorded.
 
+The billed number of functions is almost always significantly lower than the number you'll see on the Serverless page or in your AWS Console because of the average hourly metering. Functions that run infrequently are less likely to affect your bill, and sudden spikes in traffic won't cost you extra
+
 For Serverless pricing information, see the infrastructure section in [Datadogs pricing page][1].
 
 ## Tracking Usage
