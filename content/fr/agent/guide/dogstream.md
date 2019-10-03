@@ -250,4 +250,4 @@ Si vous pensez que l'erreur n'est pas liée à la fonction de votre parser de lo
 [8]: /fr/agent/guide/agent-commands
 [9]: https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278
 [10]: /fr/help
-[11]: /fr/agent/#send-a-flare
+[11]: /fr/agent/troubleshooting/send_a_flare
