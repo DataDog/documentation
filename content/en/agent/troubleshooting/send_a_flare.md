@@ -18,7 +18,8 @@ If you are running Agent 5.3+, you can send necessary troubleshooting informatio
 **Confirm the upload of the archive to immediately send it to Datadog support**.
 Datadog Agent is completely open source, which allows you to [verify the code's behavior][1]. If needed, the flare can be reviewed prior to sending since the flare prompts a confirmation before uploading it.
 
-In the commands below, replace `<CASE_ID>` with your Datadog support case ID. In all cases, you will be asked for an email address. It is used verify your case ID. If you don't specify a case ID, the email address is used to login in your organization and create a new support case.
+In the commands below, replace `<CASE_ID>` with your Datadog support case ID if you have one, then enter the email address associated with it. 
+If you don't have a case ID, just enter your email address used to login in Datadog to create a new support case.
 
 
 
