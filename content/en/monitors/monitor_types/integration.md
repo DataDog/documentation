@@ -29,7 +29,7 @@ To create an [integration monitor][1] in Datadog:
 
 ### Integration Metric
 
-Create an integration metric monitor by following the instructions in the [metric monitor][2] documentation. Using the integration metric monitor type ensures the monitor can be selected by the integration monitor type facet on the [Manage Monitors][] page.
+Create an integration metric monitor by following the instructions in the [metric monitor][2] documentation. Using the integration metric monitor type ensures the monitor can be selected by the integration monitor type facet on the [Manage Monitors][3] page.
 
 ### Integration Status
 
@@ -83,11 +83,11 @@ Set up a cluster alert:
 {{% /tab %}}
 {{< /tabs >}}
 
-See the [metric monitor][2] documentation for information on [No data][3], [Auto resolve][4], and [Evaluation delay][5] options.
+See the [metric monitor][2] documentation for information on [No data][4], [Auto resolve][5], and [Evaluation delay][6] options.
 
 #### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][6] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] page.
 
 ## Further Reading
 
@@ -95,7 +95,8 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 [1]: https://app.datadoghq.com/monitors#create/integration
 [2]: /monitors/monitor_types/metric
-[3]: /monitors/monitor_types/metric/#no-data
-[4]: /monitors/monitor_types/metric/#auto-resolve
-[5]: /monitors/monitor_types/metric/#evaluation-delay
-[6]: /monitors/notifications
+[3]: https://app.datadoghq.com/monitors/manage
+[4]: /monitors/monitor_types/metric/#no-data
+[5]: /monitors/monitor_types/metric/#auto-resolve
+[6]: /monitors/monitor_types/metric/#evaluation-delay
+[7]: /monitors/notifications
