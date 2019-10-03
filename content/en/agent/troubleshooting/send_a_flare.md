@@ -63,7 +63,7 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 
 
 [1]: /agent/basic_agent_usage/windows/#agent-v5
-[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
+[2]: /agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
 {{% /tab %}}
 {{% tab "Cluster Agent" %}}
 
