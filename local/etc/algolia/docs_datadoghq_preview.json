@@ -154,7 +154,6 @@
     "docs.datadoghq.com/tracing/faq/$",
     "docs.datadoghq.com/tracing/guide/$",
     "docs.datadoghq.com/tracing/guide/agent-5-tracing-setup/$",
-    "docs.datadoghq.com/tracing/guide/agent-obfuscation/$",
     "docs.datadoghq.com/videos/"
   ],
   "selectors": {
