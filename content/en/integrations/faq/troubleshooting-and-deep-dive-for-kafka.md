@@ -33,11 +33,11 @@ The [Kafka_Consumer Integration][6] collects metrics like our standard Python ba
 ## Troubleshooting:
 ### Older Agent versions
 
-This issue only applies if you are running version *<5.20* of the [Datadog Agent][7]. In older versions of Kafka, consumer offsets were stored in Zookeper exclusively. The initial Kafka_consumer check was written when this limitation was in place. Due to this, you cannot get the `kafka.consumer_lag` metric if your offsets are stored in Kafka and you are using an older version of the Agent. Upgrade the Agent to the latest version to see these metrics.
+This issue only applies if you are running version *<5.20* of the [Datadog Agent][7]. In older versions of Kafka, consumer offsets were stored in Zookeper exclusively. The initial Kafka_consumer Agent Check was written when this limitation was in place. Due to this, you cannot get the `kafka.consumer_lag` metric if your offsets are stored in Kafka and you are using an older version of the Agent. [Upgrade the Agent to the latest version](/agent/guide/upgrade-to-agent-v6/#upgrade-to-agent-6) to see these metrics.
 
 ### Cannot connect to instance
 
-You might see the following error for the Kafka integration:
+You might see the following error for the Datadog-Kafka integration:
 ```text
 instance #kafka-localhost-<PORT_NUM> [ERROR]: 'Cannot connect to instance localhost:<PORT_NUM>. java.io.IOException: Failed to retrieve RMIServer stub
 ```
@@ -65,7 +65,7 @@ For Java based producers and consumers, add the following to the `conf.yaml` and
 
 ### Partition doesn't exist
 
-This issue is specifically for the Kafka Consumer check. If you specify a partition in `kafka_consumer.d/conf.yaml` that doesn't exist in your environment, you see the following error:
+This issue is specifically for the Kafka Consumer Agent check. If you specify a partition in `kafka_consumer.d/conf.yaml` that doesn't exist in your environment, you see the following error:
 ```text
 instance - #0 [Error]: ''
 ```
