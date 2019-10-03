@@ -64,7 +64,6 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 
         ```
         ## Define the destination for the logs
-
         $DefaultNetstreamDriverCAFile /etc/ssl/certs/ca-certificates.crt
         ruleset(name="infiles") {
           action(type="omfwd" protocol="tcp" target="intake.logs.datadoghq.com" port="10516" template="DatadogFormat" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.com" )
@@ -147,8 +146,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     * Modify your `/etc/rsyslog.d/datadog.conf` to end with the following content:
 
         ```
-        # Define the destination for the logs
-
+        ## Define the destination for the logs
         $DefaultNetstreamDriverCAFile /etc/ssl/certs/ca-certificates.crt
         ruleset(name="infiles") {
           action(type="omfwd" protocol="tcp" target="tcp-intake.logs.datadoghq.eu" port="443" template="DatadogFormat"           StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.com" )
@@ -201,34 +199,32 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 {{< tabs >}}
 {{% tab "Datadog US site" %}}
 
-1. (Optional) Activate Rsyslog file monitoring module.
-    If you want to watch or monitor specific log files, activate the `imfile` module by adding this to your `rsyslog.conf`:
+1. (Optional) Activate Rsyslog file monitoring module. If you want to watch or monitor specific log files, activate the `imfile` module by adding this to your `rsyslog.conf`:
 
-        ```
-        $ModLoad imfile
-        $InputFilePollInterval 10
-        $PrivDropToGroup adm
-        $WorkDirectory /var/spool/rsyslog
-        ```
+    ```
+    $ModLoad imfile
+    $InputFilePollInterval 10
+    $PrivDropToGroup adm
+    $WorkDirectory /var/spool/rsyslog
+    ```
 
 2. Create a `/etc/rsyslog.d/datadog.conf` file.
-3. Set the log files to monitor and configure the destination endpoint.
-    Add the following in `/etc/rsyslog.d/datadog.conf`.
+3. Set the log files to monitor and configure the destination endpoint. Add the following in `/etc/rsyslog.d/datadog.conf`.
 
-        ```
-        # Input for FILE1
-        $InputFileName /<PATH_TO_FILE1>
-        $InputFileTag <APP_NAME_OF_FILE1>
-        $InputFileStateFile <UNIQUE_FILE_ID>
-        $InputFileSeverity info
-        $InputRunFileMonitor
+    ```
+    ## Input for FILE1
+    $InputFileName /<PATH_TO_FILE1>
+    $InputFileTag <APP_NAME_OF_FILE1>
+    $InputFileStateFile <UNIQUE_FILE_ID>
+    $InputFileSeverity info
+    $InputRunFileMonitor
 
-        #Set the Datadog Format to send the logs
-        $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
+    ## Set the Datadog Format to send the logs
+    $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
 
-        #Define the destination for the logs
-        *.* @@intake.logs.datadoghq.com:10514;DatadogFormat
-        ```
+    ## Define the destination for the logs
+    *.* @@intake.logs.datadoghq.com:10514;DatadogFormat
+    ```
 
 4. (Optional) TLS Encryption:
     While sending your logs directly from Rsyslog to your Datadog account, if you want to add TLS encryption, take the following steps.
@@ -292,34 +288,32 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 {{% /tab %}}
 {{% tab "Datadog EU site" %}}
 
-1. (Optional) Activate Rsyslog file monitoring module.
-    If you want to watch or monitor specific log files, activate the `imfile` module by adding this to your `rsyslog.conf`:
+1. (Optional) Activate Rsyslog file monitoring module. If you want to watch or monitor specific log files, activate the `imfile` module by adding this to your `rsyslog.conf`:
 
-        ```
-        $ModLoad imfile
-        $InputFilePollInterval 10
-        $PrivDropToGroup adm
-        $WorkDirectory /var/spool/rsyslog
-        ```
+    ```
+    $ModLoad imfile
+    $InputFilePollInterval 10
+    $PrivDropToGroup adm
+    $WorkDirectory /var/spool/rsyslog
+    ```
 
 2. Create a `/etc/rsyslog.d/datadog.conf` file.
-3. Set the log files to monitor and configure the destination endpoint.
-    Add the following in `/etc/rsyslog.d/datadog.conf`.
+3. Set the log files to monitor and configure the destination endpoint. Add the following in `/etc/rsyslog.d/datadog.conf`.
 
-        ```
-        # Input for FILE1
-        $InputFileName /<PATH_TO_FILE1>
-        $InputFileTag <APP_NAME_OF_FILE1>
-        $InputFileStateFile <UNIQUE_FILE_ID>
-        $InputFileSeverity info
-        $InputRunFileMonitor
+    ```
+    ## Input for FILE1
+    $InputFileName /<PATH_TO_FILE1>
+    $InputFileTag <APP_NAME_OF_FILE1>
+    $InputFileStateFile <UNIQUE_FILE_ID>
+    $InputFileSeverity info
+    $InputRunFileMonitor
 
-        #Set the Datadog Format to send the logs
-        $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
+    ## Set the Datadog Format to send the logs
+    $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
 
-        #Define the destination for the logs
-        *.* @@tcp-intake.logs.datadoghq.eu:1883;DatadogFormat
-        ```
+    ## Define the destination for the logs
+    *.* @@tcp-intake.logs.datadoghq.eu:1883;DatadogFormat
+    ```
 
 4. (Optional) TLS Encryption:
     While sending your logs directly from Rsyslog to your Datadog account, if you want to add TLS encryption, take the following steps.
