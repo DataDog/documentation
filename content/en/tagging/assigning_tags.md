@@ -400,12 +400,12 @@ The following tags are collected from AWS integrations. **Note**: Some tags only
 
 ### Azure
 
-For Azure integrations, all resources receive the same tags with the exception of VMs which get some additional tags.
+For Azure integrations, all metrics, events, and service checks receive the same tags with the exception of the Azure VMs integration ressources which get some additional tags.
 
-| Type                 | Datadog tag keys                                                                                                                                      |
-|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| All resource metrics | `cloud_provider`, `region`, `kind`, `type`, `name`, `resource_group`, `tenant_name`, `subscription_name`, `subscription_id`, `status` (if applicable) |
-| VMs                  | All tags above, `host`, `size`, `operating_system`, `availability_zone`                                                                                               |
+| Integration            | Datadog Tag Keys                                                                                                                                      |
+|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| All Azure integrations | `cloud_provider`, `region`, `kind`, `type`, `name`, `resource_group`, `tenant_name`, `subscription_name`, `subscription_id`, `status` (if applicable) |
+| Azure VMs integration  | All tags above plus: `host`, `size`, `operating_system`, `availability_zone`                                                                          |
 
 ## Further Reading
 
