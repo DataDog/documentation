@@ -62,7 +62,7 @@ Pour chaque processus, un statut de check de service unique est généré. Via c
   Les noms configurés dans les Agents présentant un check de processus actif s'affichent.
     {{< img src="monitors/monitor_types/process/process_monitor_pick.png" alt="sélectionner le monitor de processus" responsive="true" style="width:80%;">}}
 
-2. **Choisissez le contexte du monitor.**  
+2. **Choisissez le contexte du monitor**.
   Seuls les tags ou les hosts qui renvoient un statut pour le processus sélectionné sont affichés.
     {{< img src="monitors/monitor_types/process/process_monitor_scope.png" alt="contexte du monitor de processus" responsive="true" style="width:80%;">}}
 
@@ -72,7 +72,7 @@ Pour chaque processus, un statut de check de service unique est généré. Via c
     {{< img src="monitors/monitor_types/process/process_check_alert_conditions.png" alt="conditions d'alerte du monitor de processus" responsive="true" style="width:80%;">}}
 
 4. **Configurez vos options de notification** :  
-   Reportez-vous à la page de la documentation relative aux [notifications](#notifications-des-monitors) pour découvrir les différentes options de base des notifications.
+    Reportez-vous à la page de la documentation relative aux [notifications][4] pour découvrir les différentes options de base des notifications.
 
 ## Pour aller plus loin
 {{< partial name="whats-next/whats-next.html" >}}
@@ -80,3 +80,4 @@ Pour chaque processus, un statut de check de service unique est généré. Via c
 [1]: /fr/graphing/infrastructure/process
 [2]: /fr/monitors/notifications
 [3]: /fr/integrations/process
+[4]: /fr/monitors/notifications
